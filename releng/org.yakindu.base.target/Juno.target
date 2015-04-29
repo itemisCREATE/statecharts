@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Juno SR2" sequenceNumber="10">
+<?pde version="3.8"?><target name="Juno SR2" sequenceNumber="11">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.platform.ide" version="4.2.2.M20130204-1200"/>
@@ -11,6 +11,11 @@
 <unit id="org.eclipse.gmf.feature.group" version="1.6.2.201302122140"/>
 <unit id="org.eclipse.xtext.sdk.feature.group" version="2.3.1.v201208210947"/>
 <repository location="http://download.eclipse.org/releases/juno"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.itemis.xtext.antlr.feature.feature.group" version="2.1.1.v201405091103"/>
+<unit id="de.itemis.xtext.antlr.sdk.feature.group" version="2.1.1.v201405091103"/>
+<repository location="http://download.itemis.com/updates/releases/2.1.1/"/>
 </location>
 </locations>
 </target>
