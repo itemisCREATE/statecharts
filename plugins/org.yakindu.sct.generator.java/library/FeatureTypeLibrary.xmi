@@ -33,4 +33,16 @@
         optional="true"
         parameterType="BOOLEAN"/>
   </types>
+  <types name="RunnableWrapper"
+      comment="Generates a runnable wrapper for the statemachine"
+      optional="true">
+    <parameters
+        name="namePrefix"
+        comment="Name prefix"
+        optional="true"/>
+    <parameters
+        name="nameSuffix"
+        comment="Name suffix"
+        optional="true"/>
+  </types>
 </sgen:FeatureTypeLibrary>

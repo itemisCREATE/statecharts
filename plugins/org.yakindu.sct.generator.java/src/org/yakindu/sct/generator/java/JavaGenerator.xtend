@@ -19,18 +19,22 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
  * This is the Java code generators main class. 
  * 
  * @author Markus Mühlbrandt
+ * @author Axel Terfloth - extensions
  */
 class JavaGenerator implements IExecutionFlowGenerator {
+
+	@Inject extension GenmodelEntries
+	@Inject extension RunnableFeature
 
 	@Inject extension Navigation
 	@Inject extension IStatemachine
 	@Inject extension ITimerCallback
 	@Inject extension ITimer
 	@Inject extension TimerService
-	@Inject extension GenmodelEntries
 	@Inject extension RuntimeService
 	@Inject extension StatemachineInterface
 	@Inject extension Statemachine
+	@Inject extension RunnableWrapper
  	
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 
@@ -50,5 +54,9 @@ class JavaGenerator implements IExecutionFlowGenerator {
 		
 		flow.generateStatemachineInterface(entry, fsa)
 		flow.generateStatemachine(entry, fsa)
+		
+		if (entry.hasFeatureRunnable) {
+			flow.generateRunnableWrapper(entry, fsa)
+		}
 	}
 }

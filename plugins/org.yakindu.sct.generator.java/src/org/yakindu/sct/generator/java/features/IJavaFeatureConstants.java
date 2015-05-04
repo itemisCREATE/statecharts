@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
+ * Copyright (c) 2011-2015 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.java.features;
 /**
  * 
  * @author muelder
+ * @author terfloth
  * 
  */
 public interface IJavaFeatureConstants {
@@ -40,6 +41,17 @@ public interface IJavaFeatureConstants {
 	public static final String STATEMACHINE_FACTORY_SUPPORT = "StatemachineFactorySupport";
 	
 	public static final String USE_JAVA_INT_FOR_INTEGER = "UseJavaIntForInteger";
+	
+	/* Constants related to the RunnableWrapper feature */
+	
+	public static final String RUNNABLE_WRAPPER = "RunnableWrapper";
+	
+	public static final String NAME_PREFIX = "namePrefix";
+	
+	public static final String NAME_SUFFIX = "nameSuffix";
+	
+	
+	
 	
 	public static final String[] JAVA_KEYWORDS = { "abstract", "assert",
 		"boolean", "break", "byte", "case", "catch", "char", "class",

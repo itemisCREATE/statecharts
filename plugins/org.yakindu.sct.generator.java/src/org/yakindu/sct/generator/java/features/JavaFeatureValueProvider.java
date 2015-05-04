@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
+ * Copyright (c) 2011-2015 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,10 +10,7 @@
  */
 package org.yakindu.sct.generator.java.features;
 
-import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.BASE_PACKAGE;
-import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.IMPLEMENTATION_SUFFIX;
-import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.JAVA_KEYWORDS;
-import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.LIBRARY_NAME;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.*;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -29,6 +26,7 @@ import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author terfloth - extensions
  * 
  */
 public class JavaFeatureValueProvider extends
@@ -46,6 +44,10 @@ public class JavaFeatureValueProvider extends
 		} else if (parameterValue.getParameter().getName()
 				.equals(IMPLEMENTATION_SUFFIX)) {
 			parameterValue.setValue("impl");
+		} else if (parameterValue.getParameter().getName().equals(NAME_PREFIX)) {
+			parameterValue.setValue("Runnable");
+		} else if (parameterValue.getParameter().getName().equals(NAME_SUFFIX)) {
+			parameterValue.setValue("");
 		}
 	}
 
