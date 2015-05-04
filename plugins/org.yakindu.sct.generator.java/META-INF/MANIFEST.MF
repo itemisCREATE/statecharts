@@ -25,7 +25,8 @@ Require-Bundle: org.eclipse.jdt.core;bundle-version="3.5.0",
  com.google.guava,
  org.eclipse.xtext.xbase.lib
 Bundle-Vendor: statecharts.org
-Export-Package: org.yakindu.sct.generator.java
+Export-Package: org.yakindu.sct.generator.java,
+ org.yakindu.sct.generator.java.features
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 
