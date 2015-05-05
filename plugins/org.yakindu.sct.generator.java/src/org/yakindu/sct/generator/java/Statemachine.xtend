@@ -63,7 +63,7 @@ class Statemachine {
 			
 			«flow.clearOutEventsFunction»
 			
-			«flow.activeFunction»
+			«flow.stateActiveFunction»
 			
 			«flow.timingFunctions»
 			
@@ -213,7 +213,7 @@ class Statemachine {
 		}
 	'''
 	
-	def protected isActiveFunction(ExecutionFlow flow) '''
+	def protected isStateActiveFunction(ExecutionFlow flow) '''
 		/**
 		* Returns true if the given state is currently active otherwise false.
 		*/
