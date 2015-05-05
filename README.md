@@ -6,10 +6,10 @@ The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an 
 
 ## How to Contribute
 
-1. Download and start [Oomph](https://wiki.eclipse.org/Eclipse_Oomph_Installer).
+1. Download and start [Oomph](https://wiki.eclipse.org/Eclipse_Oomph_Installer) and the [Oomph-Setup file](https://github.com/Yakindu/statecharts/blob/master/StatechartTools.setup)
 2. On the initial page, click on the *Switch to advanced mode* button in the top right.
 3. On the *Product* page, select *Eclipse IDE for Java Developers*, press *Next*.
-4. On the *Project* page, press on the green plus-symbol. *Browser File System* to select the setup-file.
+4. On the *Project* page, press on the green plus-symbol. *Browse File System* to select the downloaded Oomph-Setup file.
 5. Doubleclick on the project *Statechart Tools* to add it to the catalog below, press *Next*.
 6. Choose a meaningful name for the *Installation folder* on the *Variables* page, press *Next*.
 7. On the last page you have to confirm the settings by clicking on *Finish*. The setup is executing tasks now. Meanwhile: Drink a cup of coffee, and watch how your Statechart Tools development environment is assembled.
