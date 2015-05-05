@@ -67,6 +67,7 @@ class RunnableWrapper {
 			
 			«flow.createFieldDeclarations(entry)»
 			«flow.interfaceAccessors»
+			«flow.timingFunctions(entry)»
 			
 			/**
 			 * init() will be delegated thread safe to the wrapped statemachine. 
@@ -115,10 +116,6 @@ class RunnableWrapper {
 			public void run() {
 			
 				boolean terminate = false;
-				long start = System.currentTimeMillis();
-				
-				long totalEventCount = 0L;
-				long recentEventCount = 0L;
 				
 				while(!(terminate || Thread.currentThread().isInterrupted())) {
 			
@@ -126,17 +123,6 @@ class RunnableWrapper {
 						
 						Runnable eventProcessor = eventQueue.take();
 						eventProcessor.run();
-						
-						recentEventCount++;
-						long current = System.currentTimeMillis();
-						
-						if (current - start > 1000) {
-							System.out.println("events/second: " + (double)recentEventCount/((double)(current-start)/1000.0) );
-							System.out.println("queued events: " + eventQueue.size());
-							totalEventCount += recentEventCount;
-							recentEventCount = 0L;
-							start = current;
-						}
 						
 					} catch (InterruptedException e) {
 						terminate = true;
@@ -158,6 +144,7 @@ class RunnableWrapper {
 		«ENDIF»
 		«IF flow.timed»
 			import «entry.getBasePackageName()».ITimer;
+			import «entry.getBasePackageName()».ITimerCallback;
 		«ENDIF»
 	'''
 	
@@ -173,7 +160,7 @@ class RunnableWrapper {
 		 * The core statemachine is simply wrapped and the event processing will be delegated to that statemachine instance.
 		 * This instance will be created implicitly.
 		 */
-		protected «flow.statemachineInterfaceName» statemachine = new «flow.statemachineClassName»();
+		protected «flow.statemachineClassName» statemachine = new «flow.statemachineClassName»();
 		
 		«FOR scope : flow.interfaceScopes»
 		/**
@@ -264,5 +251,65 @@ class RunnableWrapper {
 		«ENDFOR»
 	'''
 
+
+	def protected timingFunctions(ExecutionFlow flow, GeneratorEntry entry) '''
+		«IF flow.timed»
+			/*========== TIME EVENT HANDLING ================
+			
+			/** An external timer instance is required. */
+			protected ITimer externalTimer;
+			
+			/** Internally we use a timer proxy that queues time events together with other input events. */
+			protected ITimer timerProxy = new ITimer() {
+				/** Simply delegate to external timer with a modified callback. */
+				@Override
+				public void setTimer(ITimerCallback callback, int eventID, long time,
+						boolean isPeriodic) {
+					externalTimer.setTimer(«flow.runnableWrapperClassName(entry)».this, eventID, time, isPeriodic);
+				}
+				
+				@Override
+				public void unsetTimer(ITimerCallback callback, int eventID) {
+					externalTimer.unsetTimer(«flow.runnableWrapperClassName(entry)».this, eventID);
+				}
+			};
+			
+			/**
+			 * Set the {@link ITimer} for the state machine. It must be set
+			 * externally on a timed state machine before a run cycle can be correct
+			 * executed.
+			 * 
+			 * @param timer
+			 */
+			public void setTimer(ITimer timer) {
+				synchronized(statemachine) {
+					this.externalTimer = timer;
+					/* the wrapped statemachine uses timer proxy as timer */
+					statemachine.setTimer(timerProxy);
+				}
+			}
+			
+			/**
+			* Returns the currently used timer.
+			* 
+			* @return {@link ITimer}
+			*/
+			public ITimer getTimer() {
+				return externalTimer;
+			}
+			
+			public void timeElapsed(int eventID) {
+				eventQueue.add(new Runnable() {
+
+					@Override
+					public void run() {
+						statemachine.timeElapsed(eventID);
+						statemachine.runCycle();
+					}
+				});
+			}
+			
+		«ENDIF»
+	'''
 	
 }
