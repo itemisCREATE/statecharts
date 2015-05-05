@@ -14,8 +14,8 @@ The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an 
 6. Choose a meaningful name for the *Installation folder* on the *Variables* page, press *Next*.
 7. On the last page you have to confirm the settings by clicking on *Finish*. The setup is executing tasks now. Meanwhile: Drink a cup of coffee, and watch how your Statechart Tools development environment is assembled.
 8. (Optional) Press *Finish* to close the initial Progress window. 
-9. (Optional) Clicking on the double arrow (yellow/blue) allows you to see the further progression. Press *Finish* to close the window.
-10. After building the workspace, you will see a lot of errors in it. That's because the language artifacts have to been generated yet. Oomph made a contribution the toolbar. Press on the double arrow symbol and only select the three Launches (the other tasks already have been executed) to generate the languages (Expressions, SText, SGen)
+9. (Optional) Clicking on the double arrow (yellow/blue) allows you to see the further progression. Press *Finish* to close the window, when then installer is done.
+10. After building the workspace, you will see a lot of errors in it. That's because the language artifacts haven't been generated yet. Oomph made a contribution to the toolbar. Press on the double arrow symbol and only select the three Launches (the other tasks already have been executed) to generate the languages (Expressions, SText, SGen)
 11. Click *Proceed* three times to execute the launches although the errors.
 
 
