@@ -11,7 +11,7 @@ The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an 
 3. On the *Product* page, select *Eclipse IDE for Java Developers*, press *Next*.
 4. On the *Project* page, press on the green plus-symbol. *Browser File System* to select the setup-file.
 5. Doubleclick on the project *Statechart Tools* to add it to the catalog below, press *Next*.
-6. Choose a meaningful name for the *Installation folder* on the *Variables* page , press *Next*.
+6. Choose a meaningful name for the *Installation folder* on the *Variables* page, press *Next*.
 7. On the last page you have to confirm the settings by clicking on *Finish*. The setup is executing tasks now. Meanwhile: Drink a cup of coffee, and watch how your Statechart Tools development environment is assembled.
 8. (Optional) Press *Finish* to close the initial Progress window. 
 9. (Optional) Clicking on the double arrow (yellow/blue) allows you to see the further progression. Press *Finish* to close the window.
