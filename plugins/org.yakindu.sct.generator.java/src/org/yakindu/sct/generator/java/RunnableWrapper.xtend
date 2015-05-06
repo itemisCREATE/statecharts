@@ -321,8 +321,10 @@ class RunnableWrapper {
 
 					@Override
 					public void run() {
-						statemachine.timeElapsed(eventID);
-						statemachine.runCycle();
+						synchronized (statemachine) {
+							statemachine.timeElapsed(eventID);
+							statemachine.runCycle();
+						}
 					}
 				});
 			}
