@@ -2,9 +2,19 @@
 #Yakindu Statechart Tools 
 # (http://www.statecharts.org)
 
-The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of statecharts. 
+The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of Harel statecharts. 
 
 ## How to Contribute
+
+We appreciate any feedback and there are various ways to contribute feedback:
+
+* Report bugs and request features in our issue tracker.
+* Ask questions and get support in our <a href="https://groups.google.com/forum/embed/?place=forum/yakindu-user#!forum/yakindu-user">google group</a>
+* visit our <a  href="http://sttecharts.org">web page</a> take a look at blog posts tutorials etc.
+* get the source code (see below)
+ 
+
+## Setting up the development environment
 
 1. Download and start <a href="https://wiki.eclipse.org/Eclipse_Oomph_Installer" target="_blank">Oomph</a> and the <a href="https://raw.githubusercontent.com/Yakindu/statecharts/master/StatechartTools.setup" target="_blank">Oomph-Setup file</a> (rightclick, *save as...*).
 2. On the initial page, click on the *Switch to advanced mode* button in the top right.
