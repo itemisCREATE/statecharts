@@ -41,6 +41,6 @@ public class LogicalOrTestsTest {
 		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue("logical or expression was executed in wrong order...",
-				statemachine.getX() == 4 && statemachine.getB());
+				statemachine.getX() == 4l && statemachine.getB());
 	}
 }

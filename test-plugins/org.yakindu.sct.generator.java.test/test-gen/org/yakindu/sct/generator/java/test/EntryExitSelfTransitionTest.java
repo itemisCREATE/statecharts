@@ -40,30 +40,30 @@ public class EntryExitSelfTransitionTest {
 	public void testSelfTransitionToChildState() {
 		statemachine.enter();
 		statemachine.runCycle();
-		assertTrue(statemachine.getEntries() == 1);
+		assertTrue(statemachine.getEntries() == 1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A__region0_B));
-		statemachine.setEntries(0);
+		statemachine.setEntries(0l);
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.getEntries() == 1);
-		assertTrue(statemachine.getExits() == 1);
+		assertTrue(statemachine.getEntries() == 1l);
+		assertTrue(statemachine.getExits() == 1l);
 		assertTrue(statemachine.isStateActive(State.main_region_A__region0_C));
 	}
 	@Test
 	public void testSelfTransitionFromChildState() {
 		statemachine.enter();
 		statemachine.runCycle();
-		assertTrue(statemachine.getEntries() == 1);
-		statemachine.setEntries(0);
+		assertTrue(statemachine.getEntries() == 1l);
+		statemachine.setEntries(0l);
 		statemachine.raiseE1();
 		statemachine.runCycle();
-		assertTrue(statemachine.getEntries() == 0);
-		assertTrue(statemachine.getExits() == 0);
+		assertTrue(statemachine.getEntries() == 0l);
+		assertTrue(statemachine.getExits() == 0l);
 		assertTrue(statemachine.isStateActive(State.main_region_A__region0_C));
 		statemachine.raiseE1();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A__region0_B));
-		assertTrue(statemachine.getEntries() == 1);
-		assertTrue(statemachine.getExits() == 1);
+		assertTrue(statemachine.getEntries() == 1l);
+		assertTrue(statemachine.getExits() == 1l);
 	}
 }

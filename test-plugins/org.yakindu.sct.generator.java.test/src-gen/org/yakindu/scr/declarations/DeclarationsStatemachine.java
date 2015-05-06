@@ -1,10 +1,6 @@
 package org.yakindu.scr.declarations;
 
 public class DeclarationsStatemachine implements IDeclarationsStatemachine {
-
-	static {
-	}
-
 	private boolean evInA;
 
 	private boolean evInB;
@@ -390,6 +386,25 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		exitSequence_main_region();
 
 		exitAction();
+	}
+
+	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
 	}
 
 	/**

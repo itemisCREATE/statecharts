@@ -2,9 +2,6 @@ package org.yakindu.scr.deephistory;
 
 public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
@@ -117,6 +114,25 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -199,35 +215,35 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		sCInterface.raiseEvent9();
 	}
 
-	private boolean check_mainRegion_State1_tr0() {
+	private boolean check_mainRegion_State1_tr0_tr0() {
 		return sCInterface.event1;
 	}
 
-	private boolean check_mainRegion_State2_tr0() {
+	private boolean check_mainRegion_State2_tr0_tr0() {
 		return sCInterface.event2;
 	}
 
-	private boolean check_mainRegion_State2__region0_a_tr0() {
+	private boolean check_mainRegion_State2__region0_a_tr0_tr0() {
 		return sCInterface.event3;
 	}
 
-	private boolean check_mainRegion_State2__region0_State4_tr0() {
+	private boolean check_mainRegion_State2__region0_State4_tr0_tr0() {
 		return sCInterface.event4;
 	}
 
-	private boolean check_mainRegion_State2__region0_State4__region0_State6_tr0() {
+	private boolean check_mainRegion_State2__region0_State4__region0_State6_tr0_tr0() {
 		return sCInterface.event5;
 	}
 
-	private boolean check_mainRegion_State2__region0_State4__region0_State7_tr0() {
+	private boolean check_mainRegion_State2__region0_State4__region0_State7_tr0_tr0() {
 		return sCInterface.event6;
 	}
 
-	private boolean check_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0() {
+	private boolean check_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0_tr0() {
 		return sCInterface.event7;
 	}
 
-	private boolean check_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0() {
+	private boolean check_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0_tr0() {
 		return sCInterface.event8;
 	}
 
@@ -585,17 +601,17 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	/* The reactions of state State1. */
 	private void react_mainRegion_State1() {
-		if (check_mainRegion_State1_tr0()) {
+		if (check_mainRegion_State1_tr0_tr0()) {
 			effect_mainRegion_State1_tr0();
 		}
 	}
 
 	/* The reactions of state a. */
 	private void react_mainRegion_State2__region0_a() {
-		if (check_mainRegion_State2_tr0()) {
+		if (check_mainRegion_State2_tr0_tr0()) {
 			effect_mainRegion_State2_tr0();
 		} else {
-			if (check_mainRegion_State2__region0_a_tr0()) {
+			if (check_mainRegion_State2__region0_a_tr0_tr0()) {
 				effect_mainRegion_State2__region0_a_tr0();
 			}
 		}
@@ -603,13 +619,13 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	/* The reactions of state State6. */
 	private void react_mainRegion_State2__region0_State4__region0_State6() {
-		if (check_mainRegion_State2_tr0()) {
+		if (check_mainRegion_State2_tr0_tr0()) {
 			effect_mainRegion_State2_tr0();
 		} else {
-			if (check_mainRegion_State2__region0_State4_tr0()) {
+			if (check_mainRegion_State2__region0_State4_tr0_tr0()) {
 				effect_mainRegion_State2__region0_State4_tr0();
 			} else {
-				if (check_mainRegion_State2__region0_State4__region0_State6_tr0()) {
+				if (check_mainRegion_State2__region0_State4__region0_State6_tr0_tr0()) {
 					effect_mainRegion_State2__region0_State4__region0_State6_tr0();
 				}
 			}
@@ -618,16 +634,16 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	/* The reactions of state State8. */
 	private void react_mainRegion_State2__region0_State4__region0_State7__region0_State8() {
-		if (check_mainRegion_State2_tr0()) {
+		if (check_mainRegion_State2_tr0_tr0()) {
 			effect_mainRegion_State2_tr0();
 		} else {
-			if (check_mainRegion_State2__region0_State4_tr0()) {
+			if (check_mainRegion_State2__region0_State4_tr0_tr0()) {
 				effect_mainRegion_State2__region0_State4_tr0();
 			} else {
-				if (check_mainRegion_State2__region0_State4__region0_State7_tr0()) {
+				if (check_mainRegion_State2__region0_State4__region0_State7_tr0_tr0()) {
 					effect_mainRegion_State2__region0_State4__region0_State7_tr0();
 				} else {
-					if (check_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0()) {
+					if (check_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0_tr0()) {
 						effect_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0();
 					}
 				}
@@ -637,16 +653,16 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	/* The reactions of state State9. */
 	private void react_mainRegion_State2__region0_State4__region0_State7__region0_State9() {
-		if (check_mainRegion_State2_tr0()) {
+		if (check_mainRegion_State2_tr0_tr0()) {
 			effect_mainRegion_State2_tr0();
 		} else {
-			if (check_mainRegion_State2__region0_State4_tr0()) {
+			if (check_mainRegion_State2__region0_State4_tr0_tr0()) {
 				effect_mainRegion_State2__region0_State4_tr0();
 			} else {
-				if (check_mainRegion_State2__region0_State4__region0_State7_tr0()) {
+				if (check_mainRegion_State2__region0_State4__region0_State7_tr0_tr0()) {
 					effect_mainRegion_State2__region0_State4__region0_State7_tr0();
 				} else {
-					if (check_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0()) {
+					if (check_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0_tr0()) {
 						effect_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0();
 					}
 				}
@@ -656,7 +672,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	/* The reactions of state State5. */
 	private void react_mainRegion_State2__region0_State5() {
-		if (check_mainRegion_State2_tr0()) {
+		if (check_mainRegion_State2_tr0_tr0()) {
 			effect_mainRegion_State2_tr0();
 		} else {
 		}

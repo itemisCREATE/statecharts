@@ -2,9 +2,6 @@ package org.yakindu.scr.nullcheck;
 
 public class NullCheckStatemachine implements INullCheckStatemachine {
 
-	static {
-	}
-
 	public enum State {
 		main_region_A, main_region_B, $NullState$
 	};
@@ -40,6 +37,25 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -66,7 +82,7 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 		}
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return null == null;
 	}
 
@@ -131,7 +147,7 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
-		if (check_main_region_A_tr0()) {
+		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
 		}
 	}

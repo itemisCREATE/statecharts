@@ -4,9 +4,6 @@ public class SameNameDifferentRegionStatemachine
 		implements
 			ISameNameDifferentRegionStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
@@ -59,6 +56,25 @@ public class SameNameDifferentRegionStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -101,11 +117,11 @@ public class SameNameDifferentRegionStatemachine
 		sCInterface.raiseE1();
 	}
 
-	private boolean check_main_region_StateA_tr0() {
+	private boolean check_main_region_StateA_tr0_tr0() {
 		return sCInterface.e1;
 	}
 
-	private boolean check_main_region_StateB_r1_StateA_tr0() {
+	private boolean check_main_region_StateB_r1_StateA_tr0_tr0() {
 		return sCInterface.e1;
 	}
 
@@ -218,14 +234,14 @@ public class SameNameDifferentRegionStatemachine
 
 	/* The reactions of state StateA. */
 	private void react_main_region_StateA() {
-		if (check_main_region_StateA_tr0()) {
+		if (check_main_region_StateA_tr0_tr0()) {
 			effect_main_region_StateA_tr0();
 		}
 	}
 
 	/* The reactions of state StateA. */
 	private void react_main_region_StateB_r1_StateA() {
-		if (check_main_region_StateB_r1_StateA_tr0()) {
+		if (check_main_region_StateB_r1_StateA_tr0_tr0()) {
 			effect_main_region_StateB_r1_StateA_tr0();
 		}
 	}

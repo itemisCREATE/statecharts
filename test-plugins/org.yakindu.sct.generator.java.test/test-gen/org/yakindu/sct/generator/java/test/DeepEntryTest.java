@@ -38,13 +38,13 @@ public class DeepEntryTest {
 
 	@Test
 	public void testenterToSubstate() {
-		assertTrue(statemachine.getX() == 0);
-		assertTrue(statemachine.getY() == 0);
-		assertTrue(statemachine.getZ() == 0);
+		assertTrue(statemachine.getX() == 0l);
+		assertTrue(statemachine.getY() == 0l);
+		assertTrue(statemachine.getZ() == 0l);
 		statemachine.enter();
-		assertTrue(statemachine.getX() == 1);
-		assertTrue(statemachine.getY() == 1);
-		assertTrue(statemachine.getZ() == 2);
+		assertTrue(statemachine.getX() == 1l);
+		assertTrue(statemachine.getY() == 1l);
+		assertTrue(statemachine.getZ() == 2l);
 		statemachine.raiseE();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r2_B_r_BB));
@@ -54,6 +54,6 @@ public class DeepEntryTest {
 		statemachine.raiseF();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r2_B_r_BB));
-		assertTrue(statemachine.getY() == 1);
+		assertTrue(statemachine.getY() == 1l);
 	}
 }

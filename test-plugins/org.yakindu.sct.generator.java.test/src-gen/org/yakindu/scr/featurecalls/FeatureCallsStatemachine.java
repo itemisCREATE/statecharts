@@ -2,9 +2,6 @@ package org.yakindu.scr.featurecalls;
 
 public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 
-	static {
-	}
-
 	private final class SCIMyInterfaceImpl implements SCIMyInterface {
 
 		private boolean event1;
@@ -67,6 +64,25 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -98,11 +114,11 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		return sCIMyInterface;
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return sCIMyInterface.event1;
 	}
 
-	private boolean check_main_region_B_tr0() {
+	private boolean check_main_region_B_tr0_tr0() {
 		return sCIMyInterface.event1;
 	}
 
@@ -182,14 +198,14 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
-		if (check_main_region_A_tr0()) {
+		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
 		}
 	}
 
 	/* The reactions of state B. */
 	private void react_main_region_B() {
-		if (check_main_region_B_tr0()) {
+		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
 		}
 	}

@@ -2,9 +2,6 @@ package org.yakindu.scr.deepentry;
 
 public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -108,6 +105,27 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$
+				|| stateVector[1] != State.$NullState$
+				|| stateVector[2] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -193,15 +211,15 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		sCInterface.setZ(value);
 	}
 
-	private boolean check_r2_B_tr0() {
+	private boolean check_r2_B_tr0_tr0() {
 		return sCInterface.f;
 	}
 
-	private boolean check_r2_B_r_BA_tr0() {
+	private boolean check_r2_B_r_BA_tr0_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean check_r2_C_tr0() {
+	private boolean check_r2_C_tr0_tr0() {
 		return sCInterface.f;
 	}
 
@@ -534,10 +552,10 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
 	/* The reactions of state BAA. */
 	private void react_r2_B_r_BA_r_BAA() {
-		if (check_r2_B_tr0()) {
+		if (check_r2_B_tr0_tr0()) {
 			effect_r2_B_tr0();
 		} else {
-			if (check_r2_B_r_BA_tr0()) {
+			if (check_r2_B_r_BA_tr0_tr0()) {
 				effect_r2_B_r_BA_tr0();
 			} else {
 			}
@@ -546,7 +564,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
 	/* The reactions of state BB. */
 	private void react_r2_B_r_BB() {
-		if (check_r2_B_tr0()) {
+		if (check_r2_B_tr0_tr0()) {
 			effect_r2_B_tr0();
 		} else {
 		}
@@ -554,7 +572,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
 	/* The reactions of state C. */
 	private void react_r2_C() {
-		if (check_r2_C_tr0()) {
+		if (check_r2_C_tr0_tr0()) {
 			effect_r2_C_tr0();
 		}
 	}

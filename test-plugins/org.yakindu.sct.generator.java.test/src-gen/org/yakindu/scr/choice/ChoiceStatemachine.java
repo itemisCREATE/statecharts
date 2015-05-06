@@ -2,9 +2,6 @@ package org.yakindu.scr.choice;
 
 public class ChoiceStatemachine implements IChoiceStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -88,6 +85,25 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -142,47 +158,47 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		sCInterface.setC(value);
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean check_main_region_A_tr1() {
+	private boolean check_main_region_A_tr1_tr1() {
 		return sCInterface.f;
 	}
 
-	private boolean check_main_region_A_tr2() {
+	private boolean check_main_region_A_tr2_tr2() {
 		return sCInterface.g;
 	}
 
-	private boolean check_main_region_A_tr3() {
+	private boolean check_main_region_A_tr3_tr3() {
 		return sCInterface.h;
 	}
 
-	private boolean check_main_region_B_tr0() {
+	private boolean check_main_region_B_tr0_tr0() {
 		return true;
 	}
 
-	private boolean check_main_region_C_tr0() {
+	private boolean check_main_region_C_tr0_tr0() {
 		return true;
 	}
 
-	private boolean check_main_region__choice_0_tr1() {
+	private boolean check_main_region__choice_0_tr1_tr1() {
 		return sCInterface.c;
 	}
 
-	private boolean check_main_region__choice_0_tr0() {
+	private boolean check_main_region__choice_0_tr0_tr0() {
 		return true;
 	}
 
-	private boolean check_main_region__choice_1_tr0() {
+	private boolean check_main_region__choice_1_tr0_tr0() {
 		return sCInterface.c;
 	}
 
-	private boolean check_main_region__choice_1_tr1() {
+	private boolean check_main_region__choice_1_tr1_tr1() {
 		return true;
 	}
 
-	private boolean check_main_region__choice_2_tr1() {
+	private boolean check_main_region__choice_2_tr1_tr1() {
 		return sCInterface.c;
 	}
 
@@ -190,11 +206,11 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		return true;
 	}
 
-	private boolean check_main_region__choice_3_tr1() {
+	private boolean check_main_region__choice_3_tr1_tr1() {
 		return sCInterface.c;
 	}
 
-	private boolean check_main_region__choice_3_tr0() {
+	private boolean check_main_region__choice_3_tr0_tr0() {
 		return true;
 	}
 
@@ -337,16 +353,16 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
-		if (check_main_region_A_tr0()) {
+		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
 		} else {
-			if (check_main_region_A_tr1()) {
+			if (check_main_region_A_tr1_tr1()) {
 				effect_main_region_A_tr1();
 			} else {
-				if (check_main_region_A_tr2()) {
+				if (check_main_region_A_tr2_tr2()) {
 					effect_main_region_A_tr2();
 				} else {
-					if (check_main_region_A_tr3()) {
+					if (check_main_region_A_tr3_tr3()) {
 						effect_main_region_A_tr3();
 					}
 				}
@@ -366,7 +382,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_0() {
-		if (check_main_region__choice_0_tr1()) {
+		if (check_main_region__choice_0_tr1_tr1()) {
 			effect_main_region__choice_0_tr1();
 		} else {
 			effect_main_region__choice_0_tr0();
@@ -375,7 +391,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_1() {
-		if (check_main_region__choice_1_tr0()) {
+		if (check_main_region__choice_1_tr0_tr0()) {
 			effect_main_region__choice_1_tr0();
 		} else {
 			effect_main_region__choice_1_tr1();
@@ -384,7 +400,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_2() {
-		if (check_main_region__choice_2_tr1()) {
+		if (check_main_region__choice_2_tr1_tr1()) {
 			effect_main_region__choice_2_tr1();
 		} else {
 			effect_main_region__choice_2_tr0();
@@ -393,7 +409,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_3() {
-		if (check_main_region__choice_3_tr1()) {
+		if (check_main_region__choice_3_tr1_tr1()) {
 			effect_main_region__choice_3_tr1();
 		} else {
 			effect_main_region__choice_3_tr0();

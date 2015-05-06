@@ -2,9 +2,6 @@ package org.yakindu.scr.enterstate;
 
 public class EnterStateStatemachine implements IEnterStateStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -71,6 +68,25 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -117,15 +133,15 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		sCInterface.raiseG();
 	}
 
-	private boolean check_r_A_tr0() {
+	private boolean check_r_A_tr0_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean check_r_A_tr1() {
+	private boolean check_r_A_tr1_tr1() {
 		return sCInterface.f;
 	}
 
-	private boolean check_r_A_tr2() {
+	private boolean check_r_A_tr2_tr2() {
 		return sCInterface.g;
 	}
 
@@ -259,13 +275,13 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 
 	/* The reactions of state A. */
 	private void react_r_A() {
-		if (check_r_A_tr0()) {
+		if (check_r_A_tr0_tr0()) {
 			effect_r_A_tr0();
 		} else {
-			if (check_r_A_tr1()) {
+			if (check_r_A_tr1_tr1()) {
 				effect_r_A_tr1();
 			} else {
-				if (check_r_A_tr2()) {
+				if (check_r_A_tr2_tr2()) {
 					effect_r_A_tr2();
 				}
 			}

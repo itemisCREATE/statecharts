@@ -4,9 +4,6 @@ public class StatechartLocalReactionsStatemachine
 		implements
 			IStatechartLocalReactionsStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private long myInt;
@@ -63,6 +60,26 @@ public class StatechartLocalReactionsStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$
+				|| stateVector[1] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -103,19 +120,19 @@ public class StatechartLocalReactionsStatemachine
 		sCInterface.setMyInt(value);
 	}
 
-	private boolean check() {
+	private boolean check__lr0() {
 		return true;
 	}
 
-	private boolean check_main_region_S1_tr0() {
+	private boolean check_main_region_S1_tr0_tr0() {
 		return true;
 	}
 
-	private boolean check_main_region_S2_tr0() {
+	private boolean check_main_region_S2_tr0_tr0() {
 		return true;
 	}
 
-	private void effect() {
+	private void effect__lr0() {
 		sCInterface.myInt += 1;
 	}
 
@@ -215,14 +232,14 @@ public class StatechartLocalReactionsStatemachine
 
 	/* The reactions of state S1. */
 	private void react_main_region_S1() {
-		effect();
+		effect__lr0();
 
 		effect_main_region_S1_tr0();
 	}
 
 	/* The reactions of state S2. */
 	private void react_main_region_S2() {
-		effect();
+		effect__lr0();
 
 		effect_main_region_S2_tr0();
 	}

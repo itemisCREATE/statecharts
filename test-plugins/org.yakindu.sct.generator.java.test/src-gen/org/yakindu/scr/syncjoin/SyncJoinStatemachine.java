@@ -2,9 +2,6 @@ package org.yakindu.scr.syncjoin;
 
 public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -88,6 +85,26 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$
+				|| stateVector[1] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -151,24 +168,24 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		sCInterface.setX(value);
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return sCInterface.e || sCInterface.f;
 	}
 
-	private boolean check_main_region_B_r1_C1_tr0() {
+	private boolean check_main_region_B_r1_C1_tr0_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean check_main_region_B_r1_C2_tr0() {
+	private boolean check_main_region_B_r1_C2_tr0_tr0() {
 		return sCInterface.jc && isStateActive(State.main_region_B_r2_D2)
 				&& sCInterface.jd;
 	}
 
-	private boolean check_main_region_B_r2_D1_tr0() {
+	private boolean check_main_region_B_r2_D1_tr0_tr0() {
 		return sCInterface.f;
 	}
 
-	private boolean check_main_region_B_r2_D2_tr0() {
+	private boolean check_main_region_B_r2_D2_tr0_tr0() {
 		return sCInterface.jd && isStateActive(State.main_region_B_r1_C2)
 				&& sCInterface.jc;
 	}
@@ -374,35 +391,35 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
-		if (check_main_region_A_tr0()) {
+		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
 		}
 	}
 
 	/* The reactions of state C1. */
 	private void react_main_region_B_r1_C1() {
-		if (check_main_region_B_r1_C1_tr0()) {
+		if (check_main_region_B_r1_C1_tr0_tr0()) {
 			effect_main_region_B_r1_C1_tr0();
 		}
 	}
 
 	/* The reactions of state C2. */
 	private void react_main_region_B_r1_C2() {
-		if (check_main_region_B_r1_C2_tr0()) {
+		if (check_main_region_B_r1_C2_tr0_tr0()) {
 			effect_main_region_B_r1_C2_tr0();
 		}
 	}
 
 	/* The reactions of state D1. */
 	private void react_main_region_B_r2_D1() {
-		if (check_main_region_B_r2_D1_tr0()) {
+		if (check_main_region_B_r2_D1_tr0_tr0()) {
 			effect_main_region_B_r2_D1_tr0();
 		}
 	}
 
 	/* The reactions of state D2. */
 	private void react_main_region_B_r2_D2() {
-		if (check_main_region_B_r2_D2_tr0()) {
+		if (check_main_region_B_r2_D2_tr0_tr0()) {
 			effect_main_region_B_r2_D2_tr0();
 		}
 	}

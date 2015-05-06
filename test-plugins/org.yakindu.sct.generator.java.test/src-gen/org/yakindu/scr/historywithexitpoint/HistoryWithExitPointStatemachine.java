@@ -4,9 +4,6 @@ public class HistoryWithExitPointStatemachine
 		implements
 			IHistoryWithExitPointStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean push;
@@ -77,6 +74,25 @@ public class HistoryWithExitPointStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -124,23 +140,23 @@ public class HistoryWithExitPointStatemachine
 		sCInterface.raiseNext();
 	}
 
-	private boolean check_mr_A_r_X1_tr0() {
+	private boolean check_mr_A_r_X1_tr0_tr0() {
 		return sCInterface.next;
 	}
 
-	private boolean check_mr_A_r_X1_tr1() {
+	private boolean check_mr_A_r_X1_tr1_tr1() {
 		return sCInterface.push;
 	}
 
-	private boolean check_mr_A_r_X2_tr0() {
+	private boolean check_mr_A_r_X2_tr0_tr0() {
 		return sCInterface.next;
 	}
 
-	private boolean check_mr_A_r_X2_tr1() {
+	private boolean check_mr_A_r_X2_tr1_tr1() {
 		return sCInterface.push;
 	}
 
-	private boolean check_mr_B_tr0() {
+	private boolean check_mr_B_tr0_tr0() {
 		return sCInterface.back;
 	}
 
@@ -302,10 +318,10 @@ public class HistoryWithExitPointStatemachine
 
 	/* The reactions of state X1. */
 	private void react_mr_A_r_X1() {
-		if (check_mr_A_r_X1_tr0()) {
+		if (check_mr_A_r_X1_tr0_tr0()) {
 			effect_mr_A_r_X1_tr0();
 		} else {
-			if (check_mr_A_r_X1_tr1()) {
+			if (check_mr_A_r_X1_tr1_tr1()) {
 				effect_mr_A_r_X1_tr1();
 			}
 		}
@@ -313,10 +329,10 @@ public class HistoryWithExitPointStatemachine
 
 	/* The reactions of state X2. */
 	private void react_mr_A_r_X2() {
-		if (check_mr_A_r_X2_tr0()) {
+		if (check_mr_A_r_X2_tr0_tr0()) {
 			effect_mr_A_r_X2_tr0();
 		} else {
-			if (check_mr_A_r_X2_tr1()) {
+			if (check_mr_A_r_X2_tr1_tr1()) {
 				effect_mr_A_r_X2_tr1();
 			}
 		}
@@ -324,7 +340,7 @@ public class HistoryWithExitPointStatemachine
 
 	/* The reactions of state B. */
 	private void react_mr_B() {
-		if (check_mr_B_tr0()) {
+		if (check_mr_B_tr0_tr0()) {
 			effect_mr_B_tr0();
 		}
 	}

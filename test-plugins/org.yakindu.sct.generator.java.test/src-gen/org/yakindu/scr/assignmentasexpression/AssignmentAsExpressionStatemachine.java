@@ -4,9 +4,6 @@ public class AssignmentAsExpressionStatemachine
 		implements
 			IAssignmentAsExpressionStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private long a;
@@ -301,6 +298,25 @@ public class AssignmentAsExpressionStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -507,35 +523,35 @@ public class AssignmentAsExpressionStatemachine
 		sCInterface.setW(value);
 	}
 
-	private boolean check_main_region_Add_tr0() {
+	private boolean check_main_region_Add_tr0_tr0() {
 		return true;
 	}
 
-	private boolean check_main_region_Multiply_tr0() {
+	private boolean check_main_region_Multiply_tr0_tr0() {
 		return true;
 	}
 
-	private boolean check_main_region_Divide_tr0() {
+	private boolean check_main_region_Divide_tr0_tr0() {
 		return true;
 	}
 
-	private boolean check_main_region_Modulo_tr0() {
+	private boolean check_main_region_Modulo_tr0_tr0() {
 		return true;
 	}
 
-	private boolean check_main_region_Shift_tr0() {
+	private boolean check_main_region_Shift_tr0_tr0() {
 		return true;
 	}
 
-	private boolean check_main_region_boolean_And_tr0() {
+	private boolean check_main_region_boolean_And_tr0_tr0() {
 		return true;
 	}
 
-	private boolean check_main_region_boolean_Or_tr0() {
+	private boolean check_main_region_boolean_Or_tr0_tr0() {
 		return true;
 	}
 
-	private boolean check_main_region_Subtract_tr0() {
+	private boolean check_main_region_Subtract_tr0_tr0() {
 		return true;
 	}
 

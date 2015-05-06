@@ -2,7 +2,6 @@ package org.yakindu.scr.integerexpressions;
 import org.yakindu.scr.IStatemachine;
 
 public interface IIntegerExpressionsStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 		public void raiseE1();
 		public long getMyInt1();

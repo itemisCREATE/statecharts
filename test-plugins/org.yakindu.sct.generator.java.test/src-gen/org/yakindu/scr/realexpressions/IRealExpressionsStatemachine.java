@@ -2,13 +2,16 @@ package org.yakindu.scr.realexpressions;
 import org.yakindu.scr.IStatemachine;
 
 public interface IRealExpressionsStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 		public void raiseE1();
 		public double getMyReal1();
 		public void setMyReal1(double value);
 		public double getMyReal2();
 		public void setMyReal2(double value);
+		public double getMyFloat();
+		public void setMyFloat(double value);
+		public double getMyDouble();
+		public void setMyDouble(double value);
 		public boolean getLess();
 		public void setLess(boolean value);
 		public boolean getGreater();

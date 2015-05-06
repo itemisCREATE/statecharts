@@ -40,19 +40,19 @@ public class ConstantsTestsTest {
 	public void testconstantDefinition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		assertTrue(statemachine.getX() == 10);
-		assertTrue(statemachine.getY() == 20);
+		assertTrue(statemachine.getX() == 10l);
+		assertTrue(statemachine.getY() == 20l);
 		assertTrue(statemachine.getSCINamed().getY().equals("Hello World"));
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.getResult() == 20);
+		assertTrue(statemachine.getResult() == 20l);
 		statemachine.raiseE();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_C));
-		assertTrue(statemachine.getResult() == 100);
+		assertTrue(statemachine.getResult() == 100l);
 		statemachine.raiseE2(statemachine.getX());
 		statemachine.runCycle();
-		assertTrue(statemachine.getResult() == 1000);
+		assertTrue(statemachine.getResult() == 1000l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }

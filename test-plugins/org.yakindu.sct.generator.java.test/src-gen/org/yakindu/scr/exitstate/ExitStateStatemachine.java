@@ -2,9 +2,6 @@ package org.yakindu.scr.exitstate;
 
 public class ExitStateStatemachine implements IExitStateStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -71,6 +68,25 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -117,15 +133,15 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		sCInterface.raiseG();
 	}
 
-	private boolean check_r_A_r_B_tr0() {
+	private boolean check_r_A_r_B_tr0_tr0() {
 		return sCInterface.g;
 	}
 
-	private boolean check_r_A_r_B_tr1() {
+	private boolean check_r_A_r_B_tr1_tr1() {
 		return sCInterface.f;
 	}
 
-	private boolean check_r_A_r_B_tr2() {
+	private boolean check_r_A_r_B_tr2_tr2() {
 		return sCInterface.e;
 	}
 
@@ -257,13 +273,13 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 
 	/* The reactions of state B. */
 	private void react_r_A_r_B() {
-		if (check_r_A_r_B_tr0()) {
+		if (check_r_A_r_B_tr0_tr0()) {
 			effect_r_A_r_B_tr0();
 		} else {
-			if (check_r_A_r_B_tr1()) {
+			if (check_r_A_r_B_tr1_tr1()) {
 				effect_r_A_r_B_tr1();
 			} else {
-				if (check_r_A_r_B_tr2()) {
+				if (check_r_A_r_B_tr2_tr2()) {
 					effect_r_A_r_B_tr2();
 				}
 			}

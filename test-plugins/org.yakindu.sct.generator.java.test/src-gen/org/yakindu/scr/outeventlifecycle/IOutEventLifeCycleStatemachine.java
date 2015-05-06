@@ -2,7 +2,6 @@ package org.yakindu.scr.outeventlifecycle;
 import org.yakindu.scr.IStatemachine;
 
 public interface IOutEventLifeCycleStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 		public void raiseE();
 		public boolean isRaisedF();

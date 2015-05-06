@@ -174,6 +174,29 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$
+				|| stateVector[1] != State.$NullState$
+				|| stateVector[2] != State.$NullState$
+				|| stateVector[3] != State.$NullState$
+				|| stateVector[4] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -269,35 +292,35 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		sCInterface.setMyString(value);
 	}
 
-	private boolean check_integer_region_B_tr0() {
+	private boolean check_integer_region_B_tr0_tr0() {
 		return sCInterface.integerEvent;
 	}
 
-	private boolean check_integer_region_C_tr0() {
+	private boolean check_integer_region_C_tr0_tr0() {
 		return sCInterface.integerEvent;
 	}
 
-	private boolean check_boolean_region_B_tr0() {
+	private boolean check_boolean_region_B_tr0_tr0() {
 		return sCInterface.booleanEvent;
 	}
 
-	private boolean check_boolean_region_C_tr0() {
+	private boolean check_boolean_region_C_tr0_tr0() {
 		return sCInterface.booleanEvent;
 	}
 
-	private boolean check_real_region_B_tr0() {
+	private boolean check_real_region_B_tr0_tr0() {
 		return sCInterface.realEvent;
 	}
 
-	private boolean check_real_region_C_tr0() {
+	private boolean check_real_region_C_tr0_tr0() {
 		return sCInterface.realEvent;
 	}
 
-	private boolean check_string_region_B_tr0() {
+	private boolean check_string_region_B_tr0_tr0() {
 		return sCInterface.stringEvent;
 	}
 
-	private boolean check_string_region_C_tr0() {
+	private boolean check_string_region_C_tr0_tr0() {
 		return sCInterface.stringEvent;
 	}
 
@@ -665,14 +688,14 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 	/* The reactions of state B. */
 	private void react_integer_region_B() {
-		if (check_integer_region_B_tr0()) {
+		if (check_integer_region_B_tr0_tr0()) {
 			effect_integer_region_B_tr0();
 		}
 	}
 
 	/* The reactions of state C. */
 	private void react_integer_region_C() {
-		if (check_integer_region_C_tr0()) {
+		if (check_integer_region_C_tr0_tr0()) {
 			effect_integer_region_C_tr0();
 		}
 	}
@@ -683,14 +706,14 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 	/* The reactions of state B. */
 	private void react_boolean_region_B() {
-		if (check_boolean_region_B_tr0()) {
+		if (check_boolean_region_B_tr0_tr0()) {
 			effect_boolean_region_B_tr0();
 		}
 	}
 
 	/* The reactions of state C. */
 	private void react_boolean_region_C() {
-		if (check_boolean_region_C_tr0()) {
+		if (check_boolean_region_C_tr0_tr0()) {
 			effect_boolean_region_C_tr0();
 		}
 	}
@@ -701,14 +724,14 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 	/* The reactions of state B. */
 	private void react_real_region_B() {
-		if (check_real_region_B_tr0()) {
+		if (check_real_region_B_tr0_tr0()) {
 			effect_real_region_B_tr0();
 		}
 	}
 
 	/* The reactions of state C. */
 	private void react_real_region_C() {
-		if (check_real_region_C_tr0()) {
+		if (check_real_region_C_tr0_tr0()) {
 			effect_real_region_C_tr0();
 		}
 	}
@@ -719,14 +742,14 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 	/* The reactions of state B. */
 	private void react_string_region_B() {
-		if (check_string_region_B_tr0()) {
+		if (check_string_region_B_tr0_tr0()) {
 			effect_string_region_B_tr0();
 		}
 	}
 
 	/* The reactions of state C. */
 	private void react_string_region_C() {
-		if (check_string_region_C_tr0()) {
+		if (check_string_region_C_tr0_tr0()) {
 			effect_string_region_C_tr0();
 		}
 	}

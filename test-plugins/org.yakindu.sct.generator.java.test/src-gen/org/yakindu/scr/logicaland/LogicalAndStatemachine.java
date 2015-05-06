@@ -2,9 +2,6 @@ package org.yakindu.scr.logicaland;
 
 public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private long x;
@@ -68,6 +65,25 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -111,7 +127,7 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		sCInterface.setB(value);
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return sCInterface.x == 1;
 	}
 
@@ -162,7 +178,7 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
-		if (check_main_region_A_tr0()) {
+		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
 		}
 	}

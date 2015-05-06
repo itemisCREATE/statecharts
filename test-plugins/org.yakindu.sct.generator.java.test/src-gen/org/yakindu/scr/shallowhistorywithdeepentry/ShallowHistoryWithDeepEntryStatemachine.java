@@ -4,9 +4,6 @@ public class ShallowHistoryWithDeepEntryStatemachine
 		implements
 			IShallowHistoryWithDeepEntryStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean toZ;
@@ -84,6 +81,25 @@ public class ShallowHistoryWithDeepEntryStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -140,23 +156,23 @@ public class ShallowHistoryWithDeepEntryStatemachine
 		sCInterface.raiseToA();
 	}
 
-	private boolean check_main_region_Y_tr0() {
+	private boolean check_main_region_Y_tr0_tr0() {
 		return sCInterface.toZ;
 	}
 
-	private boolean check_main_region_Y_tr1() {
+	private boolean check_main_region_Y_tr1_tr1() {
 		return sCInterface.toC;
 	}
 
-	private boolean check_main_region_Z_tr0() {
+	private boolean check_main_region_Z_tr0_tr0() {
 		return sCInterface.toY;
 	}
 
-	private boolean check_main_region_Z__region0_A_tr0() {
+	private boolean check_main_region_Z__region0_A_tr0_tr0() {
 		return sCInterface.toC;
 	}
 
-	private boolean check_main_region_Z__region0_B__region0_C_tr0() {
+	private boolean check_main_region_Z__region0_B__region0_C_tr0_tr0() {
 		return sCInterface.toA;
 	}
 
@@ -343,10 +359,10 @@ public class ShallowHistoryWithDeepEntryStatemachine
 
 	/* The reactions of state Y. */
 	private void react_main_region_Y() {
-		if (check_main_region_Y_tr0()) {
+		if (check_main_region_Y_tr0_tr0()) {
 			effect_main_region_Y_tr0();
 		} else {
-			if (check_main_region_Y_tr1()) {
+			if (check_main_region_Y_tr1_tr1()) {
 				effect_main_region_Y_tr1();
 			}
 		}
@@ -354,10 +370,10 @@ public class ShallowHistoryWithDeepEntryStatemachine
 
 	/* The reactions of state A. */
 	private void react_main_region_Z__region0_A() {
-		if (check_main_region_Z_tr0()) {
+		if (check_main_region_Z_tr0_tr0()) {
 			effect_main_region_Z_tr0();
 		} else {
-			if (check_main_region_Z__region0_A_tr0()) {
+			if (check_main_region_Z__region0_A_tr0_tr0()) {
 				effect_main_region_Z__region0_A_tr0();
 			}
 		}
@@ -365,10 +381,10 @@ public class ShallowHistoryWithDeepEntryStatemachine
 
 	/* The reactions of state C. */
 	private void react_main_region_Z__region0_B__region0_C() {
-		if (check_main_region_Z_tr0()) {
+		if (check_main_region_Z_tr0_tr0()) {
 			effect_main_region_Z_tr0();
 		} else {
-			if (check_main_region_Z__region0_B__region0_C_tr0()) {
+			if (check_main_region_Z__region0_B__region0_C_tr0_tr0()) {
 				effect_main_region_Z__region0_B__region0_C_tr0();
 			}
 		}

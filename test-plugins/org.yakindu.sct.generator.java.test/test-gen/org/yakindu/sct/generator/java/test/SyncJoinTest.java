@@ -114,6 +114,6 @@ public class SyncJoinTest {
 		statemachine.raiseJd();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		assertTrue(statemachine.getX() == 1);
+		assertTrue(statemachine.getX() == 1l);
 	}
 }

@@ -4,9 +4,6 @@ public class EntryExitSelfTransitionStatemachine
 		implements
 			IEntryExitSelfTransitionStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -87,6 +84,25 @@ public class EntryExitSelfTransitionStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -145,15 +161,15 @@ public class EntryExitSelfTransitionStatemachine
 		sCInterface.setEntries(value);
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean check_main_region_A__region0_B_tr0() {
+	private boolean check_main_region_A__region0_B_tr0_tr0() {
 		return sCInterface.e1;
 	}
 
-	private boolean check_main_region_A__region0_C_tr0() {
+	private boolean check_main_region_A__region0_C_tr0_tr0() {
 		return sCInterface.e1;
 	}
 
@@ -281,10 +297,10 @@ public class EntryExitSelfTransitionStatemachine
 
 	/* The reactions of state B. */
 	private void react_main_region_A__region0_B() {
-		if (check_main_region_A_tr0()) {
+		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
 		} else {
-			if (check_main_region_A__region0_B_tr0()) {
+			if (check_main_region_A__region0_B_tr0_tr0()) {
 				effect_main_region_A__region0_B_tr0();
 			}
 		}
@@ -292,10 +308,10 @@ public class EntryExitSelfTransitionStatemachine
 
 	/* The reactions of state C. */
 	private void react_main_region_A__region0_C() {
-		if (check_main_region_A_tr0()) {
+		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
 		} else {
-			if (check_main_region_A__region0_C_tr0()) {
+			if (check_main_region_A__region0_C_tr0_tr0()) {
 				effect_main_region_A__region0_C_tr0();
 			}
 		}

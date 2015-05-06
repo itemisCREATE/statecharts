@@ -4,9 +4,6 @@ public class TransitionWithoutConditionStatemachine
 		implements
 			ITransitionWithoutConditionStatemachine {
 
-	static {
-	}
-
 	public enum State {
 		main_region_A, main_region_B, $NullState$
 	};
@@ -42,6 +39,25 @@ public class TransitionWithoutConditionStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -68,7 +84,7 @@ public class TransitionWithoutConditionStatemachine
 		}
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return true;
 	}
 

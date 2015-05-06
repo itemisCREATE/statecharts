@@ -2,9 +2,6 @@ package org.yakindu.scr.guardedentry;
 
 public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -78,6 +75,25 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -128,11 +144,11 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 		sCInterface.setDone(value);
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean check_main_region_B_tr0() {
+	private boolean check_main_region_B_tr0_tr0() {
 		return sCInterface.e;
 	}
 
@@ -212,14 +228,14 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
-		if (check_main_region_A_tr0()) {
+		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
 		}
 	}
 
 	/* The reactions of state B. */
 	private void react_main_region_B() {
-		if (check_main_region_B_tr0()) {
+		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
 		}
 	}

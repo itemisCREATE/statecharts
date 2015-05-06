@@ -4,9 +4,6 @@ public class HistoryWithoutInitialStepStatemachine
 		implements
 			IHistoryWithoutInitialStepStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean toA;
@@ -84,6 +81,25 @@ public class HistoryWithoutInitialStepStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -142,27 +158,27 @@ public class HistoryWithoutInitialStepStatemachine
 		sCInterface.raiseNext();
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return sCInterface.toB;
 	}
 
-	private boolean check_main_region_A_tr1() {
+	private boolean check_main_region_A_tr1_tr1() {
 		return sCInterface.toHistory;
 	}
 
-	private boolean check_main_region_B_tr0() {
+	private boolean check_main_region_B_tr0_tr0() {
 		return sCInterface.toA;
 	}
 
-	private boolean check_main_region_B_r1_C_tr0() {
+	private boolean check_main_region_B_r1_C_tr0_tr0() {
 		return sCInterface.next;
 	}
 
-	private boolean check_main_region_B_r1_D_tr0() {
+	private boolean check_main_region_B_r1_D_tr0_tr0() {
 		return sCInterface.next;
 	}
 
-	private boolean check_main_region_B_r1_E_tr0() {
+	private boolean check_main_region_B_r1_E_tr0_tr0() {
 		return sCInterface.next;
 	}
 
@@ -377,10 +393,10 @@ public class HistoryWithoutInitialStepStatemachine
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
-		if (check_main_region_A_tr0()) {
+		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
 		} else {
-			if (check_main_region_A_tr1()) {
+			if (check_main_region_A_tr1_tr1()) {
 				effect_main_region_A_tr1();
 			}
 		}
@@ -388,10 +404,10 @@ public class HistoryWithoutInitialStepStatemachine
 
 	/* The reactions of state C. */
 	private void react_main_region_B_r1_C() {
-		if (check_main_region_B_tr0()) {
+		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
 		} else {
-			if (check_main_region_B_r1_C_tr0()) {
+			if (check_main_region_B_r1_C_tr0_tr0()) {
 				effect_main_region_B_r1_C_tr0();
 			}
 		}
@@ -399,10 +415,10 @@ public class HistoryWithoutInitialStepStatemachine
 
 	/* The reactions of state D. */
 	private void react_main_region_B_r1_D() {
-		if (check_main_region_B_tr0()) {
+		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
 		} else {
-			if (check_main_region_B_r1_D_tr0()) {
+			if (check_main_region_B_r1_D_tr0_tr0()) {
 				effect_main_region_B_r1_D_tr0();
 			}
 		}
@@ -410,10 +426,10 @@ public class HistoryWithoutInitialStepStatemachine
 
 	/* The reactions of state F. */
 	private void react_main_region_B_r1_E__region0_F() {
-		if (check_main_region_B_tr0()) {
+		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
 		} else {
-			if (check_main_region_B_r1_E_tr0()) {
+			if (check_main_region_B_r1_E_tr0_tr0()) {
 				effect_main_region_B_r1_E_tr0();
 			} else {
 			}

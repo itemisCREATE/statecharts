@@ -2,9 +2,6 @@ package org.yakindu.scr.operations;
 
 public class OperationsStatemachine implements IOperationsStatemachine {
 
-	static {
-	}
-
 	private final class SCIInterface1Impl implements SCIInterface1 {
 
 		private SCIInterface1OperationCallback operationCallback;
@@ -82,6 +79,25 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -129,15 +145,15 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		sCInterface.raiseEv();
 	}
 
-	private boolean check_main_region_B_tr0() {
+	private boolean check_main_region_B_tr0_tr0() {
 		return (sCInterface.ev) && sCInterface.operationCallback.alwaysTrue();
 	}
 
-	private boolean check_main_region_C_tr0() {
+	private boolean check_main_region_C_tr0_tr0() {
 		return sCInterface.ev;
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return true;
 	}
 
@@ -309,14 +325,14 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 
 	/* The reactions of state B. */
 	private void react_main_region_B() {
-		if (check_main_region_B_tr0()) {
+		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
 		}
 	}
 
 	/* The reactions of state C. */
 	private void react_main_region_C() {
-		if (check_main_region_C_tr0()) {
+		if (check_main_region_C_tr0_tr0()) {
 			effect_main_region_C_tr0();
 		}
 	}

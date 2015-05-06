@@ -2,9 +2,6 @@ package org.yakindu.scr.localreactions;
 
 public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private long x;
@@ -57,6 +54,25 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -93,11 +109,11 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 		sCInterface.setX(value);
 	}
 
-	private boolean check_main_region_A_lr0() {
+	private boolean check_main_region_A_lr0_lr0() {
 		return sCInterface.x == 0;
 	}
 
-	private void effect_main_region_A_lr0() {
+	private void effect_main_region_A_lr0_lr0() {
 		sCInterface.x += 1;
 	}
 
@@ -140,8 +156,8 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
-		if (check_main_region_A_lr0()) {
-			effect_main_region_A_lr0();
+		if (check_main_region_A_lr0_lr0()) {
+			effect_main_region_A_lr0_lr0();
 		}
 	}
 

@@ -4,9 +4,6 @@ public class EmptyTransitionStatemachine
 		implements
 			IEmptyTransitionStatemachine {
 
-	static {
-	}
-
 	public enum State {
 		main_region_A, main_region_B, $NullState$
 	};
@@ -39,6 +36,25 @@ public class EmptyTransitionStatemachine
 		exitSequence_main_region();
 
 		exitAction();
+	}
+
+	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
 	}
 
 	/**

@@ -39,12 +39,12 @@ public class CastExpressionsTest {
 	@Test
 	public void testCastExpressionTest() {
 		statemachine.enter();
-		assertTrue(statemachine.getRealValue() == 5);
-		assertTrue(statemachine.getIntValue() == 5);
+		assertTrue(statemachine.getRealValue() == 5l);
+		assertTrue(statemachine.getIntValue() == 5l);
 		statemachine.runCycle();
-		assertTrue(statemachine.getRealValue() == 15);
+		assertTrue(statemachine.getRealValue() == 15l);
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_C));
-		assertTrue(statemachine.getRealValue() == 757);
+		assertTrue(statemachine.getRealValue() == 757l);
 	}
 }

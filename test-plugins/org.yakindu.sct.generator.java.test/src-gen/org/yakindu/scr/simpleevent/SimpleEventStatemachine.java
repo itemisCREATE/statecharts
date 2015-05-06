@@ -2,9 +2,6 @@ package org.yakindu.scr.simpleevent;
 
 public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
@@ -57,6 +54,23 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return (stateVector[0] == State.main_region__final_);
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -94,11 +108,11 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 		sCInterface.raiseEvent1();
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return sCInterface.event1;
 	}
 
-	private boolean check_main_region_B_tr0() {
+	private boolean check_main_region_B_tr0_tr0() {
 		return true;
 	}
 
@@ -185,7 +199,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
-		if (check_main_region_A_tr0()) {
+		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
 		}
 	}

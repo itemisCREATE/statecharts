@@ -2,9 +2,6 @@ package org.yakindu.scr.alwaysoncycle;
 
 public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private long value;
@@ -68,6 +65,25 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -113,19 +129,19 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		sCInterface.setV2(value);
 	}
 
-	private boolean check_main_region_StateA_tr0() {
+	private boolean check_main_region_StateA_tr0_tr0() {
 		return sCInterface.value == 5;
 	}
 
-	private boolean check_main_region_StateA_lr1() {
+	private boolean check_main_region_StateA_lr1_lr1() {
 		return true;
 	}
 
-	private boolean check_main_region_StateB_tr0() {
+	private boolean check_main_region_StateB_tr0_tr0() {
 		return sCInterface.value == 5;
 	}
 
-	private boolean check_main_region_StateB_lr0() {
+	private boolean check_main_region_StateB_lr0_lr0() {
 		return true;
 	}
 
@@ -135,7 +151,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		enterSequence_main_region_StateB_default();
 	}
 
-	private void effect_main_region_StateA_lr1() {
+	private void effect_main_region_StateA_lr1_lr1() {
 		sCInterface.value += 1;
 	}
 
@@ -145,7 +161,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		enterSequence_main_region_StateA_default();
 	}
 
-	private void effect_main_region_StateB_lr0() {
+	private void effect_main_region_StateB_lr0_lr0() {
 		sCInterface.value += 1;
 	}
 
@@ -218,19 +234,19 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
 	/* The reactions of state StateA. */
 	private void react_main_region_StateA() {
-		if (check_main_region_StateA_tr0()) {
+		if (check_main_region_StateA_tr0_tr0()) {
 			effect_main_region_StateA_tr0();
 		} else {
-			effect_main_region_StateA_lr1();
+			effect_main_region_StateA_lr1_lr1();
 		}
 	}
 
 	/* The reactions of state StateB. */
 	private void react_main_region_StateB() {
-		if (check_main_region_StateB_tr0()) {
+		if (check_main_region_StateB_tr0_tr0()) {
 			effect_main_region_StateB_tr0();
 		} else {
-			effect_main_region_StateB_lr0();
+			effect_main_region_StateB_lr0_lr0();
 		}
 	}
 

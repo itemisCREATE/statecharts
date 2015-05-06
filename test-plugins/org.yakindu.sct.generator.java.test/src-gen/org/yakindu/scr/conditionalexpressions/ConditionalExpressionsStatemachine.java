@@ -4,9 +4,6 @@ public class ConditionalExpressionsStatemachine
 		implements
 			IConditionalExpressionsStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -80,6 +77,25 @@ public class ConditionalExpressionsStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -130,7 +146,7 @@ public class ConditionalExpressionsStatemachine
 		sCInterface.setBoolVar(value);
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return (sCInterface.e) && 1 == (sCInterface.boolVar ? 1 : 0);
 	}
 
@@ -209,7 +225,7 @@ public class ConditionalExpressionsStatemachine
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
-		if (check_main_region_A_tr0()) {
+		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
 		}
 	}

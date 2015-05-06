@@ -2,7 +2,6 @@ package org.yakindu.scr.stringexpressions;
 import org.yakindu.scr.IStatemachine;
 
 public interface IStringExpressionsStatemachine extends IStatemachine {
-
 	public interface SCInterface {
 		public void raiseE();
 		public String getStringA();

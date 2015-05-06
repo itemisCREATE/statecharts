@@ -2,9 +2,6 @@ package org.yakindu.scr.staticchoice;
 
 public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean reset;
@@ -67,6 +64,25 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -112,11 +128,11 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		sCInterface.setNumber(value);
 	}
 
-	private boolean check_main_region_Start_tr0() {
+	private boolean check_main_region_Start_tr0_tr0() {
 		return true;
 	}
 
-	private boolean check_main_region__choice_0_tr1() {
+	private boolean check_main_region__choice_0_tr1_tr1() {
 		return sCInterface.number == 2;
 	}
 
@@ -231,7 +247,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_0() {
-		if (check_main_region__choice_0_tr1()) {
+		if (check_main_region__choice_0_tr1_tr1()) {
 			effect_main_region__choice_0_tr1();
 		} else {
 			effect_main_region__choice_0_tr0();

@@ -2,9 +2,6 @@ package org.yakindu.scr.stateisactive;
 
 public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
@@ -61,6 +58,26 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$
+				|| stateVector[1] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -100,11 +117,11 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		sCInterface.raiseEvent1();
 	}
 
-	private boolean check_R1_R1A_tr0() {
+	private boolean check_R1_R1A_tr0_tr0() {
 		return isStateActive(State.r2_R2B);
 	}
 
-	private boolean check_R2_R2A_tr0() {
+	private boolean check_R2_R2A_tr0_tr0() {
 		return sCInterface.event1;
 	}
 
@@ -220,7 +237,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 
 	/* The reactions of state R1A. */
 	private void react_R1_R1A() {
-		if (check_R1_R1A_tr0()) {
+		if (check_R1_R1A_tr0_tr0()) {
 			effect_R1_R1A_tr0();
 		}
 	}
@@ -231,7 +248,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 
 	/* The reactions of state R2A. */
 	private void react_R2_R2A() {
-		if (check_R2_R2A_tr0()) {
+		if (check_R2_R2A_tr0_tr0()) {
 			effect_R2_R2A_tr0();
 		}
 	}

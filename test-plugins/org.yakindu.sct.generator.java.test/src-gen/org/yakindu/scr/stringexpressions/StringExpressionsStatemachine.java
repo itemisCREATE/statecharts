@@ -4,9 +4,6 @@ public class StringExpressionsStatemachine
 		implements
 			IStringExpressionsStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -157,6 +154,25 @@ public class StringExpressionsStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -264,23 +280,23 @@ public class StringExpressionsStatemachine
 		sCInterface.setGuardStringEqual(value);
 	}
 
-	private boolean check_main_region_AssignmentChecked_tr0() {
+	private boolean check_main_region_AssignmentChecked_tr0_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean check_main_region_VarToVarCompareSucceeded_tr0() {
+	private boolean check_main_region_VarToVarCompareSucceeded_tr0_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean check_main_region_VarToConstCompareSucceeded_tr0() {
+	private boolean check_main_region_VarToConstCompareSucceeded_tr0_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean check_main_region_ConstToVarCompareSucceeded_tr0() {
+	private boolean check_main_region_ConstToVarCompareSucceeded_tr0_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean check_main_region__choice_0_tr1() {
+	private boolean check_main_region__choice_0_tr1_tr1() {
 		return sCInterface.e;
 	}
 
@@ -288,7 +304,7 @@ public class StringExpressionsStatemachine
 		return true;
 	}
 
-	private boolean check_main_region__choice_1_tr1() {
+	private boolean check_main_region__choice_1_tr1_tr1() {
 		return (sCInterface.e)
 				&& (sCInterface.stringA == null
 						? sCInterface.stringA2 == null
@@ -299,7 +315,7 @@ public class StringExpressionsStatemachine
 		return true;
 	}
 
-	private boolean check_main_region__choice_2_tr1() {
+	private boolean check_main_region__choice_2_tr1_tr1() {
 		return (sCInterface.e)
 				&& (sCInterface.stringA == null
 						? sCInterface.stringB != null
@@ -310,7 +326,7 @@ public class StringExpressionsStatemachine
 		return true;
 	}
 
-	private boolean check_main_region__choice_3_tr0() {
+	private boolean check_main_region__choice_3_tr0_tr0() {
 		return sCInterface.e;
 	}
 
@@ -318,7 +334,7 @@ public class StringExpressionsStatemachine
 		return true;
 	}
 
-	private boolean check_main_region__choice_4_tr1() {
+	private boolean check_main_region__choice_4_tr1_tr1() {
 		return (sCInterface.e)
 				&& (sCInterface.stringA == null
 						? "A" == null
@@ -329,7 +345,7 @@ public class StringExpressionsStatemachine
 		return true;
 	}
 
-	private boolean check_main_region__choice_5_tr1() {
+	private boolean check_main_region__choice_5_tr1_tr1() {
 		return (sCInterface.e)
 				&& (sCInterface.stringA == null
 						? "B" != null
@@ -344,7 +360,7 @@ public class StringExpressionsStatemachine
 		return true;
 	}
 
-	private boolean check_main_region__choice_7_tr0() {
+	private boolean check_main_region__choice_7_tr0_tr0() {
 		return sCInterface.e;
 	}
 
@@ -352,7 +368,7 @@ public class StringExpressionsStatemachine
 		return true;
 	}
 
-	private boolean check_main_region__choice_8_tr1() {
+	private boolean check_main_region__choice_8_tr1_tr1() {
 		return (sCInterface.e)
 				&& ("A" == null ? sCInterface.stringA == null : "A"
 						.equals(sCInterface.stringA));
@@ -362,7 +378,7 @@ public class StringExpressionsStatemachine
 		return true;
 	}
 
-	private boolean check_main_region__choice_9_tr1() {
+	private boolean check_main_region__choice_9_tr1_tr1() {
 		return (sCInterface.e)
 				&& ("A" == null ? sCInterface.stringB != null : !"A"
 						.equals(sCInterface.stringB));
@@ -376,7 +392,7 @@ public class StringExpressionsStatemachine
 		return true;
 	}
 
-	private boolean check_main_region__choice_11_tr0() {
+	private boolean check_main_region__choice_11_tr0_tr0() {
 		return sCInterface.e;
 	}
 
@@ -384,7 +400,7 @@ public class StringExpressionsStatemachine
 		return true;
 	}
 
-	private boolean check_main_region__choice_12_tr1() {
+	private boolean check_main_region__choice_12_tr1_tr1() {
 		return (sCInterface.e) && ("A" == null ? "A" == null : "A".equals("A"));
 	}
 
@@ -392,7 +408,7 @@ public class StringExpressionsStatemachine
 		return true;
 	}
 
-	private boolean check_main_region__choice_13_tr1() {
+	private boolean check_main_region__choice_13_tr1_tr1() {
 		return (sCInterface.e)
 				&& ("A" == null ? "B" != null : !"A".equals("B"));
 	}
@@ -729,7 +745,7 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state AssignmentChecked. */
 	private void react_main_region_AssignmentChecked() {
-		if (check_main_region_AssignmentChecked_tr0()) {
+		if (check_main_region_AssignmentChecked_tr0_tr0()) {
 			effect_main_region_AssignmentChecked_tr0();
 		}
 	}
@@ -740,21 +756,21 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state VarToVarCompareSucceeded. */
 	private void react_main_region_VarToVarCompareSucceeded() {
-		if (check_main_region_VarToVarCompareSucceeded_tr0()) {
+		if (check_main_region_VarToVarCompareSucceeded_tr0_tr0()) {
 			effect_main_region_VarToVarCompareSucceeded_tr0();
 		}
 	}
 
 	/* The reactions of state VarToConstCompareSucceeded. */
 	private void react_main_region_VarToConstCompareSucceeded() {
-		if (check_main_region_VarToConstCompareSucceeded_tr0()) {
+		if (check_main_region_VarToConstCompareSucceeded_tr0_tr0()) {
 			effect_main_region_VarToConstCompareSucceeded_tr0();
 		}
 	}
 
 	/* The reactions of state ConstToVarCompareSucceeded. */
 	private void react_main_region_ConstToVarCompareSucceeded() {
-		if (check_main_region_ConstToVarCompareSucceeded_tr0()) {
+		if (check_main_region_ConstToVarCompareSucceeded_tr0_tr0()) {
 			effect_main_region_ConstToVarCompareSucceeded_tr0();
 		}
 	}
@@ -765,7 +781,7 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_0() {
-		if (check_main_region__choice_0_tr1()) {
+		if (check_main_region__choice_0_tr1_tr1()) {
 			effect_main_region__choice_0_tr1();
 		} else {
 			effect_main_region__choice_0_tr0();
@@ -774,7 +790,7 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_1() {
-		if (check_main_region__choice_1_tr1()) {
+		if (check_main_region__choice_1_tr1_tr1()) {
 			effect_main_region__choice_1_tr1();
 		} else {
 			effect_main_region__choice_1_tr0();
@@ -783,7 +799,7 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_2() {
-		if (check_main_region__choice_2_tr1()) {
+		if (check_main_region__choice_2_tr1_tr1()) {
 			effect_main_region__choice_2_tr1();
 		} else {
 			effect_main_region__choice_2_tr0();
@@ -792,7 +808,7 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_3() {
-		if (check_main_region__choice_3_tr0()) {
+		if (check_main_region__choice_3_tr0_tr0()) {
 			effect_main_region__choice_3_tr0();
 		} else {
 			effect_main_region__choice_3_tr1();
@@ -801,7 +817,7 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_4() {
-		if (check_main_region__choice_4_tr1()) {
+		if (check_main_region__choice_4_tr1_tr1()) {
 			effect_main_region__choice_4_tr1();
 		} else {
 			effect_main_region__choice_4_tr0();
@@ -810,7 +826,7 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_5() {
-		if (check_main_region__choice_5_tr1()) {
+		if (check_main_region__choice_5_tr1_tr1()) {
 			effect_main_region__choice_5_tr1();
 		} else {
 			effect_main_region__choice_5_tr0();
@@ -824,7 +840,7 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_7() {
-		if (check_main_region__choice_7_tr0()) {
+		if (check_main_region__choice_7_tr0_tr0()) {
 			effect_main_region__choice_7_tr0();
 		} else {
 			effect_main_region__choice_7_tr1();
@@ -833,7 +849,7 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_8() {
-		if (check_main_region__choice_8_tr1()) {
+		if (check_main_region__choice_8_tr1_tr1()) {
 			effect_main_region__choice_8_tr1();
 		} else {
 			effect_main_region__choice_8_tr0();
@@ -842,7 +858,7 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_9() {
-		if (check_main_region__choice_9_tr1()) {
+		if (check_main_region__choice_9_tr1_tr1()) {
 			effect_main_region__choice_9_tr1();
 		} else {
 			effect_main_region__choice_9_tr0();
@@ -856,7 +872,7 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_11() {
-		if (check_main_region__choice_11_tr0()) {
+		if (check_main_region__choice_11_tr0_tr0()) {
 			effect_main_region__choice_11_tr0();
 		} else {
 			effect_main_region__choice_11_tr1();
@@ -865,7 +881,7 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_12() {
-		if (check_main_region__choice_12_tr1()) {
+		if (check_main_region__choice_12_tr1_tr1()) {
 			effect_main_region__choice_12_tr1();
 		} else {
 			effect_main_region__choice_12_tr0();
@@ -874,7 +890,7 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state null. */
 	private void react_main_region__choice_13() {
-		if (check_main_region__choice_13_tr1()) {
+		if (check_main_region__choice_13_tr1_tr1()) {
 			effect_main_region__choice_13_tr1();
 		} else {
 			effect_main_region__choice_13_tr0();

@@ -4,9 +4,6 @@ public class NamedInterfaceAccessStatemachine
 		implements
 			INamedInterfaceAccessStatemachine {
 
-	static {
-	}
-
 	private final class SCISafeImpl implements SCISafe {
 
 		private boolean open;
@@ -122,6 +119,26 @@ public class NamedInterfaceAccessStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$
+				|| stateVector[1] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -166,35 +183,35 @@ public class NamedInterfaceAccessStatemachine
 		return sCIUser;
 	}
 
-	private boolean check_region_1_Idle_tr0() {
+	private boolean check_region_1_Idle_tr0_tr0() {
 		return (sCIUser.numberPressed) && sCIUser.numberPressedValue == number1;
 	}
 
-	private boolean check_region_1_Number1Pressed_tr0() {
+	private boolean check_region_1_Number1Pressed_tr0_tr0() {
 		return (sCIUser.numberPressed) && sCIUser.numberPressedValue == number2;
 	}
 
-	private boolean check_region_1_Number1Pressed_tr1() {
+	private boolean check_region_1_Number1Pressed_tr1_tr1() {
 		return sCIUser.numberPressed;
 	}
 
-	private boolean check_region_1_Number2Pressed_tr0() {
+	private boolean check_region_1_Number2Pressed_tr0_tr0() {
 		return (sCIUser.numberPressed) && sCIUser.numberPressedValue == number3;
 	}
 
-	private boolean check_region_1_Number2Pressed_tr1() {
+	private boolean check_region_1_Number2Pressed_tr1_tr1() {
 		return sCIUser.numberPressed;
 	}
 
-	private boolean check_region_1_Number3Pressed_tr0() {
+	private boolean check_region_1_Number3Pressed_tr0_tr0() {
 		return sCIUser.numberPressed;
 	}
 
-	private boolean check__region1_Closed_tr0() {
+	private boolean check__region1_Closed_tr0_tr0() {
 		return sCISafe.open;
 	}
 
-	private boolean check__region1_Open_tr0() {
+	private boolean check__region1_Open_tr0_tr0() {
 		return sCISafe.close;
 	}
 
@@ -392,17 +409,17 @@ public class NamedInterfaceAccessStatemachine
 
 	/* The reactions of state Idle. */
 	private void react_region_1_Idle() {
-		if (check_region_1_Idle_tr0()) {
+		if (check_region_1_Idle_tr0_tr0()) {
 			effect_region_1_Idle_tr0();
 		}
 	}
 
 	/* The reactions of state Number1Pressed. */
 	private void react_region_1_Number1Pressed() {
-		if (check_region_1_Number1Pressed_tr0()) {
+		if (check_region_1_Number1Pressed_tr0_tr0()) {
 			effect_region_1_Number1Pressed_tr0();
 		} else {
-			if (check_region_1_Number1Pressed_tr1()) {
+			if (check_region_1_Number1Pressed_tr1_tr1()) {
 				effect_region_1_Number1Pressed_tr1();
 			}
 		}
@@ -410,10 +427,10 @@ public class NamedInterfaceAccessStatemachine
 
 	/* The reactions of state Number2Pressed. */
 	private void react_region_1_Number2Pressed() {
-		if (check_region_1_Number2Pressed_tr0()) {
+		if (check_region_1_Number2Pressed_tr0_tr0()) {
 			effect_region_1_Number2Pressed_tr0();
 		} else {
-			if (check_region_1_Number2Pressed_tr1()) {
+			if (check_region_1_Number2Pressed_tr1_tr1()) {
 				effect_region_1_Number2Pressed_tr1();
 			}
 		}
@@ -421,21 +438,21 @@ public class NamedInterfaceAccessStatemachine
 
 	/* The reactions of state Number3Pressed. */
 	private void react_region_1_Number3Pressed() {
-		if (check_region_1_Number3Pressed_tr0()) {
+		if (check_region_1_Number3Pressed_tr0_tr0()) {
 			effect_region_1_Number3Pressed_tr0();
 		}
 	}
 
 	/* The reactions of state Closed. */
 	private void react__region1_Closed() {
-		if (check__region1_Closed_tr0()) {
+		if (check__region1_Closed_tr0_tr0()) {
 			effect__region1_Closed_tr0();
 		}
 	}
 
 	/* The reactions of state Open. */
 	private void react__region1_Open() {
-		if (check__region1_Open_tr0()) {
+		if (check__region1_Open_tr0_tr0()) {
 			effect__region1_Open_tr0();
 		}
 	}

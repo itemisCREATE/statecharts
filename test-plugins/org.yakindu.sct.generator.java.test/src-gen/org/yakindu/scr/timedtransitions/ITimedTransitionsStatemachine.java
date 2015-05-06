@@ -6,5 +6,4 @@ public interface ITimedTransitionsStatemachine
 		extends
 			ITimerCallback,
 			IStatemachine {
-
 }

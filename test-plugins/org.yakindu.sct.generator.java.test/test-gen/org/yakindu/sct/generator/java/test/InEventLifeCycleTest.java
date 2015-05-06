@@ -40,8 +40,8 @@ public class InEventLifeCycleTest {
 	public void testeventLifeCycle() {
 		statemachine.enter();
 		statemachine.raiseE();
-		assertTrue(statemachine.getI() == 0);
+		assertTrue(statemachine.getI() == 0l);
 		statemachine.runCycle();
-		assertTrue(statemachine.getI() == 1);
+		assertTrue(statemachine.getI() == 1l);
 	}
 }

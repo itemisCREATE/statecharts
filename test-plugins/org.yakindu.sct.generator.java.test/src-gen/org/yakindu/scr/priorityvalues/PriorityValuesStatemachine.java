@@ -2,9 +2,6 @@ package org.yakindu.scr.priorityvalues;
 
 public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
@@ -68,6 +65,26 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$
+				|| stateVector[1] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -116,23 +133,23 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		sCInterface.raiseEvent2();
 	}
 
-	private boolean check_someRegion_A_tr0() {
+	private boolean check_someRegion_A_tr0_tr0() {
 		return sCInterface.event2;
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return sCInterface.event1;
 	}
 
-	private boolean check_main_region_A_tr1() {
+	private boolean check_main_region_A_tr1_tr1() {
 		return sCInterface.event1;
 	}
 
-	private boolean check_main_region_A_tr2() {
+	private boolean check_main_region_A_tr2_tr2() {
 		return sCInterface.event1;
 	}
 
-	private boolean check_main_region_A_tr3() {
+	private boolean check_main_region_A_tr3_tr3() {
 		return (sCInterface.event2) && !isStateActive(State.someRegion_B);
 	}
 
@@ -314,7 +331,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 
 	/* The reactions of state A. */
 	private void react_someRegion_A() {
-		if (check_someRegion_A_tr0()) {
+		if (check_someRegion_A_tr0_tr0()) {
 			effect_someRegion_A_tr0();
 		}
 	}
@@ -325,16 +342,16 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
-		if (check_main_region_A_tr0()) {
+		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
 		} else {
-			if (check_main_region_A_tr1()) {
+			if (check_main_region_A_tr1_tr1()) {
 				effect_main_region_A_tr1();
 			} else {
-				if (check_main_region_A_tr2()) {
+				if (check_main_region_A_tr2_tr2()) {
 					effect_main_region_A_tr2();
 				} else {
-					if (check_main_region_A_tr3()) {
+					if (check_main_region_A_tr3_tr3()) {
 						effect_main_region_A_tr3();
 					}
 				}

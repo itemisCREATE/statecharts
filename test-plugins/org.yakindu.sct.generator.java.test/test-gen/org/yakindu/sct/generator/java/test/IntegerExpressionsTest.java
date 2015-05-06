@@ -40,8 +40,8 @@ public class IntegerExpressionsTest {
 	public void testintegerExpressions() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
-		assertTrue(statemachine.getMyInt1() == 10);
-		assertTrue(statemachine.getMyInt2() == 5);
+		assertTrue(statemachine.getMyInt1() == 10l);
+		assertTrue(statemachine.getMyInt2() == 5l);
 		statemachine.raiseE1();
 		statemachine.runCycle();
 		assertTrue(statemachine.getLess() == false);
@@ -50,16 +50,16 @@ public class IntegerExpressionsTest {
 		assertTrue(statemachine.getEqualOrGreater() == true);
 		assertTrue(statemachine.getEqual() == false);
 		assertTrue(statemachine.getNotEqual() == true);
-		assertTrue(statemachine.getPlus() == 15);
-		assertTrue(statemachine.getMinus() == 5);
-		assertTrue(statemachine.getMultiply() == 50);
-		assertTrue(statemachine.getDivision() == 2);
-		assertTrue(statemachine.getModulo() == 0);
-		assertTrue(statemachine.getNegat() == -10);
-		assertTrue(statemachine.getMultiAssign() == 20);
-		assertTrue(statemachine.getDivAssign() == 2);
-		assertTrue(statemachine.getPlusAssign() == 12);
-		assertTrue(statemachine.getMinusAssign() == -8);
-		assertTrue(statemachine.getModuloAssign() == 0);
+		assertTrue(statemachine.getPlus() == 15l);
+		assertTrue(statemachine.getMinus() == 5l);
+		assertTrue(statemachine.getMultiply() == 50l);
+		assertTrue(statemachine.getDivision() == 2l);
+		assertTrue(statemachine.getModulo() == 0l);
+		assertTrue(statemachine.getNegat() == -10l);
+		assertTrue(statemachine.getMultiAssign() == 20l);
+		assertTrue(statemachine.getDivAssign() == 2l);
+		assertTrue(statemachine.getPlusAssign() == 12l);
+		assertTrue(statemachine.getMinusAssign() == -8l);
+		assertTrue(statemachine.getModuloAssign() == 0l);
 	}
 }

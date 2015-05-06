@@ -4,9 +4,6 @@ public class RealExpressionsStatemachine
 		implements
 			IRealExpressionsStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
@@ -31,6 +28,24 @@ public class RealExpressionsStatemachine
 
 		public void setMyReal2(double value) {
 			this.myReal2 = value;
+		}
+
+		private double myFloat;
+		public double getMyFloat() {
+			return myFloat;
+		}
+
+		public void setMyFloat(double value) {
+			this.myFloat = value;
+		}
+
+		private double myDouble;
+		public double getMyDouble() {
+			return myDouble;
+		}
+
+		public void setMyDouble(double value) {
+			this.myDouble = value;
 		}
 
 		private boolean less;
@@ -228,6 +243,10 @@ public class RealExpressionsStatemachine
 
 		sCInterface.myReal2 = 0.0;
 
+		sCInterface.myFloat = 1.0;
+
+		sCInterface.myDouble = 2.0;
+
 		sCInterface.less = false;
 
 		sCInterface.greater = false;
@@ -275,6 +294,25 @@ public class RealExpressionsStatemachine
 		exitSequence_main_region();
 
 		exitAction();
+	}
+
+	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
 	}
 
 	/**
@@ -326,6 +364,20 @@ public class RealExpressionsStatemachine
 
 	public void setMyReal2(double value) {
 		sCInterface.setMyReal2(value);
+	}
+	public double getMyFloat() {
+		return sCInterface.getMyFloat();
+	}
+
+	public void setMyFloat(double value) {
+		sCInterface.setMyFloat(value);
+	}
+	public double getMyDouble() {
+		return sCInterface.getMyDouble();
+	}
+
+	public void setMyDouble(double value) {
+		sCInterface.setMyDouble(value);
 	}
 	public boolean getLess() {
 		return sCInterface.getLess();
@@ -454,7 +506,7 @@ public class RealExpressionsStatemachine
 		sCInterface.setModuloAssign(value);
 	}
 
-	private boolean check_main_region_StateA_tr0() {
+	private boolean check_main_region_StateA_tr0_tr0() {
 		return sCInterface.e1;
 	}
 
@@ -473,6 +525,10 @@ public class RealExpressionsStatemachine
 		sCInterface.myReal1 = 5.3;
 
 		sCInterface.myReal2 = 10.6;
+
+		sCInterface.myFloat = 3.3;
+
+		sCInterface.myDouble = 4.4;
 	}
 
 	/* Entry action for state 'StateB'. */
@@ -567,7 +623,7 @@ public class RealExpressionsStatemachine
 
 	/* The reactions of state StateA. */
 	private void react_main_region_StateA() {
-		if (check_main_region_StateA_tr0()) {
+		if (check_main_region_StateA_tr0_tr0()) {
 			effect_main_region_StateA_tr0();
 		}
 	}

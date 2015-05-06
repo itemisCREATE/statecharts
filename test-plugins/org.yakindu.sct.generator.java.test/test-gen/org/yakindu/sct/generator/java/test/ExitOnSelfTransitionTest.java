@@ -40,15 +40,15 @@ public class ExitOnSelfTransitionTest {
 	public void testExitOnSelfTransitionTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		assertTrue(statemachine.getEntryCount() == 1);
-		assertTrue(statemachine.getExitCount() == 0);
+		assertTrue(statemachine.getEntryCount() == 1l);
+		assertTrue(statemachine.getExitCount() == 0l);
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.getEntryCount() == 2);
-		assertTrue(statemachine.getExitCount() == 1);
+		assertTrue(statemachine.getEntryCount() == 2l);
+		assertTrue(statemachine.getExitCount() == 1l);
 		statemachine.raiseF();
 		statemachine.runCycle();
-		assertTrue(statemachine.getEntryCount() == 2);
-		assertTrue(statemachine.getExitCount() == 2);
+		assertTrue(statemachine.getEntryCount() == 2l);
+		assertTrue(statemachine.getExitCount() == 2l);
 	}
 }

@@ -2,9 +2,6 @@ package org.yakindu.scr.javakeywords;
 
 public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean while_ID;
@@ -551,6 +548,25 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -911,19 +927,19 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		sCInterface.setVolatile(value);
 	}
 
-	private boolean check_goto_abstract_tr0() {
+	private boolean check_goto_abstract_tr0_tr0() {
 		return (sCInterface.while_ID) && true;
 	}
 
-	private boolean check_goto_boolean_tr0() {
+	private boolean check_goto_boolean_tr0_tr0() {
 		return sCInterface.while_ID;
 	}
 
-	private boolean check_goto_boolean_tr1() {
+	private boolean check_goto_boolean_tr1_tr1() {
 		return sCInterface.ev;
 	}
 
-	private boolean check_goto_void_volatile_state_tr0() {
+	private boolean check_goto_void_volatile_state_tr0_tr0() {
 		return sCInterface.ev;
 	}
 
@@ -1328,17 +1344,17 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	/* The reactions of state abstract. */
 	private void react_goto_abstract() {
-		if (check_goto_abstract_tr0()) {
+		if (check_goto_abstract_tr0_tr0()) {
 			effect_goto_abstract_tr0();
 		}
 	}
 
 	/* The reactions of state boolean. */
 	private void react_goto_boolean() {
-		if (check_goto_boolean_tr0()) {
+		if (check_goto_boolean_tr0_tr0()) {
 			effect_goto_boolean_tr0();
 		} else {
-			if (check_goto_boolean_tr1()) {
+			if (check_goto_boolean_tr1_tr1()) {
 				effect_goto_boolean_tr1();
 			}
 		}
@@ -1350,7 +1366,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	/* The reactions of state state. */
 	private void react_goto_void_volatile_state() {
-		if (check_goto_void_volatile_state_tr0()) {
+		if (check_goto_void_volatile_state_tr0_tr0()) {
 			effect_goto_void_volatile_state_tr0();
 		}
 	}

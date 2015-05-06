@@ -4,9 +4,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 		implements
 			ISTextKeywordsInStatesAndRegionsStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
@@ -142,6 +139,44 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$
+				|| stateVector[1] != State.$NullState$
+				|| stateVector[2] != State.$NullState$
+				|| stateVector[3] != State.$NullState$
+				|| stateVector[4] != State.$NullState$
+				|| stateVector[5] != State.$NullState$
+				|| stateVector[6] != State.$NullState$
+				|| stateVector[7] != State.$NullState$
+				|| stateVector[8] != State.$NullState$
+				|| stateVector[9] != State.$NullState$
+				|| stateVector[10] != State.$NullState$
+				|| stateVector[11] != State.$NullState$
+				|| stateVector[12] != State.$NullState$
+				|| stateVector[13] != State.$NullState$
+				|| stateVector[14] != State.$NullState$
+				|| stateVector[15] != State.$NullState$
+				|| stateVector[16] != State.$NullState$
+				|| stateVector[17] != State.$NullState$
+				|| stateVector[18] != State.$NullState$
+				|| stateVector[19] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -254,79 +289,79 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 		sCInterface.raiseE2();
 	}
 
-	private boolean check_operation_interface_tr0() {
+	private boolean check_operation_interface_tr0_tr0() {
 		return (sCInterface.e1) && isStateActive(State.default_namespace);
 	}
 
-	private boolean check_namespace_event_tr0() {
+	private boolean check_namespace_event_tr0_tr0() {
 		return (sCInterface.e2) && isStateActive(State.operation_internal);
 	}
 
-	private boolean check_local_in_tr0() {
+	private boolean check_local_in_tr0_tr0() {
 		return (sCInterface.e1) && isStateActive(State.namespace_local);
 	}
 
-	private boolean check_interface_var_tr0() {
+	private boolean check_interface_var_tr0_tr0() {
 		return (sCInterface.e2) && isStateActive(State.local_out);
 	}
 
-	private boolean check_internal_external_tr0() {
+	private boolean check_internal_external_tr0_tr0() {
 		return (sCInterface.e1) && isStateActive(State.interface_readonly);
 	}
 
-	private boolean check_event_default_tr0() {
+	private boolean check_event_default_tr0_tr0() {
 		return (sCInterface.e2) && isStateActive(State.internal_operation);
 	}
 
-	private boolean check_in_entry_tr0() {
+	private boolean check_in_entry_tr0_tr0() {
 		return (sCInterface.e1) && isStateActive(State.event_else);
 	}
 
-	private boolean check_out_always_tr0() {
+	private boolean check_out_always_tr0_tr0() {
 		return (sCInterface.e2) && isStateActive(State.in_exit);
 	}
 
-	private boolean check_var_raise_tr0() {
+	private boolean check_var_raise_tr0_tr0() {
 		return (sCInterface.e1) && isStateActive(State.out_oncycle);
 	}
 
-	private boolean check_readonly_active_tr0() {
+	private boolean check_readonly_active_tr0_tr0() {
 		return (sCInterface.e2) && isStateActive(State.var_valueof);
 	}
 
-	private boolean check_external_interface_tr0() {
+	private boolean check_external_interface_tr0_tr0() {
 		return (sCInterface.e1) && isStateActive(State.readonly_namespace);
 	}
 
-	private boolean check_else_event_tr0() {
+	private boolean check_else_event_tr0_tr0() {
 		return (sCInterface.e2) && isStateActive(State.external_internal);
 	}
 
-	private boolean check_entry_in_tr0() {
+	private boolean check_entry_in_tr0_tr0() {
 		return (sCInterface.e1) && isStateActive(State.else_local);
 	}
 
-	private boolean check_exit_var_tr0() {
+	private boolean check_exit_var_tr0_tr0() {
 		return (sCInterface.e2) && isStateActive(State.entry_out);
 	}
 
-	private boolean check_always_external_tr0() {
+	private boolean check_always_external_tr0_tr0() {
 		return (sCInterface.e1) && isStateActive(State.exit_readonly);
 	}
 
-	private boolean check_oncycle_default_tr0() {
+	private boolean check_oncycle_default_tr0_tr0() {
 		return (sCInterface.e2) && isStateActive(State.always_operation);
 	}
 
-	private boolean check_raise_entry_tr0() {
+	private boolean check_raise_entry_tr0_tr0() {
 		return (sCInterface.e1) && isStateActive(State.oncycle_else);
 	}
 
-	private boolean check_valueof_always_tr0() {
+	private boolean check_valueof_always_tr0_tr0() {
 		return (sCInterface.e2) && isStateActive(State.raise_exit);
 	}
 
-	private boolean check_active_raise_tr0() {
+	private boolean check_active_raise_tr0_tr0() {
 		return (sCInterface.e1) && isStateActive(State.valueof_oncycle);
 	}
 
@@ -1342,7 +1377,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state interface. */
 	private void react_operation_interface() {
-		if (check_operation_interface_tr0()) {
+		if (check_operation_interface_tr0_tr0()) {
 			effect_operation_interface_tr0();
 		}
 	}
@@ -1353,7 +1388,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state event. */
 	private void react_namespace_event() {
-		if (check_namespace_event_tr0()) {
+		if (check_namespace_event_tr0_tr0()) {
 			effect_namespace_event_tr0();
 		}
 	}
@@ -1364,7 +1399,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state in. */
 	private void react_local_in() {
-		if (check_local_in_tr0()) {
+		if (check_local_in_tr0_tr0()) {
 			effect_local_in_tr0();
 		}
 	}
@@ -1375,7 +1410,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state var. */
 	private void react_interface_var() {
-		if (check_interface_var_tr0()) {
+		if (check_interface_var_tr0_tr0()) {
 			effect_interface_var_tr0();
 		}
 	}
@@ -1386,7 +1421,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state external. */
 	private void react_internal_external() {
-		if (check_internal_external_tr0()) {
+		if (check_internal_external_tr0_tr0()) {
 			effect_internal_external_tr0();
 		}
 	}
@@ -1397,7 +1432,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state default. */
 	private void react_event_default() {
-		if (check_event_default_tr0()) {
+		if (check_event_default_tr0_tr0()) {
 			effect_event_default_tr0();
 		}
 	}
@@ -1408,7 +1443,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state entry. */
 	private void react_in_entry() {
-		if (check_in_entry_tr0()) {
+		if (check_in_entry_tr0_tr0()) {
 			effect_in_entry_tr0();
 		}
 	}
@@ -1419,7 +1454,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state always. */
 	private void react_out_always() {
-		if (check_out_always_tr0()) {
+		if (check_out_always_tr0_tr0()) {
 			effect_out_always_tr0();
 		}
 	}
@@ -1430,7 +1465,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state raise. */
 	private void react_var_raise() {
-		if (check_var_raise_tr0()) {
+		if (check_var_raise_tr0_tr0()) {
 			effect_var_raise_tr0();
 		}
 	}
@@ -1441,7 +1476,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state active. */
 	private void react_readonly_active() {
-		if (check_readonly_active_tr0()) {
+		if (check_readonly_active_tr0_tr0()) {
 			effect_readonly_active_tr0();
 		}
 	}
@@ -1452,7 +1487,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state interface. */
 	private void react_external_interface() {
-		if (check_external_interface_tr0()) {
+		if (check_external_interface_tr0_tr0()) {
 			effect_external_interface_tr0();
 		}
 	}
@@ -1463,7 +1498,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state event. */
 	private void react_else_event() {
-		if (check_else_event_tr0()) {
+		if (check_else_event_tr0_tr0()) {
 			effect_else_event_tr0();
 		}
 	}
@@ -1474,7 +1509,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state in. */
 	private void react_entry_in() {
-		if (check_entry_in_tr0()) {
+		if (check_entry_in_tr0_tr0()) {
 			effect_entry_in_tr0();
 		}
 	}
@@ -1485,7 +1520,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state var. */
 	private void react_exit_var() {
-		if (check_exit_var_tr0()) {
+		if (check_exit_var_tr0_tr0()) {
 			effect_exit_var_tr0();
 		}
 	}
@@ -1496,7 +1531,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state external. */
 	private void react_always_external() {
-		if (check_always_external_tr0()) {
+		if (check_always_external_tr0_tr0()) {
 			effect_always_external_tr0();
 		}
 	}
@@ -1507,7 +1542,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state default. */
 	private void react_oncycle_default() {
-		if (check_oncycle_default_tr0()) {
+		if (check_oncycle_default_tr0_tr0()) {
 			effect_oncycle_default_tr0();
 		}
 	}
@@ -1518,7 +1553,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state entry. */
 	private void react_raise_entry() {
-		if (check_raise_entry_tr0()) {
+		if (check_raise_entry_tr0_tr0()) {
 			effect_raise_entry_tr0();
 		}
 	}
@@ -1529,7 +1564,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state always. */
 	private void react_valueof_always() {
-		if (check_valueof_always_tr0()) {
+		if (check_valueof_always_tr0_tr0()) {
 			effect_valueof_always_tr0();
 		}
 	}
@@ -1540,7 +1575,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state raise. */
 	private void react_active_raise() {
-		if (check_active_raise_tr0()) {
+		if (check_active_raise_tr0_tr0()) {
 			effect_active_raise_tr0();
 		}
 	}

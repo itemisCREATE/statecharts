@@ -103,6 +103,25 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -162,15 +181,15 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		sCInterface.setResult(value);
 	}
 
-	private boolean check_main_region_A_tr0() {
+	private boolean check_main_region_A_tr0_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean check_main_region_B_tr0() {
+	private boolean check_main_region_B_tr0_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean check_main_region_C_tr0() {
+	private boolean check_main_region_C_tr0_tr0() {
 		return sCInterface.e2;
 	}
 
@@ -281,21 +300,21 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
-		if (check_main_region_A_tr0()) {
+		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
 		}
 	}
 
 	/* The reactions of state B. */
 	private void react_main_region_B() {
-		if (check_main_region_B_tr0()) {
+		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
 		}
 	}
 
 	/* The reactions of state C. */
 	private void react_main_region_C() {
-		if (check_main_region_C_tr0()) {
+		if (check_main_region_C_tr0_tr0()) {
 			effect_main_region_C_tr0();
 		}
 	}

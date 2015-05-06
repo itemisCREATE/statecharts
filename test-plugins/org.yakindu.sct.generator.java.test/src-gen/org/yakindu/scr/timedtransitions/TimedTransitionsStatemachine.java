@@ -4,10 +4,6 @@ import org.yakindu.scr.ITimer;
 public class TimedTransitionsStatemachine
 		implements
 			ITimedTransitionsStatemachine {
-
-	static {
-	}
-
 	private final boolean[] timeEvents = new boolean[1];
 
 	public enum State {
@@ -50,6 +46,25 @@ public class TimedTransitionsStatemachine
 		exitSequence_main_region();
 
 		exitAction();
+	}
+
+	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
 	}
 
 	/**
@@ -106,7 +121,7 @@ public class TimedTransitionsStatemachine
 		timeEvents[eventID] = true;
 	}
 
-	private boolean check_main_region_Start_tr0() {
+	private boolean check_main_region_Start_tr0_tr0() {
 		return timeEvents[0];
 	}
 
@@ -186,7 +201,7 @@ public class TimedTransitionsStatemachine
 
 	/* The reactions of state Start. */
 	private void react_main_region_Start() {
-		if (check_main_region_Start_tr0()) {
+		if (check_main_region_Start_tr0_tr0()) {
 			effect_main_region_Start_tr0();
 		}
 	}

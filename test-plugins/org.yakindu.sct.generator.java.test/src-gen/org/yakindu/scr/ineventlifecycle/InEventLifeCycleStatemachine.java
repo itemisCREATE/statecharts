@@ -4,9 +4,6 @@ public class InEventLifeCycleStatemachine
 		implements
 			IInEventLifeCycleStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -69,6 +66,25 @@ public class InEventLifeCycleStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -110,11 +126,11 @@ public class InEventLifeCycleStatemachine
 		sCInterface.setI(value);
 	}
 
-	private boolean check_main_region_A_lr0() {
+	private boolean check_main_region_A_lr0_lr0() {
 		return sCInterface.e;
 	}
 
-	private void effect_main_region_A_lr0() {
+	private void effect_main_region_A_lr0_lr0() {
 		sCInterface.i += 1;
 	}
 
@@ -157,8 +173,8 @@ public class InEventLifeCycleStatemachine
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
-		if (check_main_region_A_lr0()) {
-			effect_main_region_A_lr0();
+		if (check_main_region_A_lr0_lr0()) {
+			effect_main_region_A_lr0_lr0();
 		}
 	}
 

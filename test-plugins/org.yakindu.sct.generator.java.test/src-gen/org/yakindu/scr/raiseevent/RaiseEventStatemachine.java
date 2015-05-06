@@ -2,9 +2,6 @@ package org.yakindu.scr.raiseevent;
 
 public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
@@ -74,6 +71,26 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$
+				|| stateVector[1] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -117,11 +134,11 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		sCInterface.raiseE2();
 	}
 
-	private boolean check_main_region_StateA_tr0() {
+	private boolean check_main_region_StateA_tr0_tr0() {
 		return sCInterface.e2;
 	}
 
-	private boolean check_second_region_SateA_tr0() {
+	private boolean check_second_region_SateA_tr0_tr0() {
 		return sCInterface.e1;
 	}
 
@@ -244,7 +261,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 
 	/* The reactions of state StateA. */
 	private void react_main_region_StateA() {
-		if (check_main_region_StateA_tr0()) {
+		if (check_main_region_StateA_tr0_tr0()) {
 			effect_main_region_StateA_tr0();
 		}
 	}
@@ -255,7 +272,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 
 	/* The reactions of state SateA. */
 	private void react_second_region_SateA() {
-		if (check_second_region_SateA_tr0()) {
+		if (check_second_region_SateA_tr0_tr0()) {
 			effect_second_region_SateA_tr0();
 		}
 	}

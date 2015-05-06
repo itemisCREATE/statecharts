@@ -40,11 +40,11 @@ public class NamedInterfaceAccessTest {
 	public void testSafeOpenSuccess() {
 		statemachine.enter();
 		statemachine.runCycle();
-		statemachine.getSCIUser().raiseNumberPressed(3);
+		statemachine.getSCIUser().raiseNumberPressed(3l);
 		statemachine.runCycle();
-		statemachine.getSCIUser().raiseNumberPressed(7);
+		statemachine.getSCIUser().raiseNumberPressed(7l);
 		statemachine.runCycle();
-		statemachine.getSCIUser().raiseNumberPressed(5);
+		statemachine.getSCIUser().raiseNumberPressed(5l);
 		statemachine.runCycle();
 		assertTrue(statemachine.getSCISafe().isRaisedOpen());
 	}

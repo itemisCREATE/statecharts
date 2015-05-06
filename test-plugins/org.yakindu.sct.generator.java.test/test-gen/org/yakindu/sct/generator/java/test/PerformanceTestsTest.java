@@ -42,11 +42,11 @@ public class PerformanceTestsTest {
 	public void testtest_100_000() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A));
-		while (statemachine.getC() < 100000) {
+		while (statemachine.getC() < 100000l) {
 			if (statemachine.isStateActive(State.mr_A)) {
 				statemachine.raiseE1();;
 			} else {
-				if (statemachine.getC() % 2 == 0) {
+				if (statemachine.getC() % 2l == 0l) {
 					statemachine.raiseE2();;
 				} else {
 					statemachine.raiseE3();;
@@ -54,17 +54,17 @@ public class PerformanceTestsTest {
 			}
 			statemachine.runCycle();
 		}
-		assertTrue(statemachine.getA() > 2);
+		assertTrue(statemachine.getA() > 2l);
 	}
 	@Test
 	public void testtest_1_000_000() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A));
-		while (statemachine.getC() < 1000000) {
+		while (statemachine.getC() < 1000000l) {
 			if (statemachine.isStateActive(State.mr_A)) {
 				statemachine.raiseE1();;
 			} else {
-				if (statemachine.getC() % 2 == 0) {
+				if (statemachine.getC() % 2l == 0l) {
 					statemachine.raiseE2();;
 				} else {
 					statemachine.raiseE3();;
@@ -72,17 +72,17 @@ public class PerformanceTestsTest {
 			}
 			statemachine.runCycle();
 		}
-		assertTrue(statemachine.getA() > 2);
+		assertTrue(statemachine.getA() > 2l);
 	}
 	@Test
 	public void testtest_10_000_000() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A));
-		while (statemachine.getC() < 10000000) {
+		while (statemachine.getC() < 10000000l) {
 			if (statemachine.isStateActive(State.mr_A)) {
 				statemachine.raiseE1();;
 			} else {
-				if (statemachine.getC() % 2 == 0) {
+				if (statemachine.getC() % 2l == 0l) {
 					statemachine.raiseE2();;
 				} else {
 					statemachine.raiseE3();;
@@ -90,6 +90,6 @@ public class PerformanceTestsTest {
 			}
 			statemachine.runCycle();
 		}
-		assertTrue(statemachine.getA() > 2);
+		assertTrue(statemachine.getA() > 2l);
 	}
 }

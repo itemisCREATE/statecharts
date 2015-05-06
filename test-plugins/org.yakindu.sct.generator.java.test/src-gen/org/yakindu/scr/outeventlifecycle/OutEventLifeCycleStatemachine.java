@@ -4,9 +4,6 @@ public class OutEventLifeCycleStatemachine
 		implements
 			IOutEventLifeCycleStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -97,6 +94,26 @@ public class OutEventLifeCycleStatemachine
 	}
 
 	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$
+				|| stateVector[1] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
@@ -153,15 +170,15 @@ public class OutEventLifeCycleStatemachine
 		sCInterface.setF_available_in_next_cycle(value);
 	}
 
-	private boolean check_r1_A_tr0() {
+	private boolean check_r1_A_tr0_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean check_r1_B_lr0() {
+	private boolean check_r1_B_lr0_lr0() {
 		return sCInterface.f;
 	}
 
-	private boolean check_r2_B_lr0() {
+	private boolean check_r2_B_lr0_lr0() {
 		return sCInterface.f;
 	}
 
@@ -173,11 +190,11 @@ public class OutEventLifeCycleStatemachine
 		enterSequence_r1_B_default();
 	}
 
-	private void effect_r1_B_lr0() {
+	private void effect_r1_B_lr0_lr0() {
 		sCInterface.f_available_in_next_cycle = true;
 	}
 
-	private void effect_r2_B_lr0() {
+	private void effect_r2_B_lr0_lr0() {
 		sCInterface.f_available_in_cycle = true;
 	}
 
@@ -265,22 +282,22 @@ public class OutEventLifeCycleStatemachine
 
 	/* The reactions of state A. */
 	private void react_r1_A() {
-		if (check_r1_A_tr0()) {
+		if (check_r1_A_tr0_tr0()) {
 			effect_r1_A_tr0();
 		}
 	}
 
 	/* The reactions of state B. */
 	private void react_r1_B() {
-		if (check_r1_B_lr0()) {
-			effect_r1_B_lr0();
+		if (check_r1_B_lr0_lr0()) {
+			effect_r1_B_lr0_lr0();
 		}
 	}
 
 	/* The reactions of state B. */
 	private void react_r2_B() {
-		if (check_r2_B_lr0()) {
-			effect_r2_B_lr0();
+		if (check_r2_B_lr0_lr0()) {
+			effect_r2_B_lr0_lr0();
 		}
 	}
 

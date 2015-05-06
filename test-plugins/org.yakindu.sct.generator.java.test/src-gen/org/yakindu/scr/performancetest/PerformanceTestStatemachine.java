@@ -4,10 +4,6 @@ import org.yakindu.scr.ITimer;
 public class PerformanceTestStatemachine
 		implements
 			IPerformanceTestStatemachine {
-
-	static {
-	}
-
 	private final boolean[] timeEvents = new boolean[2];
 
 	private final class SCInterfaceImpl implements SCInterface {
@@ -115,13 +111,33 @@ public class PerformanceTestStatemachine
 
 		entryAction();
 
-		enterSequenceMr();
+		enterSequence_mr_default();
 	}
 
 	public void exit() {
-		exitSequenceMr();
+		exitSequence_mr();
 
 		exitAction();
+	}
+
+	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$
+				|| stateVector[1] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
 	}
 
 	/**
@@ -243,276 +259,276 @@ public class PerformanceTestStatemachine
 		sCInterface.setC(value);
 	}
 
-	private boolean checkLr0() {
+	private boolean check__lr0() {
 		return true;
 	}
 
-	private boolean checkLr1() {
+	private boolean check__lr1() {
 		return timeEvents[0];
 	}
 
-	private boolean checkLr2() {
+	private boolean check__lr2() {
 		return timeEvents[1];
 	}
 
-	private boolean checkMr_ATr0() {
+	private boolean check_mr_A_tr0_tr0() {
 		return sCInterface.e1;
 	}
 
-	private boolean checkMr_B_r1_XTr0() {
+	private boolean check_mr_B_r1_X_tr0_tr0() {
 		return sCInterface.e2;
 	}
 
-	private boolean checkMr_B_r1_YTr0() {
+	private boolean check_mr_B_r1_Y_tr0_tr0() {
 		return sCInterface.e2;
 	}
 
-	private boolean checkMr_B_r1_ZTr0() {
+	private boolean check_mr_B_r1_Z_tr0_tr0() {
 		return sCInterface.e2;
 	}
 
-	private boolean checkMr_B_r1_VTr0() {
+	private boolean check_mr_B_r1_V_tr0_tr0() {
 		return sCInterface.e2;
 	}
 
-	private boolean checkMr_B_r1_WTr0() {
+	private boolean check_mr_B_r1_W_tr0_tr0() {
 		return sCInterface.e2;
 	}
 
-	private boolean checkMr_B_r1_STr0() {
+	private boolean check_mr_B_r1_S_tr0_tr0() {
 		return sCInterface.e2;
 	}
 
-	private boolean checkMr_B_r1_STr1() {
+	private boolean check_mr_B_r1_S_tr1_tr1() {
 		return true && isStateActive(State.mr_B_r2_W) && sCInterface.e3;
 	}
 
-	private boolean checkMr_B_r1_TTr0() {
+	private boolean check_mr_B_r1_T_tr0_tr0() {
 		return sCInterface.e2;
 	}
 
-	private boolean checkMr_B_r1_UTr0() {
+	private boolean check_mr_B_r1_U_tr0_tr0() {
 		return sCInterface.e2;
 	}
 
-	private boolean checkMr_B_r2_STr0() {
+	private boolean check_mr_B_r2_S_tr0_tr0() {
 		return sCInterface.e3;
 	}
 
-	private boolean checkMr_B_r2_TTr0() {
+	private boolean check_mr_B_r2_T_tr0_tr0() {
 		return sCInterface.e3;
 	}
 
-	private boolean checkMr_B_r2_UTr0() {
+	private boolean check_mr_B_r2_U_tr0_tr0() {
 		return sCInterface.e3;
 	}
 
-	private boolean checkMr_B_r2_UTr1() {
+	private boolean check_mr_B_r2_U_tr1_tr1() {
 		return sCInterface.e2;
 	}
 
-	private boolean checkMr_B_r2_VTr0() {
+	private boolean check_mr_B_r2_V_tr0_tr0() {
 		return sCInterface.e3;
 	}
 
-	private boolean checkMr_B_r2_VTr1() {
+	private boolean check_mr_B_r2_V_tr1_tr1() {
 		return sCInterface.e2;
 	}
 
-	private boolean checkMr_B_r2_WTr0() {
+	private boolean check_mr_B_r2_W_tr0_tr0() {
 		return sCInterface.e3 && isStateActive(State.mr_B_r1_S) && true;
 	}
 
-	private boolean checkPerformanceTest_mr_B_r1__choice_0Tr0() {
+	private boolean check_mr_B_r1__choice_0_tr0_tr0() {
 		return true;
 	}
 
-	private boolean checkPerformanceTest_mr_B_r1__choice_1Tr0() {
+	private boolean check_mr_B_r1__choice_1_tr0_tr0() {
 		return sCInterface.x == 4;
 	}
 
-	private boolean checkPerformanceTest_mr_B_r1__choice_1Tr1() {
+	private boolean check_mr_B_r1__choice_1_tr1_tr1() {
 		return sCInterface.x == 5;
 	}
 
-	private boolean checkPerformanceTest_mr_B_r1__choice_1Tr2() {
+	private boolean check_mr_B_r1__choice_1_tr2_tr2() {
 		return sCInterface.x == 6;
 	}
 
-	private boolean checkPerformanceTest_mr_B_r1__choice_1Tr3() {
+	private boolean check_mr_B_r1__choice_1_tr3_tr3() {
 		return sCInterface.x == 7;
 	}
 
-	private boolean checkPerformanceTest_mr_B_r1__choice_1Tr4() {
+	private boolean check_mr_B_r1__choice_1_tr4_tr4() {
 		return sCInterface.x == 8;
 	}
 
-	private boolean checkPerformanceTest_mr_B_r1__choice_1Tr5() {
+	private boolean check_mr_B_r1__choice_1_tr5_tr5() {
 		return sCInterface.x == 3;
 	}
 
-	private boolean checkPerformanceTest_mr_B_r1__choice_1Tr6() {
+	private boolean check_mr_B_r1__choice_1_tr6_tr6() {
 		return sCInterface.x == 2;
 	}
 
-	private boolean checkPerformanceTest_mr_B_r1__choice_1Tr7() {
+	private boolean check_mr_B_r1__choice_1_tr7_tr7() {
 		return true;
 	}
 
-	private void effectLr0() {
+	private void effect__lr0() {
 		sCInterface.c += 1;
 	}
 
-	private void effectLr1() {
+	private void effect__lr1() {
 		sCInterface.raiseE2();
 
 		sCInterface.raiseE1();
 	}
 
-	private void effectLr2() {
+	private void effect__lr2() {
 		sCInterface.raiseE3();
 	}
 
-	private void effectMr_ATr0() {
-		exitSequenceMr_A();
+	private void effect_mr_A_tr0() {
+		exitSequence_mr_A();
 
-		enterSequenceMr_B();
+		enterSequence_mr_B_default();
 	}
 
-	private void effectMr_B_r1_XTr0() {
-		exitSequenceMr_B_r1_X();
+	private void effect_mr_B_r1_X_tr0() {
+		exitSequence_mr_B_r1_X();
 
-		reactPerformanceTest_mr_B_r1__choice_0();
+		react_mr_B_r1__choice_0();
 	}
 
-	private void effectMr_B_r1_YTr0() {
-		exitSequenceMr_B_r1_Y();
+	private void effect_mr_B_r1_Y_tr0() {
+		exitSequence_mr_B_r1_Y();
 
-		reactPerformanceTest_mr_B_r1__choice_0();
+		react_mr_B_r1__choice_0();
 	}
 
-	private void effectMr_B_r1_ZTr0() {
-		exitSequenceMr_B_r1_Z();
+	private void effect_mr_B_r1_Z_tr0() {
+		exitSequence_mr_B_r1_Z();
 
-		reactPerformanceTest_mr_B_r1__choice_0();
+		react_mr_B_r1__choice_0();
 	}
 
-	private void effectMr_B_r1_VTr0() {
-		exitSequenceMr_B_r1_V();
+	private void effect_mr_B_r1_V_tr0() {
+		exitSequence_mr_B_r1_V();
 
-		reactPerformanceTest_mr_B_r1__choice_0();
+		react_mr_B_r1__choice_0();
 	}
 
-	private void effectMr_B_r1_WTr0() {
-		exitSequenceMr_B_r1_W();
+	private void effect_mr_B_r1_W_tr0() {
+		exitSequence_mr_B_r1_W();
 
-		reactPerformanceTest_mr_B_r1__choice_0();
+		react_mr_B_r1__choice_0();
 	}
 
-	private void effectMr_B_r1_STr0() {
-		exitSequenceMr_B_r1_S();
+	private void effect_mr_B_r1_S_tr0() {
+		exitSequence_mr_B_r1_S();
 
-		reactPerformanceTest_mr_B_r1__choice_0();
+		react_mr_B_r1__choice_0();
 	}
 
-	private void effectMr_B_r1_STr1() {
-		exitSequenceMr_B();
+	private void effect_mr_B_r1_S_tr1() {
+		exitSequence_mr_B();
 
-		reactPerformanceTest_mr__sync0();
+		react_mr__sync0();
 	}
 
-	private void effectMr_B_r1_TTr0() {
-		exitSequenceMr_B_r1_T();
+	private void effect_mr_B_r1_T_tr0() {
+		exitSequence_mr_B_r1_T();
 
-		reactPerformanceTest_mr_B_r1__choice_0();
+		react_mr_B_r1__choice_0();
 	}
 
-	private void effectMr_B_r1_UTr0() {
-		exitSequenceMr_B_r1_U();
+	private void effect_mr_B_r1_U_tr0() {
+		exitSequence_mr_B_r1_U();
 
-		reactPerformanceTest_mr_B_r1__choice_0();
+		react_mr_B_r1__choice_0();
 	}
 
-	private void effectMr_B_r2_STr0() {
-		exitSequenceMr_B_r2_S();
+	private void effect_mr_B_r2_S_tr0() {
+		exitSequence_mr_B_r2_S();
 
-		enterSequenceMr_B_r2_T();
+		enterSequence_mr_B_r2_T_default();
 	}
 
-	private void effectMr_B_r2_TTr0() {
-		exitSequenceMr_B_r2_T();
+	private void effect_mr_B_r2_T_tr0() {
+		exitSequence_mr_B_r2_T();
 
-		enterSequenceMr_B_r2_U();
+		enterSequence_mr_B_r2_U_default();
 	}
 
-	private void effectMr_B_r2_UTr0() {
-		exitSequenceMr_B_r2_U();
+	private void effect_mr_B_r2_U_tr0() {
+		exitSequence_mr_B_r2_U();
 
-		enterSequenceMr_B_r2_V();
+		enterSequence_mr_B_r2_V_default();
 	}
 
-	private void effectMr_B_r2_UTr1() {
-		exitSequenceMr_B_r2_U();
+	private void effect_mr_B_r2_U_tr1() {
+		exitSequence_mr_B_r2_U();
 
-		enterSequenceMr_B_r2_W();
+		enterSequence_mr_B_r2_W_default();
 	}
 
-	private void effectMr_B_r2_VTr0() {
-		exitSequenceMr_B_r2_V();
+	private void effect_mr_B_r2_V_tr0() {
+		exitSequence_mr_B_r2_V();
 
-		enterSequenceMr_B_r2_W();
+		enterSequence_mr_B_r2_W_default();
 	}
 
-	private void effectMr_B_r2_VTr1() {
-		exitSequenceMr_B_r2_V();
+	private void effect_mr_B_r2_V_tr1() {
+		exitSequence_mr_B_r2_V();
 
-		enterSequenceMr_B_r2_S();
+		enterSequence_mr_B_r2_S_default();
 	}
 
-	private void effectMr_B_r2_WTr0() {
-		exitSequenceMr_B();
+	private void effect_mr_B_r2_W_tr0() {
+		exitSequence_mr_B();
 
-		reactPerformanceTest_mr__sync0();
+		react_mr__sync0();
 	}
 
-	private void effectPerformanceTest_mr_B_r1__choice_0Tr0() {
+	private void effect_mr_B_r1__choice_0_tr0() {
 		sCInterface.x += 1;
 
-		reactPerformanceTest_mr_B_r1__choice_1();
+		react_mr_B_r1__choice_1();
 	}
 
-	private void effectPerformanceTest_mr_B_r1__choice_1Tr0() {
-		enterSequenceMr_B_r1_V();
+	private void effect_mr_B_r1__choice_1_tr0() {
+		enterSequence_mr_B_r1_V_default();
 	}
 
-	private void effectPerformanceTest_mr_B_r1__choice_1Tr1() {
-		enterSequenceMr_B_r1_W();
+	private void effect_mr_B_r1__choice_1_tr1() {
+		enterSequence_mr_B_r1_W_default();
 	}
 
-	private void effectPerformanceTest_mr_B_r1__choice_1Tr2() {
-		enterSequenceMr_B_r1_X();
+	private void effect_mr_B_r1__choice_1_tr2() {
+		enterSequence_mr_B_r1_X_default();
 	}
 
-	private void effectPerformanceTest_mr_B_r1__choice_1Tr3() {
-		enterSequenceMr_B_r1_Y();
+	private void effect_mr_B_r1__choice_1_tr3() {
+		enterSequence_mr_B_r1_Y_default();
 	}
 
-	private void effectPerformanceTest_mr_B_r1__choice_1Tr4() {
+	private void effect_mr_B_r1__choice_1_tr4() {
 		sCInterface.x = 0;
 
-		enterSequenceMr_B_r1_Z();
+		enterSequence_mr_B_r1_Z_default();
 	}
 
-	private void effectPerformanceTest_mr_B_r1__choice_1Tr5() {
-		enterSequenceMr_B_r1_U();
+	private void effect_mr_B_r1__choice_1_tr5() {
+		enterSequence_mr_B_r1_U_default();
 	}
 
-	private void effectPerformanceTest_mr_B_r1__choice_1Tr6() {
-		enterSequenceMr_B_r1_T();
+	private void effect_mr_B_r1__choice_1_tr6() {
+		enterSequence_mr_B_r1_T_default();
 	}
 
-	private void effectPerformanceTest_mr_B_r1__choice_1Tr7() {
-		enterSequenceMr_B_r1_S();
+	private void effect_mr_B_r1__choice_1_tr7() {
+		enterSequence_mr_B_r1_S_default();
 	}
 
 	/* Entry action for statechart 'PerformanceTest'. */
@@ -524,7 +540,7 @@ public class PerformanceTestStatemachine
 	}
 
 	/* Entry action for state 'A'. */
-	private void entryActionMr_A() {
+	private void entryAction_mr_A() {
 		sCInterface.a += 1;
 	}
 
@@ -536,22 +552,22 @@ public class PerformanceTestStatemachine
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMr_A() {
-		entryActionMr_A();
+	private void enterSequence_mr_A_default() {
+		entryAction_mr_A();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.mr_A;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceMr_B() {
-		enterSequenceMr_B_r1();
+	private void enterSequence_mr_B_default() {
+		enterSequence_mr_B_r1_default();
 
-		enterSequenceMr_B_r2();
+		enterSequence_mr_B_r2_default();
 	}
 
 	/* 'default' enter sequence for state X */
-	private void enterSequenceMr_B_r1_X() {
+	private void enterSequence_mr_B_r1_X_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mr_B_r1_X;
 
@@ -559,7 +575,7 @@ public class PerformanceTestStatemachine
 	}
 
 	/* 'default' enter sequence for state Y */
-	private void enterSequenceMr_B_r1_Y() {
+	private void enterSequence_mr_B_r1_Y_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mr_B_r1_Y;
 
@@ -567,7 +583,7 @@ public class PerformanceTestStatemachine
 	}
 
 	/* 'default' enter sequence for state Z */
-	private void enterSequenceMr_B_r1_Z() {
+	private void enterSequence_mr_B_r1_Z_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mr_B_r1_Z;
 
@@ -575,7 +591,7 @@ public class PerformanceTestStatemachine
 	}
 
 	/* 'default' enter sequence for state V */
-	private void enterSequenceMr_B_r1_V() {
+	private void enterSequence_mr_B_r1_V_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mr_B_r1_V;
 
@@ -583,7 +599,7 @@ public class PerformanceTestStatemachine
 	}
 
 	/* 'default' enter sequence for state W */
-	private void enterSequenceMr_B_r1_W() {
+	private void enterSequence_mr_B_r1_W_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mr_B_r1_W;
 
@@ -591,7 +607,7 @@ public class PerformanceTestStatemachine
 	}
 
 	/* 'default' enter sequence for state S */
-	private void enterSequenceMr_B_r1_S() {
+	private void enterSequence_mr_B_r1_S_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mr_B_r1_S;
 
@@ -599,7 +615,7 @@ public class PerformanceTestStatemachine
 	}
 
 	/* 'default' enter sequence for state T */
-	private void enterSequenceMr_B_r1_T() {
+	private void enterSequence_mr_B_r1_T_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mr_B_r1_T;
 
@@ -607,7 +623,7 @@ public class PerformanceTestStatemachine
 	}
 
 	/* 'default' enter sequence for state U */
-	private void enterSequenceMr_B_r1_U() {
+	private void enterSequence_mr_B_r1_U_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mr_B_r1_U;
 
@@ -615,78 +631,78 @@ public class PerformanceTestStatemachine
 	}
 
 	/* 'default' enter sequence for state S */
-	private void enterSequenceMr_B_r2_S() {
+	private void enterSequence_mr_B_r2_S_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.mr_B_r2_S;
 	}
 
 	/* 'default' enter sequence for state T */
-	private void enterSequenceMr_B_r2_T() {
+	private void enterSequence_mr_B_r2_T_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.mr_B_r2_T;
 	}
 
 	/* 'default' enter sequence for state U */
-	private void enterSequenceMr_B_r2_U() {
+	private void enterSequence_mr_B_r2_U_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.mr_B_r2_U;
 	}
 
 	/* 'default' enter sequence for state V */
-	private void enterSequenceMr_B_r2_V() {
+	private void enterSequence_mr_B_r2_V_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.mr_B_r2_V;
 	}
 
 	/* 'default' enter sequence for state W */
-	private void enterSequenceMr_B_r2_W() {
+	private void enterSequence_mr_B_r2_W_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.mr_B_r2_W;
 	}
 
 	/* 'default' enter sequence for region mr */
-	private void enterSequenceMr() {
-		reactPerformanceTest_mr__entry_Default();
+	private void enterSequence_mr_default() {
+		react_mr__entry_Default();
 	}
 
 	/* 'default' enter sequence for region r1 */
-	private void enterSequenceMr_B_r1() {
-		reactPerformanceTest_mr_B_r1__entry_Default();
+	private void enterSequence_mr_B_r1_default() {
+		react_mr_B_r1__entry_Default();
 	}
 
 	/* shallow enterSequence with history in child r1 */
-	private void shallowEnterSequenceMr_B_r1() {
+	private void shallowEnterSequence_mr_B_r1() {
 		switch (historyVector[0]) {
 			case mr_B_r1_X :
-				enterSequenceMr_B_r1_X();
+				enterSequence_mr_B_r1_X_default();
 				break;
 
 			case mr_B_r1_Y :
-				enterSequenceMr_B_r1_Y();
+				enterSequence_mr_B_r1_Y_default();
 				break;
 
 			case mr_B_r1_Z :
-				enterSequenceMr_B_r1_Z();
+				enterSequence_mr_B_r1_Z_default();
 				break;
 
 			case mr_B_r1_V :
-				enterSequenceMr_B_r1_V();
+				enterSequence_mr_B_r1_V_default();
 				break;
 
 			case mr_B_r1_W :
-				enterSequenceMr_B_r1_W();
+				enterSequence_mr_B_r1_W_default();
 				break;
 
 			case mr_B_r1_S :
-				enterSequenceMr_B_r1_S();
+				enterSequence_mr_B_r1_S_default();
 				break;
 
 			case mr_B_r1_T :
-				enterSequenceMr_B_r1_T();
+				enterSequence_mr_B_r1_T_default();
 				break;
 
 			case mr_B_r1_U :
-				enterSequenceMr_B_r1_U();
+				enterSequence_mr_B_r1_U_default();
 				break;
 
 			default :
@@ -695,138 +711,138 @@ public class PerformanceTestStatemachine
 	}
 
 	/* 'default' enter sequence for region r2 */
-	private void enterSequenceMr_B_r2() {
-		reactPerformanceTest_mr_B_r2__entry_Default();
+	private void enterSequence_mr_B_r2_default() {
+		react_mr_B_r2__entry_Default();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMr_A() {
+	private void exitSequence_mr_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceMr_B() {
-		exitSequenceMr_B_r1();
+	private void exitSequence_mr_B() {
+		exitSequence_mr_B_r1();
 
-		exitSequenceMr_B_r2();
+		exitSequence_mr_B_r2();
 	}
 
 	/* Default exit sequence for state X */
-	private void exitSequenceMr_B_r1_X() {
+	private void exitSequence_mr_B_r1_X() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state Y */
-	private void exitSequenceMr_B_r1_Y() {
+	private void exitSequence_mr_B_r1_Y() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state Z */
-	private void exitSequenceMr_B_r1_Z() {
+	private void exitSequence_mr_B_r1_Z() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state V */
-	private void exitSequenceMr_B_r1_V() {
+	private void exitSequence_mr_B_r1_V() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state W */
-	private void exitSequenceMr_B_r1_W() {
+	private void exitSequence_mr_B_r1_W() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state S */
-	private void exitSequenceMr_B_r1_S() {
+	private void exitSequence_mr_B_r1_S() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state T */
-	private void exitSequenceMr_B_r1_T() {
+	private void exitSequence_mr_B_r1_T() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state U */
-	private void exitSequenceMr_B_r1_U() {
+	private void exitSequence_mr_B_r1_U() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state S */
-	private void exitSequenceMr_B_r2_S() {
+	private void exitSequence_mr_B_r2_S() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state T */
-	private void exitSequenceMr_B_r2_T() {
+	private void exitSequence_mr_B_r2_T() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state U */
-	private void exitSequenceMr_B_r2_U() {
+	private void exitSequence_mr_B_r2_U() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state V */
-	private void exitSequenceMr_B_r2_V() {
+	private void exitSequence_mr_B_r2_V() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state W */
-	private void exitSequenceMr_B_r2_W() {
+	private void exitSequence_mr_B_r2_W() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region mr */
-	private void exitSequenceMr() {
+	private void exitSequence_mr() {
 		switch (stateVector[0]) {
 			case mr_A :
-				exitSequenceMr_A();
+				exitSequence_mr_A();
 				break;
 
 			case mr_B_r1_X :
-				exitSequenceMr_B_r1_X();
+				exitSequence_mr_B_r1_X();
 				break;
 
 			case mr_B_r1_Y :
-				exitSequenceMr_B_r1_Y();
+				exitSequence_mr_B_r1_Y();
 				break;
 
 			case mr_B_r1_Z :
-				exitSequenceMr_B_r1_Z();
+				exitSequence_mr_B_r1_Z();
 				break;
 
 			case mr_B_r1_V :
-				exitSequenceMr_B_r1_V();
+				exitSequence_mr_B_r1_V();
 				break;
 
 			case mr_B_r1_W :
-				exitSequenceMr_B_r1_W();
+				exitSequence_mr_B_r1_W();
 				break;
 
 			case mr_B_r1_S :
-				exitSequenceMr_B_r1_S();
+				exitSequence_mr_B_r1_S();
 				break;
 
 			case mr_B_r1_T :
-				exitSequenceMr_B_r1_T();
+				exitSequence_mr_B_r1_T();
 				break;
 
 			case mr_B_r1_U :
-				exitSequenceMr_B_r1_U();
+				exitSequence_mr_B_r1_U();
 				break;
 
 			default :
@@ -835,23 +851,23 @@ public class PerformanceTestStatemachine
 
 		switch (stateVector[1]) {
 			case mr_B_r2_S :
-				exitSequenceMr_B_r2_S();
+				exitSequence_mr_B_r2_S();
 				break;
 
 			case mr_B_r2_T :
-				exitSequenceMr_B_r2_T();
+				exitSequence_mr_B_r2_T();
 				break;
 
 			case mr_B_r2_U :
-				exitSequenceMr_B_r2_U();
+				exitSequence_mr_B_r2_U();
 				break;
 
 			case mr_B_r2_V :
-				exitSequenceMr_B_r2_V();
+				exitSequence_mr_B_r2_V();
 				break;
 
 			case mr_B_r2_W :
-				exitSequenceMr_B_r2_W();
+				exitSequence_mr_B_r2_W();
 				break;
 
 			default :
@@ -860,38 +876,38 @@ public class PerformanceTestStatemachine
 	}
 
 	/* Default exit sequence for region r1 */
-	private void exitSequenceMr_B_r1() {
+	private void exitSequence_mr_B_r1() {
 		switch (stateVector[0]) {
 			case mr_B_r1_X :
-				exitSequenceMr_B_r1_X();
+				exitSequence_mr_B_r1_X();
 				break;
 
 			case mr_B_r1_Y :
-				exitSequenceMr_B_r1_Y();
+				exitSequence_mr_B_r1_Y();
 				break;
 
 			case mr_B_r1_Z :
-				exitSequenceMr_B_r1_Z();
+				exitSequence_mr_B_r1_Z();
 				break;
 
 			case mr_B_r1_V :
-				exitSequenceMr_B_r1_V();
+				exitSequence_mr_B_r1_V();
 				break;
 
 			case mr_B_r1_W :
-				exitSequenceMr_B_r1_W();
+				exitSequence_mr_B_r1_W();
 				break;
 
 			case mr_B_r1_S :
-				exitSequenceMr_B_r1_S();
+				exitSequence_mr_B_r1_S();
 				break;
 
 			case mr_B_r1_T :
-				exitSequenceMr_B_r1_T();
+				exitSequence_mr_B_r1_T();
 				break;
 
 			case mr_B_r1_U :
-				exitSequenceMr_B_r1_U();
+				exitSequence_mr_B_r1_U();
 				break;
 
 			default :
@@ -900,26 +916,26 @@ public class PerformanceTestStatemachine
 	}
 
 	/* Default exit sequence for region r2 */
-	private void exitSequenceMr_B_r2() {
+	private void exitSequence_mr_B_r2() {
 		switch (stateVector[1]) {
 			case mr_B_r2_S :
-				exitSequenceMr_B_r2_S();
+				exitSequence_mr_B_r2_S();
 				break;
 
 			case mr_B_r2_T :
-				exitSequenceMr_B_r2_T();
+				exitSequence_mr_B_r2_T();
 				break;
 
 			case mr_B_r2_U :
-				exitSequenceMr_B_r2_U();
+				exitSequence_mr_B_r2_U();
 				break;
 
 			case mr_B_r2_V :
-				exitSequenceMr_B_r2_V();
+				exitSequence_mr_B_r2_V();
 				break;
 
 			case mr_B_r2_W :
-				exitSequenceMr_B_r2_W();
+				exitSequence_mr_B_r2_W();
 				break;
 
 			default :
@@ -928,234 +944,234 @@ public class PerformanceTestStatemachine
 	}
 
 	/* The reactions of state A. */
-	private void reactMr_A() {
-		effectLr0();
+	private void react_mr_A() {
+		effect__lr0();
 
-		if (checkLr1()) {
-			effectLr1();
+		if (check__lr1()) {
+			effect__lr1();
 		}
 
-		if (checkLr2()) {
-			effectLr2();
+		if (check__lr2()) {
+			effect__lr2();
 		}
 
-		if (checkMr_ATr0()) {
-			effectMr_ATr0();
+		if (check_mr_A_tr0_tr0()) {
+			effect_mr_A_tr0();
 		}
 	}
 
 	/* The reactions of state X. */
-	private void reactMr_B_r1_X() {
-		effectLr0();
+	private void react_mr_B_r1_X() {
+		effect__lr0();
 
-		if (checkLr1()) {
-			effectLr1();
+		if (check__lr1()) {
+			effect__lr1();
 		}
 
-		if (checkLr2()) {
-			effectLr2();
+		if (check__lr2()) {
+			effect__lr2();
 		}
 
-		if (checkMr_B_r1_XTr0()) {
-			effectMr_B_r1_XTr0();
+		if (check_mr_B_r1_X_tr0_tr0()) {
+			effect_mr_B_r1_X_tr0();
 		}
 	}
 
 	/* The reactions of state Y. */
-	private void reactMr_B_r1_Y() {
-		effectLr0();
+	private void react_mr_B_r1_Y() {
+		effect__lr0();
 
-		if (checkLr1()) {
-			effectLr1();
+		if (check__lr1()) {
+			effect__lr1();
 		}
 
-		if (checkLr2()) {
-			effectLr2();
+		if (check__lr2()) {
+			effect__lr2();
 		}
 
-		if (checkMr_B_r1_YTr0()) {
-			effectMr_B_r1_YTr0();
+		if (check_mr_B_r1_Y_tr0_tr0()) {
+			effect_mr_B_r1_Y_tr0();
 		}
 	}
 
 	/* The reactions of state Z. */
-	private void reactMr_B_r1_Z() {
-		effectLr0();
+	private void react_mr_B_r1_Z() {
+		effect__lr0();
 
-		if (checkLr1()) {
-			effectLr1();
+		if (check__lr1()) {
+			effect__lr1();
 		}
 
-		if (checkLr2()) {
-			effectLr2();
+		if (check__lr2()) {
+			effect__lr2();
 		}
 
-		if (checkMr_B_r1_ZTr0()) {
-			effectMr_B_r1_ZTr0();
+		if (check_mr_B_r1_Z_tr0_tr0()) {
+			effect_mr_B_r1_Z_tr0();
 		}
 	}
 
 	/* The reactions of state V. */
-	private void reactMr_B_r1_V() {
-		effectLr0();
+	private void react_mr_B_r1_V() {
+		effect__lr0();
 
-		if (checkLr1()) {
-			effectLr1();
+		if (check__lr1()) {
+			effect__lr1();
 		}
 
-		if (checkLr2()) {
-			effectLr2();
+		if (check__lr2()) {
+			effect__lr2();
 		}
 
-		if (checkMr_B_r1_VTr0()) {
-			effectMr_B_r1_VTr0();
+		if (check_mr_B_r1_V_tr0_tr0()) {
+			effect_mr_B_r1_V_tr0();
 		}
 	}
 
 	/* The reactions of state W. */
-	private void reactMr_B_r1_W() {
-		effectLr0();
+	private void react_mr_B_r1_W() {
+		effect__lr0();
 
-		if (checkLr1()) {
-			effectLr1();
+		if (check__lr1()) {
+			effect__lr1();
 		}
 
-		if (checkLr2()) {
-			effectLr2();
+		if (check__lr2()) {
+			effect__lr2();
 		}
 
-		if (checkMr_B_r1_WTr0()) {
-			effectMr_B_r1_WTr0();
+		if (check_mr_B_r1_W_tr0_tr0()) {
+			effect_mr_B_r1_W_tr0();
 		}
 	}
 
 	/* The reactions of state S. */
-	private void reactMr_B_r1_S() {
-		effectLr0();
+	private void react_mr_B_r1_S() {
+		effect__lr0();
 
-		if (checkLr1()) {
-			effectLr1();
+		if (check__lr1()) {
+			effect__lr1();
 		}
 
-		if (checkLr2()) {
-			effectLr2();
+		if (check__lr2()) {
+			effect__lr2();
 		}
 
-		if (checkMr_B_r1_STr0()) {
-			effectMr_B_r1_STr0();
+		if (check_mr_B_r1_S_tr0_tr0()) {
+			effect_mr_B_r1_S_tr0();
 		} else {
-			if (checkMr_B_r1_STr1()) {
-				effectMr_B_r1_STr1();
+			if (check_mr_B_r1_S_tr1_tr1()) {
+				effect_mr_B_r1_S_tr1();
 			}
 		}
 	}
 
 	/* The reactions of state T. */
-	private void reactMr_B_r1_T() {
-		effectLr0();
+	private void react_mr_B_r1_T() {
+		effect__lr0();
 
-		if (checkLr1()) {
-			effectLr1();
+		if (check__lr1()) {
+			effect__lr1();
 		}
 
-		if (checkLr2()) {
-			effectLr2();
+		if (check__lr2()) {
+			effect__lr2();
 		}
 
-		if (checkMr_B_r1_TTr0()) {
-			effectMr_B_r1_TTr0();
+		if (check_mr_B_r1_T_tr0_tr0()) {
+			effect_mr_B_r1_T_tr0();
 		}
 	}
 
 	/* The reactions of state U. */
-	private void reactMr_B_r1_U() {
-		effectLr0();
+	private void react_mr_B_r1_U() {
+		effect__lr0();
 
-		if (checkLr1()) {
-			effectLr1();
+		if (check__lr1()) {
+			effect__lr1();
 		}
 
-		if (checkLr2()) {
-			effectLr2();
+		if (check__lr2()) {
+			effect__lr2();
 		}
 
-		if (checkMr_B_r1_UTr0()) {
-			effectMr_B_r1_UTr0();
+		if (check_mr_B_r1_U_tr0_tr0()) {
+			effect_mr_B_r1_U_tr0();
 		}
 	}
 
 	/* The reactions of state S. */
-	private void reactMr_B_r2_S() {
-		if (checkMr_B_r2_STr0()) {
-			effectMr_B_r2_STr0();
+	private void react_mr_B_r2_S() {
+		if (check_mr_B_r2_S_tr0_tr0()) {
+			effect_mr_B_r2_S_tr0();
 		}
 	}
 
 	/* The reactions of state T. */
-	private void reactMr_B_r2_T() {
-		if (checkMr_B_r2_TTr0()) {
-			effectMr_B_r2_TTr0();
+	private void react_mr_B_r2_T() {
+		if (check_mr_B_r2_T_tr0_tr0()) {
+			effect_mr_B_r2_T_tr0();
 		}
 	}
 
 	/* The reactions of state U. */
-	private void reactMr_B_r2_U() {
-		if (checkMr_B_r2_UTr0()) {
-			effectMr_B_r2_UTr0();
+	private void react_mr_B_r2_U() {
+		if (check_mr_B_r2_U_tr0_tr0()) {
+			effect_mr_B_r2_U_tr0();
 		} else {
-			if (checkMr_B_r2_UTr1()) {
-				effectMr_B_r2_UTr1();
+			if (check_mr_B_r2_U_tr1_tr1()) {
+				effect_mr_B_r2_U_tr1();
 			}
 		}
 	}
 
 	/* The reactions of state V. */
-	private void reactMr_B_r2_V() {
-		if (checkMr_B_r2_VTr0()) {
-			effectMr_B_r2_VTr0();
+	private void react_mr_B_r2_V() {
+		if (check_mr_B_r2_V_tr0_tr0()) {
+			effect_mr_B_r2_V_tr0();
 		} else {
-			if (checkMr_B_r2_VTr1()) {
-				effectMr_B_r2_VTr1();
+			if (check_mr_B_r2_V_tr1_tr1()) {
+				effect_mr_B_r2_V_tr1();
 			}
 		}
 	}
 
 	/* The reactions of state W. */
-	private void reactMr_B_r2_W() {
-		if (checkMr_B_r2_WTr0()) {
-			effectMr_B_r2_WTr0();
+	private void react_mr_B_r2_W() {
+		if (check_mr_B_r2_W_tr0_tr0()) {
+			effect_mr_B_r2_W_tr0();
 		}
 	}
 
 	/* The reactions of state null. */
-	private void reactPerformanceTest_mr_B_r1__choice_0() {
-		effectPerformanceTest_mr_B_r1__choice_0Tr0();
+	private void react_mr_B_r1__choice_0() {
+		effect_mr_B_r1__choice_0_tr0();
 	}
 
 	/* The reactions of state null. */
-	private void reactPerformanceTest_mr_B_r1__choice_1() {
-		if (checkPerformanceTest_mr_B_r1__choice_1Tr0()) {
-			effectPerformanceTest_mr_B_r1__choice_1Tr0();
+	private void react_mr_B_r1__choice_1() {
+		if (check_mr_B_r1__choice_1_tr0_tr0()) {
+			effect_mr_B_r1__choice_1_tr0();
 		} else {
-			if (checkPerformanceTest_mr_B_r1__choice_1Tr1()) {
-				effectPerformanceTest_mr_B_r1__choice_1Tr1();
+			if (check_mr_B_r1__choice_1_tr1_tr1()) {
+				effect_mr_B_r1__choice_1_tr1();
 			} else {
-				if (checkPerformanceTest_mr_B_r1__choice_1Tr2()) {
-					effectPerformanceTest_mr_B_r1__choice_1Tr2();
+				if (check_mr_B_r1__choice_1_tr2_tr2()) {
+					effect_mr_B_r1__choice_1_tr2();
 				} else {
-					if (checkPerformanceTest_mr_B_r1__choice_1Tr3()) {
-						effectPerformanceTest_mr_B_r1__choice_1Tr3();
+					if (check_mr_B_r1__choice_1_tr3_tr3()) {
+						effect_mr_B_r1__choice_1_tr3();
 					} else {
-						if (checkPerformanceTest_mr_B_r1__choice_1Tr4()) {
-							effectPerformanceTest_mr_B_r1__choice_1Tr4();
+						if (check_mr_B_r1__choice_1_tr4_tr4()) {
+							effect_mr_B_r1__choice_1_tr4();
 						} else {
-							if (checkPerformanceTest_mr_B_r1__choice_1Tr5()) {
-								effectPerformanceTest_mr_B_r1__choice_1Tr5();
+							if (check_mr_B_r1__choice_1_tr5_tr5()) {
+								effect_mr_B_r1__choice_1_tr5();
 							} else {
-								if (checkPerformanceTest_mr_B_r1__choice_1Tr6()) {
-									effectPerformanceTest_mr_B_r1__choice_1Tr6();
+								if (check_mr_B_r1__choice_1_tr6_tr6()) {
+									effect_mr_B_r1__choice_1_tr6();
 								} else {
-									effectPerformanceTest_mr_B_r1__choice_1Tr7();
+									effect_mr_B_r1__choice_1_tr7();
 								}
 							}
 						}
@@ -1166,28 +1182,28 @@ public class PerformanceTestStatemachine
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactPerformanceTest_mr__entry_Default() {
-		enterSequenceMr_A();
+	private void react_mr__entry_Default() {
+		enterSequence_mr_A_default();
 	}
 
 	/* Default react sequence for shallow history entry  */
-	private void reactPerformanceTest_mr_B_r1__entry_Default() {
+	private void react_mr_B_r1__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
-			shallowEnterSequenceMr_B_r1();
+			shallowEnterSequence_mr_B_r1();
 		} else {
-			enterSequenceMr_B_r1_S();
+			enterSequence_mr_B_r1_S_default();
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactPerformanceTest_mr_B_r2__entry_Default() {
-		enterSequenceMr_B_r2_S();
+	private void react_mr_B_r2__entry_Default() {
+		enterSequence_mr_B_r2_S_default();
 	}
 
 	/* The reactions of state null. */
-	private void reactPerformanceTest_mr__sync0() {
-		enterSequenceMr_A();
+	private void react_mr__sync0() {
+		enterSequence_mr_A_default();
 	}
 
 	public void runCycle() {
@@ -1198,46 +1214,46 @@ public class PerformanceTestStatemachine
 
 			switch (stateVector[nextStateIndex]) {
 				case mr_A :
-					reactMr_A();
+					react_mr_A();
 					break;
 				case mr_B_r1_X :
-					reactMr_B_r1_X();
+					react_mr_B_r1_X();
 					break;
 				case mr_B_r1_Y :
-					reactMr_B_r1_Y();
+					react_mr_B_r1_Y();
 					break;
 				case mr_B_r1_Z :
-					reactMr_B_r1_Z();
+					react_mr_B_r1_Z();
 					break;
 				case mr_B_r1_V :
-					reactMr_B_r1_V();
+					react_mr_B_r1_V();
 					break;
 				case mr_B_r1_W :
-					reactMr_B_r1_W();
+					react_mr_B_r1_W();
 					break;
 				case mr_B_r1_S :
-					reactMr_B_r1_S();
+					react_mr_B_r1_S();
 					break;
 				case mr_B_r1_T :
-					reactMr_B_r1_T();
+					react_mr_B_r1_T();
 					break;
 				case mr_B_r1_U :
-					reactMr_B_r1_U();
+					react_mr_B_r1_U();
 					break;
 				case mr_B_r2_S :
-					reactMr_B_r2_S();
+					react_mr_B_r2_S();
 					break;
 				case mr_B_r2_T :
-					reactMr_B_r2_T();
+					react_mr_B_r2_T();
 					break;
 				case mr_B_r2_U :
-					reactMr_B_r2_U();
+					react_mr_B_r2_U();
 					break;
 				case mr_B_r2_V :
-					reactMr_B_r2_V();
+					react_mr_B_r2_V();
 					break;
 				case mr_B_r2_W :
-					reactMr_B_r2_W();
+					react_mr_B_r2_W();
 					break;
 				default :
 					// $NullState$

@@ -2,9 +2,6 @@ package org.yakindu.scr.parenthesis;
 
 public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
-	static {
-	}
-
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private long erg;
@@ -54,6 +51,25 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		exitSequence_mainRegion();
 
 		exitAction();
+	}
+
+	/**
+	 * @see IStatemachine#isActive()
+	 */
+	@Override
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	 * Always returns 'false' since this state machine can never become final.
+	 *
+	 * @see IStatemachine#isFinal() 
+	 */
+	@Override
+	public boolean isFinal() {
+		return false;
 	}
 
 	/**
