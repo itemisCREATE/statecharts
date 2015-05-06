@@ -242,7 +242,7 @@ class BehaviorMapping {
 	def dispatch Sequence mapEffect(ReactionEffect effect) {
 		if ( ! effect.actions.empty) {
 			val sequence = sexec.factory.createSequence
-			sequence.name = "reaction_action"
+			sequence.name = effect.reaction.id
 			sequence.steps.addAll( effect.actions.map( stmnt | stmnt.mapToExecution))
 			return sequence	
 		}	

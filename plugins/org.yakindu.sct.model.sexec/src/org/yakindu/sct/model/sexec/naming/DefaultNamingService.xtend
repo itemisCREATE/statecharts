@@ -443,9 +443,13 @@ class DefaultNamingService implements INamingService {
 		""
 	}
 
+
+	/**
+	 * TODO: refactor sequence type checks below - no conditional handling should be necessary
+	 */
 	def protected dispatch String elementName(Step it, NameShorteningStrategy nameShorteningType) {
 		var parentName = eContainer.elementName(nameShorteningType)
-		if( isEnterSequence && (name != null) && (!name.trim.empty) ) parentName + separator + name
+		if( ( isEnterSequence || isCheckFunction || isEffect ) && (name != null) && (!name.trim.empty) ) parentName + separator + name
 		else parentName
 	}
 

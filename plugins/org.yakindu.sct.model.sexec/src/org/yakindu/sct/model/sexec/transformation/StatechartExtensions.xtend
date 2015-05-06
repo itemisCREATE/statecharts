@@ -23,9 +23,8 @@ import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Exit
+import org.yakindu.sct.model.stext.stext.ReactionEffect
 
- 
- 
 class StatechartExtensions {
 	
 	
@@ -57,6 +56,7 @@ class StatechartExtensions {
 	//
 		
 	def reaction(Trigger tr) { tr.eContainer as Reaction }
+	def reaction(ReactionEffect tr) { tr.eContainer as Reaction }
 
 
 	def Statechart statechart(State state) { state.parentRegion.statechart }
