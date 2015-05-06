@@ -96,6 +96,24 @@ class RunnableWrapper {
 				}
 			}
 			
+			/**
+			 * isActive() will be delegated thread safe to the wrapped statemachine.  
+			 */ 
+			public boolean isActive() {
+				synchronized(statemachine) {
+					return statemachine.isActive();
+				}
+			}
+			
+			/**
+			 * isFinal() will be delegated thread safe to the wrapped statemachine.  
+			 */ 
+			public boolean isFinal() {
+				synchronized(statemachine) {
+					return statemachine.isFinal();
+				}
+			}
+			
 			
 			/**
 			 * runCycle() will be delegated thread safe to the wrapped statemachine.  
