@@ -11,7 +11,7 @@ We appreciate any feedback and there are various ways to contribute feedback:
 * Report bugs and request features in our issue tracker.
 * Ask questions and get support in our <a href="https://groups.google.com/forum/embed/?place=forum/yakindu-user#!forum/yakindu-user">google group</a>
 * visit our <a  href="http://statecharts.org">web page</a> take a look at blog posts tutorials etc.
-* get the source code (see below)
+* get the source code (see below) - fork it - work on it - and provide pull requests ... 
  
 
 ## Setting up the development environment
