@@ -10,6 +10,7 @@ import org.eclipse.xtext.ui.editor.hover.ProblemAnnotationHover;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
@@ -23,6 +24,7 @@ import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerTypeProvider;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
+import org.yakindu.sct.model.stext.ui.highlighting.SCTHighlightingConfiguration;
 import org.yakindu.sct.model.stext.ui.validation.SCTDiagnosticConverterImpl;
 import org.yakindu.sct.model.stext.ui.validation.SCTResourceValidatorImpl;
 
@@ -87,11 +89,6 @@ public class STextUiModule extends
 				.toInstance("/StextHoverStyleSheet.css");
 	}
 
-//	@Override
-//	public Class<? extends IHyperlinkDetector> bindIHyperlinkDetector() {
-//		return NullHyperlinkDetector.class;
-//	}
-
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
 		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
 			return Access.getJavaProjectsState();
@@ -100,7 +97,6 @@ public class STextUiModule extends
 		}
 	}
 
-	@Override
 	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
 		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
 			return XtextResourceSetProvider.class;
@@ -117,8 +113,12 @@ public class STextUiModule extends
 			return ResourceForIEditorInputFactory.class;
 		}
 	}
-	
+
 	public Class<? extends org.eclipse.jface.text.ITextHover> bindITextHover() {
 		return ProblemAnnotationHover.class;
+	}
+
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return SCTHighlightingConfiguration.class;
 	}
 }
