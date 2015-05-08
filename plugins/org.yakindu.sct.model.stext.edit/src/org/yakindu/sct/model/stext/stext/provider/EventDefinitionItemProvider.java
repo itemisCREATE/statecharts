@@ -64,7 +64,7 @@ public class EventDefinitionItemProvider extends EventItemProvider {
 	public String getText(Object object) {
 		Event event = (Event) object;
 		StringBuilder builder = new StringBuilder(event.getName());
-		builder.append("() : ");
+		builder.append(" : ");
 		builder.append(event.getType() != null ? event.getType().getName() : "void");
 		return builder.toString();
 	}
