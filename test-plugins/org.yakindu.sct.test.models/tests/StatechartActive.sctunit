@@ -1,0 +1,30 @@
+
+testgroup StatechartActive for statechart StatechartActive {
+	
+	/** A state machine must be inactive before it has been entered.  */
+	test inactiveBeforeEnter {
+		assert false /* ! is_active */
+	}
+	
+	/** A state machine must be active after it has been entered. */
+	test activeAfterEnter {
+		enter
+		assert false /*is_active */
+	}
+	
+	/** A state machine must be inactive after it has been exited. */
+	test inactiveAfterExit {
+		enter
+		exit
+		assert false /* ! is_active */
+	}
+
+	/** A state machine must be active after it has been exited and reentered. */
+	test activeAfterReenter {
+		enter
+		exit
+		enter
+		assert false /* is_active */
+	}
+	
+}
