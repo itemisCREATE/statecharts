@@ -1035,6 +1035,30 @@ GeneratorModel for sctunit::cpp {
 		}		
 	}
 	
+	test StatechartActive {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
+	}
+	
 	test StatechartLocalReactions{
 		
 		feature Outlet{ 
