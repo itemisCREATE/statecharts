@@ -32,10 +32,10 @@ import org.junit.runners.Suite.SuiteClasses;
 		ParenthesisTest.class, PriorityValuesTest.class, RaiseEventTest.class,
 		SameNameDifferentRegionTest.class, ShallowHistoryTest.class,
 		ShallowHistoryWithDeepEntryTest.class, SimpleEventTest.class,
-		StatechartLocalReactionsTest.class, SimpleHierachyTest.class,
-		StateIsActiveTest.class, StaticChoiceTest.class,
-		STextKeywordsInStatesAndRegionsTest.class, StringExpressionsTest.class,
-		SyncForkTest.class, SyncJoinTest.class,
+		SimpleHierachyTest.class, StatechartActiveTest.class,
+		StatechartLocalReactionsTest.class, StateIsActiveTest.class,
+		StaticChoiceTest.class, STextKeywordsInStatesAndRegionsTest.class,
+		StringExpressionsTest.class, SyncForkTest.class, SyncJoinTest.class,
 		TransitionWithoutConditionTest.class,
 		TriggerGuardExpressionsTest.class, ValuedEventsTest.class})
 public class AllTestsTest {

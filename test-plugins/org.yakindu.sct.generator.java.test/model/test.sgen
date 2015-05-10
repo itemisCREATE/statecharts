@@ -363,6 +363,14 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 	
+	test StatechartActive {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test StateIsActive{
 		
 		feature Outlet{ 
