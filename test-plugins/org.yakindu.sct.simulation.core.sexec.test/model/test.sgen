@@ -363,6 +363,14 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 	
+	test StatechartActive{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test StateIsActive{
 		
 		feature Outlet{ 

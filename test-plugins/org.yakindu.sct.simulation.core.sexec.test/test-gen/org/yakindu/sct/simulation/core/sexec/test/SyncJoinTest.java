@@ -111,6 +111,6 @@ public class SyncJoinTest extends AbstractExecutionFlowTest {
 		raiseEvent("jd");
 		interpreter.runCycle();
 		assertTrue(isActive("A"));
-		assertTrue(getInteger("x") == 1);
+		assertTrue(getInteger("x") == 1l);
 	}
 }

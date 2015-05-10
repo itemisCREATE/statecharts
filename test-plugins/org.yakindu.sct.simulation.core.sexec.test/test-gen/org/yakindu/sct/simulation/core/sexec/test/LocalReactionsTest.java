@@ -38,6 +38,6 @@ public class LocalReactionsTest extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isActive("A"));
 		interpreter.runCycle();
-		assertTrue(getInteger("x") == 1);
+		assertTrue(getInteger("x") == 1l);
 	}
 }

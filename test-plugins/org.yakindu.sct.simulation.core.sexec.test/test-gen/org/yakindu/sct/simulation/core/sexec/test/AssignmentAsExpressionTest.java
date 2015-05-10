@@ -37,33 +37,33 @@ public class AssignmentAsExpressionTest extends AbstractExecutionFlowTest {
 	public void simpleAssignment() throws Exception {
 		interpreter.enter();
 		assertTrue(isActive("Add"));
-		assertTrue(getInteger("b") == 5);
-		assertTrue(getInteger("a") == 9);
+		assertTrue(getInteger("b") == 5l);
+		assertTrue(getInteger("a") == 9l);
 		interpreter.runCycle();
 		assertTrue(isActive("Subtract"));
-		assertTrue(getInteger("d") == 6);
+		assertTrue(getInteger("d") == 6l);
 		interpreter.runCycle();
 		assertTrue(isActive("Multiply"));
-		assertTrue(getInteger("e") == 15);
+		assertTrue(getInteger("e") == 15l);
 		interpreter.runCycle();
 		assertTrue(isActive("Divide"));
-		assertTrue(getInteger("g") == 1);
+		assertTrue(getInteger("g") == 1l);
 		interpreter.runCycle();
 		assertTrue(isActive("Modulo"));
-		assertTrue(getInteger("i") == 1);
+		assertTrue(getInteger("i") == 1l);
 		interpreter.runCycle();
 		assertTrue(isActive("Shift"));
-		assertTrue(getInteger("j") == 16);
-		assertTrue(getInteger("k") == 4);
+		assertTrue(getInteger("j") == 16l);
+		assertTrue(getInteger("k") == 4l);
 		interpreter.runCycle();
 		assertTrue(isActive("boolean And"));
-		assertTrue(getInteger("l") == 1);
+		assertTrue(getInteger("l") == 1l);
 		interpreter.runCycle();
 		assertTrue(isActive("boolean Or"));
-		assertTrue(getInteger("p") == 15);
+		assertTrue(getInteger("p") == 15l);
 		interpreter.runCycle();
 		assertTrue(isActive("boolean Xor"));
-		assertTrue(getInteger("u") == 12);
+		assertTrue(getInteger("u") == 12l);
 		interpreter.exit();
 	}
 }

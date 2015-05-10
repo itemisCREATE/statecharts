@@ -21,31 +21,38 @@ import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
 import static org.junit.Assert.assertTrue;
 /**
- *  Unit TestCase for ExitOnSelfTransition
+ *  Unit TestCase for StatechartActive
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class ExitOnSelfTransitionTest extends AbstractExecutionFlowTest {
+public class StatechartActiveTest extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception {
 		ExecutionFlow flow = models
-				.loadExecutionFlowFromResource("ExitOnSelfTransition.sct");
+				.loadExecutionFlowFromResource("StatechartActive.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void ExitOnSelfTransitionTest() throws Exception {
+	public void inactiveBeforeEnter() throws Exception {
+		assertTrue(false);
+	}
+	@Test
+	public void activeAfterEnter() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
-		assertTrue(getInteger("entryCount") == 1l);
-		assertTrue(getInteger("exitCount") == 0l);
-		raiseEvent("e");
-		interpreter.runCycle();
-		assertTrue(getInteger("entryCount") == 2l);
-		assertTrue(getInteger("exitCount") == 1l);
-		raiseEvent("f");
-		interpreter.runCycle();
-		assertTrue(getInteger("entryCount") == 2l);
-		assertTrue(getInteger("exitCount") == 2l);
+		assertTrue(false);
+	}
+	@Test
+	public void inactiveAfterExit() throws Exception {
+		interpreter.enter();
+		interpreter.exit();
+		assertTrue(false);
+	}
+	@Test
+	public void activeAfterReenter() throws Exception {
+		interpreter.enter();
+		interpreter.exit();
+		interpreter.enter();
+		assertTrue(false);
 	}
 }

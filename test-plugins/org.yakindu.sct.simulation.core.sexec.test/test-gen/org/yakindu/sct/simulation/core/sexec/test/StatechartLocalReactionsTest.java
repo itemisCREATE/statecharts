@@ -38,9 +38,9 @@ public class StatechartLocalReactionsTest extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isActive("S1"));
 		assertTrue(isActive("a"));
-		while (getInteger("myInt") < 10) {
+		while (getInteger("myInt") < 10l) {
 			assertTrue(isActive("a"));
-			if (getInteger("myInt") % 2 == 0) {
+			if (getInteger("myInt") % 2l == 0l) {
 				assertTrue(isActive("S1"));;
 			} else {
 				assertTrue(isActive("S2"));;

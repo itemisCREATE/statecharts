@@ -37,8 +37,8 @@ public class IntegerExpressionsTest extends AbstractExecutionFlowTest {
 	public void integerExpressions() throws Exception {
 		interpreter.enter();
 		assertTrue(isActive("StateA"));
-		assertTrue(getInteger("myInt1") == 10);
-		assertTrue(getInteger("myInt2") == 5);
+		assertTrue(getInteger("myInt1") == 10l);
+		assertTrue(getInteger("myInt2") == 5l);
 		raiseEvent("e1");
 		interpreter.runCycle();
 		assertTrue(getBoolean("less") == false);
@@ -47,16 +47,16 @@ public class IntegerExpressionsTest extends AbstractExecutionFlowTest {
 		assertTrue(getBoolean("equalOrGreater") == true);
 		assertTrue(getBoolean("equal") == false);
 		assertTrue(getBoolean("notEqual") == true);
-		assertTrue(getInteger("plus") == 15);
-		assertTrue(getInteger("minus") == 5);
-		assertTrue(getInteger("multiply") == 50);
-		assertTrue(getInteger("division") == 2);
-		assertTrue(getInteger("modulo") == 0);
-		assertTrue(getInteger("negat") == -10);
-		assertTrue(getInteger("multiAssign") == 20);
-		assertTrue(getInteger("divAssign") == 2);
-		assertTrue(getInteger("plusAssign") == 12);
-		assertTrue(getInteger("minusAssign") == -8);
-		assertTrue(getInteger("moduloAssign") == 0);
+		assertTrue(getInteger("plus") == 15l);
+		assertTrue(getInteger("minus") == 5l);
+		assertTrue(getInteger("multiply") == 50l);
+		assertTrue(getInteger("division") == 2l);
+		assertTrue(getInteger("modulo") == 0l);
+		assertTrue(getInteger("negat") == -10l);
+		assertTrue(getInteger("multiAssign") == 20l);
+		assertTrue(getInteger("divAssign") == 2l);
+		assertTrue(getInteger("plusAssign") == 12l);
+		assertTrue(getInteger("minusAssign") == -8l);
+		assertTrue(getInteger("moduloAssign") == 0l);
 	}
 }

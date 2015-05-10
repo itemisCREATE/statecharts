@@ -37,11 +37,11 @@ public class NamedInterfaceAccessTest extends AbstractExecutionFlowTest {
 	public void SafeOpenSuccess() throws Exception {
 		interpreter.enter();
 		interpreter.runCycle();
-		raiseEvent("User.numberPressed", 3);
+		raiseEvent("User.numberPressed", 3l);
 		interpreter.runCycle();
-		raiseEvent("User.numberPressed", 7);
+		raiseEvent("User.numberPressed", 7l);
 		interpreter.runCycle();
-		raiseEvent("User.numberPressed", 5);
+		raiseEvent("User.numberPressed", 5l);
 		interpreter.runCycle();
 		assertTrue(isRaised("Safe.open"));
 	}

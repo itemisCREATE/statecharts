@@ -37,8 +37,8 @@ public class InEventLifeCycleTest extends AbstractExecutionFlowTest {
 	public void eventLifeCycle() throws Exception {
 		interpreter.enter();
 		raiseEvent("e");
-		assertTrue(getInteger("i") == 0);
+		assertTrue(getInteger("i") == 0l);
 		interpreter.runCycle();
-		assertTrue(getInteger("i") == 1);
+		assertTrue(getInteger("i") == 1l);
 	}
 }

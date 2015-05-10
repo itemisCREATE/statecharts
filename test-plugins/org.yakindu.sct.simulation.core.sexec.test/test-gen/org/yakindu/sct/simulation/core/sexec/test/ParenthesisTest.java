@@ -37,6 +37,6 @@ public class ParenthesisTest extends AbstractExecutionFlowTest {
 	public void simple() throws Exception {
 		interpreter.enter();
 		assertTrue(isActive("A"));
-		assertTrue(getInteger("erg") == 8);
+		assertTrue(getInteger("erg") == 8l);
 	}
 }

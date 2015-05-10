@@ -38,6 +38,6 @@ public class LogicalAndTestsTest extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		interpreter.runCycle();
 		assertTrue("logical and expression was executed in wrong order...",
-				getInteger("x") == 4 && getBoolean("b"));
+				getInteger("x") == 4l && getBoolean("b"));
 	}
 }

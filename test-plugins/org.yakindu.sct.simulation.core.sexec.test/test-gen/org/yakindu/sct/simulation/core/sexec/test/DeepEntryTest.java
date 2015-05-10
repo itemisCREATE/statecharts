@@ -35,13 +35,13 @@ public class DeepEntryTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void enterToSubstate() throws Exception {
-		assertTrue(getInteger("x") == 0);
-		assertTrue(getInteger("y") == 0);
-		assertTrue(getInteger("z") == 0);
+		assertTrue(getInteger("x") == 0l);
+		assertTrue(getInteger("y") == 0l);
+		assertTrue(getInteger("z") == 0l);
 		interpreter.enter();
-		assertTrue(getInteger("x") == 1);
-		assertTrue(getInteger("y") == 1);
-		assertTrue(getInteger("z") == 2);
+		assertTrue(getInteger("x") == 1l);
+		assertTrue(getInteger("y") == 1l);
+		assertTrue(getInteger("z") == 2l);
 		raiseEvent("e");
 		interpreter.runCycle();
 		assertTrue(isActive("BB"));
@@ -51,6 +51,6 @@ public class DeepEntryTest extends AbstractExecutionFlowTest {
 		raiseEvent("f");
 		interpreter.runCycle();
 		assertTrue(isActive("BB"));
-		assertTrue(getInteger("y") == 1);
+		assertTrue(getInteger("y") == 1l);
 	}
 }

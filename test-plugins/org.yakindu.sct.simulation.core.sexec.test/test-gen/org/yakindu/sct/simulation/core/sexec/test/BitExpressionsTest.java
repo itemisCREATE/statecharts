@@ -37,16 +37,16 @@ public class BitExpressionsTest extends AbstractExecutionFlowTest {
 	public void BitExpressions() throws Exception {
 		interpreter.enter();
 		assertTrue(isActive("StateA"));
-		assertTrue(getInteger("myBit1") == 5);
-		assertTrue(getInteger("myBit2") == 7);
+		assertTrue(getInteger("myBit1") == 5l);
+		assertTrue(getInteger("myBit2") == 7l);
 		raiseEvent("e1");
 		interpreter.runCycle();
 		assertTrue(isActive("StateB"));
-		assertTrue(getInteger("leftBitshift") == 10);
-		assertTrue(getInteger("rightBitshift") == 2);
-		assertTrue(getInteger("complementBitshift") == -6);
-		assertTrue(getInteger("bitwiseAnd") == 5);
-		assertTrue(getInteger("bitwiseOr") == 7);
-		assertTrue(getInteger("bitwiseXor") == 2);
+		assertTrue(getInteger("leftBitshift") == 10l);
+		assertTrue(getInteger("rightBitshift") == 2l);
+		assertTrue(getInteger("complementBitshift") == -6l);
+		assertTrue(getInteger("bitwiseAnd") == 5l);
+		assertTrue(getInteger("bitwiseOr") == 7l);
+		assertTrue(getInteger("bitwiseXor") == 2l);
 	}
 }

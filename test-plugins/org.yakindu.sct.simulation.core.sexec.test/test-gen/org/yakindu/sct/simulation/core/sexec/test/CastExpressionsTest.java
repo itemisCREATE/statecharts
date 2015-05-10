@@ -36,12 +36,12 @@ public class CastExpressionsTest extends AbstractExecutionFlowTest {
 	@Test
 	public void CastExpressionTest() throws Exception {
 		interpreter.enter();
-		assertTrue(getReal("realValue") == 5);
-		assertTrue(getInteger("intValue") == 5);
+		assertTrue(getReal("realValue") == 5l);
+		assertTrue(getInteger("intValue") == 5l);
 		interpreter.runCycle();
-		assertTrue(getReal("realValue") == 15);
+		assertTrue(getReal("realValue") == 15l);
 		interpreter.runCycle();
 		assertTrue(isActive("C"));
-		assertTrue(getReal("realValue") == 757);
+		assertTrue(getReal("realValue") == 757l);
 	}
 }

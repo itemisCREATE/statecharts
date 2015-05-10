@@ -37,30 +37,30 @@ public class EntryExitSelfTransitionTest extends AbstractExecutionFlowTest {
 	public void SelfTransitionToChildState() throws Exception {
 		interpreter.enter();
 		interpreter.runCycle();
-		assertTrue(getInteger("entries") == 1);
+		assertTrue(getInteger("entries") == 1l);
 		assertTrue(isActive("B"));
-		setInteger("entries", 0);
+		setInteger("entries", 0l);
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(getInteger("entries") == 1);
-		assertTrue(getInteger("exits") == 1);
+		assertTrue(getInteger("entries") == 1l);
+		assertTrue(getInteger("exits") == 1l);
 		assertTrue(isActive("C"));
 	}
 	@Test
 	public void SelfTransitionFromChildState() throws Exception {
 		interpreter.enter();
 		interpreter.runCycle();
-		assertTrue(getInteger("entries") == 1);
-		setInteger("entries", 0);
+		assertTrue(getInteger("entries") == 1l);
+		setInteger("entries", 0l);
 		raiseEvent("e1");
 		interpreter.runCycle();
-		assertTrue(getInteger("entries") == 0);
-		assertTrue(getInteger("exits") == 0);
+		assertTrue(getInteger("entries") == 0l);
+		assertTrue(getInteger("exits") == 0l);
 		assertTrue(isActive("C"));
 		raiseEvent("e1");
 		interpreter.runCycle();
 		assertTrue(isActive("B"));
-		assertTrue(getInteger("entries") == 1);
-		assertTrue(getInteger("exits") == 1);
+		assertTrue(getInteger("entries") == 1l);
+		assertTrue(getInteger("exits") == 1l);
 	}
 }
