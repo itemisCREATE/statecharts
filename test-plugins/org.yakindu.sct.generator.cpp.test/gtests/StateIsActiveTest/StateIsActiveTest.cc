@@ -16,12 +16,12 @@ TEST(StatemachineTest, stateIsActive) {
 	StateIsActive* statechart = new StateIsActive();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(StateIsActive::R1_R1A));
-	EXPECT_TRUE(statechart->isActive(StateIsActive::R2_R2A));
+	EXPECT_TRUE(statechart->isStateActive(StateIsActive::R1_R1A));
+	EXPECT_TRUE(statechart->isStateActive(StateIsActive::R2_R2A));
 	statechart->raise_event1();
 	statechart->runCycle();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(StateIsActive::R1_R1B));
-	EXPECT_TRUE(statechart->isActive(StateIsActive::R2_R2B));
+	EXPECT_TRUE(statechart->isStateActive(StateIsActive::R1_R1B));
+	EXPECT_TRUE(statechart->isStateActive(StateIsActive::R2_R2B));
 	delete statechart;
 }

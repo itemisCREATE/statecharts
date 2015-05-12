@@ -18,6 +18,7 @@ import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
@@ -34,6 +35,7 @@ class StatemachineImplementation {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension INamingService
 	@Inject extension ExpressionCode
+	@Inject protected extension StateVectorExtensions
 	
 	protected GeneratorEntry entry
 	
@@ -62,6 +64,10 @@ class StatemachineImplementation {
 		
 		«exitFunction»
 		
+		«activeFunction»
+		
+		«finalFunction»
+		
 		«runCycleFunction»
 		
 		«clearInEventsFunction»
@@ -70,7 +76,7 @@ class StatemachineImplementation {
 
 		«timedStatemachineFunctions»
 
-		«isActiveFunction»
+		«isStateActiveFunction»
 		
 		«interfaceFunctions»
 		
@@ -211,7 +217,7 @@ class StatemachineImplementation {
 		«ENDIF»
 	'''
 	
-	def isActiveFunction(ExecutionFlow it) '''
+	def isStateActiveFunction(ExecutionFlow it) '''
 		sc_boolean «module»::«stateActiveFctID»(«statesEnumType» state) {
 			switch (state) {
 				«FOR s : states»
@@ -224,6 +230,32 @@ class StatemachineImplementation {
 			}
 		}
 	'''
+	
+	
+	def isActiveFunction(ExecutionFlow it) '''
+		sc_boolean «module»::isActive() {
+			return «FOR i : 0 ..< stateVector.size SEPARATOR '||'»stateConfVector[«i»] != «null_state»«ENDFOR»;
+		}
+	'''
+	
+	def protected isFinalFunction(ExecutionFlow it) {
+		val finalStateImpactVector = flow.finalStateImpactVector
+		'''
+			«IF !finalStateImpactVector.isCompletelyCovered»
+			/* 
+			 * Always returns 'false' since this state machine can never become final.
+			 */
+			«ENDIF»
+			sc_boolean «module»::isFinal(){
+		''' +
+		// only if the impact vector is completely covered by final states the state machine 
+		// can become final
+		{if (finalStateImpactVector.isCompletelyCovered) {'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»stateConfVector[«i»] == «IF fs.stateVector.offset == i»«fs.stateName.asEscapedIdentifier»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
+		'''} else {'''   return false;'''} }		
+		+ '''
+		}'''
+	}
+	
 	
 	/* ===================================================================================
 	 * Implementation of interface element access functions

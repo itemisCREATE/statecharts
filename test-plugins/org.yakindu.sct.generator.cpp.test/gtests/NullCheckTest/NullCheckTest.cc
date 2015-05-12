@@ -16,8 +16,8 @@ TEST(StatemachineTest, SimpleNullCheckTest) {
 	NullCheck* statechart = new NullCheck();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(NullCheck::main_region_A));
+	EXPECT_TRUE(statechart->isStateActive(NullCheck::main_region_A));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(NullCheck::main_region_B));
+	EXPECT_TRUE(statechart->isStateActive(NullCheck::main_region_B));
 	delete statechart;
 }

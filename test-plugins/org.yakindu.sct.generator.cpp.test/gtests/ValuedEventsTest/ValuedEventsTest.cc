@@ -23,10 +23,10 @@ TEST(StatemachineTest, valuedEventsTest) {
 	statechart->raise_realEvent( 20l);
 	statechart->raise_stringEvent( "tool");
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ValuedEvents::integer_region_D));
-	EXPECT_TRUE(statechart->isActive(ValuedEvents::string_region_D));
-	EXPECT_TRUE(statechart->isActive(ValuedEvents::boolean_region_D));
-	EXPECT_TRUE(statechart->isActive(ValuedEvents::real_region_D));
+	EXPECT_TRUE(statechart->isStateActive(ValuedEvents::integer_region_D));
+	EXPECT_TRUE(statechart->isStateActive(ValuedEvents::string_region_D));
+	EXPECT_TRUE(statechart->isStateActive(ValuedEvents::boolean_region_D));
+	EXPECT_TRUE(statechart->isStateActive(ValuedEvents::real_region_D));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt()== 23l);
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool()== false);
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myReal()== 20l);

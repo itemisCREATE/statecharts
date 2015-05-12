@@ -10,15 +10,13 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "TimedTransitions.h"
+#include "FinalState.h"
 
-TEST(StatemachineTest, Timer01) {
-	TimedTransitions* statechart = new TimedTransitions();
+TEST(StatemachineTest, StatechartNameTest) {
+	FinalState* statechart = new FinalState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isStateActive(TimedTransitions::main_region_Start));
-	/*not implemented: WaitStatement*/
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isStateActive(TimedTransitions::main_region_End));
+	EXPECT_TRUE(statechart->isFinal());
 	delete statechart;
 }

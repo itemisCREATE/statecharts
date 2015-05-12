@@ -24,15 +24,15 @@ TEST(StatemachineTest, deepHistoryTest) {
 	statechart->runCycle();
 	statechart->raise_event7();
 	statechart->runCycle();
-	EXPECT_TRUE(!statechart->isActive(DeepHistory::mainRegion_State1));
-	EXPECT_TRUE(statechart->isActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	EXPECT_TRUE(!statechart->isStateActive(DeepHistory::mainRegion_State1));
+	EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	statechart->raise_event2();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(DeepHistory::mainRegion_State1));
-	EXPECT_TRUE(!statechart->isActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State1));
+	EXPECT_TRUE(!statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	statechart->raise_event1();
 	statechart->runCycle();
-	EXPECT_TRUE(!statechart->isActive(DeepHistory::mainRegion_State1));
-	EXPECT_TRUE(statechart->isActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	EXPECT_TRUE(!statechart->isStateActive(DeepHistory::mainRegion_State1));
+	EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	delete statechart;
 }

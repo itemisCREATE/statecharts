@@ -16,8 +16,8 @@ TEST(StatemachineTest, DynamicChoiceTest) {
 	DynamicChoice* statechart = new DynamicChoice();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(DynamicChoice::main_region_Start));
+	EXPECT_TRUE(statechart->isStateActive(DynamicChoice::main_region_Start));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(DynamicChoice::main_region_A));
+	EXPECT_TRUE(statechart->isStateActive(DynamicChoice::main_region_A));
 	delete statechart;
 }

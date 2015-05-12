@@ -16,11 +16,11 @@ TEST(StatemachineTest, ConditionalExpressionTest) {
 	ConditionalExpressions* statechart = new ConditionalExpressions();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ConditionalExpressions::main_region_A));
+	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_A));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 1l);
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ConditionalExpressions::main_region_B));
+	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_B));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 2l);
 	delete statechart;
 }

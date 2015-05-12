@@ -16,18 +16,18 @@ TEST(StatemachineTest, alwaysOncycleTest) {
 	AlwaysOncycle* statechart = new AlwaysOncycle();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(AlwaysOncycle::main_region_StateA));
+	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
 	while (statechart->getDefaultSCI()->get_value()< 5l) {
 		statechart->runCycle();
-		EXPECT_TRUE(statechart->isActive(AlwaysOncycle::main_region_StateA));
+		EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
 	}
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(AlwaysOncycle::main_region_StateB));
+	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateB));
 	while (statechart->getDefaultSCI()->get_value()< 5l) {
 		statechart->runCycle();
-		EXPECT_TRUE(statechart->isActive(AlwaysOncycle::main_region_StateB));
+		EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateB));
 	}
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(AlwaysOncycle::main_region_StateA));
+	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
 	delete statechart;
 }

@@ -16,7 +16,7 @@ TEST(StatemachineTest, LocalReactionsTest) {
 	LocalReactions* statechart = new LocalReactions();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(LocalReactions::main_region_A));
+	EXPECT_TRUE(statechart->isStateActive(LocalReactions::main_region_A));
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1l);
 	delete statechart;

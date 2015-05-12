@@ -61,6 +61,18 @@ class StatemachineInterface {
 				* Start a run-to-completion cycle.
 				*/
 				virtual void runCycle() = 0;
+				
+				/*
+				* Checks if the statemachine is active. 
+			 	* A statemachine is active if it was entered. It is inactive if it has not been entered at all or if it was exited.
+			 	*/	
+				virtual	sc_boolean isActive() = 0;
+				
+				/*
+				* Checks if all active states are final. 
+			 	* If there are no active states then the statemachine is considered as inactive and this method returns false.
+			 	*/
+				virtual sc_boolean isFinal() = 0;
 		};
 		
 		inline StatemachineInterface::~StatemachineInterface() {}

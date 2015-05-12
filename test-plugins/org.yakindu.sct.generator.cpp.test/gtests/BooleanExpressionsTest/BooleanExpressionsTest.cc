@@ -16,12 +16,12 @@ TEST(StatemachineTest, booleanExpressions) {
 	BooleanExpressions* statechart = new BooleanExpressions();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(BooleanExpressions::main_region_StateA));
+	EXPECT_TRUE(statechart->isStateActive(BooleanExpressions::main_region_StateA));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool1()== true);
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool2()== false);
 	statechart->raise_e1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(BooleanExpressions::main_region_StateB));
+	EXPECT_TRUE(statechart->isStateActive(BooleanExpressions::main_region_StateB));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_and()== false);
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_or()== true);
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_not()== false);

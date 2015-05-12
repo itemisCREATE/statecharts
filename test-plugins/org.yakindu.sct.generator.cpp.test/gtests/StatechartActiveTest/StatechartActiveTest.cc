@@ -15,14 +15,14 @@
 TEST(StatemachineTest, inactiveBeforeEnter) {
 	StatechartActive* statechart = new StatechartActive();
 	statechart->init();
-	EXPECT_TRUE(false);
+	EXPECT_TRUE(!statechart->isActive());
 	delete statechart;
 }
 TEST(StatemachineTest, activeAfterEnter) {
 	StatechartActive* statechart = new StatechartActive();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(false);
+	EXPECT_TRUE(statechart->isActive());
 	delete statechart;
 }
 TEST(StatemachineTest, inactiveAfterExit) {
@@ -30,7 +30,7 @@ TEST(StatemachineTest, inactiveAfterExit) {
 	statechart->init();
 	statechart->enter();
 	statechart->exit();
-	EXPECT_TRUE(false);
+	EXPECT_TRUE(!statechart->isActive());
 	delete statechart;
 }
 TEST(StatemachineTest, activeAfterReenter) {
@@ -39,6 +39,6 @@ TEST(StatemachineTest, activeAfterReenter) {
 	statechart->enter();
 	statechart->exit();
 	statechart->enter();
-	EXPECT_TRUE(false);
+	EXPECT_TRUE(statechart->isActive());
 	delete statechart;
 }

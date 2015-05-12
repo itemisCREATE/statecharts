@@ -224,8 +224,12 @@ class StatemachineHeader extends Statemachine {
 		void exit();
 		
 		void runCycle();
+		
+		sc_boolean isActive();
+		
+		sc_boolean isFinal();
 	'''
-
+	
 	def timedStatemachineFunctions(ExecutionFlow it) '''
 		void setTimer(«timerInterface»* timer);
 		

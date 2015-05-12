@@ -16,7 +16,7 @@ TEST(StatemachineTest, StaticChoiceTest) {
 	StaticChoice* statechart = new StaticChoice();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(StaticChoice::main_region_Start));
+	EXPECT_TRUE(statechart->isStateActive(StaticChoice::main_region_Start));
 	statechart->runCycle();
 	delete statechart;
 }

@@ -16,14 +16,14 @@ TEST(StatemachineTest, sameNameDifferenRegionTest) {
 	SameNameDifferentRegion* statechart = new SameNameDifferentRegion();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::main_region_StateA));
+	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateA));
 	statechart->raise_e1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::main_region_StateB));
-	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::main_region_StateB_r1_StateA));
+	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB));
+	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB_r1_StateA));
 	statechart->raise_e1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::main_region_StateB));
-	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::main_region_StateB_r1_StateB));
+	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB));
+	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB_r1_StateB));
 	delete statechart;
 }

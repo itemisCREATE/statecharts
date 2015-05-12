@@ -21,7 +21,7 @@ TEST(StatemachineTest, CastExpressionTest) {
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 15l);
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(CastExpressions::main_region_C));
+	EXPECT_TRUE(statechart->isStateActive(CastExpressions::main_region_C));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 757l);
 	delete statechart;
 }

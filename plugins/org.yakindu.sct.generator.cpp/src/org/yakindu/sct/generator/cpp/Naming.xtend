@@ -155,7 +155,7 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	}
 
 	override isStateActiveFctID(ExecutionFlow it) {
-		"isActive"
+		"isStateActive"
 	}
 
 	override dispatch access(OperationDefinition it) {

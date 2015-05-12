@@ -18,6 +18,6 @@ TEST(StatemachineTest, EntryChoiceTest) {
 	statechart->enter();
 	statechart->runCycle();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(EntryChoice::main_region_A));
+	EXPECT_TRUE(statechart->isStateActive(EntryChoice::main_region_A));
 	delete statechart;
 }
