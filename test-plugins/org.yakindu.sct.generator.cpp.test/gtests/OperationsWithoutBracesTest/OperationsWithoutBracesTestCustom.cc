@@ -20,17 +20,17 @@ TEST(StatemachineTest, OperationsWithoutBracesTest) {
 	
 	statechart->setDefaultSCI_OCB(new DefaultCallBack());
 	
-	EXPECT_TRUE(statechart->isActive(OperationsWithoutBraces::main_region_A));
-	EXPECT_TRUE(statechart->isActive(OperationsWithoutBraces::another_region_A));
+	EXPECT_TRUE(statechart->isStateActive(OperationsWithoutBraces::main_region_A));
+	EXPECT_TRUE(statechart->isStateActive(OperationsWithoutBraces::another_region_A));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(OperationsWithoutBraces::main_region_B));
-	EXPECT_TRUE(statechart->isActive(OperationsWithoutBraces::another_region_B));
+	EXPECT_TRUE(statechart->isStateActive(OperationsWithoutBraces::main_region_B));
+	EXPECT_TRUE(statechart->isStateActive(OperationsWithoutBraces::another_region_B));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(OperationsWithoutBraces::main_region_C));
-	EXPECT_TRUE(statechart->isActive(OperationsWithoutBraces::another_region_C));
+	EXPECT_TRUE(statechart->isStateActive(OperationsWithoutBraces::main_region_C));
+	EXPECT_TRUE(statechart->isStateActive(OperationsWithoutBraces::another_region_C));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(OperationsWithoutBraces::main_region_D));
-	EXPECT_TRUE(statechart->isActive(OperationsWithoutBraces::another_region_D));
+	EXPECT_TRUE(statechart->isStateActive(OperationsWithoutBraces::main_region_D));
+	EXPECT_TRUE(statechart->isStateActive(OperationsWithoutBraces::another_region_D));
 
 	delete statechart;
 }
