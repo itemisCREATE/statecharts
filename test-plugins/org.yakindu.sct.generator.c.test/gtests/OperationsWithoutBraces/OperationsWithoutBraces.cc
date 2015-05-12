@@ -18,17 +18,17 @@ OperationsWithoutBraces handle;
 TEST(StatemachineTest, OperationsWithoutBracesTest) {
 	operationsWithoutBraces_init(&handle);
 	operationsWithoutBraces_enter(&handle);
-	EXPECT_TRUE(operationsWithoutBraces_isActive(&handle, OperationsWithoutBraces_main_region_A));
-	EXPECT_TRUE(operationsWithoutBraces_isActive(&handle, OperationsWithoutBraces_another_region_A));
+	EXPECT_TRUE(operationsWithoutBraces_isStateActive(&handle, OperationsWithoutBraces_main_region_A));
+	EXPECT_TRUE(operationsWithoutBraces_isStateActive(&handle, OperationsWithoutBraces_another_region_A));
 	operationsWithoutBraces_runCycle(&handle);
-	EXPECT_TRUE(operationsWithoutBraces_isActive(&handle, OperationsWithoutBraces_main_region_B));
-	EXPECT_TRUE(operationsWithoutBraces_isActive(&handle, OperationsWithoutBraces_another_region_B));
+	EXPECT_TRUE(operationsWithoutBraces_isStateActive(&handle, OperationsWithoutBraces_main_region_B));
+	EXPECT_TRUE(operationsWithoutBraces_isStateActive(&handle, OperationsWithoutBraces_another_region_B));
 	operationsWithoutBraces_runCycle(&handle);
-	EXPECT_TRUE(operationsWithoutBraces_isActive(&handle, OperationsWithoutBraces_main_region_C));
-	EXPECT_TRUE(operationsWithoutBraces_isActive(&handle, OperationsWithoutBraces_another_region_C));
+	EXPECT_TRUE(operationsWithoutBraces_isStateActive(&handle, OperationsWithoutBraces_main_region_C));
+	EXPECT_TRUE(operationsWithoutBraces_isStateActive(&handle, OperationsWithoutBraces_another_region_C));
 	operationsWithoutBraces_runCycle(&handle);
-	EXPECT_TRUE(operationsWithoutBraces_isActive(&handle, OperationsWithoutBraces_main_region_D));
-	EXPECT_TRUE(operationsWithoutBraces_isActive(&handle, OperationsWithoutBraces_another_region_D));
+	EXPECT_TRUE(operationsWithoutBraces_isStateActive(&handle, OperationsWithoutBraces_main_region_D));
+	EXPECT_TRUE(operationsWithoutBraces_isStateActive(&handle, OperationsWithoutBraces_another_region_D));
 }
 
 		

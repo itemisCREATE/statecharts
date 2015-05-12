@@ -19,13 +19,13 @@ TEST(StatemachineTest, OperationsTest) {
 	operations_init(&handle);
 	operations_enter(&handle);
 	operations_runCycle(&handle);
-	EXPECT_TRUE(operations_isActive(&handle, Operations_main_region_B));
+	EXPECT_TRUE(operations_isStateActive(&handle, Operations_main_region_B));
 	operationsIface_raise_ev(&handle);
 	operations_runCycle(&handle);
-	EXPECT_TRUE(operations_isActive(&handle, Operations_main_region_C));
+	EXPECT_TRUE(operations_isStateActive(&handle, Operations_main_region_C));
 	operationsIface_raise_ev(&handle);
 	operations_runCycle(&handle);
-	EXPECT_TRUE(operations_isActive(&handle, Operations_main_region_D));
+	EXPECT_TRUE(operations_isStateActive(&handle, Operations_main_region_D));
 }
 
 		

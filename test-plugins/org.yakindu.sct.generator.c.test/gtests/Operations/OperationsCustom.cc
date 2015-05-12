@@ -47,7 +47,7 @@ TEST(StatemachineTest, OperationCallback) {
 	operations_init(&handle);
 	operations_enter(&handle);
 	operations_runCycle(&handle);
-	EXPECT_TRUE(operations_isActive(&handle, Operations_main_region_B));
+	EXPECT_TRUE(operations_isStateActive(&handle, Operations_main_region_B));
 	EXPECT_TRUE(internalOperation1Called);
 	EXPECT_TRUE(internalOperation2Called);
 	EXPECT_TRUE(internalOp2Param == 4);
@@ -58,7 +58,7 @@ TEST(StatemachineTest, OperationCallback) {
 	
 	operationsIface_raise_ev(&handle);
 	operations_runCycle(&handle);
-	EXPECT_TRUE(operations_isActive(&handle, Operations_main_region_C));
+	EXPECT_TRUE(operations_isStateActive(&handle, Operations_main_region_C));
 	EXPECT_TRUE(interfaceOperation1Called);
 	EXPECT_TRUE(interfaceOperation2Called);
 	EXPECT_TRUE(interfaceOp2Param == 4);
@@ -67,7 +67,7 @@ TEST(StatemachineTest, OperationCallback) {
 	
 	operationsIface_raise_ev(&handle);
 	operations_runCycle(&handle);
-	EXPECT_TRUE(operations_isActive(&handle, Operations_main_region_D));
+	EXPECT_TRUE(operations_isStateActive(&handle, Operations_main_region_D));
 	EXPECT_TRUE(unnamedInterfaceOperation1Called);
 	EXPECT_TRUE(unnamedInterfaceOperation2Called);
 	EXPECT_TRUE(unnamedInterfaceOp2Param == 4);
