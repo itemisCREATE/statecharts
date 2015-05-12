@@ -22,7 +22,7 @@ public interface IStatemachine {
 
 	/**
 	 * Checks if the statemachine is active. 
-	 * A statemachine is active if it was entered. It is inactive if it has nt been entered at all or if it was exited.
+	 * A statemachine is active if it was entered. It is inactive if it has not been entered at all or if it was exited.
 	 */
 	public boolean isActive();
 

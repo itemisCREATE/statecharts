@@ -18,65 +18,65 @@ Choice handle;
 TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
 	choice_init(&handle);
 	choice_enter(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle, true);
 	choiceIface_raise_e(&handle);
 	choice_runCycle(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_C));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
 }
 TEST(StatemachineTest, elseChoiceUsingDefaultTransition) {
 	choice_init(&handle);
 	choice_enter(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle, false);
 	choiceIface_raise_e(&handle);
 	choice_runCycle(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_B));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_B));
 }
 TEST(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
 	choice_init(&handle);
 	choice_enter(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle, true);
 	choiceIface_raise_g(&handle);
 	choice_runCycle(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_C));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
 }
 TEST(StatemachineTest, defaultChoiceUsingDefaultTransition) {
 	choice_init(&handle);
 	choice_enter(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle, false);
 	choiceIface_raise_g(&handle);
 	choice_runCycle(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_B));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_B));
 }
 TEST(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
 	choice_init(&handle);
 	choice_enter(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle, true);
 	choiceIface_raise_f(&handle);
 	choice_runCycle(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_C));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
 }
 TEST(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
 	choice_init(&handle);
 	choice_enter(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle, false);
 	choiceIface_raise_f(&handle);
 	choice_runCycle(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_B));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_B));
 }
 TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
 	choice_init(&handle);
 	choice_enter(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle, true);
 	choiceIface_raise_h(&handle);
 	choice_runCycle(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_C));
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
 }
 
 		

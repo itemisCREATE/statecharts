@@ -10,6 +10,7 @@ encoding//testmodels/SCTUnit/EnterState.sct=UTF-8
 encoding//testmodels/SCTUnit/ExitOnSelfTransition.sct=UTF-8
 encoding//testmodels/SCTUnit/ExitState.sct=UTF-8
 encoding//testmodels/SCTUnit/ExitStatechart.sct=UTF-8
+encoding//testmodels/SCTUnit/FinalState.sct=UTF-8
 encoding//testmodels/SCTUnit/GuardedEntry.sct=UTF-8
 encoding//testmodels/SCTUnit/GuardedExit.sct=UTF-8
 encoding//testmodels/SCTUnit/HistoryWithoutInitialStep.sct=UTF-8

@@ -1,0 +1,10 @@
+
+testgroup FinalState for statechart FinalState{
+	test StatechartNameTest { 
+		enter
+		cycle
+		assert is_final
+		 
+	} 
+}
+	

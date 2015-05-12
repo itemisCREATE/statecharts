@@ -18,7 +18,7 @@ ExitOnSelfTransition handle;
 TEST(StatemachineTest, ExitOnSelfTransitionTest) {
 	exitOnSelfTransition_init(&handle);
 	exitOnSelfTransition_enter(&handle);
-	EXPECT_TRUE(exitOnSelfTransition_isActive(&handle, ExitOnSelfTransition_main_region_A));
+	EXPECT_TRUE(exitOnSelfTransition_isStateActive(&handle, ExitOnSelfTransition_main_region_A));
 	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&handle) == 1l);
 	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&handle) == 0l);
 	exitOnSelfTransitionIface_raise_e(&handle);

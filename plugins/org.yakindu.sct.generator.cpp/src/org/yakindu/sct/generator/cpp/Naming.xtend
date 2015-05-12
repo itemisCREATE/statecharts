@@ -154,7 +154,7 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		"raiseTimeEvent"
 	}
 
-	override isActiveFctID(ExecutionFlow it) {
+	override isStateActiveFctID(ExecutionFlow it) {
 		"isActive"
 	}
 

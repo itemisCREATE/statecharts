@@ -18,7 +18,7 @@ IntegerExpressions handle;
 TEST(StatemachineTest, integerExpressions) {
 	integerExpressions_init(&handle);
 	integerExpressions_enter(&handle);
-	EXPECT_TRUE(integerExpressions_isActive(&handle, IntegerExpressions_main_region_StateA));
+	EXPECT_TRUE(integerExpressions_isStateActive(&handle, IntegerExpressions_main_region_StateA));
 	EXPECT_TRUE(integerExpressionsIface_get_myInt1(&handle) == 10l);
 	EXPECT_TRUE(integerExpressionsIface_get_myInt2(&handle) == 5l);
 	integerExpressionsIface_raise_e1(&handle);

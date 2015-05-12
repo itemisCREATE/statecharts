@@ -18,22 +18,22 @@ HistoryWithExitPoint handle;
 TEST(StatemachineTest, historyEntryAfterExit) {
 	historyWithExitPoint_init(&handle);
 	historyWithExitPoint_enter(&handle);
-	EXPECT_TRUE(historyWithExitPoint_isActive(&handle, HistoryWithExitPoint_mr_A_r_X1));
+	EXPECT_TRUE(historyWithExitPoint_isStateActive(&handle, HistoryWithExitPoint_mr_A_r_X1));
 	historyWithExitPointIface_raise_push(&handle);
 	historyWithExitPoint_runCycle(&handle);
-	EXPECT_TRUE(historyWithExitPoint_isActive(&handle, HistoryWithExitPoint_mr_B));
+	EXPECT_TRUE(historyWithExitPoint_isStateActive(&handle, HistoryWithExitPoint_mr_B));
 	historyWithExitPointIface_raise_back(&handle);
 	historyWithExitPoint_runCycle(&handle);
-	EXPECT_TRUE(historyWithExitPoint_isActive(&handle, HistoryWithExitPoint_mr_A_r_X1));
+	EXPECT_TRUE(historyWithExitPoint_isStateActive(&handle, HistoryWithExitPoint_mr_A_r_X1));
 	historyWithExitPointIface_raise_next(&handle);
 	historyWithExitPoint_runCycle(&handle);
-	EXPECT_TRUE(historyWithExitPoint_isActive(&handle, HistoryWithExitPoint_mr_A_r_X2));
+	EXPECT_TRUE(historyWithExitPoint_isStateActive(&handle, HistoryWithExitPoint_mr_A_r_X2));
 	historyWithExitPointIface_raise_push(&handle);
 	historyWithExitPoint_runCycle(&handle);
-	EXPECT_TRUE(historyWithExitPoint_isActive(&handle, HistoryWithExitPoint_mr_B));
+	EXPECT_TRUE(historyWithExitPoint_isStateActive(&handle, HistoryWithExitPoint_mr_B));
 	historyWithExitPointIface_raise_back(&handle);
 	historyWithExitPoint_runCycle(&handle);
-	EXPECT_TRUE(historyWithExitPoint_isActive(&handle, HistoryWithExitPoint_mr_A_r_X2));
+	EXPECT_TRUE(historyWithExitPoint_isStateActive(&handle, HistoryWithExitPoint_mr_A_r_X2));
 }
 
 		

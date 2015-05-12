@@ -21,7 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		DeepHistory.class, DynamicChoice.class, EmptyTransition.class,
 		EnterState.class, EntryChoice.class, EntryExitSelfTransition.class,
 		ExitOnSelfTransition.class, ExitState.class, FeatureCalls.class,
-		Guard.class, GuardedEntry.class, GuardedExit.class,
+		FinalState.class, Guard.class, GuardedEntry.class, GuardedExit.class,
 		HistoryWithExitPoint.class, HistoryWithoutInitialStep.class,
 		InEventLifeCycle.class, IntegerExpressions.class,
 		InternalEventLifeCycle.class, LocalReactions.class,

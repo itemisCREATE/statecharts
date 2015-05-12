@@ -62,29 +62,40 @@ class Statemachine {
 			«statemachineTypeDecl»
 
 			/*! Initializes the «type» state machine data structures. Must be called before first usage.*/
-			extern void «functionPrefix»init(«type»* handle);
+			extern void «functionPrefix»init(«scHandleDecl»);
 			
 			/*! Activates the state machine */
-			extern void «functionPrefix»enter(«type»* handle);
+			extern void «functionPrefix»enter(«scHandleDecl»);
 			
 			/*! Deactivates the state machine */
-			extern void «functionPrefix»exit(«type»* handle);
+			extern void «functionPrefix»exit(«scHandleDecl»);
 			
 			/*! Performs a 'run to completion' step. */
-			extern void «functionPrefix»runCycle(«type»* handle);
+			extern void «functionPrefix»runCycle(«scHandleDecl»);
 
 			«IF timed»
 				/*! Raises a time event. */
-				extern void «raiseTimeEventFctID»(«type»* handle, sc_eventid evid);
+				extern void «raiseTimeEventFctID»(«scHandleDecl», sc_eventid evid);
 			«ENDIF»
 			
 			«FOR s : it.scopes.filter( typeof(InterfaceScope) )»
 				«s.scopeFunctionPrototypes»
-				
 			«ENDFOR»
 			
+			/*!
+			 * Checks if the statemachine is active. 
+			 * A statemachine is active if it was entered. It is inactive if it has not been entered at all or if it was exited.
+			 */
+			extern sc_boolean «isActiveFctID»(«scHandleDecl»);
+			
+			/*!
+			 * Checks if all active states are final. 
+			 * If there are no active states then the statemachine is considered as incative and this method returns false.
+			 */
+			extern sc_boolean «isFinalFctID»(«scHandleDecl»);
+			
 			/*! Checks if the specified state is active. */
-			extern sc_boolean «activeFctID»(«scHandleDecl», «statesEnumType» state);
+			extern sc_boolean «stateActiveFctID»(«scHandleDecl», «statesEnumType» state);
 			
 			#ifdef __cplusplus
 			}
@@ -99,7 +110,7 @@ class Statemachine {
 			«FOR state : states »
 			«state.shortName»,
 			«ENDFOR»
-			«last_state»
+			«null_state»
 		} «statesEnumType»;
 	'''
 
@@ -170,15 +181,15 @@ class Statemachine {
 	def dispatch functionPrototypes(EventDefinition it) '''
 		«IF direction == Direction::IN»
 		/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */ 
-		extern void «asRaiser»(«it.flow.type»* handle«valueParams»);
+		extern void «asRaiser»(«scHandleDecl»«valueParams»);
 		
 		«ELSE»
 			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */ 
-			extern sc_boolean «asRaised»(«it.flow.type»* handle);
+			extern sc_boolean «asRaised»(«scHandleDecl»);
 			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */ 
-				extern «type.targetLanguageName» «asGetter»(«it.flow.type»* handle);
+				extern «type.targetLanguageName» «asGetter»(«scHandleDecl»);
 				
 			«ENDIF»
 		«ENDIF»
@@ -186,10 +197,10 @@ class Statemachine {
 
 	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-		extern «type.targetLanguageName» «it.asGetter»(«it.flow.type»* handle);
+		extern «type.targetLanguageName» «it.asGetter»(«scHandleDecl»);
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-			extern void «asSetter»(«it.flow.type»* handle, «type.targetLanguageName» value);
+			extern void «asSetter»(«scHandleDecl», «type.targetLanguageName» value);
 		«ENDIF»
 	'''
 }

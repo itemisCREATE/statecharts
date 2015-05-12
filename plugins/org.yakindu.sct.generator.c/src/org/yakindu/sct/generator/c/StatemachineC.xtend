@@ -17,18 +17,20 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
+import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sexec.naming.INamingService
 
 class StatemachineC {
 	
 	@Inject extension Naming
-	@Inject extension Navigation
-	@Inject extension FlowCode
 	@Inject extension GenmodelEntries
+	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension INamingService
+	@Inject extension FlowCode
+	@Inject protected extension StateVectorExtensions
 	
 	def generateStatemachineC(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		flow.initializeNamingService
@@ -58,6 +60,10 @@ class StatemachineC {
 		
 		«exitFunction»
 		
+		«activeFunction»
+		
+		«finalFunction»
+		
 		«clearInEventsFunction»
 		
 		«clearOutEventsFunction»
@@ -66,13 +72,12 @@ class StatemachineC {
 		
 		«raiseTimeEventFunction»
 		
-		«isActiveFunction»
+		«isStateActiveFunction»
 		
 		«interfaceFunctions»
 		
 		«functionImplementations»
 	'''
-	
 	
 	def initFunction(ExecutionFlow it) '''
 		void «functionPrefix»init(«scHandleDecl»)
@@ -80,11 +85,11 @@ class StatemachineC {
 			int i;
 
 			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i)
-				«scHandle»->stateConfVector[i] = «last_state»;
+				«scHandle»->stateConfVector[i] = «null_state»;
 			
 			«IF hasHistory»
 			for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i)
-				«scHandle»->historyVector[i] = «last_state»;
+				«scHandle»->historyVector[i] = «null_state»;
 			«ENDIF»
 			
 			«scHandle»->stateConfVectorPosition = 0;
@@ -179,8 +184,8 @@ class StatemachineC {
 		«ENDIF»
 	'''
 	
-	def isActiveFunction(ExecutionFlow it) '''
-		sc_boolean «activeFctID»(«scHandleDecl», «statesEnumType» state) {
+	def isStateActiveFunction(ExecutionFlow it) '''
+		sc_boolean «stateActiveFctID»(«scHandleDecl», «statesEnumType» state) {
 			switch (state) {
 				«FOR s : states»
 				case «s.shortName» : 
@@ -192,6 +197,33 @@ class StatemachineC {
 			}
 		}
 	'''
+	
+	def isActiveFunction(ExecutionFlow it) '''
+
+		sc_boolean «isActiveFctID»(«scHandleDecl») {
+			return «FOR i : 0 ..< stateVector.size SEPARATOR '||'»«scHandle»->stateConfVector[«i»] != «null_state»«ENDFOR»;
+		}
+	'''
+	
+	def protected isFinalFunction(ExecutionFlow it) {
+		val finalStateImpactVector = flow.finalStateImpactVector
+
+		'''
+			«IF !finalStateImpactVector.isCompletelyCovered»
+			/* 
+			 * Always returns 'false' since this state machine can never become final.
+			 */
+			«ENDIF»
+			sc_boolean «isFinalFctID»(«scHandleDecl»){
+		''' +
+		// only if the impact vector is completely covered by final states the state machine 
+		// can become final
+		{if (finalStateImpactVector.isCompletelyCovered) {'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] == «IF fs.stateVector.offset == i»«functionPrefix.toFirstUpper»«fs.stateName.asEscapedIdentifier»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
+		'''} else {'''   return false;'''} }		
+		+ '''}'''
+	}
+	
+	
 	
 	/* ===================================================================================
 	 * Implementation of interface element accessor functions

@@ -137,7 +137,7 @@ class ExpressionCode {
 	/* TODO: check if event is active */
 	def dispatch CharSequence code(EventValueReferenceExpression it) '''«value.definition.event.valueAccess»'''
 
-	def dispatch CharSequence code(ActiveStateReferenceExpression it) '''«flow.activeFctID»(«value.shortName»)'''
+	def dispatch CharSequence code(ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«value.shortName»)'''
 
 	def dispatch CharSequence code(ParenthesizedExpression it) '''(«expression.code»)'''
 

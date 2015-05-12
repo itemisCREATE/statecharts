@@ -168,6 +168,14 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 	
+	test FinalState{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test Guard{
 		
 		feature Outlet{ 

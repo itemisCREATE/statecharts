@@ -18,15 +18,15 @@ StatechartLocalReactions handle;
 TEST(StatemachineTest, statechartLocalReactionsTest) {
 	statechartLocalReactions_init(&handle);
 	statechartLocalReactions_enter(&handle);
-	EXPECT_TRUE(statechartLocalReactions_isActive(&handle, StatechartLocalReactions_main_region_S1));
-	EXPECT_TRUE(statechartLocalReactions_isActive(&handle, StatechartLocalReactions_region2_a));
+	EXPECT_TRUE(statechartLocalReactions_isStateActive(&handle, StatechartLocalReactions_main_region_S1));
+	EXPECT_TRUE(statechartLocalReactions_isStateActive(&handle, StatechartLocalReactions_region2_a));
 	while (statechartLocalReactionsIface_get_myInt(&handle) < 10l) {
-		EXPECT_TRUE(statechartLocalReactions_isActive(&handle, StatechartLocalReactions_region2_a));
+		EXPECT_TRUE(statechartLocalReactions_isStateActive(&handle, StatechartLocalReactions_region2_a));
 		if (statechartLocalReactionsIface_get_myInt(&handle) %2l== 0l) {
-					EXPECT_TRUE(statechartLocalReactions_isActive(&handle, StatechartLocalReactions_main_region_S1));;
+					EXPECT_TRUE(statechartLocalReactions_isStateActive(&handle, StatechartLocalReactions_main_region_S1));;
 				  }
 				else {
-					EXPECT_TRUE(statechartLocalReactions_isActive(&handle, StatechartLocalReactions_main_region_S2));;
+					EXPECT_TRUE(statechartLocalReactions_isStateActive(&handle, StatechartLocalReactions_main_region_S2));;
 				}
 		statechartLocalReactions_runCycle(&handle);
 	}

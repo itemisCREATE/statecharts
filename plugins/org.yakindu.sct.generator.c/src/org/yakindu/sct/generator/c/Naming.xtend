@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.Event
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
@@ -47,6 +48,19 @@ class Naming {
 
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
+	}
+	
+	def dispatch String stateName(State state) {
+		val String name = provider.getFullyQualifiedName(state).toString();
+		name.fullQualifiedStateName
+	}
+	
+	def dispatch String stateName(ExecutionState it) {
+		name.fullQualifiedStateName
+	}
+		
+	def private String fullQualifiedStateName(String name) {
+		name.substring(name.indexOf(".") + 1).replace(".", "_")
 	}
 
 	def module(ExecutionFlow it) {
@@ -148,11 +162,11 @@ class Naming {
 		functionPrefix + "clearOutEvents"
 	}
 
-	def dispatch last_state(ExecutionFlow it) {
+	def dispatch null_state(ExecutionFlow it) {
 		type + lastStateID
 	}
 
-	def dispatch last_state(Step it) {
+	def dispatch null_state(Step it) {
 		execution_flow.type + lastStateID
 	}
 
@@ -181,8 +195,16 @@ class Naming {
 		functionPrefix + "raiseTimeEvent"
 	}
 
+	def isStateActiveFctID(ExecutionFlow it) {
+		functionPrefix + "isStateActive"
+	}
+	
 	def isActiveFctID(ExecutionFlow it) {
 		functionPrefix + "isActive"
+	}
+	
+	def isFinalFctID(ExecutionFlow it) {
+		functionPrefix + "isFinal"
 	}
 
 	def asRaiser(EventDefinition it) {

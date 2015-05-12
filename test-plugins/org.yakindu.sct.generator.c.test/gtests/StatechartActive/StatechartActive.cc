@@ -17,25 +17,25 @@ StatechartActive handle;
 
 TEST(StatemachineTest, inactiveBeforeEnter) {
 	statechartActive_init(&handle);
-	EXPECT_TRUE(false);
+	EXPECT_TRUE(!statechartActive_isActive(&handle));
 }
 TEST(StatemachineTest, activeAfterEnter) {
 	statechartActive_init(&handle);
 	statechartActive_enter(&handle);
-	EXPECT_TRUE(false);
+	EXPECT_TRUE(statechartActive_isActive(&handle));
 }
 TEST(StatemachineTest, inactiveAfterExit) {
 	statechartActive_init(&handle);
 	statechartActive_enter(&handle);
 	statechartActive_exit(&handle);
-	EXPECT_TRUE(false);
+	EXPECT_TRUE(!statechartActive_isActive(&handle));
 }
 TEST(StatemachineTest, activeAfterReenter) {
 	statechartActive_init(&handle);
 	statechartActive_enter(&handle);
 	statechartActive_exit(&handle);
 	statechartActive_enter(&handle);
-	EXPECT_TRUE(false);
+	EXPECT_TRUE(statechartActive_isActive(&handle));
 }
 
 		

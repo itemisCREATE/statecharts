@@ -38,7 +38,6 @@ class StatemachineHeader extends Statemachine {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntriesExtension
 	@Inject extension INamingService
-	@Inject extension ExpressionCode
 
 	protected GeneratorEntry entry
 
@@ -77,7 +76,7 @@ class StatemachineHeader extends Statemachine {
 				«publicFunctionPrototypes»
 				
 				/*! Checks if the specified state is active. */
-				sc_boolean «activeFctID»(«statesEnumType» state);
+				sc_boolean «stateActiveFctID»(«statesEnumType» state);
 			
 			«entry.innerClassVisibility»:
 			

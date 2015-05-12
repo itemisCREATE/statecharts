@@ -29,7 +29,7 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
 	override dispatch CharSequence code(HistoryEntry it) '''
 		«stepComment»
-		if (historyVector[«region.historyVector.offset»] != «last_state») {
+		if (historyVector[«region.historyVector.offset»] != «null_state») {
 			«historyStep.code»
 		} «IF initialStep != null»else {
 			«initialStep.code»
@@ -88,7 +88,7 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	'''
 
 	override dispatch CharSequence code(ExitState it) '''
-		stateConfVector[«state.stateVector.offset»] = «last_state»;
+		stateConfVector[«state.stateVector.offset»] = «null_state»;
 		stateConfVectorPosition = «state.stateVector.offset»;
 	'''
 }

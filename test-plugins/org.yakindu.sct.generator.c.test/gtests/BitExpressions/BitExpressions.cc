@@ -18,12 +18,12 @@ BitExpressions handle;
 TEST(StatemachineTest, BitExpressions) {
 	bitExpressions_init(&handle);
 	bitExpressions_enter(&handle);
-	EXPECT_TRUE(bitExpressions_isActive(&handle, BitExpressions_main_region_StateA));
+	EXPECT_TRUE(bitExpressions_isStateActive(&handle, BitExpressions_main_region_StateA));
 	EXPECT_TRUE(bitExpressionsIface_get_myBit1(&handle) == 5l);
 	EXPECT_TRUE(bitExpressionsIface_get_myBit2(&handle) == 7l);
 	bitExpressionsIface_raise_e1(&handle);
 	bitExpressions_runCycle(&handle);
-	EXPECT_TRUE(bitExpressions_isActive(&handle, BitExpressions_main_region_StateB));
+	EXPECT_TRUE(bitExpressions_isStateActive(&handle, BitExpressions_main_region_StateB));
 	EXPECT_TRUE(bitExpressionsIface_get_leftBitshift(&handle) == 10l);
 	EXPECT_TRUE(bitExpressionsIface_get_rightBitshift(&handle) == 2l);
 	EXPECT_TRUE(bitExpressionsIface_get_complementBitshift(&handle) == - 6l );

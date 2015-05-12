@@ -18,33 +18,33 @@ ExitState handle;
 TEST(StatemachineTest, defaultExit) {
 	exitState_init(&handle);
 	exitState_enter(&handle);
-	EXPECT_TRUE(exitState_isActive(&handle, ExitState_r_A));
+	EXPECT_TRUE(exitState_isStateActive(&handle, ExitState_r_A));
 	exitStateIface_raise_e(&handle);
 	exitState_runCycle(&handle);
-	EXPECT_TRUE(exitState_isActive(&handle, ExitState_r_E));
+	EXPECT_TRUE(exitState_isStateActive(&handle, ExitState_r_E));
 }
 TEST(StatemachineTest, namedExitThroughNamedTransition) {
 	exitState_init(&handle);
 	exitState_enter(&handle);
-	EXPECT_TRUE(exitState_isActive(&handle, ExitState_r_A));
+	EXPECT_TRUE(exitState_isStateActive(&handle, ExitState_r_A));
 	exitStateIface_raise_f(&handle);
 	exitState_runCycle(&handle);
-	EXPECT_TRUE(exitState_isActive(&handle, ExitState_r_F));
+	EXPECT_TRUE(exitState_isStateActive(&handle, ExitState_r_F));
 }
 TEST(StatemachineTest, namedExitThroughDefaultTransition) {
 	exitState_init(&handle);
 	exitState_enter(&handle);
-	EXPECT_TRUE(exitState_isActive(&handle, ExitState_r_A));
+	EXPECT_TRUE(exitState_isStateActive(&handle, ExitState_r_A));
 	exitStateIface_raise_g(&handle);
 	exitState_runCycle(&handle);
-	EXPECT_TRUE(exitState_isActive(&handle, ExitState_r_E));
+	EXPECT_TRUE(exitState_isStateActive(&handle, ExitState_r_E));
 }
 TEST(StatemachineTest, remainInA) {
 	exitState_init(&handle);
 	exitState_enter(&handle);
-	EXPECT_TRUE(exitState_isActive(&handle, ExitState_r_A));
+	EXPECT_TRUE(exitState_isStateActive(&handle, ExitState_r_A));
 	exitState_runCycle(&handle);
-	EXPECT_TRUE(exitState_isActive(&handle, ExitState_r_A));
+	EXPECT_TRUE(exitState_isStateActive(&handle, ExitState_r_A));
 }
 
 		

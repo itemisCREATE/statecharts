@@ -84,7 +84,7 @@ class StatemachineImplementation {
 			«IF hasHistory»
 				
 				for (int i = 0; i < «historyStatesConst»; ++i)
-					historyVector[i] = «last_state»;
+					historyVector[i] = «null_state»;
 			«ENDIF»
 			
 			stateConfVectorPosition = 0;
@@ -104,11 +104,11 @@ class StatemachineImplementation {
 		void «module»::init()
 		{
 			for (int i = 0; i < «orthogonalStatesConst»; ++i)
-				stateConfVector[i] = «last_state»;
+				stateConfVector[i] = «null_state»;
 			
 			«IF hasHistory»
 			for (int i = 0; i < «historyStatesConst»; ++i)
-				historyVector[i] = «last_state»;
+				historyVector[i] = «null_state»;
 			
 			«ENDIF»
 			stateConfVectorPosition = 0;
@@ -212,7 +212,7 @@ class StatemachineImplementation {
 	'''
 	
 	def isActiveFunction(ExecutionFlow it) '''
-		sc_boolean «module»::«activeFctID»(«statesEnumType» state) {
+		sc_boolean «module»::«stateActiveFctID»(«statesEnumType» state) {
 			switch (state) {
 				«FOR s : states»
 				case «s.shortName.asEscapedIdentifier» : 

@@ -18,13 +18,13 @@ SimpleEvent handle;
 TEST(StatemachineTest, simpleEventTest) {
 	simpleEvent_init(&handle);
 	simpleEvent_enter(&handle);
-	EXPECT_TRUE(simpleEvent_isActive(&handle, SimpleEvent_main_region_A)) << "Expected A to be active" ;
+	EXPECT_TRUE(simpleEvent_isStateActive(&handle, SimpleEvent_main_region_A)) << "Expected A to be active" ;
 	EXPECT_TRUE(5l== 5l);
 	simpleEventIface_raise_event1(&handle);
 	simpleEvent_runCycle(&handle);
-	EXPECT_TRUE(simpleEvent_isActive(&handle, SimpleEvent_main_region_B)) << "Expected B to be active" ;
+	EXPECT_TRUE(simpleEvent_isStateActive(&handle, SimpleEvent_main_region_B)) << "Expected B to be active" ;
 	simpleEvent_runCycle(&handle);
-	EXPECT_TRUE(!simpleEvent_isActive(&handle, SimpleEvent_main_region_B));
+	EXPECT_TRUE(!simpleEvent_isStateActive(&handle, SimpleEvent_main_region_B));
 }
 
 		

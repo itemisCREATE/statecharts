@@ -18,43 +18,43 @@ HistoryWithoutInitialStep handle;
 TEST(StatemachineTest, enterThroughInitialEntry) {
 	historyWithoutInitialStep_init(&handle);
 	historyWithoutInitialStep_enter(&handle);
-	EXPECT_TRUE(historyWithoutInitialStep_isActive(&handle, HistoryWithoutInitialStep_main_region_A));
+	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_A));
 	historyWithoutInitialStepIface_raise_toB(&handle);
 	historyWithoutInitialStep_runCycle(&handle);
-	EXPECT_TRUE(historyWithoutInitialStep_isActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_C));
+	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_C));
 	historyWithoutInitialStepIface_raise_next(&handle);
 	historyWithoutInitialStep_runCycle(&handle);
-	EXPECT_TRUE(historyWithoutInitialStep_isActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_D));
+	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_D));
 }
 TEST(StatemachineTest, enterCThroughHistory) {
 	historyWithoutInitialStep_init(&handle);
 	historyWithoutInitialStep_enter(&handle);
-	EXPECT_TRUE(historyWithoutInitialStep_isActive(&handle, HistoryWithoutInitialStep_main_region_A));
+	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_A));
 	historyWithoutInitialStepIface_raise_toB(&handle);
 	historyWithoutInitialStep_runCycle(&handle);
-	EXPECT_TRUE(historyWithoutInitialStep_isActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_C));
+	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_C));
 	historyWithoutInitialStepIface_raise_toA(&handle);
 	historyWithoutInitialStep_runCycle(&handle);
-	EXPECT_TRUE(historyWithoutInitialStep_isActive(&handle, HistoryWithoutInitialStep_main_region_A));
+	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_A));
 	historyWithoutInitialStepIface_raise_toHistory(&handle);
 	historyWithoutInitialStep_runCycle(&handle);
-	EXPECT_TRUE(historyWithoutInitialStep_isActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_C));
+	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_C));
 }
 TEST(StatemachineTest, enterDThroughHistory) {
 	historyWithoutInitialStep_init(&handle);
 	historyWithoutInitialStep_enter(&handle);
-	EXPECT_TRUE(historyWithoutInitialStep_isActive(&handle, HistoryWithoutInitialStep_main_region_A));
+	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_A));
 	historyWithoutInitialStepIface_raise_toB(&handle);
 	historyWithoutInitialStep_runCycle(&handle);
 	historyWithoutInitialStepIface_raise_next(&handle);
 	historyWithoutInitialStep_runCycle(&handle);
-	EXPECT_TRUE(historyWithoutInitialStep_isActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_D));
+	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_D));
 	historyWithoutInitialStepIface_raise_toA(&handle);
 	historyWithoutInitialStep_runCycle(&handle);
-	EXPECT_TRUE(historyWithoutInitialStep_isActive(&handle, HistoryWithoutInitialStep_main_region_A));
+	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_A));
 	historyWithoutInitialStepIface_raise_toHistory(&handle);
 	historyWithoutInitialStep_runCycle(&handle);
-	EXPECT_TRUE(historyWithoutInitialStep_isActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_D));
+	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_D));
 }
 
 		
