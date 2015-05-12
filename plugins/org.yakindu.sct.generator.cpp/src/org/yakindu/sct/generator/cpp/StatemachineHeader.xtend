@@ -75,7 +75,7 @@ class StatemachineHeader extends Statemachine {
 				
 				«publicFunctionPrototypes»
 				
-				/*! Checks if the specified state is active. */
+				/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
 				sc_boolean «stateActiveFctID»(«statesEnumType» state);
 			
 			«entry.innerClassVisibility»:
@@ -225,8 +225,17 @@ class StatemachineHeader extends Statemachine {
 		
 		void runCycle();
 		
+		/*!
+		* Checks if the statemachine is active (until 2.4.1 this method was used for states).
+		* A statemachine is active if it was entered. It is inactive if it has not been entered at all or if it was exited.
+		*/
 		sc_boolean isActive();
 		
+		
+		/*!
+		* Checks if all active states are final. 
+		* If there are no active states then the statemachine is considered as inactive and this method returns false.
+		*/
 		sc_boolean isFinal();
 	'''
 	

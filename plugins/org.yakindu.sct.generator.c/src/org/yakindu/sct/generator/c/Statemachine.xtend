@@ -83,18 +83,18 @@ class Statemachine {
 			«ENDFOR»
 			
 			/*!
-			 * Checks if the statemachine is active. 
+			 * Checks if the statemachine is active (until 2.4.1 this method was used for states).
 			 * A statemachine is active if it was entered. It is inactive if it has not been entered at all or if it was exited.
 			 */
 			extern sc_boolean «isActiveFctID»(«scHandleDecl»);
 			
 			/*!
 			 * Checks if all active states are final. 
-			 * If there are no active states then the statemachine is considered as incative and this method returns false.
+			 * If there are no active states then the statemachine is considered as inactive and this method returns false.
 			 */
 			extern sc_boolean «isFinalFctID»(«scHandleDecl»);
 			
-			/*! Checks if the specified state is active. */
+			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
 			extern sc_boolean «stateActiveFctID»(«scHandleDecl», «statesEnumType» state);
 			
 			#ifdef __cplusplus
