@@ -567,7 +567,7 @@ feature Naming {
 }
 p. ==<!-- End sgen_feature_naming -->==	
 
-==<!-- Start sgen_feature_runnablewrapper -->==
+==<!-- Start sgen_feature_runnablewrapperX -->==
 
 h4. Runnable Wrapper
 
@@ -584,7 +584,7 @@ feature RunnableWrapper {
 	namePrefix = "org.yakindu.sct"
 	nameSuffix = "Impl"
 }
-p. ==<!-- End sgen_feature_runnablewrapper -->==
+p. ==<!-- End sgen_feature_runnablewrapperX -->==
 
 ==<!-- Start sgen_feature_generalfeatures -->==	
 
