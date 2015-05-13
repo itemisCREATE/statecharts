@@ -566,6 +566,26 @@ feature Naming {
 	implementationSuffix = "Impl"
 }
 p. ==<!-- End sgen_feature_naming -->==	
+
+==<!-- Start sgen_feature_runnablewrapper -->==
+
+h4. Runnable Wrapper
+
+*Generates* a runnable wrapper for the statemachine.
+It is an *optional* feature and consists of the following parameters:
+
+# __namePrefix__  (String, optional): The preffix for the implementing classes
+# __nameSuffix__  (String, optional): The suffix for the implementing classes
+
+Example configuration:
+
+bc(prettyprint).. 
+feature RunnableWrapper {
+	namePrefix = "org.yakindu.sct"
+	nameSuffix = "Impl"
+}
+p. ==<!-- End sgen_feature_runnablewrapper -->==
+
 ==<!-- Start sgen_feature_generalfeatures -->==	
 
 h4(#GeneralFeatures). GeneralFeatures
