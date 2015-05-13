@@ -36,50 +36,50 @@ public class ShallowHistoryWithDeepEntryTest extends AbstractExecutionFlowTest {
 	@Test
 	public void noDeepEntryWithinHistory() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("Y"));
+		assertTrue(isStateActive("Y"));
 		raiseEvent("toZ");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("toY");
 		interpreter.runCycle();
-		assertTrue(isActive("Y"));
+		assertTrue(isStateActive("Y"));
 		raiseEvent("toZ");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 	}
 	@Test
 	public void deepEntryWithinHistory() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("Y"));
+		assertTrue(isStateActive("Y"));
 		raiseEvent("toZ");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("toC");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("C"));
+		assertTrue(isStateActive("B"));
 		raiseEvent("toY");
 		interpreter.runCycle();
-		assertTrue(isActive("Y"));
+		assertTrue(isStateActive("Y"));
 		raiseEvent("toZ");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("C"));
+		assertTrue(isStateActive("B"));
 	}
 	@Test
 	public void directDeepEntryIntoHistory() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("Y"));
+		assertTrue(isStateActive("Y"));
 		raiseEvent("toC");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("C"));
+		assertTrue(isStateActive("B"));
 		raiseEvent("toY");
 		interpreter.runCycle();
-		assertTrue(isActive("Y"));
+		assertTrue(isStateActive("Y"));
 		raiseEvent("toZ");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("C"));
+		assertTrue(isStateActive("B"));
 	}
 }

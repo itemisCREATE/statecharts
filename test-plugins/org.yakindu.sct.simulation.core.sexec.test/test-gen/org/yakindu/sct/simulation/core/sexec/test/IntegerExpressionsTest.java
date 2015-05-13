@@ -36,7 +36,7 @@ public class IntegerExpressionsTest extends AbstractExecutionFlowTest {
 	@Test
 	public void integerExpressions() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("StateA"));
+		assertTrue(isStateActive("StateA"));
 		assertTrue(getInteger("myInt1") == 10l);
 		assertTrue(getInteger("myInt2") == 5l);
 		raiseEvent("e1");

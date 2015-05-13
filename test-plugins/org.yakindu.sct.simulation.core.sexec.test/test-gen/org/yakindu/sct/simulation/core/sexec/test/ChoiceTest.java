@@ -35,64 +35,64 @@ public class ChoiceTest extends AbstractExecutionFlowTest {
 	@Test
 	public void elseChoiceUsingNonDefaultTransition() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		setBoolean("c", true);
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("C"));
 	}
 	@Test
 	public void elseChoiceUsingDefaultTransition() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		setBoolean("c", false);
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 	}
 	@Test
 	public void defaultChoiceUsingNonDefaultTransition() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		setBoolean("c", true);
 		raiseEvent("g");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("C"));
 	}
 	@Test
 	public void defaultChoiceUsingDefaultTransition() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		setBoolean("c", false);
 		raiseEvent("g");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 	}
 	@Test
 	public void uncheckedChoiceUsingNonDefaultTransition() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		setBoolean("c", true);
 		raiseEvent("f");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("C"));
 	}
 	@Test
 	public void uncheckedChoiceUsingDefaultTransition() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		setBoolean("c", false);
 		raiseEvent("f");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 	}
 	@Test
 	public void alwaysTrueTransitionInChoice() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		setBoolean("c", true);
 		raiseEvent("h");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("C"));
 	}
 }

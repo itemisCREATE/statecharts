@@ -36,8 +36,8 @@ public class TransitionWithoutConditionTest extends AbstractExecutionFlowTest {
 	@Test
 	public void TransitionWithoutConditionTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 	}
 }

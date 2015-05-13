@@ -36,33 +36,33 @@ public class AssignmentAsExpressionTest extends AbstractExecutionFlowTest {
 	@Test
 	public void simpleAssignment() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("Add"));
+		assertTrue(isStateActive("Add"));
 		assertTrue(getInteger("b") == 5l);
 		assertTrue(getInteger("a") == 9l);
 		interpreter.runCycle();
-		assertTrue(isActive("Subtract"));
+		assertTrue(isStateActive("Subtract"));
 		assertTrue(getInteger("d") == 6l);
 		interpreter.runCycle();
-		assertTrue(isActive("Multiply"));
+		assertTrue(isStateActive("Multiply"));
 		assertTrue(getInteger("e") == 15l);
 		interpreter.runCycle();
-		assertTrue(isActive("Divide"));
+		assertTrue(isStateActive("Divide"));
 		assertTrue(getInteger("g") == 1l);
 		interpreter.runCycle();
-		assertTrue(isActive("Modulo"));
+		assertTrue(isStateActive("Modulo"));
 		assertTrue(getInteger("i") == 1l);
 		interpreter.runCycle();
-		assertTrue(isActive("Shift"));
+		assertTrue(isStateActive("Shift"));
 		assertTrue(getInteger("j") == 16l);
 		assertTrue(getInteger("k") == 4l);
 		interpreter.runCycle();
-		assertTrue(isActive("boolean And"));
+		assertTrue(isStateActive("boolean And"));
 		assertTrue(getInteger("l") == 1l);
 		interpreter.runCycle();
-		assertTrue(isActive("boolean Or"));
+		assertTrue(isStateActive("boolean Or"));
 		assertTrue(getInteger("p") == 15l);
 		interpreter.runCycle();
-		assertTrue(isActive("boolean Xor"));
+		assertTrue(isStateActive("boolean Xor"));
 		assertTrue(getInteger("u") == 12l);
 		interpreter.exit();
 	}

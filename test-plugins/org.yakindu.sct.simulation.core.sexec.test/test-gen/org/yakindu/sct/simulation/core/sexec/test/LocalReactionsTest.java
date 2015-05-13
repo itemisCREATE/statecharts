@@ -36,7 +36,7 @@ public class LocalReactionsTest extends AbstractExecutionFlowTest {
 	@Test
 	public void LocalReactionsTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		interpreter.runCycle();
 		assertTrue(getInteger("x") == 1l);
 	}

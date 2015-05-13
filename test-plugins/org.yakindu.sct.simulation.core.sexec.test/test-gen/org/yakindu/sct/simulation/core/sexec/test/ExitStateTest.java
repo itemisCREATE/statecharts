@@ -36,32 +36,32 @@ public class ExitStateTest extends AbstractExecutionFlowTest {
 	@Test
 	public void defaultExit() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("E"));
+		assertTrue(isStateActive("E"));
 	}
 	@Test
 	public void namedExitThroughNamedTransition() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("f");
 		interpreter.runCycle();
-		assertTrue(isActive("F"));
+		assertTrue(isStateActive("F"));
 	}
 	@Test
 	public void namedExitThroughDefaultTransition() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("g");
 		interpreter.runCycle();
-		assertTrue(isActive("E"));
+		assertTrue(isStateActive("E"));
 	}
 	@Test
 	public void remainInA() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 	}
 }

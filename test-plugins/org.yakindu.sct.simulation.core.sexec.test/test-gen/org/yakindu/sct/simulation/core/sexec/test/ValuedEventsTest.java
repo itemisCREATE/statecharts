@@ -43,10 +43,10 @@ public class ValuedEventsTest extends AbstractExecutionFlowTest {
 		raiseEvent("realEvent", 20l);
 		raiseEvent("stringEvent", "tool");
 		interpreter.runCycle();
-		assertTrue(isActive("D"));
-		assertTrue(isActive("D"));
-		assertTrue(isActive("D"));
-		assertTrue(isActive("D"));
+		assertTrue(isStateActive("D"));
+		assertTrue(isStateActive("D"));
+		assertTrue(isStateActive("D"));
+		assertTrue(isStateActive("D"));
 		assertTrue(getInteger("myInt") == 23l);
 		assertTrue(getBoolean("myBool") == false);
 		assertTrue(getReal("myReal") == 20l);

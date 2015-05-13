@@ -36,21 +36,21 @@ public class InternalEventLifeCycleTest extends AbstractExecutionFlowTest {
 	@Test
 	public void InternalEventLifeCycleTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("A"));
+		assertTrue(isStateActive("C"));
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
-		assertTrue(isActive("D"));
+		assertTrue(isStateActive("A"));
+		assertTrue(isStateActive("D"));
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
-		assertTrue(isActive("D"));
+		assertTrue(isStateActive("A"));
+		assertTrue(isStateActive("D"));
 		raiseEvent("f");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("A"));
+		assertTrue(isStateActive("C"));
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("A"));
+		assertTrue(isStateActive("C"));
 	}
 }

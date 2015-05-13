@@ -36,11 +36,11 @@ public class CKeywordsTest extends AbstractExecutionFlowTest {
 	@Test
 	public void CKeywordsTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("char"));
+		assertTrue(isStateActive("char"));
 		raiseEvent("auto");
 		interpreter.runCycle();
-		assertTrue(isActive("loop"));
-		assertTrue(isActive("case"));
-		assertTrue(isActive("asm"));
+		assertTrue(isStateActive("loop"));
+		assertTrue(isStateActive("case"));
+		assertTrue(isStateActive("asm"));
 	}
 }

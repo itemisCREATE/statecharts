@@ -36,7 +36,7 @@ public class ConstantsTestsTest extends AbstractExecutionFlowTest {
 	@Test
 	public void constantDefinition() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("x") == 10l);
 		assertTrue(getInteger("y") == 20l);
 		assertTrue(getString("Named.y").equals("Hello World"));
@@ -45,11 +45,11 @@ public class ConstantsTestsTest extends AbstractExecutionFlowTest {
 		assertTrue(getInteger("result") == 20l);
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("C"));
 		assertTrue(getInteger("result") == 100l);
 		raiseEvent("e2", getInteger("x"));
 		interpreter.runCycle();
 		assertTrue(getInteger("result") == 1000l);
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 	}
 }

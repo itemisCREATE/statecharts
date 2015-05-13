@@ -36,8 +36,8 @@ public class DynamicChoiceTest extends AbstractExecutionFlowTest {
 	@Test
 	public void DynamicChoiceTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("Start"));
+		assertTrue(isStateActive("Start"));
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 	}
 }

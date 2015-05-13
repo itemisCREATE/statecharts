@@ -36,18 +36,18 @@ public class PriorityValuesTest extends AbstractExecutionFlowTest {
 	@Test
 	public void transitionPriority() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("event1");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("C"));
 	}
 	@Test
 	public void regionPriority() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("event2");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
-		assertTrue(!isActive("E"));
+		assertTrue(isStateActive("B"));
+		assertTrue(!isStateActive("E"));
 	}
 }

@@ -17,6 +17,9 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions;
+import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
@@ -40,14 +43,23 @@ public abstract class AbstractExecutionFlowTest {
 	protected ExecutionContext context;
 	@Inject
 	protected IExecutionContextInitializer initializer;
+	@Inject
+	protected StateVectorExtensions stateVectorExtensions;
+
+	protected ExecutionFlow flow;
 
 	protected ExecutionContext context() {
 		return context;
 	}
 
+	protected ExecutionFlow flow() {
+		return flow;
+	}
+	
 	protected void initInterpreter(ExecutionFlow flow) {
 		initializer.initialize(context, flow);
 		interpreter.initialize(flow, context);
+		this.flow = flow;
 	}
 
 	protected long getInteger(String varName) {
@@ -93,12 +105,11 @@ public abstract class AbstractExecutionFlowTest {
 	// -> Assertion methods...
 	protected void assertVarValue(String variableName, Object value) {
 		ExecutionVariable variable = context().getVariable(variableName);
-		assertNotNull("Variable '" + variableName + "' is not defined",
-				variable);
+		assertNotNull("Variable '" + variableName + "' is not defined", variable);
 		assertEquals(value, variable.getValue());
 	}
 
-	protected boolean isActive(String stateName) {
+	protected boolean isStateActive(String stateName) {
 		Assert.isNotNull(stateName);
 		List<RegularState> allActiveStates = context().getAllActiveStates();
 		for (RegularState regularState : allActiveStates) {
@@ -123,4 +134,29 @@ public abstract class AbstractExecutionFlowTest {
 		return context().getEvent(eventName).isRaised();
 	}
 
+	protected boolean isActive() {
+		List<RegularState> activeStates = context.getAllActiveStates();
+		for (RegularState regularState : activeStates) {
+			if (!(regularState instanceof FinalState)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected boolean isFinal() {
+		List<ExecutionState>[] list = stateVectorExtensions.finalStateImpactVector(flow);
+		boolean isCompletlyCovered = stateVectorExtensions.isCompletelyCovered(list);
+		if (!isCompletlyCovered) {
+			return false;
+		} else {
+			List<RegularState> activeStates = context.getAllActiveStates();
+			for (RegularState regularState : activeStates) {
+				if (!(regularState instanceof FinalState)) {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
 }

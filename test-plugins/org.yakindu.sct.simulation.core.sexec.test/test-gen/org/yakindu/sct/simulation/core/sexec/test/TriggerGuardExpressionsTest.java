@@ -36,37 +36,37 @@ public class TriggerGuardExpressionsTest extends AbstractExecutionFlowTest {
 	@Test
 	public void trueGuard() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("e1");
 		setBoolean("b", true);
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("e2");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("e1");
 		raiseEvent("e2");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 	}
 	@Test
 	public void falseGuard() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		setBoolean("b", false);
 		raiseEvent("e1");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("e2");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("e1");
 		raiseEvent("e2");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 	}
 }

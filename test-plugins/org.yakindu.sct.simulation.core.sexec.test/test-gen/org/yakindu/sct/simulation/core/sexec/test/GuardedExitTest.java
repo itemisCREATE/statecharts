@@ -36,21 +36,21 @@ public class GuardedExitTest extends AbstractExecutionFlowTest {
 	@Test
 	public void ExitTaken() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		assertTrue(!getBoolean("guard"));
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 		assertTrue(!getBoolean("done"));
 	}
 	@Test
 	public void ExitNotTaken() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		setBoolean("guard", true);
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 		assertTrue(getBoolean("done"));
 	}
 }

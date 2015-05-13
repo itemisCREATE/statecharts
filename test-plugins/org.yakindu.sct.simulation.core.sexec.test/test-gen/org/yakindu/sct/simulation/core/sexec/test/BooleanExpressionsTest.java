@@ -36,12 +36,12 @@ public class BooleanExpressionsTest extends AbstractExecutionFlowTest {
 	@Test
 	public void booleanExpressions() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("StateA"));
+		assertTrue(isStateActive("StateA"));
 		assertTrue(getBoolean("myBool1") == true);
 		assertTrue(getBoolean("myBool2") == false);
 		raiseEvent("e1");
 		interpreter.runCycle();
-		assertTrue(isActive("StateB"));
+		assertTrue(isStateActive("StateB"));
 		assertTrue(getBoolean("and") == false);
 		assertTrue(getBoolean("or") == true);
 		assertTrue(getBoolean("not") == false);

@@ -36,21 +36,21 @@ public class HistoryWithExitPointTest extends AbstractExecutionFlowTest {
 	@Test
 	public void historyEntryAfterExit() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("X1"));
+		assertTrue(isStateActive("X1"));
 		raiseEvent("push");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 		raiseEvent("back");
 		interpreter.runCycle();
-		assertTrue(isActive("X1"));
+		assertTrue(isStateActive("X1"));
 		raiseEvent("next");
 		interpreter.runCycle();
-		assertTrue(isActive("X2"));
+		assertTrue(isStateActive("X2"));
 		raiseEvent("push");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 		raiseEvent("back");
 		interpreter.runCycle();
-		assertTrue(isActive("X2"));
+		assertTrue(isStateActive("X2"));
 	}
 }

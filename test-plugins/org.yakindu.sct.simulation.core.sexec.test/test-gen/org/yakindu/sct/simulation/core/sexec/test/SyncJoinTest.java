@@ -36,70 +36,70 @@ public class SyncJoinTest extends AbstractExecutionFlowTest {
 	@Test
 	public void syncJoin_C2_Waits() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("B"));
-		assertTrue(isActive("C1"));
-		assertTrue(isActive("D1"));
+		assertTrue(isStateActive("B"));
+		assertTrue(isStateActive("C1"));
+		assertTrue(isStateActive("D1"));
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("C2"));
-		assertTrue(isActive("D1"));
+		assertTrue(isStateActive("C2"));
+		assertTrue(isStateActive("D1"));
 		raiseEvent("jc");
 		interpreter.runCycle();
-		assertTrue(isActive("C2"));
-		assertTrue(isActive("D1"));
+		assertTrue(isStateActive("C2"));
+		assertTrue(isStateActive("D1"));
 		raiseEvent("jd");
 		interpreter.runCycle();
-		assertTrue(isActive("C2"));
-		assertTrue(isActive("D1"));
+		assertTrue(isStateActive("C2"));
+		assertTrue(isStateActive("D1"));
 		raiseEvent("jc");
 		raiseEvent("jd");
 		interpreter.runCycle();
-		assertTrue(isActive("C2"));
-		assertTrue(isActive("D1"));
+		assertTrue(isStateActive("C2"));
+		assertTrue(isStateActive("D1"));
 		raiseEvent("f");
 		interpreter.runCycle();
-		assertTrue(isActive("C2"));
-		assertTrue(isActive("D2"));
+		assertTrue(isStateActive("C2"));
+		assertTrue(isStateActive("D2"));
 		raiseEvent("jc");
 		interpreter.runCycle();
-		assertTrue(isActive("C2"));
-		assertTrue(isActive("D2"));
+		assertTrue(isStateActive("C2"));
+		assertTrue(isStateActive("D2"));
 		raiseEvent("jd");
 		interpreter.runCycle();
-		assertTrue(isActive("C2"));
-		assertTrue(isActive("D2"));
+		assertTrue(isStateActive("C2"));
+		assertTrue(isStateActive("D2"));
 		raiseEvent("jc");
 		raiseEvent("jd");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 	}
 	@Test
 	public void syncJoin_D2_Waits() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("B"));
-		assertTrue(isActive("C1"));
-		assertTrue(isActive("D1"));
+		assertTrue(isStateActive("B"));
+		assertTrue(isStateActive("C1"));
+		assertTrue(isStateActive("D1"));
 		raiseEvent("f");
 		interpreter.runCycle();
-		assertTrue(isActive("C1"));
-		assertTrue(isActive("D2"));
+		assertTrue(isStateActive("C1"));
+		assertTrue(isStateActive("D2"));
 		raiseEvent("jc");
 		interpreter.runCycle();
-		assertTrue(isActive("C1"));
-		assertTrue(isActive("D2"));
+		assertTrue(isStateActive("C1"));
+		assertTrue(isStateActive("D2"));
 		raiseEvent("jd");
 		interpreter.runCycle();
-		assertTrue(isActive("C1"));
-		assertTrue(isActive("D2"));
+		assertTrue(isStateActive("C1"));
+		assertTrue(isStateActive("D2"));
 		raiseEvent("jc");
 		raiseEvent("jd");
 		interpreter.runCycle();
-		assertTrue(isActive("C1"));
-		assertTrue(isActive("D2"));
+		assertTrue(isStateActive("C1"));
+		assertTrue(isStateActive("D2"));
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("C2"));
-		assertTrue(isActive("D2"));
+		assertTrue(isStateActive("C2"));
+		assertTrue(isStateActive("D2"));
 	}
 	@Test
 	public void doubleEntryActionBug() throws Exception {
@@ -110,7 +110,7 @@ public class SyncJoinTest extends AbstractExecutionFlowTest {
 		raiseEvent("jc");
 		raiseEvent("jd");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("x") == 1l);
 	}
 }

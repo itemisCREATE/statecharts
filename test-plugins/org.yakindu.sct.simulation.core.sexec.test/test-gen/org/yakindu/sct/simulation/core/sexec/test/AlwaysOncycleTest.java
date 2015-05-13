@@ -36,18 +36,18 @@ public class AlwaysOncycleTest extends AbstractExecutionFlowTest {
 	@Test
 	public void alwaysOncycleTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("StateA"));
+		assertTrue(isStateActive("StateA"));
 		while (getInteger("value") < 5l) {
 			interpreter.runCycle();
-			assertTrue(isActive("StateA"));
+			assertTrue(isStateActive("StateA"));
 		}
 		interpreter.runCycle();
-		assertTrue(isActive("StateB"));
+		assertTrue(isStateActive("StateB"));
 		while (getInteger("value") < 5l) {
 			interpreter.runCycle();
-			assertTrue(isActive("StateB"));
+			assertTrue(isStateActive("StateB"));
 		}
 		interpreter.runCycle();
-		assertTrue(isActive("StateA"));
+		assertTrue(isStateActive("StateA"));
 	}
 }

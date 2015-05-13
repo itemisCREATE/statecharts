@@ -36,8 +36,8 @@ public class FeatureCallsTest extends AbstractExecutionFlowTest {
 	@Test
 	public void FeatureCalls() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 	}
 }

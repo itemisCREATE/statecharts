@@ -36,8 +36,8 @@ public class NullCheckTest extends AbstractExecutionFlowTest {
 	@Test
 	public void SimpleNullCheckTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 	}
 }

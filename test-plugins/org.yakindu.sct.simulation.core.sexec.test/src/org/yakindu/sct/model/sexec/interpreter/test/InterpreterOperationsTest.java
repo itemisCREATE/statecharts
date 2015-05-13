@@ -39,20 +39,20 @@ public class InterpreterOperationsTest extends AbstractExecutionFlowTest {
 	@Test
 	public void operationsSimpleTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 	}
 
 	@Test
 	public void operationsExtendedTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 		assertTrue(getBoolean("myBool") == true);
 		raiseEvent("ev");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("C"));
 	}
 }

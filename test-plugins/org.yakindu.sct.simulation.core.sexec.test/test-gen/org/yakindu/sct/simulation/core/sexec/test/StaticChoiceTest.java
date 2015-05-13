@@ -36,7 +36,7 @@ public class StaticChoiceTest extends AbstractExecutionFlowTest {
 	@Test
 	public void StaticChoiceTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("Start"));
+		assertTrue(isStateActive("Start"));
 		interpreter.runCycle();
 	}
 }

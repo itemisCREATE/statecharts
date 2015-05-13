@@ -36,9 +36,9 @@ public class TimedTransitionsTest extends AbstractExecutionFlowTest {
 	@Test
 	public void Timer01() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("Start"));
+		assertTrue(isStateActive("Start"));
 		Thread.sleep(2030);
 		interpreter.runCycle();
-		assertTrue(isActive("End"));
+		assertTrue(isStateActive("End"));
 	}
 }

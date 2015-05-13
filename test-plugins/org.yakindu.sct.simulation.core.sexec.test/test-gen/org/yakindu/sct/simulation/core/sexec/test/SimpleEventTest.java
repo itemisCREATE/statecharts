@@ -36,12 +36,12 @@ public class SimpleEventTest extends AbstractExecutionFlowTest {
 	@Test
 	public void simpleEventTest() throws Exception {
 		interpreter.enter();
-		assertTrue("Expected A to be active", isActive("A"));
+		assertTrue("Expected A to be active", isStateActive("A"));
 		assertTrue(5l == 5l);
 		raiseEvent("Event1");
 		interpreter.runCycle();
-		assertTrue("Expected B to be active", isActive("B"));
+		assertTrue("Expected B to be active", isStateActive("B"));
 		interpreter.runCycle();
-		assertTrue(!isActive("B"));
+		assertTrue(!isStateActive("B"));
 	}
 }

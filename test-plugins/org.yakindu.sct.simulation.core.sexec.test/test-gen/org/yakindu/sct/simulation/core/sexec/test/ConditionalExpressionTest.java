@@ -36,11 +36,11 @@ public class ConditionalExpressionTest extends AbstractExecutionFlowTest {
 	@Test
 	public void ConditionalExpressionTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("condition") == 1l);
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 		assertTrue(getInteger("condition") == 2l);
 	}
 }

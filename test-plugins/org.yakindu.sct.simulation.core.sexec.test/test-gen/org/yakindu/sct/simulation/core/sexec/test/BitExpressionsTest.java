@@ -36,12 +36,12 @@ public class BitExpressionsTest extends AbstractExecutionFlowTest {
 	@Test
 	public void BitExpressions() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("StateA"));
+		assertTrue(isStateActive("StateA"));
 		assertTrue(getInteger("myBit1") == 5l);
 		assertTrue(getInteger("myBit2") == 7l);
 		raiseEvent("e1");
 		interpreter.runCycle();
-		assertTrue(isActive("StateB"));
+		assertTrue(isStateActive("StateB"));
 		assertTrue(getInteger("leftBitshift") == 10l);
 		assertTrue(getInteger("rightBitshift") == 2l);
 		assertTrue(getInteger("complementBitshift") == -6l);

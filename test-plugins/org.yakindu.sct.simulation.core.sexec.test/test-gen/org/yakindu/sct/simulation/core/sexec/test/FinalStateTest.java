@@ -21,40 +21,22 @@ import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
 import static org.junit.Assert.assertTrue;
 /**
- *  Unit TestCase for EnterState
+ *  Unit TestCase for FinalState
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class EnterStateTest extends AbstractExecutionFlowTest {
+public class FinalStateTest extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception {
 		ExecutionFlow flow = models
-				.loadExecutionFlowFromResource("EnterState.sct");
+				.loadExecutionFlowFromResource("FinalState.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void defaultEntry() throws Exception {
+	public void StatechartNameTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isStateActive("A"));
-		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isStateActive("E"));
-	}
-	@Test
-	public void namedEntryThroughNamedTransition() throws Exception {
-		interpreter.enter();
-		assertTrue(isStateActive("A"));
-		raiseEvent("f");
-		interpreter.runCycle();
-		assertTrue(isStateActive("F"));
-	}
-	@Test
-	public void namedEntryThroughDefaultTransition() throws Exception {
-		interpreter.enter();
-		assertTrue(isStateActive("A"));
-		raiseEvent("g");
-		interpreter.runCycle();
-		assertTrue(isStateActive("E"));
+		assertTrue(isFinal());
 	}
 }

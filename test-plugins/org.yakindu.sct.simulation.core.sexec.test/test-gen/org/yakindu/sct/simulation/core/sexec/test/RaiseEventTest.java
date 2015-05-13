@@ -36,12 +36,12 @@ public class RaiseEventTest extends AbstractExecutionFlowTest {
 	@Test
 	public void raiseEvent() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("SateA"));
-		assertTrue(isActive("StateA"));
+		assertTrue(isStateActive("SateA"));
+		assertTrue(isStateActive("StateA"));
 		raiseEvent("e2");
 		interpreter.runCycle();
 		interpreter.runCycle();
-		assertTrue(isActive("StateB"));
-		assertTrue(isActive("StateB"));
+		assertTrue(isStateActive("StateB"));
+		assertTrue(isStateActive("StateB"));
 	}
 }

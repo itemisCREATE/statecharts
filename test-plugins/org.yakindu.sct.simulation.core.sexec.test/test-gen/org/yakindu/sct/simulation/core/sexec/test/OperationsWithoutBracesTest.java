@@ -36,16 +36,16 @@ public class OperationsWithoutBracesTest extends AbstractExecutionFlowTest {
 	@Test
 	public void OperationsWithoutBracesTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
+		assertTrue(isStateActive("A"));
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
+		assertTrue(isStateActive("B"));
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("C"));
+		assertTrue(isStateActive("C"));
 		interpreter.runCycle();
-		assertTrue(isActive("D"));
-		assertTrue(isActive("D"));
+		assertTrue(isStateActive("D"));
+		assertTrue(isStateActive("D"));
 	}
 }

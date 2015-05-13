@@ -44,13 +44,13 @@ public class DeepEntryTest extends AbstractExecutionFlowTest {
 		assertTrue(getInteger("z") == 2l);
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("BB"));
+		assertTrue(isStateActive("BB"));
 		raiseEvent("f");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("C"));
 		raiseEvent("f");
 		interpreter.runCycle();
-		assertTrue(isActive("BB"));
+		assertTrue(isStateActive("BB"));
 		assertTrue(getInteger("y") == 1l);
 	}
 }

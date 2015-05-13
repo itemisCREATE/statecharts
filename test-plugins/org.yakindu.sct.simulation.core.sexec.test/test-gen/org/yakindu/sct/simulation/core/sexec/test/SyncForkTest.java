@@ -36,24 +36,24 @@ public class SyncForkTest extends AbstractExecutionFlowTest {
 	@Test
 	public void syncForkTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("f");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
-		assertTrue(isActive("C1"));
-		assertTrue(isActive("D1"));
+		assertTrue(isStateActive("B"));
+		assertTrue(isStateActive("C1"));
+		assertTrue(isStateActive("D1"));
 		raiseEvent("f");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
-		assertTrue(isActive("C2"));
-		assertTrue(isActive("D2"));
+		assertTrue(isStateActive("B"));
+		assertTrue(isStateActive("C2"));
+		assertTrue(isStateActive("D2"));
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("f");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
-		assertTrue(isActive("C1"));
-		assertTrue(isActive("D1"));
+		assertTrue(isStateActive("B"));
+		assertTrue(isStateActive("C1"));
+		assertTrue(isStateActive("D1"));
 	}
 }

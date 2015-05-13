@@ -36,7 +36,7 @@ public class ExitOnSelfTransitionTest extends AbstractExecutionFlowTest {
 	@Test
 	public void ExitOnSelfTransitionTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		assertTrue(getInteger("entryCount") == 1l);
 		assertTrue(getInteger("exitCount") == 0l);
 		raiseEvent("e");

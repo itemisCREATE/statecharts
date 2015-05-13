@@ -38,6 +38,6 @@ public class EntryChoiceTest extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		interpreter.runCycle();
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 	}
 }

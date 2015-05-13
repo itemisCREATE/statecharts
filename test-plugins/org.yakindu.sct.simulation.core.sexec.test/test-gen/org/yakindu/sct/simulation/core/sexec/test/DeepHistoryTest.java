@@ -44,15 +44,15 @@ public class DeepHistoryTest extends AbstractExecutionFlowTest {
 		interpreter.runCycle();
 		raiseEvent("event7");
 		interpreter.runCycle();
-		assertTrue(!isActive("State1"));
-		assertTrue(isActive("State9"));
+		assertTrue(!isStateActive("State1"));
+		assertTrue(isStateActive("State9"));
 		raiseEvent("event2");
 		interpreter.runCycle();
-		assertTrue(isActive("State1"));
-		assertTrue(!isActive("State9"));
+		assertTrue(isStateActive("State1"));
+		assertTrue(!isStateActive("State9"));
 		raiseEvent("event1");
 		interpreter.runCycle();
-		assertTrue(!isActive("State1"));
-		assertTrue(isActive("State9"));
+		assertTrue(!isStateActive("State1"));
+		assertTrue(isStateActive("State9"));
 	}
 }

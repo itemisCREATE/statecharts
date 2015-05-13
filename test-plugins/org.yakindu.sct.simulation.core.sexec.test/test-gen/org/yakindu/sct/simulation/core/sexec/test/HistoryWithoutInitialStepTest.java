@@ -36,42 +36,42 @@ public class HistoryWithoutInitialStepTest extends AbstractExecutionFlowTest {
 	@Test
 	public void enterThroughInitialEntry() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("toB");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("C"));
 		raiseEvent("next");
 		interpreter.runCycle();
-		assertTrue(isActive("D"));
+		assertTrue(isStateActive("D"));
 	}
 	@Test
 	public void enterCThroughHistory() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("toB");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("C"));
 		raiseEvent("toA");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("toHistory");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
+		assertTrue(isStateActive("C"));
 	}
 	@Test
 	public void enterDThroughHistory() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("toB");
 		interpreter.runCycle();
 		raiseEvent("next");
 		interpreter.runCycle();
-		assertTrue(isActive("D"));
+		assertTrue(isStateActive("D"));
 		raiseEvent("toA");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("toHistory");
 		interpreter.runCycle();
-		assertTrue(isActive("D"));
+		assertTrue(isStateActive("D"));
 	}
 }

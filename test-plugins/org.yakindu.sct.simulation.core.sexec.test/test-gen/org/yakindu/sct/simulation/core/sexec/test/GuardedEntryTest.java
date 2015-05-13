@@ -37,42 +37,42 @@ public class GuardedEntryTest extends AbstractExecutionFlowTest {
 	public void EntryNotTakenOnStatechartEnter() throws Exception {
 		assertTrue(getBoolean("guard") == false);
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		assertTrue(getBoolean("done") == false);
 	}
 	@Test
 	public void EntryTakenOnStatechartEnter() throws Exception {
 		setBoolean("guard", true);
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		assertTrue(getBoolean("done") == true);
 	}
 	@Test
 	public void EntryTakenInTransition() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 		setBoolean("guard", true);
 		setBoolean("done", false);
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		assertTrue(getBoolean("done"));
 	}
 	@Test
 	public void EntryNotTakenInTransition() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isStateActive("B"));
 		setBoolean("guard", false);
 		setBoolean("done", false);
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isStateActive("A"));
 		assertTrue(!getBoolean("done"));
 	}
 }

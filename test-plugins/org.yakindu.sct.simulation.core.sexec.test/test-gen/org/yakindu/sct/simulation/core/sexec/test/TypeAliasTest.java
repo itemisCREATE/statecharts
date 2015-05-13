@@ -36,15 +36,15 @@ public class TypeAliasTest extends AbstractExecutionFlowTest {
 	@Test
 	public void TypeAliasTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("Start"));
+		assertTrue(isStateActive("Start"));
 		assertTrue(getInteger("myVar") == 1l);
 		interpreter.runCycle();
-		assertTrue(isActive("Mid"));
+		assertTrue(isStateActive("Mid"));
 		assertTrue(getString("myString").equals("TypeSystem"));
 		interpreter.runCycle();
-		assertTrue(isActive("Mid2"));
+		assertTrue(isStateActive("Mid2"));
 		raiseEvent("myEvent");
 		interpreter.runCycle();
-		assertTrue(isActive("End"));
+		assertTrue(isStateActive("End"));
 	}
 }
