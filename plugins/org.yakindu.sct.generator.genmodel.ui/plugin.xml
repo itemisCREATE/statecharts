@@ -103,6 +103,11 @@
         </page>
     </extension>
     <extension
+       point="org.eclipse.core.runtime.preferences">
+    	<initializer class="org.yakindu.sct.generator.genmodel.ui.preferences.PreferenceInitializer">
+    	</initializer>
+ 	</extension>
+    <extension
             point="org.eclipse.ui.propertyPages">
         <page
             class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
