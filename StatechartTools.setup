@@ -68,6 +68,8 @@
         name="org.eclipse.oomph.setup.feature.group"/>
     <requirement
         name="org.eclipse.xtext.sdk.feature.group"/>
+    <requirement
+        name="org.eclipse.team.svn.feature.group"/>
     <repository
         url="${oomph.update.url}"/>
     <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
