@@ -1,5 +1,6 @@
 package org.yakindu.sct.generator.core;
 
+import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 

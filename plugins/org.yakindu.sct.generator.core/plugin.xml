@@ -143,4 +143,9 @@
          </visibility>
       </objectContribution>
    </extension>
+     <extension
+       point="org.eclipse.core.runtime.preferences">
+    	<initializer class="org.yakindu.sct.generator.core.preferences.GenModelPreferenceInitializer">
+    	</initializer>
+ 	</extension>
 </plugin>
