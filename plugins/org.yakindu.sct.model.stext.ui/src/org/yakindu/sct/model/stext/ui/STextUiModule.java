@@ -2,6 +2,7 @@ package org.yakindu.sct.model.stext.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
@@ -25,6 +26,7 @@ import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
 import org.yakindu.sct.model.stext.ui.highlighting.SCTHighlightingConfiguration;
+import org.yakindu.sct.model.stext.ui.tasks.STextTaskFinder;
 import org.yakindu.sct.model.stext.ui.validation.SCTDiagnosticConverterImpl;
 import org.yakindu.sct.model.stext.ui.validation.SCTResourceValidatorImpl;
 
@@ -36,6 +38,7 @@ import de.itemis.utils.jface.viewers.help.CrossRefObjectTextHover;
 /**
  * Use this class to register components to be used within the IDE.
  */
+@SuppressWarnings("restriction")
 public class STextUiModule extends
 		org.yakindu.sct.model.stext.ui.AbstractSTextUiModule {
 
@@ -121,4 +124,10 @@ public class STextUiModule extends
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return SCTHighlightingConfiguration.class;
 	}
+	
+	public Class<? extends ITaskFinder> bindITaskFinder() {
+		return STextTaskFinder.class;
+	}
+	
+	
 }
