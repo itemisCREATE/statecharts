@@ -151,18 +151,27 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		Type result = getCommonTypeInternal(type1, type2);
 		if (result != null)
 			return result;
+		return null;
+	}
 
+	@Override
+	public boolean haveCommonTypeWithConversion(Type type1, Type type2) {
+		return getCommonTypeWithConversion(type1, type2) != null;
+	}
+
+	public Type getCommonTypeWithConversion(Type type1, Type type2) {
+		Type result = getCommonType(type1, type2);
+		if (result != null)
+			return result;
 		Type conversionType1 = getConversionType(type1);
 		if (conversionType1 != null) {
 			result = getCommonTypeInternal(conversionType1, type2);
 			if (result != null)
 				return result;
 		}
-
 		Type conversionType2 = getConversionType(type2);
 		if (conversionType2 != null)
 			return getCommonTypeInternal(type1, conversionType2);
-
 		return null;
 	}
 

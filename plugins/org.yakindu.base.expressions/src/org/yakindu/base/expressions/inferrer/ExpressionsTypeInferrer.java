@@ -142,10 +142,17 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	public Type infer(NumericalAddSubtractExpression e) {
 		Type type1 = inferTypeDispatch(e.getLeftOperand());
 		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertCompatible(type1, type2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2));
-		assertIsType(type1, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2), getType(INTEGER),
-				getType(REAL));
-		return getCommonType(e.getLeftOperand(), e.getRightOperand());
+		if (registry.isSame(type1, getType(STRING))) {
+			assertCompatibleWithConversion(type1, type2, String.format(CAN_NOT_CONVERT, type2, type1));
+			return getType(STRING);
+		} else {
+			assertCompatible(type1, type2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2));
+			assertIsType(type1, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2), getType(INTEGER),
+					getType(REAL));
+			assertIsType(type2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2), getType(INTEGER),
+					getType(REAL));
+			return getCommonType(e.getLeftOperand(), e.getRightOperand());
+		}
 	}
 
 	public Type infer(NumericalMultiplyDivideExpression e) {
@@ -153,6 +160,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertCompatible(type1, type2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2));
 		assertIsType(type1, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2), getType(INTEGER),
+				getType(REAL));
+		assertIsType(type2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2), getType(INTEGER),
 				getType(REAL));
 		return getCommonType(type1, type2);
 	}
@@ -170,7 +179,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	public Type infer(TypeCastExpression e) {
 		Type type1 = inferTypeDispatch(e.getOperand());
 		Type type2 = inferTypeDispatch(e.getType());
-		assertCompatible(type1, type2, String.format(CAST_OPERATORS, type1, type2));
+		assertAssignable(type1, type2, String.format(CAST_OPERATORS, type1, type2));
 		return inferTypeDispatch(e.getType());
 	}
 
@@ -245,8 +254,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	public Type infer(DoubleLiteral literal) {
 		return getType(REAL);
 	}
-	
-	public Type infer(FloatLiteral literal){
+
+	public Type infer(FloatLiteral literal) {
 		return getType(REAL);
 	}
 

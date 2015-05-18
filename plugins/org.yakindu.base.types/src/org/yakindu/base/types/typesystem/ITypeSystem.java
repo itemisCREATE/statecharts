@@ -42,14 +42,19 @@ public interface ITypeSystem {
 	
 	public boolean isSame(Type type1, Type type2);
 
-	public Type getCommonType(Type type1, Type type2);
-
 	public boolean haveCommonType(Type type1, Type type2);
 
+	public Type getCommonType(Type type1, Type type2);
+
+	public boolean haveCommonTypeWithConversion(Type type1, Type type2);
+
+	public Type getCommonTypeWithConversion(Type type1, Type type2);
+	
 	public Type getSuperType(Type type);
 
 	public boolean isSuperType(Type subtype, Type supertype);
 
 	public void declareType(Type type, String name);
+
 
 }

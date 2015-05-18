@@ -27,6 +27,7 @@ public interface ExpressionsTypeInferrerMessages {
 	public static final String COMMON_TYPE = "Could not determine a common type for %s and %s.";
 	public static final String CONDITIONAL_BOOLEAN = "conditional expression must be of type boolean.";
 	public static final String CAST_OPERATORS = "Cannot cast from %s to %s.";
+	public static final String CAN_NOT_CONVERT = "%s cannot be converted to '%s'.";
 	public static final String INCOMPATIBLE_TYPES = "Incompatible types %s and %s.";
 	public static final String VARIABLE_VOID_TYPE = "'void' is an invalid type for variables";
 

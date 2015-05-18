@@ -43,7 +43,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	private static final String METHOD_NAME = "infer";
 
 	@Inject
-	private ITypeSystem registry;
+	protected ITypeSystem registry;
 
 	private IValidationIssueAcceptor acceptor;
 
@@ -153,7 +153,14 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, type1, type2), NOT_COMPATIBLE_CODE);
 		}
 	}
-
+	protected void assertCompatibleWithConversion(Type type1, Type type2, String msg) {
+		if (type1 == null || type2 == null)
+			return;
+		if (!registry.haveCommonTypeWithConversion(type1, type2)) {
+			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, type1, type2), NOT_COMPATIBLE_CODE);
+		}
+	}
+	
 	protected void assertAssignable(Type varType, Type valueType, String msg) {
 		if (varType == null || valueType == null)
 			return;
