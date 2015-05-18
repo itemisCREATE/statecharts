@@ -100,8 +100,8 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 
 	@Test
 	public void testGetCommonTypeWithConversion() throws Exception {
-		assertTrue(isSame(conversionType, getCommonType(conversionType, simpleType)));
-		assertTrue(isSame(conversionType, getCommonType(conversionType, conversionSubType)));
+		assertTrue(isSame(conversionType, getCommonTypeWithConversion(conversionType, simpleType)));
+		assertTrue(isSame(conversionType, getCommonTypeWithConversion(conversionType, conversionSubType)));
 	}
 
 }
