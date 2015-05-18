@@ -11,32 +11,33 @@
 package org.yakindu.sct.generator.genmodel.ui.preferences;
 
 import org.eclipse.gmf.runtime.common.ui.preferences.CheckBoxFieldEditor;
+import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage;
+import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.yakindu.sct.generator.core.GeneratorActivator;
 
-public class GeneratorRootPreferencePage extends LanguageRootPreferencePage {
+public class GeneratorRootPreferencePage extends FieldEditorPreferencePage
+		implements IWorkbenchPreferencePage {
 
 	public GeneratorRootPreferencePage() {
-
-		setPreferenceStore(doGetPreferenceStore());
 		setDescription("Change the behavior of the Generator model");
 	}
 
 	@Override
 	protected void createFieldEditors() {
-		addField(new CheckBoxFieldEditor(GeneratorActivator.PREF_GENERATE_AUTOMATICALLY, "Execute SGen Files automatically: ",
-				getFieldEditorParent()));
-	}
-
-	public void init(IWorkbench workbench) {
-		new PreferenceInitializer().initializeDefaultPreferences();
+		addField(new CheckBoxFieldEditor(
+				GeneratorActivator.PREF_GENERATE_AUTOMATICALLY,
+				"Execute SGen Files automatically: ", getFieldEditorParent()));
 	}
 
 	@Override
-	protected IPreferenceStore doGetPreferenceStore() {
+	public IPreferenceStore getPreferenceStore() {
 		return GeneratorActivator.getDefault().getPreferenceStore();
 	}
 
+	@Override
+	public void init(IWorkbench workbench) {
+		new GenModelPreferenceInitializer().initializeDefaultPreferences();
+	}
 }

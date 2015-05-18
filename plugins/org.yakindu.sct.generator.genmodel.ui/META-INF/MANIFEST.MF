@@ -4,7 +4,6 @@ Bundle-Name: Yakindu Statechart Tools (SCT) Generator Model UI
 Bundle-Vendor: statecharts.org
 Bundle-Version: 2.4.1.qualifier
 Bundle-SymbolicName: org.yakindu.sct.generator.genmodel.ui; singleton:=true
-Bundle-ActivationPolicy: lazy
 Require-Bundle: org.yakindu.sct.generator.genmodel;visibility:=reexport,
  org.eclipse.xtext.ui,
  org.eclipse.ui.editors;bundle-version="3.5.0",
@@ -40,3 +39,4 @@ Export-Package: org.yakindu.sct.generator.genmodel.ui,
  org.yakindu.sct.generator.genmodel.ui.quickfix,
  org.yakindu.sct.generator.genmodel.ui.wizard
 Bundle-Activator: org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator
+Bundle-ActivationPolicy: lazy

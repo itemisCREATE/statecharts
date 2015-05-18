@@ -14,14 +14,17 @@ import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.yakindu.sct.generator.core.GeneratorActivator;
 
-public class PreferenceInitializer extends AbstractPreferenceInitializer {
+public class GenModelPreferenceInitializer extends
+		AbstractPreferenceInitializer {
 
 	@Override
 	public void initializeDefaultPreferences() {
-		getPreferenceStore().setDefault(GeneratorActivator.PREF_GENERATE_AUTOMATICALLY, true);
+		getPreferenceStore().setDefault(
+				GeneratorActivator.PREF_GENERATE_AUTOMATICALLY, true);
 	}
 
 	protected IPreferenceStore getPreferenceStore() {
 		return GeneratorActivator.getDefault().getPreferenceStore();
 	}
+
 }
