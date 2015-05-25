@@ -37,16 +37,18 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.render.util.DiagramRenderUtil;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.eclipse.gmf.runtime.notation.ConnectorStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
+import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
-import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 import org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants;
@@ -73,7 +75,11 @@ public class SimulationImageRenderer {
 	public Image renderImage(Diagram diagram, ExecutionContext context) {
 		highlightActiveStates(context, diagram);
 		return renderImage(diagram);
+	}
 
+	public Image renderImage(Diagram diagram, List<? extends EObject> objects) {
+		highlightElements(objects, diagram);
+		return renderImage(diagram);
 	}
 
 	protected Image renderImage(Diagram diagram) {
@@ -82,6 +88,10 @@ public class SimulationImageRenderer {
 	}
 
 	public void highlightActiveStates(final ExecutionContext context, final Diagram diagram) {
+		highlightElements(context.getActiveStates(), diagram);
+	}
+
+	public void highlightElements(final List<? extends EObject> objects, final Diagram diagram) {
 		AbstractTransactionalCommand cmd = new AbstractTransactionalCommand(TransactionUtil.getEditingDomain(diagram),
 				"", null) {
 
@@ -89,31 +99,53 @@ public class SimulationImageRenderer {
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				// Init colors from preferences
-				RGB rgbforeGround = PreferenceConverter.getColor(SimulationActivator.getDefault().getPreferenceStore(),
+				RGB rgbForeGround = PreferenceConverter.getColor(SimulationActivator.getDefault().getPreferenceStore(),
 						SimulationPreferenceConstants.STATE_FOREGROUND_HIGHLIGHTING_COLOR);
 				RGB rgbBackGround = PreferenceConverter.getColor(SimulationActivator.getDefault().getPreferenceStore(),
 						SimulationPreferenceConstants.STATE_BACKGROUND_HIGHLIGHTING_COLOR);
-				Color color = new Color(Display.getDefault(), rgbforeGround);
+				RGB rgbTransitionActive = PreferenceConverter.getColor(SimulationActivator.getDefault()
+						.getPreferenceStore(), SimulationPreferenceConstants.TRANSITION_HIGHLIGHTING_COLOR);
+
+				Color color = new Color(Display.getDefault(), rgbForeGround);
 				Integer foreGround = FigureUtilities.colorToInteger(color);
 				color.dispose();
 				color = new Color(Display.getDefault(), rgbBackGround);
 				Integer background = FigureUtilities.colorToInteger(color);
 				color.dispose();
-				
+
+				color = new Color(Display.getDefault(), rgbTransitionActive);
+				Integer transitionActive = FigureUtilities.colorToInteger(color);
+				color.dispose();
+
 				// Set styling
 				TreeIterator<EObject> eAllContents = diagram.eAllContents();
 				while (eAllContents.hasNext()) {
 					EObject next = eAllContents.next();
-					if (next instanceof Node) {
-						List<RegularState> activeStates = context.getActiveStates();
-						for (RegularState regularState : activeStates) {
-							EObject element = ((Node) next).getElement();
-							if (EcoreUtil.getURI(regularState).equals(EcoreUtil.getURI(element))) {
-								ShapeStyle style = (ShapeStyle) ((Node) next)
-										.getStyle(NotationPackage.Literals.SHAPE_STYLE);
-								if (style != null) {
-									style.setFillColor(background);
-									style.setLineColor(foreGround);
+					if (next instanceof View) {
+						for (EObject elementToHighlight : objects) {
+							EObject element = null;
+							if (next instanceof Node) {
+								element = ((Node) next).getElement();
+							} else if (next instanceof Edge) {
+								element = ((Edge) next).getElement();
+							}
+
+							if (EcoreUtil.getURI(elementToHighlight).equals(EcoreUtil.getURI(element))) {
+								if (next instanceof Node) {
+									ShapeStyle style = (ShapeStyle) ((Node) next)
+											.getStyle(NotationPackage.Literals.SHAPE_STYLE);
+									if (style != null) {
+										style.setFillColor(background);
+										style.setLineColor(foreGround);
+									}
+
+								} else if (next instanceof Edge) {
+									ConnectorStyle style = (ConnectorStyle) ((View) next)
+											.getStyle(NotationPackage.Literals.CONNECTOR_STYLE);
+									if (style != null) {
+										style.setLineColor(transitionActive);
+									}
+
 								}
 							}
 						}
