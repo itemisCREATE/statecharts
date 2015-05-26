@@ -33,15 +33,15 @@ We appreciate any feedback and there are various ways to contribute feedback:
 2. Install the current Xtext release -> Help / Install new Software / select 'Luna - http://download.eclipse.org/releases/luna'
 2.1 Select Modeling / Xtext Complete SDK
 3. Select the Git perspective and clone the following Git Repositories:
-3.1 https://github.com/Yakindu/statecharts.git
-3.2 https://github.com/Yakindu/base.git
-3.3 On both repositories, select 'Import projects' on the 'working directory' subfolder
+https://github.com/Yakindu/statecharts.git
+https://github.com/Yakindu/base.git
+On both repositories, select 'Import projects' on the 'working directory' subfolder
 4. Set the target platform to org.yakindu.base.target/luna.target
-4.1 Open the target file and click on the link for setting the target platform (takes some minutes the first time)
+Open the target file and click on the link for setting the target platform (takes some minutes the first time)
 5. Build relevant Xtext grammars
-5.1. Rightclick on org.yakindu.base.expressions/Expressions.xtext => Run As.. => Generate Xtext Artifacts
-5.2 Rightclick on org.yakindu.sct.stext/SText.xtext => Run As.. => Generate Xtext Artifacts
-5.3 Rightclick org.yakindu.sct.generator.genmodel/SGen.xtext => Run As.. => Generate Xtext Artifacts
+Rightclick on org.yakindu.base.expressions/Expressions.xtext => Run As.. => Generate Xtext Artifacts
+Rightclick on org.yakindu.sct.stext/SText.xtext => Run As.. => Generate Xtext Artifacts
+Rightclick org.yakindu.sct.generator.genmodel/SGen.xtext => Run As.. => Generate Xtext Artifacts
 
 After these steps all projects should compile without errors. To launch a runtime instance which has these projects as installed plugins, just right-click on a project => Run As => Eclipse Application
 
