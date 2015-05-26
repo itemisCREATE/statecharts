@@ -10,19 +10,19 @@
  */
 package org.yakindu.sct.model.sexec.naming
 
+import com.google.inject.Inject
 import java.io.UnsupportedEncodingException
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.Formatter
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.base.NamedElement
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
+import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sgraph.Statechart
-import java.util.List
-import org.yakindu.sct.model.sexec.ExecutionScope
-import com.google.inject.Inject
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 
 /**
@@ -62,7 +62,12 @@ class NamingHelper {
 	}
 	
 	def dispatch String fqElementName(NamedElement it, char separator) {
-		provider.getFullyQualifiedName(it).skipFirst(1).toString(separator.toString)
+		val qualifiedName = provider.getFullyQualifiedName(it)
+		
+		if (qualifiedName!=null) {
+			return qualifiedName.skipFirst(1).toString(separator.toString)
+		}
+		return class.simpleName
 	}
 	
 	def containsName(List<String> it, String shortName) {
