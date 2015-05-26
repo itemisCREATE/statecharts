@@ -28,7 +28,7 @@ We appreciate any feedback and there are various ways to contribute feedback:
 10. After building the workspace, you will see a lot of errors in it. That's because the language artifacts haven't been generated yet. Oomph made a contribution to the toolbar. Press on the double arrow symbol and only select the three Launches (the other tasks already have been executed) to generate the languages (Expressions, SText, SGen)
 11. Click *Proceed* three times to execute the launches although the errors.
 
-How to setup your developer workspace without Oomph
+## How to setup your developer workspace without Oomph
 1. Download Eclipse Luna from https://www.eclipse.org/downloads/
 2. Install the current Xtext release -> Help / Install new Software / select 'Luna - http://download.eclipse.org/releases/luna'
 2.1 Select Modeling / Xtext Complete SDK
