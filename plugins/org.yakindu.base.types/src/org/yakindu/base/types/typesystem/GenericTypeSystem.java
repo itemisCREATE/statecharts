@@ -31,8 +31,5 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 
 		declareSuperType(getType(INTEGER), getType(REAL));
 		
-		declareConversion(getType(INTEGER), getType(STRING));
-		declareConversion(getType(REAL), getType(STRING));
-		declareConversion(getType(BOOLEAN), getType(STRING));
 	}
 }
