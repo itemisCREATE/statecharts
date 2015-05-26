@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2013 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.generator.genmodel.ui.highlighting;
 
 import java.util.List;
@@ -16,11 +26,14 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.SGenPackage;
 import org.yakindu.sct.model.sgen.impl.FeatureConfigurationImpl;
 
-public class SGenSemanticHighlightingCalculator implements
-		ISemanticHighlightingCalculator {
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
+public class SGenSemanticHighlightingCalculator implements ISemanticHighlightingCalculator {
 
-	public void provideHighlightingFor(XtextResource resource,
-			IHighlightedPositionAcceptor acceptor) {
+	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		if (resource == null || resource.getParseResult() == null)
 			return;
 		TreeIterator<EObject> allContents = resource.getAllContents();
@@ -31,28 +44,22 @@ public class SGenSemanticHighlightingCalculator implements
 
 				List<INode> nodes = NodeModelUtils.findNodesForFeature(entry,
 						SGenPackage.Literals.GENERATOR_ENTRY__CONTENT_TYPE);
-				List<INode> features = NodeModelUtils.findNodesForFeature(
-						entry, SGenPackage.Literals.GENERATOR_ENTRY__FEATURES);
+				List<INode> features = NodeModelUtils.findNodesForFeature(entry,
+						SGenPackage.Literals.GENERATOR_ENTRY__FEATURES);
 				for (INode node : nodes) {
-					if (node instanceof LeafNode
-							&& !((LeafNode) node).isHidden()) {
-						acceptor.addPosition(node.getTotalOffset(),
-								node.getTotalLength(),
+					if (node instanceof LeafNode && !((LeafNode) node).isHidden()) {
+						acceptor.addPosition(node.getTotalOffset(), node.getTotalLength(),
 								DefaultHighlightingConfiguration.KEYWORD_ID);
 					}
 				}
 				for (INode node : features) {
 					if (node.getSemanticElement() instanceof FeatureConfigurationImpl) {
-						FeatureConfigurationImpl feature = (FeatureConfigurationImpl) node
-								.getSemanticElement();
+						FeatureConfigurationImpl feature = (FeatureConfigurationImpl) node.getSemanticElement();
 						if (feature.getType() instanceof DeprecatableElement) {
 
-							DeprecatableElement deprecatableElement = feature
-									.getType();
+							DeprecatableElement deprecatableElement = feature.getType();
 							if (deprecatableElement.isDeprecated()) {
-								acceptor.addPosition(
-										node.getTotalOffset(),
-										node.getTotalLength(),
+								acceptor.addPosition(node.getTotalOffset(), node.getTotalLength(),
 										SGenHighlightingConfiguration.DEPRECATION);
 							}
 						}

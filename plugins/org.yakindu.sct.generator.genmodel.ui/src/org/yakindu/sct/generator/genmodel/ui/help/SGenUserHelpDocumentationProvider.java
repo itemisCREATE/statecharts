@@ -23,13 +23,11 @@ import de.itemis.utils.jface.viewers.help.AbstractUserHelpDocumentationProvider;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SGenUserHelpDocumentationProvider extends
-		AbstractUserHelpDocumentationProvider implements
+public class SGenUserHelpDocumentationProvider extends AbstractUserHelpDocumentationProvider implements
 		IEObjectDocumentationProvider {
 
 	private static final String PLUGIN_ID = "org.yakindu.sct.ui.editor";
 	private static final String CONTEXT_ID = "sgen_feature";
-
 
 	public String getDocumentation(EObject o) {
 		if (o instanceof FeatureConfiguration) {
