@@ -23,7 +23,7 @@
       <page
             class="org.yakindu.sct.ui.preferences.YakinduRootPreferencePage"
             id="org.yakindu.sct.ui.preferences.root"
-            name="YAKINDU SCT2">
+            name="YAKINDU SCT">
       </page>
    </extension>
    <extension
