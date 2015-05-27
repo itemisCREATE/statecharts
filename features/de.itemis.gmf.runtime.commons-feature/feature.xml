@@ -17,20 +17,6 @@
       %license
    </license>
 
-   <requires>
-      <import plugin="org.eclipse.gmf.runtime.diagram.ui.properties" version="1.4.2" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.gmf.runtime.diagram.ui.resources.editor" version="1.4.1" match="greaterOrEqual"/>
-      <import plugin="de.itemis.xtext.utils.jface" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.google.inject" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.help" version="3.5.100" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.databinding" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.jface.databinding" version="1.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.databinding.property" version="1.4.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.databinding.edit" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.gmf.runtime.diagram.ui.render" version="1.4.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.gmf.runtime.diagram.ui.providers" version="1.5.0" match="greaterOrEqual"/>
-   </requires>
-
    <plugin
          id="de.itemis.gmf.runtime.commons"
          download-size="0"
