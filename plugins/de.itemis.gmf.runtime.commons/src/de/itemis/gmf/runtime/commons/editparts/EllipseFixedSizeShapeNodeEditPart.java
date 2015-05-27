@@ -21,8 +21,7 @@ import de.itemis.gmf.runtime.commons.figures.EllipseAnchorDefaultSizeNodeFigure;
  * @author andreas muelder (andreas.muelder@itemis.de)
  * 
  */
-public abstract class EllipseFixedSizeShapeNodeEditPart extends
-		FixedSizeShapeNodeEditPart {
+public abstract class EllipseFixedSizeShapeNodeEditPart extends FixedSizeShapeNodeEditPart {
 
 	public EllipseFixedSizeShapeNodeEditPart(View view) {
 		super(view);
@@ -30,10 +29,9 @@ public abstract class EllipseFixedSizeShapeNodeEditPart extends
 
 	@Override
 	protected NodeFigure createNodeFigure() {
-		final NodeFigure figure = new EllipseAnchorDefaultSizeNodeFigure(
-				getDefaultSize());
+		final NodeFigure figure = new EllipseAnchorDefaultSizeNodeFigure(getDefaultSize());
 		figure.setLayoutManager(getLayoutManager());
-		figure.add(getPrimaryShape());
+		figure.add(createPrimaryShape());
 		return figure;
 	}
 }

@@ -36,13 +36,13 @@ public abstract class FixedSizeShapeNodeEditPart extends ShapeNodeEditPart {
 
 	public abstract Dimension getDefaultSize();
 
-	public abstract IFigure getPrimaryShape();
+	public abstract IFigure createPrimaryShape();
 
 	@Override
 	protected NodeFigure createNodeFigure() {
 		final NodeFigure figure = new DefaultSizeNodeFigure(getDefaultSize());
 		figure.setLayoutManager(getLayoutManager());
-		figure.add(getPrimaryShape());
+		figure.add(createPrimaryShape());
 		return figure;
 	}
 
