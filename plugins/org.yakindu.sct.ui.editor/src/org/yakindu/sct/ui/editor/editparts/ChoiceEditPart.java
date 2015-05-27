@@ -12,6 +12,7 @@ package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.ChoiceFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
@@ -37,12 +38,20 @@ public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {
 	}
 
 	@Override
+	protected NodeFigure createNodeFigure() {
+		NodeFigure figure = super.createNodeFigure();
+		figure.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);
+		figure.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
+		return figure;
+	}
+
+	@Override
 	public Dimension getDefaultSize() {
 		return MapModeUtils.getMappedDimensions(getMapMode(), MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
 	}
 
 	@Override
-	public IFigure getPrimaryShape() {
+	public IFigure createPrimaryShape() {
 		return new ChoiceFigure();
 	}
 

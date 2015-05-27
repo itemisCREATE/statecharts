@@ -11,7 +11,6 @@
 package org.yakindu.sct.ui.editor.editor.figures;
 
 import org.eclipse.draw2d.BorderLayout;
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -27,8 +26,7 @@ public class InitialStateFigure extends Ellipse {
 		this.setOutline(false);
 		this.setLineWidth(0);
 		this.setSize(new Dimension(2, 2));
-		this.setBackgroundColor(ColorConstants.black);
-		this.setForegroundColor(ColorConstants.black);
 		this.setBorder(new MarginBorder(2, 2, 2, 2));
 	}
+	
 }

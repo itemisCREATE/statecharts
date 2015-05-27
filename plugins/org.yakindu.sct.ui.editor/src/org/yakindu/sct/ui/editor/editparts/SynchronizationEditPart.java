@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
@@ -47,6 +48,8 @@ public class SynchronizationEditPart extends ShapeNodeEditPart {
 				getMapMode().DPtoLP(DEFAULT_HEIGHT));
 		nodeFigure.setLayoutManager(new StackLayout());
 		nodeFigure.add(new SynchronizationFigure(getMapMode()));
+		nodeFigure.setForegroundColor(ColorConstants.black);
+		nodeFigure.setBackgroundColor(ColorConstants.black);
 		return nodeFigure;
 	}
 

@@ -22,19 +22,17 @@ public class DeepHistoryFigure extends Ellipse {
 
 	public DeepHistoryFigure() {
 		this.setSize(new Dimension(10, 10));
-		this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
-		this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.black);
 	}
 
 	@Override
 	protected void outlineShape(Graphics graphics) {
-		super.outlineShape(graphics);
-
-		// draw the 'H' letter
-		
 		graphics.pushState();
-		graphics.setForegroundColor(org.eclipse.draw2d.ColorConstants.white);
-
+		//Outline with foreground
+		graphics.setForegroundColor(getBackgroundColor());
+		super.outlineShape(graphics);
+		// draw the 'H' letter
+		graphics.setForegroundColor(getForegroundColor());
+		graphics.setBackgroundColor(getBackgroundColor());
 		graphics.drawLine(
 				bounds.getCenter().getTranslated((int) (-bounds.width * WIDTH_RATIO), (int) (-bounds.height * HEIGHT_RATIO)), bounds
 						.getCenter().getTranslated((int) (-bounds.width * WIDTH_RATIO), (int) (bounds.height * HEIGHT_RATIO)));

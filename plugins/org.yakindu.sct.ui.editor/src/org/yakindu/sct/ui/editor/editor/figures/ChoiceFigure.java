@@ -20,8 +20,6 @@ public class ChoiceFigure extends Shape {
 
 	public ChoiceFigure() {
 		this.setSize(new Dimension(15, 15));
-		this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);
-		this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
 		setLineWidth(2);
 	}
 
@@ -30,13 +28,16 @@ public class ChoiceFigure extends Shape {
 	 */
 	@Override
 	protected void fillShape(Graphics graphics) {
+		graphics.pushState();
+		graphics.setForegroundColor(getForegroundColor());
+		graphics.setBackgroundColor(getBackgroundColor());
 		PointList pl = new PointList();
 		pl.addPoint(getBounds().getTop());
 		pl.addPoint(getBounds().getRight());
 		pl.addPoint(getBounds().getBottom());
 		pl.addPoint(getBounds().getLeft());
-
 		graphics.fillPolygon(pl);
+		graphics.popState();
 	}
 
 	/**
@@ -44,6 +45,9 @@ public class ChoiceFigure extends Shape {
 	 */
 	@Override
 	protected void outlineShape(Graphics graphics) {
+		graphics.pushState();
+		graphics.setForegroundColor(getForegroundColor());
+		graphics.setBackgroundColor(getBackgroundColor());
 		Rectangle f = Rectangle.SINGLETON;
 		Rectangle r = getBounds();
 		f.x = r.x + getLineWidth() / 2;
@@ -58,6 +62,7 @@ public class ChoiceFigure extends Shape {
 		pl.addPoint(f.getLeft());
 
 		graphics.drawPolygon(pl);
+		graphics.popState();
 	}
 
 }

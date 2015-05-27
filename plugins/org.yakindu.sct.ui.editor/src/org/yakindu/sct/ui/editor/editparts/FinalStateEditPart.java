@@ -47,7 +47,7 @@ public class FinalStateEditPart extends EllipseFixedSizeShapeNodeEditPart {
 	}
 
 	@Override
-	public Ellipse getPrimaryShape() {
+	public Ellipse createPrimaryShape() {
 		return new FinalStateFigure(getMapMode());
 	}
 

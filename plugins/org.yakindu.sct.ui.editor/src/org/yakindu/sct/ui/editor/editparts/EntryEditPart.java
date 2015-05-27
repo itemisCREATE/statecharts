@@ -10,24 +10,33 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirection;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
+import org.eclipse.gmf.runtime.notation.NamedStyle;
 import org.eclipse.gmf.runtime.notation.Node;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.graphics.Color;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.editor.figures.DeepHistoryFigure;
 import org.yakindu.sct.ui.editor.editor.figures.InitialStateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.ShallowHistoryFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.ui.editor.factories.EntryViewFactory;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
+import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
+import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
@@ -60,7 +69,7 @@ public class EntryEditPart extends BorderedShapeEditPart {
 		return (Entry) super.resolveSemanticElement();
 	}
 
-	protected Ellipse getPrimaryShape() {
+	protected Ellipse createPrimaryShape() {
 		switch (resolveSemanticElement().getKind()) {
 		case DEEP_HISTORY:
 			return new DeepHistoryFigure();
@@ -78,7 +87,7 @@ public class EntryEditPart extends BorderedShapeEditPart {
 		if (SGraphPackage.eINSTANCE.getEntry_Kind().equals(notification.getFeature())) {
 			// TODO: We have to remove the old figure, this does not work
 			// currently because the connections get broken then.
-			getMainFigure().add(getPrimaryShape());
+			getMainFigure().add(createPrimaryShape());
 		}
 		super.handleNotificationEvent(notification);
 	}
@@ -92,8 +101,36 @@ public class EntryEditPart extends BorderedShapeEditPart {
 	protected NodeFigure createMainFigure() {
 		final NodeFigure figure = new EllipseAnchorDefaultSizeNodeFigure(MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
 		figure.setLayoutManager(new StackLayout());
-		figure.add(getPrimaryShape());
+		figure.add(createPrimaryShape());
+		figure.setBackgroundColor(ColorConstants.black);
+		figure.setForegroundColor(ColorConstants.white);
 		return figure;
+	}
+
+	@Override
+	protected void setBackgroundColor(Color c) {
+		if (null != GMFNotationUtil.getNamedStyle(getNotationView(), NamedStyle.class, EntryViewFactory.ALLOW_COLORS)) {
+			getMainFigure().setBackgroundColor(c);
+		}
+		super.setBackgroundColor(c);
+	}
+
+	@Override
+	protected void setForegroundColor(Color color) {
+		if (null != GMFNotationUtil.getNamedStyle(getNotationView(), NamedStyle.class, EntryViewFactory.ALLOW_COLORS)) {
+			getMainFigure().setForegroundColor(color);
+		}
+		super.setForegroundColor(color);
+	}
+
+	@Override
+	public Object getPreferredValue(EStructuralFeature feature) {
+		if (feature == NotationPackage.eINSTANCE.getLineStyle_LineColor()) {
+			return FigureUtilities.RGBToInteger(ColorConstants.white.getRGB());
+		} else if (feature == NotationPackage.eINSTANCE.getFillStyle_FillColor()) {
+			return FigureUtilities.RGBToInteger(ColorConstants.black.getRGB());
+		}
+		return super.getPreferredValue(feature);
 	}
 
 }

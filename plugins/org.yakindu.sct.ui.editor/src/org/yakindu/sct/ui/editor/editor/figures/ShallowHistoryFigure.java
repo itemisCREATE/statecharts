@@ -21,19 +21,18 @@ public class ShallowHistoryFigure extends Ellipse {
 
 	public ShallowHistoryFigure() {
 		this.setSize(new Dimension(10, 10));
-		this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
-		this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.black);
 	}
-
 	/**
 	 * @see org.eclipse.draw2d.Ellipse#outlineShape(org.eclipse.draw2d.Graphics)
 	 */
 	@Override
 	protected void outlineShape(Graphics graphics) {
+		graphics.pushState();
+		graphics.setForegroundColor(getBackgroundColor());
 		super.outlineShape(graphics);
 		// draw the 'H' letter
-		graphics.pushState();
-		graphics.setForegroundColor(org.eclipse.draw2d.ColorConstants.white);
+		graphics.setForegroundColor(getForegroundColor());
+		graphics.setBackgroundColor(getBackgroundColor());
 		graphics.drawLine(
 				bounds.getCenter().getTranslated((int) (-bounds.width * WIDTH_RATIO), (int) (-bounds.height * HEIGHT_RATIO)), bounds
 						.getCenter().getTranslated((int) (-bounds.width * WIDTH_RATIO), (int) (bounds.height * HEIGHT_RATIO)));

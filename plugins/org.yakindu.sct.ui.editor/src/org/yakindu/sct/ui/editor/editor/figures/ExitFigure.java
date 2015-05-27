@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.editor.figures;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
@@ -29,23 +28,23 @@ public class ExitFigure extends Ellipse {
 	private IMapMode mapMode;
 
 	public ExitFigure(IMapMode mapMode) {
-
 		this.mapMode = mapMode;
 		this.setLineWidth(2);
-		this.setForegroundColor(ColorConstants.black);
-		this.setBackgroundColor(ColorConstants.white);
 	}
 
 	@Override
 	public void paint(Graphics graphics) {
+		graphics.pushState();
+		graphics.setForegroundColor(getForegroundColor());
+		graphics.setBackgroundColor(getBackgroundColor());
 		super.paint(graphics);
 		Path path = new Path(Display.getDefault());
-		path.addArc(getBounds().x, getBounds().y, getBounds().width - 1,
-				getBounds().height - 1, 0, 360);
+		path.addArc(getBounds().x, getBounds().y, getBounds().width - 1, getBounds().height - 1, 0, 360);
 		graphics.setClip(path);
 		graphics.setLineWidth(2);
 		graphics.drawLine(bounds.getTopLeft(), bounds.getBottomRight());
 		graphics.drawLine(bounds.getTopRight(), bounds.getBottomLeft());
 		path.dispose();
+		graphics.popState();
 	}
 }
