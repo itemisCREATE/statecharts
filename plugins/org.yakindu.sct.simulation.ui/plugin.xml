@@ -16,7 +16,11 @@
 <!-- Session Listener -->
  <extension
        point="org.eclipse.ui.views">
+    <category 
+           id="org.yakindu.sct.category"
+           name="YAKINDU SCT"/>
     <view
+    	  category="org.yakindu.sct.category"
           allowMultiple="false"
           class="org.yakindu.sct.simulation.ui.view.SimulationView"
           icon="icons/Declarations-View-16.gif"
