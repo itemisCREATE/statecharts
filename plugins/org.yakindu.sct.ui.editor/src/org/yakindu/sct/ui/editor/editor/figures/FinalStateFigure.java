@@ -39,7 +39,7 @@ public class FinalStateFigure extends Ellipse {
 		Ellipse whiteCircle = new Ellipse();
 		whiteCircle.setOutline(false);
 		whiteCircle.setLineWidth(1);
-		whiteCircle.setBackgroundColor(getBackgroundColor());
+		whiteCircle.setBackgroundColor(ColorConstants.white);
 		size = mapMode.DPtoLP(3);
 		whiteCircle.setBorder(new MarginBorder(size, size, size, size));
 		BorderLayout layout = new BorderLayout();
@@ -49,7 +49,7 @@ public class FinalStateFigure extends Ellipse {
 		Ellipse blackCircle = new Ellipse();
 		blackCircle.setOutline(false);
 		blackCircle.setLineWidth(mapMode.DPtoLP(1));
-		blackCircle.setBackgroundColor(getBackgroundColor());
+		blackCircle.setBackgroundColor(ColorConstants.black);
 		data = BorderLayout.CENTER;
 		whiteCircle.add(blackCircle, data);
 	}
