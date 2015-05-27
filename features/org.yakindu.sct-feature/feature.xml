@@ -23,55 +23,7 @@
    </url>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="de.itemis.xtext.utils.gmf"/>
-      <import plugin="org.eclipse.xtext.ui"/>
-      <import plugin="org.apache.log4j"/>
-      <import plugin="org.antlr.runtime"/>
-      <import plugin="org.eclipse.emf.common"/>
-      <import plugin="org.eclipse.xtext"/>
-      <import plugin="org.eclipse.xtext.util"/>
-      <import plugin="org.eclipse.xtext.common.types"/>
-      <import plugin="org.apache.commons.logging"/>
-      <import plugin="org.eclipse.xtext.builder"/>
-      <import plugin="org.eclipse.xtext.xbase.lib"/>
-      <import plugin="org.eclipse.ui.editors"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.xtext.ui.shared"/>
-      <import plugin="org.eclipse.xtext.common.types.ui"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.jface"/>
-      <import plugin="org.eclipse.ui.views"/>
-      <import plugin="org.eclipse.ui.navigator"/>
-      <import plugin="org.eclipse.ui.navigator.resources"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
-      <import plugin="org.eclipse.draw2d"/>
-      <import plugin="com.google.inject"/>
-      <import plugin="de.itemis.xtext.utils.jface" version="2.0.0" match="compatible"/>
-      <import plugin="de.itemis.gmf.runtime.commons" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.help" version="3.5.100" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.debug.ui"/>
-      <import plugin="org.eclipse.core.expressions"/>
-      <import plugin="org.eclipse.debug.core"/>
-      <import plugin="org.eclipse.jdt.debug"/>
-      <import plugin="org.eclipse.jdt.launching"/>
-      <import plugin="org.eclipse.jdt.debug.ui"/>
-      <import plugin="org.eclipse.xpand"/>
-      <import plugin="org.eclipse.xtend"/>
-      <import plugin="org.eclipse.emf"/>
-      <import plugin="org.eclipse.xtend.typesystem.emf"/>
-      <import plugin="org.eclipse.jdt.core"/>
-      <import plugin="com.ibm.icu"/>
-      <import plugin="org.eclipse.emf.mwe.utils"/>
-      <import plugin="org.eclipse.jface.text"/>
       <import feature="org.yakindu.base" version="2.4.1.qualifier"/>
-      <import plugin="com.google.guava"/>
-      <import feature="org.eclipse.gmf" version="1.6.2" match="greaterOrEqual"/>
-      <import feature="org.eclipse.gmf.runtime.notation" version="1.6.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
