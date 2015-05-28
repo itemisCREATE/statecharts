@@ -3,7 +3,7 @@
 <plugin>
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.yakindu.sct.ui.Examples" 
-				  name="YAKINDU Examples" 
+				  name="YAKINDU SCT Examples" 
 				  parentCategory="org.eclipse.ui.Examples" />
 	</extension>
 
