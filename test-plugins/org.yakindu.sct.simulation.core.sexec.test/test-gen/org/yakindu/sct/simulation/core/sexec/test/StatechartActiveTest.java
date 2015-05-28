@@ -35,24 +35,24 @@ public class StatechartActiveTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void inactiveBeforeEnter() throws Exception {
-		assertTrue(!isActive());
+		assertTrue(!interpreter.isActive());
 	}
 	@Test
 	public void activeAfterEnter() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive());
+		assertTrue(interpreter.isActive());
 	}
 	@Test
 	public void inactiveAfterExit() throws Exception {
 		interpreter.enter();
 		interpreter.exit();
-		assertTrue(!isActive());
+		assertTrue(!interpreter.isActive());
 	}
 	@Test
 	public void activeAfterReenter() throws Exception {
 		interpreter.enter();
 		interpreter.exit();
 		interpreter.enter();
-		assertTrue(isActive());
+		assertTrue(interpreter.isActive());
 	}
 }

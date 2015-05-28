@@ -17,9 +17,6 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
-import org.yakindu.sct.model.sexec.ExecutionState;
-import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions;
-import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
@@ -43,8 +40,6 @@ public abstract class AbstractExecutionFlowTest {
 	protected ExecutionContext context;
 	@Inject
 	protected IExecutionContextInitializer initializer;
-	@Inject
-	protected StateVectorExtensions stateVectorExtensions;
 
 	protected ExecutionFlow flow;
 
@@ -132,31 +127,5 @@ public abstract class AbstractExecutionFlowTest {
 
 	protected boolean isRaised(String eventName) {
 		return context().getEvent(eventName).isRaised();
-	}
-
-	protected boolean isActive() {
-		List<RegularState> activeStates = context.getAllActiveStates();
-		for (RegularState regularState : activeStates) {
-			if (!(regularState instanceof FinalState)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	protected boolean isFinal() {
-		List<ExecutionState>[] list = stateVectorExtensions.finalStateImpactVector(flow);
-		boolean isCompletlyCovered = stateVectorExtensions.isCompletelyCovered(list);
-		if (!isCompletlyCovered) {
-			return false;
-		} else {
-			List<RegularState> activeStates = context.getAllActiveStates();
-			for (RegularState regularState : activeStates) {
-				if (!(regularState instanceof FinalState)) {
-					return false;
-				}
-			}
-			return true;
-		}
 	}
 }

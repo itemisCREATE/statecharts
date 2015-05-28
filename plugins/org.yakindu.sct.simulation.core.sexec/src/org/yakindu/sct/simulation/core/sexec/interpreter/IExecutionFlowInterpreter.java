@@ -34,5 +34,9 @@ public interface IExecutionFlowInterpreter {
 	public void resume();
 
 	public void exit();
+	
+	public boolean isActive();
+	
+	public boolean isFinal();
 
 }

@@ -37,6 +37,6 @@ public class FinalStateTest extends AbstractExecutionFlowTest {
 	public void StatechartNameTest() throws Exception {
 		interpreter.enter();
 		interpreter.runCycle();
-		assertTrue(isFinal());
+		assertTrue(interpreter.isFinal());
 	}
 }

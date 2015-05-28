@@ -31,7 +31,9 @@ import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.Trace
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
+import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
+import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 
@@ -52,6 +54,8 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	@Inject(optional=true)
 	ITraceStepInterpreter traceInterpreter
 	@Inject protected extension ExecutionContextExtensions
+	@Inject
+	protected StateVectorExtensions stateVectorExtensions;
 
 	protected ExecutionFlow flow
 	protected ExecutionContext executionContext
@@ -227,5 +231,32 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 		timingService.unscheduleTimeEvent(timeEvent.timeEvent.name)
 		null
 	}
+	
+	override boolean isActive() {
+		var List<RegularState> activeStates = executionContext.getAllActiveStates()
+		
+		for (RegularState regularState : activeStates) {
+			if (!(regularState instanceof FinalState)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
+	override boolean isFinal() {
+		var List<ExecutionState>[] list = stateVectorExtensions.finalStateImpactVector(flow);
+		var boolean isCompletlyCovered = stateVectorExtensions.isCompletelyCovered(list);
+		if (!isCompletlyCovered) {
+			return false;
+		} else {
+			var List<RegularState> activeStates = executionContext.getAllActiveStates();
+			for (RegularState regularState : activeStates) {
+				if (!(regularState instanceof FinalState)) {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
+	
 }
