@@ -130,6 +130,10 @@ public class SimulationImageRenderer {
 								element = ((Edge) next).getElement();
 							}
 
+							if(element == null){ //next instanceof BasicDecorationNode || next instanceof Shape
+								continue;
+							}
+							
 							if (EcoreUtil.getURI(elementToHighlight).equals(EcoreUtil.getURI(element))) {
 								if (next instanceof Node) {
 									ShapeStyle style = (ShapeStyle) ((Node) next)
