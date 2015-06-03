@@ -26,6 +26,8 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
+import static org.eclipse.xtext.util.Strings.*
+
 class Statemachine {
 	
 	@Inject protected extension Naming
@@ -87,8 +89,8 @@ class Statemachine {
 	
 	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
 		«IF entry.createInterfaceObserver && flow.hasOutgoingEvents»
-		import java.util.LinkedList;
-		import java.util.List;
+			import java.util.LinkedList;
+			import java.util.List;
 		«ENDIF»
 		«IF flow.timed»
 			import «entry.getBasePackageName()».ITimer;
@@ -326,122 +328,154 @@ class Statemachine {
 		private final class «scope.getInterfaceImplName» implements «scope.getInterfaceName» {
 		
 		«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
-			private List<«scope.getInterfaceListenerName»> listeners = new LinkedList<«scope.getInterfaceListenerName»>();
-			
-			public List<«scope.getInterfaceListenerName»> getListeners() {
-				return listeners;
-			}
+			«scope.generateListeners»
 		«ENDIF»
 		
 		«IF scope.hasOperations»
-			private «scope.getInterfaceOperationCallbackName()» operationCallback;
-			
-			public void set«scope.getInterfaceOperationCallbackName»(
-					«scope.getInterfaceOperationCallbackName» operationCallback) {
-				this.operationCallback = operationCallback;
-			}
+			«scope.generateOperationCallback»
 		«ENDIF»
 		
-		«FOR event : scope.eventDefinitions»
-			
-			private boolean «event.symbol»;
-			
-			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-				private «event.type.targetLanguageName» «event.valueIdentifier»;
-			«ENDIF»
-			
-			«IF event.direction == Direction::IN»
-				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-					public void raise«event.name.asName»(«event.type.targetLanguageName» value) {
-						«event.symbol» = true;
-						«event.valueIdentifier» = value;
-					}
-					
-					private «event.type.targetLanguageName» get«event.name.asName»Value() {
-						«event.getIllegalAccessValidation()»
-						return «event.valueIdentifier»;
-					}
-					
-				«ELSE»
-					public void raise«event.name.asName»() {
-						«event.symbol» = true;
-					}
-					
-				«ENDIF»
-			«ENDIF»
-			
-			«IF event.direction == Direction::OUT»
-				
-				public boolean isRaised«event.name.asName»() {
-					return «event.symbol»;
-				}
-				
-				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-					private void raise«event.name.asName»(«event.type.targetLanguageName» value) {
-						«event.symbol» = true;
-						«event.valueIdentifier» = value;
-						«IF entry.createInterfaceObserver»
-						for («scope.interfaceListenerName» listener : listeners) {
-							listener.on«event.name.asEscapedName»Raised(value);
-						}
-						«ENDIF»
-					}
-					
-					public «event.type.targetLanguageName» get«event.name.asName»Value() {
-						«event.getIllegalAccessValidation()»
-						return «event.valueIdentifier»;
-					}
-				«ELSE»
-					private void raise«event.name.asName»() {
-						«event.symbol» = true;
-						«IF entry.createInterfaceObserver»
-							for («scope.interfaceListenerName» listener : listeners) {
-								listener.on«event.name.asEscapedName»Raised();
-							}
-						«ENDIF»
-					}
-				«ENDIF»
-			«ENDIF»
+		«FOR event : scope.eventDefinitions BEFORE newLine SEPARATOR newLine»
+			«generateEventDefinition(event, entry, scope)»
 		«ENDFOR»
 		
-		«FOR variable : scope.variableDefinitions»
-				
-				«IF !variable.const»
-					«variable.writeableFieldDeclaration»
-				«ENDIF»
-				public «variable.type.targetLanguageName» «variable.getter» {
-					return «variable.symbol»;
-				}
-				
-				«IF !variable.readonly && !variable.const»
-					public void «variable.setter»(«variable.type.targetLanguageName» value) {
-						this.«variable.symbol» = value;
-					}
-				«ENDIF»
+		«FOR variable : scope.variableDefinitions BEFORE newLine SEPARATOR newLine»
+			«generateVariableDefinition(variable)»
 		«ENDFOR»
 		
 		«IF scope.hasEvents»
-			public void clearEvents() {
-			«FOR event : scope.eventDefinitions»
-				«IF event.direction != Direction::OUT»
-				«event.symbol» = false;
-				«ENDIF»
-			«ENDFOR»
-			}
-			
+			«scope.generateClearEvents»
 		«ENDIF»
 		
 		«IF scope.hasOutgoingEvents()»
-			public void clearOutEvents() {
-			«FOR event : scope.eventDefinitions»
-				«IF event.direction == Direction::OUT»
-					«event.symbol» = false;
-				«ENDIF»
-			«ENDFOR»
-			}
+			«generateClearOutEvents(scope)»
 		«ENDIF»
 		}
 	'''
+	
+	protected def generateClearOutEvents(InterfaceScope scope) '''
+		public void clearOutEvents() {
+		«FOR event : scope.eventDefinitions»
+			«IF event.direction == Direction::OUT»
+				«event.symbol» = false;
+			«ENDIF»
+		«ENDFOR»
+		}
+	'''
+	
+	
+	protected def generateClearEvents(InterfaceScope scope) '''
+		public void clearEvents() {
+		«FOR event : scope.eventDefinitions»
+			«IF event.direction != Direction::OUT»
+			«event.symbol» = false;
+			«ENDIF»
+		«ENDFOR»
+		}
+	'''
+	
+	protected def generateVariableDefinition(VariableDefinition variable) '''
+		«IF !variable.const»
+			«variable.writeableFieldDeclaration»
+		«ENDIF»
+		public «variable.type.targetLanguageName» «variable.getter» {
+			return «variable.symbol»;
+		}
+		
+		«IF !variable.readonly && !variable.const»
+			public void «variable.setter»(«variable.type.targetLanguageName» value) {
+				this.«variable.symbol» = value;
+			}
+		«ENDIF»
+	'''
+	
+	protected def generateEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
+		private boolean «event.symbol»;
+		
+		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+			private «event.type.targetLanguageName» «event.valueIdentifier»;
+		«ENDIF»
+		
+		«IF event.direction == Direction::IN»
+			«event.generateInEventDefinition»
+		«ENDIF»
+		
+		«IF event.direction == Direction::OUT»
+			«event.generateOutEventDefinition(entry, scope)»
+		«ENDIF»
+	'''
+			
+	protected def generateOutEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
+		
+		public boolean isRaised«event.name.asName»() {
+			return «event.symbol»;
+		}
+		
+		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+			private void raise«event.name.asName»(«event.type.targetLanguageName» value) {
+				«event.symbol» = true;
+				«event.valueIdentifier» = value;
+				«IF entry.createInterfaceObserver»
+				for («scope.interfaceListenerName» listener : listeners) {
+					listener.on«event.name.asEscapedName»Raised(value);
+				}
+				«ENDIF»
+			}
+			
+			public «event.type.targetLanguageName» get«event.name.asName»Value() {
+				«event.getIllegalAccessValidation()»
+				return «event.valueIdentifier»;
+			}
+		«ELSE»
+			private void raise«event.name.asName»() {
+				«event.symbol» = true;
+				«IF entry.createInterfaceObserver»
+					for («scope.interfaceListenerName» listener : listeners) {
+						listener.on«event.name.asEscapedName»Raised();
+					}
+				«ENDIF»
+			}
+		«ENDIF»
+	'''
+
+	protected def generateInEventDefinition(EventDefinition event) '''
+		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+			public void raise«event.name.asName»(«event.type.targetLanguageName» value) {
+				«event.symbol» = true;
+				«event.valueIdentifier» = value;
+			}
+			
+			private «event.type.targetLanguageName» get«event.name.asName»Value() {
+				«event.getIllegalAccessValidation()»
+				return «event.valueIdentifier»;
+			}
+			
+		«ELSE»
+			public void raise«event.name.asName»() {
+				«event.symbol» = true;
+			}
+			
+		«ENDIF»
+	'''
+	
+	protected def generateOperationCallback(InterfaceScope scope) '''
+		private «scope.getInterfaceOperationCallbackName()» operationCallback;
+		
+		public void set«scope.getInterfaceOperationCallbackName»(
+				«scope.getInterfaceOperationCallbackName» operationCallback) {
+			this.operationCallback = operationCallback;
+		}
+	'''
+	
+	
+	protected def generateListeners(InterfaceScope scope) '''
+		private List<«scope.getInterfaceListenerName»> listeners = new LinkedList<«scope.getInterfaceListenerName»>();
+		
+		public List<«scope.getInterfaceListenerName»> getListeners() {
+			return listeners;
+		}
+	'''
+
 	
 	def protected getIllegalAccessValidation(EventDefinition it) '''
 		if (! «name.asEscapedIdentifier» ) 
