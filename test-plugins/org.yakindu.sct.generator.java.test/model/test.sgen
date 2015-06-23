@@ -321,7 +321,15 @@ GeneratorModel for sctunit::java {
 			targetFolder = "test-gen"			
 		}			
 	}
+	
+	test ReadOnlyVariable{
 		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+			
 	test SameNameDifferentRegion{
 		
 		feature Outlet{ 

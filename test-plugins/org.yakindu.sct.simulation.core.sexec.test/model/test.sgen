@@ -312,8 +312,16 @@ GeneratorModel for sctunit::interpreter {
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
-	}	
+	}
 	
+	test ReadOnlyVariable{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+			
 	test RaiseEvent{
 		
 		feature Outlet{ 

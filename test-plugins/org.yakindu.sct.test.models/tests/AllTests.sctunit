@@ -37,6 +37,7 @@ testsuite AllTests {
 	Parenthesis,
 	PriorityValues,
 	RaiseEvent,
+	ReadOnlyVariable,
 	SameNameDifferentRegion, 
 	ShallowHistory, 	
 	ShallowHistoryWithDeepEntry, 	

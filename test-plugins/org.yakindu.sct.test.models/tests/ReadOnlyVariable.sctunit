@@ -1,0 +1,32 @@
+
+testgroup ReadOnlyVariable for statechart ReadOnlyVariable{
+	test ReadOnlyVariableTest { 
+		enter
+		
+		assert active(ReadOnlyVariable.main_region.StateA)
+		assert myInt == 0
+		assert myString == "testString"
+		assert myBool == true
+		assert myReal == 1.1
+		
+		assert A.myInt == 0
+		assert A.myString == "testString"
+		assert A.myBool == true
+		assert A.myReal == 1.1
+		
+		cycle
+		
+		assert active(ReadOnlyVariable.main_region.StateB)
+		assert myInt == 100
+		assert myString == "fail"
+		assert myBool == false
+		assert myReal == 6.6
+		
+		assert A.myInt == 200
+		assert A.myString == "A_fail"
+		assert A.myBool == false
+		assert A.myReal == 7.7		
+				
+	} 
+}
+	
