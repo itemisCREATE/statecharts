@@ -477,6 +477,7 @@
 		<!-- Only for access without m2-repo -->
 		<module>../org.yakindu.base.target</module>
 		<module>../org.yakindu.sct.commons</module>
+		<!-->  <module>../org.yakindu.sct.compare</module <-->
 		<module>../org.yakindu.sct.domain</module>
 		<module>../org.yakindu.sct.domain.generic</module>
 		<module>../org.yakindu.sct.doc.user</module>
@@ -528,7 +529,6 @@
 		<module>../org.yakindu.sct.test-feature</module>
 		<module>../org.yakindu.sct.repository</module>
 		<module>../org.yakindu.sct.repository.full</module>
-		<module>../org.yakindu.sct.compare</module>
 	</modules>
 
 </project>
