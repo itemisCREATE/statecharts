@@ -90,7 +90,8 @@
  </extension>
  <extension
        point="org.eclipse.ui.startup">
-    <startup></startup>
+    <startup
+          class="org.yakindu.sct.simulation.ui.SimulationActivator"></startup>
  </extension>
     <!-- Decoration Providers -->
    <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders"> 
