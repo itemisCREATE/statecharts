@@ -26,7 +26,7 @@ import org.eclipse.gmf.runtime.notation.View;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class EntryViewFactory extends BorderItemLabelViewFactory {
+public class EntryViewFactory extends BorderItemContainerViewFactory {
 
 	public static final String ALLOW_COLORS = "allowColors";
 
