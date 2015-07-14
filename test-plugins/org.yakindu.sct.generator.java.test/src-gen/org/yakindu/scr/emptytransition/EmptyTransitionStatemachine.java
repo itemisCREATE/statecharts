@@ -82,6 +82,16 @@ public class EmptyTransitionStatemachine implements IEmptyTransitionStatemachine
 		}
 	}
 
+	private boolean check_main_region_A_tr0() {
+		return true;
+	}
+
+	private void effect_main_region_A_tr0() {
+		exitSequence_main_region_A();
+
+		enterSequence_main_region_B_default();
+	}
+
 	/* Entry action for statechart 'EmptyTransition'. */
 	private void entryAction() {
 	}
@@ -137,6 +147,7 @@ public class EmptyTransitionStatemachine implements IEmptyTransitionStatemachine
 
 	/* The reactions of state A. */
 	private void react_main_region_A() {
+		effect_main_region_A_tr0();
 	}
 
 	/* The reactions of state B. */
