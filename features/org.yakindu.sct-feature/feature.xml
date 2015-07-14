@@ -26,12 +26,12 @@
       <import feature="org.yakindu.base" version="2.4.1.qualifier"/>
    </requires>
 
-   <!--plugin
+   <plugin
          id="org.yakindu.sct.compare"
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/-->
+         unpack="false"/>
 
    <plugin
          id="org.yakindu.sct.model.sgraph"
