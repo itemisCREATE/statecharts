@@ -1,8 +1,6 @@
 package org.yakindu.scr.emptytransition;
 
-public class EmptyTransitionStatemachine
-		implements
-			IEmptyTransitionStatemachine {
+public class EmptyTransitionStatemachine implements IEmptyTransitionStatemachine {
 
 	public enum State {
 		main_region_A, main_region_B, $NullState$
@@ -48,8 +46,8 @@ public class EmptyTransitionStatemachine
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
 	@Override
@@ -58,21 +56,21 @@ public class EmptyTransitionStatemachine
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
