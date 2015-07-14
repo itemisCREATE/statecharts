@@ -14,6 +14,7 @@ package org.yakindu.sct.model.stext.ui.contentassist;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -66,55 +67,83 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
 		List<Keyword> suppressKeywords = new ArrayList<Keyword>();
-		// context Transition
-		if (contentAssistContext.getRootModel() instanceof TransitionSpecification) {
-			suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
-		}
-		// context States
-		else if (contentAssistContext.getRootModel() instanceof SimpleScope) {
-			suppressKeywords.addAll(getKeywords(grammarAccess.getVariableDefinitionAccess().getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getEventDefinitionAccess().getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getDirectionAccess().getAlternatives().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getOperationDefinitionAccess().getGroup().eContents()));
-		}
-		// context Statechart
-		else if (contentAssistContext.getRootModel() instanceof StatechartSpecification) {
-			suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
+
+		EObject rootModel = contentAssistContext.getRootModel();
+		if (rootModel instanceof TransitionSpecification) {
+			suppressKeywords(suppressKeywords, (TransitionSpecification) rootModel);
+		} else if (rootModel instanceof SimpleScope) {
+			suppressKeywords(suppressKeywords, (SimpleScope) rootModel);
+		} else if (rootModel instanceof StatechartSpecification) {
+			suppressKeywords(suppressKeywords, (StatechartSpecification) rootModel);
 		}
 
 		EObject currentModel = contentAssistContext.getCurrentModel();
 		if (currentModel instanceof InterfaceScope) {
-			suppressKeywords.addAll(getKeywords(grammarAccess.getLocalReactionAccess().getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getAlwaysEventAccess().getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getTimeEventTypeAccess().getAlternatives().eContents()));
-			suppressKeywords.add(grammarAccess.getDirectionAccess().getLOCALLocalKeyword_0_0());
+			suppressKeywords(suppressKeywords, (InterfaceScope) currentModel);
 		}
 
 		if (currentModel instanceof FeatureCall) {
-			FeatureCall featureCall = (FeatureCall) currentModel;
-			if (!(featureCall.getFeature() instanceof Operation)) {
-				suppressKeywords.add(grammarAccess.getFeatureCallAccess()
-						.getOperationCallLeftParenthesisKeyword_1_3_0_0());
-			}
+			suppressKeywords(suppressKeywords, (FeatureCall) currentModel);
 		}
 		if (currentModel instanceof ElementReferenceExpression) {
-			ElementReferenceExpression referenceExpression = (ElementReferenceExpression) currentModel;
-			if (!(referenceExpression.getReference() instanceof Operation)) {
-				suppressKeywords.add(grammarAccess.getElementReferenceExpressionAccess()
-						.getOperationCallLeftParenthesisKeyword_2_0_0());
-			}
+			suppressKeywords(suppressKeywords, (ElementReferenceExpression) currentModel);
 		}
 		if (currentModel instanceof InternalScope) {
-			suppressKeywords.add(grammarAccess.getDirectionAccess().getINInKeyword_1_0());
-			suppressKeywords.add(grammarAccess.getDirectionAccess().getOUTOutKeyword_2_0());
+			suppressKeywords(suppressKeywords, (InternalScope) currentModel);
 		}
 
 		if (!suppressKeywords.contains(keyword)) {
 			super.completeKeyword(keyword, contentAssistContext, new AcceptorDelegate(acceptor));
 
 		}
+	}
+
+	// context Transition
+	private void suppressKeywords(List<Keyword> suppressKeywords, TransitionSpecification model) {
+		suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
+	}
+
+	// context States
+	private void suppressKeywords(List<Keyword> suppressKeywords, SimpleScope model) {
+		suppressKeywords.addAll(getKeywords(grammarAccess.getVariableDefinitionAccess().getGroup().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getEventDefinitionAccess().getGroup().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getDirectionAccess().getAlternatives().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getOperationDefinitionAccess().getGroup().eContents()));
+	}
+
+	// context Statechart
+	private void suppressKeywords(List<Keyword> suppressKeywords, StatechartSpecification model) {
+		suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
+		EList<EObject> importKeyWordList = new BasicEList<EObject>();
+		importKeyWordList.add(grammarAccess.getImportScopeAccess().getImportKeyword_1());
+		suppressKeywords.addAll(getKeywords(importKeyWordList));
+	}
+
+	private void suppressKeywords(List<Keyword> suppressKeywords, InterfaceScope model) {
+		suppressKeywords.addAll(getKeywords(grammarAccess.getLocalReactionAccess().getGroup().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getAlwaysEventAccess().getGroup().eContents()));
+		suppressKeywords.addAll(getKeywords(grammarAccess.getTimeEventTypeAccess().getAlternatives().eContents()));
+		suppressKeywords.add(grammarAccess.getDirectionAccess().getLOCALLocalKeyword_0_0());
+	}
+
+	private void suppressKeywords(List<Keyword> suppressKeywords, FeatureCall featureCall) {
+		if (!(featureCall.getFeature() instanceof Operation)) {
+			suppressKeywords.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0());
+		}
+	}
+
+	private void suppressKeywords(List<Keyword> suppressKeywords, ElementReferenceExpression referenceExpression) {
+		if (!(referenceExpression.getReference() instanceof Operation)) {
+			suppressKeywords.add(grammarAccess.getElementReferenceExpressionAccess()
+					.getOperationCallLeftParenthesisKeyword_2_0_0());
+		}
+	}
+
+	private void suppressKeywords(List<Keyword> suppressKeywords, InternalScope model) {
+		suppressKeywords.add(grammarAccess.getDirectionAccess().getINInKeyword_1_0());
+		suppressKeywords.add(grammarAccess.getDirectionAccess().getOUTOutKeyword_2_0());
 	}
 
 	private List<Keyword> getKeywords(EList<EObject> list) {

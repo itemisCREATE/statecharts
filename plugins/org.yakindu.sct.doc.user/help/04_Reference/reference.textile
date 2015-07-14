@@ -423,6 +423,20 @@ p.
 
 ==<!-- End stext_keyword_valueof -->==
 
+
+==<!-- Start stext_keyword_as -->==
+
+h4(#as). as
+
+Casting of an variable. Example: Casting an Integer to a real value.
+
+bc(prettyprint).. 
+myReal = 12 as real
+p. 
+
+==<!-- End stext_keyword_as -->==
+
+
 ==<!-- Start stext_keyword_active -->==
 
 h4(#activestate). active(state)
