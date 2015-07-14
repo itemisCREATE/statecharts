@@ -428,7 +428,7 @@ p.
 
 h4(#as). as
 
-Casting of an variable. Example: Casting an Integer to a real value.
+Casting of a variable. Example: Casting an Integer to a real value.
 
 bc(prettyprint).. 
 myReal = 12 as real
