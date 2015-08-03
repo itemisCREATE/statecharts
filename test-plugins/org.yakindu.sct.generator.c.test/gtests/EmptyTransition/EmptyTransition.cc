@@ -19,8 +19,8 @@ TEST(StatemachineTest, EmptyTransitionTest) {
 	emptyTransition_init(&handle);
 	emptyTransition_enter(&handle);
 	emptyTransition_runCycle(&handle);
-	EXPECT_TRUE(emptyTransition_isStateActive(&handle, EmptyTransition_main_region_B));
-	EXPECT_TRUE(!emptyTransition_isStateActive(&handle, EmptyTransition_main_region_A));
+	EXPECT_TRUE(!emptyTransition_isStateActive(&handle, EmptyTransition_main_region_B));
+	EXPECT_TRUE(emptyTransition_isStateActive(&handle, EmptyTransition_main_region_A));
 }
 
 		

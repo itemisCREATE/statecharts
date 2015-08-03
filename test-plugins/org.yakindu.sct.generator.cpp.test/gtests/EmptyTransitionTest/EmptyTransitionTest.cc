@@ -17,7 +17,7 @@ TEST(StatemachineTest, EmptyTransitionTest) {
 	statechart->init();
 	statechart->enter();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isStateActive(EmptyTransition::main_region_B));
-	EXPECT_TRUE(!statechart->isStateActive(EmptyTransition::main_region_A));
+	EXPECT_TRUE(!statechart->isStateActive(EmptyTransition::main_region_B));
+	EXPECT_TRUE(statechart->isStateActive(EmptyTransition::main_region_A));
 	delete statechart;
 }

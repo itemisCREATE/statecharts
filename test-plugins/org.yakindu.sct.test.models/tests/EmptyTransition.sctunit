@@ -3,8 +3,8 @@ testgroup EmptyTransition for statechart EmptyTransition{
 	test EmptyTransitionTest { 
 		enter
 		cycle
-		assert active (EmptyTransition.main_region.B)
-		assert !active  (EmptyTransition.main_region.A) 
+		assert !active (EmptyTransition.main_region.B)
+		assert active  (EmptyTransition.main_region.A) 
 		 
 	} 
 }

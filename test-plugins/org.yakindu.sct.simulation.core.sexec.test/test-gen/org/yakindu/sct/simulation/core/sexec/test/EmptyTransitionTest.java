@@ -36,7 +36,7 @@ public class EmptyTransitionTest extends AbstractExecutionFlowTest {
 	public void EmptyTransitionTest() throws Exception {
 		interpreter.enter();
 		interpreter.runCycle();
-		assertTrue(isStateActive("B"));
-		assertTrue(!isStateActive("A"));
+		assertTrue(!isStateActive("B"));
+		assertTrue(isStateActive("A"));
 	}
 }
