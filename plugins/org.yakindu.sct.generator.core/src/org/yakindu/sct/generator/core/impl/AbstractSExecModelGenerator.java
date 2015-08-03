@@ -82,23 +82,23 @@ public abstract class AbstractSExecModelGenerator extends
 		FlowOptimizer optimizer = injector.getInstance(FlowOptimizer.class);
 
 		optimizer.inlineReactions(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_REACTIONS, true));
+				FUNCTION_INLINING_FEATURE_INLINE_REACTIONS, false));
 		optimizer.inlineExitActions(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS, true));
+				FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS, false));
 		optimizer.inlineEntryActions(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS, true));
+				FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS, false));
 		optimizer.inlineEnterSequences(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES, true));
+				FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES, false));
 		optimizer.inlineExitSequences(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES, true));
+				FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES, false));
 		optimizer.inlineChoices(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_CHOICES, true));
+				FUNCTION_INLINING_FEATURE_INLINE_CHOICES, false));
 		optimizer.inlineEntries(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_ENTRIES, true));
+				FUNCTION_INLINING_FEATURE_INLINE_ENTRIES, false));
 		optimizer.inlineEnterRegion(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION, true));
+				FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION, false));
 		optimizer.inlineExitRegion(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION, true));
+				FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION, false));
 
 		flow = optimizer.transform(flow);
 
