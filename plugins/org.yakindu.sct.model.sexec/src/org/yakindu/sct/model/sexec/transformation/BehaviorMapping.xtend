@@ -275,8 +275,16 @@ class BehaviorMapping {
 	
 	def dispatch Reaction mapTransition(Transition t, Vertex source, Vertex target) {
 		val r = t.create 
+		if (t.trigger != null) r.check = mapToCheck(t.trigger)
+		r.effect = mapToEffect(newArrayList(t), r)
+		
+		return r
+	}
+	
+	def dispatch Reaction mapTransition(Transition t, Choice source, Vertex target) {
+		val r = t.create 
 		if (t.trigger != null) {
-			r.check = mapToCheck(t.trigger)
+			r.check = mapToCheck(t.trigger) 
 		} else {
 			r.check = sexecFactory.createCheck
 			r.check.condition = true.expression
@@ -285,6 +293,8 @@ class BehaviorMapping {
 		
 		return r
 	}
+	
+
 	
 	/** Ignore transitions from pseudostates to synchronization nodes.
 	 * 
