@@ -588,7 +588,16 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		assertIssueCount(diagnostics, 2);
 		assertError(diagnostics, REFERENCE_CONSTANT_BEFORE_DEFINED);
 	}
-
+		
+	@Test
+	public void checkUnusedInternalDefinitions(){
+		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "UnusedInternalDeclarations.sct");
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+		assertIssueCount(diagnostics, 3);
+		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
+	}
+	
 	/**
 	 * Show warning when transition has no guard
 	 */
