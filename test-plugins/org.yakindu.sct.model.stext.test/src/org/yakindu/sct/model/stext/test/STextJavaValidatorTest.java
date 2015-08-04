@@ -590,7 +590,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	}
 		
 	@Test
-	public void checkUnusedInternalDefinitions(){
+	public void checkUnusedVariablesInInternalScope(){
 		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
 				+ "UnusedInternalDeclarations.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
