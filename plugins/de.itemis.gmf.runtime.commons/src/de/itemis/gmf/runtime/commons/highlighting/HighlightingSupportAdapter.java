@@ -116,8 +116,6 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		IGraphicalEditPart editPart = getEditPartForSemanticElement(semanticElement);
 		if(editPart == null)
 			return;
-		// ensure the edit part is made visible.
-		diagramWorkbenchPart.getDiagramGraphicalViewer().reveal(editPart);
 		IFigure figure = getTargetFigure(editPart);
 		Assert.isNotNull(figure, "Could not obtain target figure");
 		// store fore and background color
