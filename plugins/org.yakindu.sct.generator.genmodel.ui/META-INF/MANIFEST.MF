@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Yakindu Statechart Tools (SCT) Generator Model UI
 Bundle-Vendor: statecharts.org
-Bundle-Version: 2.4.1.qualifier
+Bundle-Version: 2.5.0.qualifier
 Bundle-SymbolicName: org.yakindu.sct.generator.genmodel.ui; singleton:=true
 Require-Bundle: org.yakindu.sct.generator.genmodel;visibility:=reexport,
  org.eclipse.xtext.ui,

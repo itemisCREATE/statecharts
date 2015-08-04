@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Yakindu Statechart Tools (SCT) Examples
 Bundle-SymbolicName: org.yakindu.sct.ui.examples;singleton:=true
-Bundle-Version: 2.4.1.qualifier
+Bundle-Version: 2.5.0.qualifier
 Bundle-Activator: org.yakindu.sct.ui.examples.Activator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.core.runtime,
