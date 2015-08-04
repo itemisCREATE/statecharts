@@ -60,11 +60,13 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
+import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
@@ -72,6 +74,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
+import org.yakindu.sct.model.stext.STextRuntimeModule;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
@@ -86,17 +89,21 @@ import org.yakindu.sct.model.stext.stext.Import;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.model.stext.stext.impl.StatechartSpecificationImpl;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.name.Named;
 
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
@@ -124,7 +131,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	private IContainer.Manager containerManager;
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
-	
+
 	@Check
 	public void checkExpression(VariableDefinition expression) {
 		if (expression.getType() == null || expression.getType().eIsProxy())
@@ -254,6 +261,58 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				}
 			}
 		}
+	}
+
+	@Check(CheckType.NORMAL)
+	public void checkUnusedVariablesInInternalScope(InternalScope internalScope) {
+		EList<Declaration> internalScopeDeclarations = internalScope.getDeclarations();
+
+		EObject rootContainer = EcoreUtil.getRootContainer(internalScope);
+		Resource rootRes = getResource(rootContainer);
+		EList<EObject> contents = rootRes.getContents();
+		Statechart sct = null;
+		for (EObject eObject : contents) {
+			if (eObject instanceof Statechart) {
+				sct = (Statechart) eObject;
+				break;
+			}
+		}
+		List<ElementReferenceExpression> allUsedElementReferences = EcoreUtil2.getAllContentsOfType(sct,
+				ElementReferenceExpression.class);
+
+		for (Declaration internalDeclaration : internalScopeDeclarations) {
+			boolean internalDeclarationUsed = false;
+			for (ElementReferenceExpression elementReference : allUsedElementReferences) {
+				if (elementReference.getReference().eContainer() instanceof InternalScope) {
+					if (elementReference.getReference() instanceof VariableDefinition) {
+						if (((VariableDefinition) elementReference.getReference()).getName().equals(
+								internalDeclaration.getName())
+								&& internalDeclaration instanceof VariableDefinition) {
+							internalDeclarationUsed = true;
+							break;
+						}
+					} else if (elementReference.getReference() instanceof EventDefinition) {
+						if (((EventDefinition) elementReference.getReference()).getName().equals(
+								internalDeclaration.getName())
+								&& internalDeclaration instanceof EventDefinition) {
+							internalDeclarationUsed = true;
+							break;
+						}
+					} else if (elementReference.getReference() instanceof OperationDefinition) {
+						if (((OperationDefinition) elementReference.getReference()).getName().equals(
+								internalDeclaration.getName())
+								&& internalDeclaration instanceof OperationDefinition) {
+							internalDeclarationUsed = true;
+							break;
+						}
+					}
+				}
+			}
+			if (!internalDeclarationUsed) {
+				warning(INTERNAL_DECLARATION_UNUSED, internalDeclaration, null, -1);
+			}
+		}
+
 	}
 
 	@Check(CheckType.FAST)

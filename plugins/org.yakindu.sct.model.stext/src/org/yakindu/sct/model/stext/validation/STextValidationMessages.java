@@ -48,4 +48,5 @@ public interface STextValidationMessages {
 	public static final String ASSIGNMENT_TO_VALUE = "Assignment constant not allowed";
 	public static final String REFERENCE_TO_VARIABLE = "Cannot reference a variable in a constant initialization";
 	public static final String REFERENCE_CONSTANT_BEFORE_DEFINED = "Cannot reference a constant from different scope or before it is defined";	
+	public static final String INTERNAL_DECLARATION_UNUSED = "Internal declaration is not used in statechart";
 }
