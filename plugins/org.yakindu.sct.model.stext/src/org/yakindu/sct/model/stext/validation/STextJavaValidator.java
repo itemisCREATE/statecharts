@@ -263,57 +263,57 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-	@Check(CheckType.NORMAL)
-	public void checkUnusedVariablesInInternalScope(InternalScope internalScope) {
-		EList<Declaration> internalScopeDeclarations = internalScope.getDeclarations();
-
-		EObject rootContainer = EcoreUtil.getRootContainer(internalScope);
-		Resource rootRes = getResource(rootContainer);
-		EList<EObject> contents = rootRes.getContents();
-		Statechart sct = null;
-		for (EObject eObject : contents) {
-			if (eObject instanceof Statechart) {
-				sct = (Statechart) eObject;
-				break;
-			}
-		}
-		List<ElementReferenceExpression> allUsedElementReferences = EcoreUtil2.getAllContentsOfType(sct,
-				ElementReferenceExpression.class);
-
-		for (Declaration internalDeclaration : internalScopeDeclarations) {
-			boolean internalDeclarationUsed = false;
-			for (ElementReferenceExpression elementReference : allUsedElementReferences) {
-				if (elementReference.getReference().eContainer() instanceof InternalScope) {
-					if (elementReference.getReference() instanceof VariableDefinition) {
-						if (((VariableDefinition) elementReference.getReference()).getName().equals(
-								internalDeclaration.getName())
-								&& internalDeclaration instanceof VariableDefinition) {
-							internalDeclarationUsed = true;
-							break;
-						}
-					} else if (elementReference.getReference() instanceof EventDefinition) {
-						if (((EventDefinition) elementReference.getReference()).getName().equals(
-								internalDeclaration.getName())
-								&& internalDeclaration instanceof EventDefinition) {
-							internalDeclarationUsed = true;
-							break;
-						}
-					} else if (elementReference.getReference() instanceof OperationDefinition) {
-						if (((OperationDefinition) elementReference.getReference()).getName().equals(
-								internalDeclaration.getName())
-								&& internalDeclaration instanceof OperationDefinition) {
-							internalDeclarationUsed = true;
-							break;
-						}
-					}
-				}
-			}
-			if (!internalDeclarationUsed) {
-				warning(INTERNAL_DECLARATION_UNUSED, internalDeclaration, null, -1);
-			}
-		}
-
-	}
+//	@Check(CheckType.NORMAL)
+//	public void checkUnusedVariablesInInternalScope(InternalScope internalScope) {
+//		EList<Declaration> internalScopeDeclarations = internalScope.getDeclarations();
+//
+//		EObject rootContainer = EcoreUtil.getRootContainer(internalScope);
+//		Resource rootRes = getResource(rootContainer);
+//		EList<EObject> contents = rootRes.getContents();
+//		Statechart sct = null;
+//		for (EObject eObject : contents) {
+//			if (eObject instanceof Statechart) {
+//				sct = (Statechart) eObject;
+//				break;
+//			}
+//		}
+//		List<ElementReferenceExpression> allUsedElementReferences = EcoreUtil2.getAllContentsOfType(sct,
+//				ElementReferenceExpression.class);
+//
+//		for (Declaration internalDeclaration : internalScopeDeclarations) {
+//			boolean internalDeclarationUsed = false;
+//			for (ElementReferenceExpression elementReference : allUsedElementReferences) {
+//				if (elementReference.getReference().eContainer() instanceof InternalScope) {
+//					if (elementReference.getReference() instanceof VariableDefinition) {
+//						if (((VariableDefinition) elementReference.getReference()).getName().equals(
+//								internalDeclaration.getName())
+//								&& internalDeclaration instanceof VariableDefinition) {
+//							internalDeclarationUsed = true;
+//							break;
+//						}
+//					} else if (elementReference.getReference() instanceof EventDefinition) {
+//						if (((EventDefinition) elementReference.getReference()).getName().equals(
+//								internalDeclaration.getName())
+//								&& internalDeclaration instanceof EventDefinition) {
+//							internalDeclarationUsed = true;
+//							break;
+//						}
+//					} else if (elementReference.getReference() instanceof OperationDefinition) {
+//						if (((OperationDefinition) elementReference.getReference()).getName().equals(
+//								internalDeclaration.getName())
+//								&& internalDeclaration instanceof OperationDefinition) {
+//							internalDeclarationUsed = true;
+//							break;
+//						}
+//					}
+//				}
+//			}
+//			if (!internalDeclarationUsed) {
+//				warning(INTERNAL_DECLARATION_UNUSED, internalDeclaration, null, -1);
+//			}
+//		}
+//
+//	}
 
 	@Check(CheckType.FAST)
 	public void checkValueReferenedBeforeDefined(Scope scope) {
