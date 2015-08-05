@@ -589,14 +589,14 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		assertError(diagnostics, REFERENCE_CONSTANT_BEFORE_DEFINED);
 	}
 		
-	@Test
-	public void checkUnusedVariablesInInternalScope(){
-		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
-				+ "UnusedInternalDeclarations.sct");
-		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
-		assertIssueCount(diagnostics, 3);
-		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
-	}
+//	@Test
+//	public void checkUnusedVariablesInInternalScope(){
+//		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+//				+ "UnusedInternalDeclarations.sct");
+//		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+//		assertIssueCount(diagnostics, 3);
+//		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
+//	}
 	
 	/**
 	 * Show warning when transition has no guard
