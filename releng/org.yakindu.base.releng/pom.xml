@@ -292,7 +292,7 @@
 	</pluginRepositories>
 	<profiles>
 		<profile>
-			<id>Luna.target</id>
+			<id>Mars.target</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
@@ -311,7 +311,7 @@
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
 									<version>2.5.0-SNAPSHOT</version>
-									<classifier>Luna</classifier>
+									<classifier>Mars</classifier>
 								</artifact>
 							</target>
 						</configuration>
