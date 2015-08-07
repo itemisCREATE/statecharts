@@ -17,9 +17,9 @@
 		<tycho-version>0.22.0</tycho-version>
 
 		<!-- scp settings for publishing udpdate site -->
-		<promotionTarget>luna/integration</promotionTarget>
+		<promotionTarget>mars/integration</promotionTarget>
 		<promotionSource>http://builds.itemis.de/urlToCIJob/lastSuccessfulBuild</promotionSource>
-		<p2.target.repository>http://download.eclipse.org/releases/luna</p2.target.repository>
+		<p2.target.repository>http://download.eclipse.org/releases/mars</p2.target.repository>
 		<promotionSourceRepo>${promotionSource}/artifact/update-site</promotionSourceRepo>
 		<updateSiteUrl>http://updates.yakindu.org/sct/${promotionTarget}</updateSiteUrl>
 		<local.update.site>${project.build.directory}/local-update-site</local.update.site>
@@ -112,7 +112,7 @@
 								<taskdef resource="net/sf/antcontrib/antlib.xml"
 									classpathref="maven.plugin.classpath" />
 								<property name="download.distro.src"
-									value="${eclipse.mirror.url}/technology/epp/downloads/release/luna/R" />
+									value="${eclipse.mirror.url}/technology/epp/downloads/release/mars/R" />
 								<property name="download.distro.dir"
 									value="${project.build.directory}/distro/download" />
 
@@ -144,7 +144,7 @@
 											</and>
 											<then>
 												<propertyregex property="distro.src.filename"
-													input="eclipse-java-luna-R-win32.zip" override="true"
+													input="eclipse-java-mars-R-win32.zip" override="true"
 													regexp="(.*)" select="\1" casesensitive="false" />
 											</then>
 										</if>
@@ -156,7 +156,7 @@
 											</and>
 											<then>
 												<propertyregex property="distro.src.filename"
-													input="eclipse-java-luna-R-win32-x86_64.zip" override="true"
+													input="eclipse-java-mars-R-win32-x86_64.zip" override="true"
 													regexp="(.*)" select="\1" casesensitive="false" />
 											</then>
 										</if>
@@ -168,7 +168,7 @@
 											</and>
 											<then>
 												<propertyregex property="distro.src.filename"
-													input="eclipse-java-luna-R-linux-gtk-x86_64.tar.gz"
+													input="eclipse-java-mars-R-linux-gtk-x86_64.tar.gz"
 													override="true" regexp="(.*)" select="\1" casesensitive="false" />
 											</then>
 										</if>
@@ -180,7 +180,7 @@
 											</and>
 											<then>
 												<propertyregex property="distro.src.filename"
-													input="eclipse-java-luna-R-linux-gtk.tar.gz" override="true"
+													input="eclipse-java-mars-R-linux-gtk.tar.gz" override="true"
 													regexp="(.*)" select="\1" casesensitive="false" />
 											</then>
 										</if>
@@ -192,7 +192,7 @@
 											</and>
 											<then>
 												<propertyregex property="distro.src.filename"
-													input="eclipse-java-luna-R-macosx-cocoa-x86_64.tar.gz"
+													input="eclipse-java-mars-R-macosx-cocoa-x86_64.tar.gz"
 													override="true" regexp="(.*)" select="\1" casesensitive="false" />
 											</then>
 										</if>
@@ -279,7 +279,7 @@
 											override="true" regexp="([^,]*)-([^\,]*)-([^\,]*)" select="\3"
 											casesensitive="false" />
 										<echo>mkdir ${distro.dir} for
-											yakindu-sct-luna-R-${distro.os}-${distro.ws}-${distro.arch}.zip</echo>
+											yakindu-sct-mars-R-${distro.os}-${distro.ws}-${distro.arch}.zip</echo>
 										<mkdir dir="${distro.dir}" />
 
 										<if>
@@ -290,14 +290,14 @@
 												<exec dir="${distro.work.dir}/@{environment}"
 													executable="zip">
 													<arg
-														line="-q -r ${distro.dir}/yakindu-sct-luna-R-${distro.os}-${distro.ws}-${distro.arch}.zip eclipse" />
+														line="-q -r ${distro.dir}/yakindu-sct-mars-R-${distro.os}-${distro.ws}-${distro.arch}.zip eclipse" />
 												</exec>
 											</then>
 											<else>
 												<exec dir="${distro.work.dir}/@{environment}"
 													executable="tar">
 													<arg
-														line="-czf ${distro.dir}/yakindu-sct-luna-R-${distro.os}-${distro.ws}-${distro.arch}.tar.gz eclipse" />
+														line="-czf ${distro.dir}/yakindu-sct-mars-R-${distro.os}-${distro.ws}-${distro.arch}.tar.gz eclipse" />
 												</exec>
 											</else>
 										</if>
@@ -399,9 +399,9 @@
 						<argLine>-Declipse.p2.mirrors=false</argLine>
 						<repositories>
 							<repository>
-								<id>luna</id>
+								<id>mars</id>
 								<layout>p2</layout>
-								<url>http://download.eclipse.org/releases/luna</url>
+								<url>http://download.eclipse.org/releases/mars</url>
 							</repository>
 						</repositories>
 						<dependencies>
