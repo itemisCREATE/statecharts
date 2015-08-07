@@ -19,7 +19,7 @@
 		<!-- scp settings for publishing udpdate site -->
 		<promotionTarget>mars/integration</promotionTarget>
 		<promotionSource>http://builds.itemis.de/urlToCIJob/lastSuccessfulBuild</promotionSource>
-		<p2.target.repository>http://download.eclipse.org/releases/mars</p2.target.repository>
+		<p2.target.repository>http://ftp.acc.umu.se/mirror/eclipse.org/releases/mars/</p2.target.repository>
 		<promotionSourceRepo>${promotionSource}/artifact/update-site</promotionSourceRepo>
 		<updateSiteUrl>http://updates.yakindu.org/sct/${promotionTarget}</updateSiteUrl>
 		<local.update.site>${project.build.directory}/local-update-site</local.update.site>
