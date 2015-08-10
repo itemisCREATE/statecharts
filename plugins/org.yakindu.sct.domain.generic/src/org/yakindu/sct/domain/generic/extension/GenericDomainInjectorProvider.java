@@ -46,7 +46,7 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 
 	private static final Map<String, Class<? extends EObject>> semanticTargetToRuleMap = new HashMap<String, Class<? extends EObject>>();
 
-	private Injector resourceInjector;
+	private static Injector resourceInjector;
 	private Map<String, Injector> embeddedInjectors = new HashMap<String, Injector>();
 
 	static {
