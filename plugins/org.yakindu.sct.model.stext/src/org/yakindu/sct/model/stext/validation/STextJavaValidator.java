@@ -279,7 +279,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 		List<ElementReferenceExpression> allUsedElementReferences = EcoreUtil2.getAllContentsOfType(sct,
 				ElementReferenceExpression.class);
-		
+
 		if (sct.getSpecification() != null) {
 			for (Declaration internalDeclaration : internalScopeDeclarations) {
 				boolean internalDeclarationUsed = false;
@@ -310,7 +310,11 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					}
 				}
 				if (!internalDeclarationUsed) {
-					warning(INTERNAL_DECLARATION_UNUSED, internalDeclaration, null, -1);
+
+					if (internalDeclaration instanceof VariableDefinition
+							|| internalDeclaration instanceof EventDefinition
+							|| internalDeclaration instanceof OperationDefinition)
+						warning(INTERNAL_DECLARATION_UNUSED, internalDeclaration, null, -1);
 				}
 			}
 		}
