@@ -330,7 +330,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		// No in declarations in internal scope
 		model = super.parseExpression("internal: in event Event1", null, InternalScope.class.getSimpleName());
 		result = tester.validate(model);
-		result.assertDiagnosticsCount(1);
+		result.assertDiagnosticsCount(1);		
 		result.assertErrorContains(STextJavaValidator.IN_OUT_DECLARATIONS);
 		// No out declarations in internal scope
 		model = super.parseExpression("internal: out event Event1", null, InternalScope.class.getSimpleName());
@@ -576,7 +576,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
 				+ "ConstWithVariable.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
-		assertIssueCount(diagnostics, 2);
+		assertIssueCount(diagnostics, 2); //
 		assertError(diagnostics, REFERENCE_TO_VARIABLE);
 	}
 
@@ -589,14 +589,14 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		assertError(diagnostics, REFERENCE_CONSTANT_BEFORE_DEFINED);
 	}
 		
-//	@Test
-//	public void checkUnusedVariablesInInternalScope(){
-//		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
-//				+ "UnusedInternalDeclarations.sct");
-//		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
-//		assertIssueCount(diagnostics, 3);
-//		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
-//	}
+	@Test
+	public void checkUnusedVariablesInInternalScope(){
+		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "UnusedInternalDeclarations.sct");
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+		assertIssueCount(diagnostics, 3);
+		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
+	}
 	
 	/**
 	 * Show warning when transition has no guard
