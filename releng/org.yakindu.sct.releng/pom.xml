@@ -10,10 +10,9 @@
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>0.22.0</tycho-version>
-		<tycho-extras-version>0.22.0</tycho-extras-version>
+		<tycho-version>0.23.1</tycho-version>
+		<tycho-extras-version>0.23.1</tycho-extras-version>
 		<antrun-version>1.6</antrun-version>
-		<p2.base.repository>file:../org.yakindu.base.repository/target/repository</p2.base.repository>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<testFailureIgnore>true</testFailureIgnore>
 	</properties>
@@ -29,90 +28,6 @@
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>${antrun-version}</version>
-				<executions>
-					<execution>
-						<id>replace-build-token</id>
-						<phase>generate-sources</phase>
-						<configuration>
-							<target>
-								<taskdef resource="net/sf/antcontrib/antcontrib.properties"
-									classpathref="maven.plugin.classpath" />
-								<if>
-									<available file="about.mappings" />
-									<then>
-										<echo
-											message="Replacing @build@ token within about.mappings with build id." />
-										<replace file="about.mappings">
-											<replacefilter token="@build@"
-												value="${unqualifiedVersion}.${buildQualifier}" />
-										</replace>
-									</then>
-								</if>
-								<if>
-									<available file="javadocOptions.txt" />
-									<then>
-										<echo
-											message="Replacing @build@ token within javadocOptions.txt with build id." />
-										<replace file="javadocOptions.txt">
-											<replacefilter token="@build@"
-												value="${unqualifiedVersion}.${buildQualifier}" />
-										</replace>
-									</then>
-								</if>
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>replace-back-build-token</id>
-						<phase>verify</phase>
-						<configuration>
-							<target>
-								<taskdef resource="net/sf/antcontrib/antcontrib.properties"
-									classpathref="maven.plugin.classpath" />
-								<if>
-									<available file="about.mappings" />
-									<then>
-										<echo
-											message="Replacing back build id within about.mappings with @build@ token." />
-										<replace file="about.mappings">
-											<replacefilter token="${unqualifiedVersion}.${buildQualifier}"
-												value="@build@" />
-										</replace>
-									</then>
-								</if>
-								<if>
-									<available file="javadocOptions.txt" />
-									<then>
-										<echo
-											message="Replacing back build id within javadocOptions.txt with @build@ token." />
-										<replace file="javadocOptions.txt">
-											<replacefilter token="${unqualifiedVersion}.${buildQualifier}"
-												value="@build@" />
-										</replace>
-									</then>
-								</if>
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>ant-contrib</groupId>
-						<artifactId>ant-contrib</artifactId>
-						<version>20020829</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 			<!-- Configure sources (Source feature has to be added to category manually) -->
 			<plugin>
@@ -325,37 +240,14 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
-<!-- 		<pluginRepository> -->
-<!-- 			<id>eclipse-xtend</id> -->
-<!-- 			<url>http://build.eclipse.org/common/xtend/maven</url> -->
-<!-- 		</pluginRepository> -->
 	</pluginRepositories>
-
-	<repositories>
-		<repository>
-			<id>yakindu-base</id>
-			<layout>p2</layout>
-			<url>${p2.base.repository}</url>
-		</repository>
-	</repositories>
 
 	<profiles>
 		<profile>
-			<id>builds-target</id>
-			<activation>
-				<!-- ActiveByDefault does not work because of macosx-profile with is 
-					triggered by property -->
-				<!-- <activeByDefault>true</activeByDefault> -->
-				<property>
-					<name>!noBuildsTarget</name>
-				</property>
-			</activation>
-			<properties>
-				<p2.base.repository>https://projects.itemis.de/data/yakindu/base/mars/snapshot/</p2.base.repository>
-			</properties>
-		</profile>
-		<profile>
 			<id>Mars.target</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<build>
 				<plugins>
 					<plugin>
@@ -363,7 +255,7 @@
 						<artifactId>target-platform-configuration</artifactId>
 						<version>${tycho-version}</version>
 						<configuration>
-							<!-- add target file content to target platform -->
+							<includePackedArtifacts>true</includePackedArtifacts>
 							<target>
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
@@ -379,32 +271,8 @@
 		</profile>
 		<profile>
 			<id>CI</id>
-			<!-- Test failures are collected by jenkins and evaluated for instable 
-				builds -->
 			<properties>
 				<testFailureIgnore>true</testFailureIgnore>
-			</properties>
-		</profile>
-		<profile>
-			<id>macosx</id>
-			<activation>
-				<os>
-					<family>mac</family>
-				</os>
-			</activation>
-			<properties>
-				<ui.test.vmargs>-Xmx512m -XX:MaxPermSize=256m -XstartOnFirstThread</ui.test.vmargs>
-			</properties>
-		</profile>
-		<profile>
-			<id>other-os</id>
-			<activation>
-				<os>
-					<family>!mac</family>
-				</os>
-			</activation>
-			<properties>
-				<ui.test.vmargs>-Xmx512m -XX:MaxPermSize=256m</ui.test.vmargs>
 			</properties>
 		</profile>
 		<profile>
@@ -430,77 +298,88 @@
 					</plugin>
 				</plugins>
 			</build>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>nexus-projects.itemis.de</id>
-					<url>https://projects.itemis.de/nexus/content/groups/maven-plugins/</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</pluginRepository>
-			</pluginRepositories>
 		</profile>
 	</profiles>
 
 	<modules>
-		<!-- Only for access without m2-repo -->
+
+		<!-- Releng -->
 		<module>../org.yakindu.base.target</module>
-		<module>../org.yakindu.sct.commons</module>
-		<module>../org.yakindu.sct.compare</module>
-		<module>../org.yakindu.sct.domain</module>
-		<module>../org.yakindu.sct.domain.generic</module>
-		<module>../org.yakindu.sct.doc.user</module>
-		<module>../org.yakindu.sct.examples.trafficlight</module>
-		<module>../org.yakindu.sct.generator.core</module>
-		<module>../org.yakindu.sct.generator.genmodel</module>
-		<module>../org.yakindu.sct.generator.genmodel.test</module>
-		<module>../org.yakindu.sct.generator.genmodel.ui</module>
-		<module>../org.yakindu.sct.model.sexec</module>
-		<module>../org.yakindu.sct.model.sexec.edit</module>
-		<module>../org.yakindu.sct.model.sexec.test</module>
-		<module>../org.yakindu.sct.model.sgen</module>
-		<module>../org.yakindu.sct.model.sgen.edit</module>
-		<module>../org.yakindu.sct.model.sgraph</module>
-		<module>../org.yakindu.sct.model.sgraph.edit</module>
-		<module>../org.yakindu.sct.model.sgraph.test</module>
-		<module>../org.yakindu.sct.model.sgraph.ui</module>
-		<module>../org.yakindu.sct.model.stext</module>
-		<module>../org.yakindu.sct.model.stext.edit</module>
-		<module>../org.yakindu.sct.model.resource</module>
-		<module>../org.yakindu.sct.model.stext.resource.test</module>
-		<module>../org.yakindu.sct.model.stext.test</module>
-		<module>../org.yakindu.sct.model.stext.ui</module>
-		<module>../org.yakindu.sct.simulation.core</module>
-		<module>../org.yakindu.sct.simulation.ui</module>
-		<module>../org.yakindu.sct.simulation.core.sexec</module>
-		<module>../org.yakindu.sct.simulation.ui.sexec</module>
-		<module>../org.yakindu.sct.simulation.core.sexec.test</module>
-		<module>../org.yakindu.sct.ui</module>
-		<module>../org.yakindu.sct.ui.editor</module>
-		<module>../org.yakindu.sct.ui.examples</module>
-		<module>../org.yakindu.sct.ui.intro</module>
-		<module>../org.yakindu.sct.ui.navigator</module>
-		<module>../org.yakindu.sct-feature</module>
-		<module>../org.yakindu.sct.test.models</module>
-		<module>../org.yakindu.sct.generator.c</module>
-		<module>../org.yakindu.sct.generator.c.test</module>
-		<module>../org.yakindu.sct.generator.c-feature</module>
-		<module>../org.yakindu.sct.generator.cpp</module>
-		<module>../org.yakindu.sct.generator.cpp.test</module>
-		<module>../org.yakindu.sct.generator.cpp-feature</module>
-		<module>../org.yakindu.sct.generator.java</module>
-		<module>../org.yakindu.sct.generator.java.test</module>
-		<module>../org.yakindu.sct.generator.java-feature</module>
-		<module>../org.yakindu.sct.refactoring</module>
-		<module>../org.yakindu.sct.refactoring.tests</module>
-		<module>../org.yakindu.sct.generator-feature</module>
-		<module>../org.yakindu.sct.sdk-feature</module>
-		<module>../org.yakindu.sct.test-feature</module>
+		<module>../org.yakindu.base.repository</module>
 		<module>../org.yakindu.sct.repository</module>
 		<module>../org.yakindu.sct.repository.full</module>
+
+		<!-- Plugins -->
+		<module>../../plugins/org.yakindu.base.types.test</module>
+		<module>../../plugins/de.itemis.xtext.utils.gmf</module>
+		<module>../../plugins/de.itemis.xtext.utils.jface</module>
+		<module>../../plugins/org.yakindu.base.types</module>
+		<module>../../plugins/org.yakindu.base.types.edit</module>
+		<module>../../plugins/org.yakindu.base.expressions</module>
+		<module>../../plugins/org.yakindu.base.expressions.edit</module>
+		<module>../../plugins/org.yakindu.base.expressions.ui</module>
+		<module>../../plugins/de.itemis.gmf.runtime.commons</module>
+		<module>../../plugins/org.yakindu.sct.commons</module>
+		<module>../../plugins/org.yakindu.sct.compare</module>
+		<module>../../plugins/org.yakindu.sct.domain</module>
+		<module>../../plugins/org.yakindu.sct.domain.generic</module>
+		<module>../../plugins/org.yakindu.sct.doc.user</module>
+		<module>../../plugins/org.yakindu.sct.generator.core</module>
+		<module>../../plugins/org.yakindu.sct.generator.genmodel</module>
+		<module>../../plugins/org.yakindu.sct.generator.genmodel.ui</module>
+		<module>../../plugins/org.yakindu.sct.model.sexec</module>
+		<module>../../plugins/org.yakindu.sct.model.sexec.edit</module>
+		<module>../../plugins/org.yakindu.sct.model.sgen</module>
+		<module>../../plugins/org.yakindu.sct.model.sgen.edit</module>
+		<module>../../plugins/org.yakindu.sct.model.sgraph</module>
+		<module>../../plugins/org.yakindu.sct.model.sgraph.edit</module>
+		<module>../../plugins/org.yakindu.sct.model.sgraph.ui</module>
+		<module>../../plugins/org.yakindu.sct.model.stext</module>
+		<module>../../plugins/org.yakindu.sct.model.stext.edit</module>
+		<module>../../plugins/org.yakindu.sct.model.resource</module>
+		<module>../../plugins/org.yakindu.sct.model.stext.ui</module>
+		<module>../../plugins/org.yakindu.sct.simulation.core</module>
+		<module>../../plugins/org.yakindu.sct.simulation.ui</module>
+		<module>../../plugins/org.yakindu.sct.simulation.core.sexec</module>
+		<module>../../plugins/org.yakindu.sct.simulation.ui.sexec</module>
+		<module>../../plugins/org.yakindu.sct.ui</module>
+		<module>../../plugins/org.yakindu.sct.ui.editor</module>
+		<module>../../plugins/org.yakindu.sct.ui.examples</module>
+		<module>../../plugins/org.yakindu.sct.ui.intro</module>
+		<module>../../plugins/org.yakindu.sct.ui.navigator</module>
+		<module>../../plugins/org.yakindu.sct.generator.c</module>
+		<module>../../plugins/org.yakindu.sct.generator.cpp</module>
+		<module>../../plugins/org.yakindu.sct.generator.java</module>
+		<module>../../plugins/org.yakindu.sct.refactoring</module>
+
+		<!-- Features -->
+		<module>../../features/org.yakindu.base-feature</module>
+		<module>../../features/de.itemis.xtext.utils.gmf-feature</module>
+		<module>../../features/de.itemis.xtext.utils.jface-feature</module>
+		<module>../../features/de.itemis.gmf.runtime.commons-feature</module>
+		<module>../../features/org.yakindu.sct-feature</module>
+		<module>../../features/org.yakindu.sct.generator.c-feature</module>
+		<module>../../features/org.yakindu.sct.generator.cpp-feature</module>
+		<module>../../features/org.yakindu.sct.generator.java-feature</module>
+		<module>../../features/org.yakindu.sct.generator-feature</module>
+		<module>../../features/org.yakindu.sct.sdk-feature</module>
+		<module>../../features/org.yakindu.sct.test-feature</module>
+
+		<!-- Examples -->
+		<module>../../examples/org.yakindu.sct.examples.trafficlight</module>
+		<!-- test plugins -->
+		<module>../../test-plugins/org.yakindu.sct.model.sexec.test</module>
+		<module>../../test-plugins/org.yakindu.sct.model.sgraph.test</module>
+		<module>../../test-plugins/org.yakindu.sct.generator.genmodel.test</module>
+		<module>../../test-plugins/org.yakindu.sct.model.stext.resource.test</module>
+		<module>../../test-plugins/org.yakindu.sct.model.stext.test</module>
+		<module>../../test-plugins/org.yakindu.sct.simulation.core.sexec.test</module>
+		<module>../../test-plugins/org.yakindu.sct.test.models</module>
+		<module>../../test-plugins/org.yakindu.sct.generator.cpp.test</module>
+		<module>../../test-plugins/org.yakindu.sct.generator.java.test</module>
+		<module>../../test-plugins/org.yakindu.sct.refactoring.tests</module>
+		<module>../../test-plugins/org.yakindu.sct.generator.c.test</module>
+
 	</modules>
 
 </project>
