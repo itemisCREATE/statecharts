@@ -309,6 +309,9 @@
 		<module>../org.yakindu.sct.repository</module>
 		<module>../org.yakindu.sct.repository.full</module>
 
+		<!-- Examples -->
+		<module>../../examples/org.yakindu.sct.examples.trafficlight</module>
+
 		<!-- Plugins -->
 		<module>../../plugins/org.yakindu.base.types.test</module>
 		<module>../../plugins/de.itemis.xtext.utils.gmf</module>
@@ -344,7 +347,7 @@
 		<module>../../plugins/org.yakindu.sct.simulation.ui.sexec</module>
 		<module>../../plugins/org.yakindu.sct.ui</module>
 		<module>../../plugins/org.yakindu.sct.ui.editor</module>
-		<module>../../plugins/org.yakindu.sct.ui.examples</module>
+		<!--  <module>../../plugins/org.yakindu.sct.ui.examples</module> -->
 		<module>../../plugins/org.yakindu.sct.ui.intro</module>
 		<module>../../plugins/org.yakindu.sct.ui.navigator</module>
 		<module>../../plugins/org.yakindu.sct.generator.c</module>
@@ -365,8 +368,6 @@
 		<module>../../features/org.yakindu.sct.sdk-feature</module>
 		<module>../../features/org.yakindu.sct.test-feature</module>
 
-		<!-- Examples -->
-		<module>../../examples/org.yakindu.sct.examples.trafficlight</module>
 		<!-- test plugins -->
 		<module>../../test-plugins/org.yakindu.sct.model.sexec.test</module>
 		<module>../../test-plugins/org.yakindu.sct.model.sgraph.test</module>

@@ -6,6 +6,7 @@ Bundle-Version: 2.5.0.qualifier
 Bundle-Activator: org.yakindu.sct.ui.examples.Activator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.common.ui;bundle-version="2.7.0"
+ org.eclipse.emf.common.ui;bundle-version="2.7.0",
+ org.yakindu.sct.examples.trafficlight;bundle-version="2.5.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
