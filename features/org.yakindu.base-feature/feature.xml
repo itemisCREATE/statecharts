@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.yakindu.base"
+      label="Yakindu Base Feature"
+      version="2.5.0.qualifier"
+      provider-name="statecharts.org">
+
+   <description url="http://www.statecharts.org">
+      %description
+   </description>
+
+   <copyright url="%licenseURL">
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <discovery label="Yakindu SCT Repository" url="http://updates.yakindu.org/mars/releases"/>
+   </url>
+
+   <includes
+         id="de.itemis.gmf.runtime.commons"
+         version="0.0.0"/>
+   <includes
+         id="de.itemis.xtext.utils.gmf"
+         version="0.0.0"/>
+   <includes
+         id="de.itemis.xtext.utils.jface"
+         version="0.0.0"/>
+   <plugin
+         id="org.yakindu.base.types"
+         version="0.0.0"/>
+   <plugin
+         id="org.yakindu.base.types.edit"
+         version="0.0.0"/>
+   <plugin
+         id="org.yakindu.base.expressions"
+         version="0.0.0"/>
+   <plugin
+         id="org.yakindu.base.expressions.edit"
+         version="0.0.0"/>
+   <plugin
+         id="org.yakindu.base.expressions.ui"
+         version="0.0.0"/>
+
+</feature>

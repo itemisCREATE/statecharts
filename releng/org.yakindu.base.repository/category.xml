@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.yakindu.base_0.0.0.jar" id="org.yakindu.base" version="0.0.0">
+      <category name="Xtext Integration Utilities"/>
+   </feature>
+   <feature url="features/org.yakindu.base.source_0.0.0.jar" id="org.yakindu.base.source" version="0.0.0">
+      <category name="Xtext Integration Utilities (Sources)"/>
+   </feature>
+   <feature url="features/de.itemis.xtext.utils.jface_0.0.0.jar" id="de.itemis.xtext.utils.jface" version="0.0.0">
+      <category name="Xtext Integration Utilities"/>
+   </feature>
+   <feature url="features/de.itemis.xtext.utils.jface.source_0.0.0.jar" id="de.itemis.xtext.utils.jface.source" version="0.0.0">
+      <category name="Xtext Integration Utilities (Sources)"/>
+   </feature>
+   <feature url="features/de.itemis.xtext.utils.gmf_0.0.0.jar" id="de.itemis.xtext.utils.gmf" version="0.0.0">
+      <category name="Xtext Integration Utilities"/>
+   </feature>
+   <feature url="features/de.itemis.xtext.utils.gmf.source_0.0.0.jar" id="de.itemis.xtext.utils.gmf.source" version="0.0.0">
+      <category name="Xtext Integration Utilities (Sources)"/>
+   </feature>
+   <category-def name="Xtext Integration Utilities" label="Xtext Integration Utilities">
+      <description>
+         Utilities for integrating Xtext with JFace and GMF Runtime.
+      </description> 
+   </category-def>
+   <category-def name="Xtext Integration Utilities (Sources)" label="Xtext Integration Utilities (Sources)">
+      <description>
+         Source plugins of Utilities for integrating Xtext with JFace and GMF Runtime.
+      </description>
+   </category-def>
+</site>

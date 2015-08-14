@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.base.types/src-gen" modelPluginID="org.yakindu.base.types"
+    modelName="Types" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" usedGenPackages="base.genmodel#//base">
+  <foreignModel>types.ecore</foreignModel>
+  <genPackages prefix="Types" basePackage="org.yakindu.base" disposableProviderFactory="true"
+      ecorePackage="types.ecore#/">
+    <genClasses ecoreClass="types.ecore#//Library">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Library/types"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute types.ecore#//Library/id"/>
+    </genClasses>
+    <genClasses ecoreClass="types.ecore#//Type">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Type/features"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//Type/superTypes"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference types.ecore#//Type/owningLibrary"/>
+    </genClasses>
+    <genClasses ecoreClass="types.ecore#//Feature">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference types.ecore#//Feature/owningType"/>
+    </genClasses>
+    <genClasses ecoreClass="types.ecore#//Operation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference types.ecore#//Operation/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="types.ecore#//Property"/>
+    <genClasses ecoreClass="types.ecore#//Parameter">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference types.ecore#//Parameter/owningOperation"/>
+    </genClasses>
+    <genClasses ecoreClass="types.ecore#//TypedElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//TypedElement/type"/>
+    </genClasses>
+    <genClasses ecoreClass="types.ecore#//Event"/>
+  </genPackages>
+</genmodel:GenModel>

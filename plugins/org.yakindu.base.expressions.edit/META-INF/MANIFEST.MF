@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Yakindu Base Edit
+Bundle-SymbolicName: org.yakindu.base.expressions.edit;singleton:=true
+Bundle-Version: 2.5.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.yakindu.base.expressions.expressions.provider.ExpressionsEditPlugin$Implementation
+Bundle-Vendor: statecharts.org
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.yakindu.base.expressions.expressions.provider
+Require-Bundle: org.eclipse.core.runtime,
+ org.yakindu.base.expressions;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Import-Package: org.yakindu.base.base.provider,
+ org.yakindu.base.types.provider
