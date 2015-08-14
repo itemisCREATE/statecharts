@@ -1,17 +1,15 @@
 sudo: false
-
+language: java
 jdk: oraclejdk7
-
 cache:
   directories:
   - $HOME/.m2
  
- env: DISPLAY=:99.0
+env: DISPLAY=:99.0
 
-language: java
 before_install:
  - sh -e /etc/init.d/xvfb start
-  - sleep 10 # give xvfb some time to start
+  - sleep 10
 script: 
  - cd releng/org.yakindu.sct.releng
  - mvn clean verify
