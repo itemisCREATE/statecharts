@@ -1,6 +1,7 @@
 language: java
+before_install:
+ - sh -e /etc/init.d/xvfb start
 script: 
  - cd releng/org.yakindu.sct.releng
  - mvn clean verify
-before_install:
- - "sh -e /etc/init.d/xvfb start"
+
