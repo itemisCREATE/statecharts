@@ -1,1 +1,2 @@
 language: java
+script: releng/org.yakindu.sct.releng/mvn clean verify
