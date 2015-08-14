@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Yakindu Base Types Edit
+Bundle-SymbolicName: org.yakindu.base.types.edit;singleton:=true
+Bundle-Version: 2.5.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.yakindu.base.types.provider.TypesEditPlugin$Implementation
+Bundle-Vendor: statecharts.org
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.yakindu.base.base.provider,
+ org.yakindu.base.types.provider
+Require-Bundle: org.eclipse.core.runtime,
+ org.yakindu.base.types;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport,
+ org.yakindu.base.types.edit;visibility:=reexport,
+ org.eclipse.emf.ecore.edit;bundle-version="2.7.0"
+Bundle-ActivationPolicy: lazy

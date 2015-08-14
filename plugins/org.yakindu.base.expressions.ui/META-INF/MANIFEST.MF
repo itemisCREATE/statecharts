@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Yakindu Base Expressions UI
+Bundle-Vendor: statecharts.org
+Bundle-Version: 2.5.0.qualifier
+Bundle-SymbolicName: org.yakindu.base.expressions.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.yakindu.base.expressions;visibility:=reexport,
+ org.eclipse.xtext.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.ui,
+ org.eclipse.xtext.builder,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.compare,
+ org.eclipse.xtext.xbase.lib,
+ org.yakindu.base.types;bundle-version="2.4.1"
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.xbase.lib
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.yakindu.base.expressions.ui.quickfix,
+ org.yakindu.base.expressions.ui.contentassist,
+ org.yakindu.base.expressions.ui.contentassist.antlr,
+ org.yakindu.base.expressions.ui.internal
+Bundle-Activator: org.yakindu.base.expressions.ui.internal.ExpressionsActivator

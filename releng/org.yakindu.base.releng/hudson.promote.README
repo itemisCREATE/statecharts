@@ -1,0 +1,61 @@
+To execute this build as a Hudson build job, you have to configure the following:
+
+Parameterized-build:
++ Run Parameter
+	Name: promotionSource
+	Project: YAKINDU_Base_CI
+	Description: Select the build to be promoted.
+
++ Selection
+	Name: promotionTarget
+	Selections:
+		kepler/integration
+		kepler/milestones
+		kepler/releases
+		juno/integration
+		juno/milestones
+		juno/releases
+	Description:
+		Select the update site to promote to.
++ Selection
+	Name: appendToExistingRepository
+	Selections:
+		true
+		false
+	Description:
+		If set to false no existing repository is mirrored before and the existing one is replaced, if there is one.
+		This should only be set to false, if the promotion is to a new repository location.
+
+Source-Code-Management:
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/releng
+	Location: releng
+ 
+Build:
+
++ Invoke Maven 3
+	Goals
+		clean install
+	POM File
+		promote-pom.xml
+	Properties
+		promotionSource=${env.promotionSource}
+		promotionTarget=${env.promotionTarget}
+		AppendToExistingRepository=${env.appendToExistingRepository}
+	Profiles
+	JVM Options
+		
+	
+Post-Build-Actions:
++ Send build artifacts over SSH
+	Name: Yakindu Update Site
+	Source files: releng/org.yakindu.base.releng/target/local-update-site/**
+	Remove prefix: releng/org.yakindu.base.releng/target/local-update-site
+	Remote directory: /yakindu/${promotionTarget}
+
+Post-Build-Actions:
++ Send build artifacts over SSH
+	Name: Yakindu Update Site
+	Source files: releng/org.yakindu.base.releng/target/local-update-site/**
+	Remove prefix: releng/org.yakindu.base.releng/target/local-update-site
+	Remote directory: /yakindu/${promotionTarget}

@@ -1,0 +1,88 @@
+To execute this build as a Hudson build job, you have to configure the following:
+JobName: YAKINDU_Base_CI
+
+Source-Code-Management:
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/releng
+	Location: releng
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.xtext.utils/plugins
+	Location: XtextUtils_repository/plugins
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.xtext.utils/features
+	Location: XtextUtils_repository/features
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.gmf.utils/plugins
+	Location: gmf_utils_repository/plugins
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.gmf.utils/features
+	Location: gmf_utils_repository/features
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/plugins
+	Location: base_repository/plugins
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/features
+	Location: base_repository/features
+
+Build environment:
++ Send files or execute commands over SSH after the build runs
+	Server: Yakindu Projects.itemis.de
+	Command:
+		if [ -e base/kepler/snapshot ]; then 
+		 if [ -e base/kepler/snapshot_backup ]; then
+		  rm -r base/kepler/snapshot_backup;
+		 fi
+		 mv base/kepler/snapshot base/kepler/snapshot_backup;
+		fi
++ Send files or execute commands over SSH after the build runs
+	Server: Yakindu Projects.itemis.de
+	Source files: update-site/**
+	Remove prefix: update-site
+	Remote directory: base/kepler/snapshot
+	Command:
+		if [ -e base/kepler/snapshot -a -e base/kepler/snapshot_backup ]; then
+		 rm -r base/kepler/snapshot_backup;
+		fi
+
+Build:
++ Execute Shell
+    Command 
+    	if [ -d "build" ]; then
+		   rm -fr build
+		fi
+		mkdir build
+		cp -R releng/* build/
+		cp -R XtextUtils_repository/plugins/* build/
+		cp -R XtextUtils_repository/features/* build/
+		cp -R gmf_utils_repository/plugins/* build/
+		cp -R gmf_utils_repository/features/* build/
+		cp -R base_repository/plugins/* build/
+		cp -R base_repository/features/* build/
+
+
++ Invoke Maven 3
+	Goals
+		clean verify -s ../build/org.yakindu.base.releng/settings.xml
+	POM File
+		../build/org.yakindu.base.releng/pom.xml
+	Properties
+	Profiles
+	JVM Options
+
++ Execute Shell
+	Command
+		if [ -d "update-site" ]; then
+			rm -fr update-site
+		fi
+		mkdir update-site
+		cp -R build/org.yakindu.base.repository/target/repository/* update-site/
+		
+	
+Post-Build-Actions:
++ Publish JUnit Test Results
+	Testreports in XML format
+		**/target/surefire-reports/*.xml
++ Archive the artifacs
+	Files to archive
+		update-site/**
+		
