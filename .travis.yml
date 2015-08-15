@@ -12,12 +12,13 @@ script:
 - mvn clean verify
 before_deploy:
  - cd ../org.yakindu.sct.repository/target/repository
- - zip $TRAVIS_TAG
+ - zip $TRAVIS_TAG.zip
+ - cd ../../../org.yakindu.sct.releng
 deploy:
   provider: releases
   api_key:
     secure: DgjvfC309xvhoh+WXZAydSRPHqhmKSyi762yiKM7zU8bZdgMne//mo2dKGUiLAdp+v4j95vLv4U3gkGDEXn8vEiNUI5ENF2a+uerrQ9fT4xSIavOx0Xq6M5zWudu8iRvwMuaSaKLkTdT3YSgFaKZ8pHYWih4KfjbvFNvp69P/Ho=
-  file: ../org.yakindu.sct.repository/target/repository
+  file: ../org.yakindu.sct.repository/target/repository $TRAVIS_TAG.zip
   on:
     tags: Yakindu/statecharts
     condition: "$TRAVIS_TAG =~ ^release.*$"
