@@ -4,12 +4,17 @@ jdk: oraclejdk7
 cache:
   directories:
   - $HOME/.m2
- 
 env: DISPLAY=:99.0
-
 before_install:
- - sh -e /etc/init.d/xvfb start
-  - sleep 10
-script: 
- - cd releng/org.yakindu.sct.releng
- - mvn clean verify
+- sh -e /etc/init.d/xvfb start - sleep 10
+script:
+- cd releng/org.yakindu.sct.releng
+- mvn clean verify
+deploy:
+  provider: releases
+  api_key:
+    secure: DgjvfC309xvhoh+WXZAydSRPHqhmKSyi762yiKM7zU8bZdgMne//mo2dKGUiLAdp+v4j95vLv4U3gkGDEXn8vEiNUI5ENF2a+uerrQ9fT4xSIavOx0Xq6M5zWudu8iRvwMuaSaKLkTdT3YSgFaKZ8pHYWih4KfjbvFNvp69P/Ho=
+  file: ../org.yakindu.sct.repository/target/repository
+  on:
+    tags: Yakindu/statecharts
+    condition: "$TRAVIS_TAG =~ ^release.*$"
