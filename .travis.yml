@@ -15,6 +15,7 @@ before_deploy:
  - zip $TRAVIS_TAG.zip
  - cd ../../../org.yakindu.sct.releng
 deploy:
+  skip_cleanup: true
   provider: releases
   api_key:
     secure: DgjvfC309xvhoh+WXZAydSRPHqhmKSyi762yiKM7zU8bZdgMne//mo2dKGUiLAdp+v4j95vLv4U3gkGDEXn8vEiNUI5ENF2a+uerrQ9fT4xSIavOx0Xq6M5zWudu8iRvwMuaSaKLkTdT3YSgFaKZ8pHYWih4KfjbvFNvp69P/Ho=
