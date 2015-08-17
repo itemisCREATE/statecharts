@@ -33,7 +33,7 @@ deploy:
   provider: releases
   api_key: 
    secure: BSEYtMYXInrXum0eOmisxDIUw5puH1WycKmXvnBJKn3GeekCWV2UCF4Elocmkil8MBzYQ3LlpiihncBalvVEzpgyVEo1Z0wnxiQtatZU0gMuw6piu+Owi5Om/kB6J4DvZShLt5qWYGVynBRhGsC4jFYpakCSHySy3icg1wI1sfI=
-  file: releng/org.yakindu.sct.repository/target/repository/updatesite.zip
+  file: releng/org.yakindu.sct.repository/target/updatesite.zip
   on:
     tags: Yakindu/statecharts
     condition: "$TRAVIS_TAG =~ ^release.*$"
