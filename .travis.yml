@@ -10,10 +10,8 @@ before_install:
 script:
 - cd releng/org.yakindu.sct.releng
 - mvn clean verify
-before_deploy:
- - cd ../org.yakindu.sct.repository/target/repository
- - zip updatesite.zip
- - cd ../../../org.yakindu.sct.releng
+- cd ../org.yakindu.sct.repository/target/repository
+- zip updatesite.zip 
 deploy:
   skip_cleanup: true
   provider: releases
