@@ -28,7 +28,7 @@ script:
 - mvn clean verify
 - cd ../org.yakindu.sct.repository/target/repository
 - zip -r updatesite.zip *.*
-- cd ${TRAVIS_BUILD_DIR}
+- cd $TRAVIS_BUILD_DIR
 deploy:
  skip_cleanup: true
   provider: releases
