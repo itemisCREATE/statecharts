@@ -30,7 +30,7 @@ script:
 - zip -r updatesite.zip *.*
 - cd $TRAVIS_BUILD_DIR
 deploy:
- skip_cleanup: true
+  skip_cleanup: true
   provider: releases
   api_key: ${GITHUB_TOKEN}
   file: releng/org.yakindu.sct.repository/target/repository/updatesite.zip
