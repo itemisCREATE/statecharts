@@ -46,6 +46,7 @@ public class SCTUnitClassifierTest {
 
 	@Inject
 	SCTUnitTestModels testModels;
+	
 
 	private static final Set<EClass> IGNORE_ME = ImmutableSet.of(SGraphPackage.Literals.STATECHART,
 			StextPackage.Literals.ROOT, StextPackage.Literals.STATE_SPECIFICATION,
