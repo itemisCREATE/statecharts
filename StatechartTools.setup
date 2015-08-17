@@ -76,12 +76,6 @@
   </setupTask>
   <setupTask
       xsi:type="git:GitCloneTask"
-      id="git.clone.base"
-      remoteURI="https://github.com/Yakindu/base.git">
-    <description>${scope.project.label}</description>
-  </setupTask>
-  <setupTask
-      xsi:type="git:GitCloneTask"
       id="git.clone.statechart"
       remoteURI="https://github.com/Yakindu/statecharts.git">
     <description>${scope.project.label}</description>
@@ -95,15 +89,6 @@
         <operand
             xsi:type="predicates:RepositoryPredicate"
             project="org.yakindu.sct-feature"/>
-      </predicate>
-    </workingSet>
-    <workingSet
-        name="base">
-      <predicate
-          xsi:type="predicates:OrPredicate">
-        <operand
-            xsi:type="predicates:RepositoryPredicate"
-            project="de.itemis.gmf.runtime.commons-feature"/>
       </predicate>
     </workingSet>
     <description>The dynamic working sets for ${scope.project.label}</description>
@@ -123,9 +108,6 @@
       xsi:type="projects:ProjectsImportTask">
     <sourceLocator
         rootFolder="${git.clone.statechart.location}"
-        locateNestedProjects="true"/>
-    <sourceLocator
-        rootFolder="${git.clone.base.location}"
         locateNestedProjects="true"/>
   </setupTask>
   <setupTask
