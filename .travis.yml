@@ -1,23 +1,34 @@
 sudo: false
 language: java
 jdk: oraclejdk7
+addons:
+ apt:
+  packages:
+  - libgtest-dev
 cache:
   directories:
   - $HOME/.m2
-env: DISPLAY=:99.0
+env:
+  global:
+  - DISPLAY=:99.0
+  - GTEST_DIR=${TRAVIS_BUILD_DIR}/gtest
+  - secure: JlyegDL2Py0e0PWdFrOWIw915LN30HXlqJjsYh69LXaRj/10l4Kf9SZIKKzX33Vs8Ng9GCbHRhu/LUBnPGMB2HIVYGbdfz6FKfavWb0pD6kfMiLZ7jAFQQly9681Vkscv5RwMGtRzTJA1T5zUFzB5PsKacBCh/vc5CDhJzHpF/s=
+before_script:
+ - mkdir gtest 
+ - cd gtest
+ - cp -r /usr/src/gtest/. .
+ - ls
+ - cmake CMakeLists.txt
+ - make
+ - cd $TRAVIS_BUILD_DIR
 before_install:
 - sh -e /etc/init.d/xvfb start - sleep 10
 script:
 - cd releng/org.yakindu.sct.releng
 - mvn clean verify
 - cd ../org.yakindu.sct.repository/target/repository
-- zip updatesite.zip 
-deploy:
-  skip_cleanup: true
-  provider: releases
-  api_key:
-    secure: DgjvfC309xvhoh+WXZAydSRPHqhmKSyi762yiKM7zU8bZdgMne//mo2dKGUiLAdp+v4j95vLv4U3gkGDEXn8vEiNUI5ENF2a+uerrQ9fT4xSIavOx0Xq6M5zWudu8iRvwMuaSaKLkTdT3YSgFaKZ8pHYWih4KfjbvFNvp69P/Ho=
-  file: ../org.yakindu.sct.repository/target/repository updatesite.zip
-  on:
-    tags: Yakindu/statecharts
-    condition: "$TRAVIS_TAG =~ ^release.*$"
+- zip -r updatesite.zip *.*
+#deploy:
+# skip_cleanup: true
+#  provider: releases
+#  api_key: ${GITHUB_TOKEN}
