@@ -12,7 +12,7 @@ env:
   global:
   - DISPLAY=:99.0
   - GTEST_DIR=${TRAVIS_BUILD_DIR}/gtest
-  - secure: JlyegDL2Py0e0PWdFrOWIw915LN30HXlqJjsYh69LXaRj/10l4Kf9SZIKKzX33Vs8Ng9GCbHRhu/LUBnPGMB2HIVYGbdfz6FKfavWb0pD6kfMiLZ7jAFQQly9681Vkscv5RwMGtRzTJA1T5zUFzB5PsKacBCh/vc5CDhJzHpF/s=
+  - secure: BSEYtMYXInrXum0eOmisxDIUw5puH1WycKmXvnBJKn3GeekCWV2UCF4Elocmkil8MBzYQ3LlpiihncBalvVEzpgyVEo1Z0wnxiQtatZU0gMuw6piu+Owi5Om/kB6J4DvZShLt5qWYGVynBRhGsC4jFYpakCSHySy3icg1wI1sfI=
 before_script:
  - mkdir gtest 
  - cd gtest
@@ -28,7 +28,11 @@ script:
 - mvn clean verify
 - cd ../org.yakindu.sct.repository/target/repository
 - zip -r updatesite.zip *.*
-#deploy:
-# skip_cleanup: true
-#  provider: releases
-#  api_key: ${GITHUB_TOKEN}
+- cd ${TRAVIS_BUILD_DIR}
+deploy:
+ skip_cleanup: true
+  provider: releases
+  api_key: ${GITHUB_TOKEN}
+  file: releng/org.yakindu.sct.repository/target/repository/updatesite.zip
+  on:
+    repo: Yakindu/statecharts
