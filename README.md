@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Yakindu/statecharts.svg?branch=master)](https://travis-ci.org/Yakindu/statecharts)
+Build Status: [![Build Status](https://travis-ci.org/Yakindu/statecharts.svg?branch=master)](https://travis-ci.org/Yakindu/statecharts)
 
 #Yakindu Statechart Tools 
 # (http://www.statecharts.org)
