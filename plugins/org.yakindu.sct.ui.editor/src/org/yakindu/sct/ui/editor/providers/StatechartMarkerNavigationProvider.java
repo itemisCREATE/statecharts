@@ -27,10 +27,9 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.emf.ui.providers.marker.AbstractModelMarkerNavigationProvider;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.xtext.EcoreUtil2;
+import org.yakindu.base.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.validation.IMarkerType;
-
-import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 
 /**
  * TODO: Move common code to gmf.runtime.commons

@@ -19,12 +19,11 @@ import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirecti
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
+import org.yakindu.gmf.runtime.editpolicies.OneWayConnectionHandlesEditPolicy;
+import org.yakindu.gmf.runtime.figures.EllipseAnchorDefaultSizeNodeFigure;
 import org.yakindu.sct.ui.editor.editor.figures.ExitFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
-
-import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
-import de.itemis.gmf.runtime.commons.figures.EllipseAnchorDefaultSizeNodeFigure;
 
 /**
  * 

@@ -16,9 +16,8 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.gmf.runtime.editparts.TextAwareLabelEditPart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
-
-import de.itemis.gmf.runtime.commons.editparts.TextAwareLabelEditPart;
 
 /**
  * 

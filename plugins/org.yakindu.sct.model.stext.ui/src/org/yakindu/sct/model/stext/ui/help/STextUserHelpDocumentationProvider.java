@@ -13,8 +13,7 @@ package org.yakindu.sct.model.stext.ui.help;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
-
-import de.itemis.utils.jface.viewers.help.AbstractUserHelpDocumentationProvider;
+import org.yakindu.base.utils.jface.help.AbstractUserHelpDocumentationProvider;
 
 /**
  * 

@@ -26,6 +26,8 @@ import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
+import org.yakindu.gmf.runtime.editpolicies.OneWayConnectionHandlesEditPolicy;
+import org.yakindu.gmf.runtime.figures.EllipseAnchorDefaultSizeNodeFigure;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.editor.figures.DeepHistoryFigure;
@@ -37,9 +39,6 @@ import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
-
-import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
-import de.itemis.gmf.runtime.commons.figures.EllipseAnchorDefaultSizeNodeFigure;
 
 /**
  * 

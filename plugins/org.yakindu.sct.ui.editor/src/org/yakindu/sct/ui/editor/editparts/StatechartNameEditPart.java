@@ -13,9 +13,8 @@ package org.yakindu.sct.ui.editor.editparts;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.gmf.runtime.editparts.TextAwareLabelEditPart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
-
-import de.itemis.gmf.runtime.commons.editparts.TextAwareLabelEditPart;
 
 /**
  * 

@@ -12,11 +12,10 @@ package org.yakindu.sct.ui.editor.editor.proposals;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.base.xtext.utils.gmf.proposals.AbstractSemanticModification;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
-
-import de.itemis.xtext.utils.gmf.proposals.AbstractSemanticModification;
 
 /**
  * 

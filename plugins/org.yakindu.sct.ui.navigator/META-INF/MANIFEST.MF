@@ -7,7 +7,7 @@ Bundle-Activator: org.yakindu.sct.ui.UIActivator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.ui.navigator;bundle-version="3.5.100",
  org.eclipse.emf.edit.ui;bundle-version="2.7.0",
- de.itemis.xtext.utils.jface;bundle-version="1.0.0",
+ org.yakindu.base.xtext.utils.jface;bundle-version="1.0.0",
  org.yakindu.sct.model.stext;bundle-version="1.0.0",
  org.yakindu.sct.model.sgraph.edit;bundle-version="1.0.0",
  org.yakindu.sct.ui.editor;bundle-version="1.0.0",

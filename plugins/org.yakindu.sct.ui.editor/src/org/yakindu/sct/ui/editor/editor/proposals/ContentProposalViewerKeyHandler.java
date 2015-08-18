@@ -21,10 +21,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
-
-import de.itemis.xtext.utils.gmf.proposals.AbstractSemanticContentProposalProvider;
-import de.itemis.xtext.utils.gmf.proposals.SemanticContentControlAdapter;
-import de.itemis.xtext.utils.gmf.proposals.SemanticContentProposalLabelProvider;
+import org.yakindu.base.xtext.utils.gmf.proposals.AbstractSemanticContentProposalProvider;
+import org.yakindu.base.xtext.utils.gmf.proposals.SemanticContentControlAdapter;
+import org.yakindu.base.xtext.utils.gmf.proposals.SemanticContentProposalLabelProvider;
 
 /**
  * 

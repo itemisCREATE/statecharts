@@ -38,6 +38,7 @@ import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -50,8 +51,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-
-import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 
 /**
  * 

@@ -35,6 +35,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.yakindu.base.xtext.utils.gmf.resource.DirtyStateListener;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -47,8 +48,6 @@ import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 import org.yakindu.sct.ui.editor.validation.SCTValidationJob;
 
 import com.google.inject.Injector;
-
-import de.itemis.xtext.utils.gmf.resource.DirtyStateListener;
 
 /**
  * 
