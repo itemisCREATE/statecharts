@@ -198,7 +198,7 @@
       </menuContribution>
       <menuContribution
             allPopups="false"
-            locationURI="popup:de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu">
+            locationURI="popup:org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu">
          <menu
                id="org.yakindu.refactoring"
                label="Refactoring">

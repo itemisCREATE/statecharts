@@ -12,5 +12,5 @@
 	<artifactId>org.yakindu.base.xtext.utils.gmf</artifactId>
 	<packaging>eclipse-feature</packaging>
 	<groupId>org.yakindu.sct.features</groupId>
-	<name>de.itemis.xtext.utils.gmf-feature</name>
+	<name>org.yakindu.base.xtext.utils.gmf-feature</name>
 </project>

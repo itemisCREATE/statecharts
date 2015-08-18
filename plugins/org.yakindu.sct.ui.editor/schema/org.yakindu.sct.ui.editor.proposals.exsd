@@ -76,7 +76,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":de.itemis.xtext.utils.gmf.proposals.ISemanticModification"/>
+                  <meta.attribute kind="java" basedOn=":org.yakindu.base.xtext.utils.gmf.proposals.ISemanticModification"/>
                </appinfo>
             </annotation>
          </attribute>

@@ -80,7 +80,7 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 
 	private CompletionProposalAdapter completionProposalAdapter;
 
-	public final static String CONTEXTMENUID = "de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu";
+	public final static String CONTEXTMENUID = "org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu";
 
 	@Override
 	public void refresh() {

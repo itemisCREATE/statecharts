@@ -60,7 +60,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 	private StyledTextXtextAdapter xtextAdapter;
 	private IXtextFakeContextResourcesProvider contextFakeResourceProvider;
 	private IContextElementProvider provider;
-	private final static String CONTEXTMENUID = "de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu";
+	private final static String CONTEXTMENUID = "org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu";
 
 	public XtextStyledTextCellEditor(int style, Injector injector,
 			IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
