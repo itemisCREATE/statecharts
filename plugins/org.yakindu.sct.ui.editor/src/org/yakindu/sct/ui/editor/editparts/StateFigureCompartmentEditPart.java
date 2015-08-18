@@ -22,6 +22,7 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.gmf.runtime.editpolicies.CompartmentLayoutEditPolicy;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.DiagramActivator;
@@ -29,8 +30,6 @@ import org.yakindu.sct.ui.editor.factories.StateViewFactory;
 import org.yakindu.sct.ui.editor.policies.StateCompartmentCanonicalEditPolicy;
 import org.yakindu.sct.ui.editor.policies.StateCompartmentCreationEditPolicy;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
-
-import de.itemis.gmf.runtime.commons.editpolicies.CompartmentLayoutEditPolicy;
 
 /**
  * 

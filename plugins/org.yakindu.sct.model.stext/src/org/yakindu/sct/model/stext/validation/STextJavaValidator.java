@@ -57,6 +57,7 @@ import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
@@ -105,8 +106,6 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.name.Named;
-
-import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 
 /**
  * s Several validations for nonsensical expressions.

@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.gmf.runtime.highlighting.IHighlightingSupport;
+import org.yakindu.gmf.runtime.highlighting.IHighlightingSupport.Action;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-
-import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
-import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport.Action;
 
 /**
  * This dynamic notation handler highlight the current states, the previous

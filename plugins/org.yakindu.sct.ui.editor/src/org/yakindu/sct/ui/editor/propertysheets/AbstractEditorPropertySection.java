@@ -46,6 +46,12 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ImageHyperlink;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.yakindu.base.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
+import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
+import org.yakindu.base.xtext.utils.jface.viewers.FilteringMenuManager;
+import org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapter;
+import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
+import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainRegistry.DomainDescriptor;
 import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
@@ -53,13 +59,6 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Injector;
-
-import de.itemis.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
-import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
-import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
-import de.itemis.xtext.utils.jface.viewers.FilteringMenuManager;
-import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
-import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 /**
  * 

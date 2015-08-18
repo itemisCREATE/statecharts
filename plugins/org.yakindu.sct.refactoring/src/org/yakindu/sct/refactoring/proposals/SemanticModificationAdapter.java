@@ -13,10 +13,9 @@ package org.yakindu.sct.refactoring.proposals;
 import java.util.Collections;
 
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.base.xtext.utils.gmf.proposals.ISemanticModification;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.refactoring.refactor.IRefactoring;
-
-import de.itemis.xtext.utils.gmf.proposals.ISemanticModification;
 
 /**
  * Adapts the {@link ISemanticModification} interface to the

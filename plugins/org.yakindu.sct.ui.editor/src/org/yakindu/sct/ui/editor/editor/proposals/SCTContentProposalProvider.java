@@ -16,12 +16,11 @@ import java.util.List;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.gef.GraphicalViewer;
+import org.yakindu.base.xtext.utils.gmf.proposals.AbstractSemanticContentProposalProvider;
+import org.yakindu.base.xtext.utils.gmf.proposals.ISemanticContentProposal;
+import org.yakindu.base.xtext.utils.gmf.proposals.ISemanticModification;
+import org.yakindu.base.xtext.utils.gmf.proposals.SemanticContentProposal;
 import org.yakindu.sct.ui.editor.StatechartImages;
-
-import de.itemis.xtext.utils.gmf.proposals.AbstractSemanticContentProposalProvider;
-import de.itemis.xtext.utils.gmf.proposals.ISemanticContentProposal;
-import de.itemis.xtext.utils.gmf.proposals.ISemanticModification;
-import de.itemis.xtext.utils.gmf.proposals.SemanticContentProposal;
 
 /**
  * 

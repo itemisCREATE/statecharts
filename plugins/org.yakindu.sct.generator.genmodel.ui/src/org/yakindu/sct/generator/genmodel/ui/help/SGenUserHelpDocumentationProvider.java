@@ -12,11 +12,10 @@ package org.yakindu.sct.generator.genmodel.ui.help;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.yakindu.base.utils.jface.help.AbstractUserHelpDocumentationProvider;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureType;
-
-import de.itemis.utils.jface.viewers.help.AbstractUserHelpDocumentationProvider;
 
 /**
  * 

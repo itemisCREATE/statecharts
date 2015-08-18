@@ -32,12 +32,11 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.xtext.ui.editor.hover.html.IXtextBrowserInformationControl;
+import org.yakindu.base.utils.jface.help.HelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-
-import de.itemis.utils.jface.viewers.help.HelpHoverProvider;
 
 /**
  * Overrides the loadStylesheet method to load a custom stylesheet from this

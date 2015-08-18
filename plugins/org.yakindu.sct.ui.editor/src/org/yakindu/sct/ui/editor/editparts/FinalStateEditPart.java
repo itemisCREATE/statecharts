@@ -15,12 +15,11 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirection;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.gmf.runtime.editparts.EllipseFixedSizeShapeNodeEditPart;
+import org.yakindu.gmf.runtime.editpolicies.OneWayConnectionHandlesEditPolicy;
 import org.yakindu.sct.ui.editor.editor.figures.FinalStateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
-
-import de.itemis.gmf.runtime.commons.editparts.EllipseFixedSizeShapeNodeEditPart;
-import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
 
 /**
  * 

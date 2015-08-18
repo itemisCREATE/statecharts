@@ -15,9 +15,8 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-
-import de.itemis.gmf.runtime.commons.highlighting.HighlightingSupportAdapter;
-import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
+import org.yakindu.gmf.runtime.highlighting.HighlightingSupportAdapter;
+import org.yakindu.gmf.runtime.highlighting.IHighlightingSupport;
 
 /**
  * Adapts GMF Editors to a {@link IHighlightingSupport}

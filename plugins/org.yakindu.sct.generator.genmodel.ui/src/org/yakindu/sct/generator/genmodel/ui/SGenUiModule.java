@@ -18,13 +18,12 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.shared.Access;
+import org.yakindu.base.utils.jface.help.CrossRefObjectTextHover;
+import org.yakindu.base.utils.jface.help.HelpHoverProvider;
 import org.yakindu.sct.generator.genmodel.ui.help.SGenUserHelpDocumentationProvider;
 import org.yakindu.sct.generator.genmodel.ui.highlighting.SGenHighlightingConfiguration;
 import org.yakindu.sct.generator.genmodel.ui.highlighting.SGenSemanticHighlightingCalculator;
 import org.yakindu.sct.generator.genmodel.ui.templates.SGenTemplateProposalProvider;
-
-import de.itemis.utils.jface.viewers.help.CrossRefObjectTextHover;
-import de.itemis.utils.jface.viewers.help.HelpHoverProvider;
 
 /**
  * Use this class to register components to be used within the IDE.

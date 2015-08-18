@@ -34,14 +34,13 @@ import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
+import org.yakindu.gmf.runtime.highlighting.HighlightingParameters;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.util.CrossDocumentContentAdapter;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 
 import com.google.common.collect.Lists;
-
-import de.itemis.gmf.runtime.commons.highlighting.HighlightingParameters;
 
 /**
  * @author andreas muelder - Initial contribution and API

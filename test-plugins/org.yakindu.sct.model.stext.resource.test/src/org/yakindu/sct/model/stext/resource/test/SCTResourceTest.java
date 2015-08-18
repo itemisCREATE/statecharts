@@ -39,6 +39,8 @@ import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
+import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
@@ -59,9 +61,6 @@ import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 
 import com.google.inject.Injector;
-
-import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
-import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 
 /**
  * 

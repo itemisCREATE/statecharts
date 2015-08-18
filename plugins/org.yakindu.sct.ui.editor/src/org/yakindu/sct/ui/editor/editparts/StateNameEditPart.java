@@ -16,12 +16,11 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.gmf.runtime.editparts.TextAwareLabelEditPart;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
-
-import de.itemis.gmf.runtime.commons.editparts.TextAwareLabelEditPart;
 
 /**
  * 

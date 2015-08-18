@@ -32,10 +32,9 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
+import org.yakindu.gmf.runtime.highlighting.IHighlightingSupport;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
-
-import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
 
 /**
  * One SCTSourceDisplay is responsible for n {@link IDynamicNotationHandler}s.

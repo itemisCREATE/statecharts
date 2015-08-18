@@ -22,9 +22,8 @@ import org.eclipse.gmf.runtime.emf.core.resources.IResourceHelper;
 import org.eclipse.gmf.runtime.emf.core.util.Util;
 import org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
+import org.yakindu.gmf.runtime.editpolicies.CompartmentLayoutEditPolicy.RequestParameterKeys;
 import org.yakindu.sct.ui.editor.DiagramActivator;
-
-import de.itemis.gmf.runtime.commons.editpolicies.CompartmentLayoutEditPolicy.RequestParameterKeys;
 
 /**
  * 

@@ -21,13 +21,12 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.yakindu.base.types.typesystem.ITypeSystem;
+import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
-
-import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 
 /**
  * @author andreas muelder - Initial contribution and API

@@ -17,9 +17,8 @@ import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
+import org.yakindu.base.xtext.utils.gmf.figures.HighlightingWrappingLabel;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
-
-import de.itemis.xtext.utils.gmf.figures.HighlightingWrappingLabel;
 
 /**
  * Figure for text compartment statechart declarations

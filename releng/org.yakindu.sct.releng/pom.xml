@@ -314,14 +314,14 @@
 
 		<!-- Plugins -->
 		<module>../../plugins/org.yakindu.base.types.test</module>
-		<module>../../plugins/de.itemis.xtext.utils.gmf</module>
-		<module>../../plugins/de.itemis.xtext.utils.jface</module>
+		<module>../../plugins/org.yakindu.base.xtext.utils.gmf</module>
+		<module>../../plugins/org.yakindu.base.xtext.utils.jface</module>
 		<module>../../plugins/org.yakindu.base.types</module>
 		<module>../../plugins/org.yakindu.base.types.edit</module>
 		<module>../../plugins/org.yakindu.base.expressions</module>
 		<module>../../plugins/org.yakindu.base.expressions.edit</module>
 		<module>../../plugins/org.yakindu.base.expressions.ui</module>
-		<module>../../plugins/de.itemis.gmf.runtime.commons</module>
+		<module>../../plugins/org.yakindu.gmf.runtime</module>
 		<module>../../plugins/org.yakindu.sct.commons</module>
 		<module>../../plugins/org.yakindu.sct.compare</module>
 		<module>../../plugins/org.yakindu.sct.domain</module>
@@ -357,9 +357,9 @@
 
 		<!-- Features -->
 		<module>../../features/org.yakindu.base-feature</module>
-		<module>../../features/de.itemis.xtext.utils.gmf-feature</module>
-		<module>../../features/de.itemis.xtext.utils.jface-feature</module>
-		<module>../../features/de.itemis.gmf.runtime.commons-feature</module>
+		<module>../../features/org.yakindu.base.xtext.utils.gmf-feature</module>
+		<module>../../features/org.yakindu.base.xtext.utils.jface-feature</module>
+		<module>../../features/org.yakindu.gmf.runtime-feature</module>
 		<module>../../features/org.yakindu.sct-feature</module>
 		<module>../../features/org.yakindu.sct.generator.c-feature</module>
 		<module>../../features/org.yakindu.sct.generator.cpp-feature</module>

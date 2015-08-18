@@ -383,12 +383,12 @@
 		<module>../org.yakindu.base.expressions.edit</module>
 		<module>../org.yakindu.base.expressions.ui</module>
 
-		<module>../de.itemis.gmf.runtime.commons</module>
-		<module>../de.itemis.gmf.runtime.commons-feature</module>
-		<module>../de.itemis.xtext.utils.gmf</module>
-		<module>../de.itemis.xtext.utils.gmf-feature</module>
-		<module>../de.itemis.xtext.utils.jface</module>
-		<module>../de.itemis.xtext.utils.jface-feature</module>
+		<module>../org.yakindu.gmf.runtime</module>
+		<module>../org.yakindu.gmf.runtime-feature</module>
+		<module>../org.yakindu.base.xtext.utils.gmf</module>
+		<module>../org.yakindu.base.xtext.utils.gmf-feature</module>
+		<module>../org.yakindu.base.xtext.utils.jface</module>
+		<module>../org.yakindu.base.xtext.utils.jface-feature</module>
 		<module>../org.yakindu.base-feature</module>
 		<module>../org.yakindu.base.repository</module>
 	</modules>

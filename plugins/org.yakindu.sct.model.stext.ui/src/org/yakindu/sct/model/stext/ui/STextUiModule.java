@@ -20,6 +20,7 @@ import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.IResourceValidator;
+import org.yakindu.base.utils.jface.help.CrossRefObjectTextHover;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerTypeProvider;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
@@ -32,8 +33,6 @@ import org.yakindu.sct.model.stext.ui.validation.SCTResourceValidatorImpl;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
-
-import de.itemis.utils.jface.viewers.help.CrossRefObjectTextHover;
 
 /**
  * Use this class to register components to be used within the IDE.

@@ -28,11 +28,10 @@ import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.base.xtext.utils.gmf.proposals.AbstractSemanticModification;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
-
-import de.itemis.xtext.utils.gmf.proposals.AbstractSemanticModification;
 
 /**
  * 

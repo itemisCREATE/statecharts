@@ -17,9 +17,8 @@ import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
-
-import de.itemis.xtext.utils.gmf.directedit.IEAttributeProvider;
-import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
+import org.yakindu.base.xtext.utils.gmf.directedit.IEAttributeProvider;
+import org.yakindu.base.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 
 /**
  * 
