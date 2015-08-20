@@ -15,7 +15,7 @@
    <feature url="features/org.yakindu.sct.generator.java_0.0.0.jar" id="org.yakindu.sct.generator.java" version="0.0.0">
       <category name="Yakindu SCT 2"/>
    </feature>
-     <feature url="features/org.yakindu.sct.generator.cpp_0.0.0.jar" id="org.yakindu.sct.generator.cpp" version="0.0.0">
+   <feature url="features/org.yakindu.sct.generator.cpp_0.0.0.jar" id="org.yakindu.sct.generator.cpp" version="0.0.0">
       <category name="Yakindu SCT 2"/>
    </feature>
    <feature url="features/org.yakindu.sct.generator.java.source_0.0.0.jar" id="org.yakindu.sct.generator.java.source" version="0.0.0">
@@ -23,6 +23,9 @@
    </feature>
    <feature url="features/org.yakindu.sct.sdk_0.0.0.jar" id="org.yakindu.sct.sdk" version="0.0.0">
       <category name="Yakindu SCT 2"/>
+   </feature>
+   <feature url="features/org.yakindu.base_2.5.0.qualifier.jar" id="org.yakindu.base" version="2.5.0.qualifier">
+      <category name="Yakindu BASE"/>
    </feature>
    <category-def name="Yakindu SCT 2" label="Yakindu SCT 2">
       <description>
@@ -32,6 +35,11 @@
    <category-def name="Yakindu SCT 2 (Sources)" label="Yakindu SCT 2 (Sources)">
       <description>
          Source features of Yakindu Statechart Tools (SCT) Version 2
+      </description>
+   </category-def>
+   <category-def name="Yakindu BASE" label="Yakindu BASE">
+      <description>
+         Yakindu Base features
       </description>
    </category-def>
 </site>
