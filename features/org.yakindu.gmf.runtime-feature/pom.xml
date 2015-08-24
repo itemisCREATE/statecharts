@@ -9,8 +9,8 @@
 		<version>2.5.0-SNAPSHOT</version>
 		<relativePath>../../releng/org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
-	<artifactId>org.yakindu.gmf.runtime</artifactId>
+	<artifactId>org.yakindu.base.gmf.runtime</artifactId>
 	<packaging>eclipse-feature</packaging>
 	<groupId>org.yakindu.sct.features</groupId>
-	<name>org.yakindu.gmf.runtime-feature</name>
+	<name>org.yakindu.gmf.base.runtime-feature</name>
 </project>

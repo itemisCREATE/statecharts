@@ -38,8 +38,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.yakindu.base.gmf.runtime.util.EditPartUtils;
 import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
-import org.yakindu.gmf.runtime.util.EditPartUtils;
 import org.yakindu.sct.model.sgraph.provider.SGraphItemProviderAdapterFactory;
 
 /**

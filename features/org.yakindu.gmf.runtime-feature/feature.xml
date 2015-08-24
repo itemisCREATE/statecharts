@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.yakindu.gmf.runtime"
+      id="org.yakindu.base.gmf.runtime"
       label="GMF Runtime"
       version="2.5.0.qualifier"
       provider-name="itemis AG">
@@ -18,7 +18,7 @@
    </license>
 
    <plugin
-         id="org.yakindu.gmf.runtime"
+         id="org.yakindu.base.gmf.runtime"
          download-size="0"
          install-size="0"
          version="0.0.0"

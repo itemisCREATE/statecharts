@@ -2,7 +2,7 @@ package org.yakindu.sct.simulation.ui.model.presenter;
 
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.yakindu.gmf.runtime.highlighting.IHighlightingSupport;
+import org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 import org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants;
 
