@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.base.base.BasePackage;
-import org.yakindu.gmf.runtime.editparts.TextAwareLabelEditPart;
-import org.yakindu.gmf.runtime.parsers.StringAttributeParser;
+import org.yakindu.base.gmf.runtime.editparts.TextAwareLabelEditPart;
+import org.yakindu.base.gmf.runtime.parsers.StringAttributeParser;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 
 /**

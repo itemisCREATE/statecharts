@@ -22,7 +22,7 @@
    </url>
 
    <includes
-         id="org.yakindu.gmf.runtime"
+         id="org.yakindu.base.gmf.runtime"
          version="0.0.0"/>
    <includes
          id="org.yakindu.base.xtext.utils.gmf"

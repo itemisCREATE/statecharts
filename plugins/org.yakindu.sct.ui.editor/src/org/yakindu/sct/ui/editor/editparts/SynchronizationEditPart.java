@@ -17,7 +17,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.gmf.runtime.editpolicies.BarResizeEditPolicy;
+import org.yakindu.base.gmf.runtime.editpolicies.BarResizeEditPolicy;
 import org.yakindu.sct.ui.editor.editor.figures.SynchronizationFigure;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 

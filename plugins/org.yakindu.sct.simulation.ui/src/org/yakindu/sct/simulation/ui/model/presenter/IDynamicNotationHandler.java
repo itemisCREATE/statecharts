@@ -1,6 +1,6 @@
 package org.yakindu.sct.simulation.ui.model.presenter;
 
-import org.yakindu.gmf.runtime.highlighting.IHighlightingSupport;
+import org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 
 /**

@@ -16,7 +16,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
 import org.yakindu.base.base.BasePackage;
-import org.yakindu.gmf.runtime.editparts.TextAwareLabelEditPart;
+import org.yakindu.base.gmf.runtime.editparts.TextAwareLabelEditPart;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
