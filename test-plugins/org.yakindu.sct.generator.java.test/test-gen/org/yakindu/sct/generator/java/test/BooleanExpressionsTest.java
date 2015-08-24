@@ -40,7 +40,7 @@ public class BooleanExpressionsTest {
 	public void testbooleanExpressions() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
-		assertTrue(statemachine.getMyBool1() == true);
+		assertTrue(statemachine.getMyBool1() == false);
 		assertTrue(statemachine.getMyBool2() == false);
 		statemachine.raiseE1();
 		statemachine.runCycle();
