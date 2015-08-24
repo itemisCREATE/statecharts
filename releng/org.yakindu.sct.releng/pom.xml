@@ -270,12 +270,6 @@
 			</build>
 		</profile>
 		<profile>
-			<id>CI</id>
-			<properties>
-				<testFailureIgnore>true</testFailureIgnore>
-			</properties>
-		</profile>
-		<profile>
 			<id>enableSigning</id>
 			<build>
 				<plugins>
