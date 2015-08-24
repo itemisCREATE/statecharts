@@ -15,7 +15,7 @@ import org.eclipse.gmf.runtime.diagram.ui.services.palette.PaletteFactory;
 import org.eclipse.gmf.runtime.diagram.ui.tools.ConnectionCreationTool;
 import org.eclipse.gmf.runtime.emf.type.core.ElementTypeRegistry;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
-import org.yakindu.gmf.runtime.palette.CreationTool;
+import org.yakindu.base.gmf.runtime.palette.CreationTool;
 
 /**
  * 

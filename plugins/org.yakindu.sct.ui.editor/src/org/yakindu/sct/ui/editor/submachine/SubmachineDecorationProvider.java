@@ -24,7 +24,7 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.EcoreUtil2;
-import org.yakindu.gmf.runtime.decorators.AbstractDecoratorProvider;
+import org.yakindu.base.gmf.runtime.decorators.AbstractDecoratorProvider;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;

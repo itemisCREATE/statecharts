@@ -8,7 +8,7 @@
             adaptableType="org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor"
             class="org.yakindu.sct.simulation.ui.model.presenter.IHighlightingSupportAdapterFactory">
          <adapter
-               type="org.yakindu.gmf.runtime.highlighting.IHighlightingSupport">
+               type="org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport">
          </adapter>
       </factory>
    </extension>

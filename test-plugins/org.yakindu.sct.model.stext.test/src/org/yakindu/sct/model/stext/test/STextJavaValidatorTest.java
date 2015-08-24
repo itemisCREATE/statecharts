@@ -225,7 +225,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		AssertableDiagnostics validationResult = tester.validate(expression);
 		validationResult.assertErrorContains(STextJavaValidator.GUARD_EXPRESSION);
 
-		Scope context = createInternalScope("internal: var myInt : integer var myBool : boolean = true)");
+		Scope context = createInternalScope("internal: var myInt : integer var myBool : boolean = true");
 		expression = super.parseExpression("[myInt = 5]", context, ReactionTrigger.class.getSimpleName());
 		validationResult = tester.validate(expression);
 		validationResult.assertErrorContains(STextJavaValidator.GUARD_EXPRESSION);

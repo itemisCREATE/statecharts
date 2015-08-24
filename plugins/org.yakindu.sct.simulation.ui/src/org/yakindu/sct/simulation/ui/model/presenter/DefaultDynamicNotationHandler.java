@@ -34,7 +34,7 @@ import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
-import org.yakindu.gmf.runtime.highlighting.HighlightingParameters;
+import org.yakindu.base.gmf.runtime.highlighting.HighlightingParameters;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.util.CrossDocumentContentAdapter;

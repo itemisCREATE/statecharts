@@ -24,7 +24,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
-import org.yakindu.gmf.runtime.decorators.AbstractMarkerBasedDecorationProvider;
+import org.yakindu.base.gmf.runtime.decorators.AbstractMarkerBasedDecorationProvider;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;

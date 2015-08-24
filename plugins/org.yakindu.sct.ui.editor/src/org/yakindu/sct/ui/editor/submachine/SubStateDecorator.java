@@ -18,7 +18,7 @@ import org.eclipse.gmf.runtime.diagram.ui.render.util.DiagramRenderUtil;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.swt.graphics.Image;
-import org.yakindu.gmf.runtime.decorators.InteractiveDecorator;
+import org.yakindu.base.gmf.runtime.decorators.InteractiveDecorator;
 import org.yakindu.sct.model.sgraph.State;
 
 /**

@@ -321,7 +321,7 @@
 		<module>../../plugins/org.yakindu.base.expressions</module>
 		<module>../../plugins/org.yakindu.base.expressions.edit</module>
 		<module>../../plugins/org.yakindu.base.expressions.ui</module>
-		<module>../../plugins/org.yakindu.gmf.runtime</module>
+		<module>../../plugins/org.yakindu.base.gmf.runtime</module>
 		<module>../../plugins/org.yakindu.sct.commons</module>
 		<module>../../plugins/org.yakindu.sct.compare</module>
 		<module>../../plugins/org.yakindu.sct.domain</module>
@@ -359,7 +359,7 @@
 		<module>../../features/org.yakindu.base-feature</module>
 		<module>../../features/org.yakindu.base.xtext.utils.gmf-feature</module>
 		<module>../../features/org.yakindu.base.xtext.utils.jface-feature</module>
-		<module>../../features/org.yakindu.gmf.runtime-feature</module>
+		<module>../../features/org.yakindu.base.gmf.runtime-feature</module>
 		<module>../../features/org.yakindu.sct-feature</module>
 		<module>../../features/org.yakindu.sct.generator.c-feature</module>
 		<module>../../features/org.yakindu.sct.generator.cpp-feature</module>

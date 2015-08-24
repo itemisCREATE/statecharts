@@ -8,7 +8,7 @@ Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
- org.yakindu.gmf.runtime,
+ org.yakindu.base.gmf.runtime,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor,
  org.eclipse.gmf.runtime.diagram.ui,
  org.eclipse.debug.ui,

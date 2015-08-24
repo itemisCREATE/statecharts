@@ -14,7 +14,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.gmf.runtime.editparts.FixedSizeShapeNodeEditPart;
+import org.yakindu.base.gmf.runtime.editparts.FixedSizeShapeNodeEditPart;
 import org.yakindu.sct.ui.editor.editor.figures.ChoiceFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
