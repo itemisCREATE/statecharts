@@ -12,6 +12,8 @@ package org.yakindu.sct.model.stext.test.util;
 
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.yakindu.sct.model.stext.STextRuntimeModule;
+import org.yakindu.sct.model.stext.expressions.IExpressionParser;
+import org.yakindu.sct.model.stext.expressions.STextExpressionParser;
 
 /**
  * 
@@ -23,6 +25,10 @@ public class STextRuntimeTestModule extends STextRuntimeModule {
 	@Override
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return STextTestScopeProvider.class;
+	}
+
+	public Class<? extends IExpressionParser> bindISTextUtilityProvider() {
+		return STextExpressionParser.class;
 	}
 
 }
