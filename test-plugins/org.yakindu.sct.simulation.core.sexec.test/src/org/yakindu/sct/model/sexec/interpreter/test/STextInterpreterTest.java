@@ -452,12 +452,12 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testPlainTrue() {
-		assertEquals(true, executeExpression("", "true"));
+		assertEquals(true, executeExpression("true"));
 	}
 
 	@Test
 	public void testPlainFalse() {
-		assertEquals(false, executeExpression("", "false"));
+		assertEquals(false, executeExpression("false"));
 	}
 
 	// Convenience...
@@ -523,22 +523,24 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	protected Object executeWithDefaultScope(String expression) {
 		Scope defaultScope = internalScope();
-		Expression statement = (Expression) parseExpression(expression,
-				defaultScope, Expression.class.getSimpleName());
+		Expression statement = (Expression) parseExpression(expression, defaultScope, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
 	}
 
 	protected Object execute(String scope, String expression) {
 		Scope defaultScope = createInternalScope(scope);
-		Expression statement = (Expression) parseExpression(expression,
-				defaultScope, Expression.class.getSimpleName());
+		Expression statement = (Expression) parseExpression(expression, defaultScope, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
 	}
 
 	protected Object executeExpression(String scope, String expression) {
 		Scope defaultScope = createInternalScope(scope);
-		Expression statement = (Expression) parseExpression(expression,
-				defaultScope, Expression.class.getSimpleName());
+		Expression statement = (Expression) parseExpression(expression, defaultScope, Expression.class.getSimpleName());
+		return interpreter.evaluateStatement(statement, context);
+	}
+
+	protected Object executeExpression(String expression) {
+		Expression statement = (Expression) parseExpression(expression, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
 	}
 

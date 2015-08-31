@@ -44,7 +44,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="Luna"
+      defaultValue="Mars"
       storageURI="scope://Workspace">
     <description>xx</description>
   </setupTask>
@@ -100,7 +100,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="target_definition"
-      value="Luna (SCT)"
+      value="Mars (SCT)"
       label="Target definition">
     <description>Target definition id</description>
   </setupTask>
