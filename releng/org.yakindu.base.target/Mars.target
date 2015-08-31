@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Mars (SCT)" sequenceNumber="30">
+<?pde version="3.8"?><target name="Mars (SCT)" sequenceNumber="31">
 <locations>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.platform.ide" version="4.5.0.I20150603-2000"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.5/"/>
-</location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.cdt.sdk.feature.group" version="8.7.0.201506070905"/>
 <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.9.0.201505312221"/>
@@ -25,6 +21,11 @@
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.compare.diagram.gmf.feature.group" version="3.0.2.201501201328"/>
 <repository location="http://download.eclipse.org/releases/luna"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.pde.source.feature.group" version="3.11.0.v20150603-2000"/>
+<unit id="org.eclipse.platform.ide" version="4.5.0.I20150603-2000"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.5/"/>
 </location>
 </locations>
 </target>
