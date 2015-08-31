@@ -115,17 +115,20 @@ public class DomainRegistry {
 	}
 
 	public static DomainDescriptor getDomainDescriptor(final String id) {
-		final String defaultValueLiteral = SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral();
+		final String defaultDomainID = SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral();
 		try {
 			return Iterables.find(getDomainDescriptors(), new Predicate<DomainDescriptor>() {
 				@Override
 				public boolean apply(DomainDescriptor input) {
-					return input.getDomainID().equals(id != null ? id : defaultValueLiteral);
+					return input.getDomainID().equals(id != null ? id : defaultDomainID);
 				}
 			});
 		} catch (NoSuchElementException e) {
+			if(defaultDomainID.equals(id)){
+				throw new IllegalArgumentException("No default domain found!");
+			}
 			System.err.println("Could not find domain descriptor for id " + id + " - > using default domain");
-			return getDomainDescriptor(defaultValueLiteral);
+			return getDomainDescriptor(defaultDomainID);
 		}
 	}
 
