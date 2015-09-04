@@ -242,7 +242,6 @@ class Statemachine {
 		/**
 		 * @see IStatemachine#isActive()
 		 */
-		@Override
 		public boolean isActive(){
 			
 			return 
@@ -263,7 +262,6 @@ class Statemachine {
 			«ENDIF»
 			 * @see IStatemachine#isFinal() 
 			 */
-			@Override
 			public boolean isFinal(){
 		''' +
 		
