@@ -191,6 +191,9 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 	@Override
 	protected String getDisplayString(EObject element, String qualifiedNameAsString, String shortName) {
+		if(element == null || element.eIsProxy()){
+			return qualifiedNameAsString;
+		}
 		IItemLabelProvider adapter = (IItemLabelProvider) composedAdapterFactory.adapt(element,
 				IItemLabelProvider.class);
 		if (adapter != null) {
