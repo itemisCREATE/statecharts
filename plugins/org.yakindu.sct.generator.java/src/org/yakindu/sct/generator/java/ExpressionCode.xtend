@@ -87,25 +87,11 @@ class ExpressionCode {
 	def dispatch String code(AssignmentExpression it) {
 		if (eContainer instanceof Expression) {
 			return varRef.code + operator.code + expression.code
-		} else {
-			if (varRef instanceof ElementReferenceExpression) {
-				val refExp = varRef as ElementReferenceExpression
-				if (refExp.definition instanceof Property) {
-					return assignCmd(refExp.definition as Property)
-				} 
-			}
-			else if (varRef instanceof FeatureCall) {
-				val featureCall = varRef as FeatureCall
-				if (featureCall.feature instanceof Property) {
-					return assignCmd(featureCall.feature as Property)
-				}
-			}
+		} else if (varRef.definition instanceof Property) {
+			var property = varRef.definition as Property
+			return '''«property.getContext(false)»«property.setter»(«assignCmdArgument(property)»)'''
 		}
 	}
-	
-	def String assignCmd(AssignmentExpression it, Property property) '''
-		«property.getContext(false)»«property.setter»(«assignCmdArgument(property)»)
-	'''
 
 	def assignCmdArgument(AssignmentExpression it, Property property) {
 		var cmd = ""
@@ -343,7 +329,7 @@ class ExpressionCode {
 		}
 		return ret
 	}
-	
+
 	def boolean isPropertyContained(Expression it) {
 		var ret = false
 		if (eContainer instanceof Property) {
