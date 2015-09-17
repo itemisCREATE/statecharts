@@ -2,7 +2,7 @@ package org.yakindu.scr.guard;
 
 public class GuardStatemachine implements IGuardStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
 
@@ -23,6 +23,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 		}
 
 		private long myVar;
+
 		public long getMyVar() {
 			return myVar;
 		}
@@ -31,7 +32,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 			this.myVar = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			event1 = false;
 			event2 = false;
 			return_ID = false;
@@ -39,7 +40,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, $NullState$
@@ -62,7 +63,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.myVar = 0;
+		sCInterface.setMyVar(0);
 	}
 
 	public void enter() {
@@ -80,39 +81,37 @@ public class GuardStatemachine implements IGuardStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -147,7 +146,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 	}
 
 	private boolean check_main_region_A_tr0_tr0() {
-		return (sCInterface.event1) && sCInterface.myVar == 10;
+		return (sCInterface.event1) && sCInterface.getMyVar() == 10;
 	}
 
 	private boolean check_main_region_A_tr1_tr1() {
@@ -182,7 +181,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.myVar = 10;
+		sCInterface.setMyVar(10);
 	}
 
 	/* Exit action for state 'Guard'. */

@@ -1,10 +1,8 @@
 package org.yakindu.scr.integerexpressions;
 
-public class IntegerExpressionsStatemachine
-		implements
-			IIntegerExpressionsStatemachine {
+public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -13,6 +11,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long myInt1;
+
 		public long getMyInt1() {
 			return myInt1;
 		}
@@ -22,6 +21,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long myInt2;
+
 		public long getMyInt2() {
 			return myInt2;
 		}
@@ -31,6 +31,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean less;
+
 		public boolean getLess() {
 			return less;
 		}
@@ -40,6 +41,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean greater;
+
 		public boolean getGreater() {
 			return greater;
 		}
@@ -49,6 +51,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean equalOrLess;
+
 		public boolean getEqualOrLess() {
 			return equalOrLess;
 		}
@@ -58,6 +61,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean equalOrGreater;
+
 		public boolean getEqualOrGreater() {
 			return equalOrGreater;
 		}
@@ -67,6 +71,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean equal;
+
 		public boolean getEqual() {
 			return equal;
 		}
@@ -76,6 +81,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean notEqual;
+
 		public boolean getNotEqual() {
 			return notEqual;
 		}
@@ -85,6 +91,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long plus;
+
 		public long getPlus() {
 			return plus;
 		}
@@ -94,6 +101,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long minus;
+
 		public long getMinus() {
 			return minus;
 		}
@@ -103,6 +111,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long multiply;
+
 		public long getMultiply() {
 			return multiply;
 		}
@@ -112,6 +121,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long division;
+
 		public long getDivision() {
 			return division;
 		}
@@ -121,6 +131,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long modulo;
+
 		public long getModulo() {
 			return modulo;
 		}
@@ -130,6 +141,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long negat;
+
 		public long getNegat() {
 			return negat;
 		}
@@ -139,6 +151,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean complement;
+
 		public boolean getComplement() {
 			return complement;
 		}
@@ -148,6 +161,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long multiAssign;
+
 		public long getMultiAssign() {
 			return multiAssign;
 		}
@@ -157,6 +171,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long divAssign;
+
 		public long getDivAssign() {
 			return divAssign;
 		}
@@ -166,6 +181,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long plusAssign;
+
 		public long getPlusAssign() {
 			return plusAssign;
 		}
@@ -175,6 +191,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long minusAssign;
+
 		public long getMinusAssign() {
 			return minusAssign;
 		}
@@ -184,6 +201,7 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long moduloAssign;
+
 		public long getModuloAssign() {
 			return moduloAssign;
 		}
@@ -192,13 +210,13 @@ public class IntegerExpressionsStatemachine
 			this.moduloAssign = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e1 = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, $NullState$
@@ -221,45 +239,45 @@ public class IntegerExpressionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.myInt1 = 0;
+		sCInterface.setMyInt1(0);
 
-		sCInterface.myInt2 = 0;
+		sCInterface.setMyInt2(0);
 
-		sCInterface.less = false;
+		sCInterface.setLess(false);
 
-		sCInterface.greater = false;
+		sCInterface.setGreater(false);
 
-		sCInterface.equalOrLess = false;
+		sCInterface.setEqualOrLess(false);
 
-		sCInterface.equalOrGreater = false;
+		sCInterface.setEqualOrGreater(false);
 
-		sCInterface.equal = false;
+		sCInterface.setEqual(false);
 
-		sCInterface.notEqual = false;
+		sCInterface.setNotEqual(false);
 
-		sCInterface.plus = 0;
+		sCInterface.setPlus(0);
 
-		sCInterface.minus = 0;
+		sCInterface.setMinus(0);
 
-		sCInterface.multiply = 0;
+		sCInterface.setMultiply(0);
 
-		sCInterface.division = 0;
+		sCInterface.setDivision(0);
 
-		sCInterface.modulo = 0;
+		sCInterface.setModulo(0);
 
-		sCInterface.negat = 0;
+		sCInterface.setNegat(0);
 
-		sCInterface.complement = false;
+		sCInterface.setComplement(false);
 
-		sCInterface.multiAssign = 2;
+		sCInterface.setMultiAssign(2);
 
-		sCInterface.divAssign = 20;
+		sCInterface.setDivAssign(20);
 
-		sCInterface.plusAssign = 2;
+		sCInterface.setPlusAssign(2);
 
-		sCInterface.minusAssign = 2;
+		sCInterface.setMinusAssign(2);
 
-		sCInterface.moduloAssign = 20;
+		sCInterface.setModuloAssign(20);
 	}
 
 	public void enter() {
@@ -277,39 +295,37 @@ public class IntegerExpressionsStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_StateA :
@@ -486,46 +502,46 @@ public class IntegerExpressionsStatemachine
 
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.myInt1 = 10;
+		sCInterface.setMyInt1(10);
 
-		sCInterface.myInt2 = 5;
+		sCInterface.setMyInt2(5);
 	}
 
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.less = (sCInterface.myInt1 < sCInterface.myInt2);
+		sCInterface.setLess((sCInterface.myInt1 < sCInterface.myInt2));
 
-		sCInterface.greater = (sCInterface.myInt1 > sCInterface.myInt2);
+		sCInterface.setGreater((sCInterface.myInt1 > sCInterface.myInt2));
 
-		sCInterface.equalOrLess = (sCInterface.myInt1 <= sCInterface.myInt2);
+		sCInterface.setEqualOrLess((sCInterface.myInt1 <= sCInterface.myInt2));
 
-		sCInterface.equalOrGreater = (sCInterface.myInt1 >= sCInterface.myInt2);
+		sCInterface.setEqualOrGreater((sCInterface.myInt1 >= sCInterface.myInt2));
 
-		sCInterface.equal = (sCInterface.myInt1 == sCInterface.myInt2);
+		sCInterface.setEqual((sCInterface.myInt1 == sCInterface.myInt2));
 
-		sCInterface.notEqual = (sCInterface.myInt1 != sCInterface.myInt2);
+		sCInterface.setNotEqual((sCInterface.myInt1 != sCInterface.myInt2));
 
-		sCInterface.plus = sCInterface.myInt1 + sCInterface.myInt2;
+		sCInterface.setPlus(sCInterface.myInt1 + sCInterface.myInt2);
 
-		sCInterface.minus = sCInterface.myInt1 - sCInterface.myInt2;
+		sCInterface.setMinus(sCInterface.myInt1 - sCInterface.myInt2);
 
-		sCInterface.multiply = sCInterface.myInt1 * sCInterface.myInt2;
+		sCInterface.setMultiply(sCInterface.myInt1 * sCInterface.myInt2);
 
-		sCInterface.division = sCInterface.myInt1 / sCInterface.myInt2;
+		sCInterface.setDivision(sCInterface.myInt1 / sCInterface.myInt2);
 
-		sCInterface.modulo = sCInterface.myInt1 % sCInterface.myInt2;
+		sCInterface.setModulo(sCInterface.myInt1 % sCInterface.myInt2);
 
-		sCInterface.negat = -sCInterface.myInt1;
+		sCInterface.setNegat(-sCInterface.myInt1);
 
-		sCInterface.multiAssign *= sCInterface.myInt1;
+		sCInterface.setMultiAssign(sCInterface.getMultiAssign() * sCInterface.myInt1);
 
-		sCInterface.divAssign /= sCInterface.myInt1;
+		sCInterface.setDivAssign(sCInterface.getDivAssign() / sCInterface.myInt1);
 
-		sCInterface.plusAssign += sCInterface.myInt1;
+		sCInterface.setPlusAssign(sCInterface.getPlusAssign() + sCInterface.myInt1);
 
-		sCInterface.minusAssign -= sCInterface.myInt1;
+		sCInterface.setMinusAssign(sCInterface.getMinusAssign() - sCInterface.myInt1);
 
-		sCInterface.moduloAssign %= sCInterface.myInt1;
+		sCInterface.setModuloAssign(sCInterface.getModuloAssign() % sCInterface.myInt1);
 	}
 
 	/* Exit action for state 'IntegerExpressions'. */

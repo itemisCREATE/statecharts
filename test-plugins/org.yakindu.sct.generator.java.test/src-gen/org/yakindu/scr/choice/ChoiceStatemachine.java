@@ -2,7 +2,7 @@ package org.yakindu.scr.choice;
 
 public class ChoiceStatemachine implements IChoiceStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -29,6 +29,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		}
 
 		private boolean c;
+
 		public boolean getC() {
 			return c;
 		}
@@ -37,7 +38,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 			this.c = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e = false;
 			f = false;
 			g = false;
@@ -46,7 +47,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, main_region_C, $NullState$
@@ -69,7 +70,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.c = false;
+		sCInterface.setC(false);
 	}
 
 	public void enter() {
@@ -87,39 +88,37 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -183,7 +182,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	}
 
 	private boolean check_main_region__choice_0_tr1_tr1() {
-		return sCInterface.c;
+		return sCInterface.getC();
 	}
 
 	private boolean check_main_region__choice_0_tr0_tr0() {
@@ -191,7 +190,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	}
 
 	private boolean check_main_region__choice_1_tr0_tr0() {
-		return sCInterface.c;
+		return sCInterface.getC();
 	}
 
 	private boolean check_main_region__choice_1_tr1_tr1() {
@@ -199,7 +198,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	}
 
 	private boolean check_main_region__choice_2_tr1_tr1() {
-		return sCInterface.c;
+		return sCInterface.getC();
 	}
 
 	private boolean check_main_region__choice_2_tr0() {
@@ -207,7 +206,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	}
 
 	private boolean check_main_region__choice_3_tr1_tr1() {
-		return sCInterface.c;
+		return sCInterface.getC();
 	}
 
 	private boolean check_main_region__choice_3_tr0_tr0() {

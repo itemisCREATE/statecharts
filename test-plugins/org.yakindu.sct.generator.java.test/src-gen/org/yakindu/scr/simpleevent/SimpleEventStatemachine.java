@@ -2,7 +2,7 @@ package org.yakindu.scr.simpleevent;
 
 public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
 
@@ -10,13 +10,13 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 			event1 = true;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			event1 = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, main_region__final_, $NullState$
@@ -56,7 +56,6 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
@@ -65,28 +64,27 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	/** 
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return (stateVector[0] == State.main_region__final_);
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :

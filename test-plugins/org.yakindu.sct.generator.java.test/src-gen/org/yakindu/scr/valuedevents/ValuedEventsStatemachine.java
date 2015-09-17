@@ -2,7 +2,7 @@ package org.yakindu.scr.valuedevents;
 
 public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean integerEvent;
 
@@ -13,10 +13,9 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			integerEventValue = value;
 		}
 
-		private long getIntegerEventValue() {
+		protected long getIntegerEventValue() {
 			if (!integerEvent)
-				throw new IllegalStateException(
-						"Illegal event value acces. Event IntegerEvent is not raised!");
+				throw new IllegalStateException("Illegal event value acces. Event IntegerEvent is not raised!");
 			return integerEventValue;
 		}
 
@@ -29,10 +28,9 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			booleanEventValue = value;
 		}
 
-		private boolean getBooleanEventValue() {
+		protected boolean getBooleanEventValue() {
 			if (!booleanEvent)
-				throw new IllegalStateException(
-						"Illegal event value acces. Event BooleanEvent is not raised!");
+				throw new IllegalStateException("Illegal event value acces. Event BooleanEvent is not raised!");
 			return booleanEventValue;
 		}
 
@@ -45,10 +43,9 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			realEventValue = value;
 		}
 
-		private double getRealEventValue() {
+		protected double getRealEventValue() {
 			if (!realEvent)
-				throw new IllegalStateException(
-						"Illegal event value acces. Event RealEvent is not raised!");
+				throw new IllegalStateException("Illegal event value acces. Event RealEvent is not raised!");
 			return realEventValue;
 		}
 
@@ -61,14 +58,14 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			stringEventValue = value;
 		}
 
-		private String getStringEventValue() {
+		protected String getStringEventValue() {
 			if (!stringEvent)
-				throw new IllegalStateException(
-						"Illegal event value acces. Event StringEvent is not raised!");
+				throw new IllegalStateException("Illegal event value acces. Event StringEvent is not raised!");
 			return stringEventValue;
 		}
 
 		private long myInt;
+
 		public long getMyInt() {
 			return myInt;
 		}
@@ -78,6 +75,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		}
 
 		private boolean myBool;
+
 		public boolean getMyBool() {
 			return myBool;
 		}
@@ -87,6 +85,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		}
 
 		private double myReal;
+
 		public double getMyReal() {
 			return myReal;
 		}
@@ -96,6 +95,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		}
 
 		private String myString;
+
 		public String getMyString() {
 			return myString;
 		}
@@ -104,7 +104,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			this.myString = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			integerEvent = false;
 			booleanEvent = false;
 			realEvent = false;
@@ -113,7 +113,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region1_A, integer_region_B, integer_region_C, integer_region_D, boolean_region_B, boolean_region_C, boolean_region_D, real_region_B, real_region_C, real_region_D, string_region_B, string_region_C, string_region_D, $NullState$
@@ -136,13 +136,13 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.myInt = 0;
+		sCInterface.setMyInt(0);
 
-		sCInterface.myBool = false;
+		sCInterface.setMyBool(false);
 
-		sCInterface.myReal = 0.0;
+		sCInterface.setMyReal(0.0);
 
-		sCInterface.myString = "";
+		sCInterface.setMyString("");
 	}
 
 	public void enter() {
@@ -176,43 +176,39 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
-		return stateVector[0] != State.$NullState$
-				|| stateVector[1] != State.$NullState$
-				|| stateVector[2] != State.$NullState$
-				|| stateVector[3] != State.$NullState$
+		return stateVector[0] != State.$NullState$ || stateVector[1] != State.$NullState$
+				|| stateVector[2] != State.$NullState$ || stateVector[3] != State.$NullState$
 				|| stateVector[4] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region1_A :
@@ -327,7 +323,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	private void effect_integer_region_B_tr0() {
 		exitSequence_integer_region_B();
 
-		sCInterface.myInt = sCInterface.integerEventValue;
+		sCInterface.setMyInt(sCInterface.getIntegerEventValue());
 
 		enterSequence_integer_region_C_default();
 	}
@@ -335,7 +331,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	private void effect_integer_region_C_tr0() {
 		exitSequence_integer_region_C();
 
-		sCInterface.myInt = sCInterface.integerEventValue;
+		sCInterface.setMyInt(sCInterface.getIntegerEventValue());
 
 		enterSequence_integer_region_D_default();
 	}
@@ -343,7 +339,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	private void effect_boolean_region_B_tr0() {
 		exitSequence_boolean_region_B();
 
-		sCInterface.myBool = sCInterface.booleanEventValue;
+		sCInterface.setMyBool(sCInterface.getBooleanEventValue());
 
 		enterSequence_boolean_region_C_default();
 	}
@@ -351,7 +347,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	private void effect_boolean_region_C_tr0() {
 		exitSequence_boolean_region_C();
 
-		sCInterface.myBool = sCInterface.booleanEventValue;
+		sCInterface.setMyBool(sCInterface.getBooleanEventValue());
 
 		enterSequence_boolean_region_D_default();
 	}
@@ -359,7 +355,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	private void effect_real_region_B_tr0() {
 		exitSequence_real_region_B();
 
-		sCInterface.myReal = sCInterface.realEventValue;
+		sCInterface.setMyReal(sCInterface.getRealEventValue());
 
 		enterSequence_real_region_C_default();
 	}
@@ -367,7 +363,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	private void effect_real_region_C_tr0() {
 		exitSequence_real_region_C();
 
-		sCInterface.myReal = sCInterface.realEventValue;
+		sCInterface.setMyReal(sCInterface.getRealEventValue());
 
 		enterSequence_real_region_D_default();
 	}
@@ -375,7 +371,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	private void effect_string_region_B_tr0() {
 		exitSequence_string_region_B();
 
-		sCInterface.myString = sCInterface.stringEventValue;
+		sCInterface.setMyString(sCInterface.getStringEventValue());
 
 		enterSequence_string_region_C_default();
 	}
@@ -383,7 +379,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	private void effect_string_region_C_tr0() {
 		exitSequence_string_region_C();
 
-		sCInterface.myString = sCInterface.stringEventValue;
+		sCInterface.setMyString(sCInterface.getStringEventValue());
 
 		enterSequence_string_region_D_default();
 	}

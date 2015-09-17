@@ -1,10 +1,8 @@
 package org.yakindu.scr.historywithexitpoint;
 
-public class HistoryWithExitPointStatemachine
-		implements
-			IHistoryWithExitPointStatemachine {
+public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean push;
 
@@ -24,7 +22,7 @@ public class HistoryWithExitPointStatemachine
 			next = true;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			push = false;
 			back = false;
 			next = false;
@@ -32,7 +30,7 @@ public class HistoryWithExitPointStatemachine
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		mr_A, mr_A_r_X1, mr_A_r_X2, mr_B, $NullState$
@@ -76,45 +74,42 @@ public class HistoryWithExitPointStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case mr_A :
 				return stateVector[0].ordinal() >= State.mr_A.ordinal()
-						&& stateVector[0].ordinal() <= State.mr_A_r_X2
-								.ordinal();
+						&& stateVector[0].ordinal() <= State.mr_A_r_X2.ordinal();
 			case mr_A_r_X1 :
 				return stateVector[0] == State.mr_A_r_X1;
 			case mr_A_r_X2 :

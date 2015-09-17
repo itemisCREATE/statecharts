@@ -1,59 +1,98 @@
 package org.yakindu.scr.readonlyvariable;
 
-public class ReadOnlyVariableStatemachine
-		implements
-			IReadOnlyVariableStatemachine {
+public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private long myInt;
+
 		public long getMyInt() {
 			return myInt;
 		}
 
+		protected void setMyInt(long value) {
+			this.myInt = value;
+		}
+
 		private String myString;
+
 		public String getMyString() {
 			return myString;
 		}
 
+		protected void setMyString(String value) {
+			this.myString = value;
+		}
+
 		private boolean myBool;
+
 		public boolean getMyBool() {
 			return myBool;
 		}
 
+		protected void setMyBool(boolean value) {
+			this.myBool = value;
+		}
+
 		private double myReal;
+
 		public double getMyReal() {
 			return myReal;
 		}
 
+		protected void setMyReal(double value) {
+			this.myReal = value;
+		}
+
 	}
 
-	private SCInterfaceImpl sCInterface;
-	private final class SCIAImpl implements SCIA {
+	protected SCInterfaceImpl sCInterface;
+
+	protected class SCIAImpl implements SCIA {
 
 		private long myInt;
+
 		public long getMyInt() {
 			return myInt;
 		}
 
+		protected void setMyInt(long value) {
+			this.myInt = value;
+		}
+
 		private String myString;
+
 		public String getMyString() {
 			return myString;
 		}
 
+		protected void setMyString(String value) {
+			this.myString = value;
+		}
+
 		private boolean myBool;
+
 		public boolean getMyBool() {
 			return myBool;
 		}
 
+		protected void setMyBool(boolean value) {
+			this.myBool = value;
+		}
+
 		private double myReal;
+
 		public double getMyReal() {
 			return myReal;
 		}
 
+		protected void setMyReal(double value) {
+			this.myReal = value;
+		}
+
 	}
 
-	private SCIAImpl sCIA;
+	protected SCIAImpl sCIA;
 
 	public enum State {
 		main_region_StateB, main_region_StateA, $NullState$
@@ -77,21 +116,21 @@ public class ReadOnlyVariableStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.myInt = 0;
+		sCInterface.setMyInt(0);
 
-		sCInterface.myString = "testString";
+		sCInterface.setMyString("testString");
 
-		sCInterface.myBool = true;
+		sCInterface.setMyBool(true);
 
-		sCInterface.myReal = 1.1;
+		sCInterface.setMyReal(1.1);
 
-		sCIA.myInt = 0;
+		sCIA.setMyInt(0);
 
-		sCIA.myString = "testString";
+		sCIA.setMyString("testString");
 
-		sCIA.myBool = true;
+		sCIA.setMyBool(true);
 
-		sCIA.myReal = 1.1;
+		sCIA.setMyReal(1.1);
 	}
 
 	public void enter() {
@@ -109,38 +148,36 @@ public class ReadOnlyVariableStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_StateB :
@@ -191,21 +228,21 @@ public class ReadOnlyVariableStatemachine
 
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.myInt = 100;
+		sCInterface.setMyInt(100);
 
-		sCInterface.myString = "fail";
+		sCInterface.setMyString("fail");
 
-		sCInterface.myBool = false;
+		sCInterface.setMyBool(false);
 
-		sCInterface.myReal = 6.6;
+		sCInterface.setMyReal(6.6);
 
-		sCIA.myInt = 200;
+		sCIA.setMyInt(200);
 
-		sCIA.myString = "A_fail";
+		sCIA.setMyString("A_fail");
 
-		sCIA.myBool = false;
+		sCIA.setMyBool(false);
 
-		sCIA.myReal = 7.7;
+		sCIA.setMyReal(7.7);
 	}
 
 	/* Exit action for state 'ReadOnlyVariable'. */

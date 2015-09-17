@@ -39,7 +39,6 @@ public class EmptyTransitionStatemachine implements IEmptyTransitionStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
@@ -50,7 +49,6 @@ public class EmptyTransitionStatemachine implements IEmptyTransitionStatemachine
 	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}

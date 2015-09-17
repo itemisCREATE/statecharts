@@ -1,10 +1,8 @@
 package org.yakindu.scr.entryexitselftransition;
 
-public class EntryExitSelfTransitionStatemachine
-		implements
-			IEntryExitSelfTransitionStatemachine {
+public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransitionStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -19,6 +17,7 @@ public class EntryExitSelfTransitionStatemachine
 		}
 
 		private long exits;
+
 		public long getExits() {
 			return exits;
 		}
@@ -28,6 +27,7 @@ public class EntryExitSelfTransitionStatemachine
 		}
 
 		private long entries;
+
 		public long getEntries() {
 			return entries;
 		}
@@ -36,14 +36,14 @@ public class EntryExitSelfTransitionStatemachine
 			this.entries = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e = false;
 			e1 = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_A__region0_B, main_region_A__region0_C, $NullState$
@@ -66,9 +66,9 @@ public class EntryExitSelfTransitionStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.exits = 0;
+		sCInterface.setExits(0);
 
-		sCInterface.entries = 0;
+		sCInterface.setEntries(0);
 	}
 
 	public void enter() {
@@ -86,46 +86,42 @@ public class EntryExitSelfTransitionStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
-				return stateVector[0].ordinal() >= State.main_region_A
-						.ordinal()
-						&& stateVector[0].ordinal() <= State.main_region_A__region0_C
-								.ordinal();
+				return stateVector[0].ordinal() >= State.main_region_A.ordinal()
+						&& stateVector[0].ordinal() <= State.main_region_A__region0_C.ordinal();
 			case main_region_A__region0_B :
 				return stateVector[0] == State.main_region_A__region0_B;
 			case main_region_A__region0_C :
@@ -199,7 +195,7 @@ public class EntryExitSelfTransitionStatemachine
 
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
-		sCInterface.entries += 1;
+		sCInterface.setEntries(sCInterface.getEntries() + 1);
 	}
 
 	/* Exit action for state 'EntryExitSelfTransition'. */
@@ -208,7 +204,7 @@ public class EntryExitSelfTransitionStatemachine
 
 	/* Exit action for state 'A'. */
 	private void exitAction_main_region_A() {
-		sCInterface.exits += 1;
+		sCInterface.setExits(sCInterface.getExits() + 1);
 	}
 
 	/* 'default' enter sequence for state A */

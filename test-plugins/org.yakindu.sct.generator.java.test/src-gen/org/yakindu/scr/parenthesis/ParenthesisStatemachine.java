@@ -2,9 +2,10 @@ package org.yakindu.scr.parenthesis;
 
 public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private long erg;
+
 		public long getErg() {
 			return erg;
 		}
@@ -15,7 +16,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		mainRegion_A, $NullState$
@@ -38,7 +39,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.erg = 0;
+		sCInterface.setErg(0);
 	}
 
 	public void enter() {
@@ -56,38 +57,36 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case mainRegion_A :
@@ -115,7 +114,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
 	/* Entry action for state 'A'. */
 	private void entryAction_mainRegion_A() {
-		sCInterface.erg = 4 * (3 - 1);
+		sCInterface.setErg(4 * (3 - 1));
 	}
 
 	/* Exit action for state 'Parenthesis'. */

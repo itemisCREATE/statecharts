@@ -2,7 +2,7 @@ package org.yakindu.scr.constants;
 
 public class ConstantsStatemachine implements IConstantsStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -19,10 +19,9 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 			e2Value = value;
 		}
 
-		private long getE2Value() {
+		protected long getE2Value() {
 			if (!e2)
-				throw new IllegalStateException(
-						"Illegal event value acces. Event E2 is not raised!");
+				throw new IllegalStateException("Illegal event value acces. Event E2 is not raised!");
 			return e2Value;
 		}
 
@@ -35,6 +34,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		}
 
 		private long result;
+
 		public long getResult() {
 			return result;
 		}
@@ -43,15 +43,16 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 			this.result = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e = false;
 			e2 = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
-	private final class SCINamedImpl implements SCINamed {
+	protected SCInterfaceImpl sCInterface;
+
+	protected class SCINamedImpl implements SCINamed {
 
 		public String getY() {
 			return y;
@@ -63,7 +64,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 
 	}
 
-	private SCINamedImpl sCINamed;
+	protected SCINamedImpl sCINamed;
 
 	public enum State {
 		main_region_A, main_region_B, main_region_C, $NullState$
@@ -72,6 +73,10 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	private final State[] stateVector = new State[1];
 
 	private int nextStateIndex;
+
+	protected long getInternalConstant() {
+		return internalConstant;
+	}
 
 	public ConstantsStatemachine() {
 
@@ -87,7 +92,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.result = 0;
+		sCInterface.setResult(0);
 	}
 
 	public void enter() {
@@ -105,39 +110,37 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -208,8 +211,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	private void effect_main_region_C_tr0() {
 		exitSequence_main_region_C();
 
-		sCInterface.result = sCInterface.e2Value * SCInterface.x * SCINamed.two
-				* IConstantsStatemachine.internalConstant;
+		sCInterface.setResult(sCInterface.getE2Value() * sCInterface.x * sCINamed.two * internalConstant);
 
 		enterSequence_main_region_A_default();
 	}
@@ -220,13 +222,12 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.result = SCINamed.two * SCInterface.x;
+		sCInterface.setResult(sCINamed.two * sCInterface.x);
 	}
 
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
-		sCInterface.result = sCInterface.result
-				* IConstantsStatemachine.internalConstant;
+		sCInterface.setResult(sCInterface.result * internalConstant);
 	}
 
 	/* Exit action for state 'Constants'. */

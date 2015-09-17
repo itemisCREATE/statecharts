@@ -2,7 +2,7 @@ package org.yakindu.scr.raiseevent;
 
 public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -10,7 +10,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 			return e1;
 		}
 
-		private void raiseE1() {
+		protected void raiseE1() {
 			e1 = true;
 		}
 
@@ -20,16 +20,16 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 			e2 = true;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e2 = false;
 		}
 
-		public void clearOutEvents() {
+		protected void clearOutEvents() {
 			e1 = false;
 		}
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, second_region_SateA, second_region_StateB, $NullState$
@@ -73,41 +73,38 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
-		return stateVector[0] != State.$NullState$
-				|| stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NullState$ || stateVector[1] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 		sCInterface.clearOutEvents();
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_StateA :

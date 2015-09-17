@@ -1,10 +1,8 @@
 package org.yakindu.scr.stringexpressions;
 
-public class StringExpressionsStatemachine
-		implements
-			IStringExpressionsStatemachine {
+public class StringExpressionsStatemachine implements IStringExpressionsStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -13,6 +11,7 @@ public class StringExpressionsStatemachine
 		}
 
 		private String stringA;
+
 		public String getStringA() {
 			return stringA;
 		}
@@ -22,6 +21,7 @@ public class StringExpressionsStatemachine
 		}
 
 		private String stringA2;
+
 		public String getStringA2() {
 			return stringA2;
 		}
@@ -31,6 +31,7 @@ public class StringExpressionsStatemachine
 		}
 
 		private String stringB;
+
 		public String getStringB() {
 			return stringB;
 		}
@@ -40,6 +41,7 @@ public class StringExpressionsStatemachine
 		}
 
 		private String quotedStringX;
+
 		public String getQuotedStringX() {
 			return quotedStringX;
 		}
@@ -49,6 +51,7 @@ public class StringExpressionsStatemachine
 		}
 
 		private String quotedStringY;
+
 		public String getQuotedStringY() {
 			return quotedStringY;
 		}
@@ -58,6 +61,7 @@ public class StringExpressionsStatemachine
 		}
 
 		private boolean stringVarEqual;
+
 		public boolean getStringVarEqual() {
 			return stringVarEqual;
 		}
@@ -67,6 +71,7 @@ public class StringExpressionsStatemachine
 		}
 
 		private boolean stringVarNotEqual;
+
 		public boolean getStringVarNotEqual() {
 			return stringVarNotEqual;
 		}
@@ -76,6 +81,7 @@ public class StringExpressionsStatemachine
 		}
 
 		private boolean guardStringNotEqual;
+
 		public boolean getGuardStringNotEqual() {
 			return guardStringNotEqual;
 		}
@@ -85,6 +91,7 @@ public class StringExpressionsStatemachine
 		}
 
 		private boolean guardStringEqual;
+
 		public boolean getGuardStringEqual() {
 			return guardStringEqual;
 		}
@@ -93,13 +100,13 @@ public class StringExpressionsStatemachine
 			this.guardStringEqual = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_AssignmentChecked, main_region_Failed, main_region_VarToVarCompareSucceeded, main_region_VarToConstCompareSucceeded, main_region_ConstToVarCompareSucceeded, main_region_ConstToConstCompareSucceeded, $NullState$
@@ -122,23 +129,23 @@ public class StringExpressionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.stringA = "A";
+		sCInterface.setStringA("A");
 
-		sCInterface.stringA2 = "A";
+		sCInterface.setStringA2("A");
 
-		sCInterface.stringB = "B";
+		sCInterface.setStringB("B");
 
-		sCInterface.quotedStringX = "\"X\"";
+		sCInterface.setQuotedStringX("\"X\"");
 
-		sCInterface.quotedStringY = "\"Y\"";
+		sCInterface.setQuotedStringY("\"Y\"");
 
-		sCInterface.stringVarEqual = false;
+		sCInterface.setStringVarEqual(false);
 
-		sCInterface.stringVarNotEqual = false;
+		sCInterface.setStringVarNotEqual(false);
 
-		sCInterface.guardStringNotEqual = false;
+		sCInterface.setGuardStringNotEqual(false);
 
-		sCInterface.guardStringEqual = false;
+		sCInterface.setGuardStringEqual(false);
 	}
 
 	public void enter() {
@@ -156,39 +163,37 @@ public class StringExpressionsStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_AssignmentChecked :
@@ -305,10 +310,9 @@ public class StringExpressionsStatemachine
 	}
 
 	private boolean check_main_region__choice_1_tr1_tr1() {
-		return (sCInterface.e)
-				&& (sCInterface.stringA == null
-						? sCInterface.stringA2 == null
-						: sCInterface.stringA.equals(sCInterface.stringA2));
+		return (sCInterface.e) && (sCInterface.getStringA() == null
+				? sCInterface.getStringA2() == null
+				: sCInterface.getStringA().equals(sCInterface.getStringA2()));
 	}
 
 	private boolean check_main_region__choice_1_tr0() {
@@ -316,10 +320,9 @@ public class StringExpressionsStatemachine
 	}
 
 	private boolean check_main_region__choice_2_tr1_tr1() {
-		return (sCInterface.e)
-				&& (sCInterface.stringA == null
-						? sCInterface.stringB != null
-						: !sCInterface.stringA.equals(sCInterface.stringB));
+		return (sCInterface.e) && (sCInterface.getStringA() == null
+				? sCInterface.getStringB() != null
+				: !sCInterface.getStringA().equals(sCInterface.getStringB()));
 	}
 
 	private boolean check_main_region__choice_2_tr0() {
@@ -336,9 +339,7 @@ public class StringExpressionsStatemachine
 
 	private boolean check_main_region__choice_4_tr1_tr1() {
 		return (sCInterface.e)
-				&& (sCInterface.stringA == null
-						? "A" == null
-						: sCInterface.stringA.equals("A"));
+				&& (sCInterface.getStringA() == null ? "A" == null : sCInterface.getStringA().equals("A"));
 	}
 
 	private boolean check_main_region__choice_4_tr0() {
@@ -347,9 +348,7 @@ public class StringExpressionsStatemachine
 
 	private boolean check_main_region__choice_5_tr1_tr1() {
 		return (sCInterface.e)
-				&& (sCInterface.stringA == null
-						? "B" != null
-						: !sCInterface.stringA.equals("B"));
+				&& (sCInterface.getStringA() == null ? "B" != null : !sCInterface.getStringA().equals("B"));
 	}
 
 	private boolean check_main_region__choice_5_tr0() {
@@ -370,8 +369,7 @@ public class StringExpressionsStatemachine
 
 	private boolean check_main_region__choice_8_tr1_tr1() {
 		return (sCInterface.e)
-				&& ("A" == null ? sCInterface.stringA == null : "A"
-						.equals(sCInterface.stringA));
+				&& ("A" == null ? sCInterface.getStringA() == null : "A".equals(sCInterface.getStringA()));
 	}
 
 	private boolean check_main_region__choice_8_tr0() {
@@ -380,8 +378,7 @@ public class StringExpressionsStatemachine
 
 	private boolean check_main_region__choice_9_tr1_tr1() {
 		return (sCInterface.e)
-				&& ("A" == null ? sCInterface.stringB != null : !"A"
-						.equals(sCInterface.stringB));
+				&& ("A" == null ? sCInterface.getStringB() != null : !"A".equals(sCInterface.getStringB()));
 	}
 
 	private boolean check_main_region__choice_9_tr0() {
@@ -409,8 +406,7 @@ public class StringExpressionsStatemachine
 	}
 
 	private boolean check_main_region__choice_13_tr1_tr1() {
-		return (sCInterface.e)
-				&& ("A" == null ? "B" != null : !"A".equals("B"));
+		return (sCInterface.e) && ("A" == null ? "B" != null : !"A".equals("B"));
 	}
 
 	private boolean check_main_region__choice_13_tr0() {
@@ -424,9 +420,9 @@ public class StringExpressionsStatemachine
 	private void effect_main_region_AssignmentChecked_tr0() {
 		exitSequence_main_region_AssignmentChecked();
 
-		sCInterface.stringVarEqual = (sCInterface.stringA == null
+		sCInterface.setStringVarEqual((sCInterface.stringA == null
 				? sCInterface.stringA2 == null
-				: sCInterface.stringA.equals(sCInterface.stringA2));
+				: sCInterface.stringA.equals(sCInterface.stringA2)));
 
 		react_main_region__choice_0();
 	}
@@ -434,9 +430,7 @@ public class StringExpressionsStatemachine
 	private void effect_main_region_VarToVarCompareSucceeded_tr0() {
 		exitSequence_main_region_VarToVarCompareSucceeded();
 
-		sCInterface.stringVarEqual = (sCInterface.stringA == null
-				? "A" == null
-				: sCInterface.stringA.equals("A"));
+		sCInterface.setStringVarEqual((sCInterface.stringA == null ? "A" == null : sCInterface.stringA.equals("A")));
 
 		react_main_region__choice_3();
 	}
@@ -444,9 +438,7 @@ public class StringExpressionsStatemachine
 	private void effect_main_region_VarToConstCompareSucceeded_tr0() {
 		exitSequence_main_region_VarToConstCompareSucceeded();
 
-		sCInterface.stringVarEqual = ("A" == null
-				? sCInterface.stringA == null
-				: "A".equals(sCInterface.stringA));
+		sCInterface.setStringVarEqual(("A" == null ? sCInterface.stringA == null : "A".equals(sCInterface.stringA)));
 
 		react_main_region__choice_7();
 	}
@@ -454,16 +446,15 @@ public class StringExpressionsStatemachine
 	private void effect_main_region_ConstToVarCompareSucceeded_tr0() {
 		exitSequence_main_region_ConstToVarCompareSucceeded();
 
-		sCInterface.stringVarEqual = ("A" == null ? "A" == null : "A"
-				.equals("A"));
+		sCInterface.setStringVarEqual(("A" == null ? "A" == null : "A".equals("A")));
 
 		react_main_region__choice_11();
 	}
 
 	private void effect_main_region__choice_0_tr1() {
-		sCInterface.stringVarNotEqual = (sCInterface.stringA == null
+		sCInterface.setStringVarNotEqual((sCInterface.stringA == null
 				? sCInterface.stringB != null
-				: !sCInterface.stringA.equals(sCInterface.stringB));
+				: !sCInterface.stringA.equals(sCInterface.stringB)));
 
 		react_main_region__choice_1();
 	}
@@ -473,9 +464,9 @@ public class StringExpressionsStatemachine
 	}
 
 	private void effect_main_region__choice_1_tr1() {
-		sCInterface.guardStringEqual = (sCInterface.stringA == null
+		sCInterface.setGuardStringEqual((sCInterface.stringA == null
 				? sCInterface.stringA2 == null
-				: sCInterface.stringA.equals(sCInterface.stringA2));
+				: sCInterface.stringA.equals(sCInterface.stringA2)));
 
 		react_main_region__choice_2();
 	}
@@ -485,9 +476,9 @@ public class StringExpressionsStatemachine
 	}
 
 	private void effect_main_region__choice_2_tr1() {
-		sCInterface.guardStringNotEqual = (sCInterface.stringA == null
+		sCInterface.setGuardStringNotEqual((sCInterface.stringA == null
 				? sCInterface.stringB != null
-				: !sCInterface.stringA.equals(sCInterface.stringB));
+				: !sCInterface.stringA.equals(sCInterface.stringB)));
 
 		enterSequence_main_region_VarToVarCompareSucceeded_default();
 	}
@@ -497,9 +488,8 @@ public class StringExpressionsStatemachine
 	}
 
 	private void effect_main_region__choice_3_tr0() {
-		sCInterface.stringVarNotEqual = (sCInterface.stringA == null
-				? "B" != null
-				: !sCInterface.stringA.equals("B"));
+		sCInterface
+				.setStringVarNotEqual((sCInterface.stringA == null ? "B" != null : !sCInterface.stringA.equals("B")));
 
 		react_main_region__choice_4();
 	}
@@ -509,9 +499,7 @@ public class StringExpressionsStatemachine
 	}
 
 	private void effect_main_region__choice_4_tr1() {
-		sCInterface.guardStringEqual = (sCInterface.stringA == null
-				? "A" == null
-				: sCInterface.stringA.equals("A"));
+		sCInterface.setGuardStringEqual((sCInterface.stringA == null ? "A" == null : sCInterface.stringA.equals("A")));
 
 		react_main_region__choice_5();
 	}
@@ -521,9 +509,8 @@ public class StringExpressionsStatemachine
 	}
 
 	private void effect_main_region__choice_5_tr1() {
-		sCInterface.guardStringNotEqual = (sCInterface.stringA == null
-				? "B" != null
-				: !sCInterface.stringA.equals("B"));
+		sCInterface
+				.setGuardStringNotEqual((sCInterface.stringA == null ? "B" != null : !sCInterface.stringA.equals("B")));
 
 		enterSequence_main_region_VarToConstCompareSucceeded_default();
 	}
@@ -537,9 +524,8 @@ public class StringExpressionsStatemachine
 	}
 
 	private void effect_main_region__choice_7_tr0() {
-		sCInterface.stringVarNotEqual = ("A" == null
-				? sCInterface.stringB != null
-				: !"A".equals(sCInterface.stringB));
+		sCInterface
+				.setStringVarNotEqual(("A" == null ? sCInterface.stringB != null : !"A".equals(sCInterface.stringB)));
 
 		react_main_region__choice_8();
 	}
@@ -549,9 +535,7 @@ public class StringExpressionsStatemachine
 	}
 
 	private void effect_main_region__choice_8_tr1() {
-		sCInterface.guardStringEqual = ("A" == null
-				? sCInterface.stringA == null
-				: "A".equals(sCInterface.stringA));
+		sCInterface.setGuardStringEqual(("A" == null ? sCInterface.stringA == null : "A".equals(sCInterface.stringA)));
 
 		react_main_region__choice_9();
 	}
@@ -561,9 +545,8 @@ public class StringExpressionsStatemachine
 	}
 
 	private void effect_main_region__choice_9_tr1() {
-		sCInterface.guardStringNotEqual = ("A" == null
-				? sCInterface.stringB != null
-				: !"A".equals(sCInterface.stringB));
+		sCInterface
+				.setGuardStringNotEqual(("A" == null ? sCInterface.stringB != null : !"A".equals(sCInterface.stringB)));
 
 		enterSequence_main_region_ConstToVarCompareSucceeded_default();
 	}
@@ -577,8 +560,7 @@ public class StringExpressionsStatemachine
 	}
 
 	private void effect_main_region__choice_11_tr0() {
-		sCInterface.stringVarNotEqual = ("A" == null ? "B" != null : !"A"
-				.equals("B"));
+		sCInterface.setStringVarNotEqual(("A" == null ? "B" != null : !"A".equals("B")));
 
 		react_main_region__choice_12();
 	}
@@ -588,8 +570,7 @@ public class StringExpressionsStatemachine
 	}
 
 	private void effect_main_region__choice_12_tr1() {
-		sCInterface.guardStringEqual = ("A" == null ? "A" == null : "A"
-				.equals("A"));
+		sCInterface.setGuardStringEqual(("A" == null ? "A" == null : "A".equals("A")));
 
 		react_main_region__choice_13();
 	}
@@ -599,8 +580,7 @@ public class StringExpressionsStatemachine
 	}
 
 	private void effect_main_region__choice_13_tr1() {
-		sCInterface.guardStringNotEqual = ("A" == null ? "B" != null : !"A"
-				.equals("B"));
+		sCInterface.setGuardStringNotEqual(("A" == null ? "B" != null : !"A".equals("B")));
 
 		enterSequence_main_region_ConstToConstCompareSucceeded_default();
 	}
@@ -619,13 +599,13 @@ public class StringExpressionsStatemachine
 
 	/* Entry action for state 'AssignmentChecked'. */
 	private void entryAction_main_region_AssignmentChecked() {
-		sCInterface.stringVarNotEqual = !(sCInterface.stringA == null
+		sCInterface.setStringVarNotEqual(!(sCInterface.stringA == null
 				? sCInterface.stringB == null
-				: sCInterface.stringA.equals(sCInterface.stringB));
+				: sCInterface.stringA.equals(sCInterface.stringB)));
 
-		sCInterface.stringVarEqual = !(sCInterface.stringA == null
+		sCInterface.setStringVarEqual(!(sCInterface.stringA == null
 				? sCInterface.stringA2 != null
-				: !sCInterface.stringA.equals(sCInterface.stringA2));
+				: !sCInterface.stringA.equals(sCInterface.stringA2)));
 	}
 
 	/* Exit action for state 'StringExpressions'. */

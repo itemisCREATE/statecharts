@@ -1,12 +1,11 @@
 package org.yakindu.scr.assignmentasexpression;
 
-public class AssignmentAsExpressionStatemachine
-		implements
-			IAssignmentAsExpressionStatemachine {
+public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressionStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private long a;
+
 		public long getA() {
 			return a;
 		}
@@ -16,6 +15,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long b;
+
 		public long getB() {
 			return b;
 		}
@@ -25,6 +25,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long c;
+
 		public long getC() {
 			return c;
 		}
@@ -34,6 +35,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long d;
+
 		public long getD() {
 			return d;
 		}
@@ -43,6 +45,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long e;
+
 		public long getE() {
 			return e;
 		}
@@ -52,6 +55,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long f;
+
 		public long getF() {
 			return f;
 		}
@@ -61,6 +65,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long g;
+
 		public long getG() {
 			return g;
 		}
@@ -70,6 +75,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long h;
+
 		public long getH() {
 			return h;
 		}
@@ -79,6 +85,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long i;
+
 		public long getI() {
 			return i;
 		}
@@ -88,6 +95,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long i1;
+
 		public long getI1() {
 			return i1;
 		}
@@ -97,6 +105,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long j;
+
 		public long getJ() {
 			return j;
 		}
@@ -106,6 +115,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long j1;
+
 		public long getJ1() {
 			return j1;
 		}
@@ -115,6 +125,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long k;
+
 		public long getK() {
 			return k;
 		}
@@ -124,6 +135,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long k1;
+
 		public long getK1() {
 			return k1;
 		}
@@ -133,6 +145,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long l;
+
 		public long getL() {
 			return l;
 		}
@@ -142,6 +155,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long m;
+
 		public long getM() {
 			return m;
 		}
@@ -151,6 +165,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long n;
+
 		public long getN() {
 			return n;
 		}
@@ -160,6 +175,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long p;
+
 		public long getP() {
 			return p;
 		}
@@ -169,6 +185,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long r;
+
 		public long getR() {
 			return r;
 		}
@@ -178,6 +195,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long t;
+
 		public long getT() {
 			return t;
 		}
@@ -187,6 +205,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long u;
+
 		public long getU() {
 			return u;
 		}
@@ -196,6 +215,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long v;
+
 		public long getV() {
 			return v;
 		}
@@ -205,6 +225,7 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long w;
+
 		public long getW() {
 			return w;
 		}
@@ -215,7 +236,7 @@ public class AssignmentAsExpressionStatemachine
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_Add, main_region_Multiply, main_region_Divide, main_region_Modulo, main_region_Shift, main_region_boolean_And, main_region_boolean_Or, main_region_boolean_Xor, main_region_Subtract, $NullState$
@@ -238,51 +259,51 @@ public class AssignmentAsExpressionStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.a = 0;
+		sCInterface.setA(0);
 
-		sCInterface.b = 0;
+		sCInterface.setB(0);
 
-		sCInterface.c = 0;
+		sCInterface.setC(0);
 
-		sCInterface.d = 0;
+		sCInterface.setD(0);
 
-		sCInterface.e = 1;
+		sCInterface.setE(1);
 
-		sCInterface.f = 1;
+		sCInterface.setF(1);
 
-		sCInterface.g = 4;
+		sCInterface.setG(4);
 
-		sCInterface.h = 32;
+		sCInterface.setH(32);
 
-		sCInterface.i = 7;
+		sCInterface.setI(7);
 
-		sCInterface.i1 = 7;
+		sCInterface.setI1(7);
 
-		sCInterface.j = 8;
+		sCInterface.setJ(8);
 
-		sCInterface.j1 = 2;
+		sCInterface.setJ1(2);
 
-		sCInterface.k = 8;
+		sCInterface.setK(8);
 
-		sCInterface.k1 = 4;
+		sCInterface.setK1(4);
 
-		sCInterface.l = 3;
+		sCInterface.setL(3);
 
-		sCInterface.m = 7;
+		sCInterface.setM(7);
 
-		sCInterface.n = 5;
+		sCInterface.setN(5);
 
-		sCInterface.p = 0;
+		sCInterface.setP(0);
 
-		sCInterface.r = 7;
+		sCInterface.setR(7);
 
-		sCInterface.t = 10;
+		sCInterface.setT(10);
 
-		sCInterface.u = 6;
+		sCInterface.setU(6);
 
-		sCInterface.v = 13;
+		sCInterface.setV(13);
 
-		sCInterface.w = 7;
+		sCInterface.setW(7);
 	}
 
 	public void enter() {
@@ -300,38 +321,36 @@ public class AssignmentAsExpressionStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_Add :
@@ -609,49 +628,49 @@ public class AssignmentAsExpressionStatemachine
 
 	/* Entry action for state 'Add'. */
 	private void entryAction_main_region_Add() {
-		sCInterface.a = (sCInterface.b = 5) + 4;
+		sCInterface.setA((sCInterface.b = 5) + 4);
 	}
 
 	/* Entry action for state 'Multiply'. */
 	private void entryAction_main_region_Multiply() {
-		sCInterface.e *= (sCInterface.f *= 5) * 3;
+		sCInterface.setE(sCInterface.getE() * ((sCInterface.f *= 5) * 3));
 	}
 
 	/* Entry action for state 'Divide'. */
 	private void entryAction_main_region_Divide() {
-		sCInterface.g /= (sCInterface.h /= 2) / 4;
+		sCInterface.setG(sCInterface.getG() / ((sCInterface.h /= 2) / 4));
 	}
 
 	/* Entry action for state 'Modulo'. */
 	private void entryAction_main_region_Modulo() {
-		sCInterface.i %= (sCInterface.i1 %= 4) % 4;
+		sCInterface.setI(sCInterface.getI() % ((sCInterface.i1 %= 4) % 4));
 	}
 
 	/* Entry action for state 'Shift'. */
 	private void entryAction_main_region_Shift() {
-		sCInterface.j <<= (sCInterface.j1 >>= 1);
+		sCInterface.setJ(sCInterface.getJ() << ((sCInterface.j1 >>= 1)));
 
-		sCInterface.k >>= (sCInterface.k1 >>= 2);
+		sCInterface.setK(sCInterface.getK() >> ((sCInterface.k1 >>= 2)));
 	}
 
 	/* Entry action for state 'boolean And'. */
 	private void entryAction_main_region_boolean_And() {
-		sCInterface.l &= (sCInterface.n &= sCInterface.m);
+		sCInterface.setL(sCInterface.getL() & ((sCInterface.n &= sCInterface.m)));
 	}
 
 	/* Entry action for state 'boolean Or'. */
 	private void entryAction_main_region_boolean_Or() {
-		sCInterface.p |= (sCInterface.r |= sCInterface.t);
+		sCInterface.setP(sCInterface.getP() | ((sCInterface.r |= sCInterface.t)));
 	}
 
 	/* Entry action for state 'boolean Xor'. */
 	private void entryAction_main_region_boolean_Xor() {
-		sCInterface.u ^= (sCInterface.v ^= sCInterface.w);
+		sCInterface.setU(sCInterface.getU() ^ ((sCInterface.v ^= sCInterface.w)));
 	}
 
 	/* Entry action for state 'Subtract'. */
 	private void entryAction_main_region_Subtract() {
-		sCInterface.d -= (sCInterface.c -= 5) - 1;
+		sCInterface.setD(sCInterface.getD() - ((sCInterface.c -= 5) - 1));
 	}
 
 	/* Exit action for state 'AssignmentAsExpression'. */

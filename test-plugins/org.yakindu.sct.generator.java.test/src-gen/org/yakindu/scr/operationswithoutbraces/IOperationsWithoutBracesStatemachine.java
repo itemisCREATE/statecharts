@@ -4,8 +4,7 @@ import org.yakindu.scr.IStatemachine;
 public interface IOperationsWithoutBracesStatemachine extends IStatemachine {
 	public interface SCInterface {
 
-		public void setSCInterfaceOperationCallback(
-				SCInterfaceOperationCallback operationCallback);
+		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
 	}
 
 	public interface SCInterfaceOperationCallback {

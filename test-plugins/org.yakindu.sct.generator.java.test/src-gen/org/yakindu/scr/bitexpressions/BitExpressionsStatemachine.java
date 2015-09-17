@@ -2,7 +2,7 @@ package org.yakindu.scr.bitexpressions;
 
 public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -11,6 +11,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		}
 
 		private long myBit1;
+
 		public long getMyBit1() {
 			return myBit1;
 		}
@@ -20,6 +21,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		}
 
 		private long myBit2;
+
 		public long getMyBit2() {
 			return myBit2;
 		}
@@ -29,6 +31,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		}
 
 		private long leftBitshift;
+
 		public long getLeftBitshift() {
 			return leftBitshift;
 		}
@@ -38,6 +41,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		}
 
 		private long rightBitshift;
+
 		public long getRightBitshift() {
 			return rightBitshift;
 		}
@@ -47,6 +51,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		}
 
 		private long complementBitshift;
+
 		public long getComplementBitshift() {
 			return complementBitshift;
 		}
@@ -56,6 +61,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		}
 
 		private long bitwiseAnd;
+
 		public long getBitwiseAnd() {
 			return bitwiseAnd;
 		}
@@ -65,6 +71,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		}
 
 		private long bitwiseOr;
+
 		public long getBitwiseOr() {
 			return bitwiseOr;
 		}
@@ -74,6 +81,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		}
 
 		private long bitwiseXor;
+
 		public long getBitwiseXor() {
 			return bitwiseXor;
 		}
@@ -82,13 +90,13 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 			this.bitwiseXor = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e1 = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, $NullState$
@@ -111,21 +119,21 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.myBit1 = 0;
+		sCInterface.setMyBit1(0);
 
-		sCInterface.myBit2 = 0;
+		sCInterface.setMyBit2(0);
 
-		sCInterface.leftBitshift = 0;
+		sCInterface.setLeftBitshift(0);
 
-		sCInterface.rightBitshift = 0;
+		sCInterface.setRightBitshift(0);
 
-		sCInterface.complementBitshift = 0;
+		sCInterface.setComplementBitshift(0);
 
-		sCInterface.bitwiseAnd = 0;
+		sCInterface.setBitwiseAnd(0);
 
-		sCInterface.bitwiseOr = 0;
+		sCInterface.setBitwiseOr(0);
 
-		sCInterface.bitwiseXor = 0;
+		sCInterface.setBitwiseXor(0);
 	}
 
 	public void enter() {
@@ -143,39 +151,37 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_StateA :
@@ -268,24 +274,24 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.myBit1 = 5;
+		sCInterface.setMyBit1(5);
 
-		sCInterface.myBit2 = 7;
+		sCInterface.setMyBit2(7);
 	}
 
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.leftBitshift = sCInterface.myBit1 << 1;
+		sCInterface.setLeftBitshift(sCInterface.myBit1 << 1);
 
-		sCInterface.rightBitshift = sCInterface.myBit1 >> 1;
+		sCInterface.setRightBitshift(sCInterface.myBit1 >> 1);
 
-		sCInterface.complementBitshift = ~sCInterface.myBit1;
+		sCInterface.setComplementBitshift(~sCInterface.myBit1);
 
-		sCInterface.bitwiseAnd = sCInterface.myBit1 & sCInterface.myBit2;
+		sCInterface.setBitwiseAnd(sCInterface.myBit1 & sCInterface.myBit2);
 
-		sCInterface.bitwiseOr = sCInterface.myBit1 | sCInterface.myBit2;
+		sCInterface.setBitwiseOr(sCInterface.myBit1 | sCInterface.myBit2);
 
-		sCInterface.bitwiseXor = sCInterface.myBit1 ^ sCInterface.myBit2;
+		sCInterface.setBitwiseXor(sCInterface.myBit1 ^ sCInterface.myBit2);
 	}
 
 	/* Exit action for state 'BitExpressions'. */

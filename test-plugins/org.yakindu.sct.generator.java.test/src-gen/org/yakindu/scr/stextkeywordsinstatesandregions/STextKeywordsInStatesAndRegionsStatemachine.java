@@ -1,10 +1,8 @@
 package org.yakindu.scr.stextkeywordsinstatesandregions;
 
-public class STextKeywordsInStatesAndRegionsStatemachine
-		implements
-			ISTextKeywordsInStatesAndRegionsStatemachine {
+public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywordsInStatesAndRegionsStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -18,14 +16,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 			e2 = true;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e1 = false;
 			e2 = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		default_namespace, operation_interface, operation_internal, namespace_event, namespace_local, local_in, local_out, interface_var, interface_readonly, internal_external, internal_operation, event_default, event_else, in_entry, in_exit, out_always, out_oncycle, var_raise, var_valueof, readonly_active, readonly_namespace, external_interface, external_internal, else_event, else_local, entry_in, entry_out, exit_var, exit_readonly, always_external, always_operation, oncycle_default, oncycle_else, raise_entry, raise_exit, valueof_always, valueof_oncycle, active_raise, active_valueof, $NullState$
@@ -141,58 +139,46 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
-		return stateVector[0] != State.$NullState$
-				|| stateVector[1] != State.$NullState$
-				|| stateVector[2] != State.$NullState$
-				|| stateVector[3] != State.$NullState$
-				|| stateVector[4] != State.$NullState$
-				|| stateVector[5] != State.$NullState$
-				|| stateVector[6] != State.$NullState$
-				|| stateVector[7] != State.$NullState$
-				|| stateVector[8] != State.$NullState$
-				|| stateVector[9] != State.$NullState$
-				|| stateVector[10] != State.$NullState$
-				|| stateVector[11] != State.$NullState$
-				|| stateVector[12] != State.$NullState$
-				|| stateVector[13] != State.$NullState$
-				|| stateVector[14] != State.$NullState$
-				|| stateVector[15] != State.$NullState$
-				|| stateVector[16] != State.$NullState$
-				|| stateVector[17] != State.$NullState$
-				|| stateVector[18] != State.$NullState$
-				|| stateVector[19] != State.$NullState$;
+		return stateVector[0] != State.$NullState$ || stateVector[1] != State.$NullState$
+				|| stateVector[2] != State.$NullState$ || stateVector[3] != State.$NullState$
+				|| stateVector[4] != State.$NullState$ || stateVector[5] != State.$NullState$
+				|| stateVector[6] != State.$NullState$ || stateVector[7] != State.$NullState$
+				|| stateVector[8] != State.$NullState$ || stateVector[9] != State.$NullState$
+				|| stateVector[10] != State.$NullState$ || stateVector[11] != State.$NullState$
+				|| stateVector[12] != State.$NullState$ || stateVector[13] != State.$NullState$
+				|| stateVector[14] != State.$NullState$ || stateVector[15] != State.$NullState$
+				|| stateVector[16] != State.$NullState$ || stateVector[17] != State.$NullState$
+				|| stateVector[18] != State.$NullState$ || stateVector[19] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case default_namespace :

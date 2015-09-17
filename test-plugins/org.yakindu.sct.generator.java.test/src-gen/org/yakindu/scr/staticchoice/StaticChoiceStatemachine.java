@@ -2,7 +2,7 @@ package org.yakindu.scr.staticchoice;
 
 public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean reset;
 
@@ -11,6 +11,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		}
 
 		private long number;
+
 		public long getNumber() {
 			return number;
 		}
@@ -19,13 +20,13 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 			this.number = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			reset = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_Start, main_region_B, main_region_A, $NullState$
@@ -48,7 +49,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.number = 0;
+		sCInterface.setNumber(0);
 	}
 
 	public void enter() {
@@ -66,39 +67,37 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_Start :
@@ -133,7 +132,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	}
 
 	private boolean check_main_region__choice_0_tr1_tr1() {
-		return sCInterface.number == 2;
+		return sCInterface.getNumber() == 2;
 	}
 
 	private boolean check_main_region__choice_0_tr0() {
@@ -143,7 +142,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	private void effect_main_region_Start_tr0() {
 		exitSequence_main_region_Start();
 
-		sCInterface.number += 1;
+		sCInterface.setNumber(sCInterface.getNumber() + 1);
 
 		react_main_region__choice_0();
 	}
@@ -162,7 +161,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 
 	/* Entry action for state 'Start'. */
 	private void entryAction_main_region_Start() {
-		sCInterface.number = 1;
+		sCInterface.setNumber(1);
 	}
 
 	/* Exit action for state 'StaticChoice'. */

@@ -1,10 +1,8 @@
 package org.yakindu.scr.conditionalexpressions;
 
-public class ConditionalExpressionsStatemachine
-		implements
-			IConditionalExpressionsStatemachine {
+public class ConditionalExpressionsStatemachine implements IConditionalExpressionsStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -13,6 +11,7 @@ public class ConditionalExpressionsStatemachine
 		}
 
 		private long condition;
+
 		public long getCondition() {
 			return condition;
 		}
@@ -22,6 +21,7 @@ public class ConditionalExpressionsStatemachine
 		}
 
 		private boolean boolVar;
+
 		public boolean getBoolVar() {
 			return boolVar;
 		}
@@ -30,13 +30,13 @@ public class ConditionalExpressionsStatemachine
 			this.boolVar = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, $NullState$
@@ -59,9 +59,9 @@ public class ConditionalExpressionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.condition = sCInterface.boolVar ? 3 : 2;
+		sCInterface.setCondition(sCInterface.boolVar ? 3 : 2);
 
-		sCInterface.boolVar = true;
+		sCInterface.setBoolVar(true);
 	}
 
 	public void enter() {
@@ -79,39 +79,37 @@ public class ConditionalExpressionsStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -147,7 +145,7 @@ public class ConditionalExpressionsStatemachine
 	}
 
 	private boolean check_main_region_A_tr0_tr0() {
-		return (sCInterface.e) && 1 == (sCInterface.boolVar ? 1 : 0);
+		return (sCInterface.e) && 1 == (sCInterface.getBoolVar() ? 1 : 0);
 	}
 
 	private void effect_main_region_A_tr0() {
@@ -162,12 +160,12 @@ public class ConditionalExpressionsStatemachine
 
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
-		sCInterface.condition = sCInterface.boolVar ? 1 : 0;
+		sCInterface.setCondition(sCInterface.boolVar ? 1 : 0);
 	}
 
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.condition = ((sCInterface.condition == 2) ? 1 : 2);
+		sCInterface.setCondition(((sCInterface.condition == 2) ? 1 : 2));
 	}
 
 	/* Exit action for state 'ConditionalExpressions'. */

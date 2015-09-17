@@ -1,10 +1,8 @@
 package org.yakindu.scr.samenamedifferentregion;
 
-public class SameNameDifferentRegionStatemachine
-		implements
-			ISameNameDifferentRegionStatemachine {
+public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRegionStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -12,13 +10,13 @@ public class SameNameDifferentRegionStatemachine
 			e1 = true;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e1 = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, main_region_StateB_r1_StateA, main_region_StateB_r1_StateB, $NullState$
@@ -58,48 +56,44 @@ public class SameNameDifferentRegionStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_StateA :
 				return stateVector[0] == State.main_region_StateA;
 			case main_region_StateB :
-				return stateVector[0].ordinal() >= State.main_region_StateB
-						.ordinal()
-						&& stateVector[0].ordinal() <= State.main_region_StateB_r1_StateB
-								.ordinal();
+				return stateVector[0].ordinal() >= State.main_region_StateB.ordinal()
+						&& stateVector[0].ordinal() <= State.main_region_StateB_r1_StateB.ordinal();
 			case main_region_StateB_r1_StateA :
 				return stateVector[0] == State.main_region_StateB_r1_StateA;
 			case main_region_StateB_r1_StateB :

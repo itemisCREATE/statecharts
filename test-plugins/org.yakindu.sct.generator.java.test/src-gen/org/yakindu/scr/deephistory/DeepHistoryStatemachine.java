@@ -2,7 +2,7 @@ package org.yakindu.scr.deephistory;
 
 public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
 
@@ -58,7 +58,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			event9 = true;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			event1 = false;
 			event2 = false;
 			event3 = false;
@@ -72,7 +72,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		mainRegion_State1, mainRegion_State2, mainRegion_State2__region0_a, mainRegion_State2__region0_State4, mainRegion_State2__region0_State4__region0_State6, mainRegion_State2__region0_State4__region0_State7, mainRegion_State2__region0_State4__region0_State7__region0_State8, mainRegion_State2__region0_State4__region0_State7__region0_State9, mainRegion_State2__region0_State5, $NullState$
@@ -116,62 +116,56 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case mainRegion_State1 :
 				return stateVector[0] == State.mainRegion_State1;
 			case mainRegion_State2 :
-				return stateVector[0].ordinal() >= State.mainRegion_State2
-						.ordinal()
-						&& stateVector[0].ordinal() <= State.mainRegion_State2__region0_State5
-								.ordinal();
+				return stateVector[0].ordinal() >= State.mainRegion_State2.ordinal()
+						&& stateVector[0].ordinal() <= State.mainRegion_State2__region0_State5.ordinal();
 			case mainRegion_State2__region0_a :
 				return stateVector[0] == State.mainRegion_State2__region0_a;
 			case mainRegion_State2__region0_State4 :
-				return stateVector[0].ordinal() >= State.mainRegion_State2__region0_State4
-						.ordinal()
-						&& stateVector[0].ordinal() <= State.mainRegion_State2__region0_State4__region0_State7__region0_State9
-								.ordinal();
+				return stateVector[0].ordinal() >= State.mainRegion_State2__region0_State4.ordinal() && stateVector[0]
+						.ordinal() <= State.mainRegion_State2__region0_State4__region0_State7__region0_State9.ordinal();
 			case mainRegion_State2__region0_State4__region0_State6 :
 				return stateVector[0] == State.mainRegion_State2__region0_State4__region0_State6;
 			case mainRegion_State2__region0_State4__region0_State7 :
-				return stateVector[0].ordinal() >= State.mainRegion_State2__region0_State4__region0_State7
-						.ordinal()
-						&& stateVector[0].ordinal() <= State.mainRegion_State2__region0_State4__region0_State7__region0_State9
-								.ordinal();
+				return stateVector[0].ordinal() >= State.mainRegion_State2__region0_State4__region0_State7.ordinal()
+						&& stateVector[0]
+								.ordinal() <= State.mainRegion_State2__region0_State4__region0_State7__region0_State9
+										.ordinal();
 			case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
 				return stateVector[0] == State.mainRegion_State2__region0_State4__region0_State7__region0_State8;
 			case mainRegion_State2__region0_State4__region0_State7__region0_State9 :

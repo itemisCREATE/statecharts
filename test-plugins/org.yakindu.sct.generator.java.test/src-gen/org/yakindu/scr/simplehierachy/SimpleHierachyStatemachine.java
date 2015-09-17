@@ -2,7 +2,7 @@ package org.yakindu.scr.simplehierachy;
 
 public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
 
@@ -10,13 +10,13 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 			event1 = true;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			event1 = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, main_region_B_subregion1_B1, $NullState$
@@ -56,48 +56,44 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
 				return stateVector[0] == State.main_region_A;
 			case main_region_B :
-				return stateVector[0].ordinal() >= State.main_region_B
-						.ordinal()
-						&& stateVector[0].ordinal() <= State.main_region_B_subregion1_B1
-								.ordinal();
+				return stateVector[0].ordinal() >= State.main_region_B.ordinal()
+						&& stateVector[0].ordinal() <= State.main_region_B_subregion1_B1.ordinal();
 			case main_region_B_subregion1_B1 :
 				return stateVector[0] == State.main_region_B_subregion1_B1;
 			default :
