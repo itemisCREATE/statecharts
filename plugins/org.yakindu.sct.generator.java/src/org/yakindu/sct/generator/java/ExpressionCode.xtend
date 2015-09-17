@@ -91,12 +91,21 @@ class ExpressionCode {
 			if (varRef instanceof ElementReferenceExpression) {
 				val refExp = varRef as ElementReferenceExpression
 				if (refExp.definition instanceof Property) {
-					val property = refExp.definition as Property
-					return '''«property.getContext(false)»«property.setter»(«assignCmdArgument(property)»)'''
+					return assignCmd(refExp.definition as Property)
+				} 
+			}
+			else if (varRef instanceof FeatureCall) {
+				val featureCall = varRef as FeatureCall
+				if (featureCall.feature instanceof Property) {
+					return assignCmd(featureCall.feature as Property)
 				}
 			}
 		}
 	}
+	
+	def String assignCmd(AssignmentExpression it, Property property) '''
+		«property.getContext(false)»«property.setter»(«assignCmdArgument(property)»)
+	'''
 
 	def assignCmdArgument(AssignmentExpression it, Property property) {
 		var cmd = ""
