@@ -2,7 +2,7 @@ package org.yakindu.scr.enterstate;
 
 public class EnterStateStatemachine implements IEnterStateStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -22,7 +22,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 			g = true;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e = false;
 			f = false;
 			g = false;
@@ -30,7 +30,7 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		r_A, r_B, r_B_r_E, r_B_r_F, $NullState$
@@ -70,39 +70,37 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case r_A :

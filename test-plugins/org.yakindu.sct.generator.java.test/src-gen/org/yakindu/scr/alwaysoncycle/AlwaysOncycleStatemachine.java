@@ -2,9 +2,10 @@ package org.yakindu.scr.alwaysoncycle;
 
 public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private long value;
+
 		public long getValue() {
 			return value;
 		}
@@ -14,6 +15,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		}
 
 		private boolean v2;
+
 		public boolean getV2() {
 			return v2;
 		}
@@ -24,7 +26,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, $NullState$
@@ -47,9 +49,9 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.value = 0;
+		sCInterface.setValue(0);
 
-		sCInterface.v2 = false;
+		sCInterface.setV2(false);
 	}
 
 	public void enter() {
@@ -67,38 +69,36 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_StateA :
@@ -130,7 +130,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	}
 
 	private boolean check_main_region_StateA_tr0_tr0() {
-		return sCInterface.value == 5;
+		return sCInterface.getValue() == 5;
 	}
 
 	private boolean check_main_region_StateA_lr1_lr1() {
@@ -138,7 +138,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	}
 
 	private boolean check_main_region_StateB_tr0_tr0() {
-		return sCInterface.value == 5;
+		return sCInterface.getValue() == 5;
 	}
 
 	private boolean check_main_region_StateB_lr0_lr0() {
@@ -152,7 +152,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	}
 
 	private void effect_main_region_StateA_lr1_lr1() {
-		sCInterface.value += 1;
+		sCInterface.setValue(sCInterface.getValue() + 1);
 	}
 
 	private void effect_main_region_StateB_tr0() {
@@ -162,7 +162,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	}
 
 	private void effect_main_region_StateB_lr0_lr0() {
-		sCInterface.value += 1;
+		sCInterface.setValue(sCInterface.getValue() + 1);
 	}
 
 	/* Entry action for statechart 'AlwaysOncycle'. */
@@ -171,7 +171,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.value = 0;
+		sCInterface.setValue(0);
 	}
 
 	/* Exit action for state 'AlwaysOncycle'. */
@@ -180,7 +180,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
 	/* Exit action for state 'StateA'. */
 	private void exitAction_main_region_StateA() {
-		sCInterface.value = 0;
+		sCInterface.setValue(0);
 	}
 
 	/* 'default' enter sequence for state StateA */

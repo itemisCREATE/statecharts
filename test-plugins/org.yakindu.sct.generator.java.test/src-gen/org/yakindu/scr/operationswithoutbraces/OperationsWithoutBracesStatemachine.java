@@ -1,21 +1,18 @@
 package org.yakindu.scr.operationswithoutbraces;
 
-public class OperationsWithoutBracesStatemachine
-		implements
-			IOperationsWithoutBracesStatemachine {
+public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBracesStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private SCInterfaceOperationCallback operationCallback;
 
-		public void setSCInterfaceOperationCallback(
-				SCInterfaceOperationCallback operationCallback) {
+		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, main_region_C, main_region_D, another_region_A, another_region_B, another_region_C, another_region_D, $NullState$
@@ -59,39 +56,36 @@ public class OperationsWithoutBracesStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
-		return stateVector[0] != State.$NullState$
-				|| stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NullState$ || stateVector[1] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :

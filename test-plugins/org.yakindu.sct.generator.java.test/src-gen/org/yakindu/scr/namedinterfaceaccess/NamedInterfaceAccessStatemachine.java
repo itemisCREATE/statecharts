@@ -1,10 +1,8 @@
 package org.yakindu.scr.namedinterfaceaccess;
 
-public class NamedInterfaceAccessStatemachine
-		implements
-			INamedInterfaceAccessStatemachine {
+public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessStatemachine {
 
-	private final class SCISafeImpl implements SCISafe {
+	protected class SCISafeImpl implements SCISafe {
 
 		private boolean open;
 
@@ -12,7 +10,7 @@ public class NamedInterfaceAccessStatemachine
 			return open;
 		}
 
-		private void raiseOpen() {
+		protected void raiseOpen() {
 			open = true;
 		}
 
@@ -22,21 +20,22 @@ public class NamedInterfaceAccessStatemachine
 			return close;
 		}
 
-		private void raiseClose() {
+		protected void raiseClose() {
 			close = true;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 		}
 
-		public void clearOutEvents() {
+		protected void clearOutEvents() {
 			open = false;
 			close = false;
 		}
 	}
 
-	private SCISafeImpl sCISafe;
-	private final class SCIUserImpl implements SCIUser {
+	protected SCISafeImpl sCISafe;
+
+	protected class SCIUserImpl implements SCIUser {
 
 		private boolean numberPressed;
 
@@ -47,10 +46,9 @@ public class NamedInterfaceAccessStatemachine
 			numberPressedValue = value;
 		}
 
-		private long getNumberPressedValue() {
+		protected long getNumberPressedValue() {
 			if (!numberPressed)
-				throw new IllegalStateException(
-						"Illegal event value acces. Event NumberPressed is not raised!");
+				throw new IllegalStateException("Illegal event value acces. Event NumberPressed is not raised!");
 			return numberPressedValue;
 		}
 
@@ -60,26 +58,52 @@ public class NamedInterfaceAccessStatemachine
 			reset = true;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			numberPressed = false;
 			reset = false;
 		}
 
 	}
 
-	private SCIUserImpl sCIUser;
+	protected SCIUserImpl sCIUser;
 
 	public enum State {
 		region_1_Idle, region_1_Number1Pressed, region_1_Number2Pressed, region_1_Number3Pressed, _region1_Closed, _region1_Open, $NullState$
 	};
 
-	private long number1;
-	private long number2;
-	private long number3;
-
 	private final State[] stateVector = new State[2];
 
 	private int nextStateIndex;
+
+	private long number1;
+
+	protected void setNumber1(long value) {
+		number1 = value;
+	}
+
+	protected long getNumber1() {
+		return number1;
+	}
+
+	private long number2;
+
+	protected void setNumber2(long value) {
+		number2 = value;
+	}
+
+	protected long getNumber2() {
+		return number2;
+	}
+
+	private long number3;
+
+	protected void setNumber3(long value) {
+		number3 = value;
+	}
+
+	protected long getNumber3() {
+		return number3;
+	}
 
 	public NamedInterfaceAccessStatemachine() {
 
@@ -95,11 +119,11 @@ public class NamedInterfaceAccessStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		number1 = 3;
+		setNumber1(3);
 
-		number2 = 7;
+		setNumber2(7);
 
-		number3 = 5;
+		setNumber3(5);
 	}
 
 	public void enter() {
@@ -121,26 +145,23 @@ public class NamedInterfaceAccessStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
-		return stateVector[0] != State.$NullState$
-				|| stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NullState$ || stateVector[1] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCISafe.clearEvents();
 		sCIUser.clearEvents();
@@ -148,15 +169,15 @@ public class NamedInterfaceAccessStatemachine
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 		sCISafe.clearOutEvents();
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case region_1_Idle :
@@ -184,11 +205,11 @@ public class NamedInterfaceAccessStatemachine
 	}
 
 	private boolean check_region_1_Idle_tr0_tr0() {
-		return (sCIUser.numberPressed) && sCIUser.numberPressedValue == number1;
+		return (sCIUser.numberPressed) && sCIUser.getNumberPressedValue() == getNumber1();
 	}
 
 	private boolean check_region_1_Number1Pressed_tr0_tr0() {
-		return (sCIUser.numberPressed) && sCIUser.numberPressedValue == number2;
+		return (sCIUser.numberPressed) && sCIUser.getNumberPressedValue() == getNumber2();
 	}
 
 	private boolean check_region_1_Number1Pressed_tr1_tr1() {
@@ -196,7 +217,7 @@ public class NamedInterfaceAccessStatemachine
 	}
 
 	private boolean check_region_1_Number2Pressed_tr0_tr0() {
-		return (sCIUser.numberPressed) && sCIUser.numberPressedValue == number3;
+		return (sCIUser.numberPressed) && sCIUser.getNumberPressedValue() == getNumber3();
 	}
 
 	private boolean check_region_1_Number2Pressed_tr1_tr1() {

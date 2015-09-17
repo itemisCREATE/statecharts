@@ -1,10 +1,7 @@
 package org.yakindu.scr.timedtransitions;
 import org.yakindu.scr.ITimer;
 
-public class TimedTransitionsStatemachine
-		implements
-			ITimedTransitionsStatemachine {
-	private final boolean[] timeEvents = new boolean[1];
+public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachine {
 
 	public enum State {
 		main_region_Start, main_region_End, $NullState$
@@ -15,6 +12,8 @@ public class TimedTransitionsStatemachine
 	private int nextStateIndex;
 
 	private ITimer timer;
+
+	private final boolean[] timeEvents = new boolean[1];
 
 	public TimedTransitionsStatemachine() {
 
@@ -51,25 +50,23 @@ public class TimedTransitionsStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 
 		for (int i = 0; i < timeEvents.length; i++) {
@@ -78,14 +75,14 @@ public class TimedTransitionsStatemachine
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_Start :
@@ -98,21 +95,21 @@ public class TimedTransitionsStatemachine
 	}
 
 	/**
-	 * Set the {@link ITimer} for the state machine. It must be set
-	 * externally on a timed state machine before a run cycle can be correct
-	 * executed.
-	 * 
-	 * @param timer
-	 */
+	* Set the {@link ITimer} for the state machine. It must be set
+	* externally on a timed state machine before a run cycle can be correct
+	* executed.
+	* 
+	* @param timer
+	*/
 	public void setTimer(ITimer timer) {
 		this.timer = timer;
 	}
 
 	/**
-	 * Returns the currently used timer.
-	 * 
-	 * @return {@link ITimer}
-	 */
+	* Returns the currently used timer.
+	* 
+	* @return {@link ITimer}
+	*/
 	public ITimer getTimer() {
 		return timer;
 	}

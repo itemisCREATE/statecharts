@@ -1,10 +1,8 @@
 package org.yakindu.scr.realexpressions;
 
-public class RealExpressionsStatemachine
-		implements
-			IRealExpressionsStatemachine {
+public class RealExpressionsStatemachine implements IRealExpressionsStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -13,6 +11,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private double myReal1;
+
 		public double getMyReal1() {
 			return myReal1;
 		}
@@ -21,7 +20,12 @@ public class RealExpressionsStatemachine
 			this.myReal1 = value;
 		}
 
+		protected double assignMyReal1(double value) {
+			return this.myReal1 = value;
+		}
+
 		private double myReal2;
+
 		public double getMyReal2() {
 			return myReal2;
 		}
@@ -31,6 +35,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private double myFloat;
+
 		public double getMyFloat() {
 			return myFloat;
 		}
@@ -40,6 +45,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private double myDouble;
+
 		public double getMyDouble() {
 			return myDouble;
 		}
@@ -49,6 +55,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean less;
+
 		public boolean getLess() {
 			return less;
 		}
@@ -58,6 +65,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean greater;
+
 		public boolean getGreater() {
 			return greater;
 		}
@@ -67,6 +75,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean equalOrLess;
+
 		public boolean getEqualOrLess() {
 			return equalOrLess;
 		}
@@ -76,6 +85,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean equalOrGreater;
+
 		public boolean getEqualOrGreater() {
 			return equalOrGreater;
 		}
@@ -85,6 +95,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean equal;
+
 		public boolean getEqual() {
 			return equal;
 		}
@@ -94,6 +105,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean notEqual;
+
 		public boolean getNotEqual() {
 			return notEqual;
 		}
@@ -103,6 +115,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean plus;
+
 		public boolean getPlus() {
 			return plus;
 		}
@@ -112,6 +125,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean minus;
+
 		public boolean getMinus() {
 			return minus;
 		}
@@ -121,6 +135,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean multiply;
+
 		public boolean getMultiply() {
 			return multiply;
 		}
@@ -130,6 +145,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean division;
+
 		public boolean getDivision() {
 			return division;
 		}
@@ -139,6 +155,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean modulo;
+
 		public boolean getModulo() {
 			return modulo;
 		}
@@ -148,6 +165,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private double negat;
+
 		public double getNegat() {
 			return negat;
 		}
@@ -157,6 +175,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean complement;
+
 		public boolean getComplement() {
 			return complement;
 		}
@@ -166,6 +185,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private double multiAssign;
+
 		public double getMultiAssign() {
 			return multiAssign;
 		}
@@ -175,6 +195,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private double divAssign;
+
 		public double getDivAssign() {
 			return divAssign;
 		}
@@ -184,6 +205,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private double plusAssign;
+
 		public double getPlusAssign() {
 			return plusAssign;
 		}
@@ -193,6 +215,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private double minusAssign;
+
 		public double getMinusAssign() {
 			return minusAssign;
 		}
@@ -202,6 +225,7 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean moduloAssign;
+
 		public boolean getModuloAssign() {
 			return moduloAssign;
 		}
@@ -210,13 +234,13 @@ public class RealExpressionsStatemachine
 			this.moduloAssign = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e1 = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, $NullState$
@@ -239,49 +263,49 @@ public class RealExpressionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.myReal1 = 0.0;
+		sCInterface.setMyReal1(0.0);
 
-		sCInterface.myReal2 = 0.0;
+		sCInterface.setMyReal2(0.0);
 
-		sCInterface.myFloat = 1.0;
+		sCInterface.setMyFloat(1.0);
 
-		sCInterface.myDouble = 2.0;
+		sCInterface.setMyDouble(2.0);
 
-		sCInterface.less = false;
+		sCInterface.setLess(false);
 
-		sCInterface.greater = false;
+		sCInterface.setGreater(false);
 
-		sCInterface.equalOrLess = false;
+		sCInterface.setEqualOrLess(false);
 
-		sCInterface.equalOrGreater = false;
+		sCInterface.setEqualOrGreater(false);
 
-		sCInterface.equal = false;
+		sCInterface.setEqual(false);
 
-		sCInterface.notEqual = false;
+		sCInterface.setNotEqual(false);
 
-		sCInterface.plus = false;
+		sCInterface.setPlus(false);
 
-		sCInterface.minus = false;
+		sCInterface.setMinus(false);
 
-		sCInterface.multiply = false;
+		sCInterface.setMultiply(false);
 
-		sCInterface.division = false;
+		sCInterface.setDivision(false);
 
-		sCInterface.modulo = false;
+		sCInterface.setModulo(false);
 
-		sCInterface.negat = 0.0;
+		sCInterface.setNegat(0.0);
 
-		sCInterface.complement = false;
+		sCInterface.setComplement(false);
 
-		sCInterface.multiAssign = 2.2;
+		sCInterface.setMultiAssign(2.2);
 
-		sCInterface.divAssign = 22.79;
+		sCInterface.setDivAssign(22.79);
 
-		sCInterface.plusAssign = 2.2;
+		sCInterface.setPlusAssign(2.2);
 
-		sCInterface.minusAssign = 8.6;
+		sCInterface.setMinusAssign(8.6);
 
-		sCInterface.moduloAssign = false;
+		sCInterface.setModuloAssign(false);
 	}
 
 	public void enter() {
@@ -299,39 +323,37 @@ public class RealExpressionsStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_StateA :
@@ -522,50 +544,56 @@ public class RealExpressionsStatemachine
 
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.myReal1 = 5.3;
+		sCInterface.setMyReal1(5.3);
 
-		sCInterface.myReal2 = 10.6;
+		sCInterface.setMyReal2(10.6);
 
-		sCInterface.myFloat = 3.3;
+		sCInterface.setMyFloat(3.3);
 
-		sCInterface.myDouble = 4.4;
+		sCInterface.setMyDouble(4.4);
 	}
 
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.less = sCInterface.myReal1 < sCInterface.myReal2;
+		sCInterface.setLess(sCInterface.myReal1 < sCInterface.myReal2);
 
-		sCInterface.greater = sCInterface.myReal1 > sCInterface.myReal2;
+		sCInterface.setGreater(sCInterface.myReal1 > sCInterface.myReal2);
 
-		sCInterface.equalOrLess = sCInterface.myReal1 <= sCInterface.myReal2;
+		sCInterface.setEqualOrLess(sCInterface.myReal1 <= sCInterface.myReal2);
 
-		sCInterface.equalOrGreater = sCInterface.myReal1 >= sCInterface.myReal2;
+		sCInterface.setEqualOrGreater(sCInterface.myReal1 >= sCInterface.myReal2);
 
-		sCInterface.equal = sCInterface.myReal1 == sCInterface.myReal2;
+		sCInterface.setEqual(sCInterface.myReal1 == sCInterface.myReal2);
 
-		sCInterface.notEqual = sCInterface.myReal1 != sCInterface.myReal2;
+		sCInterface.setNotEqual(sCInterface.myReal1 != sCInterface.myReal2);
 
-		sCInterface.plus = (15.89 <= (sCInterface.myReal1 + sCInterface.myReal2) && (sCInterface.myReal1 + sCInterface.myReal2) <= 16.91);
+		sCInterface.setPlus((15.89 <= (sCInterface.myReal1 + sCInterface.myReal2)
+				&& (sCInterface.myReal1 + sCInterface.myReal2) <= 16.91));
 
-		sCInterface.minus = (5.29 <= (sCInterface.myReal2 - sCInterface.myReal1) && (sCInterface.myReal1 - sCInterface.myReal2) <= 5.31);
+		sCInterface.setMinus((5.29 <= (sCInterface.myReal2 - sCInterface.myReal1)
+				&& (sCInterface.myReal1 - sCInterface.myReal2) <= 5.31));
 
-		sCInterface.multiply = (56.17 <= (sCInterface.myReal1 * sCInterface.myReal2) && (sCInterface.myReal1 * sCInterface.myReal2) <= 56.19);
+		sCInterface.setMultiply((56.17 <= (sCInterface.myReal1 * sCInterface.myReal2)
+				&& (sCInterface.myReal1 * sCInterface.myReal2) <= 56.19));
 
-		sCInterface.division = (1.9 <= (sCInterface.myReal2 / sCInterface.myReal1) && (sCInterface.myReal1 / sCInterface.myReal2) <= 2.1);
+		sCInterface.setDivision((1.9 <= (sCInterface.myReal2 / sCInterface.myReal1)
+				&& (sCInterface.myReal1 / sCInterface.myReal2) <= 2.1));
 
-		sCInterface.modulo = (-0.1 <= (sCInterface.myReal2 % sCInterface.myReal1) && (sCInterface.myReal1 % sCInterface.myReal2) <= 0.1);
+		sCInterface.setModulo((-0.1 <= (sCInterface.myReal2 % sCInterface.myReal1)
+				&& (sCInterface.myReal1 % sCInterface.myReal2) <= 0.1));
 
-		sCInterface.negat = -sCInterface.myReal1;
+		sCInterface.setNegat(-sCInterface.myReal1);
 
-		sCInterface.multiAssign *= sCInterface.myReal1;
+		sCInterface.setMultiAssign(sCInterface.getMultiAssign() * sCInterface.myReal1);
 
-		sCInterface.divAssign /= sCInterface.myReal1;
+		sCInterface.setDivAssign(sCInterface.getDivAssign() / sCInterface.myReal1);
 
-		sCInterface.plusAssign += sCInterface.myReal1;
+		sCInterface.setPlusAssign(sCInterface.getPlusAssign() + sCInterface.myReal1);
 
-		sCInterface.minusAssign -= sCInterface.myReal1;
+		sCInterface.setMinusAssign(sCInterface.getMinusAssign() - sCInterface.myReal1);
 
-		sCInterface.moduloAssign = (-0.1 <= (sCInterface.myReal1 %= sCInterface.myReal1));
+		sCInterface
+				.setModuloAssign((-0.1 <= (sCInterface.assignMyReal1(sCInterface.getMyReal1() % sCInterface.myReal1))));
 	}
 
 	/* Exit action for state 'RealExpressions'. */

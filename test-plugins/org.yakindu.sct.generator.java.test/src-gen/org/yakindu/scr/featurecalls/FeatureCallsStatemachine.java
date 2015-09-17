@@ -2,7 +2,7 @@ package org.yakindu.scr.featurecalls;
 
 public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 
-	private final class SCIMyInterfaceImpl implements SCIMyInterface {
+	protected class SCIMyInterfaceImpl implements SCIMyInterface {
 
 		private boolean event1;
 
@@ -11,6 +11,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		}
 
 		private long myInt;
+
 		public long getMyInt() {
 			return myInt;
 		}
@@ -19,13 +20,13 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 			this.myInt = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			event1 = false;
 		}
 
 	}
 
-	private SCIMyInterfaceImpl sCIMyInterface;
+	protected SCIMyInterfaceImpl sCIMyInterface;
 
 	public enum State {
 		main_region_A, main_region_B, $NullState$
@@ -48,7 +49,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCIMyInterface.myInt = 0;
+		sCIMyInterface.setMyInt(0);
 	}
 
 	public void enter() {
@@ -66,39 +67,37 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCIMyInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -140,7 +139,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCIMyInterface.myInt = 42;
+		sCIMyInterface.setMyInt(42);
 
 		sCIMyInterface.raiseEvent1();
 	}

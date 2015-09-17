@@ -1,12 +1,9 @@
 package org.yakindu.scr.performancetest;
 import org.yakindu.scr.ITimer;
 
-public class PerformanceTestStatemachine
-		implements
-			IPerformanceTestStatemachine {
-	private final boolean[] timeEvents = new boolean[2];
+public class PerformanceTestStatemachine implements IPerformanceTestStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -27,6 +24,7 @@ public class PerformanceTestStatemachine
 		}
 
 		private long x;
+
 		public long getX() {
 			return x;
 		}
@@ -36,6 +34,7 @@ public class PerformanceTestStatemachine
 		}
 
 		private long a;
+
 		public long getA() {
 			return a;
 		}
@@ -45,6 +44,7 @@ public class PerformanceTestStatemachine
 		}
 
 		private long c;
+
 		public long getC() {
 			return c;
 		}
@@ -53,7 +53,7 @@ public class PerformanceTestStatemachine
 			this.c = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e1 = false;
 			e2 = false;
 			e3 = false;
@@ -61,7 +61,7 @@ public class PerformanceTestStatemachine
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		mr_A, mr_B, mr_B_r1_X, mr_B_r1_Y, mr_B_r1_Z, mr_B_r1_V, mr_B_r1_W, mr_B_r1_S, mr_B_r1_T, mr_B_r1_U, mr_B_r2_S, mr_B_r2_T, mr_B_r2_U, mr_B_r2_V, mr_B_r2_W, $NullState$
@@ -73,6 +73,8 @@ public class PerformanceTestStatemachine
 	private int nextStateIndex;
 
 	private ITimer timer;
+
+	private final boolean[] timeEvents = new boolean[2];
 
 	public PerformanceTestStatemachine() {
 
@@ -93,11 +95,11 @@ public class PerformanceTestStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.x = 0;
+		sCInterface.setX(0);
 
-		sCInterface.a = 0;
+		sCInterface.setA(0);
 
-		sCInterface.c = 0;
+		sCInterface.setC(0);
 	}
 
 	public void enter() {
@@ -123,26 +125,23 @@ public class PerformanceTestStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
-		return stateVector[0] != State.$NullState$
-				|| stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NullState$ || stateVector[1] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
@@ -152,22 +151,21 @@ public class PerformanceTestStatemachine
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case mr_A :
 				return stateVector[0] == State.mr_A;
 			case mr_B :
 				return stateVector[0].ordinal() >= State.mr_B.ordinal()
-						&& stateVector[0].ordinal() <= State.mr_B_r2_W
-								.ordinal();
+						&& stateVector[0].ordinal() <= State.mr_B_r2_W.ordinal();
 			case mr_B_r1_X :
 				return stateVector[0] == State.mr_B_r1_X;
 			case mr_B_r1_Y :
@@ -200,21 +198,21 @@ public class PerformanceTestStatemachine
 	}
 
 	/**
-	 * Set the {@link ITimer} for the state machine. It must be set
-	 * externally on a timed state machine before a run cycle can be correct
-	 * executed.
-	 * 
-	 * @param timer
-	 */
+	* Set the {@link ITimer} for the state machine. It must be set
+	* externally on a timed state machine before a run cycle can be correct
+	* executed.
+	* 
+	* @param timer
+	*/
 	public void setTimer(ITimer timer) {
 		this.timer = timer;
 	}
 
 	/**
-	 * Returns the currently used timer.
-	 * 
-	 * @return {@link ITimer}
-	 */
+	* Returns the currently used timer.
+	* 
+	* @return {@link ITimer}
+	*/
 	public ITimer getTimer() {
 		return timer;
 	}
@@ -344,31 +342,31 @@ public class PerformanceTestStatemachine
 	}
 
 	private boolean check_mr_B_r1__choice_1_tr0_tr0() {
-		return sCInterface.x == 4;
+		return sCInterface.getX() == 4;
 	}
 
 	private boolean check_mr_B_r1__choice_1_tr1_tr1() {
-		return sCInterface.x == 5;
+		return sCInterface.getX() == 5;
 	}
 
 	private boolean check_mr_B_r1__choice_1_tr2_tr2() {
-		return sCInterface.x == 6;
+		return sCInterface.getX() == 6;
 	}
 
 	private boolean check_mr_B_r1__choice_1_tr3_tr3() {
-		return sCInterface.x == 7;
+		return sCInterface.getX() == 7;
 	}
 
 	private boolean check_mr_B_r1__choice_1_tr4_tr4() {
-		return sCInterface.x == 8;
+		return sCInterface.getX() == 8;
 	}
 
 	private boolean check_mr_B_r1__choice_1_tr5_tr5() {
-		return sCInterface.x == 3;
+		return sCInterface.getX() == 3;
 	}
 
 	private boolean check_mr_B_r1__choice_1_tr6_tr6() {
-		return sCInterface.x == 2;
+		return sCInterface.getX() == 2;
 	}
 
 	private boolean check_mr_B_r1__choice_1_tr7_tr7() {
@@ -376,7 +374,7 @@ public class PerformanceTestStatemachine
 	}
 
 	private void effect__lr0() {
-		sCInterface.c += 1;
+		sCInterface.setC(sCInterface.getC() + 1);
 	}
 
 	private void effect__lr1() {
@@ -492,7 +490,7 @@ public class PerformanceTestStatemachine
 	}
 
 	private void effect_mr_B_r1__choice_0_tr0() {
-		sCInterface.x += 1;
+		sCInterface.setX(sCInterface.getX() + 1);
 
 		react_mr_B_r1__choice_1();
 	}
@@ -514,7 +512,7 @@ public class PerformanceTestStatemachine
 	}
 
 	private void effect_mr_B_r1__choice_1_tr4() {
-		sCInterface.x = 0;
+		sCInterface.setX(0);
 
 		enterSequence_mr_B_r1_Z_default();
 	}
@@ -541,7 +539,7 @@ public class PerformanceTestStatemachine
 
 	/* Entry action for state 'A'. */
 	private void entryAction_mr_A() {
-		sCInterface.a += 1;
+		sCInterface.setA(sCInterface.getA() + 1);
 	}
 
 	/* Exit action for state 'PerformanceTest'. */

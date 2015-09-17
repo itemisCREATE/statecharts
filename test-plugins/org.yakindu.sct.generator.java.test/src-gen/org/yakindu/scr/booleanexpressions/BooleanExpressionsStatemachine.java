@@ -1,10 +1,8 @@
 package org.yakindu.scr.booleanexpressions;
 
-public class BooleanExpressionsStatemachine
-		implements
-			IBooleanExpressionsStatemachine {
+public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -13,6 +11,7 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean myBool1;
+
 		public boolean getMyBool1() {
 			return myBool1;
 		}
@@ -22,6 +21,7 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean myBool2;
+
 		public boolean getMyBool2() {
 			return myBool2;
 		}
@@ -31,6 +31,7 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean and;
+
 		public boolean getAnd() {
 			return and;
 		}
@@ -40,6 +41,7 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean or;
+
 		public boolean getOr() {
 			return or;
 		}
@@ -49,6 +51,7 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean not;
+
 		public boolean getNot() {
 			return not;
 		}
@@ -58,6 +61,7 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean equal;
+
 		public boolean getEqual() {
 			return equal;
 		}
@@ -67,6 +71,7 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean notequal;
+
 		public boolean getNotequal() {
 			return notequal;
 		}
@@ -75,13 +80,13 @@ public class BooleanExpressionsStatemachine
 			this.notequal = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e1 = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, $NullState$
@@ -104,19 +109,19 @@ public class BooleanExpressionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.myBool1 = false;
+		sCInterface.setMyBool1(false);
 
-		sCInterface.myBool2 = false;
+		sCInterface.setMyBool2(false);
 
-		sCInterface.and = false;
+		sCInterface.setAnd(false);
 
-		sCInterface.or = false;
+		sCInterface.setOr(false);
 
-		sCInterface.not = false;
+		sCInterface.setNot(false);
 
-		sCInterface.equal = false;
+		sCInterface.setEqual(false);
 
-		sCInterface.notequal = false;
+		sCInterface.setNotequal(false);
 	}
 
 	public void enter() {
@@ -134,39 +139,37 @@ public class BooleanExpressionsStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_StateA :
@@ -252,22 +255,22 @@ public class BooleanExpressionsStatemachine
 
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
-		sCInterface.myBool1 = true;
+		sCInterface.setMyBool1(true);
 
-		sCInterface.myBool2 = false;
+		sCInterface.setMyBool2(false);
 	}
 
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.and = sCInterface.myBool1 && sCInterface.myBool2;
+		sCInterface.setAnd(sCInterface.myBool1 && sCInterface.myBool2);
 
-		sCInterface.or = sCInterface.myBool1 || sCInterface.myBool2;
+		sCInterface.setOr(sCInterface.myBool1 || sCInterface.myBool2);
 
-		sCInterface.not = !sCInterface.myBool1;
+		sCInterface.setNot(!sCInterface.myBool1);
 
-		sCInterface.equal = sCInterface.myBool1 == sCInterface.myBool2;
+		sCInterface.setEqual(sCInterface.myBool1 == sCInterface.myBool2);
 
-		sCInterface.notequal = (sCInterface.myBool1 != sCInterface.myBool2);
+		sCInterface.setNotequal((sCInterface.myBool1 != sCInterface.myBool2));
 	}
 
 	/* Exit action for state 'BooleanExpressions'. */

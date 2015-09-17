@@ -2,24 +2,23 @@ package org.yakindu.scr.operations;
 
 public class OperationsStatemachine implements IOperationsStatemachine {
 
-	private final class SCIInterface1Impl implements SCIInterface1 {
+	protected class SCIInterface1Impl implements SCIInterface1 {
 
 		private SCIInterface1OperationCallback operationCallback;
 
-		public void setSCIInterface1OperationCallback(
-				SCIInterface1OperationCallback operationCallback) {
+		public void setSCIInterface1OperationCallback(SCIInterface1OperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 
 	}
 
-	private SCIInterface1Impl sCIInterface1;
-	private final class SCInterfaceImpl implements SCInterface {
+	protected SCIInterface1Impl sCIInterface1;
+
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private SCInterfaceOperationCallback operationCallback;
 
-		public void setSCInterfaceOperationCallback(
-				SCInterfaceOperationCallback operationCallback) {
+		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 
@@ -29,23 +28,31 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 			ev = true;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			ev = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_B, main_region_C, main_region_D, main_region_A, $NullState$
 	};
 
-	private boolean myBool;
-
 	private final State[] stateVector = new State[1];
 
 	private int nextStateIndex;
+
+	private boolean myBool;
+
+	protected void setMyBool(boolean value) {
+		myBool = value;
+	}
+
+	protected boolean getMyBool() {
+		return myBool;
+	}
 
 	private InternalOperationCallback operationCallback;
 
@@ -63,7 +70,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		myBool = false;
+		setMyBool(false);
 	}
 
 	public void enter() {
@@ -81,39 +88,37 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_B :
@@ -136,8 +141,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		return sCInterface;
 	}
 
-	public void setInternalOperationCallback(
-			InternalOperationCallback operationCallback) {
+	public void setInternalOperationCallback(InternalOperationCallback operationCallback) {
 		this.operationCallback = operationCallback;
 	}
 
@@ -183,7 +187,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	private void entryAction_main_region_B() {
 		operationCallback.internalOperation1();
 
-		myBool = operationCallback.internalOperation2(4);
+		setMyBool(operationCallback.internalOperation2(4));
 
 		operationCallback.internalOperation3();
 

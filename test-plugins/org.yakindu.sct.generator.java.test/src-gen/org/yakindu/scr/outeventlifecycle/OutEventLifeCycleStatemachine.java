@@ -1,10 +1,8 @@
 package org.yakindu.scr.outeventlifecycle;
 
-public class OutEventLifeCycleStatemachine
-		implements
-			IOutEventLifeCycleStatemachine {
+public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -18,11 +16,12 @@ public class OutEventLifeCycleStatemachine
 			return f;
 		}
 
-		private void raiseF() {
+		protected void raiseF() {
 			f = true;
 		}
 
 		private boolean f_available_in_cycle;
+
 		public boolean getF_available_in_cycle() {
 			return f_available_in_cycle;
 		}
@@ -32,6 +31,7 @@ public class OutEventLifeCycleStatemachine
 		}
 
 		private boolean f_available_in_next_cycle;
+
 		public boolean getF_available_in_next_cycle() {
 			return f_available_in_next_cycle;
 		}
@@ -40,16 +40,16 @@ public class OutEventLifeCycleStatemachine
 			this.f_available_in_next_cycle = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e = false;
 		}
 
-		public void clearOutEvents() {
+		protected void clearOutEvents() {
 			f = false;
 		}
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		r1_A, r1_B, r2_B, $NullState$
@@ -72,9 +72,9 @@ public class OutEventLifeCycleStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.f_available_in_cycle = false;
+		sCInterface.setF_available_in_cycle(false);
 
-		sCInterface.f_available_in_next_cycle = false;
+		sCInterface.setF_available_in_next_cycle(false);
 	}
 
 	public void enter() {
@@ -96,41 +96,38 @@ public class OutEventLifeCycleStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
-		return stateVector[0] != State.$NullState$
-				|| stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NullState$ || stateVector[1] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 		sCInterface.clearOutEvents();
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case r1_A :
@@ -191,11 +188,11 @@ public class OutEventLifeCycleStatemachine
 	}
 
 	private void effect_r1_B_lr0_lr0() {
-		sCInterface.f_available_in_next_cycle = true;
+		sCInterface.setF_available_in_next_cycle(true);
 	}
 
 	private void effect_r2_B_lr0_lr0() {
-		sCInterface.f_available_in_cycle = true;
+		sCInterface.setF_available_in_cycle(true);
 	}
 
 	/* Entry action for statechart 'OutEventLifeCycle'. */

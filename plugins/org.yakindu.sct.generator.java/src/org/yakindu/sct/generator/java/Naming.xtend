@@ -169,12 +169,20 @@ class Naming implements JavaKeywords {
 		}
 	}
 
+	def String getter(Event it) {
+		"get" + name.asName + "Value()"
+	}
+	
 	def String getter(Property it) {
 		return "get" + varName + "()"
 	}
 
 	def String setter(Property it) {
 		"set" + varName
+	}
+	
+	def String assign(Property it) {
+		"assign" + varName
 	}
 
 	def String getNullStateName() {

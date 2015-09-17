@@ -1,10 +1,8 @@
 package org.yakindu.scr.triggerguardexpressions;
 
-public class TriggerGuardExpressionsStatemachine
-		implements
-			ITriggerGuardExpressionsStatemachine {
+public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpressionsStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -19,6 +17,7 @@ public class TriggerGuardExpressionsStatemachine
 		}
 
 		private boolean b;
+
 		public boolean getB() {
 			return b;
 		}
@@ -27,14 +26,14 @@ public class TriggerGuardExpressionsStatemachine
 			this.b = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e1 = false;
 			e2 = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, $NullState$
@@ -57,7 +56,7 @@ public class TriggerGuardExpressionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.b = false;
+		sCInterface.setB(false);
 	}
 
 	public void enter() {
@@ -75,39 +74,37 @@ public class TriggerGuardExpressionsStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -139,7 +136,7 @@ public class TriggerGuardExpressionsStatemachine
 	}
 
 	private boolean check_main_region_A_tr0_tr0() {
-		return (sCInterface.e1 || sCInterface.e2) && sCInterface.b;
+		return (sCInterface.e1 || sCInterface.e2) && sCInterface.getB();
 	}
 
 	private boolean check_main_region_B_tr0_tr0() {

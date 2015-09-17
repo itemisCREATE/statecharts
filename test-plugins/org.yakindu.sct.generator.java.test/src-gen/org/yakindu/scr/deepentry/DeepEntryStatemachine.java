@@ -2,7 +2,7 @@ package org.yakindu.scr.deepentry;
 
 public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -17,6 +17,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		}
 
 		private long x;
+
 		public long getX() {
 			return x;
 		}
@@ -26,6 +27,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		}
 
 		private long y;
+
 		public long getY() {
 			return y;
 		}
@@ -35,6 +37,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		}
 
 		private long z;
+
 		public long getZ() {
 			return z;
 		}
@@ -43,14 +46,14 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			this.z = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e = false;
 			f = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		r_A, r_A_r_B, r2_B, r2_B_r_BA, r2_B_r_BA_r_BAA, r2_B_r_BB, r2_C, r3_D, r3_D_r_DA, r3_D_r_DA_r_DAA, $NullState$
@@ -77,11 +80,11 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.x = 0;
+		sCInterface.setX(0);
 
-		sCInterface.y = 0;
+		sCInterface.setY(0);
 
-		sCInterface.z = 0;
+		sCInterface.setZ(0);
 	}
 
 	public void enter() {
@@ -107,41 +110,38 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
-		return stateVector[0] != State.$NullState$
-				|| stateVector[1] != State.$NullState$
+		return stateVector[0] != State.$NullState$ || stateVector[1] != State.$NullState$
 				|| stateVector[2] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case r_A :
@@ -151,12 +151,10 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				return stateVector[0] == State.r_A_r_B;
 			case r2_B :
 				return stateVector[1].ordinal() >= State.r2_B.ordinal()
-						&& stateVector[1].ordinal() <= State.r2_B_r_BB
-								.ordinal();
+						&& stateVector[1].ordinal() <= State.r2_B_r_BB.ordinal();
 			case r2_B_r_BA :
 				return stateVector[1].ordinal() >= State.r2_B_r_BA.ordinal()
-						&& stateVector[1].ordinal() <= State.r2_B_r_BA_r_BAA
-								.ordinal();
+						&& stateVector[1].ordinal() <= State.r2_B_r_BA_r_BAA.ordinal();
 			case r2_B_r_BA_r_BAA :
 				return stateVector[1] == State.r2_B_r_BA_r_BAA;
 			case r2_B_r_BB :
@@ -165,12 +163,10 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 				return stateVector[1] == State.r2_C;
 			case r3_D :
 				return stateVector[2].ordinal() >= State.r3_D.ordinal()
-						&& stateVector[2].ordinal() <= State.r3_D_r_DA_r_DAA
-								.ordinal();
+						&& stateVector[2].ordinal() <= State.r3_D_r_DA_r_DAA.ordinal();
 			case r3_D_r_DA :
 				return stateVector[2].ordinal() >= State.r3_D_r_DA.ordinal()
-						&& stateVector[2].ordinal() <= State.r3_D_r_DA_r_DAA
-								.ordinal();
+						&& stateVector[2].ordinal() <= State.r3_D_r_DA_r_DAA.ordinal();
 			case r3_D_r_DA_r_DAA :
 				return stateVector[2] == State.r3_D_r_DA_r_DAA;
 			default :
@@ -247,22 +243,22 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
 	/* Entry action for state 'A'. */
 	private void entryAction_r_A() {
-		sCInterface.x += 1;
+		sCInterface.setX(sCInterface.getX() + 1);
 	}
 
 	/* Entry action for state 'BA'. */
 	private void entryAction_r2_B_r_BA() {
-		sCInterface.y += 1;
+		sCInterface.setY(sCInterface.getY() + 1);
 	}
 
 	/* Entry action for state 'D'. */
 	private void entryAction_r3_D() {
-		sCInterface.z += 1;
+		sCInterface.setZ(sCInterface.getZ() + 1);
 	}
 
 	/* Entry action for state 'DA'. */
 	private void entryAction_r3_D_r_DA() {
-		sCInterface.z += 1;
+		sCInterface.setZ(sCInterface.getZ() + 1);
 	}
 
 	/* Exit action for state 'DeepEntry'. */

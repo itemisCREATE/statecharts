@@ -52,9 +52,9 @@ class Statemachine {
 		«flow.createImports(entry)»
 		
 		public class «flow.statemachineClassName» implements «flow.statemachineInterfaceName» {
+			
 			«flow.createFieldDeclarations(entry)»
-		
-				
+			
 			«flow.createConstructor»
 			
 			«flow.initFunction»
@@ -98,35 +98,18 @@ class Statemachine {
 	'''
 	
 	def protected createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
-		«FOR event : flow.internalScopeEvents»
-		private boolean «event.symbol»;
-		
-		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-			private «event.type.targetLanguageName» «event.valueIdentifier»;
-		«ENDIF»
-		«ENDFOR»
-		«IF flow.timed»
-			private final boolean[] timeEvents = new boolean[«flow.timeEvents.size»];
-		«ENDIF»
-	
 		«FOR scope : flow.interfaceScopes»
 			«scope.toImplementation(entry)»
 			
-			private «scope.interfaceImplName» «scope.interfaceName.asEscapedIdentifier»;
+			protected «scope.interfaceImplName» «scope.interfaceName.asEscapedIdentifier»;
+			
 		«ENDFOR»
-	
 		public enum State {
 			«FOR state : flow.states»
 				«state.stateName.asEscapedIdentifier»,
 			«ENDFOR»
 			«getNullStateName()»
 		};
-		
-		«FOR variable : flow.internalScopeVariables»
-			«IF !variable.const»
-				«variable.writeableFieldDeclaration»
-			«ENDIF»
-		«ENDFOR»
 		
 		«IF flow.hasHistory»
 		private State[] historyVector = new State[«flow.historyVector.size»];
@@ -137,20 +120,48 @@ class Statemachine {
 		
 		«IF flow.timed»
 		private ITimer timer;
+		
+		private final boolean[] timeEvents = new boolean[«flow.timeEvents.size»];
 		«ENDIF»
 		
+		«FOR event : flow.internalScopeEvents»
+			private boolean «event.symbol»;
+			
+			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+				private «event.type.targetLanguageName» «event.valueIdentifier»;
+				
+			«ENDIF»
+		«ENDFOR»
+		
+		«FOR variable : flow.internalScopeVariables SEPARATOR newLine AFTER newLine»
+			«IF !variable.const»
+				«variable.fieldDeclaration»
+				
+				protected void «variable.setter»(«variable.type.targetLanguageName» value) {
+					«variable.symbol» = value;
+				}
+				
+			«ENDIF»
+			protected «variable.type.targetLanguageName» «variable.getter» {
+				return «variable.symbol»;
+			}
+			
+			«IF variable.needsAssignMethod»
+				protected «variable.type.targetLanguageName» «variable.assign»(«variable.type.targetLanguageName» value) {
+					return this.«variable.symbol» = value;
+				}
+			«ENDIF»
+		«ENDFOR»
 		«FOR internal : flow.internalScopes»
-		«IF internal.hasOperations()»
-			private «internal.getInternalOperationCallbackName()» operationCallback;
-		«ENDIF»
+			«IF internal.hasOperations()»
+				private «internal.getInternalOperationCallbackName()» operationCallback;
+			«ENDIF»
 		«ENDFOR»
 	'''
-	
-	def protected writeableFieldDeclaration(VariableDefinition variable){
+	//reused by interfaces
+	def protected fieldDeclaration(VariableDefinition variable) {
 		'''private «variable.type.targetLanguageName» «variable.symbol»;'''
 	}
-	
-	
 	
 	def protected createConstructor(ExecutionFlow flow) '''
 		public «flow.statemachineClassName»() {
@@ -323,7 +334,7 @@ class Statemachine {
 	'''
 	
 	def protected toImplementation(InterfaceScope scope, GeneratorEntry entry) '''
-		private final class «scope.getInterfaceImplName» implements «scope.getInterfaceName» {
+		protected class «scope.getInterfaceImplName» implements «scope.getInterfaceName» {
 		
 		«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
 			«scope.generateListeners»
@@ -352,7 +363,7 @@ class Statemachine {
 	'''
 	
 	protected def generateClearOutEvents(InterfaceScope scope) '''
-		public void clearOutEvents() {
+		protected void clearOutEvents() {
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction == Direction::OUT»
 				«event.symbol» = false;
@@ -363,7 +374,7 @@ class Statemachine {
 	
 	
 	protected def generateClearEvents(InterfaceScope scope) '''
-		public void clearEvents() {
+		protected void clearEvents() {
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction != Direction::OUT»
 			«event.symbol» = false;
@@ -374,15 +385,23 @@ class Statemachine {
 	
 	protected def generateVariableDefinition(VariableDefinition variable) '''
 		«IF !variable.const»
-			«variable.writeableFieldDeclaration»
+			«variable.fieldDeclaration»
+			
 		«ENDIF»
 		public «variable.type.targetLanguageName» «variable.getter» {
 			return «variable.symbol»;
 		}
 		
-		«IF !variable.readonly && !variable.const»
-			public void «variable.setter»(«variable.type.targetLanguageName» value) {
+		«IF !variable.const»
+			«IF variable.readonly»protected«ELSE»public«ENDIF» void «variable.setter»(«variable.type.targetLanguageName» value) {
 				this.«variable.symbol» = value;
+			}
+			
+		«ENDIF»
+		
+		«IF variable.needsAssignMethod»
+			protected «variable.type.targetLanguageName» «variable.assign»(«variable.type.targetLanguageName» value) {
+				return this.«variable.symbol» = value;
 			}
 		«ENDIF»
 	'''
@@ -410,7 +429,7 @@ class Statemachine {
 		}
 		
 		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-			private void raise«event.name.asName»(«event.type.targetLanguageName» value) {
+			protected void raise«event.name.asName»(«event.type.targetLanguageName» value) {
 				«event.symbol» = true;
 				«event.valueIdentifier» = value;
 				«IF entry.createInterfaceObserver»
@@ -425,7 +444,7 @@ class Statemachine {
 				return «event.valueIdentifier»;
 			}
 		«ELSE»
-			private void raise«event.name.asName»() {
+			protected void raise«event.name.asName»() {
 				«event.symbol» = true;
 				«IF entry.createInterfaceObserver»
 					for («scope.interfaceListenerName» listener : listeners) {
@@ -443,7 +462,7 @@ class Statemachine {
 				«event.valueIdentifier» = value;
 			}
 			
-			private «event.type.targetLanguageName» get«event.name.asName»Value() {
+			protected «event.type.targetLanguageName» get«event.name.asName»Value() {
 				«event.getIllegalAccessValidation()»
 				return «event.valueIdentifier»;
 			}

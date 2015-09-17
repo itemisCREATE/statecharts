@@ -2,9 +2,10 @@ package org.yakindu.scr.logicaland;
 
 public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private long x;
+
 		public long getX() {
 			return x;
 		}
@@ -13,7 +14,12 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 			this.x = value;
 		}
 
+		protected long assignX(long value) {
+			return this.x = value;
+		}
+
 		private boolean b;
+
 		public boolean getB() {
 			return b;
 		}
@@ -24,7 +30,7 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, $NullState$
@@ -47,9 +53,9 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.x = 1;
+		sCInterface.setX(1);
 
-		sCInterface.b = false;
+		sCInterface.setB(false);
 	}
 
 	public void enter() {
@@ -67,38 +73,36 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -128,13 +132,14 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 	}
 
 	private boolean check_main_region_A_tr0_tr0() {
-		return sCInterface.x == 1;
+		return sCInterface.getX() == 1;
 	}
 
 	private void effect_main_region_A_tr0() {
 		exitSequence_main_region_A();
 
-		sCInterface.b = ((sCInterface.x += 1) == 2 && (sCInterface.x *= 2) == 4);
+		sCInterface.setB(((sCInterface.assignX(sCInterface.getX() + 1)) == 2
+				&& (sCInterface.assignX(sCInterface.getX() * 2)) == 4));
 
 		enterSequence_main_region_A_default();
 	}

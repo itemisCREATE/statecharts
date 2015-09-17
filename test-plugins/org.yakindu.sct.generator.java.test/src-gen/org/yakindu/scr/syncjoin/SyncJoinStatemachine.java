@@ -2,7 +2,7 @@ package org.yakindu.scr.syncjoin;
 
 public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -29,6 +29,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		}
 
 		private long x;
+
 		public long getX() {
 			return x;
 		}
@@ -37,7 +38,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 			this.x = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			e = false;
 			f = false;
 			jc = false;
@@ -46,7 +47,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, main_region_B_r1_C1, main_region_B_r1_C2, main_region_B_r2_D1, main_region_B_r2_D2, $NullState$
@@ -69,7 +70,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.x = 0;
+		sCInterface.setX(0);
 	}
 
 	public void enter() {
@@ -87,49 +88,44 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
-		return stateVector[0] != State.$NullState$
-				|| stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NullState$ || stateVector[1] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
 				return stateVector[0] == State.main_region_A;
 			case main_region_B :
-				return stateVector[0].ordinal() >= State.main_region_B
-						.ordinal()
-						&& stateVector[0].ordinal() <= State.main_region_B_r2_D2
-								.ordinal();
+				return stateVector[0].ordinal() >= State.main_region_B.ordinal()
+						&& stateVector[0].ordinal() <= State.main_region_B_r2_D2.ordinal();
 			case main_region_B_r1_C1 :
 				return stateVector[0] == State.main_region_B_r1_C1;
 			case main_region_B_r1_C2 :
@@ -177,8 +173,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 
 	private boolean check_main_region_B_r1_C2_tr0_tr0() {
-		return sCInterface.jc && isStateActive(State.main_region_B_r2_D2)
-				&& sCInterface.jd;
+		return sCInterface.jc && isStateActive(State.main_region_B_r2_D2) && sCInterface.jd;
 	}
 
 	private boolean check_main_region_B_r2_D1_tr0_tr0() {
@@ -186,8 +181,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 
 	private boolean check_main_region_B_r2_D2_tr0_tr0() {
-		return sCInterface.jd && isStateActive(State.main_region_B_r1_C2)
-				&& sCInterface.jc;
+		return sCInterface.jd && isStateActive(State.main_region_B_r1_C2) && sCInterface.jc;
 	}
 
 	private void effect_main_region_A_tr0() {
@@ -226,7 +220,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
-		sCInterface.x += 1;
+		sCInterface.setX(sCInterface.getX() + 1);
 	}
 
 	/* Exit action for state 'SyncJoin'. */

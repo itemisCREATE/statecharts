@@ -2,7 +2,7 @@ package org.yakindu.scr.ckeywords;
 
 public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private boolean auto;
 
@@ -17,6 +17,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean case_ID;
+
 		public boolean getCase() {
 			return case_ID;
 		}
@@ -26,6 +27,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private long do_ID;
+
 		public long getDo() {
 			return do_ID;
 		}
@@ -35,6 +37,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean continue_ID;
+
 		public boolean getContinue() {
 			return continue_ID;
 		}
@@ -44,6 +47,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean double_ID;
+
 		public boolean getDouble() {
 			return double_ID;
 		}
@@ -53,6 +57,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean enum_ID;
+
 		public boolean getEnum() {
 			return enum_ID;
 		}
@@ -62,6 +67,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean extern;
+
 		public boolean getExtern() {
 			return extern;
 		}
@@ -71,6 +77,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean float_ID;
+
 		public boolean getFloat() {
 			return float_ID;
 		}
@@ -80,6 +87,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean for_ID;
+
 		public boolean getFor() {
 			return for_ID;
 		}
@@ -89,6 +97,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean goto_ID;
+
 		public boolean getGoto() {
 			return goto_ID;
 		}
@@ -98,6 +107,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean if_ID;
+
 		public boolean getIf() {
 			return if_ID;
 		}
@@ -107,6 +117,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean int_ID;
+
 		public boolean getInt() {
 			return int_ID;
 		}
@@ -116,6 +127,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean long_ID;
+
 		public boolean getLong() {
 			return long_ID;
 		}
@@ -125,6 +137,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean register;
+
 		public boolean getRegister() {
 			return register;
 		}
@@ -134,6 +147,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean return_ID;
+
 		public boolean getReturn() {
 			return return_ID;
 		}
@@ -143,6 +157,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean short_ID;
+
 		public boolean getShort() {
 			return short_ID;
 		}
@@ -152,6 +167,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean signed;
+
 		public boolean getSigned() {
 			return signed;
 		}
@@ -161,6 +177,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean sizeof;
+
 		public boolean getSizeof() {
 			return sizeof;
 		}
@@ -170,6 +187,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean static_ID;
+
 		public boolean getStatic() {
 			return static_ID;
 		}
@@ -179,6 +197,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean struct;
+
 		public boolean getStruct() {
 			return struct;
 		}
@@ -188,6 +207,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean switch_ID;
+
 		public boolean getSwitch() {
 			return switch_ID;
 		}
@@ -197,6 +217,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean typedef;
+
 		public boolean getTypedef() {
 			return typedef;
 		}
@@ -206,6 +227,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean union;
+
 		public boolean getUnion() {
 			return union;
 		}
@@ -215,6 +237,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean unsigned;
+
 		public boolean getUnsigned() {
 			return unsigned;
 		}
@@ -224,6 +247,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean void_ID;
+
 		public boolean getVoid() {
 			return void_ID;
 		}
@@ -233,6 +257,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean volatile_ID;
+
 		public boolean getVolatile() {
 			return volatile_ID;
 		}
@@ -242,6 +267,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 
 		private boolean while_ID;
+
 		public boolean getWhile() {
 			return while_ID;
 		}
@@ -250,14 +276,14 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.while_ID = value;
 		}
 
-		public void clearEvents() {
+		protected void clearEvents() {
 			auto = false;
 			break_ID = false;
 		}
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		auto_char, auto_loop, auto_loop_switch_case, auto_loop_switch_case_enum_asm, $NullState$
@@ -284,57 +310,57 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.case_ID = false;
+		sCInterface.setCase(false);
 
-		sCInterface.do_ID = 0;
+		sCInterface.setDo(0);
 
-		sCInterface.continue_ID = false;
+		sCInterface.setContinue(false);
 
-		sCInterface.double_ID = false;
+		sCInterface.setDouble(false);
 
-		sCInterface.enum_ID = false;
+		sCInterface.setEnum(false);
 
-		sCInterface.extern = false;
+		sCInterface.setExtern(false);
 
-		sCInterface.float_ID = false;
+		sCInterface.setFloat(false);
 
-		sCInterface.for_ID = false;
+		sCInterface.setFor(false);
 
-		sCInterface.goto_ID = false;
+		sCInterface.setGoto(false);
 
-		sCInterface.if_ID = false;
+		sCInterface.setIf(false);
 
-		sCInterface.int_ID = false;
+		sCInterface.setInt(false);
 
-		sCInterface.long_ID = false;
+		sCInterface.setLong(false);
 
-		sCInterface.register = false;
+		sCInterface.setRegister(false);
 
-		sCInterface.return_ID = false;
+		sCInterface.setReturn(false);
 
-		sCInterface.short_ID = false;
+		sCInterface.setShort(false);
 
-		sCInterface.signed = false;
+		sCInterface.setSigned(false);
 
-		sCInterface.sizeof = false;
+		sCInterface.setSizeof(false);
 
-		sCInterface.static_ID = false;
+		sCInterface.setStatic(false);
 
-		sCInterface.struct = false;
+		sCInterface.setStruct(false);
 
-		sCInterface.switch_ID = false;
+		sCInterface.setSwitch(false);
 
-		sCInterface.typedef = false;
+		sCInterface.setTypedef(false);
 
-		sCInterface.union = false;
+		sCInterface.setUnion(false);
 
-		sCInterface.unsigned = false;
+		sCInterface.setUnsigned(false);
 
-		sCInterface.void_ID = false;
+		sCInterface.setVoid(false);
 
-		sCInterface.volatile_ID = false;
+		sCInterface.setVolatile(false);
 
-		sCInterface.while_ID = false;
+		sCInterface.setWhile(false);
 	}
 
 	public void enter() {
@@ -352,52 +378,47 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case auto_char :
 				return stateVector[0] == State.auto_char;
 			case auto_loop :
 				return stateVector[0].ordinal() >= State.auto_loop.ordinal()
-						&& stateVector[0].ordinal() <= State.auto_loop_switch_case_enum_asm
-								.ordinal();
+						&& stateVector[0].ordinal() <= State.auto_loop_switch_case_enum_asm.ordinal();
 			case auto_loop_switch_case :
-				return stateVector[0].ordinal() >= State.auto_loop_switch_case
-						.ordinal()
-						&& stateVector[0].ordinal() <= State.auto_loop_switch_case_enum_asm
-								.ordinal();
+				return stateVector[0].ordinal() >= State.auto_loop_switch_case.ordinal()
+						&& stateVector[0].ordinal() <= State.auto_loop_switch_case_enum_asm.ordinal();
 			case auto_loop_switch_case_enum_asm :
 				return stateVector[0] == State.auto_loop_switch_case_enum_asm;
 			default :
@@ -600,13 +621,13 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	private boolean check_auto_char_tr0_tr0() {
-		return (sCInterface.auto) && sCInterface.case_ID;
+		return (sCInterface.auto) && sCInterface.getCase();
 	}
 
 	private void effect_auto_char_tr0() {
 		exitSequence_auto_char();
 
-		sCInterface.do_ID += 1;
+		sCInterface.setDo(sCInterface.getDo() + 1);
 
 		enterSequence_auto_loop_default();
 	}
@@ -617,112 +638,112 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
 	/* Entry action for state 'char'. */
 	private void entryAction_auto_char() {
-		sCInterface.case_ID = true;
+		sCInterface.setCase(true);
 
-		sCInterface.do_ID = 0;
+		sCInterface.setDo(0);
 
-		sCInterface.continue_ID = true;
+		sCInterface.setContinue(true);
 
-		sCInterface.double_ID = true;
+		sCInterface.setDouble(true);
 
-		sCInterface.enum_ID = true;
+		sCInterface.setEnum(true);
 
-		sCInterface.extern = true;
+		sCInterface.setExtern(true);
 
-		sCInterface.float_ID = true;
+		sCInterface.setFloat(true);
 
-		sCInterface.for_ID = true;
+		sCInterface.setFor(true);
 
-		sCInterface.goto_ID = true;
+		sCInterface.setGoto(true);
 
-		sCInterface.if_ID = true;
+		sCInterface.setIf(true);
 
-		sCInterface.int_ID = true;
+		sCInterface.setInt(true);
 
-		sCInterface.long_ID = true;
+		sCInterface.setLong(true);
 
-		sCInterface.register = true;
+		sCInterface.setRegister(true);
 
-		sCInterface.return_ID = true;
+		sCInterface.setReturn(true);
 
-		sCInterface.short_ID = true;
+		sCInterface.setShort(true);
 
-		sCInterface.signed = true;
+		sCInterface.setSigned(true);
 
-		sCInterface.sizeof = true;
+		sCInterface.setSizeof(true);
 
-		sCInterface.static_ID = true;
+		sCInterface.setStatic(true);
 
-		sCInterface.struct = true;
+		sCInterface.setStruct(true);
 
-		sCInterface.switch_ID = true;
+		sCInterface.setSwitch(true);
 
-		sCInterface.typedef = true;
+		sCInterface.setTypedef(true);
 
-		sCInterface.union = true;
+		sCInterface.setUnion(true);
 
-		sCInterface.unsigned = true;
+		sCInterface.setUnsigned(true);
 
-		sCInterface.void_ID = true;
+		sCInterface.setVoid(true);
 
-		sCInterface.volatile_ID = true;
+		sCInterface.setVolatile(true);
 
-		sCInterface.while_ID = true;
+		sCInterface.setWhile(true);
 	}
 
 	/* Entry action for state 'asm'. */
 	private void entryAction_auto_loop_switch_case_enum_asm() {
-		sCInterface.case_ID = false;
+		sCInterface.setCase(false);
 
-		sCInterface.do_ID = 0;
+		sCInterface.setDo(0);
 
-		sCInterface.continue_ID = false;
+		sCInterface.setContinue(false);
 
-		sCInterface.double_ID = false;
+		sCInterface.setDouble(false);
 
-		sCInterface.enum_ID = false;
+		sCInterface.setEnum(false);
 
-		sCInterface.extern = false;
+		sCInterface.setExtern(false);
 
-		sCInterface.float_ID = false;
+		sCInterface.setFloat(false);
 
-		sCInterface.for_ID = false;
+		sCInterface.setFor(false);
 
-		sCInterface.goto_ID = false;
+		sCInterface.setGoto(false);
 
-		sCInterface.if_ID = false;
+		sCInterface.setIf(false);
 
-		sCInterface.int_ID = false;
+		sCInterface.setInt(false);
 
-		sCInterface.long_ID = false;
+		sCInterface.setLong(false);
 
-		sCInterface.register = false;
+		sCInterface.setRegister(false);
 
-		sCInterface.return_ID = false;
+		sCInterface.setReturn(false);
 
-		sCInterface.short_ID = false;
+		sCInterface.setShort(false);
 
-		sCInterface.signed = false;
+		sCInterface.setSigned(false);
 
-		sCInterface.sizeof = false;
+		sCInterface.setSizeof(false);
 
-		sCInterface.static_ID = false;
+		sCInterface.setStatic(false);
 
-		sCInterface.struct = false;
+		sCInterface.setStruct(false);
 
-		sCInterface.switch_ID = false;
+		sCInterface.setSwitch(false);
 
-		sCInterface.typedef = false;
+		sCInterface.setTypedef(false);
 
-		sCInterface.union = false;
+		sCInterface.setUnion(false);
 
-		sCInterface.unsigned = false;
+		sCInterface.setUnsigned(false);
 
-		sCInterface.void_ID = false;
+		sCInterface.setVoid(false);
 
-		sCInterface.volatile_ID = false;
+		sCInterface.setVolatile(false);
 
-		sCInterface.while_ID = false;
+		sCInterface.setWhile(false);
 	}
 
 	/* Exit action for state 'CKeywords'. */

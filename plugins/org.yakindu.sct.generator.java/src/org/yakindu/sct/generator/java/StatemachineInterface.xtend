@@ -170,7 +170,7 @@ class StatemachineInterface {
 					public boolean isRaised«event.name.asName»();
 					««« IMPORTANT: An event not specifying a type is regarded to have a void type
 				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-						public «event.type.targetLanguageName» get«event.name.asName»Value();
+						public «event.type.targetLanguageName» «event.getter»;
 					«ENDIF»	
 				«ENDIF»
 			«ENDFOR»

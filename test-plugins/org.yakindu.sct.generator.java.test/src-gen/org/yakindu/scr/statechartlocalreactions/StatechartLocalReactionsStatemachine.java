@@ -1,12 +1,11 @@
 package org.yakindu.scr.statechartlocalreactions;
 
-public class StatechartLocalReactionsStatemachine
-		implements
-			IStatechartLocalReactionsStatemachine {
+public class StatechartLocalReactionsStatemachine implements IStatechartLocalReactionsStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private long myInt;
+
 		public long getMyInt() {
 			return myInt;
 		}
@@ -17,7 +16,7 @@ public class StatechartLocalReactionsStatemachine
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_S1, main_region_S2, region2_a, $NullState$
@@ -40,7 +39,7 @@ public class StatechartLocalReactionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.myInt = 0;
+		sCInterface.setMyInt(0);
 	}
 
 	public void enter() {
@@ -62,39 +61,36 @@ public class StatechartLocalReactionsStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
-		return stateVector[0] != State.$NullState$
-				|| stateVector[1] != State.$NullState$;
+		return stateVector[0] != State.$NullState$ || stateVector[1] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_S1 :
@@ -133,7 +129,7 @@ public class StatechartLocalReactionsStatemachine
 	}
 
 	private void effect__lr0() {
-		sCInterface.myInt += 1;
+		sCInterface.setMyInt(sCInterface.getMyInt() + 1);
 	}
 
 	private void effect_main_region_S1_tr0() {

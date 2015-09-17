@@ -14,12 +14,10 @@ public interface IOperationsStatemachine extends IStatemachine {
 		public String internalOperation5a(String param1);
 	}
 
-	public void setInternalOperationCallback(
-			InternalOperationCallback operationCallback);
+	public void setInternalOperationCallback(InternalOperationCallback operationCallback);
 	public interface SCIInterface1 {
 
-		public void setSCIInterface1OperationCallback(
-				SCIInterface1OperationCallback operationCallback);
+		public void setSCIInterface1OperationCallback(SCIInterface1OperationCallback operationCallback);
 	}
 
 	public interface SCIInterface1OperationCallback {
@@ -38,8 +36,7 @@ public interface IOperationsStatemachine extends IStatemachine {
 	public interface SCInterface {
 		public void raiseEv();
 
-		public void setSCInterfaceOperationCallback(
-				SCInterfaceOperationCallback operationCallback);
+		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback);
 	}
 
 	public interface SCInterfaceOperationCallback {

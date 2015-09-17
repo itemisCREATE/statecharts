@@ -1,12 +1,11 @@
 package org.yakindu.scr.castexpressions;
 
-public class CastExpressionsStatemachine
-		implements
-			ICastExpressionsStatemachine {
+public class CastExpressionsStatemachine implements ICastExpressionsStatemachine {
 
-	private final class SCInterfaceImpl implements SCInterface {
+	protected class SCInterfaceImpl implements SCInterface {
 
 		private double realValue;
+
 		public double getRealValue() {
 			return realValue;
 		}
@@ -16,6 +15,7 @@ public class CastExpressionsStatemachine
 		}
 
 		private long intValue;
+
 		public long getIntValue() {
 			return intValue;
 		}
@@ -26,7 +26,7 @@ public class CastExpressionsStatemachine
 
 	}
 
-	private SCInterfaceImpl sCInterface;
+	protected SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, main_region_C, $NullState$
@@ -49,9 +49,9 @@ public class CastExpressionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.realValue = (((double) 5));
+		sCInterface.setRealValue((((double) 5)));
 
-		sCInterface.intValue = (((long) 5.5));
+		sCInterface.setIntValue((((long) 5.5)));
 	}
 
 	public void enter() {
@@ -69,38 +69,36 @@ public class CastExpressionsStatemachine
 	/**
 	 * @see IStatemachine#isActive()
 	 */
-	@Override
 	public boolean isActive() {
 
 		return stateVector[0] != State.$NullState$;
 	}
 
 	/** 
-	 * Always returns 'false' since this state machine can never become final.
-	 *
+	* Always returns 'false' since this state machine can never become final.
+	*
 	 * @see IStatemachine#isFinal() 
 	 */
-	@Override
 	public boolean isFinal() {
 		return false;
 	}
 
 	/**
-	 * This method resets the incoming events (time events included).
-	 */
+	* This method resets the incoming events (time events included).
+	*/
 	protected void clearEvents() {
 
 	}
 
 	/**
-	 * This method resets the outgoing events.
-	 */
+	* This method resets the outgoing events.
+	*/
 	protected void clearOutEvents() {
 	}
 
 	/**
-	 * Returns true if the given state is currently active otherwise false.
-	 */
+	* Returns true if the given state is currently active otherwise false.
+	*/
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -138,9 +136,8 @@ public class CastExpressionsStatemachine
 	}
 
 	private boolean check_main_region_B_tr0_tr0() {
-		return (true)
-				&& ((double) (sCInterface.realValue * 0.1)) > ((long) 1.4)
-				&& ((long) (sCInterface.realValue * sCInterface.intValue)) < ((double) 100);
+		return (true) && ((double) (sCInterface.getRealValue() * 0.1)) > ((long) 1.4)
+				&& ((long) (sCInterface.getRealValue() * sCInterface.getIntValue())) < ((double) 100);
 	}
 
 	private void effect_main_region_A_tr0() {
@@ -161,13 +158,12 @@ public class CastExpressionsStatemachine
 
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.realValue = 3 * ((long) 5.5);
+		sCInterface.setRealValue(3 * ((long) 5.5));
 	}
 
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
-		sCInterface.realValue = ((long) (sCInterface.realValue
-				* sCInterface.intValue * 10.1));
+		sCInterface.setRealValue(((long) (sCInterface.realValue * sCInterface.intValue * 10.1)));
 	}
 
 	/* Exit action for state 'CastExpressions'. */
