@@ -145,6 +145,12 @@ class Statemachine {
 			protected «variable.type.targetLanguageName» «variable.getter» {
 				return «variable.symbol»;
 			}
+			
+			«IF variable.needsAssignMethod»
+				protected «variable.type.targetLanguageName» «variable.assign»(«variable.type.targetLanguageName» value) {
+					return this.«variable.symbol» = value;
+				}
+			«ENDIF»
 		«ENDFOR»
 		«FOR internal : flow.internalScopes»
 			«IF internal.hasOperations()»
@@ -391,6 +397,12 @@ class Statemachine {
 				this.«variable.symbol» = value;
 			}
 			
+		«ENDIF»
+		
+		«IF variable.needsAssignMethod»
+			protected «variable.type.targetLanguageName» «variable.assign»(«variable.type.targetLanguageName» value) {
+				return this.«variable.symbol» = value;
+			}
 		«ENDIF»
 	'''
 	

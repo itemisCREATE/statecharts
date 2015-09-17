@@ -180,6 +180,10 @@ class Naming implements JavaKeywords {
 	def String setter(Property it) {
 		"set" + varName
 	}
+	
+	def String assign(Property it) {
+		"assign" + varName
+	}
 
 	def String getNullStateName() {
 		"$NullState$";

@@ -85,11 +85,13 @@ class ExpressionCode {
 
 	/* Assignment */
 	def dispatch String code(AssignmentExpression it) {
-		if (eContainer instanceof Expression) {
-			return varRef.code + operator.code + expression.code
-		} else if (varRef.definition instanceof Property) {
+		if (varRef.definition instanceof Property) {
 			var property = varRef.definition as Property
-			return '''«property.getContext(false)»«property.setter»(«assignCmdArgument(property)»)'''
+			if (eContainer instanceof Expression) {
+				return '''«property.getContext(false)»«property.assign»(«assignCmdArgument(property)»)'''
+			} else {
+				return '''«property.getContext(false)»«property.setter»(«assignCmdArgument(property)»)'''
+			}
 		}
 	}
 
@@ -98,7 +100,8 @@ class ExpressionCode {
 		if (!AssignmentOperator.ASSIGN.equals(operator)) {
 			cmd = property.getContext(false) + property.getter + " " + operator.code.replaceFirst("=", "") + " "
 
-			if (expression instanceof PrimitiveValueExpression || expression instanceof ElementReferenceExpression) {
+			if (expression instanceof PrimitiveValueExpression || expression instanceof ElementReferenceExpression ||
+				expression instanceof AssignmentExpression) {
 				cmd += expression.code
 			} else {
 				cmd += "(" + expression.code + ")"
