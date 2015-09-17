@@ -24,6 +24,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			this.b = value;
 		}
 
+		protected long assignB(long value) {
+			return this.b = value;
+		}
+
 		private long c;
 
 		public long getC() {
@@ -32,6 +36,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 
 		public void setC(long value) {
 			this.c = value;
+		}
+
+		protected long assignC(long value) {
+			return this.c = value;
 		}
 
 		private long d;
@@ -64,6 +72,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			this.f = value;
 		}
 
+		protected long assignF(long value) {
+			return this.f = value;
+		}
+
 		private long g;
 
 		public long getG() {
@@ -82,6 +94,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 
 		public void setH(long value) {
 			this.h = value;
+		}
+
+		protected long assignH(long value) {
+			return this.h = value;
 		}
 
 		private long i;
@@ -104,6 +120,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			this.i1 = value;
 		}
 
+		protected long assignI1(long value) {
+			return this.i1 = value;
+		}
+
 		private long j;
 
 		public long getJ() {
@@ -124,6 +144,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			this.j1 = value;
 		}
 
+		protected long assignJ1(long value) {
+			return this.j1 = value;
+		}
+
 		private long k;
 
 		public long getK() {
@@ -142,6 +166,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 
 		public void setK1(long value) {
 			this.k1 = value;
+		}
+
+		protected long assignK1(long value) {
+			return this.k1 = value;
 		}
 
 		private long l;
@@ -174,6 +202,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			this.n = value;
 		}
 
+		protected long assignN(long value) {
+			return this.n = value;
+		}
+
 		private long p;
 
 		public long getP() {
@@ -192,6 +224,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 
 		public void setR(long value) {
 			this.r = value;
+		}
+
+		protected long assignR(long value) {
+			return this.r = value;
 		}
 
 		private long t;
@@ -222,6 +258,10 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 
 		public void setV(long value) {
 			this.v = value;
+		}
+
+		protected long assignV(long value) {
+			return this.v = value;
 		}
 
 		private long w;
@@ -628,49 +668,49 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 
 	/* Entry action for state 'Add'. */
 	private void entryAction_main_region_Add() {
-		sCInterface.setA((sCInterface.b = 5) + 4);
+		sCInterface.setA((sCInterface.assignB(5)) + 4);
 	}
 
 	/* Entry action for state 'Multiply'. */
 	private void entryAction_main_region_Multiply() {
-		sCInterface.setE(sCInterface.getE() * ((sCInterface.f *= 5) * 3));
+		sCInterface.setE(sCInterface.getE() * ((sCInterface.assignF(sCInterface.getF() * 5)) * 3));
 	}
 
 	/* Entry action for state 'Divide'. */
 	private void entryAction_main_region_Divide() {
-		sCInterface.setG(sCInterface.getG() / ((sCInterface.h /= 2) / 4));
+		sCInterface.setG(sCInterface.getG() / ((sCInterface.assignH(sCInterface.getH() / 2)) / 4));
 	}
 
 	/* Entry action for state 'Modulo'. */
 	private void entryAction_main_region_Modulo() {
-		sCInterface.setI(sCInterface.getI() % ((sCInterface.i1 %= 4) % 4));
+		sCInterface.setI(sCInterface.getI() % ((sCInterface.assignI1(sCInterface.getI1() % 4)) % 4));
 	}
 
 	/* Entry action for state 'Shift'. */
 	private void entryAction_main_region_Shift() {
-		sCInterface.setJ(sCInterface.getJ() << ((sCInterface.j1 >>= 1)));
+		sCInterface.setJ(sCInterface.getJ() << ((sCInterface.assignJ1(sCInterface.getJ1() >> 1))));
 
-		sCInterface.setK(sCInterface.getK() >> ((sCInterface.k1 >>= 2)));
+		sCInterface.setK(sCInterface.getK() >> ((sCInterface.assignK1(sCInterface.getK1() >> 2))));
 	}
 
 	/* Entry action for state 'boolean And'. */
 	private void entryAction_main_region_boolean_And() {
-		sCInterface.setL(sCInterface.getL() & ((sCInterface.n &= sCInterface.m)));
+		sCInterface.setL(sCInterface.getL() & ((sCInterface.assignN(sCInterface.getN() & sCInterface.m))));
 	}
 
 	/* Entry action for state 'boolean Or'. */
 	private void entryAction_main_region_boolean_Or() {
-		sCInterface.setP(sCInterface.getP() | ((sCInterface.r |= sCInterface.t)));
+		sCInterface.setP(sCInterface.getP() | ((sCInterface.assignR(sCInterface.getR() | sCInterface.t))));
 	}
 
 	/* Entry action for state 'boolean Xor'. */
 	private void entryAction_main_region_boolean_Xor() {
-		sCInterface.setU(sCInterface.getU() ^ ((sCInterface.v ^= sCInterface.w)));
+		sCInterface.setU(sCInterface.getU() ^ ((sCInterface.assignV(sCInterface.getV() ^ sCInterface.w))));
 	}
 
 	/* Entry action for state 'Subtract'. */
 	private void entryAction_main_region_Subtract() {
-		sCInterface.setD(sCInterface.getD() - ((sCInterface.c -= 5) - 1));
+		sCInterface.setD(sCInterface.getD() - ((sCInterface.assignC(sCInterface.getC() - 5)) - 1));
 	}
 
 	/* Exit action for state 'AssignmentAsExpression'. */

@@ -14,6 +14,10 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 			this.x = value;
 		}
 
+		protected long assignX(long value) {
+			return this.x = value;
+		}
+
 		private boolean b;
 
 		public boolean getB() {
@@ -36,6 +40,30 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 
 	private int nextStateIndex;
 
+	private long y;
+
+	protected void setY(long value) {
+		y = value;
+	}
+
+	protected long getY() {
+		return y;
+	}
+
+	protected long assignY(long value) {
+		return this.y = value;
+	}
+
+	private long z;
+
+	protected void setZ(long value) {
+		z = value;
+	}
+
+	protected long getZ() {
+		return z;
+	}
+
 	public LogicalOrStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
@@ -52,6 +80,10 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 		sCInterface.setX(1);
 
 		sCInterface.setB(false);
+
+		setY(2);
+
+		setZ(1);
 	}
 
 	public void enter() {
@@ -134,7 +166,8 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	private void effect_main_region_A_tr0() {
 		exitSequence_main_region_A();
 
-		sCInterface.setB(((sCInterface.x += 1) != 2 || (sCInterface.x *= 2) == 4));
+		sCInterface.setB(((sCInterface.assignX(sCInterface.getX() + 1)) != 2
+				|| (sCInterface.assignX(sCInterface.getX() * 2)) == 4));
 
 		enterSequence_main_region_A_default();
 	}
@@ -143,12 +176,21 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	private void entryAction() {
 	}
 
+	/* Entry action for state 'A'. */
+	private void entryAction_main_region_A() {
+		setZ((assignY(getY() + 1)));
+
+		setZ(getZ() + 1);
+	}
+
 	/* Exit action for state 'LogicalOr'. */
 	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
+		entryAction_main_region_A();
+
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
 	}

@@ -14,6 +14,10 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 			this.x = value;
 		}
 
+		protected long assignX(long value) {
+			return this.x = value;
+		}
+
 		private boolean b;
 
 		public boolean getB() {
@@ -134,7 +138,8 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 	private void effect_main_region_A_tr0() {
 		exitSequence_main_region_A();
 
-		sCInterface.setB(((sCInterface.x += 1) == 2 && (sCInterface.x *= 2) == 4));
+		sCInterface.setB(((sCInterface.assignX(sCInterface.getX() + 1)) == 2
+				&& (sCInterface.assignX(sCInterface.getX() * 2)) == 4));
 
 		enterSequence_main_region_A_default();
 	}

@@ -20,6 +20,10 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 			this.myReal1 = value;
 		}
 
+		protected double assignMyReal1(double value) {
+			return this.myReal1 = value;
+		}
+
 		private double myReal2;
 
 		public double getMyReal2() {
@@ -588,7 +592,8 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 
 		sCInterface.setMinusAssign(sCInterface.getMinusAssign() - sCInterface.myReal1);
 
-		sCInterface.setModuloAssign((-0.1 <= (sCInterface.myReal1 %= sCInterface.myReal1)));
+		sCInterface
+				.setModuloAssign((-0.1 <= (sCInterface.assignMyReal1(sCInterface.getMyReal1() % sCInterface.myReal1))));
 	}
 
 	/* Exit action for state 'RealExpressions'. */
