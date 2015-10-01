@@ -33,10 +33,9 @@ We appreciate any feedback and there are various ways to contribute feedback:
 1. Download Eclipse Luna from https://www.eclipse.org/downloads/
 2. Install the current Xtext release -> Help / Install new Software / select 'Luna - http://download.eclipse.org/releases/luna'
 2.1 Select Modeling / Xtext Complete SDK
-3. Select the Git perspective and clone the following Git Repositories:
+3. Select the Git perspective and clone the following Git Repository:
 https://github.com/Yakindu/statecharts.git
-https://github.com/Yakindu/base.git
-On both repositories, select 'Import projects' on the 'working directory' subfolder
+Select 'Import projects' on the 'working directory' subfolder
 4. Set the target platform to org.yakindu.base.target/luna.target
 Open the target file and click on the link for setting the target platform (takes some minutes the first time)
 5. Build relevant Xtext grammars
