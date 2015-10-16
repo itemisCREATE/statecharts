@@ -115,6 +115,8 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		main_region1_A, integer_region_B, integer_region_C, integer_region_D, boolean_region_B, boolean_region_C, boolean_region_D, real_region_B, real_region_C, real_region_D, string_region_B, string_region_C, string_region_D, $NullState$
 	};
@@ -129,6 +131,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 5; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -146,6 +149,10 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_main_region1_default();
@@ -780,6 +787,9 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

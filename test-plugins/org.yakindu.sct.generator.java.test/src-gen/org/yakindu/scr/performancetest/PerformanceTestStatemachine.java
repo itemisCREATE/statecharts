@@ -63,6 +63,8 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		mr_A, mr_B, mr_B_r1_X, mr_B_r1_Y, mr_B_r1_Z, mr_B_r1_V, mr_B_r1_W, mr_B_r1_S, mr_B_r1_T, mr_B_r1_U, mr_B_r2_S, mr_B_r2_T, mr_B_r2_U, mr_B_r2_V, mr_B_r2_W, $NullState$
 	};
@@ -82,6 +84,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	}
 
 	public void init() {
+		this.initialized = true;
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
@@ -103,6 +106,10 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
@@ -1205,6 +1212,9 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

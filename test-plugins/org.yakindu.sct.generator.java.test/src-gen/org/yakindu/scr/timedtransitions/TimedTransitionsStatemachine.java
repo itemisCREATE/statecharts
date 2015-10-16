@@ -3,6 +3,8 @@ import org.yakindu.scr.ITimer;
 
 public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachine {
 
+	private boolean initialized = false;
+
 	public enum State {
 		main_region_Start, main_region_End, $NullState$
 	};
@@ -20,6 +22,7 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	}
 
 	public void init() {
+		this.initialized = true;
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
@@ -33,6 +36,10 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
@@ -213,6 +220,9 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

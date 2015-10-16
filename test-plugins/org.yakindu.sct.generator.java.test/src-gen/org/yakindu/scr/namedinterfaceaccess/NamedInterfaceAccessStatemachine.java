@@ -67,6 +67,8 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 
 	protected SCIUserImpl sCIUser;
 
+	private boolean initialized = false;
+
 	public enum State {
 		region_1_Idle, region_1_Number1Pressed, region_1_Number2Pressed, region_1_Number3Pressed, _region1_Closed, _region1_Open, $NullState$
 	};
@@ -112,6 +114,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -127,6 +130,10 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_region_1_default();
@@ -489,6 +496,9 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

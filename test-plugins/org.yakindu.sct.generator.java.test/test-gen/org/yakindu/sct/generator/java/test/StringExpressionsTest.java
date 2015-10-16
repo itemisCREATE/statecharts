@@ -1,13 +1,13 @@
 /**
- * Copyright (c) 2015 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
- */
+* Copyright (c) 2015 committers of YAKINDU and others.
+* All rights reserved. This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+* Contributors:
+*     committers of YAKINDU - initial API and implementation
+*/
 
 package org.yakindu.sct.generator.java.test;
 
@@ -41,36 +41,31 @@ public class StringExpressionsTest {
 		assertTrue(statemachine.getQuotedStringX().equals("\"X\""));
 		assertTrue(statemachine.getQuotedStringY().equals("\"Y\""));
 		statemachine.enter();
-		assertTrue(statemachine
-				.isStateActive(State.main_region_AssignmentChecked));
+		assertTrue(statemachine.isStateActive(State.main_region_AssignmentChecked));
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine
-				.isStateActive(State.main_region_VarToVarCompareSucceeded));
+		assertTrue(statemachine.isStateActive(State.main_region_VarToVarCompareSucceeded));
 		assertTrue(statemachine.getGuardStringEqual());
 		assertTrue(statemachine.getGuardStringNotEqual());
 		assertTrue(statemachine.getStringVarEqual());
 		assertTrue(statemachine.getStringVarNotEqual());
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine
-				.isStateActive(State.main_region_VarToConstCompareSucceeded));
+		assertTrue(statemachine.isStateActive(State.main_region_VarToConstCompareSucceeded));
 		assertTrue(statemachine.getGuardStringEqual());
 		assertTrue(statemachine.getGuardStringNotEqual());
 		assertTrue(statemachine.getStringVarEqual());
 		assertTrue(statemachine.getStringVarNotEqual());
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine
-				.isStateActive(State.main_region_ConstToVarCompareSucceeded));
+		assertTrue(statemachine.isStateActive(State.main_region_ConstToVarCompareSucceeded));
 		assertTrue(statemachine.getGuardStringEqual());
 		assertTrue(statemachine.getGuardStringNotEqual());
 		assertTrue(statemachine.getStringVarEqual());
 		assertTrue(statemachine.getStringVarNotEqual());
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine
-				.isStateActive(State.main_region_ConstToConstCompareSucceeded));
+		assertTrue(statemachine.isStateActive(State.main_region_ConstToConstCompareSucceeded));
 		assertTrue(statemachine.getGuardStringEqual());
 		assertTrue(statemachine.getGuardStringNotEqual());
 		assertTrue(statemachine.getStringVarEqual());

@@ -32,6 +32,8 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		r_A, r_A_r_B, r_E, r_F, $NullState$
 	};
@@ -46,6 +48,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -56,6 +59,10 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_r_default();
@@ -318,6 +325,9 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

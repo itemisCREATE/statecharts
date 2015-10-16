@@ -1,13 +1,13 @@
 /**
- * Copyright (c) 2015 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
- */
+* Copyright (c) 2015 committers of YAKINDU and others.
+* All rights reserved. This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+* Contributors:
+*     committers of YAKINDU - initial API and implementation
+*/
 
 package org.yakindu.sct.generator.java.test;
 
@@ -39,13 +39,11 @@ public class SimpleEventTest {
 	@Test
 	public void testsimpleEventTest() {
 		statemachine.enter();
-		assertTrue("Expected A to be active",
-				statemachine.isStateActive(State.main_region_A));
+		assertTrue("Expected A to be active", statemachine.isStateActive(State.main_region_A));
 		assertTrue(5l == 5l);
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
-		assertTrue("Expected B to be active",
-				statemachine.isStateActive(State.main_region_B));
+		assertTrue("Expected B to be active", statemachine.isStateActive(State.main_region_B));
 		statemachine.runCycle();
 		assertTrue(!statemachine.isStateActive(State.main_region_B));
 	}

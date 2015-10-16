@@ -285,6 +285,8 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		auto_char, auto_loop, auto_loop_switch_case, auto_loop_switch_case_enum_asm, $NullState$
 	};
@@ -300,6 +302,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -364,6 +367,10 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_auto_default();
@@ -908,6 +915,9 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

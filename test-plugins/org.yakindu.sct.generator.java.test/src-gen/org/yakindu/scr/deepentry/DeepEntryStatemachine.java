@@ -55,6 +55,8 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		r_A, r_A_r_B, r2_B, r2_B_r_BA, r2_B_r_BA_r_BAA, r2_B_r_BB, r2_C, r3_D, r3_D_r_DA, r3_D_r_DA_r_DAA, $NullState$
 	};
@@ -70,6 +72,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 3; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -88,6 +91,10 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_r_default();
@@ -627,6 +634,9 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

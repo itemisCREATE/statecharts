@@ -31,6 +31,8 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		main_region_StateA, main_region_StateB, second_region_SateA, second_region_StateB, $NullState$
 	};
@@ -45,6 +47,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -55,6 +58,10 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_main_region_default();
@@ -289,6 +296,9 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

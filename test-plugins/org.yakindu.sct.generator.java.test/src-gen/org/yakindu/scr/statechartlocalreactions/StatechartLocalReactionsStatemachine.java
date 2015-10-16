@@ -18,6 +18,8 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		main_region_S1, main_region_S2, region2_a, $NullState$
 	};
@@ -32,6 +34,7 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -43,6 +46,10 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_main_region_default();
@@ -255,6 +262,9 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

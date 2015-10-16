@@ -14,6 +14,8 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		main_region_A, main_region_B, main_region_C, main_region_D, another_region_A, another_region_B, another_region_C, another_region_D, $NullState$
 	};
@@ -28,6 +30,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -38,6 +41,10 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_main_region_default();
@@ -396,6 +403,9 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

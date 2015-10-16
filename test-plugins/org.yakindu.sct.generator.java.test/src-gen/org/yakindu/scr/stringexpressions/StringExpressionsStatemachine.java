@@ -108,6 +108,8 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		main_region_AssignmentChecked, main_region_Failed, main_region_VarToVarCompareSucceeded, main_region_VarToConstCompareSucceeded, main_region_ConstToVarCompareSucceeded, main_region_ConstToConstCompareSucceeded, $NullState$
 	};
@@ -122,6 +124,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -149,6 +152,10 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_main_region_default();
@@ -888,6 +895,9 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

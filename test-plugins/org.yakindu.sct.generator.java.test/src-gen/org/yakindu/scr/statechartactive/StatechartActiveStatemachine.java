@@ -2,6 +2,8 @@ package org.yakindu.scr.statechartactive;
 
 public class StatechartActiveStatemachine implements IStatechartActiveStatemachine {
 
+	private boolean initialized = false;
+
 	public enum State {
 		r_A, $NullState$
 	};
@@ -15,6 +17,7 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -25,6 +28,10 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_r_default();
@@ -125,6 +132,9 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

@@ -32,6 +32,8 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		main_region_A, $NullState$
 	};
@@ -40,36 +42,13 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 
 	private int nextStateIndex;
 
-	private long y;
-
-	protected void setY(long value) {
-		y = value;
-	}
-
-	protected long getY() {
-		return y;
-	}
-
-	protected long assignY(long value) {
-		return this.y = value;
-	}
-
-	private long z;
-
-	protected void setZ(long value) {
-		z = value;
-	}
-
-	protected long getZ() {
-		return z;
-	}
-
 	public LogicalOrStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -80,13 +59,13 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 		sCInterface.setX(1);
 
 		sCInterface.setB(false);
-
-		setY(2);
-
-		setZ(1);
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_main_region_default();
@@ -176,21 +155,12 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	private void entryAction() {
 	}
 
-	/* Entry action for state 'A'. */
-	private void entryAction_main_region_A() {
-		setZ((assignY(getY() + 1)));
-
-		setZ(getZ() + 1);
-	}
-
 	/* Exit action for state 'LogicalOr'. */
 	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */
 	private void enterSequence_main_region_A_default() {
-		entryAction_main_region_A();
-
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
 	}
@@ -231,6 +201,9 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 
