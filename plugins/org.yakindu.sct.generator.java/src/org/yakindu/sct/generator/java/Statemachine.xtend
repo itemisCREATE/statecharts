@@ -103,7 +103,10 @@ class Statemachine {
 			
 			protected «scope.interfaceImplName» «scope.interfaceName.asEscapedIdentifier»;
 			
+			
 		«ENDFOR»
+		private boolean initialized=false;
+
 		public enum State {
 			«FOR state : flow.states»
 				«state.stateName.asEscapedIdentifier»,
@@ -174,6 +177,7 @@ class Statemachine {
 	
 	def protected initFunction(ExecutionFlow flow) '''
 		public void init() {
+			this.initialized=true;
 			«IF flow.timed»
 			if (timer == null) {
 				throw new IllegalStateException("timer not set.");
@@ -574,6 +578,8 @@ class Statemachine {
 	
 	def protected runCycleFunction(ExecutionFlow flow) '''
 		public void runCycle() {
+			if(!initialized)
+				throw new IllegalStateException("The statemachine needs to be initialized first by calling the init() function.");
 			
 			clearOutEvents();
 			
@@ -598,6 +604,9 @@ class Statemachine {
 	
 	def protected enterFunction(ExecutionFlow it) '''
 		public void enter() {
+			if(!initialized)
+				throw new IllegalStateException("The statemachine needs to be initialized first by calling the init() function.");
+			
 			«IF timed»
 			if (timer == null) {
 				throw new IllegalStateException("timer not set.");
@@ -609,6 +618,7 @@ class Statemachine {
 	
 	def protected exitFunction(ExecutionFlow it) '''
 		public void exit(){
+			initialized=false;
 			«exitSequence.code»
 		}
 	'''
