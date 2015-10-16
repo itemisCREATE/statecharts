@@ -618,7 +618,6 @@ class Statemachine {
 	
 	def protected exitFunction(ExecutionFlow it) '''
 		public void exit(){
-			initialized=false;
 			«exitSequence.code»
 		}
 	'''
