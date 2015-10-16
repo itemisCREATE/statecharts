@@ -32,6 +32,8 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		mr_A, mr_A_r_X1, mr_A_r_X2, mr_B, $NullState$
 	};
@@ -47,6 +49,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -60,12 +63,17 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_mr_default();
 	}
 
 	public void exit() {
+		initialized = false;
 		exitSequence_mr();
 
 		exitAction();
@@ -361,6 +369,9 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

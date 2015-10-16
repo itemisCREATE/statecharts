@@ -49,6 +49,8 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		main_region_A, main_region_B, main_region_B_r1_C1, main_region_B_r1_C2, main_region_B_r2_D1, main_region_B_r2_D2, $NullState$
 	};
@@ -63,6 +65,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -74,12 +77,17 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
+		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();
@@ -439,6 +447,9 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

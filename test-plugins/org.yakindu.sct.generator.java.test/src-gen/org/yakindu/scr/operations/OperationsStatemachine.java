@@ -36,6 +36,8 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		main_region_B, main_region_C, main_region_D, main_region_A, $NullState$
 	};
@@ -63,6 +65,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -74,12 +77,17 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
+		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();
@@ -356,6 +364,9 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

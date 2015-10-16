@@ -25,6 +25,8 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		default_namespace, operation_interface, operation_internal, namespace_event, namespace_local, local_in, local_out, interface_var, interface_readonly, internal_external, internal_operation, event_default, event_else, in_entry, in_exit, out_always, out_oncycle, var_raise, var_valueof, readonly_active, readonly_namespace, external_interface, external_internal, else_event, else_local, entry_in, entry_out, exit_var, exit_readonly, always_external, always_operation, oncycle_default, oncycle_else, raise_entry, raise_exit, valueof_always, valueof_oncycle, active_raise, active_valueof, $NullState$
 	};
@@ -39,6 +41,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 20; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -49,6 +52,10 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_default_default();
@@ -93,6 +100,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	}
 
 	public void exit() {
+		initialized = false;
 		exitSequence_default();
 
 		exitSequence_operation();
@@ -1671,6 +1679,9 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

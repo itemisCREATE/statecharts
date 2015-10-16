@@ -25,6 +25,8 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		r1_A, r1_B, r2_C, r2_D, $NullState$
 	};
@@ -43,6 +45,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -53,6 +56,10 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_r1_default();
@@ -61,6 +68,7 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	}
 
 	public void exit() {
+		initialized = false;
 		exitSequence_r1();
 
 		exitSequence_r2();
@@ -329,6 +337,9 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

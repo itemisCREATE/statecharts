@@ -98,6 +98,8 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		main_region_StateA, main_region_StateB, $NullState$
 	};
@@ -112,6 +114,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -137,12 +140,17 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
+		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();
@@ -364,6 +372,9 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

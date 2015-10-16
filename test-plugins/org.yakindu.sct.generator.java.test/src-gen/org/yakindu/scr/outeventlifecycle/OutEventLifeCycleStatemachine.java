@@ -51,6 +51,8 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 
 	protected SCInterfaceImpl sCInterface;
 
+	private boolean initialized = false;
+
 	public enum State {
 		r1_A, r1_B, r2_B, $NullState$
 	};
@@ -65,6 +67,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	}
 
 	public void init() {
+		this.initialized = true;
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -78,6 +81,10 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	}
 
 	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
+
 		entryAction();
 
 		enterSequence_r1_default();
@@ -86,6 +93,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	}
 
 	public void exit() {
+		initialized = false;
 		exitSequence_r1();
 
 		exitSequence_r2();
@@ -309,6 +317,9 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	}
 
 	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The statemachine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 
