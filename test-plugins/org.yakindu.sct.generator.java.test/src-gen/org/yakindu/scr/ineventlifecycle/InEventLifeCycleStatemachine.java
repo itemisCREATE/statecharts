@@ -66,7 +66,6 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

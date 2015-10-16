@@ -38,7 +38,6 @@ public class EmptyTransitionStatemachine implements IEmptyTransitionStatemachine
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

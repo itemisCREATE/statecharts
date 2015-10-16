@@ -38,7 +38,6 @@ public class TransitionWithoutConditionStatemachine implements ITransitionWithou
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

@@ -72,7 +72,6 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

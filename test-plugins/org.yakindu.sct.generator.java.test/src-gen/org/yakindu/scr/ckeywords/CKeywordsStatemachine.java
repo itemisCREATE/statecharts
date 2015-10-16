@@ -377,7 +377,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_auto();
 
 		exitAction();

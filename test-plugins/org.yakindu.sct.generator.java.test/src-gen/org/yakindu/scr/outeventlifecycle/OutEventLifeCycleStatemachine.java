@@ -93,7 +93,6 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_r1();
 
 		exitSequence_r2();

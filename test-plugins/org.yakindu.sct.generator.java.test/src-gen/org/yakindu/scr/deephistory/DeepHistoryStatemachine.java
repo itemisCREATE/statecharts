@@ -115,7 +115,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_mainRegion();
 
 		exitAction();

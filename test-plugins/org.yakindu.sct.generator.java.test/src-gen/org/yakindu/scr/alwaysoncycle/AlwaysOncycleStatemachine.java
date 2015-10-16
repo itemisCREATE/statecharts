@@ -68,7 +68,6 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

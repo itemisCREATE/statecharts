@@ -49,7 +49,6 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

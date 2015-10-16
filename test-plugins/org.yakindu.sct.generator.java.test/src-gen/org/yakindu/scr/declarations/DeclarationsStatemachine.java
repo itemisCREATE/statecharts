@@ -441,7 +441,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

@@ -100,7 +100,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_default();
 
 		exitSequence_operation();

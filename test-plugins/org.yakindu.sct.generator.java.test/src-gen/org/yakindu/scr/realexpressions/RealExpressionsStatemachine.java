@@ -322,7 +322,6 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

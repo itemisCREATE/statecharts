@@ -69,7 +69,6 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_r();
 
 		exitAction();

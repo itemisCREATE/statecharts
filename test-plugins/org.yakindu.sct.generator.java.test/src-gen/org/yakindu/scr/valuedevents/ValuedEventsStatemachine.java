@@ -167,7 +167,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region1();
 
 		exitSequence_integer_region();

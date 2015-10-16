@@ -150,7 +150,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

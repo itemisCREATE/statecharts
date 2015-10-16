@@ -162,7 +162,6 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

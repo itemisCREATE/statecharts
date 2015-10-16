@@ -55,7 +55,6 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

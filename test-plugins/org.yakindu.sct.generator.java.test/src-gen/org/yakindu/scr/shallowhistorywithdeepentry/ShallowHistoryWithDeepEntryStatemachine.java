@@ -80,7 +80,6 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

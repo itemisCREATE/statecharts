@@ -38,7 +38,6 @@ public class StatechartActiveStatemachine implements IStatechartActiveStatemachi
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_r();
 
 		exitAction();

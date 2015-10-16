@@ -56,7 +56,6 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_mainRegion();
 
 		exitAction();

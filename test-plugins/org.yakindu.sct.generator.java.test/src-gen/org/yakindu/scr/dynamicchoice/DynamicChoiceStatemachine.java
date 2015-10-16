@@ -66,7 +66,6 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

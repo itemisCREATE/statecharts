@@ -58,7 +58,6 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitSequence_region2();

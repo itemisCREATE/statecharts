@@ -105,7 +105,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_r();
 
 		exitSequence_r2();

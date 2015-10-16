@@ -142,7 +142,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_region_1();
 
 		exitSequence__region1();

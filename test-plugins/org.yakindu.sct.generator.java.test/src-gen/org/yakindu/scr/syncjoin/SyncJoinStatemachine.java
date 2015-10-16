@@ -87,7 +87,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

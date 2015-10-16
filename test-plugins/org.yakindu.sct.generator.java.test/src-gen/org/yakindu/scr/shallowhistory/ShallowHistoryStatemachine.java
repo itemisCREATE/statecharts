@@ -108,7 +108,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_mainRegion();
 
 		exitAction();

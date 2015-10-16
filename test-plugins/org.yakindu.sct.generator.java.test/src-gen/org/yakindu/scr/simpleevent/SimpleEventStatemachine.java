@@ -55,7 +55,6 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

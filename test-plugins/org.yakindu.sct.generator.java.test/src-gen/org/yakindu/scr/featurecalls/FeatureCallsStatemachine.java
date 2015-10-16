@@ -66,7 +66,6 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

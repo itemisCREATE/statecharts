@@ -70,7 +70,6 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitSequence_second_region();

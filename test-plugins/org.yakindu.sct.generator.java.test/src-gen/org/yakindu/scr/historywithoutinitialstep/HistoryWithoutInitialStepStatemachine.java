@@ -80,7 +80,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

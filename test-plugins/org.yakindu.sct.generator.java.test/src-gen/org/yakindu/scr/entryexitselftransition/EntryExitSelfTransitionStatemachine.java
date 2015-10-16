@@ -85,7 +85,6 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

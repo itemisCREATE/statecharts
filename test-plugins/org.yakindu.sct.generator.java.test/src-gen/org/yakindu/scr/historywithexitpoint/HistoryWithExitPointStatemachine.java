@@ -73,7 +73,6 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_mr();
 
 		exitAction();

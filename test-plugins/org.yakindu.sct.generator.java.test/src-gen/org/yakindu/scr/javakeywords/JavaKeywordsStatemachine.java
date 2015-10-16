@@ -593,7 +593,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_goto();
 
 		exitAction();

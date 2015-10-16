@@ -124,7 +124,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_mr();
 
 		exitAction();

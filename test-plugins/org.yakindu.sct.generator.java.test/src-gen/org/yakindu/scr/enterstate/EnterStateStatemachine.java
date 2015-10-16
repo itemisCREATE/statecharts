@@ -69,7 +69,6 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_r();
 
 		exitAction();

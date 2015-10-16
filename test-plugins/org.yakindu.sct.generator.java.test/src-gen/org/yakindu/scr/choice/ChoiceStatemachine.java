@@ -87,7 +87,6 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

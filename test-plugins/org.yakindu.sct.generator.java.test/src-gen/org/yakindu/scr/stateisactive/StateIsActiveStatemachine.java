@@ -57,7 +57,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_R1();
 
 		exitSequence_R2();

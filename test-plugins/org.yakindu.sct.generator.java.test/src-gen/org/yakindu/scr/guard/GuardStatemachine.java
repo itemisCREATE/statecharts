@@ -80,7 +80,6 @@ public class GuardStatemachine implements IGuardStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

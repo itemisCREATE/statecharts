@@ -109,7 +109,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_main_region();
 
 		exitAction();

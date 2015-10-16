@@ -64,7 +64,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	}
 
 	public void exit() {
-		initialized = false;
 		exitSequence_someRegion();
 
 		exitSequence_main_region();
