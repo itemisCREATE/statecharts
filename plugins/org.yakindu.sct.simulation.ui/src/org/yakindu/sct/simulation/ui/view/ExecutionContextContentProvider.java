@@ -33,6 +33,7 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 
 	private Viewer viewer;
 	protected RefreshAdapter refreshAdapter = new RefreshAdapter();
+	protected boolean shouldUpdate = true;
 
 	public void dispose() {
 		getStore().removePropertyChangeListener(this);
@@ -93,17 +94,29 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 				viewer.refresh();
 		}
 	}
+	
+	
+
+	public boolean isShouldUpdate() {
+		return shouldUpdate;
+	}
+
+	public void setShouldUpdate(boolean shouldUpdate) {
+		this.shouldUpdate = shouldUpdate;
+	}
+
+
 
 	protected final class RefreshAdapter extends EContentAdapter {
 		@Override
-		public void notifyChanged(Notification notification) {
+		public void notifyChanged(final Notification notification) {
 			if (notification.getFeature() == SRuntimePackage.Literals.EXECUTION_SLOT__VALUE
 					|| notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__RAISED
 					|| notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__SCHEDULED
 					|| notification.getFeature() == SRuntimePackage.Literals.COMPOSITE_SLOT__SLOTS)
 				Display.getDefault().asyncExec(new Runnable() {
 					public void run() {
-						if (viewer != null && !viewer.getControl().isDisposed())
+						if (viewer != null && !viewer.getControl().isDisposed() && shouldUpdate)
 							viewer.refresh();
 					}
 				});
