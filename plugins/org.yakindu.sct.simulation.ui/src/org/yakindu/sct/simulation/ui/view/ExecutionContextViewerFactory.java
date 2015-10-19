@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
+import org.eclipse.jface.viewers.ColumnViewerEditorActivationEvent;
+import org.eclipse.jface.viewers.ColumnViewerEditorActivationListener;
+import org.eclipse.jface.viewers.ColumnViewerEditorDeactivationEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -30,12 +33,12 @@ import org.yakindu.sct.simulation.ui.view.editing.StringEditingSupport;
  */
 public class ExecutionContextViewerFactory {
 
-	
 	public static TreeViewer createViewer(Composite parent, boolean readOnly) {
-		TreeViewer viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
+		final TreeViewer viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
-		viewer.setContentProvider(new ExecutionContextContentProvider());
+		final ExecutionContextContentProvider contentProvider = new ExecutionContextContentProvider();
+		viewer.setContentProvider(contentProvider);
 		viewer.setFilters(new ViewerFilter[] { new TimeEventViewerFilter() });
 		TreeViewerColumn nameColumn = new TreeViewerColumn(viewer, SWT.DEFAULT);
 		nameColumn.getColumn().setText("Name");
@@ -49,10 +52,34 @@ public class ExecutionContextViewerFactory {
 		valueColumn.getColumn().setWidth(100);
 		if (!readOnly)
 			valueColumn.setEditingSupport(new MultiEditingSupport(viewer, new BooleanEditingSupport(viewer),
-					new LongEditingSupport(viewer), new RealEditingSupport(viewer),
-					new StringEditingSupport(viewer), new EnumerationEditingSupport(viewer), new IntegerEditingSupport(viewer)));
+					new LongEditingSupport(viewer), new RealEditingSupport(viewer), new StringEditingSupport(viewer),
+					new EnumerationEditingSupport(viewer), new IntegerEditingSupport(viewer)));
 
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
+
+		valueColumn.getViewer().getColumnViewerEditor()
+				.addEditorActivationListener(new ColumnViewerEditorActivationListener() {
+					@Override
+					public void afterEditorDeactivated(ColumnViewerEditorDeactivationEvent event) {
+						contentProvider.shouldUpdate = true;
+						viewer.refresh();
+
+					}
+
+					@Override
+					public void afterEditorActivated(ColumnViewerEditorActivationEvent event) {
+						contentProvider.shouldUpdate = false;
+
+					}
+
+					@Override
+					public void beforeEditorDeactivated(ColumnViewerEditorDeactivationEvent event) {
+					}
+
+					@Override
+					public void beforeEditorActivated(ColumnViewerEditorActivationEvent event) {
+					}
+				});
 
 		return viewer;
 	}
