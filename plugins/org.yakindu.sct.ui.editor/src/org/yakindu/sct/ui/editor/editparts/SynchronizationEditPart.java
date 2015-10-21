@@ -20,6 +20,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.base.gmf.runtime.editpolicies.BarResizeEditPolicy;
 import org.yakindu.sct.ui.editor.editor.figures.SynchronizationFigure;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
+import org.yakindu.sct.ui.editor.policies.FeedbackGraphicalNodeEditPolicy;
 
 /**
  * 
@@ -39,6 +40,7 @@ public class SynchronizationEditPart extends ShapeNodeEditPart {
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
+		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new FeedbackGraphicalNodeEditPolicy());
 	}
 
 	@Override

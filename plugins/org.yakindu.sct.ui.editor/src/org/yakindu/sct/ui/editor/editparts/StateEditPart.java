@@ -44,6 +44,7 @@ import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
+import org.yakindu.sct.ui.editor.policies.FeedbackGraphicalNodeEditPolicy;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
@@ -100,8 +101,9 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 			// StateFigure is drawed smaller (Blurshadow size)
 			public Rectangle getHandleBounds() {
 				Insets insets = new Insets(0, 0, StateFigure.BLUR_SHADOW_WIDTH, StateFigure.BLUR_SHADOW_WIDTH);
-				return new Rectangle(getBounds().x + insets.left, getBounds().y + insets.top, getBounds().width
-						- (insets.right + insets.left), getBounds().height - (insets.bottom + insets.top));
+				return new Rectangle(getBounds().x + insets.left, getBounds().y + insets.top,
+						getBounds().width - (insets.right + insets.left),
+						getBounds().height - (insets.bottom + insets.top));
 			}
 
 		};
@@ -125,6 +127,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		removeEditPolicy(EditPolicyRoles.CREATION_ROLE);
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeHandlerEditPolicy());
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
+		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new FeedbackGraphicalNodeEditPolicy());
 	}
 
 	@Override
