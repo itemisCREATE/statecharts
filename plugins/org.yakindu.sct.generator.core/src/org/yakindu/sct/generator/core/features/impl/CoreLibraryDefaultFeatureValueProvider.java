@@ -26,49 +26,37 @@ import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
  * 
  * @author holger willebrandt - Initial contribution and API
  */
-public class CoreLibraryDefaultFeatureValueProvider extends
-		AbstractDefaultFeatureValueProvider {
+public class CoreLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatureValueProvider {
 
 	public boolean isProviderFor(FeatureTypeLibrary library) {
 		return LIBRARY_NAME.equals(library.getName());
 	}
 
 	@Override
-	protected void setDefaultValue(FeatureParameterValue parameterValue,
-			EObject contextElement) {
+	protected void setDefaultValue(FeatureParameterValue parameterValue, EObject contextElement) {
 		String parameterName = parameterValue.getParameter().getName();
 		if (OUTLET_FEATURE_TARGET_FOLDER.equals(parameterName)) {
 			parameterValue.setValue("src-gen");
 		} else if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)) {
 			parameterValue.setValue(getProject(contextElement).getName());
-		} 
-		else if (LICENSE_TEXT.equals(parameterName)) {
+		} else if (LICENSE_TEXT.equals(parameterName)) {
 			parameterValue.setValue("Enter license text here");
 		}
 	}
 
 	public IStatus validateParameterValue(FeatureParameterValue parameterValue) {
 		String parameterName = parameterValue.getParameter().getName();
-		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)
-				&& !projectExists(parameterValue.getStringValue()))
-			return warning(String.format("The Project %s does not exist",
-					parameterValue.getExpression()));
-		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)
-				&& projectExists(parameterValue.getStringValue())
+		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName) && !projectExists(parameterValue.getStringValue()))
+			return error(String.format("The Project %s does not exist.", parameterValue.getExpression()));
+		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName) && projectExists(parameterValue.getStringValue())
 				&& !projectOpened(parameterValue.getStringValue()))
-			return error(String.format("The Project %s is not open.",
-					parameterValue.getExpression()));
+			return error(String.format("The Project %s is not open.", parameterValue.getExpression()));
 		if (OUTLET_FEATURE_TARGET_FOLDER.equals(parameterName)) {
-			FeatureParameterValue targetProjectParam = parameterValue
-					.getFeatureConfiguration().getParameterValue(
-							OUTLET_FEATURE_TARGET_PROJECT);
-			String targetProjectName = targetProjectParam != null ? targetProjectParam
-					.getStringValue() : null;
-			if (targetProjectName != null
-					&& !folderExists(targetProjectName,
-							parameterValue.getStringValue())) {
-				return warning(String.format(
-						"The Folder %s does not exist in Project %s",
+			FeatureParameterValue targetProjectParam = parameterValue.getFeatureConfiguration()
+					.getParameterValue(OUTLET_FEATURE_TARGET_PROJECT);
+			String targetProjectName = targetProjectParam != null ? targetProjectParam.getStringValue() : null;
+			if (targetProjectName != null && !folderExists(targetProjectName, parameterValue.getStringValue())) {
+				return warning(String.format("The Folder %s does not exist in Project %s",
 						parameterValue.getExpression(), targetProjectName));
 			}
 		}
