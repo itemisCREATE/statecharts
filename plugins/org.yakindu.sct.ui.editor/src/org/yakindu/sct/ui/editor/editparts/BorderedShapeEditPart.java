@@ -12,6 +12,7 @@ package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.AbstractBorderedShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IBorderItemEditPart;
@@ -19,6 +20,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.ui.editor.policies.FeedbackGraphicalNodeEditPolicy;
 
 /**
  * 
@@ -38,8 +40,7 @@ public class BorderedShapeEditPart extends AbstractBorderedShapeEditPart {
 		return null;
 	}
 
-	protected void addBorderItem(IFigure borderItemContainer,
-			IBorderItemEditPart borderItemEditPart) {
+	protected void addBorderItem(IFigure borderItemContainer, IBorderItemEditPart borderItemEditPart) {
 		if (primaryChildEditPart == null) {
 			primaryChildEditPart = borderItemEditPart;
 		}
@@ -56,6 +57,12 @@ public class BorderedShapeEditPart extends AbstractBorderedShapeEditPart {
 	@Override
 	protected void performDirectEditRequest(Request request) {
 		primaryChildEditPart.performRequest(request);
+	}
+
+	@Override
+	protected void createDefaultEditPolicies() {
+		super.createDefaultEditPolicies();
+		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new FeedbackGraphicalNodeEditPolicy());
 	}
 
 }
