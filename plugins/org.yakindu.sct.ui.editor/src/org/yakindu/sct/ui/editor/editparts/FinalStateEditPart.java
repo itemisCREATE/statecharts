@@ -12,6 +12,7 @@ package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirection;
 import org.eclipse.gmf.runtime.notation.View;
@@ -20,6 +21,7 @@ import org.yakindu.base.gmf.runtime.editpolicies.OneWayConnectionHandlesEditPoli
 import org.yakindu.sct.ui.editor.editor.figures.FinalStateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
+import org.yakindu.sct.ui.editor.policies.FeedbackGraphicalNodeEditPolicy;
 
 /**
  * 
@@ -38,6 +40,7 @@ public class FinalStateEditPart extends EllipseFixedSizeShapeNodeEditPart {
 		installEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE, new OneWayConnectionHandlesEditPolicy(
 				HandleDirection.INCOMING));
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
+		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new FeedbackGraphicalNodeEditPolicy());
 	}
 
 	@Override
