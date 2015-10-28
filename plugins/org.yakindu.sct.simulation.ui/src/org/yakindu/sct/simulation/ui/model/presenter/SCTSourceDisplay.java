@@ -61,7 +61,7 @@ public class SCTSourceDisplay implements ISourceDisplay {
 		displaySource(editor);
 	}
 
-	private void displaySource(IEditorPart editor) {
+	public void displaySource(IEditorPart editor) {
 		IDynamicNotationHandler notationHandler = handler.get(editor);
 		if (notationHandler == null) {
 			notationHandler = new DefaultDynamicNotationHandler();
