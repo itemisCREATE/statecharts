@@ -12,7 +12,10 @@ package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.base.gmf.runtime.editparts.FixedSizeShapeNodeEditPart;
@@ -41,7 +44,21 @@ public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {
 
 	@Override
 	protected NodeFigure createNodeFigure() {
-		NodeFigure figure = super.createNodeFigure();
+		final NodeFigure figure = new DefaultSizeNodeFigure(getDefaultSize()) {
+			@Override
+			public PointList getPolygonPoints() {
+				PointList points = new PointList(5);
+				Rectangle handleBounds = getHandleBounds();
+				points.addPoint(handleBounds.x + (handleBounds.width / 2), handleBounds.y);
+				points.addPoint(handleBounds.x + handleBounds.width, handleBounds.y + (handleBounds.height / 2));
+				points.addPoint(handleBounds.x + (handleBounds.width / 2), handleBounds.y + handleBounds.height);
+				points.addPoint(handleBounds.x, handleBounds.y + handleBounds.height / 2);
+				points.addPoint(handleBounds.x + (handleBounds.width / 2), handleBounds.y);
+				return points;
+			}
+		};
+		figure.setLayoutManager(getLayoutManager());
+		figure.add(createPrimaryShape());
 		figure.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);
 		figure.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
 		return figure;
