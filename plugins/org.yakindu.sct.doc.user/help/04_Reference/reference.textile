@@ -585,7 +585,8 @@ p. ==<!-- End sgen_feature_naming -->==
 
 h4. Runnable Wrapper
 
-*Generates* a runnable wrapper for the statemachine.
+*Generates* a runnable wrapper for the statemachine. This feature generates an additional Java class that provides a thread safe wrapper for the generated statemachne implementation. It implements the __Runnable__ interface in addition to the specific statemachine interface and can be started as a thread. It implements an event queue and thus implies event driven execution semantics. As the wrapper adds thread safety any number of client threads may call the statemachine.
+  
 It is an *optional* feature and consists of the following parameters:
 
 # __namePrefix__  (String, optional): The preffix for the implementing classes
