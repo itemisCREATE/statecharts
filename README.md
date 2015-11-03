@@ -5,6 +5,11 @@ Build Status: [![Build Status](https://travis-ci.org/Yakindu/statecharts.svg?bra
 
 The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of Harel statecharts. 
 
+
+## License
+
+The source code is provided under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.
+
 ## How to Contribute
 
 We appreciate any feedback and there are various ways to contribute feedback:
