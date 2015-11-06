@@ -50,7 +50,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_7thtYHNzEeGtAMDjlTj9eQ" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_7tfRIXNzEeGtAMDjlTj9eQ" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_7tfRInNzEeGtAMDjlTj9eQ"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_7thtYXNzEeGtAMDjlTj9eQ"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_7tiUcHNzEeGtAMDjlTj9eQ" x="10" y="94" width="140" height="115"/>
         </children>
         <children xmi:id="_8Yof4HNzEeGtAMDjlTj9eQ" type="State" element="_8YlckHNzEeGtAMDjlTj9eQ">
@@ -83,7 +82,6 @@
                   <children xsi:type="notation:Compartment" xmi:id="_EUb40HN0EeGtAMDjlTj9eQ" type="StateFigureCompartment"/>
                   <styles xsi:type="notation:ShapeStyle" xmi:id="_EUY1gXN0EeGtAMDjlTj9eQ" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
                   <styles xsi:type="notation:FontStyle" xmi:id="_EUY1gnN0EeGtAMDjlTj9eQ"/>
-                  <styles xsi:type="notation:BooleanValueStyle" xmi:id="_EUb40XN0EeGtAMDjlTj9eQ"/>
                   <layoutConstraint xsi:type="notation:Bounds" xmi:id="_EUY1g3N0EeGtAMDjlTj9eQ" x="133" y="33"/>
                 </children>
                 <children xmi:id="_Fq_cEHN0EeGtAMDjlTj9eQ" type="Entry" element="_Fq8_0HN0EeGtAMDjlTj9eQ">
@@ -106,7 +104,6 @@
           </children>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_8Yof4XNzEeGtAMDjlTj9eQ" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_8Yof4nNzEeGtAMDjlTj9eQ"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_8Yq8IXNzEeGtAMDjlTj9eQ"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_8Yof43NzEeGtAMDjlTj9eQ" x="229" y="20" width="246" height="236"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_7ta_sXNzEeGtAMDjlTj9eQ"/>

@@ -49,7 +49,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_o9cQdz1DEeK7haHJZ9RPwA" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_o9cQbj1DEeK7haHJZ9RPwA" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_o9cQbz1DEeK7haHJZ9RPwA"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_o9cQeD1DEeK7haHJZ9RPwA"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_o9cQeT1DEeK7haHJZ9RPwA" x="64" y="167" width="446" height="161"/>
         </children>
         <children xmi:id="__d9P8D1DEeK7haHJZ9RPwA" type="State" element="__d3JUD1DEeK7haHJZ9RPwA">
@@ -65,7 +64,6 @@
           <children xsi:type="notation:Compartment" xmi:id="__d9P-j1DEeK7haHJZ9RPwA" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="__d9P8T1DEeK7haHJZ9RPwA" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="__d9P8j1DEeK7haHJZ9RPwA"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="__d9P-z1DEeK7haHJZ9RPwA"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="__d9P8z1DEeK7haHJZ9RPwA" x="57" y="377" width="453" height="161"/>
         </children>
         <children xmi:id="_AJsWgD3yEeK47LT8Vd-Q2Q" type="State" element="_AJilgD3yEeK47LT8Vd-Q2Q">
@@ -81,7 +79,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_AKJCdj3yEeK47LT8Vd-Q2Q" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_AJsWgT3yEeK47LT8Vd-Q2Q" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_AJsWgj3yEeK47LT8Vd-Q2Q"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_AKJCdz3yEeK47LT8Vd-Q2Q"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_AJsWgz3yEeK47LT8Vd-Q2Q" x="57" y="587" width="453" height="151"/>
         </children>
         <children xmi:id="_YFySoB17EeSUu8X40Qay1A" type="State" element="_YFq94B17EeSUu8X40Qay1A">

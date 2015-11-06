@@ -49,7 +49,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_UYKkwCdmEeKIUcvKJ7R2Xg" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_UYJWoSdmEeKIUcvKJ7R2Xg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_UYJWoidmEeKIUcvKJ7R2Xg"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_UYKkwSdmEeKIUcvKJ7R2Xg"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_UYKkwidmEeKIUcvKJ7R2Xg" x="29" y="61" width="127"/>
         </children>
         <children xmi:id="_Eq9lwCkLEeKkhf1edRNNAA" type="State" element="_Eq3fICkLEeKkhf1edRNNAA">
@@ -65,7 +64,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_Eq-M1CkLEeKkhf1edRNNAA" type="StateFigureCompartment" collapsed="true"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_Eq9lwSkLEeKkhf1edRNNAA" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_Eq9lwikLEeKkhf1edRNNAA"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_Eq-M1SkLEeKkhf1edRNNAA"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Eq9lwykLEeKkhf1edRNNAA" x="227" y="61" width="190"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_UYG6ZCdmEeKIUcvKJ7R2Xg"/>
@@ -114,7 +112,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_BuNWMCkKEeKkhf1edRNNAA" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_BuMIESkKEeKkhf1edRNNAA" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_BuMIEikKEeKkhf1edRNNAA"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_BuNWMSkKEeKkhf1edRNNAA"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_BuMIEykKEeKkhf1edRNNAA" x="123" y="21" width="178"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="__WEaISkJEeKkhf1edRNNAA"/>

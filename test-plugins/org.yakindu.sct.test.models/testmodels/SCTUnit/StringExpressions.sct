@@ -110,7 +110,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_GCmpDcUEEeGBt-G4bU7TpQ" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_GCmpBMUEEeGBt-G4bU7TpQ" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_GCmpBcUEEeGBt-G4bU7TpQ"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_GCmpDsUEEeGBt-G4bU7TpQ"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_GCmpD8UEEeGBt-G4bU7TpQ" x="-15" y="39"/>
         </children>
         <children xsi:type="notation:Shape" xmi:id="_1R8RsMUPEeGfjbriQ9CjYQ" type="Note" fontName="Verdana" description="Expectation:&#xD;&#xA;&#xD;&#xA;equal = false&#xD;&#xA;notEqual = true" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">

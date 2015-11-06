@@ -67,7 +67,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_LdeLuqlkEeGmpNX2cnyk2Q" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_LdeLsalkEeGmpNX2cnyk2Q" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_LdeLsqlkEeGmpNX2cnyk2Q"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_LdeLu6lkEeGmpNX2cnyk2Q"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_LdeLs6lkEeGmpNX2cnyk2Q" x="164" y="29" width="154" height="48"/>
         </children>
         <children xsi:type="notation:Shape" xmi:id="_RkU1MKlkEeGmpNX2cnyk2Q" type="Choice" element="_RkLEMKlkEeGmpNX2cnyk2Q" fontName="Verdana" lineColor="4210752">
@@ -86,7 +85,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_W-n6uqlkEeGmpNX2cnyk2Q" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_W-n6salkEeGmpNX2cnyk2Q" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_W-n6sqlkEeGmpNX2cnyk2Q"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_W-n6u6lkEeGmpNX2cnyk2Q"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_W-n6s6lkEeGmpNX2cnyk2Q" x="284" y="255" width="145" height="48"/>
         </children>
         <children xmi:id="_OoTTgKllEeGmpNX2cnyk2Q" type="State" element="_OoKJkKllEeGmpNX2cnyk2Q">
@@ -102,7 +100,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_OodEhqllEeGmpNX2cnyk2Q" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_OoTTgallEeGmpNX2cnyk2Q" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_OoTTgqllEeGmpNX2cnyk2Q"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_OodEh6llEeGmpNX2cnyk2Q"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_OoTTg6llEeGmpNX2cnyk2Q" x="47" y="255" width="163" height="48"/>
         </children>
         <children xsi:type="notation:Shape" xmi:id="_zat18KlmEeGmpNX2cnyk2Q" type="Choice" element="_zaksAKlmEeGmpNX2cnyk2Q" fontName="Verdana" lineColor="4210752">

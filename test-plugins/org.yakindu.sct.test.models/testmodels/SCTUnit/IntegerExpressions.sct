@@ -43,7 +43,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_OTbYpL7WEeGmQI_7e4ED3g" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_OTbYm77WEeGmQI_7e4ED3g" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_OTbYnL7WEeGmQI_7e4ED3g"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_OTbYpb7WEeGmQI_7e4ED3g"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_OTbYpr7WEeGmQI_7e4ED3g" x="74" y="54" width="148" height="121"/>
         </children>
         <children xmi:id="_F5OW4L7XEeGmQI_7e4ED3g" type="State" element="_F5El4L7XEeGmQI_7e4ED3g">
@@ -59,7 +58,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_F5YH4L7XEeGmQI_7e4ED3g" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_F5OW4b7XEeGmQI_7e4ED3g" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_F5OW4r7XEeGmQI_7e4ED3g"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_F5YH4b7XEeGmQI_7e4ED3g"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_F5OW477XEeGmQI_7e4ED3g" x="21" y="224"/>
         </children>
         <children xsi:type="notation:Shape" xmi:id="__N3f0L-fEeGY1JN0_LPdVA" type="Note" fontName="Verdana" description="expectation:&#xD;&#xA;less = false&#xD;&#xA;greater = true&#xD;&#xA;equalOrLess = false&#xD;&#xA;equalOrGreater = true&#xD;&#xA;eual = false&#xD;&#xA;notEqual = true&#xD;&#xA;&#xD;&#xA;plus = 15&#xD;&#xA;minus = 5&#xD;&#xA;multiply = 50&#xD;&#xA;division = 2&#xD;&#xA;modulo = 0&#xD;&#xA;&#xD;&#xA;negat = -10&#xD;&#xA;complement = ? //todo&#xD;&#xA;&#xD;&#xA;mulltiAssign = 20&#xD;&#xA;divAssign = 2&#xD;&#xA;plusAssign = 2&#xD;&#xA;minusAssign = -8&#xD;&#xA;moduloAssign = 0" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">

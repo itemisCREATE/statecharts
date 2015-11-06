@@ -45,7 +45,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_z1tnPZ6iEeGR-6jhjFPx5A" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_z1tnNJ6iEeGR-6jhjFPx5A" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_z1tnNZ6iEeGR-6jhjFPx5A"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_z1tnPp6iEeGR-6jhjFPx5A"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_z1tnP56iEeGR-6jhjFPx5A" x="9" y="84"/>
         </children>
         <children xmi:id="_UkqwsJ6jEeGR-6jhjFPx5A" type="State" element="_UkOEwJ6jEeGR-6jhjFPx5A">
@@ -61,7 +60,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_Ukqwup6jEeGR-6jhjFPx5A" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_UkqwsZ6jEeGR-6jhjFPx5A" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_Ukqwsp6jEeGR-6jhjFPx5A"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_Ukqwu56jEeGR-6jhjFPx5A"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Ukqws56jEeGR-6jhjFPx5A" x="239" y="69" width="116" height="132"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_z1j2N56iEeGR-6jhjFPx5A"/>
