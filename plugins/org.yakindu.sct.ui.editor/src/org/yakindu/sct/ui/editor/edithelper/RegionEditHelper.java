@@ -35,7 +35,7 @@ public class RegionEditHelper extends AbstractEditHelper {
 		return new DestroyElementCommand(req) {
 			@Override
 			protected IStatus doExecute(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-				if (getElementToDestroy() instanceof State) {
+				if (getElementToDestroy() instanceof State && getElementToDestroy().eResource() != null) {
 					boolean success = DiagramPartitioningUtil.closeSubdiagramEditors((State) getElementToDestroy());
 					if (success)
 						return super.doExecute(monitor, info);

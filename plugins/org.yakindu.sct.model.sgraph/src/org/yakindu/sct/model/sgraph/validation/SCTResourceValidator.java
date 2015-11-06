@@ -46,7 +46,8 @@ public class SCTResourceValidator extends AbstractDeclarativeValidator {
 		for (Map.Entry<SpecificationElement, Collection<Diagnostic>> entry : resource.getLinkingDiagnostics().asMap()
 				.entrySet()) {
 			for (Diagnostic diag : entry.getValue()) {
-				error(diag.getMessage(), entry.getKey(), null, -1);
+				if (entry.getKey().eResource() != null)
+					error(diag.getMessage(), entry.getKey(), null, -1);
 			}
 		}
 	}
