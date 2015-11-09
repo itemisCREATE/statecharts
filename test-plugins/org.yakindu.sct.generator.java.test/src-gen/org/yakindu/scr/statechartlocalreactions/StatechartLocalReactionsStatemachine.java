@@ -127,6 +127,10 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 		return true;
 	}
 
+	private boolean check__lr1() {
+		return sCInterface.getMyInt() == 100;
+	}
+
 	private boolean check_main_region_S1_tr0_tr0() {
 		return true;
 	}
@@ -137,6 +141,10 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 
 	private void effect__lr0() {
 		sCInterface.setMyInt(sCInterface.getMyInt() + 1);
+	}
+
+	private void effect__lr1() {
+		sCInterface.setMyInt(0);
 	}
 
 	private void effect_main_region_S1_tr0() {
@@ -237,12 +245,20 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	private void react_main_region_S1() {
 		effect__lr0();
 
+		if (check__lr1()) {
+			effect__lr1();
+		}
+
 		effect_main_region_S1_tr0();
 	}
 
 	/* The reactions of state S2. */
 	private void react_main_region_S2() {
 		effect__lr0();
+
+		if (check__lr1()) {
+			effect__lr1();
+		}
 
 		effect_main_region_S2_tr0();
 	}
