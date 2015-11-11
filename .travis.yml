@@ -27,7 +27,7 @@ before_install:
 - sh -e /etc/init.d/xvfb start - sleep 10
 script:
 - cd releng/org.yakindu.sct.releng
-- mvn clean verify -P${TARGET}
+- mvn clean verify -P$TARGET
 - cd ../org.yakindu.sct.repository/target
 - zip -r updatesite.zip repository
 - cd $TRAVIS_BUILD_DIR
