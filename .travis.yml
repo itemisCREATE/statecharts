@@ -15,6 +15,7 @@ env:
   matrix:
   - TARGET=Mars.target
   - TARGET=Luna.target
+  - TARGET=Neon.target
 before_script:
  - mkdir gtest 
  - cd gtest
