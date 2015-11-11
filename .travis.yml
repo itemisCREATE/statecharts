@@ -12,6 +12,7 @@ env:
   global:
   - DISPLAY=:99.0
   - GTEST_DIR=${TRAVIS_BUILD_DIR}/gtest
+  matrix:
   - TARGET=Mars.target
   - TARGET=Luna.target
 before_script:
