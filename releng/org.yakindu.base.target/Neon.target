@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="Neon (SCT)" sequenceNumber="25">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.platform.ide" version="4.6.0.I20151029-1100"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.6milestones"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.jdt.feature.group" version="3.12.0.v20150916-2000"/>
+<unit id="org.eclipse.emf.compare.diagram.papyrus.feature.group" version="3.2.0.201509300604"/>
+<unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.9.0.201505312221"/>
+<unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.2.0.201509300604"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.12.0.v20150928-0952"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.9.0.v201509281643"/>
+<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.9.0.201506060219"/>
+<repository location="http://download.eclipse.org/releases/neon"/>
+</location>
+</locations>
+</target>
