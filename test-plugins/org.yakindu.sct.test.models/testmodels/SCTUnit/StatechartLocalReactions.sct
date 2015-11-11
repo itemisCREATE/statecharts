@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_RFTg0In9EeGKqoh-gt8EXQ" specification="interface:&#xD;&#xA;var myInt : integer&#xD;&#xA;internal:&#xD;&#xA;oncycle / myInt+=1&#xD;&#xA;" name="StatechartLocalReactions">
+  <sgraph:Statechart xmi:id="_RFTg0In9EeGKqoh-gt8EXQ" specification="interface:&#xD;&#xA;var myInt : integer&#xD;&#xA;&#xD;&#xA;internal:&#xD;&#xA;&#xD;&#xA;oncycle / myInt+=1&#xD;&#xA;[myInt == 100] / myInt = 0&#xD;&#xA;" name="StatechartLocalReactions">
     <regions xmi:id="_RFWkIon9EeGKqoh-gt8EXQ" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_RGUNcIn9EeGKqoh-gt8EXQ">
         <outgoingTransitions xmi:id="_RGfMkYn9EeGKqoh-gt8EXQ" target="_RGZtAYn9EeGKqoh-gt8EXQ"/>
