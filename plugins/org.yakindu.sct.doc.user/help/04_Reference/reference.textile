@@ -128,8 +128,6 @@ event addReal : real
 event checkValidity : boolean
 event stringEvent : string
 event voidEvent : void
- 
-
 h3(#Expressions). Expressions
 
 Expressions in SCT are similar to expressions in other programming languages. The language provides operators for logical expressions, number arithmetic, bitwise arithmetic, and bit shifting.
@@ -219,7 +217,6 @@ The language allows to define unique namespaces which can be used to qualify ref
 
 bc(prettyprint).. 
 namespace trafficlights
-
 p. ==<!-- End stext_keyword_namespace -->==
 ==<!-- Start stext_keyword_interface -->==
 
@@ -227,13 +224,11 @@ h4(#interfacescope). Interface scope
 
 Declarations in the interface scope are externally visible. They can be shared within the environment.
 
-
 bc(prettyprint).. 
 interface NamedInterface:
 in event event1
 out event event3 : integer
 var variable1 : integer
-
 p. ==<!-- End stext_keyword_interface -->==
 ==<!-- Start stext_keyword_internal -->==
 
@@ -249,7 +244,6 @@ local event localEvent2
 operation localOperation (int1 : integer, int2 : integer): integer
 localEvent2 / raise NamedInterface.event3 : 
 localOperation(valueof(localEvent) , NamedInterface.variable1)
-
 p. ==<!-- End stext_keyword_internal -->==
 
 h3(#Declarations). Declarations
@@ -276,9 +270,7 @@ p. A local event can have a value assignment:
 bc(prettyprint).. 
 internal:
 event localEvent1: integer = 25
-
 p. ==<!-- End stext_keyword_event -->==
-
 ==<!-- Start stext_keyword_var -->==
 
 h3(#Variables). Variables
@@ -295,9 +287,7 @@ p. Variables can be referenced by the environment.
 
 bc(prettyprint).. 
 var external variable3: integer = 34
-
 p. ==<!-- End stext_keyword_var -->==
-
 ==<!-- Start stext_keyword_const -->==
 
 h3(#Constants). Constants
@@ -306,7 +296,6 @@ Variables can be immutable. For this special variable the keyword @const@ is use
 
 bc(prettyprint).. 
 const variable1: real
-
 p. ==<!-- End stext_keyword_const -->==
 
 h3(#ReactionTriggers). Reaction Triggers
@@ -480,7 +469,6 @@ p. A local reaction can have a priority value. The latter is defined by appendin
 bc(prettyprint#GeneratorFeatures).. 
 localEvent2 / NamedInterface.variable2 += 3; #1
 localEvent3 / NamedInterface.variable4 += 2.0; #2
-
 h2. SGen generator features
 
 All generators can be customized by a generator model. This is a textual model in a file, specifying generator features, i.e. the outlet path. The following screenshot shows an sample configuration for the Java code generator. 
@@ -565,7 +553,6 @@ bc(prettyprint)..
 feature Debug {
 	dumpSexec = true
 }
-
 p. ==<!-- End sgen_feature_debug -->==
 
 h2(#JavaGeneratorFeatures). Java generator features
@@ -632,7 +619,6 @@ feature GeneralFeatures {
 	RuntimeService = true
 	TimerService = true
 }
-
 p. ==<!-- End sgen_feature_generalfeatures -->==			
 
 
@@ -734,7 +720,6 @@ feature Generator {
 	generatorProject = "org.yakindu.sct.mygenerator"
 	generatorClass = "org.yakindu.sct.MyGenerator"
 }
-		
 p. ==<!-- End sgen_feature_generator -->==
 
 h3(#ExecutingacustomXpandcodegenerator). Executing a custom Xpand code generator
@@ -813,7 +798,6 @@ public interface IStatemachine {
 	*/
 	public void runCycle();
 }
-
 h5. Fundamental statechart methods
 
 The generated code contains fundamental methods to initialize, enter, and exit a state machine, as well as a method to start a run-to-completion step.
@@ -834,16 +818,11 @@ The @IStatemachine@ interface specifies the four methods @init()@, @enter()@, @e
 ## Execute entry actions of the new state.
 # Clear list of incoming events.
 
+==<!-- h5. Variable and event access -->==
 
-==<!--
-h5. Variable and event access
+==<!-- Do we need some equivalent to the C section here? Here's the C text: -->==
 
-Do we need some equivalent to the C section here?
-
-Here's the C text:
-
-The getters and setters for each variable and event are also contained in the header file. The method names are matching the following pattern: _statechart_name_<code>Iface</code>_interface_name_@_@[ <code>set</code> | <code>get</code> | <code>raise</code> ]@_@[ _variable_name_ | _event_name_ ]. For example, the getter of the variable _red_ of the _pedestrian_ interface is named @trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle)@.
--->==
+==<!-- The getters and setters for each variable and event are also contained in the header file. The method names are matching the following pattern: _statechart_name_<code>Iface</code>_interface_name_@_@[ <code>set</code> | <code>get</code> | <code>raise</code> ]@_@[ _variable_name_ | _event_name_ ]. For example, the getter of the variable _red_ of the _pedestrian_ interface is named @trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle)@. -->==
 
 h4. Timed state machines
 
@@ -1023,12 +1002,11 @@ public class TimeEvent {
 p. A @TimeEvent@ holds a reference to the state machine it belongs to as well as a flag telling if the time event should be raised only once or periodically. The timer service implementation needs these information to properly raise the time event on the associated state machine. The _index_ attribute is used by the timed state machine internally.
 
 
-h4. Default implementation of @ITimerService@
+h4. Default implementation of ITimerService
 
 The Java code generator generates a default implementation of the @ITimerService@ interface if the _TimerService_ feature in the SGen model is set to _true_. This implementation is based on @java.util.Timer@ and @java.util.TimerTask@ and should be compatible with the Oracle JVM or the OpenJDK JVM.
 
 bc(prettyprint).. 
-
 package org.yakindu.sct.examples.trafficlight.cyclebased;
 
 import java.util.HashMap;
@@ -1118,7 +1096,6 @@ public interface IDefaultSMStatemachine extends IStatemachine {
 		public boolean getA();
 		public void setA(boolean value);
 	}
-
 p. The anonymous interface in a statechart is generated as the Java interface @SCInterface@. An incoming event _evA_ is generated as the raise method @raiseEvA(boolean value)@. Since the event is of type boolean the method has a boolean parameter. For an outgoing event _evB_ the methods @isRaisedEvB()@ and @getEvBValue()@ are generated. The former can be used to determine whether the event has already been raised by the state machine or not. The latter serves to query the boolean value of the event. For variables, the code generator creates getter and setter methods. Additionally, the enclosing interface contains getter methods to acquire nested interfaces.
 
 The nesting interface is implemented by the state machine itself. Each nested interface is implemented as an internal class. The nesting class holds an instance of each nested interface implementation and provides them via getter methods. Have a look at the code snipped generated from the unnamed default interface implementation:
@@ -1202,7 +1179,7 @@ h4(#JavaInterfaceObservers). Interface observers
 
 If the general feature _InterfaceObserverSupport_ is enabled in the SGen model, the generated interfaces will support the registration of observers:
 
-bc(prettyprint)..
+bc(prettyprint).. 
 public interface IDefaultSMStatemachine extends IStatemachine {
 
 	public interface SCInterface {
@@ -1250,7 +1227,6 @@ public interface IDefaultSMStatemachine extends IStatemachine {
 
 	public SCInterface getSCInterface();
 }
-
 p. An additional interface @SCInterfaceOperationCallback@ specifying the method @myOperation(int param1, boolean param2)@ has been generated. This interface has to be implemented, and an instance of the implementing class has to be provided to the state machine via the @setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback)@ method, so that the state machine can use it.
 
 bc(prettyprint).. 
@@ -1305,7 +1281,7 @@ public void runTrafficLight() {
 }
 p. This method sets up the state machine and creates the GUI content. In a while loop it reads the content of the state machine and repaints the GUI. If the user exits the GUI shell, the loop terminates and the state machine is torn down. The really interesting methods are @setUpAndRunStatemachine()@, @readStatemachineOutput@ and @tearDownStatemachine()@:
 
-bc(prettyprint)..
+bc(prettyprint).. 
 protected void setUpAndRunStatemachine() {
 
 	statemachine = new TrafficLightWaitingStatemachine();
@@ -1319,7 +1295,7 @@ p. First a new instance of the generated state machine is created. Since the tra
 
 Finally the state machine is passed to the runtime service. This service executes the @runCycle()@ method of the state machine every 100 ms, that is the state machine executes a run-to-completion step every 100 ms.
 
-bc(prettyprint)..
+bc(prettyprint).. 
 protected void readStatemachineOutput() {
 	trafficLightFigure.setRed(statemachine.getSCITrafficLight()
 			.getRed());
@@ -1338,7 +1314,7 @@ p. The generated code contains getters and setters for each variable and event. 
 
 Hint: When outgoing events are raised within the state machine, they remain active until the next run-to-completion step is started.
 
-bc(prettyprint)..
+bc(prettyprint).. 
 @Override
 protected void tearDownStatemachine() {
 	// End TimerHandler and RuntimeService.
@@ -1351,13 +1327,11 @@ h3(#SpecC). Specifications of C code
 
 You can checkout the C sample project _"org.yakindu.examples.c.trafficlight":http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/examples_ from the "Yakindu Google Code repository":http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk. The C example contains statechart, SGen model, graphical widgets, and some glue code to connect the generated code with the widgets. The graphical widgets are based on Qt.
 
-To execute the C example, run the file _org_yakindu_sct_examples_c_trafficlight_ as "Local C/C++ application" from the Eclipse _Run As_ context menu.
+To execute the C example, run the file _org_yakindu_sct_examples_c_trafficlight_ as _Local C/C++ application_ from the Eclipse _Run As_ context menu.
 
 h4(#CGeneratedCode). Generated code files
 
-==<!--
 You will find the generated code in the _src-gen_ folder of the traffic light example.
--->==
 
 The C code generator generates three header files. The first one is _sc_types.h_:
 
@@ -1529,7 +1503,6 @@ extern sc_boolean trafficLightWaiting_isActive(TrafficLightWaiting* handle, Traf
 #endif 
 
 #endif /* TRAFFICLIGHTWAITING_H_ */
-
 p. Within this header file an @enum@ containing the state names is defined as well as data structures for each of the statechart's interfaces. Additionally a structure for the statechart's time events is defined. The interfaces' and time events' data structures are nested into the parent structure @TrafficLightWaiting@. The client has to allocate this structure. It is a common parameter of most methods the statechart defines. Below this structure is called the _statechart data structure_.
 
 h5. Fundamental statechart methods
@@ -1538,11 +1511,12 @@ The generated code contains fundamental methods to initialize, enter, and exit a
 
 In the header file the method names are made up of the statechart name followed by the name of the respective functionality. For example, the methods of the traffic light example are generated as follows:
 
-bc(prettyprint)..
-@extern void trafficLightWaiting_init(TrafficLightWaiting* handle);@
-@extern void trafficLightWaiting_enter(TrafficLightWaiting* handle);@
-@extern void trafficLightWaiting_exitTrafficLightWaiting* handle);@
-@extern void trafficLightWaiting_runCycle(TrafficLightWaiting* handle);@
+bc(prettyprint).. 
+extern void trafficLightWaiting_init(TrafficLightWaiting* handle);
+extern void trafficLightWaiting_enter(TrafficLightWaiting* handle);
+extern void trafficLightWaiting_exitTrafficLightWaiting* handle);
+extern void trafficLightWaiting_runCycle(TrafficLightWaiting* handle);
+p. 
 
 * The @init()@ method is used to initialize the statechart data structure right after its instantiation. Variables are initialized to their respective default values. If the statechart defines initialized variables, these initializations are also done in the @init()@ method.
 * The @enter()@ method must be called to enter the state machine. It brings the state machine to a well-defined state.
@@ -1560,7 +1534,7 @@ bc(prettyprint)..
 
 h5. Variable and event access
 
-The getters and setters for each variable and event are also contained in the header file. The method names are matching the following pattern: _statechart_name_<code>Iface</code>_interface_name_@_@[ <code>set</code> | <code>get</code> | <code>raise</code> ]@_@[ _variable_name_ | _event_name_ ]. For example, the getter of the variable _red_ of the _pedestrian_ interface is named @trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle)@.
+The getters and setters for each variable and event are also contained in the header file. The method names are matching the following pattern: _statechart_name_<code>Iface</code>_interface_name_@_@[ <code>set</code> | <code>get</code> | <code>raise</code> ]@_@[ _variable_name_ | _event_name_ ]. For example, the getter of the _red_ variable of the _pedestrian_ interface is named @trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle)@.
 
 h4. Timed state machines
 
@@ -1713,7 +1687,6 @@ void trafficLightWaiting_setTimer(const sc_eventid evid,
 void trafficLightWaiting_unsetTimer(const sc_eventid evid) {
 	timer->unsetTimer(evid);
 }
-
 p. First an instance of the statechart data structure is created and initialized by the @trafficLightWaiting_init(&handle)@ method. The next step instantiates the timer. The class @TrafficLightTimer@ represents an implementation of a timer service and uses the timer fuctionality of the Qt framework. The @TrafficLightRunner@ is a runtime service which executes a run-to-completion step of the state machine every 100 ms. The runner class and the GUI are wired in the class @org_yakindu_sct_examples_c_trafficlight@:
 
 bc(prettyprint).. 
@@ -1756,7 +1729,6 @@ void org_yakindu_sct_examples_c_trafficlight::update(
 org_yakindu_sct_examples_c_trafficlight::~org_yakindu_sct_examples_c_trafficlight() {
 
 }
-
 h3(#CppSpec). Specifications of C++ code
 
 You can checkout the C++ sample project _"QtTrafficLightCpp":http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/examples_ from the "Yakindu Google Code repository":http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk. The C++ example contains statechart, SGen model, graphical widgets, and some glue code to connect the generated code with the widgets. The graphical widgets are based on Qt.
@@ -1811,7 +1783,6 @@ class StatemachineInterface {
 inline StatemachineInterface::~StatemachineInterface() {}
 
 #endif /* STATEMACHINEINTERFACE_H_ */
-
 h5. Fundamental statechart methods
 
 The generated code contains fundamental methods to initialize, enter, and exit a state machine, as well as a method to start a run-to-completion step.
@@ -1833,15 +1804,11 @@ The @StatemachineInterface@ interface specifies the four functions @init()@, @en
 # Clear list of incoming events.
 
 
-==<!--
-h5. Variable and event access
+==<!-- h5. Variable and event access -->==
 
-Do we need some equivalent to the C section here?
+==<!-- Do we need some equivalent to the C section here? Here's the C text: -->==
 
-Here's the C text:
-
-The getters and setters for each variable and event are also contained in the header file. The method names are matching the following pattern: _statechart_name_<code>Iface</code>_interface_name_@_@[ <code>set</code> | <code>get</code> | <code>raise</code> ]@_@[ _variable_name_ | _event_name_ ]. For example, the getter of the variable _red_ of the _pedestrian_ interface is named @trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle)@.
--->==
+==<!-- The getters and setters for each variable and event are also contained in the header file. The method names are matching the following pattern: _statechart_name_<code>Iface</code>_interface_name_@_@[ <code>set</code> | <code>get</code> | <code>raise</code> ]@_@[ _variable_name_ | _event_name_ ]. For example, the getter of the variable _red_ of the _pedestrian_ interface is named @trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle)@. -->==
 
 h4. Timed state machines
 
@@ -2019,32 +1986,9 @@ p. The name of the default, unnamed statechart interface class is generated as @
 
 The value of an event can be accessed only if the event has been processed in a run-to-completion step. Otherwise the event could contain an illegal value.
 
-==<!--
-h4(#CppInterfaceObservers). Interface observers
+==<!-- h4(#CppInterfaceObservers). Interface observers -->==
 
->>> In Java we have this chapter. What about a C++ equivalent? <<<
-
-If the general feature _InterfaceObserverSupport_ is enabled in the SGen model, the generated interfaces will support the registration of observers:
-
-bc(prettyprint)..
-public interface IDefaultSMStatemachine extends IStatemachine {
-
-	public interface SCInterface {
-		public void raiseEvA(boolean value);
-		public boolean isRaisedEvB();
-		public int getEvBValue();
-		public boolean getA();
-		public void setA(boolean value);
-		public List<SCInterfaceListener> getListeners();
-	}
-
-	public interface SCInterfaceListener {
-		public void onEvBRaised(int value);
-	}
-
-	public SCInterface getSCInterface();
-}
--->==
+==<!-- In Java we have such a chapter. What about a C++ equivalent? -->==
 
 h4(#CppOperationCallbacks). Operation callbacks
 
@@ -2065,7 +2009,7 @@ class DefaultSCI_OCB {
 void setDefaultSCI_OCB(DefaultSCI_OCB* operationCallback);
 p. An additional interface @DefaultSCI_OCB@ with the pure virtual function @myOp(sc_integer param1, sc_boolean param2)@ has been generated. This interface has to be implemented, and an instance of the implementing class has to be provided to the state machine via the @setDefaultSCI_OCB(DefaultSCI_OCB* operationCallback)@ function, so that the state machine can use it.
 
-bc(prettyprint)..
+bc(prettyprint).. 
 #include "default.h"
 
 sc_integer Default::DefaultSCI_OCB::myOp(sc_integer param1, sc_boolean param2) {
@@ -2083,10 +2027,8 @@ int main(int argc, char *argv[]) {
     defaultSM->enter();
     defaultSM->runCycle();
 }
+p. 
 
-==<!--
-h4(#CppIntegratingGeneratedCode). Integrating generated code
+==<!-- h4(#CppIntegratingGeneratedCode). Integrating generated code -->==
 
-This chapter is available for Java and C, but missing for C++.
-
--->==
+==<!-- This chapter is available for Java and C, but missing for C++. -->==
