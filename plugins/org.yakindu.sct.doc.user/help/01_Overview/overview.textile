@@ -1,14 +1,14 @@
 h1. Overview
 
-h2(#WhataretheYAKINDUStatechartTools2). What are the YAKINDU Statechart Tools 2
+h2(#WhatareYAKINDUStatechartTools2). What are YAKINDU Statechart Tools 2?
 
-The statechart tools are one central part of YAKINDU: the modular toolkit for model driven development of embedded systems. It is based on the open source development platform Eclipse. The YAKINDU Statechart tools provide the following tools to deal with state machine diagramms:
+The statechart tools are a central part of YAKINDU: the modular toolkit for model-driven development of embedded systems. It is based on the open-source development platform Eclipse. YAKINDU Statechart Tools provide the following tools to deal with state machine diagrams:
 
-* *YAKINDU SCT editor* to create and edit state charts
-* *YAKINDU simulator* to simulate the behavior of state charts
-* *YAKINDU Xpand generator projects* to create a transformation of the state chart in Xpand
+* *YAKINDU SCT Editor* to create and edit statecharts
+* *YAKINDU Simulator* to simulate the behavior of statecharts
+* *YAKINDU Xpand generator projects* to create a transformation of statecharts in Xpand
 * *YAKINDU Xtend/Java generator projects* to create a transformation in Xtend/Java
-* integrated validation
+* *Integrated Validator*
 
 The following graph shows these features and their relation to each other:
 
@@ -17,11 +17,11 @@ The following graph shows these features and their relation to each other:
 
 h2(#WhoisbehindYAKINDUStatechartTools2). Who is behind YAKINDU Statechart Tools 2?
 
-The main part of YAKINDU SCT 2 is an open source project ("www.yakindu.org":http://www.yakindu.org ). Most of the developers work for itemis, a well known consulting company specialized on model based development.  
+The main part of YAKINDU SCT 2 is an open-source project ("http://www.yakindu.org/":http://www.yakindu.org/ ). Most developers work for itemis, a well-known consulting company specialized on model-based development.
 
-You may ask: Where does the money for Open-Source development come from? Well, we provide professional services around Yakindu. Be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages. We do not only know the framework very well but we are also experts in programming and domain-specific language design. If you need an advice get in contact with us ("www.yakindu.de":http://www.yakindu.de ). 
+You may ask: Where does the money for open-source development come from? Well, we are providing professional services around Yakindu, be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages, you name it. We do not only know the framework very well but we are also experts in programming and domain-specific language design. If you need an advice get in contact with us ("http://www.yakindu.de/":http://www.yakindu.de/ ). 
 
 
-h2(#WhousestheYAKINDUStatechartTools2). Who uses the YAKINDU Statechart Tools 2?
+h2(#WhoisusingtheYAKINDUStatechartTools2). Who is using YAKINDU Statechart Tools 2?
 
-p(#Statechartelements).Initially the YAKINDU SCT 2 were designed for the embedded systems industry: automotive, system controls, vending machines etc. ut it brings benefit to everyone who needs to design, simulate and develop behavior. People can use the YAKINDU SCT 2 to generate Java, C, or C++.
+Initially the YAKINDU SCT 2 were designed for the embedded systems industry: automotive, system controls, vending machines etc. ut it brings benefit to everyone who needs to design, simulate and develop behavior. People can use the YAKINDU SCT 2 to generate Java, C, or C++.
