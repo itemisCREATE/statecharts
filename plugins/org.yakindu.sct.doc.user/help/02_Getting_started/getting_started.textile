@@ -1,81 +1,108 @@
 h1(#Gettingstartedtutorial). Getting started
 
-h3. Installation
+h2(#Installation). Installation
 
-For a new installation
-* choose Eclipse menu Help/Install New Software ...
-* press the 'add' button in the top right corner of the installation wizard to add http://updates.yakindu.org/sct/luna/releases as update site
-* select all the listed features
-* and follow the installation wizzard 
-* For updating the installed plugins select Help/Check for Updates...
+For a new installation:
+* In Eclipse, select menu entry _Help → Install New Software ..._.
+* Click the _add_ button in the top-right corner of the installation wizard to add http://updates.yakindu.org/sct/luna/releases as update site.
+* Select all listed features.
+* Follow the installation wizard. 
+* To update the installed plugins, select _Help → Check for Updates_.
 
-After installing the plugins a user guide is included in the Eclipse help. Choose Help/Help Contents from the menue. A browser window will pop up and you will find the user guide as an entry on the left side overview.
+After having installed the plugins a user guide is included in the Eclipse help. Select _Help → Contents_ from the Eclipe menu to display a browser window showing the user guide as an entry in the overview on the left.hand side.
 
-When the installation finished the wizard will ask to reopen Eclipse. The restart is important to make the newly installed software work correctly.
+When the installation has finished the wizard will ask whether it should restart Eclipse. This restart is important to make the newly-installed software work correctly.
 
-h3(Tutorial). Introduction
+h2(Tutorial). Introduction
 
-p(#Tutorial). This tutorial will introduce the open source project Yakindu Statechart Tools (SCT).YAKINDU Statechart Tools provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of statecharts. It is an easy to use tool that features sophisticated graphical state chart editing, validation and simulation of statecharts as well as code generation.
+p(#Tutorial). This tutorial will introduce the open-source project Yakindu Statechart Tools (SCT). YAKINDU Statechart Tools provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of state machines or statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation.
 
-In this tutorial you will learn how to create a new statechart model, execute it with the simulation engine and generate a fully working Java statechart implementation from it. Note that this tutorial will not explain statecharts in general, so you should familiarize yourself with the basic concepts of state machines first.[1] Before we get started, make sure you have Yakindu Statechart Tools properly installed. For installation instructions see chapter "Installation":getting_started.html .
+In this tutorial you will learn how to create a new statechart model, execute it using the simulation engine and generate Java code to get a fully-working statechart implementation. Please note that this tutorial will not explain statecharts in general, so you should familiarize yourself with the basic concepts of state machines first.[1] Before we get started, make sure you have Yakindu Statechart Tools properly installed. For installation instructions see chapter "Installation":getting_started.html#Installation.
 
-h3. CallHandling example explained
+h2. CallHandling example explained
 
-p(#Prepareaproject). The example application we will create during this tutorial is a system for handling of incoming phone calls. After start up, the system is in an Idle state and waits for incoming calls. If a call comes in, the user can either accept the call and open a connection or dismiss it. If the connection is opened, the system tracks the duration of the call and waits for the user to hang up. After hang up, the system displays the total time of call and returns to its idle state. The complete statechart model is shown below:
+p(#Prepareaproject). During this tutorial we will create a system for handling incoming phone calls as a sample application. After startup, the system is in an idle state and is waiting for incoming calls. When a call comes in, the user can either accept the call or dismiss it. If the users accepts the call and opens a connection, the system is tracking the duration of the call and is waiting for the user to hang up. After hanging up, the system displays the total time of call and then returns to its idle state. The complete statechart model is shown below:
 
 !(img-rounded shadowed)images/example.png!
 
-h3. Prepare a project
+h2. Preparing a project
 
-p(#Createastatechartmodel). The first step is to create a new Project by choosing _File -> New -> Project...._ The dialog offers a couple of different project types. Since we want to generate Java code later on, choose _Java -> Java Project_ from the wizard menu. Give the project a meaningful name, i.e. *CallHandling* and click finish. It is good practice to separate your models from the source code. Therefore, create a new folder to the projects root by choosing _File -> New -> Folder_ from the projects context menu and call it *model*.
+p(#Createastatechartmodel). The first step is to create a new Eclipse project by selecting _File → New → Project…_. A wizard opens, showing a couple of different project types. Since we want to generate Java code from our statechart model later on, select _Java → Java Project_ from the wizard menu. Give the project a meaningful name, e.g. *CallHandling* and click _Finish_. As a result, Eclipse creates the project and establishes a folder _src_ inside of it which is indended for any Java code.
 
-h3. Create a statechart model
+However, we won't deal with Java programming right now, but rather create our statechart model. It is good practice to keep models and source code separate. So, let's create a new folder for the model. Right-click on the project's root, i.e. on *CallHandling*, then select _File → New → Folder_ from the context menu. Give the model folder a reasonable name, e.g. *model*, then click _Finish_.
 
-p(#UsetheEditor). Next, create a new statechart model by choosing _File -> New -> Other -> Yakindu -> YAKINDU Statechart Model_ and name it *CallHandling.sct*. The wizard asks for the parent folder and we choose *CallHandling/model*. Name the File *CallHandling.sct* and finish the wizard. Last, confirm the perspective switch with *Yes*. The statechart editor opens and show the definition of a very simple statechart.
+h2. Creating a statechart model
 
-h3. Use the Editor
+p(#UsetheEditor). Next, create the statechart model itself:
+* Right-click the *model* folder. The context menu opens.
+* Select _File → New → Other_. The _New_ wizard opens.
+* In the _New_ wizard, select _YAKINDU SCT → Statechart model_.
+* Click _Next_.
+* In the following dialog, the wizard asks for the name the of the model file and for the directory it should be created in. Let's choose *CallHandling.sct* as the file name and *CallHandling/model* as the directory name, i.e. the directory *model* inside the Eclipse project *CallHandling*.
+* Click _Finish_.
+* Answer the question regarding the perspective switch with _Yes_.
+* The statechart editor opens and shows the definition of a very simple statechart.
 
-YAKINDU statecharts are self-contained - they not only contain the definition of states and state transitions, but also the definition of the statechart interfaces. To define those interfaces, open the direct edit mode by double clicking onto the statechart definition block on the left and enter the following definition:
+h2. Using the editor
 
-bc(prettyprint).  interface User:
-in event accept_call
-in event dismiss_call
+h3. Creating interfaces
 
-bc(prettyprint).  interface Phone:
-var duration : integer
-in event incoming_call
+YAKINDU statecharts are self-contained – they not only contain the definition of states and state transitions, but also the definition of the statechart interfaces. To define those interfaces, start the direct editing mode by double-clicking onto the statechart definition block on the left-hand side. Enter the following definition:
+
+bc(prettyprint). interface User:
+    in event accept_call
+    in event dismiss_call
+
+bc(prettyprint). interface Phone:
+    var duration : integer
+    in event incoming_call
 	
-Tip:  The statechart Editor offers code completion for all textual parts. To open the content assist press *CTRL + space*. For all keywords, a detailed description with example code shows up in the help hover besides the content assist window.
+Tip: The statechart editor's content assist offers code completion for all textual parts. To open the content assist, press @[Ctrl+Space]@. For all keywords, a detailed description with sample code shows up in the help hover besides the content assist window.
 !images/ctrlspace.png! 
 
-The example code contains two interfaces and one internal block. The _User_ interface defines the communication of the system with the user. It consists of the two in events _dismiss_call_ and _accept_call_. The _Phone_ interface defines the communication with the underlying hardware. It provides the in event _incoming_call_ as well as a variable _duration_ of type _integer_.
+The sample code contains two interfaces and one internal block. The _User_ interface defines the communication of the system with the user. It consists of the two in events _dismiss_call_ and _accept_call_. The _Phone_ interface defines the communication with the underlying hardware. It provides the in event _incoming_call_ as well as a variable _duration_ of type _integer_.
 
-Next, give the initially created state the name *Idle* by double clicking on the name label. The error marker will disappear. The validation of statecharts includes syntax and semantic checks of the complete statechart. Examples of validations are the detection of unreachable states, dead ends, and references to unknown events. These validation constraints are live checked during editing. In case a constraint is violated, this is visualized by warning and error markers, which are attached to the faulty model elements. By this the user gets direct and immediate feedback on the validation state of the statecharts
+h3. Creating states
 
-Now, create the three states *Incoming Call*, *Active Call* and *Dismiss Call* by dragging _States_ from the palette on the right onto the main region. Connect them with the _Transition_ tool from the palette as shown in the example model above. After each transition, select the appropriate event (use the content assist Ctrl + space to navigate from interfaces to events) in the direct editing pop up.
+Next, rename the initially created state to *Idle* by double-clicking on the name label and entering the new name. The error marker will disappear.
 
-Finally, create the internal behavior for the states *Active Call* and *Dismiss Call*. This can either be done by opening the direct editing text box via double click or using the property view on the bottom, that supports code completion, syntax highlighting and validation, too.
+Statechart validation includes syntactical and semantical checks of the whole statechart. For examples, a statechart is checked for unreachable states, dead ends, or references to unknown events. These validation constraints are checked during editing. In case any constraints are violated, warning or error markers will be shown, attached to the faulty model elements. Thus the user receives direct and immediate feedback on the validation state of his statecharts.
 
-If everything went well, there shouldn't be any error markers and your example should look like the one in the following screenshot:
+Now, create the three states *Incoming Call*, *Active Call* and *Dismiss Call* by dragging _States_ symbol from the palette on the right onto the main region thrice and naming the states appropriately.
+
+h3. Creating transitions
+
+Connect the states using the _Transition_ tool from the palette as shown in the sample model above. After creating a transition, select the appropriate event (use the content assist @[Ctrl+Space]@ to navigate from interfaces to events) in the direct editing pop-up.
+
+Finally, create the *Active Call* and *Dismiss Call* states' internal behavior. This can either be done by opening the direct editing text box via double-clicking or by using the property view at the bottom. The text box supports code completion, syntax highlighting and validation.
+
+If everything went well, the error markers should be gone. Your model should look like the one in the following screenshot:
 
 !(img-rounded shadowed)images/example_final.png!
 
-p(#Simulatingthemodel). If something went wrong, you can still download the example project "here":examples/CallHandling.zip . 
+p(#Simulatingthemodel). If something went wrong and you cannot eliminate the problem, you can download the sample project "here":examples/CallHandling.zip. 
 
-h3. Simulating the model
+h2. Simulating the model
 
-To start the simulation, select your model in the project explorer on the left and select _Run As -> Statechart Simulation_ from the context menu. The perspective is switched from *SC Modeling* to *SC Simulation*. The simulation perspective defines two additional views. The _Debug View_ on the top shows all running statechart instances and allows the selection of one. Note that SCT allows multiple execution of one statechart as well as parallel execution of different statecharts at the same time. 
-The _Simulation View_ on the right allows raising of events and inspection and modification of variables. 
-When the simulation starts, the *Idle* state becomes active since it is connected with the *Initial State*. This is illustrated by a red foreground color in the editor. Now, raise a event by clicking on the _incoming_call_ hyperlink in the _Simulation View_ on the right. This will trigger a state transition from *(#GenerateJavacode)Idle* to *Incoming Call*. Accept the call by raising the event _accept_call_. State *Active Call* becomes active and the value for duration in the _Simulation View_ increases every second. If you are done with your phone call, raise the _dismiss_call_ event. After 2 seconds, the system will return to its *Idle* State.
-If your statechart behaves as expected, we can now go one step further and generate code out of it. Therefore, stop the simulation by pressing the _Terminate_ button from the toolbar on the top.
+To start the dynamic simulation of your model, right-click on the model file *CallHandling.sct* in the Eclipse _Project Explorer_, then select _Run As → Statechart Simulation_ in the context menu.
 
-h3. Generate Java code
+The perspective changes from _SC Modeling_ to _SC Simulation_. The simulation perspective defines two additional views: The _Debug_ view at the top shows all running statechart instances and allows to select one of them. Please note that SCT allows multiple executions of the same statechart as well as parallel executions of different statecharts at the same time.7
 
-YAKINDU SCT includes code generators for Java and C out of the box. Our code generators follow a "code-only" approach and do not rely on any additional runtime library. The generated code provides a well-defined interface and can be integrated easily with any client code. In this tutorial we will generate Java code for our *CallHandling* example.
+You can use the _Simulation_ view on the right to raise events and to inspect and modify variables.
+ 
+When the simulation starts, the *Idle* state becomes active since it is connected to the *Initial State*. An active state is visualized by a red background color in the statechart view.
 
-For code generation, SCT uses a textual generator model called SGen. This model allows customization of the code generation process. To create a new SGen model select the model folder in the project explorer on the left, and select _New – Code Generator Model_ from the context menu. On the first wizard page, enter *CallHandling.sgen* as the file name and press next. On the second wizard page, select _Yakindu SCT Java Code Generator_ from the drop down menu on the top. In the statechart tree below, check the *CallHandling.sct* model and press Finish. The SGen Editor opens and show the following simple generator model:
+Now let's simulate an incoming call. Raise the associated event by clicking at the _incoming_call_ text formatted as a hyperling in the _Simulation_ view on the right. This event will trigger a state transition from *Idle* to *Incoming Call*. Accept the call by raising the _accept_call_ event. Another transition happens, and the state *Active Call* becomes active. For the duration of the call, the variable _duration_ in the _Simulation_ view is incremented every second. When you are done with your phone call, raise the _dismiss_call_ event. The state machine transitions to the *Dismiss Call* state, and two seconds later returns to its *Idle* state.
 
-bc(prettyprint).  
+If your statechart behaves as expected, we can go one step further now and generate code from it. Before doing so, stop the simulator by clicking at the little red terminate button in the toolbar at the top.
+
+h2. Generating Java source code
+
+YAKINDU SCT includes code generators for Java, C, and C++ out of the box. The code generators are following a "code-only" approach and do not need any additional runtime libraries. The generated code provides a well-defined interface and can be integrated easily with any client code. In this tutorial we will generate Java code representing our *CallHandling* example.
+
+For code generation, SCT uses a textual generator model called SGen. This model allows for customization of the code generation process. To create a new SGen model, select the model folder in the project explorer on the left, and select _New → Code Generator Model_ from the context menu. The _YAKINDU Generator Model_ wizard opens. On the first wizard page, enter *CallHandling.sgen* as the filename, then click _Next_. On the second wizard page, select _Yakindu SCT Java Code Generator_ from the _Generator_ drop-down menu at the top. In the statechart tree beneath, check the *CallHandling.sct* model, then click _Finish_. The SGen Editor opens and shows the following simple generator model:
+
+bc(prettyprint). 
 GeneratorModel for yakindu::java {
 	statechart CallHandling {
 		feature Outlet {
@@ -84,24 +111,25 @@ GeneratorModel for yakindu::java {
 		}
 	}
 }
- 
-_yakindu::java_  is the unique ID of the code generator.  This is followed by a reference to our *CallHandling* statechart model for that we want to generate code. Each statechart reference can contain different configuration features. The Outlet feature specifies the target project and folder for the generated artifacts.
- 
-Since we are using timed events with our _after_ and _every_ expression, we want the generater to provide us a default implementation for the Timer Service. Therefore, we add the following feature to our generator model
 
-bc(prettyprint).  
+In the listing above, @yakindu::java@ is the unique ID of the code generator. It is followed by a reference to the statechart model we want to generate code for, i.e. @CallHandling@. A statechart reference may contain various configuration features. The @Outlet@ feature specifies target project and folder for the generated artifacts.
+
+The model is using _after_ and _every_ expressions. That is, we are dealing with timed events and want the generater to provide us with a default implementation of a timer service. In order to achieve this, we have to add the following feature to the generator model:
+
+bc(prettyprint). 
 feature GeneralFeatures {
 	TimerService = true
-}		
+}
 
-The generator Model is executed by a builder. Thus, the artifacts are generated automatically if _Project > Build Automatically_ is checked. If you want to execute your generator model manually, select _Generate Statechart Artifacts_ from the Package Explorer’s context menu.
+The generator model is executed by a so-called Eclipse builder. That is, as long as _Project → Build Automatically_ is checked the artifacts are generated automatically with each model change. If you want to execute your generator model manually, select _Generate Statechart Artifacts_ from the @.sgen@ file's context menu in the project explorer.
 
-p(#Integrationwithclientcode). As a result, you should see a new folder *src-gen* in your project explorer on the left that contains the generated java artifacts. Add the generated artifacts to the Java Build Path by selecting _Build Path -> Use as source folder_ from the src-gen folders context menu. 
+p(#Integrationwithclientcode). As a result, you should see a new folder *src-gen* in the project explorer containing the generated Java artifacts. Add the generated artifacts to the Java build path by selecting _Build Path → Use as source folder_ from the *src-gen* folder's context menu.
 
-h3. Integration with client code
+h2. Integration with client code
 
-In the last step, we want to integrate the generated statechart implementation with some client code. Create a new class by selecting New -> Class from the context menu of the src folder in the project explorer. Give it a meaningful name, for example CallHandlingClient and hit finish.
- Next, copy the following code into your created class. 
+As the final step, we want to integrate the generated statechart implementation with some client code. Create a new class by selecting _New → Class_ in the context menu of the *src* folder. Give it a meaningful name, for example *CallHandlingClient*, then click _Finish_.
+
+Next, copy the following code into the created class:
 
 bc(prettyprint linenums). 
 1  import org.yakindu.scr.TimerService;
@@ -130,12 +158,18 @@ bc(prettyprint linenums).
 24  }
 
 
-Let's have a detailed look at the implementation. First, create a new instanceof your Statemachine by calling the default constructor. (line 5). Since we use timed events, the statechart implementation requires an implementation of ITimerService. Because of the TimerService feature that we added to the genmodel, the code generator creates default implementation that uses the java.util.Timer. We create a new instanceof of the default TimerService and set it to the statemachine. (line 6). The call of the enter method in line 8 enteres the statechart and activates the Idle state. For each interface created in the statechart specification block, a getter for this interface is generated. (getSCIPhone() and getSCIUser()). You can access all in events and variables via these interfaces. In line 10, the incoming call event is raised, that activates the Incoming Call state after the next runcycle is executed. (line 11). In line 13, we raise the accept call event via the user interface, that activates the Active Call State after the next runcycle. (line 17). From line 15 to line 18, the runcycle is executed periodically every 200ms. After that, the duration is printed to console. (line 19, 20). Finally, the event dismiss call is executed that activated the *(#Weblinks)Dimiss Call* state after the next runcycle. 
+Let's have a detailed look at the implementation.
 
-Finally, execute the code via Run As -> Java Application from the context menu. 
+* First, the code creates a new instance of the state machine by calling the default constructor of @CallHandlingStatemachine@ (line 5).
+* Since we use timed events, the statechart implementation requires an implementation of the @ITimerService@ interface. Since we added the @TimerService@ feature to the generator model, the code generator creates a default implementation that uses the @java.util.Timer@ class. A new instance of the default @TimerService@ is created and set to the state machine (line 6).
+* In line 8, @sm.enter()@ enters the statechart and – via the initial state – activates its *Idle* state.
+* For each interface in the statechart specification block, a getter method has been generated, here @getSCIPhone()@ and @getSCIUser()@. You can access all in events and variables via these interfaces. In line 10, the incoming call event is raised, activating the *Incoming Call* state after the next runcycle has been executed (line 11).
+* In line 13, we raise the _accept_call_ event via the _User_ interface. It activates the *Active Call* state after the next runcycle has been performed (line 17).
+* From line 15 to line 18, the runcycle is executed periodically every 200 milliseconds. After that, the duration is printed to console (lines 19 and 20). Finally, the _dismiss_call_ event  is raised, activating the *Dismiss Call* state after the next runcycle. 
+
+You can execute the client code via _Run As → Java Application_ from the class file's context menu.
 
 
 h2(#Overview). Weblinks
 
-fn1. "UML Statemachines":http://en.wikipedia.org/wiki/UML_state_machine
-
+fn1. "UML state machine":http://en.wikipedia.org/wiki/UML_state_machine
