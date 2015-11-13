@@ -27,7 +27,7 @@ p(#Prepareaproject). During this tutorial we will create a system for handling i
 
 h2. Preparing a project
 
-p(#Createastatechartmodel). The first step is to create a new Eclipse project by selecting _File → New → Project…_. A wizard opens, showing a couple of different project types. Since we want to generate Java code from our statechart model later on, select _Java → Java Project_ from the wizard menu. Give the project a meaningful name, e.g. *CallHandling* and click _Finish_. As a result, Eclipse creates the project and establishes a folder _src_ inside of it which is indended for any Java code.
+p(#Createastatechartmodel). The first step is to create a new Eclipse project by selecting _File → New → Project…_. A wizard opens, showing a couple of different project types. Since we want to generate Java code from our statechart model later on, select _Java → Java Project_ from the wizard menu. Give the project a meaningful name, e.g. *CallHandling* and click _Finish_. As a result, Eclipse creates the project and establishes a folder _src_ inside of it. This folder is indended for Java code.
 
 However, we won't deal with Java programming right now, but rather create our statechart model. It is good practice to keep models and source code separate. So, let's create a new folder for the model. Right-click on the project's root, i.e. on *CallHandling*, then select _File → New → Folder_ from the context menu. Give the model folder a reasonable name, e.g. *model*, then click _Finish_.
 

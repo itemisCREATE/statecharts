@@ -15,7 +15,7 @@ The YAKINDU SCT 2 meta model is designed similar to the UML statechart meta mode
 
 The model interpreter and different flavors of generated code are following these same core semantics.
 
-Please refer to the description of the "UML state machine":http://en.wikipedia.org/wiki/UML_state_machine for more details.
+Please refer to the Wikipedia article "UML state machine":http://en.wikipedia.org/wiki/UML_state_machine for more details.
 
 h3(#Regions). Regions
 
@@ -518,7 +518,7 @@ p. ==<!-- End sgen_feature_licenseheader -->==
 h4(#FunctionInlining). FunctionInlining
 
 The *FunctionInlining* feature enables the inlining of expressions instead of generating separate functions or methods. This might reduce the readability of the generated code, but increases performance, because less operation calls are necessary. 
-It is an *optinal* feature and has the following parameters:
+It is an *optional* feature and has the following parameters:
 
 # __inlineReactions__  (Boolean, optional): inlines the expression for reactions
 # __inlineEntryActions__  (Boolean, optional): inlines the expression for entry actions
