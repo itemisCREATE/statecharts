@@ -1,6 +1,86 @@
 h1(#Gettingstartedtutorial). Getting started
 
-h2(#Installation). Installation
+{toc}
+
+h2(#InstallingYakinduStatechartTools). Installing Yakindu Statechart Tools
+
+In order to start working with Yakindu Statechart Tools, you have to install the software on your computer. We are assuming you have downloaded the software package and you have stored it on your machine.
+
+Yakindu Statechart Tools is based on the Eclipse integrated development environment (IDE) and runs inside Eclipse. The installation process as described below will put a full-fledged Eclipse instance on your computer. It is comprised in the Yakindu Statechart Tools distribution file you downloaded. You will have to unpack and execute Eclipse in order to work with Yakindu Statechart Tools inside of it.
+
+The chapter "below":getting_started.html#InstallationOnLinux walks through the installation process on Linux machine. The installation procedures are quite similar on other computer architectures, like on a Mac or a Windows PC. They will be described later. If you are working with such a computer, please try to translate the Linux  
+
+h3(#InstallationOnLinux). Installation on Linux
+
+This chapter describes how to install Yakindu Statechart Tools on a Linux machine using a command-line tool. The installation doesn't require _root_ permissions.
+
+h4. Unpacking the downloaded file
+
+Choose a directory for Yakindu Statechart Tools (SCT) respectively Eclipse. The commands below assume you want to install the software in the _/my/software_ directory. Please modify the commands appropriately to suit your needs!
+
+Go to the installation directory:
+
+bc(prettyprint). 
+cd /my/software/
+
+Unpack the software distribution file. If the downloaded file is located in _/download/yakindu-sct-luna-R-linux-gtk-x86_64.tar.gz_, use the following command to unpack in the installation directory:
+
+bc(prettyprint). 
+gzip -dc /download/yakindu-sct-luna-R-linux-gtk-x86_64.tar.gz | tar xvfp -
+
+This will create a folder _eclipse_ in your installation directory, i.&nbsp;e. _/my/software/eclipse_, as shown in the image below:
+
+!(img-rounded shadowed)images/linux_install_010_eclipse_folder.png!
+
+The contents of the _eclipse_ folder looks like this:
+
+!(img-rounded shadowed)images/linux_install_020_eclipse_contents.png!
+
+There you are: You have installed the software. Now you should start Eclipse.
+
+h4. Starting Eclipse
+
+Start Eclipse by running the _eclipse_ executable.
+
+To do so, please enter the command
+
+bc(prettyprint). 
+eclipse/eclipse
+
+in your installation directory. Or issue the command
+
+bc(prettyprint). 
+/my/software/eclipse/eclipse
+
+if your command shell is in any other working directory.
+
+From a file browser, you can start Eclipse by clicking on the _eclipse_ symbol, shown as a gear-wheel in the sample screenshot above.
+
+While Eclipse is starting up, it is showing a splash screen:
+
+!(img-rounded shadowed)images/linux_install_030_eclipse_splash.png!
+
+Eclipse needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, Eclipse's _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please specify a new and empty one.
+
+In the example below, we chose the _/my/workspace_ directory for our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, Eclipse won't ask again for a workspace directory, but will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the Eclipse menu.)
+
+!(img-rounded shadowed)images/linux_install_040_eclipse_workspace_dialog.png!
+
+Click on the _OK_ button to proceed.
+
+On the first start, Eclipse presents a _Welcome_ window:
+
+!(img-rounded shadowed)images/linux_install_050_eclipse_welcome.png!
+
+You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions lead to the Eclipse workbench:
+
+!(img-rounded shadowed)images/linux_install_060_eclipse_workbench.png!
+
+This is your working environment now. Congratulations, you have just installed Eclipse properly!
+
+You can "proceed":getting_started.html#Introduction now to create your first Yakindu Statecharts Tools project.
+
+h3. Installing into an existing Eclipse instance
 
 For a new installation:
 * In Eclipse, select menu entry _Help → Install New Software ..._.
@@ -13,9 +93,9 @@ After having installed the plugins a user guide is included in the Eclipse help.
 
 When the installation has finished the wizard will ask whether it should restart Eclipse. This restart is important to make the newly-installed software work correctly.
 
-h2(Tutorial). Introduction
+h2(#Introduction). Introducing Yakindu Statechart Tools
 
-p(#Tutorial). This tutorial will introduce the open-source project Yakindu Statechart Tools (SCT). YAKINDU Statechart Tools provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of state machines or statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation.
+This tutorial will introduce Yakindu Statechart Tools (SCT). YAKINDU Statechart Tools provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of state machines or statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation.
 
 In this tutorial you will learn how to create a new statechart model, execute it using the simulation engine and generate Java code to get a fully-working statechart implementation. Please note that this tutorial will not explain statecharts in general, so you should familiarize yourself with the basic concepts of state machines first.[1] Before we get started, make sure you have Yakindu Statechart Tools properly installed. For installation instructions see chapter "Installation":getting_started.html#Installation.
 
@@ -27,7 +107,7 @@ p(#Prepareaproject). During this tutorial we will create a system for handling i
 
 h2. Preparing a project
 
-p(#Createastatechartmodel). The first step is to create a new Eclipse project by selecting _File → New → Project…_. A wizard opens, showing a couple of different project types. Since we want to generate Java code from our statechart model later on, select _Java → Java Project_ from the wizard menu. Give the project a meaningful name, e.g. *CallHandling* and click _Finish_. As a result, Eclipse creates the project and establishes a folder _src_ inside of it which is indended for any Java code.
+p(#Createastatechartmodel). The first step is to create a new Eclipse project by selecting _File → New → Project…_. A wizard opens, showing a couple of different project types. Since we want to generate Java code from our statechart model later on, select _Java → Java Project_ from the wizard menu. Give the project a meaningful name, e.g. *CallHandling* and click _Finish_. As a result, Eclipse creates the project and establishes a folder _src_ inside of it. This folder is indended for Java code.
 
 However, we won't deal with Java programming right now, but rather create our statechart model. It is good practice to keep models and source code separate. So, let's create a new folder for the model. Right-click on the project's root, i.e. on *CallHandling*, then select _File → New → Folder_ from the context menu. Give the model folder a reasonable name, e.g. *model*, then click _Finish_.
 
