@@ -8,15 +8,17 @@ In order to start working with Yakindu Statechart Tools, you have to install the
 
 Yakindu Statechart Tools is based on the Eclipse integrated development environment (IDE) and runs inside Eclipse. The installation process as described below will put a full-fledged Eclipse instance on your computer. It is comprised in the Yakindu Statechart Tools distribution file you downloaded. You will have to unpack and execute Eclipse in order to work with Yakindu Statechart Tools inside of it.
 
+While Yakindu Statechart Tools is based on Eclipse, the latter in turn is based on Java. In order to use Eclipse, you need a more or less recent Java version on your machine. Depending on what you are going to do with Yakindu Statechart Tools, you either need a Java Runtime Environment (JRE) or a Java Development Kit (JDK). Since a JDK always contains a JRE, it is a safe bet to install the former. However, unless you are going to do some Java development – i.&nbsp;e. create a state machine, turn it into Java source code, and use the latter from your Java client code –, you might get away with a JRE. Installation of Java is beyond the scope of this document. You can find more information and download the software from "https://www.java.com/":https://www.java.com/.
+
 The chapter "below":getting_started.html#InstallationOnLinux walks through the installation process on Linux machine. The installation procedures are quite similar on other computer architectures, like on a Mac or a Windows PC. They will be described later. If you are working with such a computer, please try to translate the Linux  
 
-h3(#InstallationOnLinux). Installation on Linux
+h3(#InstallingOnLinux). Installing on Linux
 
 This chapter describes how to install Yakindu Statechart Tools on a Linux machine using a command-line tool. The installation doesn't require _root_ permissions.
 
 h4. Unpacking the downloaded file
 
-Choose a directory for Yakindu Statechart Tools (SCT) respectively Eclipse. The commands below assume you want to install the software in the _/my/software_ directory. Please modify the commands appropriately to suit your needs!
+Choose a directory for Yakindu Statechart Tools (SCT) – or Eclipse, respectively. The commands below assume you want to install the software in the _/my/software_ directory. Please modify the commands appropriately to suit your needs!
 
 Go to the installation directory:
 
@@ -28,7 +30,7 @@ Unpack the software distribution file. If the downloaded file is located in _/do
 bc(prettyprint). 
 gzip -dc /download/yakindu-sct-luna-R-linux-gtk-x86_64.tar.gz | tar xvfp -
 
-This will create a folder _eclipse_ in your installation directory, i.&nbsp;e. _/my/software/eclipse_, as shown in the image below:
+This will create a folder _eclipse_ in your installation directory, i.&nbsp;e. _/my/software/eclipse_ in our example, as shown in the image below:
 
 !(img-rounded shadowed)images/linux_install_010_eclipse_folder.png!
 
@@ -62,7 +64,7 @@ While Eclipse is starting up, it is showing a splash screen:
 
 Eclipse needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, Eclipse's _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please specify a new and empty one.
 
-In the example below, we chose the _/my/workspace_ directory for our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, Eclipse won't ask again for a workspace directory, but will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the Eclipse menu.)
+In the example below, we chose the _/my/workspace_ directory as our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, Eclipse won't ask for a workspace directory again, but will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the Eclipse menu.)
 
 !(img-rounded shadowed)images/linux_install_040_eclipse_workspace_dialog.png!
 
@@ -75,6 +77,60 @@ On the first start, Eclipse presents a _Welcome_ window:
 You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions lead to the Eclipse workbench:
 
 !(img-rounded shadowed)images/linux_install_060_eclipse_workbench.png!
+
+This is your working environment now. Congratulations, you have just installed Eclipse properly!
+
+You can "proceed":getting_started.html#Introduction now to create your first Yakindu Statecharts Tools project.
+
+h3(#InstallingOnWindows). Installing on Windows
+
+This chapter describes how to install Yakindu Statechart Tools on a Windows 7 machine.
+
+h4. Unpacking the downloaded file
+
+Unpack the software distribution file. Use the file explorer to open the directory you downloaded the software distribution file to, right-click on the latter, and select _Extract all_ in the context menu.
+
+!(img-rounded shadowed)images/windows7_install_010_eclipse_extract_1.png!
+
+Choose a directory for Yakindu Statechart Tools (SCT) – or Eclipse, respectively. The example below assumes you want to install the software in the _C:\Program Files\yakindu_sct_ directory. Please modify as needed!
+
+!(img-rounded shadowed)images/windows7_install_020_eclipse_extract_2.png!
+
+After unpacking, you will find a folder _eclipse_ in your installation directory, i.&nbsp;e. _C:\Program Files\yakindu_sct\eclipse_ in our example, as shown in the image below:
+
+!(img-rounded shadowed)images/windows7_install_030_eclipse_folder.png!
+
+The contents of the _eclipse_ folder looks like this:
+
+!(img-rounded shadowed)images/windows7_install_040_eclipse_contents.png!
+
+There you are: You have installed the software. Now you should start Eclipse.
+
+h4. Starting Eclipse
+
+Start Eclipse by running the _eclipse.exe_ executable.
+
+To do so, please double-click (or single-click, depending on your Windows settings) on the _eclipse_ symbol, shown as a dark purple circle with three horizontal lines in the sample screenshot above.
+
+While Eclipse is starting up, it is showing a splash screen:
+
+!(img-rounded shadowed)images/windows7_install_050_eclipse_splash.png!
+
+Eclipse needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, Eclipse's _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please specify a new and empty one.
+
+In the example below, we chose the _C:\Users\joedoe\workspace_ directory as our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, Eclipse won't ask for a workspace directory again, but will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the Eclipse menu.)
+
+!(img-rounded shadowed)images/windows7_install_060_eclipse_workspace_dialog.png!
+
+Click on the _OK_ button to proceed.
+
+On the first start, Eclipse presents a _Welcome_ window:
+
+!(img-rounded shadowed)images/windows7_install_070_eclipse_welcome.png!
+
+You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions lead to the Eclipse workbench:
+
+!(img-rounded shadowed)images/windows7_install_080_eclipse_workbench.png!
 
 This is your working environment now. Congratulations, you have just installed Eclipse properly!
 
