@@ -161,8 +161,6 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		if(editPart == null) {
 			return;
 		}
-		// ensure the edit part is made visible.
-		diagramWorkbenchPart.getDiagramGraphicalViewer().reveal(editPart);
 
 		final IFigure figure = getTargetFigure(editPart);
 				
