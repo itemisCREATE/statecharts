@@ -38,8 +38,8 @@ class Timer {
 		extern "C" {
 		#endif 
 		
-		typedef void(*setTimerFPtr)(uint32_t evid, const uint32_t time_ms, sc_boolean periodic);
-		typedef void(*unsetTimerFPtr)(const uint32_t evid);
+		typedef void(*setTimerFPtr)(int* handle, uint32_t evid, const uint32_t time_ms, sc_boolean periodic);
+		typedef void(*unsetTimerFPtr)(int* handle, const uint32_t evid);
 		
 		typedef struct {
 		

@@ -85,14 +85,14 @@ class StatemachineRequired {
 				\time_ms The time in milli seconds
 				\periodic Indicates the the time event must be raised periodically until the timer is unset 
 			*/
-			extern void «type.toFirstLower»_setTimer(«scHandleDecl», const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
+			extern void «type.toFirstLower»_setTimer(«scHandleDecl», int* timer_hnd, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 
 			//! This function has to unset timers for the time events that are required by the state machine.
 			/*! 
 				This function will be called for each time event taht is relevant for a state when a state will be left.
 				\param evid An unique identifier of the event.
 			*/
-			extern void «type.toFirstLower»_unsetTimer(«scHandleDecl», const sc_eventid evid);
+			extern void «type.toFirstLower»_unsetTimer(«scHandleDecl», int* timer_hnd, const sc_eventid evid);
 			«ENDIF»
 			
 			#ifdef __cplusplus

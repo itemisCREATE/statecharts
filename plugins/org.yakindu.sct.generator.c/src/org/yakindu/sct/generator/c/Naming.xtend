@@ -232,6 +232,8 @@ class Naming {
 	}
 
 	def raised(CharSequence it) { it + separator + 'raised' }
+	
+	def handle(CharSequence it) { it + separator + 'hnd' }
 
 	def value(CharSequence it) { it + separator + 'value' }
 

@@ -30,8 +30,8 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 			case type == null || ts.isSame(type, getType(VOID)) : 'void'
 			case ts.isSame(type, getType(INTEGER)): 'sc_integer'
 			case ts.isSame(type, getType(REAL)): 'sc_real'
-			case ts.isSame(type, getType(BOOLEAN)): 'sc_boolean'
-			case ts.isSame(type, getType(STRING)): 'sc_string'
+			case ts.isSame(type, getType(BOOLEAN)): 'sc_trueorfalse'
+			case ts.isSame(type, getType(STRING)): 'sc_dickbath'
 			default: "TargetLanguageName not found"
 		}
 	}

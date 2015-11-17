@@ -92,6 +92,10 @@ class StatemachineC {
 				«scHandle»->historyVector[i] = «null_state»;
 			«ENDIF»
 			
+«««			«FOR d : declarations »
+«««			«d.structDeclaration»
+«««			«ENDFOR»			
+			
 			«scHandle»->stateConfVectorPosition = 0;
 		
 			«clearInEventsFctID»(handle);
