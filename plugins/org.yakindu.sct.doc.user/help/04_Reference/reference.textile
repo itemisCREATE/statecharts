@@ -754,7 +754,7 @@ The explanations below are using the TrafficLight sample state machine to descri
 
 h3(#JavaSpec). Specifications of Java code
 
-You can checkout the Java sample project _"org.yakindusct.examples.trafficlight":http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/examples_ from the "Yakindu Google Code repository":http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk. The Java example contains statechart, SGen model, graphical widgets, and some glue code to connect the generated code with the widgets. The graphical widgets are based on SWT.
+You can checkout the Java sample project _"org.yakindusct.examples.trafficlight":https://github.com/Yakindu/statecharts/tree/master/examples/org.yakindu.sct.examples.trafficlight_ from the "Yakindu Statechart Tools GitHub repository":https://github.com/Yakindu/statecharts. The Java example contains statechart, SGen model, graphical widgets, and some glue code to connect the generated code with the widgets. The graphical widgets are based on SWT.
 
 To execute the Java example, run the file _CrossingDemoCycleBased.java_ as "Java Application" from the Eclipse _Run As_ context menu.
 
@@ -1325,7 +1325,7 @@ p. If the UI thread has been terminated by the user, the state machine will be s
 
 h3(#SpecC). Specifications of C code
 
-You can checkout the C sample project _"org.yakindu.examples.c.trafficlight":http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/examples_ from the "Yakindu Google Code repository":http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk. The C example contains statechart, SGen model, graphical widgets, and some glue code to connect the generated code with the widgets. The graphical widgets are based on Qt.
+You can checkout the C sample project _"org.yakindu.sct.examples.c.trafficlight":https://github.com/Yakindu/statecharts/tree/master/examples/org.yakindu.sct.examples.c.trafficlight_ from the "Yakindu Statechart Tools GitHub repository":https://github.com/Yakindu/statecharts. The C example contains statechart, SGen model, graphical widgets, and some glue code to connect the generated code with the widgets. The graphical widgets are based on Qt.
 
 To execute the C example, run the file _org_yakindu_sct_examples_c_trafficlight_ as _Local C/C++ application_ from the Eclipse _Run As_ context menu.
 
