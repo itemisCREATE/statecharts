@@ -13,5 +13,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.sgraph;bundle-version="2.4.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: org.yakindu.sct.domain,
+Export-Package: com.google.inject.multibindings,
+ org.yakindu.sct.domain,
  org.yakindu.sct.domain.extension
+Bundle-ClassPath: libs/guice-multibindings-3.0.jar,
+ .
