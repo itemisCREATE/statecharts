@@ -76,12 +76,23 @@ class StatemachineRequired {
 			«IF timed»
 			//
 			// This is a timed state machine that requires timer services
-			// 
+			//
+			
+			//! This function has to initialize timers for the time events that are required by the state machine.
+			/*! 
+				This function will be called when the state machine is initialized.
+				\param timer_hnd An int that can be used to either hold a pointer to the timer handle, or hold the handle itself. 
+				\evid An unique identifier of the event.
+				\time_ms The time in milli seconds
+				\periodic Indicates the the time event must be raised periodically until the timer is unset 
+			*/
+			extern void «type.toFirstLower»_initTimer(«scHandleDecl», int* timer_hnd, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic); 
 			
 			//! This function has to set up timers for the time events that are required by the state machine.
 			/*! 
 				This function will be called for each time event that is relevant for a state when a state will be entered.
-				\param evid An unique identifier of the event.
+				\param timer_hnd An int that can be used to either hold a pointer to the timer handle, or hold the handle itself.
+				\evid An unique identifier of the event.
 				\time_ms The time in milli seconds
 				\periodic Indicates the the time event must be raised periodically until the timer is unset 
 			*/
@@ -90,7 +101,8 @@ class StatemachineRequired {
 			//! This function has to unset timers for the time events that are required by the state machine.
 			/*! 
 				This function will be called for each time event taht is relevant for a state when a state will be left.
-				\param evid An unique identifier of the event.
+				\param timer_hnd An int that can be used to either hold a pointer to the timer handle, or hold the handle itself.
+				\evid An unique identifier of the event.
 			*/
 			extern void «type.toFirstLower»_unsetTimer(«scHandleDecl», int* timer_hnd, const sc_eventid evid);
 			«ENDIF»

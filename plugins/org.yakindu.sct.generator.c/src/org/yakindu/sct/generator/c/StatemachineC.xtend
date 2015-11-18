@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
 
+
 class StatemachineC {
 	
 	@Inject extension Naming
@@ -31,6 +32,7 @@ class StatemachineC {
 	@Inject extension INamingService
 	@Inject extension FlowCode
 	@Inject protected extension StateVectorExtensions
+
 	
 	def generateStatemachineC(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		flow.initializeNamingService
@@ -79,6 +81,15 @@ class StatemachineC {
 		«functionImplementations»
 	'''
 	
+	//This was going to be the solution to below.
+//	def scopeTimeDecl(Scope it) '''
+//			«FOR d : declarations »
+//			«flow.type.toFirstLower»_initTimer(«scHandle», &(«scHandle»->timeEvents.«d.shortName.handle»), (sc_eventid) &(«scHandle»->timeEvents.«d.shortName»_raised) , «d.» 
+//«««			«IF true»bool_true«ELSE»bool_false«ENDIF»);
+//			shit «d.shortName.handle»;
+//			«ENDFOR»
+//	'''
+	
 	def initFunction(ExecutionFlow it) '''
 		void «functionPrefix»init(«scHandleDecl»)
 		{
@@ -92,9 +103,12 @@ class StatemachineC {
 				«scHandle»->historyVector[i] = «null_state»;
 			«ENDIF»
 			
-«««			«FOR d : declarations »
-«««			«d.structDeclaration»
-«««			«ENDFOR»			
+			//This sucks, but I can't for the life of me figure out how to mak etimeEvent.periodic to resolve properly here in xtext 
+			«IF timed»
+				«FOR event : timeEventScope.events»
+				«event.access» = (int)0xFFFFFFFF;
+				«ENDFOR»
+			«ENDIF»	
 			
 			«scHandle»->stateConfVectorPosition = 0;
 		
