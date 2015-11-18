@@ -57,13 +57,7 @@ class Statemachine {
 			
 			«statesEnumDecl»
 			
-			«FOR s : it.scopes»
-				«IF s.type.contains('TimeEvents')»
-					«s.scopeTimeDecl»
-				«ELSE»
-					«s.scopeMainDecl»
-				«ENDIF»
-			«ENDFOR»
+			«FOR s : it.scopes»«s.scopeTypeDecl»«ENDFOR»
 			
 			«statemachineTypeDecl»
 
@@ -137,29 +131,11 @@ class Statemachine {
 	def dispatch structDeclaration(Declaration it) ''''''
 	
 	
-	def scopeMainDecl(Scope it) '''
+	def scopeTypeDecl(Scope it) '''
 		//! Type definition of the data structure for the «type» interface scope.
 		typedef struct {
 			«FOR d : declarations »
 			«d.structDeclaration»
-			«ENDFOR»
-		} «it.type»;
-		
-		//declaration of constants for scope «type»
-		«FOR d : declarations.filter(typeof(VariableDefinition)).filter[const]»
-			«IF d.type.name != 'void'»const «d.type.targetLanguageName» «d.constantName» = «d.initialValue.resolveConstants»;«ENDIF»
-		«ENDFOR»
-
-	'''
-	
-	def scopeTimeDecl(Scope it) '''
-		//! Type definition of the data structure for the «type» interface scope.
-		typedef struct {
-			«FOR d : declarations »
-			«d.structDeclaration»
-			«ENDFOR»
-			«FOR d : declarations »
-			int «d.shortName.handle»;
 			«ENDFOR»
 		} «it.type»;
 		
