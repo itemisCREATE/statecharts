@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 committers of YAKINDU and others.
+ * Copyright (c) 2013-2015 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -22,23 +22,39 @@ import org.yakindu.sct.refactoring.refactor.IRefactoring;
  * {@link IRefactoring} interface
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author terfloth
  * 
  */
 public class SemanticModificationAdapter implements ISemanticModification {
 
+	private View targetView;
 	private AbstractRefactoring<View> refactoring;
 
-	public SemanticModificationAdapter(AbstractRefactoring<View> refactoring) {
-		this.refactoring = refactoring;
-
+	
+	@Override
+	public void setTargetView(View view) {
+		targetView = view;
 	}
 
-	public boolean IsModificationFor(View object) {
-		refactoring.setContextObjects(Collections.singletonList(object));
+	@Override
+	public View getTargetView() {
+		return targetView;
+	}
+
+
+	public SemanticModificationAdapter(View view, AbstractRefactoring<View> refactoring) {
+		this.targetView = view;
+		this.refactoring = refactoring;
+	}
+
+	
+	public boolean isApplicable() {
+		if ( targetView == null ) return false;
+		refactoring.setContextObjects(Collections.singletonList(targetView));
 		return refactoring.isExecutable();
 	}
 
-	public void modify(View view) {
+	public void modify() {
 		refactoring.execute();
 	}
 

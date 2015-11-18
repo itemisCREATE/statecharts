@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 committers of YAKINDU and others.
+ * Copyright (c) 2013-2015 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,16 +20,23 @@ import org.yakindu.sct.model.sgraph.Transition;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author terfloth - adapted to new hooks.
  * 
  */
 public class AddOutgoingStateModification extends AbstractSemanticModification {
-
-	public boolean IsModificationFor(View object) {
-		return object.getElement() instanceof State;
+	
+	public AddOutgoingStateModification(View view) {
+		super();
+		setTargetView(view);
 	}
 
 	@Override
-	protected void internalExecute(EObject semanticElement, View view) {
+	protected boolean check(EObject semanticObject, View view) {
+		return semanticObject instanceof State;
+	}
+
+	@Override
+	protected void execute(EObject semanticElement, View view) {
 		State state = (State) semanticElement;
 		State newState = SGraphFactory.eINSTANCE.createState();
 		Transition transition = SGraphFactory.eINSTANCE.createTransition();
