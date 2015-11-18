@@ -8,14 +8,16 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.base.xtext.utils.gmf.proposals;
+package org.yakindu.sct.ui.editor.proposals;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.jface.fieldassist.IContentProposalProvider;
 import org.eclipse.jface.fieldassist.IControlContentAdapter;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Control;
+import org.yakindu.base.xtext.utils.gmf.proposals.ISemanticContentProposal;
 
 /**
  * 
@@ -24,10 +26,10 @@ import org.eclipse.swt.widgets.Control;
  */
 public class SemanticContentControlAdapter implements IControlContentAdapter {
 
-	private AbstractSemanticContentProposalProvider provider;
+	private IContentProposalProvider provider;
 	private GraphicalViewer viewer;
 
-	public SemanticContentControlAdapter(AbstractSemanticContentProposalProvider provider, GraphicalViewer viewer) {
+	public SemanticContentControlAdapter(IContentProposalProvider provider, GraphicalViewer viewer) {
 		this.provider = provider;
 		this.viewer = viewer;
 	}
@@ -40,10 +42,10 @@ public class SemanticContentControlAdapter implements IControlContentAdapter {
 	}
 
 	public void insertControlContents(Control control, String id, int cursorPosition) {
-		ISemanticContentProposal proposal = provider.getProposal(id);
-		// TODO:Multi selection
-		IGraphicalEditPart editPart = (IGraphicalEditPart) viewer.getSelectedEditParts().get(0);
-		proposal.getSemanticModification().modify(editPart.getNotationView());
+//		ISemanticContentProposal proposal = provider.getProposals(id, position)(id);
+//		// TODO:Multi selection
+//		IGraphicalEditPart editPart = (IGraphicalEditPart) viewer.getSelectedEditParts().get(0);
+//		proposal.getSemanticModification().modify(editPart.getNotationView());
 	}
 
 	public String getControlContents(Control control) {

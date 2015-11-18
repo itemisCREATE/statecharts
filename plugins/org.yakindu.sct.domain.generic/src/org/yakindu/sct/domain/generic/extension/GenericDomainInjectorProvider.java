@@ -18,6 +18,7 @@ import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
 import org.yakindu.sct.domain.generic.modules.EntryRuleRuntimeModule;
 import org.yakindu.sct.domain.generic.modules.EntryRuleUIModule;
+import org.yakindu.sct.domain.generic.modules.GenericEditorModule;
 import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 import org.yakindu.sct.domain.generic.modules.GenericSimulationModule;
 import org.yakindu.sct.domain.generic.modules.GenericTypeSystemModule;
@@ -40,6 +41,7 @@ import com.google.inject.util.Modules;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author terfloth - added editorInjector
  * 
  */
 public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
@@ -56,30 +58,31 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 		semanticTargetToRuleMap.put(Guard.class.getName(), Guard.class);
 	}
 
-	public Module getSharedStateModule() {
+	protected Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
 
-	public Module getLanguageRuntimeModule() {
+	protected Module getLanguageRuntimeModule() {
 		return new STextRuntimeModule();
 	}
 
-	public Module getLanguageUIModule() {
+	protected Module getLanguageUIModule() {
 		return new STextUiModule(STextActivator.getInstance());
 	}
 
-	public Module getTypeSystemModule() {
+	protected Module getTypeSystemModule() {
 		return new GenericTypeSystemModule();
 	}
 
-	public Module getSimulationModule() {
+	protected Module getSimulationModule() {
 		return new GenericSimulationModule();
 	}
 
-	public Module getSequencerModule() {
+	protected Module getSequencerModule() {
 		return new GenericSequencerModule();
 	}
 
+	
 	protected Module getResourceModule() {
 		Module uiModule = Modules.override(getLanguageRuntimeModule()).with(getLanguageUIModule());
 		Module result = Modules.override(uiModule).with(getSharedStateModule());
@@ -118,5 +121,10 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 	@Override
 	public Injector getSequencerInjector() {
 		return Guice.createInjector(getSequencerModule());
+	}
+
+	@Override
+	public Injector getEditorInjector() {
+		return Guice.createInjector(new GenericEditorModule());	
 	}
 }

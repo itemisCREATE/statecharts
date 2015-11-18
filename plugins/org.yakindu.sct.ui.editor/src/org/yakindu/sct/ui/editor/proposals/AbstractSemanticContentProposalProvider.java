@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.base.xtext.utils.gmf.proposals;
+package org.yakindu.sct.ui.editor.proposals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ import java.util.List;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.jface.fieldassist.IContentProposalProvider;
+import org.yakindu.base.xtext.utils.gmf.proposals.ISemanticContentProposal;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -62,7 +63,7 @@ public abstract class AbstractSemanticContentProposalProvider implements IConten
 		Iterable<ISemanticContentProposal> validProposals = Iterables.filter(acceptor.getAllProposals(),
 				new Predicate<ISemanticContentProposal>() {
 					public boolean apply(ISemanticContentProposal input) {
-						return input.getSemanticModification().IsModificationFor((selectedEditPart.getNotationView()));
+						return input.getSemanticModification().isApplicable();
 					}
 				});
 		if (Iterables.size(validProposals) == 0) {
