@@ -11,8 +11,9 @@
 package org.yakindu.sct.domain.generic.modules;
 
 import org.eclipse.xtext.service.AbstractGenericModule;
-import org.yakindu.sct.domain.generic.assist.SCTSmartEditProposalProvider;
+import org.yakindu.sct.refactoring.proposals.RefactoringProposalProvider;
 import org.yakindu.sct.ui.editor.proposals.IEditProposalProvider;
+import org.yakindu.sct.ui.editor.proposals.SCTSmartEditProposalProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.multibindings.Multibinder;
@@ -29,6 +30,7 @@ public class GenericEditorModule extends AbstractGenericModule {
 		
 		Multibinder<IEditProposalProvider> proposalProviderBinder = Multibinder.newSetBinder(binder, IEditProposalProvider.class);
 	    proposalProviderBinder.addBinding().to(SCTSmartEditProposalProvider.class);
+	    proposalProviderBinder.addBinding().to(RefactoringProposalProvider.class);
 	}
 
 	

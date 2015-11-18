@@ -19,7 +19,7 @@ import org.yakindu.sct.refactoring.refactor.impl.ExtractSubdiagramRefactoring;
  * @author terfloth
  * 
  */
-public class ExtractSubdiagramModification extends SemanticModificationAdapter {
+public class ExtractSubdiagramModification extends RefactoringBasedModification {
 
 	public ExtractSubdiagramModification(View view) {
 		super(view, new ExtractSubdiagramRefactoring());

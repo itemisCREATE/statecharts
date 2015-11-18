@@ -19,7 +19,7 @@ import org.yakindu.sct.refactoring.refactor.impl.InlineSubdiagramRefactoring;
  * @author terfloth
  * 
  */
-public class InlineSubdiagramModification extends SemanticModificationAdapter {
+public class InlineSubdiagramModification extends RefactoringBasedModification {
 
 	public InlineSubdiagramModification(View view) {
 		super(view, new InlineSubdiagramRefactoring());

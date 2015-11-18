@@ -25,7 +25,7 @@ import org.yakindu.sct.refactoring.refactor.IRefactoring;
  * @author terfloth
  * 
  */
-public class SemanticModificationAdapter implements ISemanticModification {
+public class RefactoringBasedModification implements ISemanticModification {
 
 	private View targetView;
 	private AbstractRefactoring<View> refactoring;
@@ -42,7 +42,7 @@ public class SemanticModificationAdapter implements ISemanticModification {
 	}
 
 
-	public SemanticModificationAdapter(View view, AbstractRefactoring<View> refactoring) {
+	public RefactoringBasedModification(View view, AbstractRefactoring<View> refactoring) {
 		this.targetView = view;
 		this.refactoring = refactoring;
 	}
