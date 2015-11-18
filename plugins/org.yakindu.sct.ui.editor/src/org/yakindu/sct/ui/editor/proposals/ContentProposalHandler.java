@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.View;
@@ -28,8 +27,6 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Control;
-import org.yakindu.base.xtext.utils.gmf.proposals.ISemanticContentProposal;
-import org.yakindu.base.xtext.utils.gmf.proposals.SemanticContentProposal;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
 
