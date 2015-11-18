@@ -84,7 +84,7 @@ class StatemachineC {
 	//This was going to be the solution to below.
 //	def scopeTimeDecl(Scope it) '''
 //			«FOR d : declarations »
-//			«flow.type.toFirstLower»_initTimer(«scHandle», &(«scHandle»->timeEvents.«d.shortName.handle»), (sc_eventid) &(«scHandle»->timeEvents.«d.shortName»_raised) , «d.» 
+//			«flow.type.toFirstLower»_initTimer(«scHandle», &(«scHandle»->timeEvents.«d.shortName.handle»), (sc_eventid) &(«scHandle»->timeEvents.«d.shortName»_raised) , «d.periodic»); 
 //«««			«IF true»bool_true«ELSE»bool_false«ENDIF»);
 //			shit «d.shortName.handle»;
 //			«ENDFOR»
