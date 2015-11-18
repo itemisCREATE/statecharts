@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.editor.editor.proposals;
+package org.yakindu.sct.ui.editor.proposals;
 
 import java.util.List;
 
@@ -21,9 +21,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
-import org.yakindu.base.xtext.utils.gmf.proposals.AbstractSemanticContentProposalProvider;
-import org.yakindu.base.xtext.utils.gmf.proposals.SemanticContentControlAdapter;
-import org.yakindu.base.xtext.utils.gmf.proposals.SemanticContentProposalLabelProvider;
 
 /**
  * 
@@ -33,7 +30,7 @@ import org.yakindu.base.xtext.utils.gmf.proposals.SemanticContentProposalLabelPr
 @SuppressWarnings("restriction")
 public class ContentProposalViewerKeyHandler extends DirectEditKeyHandler {
 
-	private AbstractSemanticContentProposalProvider proposalProvider;
+	private ContentProposalHandler proposalHandler;
 
 	private ContentProposalAdapter adapter;
 
@@ -41,25 +38,26 @@ public class ContentProposalViewerKeyHandler extends DirectEditKeyHandler {
 
 	public ContentProposalViewerKeyHandler(GraphicalViewer viewer) {
 		super(viewer);
-		createProposalProvider();
+		createProposalHandler();
 		createContentAdpater();
 	}
 
+	protected void createProposalHandler() {
+		proposalHandler = new ContentProposalHandler(getViewer());
+	}
+
 	protected void createContentAdpater() {
-		SemanticContentControlAdapter controlAdapter = new SemanticContentControlAdapter(proposalProvider, getViewer());
-		adapter = new ContentProposalAdapter((Composite) getViewer().getControl(), controlAdapter, proposalProvider,
+//		SemanticContentControlAdapter controlAdapter = new SemanticContentControlAdapter(proposalProvider, getViewer());
+		adapter = new ContentProposalAdapter((Composite) getViewer().getControl(), proposalHandler.getProposalControlAdapter(), proposalHandler,
 				keyStroke, null);
-		adapter.setLabelProvider(new SemanticContentProposalLabelProvider());
+		adapter.setLabelProvider(proposalHandler.getProposalLabelProvider());
 		adapter.setPropagateKeys(true);
 		// TODO: If not set, the adapter uses the full width of the
 		// GraphicalViewer as initial bounds
 		adapter.setPopupSize(new Point(400, 150));
 	}
 
-	protected void createProposalProvider() {
-		proposalProvider = new SCTContentProposalProvider(getViewer());
-	}
-
+	
 	@Override
 	public boolean keyPressed(KeyEvent e) {
 		if (getCurrentSelection() == null)

@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.editor.editor.proposals;
+package org.yakindu.sct.domain.generic.assist;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +16,11 @@ import java.util.List;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.gef.GraphicalViewer;
-import org.yakindu.base.xtext.utils.gmf.proposals.AbstractSemanticContentProposalProvider;
 import org.yakindu.base.xtext.utils.gmf.proposals.ISemanticContentProposal;
 import org.yakindu.base.xtext.utils.gmf.proposals.ISemanticModification;
 import org.yakindu.base.xtext.utils.gmf.proposals.SemanticContentProposal;
 import org.yakindu.sct.ui.editor.StatechartImages;
+import org.yakindu.sct.ui.editor.proposals.AbstractSemanticContentProposalProvider;
 
 /**
  * 

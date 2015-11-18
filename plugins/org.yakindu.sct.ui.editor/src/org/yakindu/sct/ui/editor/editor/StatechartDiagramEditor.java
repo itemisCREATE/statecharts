@@ -41,9 +41,9 @@ import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
-import org.yakindu.sct.ui.editor.editor.proposals.ContentProposalViewerKeyHandler;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
+import org.yakindu.sct.ui.editor.proposals.ContentProposalViewerKeyHandler;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 import org.yakindu.sct.ui.editor.validation.SCTValidationJob;
 
