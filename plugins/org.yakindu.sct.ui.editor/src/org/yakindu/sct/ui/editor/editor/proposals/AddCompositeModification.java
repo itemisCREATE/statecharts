@@ -11,6 +11,7 @@
 package org.yakindu.sct.ui.editor.editor.proposals;
 
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.ui.editor.modifications.StateTemplatesModification;
 
 /**
  * 

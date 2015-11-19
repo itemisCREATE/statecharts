@@ -15,7 +15,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.yakindu.base.xtext.utils.gmf.directedit,
  org.yakindu.base.xtext.utils.gmf.experimental,
  org.yakindu.base.xtext.utils.gmf.figures,
- org.yakindu.base.xtext.utils.gmf.proposals,
  org.yakindu.base.xtext.utils.gmf.resource,
  org.yakindu.base.xtext.utils.gmf.viewers
 Bundle-ActivationPolicy: lazy

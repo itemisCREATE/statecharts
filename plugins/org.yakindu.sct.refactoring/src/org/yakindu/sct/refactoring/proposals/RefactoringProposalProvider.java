@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.ui.editor.editor.proposals.AddCompositeModification;
-import org.yakindu.sct.ui.editor.editor.proposals.AddOutgoingStateModification;
 import org.yakindu.sct.ui.editor.proposals.IEditProposal;
 import org.yakindu.sct.ui.editor.proposals.IEditProposalProvider;
 import org.yakindu.sct.ui.editor.proposals.ModificationBasedEditProposal;
@@ -34,14 +32,15 @@ public class RefactoringProposalProvider implements IEditProposalProvider {
 		proposals.add(new ModificationBasedEditProposal(
 				new ExtractSubdiagramModification(view), 
 				"Refactoring - Extract Subdiagram", 
-				"Extracts all sub regions into a sub diagram. " +
+				"Extracts all sub regions into a sub diagram.<br> " +
 				"Direct transitions into the diagram will be substituted by entries and outgoing transitions will be substituted using exit nodes. " +
-				"Sub diagrams are opened seperately." , 
+				"<i>Sub diagrams are opened seperately</i>." , 
 				null));
 		proposals.add(new ModificationBasedEditProposal(
 				new InlineSubdiagramModification(view), 
 				"Refactoring - Inline Subdiagram", 
-				"Inlines the existing subdiagram. The region includes an initial state.", null));
+				"Inlines the existing subdiagram. The region includes an initial state.", 
+				null));
 		
 		return proposals;
 	}

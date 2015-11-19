@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.base.xtext.utils.gmf.proposals;
+package org.yakindu.sct.ui.editor.modifications;
 
 import org.eclipse.gmf.runtime.notation.View;
 

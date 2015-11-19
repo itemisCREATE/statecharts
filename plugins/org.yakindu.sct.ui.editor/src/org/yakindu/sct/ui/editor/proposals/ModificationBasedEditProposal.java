@@ -1,7 +1,7 @@
 package org.yakindu.sct.ui.editor.proposals;
 
 import org.eclipse.swt.graphics.Image;
-import org.yakindu.base.xtext.utils.gmf.proposals.ISemanticModification;
+import org.yakindu.sct.ui.editor.modifications.ISemanticModification;
 
 public class ModificationBasedEditProposal implements IEditProposal {
 
