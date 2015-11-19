@@ -136,18 +136,83 @@ This is your working environment now. Congratulations, you have just installed E
 
 You can "proceed":getting_started.html#Introduction now to create your first Yakindu Statecharts Tools project.
 
-h3. Installing into an existing Eclipse instance
+h3. Installing to an existing Eclipse instance
 
-For a new installation:
-* In Eclipse, select menu entry _Help → Install New Software ..._.
-* Click the _add_ button in the top-right corner of the installation wizard to add http://updates.yakindu.org/sct/luna/releases as update site.
-* Select all listed features.
-* Follow the installation wizard. 
-* To update the installed plugins, select _Help → Check for Updates_.
+This chapter describes the steps that are needed to install Yakindu Statechart Tools to an existing Eclipse instance. Let's assume you already have Eclipse up and running and now you want to install Yakindu Statechart Tools as an additional software item (plugin).
 
-After having installed the plugins a user guide is included in the Eclipse help. Select _Help → Contents_ from the Eclipe menu to display a browser window showing the user guide as an entry in the overview on the left.hand side.
+In the the _Help_ menu, select the _Install new software_ menu item:
 
-When the installation has finished the wizard will ask whether it should restart Eclipse. This restart is important to make the newly-installed software work correctly.
+!images/eclipse_install_010_eclipse_menu_install_new_software.png!
+
+The _Install_ wizard opens:
+
+!images/eclipse_install_020_eclipse_install_wizard.png!
+
+Click on the _Add…_ button near the upper right corner of the wizard.
+
+A dialog opens, asking you to specify the update repository you want to install the new software from. If your Eclipse release is _Luna_, please enter @http://updates.yakindu.org/sct/luna/releases/@ into the _Location_ field. Enter some text into the _Name_ field. This text is abitrary in principle, but it should make it easier for you to identify this particular update repository among the other update repositories. The example below the repository's name is @Yakindu Statechart Tools (Luna)@. It describes which piece of software the repository provides (Yakindu Statechart Tools) and which Eclipse release that software is compatible with (Luna, i.&nbsp;e. Eclipse 4.4).
+
+!images/eclipse_install_030_eclipse_add_repository.png!
+
+If you want to install Yakindu Statechart Tools not to _Luna_ but to another Eclipse release instead, please replace @luna@ in the repository address by the respective name of your Eclipse release, e.&nbsp;g. @mars@, so that the repository address becomes @http://updates.yakindu.org/sct/mars/releases/@. Please note that Yakindu Statechart Tools might not be available for each Eclipse release. In particular it might take some time to catch up with most recent Eclipse releases.
+
+If you do not want to install an officially stable Yakindu Statechart Tools release, but rather a more recent milestone release, please replace @releases@ in the repository address by @milestones@. Since milestone builds are newer than stable releases, they generally have more features available and more bugs fixed. However, they might also contain some new bugs that have gone unnoticed by now.
+
+After entering name and location of the update repository, click _OK_.
+
+Eclipse establishes a network connection to the update repository, asks it for available software items and shows them in the install wizard:
+
+!images/eclipse_install_040_eclipse_software_items.png!
+
+Please check at least _Xtext Integration Utilities_ and – no surprise – _Yakindu SCT 2_. (You can also install the respective source code items. However, unless you want to have a look at that source code or even want to modify it, you don't need them.)
+
+Click _Next >_.
+
+Eclipse tries to integrate the new software with the software that is already installed. If it detects any mismatched between requirements and provisions, Eclipse will try to find a solution in order to mitigate this problem. The screenshot below shows such a case:
+
+!images/eclipse_install_050_eclipse_trouble.png!
+
+Select the most appropriate solution, then click _Next >_.
+
+The wizard shows the software to be installed and gives you the opportunity to review the changes:
+
+!images/eclipse_install_060_eclipse_review.png!
+
+Click _Next >_.
+
+The wizard asks you to review and accept the terms of the new software's license agreements.
+
+!images/eclipse_install_070_eclipse_licenses.png!
+
+Select the radio button labelled _I accept the terms of the license agreements_ (if you do), then click _Finish_.
+
+Eclipse starts to download the software and installs it on your computer. This may take some time.
+
+!images/eclipse_install_080_eclipse_installation.png!
+
+If the installation was completed successfully, Eclipse needs a restart in order to have the changes take effect. A dialog asks whether you want to restart Eclipse right now or later:
+
+!images/eclipse_install_090_eclipse_restart.png!
+
+After the restart, Eclipse displays its _Welcome_ window, now also featuring Yakindu Statechart Tools:
+
+!images/eclipse_install_100_eclipse_sct_help.png!
+
+h3. Updating Yakindu Statechart Tools
+
+To check whether a new Yakindu Statechart Tools release is available and to install it, please select the _Help → Check for Updates_ menu item.
+
+!images/eclipse_update_010_eclipse_menu_check_for_updates.png!
+
+If Eclipse finds any software items to be updated – not just Yakindu Statechart Tools –, it will guide you through the process of updating them. Generally Eclipse has to be restarted afterwards to have any changes take effect. 
+
+You can configure Eclipse as follows to automatically check for updates:
+
+Select the _Window → Preferences_ menu item. The _Preferences_ dialog opens.
+
+Go to the _Install/Update → Automatic Updates_ section. Here you can configure whether and when Eclipse should check for updates and what to do when it finds any.
+
+!images/eclipse_update_020_eclipse_automatic_updates.png!
 
 h2(#Introduction). Introducing Yakindu Statechart Tools
 
@@ -163,21 +228,29 @@ p(#Prepareaproject). During this tutorial we will create a system for handling i
 
 h2. Preparing a project
 
-p(#Createastatechartmodel). The first step is to create a new Eclipse project by selecting _File → New → Project…_. A wizard opens, showing a couple of different project types. Since we want to generate Java code from our statechart model later on, select _Java → Java Project_ from the wizard menu. Give the project a meaningful name, e.g. *CallHandling* and click _Finish_. As a result, Eclipse creates the project and establishes a folder _src_ inside of it. This folder is indended for Java code.
+p(#Createastatechartmodel). The first step is to create a new Eclipse project by selecting _File → New → Project…_. A wizard opens, showing a couple of different project types. Since we want to generate Java code from our statechart model later on, select _Java → Java Project_ from the wizard menu. Give the project a meaningful name, e.g. *CallHandling* and click _Finish_.
 
-However, we won't deal with Java programming right now, but rather create our statechart model. It is good practice to keep models and source code separate. So, let's create a new folder for the model. Right-click on the project's root, i.e. on *CallHandling*, then select _File → New → Folder_ from the context menu. Give the model folder a reasonable name, e.g. *model*, then click _Finish_.
+!images/callhandling_create_java_project.png!
+
+As a result, Eclipse creates the project and establishes a folder _src_ inside of it. Initially this folder is empty. It is indended for user-created Java code.
+
+!images/callhandling_new_java_project.png!
+
+However, we won't deal with Java programming right now, but rather create our statechart model first. It is good practice to keep models and source code separate. So, let's create a new folder for the model. Right-click on the project's root, i.&nbsp;e. on *CallHandling*, then select _New → Folder_ from the context menu. Give the model folder a reasonable name by typing e.&nbsp;g. *model* into the _Folder Name_ text field, then click _Finish_. The new _model_ folder appears in the package explorer:
+
+!images/callhandling_030_model_folder_created.png!
 
 h2. Creating a statechart model
 
 p(#UsetheEditor). Next, create the statechart model itself:
 * Right-click the *model* folder. The context menu opens.
-* Select _File → New → Other_. The _New_ wizard opens.
-* In the _New_ wizard, select _YAKINDU SCT → Statechart model_.
+* Select _New → Other_. The _New_ wizard opens.
+* In the _New_ wizard, select _YAKINDU SCT → Statechart model_.<br/>!images/callhandling_040_create_model_new_statechart_model.png!
 * Click _Next_.
-* In the following dialog, the wizard asks for the name the of the model file and for the directory it should be created in. Let's choose *CallHandling.sct* as the file name and *CallHandling/model* as the directory name, i.e. the directory *model* inside the Eclipse project *CallHandling*.
+* In the following dialog, the wizard asks for the name the of the model file and for the directory it should be created in. Let's choose *CallHandling.sct* as the file name and *CallHandling/model* as the directory name, i.e. the directory *model* inside the Eclipse project *CallHandling*.<br/>!images/callhandling_050_create_model_specify_name.png!
 * Click _Finish_.
-* Answer the question regarding the perspective switch with _Yes_.
-* The statechart editor opens and shows the definition of a very simple statechart.
+* Answer the question regarding the perspective switch with _Yes_.<br/>!images/callhandling_060_create_model_modeling_perspective_dialog.png!
+* The statechart editor opens and shows the definition of a very simple statechart. You will notice that the statechart editor flags an error in the model. This is due to the fact that the state does not have a name yet. The error marker will disappear once when have named the state.<br/>!images/callhandling_070_create_model_completed.png!<br/>
 
 h2. Using the editor
 
