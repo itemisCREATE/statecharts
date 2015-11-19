@@ -188,15 +188,20 @@ class StatemachineC {
 	
 	def isStateActiveFunction(ExecutionFlow it) '''
 		sc_boolean «stateActiveFctID»(const «scHandleDecl», «statesEnumType» state) {
+			sc_boolean result = bool_false;
 			switch (state) {
 				«FOR s : states»
 				case «s.shortName» : 
-					return (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.shortName»
+					result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.shortName»
 					«ELSE»«scHandle»->stateConfVector[«s.stateVector.offset»] >= «s.shortName»
 						&& «scHandle»->stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.shortName»«ENDIF»);
+					break;
 				«ENDFOR»
-				default: return bool_false;
+				default: 
+					result = bool_false;
+					break;
 			}
+			return result;
 		}
 	'''
 	
