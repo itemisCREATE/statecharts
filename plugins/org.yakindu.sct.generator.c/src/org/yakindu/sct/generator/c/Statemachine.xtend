@@ -86,16 +86,16 @@ class Statemachine {
 			 * Checks if the statemachine is active (until 2.4.1 this method was used for states).
 			 * A statemachine is active if it was entered. It is inactive if it has not been entered at all or if it was exited.
 			 */
-			extern sc_boolean «isActiveFctID»(«scHandleDecl»);
+			extern sc_boolean «isActiveFctID»(const «scHandleDecl»);
 			
 			/*!
 			 * Checks if all active states are final. 
 			 * If there are no active states then the statemachine is considered as inactive and this method returns false.
 			 */
-			extern sc_boolean «isFinalFctID»(«scHandleDecl»);
+			extern sc_boolean «isFinalFctID»(const «scHandleDecl»);
 			
 			/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-			extern sc_boolean «stateActiveFctID»(«scHandleDecl», «statesEnumType» state);
+			extern sc_boolean «stateActiveFctID»(const «scHandleDecl», «statesEnumType» state);
 			
 			#ifdef __cplusplus
 			}
@@ -187,11 +187,11 @@ class Statemachine {
 		
 		«ELSE»
 			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */ 
-			extern sc_boolean «asRaised»(«scHandleDecl»);
+			extern sc_boolean «asRaised»(const «scHandleDecl»);
 			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */ 
-				extern «type.targetLanguageName» «asGetter»(«scHandleDecl»);
+				extern «type.targetLanguageName» «asGetter»(const «scHandleDecl»);
 				
 			«ENDIF»
 		«ENDIF»
@@ -199,7 +199,7 @@ class Statemachine {
 
 	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-		extern «type.targetLanguageName» «it.asGetter»(«scHandleDecl»);
+		extern «type.targetLanguageName» «it.asGetter»(const «scHandleDecl»);
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
 			extern void «asSetter»(«scHandleDecl», «type.targetLanguageName» value);
