@@ -254,9 +254,19 @@ p(#UsetheEditor). Next, create the statechart model itself:
 
 h2. Using the editor
 
+Within the Eclipse workbench, the area marked by a red rectangle in the image below is the *statechart editor*. The subsequent paragraph will explain how to work with it, how to create and modify the statechart for the _CallHandling_ example.
+
+!images/callhandling_080_editing_editor.png!
+
 h3. Creating interfaces
 
-YAKINDU statecharts are self-contained – they not only contain the definition of states and state transitions, but also the definition of the statechart interfaces. To define those interfaces, start the direct editing mode by double-clicking onto the statechart definition block on the left-hand side. Enter the following definition:
+Statecharts can describe very complex interactions between a multitude of actors and an even bigger multitude of events these actors can receive or trigger. It is therefore good practice to structure those events and associate them with their respective actors. For this purpose Yakindu Statecharts Tools provides the concept of so-called *interfaces*[2].
+
+In the _CallHandling_ example, we have two actors: the user and the phone. Let's model their communication as two interfaces:
+* The _Phone_ interface provides a single incoming event named _incoming_call_.
+* The _User_ interface comprises two incoming events: _accept_call_ and _dismiss_call_.
+
+We have to enter the respective definitions in textual form into the statechart editor. Here's how the interface definitions look like:
 
 bc(prettyprint). interface User:
     in event accept_call
@@ -265,11 +275,15 @@ bc(prettyprint). interface User:
 bc(prettyprint). interface Phone:
     var duration : integer
     in event incoming_call
-	
-Tip: The statechart editor's content assist offers code completion for all textual parts. To open the content assist, press @[Ctrl+Space]@. For all keywords, a detailed description with sample code shows up in the help hover besides the content assist window.
-!images/ctrlspace.png! 
 
-The sample code contains two interfaces and one internal block. The _User_ interface defines the communication of the system with the user. It consists of the two in events _dismiss_call_ and _accept_call_. The _Phone_ interface defines the communication with the underlying hardware. It provides the in event _incoming_call_ as well as a variable _duration_ of type _integer_.
+As you can see, _Phone_ interface also has an integer variable _duration_, which will be explained later. This text has to go into the statechart editor's *definition block*, which is the compartment on the statechart editor's left-hand side. To enter the text, double-click on the definition block and start typing.
+
+Hint: The text editor offers context-sensitive assistance helping you to know what keyword etc. are allowed at the very position the text cursor currently is. Let's assume you have just entered the definition of the _User_ interface and your text cursor is positioned _behind_ that definition.
+# Press @[Ctrl+Space]@. This key combination invokes the *content assist*. A popup window appears showing all keyword alternatives that are allowed here.
+# Single-click on one of the alternatives, say on @interface@, and a help text containing a detailed description with sample code is displayed in a second popup window.
+# Double-click on it, and the keyword is carried over into the text field.
+
+!images/callhandling_090_editing_interfaces.png!
 
 h3. Creating states
 
@@ -379,6 +393,8 @@ Let's have a detailed look at the implementation.
 You can execute the client code via _Run As → Java Application_ from the class file's context menu.
 
 
-h2(#Overview). Weblinks
+h2(#Footnotes). Footnotes
 
 fn1. "UML state machine":http://en.wikipedia.org/wiki/UML_state_machine
+
+fn2. Not to be confused with user interfaces.
