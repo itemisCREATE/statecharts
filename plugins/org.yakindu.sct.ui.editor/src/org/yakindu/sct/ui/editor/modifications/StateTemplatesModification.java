@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.editor.editor.proposals;
+package org.yakindu.sct.ui.editor.modifications;
 
 import static org.eclipse.emf.ecore.util.EcoreUtil.getObjectByType;
 
@@ -28,7 +28,6 @@ import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.base.xtext.utils.gmf.proposals.AbstractSemanticModification;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;

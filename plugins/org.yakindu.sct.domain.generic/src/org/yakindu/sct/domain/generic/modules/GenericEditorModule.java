@@ -12,13 +12,14 @@ package org.yakindu.sct.domain.generic.modules;
 
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.sct.refactoring.proposals.RefactoringProposalProvider;
+import org.yakindu.sct.ui.editor.editor.proposals.SmartEditProposalProvider;
 import org.yakindu.sct.ui.editor.proposals.IEditProposalProvider;
-import org.yakindu.sct.ui.editor.proposals.SCTSmartEditProposalProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.multibindings.Multibinder;
 
 /**
+ * This module registers services that are intended to be used by the graphical editor.
  * 
  * @author terfloth
  *
@@ -29,7 +30,7 @@ public class GenericEditorModule extends AbstractGenericModule {
 		super.configure(binder);
 		
 		Multibinder<IEditProposalProvider> proposalProviderBinder = Multibinder.newSetBinder(binder, IEditProposalProvider.class);
-	    proposalProviderBinder.addBinding().to(SCTSmartEditProposalProvider.class);
+	    proposalProviderBinder.addBinding().to(SmartEditProposalProvider.class);
 	    proposalProviderBinder.addBinding().to(RefactoringProposalProvider.class);
 	}
 

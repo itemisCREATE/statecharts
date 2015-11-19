@@ -8,14 +8,15 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.editor.proposals;
+package org.yakindu.sct.ui.editor.editor.proposals;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.ui.editor.editor.proposals.AddCompositeModification;
-import org.yakindu.sct.ui.editor.editor.proposals.AddOutgoingStateModification;
+import org.yakindu.sct.ui.editor.proposals.IEditProposal;
+import org.yakindu.sct.ui.editor.proposals.IEditProposalProvider;
+import org.yakindu.sct.ui.editor.proposals.ModificationBasedEditProposal;
 
 /**
  * This provider implementation provides the standard high level editing operations.
@@ -24,7 +25,7 @@ import org.yakindu.sct.ui.editor.editor.proposals.AddOutgoingStateModification;
  *  
  * @author terfloth
  */
-public class SCTSmartEditProposalProvider implements IEditProposalProvider {
+public class SmartEditProposalProvider implements IEditProposalProvider {
 
 	@Override
 	public List<IEditProposal> getProposals(View view) {
