@@ -29,6 +29,7 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Control;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
+import org.yakindu.sct.ui.editor.StatechartImages;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -202,6 +203,12 @@ public class ContentProposalHandler implements IContentProposalProvider {
 	 */
 	public static class ProposalLabelProvider extends LabelProvider {
 
+		protected Image defaultImage;
+
+		public ProposalLabelProvider() {
+			defaultImage = StatechartImages.SUB_STATECHART_PICTOGRAM.image();
+		}
+
 		@Override
 		public String getText(Object element) {
 			if (element instanceof IContentProposal) {
@@ -212,10 +219,13 @@ public class ContentProposalHandler implements IContentProposalProvider {
 
 		@Override
 		public Image getImage(Object element) {
+			
+			Image image = null;
 			if (element instanceof EditProposalWrapper) {
-				return ((EditProposalWrapper) element).getEditProposal().getImage();
+				image = ((EditProposalWrapper) element).getEditProposal().getImage();
 			}
-			return super.getImage(element);
+			
+			return (image != null)? image : defaultImage;
 		}
 
 	}
