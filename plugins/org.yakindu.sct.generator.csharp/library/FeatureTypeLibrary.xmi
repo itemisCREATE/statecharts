@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sgen:FeatureTypeLibrary
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:sgen="http://www.yakindu.org/sct/statechart/SGen"
+    xsi:schemaLocation="http://www.yakindu.org/sct/statechart/SGen ../../org.yakindu.sct.model.sgen/model/emf/sgen.ecore"
+    name="C# Generator">
+  <types name="Naming"
+      optional="true">
+    <parameters
+        name="implementationSuffix"
+        optional="true"/>
+    <parameters
+        name="namespaceName"
+        comment="Namespace the state chart and all its utility functions live in"/>
+  </types>
+  <types name="GeneralFeatures"
+      optional="true">
+    <parameters
+        name="InterfaceObserverSupport"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="RuntimeService"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="TimerService"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="UseCSharpIntForInteger"
+        optional="true"
+        parameterType="BOOLEAN"/>
+  </types>
+  <types name="RunnableWrapper"
+      comment="Generates a runnable wrapper for the statemachine"
+      optional="true">
+    <parameters
+        name="namePrefix"
+        comment="Name prefix"
+        optional="true"/>
+    <parameters
+        name="nameSuffix"
+        comment="Name suffix"
+        optional="true"/>
+  </types>
+</sgen:FeatureTypeLibrary>

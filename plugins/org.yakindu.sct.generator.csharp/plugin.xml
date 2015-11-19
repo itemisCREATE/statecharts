@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.yakindu.sct.generator.core.generator">
+       <SCTGenerator
+            class="org.yakindu.sct.generator.csharp.CSharpCodeGenerator"
+            description="YAKINDU SCT C# Code Generator"
+            contentType="statechart"
+            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+            icon="icons/sct.png"
+            id="yakindu::csharp"
+            name="YAKINDU SCT C# Code Generator">
+          <FeatureLibrary
+                library_id="org.yakindu.generator.core.features">
+          </FeatureLibrary>
+          <FeatureLibrary
+                library_id="org.yakindu.generator.core.features.sctbase">
+          </FeatureLibrary>
+          <FeatureLibrary
+                library_id="org.yakindu.sct.generator.feature.csharp">
+          </FeatureLibrary>
+      </SCTGenerator>
+   </extension>
+   <extension
+         point="org.yakindu.sct.generator.core.featuretypes">
+      <FeatureLibrary
+            defaultProvider="org.yakindu.sct.generator.csharp.features.CSharpFeatureValueProvider"
+            library_id="org.yakindu.sct.generator.feature.csharp"
+            uri="platform:/plugin/org.yakindu.sct.generator.csharp/library/FeatureTypeLibrary.xmi">
+      </FeatureLibrary>
+   </extension>
+   <extension
+         point="org.yakindu.sct.generator.core.extensions">
+      <ExtensionGeneratorMapping
+            fileExtension="sct"
+            generatorId="yakindu::csharp">
+      </ExtensionGeneratorMapping>
+   </extension>
+
+</plugin>
