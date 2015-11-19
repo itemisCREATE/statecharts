@@ -175,7 +175,7 @@ class StatemachineC {
 	
 	def raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»
-			void «raiseTimeEventFctID»(«type»* handle, sc_eventid evid) {
+			void «raiseTimeEventFctID»(const «type»* handle, sc_eventid evid) {
 				if ( ((intptr_t)evid) >= ((intptr_t)&(«scHandle»->timeEvents))
 					&&  ((intptr_t)evid) < ((intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»)) {
 					*(sc_boolean*)evid = bool_true;
@@ -185,7 +185,7 @@ class StatemachineC {
 	'''
 	
 	def isStateActiveFunction(ExecutionFlow it) '''
-		sc_boolean «stateActiveFctID»(«scHandleDecl», «statesEnumType» state) {
+		sc_boolean «stateActiveFctID»(const «scHandleDecl», «statesEnumType» state) {
 			switch (state) {
 				«FOR s : states»
 				case «s.shortName» : 
@@ -200,7 +200,7 @@ class StatemachineC {
 	
 	def isActiveFunction(ExecutionFlow it) '''
 
-		sc_boolean «isActiveFctID»(«scHandleDecl») {
+		sc_boolean «isActiveFctID»(const «scHandleDecl») {
 			return «FOR i : 0 ..< stateVector.size SEPARATOR '||'»«scHandle»->stateConfVector[«i»] != «null_state»«ENDFOR»;
 		}
 	'''
@@ -214,7 +214,7 @@ class StatemachineC {
 			 * Always returns 'false' since this state machine can never become final.
 			 */
 			«ENDIF»
-			sc_boolean «isFinalFctID»(«scHandleDecl»){
+			sc_boolean «isFinalFctID»(const «scHandleDecl»){
 		''' +
 		// only if the impact vector is completely covered by final states the state machine 
 		// can become final
@@ -241,18 +241,18 @@ class StatemachineC {
 			«ENDFOR»
 			
 			«FOR event : scope.outgoingEvents»
-				sc_boolean «event.asRaised»(«scHandleDecl») {
+				sc_boolean «event.asRaised»(const «scHandleDecl») {
 					return «event.access»;
 				}
 				«IF event.hasValue» 
-					«event.type.targetLanguageName» «event.asGetter»(«scHandleDecl») {
+					«event.type.targetLanguageName» «event.asGetter»(const «scHandleDecl») {
 						return «event.valueAccess»;
 					}
 				«ENDIF»
 			«ENDFOR»
 			
 			«FOR variable : scope.variableDefinitions»
-				«variable.type.targetLanguageName» «variable.asGetter»(«scHandleDecl») {
+				«variable.type.targetLanguageName» «variable.asGetter»(const «scHandleDecl») {
 					return «variable.access»;
 				}
 				«IF !variable.readonly && !variable.const»
