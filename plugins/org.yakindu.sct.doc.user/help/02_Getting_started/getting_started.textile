@@ -228,21 +228,29 @@ p(#Prepareaproject). During this tutorial we will create a system for handling i
 
 h2. Preparing a project
 
-p(#Createastatechartmodel). The first step is to create a new Eclipse project by selecting _File → New → Project…_. A wizard opens, showing a couple of different project types. Since we want to generate Java code from our statechart model later on, select _Java → Java Project_ from the wizard menu. Give the project a meaningful name, e.g. *CallHandling* and click _Finish_. As a result, Eclipse creates the project and establishes a folder _src_ inside of it. This folder is indended for Java code.
+p(#Createastatechartmodel). The first step is to create a new Eclipse project by selecting _File → New → Project…_. A wizard opens, showing a couple of different project types. Since we want to generate Java code from our statechart model later on, select _Java → Java Project_ from the wizard menu. Give the project a meaningful name, e.g. *CallHandling* and click _Finish_.
 
-However, we won't deal with Java programming right now, but rather create our statechart model. It is good practice to keep models and source code separate. So, let's create a new folder for the model. Right-click on the project's root, i.e. on *CallHandling*, then select _File → New → Folder_ from the context menu. Give the model folder a reasonable name, e.g. *model*, then click _Finish_.
+!images/callhandling_create_java_project.png!
+
+As a result, Eclipse creates the project and establishes a folder _src_ inside of it. Initially this folder is empty. It is indended for user-created Java code.
+
+!images/callhandling_new_java_project.png!
+
+However, we won't deal with Java programming right now, but rather create our statechart model first. It is good practice to keep models and source code separate. So, let's create a new folder for the model. Right-click on the project's root, i.&nbsp;e. on *CallHandling*, then select _New → Folder_ from the context menu. Give the model folder a reasonable name by typing e.&nbsp;g. *model* into the _Folder Name_ text field, then click _Finish_. The new _model_ folder appears in the package explorer:
+
+!images/callhandling_030_model_folder_created.png!
 
 h2. Creating a statechart model
 
 p(#UsetheEditor). Next, create the statechart model itself:
 * Right-click the *model* folder. The context menu opens.
-* Select _File → New → Other_. The _New_ wizard opens.
-* In the _New_ wizard, select _YAKINDU SCT → Statechart model_.
+* Select _New → Other_. The _New_ wizard opens.
+* In the _New_ wizard, select _YAKINDU SCT → Statechart model_.<br/>!images/callhandling_040_create_model_new_statechart_model.png!
 * Click _Next_.
-* In the following dialog, the wizard asks for the name the of the model file and for the directory it should be created in. Let's choose *CallHandling.sct* as the file name and *CallHandling/model* as the directory name, i.e. the directory *model* inside the Eclipse project *CallHandling*.
+* In the following dialog, the wizard asks for the name the of the model file and for the directory it should be created in. Let's choose *CallHandling.sct* as the file name and *CallHandling/model* as the directory name, i.e. the directory *model* inside the Eclipse project *CallHandling*.<br/>!images/callhandling_050_create_model_specify_name.png!
 * Click _Finish_.
-* Answer the question regarding the perspective switch with _Yes_.
-* The statechart editor opens and shows the definition of a very simple statechart.
+* Answer the question regarding the perspective switch with _Yes_.<br/>!images/callhandling_060_create_model_modeling_perspective_dialog.png!
+* The statechart editor opens and shows the definition of a very simple statechart. You will notice that the statechart editor flags an error in the model. This is due to the fact that the state does not have a name yet. The error marker will disappear once when have named the state.<br/>!images/callhandling_070_create_model_completed.png!<br/>
 
 h2. Using the editor
 
