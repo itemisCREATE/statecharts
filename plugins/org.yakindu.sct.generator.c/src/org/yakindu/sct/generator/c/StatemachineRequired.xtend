@@ -74,11 +74,11 @@ class StatemachineRequired {
 			
 			«ENDFOR»
 			«IF timed»
-			//
-			// This is a timed state machine that requires timer services
-			// 
+			/*!
+			 * This is a timed state machine that requires timer services
+			 */ 
 			
-			//! This function has to set up timers for the time events that are required by the state machine.
+			/*! This function has to set up timers for the time events that are required by the state machine. */
 			/*! 
 				This function will be called for each time event that is relevant for a state when a state will be entered.
 				\param evid An unique identifier of the event.
@@ -87,7 +87,7 @@ class StatemachineRequired {
 			*/
 			extern void «type.toFirstLower»_setTimer(«scHandleDecl», const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 
-			//! This function has to unset timers for the time events that are required by the state machine.
+			/*! This function has to unset timers for the time events that are required by the state machine. */
 			/*! 
 				This function will be called for each time event taht is relevant for a state when a state will be left.
 				\param evid An unique identifier of the event.
