@@ -270,7 +270,7 @@ class StatemachineC {
 	 
 	/** */
 	def functionPrototypes(ExecutionFlow it) '''
-		// prototypes of all internal functions
+		/* prototypes of all internal functions */
 		
 		«checkFunctions.toPrototypes»
 		«effectFunctions.toPrototypes»
@@ -307,7 +307,7 @@ class StatemachineC {
 	 
 	/** */
 	def functionImplementations(ExecutionFlow it) '''
-		// implementations of all internal functions
+		/* implementations of all internal functions */
 		
 		«checkFunctions.toImplementation»
 		«effectFunctions.toImplementation»

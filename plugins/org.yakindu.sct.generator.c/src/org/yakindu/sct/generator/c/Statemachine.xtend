@@ -105,7 +105,7 @@ class Statemachine {
 	'''
 
 	def statesEnumDecl(ExecutionFlow it) '''
-		//! enumeration of all states 
+		/*! Enumeration of all states */ 
 		typedef enum {
 			«FOR state : states »
 			«state.shortName»,
@@ -132,14 +132,14 @@ class Statemachine {
 	
 	
 	def scopeTypeDecl(Scope it) '''
-		//! Type definition of the data structure for the «type» interface scope.
+		/*! Type definition of the data structure for the «type» interface scope. */
 		typedef struct {
 			«FOR d : declarations »
 			«d.structDeclaration»
 			«ENDFOR»
 		} «it.type»;
 		
-		//declaration of constants for scope «type»
+		/* Declaration of constants for scope «type». */
 		«FOR d : declarations.filter(typeof(VariableDefinition)).filter[const]»
 			«IF d.type.name != 'void'»const «d.type.targetLanguageName» «d.constantName» = «d.initialValue.resolveConstants»;«ENDIF»
 		«ENDFOR»
@@ -147,14 +147,16 @@ class Statemachine {
 	'''
 
 	def statemachineTypeDecl(ExecutionFlow it) '''
-		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
+		/*! Define dimension of the state configuration vector for orthogonal states. */
 		#define «type.toUpperCase»_MAX_ORTHOGONAL_STATES «stateVector.size»
 		«IF hasHistory»
-		//! dimension of the state configuration vector for history states
+		/*! Define dimension of the state configuration vector for history states. */
 		#define «type.toUpperCase»_MAX_HISTORY_STATES «historyVector.size»«ENDIF»
 		
-		/*! Type definition of the data structure for the «type» state machine.
-		This data structure has to be allocated by the client code. */
+		/*! 
+		 * Type definition of the data structure for the «type» state machine.
+		 * This data structure has to be allocated by the client code. 
+		 */
 		typedef struct {
 			«statesEnumType» stateConfVector[«type.toUpperCase»_MAX_ORTHOGONAL_STATES];
 			«IF hasHistory»«statesEnumType» historyVector[«type.toUpperCase»_MAX_HISTORY_STATES];«ENDIF»
