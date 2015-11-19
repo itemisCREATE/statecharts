@@ -84,12 +84,14 @@ class StatemachineC {
 		{
 			int i;
 
-			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i)
+			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i) {
 				«scHandle»->stateConfVector[i] = «null_state»;
+			}
 			
 			«IF hasHistory»
-			for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i)
+			for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i) {
 				«scHandle»->historyVector[i] = «null_state»;
+			}
 			«ENDIF»
 			
 			«scHandle»->stateConfVectorPosition = 0;
