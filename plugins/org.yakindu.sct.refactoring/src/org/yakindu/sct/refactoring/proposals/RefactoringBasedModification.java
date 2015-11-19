@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 committers of YAKINDU and others.
+ * Copyright (c) 2013-2015 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -13,32 +13,48 @@ package org.yakindu.sct.refactoring.proposals;
 import java.util.Collections;
 
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.base.xtext.utils.gmf.proposals.ISemanticModification;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.refactoring.refactor.IRefactoring;
+import org.yakindu.sct.ui.editor.modifications.ISemanticModification;
 
 /**
  * Adapts the {@link ISemanticModification} interface to the
  * {@link IRefactoring} interface
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author terfloth
  * 
  */
-public class SemanticModificationAdapter implements ISemanticModification {
+public class RefactoringBasedModification implements ISemanticModification {
 
+	private View targetView;
 	private AbstractRefactoring<View> refactoring;
 
-	public SemanticModificationAdapter(AbstractRefactoring<View> refactoring) {
-		this.refactoring = refactoring;
-
+	
+	@Override
+	public void setTargetView(View view) {
+		targetView = view;
 	}
 
-	public boolean IsModificationFor(View object) {
-		refactoring.setContextObjects(Collections.singletonList(object));
+	@Override
+	public View getTargetView() {
+		return targetView;
+	}
+
+
+	public RefactoringBasedModification(View view, AbstractRefactoring<View> refactoring) {
+		this.targetView = view;
+		this.refactoring = refactoring;
+	}
+
+	
+	public boolean isApplicable() {
+		if ( targetView == null ) return false;
+		refactoring.setContextObjects(Collections.singletonList(targetView));
 		return refactoring.isExecutable();
 	}
 
-	public void modify(View view) {
+	public void modify() {
 		refactoring.execute();
 	}
 

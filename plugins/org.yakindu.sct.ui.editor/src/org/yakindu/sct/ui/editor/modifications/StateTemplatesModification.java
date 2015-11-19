@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 committers of YAKINDU and others.
+ * Copyright (c) 2013-2015 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.editor.editor.proposals;
+package org.yakindu.sct.ui.editor.modifications;
 
 import static org.eclipse.emf.ecore.util.EcoreUtil.getObjectByType;
 
@@ -28,7 +28,6 @@ import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.base.xtext.utils.gmf.proposals.AbstractSemanticModification;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
@@ -36,19 +35,23 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author terfloth
  * 
  */
 public abstract class StateTemplatesModification extends AbstractSemanticModification {
 
 	public abstract String getTemplatePath();
 
-	public boolean IsModificationFor(View view) {
-		return view.getElement() instanceof State;
+
+	@Override
+	protected boolean check(EObject semanticObject, View view) {
+		return semanticObject instanceof State;
 	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void internalExecute(EObject semanticObject, View view) {
+	protected void execute(EObject semanticObject, View view) {
 		State state = (State) semanticObject;
 		Resource resource = loadTemplateResource(getTemplatePath());
 		Diagram diagram = (Diagram) getObjectByType(resource.getContents(), NotationPackage.Literals.DIAGRAM);
@@ -77,11 +80,13 @@ public abstract class StateTemplatesModification extends AbstractSemanticModific
 		setPreferredSize(view);
 	}
 
+	
 	protected Resource loadTemplateResource(String templatePath) {
 		ResourceSet set = new ResourceSetImpl();
 		return set.getResource(URI.createPlatformPluginURI(getTemplatePath(), true), true);
 	}
 
+	
 	protected void setPreferredSize(View view) {
 		Bounds bounds = (Bounds) ((Node) view).getLayoutConstraint();
 		bounds.setWidth(-1);

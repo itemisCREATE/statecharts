@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-	<!-- Extension Points -->
-	
-   <extension-point id="org.yakindu.sct.ui.editor.proposals" name="proposals" schema="schema/org.yakindu.sct.ui.editor.proposals.exsd"/>
-  
     <!-- Editor -->
   
    <extension
@@ -994,19 +990,5 @@
       </factory>
    </extension>
   <!-- Added default templates -->
- <extension
-       point="org.yakindu.sct.ui.editor.proposals">
-       <ContentProposal
-             id="org.yakindu.sct.ui.editor.proposal.subregion"
-             label="Add Subregion"
-             modification="org.yakindu.sct.ui.editor.editor.proposals.AddCompositeModification">
-       </ContentProposal>
-       <ContentProposal
-             description="Adds an outgoing state "
-             id="org.yakindu.sct.ui.editor.proposal.outgoingstate"
-             label="Add outgoing state"
-             modification="org.yakindu.sct.ui.editor.editor.proposals.AddOutgoingStateModification">
-       </ContentProposal>
- </extension>   
    
 </plugin>

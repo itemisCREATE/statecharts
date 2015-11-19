@@ -16,6 +16,7 @@ import com.google.inject.Injector;
 
 /**
  * @author andreas muelder - Initial contribution and API
+ * @author terfloth
  * 
  */
 public interface IDomainInjectorProvider {
@@ -45,4 +46,9 @@ public interface IDomainInjectorProvider {
 	 */
 	public Injector getEmbeddedEditorInjector(String elementKey);
 
+	
+	/**
+	 * Returns an injector for all editor and UI related stuff.
+	 */
+	public Injector getEditorInjector();
 }

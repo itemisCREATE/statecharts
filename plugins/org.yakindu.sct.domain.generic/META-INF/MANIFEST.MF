@@ -13,7 +13,11 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.simulation.core,
  org.eclipse.xtext.ui,
  org.yakindu.sct.model.stext.ui,
- org.eclipse.xtext.ui.shared;bundle-version="2.7.2"
+ org.eclipse.xtext.ui.shared;bundle-version="2.7.2",
+ org.eclipse.gmf.runtime.notation;bundle-version="1.8.0",
+ org.yakindu.sct.ui.editor;bundle-version="2.5.0",
+ org.yakindu.base.xtext.utils.gmf;bundle-version="2.5.0",
+ org.yakindu.sct.refactoring;bundle-version="2.5.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.domain.generic,

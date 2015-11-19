@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.editor.proposals;
 
+import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.ui.editor.modifications.StateTemplatesModification;
 
 /**
  * 
@@ -17,6 +19,12 @@ package org.yakindu.sct.ui.editor.editor.proposals;
  * 
  */
 public class AddCompositeModification extends StateTemplatesModification {
+
+	
+	public AddCompositeModification(View view) {
+		super();
+		setTargetView(view);
+	}
 
 	@Override
 	public String getTemplatePath() {

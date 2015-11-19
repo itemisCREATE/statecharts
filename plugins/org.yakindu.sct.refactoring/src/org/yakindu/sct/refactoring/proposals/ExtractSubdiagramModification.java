@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 committers of YAKINDU and others.
+ * Copyright (c) 2013-2015 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,17 +10,19 @@
  */
 package org.yakindu.sct.refactoring.proposals;
 
+import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.refactoring.refactor.impl.ExtractSubdiagramRefactoring;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author terfloth
  * 
  */
-public class ExtractSubdiagramModification extends SemanticModificationAdapter {
+public class ExtractSubdiagramModification extends RefactoringBasedModification {
 
-	public ExtractSubdiagramModification() {
-		super(new ExtractSubdiagramRefactoring());
+	public ExtractSubdiagramModification(View view) {
+		super(view, new ExtractSubdiagramRefactoring());
 	}
 
 }
