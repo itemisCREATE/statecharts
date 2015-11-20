@@ -40,7 +40,6 @@
           <children xsi:type="notation:Compartment" xmi:id="_xNFUk0M7EeG-xr5kMvujEg" type="StateFigureCompartment"/>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_xNEtikM7EeG-xr5kMvujEg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_xNEti0M7EeG-xr5kMvujEg"/>
-          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_xNFUlEM7EeG-xr5kMvujEg"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_xNFUlUM7EeG-xr5kMvujEg" x="60" y="75"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_xNEGcUM7EeG-xr5kMvujEg"/>

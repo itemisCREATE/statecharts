@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Luna (SCT)" sequenceNumber="22">
+<?pde version="3.8"?><target name="Luna (SCT)" sequenceNumber="23">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.platform.ide" version="4.4.2.M20150204-1700"/>
@@ -14,13 +14,6 @@
 <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.8.0.201405281433"/>
 <unit id="org.eclipse.emf.compare.diagram.gmf.feature.group" version="3.0.2.201501201328"/>
 <repository location="http://download.eclipse.org/releases/luna"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="com.google.inject" version="3.0.0.v201312141243"/>
-<unit id="com.google.inject.source" version="3.0.0.v201312141243"/>
-<unit id="com.google.inject.multibindings" version="3.0.0.v201402270930"/>
-<unit id="com.google.inject.multibindings.source" version="3.0.0.v201402270930"/>
-<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
 </location>
 </locations>
 </target>
