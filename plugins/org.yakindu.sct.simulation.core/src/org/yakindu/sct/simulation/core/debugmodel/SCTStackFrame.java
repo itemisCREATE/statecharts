@@ -152,6 +152,7 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 		return element.eResource().getURI().toPlatformString(true);
 	}
 
+	@SuppressWarnings("unchecked")
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == EObject.class)
 			return element;

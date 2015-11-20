@@ -103,27 +103,29 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 		for (RegularState vertex : activeLeafStates) {
 			activeRegions.add(vertex.getParentRegion());
 		}
-		// Remove orphaned debug threads
-		Iterator<SCTDebugThread> iterator = threads.iterator();
-		while (iterator.hasNext()) {
-			SCTDebugThread next = iterator.next();
-			if (!activeRegions.contains(next.getElement())) {
-				iterator.remove();
-			}
-		}
-		// Add new debug threads
-		for (Region region : activeRegions) {
-			boolean found = false;
-			for (SCTDebugThread thread : threads) {
-				if (thread.getElement() == region) {
-					found = true;
+		synchronized (threads) {
+			// Remove orphaned debug threads
+			Iterator<SCTDebugThread> iterator = threads.iterator();
+			while (iterator.hasNext()) {
+				SCTDebugThread next = iterator.next();
+				if (!activeRegions.contains(next.getElement())) {
+					iterator.remove();
 				}
 			}
-			if (!found) {
-				threads.add(new SCTDebugThread(this, engine, getResourceString(), region));
+			// Add new debug threads
+			for (Region region : activeRegions) {
+				boolean found = false;
+				for (SCTDebugThread thread : threads) {
+					if (thread.getElement() == region) {
+						found = true;
+					}
+				}
+				if (!found) {
+					threads.add(new SCTDebugThread(this, engine, getResourceString(), region));
+				}
 			}
+			return threads.toArray(new IThread[] {});
 		}
-		return threads.toArray(new IThread[] {});
 	}
 
 	public boolean hasThreads() throws DebugException {
@@ -216,6 +218,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 		return this;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == ISimulationEngine.class)
 			return engine;
