@@ -114,6 +114,13 @@
 						<encoding>UTF-8</encoding>
 						<source>6.0</source>
 						<target>6.0</target>
+						<extraClasspathElements>
+							<extraClasspathElement>
+								<groupId>com.google.inject.extensions</groupId>
+								<artifactId>guice-multibindings</artifactId>
+								<version>3.0</version>
+							</extraClasspathElement>
+						</extraClasspathElements>
 					</configuration>
 				</plugin>
 				<plugin>
