@@ -58,27 +58,27 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 		semanticTargetToRuleMap.put(Guard.class.getName(), Guard.class);
 	}
 
-	protected Module getSharedStateModule() {
+	public Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
 
-	protected Module getLanguageRuntimeModule() {
+	public Module getLanguageRuntimeModule() {
 		return new STextRuntimeModule();
 	}
 
-	protected Module getLanguageUIModule() {
+	public Module getLanguageUIModule() {
 		return new STextUiModule(STextActivator.getInstance());
 	}
 
-	protected Module getTypeSystemModule() {
+	public Module getTypeSystemModule() {
 		return new GenericTypeSystemModule();
 	}
 
-	protected Module getSimulationModule() {
+	public Module getSimulationModule() {
 		return new GenericSimulationModule();
 	}
 
-	protected Module getSequencerModule() {
+	public Module getSequencerModule() {
 		return new GenericSequencerModule();
 	}
 
