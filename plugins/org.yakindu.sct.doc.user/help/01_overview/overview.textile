@@ -1,4 +1,4 @@
-h1. Overview
+h1(#Overview). Overview
 
 h2(#WhatareYAKINDUStatechartTools). What are YAKINDU Statechart Tools?
 
@@ -25,3 +25,13 @@ You may ask: Where does the money for open-source development come from? Well, w
 h2(#WhoisusingtheYAKINDUStatechartTools). Who is using YAKINDU Statechart Tools?
 
 Initially YAKINDU Statechart Tools were designed for the embedded systems industry: automotive, system controls, vending machines etc. ut it brings benefit to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, or C++.
+
+
+h2. What is the structure of this documentation?
+
+# "Overview":#Overview
+# "Installation":../02_installation/installation.html
+# "Getting Started":../03_getting_started/getting_started.html
+# "Code generation":../04_code_generation/code_generation.html
+# "Reference":../05_reference/reference.html
+# "Task":../06_tasks/tasks.html
