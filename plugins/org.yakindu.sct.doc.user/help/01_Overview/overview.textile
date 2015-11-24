@@ -1,6 +1,6 @@
 h1. Overview
 
-h2(#WhatareYAKINDUStatechartTools2). What are YAKINDU Statechart Tools 2?
+h2(#WhatareYAKINDUStatechartTools). What are YAKINDU Statechart Tools?
 
 The statechart tools are a central part of YAKINDU: the modular toolkit for model-driven development of embedded systems. It is based on the open-source development platform Eclipse. YAKINDU Statechart Tools provide the following tools to deal with state machine diagrams:
 
@@ -15,13 +15,13 @@ The following graph shows these features and their relation to each other:
 !images/YAKINDU_features.png! 
 
 
-h2(#WhoisbehindYAKINDUStatechartTools2). Who is behind YAKINDU Statechart Tools 2?
+h2(#WhoisbehindYAKINDUStatechartTools). Who is behind YAKINDU Statechart Tools?
 
-The main part of YAKINDU SCT 2 is an open-source project ("http://www.yakindu.org/":http://www.yakindu.org/ ). Most developers work for itemis, a well-known consulting company specialized on model-based development.
+The main part of YAKINDU Statechart Tools is an open-source project ("http://www.yakindu.org/":http://www.yakindu.org/ ). Most developers work for itemis, a well-known consulting company specialized on model-based development.
 
-You may ask: Where does the money for open-source development come from? Well, we are providing professional services around Yakindu, be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages, you name it. We do not only know the framework very well but we are also experts in programming and domain-specific language design. If you need an advice get in contact with us ("http://www.yakindu.de/":http://www.yakindu.de/ ). 
+You may ask: Where does the money for open-source development come from? Well, we are providing professional services around YAKINDU, be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages, you name it. We do not only know the framework very well but we are also experts in programming and domain-specific language design. If you need an advice get in contact with us ("http://www.yakindu.de/":http://www.yakindu.de/ ). 
 
 
-h2(#WhoisusingtheYAKINDUStatechartTools2). Who is using YAKINDU Statechart Tools 2?
+h2(#WhoisusingtheYAKINDUStatechartTools). Who is using YAKINDU Statechart Tools?
 
-Initially the YAKINDU SCT 2 were designed for the embedded systems industry: automotive, system controls, vending machines etc. ut it brings benefit to everyone who needs to design, simulate and develop behavior. People can use the YAKINDU SCT 2 to generate Java, C, or C++.
+Initially YAKINDU Statechart Tools were designed for the embedded systems industry: automotive, system controls, vending machines etc. ut it brings benefit to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, or C++.
