@@ -1,5 +1,7 @@
 h1. Tasks
 
+{toc}
+
 h2. Simulating operations with custom Java code
 
 To simulate a model with operations it is possible to use custom Java code that mocks the desired behavior or even to simulate against an existing Java backend. For this purpose it is required to provide one or more custom Java classes having a method with a matching signature. 
@@ -69,7 +71,7 @@ A single generator model can contain several _StatechartReferences_. These are c
  
 The generator model is executed by a so-called Eclipse builder. Thus, the artifacts are generated automatically if _Project → Build Automatically_ is checked. If you want to execute your Generator Model manually, select _Generate Statechart Artifacts_ from the _Package Explorer_'s context menu.
 
-h2. Create custom code generators
+h2. Creating custom code generators
 
 Although YAKINDU Statechart Tools are shipped with powerful code generators for C, C++ and Java, it may be necessary to create a custom code generator to support a variety of use cases. One reason for a custom code generator could be to support additional programming languages – in this case we would be happy to receive a contribution! – or to generate code for an existing framework. 
 

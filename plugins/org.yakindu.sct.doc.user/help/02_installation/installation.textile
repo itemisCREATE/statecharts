@@ -1,1 +1,257 @@
-h1. Placeholder
+h1(#InstallingYAKINDUStatechartTools). Installing YAKINDU Statechart Tools
+
+{toc}
+
+In order to start working with YAKINDU Statechart Tools, you have to install the software on your computer. We are assuming you have downloaded the software package and stored it somewhere on your machine.
+
+h2. Dependencies
+
+h3. Eclipse
+
+YAKINDU Statechart Tools is based on the Eclipse integrated development environment (IDE) and runs inside Eclipse. The installation process as described below will put a full-fledged Eclipse instance on your computer. It is comprised in the YAKINDU Statechart Tools distribution file you downloaded. You will have to unpack and execute Eclipse in order to work with YAKINDU Statechart Tools inside of it.
+
+
+h3. Java
+
+While YAKINDU Statechart Tools is based on Eclipse, the latter in turn is based on Java. In order to use Eclipse, you also need a more or less recent Java version on your machine. Depending on what you are going to do with YAKINDU Statechart Tools, you either need a Java Runtime Environment (JRE) or a Java Development Kit (JDK). Since a JDK always contains a JRE, it is a safe bet to install the former. However, unless you are going to do some Java development – i.&nbsp;e. create a state machine, turn it into Java source code, and use the latter from your Java client code –, you might get away with a JRE. Installation of Java is beyond the scope of this document. You can find more information and download the software from "https://www.java.com/":https://www.java.com/.
+
+In case you don't have Java on your machine yet and you are going to download and install it, make sure you are picking the variant with the correct bit size, i.&nbsp;e. either 32 or 64 bit, whichever is appropriate for your computer.
+
+
+h2. Plattform overview
+
+You can either install YAKINDU Statechart Tools as a stand-alone software package under the following operating systems.
+
+* "Installing YAKINDU Statechart Tools on Windows":#InstallingOnWindows
+* "Installing YAKINDU Statechart Tools on MacOS":#InstallingOnMacOS
+* "Installing YAKINDU Statechart Tools on Linux":#InstallingOnLinux
+
+Alternatively you can install YAKINDU Statechart Tools to an existing Eclipse instance.
+
+* "Installing YAKINDU Statechart Tools to an existing Eclipse instance":#InstallingOnEclipse
+
+
+
+h2(#InstallingOnWindows). Installing on Windows
+
+This chapter describes how to install YAKINDU Statechart Tools on a Windows 7 machine.
+
+h3. Unpacking the downloaded file
+
+Unpack the software distribution file. Use the file explorer to open the directory you downloaded the software distribution file to, right-click on the latter, and select _Extract all_ in the context menu.
+
+!(img-rounded shadowed)images/windows7_install_010_eclipse_extract_1.png!
+
+Choose a directory for YAKINDU Statechart Tools (SCT) – or Eclipse, respectively. The example below assumes you want to install the software in the _C:\Program Files\yakindu_sct_ directory. Please modify as needed!
+
+!(img-rounded shadowed)images/windows7_install_020_eclipse_extract_2.png!
+
+After unpacking, you will find a folder _eclipse_ in your installation directory, i.&nbsp;e. _C:\Program Files\yakindu_sct\eclipse_ in our example, as shown in the image below:
+
+!(img-rounded shadowed)images/windows7_install_030_eclipse_folder.png!
+
+The contents of the _eclipse_ folder looks like this:
+
+!(img-rounded shadowed)images/windows7_install_040_eclipse_contents.png!
+
+There you are: You have installed the software. Now you should start Eclipse.
+
+h3. Starting Eclipse
+
+Start Eclipse by running the _eclipse.exe_ executable.
+
+To do so, please double-click (or single-click, depending on your Windows settings) on the _eclipse_ symbol, shown as a dark purple circle with three horizontal lines in the sample screenshot above.
+
+While Eclipse is starting up, it is showing a splash screen:
+
+!(img-rounded shadowed)images/windows7_install_050_eclipse_splash.png!
+
+Eclipse needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, Eclipse's _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please specify a new and empty one.
+
+In the example below, we chose the _C:\Users\joedoe\workspace_ directory as our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, Eclipse won't ask for a workspace directory again, but will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the Eclipse menu.)
+
+!(img-rounded shadowed)images/windows7_install_060_eclipse_workspace_dialog.png!
+
+Click on the _OK_ button to proceed.
+
+On the first start, Eclipse presents a _Welcome_ window:
+
+!(img-rounded shadowed)images/windows7_install_070_eclipse_welcome.png!
+
+You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions lead to the Eclipse workbench:
+
+!(img-rounded shadowed)images/windows7_install_080_eclipse_workbench.png!
+
+This is your working environment now. Congratulations, you have just installed YAKINDU Statechart Tools with Eclipse!
+
+You can "proceed":../03_getting_started/getting_started.html now to create your first YAKINDU Statecharts Tools project.
+
+
+
+h2(#InstallingOnMacOS). Installing on MacOS
+
+This chapter describes how to install YAKINDU Statechart Tools on a Mac under MacOS.
+
+_*[To be done]*_
+
+This is your working environment now. Congratulations, you have just installed YAKINDU Statechart Tools with Eclipse!
+
+You can "proceed":../03_getting_started/getting_started.html now to create your first YAKINDU Statecharts Tools project.
+
+
+
+h2(#InstallingOnLinux). Installing on Linux
+
+This chapter describes how to install YAKINDU Statechart Tools on a Linux machine using a command-line tool. The installation doesn't require _root_ permissions.
+
+h3. Unpacking the downloaded file
+
+Choose a directory for YAKINDU Statechart Tools – or Eclipse, respectively. The commands below assume you want to install the software in the _/my/software_ directory. Please modify the commands appropriately to suit your needs!
+
+Go to the installation directory:
+
+bc(prettyprint). 
+cd /my/software/
+
+Unpack the software distribution file. If the downloaded file is located in _/download/yakindu-sct-luna-R-linux-gtk-x86_64.tar.gz_, use the following command to unpack in the installation directory:
+
+bc(prettyprint). 
+gzip -dc /download/yakindu-sct-luna-R-linux-gtk-x86_64.tar.gz | tar xvfp -
+
+This will create a folder _eclipse_ in your installation directory, i.&nbsp;e. _/my/software/eclipse_ in our example, as shown in the image below:
+
+!(img-rounded shadowed)images/linux_install_010_eclipse_folder.png!
+
+The contents of the _eclipse_ folder looks like this:
+
+!(img-rounded shadowed)images/linux_install_020_eclipse_contents.png!
+
+There you are: You have installed the software. Now you should start Eclipse.
+
+h3. Starting Eclipse
+
+Start Eclipse by running the _eclipse_ executable.
+
+To do so, please enter the command
+
+bc(prettyprint). 
+eclipse/eclipse
+
+in your installation directory. Or issue the command
+
+bc(prettyprint). 
+/my/software/eclipse/eclipse
+
+if your command shell is in any other working directory.
+
+From a file browser, you can start Eclipse by clicking on the _eclipse_ symbol, shown as a gear-wheel in the sample screenshot above.
+
+While Eclipse is starting up, it is showing a splash screen:
+
+!(img-rounded shadowed)images/linux_install_030_eclipse_splash.png!
+
+Eclipse needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, Eclipse's _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please specify a new and empty one.
+
+In the example below, we chose the _/my/workspace_ directory as our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, Eclipse won't ask for a workspace directory again, but will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the Eclipse menu.)
+
+!(img-rounded shadowed)images/linux_install_040_eclipse_workspace_dialog.png!
+
+Click on the _OK_ button to proceed.
+
+On the first start, Eclipse presents a _Welcome_ window:
+
+!(img-rounded shadowed)images/linux_install_050_eclipse_welcome.png!
+
+You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions lead to the Eclipse workbench:
+
+!(img-rounded shadowed)images/linux_install_060_eclipse_workbench.png!
+
+This is your working environment now. Congratulations, you have just installed YAKINDU Statechart Tools with Eclipse!
+
+You can "proceed":../03_getting_started/getting_started.html now to create your first YAKINDU Statecharts Tools project.
+
+
+
+h2(#InstallingOnEclipse). Installing to an existing Eclipse instance
+
+This chapter describes the steps that are needed to install YAKINDU Statechart Tools to an existing Eclipse instance. Let's assume you already have Eclipse up and running and now you want to install YAKINDU Statechart Tools as an additional software item (plugin).
+
+In the the _Help_ menu, select the _Install new software_ menu item:
+
+!images/eclipse_install_010_eclipse_menu_install_new_software.png!
+
+The _Install_ wizard opens:
+
+!images/eclipse_install_020_eclipse_install_wizard.png!
+
+Click on the _Add…_ button near the upper right corner of the wizard.
+
+A dialog opens, asking you to specify the update repository you want to install the new software from. The appropriate update repository depends on your Eclipse version. Please enter the respective update repository into the _Location_ field.
+
+<table border="1"><tr valign="top"><th colspan="2">Eclipse</th><th colspan="2">YAKINDU Statechart Tools Update Repository</th></tr><tr valign="top"><th>Name</th><th>Version</th><th>Release Build</th><th>Milestone Build</th></tr><tr valign="top"><td>Neon</td><td>4.6</td><td>@http://updates.yakindu.org/sct/neon/releases/@</td><td>@http://updates.yakindu.org/sct/neon/milestones/@</td></tr><tr valign="top"><td>Mars</td><td>4.5</td><td>@http://updates.yakindu.org/sct/mars/releases/@</td><td>@http://updates.yakindu.org/sct/mark/milestones/@</td></tr><tr valign="top"><td>Luna</td><td>4.4</td><td>@http://updates.yakindu.org/sct/luna/releases/@</td><td>@http://updates.yakindu.org/sct/luna/milestones/@</td></tr></table>
+
+Please note that YAKINDU Statechart Tools might take some time to catch up with more recent Eclipse releases. The corresponding update repositories will not be available until then.
+
+Instead of an officially stable YAKINDU Statechart Tools _release_, you can alternatively install a _milestone_ build. Since milestone builds are newer than stable releases, they generally have more features available and more bugs fixed. However, they might also contain some new bugs that have gone unnoticed by now.
+
+Enter some text into the _Name_ field. This text is abitrary in principle, but you should choose something that makes it easier for you to identify this particular update repository among other update repositories. In the example below, the repository's name is @YAKINDU Statechart Tools (Luna)@. It describes which piece of software the repository provides (YAKINDU Statechart Tools) and which Eclipse release that software is compatible with (Luna, i.&nbsp;e. Eclipse 4.4).
+
+!images/eclipse_install_030_eclipse_add_repository.png!
+
+After entering name and location of the update repository, click _OK_.
+
+Eclipse establishes a network connection to the update repository, asks it for available software items and shows them in the install wizard:
+
+!images/eclipse_install_040_eclipse_software_items.png!
+
+Please check at least _Xtext Integration Utilities_ and – no surprise – _Yakindu SCT 2_. (You can also install the respective source code items. However, unless you want to have a look at that source code or even want to modify it, you don't need them.)
+
+Click _Next >_.
+
+Eclipse tries to integrate the new software with the software that is already installed. If it detects any mismatched between requirements and provisions, Eclipse will try to find a solution in order to mitigate this problem. The screenshot below shows such a case:
+
+!images/eclipse_install_050_eclipse_trouble.png!
+
+Select the most appropriate solution, then click _Next >_.
+
+The wizard shows the software to be installed and gives you the opportunity to review the changes:
+
+!images/eclipse_install_060_eclipse_review.png!
+
+Click _Next >_.
+
+The wizard asks you to review and accept the terms of the new software's license agreements.
+
+!images/eclipse_install_070_eclipse_licenses.png!
+
+Select the radio button labelled _I accept the terms of the license agreements_ (if you do), then click _Finish_.
+
+Eclipse starts to download the software and installs it on your computer. This may take some time.
+
+!images/eclipse_install_080_eclipse_installation.png!
+
+If the installation was completed successfully, Eclipse needs a restart in order to have the changes take effect. A dialog asks whether you want to restart Eclipse right now or later:
+
+!images/eclipse_install_090_eclipse_restart.png!
+
+After the restart, Eclipse displays its _Welcome_ window, now also featuring YAKINDU Statechart Tools:
+
+!images/eclipse_install_100_eclipse_sct_help.png!
+
+
+
+h2. Updating YAKINDU Statechart Tools
+
+To check whether a new YAKINDU Statechart Tools release is available and to install it, please select the _Help → Check for Updates_ menu item.
+
+!images/eclipse_update_010_eclipse_menu_check_for_updates.png!
+
+If Eclipse finds any software items to be updated – not just YAKINDU Statechart Tools –, it will guide you through the process of updating them. Generally Eclipse has to be restarted afterwards to have any changes take effect.
+
+You can configure Eclipse as follows to automatically check for updates:
+
+Select the _Window → Preferences_ menu item. The _Preferences_ dialog opens.
+
+Go to the _Install/Update → Automatic Updates_ section. Here you can configure whether and when Eclipse should check for updates and what to do when it finds any.
+
+!images/eclipse_update_020_eclipse_automatic_updates.png!
