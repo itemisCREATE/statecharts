@@ -2,23 +2,108 @@ h1(#Gettingstartedtutorial). Getting started
 
 {toc}
 
-h2(#InstallingYakinduStatechartTools). Installing Yakindu Statechart Tools
+h2(#InstallingYAKINDUStatechartTools). Installing YAKINDU Statechart Tools
 
-In order to start working with Yakindu Statechart Tools, you have to install the software on your computer. We are assuming you have downloaded the software package and you have stored it on your machine.
+In order to start working with YAKINDU Statechart Tools, you have to install the software on your computer. We are assuming you have downloaded the software package and you have stored it on your machine.
 
-Yakindu Statechart Tools is based on the Eclipse integrated development environment (IDE) and runs inside Eclipse. The installation process as described below will put a full-fledged Eclipse instance on your computer. It is comprised in the Yakindu Statechart Tools distribution file you downloaded. You will have to unpack and execute Eclipse in order to work with Yakindu Statechart Tools inside of it.
+h3. Dependencies
 
-While Yakindu Statechart Tools is based on Eclipse, the latter in turn is based on Java. In order to use Eclipse, you need a more or less recent Java version on your machine. Depending on what you are going to do with Yakindu Statechart Tools, you either need a Java Runtime Environment (JRE) or a Java Development Kit (JDK). Since a JDK always contains a JRE, it is a safe bet to install the former. However, unless you are going to do some Java development – i.&nbsp;e. create a state machine, turn it into Java source code, and use the latter from your Java client code –, you might get away with a JRE. Installation of Java is beyond the scope of this document. You can find more information and download the software from "https://www.java.com/":https://www.java.com/.
+h4. Eclipse
 
-The chapter "below":getting_started.html#InstallationOnLinux walks through the installation process on Linux machine. The installation procedures are quite similar on other computer architectures, like on a Mac or a Windows PC. They will be described later. If you are working with such a computer, please try to translate the Linux  
+YAKINDU Statechart Tools is based on the Eclipse integrated development environment (IDE) and runs inside Eclipse. The installation process as described below will put a full-fledged Eclipse instance on your computer. It is comprised in the YAKINDU Statechart Tools distribution file you downloaded. You will have to unpack and execute Eclipse in order to work with YAKINDU Statechart Tools inside of it.
 
-h3(#InstallingOnLinux). Installing on Linux
+h4. Java
 
-This chapter describes how to install Yakindu Statechart Tools on a Linux machine using a command-line tool. The installation doesn't require _root_ permissions.
+While YAKINDU Statechart Tools is based on Eclipse, the latter in turn is based on Java. In order to use Eclipse, you also need a more or less recent Java version on your machine. Depending on what you are going to do with YAKINDU Statechart Tools, you either need a Java Runtime Environment (JRE) or a Java Development Kit (JDK). Since a JDK always contains a JRE, it is a safe bet to install the former. However, unless you are going to do some Java development – i.&nbsp;e. create a state machine, turn it into Java source code, and use the latter from your Java client code –, you might get away with a JRE. Installation of Java is beyond the scope of this document. You can find more information and download the software from "https://www.java.com/":https://www.java.com/.
+
+In case you don't have Java on your machine yet and you are going to download and install it, make sure you are picking the variant with the correct bit size, i.&nbsp;e. either 32 or 64 bit, whichever is appropriate for your computer.
+
+h3. Plattform overview
+
+You can either install YAKINDU Statechart Tools as a stand-alone software package under the following operating systems.
+
+* "Installing YAKINDU Statechart Tools on Windows":#InstallingOnWindows
+* "Installing YAKINDU Statechart Tools on MacOS":#InstallingOnMacOS
+* "Installing YAKINDU Statechart Tools on Linux":#InstallingOnLinux
+
+Alternatively you can install YAKINDU Statechart Tools to an existing Eclipse instance.
+
+* "Installing YAKINDU Statechart Tools to an existing Eclipse instance":#InstallingOnEclipse
+
+
+h3(#InstallingOnWindows). Installing on Windows
+
+This chapter describes how to install YAKINDU Statechart Tools on a Windows 7 machine.
 
 h4. Unpacking the downloaded file
 
-Choose a directory for Yakindu Statechart Tools (SCT) – or Eclipse, respectively. The commands below assume you want to install the software in the _/my/software_ directory. Please modify the commands appropriately to suit your needs!
+Unpack the software distribution file. Use the file explorer to open the directory you downloaded the software distribution file to, right-click on the latter, and select _Extract all_ in the context menu.
+
+!(img-rounded shadowed)images/windows7_install_010_eclipse_extract_1.png!
+
+Choose a directory for YAKINDU Statechart Tools (SCT) – or Eclipse, respectively. The example below assumes you want to install the software in the _C:\Program Files\yakindu_sct_ directory. Please modify as needed!
+
+!(img-rounded shadowed)images/windows7_install_020_eclipse_extract_2.png!
+
+After unpacking, you will find a folder _eclipse_ in your installation directory, i.&nbsp;e. _C:\Program Files\yakindu_sct\eclipse_ in our example, as shown in the image below:
+
+!(img-rounded shadowed)images/windows7_install_030_eclipse_folder.png!
+
+The contents of the _eclipse_ folder looks like this:
+
+!(img-rounded shadowed)images/windows7_install_040_eclipse_contents.png!
+
+There you are: You have installed the software. Now you should start Eclipse.
+
+h4. Starting Eclipse
+
+Start Eclipse by running the _eclipse.exe_ executable.
+
+To do so, please double-click (or single-click, depending on your Windows settings) on the _eclipse_ symbol, shown as a dark purple circle with three horizontal lines in the sample screenshot above.
+
+While Eclipse is starting up, it is showing a splash screen:
+
+!(img-rounded shadowed)images/windows7_install_050_eclipse_splash.png!
+
+Eclipse needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, Eclipse's _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please specify a new and empty one.
+
+In the example below, we chose the _C:\Users\joedoe\workspace_ directory as our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, Eclipse won't ask for a workspace directory again, but will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the Eclipse menu.)
+
+!(img-rounded shadowed)images/windows7_install_060_eclipse_workspace_dialog.png!
+
+Click on the _OK_ button to proceed.
+
+On the first start, Eclipse presents a _Welcome_ window:
+
+!(img-rounded shadowed)images/windows7_install_070_eclipse_welcome.png!
+
+You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions lead to the Eclipse workbench:
+
+!(img-rounded shadowed)images/windows7_install_080_eclipse_workbench.png!
+
+This is your working environment now. Congratulations, you have just installed YAKINDU Statechart Tools with Eclipse!
+
+You can "proceed":#Introduction now to create your first YAKINDU Statecharts Tools project.
+
+
+h3(#InstallingOnMac). Installing on MacOS
+
+This chapter describes how to install YAKINDU Statechart Tools on a Mac under MacOS.
+
+_*[To be done]*_
+
+This is your working environment now. Congratulations, you have just installed YAKINDU Statechart Tools with Eclipse!
+
+You can "proceed":#Introduction now to create your first YAKINDU Statecharts Tools project.
+
+
+h3(#InstallingOnLinux). Installing on Linux
+
+This chapter describes how to install YAKINDU Statechart Tools on a Linux machine using a command-line tool. The installation doesn't require _root_ permissions.
+
+h4. Unpacking the downloaded file
+
+Choose a directory for YAKINDU Statechart Tools – or Eclipse, respectively. The commands below assume you want to install the software in the _/my/software_ directory. Please modify the commands appropriately to suit your needs!
 
 Go to the installation directory:
 
@@ -78,67 +163,15 @@ You can browse the material shown here, if you want. When you are done, please c
 
 !(img-rounded shadowed)images/linux_install_060_eclipse_workbench.png!
 
-This is your working environment now. Congratulations, you have just installed Eclipse properly!
+This is your working environment now. Congratulations, you have just installed YAKINDU Statechart Tools with Eclipse!
 
-You can "proceed":getting_started.html#Introduction now to create your first Yakindu Statecharts Tools project.
+You can "proceed":#Introduction now to create your first YAKINDU Statecharts Tools project.
 
-h3(#InstallingOnWindows). Installing on Windows
 
-This chapter describes how to install Yakindu Statechart Tools on a Windows 7 machine.
-
-h4. Unpacking the downloaded file
-
-Unpack the software distribution file. Use the file explorer to open the directory you downloaded the software distribution file to, right-click on the latter, and select _Extract all_ in the context menu.
-
-!(img-rounded shadowed)images/windows7_install_010_eclipse_extract_1.png!
-
-Choose a directory for Yakindu Statechart Tools (SCT) – or Eclipse, respectively. The example below assumes you want to install the software in the _C:\Program Files\yakindu_sct_ directory. Please modify as needed!
-
-!(img-rounded shadowed)images/windows7_install_020_eclipse_extract_2.png!
-
-After unpacking, you will find a folder _eclipse_ in your installation directory, i.&nbsp;e. _C:\Program Files\yakindu_sct\eclipse_ in our example, as shown in the image below:
-
-!(img-rounded shadowed)images/windows7_install_030_eclipse_folder.png!
-
-The contents of the _eclipse_ folder looks like this:
-
-!(img-rounded shadowed)images/windows7_install_040_eclipse_contents.png!
-
-There you are: You have installed the software. Now you should start Eclipse.
-
-h4. Starting Eclipse
-
-Start Eclipse by running the _eclipse.exe_ executable.
-
-To do so, please double-click (or single-click, depending on your Windows settings) on the _eclipse_ symbol, shown as a dark purple circle with three horizontal lines in the sample screenshot above.
-
-While Eclipse is starting up, it is showing a splash screen:
-
-!(img-rounded shadowed)images/windows7_install_050_eclipse_splash.png!
-
-Eclipse needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, Eclipse's _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please specify a new and empty one.
-
-In the example below, we chose the _C:\Users\joedoe\workspace_ directory as our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, Eclipse won't ask for a workspace directory again, but will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the Eclipse menu.)
-
-!(img-rounded shadowed)images/windows7_install_060_eclipse_workspace_dialog.png!
-
-Click on the _OK_ button to proceed.
-
-On the first start, Eclipse presents a _Welcome_ window:
-
-!(img-rounded shadowed)images/windows7_install_070_eclipse_welcome.png!
-
-You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions lead to the Eclipse workbench:
-
-!(img-rounded shadowed)images/windows7_install_080_eclipse_workbench.png!
-
-This is your working environment now. Congratulations, you have just installed Eclipse properly!
-
-You can "proceed":getting_started.html#Introduction now to create your first Yakindu Statecharts Tools project.
 
 h3. Installing to an existing Eclipse instance
 
-This chapter describes the steps that are needed to install Yakindu Statechart Tools to an existing Eclipse instance. Let's assume you already have Eclipse up and running and now you want to install Yakindu Statechart Tools as an additional software item (plugin).
+This chapter describes the steps that are needed to install YAKINDU Statechart Tools to an existing Eclipse instance. Let's assume you already have Eclipse up and running and now you want to install YAKINDU Statechart Tools as an additional software item (plugin).
 
 In the the _Help_ menu, select the _Install new software_ menu item:
 
@@ -150,13 +183,17 @@ The _Install_ wizard opens:
 
 Click on the _Add…_ button near the upper right corner of the wizard.
 
-A dialog opens, asking you to specify the update repository you want to install the new software from. If your Eclipse release is _Luna_, please enter @http://updates.yakindu.org/sct/luna/releases/@ into the _Location_ field. Enter some text into the _Name_ field. This text is abitrary in principle, but it should make it easier for you to identify this particular update repository among the other update repositories. The example below the repository's name is @Yakindu Statechart Tools (Luna)@. It describes which piece of software the repository provides (Yakindu Statechart Tools) and which Eclipse release that software is compatible with (Luna, i.&nbsp;e. Eclipse 4.4).
+A dialog opens, asking you to specify the update repository you want to install the new software from. The appropriate update repository depends on your Eclipse version. Please enter the respective update repository into the _Location_ field.
+
+<table border="1"><tr valign="top"><th colspan="2">Eclipse</th><th colspan="2">YAKINDU Statechart Tools Update Repository</th></tr><tr valign="top"><th>Name</th><th>Version</th><th>Release Build</th><th>Milestone Build</th></tr><tr valign="top"><td>Neon</td><td>4.6</td><td>@http://updates.yakindu.org/sct/neon/releases/@</td><td>@http://updates.yakindu.org/sct/neon/milestones/@</td></tr><tr valign="top"><td>Mars</td><td>4.5</td><td>@http://updates.yakindu.org/sct/mars/releases/@</td><td>@http://updates.yakindu.org/sct/mark/milestones/@</td></tr><tr valign="top"><td>Luna</td><td>4.4</td><td>@http://updates.yakindu.org/sct/luna/releases/@</td><td>@http://updates.yakindu.org/sct/luna/milestones/@</td></tr></table>
+
+Please note that YAKINDU Statechart Tools might take some time to catch up with more recent Eclipse releases. The corresponding update repositories will not be available until then.
+
+Instead of an officially stable YAKINDU Statechart Tools _release_, you can alternatively install a _milestone_ build. Since milestone builds are newer than stable releases, they generally have more features available and more bugs fixed. However, they might also contain some new bugs that have gone unnoticed by now.
+
+Enter some text into the _Name_ field. This text is abitrary in principle, but you should choose something that makes it easier for you to identify this particular update repository among other update repositories. In the example below, the repository's name is @YAKINDU Statechart Tools (Luna)@. It describes which piece of software the repository provides (YAKINDU Statechart Tools) and which Eclipse release that software is compatible with (Luna, i.&nbsp;e. Eclipse 4.4).
 
 !images/eclipse_install_030_eclipse_add_repository.png!
-
-If you want to install Yakindu Statechart Tools not to _Luna_ but to another Eclipse release instead, please replace @luna@ in the repository address by the respective name of your Eclipse release, e.&nbsp;g. @mars@, so that the repository address becomes @http://updates.yakindu.org/sct/mars/releases/@. Please note that Yakindu Statechart Tools might not be available for each Eclipse release. In particular it might take some time to catch up with most recent Eclipse releases.
-
-If you do not want to install an officially stable Yakindu Statechart Tools release, but rather a more recent milestone release, please replace @releases@ in the repository address by @milestones@. Since milestone builds are newer than stable releases, they generally have more features available and more bugs fixed. However, they might also contain some new bugs that have gone unnoticed by now.
 
 After entering name and location of the update repository, click _OK_.
 
@@ -194,17 +231,17 @@ If the installation was completed successfully, Eclipse needs a restart in order
 
 !images/eclipse_install_090_eclipse_restart.png!
 
-After the restart, Eclipse displays its _Welcome_ window, now also featuring Yakindu Statechart Tools:
+After the restart, Eclipse displays its _Welcome_ window, now also featuring YAKINDU Statechart Tools:
 
 !images/eclipse_install_100_eclipse_sct_help.png!
 
-h3. Updating Yakindu Statechart Tools
+h3. Updating YAKINDU Statechart Tools
 
-To check whether a new Yakindu Statechart Tools release is available and to install it, please select the _Help → Check for Updates_ menu item.
+To check whether a new YAKINDU Statechart Tools release is available and to install it, please select the _Help → Check for Updates_ menu item.
 
 !images/eclipse_update_010_eclipse_menu_check_for_updates.png!
 
-If Eclipse finds any software items to be updated – not just Yakindu Statechart Tools –, it will guide you through the process of updating them. Generally Eclipse has to be restarted afterwards to have any changes take effect. 
+If Eclipse finds any software items to be updated – not just YAKINDU Statechart Tools –, it will guide you through the process of updating them. Generally Eclipse has to be restarted afterwards to have any changes take effect.
 
 You can configure Eclipse as follows to automatically check for updates:
 
@@ -214,11 +251,11 @@ Go to the _Install/Update → Automatic Updates_ section. Here you can configure
 
 !images/eclipse_update_020_eclipse_automatic_updates.png!
 
-h2(#Introduction). Introducing Yakindu Statechart Tools
+h2(#Introduction). Introducing YAKINDU Statechart Tools
 
-This tutorial will introduce Yakindu Statechart Tools (SCT). YAKINDU Statechart Tools provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of state machines or statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation.
+This tutorial will introduce YAKINDU Statechart Tools (SCT). YAKINDU Statechart Tools provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of state machines or statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation.
 
-In this tutorial you will learn how to create a new statechart model, execute it using the simulation engine and generate Java code to get a fully-working statechart implementation. Please note that this tutorial will not explain statecharts in general, so you should familiarize yourself with the basic concepts of state machines first.[1] Before we get started, make sure you have Yakindu Statechart Tools properly installed. For installation instructions see chapter "Installation":getting_started.html#Installation.
+In this tutorial you will learn how to create a new statechart model, execute it using the simulation engine and generate Java code to get a fully-working statechart implementation. Please note that this tutorial will not explain statecharts in general, so you should familiarize yourself with the basic concepts of state machines first.[1] Before we get started, make sure you have YAKINDU Statechart Tools installed. For installation instructions see chapter "Installation":#Installation.
 
 h2. CallHandling example explained
 
@@ -230,11 +267,11 @@ h2. Preparing a project
 
 p(#Createastatechartmodel). The first step is to create a new Eclipse project by selecting _File → New → Project…_. A wizard opens, showing a couple of different project types. Since we want to generate Java code from our statechart model later on, select _Java → Java Project_ from the wizard menu. Give the project a meaningful name, e.g. *CallHandling* and click _Finish_.
 
-!images/callhandling_create_java_project.png!
+!images/callhandling_010_create_java_project.png
 
 As a result, Eclipse creates the project and establishes a folder _src_ inside of it. Initially this folder is empty. It is indended for user-created Java code.
 
-!images/callhandling_new_java_project.png!
+!images/callhandling_020_new_java_project.png!
 
 However, we won't deal with Java programming right now, but rather create our statechart model first. It is good practice to keep models and source code separate. So, let's create a new folder for the model. Right-click on the project's root, i.&nbsp;e. on *CallHandling*, then select _New → Folder_ from the context menu. Give the model folder a reasonable name by typing e.&nbsp;g. *model* into the _Folder Name_ text field, then click _Finish_. The new _model_ folder appears in the package explorer:
 
@@ -254,9 +291,19 @@ p(#UsetheEditor). Next, create the statechart model itself:
 
 h2. Using the editor
 
+Within the Eclipse workbench, the area marked by a red rectangle in the image below is the *statechart editor*. The subsequent paragraph will explain how to work with it, how to create and modify the statechart for the _CallHandling_ example.
+
+!images/callhandling_080_editing_editor.png!
+
 h3. Creating interfaces
 
-YAKINDU statecharts are self-contained – they not only contain the definition of states and state transitions, but also the definition of the statechart interfaces. To define those interfaces, start the direct editing mode by double-clicking onto the statechart definition block on the left-hand side. Enter the following definition:
+Statecharts can describe very complex interactions between a multitude of actors and an even bigger multitude of events these actors can receive or trigger. It is therefore good practice to structure those events and associate them with their respective actors. For this purpose YAKINDU Statecharts Tools provides the concept of so-called *interfaces*[2].
+
+In the _CallHandling_ example, we have two actors: the user and the phone. Let's model their communication as two interfaces:
+* The _Phone_ interface provides a single incoming event named _incoming_call_.
+* The _User_ interface comprises two incoming events: _accept_call_ and _dismiss_call_.
+
+We have to enter the respective definitions in textual form into the statechart editor. Here's how the interface definitions look like:
 
 bc(prettyprint). interface User:
     in event accept_call
@@ -265,11 +312,15 @@ bc(prettyprint). interface User:
 bc(prettyprint). interface Phone:
     var duration : integer
     in event incoming_call
-	
-Tip: The statechart editor's content assist offers code completion for all textual parts. To open the content assist, press @[Ctrl+Space]@. For all keywords, a detailed description with sample code shows up in the help hover besides the content assist window.
-!images/ctrlspace.png! 
 
-The sample code contains two interfaces and one internal block. The _User_ interface defines the communication of the system with the user. It consists of the two in events _dismiss_call_ and _accept_call_. The _Phone_ interface defines the communication with the underlying hardware. It provides the in event _incoming_call_ as well as a variable _duration_ of type _integer_.
+As you can see, _Phone_ interface also has an integer variable _duration_, which will be explained later. This text has to go into the statechart editor's *definition block*, which is the compartment on the statechart editor's left-hand side. To enter the text, double-click on the definition block and start typing.
+
+Hint: The text editor offers context-sensitive assistance helping you to know what keyword etc. are allowed at the very position the text cursor currently is. Let's assume you have just entered the definition of the _User_ interface and your text cursor is positioned _behind_ that definition.
+# Press @[Ctrl+Space]@. This key combination invokes the *content assist*. A popup window appears showing all keyword alternatives that are allowed here.
+# Single-click on one of the alternatives, say on @interface@, and a help text containing a detailed description with sample code is displayed in a second popup window.
+# Double-click on it, and the keyword is carried over into the text field.
+
+!images/callhandling_090_editing_interfaces.png!
 
 h3. Creating states
 
@@ -289,7 +340,7 @@ If everything went well, the error markers should be gone. Your model should loo
 
 !(img-rounded shadowed)images/example_final.png!
 
-p(#Simulatingthemodel). If something went wrong and you cannot eliminate the problem, you can download the sample project "here":examples/CallHandling.zip. 
+p(#Simulatingthemodel). If something went wrong and you cannot eliminate the problem, you can download the sample project "here":examples/CallHandling.zip.
 
 h2. Simulating the model
 
@@ -298,7 +349,7 @@ To start the dynamic simulation of your model, right-click on the model file *Ca
 The perspective changes from _SC Modeling_ to _SC Simulation_. The simulation perspective defines two additional views: The _Debug_ view at the top shows all running statechart instances and allows to select one of them. Please note that SCT allows multiple executions of the same statechart as well as parallel executions of different statecharts at the same time.7
 
 You can use the _Simulation_ view on the right to raise events and to inspect and modify variables.
- 
+
 When the simulation starts, the *Idle* state becomes active since it is connected to the *Initial State*. An active state is visualized by a red background color in the statechart view.
 
 Now let's simulate an incoming call. Raise the associated event by clicking at the _incoming_call_ text formatted as a hyperling in the _Simulation_ view on the right. This event will trigger a state transition from *Idle* to *Incoming Call*. Accept the call by raising the _accept_call_ event. Another transition happens, and the state *Active Call* becomes active. For the duration of the call, the variable _duration_ in the _Simulation_ view is incremented every second. When you are done with your phone call, raise the _dismiss_call_ event. The state machine transitions to the *Dismiss Call* state, and two seconds later returns to its *Idle* state.
@@ -307,13 +358,37 @@ If your statechart behaves as expected, we can go one step further now and gener
 
 h2. Generating Java source code
 
-YAKINDU SCT includes code generators for Java, C, and C++ out of the box. The code generators are following a "code-only" approach and do not need any additional runtime libraries. The generated code provides a well-defined interface and can be integrated easily with any client code. In this tutorial we will generate Java code representing our *CallHandling* example.
+YAKINDU Statechart Tools include code generators for Java, C, and C++ out of the box. The code generators are following a "code-only" approach: They are generating all the code that is needed and do not rely on any additional runtime libraries. The generated code provides a well-defined application programming interface and can be integrated easily with any client code. In this tutorial we will generate Java code representing our *CallHandling* example.
 
-For code generation, SCT uses a textual generator model called SGen. This model allows for customization of the code generation process. To create a new SGen model, select the model folder in the project explorer on the left, and select _New → Code Generator Model_ from the context menu. The _YAKINDU Generator Model_ wizard opens. On the first wizard page, enter *CallHandling.sgen* as the filename, then click _Next_. On the second wizard page, select _Yakindu SCT Java Code Generator_ from the _Generator_ drop-down menu at the top. In the statechart tree beneath, check the *CallHandling.sct* model, then click _Finish_. The SGen Editor opens and shows the following simple generator model:
+h3. Creating a generator model
 
-bc(prettyprint). 
+For code generation, SCT uses a textual generator model called *SGen*. The generator model holds key parameters for the code generation process and allows for the latter's customization.
+
+The first step to code generation is to create a new SGen model. Right-click on the _model_ folder in the project explorer and select _New → Code Generator Model_ from the context menu.
+
+!images/callhandling_200_generation_create_generator_model.png!
+
+The _YAKINDU Generator Model_ wizard opens. Change the _File name_ to *CallHandling.sgen*, then click _Next >_.
+
+!images/callhandling_210_generation_new_sgen_model_1.png!
+
+From the _Generator_ drop-down menu at the top, select _Yakindu SCT Java Code Generator_.
+
+In the statechart tree beneath that menu, check the *CallHandling.sct* model, then click _Finish_.
+
+!images/callhandling_220_generation_new_sgen_model_2.png!
+
+Now the wizard creates the default SGen model for Java code generation and opens it in an SGen editor. The project explorer on the left-hand side shows the new model file _CallHandling.sgen_.
+
+!images/callhandling_230_generation_new_sgen_model_3.png!
+
+Here's the generator model once again as plain text:
+
+bc(prettyprint).. 
 GeneratorModel for yakindu::java {
+
 	statechart CallHandling {
+
 		feature Outlet {
 			targetProject = "CallHandling"
 			targetFolder = "src-gen"
@@ -321,64 +396,109 @@ GeneratorModel for yakindu::java {
 	}
 }
 
-In the listing above, @yakindu::java@ is the unique ID of the code generator. It is followed by a reference to the statechart model we want to generate code for, i.e. @CallHandling@. A statechart reference may contain various configuration features. The @Outlet@ feature specifies target project and folder for the generated artifacts.
+p. Let's have a closer look at the listing above:
+* @yakindu::java@ is the unique ID of the Java code generator.
+* The @statechart CallHandling { … }@ block references the statechart model we want to generate code for.
+* The @feature Outlet { … }@ block specifies where the generated code artifacts are to be placed, i.&nbsp;e. in the Eclipse project @CallHandling@ and within that project in the @src-gen@ folder.
 
-The model is using _after_ and _every_ expressions. That is, we are dealing with timed events and want the generater to provide us with a default implementation of a timer service. In order to achieve this, we have to add the following feature to the generator model:
+A statechart reference may contain various configuration features. You will learn more about feature later.
+
+h3. Enhancing the generator model by timing capabilities
+
+However, the default generator model is insufficient yet. The _CallHandling_ statechart model uses _after_ and _every_ expressions. That is, it is dealing with *timed events*, requiring a timer service to trigger them. We can instruct the code generator to provide us with a default timer service implementation by adding the following feature to the generator model:
 
 bc(prettyprint). 
 feature GeneralFeatures {
 	TimerService = true
 }
 
-The generator model is executed by a so-called Eclipse builder. That is, as long as _Project → Build Automatically_ is checked the artifacts are generated automatically with each model change. If you want to execute your generator model manually, select _Generate Statechart Artifacts_ from the @.sgen@ file's context menu in the project explorer.
+h3. Generating Java source code
 
-p(#Integrationwithclientcode). As a result, you should see a new folder *src-gen* in the project explorer containing the generated Java artifacts. Add the generated artifacts to the Java build path by selecting _Build Path → Use as source folder_ from the *src-gen* folder's context menu.
+What do we have to do to actually start the Java source code generation? Nothing!
+
+The generator model is executed by a so-called Eclipse *builder*. That is, as long as the _Project → Build Automatically_ menu item is checked (which it is by default), the artifacts are generated automatically with each modification of the statechart model or of the generator model.
+
+As you can see in the project explorer, the folder _src-gen_ has been created and populated with the generated Java source code artifacts.
+
+!images/callhandling_240_generation_timer_service.png!
+
+Add the generated artifacts to the Java build path by right-clicking on the _src-gen_ folder and selecting _Build Path → Use as source folder_ in the context menu.
+
+!images/callhandling_250_generation_use_as_source_folder.png!
+
+If you want to execute your generator model manually, select _Generate Statechart Artifacts_ from the @.sgen@ file's context menu in the project explorer.
+
 
 h2. Integration with client code
 
-As the final step, we want to integrate the generated statechart implementation with some client code. Create a new class by selecting _New → Class_ in the context menu of the *src* folder. Give it a meaningful name, for example *CallHandlingClient*, then click _Finish_.
+Now that we have a generated Java implementation of the _CallHandling_ state machine available, we want to actually use it from some client code. We'll create that client code in a second.
 
-Next, copy the following code into the created class:
+h3. Creating client code
 
-bc(prettyprint linenums). 
-1  import org.yakindu.scr.TimerService;
-2  import org.yakindu.scr.callhandling.CallHandlingStatemachine;
-3  public class CallHandlingClient {
-4        public static void main(String[] args) throws Exception {
-5               CallHandlingStatemachine sm = new CallHandlingStatemachine();
-6               sm.setTimer(new TimerService());
-7               // enter the sm and active the Idle state
-8               sm.enter();
-9               // Raise an incoming call
-10              sm.getSCIPhone().raiseIncoming_call();
-11              sm.runCycle();
-12              // Accept the call
-13              sm.getSCIUser().raiseAccept_call();
-14              sm.runCycle();
-15              for (int i = 0; i < 50; i++) {
-16                      Thread.sleep(200);
-17                      sm.runCycle();
-18              }
-19              System.out.println(String.format("The phone call took %d s", +sm
-20                              .getSCIPhone().getDuration()));
-21              sm.getSCIUser().raiseDismiss_call();
-22              sm.runCycle();
-23        }
-24  }
+Let's establish a new Java class _CallHandlingClient_ and integrate the state machine with it:
 
+# Right-clicking on the _src_ folder.
+# Select _New → Class_ in the context menu.
+# Name it _CallHandlingClient_.<br/>!images/callhandling_300_java_integration_create_new_class.png!
+# Click _Finish_.
 
-Let's have a detailed look at the implementation.
+Next, copy the following code into the created class (without the line numbers, of course):
 
-* First, the code creates a new instance of the state machine by calling the default constructor of @CallHandlingStatemachine@ (line 5).
-* Since we use timed events, the statechart implementation requires an implementation of the @ITimerService@ interface. Since we added the @TimerService@ feature to the generator model, the code generator creates a default implementation that uses the @java.util.Timer@ class. A new instance of the default @TimerService@ is created and set to the state machine (line 6).
-* In line 8, @sm.enter()@ enters the statechart and – via the initial state – activates its *Idle* state.
-* For each interface in the statechart specification block, a getter method has been generated, here @getSCIPhone()@ and @getSCIUser()@. You can access all in events and variables via these interfaces. In line 10, the incoming call event is raised, activating the *Incoming Call* state after the next runcycle has been executed (line 11).
-* In line 13, we raise the _accept_call_ event via the _User_ interface. It activates the *Active Call* state after the next runcycle has been performed (line 17).
-* From line 15 to line 18, the runcycle is executed periodically every 200 milliseconds. After that, the duration is printed to console (lines 19 and 20). Finally, the _dismiss_call_ event  is raised, activating the *Dismiss Call* state after the next runcycle. 
+bc(prettyprint linenums).. 
+ 1	import org.yakindu.scr.TimerService;
+ 2	import org.yakindu.scr.callhandling.CallHandlingStatemachine;
+ 3
+ 4	public class CallHandlingClient {
+ 5
+ 6		public static void main(String[] args) throws InterruptedException {
+ 7
+ 8			// Create the state machine:
+ 9			CallHandlingStatemachine sm = new CallHandlingStatemachine();
+10			sm.setTimer(new TimerService());
+11
+12			// Enter the state machine and implicitly activate its "Idle" state:
+13			sm.enter();
+14
+15			// Raise an incoming call:
+16			sm.getSCIPhone().raiseIncoming_call();
+17			sm.runCycle();
+18
+19			// Accept the call:
+20			sm.getSCIUser().raiseAccept_call();
+21			sm.runCycle();
+22
+23			// Keep the phone conversation busy for a while:
+24			for (int i = 0; i < 50; i++) {
+25				Thread.sleep(200);
+26				sm.runCycle();
+27			}
+28
+29			// Before hang-up, output the duration of the call:
+30			System.out.println(String.format("The phone call took %d seconds.",
+31					sm.getSCIPhone().getDuration()));
+32
+33			// Hang up the phone:
+34			sm.getSCIUser().raiseDismiss_call();
+35			sm.runCycle();
+36		}
+37	}
+p. Let's have a detailed look at this client code:
+
+* First, this program creates a new instance of the state machine by calling the default constructor of @CallHandlingStatemachine@ (line 9).
+* Since we are using timed events, the statechart implementation requires an implementation of the @ITimer@ interface. Since we added the @TimerService@ feature to the generator model, the code generator creates a default implementation @org.yakindu.scr.TimerService@ that uses the @java.util.Timer@ class. A new instance of the default @TimerService@ is created and set to the state machine (line 10).
+* In line 13, @sm.enter()@ enters the state machine and – via its initial state – activates its *Idle* state.
+* For each interface in the statechart definition block a getter method has been generated, here @getSCIPhone()@ and @getSCIUser()@. You can access all incoming events and all variables via these interfaces. In line 16, the _incoming_call_ event is raised, activating the *Incoming Call* state after the next run cycle has been executed (line 17).
+* In line 20, we raise the _accept_call_ event via the _User_ interface. It activates the *Active Call* state after the next run cycle has been performed (line 21).
+* From line 24 to line 27, the run cycle is executed periodically every 200 milliseconds.
+* After that, the call's duration is printed to the console (lines 30 and 31).
+* Finally, the _dismiss_call_ event is raised (line 34), activating the *Dismiss Call* state after the next run cycle (line 35).
+
+h3. Executing the client code
 
 You can execute the client code via _Run As → Java Application_ from the class file's context menu.
 
-
-h2(#Overview). Weblinks
+h2(#Footnotes). Footnotes
 
 fn1. "UML state machine":http://en.wikipedia.org/wiki/UML_state_machine
+
+fn2. Not to be confused with user interfaces.
