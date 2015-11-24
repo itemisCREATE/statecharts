@@ -58,19 +58,20 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 				break;
 			}
 		}
-
-		if (activeState != null && lastActiveState != activeState) {
-			lastActiveState = activeState;
-			EObject container = activeState;
-			stateStack = new ArrayList<SCTStackFrame>();
-			while (container != null) {
-				if (container instanceof RegularState) {
-					stateStack.add(new SCTStackFrame(this, (RegularState) container, getResourceString()));
+		synchronized (stateStack) {
+			if (activeState != null && lastActiveState != activeState) {
+				lastActiveState = activeState;
+				EObject container = activeState;
+				stateStack = new ArrayList<SCTStackFrame>();
+				while (container != null) {
+					if (container instanceof RegularState) {
+						stateStack.add(new SCTStackFrame(this, (RegularState) container, getResourceString()));
+					}
+					container = container.eContainer();
 				}
-				container = container.eContainer();
 			}
+			return stateStack.toArray(new IStackFrame[] {});
 		}
-		return stateStack.toArray(new IStackFrame[] {});
 	}
 
 	public boolean hasStackFrames() throws DebugException {
@@ -147,6 +148,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == ISimulationEngine.class)
 			return container;

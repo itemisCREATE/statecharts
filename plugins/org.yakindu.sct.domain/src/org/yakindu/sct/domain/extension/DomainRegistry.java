@@ -54,6 +54,8 @@ public class DomainRegistry {
 
 		private Image image;
 
+		private IDomainInjectorProvider injectorProvider;
+
 		DomainDescriptor(IConfigurationElement configElement) {
 			this.configElement = configElement;
 		}
@@ -71,12 +73,15 @@ public class DomainRegistry {
 		}
 
 		public IDomainInjectorProvider getDomainInjectorProvider() {
-			try {
-				return (IDomainInjectorProvider) configElement.createExecutableExtension(MODULE_PROVIDER);
-			} catch (CoreException e) {
-				e.printStackTrace();
+			if (injectorProvider == null) {
+				try {
+					injectorProvider = (IDomainInjectorProvider) configElement
+							.createExecutableExtension(MODULE_PROVIDER);
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
 			}
-			return null;
+			return injectorProvider;
 		}
 
 		public Image getImage() {
@@ -124,7 +129,7 @@ public class DomainRegistry {
 				}
 			});
 		} catch (NoSuchElementException e) {
-			if(defaultDomainID.equals(id)){
+			if (defaultDomainID.equals(id)) {
 				throw new IllegalArgumentException("No default domain found!");
 			}
 			System.err.println("Could not find domain descriptor for id " + id + " - > using default domain");
