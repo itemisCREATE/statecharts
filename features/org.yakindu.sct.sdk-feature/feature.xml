@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.yakindu.sct.sdk"
-      label="Yakindu Statechart Tools (SCT) 2 SDK"
+      label="YAKINDU 2 SDK"
       version="2.5.0.qualifier"
       provider-name="yakindu.org"
       plugin="org.yakindu.sct.doc.user">

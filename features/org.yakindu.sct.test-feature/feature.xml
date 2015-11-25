@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.yakindu.sct.test"
-      label="Yakindu Statechart Tools (SCT) 2 Test"
+      label="YAKINDU 2 Test"
       version="2.5.0.qualifier"
       provider-name="yakindu.org">
 
