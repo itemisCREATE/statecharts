@@ -98,7 +98,7 @@ public class JavaOperationMockup implements IOperationMockup {
 
 		// TODO: Check parameter types and return type match. For this a
 		// JavaTypeChecker should be introduced to get a matching Java type for
-		// a Yakindu Type System type.
+		// a YAKINDU Type System type.
 
 		return true;
 	}

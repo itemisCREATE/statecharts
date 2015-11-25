@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.yakindu.sct.generator.cpp"
-      label="Yakindu Statechart Tools (SCT) C++ Generator Feature"
+      label="YAKINDU C++ Generator Feature"
       version="2.5.0.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.doc.user">

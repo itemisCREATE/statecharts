@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.yakindu.sct.generator"
-      label="Yakindu Statechart Tools (SCT) Generator All-In-One Feature"
+      label="YAKINDU Generator All-In-One Feature"
       version="2.5.0.qualifier"
       provider-name="yakindu.org"
       plugin="org.yakindu.sct.doc.user">

@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Yakindu Statechart Tools (SCT) Test Models
+Bundle-Name: YAKINDU Test Models
 Bundle-SymbolicName: org.yakindu.sct.test.models
 Bundle-Version: 2.5.0.qualifier
 Bundle-Vendor: statecharts.org

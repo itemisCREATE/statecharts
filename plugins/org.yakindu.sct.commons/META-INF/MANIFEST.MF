@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Yakindu Statechart Tools (SCT) Commons
+Bundle-Name: YAKINDU Commons
 Bundle-SymbolicName: org.yakindu.sct.commons
 Bundle-Version: 2.5.0.qualifier
 Bundle-Vendor: statecharts.org

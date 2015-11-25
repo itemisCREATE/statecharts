@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Yakindu Statechart Tools (SCT) Navigator UI
+Bundle-Name: YAKINDU Navigator UI
 Bundle-SymbolicName: org.yakindu.sct.ui.navigator;singleton:=true
 Bundle-Version: 2.5.0.qualifier
 Bundle-Activator: org.yakindu.sct.ui.UIActivator

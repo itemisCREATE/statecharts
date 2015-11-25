@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Yakindu Base Expressions
+Bundle-Name: YAKINDU Base Expressions
 Bundle-Vendor: statecharts.org
 Bundle-Version: 2.5.0.qualifier
 Bundle-SymbolicName: org.yakindu.base.expressions; singleton:=true

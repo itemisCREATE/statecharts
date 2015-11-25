@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Statechart Domain
+Bundle-Name: YAKINDU Domain
 Bundle-SymbolicName: org.yakindu.sct.domain;singleton:=true
 Bundle-Version: 2.5.0.qualifier
 Bundle-Activator: org.yakindu.sct.domain.DomainActivator
