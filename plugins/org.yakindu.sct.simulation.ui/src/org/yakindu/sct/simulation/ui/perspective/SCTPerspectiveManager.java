@@ -28,10 +28,10 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.progress.UIJob;
 
 /**
- * custom implementation of the {@link PerspectiveManager} for the Yakindu
+ * custom implementation of the {@link PerspectiveManager} for the YAKINDU
  * Statechart launch types. </br>
  * 
- * This implementation forces to open the Yakindu Simulation perspective and the
+ * This implementation forces to open the YAKINDU Simulation perspective and the
  * Debug view.</br>
  * 
  * @author andreas muelder - Initial contribution and API
