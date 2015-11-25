@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext GMF Integration (XGI)
+Bundle-Name: YAKINDU Xtext GMF Integration (XGI)
 Bundle-SymbolicName: org.yakindu.base.xtext.utils.gmf
 Bundle-Version: 2.5.0.qualifier
 Bundle-Vendor: itemis AG

@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Yakindu Statechart Tools (SCT) Execution Model Edit
+Bundle-Name: YAKINDU Execution Model Edit
 Bundle-SymbolicName: org.yakindu.sct.model.sexec.edit;singleton:=true
 Bundle-Version: 2.5.0.qualifier
 Bundle-ClassPath: .

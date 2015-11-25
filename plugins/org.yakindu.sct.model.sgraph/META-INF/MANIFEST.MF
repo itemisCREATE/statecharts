@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: YAKINDU SGraph Model
 Bundle-SymbolicName: org.yakindu.sct.model.sgraph;singleton:=true
 Bundle-Version: 2.5.0.qualifier
 Bundle-ClassPath: .

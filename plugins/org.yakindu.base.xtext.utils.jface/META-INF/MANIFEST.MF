@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext JFace Integration (XJI)
+Bundle-Name: YAKINDU Xtext JFace Integration (XJI)
 Bundle-SymbolicName: org.yakindu.base.xtext.utils.jface;singleton:=true
 Bundle-Version: 2.5.0.qualifier
 Bundle-Vendor: itemis AG
