@@ -341,12 +341,12 @@ class StatemachineImplementation {
 				«ENDIF»
 			«ENDFOR»
 			«FOR variable : scope.variableDefinitions»
-				«variable.type.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() {
+				«IF variable.const»const «ENDIF»«variable.type.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() {
 					return «variable.localAccess»;
 				}
 				
 				«IF scope.defaultInterface»
-					«variable.type.targetLanguageName» «module»::«variable.asGetter»() {
+					«IF variable.const»const «ENDIF»«variable.type.targetLanguageName» «module»::«variable.asGetter»() {
 						return «variable.access»;
 					}
 					
