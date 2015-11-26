@@ -72,15 +72,11 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -171,19 +167,11 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 		enterSequence_main_region_A_default();
 	}
 
-	/* Entry action for statechart 'GuardedEntry'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
 		if (sCInterface.getGuard()) {
 			sCInterface.setDone(true);
 		}
-	}
-
-	/* Exit action for state 'GuardedEntry'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

@@ -67,15 +67,11 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -160,14 +156,6 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 		exitSequence_main_region_B();
 
 		enterSequence_main_region_A_default();
-	}
-
-	/* Entry action for statechart 'TriggerGuardExpressions'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'TriggerGuardExpressions'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

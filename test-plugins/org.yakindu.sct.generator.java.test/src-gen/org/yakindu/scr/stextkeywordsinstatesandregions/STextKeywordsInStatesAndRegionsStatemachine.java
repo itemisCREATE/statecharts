@@ -56,8 +56,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_default_default();
 
 		enterSequence_operation_default();
@@ -139,8 +137,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		exitSequence_valueof();
 
 		exitSequence_active();
-
-		exitAction();
 	}
 
 	/**
@@ -470,14 +466,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 		exitSequence_active_raise();
 
 		enterSequence_active_valueof_default();
-	}
-
-	/* Entry action for statechart 'STextKeywordsInStatesAndRegions'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'STextKeywordsInStatesAndRegions'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state namespace */

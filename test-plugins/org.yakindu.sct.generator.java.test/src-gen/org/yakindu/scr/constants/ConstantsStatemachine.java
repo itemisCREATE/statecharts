@@ -103,15 +103,11 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -223,10 +219,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		enterSequence_main_region_A_default();
 	}
 
-	/* Entry action for statechart 'Constants'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
 		sCInterface.setResult(sCINamed.two * sCInterface.x);
@@ -235,10 +227,6 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
 		sCInterface.setResult(sCInterface.result * internalConstant);
-	}
-
-	/* Exit action for state 'Constants'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

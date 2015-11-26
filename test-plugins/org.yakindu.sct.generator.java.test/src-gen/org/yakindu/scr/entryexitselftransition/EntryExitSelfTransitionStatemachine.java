@@ -79,15 +79,11 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -196,17 +192,9 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		enterSequence_main_region_A_default();
 	}
 
-	/* Entry action for statechart 'EntryExitSelfTransition'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
 		sCInterface.setEntries(sCInterface.getEntries() + 1);
-	}
-
-	/* Exit action for state 'EntryExitSelfTransition'. */
-	private void exitAction() {
 	}
 
 	/* Exit action for state 'A'. */

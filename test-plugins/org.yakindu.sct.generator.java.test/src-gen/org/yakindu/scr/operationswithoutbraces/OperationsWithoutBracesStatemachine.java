@@ -45,8 +45,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 
 		enterSequence_another_region_default();
@@ -56,8 +54,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		exitSequence_main_region();
 
 		exitSequence_another_region();
-
-		exitAction();
 	}
 
 	/**
@@ -178,14 +174,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 		exitSequence_another_region_C();
 
 		enterSequence_another_region_D_default();
-	}
-
-	/* Entry action for statechart 'OperationsWithoutBraces'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'OperationsWithoutBraces'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

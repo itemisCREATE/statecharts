@@ -49,15 +49,11 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -131,14 +127,6 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 		exitSequence_main_region_B();
 
 		enterSequence_main_region__final__default();
-	}
-
-	/* Entry action for statechart 'SimpleEvent'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'SimpleEvent'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

@@ -587,15 +587,11 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_goto_default();
 	}
 
 	public void exit() {
 		exitSequence_goto();
-
-		exitAction();
 	}
 
 	/**
@@ -1015,10 +1011,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		enterSequence_goto_void_volatile_transient_this();
 	}
 
-	/* Entry action for statechart 'JavaKeywords'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'abstract'. */
 	private void entryAction_goto_abstract() {
 		sCInterface.setAbstract(true);
@@ -1197,10 +1189,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		sCInterface.setVoid(false);
 
 		sCInterface.setVolatile(false);
-	}
-
-	/* Exit action for state 'JavaKeywords'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state abstract */

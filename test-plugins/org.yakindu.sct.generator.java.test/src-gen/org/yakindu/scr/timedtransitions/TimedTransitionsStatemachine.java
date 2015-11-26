@@ -43,15 +43,11 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -135,18 +131,10 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		enterSequence_main_region_End_default();
 	}
 
-	/* Entry action for statechart 'TimedTransitions'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'Start'. */
 	private void entryAction_main_region_Start() {
 
 		timer.setTimer(this, 0, 2 * 1000, false);
-	}
-
-	/* Exit action for state 'TimedTransitions'. */
-	private void exitAction() {
 	}
 
 	/* Exit action for state 'Start'. */

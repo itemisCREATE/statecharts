@@ -62,8 +62,6 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 
 		enterSequence_second_region_default();
@@ -73,8 +71,6 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		exitSequence_main_region();
 
 		exitSequence_second_region();
-
-		exitAction();
 	}
 
 	/**
@@ -158,17 +154,9 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		enterSequence_second_region_StateB_default();
 	}
 
-	/* Entry action for statechart 'RaiseEvent'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
 		sCInterface.raiseE1();
-	}
-
-	/* Exit action for state 'RaiseEvent'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state StateA */

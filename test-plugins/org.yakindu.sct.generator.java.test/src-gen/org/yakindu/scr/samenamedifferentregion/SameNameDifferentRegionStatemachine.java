@@ -49,15 +49,11 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -136,14 +132,6 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 		exitSequence_main_region_StateB_r1_StateA();
 
 		enterSequence_main_region_StateB_r1_StateB_default();
-	}
-
-	/* Entry action for statechart 'SameNameDifferentRegion'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'SameNameDifferentRegion'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state StateA */

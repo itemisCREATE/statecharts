@@ -102,15 +102,11 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_mainRegion_default();
 	}
 
 	public void exit() {
 		exitSequence_mainRegion();
-
-		exitAction();
 	}
 
 	/**
@@ -284,14 +280,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 
 		enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default();
-	}
-
-	/* Entry action for statechart 'ShallowHistory'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'ShallowHistory'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state State1 */

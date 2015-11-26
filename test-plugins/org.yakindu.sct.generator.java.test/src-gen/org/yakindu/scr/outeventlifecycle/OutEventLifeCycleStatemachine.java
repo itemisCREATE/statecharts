@@ -85,8 +85,6 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_r1_default();
 
 		enterSequence_r2_default();
@@ -96,8 +94,6 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 		exitSequence_r1();
 
 		exitSequence_r2();
-
-		exitAction();
 	}
 
 	/**
@@ -200,14 +196,6 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 
 	private void effect_r2_B_lr0_lr0() {
 		sCInterface.setF_available_in_cycle(true);
-	}
-
-	/* Entry action for statechart 'OutEventLifeCycle'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'OutEventLifeCycle'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

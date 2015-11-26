@@ -354,15 +354,11 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -669,10 +665,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 		enterSequence_main_region_Multiply_default();
 	}
 
-	/* Entry action for statechart 'AssignmentAsExpression'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'Add'. */
 	private void entryAction_main_region_Add() {
 		sCInterface.setA((sCInterface.assignB(5)) + 4);
@@ -718,10 +710,6 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 	/* Entry action for state 'Subtract'. */
 	private void entryAction_main_region_Subtract() {
 		sCInterface.setD(sCInterface.getD() - ((sCInterface.assignC(sCInterface.getC() - 5)) - 1));
-	}
-
-	/* Exit action for state 'AssignmentAsExpression'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state Add */

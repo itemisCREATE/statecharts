@@ -109,15 +109,11 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_mainRegion_default();
 	}
 
 	public void exit() {
 		exitSequence_mainRegion();
-
-		exitAction();
 	}
 
 	/**
@@ -294,14 +290,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 
 		enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default();
-	}
-
-	/* Entry action for statechart 'DeepHistory'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'DeepHistory'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state State1 */

@@ -32,15 +32,11 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -95,14 +91,6 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 		exitSequence_main_region_A();
 
 		enterSequence_main_region_B_default();
-	}
-
-	/* Entry action for statechart 'NullCheck'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'NullCheck'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

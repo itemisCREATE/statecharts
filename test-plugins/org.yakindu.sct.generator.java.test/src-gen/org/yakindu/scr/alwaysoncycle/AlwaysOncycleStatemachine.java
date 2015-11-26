@@ -62,15 +62,11 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -172,17 +168,9 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		sCInterface.setValue(sCInterface.getValue() + 1);
 	}
 
-	/* Entry action for statechart 'AlwaysOncycle'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
 		sCInterface.setValue(0);
-	}
-
-	/* Exit action for state 'AlwaysOncycle'. */
-	private void exitAction() {
 	}
 
 	/* Exit action for state 'StateA'. */

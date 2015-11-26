@@ -60,15 +60,11 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -136,14 +132,6 @@ public class InEventLifeCycleStatemachine implements IInEventLifeCycleStatemachi
 
 	private void effect_main_region_A_lr0_lr0() {
 		sCInterface.setI(sCInterface.getI() + 1);
-	}
-
-	/* Entry action for statechart 'InEventLifeCycle'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'InEventLifeCycle'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

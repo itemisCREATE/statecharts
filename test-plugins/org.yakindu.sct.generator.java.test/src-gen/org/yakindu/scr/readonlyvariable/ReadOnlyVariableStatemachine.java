@@ -141,15 +141,11 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -229,10 +225,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		enterSequence_main_region_StateB_default();
 	}
 
-	/* Entry action for statechart 'ReadOnlyVariable'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
 		sCInterface.setMyInt(100);
@@ -250,10 +242,6 @@ public class ReadOnlyVariableStatemachine implements IReadOnlyVariableStatemachi
 		sCIA.setMyBool(false);
 
 		sCIA.setMyReal(7.7);
-	}
-
-	/* Exit action for state 'ReadOnlyVariable'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state StateB */

@@ -81,15 +81,11 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -221,17 +217,9 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		react_main_region__sync0();
 	}
 
-	/* Entry action for statechart 'SyncJoin'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
 		sCInterface.setX(sCInterface.getX() + 1);
-	}
-
-	/* Exit action for state 'SyncJoin'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

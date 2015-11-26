@@ -56,15 +56,11 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -180,14 +176,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		exitSequence_main_region_B_r2_D1();
 
 		enterSequence_main_region_B_r2_D2_default();
-	}
-
-	/* Entry action for statechart 'SyncFork'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'SyncFork'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

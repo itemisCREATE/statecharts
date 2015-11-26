@@ -32,15 +32,11 @@ public class EmptyTransitionStatemachine implements IEmptyTransitionStatemachine
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -85,14 +81,6 @@ public class EmptyTransitionStatemachine implements IEmptyTransitionStatemachine
 			default :
 				return false;
 		}
-	}
-
-	/* Entry action for statechart 'EmptyTransition'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'EmptyTransition'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

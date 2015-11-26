@@ -67,15 +67,11 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_mr_default();
 	}
 
 	public void exit() {
 		exitSequence_mr();
-
-		exitAction();
 	}
 
 	/**
@@ -196,14 +192,6 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		exitSequence_mr_B();
 
 		enterSequence_mr_A_default();
-	}
-
-	/* Entry action for statechart 'HistoryWithExitPoint'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'HistoryWithExitPoint'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */
