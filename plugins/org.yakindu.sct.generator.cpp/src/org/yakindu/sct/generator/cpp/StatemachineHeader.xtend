@@ -278,7 +278,7 @@ class StatemachineHeader extends Statemachine {
 
 	override dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-		«type.targetLanguageName» «it.asGetter»();
+		«IF const»const «ENDIF»«type.targetLanguageName» «it.asGetter»();
 
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
@@ -288,7 +288,7 @@ class StatemachineHeader extends Statemachine {
 	'''
 
 	/* ===================================================================================
-	 * Handling decralartion of function prototypes
+	 * Handling declaration of function prototypes
 	 */
 	/** */
 	def prototypes(ExecutionFlow it) '''
