@@ -50,6 +50,8 @@ class Types {
 		
 		#include <stdint.h>
 		#include <stdbool.h>
+		
+		#define sc_string		char*
 		 
 		typedef bool			sc_boolean;
 		typedef int_fast16_t	sc_short;
@@ -57,7 +59,6 @@ class Types {
 		typedef int32_t			sc_integer; 
 		typedef uint32_t		sc_uinteger; 
 		typedef double			sc_real;
-		typedef char*			sc_string;
 		
 		typedef void*			sc_eventid;
 		
