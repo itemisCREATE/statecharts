@@ -259,7 +259,7 @@ class StatemachineC {
 			«ENDFOR»
 			
 			«FOR variable : scope.variableDefinitions»
-				«variable.type.targetLanguageName» «variable.asGetter»(const «scHandleDecl») {
+				«IF variable.const»const «ENDIF»«variable.type.targetLanguageName» «variable.asGetter»(const «scHandleDecl») {
 					return «variable.access»;
 				}
 				«IF !variable.readonly && !variable.const»

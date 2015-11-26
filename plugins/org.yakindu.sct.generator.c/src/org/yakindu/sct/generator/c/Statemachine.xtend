@@ -141,7 +141,7 @@ class Statemachine {
 		
 		/* Declaration of constants for scope «type». */
 		«FOR d : declarations.filter(typeof(VariableDefinition)).filter[const]»
-			«IF d.type.name != 'void'»const «d.type.targetLanguageName» «d.constantName» = «d.initialValue.resolveConstants»;«ENDIF»
+			«IF d.type.name != 'void'»static const «d.type.targetLanguageName» «d.constantName» = «d.initialValue.resolveConstants»;«ENDIF»
 		«ENDFOR»
 
 	'''
@@ -199,7 +199,7 @@ class Statemachine {
 
 	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-		extern «type.targetLanguageName» «it.asGetter»(const «scHandleDecl»);
+		extern «IF const»const «ENDIF»«type.targetLanguageName» «it.asGetter»(const «scHandleDecl»);
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
 			extern void «asSetter»(«scHandleDecl», «type.targetLanguageName» value);
