@@ -25,6 +25,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import static org.eclipse.xtext.util.Strings.*
 
 class StatemachineImplementation {
 	
@@ -256,14 +257,9 @@ class StatemachineImplementation {
 		}'''
 	}
 	
-	
-	/* ===================================================================================
-	 * Implementation of interface element access functions
-	 */
-	 
 	def constantDefinitions(ExecutionFlow it) '''
 		«FOR scope : statechartScopes»
-			«FOR d : scope.declarations.filter(typeof(VariableDefinition)).filter[const]»
+			«FOR d : scope.declarations.filter(typeof(VariableDefinition)).filter[const] AFTER newLine»
 				«IF d.type.name != 'void'»const «d.type.targetLanguageName» «d.access» = «d.initialValue.code»;«ENDIF»
 			«ENDFOR»
 		«ENDFOR»
