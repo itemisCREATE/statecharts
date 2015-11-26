@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Yakindu Statechart Tools (SCT) TrafficLight Example
+Bundle-Name: YAKINDU TrafficLight Example
 Bundle-SymbolicName: org.yakindu.sct.examples.trafficlight
 Bundle-Version: 2.5.0.qualifier
 Export-Package: org.yakindu.sct.examples.java.trafficlight

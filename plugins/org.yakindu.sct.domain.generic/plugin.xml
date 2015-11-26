@@ -4,7 +4,7 @@
 <extension
          point="org.yakindu.sct.domain">
       <Domain
-            description="The default domain for Yakindu Statechart Tools."
+            description="The default domain for YAKINDU Statechart Tools."
             domainID="org.yakindu.domain.default"
             domainModuleProvider="org.yakindu.sct.domain.generic.extension.GenericDomainInjectorProvider"
             image="icons/logo_small.png"

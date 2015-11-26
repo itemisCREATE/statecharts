@@ -73,7 +73,7 @@
 <project reference="1.0.1,https://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/plugins/org.yakindu.sct.ui.integration.stext,org.yakindu.sct.ui.integration.stext,4053c23f378f00131d25942d53e355b5;https://svn.codespot.com/a/eclipselabs.org/yakindu/;https://svn.codespot.com/a/eclipselabs.org/yakindu/;branches;tags;trunk;true;6a4fa09a-a2c1-c95f-7b62-f4ef5be68d87;https://svn.codespot.com/a/eclipselabs.org/yakindu;;false;;;0"/>
 <project reference="1.0.1,https://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/plugins/org.yakindu.sct.ui.navigator,org.yakindu.sct.ui.navigator,4053c23f378f00131d25942d53e355b5;https://svn.codespot.com/a/eclipselabs.org/yakindu/;https://svn.codespot.com/a/eclipselabs.org/yakindu/;branches;tags;trunk;true;6a4fa09a-a2c1-c95f-7b62-f4ef5be68d87;https://svn.codespot.com/a/eclipselabs.org/yakindu;;false;;;0"/>
 </provider>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1404211942534_3" label="Yakindu Base" name="Yakindu Base">
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1404211942534_3" label="YAKINDU Base" name="YAKINDU Base">
 <item elementID="=org.yakindu.base.types" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.yakindu.base.types.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/de.itemis.gmf.runtime.commons-feature" type="4"/>
@@ -92,7 +92,7 @@
 <item elementID="=org.yakindu.base.expressions" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.yakindu.base-feature" type="4"/>
 </workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1404211948453_4" label="Yakindu SCT" name="Yakindu SCT">
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1404211948453_4" label="YAKINDU SCT" name="YAKINDU SCT">
 <item elementID="=org.yakindu.sct.ui.editor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.yakindu.sct.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.yakindu.sct.ui.integration.stext" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -127,7 +127,7 @@
 <item elementID="=org.yakindu.sct.model.sgraph" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.yakindu.sct.examples.trafficlight" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1404211963238_6" label="Yakindu SCT - releng" name="Yakindu SCT - releng">
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1404211963238_6" label="YAKINDU SCT - releng" name="YAKINDU SCT - releng">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.yakindu.sct.generator.cpp-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.yakindu.sct.generator-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.yakindu.sct-feature" type="4"/>
@@ -138,7 +138,7 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.yakindu.sct.repository.full" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.yakindu.sct.generator.java-feature" type="4"/>
 </workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1404211955437_5" label="Yakindu SCT - tests" name="Yakindu SCT - tests">
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1404211955437_5" label="YAKINDU SCT - tests" name="YAKINDU SCT - tests">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.yakindu.sct.test.manual" type="4"/>
 <item elementID="=org.yakindu.sct.model.stext.resource.test" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.yakindu.sct.generator.c.test" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>

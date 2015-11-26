@@ -5,7 +5,7 @@
  *   which accompanies this distribution, and is available at
  *   http://www.eclipse.org/legal/epl-v10.html
  *   Contributors:
- *   	Commiters of Yakindu - Initial contribution and API
+ *   	Commiters of YAKINDU - Initial contribution and API
  */
 package org.yakindu.sct.generator.java
 
