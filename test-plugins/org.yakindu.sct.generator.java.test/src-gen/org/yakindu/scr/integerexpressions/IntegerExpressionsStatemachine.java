@@ -288,15 +288,11 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -503,10 +499,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		enterSequence_main_region_StateB_default();
 	}
 
-	/* Entry action for statechart 'IntegerExpressions'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
 		sCInterface.setMyInt1(10);
@@ -549,10 +541,6 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		sCInterface.setMinusAssign(sCInterface.getMinusAssign() - sCInterface.myInt1);
 
 		sCInterface.setModuloAssign(sCInterface.getModuloAssign() % sCInterface.myInt1);
-	}
-
-	/* Exit action for state 'IntegerExpressions'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state StateA */

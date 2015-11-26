@@ -60,15 +60,11 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -162,17 +158,9 @@ public class DynamicChoiceStatemachine implements IDynamicChoiceStatemachine {
 		enterSequence_main_region_B_default();
 	}
 
-	/* Entry action for statechart 'DynamicChoice'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'Start'. */
 	private void entryAction_main_region_Start() {
 		sCInterface.setNumber(1);
-	}
-
-	/* Exit action for state 'DynamicChoice'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state Start */

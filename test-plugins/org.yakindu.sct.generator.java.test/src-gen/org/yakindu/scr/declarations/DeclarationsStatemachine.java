@@ -435,15 +435,11 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -677,10 +673,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		enterSequence_main_region_A_default();
 	}
 
-	/* Entry action for statechart 'Declarations'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
 		setVarInA(false);
@@ -692,10 +684,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		setVarInD("blub");
 
 		setVarInE(1);
-	}
-
-	/* Exit action for state 'Declarations'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

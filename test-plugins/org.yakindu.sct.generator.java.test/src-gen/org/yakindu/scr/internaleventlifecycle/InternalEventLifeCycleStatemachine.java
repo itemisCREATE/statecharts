@@ -60,8 +60,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_r1_default();
 
 		enterSequence_r2_default();
@@ -71,8 +69,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		exitSequence_r1();
 
 		exitSequence_r2();
-
-		exitAction();
 	}
 
 	/**
@@ -193,14 +189,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		raiseI2();
 
 		enterSequence_r2_C_default();
-	}
-
-	/* Entry action for statechart 'InternalEventLifeCycle'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'InternalEventLifeCycle'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

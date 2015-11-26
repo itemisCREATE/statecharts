@@ -56,8 +56,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_someRegion_default();
 
 		enterSequence_main_region_default();
@@ -67,8 +65,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		exitSequence_someRegion();
 
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -185,14 +181,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		exitSequence_main_region_A();
 
 		enterSequence_main_region_E_default();
-	}
-
-	/* Entry action for statechart 'PriorityValues'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'PriorityValues'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

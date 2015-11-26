@@ -72,15 +72,11 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -169,14 +165,6 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		exitSequence_main_region_B();
 
 		enterSequence_main_region_A_default();
-	}
-
-	/* Entry action for statechart 'GuardedExit'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'GuardedExit'. */
-	private void exitAction() {
 	}
 
 	/* Exit action for state 'A'. */

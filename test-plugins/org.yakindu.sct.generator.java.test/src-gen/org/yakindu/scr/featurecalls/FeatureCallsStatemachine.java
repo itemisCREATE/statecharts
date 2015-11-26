@@ -60,15 +60,11 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -140,19 +136,11 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		enterSequence_main_region_A_default();
 	}
 
-	/* Entry action for statechart 'FeatureCalls'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
 		sCIMyInterface.setMyInt(42);
 
 		sCIMyInterface.raiseEvent1();
-	}
-
-	/* Exit action for state 'FeatureCalls'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

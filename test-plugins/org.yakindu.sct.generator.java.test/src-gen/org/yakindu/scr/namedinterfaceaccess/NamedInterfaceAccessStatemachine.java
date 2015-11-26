@@ -134,8 +134,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_region_1_default();
 
 		enterSequence__region1_default();
@@ -145,8 +143,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		exitSequence_region_1();
 
 		exitSequence__region1();
-
-		exitAction();
 	}
 
 	/**
@@ -291,10 +287,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		enterSequence__region1_Closed_default();
 	}
 
-	/* Entry action for statechart 'NamedInterfaceAccess'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'Idle'. */
 	private void entryAction_region_1_Idle() {
 		sCISafe.raiseClose();
@@ -303,10 +295,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	/* Entry action for state 'Number3Pressed'. */
 	private void entryAction_region_1_Number3Pressed() {
 		sCISafe.raiseOpen();
-	}
-
-	/* Exit action for state 'NamedInterfaceAccess'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state Idle */

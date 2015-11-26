@@ -63,15 +63,11 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_r_default();
 	}
 
 	public void exit() {
 		exitSequence_r();
-
-		exitAction();
 	}
 
 	/**
@@ -178,14 +174,6 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 		exitSequence_r_A_r_B();
 
 		react_r_A_r__exit_Default();
-	}
-
-	/* Entry action for statechart 'ExitState'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'ExitState'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

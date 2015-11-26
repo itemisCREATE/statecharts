@@ -153,8 +153,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region1_default();
 
 		enterSequence_integer_region_default();
@@ -176,8 +174,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		exitSequence_real_region();
 
 		exitSequence_string_region();
-
-		exitAction();
 	}
 
 	/**
@@ -391,10 +387,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		enterSequence_string_region_D_default();
 	}
 
-	/* Entry action for statechart 'ValuedEvents'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region1_A() {
 		sCInterface.raiseIntegerEvent(2 * 21);
@@ -404,10 +396,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		sCInterface.raiseBooleanEvent(true || false);
 
 		sCInterface.raiseStringEvent("sct");
-	}
-
-	/* Exit action for state 'ValuedEvents'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

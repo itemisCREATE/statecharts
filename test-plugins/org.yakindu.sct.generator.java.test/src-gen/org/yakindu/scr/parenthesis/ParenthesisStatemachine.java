@@ -50,15 +50,11 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_mainRegion_default();
 	}
 
 	public void exit() {
 		exitSequence_mainRegion();
-
-		exitAction();
 	}
 
 	/**
@@ -115,17 +111,9 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		sCInterface.setErg(value);
 	}
 
-	/* Entry action for statechart 'Parenthesis'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'A'. */
 	private void entryAction_mainRegion_A() {
 		sCInterface.setErg(4 * (3 - 1));
-	}
-
-	/* Exit action for state 'Parenthesis'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

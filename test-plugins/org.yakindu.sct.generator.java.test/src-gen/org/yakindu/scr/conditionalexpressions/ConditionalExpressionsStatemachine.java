@@ -72,15 +72,11 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -161,10 +157,6 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 		enterSequence_main_region_B_default();
 	}
 
-	/* Entry action for statechart 'ConditionalExpressions'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
 		sCInterface.setCondition(sCInterface.boolVar ? 1 : 0);
@@ -173,10 +165,6 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
 		sCInterface.setCondition(((sCInterface.condition == 2) ? 1 : 2));
-	}
-
-	/* Exit action for state 'ConditionalExpressions'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

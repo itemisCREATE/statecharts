@@ -66,15 +66,11 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -149,14 +145,6 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 				|| (sCInterface.assignX(sCInterface.getX() * 2)) == 4));
 
 		enterSequence_main_region_A_default();
-	}
-
-	/* Entry action for statechart 'LogicalOr'. */
-	private void entryAction() {
-	}
-
-	/* Exit action for state 'LogicalOr'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */

@@ -144,15 +144,11 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -275,10 +271,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		enterSequence_main_region_StateB_default();
 	}
 
-	/* Entry action for statechart 'BitExpressions'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'StateA'. */
 	private void entryAction_main_region_StateA() {
 		sCInterface.setMyBit1(5);
@@ -299,10 +291,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		sCInterface.setBitwiseOr(sCInterface.myBit1 | sCInterface.myBit2);
 
 		sCInterface.setBitwiseXor(sCInterface.myBit1 ^ sCInterface.myBit2);
-	}
-
-	/* Exit action for state 'BitExpressions'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state StateA */

@@ -62,15 +62,11 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 			throw new IllegalStateException(
 					"The statemachine needs to be initialized first by calling the init() function.");
 
-		entryAction();
-
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
-
-		exitAction();
 	}
 
 	/**
@@ -159,10 +155,6 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 		enterSequence_main_region_C_default();
 	}
 
-	/* Entry action for statechart 'CastExpressions'. */
-	private void entryAction() {
-	}
-
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
 		sCInterface.setRealValue(3 * ((long) 5.5));
@@ -171,10 +163,6 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
 		sCInterface.setRealValue(((long) (sCInterface.realValue * sCInterface.intValue * 10.1)));
-	}
-
-	/* Exit action for state 'CastExpressions'. */
-	private void exitAction() {
 	}
 
 	/* 'default' enter sequence for state A */
