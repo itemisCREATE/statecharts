@@ -1,0 +1,115 @@
+h1(#Gettingstartedtutorial). Getting started
+
+{toc}
+
+h2(#Introduction). Introducing YAKINDU Statechart Tools
+
+This tutorial will introduce YAKINDU Statechart Tools (SCT). YAKINDU Statechart Tools provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of state machines or statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation.
+
+In this tutorial you will learn how to create a new statechart model, execute it using the simulation engine and generate Java code to get a fully-working statechart implementation. Please note that this tutorial will not explain statecharts in general, so you should familiarize yourself with the basic concepts of state machines first.[1] Before we get started, make sure you have YAKINDU Statechart Tools installed. For installation instructions see "Installation":../02_installation/installation.html.
+
+h2. CallHandling example explained
+
+p(#Prepareaproject). During this tutorial we will create a system for handling incoming phone calls as a sample application. After startup, the system is in an idle state and is waiting for incoming calls. When a call comes in, the user can either accept the call or dismiss it. If the users accepts the call and opens a connection, the system is tracking the duration of the call and is waiting for the user to hang up. After hanging up, the system displays the total time of call and then returns to its idle state. The complete statechart model is shown below:
+
+!(img-rounded shadowed)images/example.png!
+
+h2. Preparing a project
+
+p(#Createastatechartmodel). The first step is to create a new Eclipse project by selecting _File → New → Project…_. A wizard opens, showing a couple of different project types. Since we want to generate Java code from our statechart model later on, select _Java → Java Project_ from the wizard menu. Give the project a meaningful name, e.g. *CallHandling* and click _Finish_.
+
+!images/callhandling_010_create_java_project.png
+
+As a result, Eclipse creates the project and establishes a folder _src_ inside of it. Initially this folder is empty. It is indended for user-created Java code.
+
+!images/callhandling_020_new_java_project.png!
+
+However, we won't deal with Java programming right now, but rather create our statechart model first. It is good practice to keep models and source code separate. So, let's create a new folder for the model. Right-click on the project's root, i.&nbsp;e. on *CallHandling*, then select _New → Folder_ from the context menu. Give the model folder a reasonable name by typing e.&nbsp;g. *model* into the _Folder Name_ text field, then click _Finish_. The new _model_ folder appears in the package explorer:
+
+!images/callhandling_030_model_folder_created.png!
+
+h2. Creating a statechart model
+
+p(#UsetheEditor). Next, create the statechart model itself:
+* Right-click the *model* folder. The context menu opens.
+* Select _New → Other_. The _New_ wizard opens.
+* In the _New_ wizard, select _YAKINDU SCT → Statechart model_.<br/>!images/callhandling_040_create_model_new_statechart_model.png!
+* Click _Next_.
+* In the following dialog, the wizard asks for the name the of the model file and for the directory it should be created in. Let's choose *CallHandling.sct* as the file name and *CallHandling/model* as the directory name, i.e. the directory *model* inside the Eclipse project *CallHandling*.<br/>!images/callhandling_050_create_model_specify_name.png!
+* Click _Finish_.
+* Answer the question regarding the perspective switch with _Yes_.<br/>!images/callhandling_060_create_model_modeling_perspective_dialog.png!
+* The statechart editor opens and shows the definition of a very simple statechart. You will notice that the statechart editor flags an error in the model. This is due to the fact that the state does not have a name yet. The error marker will disappear once when have named the state.<br/>!images/callhandling_070_create_model_completed.png!<br/>
+
+h2. Using the editor
+
+Within the Eclipse workbench, the area marked by a red rectangle in the image below is the *statechart editor*. The subsequent paragraph will explain how to work with it, how to create and modify the statechart for the _CallHandling_ example.
+
+!images/callhandling_080_editing_editor.png!
+
+h3. Creating interfaces
+
+Statecharts can describe very complex interactions between a multitude of actors and an even bigger multitude of events these actors can receive or trigger. It is therefore good practice to structure those events and associate them with their respective actors. For this purpose YAKINDU Statecharts Tools provides the concept of so-called *interfaces*.
+
+In the _CallHandling_ example, we have two actors: the user and the phone. Let's model their communication as two interfaces:
+* The _Phone_ interface provides a single incoming event named _incoming_call_.
+* The _User_ interface comprises two incoming events: _accept_call_ and _dismiss_call_.
+
+We have to enter the respective definitions in textual form into the statechart editor. Here's how the interface definitions look like:
+
+bc(prettyprint). interface User:
+    in event accept_call
+    in event dismiss_call
+
+bc(prettyprint). interface Phone:
+    var duration : integer
+    in event incoming_call
+
+As you can see, _Phone_ interface also has an integer variable _duration_, which will be explained later. This text has to go into the statechart editor's *definition block*, which is the compartment on the statechart editor's left-hand side. To enter the text, double-click on the definition block and start typing.
+
+Hint: The text editor offers context-sensitive assistance helping you to know what keyword etc. are allowed at the very position the text cursor currently is. Let's assume you have just entered the definition of the _User_ interface and your text cursor is positioned _behind_ that definition.
+# Press @[Ctrl+Space]@. This key combination invokes the *content assist*. A popup window appears showing all keyword alternatives that are allowed here.
+# Single-click on one of the alternatives, say on @interface@, and a help text containing a detailed description with sample code is displayed in a second popup window.
+# Double-click on it, and the keyword is carried over into the text field.
+
+!images/callhandling_090_editing_interfaces.png!
+
+h3. Creating states
+
+Next, rename the initially created state to *Idle* by double-clicking on the name label and entering the new name. The error marker will disappear.
+
+Statechart validation includes syntactical and semantical checks of the whole statechart. For examples, a statechart is checked for unreachable states, dead ends, or references to unknown events. These validation constraints are checked during editing. In case any constraints are violated, warning or error markers will be shown, attached to the faulty model elements. Thus the user receives direct and immediate feedback on the validation state of his statecharts.
+
+Now, create the three states *Incoming Call*, *Active Call* and *Dismiss Call* by dragging _States_ symbol from the palette on the right onto the main region thrice and naming the states appropriately.
+
+h3. Creating transitions
+
+Connect the states using the _Transition_ tool from the palette as shown in the sample model above. After creating a transition, select the appropriate event (use the content assist @[Ctrl+Space]@ to navigate from interfaces to events) in the direct editing pop-up.
+
+Finally, create the *Active Call* and *Dismiss Call* states' internal behavior. This can either be done by opening the direct editing text box via double-clicking or by using the property view at the bottom. The text box supports code completion, syntax highlighting and validation.
+
+If everything went well, the error markers should be gone. Your model should look like the one in the following screenshot:
+
+!(img-rounded shadowed)images/example_final.png!
+
+p(#Simulatingthemodel). If something went wrong and you cannot eliminate the problem, you can download the sample project "here":examples/CallHandling.zip.
+
+h2. Simulating the model
+
+To start the dynamic simulation of your model, right-click on the model file *CallHandling.sct* in the Eclipse _Project Explorer_, then select _Run As → Statechart Simulation_ in the context menu.
+
+The perspective changes from _SC Modeling_ to _SC Simulation_. The simulation perspective defines two additional views: The _Debug_ view at the top shows all running statechart instances and allows to select one of them. Please note that SCT allows multiple executions of the same statechart as well as parallel executions of different statecharts at the same time.7
+
+You can use the _Simulation_ view on the right to raise events and to inspect and modify variables.
+
+When the simulation starts, the *Idle* state becomes active since it is connected to the *Initial State*. An active state is visualized by a red background color in the statechart view.
+
+Now let's simulate an incoming call. Raise the associated event by clicking at the _incoming_call_ text formatted as a hyperling in the _Simulation_ view on the right. This event will trigger a state transition from *Idle* to *Incoming Call*. Accept the call by raising the _accept_call_ event. Another transition happens, and the state *Active Call* becomes active. For the duration of the call, the variable _duration_ in the _Simulation_ view is incremented every second. When you are done with your phone call, raise the _dismiss_call_ event. The state machine transitions to the *Dismiss Call* state, and two seconds later returns to its *Idle* state.
+
+If your statechart behaves as expected, we can go one step further now and generate code from it. Before doing so, stop the simulator by clicking at the little red terminate button in the toolbar at the top.
+
+
+h2(#Footnotes). Footnotes
+
+fn1. "UML state machine":http://en.wikipedia.org/wiki/UML_state_machine
+
+fn2. Not to be confused with user interfaces.
