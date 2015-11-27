@@ -262,6 +262,40 @@ Upon releasing the mouse button the transition is established. Type @operate@ as
 
 
 
+h2. Simulating the light switch model
+
+Simulating a model means to execute it, raise events manually, have timed and run cycle-based events being triggered automatically, and observe its behaviour.
+
+Start the simulation by right-clicking on the _LightSwitch.sct_ file in the project explorer and selecting _Run As → Statechart Simulation_:
+
+!images/light_switch_300_statechart_simulator_run_as_statechart_simulation.png!
+
+The perspective changes from _SC Modeling_ to _SC Simulation_. This perspective defines two additional views:
+* The _Debug_ view at the top shows all running statechart instances and allows to select one of them. YAKINDU Statechart Tools allow multiple executions of the same statechart as well as parallel executions of different statecharts at the same time.
+* The _Simulation_ view on the right-hand side is used to raise events and to inspect and modify variables.
+
+Not surprisingly, the simulation starts at the initial state and then transitions to the *Off* state immediately. The latter becomes the active state now. It is highlighted by a red background:
+
+!images/light_switch_310_statechart_simulator_state_off.png!
+
+Now that the light switch is off, let's turn the lights on by operating the switch. In the simulation, we will have to raise the _operate_ event. How can we do this?
+
+In the _Simulation_ view at the right-hand side of the Eclipse workbench, click on the _internal_ entry's show/hide symbol to display its contents.
+
+!images/light_switch_320_statechart_simulator_state_events.png!
+
+The _operate_ event is shown. Click on it to raise the event, i.&nbsp;e. to operate the light switch. 
+
+The transition arc leading from the *Off* state to the *On* state flashes briefly in red, and the *On* state becomes active. Its background color changes to red while the *On* state's background color becomes normal again. 
+
+!images/light_switch_330_statechart_simulator_state_on.png!
+
+Click on _operate_ again, and the active state changes back to *Off*. Click on _operate_ several times and enjoy watching the state machine's behaviour.
+
+Stop the simulator by clicking at the little red termination button in the toolbar at the top.
+
+
+
 h2. CallHandling example explained
 
 p(#Prepareaproject). During this tutorial we will create a system for handling incoming phone calls as a sample application. After startup, the system is in an idle state and is waiting for incoming calls. When a call comes in, the user can either accept the call or dismiss it. If the users accepts the call and opens a connection, the system is tracking the duration of the call and is waiting for the user to hang up. After hanging up, the system displays the total time of call and then returns to its idle state. The complete statechart model is shown below:
