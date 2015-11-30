@@ -10,15 +10,15 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1483"
-   height="897"
+   width="1088.6281"
+   height="505.89349"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
    sodipodi:docname="light_switch_220_statechart_editor.svg"
-   inkscape:export-filename="/data/home/klute/itemis/yakindu_statechart_tools/statecharts/plugins/org.yakindu.sct.doc.user/help/02_Getting_started/images/callhandling_080_editing_editor.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-filename="/data/home/klute/itemis/yakindu_statechart_tools/statecharts/plugins/org.yakindu.sct.doc.user/help/03_getting_started/images/light_switch_220_statechart_editor.png"
+   inkscape:export-xdpi="90.422539"
+   inkscape:export-ydpi="90.422539">
   <defs
      id="defs4">
     <filter
@@ -39,8 +39,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.1038436"
-     inkscape:cx="741.5"
-     inkscape:cy="448.5"
+     inkscape:cx="505.61841"
+     inkscape:cy="128.02109"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -48,9 +48,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:window-width="1765"
+     inkscape:window-width="1902"
      inkscape:window-height="1536"
-     inkscape:window-x="324"
+     inkscape:window-x="187"
      inkscape:window-y="0"
      inkscape:window-maximized="0" />
   <metadata
@@ -69,7 +69,7 @@
         </dc:creator>
         <dc:rights>
           <cc:Agent>
-            <dc:title></dc:title>
+            <dc:title />
           </cc:Agent>
         </dc:rights>
         <cc:license
@@ -81,17 +81,14 @@
      inkscape:label="Ebene 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(1538.3004,2.3231974)">
+     transform="translate(1302.4188,-68.304392)">
     <image
-       y="-2.3231974"
-       x="-1538.3004"
-       id="image3064"
-       xlink:href="file:///home/klute/itemis/yakindu_statechart_tools/statecharts/plugins/org.yakindu.sct.doc.user/help/03_getting_started/images/light_switch_200_empty_statechart_created.png"
-       height="897"
-       width="1483"
-       inkscape:export-filename="/data/home/klute/itemis/yakindu_statechart_tools/statecharts/plugins/org.yakindu.sct.doc.user/help/03_getting_started/images/light_switch_220_statechart_editor.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       y="-70.047371"
+       x="-1522.8231"
+       id="image3045"
+       xlink:href="file:///home/klute/itemis/yakindu_statechart_tools/statecharts/plugins/org.yakindu.sct.doc.user/help/03_getting_started/images/light_switch_220_statechart_editor_raw.png"
+       height="913"
+       width="1491" />
     <rect
        style="color:black;fill:none;stroke:red;stroke-width:10;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter3928);enable-background:accumulate"
        id="rect3128"
@@ -99,6 +96,6 @@
        height="305.71429"
        x="-1089.7764"
        y="152.72177"
-       transform="matrix(1.9205044,-0.00133688,0,1.5438288,788.2306,-87.438076)" />
+       transform="matrix(1.9401021,-0.00137437,0,1.5871156,824.04854,-164.85747)" />
   </g>
 </svg>

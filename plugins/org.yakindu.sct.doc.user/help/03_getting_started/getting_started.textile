@@ -7,11 +7,12 @@ h2(#Introduction). Introducing YAKINDU Statechart Tools
 This tutorial introduces YAKINDU Statechart Tools (SCT). It provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of state machines or statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation.
 
 This tutorial you will teach how to
-* create a new statechart model, 
-* execute it using the simulation engine, and
-* generate Java source code to get a fully-working statechart implementation.
+* create a new statechart model, and
+* execute it using the simulation engine.
 
 Please note that this tutorial will not explain statecharts in general, so you should familiarize yourself with the basic concepts of state machines first.[1]
+
+In order to get a fully-working statechart implementation that you can integrate with your project, you will have to familiarize yourself with _code generation_, which is covered by the chapter "Code generation":../../04_code_generation/code_generation.html in this documentation. You can generate your state machine implementation as source code in C, C++, and Java out of the box. Alternatively, you can write your own code generator for other programming languages or for other purposes.
 
 Before we get started, make sure you have YAKINDU Statechart Tools installed. For installation instructions, see the "Installation documentation":../02_installation/installation.html.
 
@@ -34,7 +35,6 @@ Now let's model the light switch as a statechart using YAKINDU Statechart Tools.
 # Creating an Eclipse project. It will serve as a container for the statechart model.
 # Modeling the light switch using the YAKINDU Statechart Tools editor. The result will be a static statechart model.
 # Simulating the model. We can play around with the model, operate the light switch and observe its behaviour.
-# Generate Java source code. The result will be a Java implementation of the state machine that we can integrate with Java client code.
 
 h3. Creating an Eclipse project
 
@@ -46,33 +46,19 @@ The _New Project_ wizard opens, showing a couple of different project types stru
 
 !images/light_switch_020_wizard_new_project_general_project.png!
 
-If we only wanted to create the statechart model and run the simulator on it, we could select _General → Project_ in the wizard (see above) in order to choose the most basic Eclipse project type.
+Select _General → Project_ and click _Next >_.
 
-However, after having created a statechart, users often also want to have an implementation of their state machine in some programming language, so that they can integrate it into their software projects. In such cases it is advisable to create a language-specific Eclipse project right from the start. This will save you from hassles later.
+The wizard shows its next page:
 
-Subsequently we will assume that your programming language is Java and consequently will work with a Java project. Don't worry if you don't have anything to do with Java! We won't dive into programming details! 
-
-In the _New Project_ wizard, select _Java → Java Project_:
-
-!images/light_switch_030_wizard_new_project_java_java_project.png!
-
-Click _Next >_. The wizard changes to the _New Java Project_ page:
-
-!images/light_switch_040_wizard_new_java_project.png!
+!images/light_switch_040_wizard_new_project.png!
 
 Specify a meaningful _Project name_, e.&nbsp;g. *LightSwitch*, and optionally select a _Location_ to create the project in.
 
 Click _Finish_.
 
-Since Eclipse has a dedicated perspective for Java projects, it asks you whether you want to change to it now or not:
+Eclipse creates the new project: 
 
-!images/light_switch_050_dialog_open_associated_perspective.png!
-
-Your answer really doesn't matter too much, because you can switch perspectives at any time. Click _Yes_ to acknowlegde opening the Java perspective. By having checked _Remember my decision_ you can also instruct Eclipse to never ask this question again (regarding the Java perspective).
-
-Eclipse creates the new Java project and establishes a folder _src_ inside of it. The latter is indended for user-created Java source code. Initially it is empty. 
-
-!images/light_switch_060_java_project_created.png!
+!images/light_switch_060_project_created.png!
 
 
 h3. Creating a folder for the model
@@ -89,7 +75,7 @@ The _New Folder_ wizard opens:
 
 Give the model folder a reasonable name, e.&nbsp;g. *model*, and type it into the _Folder Name_ text field. Then click _Finish_.
 
-The new _model_ folder is created and appears in the package explorer.
+The new _model_ folder is created and appears in the _Project Explorer_ view at the left.
 
 
 h3. Starting with an empty statechart model
@@ -114,13 +100,18 @@ The default file name in the _File Name_ field is *default.sct*, however. You sh
 
 Click _Finish_.
 
-Answer the question regarding switching to the YAKINDU Modeling perspective with _Yes_.
+Since there's a dedicated perspective for statechart models, Eclipse asks you whether you want to change to it now or not:
 
 !images/light_switch_150_dialog_confirm_perspective_switch.png!
 
+Please answer the question regarding switching to the _YAKINDU Modeling_ perspective by clicking on the _Yes_ button. The _YAKINDU Modeling_ perspective has a graphical editor for statechart models, and you will need it to create and modify statecharts. On the other hand your answer really doesn't matter that much, because you can switch perspectives at any time. If you check _Do not offer to switch perspective in the future_ before clicking _Yes_, Eclipse will never ask this question again, at least regarding the _YAKINDU Modeling_ perspective.
+
+
 h4. The initial model
 
-An empty statechart is created and displayed in the large editor compartment in the middle of the Eclipse workbench. This is the *statechart editor*, marked by a red rectangle in the screenshot below. It is used to edit statecharts graphically. Subsequently, we will use it to develop the light switch statechart.
+An empty statechart is created and displayed in the *statechart editor* in the middle of the Eclipse workbench. In the screenshot below the statechart editor is marked by a red rectangle. Subsequently, we will use statechart editor to graphically develop the light switch statechart.
+
+p(#light_switch_220_statechart_editor). 
 
 !images/light_switch_220_statechart_editor.png!
 
@@ -128,19 +119,27 @@ Actually the new statechart isn't really empty. It already contains the initial 
 
 h3. Statechart validation
 
-The "normal" state, however, is marked with a small filled red circle containing a white 'X'. This is an error marker and tells you that something is wrong with your model or, more particularly, with the state it is attached to.
+h4. Error markers in the model graph
 
-The error marker is also shown in the _Project Explorer_ view at the left-hand side of the main window. So you can see immediately which of your projects contain errors. Click on the small show/hide symbol (a triangle) left from a project's or any other resource's name in order to display or hide its respective contents. In this way you will quickly find out which directories and files are affected by errors. In the screenshot above we have clicked open the _LightSwitch_ project and the _model_ directory, showing the error is in the _LightSwitch.sct_ file.
+The "normal" state, however, has a small filled red circle containing a white 'X' attached. This is an error marker and tells you that something is wrong with your model, particularly with the object it is attached to.
 
-The error marker exemplifies YAKINDU Statechart Tools' model validation capabilities. Statechart validation includes syntactical and semantical checks of the whole statechart. For examples, a statechart is checked for unreachable states, dead ends, or references to unknown events. These validation constraints are checked during editing. In case any constraints are violated, warning or error markers are attached to the faulty model elements. Thus the user receives direct and immediate feedback on the validation state of his statechart.
+h4. Error markers in the project explorer
+
+The error marker is also shown in the _Project Explorer_ view at the left-hand side of the main window. In this way you can see immediately which of your projects contain errors. Click on the small show/hide symbol (triangle) left of a project's or any other resource's name to show or hide its respective contents. By doing so, you can quickly encircle the directories and files that are affected by errors. In the screenshot above we have clicked open the _LightSwitch_ project and the _model_ directory, showing the error is in the _LightSwitch.sct_ file.
+
+h4. Validation principles
+
+This error marker exemplifies YAKINDU Statechart Tools' model validation capabilities. Statechart validation includes syntactical and semantical checks of the whole statechart. For example, a statechart is checked for unreachable states, dead ends, or references to unknown events. These validation constraints are checked during editing. In case any constraints are violated, error or warning markers are attached to the faulty model elements. Thus the user receives direct and immediate feedback on the validation state of his statechart.
 
 Hovering with the mouse over the error marker in the statechart editor reveals what the problem is. A small popup appears and displays the error description: "A state must have a name."
 
 !images/light_switch_210_error_marker_and_popup.png!
 
-An alternative place to see error messages is the _Problems_ view at the bottom of the Eclipse window. This view displays:
-* The total number of errors, warnings, and others. In our case we have one error and nothing else.
-* Lists containing errors, warnings, and others, if available. In our example there is a single list containing error messages. Click on the show/hide symbol to show or hide the message list or just its header. 
+h4. Error markers in the "problems" view
+
+An alternative place to see error messages is the _Problems_ view. This view has the particular advantage to comprise all notifications in a clearly arranged list form, see the "screenshot above":#light_switch_220_statechart_editor. It displays:
+* A summary comprising the total number of errors, warnings, and others. In our case we have one error and nothing else.
+* Zero or more lists containing errors, warnings, and other types of messages, if available. In our example there is a just a single list containing error messages. Click on the show/hide symbol to show the message list's contents or the list's header only. 
 
 Double-clicking on an error message in the _Problems_ view brings you directly to the erroneous object.
 
@@ -151,7 +150,7 @@ h3. Giving a state a name
 
 As we have seen, the initial statechart is erroneous insofar as the state does not have a name. So let's fix that.
 
-The first requirement demands the switch to be off initially. The erroneous state is reached from the initial state immediately, so it is appropriate to name it *Off*.
+Remember the requirements of our light switch example? The first requirement demands the switch to be off initially. The erroneous state is reached from the initial state immediately, so it is appropriate to name it *Off*.
 
 Double-click on the string @<name>@ in the state object. The string turns into a text input field with @<name>@ being highlighted:
 
@@ -161,17 +160,17 @@ Type the state's new name, i.&nbsp;e. @Off@:
 
 !images/light_switch_230_statechart_editor_change_state_name_02.png!
 
-Hit the @[Enter]@ key. Bingo! The state now has a proper name and the error marker disappears:
+Hit the @[Enter]@ key or click anywhere outside the text field. Bingo! The state now has a proper name and the error marker disappears:
 
 !images/light_switch_230_statechart_editor_change_state_name_03.png!
 
-However, since the state box's size is smaller now than before while the box's left position remains unchanged, everything looks crooked.
+However, since the state box's size is smaller now than before while the box's left position remains unchanged, the graph looks crooked.
 
-We can improve the graphics by dragging the state box a little bit to the right. When it is centered below the initial state symbol, a vertical blue line appears giving the user a visual hint:
+We can improve it by dragging the state box a little bit to the right. When it is centered below the initial state symbol, a vertical blue line appears giving the user a visual hint:
 
 !images/light_switch_230_statechart_editor_change_state_name_04.png!
 
-Drop the state box at this very place, and everything looks better:
+Drop the state box at this very place, and everything looks much better now:
 
 !images/light_switch_230_statechart_editor_change_state_name_05.png!
 
