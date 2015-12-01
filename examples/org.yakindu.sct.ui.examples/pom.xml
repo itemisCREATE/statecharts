@@ -20,7 +20,7 @@
 				<version>2.4</version>
 				<executions>
 					<execution>
-						<id>copy</id>
+						<id>copyTrafficLight</id>
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>copy</goal>
@@ -44,7 +44,7 @@
 						<id>copy</id>
 						<phase>prepare-package</phase>
 						<goals>
-							<goal>copy</goal>
+							<goal>copyClock</goal>
 						</goals>
 						<configuration>
 							<artifactItems>
@@ -62,7 +62,7 @@
 						</configuration>
 					</execution>
 					<execution>
-						<id>copy</id>
+						<id>copyLightSwitch</id>
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>copy</goal>
