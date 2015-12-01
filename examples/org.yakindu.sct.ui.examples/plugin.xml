@@ -23,4 +23,39 @@
 		 <projectDescriptor name="org.yakindu.sct.examples.trafficlight" contentURI="contents/org.yakindu.sct.examples.trafficlight.zip" description="Trafficlight example with java generated source code"/>
 	  </example>
    </extension>
+   
+   <!-- org.yakindu.sct.example.clock -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.yakindu.sct.example.clock" 
+			name="Clock Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.yakindu.sct.ui.Examples"
+			icon="icons/logo-16.png" 
+			project="true">
+			<description>A hands-on tutorial to try out The YAKINDU Statechart Tools</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	  <example wizardID="org.yakindu.sct.example.clock" pageImage="icons/logo-16.png">
+		 <projectDescriptor name="org.yakindu.sct.examples.clock" contentURI="contents/org.yakindu.sct.examples.clock.zip" description="Clock example Model without generated source code"/>
+	  </example>
+   </extension>
+   
+   <!-- org.yakindu.sct.example.lightswitch -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.yakindu.sct.example.trafficlight" 
+			name="LightSwitch Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.yakindu.sct.ui.Examples"
+			icon="icons/logo-16.png" 
+			project="true">
+			<description>The hello world lightswitch example from our user documentation</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	  <example wizardID="org.yakindu.sct.example.lightswitch" pageImage="icons/logo-16.png">
+		 <projectDescriptor name="org.yakindu.sct.examples.lightswitch" contentURI="contents/org.yakindu.sct.examples.lightswitch.zip" description="Lightswitch example from the tutorial section"/>
+	  </example>
+   </extension>
+   
 </plugin>
