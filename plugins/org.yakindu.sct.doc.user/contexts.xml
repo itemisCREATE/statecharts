@@ -18,7 +18,6 @@
    <context id="sc_properties_transition_expression" title="YAKINDU Statechart Element Properties">
       <description>A transition is the transfer of one state to another. Transitions are diagrammed as arrows and can carry events and actions but must not.</description>
       <topic href="help/05_reference/reference.html#Transitions" label="Transitions reference"/>
- 	     
    </context>
    <context id="sgen_feature" title="Genmodel Features">
       <topic href="help/05_reference/reference.html" label="Help_Topic"/>

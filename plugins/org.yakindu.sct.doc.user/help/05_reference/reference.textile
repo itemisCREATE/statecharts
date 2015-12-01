@@ -489,8 +489,9 @@ The following section describes the *Core Features* which are available for all 
 h4(#Outlet). Outlet
 
 The *Outlet* feature specifies target project and target folder for the generated artifacts. It is a _required_ feature and has the following parameters:
-# __targetProject__ (String, required): The project to store the generated artifacts  
-# __targetFolder__ (String, required): The folder to store the generated artifacts
+# __targetProject__ (String, required): The project to store the generated artifacts to. 
+# __targetFolder__ (String, required): The folder to store the generated artifacts to. If a library folder is given, only the dynamic (i.e. model dependent artifacts) are generated into the target folder, if not all generated artifacts will be generated into it. All artifacts in this folder will be overwritten during re-generation.
+# __libraryTargetFolder__ (String, optional): The folder to store the static (i.e. model independent artifacts) to. In case this is not specified, all artifacts will be generated into the target folder. All artifacts in this folder will be preserved during re-generation.
 
 Sample configuration:
 
@@ -498,6 +499,7 @@ bc(prettyprint)..
 feature Outlet {
 	targetProject = "SampleProject"
 	targetFolder = "src-gen"
+	libraryTargetFolder = "src"
 }
 p. ==<!-- End sgen_feature_outlet -->==
 ==<!-- Start sgen_feature_licenseheader -->==

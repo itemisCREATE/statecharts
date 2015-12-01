@@ -9,10 +9,14 @@
  */
 package org.yakindu.sct.generator.java
 
+import com.google.inject.Inject
+import org.eclipse.xtext.generator.IFileSystemAccess
+import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
+import org.yakindu.sct.generator.core.util.GeneratorUtils
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.eclipse.xtext.generator.IFileSystemAccess
-import com.google.inject.Inject
+
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER
 
 class ITimer {
 	
@@ -23,7 +27,14 @@ class ITimer {
 	extension GenmodelEntries
 	
 	def generateITimer(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		fsa.generateFile(entry.basePackagePath + '/' + iTimer.java, content(entry))
+		if (GeneratorUtils.getOutletFeatureConfiguration(entry).getParameterValue(
+			OUTLET_FEATURE_LIBRARY_TARGET_FOLDER) != null) {	
+			// generate into library target folder in case one is specified, as the contents are static
+			fsa.generateFile(entry.basePackagePath + '/' + iTimer.java, IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT, content(entry))
+		} else {
+			// use default target folder path in case no library target folder is specified (the file will be overwritten there)
+			fsa.generateFile(entry.basePackagePath + '/' + iTimer.java, content(entry))
+		}
 	}
 	
 	def private content(GeneratorEntry entry) {
