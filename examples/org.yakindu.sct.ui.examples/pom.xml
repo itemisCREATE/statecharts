@@ -40,6 +40,48 @@
 							<outputDirectory>${basedir}/contents</outputDirectory>
 						</configuration>
 					</execution>
+					<execution>
+						<id>copy</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.yakindu.sct.examples</groupId>
+									<artifactId>org.yakindu.sct.examples.clock</artifactId>
+									<version>${project.version}</version>
+									<type>zip</type>
+									<classifier>content</classifier>
+									<destFileName>org.yakindu.sct.examples.clock.zip</destFileName>
+								</artifactItem>
+							</artifactItems>
+							<overWriteIfNewer>true</overWriteIfNewer>
+							<outputDirectory>${basedir}/contents</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.yakindu.sct.examples</groupId>
+									<artifactId>org.yakindu.sct.examples.lightswitch</artifactId>
+									<version>${project.version}</version>
+									<type>zip</type>
+									<classifier>content</classifier>
+									<destFileName>org.yakindu.sct.examples.lightswitch.zip</destFileName>
+								</artifactItem>
+							</artifactItems>
+							<overWriteIfNewer>true</overWriteIfNewer>
+							<outputDirectory>${basedir}/contents</outputDirectory>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
