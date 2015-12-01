@@ -44,7 +44,7 @@
 						<id>copy</id>
 						<phase>prepare-package</phase>
 						<goals>
-							<goal>copyClock</goal>
+							<goal>copy</goal>
 						</goals>
 						<configuration>
 							<artifactItems>
