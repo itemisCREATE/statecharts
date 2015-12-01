@@ -73,6 +73,10 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 		public File getTargetFolder(GeneratorEntry entry) {
 			return GeneratorUtils.getTargetFolder(entry);
 		}
+		
+		public File getLibraryTargetFolder(GeneratorEntry entry) {
+			return GeneratorUtils.getLibraryTargetFolder(entry);
+		}
 	};
 
 	protected void runGenerator(Statechart statechart, GeneratorEntry entry) {

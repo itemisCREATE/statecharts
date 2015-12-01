@@ -95,6 +95,17 @@ public class GeneratorUtils {
 				.getPath()
 				+ File.separator + targetFolder);
 	}
+	
+	/** Gets the target folder path as a File that includes the project location */
+	public static File getLibraryTargetFolder(GeneratorEntry entry) {
+		String targetFolder = getOutletFeatureConfiguration(entry)
+				.getParameterValue(
+						ICoreFeatureConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER)
+				.getStringValue();
+		return new File(getTargetProject(entry).getLocation().toFile()
+				.getPath()
+				+ File.separator + targetFolder);
+	}
 
 	public static FeatureConfiguration getOutletFeatureConfiguration(
 			GeneratorEntry entry) {
