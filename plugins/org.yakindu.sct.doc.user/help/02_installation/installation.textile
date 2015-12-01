@@ -48,11 +48,11 @@ Choose a directory for YAKINDU Statechart Tools (SCT). The example below assumes
 
 !=images/windows7_install_020_eclipse_extract_2.png!
 
-After unpacking, you will find a folder _eclipse_ in your installation directory, i.&nbsp;e. _C:\Program Files\yakindu_sct\eclipse_ in our example, as shown in the image below:
+After unpacking, you will find a folder _sct_ in your installation directory, i.&nbsp;e. _C:\Program Files\yakindu_sct\sct_ in our example, as shown in the image below:
 
 !=images/windows7_install_030_eclipse_folder.png!
 
-The contents of the _eclipse_ folder looks like this:
+The contents of the _sct_ folder looks like this:
 
 !=images/windows7_install_040_eclipse_contents.png!
 
@@ -76,7 +76,7 @@ In the example below, we chose the _C:\Users\joedoe\workspace_ directory as our 
 
 Click on the _OK_ button to proceed.
 
-On the first start, Eclipse presents a _Welcome_ window:
+On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
 
 !=images/windows7_install_070_eclipse_welcome.png!
 
@@ -120,22 +120,18 @@ Go to the installation directory:
 bc(prettyprint). 
 cd /my/software/
 
-<div style="background: yellow">
-
 Unpack the software distribution file. If the downloaded file is located in _/download/yakindu-sct-luna-R-linux-gtk-x86_64.tar.gz_, use the following command to unpack in the installation directory:
 
 bc(prettyprint). 
 gzip -dc /download/yakindu-sct-luna-R-linux-gtk-x86_64.tar.gz | tar xvfp -
 
-This will create a folder _eclipse_ in your installation directory, i.&nbsp;e. _/my/software/eclipse_ in our example, as shown in the image below:
+This will create a folder _sct_ in your installation directory, i.&nbsp;e. _/my/software/sct_ in our example, as shown in the image below:
 
 !=images/linux_install_010_eclipse_folder.png!
 
-The contents of the _eclipse_ folder looks like this:
+The contents of the _sct_ folder looks like this:
 
 !=images/linux_install_020_eclipse_contents.png!
-
-</div>
 
 There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
 
@@ -144,21 +140,17 @@ h3. Starting YAKINDU Statechart Tools
 
 Start YAKINDU Statechart Tools by running the _SCT_ executable.
 
-<div style="background: yellow">
-
 To do so, please enter the command
 
 bc(prettyprint). 
-eclipse/SCT
+sct/SCT
 
 in your installation directory. Or issue the command
 
 bc(prettyprint). 
-/my/software/eclipse/SCT
+/my/software/sct/SCT
 
 if your command shell is in any other working directory.
-
-</div>
 
 From a file browser, you can start YAKINDU Statechart Tools by clicking on the _SCT_ symbol, shown as a gear-wheel in the sample screenshot above.
 
@@ -176,7 +168,7 @@ Click on the _OK_ button to proceed.
 
 <div style="background: yellow">
 
-On the first start, Eclipse presents a _Welcome_ window:
+On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
 
 !=images/linux_install_050_eclipse_welcome.png!
 
