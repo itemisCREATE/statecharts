@@ -330,6 +330,9 @@
 		</profile>
 		<profile>
 			<id>enableSigning</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
 			<build>
 				<plugins>
 					<plugin>
@@ -352,19 +355,42 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>tests</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<!-- test plugins -->
+				<module>../../test-plugins/org.yakindu.sct.model.sexec.test</module>
+				<module>../../test-plugins/org.yakindu.sct.model.sgraph.test</module>
+				<module>../../test-plugins/org.yakindu.sct.generator.genmodel.test</module>
+				<module>../../test-plugins/org.yakindu.sct.model.stext.resource.test</module>
+				<module>../../test-plugins/org.yakindu.sct.model.stext.test</module>
+				<module>../../test-plugins/org.yakindu.sct.simulation.core.sexec.test</module>
+				<module>../../test-plugins/org.yakindu.sct.test.models</module>
+				<module>../../test-plugins/org.yakindu.sct.generator.cpp.test</module>
+				<module>../../test-plugins/org.yakindu.sct.generator.java.test</module>
+				<module>../../test-plugins/org.yakindu.sct.refactoring.tests</module>
+				<module>../../test-plugins/org.yakindu.sct.generator.c.test</module>
+				<!--  test feature -->
+				<module>../../features/org.yakindu.sct.test-feature</module>
+				<!--  test releng -->
+				<module>../org.yakindu.sct.repository.full</module>
+				
+			</modules>
+		</profile>
 	</profiles>
-
 	<modules>
-
 		<!-- Releng -->
 		<module>../org.yakindu.base.target</module>
 		<module>../org.yakindu.base.repository</module>
 		<module>../org.yakindu.sct.repository</module>
-		<module>../org.yakindu.sct.repository.full</module>
-
 		<!-- Examples -->
 		<module>../../examples/org.yakindu.sct.examples.trafficlight</module>
-
+		<module>../../examples/org.yakindu.sct.examples.clock</module>
+		<module>../../examples/org.yakindu.sct.examples.lightswitch</module>
+		<module>../../examples/org.yakindu.sct.ui.examples</module>
 		<!-- Plugins -->
 		<module>../../plugins/org.yakindu.base.types.test</module>
 		<module>../../plugins/org.yakindu.base.xtext.utils.gmf</module>
@@ -400,7 +426,6 @@
 		<module>../../plugins/org.yakindu.sct.simulation.ui.sexec</module>
 		<module>../../plugins/org.yakindu.sct.ui</module>
 		<module>../../plugins/org.yakindu.sct.ui.editor</module>
-		<!--  <module>../../plugins/org.yakindu.sct.ui.examples</module> -->
 		<module>../../plugins/org.yakindu.sct.ui.intro</module>
 		<module>../../plugins/org.yakindu.sct.ui.navigator</module>
 		<module>../../plugins/org.yakindu.sct.generator.c</module>
@@ -419,20 +444,6 @@
 		<module>../../features/org.yakindu.sct.generator.java-feature</module>
 		<module>../../features/org.yakindu.sct.generator-feature</module>
 		<module>../../features/org.yakindu.sct.sdk-feature</module>
-		<module>../../features/org.yakindu.sct.test-feature</module>
-
-		<!-- test plugins -->
-		<module>../../test-plugins/org.yakindu.sct.model.sexec.test</module>
-		<module>../../test-plugins/org.yakindu.sct.model.sgraph.test</module>
-		<module>../../test-plugins/org.yakindu.sct.generator.genmodel.test</module>
-		<module>../../test-plugins/org.yakindu.sct.model.stext.resource.test</module>
-		<module>../../test-plugins/org.yakindu.sct.model.stext.test</module>
-		<module>../../test-plugins/org.yakindu.sct.simulation.core.sexec.test</module>
-		<module>../../test-plugins/org.yakindu.sct.test.models</module>
-		<module>../../test-plugins/org.yakindu.sct.generator.cpp.test</module>
-		<module>../../test-plugins/org.yakindu.sct.generator.java.test</module>
-		<module>../../test-plugins/org.yakindu.sct.refactoring.tests</module>
-		<module>../../test-plugins/org.yakindu.sct.generator.c.test</module>
 
 	</modules>
 
