@@ -383,15 +383,15 @@
 		</profile>
 	</profiles>
 	<modules>
-		<!-- Releng -->
-		<module>../org.yakindu.base.target</module>
-		<module>../org.yakindu.base.repository</module>
-		<module>../org.yakindu.sct.repository</module>
 		<!-- Examples -->
 		<module>../../examples/org.yakindu.sct.examples.trafficlight</module>
 		<module>../../examples/org.yakindu.sct.examples.clock</module>
 		<module>../../examples/org.yakindu.sct.examples.lightswitch</module>
 		<module>../../examples/org.yakindu.sct.ui.examples</module>
+		<!-- Releng -->
+		<module>../org.yakindu.base.target</module>
+		<module>../org.yakindu.base.repository</module>
+		<module>../org.yakindu.sct.repository</module>
 		<!-- Plugins -->
 		<module>../../plugins/org.yakindu.base.xtext.utils.gmf</module>
 		<module>../../plugins/org.yakindu.base.xtext.utils.jface</module>
