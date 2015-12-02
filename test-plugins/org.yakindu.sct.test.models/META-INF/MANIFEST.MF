@@ -4,7 +4,7 @@ Bundle-Name: YAKINDU Test Models
 Bundle-SymbolicName: org.yakindu.sct.test.models
 Bundle-Version: 2.5.0.qualifier
 Bundle-Vendor: statecharts.org
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.yakindu.sct.model.sexec;bundle-version="1.0.0",
  com.google.inject;bundle-version="2.0.0",
  org.yakindu.base.xtext.utils.gmf;bundle-version="1.0.0",

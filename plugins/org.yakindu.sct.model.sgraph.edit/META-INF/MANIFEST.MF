@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: org.yakindu.sct.model.sgraph.provider.SGraphEditPlugin$Implementation
 Bundle-Vendor: statecharts.org
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.yakindu.sct.model.sgraph.provider
 Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.sgraph;visibility:=reexport,
