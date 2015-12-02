@@ -26,7 +26,6 @@
       <import feature="org.yakindu.base" version="2.5.0.qualifier"/>
       <import plugin="com.google.guava" version="12.0.0" match="greaterOrEqual"/>
       <import plugin="com.google.inject" version="3.0.0" match="compatible"/>
-      <!-- Error can be safely ignored -->
       <import plugin="com.google.inject.multibindings" version="3.0.0" match="compatible"/>
    </requires>
 
@@ -220,6 +219,13 @@
 
    <plugin
          id="org.yakindu.sct.domain.generic"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.examples"
          download-size="0"
          install-size="0"
          version="0.0.0"
