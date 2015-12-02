@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: YAKINDU Lightswitch Example
-Bundle-SymbolicName: org.yakindu.sct.examples.lightswitch
-Bundle-Version: 2.5.0.qualifier
-Bundle-Vendor: statecharts.org
