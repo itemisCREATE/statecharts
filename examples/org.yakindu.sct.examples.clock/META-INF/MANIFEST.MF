@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: YAKINDU Clock example
+Bundle-SymbolicName: org.yakindu.sct.examples.clock
+Bundle-Version: 2.5.0.qualifier
+Bundle-Vendor: statecharts.org
