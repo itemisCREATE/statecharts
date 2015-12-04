@@ -159,8 +159,6 @@ In the example below, we chose the _/my/workspace_ directory as our workspace. W
 
 Click on the _OK_ button to proceed.
 
-</p><div style="background: yellow"><p>
-
 On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
 
 !images/linux_install_050_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
@@ -168,8 +166,6 @@ On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
 You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
 
 !images/linux_install_060_eclipse_workbench.png(The YAKINDU Statechart Tools workbench)!
-
-</p></div><p>
 
 This is your working environment now. Congratulations, you have just started YAKINDU Statechart Tools!
 
