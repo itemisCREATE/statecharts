@@ -23,7 +23,7 @@ h3(#Regions). Regions
 
 As already mentioned, the YAKINDU statecharts are self-contained. They are organized in regions. Due to this it is possible to organize multiple state machines in different regions and to run them concurrently.
 
-!images/parallelRegions.jpg!
+!images/parallelRegions.jpg(Parallel regions)!
 
 h3(#States). States
 
@@ -67,21 +67,21 @@ h4(#Orthogonalstates). Orthogonal states
 
 In the context of state machines orthogonal states are states that are independent of each other. The presumably most famous example is the keyboard example:
 
-!images/orthogonalState_example.jpg!
+!images/orthogonalState_example.jpg(Orthogonal states)!
 
 h4(#Submachinestates). Subdiagrams 
 
 When using composite states, a statechart model often becomes too big to give a comprehensive overview of the whole diagram. Although it is possible to collapse and expand a state's figure compartment, these actions would spoil the diagram layout each time they are executed. Subdiagrams come as a solution.
 
-!images/extract_subdiagram.png!
+!images/extract_subdiagram.png(Composite state)!
 
 When the _Extract Subdiagram_ refactoring is executed on a composite state, all containing regions are extracted into a separate diagram. A small decorator in the lower-right corner of the state indicates the existence of such a subdiagram. When you hover with the mouse cursor over this decorator, you'll see a small preview of the subdiagram's content. The refactoring also creates the required entry and exit points for you.
 
-!images/extract_subdiagram2.png!
+!images/extract_subdiagram2.png(Subdiagram popup window)!
 
 A click on the decorator opens the subdiagram in a separate editor tab. The breadcrumb at the top allows easy navigation throughout the hierachy levels.
 
-!images/extract_subdiagram3.png!
+!images/extract_subdiagram3.png(Subdiagram editor)!
 
 h3(#ShallowHistory). Shallow history
 
@@ -89,13 +89,13 @@ The shallow history state is a pseudo state that is placed inside regions of com
 
 The following example, showing the answering of a questionaire, explains this:
 
-!images/shallowHistory01.jpg!
+!images/shallowHistory01.jpg(Shallow history [1])!
 
 Particularly interesting in this statechart are the events _checkProgress_ and _goon_. The event _checkProgress_ jumps back to the *init* state while assigning the current progress count to the variable _temp_. The event _goon_ jumps to the shallow history state that was placed inside the composite state.
 
-!images/shallowHistory02.jpg!
+!images/shallowHistory02.jpg(Shallow history [2])!
 
-!images/shallowHistory03.jpg!
+!images/shallowHistory03.jpg(Shallow history [3])!
 
 When the _goon_ event is triggered, the most recent active state inside of the composite state *answeringQuestions* is activated again.
 
@@ -200,7 +200,7 @@ A statement is one of three kinds:
 
 The language has the following assignment operators:
 
-<table><tr><td>simple assignment</td><td><code>=</code></td></tr><tr><td>multiply and assign</td><td><code>*=</code></td></tr><tr><td>divide and assign</td><td><code>/=</code></td></tr><tr><td>calculate modulo and assign</td><td><code>%=</code></td></tr><tr><td>add and assign</td><td><code>+=</code></td></tr><tr><td>subtract and assign</td><td><code>-=</code></td></tr><tr><td>bitshift left and assign</td><td><code><<=</code></td></tr><tr><td>bitshift right and assign</td><td><code>>>=</code></td></tr><tr><td>bitwise AND and assign</td><td><code>&=</code></td></tr><tr><td>bitwise XOR and assign</td><td><code>^=</code></td></tr><tr><td>bitwise OR and assign</td><td><code>|=</code></td></tr></table>
+</p><table><tr><td>simple assignment</td><td><code>=</code></td></tr><tr><td>multiply and assign</td><td><code>*=</code></td></tr><tr><td>divide and assign</td><td><code>/=</code></td></tr><tr><td>calculate modulo and assign</td><td><code>%=</code></td></tr><tr><td>add and assign</td><td><code>+=</code></td></tr><tr><td>subtract and assign</td><td><code>-=</code></td></tr><tr><td>bitshift left and assign</td><td><code><<=</code></td></tr><tr><td>bitshift right and assign</td><td><code>>>=</code></td></tr><tr><td>bitwise AND and assign</td><td><code>&=</code></td></tr><tr><td>bitwise XOR and assign</td><td><code>^=</code></td></tr><tr><td>bitwise OR and assign</td><td><code>|=</code></td></tr></table><p>
 
 ==<!-- FIXME: The following sentences are broken somehow. -->==
 
@@ -477,7 +477,7 @@ All generators can be customized by a generator model. This is a textual model i
 
 To get started with the generator model, YAKINDU Statechart Tools includes a wizard that creates a basic configuration file with default values.
 
-!images/sGenEditor.png!
+!images/sGenEditor.png(SGen generator model with default values)!
 
 ==<!-- FIXME: Explain what a "builder" is! -->==
 The generator model is associated with the builder. If _Project → Build Automatically_ is checked, the generator automatically creates its output files for each modification the user makes to the statechart model. Below the specific customizing features of the generator models are explained.
@@ -694,7 +694,7 @@ h3(#WritingacustomcodegeneratorwithXtend2Java). Writing a custom code generator 
 
 First, you have to create a new Xtend2 generator project. Click __File → New → Other... → YAKINDU → YAKINDU Xtend2/Java Generator Project__ to create a new Xtend2 generator project. 
 
-!images/xtendGenerator.png!
+!images/xtendGenerator.png(Creating an Xtend2 generator project)!
 
 The wizard asks for a *Project name* and the name of the *Generator class*, which has to be the fully-qualified class name. If you check the *Use Xtend* checkbox, the generator class will initially be created as an "Xtend":http://www.eclipse.org/xtend/ class. Otherwise, Java will be used for the generator.
 
@@ -753,7 +753,7 @@ h2(#APISecification). API specifications of the generated code
 
 The explanations below are using the _TrafficLight_ sample state machine to describe the API specifications of the code generated by the YAKINDU C and Java code generators. The image below is showing the statechart. It models a pedestrian crossing with push-button operated traffic lights ("pelican crossing").
 
-!(img-rounded shadowed#SpecJava)images/TrafficLight.png!
+!(img-rounded shadowed#SpecJava)images/TrafficLight.png(The traffic light model)!
 
 
 h3(#JavaSpec). Specifications of Java code
@@ -1207,7 +1207,7 @@ h4(#JavaOperationCallbacks). Operation callbacks
 
 YAKINDU Statechart Tools support client code operations that can be used by a state machine and are executed as as actions. These operations have to be implemented in order to make a statechart executable. The figure below shows a sample statechart using an operation:
 
-!images/OperationExample.png!
+!images/OperationExample.png(Specifying an operation callback in the model)!
 
 Let's have a look at the generated code:
 
@@ -1616,7 +1616,7 @@ h4(#COperationCallbacks). Operation callbacks
 
 YAKINDU Statechart Tools support client code operations that can be used by a state machine and are executed as as actions. These operations have to be implemented in order to make a statechart executable. The figure below shows a sample statechart using an operation:
 
-!images/OperationExample.png!
+!images/OperationExample.png(Specifying an operation callback in the model)!
 
 Let's have a look at the generated code:
 
@@ -1998,7 +1998,7 @@ h4(#CppOperationCallbacks). Operation callbacks
 
 YAKINDU Statechart Tools support client code operations that can be used by a state machine and are executed as as actions. These operations have to be implemented in order to make a statechart executable. The figure below shows a sample statechart using an operation:
 
-!images/OperationExample.png!
+!images/OperationExample.png(Specifying an operation callback in the model)!
 
 Let's have a look at the additionally generated code for operation support in the _default.h_ header file:
 
