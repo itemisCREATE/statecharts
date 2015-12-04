@@ -8,21 +8,21 @@ For code generation, SCT uses a textual generator model called *SGen*. The gener
 
 The first step to code generation is to create a new SGen model. Right-click on the _model_ folder in the project explorer and select _New → Code Generator Model_ from the context menu.
 
-!images/callhandling_200_generation_create_generator_model.png!
+!images/callhandling_200_generation_create_generator_model.png(Selecting "New → Code Generator Model" in the context menu)!
 
 The _YAKINDU Generator Model_ wizard opens. Change the _File name_ to *CallHandling.sgen*, then click _Next >_.
 
-!images/callhandling_210_generation_new_sgen_model_1.png!
+!images/callhandling_210_generation_new_sgen_model_1.png(Selecting a filename for the generator model)!
 
 From the _Generator_ drop-down menu at the top, select _Yakindu SCT Java Code Generator_.
 
 In the statechart tree beneath that menu, check the *CallHandling.sct* model, then click _Finish_.
 
-!images/callhandling_220_generation_new_sgen_model_2.png!
+!images/callhandling_220_generation_new_sgen_model_2.png(Selecting generator type and statechart model)!
 
 Now the wizard creates the default SGen model for Java code generation and opens it in an SGen editor. The project explorer on the left-hand side shows the new model file _CallHandling.sgen_.
 
-!images/callhandling_230_generation_new_sgen_model_3.png!
+!images/callhandling_230_generation_new_sgen_model_3.png(The generator model)!
 
 Here's the generator model once again as plain text:
 
@@ -62,11 +62,11 @@ The generator model is executed by a so-called Eclipse *builder*. That is, as lo
 
 As you can see in the project explorer, the folder _src-gen_ has been created and populated with the generated Java source code artifacts.
 
-!images/callhandling_240_generation_timer_service.png!
+!images/callhandling_240_generation_timer_service.png(Adding the timer service feature)!
 
 Add the generated artifacts to the Java build path by right-clicking on the _src-gen_ folder and selecting _Build Path → Use as source folder_ in the context menu.
 
-!images/callhandling_250_generation_use_as_source_folder.png!
+!images/callhandling_250_generation_use_as_source_folder.png(Declaring "src-gen" as a source folder)!
 
 If you want to execute your generator model manually, select _Generate Statechart Artifacts_ from the @.sgen@ file's context menu in the project explorer.
 
@@ -81,7 +81,7 @@ Let's establish a new Java class _CallHandlingClient_ and integrate the state ma
 
 # Right-clicking on the _src_ folder.
 # Select _New → Class_ in the context menu.
-# Name it _CallHandlingClient_.<br/>!images/callhandling_300_java_integration_create_new_class.png!
+# Name it _CallHandlingClient_.<br/>!images/callhandling_300_java_integration_create_new_class.png(Creating some Java client source code)!
 # Click _Finish_.
 
 Next, copy the following code into the created class (without the line numbers, of course):

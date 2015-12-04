@@ -6,7 +6,7 @@ h2. Simulating operations with custom Java code
 
 To simulate a model with operations it is possible to use custom Java code that mocks the desired behavior or even to simulate against an existing Java backend. For this purpose it is required to provide one or more custom Java classes having a method with a matching signature. 
 
-!images/operationsExample.png!
+!images/operationsExample.png(A statechart model with an operation)!
 
 To simulate the statechart above, a new Java class must be created matching the method signature defined in the statechart. This class must be placed onto the classpath of the
 statecharts project.
@@ -33,7 +33,7 @@ This custom class can be passed to Eclipse's run configuration as *Operation Cla
 
 When the simulation is executed, the variable _result_ gets the value 2.
 
-!images/runConfiguration.png!
+!images/runConfiguration.png(Configuring an operations class)!
 
 
 h2. Generating code
@@ -47,7 +47,7 @@ To create a generator model with the wizard, proceed as follows:
 # Choose the desired generator, i.&nbsp;e. _YAKINDU SCT Java Code Generator_.
 # Check the model(s) to generate code from and click _Finish_.
 
-!images/genmodelwizardchooselanguage.jpg!
+!images/genmodelwizardchooselanguage.jpg(Selecting code generator and models)!
 
 The result is an @.sgen@ file of the following format: 
  
@@ -84,11 +84,11 @@ h3. Creating a new code generator project
 
 Creating custom code generators is a first-level concept in YAKINDU Statechart Tools. It is not required to set up a developer workspace with the Statechart Tools source code and to start a new Eclipse runtime to test your generator changes. Instead you can develop and test your custom generator at runtime. To set up a new generator project, select _File → New → Other → Yakindu_ → Xtend2/Java Generator Project_ and click _Next_.
 
-!images/xtendwizard.png!
+!images/xtendwizard.png(Creating a new code generator project)!
 
 The wizard for configuring a generator projects opens. Specify the _project name_ and the name of the _generator class_ as shown in the example above, then check the _Use Xtend_ checkbox. If you plan to export your custom generator as a single Eclipse plugin in order to deploy it to different YAKINDU Statechart Tools installations, check the _configure plugin for export_ checkbox. Generator ID, name and description are used to make your generator accessible after export from within a generator model, see chapter "Generating code". The *create feature library* checkbox allows the contribution of custom generator fragments to the generator model. This is an advanced topic and you should ignore it for now. Click _Finish_ to close the wizard.
 
-!images/generatornavigator.png!
+!images/generatornavigator.png(Created generator project)!
 
 Voilà! The wizard creates a new generator project for you with a structure as shown above. The file _CustomGenerator.xtend_ contains a simple default code generator that simply prints the name of the statechart and all of its states to the target file.
 
@@ -130,7 +130,7 @@ h3. Different meta models for different use cases
 *The SGraph meta model*
 The SGraph meta model defines the structural aspects of the Statechart model and is similiar to the statemachine model defined by the Unified Modeling Language (UML). A simplified version is shown in the following diagram.   
 
-!images/sgraph_simple.png!
+!images/sgraph_simple.png(Simplified SGraph meta model)!
 
 * *Statechart* extends __CompositeElement__, therefore it contains 0..* __Regions__. It is the root element of the model.
 * *CompositeElement* is an abstract type that contains __Regions__. Known subclasses are __Statechart__ and __State__.
