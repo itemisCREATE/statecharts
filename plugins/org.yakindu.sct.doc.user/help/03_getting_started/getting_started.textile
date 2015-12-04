@@ -1,7 +1,5 @@
 h1(#Gettingstartedtutorial). Getting started
 
-{toc}
-
 h2(#Introduction). Introducing YAKINDU Statechart Tools
 
 This tutorial introduces YAKINDU Statechart Tools (SCT). It provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of state machines or statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation for C, C++, and Java.

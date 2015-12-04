@@ -1,7 +1,5 @@
 h1(#InstallingYAKINDUStatechartTools). Installing YAKINDU Statechart Tools
 
-{toc}
-
 In order to start working with YAKINDU Statechart Tools, you have to install the software on your computer. We are assuming you have downloaded the software package and stored it somewhere on your machine.
 
 h2. Dependencies
