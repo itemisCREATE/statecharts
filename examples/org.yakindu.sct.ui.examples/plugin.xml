@@ -43,7 +43,7 @@
    
    <!-- org.yakindu.sct.example.lightswitch -->
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.yakindu.sct.example.trafficlight" 
+		<wizard	id="org.yakindu.sct.example.lightswitch" 
 			name="LightSwitch Example" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/org.yakindu.sct.ui.Examples"
