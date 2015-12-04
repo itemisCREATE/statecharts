@@ -113,3 +113,10 @@
 	background: url("../img/player_play.png") center center no-repeat;
 	z-index: 10;
 }
+
+img {
+    max-width: 94%;
+    height: auto;
+    margin-left: 3%;
+    display: block;
+}
