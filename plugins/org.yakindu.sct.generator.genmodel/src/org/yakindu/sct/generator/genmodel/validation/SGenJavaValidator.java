@@ -229,7 +229,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		Iterable<FeatureType> deprecatedFeatures = filter(
 				transform(features, getFeatureType()), isDeprecated());
 		for (FeatureType feature : deprecatedFeatures) {
-			warning(String.format(DEPRECATED + " %s : %f", feature.getName(),
+			warning(String.format(DEPRECATED + " %s : %s", feature.getName(),
 					feature.getComment()),
 					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF,
 					feature.getName());
@@ -277,7 +277,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 						transform(entry.getFeatures(), getFeatureType()),
 						getParmeter())), isDeprecated());
 		for (FeatureParameter parameter : deprecatedParameters) {
-			warning(String.format(DEPRECATED + " %s : %f", parameter.getName(),
+			warning(String.format(DEPRECATED + " %s : %s", parameter.getName(),
 					parameter.getComment()),
 					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF,
 					parameter.getName());
