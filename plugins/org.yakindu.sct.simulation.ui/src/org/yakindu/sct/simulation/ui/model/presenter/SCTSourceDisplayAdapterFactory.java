@@ -22,6 +22,7 @@ public class SCTSourceDisplayAdapterFactory implements IAdapterFactory {
 
 	private static SCTSourceDisplayDispatcher display = new SCTSourceDisplayDispatcher();
 
+	@SuppressWarnings("unchecked")
 	public Object getAdapter(Object adaptableObject, @SuppressWarnings("rawtypes") Class adapterType) {
 		return display;
 	}

@@ -28,27 +28,27 @@ import org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport;
 public class IHighlightingSupportAdapterFactory implements IAdapterFactory {
 
 	private static Map<DiagramDocumentEditor, IHighlightingSupport> cache;
+
 	static {
 		cache = new HashMap<DiagramDocumentEditor, IHighlightingSupport>();
 	}
 
+	@SuppressWarnings("unchecked")
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 		if (adapterType == IHighlightingSupport.class) {
 			if (adaptableObject instanceof DiagramDocumentEditor) {
-				IHighlightingSupport supportFromCache = cache
-						.get((DiagramDocumentEditor) adaptableObject);
+				IHighlightingSupport supportFromCache = cache.get((DiagramDocumentEditor) adaptableObject);
 				if (supportFromCache != null)
 					return supportFromCache;
-				supportFromCache = new HighlightingSupportAdapter(
-						(DiagramDocumentEditor) adaptableObject);
-				cache.put((DiagramDocumentEditor) adaptableObject,
-						supportFromCache);
+				supportFromCache = new HighlightingSupportAdapter((DiagramDocumentEditor) adaptableObject);
+				cache.put((DiagramDocumentEditor) adaptableObject, supportFromCache);
 				return supportFromCache;
 			}
 		}
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Class[] getAdapterList() {
 		return new Class[] { IHighlightingSupport.class };
 	}
