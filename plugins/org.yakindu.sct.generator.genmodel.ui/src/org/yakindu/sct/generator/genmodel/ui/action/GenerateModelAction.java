@@ -81,10 +81,12 @@ public class GenerateModelAction implements IObjectActionDelegate {
 		try {
 			Resource resource = rs.getResource(URI.createPlatformResourceURI(file.getFullPath().toString(), true),
 					true);
+			if (resource == null)
+				return false;
 			if (!resource.getErrors().isEmpty()) {
 				return true;
 			}
-			if (resource != null && !resource.getContents().isEmpty()) {
+			if (!resource.getContents().isEmpty()) {
 				Diagnostic diagnostic = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 				if (diagnostic.getSeverity() == Diagnostic.ERROR) {
 					return true;
