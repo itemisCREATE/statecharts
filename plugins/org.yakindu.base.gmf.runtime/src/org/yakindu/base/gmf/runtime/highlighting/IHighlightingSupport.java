@@ -10,6 +10,7 @@
  */
 package org.yakindu.base.gmf.runtime.highlighting;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -21,108 +22,94 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface IHighlightingSupport {
 
-	/**
-	 * Prevent user from editing
-	 */
 	void lockEditor();
 
 	boolean isLocked();
-	/**
-	 * Allow user to edit model again
-	 */
+
 	void releaseEditor();
 
-	void highlight(EObject semanticElement, HighlightingParameters parameters);
+	void highlight(List<? extends EObject> semanticElement, HighlightingParameters parameters);
 
-	/**
-	 * Highlight a model element. Fading time may be zero to indicate that
-	 * hightlighting should take place immediately.
-	 * 
-	 * @param modelElement
-	 * @param parameterObject
-	 */
-	void fadeIn(EObject semanticElement, HighlightingParameters parameters);
+	void flash(List<? extends EObject> semanticElemesnt, HighlightingParameters parameters, int highlightTime);
 
-	/**
-	 * Unhighlight a model element. Fading time may be zero to indicate that
-	 * hightlighting should be directly removed.
-	 * 
-	 * @param modelElement
-	 * @param fadeOutTime
-	 */
-	void fadeOut(EObject semanticElement, HighlightingParameters parameters);
+	void execute(List<Action> actions);
 
-	/**
-	 * Shortly highlight the given model element. The given fading time will be
-	 * used for entering and leaving the highlighted state.
-	 * 
-	 * @param modelElement
-	 * @param parameters
-	 */
-	void flash(EObject semanticElemesnt, HighlightingParameters parameters);
-
-	/**
-	 * 
-	 * @param actions
-	 */
-	void executeBatch(List<Action> actions);
-	
-	
 	public static interface Action {
 		public void execute(IHighlightingSupport hs);
 	}
-	
 
 	public static class Highlight implements Action {
 
-		protected EObject semanticElement;
+		protected List<? extends EObject> semanticElements;
 		protected HighlightingParameters highligtingParams;
-		
+
 		public Highlight(EObject semanticElement, HighlightingParameters parameters) {
-			this.semanticElement = semanticElement;
+			this(Collections.singletonList(semanticElement), parameters);
+		}
+
+		public Highlight(List<? extends EObject> semanticElements, HighlightingParameters parameters) {
+			this.semanticElements = semanticElements;
 			this.highligtingParams = parameters;
 		}
-		
+
 		public void execute(IHighlightingSupport hs) {
-			hs.highlight(semanticElement, highligtingParams);
+			hs.highlight(semanticElements, highligtingParams);
 		}
-		
 	}
 
-	
-	public static class HighlightingSupportNullImpl implements
-			IHighlightingSupport {
+	public static class Flash implements Action {
 
+		protected List<? extends EObject> semanticElements;
+		protected HighlightingParameters highligtingParams;
+		private int flashTime;
+
+		public Flash(EObject semanticElement, HighlightingParameters parameters, int flashTime) {
+			this(Collections.singletonList(semanticElement), parameters, flashTime);
+		}
+
+		public Flash(List<? extends EObject> semanticElements, HighlightingParameters parameters, int flashTime) {
+			this.semanticElements = semanticElements;
+			this.highligtingParams = parameters;
+			this.flashTime = flashTime;
+		}
+
+		public void execute(IHighlightingSupport hs) {
+			hs.flash(semanticElements, highligtingParams, flashTime);
+		}
+
+	}
+
+	public static class HighlightingSupportNullImpl implements IHighlightingSupport {
+
+		@Override
 		public void lockEditor() {
+
 		}
 
-		public void releaseEditor() {
-		}
-
-		public void fadeIn(EObject semanticElement,
-				HighlightingParameters parameters) {
-		}
-
-		public void fadeOut(EObject semanticElement,
-				HighlightingParameters parameters) {
-		}
-
-		public void flash(EObject semanticElement,
-				HighlightingParameters parameters) {
-		}
-
-		public void highlight(EObject semanticElement,
-				HighlightingParameters parameters) {
-			
-		}
-
+		@Override
 		public boolean isLocked() {
 			return false;
 		}
 
-		public void executeBatch(List<Action> actions) {
+		@Override
+		public void releaseEditor() {
+
 		}
-		
-		
+
+		@Override
+		public void execute(List<Action> actions) {
+		}
+
+		@Override
+		public void highlight(List<? extends EObject> semanticElement, HighlightingParameters parameters) {
+
+		}
+
+		@Override
+		public void flash(List<? extends EObject> semanticElemesnt, HighlightingParameters parameters,
+				int highlightTime) {
+
+		}
+
 	}
 }

@@ -10,13 +10,10 @@
  */
 package org.yakindu.sct.simulation.ui.model.presenter;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
-import org.eclipse.debug.core.model.DebugElement;
+import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.ui.sourcelookup.ISourceDisplay;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
@@ -26,6 +23,8 @@ import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
+import org.yakindu.sct.simulation.core.debugmodel.SCTDebugElement;
+import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.ui.editor.partitioning.DiagramEditorInput;
 
@@ -39,27 +38,38 @@ import org.yakindu.sct.ui.editor.partitioning.DiagramEditorInput;
  */
 public class SCTSourceDisplayDispatcher implements ISourceDisplay, IDebugEventSetListener, IPartListener {
 
-	private Map<IDebugTarget, SCTSourceDisplay> target2Display;
 	private SCTSourceDisplay activeSourceDisplay;
-	private DebugElement activeDebugTarget;
+	private SCTDebugTarget activeDebugTarget;
 
 	public SCTSourceDisplayDispatcher() {
-		target2Display = new HashMap<IDebugTarget, SCTSourceDisplay>();
 		DebugPlugin.getDefault().addDebugEventListener(this);
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().addPartListener(this);
 	}
 
 	public void displaySource(Object element, IWorkbenchPage page, boolean forceSourceLookup) {
-		activeDebugTarget = (DebugElement) element;
+		SCTDebugTarget newTarget = unwrapTarget(element);
+		if (newTarget == null || activeDebugTarget == newTarget)
+			return;
+		activeDebugTarget = newTarget;
 		if (activeDebugTarget.getDebugTarget().isTerminated())
 			return;
-		activeSourceDisplay = target2Display.get(activeDebugTarget.getDebugTarget());
-		if (activeSourceDisplay == null) {
-			activeSourceDisplay = new SCTSourceDisplay(
-					(ISimulationEngine) activeDebugTarget.getAdapter(ISimulationEngine.class));
-			target2Display.put(activeDebugTarget.getDebugTarget(), activeSourceDisplay);
-		}
+		if (activeSourceDisplay != null)
+			activeSourceDisplay.terminate();
+		activeSourceDisplay = new SCTSourceDisplay(
+				(ISimulationEngine) activeDebugTarget.getAdapter(ISimulationEngine.class));
 		activeSourceDisplay.displaySource(activeDebugTarget, page, forceSourceLookup);
+	}
+
+	protected SCTDebugTarget unwrapTarget(Object element) {
+		if (element instanceof Launch) {
+			IDebugTarget debugTarget = ((Launch) element).getDebugTarget();
+			if (debugTarget instanceof SCTDebugTarget)
+				return (SCTDebugTarget) debugTarget;
+		} else if (element instanceof SCTDebugElement) {
+			return (SCTDebugTarget) ((SCTDebugElement) element).getDebugTarget();
+		}
+		return null;
+
 	}
 
 	public void handleDebugEvents(DebugEvent[] events) {
@@ -80,10 +90,8 @@ public class SCTSourceDisplayDispatcher implements ISourceDisplay, IDebugEventSe
 		Object source = debugEvent.getSource();
 		if (source instanceof IDebugTarget) {
 			IDebugTarget target = (IDebugTarget) source;
-			SCTSourceDisplay sourceDisplay = target2Display.get(target);
-			if (sourceDisplay != null) {
-				sourceDisplay.terminate();
-				target2Display.remove(sourceDisplay);
+			if (target == activeDebugTarget) {
+				activeSourceDisplay.terminate();
 			}
 		}
 	}
@@ -121,7 +129,7 @@ public class SCTSourceDisplayDispatcher implements ISourceDisplay, IDebugEventSe
 
 	@Override
 	public void partDeactivated(IWorkbenchPart part) {
-		//Nothing to do
+		// Nothing to do
 	}
 
 }

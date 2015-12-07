@@ -75,7 +75,7 @@ public class SCTSourceDisplay implements ISourceDisplay {
 			notationHandler.getHighlightingSupport().releaseEditor();
 		}
 		notationHandler.getHighlightingSupport().lockEditor();
-		notationHandler.updateExecutionContext(container.getExecutionContext());
+		notationHandler.display(container.getExecutionContext());
 	}
 
 	public void terminate() {
@@ -85,6 +85,7 @@ public class SCTSourceDisplay implements ISourceDisplay {
 		for (IDynamicNotationHandler notationHandler : values) {
 			if (notationHandler.getHighlightingSupport().isLocked())
 				notationHandler.getHighlightingSupport().releaseEditor();
+			notationHandler.terminate();
 		}
 		handler.clear();
 	}
@@ -136,4 +137,5 @@ public class SCTSourceDisplay implements ISourceDisplay {
 		// No editor found
 		throw new RuntimeException("No editor found for semantic element " + semanticObject);
 	}
+
 }
