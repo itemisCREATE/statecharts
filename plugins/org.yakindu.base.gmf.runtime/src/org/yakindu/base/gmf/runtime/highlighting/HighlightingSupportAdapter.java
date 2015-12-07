@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
@@ -23,11 +22,7 @@ import org.eclipse.gmf.runtime.diagram.ui.figures.BorderedNodeFigure;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.widgets.Display;
 import org.yakindu.base.gmf.runtime.util.EditPartUtils;
 
@@ -67,10 +62,8 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		private final Color sourceBackgroundColor;
 		private final Color targetBackgroundColor;
 
-		private Fader(IFigure figure, Color sourceForegroundColor,
-				Color targetForegroundColor, Color sourceBackgroundColor,
-				Color targetBackgroundColor, int fadingTime,
-				boolean shouldFadeBack) {
+		private Fader(IFigure figure, Color sourceForegroundColor, Color targetForegroundColor,
+				Color sourceBackgroundColor, Color targetBackgroundColor, int fadingTime, boolean shouldFadeBack) {
 			this.figure = figure;
 			this.sourceForegroundColor = sourceForegroundColor;
 			this.targetForegroundColor = targetForegroundColor;
@@ -91,117 +84,29 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 			figure.setBackgroundColor(targetBackgroundColor);
 			figure.invalidate();
 			if (shouldFadeBack) {
-				Display.getCurrent().timerExec(
-						fadingTime,
-						new Fader(figure, targetForegroundColor,
-								sourceForegroundColor, targetBackgroundColor,
-								sourceBackgroundColor, fadingTime, false));
+				Display.getCurrent().timerExec(fadingTime, new Fader(figure, targetForegroundColor,
+						sourceForegroundColor, targetBackgroundColor, sourceBackgroundColor, fadingTime, false));
 			}
 		}
 	}
 
 	private final Map<IFigure, ColorMemento> figureStates = new HashMap<IFigure, ColorMemento>();
-	private final Map<Color, Color> greyscaleColors = new HashMap<Color, Color>();
 	private boolean locked = false;
 	private final IDiagramWorkbenchPart diagramWorkbenchPart;
+	private Map<EObject, IGraphicalEditPart> object2editPart = new HashMap<EObject, IGraphicalEditPart>();
 
 	public HighlightingSupportAdapter(IDiagramWorkbenchPart diagramWorkbenchPart) {
 		this.diagramWorkbenchPart = diagramWorkbenchPart;
 	}
 
-	public synchronized void fadeIn(EObject semanticElement,
-			HighlightingParameters parameters) {
-
-		IGraphicalEditPart editPart = getEditPartForSemanticElement(semanticElement);
-		if(editPart == null)
-			return;
-		IFigure figure = getTargetFigure(editPart);
-		Assert.isNotNull(figure, "Could not obtain target figure");
-		// store fore and background color
-		Display.getCurrent().asyncExec(
-				new Fader(figure, figure.getForegroundColor(),
-						parameters.foregroundFadingColor, figure
-								.getBackgroundColor(),
-						parameters.backgroundFadingColor,
-						(int) parameters.fadingTime, false));
-	}
-
-	public synchronized void fadeOut(EObject semanticElement,
-			HighlightingParameters parameters) {
-		if (!locked) {
-			throw new IllegalStateException(
-					"May only highlight if editor is locked");
-		}
-
-		IGraphicalEditPart editPart = getEditPartForSemanticElement(semanticElement);
-		if(editPart == null)
-			return;
-		IFigure figure = getTargetFigure(editPart);
-		Assert.isNotNull(figure, "Could not obtain target figure");
-		Color foregroundColor = figureStates.get(figure).foregroundColor;
-		Color backgroundColor = figureStates.get(figure).backgroundColor;
-
-		Display.getCurrent().asyncExec(
-				new Fader(figure, parameters.foregroundFadingColor,
-						parameters.grayScale ? getGreyscaled(foregroundColor)
-								: foregroundColor,
-						parameters.backgroundFadingColor,
-						parameters.grayScale ? getGreyscaled(backgroundColor)
-								: backgroundColor, (int) parameters.fadingTime,
-						false));
-	}
-
-	public synchronized void flash(final EObject semanticElement,
-			final HighlightingParameters parameters) {
-		if (!locked) {
-			throw new IllegalStateException(
-					"May only highlight if editor is locked");
-		}
-		final IGraphicalEditPart editPart = getEditPartForSemanticElement(semanticElement);
-		if(editPart == null) {
-			return;
-		}
-
-		final IFigure figure = getTargetFigure(editPart);
-				
-//				(editPart instanceof FixedSizeShapeNodeEditPart) 
-//				? (IFigure) 	editPart.getFigure().getChildren().get(0) 
-//				: editPart.getFigure();
-		
-		Display.getCurrent().asyncExec(
-				new Fader(figure, figure.getForegroundColor(),
-						parameters.foregroundFadingColor, figure
-								.getBackgroundColor(),
-						parameters.backgroundFadingColor,
-						(int) parameters.fadingTime, true));
-	}
-
-	private IGraphicalEditPart getEditPartForSemanticElement(
-			EObject semanticElement) {
-		return EditPartUtils.findEditPartForSemanticElement(
-				diagramWorkbenchPart.getDiagramGraphicalViewer()
-						.getRootEditPart(), semanticElement);
-	}
-
-	private Color getGreyscaled(Color color) {
-		// check cache (if color has already be computed)
-		if (greyscaleColors.containsKey(color)) {
-			return greyscaleColors.get(color);
-		}
-		// use image to convert colors to greyscale
-		ImageData imageData = new ImageData(1, 1, 24, new PaletteData(0xFF,
-				0xFF00, 0xFF0000));
-		imageData.setPixel(0, 0, imageData.palette.getPixel(color.getRGB()));
-		Image image = new Image(Display.getCurrent(), imageData);
-		Image convertedImage = new Image(Display.getCurrent(), image,
-				SWT.IMAGE_DISABLE);
-		Color newColor = new Color(Display.getCurrent(),
-				convertedImage.getImageData().palette.getRGB(convertedImage
-						.getImageData().getPixel(0, 0)));
-		greyscaleColors.put(color, newColor);
-		convertedImage.dispose();
-		image.dispose();
-		return newColor;
+	private IGraphicalEditPart getEditPartForSemanticElement(EObject semanticElement) {
+		IGraphicalEditPart result = object2editPart.get(semanticElement);
+		if (result != null)
+			return result;
+		result = EditPartUtils.findEditPartForSemanticElement(
+				diagramWorkbenchPart.getDiagramGraphicalViewer().getRootEditPart(), semanticElement);
+		object2editPart.put(semanticElement, result);
+		return result;
 	}
 
 	private IFigure getTargetFigure(IGraphicalEditPart editPart) {
@@ -221,8 +126,7 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		}
 
 		setSanityCheckEnablementState(false);
-		for (Object editPart : diagramWorkbenchPart.getDiagramGraphicalViewer()
-				.getEditPartRegistry().values()) {
+		for (Object editPart : diagramWorkbenchPart.getDiagramGraphicalViewer().getEditPartRegistry().values()) {
 			if (editPart instanceof IGraphicalEditPart) {
 				IGraphicalEditPart graphicalEditPart = (IGraphicalEditPart) editPart;
 				IFigure figure = getTargetFigure(graphicalEditPart);
@@ -234,9 +138,8 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 
 	private void setSanityCheckEnablementState(boolean state) {
 		try {
-			Method enableMethod = DiagramDocumentEditor.class
-					.getDeclaredMethod("enableSanityChecking",
-							new Class[] { boolean.class });
+			Method enableMethod = DiagramDocumentEditor.class.getDeclaredMethod("enableSanityChecking",
+					new Class[] { boolean.class });
 			enableMethod.setAccessible(true);
 			enableMethod.invoke(diagramWorkbenchPart, new Object[] { state });
 		} catch (Exception e) {
@@ -256,37 +159,54 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		figureStates.clear();
 		diagramWorkbenchPart.getDiagramEditPart().enableEditMode();
 		setSanityCheckEnablementState(true);
-
+		object2editPart.clear();
 		locked = false;
 	}
 
-	public void highlight(EObject semanticElement,
-			HighlightingParameters parameters) {
-		IGraphicalEditPart editPartForSemanticElement = getEditPartForSemanticElement(semanticElement);
-		if (editPartForSemanticElement != null) {
-			IFigure figure = getTargetFigure(editPartForSemanticElement);
-			if (parameters != null) {
-				figure.setForegroundColor(parameters.foregroundFadingColor);
-				figure.setBackgroundColor(parameters.backgroundFadingColor);
-				figure.invalidate();
-			} else {
-				ColorMemento memento = figureStates.get(figure);
-				if ( memento != null ) memento.restore();
+	public void highlight(List<? extends EObject> semanticElements, HighlightingParameters parameters) {
+		synchronized (semanticElements) {
+			for (EObject semanticElement : semanticElements) {
+				IGraphicalEditPart editPartForSemanticElement = getEditPartForSemanticElement(semanticElement);
+				if (editPartForSemanticElement != null) {
+					IFigure figure = getTargetFigure(editPartForSemanticElement);
+					if (parameters != null) {
+						figure.setForegroundColor(parameters.foregroundFadingColor);
+						figure.setBackgroundColor(parameters.backgroundFadingColor);
+						figure.invalidate();
+					} else {
+						ColorMemento memento = figureStates.get(figure);
+						if (memento != null)
+							memento.restore();
+					}
+				}
 			}
 		}
+	}
 
+	public void flash(List<? extends EObject> semanticElements, HighlightingParameters parameters, int flashTime) {
+		synchronized (semanticElements) {
+			for (EObject semanticElement : semanticElements) {
+				IGraphicalEditPart editPartForSemanticElement = getEditPartForSemanticElement(semanticElement);
+				if (editPartForSemanticElement != null) {
+					IFigure figure = getTargetFigure(editPartForSemanticElement);
+					Fader fader = new Fader(figure, figure.getForegroundColor(), parameters.foregroundFadingColor,
+							figure.getBackgroundColor(), parameters.backgroundFadingColor, (int) flashTime, true);
+					Display.getCurrent().asyncExec(fader);
+				}
+			}
+		}
 	}
 
 	public boolean isLocked() {
 		return locked;
 	}
 
-	public void executeBatch(final List<Action> actions) {
-		if ( actions != null ) {
-			
-			Display.getCurrent().asyncExec( new Runnable() {				
+	public void execute(final List<Action> actions) {
+		if (actions != null) {
+
+			Display.getDefault().asyncExec(new Runnable() {
 				public void run() {
-					for ( Action a : actions ) {
+					for (Action a : actions) {
 						a.execute(HighlightingSupportAdapter.this);
 					}
 				}
