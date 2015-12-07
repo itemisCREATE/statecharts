@@ -48,19 +48,13 @@ public class GenerateModelAction implements IObjectActionDelegate {
 	@Inject
 	private GeneratorExecutor generatorExecutor;
 
-	@SuppressWarnings("unused")
-	private IWorkbenchPart workbenchPart;
-
 	public void run(IAction action) {
 		IFile file = unwrap();
 
 		if (hasError(file)) {
-			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-					.getShell();
-			ErrorDialog.openError(shell, "Generator Error",
-					"Cannot execute Generator", new Status(IStatus.ERROR,
-							GeneratorActivator.PLUGIN_ID,
-							"The file contains errors"));
+			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			ErrorDialog.openError(shell, "Generator Error", "Cannot execute Generator",
+					new Status(IStatus.ERROR, GeneratorActivator.PLUGIN_ID, "The file contains errors"));
 			return;
 		}
 		generatorExecutor.executeGenerator(file);
@@ -69,56 +63,43 @@ public class GenerateModelAction implements IObjectActionDelegate {
 	private boolean hasError(IFile file) {
 		IMarker[] findMarkers = null;
 		try {
-			findMarkers = file.findMarkers(IMarker.PROBLEM, true,
-					IResource.DEPTH_INFINITE);
+			findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
 			for (IMarker iMarker : findMarkers) {
-				Integer attribute = (Integer) iMarker
-						.getAttribute(IMarker.SEVERITY);
+				Integer attribute = (Integer) iMarker.getAttribute(IMarker.SEVERITY);
 				if (attribute.intValue() == IMarker.SEVERITY_ERROR) {
 					return true;
 				}
 			}
 		} catch (CoreException e) {
-			SGenActivator
-					.getInstance()
-					.getLog()
-					.log(new Status(
-							IStatus.WARNING,
-							SGenActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN,
+			SGenActivator.getInstance().getLog()
+					.log(new Status(IStatus.WARNING, SGenActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN,
 							"Error in determine, if file contains errors", e));
 		}
 
 		ResourceSet rs = new ResourceSetImpl();
 
 		try {
-			Resource resource = rs.getResource(URI.createPlatformResourceURI(
-					file.getFullPath().toString(), true), true);
+			Resource resource = rs.getResource(URI.createPlatformResourceURI(file.getFullPath().toString(), true),
+					true);
 			if (!resource.getErrors().isEmpty()) {
 				return true;
 			}
 			if (resource != null && !resource.getContents().isEmpty()) {
-				Diagnostic diagnostic = Diagnostician.INSTANCE
-						.validate(resource.getContents().get(0));
+				Diagnostic diagnostic = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 				if (diagnostic.getSeverity() == Diagnostic.ERROR) {
 					return true;
 				}
 			}
 		} catch (RuntimeException e) {
-			SGenActivator
-					.getInstance()
-					.getLog()
-					.log(new Status(
-							IStatus.INFO,
-							SGenActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN,
-							"Error in opening Resource", e));
+			SGenActivator.getInstance().getLog().log(new Status(IStatus.INFO,
+					SGenActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN, "Error in opening Resource", e));
 		}
 		return false;
 	}
 
 	private IFile unwrap() {
 		if (selection instanceof StructuredSelection) {
-			Object firstElement = ((StructuredSelection) selection)
-					.getFirstElement();
+			Object firstElement = ((StructuredSelection) selection).getFirstElement();
 			if (firstElement instanceof IFile) {
 				return (IFile) firstElement;
 			}
@@ -131,7 +112,7 @@ public class GenerateModelAction implements IObjectActionDelegate {
 	}
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-		this.workbenchPart = targetPart;
+		// Nothing to do
 	}
 
 }
