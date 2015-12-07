@@ -26,6 +26,21 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
  */
 public class DefaultTimingService implements ITimingService {
 
+	public static class TimeEventTask extends TimerTask {
+
+		private final ExecutionContext context;
+		private final String eventName;
+
+		public TimeEventTask(ExecutionContext context, String eventName) {
+			this.context = context;
+			this.eventName = eventName;
+		}
+
+		public void run() {
+			context.getEvent(eventName).setScheduled(true);
+		}
+	}
+
 	private Timer timer;
 
 	private Map<String, TimerTask> timerTasks;
@@ -48,21 +63,6 @@ public class DefaultTimingService implements ITimingService {
 	public void unscheduleTimeEvent(String eventName) {
 		TimerTask timerTask = timerTasks.get(eventName);
 		timerTask.cancel();
-	}
-
-	public class TimeEventTask extends TimerTask {
-
-		private final ExecutionContext context;
-		private final String eventName;
-
-		public TimeEventTask(ExecutionContext context, String eventName) {
-			this.context = context;
-			this.eventName = eventName;
-		}
-
-		public void run() {
-			context.getEvent(eventName).setScheduled(true);
-		}
 	}
 
 	public void pause() {
