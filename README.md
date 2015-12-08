@@ -52,7 +52,7 @@ Rightclick org.yakindu.sct.generator.genmodel/SGen.xtext => Run As.. => Generate
 After these steps all projects should compile without errors. To launch a runtime instance which has these projects as installed plugins, just right-click on a project => Run As => Eclipse Application
 
 ## Thanks
-<img src="https://www.yourkit.com/images/yklogo.png" />
+<img src="https://www.yourkit.com/images/yklogo.png" /> <br />
 YourKit is kindly supporting open source projects with its full-featured Java Profiler.
 YourKit, LLC is the creator of innovative and intelligent tools for profiling
 Java and .NET applications. Take a look at YourKit's leading software products:
