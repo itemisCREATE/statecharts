@@ -61,7 +61,6 @@ import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
-import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -75,7 +74,6 @@ import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
-import org.yakindu.sct.model.stext.STextRuntimeModule;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
@@ -96,15 +94,12 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
-import org.yakindu.sct.model.stext.stext.impl.StatechartSpecificationImpl;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.name.Named;
 
 /**
@@ -211,7 +206,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 		} else if (varRef instanceof ElementReferenceExpression) {
 			EObject referencedObject = ((ElementReferenceExpression) varRef).getReference();
-			if (!(referencedObject instanceof Property) && !(referencedObject instanceof Property)) {
+			if (!(referencedObject instanceof Property)) {
 				error(LEFT_HAND_ASSIGNMENT, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
 			}
 
@@ -285,22 +280,21 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				for (ElementReferenceExpression elementReference : allUsedElementReferences) {
 					if (elementReference.getReference().eContainer() instanceof InternalScope) {
 						if (elementReference.getReference() instanceof VariableDefinition) {
-							if (((VariableDefinition) elementReference.getReference()).getName().equals(
-									internalDeclaration.getName())
+							if (((VariableDefinition) elementReference.getReference()).getName()
+									.equals(internalDeclaration.getName())
 									&& internalDeclaration instanceof VariableDefinition) {
 								internalDeclarationUsed = true;
 								break;
 							}
 						} else if (elementReference.getReference() instanceof EventDefinition) {
 							if (((EventDefinition) elementReference.getReference()).getName().equals(
-									internalDeclaration.getName())
-									&& internalDeclaration instanceof EventDefinition) {
+									internalDeclaration.getName()) && internalDeclaration instanceof EventDefinition) {
 								internalDeclarationUsed = true;
 								break;
 							}
 						} else if (elementReference.getReference() instanceof OperationDefinition) {
-							if (((OperationDefinition) elementReference.getReference()).getName().equals(
-									internalDeclaration.getName())
+							if (((OperationDefinition) elementReference.getReference()).getName()
+									.equals(internalDeclaration.getName())
 									&& internalDeclaration instanceof OperationDefinition) {
 								internalDeclarationUsed = true;
 								break;
@@ -407,8 +401,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 						// Validate an exit point is continued on one transition
 						// only.
 						for (Transition t : state.getOutgoingTransitions()) {
-							if (transition != t
-									&& STextValidationModelUtils.isNamedExitTransition(t, exitPointSpec.getExitpoint())) {
+							if (transition != t && STextValidationModelUtils.isNamedExitTransition(t,
+									exitPointSpec.getExitpoint())) {
 								warning(TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS, transition, null, -1);
 							}
 						}
@@ -440,8 +434,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Check(CheckType.FAST)
 	public void checkUnboundEntryPoints(final org.yakindu.sct.model.sgraph.State state) {
 		if (state.isComposite()) {
-			final List<Transition>[] transitions = STextValidationModelUtils.getEntrySpecSortedTransitions(state
-					.getIncomingTransitions());
+			final List<Transition>[] transitions = STextValidationModelUtils
+					.getEntrySpecSortedTransitions(state.getIncomingTransitions());
 			Map<Region, List<Entry>> regions = null;
 
 			// first list contains Transitions without entry spec
@@ -599,8 +593,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				} else if (exp instanceof ElementReferenceExpression) {
 					checkElementReferenceEffect((ElementReferenceExpression) exp);
 				} else {
-					error("Action has no effect.", StextPackage.Literals.REACTION_EFFECT__ACTIONS, effect.getActions()
-							.indexOf(exp), FEATURE_CALL_HAS_NO_EFFECT);
+					error("Action has no effect.", StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+							effect.getActions().indexOf(exp), FEATURE_CALL_HAS_NO_EFFECT);
 				}
 
 			}
@@ -697,10 +691,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	protected boolean isDefault(Trigger trigger) {
 
-		return trigger == null
-				|| trigger instanceof DefaultTrigger
-				|| ((trigger instanceof ReactionTrigger) && ((ReactionTrigger) trigger).getTriggers().size() == 0 && ((ReactionTrigger) trigger)
-						.getGuard() == null);
+		return trigger == null || trigger instanceof DefaultTrigger
+				|| ((trigger instanceof ReactionTrigger) && ((ReactionTrigger) trigger).getTriggers().size() == 0
+						&& ((ReactionTrigger) trigger).getGuard() == null);
 	}
 
 	@Override
@@ -804,8 +797,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	private Resource getResource(EObject context) {
-		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(
-				context.eResource(), ContextElementAdapter.class);
+		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
+				ContextElementAdapter.class);
 		if (provider == null) {
 			return context.eResource();
 		} else {
