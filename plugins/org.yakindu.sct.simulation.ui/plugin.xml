@@ -72,6 +72,13 @@
              type="org.eclipse.debug.ui.sourcelookup.ISourceDisplay">
        </adapter>
     </factory>
+     <factory
+          adaptableType="org.eclipse.debug.core.Launch"
+          class="org.yakindu.sct.simulation.ui.model.presenter.SCTSourceDisplayAdapterFactory">
+       <adapter
+             type="org.eclipse.debug.ui.sourcelookup.ISourceDisplay">
+       </adapter>
+    </factory>
  </extension>
  <extension
        point="org.eclipse.ui.preferencePages">

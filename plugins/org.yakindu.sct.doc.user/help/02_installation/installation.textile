@@ -1,7 +1,5 @@
 h1(#InstallingYAKINDUStatechartTools). Installing YAKINDU Statechart Tools
 
-{toc}
-
 In order to start working with YAKINDU Statechart Tools, you have to install the software on your computer. We are assuming you have downloaded the software package and stored it somewhere on your machine.
 
 h2. Dependencies
@@ -38,11 +36,11 @@ This chapter describes how to install YAKINDU Statechart Tools on a Windows 7 ma
 
 h3. Unpacking the downloaded file
 
-Unpack the software distribution file. Use the file explorer to open the directory you downloaded the software distribution file to, right-click on the latter, and select _Extract all_ in the context menu.
+Unpack the software distribution file. Use the file explorer to open the directory you downloaded the software distribution file to, right-click on the latter, and select _Extract All…_ in the context menu.
 
 !images/windows7_install_010_eclipse_extract_1.png(Unpacking the downloaded file on Windows [1])!
 
-Choose a directory for YAKINDU Statechart Tools (SCT). The example below assumes you want to install the software in the _C:\Program Files\yakindu_sct_ directory. Please modify as needed to install it somewhere else!
+Choose a directory for YAKINDU Statechart Tools (SCT). The example below assumes you want to install the software in the _C:\Program Files\yakindu_sct_ directory. Please modify as needed to install somewhere else!
 
 !images/windows7_install_020_eclipse_extract_2.png(Unpacking the downloaded file on Windows [2])!
 
@@ -106,7 +104,7 @@ This chapter describes how to install YAKINDU Statechart Tools on a Linux machin
 
 h3. Unpacking the downloaded file
 
-Choose a directory for YAKINDU Statechart Tools. The commands below assume you want to install the software in the _/my/software_ directory. Please modify the commands appropriately to install it somewhere else!
+Choose a directory for YAKINDU Statechart Tools. The commands below assume you want to install the software in the _/my/software_ directory. Please modify the commands appropriately to install somewhere else!
 
 Go to the installation directory:
 
@@ -159,8 +157,6 @@ In the example below, we chose the _/my/workspace_ directory as our workspace. W
 
 Click on the _OK_ button to proceed.
 
-</p><div style="background: yellow"><p>
-
 On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
 
 !images/linux_install_050_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
@@ -168,8 +164,6 @@ On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
 You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
 
 !images/linux_install_060_eclipse_workbench.png(The YAKINDU Statechart Tools workbench)!
-
-</p></div><p>
 
 This is your working environment now. Congratulations, you have just started YAKINDU Statechart Tools!
 

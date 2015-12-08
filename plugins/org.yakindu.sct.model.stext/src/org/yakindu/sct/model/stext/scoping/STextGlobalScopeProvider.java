@@ -74,21 +74,16 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	}
 
 	/**
-	 * Filter all Elements that are part of an SCT file bug from another
-	 * resource...
-	 * 
-	 * @param context
-	 * @param parentScope
-	 * @return
+	 * Filter all Elements that are part of an SCT file from other resources to
+	 * avoid cross document referencing
 	 */
 	protected IScope filterExternalDeclarations(Resource context, IScope parentScope) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context,
 				ContextElementAdapter.class);
 		final URI resourceURI = provider != null ? provider.getElement().eResource().getURI() : context.getURI();
 		parentScope = new FilteringScope(parentScope, new Predicate<IEObjectDescription>() {
-
 			public boolean apply(IEObjectDescription input) {
-				if (input.getEObjectURI().fileExtension().equals(FILE_EXTENSION)) {
+				if (FILE_EXTENSION.equals(input.getEObjectURI().fileExtension())) {
 					URI sourceURI = input.getEObjectURI().trimFragment();
 					return sourceURI.equals(resourceURI);
 				}

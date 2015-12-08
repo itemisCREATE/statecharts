@@ -1,7 +1,5 @@
 h1. Tasks
 
-{toc}
-
 h2. Simulating operations with custom Java code
 
 To simulate a model with operations it is possible to use custom Java code that mocks the desired behavior or even to simulate against an existing Java backend. For this purpose it is required to provide one or more custom Java classes having a method with a matching signature. 

@@ -1,4 +1,5 @@
-Build Status: [![Build Status](https://travis-ci.org/Yakindu/statecharts.svg?branch=master)](https://travis-ci.org/Yakindu/statecharts)
+[![Build Status](https://travis-ci.org/Yakindu/statecharts.svg?branch=master)](https://travis-ci.org/Yakindu/statecharts)
+[![Coverity Scan Build Status](https://scan.coverity.com/projects/6091/badge.svg)](https://scan.coverity.com/projects/yakindu-statecharts)
 
 #YAKINDU Statechart Tools 
 # (http://www.statecharts.org)
@@ -50,4 +51,9 @@ Rightclick org.yakindu.sct.generator.genmodel/SGen.xtext => Run As.. => Generate
 
 After these steps all projects should compile without errors. To launch a runtime instance which has these projects as installed plugins, just right-click on a project => Run As => Eclipse Application
 
-
+## Thanks
+YourKit is kindly supporting open source projects with its full-featured Java Profiler.
+YourKit, LLC is the creator of innovative and intelligent tools for profiling
+Java and .NET applications. Take a look at YourKit's leading software products:
+<a href="http://www.yourkit.com/java/profiler/index.jsp">YourKit Java Profiler</a> and
+<a href="http://www.yourkit.com/.net/profiler/index.jsp">YourKit .NET Profiler</a>.
