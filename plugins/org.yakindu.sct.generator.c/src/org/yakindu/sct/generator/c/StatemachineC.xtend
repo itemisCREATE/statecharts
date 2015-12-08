@@ -230,7 +230,7 @@ class StatemachineC {
 		''' +
 		// only if the impact vector is completely covered by final states the state machine 
 		// can become final
-		{if (finalStateImpactVector.isCompletelyCovered) {'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] == «IF fs.stateVector.offset == i»«functionPrefix.toFirstUpper»«fs.stateName.asEscapedIdentifier»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
+		{if (finalStateImpactVector.isCompletelyCovered) {'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] == «IF fs.stateVector.offset == i»«fs.shortName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
 		'''} else {'''   return false;'''} }		
 		+ '''}'''
 	}

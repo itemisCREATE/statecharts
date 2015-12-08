@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.Event
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
@@ -49,19 +48,6 @@ class Naming {
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
 	}
-	
-	def dispatch String stateName(State state) {
-		val String name = provider.getFullyQualifiedName(state).toString();
-		name.fullQualifiedStateName
-	}
-	
-	def dispatch String stateName(ExecutionState it) {
-		name.fullQualifiedStateName
-	}
-		
-	def private String fullQualifiedStateName(String name) {
-		name.substring(name.indexOf(".") + 1).replace(".", "_")
-	}
 
 	def module(ExecutionFlow it) {
 		if (entry.moduleName.nullOrEmpty) {
@@ -70,9 +56,6 @@ class Naming {
 		return entry.moduleName.toFirstUpper
 	}
 
-	//	def module(InterfaceScope it) {
-	//		flow.type + (if (name.nullOrEmpty) 'Default' else name).asIdentifier.toFirstUpper	
-	//	}
 	def filterNullOrEmptyAndJoin(Iterable<CharSequence> it) {
 		filter[!it?.toString.nullOrEmpty].join('\n')
 	}
@@ -162,12 +145,12 @@ class Naming {
 		functionPrefix + "clearOutEvents"
 	}
 
-	def dispatch null_state(ExecutionFlow it) {
+	def dispatch String null_state(ExecutionFlow it) {
 		type + lastStateID
 	}
 
-	def dispatch null_state(Step it) {
-		execution_flow.type + lastStateID
+	def dispatch String null_state(Step it) {
+		execution_flow.null_state
 	}
 
 	def lastStateID() {
