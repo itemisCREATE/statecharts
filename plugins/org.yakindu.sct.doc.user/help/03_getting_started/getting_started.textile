@@ -111,7 +111,7 @@ An empty statechart is created and displayed in the *statechart editor* in the m
 
 p(#light_switch_220_statechart_editor). 
 
-!images/light_switch_220_statechart_editor.png(The statechart editor)!
+!{width:60%}images/light_switch_220_statechart_editor.png(The statechart editor)!
 
 Actually the new statechart isn't really empty. It already contains the initial state (a small filled black circle), a "normal" state, and a transition leading from the former to the latter.
 
@@ -150,31 +150,18 @@ As we have seen, the initial statechart is erroneous insofar as the state does n
 
 Remember the requirements of our light switch example? The first requirement demands the switch to be off initially. The erroneous state is reached from the initial state immediately, so it is appropriate to name it *Off*.
 
-Double-click on the string @<name>@ in the state object. The string turns into a text input field with @<name>@ being highlighted:
-
-!images/light_switch_230_statechart_editor_change_state_name_01.png(Changing a state's name [1])!
-
-Type the state's new name, i.&nbsp;e. @Off@:
-
-!images/light_switch_230_statechart_editor_change_state_name_02.png(Changing a state's name [2])!
-
-Hit the @[Enter]@ key or click anywhere outside the text field. Bingo! The state now has a proper name and the error marker disappears:
-
-!images/light_switch_230_statechart_editor_change_state_name_03.png(Changing a state's name [3])!
+table{width:100%}.
+| Double-click on the string @<name>@ in the state object. The string turns into a text input field with @<name>@ being highlighted: | !images/light_switch_230_statechart_editor_change_state_name_01.png(Changing a state's name [1])! |
+| Type the state's new name, i.&nbsp;e. @Off@: | !images/light_switch_230_statechart_editor_change_state_name_02.png(Changing a state's name [2])! |
+| Hit the @[Enter]@ key or click anywhere outside the text field. Bingo! The state now has a proper name and the error marker disappears: | !images/light_switch_230_statechart_editor_change_state_name_03.png(Changing a state's name [3])! |
 
 However, since the state box's size is smaller now than before while the box's left position remains unchanged, the graph looks crooked.
 
-We can improve it by dragging the state box a little bit to the right. When it is centered below the initial state symbol, a vertical blue line appears giving the user a visual hint:
+table{width:100%}.
+| We can improve it by dragging the state box a little bit to the right. When it is centered below the initial state symbol, a vertical blue line appears giving the user a visual hint: | !images/light_switch_230_statechart_editor_change_state_name_04.png(Changing a state's name [4])! |
+| Drop the state box at this very place, and everything looks much better now: | !images/light_switch_230_statechart_editor_change_state_name_05.png(Changing a state's name [5])! |
+| Alternatively, we could have used the state box's handles to resize it. However, we just deselect the box by clicking elsewhere: | !images/light_switch_230_statechart_editor_change_state_name_06.png(Changing a state's name [6])! |
 
-!images/light_switch_230_statechart_editor_change_state_name_04.png(Changing a state's name [4])!
-
-Drop the state box at this very place, and everything looks much better now:
-
-!images/light_switch_230_statechart_editor_change_state_name_05.png(Changing a state's name [5])!
-
-Alternatively, we could have used the state box's handles to resize it. However, we just deselect the box by clicking elsewhere:
-
-!images/light_switch_230_statechart_editor_change_state_name_06.png(Changing a state's name [6])!
 
 
 h3. Creating a state
