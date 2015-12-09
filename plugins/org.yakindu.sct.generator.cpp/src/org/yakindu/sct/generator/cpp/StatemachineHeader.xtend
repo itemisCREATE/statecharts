@@ -152,12 +152,12 @@ class StatemachineHeader extends Statemachine {
 			«entry.innerClassVisibility»:
 				friend class «scope.execution_flow.module()»;
 				«FOR d : scope.declarations»
-					«d.structDeclaration»
+					«d.scopeTypeDeclMember»
 				«ENDFOR»
 		};
 	'''
 
-	override dispatch structDeclaration(VariableDefinition it) '''
+	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
 		«IF type.name != 'void'»«IF const»static const «ENDIF»«type.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
 
