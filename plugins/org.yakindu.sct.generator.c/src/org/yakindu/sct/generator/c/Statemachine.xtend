@@ -23,9 +23,10 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.InternalScope
+
 import static org.eclipse.xtext.util.Strings.*
 
 class Statemachine {
@@ -58,7 +59,10 @@ class Statemachine {
 		
 		«statesEnumDecl»
 		
-		«FOR s : it.scopes»«s.scopeTypeDecl»«ENDFOR»
+		«FOR s : it.scopes»
+			«s.scopeTypeDecl»
+			«s.scopeConstDecl»
+		«ENDFOR»
 		
 		«statemachineTypeDecl»
 		
@@ -115,36 +119,50 @@ class Statemachine {
 		} «statesEnumType»;
 	'''
 
-	def dispatch structDeclaration(EventDefinition it) '''
+	def dispatch scopeTypeDeclMember(EventDefinition it) '''
 		sc_boolean «name.asIdentifier»_raised;
 		«IF type != null && type.name != 'void'»«type.targetLanguageName» «name.asIdentifier»_value;«ENDIF»
 	'''
 
-	def dispatch structDeclaration(TimeEvent it) '''
+	def dispatch scopeTypeDeclMember(TimeEvent it) '''
 		sc_boolean «shortName.raised»;
 	'''
 
-	def dispatch structDeclaration(VariableDefinition it) '''
+	def dispatch scopeTypeDeclMember(VariableDefinition it) '''
 		«IF type.name != 'void' && !isConst»«type.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
+	
+	def dispatch scopeTypeDeclMember(Declaration it) ''''''
 
-	def dispatch structDeclaration(Declaration it) ''''''
+	def scopeTypeDecl(Scope scope) '''
+		«val typeRelevantDeclarations = scope.typeRelevantDeclarations.toList»
+		«IF !typeRelevantDeclarations.empty»
+			/*! Type definition of the data structure for the «scope.type» interface scope. */
+			typedef struct {
+				«FOR d : typeRelevantDeclarations»
+					«d.scopeTypeDeclMember»
+				«ENDFOR»
+			} «scope.type»;
 
-	def scopeTypeDecl(Scope it) '''
-		/*! Type definition of the data structure for the «type» interface scope. */
-		typedef struct {
-			«FOR d : declarations»
-				«d.structDeclaration»
-			«ENDFOR»
-		} «it.type»;
-		
-		«IF !(it instanceof InternalScope)»
-			/* Declaration of constants for scope «type». */
-			«FOR d : declarations.filter(typeof(VariableDefinition)).filter[const] AFTER newLine»
+		«ENDIF»
+	'''
+	
+	def scopeConstDecl(Scope scope)'''
+		«IF !(scope instanceof InternalScope) && !scope.constDeclarations.empty»
+			/* Declaration of constants for scope «scope.type». */
+			«FOR d : scope.constDeclarations AFTER newLine»
 				«IF d.type.name != 'void'»extern const «d.type.targetLanguageName» «d.constantName»;«ENDIF»
 			«ENDFOR»
 		«ENDIF»
 	'''
+	
+	private def typeRelevantDeclarations(Scope scope){
+		return scope.declarations.filter[it instanceof EventDefinition || it instanceof VariableDefinition || it instanceof TimeEvent]
+	}
+	
+	private def constDeclarations(Scope scope){
+		return scope.declarations.filter(typeof(VariableDefinition)).filter[const]
+	}
 
 	def statemachineTypeDecl(ExecutionFlow it) '''
 		/*! Define dimension of the state configuration vector for orthogonal states. */
@@ -162,7 +180,7 @@ class Statemachine {
 			«IF hasHistory»«statesEnumType» historyVector[«type.toUpperCase»_MAX_HISTORY_STATES];«ENDIF»
 			sc_ushort stateConfVectorPosition; 
 			
-			«FOR iScope : scopes»
+			«FOR iScope : scopes.filter[!typeRelevantDeclarations.empty]»
 				«iScope.type» «iScope.instance»;
 			«ENDFOR»			
 		} «type»;
