@@ -11,6 +11,7 @@
 package org.yakindu.base.gmf.runtime.highlighting;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -124,7 +125,17 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		if (locked) {
 			throw new IllegalStateException("Editor already locked!");
 		}
+		List<Action> singletonList = new ArrayList<>();
+		singletonList.add(new Action() {
+			@Override
+			public void execute(IHighlightingSupport hs) {
+				lockEditorInternal();
+			}
+		});
+		executeSync(singletonList);
+	}
 
+	private void lockEditorInternal() {
 		setSanityCheckEnablementState(false);
 		for (Object editPart : diagramWorkbenchPart.getDiagramGraphicalViewer().getEditPartRegistry().values()) {
 			if (editPart instanceof IGraphicalEditPart) {
@@ -151,7 +162,17 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		if (!locked) {
 			throw new IllegalStateException("Editor not locked!");
 		}
+		List<Action> singletonList = new ArrayList<>();
+		singletonList.add(new Action() {
+			@Override
+			public void execute(IHighlightingSupport hs) {
+				releaseInternal();
+			}
+		});
+		executeSync(singletonList);
+	}
 
+	protected void releaseInternal() {
 		// restore all elements still being highlighted
 		for (ColorMemento figureState : figureStates.values()) {
 			figureState.restore();
@@ -201,10 +222,22 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		return locked;
 	}
 
-	public void execute(final List<Action> actions) {
+	public void executeAsync(final List<Action> actions) {
 		if (actions != null) {
 
 			Display.getDefault().asyncExec(new Runnable() {
+				public void run() {
+					for (Action a : actions) {
+						a.execute(HighlightingSupportAdapter.this);
+					}
+				}
+			});
+		}
+	}
+	public void executeSync(final List<Action> actions) {
+		if (actions != null) {
+
+			Display.getDefault().syncExec(new Runnable() {
 				public void run() {
 					for (Action a : actions) {
 						a.execute(HighlightingSupportAdapter.this);

@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -20,7 +18,6 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
 
@@ -31,12 +28,48 @@ import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
  */
 public class ExecutionContextContentProvider implements ITreeContentProvider, IPropertyChangeListener {
 
+	protected class ViewerRefresher implements Runnable {
+
+		private static final int UPDATE_INTERVAL = 500;
+
+		private boolean cancel = false;
+
+		@Override
+		public void run() {
+			while (!cancel && viewer.getInput() != null) {
+				try {
+					Thread.sleep(UPDATE_INTERVAL);
+					Display.getDefault().asyncExec(new Runnable() {
+						public void run() {
+							if (viewer != null && !viewer.getControl().isDisposed() && shouldUpdate)
+								viewer.refresh();
+						}
+					});
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+
+		public boolean isCancel() {
+			return cancel;
+		}
+
+		public void setCancel(boolean cancel) {
+			this.cancel = cancel;
+		}
+
+	}
+
+	private boolean shouldUpdate = true;
+	private ViewerRefresher refresher;
 	private Viewer viewer;
-	protected RefreshAdapter refreshAdapter = new RefreshAdapter();
-	protected boolean shouldUpdate = true;
 
 	public void dispose() {
 		getStore().removePropertyChangeListener(this);
+		if (refresher != null)
+			refresher.cancel = true;
 	}
 
 	public ExecutionContextContentProvider() {
@@ -45,13 +78,11 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		this.viewer = viewer;
-		if (oldInput != null) {
-			ExecutionContext oldContext = (ExecutionContext) oldInput;
-			oldContext.eAdapters().remove(refreshAdapter);
-		}
+		refresher = new ViewerRefresher();
 		if (newInput != null) {
-			ExecutionContext newContext = (ExecutionContext) newInput;
-			newContext.eAdapters().add(refreshAdapter);
+			new Thread(refresher).start();
+		} else {
+			refresher.cancel = true;
 		}
 	}
 
@@ -94,8 +125,6 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 				viewer.refresh();
 		}
 	}
-	
-	
 
 	public boolean isShouldUpdate() {
 		return shouldUpdate;
@@ -105,23 +134,4 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 		this.shouldUpdate = shouldUpdate;
 	}
 
-
-
-	protected final class RefreshAdapter extends EContentAdapter {
-		@Override
-		public void notifyChanged(final Notification notification) {
-			if (notification.getFeature() == SRuntimePackage.Literals.EXECUTION_SLOT__VALUE
-					|| notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__RAISED
-					|| notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__SCHEDULED
-					|| notification.getFeature() == SRuntimePackage.Literals.COMPOSITE_SLOT__SLOTS)
-				Display.getDefault().asyncExec(new Runnable() {
-					public void run() {
-						if (viewer != null && !viewer.getControl().isDisposed() && shouldUpdate)
-							viewer.refresh();
-					}
-				});
-
-			super.notifyChanged(notification);
-		}
-	}
 }

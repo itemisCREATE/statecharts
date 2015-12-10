@@ -90,7 +90,7 @@ public class ExecutionContextVisualizer extends CrossDocumentContentAdapter {
 				}
 			}
 		}
-		getHighlightingSupport().execute(actions);
+		getHighlightingSupport().executeAsync(actions);
 	}
 
 	protected void highlight(final Notification notification, HighlightingParameters params) {
@@ -103,7 +103,7 @@ public class ExecutionContextVisualizer extends CrossDocumentContentAdapter {
 			List<EObject> objects = toList(notification.getOldValue());
 			actions.add(new IHighlightingSupport.Highlight(objects, null));
 		}
-		getHighlightingSupport().execute(actions);
+		getHighlightingSupport().executeAsync(actions);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -61,14 +61,12 @@ public class ExecutionContextViewerFactory {
 				.addEditorActivationListener(new ColumnViewerEditorActivationListener() {
 					@Override
 					public void afterEditorDeactivated(ColumnViewerEditorDeactivationEvent event) {
-						contentProvider.shouldUpdate = true;
+						contentProvider.setShouldUpdate(true);
 						viewer.refresh();
-
 					}
-
 					@Override
 					public void afterEditorActivated(ColumnViewerEditorActivationEvent event) {
-						contentProvider.shouldUpdate = false;
+						contentProvider.setShouldUpdate(false);
 
 					}
 
