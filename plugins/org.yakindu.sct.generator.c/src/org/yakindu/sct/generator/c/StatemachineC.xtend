@@ -87,7 +87,7 @@ class StatemachineC {
 	def initFunction(ExecutionFlow it) '''
 		void «functionPrefix»init(«scHandleDecl»)
 		{
-			int i;
+			sc_integer i;
 
 			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i) {
 				«scHandle»->stateConfVector[i] = «null_state»;
@@ -211,7 +211,6 @@ class StatemachineC {
 	'''
 	
 	def isActiveFunction(ExecutionFlow it) '''
-
 		sc_boolean «isActiveFctID»(const «scHandleDecl») {
 			return «FOR i : 0 ..< stateVector.size SEPARATOR '||'»«scHandle»->stateConfVector[«i»] != «null_state»«ENDFOR»;
 		}
@@ -231,7 +230,7 @@ class StatemachineC {
 		// only if the impact vector is completely covered by final states the state machine 
 		// can become final
 		{if (finalStateImpactVector.isCompletelyCovered) {'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] == «IF fs.stateVector.offset == i»«fs.shortName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
-		'''} else {'''   return false;'''} }		
+		'''} else {'''   return bool_false;'''} }		
 		+ '''}'''
 	}
 	
@@ -309,7 +308,7 @@ class StatemachineC {
 	'''
 	
 	def dispatch functionPrototype(Check it) '''
-		static sc_boolean «shortName»(«scHandleDecl»);
+		static sc_boolean «shortName»(const «scHandleDecl»);
 	'''
 	
 	def dispatch functionPrototype(Step it) '''
@@ -344,7 +343,7 @@ class StatemachineC {
 	
 	def dispatch functionImplementation(Check it) '''
 		«stepComment»
-		static sc_boolean «shortName»(«scHandleDecl») {
+		static sc_boolean «shortName»(const «scHandleDecl») {
 			return «code»;
 		}
 		
