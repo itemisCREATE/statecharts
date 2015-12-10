@@ -10,7 +10,7 @@
 
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.yakindu.sct.examples" 
-			name="SCT Examples" 
+			name="Statechart Examples" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/org.yakindu.sct.ui.Examples"
 			icon="icons/logo-16.png" 
@@ -18,22 +18,13 @@
 			<description>YAKINDU Statechart Tools examples</description>
 		</wizard>
 	</extension>
+	
    <!-- org.yakindu.sct.example.lightswitch -->
 	<extension point="org.eclipse.emf.common.ui.examples">
 	  <example wizardID="org.yakindu.sct.examples" pageImage="icons/logo-16.png">
-		 <projectDescriptor name="org.yakindu.sct.examples.lightswitch" contentURI="contents/org.yakindu.sct.examples.lightswitch.zip" description="Lightswitch example from the tutorial section"/>
-	  </example>
-   </extension>
-	<!-- org.yakindu.sct.example.trafficlight -->
-	<extension point="org.eclipse.emf.common.ui.examples">
-	  <example wizardID="org.yakindu.sct.examples" pageImage="icons/logo-16.png">
-		 <projectDescriptor name="org.yakindu.sct.examples.trafficlight" contentURI="contents/org.yakindu.sct.examples.trafficlight.zip" description="Trafficlight example with java generated source code"/>
-	  </example>
-   </extension>
-   <!-- org.yakindu.sct.example.clock -->
-	<extension point="org.eclipse.emf.common.ui.examples">
-	  <example wizardID="org.yakindu.sct.examples" pageImage="icons/logo-16.png">
-		 <projectDescriptor name="org.yakindu.sct.examples.clock" contentURI="contents/org.yakindu.sct.examples.clock.zip" description="Clock example Model without generated source code"/>
+	  	 <projectDescriptor name="light_switch" contentURI="contents/light_switch.zip" description="Light switch example from the tutorial section"/>
+		 <projectDescriptor name="traffic_light" contentURI="contents/traffic_light.zip" description="Traffic light example with java generated source code"/>
+		 <projectDescriptor name="digital_watch" contentURI="contents/digital_watch.zip" description="Digital watch hierarchies parallel regions, etc..."/>
 	  </example>
    </extension>
    
