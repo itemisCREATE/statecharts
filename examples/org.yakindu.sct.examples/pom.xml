@@ -29,11 +29,11 @@
 							<artifactItems>
 								<artifactItem>
 									<groupId>org.yakindu.sct.examples</groupId>
-									<artifactId>org.yakindu.sct.examples.trafficlight</artifactId>
+									<artifactId>traffic_light</artifactId>
 									<version>${project.version}</version>
 									<type>zip</type>
 									<classifier>content</classifier>
-									<destFileName>org.yakindu.sct.examples.trafficlight.zip</destFileName>
+									<destFileName>traffic_light.zip</destFileName>
 								</artifactItem>
 							</artifactItems>
 							<overWriteIfNewer>true</overWriteIfNewer>
@@ -50,11 +50,11 @@
 							<artifactItems>
 								<artifactItem>
 									<groupId>org.yakindu.sct.examples</groupId>
-									<artifactId>org.yakindu.sct.examples.clock</artifactId>
+									<artifactId>digital_watch</artifactId>
 									<version>${project.version}</version>
 									<type>zip</type>
 									<classifier>content</classifier>
-									<destFileName>org.yakindu.sct.examples.clock.zip</destFileName>
+									<destFileName>digital_watch.zip</destFileName>
 								</artifactItem>
 							</artifactItems>
 							<overWriteIfNewer>true</overWriteIfNewer>
@@ -71,11 +71,11 @@
 							<artifactItems>
 								<artifactItem>
 									<groupId>org.yakindu.sct.examples</groupId>
-									<artifactId>org.yakindu.sct.examples.lightswitch</artifactId>
+									<artifactId>light_switch</artifactId>
 									<version>${project.version}</version>
 									<type>zip</type>
 									<classifier>content</classifier>
-									<destFileName>org.yakindu.sct.examples.lightswitch.zip</destFileName>
+									<destFileName>light_switch.zip</destFileName>
 								</artifactItem>
 							</artifactItems>
 							<overWriteIfNewer>true</overWriteIfNewer>
