@@ -201,7 +201,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		Expression varRef = expression.getVarRef();
 		if (varRef instanceof FeatureCall) {
 			EObject referencedObject = ((FeatureCall) varRef).getFeature();
-			if (!(referencedObject instanceof Property) && !(referencedObject instanceof Property)) {
+			if (!(referencedObject instanceof Property)) {
 				error(LEFT_HAND_ASSIGNMENT, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
 			}
 		} else if (varRef instanceof ElementReferenceExpression) {
@@ -263,18 +263,14 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 		EObject rootContainer = EcoreUtil.getRootContainer(internalScope);
 		Resource rootRes = getResource(rootContainer);
-		EList<EObject> contents = rootRes.getContents();
-		Statechart sct = null;
-		for (EObject eObject : contents) {
-			if (eObject instanceof Statechart) {
-				sct = (Statechart) eObject;
-				break;
-			}
-		}
-		List<ElementReferenceExpression> allUsedElementReferences = EcoreUtil2.getAllContentsOfType(sct,
+		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(rootRes.getContents(),
+				SGraphPackage.Literals.STATECHART);
+		if (statechart == null)
+			return;
+		List<ElementReferenceExpression> allUsedElementReferences = EcoreUtil2.getAllContentsOfType(statechart,
 				ElementReferenceExpression.class);
 
-		if (sct.getSpecification() != null) {
+		if (statechart.getSpecification() != null) {
 			for (Declaration internalDeclaration : internalScopeDeclarations) {
 				boolean internalDeclarationUsed = false;
 				for (ElementReferenceExpression elementReference : allUsedElementReferences) {
