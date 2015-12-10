@@ -50,7 +50,8 @@ public class DefaultTimingService implements ITimingService {
 		timerTasks = new HashMap<String, TimerTask>();
 	}
 
-	public void scheduleTimeEvent(ExecutionContext context, String eventName, boolean isPeriodical, long duration) {
+	public synchronized void scheduleTimeEvent(ExecutionContext context, String eventName, boolean isPeriodical,
+			long duration) {
 		TimeEventTask timeEventTask = new TimeEventTask(context, eventName);
 		timerTasks.put(eventName, timeEventTask);
 		if (isPeriodical) {
@@ -60,20 +61,20 @@ public class DefaultTimingService implements ITimingService {
 		}
 	}
 
-	public void unscheduleTimeEvent(String eventName) {
+	public synchronized void unscheduleTimeEvent(String eventName) {
 		TimerTask timerTask = timerTasks.get(eventName);
 		timerTask.cancel();
 	}
 
-	public void pause() {
+	public synchronized void pause() {
 		throw new RuntimeException("Implement me");
 	}
 
-	public void resume() {
+	public synchronized void resume() {
 		throw new RuntimeException("Implement me");
 	}
 
-	public void stop() {
+	public synchronized void stop() {
 		Collection<TimerTask> values = timerTasks.values();
 		for (TimerTask timerTask : values) {
 			timerTask.cancel();
