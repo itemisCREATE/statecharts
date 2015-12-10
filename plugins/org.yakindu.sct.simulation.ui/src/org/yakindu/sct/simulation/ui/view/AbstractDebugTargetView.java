@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
+import org.eclipse.debug.core.Launch;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.debug.ui.contexts.DebugContextEvent;
@@ -30,7 +31,8 @@ import org.eclipse.ui.part.ViewPart;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractDebugTargetView extends ViewPart implements IDebugContextListener, IDebugEventSetListener {
+public abstract class AbstractDebugTargetView extends ViewPart
+		implements IDebugContextListener, IDebugEventSetListener {
 
 	protected IDebugTarget debugTarget;
 
@@ -79,7 +81,12 @@ public abstract class AbstractDebugTargetView extends ViewPart implements IDebug
 			PlatformObject object = (PlatformObject) ((IStructuredSelection) event.getContext()).getFirstElement();
 			if (object == null)
 				return;
-			IDebugTarget newTarget = (IDebugTarget) object.getAdapter(IDebugTarget.class);
+			IDebugTarget newTarget = null;
+			if (object instanceof Launch) {
+				newTarget = ((Launch) object).getDebugTarget();
+			} else {
+				newTarget = (IDebugTarget) object.getAdapter(IDebugTarget.class);
+			}
 			if (newTarget != debugTarget && newTarget != null && !newTarget.isTerminated()) {
 				debugTarget = newTarget;
 				activeTargetChanged(newTarget);
