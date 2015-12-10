@@ -65,7 +65,7 @@ public class DefaultTimingService implements ITimingService {
 		TimerTask timerTask = timerTasks.get(eventName);
 		timerTask.cancel();
 	}
-
+	
 	public synchronized void pause() {
 		throw new RuntimeException("Implement me");
 	}
