@@ -63,29 +63,31 @@ public class SCTSourceDisplay implements ISourceDisplay {
 
 	public void displaySource(IEditorPart editor) {
 		IDynamicNotationHandler notationHandler = handler.get(editor);
+		IHighlightingSupport support = (IHighlightingSupport) editor.getAdapter(IHighlightingSupport.class);
+		if (support == null)
+			return;
 		if (notationHandler == null) {
 			notationHandler = new DefaultDynamicNotationHandler();
-			IHighlightingSupport support = (IHighlightingSupport) editor.getAdapter(IHighlightingSupport.class);
-			if (support == null)
-				return;
-			notationHandler.setHighlightingSupport(support);
 			handler.put(editor, notationHandler);
+		} else {
+			notationHandler.setHighlightingSupport(new IHighlightingSupport.HighlightingSupportNullImpl());
 		}
-		if (notationHandler.getHighlightingSupport().isLocked()) {
-			notationHandler.getHighlightingSupport().releaseEditor();
+		if (support.isLocked()) {
+			support.releaseEditor();
 		}
-		notationHandler.getHighlightingSupport().lockEditor();
+		support.lockEditor();
+		notationHandler.setHighlightingSupport(support);
 		notationHandler.display(container.getExecutionContext());
 	}
 
-	public void terminate() {
+	public void terminate(boolean release) {
 		container = null;
 		debugElement = null;
 		Collection<IDynamicNotationHandler> values = handler.values();
 		for (IDynamicNotationHandler notationHandler : values) {
-			if (notationHandler.getHighlightingSupport().isLocked())
-				notationHandler.getHighlightingSupport().releaseEditor();
 			notationHandler.terminate();
+			if (release && notationHandler.getHighlightingSupport().isLocked())
+				notationHandler.getHighlightingSupport().releaseEditor();
 		}
 		handler.clear();
 	}
