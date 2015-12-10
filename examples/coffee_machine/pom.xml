@@ -10,7 +10,7 @@
 		<relativePath>../../releng/org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
 	<groupId>org.yakindu.sct.examples</groupId>
-	<artifactId>org.yakindu.sct.examples.lightswitch</artifactId>
+	<artifactId>coffee_machine</artifactId>
 	<packaging>pom</packaging>
 
 	<properties>
