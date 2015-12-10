@@ -18,23 +18,11 @@
 			<description>YAKINDU Statechart Tools examples</description>
 		</wizard>
 	</extension>
-   <!-- org.yakindu.sct.example.lightswitch -->
 	<extension point="org.eclipse.emf.common.ui.examples">
 	  <example wizardID="org.yakindu.sct.examples" pageImage="icons/logo-16.png">
 		 <projectDescriptor name="org.yakindu.sct.examples.lightswitch" contentURI="contents/org.yakindu.sct.examples.lightswitch.zip" description="Lightswitch example from the tutorial section"/>
-	  </example>
-   </extension>
-	<!-- org.yakindu.sct.example.trafficlight -->
-	<extension point="org.eclipse.emf.common.ui.examples">
-	  <example wizardID="org.yakindu.sct.examples" pageImage="icons/logo-16.png">
 		 <projectDescriptor name="org.yakindu.sct.examples.trafficlight" contentURI="contents/org.yakindu.sct.examples.trafficlight.zip" description="Trafficlight example with java generated source code"/>
-	  </example>
-   </extension>
-   <!-- org.yakindu.sct.example.clock -->
-	<extension point="org.eclipse.emf.common.ui.examples">
-	  <example wizardID="org.yakindu.sct.examples" pageImage="icons/logo-16.png">
 		 <projectDescriptor name="org.yakindu.sct.examples.clock" contentURI="contents/org.yakindu.sct.examples.clock.zip" description="Clock example Model without generated source code"/>
 	  </example>
    </extension>
-   
 </plugin>
