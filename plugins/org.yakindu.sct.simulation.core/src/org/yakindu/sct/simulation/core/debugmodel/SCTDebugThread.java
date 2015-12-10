@@ -10,9 +10,6 @@
  */
 package org.yakindu.sct.simulation.core.debugmodel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IBreakpoint;
@@ -20,8 +17,6 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.sct.model.sgraph.RegularState;
-import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 
 /**
@@ -32,8 +27,6 @@ import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 public class SCTDebugThread extends SCTDebugElement implements IThread {
 
 	private final NamedElement element;
-	protected List<SCTStackFrame> stateStack;
-	private Vertex lastActiveState;
 	private ISimulationEngine container;
 
 	public SCTDebugThread(SCTDebugTarget target, ISimulationEngine container, String resourceString,
@@ -42,40 +35,19 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 		Assert.isNotNull(element);
 		this.container = container;
 		this.element = element;
-		stateStack = new ArrayList<SCTStackFrame>();
+	}
+
+	@Override
+	public IStackFrame[] getStackFrames() throws DebugException {
+		return null;
 	}
 
 	public int getPriority() throws DebugException {
 		return 0;
 	}
 
-	public IStackFrame[] getStackFrames() throws DebugException {
-		List<RegularState> activeLeafStates = container.getExecutionContext().getActiveStates();
-		Vertex activeState = null;
-		for (Vertex vertex : activeLeafStates) {
-			if (vertex.getParentRegion() == element) {
-				activeState = vertex;
-				break;
-			}
-		}
-		synchronized (stateStack) {
-			if (activeState != null && lastActiveState != activeState) {
-				lastActiveState = activeState;
-				EObject container = activeState;
-				stateStack = new ArrayList<SCTStackFrame>();
-				while (container != null) {
-					if (container instanceof RegularState) {
-						stateStack.add(new SCTStackFrame(this, (RegularState) container, getResourceString()));
-					}
-					container = container.eContainer();
-				}
-			}
-			return stateStack.toArray(new IStackFrame[] {});
-		}
-	}
-
 	public boolean hasStackFrames() throws DebugException {
-		return true;
+		return false;
 	}
 
 	public String getName() throws DebugException {
