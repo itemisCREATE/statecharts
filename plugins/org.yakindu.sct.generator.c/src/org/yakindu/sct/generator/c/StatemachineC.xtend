@@ -184,8 +184,8 @@ class StatemachineC {
 	def raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»
 			void «raiseTimeEventFctID»(const «type»* handle, sc_eventid evid) {
-				if ( ((intptr_t)evid) >= ((intptr_t)&(«scHandle»->timeEvents))
-					&&  ((intptr_t)evid) < ((intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»)) {
+				if ( ((sc_intptr_t)evid) >= ((sc_intptr_t)&(«scHandle»->timeEvents))
+					&&  ((sc_intptr_t)evid) < ((sc_intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»)) {
 					*(sc_boolean*)evid = bool_true;
 				}		
 			}
