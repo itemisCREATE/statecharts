@@ -52,7 +52,7 @@ public class SCTSourceDisplayDispatcher implements ISourceDisplay, IDebugEventSe
 			return;
 		if (newTarget != null && activeDebugTarget != newTarget){
 			if (activeSourceDisplay != null)
-				activeSourceDisplay.terminate();
+				activeSourceDisplay.terminate(false);
 			activeSourceDisplay = new SCTSourceDisplay(
 					(ISimulationEngine) newTarget.getAdapter(ISimulationEngine.class));
 		}
@@ -91,7 +91,8 @@ public class SCTSourceDisplayDispatcher implements ISourceDisplay, IDebugEventSe
 		if (source instanceof IDebugTarget) {
 			IDebugTarget target = (IDebugTarget) source;
 			if (target == activeDebugTarget) {
-				activeSourceDisplay.terminate();
+				activeSourceDisplay.terminate(true);
+				activeSourceDisplay = null;
 			}
 		}
 	}

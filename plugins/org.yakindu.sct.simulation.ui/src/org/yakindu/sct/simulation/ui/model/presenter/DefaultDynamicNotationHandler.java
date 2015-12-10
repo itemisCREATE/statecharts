@@ -56,7 +56,6 @@ public class DefaultDynamicNotationHandler extends AbstractDynamicNotationHandle
 		if (this.currentContext != null)
 			this.currentContext.eAdapters().remove(visualizer);
 		visualizer.setHighlightingSupport(NULL_SUPPORT);
-		setHighlightingSupport(NULL_SUPPORT);
 	}
 
 	@Override
