@@ -384,10 +384,10 @@
 	</profiles>
 	<modules>
 		<!-- Examples -->
-		<module>../../examples/org.yakindu.sct.examples.trafficlight</module>
-		<module>../../examples/org.yakindu.sct.examples.clock</module>
-		<module>../../examples/org.yakindu.sct.examples.lightswitch</module>
-		<module>../../examples/org.yakindu.sct.ui.examples</module>
+		<module>../../examples/traffic_light</module>
+		<module>../../examples/digital_watch</module>
+		<module>../../examples/light_switch</module>
+		<module>../../examples/org.yakindu.sct.examples</module>
 		<!-- Releng -->
 		<module>../org.yakindu.base.target</module>
 		<module>../org.yakindu.base.repository</module>
