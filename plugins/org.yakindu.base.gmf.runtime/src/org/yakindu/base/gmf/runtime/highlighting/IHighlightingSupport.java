@@ -32,7 +32,7 @@ public interface IHighlightingSupport {
 
 	void flash(List<? extends EObject> semanticElemesnt, HighlightingParameters parameters, int highlightTime);
 
-	void execute(List<Action> actions);
+	void executeAsync(List<Action> actions);
 
 	public static interface Action {
 		public void execute(IHighlightingSupport hs);
@@ -97,7 +97,7 @@ public interface IHighlightingSupport {
 		}
 
 		@Override
-		public void execute(List<Action> actions) {
+		public void executeAsync(List<Action> actions) {
 		}
 
 		@Override

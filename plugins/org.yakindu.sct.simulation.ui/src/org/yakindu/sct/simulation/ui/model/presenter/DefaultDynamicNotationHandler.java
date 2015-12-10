@@ -48,7 +48,7 @@ public class DefaultDynamicNotationHandler extends AbstractDynamicNotationHandle
 		actions.add(new IHighlightingSupport.Flash(context.getExecutedElements(), HighlightingParameters.DEFAULT,
 				FLASHTIME));
 		actions.add(new IHighlightingSupport.Highlight(context.getExecutedElements(), SUSPENDED_PARAMS));
-		getHighlightingSupport().execute(actions);
+		getHighlightingSupport().executeAsync(actions);
 	}
 
 	@Override
