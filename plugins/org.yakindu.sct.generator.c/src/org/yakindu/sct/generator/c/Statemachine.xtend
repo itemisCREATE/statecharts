@@ -76,7 +76,7 @@ class Statemachine {
 		
 		«IF timed»
 			/*! Raises a time event. */
-			extern void «raiseTimeEventFctID»(«scHandleDecl», sc_eventid evid);
+			extern void «raiseTimeEventFctID»(const «scHandleDecl», sc_eventid evid);
 		«ENDIF»
 		
 		«FOR s : it.scopes.filter( typeof(InterfaceScope) )»
