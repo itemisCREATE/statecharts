@@ -1,5 +1,5 @@
 /**
-Copyright (c) 2012 committers of YAKINDU and others.
+Copyright (c) 2012-2015 committers of YAKINDU and others.
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
@@ -8,15 +8,11 @@ http://www.eclipse.org/legal/epl-v10.html
 Contributors:
     committers of YAKINDU - initial API and implementation
 �*/
-package org.yakindu.sct.examples.trafficlight.cyclebased.trafficlightwaiting;
-import org.yakindu.sct.examples.trafficlight.cyclebased.IStatemachine;
-import org.yakindu.sct.examples.trafficlight.cyclebased.ITimerCallback;
+package traffic.light.trafficlightwaiting;
+import traffic.light.IStatemachine;
+import traffic.light.ITimerCallback;
 
-public interface ITrafficLightWaitingStatemachine
-		extends
-			ITimerCallback,
-			IStatemachine {
-
+public interface ITrafficLightWaitingStatemachine extends ITimerCallback, IStatemachine {
 	public interface SCITrafficLight {
 		public boolean getRed();
 		public void setRed(boolean value);
