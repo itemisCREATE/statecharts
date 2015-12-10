@@ -41,7 +41,6 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 					Thread.sleep(UPDATE_INTERVAL);
 					Display.getDefault().asyncExec(new Runnable() {
 						public void run() {
-							System.out.println("running update threade");
 							if (viewer != null && !viewer.getControl().isDisposed() && shouldUpdate)
 								viewer.refresh();
 						}
