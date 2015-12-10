@@ -14,7 +14,7 @@ The _YAKINDU Generator Model_ wizard opens. Change the _File name_ to *CallHandl
 
 !images/callhandling_210_generation_new_sgen_model_1.png(Selecting a filename for the generator model)!
 
-From the _Generator_ drop-down menu at the top, select _Yakindu SCT Java Code Generator_.
+From the _Generator_ drop-down menu at the top, select _YAKINDU SCT Java Code Generator_.
 
 In the statechart tree beneath that menu, check the *CallHandling.sct* model, then click _Finish_.
 
