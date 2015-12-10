@@ -90,7 +90,7 @@ public class SCTSourceDisplay implements ISourceDisplay {
 		handler.clear();
 	}
 
-	private IEditorPart openEditor(DebugElement debugElement, IWorkbenchPage page) {
+	public IEditorPart openEditor(DebugElement debugElement, IWorkbenchPage page) {
 		EObject semanticObject = (EObject) debugElement.getAdapter(EObject.class);
 		IFile file = (IFile) debugElement.getAdapter(IFile.class);
 		if (file == null)
