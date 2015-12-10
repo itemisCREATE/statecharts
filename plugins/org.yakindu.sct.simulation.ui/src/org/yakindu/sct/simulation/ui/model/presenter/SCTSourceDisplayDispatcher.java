@@ -48,16 +48,16 @@ public class SCTSourceDisplayDispatcher implements ISourceDisplay, IDebugEventSe
 
 	public void displaySource(Object element, IWorkbenchPage page, boolean forceSourceLookup) {
 		SCTDebugTarget newTarget = unwrapTarget(element);
-		if (newTarget == null || activeDebugTarget == newTarget)
+		if (newTarget.getDebugTarget().isTerminated())
 			return;
+		if (newTarget != null && activeDebugTarget != newTarget){
+			if (activeSourceDisplay != null)
+				activeSourceDisplay.terminate();
+			activeSourceDisplay = new SCTSourceDisplay(
+					(ISimulationEngine) newTarget.getAdapter(ISimulationEngine.class));
+		}
+		activeSourceDisplay.displaySource(newTarget, page, forceSourceLookup);
 		activeDebugTarget = newTarget;
-		if (activeDebugTarget.getDebugTarget().isTerminated())
-			return;
-		if (activeSourceDisplay != null)
-			activeSourceDisplay.terminate();
-		activeSourceDisplay = new SCTSourceDisplay(
-				(ISimulationEngine) activeDebugTarget.getAdapter(ISimulationEngine.class));
-		activeSourceDisplay.displaySource(activeDebugTarget, page, forceSourceLookup);
 	}
 
 	protected SCTDebugTarget unwrapTarget(Object element) {
