@@ -96,36 +96,34 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 		engine.getExecutionControl().stepForward();
 	}
 
-	public IThread[] getThreads() throws DebugException {
+	public synchronized IThread[] getThreads() throws DebugException {
 		// Collect all active regions
 		List<RegularState> activeLeafStates = engine.getExecutionContext().getActiveStates();
 		List<Region> activeRegions = new ArrayList<Region>();
 		for (RegularState vertex : activeLeafStates) {
 			activeRegions.add(vertex.getParentRegion());
 		}
-		synchronized (threads) {
-			// Remove orphaned debug threads
-			Iterator<SCTDebugThread> iterator = threads.iterator();
-			while (iterator.hasNext()) {
-				SCTDebugThread next = iterator.next();
-				if (!activeRegions.contains(next.getElement())) {
-					iterator.remove();
-				}
+		// Remove orphaned debug threads
+		Iterator<SCTDebugThread> iterator = threads.iterator();
+		while (iterator.hasNext()) {
+			SCTDebugThread next = iterator.next();
+			if (!activeRegions.contains(next.getElement())) {
+				iterator.remove();
 			}
-			// Add new debug threads
-			for (Region region : activeRegions) {
-				boolean found = false;
-				for (SCTDebugThread thread : threads) {
-					if (thread.getElement() == region) {
-						found = true;
-					}
-				}
-				if (!found) {
-					threads.add(new SCTDebugThread(this, engine, getResourceString(), region));
-				}
-			}
-			return threads.toArray(new IThread[] {});
 		}
+		// Add new debug threads
+		for (Region region : activeRegions) {
+			boolean found = false;
+			for (SCTDebugThread thread : threads) {
+				if (thread.getElement() == region) {
+					found = true;
+				}
+			}
+			if (!found) {
+				threads.add(new SCTDebugThread(this, engine, getResourceString(), region));
+			}
+		}
+		return threads.toArray(new IThread[] {});
 	}
 
 	public boolean hasThreads() throws DebugException {
