@@ -84,9 +84,9 @@ Now we are going to create an empty statechart model in the _model_ folder. Righ
 
 !images/light_switch_120_menu_new_other.png(Selecting "New → Other" in the context menu)!
 
-The _New_ wizard opens. Select _Yakindu → Statechart model_
+The _New_ wizard opens. Select _YAKINDU SCT → Statechart model_
 
-!images/light_switch_130_wizard_new.png(Selecting "YAKINDU → Statechart model")!
+!images/light_switch_130_wizard_new.png(Selecting "YAKINDU SCT → Statechart model")!
 
 Click _Next >_. The wizard shows the _New YAKINDU Statechart_ dialog:
 

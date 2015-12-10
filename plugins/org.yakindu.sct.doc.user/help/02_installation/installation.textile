@@ -255,7 +255,7 @@ Eclipse establishes a network connection to the update repository, asks it for a
 
 !images/eclipse_install_040_eclipse_software_items.png(Selecting YAKINDU Statechart Tools software items)!
 
-Please check at least _Xtext Integration Utilities_ and – no surprise – _Yakindu SCT 2_. (You can also install the respective source code items. However, unless you want to have a look at that source code or even want to modify it, you don't need them.)
+Please check at least _Xtext Integration Utilities_ and – no surprise – _YAKINDU SCT_. (You can also install the respective source code items. However, unless you want to have a look at that source code or even want to modify it, you don't need them.)
 
 Click _Next >_.
 

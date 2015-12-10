@@ -36,11 +36,11 @@ When the simulation is executed, the variable _result_ gets the value 2.
 
 h2. Generating code
 
-For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called *SGen*. It can be created either by using the provided wizard *Yakindu Statechart Generator Model* or by creating a new text file with the file extension @.sgen@.
+For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called *SGen*. It can be created either by using the provided wizard *YAKINDU Statechart Generator Model* or by creating a new text file with the file extension @.sgen@.
 
 To create a generator model with the wizard, proceed as follows:
 
-# Select _File → New → Other... → Code Generator Model_.
+# Select _File → New → YAKINDU SCT → Code Generator Model_.
 # Enter a name and click _Next_.
 # Choose the desired generator, i.&nbsp;e. _YAKINDU SCT Java Code Generator_.
 # Check the model(s) to generate code from and click _Finish_.
@@ -80,7 +80,7 @@ Implementing a custom code generator is no trivial task. Before you get started,
 
 h3. Creating a new code generator project
 
-Creating custom code generators is a first-level concept in YAKINDU Statechart Tools. It is not required to set up a developer workspace with the Statechart Tools source code and to start a new Eclipse runtime to test your generator changes. Instead you can develop and test your custom generator at runtime. To set up a new generator project, select _File → New → Other → Yakindu_ → Xtend2/Java Generator Project_ and click _Next_.
+Creating custom code generators is a first-level concept in YAKINDU Statechart Tools. It is not required to set up a developer workspace with the Statechart Tools source code and to start a new Eclipse runtime to test your generator changes. Instead you can develop and test your custom generator at runtime. To set up a new generator project, select _File → New → Other → YAKINDU SCT_ → Xtend2/Java Generator Project_ and click _Next_.
 
 !images/xtendwizard.png(Creating a new code generator project)!
 
