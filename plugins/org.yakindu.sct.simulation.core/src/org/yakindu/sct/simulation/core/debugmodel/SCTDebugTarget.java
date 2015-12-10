@@ -10,10 +10,6 @@
  */
 package org.yakindu.sct.simulation.core.debugmodel;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
@@ -27,18 +23,12 @@ import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStep;
 import org.eclipse.debug.core.model.IThread;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.sct.model.sgraph.Region;
-import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.simulation.core.engine.IExecutionControl;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
-import org.yakindu.sct.simulation.core.sruntime.util.CrossDocumentContentAdapter;
 
 /**
  * 
@@ -55,7 +45,6 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 	private boolean suspended = false;
 
 	private final NamedElement element;
-	protected List<SCTDebugThread> threads;
 
 	protected ISimulationEngine engine;
 
@@ -72,15 +61,9 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 	}
 
 	public void init() {
-		threads = new ArrayList<SCTDebugThread>();
 		executionControl = engine.getExecutionControl();
 		executionControl.init();
 		DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
-		engine.getExecutionContext().eAdapters().add(updater = createUpdater());
-	}
-
-	protected AdapterImpl createUpdater() {
-		return new UpdateTreeAdapter();
 	}
 
 	public void start() {
@@ -97,37 +80,11 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 	}
 
 	public synchronized IThread[] getThreads() throws DebugException {
-		// Collect all active regions
-		List<RegularState> activeLeafStates = engine.getExecutionContext().getActiveStates();
-		List<Region> activeRegions = new ArrayList<Region>();
-		for (RegularState vertex : activeLeafStates) {
-			activeRegions.add(vertex.getParentRegion());
-		}
-		// Remove orphaned debug threads
-		Iterator<SCTDebugThread> iterator = threads.iterator();
-		while (iterator.hasNext()) {
-			SCTDebugThread next = iterator.next();
-			if (!activeRegions.contains(next.getElement())) {
-				iterator.remove();
-			}
-		}
-		// Add new debug threads
-		for (Region region : activeRegions) {
-			boolean found = false;
-			for (SCTDebugThread thread : threads) {
-				if (thread.getElement() == region) {
-					found = true;
-				}
-			}
-			if (!found) {
-				threads.add(new SCTDebugThread(this, engine, getResourceString(), region));
-			}
-		}
-		return threads.toArray(new IThread[] {});
+		return new IThread[] {};
 	}
 
 	public boolean hasThreads() throws DebugException {
-		return true;
+		return false;
 	}
 
 	public String getName() throws DebugException {
@@ -242,24 +199,6 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 
 	public ISimulationEngine getSimulationEngine() {
 		return engine;
-	}
-
-	// Fires fireChangeEvents to refresh the DebugUI TreeViewer with the active
-	// states
-	public class UpdateTreeAdapter extends CrossDocumentContentAdapter {
-
-		@Override
-		protected boolean shouldAdapt(EStructuralFeature feature) {
-			return feature == SRuntimePackage.Literals.EXECUTION_CONTEXT__ACTIVE_STATES;
-		}
-
-		@Override
-		public void notifyChanged(Notification notification) {
-			if (notification.getFeature() == SRuntimePackage.Literals.EXECUTION_CONTEXT__ACTIVE_STATES) {
-				fireChangeEvent(DebugEvent.CONTENT);
-			}
-			super.notifyChanged(notification);
-		}
 	}
 
 	public boolean canStepInto() {
