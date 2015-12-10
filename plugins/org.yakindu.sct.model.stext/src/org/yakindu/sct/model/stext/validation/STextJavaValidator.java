@@ -201,7 +201,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		Expression varRef = expression.getVarRef();
 		if (varRef instanceof FeatureCall) {
 			EObject referencedObject = ((FeatureCall) varRef).getFeature();
-			if (!(referencedObject instanceof Property) && !(referencedObject instanceof Property)) {
+			if (!(referencedObject instanceof Property)) {
 				error(LEFT_HAND_ASSIGNMENT, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
 			}
 		} else if (varRef instanceof ElementReferenceExpression) {
