@@ -53,7 +53,7 @@ public class GTestRunner extends Runner {
 
 	private static final Pattern TEST_PATTERN = Pattern.compile("TEST(?:_F)?\\s*\\(\\s*(\\w+)\\s*,\\s*(\\w+)\\s*\\)");
 	private static final Pattern SL_COMMENT_PATTERN = Pattern.compile("//.*(?:\\r?\\n|\\z)");
-	private static final Pattern ML_COMMENT_PATTERN = Pattern.compile("/\\*.*\\*/", Pattern.DOTALL);
+	private static final Pattern ML_COMMENT_PATTERN = Pattern.compile("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)");
 	private static final Pattern TEST_OUTPUT_PATTERN = Pattern.compile("\\[\\s*(\\w+)\\s*\\] (\\w+)\\.(\\w+)");
 
 	private Class<?> testClass;

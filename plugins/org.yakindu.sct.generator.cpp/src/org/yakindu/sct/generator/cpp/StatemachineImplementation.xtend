@@ -97,7 +97,7 @@ class StatemachineImplementation {
 			stateConfVectorPosition = 0;
 			
 			«IF timed»
-				«timerInstance» = NULL;
+				«timerInstance» = null;
 			«ENDIF»
 		}
 	'''
