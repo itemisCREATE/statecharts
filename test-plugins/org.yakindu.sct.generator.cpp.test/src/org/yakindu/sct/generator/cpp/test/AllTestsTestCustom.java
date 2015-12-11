@@ -9,11 +9,12 @@
  *     committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.generator.cpp.test;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({OperationsTestCustom.class, OperationsWithoutBracesTestCustom.class})
+@SuiteClasses({ OperationsTestCustom.class, OperationsWithoutBracesTestCustom.class, TimedTransitionsTestCustom.class })
 public class AllTestsTestCustom {
 }
