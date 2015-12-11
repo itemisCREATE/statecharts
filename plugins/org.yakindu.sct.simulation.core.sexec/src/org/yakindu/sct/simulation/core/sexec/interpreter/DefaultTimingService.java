@@ -52,6 +52,9 @@ public class DefaultTimingService implements ITimingService {
 
 	public synchronized void scheduleTimeEvent(ExecutionContext context, String eventName, boolean isPeriodical,
 			long duration) {
+		//This is called with zero for nano and micro seconds
+		if(duration <= 0)
+			duration = 1;
 		TimeEventTask timeEventTask = new TimeEventTask(context, eventName);
 		timerTasks.put(eventName, timeEventTask);
 		if (isPeriodical) {
