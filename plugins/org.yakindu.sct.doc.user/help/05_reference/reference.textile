@@ -49,10 +49,6 @@ A choice is also a pseudo state. It can be used to model a conditional path. A c
 
 Usually the first transition points towards the choice node. One of the choice's outgoing transitions can carry a condition.
 
-h3(#Junction). Junction
-
-A junction is a pseudo state to combine transitions. This is very convenient if a state machine has many similar transitions. Junctions add clear arrangements to the state machine.
-
 h3(#CompositeState). Composite states
 
 A composite state is a state comprising one or more state machines. These state machines are also organized in regions within the composite state.
