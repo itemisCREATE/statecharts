@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.yakindu.sct.ui.Examples" 
+				  name="YAKINDU SCT Examples" 
+				  parentCategory="org.eclipse.ui.Examples" />
+	</extension>
+
+
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.yakindu.sct.examples" 
+			name="Statechart Examples" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.yakindu.sct.ui.Examples"
+			icon="icons/logo-16.png" 
+			project="true">
+			<description>YAKINDU Statechart Tools examples</description>
+		</wizard>
+	</extension>
+	
+   <!-- org.yakindu.sct.example.lightswitch -->
+	<extension point="org.eclipse.emf.common.ui.examples">
+	  <example wizardID="org.yakindu.sct.examples" pageImage="icons/logo-16.png">
+	  	 <projectDescriptor name="light_switch" contentURI="contents/light_switch.zip" description="Light switch example from the tutorial section"/>
+		 <projectDescriptor name="traffic_light" contentURI="contents/traffic_light.zip" description="Traffic light example with java generated source code"/>
+		 <projectDescriptor name="digital_watch" contentURI="contents/digital_watch.zip" description="Digital watch hierarchies parallel regions, etc..."/>
+	  </example>
+   </extension>
+   
+</plugin>

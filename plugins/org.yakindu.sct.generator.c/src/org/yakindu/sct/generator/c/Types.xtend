@@ -72,6 +72,8 @@ class Types {
 		
 		typedef void*			sc_eventid;
 		
+		typedef intptr_t		sc_intptr_t;
+		
 		#ifdef __cplusplus
 		}
 		#endif

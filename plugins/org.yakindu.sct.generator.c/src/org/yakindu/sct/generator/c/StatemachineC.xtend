@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
+import org.eclipse.xtext.util.Strings
 
 class StatemachineC {
 	
@@ -183,8 +184,8 @@ class StatemachineC {
 	def raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»
 			void «raiseTimeEventFctID»(const «type»* handle, sc_eventid evid) {
-				if ( ((intptr_t)evid) >= ((intptr_t)&(«scHandle»->timeEvents))
-					&&  ((intptr_t)evid) < ((intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»)) {
+				if ( ((sc_intptr_t)evid) >= ((sc_intptr_t)&(«scHandle»->timeEvents))
+					&&  ((sc_intptr_t)evid) < ((sc_intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»)) {
 					*(sc_boolean*)evid = bool_true;
 				}		
 			}
@@ -212,7 +213,16 @@ class StatemachineC {
 	
 	def isActiveFunction(ExecutionFlow it) '''
 		sc_boolean «isActiveFctID»(const «scHandleDecl») {
-			return «FOR i : 0 ..< stateVector.size SEPARATOR '||'»«scHandle»->stateConfVector[«i»] != «null_state»«ENDFOR»;
+			sc_boolean result;
+			if («FOR i : 0 ..< stateVector.size SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] != «null_state»«ENDFOR»)
+			{
+				result =  bool_true;
+			}
+			else
+			{
+				result = bool_false;
+			}
+			return result;
 		}
 	'''
 	
@@ -231,7 +241,7 @@ class StatemachineC {
 		// can become final
 		{if (finalStateImpactVector.isCompletelyCovered) {'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] == «IF fs.stateVector.offset == i»«fs.shortName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
 		'''} else {'''   return bool_false;'''} }		
-		+ '''}'''
+		+ Strings.newLine + '''}'''
 	}
 	
 	

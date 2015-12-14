@@ -1,10 +1,56 @@
 h1. Generating Java source code
 
-YAKINDU Statechart Tools include code generators for Java, C, and C++ out of the box. The code generators are following a "code-only" approach: They are generating all the code that is needed and do not rely on any additional runtime libraries. The generated code provides a well-defined application programming interface and can be integrated easily with any client code. In this tutorial we will generate Java code representing our *CallHandling* example.
+YAKINDU Statechart Tools include code generators for Java, C, and C++ out of the box. The code generators are following a "code-only" approach: They are generating all the code that is needed and do not rely on any additional runtime libraries. The generated code provides a well-defined application programming interface and can be integrated easily with any client code. In this tutorial we will generate Java code for a sample statechart modeling the handling of a phone call, the *CallHandling* example.
+
+h2. The CallHandling example
+
+The state machine handling a phone call works as follows:
+* After startup, the system is in an idle state and is waiting for incoming calls.
+* When a call comes in, the user can either accept the call or dismiss it.
+* If the users accepts the call and opens a connection, the system is tracking the duration of the call and is waiting for the user to hang up.
+* After hanging up, the system displays the total time of call and then returns to its idle state.
+
+The complete statechart model is shown below:
+
+!(img-rounded shadowed)images/callhandling_model.png(The CallHandling statechart model)!
+
+In order to eventually obtain the *CallHandling* example in the form of executable code, we have to create the model in the statechart editor first, followed by creating a suitable generator model, followed by executing the code generator to create the source code we need.
+
+h3. Creating the statechart model
+
+In the "Getting Started":../03_getting_started/getting_started.html tutorial we have seen how to operate the statechart editor. So let's create a new project now and use the statechart editor to create the *CallHandling* statechart model as outlined above.
+
+In addition to what we have learned in "Getting Started":../03_getting_started/getting_started.html already, there is one new concept: interfaces.
+
+h3. Creating interfaces
+
+Statecharts can describe very complex interactions between a multitude of actors and an even bigger multitude of events these actors can receive or trigger. It is therefore good practice to structure such events and associate them with their respective actors. For this purpose YAKINDU Statecharts Tools provides the concept of so-called *interfaces*.
+
+In the _CallHandling_ example, we have two actors: the user and the phone. Let's model their communication as two interfaces:
+* The _Phone_ interface provides a single incoming event named _incoming_call_.
+* The _User_ interface comprises two incoming events: _accept_call_ and _dismiss_call_.
+
+We have to enter the respective definitions in textual form into the statechart editor. Here's how the interface definitions look like:
+
+bc(prettyprint). interface User:
+    in event accept_call
+    in event dismiss_call
+
+bc(prettyprint). interface Phone:
+    var duration : integer
+    in event incoming_call
+
+As you can see, the _Phone_ interface also has an integer variable _duration_ which will track the duration of the call. The interface definitions above have to go into the statechart editor's definition block on the left-hand side of the statechart editor.
+
+If everything went well, any error markers in the model are gone. Your model should look like the one in the following screenshot:
+
+!(img-rounded shadowed)images/callhandling_example_final.png(The CallHandling statechart modeled in the statechart editor)!
+
+
 
 h2. Creating a generator model
 
-For code generation, SCT uses a textual generator model called *SGen*. The generator model holds key parameters for the code generation process and allows for the latter's customization.
+For code generation, YAKINDU Statechart Tools use a textual generator model called *SGen*. The generator model holds key parameters for the code generation process and allows for the latter's customization.
 
 The first step to code generation is to create a new SGen model. Right-click on the _model_ folder in the project explorer and select _New → Code Generator Model_ from the context menu.
 
@@ -14,7 +60,7 @@ The _YAKINDU Generator Model_ wizard opens. Change the _File name_ to *CallHandl
 
 !images/callhandling_210_generation_new_sgen_model_1.png(Selecting a filename for the generator model)!
 
-From the _Generator_ drop-down menu at the top, select _Yakindu SCT Java Code Generator_.
+From the _Generator_ drop-down menu at the top, select _YAKINDU SCT Java Code Generator_.
 
 In the statechart tree beneath that menu, check the *CallHandling.sct* model, then click _Finish_.
 

@@ -257,6 +257,9 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements I
 					} catch (IllegalAccessException e) {
 						setErrorMessage("Could not access class constructor for class" + clazz + "!");
 						return false;
+					}catch(Throwable t){
+						setErrorMessage(t.getMessage());
+						return false;
 					}
 				}
 			}

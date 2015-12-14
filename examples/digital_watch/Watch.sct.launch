@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.yakindu.sct.simulation.core.launch.statechart">
+<booleanAttribute key="cycleBased" value="true"/>
+<intAttribute key="cyclePeriod" value="100"/>
+<booleanAttribute key="eventDriven" value="false"/>
+<stringAttribute key="filename" value="/digital_watch/Watch.sct"/>
+<stringAttribute key="operationClass" value=""/>
+</launchConfiguration>
