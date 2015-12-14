@@ -11,6 +11,12 @@ The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an 
 
 The source code is provided under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.
 
+## Download & Installation
+
+In addition to the source code provided here on GitHub we also provide ready-tu-use builds for Windows, Linux and OS X.  
+1. Dowload a package from our <a href="http://www.statecharts.org/download.html">download page</a>.
+2. Follow the <a href="https://github.com/Yakindu/statecharts/blob/master/plugins/org.yakindu.sct.doc.user/help/02_installation/installation.textile">installation instructions</a>.
+
 ## How to Contribute
 
 We appreciate any feedback and there are various ways to contribute feedback:
