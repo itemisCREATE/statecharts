@@ -80,6 +80,7 @@ GeneratorModel for yakindu::java {
 		feature Outlet {
 			targetProject = "CallHandling"
 			targetFolder = "src-gen"
+			libraryTargetFolder = "src"
 		}
 	}
 }
