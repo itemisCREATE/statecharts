@@ -14,8 +14,9 @@ The source code is provided under the <a href="http://www.eclipse.org/legal/epl-
 ## Download & Installation
 
 In addition to the source code provided here on GitHub we also provide ready-tu-use builds for Windows, Linux and OS X.  
-1. Dowload a package from our <a href="http://www.statecharts.org/download.html">download page</a>.
-2. Follow the <a href="https://github.com/Yakindu/statecharts/blob/master/plugins/org.yakindu.sct.doc.user/help/02_installation/installation.textile">installation instructions</a>.
+
+1. Dowload a package from our <a href="http://www.statecharts.org/download.html" target="_blank">download page</a>.
+2. Follow the <a href="https://github.com/Yakindu/statecharts/blob/master/plugins/org.yakindu.sct.doc.user/help/02_installation/installation.textile" target="_blank">installation instructions</a>.
 
 ## How to Contribute
 
