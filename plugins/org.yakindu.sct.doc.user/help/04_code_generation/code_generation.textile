@@ -88,7 +88,9 @@ GeneratorModel for yakindu::java {
 p. Let's have a closer look at the listing above:
 * @yakindu::java@ is the unique ID of the Java code generator.
 * The @statechart CallHandling { … }@ block references the statechart model we want to generate code for.
-* The @feature Outlet { … }@ block specifies where the generated code artifacts are to be placed, i.&nbsp;e. in the Eclipse project @CallHandling@ and within that project in the @src-gen@ folder.
+* The @feature Outlet { … }@ block specifies where the generated code artifacts are to be placed:
+** The parameters @targetProject@ and @targetFolder@ define the Eclipse project @CallHandling@ as destination for generated code and within that project the @src-gen@ folder.
+** However, certain source code modules are generated only once and won't change with the underlying statechart. By default, these source code artifacts are generated into the folder specified by the @libraryTargetFolder@ option which by default is @src@. You can change the folder name or even remove the @libraryTargetFolder@ option at all. In the latter case the "library" components are generated into the @targetFolder@.
 
 A statechart reference may contain various configuration features. You will learn more about feature later.
 
