@@ -96,7 +96,7 @@ A statechart reference may contain various configuration features. You will lear
 
 h2. Enhancing the generator model by timing capabilities
 
-However, the default generator model is insufficient yet. The _CallHandling_ statechart model uses _after_ and _every_ expressions. That is, it is dealing with *timed events*, requiring a timer service to trigger them. We can instruct the code generator to provide us with a default timer service implementation by adding the following feature to the generator model:
+However, the default generator model is insufficient yet. The _CallHandling_ statechart model uses _after_ and _every_ expressions. That is, it is dealing with *time events*, requiring a timer service to trigger them. We can instruct the code generator to provide us with a default timer service implementation by adding the following feature to the generator model:
 
 bc(prettyprint). 
 feature GeneralFeatures {
@@ -176,7 +176,7 @@ bc(prettyprint linenums)..
 p. Let's have a detailed look at this client code:
 
 * First, this program creates a new instance of the state machine by calling the default constructor of @CallHandlingStatemachine@ (line 9).
-* Since we are using timed events, the statechart implementation requires an implementation of the @ITimer@ interface. Since we added the @TimerService@ feature to the generator model, the code generator creates a default implementation @org.yakindu.scr.TimerService@ that uses the @java.util.Timer@ class. A new instance of the default @TimerService@ is created and set to the state machine (line 10).
+* Since we are using time events, the statechart implementation requires an implementation of the @ITimer@ interface. Since we added the @TimerService@ feature to the generator model, the code generator creates a default implementation @org.yakindu.scr.TimerService@ that uses the @java.util.Timer@ class. A new instance of the default @TimerService@ is created and set to the state machine (line 10).
 * In line 13, @sm.enter()@ enters the state machine and – via its initial state – activates its *Idle* state.
 * For each interface in the statechart definition block a getter method has been generated, here @getSCIPhone()@ and @getSCIUser()@. You can access all incoming events and all variables via these interfaces. In line 16, the _incoming_call_ event is raised, activating the *Incoming Call* state after the next run cycle has been executed (line 17).
 * In line 20, we raise the _accept_call_ event via the _User_ interface. It activates the *Active Call* state after the next run cycle has been performed (line 21).

@@ -228,7 +228,7 @@ table(scedit).
 
 h2. Simulating the light switch model
 
-Simulating a model means to execute it, raise events manually, have timed and run cycle-based events being triggered automatically, and observe its behaviour.
+Simulating a model means to execute it, raise events manually, have time events and run cycle-based events being triggered automatically, and observe its behaviour.
 
 Start the simulation by right-clicking on the _LightSwitch.sct_ file in the project explorer and selecting _Run As → Statechart Simulation_:
 

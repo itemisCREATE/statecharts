@@ -1546,7 +1546,7 @@ h5. Variable and event access
 
 The getters and setters for each variable and event are also contained in the header file. The method names are matching the following pattern: _statechart_name_<code>Iface</code>_interface_name_@_@[ <code>set</code> | <code>get</code> | <code>raise</code> ]@_@[ _variable_name_ | _event_name_ ]. For example, the getter of the _red_ variable of the _pedestrian_ interface is named @trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle)@.
 
-h4. Timed state machines
+h4. Time-controlled state machines
 
 If a statechart uses timing functionality or external operations, an additional header file is generated. Its name matches the pattern _statechart_name_@Required.h@. This header file defines method hooks the client code has to implement externally.
 
@@ -1820,7 +1820,7 @@ The @StatemachineInterface@ interface specifies the four functions @init()@, @en
 
 ==<!-- The getters and setters for each variable and event are also contained in the header file. The method names are matching the following pattern: _statechart_name_<code>Iface</code>_interface_name_@_@[ <code>set</code> | <code>get</code> | <code>raise</code> ]@_@[ _variable_name_ | _event_name_ ]. For example, the getter of the variable _red_ of the _pedestrian_ interface is named @trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle)@. -->==
 
-h4. Timed state machines
+h4. Time-controlled state machines
 
 If a statechart uses timing functionality, additional classes are generated.
 
