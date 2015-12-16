@@ -1346,6 +1346,7 @@ You will find the generated code in the _src-gen_ folder of the traffic light ex
 The C code generator generates three header files. The first one is _sc_types.h_:
 
 bc(prettyprint).. 
+
 #ifndef SC_TYPES_H_
 #define SC_TYPES_H_
 
@@ -1355,20 +1356,30 @@ extern "C" {
 
 #include <stdint.h>
 #include <stdbool.h>
- 				
-typedef int_fast16_t  sc_short;
-typedef uint_fast16_t sc_ushort;
-typedef int32_t       sc_integer; 
-typedef uint32_t      sc_uinteger; 
-typedef double        sc_real;
-typedef char*         sc_string;
 
-typedef void*         sc_eventid;
+#define sc_string		char*
+ 
+typedef bool			sc_boolean;
+typedef int_fast16_t	sc_short;
+typedef uint_fast16_t	sc_ushort;
+typedef int32_t			sc_integer; 
+typedef uint32_t		sc_uinteger; 
+typedef double			sc_real;
+
+typedef void*			sc_eventid;
 
 #ifdef __cplusplus
 }
-#endif 
-#define sc_boolean bool
+#endif
+
+#ifndef null
+	#ifdef __cplusplus
+		#define null 0
+	#else
+		#define null ((void *)0)
+	#endif
+#endif
+
 #define bool_true true
 #define bool_false false
 
@@ -1376,6 +1387,7 @@ typedef void*         sc_eventid;
 p. The header file contains some basic definitions for C++ compiler compatibility and typedefs to map the YAKINDU statechart types to C types. The next header file is named after the statechart. In case of the traffic light example it is called _TrafficLightWaiting.h_:
 
 bc(prettyprint).. 
+
 #ifndef TRAFFICLIGHTWAITING_H_
 #define TRAFFICLIGHTWAITING_H_
 
@@ -1388,64 +1400,66 @@ extern "C" {
 /*! \file Header of the state machine 'TrafficLightWaiting'.
 */
 
-//! enumeration of all states 
+/*! Enumeration of all states */ 
 typedef enum {
-	TrafficLightWaiting_main_region_on ,
-	TrafficLightWaiting_main_region_on_r1_StreetGreen ,
-	TrafficLightWaiting_main_region_on_r1_PedWaiting ,
-	TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOn ,
-	TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOff ,
-	TrafficLightWaiting_main_region_on_r1_StreetAttention ,
-	TrafficLightWaiting_main_region_on_r1_StreetRed ,
-	TrafficLightWaiting_main_region_on_r1_PedestrianGreen ,
-	TrafficLightWaiting_main_region_on_r1_PedestrianRed ,
-	TrafficLightWaiting_main_region_on_r1_StreetPrepared ,
-	TrafficLightWaiting_main_region_off ,
-	TrafficLightWaiting_main_region_off_r1_YellowOn ,
-	TrafficLightWaiting_main_region_off_r1_YellowOff ,
+	TrafficLightWaiting_main_region_on,
+	TrafficLightWaiting_main_region_on_r1_StreetGreen,
+	TrafficLightWaiting_main_region_on_r1_PedWaiting,
+	TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOn,
+	TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOff,
+	TrafficLightWaiting_main_region_on_r1_StreetAttention,
+	TrafficLightWaiting_main_region_on_r1_StreetRed,
+	TrafficLightWaiting_main_region_on_r1_PedestrianGreen,
+	TrafficLightWaiting_main_region_on_r1_PedestrianRed,
+	TrafficLightWaiting_main_region_on_r1_StreetPrepare,
+	TrafficLightWaiting_main_region_off,
+	TrafficLightWaiting_main_region_off_r1_YellowOn,
+	TrafficLightWaiting_main_region_off_r1_YellowOff,
 	TrafficLightWaiting_last_state
 } TrafficLightWaitingStates;
 
-//! Type definition of the data structure for the TrafficLightWaitingIfaceTrafficLight interface scope.
+/*! Type definition of the data structure for the TrafficLightWaitingIfaceTrafficLight interface scope. */
 typedef struct {
-	sc_boolean  red;
-	sc_boolean  yellow;
-	sc_boolean  green;
+	sc_boolean red;
+	sc_boolean yellow;
+	sc_boolean green;
 } TrafficLightWaitingIfaceTrafficLight;
 
-//! Type definition of the data structure for the TrafficLightWaitingIfacePedestrian interface scope.
+/*! Type definition of the data structure for the TrafficLightWaitingIfacePedestrian interface scope. */
 typedef struct {
-	sc_boolean  request;
-	sc_boolean  red;
-	sc_boolean  green;
+	sc_boolean request;
+	sc_boolean red;
+	sc_boolean green;
 } TrafficLightWaitingIfacePedestrian;
 
-//! Type definition of the data structure for the TrafficLightWaitingIface interface scope.
+/*! Type definition of the data structure for the TrafficLightWaitingIface interface scope. */
 typedef struct {
 	sc_boolean pedestrianRequest_raised;
 	sc_boolean onOff_raised;
 } TrafficLightWaitingIface;
 
-//! Type definition of the data structure for the TrafficLightWaitingTimeEvents interface scope.
+/*! Type definition of the data structure for the TrafficLightWaitingTimeEvents interface scope. */
 typedef struct {
-	sc_boolean TrafficLightWaiting_main_region_on_r1_PedWaiting_time_event_0_raised;
-	sc_boolean TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOn_time_event_0_raised;
-	sc_boolean TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOff_time_event_0_raised;
-	sc_boolean TrafficLightWaiting_main_region_on_r1_StreetAttention_time_event_0_raised;
-	sc_boolean TrafficLightWaiting_main_region_on_r1_StreetRed_time_event_0_raised;
-	sc_boolean _main_region_on_r1_PedestrianGreen_time_event_0_raised;
-	sc_boolean TrafficLightWaiting_main_region_on_r1_PedestrianRed_time_event_0_raised;
-	sc_boolean TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised;
-	sc_boolean TrafficLightWaiting_main_region_off_r1_YellowOn_time_event_0_raised;
-	sc_boolean TrafficLightWaiting_main_region_off_r1_YellowOff_time_event_0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedWaiting_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOn_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOff_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_StreetAttention_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_StreetRed_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedestrianGreen_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedestrianRed_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_StreetPrepare_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_off_r1_YellowOn_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_off_r1_YellowOff_tev0_raised;
 } TrafficLightWaitingTimeEvents;
 
 
-//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
+/*! Define dimension of the state configuration vector for orthogonal states. */
 #define TRAFFICLIGHTWAITING_MAX_ORTHOGONAL_STATES 1
 
-/*! Type definition of the data structure for the TrafficLightWaiting state machine.
-This data structure has to be allocated by the client code. */
+/*! 
+ * Type definition of the data structure for the TrafficLightWaiting state machine.
+ * This data structure has to be allocated by the client code. 
+ */
 typedef struct {
 	TrafficLightWaitingStates stateConfVector[TRAFFICLIGHTWAITING_MAX_ORTHOGONAL_STATES];
 	sc_ushort stateConfVectorPosition; 
@@ -1465,38 +1479,36 @@ extern void trafficLightWaiting_enter(TrafficLightWaiting* handle);
 /*! Deactivates the state machine */
 extern void trafficLightWaiting_exit(TrafficLightWaiting* handle);
 
-/*! Performs a 'run-to-completion' step. */
+/*! Performs a 'run to completion' step. */
 extern void trafficLightWaiting_runCycle(TrafficLightWaiting* handle);
 
 /*! Raises a time event. */
-extern void trafficLightWaiting_raiseTimeEvent(TrafficLightWaiting* handle, sc_eventid evid);
+extern void trafficLightWaiting_raiseTimeEvent(const TrafficLightWaiting* handle, sc_eventid evid);
 
 /*! Gets the value of the variable 'red' that is defined in the interface scope 'TrafficLight'. */ 
-extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_red(TrafficLightWaiting* handle);
+extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_red(const TrafficLightWaiting* handle);
 /*! Sets the value of the variable 'red' that is defined in the interface scope 'TrafficLight'. */ 
 extern void trafficLightWaitingIfaceTrafficLight_set_red(TrafficLightWaiting* handle, sc_boolean value);
 /*! Gets the value of the variable 'yellow' that is defined in the interface scope 'TrafficLight'. */ 
-extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_yellow(TrafficLightWaiting* handle);
+extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_yellow(const TrafficLightWaiting* handle);
 /*! Sets the value of the variable 'yellow' that is defined in the interface scope 'TrafficLight'. */ 
 extern void trafficLightWaitingIfaceTrafficLight_set_yellow(TrafficLightWaiting* handle, sc_boolean value);
 /*! Gets the value of the variable 'green' that is defined in the interface scope 'TrafficLight'. */ 
-extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_green(TrafficLightWaiting* handle);
+extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_green(const TrafficLightWaiting* handle);
 /*! Sets the value of the variable 'green' that is defined in the interface scope 'TrafficLight'. */ 
 extern void trafficLightWaitingIfaceTrafficLight_set_green(TrafficLightWaiting* handle, sc_boolean value);
-
 /*! Gets the value of the variable 'request' that is defined in the interface scope 'Pedestrian'. */ 
-extern sc_boolean trafficLightWaitingIfacePedestrian_get_request(TrafficLightWaiting* handle);
+extern sc_boolean trafficLightWaitingIfacePedestrian_get_request(const TrafficLightWaiting* handle);
 /*! Sets the value of the variable 'request' that is defined in the interface scope 'Pedestrian'. */ 
 extern void trafficLightWaitingIfacePedestrian_set_request(TrafficLightWaiting* handle, sc_boolean value);
 /*! Gets the value of the variable 'red' that is defined in the interface scope 'Pedestrian'. */ 
-extern sc_boolean trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle);
+extern sc_boolean trafficLightWaitingIfacePedestrian_get_red(const TrafficLightWaiting* handle);
 /*! Sets the value of the variable 'red' that is defined in the interface scope 'Pedestrian'. */ 
 extern void trafficLightWaitingIfacePedestrian_set_red(TrafficLightWaiting* handle, sc_boolean value);
 /*! Gets the value of the variable 'green' that is defined in the interface scope 'Pedestrian'. */ 
-extern sc_boolean trafficLightWaitingIfacePedestrian_get_green(TrafficLightWaiting* handle);
+extern sc_boolean trafficLightWaitingIfacePedestrian_get_green(const TrafficLightWaiting* handle);
 /*! Sets the value of the variable 'green' that is defined in the interface scope 'Pedestrian'. */ 
 extern void trafficLightWaitingIfacePedestrian_set_green(TrafficLightWaiting* handle, sc_boolean value);
-
 /*! Raises the in event 'pedestrianRequest' that is defined in the default interface scope. */ 
 extern void trafficLightWaitingIface_raise_pedestrianRequest(TrafficLightWaiting* handle);
 
@@ -1504,9 +1516,20 @@ extern void trafficLightWaitingIface_raise_pedestrianRequest(TrafficLightWaiting
 extern void trafficLightWaitingIface_raise_onOff(TrafficLightWaiting* handle);
 
 
+/*!
+ * Checks if the statemachine is active (until 2.4.1 this method was used for states).
+ * A statemachine is active if it was entered. It is inactive if it has not been entered at all or if it was exited.
+ */
+extern sc_boolean trafficLightWaiting_isActive(const TrafficLightWaiting* handle);
 
-/*! Checks if the specified state is active. */
-extern sc_boolean trafficLightWaiting_isActive(TrafficLightWaiting* handle, TrafficLightWaitingStates state);
+/*!
+ * Checks if all active states are final. 
+ * If there are no active states then the statemachine is considered as inactive and this method returns false.
+ */
+extern sc_boolean trafficLightWaiting_isFinal(const TrafficLightWaiting* handle);
+
+/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
+extern sc_boolean trafficLightWaiting_isStateActive(const TrafficLightWaiting* handle, TrafficLightWaitingStates state);
 
 #ifdef __cplusplus
 }
@@ -1524,7 +1547,7 @@ In the header file the method names are made up of the statechart name followed 
 bc(prettyprint).. 
 extern void trafficLightWaiting_init(TrafficLightWaiting* handle);
 extern void trafficLightWaiting_enter(TrafficLightWaiting* handle);
-extern void trafficLightWaiting_exitTrafficLightWaiting* handle);
+extern void trafficLightWaiting_exit(TrafficLightWaiting* handle);
 extern void trafficLightWaiting_runCycle(TrafficLightWaiting* handle);
 p. 
 
@@ -1553,6 +1576,14 @@ If a statechart uses timing functionality or external operations, an additional 
 The traffic light example uses timing funtionality, namely _after_ clauses. To support time-controlled behavior, such an additional header file is generated.
 
 bc(prettyprint).. 
+
+#ifndef TRAFFICLIGHTWAITINGREQUIRED_H_
+#define TRAFFICLIGHTWAITINGREQUIRED_H_
+
+#include "sc_types.h"
+#include "TrafficLightWaiting.h"
+
+#ifdef __cplusplus
 extern "C" {
 #endif 
 
@@ -1563,56 +1594,58 @@ This is a state machine uses time events which require access to a timing servic
 	- trafficLightWaiting_unsetTimer
 are defined.
 
-		
-These functions will be called during a 'run-to-completion step' (runCycle) of the statechart. 
+These functions will be called during a 'run to completion step' (runCycle) of the statechart. 
 There are some constraints that have to be considered for the implementation of these functions:
 	- never call the statechart API functions from within these functions.
 	- make sure that the execution time is as short as possible.
  
 */
 
-//
-// This is a timed state machine that requires timer services
-// 
 
-//! This function has to set up timers for the time events that are required by the state machine.
+
+
+/*!
+ * This is a timed state machine that requires timer services
+ */ 
+
+/*! This function has to set up timers for the time events that are required by the state machine. */
 /*! 
 	This function will be called for each time event that is relevant for a state when a state will be entered.
 	\param evid An unique identifier of the event.
 	\time_ms The time in milli seconds
 	\periodic Indicates the the time event must be raised periodically until the timer is unset 
 */
-extern void trafficLightWaiting_setTimer(const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
+extern void trafficLightWaiting_setTimer(TrafficLightWaiting* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 
-//! This function has to unset timers for the time events that are required by the state machine.
+/*! This function has to unset timers for the time events that are required by the state machine. */
 /*! 
 	This function will be called for each time event taht is relevant for a state when a state will be left.
 	\param evid An unique identifier of the event.
 */
-extern void trafficLightWaiting_unsetTimer(const sc_eventid evid);
+extern void trafficLightWaiting_unsetTimer(TrafficLightWaiting* handle, const sc_eventid evid);
 
 #ifdef __cplusplus
 }
 #endif 
 
 #endif /* TRAFFICLIGHTWAITINGREQUIRED_H_ */
-p. Basically the proper time handling has to be implemented by the developer, because timer functions generally depend on the hardware target used. So for each hardware target the client code must provide a method to set a timer and another method to reset it. The methods have to be implemented externally and linked to the generated code.
+p. Basically the proper time handling has to be implemented by the developer, because timer functions generally depend on the hardware target used. So for each hardware target the client code must provide a method to set a timer and another method to unset it. These methods have to be implemented externally and linked to the generated code.
 
 p. The following methods are dealing with timing functionality:
 
 h5. Method setTimer
 
-p. A state machine calls the @setTimer()@ method – short for the method's full name like e.&nbsp;g. @trafficLightWaiting_setTimer(const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic)@ – to tell the timer service that it has to start a timer for the given time event identifier and raise it after the period of time specified by the _time_ms_ parameter has expired. It is important to only start a timer thread or a hardware timer interrupt within the @setTimer()@ method and avoid any time-consuming operations like extensive computations, sleeping or waiting. Never call the statechart API functions from within these functions! Otherwise the state machine execution might hang within the timer service or might not show the expected runtime behavior.
+p. A state machine calls the @setTimer()@ method – short for the method's full name like e.&nbsp;g. @void trafficLightWaiting_setTimer(TrafficLightWaiting* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic)@ – to tell the timer service that it has to start a timer for the given time event identifier and raise it after the period of time specified by the _time_ms_ parameter has expired. It is important to only start a timer thread or a hardware timer interrupt within the @setTimer()@ method and avoid any time-consuming operations like extensive computations, sleeping or waiting. Never call the statechart API functions from within these functions! Otherwise the state machine execution might hang within the timer service or might not show the expected runtime behavior.
 
 In order to have the timer service raise the time event periodically, the parameter _periodic_ must be _true_.
 
 h5. Method unsetTimer
 
-p. The state machine calls the method @trafficLightWaiting_unsetTimer(const sc_eventid evid)@ to notify the timer service to unset the timer for the given event ID.
+p. The state machine calls the method @trafficLightWaiting_setTimer(TrafficLightWaiting* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic)@ to notify the timer service to unset the timer for the given event ID.
 
 h5. Method raiseTimeEvent
 
-p. In order to notify the state machine about the occurence of a time event after a period of time has expired, the @raiseTimeEvent()@ method – defined in the header file of the state machine – is called on the state machine. In the case of the traffic light example it is named @trafficLightWaiting_raiseTimeEvent(TrafficLightWaiting* handle, sc_eventid evid)@ (in file _TrafficLightWaiting.h_).
+p. In order to notify the state machine about the occurence of a time event after a period of time has expired, the @raiseTimeEvent()@ method – defined in the header file of the state machine – is called on the state machine. In the case of the traffic light example it is named @trafficLightWaiting_raiseTimeEvent(const TrafficLightWaiting* handle, sc_eventid evid)@ (in file _TrafficLightWaiting.h_).
 
 The time event is recognized by the state machine and will be processed during the next run cycle.
 
@@ -1627,10 +1660,11 @@ YAKINDU Statechart Tools support client code operations that can be used by a st
 Let's have a look at the generated code:
 
 bc(prettyprint).. 
-#ifndef DEFAULTREQUIRED_H_
-#define DEFAULTREQUIRED_H_
+#ifndef DEFAULTSMREQUIRED_H_
+#define DEFAULTSMREQUIRED_H_
 
 #include "sc_types.h"
+#include "DefaultSM.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -1638,27 +1672,25 @@ extern "C" {
 
 /*! \file This header defines prototypes for all functions that are required by the state machine implementation.
 
-
 This state machine makes use of operations declared in the state machines interface or internal scopes. Thus the function prototypes:
-	- defaultIface_myOperation
+	- defaultSMIfaceSample_myOperation
 are defined.
-		
-These functions will be called during a 'run-to-completion step' (runCycle) of the statechart. 
+
+These functions will be called during a 'run to completion step' (runCycle) of the statechart. 
 There are some constraints that have to be considered for the implementation of these functions:
 	- never call the statechart API functions from within these functions.
 	- make sure that the execution time is as short as possible.
  
 */
+extern sc_integer defaultSMIfaceSample_myOperation(DefaultSM* handle, const sc_integer p1, const sc_boolean p2);
 
-extern sc_integer defaultIface_myOperation(const sc_integer param1, const sc_boolean param2);
 
 #ifdef __cplusplus
 }
 #endif 
 
-#endif /* DEFAULTREQUIRED_H_ */
-
-p. An additional method @sc_integer defaultIface_myOperation(const sc_integer param1, const sc_boolean param2)@ has been generated. This method has to be implemented and linked with the generated code, so that the state machine can use it.
+#endif /* DEFAULTSMREQUIRED_H_ */
+p. An additional method @sc_integer defaultSMIfaceSample_myOperation(DefaultSM* handle, const sc_integer p1, const sc_boolean p2)@ has been generated. This method has to be implemented and linked with the generated code, so that the state machine can use it.
 
 h4(#CIntegratingGeneratedCode). Integrating generated code
 
