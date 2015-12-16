@@ -1082,7 +1082,7 @@ For variables, the code generator creates getter and setter methods, here @boole
 
 The code generator also creates appropriately named getter methods in the enclosing interface which can be used to acquire the nested interfaces, here: @SCISample getSCISample()@.
 
-The nesting interface is implemented by the generated state machine source code. Each nested interface is implemented as an internal class of the state machine class. The latter holds instances of the nested interface implementations and provides them via getter methods. Have a look at (some parts of) the source code generated for the _Sample_ interface:
+The nesting interface is implemented by the generated state machine source code. Each nested interface is implemented as an internal class of the state machine class. The latter holds instances of the nested interface implementations and provides them via getter methods. Have a look at (some snippets of) the source code generated for the _Sample_ interface:
 
 bc(prettyprint).. 
 import org.yakindu.scr.ITimer;
@@ -1565,7 +1565,7 @@ p.
 ## Execute entry actions of the new state.
 # Clear list of incoming events.
 
-h5. Variable and event access
+h5. Accessing variables and events
 
 The getters and setters for each variable and event are also contained in the header file. The method names are matching the following pattern: _statechart_name_<code>Iface</code>_interface_name_@_@[ <code>set</code> | <code>get</code> | <code>raise</code> ]@_@[ _variable_name_ | _event_name_ ]. For example, the getter of the _red_ variable of the _pedestrian_ interface is named @trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle)@.
 
@@ -1783,13 +1783,15 @@ You will find the generated code in the _src-gen_ folder of the traffic light ex
 
 The _StatemachineInterface.h_ header file defines the fundamental state machine interface methods. This file also contains the definition of the abstract class @StatemachineInterface@ which contains pure virtual functions only. It is needed by each particular state machine and is independend from concrete ones.
 
+h4. Statemachine class
+
+The state machine source code is generated as a C++ class with the same name as the statechart. For example, if the statechart is named _DefaultSM_ the C++ class will also be called _DefaultSM_ and will be generated as the source code file _DefaultSM.cpp_. 
+
 h4. Abstract class StatemachineInterface
 
 Each generated state machine implements the interface @StatemachineInterface@:
 
 bc(prettyprint).. 
-package org.yakindu.sct.examples.trafficlight.cyclebased;
-
 #ifndef STATEMACHINEINTERFACE_H_
 #define STATEMACHINEINTERFACE_H_
 
@@ -1820,6 +1822,18 @@ class StatemachineInterface {
 		* Start a run-to-completion cycle.
 		*/
 		virtual void runCycle() = 0;
+		
+		/*
+		* Checks if the statemachine is active. 
+	 	* A statemachine is active if it was entered. It is inactive if it has not been entered at all or if it was exited.
+	 	*/	
+		virtual	sc_boolean isActive() = 0;
+		
+		/*
+		* Checks if all active states are final. 
+	 	* If there are no active states then the statemachine is considered as inactive and this method returns false.
+	 	*/
+		virtual sc_boolean isFinal() = 0;
 };
 
 inline StatemachineInterface::~StatemachineInterface() {}
@@ -1831,7 +1845,7 @@ The generated code contains fundamental methods to initialize, enter, and exit a
 
 The @StatemachineInterface@ interface specifies the four functions @init()@, @enter()@, @exit()@ and @runCycle()@.
 
-* The @init()@ function is used to initialize the internal objects of the state machine right after its instantiation. Variables are initialized to their respective default value. If the statechart defines initialized variables, these initializations are also done in the @init()@ function.
+* The @init()@ function is used to initialize the internal objects of the state machine right after its instantiation. Variables are initialized to their respective default values. If the statechart defines initialized variables, these initializations are also done in the @init()@ function.
 * The @enter()@ function must be called to enter the state machine. It brings the state machine to a well-defined state.
 * The @exit()@ function is used to leave a state machine statefully. If for example a history state is used in one of the top regions, the last active state is stored and the state machine is left via @exit()@. Re-entering it via @enter()@ continues to work with the saved state.
 * The @runCycle()@ function is used to trigger a run-to-completion step in which the state machine evaluates arising events and computes possible state changes. Somewhat simplified, a run-to-completion cycle consists of the following steps:
@@ -1846,11 +1860,6 @@ The @StatemachineInterface@ interface specifies the four functions @init()@, @en
 # Clear list of incoming events.
 
 
-==<!-- h5. Variable and event access -->==
-
-==<!-- Do we need some equivalent to the C section here? Here's the C text: -->==
-
-==<!-- The getters and setters for each variable and event are also contained in the header file. The method names are matching the following pattern: _statechart_name_<code>Iface</code>_interface_name_@_@[ <code>set</code> | <code>get</code> | <code>raise</code> ]@_@[ _variable_name_ | _event_name_ ]. For example, the getter of the variable _red_ of the _pedestrian_ interface is named @trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle)@. -->==
 
 h4. Time-controlled state machines
 
@@ -1858,7 +1867,7 @@ If a statechart uses timing functionality, additional classes are generated.
 
 The traffic light example uses timing funtionality, namely _after_ clauses. To support time-controlled behavior, the abstract classes @TimedStatemachineInterface@ and @TimerInterface@ are generated.
 
-The @TimedStatemachineInterface@ interface extends the generated state machine by a @TimerInterface@ data member. The client code must provide an implementation of that interface. ==<!-- Java: It may use the @TimerService@, an @ITimerService@ implementation that is also generated. -->==
+The @TimedStatemachineInterface@ interface extends the generated state machine by a @TimerInterface@ data member. The client code must provide an implementation of that interface.
 
 @TimedStatemachineInterface@ also specifies the callback function @raiseTimeEvent(sc_eventid event)@, enabling the timer service to raise time events.
 
@@ -1898,7 +1907,9 @@ class TimedStatemachineInterface {
 inline TimedStatemachineInterface::~TimedStatemachineInterface() {}
 
 #endif /* TIMEDSTATEMACHINEINTERFACE_H_ */
-p. Basically the proper time handling has to be implemented by the developer, because timer functions generally depend on the hardware target used. So for each hardware target a timer service class implementing the @TimerInterface@ interface has to be developed. Let's have a look at the @TimerInterface@ interface:
+p. Basically the proper time handling has to be implemented by the developer, because timer functions generally depend on the hardware target used. So for each hardware target a timer service class implementing the @TimerInterface@ interface has to be developed.
+
+Let's have a look at the @TimerInterface@ interface:
 
 bc(prettyprint).. 
 #ifndef TIMERINTERFACE_H_
@@ -1910,7 +1921,7 @@ bc(prettyprint)..
 class TimedStatemachineInterface;
 
 /*
- * Basic interface for state machines.
+ * Basic interface for statemachines.
  */
 class TimerInterface {
 	public:
@@ -1941,7 +1952,7 @@ p. The @TimerInterface@ interface defines the following functions dealing with t
 
 h5. Function setTimer
 
-p. A state machine calls the @setTimer(TimedStatemachineInterface* statemachine, sc_eventid event, sc_integer time, sc_boolean isPeriodic)@ function to tell the timer service that it has to start a timer for the given time event and raise it after the period of time specified by the _time_ parameter has expired. It is important to only start a timer thread or a hardware timer interrupt within the @setTimer()@ function and avoid any time-consuming operations like extensive computations, @Thread.sleep(…)@ or waiting. Otherwise the state machine execution might hang within the timer service or might not show the expected runtime behavior.
+p. A state machine calls the @setTimer(TimedStatemachineInterface* statemachine, sc_eventid event, sc_integer time, sc_boolean isPeriodic)@ function to tell the timer service that it has to start a timer for the given time event and raise it after the period of time specified by the _time_ parameter has expired. It is important to only start a timer thread or a hardware timer interrupt within the @setTimer()@ function and to avoid any time-consuming operations like extensive computations, @Thread.sleep(…)@ or waiting. Otherwise the state machine execution might hang within the timer service or might not show the expected runtime behavior.
 
 In order to have the timer service raise the time event periodically, the parameter _isPeriodic_ must be _true_.
 
@@ -1951,82 +1962,91 @@ p. The state machine calls the function @unsetTimer(TimedStatemachineInterface* 
 
 h5. Function raiseTimeEvent
 
-p. In order to notify the state machine about the occurence of a time event after a period of time has expired, the function @raiseTimeEvent(sc_eventid event)@ is called on the state machine. For this purpose, the state machine must implement the @TimedStatemachineInterface@) interface.
+p. In order to notify the state machine about the occurence of a time event after a period of time has expired, the function @raiseTimeEvent(sc_eventid event)@ must be called on the state machine. For this purpose, the state machine must implement the @TimedStatemachineInterface@) interface.
 
 The time event is recognized by the state machine and will be processed during the next run cycle.
 
 You can conclude that in order to process the time events raised by the timing service without too much latency, the runtime environment has to call the state machine's @runCycle()@ function as frequently as needed. Consider for example a time event which is raised by the timer service after 500 ms. However, if the runtime environment calls the state machine's @runCycle()@ function with a frequency of once per 1000 ms only, the event will quite likely not be processed at the correct points in time.
 
-h4(#CppInterVar). Interfaces, Variable and Event access
+h4(#CppInterVar). Accessing interfaces, variables and events
 
-==<!-- FIXME: It should be made clear what a statechart interface is, in contrast to e. g. am interface in a programming language. -->==
+In a YAKINDU statechart, variables and events are contained in so-called *interfaces*. There can be at most one default, unnamed interface plus zero or more named interfaces. In the generated C++ code, these interfaces can be found as internal subclasses of the main state machine class. This outer class' name is derived from the statechart's name while the internal subclasses' names are derived from the respective names of the statechart interfaces.
 
-In a YAKINDU statechart, variables and events are contained in *interfaces*. There can be a single default, unnamed interface plus zero or more named interfaces. In the generated C++ code, these interfaces are defined as internal subclasses inside of the main state machine class. Let's have a look at the following sample statechart interface declaration:
+Let's have a look at the following sample statechart interface declaration of a statechart named _DefaultSM_:
 
 bc(prettyprint).. 
-interface:
+interface Sample:
 	var a:boolean
 	in event evA:boolean
 	out event evB:integer
-p. The generated interface code looks like following:
+p. The generated interface code is shown below. Since the statechart's name is _DefaultSM_ the state machine class' name is also _DefaultSM_, to be found in the _DefaultSM.h_ file. The following is a snippet from that file.
 
 bc(prettyprint).. 
-//! Inner class for SCInterface interface scope.
-class SCInterface {
-	
-	public:
-		/*! Gets the value of the variable 'a' that is defined in the default interface scope. */ 
-		sc_boolean get_a();
-		
-		/*! Sets the value of the variable 'a' that is defined in the default interface scope. */ 
-		void set_a(sc_boolean value);
-		
-		/*! Raises the in event 'evA' that is defined in the default interface scope. */ 
-		void raise_evA(sc_boolean value);
-		
-		/*! Checks if the out event 'evB' that is defined in the default interface scope has been raised. */ 
-		sc_boolean isRaised_evB();
-		
-		/*! Gets the value of the out event 'evB' that is defined in the default interface scope. */ 
-		sc_integer get_evB_value();
-		
-		
-	private:
-		friend class Default;
-		sc_boolean a;
-		sc_boolean evA_raised;
-		sc_boolean evA_value;
-		sc_boolean evB_raised;
-		sc_integer evB_value;
-};
-p. The anonymous interface in a statechart is generated as the C++ class @SCInterface@. An incoming event _evA_ is generated as the raise function @raise_evA(boolean value)@. Since the event is of type boolean the function has a boolean parameter. For an outgoing event _evB_ the functions @isRaised_evB()@ and @get_evB_value()@ are generated. The former can be used to determine whether the event has already been raised by the state machine or not. The latter serves to query the boolean value of the event. For variables, the code generator creates getter and setter methods. Additionally, the enclosing interface contains getter methods to acquire nested interfaces.
+		//! Inner class for Sample interface scope.
+		class SCI_Sample {
+			
+			public:
+				/*! Gets the value of the variable 'a' that is defined in the interface scope 'Sample'. */ 
+				sc_boolean get_a();
+				
+				/*! Sets the value of the variable 'a' that is defined in the interface scope 'Sample'. */ 
+				void set_a(sc_boolean value);
+				
+				/*! Raises the in event 'evA' that is defined in the interface scope 'Sample'. */ 
+				void raise_evA(sc_boolean value);
+				
+				/*! Checks if the out event 'evB' that is defined in the interface scope 'Sample' has been raised. */ 
+				sc_boolean isRaised_evB();
+				
+				/*! Gets the value of the out event 'evB' that is defined in the interface scope 'Sample'. */ 
+				sc_integer get_evB_value();
+				
+				
+			private:
+				friend class DefaultSM;
+				sc_boolean a;
+				sc_boolean evA_raised;
+				sc_boolean evA_value;
+				sc_boolean evB_raised;
+				sc_integer evB_value;
+		};
+p. A statechart interface is generated as an internal subclass within the state machine class. The subclass' name is derived from the statechart interface's name by prepending the string @SCI_@.
 
-The nesting interface is implemented by the state machine itself. Each nested interface is implemented as an internal class. The nesting class holds an instance of each nested interface class implementation and provides them via getter methods. Have a look at the code snipped generated from the unnamed default interface implementation:
+A special case is the unnamed statechart interface: It is generated as the C++ subclass @SCInterface@.
+
+An incoming event _evA:boolean_ is generated as the raise function @raise_evA(boolean value)@. Since the event is of type _boolean_ the function has a _boolean_ parameter.
+
+For an outgoing event _evB:integer_ the functions @isRaised_evB()@ and @get_evB_value()@ are generated. The former can be used to determine whether the event has already been raised by the state machine or not. The latter serves to query the value of the event.
+
+For variables, the code generator creates getter and setter functions, here @sc_boolean get_a()@ and @void set_a(sc_boolean value)@.
+
+The code generator also creates appropriately named getter functions in the enclosing class which can be used to acquire the inner classes, here: @SCI_Sample* getSCI_Sample()@.
+
+The nesting class is the generated state machine source code. It holds instances of the nested interface class implementations and provides them via getter functions. Have a look at (some snippets of) the source code generated for the _Sample_ statechart interface:
 
 bc(prettyprint).. 
-void Default::SCInterface::raise_evA(sc_boolean value) {
+void DefaultSM::SCI_Sample::raise_evA(sc_boolean value) {
 	evA_value = value;
 	evA_raised = true;
 }
 
-sc_boolean Default::SCInterface::isRaised_evB() {
+sc_boolean DefaultSM::SCI_Sample::isRaised_evB() {
 	return evB_raised;
 }
 
-sc_integer Default::SCInterface::get_evB_value() {
+sc_integer DefaultSM::SCI_Sample::get_evB_value() {
 	return evB_value;
 }
 
-sc_boolean Default::SCInterface::get_a() {
+
+sc_boolean DefaultSM::SCI_Sample::get_a() {
 	return a;
 }
 
-void Default::SCInterface::set_a(sc_boolean value) {
+void DefaultSM::SCI_Sample::set_a(sc_boolean value) {
 	a = value;
 }
-p. The name of the default, unnamed statechart interface class is generated as @SCInterface@. If a statechart interface has a dedicated name, e.&nbsp;g. _MyInterface_, then the C++ class name will be the statechart interface's name, prepended with string @SCI@, e.&nbsp;g. @SCIMyInterface@.
-
-The value of an event can be accessed only if the event has been processed in a run-to-completion step. Otherwise the event could contain an illegal value.
+p. The value of an event can be accessed only if the event has been processed in a run-to-completion step. Otherwise the event could contain an illegal value.
 
 ==<!-- h4(#CppInterfaceObservers). Interface observers -->==
 
@@ -2038,32 +2058,34 @@ YAKINDU Statechart Tools support client code operations that can be used by a st
 
 !images/operationExample.png(Specifying an operation callback in the model)!
 
-Let's have a look at the additionally generated code for operation support in the _default.h_ header file:
+Let's have a look at the additionally generated code for operation support in the _DefaultSM.h_ header file:
 
 bc(prettyprint).. 
-//! Inner class for default interface scope operation callbacks.
-class DefaultSCI_OCB {
-	public:
-		virtual sc_integer myOp(sc_integer param1, sc_boolean param2) = 0;
-};
-
-/*! Set the working instance of the operation callback interface 'DefaultSCI_OCB'. */
-void setDefaultSCI_OCB(DefaultSCI_OCB* operationCallback);
-p. An additional interface @DefaultSCI_OCB@ with the pure virtual function @myOp(sc_integer param1, sc_boolean param2)@ has been generated. This interface has to be implemented, and an instance of the implementing class has to be provided to the state machine via the @setDefaultSCI_OCB(DefaultSCI_OCB* operationCallback)@ function, so that the state machine can use it.
+				//! Inner class for Sample interface scope operation callbacks.
+				class SCI_Sample_OCB {
+					public:
+						virtual ~SCI_Sample_OCB() = 0;
+						
+						virtual sc_integer myOperation(sc_integer p1, sc_boolean p2) = 0;
+				};
+				
+				/*! Set the working instance of the operation callback interface 'SCI_Sample_OCB'. */
+				void setSCI_Sample_OCB(SCI_Sample_OCB* operationCallback);
+p. An additional interface @SCI_Sample_OCB@ with the pure virtual function @sc_integer myOperation(sc_integer p1, sc_boolean p2)@ has been generated. This interface has to be implemented, and an instance of the implementing class has to be provided to the state machine via the @setSCI_Sample_OCB(SCI_Sample_OCB* operationCallback)@ function, so that the state machine can use it.
 
 bc(prettyprint).. 
-#include "default.h"
+#include "DefaultSM.h"
 
-sc_integer Default::DefaultSCI_OCB::myOp(sc_integer param1, sc_boolean param2) {
+sc_integer DefaultSM::SCI_Sample_OCB::myOperation(sc_integer p1, sc_boolean p2) {
 	// Your operation code should be placed here;
 	return 0;
 }
 
 int main(int argc, char *argv[]) {
-    Default *defaultSM = new Default();
-    DefaultSCI_OCB *defaultSCI_OCB = new DefaultSCI_OCB();
+    DefaultSM *defaultSM = new DefaultSM();
+    SCI_Sample_OCB *sci_Sample_OCB = new SCI_Sample_OCB();
 
-    defaultSM->setDefaultSCI_OCB(defaultSCI_OCB);
+    defaultSM->setSCI_Sample_OCB(sci_Sample_OCB);
 
     defaultSM->init();
     defaultSM->enter();
