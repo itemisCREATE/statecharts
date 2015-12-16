@@ -260,6 +260,6 @@ Stop the simulator by clicking at the little red termination button in the toolb
 
 
 
-h2(#Footnotes). Footnotes
+<hr/>
 
 fn1. "UML state machine":http://en.wikipedia.org/wiki/UML_state_machine
