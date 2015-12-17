@@ -1,0 +1,87 @@
+h1. Statechart Tools Installation Guide
+
+h1. Statechart Tools User Guide
+
+h2. What is YAKINDU Statechart Tools?
+
+h2. 5 minute tutorial
+
+h2. The statechart language
+
+h3. Statechart
+
+h3. Graphical elements
+
+h4. Region
+
+h4. State
+
+h4. Final state
+
+h4. Entry
+
+h4. Exit
+
+h4. Choice
+
+h4. Synchronization
+
+h3. Declarations
+
+h3. Expressions
+
+h2. Editing statecharts
+
+h3. Creating and deleting statecharts
+
+h3. Editor UI
+
+h4. 'SC Modling' perspective
+
+h4. The canvas
+
+h4. Editor palette
+
+h4. Outline view
+
+h4. Problems view
+
+h3. Editing states and other nodes
+
+h3. Editing transitions
+
+h3. Editing hierarchies
+
+h3. Using sub diagrams
+
+h3. Refactorings
+
+h3. Using editing proposals
+
+h3. Comparing statecharts
+
+h2. Simulating statecharts
+
+h3. Starting a simulation
+
+h3. 'SC Simulation' perspective
+
+h3. Controlling a simulation
+
+h3. Interacting with a simulation
+
+h3. Configuring a simulation
+
+h2. Generating state machine code
+
+h3. Configuring a generator
+
+h3. Running a generator
+
+h3. General concepts of the state machine code
+
+h2. C code generator
+
+h2. C++ code generator
+
+h2. Java code generator
