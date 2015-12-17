@@ -1,10 +1,10 @@
-h1. Statechart Tools Installation Guide
+h1. YAKINDU Statechart Tools Installation Guide
 
-h1. Statechart Tools User Guide
+h1. YAKINDU Statechart Tools User Guide
 
-h2. What is YAKINDU Statechart Tools?
+h2. What are YAKINDU Statechart Tools?
 
-h2. 5 minute tutorial
+h2. Five minutes tutorial
 
 h2. The statechart language
 
@@ -36,9 +36,9 @@ h3. Creating and deleting statecharts
 
 h3. Editor UI
 
-h4. 'SC Modling' perspective
+h4. "SC Modeling" perspective
 
-h4. The canvas
+h4. Canvas
 
 h4. Editor palette
 
@@ -52,7 +52,7 @@ h3. Editing transitions
 
 h3. Editing hierarchies
 
-h3. Using sub diagrams
+h3. Using subdiagrams
 
 h3. Refactorings
 
@@ -64,7 +64,7 @@ h2. Simulating statecharts
 
 h3. Starting a simulation
 
-h3. 'SC Simulation' perspective
+h3. "SC Simulation" perspective
 
 h3. Controlling a simulation
 
