@@ -40,7 +40,7 @@ Unpack the software distribution file. Use the file explorer to open the directo
 
 !images/windows7_install_010_eclipse_extract_1.png(Unpacking the downloaded file on Windows [1])!
 
-Choose a directory for YAKINDU Statechart Tools (SCT). The example below assumes you want to install the software in the _C:\Program Files\YAKINDU_ directory.
+Choose a directory for YAKINDU Statechart Tools (YAKINDU SCT). The example below assumes you want to install the software in the _C:\Program Files\YAKINDU_ directory.
 
 Depending on your permissions, you might not be able to create a directory and install software under _C:\Program Files_. In this case, please choose another installation directory at a location you are allowed to write to.
 
@@ -313,7 +313,7 @@ h1. YAKINDU Statechart Tools User Guide
 
 h2. What are YAKINDU Statechart Tools?
 
-The statechart tools are a central part of YAKINDU: the modular toolkit for model-driven development of embedded systems. It is based on the open-source development platform Eclipse. YAKINDU Statechart Tools provide the following tools to deal with state machine diagrams:
+The statechart tools are a central part of YAKINDU: the modular toolkit for model-driven development of embedded systems. It is based on the open-source development platform Eclipse. YAKINDU Statechart Tools (YAKINDU SCT) provide the following tools to deal with state machine diagrams:
 
 * *YAKINDU SCT Editor* to create and edit statecharts
 * *YAKINDU Simulator* to simulate the behavior of statecharts
@@ -794,11 +794,11 @@ fn1. "UML state machine":http://en.wikipedia.org/wiki/UML_state_machine
 
 h2. The statechart language
 
-This chapter describes the state chart elements of the YAKINDU SCT 2 editor. The meta model of the YAKINDU SCT 2 is the model of finite state machines. It is based on the view of a system that is defined by a finite number of states. The behavior of such a system is based on its active states. These states are determined by the history of the state machine. Very important are the theoretical models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (entry, exit). YAKINDU SCT 2 can model both these types.
+This chapter describes the statechart elements of the YAKINDU Statechart Tools (YAKINDU SCT) editor. The YAKINDU SCT meta model is the model of finite state machines. It is based on the view of a system that is defined by a finite number of states. The behavior of such a system is based on its active states. These states are determined by the history of the state machine. Very important are the theoretical models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (entry, exit). YAKINDU SCT can model both these types.
 
-The YAKINDU SCT 2 meta model is designed similar to the UML statechart meta model with the following differences:
+The YAKINDU SCT meta model is designed similar to the UML statechart meta model with the following differences:
 
-* SCT statecharts are self-contained with interfaces defined by events and variables.
+* YAKINDU SCT statecharts are self-contained with interfaces defined by events and variables.
 * Core execution semantics are cycle-driven, not event-driven.
 ** This allows to process concurrent events.
 ** Event-driven behavior can be defined on top.
@@ -942,7 +942,7 @@ An operation is called similar to other programming languages with the operation
 
 h3. Expressions
 
-Expressions in SCT are similar to expressions in other programming languages. The language provides operators for logical expressions, number arithmetic, bitwise arithmetic, and bit shifting.
+Expressions in YAKINDU SCT are similar to expressions in other programming languages. The language provides operators for logical expressions, number arithmetic, bitwise arithmetic, and bit shifting.
 
 The type of a logical expression is *boolean*.
 
@@ -1138,7 +1138,7 @@ localEvent3 / NamedInterface.variable4 += 2.0; #2
 
 h3. Reaction triggers
 
-Actions are key constructs in state machines to model behavior. YAKINDU SCT 2 knows about the following kinds of actions.
+Actions are key constructs in state machines to model behavior. YAKINDU SCT knows about the following kinds of actions.
 
 ==<!-- Start stext_keyword_after -->==
 
