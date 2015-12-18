@@ -16,6 +16,8 @@ h4. Region
 
 h4. State
 
+h4. Transition
+
 h4. Final state
 
 h4. Entry
@@ -26,9 +28,59 @@ h4. Choice
 
 h4. Synchronization
 
-h3. Declarations
+h4. Composite state
+
+h4. Orthogonal states
+
+h4. Shallow history
+
+h4. Deep history
+
+h3. Types
+
+h3. Statements
+
+h4. Assignments
+
+h4. Raising an event
+
+h4. Calling an operation
 
 h3. Expressions
+
+h3. Scopes
+
+h4. Namespace
+
+h4. Interface scope
+
+h4. Internal scope
+
+h3. Declarations
+
+h4. Variables
+
+h4. Constants
+
+h4. Events
+
+h5. Incoming and outgoing events
+
+h5. Events with variables
+
+h4. Operations
+
+h4. Local reactions
+
+h3. Reaction triggers
+
+h3. Built-in functions
+
+h4. valueof(event)
+
+h4. as
+
+h4. active(state)
 
 h2. Editing statecharts
 
@@ -85,3 +137,5 @@ h2. C code generator
 h2. C++ code generator
 
 h2. Java code generator
+
+h2. Custom code generator
