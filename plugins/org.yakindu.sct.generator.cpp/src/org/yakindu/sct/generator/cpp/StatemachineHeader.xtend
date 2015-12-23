@@ -15,7 +15,6 @@ import java.util.List
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
-import org.yakindu.sct.generator.c.Statemachine
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
@@ -31,7 +30,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
-class StatemachineHeader extends Statemachine {
+class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader {
 
 	@Inject extension Naming
 	@Inject extension Navigation
@@ -41,12 +40,12 @@ class StatemachineHeader extends Statemachine {
 
 	protected GeneratorEntry entry
 
-	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+	override generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		this.entry = entry
-		fsa.generateFile(flow.module().h, flow.statemachineHContent(entry))
+		fsa.generateFile(flow.module().h, flow.generateStatemachineHeaderContents(entry))
 	}
 
-	override statemachineHContent(ExecutionFlow it, GeneratorEntry entry) '''
+	override generateStatemachineHeaderContents(ExecutionFlow it, GeneratorEntry entry) '''
 		«entry.licenseText»
 		
 		#ifndef «module().define»_H_
