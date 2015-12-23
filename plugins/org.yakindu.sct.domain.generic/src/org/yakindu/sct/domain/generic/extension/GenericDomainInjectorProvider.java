@@ -82,7 +82,6 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 		return new GenericSequencerModule();
 	}
 
-	
 	protected Module getResourceModule() {
 		Module uiModule = Modules.override(getLanguageRuntimeModule()).with(getLanguageUIModule());
 		Module result = Modules.override(uiModule).with(getSharedStateModule());
@@ -117,14 +116,22 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 	public Injector getSimulationInjector() {
 		return Guice.createInjector(getSimulationModule());
 	}
-
+	
 	@Override
 	public Injector getSequencerInjector() {
 		return Guice.createInjector(getSequencerModule());
 	}
+	
+	@Override
+	public Injector getSequencerInjector(Module overrides) {
+		if(overrides != null) {
+			return Guice.createInjector(Modules.override(getSequencerModule()).with(overrides));
+		}
+		return getSequencerInjector();
+	}
 
 	@Override
 	public Injector getEditorInjector() {
-		return Guice.createInjector(new GenericEditorModule());	
+		return Guice.createInjector(new GenericEditorModule());
 	}
 }

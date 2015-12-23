@@ -21,7 +21,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
-class StatemachineRequired {
+class StatemachineRequiredHeader {
 
 	@Inject extension Naming cNaming
 	@Inject extension Navigation
@@ -29,11 +29,11 @@ class StatemachineRequired {
 	@Inject extension GenmodelEntries
 	@Inject extension INamingService
 	
-	def generateStatemachineClientH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-		 fsa.generateFile(flow.module.client.h, flow.statemachineClientHContent(entry) )
+	def generateStatemachineRequiredHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+		 fsa.generateFile(flow.module.client.h, flow.statemachineRequiredHeaderContents(entry) )
 	}
 	
-	def statemachineClientHContent(ExecutionFlow it, GeneratorEntry entry) '''
+	def statemachineRequiredHeaderContents(ExecutionFlow it, GeneratorEntry entry) '''
 			«entry.licenseText»
 			
 			#ifndef «module.client.define»_H_
@@ -93,6 +93,22 @@ class StatemachineRequired {
 				\param evid An unique identifier of the event.
 			*/
 			extern void «type.toFirstLower»_unsetTimer(«scHandleDecl», const sc_eventid evid);
+			«ENDIF»
+			
+			
+			«IF entry.tracingEnterState || entry.tracingExitState»
+			/*!
+			 * Tracing callback functions
+			 */
+			«IF entry.tracingEnterState»
+				/*! This function is called when a state is entered. */
+				extern void stateEntered(const SCTStates state);
+			«ENDIF»
+			
+			«IF entry.tracingExitState»
+				/*! This function is called when a state is exited. */
+				extern void stateExited(const SCTStates state);
+			«ENDIF»
 			«ENDIF»
 			
 			#ifdef __cplusplus

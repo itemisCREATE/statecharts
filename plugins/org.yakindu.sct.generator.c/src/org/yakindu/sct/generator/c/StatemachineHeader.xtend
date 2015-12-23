@@ -29,7 +29,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
 
-class Statemachine {
+class StatemachineHeader {
 
 	@Inject extension Naming cNaming
 	@Inject extension Navigation
@@ -37,12 +37,12 @@ class Statemachine {
 	@Inject extension GenmodelEntries
 	@Inject extension INamingService
 
-	def generateStatemachineH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		flow.initializeNamingService
-		fsa.generateFile(flow.module.h, flow.statemachineHContent(entry))
+		fsa.generateFile(flow.module.h, flow.generateStatemachineHeaderContents(entry))
 	}
 
-	def statemachineHContent(ExecutionFlow it, GeneratorEntry entry) '''
+	def generateStatemachineHeaderContents(ExecutionFlow it, GeneratorEntry entry) '''
 		«entry.licenseText»
 		
 		#ifndef «module.define»_H_
