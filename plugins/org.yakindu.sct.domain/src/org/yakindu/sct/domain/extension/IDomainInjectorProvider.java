@@ -13,6 +13,7 @@ package org.yakindu.sct.domain.extension;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 
 import com.google.inject.Injector;
+import com.google.inject.Module;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -35,7 +36,7 @@ public interface IDomainInjectorProvider {
 	/**
 	 * Returns the Injector for the model sequencing
 	 */
-	public Injector getSequencerInjector();
+	public Injector getSequencerInjector(Module overrides);
 
 	/**
 	 * Injector used to create the embedded in-diagram Xtext Editor

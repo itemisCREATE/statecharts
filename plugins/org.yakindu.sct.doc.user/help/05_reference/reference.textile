@@ -644,6 +644,24 @@ feature IdentifierSettings {
 }
 p. ==<!-- End sgen_feature_identifiersettings -->==
 
+==<!-- Start sgen_feature_tracing -->==
+
+h4. Tracing
+
+The *Tracing* feature allows to enable generation of tracing callback functions:
+
+# __enterState__ (Boolean, optional): whether to generate a callback that is used to notify about 'state enter' events.
+# __exitState__ (Boolean, optional): whether to generate a callback that is used to notify about 'state exit' events.
+
+Sample configuration:
+
+bc(prettyprint).. 
+feature Tracing {
+	enterState = true 
+	exitState  = true
+}
+p. ==<!-- End sgen_feature_tracing -->==
+
 ==<!-- Start sgen_feature_generatoroptions -->==
 
 h4. GeneratorOptions

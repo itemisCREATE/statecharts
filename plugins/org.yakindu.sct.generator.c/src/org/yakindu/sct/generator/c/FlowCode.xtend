@@ -26,6 +26,9 @@ import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.TraceStateEntered
+import org.yakindu.sct.model.sexec.Trace
+import org.yakindu.sct.model.sexec.TraceStateExited
 
 class FlowCode {
 	
@@ -42,6 +45,17 @@ class FlowCode {
 	
 	def dispatch CharSequence code(Step it) '''
 		#error ActionCode for Step '«getClass().name»' not defined
+	'''
+	
+// ignore all trace steps not explicitly supported
+	def dispatch CharSequence code(Trace it)''''''
+	
+	def dispatch CharSequence code(TraceStateEntered it) '''
+		stateEntered(«it.state.shortName»);
+	'''
+	
+	def dispatch CharSequence code(TraceStateExited it) '''
+		stateExited(«it.state.shortName»);
 	'''
 
 	def dispatch CharSequence code(SaveHistory it) '''
