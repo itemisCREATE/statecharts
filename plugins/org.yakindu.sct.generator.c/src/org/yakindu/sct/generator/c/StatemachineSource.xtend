@@ -25,7 +25,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.eclipse.xtext.util.Strings
 
-class StatemachineC {
+class StatemachineSource {
 	
 	@Inject extension Naming
 	@Inject extension GenmodelEntries
@@ -36,14 +36,14 @@ class StatemachineC {
 	@Inject extension ConstantInitializationResolver
 	@Inject protected extension StateVectorExtensions
 	
-	def generateStatemachineC(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+	def generateStatemachineSource(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		flow.initializeNamingService
-		var content = flow.statemachineCContent(entry)
+		var content = flow.generateStatemachineSourceContents(entry)
 		var target = flow.module.c
 		fsa.generateFile(target , content)
 	}
 	
-	def statemachineCContent(ExecutionFlow it, GeneratorEntry entry) '''
+	def generateStatemachineSourceContents(ExecutionFlow it, GeneratorEntry entry) '''
 		«entry.licenseText»
 		
 		#include <stdlib.h>
