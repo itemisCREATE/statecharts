@@ -24,11 +24,12 @@ import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.Trace
+import org.yakindu.sct.model.sexec.TraceStateEntered
+import org.yakindu.sct.model.sexec.TraceStateExited
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
-import org.yakindu.sct.model.sexec.TraceStateEntered
-import org.yakindu.sct.model.sexec.Trace
-import org.yakindu.sct.model.sexec.TraceStateExited
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class FlowCode {
 	
@@ -36,6 +37,9 @@ class FlowCode {
 	@Inject extension Navigation
 	@Inject extension ExpressionCode
 	@Inject extension INamingService
+	@Inject extension GenmodelEntries
+ 
+ 	@Inject GeneratorEntry entry
  
 	def stepComment(Step it) '''
 		«IF !comment.nullOrEmpty»
@@ -51,11 +55,15 @@ class FlowCode {
 	def dispatch CharSequence code(Trace it)''''''
 	
 	def dispatch CharSequence code(TraceStateEntered it) '''
+		«IF entry.tracingEnterState»
 		stateEntered(«it.state.shortName»);
+		«ENDIF»
 	'''
 	
 	def dispatch CharSequence code(TraceStateExited it) '''
+		«IF entry.tracingExitState»
 		stateExited(«it.state.shortName»);
+		«ENDIF»
 	'''
 
 	def dispatch CharSequence code(SaveHistory it) '''

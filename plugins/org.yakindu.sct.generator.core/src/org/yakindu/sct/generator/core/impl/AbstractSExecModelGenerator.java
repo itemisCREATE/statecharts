@@ -77,7 +77,7 @@ public abstract class AbstractSExecModelGenerator extends AbstractSGraphModelGen
 			public void configure(Binder binder) {
 				// by default, traces should not be generated
 				binder.bind(Boolean.class).annotatedWith(Names.named(GenericSequencerModule.ADD_TRACES))
-						.toInstance(Boolean.TRUE);
+						.toInstance(Boolean.FALSE);
 			}
 		});
 	}
