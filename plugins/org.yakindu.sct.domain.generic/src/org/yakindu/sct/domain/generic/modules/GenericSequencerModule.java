@@ -52,8 +52,8 @@ public class GenericSequencerModule extends AbstractGenericModule {
 	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
 		return STextTypeInferrer.class;
 	}
-	
-	public Class<? extends ITypeSystem> bindITypesystem(){
+
+	public Class<? extends ITypeSystem> bindITypesystem() {
 		return GenericTypeSystem.class;
 	}
 

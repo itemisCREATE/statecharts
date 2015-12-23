@@ -6,7 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     committers of YAKINDU - initial API and implementation
+ *     Andreas Mülder - Initial API and implementation
+ *     Alexaner Nyßen - Refactored to use overriding module instead of child injector
  */
 package org.yakindu.sct.generator.core.impl;
 
@@ -38,7 +39,7 @@ import com.google.inject.Module;
  * abstract base class for all code generators that want to generate code based
  * on the {@link ExecutionFlow}
  * 
- * @author andreas muelder - Initial contribution and API
+ * @author Andreas Mülder - Initial contribution and API
  * 
  */
 public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
@@ -73,7 +74,7 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 		public File getTargetFolder(GeneratorEntry entry) {
 			return GeneratorUtils.getTargetFolder(entry);
 		}
-		
+
 		public File getLibraryTargetFolder(GeneratorEntry entry) {
 			return GeneratorUtils.getLibraryTargetFolder(entry);
 		}
@@ -137,11 +138,11 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	private Injector injector;
 
 	protected Injector createInjector(GeneratorEntry entry) {
-		Injector sequencerInjector = DomainRegistry.getDomainDescriptor(entry.getElementRef()).getDomainInjectorProvider().getSequencerInjector();
-		return sequencerInjector.createChildInjector(getChildInjectorModule(entry));
+		return DomainRegistry.getDomainDescriptor(entry.getElementRef()).getDomainInjectorProvider()
+				.getSequencerInjector(getOverridesModule(entry));
 	}
 
-	protected Module getChildInjectorModule(GeneratorEntry entry) {
+	protected Module getOverridesModule(GeneratorEntry entry) {
 		Module bridgeModule = new Module() {
 			public void configure(Binder binder) {
 				binder.bind(IGeneratorBridge.class).toInstance(bridge);
@@ -180,7 +181,7 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 			}
 		}
 		MessageConsole myConsole = new MessageConsole(SCT_GENERATOR_CONSOLE, null);
-		conMan.addConsoles(new IConsole[] { myConsole });
+		conMan.addConsoles(new IConsole[]{myConsole});
 		return myConsole;
 	}
 

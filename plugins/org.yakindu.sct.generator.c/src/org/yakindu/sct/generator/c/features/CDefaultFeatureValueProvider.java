@@ -1,12 +1,14 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
+ * Copyright (c) 2011, 2015 Committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * Contributors:
- * 	committers of YAKINDU - initial API and implementation
  * 
+ * Contributors:
+ * 	Andreas Mülder    - Initial contribution and API
+ *  Markus Mühlbrandt - Added support for 'IdentifierSettings' feature
+ *  Alexander Nyßen   - Added support for 'Tracing' feature; general refactorings
  */
 package org.yakindu.sct.generator.c.features;
 
@@ -21,63 +23,65 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
- * Feature value provider for c code generator.
+ * Provides default values and support for validating parameter values of C code
+ * generator generator model.
  * 
- * @author andreas muelder - Initial contribution and API
- * @author Markus Mühlbrandt - Added additional features
- * 
+ * @author Andreas Mülder
+ * @author Markus Mühlbrandt
+ * @author Alexander Nyßen
  */
-public class CDefaultFeatureValueProvider extends
-		AbstractDefaultFeatureValueProvider {
+public class CDefaultFeatureValueProvider extends AbstractDefaultFeatureValueProvider {
 
 	private static final String INVALID_IDENTIFIER_REGEX = "[^a-z&&[^A-Z&&[^0-9]]]";
 	private static final String VALID_IDENTIFIER_REGEX = "[_a-zA-Z][_a-zA-Z0-9]*";
 
+	@Override
 	public boolean isProviderFor(FeatureTypeLibrary library) {
-		return CFeatureConstants.LIBRARY_NAME.equals(library.getName());
+		return ICFeatureConstants.LIBRARY_NAME.equals(library.getName());
 	}
 
 	@Override
-	protected void setDefaultValue(FeatureParameterValue parameterValue,
-			EObject contextElement) {
+	protected void setDefaultValue(FeatureParameterValue parameterValue, EObject contextElement) {
 
 		GeneratorEntry entry = (GeneratorEntry) contextElement;
 		Statechart statechart = (Statechart) entry.getElementRef();
+		String parameterName = parameterValue.getParameter().getName();
 
-		if (parameterValue.getParameter().getName()
-				.equals(CFeatureConstants.PARAMETER_MODULE_NAME)) {
+		if (ICFeatureConstants.PARAMETER_NAMING_MODULE_NAME.equals(parameterName)) {
 			parameterValue.setValue(asIdentifier(statechart.getName(), "_"));
-		} else if (parameterValue.getParameter().getName()
-				.equals(CFeatureConstants.PARAMETER_STATEMACHINE_PREFIX)) {
-			parameterValue.setValue(StringExtensions.toFirstLower(asIdentifier(
-					statechart.getName(), "_")));
-		} else if (parameterValue.getParameter().getName()
-				.equals(CFeatureConstants.PARAMETER_MAX_IDENTIFIER_LENGTH)) {
+		} else if (ICFeatureConstants.PARAMETER_NAMING_STATEMACHINE_PREFIX.equals(parameterName)) {
+			parameterValue.setValue(StringExtensions.toFirstLower(asIdentifier(statechart.getName(), "_")));
+		} else if (ICFeatureConstants.PARAMETER_NAMING_MAX_IDENTIFIER_LENGTH.equals(parameterName)) {
 			parameterValue.setValue("31");
-		} else if (parameterValue.getParameter().getName()
-				.equals(CFeatureConstants.PARAMETER_SEPARATOR)) {
+		} else if (ICFeatureConstants.PARAMETER_NAMING_SEPARATOR.equals(parameterName)) {
 			parameterValue.setValue("_");
+		} else if (ICFeatureConstants.PARAMETER_TRACING_ENTER_STATE.equals(parameterName)) {
+			parameterValue.setValue(true);
+		} else if (ICFeatureConstants.PARAMETER_TRACING_EXIT_STATE.equals(parameterName)) {
+			parameterValue.setValue(true);
+		} else {
+			throw new IllegalArgumentException("Unsupported parameter '" + parameterName + "'.");
 		}
 	}
 
-	/**
-	 * Executes some validations on the given {@link FeatureParameterValue}
-	 */
+	@Override
 	public IStatus validateParameterValue(FeatureParameterValue parameter) {
 		String parameterName = parameter.getParameter().getName();
-		if (CFeatureConstants.PARAMETER_MODULE_NAME.equals(parameterName)) {
+		if (ICFeatureConstants.PARAMETER_NAMING_MODULE_NAME.equals(parameterName)) {
 			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
 				return error("Invalid module name");
 			}
-		} else if (CFeatureConstants.PARAMETER_STATEMACHINE_PREFIX.equals(parameterName)) {
+		} else if (ICFeatureConstants.PARAMETER_NAMING_STATEMACHINE_PREFIX.equals(parameterName)) {
 			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
 				return error("Invalid function prefix name");
 			}
-		} else if (CFeatureConstants.PARAMETER_SEPARATOR.equals(parameterName)) {
+		} else if (ICFeatureConstants.PARAMETER_NAMING_SEPARATOR.equals(parameterName)) {
 			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
 				return error("Invalid separator");
 			}
 		}
+		// No specific validation is required for 'enterState' and 'exitState'
+		// parameters of 'Tracing' feature, as they are boolean.
 		return Status.OK_STATUS;
 	}
 

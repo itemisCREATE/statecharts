@@ -12,7 +12,7 @@ package org.yakindu.sct.generator.c
 import org.yakindu.sct.generator.core.features.ICoreFeatureConstants
 import org.yakindu.sct.model.sgen.FeatureParameterValue
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.c.features.CFeatureConstants
+import org.yakindu.sct.generator.c.features.ICFeatureConstants
 
 class GenmodelEntries {
 	
@@ -32,11 +32,11 @@ class GenmodelEntries {
 	}
 	
 	def private getIdentifierSettingsFeature(GeneratorEntry it) {
-		getFeatureConfiguration(CFeatureConstants::FEATURE_IDENTIFIER_SETTINGS)
+		getFeatureConfiguration(ICFeatureConstants::FEATURE_NAMING)
 	}
 	
 	def private FeatureParameterValue getMaxIdentifierLengthParameter(GeneratorEntry it) {
-		identifierSettingsFeature?.getParameterValue(CFeatureConstants::PARAMETER_MAX_IDENTIFIER_LENGTH)
+		identifierSettingsFeature?.getParameterValue(ICFeatureConstants::PARAMETER_NAMING_MAX_IDENTIFIER_LENGTH)
 	}
 	
 	def getIdentifierLength(GeneratorEntry it) {
@@ -52,7 +52,7 @@ class GenmodelEntries {
 	}
 	
 	def private FeatureParameterValue getSeparatorParameter(GeneratorEntry it) {
-		identifierSettingsFeature?.getParameterValue(CFeatureConstants::PARAMETER_SEPARATOR)
+		identifierSettingsFeature?.getParameterValue(ICFeatureConstants::PARAMETER_NAMING_SEPARATOR)
 	}
 	
 	def getSeparator(GeneratorEntry it) {
@@ -60,7 +60,7 @@ class GenmodelEntries {
 	}
 	
 	def private FeatureParameterValue getStatemachinePrefixParameter(GeneratorEntry it) {
-		identifierSettingsFeature?.getParameterValue(CFeatureConstants::PARAMETER_STATEMACHINE_PREFIX)
+		identifierSettingsFeature?.getParameterValue(ICFeatureConstants::PARAMETER_NAMING_STATEMACHINE_PREFIX)
 	}
 	
 	def getStatemachinePrefix(GeneratorEntry it) {
@@ -68,10 +68,31 @@ class GenmodelEntries {
 	}
 	
 	def private FeatureParameterValue getModuleNameParameter(GeneratorEntry it) {
-		identifierSettingsFeature?.getParameterValue(CFeatureConstants::PARAMETER_MODULE_NAME)
+		identifierSettingsFeature?.getParameterValue(ICFeatureConstants::PARAMETER_NAMING_MODULE_NAME)
 	}
 	
 	def getModuleName(GeneratorEntry it) {
 		return moduleNameParameter?.stringValue
+	}
+	
+	
+	def private getTracingFeature(GeneratorEntry it) {
+		getFeatureConfiguration(ICFeatureConstants::FEATURE_TRACING)
+	}
+	
+	def getTracingEnterState(GeneratorEntry it){
+		val enterStateParameter = tracingFeature?.getParameterValue(ICFeatureConstants::PARAMETER_TRACING_ENTER_STATE)
+		if (enterStateParameter != null) {
+			return enterStateParameter.booleanValue
+		}
+		return false
+	}
+	
+	def getTracingExitState(GeneratorEntry it){
+		val exitStateParameter = tracingFeature?.getParameterValue(ICFeatureConstants::PARAMETER_TRACING_EXIT_STATE)
+		if (exitStateParameter != null) {
+			return exitStateParameter.booleanValue
+		}
+		return false
 	}
 }
