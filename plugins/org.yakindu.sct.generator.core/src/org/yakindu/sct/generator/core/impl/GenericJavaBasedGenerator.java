@@ -10,8 +10,8 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.CONFIGURATION_MODULE;
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_CLASS;
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_PROJECT;
@@ -45,8 +45,8 @@ import com.google.inject.util.Modules;
 public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 
 	@Override
-	protected Module getChildInjectorModule(final GeneratorEntry entry) {
-		Module defaultModule = super.getChildInjectorModule(entry);
+	protected Module getOverridesModule(final GeneratorEntry entry) {
+		Module defaultModule = super.getOverridesModule(entry);
 
 		String overridingModuleClass = null;
 		FeatureConfiguration featureConfiguration = entry.getFeatureConfiguration(TEMPLATE_FEATURE);

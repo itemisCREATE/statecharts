@@ -22,27 +22,20 @@ import org.yakindu.sct.model.sgraph.Statechart
  * 
  * @author Axel Terfloth
  */
-class CSCTGenerator implements IExecutionFlowGenerator {
+class CGenerator implements IExecutionFlowGenerator {
 	 
 	@Inject extension Types
-	@Inject extension Statemachine
-	@Inject extension StatemachineC
-	@Inject extension StatemachineRequired
+	@Inject extension StatemachineHeader
+	@Inject extension StatemachineSource
+	@Inject extension StatemachineRequiredHeader
 	@Inject extension Navigation
 	
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-
 		flow.generateTypesH(flow.sourceElement as Statechart, fsa, entry)
-		
-		flow.generateStatemachineH(flow.sourceElement as Statechart, fsa, entry)
-		
+		flow.generateStatemachineHeader(flow.sourceElement as Statechart, fsa, entry)
 		if (flow.timed || !flow.operations.empty) {
-			flow.generateStatemachineClientH(flow.sourceElement as Statechart, fsa, entry)
+			flow.generateStatemachineRequiredHeader(flow.sourceElement as Statechart, fsa, entry)
 		}
-
-		flow.generateStatemachineC(flow.sourceElement as Statechart, fsa, entry)
-
+		flow.generateStatemachineSource(flow.sourceElement as Statechart, fsa, entry)
 	}
-
-	
 }
