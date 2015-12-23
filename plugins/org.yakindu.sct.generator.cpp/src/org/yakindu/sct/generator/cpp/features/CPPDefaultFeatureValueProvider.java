@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.yakindu.sct.generator.c.features.CFeatureConstants;
+import org.yakindu.sct.generator.c.features.ICFeatureConstants;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.Visibility;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -46,17 +46,17 @@ public class CPPDefaultFeatureValueProvider extends
 		Statechart statechart = (Statechart) entry.getElementRef();
 
 		if (parameterValue.getParameter().getName()
-				.equals(CFeatureConstants.PARAMETER_MODULE_NAME)) {
+				.equals(ICFeatureConstants.PARAMETER_NAMING_MODULE_NAME)) {
 			parameterValue.setValue(asIdentifier(statechart.getName(), "_"));
 		} else if (parameterValue.getParameter().getName()
-				.equals(CFeatureConstants.PARAMETER_STATEMACHINE_PREFIX)) {
+				.equals(ICFeatureConstants.PARAMETER_NAMING_STATEMACHINE_PREFIX)) {
 			parameterValue.setValue(StringExtensions.toFirstLower(asIdentifier(
 					statechart.getName(), "_")));
 		} else if (parameterValue.getParameter().getName()
-				.equals(CFeatureConstants.PARAMETER_MAX_IDENTIFIER_LENGTH)) {
+				.equals(ICFeatureConstants.PARAMETER_NAMING_MAX_IDENTIFIER_LENGTH)) {
 			parameterValue.setValue("31");
 		} else if (parameterValue.getParameter().getName()
-				.equals(CFeatureConstants.PARAMETER_SEPARATOR)) {
+				.equals(ICFeatureConstants.PARAMETER_NAMING_SEPARATOR)) {
 			parameterValue.setValue("_");
 		} else if (parameterValue
 				.getParameter()
@@ -71,16 +71,16 @@ public class CPPDefaultFeatureValueProvider extends
 
 	public IStatus validateParameterValue(FeatureParameterValue parameter) {
 		String parameterName = parameter.getParameter().getName();
-		if (CFeatureConstants.PARAMETER_MODULE_NAME.equals(parameterName)) {
+		if (ICFeatureConstants.PARAMETER_NAMING_MODULE_NAME.equals(parameterName)) {
 			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
 				return error("Invalid module name");
 			}
-		} else if (CFeatureConstants.PARAMETER_STATEMACHINE_PREFIX
+		} else if (ICFeatureConstants.PARAMETER_NAMING_STATEMACHINE_PREFIX
 				.equals(parameterName)) {
 			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
 				return error("Invalid function prefix name");
 			}
-		} else if (CFeatureConstants.PARAMETER_SEPARATOR.equals(parameterName)) {
+		} else if (ICFeatureConstants.PARAMETER_NAMING_SEPARATOR.equals(parameterName)) {
 			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
 				return error("Invalid separator");
 			}

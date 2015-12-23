@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.FlowOptimizer;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
@@ -38,7 +39,11 @@ import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
+import com.google.inject.Binder;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.name.Names;
+import com.google.inject.util.Modules;
 
 /**
  * abstract base class for all code generators that want to generate code based
@@ -47,8 +52,7 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractSExecModelGenerator extends
-		AbstractSGraphModelGenerator {
+public abstract class AbstractSExecModelGenerator extends AbstractSGraphModelGenerator {
 
 	private static final String SEXEC_FILE_EXTENSION = "sexec";
 
@@ -60,45 +64,49 @@ public abstract class AbstractSExecModelGenerator extends
 	protected void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		if (this instanceof IExecutionFlowGenerator) {
 			IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) this;
-			flowGenerator.generate(createExecutionFlow(statechart, entry),
-					entry, null);
+			flowGenerator.generate(createExecutionFlow(statechart, entry), entry, null);
 		}
 		super.runGenerator(statechart, entry);
+	}
+
+	@Override
+	protected Module getOverridesModule(GeneratorEntry entry) {
+		Module module = super.getOverridesModule(entry);
+
+		return Modules.override(module).with(new Module() {
+			public void configure(Binder binder) {
+				// by default, traces should not be generated
+				binder.bind(Boolean.class).annotatedWith(Names.named(GenericSequencerModule.ADD_TRACES))
+						.toInstance(Boolean.FALSE);
+			}
+		});
 	}
 
 	/**
 	 * Transforms the {@link Statechart} model to a {@link ExecutionFlow} model
 	 */
-	protected ExecutionFlow createExecutionFlow(Statechart statechart,
-			GeneratorEntry entry) {
+	protected ExecutionFlow createExecutionFlow(Statechart statechart, GeneratorEntry entry) {
 		Injector injector = getInjector(entry);
 		IModelSequencer sequencer = injector.getInstance(IModelSequencer.class);
 		ExecutionFlow flow = sequencer.transform(statechart);
 		Assert.isNotNull(flow, "Error creation ExecutionFlow");
 
-		FeatureConfiguration optimizeConfig = entry
-				.getFeatureConfiguration(FUNCTION_INLINING_FEATURE);
+		FeatureConfiguration optimizeConfig = entry.getFeatureConfiguration(FUNCTION_INLINING_FEATURE);
 
 		FlowOptimizer optimizer = injector.getInstance(FlowOptimizer.class);
 
-		optimizer.inlineReactions(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_REACTIONS, false));
-		optimizer.inlineExitActions(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS, false));
-		optimizer.inlineEntryActions(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS, false));
-		optimizer.inlineEnterSequences(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES, false));
-		optimizer.inlineExitSequences(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES, false));
-		optimizer.inlineChoices(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_CHOICES, false));
-		optimizer.inlineEntries(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_ENTRIES, false));
-		optimizer.inlineEnterRegion(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION, false));
-		optimizer.inlineExitRegion(getBoolValue(optimizeConfig,
-				FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION, false));
+		optimizer.inlineReactions(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_REACTIONS, false));
+		optimizer.inlineExitActions(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS, false));
+		optimizer.inlineEntryActions(
+				getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS, false));
+		optimizer.inlineEnterSequences(
+				getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES, false));
+		optimizer.inlineExitSequences(
+				getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES, false));
+		optimizer.inlineChoices(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_CHOICES, false));
+		optimizer.inlineEntries(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_ENTRIES, false));
+		optimizer.inlineEnterRegion(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION, false));
+		optimizer.inlineExitRegion(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION, false));
 
 		flow = optimizer.transform(flow);
 
@@ -107,13 +115,10 @@ public abstract class AbstractSExecModelGenerator extends
 
 	protected void dumpSexec(GeneratorEntry entry, ExecutionFlow flow) {
 		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet
-				.getResourceFactoryRegistry()
-				.getExtensionToFactoryMap()
-				.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
-						new XMIResourceFactoryImpl());
-		URI fileURI = entry.getElementRef().eResource().getURI()
-				.trimFileExtension().appendFileExtension(SEXEC_FILE_EXTENSION);
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+				.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+		URI fileURI = entry.getElementRef().eResource().getURI().trimFileExtension()
+				.appendFileExtension(SEXEC_FILE_EXTENSION);
 		Resource resource = resourceSet.createResource(fileURI);
 		resource.getContents().add(flow);
 		try {
