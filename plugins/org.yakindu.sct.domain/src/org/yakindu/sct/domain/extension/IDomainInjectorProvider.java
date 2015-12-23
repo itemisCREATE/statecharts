@@ -34,7 +34,14 @@ public interface IDomainInjectorProvider {
 	public Injector getSimulationInjector();
 
 	/**
-	 * Returns the Injector for the model sequencing
+	 * Returns the Injector for the model sequencing without overriding existing
+	 * bindings.
+	 */
+	public Injector getSequencerInjector();
+
+	/**
+	 * Returns the Injector for the model sequencing, giving precedence to those
+	 * bindings in the overrides module.
 	 */
 	public Injector getSequencerInjector(Module overrides);
 
@@ -47,7 +54,6 @@ public interface IDomainInjectorProvider {
 	 */
 	public Injector getEmbeddedEditorInjector(String elementKey);
 
-	
 	/**
 	 * Returns an injector for all editor and UI related stuff.
 	 */
