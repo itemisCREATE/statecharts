@@ -56,13 +56,13 @@ class FlowCode {
 	
 	def dispatch CharSequence code(TraceStateEntered it) '''
 		«IF entry.tracingEnterState»
-		stateEntered(«it.state.shortName»);
+		«flow.type.toFirstLower»_stateEntered(«scHandle», «it.state.shortName»);
 		«ENDIF»
 	'''
 	
 	def dispatch CharSequence code(TraceStateExited it) '''
 		«IF entry.tracingExitState»
-		stateExited(«it.state.shortName»);
+		«flow.type.toFirstLower»_stateExited(«scHandle», «it.state.shortName»);
 		«ENDIF»
 	'''
 
