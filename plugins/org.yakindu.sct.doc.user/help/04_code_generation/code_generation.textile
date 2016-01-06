@@ -80,6 +80,7 @@ GeneratorModel for yakindu::java {
 		feature Outlet {
 			targetProject = "CallHandling"
 			targetFolder = "src-gen"
+			libraryTargetFolder = "src"
 		}
 	}
 }
@@ -87,13 +88,15 @@ GeneratorModel for yakindu::java {
 p. Let's have a closer look at the listing above:
 * @yakindu::java@ is the unique ID of the Java code generator.
 * The @statechart CallHandling { … }@ block references the statechart model we want to generate code for.
-* The @feature Outlet { … }@ block specifies where the generated code artifacts are to be placed, i.&nbsp;e. in the Eclipse project @CallHandling@ and within that project in the @src-gen@ folder.
+* The @feature Outlet { … }@ block specifies where the generated code artifacts are to be placed:
+** The parameters @targetProject@ and @targetFolder@ define the Eclipse project @CallHandling@ as destination for generated code and within that project the @src-gen@ folder.
+** However, certain source code modules are generated only once and won't change with the underlying statechart. By default, these source code artifacts are generated into the folder specified by the @libraryTargetFolder@ option which by default is @src@. You can change the folder name or even remove the @libraryTargetFolder@ option at all. In the latter case the "library" components are generated into the @targetFolder@.
 
 A statechart reference may contain various configuration features. You will learn more about feature later.
 
 h2. Enhancing the generator model by timing capabilities
 
-However, the default generator model is insufficient yet. The _CallHandling_ statechart model uses _after_ and _every_ expressions. That is, it is dealing with *timed events*, requiring a timer service to trigger them. We can instruct the code generator to provide us with a default timer service implementation by adding the following feature to the generator model:
+However, the default generator model is insufficient yet. The _CallHandling_ statechart model uses _after_ and _every_ expressions. That is, it is dealing with *time events*, requiring a timer service to trigger them. We can instruct the code generator to provide us with a default timer service implementation by adding the following feature to the generator model:
 
 bc(prettyprint). 
 feature GeneralFeatures {
@@ -173,7 +176,7 @@ bc(prettyprint linenums)..
 p. Let's have a detailed look at this client code:
 
 * First, this program creates a new instance of the state machine by calling the default constructor of @CallHandlingStatemachine@ (line 9).
-* Since we are using timed events, the statechart implementation requires an implementation of the @ITimer@ interface. Since we added the @TimerService@ feature to the generator model, the code generator creates a default implementation @org.yakindu.scr.TimerService@ that uses the @java.util.Timer@ class. A new instance of the default @TimerService@ is created and set to the state machine (line 10).
+* Since we are using time events, the statechart implementation requires an implementation of the @ITimer@ interface. Since we added the @TimerService@ feature to the generator model, the code generator creates a default implementation @org.yakindu.scr.TimerService@ that uses the @java.util.Timer@ class. A new instance of the default @TimerService@ is created and set to the state machine (line 10).
 * In line 13, @sm.enter()@ enters the state machine and – via its initial state – activates its *Idle* state.
 * For each interface in the statechart definition block a getter method has been generated, here @getSCIPhone()@ and @getSCIUser()@. You can access all incoming events and all variables via these interfaces. In line 16, the _incoming_call_ event is raised, activating the *Incoming Call* state after the next run cycle has been executed (line 17).
 * In line 20, we raise the _accept_call_ event via the _User_ interface. It activates the *Active Call* state after the next run cycle has been performed (line 21).

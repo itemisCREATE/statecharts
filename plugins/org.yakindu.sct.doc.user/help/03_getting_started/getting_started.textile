@@ -154,8 +154,7 @@ table(scedit).
 | Double-click on the string @<name>@ in the state object. The string turns into a text input field with @<name>@ being highlighted: | !images/light_switch_230_statechart_editor_change_state_name_01.png(Changing a state's name [1])! |
 | Type the state's new name, i.&nbsp;e. @Off@: | !images/light_switch_230_statechart_editor_change_state_name_02.png(Changing a state's name [2])! |
 | Hit the @[Enter]@ key or click anywhere outside the text field. Bingo! The state now has a proper name and the error marker disappears: | !images/light_switch_230_statechart_editor_change_state_name_03.png(Changing a state's name [3])! |
-| However, since the state box's size is smaller now than before while the box's left position remains unchanged, the graph looks crooked.
-|
+| However, since the state box's size is smaller now than before while the box's left position remains unchanged, the graph looks crooked. |
 | We can improve it by dragging the state box a little bit to the right. When it is centered below the initial state symbol, a vertical blue line appears giving the user a visual hint: | !images/light_switch_230_statechart_editor_change_state_name_04.png(Changing a state's name [4])! |
 | Drop the state box at this very place, and everything looks much better now: | !images/light_switch_230_statechart_editor_change_state_name_05.png(Changing a state's name [5])! |
 | Alternatively, we could have used the state box's handles to resize it. However, we just deselect the box by clicking elsewhere: | !images/light_switch_230_statechart_editor_change_state_name_06.png(Changing a state's name [6])! |
@@ -167,36 +166,24 @@ h3. Creating a state
 With the *Off* state only the light switch statechart isn't complete yet. We also need an *On* state, and we going to create it now.
 
 table(scedit).
-| In order to add another state, move the mouse pointer to the _Palette_ compartment at the right-hand side of the statechart editor. Click on the _State_ symbol in the palette without releasing the mouse button, and drag the symbol over to the editing area. | !images/light_switch_240_statechart_editor_create_state_01.png(Creating a state [1])!
-|
-| Release the mouse button over a gray area, a region: | !images/light_switch_240_statechart_editor_create_state_02.png(Creating a state [2])!
-|
-| The new state appears in the model graph: | !images/light_switch_240_statechart_editor_create_state_03.png(Creating a state [3])!
-|
-| Rename the new state to *On*. Vertically align it to the *Off* state, if you like: | !images/light_switch_240_statechart_editor_create_state_04.png(Creating a state [4])!
-|
-| You'll notice that the new state is showing an error marker. The reason is that it is not yet possible to reach the *On* state.
-|
-| Before we'll go on and fix that problem, here's another way to create a new state. When you are hovering with the mouse pointer over the main region, i.&nbsp;e. the rectangle with a gray background, a popup menu shows up. If you click on the 'S' symbol in that menu, a new state will be created. Other options in this menu are to create an initial state, a final state, or a choice. | !images/light_switch_240_statechart_editor_create_state_05.png(Creating a state [5])!
-|
+| In order to add another state, move the mouse pointer to the _Palette_ compartment at the right-hand side of the statechart editor. Click on the _State_ symbol in the palette without releasing the mouse button, and drag the symbol over to the editing area. | !images/light_switch_240_statechart_editor_create_state_01.png(Creating a state [1])! |
+| Release the mouse button over a gray area, a region: | !images/light_switch_240_statechart_editor_create_state_02.png(Creating a state [2])! |
+| The new state appears in the model graph: | !images/light_switch_240_statechart_editor_create_state_03.png(Creating a state [3])! |
+| Rename the new state to *On*. Vertically align it to the *Off* state, if you like: | !images/light_switch_240_statechart_editor_create_state_04.png(Creating a state [4])! |
+| You'll notice that the new state is showing an error marker. The reason is that it is not yet possible to reach the *On* state. |
+| Before we'll go on and fix that problem, here's another way to create a new state. When you are hovering with the mouse pointer over the main region, i.&nbsp;e. the rectangle with a gray background, a popup menu shows up. If you click on the 'S' symbol in that menu, a new state will be created. Other options in this menu are to create an initial state, a final state, or a choice. | !images/light_switch_240_statechart_editor_create_state_05.png(Creating a state [5])! |
 
 h3. Creating a transition
 
 As we have seen above, the *On* state is not reachable as of yet. So let's model switching the light switch from "off" to "on" as a transition leading from the *Off* state to the *On* state.
 
 table(scedit).
-|In the _Palette_, click on the _Transition_ symbol. The symbol's background turn blue. | !images/light_switch_250_statechart_editor_create_transition_01.png(Creating a transition [1])!
-|
-| Click on the *On* state, but don't release the mouse button. Drag the mouse pointer towards the *Off* state. A light gray line is shown as a preview of the transition to be established: | !images/light_switch_250_statechart_editor_create_transition_02.png(Creating a transition [2])!
-|
-| Once the mouse pointer reaches the target state, it changes its shape: | !images/light_switch_250_statechart_editor_create_transition_03.png(Creating a transition [3])!
-|
-| Releasing the mouse button establishes the transition. A text input field to specify event trigger, guard condition and effect appears. We want the transition to be triggered when the light switch is operated, so let's type @operate@ into the text field. | !images/light_switch_250_statechart_editor_create_transition_04.png(Creating a transition [4])!
-|
-| If you suspect that something is not in order, because the input text is underlined in red, you are right. We will explain and deal with that in a minute.
-|
-| Clicking anywhere outside the text field terminates the editing mode: | !images/light_switch_250_statechart_editor_create_transition_05.png(Creating a transition [5])!
-|
+|In the _Palette_, click on the _Transition_ symbol. The symbol's background turn blue. | !images/light_switch_250_statechart_editor_create_transition_01.png(Creating a transition [1])! |
+| Click on the *On* state, but don't release the mouse button. Drag the mouse pointer towards the *Off* state. A light gray line is shown as a preview of the transition to be established: | !images/light_switch_250_statechart_editor_create_transition_02.png(Creating a transition [2])! |
+| Once the mouse pointer reaches the target state, it changes its shape: | !images/light_switch_250_statechart_editor_create_transition_03.png(Creating a transition [3])! |
+| Releasing the mouse button establishes the transition. A text input field to specify event trigger, guard condition and effect appears. We want the transition to be triggered when the light switch is operated, so let's type @operate@ into the text field. | !images/light_switch_250_statechart_editor_create_transition_04.png(Creating a transition [4])! |
+| If you suspect that something is not in order, because the input text is underlined in red, you are right. We will explain and deal with that in a minute. |
+| Clicking anywhere outside the text field terminates the editing mode: | !images/light_switch_250_statechart_editor_create_transition_05.png(Creating a transition [5])! |
 
 The event trigger _operate_ is flagged as an error. The reason is that an event with that name is not known yet. The screenshot below shows how to change that:
 
@@ -217,18 +204,15 @@ Click anywhere outside of the text field, which terminates editing the definitio
 In its current state the model would not allow to turn the light switch off again, which is somewhat unsatisfactory. However, operating the light switch while it is on should turn it off. Let's model this by adding another transition. It should lead from the source state *On* to the target state *Off*.
 
 table(scedit).
-| However, in order to not get two straight lines being close together in the graph, let's first make some room and turn the present line into an arc. Move the mouse pointer over the transition line, but not over the text. The mouse pointer changes its shape to indicate that you can insert a control point. Click and hold to add the control point, then drag it to an appropriate position. | !images/light_switch_270_statechart_editor_create_transition_01.png(Creating another transition [1])!
-|
-| Now let's insert the second transition. This time we won't use the palette, but instead use another method. Hover the mouse pointer over the source state, i.&nbsp;e. *On*. An ingoing and an outgoing arrow appear, both with a handle.  Click and hold the handle of the outgoing arrow and drag it to the *Off* target state. | !images/light_switch_270_statechart_editor_create_transition_02.png(Creating another transition [2])!
-|
-| Upon releasing the mouse button the transition is established. Type @operate@ as the transition's event trigger into the text field. Reshape the transition arrow to make the graph look nice. | !images/light_switch_270_statechart_editor_create_transition_03.png(Creating another transition [3])!
-|
+| However, in order to not get two straight lines being close together in the graph, let's first make some room and turn the present line into an arc. Move the mouse pointer over the transition line, but not over the text. The mouse pointer changes its shape to indicate that you can insert a control point. Click and hold to add the control point, then drag it to an appropriate position. | !images/light_switch_270_statechart_editor_create_transition_01.png(Creating another transition [1])! |
+| Now let's insert the second transition. This time we won't use the palette, but instead use another method. Hover the mouse pointer over the source state, i.&nbsp;e. *On*. An ingoing and an outgoing arrow appear, both with a handle.  Click and hold the handle of the outgoing arrow and drag it to the *Off* target state. | !images/light_switch_270_statechart_editor_create_transition_02.png(Creating another transition [2])! |
+| Upon releasing the mouse button the transition is established. Type @operate@ as the transition's event trigger into the text field. Reshape the transition arrow to make the graph look nice. | !images/light_switch_270_statechart_editor_create_transition_03.png(Creating another transition [3])! |
 
 
 
 h2. Simulating the light switch model
 
-Simulating a model means to execute it, raise events manually, have timed and run cycle-based events being triggered automatically, and observe its behaviour.
+Simulating a model means to execute it, raise events manually, have time events and run cycle-based events being triggered automatically, and observe its behaviour.
 
 Start the simulation by right-clicking on the _LightSwitch.sct_ file in the project explorer and selecting _Run As → Statechart Simulation_:
 
@@ -260,6 +244,6 @@ Stop the simulator by clicking at the little red termination button in the toolb
 
 
 
-h2(#Footnotes). Footnotes
+</p><hr/><p>
 
 fn1. "UML state machine":http://en.wikipedia.org/wiki/UML_state_machine
