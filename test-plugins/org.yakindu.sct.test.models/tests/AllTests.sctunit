@@ -1,4 +1,5 @@
 testsuite AllTests {
+	ActionOutgoingTransitionsInitialState,
 	AlwaysOncycle, 
 	AssignmentAsExpression,
 	BitExpressions, 

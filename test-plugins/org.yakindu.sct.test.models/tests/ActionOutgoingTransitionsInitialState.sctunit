@@ -1,0 +1,21 @@
+
+testgroup ActionOutgoingTransitionsInitialState for statechart ActionOutgoingTransitionsInitialState{
+	test ActionOutgoingTransitionsInitialStateTest { 
+		enter
+		assert active(ActionOutgoingTransitionsInitialState.region_1._1)
+		assert active(ActionOutgoingTransitionsInitialState.region_2._1)
+		assert active(ActionOutgoingTransitionsInitialState.region_2._1.r1._2)
+		 
+		assert internalB == 5 
+		assert c == 5
+		assert d == 5
+		
+		
+		
+		
+			
+			
+		
+	} 
+}
+	
