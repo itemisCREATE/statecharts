@@ -102,12 +102,12 @@ class StatemachineRequiredHeader {
 			 */
 			«IF entry.tracingEnterState»
 				/*! This function is called when a state is entered. */
-				extern void stateEntered(const SCTStates state);
+				extern void stateEntered(const «statesEnumType» state);
 			«ENDIF»
 			
 			«IF entry.tracingExitState»
 				/*! This function is called when a state is exited. */
-				extern void stateExited(const SCTStates state);
+				extern void stateExited(const «statesEnumType» state);
 			«ENDIF»
 			«ENDIF»
 			
