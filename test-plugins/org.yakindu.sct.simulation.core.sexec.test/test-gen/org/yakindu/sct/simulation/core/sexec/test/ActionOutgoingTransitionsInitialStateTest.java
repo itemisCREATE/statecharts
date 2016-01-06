@@ -21,21 +21,25 @@ import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
 import static org.junit.Assert.assertTrue;
 /**
- *  Unit TestCase for LogicalOr
+ *  Unit TestCase for ActionOutgoingTransitionsInitialState
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class LogicalOrTestsTest extends AbstractExecutionFlowTest {
+public class ActionOutgoingTransitionsInitialStateTest extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception {
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("LogicalOr.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("ActionOutgoingTransitionsInitialState.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void operandEvaluationOrder() throws Exception {
+	public void ActionOutgoingTransitionsInitialStateTest() throws Exception {
 		interpreter.enter();
-		interpreter.runCycle();
-		assertTrue("logical or expression was executed in wrong order...", getInteger("x") == 4l && getBoolean("b"));
+		assertTrue(isStateActive("1"));
+		assertTrue(isStateActive("1"));
+		assertTrue(isStateActive("2"));
+		assertTrue(getInteger("internalB") == 5l);
+		assertTrue(getInteger("c") == 5l);
+		assertTrue(getInteger("d") == 5l);
 	}
 }
