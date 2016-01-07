@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="generate.help" basedir=".">
+<project default="generate.help" basedir="." name="org.yakindu.sct.doc.user">
 
-	<property name="wikitext.standalone" location="${basedir}/lib" />
+	<property name="docbook.xsl.dir" location="${basedir}/docbook-xsl" />
+	<property name="lib.dir" location="${basedir}/lib" />
+	<property name="wikitext.standalone" location="${lib.dir}" />
 	<property name="help.prefix" value="help" />
 	<property name="help.dir" location="${basedir}/${help.prefix}" />
+	<property name="pdf.dir" location="pdf" />
 
 	<path id="wikitext.classpath">
 		<fileset dir="${wikitext.standalone}">
 			<include name="org.eclipse.mylyn.wikitext.*core*.jar" />
+		</fileset>
+	</path>
+
+	<!-- Classpath for Xalan, which is needed to render DocBook documents. -->
+	<path id="xalan.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="xalan.jar" />
+			<include name="serializer.jar" />
 		</fileset>
 	</path>
 
@@ -21,10 +32,13 @@
 
 	<!-- Building the master TOC (toc.xml) and registering it along with the sub-TOCs produced by this target in the plugin.xml file must still be done manually. -->
 	<!-- The help contexts file (contexts.xml) is not yet updated automatically, either. -->
-	<!--<target name="generate.help" depends="assemble.sections" description="Runs the Eclipse help generator on the listed wiki source files">
--->
+	<!--
+		<target name="generate.help" depends="assemble.sections" description="Runs the Eclipse help generator on the listed wiki source files">
+	-->
 	<target name="generate.help" description="Runs the Eclipse help generator on the listed wiki source files">
-		<generate.section.help src.dir="${help.dir}/00_structure" src.file="structure.textile" prefix="${help.prefix}/00_structure" />
+		<docbook.to.eclipsehelp help.dir="help" subdir="00_structure" basename="structure" />
+		<!-- <docbook.to.pdf src.dir="${help.dir}/00_structure" src.file="structure.docbook" prefix="${help.dir}/${pdf.dir}" /> -->
+
 		<generate.section.help src.dir="${help.dir}/01_overview" src.file="overview.textile" prefix="${help.prefix}/01_overview" />
 		<generate.section.help src.dir="${help.dir}/02_installation" src.file="installation.textile" prefix="${help.prefix}/02_installation" />
 		<generate.section.help src.dir="${help.dir}/03_getting_started" src.file="getting_started.textile" prefix="${help.prefix}/03_getting_started" />
@@ -34,10 +48,17 @@
 	</target>
 
 	<target name="clean">
-		<delete>
-			<fileset dir="${help.dir}">
-				<include name="**/**/*.html" />
-				<include name="**/**/*toc.xml" />
+		<delete includeemptydirs="true">
+			<fileset dir="${help.dir}" defaultexcludes="false">
+				<include name="**/*.html" />
+				<include name="**/*-toc.xml" />
+				<include name="**/*~" />
+				<include name="00_structure/index.xml" />
+				<include name="00_structure/plugin.xml" />
+				<include name="00_structure/toc.xml" />
+				<include name="**/pdf/*" />
+				<include name="**/pdf" />
+
 				<!-- Include joined source files produced by assemble.sections here 
 				<include name="**/**/c_code_generator.textile" />
 				<include name="**/**/java_code_generator.textile" />-->
@@ -78,5 +99,94 @@
 			</wikitext-to-eclipse-help>
 		</sequential>
 	</macrodef>
+
+	<!--
+	<macrodef name="docbook.to.html" description="Converts a DocBook file into an HTML document.">
+		<attribute name="src.dir" />
+		<attribute name="src.file" />
+		<attribute name="prefix" />
+		<sequential>
+			<xslt force="true" style="${docbook.xsl.dir}/html/ysct-docbook.xsl" in="@{src.dir}/@{src.file}" out="@{prefix}/test.html" classpathref="xalan.classpath">
+				<factory name="org.apache.xalan.processor.TransformerFactoryImpl" />
+				<param name="base.dir" expression="@{prefix}" />
+				<param name="manifest" expression="1" />
+				<param name="create.plugin.xml" expression="0" />
+				<param name="chunker.output.indent" expression="yes" />
+				<param name="navig.showtitles" expression="0" />
+				<param name="suppress.navigation" expression="0" />
+				<param name="html.stylesheet" expression="../style.css" />
+				<param name="section.autolabel" expression="1" />
+				<param name="section.autolabel.max.depth" expression="4" />
+			</xslt>
+		</sequential>
+	</macrodef>
+	-->
+
+	<macrodef name="docbook.to.eclipsehelp" description="Converts a DocBook file into an Eclipse help document.">
+		<attribute name="help.dir" />
+		<attribute name="subdir" />
+		<attribute name="basename" />
+
+		<sequential>
+			<!-- Creates the following files in the current subdirectory:
+			     - HTML file containing the documentation
+			     - index.xml containing
+			     - plugin.xml containing
+			     - toc.xml containing
+			-->
+			<property name="src.file" value="@{help.dir}/@{subdir}/@{basename}.docbook" />
+			<property name="dummy.file" value="@{help.dir}/@{subdir}/dummy.html" />
+			<property name="current.dir" value="@{help.dir}/@{subdir}" />
+
+
+			<xslt force="true" style="${docbook.xsl.dir}/eclipsehelp.xsl" in="${src.file}" out="${dummy.file}" classpathref="xalan.classpath">
+				<factory name="org.apache.xalan.processor.TransformerFactoryImpl" />
+				<param name="base.dir" expression="${current.dir}" />
+				<param name="chunked.filename.prefix" expression="@{basename}-" />
+				<param name="manifest" expression="0" />
+				<param name="create.plugin.xml" expression="0" />
+				<param name="navig.showtitles" expression="0" />
+				<param name="suppress.navigation" expression="1" />
+				<param name="html.stylesheet" expression="../style.css" />
+				<param name="section.autolabel" expression="1" />
+				<param name="section.autolabel.max.depth" expression="4" />
+				<param name="eclipse.plugin.name" expression="YAKINDU Statechart Tools Documentation" />
+				<param name="eclipse.plugin.id" expression="${ant.project.name}" />
+				<param name="eclipse.provider" expression="itemis AG, YAKINDU Statechart Tools team" />
+			</xslt>
+
+			<!-- Unfortunately the HTML files are created in a subdirectory where they shouldn't belong. So we have to move
+				 the files to their proper destination. That subdirectory remains for now. This will be overhauled in a
+				 later version of this build file. -->
+			<move todir="${current.dir}" verbose="true">
+				<fileset dir="${current.dir}/${current.dir}">
+					<filename name="*" />
+				</fileset>
+			</move>
+
+		</sequential>
+	</macrodef>
+
+	<!--
+	<macrodef name="docbook.to.pdf" description="Converts a DocBook file into a PDF document.">
+		<attribute name="src.dir" />
+		<attribute name="src.file" />
+		<attribute name="prefix" />
+		<sequential>
+			<xslt force="true" style="${docbook.xsl.dir}/fo/docbook.xsl" in="@{src.dir}/@{src.file}" out="@{prefix}/test.fo" classpathref="xalan.classpath">
+				<factory name="org.apache.xalan.processor.TransformerFactoryImpl" />
+				<param name="base.dir" expression="@{prefix}" />
+				<param name="manifest" expression="1" />
+				<param name="create.plugin.xml" expression="0" />
+				<param name="chunker.output.indent" expression="yes" />
+				<param name="navig.showtitles" expression="0" />
+				<param name="suppress.navigation" expression="0" />
+				<param name="html.stylesheet" expression="../style.css" />
+				<param name="section.autolabel" expression="1" />
+				<param name="section.autolabel.max.depth" expression="4" />
+			</xslt>
+		</sequential>
+	</macrodef>
+	-->
 
 </project>

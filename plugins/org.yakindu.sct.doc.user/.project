@@ -3,6 +3,7 @@
 	<name>org.yakindu.sct.doc.user</name>
 	<comment></comment>
 	<projects>
+		<project>org.yakindu.sct.doc.docbook</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

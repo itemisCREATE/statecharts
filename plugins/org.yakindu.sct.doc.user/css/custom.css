@@ -155,3 +155,12 @@ table.scedit img {
     margin-right: 0px;
     box-shadow: 4px 4px 2px #bbb;
 }
+
+.application {
+	font-style: italic;
+}
+
+.application-ysct {
+	font-weight: bold;
+	color: #555566;
+}
