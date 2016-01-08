@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.yakindu.base"
-      label="YAKINDU Base Feature"
+      label="YAKINDU Statechart Tool Base"
       version="2.5.0.qualifier"
       provider-name="statecharts.org">
 
@@ -24,26 +24,43 @@
    <includes
          id="org.yakindu.base.gmf.runtime"
          version="0.0.0"/>
+
    <includes
          id="org.yakindu.base.xtext.utils.gmf"
          version="0.0.0"/>
+
    <includes
          id="org.yakindu.base.xtext.utils.jface"
          version="0.0.0"/>
+
    <plugin
          id="org.yakindu.base.types"
+         download-size="0"
+         install-size="0"
          version="0.0.0"/>
+
    <plugin
          id="org.yakindu.base.types.edit"
+         download-size="0"
+         install-size="0"
          version="0.0.0"/>
+
    <plugin
          id="org.yakindu.base.expressions"
+         download-size="0"
+         install-size="0"
          version="0.0.0"/>
+
    <plugin
          id="org.yakindu.base.expressions.edit"
+         download-size="0"
+         install-size="0"
          version="0.0.0"/>
+
    <plugin
          id="org.yakindu.base.expressions.ui"
+         download-size="0"
+         install-size="0"
          version="0.0.0"/>
 
 </feature>
