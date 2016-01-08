@@ -32,11 +32,6 @@
          YAKINDU Statechart Tools (SCT)
       </description>
    </category-def>
-   <category-def name="YAKINDU SCT(Sources)" label="YAKINDU SCT (Sources)">
-      <description>
-         Source features of YAKINDU Statechart Tools (SCT)
-      </description>
-   </category-def>
    <category-def name="YAKINDU BASE" label="YAKINDU BASE">
       <description>
          YAKINDU Base features
