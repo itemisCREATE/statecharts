@@ -24,6 +24,7 @@ import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.If
 
 class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
@@ -91,6 +92,16 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
 	override dispatch CharSequence code(CheckRef it) 
 		'''«IF check != null»«check.shortName»()«ELSE»true«ENDIF»'''
+		
+    override dispatch CharSequence code(If it) '''
+		«stepComment»
+		if («check.code») { 
+			«thenStep.code»
+		} «IF (elseStep != null)» else {
+			«elseStep.code»
+		}
+		«ENDIF»
+	'''
 	
 	override dispatch CharSequence code(EnterState it) '''
 		stateConfVector[«state.stateVector.offset»] = «state.shortName»;
