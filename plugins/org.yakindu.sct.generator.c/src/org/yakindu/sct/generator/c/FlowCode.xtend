@@ -121,10 +121,10 @@ class FlowCode {
 	'''	
 
 	def dispatch CharSequence code(Check it) 
-		'''«IF condition != null»(«condition.code») ? bool_true : bool_false«ELSE»bool_true«ENDIF»'''
+		'''«IF condition != null»«condition.code»«ELSE»bool_true«ENDIF»'''
 	
 	def dispatch CharSequence code(CheckRef it) 
-		'''«IF check != null»(«check.shortName»(«scHandle»)) ? bool_true : bool_false«ELSE»bool_true«ENDIF»'''
+		'''«IF check != null»«check.shortName»(«scHandle»)«ELSE»bool_true«ENDIF»'''
 
 	def dispatch CharSequence code(If it) '''
 		«stepComment»
