@@ -40,6 +40,16 @@ public class ChoicePropertySection extends AbstractEditorPropertySection impleme
 	@Override
 	public void createControls(Composite parent) {
 
+		Label label;
+		// createChoiceKindViewer(parent);
+		label = getToolkit().createLabel(parent, "Transition Priority:");
+		GridDataFactory.fillDefaults().applyTo(label);
+		orderElementControl = new OrderElementControl(parent, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS,
+				this);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(orderElementControl);
+	}
+
+	protected void createChoiceKindViewer(Composite parent) {
 		Label label = getToolkit().createLabel(parent, "Choice kind:");
 		GridDataFactory.fillDefaults().applyTo(label);
 		choiceKindViewer = new ComboViewer(parent);
@@ -47,16 +57,12 @@ public class ChoicePropertySection extends AbstractEditorPropertySection impleme
 		choiceKindViewer.setContentProvider(new ArrayContentProvider());
 		choiceKindViewer.setLabelProvider(new LabelProvider());
 		choiceKindViewer.setInput(ChoiceKind.values());
-		label = getToolkit().createLabel(parent, "Transition Priority:");
-		GridDataFactory.fillDefaults().applyTo(label);
-		orderElementControl = new OrderElementControl(parent, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS, this);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(orderElementControl);
 	}
 
 	@Override
 	public void bindModel(EMFDataBindingContext context) {
 		orderElementControl.refreshInput();
-		bindChoiceKind(context);
+//		bindChoiceKind(context);
 	}
 
 	protected void bindChoiceKind(EMFDataBindingContext context) {
