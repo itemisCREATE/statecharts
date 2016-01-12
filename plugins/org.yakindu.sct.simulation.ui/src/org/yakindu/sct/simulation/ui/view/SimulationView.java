@@ -14,13 +14,11 @@ import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.graphics.Font;
@@ -46,6 +44,7 @@ public class SimulationView extends AbstractDebugTargetView {
 	private TreeViewer viewer;
 	private FormToolkit kit;
 	private Font font;
+	private RaiseEventSelectionListener selectionListener;
 
 	public SimulationView() {
 		kit = new FormToolkit(Display.getDefault());
@@ -55,6 +54,7 @@ public class SimulationView extends AbstractDebugTargetView {
 
 	@Override
 	public void dispose() {
+		selectionListener.dispose();
 		font.dispose();
 		super.dispose();
 	}
@@ -76,7 +76,7 @@ public class SimulationView extends AbstractDebugTargetView {
 
 	protected Viewer createViewer(Composite parent) {
 		viewer = ExecutionContextViewerFactory.createViewer(parent, false);
-		viewer.addSelectionChangedListener(new RaiseEventSelectionListener(viewer));
+		selectionListener = new RaiseEventSelectionListener(viewer);
 		return viewer;
 	}
 
@@ -118,40 +118,54 @@ public class SimulationView extends AbstractDebugTargetView {
 	 * @author andreas muelder - Initial contribution and API
 	 * 
 	 */
-	protected static class RaiseEventSelectionListener implements ISelectionChangedListener {
+	protected static class RaiseEventSelectionListener {
 
 		private TreeViewer viewer;
 		private Point mouseLocation;
+
+		MouseMoveListener moveListener = new MouseMoveListener() {
+			public void mouseMove(MouseEvent e) {
+				mouseLocation = new Point(e.x, e.y);
+			}
+		};
+		MouseAdapter clickListener = new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				ViewerCell cell = viewer.getCell(mouseLocation);
+				if (cell == null || cell.getColumnIndex() != 0)
+					return;
+				Object element = cell.getElement();
+				if (element instanceof ExecutionEvent)
+					raiseEvent((ExecutionEvent) element);
+			}
+		};
 
 		public RaiseEventSelectionListener(TreeViewer viewer) {
 			this.viewer = viewer;
 			registerMouseListener();
 		}
 
-		protected void registerMouseListener() {
-			viewer.getControl().addMouseMoveListener(new MouseMoveListener() {
-				public void mouseMove(MouseEvent e) {
-					mouseLocation = new Point(e.x, e.y);
-				}
-			});
+		public void dispose() {
+			if (!viewer.getControl().isDisposed()) {
+				viewer.getControl().removeMouseMoveListener(moveListener);
+				viewer.getControl().removeMouseListener(clickListener);
+			}
 		}
 
-		public void selectionChanged(SelectionChangedEvent event) {
-			ViewerCell cell = viewer.getCell(mouseLocation);
-			if (cell == null || cell.getColumnIndex() != 0)
-				return;
-			Object firstElement = ((IStructuredSelection) event.getSelection()).getFirstElement();
-			if (firstElement instanceof ExecutionEvent) {
-				ExecutionEvent casted = (ExecutionEvent) firstElement;
-				if (casted.isRaised()) {
-					casted.setRaised(false);
-				} else if (casted.isScheduled()) {
-					casted.setScheduled(false);
-				} else {
-					casted.setScheduled(true);
-				}
-				viewer.refresh();
+		protected void registerMouseListener() {
+			viewer.getControl().addMouseMoveListener(moveListener);
+			viewer.getControl().addMouseListener(clickListener);
+		}
+
+		public void raiseEvent(ExecutionEvent event) {
+			if (event.isRaised()) {
+				event.setRaised(false);
+			} else if (event.isScheduled()) {
+				event.setScheduled(false);
+			} else {
+				event.setScheduled(true);
 			}
+			viewer.refresh();
 		}
 	}
 }
