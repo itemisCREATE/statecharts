@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.yakindu.base.gmf.runtime.highlighting.HighlightingParameters;
 import org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport;
 import org.yakindu.sct.model.sgraph.RegularState;
-import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.util.CrossDocumentContentAdapter;
 
@@ -74,9 +73,12 @@ public class ExecutionContextVisualizer extends CrossDocumentContentAdapter {
 		} else if (eventType == REMOVE || eventType == REMOVE_MANY) {
 			objects = toList(notification.getOldValue());
 		}
+		if(objects.size() == 0)
+			return;
+		
 		List<IHighlightingSupport.Action> actions = new ArrayList<IHighlightingSupport.Action>();
 		for (EObject eObject : objects) {
-			if (eObject instanceof State) {
+			if (eObject instanceof RegularState) {
 				EObject container = eObject;
 				while (container != null) {
 					if (container instanceof RegularState) {
