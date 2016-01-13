@@ -9,9 +9,6 @@
    <feature url="features/org.yakindu.sct.generator.java_0.0.0.jar" id="org.yakindu.sct.generator.java" version="0.0.0">
       <category name="YAKINDU SCT"/>
    </feature>
-   <feature url="features/org.yakindu.sct.sdk_0.0.0.jar" id="org.yakindu.sct.sdk" version="0.0.0">
-      <category name="YAKINDU SCT"/>
-   </feature>
    <feature url="features/org.yakindu.sct.test_0.0.0.jar" id="org.yakindu.sct.test" version="0.0.0">
       <category name="YAKINDU SCT Test"/>
    </feature>
