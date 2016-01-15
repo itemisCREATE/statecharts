@@ -1,11 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook V5.1//EN//XML"
-                  "http://www.oasis-open.org/docbook/xml/5.1/docbookx.dtd"[
-<!ATTLIST para           xml:space (default|preserve) 'preserve'>
-<!ATTLIST programlisting xml:space (default|preserve) 'preserve'>
+<!DOCTYPE article [
+<!ENTITY nbsp "&#x00a0;">
+<!ENTITY ysct "YAKINDU Statechart Tools">
 ]>
- -->
-
+-->
 <article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
  <info>
   <title>YAKINDU Statechart Tools Documentation</title>
@@ -46,8 +45,8 @@
      your computer.</para>
    </sect3>
   </sect2>
-  <sect2 xml:id="plattform-overview">
-   <title>Plattform overview</title>
+  <sect2 xml:id="platform-overview">
+   <title>Platform overview</title>
    <para>You can either install <application>YAKINDU Statechart Tools</application> as a stand-alone software package under the following operating systems.</para>
    <itemizedlist>
     <listitem>
@@ -72,9 +71,13 @@
    <indexterm><primary>Windows</primary><secondary>Installing YAKINDU Statechart Tools</secondary></indexterm>
    <indexterm><primary>Installation</primary><secondary>Installation on Windows</secondary></indexterm>
    <para>This chapter describes how to install <application>YAKINDU Statechart Tools</application> on a Windows 7 machine.</para>
+
    <sect3 xml:id="unpacking-the-downloaded-file">
     <title>Unpacking the downloaded file</title>
-    <para>Unpack the software distribution file. Use the file explorer to open the directory you downloaded the software distribution file to, right-click on the latter, and select <emphasis>Extract All…</emphasis> in the context menu.</para>
+
+    <para>Unpack the software distribution file. Use the file explorer to open the directory you downloaded the software
+     distribution file to, right-click on the latter, and select <emphasis>Extract All…</emphasis> in the context menu.</para>
+
     <figure>
      <title>Unpacking the downloaded file on Windows [1]</title>
      <mediaobject>
@@ -86,8 +89,10 @@
       </textobject>
      </mediaobject>
     </figure>
+
     <para>Choose a directory for <application>YAKINDU Statechart Tools</application> (YAKINDU SCT). The example below assumes you want to install the software in the <emphasis>C:\Program Files\YAKINDU</emphasis> directory.</para>
     <para>Depending on your permissions, you might not be able to create a directory and install software under <emphasis>C:\Program Files</emphasis>. In this case, please choose another installation directory at a location you are allowed to write to.</para>
+
     <figure>
      <title>Unpacking the downloaded file on Windows [2]</title>
      <mediaobject>
@@ -99,18 +104,24 @@
       </textobject>
      </mediaobject>
     </figure>
+
     <para>Click on <emphasis>Extract</emphasis> to start the extraction process. With Window’s built-in unpacker, this will take surprisingly much time. Alternatively, you can use a 3rd-party unpacker like <link xl:href="http://www.7-zip.org/">7-Zip</link>. Saves you a lot of time!</para>
     <para>After unpacking, you will find a folder <emphasis>yakindu-sct</emphasis> in your installation directory, i. e. <emphasis>C:\Program Files\YAKINDU\yakindu-sct</emphasis> in our example, as shown in the image below:</para>
+
     <figure>
      <title>The extracted "yakindu-sct" folder</title>
      <mediaobject>
       <imageobject>
        <imagedata fileref="images/windows7_install_030_eclipse_folder.png" />
       </imageobject>
-      <caption>The extracted "yakindu-sct" folder</caption>
+      <textobject>
+       <phrase>The extracted "yakindu-sct" folder</phrase>
+      </textobject>
      </mediaobject>
     </figure>
+
     <para>The contents of the <emphasis>yakindu-sct</emphasis> folder looks like this:</para>
+
     <figure>
      <title>Contents of the extracted &quot;yakindu-sct&quot; folder</title>
      <mediaobject>
@@ -122,10 +133,15 @@
       </textobject>
      </mediaobject>
     </figure>
+
     <para>There you are: You have installed <application>YAKINDU Statechart Tools</application>. Now you should start it.</para>
+
    </sect3>
+
+
    <sect3 xml:id="starting-yakindu-statechart-tools">
     <title>Starting YAKINDU Statechart Tools</title>
+
     <para>Start <application>YAKINDU Statechart Tools</application> by running the <emphasis>SCT.exe</emphasis> executable.</para>
     <para>To do so, please double-click (or single-click, depending on your Windows settings) on the <emphasis>YAKINDU</emphasis> symbol shown in the sample screenshot above.</para>
     <para>Depending on the Windows settings and your permissions, you might get the following security warning, indicating that you downloaded the application from a potentially unsecure source:</para>
@@ -1419,8 +1435,10 @@ internal:
       </textobject>
      </mediaobject>
     </figure>
-    <para>Now that the light switch is off, let’s turn the lights on by operating the switch. In the simulation, we will have to raise the <emphasis>operate</emphasis> event. How can we do this?</para>
-    <para>In the <emphasis>Simulation</emphasis> view at the right-hand side of the Eclipse workbench, click on the <emphasis>internal</emphasis> entry’s show/hide symbol to display its contents.</para>
+    <para>Now that the light switch is off, let’s turn the lights on by operating the switch. In the simulation, we will have
+     to raise the <emphasis>operate</emphasis> event. How can we do this?</para>
+    <para>In the <emphasis>Simulation</emphasis> view at the right-hand side of the Eclipse workbench, click on the
+     <emphasis>internal</emphasis> entry’s show/hide symbol to display its contents.</para>
     <figure>
      <title>Displaying event names in the statechart simulator</title>
      <mediaobject>
@@ -1757,7 +1775,12 @@ feature GeneralFeatures {
   </sect2>
   <sect2 xml:id="the-statechart-language">
    <title>The statechart language</title>
-   <para>This chapter describes the statechart elements of the <application>YAKINDU Statechart Tools</application> (YAKINDU SCT) editor. The YAKINDU SCT meta model is the model of finite state machines. It is based on the view of a system that is defined by a finite number of states. The behavior of such a system is based on its active states. These states are determined by the history of the state machine. Very important are the theoretical models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (entry, exit). YAKINDU SCT can model both these types.</para>
+   <para>This chapter describes the statechart elements of the <application>YAKINDU Statechart Tools</application> (YAKINDU SCT)
+    editor. The YAKINDU SCT meta model is the model of finite state machines. It is based on the view of a system that is defined
+    by a finite number of states. The behavior of such a system is based on its active states. These states are determined by the
+    history of the state machine. Very important are the theoretical models for state machines by Mealy and Moore. Mealy state
+    machines associate actions with transitions. Moore machines associate actions with states (<emphasis role="state">entry</emphasis>,
+    <emphasis role="state">exit</emphasis>). YAKINDU SCT can model both these types.</para>
    <para>The YAKINDU SCT meta model is designed similar to the UML statechart meta model with the following differences:</para>
    <itemizedlist>
     <listitem>
@@ -1788,11 +1811,16 @@ feature GeneralFeatures {
     <title>Statechart</title>
     <para></para>
    </sect3>
+
    <sect3 xml:id="graphical-elements">
     <title>Graphical elements</title>
+
     <sect4 xml:id="region">
      <title>Region</title>
-     <para>As already mentioned, the YAKINDU statecharts are self-contained. They are organized in regions. Due to this it is possible to organize multiple state machines in different regions and to run them concurrently.</para>
+
+     <para>As already mentioned, the YAKINDU statecharts are self-contained. They are organized in regions. Due to this
+      it is possible to organize multiple state machines in different regions and to run them concurrently.</para>
+
      <figure>
       <title>Parallel regions</title>
       <mediaobject>
@@ -1805,47 +1833,341 @@ feature GeneralFeatures {
       </mediaobject>
      </figure>
     </sect4>
+
     <sect4 xml:id="state">
-     <title>State</title>
-     <para>States are the central elements of a state machine. A state has to be placed inside a region and must have a name that is unique inside this region. During simulation, each state can be active or passive. An active state has actions that are accomplished. Either an action is carried out on entering a state, during active state, or on exit.</para>
+     <title>State</title><indexterm><primary>State</primary></indexterm>
+     <para>States are the central elements of a state machine. A state has to be placed inside a region and must have a name
+      that is unique inside this region. During simulation, each state can be active or passive. An active state has actions
+      that are accomplished. Either an action is carried out on entering a state, during active state, or on exit.</para>
     </sect4>
+
     <sect4 xml:id="transition">
-     <title>Transition</title>
+     <title>Transition</title><indexterm><primary>Transition</primary></indexterm>
      <para>A transition is the transfer of one state to another. Transitions are diagrammed as arrows. They can have events and actions, but don’t need to.</para>
      <para>The syntax of events and actions is defined by a <link linkend="the-statechart-language">textual description language</link>. Please refer to section <link linkend="events">Events</link> of this documentation for more details! For more details on actions please see chapter <link linkend="reaction-triggers">Actions</link>.</para>
      <para>If a state has more than a single outgoing transition without event, then among those transitions the one that has been modeled first will be carried out.</para>
     </sect4>
-    <sect4 xml:id="final-state">
-     <title>Final state</title>
-     <para>Initial and final states are pseudo states, because the statechart does not rely on them. Pseudo states express characteristics that are impossible to express by simple states.</para>
-     <para>The initial state is always the first state that becomes active during interpretation or simulation of the state machine. An initial state can have only one outgoing transition and has no incoming ones. Its outgoing transition has no events or actions.</para>
-     <para>Within a region, only a single initial state is allowed, but each region may have its own initial state.</para>
-    </sect4>
+
+
     <sect4 xml:id="entry">
      <title>Entry</title>
-     <para></para>
+     <indexterm><primary>Entry</primary></indexterm>
+     <indexterm><primary>Entry state</primary></indexterm>
+     <indexterm><primary>Entry point</primary></indexterm>
+     <indexterm><primary>Entry node</primary></indexterm>
+
+     <para>When a state machine starts or when the control flow enters a <link linkend="region">region</link>, an 
+      <emphasis>entry</emphasis> defines which state is to be activated first. The flow passes through the state
+      machine's or the region's entry and transitions to the target state the entry's transition is pointing to. 
+      This state becomes active.</para>
+
+     <para> An entry has a single outgoing transistion and no incoming ones. Its outgoing transition has neither a 
+      trigger nor a guard condition.</para>
+
+     <para>An entry is depicted as a filled circle, see <xref linkend="fig_state_entry_exit_final_explained"/>.</para>
+
+     <figure xml:id="fig_state_entry_exit_final_explained">
+      <title>Entry, exit, and final state</title>
+      <mediaobject>
+       <imageobject>
+        <imagedata fileref="images/state_entry_exit_final_explained.png"/>
+       </imageobject>
+       <textobject><phrase>Entry, exit, and final state</phrase></textobject>
+      </mediaobject>
+     </figure>
+
+     <sect5 xml:id="default-entry">
+      <title>Default entry and initial state</title>
+      <indexterm><primary>Default entry</primary></indexterm>
+      <indexterm><primary>Entry</primary><secondary>default</secondary></indexterm>
+     <indexterm><primary>Initial state</primary></indexterm>
+     <indexterm><primary>State</primary><secondary>initial</secondary></indexterm>
+
+      <para>An entry without a name is called the <emphasis>default entry</emphasis>. It is similar to the
+       UML's<indexterm><primary>UML</primary></indexterm> <emphasis>initial state</emphasis><indexterm><primary>Initial 
+       state</primary></indexterm><indexterm><primary>State</primary><secondary>initial</secondary></indexterm>. 
+       However, while the transition from the initial state to an ordinary state may specify a guard, the transition 
+       sourced at an entry cannot.</para>
+       
+       <para>A region may have at most one default entry.</para>
+     </sect5>
+
+     <sect5 xml:id="named-entries">
+      <title>Named entries</title>
+      <indexterm><primary>Named entry</primary></indexterm>
+      <indexterm><primary>Entry</primary><secondary>named</secondary></indexterm>
+
+      <para>The <link linkend="default-entry">default entry</link> specifies a single entry point into a region. 
+       A region can provide a multitude of additional or alternative entry points, thus implementing different kinds of 
+       behaviour, depending on which entry point has been taken. If a region comprises multiple entries, these entries 
+       must be <emphasis>named</emphasis>. An entry's name must be unique within its region.</para>
+
+      <para>The default entry implicitly has the name <literal>default</literal>. Alternatively, it is possible to 
+       explicitly give the name <literal>default</literal> to the default entry. Semantically both variants are 
+       equivalent. Whether an entry has no name or it has the name <literal>default</literal>: in both cases the entry 
+       is called <emphasis>default entry</emphasis>.</para>
+
+      <para>An incoming transition specifies a named entry to be used by the entry's <emphasis>name</emphasis>. This is 
+       done in a so-called <emphasis>transition property</emphasis><indexterm><primary>property</primary></indexterm> 
+       of the transition, according to the following format:</para>
+      
+      <synopsis><code># &gt;</code><emphasis>entry-name</emphasis></synopsis>
+      
+      <para>Named entries have no equivalent in the UML<indexterm><primary>UML</primary></indexterm>.</para>
+
+      <example><para>The sample statechart in <xref linkend="fig_state_entry"/> has a composite state
+       named <emphasis role="state-name">Handle result</emphasis>. This composite state has a default entry as well as 
+       an entry called <emphasis>failure</emphasis>. If state <emphasis role="state-name">A</emphasis> is active and the
+       <emphasis role="trigger-name">error</emphasis> trigger fires, control is transitioned to the
+       <emphasis role="state-name">Handle result</emphasis> composite state. The notation
+       <literal>error # >failure</literal> specifies that the <emphasis>failure</emphasis> entry is to be
+       used.</para></example>
+
+      <figure xml:id="fig_state_entry">
+       <title>Entry state</title>
+       <mediaobject>
+        <imageobject>
+         <imagedata fileref="images/state_entry.png"/>
+        </imageobject>
+        <textobject><phrase>Entry state</phrase></textobject>
+       </mediaobject>
+      </figure>
+     </sect5>
     </sect4>
+
     <sect4 xml:id="exit">
      <title>Exit</title>
-     <para></para>
+     <indexterm><primary>Exit state</primary></indexterm>
+     <indexterm><primary>Exit point</primary></indexterm>
+     <indexterm><primary>Exit node</primary></indexterm>
+     <indexterm><primary>State</primary><secondary>exit</secondary></indexterm>
+
+     <para>An <emphasis>exit</emphasis> is a pseudo state<indexterm><primary>pseudo state</primary></indexterm> that is
+      used to leave and deactivate a composite state. Exits are counterpart to <link linkend="entry">entries</link>.
+      They are also known as exit points, exit states, or exit nodes. See <xref linkend="final"/> for a different way
+      to terminate a region or state machine.</para>
+
+     <para>An exit may have multiple incoming transistions and has no outgoing one.</para>
+
+     <para>An exit state is depicted as an unfilled circle with an X-shaped cross, see
+      <xref linkend="fig_state_entry_exit_final_explained"/>.</para>
+
+     <para>Within a region, multiple exits are allowed. Each exit must either have a name that is unique within its 
+      region or be the <emphasis>default exit</emphasis>. The default exit is either unnamed or has the name 
+      <literal>default</literal>, which is semantically equivalent. A region may have at most one default exit.</para>
+
+     <para>When a composite state reaches an exit in any of its regions, all states in other regions of that composite 
+      state, if any, are deactivated immediately. The composite state will be left and be deactivated. It maintains no 
+      status information that could be probed from the outside. In other words, reaching an exit in one of a composite 
+      state's regions has severe consequences for all the other regions since they are exited and disposed immediately. 
+      After that, the containing composite state is also exited. There must be an unguarded transition that catches the 
+      exit and leads to another state outside of the composite state. The semantics of exit is different from that of 
+      final state; please see <xref linkend="final"/> for details.</para>
+
+     <para>A transition that has a composite state as its source can specify which exits should triggered it. That
+      is, different exits can lead to different behavior on the outside. A transition specifies the exits to 
+      react upon as a so-called <emphasis>property</emphasis><indexterm><primary>property</primary></indexterm> 
+      which looks like this:</para>
+      
+     <synopsis><code># </code><emphasis>exit-point-1</emphasis><code>&gt;</code> [ <emphasis>exit-point-2</emphasis><code>&gt;</code> ]…</synopsis>
+     
+     <para>Exits have no equivalent in the UML<indexterm><primary>UML</primary></indexterm>.</para>
+
+     <example>
+      <para>The sample statechart in <xref linkend="fig_state_entry_exit"/> contains two composite states:</para>
+       
+      <itemizedlist>
+      
+       <listitem><para>The composite state <emphasis role="state-name">Process</emphasis> models a
+        process with two passes (states) A and B. If both passes succeed, the composite state is left
+        via the <emphasis>no_problem</emphasis> exit node. However, if an error occurs in either A or
+        B the execution flow proceeds to the <emphasis>problem</emphasis> exit point and leaves the
+        composite state there.</para></listitem>
+        
+       <listitem><para>The composite state <emphasis role="state-name">Handle result</emphasis> is
+        intended to handle the processing result, be it success or failure. It has two entry points
+        <emphasis>success</emphasis> and <emphasis>failure</emphasis>.</para></listitem>
+      
+      </itemizedlist>
+
+      <para>The question is how to connect the exit points of <emphasis role="state-name">Process</emphasis>
+       to the corresponding entry points of <emphasis role="state-name">Handle result</emphasis>. This is done by two 
+       transitions leading from <emphasis role="state-name">Process</emphasis> to
+       <emphasis role="state-name">Handle result</emphasis> and appropriate specifications.</para>
+       
+      <para>The transition shown on the left specifies <literal># no_problem> >success</literal>. This means: If the 
+       source composite state is left via the <emphasis>no_problem</emphasis> exit point, enter the target composite 
+       state at the <emphasis>success</emphasis> entry point. The specification of the transition on the right is 
+       analogous: If the source state is left via the <emphasis>problem</emphasis> exit point, enter the target state 
+       at the <emphasis>failure</emphasis> entry point.</para>
+      
+      <para>The order of exit and entry points in a transition specification is irrelevant. Instead, the position 
+       of the <literal>&gt;</literal> character is decisive:</para>
+       
+      <itemizedlist>
+        <listitem><para>If the <literal>&gt;</literal> character is to the <emphasis>right</emphasis> of a name, like in 
+         <literal>exit_name&gt;</literal>, that name denotes an <emphasis>exit</emphasis>.</para></listitem>
+
+        <listitem><para>If the <literal>&gt;</literal> character is to the <emphasis>left</emphasis> of a name, like in 
+         <literal>&gt;entry_name</literal>, that name denotes an <emphasis>entry</emphasis>.</para></listitem>
+      </itemizedlist>
+
+      <para>Alternatively, <emphasis role="state-name">Process</emphasis> could have been modeled with two 
+       different error exit states, say <emphasis>error_1</emphasis> and <emphasis>error_2</emphasis>. This
+       would allow to respond differently to different error conditions, while still enabling to catch
+       them both with a single flow. A transition with <literal># >error_1 >error_2 problem></literal>
+       would do so.</para>
+     </example>
+
+     <figure xml:id="fig_state_entry_exit">
+      <title>Entries and exits</title>
+      <mediaobject>
+       <imageobject>
+        <imagedata fileref="images/state_entry_exit.png"/>
+       </imageobject>
+       <textobject><phrase>Entries and exits</phrase></textobject>
+      </mediaobject>
+     </figure>
     </sect4>
+
+    <sect4 xml:id="final">
+     <title>Final state</title>
+     <indexterm><primary>Final state</primary></indexterm>
+     <indexterm><primary>State</primary><secondary>final</secondary></indexterm>
+
+     <para>A <emphasis role="state">final state</emphasis> denotes the end of the execution flow of a state machine or 
+      region. See <xref linkend="exit"/> for a different way to terminate a composite state.</para>
+
+     <para>A final state is depicted as an unfilled circle with a smaller filled black circle inside, see
+      <xref linkend="fig_state_entry_exit_final_explained"/>.</para>
+
+     <para>A final state can have multiple incoming transitions and has no outgoing ones.</para>
+
+     <para>Within a region, only a single final state is allowed, but each region may have its own final state.</para>
+
+     <para>When a region reaches its final state, control stops there and waits until all other orthogonal regions, if 
+      any, have reached their respective final states, too. The semantics of final states is different from that of 
+      exits; please see <xref linkend="exit"/> for details.</para>
+
+     <note>
+      <para>Final states are proper states. This is different from the UML<indexterm><primary>UML</primary></indexterm>, 
+       where a final state is a pseudo state<indexterm><primary>pseudo state</primary></indexterm>, i.&#x00a0;e. in the 
+       UML, it cannot have any properties normal states can have, except for a name.</para>
+     </note>
+    </sect4>
+
+
     <sect4 xml:id="choice">
      <title>Choice</title>
-     <para>A choice is also a pseudo state. It can be used to model a conditional path. A choice node divides a transition into multiple parts.</para>
+     <indexterm><primary>Choice state</primary></indexterm>
+     <indexterm><primary>State</primary><secondary>choice</secondary></indexterm>
+
+     <para>A choice is a pseudo state. It can be used to model a conditional path. A choice node divides a transition into multiple parts.</para>
      <para>Usually the first transition points towards the choice node. One of the choice’s outgoing transitions can carry a condition.</para>
     </sect4>
+
     <sect4 xml:id="synchronization">
      <title>Synchronization</title>
-     <para></para>
+     <indexterm><primary>Synchronization state</primary></indexterm>
+     <indexterm><primary>State</primary><secondary>synchronization</secondary></indexterm>
+
+     <para>
+      Synchronization is a means to either split a flow into several parallel regions of a substate or to join several parallel
+      flows from orthogonal regions into a single flow. The synchronization state corresponds to the UML's concepts of
+      fork<indexterm><primary>fork</primary></indexterm> and join<indexterm><primary>join</primary></indexterm>.</para>
+
+     <para>Whether a synchronization state behaves as a fork or as a join depends on its usage.</para>
+
+     <itemizedlist>
+
+      <listitem>
+       <para>A synchronization with a single incoming transition and several outgoing ones <emphasis>forks</emphasis>
+        the flow into several regions of the same substate. These regions are executed in parallel, see
+        <xref linkend="orthogonal-states"/>.</para>
+      </listitem>
+
+      <listitem>
+       <para>A synchronization with several incoming transitions from parallel regions of the same substate and a
+        single outgoing transition <emphasis>joins</emphasis> the incoming flows into a single flow of execution.</para>
+      </listitem>
+     </itemizedlist>
+ 
+     <para>A synchronization state is shown as a thick horizontal or vertical line, as can be seen in figure
+      <xref linkend="fig_state_synchronization"/>.</para>
+
+     <figure xml:id="fig_state_synchronization">
+      <title>Synchronization state</title>
+      <mediaobject>
+       <imageobject>
+        <imagedata fileref="images/state_synchronization.png"/>
+       </imageobject>
+       <textobject><phrase>Synchronization state</phrase></textobject>
+      </mediaobject>
+     </figure>
+ 
+     <para>For a synchronization to actually join the incoming transitions and execute the outgoing one, all of the
+      following conditions must be met:</para>
+
+     <itemizedlist>
+
+      <listitem>
+       <para>All source states must be active.</para>
+      </listitem>
+
+      <listitem>
+       <para>All guard conditions<indexterm><primary>guard condition</primary></indexterm> that are specified must be
+        fulfilled.</para>
+      </listitem>
+
+      <listitem>
+       <para>If one or more triggers are defined, at least one trigger must fire at a point in time while the conditions
+        above are met.</para>
+      </listitem>
+     
+     </itemizedlist>
+     
+     <example><para><xref linkend="fig_state_synchronization"/> shows an sample statechart containing a forking and a
+      joining synchronization. After having left the <varname role="state-name">Initialize</varname> state,
+      the synchronization state forks the execution flow into two regions
+      <varname role="region-name">r1</varname> and <varname role="region-name">r2</varname>. Both are part of
+      the <varname role="state-name">Process</varname> composite state and both are executed in
+      parallel. That is, when activating <varname role="state-name">Process</varname>, the substates
+      <varname role="state-name">Line A 1</varname> and 
+      <varname role="state-name">Line B 1</varname> also become active. When the flows continues and both
+      <varname role="state-name">Line A 2</varname> and 
+      <varname role="state-name">Line B 2</varname> have been reached, the synchronization state on the
+      right-hand side joins the flows and transitions to substates <varname role="state-name">Cleanup</varname>,
+      making it the active state. However, as long as only one of them is active, the synchronization will
+      wait for the other one to also become active before proceeding to
+      <varname role="state-name">Process</varname>.</para>
+      
+      <para>The example also demonstrates different lengths and orientations of the synchronization symbol.
+       In the statechart editor, first select the synchronization symbol, the use a handle in one of the
+       symbol's corners to change length or orientation. The handles in the middle of the symbol
+       have no effect.</para></example>
+
     </sect4>
+
+
     <sect4 xml:id="composite-state">
      <title>Composite state</title>
-     <para>A composite state is a state comprising one or more state machines. These state machines are also organized in regions within the composite state.</para>
-     <para>Besides the simple composite state YAKINDU SCT knows about two kinds of composite states: orthogonal states and submachine states.</para>
+     <indexterm><primary>Composite state</primary></indexterm>
+     <indexterm><primary>State</primary><secondary>composite</secondary></indexterm>
+     
+     <para>A composite state is a state comprising one or more state machines. These state machines are also organized
+      in regions within the composite state.</para>
+
+     <para>Besides the simple composite state YAKINDU SCT knows about two kinds of composite states: orthogonal
+      states and submachine states.</para>
+
      <para>Composite states contain other state machine branches.</para>
     </sect4>
+
     <sect4 xml:id="orthogonal-states">
      <title>Orthogonal states</title>
+     <indexterm><primary>Orthogonal states</primary></indexterm>
+     <indexterm><primary>States</primary><secondary>orthogonal</secondary></indexterm>
+
      <para>In the context of state machines orthogonal states are states that are independent of each other. The presumably most famous example is the keyboard example:</para>
      <figure>
       <title>Orthogonal states</title>
@@ -1859,6 +2181,7 @@ feature GeneralFeatures {
       </mediaobject>
      </figure>
     </sect4>
+
     <sect4 xml:id="shallow-history">
      <title>Shallow history</title>
      <para>The shallow history state is a pseudo state that is placed inside regions of composite states. It is used to remember the last active state inside a composite state. This makes it possible to jump back to the remembered state instead of starting at the inner initial state again.</para>
@@ -1874,7 +2197,9 @@ feature GeneralFeatures {
        </textobject>
       </mediaobject>
      </figure>
+
      <para>Particularly interesting in this statechart are the events <emphasis>checkProgress</emphasis> and <emphasis>goon</emphasis>. The event <emphasis>checkProgress</emphasis> jumps back to the <emphasis role="strong">init</emphasis> state while assigning the current progress count to the variable <emphasis>temp</emphasis>. The event <emphasis>goon</emphasis> jumps to the shallow history state that was placed inside the composite state.</para>
+
      <figure>
       <title>Shallow history [2]</title>
       <mediaobject>
@@ -1886,6 +2211,7 @@ feature GeneralFeatures {
        </textobject>
       </mediaobject>
      </figure>
+
      <figure>
       <title>Shallow history [3]</title>
       <mediaobject>
@@ -1897,13 +2223,17 @@ feature GeneralFeatures {
        </textobject>
       </mediaobject>
      </figure>
+
      <para>When the <emphasis>goon</emphasis> event is triggered, the most recent active state inside of the composite state <emphasis role="strong">answeringQuestions</emphasis> is activated again.</para>
     </sect4>
+
     <sect4 xml:id="deep-history">
      <title>Deep history</title>
+
      <para>Deep history is similar to shallow history, but more complex. With a deep history the latest state of multiple nested states is remembered.</para>
     </sect4>
    </sect3>
+
    <sect3 xml:id="types">
     <title>Types</title>
     <para>The language has a small integrated type system consisting of the following simple types:</para>
@@ -2096,8 +2426,7 @@ var1 &amp; var2
        <colspec align="left" />
        <tbody>
         <row>
-         <entry>
-                  less than
+         <entry>less than
                 </entry>
          <entry>
           <literal>&lt;</literal>
@@ -2542,7 +2871,11 @@ myBool = active(StateA)
       </textobject>
      </mediaobject>
     </figure>
-    <para>When the <emphasis>Extract Subdiagram</emphasis> refactoring is executed on a composite state, all containing regions are extracted into a separate diagram. A small decorator in the lower-right corner of the state indicates the existence of such a subdiagram. When you hover with the mouse cursor over this decorator, you’ll see a small preview of the subdiagram’s content. The refactoring also creates the required entry and exit points for you.</para>
+    <para>When the <emphasis>Extract Subdiagram</emphasis> refactoring is executed on a composite state, all containing regions are 
+     extracted into a separate diagram. A small decorator in the lower-right corner of the state indicates the existence of such a
+     subdiagram. When you hover with the mouse cursor over this decorator, you’ll see a small preview of the subdiagram’s content.
+     The refactoring also creates the required <emphasis role="state">entry</emphasis> and <emphasis role="state">exit</emphasis>
+     points for you.</para>
     <figure>
      <title>Subdiagram popup window</title>
      <mediaobject>

@@ -146,13 +146,19 @@
 				<param name="manifest" expression="0" />
 				<param name="create.plugin.xml" expression="0" />
 				<param name="navig.showtitles" expression="0" />
-				<param name="suppress.navigation" expression="1" />
+				<param name="suppress.navigation" expression="0" />
 				<param name="html.stylesheet" expression="../style.css" />
 				<param name="section.autolabel" expression="1" />
 				<param name="section.autolabel.max.depth" expression="4" />
 				<param name="eclipse.plugin.name" expression="YAKINDU Statechart Tools Documentation" />
 				<param name="eclipse.plugin.id" expression="${ant.project.name}" />
 				<param name="eclipse.provider" expression="itemis AG, YAKINDU Statechart Tools team" />
+				<param name="formal.title.placement" expression="figure after
+					example before
+					equation before
+					table before
+					procedure before
+					task before" />
 			</xslt>
 
 			<!-- Unfortunately the HTML files are created in a subdirectory where they shouldn't belong. So we have to move
