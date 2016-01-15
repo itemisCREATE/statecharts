@@ -58,10 +58,12 @@ public class Function {
 		public int compare(Method method1, Method method2) {
 			Class<?>[] parameterTypes1 = method1.getParameterTypes();
 			Class<?>[] parameterTypes2 = method2.getParameterTypes();
-
-			if (parameterTypes1.length != parameterTypes2.length)
-				return 0;
-
+			if (parameterTypes1.length > parameterTypes2.length) {
+				return -1;
+			}
+			if (parameterTypes1.length < parameterTypes2.length) {
+				return 1;
+			}
 			for (int i = 0; i < parameterTypes1.length; i++) {
 				final Class<?> class1 = parameterTypes1[i];
 				final Class<?> class2 = parameterTypes2[i];
