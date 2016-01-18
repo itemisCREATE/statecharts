@@ -1,0 +1,37 @@
+h1(#Overview). Overview
+
+h2(#WhatareYAKINDUStatechartTools). What are YAKINDU Statechart Tools?
+
+The statechart tools are a central part of YAKINDU: the modular toolkit for model-driven development of embedded systems. It is based on the open-source development platform Eclipse. YAKINDU Statechart Tools provide the following tools to deal with state machine diagrams:
+
+* *YAKINDU SCT Editor* to create and edit statecharts
+* *YAKINDU Simulator* to simulate the behavior of statecharts
+* *YAKINDU Xpand generator projects* to create a transformation of statecharts in Xpand
+* *YAKINDU Xtend/Java generator projects* to create a transformation in Xtend/Java
+* *Integrated Validator*
+
+The following graph shows these features and their relation to each other:
+
+!images/YAKINDU_features.png(Features of YAKINDU Statechart Tools)!
+
+
+h2(#WhoisbehindYAKINDUStatechartTools). Who is behind YAKINDU Statechart Tools?
+
+The main part of YAKINDU Statechart Tools is an open-source project ("http://www.yakindu.org/":http://www.yakindu.org/ ). Most developers work for itemis, a well-known consulting company specialized on model-based development.
+
+You may ask: Where does the money for open-source development come from? Well, we are providing professional services around YAKINDU, be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages, you name it. We do not only know the framework very well but we are also experts in programming and domain-specific language design. If you need an advice get in contact with us ("http://www.yakindu.de/":http://www.yakindu.de/ ). 
+
+
+h2(#WhoisusingtheYAKINDUStatechartTools). Who is using YAKINDU Statechart Tools?
+
+Initially YAKINDU Statechart Tools were designed for the embedded systems industry: automotive, system controls, vending machines etc. ut it brings benefit to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, or C++.
+
+
+h2. What is the structure of this documentation?
+
+# "Overview":#Overview
+# "Installation":../02_installation/installation.html
+# "Getting Started":../03_getting_started/getting_started.html
+# "Code generation":../04_code_generation/code_generation.html
+# "Reference":../05_reference/reference.html
+# "Task":../06_tasks/tasks.html

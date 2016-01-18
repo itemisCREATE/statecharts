@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="YAKINDU Statechart Tools Documentation">
+
+	<link toc="help/00_structure/toc.xml"/>
+
+	<link toc="help/01_overview/overview-toc.xml"/>
+	<link toc="help/02_installation/installation-toc.xml"/>
+	<link toc="help/03_getting_started/getting_started-toc.xml"/>
+	<link toc="help/04_code_generation/code_generation-toc.xml"/>
+	<link toc="help/05_reference/reference-toc.xml"/>
+	<!-- <link toc="help/06_tasks/tasks-toc.xml"/> -->
+
+	<topic label="SCT Simulation">
+		<anchor id ="sctSimulation" />
+	</topic>	   
+
+	<topic label="SCTUnit">
+		<anchor id ="sctUnit" />
+	</topic>	
+
+</toc>

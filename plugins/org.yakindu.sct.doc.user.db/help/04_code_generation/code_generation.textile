@@ -1,0 +1,189 @@
+h1. Generating Java source code
+
+YAKINDU Statechart Tools include code generators for Java, C, and C++ out of the box. The code generators are following a "code-only" approach: They are generating all the code that is needed and do not rely on any additional runtime libraries. The generated code provides a well-defined application programming interface and can be integrated easily with any client code. In this tutorial we will generate Java code for a sample statechart modeling the handling of a phone call, the *CallHandling* example.
+
+h2. The CallHandling example
+
+The state machine handling a phone call works as follows:
+* After startup, the system is in an idle state and is waiting for incoming calls.
+* When a call comes in, the user can either accept the call or dismiss it.
+* If the users accepts the call and opens a connection, the system is tracking the duration of the call and is waiting for the user to hang up.
+* After hanging up, the system displays the total time of call and then returns to its idle state.
+
+The complete statechart model is shown below:
+
+!(img-rounded shadowed)images/callhandling_model.png(The CallHandling statechart model)!
+
+In order to eventually obtain the *CallHandling* example in the form of executable code, we have to create the model in the statechart editor first, followed by creating a suitable generator model, followed by executing the code generator to create the source code we need.
+
+h3. Creating the statechart model
+
+In the "Getting Started":../03_getting_started/getting_started.html tutorial we have seen how to operate the statechart editor. So let's create a new project now and use the statechart editor to create the *CallHandling* statechart model as outlined above.
+
+In addition to what we have learned in "Getting Started":../03_getting_started/getting_started.html already, there is one new concept: interfaces.
+
+h3. Creating interfaces
+
+Statecharts can describe very complex interactions between a multitude of actors and an even bigger multitude of events these actors can receive or trigger. It is therefore good practice to structure such events and associate them with their respective actors. For this purpose YAKINDU Statecharts Tools provides the concept of so-called *interfaces*.
+
+In the _CallHandling_ example, we have two actors: the user and the phone. Let's model their communication as two interfaces:
+* The _Phone_ interface provides a single incoming event named _incoming_call_.
+* The _User_ interface comprises two incoming events: _accept_call_ and _dismiss_call_.
+
+We have to enter the respective definitions in textual form into the statechart editor. Here's how the interface definitions look like:
+
+bc(prettyprint). interface User:
+    in event accept_call
+    in event dismiss_call
+
+bc(prettyprint). interface Phone:
+    var duration : integer
+    in event incoming_call
+
+As you can see, the _Phone_ interface also has an integer variable _duration_ which will track the duration of the call. The interface definitions above have to go into the statechart editor's definition block on the left-hand side of the statechart editor.
+
+If everything went well, any error markers in the model are gone. Your model should look like the one in the following screenshot:
+
+!(img-rounded shadowed)images/callhandling_example_final.png(The CallHandling statechart modeled in the statechart editor)!
+
+
+
+h2. Creating a generator model
+
+For code generation, YAKINDU Statechart Tools use a textual generator model called *SGen*. The generator model holds key parameters for the code generation process and allows for the latter's customization.
+
+The first step to code generation is to create a new SGen model. Right-click on the _model_ folder in the project explorer and select _New → Code Generator Model_ from the context menu.
+
+!images/callhandling_200_generation_create_generator_model.png(Selecting "New → Code Generator Model" in the context menu)!
+
+The _YAKINDU Generator Model_ wizard opens. Change the _File name_ to *CallHandling.sgen*, then click _Next >_.
+
+!images/callhandling_210_generation_new_sgen_model_1.png(Selecting a filename for the generator model)!
+
+From the _Generator_ drop-down menu at the top, select _YAKINDU SCT Java Code Generator_.
+
+In the statechart tree beneath that menu, check the *CallHandling.sct* model, then click _Finish_.
+
+!images/callhandling_220_generation_new_sgen_model_2.png(Selecting generator type and statechart model)!
+
+Now the wizard creates the default SGen model for Java code generation and opens it in an SGen editor. The project explorer on the left-hand side shows the new model file _CallHandling.sgen_.
+
+!images/callhandling_230_generation_new_sgen_model_3.png(The generator model)!
+
+Here's the generator model once again as plain text:
+
+bc(prettyprint).. 
+GeneratorModel for yakindu::java {
+
+	statechart CallHandling {
+
+		feature Outlet {
+			targetProject = "CallHandling"
+			targetFolder = "src-gen"
+			libraryTargetFolder = "src"
+		}
+	}
+}
+
+p. Let's have a closer look at the listing above:
+* @yakindu::java@ is the unique ID of the Java code generator.
+* The @statechart CallHandling { … }@ block references the statechart model we want to generate code for.
+* The @feature Outlet { … }@ block specifies where the generated code artifacts are to be placed:
+** The parameters @targetProject@ and @targetFolder@ define the Eclipse project @CallHandling@ as destination for generated code and within that project the @src-gen@ folder.
+** However, certain source code modules are generated only once and won't change with the underlying statechart. By default, these source code artifacts are generated into the folder specified by the @libraryTargetFolder@ option which by default is @src@. You can change the folder name or even remove the @libraryTargetFolder@ option at all. In the latter case the "library" components are generated into the @targetFolder@.
+
+A statechart reference may contain various configuration features. You will learn more about feature later.
+
+h2. Enhancing the generator model by timing capabilities
+
+However, the default generator model is insufficient yet. The _CallHandling_ statechart model uses _after_ and _every_ expressions. That is, it is dealing with *time events*, requiring a timer service to trigger them. We can instruct the code generator to provide us with a default timer service implementation by adding the following feature to the generator model:
+
+bc(prettyprint). 
+feature GeneralFeatures {
+	TimerService = true
+}
+
+h2. Generating Java source code
+
+What do we have to do to actually start the Java source code generation? Nothing!
+
+The generator model is executed by a so-called Eclipse *builder*. That is, as long as the _Project → Build Automatically_ menu item is checked (which it is by default), the artifacts are generated automatically with each modification of the statechart model or of the generator model.
+
+As you can see in the project explorer, the folder _src-gen_ has been created and populated with the generated Java source code artifacts.
+
+!images/callhandling_240_generation_timer_service.png(Adding the timer service feature)!
+
+Add the generated artifacts to the Java build path by right-clicking on the _src-gen_ folder and selecting _Build Path → Use as source folder_ in the context menu.
+
+!images/callhandling_250_generation_use_as_source_folder.png(Declaring "src-gen" as a source folder)!
+
+If you want to execute your generator model manually, select _Generate Statechart Artifacts_ from the @.sgen@ file's context menu in the project explorer.
+
+
+h2. Integration with client code
+
+Now that we have a generated Java implementation of the _CallHandling_ state machine available, we want to actually use it from some client code. We'll create that client code in a second.
+
+h3. Creating client code
+
+Let's establish a new Java class _CallHandlingClient_ and integrate the state machine with it:
+
+# Right-clicking on the _src_ folder.
+# Select _New → Class_ in the context menu.
+# Name it _CallHandlingClient_.<br/>!images/callhandling_300_java_integration_create_new_class.png(Creating some Java client source code)!
+# Click _Finish_.
+
+Next, copy the following code into the created class (without the line numbers, of course):
+
+bc(prettyprint linenums).. 
+ 1	import org.yakindu.scr.TimerService;
+ 2	import org.yakindu.scr.callhandling.CallHandlingStatemachine;
+ 3
+ 4	public class CallHandlingClient {
+ 5
+ 6		public static void main(String[] args) throws InterruptedException {
+ 7
+ 8			// Create the state machine:
+ 9			CallHandlingStatemachine sm = new CallHandlingStatemachine();
+10			sm.setTimer(new TimerService());
+11
+12			// Enter the state machine and implicitly activate its "Idle" state:
+13			sm.enter();
+14
+15			// Raise an incoming call:
+16			sm.getSCIPhone().raiseIncoming_call();
+17			sm.runCycle();
+18
+19			// Accept the call:
+20			sm.getSCIUser().raiseAccept_call();
+21			sm.runCycle();
+22
+23			// Keep the phone conversation busy for a while:
+24			for (int i = 0; i < 50; i++) {
+25				Thread.sleep(200);
+26				sm.runCycle();
+27			}
+28
+29			// Before hang-up, output the duration of the call:
+30			System.out.println(String.format("The phone call took %d seconds.",
+31					sm.getSCIPhone().getDuration()));
+32
+33			// Hang up the phone:
+34			sm.getSCIUser().raiseDismiss_call();
+35			sm.runCycle();
+36		}
+37	}
+p. Let's have a detailed look at this client code:
+
+* First, this program creates a new instance of the state machine by calling the default constructor of @CallHandlingStatemachine@ (line 9).
+* Since we are using time events, the statechart implementation requires an implementation of the @ITimer@ interface. Since we added the @TimerService@ feature to the generator model, the code generator creates a default implementation @org.yakindu.scr.TimerService@ that uses the @java.util.Timer@ class. A new instance of the default @TimerService@ is created and set to the state machine (line 10).
+* In line 13, @sm.enter()@ enters the state machine and – via its initial state – activates its *Idle* state.
+* For each interface in the statechart definition block a getter method has been generated, here @getSCIPhone()@ and @getSCIUser()@. You can access all incoming events and all variables via these interfaces. In line 16, the _incoming_call_ event is raised, activating the *Incoming Call* state after the next run cycle has been executed (line 17).
+* In line 20, we raise the _accept_call_ event via the _User_ interface. It activates the *Active Call* state after the next run cycle has been performed (line 21).
+* From line 24 to line 27, the run cycle is executed periodically every 200 milliseconds.
+* After that, the call's duration is printed to the console (lines 30 and 31).
+* Finally, the _dismiss_call_ event is raised (line 34), activating the *Dismiss Call* state after the next run cycle (line 35).
+
+h3. Executing the client code
+
+You can execute the client code via _Run As → Java Application_ from the class file's context menu.
