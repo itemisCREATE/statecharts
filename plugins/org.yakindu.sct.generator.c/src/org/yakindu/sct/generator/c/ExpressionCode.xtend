@@ -151,4 +151,19 @@ class ExpressionCode {
 	
 	def dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
 
+	
+	// ensure we obtain an expression of type sc_boolean
+	
+	def dispatch CharSequence sc_boolean_code(Expression it) '''«it.code»'''
+	
+	def dispatch CharSequence sc_boolean_code(LogicalOrExpression it) '''(«it.code») ? bool_true : bool_false'''
+	
+	def dispatch CharSequence sc_boolean_code(LogicalAndExpression it) '''(«it.code») ? bool_true : bool_false'''
+	
+	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) '''(«it.code») ? bool_true : bool_false'''
+	
+	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) '''(«it.code») ? bool_true : bool_false'''
+	
+	
+
 }

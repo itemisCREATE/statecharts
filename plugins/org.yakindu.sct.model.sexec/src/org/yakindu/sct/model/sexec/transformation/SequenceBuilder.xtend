@@ -1,3 +1,13 @@
+/** 
+ * Copyright (c) 2015 committers of YAKINDU and others. 
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0 
+ * which accompanies this distribution, and is available at 
+ * http://www.eclipse.org/legal/epl-v10.html 
+ * Contributors:
+ * committers of YAKINDU - initial API and implementation
+ *
+*/
 package org.yakindu.sct.model.sexec.transformation
 
 import com.google.inject.Inject
@@ -8,6 +18,7 @@ import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
+import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
@@ -31,7 +42,6 @@ import org.yakindu.sct.model.stext.stext.TimeUnit
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import org.yakindu.base.expressions.expressions.FloatLiteral
 
 class SequenceBuilder {
 
@@ -43,7 +53,8 @@ class SequenceBuilder {
 
 	@Inject extension ITypeValueProvider 
 
-	@Inject @Named("ADD_TRACES")
+	@Inject
+	@Named("ADD_TRACES")
 	boolean _addTraceSteps
 
 	static String DEFAULT_SEQUENCE_NAME = "default"

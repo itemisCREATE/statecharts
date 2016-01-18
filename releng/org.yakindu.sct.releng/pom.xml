@@ -443,7 +443,6 @@
 		<module>../../features/org.yakindu.sct.generator.cpp-feature</module>
 		<module>../../features/org.yakindu.sct.generator.java-feature</module>
 		<module>../../features/org.yakindu.sct.generator-feature</module>
-		<module>../../features/org.yakindu.sct.sdk-feature</module>
 
 	</modules>
 

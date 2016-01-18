@@ -23,9 +23,12 @@ import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.internal.parts.DiagramGraphicalViewerKeyHandler;
+import org.eclipse.gmf.runtime.gef.ui.internal.editparts.AnimatableZoomManager;
+import org.eclipse.gmf.runtime.gef.ui.internal.editparts.AnimatedZoomListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -115,7 +118,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	private void checkXtextNature() {
 		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
 		IProject project = editorInput.getFile().getProject();
-		if (project != null && !XtextProjectHelper.hasNature(project) && project.isAccessible() && !project.isHidden()) {
+		if (project != null && !XtextProjectHelper.hasNature(project) && project.isAccessible()
+				&& !project.isHidden()) {
 			addNature(project);
 		}
 	}
@@ -162,7 +166,15 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	@Override
 	protected void configureGraphicalViewer() {
 		super.configureGraphicalViewer();
+		disableAnimatedZoom();
 		createContentProposalViewerKeyHandler();
+	}
+
+	// Disable the animated zoom, it is too slow for bigger models
+	protected void disableAnimatedZoom() {
+		AnimatableZoomManager zoomManager = (AnimatableZoomManager) getGraphicalViewer()
+				.getProperty(ZoomManager.class.toString());
+		zoomManager.setZoomAnimationStyle(ZoomManager.ANIMATE_NEVER);
 	}
 
 	protected void createContentProposalViewerKeyHandler() {

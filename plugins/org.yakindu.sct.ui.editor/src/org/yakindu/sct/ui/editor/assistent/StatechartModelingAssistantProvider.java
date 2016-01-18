@@ -16,6 +16,8 @@ import static org.yakindu.sct.ui.editor.editor.StatechartElementTypes.FINALSTATE
 import static org.yakindu.sct.ui.editor.editor.StatechartElementTypes.REGION;
 import static org.yakindu.sct.ui.editor.editor.StatechartElementTypes.STATE;
 import static org.yakindu.sct.ui.editor.editor.StatechartElementTypes.TRANSITION;
+import static org.yakindu.sct.ui.editor.editor.StatechartElementTypes.EXIT;
+
 
 import java.util.Collections;
 import java.util.List;
@@ -47,7 +49,7 @@ public class StatechartModelingAssistantProvider extends
 
 		if (editPart instanceof RegionEditPart
 				|| editPart instanceof RegionCompartmentEditPart)
-			return Lists.newArrayList(ENTRY, STATE, FINALSTATE, ENTRY, CHOICE);
+			return Lists.newArrayList(ENTRY, STATE, FINALSTATE, ENTRY, CHOICE, EXIT);
 
 		if (editPart instanceof StateEditPart
 				|| editPart instanceof StateFigureCompartmentEditPart)
@@ -61,7 +63,7 @@ public class StatechartModelingAssistantProvider extends
 	public List<IElementType> getTypesForTarget(IAdaptable source,
 			IElementType relationshipType) {
 		if (StatechartElementTypes.TRANSITION.equals(relationshipType))
-			return Lists.newArrayList(STATE, FINALSTATE, CHOICE);
+			return Lists.newArrayList(STATE, FINALSTATE, CHOICE, EXIT);
 		return Collections.EMPTY_LIST;
 	}
 
