@@ -9,7 +9,9 @@ The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an 
 
 ## License
 
-The source code is provided under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.
+The source code is provided under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>. 
+
+The provided open source code generators do not imply any licence constraint on the generated code. The generated code is property of the user (as person or organization). The user is free to choose any licencing model for the generated code. 
 
 ## Download & Installation
 
