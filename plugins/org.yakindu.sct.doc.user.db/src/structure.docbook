@@ -82,7 +82,7 @@
      <title>Unpacking the downloaded file on Windows [1]</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/windows7_install_010_eclipse_extract_1.png" />
+       <imagedata fileref="images/windows7_install_010_eclipse_extract_1.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Unpacking the downloaded file on Windows [1]</phrase>
@@ -97,7 +97,7 @@
      <title>Unpacking the downloaded file on Windows [2]</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/windows7_install_020_eclipse_extract_2.png" />
+       <imagedata fileref="images/windows7_install_020_eclipse_extract_2.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Unpacking the downloaded file on Windows [2]</phrase>
@@ -112,7 +112,7 @@
      <title>The extracted "yakindu-sct" folder</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/windows7_install_030_eclipse_folder.png" />
+       <imagedata fileref="images/windows7_install_030_eclipse_folder.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>The extracted "yakindu-sct" folder</phrase>
@@ -126,7 +126,7 @@
      <title>Contents of the extracted &quot;yakindu-sct&quot; folder</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/windows7_install_040_eclipse_contents.png" />
+       <imagedata fileref="images/windows7_install_040_eclipse_contents.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Contents of the extracted &quot;yakindu-sct&quot; folder</phrase>
@@ -149,7 +149,7 @@
      <title>Windows security warning</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/windows7_install_045_security_warning.png" />
+       <imagedata fileref="images/windows7_install_045_security_warning.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Windows security warning</phrase>
@@ -163,7 +163,7 @@
       <application>YAKINDU Statechart Tools</application> starting up and showing a splash screen</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/windows7_install_050_eclipse_splash.png" />
+       <imagedata fileref="images/windows7_install_050_eclipse_splash.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>
@@ -177,7 +177,7 @@
      <title>Selecting a workspace</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/windows7_install_060_eclipse_workspace_dialog.png" />
+       <imagedata fileref="images/windows7_install_060_eclipse_workspace_dialog.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Selecting a workspace</phrase>
@@ -191,7 +191,7 @@
       <application>YAKINDU Statechart Tools</application> presenting the &quot;Welcome&quot; window</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/windows7_install_070_eclipse_welcome.png" />
+       <imagedata fileref="images/windows7_install_070_eclipse_welcome.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>
@@ -204,7 +204,7 @@
      <title>The <application>YAKINDU Statechart Tools</application> workbench</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/windows7_install_080_eclipse_workbench.png" />
+       <imagedata fileref="images/windows7_install_080_eclipse_workbench.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>The <application>YAKINDU Statechart Tools</application> workbench</phrase>
@@ -229,7 +229,7 @@
      <title>The YAKINDU Statecharts Tools application in the &quot;Applications&quot; directory</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/macosx_install_010_applications.png" />
+       <imagedata fileref="images/macosx_install_010_applications.png" align="center" contentwidth="40%"/>
       </imageobject>
       <textobject>
        <phrase>The YAKINDU Statecharts Tools application in the <filename>Applications</filename> directory</phrase>
@@ -247,7 +247,7 @@
      <title>Mac OS X warning</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/macosx_install_020_security_warning.png" />
+       <imagedata fileref="images/macosx_install_020_security_warning.png" align="center" contentwidth="40%"/>
       </imageobject>
       <textobject>
        <phrase>Mac OS X warning</phrase>
@@ -260,7 +260,7 @@
      <title>YAKINDU Statechart Tools starting up and showing a splash screen</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/macosx_install_050_eclipse_splash.png" />
+       <imagedata fileref="images/macosx_install_050_eclipse_splash.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>
@@ -274,7 +274,7 @@
      <title>Selecting a workspace</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/macosx_install_060_eclipse_workspace_dialog.png" />
+       <imagedata fileref="images/macosx_install_060_eclipse_workspace_dialog.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Selecting a workspace</phrase>
@@ -287,7 +287,7 @@
      <title>YAKINDU Statechart Tools presenting the &quot;Welcome&quot; window</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/macosx_install_070_eclipse_welcome.png" />
+       <imagedata fileref="images/macosx_install_070_eclipse_welcome.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>
@@ -300,7 +300,7 @@
      <title>The YAKINDU Statechart Tools workbench</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/macosx_install_080_eclipse_workbench.png" />
+       <imagedata fileref="images/macosx_install_080_eclipse_workbench.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>The <application>YAKINDU Statechart Tools</application> workbench</phrase>
@@ -332,7 +332,7 @@ unzip /download/sct-linux.gtk.x86_64.zip
      <title>The extracted &quot;yakindu-sct&quot; folder</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/linux_install_010_eclipse_folder.png" />
+       <imagedata fileref="images/linux_install_010_eclipse_folder.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>The extracted &quot;yakindu-sct&quot; folder</phrase>
@@ -344,7 +344,7 @@ unzip /download/sct-linux.gtk.x86_64.zip
      <title>Contents of the extracted &quot;yakindu-sct&quot; folder</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/linux_install_020_eclipse_contents.png" />
+       <imagedata fileref="images/linux_install_020_eclipse_contents.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Contents of the extracted &quot;yakindu-sct&quot; folder</phrase>
@@ -371,7 +371,7 @@ yakindu-sct/SCT
      <title>YAKINDU Statechart Tools starting up and showing a splash screen</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/linux_install_030_eclipse_splash.png" />
+       <imagedata fileref="images/linux_install_030_eclipse_splash.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>
@@ -385,7 +385,7 @@ yakindu-sct/SCT
      <title>Selecting a workspace</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/linux_install_040_eclipse_workspace_dialog.png" />
+       <imagedata fileref="images/linux_install_040_eclipse_workspace_dialog.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Selecting a workspace</phrase>
@@ -398,7 +398,7 @@ yakindu-sct/SCT
      <title>YAKINDU Statechart Tools presenting the &quot;Welcome&quot; window</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/linux_install_050_eclipse_welcome.png" />
+       <imagedata fileref="images/linux_install_050_eclipse_welcome.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>
@@ -411,7 +411,7 @@ yakindu-sct/SCT
      <title>The YAKINDU Statechart Tools workbench</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/linux_install_060_eclipse_workbench.png" />
+       <imagedata fileref="images/linux_install_060_eclipse_workbench.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>The <application>YAKINDU Statechart Tools</application> workbench</phrase>
@@ -432,7 +432,7 @@ yakindu-sct/SCT
     <title>Selecting &quot;Help → Install New Software&quot; in the main menu</title>
     <mediaobject>
      <imageobject>
-      <imagedata fileref="images/eclipse_install_010_eclipse_menu_install_new_software.png" />
+      <imagedata fileref="images/eclipse_install_010_eclipse_menu_install_new_software.png" align="center" width="80%" scalefit="1"/>
      </imageobject>
      <textobject>
       <phrase>Selecting &quot;Help → Install New Software&quot; in the main menu</phrase>
@@ -444,7 +444,7 @@ yakindu-sct/SCT
     <title>The &quot;Install&quot; wizard</title>
     <mediaobject>
      <imageobject>
-      <imagedata fileref="images/eclipse_install_020_eclipse_install_wizard.png" />
+      <imagedata fileref="images/eclipse_install_020_eclipse_install_wizard.png" align="center" width="80%" scalefit="1"/>
      </imageobject>
      <textobject>
       <phrase>The &quot;Install&quot; wizard</phrase>
@@ -530,7 +530,7 @@ yakindu-sct/SCT
     <title>Adding a software repository</title>
     <mediaobject>
      <imageobject>
-      <imagedata fileref="images/eclipse_install_030_eclipse_add_repository.png" />
+      <imagedata fileref="images/eclipse_install_030_eclipse_add_repository.png" align="center" width="80%" scalefit="1"/>
      </imageobject>
      <textobject>
       <phrase>Adding a software repository</phrase>
@@ -543,7 +543,7 @@ yakindu-sct/SCT
     <title>Selecting YAKINDU Statechart Tools software items</title>
     <mediaobject>
      <imageobject>
-      <imagedata fileref="images/eclipse_install_040_eclipse_software_items.png" />
+      <imagedata fileref="images/eclipse_install_040_eclipse_software_items.png" align="center" width="80%" scalefit="1"/>
      </imageobject>
      <textobject>
       <phrase>Selecting <application>YAKINDU Statechart Tools</application> software items</phrase>
@@ -557,7 +557,7 @@ yakindu-sct/SCT
     <title>Install remediation page</title>
     <mediaobject>
      <imageobject>
-      <imagedata fileref="images/eclipse_install_050_eclipse_trouble.png" />
+      <imagedata fileref="images/eclipse_install_050_eclipse_trouble.png" align="center" width="80%" scalefit="1"/>
      </imageobject>
      <textobject>
       <phrase>Install remediation page</phrase>
@@ -570,7 +570,7 @@ yakindu-sct/SCT
     <title>Reviewing the items to be installed</title>
     <mediaobject>
      <imageobject>
-      <imagedata fileref="images/eclipse_install_060_eclipse_review.png" />
+      <imagedata fileref="images/eclipse_install_060_eclipse_review.png" align="center" width="80%" scalefit="1"/>
      </imageobject>
      <textobject>
       <phrase>Reviewing the items to be installed</phrase>
@@ -583,7 +583,7 @@ yakindu-sct/SCT
     <title>Accepting the new software's license agreements</title>
     <mediaobject>
      <imageobject>
-      <imagedata fileref="images/eclipse_install_070_eclipse_licenses.png" />
+      <imagedata fileref="images/eclipse_install_070_eclipse_licenses.png" align="center" width="80%" scalefit="1"/>
      </imageobject>
      <textobject>
       <phrase>Accepting the new software's license agreements</phrase>
@@ -596,7 +596,7 @@ yakindu-sct/SCT
     <title>Installing software in progress …</title>
     <mediaobject>
      <imageobject>
-      <imagedata fileref="images/eclipse_install_080_eclipse_installation.png" />
+      <imagedata fileref="images/eclipse_install_080_eclipse_installation.png" align="center" width="80%" scalefit="1"/>
      </imageobject>
      <textobject>
       <phrase>Installing software in progress …</phrase>
@@ -608,7 +608,7 @@ yakindu-sct/SCT
     <title>Restarting Eclipse after software installation</title>
     <mediaobject>
      <imageobject>
-      <imagedata fileref="images/eclipse_install_090_eclipse_restart.png" />
+      <imagedata fileref="images/eclipse_install_090_eclipse_restart.png" align="center" width="80%" scalefit="1"/>
      </imageobject>
      <textobject>
       <phrase>Restarting Eclipse after software installation</phrase>
@@ -620,7 +620,7 @@ yakindu-sct/SCT
     <title>Eclipse presenting the &quot;Welcome&quot; window</title>
     <mediaobject>
      <imageobject>
-      <imagedata fileref="images/eclipse_install_100_eclipse_sct_help.png" />
+      <imagedata fileref="images/eclipse_install_100_eclipse_sct_help.png" align="center" width="80%" scalefit="1"/>
      </imageobject>
      <textobject>
       <phrase>Eclipse presenting the &quot;Welcome&quot; window</phrase>
@@ -635,7 +635,7 @@ yakindu-sct/SCT
     <title>Selecting &quot;Help → Check for Updates&quot; in the main menu</title>
     <mediaobject>
      <imageobject>
-      <imagedata fileref="images/eclipse_update_010_eclipse_menu_check_for_updates.png" />
+      <imagedata fileref="images/eclipse_update_010_eclipse_menu_check_for_updates.png" align="center" width="80%" scalefit="1"/>
      </imageobject>
      <textobject>
       <phrase>Selecting &quot;Help → Check for Updates&quot; in the main menu</phrase>
@@ -650,7 +650,7 @@ yakindu-sct/SCT
     <title>Configuring automatic update</title>
     <mediaobject>
      <imageobject>
-      <imagedata fileref="images/eclipse_update_020_eclipse_automatic_updates.png" />
+      <imagedata fileref="images/eclipse_update_020_eclipse_automatic_updates.png" align="center" width="80%" scalefit="1"/>
      </imageobject>
      <textobject>
       <phrase>Configuring automatic update</phrase>
@@ -686,7 +686,7 @@ yakindu-sct/SCT
     <title>Features of YAKINDU Statechart Tools</title>
     <mediaobject>
      <imageobject>
-      <imagedata fileref="images/YAKINDU_features.png" />
+      <imagedata fileref="images/YAKINDU_features.png" align="center" width="80%" scalefit="1"/>
      </imageobject>
      <textobject>
       <phrase>Features of <application>YAKINDU Statechart Tools</application>
@@ -791,7 +791,7 @@ yakindu-sct/SCT
       <title>Selecting &quot;File → New → Project…&quot; in the main menu</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/light_switch_010_menu_file_new_project.png" />
+        <imagedata fileref="images/light_switch_010_menu_file_new_project.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Selecting &quot;File → New → Project…&quot; in the main menu</phrase>
@@ -803,7 +803,7 @@ yakindu-sct/SCT
       <title>The &quot;New Project&quot; wizard</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/light_switch_020_wizard_new_project_general_project.png" />
+        <imagedata fileref="images/light_switch_020_wizard_new_project_general_project.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>The &quot;New Project&quot; wizard</phrase>
@@ -816,7 +816,7 @@ yakindu-sct/SCT
       <title>&quot;Specifying project name and location&quot;</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/light_switch_040_wizard_new_project.png" />
+        <imagedata fileref="images/light_switch_040_wizard_new_project.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>&quot;Specifying project name and location&quot;</phrase>
@@ -830,7 +830,7 @@ yakindu-sct/SCT
       <title>Project &quot;LightSwitch&quot; created</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/light_switch_060_project_created.png" />
+        <imagedata fileref="images/light_switch_060_project_created.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Project &quot;LightSwitch&quot; created</phrase>
@@ -846,7 +846,7 @@ yakindu-sct/SCT
       <title>Selecting &quot;New → Folder&quot; in the context menu</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/light_switch_100_menu_new_folder.png" />
+        <imagedata fileref="images/light_switch_100_menu_new_folder.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Selecting &quot;New → Folder&quot; in the context menu</phrase>
@@ -858,7 +858,7 @@ yakindu-sct/SCT
       <title>The &quot;New Folder&quot; wizard</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/light_switch_110_wizard_new_folder.png" />
+        <imagedata fileref="images/light_switch_110_wizard_new_folder.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>The &quot;New Folder&quot; wizard</phrase>
@@ -877,7 +877,7 @@ yakindu-sct/SCT
        <title>Selecting &quot;New → Other&quot; in the context menu</title>
        <mediaobject>
         <imageobject>
-         <imagedata fileref="images/light_switch_120_menu_new_other.png" />
+         <imagedata fileref="images/light_switch_120_menu_new_other.png" align="center" width="80%" scalefit="1"/>
         </imageobject>
         <textobject>
          <phrase>Selecting &quot;New → Other&quot; in the context menu</phrase>
@@ -889,7 +889,7 @@ yakindu-sct/SCT
        <title>Selecting &quot;YAKINDU SCT → Statechart model&quot;</title>
        <mediaobject>
         <imageobject>
-         <imagedata fileref="images/light_switch_130_wizard_new.png" />
+         <imagedata fileref="images/light_switch_130_wizard_new.png" align="center" width="80%" scalefit="1"/>
         </imageobject>
         <textobject>
          <phrase>Selecting &quot;YAKINDU SCT → Statechart model&quot;</phrase>
@@ -901,7 +901,7 @@ yakindu-sct/SCT
        <title>The &quot;New YAKINDU Statechart&quot; dialog</title>
        <mediaobject>
         <imageobject>
-         <imagedata fileref="images/light_switch_140_wizard_new_yakindu_statechart.png" />
+         <imagedata fileref="images/light_switch_140_wizard_new_yakindu_statechart.png" align="center" width="80%" scalefit="1"/>
         </imageobject>
         <textobject>
          <phrase>The &quot;New YAKINDU Statechart&quot; dialog</phrase>
@@ -916,7 +916,7 @@ yakindu-sct/SCT
        <title>Dialog &quot;Confirm Perspective Switch&quot;</title>
        <mediaobject>
         <imageobject>
-         <imagedata fileref="images/light_switch_150_dialog_confirm_perspective_switch.png" />
+         <imagedata fileref="images/light_switch_150_dialog_confirm_perspective_switch.png" align="center" width="80%" scalefit="1"/>
         </imageobject>
         <textobject>
          <phrase>Dialog &quot;Confirm Perspective Switch&quot;</phrase>
@@ -932,7 +932,7 @@ yakindu-sct/SCT
        <title>The statechart editor</title>
        <mediaobject>
         <imageobject>
-         <imagedata fileref="images/light_switch_220_statechart_editor.png" />
+         <imagedata fileref="images/light_switch_220_statechart_editor.png" align="center" width="80%" scalefit="1"/>
         </imageobject>
         <textobject>
          <phrase>The statechart editor</phrase>
@@ -960,7 +960,7 @@ yakindu-sct/SCT
        <title>An error marker and a popup window explaining it</title>
        <mediaobject>
         <imageobject>
-         <imagedata fileref="images/light_switch_210_error_marker_and_popup.png" />
+         <imagedata fileref="images/light_switch_210_error_marker_and_popup.png" align="center" width="80%" scalefit="1"/>
         </imageobject>
         <textobject>
          <phrase>An error marker and a popup window explaining it</phrase>
@@ -1002,7 +1002,7 @@ yakindu-sct/SCT
             <info>
              <title>Changing a state's name [1]</title>
             </info>
-            <imagedata fileref="images/light_switch_230_statechart_editor_change_state_name_01.png" />
+            <imagedata fileref="images/light_switch_230_statechart_editor_change_state_name_01.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1019,7 +1019,7 @@ yakindu-sct/SCT
                           Changing a state's name [2]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_230_statechart_editor_change_state_name_02.png" />
+            <imagedata fileref="images/light_switch_230_statechart_editor_change_state_name_02.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1036,7 +1036,7 @@ yakindu-sct/SCT
                           Changing a state's name [3]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_230_statechart_editor_change_state_name_03.png" />
+            <imagedata fileref="images/light_switch_230_statechart_editor_change_state_name_03.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1059,7 +1059,7 @@ yakindu-sct/SCT
                           Changing a state's name [4]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_230_statechart_editor_change_state_name_04.png" />
+            <imagedata fileref="images/light_switch_230_statechart_editor_change_state_name_04.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1076,7 +1076,7 @@ yakindu-sct/SCT
                           Changing a state's name [5]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_230_statechart_editor_change_state_name_05.png" />
+            <imagedata fileref="images/light_switch_230_statechart_editor_change_state_name_05.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1093,7 +1093,7 @@ yakindu-sct/SCT
                           Changing a state's name [6]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_230_statechart_editor_change_state_name_06.png" />
+            <imagedata fileref="images/light_switch_230_statechart_editor_change_state_name_06.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1122,7 +1122,7 @@ yakindu-sct/SCT
                           Creating a state [1]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_240_statechart_editor_create_state_01.png" />
+            <imagedata fileref="images/light_switch_240_statechart_editor_create_state_01.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1139,7 +1139,7 @@ yakindu-sct/SCT
                           Creating a state [2]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_240_statechart_editor_create_state_02.png" />
+            <imagedata fileref="images/light_switch_240_statechart_editor_create_state_02.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1156,7 +1156,7 @@ yakindu-sct/SCT
                           Creating a state [3]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_240_statechart_editor_create_state_03.png" />
+            <imagedata fileref="images/light_switch_240_statechart_editor_create_state_03.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1173,7 +1173,7 @@ yakindu-sct/SCT
                           Creating a state [4]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_240_statechart_editor_create_state_04.png" />
+            <imagedata fileref="images/light_switch_240_statechart_editor_create_state_04.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1196,7 +1196,7 @@ yakindu-sct/SCT
                           Creating a state [5]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_240_statechart_editor_create_state_05.png" />
+            <imagedata fileref="images/light_switch_240_statechart_editor_create_state_05.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1225,7 +1225,7 @@ yakindu-sct/SCT
                           Creating a transition [1]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_250_statechart_editor_create_transition_01.png" />
+            <imagedata fileref="images/light_switch_250_statechart_editor_create_transition_01.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1242,7 +1242,7 @@ yakindu-sct/SCT
                           Creating a transition [2]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_250_statechart_editor_create_transition_02.png" />
+            <imagedata fileref="images/light_switch_250_statechart_editor_create_transition_02.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1259,7 +1259,7 @@ yakindu-sct/SCT
                           Creating a transition [3]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_250_statechart_editor_create_transition_03.png" />
+            <imagedata fileref="images/light_switch_250_statechart_editor_create_transition_03.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1276,7 +1276,7 @@ yakindu-sct/SCT
                           Creating a transition [4]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_250_statechart_editor_create_transition_04.png" />
+            <imagedata fileref="images/light_switch_250_statechart_editor_create_transition_04.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1299,7 +1299,7 @@ yakindu-sct/SCT
                           Creating a transition [5]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_250_statechart_editor_create_transition_05.png" />
+            <imagedata fileref="images/light_switch_250_statechart_editor_create_transition_05.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1312,7 +1312,7 @@ yakindu-sct/SCT
       <title>Creating definitions [1]</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/light_switch_260_statechart_editor_create_definitions_01.png" />
+        <imagedata fileref="images/light_switch_260_statechart_editor_create_definitions_01.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Creating definitions [1]</phrase>
@@ -1330,7 +1330,7 @@ internal:
       <title>Creating definitions [2]</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/light_switch_260_statechart_editor_create_definitions_02.png" />
+        <imagedata fileref="images/light_switch_260_statechart_editor_create_definitions_02.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Creating definitions [2]</phrase>
@@ -1355,7 +1355,7 @@ internal:
                           Creating another transition [1]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_270_statechart_editor_create_transition_01.png" />
+            <imagedata fileref="images/light_switch_270_statechart_editor_create_transition_01.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1372,7 +1372,7 @@ internal:
                           Creating another transition [2]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_270_statechart_editor_create_transition_02.png" />
+            <imagedata fileref="images/light_switch_270_statechart_editor_create_transition_02.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1389,7 +1389,7 @@ internal:
                           Creating another transition [3]
                         </title>
             </info>
-            <imagedata fileref="images/light_switch_270_statechart_editor_create_transition_03.png" />
+            <imagedata fileref="images/light_switch_270_statechart_editor_create_transition_03.png" align="center" width="80%" scalefit="1"/>
            </imageobject>
           </inlinemediaobject>
          </entry>
@@ -1407,7 +1407,7 @@ internal:
      <title>Selecting &quot;Run As → Statechart Simulation&quot; in the context menu</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/light_switch_300_statechart_simulator_run_as_statechart_simulation.png" />
+       <imagedata fileref="images/light_switch_300_statechart_simulator_run_as_statechart_simulation.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Selecting &quot;Run As → Statechart Simulation&quot; in the context menu</phrase>
@@ -1428,7 +1428,7 @@ internal:
      <title>Light switch simulation in &quot;off&quot; state</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/light_switch_310_statechart_simulator_state_off.png" />
+       <imagedata fileref="images/light_switch_310_statechart_simulator_state_off.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Light switch simulation in &quot;off&quot; state</phrase>
@@ -1443,7 +1443,7 @@ internal:
      <title>Displaying event names in the statechart simulator</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/light_switch_320_statechart_simulator_state_events.png" />
+       <imagedata fileref="images/light_switch_320_statechart_simulator_state_events.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Displaying event names in the statechart simulator</phrase>
@@ -1456,7 +1456,7 @@ internal:
      <title>Light switch simulation in &quot;on&quot; state</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/light_switch_330_statechart_simulator_state_on.png" />
+       <imagedata fileref="images/light_switch_330_statechart_simulator_state_on.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Light switch simulation in &quot;on&quot; state</phrase>
@@ -1491,7 +1491,7 @@ internal:
       <title>The CallHandling statechart model</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/callhandling_model.png" />
+        <imagedata fileref="images/callhandling_model.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>The CallHandling statechart model</phrase>
@@ -1532,7 +1532,7 @@ interface Phone:
        <title>The CallHandling statechart modeled in the statechart editor</title>
        <mediaobject>
         <imageobject>
-         <imagedata fileref="images/callhandling_example_final.png" />
+         <imagedata fileref="images/callhandling_example_final.png" align="center" width="80%" scalefit="1"/>
         </imageobject>
         <textobject>
          <phrase>The CallHandling statechart modeled in the statechart editor</phrase>
@@ -1549,7 +1549,7 @@ interface Phone:
       <title>Selecting &quot;New → Code Generator Model&quot; in the context menu</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/callhandling_200_generation_create_generator_model.png" />
+        <imagedata fileref="images/callhandling_200_generation_create_generator_model.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Selecting &quot;New → Code Generator Model&quot; in the context menu</phrase>
@@ -1561,7 +1561,7 @@ interface Phone:
       <title>Selecting a filename for the generator model</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/callhandling_210_generation_new_sgen_model_1.png" />
+        <imagedata fileref="images/callhandling_210_generation_new_sgen_model_1.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Selecting a filename for the generator model</phrase>
@@ -1574,7 +1574,7 @@ interface Phone:
       <title>Selecting generator type and statechart model</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/callhandling_220_generation_new_sgen_model_2.png" />
+        <imagedata fileref="images/callhandling_220_generation_new_sgen_model_2.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Selecting generator type and statechart model</phrase>
@@ -1586,7 +1586,7 @@ interface Phone:
       <title>The generator model</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/callhandling_230_generation_new_sgen_model_3.png" />
+        <imagedata fileref="images/callhandling_230_generation_new_sgen_model_3.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>The generator model</phrase>
@@ -1647,7 +1647,7 @@ feature GeneralFeatures {
       <title>Adding the timer service feature</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/callhandling_240_generation_timer_service.png" />
+        <imagedata fileref="images/callhandling_240_generation_timer_service.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Adding the timer service feature</phrase>
@@ -1659,7 +1659,7 @@ feature GeneralFeatures {
       <title>Declaring &quot;src-gen&quot; as a source folder</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/callhandling_250_generation_use_as_source_folder.png" />
+        <imagedata fileref="images/callhandling_250_generation_use_as_source_folder.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Declaring &quot;src-gen&quot; as a source folder</phrase>
@@ -1690,7 +1690,7 @@ feature GeneralFeatures {
                         Creating some Java client source code
                       </title>
            </info>
-           <imagedata fileref="images/callhandling_300_java_integration_create_new_class.png" />
+           <imagedata fileref="images/callhandling_300_java_integration_create_new_class.png" align="center" width="80%" scalefit="1"/>
           </imageobject>
          </inlinemediaobject></para>
        </listitem>
@@ -1825,7 +1825,7 @@ feature GeneralFeatures {
       <title>Parallel regions</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/parallelRegions.jpg" />
+        <imagedata fileref="images/parallelRegions.jpg" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Parallel regions</phrase>
@@ -1870,7 +1870,7 @@ feature GeneralFeatures {
       <title>Entry, exit, and final state</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/state_entry_exit_final_explained.png"/>
+        <imagedata fileref="images/state_entry_exit_final_explained.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject><phrase>Entry, exit, and final state</phrase></textobject>
       </mediaobject>
@@ -1927,7 +1927,7 @@ feature GeneralFeatures {
        <title>Entry state</title>
        <mediaobject>
         <imageobject>
-         <imagedata fileref="images/state_entry.png"/>
+         <imagedata fileref="images/state_entry.png" align="center" width="80%" scalefit="1"/>
         </imageobject>
         <textobject><phrase>Entry state</phrase></textobject>
        </mediaobject>
@@ -2023,7 +2023,7 @@ feature GeneralFeatures {
       <title>Entries and exits</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/state_entry_exit.png"/>
+        <imagedata fileref="images/state_entry_exit.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject><phrase>Entries and exits</phrase></textobject>
       </mediaobject>
@@ -2099,7 +2099,7 @@ feature GeneralFeatures {
       <title>Synchronization state</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/state_synchronization.png"/>
+        <imagedata fileref="images/state_synchronization.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject><phrase>Synchronization state</phrase></textobject>
       </mediaobject>
@@ -2173,7 +2173,7 @@ feature GeneralFeatures {
       <title>Orthogonal states</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/orthogonalState_example.jpg" />
+        <imagedata fileref="images/orthogonalState_example.jpg" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Orthogonal states</phrase>
@@ -2190,7 +2190,7 @@ feature GeneralFeatures {
       <title>Shallow history [1]</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/shallowHistory01.jpg" />
+        <imagedata fileref="images/shallowHistory01.jpg" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Shallow history [1]</phrase>
@@ -2204,7 +2204,7 @@ feature GeneralFeatures {
       <title>Shallow history [2]</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/shallowHistory02.jpg" />
+        <imagedata fileref="images/shallowHistory02.jpg" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Shallow history [2]</phrase>
@@ -2216,7 +2216,7 @@ feature GeneralFeatures {
       <title>Shallow history [3]</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/shallowHistory03.jpg" />
+        <imagedata fileref="images/shallowHistory03.jpg" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Shallow history [3]</phrase>
@@ -2864,7 +2864,7 @@ myBool = active(StateA)
      <title>Composite state</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/extract_subdiagram.png" />
+       <imagedata fileref="images/extract_subdiagram.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Composite state</phrase>
@@ -2880,7 +2880,7 @@ myBool = active(StateA)
      <title>Subdiagram popup window</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/extract_subdiagram2.png" />
+       <imagedata fileref="images/extract_subdiagram2.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Subdiagram popup window</phrase>
@@ -2892,7 +2892,7 @@ myBool = active(StateA)
      <title>Subdiagram editor</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/extract_subdiagram3.png" />
+       <imagedata fileref="images/extract_subdiagram3.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>Subdiagram editor</phrase>
@@ -2946,7 +2946,7 @@ myBool = active(StateA)
      <title>SGen generator model with default values</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/sGenEditor.png" />
+       <imagedata fileref="images/sGenEditor.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>SGen generator model with default values</phrase>
@@ -3073,7 +3073,7 @@ feature Debug {
      <title>The traffic light model</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/TrafficLight.png" />
+       <imagedata fileref="images/TrafficLight.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>The traffic light model</phrase>
@@ -3428,7 +3428,7 @@ extern void trafficLightWaiting_unsetTimer(TrafficLightWaiting* handle, const sc
       <title>Specifying an operation callback in the model</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/operationExample.png" />
+        <imagedata fileref="images/operationExample.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Specifying an operation callback in the model</phrase>
@@ -3626,7 +3626,7 @@ feature JUnitWrapper {
      <title>The traffic light model</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/TrafficLight.png" />
+       <imagedata fileref="images/TrafficLight.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>The traffic light model</phrase>
@@ -3929,7 +3929,7 @@ void DefaultSM::SCI_Sample::set_a(sc_boolean value) {
       <title>Specifying an operation callback in the model</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/operationExample.png" />
+        <imagedata fileref="images/operationExample.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Specifying an operation callback in the model</phrase>
@@ -4051,7 +4051,7 @@ feature GeneralFeatures {
      <title>The traffic light model</title>
      <mediaobject>
       <imageobject>
-       <imagedata fileref="images/TrafficLight.png" />
+       <imagedata fileref="images/TrafficLight.png" align="center" width="80%" scalefit="1"/>
       </imageobject>
       <textobject>
        <phrase>The traffic light model</phrase>
@@ -4518,7 +4518,7 @@ public interface IDefaultSMStatemachine extends ITimerCallback, IStatemachine {
       <title>Specifying an operation callback in the model</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/operationExample.png" />
+        <imagedata fileref="images/operationExample.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Specifying an operation callback in the model</phrase>
@@ -4672,7 +4672,7 @@ protected void tearDownStatemachine() {
       <title>Creating an Xtend2 generator project</title>
       <mediaobject>
        <imageobject>
-        <imagedata fileref="images/xtendGenerator.png" />
+        <imagedata fileref="images/xtendGenerator.png" align="center" width="80%" scalefit="1"/>
        </imageobject>
        <textobject>
         <phrase>Creating an Xtend2 generator project</phrase>
