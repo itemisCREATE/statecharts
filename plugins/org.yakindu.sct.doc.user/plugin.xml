@@ -6,10 +6,8 @@
         <toc file="help/toc.xml" primary="true" />
     </extension>
 
-    <!--
     <extension point="org.eclipse.help.contexts">
         <contexts file="contexts.xml" plugin="org.yakindu.sct.ui.editor"/>
     </extension>
-    -->
 
 </plugin>
