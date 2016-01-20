@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.4"?>
+
 <plugin>
 
-	<extension point="org.eclipse.help.toc">
-		<toc file="toc.xml" primary="true"/>
-		<toc file="help/00_structure/toc.xml" primary="false"/>
-		<toc file="help/01_overview/overview-toc.xml" primary="false"/>
-		<toc file="help/02_installation/installation-toc.xml" primary="false"/>
-		<toc file="help/03_getting_started/getting_started-toc.xml" primary="false"/>
-		<toc file="help/04_code_generation/code_generation-toc.xml" primary="false"/>
-		<toc file="help/05_reference/reference-toc.xml" primary="false"/>
-		<toc file="help/06_tasks/tasks-toc.xml" primary="false"/>
-	</extension>
+    <extension point="org.eclipse.help.toc">
+        <toc file="help/toc.xml" primary="true" />
+    </extension>
 
-	<extension point="org.eclipse.help.contexts">
-		<contexts file="contexts.xml" plugin="org.yakindu.sct.ui.editor"/>
-	</extension>
+    <!--
+    <extension point="org.eclipse.help.contexts">
+        <contexts file="contexts.xml" plugin="org.yakindu.sct.ui.editor"/>
+    </extension>
+    -->
 
 </plugin>
