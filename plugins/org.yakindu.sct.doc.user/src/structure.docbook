@@ -2912,7 +2912,106 @@ myBool = active(StateA)
     <title>Comparing statecharts</title>
     <para></para>
    </sect3>
+
+   <sect3 xml:id="exporting-a-statechart-as-an-image-file">
+    <title>Exporting a statechart as an image file</title>
+
+    <para>A statechart can be saved as an image file and e.g. be included in some documentation. The following 
+     steps explain how to do the export.</para>
+
+    <orderedlist>
+
+     <listitem><para>In the statechart editor, right-click on the main region. The context menu appears.</para>
+      
+      <figure xml:id="fig_exporting_statechart_as_image_010_save_as_menu_item">
+       <title>Selecting the "Save As Image File…" menu item</title>
+       <mediaobject>
+        <imageobject>
+         <imagedata fileref="images/exporting_statechart_as_image_010_save_as_menu_item.png" align="center" width="80%" scalefit="1"/>
+        </imageobject>
+        <textobject>
+         <phrase>Selecting the "Save As Image File…" menu item</phrase>
+        </textobject>
+       </mediaobject>
+      </figure>
+     </listitem>
+
+     <listitem><para>In the context menu, select <guimenuitem>File → Save As Image File…</guimenuitem>. The 
+      <emphasis>Save As Image</emphasis> dialog appears.</para>
+     
+      <figure xml:id="fig_exporting_statechart_as_image_020_save_as_dialog">
+       <title>The "Save As Image File" dialog</title>
+       <mediaobject>
+        <imageobject>
+         <imagedata fileref="images/exporting_statechart_as_image_020_save_as_dialog.png" align="center" width="80%" scalefit="1"/>
+        </imageobject>
+        <textobject>
+         <phrase>The "Save As Image File" dialog</phrase>
+        </textobject>
+       </mediaobject>
+      </figure>
+     </listitem>
+
+     <listitem><para>Specify the filesystem folder for the exported image file in the <emphasis>Folder</emphasis> text 
+      field.</para></listitem>
+
+     <listitem><para>Enter the name of the export image file into the <emphasis>File Name</emphasis> text field. The 
+      file name extension depends on the selected image format (see below).</para></listitem>
+
+     <listitem><para>Select the image format from the <emphasis>Image Format</emphasis> drop-down menu. 
+      <application>YAKINDU Statechart Tools</application> supports the following formats:</para>
+
+      <variablelist>
+
+       <varlistentry>
+        <term>BMP</term>
+        <term>GIF</term>
+        <term>PNG</term>
+        <listitem><simpara>Lossless pixel image formats</simpara></listitem>
+       </varlistentry>
+
+       <varlistentry>
+        <term>JPG</term>
+        <term>JPEG</term>
+        <listitem><simpara>Lossy pixel image format. Both JPG and JPEG essentially stand for the same image format. You 
+         can specify the image quality via the <emphasis>Quality (%)</emphasis> setting.</simpara></listitem>
+       </varlistentry>
+
+       <varlistentry>
+        <term>SVG</term>
+        <listitem><simpara>Scalable Vector Graphics (SVG)</simpara></listitem>
+       </varlistentry>
+
+       <varlistentry>
+        <term>PDF</term>
+        <listitem><simpara>Portable Document Format (PDF)</simpara></listitem>
+       </varlistentry>
+
+      </variablelist>
+
+      <para>Selecting an image format changes the export file name's extension appropriately, e.g. if the file name you 
+       entered was <literal>foobar</literal>, and the you select PNG as image format, the file name will change to 
+       <literal>foobar.png</literal>.</para>
+       
+      <note><para>The image export functionality is subject to the capabilities of your Java runtime environment (JRE). 
+       You can use only those image formats your JRE actually supports.</para></note>
+     </listitem>
+
+     <listitem><para>The <emphasis>Quality (%)</emphasis> text field is active for JPEG images only. JPEG is a lossy 
+      format, and reducing the quality results in a smaller file size. However, due to the nature of statechart images, 
+      a lossless format like PNG is most often a better choice, both in quality and in file size.</para></listitem>
+
+     <listitem><para>Check <emphasis>Overwrite existing file without warning</emphasis> if you don't want to be 
+      bothered by a confirmation dialog which will appear if the export file already exists.</para></listitem>
+
+     <listitem><para>Check <emphasis>Export to HTML</emphasis> to create both the image file plus an HTML file to 
+      include it.</para></listitem>
+
+    </orderedlist>
+
+   </sect3>
   </sect2>
+
   <sect2 xml:id="simulating-statecharts">
    <title>Simulating statecharts</title>
    <sect3 xml:id="starting-a-simulation">

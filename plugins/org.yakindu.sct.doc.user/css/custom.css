@@ -162,7 +162,7 @@ table.scedit img {
     box-shadow: 4px 4px 2px #bbb;
 }
 
-.application, .state-name, .trigger-name {
+.application, .state-name, .trigger-name, .guimenuitem {
 	font-style: italic;
 }
 
