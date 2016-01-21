@@ -21,7 +21,7 @@ import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 /**
- * Generates the runnable wrapper for the statemachine. This wrapper implies event based execution semantics. 
+ * Generates the runnable wrapper for the state machine. This wrapper implies event based execution semantics. 
  */
 class RunnableWrapper {
 
@@ -52,9 +52,9 @@ class RunnableWrapper {
 		«flow.createImports(entry)»
 		
 		/**
-		 * Runnable wrapper of «flow.statemachineClassName». This wrapper provides a thread safe, runnable instance of the statemachine.
+		 * Runnable wrapper of «flow.statemachineClassName». This wrapper provides a thread-safe, runnable instance of the state machine.
 		 * The wrapper implements the {@link Runnable} interface and can be started in a thread by the client code. 
-		 * The run method then starts the main event processing loop for this statemachine.
+		 * The run method then starts the main event processing loop for this state machine.
 		 * 
 		 * This feature is in beta state. Currently not supported are
 		 * - interface observer
@@ -70,7 +70,7 @@ class RunnableWrapper {
 			«flow.timingFunctions(entry)»
 			
 			/**
-			 * init() will be delegated thread safe to the wrapped statemachine. 
+			 * init() will be delegated thread-safely to the wrapped state machine. 
 			 */ 
 			public void init() {
 				synchronized(statemachine) {
@@ -79,7 +79,7 @@ class RunnableWrapper {
 			}
 			
 			/**
-			 * enter() will be delegated thread safe to the wrapped statemachine.  
+			 * enter() will be delegated thread-safely to the wrapped state machine.  
 			 */ 
 			public void enter() {
 				synchronized(statemachine) {
@@ -88,7 +88,7 @@ class RunnableWrapper {
 			}
 			
 			/**
-			 * exit() will be delegated thread safe to the wrapped statemachine.  
+			 * exit() will be delegated thread-safely to the wrapped state machine.  
 			 */ 
 			public void exit() {
 				synchronized(statemachine) {
@@ -97,7 +97,7 @@ class RunnableWrapper {
 			}
 			
 			/**
-			 * isActive() will be delegated thread safe to the wrapped statemachine.  
+			 * isActive() will be delegated thread-safely to the wrapped state machine.  
 			 */ 
 			public boolean isActive() {
 				synchronized(statemachine) {
@@ -106,7 +106,7 @@ class RunnableWrapper {
 			}
 			
 			/**
-			 * isFinal() will be delegated thread safe to the wrapped statemachine.  
+			 * isFinal() will be delegated thread-safely to the wrapped state machine.  
 			 */ 
 			public boolean isFinal() {
 				synchronized(statemachine) {
@@ -116,7 +116,7 @@ class RunnableWrapper {
 			
 			
 			/**
-			 * runCycle() will be delegated thread safe to the wrapped statemachine.  
+			 * runCycle() will be delegated thread-safely to the wrapped state machine.  
 			 */ 
 			@Override
 			public void runCycle() {
@@ -126,8 +126,8 @@ class RunnableWrapper {
 			}
 
 			/**
-			 * This method will start the main execution loop for the statemachine. 
-			 * First it will init and enter the statemachine implicitly and then will start processing events 
+			 * This method will start the main execution loop for the state machine. 
+			 * First it will init and enter the state machine implicitly and then will start processing events 
 			 * from the event queue until the thread is interrupted. 
 			 */
 			@Override
@@ -175,7 +175,7 @@ class RunnableWrapper {
 		protected BlockingQueue<Runnable> eventQueue = new LinkedBlockingQueue<Runnable>();
 
 		/**
-		 * The core statemachine is simply wrapped and the event processing will be delegated to that statemachine instance.
+		 * The core state machine is simply wrapped and the event processing will be delegated to that state machine instance.
 		 * This instance will be created implicitly.
 		 */
 		protected «flow.statemachineClassName» statemachine = new «flow.statemachineClassName»();
@@ -302,7 +302,7 @@ class RunnableWrapper {
 			public void setTimer(ITimer timer) {
 				synchronized(statemachine) {
 					this.externalTimer = timer;
-					/* the wrapped statemachine uses timer proxy as timer */
+					/* the wrapped state machine uses timer proxy as timer */
 					statemachine.setTimer(timerProxy);
 				}
 			}

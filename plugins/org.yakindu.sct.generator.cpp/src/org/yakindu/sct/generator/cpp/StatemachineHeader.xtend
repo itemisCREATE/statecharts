@@ -225,15 +225,15 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		void runCycle();
 		
 		/*!
-		* Checks if the statemachine is active (until 2.4.1 this method was used for states).
-		* A statemachine is active if it was entered. It is inactive if it has not been entered at all or if it was exited.
+		* Checks if the state machine is active (until 2.4.1 this method was used for states).
+		* A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
 		*/
 		sc_boolean isActive();
 		
 		
 		/*!
 		* Checks if all active states are final. 
-		* If there are no active states then the statemachine is considered as inactive and this method returns false.
+		* If there are no active states then the state machine is considered being inactive. In this case this method returns false.
 		*/
 		sc_boolean isFinal();
 	'''

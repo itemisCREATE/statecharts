@@ -34,7 +34,7 @@
         parameterType="BOOLEAN"/>
   </types>
   <types name="RunnableWrapper"
-      comment="Generates a runnable wrapper for the statemachine"
+      comment="Generates a runnable wrapper for the state machine"
       optional="true">
     <parameters
         name="namePrefix"

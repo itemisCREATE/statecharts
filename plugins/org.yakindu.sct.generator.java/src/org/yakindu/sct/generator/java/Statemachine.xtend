@@ -579,7 +579,7 @@ class Statemachine {
 	def protected runCycleFunction(ExecutionFlow flow) '''
 		public void runCycle() {
 			if(!initialized)
-				throw new IllegalStateException("The statemachine needs to be initialized first by calling the init() function.");
+				throw new IllegalStateException("The state machine needs to be initialized first by calling the init() function.");
 			
 			clearOutEvents();
 			
@@ -605,7 +605,7 @@ class Statemachine {
 	def protected enterFunction(ExecutionFlow it) '''
 		public void enter() {
 			if(!initialized)
-				throw new IllegalStateException("The statemachine needs to be initialized first by calling the init() function.");
+				throw new IllegalStateException("The state machine needs to be initialized first by calling the init() function.");
 			
 			«IF timed»
 			if (timer == null) {

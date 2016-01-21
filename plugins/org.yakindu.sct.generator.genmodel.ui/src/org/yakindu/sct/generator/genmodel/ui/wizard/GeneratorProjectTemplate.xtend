@@ -397,10 +397,10 @@ class GeneratorProjectTemplate {
 
 			public void generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess access) {
 				StringBuilder builder = new StringBuilder();
-				builder.append("The name of the Statemachine is ");
+				builder.append("The name of the state machine is ");
 				builder.append(flow.getName());
 				builder.append(LBR).append(LBR);
-				builder.append("The Statemachine has the following states:");
+				builder.append("The state machine has the following states:");
 				builder.append(LBR).append(LBR);
 				for (ExecutionState state : flow.getStates()) {
 					builder.append(
@@ -446,9 +446,9 @@ class GeneratorProjectTemplate {
 			}
 		
 			def info(ExecutionFlow flow) {''«"'"»
-				The name of the Statemachine is '«'«'»flow.name»'
+				The name of the state machine is '«'«'»flow.name»'
 
-				The Statemachine has the following states:
+				The state machine has the following states:
 		
 				«'«'»FOR ExecutionState state : flow.states»
 					«'«'»state.name.replaceFirst(flow.name+'\\.','')»

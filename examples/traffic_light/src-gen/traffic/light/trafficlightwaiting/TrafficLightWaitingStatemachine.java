@@ -157,7 +157,7 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 	public void enter() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
@@ -1074,7 +1074,7 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

@@ -24,7 +24,7 @@ import org.yakindu.sct.test.models.TestModelInjectorProvider;
 
 /**
  * These tests only check for compile errors, they don't check the behaviour of
- * the generated Statemachine!
+ * the generated state machine!
  * 
  * @author andreas muelder - Initial contribution and API
  * 

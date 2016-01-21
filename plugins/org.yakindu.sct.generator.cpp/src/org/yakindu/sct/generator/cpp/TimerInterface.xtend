@@ -40,7 +40,7 @@ class TimerInterface {
 		class TimedStatemachineInterface;
 		
 		/*
-		 * Basic interface for statemachines.
+		 * Basic interface for state machines.
 		 */
 		class «timerInterface» {
 			public:
