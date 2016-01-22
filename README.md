@@ -33,7 +33,7 @@ We appreciate any feedback and there are various ways to contribute feedback:
 ## Setting up the development environment using Oomph (recommended)
 
 1. Download the <a href="https://wiki.eclipse.org/Eclipse_Oomph_Installer" target="_blank">Oomph Eclipse Installer</a> for your platform and install it.
-2.Download the <a href="https://github.com/Yakindu/statecharts/blob/master/StatechartTools.setup" target="_blank">YAKINDU Statechart Tools Setup file</a> for Oomph (rightclick, *save as …*).
+2. Download the <a href="https://raw.githubusercontent.com/Yakindu/statecharts/master/StatechartTools.setup" target="_blank">YAKINDU Statechart Tools Setup file</a> for Oomph (rightclick, *save as …*).
 3. Start Oomph by executing *eclipse-installer/eclipse-inst*.
 4. On the initial page, select *Advanced Mode* in the menu at the top right.
 5. On the *Product* page, select *Eclipse IDE for Eclipse Committers* in the *Eclipse.org* folder, then click *Next*.
