@@ -136,7 +136,7 @@ class RuntimeService {
 		
 				if (timerTasks.containsKey(cyclePeriod)) {
 					// TimerTask for cycle time already existing -> add state machine
-					return timerTasks.get(cyclePeriod).addStatemachine(state machine);
+					return timerTasks.get(cyclePeriod).addStatemachine(statemachine);
 				} else {
 					// Create new TimerTask for cycle period and add state machine
 					StatemachineTimerTask timerTask = new StatemachineTimerTask();
