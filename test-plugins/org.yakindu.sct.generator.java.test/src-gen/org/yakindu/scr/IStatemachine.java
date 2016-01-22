@@ -6,12 +6,12 @@ package org.yakindu.scr;
 public interface IStatemachine {
 
 	/**
-	 * Initializes the state machine. Use to init internal variables etc.
+	 * Initializes the state machine. Used to initialize internal variables etc.
 	 */
 	public void init();
 
 	/**
-	 * Enters the state machine. Sets the state machine in a defined state.
+	 * Enters the state machine. Sets the state machine into a defined state.
 	 */
 	public void enter();
 
@@ -21,14 +21,14 @@ public interface IStatemachine {
 	public void exit();
 
 	/**
-	 * Checks if the state machine is active. 
-	 * A state machine is active if it was entered. It is inactive if it has not been entered at all or if it was exited.
+	 * Checks whether the state machine is active. 
+	 * A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
 	 */
 	public boolean isActive();
 
 	/**
-	 * Checks if all active states are final. 
-	 * If there are no active states then the state machine is considered as incative and this method returns false.
+	 * Checks whether all active states are final. 
+	 * If there are no active states then the state machine is considered being incative. In this case this method returns <code>false</code>.
 	 */
 	public boolean isFinal();
 

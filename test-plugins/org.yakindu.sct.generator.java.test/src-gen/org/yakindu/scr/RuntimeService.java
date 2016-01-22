@@ -125,7 +125,7 @@ public class RuntimeService {
 	 * Removes the given state machine from runtime service.
 	 * 
 	 * @param statemachine
-	 *            - the state machine which should be removed
+	 *            - the state machine to be removed
 	 * @param cyclePeriod
 	 *            - the scheduling cycle period of the state machine
 	 * @return {@code true} if state machine is removed properly.

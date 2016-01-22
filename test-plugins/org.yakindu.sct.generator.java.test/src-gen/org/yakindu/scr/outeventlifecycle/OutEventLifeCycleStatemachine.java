@@ -83,7 +83,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	public void enter() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		enterSequence_r1_default();
 
@@ -306,7 +306,7 @@ public class OutEventLifeCycleStatemachine implements IOutEventLifeCycleStatemac
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 
