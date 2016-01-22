@@ -79,7 +79,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	public void enter() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		enterSequence_main_region_default();
 	}
@@ -353,7 +353,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

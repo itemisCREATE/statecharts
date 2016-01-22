@@ -108,16 +108,11 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	public void enter() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
-
-		timer.setTimer(this, 0, 2000, true);
-
-		timer.setTimer(this, 1, 6200, true);
-
 		entryAction();
 
 		enterSequence_mr_default();
@@ -1214,7 +1209,7 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 
