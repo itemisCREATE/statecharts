@@ -2363,63 +2363,86 @@ event voidEvent : void
       </tr>
      </table>
     </sect4>
+
     <sect4 xml:id="raising-an-event">
      <title>Raising an event</title>
-     <para>An event is raised by calling a method whose name consists of the word <emphasis>raise</emphasis> followed by the event name, e. g. <emphasis>raiseIncoming_call()</emphasis>, and if it is an interface event the name of the interface.</para>
+     <para>An event is raised by calling a method whose name consists of the word <emphasis>raise</emphasis> followed 
+      by the event name, e. g. <emphasis>raiseIncoming_call()</emphasis>, and if it is an interface event the name of 
+      the interface.</para>
     </sect4>
+
     <sect4 xml:id="calling-an-operation">
      <title>Calling an operation</title>
-     <para>An operation is called similar to other programming languages with the operation name and passing concrete parameters. The parameters can be expressions.</para>
+     <para>An operation is called similar to other programming languages with the operation name and passing concrete 
+      parameters. The parameters can be expressions.</para>
     </sect4>
    </sect3>
+
    <sect3 xml:id="expressions">
     <title>Expressions</title>
-    <para>Expressions in YAKINDU SCT are similar to expressions in other programming languages. The language provides operators for logical expressions, number arithmetic, bitwise arithmetic, and bit shifting.</para>
+
+    <para>Expressions in <application>YAKINDU Statechart Tools</application> are similar to expressions in other
+     programming languages. The language provides operators for logical expressions, number arithmetic, bitwise
+     arithmetic, and bit shifting.</para>
+
     <para>The type of a logical expression is <emphasis role="strong">boolean</emphasis>.</para>
+
     <sect4 xml:id="LogicalAND">
      <title>Logical AND</title>
+
      <programlisting>
-var1 &amp;&amp; var2
+expr1 &amp;&amp; expr2
 </programlisting>
     </sect4>
+
     <sect4 xml:id="LogicalOR">
      <title>Logical OR</title>
+
      <programlisting>
-var1 ||  var2 
+expr1 ||  expr2 
 </programlisting>
     </sect4>
+
     <sect4 xml:id="LogicalNOT">
      <title>Logical NOT</title>
      <programlisting>
-!var1 
+!expr1 
 </programlisting>
     </sect4>
+
     <sect4 xml:id="Conditionalexpression">
      <title>Conditional expression</title>
+
      <programlisting>
-var1 ? var2 : 23 
+expr1 ? expr2 : expr3
 </programlisting>
     </sect4>
+
     <sect4 xml:id="BitwiseXOR">
      <title>Bitwise XOR</title>
+
      <programlisting>
-var1 ^ var2
+expr1 ^ expr2
 </programlisting>
     </sect4>
+
     <sect4 xml:id="BitwiseOR">
      <title>Bitwise OR</title>
+
      <programlisting>
-var1 | var2
+expr1 | expr2
 </programlisting>
     </sect4>
     <sect4 xml:id="BitwiseAND">
      <title>Bitwise AND</title>
      <programlisting>
-var1 &amp; var2
+expr1 &amp; expr2
 </programlisting>
     </sect4>
+
     <sect4 xml:id="LogicalRelationsandShiftOperators">
      <title>Logical Relations and Shift Operators</title>
+
      <informaltable>
       <tgroup cols="2">
        <colspec align="left" />
@@ -2492,8 +2515,10 @@ var1 &amp; var2
       </tgroup>
      </informaltable>
     </sect4>
+
     <sect4 xml:id="Binaryarithmeticoperators">
      <title>Binary arithmetic operators</title>
+
      <informaltable>
       <tgroup cols="2">
        <colspec align="left" />
@@ -2543,8 +2568,10 @@ var1 &amp; var2
       </tgroup>
      </informaltable>
     </sect4>
+
     <sect4 xml:id="Unaryarithmeticoperators">
      <title>Unary arithmetic operators</title>
+
      <informaltable>
       <tgroup cols="2">
        <colspec align="left" />
@@ -2579,6 +2606,7 @@ var1 &amp; var2
      </informaltable>
     </sect4>
    </sect3>
+
    <sect3 xml:id="scopes">
     <title>Scopes</title>
     <sect4 xml:id="Namespace" role="stext_keyword_namespace">
