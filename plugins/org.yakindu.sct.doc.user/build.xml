@@ -103,6 +103,7 @@
 					<available file="${dst.subdir}" />
 				</condition>
 				<sequential if:set="subdir.exists">
+					<mkdir dir="${dst.subdir}"/>
 					<move todir="@{dst.dir}">
 						<fileset dir="${dst.subdir}">
 							<include name="*" />
