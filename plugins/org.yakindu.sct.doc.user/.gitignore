@@ -2,4 +2,6 @@ epub/
 help/
 html/
 pdf/
+target/
+model/*experiment*
 **/*~
