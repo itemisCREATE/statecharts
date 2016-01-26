@@ -2366,9 +2366,12 @@ event voidEvent : void
 
     <sect4 xml:id="raising-an-event">
      <title>Raising an event</title>
-     <para>An event is raised by calling a method whose name consists of the word <emphasis>raise</emphasis> followed 
-      by the event name, e. g. <emphasis>raiseIncoming_call()</emphasis>, and if it is an interface event the name of 
-      the interface.</para>
+
+     <para>An event is raised by calling a method whose name consists of the word <emphasis>raise</emphasis>, 
+      immediately followed by the event name, e. g. <emphasis>raiseIncoming_call()</emphasis>. If the event is an 
+      interface event, the name of the interface must also be appended.</para>
+      
+
     </sect4>
 
     <sect4 xml:id="calling-an-operation">
@@ -2626,9 +2629,12 @@ out event event3 : integer
 var variable1 : integer
 </programlisting>
     </sect4>
-    <sect4 xml:id="internal-scope-internal-scope-.internalscope" role="stext_keyword_internal">
-     <title>Internal scope {#internal-scope .'internalscope}</title>
+
+    <sect4 xml:id="internal-scope" role="stext_keyword_internal">
+     <title>Internal scope</title>
+
      <para>Declarations made in an internal scope are visible to contained states only.</para>
+
      <programlisting>
 internal:
 var localVariable1: integer
@@ -2640,6 +2646,7 @@ localOperation(valueof(localEvent) , NamedInterface.variable1)
 </programlisting>
     </sect4>
    </sect3>
+
    <sect3 xml:id="declarations">
     <title>Declarations</title>
     <para>Within scopes, variables, constants, events, variables, operations, and local reactions can be declared.</para>
@@ -2668,29 +2675,50 @@ const variable1: real
 
     <sect4 xml:id="events" role="stext_keyword_event">
      <title>Events</title>
+
      <sect5 xml:id="incoming-and-outgoing-events">
       <title>Incoming and outgoing events</title>
+
       <para>An event in an interface scope has a direction. It is either ingoing or outgoing:</para>
+
       <programlisting>
 interface NamedInterface:
 in event event1
 out event event2
 </programlisting>
      </sect5>
+
      <sect5 xml:id="events-with-variables">
       <title>Events with variables</title>
+
       <para>An event in the local scope can carry variables:</para>
+
       <programlisting>
 internal:
 event localEvent1 : integer
 </programlisting>
+
       <para>A local event can have a value assignment:</para>
+
       <programlisting>
 internal:
 event localEvent1: integer = 25
 </programlisting>
+
+      <para>Read access to the value of an event is possible in the statechart using the <literal>valueof()</literal>
+       built-in method. Please note that reading an event's value is possible only when the event actually occurs, for 
+       example in a guard:</para>
+
+      <programlisting>localEvent1 [valueof(localEvent1) == 6]</programlisting>
+      
+      <para>An event parameter can be specified when raising an event, as in the following example:</para>
+      
+      <programlisting>raise event1 : 3+3</programlisting>
+      
+      <remark role="fixme">Explain how and where an event can be raised!</remark>
      </sect5>
     </sect4>
+
     <sect4 xml:id="operations" role="stext_keyword_operation">
      <title>Operations</title>
      <para>Operations can have none, one or multiple parameters. A parameter is declared with a name and a type. An operation may have a single return type similar to Java.</para>
