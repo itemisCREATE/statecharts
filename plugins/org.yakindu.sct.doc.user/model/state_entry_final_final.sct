@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_BNR3gLX7EeWTfOMYDrZNaw" specification="internal:&#xA;event proceed: void&#xA;event error" name="state_initial_final">
+  <sgraph:Statechart xmi:id="_BNR3gLX7EeWTfOMYDrZNaw" specification="internal:&#xA;event proceed: void&#xA;event error" name="definitions">
     <regions xmi:id="_BNSekrX7EeWTfOMYDrZNaw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_BNWwAbX7EeWTfOMYDrZNaw">
         <outgoingTransitions xmi:id="_3_1okLkQEeW6eogEEG3H2w" specification="" target="_QCGVsLYGEeWTfOMYDrZNaw"/>
@@ -45,7 +45,7 @@
           </children>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_BNWwA7X7EeWTfOMYDrZNaw" fontName="Verdana" fillColor="0" lineColor="16777215"/>
           <styles xsi:type="notation:NamedStyle" xmi:id="_BNWwBLX7EeWTfOMYDrZNaw" name="allowColors"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_BNXXFrX7EeWTfOMYDrZNaw" y="38" width="15" height="15"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_BNXXFrX7EeWTfOMYDrZNaw" x="-3" y="102" width="15" height="15"/>
         </children>
         <children xmi:id="_f7mhoLhOEeWuvJHgu3pQWg" type="State" element="_f7J1sLhOEeWuvJHgu3pQWg">
           <children xsi:type="notation:DecorationNode" xmi:id="_f7nIsLhOEeWuvJHgu3pQWg" type="StateName">
@@ -137,7 +137,7 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_8bZUXbhUEeWuvJHgu3pQWg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_8bZUXrhUEeWuvJHgu3pQWg"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_8bZUX7hUEeWuvJHgu3pQWg" name="isHorizontal" booleanValue="true"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_8bZUYLhUEeWuvJHgu3pQWg" x="81" y="22" width="40" height="53"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_8bZUYLhUEeWuvJHgu3pQWg" x="78" y="86" width="40" height="53"/>
         </children>
         <children xsi:type="notation:Shape" xmi:id="_DthlULqeEeWi--onjuZ4vw" type="FinalState" element="_DtfwILqeEeWi--onjuZ4vw" fontName="Verdana" lineColor="4210752">
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_DthlUbqeEeWi--onjuZ4vw" x="664" y="102" width="15" height="15"/>
