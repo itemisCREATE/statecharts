@@ -6,6 +6,7 @@
  <xsl:param name="html.stylesheet">css/style.css</xsl:param>
  <xsl:param name="section.autolabel">1</xsl:param>
  <xsl:param name="section.autolabel.max.depth">4</xsl:param>
+ <xsl:param name="show.comments" select="0"></xsl:param>
  <xsl:param name="formal.title.placement">
   figure after
   example before
