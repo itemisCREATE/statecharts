@@ -22,5 +22,10 @@
 <unit id="com.google.inject.multibindings.source" version="3.0.0.v201402270930"/>
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
 </location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.itemis.xtext.antlr.feature.feature.group" version="2.1.1.v201405091103"/>
+<unit id="de.itemis.xtext.antlr.sdk.feature.group" version="2.1.1.v201405091103"/>
+<repository location="http://download.itemis.com/updates/releases/2.1.1/"/>
+</location>
 </locations>
 </target>
