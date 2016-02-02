@@ -152,4 +152,14 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 		this.selection = selection;
 	}
 
+	@Override
+	public boolean canFinish() {
+		boolean complete = super.canFinish();
+		if (!complete)
+			return false;
+		if (getContainer().getCurrentPage() == modelFilePage)
+			return false;
+		else
+			return true;
+	}
 }
