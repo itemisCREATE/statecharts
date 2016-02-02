@@ -95,8 +95,7 @@ public class SGenWizardPage2ContentProvider implements ITreeContentProvider {
 					else if (resource instanceof IFile
 							&& resource.getFileExtension()
 									.equals(fileExtension)) {
-						if (!containsErrors(resource))
-							result.add(obj);
+						result.add(obj);
 						return true;
 					} else if (resource instanceof IFolder
 							&& containsFile((IFolder) resource)) {
@@ -108,17 +107,6 @@ public class SGenWizardPage2ContentProvider implements ITreeContentProvider {
 			});
 		}
 		return result.toArray(new IResource[0]);
-	}
-
-	public boolean containsErrors(IResource resource) {
-		int maxSeverity;
-		try {
-			maxSeverity = resource.findMaxProblemSeverity(IMarker.PROBLEM,
-					true, IResource.DEPTH_INFINITE);
-			return maxSeverity == IMarker.SEVERITY_ERROR;
-		} catch (CoreException e) {
-			return true;
-		}
 	}
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
