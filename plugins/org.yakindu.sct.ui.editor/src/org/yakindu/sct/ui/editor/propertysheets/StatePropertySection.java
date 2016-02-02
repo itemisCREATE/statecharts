@@ -92,6 +92,7 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 	}
 
 	protected void createSpecificationControl(final Composite parent) {
+		Label lblDocumentation = getToolkit().createLabel(parent, "State Behavior: ");
 		Injector injector = getInjector(State.class.getName());
 		if (injector != null) {
 			txtSpecification = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
@@ -101,6 +102,7 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 		} else {
 			txtSpecification = getToolkit().createText(parent, "", SWT.MULTI);
 		}
+		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblDocumentation);
 		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(txtSpecification);
 	}
 
