@@ -51,6 +51,7 @@ import org.eclipse.swt.widgets.Label;
 import org.yakindu.sct.generator.core.extensions.FileExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.ui.wizards.ModelCreationWizardPage;
 
 import com.google.common.collect.Lists;
 
@@ -75,14 +76,14 @@ public class SGenWizardPage2 extends WizardPage {
 
 	protected CheckboxTreeViewer resourceTree;
 
-	private final SGenWizardPage1 fileSelectionPage;
+	private final ModelCreationWizardPage fileSelectionPage;
 
 	@SuppressWarnings("unused")
 	private final IStructuredSelection selection;
 
 	private Label lblNewLabel;
 
-	protected SGenWizardPage2(String pageName, SGenWizardPage1 fileSelectionPage, IStructuredSelection selection) {
+	protected SGenWizardPage2(String pageName, ModelCreationWizardPage fileSelectionPage, IStructuredSelection selection) {
 		super(pageName);
 		this.fileSelectionPage = fileSelectionPage;
 		this.selection = selection;
