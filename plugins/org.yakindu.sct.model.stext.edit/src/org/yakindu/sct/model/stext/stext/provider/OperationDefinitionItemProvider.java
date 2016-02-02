@@ -16,11 +16,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.yakindu.base.types.Operation;
-import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.provider.OperationItemProvider;
 
 /**
@@ -69,30 +66,6 @@ public class OperationDefinitionItemProvider extends OperationItemProvider
   {
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/OperationDefinition"));
 	}
-
-  /**
-	 * @generated NOT
-	 */
-	@Override
-	public String getText(Object object) {
-		Operation operation = (Operation)object;
-		StringBuilder builder = new StringBuilder(operation.getName());
-		builder.append("(");
-		EList<Parameter> parameters = operation.getParameters();
-		for (Parameter parameter : parameters) {
-			builder.append(parameter.getName());
-			builder.append(" : " );
-			builder.append(parameter.getType().getName());
-		}
-		builder.append(")");
-		if(operation.getType() != null){
-			builder.append(" : ");
-			String name = operation.getType().getName();
-			builder.append(name == null ? "void" : name);
-		}
-		return builder.toString();
-	}
-  
 
   /**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
