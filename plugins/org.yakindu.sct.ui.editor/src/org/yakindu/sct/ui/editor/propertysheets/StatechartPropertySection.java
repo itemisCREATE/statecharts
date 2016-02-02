@@ -116,7 +116,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		Label label = getToolkit().createLabel(rightColumn, "Region Priority:");
 		GridDataFactory.fillDefaults().applyTo(label);
 		orderElementControl = new OrderElementControl(rightColumn, SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS,
-				this);
+				this, "Statechart contains no regions");
 		GridDataFactory.fillDefaults().span(2, 0).grab(true, false).applyTo(orderElementControl);
 	}
 
