@@ -116,7 +116,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		Label label = getToolkit().createLabel(rightColumn, "Region Priority:");
 		GridDataFactory.fillDefaults().applyTo(label);
 		orderElementControl = new OrderElementControl(rightColumn, SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS,
-				this);
+				this, "Statechart contains no regions");
 		GridDataFactory.fillDefaults().span(2, 0).grab(true, false).applyTo(orderElementControl);
 	}
 
@@ -129,7 +129,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 	}
 
 	protected void createSpecificationControl(final Composite parent) {
-
+		Label lblDocumentation = getToolkit().createLabel(parent, "Statechart Behavior: ");
 		Injector injector = getInjector(Statechart.class.getName());
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
@@ -139,6 +139,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		} else {
 			textControl = getToolkit().createText(parent, "", SWT.MULTI);
 		}
+		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblDocumentation);
 		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(textControl);
 	}
 

@@ -92,6 +92,7 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 	}
 
 	protected void createSpecificationControl(final Composite parent) {
+		Label lblDocumentation = getToolkit().createLabel(parent, "State Behavior: ");
 		Injector injector = getInjector(State.class.getName());
 		if (injector != null) {
 			txtSpecification = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
@@ -101,13 +102,15 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 		} else {
 			txtSpecification = getToolkit().createText(parent, "", SWT.MULTI);
 		}
+		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblDocumentation);
 		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(txtSpecification);
 	}
 
 	protected void createTransitionsControl(Composite parent) {
 		Label label = getToolkit().createLabel(parent, "Transition Priority:");
 		GridDataFactory.fillDefaults().applyTo(label);
-		orderElementControl = new OrderElementControl(parent, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS, this);
+		orderElementControl = new OrderElementControl(parent, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS, this,
+				"State has no outgoing transitions");
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(orderElementControl);
 	}
 
@@ -126,8 +129,8 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 	protected void bindDocumentationControl(EMFDataBindingContext context) {
 		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION);
-		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
-				txtDoc);
+		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection })
+				.observe(txtDoc);
 		context.bindValue(observe, property.observe(eObject));
 	}
 
