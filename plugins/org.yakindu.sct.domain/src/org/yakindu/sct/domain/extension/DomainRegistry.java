@@ -46,9 +46,9 @@ public class DomainRegistry {
 	private DomainRegistry() {
 	}
 
-	private static List<DomainDescriptor> descriptors = null;
+	private static List<IDomainDescriptor> descriptors = null;
 
-	public static final class DomainDescriptor {
+	protected static final class ConfigElementDomainDescriptor implements IDomainDescriptor {
 
 		private final IConfigurationElement configElement;
 
@@ -56,22 +56,26 @@ public class DomainRegistry {
 
 		private IDomainInjectorProvider injectorProvider;
 
-		DomainDescriptor(IConfigurationElement configElement) {
+		ConfigElementDomainDescriptor(IConfigurationElement configElement) {
 			this.configElement = configElement;
 		}
 
+		@Override
 		public String getDomainID() {
 			return configElement.getAttribute(DOMAIN_ID);
 		}
 
+		@Override
 		public String getName() {
 			return configElement.getAttribute(NAME);
 		}
 
+		@Override
 		public String getDescription() {
 			return configElement.getAttribute(DESCRIPTION);
 		}
 
+		@Override
 		public IDomainInjectorProvider getDomainInjectorProvider() {
 			if (injectorProvider == null) {
 				try {
@@ -84,6 +88,7 @@ public class DomainRegistry {
 			return injectorProvider;
 		}
 
+		@Override
 		public Image getImage() {
 			if (image != null)
 				return image;
@@ -97,34 +102,29 @@ public class DomainRegistry {
 			image = descriptor.createImage();
 			return image;
 		}
-
-		public IConfigurationElement getConfigElement() {
-			return configElement;
-		}
-
-		public void setImage(Image image) {
-			this.image = image;
-		}
 	}
 
-	public static List<DomainDescriptor> getDomainDescriptors() {
+	public static List<IDomainDescriptor> getDomainDescriptors() {
 		if (descriptors == null) {
-			descriptors = new ArrayList<DomainDescriptor>();
-			IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
-					.getConfigurationElementsFor(EXTENSION_POINT);
-			for (IConfigurationElement iConfigurationElement : configurationElements) {
-				descriptors.add(new DomainDescriptor(iConfigurationElement));
+			descriptors = new ArrayList<IDomainDescriptor>();
+
+			if (Platform.isRunning()) {
+				IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
+						.getConfigurationElementsFor(EXTENSION_POINT);
+				for (IConfigurationElement iConfigurationElement : configurationElements) {
+					descriptors.add(new ConfigElementDomainDescriptor(iConfigurationElement));
+				}
 			}
 		}
 		return descriptors;
 	}
 
-	public static DomainDescriptor getDomainDescriptor(final String id) {
+	public static IDomainDescriptor getDomainDescriptor(final String id) {
 		final String defaultDomainID = SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral();
 		try {
-			return Iterables.find(getDomainDescriptors(), new Predicate<DomainDescriptor>() {
+			return Iterables.find(getDomainDescriptors(), new Predicate<IDomainDescriptor>() {
 				@Override
-				public boolean apply(DomainDescriptor input) {
+				public boolean apply(IDomainDescriptor input) {
 					return input.getDomainID().equals(id != null ? id : defaultDomainID);
 				}
 			});
@@ -137,7 +137,7 @@ public class DomainRegistry {
 		}
 	}
 
-	public static DomainDescriptor getDomainDescriptor(EObject object) {
+	public static IDomainDescriptor getDomainDescriptor(EObject object) {
 		EObject rootContainer = EcoreUtil.getRootContainer(object);
 		Assert.isTrue(rootContainer instanceof Statechart);
 		return getDomainDescriptor(((Statechart) rootContainer).getDomainID());

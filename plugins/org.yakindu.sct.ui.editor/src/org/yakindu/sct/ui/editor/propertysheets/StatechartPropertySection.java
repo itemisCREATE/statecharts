@@ -40,7 +40,7 @@ import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Text;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.DomainRegistry.DomainDescriptor;
+import org.yakindu.sct.domain.extension.IDomainDescriptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.propertysheets.OrderElementControl.ISourceObjectCallback;
@@ -84,12 +84,12 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		domainCombo.setLabelProvider(new LabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((DomainDescriptor) element).getName();
+				return ((IDomainDescriptor) element).getName();
 			}
 		});
 
-		List<DomainDescriptor> domains = DomainRegistry.getDomainDescriptors();
-		for (DomainDescriptor domainDescriptor : domains) {
+		List<IDomainDescriptor> domains = DomainRegistry.getDomainDescriptors();
+		for (IDomainDescriptor domainDescriptor : domains) {
 			domainCombo.add(domainDescriptor);
 		}
 		domainCombo.setSelection(new StructuredSelection(DomainRegistry
@@ -160,7 +160,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		UpdateValueStrategy modelToTarget = new UpdateValueStrategy() {
 			@Override
 			public Object convert(Object value) {
-				return ((DomainDescriptor) value).getDomainID();
+				return ((IDomainDescriptor) value).getDomainID();
 			}
 		};
 		UpdateValueStrategy targetToModel = new UpdateValueStrategy() {
@@ -175,8 +175,8 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 	private void bindDocumentationControl(EMFDataBindingContext context) {
 		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION);
-		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
-				documentation);
+		ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
+				.observe(documentation);
 		context.bindValue(observe, property.observe(eObject));
 	}
 
@@ -198,8 +198,8 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 	protected void bindNameControl(EMFDataBindingContext context) {
 		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.NAMED_ELEMENT__NAME);
-		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
-				txtName);
+		ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
+				.observe(txtName);
 		context.bindValue(observe, property.observe(eObject));
 	}
 
