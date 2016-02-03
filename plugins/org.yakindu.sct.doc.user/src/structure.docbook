@@ -3738,6 +3738,36 @@ feature IdentifierSettings {
 }
 </programlisting>
     </sect4>
+
+
+    <sect4 xml:id="tracing" role="sgen_feature_tracing">
+     <title>Tracing</title>
+     <para>The <emphasis role="strong">Tracing</emphasis> feature enables the generation of tracing callback 
+      functions:</para>
+
+     <itemizedlist>
+     
+      <listitem>
+       <para><emphasis>enterState</emphasis> (boolean, optional): specifies whether to generate a callback function 
+        that is used to notify about state entering events</para>
+      </listitem>
+
+      <listitem>
+       <para><emphasis>exitState</emphasis> (boolean, optional): specifies whether to generate a callback that is used
+        to notify about state exiting events.</para>
+      </listitem>
+
+     </itemizedlist>
+     
+     <para>Sample configuration:</para>
+
+     <programlisting>feature Tracing {
+ enterState = true 
+ exitState  = true
+}</programlisting>
+    </sect4>
+
+
     <sect4 xml:id="generatoroptions" role="sgen_feature_generatoroptions">
      <title>GeneratorOptions</title>
      <para>The <emphasis role="strong">GeneratorOptions</emphasis> feature allows change the behavior of the C++ generator:</para>
