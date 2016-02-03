@@ -23,44 +23,53 @@ import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 
 /**
- * 
  * @author andreas muelder - Initial contribution and API
- * 
  */
 public class SGenProposalProvider extends AbstractSGenProposalProvider {
 
 	@Override
-	public void completeGeneratorEntry_ContentType(EObject model, Assignment assignment, ContentAssistContext context,
+	public void completeGeneratorEntry_ContentType(EObject model,
+			Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 
-		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(model, GeneratorModel.class);
-		IGeneratorDescriptor descriptor = GeneratorExtensions.getGeneratorDescriptor(generatorModel.getGeneratorId());
+		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(model,
+				GeneratorModel.class);
+		IGeneratorDescriptor descriptor = GeneratorExtensions
+				.getGeneratorDescriptor(generatorModel.getGeneratorId());
 		if (descriptor == null)
 			return;
-		ICompletionProposal proposal = createCompletionProposal(descriptor.getContentType(), context);
+		ICompletionProposal proposal = createCompletionProposal(
+				descriptor.getContentType(), context);
 		acceptor.accept(proposal);
 	}
 
 	@Override
-	public void completeGeneratorModel_GeneratorId(EObject model, Assignment assignment, ContentAssistContext context,
+	public void completeGeneratorModel_GeneratorId(EObject model,
+			Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		Iterable<IGeneratorDescriptor> descriptions = GeneratorExtensions.getGeneratorDescriptors();
+		Iterable<IGeneratorDescriptor> descriptions = GeneratorExtensions
+				.getGeneratorDescriptors();
 		for (IGeneratorDescriptor desc : descriptions) {
-			ICompletionProposal proposal = createCompletionProposal(desc.getId(),
-					new StyledString((desc.getName() != null) ? desc.getName() : "null"), desc.getImage(), context);
+			ICompletionProposal proposal = createCompletionProposal(
+					desc.getId(),
+					new StyledString((desc.getName() != null) ? desc.getName()
+							: "null"), desc.getImage(), context);
 
 			if (proposal instanceof ConfigurableCompletionProposal) {
 				ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;
 				configurable.setAdditionalProposalInfo(desc.getDescription());
 			}
 
+
 			acceptor.accept(proposal);
 		}
 	}
 
 	@Override
-	public void completeFeatureConfiguration_ParameterValues(EObject model, Assignment assignment,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		super.completeFeatureConfiguration_ParameterValues(model, assignment, context, acceptor);
+	public void completeFeatureConfiguration_ParameterValues(EObject model,
+			Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeFeatureConfiguration_ParameterValues(model, assignment,
+				context, acceptor);
 	}
 }
