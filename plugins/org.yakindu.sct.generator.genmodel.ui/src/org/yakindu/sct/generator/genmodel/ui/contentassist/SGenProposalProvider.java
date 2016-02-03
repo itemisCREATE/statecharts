@@ -19,7 +19,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 
 /**
@@ -30,48 +30,37 @@ import org.yakindu.sct.model.sgen.GeneratorModel;
 public class SGenProposalProvider extends AbstractSGenProposalProvider {
 
 	@Override
-	public void completeGeneratorEntry_ContentType(EObject model,
-			Assignment assignment, ContentAssistContext context,
+	public void completeGeneratorEntry_ContentType(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 
-		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(model,
-				GeneratorModel.class);
-		GeneratorDescriptor descriptor = GeneratorExtensions
-				.getGeneratorDescriptorForId(generatorModel.getGeneratorId());
+		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(model, GeneratorModel.class);
+		IGeneratorDescriptor descriptor = GeneratorExtensions.getGeneratorDescriptor(generatorModel.getGeneratorId());
 		if (descriptor == null)
 			return;
-		ICompletionProposal proposal = createCompletionProposal(
-				descriptor.getContentType(), context);
+		ICompletionProposal proposal = createCompletionProposal(descriptor.getContentType(), context);
 		acceptor.accept(proposal);
 	}
 
 	@Override
-	public void completeGeneratorModel_GeneratorId(EObject model,
-			Assignment assignment, ContentAssistContext context,
+	public void completeGeneratorModel_GeneratorId(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		Iterable<GeneratorDescriptor> descriptions = GeneratorExtensions
-				.getGeneratorDescriptors();
-		for (GeneratorDescriptor desc : descriptions) {
-			ICompletionProposal proposal = createCompletionProposal(
-					desc.getId(),
-					new StyledString((desc.getName() != null) ? desc.getName()
-							: "null"), desc.getImage(), context);
+		Iterable<IGeneratorDescriptor> descriptions = GeneratorExtensions.getGeneratorDescriptors();
+		for (IGeneratorDescriptor desc : descriptions) {
+			ICompletionProposal proposal = createCompletionProposal(desc.getId(),
+					new StyledString((desc.getName() != null) ? desc.getName() : "null"), desc.getImage(), context);
 
 			if (proposal instanceof ConfigurableCompletionProposal) {
 				ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;
 				configurable.setAdditionalProposalInfo(desc.getDescription());
 			}
 
-
 			acceptor.accept(proposal);
 		}
 	}
 
 	@Override
-	public void completeFeatureConfiguration_ParameterValues(EObject model,
-			Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeFeatureConfiguration_ParameterValues(model, assignment,
-				context, acceptor);
+	public void completeFeatureConfiguration_ParameterValues(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.completeFeatureConfiguration_ParameterValues(model, assignment, context, acceptor);
 	}
 }

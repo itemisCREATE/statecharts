@@ -38,7 +38,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.part.FileEditorInput;
 import org.yakindu.sct.builder.nature.SCTNature;
 import org.yakindu.sct.builder.nature.ToggleSCTNatureAction;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.ui.wizards.ModelCreationWizardPage;
 
@@ -131,7 +131,7 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 
 	private Resource createDefaultModel(URI uri) {
 		List<EObject> selectedObjects = generatorConfigPage.getSelectedElements();
-		GeneratorDescriptor selectedGenerator = generatorConfigPage.getSelectedGenerator();
+		IGeneratorDescriptor selectedGenerator = generatorConfigPage.getSelectedGenerator();
 		ModelCreator creator = new ModelCreator(selectedGenerator, selectedObjects);
 		GeneratorModel model = creator.create();
 

@@ -50,7 +50,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.yakindu.sct.generator.core.extensions.FileExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.ui.wizards.ModelCreationWizardPage;
 
 import com.google.common.collect.Lists;
@@ -83,7 +83,8 @@ public class SGenWizardPage2 extends WizardPage {
 
 	private Label lblNewLabel;
 
-	protected SGenWizardPage2(String pageName, ModelCreationWizardPage fileSelectionPage, IStructuredSelection selection) {
+	protected SGenWizardPage2(String pageName, ModelCreationWizardPage fileSelectionPage,
+			IStructuredSelection selection) {
 		super(pageName);
 		this.fileSelectionPage = fileSelectionPage;
 		this.selection = selection;
@@ -118,7 +119,7 @@ public class SGenWizardPage2 extends WizardPage {
 		resourceTree.addCheckStateListener(checkStateListener);
 		resourceTree.addDoubleClickListener(new TreeExpandingDoubleClickListener(resourceTree, checkStateListener));
 		resourceTree.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
-		resourceTree.setFilters(new ViewerFilter[] { new ViewerFilter() {
+		resourceTree.setFilters(new ViewerFilter[]{new ViewerFilter() {
 			@Override
 			public boolean select(Viewer viewer, Object parentElement, Object element) {
 				// TODO: Filter by common navigator filter instead of supressing
@@ -128,7 +129,7 @@ public class SGenWizardPage2 extends WizardPage {
 				}
 				return true;
 			}
-		} });
+		}});
 	}
 
 	private void createGeneratorCombo(Composite container) {
@@ -138,7 +139,7 @@ public class SGenWizardPage2 extends WizardPage {
 		generatorCombo.getCombo().setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		generatorCombo.setLabelProvider(new GeneratorDescriptorLabelProvider());
 		generatorCombo.setContentProvider(new ArrayContentProvider());
-		List<GeneratorDescriptor> descriptors = Lists.newArrayList(GeneratorExtensions.getGeneratorDescriptors());
+		List<IGeneratorDescriptor> descriptors = Lists.newArrayList(GeneratorExtensions.getGeneratorDescriptors());
 		Collections.sort(descriptors, CoreGenerator.generatorOrder);
 		generatorCombo.setInput(descriptors);
 		generatorCombo.getCombo().select(0);
@@ -151,8 +152,8 @@ public class SGenWizardPage2 extends WizardPage {
 
 	protected void refreshInput() {
 		lblNewLabel.setText("Choose: " + getSelectedGenerator().getContentType());
-		((SGenWizardPage2ContentProvider) resourceTree.getContentProvider()).setFileExtension(FileExtensions
-				.getFileExtension(getSelectedGenerator().getId()));
+		((SGenWizardPage2ContentProvider) resourceTree.getContentProvider())
+				.setFileExtension(FileExtensions.getFileExtension(getSelectedGenerator().getId()));
 		resourceTree.setInput(getSelectedProject());
 	}
 
@@ -178,7 +179,7 @@ public class SGenWizardPage2 extends WizardPage {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource emfResource = resourceSet.getResource(uri, true);
 
-		GeneratorDescriptor desc = getSelectedGenerator();
+		IGeneratorDescriptor desc = getSelectedGenerator();
 		String className = desc.getElementRefType();
 
 		TreeIterator<EObject> content = emfResource.getAllContents();
@@ -200,24 +201,24 @@ public class SGenWizardPage2 extends WizardPage {
 		return null;
 	}
 
-	public GeneratorDescriptor getSelectedGenerator() {
-		return (GeneratorDescriptor) ((StructuredSelection) generatorCombo.getSelection()).getFirstElement();
+	public IGeneratorDescriptor getSelectedGenerator() {
+		return (IGeneratorDescriptor) ((StructuredSelection) generatorCombo.getSelection()).getFirstElement();
 	}
 
 	private static class GeneratorDescriptorLabelProvider extends LabelProvider {
 
 		@Override
 		public String getText(Object element) {
-			if (element instanceof GeneratorDescriptor) {
-				return ((GeneratorDescriptor) element).getName();
+			if (element instanceof IGeneratorDescriptor) {
+				return ((IGeneratorDescriptor) element).getName();
 			}
 			return super.getText(element);
 		}
 
 		@Override
 		public Image getImage(Object element) {
-			if (element instanceof GeneratorDescriptor) {
-				return ((GeneratorDescriptor) element).getImage();
+			if (element instanceof IGeneratorDescriptor) {
+				return ((IGeneratorDescriptor) element).getImage();
 			}
 			return super.getImage(element);
 		}

@@ -25,8 +25,8 @@ import org.eclipse.xtext.ui.editor.contentassist.ITemplateAcceptor;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 import org.eclipse.xtext.ui.editor.templates.DefaultTemplateProposalProvider;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.genmodel.services.SGenGrammarAccess;
 import org.yakindu.sct.model.sgen.FeatureType;
@@ -75,8 +75,8 @@ public class SGenTemplateProposalProvider extends
 				.getRootContainer(context.getCurrentModel());
 
 
-		GeneratorDescriptor generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptorForId(model.getGeneratorId());
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
 		
 		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
 				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());

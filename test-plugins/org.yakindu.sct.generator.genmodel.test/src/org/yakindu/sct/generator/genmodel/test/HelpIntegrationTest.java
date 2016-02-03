@@ -25,8 +25,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.genmodel.resource.FeatureResourceDescription;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
@@ -112,8 +112,8 @@ public class HelpIntegrationTest {
 
 	private List<String> getFeaturesWithoutDocumentation(String generatorId) {
 		
-		GeneratorDescriptor generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptorForId(generatorId);
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(generatorId);
 		
 		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
 				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());

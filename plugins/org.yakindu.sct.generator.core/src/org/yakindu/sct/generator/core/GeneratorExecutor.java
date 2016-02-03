@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 
@@ -40,8 +40,8 @@ public class GeneratorExecutor {
 		GeneratorModel model = (GeneratorModel) resource.getContents().get(0);
 
 		String generatorId = model.getGeneratorId();
-		GeneratorDescriptor description = GeneratorExtensions
-				.getGeneratorDescriptorForId(generatorId);
+		IGeneratorDescriptor description = GeneratorExtensions
+				.getGeneratorDescriptor(generatorId);
 		if (description == null)
 			return;
 		final ISCTGenerator generator = description.createGenerator();
@@ -66,8 +66,8 @@ public class GeneratorExecutor {
 	public void executeGenerator(GeneratorModel model) {
 
 		String generatorId = model.getGeneratorId();
-		GeneratorDescriptor description = GeneratorExtensions
-				.getGeneratorDescriptorForId(generatorId);
+		IGeneratorDescriptor description = GeneratorExtensions
+				.getGeneratorDescriptor(generatorId);
 		if (description == null)
 			throw new RuntimeException("No generator registered for ID: " + generatorId);
 		final ISCTGenerator generator = description.createGenerator();
