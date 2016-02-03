@@ -46,34 +46,16 @@ public class LibraryExtensions {
 			this.configElement = configElement;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.yakindu.sct.generator.core.extensions.ILibraryDescriptor#getURI()
-		 */
 		@Override
 		public URI getURI() {
 			return URI.createURI(configElement.getAttribute(ATTRIBUTE_URI));
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.yakindu.sct.generator.core.extensions.ILibraryDescriptor#
-		 * getLibraryId()
-		 */
 		@Override
 		public String getLibraryId() {
 			return configElement.getAttribute(ATTRIBUTE_LIBRARY_ID);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.yakindu.sct.generator.core.extensions.ILibraryDescriptor#
-		 * createFeatureValueProvider()
-		 */
 		@Override
 		public IDefaultFeatureValueProvider createFeatureValueProvider() {
 			try {
