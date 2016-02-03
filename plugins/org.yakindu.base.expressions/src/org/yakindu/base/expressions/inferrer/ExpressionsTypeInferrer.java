@@ -72,61 +72,61 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		Type type1 = inferTypeDispatch(e.getTrueCase());
 		Type type2 = inferTypeDispatch(e.getFalseCase());
 		assertCompatible(type1, type2, String.format(COMMON_TYPE, type1, type2));
-		assertIsType(inferTypeDispatch(e.getCondition()), CONDITIONAL_BOOLEAN, getType(BOOLEAN));
+		assertIsSupertype(inferTypeDispatch(e.getCondition()), getType(BOOLEAN), CONDITIONAL_BOOLEAN);
 		return getCommonType(type1, type2);
 	}
 
 	public Type infer(LogicalOrExpression e) {
 		Type type1 = inferTypeDispatch(e.getLeftOperand());
 		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertIsType(type1, String.format(LOGICAL_OPERATORS, "||", type1, type2), getType(BOOLEAN));
-		assertIsType(type2, String.format(LOGICAL_OPERATORS, "||", type1, type2), getType(BOOLEAN));
+		assertIsSupertype(type1, getType(BOOLEAN), String.format(LOGICAL_OPERATORS, "||", type1, type2));
+		assertIsSupertype(type2, getType(BOOLEAN), String.format(LOGICAL_OPERATORS, "||", type1, type2));
 		return getType(BOOLEAN);
 	}
 
 	public Type infer(LogicalAndExpression e) {
 		Type type1 = inferTypeDispatch(e.getLeftOperand());
 		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertIsType(type1, String.format(LOGICAL_OPERATORS, "&&", type1, type2), getType(BOOLEAN));
-		assertIsType(type2, String.format(LOGICAL_OPERATORS, "&&", type1, type2), getType(BOOLEAN));
+		assertIsSupertype(type1, getType(BOOLEAN), String.format(LOGICAL_OPERATORS, "&&", type1, type2));
+		assertIsSupertype(type2, getType(BOOLEAN), String.format(LOGICAL_OPERATORS, "&&", type1, type2));
 		return getType(BOOLEAN);
 	}
 
 	public Type infer(LogicalNotExpression e) {
 		Type type = inferTypeDispatch(e.getOperand());
-		assertIsType(type, String.format(LOGICAL_OPERATOR, "!", type), getType(BOOLEAN));
+		assertIsSupertype(type, getType(BOOLEAN), String.format(LOGICAL_OPERATOR, "!", type));
 		return getType(BOOLEAN);
 	}
 
 	public Type infer(BitwiseXorExpression e) {
 		Type type1 = inferTypeDispatch(e.getLeftOperand());
 		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertIsType(type1, String.format(BITWISE_OPERATORS, "^", type1, type2), getType(INTEGER));
-		assertIsType(type2, String.format(BITWISE_OPERATORS, "^", type1, type2), getType(INTEGER));
+		assertIsSupertype(type1, getType(INTEGER), String.format(BITWISE_OPERATORS, "^", type1, type2));
+		assertIsSupertype(type2, getType(INTEGER), String.format(BITWISE_OPERATORS, "^", type1, type2));
 		return getType(INTEGER);
 	}
 
 	public Type infer(BitwiseOrExpression e) {
 		Type type1 = inferTypeDispatch(e.getLeftOperand());
 		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertIsType(type1, String.format(BITWISE_OPERATORS, "|", type1, type2), getType(INTEGER));
-		assertIsType(type2, String.format(BITWISE_OPERATORS, "|", type1, type2), getType(INTEGER));
+		assertIsSupertype(type1, getType(INTEGER), String.format(BITWISE_OPERATORS, "|", type1, type2));
+		assertIsSupertype(type2, getType(INTEGER), String.format(BITWISE_OPERATORS, "|", type1, type2));
 		return getType(INTEGER);
 	}
 
 	public Type infer(BitwiseAndExpression e) {
 		Type type1 = inferTypeDispatch(e.getLeftOperand());
 		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertIsType(type1, String.format(BITWISE_OPERATORS, "&", type1, type2), getType(INTEGER));
-		assertIsType(type2, String.format(BITWISE_OPERATORS, "&", type1, type2), getType(INTEGER));
+		assertIsSupertype(type1, getType(INTEGER), String.format(BITWISE_OPERATORS, "&", type1, type2));
+		assertIsSupertype(type2, getType(INTEGER), String.format(BITWISE_OPERATORS, "&", type1, type2));
 		return getType(INTEGER);
 	}
 
 	public Type infer(ShiftExpression e) {
 		Type type1 = inferTypeDispatch(e.getLeftOperand());
 		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertIsType(type1, String.format(BITWISE_OPERATORS, e.getOperator(), type1, type2), getType(INTEGER));
-		assertIsType(type2, String.format(BITWISE_OPERATORS, e.getOperator(), type1, type2), getType(INTEGER));
+		assertIsSupertype(type1, getType(INTEGER), String.format(BITWISE_OPERATORS, e.getOperator(), type1, type2));
+		assertIsSupertype(type2, getType(INTEGER), String.format(BITWISE_OPERATORS, e.getOperator(), type1, type2));
 		return getType(INTEGER);
 	}
 
@@ -143,8 +143,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		Type type1 = inferTypeDispatch(e.getLeftOperand());
 		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertCompatible(type1, type2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2));
-		assertIsType(type1, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2), getType(INTEGER),
-				getType(REAL));
+		assertIsSupertype(type1, getType(REAL), String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2));
 		return getCommonType(e.getLeftOperand(), e.getRightOperand());
 	}
 
@@ -152,17 +151,16 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		Type type1 = inferTypeDispatch(e.getLeftOperand());
 		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertCompatible(type1, type2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2));
-		assertIsType(type1, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2), getType(INTEGER),
-				getType(REAL));
+		assertIsSupertype(type1, getType(REAL), String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2));
 		return getCommonType(type1, type2);
 	}
 
 	public Type infer(NumericalUnaryExpression e) {
 		Type type1 = inferTypeDispatch(e.getOperand());
 		if (e.getOperator() == UnaryOperator.COMPLEMENT)
-			assertIsType(type1, String.format(BITWISE_OPERATOR, '~', type1), getType(INTEGER));
+			assertIsSupertype(type1, getType(INTEGER), String.format(BITWISE_OPERATOR, '~', type1));
 		else {
-			assertCompatible(type1, getType(REAL), String.format(ARITHMETIC_OPERATOR, e.getOperator(), type1));
+			assertIsSupertype(type1, getType(REAL), String.format(ARITHMETIC_OPERATOR, e.getOperator(), type1));
 		}
 		return type1;
 	}
