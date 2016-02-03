@@ -46,7 +46,7 @@ public class DomainRegistry {
 	private DomainRegistry() {
 	}
 
-	private static List<IDomainDescriptor> descriptors = null;
+	private static List<IDomainDescriptor> descriptors;
 
 	private static final class ConfigElementDomainDescriptor implements IDomainDescriptor {
 

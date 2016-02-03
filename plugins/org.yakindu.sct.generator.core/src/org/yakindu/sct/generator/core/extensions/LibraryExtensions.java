@@ -10,9 +10,6 @@
  */
 package org.yakindu.sct.generator.core.extensions;
 
-import static com.google.common.collect.Iterables.transform;
-import static com.google.common.collect.Lists.newArrayList;
-
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -22,9 +19,9 @@ import org.eclipse.emf.common.util.URI;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /**
  * 
@@ -40,25 +37,47 @@ public class LibraryExtensions {
 
 	public static final String GLOBAL_ID = "ALL";
 
-	public static class LibraryDescriptor {
+	private static List<ILibraryDescriptor> descriptors;
+
+	private static class LibraryDescriptor implements ILibraryDescriptor {
 		private final IConfigurationElement configElement;
 
 		LibraryDescriptor(IConfigurationElement configElement) {
 			this.configElement = configElement;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.yakindu.sct.generator.core.extensions.ILibraryDescriptor#getURI()
+		 */
+		@Override
 		public URI getURI() {
 			return URI.createURI(configElement.getAttribute(ATTRIBUTE_URI));
 		}
-		
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.yakindu.sct.generator.core.extensions.ILibraryDescriptor#
+		 * getLibraryId()
+		 */
+		@Override
 		public String getLibraryId() {
 			return configElement.getAttribute(ATTRIBUTE_LIBRARY_ID);
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.yakindu.sct.generator.core.extensions.ILibraryDescriptor#
+		 * createFeatureValueProvider()
+		 */
+		@Override
 		public IDefaultFeatureValueProvider createFeatureValueProvider() {
 			try {
-				return (IDefaultFeatureValueProvider) configElement
-						.createExecutableExtension(DEFAULT_PROVIDER);
+				return (IDefaultFeatureValueProvider) configElement.createExecutableExtension(DEFAULT_PROVIDER);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
@@ -66,51 +85,49 @@ public class LibraryExtensions {
 		}
 	}
 
-	public static Iterable<LibraryDescriptor> getLibraryDescriptors() {
-		IConfigurationElement[] configurationElements = Platform
-				.getExtensionRegistry().getConfigurationElementsFor(
-						EXTENSION_POINT_ID);
-		return transform(newArrayList(configurationElements),
-				new CreateLibraryDescriptor());
+	public static List<ILibraryDescriptor> getLibraryDescriptors() {
+
+		if (descriptors == null) {
+			descriptors = Lists.newArrayList();
+			if (Platform.isRunning()) {
+				initFromExtensions();
+			}
+		}
+		return descriptors;
 	}
-	
-	public static Iterable<LibraryDescriptor> getLibraryDescriptors(
-			final List<String> libraryIds) {
-		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
-				.getLibraryDescriptors();
-		return Iterables.filter(libraryDescriptor,
-				new Predicate<LibraryDescriptor>() {
-					public boolean apply(LibraryDescriptor input) {
-						for (String libId : libraryIds) {
-							if (input.getLibraryId().equals(libId)) {
-								return true;
-							}
-						}
-						return false;
+
+	protected static void initFromExtensions() {
+		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(EXTENSION_POINT_ID);
+		for (IConfigurationElement iConfigurationElement : configurationElements) {
+			descriptors.add(new LibraryDescriptor(iConfigurationElement));
+		}
+	}
+
+	public static List<ILibraryDescriptor> getLibraryDescriptors(final List<String> libraryIds) {
+		Iterable<ILibraryDescriptor> libraryDescriptor = getLibraryDescriptors();
+		return Lists.newArrayList(Iterables.filter(libraryDescriptor, new Predicate<ILibraryDescriptor>() {
+			public boolean apply(ILibraryDescriptor input) {
+				for (String libId : libraryIds) {
+					if (input.getLibraryId().equals(libId)) {
+						return true;
 					}
-				});
+				}
+				return false;
+			}
+		}));
 	}
-	
-	public static IDefaultFeatureValueProvider getDefaultFeatureValueProvider(
-			List<String> libraryId, FeatureTypeLibrary library) {
-		Iterable<LibraryDescriptor> libraryDescriptor = getLibraryDescriptors(libraryId);
-		for (LibraryDescriptor desc : libraryDescriptor) {
-			IDefaultFeatureValueProvider defaultProvider = desc
-					.createFeatureValueProvider();
-			if (defaultProvider != null
-					&& defaultProvider.isProviderFor(library)) {
+
+	public static IDefaultFeatureValueProvider getDefaultFeatureValueProvider(List<String> libraryId,
+			FeatureTypeLibrary library) {
+		List<ILibraryDescriptor> libraryDescriptor = getLibraryDescriptors(libraryId);
+		for (ILibraryDescriptor desc : libraryDescriptor) {
+			IDefaultFeatureValueProvider defaultProvider = desc.createFeatureValueProvider();
+			if (defaultProvider != null && defaultProvider.isProviderFor(library)) {
 				return defaultProvider;
 			}
 		}
 		return null;
-	}
-
-	private static final class CreateLibraryDescriptor implements
-			Function<IConfigurationElement, LibraryDescriptor> {
-
-		public LibraryDescriptor apply(IConfigurationElement from) {
-			return new LibraryDescriptor(from);
-		}
 	}
 
 }

@@ -26,8 +26,8 @@ import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
-import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.genmodel.resource.FeatureResourceDescription;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorModel;
@@ -144,10 +144,10 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 		Iterable<IEObjectDescription> allElements = Lists.newArrayList();
 
 		if (generatorDescriptor != null) {
-			Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
+			Iterable<ILibraryDescriptor> libraryDescriptor = LibraryExtensions
 					.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
 
-			for (LibraryDescriptor desc : libraryDescriptor) {
+			for (ILibraryDescriptor desc : libraryDescriptor) {
 				Resource library = resourceSet.getResource(desc.getURI(), true);
 				FeatureResourceDescription description = new FeatureResourceDescription(
 						library);

@@ -23,8 +23,8 @@ import org.eclipse.xtext.validation.Check;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
-import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.BoolLiteral;
 import org.yakindu.sct.model.sgen.DeprecatableElement;
@@ -203,7 +203,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
 				.getGeneratorDescriptor(model.getGeneratorId());
 
-		Iterable<LibraryDescriptor> libraryDescriptors = LibraryExtensions
+		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
 				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
 
 		Iterable<FeatureType> requiredFeatures = filter(
@@ -244,7 +244,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
 				.getGeneratorDescriptor(model.getGeneratorId());
 
-		Iterable<LibraryDescriptor> libraryDescriptors = LibraryExtensions
+		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
 				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
 
 		Iterable<String> requiredParameters = transform(
@@ -349,10 +349,10 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		};
 	}
 
-	private static Function<LibraryDescriptor, FeatureTypeLibrary> getFeatureTypeLibrary() {
-		return new Function<LibraryExtensions.LibraryDescriptor, FeatureTypeLibrary>() {
+	private static Function<ILibraryDescriptor, FeatureTypeLibrary> getFeatureTypeLibrary() {
+		return new Function<ILibraryDescriptor, FeatureTypeLibrary>() {
 
-			public FeatureTypeLibrary apply(LibraryDescriptor from) {
+			public FeatureTypeLibrary apply(ILibraryDescriptor from) {
 				return (FeatureTypeLibrary) new ResourceSetImpl()
 						.getResource(from.getURI(), true).getContents().get(0);
 			}
