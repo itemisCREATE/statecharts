@@ -103,10 +103,13 @@ public class OperationItemProvider extends DeclarationItemProvider {
 		StringBuilder builder = new StringBuilder(operation.getName());
 		builder.append("(");
 		EList<Parameter> parameters = operation.getParameters();
+		String sep = "";
 		for (Parameter parameter : parameters) {
+			builder.append(sep);
 			builder.append(parameter.getName());
 			builder.append(" : " );
 			builder.append(parameter.getType().getName());
+			sep = ", ";
 		}
 		builder.append(")");
 		if(operation.getType() != null){
