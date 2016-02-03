@@ -11,7 +11,6 @@
 package org.yakindu.sct.domain.extension;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -29,6 +28,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -36,7 +36,7 @@ import com.google.common.collect.Iterables;
  */
 public class DomainRegistry {
 
-	private static final String EXTENSION_POINT = "org.yakindu.sct.domain";
+	private static final String EXTENSION_POINT_ID = "org.yakindu.sct.domain";
 	private static final String DOMAIN_ID = "domainID";
 	private static final String DESCRIPTION = "description";
 	private static final String IMAGE = "image";
@@ -48,7 +48,7 @@ public class DomainRegistry {
 
 	private static List<IDomainDescriptor> descriptors = null;
 
-	protected static final class ConfigElementDomainDescriptor implements IDomainDescriptor {
+	private static final class ConfigElementDomainDescriptor implements IDomainDescriptor {
 
 		private final IConfigurationElement configElement;
 
@@ -106,17 +106,20 @@ public class DomainRegistry {
 
 	public static List<IDomainDescriptor> getDomainDescriptors() {
 		if (descriptors == null) {
-			descriptors = new ArrayList<IDomainDescriptor>();
-
+			descriptors = Lists.newArrayList();
 			if (Platform.isRunning()) {
-				IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
-						.getConfigurationElementsFor(EXTENSION_POINT);
-				for (IConfigurationElement iConfigurationElement : configurationElements) {
-					descriptors.add(new ConfigElementDomainDescriptor(iConfigurationElement));
-				}
+				initFromExtensions();
 			}
 		}
 		return descriptors;
+	}
+
+	protected static void initFromExtensions() {
+		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(EXTENSION_POINT_ID);
+		for (IConfigurationElement iConfigurationElement : configurationElements) {
+			descriptors.add(new ConfigElementDomainDescriptor(iConfigurationElement));
+		}
 	}
 
 	public static IDomainDescriptor getDomainDescriptor(final String id) {
