@@ -97,11 +97,11 @@
 	</target>
 
 	<!-- The help contexts file (contexts.xml) is not updated automatically. -->
-	<target name="generate.eclipsehelp" description="Generate Eclipse help from DocBook documentation">
+	<target name="generate.eclipsehelp" description="Generate Eclipse help from DocBook documentation" depends="setup.docbook-xsl">
 		<docbook.conversion src.dir="src" dst.dir="${help.dir.name}" basename="structure" style="${docbook.xsl.dir}/eclipsehelp.xsl" dst.extension="html" />
 	</target>
 
-	<target name="generate.pdf" description="Generate PDF from DocBook documentation">
+	<target name="generate.pdf" description="Generate PDF from DocBook documentation" depends="setup.docbook-xsl">
 		<local name="basename" />
 		<property name="basename" value="structure" />
 		<docbook.conversion src.dir="src" dst.dir="${pdf.dir.name}" basename="${basename}" style="${docbook.xsl.dir}/pdf.xsl" dst.extension="fo" />
