@@ -17,6 +17,7 @@ import java.util.Collections;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
@@ -86,6 +87,10 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	private void initTypeCache(final EObject context) {
 		typeCache = CacheBuilder.newBuilder().maximumSize(100).build(new CacheLoader<EObject, Type>() {
 			public Type load(EObject key) {
+				if (key instanceof TypeAlias) {
+					// for type aliases we want to infer their base types
+					return (Type) (EObject) dispatcher.invoke(key);
+				}
 				if (key instanceof Type) {
 					Collection<Type> types = registry.getTypes(context);
 					for (Type type : types) {
