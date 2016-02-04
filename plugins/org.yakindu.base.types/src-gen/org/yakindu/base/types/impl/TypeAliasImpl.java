@@ -393,20 +393,13 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", abstract: ");
-		result.append(abstract_);
-		result.append(')');
-		return result.toString();
+		return name;
 	}
 
 } // TypeAliasImpl

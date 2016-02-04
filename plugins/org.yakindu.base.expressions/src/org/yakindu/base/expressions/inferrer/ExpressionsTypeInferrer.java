@@ -184,8 +184,10 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		return type;
 	}
 
-	// TODO: How to handle TypeAlias, like in C as weak types or like Lint
-	// strong types?
+	/**
+	 * The type of a type alias is its (recursively inferred) base type, i.e.
+	 * type aliases are assignable if their inferred base types are assignable.
+	 */
 	public Object infer(TypeAlias typeAlias) {
 		return inferTypeDispatch(typeAlias.getType());
 	}
@@ -260,7 +262,6 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		Type type = inferTypeDispatch(p.getType());
 		assertNotType(type, VARIABLE_VOID_TYPE, getType(VOID));
 		return inferTypeDispatch(type);
-
 	}
 
 	public Object infer(Operation e) {
