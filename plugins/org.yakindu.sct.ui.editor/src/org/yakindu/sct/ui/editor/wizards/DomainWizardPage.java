@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.DomainRegistry.DomainDescriptor;
+import org.yakindu.sct.domain.extension.IDomainDescriptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 /**
@@ -69,7 +69,7 @@ public class DomainWizardPage extends WizardPage {
 		domainCombo.setLabelProvider(new LabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((DomainDescriptor) element).getName();
+				return ((IDomainDescriptor) element).getName();
 			}
 		});
 		domainCombo.setInput(DomainRegistry.getDomainDescriptors());
@@ -83,7 +83,7 @@ public class DomainWizardPage extends WizardPage {
 		domainCombo.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			public void selectionChanged(SelectionChangedEvent event) {
-				DomainDescriptor domain = unwrap(event.getSelection());
+				IDomainDescriptor domain = unwrap(event.getSelection());
 				description.setText(domain.getDescription());
 				image.setImage(domain.getImage());
 				domainSelectionGroup.layout();
@@ -110,8 +110,8 @@ public class DomainWizardPage extends WizardPage {
 		return unwrap(domainCombo.getSelection()).getDomainID();
 	}
 
-	private DomainDescriptor unwrap(ISelection selection) {
-		DomainDescriptor domain = (DomainDescriptor) ((StructuredSelection) selection).getFirstElement();
+	private IDomainDescriptor unwrap(ISelection selection) {
+		IDomainDescriptor domain = (IDomainDescriptor) ((StructuredSelection) selection).getFirstElement();
 		return domain;
 	}
 

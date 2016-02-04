@@ -22,9 +22,9 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
-import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.BoolLiteral;
 import org.yakindu.sct.model.sgen.DeprecatableElement;
@@ -73,8 +73,8 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public void checkContentType(GeneratorEntry entry) {
 		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(entry,
 				GeneratorModel.class);
-		GeneratorDescriptor descriptor = GeneratorExtensions
-				.getGeneratorDescriptorForId(generatorModel.getGeneratorId());
+		IGeneratorDescriptor descriptor = GeneratorExtensions
+				.getGeneratorDescriptor(generatorModel.getGeneratorId());
 		if (descriptor == null)
 			return;
 		String contentType = entry.getContentType();
@@ -126,8 +126,8 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2
 				.getRootContainer(value);
 
-		GeneratorDescriptor generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptorForId(model.getGeneratorId());
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
 
 		IDefaultFeatureValueProvider provider = LibraryExtensions
 				.getDefaultFeatureValueProvider(
@@ -151,8 +151,8 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 	@Check
 	public void checkGeneratorExists(GeneratorModel model) {
-		GeneratorDescriptor descriptor = GeneratorExtensions
-				.getGeneratorDescriptorForId(model.getGeneratorId());
+		IGeneratorDescriptor descriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
 		if (descriptor == null) {
 			error(String.format(UNKOWN_GENERATOR + " %s!",
 					model.getGeneratorId()),
@@ -200,10 +200,10 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2
 				.getRootContainer(entry);
 
-		GeneratorDescriptor generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptorForId(model.getGeneratorId());
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
 
-		Iterable<LibraryDescriptor> libraryDescriptors = LibraryExtensions
+		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
 				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
 
 		Iterable<FeatureType> requiredFeatures = filter(
@@ -241,10 +241,10 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2
 				.getRootContainer(configuration);
 
-		GeneratorDescriptor generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptorForId(model.getGeneratorId());
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
 
-		Iterable<LibraryDescriptor> libraryDescriptors = LibraryExtensions
+		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
 				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
 
 		Iterable<String> requiredParameters = transform(
@@ -349,10 +349,10 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		};
 	}
 
-	private static Function<LibraryDescriptor, FeatureTypeLibrary> getFeatureTypeLibrary() {
-		return new Function<LibraryExtensions.LibraryDescriptor, FeatureTypeLibrary>() {
+	private static Function<ILibraryDescriptor, FeatureTypeLibrary> getFeatureTypeLibrary() {
+		return new Function<ILibraryDescriptor, FeatureTypeLibrary>() {
 
-			public FeatureTypeLibrary apply(LibraryDescriptor from) {
+			public FeatureTypeLibrary apply(ILibraryDescriptor from) {
 				return (FeatureTypeLibrary) new ResourceSetImpl()
 						.getResource(from.getURI(), true).getContents().get(0);
 			}

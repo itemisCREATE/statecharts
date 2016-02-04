@@ -23,9 +23,9 @@ import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
-import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureType;
@@ -63,12 +63,12 @@ public class SGenQuickfixProvider extends DefaultQuickfixProvider {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2
 				.getRootContainer(element);
 		
-		GeneratorDescriptor generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptorForId(model.getGeneratorId());
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
 		
-		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
+		Iterable<ILibraryDescriptor> libraryDescriptor = LibraryExtensions
 				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
-		for (LibraryDescriptor desc : libraryDescriptor) {
+		for (ILibraryDescriptor desc : libraryDescriptor) {
 			ResourceSet set = new ResourceSetImpl();
 			Resource resource = set.getResource(desc.getURI(), true);
 			FeatureTypeLibrary lib = (FeatureTypeLibrary) resource

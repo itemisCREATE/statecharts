@@ -10,9 +10,6 @@
  */
 package org.yakindu.sct.generator.core.extensions;
 
-import static com.google.common.collect.Iterables.transform;
-import static com.google.common.collect.Lists.newArrayList;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +23,9 @@ import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.Bundle;
 import org.yakindu.sct.generator.core.ISCTGenerator;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /**
  * @author holger willebrandt - Initial contribution and API
@@ -46,9 +43,9 @@ public class GeneratorExtensions {
 	private static final String ATTRIBUTE_ICON = "icon";
 	private static final String ATTRIBUTE_DESCRIPTION = "description";
 
-	private static Iterable<GeneratorDescriptor> generatorDescriptors;
+	private static List<IGeneratorDescriptor> descriptors;
 
-	public static class GeneratorDescriptor {
+	private static class GeneratorDescriptor implements IGeneratorDescriptor {
 
 		private final IConfigurationElement configElement;
 
@@ -58,6 +55,7 @@ public class GeneratorExtensions {
 			this.configElement = configElement;
 		}
 
+		@Override
 		public ISCTGenerator createGenerator() {
 			try {
 				return (ISCTGenerator) configElement.createExecutableExtension(ATTRIBUTE_CLASS);
@@ -67,6 +65,7 @@ public class GeneratorExtensions {
 			return null;
 		}
 
+		@Override
 		public List<String> getLibraryIDs() {
 			List<String> libs = new ArrayList<String>();
 			for (IConfigurationElement child : configElement.getChildren(LIBRARY_CONFIG_ELEMENT)) {
@@ -78,17 +77,17 @@ public class GeneratorExtensions {
 			return libs;
 		}
 
+		@Override
 		public String getId() {
 			return configElement.getAttribute(ATTRIBUTE_ID);
 		}
 
+		@Override
 		public String getName() {
 			return configElement.getAttribute(ATTRIBUTE_NAME);
 		}
 
-		/**
-		 * may return null!!
-		 */
+		@Override
 		public Image getImage() {
 			if (image != null)
 				return image;
@@ -103,14 +102,17 @@ public class GeneratorExtensions {
 			return image;
 		}
 
+		@Override
 		public String getContentType() {
 			return configElement.getAttribute(ATTRIBUTE_CONTENT_TYPE);
 		}
 
+		@Override
 		public String getDescription() {
 			return configElement.getAttribute(ATTRIBUTE_DESCRIPTION);
 		}
 
+		@Override
 		public String getElementRefType() {
 			try {
 				return configElement.getAttribute(ATTRIBUTE_ELEMENT_REF_TYPE);
@@ -119,70 +121,39 @@ public class GeneratorExtensions {
 				return null;
 			}
 		}
-
-		@Override
-		public int hashCode() {
-			String id = getId();
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((id == null) ? 0 : id.hashCode());
-			return result;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj) {
-				return true;
-			}
-			if (obj == null) {
-				return false;
-			}
-			if (getClass() != obj.getClass()) {
-				return false;
-			}
-			GeneratorDescriptor other = (GeneratorDescriptor) obj;
-			String id = getId();
-			if (id == null) {
-				if (other.getId() != null) {
-					return false;
-				}
-			} else if (!id.equals(other.getId())) {
-				return false;
-			}
-			return true;
-		}
-
-
 	}
 
-	public static Iterable<GeneratorDescriptor> getGeneratorDescriptors() {
-		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSION_POINT_ID);
-		if (generatorDescriptors == null) {
-			generatorDescriptors = transform(newArrayList(configurationElements), new CreateGeneratorDescriptor());
+	public static List<IGeneratorDescriptor> getGeneratorDescriptors() {
+		if (descriptors == null) {
+			descriptors = Lists.newArrayList();
+			if (Platform.isRunning()) {
+				initFromExtensions();
+			}
 		}
-		return generatorDescriptors;
+		return descriptors;
+	}
+
+	protected static void initFromExtensions() {
+		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(EXTENSION_POINT_ID);
+		for (IConfigurationElement iConfigurationElement : configurationElements) {
+			descriptors.add(new GeneratorDescriptor(iConfigurationElement));
+		}
 	}
 
 	/**
 	 * returns the Generator Descriptor for the given generator id, or null, if
 	 * the id is unknown
 	 */
-	public static GeneratorDescriptor getGeneratorDescriptorForId(final String generatorId) {
+	public static IGeneratorDescriptor getGeneratorDescriptor(final String generatorId) {
 		try {
-			return Iterables.find(getGeneratorDescriptors(), new Predicate<GeneratorDescriptor>() {
-				public boolean apply(GeneratorDescriptor input) {
+			return Iterables.find(getGeneratorDescriptors(), new Predicate<IGeneratorDescriptor>() {
+				public boolean apply(IGeneratorDescriptor input) {
 					return input != null && input.getId() != null && input.getId().equals(generatorId);
 				}
 			});
 		} catch (NoSuchElementException ex) {
 			return null;
-		}
-	}
-
-	private static final class CreateGeneratorDescriptor implements Function<IConfigurationElement, GeneratorDescriptor> {
-
-		public GeneratorDescriptor apply(IConfigurationElement from) {
-			return new GeneratorDescriptor(from);
 		}
 	}
 

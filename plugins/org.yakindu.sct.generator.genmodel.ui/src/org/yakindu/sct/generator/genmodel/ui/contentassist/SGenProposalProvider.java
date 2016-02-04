@@ -19,13 +19,11 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 
 /**
- * 
  * @author andreas muelder - Initial contribution and API
- * 
  */
 public class SGenProposalProvider extends AbstractSGenProposalProvider {
 
@@ -36,8 +34,8 @@ public class SGenProposalProvider extends AbstractSGenProposalProvider {
 
 		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(model,
 				GeneratorModel.class);
-		GeneratorDescriptor descriptor = GeneratorExtensions
-				.getGeneratorDescriptorForId(generatorModel.getGeneratorId());
+		IGeneratorDescriptor descriptor = GeneratorExtensions
+				.getGeneratorDescriptor(generatorModel.getGeneratorId());
 		if (descriptor == null)
 			return;
 		ICompletionProposal proposal = createCompletionProposal(
@@ -49,9 +47,9 @@ public class SGenProposalProvider extends AbstractSGenProposalProvider {
 	public void completeGeneratorModel_GeneratorId(EObject model,
 			Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		Iterable<GeneratorDescriptor> descriptions = GeneratorExtensions
+		Iterable<IGeneratorDescriptor> descriptions = GeneratorExtensions
 				.getGeneratorDescriptors();
-		for (GeneratorDescriptor desc : descriptions) {
+		for (IGeneratorDescriptor desc : descriptions) {
 			ICompletionProposal proposal = createCompletionProposal(
 					desc.getId(),
 					new StyledString((desc.getName() != null) ? desc.getName()
