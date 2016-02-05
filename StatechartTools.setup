@@ -2508,6 +2508,10 @@
     </setupTask>
   </setupTask>
   <setupTask
+      xsi:type="setup:PreferenceTask"
+      key="/instance/org.eclipse.core.resources/encoding"
+      value="UTF-8"/>
+  <setupTask
       xsi:type="launching:LaunchTask"
       excludedTriggers="STARTUP"
       launcher="GenerateExpressions.mwe2"/>
