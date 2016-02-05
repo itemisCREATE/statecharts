@@ -1,11 +1,12 @@
 GeneratorModel for yakindu::java {
 
 	
-	statechart ActionOutgoingTransitionsInitialState{
+	statechart EntryReactionAction  {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
+
 
 		feature GeneralFeatures {
 			TimerService = true
@@ -23,6 +24,8 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		
 		
 	}
 	

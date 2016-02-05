@@ -8,7 +8,7 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 
-	test ActionOutgoingTransitionsInitialState{
+	test EntryReactionAction{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
