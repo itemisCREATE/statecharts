@@ -1,5 +1,4 @@
 eclipse.preferences.version=1
-encoding//testmodels/SCTUnit/ActionOutgoingTransitionsInitialState.sct=UTF-8
 encoding//testmodels/SCTUnit/AlwaysOncycle.sct=UTF-8
 encoding//testmodels/SCTUnit/AssignmentAsExpression.sct=UTF-8
 encoding//testmodels/SCTUnit/ConditionalExpressions.sct=UTF-8
@@ -32,6 +31,7 @@ encoding//testmodels/SCTUnit/TransitionWithoutCondition.sct=UTF-8
 encoding//testmodels/SCTUnit/TriggerGuardExpressions.sct=UTF-8
 encoding//testmodels/SCTUnit/TypeAlias.sct=UTF-8
 encoding//testmodels/SCTUnit/ValuedEvents.sct=UTF-8
+encoding//testmodels/SCTUnit/entries/EntryReactionAction.sct=UTF-8
 encoding//testmodels/validation/EntryTransitionToParentState.sct=UTF-8
 encoding//testmodels/validation/NoTriggerOnTransitionWithExitPointSpec.sct=UTF-8
 encoding//testmodels/validation/RegionCantBeEnteredUsingShallowHistory.sct=UTF-8
