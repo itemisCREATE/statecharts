@@ -183,7 +183,10 @@
                             style="${docbook.xsl.dir}/pdf.xsl"
                             dst.extension="fo" />
         <taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop" classpathref="fop.classpath" />
-        <fop fofile="${pdf.dir}/${basename}.fo" outfile="${pdf.dir}/${basename}.pdf" format="application/pdf" />
+        <fop fofile="${pdf.dir}/${basename}.fo"
+             outfile="${pdf.dir}/${basename}.pdf"
+             format="application/pdf"
+             basedir="${pdf.dir}" />
     </target>
 
 
