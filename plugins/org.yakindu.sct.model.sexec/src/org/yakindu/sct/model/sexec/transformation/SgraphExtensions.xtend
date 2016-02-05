@@ -90,15 +90,21 @@ class SgraphExtensions {
 	 * Retrieves the target from an entry.
 	 * TODO: validation of preconditions for entry targets e.g every region needs an entry with appropriate target
 	 */
-	def target(Entry entry) {
-		var State target = null
+	def State target(Entry entry) {
+		val obj = entry.transition.target
+		if (obj instanceof State ) return obj as State		
+		
+		return null
+	}
+	
+	def Transition transition(Entry entry) {
 		if ( entry?.outgoingTransitions != null) {
 			if (entry.outgoingTransitions.size > 0) {
-				val obj =entry.outgoingTransitions.get(0).target
-				if (obj instanceof State ) target = obj as State	
+				return entry.outgoingTransitions.get(0)
 			}
-		}
-		return target
+		}	
+		
+		return null	
 	}
 	
 	

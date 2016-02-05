@@ -216,19 +216,33 @@ class ReactionBuilder {
 	}
 	
 	def defineReaction(Entry e) {
+
+		// first get the mapped control flow element the entry
 		val execEntry = e.create
-		//Reuse already created react sequence from defineStateEnterSequence(Entry) 
-		val seq = execEntry.reactSequence
+		
+		// if the entry defines a transition then we will derive the entry transition sequence
+		var Sequence entryTransSeq = null
+		val entryTransitionEffect = e?.transition?.effect		
 		val target = e.target.create
 		val targetEnterSequence = if (target != null && e.outgoingTransitions.size > 0) { e.outgoingTransitions.mapToStateConfigurationEnterSequence } else null
 			
+		if ( entryTransitionEffect != null || targetEnterSequence != null) {
+			entryTransSeq = sexecFactory.createSequence
+			if (entryTransitionEffect != null) {
+				entryTransSeq.steps += entryTransitionEffect.mapEffect	
+			}
+			if (targetEnterSequence != null) {
+				entryTransSeq.steps += targetEnterSequence
+			}
+		}	
+		
+		// we add behavior to the already created react sequence from defineStateEnterSequence(Entry) 
+		val seq = execEntry.reactSequence
 		
 		if ( trace.addTraceSteps ) seq.steps.add(0,execEntry.newTraceNodeExecuted)
 		
-		if (e.kind == EntryKind::INITIAL) {
-			if (targetEnterSequence != null) {
-				seq.steps += targetEnterSequence
-			}
+		if (e.kind == EntryKind::INITIAL) {			
+			if (entryTransSeq != null) seq.steps += entryTransSeq
 			
 		} else if (e.kind == EntryKind::SHALLOW_HISTORY) {
 			val entryStep = sexec.factory.createHistoryEntry
@@ -237,10 +251,7 @@ class ReactionBuilder {
 			entryStep.deep = false
 			entryStep.region = (e.eContainer as Region).create
 			
-			//Initial step, if no history is known
-			if (targetEnterSequence != null) {
-				entryStep.initialStep = targetEnterSequence
-			}
+			if (entryTransSeq != null) entryStep.initialStep = entryTransSeq
 			
 			entryStep.historyStep = (e.eContainer as Region).create.shallowEnterSequence.newCall
 			
@@ -252,10 +263,8 @@ class ReactionBuilder {
 			entryStep.region = (e.eContainer as Region).create
 			entryStep.deep = true
 			
-			//Initial step, if no history is known
-			if (targetEnterSequence != null) {
-				entryStep.initialStep = targetEnterSequence
-			}
+			if (entryTransSeq != null) entryStep.initialStep = entryTransSeq
+			
 			
 			entryStep.historyStep =  (e.eContainer as Region).create.deepEnterSequence.newCall
 
