@@ -110,7 +110,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	}
 
 	private void updateTypeSystem(final IDebugTarget debugTarget) {
-		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(debugTarget.getAdapter(EObject.class));
+		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor((EObject)debugTarget.getAdapter(EObject.class));
 		typeSystem = domainDescriptor.getDomainInjectorProvider().getResourceInjector().getInstance(ITypeSystem.class);
 	}
 
