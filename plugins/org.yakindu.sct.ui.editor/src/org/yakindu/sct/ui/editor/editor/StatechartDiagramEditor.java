@@ -208,4 +208,9 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		}
 		super.dispose();
 	}
+	
+	@Override
+	protected int getInitialPaletteSize() {
+		return 175;
+	}
 }

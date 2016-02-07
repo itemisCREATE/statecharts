@@ -48,9 +48,8 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer
 
 		// set preferences for tool palette.
 		DefaultPaletteViewerPreferences prefs = new DefaultPaletteViewerPreferences();
-		prefs.setLayoutSetting(DefaultPaletteViewerPreferences.LAYOUT_COLUMNS);
+		prefs.setLayoutSetting(DefaultPaletteViewerPreferences.LAYOUT_LIST);
 		prefs.setCurrentUseLargeIcons(true);
-		prefs.setFontData(new FontData("Verdana", 8, SWT.NONE));
 
 		// State line and background color
 		PreferenceConverter.setDefault(getPreferenceStore(),
