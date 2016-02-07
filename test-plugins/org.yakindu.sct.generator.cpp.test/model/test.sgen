@@ -24,7 +24,7 @@ GeneratorModel for sctunit::cpp {
 		}	
 	}
 		
-	test ActionOutgoingTransitionsInitialState{
+	test EntryReactionAction {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 

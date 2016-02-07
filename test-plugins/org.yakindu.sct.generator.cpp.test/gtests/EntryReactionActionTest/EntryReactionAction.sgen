@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::cpp {
-	statechart ActionOutgoingTransitionsInitialState {
+	statechart EntryReactionAction {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "ActionOutgoingTransitionsInitialStateTest"
+			targetFolder = "EntryReactionActionTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

@@ -18,9 +18,9 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/ActionOutgoingTransitionsInitialStateTest/ActionOutgoingTransitionsInitialStateTest.cc", program = "gtests/ActionOutgoingTransitionsInitialStateTest/ActionOutgoingTransitionsInitialState", model = "testmodels/SCTUnit/ActionOutgoingTransitionsInitialState.sct")
+@GTest(sourceFile = "gtests/EntryReactionActionTest/EntryReactionActionTest.cc", program = "gtests/EntryReactionActionTest/EntryReactionAction", model = "testmodels/SCTUnit/EntryReactionAction.sct")
 @RunWith(GTestRunner.class)
-public class ActionOutgoingTransitionsInitialStateTest {
+public class EntryReactionActionTest {
 
 	protected final GTestHelper helper = new GTestHelper(this) {
 
