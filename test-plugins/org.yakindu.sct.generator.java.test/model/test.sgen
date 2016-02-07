@@ -8,6 +8,14 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 
+	test ActionOutgoingTransitionsInitialState{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test AlwaysOncycle{
 		
 		feature Outlet{ 
