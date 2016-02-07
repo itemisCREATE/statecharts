@@ -91,7 +91,7 @@ class SgraphExtensions {
 	 * TODO: validation of preconditions for entry targets e.g every region needs an entry with appropriate target
 	 */
 	def State target(Entry entry) {
-		val obj = entry.transition.target
+		val obj = entry.transition?.target
 		if (obj instanceof State ) return obj as State		
 		
 		return null
