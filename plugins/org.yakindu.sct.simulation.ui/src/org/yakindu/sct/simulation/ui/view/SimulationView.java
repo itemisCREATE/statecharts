@@ -12,6 +12,7 @@ package org.yakindu.sct.simulation.ui.view;
 
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.model.IDebugTarget;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -28,23 +29,28 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.yakindu.base.types.typesystem.ITypeSystem;
+import org.yakindu.sct.domain.extension.DomainRegistry;
+import org.yakindu.sct.domain.extension.IDomainDescriptor;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.ui.view.actions.CollapseAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.ExpandAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
+import org.yakindu.sct.simulation.ui.view.editing.ScopeSlotEditingSupport.ITypeSystemProvider;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SimulationView extends AbstractDebugTargetView {
+public class SimulationView extends AbstractDebugTargetView implements ITypeSystemProvider {
 
 	private TreeViewer viewer;
 	private FormToolkit kit;
 	private Font font;
 	private RaiseEventSelectionListener selectionListener;
+	private ITypeSystem typeSystem;
 
 	public SimulationView() {
 		kit = new FormToolkit(Display.getDefault());
@@ -75,7 +81,7 @@ public class SimulationView extends AbstractDebugTargetView {
 	}
 
 	protected Viewer createViewer(Composite parent) {
-		viewer = ExecutionContextViewerFactory.createViewer(parent, false);
+		viewer = ExecutionContextViewerFactory.createViewer(parent, false, this);
 		selectionListener = new RaiseEventSelectionListener(viewer);
 		return viewer;
 	}
@@ -97,9 +103,15 @@ public class SimulationView extends AbstractDebugTargetView {
 	}
 
 	protected void activeTargetChanged(final IDebugTarget debugTarget) {
+		updateTypeSystem(debugTarget);
 		ISimulationEngine engine = (ISimulationEngine) debugTarget.getAdapter(ISimulationEngine.class);
 		viewer.setInput(engine.getExecutionContext());
 		(new ExpandAllAction(viewer)).run();
+	}
+
+	private void updateTypeSystem(final IDebugTarget debugTarget) {
+		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(debugTarget.getAdapter(EObject.class));
+		typeSystem = domainDescriptor.getDomainInjectorProvider().getResourceInjector().getInstance(ITypeSystem.class);
 	}
 
 	protected void hookActions() {
@@ -167,5 +179,10 @@ public class SimulationView extends AbstractDebugTargetView {
 			}
 			viewer.refresh();
 		}
+	}
+
+	@Override
+	public ITypeSystem getTypeSystem() {
+		return typeSystem;
 	}
 }

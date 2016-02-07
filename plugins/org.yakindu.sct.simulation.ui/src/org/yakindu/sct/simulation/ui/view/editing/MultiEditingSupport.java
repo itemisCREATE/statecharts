@@ -56,4 +56,10 @@ public class MultiEditingSupport extends EditingSupport {
 		currentActive.setValue(element, value);
 	}
 
+	public PublicEditingSupport[] getSupport() {
+		return support;
+	}
+	
+	
+
 }

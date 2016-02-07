@@ -20,6 +20,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
+import org.yakindu.base.types.Type;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 
 /**
@@ -30,8 +31,8 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
  */
 public class EnumerationEditingSupport extends ScopeSlotEditingSupport {
 
-	public EnumerationEditingSupport(ColumnViewer viewer) {
-		super(viewer);
+	public EnumerationEditingSupport(ColumnViewer viewer, ITypeSystemProvider provider) {
+		super(viewer, provider);
 	}
 
 	@Override
@@ -62,8 +63,20 @@ public class EnumerationEditingSupport extends ScopeSlotEditingSupport {
 	}
 
 	@Override
-	protected Class<?> getSupportedType() {
-		return Enumerator.class;
+	protected Type getSupportedType() {
+		// Never called cause canEdit is overridden
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean canEdit(Object element) {
+		if (element instanceof ExecutionSlot) {
+			if (!((ExecutionSlot) element).isWritable())
+				return false;
+			Type type = ((ExecutionSlot) element).getType();
+			return type instanceof EnumerationType;
+		}
+		return false;
 	}
 
 	@Override

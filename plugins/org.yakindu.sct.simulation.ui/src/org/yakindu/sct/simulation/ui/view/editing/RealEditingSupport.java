@@ -15,6 +15,8 @@ import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.widgets.Composite;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 
 /**
  * {@link TextCellEditor} support for Real values.
@@ -24,8 +26,8 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class RealEditingSupport extends ScopeSlotEditingSupport {
 
-	public RealEditingSupport(ColumnViewer viewer) {
-		super(viewer);
+	public RealEditingSupport(ColumnViewer viewer, ITypeSystemProvider provider) {
+		super(viewer, provider);
 	}
 
 	@Override
@@ -46,8 +48,8 @@ public class RealEditingSupport extends ScopeSlotEditingSupport {
 	}
 
 	@Override
-	public Class<?> getSupportedType() {
-		return Double.class;
+	public Type getSupportedType() {
+		return provider.getTypeSystem().getType(ITypeSystem.REAL);
 	}
 
 	@Override

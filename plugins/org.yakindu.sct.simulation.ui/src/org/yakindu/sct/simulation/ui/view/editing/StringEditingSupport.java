@@ -14,6 +14,8 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.widgets.Composite;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 
 /**
@@ -24,8 +26,8 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
  */
 public class StringEditingSupport extends ScopeSlotEditingSupport {
 
-	public StringEditingSupport(ColumnViewer viewer) {
-		super(viewer);
+	public StringEditingSupport(ColumnViewer viewer, ITypeSystemProvider provider) {
+		super(viewer, provider);
 	}
 
 	@Override
@@ -34,8 +36,8 @@ public class StringEditingSupport extends ScopeSlotEditingSupport {
 	}
 
 	@Override
-	public Class<?> getSupportedType() {
-		return String.class;
+	public Type getSupportedType() {
+		return provider.getTypeSystem().getType(ITypeSystem.STRING);
 	}
 
 	public Object getValue(Object element) {
