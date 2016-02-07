@@ -32,7 +32,7 @@ import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 public class JavaFeatureValueProvider extends
 		AbstractDefaultFeatureValueProvider {
 
-	private static final String PACKAGE_NAME_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*\\.)+[a-zA-Z_][a-zA-Z0-9_]*";
+	private static final String PACKAGE_NAME_REGEX = "([a-zA-Z_][a-zA-Z0-9_\\.]*)+[a-zA-Z_][a-zA-Z0-9_]*";
 	private static final String SUFFIX_REGEX = "[a-zA-Z0-9_]*";
 
 	@Override
@@ -40,7 +40,6 @@ public class JavaFeatureValueProvider extends
 			EObject contextElement) {
 		if (parameterValue.getParameter().getName().equals(BASE_PACKAGE)) {
 			parameterValue.setValue("org.yakindu.sct");
-					//+ JavaFeatureConstants.getValidStatemachineName(statechart.getName()));
 		} else if (parameterValue.getParameter().getName()
 				.equals(IMPLEMENTATION_SUFFIX)) {
 			parameterValue.setValue("impl");
