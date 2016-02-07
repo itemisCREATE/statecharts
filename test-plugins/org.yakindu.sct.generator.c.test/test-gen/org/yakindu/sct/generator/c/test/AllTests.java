@@ -14,18 +14,18 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ActionOutgoingTransitionsInitialState.class, AlwaysOncycle.class, AssignmentAsExpression.class, BitExpressions.class, BooleanExpressions.class,
+@SuiteClasses({AlwaysOncycle.class, AssignmentAsExpression.class, BitExpressions.class, BooleanExpressions.class,
 		CastExpressions.class, Choice.class, CKeywords.class, ConditionalExpression.class, ConstantsTests.class,
 		Declarations.class, DeepEntry.class, DeepHistory.class, DynamicChoice.class, EmptyTransition.class,
-		EnterState.class, EntryChoice.class, EntryExitSelfTransition.class, ExitOnSelfTransition.class, ExitState.class,
-		FeatureCalls.class, FinalState.class, Guard.class, GuardedEntry.class, GuardedExit.class,
-		HistoryWithExitPoint.class, HistoryWithoutInitialStep.class, InEventLifeCycle.class, IntegerExpressions.class,
-		InternalEventLifeCycle.class, LocalReactions.class, LogicalAndTests.class, LogicalOrTests.class,
-		NamedInterfaceAccess.class, OutEventLifeCycle.class, Parenthesis.class, PriorityValues.class, RaiseEvent.class,
-		ReadOnlyVariable.class, SameNameDifferentRegion.class, ShallowHistory.class, ShallowHistoryWithDeepEntry.class,
-		SimpleEvent.class, SimpleHierachy.class, StatechartActive.class, StatechartLocalReactions.class,
-		StateIsActive.class, StaticChoice.class, STextKeywordsInStatesAndRegions.class, StringExpressions.class,
-		SyncFork.class, SyncJoin.class, TransitionWithoutCondition.class, TriggerGuardExpressions.class,
-		ValuedEvents.class})
+		EnterState.class, EntryChoice.class, EntryExitSelfTransition.class, EntryReactionAction.class,
+		ExitOnSelfTransition.class, ExitState.class, FeatureCalls.class, FinalState.class, Guard.class,
+		GuardedEntry.class, GuardedExit.class, HistoryWithExitPoint.class, HistoryWithoutInitialStep.class,
+		InEventLifeCycle.class, IntegerExpressions.class, InternalEventLifeCycle.class, LocalReactions.class,
+		LogicalAndTests.class, LogicalOrTests.class, NamedInterfaceAccess.class, OutEventLifeCycle.class,
+		Parenthesis.class, PriorityValues.class, RaiseEvent.class, ReadOnlyVariable.class,
+		SameNameDifferentRegion.class, ShallowHistory.class, ShallowHistoryWithDeepEntry.class, SimpleEvent.class,
+		SimpleHierachy.class, StatechartActive.class, StatechartLocalReactions.class, StateIsActive.class,
+		StaticChoice.class, STextKeywordsInStatesAndRegions.class, StringExpressions.class, SyncFork.class,
+		SyncJoin.class, TransitionWithoutCondition.class, TriggerGuardExpressions.class, ValuedEvents.class})
 public class AllTests {
 }
