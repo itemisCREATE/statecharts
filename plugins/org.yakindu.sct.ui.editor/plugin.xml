@@ -290,14 +290,6 @@
                   large_icon="icons/obj32/State-32.png"
                   path="/tools/"
                   small_icon="icons/obj16/State-16.png">
-                   <expand
-                         force="true">
-                           <content>
-                           </content>
-                     </expand>
-            </entry>
-            <entry
-                  kind="stack" id="stack" path="/tools/" >
             </entry>
              <entry
                   description="Creates a composite state"
@@ -305,13 +297,8 @@
                   kind="tool"
                   label="Composite State"
                   large_icon="icons/obj32/Composite-State-32.png"
-                  path="/tools/stack/"
+                  path="/tools/"
                   small_icon="icons/obj16/Composite-State-16.png">
-                   <expand
-                         force="true">
-                           <content>
-                           </content>
-                     </expand>
             </entry>
              <entry
                   description="Creates a orthogonal state"
@@ -319,29 +306,9 @@
                   kind="tool"
                   label="Orthogonal State"
                   large_icon="icons/obj32/Orthogonal-State-32.png"
-                  path="/tools/stack/"
+                  path="/tools/"
                   small_icon="icons/obj16/Orthogonal-State-16.png">
-                   <expand
-                         force="true">
-                           <content>
-                           </content>
-                     </expand>
             </entry>
-            <!--  <entry
-                  description="Creates a sub submachine state"
-                  id="org.yakindu.sct.ui.editor.SubmachineState"
-                  kind="tool"
-                  label="Submachine State"
-                  large_icon="icons/obj32/Submachine-State-32.png"
-                  path="/tools/stack/"
-                  small_icon="icons/obj16/Submachine-State-16.png">
-                   <expand
-                         force="true">
-                           <content>
-                           </content>
-                     </expand>
-            </entry>
-            -->
              <entry
                    description="Creates a region"
                    id="org.yakindu.sct.ui.editor.Region"
@@ -355,7 +322,7 @@
                    description="Creates an initial entry node"
                    id="org.yakindu.sct.ui.editor.Entry"
                    kind="tool"
-                   label="Initial entry node"
+                   label="Entry"
                    large_icon="icons/obj32/Initial-State-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/Initial-State-16.png">
