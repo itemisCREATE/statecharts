@@ -1,5 +1,5 @@
 
-testgroup EntryReactionAction for statechart EntryReactionAction {
+testgroup EntryReactionAction for statechart entries.EntryReactionAction {
 
 	/*
 	 * Actions on an entry transition should be executed during entering the state machine.
