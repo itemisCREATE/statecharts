@@ -14,6 +14,8 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.java.features.EventBasedRunnableFeature
+import org.yakindu.sct.generator.java.features.CycleBasedWrapperFeature
 
 /**
  * This is the Java code generators main class. 
@@ -24,7 +26,8 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 class JavaGenerator implements IExecutionFlowGenerator {
 
 	@Inject extension GenmodelEntries
-	@Inject extension RunnableFeature
+	@Inject extension EventBasedRunnableFeature
+	@Inject extension CycleBasedWrapperFeature
 
 	@Inject extension Navigation
 	@Inject extension IStatemachine
@@ -34,7 +37,8 @@ class JavaGenerator implements IExecutionFlowGenerator {
 	@Inject extension RuntimeService
 	@Inject extension StatemachineInterface
 	@Inject extension Statemachine
-	@Inject extension RunnableWrapper
+	@Inject extension EventBasedRunnableWrapper
+	@Inject extension CycleBasedSynchronizedWrapper
  	
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 
@@ -55,8 +59,12 @@ class JavaGenerator implements IExecutionFlowGenerator {
 		flow.generateStatemachineInterface(entry, fsa)
 		flow.generateStatemachine(entry, fsa)
 		
-		if (entry.hasFeatureRunnable) {
-			flow.generateRunnableWrapper(entry, fsa)
+		if (entry.hasFeatureEventRunnable) {
+			flow.generateEventBasedRunnableWrapper(entry, fsa)
+		}
+		
+		if (entry.hasFeatureCycleWrapper) {
+			flow.generateCycleWrapper(entry, fsa)
 		}
 	}
 }
