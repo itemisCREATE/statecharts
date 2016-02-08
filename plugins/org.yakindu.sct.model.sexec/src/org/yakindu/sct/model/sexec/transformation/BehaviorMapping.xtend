@@ -730,7 +730,7 @@ class BehaviorMapping {
 		
 		val guard = t.buildGuard
 		
-		if ( triggerCheck != null && guard != null )  stext.and(stext.parenthesis(triggerCheck), guard)
+		if ( triggerCheck != null && guard != null )  stext.and(stext.parenthesis(triggerCheck), stext.parenthesis(guard))
 		else if ( triggerCheck != null )  triggerCheck
 		else guard
 	}
