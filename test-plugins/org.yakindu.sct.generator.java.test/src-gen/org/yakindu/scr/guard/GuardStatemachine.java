@@ -149,7 +149,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 	}
 
 	private boolean check_main_region_A_tr0_tr0() {
-		return (sCInterface.event1) && sCInterface.getMyVar() == 10;
+		return (sCInterface.event1) && (sCInterface.getMyVar() == 10);
 	}
 
 	private boolean check_main_region_A_tr1_tr1() {

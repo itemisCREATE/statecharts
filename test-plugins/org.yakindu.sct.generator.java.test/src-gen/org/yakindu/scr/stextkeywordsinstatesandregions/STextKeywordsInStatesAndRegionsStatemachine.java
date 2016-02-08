@@ -279,79 +279,79 @@ public class STextKeywordsInStatesAndRegionsStatemachine implements ISTextKeywor
 	}
 
 	private boolean check_operation_interface_tr0_tr0() {
-		return (sCInterface.e1) && isStateActive(State.default_namespace);
+		return (sCInterface.e1) && (isStateActive(State.default_namespace));
 	}
 
 	private boolean check_namespace_event_tr0_tr0() {
-		return (sCInterface.e2) && isStateActive(State.operation_internal);
+		return (sCInterface.e2) && (isStateActive(State.operation_internal));
 	}
 
 	private boolean check_local_in_tr0_tr0() {
-		return (sCInterface.e1) && isStateActive(State.namespace_local);
+		return (sCInterface.e1) && (isStateActive(State.namespace_local));
 	}
 
 	private boolean check_interface_var_tr0_tr0() {
-		return (sCInterface.e2) && isStateActive(State.local_out);
+		return (sCInterface.e2) && (isStateActive(State.local_out));
 	}
 
 	private boolean check_internal_external_tr0_tr0() {
-		return (sCInterface.e1) && isStateActive(State.interface_readonly);
+		return (sCInterface.e1) && (isStateActive(State.interface_readonly));
 	}
 
 	private boolean check_event_default_tr0_tr0() {
-		return (sCInterface.e2) && isStateActive(State.internal_operation);
+		return (sCInterface.e2) && (isStateActive(State.internal_operation));
 	}
 
 	private boolean check_in_entry_tr0_tr0() {
-		return (sCInterface.e1) && isStateActive(State.event_else);
+		return (sCInterface.e1) && (isStateActive(State.event_else));
 	}
 
 	private boolean check_out_always_tr0_tr0() {
-		return (sCInterface.e2) && isStateActive(State.in_exit);
+		return (sCInterface.e2) && (isStateActive(State.in_exit));
 	}
 
 	private boolean check_var_raise_tr0_tr0() {
-		return (sCInterface.e1) && isStateActive(State.out_oncycle);
+		return (sCInterface.e1) && (isStateActive(State.out_oncycle));
 	}
 
 	private boolean check_readonly_active_tr0_tr0() {
-		return (sCInterface.e2) && isStateActive(State.var_valueof);
+		return (sCInterface.e2) && (isStateActive(State.var_valueof));
 	}
 
 	private boolean check_external_interface_tr0_tr0() {
-		return (sCInterface.e1) && isStateActive(State.readonly_namespace);
+		return (sCInterface.e1) && (isStateActive(State.readonly_namespace));
 	}
 
 	private boolean check_else_event_tr0_tr0() {
-		return (sCInterface.e2) && isStateActive(State.external_internal);
+		return (sCInterface.e2) && (isStateActive(State.external_internal));
 	}
 
 	private boolean check_entry_in_tr0_tr0() {
-		return (sCInterface.e1) && isStateActive(State.else_local);
+		return (sCInterface.e1) && (isStateActive(State.else_local));
 	}
 
 	private boolean check_exit_var_tr0_tr0() {
-		return (sCInterface.e2) && isStateActive(State.entry_out);
+		return (sCInterface.e2) && (isStateActive(State.entry_out));
 	}
 
 	private boolean check_always_external_tr0_tr0() {
-		return (sCInterface.e1) && isStateActive(State.exit_readonly);
+		return (sCInterface.e1) && (isStateActive(State.exit_readonly));
 	}
 
 	private boolean check_oncycle_default_tr0_tr0() {
-		return (sCInterface.e2) && isStateActive(State.always_operation);
+		return (sCInterface.e2) && (isStateActive(State.always_operation));
 	}
 
 	private boolean check_raise_entry_tr0_tr0() {
-		return (sCInterface.e1) && isStateActive(State.oncycle_else);
+		return (sCInterface.e1) && (isStateActive(State.oncycle_else));
 	}
 
 	private boolean check_valueof_always_tr0_tr0() {
-		return (sCInterface.e2) && isStateActive(State.raise_exit);
+		return (sCInterface.e2) && (isStateActive(State.raise_exit));
 	}
 
 	private boolean check_active_raise_tr0_tr0() {
-		return (sCInterface.e1) && isStateActive(State.valueof_oncycle);
+		return (sCInterface.e1) && (isStateActive(State.valueof_oncycle));
 	}
 
 	private void effect_operation_interface_tr0() {

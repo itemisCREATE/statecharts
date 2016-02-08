@@ -208,11 +208,11 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	}
 
 	private boolean check_region_1_Idle_tr0_tr0() {
-		return (sCIUser.numberPressed) && sCIUser.getNumberPressedValue() == getNumber1();
+		return (sCIUser.numberPressed) && (sCIUser.getNumberPressedValue() == getNumber1());
 	}
 
 	private boolean check_region_1_Number1Pressed_tr0_tr0() {
-		return (sCIUser.numberPressed) && sCIUser.getNumberPressedValue() == getNumber2();
+		return (sCIUser.numberPressed) && (sCIUser.getNumberPressedValue() == getNumber2());
 	}
 
 	private boolean check_region_1_Number1Pressed_tr1_tr1() {
@@ -220,7 +220,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	}
 
 	private boolean check_region_1_Number2Pressed_tr0_tr0() {
-		return (sCIUser.numberPressed) && sCIUser.getNumberPressedValue() == getNumber3();
+		return (sCIUser.numberPressed) && (sCIUser.getNumberPressedValue() == getNumber3());
 	}
 
 	private boolean check_region_1_Number2Pressed_tr1_tr1() {

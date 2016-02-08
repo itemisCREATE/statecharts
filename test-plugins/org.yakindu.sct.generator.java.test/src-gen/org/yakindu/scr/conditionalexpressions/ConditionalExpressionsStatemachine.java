@@ -148,7 +148,7 @@ public class ConditionalExpressionsStatemachine implements IConditionalExpressio
 	}
 
 	private boolean check_main_region_A_tr0_tr0() {
-		return (sCInterface.e) && 1 == (sCInterface.getBoolVar() ? 1 : 0);
+		return (sCInterface.e) && (1 == (sCInterface.getBoolVar() ? 1 : 0));
 	}
 
 	private void effect_main_region_A_tr0() {

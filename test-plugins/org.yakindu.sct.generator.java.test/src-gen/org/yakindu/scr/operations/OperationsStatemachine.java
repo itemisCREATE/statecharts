@@ -153,7 +153,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 
 	private boolean check_main_region_B_tr0_tr0() {
-		return (sCInterface.ev) && sCInterface.operationCallback.alwaysTrue();
+		return (sCInterface.ev) && (sCInterface.operationCallback.alwaysTrue());
 	}
 
 	private boolean check_main_region_C_tr0_tr0() {

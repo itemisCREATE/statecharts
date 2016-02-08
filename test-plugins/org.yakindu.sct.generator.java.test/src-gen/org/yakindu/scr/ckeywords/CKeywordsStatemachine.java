@@ -624,7 +624,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	private boolean check_auto_char_tr0_tr0() {
-		return (sCInterface.auto) && sCInterface.getCase();
+		return (sCInterface.auto) && (sCInterface.getCase());
 	}
 
 	private void effect_auto_char_tr0() {

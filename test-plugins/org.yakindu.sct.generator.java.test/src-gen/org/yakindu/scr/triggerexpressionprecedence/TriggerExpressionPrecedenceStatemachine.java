@@ -194,7 +194,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 	}
 
 	private boolean check_TriggerExpressionPrecedence_main_region_A_tr0_tr0() {
-		return (sCInterface.e1) && sCInterface.getC1() || sCInterface.getC2();
+		return (sCInterface.e1) && (sCInterface.getC1() || sCInterface.getC2());
 	}
 
 	private boolean check_TriggerExpressionPrecedence_main_region_A_tr1_tr1() {
