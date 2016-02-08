@@ -74,7 +74,7 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 		
 		assertCall(flow.getStates().get(0).getSuperScope().getEnterSequences().get(0),
 				0, entryReactSequence);
-		assertCall(((Sequence)entryReactSequence.getSteps().get(0)), 0, flow
+		assertCall(((Sequence) firstStep(firstStep(entryReactSequence))), 0, flow
 				.getStates().get(0).getEnterSequences().get(0));
 	}
 
@@ -98,7 +98,7 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 		
 		assertCall(flow.getStates().get(0).getSuperScope().getEnterSequences().get(0),
 				0, r1EntryReactSequence);
-		assertCall(((Sequence)r1EntryReactSequence.getSteps().get(0)), 0, flow
+		assertCall(((Sequence) firstStep(firstStep(r1EntryReactSequence))), 0, flow
 				.getStates().get(0).getEnterSequences().get(0));
 
 		assertCall(flow.getEnterSequences().get(0), 2, flow.getStates().get(2)
@@ -108,7 +108,7 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 		
 		assertCall(flow.getStates().get(2).getSuperScope().getEnterSequences().get(0),
 				0, r2EntryReactSequence);
-		assertCall(((Sequence)r2EntryReactSequence.getSteps().get(0)), 0, flow
+		assertCall(((Sequence) firstStep(firstStep(r2EntryReactSequence))), 0, flow
 				.getStates().get(2).getEnterSequences().get(0));
 
 	}

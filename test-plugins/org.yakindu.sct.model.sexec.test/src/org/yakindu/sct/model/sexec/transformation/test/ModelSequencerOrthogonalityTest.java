@@ -511,13 +511,13 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 		assertCall(_effect, 2, _s3a.getSuperScope().getEnterSequences().get(0));
 		Sequence r3a_entryReactSequence = flow.getNodes().get(3).getReactSequence();
 		assertCall(_s3a.getSuperScope().getEnterSequences().get(0), 0, r3a_entryReactSequence);
-		assertCall(((Sequence) r3a_entryReactSequence.getSteps().get(0)), 0,
+		assertCall(((Sequence) firstStep(firstStep(r3a_entryReactSequence))), 0,
 				_s3a.getEnterSequences().get(0));
 		assertCall(_effect, 3, _s3b2.getEnterSequences().get(0));
 		assertCall(_effect, 4, _s3c.getSuperScope().getEnterSequences().get(0));
 		Sequence r3c_entryReactSequence = flow.getNodes().get(5).getReactSequence();
 		assertCall(_s3c.getSuperScope().getEnterSequences().get(0), 0, r3c_entryReactSequence);
-		assertCall(((Sequence) r3c_entryReactSequence.getSteps().get(0)), 0,
+		assertCall(((Sequence) firstStep(firstStep(r3c_entryReactSequence))), 0,
 				_s3c.getEnterSequences().get(0));
 		assertTrue(_s3c.getEnterSequences().get(0).getSteps().get(0).getClass()
 				.getSimpleName(),
