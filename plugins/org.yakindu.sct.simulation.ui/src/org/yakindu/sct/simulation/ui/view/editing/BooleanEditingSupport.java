@@ -15,6 +15,8 @@ import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 
 /**
@@ -25,8 +27,8 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
  */
 public class BooleanEditingSupport extends ScopeSlotEditingSupport {
 
-	public BooleanEditingSupport(ColumnViewer viewer) {
-		super(viewer);
+	public BooleanEditingSupport(ColumnViewer viewer, ITypeSystemProvider provider) {
+		super(viewer, provider);
 	}
 
 	@Override
@@ -36,8 +38,8 @@ public class BooleanEditingSupport extends ScopeSlotEditingSupport {
 	}
 
 	@Override
-	public Class<?> getSupportedType() {
-		return Boolean.class;
+	public Type getSupportedType() {
+		return provider.getTypeSystem().getType(ITypeSystem.BOOLEAN);
 	}
 
 	public Object getValue(Object element) {
