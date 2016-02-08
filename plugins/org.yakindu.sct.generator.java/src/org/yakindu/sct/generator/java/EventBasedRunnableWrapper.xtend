@@ -19,29 +19,25 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.java.features.EventBasedRunnableFeature
 
 /**
  * Generates the runnable wrapper for the state machine. This wrapper implies event based execution semantics. 
  */
-class RunnableWrapper {
+class EventBasedRunnableWrapper {
 
 	@Inject protected extension GenmodelEntries
-	@Inject protected extension RunnableFeature
+	@Inject protected extension EventBasedRunnableFeature
 
 	@Inject protected extension Naming
 	@Inject protected extension Navigation
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ICodegenTypeSystemAccess
 	
-	
-	@Inject Beautifier beautifier
-	
-	
-	def generateRunnableWrapper(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
+	def generateEventBasedRunnableWrapper(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		
-		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.runnableWrapperClassName(entry).java
+		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.eventBasedWrapperClassName(entry).java
 		var content = content(flow, entry)
-//		var content = beautifier.format(filename, content(flow, entry))
 		fsa.generateFile(filename, content)
 	}
 	
@@ -63,7 +59,7 @@ class RunnableWrapper {
 		 * Please report bugs and issues... 
 		 */
 		
-		public class «flow.runnableWrapperClassName(entry)» implements «flow.statemachineInterfaceName», Runnable {
+		public class «flow.eventBasedWrapperClassName(entry)» implements «flow.statemachineInterfaceName», Runnable {
 			
 			«flow.createFieldDeclarations(entry)»
 			«flow.interfaceAccessors»
@@ -283,12 +279,12 @@ class RunnableWrapper {
 				@Override
 				public void setTimer(ITimerCallback callback, int eventID, long time,
 						boolean isPeriodic) {
-					externalTimer.setTimer(«flow.runnableWrapperClassName(entry)».this, eventID, time, isPeriodic);
+					externalTimer.setTimer(«flow.eventBasedWrapperClassName(entry)».this, eventID, time, isPeriodic);
 				}
 				
 				@Override
 				public void unsetTimer(ITimerCallback callback, int eventID) {
-					externalTimer.unsetTimer(«flow.runnableWrapperClassName(entry)».this, eventID);
+					externalTimer.unsetTimer(«flow.eventBasedWrapperClassName(entry)».this, eventID);
 				}
 			};
 			
