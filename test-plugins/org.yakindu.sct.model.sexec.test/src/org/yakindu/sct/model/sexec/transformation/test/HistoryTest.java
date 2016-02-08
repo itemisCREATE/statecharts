@@ -339,7 +339,7 @@ public class HistoryTest extends ModelSequencerTest {
 
 		HistoryEntry historyEntry = (HistoryEntry) historyEntryStep;
 		Sequence initialStep = (Sequence) historyEntry.getInitialStep();
-		assertCall(initialStep.getSteps().get(0), _s3.getEnterSequences()
+		assertCall(((Sequence)initialStep.getSteps().get(0)).getSteps().get(0), _s3.getEnterSequences()
 				.get(0));
 		ExecutionRegion _r2 = (ExecutionRegion) _s3.getSuperScope();
 		assertCall(historyEntry.getHistoryStep(), _r2.getDeepEnterSequence());

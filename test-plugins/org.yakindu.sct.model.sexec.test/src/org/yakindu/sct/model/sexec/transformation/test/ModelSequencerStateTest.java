@@ -292,12 +292,12 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertCall(_s1.getEnterSequences().get(0), 1, _s2.getSuperScope().getEnterSequences().get(0));
 		Sequence r1EntryReactSequence = flow.getNodes().get(0).getReactSequence();
 		assertCall(_s2.getSuperScope().getEnterSequences().get(0), 0, r1EntryReactSequence);
-		assertCall(((Sequence) r1EntryReactSequence.getSteps().get(0)), 0, _s2.getEnterSequences().get(0));
+		assertCall(((Sequence) firstStep(firstStep(r1EntryReactSequence))), 0, _s2.getEnterSequences().get(0));
 
 		assertCall(_s1.getEnterSequences().get(0), 2, _s3.getSuperScope().getEnterSequences().get(0));
 		Sequence r2EntryReactSequence = flow.getNodes().get(1).getReactSequence();
 		assertCall(_s3.getSuperScope().getEnterSequences().get(0), 0, r2EntryReactSequence);
-		assertCall(((Sequence) r2EntryReactSequence.getSteps().get(0)), 0, _s3.getEnterSequences().get(0));
+		assertCall(((Sequence) firstStep(firstStep(r2EntryReactSequence))), 0, _s3.getEnterSequences().get(0));
 	}
 
 	/**

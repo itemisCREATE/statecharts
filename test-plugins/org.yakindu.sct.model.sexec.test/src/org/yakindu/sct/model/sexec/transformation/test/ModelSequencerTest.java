@@ -12,6 +12,8 @@ package org.yakindu.sct.model.sexec.transformation.test;
 
 import org.junit.Before;
 import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
+import org.yakindu.sct.model.sexec.Sequence;
+import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.naming.DefaultNamingService;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
@@ -51,6 +53,14 @@ public class ModelSequencerTest extends Assert {
 		});
 		Injector injector = Guice.createInjector(m);
 		injector.injectMembers(this);
+	}
+	
+	
+	protected Step firstStep(Step seq){
+		org.junit.Assert.assertNotNull(seq);
+		assert (seq instanceof Sequence);
+		
+		return ((Sequence)seq).getSteps().get(0);
 	}
 
 }
