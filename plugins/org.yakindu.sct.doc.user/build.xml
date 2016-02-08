@@ -157,7 +157,7 @@
     <target name="generate.html" description="Generates the documentation as HTML." depends="init">
         <docbook.conversion src.dir="src"
                             dst.dir="${html.dir.name}"
-                            basename="structure"
+                            basename="documentation"
                             style="${docbook.xsl.dir}/html.xsl"
                             dst.extension="html" />
     </target>
@@ -167,7 +167,7 @@
     <target name="generate.eclipsehelp" description="Generates the documentation as Eclipse help." depends="init">
         <docbook.conversion src.dir="src"
                             dst.dir="${help.dir.name}"
-                            basename="structure"
+                            basename="documentation"
                             style="${docbook.xsl.dir}/eclipsehelp.xsl"
                             dst.extension="html" />
     </target>
@@ -176,7 +176,7 @@
     <!-- Generates the documentation as PDF. -->
     <target name="generate.pdf" description="Generates the documentation as PDF." depends="init">
         <local name="basename" />
-        <property name="basename" value="structure" />
+        <property name="basename" value="documentation" />
         <docbook.conversion src.dir="src"
                             dst.dir="${pdf.dir.name}"
                             basename="${basename}"

@@ -8,7 +8,7 @@
  <xsl:import href="common-html-rules.xsl"/>
 
  <xsl:param name="base.dir">help</xsl:param>
- <xsl:param name="chunked.filename.prefix">structure-</xsl:param>
+ <xsl:param name="chunked.filename.prefix">documentation-</xsl:param>
  <xsl:param name="manifest">0</xsl:param>
  <xsl:param name="create.plugin.xml">0</xsl:param>
 
