@@ -119,6 +119,11 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		throw new IllegalArgumentException
 	}
 
+	def dispatch Object typeCast(Enumerator value, Type type) {
+		if(ts.isSuperType(type, value.owningEnumeration)) return value
+		throw new IllegalArgumentException
+	}
+
 	def dispatch Object typeCast(Object value, Type type) {
 		throw new IllegalArgumentException("Invalid cast " + value.class + " to " + type.name)
 	}
