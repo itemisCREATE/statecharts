@@ -44,10 +44,10 @@ import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl
  */
 class DefaultExecutionContextInitializer implements IExecutionContextInitializer {
 
-	@Inject extension IQualifiedNameProvider
-	@Inject extension ITypeSystem
-	@Inject extension ITypeSystemInferrer
-	@Inject extension ITypeValueProvider
+	@Inject protected extension IQualifiedNameProvider
+	@Inject protected extension ITypeSystem
+	@Inject protected extension ITypeSystemInferrer
+	@Inject protected extension ITypeValueProvider
 
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
 		flow.scopes.forEach[context.slots += transform]
