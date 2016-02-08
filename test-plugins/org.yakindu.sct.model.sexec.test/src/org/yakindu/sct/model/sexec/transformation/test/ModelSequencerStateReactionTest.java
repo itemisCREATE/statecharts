@@ -221,8 +221,8 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 				.getLeftOperand();
 		LogicalOrExpression triggerCheck = (LogicalOrExpression) parenthesis
 				.getExpression();
-		PrimitiveValueExpression guardCheck = (PrimitiveValueExpression) and
-				.getRightOperand();
+		PrimitiveValueExpression guardCheck = (PrimitiveValueExpression) ((ParenthesizedExpression) and
+				.getRightOperand()).getExpression();
 
 		assertClass(ElementReferenceExpression.class,
 				triggerCheck.getLeftOperand());
