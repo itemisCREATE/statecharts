@@ -33,7 +33,7 @@
         optional="true"
         parameterType="BOOLEAN"/>
   </types>
-  <types name="RunnableWrapper"
+  <types name="EventBasedRunnableWrapper"
       comment="Generates a runnable wrapper for the state machine"
       optional="true">
     <parameters
@@ -43,6 +43,15 @@
     <parameters
         name="nameSuffix"
         comment="Name suffix"
+        optional="true"/>
+  </types>
+  <types name="CycleBasedSynchronizedWrapper"
+      optional="true">
+    <parameters
+        name="namePrefix"
+        optional="true"/>
+    <parameters
+        name="nameSuffix"
         optional="true"/>
   </types>
 </sgen:FeatureTypeLibrary>

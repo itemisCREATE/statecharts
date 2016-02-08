@@ -44,11 +44,13 @@ public interface IJavaFeatureConstants {
 	
 	/* Constants related to the RunnableWrapper feature */
 	
-	public static final String RUNNABLE_WRAPPER = "RunnableWrapper";
+	public static final String EVENT_BASED_RUNNABLE_WRAPPER = "EventBasedRunnableWrapper";
 	
 	public static final String NAME_PREFIX = "namePrefix";
 	
 	public static final String NAME_SUFFIX = "nameSuffix";
+	
+	public static final String CYCLE_BASED_SYCHRONIZED_WRAPPER = "CycleBasedSynchronizedWrapper";
 	
 	
 	
