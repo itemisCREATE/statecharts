@@ -313,9 +313,9 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 
 	private boolean check_main_region__choice_1_tr1_tr1() {
-		return (sCInterface.e) && (sCInterface.getStringA() == null
+		return (sCInterface.e) && ((sCInterface.getStringA() == null
 				? sCInterface.getStringA2() == null
-				: sCInterface.getStringA().equals(sCInterface.getStringA2()));
+				: sCInterface.getStringA().equals(sCInterface.getStringA2())));
 	}
 
 	private boolean check_main_region__choice_1_tr0() {
@@ -323,9 +323,9 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 
 	private boolean check_main_region__choice_2_tr1_tr1() {
-		return (sCInterface.e) && (sCInterface.getStringA() == null
+		return (sCInterface.e) && ((sCInterface.getStringA() == null
 				? sCInterface.getStringB() != null
-				: !sCInterface.getStringA().equals(sCInterface.getStringB()));
+				: !sCInterface.getStringA().equals(sCInterface.getStringB())));
 	}
 
 	private boolean check_main_region__choice_2_tr0() {
@@ -342,7 +342,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 
 	private boolean check_main_region__choice_4_tr1_tr1() {
 		return (sCInterface.e)
-				&& (sCInterface.getStringA() == null ? "A" == null : sCInterface.getStringA().equals("A"));
+				&& ((sCInterface.getStringA() == null ? "A" == null : sCInterface.getStringA().equals("A")));
 	}
 
 	private boolean check_main_region__choice_4_tr0() {
@@ -351,7 +351,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 
 	private boolean check_main_region__choice_5_tr1_tr1() {
 		return (sCInterface.e)
-				&& (sCInterface.getStringA() == null ? "B" != null : !sCInterface.getStringA().equals("B"));
+				&& ((sCInterface.getStringA() == null ? "B" != null : !sCInterface.getStringA().equals("B")));
 	}
 
 	private boolean check_main_region__choice_5_tr0() {
@@ -372,7 +372,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 
 	private boolean check_main_region__choice_8_tr1_tr1() {
 		return (sCInterface.e)
-				&& ("A" == null ? sCInterface.getStringA() == null : "A".equals(sCInterface.getStringA()));
+				&& (("A" == null ? sCInterface.getStringA() == null : "A".equals(sCInterface.getStringA())));
 	}
 
 	private boolean check_main_region__choice_8_tr0() {
@@ -381,7 +381,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 
 	private boolean check_main_region__choice_9_tr1_tr1() {
 		return (sCInterface.e)
-				&& ("A" == null ? sCInterface.getStringB() != null : !"A".equals(sCInterface.getStringB()));
+				&& (("A" == null ? sCInterface.getStringB() != null : !"A".equals(sCInterface.getStringB())));
 	}
 
 	private boolean check_main_region__choice_9_tr0() {
@@ -401,7 +401,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 
 	private boolean check_main_region__choice_12_tr1_tr1() {
-		return (sCInterface.e) && ("A" == null ? "A" == null : "A".equals("A"));
+		return (sCInterface.e) && (("A" == null ? "A" == null : "A".equals("A")));
 	}
 
 	private boolean check_main_region__choice_12_tr0() {
@@ -409,7 +409,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	}
 
 	private boolean check_main_region__choice_13_tr1_tr1() {
-		return (sCInterface.e) && ("A" == null ? "B" != null : !"A".equals("B"));
+		return (sCInterface.e) && (("A" == null ? "B" != null : !"A".equals("B")));
 	}
 
 	private boolean check_main_region__choice_13_tr0() {

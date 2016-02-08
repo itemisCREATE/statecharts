@@ -54,5 +54,6 @@ testsuite AllTests {
 	SyncJoin, 
 	TransitionWithoutCondition,
 	TriggerGuardExpressions,
+	TriggerExpressionPrecedence,
 	ValuedEvents
 } 

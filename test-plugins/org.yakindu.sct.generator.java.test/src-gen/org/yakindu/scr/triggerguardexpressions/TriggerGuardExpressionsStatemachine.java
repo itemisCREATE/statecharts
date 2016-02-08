@@ -139,7 +139,7 @@ public class TriggerGuardExpressionsStatemachine implements ITriggerGuardExpress
 	}
 
 	private boolean check_main_region_A_tr0_tr0() {
-		return (sCInterface.e1 || sCInterface.e2) && sCInterface.getB();
+		return (sCInterface.e1 || sCInterface.e2) && (sCInterface.getB());
 	}
 
 	private boolean check_main_region_B_tr0_tr0() {

@@ -970,7 +970,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	private boolean check_goto_abstract_tr0_tr0() {
-		return (sCInterface.while_ID) && true;
+		return (sCInterface.while_ID) && (true);
 	}
 
 	private boolean check_goto_boolean_tr0_tr0() {
