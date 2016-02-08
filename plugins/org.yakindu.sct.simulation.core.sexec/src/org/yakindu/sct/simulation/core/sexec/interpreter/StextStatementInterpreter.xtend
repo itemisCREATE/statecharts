@@ -167,6 +167,11 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
 			}
 		}
+		// for enumeration types just return the referenced enumerator
+		if (expression.reference instanceof Enumerator) {
+			return expression.reference
+		}
+		
 		val executionSlot = context.resolve(expression)
 		if (executionSlot instanceof ExecutionVariable)
 			return executionSlot.getValue
