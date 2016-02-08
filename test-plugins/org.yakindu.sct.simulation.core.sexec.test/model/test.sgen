@@ -8,14 +8,6 @@ GeneratorModel for sctunit::interpreter {
 		}
 	}	
 	
-	test EntryReactionAction{ 
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-			targetFolder = "test-gen"			
-		}			
-	}
-	
 	test AlwaysOncycle{ 
 		
 		feature Outlet{ 
@@ -152,6 +144,14 @@ GeneratorModel for sctunit::interpreter {
 			targetFolder = "test-gen"			
 		}			
 	}	
+	
+	test EntryReactionAction{ 
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
 	
 	test ExitOnSelfTransition{
 		
@@ -463,6 +463,14 @@ GeneratorModel for sctunit::interpreter {
 	
 
 	test TriggerGuardExpressions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test TriggerExpressionPrecedence{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
