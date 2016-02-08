@@ -61,7 +61,7 @@ public class TriggerExpressionPrecedenceTest {
 		assertTrue(!statemachine.getE1_transition());
 	}
 	@Test
-	public void testunsatisfiedTriggerAndFGuardtrueOrTrue() {
+	public void testunsatisfiedTriggerAndFGuardTrueOrTrue() {
 		statemachine.enter();
 		statemachine.setC1(true);
 		statemachine.setC2(true);
