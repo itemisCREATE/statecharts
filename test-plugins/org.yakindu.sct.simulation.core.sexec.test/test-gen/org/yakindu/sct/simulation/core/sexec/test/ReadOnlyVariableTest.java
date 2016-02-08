@@ -39,20 +39,20 @@ public class ReadOnlyVariableTest extends AbstractExecutionFlowTest {
 		assertTrue(getInteger("myInt") == 0l);
 		assertTrue(getString("myString").equals("testString"));
 		assertTrue(getBoolean("myBool") == true);
-		assertTrue(getReal("myReal") == 1.1d);
+		assertTrue(getReal("myReal") == 1.1);
 		assertTrue(getInteger("A.myInt") == 0l);
 		assertTrue(getString("A.myString").equals("testString"));
 		assertTrue(getBoolean("A.myBool") == true);
-		assertTrue(getReal("A.myReal") == 1.1d);
+		assertTrue(getReal("A.myReal") == 1.1);
 		interpreter.runCycle();
 		assertTrue(isStateActive("StateB"));
 		assertTrue(getInteger("myInt") == 100l);
 		assertTrue(getString("myString").equals("fail"));
 		assertTrue(getBoolean("myBool") == false);
-		assertTrue(getReal("myReal") == 6.6d);
+		assertTrue(getReal("myReal") == 6.6);
 		assertTrue(getInteger("A.myInt") == 200l);
 		assertTrue(getString("A.myString").equals("A_fail"));
 		assertTrue(getBoolean("A.myBool") == false);
-		assertTrue(getReal("A.myReal") == 7.7d);
+		assertTrue(getReal("A.myReal") == 7.7);
 	}
 }
