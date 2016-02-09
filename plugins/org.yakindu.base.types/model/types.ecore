@@ -6,6 +6,8 @@
         eType="#//PackageMember" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domain" eType="#//Domain"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="import" upperBound="-1"
+        eType="#//Package"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="#//PackageMember">
     <eOperations name="getOriginType" eType="#//Type"/>

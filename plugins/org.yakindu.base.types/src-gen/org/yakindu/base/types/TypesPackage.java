@@ -99,13 +99,22 @@ public interface TypesPackage extends EPackage {
 	int PACKAGE__DOMAIN = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Import</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__IMPORT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Package</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int PACKAGE_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.PackageMemberImpl <em>Package Member</em>}' class.
@@ -1062,6 +1071,17 @@ public interface TypesPackage extends EPackage {
 	EReference getPackage_Domain();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.yakindu.base.types.Package#getImport <em>Import</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Import</em>'.
+	 * @see org.yakindu.base.types.Package#getImport()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EReference getPackage_Import();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1540,6 +1560,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PACKAGE__DOMAIN = eINSTANCE.getPackage_Domain();
+
+		/**
+		 * The meta object literal for the '<em><b>Import</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PACKAGE__IMPORT = eINSTANCE.getPackage_Import();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.TypeImpl <em>Type</em>}' class.
