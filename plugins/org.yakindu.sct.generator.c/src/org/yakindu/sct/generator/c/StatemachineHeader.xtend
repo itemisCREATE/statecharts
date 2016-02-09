@@ -111,7 +111,8 @@ class StatemachineHeader {
 
 	def statesEnumDecl(ExecutionFlow it) '''
 		/*! Enumeration of all states */ 
-		typedef enum {
+		typedef enum
+		{
 			«FOR state : states»
 				«state.shortName»,
 			«ENDFOR»
@@ -138,7 +139,8 @@ class StatemachineHeader {
 		«val typeRelevantDeclarations = scope.typeRelevantDeclarations.toList»
 		«IF !typeRelevantDeclarations.empty»
 			/*! Type definition of the data structure for the «scope.type» interface scope. */
-			typedef struct {
+			typedef struct
+			{
 				«FOR d : typeRelevantDeclarations»
 					«d.scopeTypeDeclMember»
 				«ENDFOR»
@@ -175,7 +177,8 @@ class StatemachineHeader {
 		 * Type definition of the data structure for the «type» state machine.
 		 * This data structure has to be allocated by the client code. 
 		 */
-		typedef struct {
+		typedef struct
+		{
 			«statesEnumType» stateConfVector[«type.toUpperCase»_MAX_ORTHOGONAL_STATES];
 			«IF hasHistory»«statesEnumType» historyVector[«type.toUpperCase»_MAX_HISTORY_STATES];«ENDIF»
 			sc_ushort stateConfVectorPosition; 

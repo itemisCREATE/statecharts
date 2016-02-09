@@ -90,12 +90,14 @@ class StatemachineSource {
 		{
 			sc_integer i;
 
-			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i) {
+			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i)
+			{
 				«scHandle»->stateConfVector[i] = «null_state»;
 			}
 			
 			«IF hasHistory»
-			for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i) {
+			for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i)
+			{
 				«scHandle»->historyVector[i] = «null_state»;
 			}
 			«ENDIF»
@@ -125,7 +127,8 @@ class StatemachineSource {
 	'''
 	
 	def clearInEventsFunction(ExecutionFlow it) '''
-		static void «clearInEventsFctID»(«scHandleDecl») {
+		static void «clearInEventsFctID»(«scHandleDecl»)
+		{
 			«FOR scope : it.scopes»
 				«FOR event : scope.incomingEvents»
 				«event.access» = bool_false;
@@ -145,7 +148,8 @@ class StatemachineSource {
 	'''
 	
 	def clearOutEventsFunction(ExecutionFlow it) '''
-		static void «clearOutEventsFctID»(«scHandleDecl») {
+		static void «clearOutEventsFctID»(«scHandleDecl»)
+		{
 			«FOR scope : it.scopes»
 				«FOR event : scope.outgoingEvents»
 				«event.access» = bool_false;
@@ -155,18 +159,22 @@ class StatemachineSource {
 	'''
 	
 	def runCycleFunction(ExecutionFlow it) '''
-		void «functionPrefix»runCycle(«scHandleDecl») {
+		void «functionPrefix»runCycle(«scHandleDecl»)
+		{
 			
 			«clearOutEventsFctID»(«scHandle»);
 			
 			for («scHandle»->stateConfVectorPosition = 0;
 				«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
-				«scHandle»->stateConfVectorPosition++) {
+				«scHandle»->stateConfVectorPosition++)
+				{
 					
-				switch («scHandle»->stateConfVector[handle->stateConfVectorPosition]) {
+				switch («scHandle»->stateConfVector[handle->stateConfVectorPosition])
+				{
 				«FOR state : states»
 					«IF state.reactSequence!=null»
-					case «state.shortName» : {
+					case «state.shortName» :
+					{
 						«state.reactSequence.shortName»(«scHandle»);
 						break;
 					}
@@ -183,9 +191,11 @@ class StatemachineSource {
 	
 	def raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»
-			void «raiseTimeEventFctID»(const «type»* handle, sc_eventid evid) {
+			void «raiseTimeEventFctID»(const «type»* handle, sc_eventid evid)
+			{
 				if ( ((sc_intptr_t)evid) >= ((sc_intptr_t)&(«scHandle»->timeEvents))
-					&&  ((sc_intptr_t)evid) < ((sc_intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»)) {
+					&&  ((sc_intptr_t)evid) < ((sc_intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»))
+					{
 					*(sc_boolean*)evid = bool_true;
 				}		
 			}
@@ -193,9 +203,11 @@ class StatemachineSource {
 	'''
 	
 	def isStateActiveFunction(ExecutionFlow it) '''
-		sc_boolean «stateActiveFctID»(const «scHandleDecl», «statesEnumType» state) {
+		sc_boolean «stateActiveFctID»(const «scHandleDecl», «statesEnumType» state)
+		{
 			sc_boolean result = bool_false;
-			switch (state) {
+			switch (state)
+			{
 				«FOR s : states»
 				case «s.shortName» : 
 					result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.shortName»
@@ -212,7 +224,8 @@ class StatemachineSource {
 	'''
 	
 	def isActiveFunction(ExecutionFlow it) '''
-		sc_boolean «isActiveFctID»(const «scHandleDecl») {
+		sc_boolean «isActiveFctID»(const «scHandleDecl»)
+		{
 			sc_boolean result;
 			if («FOR i : 0 ..< stateVector.size SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] != «null_state»«ENDFOR»)
 			{
@@ -235,7 +248,8 @@ class StatemachineSource {
 			 * Always returns 'false' since this state machine can never become final.
 			 */
 			«ENDIF»
-			sc_boolean «isFinalFctID»(const «scHandleDecl»){
+			sc_boolean «isFinalFctID»(const «scHandleDecl») 
+			{
 		''' +
 		// only if the impact vector is completely covered by final states the state machine 
 		// can become final
@@ -253,7 +267,8 @@ class StatemachineSource {
 	def interfaceFunctions(ExecutionFlow it) '''
 		«FOR scope : interfaceScopes»
 			«FOR event : scope.incomingEvents»
-				void «event.asRaiser»(«scHandleDecl»«event.valueParams») {
+				void «event.asRaiser»(«scHandleDecl»«event.valueParams»)
+				{
 					«IF event.hasValue»
 					«event.valueAccess» = value;
 					«ENDIF»
@@ -262,22 +277,26 @@ class StatemachineSource {
 			«ENDFOR»
 			
 			«FOR event : scope.outgoingEvents»
-				sc_boolean «event.asRaised»(const «scHandleDecl») {
+				sc_boolean «event.asRaised»(const «scHandleDecl»)
+				{
 					return «event.access»;
 				}
 				«IF event.hasValue» 
-					«event.type.targetLanguageName» «event.asGetter»(const «scHandleDecl») {
+					«event.type.targetLanguageName» «event.asGetter»(const «scHandleDecl»)
+					{
 						return «event.valueAccess»;
 					}
 				«ENDIF»
 			«ENDFOR»
 			
 			«FOR variable : scope.variableDefinitions»
-				«IF variable.const»const «ENDIF»«variable.type.targetLanguageName» «variable.asGetter»(const «scHandleDecl») {
+				«IF variable.const»const «ENDIF»«variable.type.targetLanguageName» «variable.asGetter»(const «scHandleDecl»)
+				{
 					return «variable.access»;
 				}
 				«IF !variable.readonly && !variable.const»
-				void «variable.asSetter»(«scHandleDecl», «variable.type.targetLanguageName» value) {
+				void «variable.asSetter»(«scHandleDecl», «variable.type.targetLanguageName» value)
+				{
 					«variable.access» = value;
 				}
 				«ENDIF»
@@ -353,7 +372,8 @@ class StatemachineSource {
 	
 	def dispatch functionImplementation(Check it) '''
 		«stepComment»
-		static sc_boolean «shortName»(const «scHandleDecl») {
+		static sc_boolean «shortName»(const «scHandleDecl»)
+		{
 			return «code»;
 		}
 		
@@ -361,7 +381,8 @@ class StatemachineSource {
 	
 	def dispatch functionImplementation(Step it) '''
 		«stepComment»
-		static void «shortName»(«scHandleDecl») {
+		static void «shortName»(«scHandleDecl»)
+		{
 			«code»
 		}
 		
