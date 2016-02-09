@@ -30,13 +30,13 @@ import org.yakindu.base.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getOwningOperation <em>Owning Operation</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

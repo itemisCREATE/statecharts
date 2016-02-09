@@ -18,12 +18,12 @@ import org.yakindu.base.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.PropertyImpl#isConst <em>Const</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.PropertyImpl#isReadonly <em>Readonly</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.PropertyImpl#isExternal <em>External</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

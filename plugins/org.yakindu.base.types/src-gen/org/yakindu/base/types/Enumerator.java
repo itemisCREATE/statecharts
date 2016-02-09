@@ -11,11 +11,11 @@ import org.yakindu.base.base.NamedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.Enumerator#getOwningEnumeration <em>Owning Enumeration</em>}</li>
  *   <li>{@link org.yakindu.base.types.Enumerator#getLiteralValue <em>Literal Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.types.TypesPackage#getEnumerator()
  * @model

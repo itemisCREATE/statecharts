@@ -25,11 +25,11 @@ import org.yakindu.base.types.TypesPackage;
  * <em><b>Complex Type</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.ComplexTypeImpl#getFeatures <em>Features</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ComplexTypeImpl#getSuperTypes <em>Super Types</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

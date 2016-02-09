@@ -14,12 +14,12 @@ package org.yakindu.base.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.Property#isConst <em>Const</em>}</li>
  *   <li>{@link org.yakindu.base.types.Property#isReadonly <em>Readonly</em>}</li>
  *   <li>{@link org.yakindu.base.types.Property#isExternal <em>External</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.types.TypesPackage#getProperty()
  * @model

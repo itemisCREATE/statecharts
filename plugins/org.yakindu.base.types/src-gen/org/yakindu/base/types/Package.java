@@ -12,11 +12,11 @@ import org.yakindu.base.base.NamedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.Package#getMember <em>Member</em>}</li>
  *   <li>{@link org.yakindu.base.types.Package#getDomain <em>Domain</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.types.TypesPackage#getPackage()
  * @model

@@ -10,10 +10,10 @@ package org.yakindu.base.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.PrimitiveType#getBaseType <em>Base Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.types.TypesPackage#getPrimitiveType()
  * @model

@@ -14,10 +14,10 @@ package org.yakindu.base.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.Event#getDirection <em>Direction</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.types.TypesPackage#getEvent()
  * @model
