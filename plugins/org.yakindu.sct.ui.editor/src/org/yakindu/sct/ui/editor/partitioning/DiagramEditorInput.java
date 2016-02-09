@@ -75,6 +75,7 @@ public class DiagramEditorInput extends FileEditorInput implements IDiagramEdito
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == IStorage.class) {

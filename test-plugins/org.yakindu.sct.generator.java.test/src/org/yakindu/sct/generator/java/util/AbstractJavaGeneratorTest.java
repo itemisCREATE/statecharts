@@ -14,9 +14,11 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJavaModelMarker;
-import org.yakindu.sct.generator.core.util.GeneratorUtils;
+import org.yakindu.sct.generator.core.library.IOutletFeatureHelper;
+import org.yakindu.sct.generator.core.library.OutletFeatureHelperImpl;
 import org.yakindu.sct.generator.java.JavaCodeGenerator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
@@ -40,53 +42,48 @@ public abstract class AbstractJavaGeneratorTest {
 	private static final String CONTENT_TYPE = "statechart";
 	private static final String OUTLET_FEATURE = "Outlet";
 	private static final String TARGET_FOLDER = "targetFolder";
+	private static final IOutletFeatureHelper outletFeatureConfigurationHelper = new OutletFeatureHelperImpl();
 
 	@Inject
 	protected JavaCodeGenerator generator;
 
 	public IMarker[] generateAndCompile(Statechart statechart) throws Exception {
-		GeneratorEntry entry = createGeneratorEntry(statechart.getName(),
-				SRC_GEN);
+		GeneratorEntry entry = createGeneratorEntry(statechart.getName(), SRC_GEN);
 		entry.setElementRef(statechart);
-		IProject targetProject = GeneratorUtils.getTargetProject(entry);
+		IProject targetProject = getProject(entry);
 		targetProject.delete(true, new NullProgressMonitor());
 		generator.generate(entry);
-		targetProject.getWorkspace().build(
-				IncrementalProjectBuilder.INCREMENTAL_BUILD, null);
-		targetProject = GeneratorUtils.getTargetProject(entry);
+		targetProject.getWorkspace().build(IncrementalProjectBuilder.INCREMENTAL_BUILD, null);
+		targetProject = getProject(entry);
 		if (!targetProject.exists()) {
 			targetProject.create(new NullProgressMonitor());
 			targetProject.open(new NullProgressMonitor());
 		}
-		targetProject.build(IncrementalProjectBuilder.INCREMENTAL_BUILD,
-				new NullProgressMonitor());
-		IMarker[] markers = targetProject.findMarkers(
-				IJavaModelMarker.JAVA_MODEL_PROBLEM_MARKER, true,
+		targetProject.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, new NullProgressMonitor());
+		IMarker[] markers = targetProject.findMarkers(IJavaModelMarker.JAVA_MODEL_PROBLEM_MARKER, true,
 				IResource.DEPTH_INFINITE);
 		return markers;
 	}
 
-	private GeneratorEntry createGeneratorEntry(String targetProject,
-			String targetFolder) {
+	protected IProject getProject(GeneratorEntry entry) {
+		return ResourcesPlugin.getWorkspace().getRoot().getProject(outletFeatureConfigurationHelper.getTargetProjectValue(entry).getStringValue());
+	}
+
+	private GeneratorEntry createGeneratorEntry(String targetProject, String targetFolder) {
 		GeneratorEntry entry = SGenFactory.eINSTANCE.createGeneratorEntry();
 		entry.setContentType(CONTENT_TYPE);
-		FeatureConfiguration config = SGenFactory.eINSTANCE
-				.createFeatureConfiguration();
+		FeatureConfiguration config = SGenFactory.eINSTANCE.createFeatureConfiguration();
 		FeatureType type = SGenFactory.eINSTANCE.createFeatureType();
 		type.setName(OUTLET_FEATURE);
 		config.setType(type);
-		FeatureParameterValue project = SGenFactory.eINSTANCE
-				.createFeatureParameterValue();
-		FeatureParameter projectParameter = SGenFactory.eINSTANCE
-				.createFeatureParameter();
+		FeatureParameterValue project = SGenFactory.eINSTANCE.createFeatureParameterValue();
+		FeatureParameter projectParameter = SGenFactory.eINSTANCE.createFeatureParameter();
 		projectParameter.setName(TARGET_PROJECT);
 		project.setParameter(projectParameter);
 		project.setValue(targetProject);
 		config.getParameterValues().add(project);
-		FeatureParameterValue targetFolderValue = SGenFactory.eINSTANCE
-				.createFeatureParameterValue();
-		FeatureParameter targetParameter = SGenFactory.eINSTANCE
-				.createFeatureParameter();
+		FeatureParameterValue targetFolderValue = SGenFactory.eINSTANCE.createFeatureParameterValue();
+		FeatureParameter targetParameter = SGenFactory.eINSTANCE.createFeatureParameter();
 		targetParameter.setName(TARGET_FOLDER);
 		targetFolderValue.setParameter(targetParameter);
 		targetFolderValue.setValue(targetFolder);

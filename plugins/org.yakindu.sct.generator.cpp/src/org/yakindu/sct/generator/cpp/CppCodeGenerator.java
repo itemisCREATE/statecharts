@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.generator.cpp;
 
-import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
-
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
@@ -33,10 +31,9 @@ public class CppCodeGenerator extends GenericJavaBasedGenerator {
 
 	@Override
 	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
-		CppGenerator delegate = getInjector(entry).getInstance(
-				CppGenerator.class);
+		CppGenerator delegate = getInjector(entry).getInstance(CppGenerator.class);
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
-		if (isDumpSexec(entry)) {
+		if (debugFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
 		delegate.generate(flow, entry, getFileSystemAccess(entry));
@@ -47,8 +44,7 @@ public class CppCodeGenerator extends GenericJavaBasedGenerator {
 		Module module = super.getOverridesModule(entry);
 		return Modules.override(module).with(new Module() {
 			public void configure(Binder binder) {
-				binder.bind(ICodegenTypeSystemAccess.class).to(
-						CTypeSystemAccess.class);
+				binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 				binder.bind(INamingService.class).to(CppNamingService.class);
 				binder.bind(GeneratorEntry.class).toInstance(entry);
 			}

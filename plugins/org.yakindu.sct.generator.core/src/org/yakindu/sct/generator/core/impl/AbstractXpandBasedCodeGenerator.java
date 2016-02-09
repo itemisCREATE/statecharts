@@ -10,16 +10,13 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER;
-import static org.yakindu.sct.generator.core.util.GeneratorUtils.getOutletFeatureConfiguration;
-import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
-import static org.yakindu.sct.generator.core.util.GeneratorUtils.refreshTargetProject;
-
-import java.io.File;
 import java.util.Collections;
 import java.util.Set;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xpand2.XpandExecutionContext;
@@ -32,17 +29,22 @@ import org.eclipse.xpand2.output.PostProcessor;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.Type;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
+import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
+import org.yakindu.sct.generator.core.filesystem.EFSResourceFileSystemAccess;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.SexecPackage;
-import org.yakindu.sct.model.sgen.FeatureConfiguration;
-import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.SGenPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.StextPackage;
+
+import com.google.inject.Binder;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 /**
  * abstract base class for all code generators using Xpand as the template
@@ -51,8 +53,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractXpandBasedCodeGenerator extends
-		AbstractSExecModelGenerator {
+public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModelGenerator {
 
 	public static final String CONTEXT_INJECTOR_PROPERTY_NAME = "AbstractXpandBasedCodeGenerator.Injector";
 
@@ -68,7 +69,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 
 		String templatePath = getTemplatePath();
 
-		writeToConsole("Executing Template " + templatePath);
+		log.writeToConsole("Executing Template " + templatePath);
 		XpandExecutionContext context = createXpandContext(entry, output);
 		XpandFacade facade = XpandFacade.create(context);
 
@@ -80,7 +81,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 		if (context.findDefinition(templatePath, targetType, paramTypes) != null) {
 			generatorFound = true;
 			ExecutionFlow flow = createExecutionFlow(statechart, entry);
-			if (isDumpSexec(entry)) {
+			if (debugFeatureHelper.isDumpSexec(entry)) {
 				dumpSexec(entry, flow);
 			}
 			facade.evaluate(templatePath, flow, entry);
@@ -92,47 +93,43 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 			facade.evaluate(templatePath, statechart, entry);
 		}
 		if (!generatorFound) {
-			writeToConsole("!!! No matching define in Template found.");
+			log.writeToConsole("!!! No matching define in Template found.");
 		}
 
 		// refresh the project to get external updates:
+
 		refreshTargetProject(entry);
 	}
 
-	protected XpandExecutionContext createXpandContext(GeneratorEntry entry,
-			Output output) {
-		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(
-				output, null, null, null, null);
+	protected XpandExecutionContext createXpandContext(GeneratorEntry entry, Output output) {
+		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null, null, null, null);
 		EmfRegistryMetaModel metamodel = new EmfRegistryMetaModel() {
 			@Override
 			protected EPackage[] allPackages() {
-				return new EPackage[] { SGraphPackage.eINSTANCE,
-						StextPackage.eINSTANCE, EcorePackage.eINSTANCE,
-						SexecPackage.eINSTANCE, SGenPackage.eINSTANCE,
-						TypesPackage.eINSTANCE, BasePackage.eINSTANCE };
+				return new EPackage[]{SGraphPackage.eINSTANCE, StextPackage.eINSTANCE, EcorePackage.eINSTANCE,
+						SexecPackage.eINSTANCE, SGenPackage.eINSTANCE, TypesPackage.eINSTANCE, BasePackage.eINSTANCE};
 			}
 		};
 		execCtx.registerMetaModel(metamodel);
-		execCtx.getGlobalVariables()
-				.put(CONTEXT_INJECTOR_PROPERTY_NAME,
-						new Variable(CONTEXT_INJECTOR_PROPERTY_NAME,
-								getInjector(entry)));
+		execCtx.getGlobalVariables().put(CONTEXT_INJECTOR_PROPERTY_NAME,
+				new Variable(CONTEXT_INJECTOR_PROPERTY_NAME, getInjector(entry)));
 		return execCtx;
 	}
 
 	protected Output createOutput(GeneratorEntry entry) {
-		FeatureConfiguration outletConfig = getOutletFeatureConfiguration(entry);
+		//FIXME !!! unify, this is duplicate see ...Java*Generic*Something
+		sctFileSystemAccess.setOutputPath(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT,
+				outletFeatureHelper.getTargetProjectValue(entry).getStringValue());
 		
-		FeatureParameterValue targetFolderValue = outletConfig
-				.getParameterValue(OUTLET_FEATURE_TARGET_FOLDER);
-		FeatureParameterValue libraryTargetFolderValue = outletConfig
-				.getParameterValue(OUTLET_FEATURE_LIBRARY_TARGET_FOLDER);
+		sctFileSystemAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
+				outletFeatureHelper.getTargetFolderValue(entry).getExpression().toString());
+		
+		String outputPath = outletFeatureHelper.getRelativeTargetFolder(entry);
 
-		String absoluteTargetFolder = getTargetProject(entry).getLocation()
-				.toOSString() + File.separator + targetFolderValue.getExpression().toString();
+		String absoluteTargetFolder = sctFileSystemAccess.getURI(outputPath).toFileString();
 
 		Output output = new OutputImpl();
-		
+
 		Outlet targetFolderOutlet = new Outlet(absoluteTargetFolder);
 		for (PostProcessor postProcessor : getPostProcessors()) {
 			targetFolderOutlet.addPostprocessor(postProcessor);
@@ -140,14 +137,29 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 		targetFolderOutlet.setOverwrite(true);
 		output.addOutlet(targetFolderOutlet);
 
-		if(libraryTargetFolderValue != null){
-			String absoluteLibraryTargetFolder = getTargetProject(entry).getLocation()
-					.toOSString() + File.separator + libraryTargetFolderValue.getExpression().toString();
-			Outlet libraryTargetFolderOutlet = new Outlet(false, null, LIBRARY_TARGET_FOLDER_OUTLET, false, absoluteLibraryTargetFolder);
-			output.addOutlet(libraryTargetFolderOutlet);
-		}
+		String relativeLibraryTargetFolder = outletFeatureHelper.getRelativeLibraryFolder(entry);
+
+		String absoluteLibraryTargetFolder = sctFileSystemAccess.getURI(relativeLibraryTargetFolder).toFileString();
 		
+		Outlet libraryTargetFolderOutlet = new Outlet(false, null, LIBRARY_TARGET_FOLDER_OUTLET, false,
+				absoluteLibraryTargetFolder);
+		output.addOutlet(libraryTargetFolderOutlet);
+
 		return output;
+	}
+
+	@Override
+	protected Module getOverridesModule(GeneratorEntry entry) {
+		Module baseModule = super.getOverridesModule(entry);
+
+		return Modules.override(baseModule).with(new Module() {
+
+			@Override
+			public void configure(Binder binder) {
+
+			}
+
+		});
 	}
 
 	/**
@@ -158,6 +170,16 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 	 */
 	protected Set<PostProcessor> getPostProcessors() {
 		return Collections.emptySet();
+	}
+
+	protected void refreshTargetProject(GeneratorEntry entry) {
+		try {
+			IProject project = EFSResourceFileSystemAccess.getTargetProject(entry);
+			if (project != null)
+				project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
