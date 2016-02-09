@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.impl.NamedElementImpl;
 import org.yakindu.base.types.Domain;
@@ -27,6 +28,7 @@ import org.yakindu.base.types.TypesPackage;
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.PackageImpl#getMember <em>Member</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.PackageImpl#getDomain <em>Domain</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.PackageImpl#getImport <em>Import</em>}</li>
  * </ul>
  *
  * @generated
@@ -50,6 +52,15 @@ public class PackageImpl extends NamedElementImpl implements org.yakindu.base.ty
 	 * @ordered
 	 */
 	protected Domain domain;
+	/**
+	 * The cached value of the '{@link #getImport() <em>Import</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImport()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<org.yakindu.base.types.Package> import_;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -129,6 +140,18 @@ public class PackageImpl extends NamedElementImpl implements org.yakindu.base.ty
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<org.yakindu.base.types.Package> getImport() {
+		if (import_ == null) {
+			import_ = new EObjectResolvingEList<org.yakindu.base.types.Package>(org.yakindu.base.types.Package.class, this, TypesPackage.PACKAGE__IMPORT);
+		}
+		return import_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -152,6 +175,8 @@ public class PackageImpl extends NamedElementImpl implements org.yakindu.base.ty
 				return getMember();
 			case TypesPackage.PACKAGE__DOMAIN:
 				return getDomain();
+			case TypesPackage.PACKAGE__IMPORT:
+				return getImport();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -172,6 +197,10 @@ public class PackageImpl extends NamedElementImpl implements org.yakindu.base.ty
 			case TypesPackage.PACKAGE__DOMAIN:
 				setDomain((Domain)newValue);
 				return;
+			case TypesPackage.PACKAGE__IMPORT:
+				getImport().clear();
+				getImport().addAll((Collection<? extends org.yakindu.base.types.Package>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -190,6 +219,9 @@ public class PackageImpl extends NamedElementImpl implements org.yakindu.base.ty
 			case TypesPackage.PACKAGE__DOMAIN:
 				setDomain((Domain)null);
 				return;
+			case TypesPackage.PACKAGE__IMPORT:
+				getImport().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -206,6 +238,8 @@ public class PackageImpl extends NamedElementImpl implements org.yakindu.base.ty
 				return member != null && !member.isEmpty();
 			case TypesPackage.PACKAGE__DOMAIN:
 				return domain != null;
+			case TypesPackage.PACKAGE__IMPORT:
+				return import_ != null && !import_.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
