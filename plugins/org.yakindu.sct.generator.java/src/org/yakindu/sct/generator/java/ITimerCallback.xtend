@@ -12,11 +12,9 @@ package org.yakindu.sct.generator.java
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
-import org.yakindu.sct.generator.core.util.GeneratorUtils
-import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
-
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.generator.core.library.OutletFeatureHelperImpl
 
 class ITimerCallback {
 
@@ -27,8 +25,7 @@ class ITimerCallback {
 	extension GenmodelEntries
 
 	def generateITimerCallback(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		if (GeneratorUtils.getOutletFeatureConfiguration(entry).getParameterValue(
-			OUTLET_FEATURE_LIBRARY_TARGET_FOLDER) != null) {
+		if (new OutletFeatureHelperImpl().getLibraryTargetFolderValue(entry) != null) {
 			// generate into library target folder in case one is specified, as the contents are static
 			fsa.generateFile(entry.basePackagePath + '/' + iTimerCallback.java,
 				IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT, content(entry))

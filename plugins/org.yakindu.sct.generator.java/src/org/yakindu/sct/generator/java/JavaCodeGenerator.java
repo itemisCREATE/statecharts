@@ -9,8 +9,6 @@
  */
 package org.yakindu.sct.generator.java;
 
-import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
-
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.JavaTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.OldJavaTypeSystemAccess;
@@ -28,12 +26,11 @@ public class JavaCodeGenerator extends AbstractJavaCodeGenerator {
 
 	@Override
 	public void generate(Statechart statechart, GeneratorEntry entry) {
-		JavaGenerator delegate = getInjector(entry).getInstance(
-				JavaGenerator.class);
+		JavaGenerator delegate = getInjector(entry).getInstance(JavaGenerator.class);
 
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
 
-		if (isDumpSexec(entry)) {
+		if (debugFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
 
@@ -47,14 +44,11 @@ public class JavaCodeGenerator extends AbstractJavaCodeGenerator {
 		return Modules.override(module).with(new Module() {
 			public void configure(Binder binder) {
 				if (entries.useJavaInt(entry)) {
-					binder.bind(ICodegenTypeSystemAccess.class).to(
-							OldJavaTypeSystemAccess.class);
+					binder.bind(ICodegenTypeSystemAccess.class).to(OldJavaTypeSystemAccess.class);
 				} else {
-					binder.bind(ICodegenTypeSystemAccess.class).to(
-							JavaTypeSystemAccess.class);
+					binder.bind(ICodegenTypeSystemAccess.class).to(JavaTypeSystemAccess.class);
 				}
-				binder.bind(INamingService.class).to(JavaNamingService.class)
-						.in(Scopes.SINGLETON);
+				binder.bind(INamingService.class).to(JavaNamingService.class).in(Scopes.SINGLETON);
 			}
 		});
 

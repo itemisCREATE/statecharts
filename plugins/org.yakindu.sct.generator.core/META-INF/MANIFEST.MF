@@ -24,6 +24,7 @@ Require-Bundle: org.eclipse.ui,
  org.yakindu.sct.commons,
  org.yakindu.sct.domain,
  org.yakindu.sct.domain.generic,
+ com.google.guava,
  org.eclipse.emf.workspace
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
@@ -31,6 +32,9 @@ Export-Package: org.yakindu.sct.builder.nature,
  org.yakindu.sct.generator.core,
  org.yakindu.sct.generator.core.extensions,
  org.yakindu.sct.generator.core.features,
+ org.yakindu.sct.generator.core.features.impl,
+ org.yakindu.sct.generator.core.filesystem,
  org.yakindu.sct.generator.core.impl,
+ org.yakindu.sct.generator.core.library,
  org.yakindu.sct.generator.core.types,
  org.yakindu.sct.generator.core.util

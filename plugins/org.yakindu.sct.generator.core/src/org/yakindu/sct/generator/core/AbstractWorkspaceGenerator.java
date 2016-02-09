@@ -12,49 +12,30 @@ package org.yakindu.sct.generator.core;
 
 import java.io.File;
 
-import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.generator.core.impl.AbstractSExecModelGenerator;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 /**
  * Base class for generators that are executed inside the workspace
  * 
  * @author holger willebrandt - Initial contribution and API
- */
-public abstract class AbstractWorkspaceGenerator implements IGeneratorBridge {
-
-	private IGeneratorBridge bridge;
-
-	public final void setBridge(IGeneratorBridge bridge) {
-		this.bridge = bridge;
-	}
-
-	public final void writeToConsole(String s) {
-		bridge.writeToConsole(s);
-	}
-
-	public final void writeToConsole(Throwable t) {
-		bridge.writeToConsole(t);
-	}
-
-	public final FeatureParameterValue getFeatureParameter(
-			GeneratorEntry entry, String featureName, String paramName) {
-		return bridge.getFeatureParameter(entry, featureName, paramName);
-	}
-
+ */ 
+//FIXME !!! used in generator samples (Xtend2 & Java)
+public abstract class AbstractWorkspaceGenerator extends AbstractSExecModelGenerator {
+	
 	public final void refreshTargetProject(GeneratorEntry entry) {
-		bridge.refreshTargetProject(entry);
+		
 	}
 
 	public final File getTargetProject(GeneratorEntry entry) {
-		return bridge.getTargetProject(entry);
+		return null;
 	}
 
 	public final File getTargetFolder(GeneratorEntry entry) {
-		return bridge.getTargetFolder(entry);
+		return null;
 	}
 	
 	public final File getLibraryTargetFolder(GeneratorEntry entry) {
-		return bridge.getLibraryTargetFolder(entry);
+		return null;
 	}
-
 }

@@ -467,4 +467,16 @@ public abstract class AbstractSCTResource extends GMFResource {
 		}
 
 	}
+	/**
+	 * overridden because original calls 'Util.denormalizeURI(uri,
+	 * getResourceSet())' which leads into error if there is no platform
+	 * available
+	 */
+	@Override
+	public void setURI(URI uri) {
+
+		if (getResourceSet() != null) {
+			setRawURI(uri);
+		}
+	}
 }

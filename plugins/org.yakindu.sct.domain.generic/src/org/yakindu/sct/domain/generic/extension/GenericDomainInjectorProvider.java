@@ -10,9 +10,11 @@
  */
 package org.yakindu.sct.domain.generic.extension;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
@@ -33,6 +35,7 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.ui.STextUiModule;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
@@ -124,8 +127,13 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 	
 	@Override
 	public Injector getSequencerInjector(Module overrides) {
-		if(overrides != null) {
-			return Guice.createInjector(Modules.override(getSequencerModule()).with(overrides));
+		ArrayList<Module> tmpOverrides = Lists.newArrayList(overrides);
+		//FIXME !!! argh... get rid of that :)
+		if(Platform.isRunning()){
+			tmpOverrides.add(getSharedStateModule());
+		}
+		if(tmpOverrides != null) {
+			return Guice.createInjector(Modules.override(getSequencerModule()).with(tmpOverrides));
 		}
 		return getSequencerInjector();
 	}

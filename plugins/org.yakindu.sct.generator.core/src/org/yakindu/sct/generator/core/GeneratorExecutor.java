@@ -37,24 +37,12 @@ public class GeneratorExecutor {
 		if (resource == null || resource.getContents().size() == 0
 				|| resource.getErrors().size() > 0)
 			return;
-		GeneratorModel model = (GeneratorModel) resource.getContents().get(0);
-
-		String generatorId = model.getGeneratorId();
-		IGeneratorDescriptor description = GeneratorExtensions
-				.getGeneratorDescriptor(generatorId);
-		if (description == null)
-			return;
-		final ISCTGenerator generator = description.createGenerator();
-		final EList<GeneratorEntry> entries = model.getEntries();
+		final GeneratorModel model = (GeneratorModel) resource.getContents().get(0);
+		
 		Job generatorJob = new Job("Execute SCT Genmodel " + file.getName()) {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				for (GeneratorEntry generatorEntry : entries) {
-					if (monitor.isCanceled()) {
-						break;
-					}
-					generator.generate(generatorEntry);
-				}
+				executeGenerator(model);
 				return Status.OK_STATUS;
 			}
 		};
@@ -65,12 +53,8 @@ public class GeneratorExecutor {
 
 	public void executeGenerator(GeneratorModel model) {
 
-		String generatorId = model.getGeneratorId();
-		IGeneratorDescriptor description = GeneratorExtensions
-				.getGeneratorDescriptor(generatorId);
-		if (description == null)
-			throw new RuntimeException("No generator registered for ID: " + generatorId);
-		final ISCTGenerator generator = description.createGenerator();
+		final ISCTGenerator generator = getGenerator(model);
+		
 		final EList<GeneratorEntry> entries = model.getEntries();
 
 		for (GeneratorEntry generatorEntry : entries) {
@@ -78,6 +62,19 @@ public class GeneratorExecutor {
 		}
 	}
 
+	protected ISCTGenerator getGenerator(GeneratorModel model) {
+		String generatorId = model.getGeneratorId();
+		IGeneratorDescriptor description = GeneratorExtensions
+				.getGeneratorDescriptor(generatorId);
+		if (description == null)
+			throw new RuntimeException("No generator registered for ID: " + generatorId);
+		final ISCTGenerator generator = description.createGenerator();
+			if(generator == null)
+				throw new RuntimeException("Failed to create Generator instance for ID:"+generatorId);
+			
+		return generator;
+	}
+	
 	protected Resource loadResource(IFile file) {
 		Resource resource = null;
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(),

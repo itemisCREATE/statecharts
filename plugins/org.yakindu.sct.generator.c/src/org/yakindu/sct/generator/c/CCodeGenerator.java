@@ -12,8 +12,6 @@
  */
 package org.yakindu.sct.generator.c;
 
-import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
-
 import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 import org.yakindu.sct.generator.c.features.ICFeatureConstants;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
@@ -43,7 +41,7 @@ public class CCodeGenerator extends GenericJavaBasedGenerator {
 	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		CGenerator delegate = getInjector(entry).getInstance(CGenerator.class);
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
-		if (isDumpSexec(entry)) {
+		if (debugFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
 		delegate.generate(flow, entry, getFileSystemAccess(entry));

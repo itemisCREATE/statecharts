@@ -20,7 +20,6 @@ import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.F
 import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION;
 import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES;
 import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_REACTIONS;
-import static org.yakindu.sct.generator.core.util.GeneratorUtils.getBoolValue;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -95,22 +94,36 @@ public abstract class AbstractSExecModelGenerator extends AbstractSGraphModelGen
 
 		FlowOptimizer optimizer = injector.getInstance(FlowOptimizer.class);
 
-		optimizer.inlineReactions(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_REACTIONS, false));
-		optimizer.inlineExitActions(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS, false));
-		optimizer.inlineEntryActions(
-				getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS, false));
-		optimizer.inlineEnterSequences(
-				getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES, false));
-		optimizer.inlineExitSequences(
-				getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES, false));
-		optimizer.inlineChoices(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_CHOICES, false));
-		optimizer.inlineEntries(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_ENTRIES, false));
-		optimizer.inlineEnterRegion(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION, false));
-		optimizer.inlineExitRegion(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION, false));
+		optimizer.inlineReactions(
+				getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_REACTIONS, false));
+		optimizer.inlineExitActions(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS, false));
+		optimizer.inlineEntryActions(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS, false));
+		optimizer.inlineEnterSequences(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES, false));
+		optimizer.inlineExitSequences(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES, false));
+		optimizer.inlineChoices(
+				getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_CHOICES, false));
+		optimizer.inlineEntries(
+				getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_ENTRIES, false));
+		optimizer.inlineEnterRegion(getBoolValue(optimizeConfig,
+				FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION, false));
+		optimizer.inlineExitRegion(
+				getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION, false));
 
 		flow = optimizer.transform(flow);
 
 		return flow;
+	}
+	
+	protected boolean getBoolValue(FeatureConfiguration conf, String param, boolean defaultValue) {
+		if (conf != null && conf.getParameterValue(param) != null) {
+			return conf.getParameterValue(param).getBooleanValue();
+		}
+
+		return defaultValue;
 	}
 
 	protected void dumpSexec(GeneratorEntry entry, ExecutionFlow flow) {
