@@ -35,13 +35,15 @@ class Timer {
 		#include "«typesModule.h»"
 		
 		#ifdef __cplusplus
-		extern "C" {
+		extern "C"
+		{
 		#endif 
 		
 		typedef void(*setTimerFPtr)(uint32_t evid, const uint32_t time_ms, sc_boolean periodic);
 		typedef void(*unsetTimerFPtr)(const uint32_t evid);
 		
-		typedef struct {
+		typedef struct
+		{
 		
 			/* callback functions */
 			setTimerFPtr   setTimer;
