@@ -13,10 +13,6 @@ package org.yakindu.sct.generator.core.impl;
 import java.util.Collections;
 import java.util.Set;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xpand2.XpandExecutionContext;
@@ -33,7 +29,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
-import org.yakindu.sct.generator.core.filesystem.EFSResourceFileSystemAccess;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -58,6 +53,8 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 	public static final String CONTEXT_INJECTOR_PROPERTY_NAME = "AbstractXpandBasedCodeGenerator.Injector";
 
 	public static final String LIBRARY_TARGET_FOLDER_OUTLET = "LIBRARY_TARGET_FOLDER";
+
+	private EFSHelper efsHelper = new EFSHelper();
 
 	public abstract String getTemplatePath();
 
@@ -98,7 +95,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 
 		// refresh the project to get external updates:
 
-		refreshTargetProject(entry);
+		efsHelper.refreshTargetProject(entry);
 	}
 
 	protected XpandExecutionContext createXpandContext(GeneratorEntry entry, Output output) {
@@ -170,16 +167,6 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 	 */
 	protected Set<PostProcessor> getPostProcessors() {
 		return Collections.emptySet();
-	}
-
-	protected void refreshTargetProject(GeneratorEntry entry) {
-		try {
-			IProject project = EFSResourceFileSystemAccess.getTargetProject(entry);
-			if (project != null)
-				project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
 	}
 
 }
