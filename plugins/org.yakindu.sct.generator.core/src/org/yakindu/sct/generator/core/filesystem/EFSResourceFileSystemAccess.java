@@ -17,7 +17,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
@@ -25,60 +24,25 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.util.StringInputStream;
 import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
-import org.yakindu.sct.generator.core.library.OutletFeatureHelperImpl;
 import org.yakindu.sct.generator.core.util.ClasspathChanger;
-import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 public class EFSResourceFileSystemAccess extends EclipseResourceFileSystemAccess2 implements SCTFileSystemAccess {
 
-	/**
-	 * Returns an IProject for the configured target project. The
-	 * {@link IProject} is returned even if the project does not exist yet.
-	 * 
-	 * @param entry
-	 * @return
-	 */
-	public static IProject getTargetProject(GeneratorEntry entry) {
-		String stringValue = new OutletFeatureHelperImpl().getTargetProjectValue(entry).getStringValue();
-		if (Platform.isRunning()) {
-
-			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(stringValue);
-
-			return project;
-		} else
-			throw new IllegalStateException("The " + EFSResourceFileSystemAccess.class.getSimpleName()
-					+ " needs a running " + Platform.class.getName());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.xtext.generator.AbstractFileSystemAccess#setOutputPath(java.
-	 * lang.String, java.lang.String)
-	 */
 	@Override
 	public void setOutputPath(String outputName, String path) {
 		super.setOutputPath(outputName, path);
 		// FIXME !!! ??? setting the targetProject has to be done firstly
 		trySetTargetProject(outputName, path);
 		// otherwise java classpath extension will fail, MSG?
-//		if (isOutputFolder(outputName)) {
 			IProject project = getProject();
 			if (isValidProject(project)) {
-				// FIXME !!! classpathchanger!?
+				// FIXME !!! should be handled if and only of java/xtend is generated?!
 				if (hasJavaNature(project) && hasClasspath(project)) {
 					new ClasspathChanger().addFolderToClassPath(project, path);
 				}
 			}
-//		}
 	}
-//FIXME !!! ???
-//	protected boolean isOutputFolder(String outputName) {
-//		return outputName.equals(IFileSystemAccess.DEFAULT_OUTPUT)
-//				|| outputName.equals(ICoreFeatureConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER)
-//				|| outputName.equals(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER);
-//	}
+
 
 	protected void trySetTargetProject(String outputName, String path) {
 		if (outputName.equals(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT)) {
