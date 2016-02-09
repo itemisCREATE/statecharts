@@ -23,11 +23,11 @@ import org.yakindu.base.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.PackageImpl#getMember <em>Member</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.PackageImpl#getDomain <em>Domain</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

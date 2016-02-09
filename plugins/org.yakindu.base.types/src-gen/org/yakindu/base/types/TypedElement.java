@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.TypedElement#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.base.types.TypedElement#getTypeArguments <em>Type Arguments</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.types.TypesPackage#getTypedElement()
  * @model interface="true" abstract="true"

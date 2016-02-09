@@ -15,11 +15,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.Type#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.Type#isAbstract <em>Abstract</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.types.TypesPackage#getType()
  * @model abstract="true"

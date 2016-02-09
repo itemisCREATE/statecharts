@@ -27,6 +27,7 @@ import org.yakindu.base.types.TypesPackage;
  * <em><b>Type Alias</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getTypeArguments <em>Type Arguments</em>}</li>
@@ -34,7 +35,6 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isAbstract <em>Abstract</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

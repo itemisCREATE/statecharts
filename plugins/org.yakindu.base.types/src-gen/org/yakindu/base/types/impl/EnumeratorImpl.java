@@ -19,11 +19,11 @@ import org.yakindu.base.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.EnumeratorImpl#getOwningEnumeration <em>Owning Enumeration</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.EnumeratorImpl#getLiteralValue <em>Literal Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

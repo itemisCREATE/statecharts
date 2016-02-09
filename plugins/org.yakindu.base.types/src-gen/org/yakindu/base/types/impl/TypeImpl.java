@@ -26,11 +26,11 @@ import org.yakindu.base.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#isAbstract <em>Abstract</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

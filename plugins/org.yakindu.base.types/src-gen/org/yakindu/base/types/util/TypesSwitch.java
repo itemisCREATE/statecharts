@@ -102,6 +102,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				Declaration declaration = (Declaration)theEObject;
 				T result = caseDeclaration(declaration);
 				if (result == null) result = caseTypedElement(declaration);
+				if (result == null) result = casePackageMember(declaration);
 				if (result == null) result = caseNamedElement(declaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -110,8 +111,8 @@ public class TypesSwitch<T> extends Switch<T> {
 				Operation operation = (Operation)theEObject;
 				T result = caseOperation(operation);
 				if (result == null) result = caseDeclaration(operation);
-				if (result == null) result = casePackageMember(operation);
 				if (result == null) result = caseTypedElement(operation);
+				if (result == null) result = casePackageMember(operation);
 				if (result == null) result = caseNamedElement(operation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -121,6 +122,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				T result = caseProperty(property);
 				if (result == null) result = caseDeclaration(property);
 				if (result == null) result = caseTypedElement(property);
+				if (result == null) result = casePackageMember(property);
 				if (result == null) result = caseNamedElement(property);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -144,6 +146,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				T result = caseEvent(event);
 				if (result == null) result = caseDeclaration(event);
 				if (result == null) result = caseTypedElement(event);
+				if (result == null) result = casePackageMember(event);
 				if (result == null) result = caseNamedElement(event);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
