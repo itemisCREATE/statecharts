@@ -29,6 +29,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
+import org.yakindu.sct.generator.core.util.EFSHelper;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sgen.GeneratorEntry;

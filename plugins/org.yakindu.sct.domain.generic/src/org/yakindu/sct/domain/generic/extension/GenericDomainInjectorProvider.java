@@ -128,7 +128,7 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 	@Override
 	public Injector getSequencerInjector(Module overrides) {
 		ArrayList<Module> tmpOverrides = Lists.newArrayList(overrides);
-		//FIXME !!! argh... get rid of that :)
+		//FIXME !!! remove shared state module
 		if(Platform.isRunning()){
 			tmpOverrides.add(getSharedStateModule());
 		}

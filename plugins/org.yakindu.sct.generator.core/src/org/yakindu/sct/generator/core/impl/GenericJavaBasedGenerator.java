@@ -141,6 +141,7 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 	 * Provides a pre configured IFileSystemAccess instance
 	 */
 	public IFileSystemAccess getFileSystemAccess(GeneratorEntry entry) {
+		//FIXME !!! unify, this is duplicate see ...Java*Generic*Something
 		// set target project value
 		sctFileSystemAccess.setOutputPath(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT,
 				outletFeatureHelper.getTargetProjectValue(entry).getStringValue());

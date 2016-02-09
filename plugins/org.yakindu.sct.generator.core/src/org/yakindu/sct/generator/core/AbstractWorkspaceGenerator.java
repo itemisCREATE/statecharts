@@ -20,7 +20,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
  * 
  * @author holger willebrandt - Initial contribution and API
  */ 
-//FIXME !!! used in generator samples (Xtend2 & Java)
+//FIXME !!! used in generator runtime samples (Xtend2 & Java)
 public abstract class AbstractWorkspaceGenerator extends AbstractSExecModelGenerator {
 	
 	public final void refreshTargetProject(GeneratorEntry entry) {
