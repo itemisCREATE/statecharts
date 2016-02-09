@@ -20,22 +20,22 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
  * 
  * @author holger willebrandt - Initial contribution and API
  */ 
-//FIXME !!! used in generator runtime samples (Xtend2 & Java)
+//FIXME !!! used in generator runtime samples (Xtend2 & Java, see e.g. org.yakindu.sct.generator.genmodel.ui.wizard.GeneratorProjectTemplate)
 public abstract class AbstractWorkspaceGenerator extends AbstractSExecModelGenerator {
 	
 	public final void refreshTargetProject(GeneratorEntry entry) {
-		
+		throw new UnsupportedOperationException("implement me!");
 	}
 
 	public final File getTargetProject(GeneratorEntry entry) {
-		return null;
+		throw new UnsupportedOperationException("implement me!");
 	}
 
 	public final File getTargetFolder(GeneratorEntry entry) {
-		return null;
+		throw new UnsupportedOperationException("implement me!");
 	}
 	
 	public final File getLibraryTargetFolder(GeneratorEntry entry) {
-		return null;
+		throw new UnsupportedOperationException("implement me!");
 	}
 }
