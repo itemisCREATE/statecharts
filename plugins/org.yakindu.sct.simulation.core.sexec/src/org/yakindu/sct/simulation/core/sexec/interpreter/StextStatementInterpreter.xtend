@@ -119,6 +119,11 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		throw new IllegalArgumentException
 	}
 
+	def dispatch Object typeCast(Enumerator value, Type type) {
+		if(ts.isSuperType(type, value.owningEnumeration)) return value
+		throw new IllegalArgumentException
+	}
+
 	def dispatch Object typeCast(Object value, Type type) {
 		throw new IllegalArgumentException("Invalid cast " + value.class + " to " + type.name)
 	}
@@ -167,6 +172,11 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
 			}
 		}
+		// for enumeration types just return the referenced enumerator
+		if (expression.reference instanceof Enumerator) {
+			return expression.reference
+		}
+		
 		val executionSlot = context.resolve(expression)
 		if (executionSlot instanceof ExecutionVariable)
 			return executionSlot.getValue
