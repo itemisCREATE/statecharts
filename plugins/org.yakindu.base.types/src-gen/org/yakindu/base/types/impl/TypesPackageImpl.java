@@ -301,6 +301,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getType_Visible() {
+		return (EAttribute)typeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDeclaration() {
 		return declarationEClass;
 	}
@@ -655,6 +664,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		typeEClass = createEClass(TYPE);
 		createEReference(typeEClass, TYPE__CONSTRAINT);
 		createEAttribute(typeEClass, TYPE__ABSTRACT);
+		createEAttribute(typeEClass, TYPE__VISIBLE);
 
 		declarationEClass = createEClass(DECLARATION);
 
@@ -774,6 +784,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getType_Constraint(), this.getTypeConstraint(), null, "constraint", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getType_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getType_Visible(), ecorePackage.getEBoolean(), "visible", "true", 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(typeEClass, this.getType(), "getOriginType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
