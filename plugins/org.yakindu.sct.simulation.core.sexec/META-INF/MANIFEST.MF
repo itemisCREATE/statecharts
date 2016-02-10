@@ -4,19 +4,19 @@ Bundle-Name: YAKINDU Simulation Execution
 Bundle-SymbolicName: org.yakindu.sct.simulation.core.sexec;singleton:=true
 Bundle-Version: 2.5.0.qualifier
 Bundle-Activator: org.yakindu.sct.simulation.core.sexec.SExecCoreActivator
-Require-Bundle: org.yakindu.sct.simulation.core;bundle-version="2.1.2",
- org.eclipse.core.runtime;bundle-version="3.9.0",
- org.yakindu.sct.model.sexec;bundle-version="2.1.2",
- com.google.inject;bundle-version="3.0.0",
- org.eclipse.xtext;bundle-version="2.4.2",
- org.yakindu.sct.model.stext;bundle-version="2.1.2",
+Require-Bundle: org.yakindu.sct.simulation.core,
+ org.eclipse.core.runtime,
+ org.yakindu.sct.model.sexec,
+ com.google.inject,
+ org.eclipse.xtext,
+ org.yakindu.sct.model.stext,
  org.eclipse.xtend.lib,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
- org.yakindu.sct.commons;bundle-version="2.1.2",
- org.eclipse.emf.workspace;bundle-version="1.5.1",
- org.yakindu.base.xtext.utils.jface;bundle-version="2.1.2",
- org.yakindu.sct.domain;bundle-version="2.4.1"
+ org.yakindu.sct.commons,
+ org.eclipse.emf.workspace,
+ org.yakindu.base.xtext.utils.jface,
+ org.yakindu.sct.domain
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.simulation.core.sexec,

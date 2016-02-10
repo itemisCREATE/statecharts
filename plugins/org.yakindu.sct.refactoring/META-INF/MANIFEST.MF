@@ -7,12 +7,12 @@ Bundle-Activator: org.yakindu.sct.refactoring.Activator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.yakindu.sct.model.sgraph;bundle-version="1.0.0",
- org.eclipse.gmf.runtime.diagram.ui;bundle-version="1.6.0",
- org.yakindu.sct.ui.editor;bundle-version="1.0.0",
- org.yakindu.sct.model.stext;bundle-version="1.0.0",
- org.yakindu.base.xtext.utils.jface;bundle-version="1.0.0",
- org.yakindu.sct.model.resource;bundle-version="1.0.0",
+ org.yakindu.sct.model.sgraph,
+ org.eclipse.gmf.runtime.diagram.ui,
+ org.yakindu.sct.ui.editor,
+ org.yakindu.sct.model.stext,
+ org.yakindu.base.xtext.utils.jface,
+ org.yakindu.sct.model.resource,
  org.eclipse.core.expressions
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
