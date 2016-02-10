@@ -42,7 +42,8 @@ class TimerInterface {
 		/*
 		 * Basic interface for state machines.
 		 */
-		class «timerInterface» {
+		class «timerInterface»
+		{
 			public:
 				
 				virtual ~«timerInterface»() = 0;
