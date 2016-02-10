@@ -59,12 +59,12 @@ class JavaGenerator implements IExecutionFlowGenerator {
 		flow.generateStatemachineInterface(entry, fsa)
 		flow.generateStatemachine(entry, fsa)
 		
-		if (entry.hasFeatureEventRunnable) {
-			flow.generateEventBasedRunnableWrapper(entry, fsa)
+		if (entry.hasFeatureCycleWrapper || entry.hasFeatureEventRunnable) {
+			flow.generateCycleWrapper(entry, fsa)
 		}
 		
-		if (entry.hasFeatureCycleWrapper) {
-			flow.generateCycleWrapper(entry, fsa)
+		if (entry.hasFeatureEventRunnable) {
+			flow.generateEventBasedRunnableWrapper(entry, fsa)
 		}
 	}
 }

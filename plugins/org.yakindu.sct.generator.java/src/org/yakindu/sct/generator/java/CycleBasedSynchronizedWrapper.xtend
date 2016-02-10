@@ -1,12 +1,12 @@
 /**
-  Copyright (c) 2015 committers of YAKINDU and others.
-  All rights reserved. This program and the accompanying materials
-  are made available under the terms of the Eclipse Public License v1.0
-  which accompanies this distribution, and is available at
-  http://www.eclipse.org/legal/epl-v10.html
-  Contributors:
-  	Markus Mühlbrandt - Initial contribution and API
-*/
+ *   Copyright (c) 2015 committers of YAKINDU and others.
+ *   All rights reserved. This program and the accompanying materials
+ *   are made available under the terms of the Eclipse Public License v1.0
+ *   which accompanies this distribution, and is available at
+ *   http://www.eclipse.org/legal/epl-v10.html
+ *   Contributors:
+ *   	Markus Mühlbrandt - Initial contribution and API
+ */
 
 package org.yakindu.sct.generator.java
 
@@ -21,8 +21,10 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 
+import static org.eclipse.xtext.util.Strings.*
+
 /**
- * Generates the runnable wrapper for the state machine. This wrapper implies event based execution semantics. 
+ * Generates the cycle bases synchronized wrapper for the state machine.
  */
 class CycleBasedSynchronizedWrapper {
 
@@ -33,67 +35,83 @@ class CycleBasedSynchronizedWrapper {
 	@Inject protected extension Navigation
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ICodegenTypeSystemAccess
-	
+
 	def generateCycleWrapper(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		
+
 		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.cycleWrapperClassName(entry).java
 		var content = content(flow, entry)
 		fsa.generateFile(filename, content)
 	}
-	
-	
+
 	def protected content(ExecutionFlow flow, GeneratorEntry entry) '''
 		«entry.licenseText»
 		package «flow.getImplementationPackageName(entry)»;
 		«flow.createImports(entry)»
 		
 		/**
-		 * Subclass of «flow.statemachineClassName». This wrapper provides a thread-safe instance of the state machine.
+		 * Runnable wrapper of «flow.statemachineClassName». This wrapper provides a thread-safe
+		 * instance of the state machine.
 		 * 
-		 * Please report bugs and issues... 
+		 * Please report bugs and issues...
 		 */
 		
-		public class «flow.cycleWrapperClassName(entry)» extends «flow.statemachineClassName» {
+		public class «flow.cycleWrapperClassName(entry)» implements «flow.statemachineInterfaceName» {
 			
 			«flow.createFieldDeclarations(entry)»
+			
+			public «flow.cycleWrapperClassName(entry)»() {
+				«FOR scope : flow.interfaceScopes»
+					«scope.interfaceName.asEscapedIdentifier» = new «scope.wrapperInterfaceName(entry)»();
+				«ENDFOR»
+			}
+			
 			«flow.interfaceAccessors»
 			«flow.timingFunctions(entry)»
 			
 			/**
 			 * init() will be delegated thread-safely to the wrapped state machine. 
 			 */ 
-			public synchronized void init() {
-				statemachine.init();
+			public void init() {
+				synchronized(statemachine) {
+					statemachine.init();
+				}
 			}
 			
 			/**
 			 * enter() will be delegated thread-safely to the wrapped state machine.  
 			 */ 
-			public synchronized void enter() {
-				statemachine.enter();
+			public void enter() {
+				synchronized(statemachine) {
+					statemachine.enter();
+				}
 			}
 			
 			/**
 			 * exit() will be delegated thread-safely to the wrapped state machine.  
 			 */ 
-			public synchronized void exit() {
-				statemachine.exit();
+			public void exit() {
+				synchronized(statemachine) {
+					statemachine.exit();
+				}
 			}
 			
 			/**
 			 * isActive() will be delegated thread-safely to the wrapped state machine.  
 			 */ 
-			public synchronized boolean isActive() {
-				return statemachine.isActive();
+			public boolean isActive() {
+				synchronized(statemachine) {
+					return statemachine.isActive();
+				}
 			}
 			
 			/**
 			 * isFinal() will be delegated thread-safely to the wrapped state machine.  
 			 */ 
-			public synchronized boolean isFinal() {
-				return statemachine.isFinal();
+			public boolean isFinal() {
+				synchronized(statemachine) {
+					return statemachine.isFinal();
+				}
 			}
-			
 			
 			/**
 			 * runCycle() will be delegated thread-safely to the wrapped state machine.  
@@ -104,93 +122,74 @@ class CycleBasedSynchronizedWrapper {
 					statemachine.runCycle();
 				}
 			}
-
-			/**
-			 * This method will start the main execution loop for the state machine. 
-			 * First it will init and enter the state machine implicitly and then will start processing events 
-			 * from the event queue until the thread is interrupted. 
-			 */
-			@Override
-			public void run() {
-			
-				boolean terminate = false;
-				
-				while(!(terminate || Thread.currentThread().isInterrupted())) {
-			
-					try {
-						
-						Runnable eventProcessor = eventQueue.take();
-						eventProcessor.run();
-						
-					} catch (InterruptedException e) {
-						terminate = true;
-					}
-				}			
-			}
-
-			
 		}
 	'''
-	
-	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
-		import java.util.concurrent.BlockingQueue;
-		import java.util.concurrent.LinkedBlockingQueue;
 
+	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
 		«IF entry.createInterfaceObserver && flow.hasOutgoingEvents»
-		import java.util.LinkedList;
-		import java.util.List;
+			import java.util.List;
 		«ENDIF»
 		«IF flow.timed»
 			import «entry.getBasePackageName()».ITimer;
 			import «entry.getBasePackageName()».ITimerCallback;
 		«ENDIF»
 	'''
-	
+
 	def protected createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
-		
-		
 		/**
-		 *
-		 * Lock to provide thread save access.
-		 *
+		 * The core state machine is simply wrapped and the event processing will be
+		 * delegated to that state machine instance. This instance will be created
+		 * implicitly.
 		 */
-		protected ReentrantLock lock = new ReentrantLock(true);
+		protected «flow.statemachineClassName» statemachine = new «flow.statemachineClassName»();
 		
-		«FOR scope : flow.interfaceScopes»
-		/**
-		 * Interface object for «scope.interfaceName»
-		 */		
-		protected «scope.interfaceName» «scope.interfaceName.asEscapedIdentifier» = new «scope.interfaceName»() {
-			«scope.toImplementation(entry)»
-		};
-		
+		«FOR scope : flow.interfaceScopes SEPARATOR newLine»
+			/**
+			 * Interface object for «scope.interfaceName»
+			 */		
+			protected class «scope.wrapperInterfaceName(entry)» implements «scope.interfaceName» {
+				«scope.toImplementation(entry)»
+			};
+			
+			protected «scope.interfaceName» «scope.interfaceName.asEscapedIdentifier»;
 		«ENDFOR»
-		
 	'''
-	
-	def protected toImplementation(InterfaceScope scope, GeneratorEntry entry) '''				
+
+	def protected toImplementation(InterfaceScope scope, GeneratorEntry entry) '''
+		
+		«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
+			«scope.generateListeners»
+		«ENDIF»
+		«IF scope.hasOperations»
+			«scope.generateOperationCallback»
+		«ENDIF»
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction == Direction::IN»
 				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 					public void raise«event.name.asName»(final «event.type.targetLanguageName» value) {
-						lock.lock();
-						statemachine.get«scope.interfaceName»().raise«event.name.asName»(value);
-						lock.unlock();
+						
+						synchronized (statemachine) {
+							statemachine.get«scope.interfaceName»().raise«event.name.asName»(value);
+							statemachine.runCycle();
+						}
 					}
 					
 				«ELSE»
 					public void raise«event.name.asName»() {
-						lock.lock();
-						statemachine.get«scope.interfaceName»().raise«event.name.asName»();
-						lock.unlock();
+						
+						synchronized (statemachine) {
+							statemachine.get«scope.interfaceName»().raise«event.name.asName»();
+							statemachine.runCycle();
+						}
 					}
 					
 				«ENDIF»
 			«ENDIF»
 			«IF event.direction == Direction::OUT»
 				public boolean isRaised«event.name.asName»() {
-						lo
+					synchronized(statemachine) {
 						return statemachine.get«scope.interfaceName»().isRaised«event.name.asName»();
+					}
 				}
 				
 				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
@@ -219,7 +218,25 @@ class CycleBasedSynchronizedWrapper {
 			«ENDIF»
 		«ENDFOR»
 	'''
-
+	
+	protected def generateListeners(InterfaceScope scope) '''
+		public List<«scope.getInterfaceListenerName»> getListeners() {
+			synchronized(statemachine) {
+				return statemachine.get«scope.interfaceName»().getListeners();
+			}
+		}
+		
+	'''
+	
+	protected def generateOperationCallback(InterfaceScope scope) '''
+		public void set«scope.getInterfaceOperationCallbackName»(«scope.getInterfaceOperationCallbackName» operationCallback) {
+			synchronized(statemachine) {
+				statemachine.get«scope.interfaceName»().set«scope.getInterfaceOperationCallbackName»(operationCallback);
+			}
+		}
+		
+	'''
+	
 	def protected interfaceAccessors(ExecutionFlow flow) '''
 		«FOR scope : flow.interfaceScopes»
 			public synchronized «scope.interfaceName» get«scope.interfaceName»() {
@@ -228,18 +245,40 @@ class CycleBasedSynchronizedWrapper {
 		«ENDFOR»
 	'''
 
-
 	def protected timingFunctions(ExecutionFlow flow, GeneratorEntry entry) '''
 		«IF flow.timed»
+			/*================ TIME EVENT HANDLING ================
+			
+			/** An external timer instance is required. */
+			protected ITimer externalTimer;
+			
+			/** Internally we use a timer proxy that queues time events together with other input events. */
+			protected ITimer timerProxy = new ITimer() {
+				/** Simply delegate to external timer with a modified callback. */
+				@Override
+				public void setTimer(ITimerCallback callback, int eventID, long time,
+						boolean isPeriodic) {
+					externalTimer.setTimer(«flow.cycleWrapperClassName(entry)».this, eventID, time, isPeriodic);
+				}
+				
+				@Override
+				public void unsetTimer(ITimerCallback callback, int eventID) {
+					externalTimer.unsetTimer(«flow.cycleWrapperClassName(entry)».this, eventID);
+				}
+			};
+			
 			/**
-			 * Set the {@link ITimer} for the state machine. It must be set
-			 * externally on a timed state machine before a run cycle can be correct
-			 * executed.
+			 * Set the {@link ITimer} for the state machine. It must be set externally
+			 * on a timed state machine before a run cycle can be correct executed.
 			 * 
 			 * @param timer
 			 */
-			public synchronized void setTimer(ITimer timer) {
-				super.setTimer(timerProxy);
+			public void setTimer(ITimer timer) {
+				synchronized(statemachine) {
+					this.externalTimer = timer;
+					/* the wrapped state machine uses timer proxy as timer */
+					statemachine.setTimer(timerProxy);
+				}
 			}
 			
 			/**
@@ -247,14 +286,17 @@ class CycleBasedSynchronizedWrapper {
 			* 
 			* @return {@link ITimer}
 			*/
-			public synchronized ITimer getTimer() {
+			public ITimer getTimer() {
 				return externalTimer;
 			}
 			
-			public synchronized void timeElapsed(int eventID) {
-				super.timeElapsed(eventID);
+			public void timeElapsed(int eventID) {
+				synchronized (statemachine) {
+					statemachine.timeElapsed(eventID);
+					statemachine.runCycle();
+				}
 			}
 		«ENDIF»
 	'''
-	
+
 }
