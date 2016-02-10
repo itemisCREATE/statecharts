@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 
 /**
@@ -35,15 +36,14 @@ public class CoreLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatu
 	}
 
 	@Override
-	protected void setDefaultValue(FeatureParameterValue parameterValue, EObject contextElement) {
+	protected void setDefaultValue(FeatureType featureType, FeatureParameterValue parameterValue,
+			EObject contextElement) {
 		String parameterName = parameterValue.getParameter().getName();
 		if (OUTLET_FEATURE_TARGET_FOLDER.equals(parameterName)) {
 			parameterValue.setValue("src-gen");
-		} 
-		else if (OUTLET_FEATURE_LIBRARY_TARGET_FOLDER.equals(parameterName)){
+		} else if (OUTLET_FEATURE_LIBRARY_TARGET_FOLDER.equals(parameterName)) {
 			parameterValue.setValue("src");
-		}
-		else if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)) {
+		} else if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)) {
 			parameterValue.setValue(getProject(contextElement).getName());
 		} else if (LICENSE_TEXT.equals(parameterName)) {
 			parameterValue.setValue("Enter license text here");
@@ -57,7 +57,8 @@ public class CoreLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatu
 		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName) && projectExists(parameterValue.getStringValue())
 				&& !projectOpened(parameterValue.getStringValue()))
 			return error(String.format("The Project %s is not open.", parameterValue.getExpression()));
-		if (OUTLET_FEATURE_TARGET_FOLDER.equals(parameterName) || OUTLET_FEATURE_LIBRARY_TARGET_FOLDER.equals(parameterName)) {
+		if (OUTLET_FEATURE_TARGET_FOLDER.equals(parameterName)
+				|| OUTLET_FEATURE_LIBRARY_TARGET_FOLDER.equals(parameterName)) {
 			FeatureParameterValue targetProjectParam = parameterValue.getFeatureConfiguration()
 					.getParameterValue(OUTLET_FEATURE_TARGET_PROJECT);
 			String targetProjectName = targetProjectParam != null ? targetProjectParam.getStringValue() : null;

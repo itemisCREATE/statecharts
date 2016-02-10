@@ -19,27 +19,28 @@ import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.BoolLiteral;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 
 /**
  * 
  * @author oliver bohl - Initial contribution
  */
-public class SCTBaseLibaryDefaultFeatureValueProvider extends
-AbstractDefaultFeatureValueProvider{
+public class SCTBaseLibaryDefaultFeatureValueProvider extends AbstractDefaultFeatureValueProvider {
 
 	public boolean isProviderFor(FeatureTypeLibrary library) {
 		return LIBRARY_NAME.equals(library.getName());
-	}	
-	
+	}
+
 	@Override
-	protected void setDefaultValue(FeatureParameterValue parameterValue, EObject contextElement) {
+	protected void setDefaultValue(FeatureType featureType, FeatureParameterValue parameterValue,
+			EObject contextElement) {
 		String parameterName = parameterValue.getParameter().getName();
 		if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)) {
 			parameterValue.setValue(false);
 		}
 	}
-	
+
 	public IStatus validateParameterValue(FeatureParameterValue parameterValue) {
 		String parameterName = parameterValue.getParameter().getName();
 		if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)

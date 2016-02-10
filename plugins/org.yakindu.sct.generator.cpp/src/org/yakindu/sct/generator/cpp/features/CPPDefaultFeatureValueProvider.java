@@ -20,6 +20,7 @@ import org.yakindu.sct.generator.c.features.ICFeatureConstants;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.Visibility;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -29,8 +30,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class CPPDefaultFeatureValueProvider extends
-		AbstractDefaultFeatureValueProvider {
+public class CPPDefaultFeatureValueProvider extends AbstractDefaultFeatureValueProvider {
 
 	private static final String INVALID_IDENTIFIER_REGEX = "[^a-z&&[^A-Z&&[^0-9]]]";
 	private static final String VALID_IDENTIFIER_REGEX = "[_a-zA-Z][_a-zA-Z0-9]*";
@@ -40,31 +40,25 @@ public class CPPDefaultFeatureValueProvider extends
 	}
 
 	@Override
-	protected void setDefaultValue(FeatureParameterValue parameterValue,
+	protected void setDefaultValue(FeatureType featureType, FeatureParameterValue parameterValue,
 			EObject contextElement) {
 		GeneratorEntry entry = (GeneratorEntry) contextElement;
 		Statechart statechart = (Statechart) entry.getElementRef();
 
-		if (parameterValue.getParameter().getName()
-				.equals(ICFeatureConstants.PARAMETER_NAMING_MODULE_NAME)) {
+		if (parameterValue.getParameter().getName().equals(ICFeatureConstants.PARAMETER_NAMING_MODULE_NAME)) {
 			parameterValue.setValue(asIdentifier(statechart.getName(), "_"));
 		} else if (parameterValue.getParameter().getName()
 				.equals(ICFeatureConstants.PARAMETER_NAMING_STATEMACHINE_PREFIX)) {
-			parameterValue.setValue(StringExtensions.toFirstLower(asIdentifier(
-					statechart.getName(), "_")));
+			parameterValue.setValue(StringExtensions.toFirstLower(asIdentifier(statechart.getName(), "_")));
 		} else if (parameterValue.getParameter().getName()
 				.equals(ICFeatureConstants.PARAMETER_NAMING_MAX_IDENTIFIER_LENGTH)) {
 			parameterValue.setValue("31");
-		} else if (parameterValue.getParameter().getName()
-				.equals(ICFeatureConstants.PARAMETER_NAMING_SEPARATOR)) {
+		} else if (parameterValue.getParameter().getName().equals(ICFeatureConstants.PARAMETER_NAMING_SEPARATOR)) {
 			parameterValue.setValue("_");
-		} else if (parameterValue
-				.getParameter()
-				.getName()
+		} else if (parameterValue.getParameter().getName()
 				.equals(CPPFeatureConstants.PARAMETER_INNER_FUNCTION_VISIBILITY)) {
 			parameterValue.setValue(Visibility.PRIVATE.toString().toLowerCase());
-		} else if (parameterValue.getParameter().getName()
-				.equals(CPPFeatureConstants.PARAMETER_STATIC_OPC)) {
+		} else if (parameterValue.getParameter().getName().equals(CPPFeatureConstants.PARAMETER_STATIC_OPC)) {
 			parameterValue.setValue(false);
 		}
 	}
@@ -75,8 +69,7 @@ public class CPPDefaultFeatureValueProvider extends
 			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
 				return error("Invalid module name");
 			}
-		} else if (ICFeatureConstants.PARAMETER_NAMING_STATEMACHINE_PREFIX
-				.equals(parameterName)) {
+		} else if (ICFeatureConstants.PARAMETER_NAMING_STATEMACHINE_PREFIX.equals(parameterName)) {
 			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
 				return error("Invalid function prefix name");
 			}
