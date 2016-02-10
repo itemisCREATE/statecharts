@@ -60,7 +60,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		/*! \file Header of the state machine '«name»'.
 		*/
 		
-		class «module» : «interfaceExtensions» {
+		class «module» : «interfaceExtensions»
+		{
 			
 			public:
 				
@@ -141,7 +142,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 
 	def protected createInterface(StatechartScope scope) '''
 		//! Inner class for «scope.simpleName» interface scope.
-		class «scope.interfaceName» {
+		class «scope.interfaceName»
+		{
 			
 			public:
 				«FOR d : scope.declarations»
@@ -165,7 +167,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			
 			«IF scope.hasOperations»
 				//! Inner class for «scope.simpleName» interface scope operation callbacks.
-				class «scope.interfaceOCBName» {
+				class «scope.interfaceOCBName»
+				{
 					public:
 						«IF !entry.useStaticOPC»
 							virtual ~«scope.interfaceOCBName»() = 0;

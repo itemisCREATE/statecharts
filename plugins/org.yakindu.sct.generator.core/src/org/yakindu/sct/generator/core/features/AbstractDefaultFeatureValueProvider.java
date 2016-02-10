@@ -34,13 +34,14 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 
 	protected static final SGenFactory factory = SGenFactory.eINSTANCE;
 
-	protected abstract void setDefaultValue(FeatureParameterValue parameterValue, EObject contextElement);
+	protected abstract void setDefaultValue(FeatureType featureType, FeatureParameterValue parameterValue,
+			EObject contextElement);
 
 	public final FeatureConfiguration createDefaultFeatureConfiguration(FeatureType type, EObject contextElement) {
 		FeatureConfiguration config = createConfiguration(type);
 		EList<FeatureParameter> parameters = type.getParameters();
 		for (FeatureParameter parameter : parameters) {
-			FeatureParameterValue parameterValue = createParameterValue(parameter, contextElement);
+			FeatureParameterValue parameterValue = createParameterValue(type, parameter, contextElement);
 			if (parameterValue != null && parameterValue.getExpression() != null) {
 				config.getParameterValues().add(parameterValue);
 			}
@@ -48,10 +49,11 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 		return config;
 	}
 
-	protected FeatureParameterValue createParameterValue(FeatureParameter parameter, EObject contextElement) {
+	protected FeatureParameterValue createParameterValue(FeatureType featureType, FeatureParameter parameter,
+			EObject contextElement) {
 		FeatureParameterValue parameterValue = factory.createFeatureParameterValue();
 		parameterValue.setParameter(parameter);
-		setDefaultValue(parameterValue, contextElement);
+		setDefaultValue(featureType, parameterValue, contextElement);
 		return parameterValue;
 	}
 

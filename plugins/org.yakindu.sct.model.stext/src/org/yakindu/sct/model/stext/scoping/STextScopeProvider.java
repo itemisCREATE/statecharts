@@ -37,6 +37,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -117,18 +118,17 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		IScope unnamedScope = getUnnamedTopLevelScope(context, reference);
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
 		unnamedScope = new FilteringScope(unnamedScope, predicate);
-		// TODO: Performance problem -> fix this in context of Add Support for
-		// Enumerations #165
-		// // add enum types
-		// IScope enumerations = new
-		// FilteringScope(getDelegate().getScope(context, reference),
-		// new Predicate<IEObjectDescription>() {
-		// @Override
-		// public boolean apply(IEObjectDescription input) {
-		// return input.getEClass() == TypesPackage.Literals.ENUMERATION_TYPE;
-		// }
-		// });
-		return new SimpleScope(Iterables.concat(namdScope.getAllElements(), unnamedScope.getAllElements()));
+		
+		// TODO: this might be a performance problem -> fix this in context of Add Support for Enumerations #165
+		IScope enumerations = new FilteringScope(getDelegate().getScope(context, reference),
+				new Predicate<IEObjectDescription>() {
+					@Override
+					public boolean apply(IEObjectDescription input) {
+						return input.getEClass() == TypesPackage.Literals.ENUMERATION_TYPE;
+					}
+				});
+		return new SimpleScope(Iterables.concat(namdScope.getAllElements(), unnamedScope.getAllElements(),
+				enumerations.getAllElements()));
 	}
 
 	public IScope scope_FeatureCall_feature(final FeatureCall context, EReference reference) {

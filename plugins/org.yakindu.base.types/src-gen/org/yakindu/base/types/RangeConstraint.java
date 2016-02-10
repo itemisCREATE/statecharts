@@ -10,11 +10,11 @@ package org.yakindu.base.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.RangeConstraint#getLowerBound <em>Lower Bound</em>}</li>
  *   <li>{@link org.yakindu.base.types.RangeConstraint#getUpperBound <em>Upper Bound</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.types.TypesPackage#getRangeConstraint()
  * @model

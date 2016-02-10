@@ -22,15 +22,14 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
-
 
 /**
  * 
  * @author holger willebrandt - Initial contribution and API
  */
-public class GenericJavaLibraryDefaultValueProvider extends
-		AbstractDefaultFeatureValueProvider {
+public class GenericJavaLibraryDefaultValueProvider extends AbstractDefaultFeatureValueProvider {
 
 	// (ID.)+ID
 	private static final String GENERATOR_CLASS_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*\\.)+[a-zA-Z_][a-zA-Z0-9_]*"; //$NON-NLS-1$
@@ -40,7 +39,7 @@ public class GenericJavaLibraryDefaultValueProvider extends
 	}
 
 	@Override
-	protected void setDefaultValue(FeatureParameterValue parameterValue,
+	protected void setDefaultValue(FeatureType featureType, FeatureParameterValue parameterValue,
 			EObject contextElement) {
 		String parameterName = parameterValue.getParameter().getName();
 		if (GENERATOR_PROJECT.equals(parameterName)) {
@@ -58,15 +57,14 @@ public class GenericJavaLibraryDefaultValueProvider extends
 		}
 		IJavaProject ijp = JavaCore.create(this.getProject(parameterValue));
 		try {
-			if(ijp.findType(value) == null && GENERATOR_CLASS.equals(parameterName)){
+			if (ijp.findType(value) == null && GENERATOR_CLASS.equals(parameterName)) {
 				return error("Generator class does not exist.");
 			}
 		} catch (JavaModelException e) {
 			// Stacktrace
 			e.printStackTrace();
-		}			
-		if (GENERATOR_CLASS.equals(parameterName)
-				&& !value.matches(GENERATOR_CLASS_REGEX)) {
+		}
+		if (GENERATOR_CLASS.equals(parameterName) && !value.matches(GENERATOR_CLASS_REGEX)) {
 			return error("Generator class must be a full qualified class name");
 		}
 		return Status.OK_STATUS;

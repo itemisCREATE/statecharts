@@ -85,7 +85,8 @@ class StatemachineImplementation {
 	'''
 	
 	def constructorDefinition(ExecutionFlow it) '''
-		«module»::«module»() {
+		«module»::«module»()
+		{
 			
 			«scopes.filter(typeof(StatechartScope)).filter[hasOperations && !entry.useStaticOPC].map['''«OCB_Instance» = null;'''].join('\n')»
 			«IF hasHistory»
@@ -103,7 +104,8 @@ class StatemachineImplementation {
 	'''
 	
 	def destructorDefinition(ExecutionFlow it) '''
-		«module»::~«module»() {
+		«module»::~«module»()
+		{
 		}
 	'''
 	
@@ -124,7 +126,6 @@ class StatemachineImplementation {
 			clearOutEvents();
 			
 			«initSequence.code»
-
 		}
 	'''
 	
@@ -143,7 +144,8 @@ class StatemachineImplementation {
 	'''
 	
 	def clearInEventsFunction(ExecutionFlow it) '''
-		void «module»::clearInEvents() {
+		void «module»::clearInEvents()
+		{
 			«FOR scope : it.scopes»
 				«FOR event : scope.incomingEvents»
 				«event.access» = false;
@@ -163,7 +165,8 @@ class StatemachineImplementation {
 	'''
 	
 	def clearOutEventsFunction(ExecutionFlow it) '''
-		void «module»::clearOutEvents() {
+		void «module»::clearOutEvents()
+		{
 			«FOR scope : it.scopes»
 				«FOR event : scope.outgoingEvents»
 				«event.access» = false;
@@ -173,18 +176,22 @@ class StatemachineImplementation {
 	'''
 	
 	def runCycleFunction(ExecutionFlow it) '''
-		void «module»::runCycle() {
+		void «module»::runCycle()
+		{
 			
 			clearOutEvents();
 			
 			for (stateConfVectorPosition = 0;
 				stateConfVectorPosition < «orthogonalStatesConst»;
-				stateConfVectorPosition++) {
+				stateConfVectorPosition++)
+				{
 					
-				switch (stateConfVector[stateConfVectorPosition]) {
+				switch (stateConfVector[stateConfVectorPosition])
+				{
 				«FOR state : states»
 					«IF state.reactSequence!=null»
-					case «state.shortName.asEscapedIdentifier» : {
+					case «state.shortName.asEscapedIdentifier» :
+					{
 						«state.reactSequence.shortName»();
 						break;
 					}
@@ -202,16 +209,20 @@ class StatemachineImplementation {
 	def timedStatemachineFunctions(ExecutionFlow it) '''
 		«IF timed»
 			
-			void «module»::setTimer(«timerInterface»* timer){
+			void «module»::setTimer(«timerInterface»* timer)
+			{
 				this->«timerInstance» = timer;
 			}
 			
-			«timerInterface»* «module»::getTimer(){
+			«timerInterface»* «module»::getTimer()
+			{
 				return «timerInstance»;
 			}
 			
-			void «module»::«raiseTimeEventFctID»(sc_eventid evid) {
-				if ((evid >= &timeEvents) && (evid < &timeEvents + sizeof(timeEvents))) {
+			void «module»::«raiseTimeEventFctID»(sc_eventid evid)
+			{
+				if ((evid >= &timeEvents) && (evid < &timeEvents + sizeof(timeEvents)))
+				{
 					*(sc_boolean*)evid = true;
 				}
 			}
@@ -219,8 +230,10 @@ class StatemachineImplementation {
 	'''
 	
 	def isStateActiveFunction(ExecutionFlow it) '''
-		sc_boolean «module»::«stateActiveFctID»(«statesEnumType» state) {
-			switch (state) {
+		sc_boolean «module»::«stateActiveFctID»(«statesEnumType» state)
+		{
+			switch (state)
+			{
 				«FOR s : states»
 				case «s.shortName.asEscapedIdentifier» : 
 					return (sc_boolean) («IF s.leaf»stateConfVector[«s.stateVector.offset»] == «s.shortName.asEscapedIdentifier»
@@ -234,12 +247,13 @@ class StatemachineImplementation {
 	
 	
 	def isActiveFunction(ExecutionFlow it) '''
-		sc_boolean «module»::isActive() {
+		sc_boolean «module»::isActive()
+		{
 			return «FOR i : 0 ..< stateVector.size SEPARATOR '||'»stateConfVector[«i»] != «null_state»«ENDFOR»;
 		}
 	'''
 	
-	def protected isFinalFunction(ExecutionFlow it) {
+	def protected isFinalFunction(ExecutionFlow it){
 		val finalStateImpactVector = flow.finalStateImpactVector
 		'''
 			«IF !finalStateImpactVector.isCompletelyCovered»
@@ -247,7 +261,8 @@ class StatemachineImplementation {
 			 * Always returns 'false' since this state machine can never become final.
 			 */
 			«ENDIF»
-			sc_boolean «module»::isFinal(){
+			sc_boolean «module»::isFinal()
+			{
 		''' +
 		// only if the impact vector is completely covered by final states the state machine 
 		// can become final
@@ -272,13 +287,15 @@ class StatemachineImplementation {
 	def interfaceFunctions(ExecutionFlow it) '''
 		«FOR scope : statechartScopes»
 			«IF scope instanceof InterfaceScope»
-			«module»::«scope.interfaceName»* «module»::get«scope.interfaceName»() {
+			«module»::«scope.interfaceName»* «module»::get«scope.interfaceName»()
+			{
 				return &«scope.instance»;
 			}
 			
 			«ENDIF»
 			«FOR event : scope.incomingEvents»
-				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams») {
+				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams»)
+				{
 					«IF event.hasValue»
 					«event.localValueAccess» = value;
 					«ENDIF»
@@ -286,30 +303,35 @@ class StatemachineImplementation {
 				}
 				
 				«IF scope.defaultInterface»
-					void «module»::«event.asRaiser»(«event.valueParams») {
+					void «module»::«event.asRaiser»(«event.valueParams»)
+					{
 						«scope.instance».«event.asRaiser»(«IF event.hasValue»value«ENDIF»);
 					}
 					
 				«ENDIF»
 			«ENDFOR»
 			«FOR event : scope.outgoingEvents»
-				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() {
+				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»()
+				{
 					return «event.localAccess»;
 				}
 				
 				«IF scope.defaultInterface»
-					sc_boolean «module»::«event.asRaised»() {
+					sc_boolean «module»::«event.asRaised»()
+					{
 						return «scope.instance».«event.asRaised»();
 					}
 					
 				«ENDIF»
 				«IF event.hasValue» 
-					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() {
+					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»()
+					{
 						return «event.localValueAccess»;
 					}
 					
 					«IF scope.defaultInterface»
-						«event.type.targetLanguageName» «module»::«event.asGetter»() {
+						«event.type.targetLanguageName» «module»::«event.asGetter»()
+						{
 							return «scope.instance».«event.asGetter»();
 						}
 						
@@ -318,42 +340,49 @@ class StatemachineImplementation {
 			«ENDFOR»
 			
 			«FOR event : scope.localEvents»
-				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams») {
+				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams»)
+				{
 					«IF event.hasValue»
 					«event.localValueAccess» = value;
 					«ENDIF»
 					«event.localAccess» = true;
 				}
 				
-				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() {
+				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»()
+				{
 					return «event.localAccess»;
 				}
 				
 				«IF event.hasValue» 
-					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() {
+					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»()
+					{
 						return «event.localValueAccess»;
 					}
 					
 				«ENDIF»
 			«ENDFOR»
 			«FOR variable : scope.variableDefinitions»
-				«IF variable.const»const «ENDIF»«variable.type.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() {
+				«IF variable.const»const «ENDIF»«variable.type.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»()
+				{
 					return «variable.localAccess»;
 				}
 				
 				«IF scope.defaultInterface»
-					«IF variable.const»const «ENDIF»«variable.type.targetLanguageName» «module»::«variable.asGetter»() {
+					«IF variable.const»const «ENDIF»«variable.type.targetLanguageName» «module»::«variable.asGetter»()
+					{
 						return «variable.access»;
 					}
 					
 				«ENDIF»
 				«IF !variable.readonly && !variable.const»
-					void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.type.targetLanguageName» value) {
+					void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.type.targetLanguageName» value)
+					{
 						«variable.localAccess» = value;
 					}
 					
 					«IF scope.defaultInterface»
-						void «module»::«variable.asSetter»(«variable.type.targetLanguageName» value) {
+						void «module»::«variable.asSetter»(«variable.type.targetLanguageName» value)
+						{
 							«variable.access» = value;
 						}
 						
@@ -361,7 +390,8 @@ class StatemachineImplementation {
 				«ENDIF»
 			«ENDFOR»
 			«IF scope.hasOperations && !entry.useStaticOPC»
-				«scope.OCB_InterfaceSetterDeclaration(true)» {
+				«scope.OCB_InterfaceSetterDeclaration(true)»
+				{
 					«scope.OCB_Instance» = operationCallback;
 				}
 			«ENDIF»
@@ -394,7 +424,8 @@ class StatemachineImplementation {
 	
 	def dispatch functionImplementation(Check it) '''
 		«stepComment»
-		sc_boolean «execution_flow.module»::«shortName»() {
+		sc_boolean «execution_flow.module»::«shortName»()
+		{
 			return «code»;
 		}
 		
@@ -402,7 +433,8 @@ class StatemachineImplementation {
 	
 	def dispatch functionImplementation(Step it) '''
 		«stepComment»
-		void «execution_flow.module»::«shortName»() {
+		void «execution_flow.module»::«shortName»()
+		{
 			«code»
 		}
 		

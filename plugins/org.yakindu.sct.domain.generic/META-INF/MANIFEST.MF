@@ -6,18 +6,18 @@ Bundle-Version: 2.5.0.qualifier
 Bundle-Activator: org.yakindu.sct.domain.generic.DefaultDomainActivator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.core.runtime,
- org.yakindu.sct.model.stext;bundle-version="2.4.1",
- org.yakindu.sct.domain;bundle-version="2.4.1",
- org.yakindu.sct.simulation.core.sexec;bundle-version="2.4.1",
- org.yakindu.sct.model.sexec;bundle-version="2.4.1",
+ org.yakindu.sct.model.stext,
+ org.yakindu.sct.domain,
+ org.yakindu.sct.simulation.core.sexec,
+ org.yakindu.sct.model.sexec,
  org.yakindu.sct.simulation.core,
  org.eclipse.xtext.ui,
  org.yakindu.sct.model.stext.ui,
- org.eclipse.xtext.ui.shared;bundle-version="2.7.2",
- org.eclipse.gmf.runtime.notation;bundle-version="1.8.0",
- org.yakindu.sct.ui.editor;bundle-version="2.5.0",
- org.yakindu.base.xtext.utils.gmf;bundle-version="2.5.0",
- org.yakindu.sct.refactoring;bundle-version="2.5.0"
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.gmf.runtime.notation,
+ org.yakindu.sct.ui.editor,
+ org.yakindu.base.xtext.utils.gmf,
+ org.yakindu.sct.refactoring
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.domain.generic,

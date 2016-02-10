@@ -12,11 +12,12 @@ import org.yakindu.base.base.NamedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.Package#getMember <em>Member</em>}</li>
  *   <li>{@link org.yakindu.base.types.Package#getDomain <em>Domain</em>}</li>
+ *   <li>{@link org.yakindu.base.types.Package#getImport <em>Import</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.types.TypesPackage#getPackage()
  * @model
@@ -64,5 +65,21 @@ public interface Package extends NamedElement {
 	 * @generated
 	 */
 	void setDomain(Domain value);
+
+	/**
+	 * Returns the value of the '<em><b>Import</b></em>' reference list.
+	 * The list contents are of type {@link org.yakindu.base.types.Package}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Import</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Import</em>' reference list.
+	 * @see org.yakindu.base.types.TypesPackage#getPackage_Import()
+	 * @model
+	 * @generated
+	 */
+	EList<Package> getImport();
 
 } // Package

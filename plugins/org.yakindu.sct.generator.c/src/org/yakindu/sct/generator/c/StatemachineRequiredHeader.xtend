@@ -43,7 +43,8 @@ class StatemachineRequiredHeader {
 			«IF timed || operations.size > 0»#include "«module.h»"«ENDIF»
 
 			#ifdef __cplusplus
-			extern "C" {
+			extern "C"
+			{
 			#endif 
 			
 			/*! \file This header defines prototypes for all functions that are required by the state machine implementation.
