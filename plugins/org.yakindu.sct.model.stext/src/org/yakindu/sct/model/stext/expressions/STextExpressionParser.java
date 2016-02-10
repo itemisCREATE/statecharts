@@ -43,19 +43,17 @@ import com.google.inject.Injector;
 
 public class STextExpressionParser implements IExpressionParser {
 
-	
 	public static class LinkingException extends RuntimeException{
+		private static final long serialVersionUID = 1L;
 		public LinkingException(String msg) {
 			super(msg);
 		}
-		private static final long serialVersionUID = 1L;
 	}
-	
+
 	@Inject
 	private IParser parser;
 	@Inject
 	private ILinker linker;
-
 	@Inject
 	private Injector injector;
 

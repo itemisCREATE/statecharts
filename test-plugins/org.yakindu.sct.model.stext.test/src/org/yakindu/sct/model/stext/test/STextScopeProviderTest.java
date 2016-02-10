@@ -19,7 +19,6 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.expressions.STextExpressionParser.LinkingException;
 import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider;
-import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
@@ -94,8 +93,8 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testConditionalExpressionSuccess() throws Exception {
-		parseExpression("myBool ? myOpp(1) : myOpp(2)", ReactionEffect.class.getSimpleName(), internalScope);
-		parseExpression("myOpp4() ? myInt : myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myBool ? myOpp(1) : myOpp(2)", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myOpp4() ? myInt : myOpp3()", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(CONDITIONAL_EXPRESSION), VARIABLES_AND_OPERATIONS);
@@ -104,7 +103,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testConditionalExpressionError() throws Exception {
-		parseExpression("myBool ? e1 : myOpp(2)", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myBool ? e1 : myOpp(2)", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(LOGICAL_OR_EXPRESSION),
@@ -114,10 +113,10 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testLogicalOrExpressionSuccess() throws Exception {
-		parseExpression("myInt || Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt || Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myInt || myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
-		parseExpression("myInt || e1", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myInt || myOpp3()", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myInt || e1", Expression.class.getSimpleName(), internalScope);
 
 	}
 	/**
@@ -128,10 +127,10 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testLogicalAndExpressionSuccess() throws Exception {
-		parseExpression("myInt && Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt && Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myInt && myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
-		parseExpression("myInt && e1", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myInt && myOpp3()", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myInt && e1", Expression.class.getSimpleName(), internalScope);
 
 	}
 
@@ -142,7 +141,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testBitWiseXOrExpressionSuccess() throws Exception {
-		parseExpression("myInt ^ Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt ^ Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
 	}
 	
@@ -153,7 +152,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testBitWiseXOrExpressionErrorWithEvents() throws Exception {
-		parseExpression("e1 ^ e2", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("e1 ^ e2", Expression.class.getSimpleName(), internalScope);
 	}
 	
 	/**
@@ -163,7 +162,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testBitWiseXOrExpressionErrorWithOperation() throws Exception {
-		parseExpression("myOpp1(1) ^ myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myOpp1(1) ^ myOpp3()", Expression.class.getSimpleName(), internalScope);
 	}
 	
 	/**
@@ -173,7 +172,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testBitWiseOrExpressionSuccess() throws Exception {
-		parseExpression("myInt | Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt | Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
 	}
 	/**
@@ -183,7 +182,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testBitWiseOrExpressionErrorWithEvents() throws Exception {
-		parseExpression("e1 | e2", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("e1 | e2", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(BITWISE_OR_EXPRESSION), VARIABLES)
@@ -192,7 +191,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testBitWiseOrExpressionErrorWithOperation() throws Exception {
-		parseExpression("myOpp1(1) | myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myOpp1(1) | myOpp3()", Expression.class.getSimpleName(), internalScope);
 		
 	}
 	/**
@@ -202,7 +201,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testBitWiseAndExpressionSuccess() throws Exception {
-		parseExpression("myInt & Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt & Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
 	}
 	/**
@@ -212,7 +211,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testBitWiseAndExpressionErrorWithEvent() throws Exception {
-		parseExpression("e1 & e2", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("e1 & e2", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(BITWISE_AND_EXPRESSION), VARIABLES)
@@ -221,7 +220,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testBitWiseAndExpressionErrorWithOperation() throws Exception {
-		parseExpression("myOpp1(1) & myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myOpp1(1) & myOpp3()", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(SHIFT_EXPRESSION), VARIABLES)
@@ -230,9 +229,9 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testShiftExpressionSuccess() throws Exception {
-		parseExpression("myInt << Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt << Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myInt >> Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt >> Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
 	}
 	/**
@@ -243,7 +242,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	@Test(expected=LinkingException.class)
 	public void testShiftExpressionErrorWithEventToRight() throws Exception {
 		// check events
-		parseExpression("e1 >> e2", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("e1 >> e2", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(SHIFT_EXPRESSION), VARIABLES)
@@ -252,7 +251,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testShiftExpressionErrorWithEventToLeft() throws Exception {
-		parseExpression("e1 >> e2", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("e1 >> e2", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(SHIFT_EXPRESSION), VARIABLES)
@@ -261,7 +260,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testShiftExpressionErrorWithOperationToRight() throws Exception {
-		parseExpression("myOpp1(1) >> myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myOpp1(1) >> myOpp3()", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(SHIFT_EXPRESSION), VARIABLES)
@@ -270,7 +269,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testShiftExpressionErrorWithOperationToLeft() throws Exception {
-		parseExpression("myOpp1(1) << myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myOpp1(1) << myOpp3()", Expression.class.getSimpleName(), internalScope);
 	}
 
 	/**
@@ -281,10 +280,10 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testLogicalNotExpressionSuccess() throws Exception {
-		parseExpression("myInt != Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt != Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myInt != myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
-		parseExpression("myInt != e1", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myInt != myOpp3()", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myInt != e1", Expression.class.getSimpleName(), internalScope);
 	}
 
 	/**
@@ -300,35 +299,35 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	@Test
 	public void testLogicalRelationExpressionSuccess() throws Exception {
 		// check <
-		parseExpression("myInt < Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt < Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myInt < myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
-		parseExpression("myInt < e1", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myInt < myOpp3()", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myInt < e1", Expression.class.getSimpleName(), internalScope);
 		// check >
-		parseExpression("myInt > Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt > Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myInt > myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
-		parseExpression("myInt > e1", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myInt > myOpp3()", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myInt > e1", Expression.class.getSimpleName(), internalScope);
 		// check <=
-		parseExpression("myInt <= Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt <= Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myInt <= myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
-		parseExpression("myInt <= e1", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myInt <= myOpp3()", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myInt <= e1", Expression.class.getSimpleName(), internalScope);
 		// check >=
-		parseExpression("myInt >= Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt >= Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myInt >= myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
-		parseExpression("myInt >= e1", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myInt >= myOpp3()", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myInt >= e1", Expression.class.getSimpleName(), internalScope);
 		// check ==
-		parseExpression("myInt == Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt == Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myInt == myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
-		parseExpression("myInt == e1", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myInt == myOpp3()", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myInt == e1", Expression.class.getSimpleName(), internalScope);
 		// check !=
-		parseExpression("myInt != Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt != Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myInt != myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
-		parseExpression("myInt != e1", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myInt != myOpp3()", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myInt != e1", Expression.class.getSimpleName(), internalScope);
 
 	}
 
@@ -340,14 +339,14 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testNumericalAddSubstractExpressionSuccess() throws Exception {
-		parseExpression("myInt + Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt + Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myInt - Interface1.myInt2", ReactionEffect.class.getSimpleName(), internalScope,
+		parseExpression("myInt - Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myOpp3() + myInt", ReactionEffect.class.getSimpleName(), internalScope);
-		parseExpression("myInt - myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
-		parseExpression("myOpp3() + myInt", ReactionEffect.class.getSimpleName(), internalScope);
-		parseExpression("myOpp3() - myInt", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("myOpp3() + myInt", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myInt - myOpp3()", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myOpp3() + myInt", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myOpp3() - myInt", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(NUMERICAL_ADD_SUBTRACT_EXPRESSION),
@@ -358,7 +357,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	@Test(expected=LinkingException.class)
 	public void testNumericalAddExpressionError() throws Exception {
 		
-		parseExpression("e1 + e2", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("e1 + e2", Expression.class.getSimpleName(), internalScope);
 	
 	}
 	/**
@@ -369,7 +368,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testNumericalSubstractExpressionError() throws Exception {
-		parseExpression("e1 - e2", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("e1 - e2", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION),
@@ -379,14 +378,14 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testNumericalMultiplyDevideExpressionSuccess() throws Exception {
-		parseExpression("myInt * Interface1.myInt2", Guard.class.getSimpleName(), internalScope,
+		parseExpression("myInt * Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myInt / Interface1.myInt2", Guard.class.getSimpleName(), internalScope,
+		parseExpression("myInt / Interface1.myInt2", Expression.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("myOpp3() * myInt", Guard.class.getSimpleName(), internalScope);
-		parseExpression("myInt / myOpp3()", Guard.class.getSimpleName(), internalScope);
-		parseExpression("myOpp3() * myInt", Guard.class.getSimpleName(), internalScope);
-		parseExpression("myOpp3() / myInt", Guard.class.getSimpleName(), internalScope);
+		parseExpression("myOpp3() * myInt", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myInt / myOpp3()", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myOpp3() * myInt", Expression.class.getSimpleName(), internalScope);
+		parseExpression("myOpp3() / myInt", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION),
@@ -396,7 +395,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testNumericalMultiplyExpressionError() throws Exception {
-		parseExpression("e1 * e2", Guard.class.getSimpleName(), internalScope);
+		parseExpression("e1 * e2", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION),
@@ -406,7 +405,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testNumericalDevideExpressionError() throws Exception {
-		parseExpression("e1 / e2", Guard.class.getSimpleName(), internalScope);
+		parseExpression("e1 / e2", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(NUMERICAL_UNARY_EXPRESSION), VARIABLES_AND_OPERATIONS)
@@ -415,10 +414,10 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testNumericalUnaryExpressionSuccess() throws Exception {
-		parseExpression("-myInt", Guard.class.getSimpleName(), internalScope);
-		parseExpression("+myInt", Guard.class.getSimpleName(), internalScope);
-		parseExpression("-myOpp3()", Guard.class.getSimpleName(), internalScope);
-		parseExpression("+myOpp3()", Guard.class.getSimpleName(), internalScope);
+		parseExpression("-myInt", Expression.class.getSimpleName(), internalScope);
+		parseExpression("+myInt", Expression.class.getSimpleName(), internalScope);
+		parseExpression("-myOpp3()", Expression.class.getSimpleName(), internalScope);
+		parseExpression("+myOpp3()", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(NUMERICAL_UNARY_EXPRESSION), VARIABLES_AND_OPERATIONS)
@@ -445,7 +444,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testEventValueReferenceExpressionSuccess() throws Exception {
-		parseExpression("valueof(e2)", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("valueof(e2)", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(EVENT_VALUE_REFERENCE_EXPRESSION), EVENTS)
@@ -454,7 +453,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testEventValueReferenceExpressionErrorOfVairable() throws Exception {
-		parseExpression("valueof(myInt)", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("valueof(myInt)", Expression.class.getSimpleName(), internalScope);
 	}
 	/**
 	 * filter.put(key(EVENT_VALUE_REFERENCE_EXPRESSION), EVENTS)
@@ -463,7 +462,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 */
 	@Test(expected=LinkingException.class)
 	public void testEventValueReferenceExpressionErrorOfOperation() throws Exception {
-		parseExpression("valueof(myOpp3())", ReactionEffect.class.getSimpleName(), internalScope);
+		parseExpression("valueof(myOpp3())", Expression.class.getSimpleName(), internalScope);
 	}
 
 	/**
