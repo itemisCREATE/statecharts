@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -41,7 +42,8 @@ public class CDefaultFeatureValueProvider extends AbstractDefaultFeatureValuePro
 	}
 
 	@Override
-	protected void setDefaultValue(FeatureParameterValue parameterValue, EObject contextElement) {
+	protected void setDefaultValue(FeatureType featureType, FeatureParameterValue parameterValue,
+			EObject contextElement) {
 
 		GeneratorEntry entry = (GeneratorEntry) contextElement;
 		Statechart statechart = (Statechart) entry.getElementRef();

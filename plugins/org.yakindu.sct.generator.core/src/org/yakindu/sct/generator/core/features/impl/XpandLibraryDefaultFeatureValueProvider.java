@@ -19,14 +19,14 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 
 /**
  * 
  * @author holger willebrandt - Initial contribution and API
  */
-public class XpandLibraryDefaultFeatureValueProvider extends
-		AbstractDefaultFeatureValueProvider {
+public class XpandLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatureValueProvider {
 
 	// (ID::)+ID
 	private static final String XPAND_TEMPLATE_PATH_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*::)+[a-zA-Z_][a-zA-Z0-9_]*"; //$NON-NLS-1$
@@ -36,12 +36,11 @@ public class XpandLibraryDefaultFeatureValueProvider extends
 	}
 
 	@Override
-	protected void setDefaultValue(final FeatureParameterValue parameterValue,
+	protected void setDefaultValue(FeatureType featureType, FeatureParameterValue parameterValue,
 			final EObject contextElement) {
 		String parameterName = parameterValue.getParameter().getName();
 		if (TEMPLATE_FEATURE_TEMPLATE_PATH.equals(parameterName)) {
-			parameterValue
-					.setValue("org::yakindu::sct::generator::xpand::Main::main");
+			parameterValue.setValue("org::yakindu::sct::generator::xpand::Main::main");
 		}
 		if (TEMPLATE_FEATURE_TEMPLATE_PROJECT.equals(parameterName)) {
 			parameterValue.setValue(getProject(contextElement).getName());
@@ -52,12 +51,10 @@ public class XpandLibraryDefaultFeatureValueProvider extends
 		String parameterName = parameterValue.getParameter().getName();
 		String value = parameterValue.getStringValue();
 		if (TEMPLATE_FEATURE_TEMPLATE_PATH.equals(parameterName)
-				&& !parameterValue.getStringValue()
-						.matches(XPAND_TEMPLATE_PATH_REGEX)) {
+				&& !parameterValue.getStringValue().matches(XPAND_TEMPLATE_PATH_REGEX)) {
 			return error("Xpand Template Path Syntax Error");
 		}
-		if (TEMPLATE_FEATURE_TEMPLATE_PROJECT.equals(parameterName)
-				&& !projectExists(value)) {
+		if (TEMPLATE_FEATURE_TEMPLATE_PROJECT.equals(parameterName) && !projectExists(value)) {
 			return error(String.format("The Project %s does not exist", value));
 		}
 		return Status.OK_STATUS;
