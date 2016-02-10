@@ -13,6 +13,6 @@ Export-Package: org.yakindu.sct.model.sgen,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.yakindu.sct.model.sgraph;visibility:=reexport,
- org.eclipse.emf.ecore.xmi;bundle-version="2.7.0",
- com.google.inject;bundle-version="2.0.0";visibility:=reexport
+ org.eclipse.emf.ecore.xmi,
+ com.google.inject;visibility:=reexport
 Bundle-ActivationPolicy: lazy
