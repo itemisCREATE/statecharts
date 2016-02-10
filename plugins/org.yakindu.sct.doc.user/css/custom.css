@@ -192,10 +192,19 @@ table.scedit img {
 }
 
 
-/* Show literals in synopsis in bold: */ 
-pre.synopsis code {
-    font-weight: bold
+
+/* Settings for "synopsys" sub-elements: */
+pre.synopsis code.literal {
+    font-weight: bold;
+    font-style: normal;
 }
+
+pre.synopsis code.varname {
+    font-weight: normal;
+    font-style: italic;
+}
+
+
 
 div.example {
 	padding-left: 2%;
