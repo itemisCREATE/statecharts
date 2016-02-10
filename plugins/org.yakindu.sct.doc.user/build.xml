@@ -196,7 +196,10 @@
 
     <!-- Validates the DocBook source file against the DocBook 5.0 Relax-NG grammar. -->
     <target name="validate" depends="init, init.docbook-xml">
-        <java classname="com.thaiopensource.relaxng.util.Driver" classpathref="jing.classpath" fork="true">
+        <java classname="com.thaiopensource.relaxng.util.Driver"
+              classpathref="jing.classpath"
+              fork="true"
+              failonerror="true">
             <arg value="${docbook-xml.distribution.dir}/xsd/docbook.rng" />
             <arg value="src/documentation.xml" />
         </java>
@@ -210,7 +213,7 @@
 
 
     <!-- Generates the documentation as HTML. -->
-    <target name="generate.html" description="Generates the documentation as HTML." depends="init">
+    <target name="generate.html" description="Generates the documentation as HTML." depends="validate">
         <docbook.conversion src.dir="src"
                             dst.dir="${html.dir.name}"
                             basename="documentation"
@@ -220,7 +223,7 @@
 
 
     <!-- Generates the documentation as Eclipse help. This is essentially chunked HTML with a TOC file. -->
-    <target name="generate.eclipsehelp" description="Generates the documentation as Eclipse help." depends="init">
+    <target name="generate.eclipsehelp" description="Generates the documentation as Eclipse help." depends="validate">
         <docbook.conversion src.dir="src"
                             dst.dir="${help.dir.name}"
                             basename="documentation"
@@ -230,7 +233,7 @@
 
 
     <!-- Generates the documentation as PDF. -->
-    <target name="generate.pdf" description="Generates the documentation as PDF." depends="init">
+    <target name="generate.pdf" description="Generates the documentation as PDF." depends="validate">
         <local name="basename" />
         <property name="basename" value="documentation" />
         <docbook.conversion src.dir="src"
