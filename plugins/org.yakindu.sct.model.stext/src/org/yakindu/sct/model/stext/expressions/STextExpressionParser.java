@@ -14,8 +14,8 @@ import java.io.StringReader;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ParserRule;
@@ -43,6 +43,15 @@ import com.google.inject.Injector;
 
 public class STextExpressionParser implements IExpressionParser {
 
+	
+	public static class LinkingError extends RuntimeException{
+		public LinkingError(String msg) {
+			super(msg);
+		}
+
+		private static final long serialVersionUID = 1L;
+	}
+	
 	@Inject
 	private IParser parser;
 	@Inject
@@ -94,7 +103,7 @@ public class STextExpressionParser implements IExpressionParser {
 		resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);
 		Multimap<SpecificationElement, Diagnostic> diagnostics = resource.getLinkingDiagnostics();
 		if (diagnostics.size() > 0) {
-			throw new RuntimeException(diagnostics.toString());
+			throw new LinkingError(diagnostics.toString());
 		}
 		if (result.hasSyntaxErrors()) {
 			StringBuilder errorMessages = new StringBuilder();
@@ -106,7 +115,7 @@ public class STextExpressionParser implements IExpressionParser {
 			throw new RuntimeException("Could not parse expression, syntax errors: " + errorMessages);
 		}
 		if (diagnosticsConsumer.hasConsumedDiagnostics(Severity.ERROR)) {
-			throw new RuntimeException("Error during linking: " + diagnosticsConsumer.getResult(Severity.ERROR));
+			throw new LinkingError("Error during linking: " + diagnosticsConsumer.getResult(Severity.ERROR));
 		}
 		return rootASTElement;
 	}
