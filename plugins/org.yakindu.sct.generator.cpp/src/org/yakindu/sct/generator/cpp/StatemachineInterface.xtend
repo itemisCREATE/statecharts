@@ -37,7 +37,8 @@ class StatemachineInterface {
 		/*
 		 * Basic interface for state machines.
 		 */
-		class «statemachineInterface» {
+		class «statemachineInterface»
+		{
 			public:
 			
 				virtual ~«statemachineInterface»() = 0;

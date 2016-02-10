@@ -40,9 +40,11 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
 	override dispatch CharSequence code(HistoryEntry it) '''
 		«stepComment»
-		if (historyVector[«region.historyVector.offset»] != «null_state») {
+		if (historyVector[«region.historyVector.offset»] != «null_state»)
+		{
 			«historyStep.code»
-		} «IF initialStep != null»else {
+		} «IF initialStep != null»else
+		{
 			«initialStep.code»
 		} «ENDIF»
 	'''
@@ -50,12 +52,15 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	override dispatch CharSequence code(StateSwitch it) '''
 		«stepComment»
 		«IF historyRegion != null»
-			switch(historyVector[ «historyRegion.historyVector.offset» ]) {
+			switch(historyVector[ «historyRegion.historyVector.offset» ])
+			{
 		«ELSE»
-			switch(stateConfVector[ «stateConfigurationIdx» ]) {
+			switch(stateConfVector[ «stateConfigurationIdx» ])
+			{
 		«ENDIF»
 			«FOR caseid : cases»
-				case «caseid.state.shortName» : {
+				case «caseid.state.shortName» :
+				{
 					«caseid.step.code»
 					break;
 				}
@@ -95,9 +100,11 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 		
     override dispatch CharSequence code(If it) '''
 		«stepComment»
-		if («check.code») { 
+		if («check.code»)
+		{ 
 			«thenStep.code»
-		} «IF (elseStep != null)» else {
+		} «IF (elseStep != null)» else
+		{
 			«elseStep.code»
 		}
 		«ENDIF»
