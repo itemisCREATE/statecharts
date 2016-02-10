@@ -44,11 +44,10 @@ import com.google.inject.Injector;
 public class STextExpressionParser implements IExpressionParser {
 
 	
-	public static class LinkingError extends RuntimeException{
-		public LinkingError(String msg) {
+	public static class LinkingException extends RuntimeException{
+		public LinkingException(String msg) {
 			super(msg);
 		}
-
 		private static final long serialVersionUID = 1L;
 	}
 	
@@ -103,7 +102,7 @@ public class STextExpressionParser implements IExpressionParser {
 		resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);
 		Multimap<SpecificationElement, Diagnostic> diagnostics = resource.getLinkingDiagnostics();
 		if (diagnostics.size() > 0) {
-			throw new LinkingError(diagnostics.toString());
+			throw new LinkingException(diagnostics.toString());
 		}
 		if (result.hasSyntaxErrors()) {
 			StringBuilder errorMessages = new StringBuilder();
@@ -115,7 +114,7 @@ public class STextExpressionParser implements IExpressionParser {
 			throw new RuntimeException("Could not parse expression, syntax errors: " + errorMessages);
 		}
 		if (diagnosticsConsumer.hasConsumedDiagnostics(Severity.ERROR)) {
-			throw new LinkingError("Error during linking: " + diagnosticsConsumer.getResult(Severity.ERROR));
+			throw new LinkingException("Error during linking: " + diagnosticsConsumer.getResult(Severity.ERROR));
 		}
 		return rootASTElement;
 	}

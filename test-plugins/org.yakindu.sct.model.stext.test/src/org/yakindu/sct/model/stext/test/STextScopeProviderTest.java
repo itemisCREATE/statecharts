@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.model.sgraph.Scope;
-import org.yakindu.sct.model.stext.expressions.STextExpressionParser.LinkingError;
+import org.yakindu.sct.model.stext.expressions.STextExpressionParser.LinkingException;
 import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider;
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
@@ -102,7 +102,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testConditionalExpressionError() throws Exception {
 		parseExpression("myBool ? e1 : myOpp(2)", ReactionEffect.class.getSimpleName(), internalScope);
 	}
@@ -151,7 +151,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testBitWiseXOrExpressionErrorWithEvents() throws Exception {
 		parseExpression("e1 ^ e2", ReactionEffect.class.getSimpleName(), internalScope);
 	}
@@ -161,7 +161,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testBitWiseXOrExpressionErrorWithOperation() throws Exception {
 		parseExpression("myOpp1(1) ^ myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
 	}
@@ -181,7 +181,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testBitWiseOrExpressionErrorWithEvents() throws Exception {
 		parseExpression("e1 | e2", ReactionEffect.class.getSimpleName(), internalScope);
 	}
@@ -190,7 +190,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testBitWiseOrExpressionErrorWithOperation() throws Exception {
 		parseExpression("myOpp1(1) | myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
 		
@@ -210,7 +210,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testBitWiseAndExpressionErrorWithEvent() throws Exception {
 		parseExpression("e1 & e2", ReactionEffect.class.getSimpleName(), internalScope);
 	}
@@ -219,7 +219,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testBitWiseAndExpressionErrorWithOperation() throws Exception {
 		parseExpression("myOpp1(1) & myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
 	}
@@ -240,7 +240,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testShiftExpressionErrorWithEventToRight() throws Exception {
 		// check events
 		parseExpression("e1 >> e2", ReactionEffect.class.getSimpleName(), internalScope);
@@ -250,7 +250,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testShiftExpressionErrorWithEventToLeft() throws Exception {
 		parseExpression("e1 >> e2", ReactionEffect.class.getSimpleName(), internalScope);
 	}
@@ -259,7 +259,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testShiftExpressionErrorWithOperationToRight() throws Exception {
 		parseExpression("myOpp1(1) >> myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
 	}
@@ -268,7 +268,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testShiftExpressionErrorWithOperationToLeft() throws Exception {
 		parseExpression("myOpp1(1) << myOpp3()", ReactionEffect.class.getSimpleName(), internalScope);
 	}
@@ -355,7 +355,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testNumericalAddExpressionError() throws Exception {
 		
 		parseExpression("e1 + e2", ReactionEffect.class.getSimpleName(), internalScope);
@@ -367,7 +367,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testNumericalSubstractExpressionError() throws Exception {
 		parseExpression("e1 - e2", ReactionEffect.class.getSimpleName(), internalScope);
 	}
@@ -394,7 +394,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testNumericalMultiplyExpressionError() throws Exception {
 		parseExpression("e1 * e2", Guard.class.getSimpleName(), internalScope);
 	}
@@ -404,7 +404,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testNumericalDevideExpressionError() throws Exception {
 		parseExpression("e1 / e2", Guard.class.getSimpleName(), internalScope);
 	}
@@ -425,7 +425,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testNumericalUnaryMinusExpressionError() throws Exception {
 		parseExpression("-e1", Expression.class.getSimpleName(), internalScope);
 	}
@@ -434,7 +434,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testNumericalUnaryPlusExpressionError() throws Exception {
 		parseExpression("+e1", Expression.class.getSimpleName(), internalScope);
 	}
@@ -452,7 +452,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testEventValueReferenceExpressionErrorOfVairable() throws Exception {
 		parseExpression("valueof(myInt)", ReactionEffect.class.getSimpleName(), internalScope);
 	}
@@ -461,7 +461,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testEventValueReferenceExpressionErrorOfOperation() throws Exception {
 		parseExpression("valueof(myOpp3())", ReactionEffect.class.getSimpleName(), internalScope);
 	}
@@ -480,7 +480,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testVariableDefinitionError() throws Exception {
 		parseExpression("var x : e1", VariableDefinition.class.getSimpleName(), internalScope);
 	}
@@ -498,7 +498,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testReactionTriggerErrorWithOperation() throws Exception {
 		parseExpression("myOpp(4) / myInt = 10", LocalReaction.class.getSimpleName(), internalScope);
 	}
@@ -508,7 +508,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Test(expected=LinkingError.class)
+	@Test(expected=LinkingException.class)
 	public void testReactionTriggerErrorWithVariable() throws Exception {
 		parseExpression("myInt / myInt = 10", LocalReaction.class.getSimpleName(), internalScope);
 	}
