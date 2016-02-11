@@ -223,43 +223,31 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 						{"-myInt", Expression.class.getSimpleName(), intn, true}, //
 						{"+myInt", Expression.class.getSimpleName(), intn, true}, //
 						{"-myOpp3()", Expression.class.getSimpleName(), intn, true}, //
-						{"+myOpp3()", Expression.class
-								.getSimpleName(), intn, true}, //
-				{"-e1", Expression.class.getSimpleName(), intn, false}, //
-				{"+e1", Expression.class.getSimpleName(), intn, false}, //
-				/*
-				 * filter.put(key(EVENT_VALUE_REFERENCE_EXPRESSION), EVENTS)
-				 */
-				{"valueof(e2)", Expression.class.getSimpleName(), intn, true}, //
-				{"valueof(myInt)", Expression.class.getSimpleName(), intn, false}, //
-				{"valueof(myOpp3())", Expression.class.getSimpleName(), intn, false}, //
-				/*
-				 * filter.put(key(VARIABLE_DEFINITION, TYPED_ELEMENT__TYPE),
-				 * TYPES)
-				 */
-				{"var x : integer", VariableDefinition.class.getSimpleName(), intn, true}, //
-				{"var x : e1", VariableDefinition.class.getSimpleName(), intn, false}, //
-				/* filter.put(key(REGULAR_EVENT_SPEC), EVENTS) */
-				{"e1 / myInt = 0", LocalReaction.class.getSimpleName(), intn, true}, //
-				{"myOpp(4) / myInt = 10", LocalReaction.class.getSimpleName(), intn, false}, //
-				{"myInt / myInt = 10", LocalReaction.class.getSimpleName(), intn, false}, //
+						{"+myOpp3()", Expression.class.getSimpleName(), intn, true}, //
+						{"-e1", Expression.class.getSimpleName(), intn, false}, //
+						{"+e1", Expression.class.getSimpleName(), intn, false}, //
+						/*
+						 * filter.put(key(EVENT_VALUE_REFERENCE_EXPRESSION), EVENTS)
+						 */
+						{"valueof(e2)", Expression.class.getSimpleName(), intn, true}, //
+						{"valueof(myInt)", Expression.class.getSimpleName(), intn, false}, //
+						{"valueof(myOpp3())", Expression.class.getSimpleName(), intn, false}, //
+						/*
+						 * filter.put(key(VARIABLE_DEFINITION, TYPED_ELEMENT__TYPE),
+						 * TYPES)
+						 */
+						{"var x : integer", VariableDefinition.class.getSimpleName(), intn, true}, //
+						{"var x : e1", VariableDefinition.class.getSimpleName(), intn, false}, //
+						/* filter.put(key(REGULAR_EVENT_SPEC), EVENTS) */
+						{"e1 / myInt = 0", LocalReaction.class.getSimpleName(), intn, true}, //
+						{"myOpp(4) / myInt = 10", LocalReaction.class.getSimpleName(), intn, false}, //
+						{"myInt / myInt = 10", LocalReaction.class.getSimpleName(), intn, false}, //
 		});
 	}
 	/** convenience because real scopes will be build after proper injection */
 	private enum S {
-		INTERNAL, INTERFACE;
-
-		@Override
-		public String toString() {
-			switch (this) {
-				case INTERNAL :
-					return "INTERNAL";
-				case INTERFACE :
-					return "INTERFACE";
-				default :
-					return "UNKNOWN";
-			}
-		}
+		INTERNAL
+		, INTERFACE;
 	}
 	private final static S[] intn = new S[]{S.INTERNAL};
 	private final static S[] intf = new S[]{S.INTERFACE};
