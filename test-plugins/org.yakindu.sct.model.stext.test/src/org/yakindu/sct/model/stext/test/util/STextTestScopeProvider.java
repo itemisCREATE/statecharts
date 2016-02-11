@@ -13,13 +13,23 @@ package org.yakindu.sct.model.stext.test.util;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
+import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Property;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypesFactory;
+import org.yakindu.base.types.typesystem.GenericTypeSystem;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
@@ -41,18 +51,31 @@ public class STextTestScopeProvider extends STextScopeProvider {
 	@Inject
 	private IQualifiedNameProvider qfnProvider;
 
+	@Inject
+	private ITypeSystem typeSystem;
+
 	public IScope getScope(EObject context, EReference reference) {
 		IScope parentScope = super.getScope(context, reference);
 
-		State dummyState = createDummyModel();
-		IEObjectDescription desc = new EObjectDescription(
-				qfnProvider.getFullyQualifiedName(dummyState), dummyState,
-				new HashMap<String, String>());
-		List<IEObjectDescription> descriptions = Lists.newArrayList(parentScope
-				.getAllElements());
-		descriptions.add(desc);
-		return new SimpleScope(descriptions);
+		List<IEObjectDescription> descriptions = Lists.newArrayList(parentScope.getAllElements());
 
+		State dummyState = createDummyModel();
+		descriptions.add(createEObjectDesc(dummyState));
+
+		Type complexType = createComplexType();
+		descriptions.add(createEObjectDesc(complexType));
+
+		TreeIterator<EObject> iterator = complexType.eAllContents();
+		while (iterator.hasNext()) {
+			EObject content = iterator.next();
+			descriptions.add(createEObjectDesc(content));
+		}
+
+		return new SimpleScope(descriptions);
+	}
+
+	private IEObjectDescription createEObjectDesc(EObject object) {
+		return new EObjectDescription(qfnProvider.getFullyQualifiedName(object), object, new HashMap<String, String>());
 	}
 
 	private State createDummyModel() {
@@ -65,6 +88,22 @@ public class STextTestScopeProvider extends STextScopeProvider {
 		state.setName("A");
 		region.getVertices().add(state);
 		return state;
+	}
+
+	private ComplexType createComplexType() {
+		ComplexType complexType = TypesFactory.eINSTANCE.createComplexType();
+		complexType.setName("ComplexType");
+
+		Property featureX = TypesFactory.eINSTANCE.createProperty();
+		featureX.setName("x");
+		featureX.setType(typeSystem.getType(GenericTypeSystem.INTEGER));
+		complexType.getFeatures().add(featureX);
+
+		typeSystem.declareType(complexType, complexType.getName());
+		Resource resource = new ResourceImpl(URI.createURI("types2"));
+		resource.getContents().add(complexType);
+
+		return complexType;
 	}
 
 }

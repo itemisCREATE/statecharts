@@ -31,9 +31,11 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
+import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
+import org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl;
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl;
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl;
 
@@ -470,11 +472,33 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	public void testEnumEqualsExpression() {
 		assertEquals(true, execute("internal: var enumVar : EnumType", "enumVar == EnumType.A"));
 	}
-	
+
 	@Test
 	public void testEnumAssignment() {
 		execute("internal: var enumVar : EnumType", "enumVar = EnumType.A");
 		assertEquals(((EnumerationType)typeSystem.getType("EnumType")).getEnumerator().get(0), getEnumValue());
+	}
+	
+	@Test
+	public void testComplexTypeEqualsExpression() {
+		assertEquals(true, execute("internal: var cpVar : ComplexType", "cpVar.x == 0"));
+	}
+	
+	@Test
+	public void testComplexTypeAssignment() {
+		execute("internal: var cpVar : ComplexType", "cpVar.x = 42");
+		assertEquals(42L, context.getVariable("cpVar.x").getValue());
+	}
+	
+	@Test
+	public void testEqualsExpressionForComplexTypeAlias() {
+		assertEquals(true, execute("internal: alias MyComplexType : ComplexType var cpVar : MyComplexType", "cpVar.x == 0"));
+	}
+	
+	@Test
+	public void testAssignmentToComplexTypeAlias() {
+		execute("internal: alias MyComplexType : ComplexType var cpVar : MyComplexType", "cpVar.x = 42");
+		assertEquals(42L, context.getVariable("cpVar.x").getValue());
 	}
 
 	// Convenience...
@@ -528,6 +552,18 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		enumVar.setType(enumType);
 		enumVar.setValue(enumType.getEnumerator().get(0));
 		context.getSlots().add(enumVar);
+		
+		CompositeSlot cpVar = new CompositeSlotImpl();
+		cpVar.setName("cpVar");
+		cpVar.setFqName("cpVar");
+		
+		ExecutionVariable featureVar = new ExecutionVariableImpl();
+		featureVar.setName("x");
+		featureVar.setFqName("cpVar.x");
+		featureVar.setType(typeSystem.getType(GenericTypeSystem.INTEGER));
+		featureVar.setValue(0);
+		cpVar.getSlots().add(featureVar);
+		context.getSlots().add(cpVar);
 	}
 	
 	private EnumerationType createEnumType() {

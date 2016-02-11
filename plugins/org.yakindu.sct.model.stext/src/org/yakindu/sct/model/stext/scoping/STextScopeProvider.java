@@ -37,6 +37,8 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -153,8 +155,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 
 		if (element instanceof ComplexType) {
-			scope = Scopes.scopeFor(((ComplexType) element).getAllFeatures(), scope);
-			scope = new FilteringScope(scope, predicate);
+			scope = addScopeForComplexType((ComplexType) element, scope, predicate);
 		}
 
 		if (element instanceof EnumerationType) {
@@ -162,11 +163,24 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			// scope = new FilteringScope(scope, predicate);
 		}
 
-		if (element instanceof Declaration && ((Declaration) element).getType() instanceof ComplexType) {
-			scope = Scopes.scopeFor(((ComplexType) ((Declaration) element).getType()).getAllFeatures(), scope);
-			scope = new FilteringScope(scope, predicate);
+		if (element instanceof Declaration) {
+			Declaration decl = (Declaration) element;
+			if (decl.getType() instanceof ComplexType) {
+				scope = addScopeForComplexType((ComplexType) decl.getType(), scope, predicate);
+			} else if (decl.getType() instanceof TypeAlias) {
+				Type originType = ((TypeAlias) decl.getType()).getOriginType();
+				if (originType instanceof ComplexType) {
+					scope = addScopeForComplexType((ComplexType) originType, scope, predicate);
+				}
+			}
 		}
+		
+		return scope;
+	}
 
+	protected IScope addScopeForComplexType(final ComplexType type, IScope scope, final Predicate<IEObjectDescription> predicate) {
+		scope = Scopes.scopeFor(type.getAllFeatures(), scope);
+		scope = new FilteringScope(scope, predicate);
 		return scope;
 	}
 
