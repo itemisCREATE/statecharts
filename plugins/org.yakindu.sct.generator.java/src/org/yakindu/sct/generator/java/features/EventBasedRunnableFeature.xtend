@@ -44,6 +44,6 @@ class EventBasedRunnableFeature {
 	}
 
 	def eventBasedWrapperClassName(ExecutionFlow it, GeneratorEntry entry) {
-		entry.namePrefix + statemachineName + entry.nameSuffix
+		entry.namePrefix + statemachineClassName + entry.nameSuffix
 	}
 }

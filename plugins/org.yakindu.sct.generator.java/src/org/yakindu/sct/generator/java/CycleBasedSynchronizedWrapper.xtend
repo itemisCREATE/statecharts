@@ -114,6 +114,15 @@ class CycleBasedSynchronizedWrapper {
 			}
 			
 			/**
+			 * isStateActive() will be delegated thread-safely to the wrapped state machine.  
+			 */
+			public boolean isStateActive(State state) {
+				synchronized(statemachine) {
+					return statemachine.isStateActive(state);
+				}
+			}
+			
+			/**
 			 * runCycle() will be delegated thread-safely to the wrapped state machine.  
 			 */ 
 			@Override
@@ -128,11 +137,13 @@ class CycleBasedSynchronizedWrapper {
 	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
 		«IF entry.createInterfaceObserver && flow.hasOutgoingEvents»
 			import java.util.List;
+			
 		«ENDIF»
 		«IF flow.timed»
 			import «entry.getBasePackageName()».ITimer;
 			import «entry.getBasePackageName()».ITimerCallback;
 		«ENDIF»
+		import «flow.getImplementationPackageName(entry)».«flow.statemachineClassName».State;
 	'''
 
 	def protected createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
@@ -293,7 +304,6 @@ class CycleBasedSynchronizedWrapper {
 			public void timeElapsed(int eventID) {
 				synchronized (statemachine) {
 					statemachine.timeElapsed(eventID);
-					statemachine.runCycle();
 				}
 			}
 		«ENDIF»

@@ -46,7 +46,7 @@ class CycleBasedWrapperFeature {
 	}
 
 	def cycleWrapperClassName(ExecutionFlow it, GeneratorEntry entry) {
-		entry.namePrefix + statemachineName + entry.nameSuffix
+		entry.namePrefix + statemachineClassName + entry.nameSuffix
 	}
 	
 	def wrapperInterfaceName(InterfaceScope it, GeneratorEntry entry) {

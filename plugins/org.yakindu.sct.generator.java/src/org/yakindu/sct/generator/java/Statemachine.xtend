@@ -240,7 +240,7 @@ class Statemachine {
 		/**
 		* Returns true if the given state is currently active otherwise false.
 		*/
-		public boolean isStateActive(State state){
+		public boolean isStateActive(State state) {
 			switch (state) {
 				«FOR s : flow.states»
 				case «s.stateName.asEscapedIdentifier» : 

@@ -48,13 +48,13 @@ public interface IJavaFeatureConstants {
 	
 	public static final String RUNNABLE_WRAPPER_NAME_PREFIX_DEFAULT = "";
 	
-	public static final String RUNNABLE_WRAPPER_NAME_SUFFIX_DEFAULT = "StatemachineRunnable";
+	public static final String RUNNABLE_WRAPPER_NAME_SUFFIX_DEFAULT = "Runnable";
 	
 	public static final String FEATURE_SYCHRONIZED_WRAPPER = "SynchronizedWrapper";
 	
-	public static final String SYCHRONIZED_WRAPPER_NAME_PREFIX_DEFAULT = "";
+	public static final String SYCHRONIZED_WRAPPER_NAME_PREFIX_DEFAULT = "Synchronized";
 	
-	public static final String SYCHRONIZED_WRAPPER_NAME_SUFFIX_DEFAULT = "SynchronizedStatemachine";
+	public static final String SYCHRONIZED_WRAPPER_NAME_SUFFIX_DEFAULT = "";
 	
 	public static final String VALUE_NAME_PREFIX = "namePrefix";
 	
