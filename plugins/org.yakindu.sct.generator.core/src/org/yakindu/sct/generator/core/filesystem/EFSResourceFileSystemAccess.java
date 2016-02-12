@@ -31,27 +31,27 @@ public class EFSResourceFileSystemAccess extends EclipseResourceFileSystemAccess
 	@Override
 	public void setOutputPath(String outputName, String path) {
 		super.setOutputPath(outputName, path);
-		// FIXME !!! ??? setting the targetProject has to be done firstly
-		trySetTargetProject(outputName, path);
+		boolean isTargetProject = trySetTargetProject(outputName, path);
 		// otherwise java classpath extension will fail, MSG?
-			IProject project = getProject();
-			if (isValidProject(project)) {
-				// FIXME !!! should be handled if and only of java/xtend is generated?!
-				if (hasJavaNature(project) && hasClasspath(project)) {
-					new ClasspathChanger().addFolderToClassPath(project, path);
-				}
+		IProject project = getProject();
+		if (!isTargetProject && isValidProject(project)) {
+			if (hasJavaNature(project) && hasClasspath(project)) {
+				new ClasspathChanger().addFolderToClassPath(project, path);
 			}
+		}
 	}
 
 
-	protected void trySetTargetProject(String outputName, String path) {
+	protected boolean trySetTargetProject(String outputName, String path) {
 		if (outputName.equals(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT)) {
 			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(path);
 			if (!project.exists()) {
 				createProject(project);
 			}
 			setProject(project);
+			return true;
 		}
+		return false;
 	}
 
 	protected boolean isValidProject(IProject project) {

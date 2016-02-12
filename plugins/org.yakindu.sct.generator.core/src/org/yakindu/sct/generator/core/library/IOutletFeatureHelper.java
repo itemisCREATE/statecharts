@@ -21,10 +21,34 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
  *
  */
 public interface IOutletFeatureHelper {
+	/**
+	 * The targetFolder value defined in SGen.
+	 * @param entry
+	 * @return the target folder value
+	 */
 	FeatureParameterValue getTargetFolderValue(GeneratorEntry entry);
+	/**
+	 * The libraryFolder value defined in SGen.
+	 * @param entry
+	 * @return the library target folder value
+	 */
 	FeatureParameterValue getLibraryTargetFolderValue(GeneratorEntry entry);
+	/**
+	 * The project value defined in SGen.
+	 * @param entry
+	 * @return the project value
+	 */
 	FeatureParameterValue getTargetProjectValue(GeneratorEntry entry);
+	/**
+	 * Convenience to combine targetProject & targetFolder values defined in SGen.
+	 * @param entry
+	 * @return a string representing the relative output path 'targetProject/targetFolder'
+	 */
 	String getRelativeTargetFolder(GeneratorEntry entry);
+	/**
+	 * Convenience to combine targetProject & libraryTargetFolder values defined in SGen.
+	 * @param entry
+	 * @return a string representing the relative output path 'targetProject/libraryTargetFolder'
+	 */
 	String getRelativeLibraryFolder(GeneratorEntry entry);
-
 }

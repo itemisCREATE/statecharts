@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.core;
 
 import java.io.File;
 
+import org.eclipse.emf.common.util.URI;
 import org.yakindu.sct.generator.core.impl.AbstractSExecModelGenerator;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
@@ -19,23 +20,41 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
  * Base class for generators that are executed inside the workspace
  * 
  * @author holger willebrandt - Initial contribution and API
+ * @author Johannes Dicks - refactored because of EFS decoupling
  */ 
-//FIXME !!! used in generator runtime samples (Xtend2 & Java, see e.g. org.yakindu.sct.generator.genmodel.ui.wizard.GeneratorProjectTemplate)
 public abstract class AbstractWorkspaceGenerator extends AbstractSExecModelGenerator {
 	
+	/**
+	 * 
+	 * @param entry
+	 * @deprecated Will be removed in future. Refreshing the project is moved to concrete file system access implementations 
+	 */
+	@Deprecated
 	public final void refreshTargetProject(GeneratorEntry entry) {
-		throw new UnsupportedOperationException("implement me!");
+		/**
+		 * This functionality will be provided by concrete file system accesses from now.
+		 */
 	}
 
 	public final File getTargetProject(GeneratorEntry entry) {
-		throw new UnsupportedOperationException("implement me!");
+		URI uri = sctFileSystemAccess.getURI(outletFeatureHelper.getTargetProjectValue(entry).getStringValue());
+		return new File(uri.toFileString());
 	}
 
 	public final File getTargetFolder(GeneratorEntry entry) {
-		throw new UnsupportedOperationException("implement me!");
+		URI uri = sctFileSystemAccess.getURI(outletFeatureHelper.getRelativeTargetFolder(entry));
+		return new File(uri.toFileString());
 	}
 	
 	public final File getLibraryTargetFolder(GeneratorEntry entry) {
-		throw new UnsupportedOperationException("implement me!");
+		URI uri = sctFileSystemAccess.getURI(outletFeatureHelper.getRelativeLibraryFolder(entry));
+		return new File(uri.toFileString());
+	}
+	
+	public final void writeToConsole(String line){
+		log.writeToConsole(line);
+	}
+	public final void writeToConsole(Throwable e){
+		log.writeToConsole(e);
 	}
 }
