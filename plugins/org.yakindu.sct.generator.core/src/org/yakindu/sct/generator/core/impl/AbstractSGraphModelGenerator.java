@@ -61,21 +61,26 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 		super();
 	}
 
+	//FIXME this is not nice...
 	@Override
 	protected void finalize() throws Throwable {
-		log.close();
+		if(log!=null)
+			log.close();
 		super.finalize();
 	}
 
 	public final void generate(GeneratorEntry entry) {
 		getInjector(entry).injectMembers(this);
 
-		EObject element = entry.getElementRef();
-		if (element == null || !(element instanceof Statechart)) {
-			log.writeToConsole("No Statechart selected in genmodel (" + entry + ")");
-			return;
+		boolean canHandle = false;
+		canHandle = canHandle(entry);
+		if (canHandle) {
+			doGenerate(entry);
 		}
-		Statechart statechart = (Statechart) element;
+	}
+
+	protected void doGenerate(GeneratorEntry entry) {
+		Statechart statechart = (Statechart) entry.getElementRef();
 		try {
 			log.writeToConsole(String.format("Generating Statechart %s ...", statechart.getName()));
 			prepareGenerator(entry);
@@ -87,6 +92,16 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 			finishGenerator(entry);
 			injector = null;
 		}
+	}
+
+	protected boolean canHandle(GeneratorEntry entry) {
+		boolean canHandle=false;
+		EObject elementRef = entry.getElementRef();
+		if (elementRef == null || !(elementRef instanceof Statechart)) {
+			log.writeToConsole("No Statechart selected in genmodel (" + entry + ")");
+			canHandle = true;
+		}
+		return canHandle;
 	}
 
 	/**
@@ -105,7 +120,7 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	private Injector injector;
 
 	protected Injector createInjector(GeneratorEntry entry) {
-		//FIXME !!! right injector, why? 
+		// FIXME !!! right injector, why?
 		return DomainRegistry.getDomainDescriptor(entry.getElementRef()).getDomainInjectorProvider()
 				.getSequencerInjector(getOverridesModule(entry));
 	}
@@ -129,5 +144,4 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 		}
 		return injector;
 	}
-
 }
