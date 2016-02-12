@@ -49,6 +49,12 @@ public class STextExpressionParser implements IExpressionParser {
 			super(msg);
 		}
 	}
+	public static class SyntaxException extends RuntimeException{
+		private static final long serialVersionUID = 1L;
+		public SyntaxException(String msg) {
+			super(msg);
+		}
+	}
 
 	@Inject
 	private IParser parser;
@@ -109,7 +115,7 @@ public class STextExpressionParser implements IExpressionParser {
 				errorMessages.append(iNode.getSyntaxErrorMessage());
 				errorMessages.append("\n");
 			}
-			throw new RuntimeException("Could not parse expression, syntax errors: " + errorMessages);
+			throw new SyntaxException("Could not parse expression, syntax errors: " + errorMessages);
 		}
 		if (diagnosticsConsumer.hasConsumedDiagnostics(Severity.ERROR)) {
 			throw new LinkingException("Error during linking: " + diagnosticsConsumer.getResult(Severity.ERROR));
