@@ -1519,5 +1519,41 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+	}
+	
+	statechart WrapperTest {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			RuntimeService = true
+			InterfaceObserverSupport = true
+		}
+		
+		feature SynchronizedWrapper {
+			namePrefix =  "Synchronized" 
+			nameSuffix =  "" 
+		}
+	}
+	
+	statechart RunnableTest {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			RuntimeService = true
+			InterfaceObserverSupport = true
+		}
+		
+		feature RunnableWrapper {
+			namePrefix =  "" 
+			nameSuffix =  "Runnable" 
+		}
 	}	
 }
