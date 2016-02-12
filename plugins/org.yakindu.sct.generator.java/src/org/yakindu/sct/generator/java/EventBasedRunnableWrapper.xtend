@@ -153,7 +153,7 @@ class EventBasedRunnableWrapper {
 
 	def protected timingFunctions(ExecutionFlow flow, GeneratorEntry entry) '''
 		«IF flow.timed»
-			public void timeElapsed(int eventID) {
+			public void timeElapsed(final int eventID) {
 				eventQueue.add(new Runnable() {
 
 					@Override
