@@ -480,6 +480,7 @@ class GeneratorProjectTemplate {
 		import org.eclipse.emf.ecore.EObject;
 		import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 		import org.yakindu.sct.model.sgen.FeatureParameterValue;
+		import org.yakindu.sct.model.sgen.FeatureType;
 		import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 			
 		/**
@@ -491,10 +492,9 @@ class GeneratorProjectTemplate {
 			public boolean isProviderFor(FeatureTypeLibrary library) {
 				return library.getName().equals(LIBRARY_NAME);
 			}
-
+		
 			@Override
-			protected void setDefaultValue(FeatureParameterValue parameterValue,
-					EObject context) {
+			protected void setDefaultValue(FeatureType type, FeatureParameterValue parameterValue, EObject context) {
 				String parameterName = parameterValue.getParameter().getName();
 				if (MY_PARAMETER.equals(parameterName)) {
 					parameterValue.setValue("default value");
