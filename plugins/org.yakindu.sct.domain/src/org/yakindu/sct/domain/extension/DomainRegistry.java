@@ -14,7 +14,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
@@ -22,7 +21,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.EcoreUtil2;
 import org.osgi.framework.Bundle;
+import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 
@@ -142,7 +143,22 @@ public class DomainRegistry {
 
 	public static IDomainDescriptor getDomainDescriptor(EObject object) {
 		EObject rootContainer = EcoreUtil.getRootContainer(object);
-		Assert.isTrue(rootContainer instanceof Statechart);
-		return getDomainDescriptor(((Statechart) rootContainer).getDomainID());
-	}
+				if (rootContainer instanceof Statechart)
+						return getDomainDescriptor(((Statechart) rootContainer).getDomainID());
+					else {
+						return getDomainDescriptor(((Statechart) getStatechart(object)).getDomainID());
+					}
+				}
+				
+				protected static Statechart getStatechart(EObject context) {
+					final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
+							ContextElementAdapter.class);
+			
+					if (provider == null) {
+						return EcoreUtil2.getContainerOfType(context, Statechart.class);
+					} else {
+						return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
+								SGraphPackage.Literals.STATECHART);
+					}
+				}
 }
