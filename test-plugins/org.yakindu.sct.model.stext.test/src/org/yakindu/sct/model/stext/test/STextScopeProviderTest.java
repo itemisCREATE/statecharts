@@ -90,8 +90,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 						statement, ruleName, scopes, isLinkable));
 		} catch (LinkingException e) {
 			if (isLinkable)
-				fail("Expected linkable but... '" + e.getMessage() + "'");
-			else if(e.getMessage().contains("Couldn't resolve reference to EObject"));
+				throw new RuntimeException("Expected linkable but : "+e.getMessage(),e);
 		}
 	}
 
