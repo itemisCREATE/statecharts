@@ -34,6 +34,7 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isVisible <em>Visible</em>}</li>
  * </ul>
  *
  * @generated
@@ -102,6 +103,26 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 * @ordered
 	 */
 	protected boolean abstract_ = ABSTRACT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VISIBLE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean visible = VISIBLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -216,6 +237,27 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisible(boolean newVisible) {
+		boolean oldVisible = visible;
+		visible = newVisible;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_ALIAS__VISIBLE, oldVisible, visible));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
@@ -258,6 +300,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return getConstraint();
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
 				return isAbstract();
+			case TypesPackage.TYPE_ALIAS__VISIBLE:
+				return isVisible();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -287,6 +331,9 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
 				setAbstract((Boolean)newValue);
 				return;
+			case TypesPackage.TYPE_ALIAS__VISIBLE:
+				setVisible((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -313,6 +360,9 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
+			case TypesPackage.TYPE_ALIAS__VISIBLE:
+				setVisible(VISIBLE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -334,6 +384,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return constraint != null && !constraint.isEmpty();
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
+			case TypesPackage.TYPE_ALIAS__VISIBLE:
+				return visible != VISIBLE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -359,6 +411,7 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 			switch (derivedFeatureID) {
 				case TypesPackage.TYPE_ALIAS__CONSTRAINT: return TypesPackage.TYPE__CONSTRAINT;
 				case TypesPackage.TYPE_ALIAS__ABSTRACT: return TypesPackage.TYPE__ABSTRACT;
+				case TypesPackage.TYPE_ALIAS__VISIBLE: return TypesPackage.TYPE__VISIBLE;
 				default: return -1;
 			}
 		}
@@ -386,6 +439,7 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 			switch (baseFeatureID) {
 				case TypesPackage.TYPE__CONSTRAINT: return TypesPackage.TYPE_ALIAS__CONSTRAINT;
 				case TypesPackage.TYPE__ABSTRACT: return TypesPackage.TYPE_ALIAS__ABSTRACT;
+				case TypesPackage.TYPE__VISIBLE: return TypesPackage.TYPE_ALIAS__VISIBLE;
 				default: return -1;
 			}
 		}
