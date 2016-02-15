@@ -45,4 +45,13 @@
         comment="Name suffix"
         optional="true"/>
   </types>
+  <types name="SynchronizedWrapper"
+      optional="true">
+    <parameters
+        name="namePrefix"
+        optional="true"/>
+    <parameters
+        name="nameSuffix"
+        optional="true"/>
+  </types>
 </sgen:FeatureTypeLibrary>

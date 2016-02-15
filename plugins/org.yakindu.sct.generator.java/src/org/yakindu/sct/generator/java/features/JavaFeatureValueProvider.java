@@ -42,10 +42,18 @@ public class JavaFeatureValueProvider extends AbstractDefaultFeatureValueProvide
 			parameterValue.setValue("org.yakindu.sct");
 		} else if (parameterValue.getParameter().getName().equals(IMPLEMENTATION_SUFFIX)) {
 			parameterValue.setValue("impl");
-		} else if (parameterValue.getParameter().getName().equals(NAME_PREFIX)) {
-			parameterValue.setValue("Runnable");
-		} else if (parameterValue.getParameter().getName().equals(NAME_SUFFIX)) {
-			parameterValue.setValue("");
+		} else if (featureType.getName().equals(FEATURE_RUNNABLE_WRAPPER)) {
+			if (parameterValue.getParameter().getName().equals(VALUE_NAME_PREFIX)) {
+				parameterValue.setValue(RUNNABLE_WRAPPER_NAME_PREFIX_DEFAULT);
+			} else if (parameterValue.getParameter().getName().equals(VALUE_NAME_SUFFIX)) {
+				parameterValue.setValue(RUNNABLE_WRAPPER_NAME_SUFFIX_DEFAULT);
+			}
+		} else if (featureType.getName().equals(FEATURE_SYCHRONIZED_WRAPPER)) {
+			if (parameterValue.getParameter().getName().equals(VALUE_NAME_PREFIX)) {
+				parameterValue.setValue(SYCHRONIZED_WRAPPER_NAME_PREFIX_DEFAULT);
+			} else if (parameterValue.getParameter().getName().equals(VALUE_NAME_SUFFIX)) {
+				parameterValue.setValue(SYCHRONIZED_WRAPPER_NAME_SUFFIX_DEFAULT);
+			}
 		}
 	}
 

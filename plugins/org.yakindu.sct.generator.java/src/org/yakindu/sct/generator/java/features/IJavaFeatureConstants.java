@@ -44,14 +44,21 @@ public interface IJavaFeatureConstants {
 	
 	/* Constants related to the RunnableWrapper feature */
 	
-	public static final String RUNNABLE_WRAPPER = "RunnableWrapper";
+	public static final String FEATURE_RUNNABLE_WRAPPER = "RunnableWrapper";
 	
-	public static final String NAME_PREFIX = "namePrefix";
+	public static final String RUNNABLE_WRAPPER_NAME_PREFIX_DEFAULT = "";
 	
-	public static final String NAME_SUFFIX = "nameSuffix";
+	public static final String RUNNABLE_WRAPPER_NAME_SUFFIX_DEFAULT = "Runnable";
 	
+	public static final String FEATURE_SYCHRONIZED_WRAPPER = "SynchronizedWrapper";
 	
+	public static final String SYCHRONIZED_WRAPPER_NAME_PREFIX_DEFAULT = "Synchronized";
 	
+	public static final String SYCHRONIZED_WRAPPER_NAME_SUFFIX_DEFAULT = "";
+	
+	public static final String VALUE_NAME_PREFIX = "namePrefix";
+	
+	public static final String VALUE_NAME_SUFFIX = "nameSuffix";
 	
 	public static final String[] JAVA_KEYWORDS = { "abstract", "assert",
 		"boolean", "break", "byte", "case", "catch", "char", "class",

@@ -1,71 +1,70 @@
 /**
-  Copyright (c) 2015 committers of YAKINDU and others.
-  All rights reserved. This program and the accompanying materials
-  are made available under the terms of the Eclipse Public License v1.0
-  which accompanies this distribution, and is available at
-  http://www.eclipse.org/legal/epl-v10.html
-  Contributors:
-  	Axel Terfloth - Initial contribution and API
-*/
+ *   Copyright (c) 2015 committers of YAKINDU and others.
+ *   All rights reserved. This program and the accompanying materials
+ *   are made available under the terms of the Eclipse Public License v1.0
+ *   which accompanies this distribution, and is available at
+ *   http://www.eclipse.org/legal/epl-v10.html
+ *   Contributors:
+ *   	Markus Mühlbrandt - Initial contribution and API
+ */
 
 package org.yakindu.sct.generator.java
 
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.base.types.typesystem.ITypeSystem
+import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.typesystem.GenericTypeSystem
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.java.features.CycleBasedWrapperFeature
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+
+import static org.eclipse.xtext.util.Strings.*
 
 /**
- * Generates the runnable wrapper for the state machine. This wrapper implies event based execution semantics. 
+ * Generates the cycle bases synchronized wrapper for the state machine.
  */
-class RunnableWrapper {
+class CycleBasedSynchronizedWrapper {
 
 	@Inject protected extension GenmodelEntries
-	@Inject protected extension RunnableFeature
+	@Inject protected extension CycleBasedWrapperFeature
 
 	@Inject protected extension Naming
 	@Inject protected extension Navigation
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ICodegenTypeSystemAccess
-	
-	
-	@Inject Beautifier beautifier
-	
-	
-	def generateRunnableWrapper(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		
-		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.runnableWrapperClassName(entry).java
+
+	def generateCycleWrapper(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
+
+		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.cycleWrapperClassName(entry).java
 		var content = content(flow, entry)
-//		var content = beautifier.format(filename, content(flow, entry))
 		fsa.generateFile(filename, content)
 	}
-	
-	
+
 	def protected content(ExecutionFlow flow, GeneratorEntry entry) '''
 		«entry.licenseText»
 		package «flow.getImplementationPackageName(entry)»;
 		«flow.createImports(entry)»
 		
 		/**
-		 * Runnable wrapper of «flow.statemachineClassName». This wrapper provides a thread-safe, runnable instance of the state machine.
-		 * The wrapper implements the {@link Runnable} interface and can be started in a thread by the client code. 
-		 * The run method then starts the main event processing loop for this state machine.
+		 * Runnable wrapper of «flow.statemachineClassName». This wrapper provides a thread-safe
+		 * instance of the state machine.
 		 * 
-		 * This feature is in beta state. Currently not supported are
-		 * - interface observer
-		 * - operation callbacks
-		 * 
-		 * Please report bugs and issues... 
+		 * Please report bugs and issues...
 		 */
 		
-		public class «flow.runnableWrapperClassName(entry)» implements «flow.statemachineInterfaceName», Runnable {
+		public class «flow.cycleWrapperClassName(entry)» implements «flow.statemachineInterfaceName» {
 			
 			«flow.createFieldDeclarations(entry)»
+			
+			public «flow.cycleWrapperClassName(entry)»() {
+				«FOR scope : flow.interfaceScopes»
+					«scope.interfaceName.asEscapedIdentifier» = new «scope.wrapperInterfaceName(entry)»();
+				«ENDFOR»
+			}
+			
 			«flow.interfaceAccessors»
 			«flow.timingFunctions(entry)»
 			
@@ -114,6 +113,14 @@ class RunnableWrapper {
 				}
 			}
 			
+			/**
+			 * isStateActive() will be delegated thread-safely to the wrapped state machine.  
+			 */
+			public boolean isStateActive(State state) {
+				synchronized(statemachine) {
+					return statemachine.isStateActive(state);
+				}
+			}
 			
 			/**
 			 * runCycle() will be delegated thread-safely to the wrapped state machine.  
@@ -124,105 +131,67 @@ class RunnableWrapper {
 					statemachine.runCycle();
 				}
 			}
-
-			/**
-			 * This method will start the main execution loop for the state machine. 
-			 * First it will init and enter the state machine implicitly and then will start processing events 
-			 * from the event queue until the thread is interrupted. 
-			 */
-			@Override
-			public void run() {
-			
-				boolean terminate = false;
-				
-				while(!(terminate || Thread.currentThread().isInterrupted())) {
-			
-					try {
-						
-						Runnable eventProcessor = eventQueue.take();
-						eventProcessor.run();
-						
-					} catch (InterruptedException e) {
-						terminate = true;
-					}
-				}			
-			}
-
-			
 		}
 	'''
-	
-	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
-		import java.util.concurrent.BlockingQueue;
-		import java.util.concurrent.LinkedBlockingQueue;
 
+	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
 		«IF entry.createInterfaceObserver && flow.hasOutgoingEvents»
-		import java.util.LinkedList;
-		import java.util.List;
+			import java.util.List;
+			
 		«ENDIF»
 		«IF flow.timed»
 			import «entry.getBasePackageName()».ITimer;
 			import «entry.getBasePackageName()».ITimerCallback;
 		«ENDIF»
+		import «flow.getImplementationPackageName(entry)».«flow.statemachineClassName».State;
 	'''
-	
-	def protected createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
-		
-		/** 
-		 * The events are queued using a blocking queue without capacity restriction. This queue holds
-		 * Runnable instances that process the events. 
-		 */
-		protected BlockingQueue<Runnable> eventQueue = new LinkedBlockingQueue<Runnable>();
 
+	def protected createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
 		/**
-		 * The core state machine is simply wrapped and the event processing will be delegated to that state machine instance.
-		 * This instance will be created implicitly.
+		 * The core state machine is simply wrapped and the event processing will be
+		 * delegated to that state machine instance. This instance will be created
+		 * implicitly.
 		 */
 		protected «flow.statemachineClassName» statemachine = new «flow.statemachineClassName»();
 		
-		«FOR scope : flow.interfaceScopes»
-		/**
-		 * Interface object for «scope.interfaceName»
-		 */		
-		protected «scope.interfaceName» «scope.interfaceName.asEscapedIdentifier» = new «scope.interfaceName»() {
-			«scope.toImplementation(entry)»
-		};
-		
+		«FOR scope : flow.interfaceScopes SEPARATOR newLine»
+			/**
+			 * Interface object for «scope.interfaceName»
+			 */		
+			protected class «scope.wrapperInterfaceName(entry)» implements «scope.interfaceName» {
+				«scope.toImplementation(entry)»
+			};
+			
+			protected «scope.interfaceName» «scope.interfaceName.asEscapedIdentifier»;
 		«ENDFOR»
-		
 	'''
-	
-	
-	def protected toImplementation(InterfaceScope scope, GeneratorEntry entry) '''				
+
+	def protected toImplementation(InterfaceScope scope, GeneratorEntry entry) '''
+		
+		«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
+			«scope.generateListeners»
+		«ENDIF»
+		«IF scope.hasOperations»
+			«scope.generateOperationCallback»
+		«ENDIF»
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction == Direction::IN»
 				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 					public void raise«event.name.asName»(final «event.type.targetLanguageName» value) {
 						
-						eventQueue.add( new Runnable() {
-							
-							@Override
-							public void run() {
-								synchronized (statemachine) {
-									statemachine.get«scope.interfaceName»().raise«event.name.asName»(value);
-									statemachine.runCycle();
-								}
-							}
-						});
+						synchronized (statemachine) {
+							statemachine.get«scope.interfaceName»().raise«event.name.asName»(value);
+							statemachine.runCycle();
+						}
 					}
 					
 				«ELSE»
 					public void raise«event.name.asName»() {
-						eventQueue.add( new Runnable() {
-							
-							@Override
-							public void run() {
-								synchronized (statemachine) {
-									statemachine.get«scope.interfaceName»().raise«event.name.asName»();
-									statemachine.runCycle();
-								}
-							}
-						});
+						
+						synchronized (statemachine) {
+							statemachine.get«scope.interfaceName»().raise«event.name.asName»();
+							statemachine.runCycle();
+						}
 					}
 					
 				«ENDIF»
@@ -260,19 +229,36 @@ class RunnableWrapper {
 			«ENDIF»
 		«ENDFOR»
 	'''
-
+	
+	protected def generateListeners(InterfaceScope scope) '''
+		public List<«scope.getInterfaceListenerName»> getListeners() {
+			synchronized(statemachine) {
+				return statemachine.get«scope.interfaceName»().getListeners();
+			}
+		}
+		
+	'''
+	
+	protected def generateOperationCallback(InterfaceScope scope) '''
+		public void set«scope.getInterfaceOperationCallbackName»(«scope.getInterfaceOperationCallbackName» operationCallback) {
+			synchronized(statemachine) {
+				statemachine.get«scope.interfaceName»().set«scope.getInterfaceOperationCallbackName»(operationCallback);
+			}
+		}
+		
+	'''
+	
 	def protected interfaceAccessors(ExecutionFlow flow) '''
 		«FOR scope : flow.interfaceScopes»
-			public «scope.interfaceName» get«scope.interfaceName»() {
+			public synchronized «scope.interfaceName» get«scope.interfaceName»() {
 				return «scope.interfaceName.asEscapedIdentifier»;
 			}
 		«ENDFOR»
 	'''
 
-
 	def protected timingFunctions(ExecutionFlow flow, GeneratorEntry entry) '''
 		«IF flow.timed»
-			/*========== TIME EVENT HANDLING ================
+			/*================ TIME EVENT HANDLING ================
 			
 			/** An external timer instance is required. */
 			protected ITimer externalTimer;
@@ -283,19 +269,18 @@ class RunnableWrapper {
 				@Override
 				public void setTimer(ITimerCallback callback, int eventID, long time,
 						boolean isPeriodic) {
-					externalTimer.setTimer(«flow.runnableWrapperClassName(entry)».this, eventID, time, isPeriodic);
+					externalTimer.setTimer(«flow.cycleWrapperClassName(entry)».this, eventID, time, isPeriodic);
 				}
 				
 				@Override
 				public void unsetTimer(ITimerCallback callback, int eventID) {
-					externalTimer.unsetTimer(«flow.runnableWrapperClassName(entry)».this, eventID);
+					externalTimer.unsetTimer(«flow.cycleWrapperClassName(entry)».this, eventID);
 				}
 			};
 			
 			/**
-			 * Set the {@link ITimer} for the state machine. It must be set
-			 * externally on a timed state machine before a run cycle can be correct
-			 * executed.
+			 * Set the {@link ITimer} for the state machine. It must be set externally
+			 * on a timed state machine before a run cycle can be correct executed.
 			 * 
 			 * @param timer
 			 */
@@ -317,19 +302,11 @@ class RunnableWrapper {
 			}
 			
 			public void timeElapsed(int eventID) {
-				eventQueue.add(new Runnable() {
-
-					@Override
-					public void run() {
-						synchronized (statemachine) {
-							statemachine.timeElapsed(eventID);
-							statemachine.runCycle();
-						}
-					}
-				});
+				synchronized (statemachine) {
+					statemachine.timeElapsed(eventID);
+				}
 			}
-			
 		«ENDIF»
 	'''
-	
+
 }
