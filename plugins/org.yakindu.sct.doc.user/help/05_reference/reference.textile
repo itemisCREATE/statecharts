@@ -576,6 +576,14 @@ feature Naming {
 }
 p. ==<!-- End sgen_feature_naming -->==	
 
+==<!-- Start sgen_feature_synchronizedwrapper -->==
+
+h4. SynchronizedWrapper
+
+Add documentation for synchronized wrapper here.
+
+p. ==<!-- End sgen_feature_synchronizedwrapper -->==
+
 ==<!-- Start sgen_feature_runnablewrapper -->==
 
 h4. RunnableWrapper
@@ -593,8 +601,8 @@ Sample configuration:
 
 bc(prettyprint).. 
 feature RunnableWrapper {
-	namePrefix = "org.yakindu.sct"
-	nameSuffix = "Impl"
+	namePrefix = ""
+	nameSuffix = "Runnable"
 }
 p. ==<!-- End sgen_feature_runnablewrapper -->==
 
