@@ -186,6 +186,18 @@ table.scedit img {
     margin-bottom: 2ex;
 }
 
+.warning {
+	padding-left: 1em;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    background: #ffd0d0;
+    margin-top: 0ex;
+    margin-left: 0ex;
+    margin-right: 0ex;
+    margin-bottom: 2ex;
+}
+
 .note h3 {
     font-size: 60%;
 	line-height: 100%;
