@@ -36,6 +36,8 @@ import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
+import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
+import org.eclipse.xtext.EcoreUtil2
 
 /**
  * 
@@ -56,6 +58,8 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	@Inject protected extension ExecutionContextExtensions
 	@Inject
 	protected StateVectorExtensions stateVectorExtensions;
+	@Inject
+	protected StatechartExtensions statechartExtensions;
 
 	protected ExecutionFlow flow
 	protected ExecutionContext executionContext
@@ -84,8 +88,26 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 			flow.enterSequences?.defaultSequence?.scheduleAndRun
 		else {
 			executionContext.activeStates.forEach[state|
-				activeStateConfiguration.set(state.toExecutionState.stateVector.offset, state.toExecutionState)]
+				activeStateConfiguration.set(state.toExecutionState.stateVector.offset, state.toExecutionState)
+				// schedule all time events
+				state.toExecutionState.enterSequences?.scheduledTimeEvents?.scheduleAndRun
+			]
 		}
+	}
+	
+	def Sequence getScheduledTimeEvents(List<Sequence> enterSequences) {
+		val seq = factory.createSequence
+		for (sequence : enterSequences) {
+			val timeEvents = EcoreUtil2.getAllContentsOfType(sequence, ScheduleTimeEvent)
+			seq.steps.addAll(timeEvents)
+			
+			val calls = EcoreUtil2.getAllContentsOfType(sequence, Call)
+			for (call : calls) {
+				val calledTimeEvents = EcoreUtil2.getAllContentsOfType(call.step, ScheduleTimeEvent)
+				seq.steps.addAll(calledTimeEvents)
+			}
+		}
+		if (seq.steps.size > 0) seq else null
 	}
 
 	def ExecutionState toExecutionState(RegularState state) {
