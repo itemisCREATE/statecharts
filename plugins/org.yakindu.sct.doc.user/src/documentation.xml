@@ -7,16 +7,16 @@
 -->
 <article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
  <info>
-  <title>YAKINDU Statechart Tools Documentation</title>
-  <date>
-<?dbtimestamp format="Y-m-d H:M:S"?>
-  </date>
+  <title>YAKINDU Statechart Tools</title>
+  <subtitle><phrase>Version <?dbtimestamp format="Y-m-d H:M:S"?></phrase></subtitle>
+  <copyright>
+   <year><?dbtimestamp format="Y"?></year>
+   <holder>itemis AG</holder>
+  </copyright>
  </info>
 
  <sect1 xml:id="yakindu-statechart-tools-installation-guide">
   <title>YAKINDU Statechart Tools Installation Guide</title>
-
-  <para>This document was generated <?dbtimestamp format="Y-m-d H:M:S"?>.</para>
 
   <para>In order to start working with <application>YAKINDU Statechart Tools</application>, you have to install
    the software on your computer. We are assuming you have downloaded the software package and stored it somewhere
@@ -875,7 +875,8 @@ yakindu-sct/SCT
      implementation of full-blown IDEs for programming languages, you name it. The itemis YAKINDU developers do not 
      only know the framework very well but are also experts in programming and domain-specific language 
      design<indexterm><primary>domain-specific language design</primary></indexterm>. If you need an advice get in 
-     contact with itemis' YAKINDU team (<link xl:href="http://www.yakindu.de/">http://www.yakindu.de/</link> ).</para>
+     contact with itemis' YAKINDU team
+     (<link xl:href="https://info.itemis.com/contact">https://info.itemis.com/contact</link> ).</para>
    </sect3>
 
 
