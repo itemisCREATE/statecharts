@@ -7,6 +7,7 @@
          xmlns:artifact="antlib:org.eclipse.aether.ant">
 
     <property file="build.properties" />
+    <property file="local.properties" />
 
     <!-- The documentation source files are located here: -->
     <property name="src.basename" value="documentation" />
@@ -52,7 +53,8 @@
 
     <!-- This directory contains our project-specific DocBook XSL customization layer as templates with to-be-resolved
          references to the unpacked DocBook XSL distribution: -->
-    <property name="docbook-xsl.dir.tmpl" location="${basedir}/docbook-xsl.tmpl" />
+    <property name="docbook-xsl.dir.tmpl.name" value="docbook-xsl.tmpl" />
+    <property name="docbook-xsl.dir.tmpl" location="${basedir}/${docbook-xsl.dir.tmpl.name}" />
 
     <!-- This directory contains our project-specific DocBook XSL customization layer with references being resolved to
          point to the unpacked DocBook XSL distribution: -->
@@ -82,9 +84,9 @@
 
 
     <!-- Aether Ant Tasks are used to access Maven dependencies from an Ant build. It is initialized by downloading
-		 the Aether Ant Tasks JAR to the library folder, if needed. The downloaded JAR will not be removed by the
-		 "clean" target. If the JAR is present, a typedef will make Aether Ant Tasks' elements available in the Ant
-		 build file. -->
+         the Aether Ant Tasks JAR to the library folder, if needed. The downloaded JAR will not be removed by the
+         "clean" target. If the JAR is present, a typedef will make Aether Ant Tasks' elements available in the Ant
+         build file. -->
     <target name="init.aether"
             description="Initialized Aether Ant Tasks JAR by downloading the JAR and defining a type.">
         <condition property="target.exists">
@@ -191,7 +193,7 @@
 
 
     <!-- Initializes DocBook XSL by unpacking the distribution ZIP file and resolving the references in our
-		 customization layer template files. -->
+         customization layer template files. -->
     <target name="init.docbook-xsl"
             description="Initializes DocBook XSL by unpacking the distribution ZIP file and resolving the references in our customization layer template files."
             depends="init.dependencies">
@@ -218,7 +220,8 @@
               classpathref="xerces.classpath"
               output="${res.dir.name}/${res.basename}.xml"
               logerror="true"
-              failonerror="true">
+              failonerror="true"
+              fork="true">
             <arg value="-np" />
             <arg value="-xi" />
             <arg value="${src.dir}/${src.basename}.xml" />
