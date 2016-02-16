@@ -17,9 +17,9 @@
  
 «DEFINE main(sgen::GeneratorEntry entry) FOR sexec::ExecutionFlow-»
 «FILE this.name+'.txt' -»
-The name of the Statemachine is '«this.name-»'
+The name of the state machine is '«this.name-»'
 
-The Statemachine has the following states:
+The state machine has the following states:
 
 «FOREACH this.states AS state-»
 «state.name.replaceFirst(this.name+'\\.','')»

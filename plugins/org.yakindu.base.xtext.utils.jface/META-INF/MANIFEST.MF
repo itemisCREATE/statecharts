@@ -5,14 +5,14 @@ Bundle-SymbolicName: org.yakindu.base.xtext.utils.jface;singleton:=true
 Bundle-Version: 2.5.0.qualifier
 Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.6.0,4.0.0)",
- org.eclipse.core.expressions;bundle-version="[3.4.0,4.0.0)",
- org.eclipse.ui.ide;bundle-version="[3.6.0,4.0.0)",
- org.eclipse.jface;bundle-version="[3.6.0,4.0.0)",
- org.eclipse.jface.text;bundle-version="[3.6.0,4.0.0)",
- org.eclipse.emf.common;bundle-version="[2.6.0,3.0.0)",
- org.eclipse.xtext.ui;bundle-version="[2.0.0,3.0.0)",
- org.eclipse.help;bundle-version="3.5.0"
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.expressions,
+ org.eclipse.ui.ide,
+ org.eclipse.jface,
+ org.eclipse.jface.text,
+ org.eclipse.emf.common,
+ org.eclipse.xtext.ui,
+ org.eclipse.help
 Export-Package: org.yakindu.base.utils.jface.help;
   uses:="org.eclipse.jface.text,
    org.eclipse.emf.ecore,

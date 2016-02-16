@@ -10,8 +10,9 @@
  */
 package org.yakindu.sct.simulation.ui.view.editing;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ColumnViewer;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 
 /**
@@ -21,27 +22,28 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
  */
 public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 
-	protected abstract Class<?> getSupportedType();
+	protected abstract Type getSupportedType();
 
 	protected abstract Object convertValue(Object element, Object value);
 
-	public ScopeSlotEditingSupport(ColumnViewer viewer) {
+	public interface ITypeSystemProvider {
+		ITypeSystem getTypeSystem();
+	}
+
+	protected ITypeSystemProvider provider;
+
+	public ScopeSlotEditingSupport(ColumnViewer viewer, ITypeSystemProvider provider) {
 		super(viewer);
+		this.provider = provider;
 	}
 
 	@Override
 	public boolean canEdit(Object element) {
 		if (element instanceof ExecutionSlot) {
-			if(!((ExecutionSlot) element).isWritable())
+			if (!((ExecutionSlot) element).isWritable())
 				return false;
-			Object value = ((ExecutionSlot) element).getValue();
-			if (value == null) {
-				return false;
-			} else if (value instanceof EObject) {
-				return getSupportedType().isAssignableFrom(((EObject) value).eClass().getInstanceClass());
-			} else {
-				return getSupportedType().isAssignableFrom(value.getClass());
-			}
+			Type type = ((ExecutionSlot) element).getType();
+			return provider.getTypeSystem().haveCommonType(type, getSupportedType());
 		}
 		return false;
 	}

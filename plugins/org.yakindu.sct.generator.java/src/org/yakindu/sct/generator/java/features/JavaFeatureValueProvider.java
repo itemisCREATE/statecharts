@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 
 /**
@@ -29,25 +30,30 @@ import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
  * @author terfloth - extensions
  * 
  */
-public class JavaFeatureValueProvider extends
-		AbstractDefaultFeatureValueProvider {
+public class JavaFeatureValueProvider extends AbstractDefaultFeatureValueProvider {
 
-	private static final String PACKAGE_NAME_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*\\.)+[a-zA-Z_][a-zA-Z0-9_]*";
+	private static final String PACKAGE_NAME_REGEX = "([a-zA-Z_][a-zA-Z0-9_\\.]*)+[a-zA-Z_][a-zA-Z0-9_]*";
 	private static final String SUFFIX_REGEX = "[a-zA-Z0-9_]*";
 
 	@Override
-	protected void setDefaultValue(FeatureParameterValue parameterValue,
+	protected void setDefaultValue(FeatureType featureType, FeatureParameterValue parameterValue,
 			EObject contextElement) {
 		if (parameterValue.getParameter().getName().equals(BASE_PACKAGE)) {
 			parameterValue.setValue("org.yakindu.sct");
-					//+ JavaFeatureConstants.getValidStatemachineName(statechart.getName()));
-		} else if (parameterValue.getParameter().getName()
-				.equals(IMPLEMENTATION_SUFFIX)) {
+		} else if (parameterValue.getParameter().getName().equals(IMPLEMENTATION_SUFFIX)) {
 			parameterValue.setValue("impl");
-		} else if (parameterValue.getParameter().getName().equals(NAME_PREFIX)) {
-			parameterValue.setValue("Runnable");
-		} else if (parameterValue.getParameter().getName().equals(NAME_SUFFIX)) {
-			parameterValue.setValue("");
+		} else if (featureType.getName().equals(FEATURE_RUNNABLE_WRAPPER)) {
+			if (parameterValue.getParameter().getName().equals(VALUE_NAME_PREFIX)) {
+				parameterValue.setValue(RUNNABLE_WRAPPER_NAME_PREFIX_DEFAULT);
+			} else if (parameterValue.getParameter().getName().equals(VALUE_NAME_SUFFIX)) {
+				parameterValue.setValue(RUNNABLE_WRAPPER_NAME_SUFFIX_DEFAULT);
+			}
+		} else if (featureType.getName().equals(FEATURE_SYCHRONIZED_WRAPPER)) {
+			if (parameterValue.getParameter().getName().equals(VALUE_NAME_PREFIX)) {
+				parameterValue.setValue(SYCHRONIZED_WRAPPER_NAME_PREFIX_DEFAULT);
+			} else if (parameterValue.getParameter().getName().equals(VALUE_NAME_SUFFIX)) {
+				parameterValue.setValue(SYCHRONIZED_WRAPPER_NAME_SUFFIX_DEFAULT);
+			}
 		}
 	}
 
@@ -63,12 +69,10 @@ public class JavaFeatureValueProvider extends
 			}
 			// Filter out java keywords
 			for (String keyword : Arrays.asList(JAVA_KEYWORDS)) {
-				Pattern pattern = Pattern.compile("(?:^|\\.)" + keyword
-						+ "(?:$|\\.)");
+				Pattern pattern = Pattern.compile("(?:^|\\.)" + keyword + "(?:$|\\.)");
 				Matcher matcher = pattern.matcher(value.getStringValue());
 				while (matcher.find()) {
-					return error("Java keyword '" + matcher.group()
-							+ "' is not allowed in package names.");
+					return error("Java keyword '" + matcher.group() + "' is not allowed in package names.");
 				}
 			}
 		}
@@ -80,8 +84,7 @@ public class JavaFeatureValueProvider extends
 				Pattern pattern = Pattern.compile("^" + keyword + "$");
 				Matcher matcher = pattern.matcher(value.getStringValue());
 				while (matcher.find()) {
-					return error("Java keyword '" + matcher.group()
-							+ "' is not allowed as suffix.");
+					return error("Java keyword '" + matcher.group() + "' is not allowed as suffix.");
 				}
 			}
 

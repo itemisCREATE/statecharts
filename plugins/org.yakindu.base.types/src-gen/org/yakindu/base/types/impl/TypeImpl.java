@@ -26,11 +26,12 @@ import org.yakindu.base.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeImpl#isVisible <em>Visible</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -64,6 +65,26 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 	 * @ordered
 	 */
 	protected boolean abstract_ = ABSTRACT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VISIBLE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isVisible() <em>Visible</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVisible()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean visible = VISIBLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -118,6 +139,27 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisible(boolean newVisible) {
+		boolean oldVisible = visible;
+		visible = newVisible;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE__VISIBLE, oldVisible, visible));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
@@ -153,6 +195,8 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 				return getConstraint();
 			case TypesPackage.TYPE__ABSTRACT:
 				return isAbstract();
+			case TypesPackage.TYPE__VISIBLE:
+				return isVisible();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -173,6 +217,9 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 			case TypesPackage.TYPE__ABSTRACT:
 				setAbstract((Boolean)newValue);
 				return;
+			case TypesPackage.TYPE__VISIBLE:
+				setVisible((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -191,6 +238,9 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 			case TypesPackage.TYPE__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
+			case TypesPackage.TYPE__VISIBLE:
+				setVisible(VISIBLE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -207,6 +257,8 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 				return constraint != null && !constraint.isEmpty();
 			case TypesPackage.TYPE__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
+			case TypesPackage.TYPE__VISIBLE:
+				return visible != VISIBLE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

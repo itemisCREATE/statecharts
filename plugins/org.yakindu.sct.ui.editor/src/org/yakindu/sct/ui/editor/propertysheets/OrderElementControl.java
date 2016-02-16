@@ -17,12 +17,14 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.emf.commands.core.commands.RepositionEObjectCommand;
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -32,10 +34,12 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.yakindu.base.gmf.runtime.util.EditPartUtils;
@@ -65,12 +69,14 @@ public class OrderElementControl extends Composite {
 	}
 
 	private ISourceObjectCallback callback;
+	private String placeholder;
 
-	public OrderElementControl(Composite parent,
-			EStructuralFeature toManyFeature, ISourceObjectCallback callback) {
+	public OrderElementControl(Composite parent, EStructuralFeature toManyFeature, ISourceObjectCallback callback,
+			String placeholder) {
 		super(parent, SWT.NONE);
 		this.toManyFeature = toManyFeature;
 		this.callback = callback;
+		this.placeholder = placeholder;
 		toolkit = new FormToolkit(parent.getDisplay());
 		upButtonListener = new ButtonSelectionListener(-1);
 		downButtonListener = new ButtonSelectionListener(1);
@@ -80,12 +86,15 @@ public class OrderElementControl extends Composite {
 		init();
 	}
 
+	public OrderElementControl(Composite parent, EStructuralFeature toManyFeature, ISourceObjectCallback callback) {
+		this(parent, toManyFeature, callback, "");
+	}
+
 	private void init() {
 		this.setLayout(new GridLayout(2, false));
 		viewer = new TableViewer(this, SWT.SINGLE | SWT.BORDER);
 		viewer.setContentProvider(new ArrayContentProvider());
-		viewer.setLabelProvider(new AdapterFactoryLabelProvider(
-				new SGraphItemProviderAdapterFactory()));
+		viewer.setLabelProvider(new AdapterFactoryLabelProvider(new SGraphItemProviderAdapterFactory()));
 		Composite buttonComposite = getToolkit().createComposite(this);
 		buttonComposite.setLayout(new FillLayout(SWT.VERTICAL));
 		btnUp = getToolkit().createButton(buttonComposite, "up", SWT.PUSH);
@@ -96,8 +105,7 @@ public class OrderElementControl extends Composite {
 		btnDown.addSelectionListener(downButtonListener);
 		GridDataFactory.fillDefaults().applyTo(viewer.getControl());
 		GridDataFactory.fillDefaults().applyTo(buttonComposite);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(viewer.getControl());
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(viewer.getControl());
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(this);
 	}
 
@@ -110,8 +118,7 @@ public class OrderElementControl extends Composite {
 	}
 
 	protected EObject getSelectedObject() {
-		return (EObject) ((StructuredSelection) viewer.getSelection())
-				.getFirstElement();
+		return (EObject) ((StructuredSelection) viewer.getSelection()).getFirstElement();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -121,7 +128,16 @@ public class OrderElementControl extends Composite {
 
 	public void refreshInput() {
 		ISelection selection = viewer.getSelection();
-		viewer.setInput(getListInput());
+		EList<EObject> listInput = getListInput();
+		viewer.setInput(listInput);
+		if (listInput.isEmpty()) {
+			viewer.getTable().clearAll();
+			TableItem item = new TableItem(viewer.getTable(), SWT.NONE);
+			item.setData(EcoreFactory.eINSTANCE.createEObject());
+			item.setText(placeholder);
+		} else {
+			viewer.setSelection(selection);
+		}
 		viewer.setSelection(selection);
 	}
 
@@ -135,12 +151,10 @@ public class OrderElementControl extends Composite {
 
 		public void widgetSelected(SelectionEvent e) {
 			RepositionEObjectCommand command = new RepositionEObjectCommand(
-					TransactionUtil.getEditingDomain(callback.getEObject()),
-					"Reorder Elements", getListInput(), getSelectedObject(),
-					displacement);
+					TransactionUtil.getEditingDomain(callback.getEObject()), "Reorder Elements", getListInput(),
+					getSelectedObject(), displacement);
 			try {
-				OperationHistoryFactory.getOperationHistory().execute(command,
-						new NullProgressMonitor(), null);
+				OperationHistoryFactory.getOperationHistory().execute(command, new NullProgressMonitor(), null);
 			} catch (ExecutionException e1) {
 				e1.printStackTrace();
 			}
@@ -148,8 +162,7 @@ public class OrderElementControl extends Composite {
 		}
 	}
 
-	private final class EnableButtonListener implements
-			ISelectionChangedListener {
+	private final class EnableButtonListener implements ISelectionChangedListener {
 
 		public void selectionChanged(SelectionChangedEvent event) {
 			EList<EObject> listInput = getListInput();
@@ -170,24 +183,17 @@ public class OrderElementControl extends Composite {
 		}
 	}
 
-	private final class EditPartSelectionListener implements
-			ISelectionChangedListener {
+	private final class EditPartSelectionListener implements ISelectionChangedListener {
 		public void selectionChanged(SelectionChangedEvent event) {
-			IEditorPart lastActiveEditor = ActiveEditorTracker
-					.getLastActiveEditor();
+			IEditorPart lastActiveEditor = ActiveEditorTracker.getLastActiveEditor();
 			EObject selectedObject = getSelectedObject();
-			if (lastActiveEditor instanceof DiagramDocumentEditor
-					&& selectedObject != null) {
-				IGraphicalEditPart editPart = EditPartUtils
-						.findEditPartForSemanticElement(
-								((DiagramDocumentEditor) lastActiveEditor)
-										.getDiagramGraphicalViewer()
-										.getRootEditPart(), selectedObject);
+			if (lastActiveEditor instanceof DiagramDocumentEditor && selectedObject != null) {
+				IGraphicalEditPart editPart = EditPartUtils.findEditPartForSemanticElement(
+						((DiagramDocumentEditor) lastActiveEditor).getDiagramGraphicalViewer().getRootEditPart(),
+						selectedObject);
 				if (editPart != null) {
-					((DiagramDocumentEditor) lastActiveEditor)
-							.getDiagramGraphicalViewer().select(editPart);
-					((DiagramDocumentEditor) lastActiveEditor)
-							.getDiagramGraphicalViewer().reveal(editPart);
+					((DiagramDocumentEditor) lastActiveEditor).getDiagramGraphicalViewer().select(editPart);
+					((DiagramDocumentEditor) lastActiveEditor).getDiagramGraphicalViewer().reveal(editPart);
 				}
 			}
 		}

@@ -1,6 +1,57 @@
 GeneratorModel for yakindu::java {
 
 	
+	statechart entries.EntryReactionAction  {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+		
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
+	}
+
+
+	statechart expressions.TriggerExpressionPrecedence  {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+		
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
+	}
+	
 	statechart AlwaysOncycle {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1467,6 +1518,42 @@ GeneratorModel for yakindu::java {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+	}
+	
+	statechart WrapperTest {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			RuntimeService = true
+			InterfaceObserverSupport = true
+		}
+		
+		feature SynchronizedWrapper {
+			namePrefix =  "Synchronized" 
+			nameSuffix =  "" 
+		}
+	}
+	
+	statechart RunnableTest {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			RuntimeService = true
+			InterfaceObserverSupport = true
+		}
+		
+		feature RunnableWrapper {
+			namePrefix =  "" 
+			nameSuffix =  "Runnable" 
 		}
 	}	
 }

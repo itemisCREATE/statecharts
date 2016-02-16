@@ -23,9 +23,10 @@ Require-Bundle: org.eclipse.ui,
  org.yakindu.sct.ui,
  com.google.inject,
  org.eclipse.xtext.xbase.lib,
- org.apache.commons.lang;bundle-version="2.4.0",
- org.yakindu.sct.commons;bundle-version="1.0.0",
- org.eclipse.xtext;bundle-version="2.4.1"
+ org.apache.commons.lang,
+ org.yakindu.sct.commons,
+ org.eclipse.xtext,
+ org.yakindu.sct.domain
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.emf.edit.ui.provider,

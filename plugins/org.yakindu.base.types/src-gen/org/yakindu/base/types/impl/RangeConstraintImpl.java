@@ -14,11 +14,11 @@ import org.yakindu.base.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.RangeConstraintImpl#getLowerBound <em>Lower Bound</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.RangeConstraintImpl#getUpperBound <em>Upper Bound</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

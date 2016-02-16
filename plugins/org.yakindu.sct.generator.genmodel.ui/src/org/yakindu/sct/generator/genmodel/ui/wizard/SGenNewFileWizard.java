@@ -38,8 +38,9 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.part.FileEditorInput;
 import org.yakindu.sct.builder.nature.SCTNature;
 import org.yakindu.sct.builder.nature.ToggleSCTNatureAction;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
+import org.yakindu.sct.ui.wizards.ModelCreationWizardPage;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -55,7 +56,7 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 
 	public static final String ID = "org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard";
 
-	protected SGenWizardPage1 modelFilePage;
+	protected ModelCreationWizardPage modelFilePage;
 
 	private IStructuredSelection selection;
 
@@ -75,7 +76,7 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 
 	@Override
 	public void addPages() {
-		modelFilePage = new SGenWizardPage1("fileName", selection, "sgen");
+		modelFilePage = new ModelCreationWizardPage("fileName", selection, "sgen");
 		modelFilePage.setTitle("YAKINDU Generator Model");
 		modelFilePage.setDescription("Create a new YAKINDU Generator Model");
 		addPage(modelFilePage);
@@ -130,7 +131,7 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 
 	private Resource createDefaultModel(URI uri) {
 		List<EObject> selectedObjects = generatorConfigPage.getSelectedElements();
-		GeneratorDescriptor selectedGenerator = generatorConfigPage.getSelectedGenerator();
+		IGeneratorDescriptor selectedGenerator = generatorConfigPage.getSelectedGenerator();
 		ModelCreator creator = new ModelCreator(selectedGenerator, selectedObjects);
 		GeneratorModel model = creator.create();
 
@@ -152,4 +153,14 @@ public class SGenNewFileWizard extends Wizard implements INewWizard {
 		this.selection = selection;
 	}
 
+	@Override
+	public boolean canFinish() {
+		boolean complete = super.canFinish();
+		if (!complete)
+			return false;
+		if (getContainer().getCurrentPage() == modelFilePage)
+			return false;
+		else
+			return true;
+	}
 }

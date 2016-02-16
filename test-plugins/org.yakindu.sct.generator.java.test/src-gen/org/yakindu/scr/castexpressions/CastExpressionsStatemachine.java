@@ -60,7 +60,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	public void enter() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		enterSequence_main_region_default();
 	}
@@ -139,8 +139,8 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	}
 
 	private boolean check_main_region_B_tr0_tr0() {
-		return (true) && ((double) (sCInterface.getRealValue() * 0.1)) > ((long) 1.4)
-				&& ((long) (sCInterface.getRealValue() * sCInterface.getIntValue())) < ((double) 100);
+		return (true) && (((double) (sCInterface.getRealValue() * 0.1)) > ((long) 1.4)
+				&& ((long) (sCInterface.getRealValue() * sCInterface.getIntValue())) < ((double) 100));
 	}
 
 	private void effect_main_region_A_tr0() {
@@ -254,7 +254,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

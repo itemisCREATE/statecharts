@@ -12,6 +12,9 @@ package org.yakindu.sct.model.sexec.interpreter.test;
 
 import static org.junit.Assert.assertEquals;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.After;
@@ -19,15 +22,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.EnumerationType;
+import org.yakindu.base.types.Enumerator;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
+import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
+import org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl;
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl;
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl;
 
@@ -459,6 +467,39 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	public void testPlainFalse() {
 		assertEquals(false, executeExpression("false"));
 	}
+	
+	@Test
+	public void testEnumEqualsExpression() {
+		assertEquals(true, execute("internal: var enumVar : EnumType", "enumVar == EnumType.A"));
+	}
+
+	@Test
+	public void testEnumAssignment() {
+		execute("internal: var enumVar : EnumType", "enumVar = EnumType.A");
+		assertEquals(((EnumerationType)typeSystem.getType("EnumType")).getEnumerator().get(0), getEnumValue());
+	}
+	
+	@Test
+	public void testComplexTypeEqualsExpression() {
+		assertEquals(true, execute("internal: var cpVar : ComplexType", "cpVar.x == 0"));
+	}
+	
+	@Test
+	public void testComplexTypeAssignment() {
+		execute("internal: var cpVar : ComplexType", "cpVar.x = 42");
+		assertEquals(42L, context.getVariable("cpVar.x").getValue());
+	}
+	
+	@Test
+	public void testEqualsExpressionForComplexTypeAlias() {
+		assertEquals(true, execute("internal: alias MyComplexType : ComplexType var cpVar : MyComplexType", "cpVar.x == 0"));
+	}
+	
+	@Test
+	public void testAssignmentToComplexTypeAlias() {
+		execute("internal: alias MyComplexType : ComplexType var cpVar : MyComplexType", "cpVar.x = 42");
+		assertEquals(42L, context.getVariable("cpVar.x").getValue());
+	}
 
 	// Convenience...
 
@@ -503,6 +544,41 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		event.setFqName("abc");
 		event.setType(typeSystem.getType(GenericTypeSystem.INTEGER));
 		context.getSlots().add(event);
+		
+		ExecutionVariable enumVar = new ExecutionVariableImpl();
+		enumVar.setName("enumVar");
+		enumVar.setFqName("enumVar");
+		EnumerationType enumType = createEnumType();
+		enumVar.setType(enumType);
+		enumVar.setValue(enumType.getEnumerator().get(0));
+		context.getSlots().add(enumVar);
+		
+		CompositeSlot cpVar = new CompositeSlotImpl();
+		cpVar.setName("cpVar");
+		cpVar.setFqName("cpVar");
+		
+		ExecutionVariable featureVar = new ExecutionVariableImpl();
+		featureVar.setName("x");
+		featureVar.setFqName("cpVar.x");
+		featureVar.setType(typeSystem.getType(GenericTypeSystem.INTEGER));
+		featureVar.setValue(0);
+		cpVar.getSlots().add(featureVar);
+		context.getSlots().add(cpVar);
+	}
+	
+	private EnumerationType createEnumType() {
+		EnumerationType enumType = TypesFactory.eINSTANCE.createEnumerationType();
+		enumType.setName("EnumType");
+		
+		Enumerator enumA = TypesFactory.eINSTANCE.createEnumerator();
+		enumA.setName("A");
+		enumType.getEnumerator().add(enumA);
+		
+		typeSystem.declareType(enumType, enumType.getName());
+		
+		Resource resource = new ResourceImpl(URI.createURI("types2"));
+		resource.getContents().add(enumType);
+		return enumType;
 	}
 
 	protected Object getBoolValue() {
@@ -519,6 +595,10 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	protected Object getStringValue() {
 		return context.getVariable("stringVar").getValue();
+	}
+	
+	protected Object getEnumValue() {
+		return context.getVariable("enumVar").getValue();
 	}
 
 	protected Object executeWithDefaultScope(String expression) {

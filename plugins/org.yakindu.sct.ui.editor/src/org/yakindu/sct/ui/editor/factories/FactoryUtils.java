@@ -42,6 +42,7 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
  */
 public final class FactoryUtils {
 
+	private static final String INITIAL_SPECIFICATION = "interface:\n// Define events and\n// and variables here";
 	private static final int INITIAL_REGION_WIDTH = 400;
 	private static final int INITIAL_REGION_HEIGHT = 400;
 	private static final String INITIAL_REGION_NAME = "main region";
@@ -65,18 +66,15 @@ public final class FactoryUtils {
 	 */
 	@SuppressWarnings("unchecked")
 	public static Node createLabel(View owner, String hint) {
-		DecorationNode nameLabel = NotationFactory.eINSTANCE
-				.createDecorationNode();
+		DecorationNode nameLabel = NotationFactory.eINSTANCE.createDecorationNode();
 		nameLabel.setType(hint);
 
 		ShapeStyle style = NotationFactory.eINSTANCE.createShapeStyle();
-		style.setFontColor(FigureUtilities.RGBToInteger(ColorConstants.black
-				.getRGB()));
+		style.setFontColor(FigureUtilities.RGBToInteger(ColorConstants.black.getRGB()));
 		nameLabel.getStyles().add(style);
 
 		ViewUtil.insertChildView(owner, nameLabel, ViewUtil.APPEND, true);
-		nameLabel.setLayoutConstraint(NotationFactory.eINSTANCE
-				.createLocation());
+		nameLabel.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
 		return nameLabel;
 	}
 
@@ -86,8 +84,7 @@ public final class FactoryUtils {
 	 * @return instanceof {@link Statechart}
 	 */
 	public static void createStatechartModel(Resource resource) {
-		createStatechartModel(resource,
-				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
+		createStatechartModel(resource, DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 	}
 
 	/**
@@ -95,17 +92,15 @@ public final class FactoryUtils {
 	 * 
 	 * @return instanceof {@link Statechart}
 	 */
-	public static void createStatechartModel(Resource resource,
-			PreferencesHint preferencesHint) {
+	public static void createStatechartModel(Resource resource, PreferencesHint preferencesHint) {
 		// Create a statechart
 		Statechart statechart = SGraphFactory.eINSTANCE.createStatechart();
 		String lastSegment = resource.getURI().lastSegment();
-		String statechartName = lastSegment.substring(0,
-				lastSegment.indexOf('.'));
+		String statechartName = lastSegment.substring(0, lastSegment.indexOf('.'));
 		statechart.setName(statechartName);
+		statechart.setSpecification(INITIAL_SPECIFICATION);
 
-		Diagram diagram = ViewService.createDiagram(statechart,
-				StatechartDiagramEditor.ID, preferencesHint);
+		Diagram diagram = ViewService.createDiagram(statechart, StatechartDiagramEditor.ID, preferencesHint);
 		diagram.setElement(statechart);
 		// Add to resource
 		resource.getContents().add(statechart);
@@ -114,34 +109,30 @@ public final class FactoryUtils {
 		Region region = SGraphFactory.eINSTANCE.createRegion();
 		region.setName(INITIAL_REGION_NAME);
 		statechart.getRegions().add(region);
-		Node regionView = ViewService.createNode(diagram, region,
-				SemanticHints.REGION, preferencesHint);
+		Node regionView = ViewService.createNode(diagram, region, SemanticHints.REGION, preferencesHint);
 		setRegionViewLayoutConstraint(regionView);
 		// // Create an initial state
 		Entry initialState = SGraphFactory.eINSTANCE.createEntry();
 		initialState.setKind(EntryKind.INITIAL);
 		region.getVertices().add(initialState);
-		Node initialStateView = ViewService.createNode(
-				getRegionCompartmentView(regionView), initialState,
+		Node initialStateView = ViewService.createNode(getRegionCompartmentView(regionView), initialState,
 				SemanticHints.ENTRY, preferencesHint);
 		setInitialStateViewLayoutConstraint(initialStateView);
 		// Create the first state
 		State state = SGraphFactory.eINSTANCE.createState();
 		region.getVertices().add(state);
-		Node stateNode = ViewService.createNode(
-				getRegionCompartmentView(regionView), state,
-				SemanticHints.STATE, preferencesHint);
+		Node stateNode = ViewService.createNode(getRegionCompartmentView(regionView), state, SemanticHints.STATE,
+				preferencesHint);
 		setStateViewLayoutConstraint(stateNode);
 		// Create the transition from Initial State to State
 		Transition transition = SGraphFactory.eINSTANCE.createTransition();
 		transition.setSource(initialState);
 		transition.setTarget(state);
 		initialState.getOutgoingTransitions().add(transition);
-		ViewService.createEdge(initialStateView, stateNode, transition,
-				SemanticHints.TRANSITION, preferencesHint);
+		ViewService.createEdge(initialStateView, stateNode, transition, SemanticHints.TRANSITION, preferencesHint);
 		// Create the textcompartment for events / variables
-		Node textCompartment = ViewService.createNode(diagram, statechart,
-				SemanticHints.STATECHART_TEXT, preferencesHint);
+		Node textCompartment = ViewService.createNode(diagram, statechart, SemanticHints.STATECHART_TEXT,
+				preferencesHint);
 		setTextCompartmentLayoutConstraint(textCompartment);
 
 	}
@@ -153,8 +144,7 @@ public final class FactoryUtils {
 		stateNode.setLayoutConstraint(bounds);
 	}
 
-	private static void setInitialStateViewLayoutConstraint(
-			Node initialStateView) {
+	private static void setInitialStateViewLayoutConstraint(Node initialStateView) {
 		Bounds bounds = NotationFactory.eINSTANCE.createBounds();
 		bounds.setX(70);
 		bounds.setY(20);
@@ -176,8 +166,7 @@ public final class FactoryUtils {
 
 	private static void setRegionViewLayoutConstraint(Node regionView) {
 		Bounds bounds = NotationFactory.eINSTANCE.createBounds();
-		bounds.setX(INITIAL_TEXT_COMPARTMENT_WIDTH + INITIAL_TEXT_COMPARTMENT_X
-				+ SPACING);
+		bounds.setX(INITIAL_TEXT_COMPARTMENT_WIDTH + INITIAL_TEXT_COMPARTMENT_X + SPACING);
 		bounds.setY(INITIAL_TEXT_COMPARTMENT_Y);
 		bounds.setHeight(INITIAL_REGION_HEIGHT);
 		bounds.setWidth(INITIAL_REGION_WIDTH);

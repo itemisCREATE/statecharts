@@ -12,7 +12,7 @@ package org.yakindu.sct.generator.genmodel.ui.wizard;
 
 import java.util.Comparator;
 
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 
 /**
  * Defines all Generators that are known to be core-generators (provided by
@@ -58,9 +58,9 @@ public enum CoreGenerator {
 	 * Comparator to sort {@link GeneratorDescriptor}s. YAKINDU
 	 * {@link CoreGenerator}s come first.
 	 */
-	public static final Comparator<GeneratorDescriptor> generatorOrder = new Comparator<GeneratorDescriptor>() {
+	public static final Comparator<IGeneratorDescriptor> generatorOrder = new Comparator<IGeneratorDescriptor>() {
 
-		public int compare(GeneratorDescriptor o1, GeneratorDescriptor o2) {
+		public int compare(IGeneratorDescriptor o1, IGeneratorDescriptor o2) {
 			int a = 0;
 			int b = 0;
 			try {

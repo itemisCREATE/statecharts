@@ -397,10 +397,10 @@ class GeneratorProjectTemplate {
 
 			public void generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess access) {
 				StringBuilder builder = new StringBuilder();
-				builder.append("The name of the Statemachine is ");
+				builder.append("The name of the state machine is ");
 				builder.append(flow.getName());
 				builder.append(LBR).append(LBR);
-				builder.append("The Statemachine has the following states:");
+				builder.append("The state machine has the following states:");
 				builder.append(LBR).append(LBR);
 				for (ExecutionState state : flow.getStates()) {
 					builder.append(
@@ -446,9 +446,9 @@ class GeneratorProjectTemplate {
 			}
 		
 			def info(ExecutionFlow flow) {''«"'"»
-				The name of the Statemachine is '«'«'»flow.name»'
+				The name of the state machine is '«'«'»flow.name»'
 
-				The Statemachine has the following states:
+				The state machine has the following states:
 		
 				«'«'»FOR ExecutionState state : flow.states»
 					«'«'»state.name.replaceFirst(flow.name+'\\.','')»
@@ -480,6 +480,7 @@ class GeneratorProjectTemplate {
 		import org.eclipse.emf.ecore.EObject;
 		import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 		import org.yakindu.sct.model.sgen.FeatureParameterValue;
+		import org.yakindu.sct.model.sgen.FeatureType;
 		import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 			
 		/**
@@ -491,10 +492,9 @@ class GeneratorProjectTemplate {
 			public boolean isProviderFor(FeatureTypeLibrary library) {
 				return library.getName().equals(LIBRARY_NAME);
 			}
-
+		
 			@Override
-			protected void setDefaultValue(FeatureParameterValue parameterValue,
-					EObject context) {
+			protected void setDefaultValue(FeatureType type, FeatureParameterValue parameterValue, EObject context) {
 				String parameterName = parameterValue.getParameter().getName();
 				if (MY_PARAMETER.equals(parameterName)) {
 					parameterValue.setValue("default value");

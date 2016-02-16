@@ -43,7 +43,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	public void enter() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		enterSequence_main_region_default();
 
@@ -117,27 +117,27 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	}
 
 	private boolean check_main_region_A_tr0_tr0() {
-		return (true) && !sCInterface.operationCallback.myBoolOp();
+		return (true) && (!sCInterface.operationCallback.myBoolOp());
 	}
 
 	private boolean check_main_region_B_tr0_tr0() {
-		return (true) && sCInterface.operationCallback.myIntOp() == 0;
+		return (true) && (sCInterface.operationCallback.myIntOp() == 0);
 	}
 
 	private boolean check_main_region_C_tr0_tr0() {
-		return (true) && sCInterface.operationCallback.myRealOp() == 0.0;
+		return (true) && (sCInterface.operationCallback.myRealOp() == 0.0);
 	}
 
 	private boolean check_another_region_A_tr0_tr0() {
-		return (true) && !sCInterface.operationCallback.myBoolOp();
+		return (true) && (!sCInterface.operationCallback.myBoolOp());
 	}
 
 	private boolean check_another_region_B_tr0_tr0() {
-		return (true) && sCInterface.operationCallback.myIntOp() == 0;
+		return (true) && (sCInterface.operationCallback.myIntOp() == 0);
 	}
 
 	private boolean check_another_region_C_tr0_tr0() {
-		return (true) && sCInterface.operationCallback.myRealOp() == 0.0;
+		return (true) && (sCInterface.operationCallback.myRealOp() == 0.0);
 	}
 
 	private void effect_main_region_A_tr0() {
@@ -393,7 +393,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

@@ -14,5 +14,5 @@ import org.yakindu.base.base.NamedElement;
  * @model abstract="true"
  * @generated
  */
-public interface Declaration extends TypedElement, NamedElement {
+public interface Declaration extends TypedElement, NamedElement, PackageMember {
 } // Declaration

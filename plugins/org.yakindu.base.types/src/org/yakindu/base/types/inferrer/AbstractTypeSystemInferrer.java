@@ -17,6 +17,7 @@ import java.util.Collections;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
@@ -34,11 +35,11 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer {
 
-	private static final String NO_INFER_METHOD = "No infer method for type(s) %s";
-	private static final String ASSERT_IS_TYPE = "Expected one of %s, but was %s.";
-	private static final String ASSERT_NOT_TYPE = "Expected type is not %s.";
-	private static final String ASSERT_SAME = "Expected types %s and %s are same.";
-	private static final String ASSERT_COMPATIBLE = "Incompatible types %s and %s.";
+	protected static final String NO_INFER_METHOD = "No infer method for type(s) %s";
+	protected static final String ASSERT_IS_TYPE = "Expected one of %s, but was %s.";
+	protected static final String ASSERT_NOT_TYPE = "Expected type is not %s.";
+	protected static final String ASSERT_SAME = "Expected types %s and %s are same.";
+	protected static final String ASSERT_COMPATIBLE = "Incompatible types %s and %s.";
 	
 	private static final String METHOD_NAME = "infer";
 
@@ -86,6 +87,10 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	private void initTypeCache(final EObject context) {
 		typeCache = CacheBuilder.newBuilder().maximumSize(100).build(new CacheLoader<EObject, Type>() {
 			public Type load(EObject key) {
+				if (key instanceof TypeAlias) {
+					// for type aliases we want to infer their base types
+					return (Type) (EObject) dispatcher.invoke(key);
+				}
 				if (key instanceof Type) {
 					Collection<Type> types = registry.getTypes(context);
 					for (Type type : types) {
@@ -111,21 +116,6 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 						return null;
 					}
 				});
-	}
-
-	protected void assertIsType(Type currentType, String msg, Type... candidates) {
-		if (currentType == null)
-			return;
-		boolean same = false;
-		for (Type type : candidates) {
-			if (registry.isSame(currentType, type)) {
-				same = true;
-			}
-		}
-		if (!same) {
-			error(msg != null ? msg : String.format(ASSERT_IS_TYPE, Arrays.toString(candidates), currentType),
-					IS_TYPE_CODE);
-		}
 	}
 
 	protected void assertNotType(Type currentType, String msg, Type... candidates) {
@@ -166,6 +156,14 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 			return;
 		if (!registry.isSuperType(valueType, varType)) {
 			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, varType, valueType), NOT_COMPATIBLE_CODE);
+		}
+	}
+	
+	protected void assertIsSupertype(Type subtype, Type supertype, String msg) {
+		if (subtype == null || supertype == null)
+			return;
+		if (!registry.isSuperType(subtype, supertype)) {
+			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, subtype, supertype), NOT_COMPATIBLE_CODE);
 		}
 	}
 

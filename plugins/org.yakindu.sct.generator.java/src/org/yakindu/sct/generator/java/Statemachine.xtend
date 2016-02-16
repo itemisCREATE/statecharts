@@ -240,7 +240,7 @@ class Statemachine {
 		/**
 		* Returns true if the given state is currently active otherwise false.
 		*/
-		public boolean isStateActive(State state){
+		public boolean isStateActive(State state) {
 			switch (state) {
 				«FOR s : flow.states»
 				case «s.stateName.asEscapedIdentifier» : 
@@ -341,7 +341,7 @@ class Statemachine {
 		protected class «scope.getInterfaceImplName» implements «scope.getInterfaceName» {
 		
 		«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
-			«scope.generateListeners»
+			«scope.generateListenerSupport»
 		«ENDIF»
 		
 		«IF scope.hasOperations»
@@ -489,7 +489,7 @@ class Statemachine {
 	'''
 	
 	
-	protected def generateListeners(InterfaceScope scope) '''
+	protected def generateListenerSupport(InterfaceScope scope) '''
 		private List<«scope.getInterfaceListenerName»> listeners = new LinkedList<«scope.getInterfaceListenerName»>();
 		
 		public List<«scope.getInterfaceListenerName»> getListeners() {
@@ -579,7 +579,7 @@ class Statemachine {
 	def protected runCycleFunction(ExecutionFlow flow) '''
 		public void runCycle() {
 			if(!initialized)
-				throw new IllegalStateException("The statemachine needs to be initialized first by calling the init() function.");
+				throw new IllegalStateException("The state machine needs to be initialized first by calling the init() function.");
 			
 			clearOutEvents();
 			
@@ -605,7 +605,7 @@ class Statemachine {
 	def protected enterFunction(ExecutionFlow it) '''
 		public void enter() {
 			if(!initialized)
-				throw new IllegalStateException("The statemachine needs to be initialized first by calling the init() function.");
+				throw new IllegalStateException("The state machine needs to be initialized first by calling the init() function.");
 			
 			«IF timed»
 			if (timer == null) {

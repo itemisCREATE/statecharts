@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
-import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureType;
@@ -39,11 +39,11 @@ import com.google.common.collect.Lists;
 public class ModelCreator {
 
 	private final SGenFactory factory = SGenFactory.eINSTANCE;
-	private final GeneratorDescriptor descriptor;
+	private final IGeneratorDescriptor descriptor;
 
 	private final List<EObject> eobjects;
 
-	public ModelCreator(GeneratorDescriptor selectedGenerator, List<EObject> objects) {
+	public ModelCreator(IGeneratorDescriptor selectedGenerator, List<EObject> objects) {
 		this.descriptor = selectedGenerator;
 		this.eobjects = objects;
 	}
@@ -72,9 +72,9 @@ public class ModelCreator {
 	}
 
 	private FeatureConfiguration createFeatureConfiguration(EObject object, FeatureType featureType) {
-		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions.getLibraryDescriptors(descriptor
+		Iterable<ILibraryDescriptor> libraryDescriptor = LibraryExtensions.getLibraryDescriptors(descriptor
 				.getLibraryIDs());
-		for (LibraryDescriptor desc : libraryDescriptor) {
+		for (ILibraryDescriptor desc : libraryDescriptor) {
 			IDefaultFeatureValueProvider defaultProvider = desc.createFeatureValueProvider();
 			if (defaultProvider != null && defaultProvider.isProviderFor(featureType.getLibrary())) {
 				return defaultProvider.createDefaultFeatureConfiguration(featureType, object);
@@ -83,11 +83,11 @@ public class ModelCreator {
 		return null;
 	}
 
-	public static List<FeatureType> getFeatureTypes(GeneratorDescriptor descriptor) {
+	public static List<FeatureType> getFeatureTypes(IGeneratorDescriptor descriptor) {
 		ArrayList<FeatureType> features = Lists.newArrayList();
-		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions.getLibraryDescriptors(descriptor
+		Iterable<ILibraryDescriptor> libraryDescriptor = LibraryExtensions.getLibraryDescriptors(descriptor
 				.getLibraryIDs());
-		for (LibraryDescriptor desc : libraryDescriptor) {
+		for (ILibraryDescriptor desc : libraryDescriptor) {
 			ResourceSet set = new ResourceSetImpl();
 			Resource resource = set.getResource(desc.getURI(), true);
 			FeatureTypeLibrary lib = (FeatureTypeLibrary) resource.getContents().get(0);

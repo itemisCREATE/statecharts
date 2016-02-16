@@ -5,8 +5,8 @@ Bundle-SymbolicName: org.yakindu.sct.generator.cpp.test
 Bundle-Version: 2.5.0.qualifier
 Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: org.yakindu.sct.test.models;bundle-version="2.1.2",
- org.yakindu.sct.generator.c.test;bundle-version="2.1.2",
- org.junit;bundle-version="4.11.0",
- org.yakindu.sct.generator.cpp;bundle-version="2.1.2",
- org.yakindu.sct.model.resource;bundle-version="2.4.1"
+Require-Bundle: org.yakindu.sct.test.models,
+ org.yakindu.sct.generator.c.test,
+ org.junit,
+ org.yakindu.sct.generator.cpp,
+ org.yakindu.sct.model.resource

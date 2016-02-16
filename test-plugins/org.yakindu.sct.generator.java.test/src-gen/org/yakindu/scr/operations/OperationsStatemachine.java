@@ -79,7 +79,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	public void enter() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		enterSequence_main_region_default();
 	}
@@ -153,7 +153,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 
 	private boolean check_main_region_B_tr0_tr0() {
-		return (sCInterface.ev) && sCInterface.operationCallback.alwaysTrue();
+		return (sCInterface.ev) && (sCInterface.operationCallback.alwaysTrue());
 	}
 
 	private boolean check_main_region_C_tr0_tr0() {
@@ -353,7 +353,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

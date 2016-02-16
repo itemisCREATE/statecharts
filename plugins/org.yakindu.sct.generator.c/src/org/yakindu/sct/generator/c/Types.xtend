@@ -55,7 +55,8 @@ class Types {
 		#define «typesModule.define»_H_
 		
 		#ifdef __cplusplus
-		extern "C" {
+		extern "C"
+		{
 		#endif 
 		
 		#include <stdint.h>

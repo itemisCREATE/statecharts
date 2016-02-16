@@ -45,7 +45,6 @@ import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
 class SequenceBuilder {
 
-	@Inject extension StatechartExtensions sc
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension SexecExtensions sexec
 	@Inject extension SexecElementMapping mapping
@@ -429,12 +428,6 @@ class SequenceBuilder {
 		enterSequence.name = DEFAULT_SEQUENCE_NAME
 		enterSequence.comment = "Default enter sequence for statechart " + sc.name
 
-		for (tes : sc.timeEventSpecs) {
-			val timeEvent = tes.createDerivedEvent
-			val scheduleStep = timeEvent.newScheduleTimeEvent(tes.buildValueExpression)
-			enterSequence.steps.add(scheduleStep)
-		}
-
 		if(flow.entryAction != null) enterSequence.steps.add(flow.entryAction.newCall)
 
 		for (r : sc.regions) {
@@ -505,7 +498,7 @@ class SequenceBuilder {
 		if (vd.initialValue != null) {
 			return vd.initialValue
 		} else {
-			return vd.type?.defaultValue.buildValue
+			return vd.type?.defaultValue?.buildValue
 		}
 	}
 

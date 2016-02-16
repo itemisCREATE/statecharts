@@ -1,13 +1,13 @@
 /**
- * Copyright (c) 2015 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
- */
+* Copyright (c) 2016 committers of YAKINDU and others.
+* All rights reserved. This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+* Contributors:
+*     committers of YAKINDU - initial API and implementation
+*/
 package org.yakindu.sct.simulation.core.sexec.test;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -29,8 +29,7 @@ import static org.junit.Assert.assertTrue;
 public class ReadOnlyVariableTest extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception {
-		ExecutionFlow flow = models
-				.loadExecutionFlowFromResource("ReadOnlyVariable.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("ReadOnlyVariable.sct");
 		initInterpreter(flow);
 	}
 	@Test
@@ -40,20 +39,20 @@ public class ReadOnlyVariableTest extends AbstractExecutionFlowTest {
 		assertTrue(getInteger("myInt") == 0l);
 		assertTrue(getString("myString").equals("testString"));
 		assertTrue(getBoolean("myBool") == true);
-		assertTrue(getReal("myReal") == 1.1d);
+		assertTrue(getReal("myReal") == 1.1);
 		assertTrue(getInteger("A.myInt") == 0l);
 		assertTrue(getString("A.myString").equals("testString"));
 		assertTrue(getBoolean("A.myBool") == true);
-		assertTrue(getReal("A.myReal") == 1.1d);
+		assertTrue(getReal("A.myReal") == 1.1);
 		interpreter.runCycle();
 		assertTrue(isStateActive("StateB"));
 		assertTrue(getInteger("myInt") == 100l);
 		assertTrue(getString("myString").equals("fail"));
 		assertTrue(getBoolean("myBool") == false);
-		assertTrue(getReal("myReal") == 6.6d);
+		assertTrue(getReal("myReal") == 6.6);
 		assertTrue(getInteger("A.myInt") == 200l);
 		assertTrue(getString("A.myString").equals("A_fail"));
 		assertTrue(getBoolean("A.myBool") == false);
-		assertTrue(getReal("A.myReal") == 7.7d);
+		assertTrue(getReal("A.myReal") == 7.7);
 	}
 }

@@ -21,9 +21,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.yakindu.sct.simulation.ui.view.editing.BooleanEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.EnumerationEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.IntegerEditingSupport;
-import org.yakindu.sct.simulation.ui.view.editing.LongEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.MultiEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.RealEditingSupport;
+import org.yakindu.sct.simulation.ui.view.editing.ScopeSlotEditingSupport.ITypeSystemProvider;
 import org.yakindu.sct.simulation.ui.view.editing.StringEditingSupport;
 
 /**
@@ -33,7 +33,7 @@ import org.yakindu.sct.simulation.ui.view.editing.StringEditingSupport;
  */
 public class ExecutionContextViewerFactory {
 
-	public static TreeViewer createViewer(Composite parent, boolean readOnly) {
+	public static TreeViewer createViewer(Composite parent, boolean readOnly, ITypeSystemProvider provider) {
 		final TreeViewer viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
@@ -51,9 +51,9 @@ public class ExecutionContextViewerFactory {
 		valueColumn.getColumn().setMoveable(true);
 		valueColumn.getColumn().setWidth(100);
 		if (!readOnly)
-			valueColumn.setEditingSupport(new MultiEditingSupport(viewer, new BooleanEditingSupport(viewer),
-					new LongEditingSupport(viewer), new RealEditingSupport(viewer), new StringEditingSupport(viewer),
-					new EnumerationEditingSupport(viewer), new IntegerEditingSupport(viewer)));
+			valueColumn.setEditingSupport(new MultiEditingSupport(viewer, new BooleanEditingSupport(viewer, provider),
+					new IntegerEditingSupport(viewer, provider), new RealEditingSupport(viewer, provider),
+					new StringEditingSupport(viewer, provider), new EnumerationEditingSupport(viewer, provider)));
 
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
 
@@ -64,6 +64,7 @@ public class ExecutionContextViewerFactory {
 						contentProvider.setShouldUpdate(true);
 						viewer.refresh();
 					}
+
 					@Override
 					public void afterEditorActivated(ColumnViewerEditorActivationEvent event) {
 						contentProvider.setShouldUpdate(false);

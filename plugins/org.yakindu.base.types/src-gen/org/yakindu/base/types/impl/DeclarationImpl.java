@@ -20,6 +20,7 @@ import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
 
 import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
 
@@ -29,12 +30,12 @@ import org.yakindu.base.types.TypesPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -263,6 +264,11 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				default: return -1;
 			}
 		}
+		if (baseClass == PackageMember.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -276,6 +282,11 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case BasePackage.NAMED_ELEMENT__NAME: return TypesPackage.DECLARATION__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == PackageMember.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

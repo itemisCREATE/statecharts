@@ -21,7 +21,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.yakindu.sct.generator.core.extensions.FileExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 
 /**
  * 
@@ -38,7 +38,7 @@ class SGenWizardPage2LabelProvider extends LabelProvider {
 			return PlatformUI.getWorkbench().getSharedImages().getImage(IDE.SharedImages.IMG_OBJ_PROJECT);
 		} else if (element instanceof IFile) {
 			String generatorID = FileExtensions.getGeneratorForFileExtension(((IFile) element).getFileExtension());
-			GeneratorDescriptor genDesc = GeneratorExtensions.getGeneratorDescriptorForId(generatorID);
+			IGeneratorDescriptor genDesc = GeneratorExtensions.getGeneratorDescriptor(generatorID);
 			return genDesc.getImage();
 		}
 		return super.getImage(element);

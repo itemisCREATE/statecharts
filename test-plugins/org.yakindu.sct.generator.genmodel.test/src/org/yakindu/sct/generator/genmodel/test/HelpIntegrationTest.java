@@ -25,9 +25,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
-import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.genmodel.resource.FeatureResourceDescription;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
 import org.yakindu.sct.generator.genmodel.ui.help.SGenUserHelpDocumentationProvider;
@@ -107,19 +107,18 @@ public class HelpIntegrationTest {
 			fail("Missing generator feature(s) documentation for generator "
 					+ YAKINDU_XPAND + ": " + missingDocumentation);
 		}
-
 	}
 
 	private List<String> getFeaturesWithoutDocumentation(String generatorId) {
 		
-		GeneratorDescriptor generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptorForId(generatorId);
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(generatorId);
 		
-		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
+		Iterable<ILibraryDescriptor> libraryDescriptor = LibraryExtensions
 				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
 		
 		Iterable<IEObjectDescription> allElements = Lists.newArrayList();
-		for (LibraryDescriptor desc : libraryDescriptor) {
+		for (ILibraryDescriptor desc : libraryDescriptor) {
 			Resource library = resourceSet.getResource(desc.getURI(), true);
 			FeatureResourceDescription description = new FeatureResourceDescription(
 					library);

@@ -73,9 +73,11 @@ class FlowCode {
 	
 	def dispatch CharSequence code(HistoryEntry it) '''
 		«stepComment»
-		if («scHandle»->historyVector[«region.historyVector.offset»] != «null_state») {
+		if («scHandle»->historyVector[«region.historyVector.offset»] != «null_state»)
+		{
 			«historyStep.code»
-		} «IF initialStep != null»else {
+		} «IF initialStep != null»else
+		{
 			«initialStep.code»
 		} «ENDIF»
 	'''
@@ -83,12 +85,15 @@ class FlowCode {
 	def dispatch CharSequence code(StateSwitch it) '''
 		«stepComment»
 		«IF historyRegion != null»
-			switch(«scHandle»->historyVector[ «historyRegion.historyVector.offset» ]) {
+			switch(«scHandle»->historyVector[ «historyRegion.historyVector.offset» ])
+			{
 		«ELSE»
-			switch(«scHandle»->stateConfVector[ «stateConfigurationIdx» ]) {
+			switch(«scHandle»->stateConfVector[ «stateConfigurationIdx» ])
+			{
 		«ENDIF»
 			«FOR caseid : cases»
-				case «caseid.state.shortName» : {
+				case «caseid.state.shortName» :
+				{
 					«caseid.step.code»
 					break;
 				}
@@ -128,9 +133,11 @@ class FlowCode {
 
 	def dispatch CharSequence code(If it) '''
 		«stepComment»
-		if («check.code» == bool_true) { 
+		if («check.code» == bool_true)
+		{ 
 			«thenStep.code»
-		} «IF (elseStep != null)» else {
+		} «IF (elseStep != null)» else
+		{
 			«elseStep.code»
 		}
 		«ENDIF»

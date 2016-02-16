@@ -15,16 +15,16 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.Operation#getParameters <em>Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.types.TypesPackage#getOperation()
  * @model
  * @generated
  */
-public interface Operation extends Declaration, PackageMember {
+public interface Operation extends Declaration {
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.base.types.Parameter}.

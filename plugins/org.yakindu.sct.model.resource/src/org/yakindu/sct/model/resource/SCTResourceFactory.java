@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.DomainRegistry.DomainDescriptor;
+import org.yakindu.sct.domain.extension.IDomainDescriptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 
@@ -38,7 +38,7 @@ public class SCTResourceFactory extends XMIResourceFactoryImpl {
 	@Override
 	public Resource createResource(URI uri) {
 		String domainID = determineDomainID(uri);
-		DomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(domainID);
+		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(domainID);
 		Injector injector = domainDescriptor.getDomainInjectorProvider().getResourceInjector();
 		Resource resource = injector.getInstance(Resource.class);
 		ResourceSet set = new ResourceSetImpl();

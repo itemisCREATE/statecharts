@@ -369,7 +369,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public void enter() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		enterSequence_auto_default();
 	}
@@ -624,7 +624,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	private boolean check_auto_char_tr0_tr0() {
-		return (sCInterface.auto) && sCInterface.getCase();
+		return (sCInterface.auto) && (sCInterface.getCase());
 	}
 
 	private void effect_auto_char_tr0() {
@@ -905,7 +905,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

@@ -16,6 +16,7 @@ testsuite AllTests {
 	EnterState,
 	EntryChoice,
 	EntryExitSelfTransition,
+	EntryReactionAction,
 	ExitOnSelfTransition, 
 	ExitState,
 	FeatureCalls,
@@ -53,5 +54,6 @@ testsuite AllTests {
 	SyncJoin, 
 	TransitionWithoutCondition,
 	TriggerGuardExpressions,
+	TriggerExpressionPrecedence,
 	ValuedEvents
 } 

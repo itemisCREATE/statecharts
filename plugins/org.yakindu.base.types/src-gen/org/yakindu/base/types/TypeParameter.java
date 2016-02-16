@@ -10,10 +10,10 @@ package org.yakindu.base.types;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.TypeParameter#getBound <em>Bound</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.types.TypesPackage#getTypeParameter()
  * @model

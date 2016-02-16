@@ -9,7 +9,9 @@ The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an 
 
 ## License
 
-The source code is provided under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.
+The source code is provided under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>. 
+
+The provided open source code generators do not imply any licence constraint on the generated code. The generated code is property of the user (as person or organization). There is no need to make the generate code open source and the user is free to choose any licence model for the generated code.
 
 ## Download & Installation
 
@@ -30,17 +32,23 @@ We appreciate any feedback and there are various ways to contribute feedback:
 
 ## Setting up the development environment using Oomph (recommended)
 
-1. Download and start <a href="https://wiki.eclipse.org/Eclipse_Oomph_Installer" target="_blank">Oomph</a> and the <a href="https://raw.githubusercontent.com/Yakindu/statecharts/master/StatechartTools.setup" target="_blank">Oomph-Setup file</a> (rightclick, *save as...*).
-2. On the initial page, click on the *Switch to advanced mode* button in the top right.
-3. On the *Product* page, select *Eclipse IDE for Eclipse Committers*, press *Next*.
-4. On the *Project* page, press on the green plus-symbol. *Browse File System* to select the downloaded Oomph-Setup file.
-5. Doubleclick on the project *Statechart Tools* to add it to the catalog below, press *Next*.
-6. Choose a meaningful name for the *Installation folder* on the *Variables* page, press *Next*.
-7. On the last page you have to confirm the settings by clicking on *Finish*. The setup is executing tasks now. Meanwhile: Drink a cup of coffee, and watch how your Statechart Tools development environment is assembled.
-8. (Optional) Press *Finish* to close the initial Progress window. 
-9. (Optional) Clicking on the double arrow (![double arrow](oomph_icon.png)) allows you to see the further progression. Press *Finish* to close the window, when the installer is done.
-10. After building the workspace, you will see a lot of errors in it. That's because the language artifacts haven't been generated yet. Oomph made a contribution to the toolbar. Press on the double arrow symbol and only select the three Launches (the other tasks already have been executed) to generate the languages (Expressions, SText, SGen)
-11. Click *Proceed* three times to execute the launches despite existing errors.
+1. Download the <a href="https://wiki.eclipse.org/Eclipse_Oomph_Installer" target="_blank">Oomph Eclipse Installer</a> for your platform and install it.
+2. Start Oomph by executing *eclipse-installer/eclipse-inst*.
+3. On the initial page, select *Advanced Mode* in the menu at the top right.
+4. On the *Product* page, select *Eclipse IDE for Eclipse Committers* in the *Eclipse.org* folder, then click *Next*.
+5. On the *Projects* page, select *Github Projects*.
+6. Click on the green "plus" symbol. Copy the Link https://raw.githubusercontent.com/Yakindu/statecharts/master/StatechartTools.setup in to the text field.
+7. Click on *OK*. The project *Statechart Tools* is available as *Github Projects/<User>/Statechart Tools*.
+8. Double-click on the project *Statechart Tools* to add it to the catalog section at the bottom of the wizard page.
+9. On the *Variables* page, choose a meaningful name for the *Installation folder name* variable, then click *Next*.
+10. On the *Confirmation* page, check the settings, then click on *Finish*.
+11. The setup is executing its tasks now. Meanwhile: Drink a cup of coffee, and watch your Statechart Tools development environment being assembled.
+12. After the installation has been completed, Eclipse starts up with the YAKINDU Statechart Tools projects in your workspace.
+13. (Optional) Click on *Finish* in the Oomph window to close it. 
+14. (Optional) While installing, clicking on the double-arrow (![double arrow](oomph_icon.png)) allows you to see the further progression. Click on *Finish* to close the window when the installer is done.
+15. After having built the workspace, you will see a lot of errors in it. That's because the language artifacts haven't been generated yet. Oomph made a contribution to the toolbar. Click on the double-arrow symbol. The *Confirmation* window appears. Deselect everything except for the three "Launch …" tasks. (The other tasks have already been executed.) The selected tasks will generate the languages "Expressions", "SText", and "SGen".
+16. Click on *Finish*.
+17. Click *Proceed* three times in order to confirm the execution of each launch despite any existing errors.
 
 ## How to setup your developer workspace without Oomph
 1. Download Eclipse Luna from https://www.eclipse.org/downloads/

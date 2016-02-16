@@ -8,6 +8,7 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 
+	
 	test AlwaysOncycle{
 		
 		feature Outlet{ 
@@ -137,6 +138,14 @@ GeneratorModel for sctunit::java {
 	}
 	
 	test EntryExitSelfTransition{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test EntryReactionAction{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
@@ -454,6 +463,14 @@ GeneratorModel for sctunit::java {
 
 
 	test TriggerGuardExpressions {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+
+	test TriggerExpressionPrecedence {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
