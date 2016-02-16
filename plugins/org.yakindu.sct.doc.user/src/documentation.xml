@@ -5524,14 +5524,16 @@ int main(int argc, char *argv[]) {
     <indexterm><primary>code generator features</primary><secondary>Java</secondary></indexterm>
     <indexterm><primary>Java</primary><secondary>code generator features</secondary></indexterm>
 
+
     <sect4 xml:id="naming-feature" role="sgen_feature_naming">
      <title>Naming feature</title>
      <indexterm><primary>Naming</primary><secondary>generator feature</secondary><tertiary>Java</tertiary></indexterm>
      <indexterm><primary>generator feature</primary><secondary>Naming</secondary><tertiary>Java</tertiary></indexterm>
 
      <para>The <emphasis role="strong">Naming</emphasis> feature allows the configuration of package names as well as
-      class name prefix / suffix.<literallayout></literallayout>It is an <emphasis role="strong">optional</emphasis> 
-      feature and has the following parameters:</para>
+      class name prefix / suffix.</para>
+      
+     <para>It is an <emphasis role="strong">optional</emphasis> feature and has the following parameters:</para>
 
      <orderedlist numeration="arabic">
       <listitem>
@@ -5557,33 +5559,73 @@ feature Naming {
     </sect4>
 
 
+    <sect4 xml:id="synchronizedwrapper-feature" role="sgen_feature_synchronizedwrapper">
+     <title>SynchronizedWrapper feature</title>
+     <indexterm><primary>SynchronizedWrapper</primary><secondary>generator feature</secondary><tertiary>Java</tertiary></indexterm>
+     <indexterm><primary>generator feature</primary><secondary>Naming</secondary><tertiary>Java</tertiary></indexterm>
+
+     <para>The <emphasis role="strong">SynchronizedWrapper</emphasis> feature generates a synchronized wrapper for the
+      state machine. This is an additional Java class providing thread-safe access to the generated state machine
+      implementation. As the wrapper adds thread safety any number of client threads may call the state machine.</para>
+     
+     <para>It is an <emphasis role="strong">optional</emphasis> feature and has the following parameters:</para>
+
+     <orderedlist numeration="arabic">
+      <listitem>
+       <para><emphasis>namePrefix</emphasis><indexterm><primary>namePrefix</primary></indexterm> (String, optional):
+        name prefix for the generated wrapper class</para>
+      </listitem>
+      <listitem>
+       <para><emphasis>nameSuffix</emphasis><indexterm><primary>nameSuffix</primary></indexterm> (String, optional):
+        name suffix for the generated wrapper class</para>
+      </listitem>
+     </orderedlist>
+      
+     <example>
+      <title>Sample configuration</title>
+
+      <programlisting>
+feature SynchronizedWrapper {
+    namePrefix = "Synchronized"
+    nameSuffix = "Wrapper"
+}
+</programlisting>
+     </example>
+    </sect4>
+
+
     <sect4 xml:id="runnablewrapper" role="sgen_feature_runnablewrapper">
      <title>RunnableWrapper</title>
      <indexterm><primary>RunnableWrapper</primary><secondary>generator feature</secondary><tertiary>Java</tertiary></indexterm>
      <indexterm><primary>generator feature</primary><secondary>RunnableWrapper</secondary><tertiary>Java</tertiary></indexterm>
 
-     <para>Generates a runnable wrapper for the state machine. This feature generates an additional Java class providing a thread-safe wrapper for the generated state machine implementation. In addition to the specific state machine interface it implements the <emphasis>Runnable</emphasis> interface and can be executed in a thread. It implements an event queue and event-driven execution semantics. As the wrapper adds thread safety any number of client threads may call the state machine.</para>
+     <para>The <emphasis role="strong">RunnableWrapper</emphasis> feature generates a runnable wrapper for the state
+      machine. This is an additional Java class providing a thread-safe wrapper for the generated state machine
+      implementation. In addition to the specific state machine interface it implements the
+      <emphasis>Runnable</emphasis> interface and can be executed in a thread. It implements an event queue and
+      event-driven execution semantics. As the wrapper adds thread safety any number of client threads may call the
+      state machine.</para>
 
      <para>It is an <emphasis role="strong">optional</emphasis> feature and has the following parameters:</para>
 
      <orderedlist numeration="arabic">
       <listitem>
        <para><emphasis>namePrefix</emphasis><indexterm><primary>namePrefix</primary></indexterm> (String, optional):
-        prefix of the implementing class' name</para>
+        name prefix for the generated wrapper class</para>
       </listitem>
       <listitem>
        <para><emphasis>nameSuffix</emphasis><indexterm><primary>nameSuffix</primary></indexterm> (String, optional):
-        suffix of the implementing class' name</para>
+        name suffix for the generated wrapper class</para>
       </listitem>
      </orderedlist>
-
+      
      <example>
       <title>Sample configuration</title>
-      <remark role="fixme">The namePrefix in the example below does not have a trailing dot. Is this correct?</remark> 
+
       <programlisting>
 feature RunnableWrapper {
-    namePrefix = &quot;org.yakindu.sct&quot;
-    nameSuffix = &quot;Impl&quot;
+    namePrefix = "Runnable"
+    nameSuffix = "Wrapper"
 }
 </programlisting>
      </example>
@@ -6463,7 +6505,10 @@ protected void tearDownStatemachine() {
     <title>Executing a custom Xtend2/Java code generator</title>
      <indexterm><primary>Xtend2/Java</primary></indexterm>
 
-    <para><application>YAKINDU Statechart Tools</application> provide a convenient way to execute your generator while you are developing it.<literallayout></literallayout>For this, you have to create a new <emphasis role="strong">generator model</emphasis> with the generator ID <emphasis role="strong">yakindu::generic</emphasis>, either by using the <emphasis role="strong">New Statechart Generator Model</emphasis> wizard or by simply creating a new text file with the file extension <literal>.sgen</literal>. The feature described below allows to configure your code generator.</para>
+    <para><application>YAKINDU Statechart Tools</application> provide a convenient way to execute your generator while
+     you are developing it.</para>
+
+    <para>For this, you have to create a new <emphasis role="strong">generator model</emphasis> with the generator ID <emphasis role="strong">yakindu::generic</emphasis>, either by using the <emphasis role="strong">New Statechart Generator Model</emphasis> wizard or by simply creating a new text file with the file extension <literal>.sgen</literal>. The feature described below allows to configure your code generator.</para>
 
     <sect4 xml:id="Generator" role="sgen_feature_generator">
      <title>Generator</title>
