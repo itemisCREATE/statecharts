@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+ <info>
+  <title>YAKINDU Statechart Tools</title>
+  <subtitle>Hints for authors</subtitle>
+  <author>
+   <personname>Rainer Klute</personname>
+   <affiliation>
+    <orgname>itemis AG</orgname>
+   </affiliation>
+  </author>
+  <date><?dbtimestamp format="Y-m-d H:M:S"?></date>
+ </info>
+
+ <section>
+  <title>Important commands</title>
+
+  <section>
+   <title>Building the whole stuff</title>
+
+   <programlisting>
+    cd releng/org.yakindu.sct.releng
+    mvn clean verify
+   </programlisting>
+  </section>
+
+  <section>
+   <title>Manually validating a DocBook file without XIncludes</title>
+
+   <programlisting>cd plugins/org.yakindu.sct.doc.user
+    java -cp /data/data2/klute/maven2-repository/com/thaiopensource/jing/20091111/jing-20091111.jar com.thaiopensource.relaxng.util.Driver docbook-xml.distribution/xsd/docbook.rng src/hints_for_authors.xml
+   </programlisting>
+  </section>
+
+ </section>
+
+ <index>
+  <title>Index</title>
+ </index>
+
+</article>

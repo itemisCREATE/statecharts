@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?NLS TYPE="org.eclipse.help.contexts"?>
 <contexts>
-   <context id="sc_properties_entry_entrykind" title="YAKINDU Statechart Element Properties">
-      <description>Init, history and shallow history states are pseudo states used to express special aspects.</description>
-      <topic href="help/05_reference/reference.html#Initialstateandfinalstate" label="Init state"/>
-      <topic href="help/05_reference/reference.html#ShallowHistory" label="Shallow History state"/>
-        <topic href="help/05_reference/reference.html#DeepHistory" label="Deep History state"/>
+   <context id="sc_properties_entry_entrykind" title="Entry">
+      <description>An entry, possibly with a shallow or deep history, defines which state is to be activated first in a state machine or region.</description>
+      <topic href="help/documentation-ar01s02.html#entry" label="Entry"/>
+      <topic href="help/documentation-ar01s02.html#shallow-history" label="Shallow History state"/>
+        <topic href="help/documentation-ar01s02.html#deep-history" label="Deep History state"/>
    </context>
-   <context id="sc_properties_state_expression" title="YAKINDU Statechart Element Properties">
-      <description>States are the central elements of a state machine.</description>
-      <topic href="help/05_reference/reference.html#States" label="State"/>
+   <context id="sc_properties_state_expression" title="State">
+      <description>States are central elements of a state machine.</description>
+      <topic href="help/documentation-ar01s02.html#state" label="State"/>
    </context>
-   <context id="sc_properties_statechart_expression" title="YAKINDU Statechart Element Properties">
+   <context id="sc_properties_statechart_expression" title="Expressions">
       <description>Expressions are used to declare events, variables etc. and to define behavior.</description>
-      <topic href="help/05_reference/reference.html#Expressions" label="Expression reference"/>
+      <topic href="help/documentation-ar01s02.html#expressions" label="Expression reference"/>
    </context>
-   <context id="sc_properties_transition_expression" title="YAKINDU Statechart Element Properties">
-      <description>A transition is the transfer of one state to another. Transitions are diagrammed as arrows and can carry events and actions but must not.</description>
-      <topic href="help/05_reference/reference.html#Transitions" label="Transitions reference"/>
+   <context id="sc_properties_transition_expression" title="Transition">
+      <description>A transition is the transfer of one state to another. Transitions are diagrammed as arrows. They can carry events and actions, but don't need to.</description>
+      <topic href="help/documentation-ar01s02.html#transition" label="Transition reference"/>
    </context>
    <context id="sgen_feature" title="Genmodel Features">
-      <topic href="help/05_reference/reference.html" label="Help_Topic"/>
+      <topic href="help/documentation-ar01s02.html" label="YAKINDU Statechart Tools User Guide"/>
    </context>
    <context id="stext_keyword">
-      <topic href="help/05_reference/reference.html" label="Help_Topic"/>
+      <topic href="help/documentation-ar01s02.html" label="YAKINDU Statechart Tools User Guide"/>
    </context>
 </contexts>

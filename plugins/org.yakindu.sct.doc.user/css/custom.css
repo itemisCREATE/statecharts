@@ -118,6 +118,12 @@ body {
 	margin: 2%;
 }
 
+
+/* Styling of figures. By default, a figure is rendered as a <div class="figure"> … <img … /> </div> */
+.figure {
+    text-align: center;
+}
+
 img {
     max-width: 60%;
     height: auto;
@@ -154,4 +160,69 @@ table.scedit img {
     margin-left: 0px;
     margin-right: 0px;
     box-shadow: 4px 4px 2px #bbb;
+}
+
+.application, .state-name, .trigger-name, .guimenuitem {
+	font-style: italic;
+}
+
+.application-ysct {
+	font-weight: bold;
+	color: #555566;
+}
+
+
+.note {
+	padding-left: 1em;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    background: #d0d0d0;
+    font-size: 50%;
+    line-height: 100%;
+    margin-top: 0ex;
+    margin-left: 0ex;
+    margin-right: 0ex;
+    margin-bottom: 2ex;
+}
+
+.warning {
+	padding-left: 1em;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    background: #ffd0d0;
+    margin-top: 0ex;
+    margin-left: 0ex;
+    margin-right: 0ex;
+    margin-bottom: 2ex;
+}
+
+.note h3 {
+    font-size: 60%;
+	line-height: 100%;
+}
+
+
+
+/* Settings for "synopsys" sub-elements: */
+pre.synopsis code.literal {
+    font-weight: bold;
+    font-style: normal;
+}
+
+pre.synopsis code.varname {
+    font-weight: normal;
+    font-style: italic;
+}
+
+
+
+div.example {
+	padding-left: 2%;
+	padding-right: 2%;
+	padding-top: 2%;
+	padding-bottom: 1%;
+	border-style: solid;
+	border-width: 1px;
 }
