@@ -84,8 +84,28 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 			flow.enterSequences?.defaultSequence?.scheduleAndRun
 		else {
 			executionContext.activeStates.forEach[state|
-				activeStateConfiguration.set(state.toExecutionState.stateVector.offset, state.toExecutionState)]
+				activeStateConfiguration.set(state.toExecutionState.stateVector.offset, state.toExecutionState)
+				// schedule all time events
+				state.toExecutionState.enterSequences?.forEach[executeAfterRestore]
+			]
+			flow.enterSequences?.forEach[executeAfterRestore]
 		}
+	}
+	
+	def dispatch protected void executeAfterRestore(Step it) {
+		// fall back
+	}
+	
+	def dispatch protected void executeAfterRestore(Sequence it) {
+		steps.forEach[executeAfterRestore]
+	}
+	
+	def dispatch protected void executeAfterRestore(Call it) {
+		step.executeAfterRestore
+	}
+
+	def dispatch protected void executeAfterRestore(ScheduleTimeEvent it) {
+		scheduleAndRun
 	}
 
 	def ExecutionState toExecutionState(RegularState state) {
