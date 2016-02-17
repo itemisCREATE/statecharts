@@ -55,64 +55,50 @@ Workflow {
 			// the serialization component
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 
-			// a custom ResourceFactory for use with EMF 
-			fragment = resourceFactory.ResourceFactoryFragment {
-				fileExtensions = file.extensions
-			}
+			// a custom ResourceFactory for use with EMF
+    		fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
 
 			// The antlr parser generator fragment.
-			fragment = parser.antlr.XtextAntlrGeneratorFragment {
-			//  options = {
-			//		backtrack = true
-			//	}
-			}
+    		fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {}
 			
 			// java-based API for validation 
-			fragment = validation.JavaValidatorFragment {
+			fragment = validation.JavaValidatorFragment auto-inject {
 				composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
 				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
-				// registerForImportedPackages = true
 			}
 
 			// scoping and exporting API
 			// fragment = scoping.ImportURIScopingFragment {}
 			// fragment = exporting.SimpleNamesFragment {}
 
-			// scoping and exporting API 
-			fragment = scoping.ImportNamespacesScopingFragment {}
-			fragment = exporting.QualifiedNamesFragment {}
-			fragment = builder.BuilderIntegrationFragment {}
+			// scoping and exporting API
+    		fragment = scoping.ImportNamespacesScopingFragment auto-inject {}
+    		fragment = exporting.QualifiedNamesFragment auto-inject {}
+			fragment = builder.BuilderIntegrationFragment auto-inject {}
 
-			// generator API
-			//fragment = generator.GeneratorFragment {
-			//	generateMwe = true
-			//	generateJavaMain = true
-			//}
-			
-			// formatter API 
-			fragment = formatting.FormatterFragment {}
+			// formatter API
+    		fragment = formatting.FormatterFragment auto-inject {}
+    
+    		// labeling API
+    		fragment = labeling.LabelProviderFragment auto-inject {}
 
-			// labeling API 
-			fragment = labeling.LabelProviderFragment {}
+			// outline API
+    		fragment = outline.OutlineTreeProviderFragment auto-inject {}
 
-			// outline API 
-			fragment = outline.OutlineTreeProviderFragment {}
-			fragment = outline.QuickOutlineFragment {}
-
-			// quickfix API 
-			fragment = quickfix.QuickfixProviderFragment {}
-
-			// content assist API  
-			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			
-			// rename refactoring  
-			fragment = refactoring.RefactorElementNameFragment {}
-
-			// generates a more lightweight Antlr parser and lexer tailored for content assist  
-			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
+			// quickfix API
+    		fragment = quickfix.QuickfixProviderFragment auto-inject {}
+    
+    		// content assist API
+    		fragment = contentAssist.ContentAssistFragment auto-inject {}
+    
+    		// generates a more lightweight Antlr parser and lexer tailored for content assist
+    		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
 
 			// generates junit test support classes into Generator#pathTestProject
-			fragment = junit.Junit4Fragment {}
+			fragment = junit.Junit4Fragment auto-inject {}
+			
+			// provides a preference page for template proposals
+    		fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
 		}
 	}
 }
