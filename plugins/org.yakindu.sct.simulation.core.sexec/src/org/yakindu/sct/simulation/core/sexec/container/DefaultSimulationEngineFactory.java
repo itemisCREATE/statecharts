@@ -25,6 +25,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.yakindu.base.types.typesystem.AbstractTypeSystem;
+import org.yakindu.base.types.typesystem.ITypeSystem;
+import org.yakindu.sct.domain.extension.DomainRegistry;
+import org.yakindu.sct.domain.extension.IDomainDescriptor;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
@@ -57,19 +61,25 @@ public class DefaultSimulationEngineFactory implements ISimulationEngineFactory 
 		// For restoring execution context
 		String attribute = launch.getLaunchConfiguration().getAttribute(ISCTLaunchParameters.EXECUTION_CONTEXT, "");
 		if (attribute != null && attribute.trim().length() > 0) {
-			ExecutionContext context = restore(attribute);
+			ExecutionContext context = restore(attribute, statechart);
 			controller.setExecutionContext(context);
 		}
 
 		return controller;
 	}
 
-	protected ExecutionContext restore(String context) {
+	protected ExecutionContext restore(String context, Statechart statechart) {
 		try {
 			ResourceSet set = new ResourceSetImpl();
-			Resource resource = set.createResource(URI.createURI("test.xmi"));
+			Resource resource = set.createResource(URI.createURI("snapshot.xmi"));
 			set.getResources().add(resource);
 			resource.load(new URIConverter.ReadableInputStream(context, "UTF_8"), Collections.emptyMap());
+			IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(statechart);
+			ITypeSystem typeSystem = domainDescriptor.getDomainInjectorProvider().getResourceInjector()
+					.getInstance(ITypeSystem.class);
+			if (typeSystem instanceof AbstractTypeSystem) {
+				set.getResources().add(((AbstractTypeSystem) typeSystem).getResource());
+			}
 			EcoreUtil.resolveAll(resource);
 			ExecutionContext result = (ExecutionContext) resource.getContents().get(0);
 			result.setSnapshot(true);
