@@ -44,46 +44,75 @@ Workflow {
 				xmlVersion = "1.0"
 			}
 
+//			// generates Java API for the generated EPackages 
+//			fragment = ecore.EcoreGeneratorFragment {
+//				generateEdit = true
+//				genModel = "model/SText.genmodel"
+//				emfRuntimeVersion = "2.8"
+//				xmiModelDirectory = "${runtimeProject}/model"
+//			}
+
 			// the serialization component
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 
-			// a custom ResourceFactory for use with EMF
-    		fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
+			// a custom ResourceFactory for use with EMF 
+			fragment = resourceFactory.ResourceFactoryFragment {
+				fileExtensions = file.extensions
+			}
 
 			// The antlr parser generator fragment.
-    		fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {
+			//  options = {
+			//		backtrack = true
+			//	}
+			}
 			
 			// java-based API for validation 
-			fragment = validation.JavaValidatorFragment auto-inject {
+			fragment = validation.JavaValidatorFragment {
 				composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
 				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+				// registerForImportedPackages = true
 			}
 
 			// scoping and exporting API
-    		fragment = scoping.ImportNamespacesScopingFragment auto-inject {}
-    		fragment = exporting.QualifiedNamesFragment auto-inject {}
-			fragment = builder.BuilderIntegrationFragment auto-inject {}
+			// fragment = scoping.ImportURIScopingFragment {}
+			// fragment = exporting.SimpleNamesFragment {}
 
-			// formatter API
-    		fragment = formatting.FormatterFragment auto-inject {}
-    
-    		// labeling API
-    		fragment = labeling.LabelProviderFragment auto-inject {}
+			// scoping and exporting API 
+			fragment = scoping.ImportNamespacesScopingFragment {}
+			fragment = exporting.QualifiedNamesFragment {}
+			fragment = builder.BuilderIntegrationFragment {}
 
-			// outline API
-    		fragment = outline.OutlineTreeProviderFragment auto-inject {}
+			// generator API
+			//fragment = generator.GeneratorFragment {
+			//	generateMwe = true
+			//	generateJavaMain = true
+			//}
+			
+			// formatter API 
+			fragment = formatting.FormatterFragment {}
 
-			// quickfix API
-    		fragment = quickfix.QuickfixProviderFragment auto-inject {}
-    
-    		// content assist API
-    		fragment = contentAssist.JavaBasedContentAssistFragment auto-inject {}
-    
-    		// generates a more lightweight Antlr parser and lexer tailored for content assist
-    		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
+			// labeling API 
+			fragment = labeling.LabelProviderFragment {}
+
+			// outline API 
+			fragment = outline.OutlineTreeProviderFragment {}
+			fragment = outline.QuickOutlineFragment {}
+
+			// quickfix API 
+			fragment = quickfix.QuickfixProviderFragment {}
+
+			// content assist API  
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+			
+			// rename refactoring  
+			fragment = refactoring.RefactorElementNameFragment {}
+
+			// generates a more lightweight Antlr parser and lexer tailored for content assist  
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
 
 			// generates junit test support classes into Generator#pathTestProject
-			fragment = junit.Junit4Fragment auto-inject {}
+			fragment = junit.Junit4Fragment {}
 		}
 	}
 }
