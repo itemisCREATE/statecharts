@@ -33,11 +33,10 @@ import org.yakindu.sct.model.sexec.Trace
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
+import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
-import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
-import org.eclipse.xtext.EcoreUtil2
 
 /**
  * 
@@ -90,24 +89,26 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 			executionContext.activeStates.forEach[state|
 				activeStateConfiguration.set(state.toExecutionState.stateVector.offset, state.toExecutionState)
 				// schedule all time events
-				state.toExecutionState.enterSequences?.scheduledTimeEvents?.scheduleAndRun
+				state.toExecutionState.enterSequences?.forEach[executeAfterRestore]
 			]
+			flow.enterSequences?.forEach[executeAfterRestore]
 		}
 	}
 	
-	def Sequence getScheduledTimeEvents(List<Sequence> enterSequences) {
-		val seq = factory.createSequence
-		for (sequence : enterSequences) {
-			val timeEvents = EcoreUtil2.getAllContentsOfType(sequence, ScheduleTimeEvent)
-			seq.steps.addAll(timeEvents)
-			
-			val calls = EcoreUtil2.getAllContentsOfType(sequence, Call)
-			for (call : calls) {
-				val calledTimeEvents = EcoreUtil2.getAllContentsOfType(call.step, ScheduleTimeEvent)
-				seq.steps.addAll(calledTimeEvents)
-			}
-		}
-		if (seq.steps.size > 0) seq else null
+	def dispatch protected void executeAfterRestore(Step it) {
+		// fall back
+	}
+	
+	def dispatch protected void executeAfterRestore(Sequence it) {
+		steps.forEach[executeAfterRestore]
+	}
+	
+	def dispatch protected void executeAfterRestore(Call it) {
+		step.executeAfterRestore
+	}
+
+	def dispatch protected void executeAfterRestore(ScheduleTimeEvent it) {
+		scheduleAndRun
 	}
 
 	def ExecutionState toExecutionState(RegularState state) {
