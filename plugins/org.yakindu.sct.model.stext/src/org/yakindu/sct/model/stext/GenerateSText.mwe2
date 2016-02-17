@@ -77,16 +77,13 @@ Workflow {
     		fragment = quickfix.QuickfixProviderFragment auto-inject {}
     
     		// content assist API
-    		fragment = contentAssist.ContentAssistFragment auto-inject {}
+    		fragment = contentAssist.JavaBasedContentAssistFragment auto-inject {}
     
     		// generates a more lightweight Antlr parser and lexer tailored for content assist
     		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
 
 			// generates junit test support classes into Generator#pathTestProject
 			fragment = junit.Junit4Fragment auto-inject {}
-			
-			// provides a preference page for template proposals
-    		fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
 		}
 	}
 }
