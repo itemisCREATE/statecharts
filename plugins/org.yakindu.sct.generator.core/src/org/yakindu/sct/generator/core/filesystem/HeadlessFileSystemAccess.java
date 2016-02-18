@@ -73,6 +73,7 @@ public class HeadlessFileSystemAccess extends AbstractFileSystemAccess implement
 
 	/**
 	 * Respects 'Pigeonhole_principle'.
+	 * 
 	 * @see https://en.wikipedia.org/wiki/Pigeonhole_principle
 	 * @param newContent
 	 * @param currentContent
