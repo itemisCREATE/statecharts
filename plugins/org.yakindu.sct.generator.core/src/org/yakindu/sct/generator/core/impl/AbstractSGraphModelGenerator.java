@@ -50,7 +50,6 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	protected ISCTFileSystemAccess sctFsa;
 
 	protected void runGenerator(Statechart statechart, GeneratorEntry entry) {
-		//FIXME JDI will that piece of code ever be called?! I cannot find an implementation of ISGraphGenerator
 		if (this instanceof ISGraphGenerator) {
 			ISGraphGenerator graphGenerator = (ISGraphGenerator) this;
 			graphGenerator.generate(statechart, entry);

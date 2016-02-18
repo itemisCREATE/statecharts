@@ -34,9 +34,9 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.inject.Inject;
 
-//FIXME JDI integrate dependent classes with ISCTFileSystemAccess?!
 /**
  * Encapsulates some EFS related functionality which can be used by Generators.
+ * 
  * @author Johannes Dicks - Initial contribution and API
  *
  */
