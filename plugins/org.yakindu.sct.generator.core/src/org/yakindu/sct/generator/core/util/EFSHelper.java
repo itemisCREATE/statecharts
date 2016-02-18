@@ -11,24 +11,38 @@
  */
 package org.yakindu.sct.generator.core.util;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.util.RuntimeIOException;
+import org.eclipse.xtext.util.StringInputStream;
 import org.yakindu.sct.generator.core.impl.AbstractXpandBasedCodeGenerator;
-import org.yakindu.sct.generator.core.library.OutletFeatureHelperImpl;
+import org.yakindu.sct.generator.core.library.IOutletFeatureHelper;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
-//FIXME !!! integrate dependent classes with SCTFileSystemAccess?!
+import com.google.inject.Inject;
+
+//FIXME JDI integrate dependent classes with ISCTFileSystemAccess?!
 /**
- * NOTE : dependent classes are not useable in headless context
+ * Encapsulates some EFS related functionality which can be used by Generators.
  * @author Johannes Dicks - Initial contribution and API
  *
  */
 public class EFSHelper {
-
+	@Inject IOutletFeatureHelper outletFeatureHelper;
+	
 	public void refreshTargetProject(GeneratorEntry entry) {
 		if (Platform.isRunning()) {
 
@@ -50,13 +64,148 @@ public class EFSHelper {
 	 * @return
 	 */
 	public IProject getTargetProject(GeneratorEntry entry) {
-		String stringValue = new OutletFeatureHelperImpl().getTargetProjectValue(entry).getStringValue();
+		String stringValue = outletFeatureHelper.getTargetProjectValue(entry).getStringValue();
 		if (Platform.isRunning()) {
 			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(stringValue);
 			return project;
 		} else
 			throw new IllegalStateException("The " + AbstractXpandBasedCodeGenerator.class.getSimpleName()
 					+ " needs a running eclipse.Platform");
+	}
+	
+	/**
+	 */
+	public String getEncoding(IFile file) throws CoreException {
+		return file.getCharset(true);
+	}
+
+
+	/**
+	 * Copy of {@link org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2#getContainer}
+	 * @param outputConfig
+	 * @return
+	 * @see {@link org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2}
+	 */
+	public IContainer getContainer(OutputConfiguration outputConfig,IProject project) {
+		String path = outputConfig.getOutputDirectory();
+		if (".".equals(path) || "./".equals(path) || "".equals(path) || project == null) {
+			return project;
+		}
+		return project.getFolder(new Path(path));
+	}
+
+	/**
+	 * @param container
+	 */
+	public void createContainer(IContainer container) {
+		try {
+			ensureExists(container);
+		} catch (CoreException e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
+
+	/**
+	 * @param fileName
+	 * @param iProject 
+	 * @param outputName
+	 * @return
+	 */
+	public IFile getFile(String fileName, OutputConfiguration config, IProject iProject) {
+		IContainer container = getContainer(config,iProject);
+		if (container != null) {
+			IFile result = container.getFile(new Path(fileName));
+			refreshFileSilently(result, new NullProgressMonitor());
+			return result;
+		}
+		return null;
+	}
+
+	/**
+	 * @param result
+	 * @param nullProgressMonitor
+	 */
+	private void refreshFileSilently(IFile result, NullProgressMonitor nullProgressMonitor) {
+		try {
+			result.refreshLocal(IResource.DEPTH_ZERO, new NullProgressMonitor());
+		} catch (CoreException c) {
+			// ignore
+		}
+	}
+
+	/**
+	 * @param file
+	 * @param newContent
+	 * @return
+	 */
+	public boolean hasContentsChanged(IFile file, StringInputStream newContent) {
+		boolean contentChanged = false;
+		BufferedInputStream oldContent = null;
+		try {
+			oldContent = new BufferedInputStream(file.getContents());
+			int newByte = newContent.read();
+			int oldByte = oldContent.read();
+			while (newByte != -1 && oldByte != -1 && newByte == oldByte) {
+				newByte = newContent.read();
+				oldByte = oldContent.read();
+			}
+			contentChanged = newByte != oldByte;
+		} catch (CoreException e) {
+			contentChanged = true;
+		} catch (IOException e) {
+			contentChanged = true;
+		} finally {
+			if (oldContent != null) {
+				try {
+					oldContent.close();
+				} catch (IOException e) {
+					// ignore
+				}
+			}
+		}
+		return contentChanged;
+	}
+	
+	/**
+	 * @param file
+	 * @param isDerived
+	 */
+	public void setDerived(IFile file, boolean isDerived) throws CoreException {
+		file.setDerived(isDerived, new NullProgressMonitor());
+	}
+
+	/**
+	 * @param file
+	 * @throws CoreException 
+	 */
+	public void ensureParentExists(IFile file) throws CoreException {
+		if (!file.exists()) {
+			ensureExists(file.getParent());
+		}
+		
+	}
+
+	/**
+	 * @param contentsAsString
+	 * @param encoding
+	 * @return
+	 */
+	public StringInputStream getInputStream(String contentsAsString, String encoding) {
+		try {
+			return new StringInputStream(contentsAsString, encoding);
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeIOException(e);
+		}
+	}
+	
+	protected void ensureExists(IContainer container) throws CoreException {
+		if (container.exists())
+			return;
+		if (container instanceof IFolder) {
+			ensureExists(container.getParent());
+			((IFolder) container).create(true, true, new NullProgressMonitor());
+		}
 	}
 
 }

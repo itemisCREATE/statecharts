@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.base.base.*;
 import org.yakindu.base.base.BaseFactory;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DocumentedElement;
@@ -62,6 +63,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 		switch (eClass.getClassifierID()) {
 			case BasePackage.NAMED_ELEMENT: return createNamedElement();
 			case BasePackage.DOCUMENTED_ELEMENT: return createDocumentedElement();
+			case BasePackage.DOMAIN_ELEMENT: return createDomainElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -85,6 +87,16 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 	public DocumentedElement createDocumentedElement() {
 		DocumentedElementImpl documentedElement = new DocumentedElementImpl();
 		return documentedElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DomainElement createDomainElement() {
+		DomainElementImpl domainElement = new DomainElementImpl();
+		return domainElement;
 	}
 
 	/**

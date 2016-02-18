@@ -47,6 +47,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.part.FileEditorInput;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -166,7 +167,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 				Statechart statechart = (Statechart) EcoreUtil.getObjectByType(resource.getContents(),
 						SGraphPackage.Literals.STATECHART);
 				statechart.setDomainID(domainWizardPage != null ? domainWizardPage.getDomainID()
-						: SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral());
+						: BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral());
 
 				try {
 					resource.save(getSaveOptions());

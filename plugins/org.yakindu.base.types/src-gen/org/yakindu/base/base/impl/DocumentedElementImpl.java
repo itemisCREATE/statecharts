@@ -15,10 +15,10 @@ import org.yakindu.base.base.DocumentedElement;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.base.impl.DocumentedElementImpl#getDocumentation <em>Documentation</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

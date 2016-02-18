@@ -10,17 +10,16 @@
  */
 package org.yakindu.sct.domain.generic.extension;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
 import org.yakindu.sct.domain.generic.modules.EntryRuleRuntimeModule;
 import org.yakindu.sct.domain.generic.modules.EntryRuleUIModule;
 import org.yakindu.sct.domain.generic.modules.GenericEditorModule;
+import org.yakindu.sct.domain.generic.modules.GenericGeneratorModule;
 import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 import org.yakindu.sct.domain.generic.modules.GenericSimulationModule;
 import org.yakindu.sct.domain.generic.modules.GenericTypeSystemModule;
@@ -35,7 +34,6 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.ui.STextUiModule;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
@@ -85,6 +83,12 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 		return new GenericSequencerModule();
 	}
 
+	public Module getGeneratorModule(String generatorId) {
+		// currently there is only one module with shared bindings for all code
+		// generators
+		return new GenericGeneratorModule();
+	}
+
 	protected Module getResourceModule() {
 		Module uiModule = Modules.override(getLanguageRuntimeModule()).with(getLanguageUIModule());
 		Module result = Modules.override(uiModule).with(getSharedStateModule());
@@ -119,21 +123,16 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 	public Injector getSimulationInjector() {
 		return Guice.createInjector(getSimulationModule());
 	}
-	
+
 	@Override
 	public Injector getSequencerInjector() {
 		return Guice.createInjector(getSequencerModule());
 	}
-	
+
 	@Override
 	public Injector getSequencerInjector(Module overrides) {
-		ArrayList<Module> tmpOverrides = Lists.newArrayList(overrides);
-		//FIXME !!! remove shared state module
-		if(Platform.isRunning()){
-			tmpOverrides.add(getSharedStateModule());
-		}
-		if(tmpOverrides != null) {
-			return Guice.createInjector(Modules.override(getSequencerModule()).with(tmpOverrides));
+		if (overrides != null) {
+			return Guice.createInjector(Modules.override(getSequencerModule()).with(overrides));
 		}
 		return getSequencerInjector();
 	}
@@ -142,4 +141,21 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 	public Injector getEditorInjector() {
 		return Guice.createInjector(new GenericEditorModule());
 	}
+
+	@Override
+	public Injector getGeneratorInjector(String generatorId) {
+		return getGeneratorInjector(generatorId, null);
+	}
+
+	@Override
+	public Injector getGeneratorInjector(String generatorId, Module overrides) {
+		Module result = null;
+		if (overrides != null) {
+			result = Modules.override(getGeneratorModule(generatorId)).with(overrides);
+		} else
+			result = getGeneratorModule(generatorId);
+		result = Modules.combine(result, getSequencerModule());
+		return Guice.createInjector(result);
+	}
+
 }

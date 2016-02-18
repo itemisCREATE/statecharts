@@ -18,15 +18,19 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Binder;
+import com.google.inject.Inject;
 import com.google.inject.Module;
 import com.google.inject.Scopes;
 import com.google.inject.util.Modules;
 
 public class JavaCodeGenerator extends AbstractJavaCodeGenerator {
 
+	@Inject
+	private JavaGenerator delegate;
+	
+	
 	@Override
 	public void generate(Statechart statechart, GeneratorEntry entry) {
-		JavaGenerator delegate = getInjector(entry).getInstance(JavaGenerator.class);
 
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
 
@@ -34,11 +38,11 @@ public class JavaCodeGenerator extends AbstractJavaCodeGenerator {
 			dumpSexec(entry, flow);
 		}
 
-		delegate.generate(flow, entry, getFileSystemAccess(entry));
+		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess());
 	}
 
 	@Override
-	protected Module getOverridesModule(final GeneratorEntry entry) {
+	public Module getOverridesModule(final GeneratorEntry entry) {
 		Module module = super.getOverridesModule(entry);
 		final GenmodelEntries entries = new GenmodelEntries();
 		return Modules.override(module).with(new Module() {

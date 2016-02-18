@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.base.BaseFactory;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DocumentedElement;
+import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 
 /**
@@ -35,6 +36,13 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	private EClass documentedElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass domainElementEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -138,6 +146,24 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDomainElement() {
+		return domainElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDomainElement_DomainID() {
+		return (EAttribute)domainElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public BaseFactory getBaseFactory() {
 		return (BaseFactory)getEFactoryInstance();
 	}
@@ -166,6 +192,9 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		documentedElementEClass = createEClass(DOCUMENTED_ELEMENT);
 		createEAttribute(documentedElementEClass, DOCUMENTED_ELEMENT__DOCUMENTATION);
+
+		domainElementEClass = createEClass(DOMAIN_ELEMENT);
+		createEAttribute(domainElementEClass, DOMAIN_ELEMENT__DOMAIN_ID);
 	}
 
 	/**
@@ -203,6 +232,9 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		initEClass(documentedElementEClass, DocumentedElement.class, "DocumentedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDocumentedElement_Documentation(), ecorePackage.getEString(), "documentation", null, 0, 1, DocumentedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(domainElementEClass, DomainElement.class, "DomainElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDomainElement_DomainID(), ecorePackage.getEString(), "domainID", "org.yakindu.domain.default", 0, 1, DomainElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

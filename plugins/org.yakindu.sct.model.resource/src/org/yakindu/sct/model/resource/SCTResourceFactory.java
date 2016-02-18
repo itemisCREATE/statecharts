@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomainDescriptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -50,7 +51,7 @@ public class SCTResourceFactory extends XMIResourceFactoryImpl {
 	}
 
 	protected String determineDomainID(URI uri) {
-		String result = SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral();
+		String result = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 		if (URIConverter.INSTANCE.exists(uri, null)) {
 			XMIResource resource = new XMIResourceImpl(uri);
 			try {

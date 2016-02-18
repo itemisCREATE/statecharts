@@ -37,17 +37,17 @@ public abstract class AbstractWorkspaceGenerator extends AbstractSExecModelGener
 	}
 
 	public final File getTargetProject(GeneratorEntry entry) {
-		URI uri = sctFileSystemAccess.getURI(outletFeatureHelper.getTargetProjectValue(entry).getStringValue());
+		URI uri = sctFsa.getURI(outletFeatureHelper.getTargetProjectValue(entry).getStringValue());
 		return new File(uri.toFileString());
 	}
 
 	public final File getTargetFolder(GeneratorEntry entry) {
-		URI uri = sctFileSystemAccess.getURI(outletFeatureHelper.getRelativeTargetFolder(entry));
+		URI uri = sctFsa.getURI(outletFeatureHelper.getRelativeTargetFolder(entry));
 		return new File(uri.toFileString());
 	}
 	
 	public final File getLibraryTargetFolder(GeneratorEntry entry) {
-		URI uri = sctFileSystemAccess.getURI(outletFeatureHelper.getRelativeLibraryFolder(entry));
+		URI uri = sctFsa.getURI(outletFeatureHelper.getRelativeLibraryFolder(entry));
 		return new File(uri.toFileString());
 	}
 	

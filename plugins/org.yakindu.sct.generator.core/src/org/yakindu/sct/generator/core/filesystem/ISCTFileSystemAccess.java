@@ -30,7 +30,7 @@ import org.eclipse.xtext.generator.OutputConfiguration;
  * @author Johannes Dicks - Initial contribution and API
  *
  */
-public interface SCTFileSystemAccess {
+public interface ISCTFileSystemAccess {
 
 	/**
 	 * Provides an absolute URI for further processing.

@@ -19,8 +19,6 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Effect</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

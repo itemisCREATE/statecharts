@@ -14,12 +14,15 @@ package org.yakindu.sct.generator.core.library;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * Provides convenience access to SGen outlet features.
  * 
  * @author Johannes Dicks - Initial contribution and API
  *
  */
+@ImplementedBy(OutletFeatureHelperImpl.class)
 public interface IOutletFeatureHelper {
 	/**
 	 * The targetFolder value defined in SGen.

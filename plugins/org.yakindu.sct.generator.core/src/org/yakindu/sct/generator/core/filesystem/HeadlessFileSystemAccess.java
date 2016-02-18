@@ -19,7 +19,7 @@ import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
-public class HeadlessFileSystemAccess extends AbstractFileSystemAccess implements SCTFileSystemAccess {
+public class HeadlessFileSystemAccess extends AbstractFileSystemAccess implements ISCTFileSystemAccess {
 	public static final String BASE_DIR = "filesystemAccess.absolute.baseDir";
 	public static final String ENCODING = "filesystemAccess.encoding";
 
@@ -164,7 +164,7 @@ public class HeadlessFileSystemAccess extends AbstractFileSystemAccess implement
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.yakindu.sct.generator.core.filesystem.SCTFileSystemAccess#
+	 * @see org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess#
 	 * getIFileSystemAccess()
 	 */
 	@Override
@@ -175,7 +175,7 @@ public class HeadlessFileSystemAccess extends AbstractFileSystemAccess implement
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.yakindu.sct.generator.core.filesystem.SCTFileSystemAccess#
+	 * @see org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess#
 	 * afterGeneration()
 	 */
 	@Override

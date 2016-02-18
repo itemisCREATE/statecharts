@@ -170,9 +170,9 @@ public class StatechartItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Statechart_domainID_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Statechart_domainID_feature", "_UI_Statechart_type"),
-				 SGraphPackage.Literals.STATECHART__DOMAIN_ID,
+				 getString("_UI_DomainElement_domainID_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DomainElement_domainID_feature", "_UI_DomainElement_type"),
+				 BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID,
 				 true,
 				 false,
 				 false,
