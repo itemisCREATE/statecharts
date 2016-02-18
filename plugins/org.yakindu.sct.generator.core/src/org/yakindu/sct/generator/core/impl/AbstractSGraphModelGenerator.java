@@ -39,8 +39,6 @@ import com.google.inject.util.Modules;
  */
 public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 
-	public static final String SCT_GENERATOR_CONSOLE = "SCT Generator Console";
-
 	@Inject
 	protected IGeneratorLog log;
 	@Inject
