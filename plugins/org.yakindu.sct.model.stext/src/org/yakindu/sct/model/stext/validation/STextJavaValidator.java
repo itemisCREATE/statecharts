@@ -125,6 +125,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	private IContainer.Manager containerManager;
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
+	@Inject  (optional = true)
+	@Named("domainId")
+	private String domainID;
 
 	@Check
 	public void checkExpression(VariableDefinition expression) {
@@ -799,6 +802,30 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			return context.eResource();
 		} else {
 			return provider.getElement().eResource();
+		}
+	}
+
+	@Override
+	protected boolean isResponsible(Map<Object, Object> context, EObject eObject) {
+		boolean isResponsible = super.isResponsible(context, eObject);
+		if (!isResponsible)
+			return false;
+		Statechart statechart = getStatechart(eObject);
+		if (domainID == null || !domainID.equals(statechart.getDomainID())) {
+			return false;
+		}
+		return true;
+	}
+
+	protected Statechart getStatechart(EObject context) {
+		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
+				ContextElementAdapter.class);
+
+		if (provider == null) {
+			return EcoreUtil2.getContainerOfType(context, Statechart.class);
+		} else {
+			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
+					SGraphPackage.Literals.STATECHART);
 		}
 	}
 }

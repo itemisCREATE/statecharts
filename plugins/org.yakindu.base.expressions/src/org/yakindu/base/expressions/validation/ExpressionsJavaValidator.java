@@ -57,7 +57,6 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 
 	@Inject
 	private GenericsPrettyPrinter printer;
-
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
 	@Inject
@@ -170,4 +169,5 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			}
 		}
 	}
+
 }
