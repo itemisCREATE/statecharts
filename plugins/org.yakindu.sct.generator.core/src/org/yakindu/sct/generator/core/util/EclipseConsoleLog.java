@@ -9,10 +9,11 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
-import org.yakindu.sct.generator.core.impl.AbstractSGraphModelGenerator;
 import org.yakindu.sct.generator.core.impl.IGeneratorLog;
 
 public class EclipseConsoleLog implements IGeneratorLog {
+	
+	public static final String SCT_GENERATOR_CONSOLE = "SCT Generator Console";
 	
 	private MessageConsoleStream info;
 	private MessageConsoleStream error;
@@ -34,11 +35,11 @@ public class EclipseConsoleLog implements IGeneratorLog {
 		IConsoleManager conMan = plugin.getConsoleManager();
 		IConsole[] existing = conMan.getConsoles();
 		for (int i = 0; i < existing.length; i++) {
-			if (AbstractSGraphModelGenerator.SCT_GENERATOR_CONSOLE.equals(existing[i].getName())) {
+			if (SCT_GENERATOR_CONSOLE.equals(existing[i].getName())) {
 				return (MessageConsole) existing[i];
 			} 
 		}
-		MessageConsole myConsole = new MessageConsole(AbstractSGraphModelGenerator.SCT_GENERATOR_CONSOLE, null);
+		MessageConsole myConsole = new MessageConsole(SCT_GENERATOR_CONSOLE, null);
 		conMan.addConsoles(new IConsole[]{myConsole});
 		return myConsole;
 	}
