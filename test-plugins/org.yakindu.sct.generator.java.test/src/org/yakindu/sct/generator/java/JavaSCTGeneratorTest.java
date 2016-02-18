@@ -17,10 +17,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
+import org.yakindu.sct.generator.java.types.JavaTypeSystemAccess;
 import org.yakindu.sct.generator.java.util.AbstractJavaGeneratorTest;
+import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import org.yakindu.sct.test.models.TestModelInjectorProvider;
+
+import com.google.inject.Binder;
+import com.google.inject.Module;
+import com.google.inject.Scopes;
 
 /**
  * These tests only check for compile errors, they don't check the behaviour of
@@ -36,8 +43,14 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 
 	@Before
 	public void setup() {
-		new TestModelInjectorProvider().getInjector().injectMembers(this);
-	}
+		new TestModelInjectorProvider(new Module(){
+			@Override
+			public void configure(Binder binder) {
+				binder.bind(ICodegenTypeSystemAccess.class).to(JavaTypeSystemAccess.class);
+				binder.bind(INamingService.class).to(JavaNamingService.class).in(Scopes.SINGLETON);
+			}
+		}).getInjector().injectMembers(this);
+	} 
 
 	public JavaSCTGeneratorTest(Statechart statechart) {
 		this.statechart = statechart;

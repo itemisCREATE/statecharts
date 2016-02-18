@@ -10,12 +10,16 @@
  */
 package org.yakindu.sct.test.models;
 
+import java.util.List;
+
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.yakindu.sct.domain.generic.modules.GenericGeneratorModule;
 import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 
 /**
  * 
@@ -24,8 +28,21 @@ import com.google.inject.Injector;
  */
 public class TestModelInjectorProvider implements IInjectorProvider {
 
+	private List<Module> module;
+
+	public TestModelInjectorProvider(Module... module) {
+		this.module = Lists.newArrayList(module);
+	}
+	public TestModelInjectorProvider() {
+	}
+
 	public Injector getInjector() {
-		return Guice.createInjector(new GenericSequencerModule(),new GenericGeneratorModule());
+		List<Module> modules = Lists.newArrayList();
+		modules.add(new GenericSequencerModule());
+		modules.add(new GenericGeneratorModule());
+		if(this.module !=null && !this.module.isEmpty())
+		modules.addAll(this.module);
+		return Guice.createInjector(modules);
 	}
 
 }
