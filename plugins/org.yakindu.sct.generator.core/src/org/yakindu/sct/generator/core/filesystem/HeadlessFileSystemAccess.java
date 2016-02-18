@@ -74,7 +74,6 @@ public class HeadlessFileSystemAccess extends AbstractFileSystemAccess implement
 	/**
 	 * Respects 'Pigeonhole_principle'.
 	 * 
-	 * @see https://en.wikipedia.org/wiki/Pigeonhole_principle
 	 * @param newContent
 	 * @param currentContent
 	 * @return
@@ -162,23 +161,11 @@ public class HeadlessFileSystemAccess extends AbstractFileSystemAccess implement
 		return URI.createFileURI(getFullPath(outputConfig) + File.separator + path);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess#
-	 * getIFileSystemAccess()
-	 */
 	@Override
 	public IFileSystemAccess getIFileSystemAccess() {
 		return this;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess#
-	 * afterGeneration()
-	 */
 	@Override
 	public void afterGeneration() {
 		// currently nothing

@@ -34,6 +34,7 @@ import com.google.inject.util.Modules;
  * on the {@link ExecutionFlow}
  * 
  * @author Andreas Mülder - Initial contribution and API
+ * @author Johannes Dicks - decouple EFS
  * 
  */
 public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {

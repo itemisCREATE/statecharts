@@ -19,12 +19,6 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 public class OutletFeatureHelperImpl extends BaseSGenFeatureHelper implements IOutletFeatureHelper {
 
-	/**
-	 * 
-	 */
-	public OutletFeatureHelperImpl() {
-		// TODO Auto-generated constructor stub
-	}
 	@Override
 	public FeatureParameterValue getTargetFolderValue(GeneratorEntry entry) {
 		return getFeatureParameter(entry, OUTLET_FEATURE, ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER);
