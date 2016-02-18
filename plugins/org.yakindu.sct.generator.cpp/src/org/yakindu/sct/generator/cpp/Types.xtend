@@ -26,18 +26,8 @@ class Types {
 	@Inject extension GenmodelEntries
 	 
 	def generateTypesHpp(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-		if (fsa instanceof EFSResourceFileSystemAccess &&
-			!exists(flow.typesModule.h, fsa as EFSResourceFileSystemAccess)) {
 			fsa.generateFile(flow.typesModule.h, flow.typesHContent(entry))	
-		}
 	}
-	
-	def protected exists(String filename, EFSResourceFileSystemAccess fsa) {
-		val uri = fsa.getURI(filename);
-		val file = ResourcesPlugin.getWorkspace().getRoot()
-					.getFile(new Path(uri.toPlatformString(true)));
-		return file.exists;
-	}	
 	
 	def typesHContent(ExecutionFlow it, GeneratorEntry entry) '''
 		«entry.licenseText»
