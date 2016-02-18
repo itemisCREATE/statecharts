@@ -29,7 +29,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
-import org.yakindu.sct.generator.core.util.EFSHelper;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -39,6 +38,8 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 import com.google.inject.Binder;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
@@ -55,9 +56,10 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 
 	public static final String LIBRARY_TARGET_FOLDER_OUTLET = "LIBRARY_TARGET_FOLDER";
 
-	private EFSHelper efsHelper = new EFSHelper();
-
 	public abstract String getTemplatePath();
+
+	@Inject
+	private Injector injector;
 
 	/**
 	 * Invokes XPands template engine to generate resources
@@ -94,9 +96,6 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 			log.writeToConsole("!!! No matching define in Template found.");
 		}
 
-		// refresh the project to get external updates:
-
-		efsHelper.refreshTargetProject(entry);
 	}
 
 	protected XpandExecutionContext createXpandContext(GeneratorEntry entry, Output output) {
@@ -110,21 +109,21 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 		};
 		execCtx.registerMetaModel(metamodel);
 		execCtx.getGlobalVariables().put(CONTEXT_INJECTOR_PROPERTY_NAME,
-				new Variable(CONTEXT_INJECTOR_PROPERTY_NAME, getInjector(entry)));
+				new Variable(CONTEXT_INJECTOR_PROPERTY_NAME, injector));
 		return execCtx;
 	}
 
 	protected Output createOutput(GeneratorEntry entry) {
-		//FIXME !!! unify, this is duplicate see ...Java*Generic*Something
-		sctFileSystemAccess.setOutputPath(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT,
+		// FIXME JDI unify, this is duplicate see ...Java*Generic*Something
+		sctFsa.setOutputPath(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT,
 				outletFeatureHelper.getTargetProjectValue(entry).getStringValue());
-		
-		sctFileSystemAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
+
+		sctFsa.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
 				outletFeatureHelper.getTargetFolderValue(entry).getExpression().toString());
-		
+
 		String outputPath = outletFeatureHelper.getRelativeTargetFolder(entry);
 
-		String absoluteTargetFolder = sctFileSystemAccess.getURI(outputPath).toFileString();
+		String absoluteTargetFolder = sctFsa.getURI(outputPath).toFileString();
 
 		Output output = new OutputImpl();
 
@@ -137,8 +136,8 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 
 		String relativeLibraryTargetFolder = outletFeatureHelper.getRelativeLibraryFolder(entry);
 
-		String absoluteLibraryTargetFolder = sctFileSystemAccess.getURI(relativeLibraryTargetFolder).toFileString();
-		
+		String absoluteLibraryTargetFolder = sctFsa.getURI(relativeLibraryTargetFolder).toFileString();
+
 		Outlet libraryTargetFolderOutlet = new Outlet(false, null, LIBRARY_TARGET_FOLDER_OUTLET, false,
 				absoluteLibraryTargetFolder);
 		output.addOutlet(libraryTargetFolderOutlet);
@@ -147,7 +146,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 	}
 
 	@Override
-	protected Module getOverridesModule(GeneratorEntry entry) {
+	public Module getOverridesModule(GeneratorEntry entry) {
 		Module baseModule = super.getOverridesModule(entry);
 
 		return Modules.override(baseModule).with(new Module() {

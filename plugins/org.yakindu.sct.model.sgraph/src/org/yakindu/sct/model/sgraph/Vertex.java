@@ -20,12 +20,12 @@ import org.yakindu.base.base.NamedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.Vertex#getParentRegion <em>Parent Region</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.Vertex#getIncomingTransitions <em>Incoming Transitions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.Vertex#getOutgoingTransitions <em>Outgoing Transitions</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getVertex()
  * @model abstract="true"

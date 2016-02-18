@@ -18,14 +18,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.EcoreUtil2;
 import org.osgi.framework.Bundle;
-import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.DomainElement;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -124,7 +122,7 @@ public class DomainRegistry {
 	}
 
 	public static IDomainDescriptor getDomainDescriptor(final String id) {
-		final String defaultDomainID = SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral();
+		final String defaultDomainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 		try {
 			return Iterables.find(getDomainDescriptors(), new Predicate<IDomainDescriptor>() {
 				@Override
@@ -142,23 +140,10 @@ public class DomainRegistry {
 	}
 
 	public static IDomainDescriptor getDomainDescriptor(EObject object) {
-		EObject rootContainer = EcoreUtil.getRootContainer(object);
-				if (rootContainer instanceof Statechart)
-						return getDomainDescriptor(((Statechart) rootContainer).getDomainID());
-					else {
-						return getDomainDescriptor(((Statechart) getStatechart(object)).getDomainID());
-					}
-				}
-				
-				protected static Statechart getStatechart(EObject context) {
-					final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
-							ContextElementAdapter.class);
-			
-					if (provider == null) {
-						return EcoreUtil2.getContainerOfType(context, Statechart.class);
-					} else {
-						return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
-								SGraphPackage.Literals.STATECHART);
-					}
-				}
+		DomainElement domainElement = EcoreUtil2.getContainerOfType(object, DomainElement.class);
+		String domainID = domainElement != null
+				? domainElement.getDomainID()
+				: BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
+		return getDomainDescriptor(domainID);
+	}
 }

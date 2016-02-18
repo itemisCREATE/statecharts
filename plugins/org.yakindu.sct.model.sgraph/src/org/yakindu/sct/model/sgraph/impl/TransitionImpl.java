@@ -37,6 +37,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getTrigger <em>Trigger</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getEffect <em>Effect</em>}</li>
@@ -45,7 +46,6 @@ import org.yakindu.sct.model.sgraph.Vertex;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getSource <em>Source</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

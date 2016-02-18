@@ -20,11 +20,11 @@ import org.yakindu.base.base.DocumentedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.Transition#getTarget <em>Target</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.Transition#getSource <em>Source</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getTransition()
  * @model

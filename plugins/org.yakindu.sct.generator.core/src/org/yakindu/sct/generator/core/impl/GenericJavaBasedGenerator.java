@@ -19,17 +19,16 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.generator.IFileSystemAccess;
-import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.util.Strings;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
-import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
@@ -40,8 +39,11 @@ import com.google.inject.util.Modules;
  */
 public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 
+	@Inject
+	private Injector injector;
+	
 	@Override
-	protected Module getOverridesModule(final GeneratorEntry entry) {
+	public Module getOverridesModule(final GeneratorEntry entry) {
 		Module defaultModule = super.getOverridesModule(entry);
 
 		String overridingModuleClass = null;
@@ -79,10 +81,9 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		String templateClass = getTemplateClassName(entry);
 		final ClassLoader classLoader = getClassLoader(entry);
-		IFileSystemAccess fsa = getFileSystemAccess(entry);
 		try {
 			Class<?> delegateGeneratorClass = (Class<?>) classLoader.loadClass(templateClass);
-			Object delegate = getInjector(entry).getInstance(delegateGeneratorClass);
+			Object delegate = injector.getInstance(delegateGeneratorClass);
 
 			Class<?> iType_ = (Class<?>) getClass().getClassLoader()
 					.loadClass("org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator");
@@ -99,11 +100,11 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 
 			if (delegate instanceof IExecutionFlowGenerator) {
 				IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) delegate;
-				flowGenerator.generate(flow, entry, fsa);
+				flowGenerator.generate(flow, entry, sctFsa.getIFileSystemAccess());
 			}
 			if (iType.isInstance(delegate)) {
 				IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) delegate;
-				flowGenerator.generate(flow, entry, fsa);
+				flowGenerator.generate(flow, entry, sctFsa.getIFileSystemAccess());
 			}
 			if (delegate instanceof ISGraphGenerator) {
 				ISGraphGenerator graphGenerator = (ISGraphGenerator) delegate;
@@ -136,39 +137,4 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 		}
 		return project;
 	}
-
-	/**
-	 * Provides a pre configured IFileSystemAccess instance
-	 */
-	public IFileSystemAccess getFileSystemAccess(GeneratorEntry entry) {
-		//FIXME !!! unify, this is duplicate see ...Java*Generic*Something
-		// set target project value
-		sctFileSystemAccess.setOutputPath(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT,
-				outletFeatureHelper.getTargetProjectValue(entry).getStringValue());
-		// set target folder
-		sctFileSystemAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
-				outletFeatureHelper.getTargetFolderValue(entry).getExpression().toString());
-
-		FeatureParameterValue libraryTargetFolderValue = outletFeatureHelper
-				.getLibraryTargetFolderValue(entry);
-		
-		if (libraryTargetFolderValue != null) {
-			sctFileSystemAccess.setOutputPath(IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT,
-					libraryTargetFolderValue.getExpression().toString());
-		}
-
-		sctFileSystemAccess.getOutputConfigurations().get(IFileSystemAccess.DEFAULT_OUTPUT).setCreateOutputDirectory(true);
-		OutputConfiguration librarytargetFolderOutputConfiguration = sctFileSystemAccess.getOutputConfigurations()
-				.get(IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT);
-		if (librarytargetFolderOutputConfiguration != null) {
-			librarytargetFolderOutputConfiguration.setCreateOutputDirectory(true);
-			// do not overwrite existing resources and ensure the folder is not
-			// cleaned.
-			librarytargetFolderOutputConfiguration.setCanClearOutputDirectory(false);
-			librarytargetFolderOutputConfiguration.setOverrideExistingResources(false);
-		}
-
-		return sctFileSystemAccess.getIFileSystemAccess();
-	}
-
 }

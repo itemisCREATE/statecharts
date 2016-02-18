@@ -13,11 +13,14 @@ package org.yakindu.sct.generator.core.library;
 
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
+import com.google.inject.ImplementedBy;
+
 /**
  *Provides convenience access to SGen debug features.
  * @author Johannes Dicks - Initial contribution and API
  *
  */
+@ImplementedBy(DebugFeatureHelperImpl.class)
 public interface IDebugFeatureHelper {
 
 	boolean isDumpSexec(GeneratorEntry entry);

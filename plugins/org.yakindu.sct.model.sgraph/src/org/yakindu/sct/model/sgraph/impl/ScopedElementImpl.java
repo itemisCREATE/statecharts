@@ -31,11 +31,11 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopedElementImpl#getScopes <em>Scopes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopedElementImpl#getNamespace <em>Namespace</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

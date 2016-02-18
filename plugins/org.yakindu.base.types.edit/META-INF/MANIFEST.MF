@@ -4,7 +4,7 @@ Bundle-Name: YAKINDU Base Types Edit
 Bundle-SymbolicName: org.yakindu.base.types.edit;singleton:=true
 Bundle-Version: 2.5.0.qualifier
 Bundle-ClassPath: .
-Bundle-Activator: org.yakindu.base.types.provider.TypesEditPlugin$Implementation
+Bundle-Activator: org.yakindu.base.base.provider.BaseEditPlugin$Implementation
 Bundle-Vendor: statecharts.org
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

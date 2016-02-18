@@ -583,15 +583,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStatechart_DomainID() {
-		return (EAttribute)statechartEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getEntry() {
 		return entryEClass;
 	}
@@ -862,7 +853,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		statechartEClass = createEClass(STATECHART);
 		createEReference(statechartEClass, STATECHART__IMPORTS);
-		createEAttribute(statechartEClass, STATECHART__DOMAIN_ID);
 
 		entryEClass = createEClass(ENTRY);
 		createEAttribute(entryEClass, ENTRY__KIND);
@@ -969,6 +959,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		statechartEClass.getESuperTypes().add(this.getCompositeElement());
 		statechartEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		statechartEClass.getESuperTypes().add(theBasePackage.getDocumentedElement());
+		statechartEClass.getESuperTypes().add(theBasePackage.getDomainElement());
 		entryEClass.getESuperTypes().add(this.getPseudostate());
 		exitEClass.getESuperTypes().add(this.getPseudostate());
 		synchronizationEClass.getESuperTypes().add(this.getPseudostate());
@@ -1004,7 +995,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		initEClass(statechartEClass, Statechart.class, "Statechart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStatechart_Imports(), this.getImport(), null, "imports", null, 0, -1, Statechart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStatechart_DomainID(), ecorePackage.getEString(), "domainID", "org.yakindu.domain.default", 0, 1, Statechart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(entryEClass, Entry.class, "Entry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEntry_Kind(), this.getEntryKind(), "kind", null, 0, 1, Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

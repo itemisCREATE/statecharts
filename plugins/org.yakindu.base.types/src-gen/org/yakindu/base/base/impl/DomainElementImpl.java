@@ -1,58 +1,57 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.yakindu.base.base.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import org.yakindu.base.base.BasePackage;
-import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.base.DomainElement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Named Element</b></em>'.
+ * An implementation of the model object '<em><b>Domain Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.base.base.impl.NamedElementImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.yakindu.base.base.impl.DomainElementImpl#getDomainID <em>Domain ID</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class NamedElementImpl extends EObjectImpl implements NamedElement {
+public class DomainElementImpl extends EObjectImpl implements DomainElement {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getDomainID() <em>Domain ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getDomainID()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+	protected static final String DOMAIN_ID_EDEFAULT = "org.yakindu.domain.default";
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getDomainID() <em>Domain ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getDomainID()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
+	protected String domainID = DOMAIN_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected NamedElementImpl() {
+	protected DomainElementImpl() {
 		super();
 	}
 
@@ -63,7 +62,7 @@ public class NamedElementImpl extends EObjectImpl implements NamedElement {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return BasePackage.Literals.NAMED_ELEMENT;
+		return BasePackage.Literals.DOMAIN_ELEMENT;
 	}
 
 	/**
@@ -71,8 +70,8 @@ public class NamedElementImpl extends EObjectImpl implements NamedElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
+	public String getDomainID() {
+		return domainID;
 	}
 
 	/**
@@ -80,11 +79,11 @@ public class NamedElementImpl extends EObjectImpl implements NamedElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
+	public void setDomainID(String newDomainID) {
+		String oldDomainID = domainID;
+		domainID = newDomainID;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BasePackage.NAMED_ELEMENT__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, BasePackage.DOMAIN_ELEMENT__DOMAIN_ID, oldDomainID, domainID));
 	}
 
 	/**
@@ -95,8 +94,8 @@ public class NamedElementImpl extends EObjectImpl implements NamedElement {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case BasePackage.NAMED_ELEMENT__NAME:
-				return getName();
+			case BasePackage.DOMAIN_ELEMENT__DOMAIN_ID:
+				return getDomainID();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,8 +108,8 @@ public class NamedElementImpl extends EObjectImpl implements NamedElement {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case BasePackage.NAMED_ELEMENT__NAME:
-				setName((String)newValue);
+			case BasePackage.DOMAIN_ELEMENT__DOMAIN_ID:
+				setDomainID((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -124,8 +123,8 @@ public class NamedElementImpl extends EObjectImpl implements NamedElement {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case BasePackage.NAMED_ELEMENT__NAME:
-				setName(NAME_EDEFAULT);
+			case BasePackage.DOMAIN_ELEMENT__DOMAIN_ID:
+				setDomainID(DOMAIN_ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -139,8 +138,8 @@ public class NamedElementImpl extends EObjectImpl implements NamedElement {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case BasePackage.NAMED_ELEMENT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case BasePackage.DOMAIN_ELEMENT__DOMAIN_ID:
+				return DOMAIN_ID_EDEFAULT == null ? domainID != null : !DOMAIN_ID_EDEFAULT.equals(domainID);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -155,10 +154,10 @@ public class NamedElementImpl extends EObjectImpl implements NamedElement {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
+		result.append(" (domainID: ");
+		result.append(domainID);
 		result.append(')');
 		return result.toString();
 	}
 
-} //NamedElementImpl
+} //DomainElementImpl

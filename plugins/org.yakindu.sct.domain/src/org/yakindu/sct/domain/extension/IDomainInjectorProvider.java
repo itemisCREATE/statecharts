@@ -58,4 +58,11 @@ public interface IDomainInjectorProvider {
 	 * Returns an injector for all editor and UI related stuff.
 	 */
 	public Injector getEditorInjector();
+
+	/**
+	 * @param generatorId
+	 */
+	public Injector getGeneratorInjector(String generatorId);
+	
+	public Injector getGeneratorInjector(String generatorId, Module overrides);
 }

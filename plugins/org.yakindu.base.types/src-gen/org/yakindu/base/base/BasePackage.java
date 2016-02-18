@@ -117,6 +117,35 @@ public interface BasePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.base.impl.DomainElementImpl <em>Domain Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.base.impl.DomainElementImpl
+	 * @see org.yakindu.base.base.impl.BasePackageImpl#getDomainElement()
+	 * @generated
+	 */
+	int DOMAIN_ELEMENT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Domain ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ELEMENT__DOMAIN_ID = 0;
+
+	/**
+	 * The number of structural features of the '<em>Domain Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ELEMENT_FEATURE_COUNT = 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.base.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -157,6 +186,27 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDocumentedElement_Documentation();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.base.DomainElement <em>Domain Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Domain Element</em>'.
+	 * @see org.yakindu.base.base.DomainElement
+	 * @generated
+	 */
+	EClass getDomainElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.base.DomainElement#getDomainID <em>Domain ID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Domain ID</em>'.
+	 * @see org.yakindu.base.base.DomainElement#getDomainID()
+	 * @see #getDomainElement()
+	 * @generated
+	 */
+	EAttribute getDomainElement_DomainID();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -215,6 +265,24 @@ public interface BasePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DOCUMENTED_ELEMENT__DOCUMENTATION = eINSTANCE.getDocumentedElement_Documentation();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.base.impl.DomainElementImpl <em>Domain Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.base.impl.DomainElementImpl
+		 * @see org.yakindu.base.base.impl.BasePackageImpl#getDomainElement()
+		 * @generated
+		 */
+		EClass DOMAIN_ELEMENT = eINSTANCE.getDomainElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Domain ID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOMAIN_ELEMENT__DOMAIN_ID = eINSTANCE.getDomainElement_DomainID();
 
 	}
 
