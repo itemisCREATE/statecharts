@@ -127,6 +127,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	}
 
 	override resume() {
+		timingService.resume
 		executionContext.suspendedElements.clear
 		suspended = false
 		run
@@ -134,6 +135,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 
 	override suspend() {
 		suspended = true
+		timingService.pause
 	}
 
 	override exit() {
