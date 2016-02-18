@@ -25,10 +25,8 @@ import org.eclipse.xpand2.output.PostProcessor;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.Type;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
-import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypesPackage;
-import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -114,13 +112,6 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 	}
 
 	protected Output createOutput(GeneratorEntry entry) {
-		// FIXME JDI unify, this is duplicate see ...Java*Generic*Something
-		sctFsa.setOutputPath(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT,
-				outletFeatureHelper.getTargetProjectValue(entry).getStringValue());
-
-		sctFsa.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
-				outletFeatureHelper.getTargetFolderValue(entry).getExpression().toString());
-
 		String outputPath = outletFeatureHelper.getRelativeTargetFolder(entry);
 
 		String absoluteTargetFolder = sctFsa.getURI(outputPath).toFileString();
