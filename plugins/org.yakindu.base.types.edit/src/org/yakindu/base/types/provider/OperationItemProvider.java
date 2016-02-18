@@ -21,6 +21,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
@@ -108,7 +109,8 @@ public class OperationItemProvider extends DeclarationItemProvider {
 			builder.append(sep);
 			builder.append(parameter.getName());
 			builder.append(" : " );
-			builder.append(parameter.getType().getName());
+			Type type = parameter.getType();
+			builder.append(type != null? type.getName() : "null");
 			sep = ", ";
 		}
 		builder.append(")");
