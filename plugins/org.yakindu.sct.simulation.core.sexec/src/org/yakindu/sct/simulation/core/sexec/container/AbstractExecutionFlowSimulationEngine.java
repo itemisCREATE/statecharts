@@ -69,8 +69,8 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 	}
 
 	private void handleWrappedException(WrappedException ex) {
-		Status errorStatus = new Status(Status.ERROR, Activator.PLUGIN_ID, ERROR_DURING_SIMULATION, ex.getCause()
-				.getMessage(), ex.getCause());
+		Status errorStatus = new Status(Status.ERROR, Activator.PLUGIN_ID, ERROR_DURING_SIMULATION,
+				ex.getCause().getMessage(), ex.getCause());
 		IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(errorStatus);
 		try {
 			statusHandler.handleStatus(errorStatus, getDebugTarget());
@@ -97,8 +97,8 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 		ListBasedValidationIssueAcceptor acceptor = new ListBasedValidationIssueAcceptor();
 		ExecutionFlow flow = sequencer.transform(statechart, acceptor);
 		if (acceptor.getTraces(Severity.ERROR).size() > 0) {
-			Status errorStatus = new Status(Status.ERROR, Activator.PLUGIN_ID, ERROR_DURING_SIMULATION, acceptor
-					.getTraces(Severity.ERROR).iterator().next().toString(), null);
+			Status errorStatus = new Status(Status.ERROR, Activator.PLUGIN_ID, ERROR_DURING_SIMULATION,
+					acceptor.getTraces(Severity.ERROR).iterator().next().toString(), null);
 			IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(errorStatus);
 			try {
 				statusHandler.handleStatus(errorStatus, getDebugTarget());
@@ -123,6 +123,7 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 
 	public void suspend() {
 		suspended = true;
+		interpreter.suspend();
 	}
 
 	public void resume() {

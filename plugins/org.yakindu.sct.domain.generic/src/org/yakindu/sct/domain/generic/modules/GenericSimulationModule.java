@@ -27,12 +27,12 @@ import org.yakindu.sct.simulation.core.sexec.container.DefaultSimulationEngineFa
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
 import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultExecutionFlowInterpreter;
-import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultTimingService;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IOperationMockup;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.ITimingService;
 import org.yakindu.sct.simulation.core.sexec.interpreter.JavaOperationMockup;
+import org.yakindu.sct.simulation.core.sexec.interpreter.SuspendableTimingService;
 import org.yakindu.sct.simulation.core.sexec.interpreter.StextStatementInterpreter;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl;
@@ -79,7 +79,7 @@ public class GenericSimulationModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends ITimingService> bindITimingService() {
-		return DefaultTimingService.class;
+		return SuspendableTimingService.class;
 	}
 
 	public Class<? extends IStatementInterpreter> bindIStatementInterpreter() {
