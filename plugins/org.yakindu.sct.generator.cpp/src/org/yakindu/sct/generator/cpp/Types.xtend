@@ -16,9 +16,9 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.c.GenmodelEntries
-import org.yakindu.sct.generator.core.impl.SimpleResourceFileSystemAccess
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.Path
+import org.yakindu.sct.generator.core.filesystem.EFSResourceFileSystemAccess
 
 class Types {
 	
@@ -26,18 +26,8 @@ class Types {
 	@Inject extension GenmodelEntries
 	 
 	def generateTypesHpp(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-		if (fsa instanceof SimpleResourceFileSystemAccess &&
-			!exists(flow.typesModule.h, fsa as SimpleResourceFileSystemAccess)) {
 			fsa.generateFile(flow.typesModule.h, flow.typesHContent(entry))	
-		}
 	}
-	
-	def protected exists(String filename, SimpleResourceFileSystemAccess fsa) {
-		val uri = fsa.getURI(filename);
-		val file = ResourcesPlugin.getWorkspace().getRoot()
-					.getFile(new Path(uri.toPlatformString(true)));
-		return file.exists;
-	}	
 	
 	def typesHContent(ExecutionFlow it, GeneratorEntry entry) '''
 		«entry.licenseText»

@@ -7,4 +7,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="DocumentedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="documentation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="domainID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="org.yakindu.domain.default"/>
+  </eClassifiers>
 </ecore:EPackage>

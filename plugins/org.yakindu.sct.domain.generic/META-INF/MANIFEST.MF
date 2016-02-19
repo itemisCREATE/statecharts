@@ -17,7 +17,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.gmf.runtime.notation,
  org.yakindu.sct.ui.editor,
  org.yakindu.base.xtext.utils.gmf,
- org.yakindu.sct.refactoring
+ org.yakindu.sct.refactoring,
+ org.yakindu.sct.generator.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.domain.generic,

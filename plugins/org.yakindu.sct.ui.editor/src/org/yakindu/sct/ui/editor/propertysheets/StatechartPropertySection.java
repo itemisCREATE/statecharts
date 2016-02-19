@@ -93,7 +93,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 			domainCombo.add(domainDescriptor);
 		}
 		domainCombo.setSelection(new StructuredSelection(DomainRegistry
-				.getDomainDescriptor(SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral())));
+				.getDomainDescriptor(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral())));
 
 	}
 
@@ -154,7 +154,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 
 	private void bindDomainCombo(EMFDataBindingContext context) {
 		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
-				SGraphPackage.Literals.STATECHART__DOMAIN_ID);
+				BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID);
 
 		IViewerObservableValue observeSingleSelection = ViewersObservables.observeSingleSelection(domainCombo);
 		UpdateValueStrategy modelToTarget = new UpdateValueStrategy() {

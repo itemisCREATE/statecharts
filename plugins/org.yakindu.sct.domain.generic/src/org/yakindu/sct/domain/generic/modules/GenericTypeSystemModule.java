@@ -11,10 +11,10 @@
 package org.yakindu.sct.domain.generic.modules;
 
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
 import com.google.inject.Binder;
@@ -39,7 +39,7 @@ public class GenericTypeSystemModule extends AbstractGenericModule {
 	}
 
 	protected String getDomainID() {
-		return SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral();
+		return BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 	}
 
 	public Class<? extends ITypeSystem> bindITypeSystem() {

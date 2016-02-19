@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DocumentedElement;
+import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.sct.model.sgraph.CompositeElement;
@@ -41,6 +42,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * <em><b>Statechart</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getLocalReactions <em>Local Reactions</em>}</li>
@@ -49,10 +51,9 @@ import org.yakindu.sct.model.sgraph.Statechart;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getRegions <em>Regions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDocumentation <em>Documentation</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDomainID <em>Domain ID</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getImports <em>Imports</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -139,16 +140,6 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	protected String documentation = DOCUMENTATION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImports()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Import> imports;
-
-	/**
 	 * The default value of the '{@link #getDomainID() <em>Domain ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -167,6 +158,16 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected String domainID = DOMAIN_ID_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImports()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Import> imports;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -383,10 +384,10 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return getName();
 			case SGraphPackage.STATECHART__DOCUMENTATION:
 				return getDocumentation();
-			case SGraphPackage.STATECHART__IMPORTS:
-				return getImports();
 			case SGraphPackage.STATECHART__DOMAIN_ID:
 				return getDomainID();
+			case SGraphPackage.STATECHART__IMPORTS:
+				return getImports();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -416,12 +417,12 @@ public class StatechartImpl extends SpecificationElementImpl implements
 			case SGraphPackage.STATECHART__DOCUMENTATION:
 				setDocumentation((String)newValue);
 				return;
+			case SGraphPackage.STATECHART__DOMAIN_ID:
+				setDomainID((String)newValue);
+				return;
 			case SGraphPackage.STATECHART__IMPORTS:
 				getImports().clear();
 				getImports().addAll((Collection<? extends Import>)newValue);
-				return;
-			case SGraphPackage.STATECHART__DOMAIN_ID:
-				setDomainID((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -449,11 +450,11 @@ public class StatechartImpl extends SpecificationElementImpl implements
 			case SGraphPackage.STATECHART__DOCUMENTATION:
 				setDocumentation(DOCUMENTATION_EDEFAULT);
 				return;
-			case SGraphPackage.STATECHART__IMPORTS:
-				getImports().clear();
-				return;
 			case SGraphPackage.STATECHART__DOMAIN_ID:
 				setDomainID(DOMAIN_ID_EDEFAULT);
+				return;
+			case SGraphPackage.STATECHART__IMPORTS:
+				getImports().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -480,10 +481,10 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SGraphPackage.STATECHART__DOCUMENTATION:
 				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
-			case SGraphPackage.STATECHART__IMPORTS:
-				return imports != null && !imports.isEmpty();
 			case SGraphPackage.STATECHART__DOMAIN_ID:
 				return DOMAIN_ID_EDEFAULT == null ? domainID != null : !DOMAIN_ID_EDEFAULT.equals(domainID);
+			case SGraphPackage.STATECHART__IMPORTS:
+				return imports != null && !imports.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -526,6 +527,12 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				default: return -1;
 			}
 		}
+		if (baseClass == DomainElement.class) {
+			switch (derivedFeatureID) {
+				case SGraphPackage.STATECHART__DOMAIN_ID: return BasePackage.DOMAIN_ELEMENT__DOMAIN_ID;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -564,6 +571,12 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		if (baseClass == DocumentedElement.class) {
 			switch (baseFeatureID) {
 				case BasePackage.DOCUMENTED_ELEMENT__DOCUMENTATION: return SGraphPackage.STATECHART__DOCUMENTATION;
+				default: return -1;
+			}
+		}
+		if (baseClass == DomainElement.class) {
+			switch (baseFeatureID) {
+				case BasePackage.DOMAIN_ELEMENT__DOMAIN_ID: return SGraphPackage.STATECHART__DOMAIN_ID;
 				default: return -1;
 			}
 		}

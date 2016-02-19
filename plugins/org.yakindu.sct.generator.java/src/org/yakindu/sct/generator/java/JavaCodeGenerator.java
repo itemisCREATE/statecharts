@@ -9,8 +9,6 @@
  */
 package org.yakindu.sct.generator.java;
 
-import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
-
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.JavaTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.OldJavaTypeSystemAccess;
@@ -20,41 +18,41 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Binder;
+import com.google.inject.Inject;
 import com.google.inject.Module;
-import com.google.inject.Singleton;
+import com.google.inject.Scopes;
 import com.google.inject.util.Modules;
 
 public class JavaCodeGenerator extends AbstractJavaCodeGenerator {
 
+	@Inject
+	private JavaGenerator delegate;
+	
+	
 	@Override
 	public void generate(Statechart statechart, GeneratorEntry entry) {
-		JavaGenerator delegate = getInjector(entry).getInstance(
-				JavaGenerator.class);
 
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
 
-		if (isDumpSexec(entry)) {
+		if (debugFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
 
-		delegate.generate(flow, entry, getFileSystemAccess(entry));
+		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess());
 	}
 
 	@Override
-	protected Module getOverridesModule(final GeneratorEntry entry) {
+	public Module getOverridesModule(final GeneratorEntry entry) {
 		Module module = super.getOverridesModule(entry);
 		final GenmodelEntries entries = new GenmodelEntries();
 		return Modules.override(module).with(new Module() {
 			public void configure(Binder binder) {
 				if (entries.useJavaInt(entry)) {
-					binder.bind(ICodegenTypeSystemAccess.class).to(
-							OldJavaTypeSystemAccess.class);
+					binder.bind(ICodegenTypeSystemAccess.class).to(OldJavaTypeSystemAccess.class);
 				} else {
-					binder.bind(ICodegenTypeSystemAccess.class).to(
-							JavaTypeSystemAccess.class);
+					binder.bind(ICodegenTypeSystemAccess.class).to(JavaTypeSystemAccess.class);
 				}
-				binder.bind(INamingService.class).to(JavaNamingService.class)
-						.in(Singleton.class);
+				binder.bind(INamingService.class).to(JavaNamingService.class).in(Scopes.SINGLETON);
 			}
 		});
 

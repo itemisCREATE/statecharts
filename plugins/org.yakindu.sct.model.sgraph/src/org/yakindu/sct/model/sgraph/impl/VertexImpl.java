@@ -34,12 +34,12 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.VertexImpl#getParentRegion <em>Parent Region</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.VertexImpl#getIncomingTransitions <em>Incoming Transitions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.VertexImpl#getOutgoingTransitions <em>Outgoing Transitions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

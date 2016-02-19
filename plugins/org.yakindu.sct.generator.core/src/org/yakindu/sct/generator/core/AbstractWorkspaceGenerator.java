@@ -12,49 +12,49 @@ package org.yakindu.sct.generator.core;
 
 import java.io.File;
 
-import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.eclipse.emf.common.util.URI;
+import org.yakindu.sct.generator.core.impl.AbstractSExecModelGenerator;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 /**
  * Base class for generators that are executed inside the workspace
  * 
  * @author holger willebrandt - Initial contribution and API
- */
-public abstract class AbstractWorkspaceGenerator implements IGeneratorBridge {
-
-	private IGeneratorBridge bridge;
-
-	public final void setBridge(IGeneratorBridge bridge) {
-		this.bridge = bridge;
-	}
-
-	public final void writeToConsole(String s) {
-		bridge.writeToConsole(s);
-	}
-
-	public final void writeToConsole(Throwable t) {
-		bridge.writeToConsole(t);
-	}
-
-	public final FeatureParameterValue getFeatureParameter(
-			GeneratorEntry entry, String featureName, String paramName) {
-		return bridge.getFeatureParameter(entry, featureName, paramName);
-	}
-
+ * @author Johannes Dicks - refactored because of EFS decoupling
+ */ 
+public abstract class AbstractWorkspaceGenerator extends AbstractSExecModelGenerator {
+	
+	/**
+	 * 
+	 * @param entry
+	 * @deprecated Will be removed in future. Refreshing the project is moved to concrete file system access implementations 
+	 */
+	@Deprecated
 	public final void refreshTargetProject(GeneratorEntry entry) {
-		bridge.refreshTargetProject(entry);
+		/**
+		 * This functionality will be provided by concrete file system accesses from now.
+		 */
 	}
 
 	public final File getTargetProject(GeneratorEntry entry) {
-		return bridge.getTargetProject(entry);
+		URI uri = sctFsa.getURI(outletFeatureHelper.getTargetProjectValue(entry).getStringValue());
+		return new File(uri.toFileString());
 	}
 
 	public final File getTargetFolder(GeneratorEntry entry) {
-		return bridge.getTargetFolder(entry);
+		URI uri = sctFsa.getURI(outletFeatureHelper.getRelativeTargetFolder(entry));
+		return new File(uri.toFileString());
 	}
 	
 	public final File getLibraryTargetFolder(GeneratorEntry entry) {
-		return bridge.getLibraryTargetFolder(entry);
+		URI uri = sctFsa.getURI(outletFeatureHelper.getRelativeLibraryFolder(entry));
+		return new File(uri.toFileString());
 	}
-
+	
+	public final void writeToConsole(String line){
+		log.writeToConsole(line);
+	}
+	public final void writeToConsole(Throwable e){
+		log.writeToConsole(e);
+	}
 }

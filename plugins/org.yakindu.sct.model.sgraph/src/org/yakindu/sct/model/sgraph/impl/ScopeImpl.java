@@ -31,12 +31,12 @@ import org.yakindu.sct.model.sgraph.util.DerivedSubsetEObjectEList;
  * <em><b>Scope</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopeImpl#getDeclarations <em>Declarations</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopeImpl#getEvents <em>Events</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopeImpl#getVariables <em>Variables</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

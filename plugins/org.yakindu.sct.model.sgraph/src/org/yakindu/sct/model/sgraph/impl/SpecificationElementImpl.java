@@ -23,10 +23,10 @@ import org.yakindu.sct.model.sgraph.SpecificationElement;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.SpecificationElementImpl#getSpecification <em>Specification</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

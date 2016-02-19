@@ -45,7 +45,7 @@ public class GenericXPandCodeGenerator extends AbstractXpandBasedCodeGenerator {
 	@Override
 	protected void finishGenerator(GeneratorEntry entry) {
 		ResourceLoaderFactory.setCurrentThreadResourceLoader(null);
-	}
+	} 
 
 	/**
 	 * create a {@link ResourceLoader} for the XPandFacade

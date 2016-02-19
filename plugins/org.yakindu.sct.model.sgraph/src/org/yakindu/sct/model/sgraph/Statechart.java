@@ -12,6 +12,7 @@ package org.yakindu.sct.model.sgraph;
 
 import org.eclipse.emf.common.util.EList;
 import org.yakindu.base.base.DocumentedElement;
+import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 
 
@@ -22,17 +23,16 @@ import org.yakindu.base.base.NamedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.Statechart#getImports <em>Imports</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgraph.Statechart#getDomainID <em>Domain ID</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getStatechart()
  * @model
  * @generated
  */
-public interface Statechart extends SpecificationElement, ReactiveElement, ScopedElement, CompositeElement, NamedElement, DocumentedElement {
+public interface Statechart extends SpecificationElement, ReactiveElement, ScopedElement, CompositeElement, NamedElement, DocumentedElement, DomainElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -55,32 +55,5 @@ public interface Statechart extends SpecificationElement, ReactiveElement, Scope
 	 * @generated
 	 */
 	EList<Import> getImports();
-
-	/**
-	 * Returns the value of the '<em><b>Domain ID</b></em>' attribute.
-	 * The default value is <code>"org.yakindu.domain.default"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Domain ID</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Domain ID</em>' attribute.
-	 * @see #setDomainID(String)
-	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getStatechart_DomainID()
-	 * @model default="org.yakindu.domain.default"
-	 * @generated
-	 */
-	String getDomainID();
-
-	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sgraph.Statechart#getDomainID <em>Domain ID</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Domain ID</em>' attribute.
-	 * @see #getDomainID()
-	 * @generated
-	 */
-	void setDomainID(String value);
 
 } // Statechart

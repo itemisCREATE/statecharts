@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.base.DocumentedElement#getDocumentation <em>Documentation</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.base.BasePackage#getDocumentedElement()
  * @model

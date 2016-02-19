@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomainDescriptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -38,9 +39,10 @@ public class SCTResourceFactory extends XMIResourceFactoryImpl {
 
 	@Override
 	public Resource createResource(URI uri) {
-		String domainID = determineDomainID(uri);
-		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(domainID);
-		Assert.isTrue(domainDescriptor.getDomainID().equals(domainID));
+		String determinedDomainID = determineDomainID(uri);
+		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(determinedDomainID);
+		String descriptorDomainID = domainDescriptor.getDomainID();
+		Assert.isTrue(descriptorDomainID.equals(determinedDomainID), "DomainID mismatch : "+determinedDomainID+":"+descriptorDomainID);
 		Injector injector = domainDescriptor.getDomainInjectorProvider().getResourceInjector();
 		Resource resource = injector.getInstance(Resource.class);
 		ResourceSet set = new ResourceSetImpl();
@@ -50,14 +52,16 @@ public class SCTResourceFactory extends XMIResourceFactoryImpl {
 	}
 
 	protected String determineDomainID(URI uri) {
-		String result = SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral();
+		String result = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 		if (URIConverter.INSTANCE.exists(uri, null)) {
 			XMIResource resource = new XMIResourceImpl(uri);
 			try {
 				resource.load(null);
 				Statechart statechart = (Statechart) EcoreUtil.getObjectByType(resource.getContents(),
 						SGraphPackage.Literals.STATECHART);
-				result = statechart.getDomainID();
+				String domainID = statechart.getDomainID();
+				Assert.isNotNull(domainID);
+				result = domainID;
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {

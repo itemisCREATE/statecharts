@@ -44,6 +44,15 @@ public interface BaseFactory extends EFactory {
 	DocumentedElement createDocumentedElement();
 
 	/**
+	 * Returns a new object of class '<em>Domain Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Domain Element</em>'.
+	 * @generated
+	 */
+	DomainElement createDomainElement();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

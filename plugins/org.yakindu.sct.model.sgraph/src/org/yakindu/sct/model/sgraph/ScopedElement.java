@@ -20,11 +20,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.ScopedElement#getScopes <em>Scopes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.ScopedElement#getNamespace <em>Namespace</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getScopedElement()
  * @model abstract="true"

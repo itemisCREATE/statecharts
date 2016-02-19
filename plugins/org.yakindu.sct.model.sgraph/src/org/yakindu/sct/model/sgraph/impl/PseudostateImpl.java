@@ -18,8 +18,6 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Pseudostate</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

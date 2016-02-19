@@ -23,12 +23,12 @@ import org.yakindu.base.types.Property;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.Scope#getDeclarations <em>Declarations</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.Scope#getEvents <em>Events</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.Scope#getVariables <em>Variables</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getScope()
  * @model
