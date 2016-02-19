@@ -133,7 +133,7 @@ img {
     margin-right: auto;
 }
 
-.inlinemediaobject/img {
+.inlinemediaobject img {
     display: inline;
 }
 
@@ -180,7 +180,7 @@ table.scedit img {
     box-shadow: 4px 4px 2px #bbb;
 }
 
-.application, .state-name, .trigger-name, .guibutton, .guimenuitem {
+.application, .eclipse-view, .guibutton, .guimenuitem, .sct-state, .sct-variable, .sct-event, .sct-trigger {
 	font-style: italic;
 }
 

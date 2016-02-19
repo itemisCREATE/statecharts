@@ -2553,10 +2553,10 @@ feature GeneralFeatures {
       <example>
        <title>Named entries</title>
        <para>The sample statechart in <xref linkend="fig_state_entry"/> has a composite state named
-        <emphasis role="state-name">Handle result</emphasis>. This composite state has a default entry as well as an
-        entry called <emphasis>failure</emphasis>. If state <emphasis role="state-name">A</emphasis> is active and the
-        <emphasis role="trigger-name">error</emphasis> trigger fires, control is transitioned to the
-        <emphasis role="state-name">Handle result</emphasis> composite state. The notation <literal>error #
+        <emphasis role="sct-state">Handle result</emphasis>. This composite state has a default entry as well as an
+        entry called <emphasis>failure</emphasis>. If state <emphasis role="sct-state">A</emphasis> is active and the
+        <emphasis role="sct-trigger">error</emphasis> trigger fires, control is transitioned to the
+        <emphasis role="sct-state">Handle result</emphasis> composite state. The notation <literal>error #
         >failure</literal> specifies that the <emphasis>failure</emphasis> entry is to be used.</para>
       </example>
 
@@ -2611,21 +2611,21 @@ feature GeneralFeatures {
       <itemizedlist>
 
        <listitem>
-        <para>The composite state <emphasis role="state-name">Process</emphasis> models a process with two passes (states) A and B. If
+        <para>The composite state <emphasis role="sct-state">Process</emphasis> models a process with two passes (states) A and B. If
          both passes succeed, the composite state is left via the <emphasis>no_problem</emphasis> exit node. However, if
          an error occurs in either A or B the execution flow proceeds to the <emphasis>problem</emphasis> exit point and
          leaves the composite state there.</para>
        </listitem>
 
        <listitem>
-        <para>The composite state <emphasis role="state-name">Handle result</emphasis> is intended to handle the processing result, be
+        <para>The composite state <emphasis role="sct-state">Handle result</emphasis> is intended to handle the processing result, be
          it success or failure. It has two entry points <emphasis>success</emphasis> and <emphasis>failure</emphasis>.</para>
        </listitem>
 
       </itemizedlist>
-      <para>The question is how to connect the exit points of <emphasis role="state-name">Process</emphasis> to the corresponding
-       entry points of <emphasis role="state-name">Handle result</emphasis>. This is done by two transitions leading
-       from <emphasis role="state-name">Process</emphasis> to <emphasis role="state-name">Handle result</emphasis> and
+      <para>The question is how to connect the exit points of <emphasis role="sct-state">Process</emphasis> to the corresponding
+       entry points of <emphasis role="sct-state">Handle result</emphasis>. This is done by two transitions leading
+       from <emphasis role="sct-state">Process</emphasis> to <emphasis role="sct-state">Handle result</emphasis> and
        appropriate specifications.</para>
       <para>The transition shown on the left specifies <literal># no_problem> >success</literal>. This means: If the source
        composite state is left via the <emphasis>no_problem</emphasis> exit point, enter the target composite state at
@@ -2647,7 +2647,7 @@ feature GeneralFeatures {
        </listitem>
 
       </itemizedlist>
-      <para>Alternatively, <emphasis role="state-name">Process</emphasis> could have been modeled with two different error exit
+      <para>Alternatively, <emphasis role="sct-state">Process</emphasis> could have been modeled with two different error exit
        states, say <emphasis>error_1</emphasis> and <emphasis>error_2</emphasis>. This would allow to respond
        differently to different error conditions, while still enabling to catch them both with a single flow. A
        transition with <literal># >error_1 >error_2 problem></literal> would do so.</para>
@@ -2763,17 +2763,17 @@ feature GeneralFeatures {
      <example>
       <title>Synchronization</title>
       <para><xref linkend="fig_state_synchronization"/> shows an sample statechart containing a forking and a joining
-       synchronization. After having left the <varname role="state-name">Initialize</varname> state, the synchronization
+       synchronization. After having left the <varname role="sct-state">Initialize</varname> state, the synchronization
        state forks the execution flow into two regions <varname role="region-name">r1</varname> and
-       <varname role="region-name">r2</varname>. Both are part of the <varname role="state-name">Process</varname>
+       <varname role="region-name">r2</varname>. Both are part of the <varname role="sct-state">Process</varname>
        composite state and both are executed in parallel. That is, when activating
-       <varname role="state-name">Process</varname>, the substates <varname role="state-name">Line A 1</varname> and
-       <varname role="state-name">Line B 1</varname> also become active. When the flows continues and both
-       <varname role="state-name">Line A 2</varname> and <varname role="state-name">Line B 2</varname> have been
+       <varname role="sct-state">Process</varname>, the substates <varname role="sct-state">Line A 1</varname> and
+       <varname role="sct-state">Line B 1</varname> also become active. When the flows continues and both
+       <varname role="sct-state">Line A 2</varname> and <varname role="sct-state">Line B 2</varname> have been
        reached, the synchronization state on the right-hand side joins the flows and transitions to substates
-       <varname role="state-name">Cleanup</varname>, making it the active state. However, as long as only one of them is
+       <varname role="sct-state">Cleanup</varname>, making it the active state. However, as long as only one of them is
        active, the synchronization will wait for the other one to also become active before proceeding to
-       <varname role="state-name">Process</varname>.</para>
+       <varname role="sct-state">Process</varname>.</para>
       <para>The example also demonstrates different lengths and orientations of the synchronization symbol. In the statechart
        editor, first select the synchronization symbol, the use a handle in one of the symbol's corners to change length
        or orientation. The handles in the middle of the symbol have no effect.</para>
@@ -2836,7 +2836,7 @@ feature GeneralFeatures {
      <para>Particularly interesting in this statechart are the events <varname
       role="event-name">checkProgress</varname> and
       <varname role="event-name">goon</varname>. The event <varname role="event-name">checkProgress</varname> jumps back
-      to the <varname role="state-name">init</varname> state while assigning the current progress count to the variable
+      to the <varname role="sct-state">init</varname> state while assigning the current progress count to the variable
       <varname role="variable-name">temp</varname>. The event <varname role="event-name">goon</varname> jumps to the
       shallow history state that was placed inside the composite state.</para>
 
@@ -2865,7 +2865,7 @@ feature GeneralFeatures {
      </figure>
 
      <para>When the <varname role="event-name">goon</varname> event is triggered, the most recent active state inside of the
-      composite state <varname role="state-name">answeringQuestions</varname> is activated again.</para>
+      composite state <varname role="sct-state">answeringQuestions</varname> is activated again.</para>
     </sect4>
 
     <sect4 xml:id="deep-history">

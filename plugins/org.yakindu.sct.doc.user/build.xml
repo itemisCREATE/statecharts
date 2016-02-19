@@ -204,12 +204,12 @@
             <unzip dest="${docbook-xsl.distribution.dir}"
                    src="${docbook-xsl.net.sf.docbook:docbook-xsl:zip:ns-resources}"
                    overwrite="false" />
-            <mkdir dir="${docbook-xsl.dir}" />
-            <filter token="docbook-xsl" value="${docbook-xsl.distribution.dir}/docbook" />
-            <copy todir="${docbook-xsl.dir}" filtering="true">
-                <fileset dir="${docbook-xsl.dir.tmpl}" />
-            </copy>
         </sequential>
+        <mkdir dir="${docbook-xsl.dir}" />
+        <filter token="docbook-xsl" value="${docbook-xsl.distribution.dir}/docbook" />
+        <copy todir="${docbook-xsl.dir}" filtering="true">
+            <fileset dir="${docbook-xsl.dir.tmpl}" />
+        </copy>
     </target>
 
 
