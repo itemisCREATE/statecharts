@@ -39,9 +39,10 @@ public class SCTResourceFactory extends XMIResourceFactoryImpl {
 
 	@Override
 	public Resource createResource(URI uri) {
-		String domainID = determineDomainID(uri);
-		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(domainID);
-		Assert.isTrue(domainDescriptor.getDomainID().equals(domainID));
+		String determinedDomainID = determineDomainID(uri);
+		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(determinedDomainID);
+		String descriptorDomainID = domainDescriptor.getDomainID();
+		Assert.isTrue(descriptorDomainID.equals(determinedDomainID), "DomainID mismatch : "+determinedDomainID+":"+descriptorDomainID);
 		Injector injector = domainDescriptor.getDomainInjectorProvider().getResourceInjector();
 		Resource resource = injector.getInstance(Resource.class);
 		ResourceSet set = new ResourceSetImpl();
@@ -58,7 +59,9 @@ public class SCTResourceFactory extends XMIResourceFactoryImpl {
 				resource.load(null);
 				Statechart statechart = (Statechart) EcoreUtil.getObjectByType(resource.getContents(),
 						SGraphPackage.Literals.STATECHART);
-				result = statechart.getDomainID();
+				String domainID = statechart.getDomainID();
+				Assert.isNotNull(domainID);
+				result = domainID;
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
