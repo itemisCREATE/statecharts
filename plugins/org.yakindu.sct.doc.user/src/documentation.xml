@@ -881,7 +881,7 @@ yakindu-sct/SCT
 
 
    <sect3 xml:id="who-is-using-yakindu-statechart-tools">
-    <title>Who is using <application>YAKINDU Statechart Tools</application>?</title>
+    <title>Who is using YAKINDU Statechart Tools?</title>
 
     <para>Initially <application>YAKINDU Statechart Tools</application> have been designed for the embedded systems
      industry: automotive, system controls, vending machines etc. However, <application>YAKINDU Statechart
@@ -2369,9 +2369,11 @@ feature GeneralFeatures {
     sensitive.</para>
 
 
-   <sect3 xml:id="statechart">
+   <sect3 xml:id="statechart" role="to-be-written">
     <title>Statechart</title>
      <indexterm><primary>statechart</primary></indexterm>
+
+     <para role="to-be-written">TBD</para>
    </sect3>
 
    <sect3 xml:id="graphical-elements">
@@ -3664,73 +3666,83 @@ localEvent3 / NamedInterface.variable4 += 2.0; #2
    <indexterm><primary>statechart editor</primary></indexterm>
    <indexterm><primary>YAKINDU Statechart Editor</primary></indexterm>
 
-   <sect3 xml:id="creating-and-deleting-statecharts">
+   <sect3 xml:id="creating-and-deleting-statecharts" role="to-be-written">
     <title>Creating and deleting statecharts</title>
     <indexterm><primary>creating a statechart</primary></indexterm>
     <indexterm><primary>deleting a statechart</primary></indexterm>
 
+     <para role="to-be-written">TBD</para>
    </sect3>
 
-   <sect3 xml:id="editor-ui">
+   <sect3 xml:id="editor-ui" role="to-be-written">
     <title>Editor UI</title>
     <sect4 xml:id="sc-modeling-perspective">
      <title>"SC Modeling" perspective</title>
      <indexterm><primary>"SC Modeling" perspective</primary></indexterm>
 
+     <para role="to-be-written">TBD</para>
     </sect4>
 
 
-    <sect4 xml:id="canvas">
+    <sect4 xml:id="canvas" role="to-be-written">
      <title>Canvas</title>
      <indexterm><primary>canvas</primary></indexterm>
 
+     <para role="to-be-written">TBD</para>
     </sect4>
-    <sect4 xml:id="editor-palette">
+
+    <sect4 xml:id="editor-palette" role="to-be-written">
      <title>Editor palette</title>
      <indexterm><primary>editor palette</primary></indexterm>
      <indexterm><primary>palette</primary></indexterm>
 
+     <para role="to-be-written">TBD</para>
     </sect4>
 
 
-    <sect4 xml:id="outline-view">
+    <sect4 xml:id="outline-view" role="to-be-written">
      <title>Outline view</title>
      <indexterm><primary>outline view</primary></indexterm>
      <indexterm><primary>view</primary><secondary>outline</secondary></indexterm>
 
+     <para role="to-be-written">TBD</para>
     </sect4>
 
 
-    <sect4 xml:id="problems-view">
+    <sect4 xml:id="problems-view" role="to-be-written">
      <title>Problems view</title>
      <indexterm><primary>problems view</primary></indexterm>
      <indexterm><primary>view</primary><secondary>problems</secondary></indexterm>
 
+     <para role="to-be-written">TBD</para>
     </sect4>
    </sect3>
 
 
-   <sect3 xml:id="editing-states-and-other-nodes">
+   <sect3 xml:id="editing-states-and-other-nodes" role="to-be-written">
     <title>Editing states and other nodes</title>
     <indexterm><primary>editing states</primary></indexterm>
     <indexterm><primary>state</primary><secondary>editing</secondary></indexterm>
 
+     <para role="to-be-written">TBD</para>
    </sect3>
 
 
-   <sect3 xml:id="editing-transitions">
+   <sect3 xml:id="editing-transitions" role="to-be-written">
     <title>Editing transitions</title>
     <indexterm><primary>editing transitions</primary></indexterm>
     <indexterm><primary>transitions</primary><secondary>editing</secondary></indexterm>
 
+     <para role="to-be-written">TBD</para>
    </sect3>
 
 
-   <sect3 xml:id="editing-hierarchies">
+   <sect3 xml:id="editing-hierarchies" role="to-be-written">
     <title>Editing hierarchies</title>
     <indexterm><primary>editing hierarchies</primary></indexterm>
     <indexterm><primary>hierarchy</primary><secondary>editing</secondary></indexterm>
 
+     <para role="to-be-written">TBD</para>
    </sect3>
 
 
@@ -3791,26 +3803,29 @@ localEvent3 / NamedInterface.variable4 += 2.0; #2
    </sect3>
 
 
-   <sect3 xml:id="refactorings">
+   <sect3 xml:id="refactorings" role="to-be-written">
     <title>Refactorings</title>
     <indexterm><primary>refactoring</primary></indexterm>
 
+     <para role="to-be-written">TBD</para>
    </sect3>
 
 
-   <sect3 xml:id="using-editing-proposals">
+   <sect3 xml:id="using-editing-proposals" role="to-be-written">
     <title>Using editing proposals</title>
     <indexterm><primary>editing proposals</primary></indexterm>
     <indexterm><primary>proposal</primary><secondary>editing </secondary></indexterm>
 
+     <para role="to-be-written">TBD</para>
    </sect3>
 
 
-   <sect3 xml:id="comparing-statecharts">
+   <sect3 xml:id="comparing-statecharts" role="to-be-written">
     <title>Comparing statecharts</title>
     <indexterm><primary>comparing statecharts</primary></indexterm>
     <indexterm><primary>statechart</primary><secondary>comparing</secondary></indexterm>
 
+     <para role="to-be-written">TBD</para>
    </sect3>
 
 
@@ -3934,43 +3949,49 @@ localEvent3 / NamedInterface.variable4 += 2.0; #2
   </sect2>
 
 
-  <sect2 xml:id="simulating-statecharts">
+  <sect2 xml:id="simulating-statecharts" role="to-be-written">
    <title>Simulating statecharts</title>
    <indexterm><primary>simulation</primary></indexterm>
    <indexterm><primary>statechart simulation</primary><see>simulation</see></indexterm>
 
-   <sect3 xml:id="starting-a-simulation">
+     <para role="to-be-written">TBD</para>
+
+   <sect3 xml:id="starting-a-simulation" role="to-be-written">
     <title>Starting a simulation</title>
     <indexterm><primary>simulation</primary><secondary>starting a</secondary></indexterm>
 
    </sect3>
 
 
-   <sect3 xml:id="sc-simulation-perspective">
+   <sect3 xml:id="sc-simulation-perspective" role="to-be-written">
     <title>"SC Simulation" perspective</title>
     <indexterm><primary>"SC Simulation" perspective</primary></indexterm>
 
+     <para role="to-be-written">TBD</para>
    </sect3>
 
 
-   <sect3 xml:id="controlling-a-simulation">
+   <sect3 xml:id="controlling-a-simulation" role="to-be-written">
     <title>Controlling a simulation</title>
     <indexterm><primary>simulation</primary><secondary>controlling a</secondary></indexterm>
 
+     <para role="to-be-written">TBD</para>
    </sect3>
 
 
-   <sect3 xml:id="interacting-with-a-simulation">
+   <sect3 xml:id="interacting-with-a-simulation" role="to-be-written">
     <title>Interacting with a simulation</title>
     <indexterm><primary>simulation</primary><secondary>interacting with a</secondary></indexterm>
 
+     <para role="to-be-written">TBD</para>
    </sect3>
 
 
-   <sect3 xml:id="configuring-a-simulation">
+   <sect3 xml:id="configuring-a-simulation" role="to-be-written">
     <title>Configuring a simulation</title>
     <indexterm><primary>simulation</primary><secondary>configuration</secondary></indexterm>
 
+     <para role="to-be-written">TBD</para>
    </sect3>
   </sect2>
 
@@ -4186,18 +4207,20 @@ feature Debug {
    </sect3>
 
 
-   <sect3 xml:id="running-a-generator">
+   <sect3 xml:id="running-a-generator" role="to-be-written">
     <title>Running a generator</title>
      <indexterm><primary>running</primary><secondary>generator</secondary></indexterm>
      <indexterm><primary>generator running</primary></indexterm>
 
+     <para role="to-be-written">TBD</para>
    </sect3>
 
 
-   <sect3 xml:id="general-concepts-of-the-state-machine-code">
+   <sect3 xml:id="general-concepts-of-the-state-machine-code" role="to-be-written">
     <title>General concepts of the state machine code</title>
      <indexterm><primary>code generation</primary><secondary>general concepts</secondary></indexterm>
 
+     <para role="to-be-written">TBD</para>
    </sect3>
   </sect2>
 

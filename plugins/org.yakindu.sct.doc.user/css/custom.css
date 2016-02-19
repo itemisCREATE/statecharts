@@ -133,6 +133,24 @@ img {
     margin-right: auto;
 }
 
+.inlinemediaobject/img {
+    display: inline;
+}
+
+
+/* Tables */
+
+.informaltable td {
+	border-color: #000;
+	border-radius: 0%;
+	border-style: solid;
+	border-width: 1px;
+	padding: 1ex;
+	vertical-align: top;
+}
+
+
+
 /* The class "scedit" is used in tables describing working with the statechart editor.
    These tables typically consist of two columns with a textual description in the
    left column and a screenshot on the right. */
@@ -162,7 +180,7 @@ table.scedit img {
     box-shadow: 4px 4px 2px #bbb;
 }
 
-.application, .state-name, .trigger-name, .guimenuitem {
+.application, .state-name, .trigger-name, .guibutton, .guimenuitem {
 	font-style: italic;
 }
 
@@ -225,4 +243,9 @@ div.example {
 	padding-bottom: 1%;
 	border-style: solid;
 	border-width: 1px;
+}
+
+
+.to-be-written {
+	background-color: yellow;
 }
