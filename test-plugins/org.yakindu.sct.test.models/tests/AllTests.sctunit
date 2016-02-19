@@ -6,6 +6,7 @@ testsuite AllTests {
 	CastExpressions,
 	Choice, 
 	CKeywords,
+	StatemachineKeywords,
 	ConditionalExpression,
 	ConstantsTests,
 	Declarations, 
