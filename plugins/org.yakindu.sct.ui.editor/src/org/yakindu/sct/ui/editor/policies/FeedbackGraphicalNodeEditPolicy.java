@@ -16,6 +16,7 @@ import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.GraphicalNodeEditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.requests.CreateUnspecifiedTypeConnectionRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.yakindu.sct.ui.editor.editor.figures.TransitionFigure;
@@ -29,6 +30,11 @@ public class FeedbackGraphicalNodeEditPolicy extends GraphicalNodeEditPolicy {
 
 	@Override
 	protected Connection createDummyConnection(Request req) {
+		if (req instanceof CreateUnspecifiedTypeConnectionRequest) {
+			if (((CreateUnspecifiedTypeConnectionRequest) req).isDirectionReversed()) {
+				return new TransitionFigure(getMapMode(), true);
+			}
+		}
 		return new TransitionFigure(getMapMode());
 	}
 
