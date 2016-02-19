@@ -71,4 +71,12 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 		binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("stext,sct");
 	}
 
+	@Override
+	public void configureIScopeProviderDelegate(Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
+				.annotatedWith(com.google.inject.name.Names
+						.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+				.to(org.yakindu.sct.model.stext.scoping.StextImportAwareScopeProvider.class);
+	}
+
 }
