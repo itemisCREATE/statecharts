@@ -25,9 +25,16 @@ public class TransitionFigure extends PolylineConnectionEx {
 	private final IMapMode mapMode;
 
 	public TransitionFigure(IMapMode mapMode) {
+		this(mapMode, false);
+	}
+
+	public TransitionFigure(IMapMode mapMode, boolean reversed) {
 		this.mapMode = mapMode;
 		setLineWidth(mapMode.DPtoLP(1));
-		setTargetDecoration(createTargetDecoration());
+		if (reversed)
+			setSourceDecoration(createTargetDecoration());
+		else
+			setTargetDecoration(createTargetDecoration());
 	}
 
 	protected IMapMode getMapMode() {
