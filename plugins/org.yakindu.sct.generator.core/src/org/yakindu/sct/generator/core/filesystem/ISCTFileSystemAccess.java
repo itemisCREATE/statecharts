@@ -45,8 +45,17 @@ public interface ISCTFileSystemAccess {
 	 * @param outletFeatureTargetProject
 	 * @param stringValue
 	 */
-	void setOutputPath(String outputName, String path);
-
+	void setOutputPath(String outputName, String relativePath);
+	
+	/**
+	 * Set the default output path.
+	 * 
+	 * @param relativePath
+	 * @see IFileSystemAccess#DEFAULT_OUTPUT
+	 */
+	void setOutputPath(String relativePath);
+	
+	
 	Map<String, OutputConfiguration> getOutputConfigurations();
 	/**
 	 * For convenience... and compatibility reasons, might be removed in further

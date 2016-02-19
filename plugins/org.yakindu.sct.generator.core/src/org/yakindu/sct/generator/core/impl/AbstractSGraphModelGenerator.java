@@ -164,9 +164,9 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	}
 
 	/**
-	 * Provides a pre configured IFileSystemAccess instance
+	 * Initialize the current file system access.
 	 */
-	protected IFileSystemAccess initFileSystemAccess(GeneratorEntry entry) {
+	protected void initFileSystemAccess(GeneratorEntry entry) {
 
 		// set target project value
 		sctFsa.setOutputPath(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT,
@@ -192,7 +192,5 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 			librarytargetFolderOutputConfiguration.setCanClearOutputDirectory(false);
 			librarytargetFolderOutputConfiguration.setOverrideExistingResources(false);
 		}
-
-		return sctFsa.getIFileSystemAccess();
 	}
 }
