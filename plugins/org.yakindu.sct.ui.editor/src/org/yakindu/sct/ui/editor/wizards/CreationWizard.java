@@ -13,6 +13,7 @@ package org.yakindu.sct.ui.editor.wizards;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.commands.ExecutionException;
@@ -27,15 +28,19 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
+import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -47,7 +52,9 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.gmf.runtime.util.EditPartUtils;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -55,6 +62,7 @@ import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.factories.FactoryUtils;
+import org.yakindu.sct.ui.editor.providers.SemanticHints;
 import org.yakindu.sct.ui.perspectives.PerspectiveUtil;
 import org.yakindu.sct.ui.wizards.ModelCreationWizardPage;
 
@@ -116,11 +124,8 @@ public class CreationWizard extends Wizard implements INewWizard {
 						openDiagram(diagram);
 						PerspectiveUtil.switchToModelingPerspective(workbench.getActiveWorkbenchWindow());
 					} catch (PartInitException e) {
-						DiagramActivator
-								.getDefault()
-								.getLog()
-								.log(new Status(IStatus.WARNING, DiagramActivator.PLUGIN_ID, "Editor can't be opened",
-										e));
+						DiagramActivator.getDefault().getLog().log(
+								new Status(IStatus.WARNING, DiagramActivator.PLUGIN_ID, "Editor can't be opened", e));
 					}
 				}
 			}
@@ -138,9 +143,30 @@ public class CreationWizard extends Wizard implements INewWizard {
 		IResource workspaceResource = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(path));
 		if (workspaceResource instanceof IFile) {
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			return null != page.openEditor(new FileEditorInput((IFile) workspaceResource), getEditorID());
+			StatechartDiagramEditor editor = (StatechartDiagramEditor) page
+					.openEditor(new FileEditorInput((IFile) workspaceResource), getEditorID());
+			if (editor != null) {
+				List<EObject> allNotationElements = EcoreUtil2.eAllContentsAsList(diagram);
+				for (EObject eObject : allNotationElements) {
+					if (eObject instanceof View && ((View) eObject).getType().equals(SemanticHints.STATE_NAME)) {
+						IGraphicalEditPart editPart = EditPartUtils.findEditPartForSemanticElement(
+								editor.getDiagramGraphicalViewer().getRootEditPart(), ((View) eObject).getElement());
+						editPart = editPart.getChildBySemanticHint(SemanticHints.STATE_NAME);
+						if (editPart != null) {
+							final DirectEditRequest request = new DirectEditRequest();
+							request.setDirectEditFeature(BasePackage.Literals.NAMED_ELEMENT__NAME);
+							editPart.performRequest(request);
+							break;
+
+						}
+					}
+				}
+				return false;
+			}
 		}
+
 		return false;
+
 	}
 
 	/**
