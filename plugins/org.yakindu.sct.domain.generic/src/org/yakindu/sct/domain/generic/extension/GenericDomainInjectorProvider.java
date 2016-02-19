@@ -89,12 +89,6 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 		return new GenericGeneratorModule();
 	}
 
-	public Module getGeneratorModule(String generatorId) {
-		// currently there is only one module with shared bindings for all code
-		// generators
-		return new GenericGeneratorModule();
-	}
-
 	protected Module getResourceModule() {
 		Module uiModule = Modules.override(getLanguageRuntimeModule()).with(getLanguageUIModule());
 		Module result = Modules.override(uiModule).with(getSharedStateModule());
