@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2016 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ * 		committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.generator.core.util;
 
 import java.io.PrintWriter;
@@ -11,6 +22,9 @@ import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 import org.yakindu.sct.generator.core.impl.IGeneratorLog;
 
+/**
+ * @author Johannes Dicks - Initial contribution and API
+ */
 public class EclipseConsoleLog implements IGeneratorLog {
 	
 	public static final String SCT_GENERATOR_CONSOLE = "SCT Generator Console";
@@ -46,7 +60,6 @@ public class EclipseConsoleLog implements IGeneratorLog {
 	public void close() throws Throwable {
 		info.close();
 		error.close();
-
 	}
 
 	@Override
@@ -57,7 +70,6 @@ public class EclipseConsoleLog implements IGeneratorLog {
 			printWriter.flush();
 			printWriter.close();
 		}
-
 	}
 
 	@Override

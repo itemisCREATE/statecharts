@@ -94,9 +94,6 @@ public class EFSHelper {
 		return project.getFolder(new Path(path));
 	}
 
-	/**
-	 * @param container
-	 */
 	public void createContainer(IContainer container) {
 		try {
 			ensureExists(container);
@@ -106,12 +103,6 @@ public class EFSHelper {
 		
 	}
 
-	/**
-	 * @param fileName
-	 * @param iProject 
-	 * @param outputName
-	 * @return
-	 */
 	public IFile getFile(String fileName, OutputConfiguration config, IProject iProject) {
 		IContainer container = getContainer(config,iProject);
 		if (container != null) {
@@ -122,10 +113,6 @@ public class EFSHelper {
 		return null;
 	}
 
-	/**
-	 * @param result
-	 * @param nullProgressMonitor
-	 */
 	private void refreshFileSilently(IFile result, NullProgressMonitor nullProgressMonitor) {
 		try {
 			result.refreshLocal(IResource.DEPTH_ZERO, new NullProgressMonitor());
@@ -134,11 +121,7 @@ public class EFSHelper {
 		}
 	}
 
-	/**
-	 * @param file
-	 * @param newContent
-	 * @return
-	 */
+
 	public boolean hasContentsChanged(IFile file, StringInputStream newContent) {
 		boolean contentChanged = false;
 		BufferedInputStream oldContent = null;
@@ -167,18 +150,11 @@ public class EFSHelper {
 		return contentChanged;
 	}
 	
-	/**
-	 * @param file
-	 * @param isDerived
-	 */
+
 	public void setDerived(IFile file, boolean isDerived) throws CoreException {
 		file.setDerived(isDerived, new NullProgressMonitor());
 	}
 
-	/**
-	 * @param file
-	 * @throws CoreException 
-	 */
 	public void ensureParentExists(IFile file) throws CoreException {
 		if (!file.exists()) {
 			ensureExists(file.getParent());
@@ -186,11 +162,6 @@ public class EFSHelper {
 		
 	}
 
-	/**
-	 * @param contentsAsString
-	 * @param encoding
-	 * @return
-	 */
 	public StringInputStream getInputStream(String contentsAsString, String encoding) {
 		try {
 			return new StringInputStream(contentsAsString, encoding);

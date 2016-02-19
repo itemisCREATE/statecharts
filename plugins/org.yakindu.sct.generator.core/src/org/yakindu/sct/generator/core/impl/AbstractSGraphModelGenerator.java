@@ -67,11 +67,12 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	 * initializations which are urgently needed for the generator
 	 * infrastructure. Use {@link #doGenerate(GeneratorEntry)} instead.
 	 * 
+	 * This method might become final in further versions. Please
+	 *             override {@link #doGenerate(GeneratorEntry)}
+	 * 
 	 * @see {@link #doGenerate(GeneratorEntry)}
-	 * @deprecated this method might become final in further versions. Please
-	 *             override {@link #doGenerate(GeneratorEntry)}.
 	 */
-	public final void generate(GeneratorEntry entry) {
+	public void generate(GeneratorEntry entry) {
 		if (canHandle(entry)) {
 			try {
 				logStart(entry);
@@ -157,8 +158,8 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 		return new Module() {
 			@Override
 			public void configure(Binder binder) {
+				// currently, do not add additional bindings
 			}
-			// per default, do not add additional bindings
 		};
 	}
 

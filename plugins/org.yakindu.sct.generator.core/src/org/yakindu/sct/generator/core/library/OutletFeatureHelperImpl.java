@@ -17,6 +17,9 @@ import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
+/**
+ * @author Johannes Dicks - Initial contribution and API
+ */
 public class OutletFeatureHelperImpl extends BaseSGenFeatureHelper implements IOutletFeatureHelper {
 
 	@Override

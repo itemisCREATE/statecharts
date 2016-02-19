@@ -24,9 +24,8 @@ import org.eclipse.xtext.generator.OutputConfiguration;
  * The SCT M2T generators use the minimal functionality provided by the
  * basic interface xtext.generator.IFileSystemAccess during transformation.
  * 
- * So the methods 
- * 
  * @see {@link org.eclipse.xtext.generator.IFileSystemAccess}
+ * 
  * @author Johannes Dicks - Initial contribution and API
  *
  */
@@ -41,27 +40,23 @@ public interface ISCTFileSystemAccess {
 	URI getURI(String path);
 
 	/**
+	 * Add an output path for an output name.
+	 * 
 	 * @param outletFeatureTargetProject
 	 * @param stringValue
 	 */
 	void setOutputPath(String outputName, String path);
 
-	/**
-	 * @return
-	 */
 	Map<String, OutputConfiguration> getOutputConfigurations();
-
 	/**
 	 * For convenience... and compatibility reasons, might be removed in further
 	 * versions
-	 * 
 	 * @return
-	 * 
 	 */
 	IFileSystemAccess getIFileSystemAccess();
 
 	/**
-	 * @param entry
+	 * A hook to execute actions after generation.
 	 */
 	void afterGeneration();
 
