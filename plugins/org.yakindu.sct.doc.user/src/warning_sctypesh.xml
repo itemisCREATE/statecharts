@@ -1,18 +1,13 @@
 <sect4>
- <title>Special treatment of sc_types.h</title>
- <indexterm><primary>sc_types.h</primary></indexterm>
- <indexterm><primary>code generator features</primary><secondary>C</secondary><tertiary>sc_types.h</tertiary></indexterm>
- <indexterm><primary>code generator features</primary><secondary>C++</secondary><tertiary>sc_types.h</tertiary></indexterm>
- <indexterm><primary>C</primary><secondary>code generator features</secondary><tertiary>sc_types.h</tertiary></indexterm>
- <indexterm><primary>C++</primary><secondary>code generator features</secondary><tertiary>sc_types.h</tertiary></indexterm>
+ <title>Special treatment of sc_types.h</title><indexterm><primary>sc_types.h</primary></indexterm><indexterm><primary>code generator features</primary><secondary>C</secondary><tertiary>sc_types.h</tertiary></indexterm><indexterm><primary>code generator features</primary><secondary>C++</secondary><tertiary>sc_types.h</tertiary></indexterm><indexterm><primary>C</primary><secondary>code generator features</secondary><tertiary>sc_types.h</tertiary></indexterm><indexterm><primary>C++</primary><secondary>code generator features</secondary><tertiary>sc_types.h</tertiary></indexterm>
 
- <para>When generating C or C++ source code, the header file <filename>sc_types.h</filename> undergoes a special
-  treatment. This file is generated only once and will never be overwritten when the C code generator is executed
-  again. This way any manual adoptions to <filename>sc_types.h</filename> are preserved.</para>
+ <para>When generating C or C++ source code, the header file <filename>sc_types.h</filename> undergoes a special treatment.
+  This file is generated only once and will never be overwritten when the C code generator is executed again. This way
+  any manual adoptions to <filename>sc_types.h</filename> are preserved.</para>
 
-  <warning>
-   <para>Please note that this feature is present for historical reasons only. It is quite likely that it will be
-    removed in the future. Please use the <literal>libraryTargetFolder</literal> parameter of the
-    <literal>Outlet</literal> generator feature for a better and general solution, see <xref
-    linkend="outlet"/>!</para></warning>
+ <warning>
+  <para>Please note that this feature is present for historical reasons only. It is quite likely that it will be removed in the
+   future. Please use the <literal>libraryTargetFolder</literal> parameter of the <literal>Outlet</literal> generator
+   feature for a better and general solution, see <xref linkend="outlet"/>!</para>
+ </warning>
 </sect4>
