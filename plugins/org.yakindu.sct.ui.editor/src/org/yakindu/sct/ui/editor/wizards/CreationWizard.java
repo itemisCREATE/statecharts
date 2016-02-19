@@ -124,11 +124,8 @@ public class CreationWizard extends Wizard implements INewWizard {
 						openDiagram(diagram);
 						PerspectiveUtil.switchToModelingPerspective(workbench.getActiveWorkbenchWindow());
 					} catch (PartInitException e) {
-						DiagramActivator
-								.getDefault()
-								.getLog()
-								.log(new Status(IStatus.WARNING, DiagramActivator.PLUGIN_ID, "Editor can't be opened",
-										e));
+						DiagramActivator.getDefault().getLog().log(
+								new Status(IStatus.WARNING, DiagramActivator.PLUGIN_ID, "Editor can't be opened", e));
 					}
 				}
 			}
@@ -167,6 +164,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 				return false;
 			}
 		}
+
 		return false;
 
 	}
