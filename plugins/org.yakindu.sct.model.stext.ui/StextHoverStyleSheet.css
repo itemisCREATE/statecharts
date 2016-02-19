@@ -21,7 +21,7 @@ dt	         { margin-top: 0px; margin-bottom: 0px; font-weight: bold; }
 dd	         { margin-top: 0px; margin-bottom: 0px; }
 
 /* Styles and colors */
-body {background-color:#FBFDFF;}
+body {background-color:#000000;}
 a:link	     { color: #0000FF; }
 a:hover	     { color: #000080; }
 a:visited    { text-decoration: underline; }

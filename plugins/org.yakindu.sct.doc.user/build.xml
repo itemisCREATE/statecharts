@@ -1,81 +1,355 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="generate.help" basedir=".">
+<project default="generate.all"
+         basedir="."
+         name="org.yakindu.sct.doc.user"
+         xmlns:if="ant:if"
+         xmlns:unless="ant:unless"
+         xmlns:artifact="antlib:org.eclipse.aether.ant">
 
-	<property name="wikitext.standalone" location="${basedir}/lib" />
-	<property name="help.prefix" value="help" />
-	<property name="help.dir" location="${basedir}/${help.prefix}" />
+    <property file="build.properties" />
+    <property file="local.properties" />
 
-	<path id="wikitext.classpath">
-		<fileset dir="${wikitext.standalone}">
-			<include name="org.eclipse.mylyn.wikitext.*core*.jar" />
-		</fileset>
-	</path>
+    <!-- The documentation source files are located here: -->
+    <property name="src.basename" value="documentation" />
+    <property name="src.dir.name" value="src" />
+    <property name="css.dir.name" value="css" />
+    <property name="img.dir.name" value="images" />
+    <property name="src.dir" location="${basedir}/${src.dir.name}" />
+    <property name="css.dir" location="${basedir}/${css.dir.name}" />
+    <property name="img.dir" location="${src.dir}/${img.dir.name}" />
 
-	<taskdef classpathref="wikitext.classpath" resource="org/eclipse/mylyn/wikitext/core/util/anttask/tasks.properties" />
+    <!-- Location of source file with XIncludes resolved: -->
+    <property name="res.basename" value="${src.basename}.resolved" />
+    <property name="res.dir.name" value="src-gen" />
 
-	<target name="assemble.sections" description="Joins individual wiki source files so that they can be presented to the Eclipse help generator as a single file.">
-		<assemble.section.sources src.dir="${help.dir}/04_C-Code_Generator" src.list="sec_04" dest.file="c_code_generator.textile" />
-		<assemble.section.sources src.dir="${help.dir}/05_Java-Code_Generator" src.list="sec_05" dest.file="java_code_generator.textile" />
-	</target>
+    <!-- Target directory names and directories for various output formats: -->
+    <property name="help.dir.name" value="help" />
+    <property name="html.dir.name" value="html" />
+    <property name="pdf.dir.name" value="pdf" />
+    <property name="epub.dir.name" value="epub" />
+    <property name="help.dir" location="${basedir}/${help.dir.name}" />
+    <property name="html.dir" location="${basedir}/${html.dir.name}" />
+    <property name="pdf.dir" location="${basedir}/${pdf.dir.name}" />
+    <property name="epub.dir" location="${basedir}/${epub.dir.name}" />
+
+    <!-- Libraries used by Ant tasks: -->
+    <property name="lib.dir.name" value="lib" />
+    <property name="lib.dir" location="${basedir}/${lib.dir.name}" />
+
+    <!-- Aether Ant Tasks configuration -->
+    <property name="aether.jar.version" value="1.0.0.v20140518" />
+    <property name="aether.jar.checksum" value="95dadd03392a75564904da45108cf048abe6e5bb" />
+    <property name="aether.jar.src"
+              value="http://search.maven.org/remotecontent?filepath=org/eclipse/aether/aether-ant-tasks/${aether.jar.version}/aether-ant-tasks-${aether.jar.version}-uber.jar" />
+    <property name="aether.jar.file" value="${lib.dir}/aether-ant-tasks-uber.jar" />
 
 
-	<!-- Building the master TOC (toc.xml) and registering it along with the sub-TOCs produced by this target in the plugin.xml file must still be done manually. -->
-	<!-- The help contexts file (contexts.xml) is not yet updated automatically, either. -->
-	<!--<target name="generate.help" depends="assemble.sections" description="Runs the Eclipse help generator on the listed wiki source files">
--->
-	<target name="generate.help" description="Runs the Eclipse help generator on the listed wiki source files">
-		<generate.section.help src.dir="${help.dir}/01_overview" src.file="overview.textile" prefix="${help.prefix}/01_overview" />
-		<generate.section.help src.dir="${help.dir}/02_installation" src.file="installation.textile" prefix="${help.prefix}/02_installation" />
-		<generate.section.help src.dir="${help.dir}/03_getting_started" src.file="getting_started.textile" prefix="${help.prefix}/03_getting_started" />
-		<generate.section.help src.dir="${help.dir}/04_code_generation" src.file="code_generation.textile" prefix="${help.prefix}/04_code_generation" />
-		<generate.section.help src.dir="${help.dir}/05_reference" src.file="reference.textile" prefix="${help.prefix}/05_reference" />
-		<generate.section.help src.dir="${help.dir}/06_tasks" src.file="tasks.textile" prefix="${help.prefix}/06_tasks" />
-	</target>
 
-	<target name="clean">
-		<delete>
-			<fileset dir="${help.dir}">
-				<include name="**/**/*.html" />
-				<include name="**/**/*toc.xml" />
-				<!-- Include joined source files produced by assemble.sections here 
-				<include name="**/**/c_code_generator.textile" />
-				<include name="**/**/java_code_generator.textile" />-->
-			</fileset>
-		</delete>
-	</target>
+    <!-- The DocBook XML distribution ZIP file will be unpacked to this directory: -->
+    <property name="docbook-xml.distribution.dir" location="${basedir}/docbook-xml.distribution" />
 
-	<macrodef name="assemble.section.sources" description="Concats individual wiki source files">
-		<attribute name="src.dir" />
-		<attribute name="index.file" default="@{src.dir}/index.txt" />
-		<attribute name="src.list" />
-		<attribute name="dest.file" />
-		<sequential>
-			<loadfile srcfile="@{index.file}" property="@{src.list}">
-				<filterchain>
-					<tokenfilter>
-						<replacestring from="\n" to="," />
-					</tokenfilter>
-				</filterchain>
-			</loadfile>
-			<!-- Attribute fixlastline does not work (on the Mac). Begin wiki files with new line for now! -->
-			<concat destfile="@{src.dir}/@{dest.file}" append="false" fixlastline="yes">
-				<filelist dir="@{src.dir}" files="${@{src.list}}" />
-			</concat>
-		</sequential>
-	</macrodef>
+    <!-- The DocBook XSL distribution ZIP file will be unpacked to this directory: -->
+    <property name="docbook-xsl.distribution.dir" location="${basedir}/docbook-xsl.distribution" />
 
-	<macrodef name="generate.section.help" description="Runs the Eclipse help generator on the provided wiki input file. Produces an HTML document and a corresponding toc.xml">
-		<attribute name="src.dir" />
-		<attribute name="src.file" />
-		<attribute name="prefix" />
-		<sequential>
-			<wikitext-to-eclipse-help markupLanguage="Textile" multipleOutputFiles="false" navigationImages="true" formatoutput="true" helpPrefix="@{prefix}">
-				<fileset dir="@{src.dir}">
-					<include name="@{src.file}" />
-				</fileset>
-				<stylesheet url="../style.css" />
-			</wikitext-to-eclipse-help>
-		</sequential>
-	</macrodef>
+    <!-- This directory contains our project-specific DocBook XSL customization layer as templates with to-be-resolved
+         references to the unpacked DocBook XSL distribution: -->
+    <property name="docbook-xsl.dir.tmpl.name" value="docbook-xsl.tmpl" />
+    <property name="docbook-xsl.dir.tmpl" location="${basedir}/${docbook-xsl.dir.tmpl.name}" />
+
+    <!-- This directory contains our project-specific DocBook XSL customization layer with references being resolved to
+         point to the unpacked DocBook XSL distribution: -->
+    <property name="docbook-xsl.dir" location="${basedir}/docbook-xsl" />
+
+
+
+    <!-- Remove generated stuff: -->
+    <target name="clean">
+        <delete includeemptydirs="true" failonerror="false">
+            <fileset dir="${res.dir.name}" />
+            <fileset dir="${docbook-xsl.dir}" />
+            <fileset dir="${docbook-xsl.distribution.dir}" />
+            <fileset dir="${docbook-xml.distribution.dir}" />
+            <fileset dir="${basedir}" defaultexcludes="false">
+                <include name="${help.dir.name}/**" />
+                <include name="${html.dir.name}/**" />
+                <include name="${pdf.dir.name}/**" />
+                <include name="${epub.dir.name}/**" />
+            </fileset>
+        </delete>
+    </target>
+
+
+    <!-- Initializes the build environment. -->
+    <target name="init" depends="init.aether, init.dependencies" description="Initializes the build environment." />
+
+
+    <!-- Aether Ant Tasks are used to access Maven dependencies from an Ant build. It is initialized by downloading
+         the Aether Ant Tasks JAR to the library folder, if needed. The downloaded JAR will not be removed by the
+         "clean" target. If the JAR is present, a typedef will make Aether Ant Tasks' elements available in the Ant
+         build file. -->
+    <target name="init.aether"
+            description="Initialized Aether Ant Tasks JAR by downloading the JAR and defining a type.">
+        <condition property="target.exists">
+            <available file="${aether.jar.file}" />
+        </condition>
+        <sequential unless:set="target.exists">
+            <mkdir dir="${lib.dir}" />
+            <get src="${aether.jar.src}" dest="${aether.jar.file}" skipexisting="true" usetimestamp="true" />
+            <fail message="Checksum mismatch for ${aether.jar.file}. Please delete it and rerun ant to redownload.">
+                <condition>
+                    <not>
+                        <checksum file="${aether.jar.file}"
+                                  algorithm="SHA"
+                                  property="${aether.jar.checksum}"
+                                  verifyproperty="checksum.matches" />
+                    </not>
+                </condition>
+            </fail>
+        </sequential>
+        <path id="aether-ant-tasks.classpath" path="${aether.jar.file}" />
+        <typedef resource="org/eclipse/aether/ant/antlib.xml"
+                 uri="antlib:org.eclipse.aether.ant"
+                 classpathref="aether-ant-tasks.classpath" />
+    </target>
+
+
+    <!-- Resolves the necessary dependencies: -->
+    <target name="init.dependencies" description="Resolves the necessary dependencies." depends="init.aether">
+
+        <!-- Classpath for Xalan, needed to render DocBook documents via XSLT. -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="xalan" artifactId="xalan" version="2.7.2" scope="compile" />
+            </artifact:dependencies>
+            <path refid="xalan.classpath" />
+        </artifact:resolve>
+
+        <!-- Classpath for Xerces and Xerces samples, needed for XInclude preprocessing. -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="xerces" artifactId="xercesImpl" version="2.11.0" scope="compile" />
+                <dependency groupId="xerces" artifactId="xercesSamples" version="2.8.0" scope="compile" />
+            </artifact:dependencies>
+            <path refid="xerces.classpath" />
+        </artifact:resolve>
+
+        <!-- Classpath for FOP, needed to render FOP files (generated by DocBook XSL) into PDF documents. -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="org.apache.xmlgraphics" artifactId="fop" version="2.1" scope="compile" />
+            </artifact:dependencies>
+            <path refid="fop.classpath" />
+        </artifact:resolve>
+
+        <!-- ZIP file containing the DocBook XSL distribution, needed to convert DocBook documents to anything else: -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="net.sf.docbook"
+                            artifactId="docbook-xsl"
+                            version="1.78.1"
+                            type="zip"
+                            classifier="ns-resources"
+                            scope="compile" />
+            </artifact:dependencies>
+            <properties prefix="docbook-xsl" />
+        </artifact:resolve>
+
+        <!-- DocBook XML -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="net.sf.docbook"
+                            artifactId="docbook-xml"
+                            version="5.0"
+                            type="zip"
+                            classifier="rng-resources"
+                            scope="compile" />
+            </artifact:dependencies>
+            <properties prefix="docbook-xml" />
+        </artifact:resolve>
+
+        <!-- Jing (used for Relax-NG validation) -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="com.thaiopensource" artifactId="jing" version="20091111" scope="compile" />
+            </artifact:dependencies>
+            <path refid="jing.classpath" />
+        </artifact:resolve>
+
+    </target>
+
+
+    <!-- Initializes DocBook XML by unpacking the distribution ZIP file. -->
+    <target name="init.docbook-xml"
+            description="Initializes DocBook XML by unpacking the distribution ZIP file."
+            depends="init.dependencies">
+        <condition property="docbook-xml.dirstribution.dir.exists">
+            <available file="${docbook-xml.distribution.dir}" />
+        </condition>
+        <unzip dest="${docbook-xml.distribution.dir}"
+               src="${docbook-xml.net.sf.docbook:docbook-xml:zip:rng-resources}"
+               overwrite="false"
+               unless:set="docbook-xml.dirstribution.dir.exists" />
+    </target>
+
+
+    <!-- Initializes DocBook XSL by unpacking the distribution ZIP file and resolving the references in our
+         customization layer template files. -->
+    <target name="init.docbook-xsl"
+            description="Initializes DocBook XSL by unpacking the distribution ZIP file and resolving the references in our customization layer template files."
+            depends="init.dependencies">
+        <condition property="docbook-xsl.distribution.dir.exists">
+            <available file="${docbook-xsl.distribution.dir}" />
+        </condition>
+        <sequential unless:set="docbook-xsl.distribution.dir.exists">
+            <unzip dest="${docbook-xsl.distribution.dir}"
+                   src="${docbook-xsl.net.sf.docbook:docbook-xsl:zip:ns-resources}"
+                   overwrite="false" />
+            <mkdir dir="${docbook-xsl.dir}" />
+            <filter token="docbook-xsl" value="${docbook-xsl.distribution.dir}/docbook" />
+            <copy todir="${docbook-xsl.dir}" filtering="true">
+                <fileset dir="${docbook-xsl.dir.tmpl}" />
+            </copy>
+        </sequential>
+    </target>
+
+
+    <!-- Resolves XIncludes. -->
+    <target name="resolve-xinclude" depends="init">
+        <mkdir dir="${res.dir.name}" />
+        <java classname="sax.Writer"
+              classpathref="xerces.classpath"
+              output="${res.dir.name}/${res.basename}.xml"
+              logerror="true"
+              failonerror="true"
+              fork="true">
+            <arg value="-np" />
+            <arg value="-xi" />
+            <arg value="${src.dir}/${src.basename}.xml" />
+        </java>
+    </target>
+
+
+    <!-- Validates the DocBook source file against the DocBook 5.0 Relax-NG grammar. -->
+    <target name="validate" depends="init.docbook-xml, resolve-xinclude">
+        <java classname="com.thaiopensource.relaxng.util.Driver"
+              classpathref="jing.classpath"
+              fork="true"
+              failonerror="true">
+            <arg value="${docbook-xml.distribution.dir}/xsd/docbook.rng" />
+            <arg value="${res.dir.name}/${res.basename}.xml" />
+        </java>
+    </target>
+
+
+    <!-- Generates the documentation in all supported formats. -->
+    <target name="generate.all"
+            description="Generates the documentation in all supported formats."
+            depends="generate.html, generate.eclipsehelp, generate.pdf" />
+
+
+    <!-- Generates the documentation as HTML. -->
+    <target name="generate.html"
+            description="Generates the documentation as HTML."
+            depends="validate, init.docbook-xsl">
+        <docbook.conversion src.dir="${res.dir.name}"
+                            src.file.name="${res.basename}.xml"
+                            dst.dir="${html.dir.name}"
+                            dst.file.name="${src.basename}.html"
+                            style="${docbook-xsl.dir}/html.xsl" />
+    </target>
+
+
+    <!-- Generates the documentation as Eclipse help. This is essentially chunked HTML with a TOC file. -->
+    <target name="generate.eclipsehelp"
+            description="Generates the documentation as Eclipse help."
+            depends="validate, init.docbook-xsl">
+        <docbook.conversion src.dir="${res.dir.name}"
+                            src.file.name="${res.basename}.xml"
+                            dst.dir="${help.dir.name}"
+                            dst.file.name="${src.basename}.html"
+                            style="${docbook-xsl.dir}/eclipsehelp.xsl" />
+    </target>
+
+
+    <!-- Generates the documentation as PDF. -->
+    <target name="generate.pdf" description="Generates the documentation as PDF." depends="validate, init.docbook-xsl">
+        <docbook.conversion src.dir="${res.dir.name}"
+                            src.file.name="${res.basename}.xml"
+                            dst.dir="${pdf.dir.name}"
+                            dst.file.name="${src.basename}.fo"
+                            style="${docbook-xsl.dir}/pdf.xsl" />
+        <taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop" classpathref="fop.classpath" />
+        <fop fofile="${pdf.dir}/${src.basename}.fo"
+             outfile="${pdf.dir}/${src.basename}.pdf"
+             format="application/pdf"
+             basedir="${pdf.dir}" />
+    </target>
+
+
+    <!-- Converts a DocBook document into a target format. -->
+    <macrodef name="docbook.conversion" description="Converts a DocBook document into a target format.">
+        <attribute name="src.dir" />
+        <attribute name="src.file.name" />
+        <attribute name="dst.dir" />
+        <attribute name="dst.file.name" />
+        <attribute name="style" />
+
+        <sequential>
+            <local name="src.file" />
+            <local name="dst.file" />
+            <local name="dst.dirname" />
+            <local name="dst.subdir" />
+            <local name="subdir.exists" />
+            <property name="src.file" value="@{src.dir}/@{src.file.name}" />
+            <property name="dst.file" value="@{dst.dir}/@{dst.file.name}" />
+            <basename property="dst.dirname" file="@{dst.dir}" />
+
+            <!-- Convert DocBook sources to target format: -->
+            <mkdir dir="@{dst.dir}" />
+            <java classname="org.apache.xalan.xslt.Process" classpathref="xalan.classpath" fork="true">
+                <sysproperty key="java.endorsed.dirs" value="${lib.dir}" />
+                <sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
+                             value="org.apache.xerces.parsers.XIncludeParserConfiguration" />
+                <arg value="-out" />
+                <arg value="${dst.file}" />
+                <arg value="-in" />
+                <arg value="${src.file}" />
+                <arg value="-xsl" />
+                <arg value="@{style}" />
+            </java>
+
+            <!-- In the special case "eclipsehelp", HTML files have been generated one level too deep, so let's move them up: -->
+            <sequential>
+                <property name="dst.subdir" value="@{dst.dir}/${dst.dirname}" />
+                <condition property="subdir.exists">
+                    <available file="${dst.subdir}" />
+                </condition>
+                <sequential if:set="subdir.exists">
+                    <mkdir dir="${dst.subdir}" />
+                    <move todir="@{dst.dir}">
+                        <fileset dir="${dst.subdir}">
+                            <include name="*" />
+                        </fileset>
+                    </move>
+                    <delete dir="${dst.subdir}" />
+                </sequential>
+            </sequential>
+
+            <!-- Copy the CSS files to the destination directory: -->
+            <copy todir="@{dst.dir}/${css.dir.name}">
+                <fileset dir="${css.dir}">
+                    <include name="*" />
+                </fileset>
+            </copy>
+
+            <!-- Copy the image files to the destination directory: -->
+            <copy todir="@{dst.dir}/${img.dir.name}">
+                <fileset dir="${img.dir}">
+                    <include name="*" />
+                </fileset>
+            </copy>
+
+        </sequential>
+    </macrodef>
 
 </project>
