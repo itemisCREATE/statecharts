@@ -1,41 +1,16 @@
 GeneratorModel for sctunit::c {
 
-	test AllTests{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}			
-				
+	test AllTests {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit="true"	
+			WrapToJUnit = "true"
 		}
-		
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}
-		
-	}	
-		
-	test EntryReactionAction {
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}
-		
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}	
-				
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -47,839 +22,20 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-		
-	}
-	
-	test AlwaysOncycle{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}
-		
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}	
-				
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}
-		
-	}
-	
-	test AssignmentAsExpression{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}	
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}
-				
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}			
-	}
-	
-	test BitExpressions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}			
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}	
-				
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}	
-	}
-	
-	test BooleanExpressions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}	
-		
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test CastExpressions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}				
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}	
-	}
-	
-	test Choice{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test CKeywords{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}			
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}		
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test ConditionalExpression{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test ConstantsTests {
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test Declarations{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test DeepEntry{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-		
-	test DeepHistory{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test DynamicChoice{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test EmptyTransition{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-		
-	test EnterState{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test EntryChoice{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test EntryExitSelfTransition{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}	
-	
-	test ExitOnSelfTransition{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test ExitState{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test FeatureCalls{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test FinalState{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test Guard{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}				
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}	
-	}
-	
-	test GuardedEntry{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}
-	}
-	
-	
-	test GuardedExit{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test HistoryWithExitPoint{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test HistoryWithoutInitialStep{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test InEventLifeCycle{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test IntegerExpressions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}				
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}	
-	}	
-	
-	test InternalEventLifeCycle{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}
-	
-	
-	}
-	test LocalReactions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}			
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}	
-		
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}	
-	}
-		 
-	test LogicalAndTests{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}		
-		
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test LogicalOrTests{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}		
-		
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test NamedInterfaceAccess{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}		
-		
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test NullCheck{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}	
-		
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}			
+
 	}
 
-	test OutEventLifeCycle{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
+	test EntryReactionAction {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}		
-		
+			WrapToJUnit = "true"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -890,44 +46,21 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}		
-	}	
-	
-	test Parenthesis{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}		
-		
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
+		}
+
 	}
-		
-	test PriorityValues{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
+
+	test AlwaysOncycle {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}		
-		
+			WrapToJUnit = "true"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -938,68 +71,21 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}		
-	}	
-		
-	test ReadOnlyVariable{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}		
-		
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}	
-	
-	test RaiseEvent{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}			
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}	
+		}
+
 	}
-		
-	test SameNameDifferentRegion{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
+
+	test AssignmentAsExpression {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
+			WrapToJUnit = "true"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1010,45 +96,956 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}		
-	}	
-	
-	
-	test ShallowHistory{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
+		}
 	}
-	
+
+	test BitExpressions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test BooleanExpressions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test CastExpressions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test Choice {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test CKeywords {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test ConditionalExpression {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test ConstantsTests {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test Declarations {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test DeepEntry {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test DeepHistory {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test DynamicChoice {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test EmptyTransition {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test EnterState {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test EntryChoice {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test EntryExitSelfTransition {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test ExitOnSelfTransition {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test ExitState {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test FeatureCalls {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test FinalState {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test Guard {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test GuardedEntry {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test GuardedExit {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test HistoryWithExitPoint {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test HistoryWithoutInitialStep {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test InEventLifeCycle {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test IntegerExpressions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test InternalEventLifeCycle {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+
+	}
+	test LocalReactions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test LogicalAndTests {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test LogicalOrTests {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test NamedInterfaceAccess {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test NullCheck {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test OutEventLifeCycle {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test Parenthesis {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test PriorityValues {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test ReadOnlyVariable {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test RaiseEvent {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test SameNameDifferentRegion {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test ShallowHistory {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
 	test ShallowHistoryWithDeepEntry {
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
+			WrapToJUnit = "true"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1059,20 +1056,20 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}		
+		}
 	}
-	
-	test SimpleEvent{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
+
+	test SimpleEvent {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
+			WrapToJUnit = "true"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1083,20 +1080,20 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}		
+		}
 	}
-	
-	test SimpleHierachy{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
+
+	test SimpleHierachy {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
+			WrapToJUnit = "true"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1107,20 +1104,20 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}		
+		}
 	}
-	
-	test StatechartLocalReactions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
+
+	test StatechartLocalReactions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}				
-						
+			WrapToJUnit = "true"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1131,20 +1128,20 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}	
+		}
 	}
-	
-	test StatechartActive{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
+
+	test StatechartActive {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}				
-						
+			WrapToJUnit = "true"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1155,20 +1152,20 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}	
+		}
 	}
-			
-	test StateIsActive{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
+
+	test StateIsActive {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}				
-						
+			WrapToJUnit = "true"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1179,20 +1176,20 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}	
+		}
 	}
-			
-	test StaticChoice{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
+
+	test StaticChoice {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
+			WrapToJUnit = "true"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1203,20 +1200,20 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}		
+		}
 	}
-	
-	test STextKeywordsInStatesAndRegions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
+
+	test STextKeywordsInStatesAndRegions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
+			WrapToJUnit = "true"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1227,25 +1224,25 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}		
+		}
 	}
-	
-	test StringExpressions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
+
+	test StringExpressions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
+			WrapToJUnit = "true"
 		}
 
 		feature IdentifierSettings {
 			maxIdentifierLength = 254
-			separator =  "_" 
-		}				
-						
+			separator = "_"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1258,90 +1255,18 @@ GeneratorModel for sctunit::c {
 			inlineEntries = false
 		}
 	}
-	
-	test SyncFork{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test SyncJoin{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}
-	
-	test TimedTransitions {
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}			
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}	
-	}	
 
-	test TransitionWithoutCondition{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
+	test SyncFork {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
+			WrapToJUnit = "true"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1352,68 +1277,92 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}		
-	}	
+		}
+	}
+
+	test SyncJoin {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test TimedTransitions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test TransitionWithoutCondition {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
 
 	test TriggerExpressionPrecedence {
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}	
 
-	test TriggerGuardExpressions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}		
-				
-		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}			
-						
-		feature FunctionInlining {
-			inlineReactions = false
-			inlineEntryActions = false
-			inlineExitActions = false
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineChoices = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
-			inlineEntries = false
-		}		
-	}	
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
 
-	test ValuedEvents{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}			
-				
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
-		}				
-						
+			WrapToJUnit = "true"
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1425,5 +1374,77 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	}	
+	}
+
+	test TriggerGuardExpressions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+
+	test ValuedEvents {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+	
+	test StatemachineKeywords {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
 }

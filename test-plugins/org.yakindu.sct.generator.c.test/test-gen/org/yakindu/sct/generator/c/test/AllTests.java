@@ -15,11 +15,11 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({AlwaysOncycle.class, AssignmentAsExpression.class, BitExpressions.class, BooleanExpressions.class,
-		CastExpressions.class, Choice.class, CKeywords.class, ConditionalExpression.class, ConstantsTests.class,
-		Declarations.class, DeepEntry.class, DeepHistory.class, DynamicChoice.class, EmptyTransition.class,
-		EnterState.class, EntryChoice.class, EntryExitSelfTransition.class, EntryReactionAction.class,
-		ExitOnSelfTransition.class, ExitState.class, FeatureCalls.class, FinalState.class, Guard.class,
-		GuardedEntry.class, GuardedExit.class, HistoryWithExitPoint.class, HistoryWithoutInitialStep.class,
+		CastExpressions.class, Choice.class, CKeywords.class, StatemachineKeywords.class, ConditionalExpression.class,
+		ConstantsTests.class, Declarations.class, DeepEntry.class, DeepHistory.class, DynamicChoice.class,
+		EmptyTransition.class, EnterState.class, EntryChoice.class, EntryExitSelfTransition.class,
+		EntryReactionAction.class, ExitOnSelfTransition.class, ExitState.class, FeatureCalls.class, FinalState.class,
+		Guard.class, GuardedEntry.class, GuardedExit.class, HistoryWithExitPoint.class, HistoryWithoutInitialStep.class,
 		InEventLifeCycle.class, IntegerExpressions.class, InternalEventLifeCycle.class, LocalReactions.class,
 		LogicalAndTests.class, LogicalOrTests.class, NamedInterfaceAccess.class, OutEventLifeCycle.class,
 		Parenthesis.class, PriorityValues.class, RaiseEvent.class, ReadOnlyVariable.class,
