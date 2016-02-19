@@ -16,10 +16,10 @@ public class GuardStatemachine implements IGuardStatemachine {
 			event2 = true;
 		}
 
-		private boolean return_ID;
+		private boolean returnEvent;
 
 		public void raiseReturn() {
-			return_ID = true;
+			returnEvent = true;
 		}
 
 		private long myVar;
@@ -35,7 +35,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 		protected void clearEvents() {
 			event1 = false;
 			event2 = false;
-			return_ID = false;
+			returnEvent = false;
 		}
 
 	}
@@ -157,7 +157,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 	}
 
 	private boolean check_main_region_B_tr0_tr0() {
-		return sCInterface.return_ID;
+		return sCInterface.returnEvent;
 	}
 
 	private void effect_main_region_A_tr0() {

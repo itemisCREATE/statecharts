@@ -21,8 +21,8 @@ public interface IJavaKeywordsStatemachine extends IStatemachine {
 		public void setCatch(boolean value);
 		public boolean getChar();
 		public void setChar(boolean value);
-		public boolean getClass_ID();
-		public void setClass_ID(boolean value);
+		public boolean getClassVariable();
+		public void setClass(boolean value);
 		public boolean getContinue();
 		public void setContinue(boolean value);
 		public boolean getDo();

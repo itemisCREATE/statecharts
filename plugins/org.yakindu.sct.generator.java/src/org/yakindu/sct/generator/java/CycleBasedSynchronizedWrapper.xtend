@@ -31,6 +31,7 @@ class CycleBasedSynchronizedWrapper {
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension CycleBasedWrapperFeature
 
+	@Inject protected extension JavaNamingService
 	@Inject protected extension Naming
 	@Inject protected extension Navigation
 	@Inject protected extension ITypeSystem

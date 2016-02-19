@@ -23,6 +23,7 @@ import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
@@ -57,11 +58,11 @@ import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.base.expressions.expressions.Expression
 
 class ExpressionCode {
 
 	@Inject extension Naming
+	@Inject extension JavaNamingService
 	@Inject extension Navigation
 	@Inject extension ITypeSystem
 	@Inject extension ITypeSystemInferrer
@@ -264,9 +265,9 @@ class ExpressionCode {
 		«ELSE»
 			«val def = definition»
 			«IF def instanceof Property && isAssignmentContained»
-				«def.getContext(false) + def.symbol»
+				«def.getContext(false) + def.identifier»
 			«ELSEIF def instanceof Property && isPropertyContained»
-				«def.getContext(true) + def.symbol»
+				«def.getContext(true) + def.identifier»
 			«ELSE»
 				«definition.code»
 			«ENDIF»
@@ -282,7 +283,7 @@ class ExpressionCode {
 	'''
 
 	def dispatch String code(Declaration it) {
-		getContext(false) + symbol
+		getContext(false) + identifier
 	}
 
 	def dispatch String code(Property it) {
