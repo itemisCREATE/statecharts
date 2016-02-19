@@ -16,6 +16,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.java.features.EventBasedRunnableFeature
 import org.yakindu.sct.generator.java.features.CycleBasedWrapperFeature
+import org.yakindu.sct.model.sexec.naming.INamingService
 
 /**
  * This is the Java code generators main class. 
@@ -39,9 +40,12 @@ class JavaGenerator implements IExecutionFlowGenerator {
 	@Inject extension Statemachine
 	@Inject extension EventBasedRunnableWrapper
 	@Inject extension CycleBasedSynchronizedWrapper
+	@Inject INamingService namingService
  	
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-
+		
+		namingService.initializeNamingService(flow);
+		
 		flow.generateIStatemachine(entry, fsa)
 		
 		if (flow.timed) {

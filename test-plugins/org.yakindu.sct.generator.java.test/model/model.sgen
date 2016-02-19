@@ -1,18 +1,17 @@
 GeneratorModel for yakindu::java {
 
 	
-	statechart entries.EntryReactionAction  {
+	statechart entries.EntryReactionAction {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
-
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
 		}
-		
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -23,22 +22,20 @@ GeneratorModel for yakindu::java {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}		
+		}
 	}
 
-
-	statechart expressions.TriggerExpressionPrecedence  {
+	statechart expressions.TriggerExpressionPrecedence {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
-
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
 		}
-		
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -49,9 +46,9 @@ GeneratorModel for yakindu::java {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
-		}		
+		}
 	}
-	
+
 	statechart AlwaysOncycle {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -62,7 +59,7 @@ GeneratorModel for yakindu::java {
 			TimerService = true
 			RuntimeService = true
 		}
-		
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -74,9 +71,9 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-		
+
 	}
-	
+
 	statechart AssignmentAsExpression {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -87,7 +84,7 @@ GeneratorModel for yakindu::java {
 			TimerService = true
 			RuntimeService = true
 		}
-		
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -100,7 +97,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart BooleanExpressions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -110,8 +107,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}	
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -124,7 +121,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart BitExpressions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -134,8 +131,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -148,7 +145,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart Choice {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -158,8 +155,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -171,8 +168,8 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	} 
-	
+	}
+
 	statechart CastExpressions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -182,8 +179,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -195,8 +192,8 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	} 
-	
+	}
+
 	statechart CKeywords {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -206,8 +203,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -220,7 +217,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart ConditionalExpressions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -230,8 +227,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -243,8 +240,8 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	}	
-	
+	}
+
 	statechart Constants {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -254,8 +251,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -267,8 +264,8 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	}	
-	
+	}
+
 	statechart Declarations {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -278,8 +275,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -292,8 +289,8 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
-	statechart DeepEntry{
+
+	statechart DeepEntry {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
@@ -302,8 +299,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -315,8 +312,8 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	}	
-		
+	}
+
 	statechart DeepHistory {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -326,8 +323,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -340,8 +337,8 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
-	statechart DynamicChoice{
+
+	statechart DynamicChoice {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
@@ -350,8 +347,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -364,7 +361,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart EmptyTransition {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -374,8 +371,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -388,7 +385,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-			
+
 	statechart EnterState {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -398,8 +395,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -412,7 +409,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart EntryChoice {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -422,8 +419,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -436,7 +433,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart EntryExitSelfTransition {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -446,8 +443,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -460,7 +457,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-			
+
 	statechart ExitOnSelfTransition {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -470,8 +467,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -484,7 +481,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart ExitState {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -495,7 +492,7 @@ GeneratorModel for yakindu::java {
 			TimerService = true
 			RuntimeService = true
 		}
-		
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -507,9 +504,9 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-		
+
 	}
-	
+
 	statechart FeatureCalls {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -519,8 +516,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -533,7 +530,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart FinalState {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -543,8 +540,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -557,7 +554,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart Guard {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -567,8 +564,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -581,7 +578,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart GuardedEntry {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -591,8 +588,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -605,7 +602,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart GuardedExit {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -615,8 +612,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -629,7 +626,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart HistoryWithExitPoint {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -639,8 +636,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -653,7 +650,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart HistoryWithoutInitialStep {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -663,8 +660,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -677,7 +674,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart InEventLifeCycle {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -687,8 +684,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -701,7 +698,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-			
+
 	statechart IntegerExpressions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -711,8 +708,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -725,7 +722,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart InternalEventLifeCycle {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -735,8 +732,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -749,7 +746,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart JavaKeywords {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -759,8 +756,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
- 		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -772,8 +769,8 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	}		
-	
+	}
+
 	statechart LocalReactions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -783,8 +780,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
- 		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -796,19 +793,19 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	}	
-		
+	}
+
 	statechart LogicalAnd {
-			feature Outlet {
+		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
-		} 
+		}
 
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -820,20 +817,20 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-		
+
 	}
 
 	statechart LogicalOr {
-			feature Outlet {
+		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
-		} 
+		}
 
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -845,9 +842,9 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-		
-	}	
-	
+
+	}
+
 	statechart NamedInterfaceAccess {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -857,8 +854,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -871,7 +868,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart NullCheck {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -881,8 +878,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -894,8 +891,8 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	}	
-	
+	}
+
 	statechart OperationsWithoutBraces {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -905,8 +902,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
- 		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -919,7 +916,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart Operations {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -929,8 +926,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
- 		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -942,8 +939,8 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	}	
-	
+	}
+
 	statechart OutEventLifeCycle {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -953,8 +950,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -966,8 +963,8 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	}	
-	
+	}
+
 	statechart Parenthesis {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -977,8 +974,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -991,7 +988,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart PerformanceTest {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1001,8 +998,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1015,7 +1012,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart PriorityValues {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1025,8 +1022,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1038,7 +1035,7 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	}	
+	}
 
 	statechart RaiseEvent {
 		feature Outlet {
@@ -1049,8 +1046,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1063,7 +1060,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart ReadOnlyVariable {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1073,8 +1070,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1087,7 +1084,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart RealExpressions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1097,8 +1094,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1110,7 +1107,7 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	}	
+	}
 
 	statechart SameNameDifferentRegion {
 		feature Outlet {
@@ -1121,8 +1118,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1135,7 +1132,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart ShallowHistory {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1145,8 +1142,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1159,7 +1156,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart ShallowHistoryWithDeepEntry {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1169,8 +1166,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1183,7 +1180,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart SimpleEvent {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1193,8 +1190,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1208,7 +1205,7 @@ GeneratorModel for yakindu::java {
 		}
 
 	}
-	
+
 	statechart SimpleHierachy {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1218,8 +1215,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1232,7 +1229,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart StatechartLocalReactions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1242,8 +1239,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1255,8 +1252,8 @@ GeneratorModel for yakindu::java {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-	}	
-	
+	}
+
 	statechart StatechartActive {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1266,8 +1263,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1280,7 +1277,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart StateIsActive {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1290,8 +1287,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1304,7 +1301,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart StaticChoice {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1314,8 +1311,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1333,13 +1330,13 @@ GeneratorModel for yakindu::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
-		} 
+		}
 
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1352,7 +1349,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart StringExpressions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1362,8 +1359,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1386,8 +1383,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1410,8 +1407,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1424,18 +1421,18 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart TimedTransitions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
-		} 
+		}
 
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1448,18 +1445,18 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart TransitionWithoutCondition {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
-		} 
+		}
 
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1472,18 +1469,18 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart TriggerGuardExpressions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
-		} 
+		}
 
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1496,7 +1493,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-		
+
 	statechart ValuedEvents {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -1506,8 +1503,8 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}		
-			
+		}
+
 		feature FunctionInlining {
 			inlineReactions = false
 			inlineEntryActions = false
@@ -1520,7 +1517,7 @@ GeneratorModel for yakindu::java {
 			inlineEntries = false
 		}
 	}
-	
+
 	statechart WrapperTest {
 
 		feature Outlet {
@@ -1532,13 +1529,13 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 			InterfaceObserverSupport = true
 		}
-		
+
 		feature SynchronizedWrapper {
-			namePrefix =  "Synchronized" 
-			nameSuffix =  "" 
+			namePrefix = "Synchronized"
+			nameSuffix = ""
 		}
 	}
-	
+
 	statechart RunnableTest {
 
 		feature Outlet {
@@ -1550,10 +1547,34 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 			InterfaceObserverSupport = true
 		}
-		
+
 		feature RunnableWrapper {
-			namePrefix =  "" 
-			nameSuffix =  "Runnable" 
+			namePrefix = ""
+			nameSuffix = "Runnable"
+		}
+	}
+	
+	statechart StatechartKeywords {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+		
+		feature GeneralFeatures {
+			InterfaceObserverSupport = true
+		}
+		
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}	
 }

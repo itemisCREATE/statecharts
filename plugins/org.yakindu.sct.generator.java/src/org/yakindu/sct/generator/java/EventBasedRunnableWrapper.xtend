@@ -12,17 +12,17 @@
 
 package org.yakindu.sct.generator.java
 
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.base.types.typesystem.ITypeSystem
+import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.typesystem.GenericTypeSystem
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-import org.yakindu.sct.generator.java.features.EventBasedRunnableFeature
 import org.yakindu.sct.generator.java.features.CycleBasedWrapperFeature
+import org.yakindu.sct.generator.java.features.EventBasedRunnableFeature
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 /**
  * Generates the runnable wrapper for the state machine. This wrapper implies event based execution semantics. 
@@ -34,6 +34,7 @@ class EventBasedRunnableWrapper {
 	@Inject protected extension CycleBasedWrapperFeature
 
 	@Inject protected extension Naming
+	@Inject protected extension JavaNamingService
 	@Inject protected extension Navigation
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ICodegenTypeSystemAccess
