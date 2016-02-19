@@ -27,6 +27,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 class StatemachineInterface {
 
 	@Inject extension Naming
+	@Inject extension JavaNamingService
 	@Inject extension GenmodelEntries
 	@Inject extension Navigation
 	@Inject extension ITypeSystem
@@ -70,7 +71,7 @@ class StatemachineInterface {
 	
 	
 	def protected constantFieldDeclaration(VariableDefinition variable){
-		'''public static final «variable.type.targetLanguageName» «variable.symbol» = «variable.initialValue.code»;'''
+		'''public static final «variable.type.targetLanguageName» «variable.identifier» = «variable.initialValue.code»;'''
 	}
 
 	def protected createScope(Scope scope, GeneratorEntry entry) {
@@ -181,7 +182,7 @@ class StatemachineInterface {
 		«FOR variable : scope.variableDefinitions»
 			public «variable.type.targetLanguageName» «variable.getter»;
 			«IF !variable.readonly && !variable.const»
-				public void «variable.setter»(«variable.type.targetLanguageName» value);	
+				public void «variable.setter»(«variable.type.targetLanguageName» value);
 			«ENDIF»
 		«ENDFOR»
 	'''
@@ -207,7 +208,7 @@ class StatemachineInterface {
 	}
 
 	def protected identifier(Parameter parameter) {
-		if (parameter.name.isJavaKeyword()) {
+		if (parameter.name.isKeyword) {
 			return parameter.name + "Arg"
 		} else {
 			parameter.name

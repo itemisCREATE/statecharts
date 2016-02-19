@@ -31,6 +31,7 @@ import static org.eclipse.xtext.util.Strings.*
 class Statemachine {
 	
 	@Inject protected extension Naming
+	@Inject protected extension JavaNamingService
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension Navigation
 	@Inject protected extension ICodegenTypeSystemAccess
@@ -128,7 +129,7 @@ class Statemachine {
 		«ENDIF»
 		
 		«FOR event : flow.internalScopeEvents»
-			private boolean «event.symbol»;
+			private boolean «event.identifier»;
 			
 			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 				private «event.type.targetLanguageName» «event.valueIdentifier»;
@@ -141,17 +142,17 @@ class Statemachine {
 				«variable.fieldDeclaration»
 				
 				protected void «variable.setter»(«variable.type.targetLanguageName» value) {
-					«variable.symbol» = value;
+					«variable.identifier» = value;
 				}
 				
 			«ENDIF»
 			protected «variable.type.targetLanguageName» «variable.getter» {
-				return «variable.symbol»;
+				return «variable.identifier»;
 			}
 			
 			«IF variable.needsAssignMethod»
 				protected «variable.type.targetLanguageName» «variable.assign»(«variable.type.targetLanguageName» value) {
-					return this.«variable.symbol» = value;
+					return this.«variable.identifier» = value;
 				}
 			«ENDIF»
 		«ENDFOR»
@@ -163,7 +164,7 @@ class Statemachine {
 	'''
 	//reused by interfaces
 	def protected fieldDeclaration(VariableDefinition variable) {
-		'''private «variable.type.targetLanguageName» «variable.symbol»;'''
+		'''private «variable.type.targetLanguageName» «variable.identifier»;'''
 	}
 	
 	def protected createConstructor(ExecutionFlow flow) '''
@@ -211,7 +212,7 @@ class Statemachine {
 			«ENDFOR»
 			«FOR scope : flow.internalScopes»
 				«FOR event : scope.eventDefinitions»
-					«event.symbol» = false;
+					«event.identifier» = false;
 				«ENDFOR»
 			«ENDFOR»
 			
@@ -370,7 +371,7 @@ class Statemachine {
 		protected void clearOutEvents() {
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction == Direction::OUT»
-				«event.symbol» = false;
+				«event.identifier» = false;
 			«ENDIF»
 		«ENDFOR»
 		}
@@ -381,7 +382,7 @@ class Statemachine {
 		protected void clearEvents() {
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction != Direction::OUT»
-			«event.symbol» = false;
+			«event.identifier» = false;
 			«ENDIF»
 		«ENDFOR»
 		}
@@ -393,25 +394,25 @@ class Statemachine {
 			
 		«ENDIF»
 		public «variable.type.targetLanguageName» «variable.getter» {
-			return «variable.symbol»;
+			return «variable.identifier»;
 		}
 		
 		«IF !variable.const»
 			«IF variable.readonly»protected«ELSE»public«ENDIF» void «variable.setter»(«variable.type.targetLanguageName» value) {
-				this.«variable.symbol» = value;
+				this.«variable.identifier» = value;
 			}
 			
 		«ENDIF»
 		
 		«IF variable.needsAssignMethod»
 			protected «variable.type.targetLanguageName» «variable.assign»(«variable.type.targetLanguageName» value) {
-				return this.«variable.symbol» = value;
+				return this.«variable.identifier» = value;
 			}
 		«ENDIF»
 	'''
 	
 	protected def generateEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
-		private boolean «event.symbol»;
+		private boolean «event.identifier»;
 		
 		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 			private «event.type.targetLanguageName» «event.valueIdentifier»;
@@ -429,12 +430,12 @@ class Statemachine {
 	protected def generateOutEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
 		
 		public boolean isRaised«event.name.asName»() {
-			return «event.symbol»;
+			return «event.identifier»;
 		}
 		
 		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 			protected void raise«event.name.asName»(«event.type.targetLanguageName» value) {
-				«event.symbol» = true;
+				«event.identifier» = true;
 				«event.valueIdentifier» = value;
 				«IF entry.createInterfaceObserver»
 				for («scope.interfaceListenerName» listener : listeners) {
@@ -449,7 +450,7 @@ class Statemachine {
 			}
 		«ELSE»
 			protected void raise«event.name.asName»() {
-				«event.symbol» = true;
+				«event.identifier» = true;
 				«IF entry.createInterfaceObserver»
 					for («scope.interfaceListenerName» listener : listeners) {
 						listener.on«event.name.asEscapedName»Raised();
@@ -462,7 +463,7 @@ class Statemachine {
 	protected def generateInEventDefinition(EventDefinition event) '''
 		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 			public void raise«event.name.asName»(«event.type.targetLanguageName» value) {
-				«event.symbol» = true;
+				«event.identifier» = true;
 				«event.valueIdentifier» = value;
 			}
 			
@@ -473,7 +474,7 @@ class Statemachine {
 			
 		«ELSE»
 			public void raise«event.name.asName»() {
-				«event.symbol» = true;
+				«event.identifier» = true;
 			}
 			
 		«ENDIF»
@@ -508,7 +509,7 @@ class Statemachine {
 			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 				private void raise«event.name.asEscapedName»(«event.type.targetLanguageName» value) {
 					«event.valueIdentifier» = value;
-					«event.symbol» = true;
+					«event.identifier» = true;
 				}
 				
 				private «event.type.targetLanguageName» get«event.name.asEscapedName»Value() {
@@ -518,7 +519,7 @@ class Statemachine {
 			«ELSE»
 			
 				private void raise«event.name.asEscapedName»() {
-					«event.symbol» = true;
+					«event.identifier» = true;
 				}
 				
 			«ENDIF»

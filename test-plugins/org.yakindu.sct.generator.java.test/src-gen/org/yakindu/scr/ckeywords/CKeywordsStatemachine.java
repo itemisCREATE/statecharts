@@ -10,60 +10,60 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			auto = true;
 		}
 
-		private boolean break_ID;
+		private boolean breakEvent;
 
 		public void raiseBreak() {
-			break_ID = true;
+			breakEvent = true;
 		}
 
-		private boolean case_ID;
+		private boolean caseVariable;
 
 		public boolean getCase() {
-			return case_ID;
+			return caseVariable;
 		}
 
 		public void setCase(boolean value) {
-			this.case_ID = value;
+			this.caseVariable = value;
 		}
 
-		private long do_ID;
+		private long doVariable;
 
 		public long getDo() {
-			return do_ID;
+			return doVariable;
 		}
 
 		public void setDo(long value) {
-			this.do_ID = value;
+			this.doVariable = value;
 		}
 
-		private boolean continue_ID;
+		private boolean continueVariable;
 
 		public boolean getContinue() {
-			return continue_ID;
+			return continueVariable;
 		}
 
 		public void setContinue(boolean value) {
-			this.continue_ID = value;
+			this.continueVariable = value;
 		}
 
-		private boolean double_ID;
+		private boolean doubleVariable;
 
 		public boolean getDouble() {
-			return double_ID;
+			return doubleVariable;
 		}
 
 		public void setDouble(boolean value) {
-			this.double_ID = value;
+			this.doubleVariable = value;
 		}
 
-		private boolean enum_ID;
+		private boolean enumVariable;
 
 		public boolean getEnum() {
-			return enum_ID;
+			return enumVariable;
 		}
 
 		public void setEnum(boolean value) {
-			this.enum_ID = value;
+			this.enumVariable = value;
 		}
 
 		private boolean extern;
@@ -76,64 +76,64 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.extern = value;
 		}
 
-		private boolean float_ID;
+		private boolean floatVariable;
 
 		public boolean getFloat() {
-			return float_ID;
+			return floatVariable;
 		}
 
 		public void setFloat(boolean value) {
-			this.float_ID = value;
+			this.floatVariable = value;
 		}
 
-		private boolean for_ID;
+		private boolean forVariable;
 
 		public boolean getFor() {
-			return for_ID;
+			return forVariable;
 		}
 
 		public void setFor(boolean value) {
-			this.for_ID = value;
+			this.forVariable = value;
 		}
 
-		private boolean goto_ID;
+		private boolean gotoVariable;
 
 		public boolean getGoto() {
-			return goto_ID;
+			return gotoVariable;
 		}
 
 		public void setGoto(boolean value) {
-			this.goto_ID = value;
+			this.gotoVariable = value;
 		}
 
-		private boolean if_ID;
+		private boolean ifVariable;
 
 		public boolean getIf() {
-			return if_ID;
+			return ifVariable;
 		}
 
 		public void setIf(boolean value) {
-			this.if_ID = value;
+			this.ifVariable = value;
 		}
 
-		private boolean int_ID;
+		private boolean intVariable;
 
 		public boolean getInt() {
-			return int_ID;
+			return intVariable;
 		}
 
 		public void setInt(boolean value) {
-			this.int_ID = value;
+			this.intVariable = value;
 		}
 
-		private boolean long_ID;
+		private boolean longVariable;
 
 		public boolean getLong() {
-			return long_ID;
+			return longVariable;
 		}
 
 		public void setLong(boolean value) {
-			this.long_ID = value;
+			this.longVariable = value;
 		}
 
 		private boolean register;
@@ -146,24 +146,24 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.register = value;
 		}
 
-		private boolean return_ID;
+		private boolean returnVariable;
 
 		public boolean getReturn() {
-			return return_ID;
+			return returnVariable;
 		}
 
 		public void setReturn(boolean value) {
-			this.return_ID = value;
+			this.returnVariable = value;
 		}
 
-		private boolean short_ID;
+		private boolean shortVariable;
 
 		public boolean getShort() {
-			return short_ID;
+			return shortVariable;
 		}
 
 		public void setShort(boolean value) {
-			this.short_ID = value;
+			this.shortVariable = value;
 		}
 
 		private boolean signed;
@@ -186,14 +186,14 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.sizeof = value;
 		}
 
-		private boolean static_ID;
+		private boolean staticVariable;
 
 		public boolean getStatic() {
-			return static_ID;
+			return staticVariable;
 		}
 
 		public void setStatic(boolean value) {
-			this.static_ID = value;
+			this.staticVariable = value;
 		}
 
 		private boolean struct;
@@ -206,14 +206,14 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.struct = value;
 		}
 
-		private boolean switch_ID;
+		private boolean switchVariable;
 
 		public boolean getSwitch() {
-			return switch_ID;
+			return switchVariable;
 		}
 
 		public void setSwitch(boolean value) {
-			this.switch_ID = value;
+			this.switchVariable = value;
 		}
 
 		private boolean typedef;
@@ -246,39 +246,39 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.unsigned = value;
 		}
 
-		private boolean void_ID;
+		private boolean voidVariable;
 
 		public boolean getVoid() {
-			return void_ID;
+			return voidVariable;
 		}
 
 		public void setVoid(boolean value) {
-			this.void_ID = value;
+			this.voidVariable = value;
 		}
 
-		private boolean volatile_ID;
+		private boolean volatileVariable;
 
 		public boolean getVolatile() {
-			return volatile_ID;
+			return volatileVariable;
 		}
 
 		public void setVolatile(boolean value) {
-			this.volatile_ID = value;
+			this.volatileVariable = value;
 		}
 
-		private boolean while_ID;
+		private boolean whileVariable;
 
 		public boolean getWhile() {
-			return while_ID;
+			return whileVariable;
 		}
 
 		public void setWhile(boolean value) {
-			this.while_ID = value;
+			this.whileVariable = value;
 		}
 
 		protected void clearEvents() {
 			auto = false;
-			break_ID = false;
+			breakEvent = false;
 		}
 
 	}

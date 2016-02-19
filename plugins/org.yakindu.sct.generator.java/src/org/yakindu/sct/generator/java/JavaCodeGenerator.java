@@ -21,7 +21,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
-import com.google.inject.Scopes;
+import com.google.inject.Singleton;
 import com.google.inject.util.Modules;
 
 public class JavaCodeGenerator extends AbstractJavaCodeGenerator {
@@ -54,7 +54,7 @@ public class JavaCodeGenerator extends AbstractJavaCodeGenerator {
 							JavaTypeSystemAccess.class);
 				}
 				binder.bind(INamingService.class).to(JavaNamingService.class)
-						.in(Scopes.SINGLETON);
+						.in(Singleton.class);
 			}
 		});
 

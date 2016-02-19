@@ -6,20 +6,16 @@
  * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
  * committers of YAKINDU - initial API and implementation
- *
-*/
+ * 
+ */
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
-import java.util.Arrays
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.EventDefinition
@@ -27,9 +23,9 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
-class Naming implements JavaKeywords {
+class Naming {
 
-	@Inject extension INamingService namingService;
+	@Inject extension JavaNamingService namingService;
 	@Inject StextNameProvider provider;
 
 	def iStatemachine() {
@@ -72,23 +68,10 @@ class Naming implements JavaKeywords {
 		"InternalOperationCallback"
 	}
 
-	def boolean isJavaKeyword(String name) {
-		var String lowName = name.toLowerCase();
-		for (String keyword : Arrays::asList(KEYWORDS)) {
-			var Pattern pattern = Pattern::compile("^" + keyword + "$");
-			var Matcher matcher = pattern.matcher(lowName);
-			if (matcher.find()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	def dispatch String statemachineName(String name) {
-
 		// remove whitespaces;
 		var String newName = name.replace(" ", "")
-		if (isJavaKeyword(name)) {
+		if (name.isKeyword) {
 			return newName + "SM"
 		}
 		return newName
@@ -106,20 +89,16 @@ class Naming implements JavaKeywords {
 		"I" + statemachineClassName
 	}
 
-	def String getInterfaceName(InterfaceScope it) {
-		if (name != null) {
-			return "SCI" + name.toFirstUpper()
-		} else {
-			return "SCInterface";
-		}
+	def dispatch identifier(VariableDefinition it) {
+		escaped.asIdentifier
 	}
 
-	def dispatch getSymbol(VariableDefinition it) {
-		name.asEscapedIdentifier
+	def dispatch identifier(EventDefinition it) {
+		escaped.asIdentifier
 	}
 
-	def dispatch getSymbol(EventDefinition it) {
-		name.asEscapedIdentifier
+	def String getValueIdentifier(Event it) {
+		name.asIdentifier + "Value"
 	}
 
 	def String getInterfaceImplName(InterfaceScope it) {
@@ -147,52 +126,54 @@ class Naming implements JavaKeywords {
 		name.fullQualifiedStateName
 	}
 
-	def asIdentifier(String it) {
-		replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', '_').toFirstLower
-	}
-
 	def asName(String it) {
 		asIdentifier.toFirstUpper
-	}
-
-	def asEscapedIdentifier(String it) {
-		var s = it
-		if (s.isJavaKeyword) {
-			s = s + '_ID'
-		}
-		return s.asIdentifier
 	}
 
 	def asEscapedName(String it) {
 		asEscapedIdentifier.toFirstUpper
 	}
 
-	def String getValueIdentifier(Event it) {
-		name.asIdentifier + "Value"
+	def private escaped(Property it) {
+		var varName = name
+		if (isKeyword) {
+			varName += "Variable"
+		}
+		return varName
 	}
 
-	def private varName(Property it) {
-		if (name.equalsIgnoreCase("class")) {
-			name.asEscapedName
-		} else {
-			name.asName
+	def private escaped(Event it) {
+		var varName = name
+		if (isKeyword) {
+			varName += "Event"
 		}
+		return varName
 	}
 
 	def String getter(Event it) {
 		"get" + name.asName + "Value()"
 	}
-	
+
 	def String getter(Property it) {
-		return "get" + varName + "()"
+		methodName("get", "()")
 	}
 
 	def String setter(Property it) {
-		"set" + varName
+		methodName("set", "");
 	}
 	
 	def String assign(Property it) {
-		"assign" + varName
+		methodName("assign", "")
+	}
+	
+	def private methodName(Property it, String prefix, String suffix) {
+		var methodName = prefix + name.asName
+
+		if (isStatemachineMethod(methodName) || isDerivedIdentifier(name)) {
+			methodName = prefix + escaped.asName
+		}
+
+		return methodName + suffix
 	}
 
 	def String getNullStateName() {

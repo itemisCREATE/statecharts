@@ -29,10 +29,12 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import java.util.List
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.naming.INamingService
 
 class FlowCode {
 	
 	@Inject extension Naming
+	@Inject extension INamingService
 	@Inject extension ExpressionCode
 	@Inject extension SExecExtensions
 	
