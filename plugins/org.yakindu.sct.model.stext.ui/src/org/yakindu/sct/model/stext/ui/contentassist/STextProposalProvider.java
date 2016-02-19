@@ -32,6 +32,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -191,6 +192,10 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 	@Override
 	protected String getDisplayString(EObject element, String qualifiedNameAsString, String shortName) {
+		if (element instanceof Type) {
+			return super.getDisplayString(element, qualifiedNameAsString, shortName);
+		}
+		
 		if(element == null || element.eIsProxy()){
 			return qualifiedNameAsString;
 		}
