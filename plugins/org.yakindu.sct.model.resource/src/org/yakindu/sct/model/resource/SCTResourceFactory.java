@@ -12,6 +12,7 @@ package org.yakindu.sct.model.resource;
 
 import java.io.IOException;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -39,6 +40,7 @@ public class SCTResourceFactory extends XMIResourceFactoryImpl {
 	public Resource createResource(URI uri) {
 		String domainID = determineDomainID(uri);
 		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(domainID);
+		Assert.isTrue(domainDescriptor.getDomainID().equals(domainID));
 		Injector injector = domainDescriptor.getDomainInjectorProvider().getResourceInjector();
 		Resource resource = injector.getInstance(Resource.class);
 		ResourceSet set = new ResourceSetImpl();
