@@ -532,7 +532,7 @@ class GeneratorProjectTemplate {
 			xtend-gen
 		«ENDIF»
 		«IF data.pluginExport»
-			bin.includes = META-INF/,.,plugin.xml
+			bin.includes = META-INF/,.,plugin.xml«IF data.typeLibrary»,library/«ENDIF»
 		«ELSE»
 			bin.includes = META-INF/,.
 		«ENDIF»
