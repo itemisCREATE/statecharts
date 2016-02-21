@@ -1,12 +1,11 @@
-**/*~
-.ant-targets-build.xml
-bin/
 docbook-xsl/
 docbook-xsl.distribution/
-epub/
+docbook-xml.distribution/
 help/
 html/
 lib/
-model/*experiment*
 pdf/
 target/
+src-gen/
+bin/
+
