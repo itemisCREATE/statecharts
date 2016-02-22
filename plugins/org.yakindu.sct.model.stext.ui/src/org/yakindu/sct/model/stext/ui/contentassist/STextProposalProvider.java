@@ -51,7 +51,7 @@ import com.google.inject.Inject;
 public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 	@Inject
-	private STextGrammarAccess grammarAccess;
+	protected STextGrammarAccess grammarAccess;
 	private ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(
 			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 	@Inject
@@ -100,13 +100,13 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 
 	// context Transition
-	private void suppressKeywords(List<Keyword> suppressKeywords, TransitionSpecification model) {
+	protected void suppressKeywords(List<Keyword> suppressKeywords, TransitionSpecification model) {
 		suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
 		suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
 	}
 
 	// context States
-	private void suppressKeywords(List<Keyword> suppressKeywords, SimpleScope model) {
+	protected void suppressKeywords(List<Keyword> suppressKeywords, SimpleScope model) {
 		suppressKeywords.addAll(getKeywords(grammarAccess.getVariableDefinitionAccess().getGroup().eContents()));
 		suppressKeywords.addAll(getKeywords(grammarAccess.getEventDefinitionAccess().getGroup().eContents()));
 		suppressKeywords.addAll(getKeywords(grammarAccess.getDirectionAccess().getAlternatives().eContents()));
@@ -114,7 +114,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 
 	// context Statechart
-	private void suppressKeywords(List<Keyword> suppressKeywords, StatechartSpecification model) {
+	protected void suppressKeywords(List<Keyword> suppressKeywords, StatechartSpecification model) {
 		suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
 		suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
 		EList<EObject> importKeyWordList = new BasicEList<EObject>();
@@ -122,32 +122,32 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		suppressKeywords.addAll(getKeywords(importKeyWordList));
 	}
 
-	private void suppressKeywords(List<Keyword> suppressKeywords, InterfaceScope model) {
+	protected void suppressKeywords(List<Keyword> suppressKeywords, InterfaceScope model) {
 		suppressKeywords.addAll(getKeywords(grammarAccess.getLocalReactionAccess().getGroup().eContents()));
 		suppressKeywords.addAll(getKeywords(grammarAccess.getAlwaysEventAccess().getGroup().eContents()));
 		suppressKeywords.addAll(getKeywords(grammarAccess.getTimeEventTypeAccess().getAlternatives().eContents()));
 		suppressKeywords.add(grammarAccess.getDirectionAccess().getLOCALLocalKeyword_0_0());
 	}
 
-	private void suppressKeywords(List<Keyword> suppressKeywords, FeatureCall featureCall) {
+	protected void suppressKeywords(List<Keyword> suppressKeywords, FeatureCall featureCall) {
 		if (!(featureCall.getFeature() instanceof Operation)) {
 			suppressKeywords.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0());
 		}
 	}
 
-	private void suppressKeywords(List<Keyword> suppressKeywords, ElementReferenceExpression referenceExpression) {
+	protected void suppressKeywords(List<Keyword> suppressKeywords, ElementReferenceExpression referenceExpression) {
 		if (!(referenceExpression.getReference() instanceof Operation)) {
 			suppressKeywords.add(grammarAccess.getElementReferenceExpressionAccess()
 					.getOperationCallLeftParenthesisKeyword_2_0_0());
 		}
 	}
 
-	private void suppressKeywords(List<Keyword> suppressKeywords, InternalScope model) {
+	protected void suppressKeywords(List<Keyword> suppressKeywords, InternalScope model) {
 		suppressKeywords.add(grammarAccess.getDirectionAccess().getINInKeyword_1_0());
 		suppressKeywords.add(grammarAccess.getDirectionAccess().getOUTOutKeyword_2_0());
 	}
 
-	private List<Keyword> getKeywords(EList<EObject> list) {
+	protected List<Keyword> getKeywords(EList<EObject> list) {
 		final List<Keyword> keywords = new ArrayList<Keyword>();
 		for (EObject eObject : list) {
 			if (eObject instanceof Keyword) {
