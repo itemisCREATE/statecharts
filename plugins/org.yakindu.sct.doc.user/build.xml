@@ -244,7 +244,7 @@
     <!-- Generates the documentation in all supported formats. -->
     <target name="generate.all"
             description="Generates the documentation in all supported formats."
-            depends="generate.html, generate.eclipsehelp, generate.pdf" />
+            depends="generate.html, generate.eclipsehelp" />
 
 
     <!-- Generates the documentation as HTML. -->
