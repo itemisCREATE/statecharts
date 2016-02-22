@@ -23,11 +23,11 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ReactiveElementImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ReactiveElementImpl#getLocalReactions <em>Local Reactions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

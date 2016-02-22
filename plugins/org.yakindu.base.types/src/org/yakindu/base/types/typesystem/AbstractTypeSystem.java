@@ -207,4 +207,8 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	protected Type getConversionType(Type sourceType) {
 		return conversionRegistry.get(sourceType);
 	}
+	
+	public Resource getResource() {
+		return resource;
+	}
 }

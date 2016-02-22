@@ -69,7 +69,8 @@ public class ClasspathChanger {
 
 		for (IClasspathEntry entry : entries) {
 			String projectString = "/" + project.getName() + "/" + folder;
-			if (entry.getPath().toString().equals(projectString)) {
+			String entryPath = entry.getPath().toString();
+			if (projectString.startsWith(entryPath)) {
 				return true;
 			}
 		}

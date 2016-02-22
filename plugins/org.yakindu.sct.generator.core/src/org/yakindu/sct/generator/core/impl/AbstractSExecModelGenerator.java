@@ -20,7 +20,6 @@ import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.F
 import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION;
 import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES;
 import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_REACTIONS;
-import static org.yakindu.sct.generator.core.util.GeneratorUtils.getBoolValue;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -31,7 +30,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.FlowOptimizer;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
@@ -40,7 +38,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Binder;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 import com.google.inject.Module;
 import com.google.inject.name.Names;
 import com.google.inject.util.Modules;
@@ -55,6 +53,12 @@ import com.google.inject.util.Modules;
 public abstract class AbstractSExecModelGenerator extends AbstractSGraphModelGenerator {
 
 	private static final String SEXEC_FILE_EXTENSION = "sexec";
+	public static final String ADD_TRACES = "ADD_TRACES";
+
+	@Inject
+	private FlowOptimizer optimizer;
+	@Inject
+	private IModelSequencer sequencer;
 
 	public AbstractSExecModelGenerator() {
 		super();
@@ -70,13 +74,13 @@ public abstract class AbstractSExecModelGenerator extends AbstractSGraphModelGen
 	}
 
 	@Override
-	protected Module getOverridesModule(GeneratorEntry entry) {
+	public Module getOverridesModule(GeneratorEntry entry) {
 		Module module = super.getOverridesModule(entry);
 
 		return Modules.override(module).with(new Module() {
 			public void configure(Binder binder) {
 				// by default, traces should not be generated
-				binder.bind(Boolean.class).annotatedWith(Names.named(GenericSequencerModule.ADD_TRACES))
+				binder.bind(Boolean.class).annotatedWith(Names.named(ADD_TRACES))
 						.toInstance(Boolean.FALSE);
 			}
 		});
@@ -86,14 +90,10 @@ public abstract class AbstractSExecModelGenerator extends AbstractSGraphModelGen
 	 * Transforms the {@link Statechart} model to a {@link ExecutionFlow} model
 	 */
 	protected ExecutionFlow createExecutionFlow(Statechart statechart, GeneratorEntry entry) {
-		Injector injector = getInjector(entry);
-		IModelSequencer sequencer = injector.getInstance(IModelSequencer.class);
 		ExecutionFlow flow = sequencer.transform(statechart);
 		Assert.isNotNull(flow, "Error creation ExecutionFlow");
 
 		FeatureConfiguration optimizeConfig = entry.getFeatureConfiguration(FUNCTION_INLINING_FEATURE);
-
-		FlowOptimizer optimizer = injector.getInstance(FlowOptimizer.class);
 
 		optimizer.inlineReactions(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_REACTIONS, false));
 		optimizer.inlineExitActions(getBoolValue(optimizeConfig, FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS, false));
@@ -111,6 +111,14 @@ public abstract class AbstractSExecModelGenerator extends AbstractSGraphModelGen
 		flow = optimizer.transform(flow);
 
 		return flow;
+	}
+
+	protected boolean getBoolValue(FeatureConfiguration conf, String param, boolean defaultValue) {
+		if (conf != null && conf.getParameterValue(param) != null) {
+			return conf.getParameterValue(param).getBooleanValue();
+		}
+
+		return defaultValue;
 	}
 
 	protected void dumpSexec(GeneratorEntry entry, ExecutionFlow flow) {

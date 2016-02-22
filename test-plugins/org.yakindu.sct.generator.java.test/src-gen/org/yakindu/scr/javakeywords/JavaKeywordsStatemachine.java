@@ -4,10 +4,10 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	protected class SCInterfaceImpl implements SCInterface {
 
-		private boolean while_ID;
+		private boolean whileEvent;
 
 		public void raiseWhile() {
-			while_ID = true;
+			whileEvent = true;
 		}
 
 		private boolean ev;
@@ -16,448 +16,448 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			ev = true;
 		}
 
-		private boolean abstract_ID;
+		private boolean abstractVariable;
 
 		public boolean getAbstract() {
-			return abstract_ID;
+			return abstractVariable;
 		}
 
 		public void setAbstract(boolean value) {
-			this.abstract_ID = value;
+			this.abstractVariable = value;
 		}
 
-		private boolean assert_ID;
+		private boolean assertVariable;
 
 		public boolean getAssert() {
-			return assert_ID;
+			return assertVariable;
 		}
 
 		public void setAssert(boolean value) {
-			this.assert_ID = value;
+			this.assertVariable = value;
 		}
 
-		private boolean boolean_ID;
+		private boolean booleanVariable;
 
 		public boolean getBoolean() {
-			return boolean_ID;
+			return booleanVariable;
 		}
 
 		public void setBoolean(boolean value) {
-			this.boolean_ID = value;
+			this.booleanVariable = value;
 		}
 
-		private boolean break_ID;
+		private boolean breakVariable;
 
 		public boolean getBreak() {
-			return break_ID;
+			return breakVariable;
 		}
 
 		public void setBreak(boolean value) {
-			this.break_ID = value;
+			this.breakVariable = value;
 		}
 
-		private boolean byte_ID;
+		private boolean byteVariable;
 
 		public boolean getByte() {
-			return byte_ID;
+			return byteVariable;
 		}
 
 		public void setByte(boolean value) {
-			this.byte_ID = value;
+			this.byteVariable = value;
 		}
 
-		private boolean case_ID;
+		private boolean caseVariable;
 
 		public boolean getCase() {
-			return case_ID;
+			return caseVariable;
 		}
 
 		public void setCase(boolean value) {
-			this.case_ID = value;
+			this.caseVariable = value;
 		}
 
-		private boolean catch_ID;
+		private boolean catchVariable;
 
 		public boolean getCatch() {
-			return catch_ID;
+			return catchVariable;
 		}
 
 		public void setCatch(boolean value) {
-			this.catch_ID = value;
+			this.catchVariable = value;
 		}
 
-		private boolean char_ID;
+		private boolean charVariable;
 
 		public boolean getChar() {
-			return char_ID;
+			return charVariable;
 		}
 
 		public void setChar(boolean value) {
-			this.char_ID = value;
+			this.charVariable = value;
 		}
 
-		private boolean class_ID;
+		private boolean classVariable;
 
-		public boolean getClass_ID() {
-			return class_ID;
+		public boolean getClassVariable() {
+			return classVariable;
 		}
 
-		public void setClass_ID(boolean value) {
-			this.class_ID = value;
+		public void setClass(boolean value) {
+			this.classVariable = value;
 		}
 
-		private boolean continue_ID;
+		private boolean continueVariable;
 
 		public boolean getContinue() {
-			return continue_ID;
+			return continueVariable;
 		}
 
 		public void setContinue(boolean value) {
-			this.continue_ID = value;
+			this.continueVariable = value;
 		}
 
-		private boolean do_ID;
+		private boolean doVariable;
 
 		public boolean getDo() {
-			return do_ID;
+			return doVariable;
 		}
 
 		public void setDo(boolean value) {
-			this.do_ID = value;
+			this.doVariable = value;
 		}
 
-		private boolean double_ID;
+		private boolean doubleVariable;
 
 		public boolean getDouble() {
-			return double_ID;
+			return doubleVariable;
 		}
 
 		public void setDouble(boolean value) {
-			this.double_ID = value;
+			this.doubleVariable = value;
 		}
 
-		private boolean enum_ID;
+		private boolean enumVariable;
 
 		public boolean getEnum() {
-			return enum_ID;
+			return enumVariable;
 		}
 
 		public void setEnum(boolean value) {
-			this.enum_ID = value;
+			this.enumVariable = value;
 		}
 
-		private boolean extends_ID;
+		private boolean extendsVariable;
 
 		public boolean getExtends() {
-			return extends_ID;
+			return extendsVariable;
 		}
 
 		public void setExtends(boolean value) {
-			this.extends_ID = value;
+			this.extendsVariable = value;
 		}
 
-		private boolean final_ID;
+		private boolean finalVariable;
 
 		public boolean getFinal() {
-			return final_ID;
+			return finalVariable;
 		}
 
 		public void setFinal(boolean value) {
-			this.final_ID = value;
+			this.finalVariable = value;
 		}
 
-		private boolean finally_ID;
+		private boolean finallyVariable;
 
 		public boolean getFinally() {
-			return finally_ID;
+			return finallyVariable;
 		}
 
 		public void setFinally(boolean value) {
-			this.finally_ID = value;
+			this.finallyVariable = value;
 		}
 
-		private boolean float_ID;
+		private boolean floatVariable;
 
 		public boolean getFloat() {
-			return float_ID;
+			return floatVariable;
 		}
 
 		public void setFloat(boolean value) {
-			this.float_ID = value;
+			this.floatVariable = value;
 		}
 
-		private boolean for_ID;
+		private boolean forVariable;
 
 		public boolean getFor() {
-			return for_ID;
+			return forVariable;
 		}
 
 		public void setFor(boolean value) {
-			this.for_ID = value;
+			this.forVariable = value;
 		}
 
-		private boolean goto_ID;
+		private boolean gotoVariable;
 
 		public boolean getGoto() {
-			return goto_ID;
+			return gotoVariable;
 		}
 
 		public void setGoto(boolean value) {
-			this.goto_ID = value;
+			this.gotoVariable = value;
 		}
 
-		private boolean if_ID;
+		private boolean ifVariable;
 
 		public boolean getIf() {
-			return if_ID;
+			return ifVariable;
 		}
 
 		public void setIf(boolean value) {
-			this.if_ID = value;
+			this.ifVariable = value;
 		}
 
-		private boolean implements_ID;
+		private boolean implementsVariable;
 
 		public boolean getImplements() {
-			return implements_ID;
+			return implementsVariable;
 		}
 
 		public void setImplements(boolean value) {
-			this.implements_ID = value;
+			this.implementsVariable = value;
 		}
 
-		private boolean instanceof_ID;
+		private boolean instanceofVariable;
 
 		public boolean getInstanceof() {
-			return instanceof_ID;
+			return instanceofVariable;
 		}
 
 		public void setInstanceof(boolean value) {
-			this.instanceof_ID = value;
+			this.instanceofVariable = value;
 		}
 
-		private boolean int_ID;
+		private boolean intVariable;
 
 		public boolean getInt() {
-			return int_ID;
+			return intVariable;
 		}
 
 		public void setInt(boolean value) {
-			this.int_ID = value;
+			this.intVariable = value;
 		}
 
-		private boolean long_ID;
+		private boolean longVariable;
 
 		public boolean getLong() {
-			return long_ID;
+			return longVariable;
 		}
 
 		public void setLong(boolean value) {
-			this.long_ID = value;
+			this.longVariable = value;
 		}
 
-		private boolean native_ID;
+		private boolean nativeVariable;
 
 		public boolean getNative() {
-			return native_ID;
+			return nativeVariable;
 		}
 
 		public void setNative(boolean value) {
-			this.native_ID = value;
+			this.nativeVariable = value;
 		}
 
-		private boolean new_ID;
+		private boolean newVariable;
 
 		public boolean getNew() {
-			return new_ID;
+			return newVariable;
 		}
 
 		public void setNew(boolean value) {
-			this.new_ID = value;
+			this.newVariable = value;
 		}
 
-		private boolean package_ID;
+		private boolean packageVariable;
 
 		public boolean getPackage() {
-			return package_ID;
+			return packageVariable;
 		}
 
 		public void setPackage(boolean value) {
-			this.package_ID = value;
+			this.packageVariable = value;
 		}
 
-		private boolean private_ID;
+		private boolean privateVariable;
 
 		public boolean getPrivate() {
-			return private_ID;
+			return privateVariable;
 		}
 
 		public void setPrivate(boolean value) {
-			this.private_ID = value;
+			this.privateVariable = value;
 		}
 
-		private boolean protected_ID;
+		private boolean protectedVariable;
 
 		public boolean getProtected() {
-			return protected_ID;
+			return protectedVariable;
 		}
 
 		public void setProtected(boolean value) {
-			this.protected_ID = value;
+			this.protectedVariable = value;
 		}
 
-		private boolean public_ID;
+		private boolean publicVariable;
 
 		public boolean getPublic() {
-			return public_ID;
+			return publicVariable;
 		}
 
 		public void setPublic(boolean value) {
-			this.public_ID = value;
+			this.publicVariable = value;
 		}
 
-		private boolean return_ID;
+		private boolean returnVariable;
 
 		public boolean getReturn() {
-			return return_ID;
+			return returnVariable;
 		}
 
 		public void setReturn(boolean value) {
-			this.return_ID = value;
+			this.returnVariable = value;
 		}
 
-		private boolean short_ID;
+		private boolean shortVariable;
 
 		public boolean getShort() {
-			return short_ID;
+			return shortVariable;
 		}
 
 		public void setShort(boolean value) {
-			this.short_ID = value;
+			this.shortVariable = value;
 		}
 
-		private boolean static_ID;
+		private boolean staticVariable;
 
 		public boolean getStatic() {
-			return static_ID;
+			return staticVariable;
 		}
 
 		public void setStatic(boolean value) {
-			this.static_ID = value;
+			this.staticVariable = value;
 		}
 
-		private boolean strictfp_ID;
+		private boolean strictfpVariable;
 
 		public boolean getStrictfp() {
-			return strictfp_ID;
+			return strictfpVariable;
 		}
 
 		public void setStrictfp(boolean value) {
-			this.strictfp_ID = value;
+			this.strictfpVariable = value;
 		}
 
-		private boolean super_ID;
+		private boolean superVariable;
 
 		public boolean getSuper() {
-			return super_ID;
+			return superVariable;
 		}
 
 		public void setSuper(boolean value) {
-			this.super_ID = value;
+			this.superVariable = value;
 		}
 
-		private boolean switch_ID;
+		private boolean switchVariable;
 
 		public boolean getSwitch() {
-			return switch_ID;
+			return switchVariable;
 		}
 
 		public void setSwitch(boolean value) {
-			this.switch_ID = value;
+			this.switchVariable = value;
 		}
 
-		private boolean synchronized_ID;
+		private boolean synchronizedVariable;
 
 		public boolean getSynchronized() {
-			return synchronized_ID;
+			return synchronizedVariable;
 		}
 
 		public void setSynchronized(boolean value) {
-			this.synchronized_ID = value;
+			this.synchronizedVariable = value;
 		}
 
-		private boolean this_ID;
+		private boolean thisVariable;
 
 		public boolean getThis() {
-			return this_ID;
+			return thisVariable;
 		}
 
 		public void setThis(boolean value) {
-			this.this_ID = value;
+			this.thisVariable = value;
 		}
 
-		private boolean throw_ID;
+		private boolean throwVariable;
 
 		public boolean getThrow() {
-			return throw_ID;
+			return throwVariable;
 		}
 
 		public void setThrow(boolean value) {
-			this.throw_ID = value;
+			this.throwVariable = value;
 		}
 
-		private boolean throws_ID;
+		private boolean throwsVariable;
 
 		public boolean getThrows() {
-			return throws_ID;
+			return throwsVariable;
 		}
 
 		public void setThrows(boolean value) {
-			this.throws_ID = value;
+			this.throwsVariable = value;
 		}
 
-		private boolean transient_ID;
+		private boolean transientVariable;
 
 		public boolean getTransient() {
-			return transient_ID;
+			return transientVariable;
 		}
 
 		public void setTransient(boolean value) {
-			this.transient_ID = value;
+			this.transientVariable = value;
 		}
 
-		private boolean try_ID;
+		private boolean tryVariable;
 
 		public boolean getTry() {
-			return try_ID;
+			return tryVariable;
 		}
 
 		public void setTry(boolean value) {
-			this.try_ID = value;
+			this.tryVariable = value;
 		}
 
-		private boolean void_ID;
+		private boolean voidVariable;
 
 		public boolean getVoid() {
-			return void_ID;
+			return voidVariable;
 		}
 
 		public void setVoid(boolean value) {
-			this.void_ID = value;
+			this.voidVariable = value;
 		}
 
-		private boolean volatile_ID;
+		private boolean volatileVariable;
 
 		public boolean getVolatile() {
-			return volatile_ID;
+			return volatileVariable;
 		}
 
 		public void setVolatile(boolean value) {
-			this.volatile_ID = value;
+			this.volatileVariable = value;
 		}
 
 		protected void clearEvents() {
-			while_ID = false;
+			whileEvent = false;
 			ev = false;
 		}
 
@@ -509,7 +509,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 		sCInterface.setChar(false);
 
-		sCInterface.setClass_ID(false);
+		sCInterface.setClass(false);
 
 		sCInterface.setContinue(false);
 
@@ -716,12 +716,12 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	public void setChar(boolean value) {
 		sCInterface.setChar(value);
 	}
-	public boolean getClass_ID() {
-		return sCInterface.getClass_ID();
+	public boolean getClassVariable() {
+		return sCInterface.getClassVariable();
 	}
 
-	public void setClass_ID(boolean value) {
-		sCInterface.setClass_ID(value);
+	public void setClass(boolean value) {
+		sCInterface.setClass(value);
 	}
 	public boolean getContinue() {
 		return sCInterface.getContinue();
@@ -970,11 +970,11 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	private boolean check_goto_abstract_tr0_tr0() {
-		return (sCInterface.while_ID) && (true);
+		return (sCInterface.whileEvent) && (true);
 	}
 
 	private boolean check_goto_boolean_tr0_tr0() {
-		return sCInterface.while_ID;
+		return sCInterface.whileEvent;
 	}
 
 	private boolean check_goto_boolean_tr1_tr1() {
@@ -1029,7 +1029,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 		sCInterface.setChar(true);
 
-		sCInterface.setClass_ID(true);
+		sCInterface.setClass(true);
 
 		sCInterface.setContinue(true);
 
@@ -1120,7 +1120,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 		sCInterface.setChar(false);
 
-		sCInterface.setClass_ID(false);
+		sCInterface.setClass(false);
 
 		sCInterface.setContinue(false);
 

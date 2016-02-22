@@ -1,3 +1,11 @@
-/bin/
-/target/
-**/*~
+docbook-xsl/
+docbook-xsl.distribution/
+docbook-xml.distribution/
+help/
+html/
+lib/
+pdf/
+target/
+src-gen/
+bin/
+

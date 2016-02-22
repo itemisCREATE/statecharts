@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: YAKINDU Developer Guide
-Bundle-SymbolicName: org.yakindu.sct.doc.developer
-Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: statecharts.org

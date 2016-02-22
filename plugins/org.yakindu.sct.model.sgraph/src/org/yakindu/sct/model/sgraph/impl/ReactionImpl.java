@@ -33,12 +33,12 @@ import org.yakindu.sct.model.sgraph.Trigger;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ReactionImpl#getTrigger <em>Trigger</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ReactionImpl#getEffect <em>Effect</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ReactionImpl#getProperties <em>Properties</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

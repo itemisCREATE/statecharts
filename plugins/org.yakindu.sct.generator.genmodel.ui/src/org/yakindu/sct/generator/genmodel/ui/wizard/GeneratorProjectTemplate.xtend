@@ -441,8 +441,7 @@ class GeneratorProjectTemplate {
 		class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator implements IExecutionFlowGenerator {
 		
 			override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess access) {
-				entry.targetFolder.write(flow.name+'.txt',flow.info)
-				refreshTargetProject(entry)
+				access.generateFile(flow.name+'.txt',flow.info);
 			}
 		
 			def info(ExecutionFlow flow) {''«"'"»
@@ -453,17 +452,7 @@ class GeneratorProjectTemplate {
 				«'«'»FOR ExecutionState state : flow.states»
 					«'«'»state.name.replaceFirst(flow.name+'\\.','')»
 				«'«'»ENDFOR»
-			''«"'"».toString}
-		
-			def write(File dir, String filename, String content) {
-				try {
-					dir.mkdirs
-					val bos = new FileOutputStream(new File(dir.path+File::separator+filename))
-					bos.write(content.bytes)
-					bos.close
-				} catch(Exception e) {
-					writeToConsole(e)
-				}
+			''«"'"».toString
 			}
 		}
 	'''
@@ -543,7 +532,7 @@ class GeneratorProjectTemplate {
 			xtend-gen
 		«ENDIF»
 		«IF data.pluginExport»
-			bin.includes = META-INF/,.,plugin.xml
+			bin.includes = META-INF/,.,plugin.xml«IF data.typeLibrary»,library/«ENDIF»
 		«ELSE»
 			bin.includes = META-INF/,.
 		«ENDIF»

@@ -20,10 +20,12 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 
 /**
  * Implementation of {@link ITimingService} interface using standard
- * 
+ * java.util.Timer
+ * @deprecated Use the {@link SuspendableTimingService} instead
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@Deprecated
 public class DefaultTimingService implements ITimingService {
 
 	public static class TimeEventTask extends TimerTask {

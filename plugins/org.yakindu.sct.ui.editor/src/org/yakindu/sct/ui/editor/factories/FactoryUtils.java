@@ -120,6 +120,7 @@ public final class FactoryUtils {
 		setInitialStateViewLayoutConstraint(initialStateView);
 		// Create the first state
 		State state = SGraphFactory.eINSTANCE.createState();
+		state.setName("StateA");
 		region.getVertices().add(state);
 		Node stateNode = ViewService.createNode(getRegionCompartmentView(regionView), state, SemanticHints.STATE,
 				preferencesHint);

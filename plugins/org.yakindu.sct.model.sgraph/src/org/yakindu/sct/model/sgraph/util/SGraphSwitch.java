@@ -14,9 +14,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.DocumentedElement;
+import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.TypedElement;
+import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Effect;
@@ -87,7 +90,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
@@ -164,6 +167,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 				if (result == null) result = caseCompositeElement(statechart);
 				if (result == null) result = caseNamedElement(statechart);
 				if (result == null) result = caseDocumentedElement(statechart);
+				if (result == null) result = caseDomainElement(statechart);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -281,6 +285,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 				T result = caseImportDeclaration(importDeclaration);
 				if (result == null) result = caseDeclaration(importDeclaration);
 				if (result == null) result = caseTypedElement(importDeclaration);
+				if (result == null) result = casePackageMember(importDeclaration);
 				if (result == null) result = caseNamedElement(importDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -350,6 +355,21 @@ public class SGraphSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Domain Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Domain Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDomainElement(DomainElement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Typed Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -361,6 +381,21 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElement(TypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package Member</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package Member</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackageMember(PackageMember object) {
 		return null;
 	}
 

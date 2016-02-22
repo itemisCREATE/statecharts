@@ -46,11 +46,12 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ImageHyperlink;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
 import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
+import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.base.xtext.utils.jface.viewers.FilteringMenuManager;
 import org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapter;
-import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomainDescriptor;
@@ -149,7 +150,7 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 	protected Injector getInjector(String semanticTarget) {
 		IEditorPart editor = ActiveEditorTracker.getLastActiveEditor();
 		IEditorInput editorInput = editor.getEditorInput();
-		String domainId = SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral();
+		String domainId =BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 		// Since the context object is not set when getInjector is called from
 		// createControls, we have to determine the active domain id via the
 		// current editor input.

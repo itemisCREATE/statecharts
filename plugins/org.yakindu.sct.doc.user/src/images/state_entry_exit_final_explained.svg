@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="951"
+   height="487.17508"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="state_entry_exit_final_explained.svg"
+   inkscape:export-filename="/home/klute/itemis/yakindu_statechart_tools/statecharts/plugins/org.yakindu.sct.doc.user/help/00_structure/images/state_entry_exit_final_explained.png"
+   inkscape:export-xdpi="141.96001"
+   inkscape:export-ydpi="141.96001">
+  <defs
+     id="defs4">
+    <filter
+       inkscape:label="Colorize"
+       inkscape:menu="Color"
+       inkscape:menu-tooltip="Blend image or object with a flood color and set lightness and contrast"
+       x="0"
+       y="0"
+       width="1"
+       height="1"
+       color-interpolation-filters="sRGB"
+       id="filter3070">
+      <feColorMatrix
+         values="1"
+         in="SourceGraphic"
+         type="saturate"
+         result="result2"
+         id="feColorMatrix3072" />
+      <feFlood
+         flood-color="rgb(254,102,0)"
+         flood-opacity="1"
+         result="result1"
+         id="feFlood3074" />
+      <feBlend
+         in2="result2"
+         mode="multiply"
+         in="result1"
+         result="result3"
+         id="feBlend3076" />
+      <feComposite
+         operator="in"
+         result="result4"
+         in2="SourceGraphic"
+         id="feComposite3078" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="white"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.5286195"
+     inkscape:cx="585.73018"
+     inkscape:cy="243.58754"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1827"
+     inkscape:window-height="1536"
+     inkscape:window-x="558"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     fit-margin-top="30"
+     fit-margin-left="30"
+     fit-margin-right="30"
+     fit-margin-bottom="30" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-32.637867,-65.934853)">
+    <image
+       y="139.88039"
+       x="62.637867"
+       id="image3572"
+       xlink:href="file:///home/klute/itemis/yakindu_statechart_tools/statecharts/plugins/org.yakindu.sct.doc.user/help/00_structure/images/state_entry_exit_final.png"
+       height="316"
+       width="891" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#6094cf;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
+       x="251.78075"
+       y="108.16923"
+       id="text3066"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3068"
+         x="251.78075"
+         y="108.16923"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;font-family:Verdana;-inkscape-font-specification:Verdana">default entry</tspan></text>
+    <path
+       style="fill:none;stroke:#6094cf;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 223.3108,115.14918 C 175.24167,141.13062 126.78197,224.32767 110.88388,277.23857"
+       id="path3080"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#6094cf;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 269.90798,115.95666 c 68.4908,49.02405 97.02492,136.22041 97.54318,143.56434"
+       id="path3080-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#6094cf;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
+       x="572.5722"
+       y="111.18485"
+       id="text3066-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3068-3"
+         x="572.5722"
+         y="111.18485"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;font-family:Verdana;-inkscape-font-specification:Verdana">exit</tspan></text>
+    <path
+       style="fill:none;stroke:#6094cf;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 574.88356,113.97465 c 41.6361,50.22103 58.98223,139.54635 59.29728,147.0696"
+       id="path3080-0-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#6094cf;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
+       x="762.43097"
+       y="521.41852"
+       id="text3066-2-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3068-3-1"
+         x="762.43097"
+         y="521.41852"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;font-family:Verdana;-inkscape-font-specification:Verdana">final state</tspan></text>
+    <path
+       style="fill:none;stroke:#6094cf;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 782.35409,506.55911 C 874.85113,435.08043 913.38661,307.94532 914.08651,297.23761"
+       id="path3080-0-3-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#6094cf;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 741.91437,506.11229 C 666.50941,459.68922 635.09474,377.1191 634.52415,370.16478"
+       id="path3080-0-3-1-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#6094cf;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
+       x="293.0686"
+       y="519.89117"
+       id="text3066-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3068-0"
+         x="293.0686"
+         y="519.89117"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;font-family:Verdana;-inkscape-font-specification:Verdana">named entry</tspan></text>
+    <path
+       style="fill:none;stroke:#6094cf;stroke-width:0.625;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 314.37774,509.37866 c 23.89123,-21.72826 47.97658,-91.30589 55.87821,-135.55524"
+       id="path3080-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>

@@ -33,11 +33,11 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.RegionImpl#getVertices <em>Vertices</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.RegionImpl#getComposite <em>Composite</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

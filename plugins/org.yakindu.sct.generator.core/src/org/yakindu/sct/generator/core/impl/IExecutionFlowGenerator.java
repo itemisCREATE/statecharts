@@ -26,7 +26,7 @@ public interface IExecutionFlowGenerator {
 	 * @param entry
 	 *            The {@link GeneratorEntry} that contains the configuration for
 	 *            the generation.
-	 * @param fsa
+	 * @param sctFsa
 	 *            A file system access that should be used for the generated
 	 *            artifacts. In case a separate libraryTargetFolder is specified
 	 *            in the Outlet feature of the generator entry, the file system

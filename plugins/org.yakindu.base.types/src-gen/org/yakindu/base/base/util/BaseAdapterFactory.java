@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.base.base.*;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.NamedElement;
@@ -79,6 +80,10 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 				return createDocumentedElementAdapter();
 			}
 			@Override
+			public Adapter caseDomainElement(DomainElement object) {
+				return createDomainElementAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -123,6 +128,20 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDocumentedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.base.DomainElement <em>Domain Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.base.DomainElement
+	 * @generated
+	 */
+	public Adapter createDomainElementAdapter() {
 		return null;
 	}
 

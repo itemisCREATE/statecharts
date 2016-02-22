@@ -94,7 +94,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def dispatch Object typeCast(Long value, Type type) {
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
-		throw new IllegalArgumentException
+		throw new IllegalArgumentException("unknown type "+type.name)
 	}
 
 	def dispatch Object typeCast(Float value, Type type) {

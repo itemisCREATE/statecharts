@@ -19,10 +19,16 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.yakindu.sct.domain.extension.DomainRegistry;
+import org.yakindu.sct.domain.extension.IDomainDescriptor;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
+import org.yakindu.sct.generator.core.impl.AbstractSGraphModelGenerator;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
+
+import com.google.inject.Injector;
+import com.google.inject.Module;
 
 /**
  * 
@@ -34,54 +40,53 @@ public class GeneratorExecutor {
 
 	public void executeGenerator(IFile file) {
 		Resource resource = loadResource(file);
-		if (resource == null || resource.getContents().size() == 0
-				|| resource.getErrors().size() > 0)
+		if (resource == null || resource.getContents().size() == 0 || resource.getErrors().size() > 0)
 			return;
-		GeneratorModel model = (GeneratorModel) resource.getContents().get(0);
+		final GeneratorModel model = (GeneratorModel) resource.getContents().get(0);
 
-		String generatorId = model.getGeneratorId();
-		IGeneratorDescriptor description = GeneratorExtensions
-				.getGeneratorDescriptor(generatorId);
-		if (description == null)
-			return;
-		final ISCTGenerator generator = description.createGenerator();
-		final EList<GeneratorEntry> entries = model.getEntries();
 		Job generatorJob = new Job("Execute SCT Genmodel " + file.getName()) {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				for (GeneratorEntry generatorEntry : entries) {
-					if (monitor.isCanceled()) {
-						break;
-					}
-					generator.generate(generatorEntry);
-				}
+				executeGenerator(model);
 				return Status.OK_STATUS;
 			}
 		};
-		generatorJob.setRule(file.getProject().getWorkspace().getRuleFactory()
-				.buildRule());
+		generatorJob.setRule(file.getProject().getWorkspace().getRuleFactory().buildRule());
 		generatorJob.schedule();
 	}
 
 	public void executeGenerator(GeneratorModel model) {
 
-		String generatorId = model.getGeneratorId();
-		IGeneratorDescriptor description = GeneratorExtensions
-				.getGeneratorDescriptor(generatorId);
-		if (description == null)
-			throw new RuntimeException("No generator registered for ID: " + generatorId);
-		final ISCTGenerator generator = description.createGenerator();
 		final EList<GeneratorEntry> entries = model.getEntries();
 
 		for (GeneratorEntry generatorEntry : entries) {
+			final ISCTGenerator generator = getGenerator(model, generatorEntry);
 			generator.generate(generatorEntry);
 		}
 	}
 
+	protected ISCTGenerator getGenerator(GeneratorModel model, GeneratorEntry entry) {
+		String generatorId = model.getGeneratorId();
+		IGeneratorDescriptor description = GeneratorExtensions.getGeneratorDescriptor(generatorId);
+		if (description == null)
+			throw new RuntimeException("No generator registered for ID: " + generatorId);
+		final ISCTGenerator generator = description.createGenerator();
+		if (generator == null)
+			throw new RuntimeException("Failed to create Generator instance for ID:" + generatorId);
+		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(entry.getElementRef());
+		Module overridesModule = null;
+		if (generator instanceof AbstractSGraphModelGenerator) {
+			overridesModule = ((AbstractSGraphModelGenerator) generator).getOverridesModule(entry);
+		}
+		Injector injector = domainDescriptor.getDomainInjectorProvider().getGeneratorInjector(model.getGeneratorId(),
+				overridesModule);
+		injector.injectMembers(generator);
+		return generator;
+	}
+
 	protected Resource loadResource(IFile file) {
 		Resource resource = null;
-		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(),
-				true);
+		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		resource = new ResourceSetImpl().getResource(uri, true);
 		return resource;
 	}

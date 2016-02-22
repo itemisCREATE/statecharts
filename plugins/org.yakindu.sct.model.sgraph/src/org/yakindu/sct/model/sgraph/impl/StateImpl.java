@@ -46,6 +46,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * <em><b>State</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getLocalReactions <em>Local Reactions</em>}</li>
@@ -65,7 +66,6 @@ import org.yakindu.sct.model.sgraph.Vertex;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#isComposite <em>Composite</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#isLeaf <em>Leaf</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

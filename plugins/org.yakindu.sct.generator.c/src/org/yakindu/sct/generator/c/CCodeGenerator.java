@@ -12,8 +12,6 @@
  */
 package org.yakindu.sct.generator.c;
 
-import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
-
 import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 import org.yakindu.sct.generator.c.features.ICFeatureConstants;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
@@ -26,6 +24,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Binder;
+import com.google.inject.Inject;
 import com.google.inject.Module;
 import com.google.inject.name.Names;
 import com.google.inject.util.Modules;
@@ -39,18 +38,20 @@ import com.google.inject.util.Modules;
  */
 public class CCodeGenerator extends GenericJavaBasedGenerator {
 
+	@Inject
+	private CGenerator delegate;
+	
 	@Override
 	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
-		CGenerator delegate = getInjector(entry).getInstance(CGenerator.class);
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
-		if (isDumpSexec(entry)) {
+		if (debugFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
-		delegate.generate(flow, entry, getFileSystemAccess(entry));
+		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess());
 	}
 
 	@Override
-	protected Module getOverridesModule(final GeneratorEntry entry) {
+	public Module getOverridesModule(final GeneratorEntry entry) {
 		Module module = super.getOverridesModule(entry);
 
 		return Modules.override(module).with(new Module() {

@@ -606,22 +606,22 @@ public interface SGraphPackage extends EPackage {
 	int STATECHART__DOCUMENTATION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATECHART__IMPORTS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
-
-	/**
 	 * The feature id for the '<em><b>Domain ID</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__DOMAIN_ID = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
+	int STATECHART__DOMAIN_ID = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART__IMPORTS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Statechart</em>' class.
@@ -1663,17 +1663,6 @@ public interface SGraphPackage extends EPackage {
 	EReference getStatechart_Imports();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.Statechart#getDomainID <em>Domain ID</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Domain ID</em>'.
-	 * @see org.yakindu.sct.model.sgraph.Statechart#getDomainID()
-	 * @see #getStatechart()
-	 * @generated
-	 */
-	EAttribute getStatechart_DomainID();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Entry <em>Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2228,14 +2217,6 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STATECHART__IMPORTS = eINSTANCE.getStatechart_Imports();
-
-		/**
-		 * The meta object literal for the '<em><b>Domain ID</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STATECHART__DOMAIN_ID = eINSTANCE.getStatechart_DomainID();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.
