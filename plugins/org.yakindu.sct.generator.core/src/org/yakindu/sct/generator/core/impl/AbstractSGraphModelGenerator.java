@@ -182,20 +182,19 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	 * configurations are interpreted is defined by the concrete FSA
 	 * implementation.
 	 */
-	protected IFileSystemAccess initFileSystemAccess(GeneratorEntry entry) {
+	protected void initFileSystemAccess(GeneratorEntry entry) {
 
-		// set target project value
-		//NOTE: this is urgently necessary for EFS based IFileSystemAcccess for now
+		// set target project value, NECESSARY
 		initFsaTargetProject(entry);
-		// set target folder
-		String defaultOutput = outletFeatureHelper.getTargetFolderValue(entry).getExpression().toString();
-		initDefaultOutput(defaultOutput);
+		initDefaultOutput(entry);
+		initLibraryTargetFolder(entry);
+	}
 
+	protected void initLibraryTargetFolder(GeneratorEntry entry) {
 		FeatureParameterValue libraryTargetFolderValue = outletFeatureHelper.getLibraryTargetFolderValue(entry);
-
 		if (libraryTargetFolderValue != null) {
 			sctFsa.setOutputPath(IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT,
-					libraryTargetFolderValue.getExpression().toString());
+					libraryTargetFolderValue.getStringValue());
 		}
 
 		OutputConfiguration librarytargetFolderOutputConfiguration = sctFsa.getOutputConfigurations()
@@ -207,12 +206,11 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 			librarytargetFolderOutputConfiguration.setCanClearOutputDirectory(false);
 			librarytargetFolderOutputConfiguration.setOverrideExistingResources(false);
 		}
-		return sctFsa.getIFileSystemAccess();
 	}
 
-	protected void initDefaultOutput(String defaultOutput) {
+	protected void initDefaultOutput(GeneratorEntry entry) {
 		sctFsa.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
-				defaultOutput);
+				outletFeatureHelper.getTargetFolderValue(entry).getExpression().toString());
 		sctFsa.getOutputConfigurations().get(IFileSystemAccess.DEFAULT_OUTPUT).setCreateOutputDirectory(true);
 	}
 
