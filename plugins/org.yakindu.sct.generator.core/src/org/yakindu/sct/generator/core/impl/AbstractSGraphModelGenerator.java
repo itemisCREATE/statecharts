@@ -182,14 +182,14 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	 * configurations are interpreted is defined by the concrete FSA
 	 * implementation.
 	 */
-	protected void initFileSystemAccess(GeneratorEntry entry) {
+	protected IFileSystemAccess initFileSystemAccess(GeneratorEntry entry) {
 
 		// set target project value
-		sctFsa.setOutputPath(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT,
-				outletFeatureHelper.getTargetProjectValue(entry).getStringValue());
+		//NOTE: this is urgently necessary for EFS based IFileSystemAcccess for now
+		initFsaTargetProject(entry);
 		// set target folder
-		sctFsa.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
-				outletFeatureHelper.getTargetFolderValue(entry).getExpression().toString());
+		String defaultOutput = outletFeatureHelper.getTargetFolderValue(entry).getExpression().toString();
+		initDefaultOutput(defaultOutput);
 
 		FeatureParameterValue libraryTargetFolderValue = outletFeatureHelper.getLibraryTargetFolderValue(entry);
 
@@ -198,7 +198,6 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 					libraryTargetFolderValue.getExpression().toString());
 		}
 
-		sctFsa.getOutputConfigurations().get(IFileSystemAccess.DEFAULT_OUTPUT).setCreateOutputDirectory(true);
 		OutputConfiguration librarytargetFolderOutputConfiguration = sctFsa.getOutputConfigurations()
 				.get(IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT);
 		if (librarytargetFolderOutputConfiguration != null) {
@@ -208,5 +207,17 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 			librarytargetFolderOutputConfiguration.setCanClearOutputDirectory(false);
 			librarytargetFolderOutputConfiguration.setOverrideExistingResources(false);
 		}
+		return sctFsa.getIFileSystemAccess();
+	}
+
+	protected void initDefaultOutput(String defaultOutput) {
+		sctFsa.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
+				defaultOutput);
+		sctFsa.getOutputConfigurations().get(IFileSystemAccess.DEFAULT_OUTPUT).setCreateOutputDirectory(true);
+	}
+
+	protected void initFsaTargetProject(GeneratorEntry entry) {
+		sctFsa.setOutputPath(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT,
+				outletFeatureHelper.getTargetProjectValue(entry).getStringValue());
 	}
 }
