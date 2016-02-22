@@ -139,7 +139,7 @@ public class ContextPredicateProvider {
 	private static final TypePredicate TYPES = new TypePredicate();
 	private static final Predicate<IEObjectDescription> ALL = Predicates.<IEObjectDescription> alwaysTrue();
 
-	private final Map<Pair<EClass, EReference>, Predicate<IEObjectDescription>> filter;
+	protected final Map<Pair<EClass, EReference>, Predicate<IEObjectDescription>> filter;
 
 	public ContextPredicateProvider() {
 		filter = new HashMap<Pair<EClass, EReference>, Predicate<IEObjectDescription>>();
