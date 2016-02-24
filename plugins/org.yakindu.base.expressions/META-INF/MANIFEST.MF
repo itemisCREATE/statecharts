@@ -19,10 +19,14 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.common.types,
  org.yakindu.base.types,
  org.eclipse.xtext.xbase.lib,
- org.objectweb.asm;resolution:=optional
+ org.objectweb.asm;resolution:=optional,
+ ch.qos.logback.classic;bundle-version="1.0.9",
+ ch.qos.logback.core;bundle-version="1.0.9",
+ log4j.over.slf4j;bundle-version="1.7.2"
 Import-Package: org.apache.log4j,
  org.eclipse.core.runtime;version="3.4.0",
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ org.slf4j;version="1.7.2"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.yakindu.base.expressions,
  org.yakindu.base.expressions.expressions,
