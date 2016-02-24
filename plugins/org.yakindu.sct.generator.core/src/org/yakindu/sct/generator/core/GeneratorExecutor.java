@@ -18,7 +18,11 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.yakindu.base.types.typesystem.AbstractTypeSystem;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomainDescriptor;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
@@ -43,6 +47,7 @@ public class GeneratorExecutor {
 		if (resource == null || resource.getContents().size() == 0 || resource.getErrors().size() > 0)
 			return;
 		final GeneratorModel model = (GeneratorModel) resource.getContents().get(0);
+
 
 		Job generatorJob = new Job("Execute SCT Genmodel " + file.getName()) {
 			@Override
@@ -81,6 +86,15 @@ public class GeneratorExecutor {
 		Injector injector = domainDescriptor.getDomainInjectorProvider().getGeneratorInjector(model.getGeneratorId(),
 				overridesModule);
 		injector.injectMembers(generator);
+		
+		// TODO: refactor location for adding type system resource.
+//		ITypeSystem typeSystem = injector.getInstance(ITypeSystem.class);
+//		if (typeSystem instanceof AbstractTypeSystem) {
+//			ResourceSet set = entry.getElementRef().eResource().getResourceSet();
+//			set.getResources().add(((AbstractTypeSystem) typeSystem).getResource());
+//			EcoreUtil.resolveAll(set);
+//		}
+
 		return generator;
 	}
 
