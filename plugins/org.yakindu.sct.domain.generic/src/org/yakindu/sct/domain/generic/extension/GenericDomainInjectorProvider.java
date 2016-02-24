@@ -148,14 +148,15 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 	}
 
 	@Override
-	public Injector getGeneratorInjector(String generatorId, Module overrides) {
-		Module result = null;
-		if (overrides != null) {
-			result = Modules.override(getGeneratorModule(generatorId)).with(overrides);
-		} else
-			result = getGeneratorModule(generatorId);
-		result = Modules.combine(result, getSequencerModule());
-		return Guice.createInjector(result);
+	public Injector getGeneratorInjector(String generatorId, Module baseModule) {
+		Module genModule = getGeneratorModule(generatorId);
+
+		if (baseModule != null) {
+			genModule = Modules.override(baseModule).with(genModule);
+		} 
+		
+		genModule = Modules.combine(genModule, getSequencerModule());
+		return Guice.createInjector(genModule);
 	}
 
 }

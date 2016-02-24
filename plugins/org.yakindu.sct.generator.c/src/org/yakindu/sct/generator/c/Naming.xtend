@@ -242,6 +242,14 @@ class Naming {
 		if (isConst) '''«it.constantName»''' else '''«scHandle»->«scope.instance».«name.asEscapedIdentifier»'''
 	}
 
+	def dispatch access(org.yakindu.base.types.Property it) {
+		'''«name.asEscapedIdentifier»'''
+	}
+
+	def dispatch access(org.yakindu.base.types.Operation it) {
+		'''«name.asEscapedIdentifier»'''
+	}
+
 	def dispatch access(OperationDefinition it) '''«asFunction»'''
 
 	def dispatch access(Event it) '''«scHandle»->«scope.instance».«name.asIdentifier.raised»'''
