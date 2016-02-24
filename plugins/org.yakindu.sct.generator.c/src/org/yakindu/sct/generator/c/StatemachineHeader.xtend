@@ -37,6 +37,7 @@ class StatemachineHeader {
 	@Inject extension GenmodelEntries
 	@Inject extension INamingService
 
+	
 	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		flow.initializeNamingService
 		fsa.generateFile(flow.module.h, flow.generateStatemachineHeaderContents(entry))
@@ -48,8 +49,8 @@ class StatemachineHeader {
 		#ifndef «module.define»_H_
 		#define «module.define»_H_
 		
-		#include "«typesModule.h»"
-		
+		«includes»
+				
 		#ifdef __cplusplus
 		extern "C" { 
 		#endif 
@@ -109,6 +110,10 @@ class StatemachineHeader {
 		#endif /* «module.define»_H_ */
 	'''
 
+	def includes(ExecutionFlow it) '''
+		#include "«typesModule.h»"
+	'''
+	
 	def statesEnumDecl(ExecutionFlow it) '''
 		/*! Enumeration of all states */ 
 		typedef enum

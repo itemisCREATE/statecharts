@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, 2015 Committers of YAKINDU and others.
+ * Copyright (c) 2012-2016 Committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -34,10 +34,13 @@ import com.google.inject.util.Modules;
  * 
  * @author Andreas Mülder
  * @author Alexander Nyßen
+ * @author axel terfloth
  * 
  */
 public class CCodeGenerator extends GenericJavaBasedGenerator {
 
+	public static String GENERATOR_ID = "yakindu::c";
+	
 	@Inject
 	private CGenerator delegate;
 	
