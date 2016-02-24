@@ -41,8 +41,6 @@ public class SCTResourceFactory extends XMIResourceFactoryImpl {
 	public Resource createResource(URI uri) {
 		String determinedDomainID = determineDomainID(uri);
 		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(determinedDomainID);
-		String descriptorDomainID = domainDescriptor.getDomainID();
-		Assert.isTrue(descriptorDomainID.equals(determinedDomainID), "DomainID mismatch : "+determinedDomainID+":"+descriptorDomainID);
 		Injector injector = domainDescriptor.getDomainInjectorProvider().getResourceInjector();
 		Resource resource = injector.getInstance(Resource.class);
 		ResourceSet set = new ResourceSetImpl();
