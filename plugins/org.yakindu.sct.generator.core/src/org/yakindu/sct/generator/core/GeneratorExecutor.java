@@ -88,12 +88,12 @@ public class GeneratorExecutor {
 		injector.injectMembers(generator);
 		
 		// TODO: refactor location for adding type system resource.
-//		ITypeSystem typeSystem = injector.getInstance(ITypeSystem.class);
-//		if (typeSystem instanceof AbstractTypeSystem) {
-//			ResourceSet set = entry.getElementRef().eResource().getResourceSet();
-//			set.getResources().add(((AbstractTypeSystem) typeSystem).getResource());
-//			EcoreUtil.resolveAll(set);
-//		}
+		ITypeSystem typeSystem = injector.getInstance(ITypeSystem.class);
+		if (typeSystem instanceof AbstractTypeSystem) {
+			ResourceSet set = entry.getElementRef().eResource().getResourceSet();
+			set.getResources().add(((AbstractTypeSystem) typeSystem).getResource());
+			EcoreUtil.resolveAll(set);
+		}
 
 		return generator;
 	}
