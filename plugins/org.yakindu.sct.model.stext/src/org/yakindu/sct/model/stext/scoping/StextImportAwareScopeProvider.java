@@ -42,7 +42,7 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 		List<ImportScope> importScopes = new ArrayList<ImportScope>();
 		if (context instanceof StateSpecification || context instanceof TransitionSpecification) {
 			importScopes = EcoreUtil2.getAllContentsOfType(getStatechart(context), ImportScope.class);
-		} else if (context instanceof Statechart) {
+		} else {
 			importScopes = EcoreUtil2.getAllContentsOfType(context, ImportScope.class);
 		}
 		for (ImportScope scope : importScopes) {
