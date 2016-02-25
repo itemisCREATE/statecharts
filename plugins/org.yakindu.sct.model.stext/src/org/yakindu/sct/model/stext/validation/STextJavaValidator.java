@@ -43,6 +43,7 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
@@ -125,9 +126,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	private IContainer.Manager containerManager;
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
-	@Inject  (optional = true)
+	@Inject(optional = true)
 	@Named("domainId")
-	private String domainID;
+	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral(); 
 
 	@Check
 	public void checkExpression(VariableDefinition expression) {
@@ -811,7 +812,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (!isResponsible)
 			return false;
 		Statechart statechart = getStatechart(eObject);
-		if (domainID == null || !domainID.equals(statechart.getDomainID())) {
+		if (!domainID.equals(statechart.getDomainID())) {
 			return false;
 		}
 		return true;

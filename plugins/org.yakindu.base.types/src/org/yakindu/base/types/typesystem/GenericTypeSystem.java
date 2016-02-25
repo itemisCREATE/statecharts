@@ -31,5 +31,6 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 
 		declareSuperType(getType(INTEGER), getType(REAL));
 		
+		getType(NULL).setAbstract(true);
 	}
 }

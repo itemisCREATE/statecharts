@@ -63,12 +63,13 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	}
 
 	/**
-	 * This method should not be overridden anymore. It is meant to do
-	 * initializations which are urgently needed for the generator
-	 * infrastructure. Use {@link #doGenerate(GeneratorEntry)} instead.
+	 * This method should not be overridden anymore. It is meant to define a
+	 * general process all generators might follow.
 	 * 
-	 * This method might become final in further versions. Please
-	 *             override {@link #doGenerate(GeneratorEntry)}
+	 * Use {@link #doGenerate(GeneratorEntry)} instead.
+	 * 
+	 * This method might become final in further versions. Please override
+	 * {@link #doGenerate(GeneratorEntry)}
 	 * 
 	 * @see {@link #doGenerate(GeneratorEntry)}
 	 */
@@ -115,8 +116,8 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	 * includes a {@link Statechart}. Sub-classes may override this method if
 	 * they handle elements with type other than @link {@link Statechart}.
 	 * 
-	 * @param entry
-	 * @return
+	 * @param entry the upcomming GeneratorEntry
+	 * @return true if this instance can handle the given {@link GeneratorEntry}
 	 */
 	protected boolean canHandle(GeneratorEntry entry) {
 		EObject elementRef = entry.getElementRef();
@@ -145,7 +146,9 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 
 	/**
 	 * Sub-classes might override this method to add custom bindings for a
-	 * specific {@link GeneratorEntry}. In normal case sub-classes will just
+	 * specific {@link GeneratorEntry}. 
+	 * 
+	 * In normal case sub-classes will just
 	 * override or add custom bindings and ensure all other bindings of
 	 * super-class implementations are still available.
 	 * 
@@ -164,25 +167,36 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	}
 
 	/**
-	 * Provides a pre configured IFileSystemAccess instance
+	 * Initialize the current file system access through generated files are
+	 * written to a particular target location.
+	 * 
+	 * In case of overriding this method it has to be ensured that at least
+	 * {@link IFileSystemAccess#DEFAULT_OUTPUT} will be initialized. Dependent
+	 * on usage of FSA functionality
+	 * <ul>
+	 * <li>{@link IFileSystemAccess#generateFile(String, CharSequence)}</li>
+	 * <li>{@link IFileSystemAccess#generateFile(String, String, CharSequence)}
+	 * </li>
+	 * </ul>
+	 * Optional output configurations has to be registered. How output
+	 * configurations are interpreted is defined by the concrete FSA
+	 * implementation.
 	 */
-	protected IFileSystemAccess initFileSystemAccess(GeneratorEntry entry) {
+	protected void initFileSystemAccess(GeneratorEntry entry) {
 
-		// set target project value
-		sctFsa.setOutputPath(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT,
-				outletFeatureHelper.getTargetProjectValue(entry).getStringValue());
-		// set target folder
-		sctFsa.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
-				outletFeatureHelper.getTargetFolderValue(entry).getExpression().toString());
+		// set target project value, NECESSARY
+		initFsaTargetProject(entry);
+		initDefaultOutput(entry);
+		initLibraryTargetFolder(entry);
+	}
 
+	protected void initLibraryTargetFolder(GeneratorEntry entry) {
 		FeatureParameterValue libraryTargetFolderValue = outletFeatureHelper.getLibraryTargetFolderValue(entry);
-
 		if (libraryTargetFolderValue != null) {
 			sctFsa.setOutputPath(IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT,
-					libraryTargetFolderValue.getExpression().toString());
+					libraryTargetFolderValue.getStringValue());
 		}
 
-		sctFsa.getOutputConfigurations().get(IFileSystemAccess.DEFAULT_OUTPUT).setCreateOutputDirectory(true);
 		OutputConfiguration librarytargetFolderOutputConfiguration = sctFsa.getOutputConfigurations()
 				.get(IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT);
 		if (librarytargetFolderOutputConfiguration != null) {
@@ -192,7 +206,16 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 			librarytargetFolderOutputConfiguration.setCanClearOutputDirectory(false);
 			librarytargetFolderOutputConfiguration.setOverrideExistingResources(false);
 		}
+	}
 
-		return sctFsa.getIFileSystemAccess();
+	protected void initDefaultOutput(GeneratorEntry entry) {
+		sctFsa.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
+				outletFeatureHelper.getTargetFolderValue(entry).getExpression().toString());
+		sctFsa.getOutputConfigurations().get(IFileSystemAccess.DEFAULT_OUTPUT).setCreateOutputDirectory(true);
+	}
+
+	protected void initFsaTargetProject(GeneratorEntry entry) {
+		sctFsa.setOutputPath(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT,
+				outletFeatureHelper.getTargetProjectValue(entry).getStringValue());
 	}
 }

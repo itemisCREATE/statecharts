@@ -66,7 +66,7 @@ public class SCTResourceValidator extends AbstractDeclarativeValidator {
 			}
 		}
 	}
-
+	
 	@Override
 	public boolean isLanguageSpecific() {
 		return false;
