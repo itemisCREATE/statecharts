@@ -281,8 +281,7 @@ table(#updaterepositories).
 |Mars|4.5|"http://updates.yakindu.org/sct/mars/releases/":http://updates.yakindu.org/sct/mars/releases/|"http://updates.yakindu.org/sct/mars/milestones/":http://updates.yakindu.org/sct/mars/milestones/|
 |Luna|4.4|"http://updates.yakindu.org/sct/luna/releases/":http://updates.yakindu.org/sct/luna/releases/|"http://updates.yakindu.org/sct/luna/milestones/":http://updates.yakindu.org/sct/luna/milestones/|
 
-
-Please note that YAKINDU Statechart Tools might take some time to catch up with more recent Eclipse releases. The corresponding update repositories will not be available until then.
+p. Please note that YAKINDU Statechart Tools might take some time to catch up with more recent Eclipse releases. The corresponding update repositories will not be available until then.
 
 Instead of an officially stable YAKINDU Statechart Tools _release_, you can alternatively install a _milestone_ build. Since milestone builds are newer than stable releases, they generally have more features available and more bugs fixed. However, they might also contain some new bugs that have gone unnoticed by now.
 
@@ -731,17 +730,15 @@ In the _CallHandling_ example, we have two actors: the user and the phone. Let's
 
 We have to enter the respective definitions in textual form into the statechart editor. Here's how the interface definitions look like:
 
-<pre>
-interface User:
+bc.. interface User:
     in event accept_call
     in event dismiss_call
 
 interface Phone:
     var duration : integer
     in event incoming_call
-</pre>
 
-As you can see, the _Phone_ interface also has an integer variable _duration_ which will track the duration of the call. The interface definitions above have to go into the statechart editor's definition block on the left-hand side of the statechart editor.
+p. As you can see, the _Phone_ interface also has an integer variable _duration_ which will track the duration of the call. The interface definitions above have to go into the statechart editor's definition block on the left-hand side of the statechart editor.
 
 If everything went well, any error markers in the model are gone. Your model should look like the one in the screenshot below:
 
@@ -1041,13 +1038,10 @@ Within a region, only a single final state is allowed, but each region may have 
 
 When a region reaches its final state, control stops there and waits until all other orthogonal regions, if any, have reached their respective final states, too. The semantics of final states is different from that of exits; please see "section &quot;Exit state&quot;":#exit for details.
 
-<blockquote>
-
-*Note*
+bq.. *Note*
 
 Final states are proper states. This is different from the UML, where a final state is a pseudo state, i. e. in the UML, it cannot have any properties normal states can have, except for a name.
 
-</blockquote>
 
 h4(#choice). Choice
 
@@ -1167,7 +1161,7 @@ h4(#assignments). Assignments
 
 The language has the following assignment operators:
 
-</p><table><tbody><tr class="odd"><td align="left">simple assignment</td><td align="left">@=@</td></tr><tr class="even"><td align="left">multiply and assign</td><td align="left">@*=@</td></tr><tr class="odd"><td align="left">divide and assign</td><td align="left">@/=@</td></tr><tr class="even"><td align="left">calculate modulo and assign</td><td align="left">@%=@</td></tr><tr class="odd"><td align="left">add and assign</td><td align="left">@+=@</td></tr><tr class="even"><td align="left">subtract and assign</td><td align="left">@-=@</td></tr><tr class="odd"><td align="left">bitshift left and assign</td><td align="left">@<<=@</td></tr><tr class="even"><td align="left">bitshift right and assign</td><td align="left">@>>=@</td></tr><tr class="odd"><td align="left">bitwise AND and assign</td><td align="left">@&=@</td></tr><tr class="even"><td align="left">bitwise XOR and assign</td><td align="left">@^=@</td></tr><tr class="odd"><td align="left">bitwise OR and assign</td><td align="left">@|=@</td></tr></tbody></table>
+<table><tbody><tr class="odd"><td align="left">simple assignment</td><td align="left">@=@</td></tr><tr class="even"><td align="left">multiply and assign</td><td align="left">@*=@</td></tr><tr class="odd"><td align="left">divide and assign</td><td align="left">@/=@</td></tr><tr class="even"><td align="left">calculate modulo and assign</td><td align="left">@%=@</td></tr><tr class="odd"><td align="left">add and assign</td><td align="left">@+=@</td></tr><tr class="even"><td align="left">subtract and assign</td><td align="left">@-=@</td></tr><tr class="odd"><td align="left">bitshift left and assign</td><td align="left">@<<=@</td></tr><tr class="even"><td align="left">bitshift right and assign</td><td align="left">@>>=@</td></tr><tr class="odd"><td align="left">bitwise AND and assign</td><td align="left">@&=@</td></tr><tr class="even"><td align="left">bitwise XOR and assign</td><td align="left">@^=@</td></tr><tr class="odd"><td align="left">bitwise OR and assign</td><td align="left">@|=@</td></tr></tbody></table>
 
 h4(#raising-an-event). Raising an event
 
@@ -1417,8 +1411,8 @@ After the specified time the reaction is triggered. An _after_ trigger can be us
 
 bc. after 20 s
 
-
 Synopsis: @after@ _time_ _unit_
+
 
 The _time_ value is a integer literal or an expression with an integer value.
 
@@ -1638,15 +1632,11 @@ Select the image format from the _Image Format_ drop-down menu. YAKINDU Statecha
 
 Selecting an image format changes the export file name's extension appropriately, e. g. if the file name you entered was @foobar@, and the you select PNG as image format, the file name will change to @foobar.png@.
 
-<blockquote>
-
-*Note*
+bq.. *Note*
 
 The image export functionality is subject to the capabilities of your Java runtime environment (JRE). You can export images only in those image formats your JRE actually supports.
 
-</blockquote>
-
-The _Quality (%)_ text field is active for JPEG images only. JPEG is a lossy format, and reducing the quality results in a smaller file size. However, due to the nature of statechart images, a lossless format like PNG is most often a better choice, both in quality and in file size.
+p. The _Quality (%)_ text field is active for JPEG images only. JPEG is a lossy format, and reducing the quality results in a smaller file size. However, due to the nature of statechart images, a lossless format like PNG is most often a better choice, both in quality and in file size.
 
 Check _Overwrite existing file without warning_ if you don't want to be bothered by a confirmation dialog which will appear if the export file already exists.
 
@@ -1703,6 +1693,8 @@ The *Outlet* feature specifies target project and target folder for the generate
 # _targetFolder_ (String, required): The folder to store the generated artifacts to. If a library folder is given, only the dynamic (i. e. model-dependent artifacts) are generated into the target folder, if not all generated artifacts will be generated into it. All artifacts in this folder will be overwritten during re-generation.
 # _libraryTargetFolder_ (String, optional): The folder to store the static (i. e. model-independent artifacts) to. In case this is not specified, all artifacts will be generated into the target folder. All artifacts in this folder will be preserved during re-generation.
 
+bq.. *Example:*
+
 bc. feature Outlet {
     targetProject = "SampleProject"
     targetFolder = "src-gen"
@@ -1718,8 +1710,10 @@ The *LicenseHeader* feature specifies the license text to be added as a header t
 
 # _licenseText_ (String, required): License text to be added as a file header
 
+bq.. *Example:*
+
 bc. feature LicenseHeader {
-    licenseText = "Copyright (c) 2012 committers of YAKINDU and others."
+    licenseText = "Copyright (c) 2016 committers of YAKINDU and others."
 }
 
 ==<!-- End sgen_feature_licenseheader -->==
@@ -1739,6 +1733,8 @@ The *FunctionInlining* feature enables the inlining of expressions instead of ge
 # _inlineExitRegion_ (Boolean, optional): inlines the expression for exit regions
 # _inlineEntries_ (Boolean, optional): inlines the expression for entries
 
+bq.. *Example:*
+
 bc. feature FunctionInlining {
     inlineChoices = false
     inlineEnterRegion = true
@@ -1753,6 +1749,8 @@ h4(#Debug). Debug
 The *Debug* feature dumps the execution model to the target folder as an XMI model. It is an *optional* feature and has the following parameter:
 
 # _dumpSexec_ (Boolean, required): dumps the execution model as XMI model
+
+bq.. *Example:*
 
 bc. feature Debug {
     dumpSexec = true
@@ -2234,6 +2232,8 @@ The *IdentifierSettings* feature allows the configuration of module names and id
 # _maxIdentifierLength_ (Integer, optional): maximum number of characters of an identifier, default: 31 characters, which is complying with the ANSI C99 standard.
 # _separator_ (String, optional): character to replace whitespace and otherwise illegal characters in manes.
 
+bq.. *Example:*
+
 bc. feature IdentifierSettings {
     moduleName =  "MyStatechart"
     statemachinePrefix =  "myStatechart"
@@ -2251,6 +2251,8 @@ The *Tracing* feature enables the generation of tracing callback functions:
 * _enterState_ (boolean, optional): specifies whether to generate a callback function that is used to notify about state entering events
 * _exitState_ (boolean, optional): specifies whether to generate a callback that is used to notify about state exiting events.
 
+bq.. *Example:*
+
 bc. feature Tracing {
     enterState = true
     exitState  = true
@@ -2265,6 +2267,8 @@ The *GeneratorOptions* feature allows to change the behavior of the C&#43;&#43; 
 
 # _innerFunctionVisibility_ (String, optional): This parameter is used to change the visibility of inner functions and variables. By default @private@ visibility is used. It can be changed to @protected@ to allow function overriding for a class which inherits from the generated state machine base class.
 # _staticOperationCallback_ (Boolean, optional): If this parameter is set to _true_, the callback function declaration for statechart operations is static and the functions are called statically by the state machine code.
+
+bq.. *Example:*
 
 bc. feature GeneratorOptions {
     innerFunctionVisibility =  "protected"
@@ -2283,6 +2287,8 @@ Using the _JUnitWrapper_ feature, it is possible to create JUnit tests that will
 ###. FIXME: What a gtests?
 
 # _WrapToJUnit_ (Boolean): This parameter determines whether a JUnit wrapper test is to be generated _&#40;true)_ or not _&#40;false)_.
+
+bq.. *Example:*
 
 bc. feature JUnitWrapper {
     WrapToJUnit =  "false"
@@ -2625,6 +2631,8 @@ It is an *optional* feature and has the following parameters:
 # _basePackage_ (Boolean, required): The package to create for the generated java classes
 # _implementationSuffix_ (Boolean, optional): The suffix for the implementing classes
 
+bq.. *Example:*
+
 bc. feature Naming {
     basePackage = "org.yakindu.sct"
     implementationSuffix = "Impl"
@@ -2642,12 +2650,14 @@ It is an *optional* feature and has the following parameters:
 # _namePrefix_ (String, optional): name prefix for the generated wrapper class
 # _nameSuffix_ (String, optional): name suffix for the generated wrapper class
 
+bq.. *Example:*
+
 bc. feature SynchronizedWrapper {
     namePrefix = "Synchronized"
     nameSuffix = "Wrapper"
 }
 
-==<!-- End sgen_feature_syncronizedwrapper -->==
+==<!-- End sgen_feature_synchronizedwrapper -->==
 ==<!-- Start sgen_feature_runnablewrapper -->==
 
 h4(#runnablewrapper). RunnableWrapper
@@ -2658,6 +2668,8 @@ It is an *optional* feature and has the following parameters:
 
 # _namePrefix_ (String, optional): name prefix for the generated wrapper class
 # _nameSuffix_ (String, optional): name suffix for the generated wrapper class
+
+bq.. *Example:*
 
 bc. feature RunnableWrapper {
     namePrefix = "Runnable"
@@ -2674,6 +2686,8 @@ The *GeneralFeatures* feature allows to configure additional services to be gene
 # _InterfaceObserverSupport_ (Boolean, optional): enables/disables the generation of listener interfaces for the state machine
 # _RuntimeService_ (Boolean, optional): enables/disables the generation of a runtime service that triggers the run cycle of a cycle-based state machine
 # _TimerService_ (Boolean, optional): enables/disables the generation of a timer service implementation using _java.util.Timer_
+
+bq.. *Example:*
 
 bc. feature GeneralFeatures {
     InterfaceObserverSupport = true
@@ -2709,32 +2723,54 @@ h4(#the-state-machine-interface). The state machine interface
 Each generated state machine implements the @IStatemachine@ interface:
 
 bc.. 
-package org.yakindu.sct.examples.trafficlight.cyclebased;
+/**
+Copyright (c) 2012-2015 committers of YAKINDU and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+    committers of YAKINDU - initial API and implementation
+�*/
+package traffic.light;
 
 /**
  * Basic interface for state machines.
  */
 public interface IStatemachine {
 
-    /**
-    * Initializes the state machine. Use to init internal variables etc.
-    */
-    public void init();
+	/**
+	 * Initializes the state machine. Used to init internal variables etc.
+	 */
+	public void init();
 
-    /**
-    * Enters the state machine. Sets the state machine in a defined state.
-    */
-    public void enter();
+	/**
+	 * Enters the state machine. Sets the state machine into a defined state.
+	 */
+	public void enter();
 
-    /**
-    * Exits the state machine. Leaves the state machine with a defined state.
-    */
-    public void exit();
+	/**
+	 * Exits the state machine. Leaves the state machine with a defined state.
+	 */
+	public void exit();
 
-    /**
-    * Start a run-to-completion cycle.
-    */
-    public void runCycle();
+	/**
+	 * Checks whether the state machine is active. 
+	 * A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
+	 */
+	public boolean isActive();
+
+	/**
+	 * Checks whether all active states are final. 
+	 * If there are no active states then the state machine is considered to be incative and this method returns <code>false</code>.
+	 */
+	public boolean isFinal();
+
+	/**
+	* Start a run-to-completion cycle.
+	*/
+	public void runCycle();
 }
 
 
@@ -2787,7 +2823,17 @@ GeneratorModel for yakindu::java {
 p. The generated class is named @TimerService@ and looks like this:
 
 bc.. 
-package org.yakindu.scr;
+/**
+Copyright (c) 2012-2015 committers of YAKINDU and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+    committers of YAKINDU - initial API and implementation
+�*/
+package traffic.light;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -2796,86 +2842,86 @@ import java.util.TimerTask;
 
 /**
  * Default timer service implementation.
- *
+ * 
  */
 public class TimerService implements ITimer {
 
-    private final Timer timer = new Timer();
-
-    private final List timerTaskList = new ArrayList();
-
-    /**
-     * Timer task that reflects a time event. It's internally used by
-     * {@link TimerService}.
-     *
-     */
-    private class TimeEventTask extends TimerTask {
-
-        private ITimerCallback callback;
-
-        int eventID;
-
-        /**
-         * Constructor for a time event.
-         *
-         * @param callback
-         *            : Set to {@code true} if event should be repeated
-         *            periodically.
-         *
-         * @param eventID
-         *            : Index position within the state machine's timeEvent
-         *            array.
-         */
-        public TimeEventTask(ITimerCallback callback, int eventID) {
-            this.callback = callback;
-            this.eventID = eventID;
-        }
-
-        public void run() {
-            callback.timeElapsed(eventID);
-        }
-
-        public boolean equals(Object obj) {
-            if (obj instanceof TimeEventTask) {
-                return ((TimeEventTask) obj).callback.equals(callback)
-                        &amp;&amp; ((TimeEventTask) obj).eventID == eventID;
-            }
-            return super.equals(obj);
-        }
-    }
-
-    public void setTimer(final ITimerCallback callback, final int eventID,
-            long time, boolean isPeriodic) {
-
-        // Create a new TimerTask for given event and store it.
-        TimeEventTask timerTask = new TimeEventTask(callback, eventID);
-        timerTaskList.add(timerTask);
-
-        // start scheduling the timer
-        if (isPeriodic) {
-            timer.scheduleAtFixedRate(timerTask, time, time);
-        } else {
-            timer.schedule(timerTask, time);
-        }
-    }
-
-    public void unsetTimer(ITimerCallback callback, int eventID) {
-        int index = timerTaskList.indexOf(new TimeEventTask(callback, eventID));
-        if (index != -1) {
-            timerTaskList.get(index).cancel();
-            timer.purge();
-            timerTaskList.remove(index);
-        }
-    }
-
-    /**
-     * Cancel timer service. Use this to end possible timing threads and free
-     * memory resources.
-     */
-    public void cancel() {
-        timer.cancel();
-        timer.purge();
-    }
+	private final Timer timer = new Timer();
+	
+	private final List<TimeEventTask> timerTaskList = new ArrayList<TimeEventTask>();
+	
+	/**
+	 * Timer task that reflects a time event. It's internally used by
+	 * {@link TimerService}.
+	 * 
+	 */
+	private class TimeEventTask extends TimerTask {
+	
+		private ITimerCallback callback;
+	
+		int eventID;
+	
+		/**
+		 * Constructor for a time event.
+		 * 
+		 * @param callback
+		 *            : Set to {@code true} if event should be repeated
+		 *            periodically.
+		 * 
+		 * @param eventID
+		 *            : Index position within the state machine's timeEvent
+		 *            array.
+		 */
+		public TimeEventTask(ITimerCallback callback, int eventID) {
+			this.callback = callback;
+			this.eventID = eventID;
+		}
+	
+		public void run() {
+			callback.timeElapsed(eventID);
+		}
+	
+		public boolean equals(Object obj) {
+			if (obj instanceof TimeEventTask) {
+				return ((TimeEventTask) obj).callback.equals(callback)
+						&& ((TimeEventTask) obj).eventID == eventID;
+			}
+			return super.equals(obj);
+		}
+	}
+	
+	public void setTimer(final ITimerCallback callback, final int eventID,
+			long time, boolean isPeriodic) {
+	
+		// Create a new TimerTask for given event and store it.
+		TimeEventTask timerTask = new TimeEventTask(callback, eventID);
+		timerTaskList.add(timerTask);
+	
+		// start scheduling the timer
+		if (isPeriodic) {
+			timer.scheduleAtFixedRate(timerTask, time, time);
+		} else {
+			timer.schedule(timerTask, time);
+		}
+	}
+	
+	public void unsetTimer(ITimerCallback callback, int eventID) {
+		int index = timerTaskList.indexOf(new TimeEventTask(callback, eventID));
+		if (index != -1) {
+			timerTaskList.get(index).cancel();
+			timer.purge();
+			timerTaskList.remove(index);
+		}
+	}
+	
+	/**
+	 * Cancel timer service. Use this to end possible timing threads and free
+	 * memory resources.
+	 */
+	public void cancel() {
+		timer.cancel();
+		timer.purge();
+	}
 }
 
 
@@ -2888,43 +2934,53 @@ If suitable, an application can use the default timer service class @TimerServic
 The @ITimer@ interface looks like this:
 
 bc.. 
-package org.yakindu.scr;
+/**
+Copyright (c) 2012-2015 committers of YAKINDU and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+    committers of YAKINDU - initial API and implementation
+�*/
+package traffic.light;
 
 /**
  * Interface a timer has to implement. Use to implement your own timer
  * service.
- *
+ * 
  */
 public interface ITimer {
 
-    /**
-     * Starts the timing for a given time event id.
-     *
-     * @param callback
-     *            : The target callback where the time event has to be raised.
-     *
-     * @param eventID
-     *            : The eventID the timer should use if timed out.
-     *
-     * @param time
-     *            : Time in milliseconds after the given time event should be
-     *            triggered
-     *
-     * @param isPeriodic
-     *            : Set to true if the time event should be triggered periodically
-     */
-    public void setTimer(ITimerCallback callback, int eventID, long time, boolean isPeriodic);
+	/**
+	 * Starts the timing for a given time event id.
+	 * 
+	 * @param callback
+	 * 			  : The target callback where the time event has to be raised.
+	 * 
+	 * @param eventID
+	 *            : The eventID the timer should use if timed out.
+	 *            
+	 * @param time
+	 *            : Time in milliseconds after the given time event should be
+	 *            triggered
+	 *            
+	 * @param isPeriodic
+	 * 			  : Set to true if the time event should be triggered periodically
+	 */
+	public void setTimer(ITimerCallback callback, int eventID, long time, boolean isPeriodic);
 
-    /**
-     * Unset a time event.
-     *
-     * @param callback
-     *          : The target callback for which the time event has to be unset.
-     *
-     * @param eventID
-     *          : The time event id.
-     */
-    public void unsetTimer(ITimerCallback callback, int eventID);
+	/**
+	 * Unset a time event.
+	 * 
+	 * @param callback
+	 * 			: The target callback for which the time event has to be unset.
+	 * 
+	 * @param eventID
+	 * 			: The time event id.
+	 */
+	public void unsetTimer(ITimerCallback callback, int eventID);
 }
 
 
@@ -2942,24 +2998,33 @@ If the state machine calls the @unsetTimer(ITimerCallback callback, int eventID)
 
 h4(#raising-time-events-on-a-state-machine). Raising time events on a state machine
 
-If a statechart is using time events, the generated Java state machine class not only implements the @IStatemachine@ interface, but it also implements the @ITimerCallback@ interface. @ITimerCallback@ is defined as follows. It specifies a single method: @public
-      void timeElapsed(int eventID)@.
+If a statechart is using time events, the generated Java state machine class not only implements the @IStatemachine@ interface, but it also implements the @ITimerCallback@ interface. @ITimerCallback@ is defined as follows. It specifies a single method: @public void timeElapsed(int eventID)@.
 
 bc.. 
-package org.yakindu.scr;
+/**
+Copyright (c) 2012-2015 committers of YAKINDU and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+    committers of YAKINDU - initial API and implementation
+�*/
+package traffic.light;
 
 /**
 * Interface for state machines which use timed event triggers.
 */
 public interface ITimerCallback {
-
-    /**
-    * Callback method if a time event occurred.
-    *
-    * @param eventID
-    *           :The id of the occurred event.
-    */
-    public void timeElapsed(int eventID);
+	
+	/**
+	* Callback method if a time event occurred.
+	* 
+	* @param eventID
+	* 			:The id of the occurred event.
+	*/
+	public void timeElapsed(int eventID);
 }
 
 
@@ -2988,20 +3053,20 @@ bc. interface Sample:
 The generated interface code looks like this:
 
 bc.. 
+package org.yakindu.scr.defaultsm;
 import org.yakindu.scr.IStatemachine;
-import org.yakindu.scr.ITimerCallback;
 
-public interface IDefaultSMStatemachine extends ITimerCallback, IStatemachine {
-    public interface SCISample {
-        public void raiseEvA(boolean value);
-        public boolean isRaisedEvB();
-        public long getEvBValue();
-        public boolean getA();
-        public void setA(boolean value);
+public interface IDefaultSMStatemachine extends IStatemachine {
+	public interface SCISample {
+		public void raiseEvA(boolean value);
+		public boolean isRaisedEvB();
+		public long getEvBValue();
+		public boolean getA();
+		public void setA(boolean value);
 
-    }
+	}
 
-    public SCISample getSCISample();
+	public SCISample getSCISample();
 
 }
 
@@ -3020,72 +3085,68 @@ The code generator also creates appropriately named getter methods in the enclos
 The nesting interface is implemented by the generated state machine source code. Each nested interface is implemented as an internal class of the state machine class. The latter holds instances of the nested interface implementations and provides them via getter methods. Have a look at (some snippets of) the source code generated for the _Sample_ interface:
 
 bc.. 
-import org.yakindu.scr.ITimer;
+package org.yakindu.scr.defaultsm;
 
 public class DefaultSMStatemachine implements IDefaultSMStatemachine {
 
-    protected class SCISampleImpl implements SCISample {
+	protected class SCISampleImpl implements SCISample {
 
-        private boolean evA;
+		private boolean evA;
 
-        private boolean evAValue;
+		private boolean evAValue;
 
-        public void raiseEvA(boolean value) {
-            evA = true;
-            evAValue = value;
-        }
+		public void raiseEvA(boolean value) {
+			evA = true;
+			evAValue = value;
+		}
 
-        protected boolean getEvAValue() {
-            if (!evA)
-                throw new IllegalStateException("Illegal event value acces. Event EvA is not raised!");
-            return evAValue;
-        }
+		protected boolean getEvAValue() {
+			if (!evA)
+				throw new IllegalStateException("Illegal event value access. Event EvA is not raised!");
+			return evAValue;
+		}
 
-        private boolean evB;
+		private boolean evB;
 
-        private long evBValue;
+		private long evBValue;
 
-        public boolean isRaisedEvB() {
-            return evB;
-        }
+		public boolean isRaisedEvB() {
+			return evB;
+		}
 
-        protected void raiseEvB(long value) {
-            evB = true;
-            evBValue = value;
-        }
+		protected void raiseEvB(long value) {
+			evB = true;
+			evBValue = value;
+		}
 
-        public long getEvBValue() {
-            if (!evB)
-                throw new IllegalStateException("Illegal event value acces. Event EvB is not raised!");
-            return evBValue;
-        }
+		public long getEvBValue() {
+			if (!evB)
+				throw new IllegalStateException("Illegal event value access. Event EvB is not raised!");
+			return evBValue;
+		}
 
-        private boolean a;
+		private boolean a;
 
-        public boolean getA() {
-            return a;
-        }
+		public boolean getA() {
+			return a;
+		}
 
-        public void setA(boolean value) {
-            this.a = value;
-        }
+		public void setA(boolean value) {
+			this.a = value;
+		}
 
-        protected void clearEvents() {
-            evA = false;
-        }
+		protected void clearEvents() {
+			evA = false;
+		}
 
-        protected void clearOutEvents() {
-            evB = false;
-        }
-    }
+		protected void clearOutEvents() {
+			evB = false;
+		}
+	}
 
-    protected SCISampleImpl sCISample;
+	protected SCISampleImpl sCISample;
 
-    public SCISample getSCISample() {
-        return sCISample;
-    }
-
-    /* … */
+	/* … */
 }
 
 p. The value of an event can be accessed only if the event has been processed in a run-to-completion step. Otherwise an @IllegalStateException@ will be thrown.
@@ -3107,24 +3168,23 @@ bc..
 package org.yakindu.scr.defaultsm;
 import java.util.List;
 import org.yakindu.scr.IStatemachine;
-import org.yakindu.scr.ITimerCallback;
 
-public interface IDefaultSMStatemachine extends ITimerCallback, IStatemachine {
-    public interface SCISample {
-        public void raiseEvA(boolean value);
-        public boolean isRaisedEvB();
-        public long getEvBValue();
-        public boolean getA();
-        public void setA(boolean value);
-        public List getListeners();
+public interface IDefaultSMStatemachine extends IStatemachine {
+	public interface SCISample {
+		public void raiseEvA(boolean value);
+		public boolean isRaisedEvB();
+		public long getEvBValue();
+		public boolean getA();
+		public void setA(boolean value);
+		public List<SCISampleListener> getListeners();
 
-    }
+	}
 
-    public interface SCISampleListener {
-        public void onEvBRaised(long value);
-    }
+	public interface SCISampleListener {
+		public void onEvBRaised(long value);
+	}
 
-    public SCISample getSCISample();
+	public SCISample getSCISample();
 
 }
 
@@ -3174,8 +3234,7 @@ public interface IDefaultSMStatemachine extends IStatemachine {
 
 }
 
-p. An additional interface @SCISampleOperationCallback@ specifying the method @public long
-      myOperation(long p1, boolean p2)@ has been generated. The client code has to
+p. An additional interface @SCISampleOperationCallback@ specifying the method @public long myOperation(long p1, boolean p2)@ has been generated. The client code has to
 
 * provide an implementation of this interface and
 * pass an instance of it to the state machine via the @setSCISampleOperationCallback(SCISampleOperationCallback operationCallback)@ method.
