@@ -234,6 +234,10 @@ pre.synopsis code.varname {
     font-style: italic;
 }
 
+pre {
+    line-height: 100%;
+}
+
 
 
 div.example {
