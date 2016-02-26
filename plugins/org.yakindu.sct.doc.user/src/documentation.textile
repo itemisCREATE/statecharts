@@ -560,6 +560,10 @@ h5(#error-markers-in-the-model-graph). Error markers in the model graph
 
 The "normal" state, however, has a small filled red circle containing a white ‘X' attached. This is an error marker and tells you that something is wrong with your model, particularly with the object it is attached to.
 
+###. FIXME: Bring documentation up to date!
+
+bq. *Note:* Since the current version of the statechart editor gives that state a proper name ("StateA"), the error marker is no longer present in a new model. So the following description is somewhat out of date. This will be fixed in a future version of this documentation. Until then, please follow the subsequent text nevertheless, because you will learn something important about statechart validation.
+
 h5(#error-markers-in-the-project-explorer). Error markers in the project explorer
 
 The error marker is also shown in the _Project Explorer_ view at the left-hand side of the main window. In this way you can see immediately which of your projects contain errors. Click on the small show/hide symbol (triangle) left of a project's or any other resource's name to show or hide its respective contents. By doing so, you can quickly encircle the directories and files that are affected by errors. In the screenshot above we have clicked open the _LightSwitch_ project and the _model_ directory, showing the error is in the _LightSwitch.sct_ file.
@@ -1792,37 +1796,41 @@ You will find the generated code in the _src-gen_ folder of the traffic light ex
 The C code generator generates three header files. The first one is _sc&#95;types.h_:
 
 bc.. 
+
 #ifndef SC_TYPES_H_
 #define SC_TYPES_H_
 
 #ifdef __cplusplus
-extern "C" {
-#endif
+extern "C"
+{
+#endif 
 
-#include <stdio.h>
 #include <stdint.h>
+#include <stdbool.h>
 
-#define sc_string       char*
+#define sc_string		char*
+ 
+typedef bool			sc_boolean;
+typedef int_fast16_t	sc_short;
+typedef uint_fast16_t	sc_ushort;
+typedef int32_t			sc_integer; 
+typedef uint32_t		sc_uinteger; 
+typedef double			sc_real;
 
-typedef bool            sc_boolean;
-typedef int_fast16_t    sc_short;
-typedef uint_fast16_t   sc_ushort;
-typedef int32_t         sc_integer;
-typedef uint32_t        sc_uinteger;
-typedef double          sc_real;
+typedef void*			sc_eventid;
 
-typedef void*           sc_eventid;
+typedef intptr_t		sc_intptr_t;
 
 #ifdef __cplusplus
 }
 #endif
 
 #ifndef null
-    #ifdef __cplusplus
-        #define null 0
-    #else
-        #define null ((void *)0)
-    #endif
+	#ifdef __cplusplus
+		#define null 0
+	#else
+		#define null ((void *)0)
+	#endif
 #endif
 
 #define bool_true true
@@ -1833,86 +1841,93 @@ typedef void*           sc_eventid;
 p. The header file contains some basic definitions for C&#43;&#43; compiler compatibility and typedefs to map the YAKINDU statechart types to C types. The next header file is named after the statechart. In case of the traffic light example it is called _TrafficLightWaiting.h_:
 
 bc.. 
+
 #ifndef TRAFFICLIGHTWAITING_H_
 #define TRAFFICLIGHTWAITING_H_
 
 #include "sc_types.h"
 
 #ifdef __cplusplus
-extern "C" {
-#endif
+extern "C" { 
+#endif 
 
 /*! \file Header of the state machine 'TrafficLightWaiting'.
 */
 
-/*! Enumeration of all states */
-typedef enum {
-    TrafficLightWaiting_main_region_on,
-    TrafficLightWaiting_main_region_on_r1_StreetGreen,
-    TrafficLightWaiting_main_region_on_r1_PedWaiting,
-    TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOn,
-    TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOff,
-    TrafficLightWaiting_main_region_on_r1_StreetAttention,
-    TrafficLightWaiting_main_region_on_r1_StreetRed,
-    TrafficLightWaiting_main_region_on_r1_PedestrianGreen,
-    TrafficLightWaiting_main_region_on_r1_PedestrianRed,
-    TrafficLightWaiting_main_region_on_r1_StreetPrepare,
-    TrafficLightWaiting_main_region_off,
-    TrafficLightWaiting_main_region_off_r1_YellowOn,
-    TrafficLightWaiting_main_region_off_r1_YellowOff,
-    TrafficLightWaiting_last_state
+/*! Enumeration of all states */ 
+typedef enum
+{
+	TrafficLightWaiting_main_region_on,
+	TrafficLightWaiting_main_region_on_r1_StreetGreen,
+	TrafficLightWaiting_main_region_on_r1_PedWaiting,
+	TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOn,
+	TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOff,
+	TrafficLightWaiting_main_region_on_r1_StreetAttention,
+	TrafficLightWaiting_main_region_on_r1_StreetRed,
+	TrafficLightWaiting_main_region_on_r1_PedestrianGreen,
+	TrafficLightWaiting_main_region_on_r1_PedestrianRed,
+	TrafficLightWaiting_main_region_on_r1_StreetPrepare,
+	TrafficLightWaiting_main_region_off,
+	TrafficLightWaiting_main_region_off_r1_YellowOn,
+	TrafficLightWaiting_main_region_off_r1_YellowOff,
+	TrafficLightWaiting_last_state
 } TrafficLightWaitingStates;
 
 /*! Type definition of the data structure for the TrafficLightWaitingIfaceTrafficLight interface scope. */
-typedef struct {
-    sc_boolean red;
-    sc_boolean yellow;
-    sc_boolean green;
+typedef struct
+{
+	sc_boolean red;
+	sc_boolean yellow;
+	sc_boolean green;
 } TrafficLightWaitingIfaceTrafficLight;
 
 /*! Type definition of the data structure for the TrafficLightWaitingIfacePedestrian interface scope. */
-typedef struct {
-    sc_boolean request;
-    sc_boolean red;
-    sc_boolean green;
+typedef struct
+{
+	sc_boolean request;
+	sc_boolean red;
+	sc_boolean green;
 } TrafficLightWaitingIfacePedestrian;
 
 /*! Type definition of the data structure for the TrafficLightWaitingIface interface scope. */
-typedef struct {
-    sc_boolean pedestrianRequest_raised;
-    sc_boolean onOff_raised;
+typedef struct
+{
+	sc_boolean pedestrianRequest_raised;
+	sc_boolean onOff_raised;
 } TrafficLightWaitingIface;
 
 /*! Type definition of the data structure for the TrafficLightWaitingTimeEvents interface scope. */
-typedef struct {
-    sc_boolean trafficLightWaiting_main_region_on_r1_PedWaiting_tev0_raised;
-    sc_boolean trafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOn_tev0_raised;
-    sc_boolean trafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOff_tev0_raised;
-    sc_boolean trafficLightWaiting_main_region_on_r1_StreetAttention_tev0_raised;
-    sc_boolean trafficLightWaiting_main_region_on_r1_StreetRed_tev0_raised;
-    sc_boolean trafficLightWaiting_main_region_on_r1_PedestrianGreen_tev0_raised;
-    sc_boolean trafficLightWaiting_main_region_on_r1_PedestrianRed_tev0_raised;
-    sc_boolean trafficLightWaiting_main_region_on_r1_StreetPrepare_tev0_raised;
-    sc_boolean trafficLightWaiting_main_region_off_r1_YellowOn_tev0_raised;
-    sc_boolean trafficLightWaiting_main_region_off_r1_YellowOff_tev0_raised;
+typedef struct
+{
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedWaiting_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOn_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOff_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_StreetAttention_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_StreetRed_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedestrianGreen_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedestrianRed_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_StreetPrepare_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_off_r1_YellowOn_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_off_r1_YellowOff_tev0_raised;
 } TrafficLightWaitingTimeEvents;
 
 
 /*! Define dimension of the state configuration vector for orthogonal states. */
 #define TRAFFICLIGHTWAITING_MAX_ORTHOGONAL_STATES 1
 
-/*!
+/*! 
  * Type definition of the data structure for the TrafficLightWaiting state machine.
- * This data structure has to be allocated by the client code.
+ * This data structure has to be allocated by the client code. 
  */
-typedef struct {
-    TrafficLightWaitingStates stateConfVector[TRAFFICLIGHTWAITING_MAX_ORTHOGONAL_STATES];
-    sc_ushort stateConfVectorPosition;
-
-    TrafficLightWaitingIfaceTrafficLight ifaceTrafficLight;
-    TrafficLightWaitingIfacePedestrian ifacePedestrian;
-    TrafficLightWaitingIface iface;
-    TrafficLightWaitingTimeEvents timeEvents;
+typedef struct
+{
+	TrafficLightWaitingStates stateConfVector[TRAFFICLIGHTWAITING_MAX_ORTHOGONAL_STATES];
+	sc_ushort stateConfVectorPosition; 
+	
+	TrafficLightWaitingIfaceTrafficLight ifaceTrafficLight;
+	TrafficLightWaitingIfacePedestrian ifacePedestrian;
+	TrafficLightWaitingIface iface;
+	TrafficLightWaitingTimeEvents timeEvents;
 } TrafficLightWaiting;
 
 /*! Initializes the TrafficLightWaiting state machine data structures. Must be called before first usage.*/
@@ -1930,55 +1945,55 @@ extern void trafficLightWaiting_runCycle(TrafficLightWaiting* handle);
 /*! Raises a time event. */
 extern void trafficLightWaiting_raiseTimeEvent(const TrafficLightWaiting* handle, sc_eventid evid);
 
-/*! Gets the value of the variable 'red' that is defined in the interface scope 'TrafficLight'. */
+/*! Gets the value of the variable 'red' that is defined in the interface scope 'TrafficLight'. */ 
 extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_red(const TrafficLightWaiting* handle);
-/*! Sets the value of the variable 'red' that is defined in the interface scope 'TrafficLight'. */
+/*! Sets the value of the variable 'red' that is defined in the interface scope 'TrafficLight'. */ 
 extern void trafficLightWaitingIfaceTrafficLight_set_red(TrafficLightWaiting* handle, sc_boolean value);
-/*! Gets the value of the variable 'yellow' that is defined in the interface scope 'TrafficLight'. */
+/*! Gets the value of the variable 'yellow' that is defined in the interface scope 'TrafficLight'. */ 
 extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_yellow(const TrafficLightWaiting* handle);
-/*! Sets the value of the variable 'yellow' that is defined in the interface scope 'TrafficLight'. */
+/*! Sets the value of the variable 'yellow' that is defined in the interface scope 'TrafficLight'. */ 
 extern void trafficLightWaitingIfaceTrafficLight_set_yellow(TrafficLightWaiting* handle, sc_boolean value);
-/*! Gets the value of the variable 'green' that is defined in the interface scope 'TrafficLight'. */
+/*! Gets the value of the variable 'green' that is defined in the interface scope 'TrafficLight'. */ 
 extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_green(const TrafficLightWaiting* handle);
-/*! Sets the value of the variable 'green' that is defined in the interface scope 'TrafficLight'. */
+/*! Sets the value of the variable 'green' that is defined in the interface scope 'TrafficLight'. */ 
 extern void trafficLightWaitingIfaceTrafficLight_set_green(TrafficLightWaiting* handle, sc_boolean value);
-/*! Gets the value of the variable 'request' that is defined in the interface scope 'Pedestrian'. */
+/*! Gets the value of the variable 'request' that is defined in the interface scope 'Pedestrian'. */ 
 extern sc_boolean trafficLightWaitingIfacePedestrian_get_request(const TrafficLightWaiting* handle);
-/*! Sets the value of the variable 'request' that is defined in the interface scope 'Pedestrian'. */
+/*! Sets the value of the variable 'request' that is defined in the interface scope 'Pedestrian'. */ 
 extern void trafficLightWaitingIfacePedestrian_set_request(TrafficLightWaiting* handle, sc_boolean value);
-/*! Gets the value of the variable 'red' that is defined in the interface scope 'Pedestrian'. */
+/*! Gets the value of the variable 'red' that is defined in the interface scope 'Pedestrian'. */ 
 extern sc_boolean trafficLightWaitingIfacePedestrian_get_red(const TrafficLightWaiting* handle);
-/*! Sets the value of the variable 'red' that is defined in the interface scope 'Pedestrian'. */
+/*! Sets the value of the variable 'red' that is defined in the interface scope 'Pedestrian'. */ 
 extern void trafficLightWaitingIfacePedestrian_set_red(TrafficLightWaiting* handle, sc_boolean value);
-/*! Gets the value of the variable 'green' that is defined in the interface scope 'Pedestrian'. */
+/*! Gets the value of the variable 'green' that is defined in the interface scope 'Pedestrian'. */ 
 extern sc_boolean trafficLightWaitingIfacePedestrian_get_green(const TrafficLightWaiting* handle);
-/*! Sets the value of the variable 'green' that is defined in the interface scope 'Pedestrian'. */
+/*! Sets the value of the variable 'green' that is defined in the interface scope 'Pedestrian'. */ 
 extern void trafficLightWaitingIfacePedestrian_set_green(TrafficLightWaiting* handle, sc_boolean value);
-/*! Raises the in event 'pedestrianRequest' that is defined in the default interface scope. */
+/*! Raises the in event 'pedestrianRequest' that is defined in the default interface scope. */ 
 extern void trafficLightWaitingIface_raise_pedestrianRequest(TrafficLightWaiting* handle);
 
-/*! Raises the in event 'onOff' that is defined in the default interface scope. */
+/*! Raises the in event 'onOff' that is defined in the default interface scope. */ 
 extern void trafficLightWaitingIface_raise_onOff(TrafficLightWaiting* handle);
 
 
 /*!
- * Checks if the statemachine is active (until 2.4.1 this method was used for states).
- * A statemachine is active if it was entered. It is inactive if it has not been entered at all or if it was exited.
+ * Checks whether the state machine is active (until 2.4.1 this method was used for states).
+ * A state machine is active if it was entered. It is inactive if it has not been entered at all or if it has been exited.
  */
 extern sc_boolean trafficLightWaiting_isActive(const TrafficLightWaiting* handle);
 
 /*!
- * Checks if all active states are final.
- * If there are no active states then the statemachine is considered as inactive and this method returns false.
+ * Checks if all active states are final. 
+ * If there are no active states then the state machine is considered being inactive. In this case this method returns false.
  */
 extern sc_boolean trafficLightWaiting_isFinal(const TrafficLightWaiting* handle);
 
-/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
+/*! Checks if the specified state is active (until 2.4.1 the used method for states was called isActive()). */
 extern sc_boolean trafficLightWaiting_isStateActive(const TrafficLightWaiting* handle, TrafficLightWaitingStates state);
 
 #ifdef __cplusplus
 }
-#endif
+#endif 
 
 #endif /* TRAFFICLIGHTWAITING_H_ */
 
@@ -1990,7 +2005,8 @@ The generated code contains fundamental methods to initialize, enter, and exit a
 
 In the header file the method names are made up of the statechart name followed by the name of the respective functionality. For example, the methods of the traffic light example are generated as follows:
 
-bc. extern void trafficLightWaiting_init(TrafficLightWaiting* handle);
+bc. 
+extern void trafficLightWaiting_init(TrafficLightWaiting* handle);
 extern void trafficLightWaiting_enter(TrafficLightWaiting* handle);
 extern void trafficLightWaiting_exit(TrafficLightWaiting* handle);
 extern void trafficLightWaiting_runCycle(TrafficLightWaiting* handle);
@@ -2014,9 +2030,10 @@ _statechart_name_@Required.h@
 
 This header file defines method hooks the client code has to implement externally.
 
-The traffic light example uses timing funtionality, namely _after_ clauses. To support time-controlled behavior, such an additional header file is generated.
+The traffic light example uses timing funtionality, namely _after_ clauses. To support time-controlled behavior, the additional header file _TrafficLightWaitingRequired.h_ is generated.
 
 bc.. 
+
 #ifndef TRAFFICLIGHTWAITINGREQUIRED_H_
 #define TRAFFICLIGHTWAITINGREQUIRED_H_
 
@@ -2024,21 +2041,22 @@ bc..
 #include "TrafficLightWaiting.h"
 
 #ifdef __cplusplus
-extern "C" {
-#endif
+extern "C"
+{
+#endif 
 
 /*! \file This header defines prototypes for all functions that are required by the state machine implementation.
 
 This is a state machine uses time events which require access to a timing service. Thus the function prototypes:
-    - trafficLightWaiting_setTimer and
-    - trafficLightWaiting_unsetTimer
+	- trafficLightWaiting_setTimer and
+	- trafficLightWaiting_unsetTimer
 are defined.
 
-These functions will be called during a 'run to completion step' (runCycle) of the statechart.
+These functions will be called during a 'run to completion step' (runCycle) of the statechart. 
 There are some constraints that have to be considered for the implementation of these functions:
-    - never call the statechart API functions from within these functions.
-    - make sure that the execution time is as short as possible.
-
+	- never call the statechart API functions from within these functions.
+	- make sure that the execution time is as short as possible.
+ 
 */
 
 
@@ -2046,27 +2064,29 @@ There are some constraints that have to be considered for the implementation of 
 
 /*!
  * This is a timed state machine that requires timer services
- */
+ */ 
 
 /*! This function has to set up timers for the time events that are required by the state machine. */
-/*!
-    This function will be called for each time event that is relevant for a state when a state will be entered.
-    \param evid An unique identifier of the event.
-    \time_ms The time in milli seconds
-    \periodic Indicates the the time event must be raised periodically until the timer is unset
+/*! 
+	This function will be called for each time event that is relevant for a state when a state will be entered.
+	\param evid An unique identifier of the event.
+	\time_ms The time in milli seconds
+	\periodic Indicates the the time event must be raised periodically until the timer is unset 
 */
 extern void trafficLightWaiting_setTimer(TrafficLightWaiting* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 
 /*! This function has to unset timers for the time events that are required by the state machine. */
-/*!
-    This function will be called for each time event taht is relevant for a state when a state will be left.
-    \param evid An unique identifier of the event.
+/*! 
+	This function will be called for each time event taht is relevant for a state when a state will be left.
+	\param evid An unique identifier of the event.
 */
 extern void trafficLightWaiting_unsetTimer(TrafficLightWaiting* handle, const sc_eventid evid);
 
+
+
 #ifdef __cplusplus
 }
-#endif
+#endif 
 
 #endif /* TRAFFICLIGHTWAITINGREQUIRED_H_ */
 
@@ -2103,6 +2123,7 @@ p=. Figure: Specifying an operation callback in the model
 Let's have a look at the generated code:
 
 bc.. 
+
 #ifndef DEFAULTSMREQUIRED_H_
 #define DEFAULTSMREQUIRED_H_
 
@@ -2110,27 +2131,30 @@ bc..
 #include "DefaultSM.h"
 
 #ifdef __cplusplus
-extern "C" {
-#endif
+extern "C"
+{
+#endif 
 
 /*! \file This header defines prototypes for all functions that are required by the state machine implementation.
 
 This state machine makes use of operations declared in the state machines interface or internal scopes. Thus the function prototypes:
-    - defaultSMIfaceSample_myOperation
+	- defaultSMIfaceSample_myOperation
 are defined.
 
-These functions will be called during a 'run to completion step' (runCycle) of the statechart.
+These functions will be called during a 'run to completion step' (runCycle) of the statechart. 
 There are some constraints that have to be considered for the implementation of these functions:
-    - never call the statechart API functions from within these functions.
-    - make sure that the execution time is as short as possible.
-
+	- never call the statechart API functions from within these functions.
+	- make sure that the execution time is as short as possible.
+ 
 */
 extern sc_integer defaultSMIfaceSample_myOperation(DefaultSM* handle, const sc_integer p1, const sc_boolean p2);
 
 
+
+
 #ifdef __cplusplus
 }
-#endif
+#endif 
 
 #endif /* DEFAULTSMREQUIRED_H_ */
 
@@ -2138,7 +2162,7 @@ p. An additional method @sc_integer defaultSMIfaceSample_myOperation(DefaultSM* 
 
 h4(#c-integrating-generated-code). Integrating generated code
 
-To get a clue how to integrate a generated C state machines with your project have a look at the @main.cpp@ file and its @main()@ method:
+To get a clue how to integrate a generated C state machines with your project have a look at the @main.c@ file and its @main()@ method:
 
 bc.. 
 #include "org_yakindu_sct_examples_c_trafficlight.h"
@@ -2328,44 +2352,45 @@ bc..
 #define STATEMACHINEINTERFACE_H_
 
 /*
- * Basic interface for statemachines.
+ * Basic interface for state machines.
  */
-class StatemachineInterface {
-    public:
-
-        virtual ~StatemachineInterface() = 0;
-
-        /*
-        * Initializes the statemachine. Use to init internal variables etc.
-        */
-        virtual void init() = 0;
-
-        /*
-        * Enters the statemachine. Sets the statemachine in a defined state.
-        */
-        virtual void enter() = 0;
-
-        /*
-        * Exits the statemachine. Leaves the statemachine with a defined state.
-        */
-        virtual void exit() = 0;
-
-        /*
-        * Start a run-to-completion cycle.
-        */
-        virtual void runCycle() = 0;
-
-        /*
-        * Checks if the statemachine is active.
-        * A statemachine is active if it was entered. It is inactive if it has not been entered at all or if it was exited.
-        */
-        virtual sc_boolean isActive() = 0;
-
-        /*
-        * Checks if all active states are final.
-        * If there are no active states then the statemachine is considered as inactive and this method returns false.
-        */
-        virtual sc_boolean isFinal() = 0;
+class StatemachineInterface
+{
+	public:
+	
+		virtual ~StatemachineInterface() = 0;
+		
+		/*
+		* Initializes the state machine. Used to initialize internal variables etc.
+		*/
+		virtual void init() = 0;
+	
+		/*
+		* Enters the state machine. Sets the state machine into a defined state.
+		*/
+		virtual void enter() = 0;
+	
+		/*
+		* Exits the state machine. Leaves the state machine with a defined state.
+		*/
+		virtual void exit() = 0;
+	
+		/*
+		* Start a run-to-completion cycle.
+		*/
+		virtual void runCycle() = 0;
+		
+		/*
+		* Checks whether the state machine is active. 
+	 	* A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
+	 	*/	
+		virtual	sc_boolean isActive() = 0;
+		
+		/*
+		* Checks if all active states are final. 
+	 	* If there are no active states then the state machine is considered being inactive. In this case this method returns false.
+	 	*/
+		virtual sc_boolean isFinal() = 0;
 };
 
 inline StatemachineInterface::~StatemachineInterface() {}
@@ -2391,6 +2416,7 @@ The @TimedStatemachineInterface@ interface extends the generated state machine b
 @TimedStatemachineInterface@ also specifies the callback function @raiseTimeEvent(sc_eventid event)@, enabling the timer service to raise time events.
 
 bc.. 
+
 #ifndef TIMEDSTATEMACHINEINTERFACE_H_
 #define TIMEDSTATEMACHINEINTERFACE_H_
 
@@ -2401,26 +2427,26 @@ bc..
 * Interface for state machines which use timed event triggers.
 */
 class TimedStatemachineInterface {
-    public:
-
-        virtual ~TimedStatemachineInterface() = 0;
-
-        /*
-        * Set the ITimerService for the state machine. It must be set
-        * externally on a timed state machine before a run cycle can be correct
-        * executed.
-        */
-        virtual void setTimer(TimerInterface* timer) = 0;
-
-        /*
-        * Returns the currently used timer service.
-        */
-        virtual TimerInterface* getTimer() = 0;
-
-        /*
-        * Callback method if a time event occurred.
-        */
-        virtual void raiseTimeEvent(sc_eventid event) = 0;
+	public:
+	
+		virtual ~TimedStatemachineInterface() = 0;
+		
+		/*
+		* Set the ITimerService for the state machine. It must be set
+		* externally on a timed state machine before a run cycle can be correct
+		* executed.
+		*/
+		virtual void setTimer(TimerInterface* timer) = 0;
+		
+		/*
+		* Returns the currently used timer service.
+		*/
+		virtual TimerInterface* getTimer() = 0;
+		
+		/*
+		* Callback method if a time event occurred.
+		*/
+		virtual void raiseTimeEvent(sc_eventid event) = 0;
 };
 
 inline TimedStatemachineInterface::~TimedStatemachineInterface() {}
@@ -2441,28 +2467,29 @@ bc..
 class TimedStatemachineInterface;
 
 /*
- * Basic interface for statemachines.
+ * Basic interface for state machines.
  */
-class TimerInterface {
-    public:
-
-        virtual ~TimerInterface() = 0;
-
-        /*
-         * Starts the timing for a time event.
-         */
-        virtual void setTimer(TimedStatemachineInterface* statemachine, sc_eventid event, sc_integer time, sc_boolean isPeriodic) = 0;
-
-        /*
-         * Unsets the given time event.
-         */
-        virtual void unsetTimer(TimedStatemachineInterface* statemachine, sc_eventid event) = 0;
-
-        /*
-         * Cancel timer service. Use this to end possible timing threads and free
-         * memory resources.
-         */
-        virtual void cancel() = 0;
+class TimerInterface
+{
+	public:
+		
+		virtual ~TimerInterface() = 0;
+	
+		/*
+		 * Starts the timing for a time event.
+		 */ 
+		virtual void setTimer(TimedStatemachineInterface* statemachine, sc_eventid event, sc_integer time, sc_boolean isPeriodic) = 0;
+		
+		/*
+		 * Unsets the given time event.
+		 */
+		virtual void unsetTimer(TimedStatemachineInterface* statemachine, sc_eventid event) = 0;
+	
+		/*
+		 * Cancel timer service. Use this to end possible timing threads and free
+		 * memory resources.
+		 */
+		virtual void cancel() = 0;
 };
 
 inline TimerInterface::~TimerInterface() {}
@@ -2500,41 +2527,125 @@ bc. interface Sample:
     in event evA:boolean
     out event evB:integer
 
-The generated interface code is shown below. Since the statechart's name is _DefaultSM_ the state machine class' name is also _DefaultSM_, to be found in the _DefaultSM.h_ file. The following is a snippet from that file.
+The generated interface code is shown below in the inner class _SCI_Sample_. Since the statechart's name is _DefaultSM_ the state machine class' name is also _DefaultSM_, to be found in the _DefaultSM.h_ file:
 
 bc.. 
-        //! Inner class for Sample interface scope.
-        class SCI_Sample {
 
-            public:
-                /*! Gets the value of the variable 'a' that is defined in the interface scope 'Sample'. */
-                sc_boolean get_a();
+#ifndef DEFAULTSM_H_
+#define DEFAULTSM_H_
 
-                /*! Sets the value of the variable 'a' that is defined in the interface scope 'Sample'. */
-                void set_a(sc_boolean value);
+#include "sc_types.h"
+#include "StatemachineInterface.h"
 
-                /*! Raises the in event 'evA' that is defined in the interface scope 'Sample'. */
-                void raise_evA(sc_boolean value);
+/*! \file Header of the state machine 'DefaultSM'.
+*/
 
-                /*! Checks if the out event 'evB' that is defined in the interface scope 'Sample' has been raised. */
-                sc_boolean isRaised_evB();
-
-                /*! Gets the value of the out event 'evB' that is defined in the interface scope 'Sample'. */
-                sc_integer get_evB_value();
-
-
-            private:
-                friend class DefaultSM;
-                sc_boolean a;
-                sc_boolean evA_raised;
-                sc_boolean evA_value;
-                sc_boolean evB_raised;
-                sc_integer evB_value;
-        };
+class DefaultSM : public StatemachineInterface
+{
+	
+	public:
+		
+		DefaultSM();
+		
+		~DefaultSM();
+		
+		/*! Enumeration of all states */ 
+		typedef enum
+		{
+			main_region_MyState,
+			DefaultSM_last_state
+		} DefaultSMStates;
+		
+		//! Inner class for Sample interface scope.
+		class SCI_Sample
+		{
+			
+			public:
+				/*! Gets the value of the variable 'a' that is defined in the interface scope 'Sample'. */ 
+				sc_boolean get_a();
+				
+				/*! Sets the value of the variable 'a' that is defined in the interface scope 'Sample'. */ 
+				void set_a(sc_boolean value);
+				
+				/*! Raises the in event 'evA' that is defined in the interface scope 'Sample'. */ 
+				void raise_evA(sc_boolean value);
+				
+				/*! Checks if the out event 'evB' that is defined in the interface scope 'Sample' has been raised. */ 
+				sc_boolean isRaised_evB();
+				
+				/*! Gets the value of the out event 'evB' that is defined in the interface scope 'Sample'. */ 
+				sc_integer get_evB_value();
+				
+				
+			private:
+				friend class DefaultSM;
+				sc_boolean a;
+				sc_boolean evA_raised;
+				sc_boolean evA_value;
+				sc_boolean evB_raised;
+				sc_integer evB_value;
+		};
+				
+		
+		/*! Returns an instance of the interface class 'SCI_Sample'. */
+		SCI_Sample* getSCI_Sample();
+		
+		
+		void init();
+		
+		void enter();
+		
+		void exit();
+		
+		void runCycle();
+		
+		/*!
+		* Checks if the state machine is active (until 2.4.1 this method was used for states).
+		* A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
+		*/
+		sc_boolean isActive();
+		
+		
+		/*!
+		* Checks if all active states are final. 
+		* If there are no active states then the state machine is considered being inactive. In this case this method returns false.
+		*/
+		sc_boolean isFinal();
+		
+		
+		/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
+		sc_boolean isStateActive(DefaultSMStates state);
+	
+	private:
+	
+	
+		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
+		static const sc_integer maxOrthogonalStates = 1;
+		
+		
+		DefaultSMStates stateConfVector[maxOrthogonalStates];
+		
+		sc_ushort stateConfVectorPosition;
+		
+		SCI_Sample ifaceSample;
+		
+		// prototypes of all internal functions
+		
+		void enseq_main_region_MyState_default();
+		void enseq_main_region_default();
+		void exseq_main_region_MyState();
+		void exseq_main_region();
+		void react_main_region_MyState();
+		void react_main_region__entry_Default();
+		void clearInEvents();
+		void clearOutEvents();
+		
+};
+#endif /* DEFAULTSM_H_ */
 
 p. A statechart interface is generated as an internal subclass within the state machine class. The subclass' name is derived from the statechart interface's name by prepending the string @SCI_@.
 
-A special case is the unnamed statechart interface: It is generated as the C&#43;&#43; subclass @SCInterface@.
+A special case is the unnamed statechart interface: It is generated as the C++ subclass @SCInterface@.
 
 An incoming event _evA:boolean_ is generated as the raise function @raise_evA(boolean value)@. Since the event is of type _boolean_ the function has a _boolean_ parameter.
 
@@ -2544,29 +2655,34 @@ For variables, the code generator creates getter and setter functions, here @sc_
 
 The code generator also creates appropriately named getter functions in the enclosing class which can be used to acquire the inner classes, here: @SCI_Sample* getSCI_Sample()@.
 
-The nesting class is the generated state machine source code. It holds instances of the nested interface class implementations and provides them via getter functions. Have a look at (some snippets of) the source code generated for the _Sample_ statechart interface:
+The nesting class is the generated state machine source code. It holds instances of the nested interface class implementations and provides them via getter functions. Have a look at (some snippets of) the source code generated for the _Sample_ statechart interface in the source file _DefaultSM.cpp_:
 
 bc.. 
-void DefaultSM::SCI_Sample::raise_evA(sc_boolean value) {
-    evA_value = value;
-    evA_raised = true;
+void DefaultSM::SCI_Sample::raise_evA(sc_boolean value)
+{
+	evA_value = value;
+	evA_raised = true;
 }
 
-sc_boolean DefaultSM::SCI_Sample::isRaised_evB() {
-    return evB_raised;
+sc_boolean DefaultSM::SCI_Sample::isRaised_evB()
+{
+	return evB_raised;
 }
 
-sc_integer DefaultSM::SCI_Sample::get_evB_value() {
-    return evB_value;
+sc_integer DefaultSM::SCI_Sample::get_evB_value()
+{
+	return evB_value;
 }
 
 
-sc_boolean DefaultSM::SCI_Sample::get_a() {
-    return a;
+sc_boolean DefaultSM::SCI_Sample::get_a()
+{
+	return a;
 }
 
-void DefaultSM::SCI_Sample::set_a(sc_boolean value) {
-    a = value;
+void DefaultSM::SCI_Sample::set_a(sc_boolean value)
+{
+	a = value;
 }
 
 p. The value of an event can be accessed only if the event has been processed in a run-to-completion step. Otherwise the event could contain an illegal value.
@@ -2584,16 +2700,17 @@ p=. Figure: Specifying an operation callback in the model
 Let's have a look at the additionally generated code for operation support in the _DefaultSM.h_ header file:
 
 bc.. 
-                //! Inner class for Sample interface scope operation callbacks.
-                class SCI_Sample_OCB {
-                    public:
-                        virtual ~SCI_Sample_OCB() = 0;
-
-                        virtual sc_integer myOperation(sc_integer p1, sc_boolean p2) = 0;
-                };
-
-                /*! Set the working instance of the operation callback interface 'SCI_Sample_OCB'. */
-                void setSCI_Sample_OCB(SCI_Sample_OCB* operationCallback);
+				//! Inner class for Sample interface scope operation callbacks.
+				class SCI_Sample_OCB
+				{
+					public:
+						virtual ~SCI_Sample_OCB() = 0;
+						
+						virtual sc_integer myOperation(sc_integer p1, sc_boolean p2) = 0;
+				};
+				
+				/*! Set the working instance of the operation callback interface 'SCI_Sample_OCB'. */
+				void setSCI_Sample_OCB(SCI_Sample_OCB* operationCallback);
 
 p. An additional interface @SCI_Sample_OCB@ with the pure virtual function @sc_integer myOperation(sc_integer p1, sc_boolean p2)@ has been generated. This interface has to be implemented, and an instance of the implementing class has to be provided to the state machine via the @setSCI_Sample_OCB(SCI_Sample_OCB* operationCallback)@ function, so that the state machine can use it.
 
@@ -2609,11 +2726,11 @@ int main(int argc, char *argv[]) {
     DefaultSM *defaultSM = new DefaultSM();
     SCI_Sample_OCB *sci_Sample_OCB = new SCI_Sample_OCB();
 
-    defaultSM-&gt;setSCI_Sample_OCB(sci_Sample_OCB);
+    defaultSM->setSCI_Sample_OCB(sci_Sample_OCB);
 
-    defaultSM-&gt;init();
-    defaultSM-&gt;enter();
-    defaultSM-&gt;runCycle();
+    defaultSM->init();
+    defaultSM->enter();
+    defaultSM->runCycle();
 }
 
 h2(#java-code-generator). Java code generator
@@ -2723,17 +2840,7 @@ h4(#the-state-machine-interface). The state machine interface
 Each generated state machine implements the @IStatemachine@ interface:
 
 bc.. 
-/**
-Copyright (c) 2012-2015 committers of YAKINDU and others.
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html
-
-Contributors:
-    committers of YAKINDU - initial API and implementation
-�*/
-package traffic.light;
+package org.yakindu.scr;
 
 /**
  * Basic interface for state machines.
@@ -2741,7 +2848,7 @@ package traffic.light;
 public interface IStatemachine {
 
 	/**
-	 * Initializes the state machine. Used to init internal variables etc.
+	 * Initializes the state machine. Used to initialize internal variables etc.
 	 */
 	public void init();
 
@@ -2763,7 +2870,7 @@ public interface IStatemachine {
 
 	/**
 	 * Checks whether all active states are final. 
-	 * If there are no active states then the state machine is considered to be incative and this method returns <code>false</code>.
+	 * If there are no active states then the state machine is considered being incative. In this case this method returns <code>false</code>.
 	 */
 	public boolean isFinal();
 
@@ -2823,22 +2930,14 @@ GeneratorModel for yakindu::java {
 p. The generated class is named @TimerService@ and looks like this:
 
 bc.. 
-/**
-Copyright (c) 2012-2015 committers of YAKINDU and others.
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html
-
-Contributors:
-    committers of YAKINDU - initial API and implementation
-�*/
-package traffic.light;
+package org.yakindu.scr;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Default timer service implementation.
@@ -2849,6 +2948,8 @@ public class TimerService implements ITimer {
 	private final Timer timer = new Timer();
 	
 	private final List<TimeEventTask> timerTaskList = new ArrayList<TimeEventTask>();
+	
+	private final Lock lock = new ReentrantLock();
 	
 	/**
 	 * Timer task that reflects a time event. It's internally used by
@@ -2895,6 +2996,7 @@ public class TimerService implements ITimer {
 	
 		// Create a new TimerTask for given event and store it.
 		TimeEventTask timerTask = new TimeEventTask(callback, eventID);
+		lock.lock();
 		timerTaskList.add(timerTask);
 	
 		// start scheduling the timer
@@ -2903,15 +3005,18 @@ public class TimerService implements ITimer {
 		} else {
 			timer.schedule(timerTask, time);
 		}
+		lock.unlock();
 	}
 	
 	public void unsetTimer(ITimerCallback callback, int eventID) {
+		lock.lock();
 		int index = timerTaskList.indexOf(new TimeEventTask(callback, eventID));
 		if (index != -1) {
 			timerTaskList.get(index).cancel();
 			timer.purge();
 			timerTaskList.remove(index);
 		}
+		lock.unlock();
 	}
 	
 	/**
@@ -2919,8 +3024,10 @@ public class TimerService implements ITimer {
 	 * memory resources.
 	 */
 	public void cancel() {
+		lock.lock();
 		timer.cancel();
 		timer.purge();
+		lock.unlock();
 	}
 }
 
@@ -2934,17 +3041,7 @@ If suitable, an application can use the default timer service class @TimerServic
 The @ITimer@ interface looks like this:
 
 bc.. 
-/**
-Copyright (c) 2012-2015 committers of YAKINDU and others.
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html
-
-Contributors:
-    committers of YAKINDU - initial API and implementation
-�*/
-package traffic.light;
+package org.yakindu.scr;
 
 /**
  * Interface a timer has to implement. Use to implement your own timer
@@ -3001,17 +3098,7 @@ h4(#raising-time-events-on-a-state-machine). Raising time events on a state mach
 If a statechart is using time events, the generated Java state machine class not only implements the @IStatemachine@ interface, but it also implements the @ITimerCallback@ interface. @ITimerCallback@ is defined as follows. It specifies a single method: @public void timeElapsed(int eventID)@.
 
 bc.. 
-/**
-Copyright (c) 2012-2015 committers of YAKINDU and others.
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html
-
-Contributors:
-    committers of YAKINDU - initial API and implementation
-�*/
-package traffic.light;
+package org.yakindu.scr;
 
 /**
 * Interface for state machines which use timed event triggers.
@@ -3082,7 +3169,7 @@ For variables, the code generator creates getter and setter methods, here @boole
 
 The code generator also creates appropriately named getter methods in the enclosing interface which can be used to acquire the nested interfaces, here: @SCISample getSCISample()@.
 
-The nesting interface is implemented by the generated state machine source code. Each nested interface is implemented as an internal class of the state machine class. The latter holds instances of the nested interface implementations and provides them via getter methods. Have a look at (some snippets of) the source code generated for the _Sample_ interface:
+The nesting interface is implemented by the generated state machine source code. Each nested interface is implemented as an internal class of the state machine class. The latter holds instances of the nested interface implementations and provides them via getter methods. Have a look at the source code generated for the _Sample_ interface:
 
 bc.. 
 package org.yakindu.scr.defaultsm;
@@ -3146,7 +3233,151 @@ public class DefaultSMStatemachine implements IDefaultSMStatemachine {
 
 	protected SCISampleImpl sCISample;
 
-	/* … */
+	private boolean initialized = false;
+
+	public enum State {
+		main_region_MyState, $NullState$
+	};
+
+	private final State[] stateVector = new State[1];
+
+	private int nextStateIndex;
+
+	public DefaultSMStatemachine() {
+
+		sCISample = new SCISampleImpl();
+	}
+
+	public void init() {
+		this.initialized = true;
+		for (int i = 0; i < 1; i++) {
+			stateVector[i] = State.$NullState$;
+		}
+
+		clearEvents();
+		clearOutEvents();
+
+		sCISample.setA(false);
+	}
+
+	public void enter() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+
+		enterSequence_main_region_default();
+	}
+
+	public void exit() {
+		exitSequence_main_region();
+	}
+
+	/**
+	 * @see IStatemachine#isActive()
+	 */
+	public boolean isActive() {
+
+		return stateVector[0] != State.$NullState$;
+	}
+
+	/** 
+	* Always returns 'false' since this state machine can never become final.
+	*
+	 * @see IStatemachine#isFinal() 
+	 */
+	public boolean isFinal() {
+		return false;
+	}
+
+	/**
+	* This method resets the incoming events (time events included).
+	*/
+	protected void clearEvents() {
+		sCISample.clearEvents();
+
+	}
+
+	/**
+	* This method resets the outgoing events.
+	*/
+	protected void clearOutEvents() {
+		sCISample.clearOutEvents();
+	}
+
+	/**
+	* Returns true if the given state is currently active otherwise false.
+	*/
+	public boolean isStateActive(State state) {
+		switch (state) {
+			case main_region_MyState :
+				return stateVector[0] == State.main_region_MyState;
+			default :
+				return false;
+		}
+	}
+
+	public SCISample getSCISample() {
+		return sCISample;
+	}
+
+	/* 'default' enter sequence for state MyState */
+	private void enterSequence_main_region_MyState_default() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_MyState;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state MyState */
+	private void exitSequence_main_region_MyState() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequence_main_region() {
+		switch (stateVector[0]) {
+			case main_region_MyState :
+				exitSequence_main_region_MyState();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* The reactions of state MyState. */
+	private void react_main_region_MyState() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_MyState_default();
+	}
+
+	public void runCycle() {
+		if (!initialized)
+			throw new IllegalStateException(
+					"The state machine needs to be initialized first by calling the init() function.");
+
+		clearOutEvents();
+
+		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
+
+			switch (stateVector[nextStateIndex]) {
+				case main_region_MyState :
+					react_main_region_MyState();
+					break;
+				default :
+					// $NullState$
+			}
+		}
+
+		clearEvents();
+	}
 }
 
 p. The value of an event can be accessed only if the event has been processed in a run-to-completion step. Otherwise an @IllegalStateException@ will be thrown.
@@ -3207,30 +3438,31 @@ p=. Figure: Specifying an operation callback in the model
 Let's have a look at the generated code:
 
 bc.. 
+package org.yakindu.scr.defaultsmwithoperation;
 import java.util.List;
 import org.yakindu.scr.IStatemachine;
 
 public interface IDefaultSMStatemachine extends IStatemachine {
-    public interface SCISample {
-        public void raiseEvA(boolean value);
-        public boolean isRaisedEvB();
-        public long getEvBValue();
-        public boolean getA();
-        public void setA(boolean value);
-        public List getListeners();
+	public interface SCISample {
+		public void raiseEvA(boolean value);
+		public boolean isRaisedEvB();
+		public long getEvBValue();
+		public boolean getA();
+		public void setA(boolean value);
+		public List<SCISampleListener> getListeners();
 
-        public void setSCISampleOperationCallback(SCISampleOperationCallback operationCallback);
-    }
+		public void setSCISampleOperationCallback(SCISampleOperationCallback operationCallback);
+	}
 
-    public interface SCISampleListener {
-        public void onEvBRaised(long value);
-    }
+	public interface SCISampleListener {
+		public void onEvBRaised(long value);
+	}
 
-    public interface SCISampleOperationCallback {
-        public long myOperation(long p1, boolean p2);
-    }
+	public interface SCISampleOperationCallback {
+		public long myOperation(long p1, boolean p2);
+	}
 
-    public SCISample getSCISample();
+	public SCISample getSCISample();
 
 }
 
