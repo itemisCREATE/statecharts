@@ -31,14 +31,14 @@ TEST(StatemachineTest, OperationsWithoutBracesTest) {
 	EXPECT_TRUE(operationsWithoutBraces_isStateActive(&handle, OperationsWithoutBraces_another_region_D));
 }
 		
-sc_boolean operationsWithoutBracesIface_myBoolOp(OperationsWithoutBraces* handle){
+sc_boolean operationsWithoutBracesIface_myBoolOp(const OperationsWithoutBraces* handle){
 	return false;
 }
 
-sc_integer operationsWithoutBracesIface_myIntOp(OperationsWithoutBraces* handle){
+sc_integer operationsWithoutBracesIface_myIntOp(const OperationsWithoutBraces* handle){
 	return 0;
 }
 
-sc_real operationsWithoutBracesIface_myRealOp(OperationsWithoutBraces* handle){
+sc_real operationsWithoutBracesIface_myRealOp(const OperationsWithoutBraces* handle){
 	return 0.0;
 }
