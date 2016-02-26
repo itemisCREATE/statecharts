@@ -3438,7 +3438,7 @@ p=. Figure: Specifying an operation callback in the model
 Let's have a look at the generated code:
 
 bc.. 
-package org.yakindu.scr.defaultsmwithoperation;
+package org.yakindu.scr.defaultsm;
 import java.util.List;
 import org.yakindu.scr.IStatemachine;
 
