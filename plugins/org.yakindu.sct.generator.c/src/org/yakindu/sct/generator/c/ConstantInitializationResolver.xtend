@@ -12,6 +12,8 @@ package org.yakindu.sct.generator.c
 
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 
 class ConstantInitializationResolver extends ExpressionCode {
 	
@@ -20,6 +22,14 @@ class ConstantInitializationResolver extends ExpressionCode {
 	}
 	
 	override dispatch CharSequence code(Expression it, VariableDefinition target) {
+		target.initialValue.code
+	}
+		
+	override dispatch CharSequence code(FeatureCall it, VariableDefinition target) {
+		target.initialValue.code
+	}
+		
+	override dispatch CharSequence code(ElementReferenceExpression it, VariableDefinition target) {
 		target.initialValue.code
 	}
 		
