@@ -132,7 +132,7 @@ class StatemachineRequiredHeader {
 	def dispatch functionPrototypes(Declaration it) ''''''
 
 	def dispatch functionPrototypes(OperationDefinition it) '''
-		extern «type.targetLanguageName» «asFunction»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»const «p.type.targetLanguageName» «p.name.asIdentifier»«ENDFOR»);
+		extern «type.targetLanguageName» «asFunction»(const «scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»const «p.type.targetLanguageName» «p.name.asIdentifier»«ENDFOR»);
 	'''
 
 }
