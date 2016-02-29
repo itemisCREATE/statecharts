@@ -485,5 +485,13 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test" 
 			targetFolder = "test-gen"			
 		}			
-	}		
+	}
+	
+	test StatemachineKeywords {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+	}
 }
