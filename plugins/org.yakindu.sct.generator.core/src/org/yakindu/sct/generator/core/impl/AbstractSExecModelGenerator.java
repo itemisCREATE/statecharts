@@ -68,7 +68,7 @@ public abstract class AbstractSExecModelGenerator extends AbstractSGraphModelGen
 	protected void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		if (this instanceof IExecutionFlowGenerator) {
 			IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) this;
-			flowGenerator.generate(createExecutionFlow(statechart, entry), entry, null);
+			flowGenerator.generate(createExecutionFlow(statechart, entry), entry, sctFsa.getIFileSystemAccess());
 		}
 		super.runGenerator(statechart, entry);
 	}
