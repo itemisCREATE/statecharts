@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "LogicalOr.h"
 
-
 LogicalOr handle;
 
 TEST(StatemachineTest, operandEvaluationOrder) {
@@ -22,4 +21,3 @@ TEST(StatemachineTest, operandEvaluationOrder) {
 	EXPECT_TRUE(logicalOrIface_get_x(&handle) == 4l && logicalOrIface_get_b(&handle) ) << "logical or expression was executed in wrong order..." ;
 }
 
-		

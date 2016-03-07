@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "EntryChoice.h"
 
-
 EntryChoice handle;
 
 TEST(StatemachineTest, EntryChoiceTest) {
@@ -23,4 +22,3 @@ TEST(StatemachineTest, EntryChoiceTest) {
 	EXPECT_TRUE(entryChoice_isStateActive(&handle, EntryChoice_main_region_A));
 }
 
-		

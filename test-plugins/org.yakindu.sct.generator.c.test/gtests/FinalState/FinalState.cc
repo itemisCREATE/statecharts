@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "FinalState.h"
 
-
 FinalState handle;
 
 TEST(StatemachineTest, StatechartNameTest) {
@@ -22,4 +21,3 @@ TEST(StatemachineTest, StatechartNameTest) {
 	EXPECT_TRUE(finalState_isFinal(&handle));
 }
 
-		

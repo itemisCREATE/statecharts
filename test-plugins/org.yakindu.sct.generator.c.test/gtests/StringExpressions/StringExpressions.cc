@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "StringExpressions.h"
 
-
 StringExpressions handle;
 
 TEST(StatemachineTest, StringExpressionsTest) {
@@ -51,4 +50,3 @@ TEST(StatemachineTest, StringExpressionsTest) {
 	EXPECT_TRUE(stringExpressionsIface_get_stringVarNotEqual(&handle) );
 }
 
-		

@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "SimpleEvent.h"
 
-
 SimpleEvent handle;
 
 TEST(StatemachineTest, simpleEventTest) {
@@ -27,4 +26,3 @@ TEST(StatemachineTest, simpleEventTest) {
 	EXPECT_TRUE(!simpleEvent_isStateActive(&handle, SimpleEvent_main_region_B));
 }
 
-		

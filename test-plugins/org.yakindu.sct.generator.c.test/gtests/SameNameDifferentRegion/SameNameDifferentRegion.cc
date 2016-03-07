@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "SameNameDifferentRegion.h"
 
-
 SameNameDifferentRegion handle;
 
 TEST(StatemachineTest, sameNameDifferenRegionTest) {
@@ -29,4 +28,3 @@ TEST(StatemachineTest, sameNameDifferenRegionTest) {
 	EXPECT_TRUE(sameNameDifferentRegion_isStateActive(&handle, SameNameDifferentRegion_main_region_StateB_r1_StateB));
 }
 
-		

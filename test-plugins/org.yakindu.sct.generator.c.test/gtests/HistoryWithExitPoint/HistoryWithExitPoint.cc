@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "HistoryWithExitPoint.h"
 
-
 HistoryWithExitPoint handle;
 
 TEST(StatemachineTest, historyEntryAfterExit) {
@@ -36,4 +35,3 @@ TEST(StatemachineTest, historyEntryAfterExit) {
 	EXPECT_TRUE(historyWithExitPoint_isStateActive(&handle, HistoryWithExitPoint_mr_A_r_X2));
 }
 
-		

@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "BooleanExpressions.h"
 
-
 BooleanExpressions handle;
 
 TEST(StatemachineTest, booleanExpressions) {
@@ -31,4 +30,3 @@ TEST(StatemachineTest, booleanExpressions) {
 	EXPECT_TRUE(booleanExpressionsIface_get_notequal(&handle) == true);
 }
 
-		

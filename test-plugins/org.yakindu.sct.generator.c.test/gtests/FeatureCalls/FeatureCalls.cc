@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "FeatureCalls.h"
 
-
 FeatureCalls handle;
 
 TEST(StatemachineTest, FeatureCalls) {
@@ -23,4 +22,3 @@ TEST(StatemachineTest, FeatureCalls) {
 	EXPECT_TRUE(featureCalls_isStateActive(&handle, FeatureCalls_main_region_A));
 }
 
-		

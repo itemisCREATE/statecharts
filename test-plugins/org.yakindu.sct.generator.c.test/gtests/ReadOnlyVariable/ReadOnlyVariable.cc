@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "ReadOnlyVariable.h"
 
-
 ReadOnlyVariable handle;
 
 TEST(StatemachineTest, ReadOnlyVariableTest) {
@@ -39,4 +38,3 @@ TEST(StatemachineTest, ReadOnlyVariableTest) {
 	EXPECT_TRUE(readOnlyVariableIfaceA_get_myReal(&handle) == 7.7);
 }
 
-		

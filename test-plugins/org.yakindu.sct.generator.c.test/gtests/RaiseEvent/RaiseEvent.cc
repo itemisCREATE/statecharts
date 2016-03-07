@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "RaiseEvent.h"
 
-
 RaiseEvent handle;
 
 TEST(StatemachineTest, raiseEvent) {
@@ -27,4 +26,3 @@ TEST(StatemachineTest, raiseEvent) {
 	EXPECT_TRUE(raiseEvent_isStateActive(&handle, RaiseEvent_main_region_StateB));
 }
 
-		

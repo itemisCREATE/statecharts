@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "StatechartLocalReactions.h"
 
-
 StatechartLocalReactions handle;
 
 TEST(StatemachineTest, statechartLocalReactionsTest) {
@@ -32,4 +31,3 @@ TEST(StatemachineTest, statechartLocalReactionsTest) {
 	}
 }
 
-		

@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "AssignmentAsExpression.h"
 
-
 AssignmentAsExpression handle;
 
 TEST(StatemachineTest, simpleAssignment) {
@@ -49,4 +48,3 @@ TEST(StatemachineTest, simpleAssignment) {
 	assignmentAsExpression_exit(&handle);
 }
 
-		

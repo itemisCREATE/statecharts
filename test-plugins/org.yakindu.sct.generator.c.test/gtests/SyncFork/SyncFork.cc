@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "SyncFork.h"
 
-
 SyncFork handle;
 
 TEST(StatemachineTest, syncForkTest) {
@@ -39,4 +38,3 @@ TEST(StatemachineTest, syncForkTest) {
 	EXPECT_TRUE(syncFork_isStateActive(&handle, SyncFork_main_region_B_r2_D1));
 }
 
-		

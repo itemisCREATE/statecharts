@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "CKeywords.h"
 
-
 CKeywords handle;
 
 TEST(StatemachineTest, CKeywordsTest) {
@@ -26,4 +25,3 @@ TEST(StatemachineTest, CKeywordsTest) {
 	EXPECT_TRUE(cKeywords_isStateActive(&handle, CKeywords_auto_loop_switch_case_enum_asm));
 }
 
-		

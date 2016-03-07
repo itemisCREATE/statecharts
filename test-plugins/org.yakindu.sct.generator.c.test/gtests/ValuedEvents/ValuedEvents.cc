@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "ValuedEvents.h"
 
-
 ValuedEvents handle;
 
 TEST(StatemachineTest, valuedEventsTest) {
@@ -35,4 +34,3 @@ TEST(StatemachineTest, valuedEventsTest) {
 	EXPECT_TRUE(strcmp(valuedEventsIface_get_myString(&handle) , "tool") == 0);
 }
 
-		

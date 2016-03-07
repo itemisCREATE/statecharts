@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "BitExpressions.h"
 
-
 BitExpressions handle;
 
 TEST(StatemachineTest, BitExpressions) {
@@ -32,4 +31,3 @@ TEST(StatemachineTest, BitExpressions) {
 	EXPECT_TRUE(bitExpressionsIface_get_bitwiseXor(&handle) == 2l);
 }
 
-		

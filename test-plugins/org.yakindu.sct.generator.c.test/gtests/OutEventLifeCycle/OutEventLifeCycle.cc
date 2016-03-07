@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "OutEventLifeCycle.h"
 
-
 OutEventLifeCycle handle;
 
 TEST(StatemachineTest, availableAfterCycle) {
@@ -46,4 +45,3 @@ TEST(StatemachineTest, unvailableAfter2ndCycle) {
 	EXPECT_TRUE(!outEventLifeCycleIface_israised_f(&handle) );
 }
 
-		

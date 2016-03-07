@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "NamedInterfaceAccess.h"
 
-
 NamedInterfaceAccess handle;
 
 TEST(StatemachineTest, SafeOpenSuccess) {
@@ -28,4 +27,3 @@ TEST(StatemachineTest, SafeOpenSuccess) {
 	EXPECT_TRUE(namedInterfaceAccessIfaceSafe_israised_open(&handle));
 }
 
-		

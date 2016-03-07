@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "SimpleHierachy.h"
 
-
 SimpleHierachy handle;
 
 TEST(StatemachineTest, simpleHierachyTest) {
@@ -27,4 +26,3 @@ TEST(StatemachineTest, simpleHierachyTest) {
 	EXPECT_TRUE(simpleHierachy_isStateActive(&handle, SimpleHierachy_main_region_B_subregion1_B1));
 }
 
-		

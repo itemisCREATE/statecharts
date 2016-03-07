@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "ShallowHistoryWithDeepEntry.h"
 
-
 ShallowHistoryWithDeepEntry handle;
 
 TEST(StatemachineTest, noDeepEntryWithinHistory) {
@@ -65,4 +64,3 @@ TEST(StatemachineTest, directDeepEntryIntoHistory) {
 	EXPECT_TRUE(shallowHistoryWithDeepEntry_isStateActive(&handle, ShallowHistoryWithDeepEntry_main_region_Z__region0_B));
 }
 
-		

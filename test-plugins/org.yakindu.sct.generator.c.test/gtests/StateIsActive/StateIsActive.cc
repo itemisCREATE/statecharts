@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "StateIsActive.h"
 
-
 StateIsActive handle;
 
 TEST(StatemachineTest, stateIsActive) {
@@ -27,4 +26,3 @@ TEST(StatemachineTest, stateIsActive) {
 	EXPECT_TRUE(stateIsActive_isStateActive(&handle, StateIsActive_R2_R2B));
 }
 
-		

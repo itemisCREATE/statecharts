@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "GuardedEntry.h"
 
-
 GuardedEntry handle;
 
 TEST(StatemachineTest, EntryNotTakenOnStatechartEnter) {
@@ -58,4 +57,3 @@ TEST(StatemachineTest, EntryNotTakenInTransition) {
 	EXPECT_TRUE(!guardedEntryIface_get_done(&handle) );
 }
 
-		
