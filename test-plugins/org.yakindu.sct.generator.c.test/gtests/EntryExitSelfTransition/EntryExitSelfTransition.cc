@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "EntryExitSelfTransition.h"
 
-
 EntryExitSelfTransition handle;
 
 TEST(StatemachineTest, SelfTransitionToChildState) {
@@ -46,4 +45,3 @@ TEST(StatemachineTest, SelfTransitionFromChildState) {
 	EXPECT_TRUE(entryExitSelfTransitionIface_get_exits(&handle) == 1l);
 }
 
-		

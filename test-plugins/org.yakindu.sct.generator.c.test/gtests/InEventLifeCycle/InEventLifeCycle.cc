@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "InEventLifeCycle.h"
 
-
 InEventLifeCycle handle;
 
 TEST(StatemachineTest, eventLifeCycle) {
@@ -24,4 +23,3 @@ TEST(StatemachineTest, eventLifeCycle) {
 	EXPECT_TRUE(inEventLifeCycleIface_get_i(&handle) == 1l);
 }
 
-		

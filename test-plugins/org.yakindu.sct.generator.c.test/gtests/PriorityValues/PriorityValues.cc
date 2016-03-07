@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "PriorityValues.h"
 
-
 PriorityValues handle;
 
 TEST(StatemachineTest, transitionPriority) {
@@ -33,4 +32,3 @@ TEST(StatemachineTest, regionPriority) {
 	EXPECT_TRUE(!priorityValues_isStateActive(&handle, PriorityValues_main_region_E));
 }
 
-		

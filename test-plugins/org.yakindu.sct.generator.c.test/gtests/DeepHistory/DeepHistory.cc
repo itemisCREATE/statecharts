@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "DeepHistory.h"
 
-
 DeepHistory handle;
 
 TEST(StatemachineTest, deepHistoryTest) {
@@ -38,4 +37,3 @@ TEST(StatemachineTest, deepHistoryTest) {
 	EXPECT_TRUE(deepHistory_isStateActive(&handle, DeepHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
 }
 
-		

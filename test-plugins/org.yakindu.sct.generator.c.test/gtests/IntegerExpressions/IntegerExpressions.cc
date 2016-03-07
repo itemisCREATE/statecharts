@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "IntegerExpressions.h"
 
-
 IntegerExpressions handle;
 
 TEST(StatemachineTest, integerExpressions) {
@@ -42,4 +41,3 @@ TEST(StatemachineTest, integerExpressions) {
 	EXPECT_TRUE(integerExpressionsIface_get_moduloAssign(&handle) == 0l);
 }
 
-		

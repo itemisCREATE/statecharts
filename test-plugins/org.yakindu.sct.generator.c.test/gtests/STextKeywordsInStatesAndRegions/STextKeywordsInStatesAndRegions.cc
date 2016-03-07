@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "STextKeywordsInStatesAndRegions.h"
 
-
 STextKeywordsInStatesAndRegions handle;
 
 TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
@@ -480,4 +479,3 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(sTextKeywordsInStatesAndRegions_isStateActive(&handle, STextKeywordsInStatesAndRegions_active_valueof));
 }
 
-		

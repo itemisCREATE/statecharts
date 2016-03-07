@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "TriggerGuardExpressions.h"
 
-
 TriggerGuardExpressions handle;
 
 TEST(StatemachineTest, trueGuard) {
@@ -52,4 +51,3 @@ TEST(StatemachineTest, falseGuard) {
 	EXPECT_TRUE(triggerGuardExpressions_isStateActive(&handle, TriggerGuardExpressions_main_region_A));
 }
 
-		

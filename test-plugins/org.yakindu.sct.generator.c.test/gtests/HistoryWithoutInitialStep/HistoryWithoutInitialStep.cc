@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "HistoryWithoutInitialStep.h"
 
-
 HistoryWithoutInitialStep handle;
 
 TEST(StatemachineTest, enterThroughInitialEntry) {
@@ -57,4 +56,3 @@ TEST(StatemachineTest, enterDThroughHistory) {
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_D));
 }
 
-		

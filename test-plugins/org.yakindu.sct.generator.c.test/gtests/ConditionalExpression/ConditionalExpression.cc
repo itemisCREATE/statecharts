@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "ConditionalExpressions.h"
 
-
 ConditionalExpressions handle;
 
 TEST(StatemachineTest, ConditionalExpressionTest) {
@@ -26,4 +25,3 @@ TEST(StatemachineTest, ConditionalExpressionTest) {
 	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&handle) == 2l);
 }
 
-		

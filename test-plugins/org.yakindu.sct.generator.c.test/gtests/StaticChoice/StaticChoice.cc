@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "StaticChoice.h"
 
-
 StaticChoice handle;
 
 TEST(StatemachineTest, StaticChoiceTest) {
@@ -22,4 +21,3 @@ TEST(StatemachineTest, StaticChoiceTest) {
 	staticChoice_runCycle(&handle);
 }
 
-		

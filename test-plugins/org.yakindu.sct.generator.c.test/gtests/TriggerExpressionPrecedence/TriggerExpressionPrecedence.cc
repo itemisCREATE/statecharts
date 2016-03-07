@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "TriggerExpressionPrecedence.h"
 
-
 TriggerExpressionPrecedence handle;
 
 TEST(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrFalse) {
@@ -48,4 +47,3 @@ TEST(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {
 	EXPECT_TRUE(!triggerExpressionPrecedenceIface_get_e1_transition(&handle) );
 }
 
-		

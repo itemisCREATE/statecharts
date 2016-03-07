@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "InternalEventLifeCycle.h"
 
-
 InternalEventLifeCycle handle;
 
 TEST(StatemachineTest, InternalEventLifeCycleTest) {
@@ -36,4 +35,3 @@ TEST(StatemachineTest, InternalEventLifeCycleTest) {
 	EXPECT_TRUE(internalEventLifeCycle_isStateActive(&handle, InternalEventLifeCycle_r2_C));
 }
 
-		

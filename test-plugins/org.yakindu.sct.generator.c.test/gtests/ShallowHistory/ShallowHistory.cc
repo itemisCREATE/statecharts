@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "ShallowHistory.h"
 
-
 ShallowHistory handle;
 
 TEST(StatemachineTest, shallowHistoryTest) {
@@ -50,4 +49,3 @@ TEST(StatemachineTest, shallowHistoryTest) {
 	EXPECT_TRUE(shallowHistory_isStateActive(&handle, ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
 }
 
-		

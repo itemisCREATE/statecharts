@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "NullCheck.h"
 
-
 NullCheck handle;
 
 TEST(StatemachineTest, SimpleNullCheckTest) {
@@ -23,4 +22,3 @@ TEST(StatemachineTest, SimpleNullCheckTest) {
 	EXPECT_TRUE(nullCheck_isStateActive(&handle, NullCheck_main_region_B));
 }
 
-		

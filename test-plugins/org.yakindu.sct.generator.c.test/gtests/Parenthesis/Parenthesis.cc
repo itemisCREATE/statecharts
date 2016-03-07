@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "Parenthesis.h"
 
-
 Parenthesis handle;
 
 TEST(StatemachineTest, simple) {
@@ -22,4 +21,3 @@ TEST(StatemachineTest, simple) {
 	EXPECT_TRUE(parenthesisIface_get_erg(&handle) == 8l);
 }
 
-		

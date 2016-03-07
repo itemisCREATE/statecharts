@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "Declarations.h"
 
-
 Declarations handle;
 
 TEST(StatemachineTest, declarationsTest) {
@@ -20,4 +19,3 @@ TEST(StatemachineTest, declarationsTest) {
 	declarations_enter(&handle);
 }
 
-		

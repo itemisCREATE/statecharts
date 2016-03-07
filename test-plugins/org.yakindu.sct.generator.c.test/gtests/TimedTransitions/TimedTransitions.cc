@@ -13,7 +13,6 @@
 #include "TimedTransitions.h"
 #include "TimedTransitionsRequired.h"
 
-
 TimedTransitions handle;
 
 TEST(StatemachineTest, Timer01) {
@@ -25,12 +24,11 @@ TEST(StatemachineTest, Timer01) {
 	EXPECT_TRUE(timedTransitions_isStateActive(&handle, TimedTransitions_main_region_End));
 }
 
-		
-void timedTransitions_setTimer(const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
+void timedTransitions_setTimer(TimedTransitions* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
 	// Mockup
-	timedTransitions_raiseTimeEvent(&handle, evid);
+	timedTransitions_raiseTimeEvent(handle, evid);
 }
 
-void timedTransitions_unsetTimer(const sc_eventid evid){
+void timedTransitions_unsetTimer(TimedTransitions* handle, const sc_eventid evid){
 	// Mockup
 }		

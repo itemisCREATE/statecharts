@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "EmptyTransition.h"
 
-
 EmptyTransition handle;
 
 TEST(StatemachineTest, EmptyTransitionTest) {
@@ -23,4 +22,3 @@ TEST(StatemachineTest, EmptyTransitionTest) {
 	EXPECT_TRUE(emptyTransition_isStateActive(&handle, EmptyTransition_main_region_A));
 }
 
-		

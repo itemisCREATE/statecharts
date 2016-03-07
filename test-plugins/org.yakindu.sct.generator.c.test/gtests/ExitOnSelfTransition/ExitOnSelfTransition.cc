@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "ExitOnSelfTransition.h"
 
-
 ExitOnSelfTransition handle;
 
 TEST(StatemachineTest, ExitOnSelfTransitionTest) {
@@ -31,4 +30,3 @@ TEST(StatemachineTest, ExitOnSelfTransitionTest) {
 	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&handle) == 2l);
 }
 
-		

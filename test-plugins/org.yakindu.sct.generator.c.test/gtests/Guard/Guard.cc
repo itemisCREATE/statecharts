@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "Guard.h"
 
-
 Guard handle;
 
 TEST(StatemachineTest, guardTest) {
@@ -36,4 +35,3 @@ TEST(StatemachineTest, guardTest) {
 	EXPECT_TRUE(guard_isStateActive(&handle, Guard_main_region_A));
 }
 
-		

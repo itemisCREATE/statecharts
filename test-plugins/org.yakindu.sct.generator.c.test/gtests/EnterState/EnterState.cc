@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "EnterState.h"
 
-
 EnterState handle;
 
 TEST(StatemachineTest, defaultEntry) {
@@ -40,4 +39,3 @@ TEST(StatemachineTest, namedEntryThroughDefaultTransition) {
 	EXPECT_TRUE(enterState_isStateActive(&handle, EnterState_r_B_r_E));
 }
 
-		
