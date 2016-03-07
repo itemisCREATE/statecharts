@@ -29,11 +29,12 @@ class CGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineSource
 	@Inject extension StatemachineRequiredHeader
 	@Inject extension Navigation
+	@Inject extension GenmodelEntries
 	
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		flow.generateTypesH(flow.sourceElement as Statechart, fsa, entry)
 		flow.generateStatemachineHeader(flow.sourceElement as Statechart, fsa, entry)
-		if (flow.timed || !flow.operations.empty) {
+		if (flow.timed || !flow.operations.empty || entry.tracingEnterState || entry.tracingExitState) {
 			flow.generateStatemachineRequiredHeader(flow.sourceElement as Statechart, fsa, entry)
 		}
 		flow.generateStatemachineSource(flow.sourceElement as Statechart, fsa, entry)
