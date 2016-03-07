@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "Choice.h"
 
-
 Choice handle;
 
 TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
@@ -79,4 +78,3 @@ TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
 }
 
-		

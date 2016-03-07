@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "ExitState.h"
 
-
 ExitState handle;
 
 TEST(StatemachineTest, defaultExit) {
@@ -47,4 +46,3 @@ TEST(StatemachineTest, remainInA) {
 	EXPECT_TRUE(exitState_isStateActive(&handle, ExitState_r_A));
 }
 
-		

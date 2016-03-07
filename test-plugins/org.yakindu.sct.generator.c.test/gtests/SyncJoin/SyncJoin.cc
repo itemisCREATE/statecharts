@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "SyncJoin.h"
 
-
 SyncJoin handle;
 
 TEST(StatemachineTest, syncJoin_C2_Waits) {
@@ -96,4 +95,3 @@ TEST(StatemachineTest, doubleEntryActionBug) {
 	EXPECT_TRUE(syncJoinIface_get_x(&handle) == 1l);
 }
 
-		

@@ -10,8 +10,8 @@
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>0.23.1</tycho-version>
-		<tycho-extras-version>0.23.1</tycho-extras-version>
+		<tycho-version>0.24.0</tycho-version>
+		<tycho-extras-version>0.24.0</tycho-extras-version>
 		<antrun-version>1.6</antrun-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<testFailureIgnore>false</testFailureIgnore>
@@ -291,6 +291,18 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>nexus-projects.itemis.de</id>
+					<url>https://projects.itemis.de/nexus/content/groups/maven-plugins/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
 			<build>
 				<plugins>
 					<plugin>

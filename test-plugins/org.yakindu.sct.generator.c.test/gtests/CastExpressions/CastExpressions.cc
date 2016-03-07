@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "CastExpressions.h"
 
-
 CastExpressions handle;
 
 TEST(StatemachineTest, CastExpressionTest) {
@@ -27,4 +26,3 @@ TEST(StatemachineTest, CastExpressionTest) {
 	EXPECT_TRUE(castExpressionsIface_get_realValue(&handle) == 757l);
 }
 
-		

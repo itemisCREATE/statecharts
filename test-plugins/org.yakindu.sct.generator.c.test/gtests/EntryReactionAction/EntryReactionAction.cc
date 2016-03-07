@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "EntryReactionAction.h"
 
-
 EntryReactionAction handle;
 
 TEST(StatemachineTest, entryTransitionActionOnStatechartEnter) {
@@ -60,4 +59,3 @@ TEST(StatemachineTest, noEntryTransitionActionOnHistory) {
 	EXPECT_TRUE(!entryReactionActionIface_get_enteredBother(&handle) );
 }
 
-		

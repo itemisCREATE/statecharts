@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "TransitionWithoutCondition.h"
 
-
 TransitionWithoutCondition handle;
 
 TEST(StatemachineTest, TransitionWithoutConditionTest) {
@@ -23,4 +22,3 @@ TEST(StatemachineTest, TransitionWithoutConditionTest) {
 	EXPECT_TRUE(transitionWithoutCondition_isStateActive(&handle, TransitionWithoutCondition_main_region_B));
 }
 
-		

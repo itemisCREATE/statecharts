@@ -15,7 +15,7 @@ The provided open source code generators do not imply any licence constraint on 
 
 ## Download & Installation
 
-In addition to the source code provided here on GitHub we also provide ready-tu-use builds for Windows, Linux and OS X.  
+In addition to the source code provided here on GitHub we also provide ready-tu-use builds for Windows, Linux and OS X along with an Eclipse update site. If you just want to use YAKINDU Statechart Tools we strongly recommend to go this way. 
 
 1. Dowload a package from our <a href="http://www.statecharts.org/download.html" target="_blank">download page</a>.
 2. Follow the <a href="https://github.com/Yakindu/statecharts/blob/master/plugins/org.yakindu.sct.doc.user/help/02_installation/installation.textile" target="_blank">installation instructions</a>.
@@ -30,7 +30,11 @@ We appreciate any feedback and there are various ways to contribute feedback:
 * get the source code (see below) - fork it - work on it - and provide pull requests ... 
  
 
-## Setting up the development environment using Oomph (recommended)
+## Build everything from source
+
+If you are familiar with Eclipse plugin development then you may want to checkout the source, setup the development environment, and start working with it. In this case you have the options described below.
+
+### Setting up the development environment using Oomph (recommended)
 
 1. Download the <a href="https://wiki.eclipse.org/Eclipse_Oomph_Installer" target="_blank">Oomph Eclipse Installer</a> for your platform and install it.
 2. Start Oomph by executing *eclipse-installer/eclipse-inst*.
@@ -50,7 +54,7 @@ We appreciate any feedback and there are various ways to contribute feedback:
 16. Click on *Finish*.
 17. Click *Proceed* three times in order to confirm the execution of each launch despite any existing errors.
 
-## How to setup your developer workspace without Oomph
+### How to setup your developer workspace without Oomph
 1. Download Eclipse Luna from https://www.eclipse.org/downloads/
 2. Install the current Xtext release -> Help / Install new Software / select 'Luna - http://download.eclipse.org/releases/luna'
 2.1 Select Modeling / Xtext Complete SDK

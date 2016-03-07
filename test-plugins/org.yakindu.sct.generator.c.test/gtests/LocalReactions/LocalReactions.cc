@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "LocalReactions.h"
 
-
 LocalReactions handle;
 
 TEST(StatemachineTest, LocalReactionsTest) {
@@ -23,4 +22,3 @@ TEST(StatemachineTest, LocalReactionsTest) {
 	EXPECT_TRUE(localReactionsIface_get_x(&handle) == 1l);
 }
 
-		

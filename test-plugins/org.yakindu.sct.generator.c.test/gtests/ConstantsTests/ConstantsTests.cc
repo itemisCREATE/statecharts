@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "Constants.h"
 
-
 Constants handle;
 
 TEST(StatemachineTest, constantDefinition) {
@@ -35,4 +34,3 @@ TEST(StatemachineTest, constantDefinition) {
 	EXPECT_TRUE(constants_isStateActive(&handle, Constants_main_region_A));
 }
 
-		

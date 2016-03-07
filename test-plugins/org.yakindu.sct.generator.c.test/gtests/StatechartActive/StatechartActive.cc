@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "StatechartActive.h"
 
-
 StatechartActive handle;
 
 TEST(StatemachineTest, inactiveBeforeEnter) {
@@ -38,4 +37,3 @@ TEST(StatemachineTest, activeAfterReenter) {
 	EXPECT_TRUE(statechartActive_isActive(&handle));
 }
 
-		

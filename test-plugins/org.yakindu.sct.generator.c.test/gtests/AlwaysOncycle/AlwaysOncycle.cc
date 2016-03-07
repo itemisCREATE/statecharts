@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "AlwaysOncycle.h"
 
-
 AlwaysOncycle handle;
 
 TEST(StatemachineTest, alwaysOncycleTest) {
@@ -33,4 +32,3 @@ TEST(StatemachineTest, alwaysOncycleTest) {
 	EXPECT_TRUE(alwaysOncycle_isStateActive(&handle, AlwaysOncycle_main_region_StateA));
 }
 
-		

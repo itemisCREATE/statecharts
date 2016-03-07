@@ -348,6 +348,9 @@ class GeneratorProjectTemplate {
 		            	library_id="«data.projectName».FeatureTypeLibrary">
 		            </FeatureLibrary>
 		            «ENDIF»
+		            <FeatureLibrary
+		            	library_id="org.yakindu.generator.core.features">
+		            </FeatureLibrary>
 		      </SCTGenerator>
 		   </extension>
 		«IF data.typeLibrary»
@@ -359,7 +362,11 @@ class GeneratorProjectTemplate {
 		      	uri="platform:/plugin/«data.projectName»/library/FeatureTypeLibrary.xmi">
 		      </FeatureLibrary>
 		   </extension>
-		«ENDIF»   
+		«ENDIF»
+		 <extension point="org.yakindu.sct.generator.core.extensions">
+			 	<ExtensionGeneratorMapping fileExtension="sct" generatorId="«data.generatorId»">
+			 	</ExtensionGeneratorMapping>
+		 	</extension>
 		</plugin>
 	'''
 	
@@ -383,8 +390,6 @@ class GeneratorProjectTemplate {
 	def javaGenerator(ProjectData data) '''
 		package «data.generatorClass.packageName»;
 
-		import java.io.File;
-		import java.io.FileOutputStream;
 		import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator;
 		import org.yakindu.sct.model.sexec.ExecutionFlow;
 		import org.yakindu.sct.model.sexec.ExecutionState;
@@ -395,7 +400,7 @@ class GeneratorProjectTemplate {
 		public class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator implements IExecutionFlowGenerator{
 			private static final String LBR = "\n\r";
 
-			public void generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess access) {
+			public void generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 				StringBuilder builder = new StringBuilder();
 				builder.append("The name of the state machine is ");
 				builder.append(flow.getName());
@@ -407,22 +412,7 @@ class GeneratorProjectTemplate {
 							state.getName().replaceFirst(flow.getName() + "\\.", ""))
 							.append(LBR);
 				}
-				File targetFolder = getTargetFolder(entry);
-				File targetFile = new File(targetFolder.getPath() + File.separator
-						+ flow.getName() + ".txt");
-				write(targetFolder, targetFile, builder.toString());
-				refreshTargetProject(entry);
-			}
-		
-			private void write(File targetFolder, File targetFile, String content) {
-				try {
-					targetFolder.mkdirs();
-					FileOutputStream out = new FileOutputStream(targetFile);
-					out.write(content.getBytes());
-					out.close();
-				} catch (Exception e) {
-					writeToConsole(e);
-				}
+				fsa.generateFile(flow.getName() + ".txt", builder.toString());
 			}
 		}
 	'''

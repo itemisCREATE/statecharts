@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "DeepEntry.h"
 
-
 DeepEntry handle;
 
 TEST(StatemachineTest, enterToSubstate) {
@@ -36,4 +35,3 @@ TEST(StatemachineTest, enterToSubstate) {
 	EXPECT_TRUE(deepEntryIface_get_y(&handle) == 1l);
 }
 
-		

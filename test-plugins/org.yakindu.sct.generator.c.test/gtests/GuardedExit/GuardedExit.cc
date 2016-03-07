@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "GuardedExit.h"
 
-
 GuardedExit handle;
 
 TEST(StatemachineTest, ExitTaken) {
@@ -36,4 +35,3 @@ TEST(StatemachineTest, ExitNotTaken) {
 	EXPECT_TRUE(guardedExitIface_get_done(&handle) );
 }
 
-		

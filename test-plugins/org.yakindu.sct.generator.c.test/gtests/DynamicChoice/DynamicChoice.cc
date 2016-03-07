@@ -12,7 +12,6 @@
 #include "gtest/gtest.h"
 #include "DynamicChoice.h"
 
-
 DynamicChoice handle;
 
 TEST(StatemachineTest, DynamicChoiceTest) {
@@ -23,4 +22,3 @@ TEST(StatemachineTest, DynamicChoiceTest) {
 	EXPECT_TRUE(dynamicChoice_isStateActive(&handle, DynamicChoice_main_region_A));
 }
 
-		
