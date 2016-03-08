@@ -33,6 +33,7 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.junit.After;
@@ -177,7 +178,9 @@ public class GTestRunner extends Runner {
 		if (Platform.getOS().equalsIgnoreCase(Platform.OS_WIN32)) {
 			program += ".exe";
 		}
-		IResource programFile = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(program));
+		String targetProject = testClass.getAnnotation(GTest.class).targetProject();
+		IPath programPath = new Path(targetProject).append(program);
+		IResource programFile = ResourcesPlugin.getWorkspace().getRoot().findMember(programPath);
 		IContainer programContainer = programFile.getParent();
 		if (!programContainer.isAccessible()) {
 			throw new RuntimeException("Test program container " + programContainer.getLocation().toOSString() + " inaccessible");

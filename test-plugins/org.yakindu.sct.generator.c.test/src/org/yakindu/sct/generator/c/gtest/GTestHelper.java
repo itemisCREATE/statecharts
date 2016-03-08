@@ -127,17 +127,20 @@ public class GTestHelper {
 
 		// copy model to JUnit workspace
 		copyFileFromBundleToFolder(getModelBundle(), getModelPath(), targetPath);
-
+		
 		String sgenFileName = getTestProgram() + ".sgen";
 		copyFileFromBundleToFolder(getTestBundle(), sgenFileName, targetPath);
 
 		IPath path = new Path(sgenFileName);
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-		Resource sgenResource = loadResource(file);
+		Resource sgenResource = loadResource(getWorkspaceFileFor(path));
 		GeneratorModel model = (GeneratorModel) sgenResource.getContents().get(
 				0);
 		model.getEntries().get(0).setElementRef(getStatechart());
 		new GeneratorExecutor().executeGenerator(model);
+	}
+	
+	protected IFile getWorkspaceFileFor(IPath filePath) {
+		return ResourcesPlugin.getWorkspace().getRoot().getFile(getTargetProjectPath().append(filePath));
 	}
 
 	protected Statechart getStatechart() {
@@ -236,7 +239,7 @@ public class GTestHelper {
 	}
 
 	protected IPath getTargetPath() {
-		return new Path(getTestProgram()).removeLastSegments(1);
+		return getTargetProjectPath().append(new Path(getTestProgram()).removeLastSegments(1));
 	}
 
 	protected IPath getModelPath() {
@@ -264,6 +267,14 @@ public class GTestHelper {
 
 	protected String getModelAnnotation() {
 		return owner.getClass().getAnnotation(GTest.class).model();
+	}
+	
+	protected String getTargetProjectAnnotation() {
+		return owner.getClass().getAnnotation(GTest.class).targetProject();
+	}
+	
+	protected IPath getTargetProjectPath() {
+		return new Path(getTargetProjectAnnotation());
 	}
 
 	protected void copyFileFromBundleToFolder(Bundle bundle, String sourcePath,
@@ -363,7 +374,7 @@ public class GTestHelper {
 			}
 		} else {
 			try {
-				project.create(monitor);
+				createTestProject(project, monitor);
 				project.open(monitor);
 			} catch (CoreException e) {
 				throw new RuntimeException(e);
@@ -373,6 +384,10 @@ public class GTestHelper {
 			doEnsureFolderExists((IFolder) container, monitor);
 		}
 		return container;
+	}
+
+	protected void createTestProject(IProject projectHandle, IProgressMonitor monitor) throws CoreException {
+		projectHandle.create(monitor);
 	}
 
 	private void doEnsureFolderExists(IFolder folder, IProgressMonitor monitor) {

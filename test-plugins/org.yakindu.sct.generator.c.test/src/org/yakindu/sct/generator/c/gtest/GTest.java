@@ -23,4 +23,6 @@ public @interface GTest {
 	String sourceFile();
 	String program();
 	String model();
+	String targetProject() default "";
+	
 }
