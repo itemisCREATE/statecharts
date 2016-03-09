@@ -32,6 +32,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -160,7 +161,11 @@ public class GTestHelper {
 	}
 
 	protected Bundle getModelBundle() {
-		return FrameworkUtil.getBundle(SCTUnitTestModels.class);
+		Bundle bundle = getAnnotatedTestBundle();
+		if (bundle == null) {
+			return FrameworkUtil.getBundle(SCTUnitTestModels.class);
+		}
+		return bundle;
 	}
 
 	private void copyFilesFromBundleToFolder() {
@@ -269,12 +274,12 @@ public class GTestHelper {
 		return owner.getClass().getAnnotation(GTest.class).model();
 	}
 	
-	protected String getTargetProjectAnnotation() {
-		return owner.getClass().getAnnotation(GTest.class).targetProject();
+	protected String getTestBundleAnnotation() {
+		return owner.getClass().getAnnotation(GTest.class).testBundle();
 	}
 	
 	protected IPath getTargetProjectPath() {
-		return new Path(getTargetProjectAnnotation());
+		return new Path(getTestBundleAnnotation());
 	}
 
 	protected void copyFileFromBundleToFolder(Bundle bundle, String sourcePath,
@@ -315,7 +320,22 @@ public class GTestHelper {
 	}
 
 	protected Bundle getTestBundle() {
-		return FrameworkUtil.getBundle(owner.getClass());
+		Bundle bundle = getAnnotatedTestBundle();
+		if (bundle == null) {
+			return FrameworkUtil.getBundle(owner.getClass());
+		}
+		return bundle;
+	}
+
+	protected Bundle getAnnotatedTestBundle() {
+		String testProject = getTestBundleAnnotation();
+		if (!testProject.isEmpty()) {
+			Bundle testBundle = Platform.getBundle(testProject);
+			if (testBundle != null) {
+				return testBundle;
+			}
+		}
+		return null;
 	}
 
 	protected void copyFileFromBundle(String sourcePath, IFile targetFile) {

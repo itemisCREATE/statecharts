@@ -97,7 +97,7 @@ public class GTestRunner extends Runner {
 	}
 
 	private CharSequence readSourceFile(String sourceFile) throws IOException {
-		Bundle bundle = FrameworkUtil.getBundle(testClass);
+		Bundle bundle = getTestBundle();
 		InputStream is = FileLocator.openStream(bundle, new Path(sourceFile),
 				false);
 		Reader reader = new InputStreamReader(is);
@@ -110,6 +110,17 @@ public class GTestRunner extends Runner {
 		reader.close();
 		is.close();
 		return sb;
+	}
+	
+	protected Bundle getTestBundle() {
+		String testProject = testClass.getAnnotation(GTest.class).testBundle();
+		if (!testProject.isEmpty()) {
+			Bundle testBundle = Platform.getBundle(testProject);
+			if (testBundle != null) {
+				return testBundle;
+			}
+		}
+		return FrameworkUtil.getBundle(testClass);
 	}
 
 	/*
@@ -178,7 +189,7 @@ public class GTestRunner extends Runner {
 		if (Platform.getOS().equalsIgnoreCase(Platform.OS_WIN32)) {
 			program += ".exe";
 		}
-		String targetProject = testClass.getAnnotation(GTest.class).targetProject();
+		String targetProject = testClass.getAnnotation(GTest.class).testBundle();
 		IPath programPath = new Path(targetProject).append(program);
 		IResource programFile = ResourcesPlugin.getWorkspace().getRoot().findMember(programPath);
 		IContainer programContainer = programFile.getParent();
