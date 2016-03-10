@@ -501,7 +501,7 @@ class Statemachine {
 	
 	def protected getIllegalAccessValidation(EventDefinition it) '''
 		if (! «name.asEscapedIdentifier» ) 
-			throw new IllegalStateException("Illegal event value acces. Event «name.asEscapedName» is not raised!");
+			throw new IllegalStateException("Illegal event value access. Event «name.asEscapedName» is not raised!");
 	'''
 	
 	def protected internalScopeFunctions (ExecutionFlow flow) '''
