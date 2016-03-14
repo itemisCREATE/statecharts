@@ -32,6 +32,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -127,17 +128,20 @@ public class GTestHelper {
 
 		// copy model to JUnit workspace
 		copyFileFromBundleToFolder(getModelBundle(), getModelPath(), targetPath);
-
+		
 		String sgenFileName = getTestProgram() + ".sgen";
 		copyFileFromBundleToFolder(getTestBundle(), sgenFileName, targetPath);
 
 		IPath path = new Path(sgenFileName);
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-		Resource sgenResource = loadResource(file);
+		Resource sgenResource = loadResource(getWorkspaceFileFor(path));
 		GeneratorModel model = (GeneratorModel) sgenResource.getContents().get(
 				0);
 		model.getEntries().get(0).setElementRef(getStatechart());
 		new GeneratorExecutor().executeGenerator(model);
+	}
+	
+	protected IFile getWorkspaceFileFor(IPath filePath) {
+		return ResourcesPlugin.getWorkspace().getRoot().getFile(getTargetProjectPath().append(filePath));
 	}
 
 	protected Statechart getStatechart() {
@@ -157,7 +161,11 @@ public class GTestHelper {
 	}
 
 	protected Bundle getModelBundle() {
-		return FrameworkUtil.getBundle(SCTUnitTestModels.class);
+		Bundle bundle = getAnnotatedTestBundle();
+		if (bundle == null) {
+			return FrameworkUtil.getBundle(SCTUnitTestModels.class);
+		}
+		return bundle;
 	}
 
 	private void copyFilesFromBundleToFolder() {
@@ -236,7 +244,7 @@ public class GTestHelper {
 	}
 
 	protected IPath getTargetPath() {
-		return new Path(getTestProgram()).removeLastSegments(1);
+		return getTargetProjectPath().append(new Path(getTestProgram()).removeLastSegments(1));
 	}
 
 	protected IPath getModelPath() {
@@ -264,6 +272,14 @@ public class GTestHelper {
 
 	protected String getModelAnnotation() {
 		return owner.getClass().getAnnotation(GTest.class).model();
+	}
+	
+	protected String getTestBundleAnnotation() {
+		return owner.getClass().getAnnotation(GTest.class).testBundle();
+	}
+	
+	protected IPath getTargetProjectPath() {
+		return new Path(getTestBundleAnnotation());
 	}
 
 	protected void copyFileFromBundleToFolder(Bundle bundle, String sourcePath,
@@ -304,7 +320,22 @@ public class GTestHelper {
 	}
 
 	protected Bundle getTestBundle() {
-		return FrameworkUtil.getBundle(owner.getClass());
+		Bundle bundle = getAnnotatedTestBundle();
+		if (bundle == null) {
+			return FrameworkUtil.getBundle(owner.getClass());
+		}
+		return bundle;
+	}
+
+	protected Bundle getAnnotatedTestBundle() {
+		String testProject = getTestBundleAnnotation();
+		if (!testProject.isEmpty()) {
+			Bundle testBundle = Platform.getBundle(testProject);
+			if (testBundle != null) {
+				return testBundle;
+			}
+		}
+		return null;
 	}
 
 	protected void copyFileFromBundle(String sourcePath, IFile targetFile) {
@@ -363,7 +394,7 @@ public class GTestHelper {
 			}
 		} else {
 			try {
-				project.create(monitor);
+				createTestProject(project, monitor);
 				project.open(monitor);
 			} catch (CoreException e) {
 				throw new RuntimeException(e);
@@ -373,6 +404,10 @@ public class GTestHelper {
 			doEnsureFolderExists((IFolder) container, monitor);
 		}
 		return container;
+	}
+
+	protected void createTestProject(IProject projectHandle, IProgressMonitor monitor) throws CoreException {
+		projectHandle.create(monitor);
 	}
 
 	private void doEnsureFolderExists(IFolder folder, IProgressMonitor monitor) {
