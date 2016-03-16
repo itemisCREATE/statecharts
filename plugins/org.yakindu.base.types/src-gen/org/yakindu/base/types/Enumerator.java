@@ -21,7 +21,7 @@ import org.yakindu.base.base.NamedElement;
  * @model
  * @generated
  */
-public interface Enumerator extends NamedElement {
+public interface Enumerator extends Declaration {
 
 	/**
 	 * Returns the value of the '<em><b>Owning Enumeration</b></em>' container reference.
