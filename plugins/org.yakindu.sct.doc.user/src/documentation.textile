@@ -856,55 +856,63 @@ Let's establish a new Java class _CallHandlingClient_ and integrate the state ma
 
 Next, copy the following code into the created class (without the line numbers, of course):
 
-bc.  1  import org.yakindu.scr.TimerService;
- 2  import org.yakindu.scr.callhandling.CallHandlingStatemachine;
- 3
- 4  public class CallHandlingClient {
- 5
- 6      public static void main(String[] args) throws InterruptedException {
- 7
- 8          // Create the state machine:
- 9          CallHandlingStatemachine sm = new CallHandlingStatemachine();
-10          sm.setTimer(new TimerService());
-11
-12          // Enter the state machine and implicitly activate its "Idle" state:
-13          sm.enter();
-14
-15          // Raise an incoming call:
-16          sm.getSCIPhone().raiseIncoming_call();
-17          sm.runCycle();
-18
-19          // Accept the call:
-20          sm.getSCIUser().raiseAccept_call();
-21          sm.runCycle();
-22
-23          // Keep the phone conversation busy for a while:
-24          for (int i = 0; i < 50; i++) {
-25              Thread.sleep(200);
-26              sm.runCycle();
-27          }
-28
-29          // Before hang-up, output the duration of the call:
-30          System.out.println(String.format("The phone call took %d seconds.",
-31                  sm.getSCIPhone().getDuration()));
-32
-33          // Hang up the phone:
-34          sm.getSCIUser().raiseDismiss_call();
-35          sm.runCycle();
-36      }
-37  }
+bc.   import org.yakindu.scr.TimerService;
+  import org.yakindu.scr.callhandling.CallHandlingStatemachine;
+
+  public class CallHandlingClient {
+
+      public static void main(String[] args) throws InterruptedException {
+
+          // Create the state machine:
+          CallHandlingStatemachine sm = new CallHandlingStatemachine();
+          sm.setTimer(new TimerService());
+
+          // Initialize the state machine:
+          sm.init();
+
+          // Enter the state machine and implicitly activate its "Idle" state:
+          sm.enter();
+
+          // Raise an incoming call:
+          sm.getSCIPhone().raiseIncoming_call();
+          sm.runCycle();
+
+          // Accept the call:
+          sm.getSCIUser().raiseAccept_call();
+          sm.runCycle();
+
+          // Keep the phone conversation busy for a while:
+          for (int i = 0; i < 50; i++) {
+              Thread.sleep(200);
+              sm.runCycle();
+          }
+
+          // Before hang-up, output the duration of the call:
+          System.out.println(String.format("The phone call took %d seconds.",
+                  sm.getSCIPhone().getDuration()));
+
+          // Hang up the phone:
+          sm.getSCIUser().raiseDismiss_call();
+          sm.runCycle();
+      }
+  }
 
 
 Let's have a detailed look at this client code:
 
-* First, this program creates a new instance of the state machine by calling the default constructor of @CallHandlingStatemachine@ (line 9).
-* Since we are using time events, the statechart implementation requires an implementation of the @ITimer@ interface. Since we added the @TimerService@ feature to the generator model, the code generator creates a default implementation @org.yakindu.scr.TimerService@ that uses the @java.util.Timer@ class. A new instance of the default @TimerService@ is created and set to the state machine (line 10).
-* In line 13, @sm.enter()@ enters the state machine and – via its initial state – activates its *Idle* state.
-* For each interface in the statechart definition block a getter method has been generated, here @getSCIPhone()@ and @getSCIUser()@. You can access all incoming events and all variables via these interfaces. In line 16, the _incoming&#95;call_ event is raised, activating the *Incoming Call* state after the next run cycle has been executed (line 17).
-* In line 20, we raise the _accept&#95;call_ event via the _User_ interface. It activates the *Active Call* state after the next run cycle has been performed (line 21).
-* From line 24 to line 27, the run cycle is executed periodically every 200 milliseconds.
-* After that, the call's duration is printed to the console (lines 30 and 31).
-* Finally, the _dismiss&#95;call_ event is raised (line 34), activating the *Dismiss Call* state after the next run cycle (line 35).
+* First, this program creates a new instance of the state machine by calling the default @CallHandlingStatemachine@ constructor:
+** @CallHandlingStatemachine sm = new CallHandlingStatemachine();@
+* Since we are using time events, the statechart implementation requires an implementation of the @ITimer@ interface. And since we added the @TimerService@ feature to the generator model, the code generator creates a default implementation @org.yakindu.scr.TimerService@ that uses the @java.util.Timer@ class. A new instance of the default @TimerService@ is created and set to the state machine:
+** @sm.setTimer(new TimerService());@
+* The state machine and its internal data structures are initialized:
+** @sm.init();@
+* After that, @sm.enter()@ enters the state machine and – via its initial state – activates its *Idle* state.
+* For each interface in the statechart definition block a getter method has been generated, here @getSCIPhone()@ and @getSCIUser()@. You can access all incoming events and all variables via these interfaces.
+** @sm.getSCIPhone().raiseIncoming_call();@ raises the _incoming&#95;call_ event, activating the *Incoming Call* state after the next run cycle has been executed. The latter is triggered by @sm.runCycle()@.
+* @sm.getSCIUser().raiseAccept_call()@ accepts the call or, to be more precise, raises the _accept_call_ event via the _User_ interface. It activates the *Active Call* state after the next run cycle has been performed by @sm.runCycle();@.
+* In the @for@ loop, the run cycle is executed periodically every 200 milliseconds. This simulates the duration of the phone call.
+* Before hanging up the phone, let's find out how much time we spent in the call. @sm.getSCIPhone().getDuration()@ retrieves the call's duration, which is then formatted and printed to the console.
+* Finally, @sm.getSCIUser().raiseDismiss_call()@ raises the _dismiss_call_ event. It activates the *Dismiss Call* state after the next run cycle.
 
 h5(#executing-the-client-code). Executing the client code
 
