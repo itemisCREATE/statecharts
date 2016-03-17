@@ -721,6 +721,8 @@ h4(#creating-the-statechart-model). Creating the statechart model
 
 In the "Five minutes tutorial":#five-minutes-tutorial tutorial we have seen how to operate the statechart editor. So let's create a new project now and use the statechart editor to create the *CallHandling* statechart model as outlined above.
 
+Since we are going to generate Java code, we should use a Java project to host the statechart model. Use _File → New → Java Project_ and follow the _New Java Project_ wizard to create one.
+
 In addition to what we have learned in the "Five Minutes Tutorial":#five-minutes-tutorial already, there is one new concept: interfaces.
 
 h5(#creating-interfaces). Creating interfaces
