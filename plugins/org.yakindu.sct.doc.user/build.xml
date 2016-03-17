@@ -131,6 +131,10 @@
         <sequential unless:set="wikitext.zip.file.exists">
             <mkdir dir="${lib.dir}" />
             <get src="${wikitext.zip.src}" dest="${wikitext.zip.file}" skipexisting="true" usetimestamp="true" />
+
+            <!-- Unfortunately there's currently no versioned release. Until there is one (if ever)
+                 checking the checksum is disabled. -->
+            <!--
             <fail message="Checksum mismatch for ${wikitext.zip.file}. Please delete it and rerun ant to redownload.">
                 <condition>
                     <not>
@@ -141,6 +145,8 @@
                     </not>
                 </condition>
             </fail>
+            -->
+
             <unzip dest="${lib.dir}" src="${wikitext.zip.file}" />
         </sequential>
     </target>
