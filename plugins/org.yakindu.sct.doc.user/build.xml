@@ -105,7 +105,11 @@
         </condition>
         <sequential unless:set="target.exists">
             <mkdir dir="${lib.dir}" />
-            <get src="${aether.jar.src}" dest="${aether.jar.file}" skipexisting="true" usetimestamp="true" />
+            <get src="${aether.jar.src}"
+                 dest="${aether.jar.file}"
+                 skipexisting="true"
+                 usetimestamp="true"
+                 verbose="true" />
             <fail message="Checksum mismatch for ${aether.jar.file}. Please delete it and rerun ant to redownload.">
                 <condition>
                     <not>
@@ -130,7 +134,11 @@
         </condition>
         <sequential unless:set="wikitext.zip.file.exists">
             <mkdir dir="${lib.dir}" />
-            <get src="${wikitext.zip.src}" dest="${wikitext.zip.file}" skipexisting="true" usetimestamp="true" />
+            <get src="${wikitext.zip.src}"
+                 dest="${wikitext.zip.file}"
+                 skipexisting="true"
+                 usetimestamp="true"
+                 verbose="true" />
 
             <!-- Unfortunately there's currently no versioned release. Until there is one (if ever)
                  checking the checksum is disabled. -->
