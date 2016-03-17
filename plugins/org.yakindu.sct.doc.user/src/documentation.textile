@@ -622,7 +622,7 @@ As we have seen above, the *On* state is not reachable as of yet. So let's model
 
 table(scedit).
 |<. In the _Palette_, click on the _Transition_ symbol. The symbol's background turn blue.|<. !{width:80.0%;height:auto;}images/light_switch_250_statechart_editor_create_transition_01.png!|
-|<. Click on the *On* state, but don't release the mouse button. Drag the mouse pointer towards the *Off* state. A light gray line is shown as a preview of the transition to be established:|<. !{width:80.0%;height:auto;}images/light_switch_250_statechart_editor_create_transition_02.png!|
+|<. Click on the *Off* state, but don't release the mouse button. Drag the mouse pointer towards the *On* state. A light gray line is shown as a preview of the transition to be established:|<. !{width:80.0%;height:auto;}images/light_switch_250_statechart_editor_create_transition_02.png!|
 |<. Once the mouse pointer reaches the target state, it changes its shape:|<. !{width:80.0%;height:auto;}images/light_switch_250_statechart_editor_create_transition_03.png!|
 |<. Releasing the mouse button establishes the transition. A text input field to specify event trigger, guard condition and effect appears. We want the transition to be triggered when the light switch is operated, so let's type @operate@ into the text field.|<. !{width:80.0%;height:auto;}images/light_switch_250_statechart_editor_create_transition_04.png!|
 |<. If you suspect that something is not in order, because the input text is underlined in red, you are right. We will explain and deal with that in a minute.|<. |
