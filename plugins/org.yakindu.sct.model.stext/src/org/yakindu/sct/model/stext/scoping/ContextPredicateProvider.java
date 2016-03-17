@@ -16,6 +16,7 @@ import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Litera
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.BITWISE_OR_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.BITWISE_XOR_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LOGICAL_AND_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LOGICAL_NOT_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LOGICAL_OR_EXPRESSION;
@@ -180,6 +181,8 @@ public class ContextPredicateProvider {
 		filter.put(key(LOCAL_REACTION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(TRANSITION_REACTION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(VARIABLE_DEFINITION, TYPED_ELEMENT__TYPE), TYPES);
+		filter.put(key(VARIABLE_DEFINITION, ELEMENT_REFERENCE_EXPRESSION__REFERENCE),
+				VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
 	}
 
 	public Predicate<IEObjectDescription> getPredicate(EClass clazz, EReference reference) {
