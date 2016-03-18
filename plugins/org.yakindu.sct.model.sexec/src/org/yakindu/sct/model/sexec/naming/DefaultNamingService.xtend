@@ -197,19 +197,31 @@ class DefaultNamingService implements INamingService {
 
 	def protected void addShortTimeEventNames(Map<NamedElement, String> map, ExecutionFlow flow, int maxLength,
 		char separator) {
+
+		// Create short name for time events of statechart
+		if (flow.sourceElement instanceof Statechart) {
+			val statechart = flow.sourceElement as Statechart
+			flow.addShortTimeEventName(statechart, statechart.timeEventSpecs, map, maxLength, separator)
+		}
+
+		// Create short name for time events of states
 		for (executionState : flow.states.sortWith(executionScopeDepthComparator)) {
 			if (executionState.sourceElement instanceof State) {
-				var state = executionState.sourceElement as State
-				var timeEventSpecs = state.timeEventSpecs
-				for (tes : timeEventSpecs) {
-					var timeEvent = flow.getTimeEvent(
-						state.fullyQualifiedName + "_time_event_" + timeEventSpecs.indexOf(tes))
-					if (timeEvent != null) {
-						map.put(timeEvent,
-							executionState.getShortName(tes.prefix(state, separator), tes.suffix(state, separator),
-								map.values.toList, maxLength, separator))
-					}
-				}
+				val state = executionState.sourceElement as State
+				executionState.addShortTimeEventName(state, state.timeEventSpecs, map, maxLength, separator)
+			}
+		}
+	}
+
+	def protected addShortTimeEventName(NamedElement executionFlowElement, NamedElement sgraphElement,
+		List<TimeEventSpec> timeEventSpecs, Map<NamedElement, String> map, int maxLength, char separator) {
+		for (tes : timeEventSpecs) {
+			val timeEvent = executionFlowElement.flow.getTimeEvent(sgraphElement.fullyQualifiedName + "_time_event_" +
+				timeEventSpecs.indexOf(tes))
+			if (timeEvent != null) {
+				map.put(timeEvent,
+					executionFlowElement.getShortName(tes.prefix(sgraphElement, separator),
+						tes.suffix(sgraphElement, separator), map.values.toList, maxLength, separator))
 			}
 		}
 	}
@@ -250,12 +262,15 @@ class DefaultNamingService implements INamingService {
 		""
 	}
 
-	def protected prefix(TimeEventSpec it, State state, char separator) {
+	def protected prefix(TimeEventSpec it, NamedElement element, char separator) {
 		activeFlow.name
 	}
 
-	def protected suffix(TimeEventSpec it, State state, char separator) {
-		"tev" + state.timeEventSpecs.indexOf(it)
+	def protected suffix(TimeEventSpec it, NamedElement element, char separator) {
+		switch (element) {
+			Statechart: "tev" + element.timeEventSpecs.indexOf(it)
+			State: "tev" + element.timeEventSpecs.indexOf(it)
+		}
 	}
 
 	def protected prefix(State it, char separator) {
@@ -458,8 +473,10 @@ class DefaultNamingService implements INamingService {
 	def protected dispatch String elementName(Step it, NameShorteningStrategy nameShorteningType) {
 		var parentName = eContainer.elementName(nameShorteningType)
 		// parent name may be null
-		if(( isEnterSequence || isCheckFunction || isEffect ) && (name != null) && (!name.trim.empty)) parentName +
-			separator + name else parentName
+		if (( isEnterSequence || isCheckFunction || isEffect ) && (name != null) && (!name.trim.empty))
+			parentName + separator + name
+		else
+			parentName
 	}
 
 	def protected dispatch String elementName(EObject it, NameShorteningStrategy nameShorteningType) {
