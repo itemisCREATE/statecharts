@@ -25,6 +25,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
@@ -131,13 +132,24 @@ public class GTestHelper {
 		
 		String sgenFileName = getTestProgram() + ".sgen";
 		copyFileFromBundleToFolder(getTestBundle(), sgenFileName, targetPath);
-
+		
 		IPath path = new Path(sgenFileName);
 		Resource sgenResource = loadResource(getWorkspaceFileFor(path));
 		GeneratorModel model = (GeneratorModel) sgenResource.getContents().get(
 				0);
 		model.getEntries().get(0).setElementRef(getStatechart());
+
+		performFullBuild();
+		
 		new GeneratorExecutor().executeGenerator(model);
+	}
+	
+	protected void performFullBuild() {
+		try {
+			ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, null);
+		} catch (CoreException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	protected IFile getWorkspaceFileFor(IPath filePath) {
@@ -153,10 +165,8 @@ public class GTestHelper {
 	}
 
 	protected Resource loadResource(IFile file) {
-		Resource resource = null;
-		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(),
-				true);
-		resource = new ResourceSetImpl().getResource(uri, true);
+		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+		Resource resource = new ResourceSetImpl().getResource(uri, true);
 		return resource;
 	}
 
