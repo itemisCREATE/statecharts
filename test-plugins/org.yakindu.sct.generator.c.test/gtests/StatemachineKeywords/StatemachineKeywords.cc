@@ -13,7 +13,6 @@
 #include "StatechartKeywords.h"
 #include "StatechartKeywordsRequired.h"
 
-
 StatechartKeywords handle;
 
 TEST(StatemachineTest, statemachineKeywords) {
@@ -22,12 +21,11 @@ TEST(StatemachineTest, statemachineKeywords) {
 	EXPECT_TRUE(statechartKeywords_isStateActive(&handle, StatechartKeywords_main_region_Timer));
 }
 
-		
-void statemachineKeywords_setTimer(const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
+void statechartKeywords_setTimer(StatechartKeywords* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
 	// Mockup
-	statemachineKeywords_raiseTimeEvent(&handle, evid);
+	statechartKeywords_raiseTimeEvent(handle, evid);
 }
 
-void statemachineKeywords_unsetTimer(const sc_eventid evid){
+void statechartKeywords_unsetTimer(StatechartKeywords* handle, const sc_eventid evid){
 	// Mockup
 }		
