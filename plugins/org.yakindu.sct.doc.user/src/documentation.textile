@@ -840,7 +840,7 @@ Add the generated artifacts to the Java build path by right-clicking on the _src
 
 p=. Declaring "src-gen" as a source folder
 
-If you want to execute your generator model manually, select _Generate Statechart Artifacts_ from the @.sgen@ file's context menu in the project explorer.
+If you want to execute your generator model manually, select _Generate Code Artifacts_ from the @.sgen@ file's context menu in the project explorer.
 
 h4(#integration-with-client-code). Integration with client code
 
