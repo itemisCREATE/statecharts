@@ -125,9 +125,9 @@ public class CNamingService extends DefaultNamingService {
 		}
 	}
 	
-	override protected prefix(TimeEventSpec it, State state, char separator) {
+	override protected prefix(TimeEventSpec it, NamedElement element, char separator) {
 		if (entry.statemachinePrefix.nullOrEmpty) {
-			super.prefix(it, state, separator).toFirstLower
+			super.prefix(it, element, separator).toFirstLower
 		} else {
 			entry.statemachinePrefix
 		}

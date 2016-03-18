@@ -15,7 +15,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 		protected long getIntegerEventValue() {
 			if (!integerEvent)
-				throw new IllegalStateException("Illegal event value acces. Event IntegerEvent is not raised!");
+				throw new IllegalStateException("Illegal event value access. Event IntegerEvent is not raised!");
 			return integerEventValue;
 		}
 
@@ -30,7 +30,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 		protected boolean getBooleanEventValue() {
 			if (!booleanEvent)
-				throw new IllegalStateException("Illegal event value acces. Event BooleanEvent is not raised!");
+				throw new IllegalStateException("Illegal event value access. Event BooleanEvent is not raised!");
 			return booleanEventValue;
 		}
 
@@ -45,7 +45,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 		protected double getRealEventValue() {
 			if (!realEvent)
-				throw new IllegalStateException("Illegal event value acces. Event RealEvent is not raised!");
+				throw new IllegalStateException("Illegal event value access. Event RealEvent is not raised!");
 			return realEventValue;
 		}
 
@@ -60,7 +60,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 		protected String getStringEventValue() {
 			if (!stringEvent)
-				throw new IllegalStateException("Illegal event value acces. Event StringEvent is not raised!");
+				throw new IllegalStateException("Illegal event value access. Event StringEvent is not raised!");
 			return stringEventValue;
 		}
 

@@ -37,7 +37,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 
 		public long getEv_outValue() {
 			if (!ev_out)
-				throw new IllegalStateException("Illegal event value acces. Event Ev_out is not raised!");
+				throw new IllegalStateException("Illegal event value access. Event Ev_out is not raised!");
 			return ev_outValue;
 		}
 
@@ -52,7 +52,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 
 		protected long getEv_inValue() {
 			if (!ev_in)
-				throw new IllegalStateException("Illegal event value acces. Event Ev_in is not raised!");
+				throw new IllegalStateException("Illegal event value access. Event Ev_in is not raised!");
 			return ev_inValue;
 		}
 

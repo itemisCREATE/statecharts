@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
 import static org.yakindu.sct.generator.cpp.CppKeywords.*
+import org.yakindu.base.base.NamedElement
 
 class CppNamingService extends CNamingService {
 
@@ -70,7 +71,7 @@ class CppNamingService extends CNamingService {
 		}
 	}
 
-	override protected prefix(TimeEventSpec it, State state, char separator) {
+	override protected prefix(TimeEventSpec it, NamedElement element, char separator) {
 		if (entry.statemachinePrefix.nullOrEmpty) {
 			""
 		} else {
