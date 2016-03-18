@@ -672,9 +672,11 @@ p=. Selecting "Run As → Statechart Simulation" in the context menu
 The perspective changes from _SC Modeling_ to _SC Simulation_. This perspective defines two additional views:
 
 * The _Debug_ view at the top shows all running statechart instances and allows to select one of them. YAKINDU Statechart Tools allow multiple executions of the same statechart as well as parallel executions of different statecharts at the same time.
-* The _Simulation_ view on the right-hand side is used to raise events and to inspect and modify variables.
+* The _Simulation_ view on the right-hand side is used to raise events and to inspect and modify variables. Depending on your screen resolution and font size settings, you might not be able to spot the _Simulation_ view by its name, because the tab containing it is quite narrow and might not provide enough space for displaying the title. Hover over tabs to reveal their respective titles in a popup window. Figure "&quot;Light switch simulation in &quot;off&quot; state&quot;":#fig_light_switch_simulation_in_off_state is demonstrating this: The user has hovered the mouse pointer over a tab that is just displaying the starting letter 'S' of its title. However, a popup window right besides the pointer is showing the tab's full title "Simulation View".
 
 Not surprisingly, the simulation starts at the initial state and then transitions to the *Off* state immediately. The latter becomes the active state now. It is highlighted by a red background:
+
+p(#fig_light_switch_simulation_in_off_state). 
 
 !{width:80.0%;height:auto;}images/light_switch_310_statechart_simulator_state_off.png(Light switch simulation in "off" state)!
 
@@ -684,9 +686,9 @@ Now that the light switch is off, let's turn the lights on by operating the swit
 
 In the _Simulation_ view at the right-hand side of the Eclipse workbench, click on the _internal_ entry's show/hide symbol to display its contents.
 
-!{width:80.0%;height:auto;}images/light_switch_320_statechart_simulator_state_events.png(Displaying event names in the statechart simulator)!
+!{width:80.0%;height:auto;}images/light_switch_320_statechart_simulator_state_events.png(Displaying event names in the statechart simulator's _Simulation_ view)!
 
-p=. Displaying event names in the statechart simulator
+p=. Displaying event names in the statechart simulator's _Simulation_ view
 
 The _operate_ event is shown. Click on it to raise the event, i. e. to operate the light switch.
 
