@@ -644,6 +644,8 @@ bc. internal:
     event operate
 
 
+The keyword @internal@ makes the following definition of the _operate_ event belong to the internal scope. The latter is explained in section "&quot;Internal scope&quot;":#internal-scope.
+
 Click anywhere outside of the text field, which terminates editing the definition section. The statechart editor digests the definition, recognizes the definition of the _operate_ event, and validates the model as being okay:
 
 !{width:80.0%;height:auto;}images/light_switch_260_statechart_editor_create_definitions_02.png(Creating definitions [2])!
