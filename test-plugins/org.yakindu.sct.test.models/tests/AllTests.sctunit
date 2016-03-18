@@ -6,7 +6,6 @@ testsuite AllTests {
 	CastExpressions,
 	Choice, 
 	CKeywords,
-	StatemachineKeywords,
 	ConditionalExpression,
 	ConstantsTests,
 	Declarations, 
@@ -49,13 +48,16 @@ testsuite AllTests {
 	StatechartLocalReactions,
 	StateIsActive, 
 	StaticChoice,
-	STextKeywordsInStatesAndRegions, 
+	STextKeywordsInStatesAndRegions,
 	StringExpressions, 
 	SyncFork,
 	SyncJoin,
-	TimedTransitions,
 	TransitionWithoutCondition,
 	TriggerGuardExpressions,
 	TriggerExpressionPrecedence,
 	ValuedEvents
+	//Add the following tests if sct unit Java and C++ generators
+	// support mock timer service generation
+	//StatemachineKeywords,
+	//TimedTransitions,
 } 
