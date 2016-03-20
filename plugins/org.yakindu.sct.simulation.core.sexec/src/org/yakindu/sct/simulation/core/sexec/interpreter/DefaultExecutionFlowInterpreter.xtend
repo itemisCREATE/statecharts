@@ -36,6 +36,7 @@ import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
+import org.yakindu.sct.simulation.core.sruntime.ExecutionContext.LocalInternalEvent
 
 /**
  * 
@@ -125,6 +126,25 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 			activeStateIndex = activeStateIndex + 1
 		}
 		executionContext.clearLocalAndInEvents
+		while ( 0 < executionContext.internalEventQueue.size )
+		{
+			var LocalInternalEvent event = executionContext.internalEventQueue.poll
+			if ( event.doesContainValue )
+			{
+				executionContext.getEvent(event.eventname).value = event.value;
+			}
+			 executionContext.getEvent(event.eventname).raised = true; 
+			 		executionContext.raiseScheduledEvents
+		activeStateIndex = 0
+		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
+		executionContext.clearOutEvents
+		while (activeStateIndex < activeStateConfiguration.size) {
+			var state = activeStateConfiguration.get(activeStateIndex)
+			state?.reactSequence?.scheduleAndRun
+			activeStateIndex = activeStateIndex + 1
+		}
+		executionContext.clearLocalAndInEvents
+		}  
 	}
 
 	override resume() {

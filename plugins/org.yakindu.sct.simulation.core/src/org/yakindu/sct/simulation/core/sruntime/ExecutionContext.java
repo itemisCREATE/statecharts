@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.core.sruntime;
 
 import java.util.List;
+import java.util.Queue;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -38,6 +39,19 @@ import org.yakindu.sct.model.sgraph.RegularState;
  * @generated
  */
 public interface ExecutionContext extends NamedElement, CompositeSlot {
+	public class LocalInternalEvent
+	{
+		public LocalInternalEvent(String name,boolean isvalue,Object value)
+		{
+			eventname = name;
+			doesContainValue = isvalue;
+			this.value = value; 
+		}
+		public String eventname;
+		public Object value; 
+		public boolean    doesContainValue; 
+	}
+	Queue<LocalInternalEvent> getInternalEventQueue();
 	/**
 	 * Returns the value of the '<em><b>Active States</b></em>' reference list.
 	 * The list contents are of type {@link org.yakindu.sct.model.sgraph.RegularState}.

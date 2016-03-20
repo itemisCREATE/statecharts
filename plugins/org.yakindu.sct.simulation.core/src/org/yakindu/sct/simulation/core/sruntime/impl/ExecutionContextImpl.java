@@ -11,7 +11,9 @@
 package org.yakindu.sct.simulation.core.sruntime.impl;
 
 import java.util.ArrayList;
+import java.util.Queue;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.core.runtime.Assert;
@@ -147,6 +149,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * @ordered
 	 */
 	protected EList<RegularState> activeStates;
+	protected Queue<LocalInternalEvent> localInternalEventQueue; 
 
 	/**
 	 * The cached value of the '{@link #getExecutedElements() <em>Executed Elements</em>}' reference list.
@@ -507,6 +510,14 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 		List<ExecutionSlot> result = new BasicEList<ExecutionSlot>();
 		addSlots(result, getSlots(), Sets.<ExecutionSlot>newHashSet());
 		return result;
+	}
+	public Queue<LocalInternalEvent> getInternalEventQueue()
+	{
+		if ( null == localInternalEventQueue )
+		{
+			localInternalEventQueue = new LinkedList<LocalInternalEvent>(); 
+		}
+		return localInternalEventQueue; 
 	}
 
 	protected void addSlots(List<ExecutionSlot> result, List<ExecutionSlot> slots, Set<ExecutionSlot> visitedSlots) {

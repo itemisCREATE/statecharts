@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.expressions.expressions.AssignmentExpression
@@ -51,10 +52,10 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
+import org.yakindu.sct.simulation.core.sruntime.ExecutionContext.LocalInternalEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
 import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot
-import java.util.List
 
 /**
  * 
@@ -160,7 +161,15 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			event.value = eventRaising.value.execute
 		}
 		if (event instanceof ExecutionEvent) {
-			(event as ExecutionEvent).raised = true
+			if (eventRaising.value != null)
+			{
+				context.getInternalEventQueue().add(new LocalInternalEvent(event.name,false,eventRaising.value));	
+			}
+			else
+			{
+				context.getInternalEventQueue().add(new LocalInternalEvent(event.name,false,null));	
+			}
+			//(event as ExecutionEvent).raised = true
 		}
 		null
 	}

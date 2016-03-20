@@ -49,6 +49,9 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		#define «module().define»_H_
 		
 		«includes(artifactConfigs)»
+		#include <deque>
+		#include <functional>
+
 		
 		/*! \file Header of the state machine '«name»'.
 		*/
@@ -83,6 +86,9 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 				«statemachineTypeDecl»
 				
 				«prototypes»
+			private:
+			void runCycleIntern();
+			std::deque<std::function<void()>> InternalEventQueue; 	
 		};
 		«IF !entry.useStaticOPC»
 			«scopes.filter(typeof(StatechartScope)).map[createInlineOCB_Destructor].filterNullOrEmptyAndJoin»
