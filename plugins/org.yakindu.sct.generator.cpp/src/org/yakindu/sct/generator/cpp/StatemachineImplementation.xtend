@@ -69,6 +69,7 @@ class StatemachineImplementation {
 		
 		«finalFunction»
 		
+		«runCycleInternFunction»
 		«runCycleFunction»
 		
 		«clearInEventsFunction»
@@ -175,8 +176,8 @@ class StatemachineImplementation {
 		}
 	'''
 	
-	def runCycleFunction(ExecutionFlow it) '''
-		void «module»::runCycle()
+	def runCycleInternFunction(ExecutionFlow it) '''
+		void «module»::runCycleIntern()
 		{
 			
 			clearOutEvents();
@@ -203,6 +204,18 @@ class StatemachineImplementation {
 			}
 			
 			clearInEvents();
+		}
+	'''
+		def runCycleFunction(ExecutionFlow it) '''
+		void «module»::runCycle()
+		{
+			runCycleIntern(); 
+			while (!InternalEventQueue.empty())
+			{
+				InternalEventQueue.front()();
+				InternalEventQueue.pop_front();
+				runCycleIntern(); 
+			}
 		}
 	'''
 	

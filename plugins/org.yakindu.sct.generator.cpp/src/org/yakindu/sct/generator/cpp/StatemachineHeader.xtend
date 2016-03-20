@@ -53,6 +53,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		
 		#include "«typesModule.h»"
 		#include "«statemachineInterface.h»"
+		#include <deque>
+		#include <functional>
 		«IF timed»
 			#include "«timedStatemachineInterface.h»"
 		«ENDIF»
@@ -85,6 +87,9 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 				«statemachineTypeDecl»
 				
 				«prototypes»
+			private:
+			void runCycleIntern();
+			std::deque<std::function<void()>> InternalEventQueue; 	
 		};
 		«IF !entry.useStaticOPC»
 			«scopes.filter(typeof(StatechartScope)).map[createInlineOCB_Destructor].filterNullOrEmptyAndJoin»

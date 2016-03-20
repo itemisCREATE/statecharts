@@ -49,6 +49,7 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class ExpressionCode {
 
@@ -108,9 +109,8 @@ class ExpressionCode {
 
 	def dispatch CharSequence code(EventRaisingExpression it) '''
 	«IF value != null»
-		«event.definition.event.valueAccess» = «value.code»;
-	«ENDIF»
-	«event.definition.event.access» = true'''
+		InternalEventQueue.push_back( [&] { «event.definition.event.scope.instance».«(event.definition.event as EventDefinition).asRaiser»(«value.code»); })«ELSE»
+		InternalEventQueue.push_back( [&] { «event.definition.event.scope.instance».«(event.definition.event as EventDefinition).asRaiser»(); })«ENDIF»'''
 
 	/* Logical Expressions */
 	def dispatch CharSequence code(LogicalOrExpression it) '''«leftOperand.code» || «rightOperand.code»'''
