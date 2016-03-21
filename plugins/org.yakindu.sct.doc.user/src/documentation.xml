@@ -1259,13 +1259,11 @@ yakindu-sct/SCT
       <para>The dialog asks you for the project, the directory, and the name of the model file to be created. Eclipse project and
        directory should be correctly preset already. In our case the corresponding text field contains
        <emphasis role="strong">LightSwitch/model</emphasis> which means the directory named
-       <emphasis
-       role="strong">model</emphasis> in the <emphasis role="strong">LightSwitch</emphasis> project.
+       <emphasis role="strong">model</emphasis> in the <emphasis role="strong">LightSwitch</emphasis> project.
        You can change that if you wish, but most likely you won't.</para>
 
       <para>The default file name in the <emphasis>File Name</emphasis> field is
-       <emphasis
-       role="strong">default.sct</emphasis>, however. You should change that to something more
+       <emphasis role="strong">default.sct</emphasis>, however. You should change that to something more
        meaningful. In our case we type <emphasis role="strong">LightSwitch.sct</emphasis> into the <emphasis>File
        name</emphasis> field, see the screenshot above.</para>
 
@@ -3059,8 +3057,7 @@ event voidEvent : void
       the event name, e. g. <literal>raiseIncoming_call()</literal>. If the event is an interface event, the name of
       the interface must also be appended.</para>
 
-     <remark role="fixme">Add an
-      example!</remark>
+     <remark role="fixme">Add an example!</remark>
     </sect4>
 
     <sect4 xml:id="calling-an-operation">
@@ -4167,7 +4164,7 @@ feature Debug {
     </figure>
 
     <para>You can checkout the C sample project
-     <emphasis><link xl:href="https://github.com/Yakindu/statecharts/tree/master/examples/org.yakindu.sct.examples.c.trafficlight_">org.yakindu.sct.examples.c.trafficlight</link></emphasis>
+     <link xl:href="https://github.com/Yakindu/statecharts/tree/master/examples/org.yakindu.sct.examples.c.trafficlight_">org.yakindu.sct.examples.c.trafficlight</link>
      from the <link xl:href="https://github.com/Yakindu/statecharts"> <application>YAKINDU Statechart
      Tools</application> GitHub repository</link>. The C example contains statechart, SGen model, graphical widgets, and
      some glue code to connect the generated code with the widgets. The graphical widgets are based on Qt.</para>
@@ -4866,7 +4863,7 @@ feature GeneratorOptions {
      <remark role="fixme">This is quite likely a Java feature, at least JUnit is.</remark>
 
      <para>Using the <emphasis>JUnitWrapper</emphasis> feature, it is possible to create JUnit tests that will run the generated
-      gtests<remark role="fixme">What a gtests?</remark>.</para>
+      gtests.<remark role="fixme">What are gtests?</remark></para>
 
      <orderedlist numeration="arabic">
 

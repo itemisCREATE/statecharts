@@ -1,0 +1,11 @@
+GeneratorModel for yakindu::c {
+
+	statechart DefaultSM {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.doc.user"
+			targetFolder = "examples/defaultsm/c/default/src-gen"
+			libraryTargetFolder = "examples/defaultsm/c/default/src"
+		}
+	}
+}

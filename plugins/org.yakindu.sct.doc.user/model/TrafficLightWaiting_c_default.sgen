@@ -1,0 +1,11 @@
+GeneratorModel for yakindu::c {
+
+	statechart TrafficLightWaiting {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.doc.user"
+			targetFolder = "examples/trafficlightwaiting/c/default/src-gen"
+			libraryTargetFolder = "examples/trafficlightwaiting/c/default/src"
+		}
+	}
+}

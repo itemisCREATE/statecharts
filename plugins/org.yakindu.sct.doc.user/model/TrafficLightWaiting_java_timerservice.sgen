@@ -1,0 +1,14 @@
+GeneratorModel for yakindu::java {
+
+	statechart TrafficLightWaiting {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.doc.user"
+			targetFolder = "examples/trafficlightwaiting/java/timerservice/src-gen"
+			libraryTargetFolder = "examples/trafficlightwaiting/java/timerservice/src"
+		}
+		feature GeneralFeatures {
+			TimerService = true
+		}
+	}
+}

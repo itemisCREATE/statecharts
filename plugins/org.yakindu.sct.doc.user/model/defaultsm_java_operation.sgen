@@ -1,0 +1,14 @@
+GeneratorModel for yakindu::java {
+
+	statechart DefaultSMWithOperation {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.doc.user"
+			targetFolder = "examples/defaultsm/java/operation/src-gen"
+			libraryTargetFolder = "examples/defaultsm/java/operation/src"
+		}
+		feature GeneralFeatures {
+			InterfaceObserverSupport = true
+		}
+	}
+}
