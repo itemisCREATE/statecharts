@@ -48,7 +48,7 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 
 		protected long getNumberPressedValue() {
 			if (!numberPressed)
-				throw new IllegalStateException("Illegal event value acces. Event NumberPressed is not raised!");
+				throw new IllegalStateException("Illegal event value access. Event NumberPressed is not raised!");
 			return numberPressedValue;
 		}
 

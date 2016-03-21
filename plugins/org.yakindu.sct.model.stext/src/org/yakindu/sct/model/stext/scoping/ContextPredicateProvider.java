@@ -16,6 +16,7 @@ import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Litera
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.BITWISE_OR_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.BITWISE_XOR_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LOGICAL_AND_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LOGICAL_NOT_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LOGICAL_OR_EXPRESSION;
@@ -59,21 +60,21 @@ import com.google.common.base.Predicates;
  */
 public class ContextPredicateProvider {
 
-	static class TypePredicate implements Predicate<IEObjectDescription> {
+	public static class TypePredicate implements Predicate<IEObjectDescription> {
 		public boolean apply(IEObjectDescription input) {
 			return TypesPackage.Literals.TYPE.isSuperTypeOf(input.getEClass())
 					&& !TypesPackage.Literals.TYPE_PARAMETER.isSuperTypeOf(input.getEClass());
 		}
 	}
 
-	static class FeaturedTypePredicate implements Predicate<IEObjectDescription> {
+	public static class FeaturedTypePredicate implements Predicate<IEObjectDescription> {
 		public boolean apply(IEObjectDescription input) {
 			return TypesPackage.Literals.TYPE.isSuperTypeOf(input.getEClass())
 					&& TypesPackage.Literals.DECLARATION.isSuperTypeOf(input.getEClass());
 		}
 	}
 
-	static class EventPredicate extends FeaturedTypePredicate {
+	public static class EventPredicate extends FeaturedTypePredicate {
 		@Override
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
@@ -91,7 +92,7 @@ public class ContextPredicateProvider {
 		}
 	}
 
-	static class VariablePredicate extends FeaturedTypePredicate {
+	public static class VariablePredicate extends FeaturedTypePredicate {
 		@Override
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
@@ -101,7 +102,7 @@ public class ContextPredicateProvider {
 
 	};
 
-	static class VariableOperationPredicate extends FeaturedTypePredicate {
+	public static class VariableOperationPredicate extends FeaturedTypePredicate {
 		@Override
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
@@ -111,19 +112,20 @@ public class ContextPredicateProvider {
 		}
 	}
 
-	static class VariableOperationEventEnumeratorPredicate extends FeaturedTypePredicate {
+	public static class VariableOperationEventEnumeratorPredicate extends FeaturedTypePredicate {
 		@Override
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
 				return true;
-			return (TypesPackage.Literals.PROPERTY.isSuperTypeOf(input.getEClass())
-					|| TypesPackage.Literals.OPERATION.isSuperTypeOf(input.getEClass())
-					|| TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass()) || TypesPackage.Literals.ENUMERATOR
-						.isSuperTypeOf(input.getEClass()));
+			return (TypesPackage.Literals.PROPERTY.isSuperTypeOf(input.getEClass()) //
+					|| TypesPackage.Literals.OPERATION.isSuperTypeOf(input.getEClass()) //
+					|| TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass()) //
+					|| TypesPackage.Literals.ENUMERATOR.isSuperTypeOf(input.getEClass()) //
+					|| TypesPackage.Literals.ENUMERATION_TYPE.isSuperTypeOf(input.getEClass()));
 		}
 	}
 
-	static class EmptyPredicate implements Predicate<IEObjectDescription> {
+	public static class EmptyPredicate implements Predicate<IEObjectDescription> {
 
 		public boolean apply(IEObjectDescription input) {
 			return true;
@@ -146,11 +148,11 @@ public class ContextPredicateProvider {
 		initMap();
 	}
 
-	private Pair<EClass, EReference> key(EClass eClass) {
+	protected Pair<EClass, EReference> key(EClass eClass) {
 		return Tuples.create(eClass, null);
 	}
 
-	private Pair<EClass, EReference> key(EClass eClass, EReference ref) {
+	protected Pair<EClass, EReference> key(EClass eClass, EReference ref) {
 		return Tuples.create(eClass, ref);
 	}
 
@@ -179,6 +181,8 @@ public class ContextPredicateProvider {
 		filter.put(key(LOCAL_REACTION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(TRANSITION_REACTION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(VARIABLE_DEFINITION, TYPED_ELEMENT__TYPE), TYPES);
+		filter.put(key(VARIABLE_DEFINITION, ELEMENT_REFERENCE_EXPRESSION__REFERENCE),
+				VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
 	}
 
 	public Predicate<IEObjectDescription> getPredicate(EClass clazz, EReference reference) {

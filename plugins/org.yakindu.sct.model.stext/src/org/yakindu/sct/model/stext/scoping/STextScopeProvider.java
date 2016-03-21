@@ -35,7 +35,6 @@ import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
-import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -66,7 +65,6 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
 		public ErrorHandlerDelegate(ErrorHandler<T> delegate) {
 			this.delegate = delegate;
-
 		}
 
 		public T handle(Object[] params, Throwable throwable) {
@@ -112,17 +110,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		IScope unnamedScope = getUnnamedTopLevelScope(context, reference);
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
 		unnamedScope = new FilteringScope(unnamedScope, predicate);
-		
-		// TODO: this might be a performance problem -> fix this in context of Add Support for Enumerations #165
-		IScope enumerations = new FilteringScope(getDelegate().getScope(context, reference),
-				new Predicate<IEObjectDescription>() {
-					@Override
-					public boolean apply(IEObjectDescription input) {
-						return input.getEClass() == TypesPackage.Literals.ENUMERATION_TYPE;
-					}
-				});
-		return new SimpleScope(Iterables.concat(namdScope.getAllElements(), unnamedScope.getAllElements(),
-				enumerations.getAllElements()));
+		return new SimpleScope(Iterables.concat(namdScope.getAllElements(), unnamedScope.getAllElements()));
 	}
 
 	public IScope scope_FeatureCall_feature(final FeatureCall context, EReference reference) {
@@ -150,11 +138,17 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			scope = addScopeForComplexType((ComplexType) element, scope, predicate);
 		}
 
+		// enumerators can be either within enum types or an type alias that refers to an enum type
 		if (element instanceof EnumerationType) {
-			return Scopes.scopeFor(((EnumerationType) element).getEnumerator(), scope);
-			// scope = new FilteringScope(scope, predicate);
+			return addScopeForEnumType((EnumerationType) element, scope, predicate);
 		}
-
+		if (element instanceof TypeAlias) {
+			Type originType = ((TypeAlias) element).getOriginType();
+			if (originType instanceof EnumerationType) {
+				return addScopeForEnumType((EnumerationType) originType, scope, predicate);
+			}
+		}
+		
 		if (element instanceof Declaration) {
 			Declaration decl = (Declaration) element;
 			if (decl.getType() instanceof ComplexType) {
@@ -167,6 +161,12 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			}
 		}
 		
+		return scope;
+	}
+
+	protected IScope addScopeForEnumType(EnumerationType element, IScope scope, final Predicate<IEObjectDescription> predicate) {
+		scope = Scopes.scopeFor((element).getEnumerator(), scope);
+		scope = new FilteringScope(scope, predicate);
 		return scope;
 	}
 

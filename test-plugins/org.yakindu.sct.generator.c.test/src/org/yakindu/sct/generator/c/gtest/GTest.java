@@ -19,8 +19,21 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface GTest {
-	
+
 	String sourceFile();
 	String program();
 	String model();
+
+	/**
+	 * If no test bundle provided, source files (cc and sgen) are expected to be
+	 * in the Junit test's bundle and the model file (sct) in
+	 * org.yakindu.sct.test.models.
+	 * 
+	 * If test bundle is provided, all test files (cc, sgen, sct) are exepcted
+	 * to be located in the test bundle. Also a project of the same name is
+	 * created in Junit workspace.
+	 * 
+	 */
+	String testBundle() default "";
+
 }

@@ -12,6 +12,15 @@
    <feature url="features/org.yakindu.sct.test_0.0.0.jar" id="org.yakindu.sct.test" version="0.0.0">
       <category name="YAKINDU SCT Test"/>
    </feature>
+   <feature url="features/org.yakindu.sct.generator.cpp_2.5.0.qualifier.jar" id="org.yakindu.sct.generator.cpp" version="2.5.0.qualifier">
+      <category name="YAKINDU SCT"/>
+   </feature>
+   <feature url="features/org.yakindu.sct.generator_2.5.0.qualifier.jar" id="org.yakindu.sct.generator" version="2.5.0.qualifier">
+      <category name="YAKINDU SCT"/>
+   </feature>
+   <feature url="features/org.yakindu.base_2.5.0.qualifier.jar" id="org.yakindu.base" version="2.5.0.qualifier">
+      <category name="YAKINDU BASE"/>
+   </feature>
    <category-def name="YAKINDU SCT" label="YAKINDU SCT">
       <description>
          YAKINDU Statechart Tools (SCT)
@@ -20,6 +29,11 @@
    <category-def name="YAKINDU SCT Test" label="YAKINDU SCT Test">
       <description>
          Tests of YAKINDU
+      </description>
+   </category-def>
+   <category-def name="YAKINDU BASE" label="YAKINDU BASE">
+      <description>
+         YAKINDU Base features
       </description>
    </category-def>
 </site>
