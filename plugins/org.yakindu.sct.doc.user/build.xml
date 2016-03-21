@@ -47,9 +47,12 @@
     <!-- Wikitext download configuration -->
     <property name="wikitext.zip.version" value="1.0.0.v20140518" />
     <property name="wikitext.zip.checksum"
-              value="f0f2fb383227cd926b2cdee2049b199639c39ffddc2ff5828d9eda995d8c4d864a5093567957b6e4f7febc968210073d34c8ceea26618737e467ecde0e0294a8" />
+              value="a4c9c3c4c6ff21dea10368b2085021088294b5fd7fc19e445d9670cbdb00390e4095fcccca29d6e58fc42d067af49ef86d6f03f7811d47cf212fe8e2418775b9" />
+    <!--
     <property name="wikitext.zip.src"
               value="http://www.eclipse.org/downloads/download.php?file=/mylyn/snapshots/nightly/docs/wikitext-standalone-latest.zip" />
+    -->
+    <property name="wikitext.zip.src" value="file://${basedir}/externals/wikitext.zip" />
     <property name="wikitext.zip.file" value="${lib.dir}/wikitext.zip" />
     <property name="wikitext.basename" value="wikitext-standalone" />
     <property name="wikitext.version" value="2.8.0-SNAPSHOT" />
@@ -139,10 +142,6 @@
                  skipexisting="true"
                  usetimestamp="true"
                  verbose="true" />
-
-            <!-- Unfortunately there's currently no versioned release. Until there is one (if ever)
-                 checking the checksum is disabled. -->
-            <!--
             <fail message="Checksum mismatch for ${wikitext.zip.file}. Please delete it and rerun ant to redownload.">
                 <condition>
                     <not>
@@ -153,8 +152,6 @@
                     </not>
                 </condition>
             </fail>
-            -->
-
             <unzip dest="${lib.dir}" src="${wikitext.zip.file}" />
         </sequential>
     </target>
