@@ -104,10 +104,10 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
- * s Several validations for nonsensical expressions.
+ * Several validations for nonsensical expressions.
  * 
  * @author muehlbrandt
- * @auhor muelder
+ * @author muelder
  * 
  */
 @ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class })
@@ -812,7 +812,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (!isResponsible)
 			return false;
 		Statechart statechart = getStatechart(eObject);
-		if (!domainID.equals(statechart.getDomainID())) {
+		if (statechart != null && !domainID.equals(statechart.getDomainID())) {
 			return false;
 		}
 		return true;
