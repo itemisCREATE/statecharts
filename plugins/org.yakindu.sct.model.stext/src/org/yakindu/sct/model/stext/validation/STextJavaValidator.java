@@ -104,10 +104,10 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
- * s Several validations for nonsensical expressions.
+ * Several validations for nonsensical expressions.
  * 
  * @author muehlbrandt
- * @auhor muelder
+ * @author muelder
  * 
  */
 @ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class })
