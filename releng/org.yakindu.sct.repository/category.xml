@@ -12,10 +12,10 @@
    <feature url="features/org.yakindu.sct.generator.cpp_0.0.0.jar" id="org.yakindu.sct.generator.cpp" version="0.0.0">
       <category name="YAKINDU SCT"/>
    </feature>
-   <feature url="features/org.yakindu.base_2.5.0.qualifier.jar" id="org.yakindu.base" version="2.5.0.qualifier">
+   <feature url="features/org.yakindu.base_0.0.0.jar" id="org.yakindu.base" version="0.0.0">
       <category name="YAKINDU BASE"/>
    </feature>
-   <feature url="features/org.yakindu.sct.generator_2.5.0.qualifier.jar" id="org.yakindu.sct.generator" version="2.5.0.qualifier">
+   <feature url="features/org.yakindu.sct.generator_0.0.0.jar" id="org.yakindu.sct.generator" version="0.0.0">
       <category name="YAKINDU SCT"/>
    </feature>
    <category-def name="YAKINDU SCT" label="YAKINDU SCT">
