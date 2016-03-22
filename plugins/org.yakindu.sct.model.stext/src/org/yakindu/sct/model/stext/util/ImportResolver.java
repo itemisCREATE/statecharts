@@ -112,7 +112,7 @@ public class ImportResolver {
 		}
 	}
 
-	private ResourceSet buildResourceSet(Resource contextResource) {
+	protected ResourceSet buildResourceSet(Resource contextResource) {
 		final ResourceSet rset = new ResourceSetImpl();
 		IProject project = WorkspaceSynchronizer.getFile(contextResource).getProject();
 		try {
