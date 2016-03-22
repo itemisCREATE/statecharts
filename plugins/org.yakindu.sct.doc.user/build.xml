@@ -52,7 +52,7 @@
     <property name="wikitext.zip.src"
               value="http://www.eclipse.org/downloads/download.php?file=/mylyn/snapshots/nightly/docs/wikitext-standalone-latest.zip" />
     -->
-    <property name="wikitext.zip.src" value="file://${basedir}/externals/wikitext.zip" />
+    <property name="wikitext.zip.src" value="file:///${basedir}/externals/wikitext.zip" />
     <property name="wikitext.zip.file" value="${lib.dir}/wikitext.zip" />
     <property name="wikitext.basename" value="wikitext-standalone" />
     <property name="wikitext.version" value="2.8.0-SNAPSHOT" />
