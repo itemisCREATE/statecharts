@@ -1,7 +1,4 @@
 .ant-targets-build.xml
-docbook-xsl/
-docbook-xsl.distribution/
-docbook-xml.distribution/
 examples/
 help/
 html/

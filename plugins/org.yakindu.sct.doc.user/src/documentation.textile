@@ -36,7 +36,7 @@ Unpack the software distribution file. Use the file explorer to open the directo
 
 !{width:80.0%;height:auto;}images/windows7_install_010_eclipse_extract_1.png(Unpacking the downloaded file on Windows [1])!
 
-p=. Figure: Unpacking the downloaded file on Windows &#91;1]
+p=. Unpacking the downloaded file on Windows &#91;1]
 
 Choose a directory for YAKINDU Statechart Tools (YAKINDU SCT). The example below assumes you want to install the software in the _C:\Program Files\YAKINDU_ directory.
 
@@ -44,7 +44,7 @@ Depending on your permissions, you might not be able to create a directory and i
 
 !{width:80.0%;height:auto;}images/windows7_install_020_eclipse_extract_2.png(Unpacking the downloaded file on Windows [2])!
 
-p=. Figure: Unpacking the downloaded file on Windows &#91;2]
+p=. Unpacking the downloaded file on Windows &#91;2]
 
 Click on _Extract_ to start the extraction process. With Window's built-in unpacker, this will take surprisingly much time. Alternatively, you can use a 3rd-party unpacker like "7-Zip":http://www.7-zip.org/. Saves you a lot of time!
 
@@ -52,13 +52,13 @@ After unpacking, you will find a folder _yakindu-sct_ in your installation direc
 
 !{width:80.0%;height:auto;}images/windows7_install_030_eclipse_folder.png(The extracted "yakindu-sct" folder)!
 
-p=. Figure: The extracted _yakindu-sct_ folder
+p=. The extracted _yakindu-sct_ folder
 
 The contents of the _yakindu-sct_ folder looks like this:
 
 !{width:80.0%;height:auto;}images/windows7_install_040_eclipse_contents.png(Contents of the extracted "yakindu-sct" folder)!
 
-p=. Figure: Contents of the extracted _yakindu-sct_ folder
+p=. Contents of the extracted _yakindu-sct_ folder
 
 There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
 
@@ -72,7 +72,7 @@ Depending on the Windows settings and your permissions, you might get the follow
 
 !{width:80.0%;height:auto;}images/windows7_install_045_security_warning.png(Windows security warning)!
 
-p=. Figure: Windows security warning
+p=. Windows security warning
 
 Uncheck the _Always ask before opening this file_ option. Click _Run_ to continue starting the application. Subsequently starting YAKINDU Statechart Tools will not show this security warning again.
 
@@ -80,7 +80,7 @@ While YAKINDU Statechart Tools is starting up, it is showing a splash screen:
 
 !{width:80.0%;height:auto;}images/windows7_install_050_eclipse_splash.png(YAKINDU Statechart Tools starting up and showing a splash screen)!
 
-p=. Figure: YAKINDU Statechart Tools starting up and showing a splash screen
+p=. YAKINDU Statechart Tools starting up and showing a splash screen
 
 The software needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, the _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please select a new and empty one.
 
@@ -88,7 +88,7 @@ In the example below, we chose the _C:\Users\joedoe\workspace_ directory as our 
 
 !{width:80.0%;height:auto;}images/windows7_install_060_eclipse_workspace_dialog.png(Selecting a workspace)!
 
-p=. Figure: Selecting a workspace
+p=. Selecting a workspace
 
 Click on the _OK_ button to proceed.
 
@@ -96,13 +96,13 @@ On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
 
 !{width:80.0%;height:auto;}images/windows7_install_070_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
 
-p=. Figure: YAKINDU Statechart Tools presenting the "Welcome" window
+p=. YAKINDU Statechart Tools presenting the "Welcome" window
 
 You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
 
 !{width:80.0%;height:auto;}images/windows7_install_080_eclipse_workbench.png(The YAKINDU Statechart Tools workbench)!
 
-p=. Figure: The YAKINDU Statechart Tools workbench
+p=. The YAKINDU Statechart Tools workbench
 
 This is your working environment now. Congratulations, you have just installed YAKINDU Statechart Tools with Eclipse!
 
@@ -122,7 +122,7 @@ Move the unpacked application bundle to your _Applications_ folder. Alternativel
 
 !images/macosx_install_010_applications.png(The YAKINDU Statecharts Tools application in the "Applications" directory)!
 
-p=. Figure: The YAKINDU Statecharts Tools application in the "Applications" directory
+p=. The YAKINDU Statecharts Tools application in the "Applications" directory
 
 There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
 
@@ -136,7 +136,7 @@ Upon the first start, Mac OS X will verify the application and show you the fo
 
 !images/macosx_install_020_security_warning.png(Mac OS X warning)!
 
-p=. Figure: Mac OS X warning
+p=. Mac OS X warning
 
 Click _Open_ to continue starting the application. Subsequently starting YAKINDU Statechart Tools will not show that security warning again.
 
@@ -144,7 +144,7 @@ While YAKINDU Statechart Tools is starting up, it is showing a splash screen:
 
 !{width:80.0%;height:auto;}images/macosx_install_050_eclipse_splash.png(YAKINDU Statechart Tools starting up and showing a splash screen)!
 
-p=. Figure: YAKINDU Statechart Tools starting up and showing a splash screen
+p=. YAKINDU Statechart Tools starting up and showing a splash screen
 
 The software needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, the _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please select a new and empty one.
 
@@ -152,7 +152,7 @@ In the example below, we chose the _/Users/joedoe/workspace_ directory as our wo
 
 !{width:80.0%;height:auto;}images/macosx_install_060_eclipse_workspace_dialog.png(Selecting a workspace)!
 
-p=. Figure: Selecting a workspace
+p=. Selecting a workspace
 
 Click on the _OK_ button to proceed.
 
@@ -160,13 +160,13 @@ On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
 
 !{width:80.0%;height:auto;}images/macosx_install_070_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
 
-p=. Figure: YAKINDU Statechart Tools presenting the "Welcome" window
+p=. YAKINDU Statechart Tools presenting the "Welcome" window
 
 You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
 
 !{width:80.0%;height:auto;}images/macosx_install_080_eclipse_workbench.png(The YAKINDU Statechart Tools workbench)!
 
-p=. Figure: The YAKINDU Statechart Tools workbench
+p=. The YAKINDU Statechart Tools workbench
 
 This is your working environment now. Congratulations, you have just installed YAKINDU Statechart Tools with Eclipse!
 
@@ -194,13 +194,13 @@ This will create a folder _yakindu-sct_ in your installation directory, i. e. _
 
 !{width:80.0%;height:auto;}images/linux_install_010_eclipse_folder.png(The extracted "yakindu-sct" folder)!
 
-p=. Figure: The extracted "yakindu-sct" folder
+p=. The extracted "yakindu-sct" folder
 
 The contents of the _yakindu-sct_ folder looks like this:
 
 !{width:80.0%;height:auto;}images/linux_install_020_eclipse_contents.png(Contents of the extracted "yakindu-sct" folder)!
 
-p=. Figure: Contents of the extracted "yakindu-sct" folder
+p=. Contents of the extracted "yakindu-sct" folder
 
 There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
 
@@ -226,7 +226,7 @@ While YAKINDU Statechart Tools is starting up, it is showing a splash screen:
 
 !{width:80.0%;height:auto;}images/linux_install_030_eclipse_splash.png(YAKINDU Statechart Tools starting up and showing a splash screen)!
 
-p=. Figure: YAKINDU Statechart Tools starting up and showing a splash screen
+p=. YAKINDU Statechart Tools starting up and showing a splash screen
 
 The software needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, the _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please select a new and empty one.
 
@@ -234,7 +234,7 @@ In the example below, we chose the _/my/workspace_ directory as our workspace. W
 
 !{width:80.0%;height:auto;}images/linux_install_040_eclipse_workspace_dialog.png(Selecting a workspace)!
 
-p=. Figure: Selecting a workspace
+p=. Selecting a workspace
 
 Click on the _OK_ button to proceed.
 
@@ -242,13 +242,13 @@ On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
 
 !{width:80.0%;height:auto;}images/linux_install_050_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
 
-p=. Figure: YAKINDU Statechart Tools presenting the "Welcome" window
+p=. YAKINDU Statechart Tools presenting the "Welcome" window
 
 You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
 
 !{width:80.0%;height:auto;}images/linux_install_060_eclipse_workbench.png(The YAKINDU Statechart Tools workbench)!
 
-p=. Figure: The YAKINDU Statechart Tools workbench
+p=. The YAKINDU Statechart Tools workbench
 
 This is your working environment now. Congratulations, you have just started YAKINDU Statechart Tools!
 
@@ -262,13 +262,13 @@ In the the _Help_ menu, select the _Install New Software_ menu item:
 
 !{width:80.0%;height:auto;}images/eclipse_install_010_eclipse_menu_install_new_software.png(Selecting "Help → Install New Software" in the main menu)!
 
-p=. Figure: Selecting "Help → Install New Software" in the main menu
+p=. Selecting "Help → Install New Software" in the main menu
 
 The _Install_ wizard opens:
 
 !{width:80.0%;height:auto;}images/eclipse_install_020_eclipse_install_wizard.png(The "Install" wizard)!
 
-p=. Figure: The "Install" wizard
+p=. The "Install" wizard
 
 Click on the _Add..._ button near the upper right corner of the wizard.
 
@@ -289,7 +289,7 @@ Enter some text into the _Name_ field. This text is abitrary in principle, but y
 
 !{width:80.0%;height:auto;}images/eclipse_install_030_eclipse_add_repository.png(Adding a software repository)!
 
-p=. Figure: Adding a software repository
+p=. Adding a software repository
 
 After entering name and location of the update repository, click _OK_.
 
@@ -297,7 +297,7 @@ Eclipse establishes a network connection to the update repository, asks it for a
 
 !{width:80.0%;height:auto;}images/eclipse_install_040_eclipse_software_items.png(Selecting YAKINDU Statechart Tools software items)!
 
-p=. Figure: Selecting YAKINDU Statechart Tools software items
+p=. Selecting YAKINDU Statechart Tools software items
 
 Please check at least _Xtext Integration Utilities_ and – no surprise – _YAKINDU SCT_. (You can also install the respective source code items. However, unless you want to have a look at that source code or even want to modify it, you don't need them.)
 
@@ -307,7 +307,7 @@ Eclipse tries to integrate the new software with the software that is already in
 
 !{width:80.0%;height:auto;}images/eclipse_install_050_eclipse_trouble.png(Install remediation page)!
 
-p=. Figure: Install remediation page
+p=. Install remediation page
 
 Select the most appropriate solution, then click _Next &gt;_.
 
@@ -315,7 +315,7 @@ The wizard shows the software to be installed and gives you the opportunity to r
 
 !{width:80.0%;height:auto;}images/eclipse_install_060_eclipse_review.png(Reviewing the items to be installed)!
 
-p=. Figure: Reviewing the items to be installed
+p=. Reviewing the items to be installed
 
 Click _Next &gt;_.
 
@@ -323,7 +323,7 @@ The wizard asks you to review and accept the terms of the new software's license
 
 !{width:80.0%;height:auto;}images/eclipse_install_070_eclipse_licenses.png(Accepting the new software's license agreements)!
 
-p=. Figure: Accepting the new software's license agreements
+p=. Accepting the new software's license agreements
 
 Select the radio button labelled _I accept the terms of the license agreements_ (if you do), then click _Finish_.
 
@@ -331,19 +331,19 @@ Eclipse starts to download the software and installs it on your computer. This m
 
 !{width:80.0%;height:auto;}images/eclipse_install_080_eclipse_installation.png(Installing software in progress ...)!
 
-p=. Figure: Installing software in progress ...
+p=. Installing software in progress ...
 
 If the installation was completed successfully, Eclipse needs a restart in order to have the changes take effect. A dialog asks whether you want to restart Eclipse right now or later:
 
 !{width:80.0%;height:auto;}images/eclipse_install_090_eclipse_restart.png(Restarting Eclipse after software installation)!
 
-p=. Figure: Restarting Eclipse after software installation
+p=. Restarting Eclipse after software installation
 
 After the restart, Eclipse displays its _Welcome_ window, now also featuring YAKINDU Statechart Tools:
 
 !{width:80.0%;height:auto;}images/eclipse_install_100_eclipse_sct_help.png(Eclipse presenting the "Welcome" window)!
 
-p=. Figure: Eclipse presenting the "Welcome" window
+p=. Eclipse presenting the "Welcome" window
 
 h2(#updating-yakindu-statechart-tools). Updating YAKINDU Statechart Tools
 
@@ -351,7 +351,7 @@ To check whether a new YAKINDU Statechart Tools release is available and to inst
 
 !{width:80.0%;height:auto;}images/eclipse_update_010_eclipse_menu_check_for_updates.png(Selecting "Help → Check for Updates" in the main menu)!
 
-p=. Figure: Selecting "Help → Check for Updates" in the main menu
+p=. Selecting "Help → Check for Updates" in the main menu
 
 If Eclipse finds any software items to be updated – not just YAKINDU Statechart Tools –, it will guide you through the process of updating them. Generally Eclipse has to be restarted afterwards to have any changes take effect.
 
@@ -363,7 +363,7 @@ Go to the _Install/Update → Automatic Updates_ section. Here you can configure
 
 !{width:80.0%;height:auto;}images/eclipse_update_020_eclipse_automatic_updates.png(Configuring automatic update)!
 
-p=. Figure: Configuring automatic update
+p=. Configuring automatic update
 
 h1(#yakindu-statechart-tools-user-guide). YAKINDU Statechart Tools User Guide
 
@@ -381,7 +381,7 @@ The following graph shows these features and their relation to each other:
 
 !{width:80.0%;height:auto;}images/YAKINDU_features.png(Features of YAKINDU Statechart Tools)!
 
-p=. Figure: Features of YAKINDU Statechart Tools
+p=. Features of YAKINDU Statechart Tools
 
 h3(#who-is-behind-yakindu-statechart-tools). Who is behind YAKINDU Statechart Tools?
 
@@ -461,13 +461,13 @@ The first step is to create a new Eclipse project that can serve as a container 
 
 !{width:80.0%;height:auto;}images/light_switch_010_menu_file_new_project.png(Selecting "File → New → Project..." in the main menu)!
 
-p=. Figure: Selecting "File → New → Project..." in the main menu
+p=. Selecting "File → New → Project..." in the main menu
 
 The _New Project_ wizard opens, showing a couple of different project types structured in various folders.
 
 !{width:80.0%;height:auto;}images/light_switch_020_wizard_new_project_general_project.png(The "New Project" wizard)!
 
-p=. Figure: The "New Project" wizard
+p=. The "New Project" wizard
 
 Select _General → Project_ and click _Next &gt;_.
 
@@ -475,7 +475,7 @@ The wizard shows its next page:
 
 !{width:80.0%;height:auto;}images/light_switch_040_wizard_new_project.png("Specifying project name and location")!
 
-p=. Figure: "Specifying project name and location"
+p=. "Specifying project name and location"
 
 Specify a meaningful _Project name_, e. g. *LightSwitch*, and optionally select a _Location_ to create the project in.
 
@@ -485,7 +485,7 @@ Eclipse creates the new project:
 
 !{width:80.0%;height:auto;}images/light_switch_060_project_created.png(Project "LightSwitch" created)!
 
-p=. Figure: Project "LightSwitch" created
+p=. Project "LightSwitch" created
 
 h4(#creating-a-folder-for-the-model). Creating a folder for the model
 
@@ -495,13 +495,13 @@ Right-click on the project's root, i. e. on *LightSwitch*, then select _New →
 
 !{width:80.0%;height:auto;}images/light_switch_100_menu_new_folder.png(Selecting "New → Folder" in the context menu)!
 
-p=. Figure: Selecting "New → Folder" in the context menu
+p=. Selecting "New → Folder" in the context menu
 
 The _New Folder_ wizard opens:
 
 !{width:80.0%;height:auto;}images/light_switch_110_wizard_new_folder.png(The "New Folder" wizard)!
 
-p=. Figure: The "New Folder" wizard
+p=. The "New Folder" wizard
 
 Give the model folder a reasonable name, e. g. *model*, and type it into the _Folder Name_ text field. Then click _Finish_.
 
@@ -515,19 +515,19 @@ Now we are going to create an empty statechart model in the _model_ folder. Righ
 
 !{width:80.0%;height:auto;}images/light_switch_120_menu_new_other.png(Selecting "New → Other" in the context menu)!
 
-p=. Figure: Selecting "New → Other" in the context menu
+p=. Selecting "New → Other" in the context menu
 
 The _New_ wizard opens. Select _YAKINDU SCT → Statechart model_
 
 !{width:80.0%;height:auto;}images/light_switch_130_wizard_new.png(Selecting "YAKINDU SCT → Statechart model")!
 
-p=. Figure: Selecting "YAKINDU SCT → Statechart model"
+p=. Selecting "YAKINDU SCT → Statechart model"
 
 Click _Next &gt;_. The wizard shows the _New YAKINDU Statechart_ dialog:
 
 !{width:80.0%;height:auto;}images/light_switch_140_wizard_new_yakindu_statechart.png(The "New YAKINDU Statechart" dialog)!
 
-p=. Figure: The "New YAKINDU Statechart" dialog
+p=. The "New YAKINDU Statechart" dialog
 
 The dialog asks you for the project, the directory, and the name of the model file to be created. Eclipse project and directory should be correctly preset already. In our case the corresponding text field contains *LightSwitch/model* which means the directory named *model* in the *LightSwitch* project. You can change that if you wish, but most likely you won't.
 
@@ -539,9 +539,11 @@ Since there's a dedicated perspective for statechart models, Eclipse asks you wh
 
 !{width:80.0%;height:auto;}images/light_switch_150_dialog_confirm_perspective_switch.png(Dialog "Confirm Perspective Switch")!
 
-p=. Figure: Dialog "Confirm Perspective Switch"
+p=. Dialog "Confirm Perspective Switch"
 
 Please answer the question regarding switching to the _YAKINDU Modeling_ perspective by clicking on the _Yes_ button. The _YAKINDU Modeling_ perspective has a graphical editor for statechart models, and you will need it to create and modify statecharts. On the other hand your answer really doesn't matter that much, because you can switch perspectives at any time. If you check _Do not offer to switch perspective in the future_ before clicking _Yes_, Eclipse will never ask this question again, at least regarding the _YAKINDU Modeling_ perspective.
+
+bq. *Please note:* If the _Confirm Perspective Switch_ dialog does not appear as described above you probably have already confirmed _Do not offer to switch perspective in the future_ once before.
 
 h5(#the-initial-model). The initial model
 
@@ -550,7 +552,7 @@ An empty statechart is created and displayed in the *statechart editor* in the m
 p(#light_switch_220_statechart_editor). 
 !{width:80.0%;height:auto;}images/light_switch_220_statechart_editor.png(The statechart editor)!
 
-p=. Figure: The statechart editor
+p=. The statechart editor
 
 Actually the new statechart isn't really empty. It already contains the initial state (a small filled black circle), a "normal" state, and a transition leading from the former to the latter.
 
@@ -562,7 +564,7 @@ The "normal" state, however, has a small filled red circle containing a white �
 
 ###. FIXME: Bring documentation up to date!
 
-bq. *Note:* Since the current version of the statechart editor gives that state a proper name ("StateA"), the error marker is no longer present in a new model. So the following description is somewhat out of date. This will be fixed in a future version of this documentation. Until then, please follow the subsequent text nevertheless, because you will learn something important about statechart validation.
+bq. *Please note:* Since the current version of the statechart editor gives that state a proper name ("StateA"), the error marker is no longer present in a new model. So the following description is somewhat out of date. This will be fixed in a future version of this documentation. Until then, please follow the subsequent text nevertheless, because you will learn something important about statechart validation.
 
 h5(#error-markers-in-the-project-explorer). Error markers in the project explorer
 
@@ -576,7 +578,7 @@ Hovering with the mouse over the error marker in the statechart editor reveals w
 
 !{width:80.0%;height:auto;}images/light_switch_210_error_marker_and_popup.png(An error marker and a popup window explaining it)!
 
-p=. Figure: An error marker and a popup window explaining it
+p=. An error marker and a popup window explaining it
 
 h5(#error-markers-in-the-problems-view). Error markers in the "problems" view
 
@@ -632,7 +634,7 @@ The event trigger _operate_ is flagged as an error. The reason is that an event 
 
 !{width:80.0%;height:auto;}images/light_switch_260_statechart_editor_create_definitions_01.png(Creating definitions [1])!
 
-p=. Figure: Creating definitions &#91;1]
+p=. Creating definitions &#91;1]
 
 Double-click into the *definition section* on the left-hand side of the statechart editor. The section becomes an editable text field.
 
@@ -642,11 +644,13 @@ bc. internal:
     event operate
 
 
+The keyword @internal@ makes the following definition of the _operate_ event belong to the internal scope. The latter is explained in section "&quot;Internal scope&quot;":#internal-scope.
+
 Click anywhere outside of the text field, which terminates editing the definition section. The statechart editor digests the definition, recognizes the definition of the _operate_ event, and validates the model as being okay:
 
 !{width:80.0%;height:auto;}images/light_switch_260_statechart_editor_create_definitions_02.png(Creating definitions [2])!
 
-p=. Figure: Creating definitions &#91;2]
+p=. Creating definitions &#91;2]
 
 In its current state the model would not allow to turn the light switch off again, which is somewhat unsatisfactory. However, operating the light switch while it is on should turn it off. Let's model this by adding another transition. It should lead from the source state *On* to the target state *Off*.
 
@@ -663,26 +667,28 @@ Start the simulation by right-clicking on the _LightSwitch.sct_ file in the proj
 
 !{width:80.0%;height:auto;}images/light_switch_300_statechart_simulator_run_as_statechart_simulation.png(Selecting "Run As → Statechart Simulation" in the context menu)!
 
-p=. Figure: Selecting "Run As → Statechart Simulation" in the context menu
+p=. Selecting "Run As → Statechart Simulation" in the context menu
 
 The perspective changes from _SC Modeling_ to _SC Simulation_. This perspective defines two additional views:
 
 * The _Debug_ view at the top shows all running statechart instances and allows to select one of them. YAKINDU Statechart Tools allow multiple executions of the same statechart as well as parallel executions of different statecharts at the same time.
-* The _Simulation_ view on the right-hand side is used to raise events and to inspect and modify variables.
+* The _Simulation_ view on the right-hand side is used to raise events and to inspect and modify variables. Depending on your screen resolution and font size settings, you might not be able to spot the _Simulation_ view by its name, because the tab containing it is quite narrow and might not provide enough space for displaying the title. Hover over tabs to reveal their respective titles in a popup window. Figure "&quot;Light switch simulation in &quot;off&quot; state&quot;":#fig_light_switch_simulation_in_off_state is demonstrating this: The user has hovered the mouse pointer over a tab that is just displaying the starting letter 'S' of its title. However, a popup window right besides the pointer is showing the tab's full title "Simulation View".
 
 Not surprisingly, the simulation starts at the initial state and then transitions to the *Off* state immediately. The latter becomes the active state now. It is highlighted by a red background:
 
+p(#fig_light_switch_simulation_in_off_state). 
+
 !{width:80.0%;height:auto;}images/light_switch_310_statechart_simulator_state_off.png(Light switch simulation in "off" state)!
 
-p=. Figure: Light switch simulation in "off" state
+p=. Light switch simulation in "off" state
 
 Now that the light switch is off, let's turn the lights on by operating the switch. In the simulation, we will have to raise the _operate_ event. How can we do this?
 
 In the _Simulation_ view at the right-hand side of the Eclipse workbench, click on the _internal_ entry's show/hide symbol to display its contents.
 
-!{width:80.0%;height:auto;}images/light_switch_320_statechart_simulator_state_events.png(Displaying event names in the statechart simulator)!
+!{width:80.0%;height:auto;}images/light_switch_320_statechart_simulator_state_events.png(Displaying event names in the statechart simulator's _Simulation_ view)!
 
-p=. Figure: Displaying event names in the statechart simulator
+p=. Displaying event names in the statechart simulator's _Simulation_ view
 
 The _operate_ event is shown. Click on it to raise the event, i. e. to operate the light switch.
 
@@ -690,7 +696,7 @@ The transition arc leading from the *Off* state to the *On* state flashes briefl
 
 !{width:80.0%;height:auto;}images/light_switch_330_statechart_simulator_state_on.png(Light switch simulation in "on" state)!
 
-p=. Figure: Light switch simulation in "on" state
+p=. Light switch simulation in "on" state
 
 Click on _operate_ again, and the active state changes back to *Off*. Click on _operate_ several times and enjoy watching the state machine's behaviour.
 
@@ -713,7 +719,7 @@ The complete statechart model is shown below:
 
 !{width:80.0%;height:auto;}images/callhandling_model.png(The CallHandling statechart model)!
 
-p=. Figure: The CallHandling statechart model
+p=. The CallHandling statechart model
 
 In order to eventually obtain the *CallHandling* example in the form of executable code, we have to create the model in the statechart editor first, followed by creating a suitable generator model, followed by executing the code generator to create the source code we need.
 
@@ -750,7 +756,7 @@ If everything went well, any error markers in the model are gone. Your model sho
 
 !{width:80.0%;height:auto;}images/callhandling_example_final.png(The CallHandling statechart modeled in the statechart editor)!
 
-p=. Figure: The CallHandling statechart modeled in the statechart editor
+p=. The CallHandling statechart modeled in the statechart editor
 
 h4(#creating-a-generator-model). Creating a generator model
 
@@ -760,13 +766,13 @@ The first step to code generation is to create a new SGen model. Right-click on 
 
 !{width:80.0%;height:auto;}images/callhandling_200_generation_create_generator_model.png(Selecting "New → Code Generator Model" in the context menu)!
 
-p=. Figure: Selecting "New → Code Generator Model" in the context menu
+p=. Selecting "New → Code Generator Model" in the context menu
 
 The _YAKINDU Generator Model_ wizard opens. Change the _File name_ to *CallHandling.sgen*, then click _Next &gt;_.
 
 !{width:80.0%;height:auto;}images/callhandling_210_generation_new_sgen_model_1.png(Selecting a filename for the generator model)!
 
-p=. Figure: Selecting a filename for the generator model
+p=. Selecting a filename for the generator model
 
 From the _Generator_ drop-down menu at the top, select _YAKINDU SCT Java Code Generator_.
 
@@ -774,13 +780,13 @@ In the statechart tree beneath that menu, check the *CallHandling.sct* model, th
 
 !{width:80.0%;height:auto;}images/callhandling_220_generation_new_sgen_model_2.png(Selecting generator type and statechart model)!
 
-p=. Figure: Selecting generator type and statechart model
+p=. Selecting generator type and statechart model
 
 Now the wizard creates the default SGen model for Java code generation and opens it in an SGen editor. The project explorer on the left-hand side shows the new model file _CallHandling.sgen_.
 
 !{width:80.0%;height:auto;}images/callhandling_230_generation_new_sgen_model_3.png(The generator model)!
 
-p=. Figure: The generator model
+p=. The generator model
 
 Here's the generator model once again as plain text:
 
@@ -828,15 +834,15 @@ As you can see in the project explorer, the folder _src-gen_ has been created an
 
 !{width:80.0%;height:auto;}images/callhandling_240_generation_timer_service.png(Adding the timer service feature)!
 
-p=. Figure: Adding the timer service feature
+p=. Adding the timer service feature
 
 Add the generated artifacts to the Java build path by right-clicking on the _src-gen_ folder and selecting _Build Path → Use as source folder_ in the context menu.
 
 !{width:80.0%;height:auto;}images/callhandling_250_generation_use_as_source_folder.png(Declaring "src-gen" as a source folder)!
 
-p=. Figure: Declaring "src-gen" as a source folder
+p=. Declaring "src-gen" as a source folder
 
-If you want to execute your generator model manually, select _Generate Statechart Artifacts_ from the @.sgen@ file's context menu in the project explorer.
+If you want to execute your generator model manually, select _Generate Code Artifacts_ from the @.sgen@ file's context menu in the project explorer.
 
 h4(#integration-with-client-code). Integration with client code
 
@@ -949,7 +955,7 @@ As already mentioned, the YAKINDU statecharts are self-contained. They are organ
 
 !{width:80.0%;height:auto;}images/parallelRegions.jpg(Parallel regions)!
 
-p=. Figure: Parallel regions
+p=. Parallel regions
 
 h4(#state). State
 
@@ -974,7 +980,7 @@ An entry is depicted as a filled circle, see "figure &quot;Entry, exit, and fina
 p(#fig_state_entry_exit_final_explained). 
 !{width:80.0%;height:auto;}images/state_entry_exit_final_explained.png(Entry, exit, and final state)!
 
-p=. Figure: Entry, exit, and final state
+p=. Entry, exit, and final state
 
 h5(#default-entry). Default entry and initial state
 
@@ -999,7 +1005,7 @@ The sample statechart in "Figure &quot;Entry state&quot;":#fig_state_entry has a
 p(#fig_state_entry). 
 !{width:80.0%;height:auto;}images/state_entry.png(Entry state)!
 
-p=. Figure: Entry state
+p=. Entry state
 
 h4(#exit). Exit
 
@@ -1038,7 +1044,7 @@ Alternatively, _Process_ could have been modeled with two different error exit s
 p(#fig_state_entry_exit). 
 !{width:80.0%;height:auto;}images/state_entry_exit.png(Entries and exits)!
 
-p=. Figure: Entries and exits
+p=. Entries and exits
 
 h4(#final). Final state
 
@@ -1078,7 +1084,7 @@ p(#fig_state_synchronization).
 
 !{width:80.0%;height:auto;}images/state_synchronization.png(Synchronization state)!
 
-p=. Figure: Synchronization state
+p=. Synchronization state
 
 For a synchronization to actually join the incoming transitions and execute the outgoing one, all of the following conditions must be met:
 
@@ -1104,7 +1110,7 @@ In the context of state machines orthogonal states are states that are independe
 
 !{width:80.0%;height:auto;}images/orthogonalState_example.jpg(Orthogonal states)!
 
-p=. Figure: Orthogonal states
+p=. Orthogonal states
 
 h4(#shallow-history). Shallow history
 
@@ -1114,17 +1120,17 @@ The following example, showing the answering of a questionaire, explains this:
 
 !{width:80.0%;height:auto;}images/shallowHistory01.jpg(Shallow history [1])!
 
-p=. Figure: Shallow history &#91;1]
+p=. Shallow history &#91;1]
 
 Particularly interesting in this statechart are the events @checkProgress@ and @goon@. The event @checkProgress@ jumps back to the @init@ state while assigning the current progress count to the variable @temp@. The event @goon@ jumps to the shallow history state that was placed inside the composite state.
 
 !{width:80.0%;height:auto;}images/shallowHistory02.jpg(Shallow history [2])!
 
-p=. Figure: Shallow history &#91;2]
+p=. Shallow history &#91;2]
 
 !{width:80.0%;height:auto;}images/shallowHistory03.jpg(Shallow history [3])!
 
-p=. Figure: Shallow history &#91;3]
+p=. Shallow history &#91;3]
 
 When the @goon@ event is triggered, the most recent active state inside of the composite state @answeringQuestions@ is activated again.
 
@@ -1585,19 +1591,19 @@ When using composite states, a statechart model often becomes too big to give a 
 
 !{width:80.0%;height:auto;}images/extract_subdiagram.png(Composite state)!
 
-p=. Figure: Composite state
+p=. Composite state
 
 When the _Extract Subdiagram_ refactoring is executed on a composite state, all containing regions are extracted into a separate diagram. A small decorator in the lower-right corner of the state indicates the existence of such a subdiagram. When you hover with the mouse cursor over this decorator, you'll see a small preview of the subdiagram's content. The refactoring also creates the required _entry_ and _exit_ points for you.
 
 !{width:80.0%;height:auto;}images/extract_subdiagram2.png(Subdiagram popup window)!
 
-p=. Figure: Subdiagram popup window
+p=. Subdiagram popup window
 
 A click on the decorator opens the subdiagram in a separate editor tab. The breadcrumb at the top allows easy navigation throughout the hierachy levels.
 
 !{width:80.0%;height:auto;}images/extract_subdiagram3.png(Subdiagram editor)!
 
-p=. Figure: Subdiagram editor
+p=. Subdiagram editor
 
 h3(#refactorings). Refactorings
 
@@ -1619,13 +1625,13 @@ In the statechart editor, right-click on the main region. The context menu appea
 
 !{width:80.0%;height:auto;}images/exporting_statechart_as_image_010_save_as_menu_item.png(Selecting the "Save As Image File..." menu item)!
 
-p=. Figure: Selecting the "Save As Image File..." menu item
+p=. Selecting the "Save As Image File..." menu item
 
 In the context menu, select File → Save As Image File.... The _Save As Image_ dialog appears.
 
 !{width:80.0%;height:auto;}images/exporting_statechart_as_image_020_save_as_dialog.png(The "Save As Image File" dialog)!
 
-p=. Figure: The "Save As Image File" dialog
+p=. The "Save As Image File" dialog
 
 Specify the filesystem folder for the exported image file in the _Folder_ text field.
 
@@ -1688,7 +1694,7 @@ To get started with the generator model, YAKINDU Statechart Tools includes a wiz
 
 !{width:80.0%;height:auto;}images/sGenEditor.png(SGen generator model with default values)!
 
-p=. Figure: SGen generator model with default values
+p=. SGen generator model with default values
 
 ###. FIXME: Explain what a "builder" is!
 
@@ -1793,7 +1799,7 @@ The explanations below are using the _TrafficLight_ sample state machine to desc
 
 !{width:80.0%;height:auto;}images/TrafficLight.png(The traffic light model)!
 
-p=. Figure: The traffic light model
+p=. The traffic light model
 
 You can checkout the C sample project "org.yakindu.sct.examples.c.trafficlight":https://github.com/Yakindu/statecharts/tree/master/examples/org.yakindu.sct.examples.c.trafficlight_ from the "YAKINDU Statechart Tools GitHub repository":https://github.com/Yakindu/statecharts. The C example contains statechart, SGen model, graphical widgets, and some glue code to connect the generated code with the widgets. The graphical widgets are based on Qt.
 
@@ -2128,7 +2134,7 @@ YAKINDU Statechart Tools support client code operations that can be used by a st
 
 !{width:80.0%;height:auto;}images/operationExample.png(Specifying an operation callback in the model)!
 
-p=. Figure: Specifying an operation callback in the model
+p=. Specifying an operation callback in the model
 
 Let's have a look at the generated code:
 
@@ -2337,7 +2343,7 @@ The explanations below are using the _TrafficLight_ sample state machine to desc
 
 !{width:80.0%;height:auto;}images/TrafficLight.png(The traffic light model)!
 
-p=. Figure: The traffic light model
+p=. The traffic light model
 
 You can checkout the C&#43;&#43; sample project "QtTrafficLightCpp":http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/examples from the "YAKINDU Google Code repository":http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk. The C&#43;&#43; example contains statechart, SGen model, graphical widgets, and some glue code to connect the generated code with the widgets. The graphical widgets are based on Qt.
 
@@ -2705,7 +2711,7 @@ YAKINDU Statechart Tools support client code operations that can be used by a st
 
 !{width:80.0%;height:auto;}images/operationExample.png(Specifying an operation callback in the model)!
 
-p=. Figure: Specifying an operation callback in the model
+p=. Specifying an operation callback in the model
 
 Let's have a look at the additionally generated code for operation support in the _DefaultSM.h_ header file:
 
@@ -2831,7 +2837,7 @@ The explanations below are using the _TrafficLight_ sample state machine to desc
 
 !{width:80.0%;height:auto;}images/TrafficLight.png(The traffic light model)!
 
-p=. Figure: The traffic light model
+p=. The traffic light model
 
 You can checkout the Java sample project _"org.yakindusct.examples.trafficlight":https://github.com/Yakindu/statecharts/tree/master/examples/org.yakindu.sct.examples.trafficlight_ from the "YAKINDU Statechart Tools GitHub repository":https://github.com/Yakindu/statecharts. The Java example contains statechart, SGen model, graphical widgets, and some glue code to connect the generated code with the widgets. The graphical widgets are based on SWT.
 
@@ -3443,7 +3449,7 @@ YAKINDU Statechart Tools support _operations_ that are executed by a state machi
 
 !{width:80.0%;height:auto;}images/operationExample.png(Specifying an operation callback in the model)!
 
-p=. Figure: Specifying an operation callback in the model
+p=. Specifying an operation callback in the model
 
 Let's have a look at the generated code:
 
@@ -3595,7 +3601,7 @@ First, you have to create a new Xtend2 generator project. Click _File → New �
 
 !{width:80.0%;height:auto;}images/xtendGenerator.png(Creating an Xtend2 generator project)!
 
-p=. Figure: Creating an Xtend2 generator project
+p=. Creating an Xtend2 generator project
 
 The wizard asks for a *Project name* and the name of the *Generator class*, which has to be the fully-qualified class name. If you check the *Use Xtend* checkbox, the generator class will initially be created as an "Xtend":http://www.eclipse.org/xtend/ class. Otherwise, Java will be used for the generator.
 
