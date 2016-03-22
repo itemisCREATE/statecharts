@@ -13,7 +13,9 @@ package org.yakindu.sct.generator.c
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
+import org.yakindu.base.types.Operation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
@@ -246,7 +248,11 @@ class Naming {
 		'''«name.asEscapedIdentifier»'''
 	}
 
-	def dispatch access(org.yakindu.base.types.Operation it) {
+	def dispatch access(Operation it) {
+		'''«name.asEscapedIdentifier»'''
+	}
+	
+	def dispatch access(Enumerator it) {
 		'''«name.asEscapedIdentifier»'''
 	}
 

@@ -50,6 +50,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Enumerator
 
 class ExpressionCode {
 
@@ -92,6 +93,8 @@ class ExpressionCode {
 		code»«ENDFOR»)'''
 
 	def dispatch CharSequence code(FeatureCall it, org.yakindu.base.types.Property target) '''«it.owner.code».«target.access»'''
+	
+	def dispatch CharSequence code(FeatureCall it, Enumerator target) '''«target.access»'''
 
 	/* HANDLING LITERALS */
 	def dispatch CharSequence code(Literal it) '''#error unknown literal type «getClass().name» '''

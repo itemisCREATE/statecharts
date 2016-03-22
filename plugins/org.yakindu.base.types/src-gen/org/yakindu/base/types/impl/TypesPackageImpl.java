@@ -767,7 +767,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		enumerationTypeEClass.getESuperTypes().add(this.getPrimitiveType());
 		primitiveTypeEClass.getESuperTypes().add(this.getType());
 		complexTypeEClass.getESuperTypes().add(this.getParameterizedType());
-		enumeratorEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		enumeratorEClass.getESuperTypes().add(this.getDeclaration());
 		typeParameterEClass.getESuperTypes().add(this.getType());
 		parameterizedTypeEClass.getESuperTypes().add(this.getType());
 		packageMemberEClass.getESuperTypes().add(theBasePackage.getNamedElement());

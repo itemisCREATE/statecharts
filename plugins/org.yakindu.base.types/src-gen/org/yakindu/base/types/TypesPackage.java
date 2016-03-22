@@ -816,13 +816,31 @@ public interface TypesPackage extends EPackage {
 	int ENUMERATOR = 11;
 
 	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATOR__TYPE = DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATOR__TYPE_ARGUMENTS = DECLARATION__TYPE_ARGUMENTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR__NAME = BasePackage.NAMED_ELEMENT__NAME;
+	int ENUMERATOR__NAME = DECLARATION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owning Enumeration</b></em>' container reference.
@@ -831,7 +849,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR__OWNING_ENUMERATION = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int ENUMERATOR__OWNING_ENUMERATION = DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Literal Value</b></em>' attribute.
@@ -840,7 +858,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR__LITERAL_VALUE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int ENUMERATOR__LITERAL_VALUE = DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Enumerator</em>' class.
@@ -849,7 +867,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATOR_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int ENUMERATOR_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 2;
 
 
 	/**
