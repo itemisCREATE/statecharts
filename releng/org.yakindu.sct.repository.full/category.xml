@@ -12,13 +12,13 @@
    <feature url="features/org.yakindu.sct.test_0.0.0.jar" id="org.yakindu.sct.test" version="0.0.0">
       <category name="YAKINDU SCT Test"/>
    </feature>
-   <feature url="features/org.yakindu.sct.generator.cpp_0.0.0.qualifier.jar" id="org.yakindu.sct.generator.cpp" version="0.0.0">
+   <feature url="features/org.yakindu.sct.generator.cpp_0.0.0.jar" id="org.yakindu.sct.generator.cpp" version="0.0.0">
       <category name="YAKINDU SCT"/>
    </feature>
-   <feature url="features/org.yakindu.sct.generator_0.0.0.qualifier.jar" id="org.yakindu.sct.generator" version="0.0.0">
+   <feature url="features/org.yakindu.sct.generator_0.0.0.jar" id="org.yakindu.sct.generator" version="0.0.0">
       <category name="YAKINDU SCT"/>
    </feature>
-   <feature url="features/org.yakindu.base_0.0.0.qualifier.jar" id="org.yakindu.base" version="0.0.0">
+   <feature url="features/org.yakindu.base_0.0.0.jar" id="org.yakindu.base" version="0.0.0">
       <category name="YAKINDU BASE"/>
    </feature>
    <category-def name="YAKINDU SCT" label="YAKINDU SCT">
