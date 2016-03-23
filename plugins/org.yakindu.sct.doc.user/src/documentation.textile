@@ -3589,6 +3589,44 @@ protected void tearDownStatemachine() {
 If the UI thread has been terminated by the user, the state machine will be shut down. It is necessary to explicitly end the timer service. Finally the runtime service is cancelled.
 
 
+h4(#simulating-operations-with-custom-java-code). Simulating operations with custom Java code
+
+To simulate a model with operations it is possible to use custom Java code that mocks the desired behavior or even to simulate against an existing Java backend. For this purpose it is required to provide one or more custom Java classes having a method with a matching signature. 
+
+!{width:80.0%;height:auto;}images/java_simulating_operation_010_statechart_with_operation.png(A statechart model with an operation)!
+
+p=. A statechart model with an operation
+
+To simulate the statechart above, a new Java class must be created matching the method signature defined in the statechart. This class must be placed onto the classpath of the
+statecharts project.
+
+YAKINDU Statechart Tools' default types are mapped to Java types as follows:
+
+table{border:1px solid black}.
+|*SCT Type* |  |*Java Type*  |
+|integer|→|long|
+|real|→|double|
+|boolean|→|boolean|
+|string|→|String|
+|void|→|void| 
+ 
+bc. 
+package example;
+public class Calculator {
+   public long add(long param1, long param2) {
+      return param1 + param2;
+   }
+}
+
+This custom class can be passed to Eclipse's run configuration as an _Operation Class_, see the figure below. It is possible to specify multiple Java classes, separated by comma.
+
+When the simulation is executed, the variable _result_ gets the value 2.
+
+!{width:80.0%;height:auto;}images/java_simulating_operation_020_run_configuration.png(Configuring an operations class)!
+
+p=. Configuring an operations class
+
+
 h2(#custom-code-generator). Custom code generator
 
 h3(#CreatingCustomCodeGenerators). Creating custom code generators
