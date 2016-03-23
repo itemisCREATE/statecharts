@@ -692,7 +692,7 @@ p=. Displaying event names in the statechart simulator's _Simulation_ view
 
 The _operate_ event is shown. Click on it to raise the event, i. e. to operate the light switch.
 
-The transition arc leading from the *Off* state to the *On* state flashes briefly in red, and the *On* state becomes active. Its background color changes to red while the *On* state's background color becomes normal again.
+The transition arc leading from the *Off* state to the *On* state flashes briefly in red, and the *On* state becomes active. Its background color changes to red while the *Off* state's background color becomes normal again.
 
 !{width:80.0%;height:auto;}images/light_switch_330_statechart_simulator_state_on.png(Light switch simulation in "on" state)!
 
