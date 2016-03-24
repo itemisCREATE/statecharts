@@ -1,4 +1,6 @@
-h1(#yakindu-statechart-tools-installation-guide). YAKINDU Statechart Tools Installation Guide
+*YAKINDU Statechart Tools*
+
+h1(#installation-guide). Installation Guide
 
 In order to start working with YAKINDU Statechart Tools, you have to install the software on your computer. We are assuming you have downloaded the software package and stored it somewhere on your machine.
 
@@ -365,7 +367,7 @@ Go to the _Install/Update → Automatic Updates_ section. Here you can configure
 
 p=. Configuring automatic update
 
-h1(#yakindu-statechart-tools-user-guide). YAKINDU Statechart Tools User Guide
+h1(#user-guide). User Guide
 
 h2(#what-are-yakindu-statechart-tools). What are YAKINDU Statechart Tools?
 
@@ -433,7 +435,7 @@ Please note that this tutorial will not explain statecharts in general, so you s
 
 In order to get a fully-working statechart implementation that you can integrate with your project, you will have to familiarize yourself with _code generation_, which is covered by chapter "Code generation":#code-generation in this documentation. You can generate your state machine implementation as source code in C, C&#43;&#43;, and Java out of the box. Alternatively, you can write your own code generator for other programming languages or for other purposes.
 
-Before we get started, make sure you have YAKINDU Statechart Tools installed. For installation instructions, see the "YAKINDU Statechart Tools Installation Guide":#yakindu-statechart-tools-installation-guide.
+Before we get started, make sure you have YAKINDU Statechart Tools installed. For installation instructions, see the "YAKINDU Statechart Tools Installation Guide":#installation-guide.
 
 h3(#the-light-switch-example). The light switch example
 

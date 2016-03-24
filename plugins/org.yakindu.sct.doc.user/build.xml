@@ -150,7 +150,7 @@
                                       validate="true"
                                       failOnValidationError="true"
                                       failOnValidationWarning="false"
-                                      title="YAKINDU Statechart Tools – User Documentation"
+                                      title="YAKINDU Statechart Tools"
                                       helpPrefix="@{dst.dir}">
                 <fileset dir="@{src.dir}">
                     <include name="@{src.file.name}" />
