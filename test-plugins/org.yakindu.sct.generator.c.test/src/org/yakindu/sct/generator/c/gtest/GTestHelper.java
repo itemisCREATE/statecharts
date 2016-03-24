@@ -14,8 +14,6 @@ package org.yakindu.sct.generator.c.gtest;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -61,66 +59,13 @@ public class GTestHelper {
 	}
 
 	public void compile() {
-		try {
 			copyFilesFromBundleToFolder();
 			IResource resource = ResourcesPlugin.getWorkspace().getRoot()
 					.findMember(getTargetPath());
 			File directory = resource.getLocation().toFile();
 			List<String> command = createCommand();
 
-			// System.out.println("compile: " + command);
-
-			ProcessBuilder processBuilder = new ProcessBuilder(command)
-					.directory(directory);
-			Process process = processBuilder.redirectErrorStream(true).start();
-			String message = readProcessInputStream(process);
-
-			boolean wait = true;
-			int exitCode = 0;
-
-			do {
-				wait = false;
-
-				// waiting for the processes termination
-				try {
-					process.waitFor();
-				} catch (InterruptedException e) { /*
-													 * we ignore if waiting was
-													 * interrupted ...
-													 */
-				}
-
-				// if we get an exit code then we know that the process is
-				// finished
-				try {
-					exitCode = process.exitValue();
-				} catch (IllegalThreadStateException e) {
-					wait = true; // if we get an exception then the process has
-									// not finished ...
-				}
-			} while (wait);
-
-			if (exitCode != 0) {
-				throw new RuntimeException("Compilation failed (exit status "
-						+ process.exitValue() + "):\n" + message);
-			}
-		} catch (Error e) {
-			throw e;
-		} catch (RuntimeException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		} finally {
-			try {
-				ResourcesPlugin
-						.getWorkspace()
-						.getRoot()
-						.refreshLocal(IResource.DEPTH_INFINITE,
-								new NullProgressMonitor());
-			} catch (CoreException e) {
-				throw new RuntimeException(e);
-			}
-		}
+			getCommandExecutor().execute(command, directory);
 	}
 
 	public void generate() {
@@ -142,6 +87,10 @@ public class GTestHelper {
 		performFullBuild();
 		
 		new GeneratorExecutor().executeGenerator(model);
+	}
+	
+	protected GCCCommandExecutor getCommandExecutor() {
+		return new GCCCommandExecutor();
 	}
 	
 	protected void performFullBuild() {
@@ -185,17 +134,6 @@ public class GTestHelper {
 		for (String file : testDataFiles) {
 			copyFileFromBundleToFolder(getTestBundle(), file, targetPath);
 		}
-	}
-
-	private String readProcessInputStream(Process process) throws IOException {
-		Reader reader = new InputStreamReader(process.getInputStream());
-		char[] buffer = new char[4096];
-		int count;
-		StringBuilder message = new StringBuilder();
-		while ((count = reader.read(buffer)) != -1) {
-			message.append(buffer, 0, count);
-		}
-		return message.toString();
 	}
 
 	protected List<String> createCommand() {
