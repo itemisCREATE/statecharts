@@ -21,15 +21,17 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Link;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomainDescriptor;
+import org.yakindu.sct.ui.editor.StatechartImages;
 
 /**
  * 
@@ -74,9 +76,6 @@ public class DomainWizardPage extends WizardPage {
 		});
 		domainCombo.setInput(DomainRegistry.getDomainDescriptors());
 
-		Label spacer2 = new Label(domainSelectionGroup, SWT.NONE);
-		GridDataFactory.fillDefaults().span(2, 1).applyTo(spacer2);
-
 		description = new Label(domainSelectionGroup, SWT.WRAP);
 		GridDataFactory.fillDefaults().grab(true, false).span(2, 1).applyTo(description);
 		setControl(composite);
@@ -94,14 +93,17 @@ public class DomainWizardPage extends WizardPage {
 		domainCombo.setSelection(new StructuredSelection(DomainRegistry
 				.getDomainDescriptor(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral())));
 
-		Link sctLink = new Link(composite, SWT.NONE);
-		sctLink.setText("<a>Get additional Statechart Domain Extensions</a>");
-		sctLink.addSelectionListener(new SelectionListener() {
-			public void widgetSelected(SelectionEvent e) {
-				org.eclipse.swt.program.Program.launch("http://statecharts.org/");
-			}
-
-			public void widgetDefaultSelected(SelectionEvent e) {
+		Label spacer2 = new Label(domainSelectionGroup, SWT.NONE);
+		GridDataFactory.fillDefaults().span(2, 1).applyTo(spacer2);
+		
+		Label image = new Label(composite, SWT.NONE);
+		GridDataFactory.fillDefaults().grab(false, false).align(GridData.CENTER, GridData.CENTER).span(2, 1)
+				.applyTo(image);
+		image.setImage(StatechartImages.PRO_EDITION.image());
+		image.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent e) {
+				Program.launch("http://statecharts.org/pro.html");
 			}
 		});
 	}

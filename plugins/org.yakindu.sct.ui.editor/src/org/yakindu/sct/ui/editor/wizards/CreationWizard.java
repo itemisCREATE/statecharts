@@ -102,13 +102,11 @@ public class CreationWizard extends Wizard implements INewWizard {
 		modelCreationPage.setTitle("YAKINDU SCT Diagram");
 		modelCreationPage.setDescription("Create a new YAKINDU SCT Diagram File");
 		modelCreationPage.setImageDescriptor(StatechartImages.LOGO.imageDescriptor());
-		if (DomainRegistry.getDomainDescriptors().size() > 1) {
-			domainWizardPage = new DomainWizardPage("DomainWizard");
-			domainWizardPage.setTitle("Select Statechart Domain");
-			domainWizardPage.setDescription("Select the domain you want to create a statechart for.");
-			domainWizardPage.setImageDescriptor(StatechartImages.LOGO.imageDescriptor());
-			addPage(domainWizardPage);
-		}
+		domainWizardPage = new DomainWizardPage("DomainWizard");
+		domainWizardPage.setTitle("Select Statechart Domain");
+		domainWizardPage.setDescription("Select the domain you want to create a statechart for.");
+		domainWizardPage.setImageDescriptor(StatechartImages.LOGO.imageDescriptor());
+		addPage(domainWizardPage);
 
 		addPage(modelCreationPage);
 	}
