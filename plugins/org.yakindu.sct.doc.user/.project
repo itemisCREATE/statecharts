@@ -27,11 +27,14 @@
 		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
-			<triggers>full,incremental,</triggers>
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
 					<value>&lt;project&gt;/.externalToolBuilders/Documentation Builder.launch</value>
+				</dictionary>
+				<dictionary>
+					<key>incclean</key>
+					<value>true</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
