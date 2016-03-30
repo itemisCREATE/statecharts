@@ -23,5 +23,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.domain.generic,
  org.yakindu.sct.domain.generic.extension,
- org.yakindu.sct.domain.generic.modules,
- org.yakindu.sct.domain.generic.util
+ org.yakindu.sct.domain.generic.modules

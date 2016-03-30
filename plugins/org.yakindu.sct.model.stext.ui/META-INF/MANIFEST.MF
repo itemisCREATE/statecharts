@@ -22,7 +22,8 @@ Require-Bundle: org.yakindu.sct.model.stext;visibility:=reexport,
  org.yakindu.sct.model.sgraph.ui,
  org.eclipse.gmf.runtime.emf.core,
  org.yakindu.base.expressions.ui;visibility:=reexport,
- org.yakindu.base.types.edit
+ org.yakindu.base.types.edit,
+ org.yakindu.sct.ui.editor
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
