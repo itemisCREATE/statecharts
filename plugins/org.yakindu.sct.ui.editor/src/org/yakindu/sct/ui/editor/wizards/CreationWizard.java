@@ -55,7 +55,6 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.gmf.runtime.util.EditPartUtils;
-import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
