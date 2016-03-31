@@ -250,11 +250,11 @@ public final class STextValidationModelUtils {
 		return exits;
 	}
 
-	public static List<Entry> getEntries(List<EObject> elements) {
+	public static List<Entry> getEntries(List<?> elements) {
 		List<Entry> entries = new ArrayList<Entry>();
-		for (EObject element : elements) {
+		for (Object element : elements) {
 			if (element instanceof Entry) {
-				entries.add((Entry) element);
+				entries.add((Entry) element); 
 			}
 		}
 		return entries;
