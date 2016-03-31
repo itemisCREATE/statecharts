@@ -31,6 +31,7 @@ import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
@@ -74,6 +75,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL = "The source states of a synchronization must be orthogonal!";
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE = "The source states of a synchronization have to be contained in the same parent state within different regions!";
 	public static final String ISSUE_SYNCHRONIZATION_TRANSITION_COUNT = "A synchronization should have at least two incoming or two outgoing transitions";
+	public static final String ISSUE_TRANSITION_ORTHOGONAL = "Source and target of a transition must not be located in orthogonal regions!";
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing Transitions from Entries can only target to sibling or inner states.";
 
 	@Check(CheckType.FAST)
@@ -297,13 +299,155 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void orthogonalStates(Synchronization fork) {
-		// check target states
-		orthogonalStates(fork, true);
-		// check source states
-		orthogonalStates(fork, false);
+	public void orthogonalTransition(Transition transition) {
+		
+		Vertex source = transition.getSource();
+		Vertex target = transition.getTarget();
+		
+		if ( (source instanceof Synchronization) || (target instanceof Synchronization) ) return; // ... the check does not apply.
+		
+		EObject commonAncestor = commonAncestor(source, target);
+		
+		if (commonAncestor instanceof CompositeElement) {
+			
+			error(ISSUE_TRANSITION_ORTHOGONAL, transition, null, -1);	
+		}
+	}
+	
+	
+	/**
+	 * Calculates the common ancestor of to EObjects. The calculation first calculates the ancestors for both objects and compares the lists starting from the root. 
+	 * The last same element is the common ancestor.
+	 *  
+	 * @param o1
+	 * @param o2
+	 * @return
+	 */
+	protected EObject commonAncestor(EObject o1, EObject o2) {
+		
+		List<EObject> o1Anchestors = collectAncestors(o1, new ArrayList<EObject>());
+		List<EObject> o2Anchestors = collectAncestors(o2, new ArrayList<EObject>());
+		
+		return findCommonAncestor(o1Anchestors, o2Anchestors);
 	}
 
+	
+	protected EObject findCommonAncestor(List<EObject> o1Anchestors, List<EObject> o2Anchestors) {
+		int max = Math.min(o1Anchestors.size(), o2Anchestors.size());
+		EObject commonAncestor = null;
+		
+		for (int i=0; i<max; i++) {
+			if (o1Anchestors.get(i) == o2Anchestors.get(i)) {
+				commonAncestor = o1Anchestors.get(i);
+			} else {
+				break; // do not continue if we came across different amcestors.
+			}
+		}
+		
+		return commonAncestor;
+	}
+	
+	
+	/**
+	 * Adds all ancestors of an EObject to the provided list. Ancestors are all eContainers starting from the specified element. The ancestors are added starting with the root.
+	 *  
+	 * @param o1 The EObject instance for which we want to get the ancestors.
+	 * @param al A list where the ancestors are added.
+	 * @return The list with ancestors (same as @param al) 
+	 */
+	protected List<EObject> collectAncestors(EObject o1, List<EObject> al) {
+
+		if ( o1 != null ) {
+		
+			if ( o1.eContainer() != null ) {
+				collectAncestors(o1.eContainer(), al);
+				al.add(o1.eContainer());
+			}
+		
+		}		
+		return al;
+	}
+	
+
+	@Check(CheckType.FAST)
+	public void orthogonalSourceStates(Synchronization sync) {
+		
+		List<Vertex> sourceVertices = sources(sync.getIncomingTransitions());
+		
+		if ( ! areOrthogonal(sourceVertices) ) {
+			error(ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL + "_new_", sync, null, -1);
+		}
+	}
+
+	
+	@Check(CheckType.FAST)
+	public void orthogonalTargetStates(Synchronization sync) {
+		
+		List<Vertex> sourceVertices = targets(sync.getOutgoingTransitions());
+		
+		if ( ! areOrthogonal(sourceVertices) ) {
+			error(ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL + "_new_", sync, null, -1);
+		}
+	}
+
+	
+	protected boolean areOrthogonal(List<Vertex> vertices) {
+		
+		if (vertices == null || vertices.isEmpty()) return true;
+		
+		List<List<EObject>> ancestorLists = new ArrayList<List<EObject>>();
+		
+		for (Vertex vertex : vertices) {
+			ancestorLists.add(collectAncestors(vertex, new ArrayList<EObject>()));
+		}
+		
+		// check all pairs of verices for orthogonality ...
+		for ( int i=0; i<vertices.size()-1; i++) {
+			for ( int j=i+1; j<vertices.size(); j++) {
+				// ... by checking their common ancestor. f it is a region then the pair of vertices are not orthogonal.
+				EObject commonAncestor = findCommonAncestor(ancestorLists.get(i), ancestorLists.get(j));
+				if ( commonAncestor instanceof Region ) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	
+	protected List<Vertex> sources(List<Transition> transitions) {
+		List<Vertex> vertices = new ArrayList<Vertex>();
+		
+		for (Transition transition : transitions) {
+			vertices.add(transition.getSource());
+		}
+		
+		return vertices;
+	}
+	
+	protected List<Vertex> targets(List<Transition> transitions) {
+		List<Vertex> vertices = new ArrayList<Vertex>();
+		
+		for (Transition transition : transitions) {
+			vertices.add(transition.getTarget());
+		}
+		
+		return vertices;
+	}
+	
+
+	
+	
+	@Check(CheckType.FAST)
+	public void orthogonalStates(Synchronization fork) {
+		// check target states
+		// orthogonalStates(fork, true);
+		// check source states
+		// orthogonalStates(fork, false);
+	}
+
+	
 	private void orthogonalStates(Synchronization fork, boolean searchTarget) {
 		List<Transition> transitions = searchTarget ? fork
 				.getOutgoingTransitions() : fork.getIncomingTransitions();
