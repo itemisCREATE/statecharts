@@ -485,7 +485,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 	@Check(CheckType.FAST)
-	public void checkTopLevelDefaultEntry(final Entry entry) {
+	public void checkTopLeveEntryIsDefaultEntry(final Entry entry) {
 		Region parentRegion = entry.getParentRegion();
 		EObject eContainer = parentRegion.eContainer();
 	
