@@ -385,11 +385,17 @@ The following graph shows these features and their relation to each other:
 
 p=. Features of YAKINDU Statechart Tools
 
+h3(#oss_which-licensing-rules-do-apply). Which licensing rules do apply to YAKINDU Statechart Tools?
+
+The source code of YAKINDU Statechart Tools is provided under the "Eclipse Public License":http://www.eclipse.org/legal/epl-v10.html.
+
+The open source code generators coming with YAKINDU Statechart Tools do not imply any license constraints on the generated code whatsoever. The generated code is property of the user (as person or organization). There is no need to make the generated code open source. The user is free to choose any license model for the generated code.
+
 h3(#who-is-behind-yakindu-statechart-tools). Who is behind YAKINDU Statechart Tools?
 
-The main part of YAKINDU Statechart Tools is an open-source project ("$":http://www.yakindu.org/ ). Most developers work for itemis, a well-known consulting company specialized on model-based development.
+The main part of YAKINDU Statechart Tools is an open-source project, available at "http://www.yakindu.org/":http://www.yakindu.org/. Most developers are working for itemis, a well-known consulting company specialized on model-based development.
 
-You may ask: Where does the money for open-source development come from? Well, itemis is providing professional services around YAKINDU, be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages, you name it. The itemis YAKINDU developers do not only know the framework very well but are also experts in programming and domain-specific language design. If you need an advice get in contact with itemis' YAKINDU team ("$":https://info.itemis.com/contact ).
+You may ask: Where does the money for open-source development come from? Well, itemis is providing professional services around YAKINDU, be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages, you name it. The itemis YAKINDU developers do not only know the framework very well but are also experts in programming and domain-specific language design. If you need advice get in contact with itemis' "YAKINDU team":https://info.itemis.com/contact.
 
 h3(#who-is-using-yakindu-statechart-tools). Who is using YAKINDU Statechart Tools?
 
