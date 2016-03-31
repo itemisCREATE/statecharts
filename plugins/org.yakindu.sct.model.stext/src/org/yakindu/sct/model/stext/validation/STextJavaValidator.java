@@ -128,7 +128,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
 	@Inject(optional = true)
 	@Named("domainId")
-	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral(); 
+	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 
 	@Check
 	public void checkExpression(VariableDefinition expression) {
@@ -481,6 +481,29 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 						}
 					}
 				}
+			}
+		}
+	}
+	@Check(CheckType.FAST)
+	public void checkTopLeveEntryIsDefaultEntry(final Entry entry) {
+		Region parentRegion = entry.getParentRegion();
+		EObject eContainer = parentRegion.eContainer();
+	
+		boolean isTopLevelRegionEntry = eContainer instanceof Statechart;
+
+		//1. check if is toplevel
+		if (isTopLevelRegionEntry) {
+			boolean isDefaultEntry = STextValidationModelUtils.isDefault(entry);
+			//2. check if is default entry
+			if (!isDefaultEntry) {
+				Map<Region, List<Entry>> regionsWithoutDefaultEntry = STextValidationModelUtils.getRegionsWithoutDefaultEntry(Lists.newArrayList(parentRegion));
+				List<Entry> list = regionsWithoutDefaultEntry.get(parentRegion);
+				if(list!=null)
+					error(TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY, entry,
+							SGraphPackage.Literals.ENTRY__KIND,-1);
+				else
+					warning(TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY, entry,
+							SGraphPackage.Literals.ENTRY__KIND,-1);
 			}
 		}
 	}

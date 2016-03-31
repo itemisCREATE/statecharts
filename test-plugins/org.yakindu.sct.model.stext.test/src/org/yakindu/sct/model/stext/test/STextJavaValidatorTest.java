@@ -413,33 +413,56 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, ENTRY_UNUSED);
 	}
+	@Test
+	public void checkTopLeveEntryIsDefaultEntry(){
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "TopLevelEntryIsDefaultEntryError.sct");
+		doValidateAllContents(Entry.class);
+		
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY);
+		resetDiagnostics();
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "TopLevelEntryIsDefaultEntryWarn.sct");
+		doValidateAllContents(Entry.class);
+		
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY);
+	}
 
 	@Test
 	public void checkUnusedExit() {
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedExitPoint.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Exit) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
-			}
-		}
+		doValidateAllContents(Exit.class);
 
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, EXIT_UNUSED);
 
 		resetDiagnostics();
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedDefaultExitPoint.sct");
-		iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Exit) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
-			}
-		}
+		doValidateAllContents(Exit.class);
 
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, EXIT_DEFAULT_UNUSED);
+	}
+
+	protected void doValidateAllContents(Class<? extends EObject> clazz) {
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (clazz.isInstance(element)) {
+				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+			}
+		}
+	}
+	protected void assertAllTransitionsAreValid(Class<? extends EObject> clazz) {
+		Iterator<EObject> iter;
+		iter = statechart.eAllContents();
+
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (clazz.isInstance(element)) {
+				assertTrue(validator.validate(element, diagnostics, new HashMap<Object, Object>()));
+			}
+		}
 	}
 
 	@Test
@@ -447,13 +470,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		// Test source state isn't composite
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
 				+ "TransitionEntrySpecNotComposite.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Transition) {
-				assertTrue(validator.validate(element, diagnostics, new HashMap<Object, Object>()));
-			}
-		}
+		doValidateAllContents(Transition.class);
 		// Test target state isn't composite
 		assertIssueCount(diagnostics, 2);
 		assertWarning(diagnostics, TRANSITION_ENTRY_SPEC_NOT_COMPOSITE);
@@ -461,14 +478,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		resetDiagnostics();
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
 				+ "TransitionExitSpecNotComposite.sct");
-		iter = statechart.eAllContents();
-
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Transition) {
-				assertTrue(validator.validate(element, diagnostics, new HashMap<Object, Object>()));
-			}
-		}
+		assertAllTransitionsAreValid(Transition.class);
 
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, TRANSITION_EXIT_SPEC_NOT_COMPOSITE);
@@ -477,13 +487,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		resetDiagnostics();
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
 				+ "TransitionExitSpecOnMultipleSiblings.sct");
-		iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Transition) {
-				assertTrue(validator.validate(element, diagnostics, new HashMap<Object, Object>()));
-			}
-		}
+		assertAllTransitionsAreValid(Transition.class);
 
 		assertIssueCount(diagnostics, 4);
 		assertWarning(diagnostics, TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS);
@@ -492,17 +496,13 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		resetDiagnostics();
 		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
 				+ "TransitionNotExistingNamedExitPoint.sct");
-		iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Transition) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
-			}
-		}
+		doValidateAllContents(Transition.class);
 
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT);
 	}
+
+
 
 	@Test
 	public void checkUnboundEntryPoints() {
