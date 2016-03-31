@@ -28,7 +28,6 @@ import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.internal.parts.DiagramGraphicalViewerKeyHandler;
 import org.eclipse.gmf.runtime.gef.ui.internal.editparts.AnimatableZoomManager;
-import org.eclipse.gmf.runtime.gef.ui.internal.editparts.AnimatedZoomListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
