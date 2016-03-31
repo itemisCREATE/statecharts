@@ -1789,7 +1789,50 @@ TBD
 
 h3(#general-concepts-of-the-state-machine-code). General concepts of the state machine code
 
-TBD
+h4(#oss_responsibilities-of-generated-code). Responsibilities of generated code
+
+The generated source code supports a basic statechart execution model that can be used to implement different variants. It is important to understand the responsibilities of the generated code, i.&nbsp;e. what it cares about and what it doesn't. The remaining issues are out of scope and must be dealt with in the client code the developer has to provide.
+
+The generated coded basically takes care about the following:
+* It provides the interfaces to access state machine variables and events.
+* It initializes the state machine.
+* It implements the execution semantics within a run-to-completion (RTC) step. This is everything that is happening within the _runCycle()_ function.
+
+There are some predefined constraints:
+* The implementation is not thread-safe. Therefore the _runCycle()_ method must never be called in parallel by different threads.
+* All events for a run-to-completion step will be consumed.
+
+Out of scope are:
+* *Scheduling:* The code generator cannot make any general assumptions about scheduling mechanisms and constraints.
+* *Timers:* The code generator does not know how the system handles times. If any specific time-dependend behavior is required, the client code has to contribute it.
+* *Event handling:* The code generator cannot know and does not prescribe how events are entering the system. Therefore deciding when events will be delivered to the state machine is an outside (client code) responsibility.
+* *Concurrency:* The client code has to care about any thread synchronization.
+* *Memory management:* The generated state machine code will never allocate any memory. Allocating the memory needed for the statechart structure is a responsibility of the client code.
+
+All these things are out of the generated code's scope, since the code generators coming with YAKINDU Statechart Tools cannot provide tailored solutions without knowing any details about a respective specific environment, like runtime system, libraries, etc.
+
+In order to have a better code generator support for specific usage patterns, you would have to implement corresponding code generator extensions.
+
+h4(#oss_cycle-based-execution). Cycle-based execution
+
+The generated state machine code implements a so-called _cycle-based execution scheme_. Each run cycle consists of two different phases:
+# In the first phase, incoming events are collected.
+# In the second phase, _runCycle()_ is executed.
+
+This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.&nbsp;g. something like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the IPO (input processing output) model.
+
+In other cases an event-driven approach might be more suitable. This can be implemented e.&nbsp;g. by directly calling _runCycle()_ as soon as a certain event occurs, like in:
+
+bc. sc_raiseEventA(handle);
+sc_runCycle(handle);
+
+More sophisticated approaches could care about buffering of events, managing an event queue, dealing with priority events, and so on. However, since this is out of the the generated code's scope, it is the client code's responsibility.
+
+h4(#oss_thread-safe-execution). Thread-safe execution
+
+In order to circumvent the missing thread-safety of the _runCycle()_ method, the Java code generator has an option for generating a so-called runnable wrapper, providing event queueing and multi-threading support. For details, see section "&quot;RunnableWrapper&quot;":#oss_runnablewrapper. It is easy to implement this as a general solution for Java, since the programming language provides corresponding standard features that by definition are available everywhere by can simply be used.
+
+C, however, does not have any standardized threading features. Therefore a general solution cannot be given. Specific solutions for specific threading libraries would require the implementation of a suitable code generator extension.
 
 h2(#c-code-generator). C code generator
 
@@ -2797,7 +2840,7 @@ bc. feature SynchronizedWrapper {
 ==<!-- End sgen_feature_synchronizedwrapper -->==
 ==<!-- Start sgen_feature_runnablewrapper -->==
 
-h4(#runnablewrapper). RunnableWrapper
+h4(#oss_runnablewrapper). RunnableWrapper
 
 The *RunnableWrapper* feature generates a runnable wrapper for the state machine. This is an additional Java class providing a thread-safe wrapper for the generated state machine implementation. In addition to the specific state machine interface it implements the _Runnable_ interface and can be executed in a thread. It implements an event queue and event-driven execution semantics. As the wrapper adds thread safety any number of client threads may call the state machine.
 
