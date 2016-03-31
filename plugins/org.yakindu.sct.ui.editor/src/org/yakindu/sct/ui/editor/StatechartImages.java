@@ -24,6 +24,8 @@ public enum StatechartImages {
 
 	LOGO("icons/obj16/logo-16.png"),
 	
+	PRO_EDITION("images/pro.png"),
+	
 	MENU("icons/obj16/Menu-16.png");
 	
 
