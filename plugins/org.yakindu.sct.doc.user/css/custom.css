@@ -133,7 +133,13 @@ img {
     margin-right: auto;
 }
 
-.inlinemediaobject img {
+.standard-image {
+    width:80.0%;
+    height:auto;
+    box-shadow: 10px 10px 20px #888888;
+}
+
+.inlinemediaobject {
     display: inline;
 }
 
