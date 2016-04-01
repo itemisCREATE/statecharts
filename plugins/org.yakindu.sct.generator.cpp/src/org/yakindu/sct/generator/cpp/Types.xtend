@@ -38,7 +38,7 @@ class Types {
 		#define sc_string		char*
 		
 		typedef unsigned char	sc_ushort;
-		typedef int				sc_integer;  
+		typedef int				sc_integer;
 		typedef double			sc_real;
 		typedef bool			sc_boolean;
 		

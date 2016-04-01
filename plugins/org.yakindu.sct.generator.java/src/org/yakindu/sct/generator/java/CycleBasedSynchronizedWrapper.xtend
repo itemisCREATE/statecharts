@@ -70,8 +70,8 @@ class CycleBasedSynchronizedWrapper {
 			«flow.timingFunctions(entry)»
 			
 			/**
-			 * init() will be delegated thread-safely to the wrapped state machine. 
-			 */ 
+			 * init() will be delegated thread-safely to the wrapped state machine.
+			 */
 			public void init() {
 				synchronized(statemachine) {
 					statemachine.init();
@@ -79,8 +79,8 @@ class CycleBasedSynchronizedWrapper {
 			}
 			
 			/**
-			 * enter() will be delegated thread-safely to the wrapped state machine.  
-			 */ 
+			 * enter() will be delegated thread-safely to the wrapped state machine.
+			 */
 			public void enter() {
 				synchronized(statemachine) {
 					statemachine.enter();
@@ -88,8 +88,8 @@ class CycleBasedSynchronizedWrapper {
 			}
 			
 			/**
-			 * exit() will be delegated thread-safely to the wrapped state machine.  
-			 */ 
+			 * exit() will be delegated thread-safely to the wrapped state machine.
+			 */
 			public void exit() {
 				synchronized(statemachine) {
 					statemachine.exit();
@@ -97,8 +97,8 @@ class CycleBasedSynchronizedWrapper {
 			}
 			
 			/**
-			 * isActive() will be delegated thread-safely to the wrapped state machine.  
-			 */ 
+			 * isActive() will be delegated thread-safely to the wrapped state machine.
+			 */
 			public boolean isActive() {
 				synchronized(statemachine) {
 					return statemachine.isActive();
@@ -106,8 +106,8 @@ class CycleBasedSynchronizedWrapper {
 			}
 			
 			/**
-			 * isFinal() will be delegated thread-safely to the wrapped state machine.  
-			 */ 
+			 * isFinal() will be delegated thread-safely to the wrapped state machine.
+			 */
 			public boolean isFinal() {
 				synchronized(statemachine) {
 					return statemachine.isFinal();
@@ -115,7 +115,7 @@ class CycleBasedSynchronizedWrapper {
 			}
 			
 			/**
-			 * isStateActive() will be delegated thread-safely to the wrapped state machine.  
+			 * isStateActive() will be delegated thread-safely to the wrapped state machine.
 			 */
 			public boolean isStateActive(State state) {
 				synchronized(statemachine) {
@@ -124,7 +124,7 @@ class CycleBasedSynchronizedWrapper {
 			}
 			
 			/**
-			 * runCycle() will be delegated thread-safely to the wrapped state machine.  
+			 * runCycle() will be delegated thread-safely to the wrapped state machine.
 			 */ 
 			@Override
 			public void runCycle() {

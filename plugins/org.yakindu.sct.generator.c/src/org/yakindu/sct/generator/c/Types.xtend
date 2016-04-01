@@ -54,8 +54,9 @@ class Types {
 		typedef bool			sc_boolean;
 		typedef int_fast16_t	sc_short;
 		typedef uint_fast16_t	sc_ushort;
-		typedef int32_t			sc_integer; 
-		typedef uint32_t		sc_uinteger; 
+		typedef int32_t			sc_integer;
+		typedef uint32_t		sc_uinteger;
+		
 		typedef double			sc_real;
 		
 		typedef void*			sc_eventid;

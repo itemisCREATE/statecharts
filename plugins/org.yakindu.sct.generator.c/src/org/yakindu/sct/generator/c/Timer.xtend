@@ -56,7 +56,7 @@ class Timer {
 		
 		#ifdef __cplusplus
 		}
-		#endif 
+		#endif
 		 
 		#endif /* «timerModule.define»_H_ */
 	'''

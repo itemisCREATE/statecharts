@@ -39,7 +39,7 @@ class TimerService {
 		
 		/**
 		 * Default timer service implementation.
-		 * 
+		 *
 		 */
 		public class TimerService implements ITimer {
 
@@ -52,7 +52,7 @@ class TimerService {
 			/**
 			 * Timer task that reflects a time event. It's internally used by
 			 * {@link TimerService}.
-			 * 
+			 *
 			 */
 			private class TimeEventTask extends TimerTask {
 			
@@ -62,11 +62,11 @@ class TimerService {
 			
 				/**
 				 * Constructor for a time event.
-				 * 
+				 *
 				 * @param callback
 				 *            : Set to {@code true} if event should be repeated
 				 *            periodically.
-				 * 
+				 *
 				 * @param eventID
 				 *            : Index position within the state machine's timeEvent
 				 *            array.

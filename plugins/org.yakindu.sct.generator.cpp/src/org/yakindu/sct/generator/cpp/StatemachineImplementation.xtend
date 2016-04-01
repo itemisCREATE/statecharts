@@ -323,7 +323,7 @@ class StatemachineImplementation {
 					}
 					
 				«ENDIF»
-				«IF event.hasValue» 
+				«IF event.hasValue»
 					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»()
 					{
 						return «event.localValueAccess»;
