@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 committers of YAKINDU and others.
+ * Copyright (c) 2012-2016 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,6 +10,13 @@
  */
 package org.yakindu.sct.model.sgraph.validation;
 
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.areOrthogonal;
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.collectAncestors;
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.commonAncestor;
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.findCommonAncestor;
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.sources;
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.targets;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -18,7 +25,6 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
@@ -31,7 +37,6 @@ import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
-import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
@@ -373,106 +378,6 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	}
 	
 	
-	
-	
-	/**
-	 * Calculates the common ancestor of to EObjects. The calculation first calculates the ancestors for both objects and compares the lists starting from the root. 
-	 * The last same element is the common ancestor.
-	 *  
-	 * @param o1
-	 * @param o2
-	 * @return
-	 */
-	protected EObject commonAncestor(EObject o1, EObject o2) {
-		
-		List<EObject> o1Anchestors = collectAncestors(o1, new ArrayList<EObject>());
-		List<EObject> o2Anchestors = collectAncestors(o2, new ArrayList<EObject>());
-		
-		return findCommonAncestor(o1Anchestors, o2Anchestors);
-	}
-
-	
-	protected EObject findCommonAncestor(List<EObject> o1Anchestors, List<EObject> o2Anchestors) {
-		int max = Math.min(o1Anchestors.size(), o2Anchestors.size());
-		EObject commonAncestor = null;
-		
-		for (int i=0; i<max; i++) {
-			if (o1Anchestors.get(i) == o2Anchestors.get(i)) {
-				commonAncestor = o1Anchestors.get(i);
-			} else {
-				break; // do not continue if we came across different amcestors.
-			}
-		}
-		
-		return commonAncestor;
-	}
-	
-	
-	/**
-	 * Adds all ancestors of an EObject to the provided list. Ancestors are all eContainers starting from the specified element. The ancestors are added starting with the root.
-	 *  
-	 * @param o1 The EObject instance for which we want to get the ancestors.
-	 * @param al A list where the ancestors are added.
-	 * @return The list with ancestors (same as @param al) 
-	 */
-	protected List<EObject> collectAncestors(EObject o1, List<EObject> al) {
-
-		if ( o1 != null ) {
-		
-			if ( o1.eContainer() != null ) {
-				collectAncestors(o1.eContainer(), al);
-				al.add(o1.eContainer());
-			}
-		
-		}		
-		return al;
-	}
-	
-
-	protected boolean areOrthogonal(List<Vertex> vertices) {
-		
-		if (vertices == null || vertices.isEmpty()) return true;
-		
-		List<List<EObject>> ancestorLists = new ArrayList<List<EObject>>();
-		
-		for (Vertex vertex : vertices) {
-			ancestorLists.add(collectAncestors(vertex, new ArrayList<EObject>()));
-		}
-		
-		// check all pairs of verices for orthogonality ...
-		for ( int i=0; i<vertices.size()-1; i++) {
-			for ( int j=i+1; j<vertices.size(); j++) {
-				// ... by checking their common ancestor. f it is a region then the pair of vertices are not orthogonal.
-				EObject commonAncestor = findCommonAncestor(ancestorLists.get(i), ancestorLists.get(j));
-				if ( commonAncestor instanceof Region ) {
-					return false;
-				}
-			}
-		}
-		
-		return true;
-	}
-	
-	
-	protected List<Vertex> sources(List<Transition> transitions) {
-		List<Vertex> vertices = new ArrayList<Vertex>();
-		
-		for (Transition transition : transitions) {
-			vertices.add(transition.getSource());
-		}
-		
-		return vertices;
-	}
-	
-	protected List<Vertex> targets(List<Transition> transitions) {
-		List<Vertex> vertices = new ArrayList<Vertex>();
-		
-		for (Transition transition : transitions) {
-			vertices.add(transition.getTarget());
-		}
-		
-		return vertices;
-	}
 	
 
 
