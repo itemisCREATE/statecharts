@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.core.features;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
@@ -92,12 +93,12 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 	}
 
 	protected boolean folderExists(String projectName, String folderPath) {
-		try {
-			return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName).getFolder(new Path(folderPath))
-					.exists();
-		} catch (IllegalArgumentException e) {
-			return false;
-		}
+			try {
+				IPath workspaceRelativePath = Path.fromPortableString(projectName).append(folderPath);
+				return ResourcesPlugin.getWorkspace().getRoot().exists(workspaceRelativePath);
+			} catch (IllegalArgumentException e) {
+				return false;
+			}
 	}
 
 	protected boolean fileExists(String projectName, String folderPath) {
