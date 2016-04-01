@@ -1668,25 +1668,53 @@ Check _Export to HTML_ to create both the image file plus an HTML file to includ
 
 h2(#simulating-statecharts). Simulating statecharts
 
-TBD
+Simulating a statechart model means to execute it, raise events manually, have time events and run cycle-based events being triggered automatically, and observe its behaviour.
+
+An introduction to simulation is given in section "&quot;Simulating the light switch model&quot;":#simulating-the-light-switch-model. A future version of this documentation will provide a comprehensive documentation of all simulation features. For now, we are just giving you the overview below. Although it intends to be complete in the sense that it lists all simulation features, the overview does not go into any detailed usage instructions. Section "&quot;Simulating the light switch model&quot;":#simulating-the-light-switch-model will be helpful. Finding out everything not mentioned there is left as an exercise to the reader for now.
 
 h3(#starting-a-simulation). Starting a simulation
 
-h3(#sc-simulation-perspective). "SC Simulation" perspective
+# Select _Run As → Statechart Simulation_ in the statechart model file's context menu.
+# Select _Run → Run_ or press @[Ctrl+F11]@.
+# Select _Run History → [model file name]_.
+# Select _Run Configurations…_ to configure your own statechart run configurations. For more details see section "&quot;Configuring a simulation&quot;":#configuring-a-simulation.
 
-TBD
+You can run multiple state machines in parallel and even multiple instances of the same state machine.
+
+h3(#sc-simulation-perspective). SC Simulation perspective
+
+The _SC Simulation_ perspective provides selected views that are useful when running a statechart simulation.
+
+Opening the _SC Simulation_ perspective:
+* _Window → Perspective → Open Perspective → SC Simulation_
+* _Window → Perspective → Open Perspective → Other…_, then select _SC Simulation_ in the dialog.
+
+By default, the _SC Simulation_ perspective shows the following views:
+* _Debug_ view
+* _Outline_ view
+* _Simulation_ view
+* _Breakpoints_ view
 
 h3(#controlling-a-simulation). Controlling a simulation
 
-TBD
+* Terminate the simulation by clicking at the _Terminate_ button or by selecting _Run → Terminate_ in the menu bar.
+* Suspend the simulation by clicking at the _Suspend_ button or by selecting _Run → Suspend_ in the menu bar.
+* Resume a suspended simulation by clicking at the _Resume_ button or by selecting _Run → Resume_ in the menu bar.
+* Use the _Step Over_ button or select _Run → Step Over_ in the menu bar to execute a single run-to-completion step.
 
 h3(#interacting-with-a-simulation). Interacting with a simulation
 
-TBD
+Use the _Simulation_ view to
+* manually trigger events
+* inspect variable values
+* modify variable values
 
 h3(#configuring-a-simulation). Configuring a simulation
 
-TBD
+In a statechart simulation's run configuration, the following parameters can be specified:
+* Operation class
+* Execution type (cycle-based versus event-driven)
+* Cycle period
 
 h2(#generating-state-machine-code). Generating state machine code
 
