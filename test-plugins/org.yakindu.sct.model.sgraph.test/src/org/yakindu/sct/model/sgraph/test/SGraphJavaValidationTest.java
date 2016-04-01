@@ -676,6 +676,7 @@ public class SGraphJavaValidationTest {
 		assertError(diagnostics, ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL);
 	}
 
+
 	@Test public void orthogonalTargetStates_StateInTopLevelRegion() {
 		statechart = loadStatechart("NotOrthogonalRegion02.sct");
 
@@ -688,48 +689,41 @@ public class SGraphJavaValidationTest {
 	}
 
 	
-	
-	
-	
-	@Test public void orthogonalState_2() {
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
-						+ "NotOrthogonalRegion02.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Synchronization) {
-				assertFalse(validator.validate(element, diagnostics,
-						new HashMap<Object, Object>()));
-			}
-		}
-
-		assertIssueCount(diagnostics, 2);
-		assertError(diagnostics,
-				ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL);
-		assertError(diagnostics,
-				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL);
+		
+	@Test public void orthogonalSynchronizedTransition() {
+		statechart = loadStatechart("NotOrthogonalRegion03.sct");
+		
+		State stateB = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B");
+		Synchronization sync = (Synchronization) stateB.getOutgoingTransitions().get(0).getTarget();
+		
+		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE);
 	}
 
-	@Test public void orthogonalState_3() {
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
-						+ "NotOrthogonalRegion03.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Synchronization) {
-				assertFalse(validator.validate(element, diagnostics,
-						new HashMap<Object, Object>()));
-			}
-		}
 
-		assertIssueCount(diagnostics, 2);
-		assertError(diagnostics,
-				ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE);
-		assertError(diagnostics,
-				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE);
+	@Test public void orthogonalSynchronizedTransition_Source() {
+		statechart = loadStatechart("NotOrthogonalRegion03.sct");
+		
+		State stateC = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "C");
+		Synchronization sync = (Synchronization) stateC.getOutgoingTransitions().get(0).getTarget();
+		
+		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE);
 	}
+
+
+	@Test public void syncLocation_Issue58() {
+		statechart = loadStatechart("SyncLocation_Issue58.sct");
+		
+		State state = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "AA");
+		Synchronization sync = (Synchronization) state.getOutgoingTransitions().get(0).getTarget();
+		
+		assertTrue(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 0);
+	}
+		
 
 
 	@Test
