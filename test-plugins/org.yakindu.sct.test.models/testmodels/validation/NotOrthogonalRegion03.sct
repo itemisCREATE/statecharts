@@ -41,7 +41,7 @@
       </vertices>
     </regions>
     <regions xmi:id="_pGDpAKgvEeKc3Yk9SnH-yA">
-      <vertices xsi:type="sgraph:State" xmi:id="_oz1cIKglEeKc3Yk9SnH-yA" name="bdd" incomingTransitions="_p4ORUKglEeKc3Yk9SnH-yA">
+      <vertices xsi:type="sgraph:State" xmi:id="_oz1cIKglEeKc3Yk9SnH-yA" name="C" incomingTransitions="_p4ORUKglEeKc3Yk9SnH-yA">
         <outgoingTransitions xmi:id="_sLAzUKglEeKc3Yk9SnH-yA" specification="" target="_CUGPgKWjEeKBrrCTA2_OoQ"/>
       </vertices>
     </regions>
@@ -251,12 +251,12 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_o0RhAaglEeKc3Yk9SnH-yA" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_o0RhAqglEeKc3Yk9SnH-yA"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_o0T9Q6glEeKc3Yk9SnH-yA" name="isHorizontal" booleanValue="true"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_o0RhA6glEeKc3Yk9SnH-yA" x="29" y="297"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_o0RhA6glEeKc3Yk9SnH-yA" x="9" y="293"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_pGIhhKgvEeKc3Yk9SnH-yA"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_pGH6cagvEeKc3Yk9SnH-yA" fontName="Verdana" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_pGH6cqgvEeKc3Yk9SnH-yA" x="780" y="10" width="91" height="389"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_pGH6cqgvEeKc3Yk9SnH-yA" x="780" y="10" width="113" height="396"/>
     </children>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_cCYv8YcVEeK5XMQGITKBlg"/>
     <edges xmi:id="_cDXAUIcVEeK5XMQGITKBlg" type="Transition" element="_cDVyM4cVEeK5XMQGITKBlg" source="_cDT9AIcVEeK5XMQGITKBlg" target="_pTH-AKWlEeKBrrCTA2_OoQ">
