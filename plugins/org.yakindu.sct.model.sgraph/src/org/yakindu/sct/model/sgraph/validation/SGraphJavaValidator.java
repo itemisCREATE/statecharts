@@ -339,7 +339,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-	
+
 
 	@Check public void orthogonalSynchronizedTransition(Synchronization sync) {
 		

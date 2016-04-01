@@ -10,10 +10,13 @@
  */
 package org.yakindu.sct.model.sgraph.util;
 
+
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
@@ -151,5 +154,20 @@ public class SGgraphUtil {
 		return vertices;
 	}
 	
+	
+	/**
+	 * Returns the first NamedElement from the specified collection that matches the specified name.
+	 * 
+	 * @param coll
+	 * @param name
+	 * @return
+	 */
+	public static <T extends NamedElement> T firstNamed(Collection<T> coll, String name) {
+		
+		for (T t : coll) {
+			if (name.equals(t.getName())) return t;
+		}
+		return null;
+	}
 
 }
