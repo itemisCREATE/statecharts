@@ -13,14 +13,20 @@ package org.yakindu.sct.model.sgraph.test;
 import static org.junit.Assert.*;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.*;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.*;
+
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.swing.plaf.synth.SynthGraphicsUtils;
+
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.validation.Check;
@@ -579,6 +585,42 @@ public class SGraphJavaValidationTest {
 		assertWarning(diagnostics, ISSUE_SYNCHRONIZATION_TRANSITION_COUNT);
 	}
 
+	
+	@Test public void orthogonalTransition() {
+		statechart = loadStatechart("OrthogonalTransition.sct");
+		
+		State state = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B2");
+		Transition trans = state.getOutgoingTransitions().get(0);
+		
+		assertTrue(validator.validate(trans, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 0);
+	}
+
+
+	@Test public void orthogonalTransition_BetweenTopLevelRegions() {
+		statechart = loadStatechart("OrthogonalTransition.sct");
+		
+		State state = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "A");
+		Transition trans = state.getOutgoingTransitions().get(0);
+		
+		assertFalse(validator.validate(trans, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, ISSUE_TRANSITION_ORTHOGONAL);
+	}
+	
+	
+	@Test public void orthogonalTransition_BetweenStateRegions() {
+		statechart = loadStatechart("OrthogonalTransition.sct");
+		
+		State state = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B1");
+		Transition trans = state.getOutgoingTransitions().get(0);
+		
+		assertFalse(validator.validate(trans, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, ISSUE_TRANSITION_ORTHOGONAL);
+	}
+
+
 	@Test public void orthogonalStates() {
 		statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR
@@ -640,7 +682,7 @@ public class SGraphJavaValidationTest {
 	}
 
 	@Test
-	public void orthogonalStatesValid() {
+	public void orthogonalStates_Valid() {
 		statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR
 						+ "OrthogonalRegion01.sct");
@@ -829,5 +871,13 @@ public class SGraphJavaValidationTest {
 		return validator.validate(obj, diagnostics,
 				new HashMap<Object, Object>());
 	}
+	
+	protected Statechart loadStatechart(String modelName) {
+		return AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR
+						+ modelName);
+	}
+
+
 
 }
