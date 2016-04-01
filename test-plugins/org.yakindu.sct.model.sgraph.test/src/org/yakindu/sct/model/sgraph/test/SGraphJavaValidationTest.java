@@ -653,6 +653,42 @@ public class SGraphJavaValidationTest {
 		assertError(diagnostics, ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL);
 	}
 
+
+	
+	@Test public void orthogonalTargetStates() {
+		statechart = loadStatechart("OrthogonalRegion01.sct");
+		
+		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B");
+		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
+		
+		assertTrue(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 0);
+	}
+		
+	@Test public void orthogonalTargetStates_StateInParentStateRegion() {
+		statechart = loadStatechart("NotOrthogonalRegion01.sct");
+
+		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B");
+		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
+		
+		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL);
+	}
+
+	@Test public void orthogonalTargetStates_StateInTopLevelRegion() {
+		statechart = loadStatechart("NotOrthogonalRegion02.sct");
+
+		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B");
+		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
+		
+		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL);
+	}
+
+	
+	
 	
 	
 	@Test public void orthogonalState_2() {
