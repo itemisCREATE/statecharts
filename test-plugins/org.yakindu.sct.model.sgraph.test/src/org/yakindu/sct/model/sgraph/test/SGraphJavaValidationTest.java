@@ -593,7 +593,7 @@ public class SGraphJavaValidationTest {
 		Transition trans = state.getOutgoingTransitions().get(0);
 		
 		assertTrue(validator.validate(trans, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 0);
+		assertNoIssues(diagnostics);
 	}
 
 
@@ -628,7 +628,7 @@ public class SGraphJavaValidationTest {
 		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
 		
 		assertTrue(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 0);
+		assertNoIssues(diagnostics);
 	}
 		
 	@Test public void orthogonalSourceStates_StateInParentStateRegion() {
@@ -662,7 +662,7 @@ public class SGraphJavaValidationTest {
 		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
 		
 		assertTrue(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 0);
+		assertNoIssues(diagnostics);
 	}
 		
 	@Test public void orthogonalTargetStates_StateInParentStateRegion() {
@@ -721,7 +721,7 @@ public class SGraphJavaValidationTest {
 		Synchronization sync = (Synchronization) state.getOutgoingTransitions().get(0).getTarget();
 		
 		assertTrue(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 0);
+		assertNoIssues(diagnostics);
 	}
 		
 
