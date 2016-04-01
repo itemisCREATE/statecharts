@@ -93,8 +93,8 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 
 	protected boolean folderExists(String projectName, String folderPath) {
 		try {
-			return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName).getFolder(new Path(folderPath))
-					.exists();
+			boolean exists = ResourcesPlugin.getWorkspace().getRoot().exists(Path.fromPortableString(projectName).append(folderPath));
+			return exists;
 		} catch (IllegalArgumentException e) {
 			return false;
 		}

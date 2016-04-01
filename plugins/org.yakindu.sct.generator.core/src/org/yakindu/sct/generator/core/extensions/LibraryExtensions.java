@@ -16,8 +16,14 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
+import org.yakindu.sct.model.sgen.FeatureConfiguration;
+import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
+import org.yakindu.sct.model.sgen.GeneratorModel;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -110,6 +116,22 @@ public class LibraryExtensions {
 			}
 		}
 		return null;
+	}
+	
+	public static FeatureParameterValue getDefaultValue(
+			GeneratorEntry entry, FeatureType featureType,String paramName) {
+		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(entry);
+
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptor(model.getGeneratorId());
+
+		IDefaultFeatureValueProvider provider = LibraryExtensions.getDefaultFeatureValueProvider(
+				generatorDescriptor.getLibraryIDs(), featureType.getLibrary());
+
+		FeatureConfiguration createDefaultFeatureConfiguration = provider
+				.createDefaultFeatureConfiguration(featureType, entry);
+
+		return createDefaultFeatureConfiguration.getParameterValue(paramName);
 	}
 
 }

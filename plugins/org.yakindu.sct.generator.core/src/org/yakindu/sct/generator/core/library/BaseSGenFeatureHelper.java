@@ -11,12 +11,14 @@
  */
 package org.yakindu.sct.generator.core.library;
 
+import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 /**
  * Convenience...
+ * 
  * @author Johannes Dicks - Initial contribution and API
  *
  */
@@ -26,11 +28,18 @@ public class BaseSGenFeatureHelper {
 		FeatureConfiguration feature = entry.getFeatureConfiguration(featureName);
 
 		if (feature != null) {
-			return feature.getParameterValue(paramName);
+			FeatureParameterValue parameterValue = feature.getParameterValue(paramName);
+
+			if (parameterValue != null) {
+				//return configured value
+				return parameterValue;
+			} else {
+				//return default value
+				return LibraryExtensions.getDefaultValue(entry,feature.getType(),paramName);
+			}
 		}
 
 		return null;
 	}
-	
-	
+
 }
