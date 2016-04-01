@@ -1793,7 +1793,7 @@ h4(#oss_responsibilities-of-generated-code). Responsibilities of generated code
 
 The generated source code supports a basic statechart execution model that can be used to implement different variants. It is important to understand the responsibilities of the generated code, i.&nbsp;e. what it cares about and what it doesn't. The remaining issues are out of scope and must be dealt with in the client code the developer has to provide.
 
-The generated coded basically takes care about the following:
+The generated code basically takes care about the following:
 * It provides the interfaces to access state machine variables and events.
 * It initializes the state machine.
 * It implements the execution semantics within a run-to-completion (RTC) step. This is everything that is happening within the _runCycle()_ function.
