@@ -11,7 +11,6 @@
  */
 package org.yakindu.sct.generator.core.library;
 
-import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -29,14 +28,7 @@ public class BaseSGenFeatureHelper {
 
 		if (feature != null) {
 			FeatureParameterValue parameterValue = feature.getParameterValue(paramName);
-
-			if (parameterValue != null) {
-				//return configured value
-				return parameterValue;
-			} else {
-				//return default value
-				return LibraryExtensions.getDefaultValue(entry,feature.getType(),paramName);
-			}
+			return parameterValue;
 		}
 
 		return null;
