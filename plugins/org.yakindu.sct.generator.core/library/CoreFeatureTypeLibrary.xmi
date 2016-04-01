@@ -6,11 +6,9 @@
     name="Core">
   <types name="Outlet">
     <parameters
-        name="targetProject"
-        optional="true"/>
+        name="targetProject"/>
     <parameters
-        name="targetFolder"
-        optional="true"/>
+        name="targetFolder"/>
     <parameters
         name="libraryTargetFolder"
         comment="A distinct output folder for static code artifacts (which are independent of concrete statechart models). It will not be cleaned or overwritten in succeeding generation passes. If not specified, the code will be generated into the target folder as well."
