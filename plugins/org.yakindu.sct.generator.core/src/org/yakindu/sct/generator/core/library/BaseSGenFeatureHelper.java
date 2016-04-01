@@ -17,7 +17,6 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 /**
  * Convenience...
- * 
  * @author Johannes Dicks - Initial contribution and API
  *
  */
@@ -27,11 +26,11 @@ public class BaseSGenFeatureHelper {
 		FeatureConfiguration feature = entry.getFeatureConfiguration(featureName);
 
 		if (feature != null) {
-			FeatureParameterValue parameterValue = feature.getParameterValue(paramName);
-			return parameterValue;
+			return feature.getParameterValue(paramName);
 		}
 
 		return null;
 	}
-
+	
+	
 }

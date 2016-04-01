@@ -93,16 +93,12 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 	}
 
 	protected boolean folderExists(String projectName, String folderPath) {
-		try {
 			try {
 				IPath workspaceRelativePath = Path.fromPortableString(projectName).append(folderPath);
 				return ResourcesPlugin.getWorkspace().getRoot().exists(workspaceRelativePath);
 			} catch (IllegalArgumentException e) {
 				return false;
 			}
-		} catch (IllegalArgumentException e) {
-			return false;
-		}
 	}
 
 	protected boolean fileExists(String projectName, String folderPath) {
