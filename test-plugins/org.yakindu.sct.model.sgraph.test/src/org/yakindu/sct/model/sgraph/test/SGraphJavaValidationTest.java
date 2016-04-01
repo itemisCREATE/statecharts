@@ -579,8 +579,7 @@ public class SGraphJavaValidationTest {
 		assertWarning(diagnostics, ISSUE_SYNCHRONIZATION_TRANSITION_COUNT);
 	}
 
-	@Test
-	public void orthogonalStates() {
+	@Test public void orthogonalStates() {
 		statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR
 						+ "NotOrthogonalRegion01.sct");
@@ -598,12 +597,13 @@ public class SGraphJavaValidationTest {
 				ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL);
 		assertError(diagnostics,
 				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL);
+	}
 
-		diagnostics = new BasicDiagnostic();
+	@Test public void orthogonalState_2() {
 		statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR
 						+ "NotOrthogonalRegion02.sct");
-		iter = statechart.eAllContents();
+		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Synchronization) {
@@ -614,15 +614,16 @@ public class SGraphJavaValidationTest {
 
 		assertIssueCount(diagnostics, 2);
 		assertError(diagnostics,
-				ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE);
+				ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL);
 		assertError(diagnostics,
-				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE);
+				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL);
+	}
 
-		diagnostics = new BasicDiagnostic();
+	@Test public void orthogonalState_3() {
 		statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR
 						+ "NotOrthogonalRegion03.sct");
-		iter = statechart.eAllContents();
+		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Synchronization) {

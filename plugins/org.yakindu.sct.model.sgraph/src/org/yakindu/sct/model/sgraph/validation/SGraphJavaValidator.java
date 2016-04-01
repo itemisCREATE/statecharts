@@ -298,8 +298,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 	}
 
-	@Check(CheckType.FAST)
-	public void orthogonalTransition(Transition transition) {
+	@Check public void orthogonalTransition(Transition transition) {
 		
 		Vertex source = transition.getSource();
 		Vertex target = transition.getTarget();
@@ -313,6 +312,67 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 			error(ISSUE_TRANSITION_ORTHOGONAL, transition, null, -1);	
 		}
 	}
+	
+	
+	@Check public void orthogonalSourceStates(Synchronization sync) {
+		
+		List<Vertex> sourceVertices = sources(sync.getIncomingTransitions());
+		
+		if ( ! areOrthogonal(sourceVertices) ) {
+			error(ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL, sync, null, -1);
+		}
+	}
+
+	
+
+	@Check public void orthogonalTargetStates(Synchronization sync) {
+		
+		List<Vertex> sourceVertices = targets(sync.getOutgoingTransitions());
+		
+		if ( ! areOrthogonal(sourceVertices) ) {
+			error(ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL, sync, null, -1);
+		}
+	}
+
+	
+
+	@Check public void orthogonalSynchronizedTransition(Synchronization sync) {
+		
+		List<Transition> incoming = sync.getIncomingTransitions();		
+		List<List<EObject>> inAncestorsList = new ArrayList<List<EObject>>();
+		for (Transition trans : incoming) { inAncestorsList.add(collectAncestors(trans.getSource(), new ArrayList<EObject>())); }
+
+		List<Transition> outgoing = sync.getOutgoingTransitions();
+		List<List<EObject>> outAncestorsList = new ArrayList<List<EObject>>(); 
+		for (Transition trans : outgoing) { outAncestorsList.add(collectAncestors(trans.getTarget(), new ArrayList<EObject>())); }
+				
+		
+		Set<Transition> inOrthogonal = new HashSet<Transition>(incoming);
+		Set<Transition> outOrthogonal = new HashSet<Transition>(outgoing);
+		
+		for ( int i=0; i<incoming.size(); i++) {
+			for ( int j=0; j<outgoing.size(); j++ ) {
+				
+				EObject commonAncestor = findCommonAncestor(inAncestorsList.get(i), outAncestorsList.get(j));
+
+				if ( commonAncestor instanceof Region ) {					
+					inOrthogonal.remove(incoming.get(i));
+					outOrthogonal.remove(outgoing.get(j));
+				}
+			}
+		}
+
+		for ( Transition trans : inOrthogonal ) {
+			error(ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE, trans, null, -1);				
+		}
+		
+		for ( Transition trans : outOrthogonal ) {
+			error(ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE, trans, null, -1);				
+		}
+		
+	}
+	
+	
 	
 	
 	/**
@@ -369,28 +429,6 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	}
 	
 
-	@Check(CheckType.FAST)
-	public void orthogonalSourceStates(Synchronization sync) {
-		
-		List<Vertex> sourceVertices = sources(sync.getIncomingTransitions());
-		
-		if ( ! areOrthogonal(sourceVertices) ) {
-			error(ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL + "_new_", sync, null, -1);
-		}
-	}
-
-	
-	@Check(CheckType.FAST)
-	public void orthogonalTargetStates(Synchronization sync) {
-		
-		List<Vertex> sourceVertices = targets(sync.getOutgoingTransitions());
-		
-		if ( ! areOrthogonal(sourceVertices) ) {
-			error(ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL + "_new_", sync, null, -1);
-		}
-	}
-
-	
 	protected boolean areOrthogonal(List<Vertex> vertices) {
 		
 		if (vertices == null || vertices.isEmpty()) return true;
