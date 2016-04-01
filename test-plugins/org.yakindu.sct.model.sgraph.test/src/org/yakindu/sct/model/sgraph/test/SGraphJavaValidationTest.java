@@ -621,26 +621,40 @@ public class SGraphJavaValidationTest {
 	}
 
 
-	@Test public void orthogonalStates() {
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
-						+ "NotOrthogonalRegion01.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Synchronization) {
-				assertFalse(validator.validate(element, diagnostics,
-						new HashMap<Object, Object>()));
-			}
-		}
+	@Test public void orthogonalSourceStates() {
+		statechart = loadStatechart("OrthogonalRegion01.sct");
+		
+		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "AA");
+		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
+		
+		assertTrue(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 0);
+	}
+		
+	@Test public void orthogonalSourceStates_StateInParentStateRegion() {
+		statechart = loadStatechart("NotOrthogonalRegion01.sct");
 
-		assertIssueCount(diagnostics, 2);
-		assertError(diagnostics,
-				ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL);
-		assertError(diagnostics,
-				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL);
+		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "AA");
+		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
+		
+		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL);
 	}
 
+	@Test public void orthogonalSourceStates_StateInTopLevelRegion() {
+		statechart = loadStatechart("NotOrthogonalRegion02.sct");
+
+		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "AA");
+		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
+		
+		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL);
+	}
+
+	
+	
 	@Test public void orthogonalState_2() {
 		statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR
@@ -681,22 +695,6 @@ public class SGraphJavaValidationTest {
 				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE);
 	}
 
-	@Test
-	public void orthogonalStates_Valid() {
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
-						+ "OrthogonalRegion01.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Synchronization) {
-				assertTrue(validator.validate(element, diagnostics,
-						new HashMap<Object, Object>()));
-			}
-		}
-
-		assertIssueCount(diagnostics, 0);
-	}
 
 	@Test
 	public void regionCantBeEnteredUsingShallowHistory() {
