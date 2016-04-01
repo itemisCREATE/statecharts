@@ -56,7 +56,7 @@ public class SGenSemanticHighlightingCalculator implements ISemanticHighlighting
 					if (node.getSemanticElement() instanceof FeatureConfigurationImpl) {
 						FeatureConfigurationImpl feature = (FeatureConfigurationImpl) node.getSemanticElement();
 						DeprecatableElement deprecatableElement = feature.getType();
-						if (deprecatableElement.isDeprecated()) {
+						if (deprecatableElement != null && deprecatableElement.isDeprecated()) {
 							acceptor.addPosition(node.getTotalOffset(), node.getTotalLength(),
 									SGenHighlightingConfiguration.DEPRECATION);
 						}
