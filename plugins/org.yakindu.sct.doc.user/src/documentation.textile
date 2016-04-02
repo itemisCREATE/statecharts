@@ -1623,9 +1623,38 @@ h3(#using-editing-proposals). Using editing proposals
 
 TBD
 
-h3(#comparing-statecharts). Comparing statecharts
+h3(#oss_comparing-statecharts). Comparing statecharts
 
-TBD
+The statechart editor allows for comparing two or even three statecharts to each other, displaying the results, and possibly merging selected differences. Figure "&quot;Comparing two statecharts&quot;":#oss_fig_comparing_two_statecharts shows a sample comparison result.
+
+p(#oss_fig_comparing_two_statecharts). 
+
+!(standard-image)images/comparing_statecharts_010_result.png(Comparing two statecharts)!
+
+p=. Comparing two statecharts
+
+h4(#oss_Comparing-a-statechart-to-its-local-history). Comparing a statechart to its local history
+
+# In the _project_ view, right-click on a single statechart model file. The context menu opens.
+# In the context menu, select _Compare With → Local History…_.
+# In the local history, double-click on the file's version to compare to.
+# The comparison results are shown.
+
+h4(#oss_comparing-two-statecharts). Comparing two statecharts
+
+# In the _project_ view, select two statechart model files.
+# Right-click on one of the selected statechart model files. The context menu opens.
+# In the context menu, select _Compare With → Each Other_.
+# The comparison results are shown.
+
+h4(#oss_comparing-three-statecharts). Comparing three statecharts
+
+# In the _project_ view, select three statechart model files.
+# Right-click on one of the selected statechart model files. The context menu opens.
+# In the context menu, select _Compare With → Each Other_.
+# In the dialog to appear, select one of the statecharts that should be regarded as a common ancestor of the two others.
+# The comparison results are shown.
+
 
 h3(#exporting-a-statechart-as-an-image-file). Exporting a statechart as an image file
 
