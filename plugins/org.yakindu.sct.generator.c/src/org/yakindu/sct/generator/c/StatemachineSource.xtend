@@ -136,12 +136,12 @@ class StatemachineSource {
 			«ENDFOR»
 			«IF hasLocalScope»
 				«FOR event : internalScope.events»
-				«event.access» = bool_false; 
+				«event.access» = bool_false;
 				«ENDFOR»
 			«ENDIF»
 			«IF timed»
 				«FOR event : timeEventScope.events»
-				«event.access» = bool_false; 
+				«event.access» = bool_false;
 				«ENDFOR»
 			«ENDIF»
 		}
@@ -209,13 +209,13 @@ class StatemachineSource {
 			switch (state)
 			{
 				«FOR s : states»
-				case «s.shortName» : 
+				case «s.shortName» :
 					result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.shortName»
 					«ELSE»«scHandle»->stateConfVector[«s.stateVector.offset»] >= «s.shortName»
 						&& «scHandle»->stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.shortName»«ENDIF»);
 					break;
 				«ENDFOR»
-				default: 
+				default:
 					result = bool_false;
 					break;
 			}
@@ -248,10 +248,10 @@ class StatemachineSource {
 			 * Always returns 'false' since this state machine can never become final.
 			 */
 			«ENDIF»
-			sc_boolean «isFinalFctID»(const «scHandleDecl») 
+			sc_boolean «isFinalFctID»(const «scHandleDecl»)
 			{
 		''' +
-		// only if the impact vector is completely covered by final states the state machine 
+		// only if the impact vector is completely covered by final states the state machine
 		// can become final
 		{if (finalStateImpactVector.isCompletelyCovered) {'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] == «IF fs.stateVector.offset == i»«fs.shortName»«ELSE»«null_state»«ENDIF»«ENDFOR»)«ENDFOR»;
 		'''} else {'''   return bool_false;'''} }		
@@ -319,7 +319,7 @@ class StatemachineSource {
 		«exitSequenceFunctions.toPrototypes»
 		«reactFunctions.toPrototypes»
 		static void «clearInEventsFctID»(«scHandleDecl»);
-		static void «clearOutEventsFctID»(«scHandleDecl»);	
+		static void «clearOutEventsFctID»(«scHandleDecl»);
 	'''
 	
 	def constantDefinitions(ExecutionFlow it) '''
@@ -329,7 +329,7 @@ class StatemachineSource {
 			«ENDFOR»
 		«ENDFOR»
 	'''
-	 
+	
 	def toPrototypes(List<Step> steps) '''
 		«FOR s : steps»
 			«s.functionPrototype»

@@ -262,7 +262,7 @@ class Statemachine {
 			
 			return 
 				«FOR i : 0 ..< flow.stateVector.size SEPARATOR '||'»
-				stateVector[«i»] != State.«nullStateName» 
+				stateVector[«i»] != State.«nullStateName»
 				«ENDFOR»;
 		}
 	'''
@@ -276,16 +276,16 @@ class Statemachine {
 			 * Always returns 'false' since this state machine can never become final.
 			 *
 			«ENDIF»
-			 * @see IStatemachine#isFinal() 
+			 * @see IStatemachine#isFinal()
 			 */
 			public boolean isFinal(){
 		''' +
 		
-		// only if the impact vector is completely covered by final states the state machine 
+		// only if the impact vector is completely covered by final states the state machine
 		// can become final
 		{if (finalStateImpactVector.isCompletelyCovered) {'''
 			return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»
-				(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '» 
+				(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»
 					stateVector[«i»] == «
 					IF fs.stateVector.offset == i
 						»State.«fs.stateName.asEscapedIdentifier»«

@@ -19,7 +19,7 @@ import org.yakindu.sct.generator.java.features.CycleBasedWrapperFeature
 import org.yakindu.sct.model.sexec.naming.INamingService
 
 /**
- * This is the Java code generators main class. 
+ * This is the Java code generators main class.
  * 
  * @author Markus Mühlbrandt
  * @author Axel Terfloth - extensions
