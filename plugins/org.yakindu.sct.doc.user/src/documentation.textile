@@ -8,7 +8,7 @@ h2(#dependencies). Dependencies
 
 h3(#eclipse). Eclipse
 
-YAKINDU Statechart Tools is based on the Eclipse integrated development environment (IDE) and runs inside Eclipse. The installation process as described below will put a full-fledged Eclipse instance on your computer. It is comprised in the YAKINDU Statechart Tools distribution file you downloaded. You will have to unpack and execute Eclipse in order to work with YAKINDU Statechart Tools inside of it.
+YAKINDU Statechart Tools is based on the Eclipse integrated development environment (IDE) and runs inside Eclipse. The installation process as described below will put a full-fledged Eclipse instance on your computer. It is contained in the YAKINDU Statechart Tools distribution file you downloaded. You will have to unpack and execute Eclipse in order to work with YAKINDU Statechart Tools inside of it.
 
 h3(#java). Java
 
@@ -18,7 +18,7 @@ In case you don't have Java on your machine yet and you are going to download an
 
 h2(#platform-overview). Platform overview
 
-You can either install YAKINDU Statechart Tools as a stand-alone software package under the following operating systems.
+You can install YAKINDU Statechart Tools as a stand-alone software package under the following operating systems:
 
 * "Installing YAKINDU Statechart Tools on Windows":#installing-on-windows
 * "Installing YAKINDU Statechart Tools on Mac  OS X":#installing-on-macosx
@@ -278,14 +278,12 @@ A dialog opens, asking you to specify the update repository you want to install 
 
 table(#updaterepositories).
 |\2_. Eclipse |\2_. YAKINDU Statechart Tools Update Repository |
-|_. Name |_. Version |_. Release Build |_. Milestone Build
-|Neon|4.6|"http://updates.yakindu.org/sct/neon/releases/":http://updates.yakindu.org/sct/neon/releases/|"http://updates.yakindu.org/sct/neon/milestones/":http://updates.yakindu.org/sct/neon/milestones/|
-|Mars|4.5|"http://updates.yakindu.org/sct/mars/releases/":http://updates.yakindu.org/sct/mars/releases/|"http://updates.yakindu.org/sct/mars/milestones/":http://updates.yakindu.org/sct/mars/milestones/|
-|Luna|4.4|"http://updates.yakindu.org/sct/luna/releases/":http://updates.yakindu.org/sct/luna/releases/|"http://updates.yakindu.org/sct/luna/milestones/":http://updates.yakindu.org/sct/luna/milestones/|
+|_. Name |_. Version |_. Release Build |
+|Neon|4.6|"http://updates.yakindu.org/sct/neon/releases/":http://updates.yakindu.org/sct/neon/releases/|
+|Mars|4.5|"http://updates.yakindu.org/sct/mars/releases/":http://updates.yakindu.org/sct/mars/releases/|
+|Luna|4.4|"http://updates.yakindu.org/sct/luna/releases/":http://updates.yakindu.org/sct/luna/releases/|
 
 p. Please note that YAKINDU Statechart Tools might take some time to catch up with more recent Eclipse releases. The corresponding update repositories will not be available until then.
-
-Instead of an officially stable YAKINDU Statechart Tools _release_, you can alternatively install a _milestone_ build. Since milestone builds are newer than stable releases, they generally have more features available and more bugs fixed. However, they might also contain some new bugs that have gone unnoticed by now.
 
 Enter some text into the _Name_ field. This text is abitrary in principle, but you should choose something that makes it easier for you to identify this particular update repository among other update repositories. In the example below, the repository's name is @YAKINDU Statechart Tools (Luna)@. It describes which piece of software the repository provides (YAKINDU Statechart Tools) and which Eclipse release that software is compatible with (Luna, i. e. Eclipse 4.4).
 
@@ -305,7 +303,7 @@ Please check at least _Xtext Integration Utilities_ and – no surprise – _YAK
 
 Click _Next &gt;_.
 
-Eclipse tries to integrate the new software with the software that is already installed. If it detects any mismatched between requirements and provisions, Eclipse will try to find a solution in order to mitigate this problem. The screenshot below shows such a case:
+Eclipse tries to integrate the new software with the software that is already installed. If it detects any mismatches between requirements and provisions, Eclipse will try to find a solution in order to mitigate this problem. The screenshot below shows such a case:
 
 !(standard-image)images/eclipse_install_050_eclipse_trouble.png(Install remediation page)!
 
@@ -373,11 +371,11 @@ h2(#what-are-yakindu-statechart-tools). What are YAKINDU Statechart Tools?
 
 The statechart tools are a central part of YAKINDU: the modular toolkit for model-driven development of embedded systems. It is based on the open-source development platform Eclipse. YAKINDU Statechart Tools (YAKINDU SCT) provide the following tools to deal with state machine diagrams:
 
-* *YAKINDU SCT Editor* to create and edit statecharts
-* *YAKINDU Simulator* to simulate the behavior of statecharts
-* *YAKINDU Xpand generator projects* to create a transformation of statecharts in Xpand
-* *YAKINDU Xtend/Java generator projects* to create a transformation in Xtend/Java
-* *Integrated Validator*
+* *Statechart diagram editor* to graphically create and edit statecharts
+* *Statechart simulator* to simulate the behavior of statecharts
+* *Code generators for Java, C, C&#43;&#43;* to transform statecharts into code
+* *Custom generator projects* to easily create model-to-text transformations with Xtend/Java or Xpand
+* *Integrated validator* to check for syntactical or semantical problems of the statechart model 
 
 The following graph shows these features and their relation to each other:
 
@@ -399,7 +397,7 @@ You may ask: Where does the money for open-source development come from? Well, i
 
 h3(#who-is-using-yakindu-statechart-tools). Who is using YAKINDU Statechart Tools?
 
-Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing benefit to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, or C&#43;&#43;.
+Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing benefit to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, or C&#43;&#43; code.
 
 ###.. FIXME: Decide what to do with the following subsection regarding the document structure.
 ###.. FIXME: h3(#what-is-the-structure-of-this-documentation). What is the structure of this documentation?
@@ -733,7 +731,7 @@ In order to eventually obtain the *CallHandling* example in the form of executab
 
 h4(#creating-the-statechart-model). Creating the statechart model
 
-"Above":#starting-with-an-empty-statechart-model tutorial we have seen how to work with the statechart editor. So let's create a new project now and use the statechart editor to create the *CallHandling* statechart model as outlined above.
+In the above "tutorial":#starting-with-an-empty-statechart-model we have seen how to work with the statechart editor. So let's create a new project now and use the statechart editor to create the *CallHandling* statechart model as outlined above.
 
 Since we are going to generate Java code, we should use a Java project to host the statechart model. Use _File → New → Java Project_ and follow the _New Java Project_ wizard to create one.
 
