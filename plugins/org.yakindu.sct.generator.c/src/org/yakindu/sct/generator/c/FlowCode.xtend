@@ -112,10 +112,10 @@ class FlowCode {
 		«flow.type.toFirstLower»_unsetTimer(«scHandle», (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) );		
 	'''
 
-	def dispatch CharSequence code(Execution it) 
+	def dispatch CharSequence code(Execution it)
 		'''«statement.code»;'''
 	
-	def dispatch CharSequence code(Call it) 
+	def dispatch CharSequence code(Call it)
 		'''«step.shortName»(«scHandle»);'''
 
 	def dispatch CharSequence code(Sequence it) '''
@@ -125,10 +125,10 @@ class FlowCode {
 		«ENDFOR»
 	'''	
 
-	def dispatch CharSequence code(Check it) 
+	def dispatch CharSequence code(Check it)
 		'''«IF condition != null»«condition.sc_boolean_code»«ELSE»bool_true«ENDIF»'''
 	
-	def dispatch CharSequence code(CheckRef it) 
+	def dispatch CharSequence code(CheckRef it)
 		'''«IF check != null»«check.shortName»(«scHandle»)«ELSE»bool_true«ENDIF»'''
 
 	def dispatch CharSequence code(If it) '''

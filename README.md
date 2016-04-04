@@ -7,12 +7,12 @@
 The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of Harel statecharts. 
 
 ## Professional Support
-Need professional support for Yakindu Statechart Tools? Contact us: statecharts@itemis.com
+Need professional support for YAKINDU Statechart Tools? Contact us: statecharts@itemis.com
 ## License
 
-The source code is provided under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>. 
+The source code of YAKINDU Statechart Tools is provided under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>. 
 
-The provided open source code generators do not imply any licence constraint on the generated code. The generated code is property of the user (as person or organization). There is no need to make the generate code open source and the user is free to choose any licence model for the generated code.
+The open source code generators coming with YAKINDU Statechart Tools do not imply any license constraints on the generated code whatsoever. The generated code is property of the user (as person or organization). There is no need to make the generated code open source. The user is free to choose any license model for the generated code.
 
 ## Download & Installation
 

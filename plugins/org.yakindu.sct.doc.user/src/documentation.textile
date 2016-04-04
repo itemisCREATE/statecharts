@@ -385,11 +385,17 @@ The following graph shows these features and their relation to each other:
 
 p=. Features of YAKINDU Statechart Tools
 
+h3(#oss_which-licensing-rules-do-apply). Which licensing rules do apply to YAKINDU Statechart Tools?
+
+The source code of YAKINDU Statechart Tools is provided under the "Eclipse Public License":http://www.eclipse.org/legal/epl-v10.html.
+
+The open source code generators coming with YAKINDU Statechart Tools do not imply any license constraints on the generated code whatsoever. The generated code is property of the user (as person or organization). There is no need to make the generated code open source. The user is free to choose any license model for the generated code.
+
 h3(#who-is-behind-yakindu-statechart-tools). Who is behind YAKINDU Statechart Tools?
 
-The main part of YAKINDU Statechart Tools is an open-source project ("$":http://www.yakindu.org/ ). Most developers work for itemis, a well-known consulting company specialized on model-based development.
+The main part of YAKINDU Statechart Tools is an open-source project, available at "http://www.yakindu.org/":http://www.yakindu.org/. Most developers are working for itemis, a well-known consulting company specialized on model-based development.
 
-You may ask: Where does the money for open-source development come from? Well, itemis is providing professional services around YAKINDU, be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages, you name it. The itemis YAKINDU developers do not only know the framework very well but are also experts in programming and domain-specific language design. If you need an advice get in contact with itemis' YAKINDU team ("$":https://info.itemis.com/contact ).
+You may ask: Where does the money for open-source development come from? Well, itemis is providing professional services around YAKINDU, be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages, you name it. The itemis YAKINDU developers do not only know the framework very well but are also experts in programming and domain-specific language design. If you need advice get in contact with itemis' "YAKINDU team":https://info.itemis.com/contact.
 
 h3(#who-is-using-yakindu-statechart-tools). Who is using YAKINDU Statechart Tools?
 
@@ -1617,9 +1623,38 @@ h3(#using-editing-proposals). Using editing proposals
 
 TBD
 
-h3(#comparing-statecharts). Comparing statecharts
+h3(#oss_comparing-statecharts). Comparing statecharts
 
-TBD
+The statechart editor allows for comparing two or even three statecharts to each other, displaying the results, and possibly merging selected differences. Figure "&quot;Comparing two statecharts&quot;":#oss_fig_comparing_two_statecharts shows a sample comparison result.
+
+p(#oss_fig_comparing_two_statecharts). 
+
+!(standard-image)images/comparing_statecharts_010_result.png(Comparing two statecharts)!
+
+p=. Comparing two statecharts
+
+h4(#oss_Comparing-a-statechart-to-its-local-history). Comparing a statechart to its local history
+
+# In the _project_ view, right-click on a single statechart model file. The context menu opens.
+# In the context menu, select _Compare With → Local History…_.
+# In the local history, double-click on the file's version to compare to.
+# The comparison results are shown.
+
+h4(#oss_comparing-two-statecharts). Comparing two statecharts
+
+# In the _project_ view, select two statechart model files.
+# Right-click on one of the selected statechart model files. The context menu opens.
+# In the context menu, select _Compare With → Each Other_.
+# The comparison results are shown.
+
+h4(#oss_comparing-three-statecharts). Comparing three statecharts
+
+# In the _project_ view, select three statechart model files.
+# Right-click on one of the selected statechart model files. The context menu opens.
+# In the context menu, select _Compare With → Each Other_.
+# In the dialog to appear, select one of the statecharts that should be regarded as a common ancestor of the two others.
+# The comparison results are shown.
+
 
 h3(#exporting-a-statechart-as-an-image-file). Exporting a statechart as an image file
 
@@ -1668,25 +1703,53 @@ Check _Export to HTML_ to create both the image file plus an HTML file to includ
 
 h2(#simulating-statecharts). Simulating statecharts
 
-TBD
+Simulating a statechart model means to execute it, raise events manually, have time events and run cycle-based events being triggered automatically, and observe its behaviour.
+
+An introduction to simulation is given in section "&quot;Simulating the light switch model&quot;":#simulating-the-light-switch-model. A future version of this documentation will provide a comprehensive documentation of all simulation features. For now, we are just giving you the overview below. Although it intends to be complete in the sense that it lists all simulation features, the overview does not go into any detailed usage instructions. Section "&quot;Simulating the light switch model&quot;":#simulating-the-light-switch-model will be helpful. Finding out everything not mentioned there is left as an exercise to the reader for now.
 
 h3(#starting-a-simulation). Starting a simulation
 
-h3(#sc-simulation-perspective). "SC Simulation" perspective
+# Select _Run As → Statechart Simulation_ in the statechart model file's context menu.
+# Select _Run → Run_ or press @[Ctrl+F11]@.
+# Select _Run History → [model file name]_.
+# Select _Run Configurations…_ to configure your own statechart run configurations. For more details see section "&quot;Configuring a simulation&quot;":#configuring-a-simulation.
 
-TBD
+You can run multiple state machines in parallel and even multiple instances of the same state machine.
+
+h3(#sc-simulation-perspective). SC Simulation perspective
+
+The _SC Simulation_ perspective provides selected views that are useful when running a statechart simulation.
+
+Opening the _SC Simulation_ perspective:
+* _Window → Perspective → Open Perspective → SC Simulation_
+* _Window → Perspective → Open Perspective → Other…_, then select _SC Simulation_ in the dialog.
+
+By default, the _SC Simulation_ perspective shows the following views:
+* _Debug_ view
+* _Outline_ view
+* _Simulation_ view
+* _Breakpoints_ view
 
 h3(#controlling-a-simulation). Controlling a simulation
 
-TBD
+* Terminate the simulation by clicking at the _Terminate_ button or by selecting _Run → Terminate_ in the menu bar.
+* Suspend the simulation by clicking at the _Suspend_ button or by selecting _Run → Suspend_ in the menu bar.
+* Resume a suspended simulation by clicking at the _Resume_ button or by selecting _Run → Resume_ in the menu bar.
+* Use the _Step Over_ button or select _Run → Step Over_ in the menu bar to execute a single run-to-completion step.
 
 h3(#interacting-with-a-simulation). Interacting with a simulation
 
-TBD
+Use the _Simulation_ view to
+* manually trigger events
+* inspect variable values
+* modify variable values
 
 h3(#configuring-a-simulation). Configuring a simulation
 
-TBD
+In a statechart simulation's run configuration, the following parameters can be specified:
+* Operation class
+* Execution type (cycle-based versus event-driven)
+* Cycle period
 
 h2(#generating-state-machine-code). Generating state machine code
 
@@ -1789,7 +1852,50 @@ TBD
 
 h3(#general-concepts-of-the-state-machine-code). General concepts of the state machine code
 
-TBD
+h4(#oss_responsibilities-of-generated-code). Responsibilities of generated code
+
+The generated source code supports a basic statechart execution model that can be used to implement different variants. It is important to understand the responsibilities of the generated code, i.&nbsp;e. what it cares about and what it doesn't. The remaining issues are out of scope and must be dealt with in the client code the developer has to provide.
+
+The generated code basically takes care about the following:
+* It provides the interfaces to access state machine variables and events.
+* It initializes the state machine.
+* It implements the execution semantics within a run-to-completion (RTC) step. This is everything that is happening within the _runCycle()_ function.
+
+There are some predefined constraints:
+* The implementation is not thread-safe. Therefore the _runCycle()_ method must never be called in parallel by different threads.
+* All events for a run-to-completion step will be consumed.
+
+Out of scope are:
+* *Scheduling:* The code generator cannot make any general assumptions about scheduling mechanisms and constraints.
+* *Timers:* The code generator does not know how the system handles times. If any specific time-dependend behavior is required, the client code has to contribute it.
+* *Event handling:* The code generator cannot know and does not prescribe how events are entering the system. Therefore deciding when events will be delivered to the state machine is an outside (client code) responsibility.
+* *Concurrency:* The client code has to care about any thread synchronization.
+* *Memory management:* The generated state machine code will never allocate any memory. Allocating the memory needed for the statechart structure is a responsibility of the client code.
+
+All these things are out of the generated code's scope, since the code generators coming with YAKINDU Statechart Tools cannot provide tailored solutions without knowing any details about a respective specific environment, like runtime system, libraries, etc.
+
+In order to have a better code generator support for specific usage patterns, you would have to implement corresponding code generator extensions.
+
+h4(#oss_cycle-based-execution). Cycle-based execution
+
+The generated state machine code implements a so-called _cycle-based execution scheme_. Each run cycle consists of two different phases:
+# In the first phase, incoming events are collected.
+# In the second phase, _runCycle()_ is executed.
+
+This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.&nbsp;g. something like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the IPO (input processing output) model.
+
+In other cases an event-driven approach might be more suitable. This can be implemented e.&nbsp;g. by directly calling _runCycle()_ as soon as a certain event occurs, like in:
+
+bc. sc_raiseEventA(handle);
+sc_runCycle(handle);
+
+More sophisticated approaches could care about buffering of events, managing an event queue, dealing with priority events, and so on. However, since this is out of the the generated code's scope, it is the client code's responsibility.
+
+h4(#oss_thread-safe-execution). Thread-safe execution
+
+In order to circumvent the missing thread-safety of the _runCycle()_ method, the Java code generator has an option for generating a so-called runnable wrapper, providing event queueing and multi-threading support. For details, see section "&quot;RunnableWrapper&quot;":#oss_runnablewrapper. It is easy to implement this as a general solution for Java, since the programming language provides corresponding standard features that by definition are available everywhere by can simply be used.
+
+C, however, does not have any standardized threading features. Therefore a general solution cannot be given. Specific solutions for specific threading libraries would require the implementation of a suitable code generator extension.
 
 h2(#c-code-generator). C code generator
 
@@ -2797,7 +2903,7 @@ bc. feature SynchronizedWrapper {
 ==<!-- End sgen_feature_synchronizedwrapper -->==
 ==<!-- Start sgen_feature_runnablewrapper -->==
 
-h4(#runnablewrapper). RunnableWrapper
+h4(#oss_runnablewrapper). RunnableWrapper
 
 The *RunnableWrapper* feature generates a runnable wrapper for the state machine. This is an additional Java class providing a thread-safe wrapper for the generated state machine implementation. In addition to the specific state machine interface it implements the _Runnable_ interface and can be executed in a thread. It implements an event queue and event-driven execution semantics. As the wrapper adds thread safety any number of client threads may call the state machine.
 

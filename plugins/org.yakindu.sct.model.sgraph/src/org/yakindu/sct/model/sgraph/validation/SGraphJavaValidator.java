@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 committers of YAKINDU and others.
+ * Copyright (c) 2012-2016 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,6 +10,13 @@
  */
 package org.yakindu.sct.model.sgraph.validation;
 
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.areOrthogonal;
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.collectAncestors;
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.commonAncestor;
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.findCommonAncestor;
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.sources;
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.targets;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -18,7 +25,6 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
@@ -74,6 +80,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL = "The source states of a synchronization must be orthogonal!";
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE = "The source states of a synchronization have to be contained in the same parent state within different regions!";
 	public static final String ISSUE_SYNCHRONIZATION_TRANSITION_COUNT = "A synchronization should have at least two incoming or two outgoing transitions";
+	public static final String ISSUE_TRANSITION_ORTHOGONAL = "Source and target of a transition must not be located in orthogonal regions!";
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing Transitions from Entries can only target to sibling or inner states.";
 
 	@Check(CheckType.FAST)
@@ -296,75 +303,83 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 	}
 
-	@Check(CheckType.FAST)
-	public void orthogonalStates(Synchronization fork) {
-		// check target states
-		orthogonalStates(fork, true);
-		// check source states
-		orthogonalStates(fork, false);
+	@Check public void orthogonalTransition(Transition transition) {
+		
+		Vertex source = transition.getSource();
+		Vertex target = transition.getTarget();
+		
+		if ( (source instanceof Synchronization) || (target instanceof Synchronization) ) return; // ... the check does not apply.
+		
+		EObject commonAncestor = commonAncestor(source, target);
+		
+		if (commonAncestor instanceof CompositeElement) {
+			
+			error(ISSUE_TRANSITION_ORTHOGONAL, transition, null, -1);	
+		}
 	}
-
-	private void orthogonalStates(Synchronization fork, boolean searchTarget) {
-		List<Transition> transitions = searchTarget ? fork
-				.getOutgoingTransitions() : fork.getIncomingTransitions();
-		if (transitions.size() > 1) {
-			final Transition firstTransition = transitions.get(0);
-			final Vertex vertex = searchTarget ? firstTransition.getTarget()
-					: firstTransition.getSource();
-
-			CompositeElement root = findCommonRootCompositeElement(vertex
-					.getParentRegion().getComposite(), fork, searchTarget);
-
-			if (root != null) {
-				for (Transition t : transitions) {
-					Region parentRegion = searchTarget ? t.getTarget()
-							.getParentRegion() : t.getSource()
-							.getParentRegion();
-					for (Transition transition : transitions) {
-						if (transition != t
-								&& EcoreUtil.isAncestor(parentRegion,
-										searchTarget ? transition.getTarget()
-												: transition.getSource())) {
-							error(searchTarget ? ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL
-									: ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL,
-									fork, null, -1);
-							break;
-						}
-					}
-				}
-			} else {
-				error(searchTarget ? ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE
-						: ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE,
-						fork, null, -1);
-			}
-
+	
+	
+	@Check public void orthogonalSourceStates(Synchronization sync) {
+		
+		List<Vertex> sourceVertices = sources(sync.getIncomingTransitions());
+		
+		if ( ! areOrthogonal(sourceVertices) ) {
+			error(ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL, sync, null, -1);
 		}
 	}
 
-	private CompositeElement findCommonRootCompositeElement(
-			CompositeElement root, Synchronization fork, boolean searchTarget) {
+	
 
-		CompositeElement ret = root;
+	@Check public void orthogonalTargetStates(Synchronization sync) {
+		
+		List<Vertex> sourceVertices = targets(sync.getOutgoingTransitions());
+		
+		if ( ! areOrthogonal(sourceVertices) ) {
+			error(ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL, sync, null, -1);
+		}
+	}
 
-		if (ret != fork.getParentRegion().getComposite()) {
-			for (Transition transition : searchTarget ? fork
-					.getOutgoingTransitions() : fork.getIncomingTransitions()) {
-				if (ret != null
-						&& !EcoreUtil.isAncestor(ret,
-								searchTarget ? transition.getTarget()
-										: transition.getSource())) {
-					if (ret.eContainer() instanceof Region) {
-						final CompositeElement newRoot = ((Region) root
-								.eContainer()).getComposite();
-						ret = findCommonRootCompositeElement(newRoot, fork,
-								searchTarget);
-					}
+
+
+	@Check public void orthogonalSynchronizedTransition(Synchronization sync) {
+		
+		List<Transition> incoming = sync.getIncomingTransitions();		
+		List<List<EObject>> inAncestorsList = new ArrayList<List<EObject>>();
+		for (Transition trans : incoming) { inAncestorsList.add(collectAncestors(trans.getSource(), new ArrayList<EObject>())); }
+
+		List<Transition> outgoing = sync.getOutgoingTransitions();
+		List<List<EObject>> outAncestorsList = new ArrayList<List<EObject>>(); 
+		for (Transition trans : outgoing) { outAncestorsList.add(collectAncestors(trans.getTarget(), new ArrayList<EObject>())); }
+				
+		
+		Set<Transition> inOrthogonal = new HashSet<Transition>(incoming);
+		Set<Transition> outOrthogonal = new HashSet<Transition>(outgoing);
+		
+		for ( int i=0; i<incoming.size(); i++) {
+			for ( int j=0; j<outgoing.size(); j++ ) {
+				
+				EObject commonAncestor = findCommonAncestor(inAncestorsList.get(i), outAncestorsList.get(j));
+
+				if ( commonAncestor instanceof Region ) {					
+					inOrthogonal.remove(incoming.get(i));
+					outOrthogonal.remove(outgoing.get(j));
 				}
 			}
-			return ret;
 		}
-		return null;
+
+		for ( Transition trans : inOrthogonal ) {
+			error(ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE, trans, null, -1);				
+		}
+		
+		for ( Transition trans : outOrthogonal ) {
+			error(ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE, trans, null, -1);				
+		}
+		
 	}
+	
+	
+	
+
 
 	@Override
 	public boolean isLanguageSpecific() {

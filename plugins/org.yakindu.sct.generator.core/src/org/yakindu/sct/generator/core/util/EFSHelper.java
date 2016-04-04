@@ -88,7 +88,7 @@ public class EFSHelper {
 	 */
 	public IContainer getContainer(OutputConfiguration outputConfig,IProject project) {
 		String path = outputConfig.getOutputDirectory();
-		if (".".equals(path) || "./".equals(path) || "".equals(path) || project == null) {
+		if (".".equals(path) ||"/".equals(path) || "./".equals(path) || "".equals(path) || project == null) {
 			return project;
 		}
 		return project.getFolder(new Path(path));

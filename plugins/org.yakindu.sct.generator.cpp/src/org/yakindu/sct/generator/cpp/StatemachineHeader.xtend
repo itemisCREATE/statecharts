@@ -251,27 +251,27 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 
 	override dispatch functionPrototypes(EventDefinition it) '''
 		«IF direction == Direction::LOCAL»
-			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */ 
+			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */
 			void «asRaiser»(«valueParams»);
 			
-			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */ 
+			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */
 			sc_boolean «asRaised»();
 			
 			«IF hasValue»
-				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */ 
+				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */
 				«type.targetLanguageName» «asGetter»();
 				
 			«ENDIF»
 		«ELSEIF direction == Direction::IN»
-			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */ 
+			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */
 			void «asRaiser»(«valueParams»);
 			
 		«ELSE»
-			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */ 
+			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */
 			sc_boolean «asRaised»();
 			
 			«IF hasValue»
-				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */ 
+				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */
 				«type.targetLanguageName» «asGetter»();
 				
 			«ENDIF»
@@ -279,11 +279,11 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 	'''
 
 	override dispatch functionPrototypes(VariableDefinition it) '''
-		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
+		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
 		«IF const»const «ENDIF»«type.targetLanguageName» «it.asGetter»();
 
 		«IF !readonly && !const»
-			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
+			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
 			void «asSetter»(«type.targetLanguageName» value);
 			
 		«ENDIF»
