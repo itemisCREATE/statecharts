@@ -2869,8 +2869,8 @@ The *Naming* feature allows the configuration of package names as well as class 
 
 It is an *optional* feature and has the following parameters:
 
-# _basePackage_ (Boolean, required): The package to create for the generated java classes
-# _implementationSuffix_ (Boolean, optional): The suffix for the implementing classes
+# _basePackage_ (String, required): The package to create for the generated java classes
+# _implementationSuffix_ (String, optional): The suffix for the implementing classes
 
 bq.. *Example:*
 
