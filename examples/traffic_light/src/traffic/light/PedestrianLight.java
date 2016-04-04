@@ -33,7 +33,7 @@ public class PedestrianLight extends JPanel {
 	private Alignment alignment;
 
 	public enum Alignment {
-		HORIZONTAL(25, 50), VERTICAL(50, 25);
+		HORIZONTAL(50, 25), VERTICAL(25, 50);
 
 		private int width;
 		private int height;
@@ -91,7 +91,7 @@ public class PedestrianLight extends JPanel {
 		graphics.setColor(Color.black);
 		graphics.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
 
-		if (alignment == Alignment.VERTICAL) {
+		if (alignment == Alignment.HORIZONTAL) {
 
 			graphics.setColor(white ? Color.white : Color.black);
 			graphics.fillRect(bounds.x + ((bounds.width - (3 * (bounds.height / 3))) / 4),
@@ -106,7 +106,7 @@ public class PedestrianLight extends JPanel {
 					bounds.x + (3 * ((bounds.width - (3 * (bounds.height / 3))) / 4)) + (2 * (bounds.height / 3)),
 					bounds.y + ((bounds.width - (3 * (bounds.height / 3))) / 4), bounds.width / 4, bounds.width / 4);
 
-		} else if (alignment == Alignment.HORIZONTAL) {
+		} else if (alignment == Alignment.VERTICAL) {
 
 			graphics.setColor(white ? Color.white : Color.black);
 			graphics.fillRect(bounds.x + 7, bounds.y + 2, bounds.height / 4, bounds.height / 4);

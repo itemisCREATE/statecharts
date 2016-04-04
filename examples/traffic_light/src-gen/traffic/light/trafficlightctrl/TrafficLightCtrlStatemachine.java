@@ -116,7 +116,7 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 	private boolean initialized = false;
 
 	public enum State {
-		main_region_on, main_region_on_r1_StreetGreen, main_region_on_r1_PedWaiting, main_region_on_r1_PedWaiting_r1_waitOn, main_region_on_r1_PedWaiting_r1_waitOff, main_region_on_r1_StreetAttention, main_region_on_r1_StreetRed, main_region_on_r1_PedestrianGreen, main_region_on_r1_PedestrianRed, main_region_on_r1_StreetPrepare, main_region_off, main_region_off_r1_YellowOn, main_region_off_r1_YellowOff, $NullState$
+		main_region_on, main_region_on_r1_StreetGreen, main_region_on_r1_PedWaiting, main_region_on_r1_PedWaiting_r1_waitOn, main_region_on_r1_PedWaiting_r1_waitOff, main_region_on_r1_StreetAttention, main_region_on_r1_StreetRed, main_region_on_r1_PedestrianGreen, main_region_on_r1_PedestrianRed, main_region_on_r1_StreetPrepare, main_region_on_r1_Safe, main_region_off, main_region_off_r1_YellowOn, main_region_off_r1_YellowOff, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -125,7 +125,7 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 
 	private ITimer timer;
 
-	private final boolean[] timeEvents = new boolean[10];
+	private final boolean[] timeEvents = new boolean[12];
 
 	public TrafficLightCtrlStatemachine() {
 
@@ -167,11 +167,15 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
 		}
+		entryAction();
+
 		enterSequence_main_region_default();
 	}
 
 	public void exit() {
 		exitSequence_main_region();
+
+		exitAction();
 	}
 
 	/**
@@ -215,7 +219,7 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 		switch (state) {
 			case main_region_on :
 				return stateVector[0].ordinal() >= State.main_region_on.ordinal()
-						&& stateVector[0].ordinal() <= State.main_region_on_r1_StreetPrepare.ordinal();
+						&& stateVector[0].ordinal() <= State.main_region_on_r1_Safe.ordinal();
 			case main_region_on_r1_StreetGreen :
 				return stateVector[0] == State.main_region_on_r1_StreetGreen;
 			case main_region_on_r1_PedWaiting :
@@ -235,6 +239,8 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 				return stateVector[0] == State.main_region_on_r1_PedestrianRed;
 			case main_region_on_r1_StreetPrepare :
 				return stateVector[0] == State.main_region_on_r1_StreetPrepare;
+			case main_region_on_r1_Safe :
+				return stateVector[0] == State.main_region_on_r1_Safe;
 			case main_region_off :
 				return stateVector[0].ordinal() >= State.main_region_off.ordinal()
 						&& stateVector[0].ordinal() <= State.main_region_off_r1_YellowOff.ordinal();
@@ -289,7 +295,7 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 	}
 
 	private boolean check__lr0() {
-		return true;
+		return timeEvents[11];
 	}
 
 	private boolean check_main_region_on_tr0_tr0() {
@@ -332,16 +338,20 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 		return timeEvents[7];
 	}
 
+	private boolean check_main_region_on_r1_Safe_tr0_tr0() {
+		return timeEvents[8];
+	}
+
 	private boolean check_main_region_off_tr0_tr0() {
 		return sCInterface.onOff;
 	}
 
 	private boolean check_main_region_off_r1_YellowOn_tr0_tr0() {
-		return timeEvents[8];
+		return timeEvents[9];
 	}
 
 	private boolean check_main_region_off_r1_YellowOff_tr0_tr0() {
-		return timeEvents[9];
+		return timeEvents[10];
 	}
 
 	private void effect__lr0() {
@@ -408,6 +418,12 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 		enterSequence_main_region_on_r1_StreetGreen_default();
 	}
 
+	private void effect_main_region_on_r1_Safe_tr0() {
+		exitSequence_main_region_on_r1_Safe();
+
+		enterSequence_main_region_on_r1_StreetPrepare_default();
+	}
+
 	private void effect_main_region_off_tr0() {
 		exitSequence_main_region_off();
 
@@ -424,6 +440,12 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 		exitSequence_main_region_off_r1_YellowOff();
 
 		enterSequence_main_region_off_r1_YellowOn_default();
+	}
+
+	/* Entry action for statechart 'TrafficLightCtrl'. */
+	private void entryAction() {
+
+		timer.setTimer(this, 11, 200, true);
 	}
 
 	/* Entry action for state 'StreetGreen'. */
@@ -519,6 +541,24 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 		sCITrafficLight.setGreen(false);
 	}
 
+	/* Entry action for state 'Safe'. */
+	private void entryAction_main_region_on_r1_Safe() {
+
+		timer.setTimer(this, 8, 10 * 1000, false);
+
+		sCITrafficLight.setRed(true);
+
+		sCITrafficLight.setYellow(false);
+
+		sCITrafficLight.setGreen(false);
+
+		sCIPedestrian.setRed(true);
+
+		sCIPedestrian.setGreen(false);
+
+		sCIPedestrian.setRequest(false);
+	}
+
 	/* Entry action for state 'off'. */
 	private void entryAction_main_region_off() {
 		sCITrafficLight.setRed(false);
@@ -535,7 +575,7 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 	/* Entry action for state 'YellowOn'. */
 	private void entryAction_main_region_off_r1_YellowOn() {
 
-		timer.setTimer(this, 8, 500, false);
+		timer.setTimer(this, 9, 500, false);
 
 		sCITrafficLight.setYellow(true);
 
@@ -545,11 +585,16 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 	/* Entry action for state 'YellowOff'. */
 	private void entryAction_main_region_off_r1_YellowOff() {
 
-		timer.setTimer(this, 9, 500, false);
+		timer.setTimer(this, 10, 500, false);
 
 		sCITrafficLight.setYellow(false);
 
 		sCIPedestrian.setRequest(false);
+	}
+
+	/* Exit action for state 'TrafficLightCtrl'. */
+	private void exitAction() {
+		timer.unsetTimer(this, 11);
 	}
 
 	/* Exit action for state 'PedWaiting'. */
@@ -594,14 +639,19 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 		timer.unsetTimer(this, 7);
 	}
 
+	/* Exit action for state 'Safe'. */
+	private void exitAction_main_region_on_r1_Safe() {
+		timer.unsetTimer(this, 8);
+	}
+
 	/* Exit action for state 'YellowOn'. */
 	private void exitAction_main_region_off_r1_YellowOn() {
-		timer.unsetTimer(this, 8);
+		timer.unsetTimer(this, 9);
 	}
 
 	/* Exit action for state 'YellowOff'. */
 	private void exitAction_main_region_off_r1_YellowOff() {
-		timer.unsetTimer(this, 9);
+		timer.unsetTimer(this, 10);
 	}
 
 	/* 'default' enter sequence for state on */
@@ -678,6 +728,14 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_on_r1_StreetPrepare;
+	}
+
+	/* 'default' enter sequence for state Safe */
+	private void enterSequence_main_region_on_r1_Safe_default() {
+		entryAction_main_region_on_r1_Safe();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_on_r1_Safe;
 	}
 
 	/* 'default' enter sequence for state off */
@@ -797,6 +855,14 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 		exitAction_main_region_on_r1_StreetPrepare();
 	}
 
+	/* Default exit sequence for state Safe */
+	private void exitSequence_main_region_on_r1_Safe() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+
+		exitAction_main_region_on_r1_Safe();
+	}
+
 	/* Default exit sequence for state off */
 	private void exitSequence_main_region_off() {
 		exitSequence_main_region_off_r1();
@@ -857,6 +923,10 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 				exitSequence_main_region_on_r1_StreetPrepare();
 				break;
 
+			case main_region_on_r1_Safe :
+				exitSequence_main_region_on_r1_Safe();
+				break;
+
 			case main_region_off_r1_YellowOn :
 				exitSequence_main_region_off_r1_YellowOn();
 				break;
@@ -909,6 +979,10 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 				exitSequence_main_region_on_r1_StreetPrepare();
 				break;
 
+			case main_region_on_r1_Safe :
+				exitSequence_main_region_on_r1_Safe();
+				break;
+
 			default :
 				break;
 		}
@@ -948,7 +1022,9 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 
 	/* The reactions of state StreetGreen. */
 	private void react_main_region_on_r1_StreetGreen() {
-		effect__lr0();
+		if (check__lr0()) {
+			effect__lr0();
+		}
 
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
@@ -961,7 +1037,9 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 
 	/* The reactions of state waitOn. */
 	private void react_main_region_on_r1_PedWaiting_r1_waitOn() {
-		effect__lr0();
+		if (check__lr0()) {
+			effect__lr0();
+		}
 
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
@@ -978,7 +1056,9 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 
 	/* The reactions of state waitOff. */
 	private void react_main_region_on_r1_PedWaiting_r1_waitOff() {
-		effect__lr0();
+		if (check__lr0()) {
+			effect__lr0();
+		}
 
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
@@ -995,7 +1075,9 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 
 	/* The reactions of state StreetAttention. */
 	private void react_main_region_on_r1_StreetAttention() {
-		effect__lr0();
+		if (check__lr0()) {
+			effect__lr0();
+		}
 
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
@@ -1008,7 +1090,9 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 
 	/* The reactions of state StreetRed. */
 	private void react_main_region_on_r1_StreetRed() {
-		effect__lr0();
+		if (check__lr0()) {
+			effect__lr0();
+		}
 
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
@@ -1021,7 +1105,9 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 
 	/* The reactions of state PedestrianGreen. */
 	private void react_main_region_on_r1_PedestrianGreen() {
-		effect__lr0();
+		if (check__lr0()) {
+			effect__lr0();
+		}
 
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
@@ -1034,7 +1120,9 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 
 	/* The reactions of state PedestrianRed. */
 	private void react_main_region_on_r1_PedestrianRed() {
-		effect__lr0();
+		if (check__lr0()) {
+			effect__lr0();
+		}
 
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
@@ -1047,7 +1135,9 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 
 	/* The reactions of state StreetPrepare. */
 	private void react_main_region_on_r1_StreetPrepare() {
-		effect__lr0();
+		if (check__lr0()) {
+			effect__lr0();
+		}
 
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
@@ -1058,9 +1148,26 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 		}
 	}
 
+	/* The reactions of state Safe. */
+	private void react_main_region_on_r1_Safe() {
+		if (check__lr0()) {
+			effect__lr0();
+		}
+
+		if (check_main_region_on_tr0_tr0()) {
+			effect_main_region_on_tr0();
+		} else {
+			if (check_main_region_on_r1_Safe_tr0_tr0()) {
+				effect_main_region_on_r1_Safe_tr0();
+			}
+		}
+	}
+
 	/* The reactions of state YellowOn. */
 	private void react_main_region_off_r1_YellowOn() {
-		effect__lr0();
+		if (check__lr0()) {
+			effect__lr0();
+		}
 
 		if (check_main_region_off_tr0_tr0()) {
 			effect_main_region_off_tr0();
@@ -1073,7 +1180,9 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 
 	/* The reactions of state YellowOff. */
 	private void react_main_region_off_r1_YellowOff() {
-		effect__lr0();
+		if (check__lr0()) {
+			effect__lr0();
+		}
 
 		if (check_main_region_off_tr0_tr0()) {
 			effect_main_region_off_tr0();
@@ -1086,7 +1195,7 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 
 	/* Default react sequence for initial entry  */
 	private void react_main_region__entry_Default() {
-		enterSequence_main_region_on_default();
+		enterSequence_main_region_off_default();
 	}
 
 	/* Default react sequence for initial entry  */
@@ -1096,7 +1205,7 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 
 	/* Default react sequence for initial entry  */
 	private void react_main_region_on_r1__entry_Default() {
-		enterSequence_main_region_on_r1_StreetGreen_default();
+		enterSequence_main_region_on_r1_Safe_default();
 	}
 
 	/* Default react sequence for initial entry  */
@@ -1137,6 +1246,9 @@ public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachi
 					break;
 				case main_region_on_r1_StreetPrepare :
 					react_main_region_on_r1_StreetPrepare();
+					break;
+				case main_region_on_r1_Safe :
+					react_main_region_on_r1_Safe();
 					break;
 				case main_region_off_r1_YellowOn :
 					react_main_region_off_r1_YellowOn();

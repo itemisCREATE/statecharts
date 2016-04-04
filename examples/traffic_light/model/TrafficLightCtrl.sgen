@@ -17,6 +17,11 @@ GeneratorModel for yakindu::java {
 			TimerService = true
 		}
 		
+		feature RunnableWrapper {
+			namePrefix =  "" 
+			nameSuffix =  "Runnable" 
+		}
+		
 		feature LicenseHeader {
 			licenseText = "
 Copyright (c) 2012-2015 committers of YAKINDU and others.
