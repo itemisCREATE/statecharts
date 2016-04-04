@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package trafficlight_example;
+package traffic.light;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -16,7 +16,9 @@ import java.awt.Point;
 
 import javax.swing.JPanel;
 
-import trafficlight_example.TrafficLight.Alignment;
+import traffic.light.PedestrianLight;
+import traffic.light.TrafficLight;
+import traffic.light.TrafficLight.Alignment;
 
 /**
  * 
@@ -39,8 +41,8 @@ public class CrossingPanel extends JPanel {
 		light2 = new TrafficLight(Alignment.VERTICAL);
 		light3 = new TrafficLight(Alignment.HORIZONTAL);
 		light4 = new TrafficLight(Alignment.VERTICAL);
-		light5 = new PedestrianLight(trafficlight_example.PedestrianLight.Alignment.HORIZONTAL);
-		light6 = new PedestrianLight(trafficlight_example.PedestrianLight.Alignment.VERTICAL);
+		light5 = new PedestrianLight(PedestrianLight.Alignment.HORIZONTAL);
+		light6 = new PedestrianLight(PedestrianLight.Alignment.VERTICAL);
 	}
 
 	public void paint(Graphics g) {

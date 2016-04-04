@@ -8,16 +8,15 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package trafficlight_example;
+package traffic.light;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
-import org.yakindu.scr.RuntimeService;
-import org.yakindu.scr.TimerService;
-import org.yakindu.scr.trafficlightwaiting.TrafficLightWaitingStatemachine;
+import traffic.light.trafficlightctrl.ITrafficLightCtrlStatemachine;
+import traffic.light.trafficlightctrl.TrafficLightCtrlStatemachine;
 
 /**
  * 
@@ -29,7 +28,7 @@ public class TrafficlightDemo extends JFrame {
 
 	private static final long serialVersionUID = -8909693541678814631L;
 
-	protected TrafficLightWaitingStatemachine statemachine;
+	protected TrafficLightCtrlStatemachine statemachine;
 
 	protected TimerService timer;
 
@@ -47,15 +46,11 @@ public class TrafficlightDemo extends JFrame {
 	protected void run() {
 		statemachine.enter();
 		RuntimeService.getInstance().registerStatemachine(statemachine, 100);
-		while (isVisible()) {
-			checkTrafficLightStates();
-			repaint();
-		}
 	}
 
 	protected void createContents() {
 		setLayout(new BorderLayout());
-		setTitle("CycleBasedDemo");
+		setTitle("Traffic Light Crossing");
 		crossing = new CrossingPanel();
 		add(BorderLayout.CENTER, crossing);
 		buttonPanel = new ButtonPanel();
@@ -70,9 +65,17 @@ public class TrafficlightDemo extends JFrame {
 	}
 
 	protected void setupStatemachine() {
-		statemachine = new TrafficLightWaitingStatemachine();
+		statemachine = new TrafficLightCtrlStatemachine();
 		timer = new TimerService();
 		statemachine.setTimer(timer);
+		statemachine.getSCInterface().setSCInterfaceOperationCallback(new ITrafficLightCtrlStatemachine.SCInterfaceOperationCallback() {
+			@Override
+			public void synchronize() {
+				checkTrafficLightStates();
+				repaint();
+			}
+		});
+		
 		statemachine.init();
 
 		buttonPanel.getPedestrianRequest()
@@ -80,6 +83,7 @@ public class TrafficlightDemo extends JFrame {
 		buttonPanel.getOnOff().addActionListener(e -> statemachine.getSCInterface().raiseOnOff());
 	}
 
+	
 	protected void checkTrafficLightStates() {
 		crossing.getLight1().setRed(statemachine.getSCITrafficLight().getRed());
 		crossing.getLight1().setYellow(statemachine.getSCITrafficLight().getYellow());

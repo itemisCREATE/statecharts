@@ -1,7 +1,16 @@
-package org.yakindu.scr.trafficlightwaiting;
-import org.yakindu.scr.ITimer;
+/** Copyright (c) 2012-2015 committers of YAKINDU and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
 
-public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStatemachine {
+Contributors:
+    committers of YAKINDU - initial API and implementation
+� */
+package traffic.light.trafficlightctrl;
+import traffic.light.ITimer;
+
+public class TrafficLightCtrlStatemachine implements ITrafficLightCtrlStatemachine {
 
 	protected class SCITrafficLightImpl implements SCITrafficLight {
 
@@ -77,6 +86,12 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 	protected class SCInterfaceImpl implements SCInterface {
 
+		private SCInterfaceOperationCallback operationCallback;
+
+		public void setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback) {
+			this.operationCallback = operationCallback;
+		}
+
 		private boolean pedestrianRequest;
 
 		public void raisePedestrianRequest() {
@@ -112,7 +127,7 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 	private final boolean[] timeEvents = new boolean[10];
 
-	public TrafficLightWaitingStatemachine() {
+	public TrafficLightCtrlStatemachine() {
 
 		sCITrafficLight = new SCITrafficLightImpl();
 		sCIPedestrian = new SCIPedestrianImpl();
@@ -147,7 +162,7 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 	public void enter() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		if (timer == null) {
 			throw new IllegalStateException("timer not set.");
@@ -170,7 +185,7 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 	/** 
 	* Always returns 'false' since this state machine can never become final.
 	*
-	 * @see IStatemachine#isFinal() 
+	 * @see IStatemachine#isFinal()
 	 */
 	public boolean isFinal() {
 		return false;
@@ -273,6 +288,10 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 		sCInterface.raiseOnOff();
 	}
 
+	private boolean check__lr0() {
+		return true;
+	}
+
 	private boolean check_main_region_on_tr0_tr0() {
 		return sCInterface.onOff;
 	}
@@ -323,6 +342,10 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 	private boolean check_main_region_off_r1_YellowOff_tr0_tr0() {
 		return timeEvents[9];
+	}
+
+	private void effect__lr0() {
+		sCInterface.operationCallback.synchronize();
 	}
 
 	private void effect_main_region_on_tr0() {
@@ -489,7 +512,7 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 		timer.setTimer(this, 7, 2 * 1000, false);
 
-		sCITrafficLight.setRed(false);
+		sCITrafficLight.setRed(true);
 
 		sCITrafficLight.setYellow(true);
 
@@ -925,6 +948,8 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 	/* The reactions of state StreetGreen. */
 	private void react_main_region_on_r1_StreetGreen() {
+		effect__lr0();
+
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
 		} else {
@@ -936,6 +961,8 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 	/* The reactions of state waitOn. */
 	private void react_main_region_on_r1_PedWaiting_r1_waitOn() {
+		effect__lr0();
+
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
 		} else {
@@ -951,6 +978,8 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 	/* The reactions of state waitOff. */
 	private void react_main_region_on_r1_PedWaiting_r1_waitOff() {
+		effect__lr0();
+
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
 		} else {
@@ -966,6 +995,8 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 	/* The reactions of state StreetAttention. */
 	private void react_main_region_on_r1_StreetAttention() {
+		effect__lr0();
+
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
 		} else {
@@ -977,6 +1008,8 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 	/* The reactions of state StreetRed. */
 	private void react_main_region_on_r1_StreetRed() {
+		effect__lr0();
+
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
 		} else {
@@ -988,6 +1021,8 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 	/* The reactions of state PedestrianGreen. */
 	private void react_main_region_on_r1_PedestrianGreen() {
+		effect__lr0();
+
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
 		} else {
@@ -999,6 +1034,8 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 	/* The reactions of state PedestrianRed. */
 	private void react_main_region_on_r1_PedestrianRed() {
+		effect__lr0();
+
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
 		} else {
@@ -1010,6 +1047,8 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 	/* The reactions of state StreetPrepare. */
 	private void react_main_region_on_r1_StreetPrepare() {
+		effect__lr0();
+
 		if (check_main_region_on_tr0_tr0()) {
 			effect_main_region_on_tr0();
 		} else {
@@ -1021,6 +1060,8 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 	/* The reactions of state YellowOn. */
 	private void react_main_region_off_r1_YellowOn() {
+		effect__lr0();
+
 		if (check_main_region_off_tr0_tr0()) {
 			effect_main_region_off_tr0();
 		} else {
@@ -1032,6 +1073,8 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 
 	/* The reactions of state YellowOff. */
 	private void react_main_region_off_r1_YellowOff() {
+		effect__lr0();
+
 		if (check_main_region_off_tr0_tr0()) {
 			effect_main_region_off_tr0();
 		} else {
@@ -1064,7 +1107,7 @@ public class TrafficLightWaitingStatemachine implements ITrafficLightWaitingStat
 	public void runCycle() {
 		if (!initialized)
 			throw new IllegalStateException(
-					"The statemachine needs to be initialized first by calling the init() function.");
+					"The state machine needs to be initialized first by calling the init() function.");
 
 		clearOutEvents();
 

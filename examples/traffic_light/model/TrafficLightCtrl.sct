@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_NPjBgBA-EeGQ0KsLDV4EFg" specification="&#xD;&#xA;interface TrafficLight:&#xD;&#xA;var red:boolean&#x9;&#x9;&#x9;&#xD;&#xA;var yellow:boolean&#x9;&#x9;&#x9;&#xD;&#xA;var green:boolean&#xD;&#xA;&#xD;&#xA;interface Pedestrian:&#xD;&#xA;var request:boolean&#x9;&#x9;&#xD;&#xA;var red:boolean&#x9;&#x9;&#x9;&#xD;&#xA;var green:boolean&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;in event pedestrianRequest&#x9;&#x9;&#xD;&#xA;in event onOff&#xD;&#xA;&#x9;" name="TrafficLightWaiting">
+  <sgraph:Statechart xmi:id="_NPjBgBA-EeGQ0KsLDV4EFg" specification="&#xD;&#xA;interface TrafficLight:&#xD;&#xA;var red:boolean&#x9;&#x9;&#x9;&#xD;&#xA;var yellow:boolean&#x9;&#x9;&#x9;&#xD;&#xA;var green:boolean&#xD;&#xA;&#xD;&#xA;interface Pedestrian:&#xD;&#xA;var request:boolean&#x9;&#x9;&#xD;&#xA;var red:boolean&#x9;&#x9;&#x9;&#xD;&#xA;var green:boolean&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;in event pedestrianRequest&#x9;&#x9;&#xD;&#xA;in event onOff&#xD;&#xA;operation synchronize() : void&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;&#xD;&#xA;internal: &#xD;&#xA;oncycle / synchronize&#xD;&#xA;&#x9;&#xD;&#xA;" name="TrafficLightCtrl">
     <regions xmi:id="_NPjBgxA-EeGQ0KsLDV4EFg" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_NPjBjRA-EeGQ0KsLDV4EFg">
         <outgoingTransitions xmi:id="_NPsyhxA-EeGQ0KsLDV4EFg" target="_NPjBmBA-EeGQ0KsLDV4EFg"/>
@@ -37,7 +37,7 @@
           <vertices xsi:type="sgraph:State" xmi:id="_K-JX7RBEEeGQ0KsLDV4EFg" specification="entry / Pedestrian.red = true;&#xD;&#xA;&#x9;Pedestrian.green = false" name="PedestrianRed" incomingTransitions="_iZox8BBEEeGQ0KsLDV4EFg">
             <outgoingTransitions xmi:id="_nVCU8BBEEeGQ0KsLDV4EFg" specification="after 5s" target="_TfjYTRBEEeGQ0KsLDV4EFg"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_TfjYTRBEEeGQ0KsLDV4EFg" specification="entry / TrafficLight.red = false;&#xD;&#xA;&#x9;TrafficLight.yellow = true;&#xD;&#xA;&#x9;TrafficLight.green = false" name="StreetPrepare" incomingTransitions="_nVCU8BBEEeGQ0KsLDV4EFg">
+          <vertices xsi:type="sgraph:State" xmi:id="_TfjYTRBEEeGQ0KsLDV4EFg" specification="entry / TrafficLight.red = true;&#xD;&#xA;&#x9;TrafficLight.yellow = true;&#xD;&#xA;&#x9;TrafficLight.green = false" name="StreetPrepare" incomingTransitions="_nVCU8BBEEeGQ0KsLDV4EFg">
             <outgoingTransitions xmi:id="_pddaABBEEeGQ0KsLDV4EFg" specification="after 2s" target="_w8meYBA_EeGQ0KsLDV4EFg"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_xz0nABBPEeGQ0KsLDV4EFg">
@@ -78,7 +78,7 @@
             <layoutConstraint xsi:type="notation:Bounds" xmi:id="_NPjBkxA-EeGQ0KsLDV4EFg"/>
           </children>
           <styles xsi:type="notation:ShapeStyle" xmi:id="_NPjBjxA-EeGQ0KsLDV4EFg" fontName="Verdana" lineColor="4210752"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_NPjBlxA-EeGQ0KsLDV4EFg" x="391" y="7" width="15" height="15"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_NPjBlxA-EeGQ0KsLDV4EFg" x="391" y="7"/>
         </children>
         <children xmi:id="_NPjBmhA-EeGQ0KsLDV4EFg" type="State" element="_NPjBmBA-EeGQ0KsLDV4EFg">
           <children xsi:type="notation:DecorationNode" xmi:id="_NPjBnhA-EeGQ0KsLDV4EFg" type="StateName">
@@ -194,7 +194,7 @@
                   <children xsi:type="notation:Compartment" xmi:id="_SKwP6hBBEeGQ0KsLDV4EFg" type="StateFigureCompartment"/>
                   <styles xsi:type="notation:ShapeStyle" xmi:id="_SKwP4RBBEeGQ0KsLDV4EFg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
                   <styles xsi:type="notation:FontStyle" xmi:id="_SKwP4hBBEeGQ0KsLDV4EFg"/>
-                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_SKwP4xBBEeGQ0KsLDV4EFg" x="383" y="514" width="234" height="106"/>
+                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_SKwP4xBBEeGQ0KsLDV4EFg" x="383" y="514" width="210"/>
                 </children>
                 <children xmi:id="_fPRkMBBDEeGQ0KsLDV4EFg" type="State" element="_fO-pQBBDEeGQ0KsLDV4EFg">
                   <children xsi:type="notation:DecorationNode" xmi:id="_fPRkNBBDEeGQ0KsLDV4EFg" type="StateName">
@@ -239,7 +239,7 @@
                   <children xsi:type="notation:Compartment" xmi:id="_K-JX6BBEEeGQ0KsLDV4EFg" type="StateFigureCompartment"/>
                   <styles xsi:type="notation:ShapeStyle" xmi:id="_K-JX6RBEEeGQ0KsLDV4EFg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
                   <styles xsi:type="notation:FontStyle" xmi:id="_K-JX6hBEEeGQ0KsLDV4EFg"/>
-                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_K-JX7BBEEeGQ0KsLDV4EFg" x="3" y="304" width="229" height="76"/>
+                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_K-JX7BBEEeGQ0KsLDV4EFg" x="3" y="304" width="229"/>
                 </children>
                 <children xmi:id="_TfjYQRBEEeGQ0KsLDV4EFg" type="State" element="_TfjYTRBEEeGQ0KsLDV4EFg">
                   <children xsi:type="notation:DecorationNode" xmi:id="_TfjYQhBEEeGQ0KsLDV4EFg" type="StateName">
@@ -254,7 +254,7 @@
                   <children xsi:type="notation:Compartment" xmi:id="_TfjYSBBEEeGQ0KsLDV4EFg" type="StateFigureCompartment"/>
                   <styles xsi:type="notation:ShapeStyle" xmi:id="_TfjYSRBEEeGQ0KsLDV4EFg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
                   <styles xsi:type="notation:FontStyle" xmi:id="_TfjYShBEEeGQ0KsLDV4EFg"/>
-                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_TfjYTBBEEeGQ0KsLDV4EFg" x="1" y="179" width="234" height="86"/>
+                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_TfjYTBBEEeGQ0KsLDV4EFg" x="1" y="179" width="231"/>
                 </children>
                 <children xmi:id="_xz9w8BBPEeGQ0KsLDV4EFg" type="Entry" element="_xz0nABBPEeGQ0KsLDV4EFg">
                   <children xmi:id="_xz9w8xBPEeGQ0KsLDV4EFg" type="BorderItemLabelContainer">
