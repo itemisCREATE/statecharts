@@ -2,10 +2,14 @@ package org.yakindu.sct.model.stext.test.validation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
+
+import java.util.HashMap;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.junit.After;
 import org.junit.Before;
@@ -16,6 +20,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
+import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -85,6 +90,17 @@ public abstract class AbstractSTextValidationTest extends AbstractSTextTest {
 				return issue;
 		}
 		return null;
+	}
+
+	protected boolean validate(EObject obj) {
+		return validator.validate(obj, diagnostics,
+				new HashMap<Object, Object>());
+	}
+
+	protected Statechart loadStatechart(String modelName) {
+		return AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR
+						+ modelName);
 	}
 
 }

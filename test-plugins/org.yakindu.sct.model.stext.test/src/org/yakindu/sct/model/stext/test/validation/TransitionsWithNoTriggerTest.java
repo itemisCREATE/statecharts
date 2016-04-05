@@ -15,11 +15,9 @@ import static org.eclipse.xtext.EcoreUtil2.eAllOfType;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.firstNamed;
-import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.util.HashMap;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Before;
@@ -30,14 +28,12 @@ import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.validation.STextValidationMessages;
-import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
 /** 
  * @author terfloth - Initial contribution
@@ -222,19 +218,6 @@ public class TransitionsWithNoTriggerTest extends AbstractSTextValidationTest im
 		assertTrue(validate(sync.getIncomingTransitions().get(0)));
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, ISSUE_TRANSITION_WITHOUT_TRIGGER);
-	}
-
-	
-	
-	protected boolean validate(EObject obj) {
-		return validator.validate(obj, diagnostics,
-				new HashMap<Object, Object>());
-	}
-	
-	protected Statechart loadStatechart(String modelName) {
-		return AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
-						+ modelName);
 	}
 
 
