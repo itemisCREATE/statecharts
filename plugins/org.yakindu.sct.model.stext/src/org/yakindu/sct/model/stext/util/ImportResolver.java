@@ -13,17 +13,12 @@ package org.yakindu.sct.model.stext.util;
 
 import java.util.List;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceVisitor;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -105,7 +100,7 @@ public class ImportResolver {
 		return null;
 	}
 
-	private void initResourceDescriptions(Resource contextResource) {
+	protected void initResourceDescriptions(Resource contextResource) {
 		if (resourceDescriptions instanceof ResourceSetBasedResourceDescriptions) {
 			ResourceSet rset = buildResourceSet(contextResource);
 			((ResourceSetBasedResourceDescriptions) resourceDescriptions).setContext(rset);
@@ -113,24 +108,11 @@ public class ImportResolver {
 	}
 
 	protected ResourceSet buildResourceSet(Resource contextResource) {
-		final ResourceSet rset = new ResourceSetImpl();
-		IProject project = WorkspaceSynchronizer.getFile(contextResource).getProject();
-		try {
-			project.accept(new IResourceVisitor() {
-				public boolean visit(IResource resource) throws CoreException {
-					if ("types".equals(resource.getFileExtension())) {
-						String filePath = resource.getFullPath().toString();
-						rset.createResource(URI.createPlatformResourceURI(filePath, true));
-					}
-					return true;
-				}
-			});
-
-		} catch (CoreException e) {
-			e.printStackTrace();
+		if (contextResource.getResourceSet() == null) {
+			final ResourceSet rset = new ResourceSetImpl();
+			rset.getResources().add(contextResource);
+			return rset;
 		}
-		rset.getResources().add(contextResource);
-
-		return rset;
+		return contextResource.getResourceSet();
 	}
 }
