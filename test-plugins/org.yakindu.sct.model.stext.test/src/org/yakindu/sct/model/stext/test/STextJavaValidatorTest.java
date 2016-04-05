@@ -569,4 +569,11 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		AssertableDiagnostics validationResult = tester.validate(importScope.getImports().get(0));
 		validationResult.assertError(STextJavaValidator.IMPORT_NOT_RESOLVED);
 	}
+	
+	/**
+	 * The erelevant testst are implemented by TransitionsWithNoTriggerTest.
+	 */
+	@Test public void transitionsWithNoTrigger() {
+	}
+	
 }
