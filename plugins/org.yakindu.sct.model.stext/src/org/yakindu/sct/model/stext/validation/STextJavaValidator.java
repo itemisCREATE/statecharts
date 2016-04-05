@@ -149,10 +149,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	@Check(CheckType.FAST)
 	public void transitionsWithNoTrigger(Transition trans) {
-		if (trans.getSource() instanceof Entry || trans.getSource() instanceof Choice
-				|| trans.getSource() instanceof Synchronization) {
-			return;
-		}
+
+		if (trans.getSource() instanceof Entry 
+			|| trans.getSource() instanceof Choice
+			|| trans.getSource() instanceof Synchronization
+			|| (trans.getTarget() instanceof Synchronization && (trans.getTarget().getIncomingTransitions().size() > 1))
+			) { return; }
+		
 		if (trans.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
 			org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) trans.getSource();
 			if (state.isComposite()) {
