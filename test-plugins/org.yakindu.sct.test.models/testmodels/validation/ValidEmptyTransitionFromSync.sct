@@ -159,7 +159,7 @@
                   <styles xsi:type="notation:ShapeStyle" xmi:id="_9oA9IW_pEeS1xYwspMh3zQ" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
                   <styles xsi:type="notation:FontStyle" xmi:id="_9oA9Im_pEeS1xYwspMh3zQ"/>
                   <styles xsi:type="notation:BooleanValueStyle" xmi:id="_9oA9K2_pEeS1xYwspMh3zQ" name="isHorizontal" booleanValue="true"/>
-                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_9oA9I2_pEeS1xYwspMh3zQ" x="62" y="19"/>
+                  <layoutConstraint xsi:type="notation:Bounds" xmi:id="_9oA9I2_pEeS1xYwspMh3zQ" x="65" y="20"/>
                 </children>
                 <layoutConstraint xsi:type="notation:Bounds" xmi:id="_4vERN2_pEeS1xYwspMh3zQ"/>
               </children>
