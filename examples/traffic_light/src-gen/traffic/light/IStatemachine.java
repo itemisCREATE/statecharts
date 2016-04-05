@@ -1,5 +1,4 @@
-/**
-Copyright (c) 2012-2015 committers of YAKINDU and others.
+/** Copyright (c) 2012-2015 committers of YAKINDU and others.
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
@@ -7,7 +6,7 @@ http://www.eclipse.org/legal/epl-v10.html
 
 Contributors:
     committers of YAKINDU - initial API and implementation
-�*/
+� */
 package traffic.light;
 
 /**
@@ -16,7 +15,7 @@ package traffic.light;
 public interface IStatemachine {
 
 	/**
-	 * Initializes the state machine. Used to init internal variables etc.
+	 * Initializes the state machine. Used to initialize internal variables etc.
 	 */
 	public void init();
 
@@ -38,7 +37,7 @@ public interface IStatemachine {
 
 	/**
 	 * Checks whether all active states are final. 
-	 * If there are no active states then the state machine is considered to be incative and this method returns <code>false</code>.
+	 * If there are no active states then the state machine is considered being incative. In this case this method returns <code>false</code>.
 	 */
 	public boolean isFinal();
 

@@ -1,6 +1,6 @@
 GeneratorModel for yakindu::java {
 
-	statechart TrafficLightWaiting {
+	statechart TrafficLightCtrl {
 	 	
 		feature Outlet {
 			targetProject = "traffic_light"
@@ -9,11 +9,17 @@ GeneratorModel for yakindu::java {
 
 		feature Naming {
 			basePackage = "traffic.light"
+			implementationSuffix =""
 		}
 
 		feature GeneralFeatures {
 			RuntimeService = true
 			TimerService = true
+		}
+		
+		feature RunnableWrapper {
+			namePrefix =  "" 
+			nameSuffix =  "Runnable" 
 		}
 		
 		feature LicenseHeader {
