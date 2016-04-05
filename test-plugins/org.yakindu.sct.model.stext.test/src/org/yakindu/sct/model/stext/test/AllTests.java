@@ -13,6 +13,7 @@ package org.yakindu.sct.model.stext.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.yakindu.sct.model.stext.test.validation.STextJavaValidatorTest;
 import org.yakindu.sct.model.stext.test.validation.TransitionsWithNoTriggerTest;
 
 /**

@@ -9,7 +9,7 @@
  * 	itemis AG - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.stext.test;
+package org.yakindu.sct.model.stext.test.validation;
 
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCode;
 import static org.junit.Assert.assertNotNull;
@@ -50,7 +50,6 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.impl.StextFactoryImpl;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
-import org.yakindu.sct.model.stext.test.validation.AbstractSTextValidationTest;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
 import org.yakindu.sct.model.stext.validation.STextValidationMessages;
 import org.yakindu.sct.test.models.AbstractTestModelsUtil;
