@@ -419,8 +419,6 @@ class GeneratorProjectTemplate {
 	def xtendGenerator(ProjectData data) '''
 		package «data.generatorClass.packageName»
 
-		import java.io.File
-		import java.io.FileOutputStream
 		import org.yakindu.sct.model.sgen.GeneratorEntry
 		import org.yakindu.sct.model.sexec.ExecutionFlow
 		import org.yakindu.sct.model.sexec.ExecutionState
