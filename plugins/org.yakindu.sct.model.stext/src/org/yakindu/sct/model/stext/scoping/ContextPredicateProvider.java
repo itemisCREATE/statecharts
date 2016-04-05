@@ -35,6 +35,7 @@ import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REGULAR_EV
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_REACTION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_SPECIFICATION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.VARIABLE_DEFINITION;
+import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.STATE_SPECIFICATION;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -183,6 +184,7 @@ public class ContextPredicateProvider {
 		filter.put(key(VARIABLE_DEFINITION, TYPED_ELEMENT__TYPE), TYPES);
 		filter.put(key(VARIABLE_DEFINITION, ELEMENT_REFERENCE_EXPRESSION__REFERENCE),
 				VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
+		filter.put(key(STATE_SPECIFICATION), EVENTS);
 	}
 
 	public Predicate<IEObjectDescription> getPredicate(EClass clazz, EReference reference) {
