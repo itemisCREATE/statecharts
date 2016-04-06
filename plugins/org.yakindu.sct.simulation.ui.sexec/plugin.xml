@@ -20,6 +20,10 @@
                   mode="run"
                   perspective="org.yakindu.sct.ui.SimulationPerspective">
             </launchMode>
+              <launchMode
+                    mode="debug"
+                    perspective="org.yakindu.sct.ui.SimulationPerspective">
+              </launchMode>
    	 </launchConfigurationTabGroup>
 	</extension>
 	
