@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.yakindu.sct.generator.csharp"
+      label="Yakindu Statechart Tools (SCT) C# Generator Feature"
+      version="2.5.0.qualifier"
+      provider-name="statecharts.org"
+      plugin="org.yakindu.sct.doc.user">
+
+   <description>
+      %description
+   </description>
+
+   <copyright url="%licenseURL">
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import feature="org.yakindu.sct" version="2.5.0.qualifier"/>
+   </requires>
+
+   <plugin
+         id="org.yakindu.sct.generator.csharp"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

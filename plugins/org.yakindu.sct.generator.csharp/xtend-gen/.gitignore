@@ -1,0 +1,5 @@
+# Ignore those directories
+*
+
+# And never this file
+!.gitignore
