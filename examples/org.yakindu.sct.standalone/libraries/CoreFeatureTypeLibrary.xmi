@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sgen:FeatureTypeLibrary
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:sgen="http://www.yakindu.org/sct/statechart/SGen"
+    name="Core">
+  <types name="Outlet">
+    <parameters
+        name="targetProject"/>
+    <parameters
+        name="targetFolder"/>
+    <parameters
+        name="libraryTargetFolder"
+        comment="A distinct output folder for static code artifacts (which are independent of concrete statechart models). It will not be cleaned or overwritten in succeeding generation passes. If not specified, the code will be generated into the target folder as well."
+        optional="true"/>
+  </types>
+  <types name="LicenseHeader"
+      optional="true">
+    <parameters
+        name="licenseText"/>
+  </types>
+</sgen:FeatureTypeLibrary>

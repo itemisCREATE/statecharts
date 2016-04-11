@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sgen:FeatureTypeLibrary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:sgen="http://www.yakindu.org/sct/statechart/SGen" name="SCT Base">
+  <types name="Debug" optional="true">
+    <parameters name="dumpSexec" parameterType="BOOLEAN"/>
+  </types>
+  <types name="FunctionInlining" optional="true">
+    <parameters name="inlineReactions" optional="true" parameterType="BOOLEAN"/>
+    <parameters name="inlineEntryActions" optional="true" parameterType="BOOLEAN"/>
+    <parameters name="inlineExitActions" optional="true" parameterType="BOOLEAN"/>
+    <parameters name="inlineEnterSequences" optional="true" parameterType="BOOLEAN"/>
+    <parameters name="inlineExitSequences" optional="true" parameterType="BOOLEAN"/>
+    <parameters name="inlineChoices" optional="true" parameterType="BOOLEAN"/>
+    <parameters name="inlineEnterRegion" optional="true" parameterType="BOOLEAN"/>
+    <parameters name="inlineExitRegion" optional="true" parameterType="BOOLEAN"/>
+    <parameters name="inlineEntries" optional="true" parameterType="BOOLEAN"/>
+  </types>
+</sgen:FeatureTypeLibrary>
