@@ -13,3 +13,10 @@ Require-Bundle: org.yakindu.sct.model.sgen,
  org.eclipse.swt,
  org.yakindu.sct.domain.generic,
  org.yakindu.sct.generator.java
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: org.eclipse.gmf.runtime.emf.core,
+ org.eclipse.jdt.core,
+ org.eclipse.jface.text,
+ org.eclipse.ui,
+ org.yakindu.base.xtext.utils.jface.viewers,
+ org.yakindu.sct.model.stext.ui
