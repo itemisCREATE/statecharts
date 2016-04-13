@@ -38,6 +38,8 @@ public interface ISCTFileSystemAccess {
 	 * @return
 	 */
 	URI getURI(String path);
+	
+	URI getURI(String path, String outputName);
 
 	/**
 	 * Add an output path for an output name.

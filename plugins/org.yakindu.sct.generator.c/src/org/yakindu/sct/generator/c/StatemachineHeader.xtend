@@ -38,18 +38,18 @@ class StatemachineHeader {
 	@Inject extension INamingService
 
 	
-	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry, ArtifactLocationProvider locations) {
 		flow.initializeNamingService
-		fsa.generateFile(flow.module.h, flow.generateStatemachineHeaderContents(entry))
+		fsa.generateFile(flow.module.h, flow.generateStatemachineHeaderContents(entry, locations))
 	}
 
-	def generateStatemachineHeaderContents(ExecutionFlow it, GeneratorEntry entry) '''
+	def generateStatemachineHeaderContents(ExecutionFlow it, GeneratorEntry entry, ArtifactLocationProvider locations) '''
 		«entry.licenseText»
 		
 		#ifndef «module.define»_H_
 		#define «module.define»_H_
 		
-		«includes»
+		«includes(locations)»
 				
 		#ifdef __cplusplus
 		extern "C" { 
@@ -110,8 +110,8 @@ class StatemachineHeader {
 		#endif /* «module.define»_H_ */
 	'''
 
-	def includes(ExecutionFlow it) '''
-		#include "«typesModule.h»"
+	def includes(ExecutionFlow it, ArtifactLocationProvider locations) '''
+		#include "«locations.computeRelativeForName(typesModule.h, module.h)»"
 	'''
 	
 	def statesEnumDecl(ExecutionFlow it) '''
