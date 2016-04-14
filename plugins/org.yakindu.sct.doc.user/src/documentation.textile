@@ -1909,7 +1909,7 @@ The explanations below are using the _TrafficLight_ sample state machine to desc
 
 p=. The traffic light model
 
-You can checkout the C sample project "org.yakindu.sct.examples.c.trafficlight":https://github.com/Yakindu/statecharts/tree/master/examples/org.yakindu.sct.examples.c.trafficlight_ from the "YAKINDU Statechart Tools GitHub repository":https://github.com/Yakindu/statecharts. The C example contains statechart, SGen model, graphical widgets, and some glue code to connect the generated code with the widgets. The graphical widgets are based on Qt.
+You can checkout the C sample project "traffic_light":https://github.com/Yakindu/statecharts/tree/master/examples/traffic_light_ from the "YAKINDU Statechart Tools GitHub repository":https://github.com/Yakindu/statecharts. The C example contains statechart, SGen model, graphical widgets, and some glue code to connect the generated code with the widgets. The graphical widgets are based on Qt.
 
 To execute the C example, run the file _org&#95;yakindu&#95;sct&#95;examples&#95;c&#95;trafficlight&#95;_ as _Local C/C&#43;&#43; application_ from the Eclipse _Run As_ context menu.
 
