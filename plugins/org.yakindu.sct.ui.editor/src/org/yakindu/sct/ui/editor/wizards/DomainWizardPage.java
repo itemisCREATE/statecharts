@@ -10,6 +10,11 @@
  */
 package org.yakindu.sct.ui.editor.wizards;
 
+import java.util.List;
+
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -21,17 +26,12 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomainDescriptor;
-import org.yakindu.sct.ui.editor.StatechartImages;
 
 /**
  * 
@@ -46,8 +46,14 @@ public class DomainWizardPage extends WizardPage {
 
 	private Label image;
 
+	private Object domainDescriptors;
+
 	protected DomainWizardPage(String pageName) {
+		this(pageName, DomainRegistry.getDomainDescriptors());
+	}
+	protected DomainWizardPage(String pageName, List<IDomainDescriptor> domainDescriptors) {
 		super(pageName);
+		this.domainDescriptors = domainDescriptors;
 	}
 
 	public void createControl(Composite parent) {
@@ -74,7 +80,7 @@ public class DomainWizardPage extends WizardPage {
 				return ((IDomainDescriptor) element).getName();
 			}
 		});
-		domainCombo.setInput(DomainRegistry.getDomainDescriptors());
+		domainCombo.setInput(domainDescriptors);
 
 		description = new Label(domainSelectionGroup, SWT.WRAP);
 		GridDataFactory.fillDefaults().grab(true, false).span(2, 1).applyTo(description);
@@ -93,19 +99,22 @@ public class DomainWizardPage extends WizardPage {
 		domainCombo.setSelection(new StructuredSelection(DomainRegistry
 				.getDomainDescriptor(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral())));
 
-		Label spacer2 = new Label(domainSelectionGroup, SWT.NONE);
-		GridDataFactory.fillDefaults().span(2, 1).applyTo(spacer2);
-		
-		Label image = new Label(composite, SWT.NONE);
-		GridDataFactory.fillDefaults().grab(false, false).align(GridData.CENTER, GridData.CENTER).span(2, 1)
-				.applyTo(image);
-		image.setImage(StatechartImages.PRO_EDITION.image());
-		image.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseDown(MouseEvent e) {
-				Program.launch("http://statecharts.org/pro.html");
+		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor("org.yakindu.sct.ui.wizard.create.contribution");
+		if (configurationElements.length > 0) {
+
+			Label spacer2 = new Label(domainSelectionGroup, SWT.NONE);
+			GridDataFactory.fillDefaults().span(2, 1).applyTo(spacer2);
+			for (IConfigurationElement iConfigurationElement : configurationElements) {
+				try {
+					CreationWizardContribution contribution = (CreationWizardContribution) iConfigurationElement
+							.createExecutableExtension("class");
+					contribution.toDomainWizardPage(composite);
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
 			}
-		});
+		}
 	}
 
 	public String getDomainID() {
