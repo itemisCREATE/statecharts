@@ -31,6 +31,8 @@ public class ArtifactLocationProvider {
 		}
 	}
 	
+	public ArtifactLocationProvider() {}
+	
 	public ArtifactLocationProvider(ISCTFileSystemAccess sctFsa) {
 		this.sctFsa = sctFsa;
 	}
@@ -41,29 +43,45 @@ public class ArtifactLocationProvider {
 		generationArtifacts.add(new Artifact(artifactName, outputConfigName));
 	}
 
-	protected URI getURIForArtifcat(String artifactName) {
+	protected URI getURI(String artifactName) {
 		for (Artifact artifact : generationArtifacts) {
 			if (artifact.getName().equals(artifactName)) {
-				return sctFsa.getURI(artifact.getName(), artifact.getOutputName());
+				return getURI(artifact);
 			}
 		}
 		return null;
 	}
-	
-	public String computeRelativeForPath(String absolutePath, String baseArtifactName) {
-		URI baseTarget = getURIForArtifcat(baseArtifactName);
-		
-		IPath basePath = new Path(baseTarget.toFileString());
-		IPath absPath = new Path(absolutePath);
-		return absPath.makeRelativeTo(basePath).toOSString();
+
+	protected URI getURI(Artifact artifact) {
+		if (sctFsa != null) {
+			return sctFsa.getURI(artifact.getName(), artifact.getOutputName());
+		}
+		return null;
 	}
 	
-	public String computeRelativeForName(String referencedArtifactName, String baseArtifactName) {
-		URI baseUri = getURIForArtifcat(baseArtifactName);
-		URI absUri = getURIForArtifcat(referencedArtifactName);
+	public String getRelativePath(String target, String baseArtifactName) {
+		URI baseUri = getURI(baseArtifactName);
+		if (baseUri == null) {
+			// throw new IllegalArgumentException("Artifact location for "+baseArtifactName+" not configured");
+			return target;
+		}
 		
-		IPath basePath = new Path(baseUri.toFileString());
-		IPath absPath = new Path(absUri.toFileString());
+		Path targetPath = new Path(target);
+		if (targetPath.isAbsolute()) {
+			return relativePath(target, baseUri.toFileString());
+		}
+		
+		URI absUri = getURI(target);
+		if (absUri != null) {
+			return relativePath(absUri.toFileString(), baseUri.toFileString());
+		}
+		// throw new IllegalArgumentException("Artifact location for "+target+" not configured");
+		return target;
+	}
+	
+	protected String relativePath(String absolute, String base) {
+		IPath basePath = new Path(base);
+		IPath absPath = new Path(absolute);
 		return absPath.makeRelativeTo(basePath).toOSString();
 	}
 }

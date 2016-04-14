@@ -50,7 +50,7 @@ public class CCodeGenerator extends GenericJavaBasedGenerator {
 		if (debugFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
-		delegate.generate(flow, entry, sctFsa);
+		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess(), new ArtifactLocationProvider(sctFsa));
 	}
 
 	@Override

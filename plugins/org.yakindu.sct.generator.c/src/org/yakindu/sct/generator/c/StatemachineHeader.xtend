@@ -36,11 +36,26 @@ class StatemachineHeader {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntries
 	@Inject extension INamingService
-
+	
+	/**
+	 * @Deprecated use {@link #generateStatemachineHeader(ExecutionFlow, Statechart, IFileSystemAccess, GeneratorEntry, ArtifactLocationProvider)} instead
+	 */
+	@Deprecated
+	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+		generateStatemachineHeader(flow, sc, fsa, entry, new ArtifactLocationProvider())
+	}
 	
 	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry, ArtifactLocationProvider locations) {
 		flow.initializeNamingService
 		fsa.generateFile(flow.module.h, flow.generateStatemachineHeaderContents(entry, locations))
+	}
+	
+	/**
+	 * @Deprecated use {@link #generateStatemachineHeaderContents(ExecutionFlow, GeneratorEntry, ArtifactLocationProvider)} instead
+	 */
+	@Deprecated
+	def generateStatemachineHeaderContents(ExecutionFlow it, GeneratorEntry entry) {
+		generateStatemachineHeaderContents(it, entry, new ArtifactLocationProvider())
 	}
 
 	def generateStatemachineHeaderContents(ExecutionFlow it, GeneratorEntry entry, ArtifactLocationProvider locations) '''
@@ -110,8 +125,16 @@ class StatemachineHeader {
 		#endif /* «module.define»_H_ */
 	'''
 
+	/**
+	 * @Deprecated use {@link #includes(ExecutionFlow, ArtifactLocationProvider)} instead
+	 */
+	@Deprecated
+	def includes(ExecutionFlow it) {
+		includes(it, new ArtifactLocationProvider())
+	}
+
 	def includes(ExecutionFlow it, ArtifactLocationProvider locations) '''
-		#include "«locations.computeRelativeForName(typesModule.h, module.h)»"
+		#include "«locations.getRelativePath(typesModule.h, module.h)»"
 	'''
 	
 	def statesEnumDecl(ExecutionFlow it) '''
