@@ -44,13 +44,26 @@ public class CCodeGenerator extends GenericJavaBasedGenerator {
 	@Inject
 	private CGenerator delegate;
 	
+	@Inject
+	private IGenArtifactConfigurations artifactConfigs;
+	
+	@Override
+	protected void prepareGenerator(GeneratorEntry entry) {
+		super.prepareGenerator(entry);
+		initGenArtifactConfigurations();
+	}
+
+	protected void initGenArtifactConfigurations() {
+		artifactConfigs.setFileSystemAccess(sctFsa);
+	}
+	
 	@Override
 	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
 		if (debugFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
-		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess(), new ArtifactLocationProvider(sctFsa));
+		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess(), artifactConfigs);
 	}
 
 	@Override
@@ -63,6 +76,12 @@ public class CCodeGenerator extends GenericJavaBasedGenerator {
 				binder.bind(GeneratorEntry.class).toInstance(entry);
 				binder.bind(INamingService.class).to(CNamingService.class);
 				binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
+				
+				binder.bind(IGenArtifactConfigurations.class).to(GenArtifactConfigurations.class);
+				// default binding to ensure consistency of already used API
+				binder.bind(IGenArtifactConfigurations.class)
+						.annotatedWith(Names.named(IGenArtifactConfigurations.DEFAULT))
+						.toInstance(GenArtifactConfigurations.DEFAULT);
 
 				// Enable generation of trace steps in case the Tracing feature
 				// is specified and at least one of enter/exit states is

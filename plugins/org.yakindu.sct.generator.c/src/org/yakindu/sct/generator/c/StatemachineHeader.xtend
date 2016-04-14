@@ -11,7 +11,7 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
-import org.eclipse.xtext.generator.IFileSystemAccess
+import com.google.inject.name.Named
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -20,7 +20,6 @@ import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
@@ -29,7 +28,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
 
-class StatemachineHeader {
+class StatemachineHeader implements IContentTemplate {
 
 	@Inject extension Naming cNaming
 	@Inject extension Navigation
@@ -37,34 +36,18 @@ class StatemachineHeader {
 	@Inject extension GenmodelEntries
 	@Inject extension INamingService
 	
-	/**
-	 * @Deprecated use {@link #generateStatemachineHeader(ExecutionFlow, Statechart, IFileSystemAccess, GeneratorEntry, ArtifactLocationProvider)} instead
-	 */
-	@Deprecated
-	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-		generateStatemachineHeader(flow, sc, fsa, entry, new ArtifactLocationProvider())
-	}
+	@Inject @Named(IGenArtifactConfigurations.DEFAULT)
+	IGenArtifactConfigurations defaultConfigs
 	
-	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry, ArtifactLocationProvider locations) {
-		flow.initializeNamingService
-		fsa.generateFile(flow.module.h, flow.generateStatemachineHeaderContents(entry, locations))
-	}
-	
-	/**
-	 * @Deprecated use {@link #generateStatemachineHeaderContents(ExecutionFlow, GeneratorEntry, ArtifactLocationProvider)} instead
-	 */
-	@Deprecated
-	def generateStatemachineHeaderContents(ExecutionFlow it, GeneratorEntry entry) {
-		generateStatemachineHeaderContents(it, entry, new ArtifactLocationProvider())
-	}
-
-	def generateStatemachineHeaderContents(ExecutionFlow it, GeneratorEntry entry, ArtifactLocationProvider locations) '''
+	override content(ExecutionFlow it, GeneratorEntry entry , IGenArtifactConfigurations artifactConfigs) {
+		initializeNamingService
+	'''
 		«entry.licenseText»
 		
 		#ifndef «module.define»_H_
 		#define «module.define»_H_
 		
-		«includes(locations)»
+		«includes(artifactConfigs)»
 				
 		#ifdef __cplusplus
 		extern "C" { 
@@ -124,17 +107,17 @@ class StatemachineHeader {
 		
 		#endif /* «module.define»_H_ */
 	'''
-
+	}
 	/**
 	 * @Deprecated use {@link #includes(ExecutionFlow, ArtifactLocationProvider)} instead
 	 */
 	@Deprecated
 	def includes(ExecutionFlow it) {
-		includes(it, new ArtifactLocationProvider())
+		includes(it, defaultConfigs)
 	}
 
-	def includes(ExecutionFlow it, ArtifactLocationProvider locations) '''
-		#include "«locations.getRelativePath(typesModule.h, module.h)»"
+	def includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) '''
+		#include "«(typesModule.h).relativeTo(module.h)»"
 	'''
 	
 	def statesEnumDecl(ExecutionFlow it) '''

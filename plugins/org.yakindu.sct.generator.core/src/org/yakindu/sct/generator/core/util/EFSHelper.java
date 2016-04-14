@@ -88,10 +88,14 @@ public class EFSHelper {
 	 */
 	public IContainer getContainer(OutputConfiguration outputConfig,IProject project) {
 		String path = outputConfig.getOutputDirectory();
-		if (".".equals(path) ||"/".equals(path) || "./".equals(path) || "".equals(path) || project == null) {
+		if (isRootPath(path) || project == null) {
 			return project;
 		}
 		return project.getFolder(new Path(path));
+	}
+	
+	public boolean isRootPath(String path) {
+		return (".".equals(path) ||"/".equals(path) || "./".equals(path) || "".equals(path));
 	}
 
 	public void createContainer(IContainer container) {
