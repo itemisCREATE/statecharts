@@ -953,7 +953,15 @@ A textual description language is used to declare and describe behaviors in a st
 
 h3(#statechart). Statechart
 
-TBD
+A statechart or statechart model consists of several components.
+
+The most important part is the *state diagram*, comprising "states":#state and "transitions":#transition. They are organized into zero or more "regions":#region.
+
+The *definition sections* is a textual statechart component. It contains definitions of namespaces, interfaces, variables, events, operations, etc.
+
+Most objects defined in the definition section are _typed_. For example, a variable could be of type _integer_. As another example, the type of an operation is by defined by the number and types of its parameters and its return type, if any.
+
+A type system or *domain* specifies which types are available. YAKINDU Statechart Tools has a built-in type system. The Professional Edition allows for additional domains to be installed.
 
 h3(#graphical-elements). Graphical elements
 
@@ -1557,51 +1565,166 @@ h2(#editing-statecharts). Editing statecharts
 
 h3(#creating-and-deleting-statecharts). Creating and deleting statecharts
 
-TBD
+Statecharts are comprised in *statechart model files*. The filename extension of these files is @.sct@. Their internal format is "XML Metadata Interchange":https://en.wikipedia.org/wiki/XML_Metadata_Interchange or "XMI":https://en.wikipedia.org/wiki/XML_Metadata_Interchange, which is an XML language.
+
+h4(#creating-a-statechart). Creating a statechart
+
+###. FIXME: Unify the following with the tutorial text!
+
+In order to create a new statechart file, use _Project Explorer_ view:
+# Right-click on a project or on a folder you want to create the new statechart in. The context menu appears.
+# In the context menu, select _New → Other…_. The _New_ dialog appears
+# In the _New_ dialog, select _YAKINDU SCT → Statechart Model_. The _New YAKINDU Statechart_ wizard appears.
+# In the wizard, select a statechart domain.
+# Click _Next >_.
+# Enter a filename for the statechart file to be created. The filename extension must be @.sct@.
+# Optionally you can change the project or folder to create the new statechart file in.
+# Click _Finish_.
+# If the _Confirm Perspective Switch_ dialog appears, answer its question as you see fit.
+# The new statechart file is created in the location you specified and opened in the "statechart editor":#editor-ui.
+
+h4(#copying-an-existing-statechart). Copying an existing statechart
+
+In order to copy an existing statechart file, proceed as follows:
+# Right-click on its filename in the _Project Explorer_ view. The context menu appears.
+# In the context menu, select _Copy_.
+# Right-click on the project or folder you want to insert the copied file in. The context menu appears.
+# In the context menu, select _Paste_.
+# If there already is a file with the same name as the file to be copied in the target project or folder – as is always the case if you are copying a file within the same project or directory –, the _Resource Exists_ dialog appears. It displays the names and last modifications times of source and target files and asks you whether you want to overwrite the target file with the source file.
+## Click _Yes To All_ to overwrite the target file plus any further target files. This option might be usefule in case you are copying multiple files.
+## Click _No_ to not overwrite the target file.
+## Click _Cancel_ to cancel to copying operation.
+## Click _Yes_ to overwrite the target file.
+
+h4(#deleting-a-statechart). Deleting a statechart
+
+In order to delete a statechart file, proceed as follows:
+# Right-click on its filename in the _Project Explorer_ view. The context menu appears.
+# In the context menu, select _Delete_.
+# The _Delete Resources_ confirmation dialog appears. You have three choices:
+## Click _Preview >_ to inspect what the delete operation is going to do, if confirmed.
+## Click _Cancel_ to cancel the delete operation. Your statechart file will remain in your project.
+## Click _OK_ to actually delete the statechart file.
 
 h3(#editor-ui). Editor UI
 
+YAKINDU Statechart Tools comes with a *statechart editor*. This section explains the statechart editor and how you can use it to graphically edit your statecharts.
+
 h4(#sc-modeling-perspective). "SC Modeling" perspective
 
-TBD
+_SC Modeling_ is an Eclipse perspective supporting the statechart editor. It contains a couple of views you typically need during editing:
+* The _Project Explorer_ for a hierarchical display of your projects, folders, and files. You can even use the _Project Explorer_ to view the internal structure of your statechart models.
 
 h4(#canvas). Canvas
 
-TBD
+The canvas is the statechart editor's drawing area. When you create a new statechart model, the canvas comprises the definition section and a single "region":#region.
+
+The following list gives an overview of what kind of actions you can perform on the canvas:
+* Add or remove a region
+** To add a region to the canvas, select _Region_ in the "editor palette":#editor-palette, then click at the canvas location you want to place the region.
+** To remove a region from the canvas, select the region, then press the @[Del]@ key or select _Edit → Delete_ from the menu bar.
+* Zooming
+** Press and hold the the @[Ctrl]@ key and turn the mouse wheel not zoom in and out.
+** Right-click on the canvas to open its context menu. In the context menu, several zooming functions are available in the _Zoom_ submenu.
 
 h4(#editor-palette). Editor palette
 
-TBD
+The editor palette provides you with a set of various actions and statechart editing tools. By default, the palette is located right from the canvas, but you can drag it to the left, if you like.
+
+You can hide the palette by clicking at the small triangle in the palette's title bar. Click at the triangle again to make the palette reappear.
+
+h5(#oss-editing-action-tools). Editing action tools
+
+Below its title bar, the palette contains a toolbar with the following editing action tools (from left to right):
+| [SYMBOL] | Select | |
+| [SYMBOL] | Zoom in | Left-click to zoom in. Press @[Shift]@ and left-click to zoom out. Drag to zoom to selection. |
+| [SYMBOL] | Zoom out | Left-click to zoom out. Press @[Shift]@ and left-click to zoom in. |
+| [SYMBOL] | Rectangle selection | Click and drag to select everything completely included in the selection rectangle. Submenus allow to restrict the selected objects to nodes, labels or transitions, respectively. |
+| [SYMBOL] | Intersection selection | Click and drag to select everything included in or touched by the selection rectangle. Submenus allow to restrict the selected objects to nodes, labels or transitions, respectively. |
+| [SYMBOL] | Note | Create a note, a text or a note attachment. |
+
+h5(#oss-statechart-elements-tools). Statechart elements tools
+
+The palette comprises a couple of tools serving to add statechart elements to the diagram:
+
+Below its title bar, the palette contains a toolbar with the following editing action tools (from left to right):
+| [SYMBOL] | Transition |  |
+| [SYMBOL] | State |  |
+| [SYMBOL] | Composite state |  |
+| [SYMBOL] | Orthogonal state |  |
+| [SYMBOL] | Region |  |
+| [SYMBOL] | Entry |  |
+| [SYMBOL] | Shallow history |  |
+| [SYMBOL] | Deep history |  |
+| [SYMBOL] | Final state |  |
+| [SYMBOL] | Exit node |  |
+| [SYMBOL] | Choice |  |
+| [SYMBOL] | Synchronization |  |
 
 h4(#outline-view). Outline view
 
-TBD
+The _Outline_ view allows you to keep the big picture of your statechart model and navigate it easily. It displays the model outline either as a graphical overview or as a hierarchical outline.
+
+h5(#oss-graphical-overview). Graphical overview
+
+Click on the _Overview_ icon in the _Outline_ view's title bar to engage the graphical overview.
+
+While the statechart editor window due to zooming or the size of the whole statechart might display a cutout only, the _Outline_ view shows the whole diagram as an overview. It is scaled down as needed to completely fit into the available area.
+
+A light-grey overlay rectangle represents the statechart editor's "viewport":https://en.wikipedia.org/wiki/Viewport. Drag this rectangle to move the statechart editor's viewport. Click into the outline view to position the rectangle's center to point you have clicked.
+
+h5(#oss-hierarchical-outline). Hierarchical outline
+
+Click on the _Outline_ icon in the _Outline_ view's title bar to engage the hierarchical outline.
 
 h4(#problems-view). Problems view
 
-TBD
+The _Problems_ view by default lists all errors, warnings and other types of messages in all open projects.
+
+The messages are grouped by message type, typically error or warning. Click on the show/hide symbol to open or close the respective message group's contents.
+
+Double-clicking at a message in the _Problems_ view takes you directly to the resource or model element causing the problem.
+
+You can configure the problems view in a multitude of ways, e.&nbsp;g. to group entries by different criteria, to sort them in a specific way, or to restrict them to certain projects. You can even define multiple problems views, each with different selection or display criteria.
+
+To start configuring the problems view, click at the small triangle pointing downwards in the problem view's title bar. A drop-down menu will open and show the options you have.
+
 
 h3(#editing-states-and-other-nodes). Editing states and other nodes
 
-TBD
+Generally there a two different ways to edit states and other nodes:
+* Use the graphical editor to modify a node in the diagram.
+* Select a node and edit its properties in the _Properties_ view.
+
+There are certain properties you can only edit with one of these methods. For example, to modify a state's position or size, use the statechart editor. To change a state's transitions' priority, use the properties view.
 
 h3(#editing-transitions). Editing transitions
 
-TBD
+Generally there a two different ways to edit transitions:
+* Use the graphical editor to modify a transition in the diagram.
+* Select a transition and edit its properties in the _Properties_ view.
+
+There are certain properties you can only edit with one of these methods. For example, to add guidance points to a transition's arrow, use the statechart editor. To change a transition's arrow's color, use the properties view.
 
 h3(#editing-hierarchies). Editing hierarchies
 
-TBD
+Statecharts can get rather big and complex. *"Composite states":#composite-state* are a way to reduce complexity and thus make statecharts easier to create, comprehend and maintain. A composite state comprises a state machine of its own within a "region":#region. The states belonging to such a nested state machine are called *substates*. *"Orthogonal states":#orthogonal-states* are a generalization of composite states, comprising two or more independend state machines in separate regions that are executed in parallel.
+
+A complementary way to mitigate size are *subdiagrams*. A subdiagram externalizes the possibly large region(s) contained by a composite state into a subdiagram. In this case the composite state no longer displays its substates. Instead it is visualized very similar to a regular state, aside from a small label marking it as a composite state and giving access to its internal structure: the subdiagram. In this way a composite state consumes much less space and gives the user the opportunity to better see the overall picture. Section "Using subdiagrams":#using-subdiagrams explains how to work with subdiagrams, how to create them and how to inline them again, if needed.
+
+Composite states resp. subdiagrams can be nested to any depth.
+
+The statechart editor provides various "refactorings":#refactorings to support editing these hierarchies.
 
 h3(#using-subdiagrams). Using subdiagrams
 
-When using composite states, a statechart model often becomes too big to give a comprehensive overview of the whole diagram. Although it is possible to collapse and expand a state's figure compartment, these actions would spoil the diagram layout each time they are executed. Subdiagrams come as a solution.
+When using composite states, a statechart model often becomes too big to give a comprehensive overview of the whole diagram. Subdiagrams come as a solution.
 
 !(standard-image)images/extract_subdiagram.png(Composite state)!
 
 p=. Composite state
 
-When the _Extract Subdiagram_ refactoring is executed on a composite state, all containing regions are extracted into a separate diagram. A small decorator in the lower-right corner of the state indicates the existence of such a subdiagram. When you hover with the mouse cursor over this decorator, you'll see a small preview of the subdiagram's content. The refactoring also creates the required _entry_ and _exit_ points for you.
+When the _Extract Subdiagram_ refactoring is executed on a composite state, all containing regions are extracted into a separate diagram. A small decorator in the lower-right corner of the state indicates the existence of such a subdiagram. When you hover over this decorator with the mouse cursor, you'll see a small preview of the subdiagram's content. The refactoring also creates the required _entry_ and _exit_ points for you.
 
 !(standard-image)images/extract_subdiagram2.png(Subdiagram popup window)!
 
@@ -1615,11 +1738,40 @@ p=. Subdiagram editor
 
 h3(#refactorings). Refactorings
 
-TBD
+Refactoring means modifying certain aspects of states or transitions while maintaining the same semantics.
+
+The statechart editor allows for refactoring states, including composite states and orthogonal states. The states' context menu contains the  _Refactor_ submenu with the following refactoring actions. Depending on the state's (or states') type and on other conditions these refactoring can actually be executed or not.
+
+|_. Refactoring action |_. Description |
+|Fold Incoming Actions|If all actions of all incoming transitions of this state are identical, this refactoring turns them into entry actions of this state and remove them from the transitions.|
+|Fold Outgoing Actions|If all actions of all outgoing transitions of this state are identical, this refactoring turns them into exit actions of this state and remove them from the transitions.|
+|Group States Into Composite|Creates a new composite state containing the selected states. The latter must belong to the same region.|
+|Unfold Entry Actions|Removes all entry actions from the state and attaches them to each incoming transaction.|
+|Unfold Exit Actions|Removes all exit actions from the state and attaches them to each outgoing transaction.|
+|Extract Subdiagram|Extracts the regions of the selected composite or orthogonal state into a subdiagram. Entry and exit node are created as needed.|
+|Inline Subdiagram|Inlines the selected node's subdiagram to show it in the composite state's diagram region.|
 
 h3(#using-editing-proposals). Using editing proposals
 
-TBD
+h4(#oss-using-text-proposals). Using text proposals
+
+Proposals assist you when writing statechart language expressions. Whenever editing some text anywhere in the graphical statechart editor or in the properties view, you can always press the @[Ctrl]+[Space]@ key combination to get some context-sensitive help. A popup window opens. It contains a menu proposing possible text choices to complete a phrase.
+
+Certain proposals, like statechart language keywords, have documentation associated to them. When such a proposal is selected either using the mouse or the keyboard, this information is shown in a secondary popup window next to the proposal.
+
+You can either use the mouse or the keyboard to select an insert a proposal in the text:
+* Double-click on a proposal for insertion in the text.
+* Use the @[Down]@ and @[Up]@ arrow keys to navigate to the proposal you want to insert in the text, then press @[Return]@ to actually insert the proposal.
+
+h4(#oss-using-action-proposals-on-states). Using actions proposals on states
+
+When a state is selected, press @[Ctrl]+[Space]@ opens a popup window showing a context-sensitive menu with possible action choices to perform on the state.
+
+These action proposals have additional information associated to them. When a proposal is selected either using the mouse or the keyboard, this information is shown in a secondary popup window next to the proposal.
+
+You can either use the mouse or the keyboard to execute a proposal:
+* Double-click on a proposal to execute it.
+* Use the @[Down]@ and @[Up]@ arrow keys to navigate to the proposal you want to execute, then press @[Return]@ to actually execute it.
 
 h3(#oss_comparing-statecharts). Comparing statecharts
 
@@ -1846,7 +1998,14 @@ bc. feature Debug {
 
 h3(#running-a-generator). Running a generator
 
-TBD
+Before you can run a generator, you have to establish a generator model first. This is explained in section "Configuring a generator":#configuring-a-generator and in the sections describing specific generators.
+
+Provided you have created the generator model, proceed as follows:
+# In the project explorer view, right-click at the @.sgen@ file containing the generator model. The context menu opens.
+# In the context menu, select _Generate Code Artifacts_.
+# The generator is executed.
+
+Please note that depending on the generator you are using you don't always need to explicitly run the generator manually as described above. Instead an Eclipse builder will do that for you automatically whenever the associated statechart model is changed. However, if that doesn't work for one or the other reason, you can always execute the generator by hand.
 
 h3(#general-concepts-of-the-state-machine-code). General concepts of the state machine code
 
