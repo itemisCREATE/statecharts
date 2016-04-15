@@ -32,7 +32,7 @@ public class SmartEditProposalProvider implements IEditProposalProvider {
 		List<IEditProposal> proposals = new ArrayList<IEditProposal>();
 
 		proposals.add(new ModificationBasedEditProposal(new AddOutgoingStateModification(view), "Add outgoing state", "Adds a new outgoing transition to a new sibling state." , null));
-		proposals.add(new ModificationBasedEditProposal(new AddCompositeModification(view), "Add sub region", "Adds a new region to this state. This region includes an initial state.", null));
+		proposals.add(new ModificationBasedEditProposal(new AddCompositeModification(view), "Add subregion", "Adds a new region to this state. This region includes an initial state.", null));
 		
 		return proposals;
 	}
