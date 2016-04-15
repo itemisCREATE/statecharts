@@ -202,6 +202,9 @@ public class EFSResourceFileSystemAccess extends AbstractFileSystemAccess2 imple
 	public URI getURI(String path, String outputConfiguration) {
 		OutputConfiguration outputConfig = getOutputConfig(outputConfiguration);
 		String outputDir = outputConfig.getOutputDirectory();
+		if (efsHelper.isRootPath(outputDir) && efsHelper.isRootPath(path)) {
+			return URI.createFileURI(getProject().getLocationURI().getPath());
+		}
 		IFile file = getProject().getFile(outputDir + File.separator + path);
 		if (file != null) {
 			return URI.createFileURI(file.getLocationURI().getPath());

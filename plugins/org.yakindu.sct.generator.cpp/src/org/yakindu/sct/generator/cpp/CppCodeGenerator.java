@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.generator.cpp;
 
+import org.yakindu.sct.generator.c.GenArtifactConfigurations;
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
@@ -21,6 +23,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import com.google.inject.Binder;
 import com.google.inject.Inject;
 import com.google.inject.Module;
+import com.google.inject.name.Names;
 import com.google.inject.util.Modules;
 
 /**
@@ -50,6 +53,9 @@ public class CppCodeGenerator extends GenericJavaBasedGenerator {
 				binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 				binder.bind(INamingService.class).to(CppNamingService.class);
 				binder.bind(GeneratorEntry.class).toInstance(entry);
+				binder.bind(IGenArtifactConfigurations.class)
+						.annotatedWith(Names.named(IGenArtifactConfigurations.DEFAULT))
+						.toInstance(GenArtifactConfigurations.DEFAULT);
 			}
 		});
 	}
