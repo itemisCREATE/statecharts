@@ -13,12 +13,12 @@ package org.yakindu.sct.model.stext.util;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -52,18 +52,19 @@ public class ImportResolver {
 	 * @return imported elements of given type
 	 */
 	public <T extends EObject> List<T> getImportedElementsOfType(Import importDeclaration, Class<T> type) {
-		List<T> varDefs = Lists.newArrayList();
+		List<T> elements = Lists.newArrayList();
 		Package importedPackage = getPackageForNamespace(importDeclaration.eResource(), importDeclaration.getImportedNamespace());
 		if (importedPackage != null) {
-			TreeIterator<EObject> iter = importedPackage.eAllContents();
-			while (iter.hasNext()) {
-				EObject next = iter.next();
-				if (type.isInstance(next)) {
-					varDefs.add(type.cast(next));
+			if (importedPackage.eIsProxy()) {
+				importedPackage = (Package) EcoreUtil.resolve(importedPackage, importDeclaration);
+			}
+			for (EObject content : importedPackage.eContents()) {
+				if (type.isInstance(content)) {
+					elements.add(type.cast(content));
 				}
 			}
 		}
-		return varDefs;
+		return elements;
 	}
 
 	/**

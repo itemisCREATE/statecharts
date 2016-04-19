@@ -27,6 +27,7 @@ import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
+import org.eclipse.xtext.EcoreUtil2
 
 /**
  * Default implementation for resolving execution slots based on expressions.
@@ -39,10 +40,7 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 	extension IQualifiedNameProvider nameProvider
 
 	def dispatch ExecutionSlot resolve(ExecutionContext context, FeatureCall e) {
-		if (e.feature instanceof VariableDefinition) {
-			return context.getVariable(e.feature.fullyQualifiedName.toString)
-		}
-		if (e.feature instanceof Operation) {
+		if (e.feature instanceof VariableDefinition || e.feature instanceof Operation) {
 			return context.getVariable(e.feature.fullyQualifiedName.toString)
 		}
 		if (e.feature instanceof Property || e.feature instanceof Event) {
@@ -54,7 +52,7 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 				calls.add(0, current.feature)
 			}
 
-			// first: get the root slot where to start the search searching
+			// first: get the root slot where to start the search
 			val root = (current.owner as ElementReferenceExpression).reference
 			var ExecutionSlot featureSlot = null
 			
@@ -63,13 +61,9 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 				calls.remove(0)
 			}
 			else {
-				var varDefFqn = getFqn(root).toString
-				featureSlot = context.getSlot(varDefFqn)
-				if (featureSlot == null) {
-					featureSlot = context.getSlot(root.fullyQualifiedName.toString)
-					if (featureSlot == null)
-						return null // could not find starting slot for feature call
-				}
+				featureSlot = packageNamespaceAwareResolve(context, root)
+				if (featureSlot == null)
+					return null // could not find starting slot for feature call
 			}
 			// go through all calls and traverse execution context hierarchy accordingly
 			for (EObject feature : calls) {
@@ -81,21 +75,26 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 					//					TODO (featureSlot as ExecutionVariable).value
 				}
 			}
-
 			return featureSlot
 		}
 	}
 	
 	def dispatch ExecutionSlot resolve(ExecutionContext context, ElementReferenceExpression e) {
-		context.getSlot(e.reference.fullyQualifiedName.toString)
+		packageNamespaceAwareResolve(context, e.reference)
+	}
+	
+	def protected ExecutionSlot packageNamespaceAwareResolve(ExecutionContext context, EObject element) {
+		val pkg = EcoreUtil2.getContainerOfType(element, org.yakindu.base.types.Package)
+		if (pkg != null) {
+			context.getSlot(pkg.name + "." + element.fullyQualifiedName.toString)
+		}
+		else {
+			context.getSlot(element.fullyQualifiedName.toString)
+		}
 	}
 	
 	def dispatch ExecutionSlot resolve(ExecutionContext context, AssignmentExpression e) {
 		return context.resolve(e.varRef)
-	}
-	
-	def getFqn(EObject varDef) {
-		varDef.getFullyQualifiedName
 	}
 
 	def private name(EObject e) {
