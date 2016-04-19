@@ -12,7 +12,7 @@ package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
 import java.util.List
-import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.util.Strings
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -20,12 +20,10 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
-import org.eclipse.xtext.util.Strings
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
-class StatemachineSource {
+class StatemachineSource implements IContentTemplate {
 	
 	@Inject extension Naming
 	@Inject extension GenmodelEntries
@@ -36,22 +34,17 @@ class StatemachineSource {
 	@Inject extension ConstantInitializationResolver
 	@Inject protected extension StateVectorExtensions
 	
-	def generateStatemachineSource(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-		flow.initializeNamingService
-		var content = flow.generateStatemachineSourceContents(entry)
-		var target = flow.module.c
-		fsa.generateFile(target , content)
-	}
-	
-	def generateStatemachineSourceContents(ExecutionFlow it, GeneratorEntry entry) '''
+	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
+		initializeNamingService
+	'''
 		«entry.licenseText»
 		
 		#include <stdlib.h>
 		#include <string.h>
-		#include "«typesModule.h»"
-		#include "«module.h»"
+		#include "«(typesModule.h).relativeTo(module.c)»"
+		#include "«(module.h).relativeTo(module.c)»"
 		«IF timed || !it.operations.empty»
-			#include "«module.client.h»"
+			#include "«(module.client.h).relativeTo(module.c)»"
 		«ENDIF»
 		/*! \file Implementation of the state machine '«name»'
 		*/
@@ -84,6 +77,7 @@ class StatemachineSource {
 		
 		«functionImplementations»
 	'''
+	}
 	
 	def initFunction(ExecutionFlow it) '''
 		void «functionPrefix»init(«scHandleDecl»)

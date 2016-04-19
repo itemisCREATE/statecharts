@@ -40,12 +40,12 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 
 	protected GeneratorEntry entry
 
-	override generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		this.entry = entry
 		fsa.generateFile(flow.module().h, flow.generateStatemachineHeaderContents(entry))
 	}
 
-	override generateStatemachineHeaderContents(ExecutionFlow it, GeneratorEntry entry) '''
+	def generateStatemachineHeaderContents(ExecutionFlow it, GeneratorEntry entry) '''
 		«entry.licenseText»
 		
 		#ifndef «module().define»_H_
