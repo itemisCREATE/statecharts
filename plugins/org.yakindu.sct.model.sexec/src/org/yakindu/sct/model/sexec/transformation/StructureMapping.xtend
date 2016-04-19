@@ -72,7 +72,7 @@ class StructureMapping {
 	def dispatch Scope mapScope(ImportScope scope) {
 		val _scope = scope.createScope
 		for (Import imp : scope.imports) {
-			val decls = resolver.getImportedElementsOfType(imp, VariableDefinition)
+			val decls = resolver.getImportedElementsOfType(imp, org.yakindu.base.types.Property)
 			for (Declaration decl : decls) {
 				val importDecl = SGraphFactory.eINSTANCE.createImportDeclaration
 				importDecl.name = decl.name
