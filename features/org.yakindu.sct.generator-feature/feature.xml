@@ -3,8 +3,7 @@
       id="org.yakindu.sct.generator"
       label="YAKINDU Generator All-In-One Feature"
       version="2.6.0.qualifier"
-      provider-name="statecharts.org"
-      plugin="org.yakindu.sct.doc.user">
+      provider-name="statecharts.org">
 
    <description url="http://www.statecharts.org">
       %description
@@ -29,9 +28,5 @@
    <includes
          id="org.yakindu.sct.generator.cpp"
          version="0.0.0"/>
-
-   <requires>
-      <import feature="org.yakindu.sct" version="2.6.0.qualifier"/>
-   </requires>
 
 </feature>
