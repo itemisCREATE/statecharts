@@ -20,7 +20,7 @@
       <topic href="help/Part2-User-Guide/30_statechart_language.html#transition" label="Transition reference"/>
    </context>
    <context id="sgen_feature" title="Genmodel Features">
-      <topic href="help/Part2-User-Guide/30_statechart_language.html" label="YAKINDU Statechart Tools User Guide"/>
+      <topic href="help/Part2-User-Guide/60_generating_code.html" label="Generating state machine code"/>
    </context>
    <context id="stext_keyword">
       <topic href="help/Part2-User-Guide/30_statechart_language.html" label="YAKINDU Statechart Tools User Guide"/>
