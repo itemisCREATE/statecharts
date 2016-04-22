@@ -118,7 +118,7 @@
 
 
     <!-- Generates the documentation as Eclipse help. -->
-    <target name="generate.eclipsehelp"
+    <target name="generate.eclipsehelp.old"
             description="Generates the documentation as Eclipse help from the textile (wikitext) sources."
             depends="init.wikitext">
         <wikitext.conversion src.dir="${src.dir.name}"
@@ -126,6 +126,56 @@
                              dst.dir="${help.dir.name}"
                              dst.file.name="---"
                              style="---" />
+    </target>
+
+
+    
+    <target name="generate.eclipsehelp"
+            description="Generates the documentation as separate Eclipse help (HTML) files from their respective textile (wikitext) sources."
+            depends="init.wikitext">
+
+        <sequential>
+            <taskdef classpathref="wikitext.classpath"
+                     resource="org/eclipse/mylyn/wikitext/core/ant/tasks.properties" />
+
+            <wikitext-to-eclipse-help markupLanguage="Textile"
+                                      multipleOutputFiles="false"
+                                      navigationImages="true"
+                                      formatoutput="true"
+                                      validate="true"
+                                      failOnValidationError="true"
+                                      failOnValidationWarning="false"
+                                      title="YAKINDU Statechart Tools – Open Edition"
+                                      helpPrefix="help">
+                <fileset dir="src">
+                    <include name="**/*.textile" />
+                </fileset>
+                <stylesheet url="../css/style.css" />
+            </wikitext-to-eclipse-help>
+
+            <!-- Files have been generated in the source directory, which is bad practice. Move them to the destination
+                 directory: -->
+            <move todir="help" flatten="no" verbose="no">
+                <fileset dir="src" >
+                    <include name="**/*.html" />
+                    <include name="**/*-toc.xml" />
+                </fileset>
+            </move>
+
+            <!-- Copy the CSS files to the destination directory: -->
+            <copy todir="help/${css.dir.name}">
+                <fileset dir="${css.dir}">
+                    <include name="*" />
+                </fileset>
+            </copy>
+
+            <!-- Copy the image files to the destination directory: -->
+            <copy todir="help">
+                <fileset dir="src">
+                    <include name="**/images/*" />
+                </fileset>
+            </copy>
+        </sequential>
     </target>
 
 
