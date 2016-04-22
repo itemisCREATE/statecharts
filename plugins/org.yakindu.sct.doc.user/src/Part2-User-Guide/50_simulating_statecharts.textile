@@ -27,6 +27,17 @@ By default, the _SC Simulation_ perspective shows the following views:
 * _Simulation_ view
 * _Breakpoints_ view
 
+h2(#advsim_simulation-view). Simulation view
+
+The simulation view shows the current state of all variables and events during a simulation. Variables and events are listed under their corresponding interfaces. The unnamed interface is thereby denoted as _default_. The simulation view allows to change variable values and to invoke events. 
+
+"Figure &quot;Simulation view&quot;":#advsim_fig-simulation-view shows a simulation of the _light switch_ statechart at a certain point in time. You can see the state machine model on the left and its events and variables in the _Simulation_ view on the right. Clicking on the underlined events _pressLightOn_ or _pressLightOff_ raises them for the next run cycle. The value of the _brightness_ variable can be changed by directly editing it.
+
+p(#advsim_fig-simulation-view). 
+!(standard-image)images/advsim_010_lightswitch_020_simulation.png(Simulation view)!
+
+p=. Simulation view
+
 h2(#controlling-a-simulation). Controlling a simulation
 
 * Terminate the simulation by clicking at the _Terminate_ button or by selecting _Run → Terminate_ in the menu bar.
