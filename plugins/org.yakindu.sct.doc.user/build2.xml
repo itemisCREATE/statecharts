@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="generate.help" basedir=".">
+
+	<property name="wikitext.standalone" location="${basedir}/lib" />
+	<property name="help.prefix" value="help" />
+	<property name="help.dir" location="${basedir}/${help.prefix}" />
+
+	<path id="wikitext.classpath">
+		<fileset dir="${wikitext.standalone}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef classpathref="wikitext.classpath" resource="org/eclipse/mylyn/wikitext/core/ant/tasks.properties" />
+
+	<target name="assemble.sections" description="Joins individual wiki source files so that they can be presented to the Eclipse help generator as a single file.">
+		<assemble.section.sources src.dir="${help.dir}/04_C-Code_Generator" src.list="sec_04" dest.file="c_code_generator.textile" />
+		<assemble.section.sources src.dir="${help.dir}/05_Java-Code_Generator" src.list="sec_05" dest.file="java_code_generator.textile" />
+	</target>
+
+
+	<!-- Building the master TOC (toc.xml) and registering it along with the sub-TOCs produced by this target in the plugin.xml file must still be done manually. -->
+	<!-- The help contexts file (contexts.xml) is not yet updated automatically, either. -->
+	<!--<target name="generate.help" depends="assemble.sections" description="Runs the Eclipse help generator on the listed wiki source files">
+-->
+	<target name="generate.help" description="Runs the Eclipse help generator on the listed wiki source files" depends="assemble.sections">
+		<generate.section.help src.dir="${basedir}/src/Part1-Installation-Guide" src.file="00_installation.textile" prefix="${help.prefix}/Part1-Installation-Guide" />
+		<generate.section.help src.dir="${help.dir}/02_Getting_started" src.file="getting_started.textile" prefix="${help.prefix}/02_Getting_started" />
+		<generate.section.help src.dir="${help.dir}/03_Tasks" src.file="tasks.textile" prefix="${help.prefix}/03_Tasks" />
+		<generate.section.help src.dir="${help.dir}/04_Reference" src.file="reference.textile" prefix="${help.prefix}/04_Reference" />
+	</target>
+
+	<target name="clean">
+		<delete>
+			<fileset dir="${help.dir}">
+				<include name="**/**/*.html" />
+				<include name="**/**/*toc.xml" />
+				<!-- Include joined source files produced by assemble.sections here 
+				<include name="**/**/c_code_generator.textile" />
+				<include name="**/**/java_code_generator.textile" />-->
+			</fileset>
+		</delete>
+	</target>
+
+	<macrodef name="assemble.section.sources" description="Concats individual wiki source files">
+		<attribute name="src.dir" />
+		<attribute name="index.file" default="@{src.dir}/index.txt" />
+		<attribute name="src.list" />
+		<attribute name="dest.file" />
+		<sequential>
+			<loadfile srcfile="@{index.file}" property="@{src.list}">
+				<filterchain>
+					<tokenfilter>
+						<replacestring from="\n" to="," />
+					</tokenfilter>
+				</filterchain>
+			</loadfile>
+			<!-- Attribute fixlastline does not work (on the Mac). Begin wiki files with new line for now! -->
+			<concat destfile="@{src.dir}/@{dest.file}" append="false" fixlastline="yes">
+				<filelist dir="@{src.dir}" files="${@{src.list}}" />
+			</concat>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="generate.section.help" description="Runs the Eclipse help generator on the provided wiki input file. Produces an HTML document and a corresponding toc.xml">
+		<attribute name="src.dir" />
+		<attribute name="src.file" />
+		<attribute name="prefix" />
+		<sequential>
+			<wikitext-to-eclipse-help markupLanguage="Textile" multipleOutputFiles="false" navigationImages="true" formatoutput="true" helpPrefix="@{prefix}">
+				<fileset dir="@{src.dir}">
+					<include name="@{src.file}" />
+				</fileset>
+					<stylesheet url="../style.css" />
+			</wikitext-to-eclipse-help>
+		</sequential>
+	</macrodef>
+
+</project>

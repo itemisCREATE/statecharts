@@ -3,26 +3,26 @@
 <contexts>
    <context id="sc_properties_entry_entrykind" title="Entry">
       <description>An entry, possibly with a shallow or deep history, defines which state is to be activated first in a state machine or region.</description>
-      <topic href="help/documentation.html#entry" label="Entry"/>
-      <topic href="help/documentation.html#shallow-history" label="Shallow History state"/>
-        <topic href="help/documentation.html#deep-history" label="Deep History state"/>
+      <topic href="help/Part2-User-Guide/30_statechart_language.html#entry" label="Entry"/>
+      <topic href="help/Part2-User-Guide/30_statechart_language.html#shallow-history" label="Shallow History state"/>
+        <topic href="help/Part2-User-Guide/30_statechart_language.html#deep-history" label="Deep History state"/>
    </context>
    <context id="sc_properties_state_expression" title="State">
       <description>States are central elements of a state machine.</description>
-      <topic href="help/documentation.html#state" label="State"/>
+      <topic href="help/Part2-User-Guide/30_statechart_language.html#state" label="State"/>
    </context>
    <context id="sc_properties_statechart_expression" title="Expressions">
       <description>Expressions are used to declare events, variables etc. and to define behavior.</description>
-      <topic href="help/documentation.html#expressions" label="Expression reference"/>
+      <topic href="help/Part2-User-Guide/30_statechart_language.html#expressions" label="Expression reference"/>
    </context>
    <context id="sc_properties_transition_expression" title="Transition">
       <description>A transition is the transfer of one state to another. Transitions are diagrammed as arrows. They can carry events and actions, but don't need to.</description>
-      <topic href="help/documentation.html#transition" label="Transition reference"/>
+      <topic href="help/Part2-User-Guide/30_statechart_language.html#transition" label="Transition reference"/>
    </context>
    <context id="sgen_feature" title="Genmodel Features">
-      <topic href="help/documentation.html" label="YAKINDU Statechart Tools User Guide"/>
+      <topic href="help/Part2-User-Guide/60_generating_code.html" label="Generating state machine code"/>
    </context>
    <context id="stext_keyword">
-      <topic href="help/documentation.html" label="YAKINDU Statechart Tools User Guide"/>
+      <topic href="help/Part2-User-Guide/30_statechart_language.html" label="YAKINDU Statechart Tools User Guide"/>
    </context>
 </contexts>
