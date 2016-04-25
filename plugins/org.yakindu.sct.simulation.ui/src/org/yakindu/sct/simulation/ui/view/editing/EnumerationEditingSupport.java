@@ -50,7 +50,7 @@ public class EnumerationEditingSupport extends ScopeSlotEditingSupport {
 	}
 
 	public EnumerationType getEnumerationType(ExecutionSlot element) {
-		EnumerationType e = (EnumerationType) element.getType();
+		EnumerationType e = (EnumerationType) element.getType().getOriginType();
 		return e;
 	}
 
@@ -73,7 +73,7 @@ public class EnumerationEditingSupport extends ScopeSlotEditingSupport {
 		if (element instanceof ExecutionSlot) {
 			if (!((ExecutionSlot) element).isWritable())
 				return false;
-			Type type = ((ExecutionSlot) element).getType();
+			Type type = ((ExecutionSlot) element).getType().getOriginType();
 			return type instanceof EnumerationType;
 		}
 		return false;
@@ -93,4 +93,5 @@ public class EnumerationEditingSupport extends ScopeSlotEditingSupport {
 		}
 		return null;
 	}
+	
 }
