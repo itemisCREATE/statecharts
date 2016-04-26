@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.generator"
       label="YAKINDU Generator All-In-One Feature"
-      version="2.6.0.qualifier"
+      version="2.6.1.qualifier"
       provider-name="statecharts.org">
 
    <description url="http://www.statecharts.org">
