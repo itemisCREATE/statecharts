@@ -25,7 +25,7 @@
           class="org.yakindu.sct.simulation.ui.view.SimulationView"
           icon="icons/Declarations-View-16.gif"
           id="org.yakindu.sct.simulation.ui.declarationview"
-          name="Simulation View"
+          name="Simulation"
           restorable="true">
     </view>
  </extension>

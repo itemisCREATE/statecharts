@@ -61,7 +61,7 @@ public class DomainWizardPage extends WizardPage {
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(composite);
 		GridLayoutFactory.fillDefaults().applyTo(composite);
 		final Group domainSelectionGroup = new Group(composite, SWT.NONE);
-		domainSelectionGroup.setText("Select the Statechart domain:");
+		domainSelectionGroup.setText("Select the statechart domain:");
 
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(domainSelectionGroup);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(domainSelectionGroup);
