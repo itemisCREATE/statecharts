@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.FillLayout;
@@ -33,8 +32,8 @@ public abstract class AbstractTwoColumnEditorPropertySection extends
 	public void createControls(Composite parent) {
 		parent.setLayout(new FillLayout());
 		SashForm sashForm = new SashForm(parent, SWT.HORIZONTAL | SWT.SMOOTH);
-		sashForm.setSashWidth(5);
-		sashForm.setBackground(ColorConstants.white);
+		sashForm.setSashWidth(2);
+		sashForm.setBackground(sashForm.getDisplay().getSystemColor( SWT.COLOR_GRAY));
 		sashForm.setLayout(new FillLayout());
 		Composite leftColumn = getToolkit().createComposite(sashForm);
 		leftColumn.setLayout(createLeftColumnLayout());
