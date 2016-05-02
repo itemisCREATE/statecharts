@@ -23,6 +23,7 @@ import org.eclipse.debug.ui.contexts.IDebugContextListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
+import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 
 /**
  * Base {@link ViewPart} implementation for all views that are related to the
@@ -90,6 +91,8 @@ public abstract class AbstractDebugTargetView extends ViewPart
 			if (newTarget != debugTarget && newTarget != null && !newTarget.isTerminated()) {
 				debugTarget = newTarget;
 				activeTargetChanged(newTarget);
+			} else {
+				setActiveSession();
 			}
 		}
 
@@ -97,7 +100,9 @@ public abstract class AbstractDebugTargetView extends ViewPart
 
 	public final void handleDebugEvents(DebugEvent[] events) {
 		for (DebugEvent debugEvent : events) {
-			handleDebugEvent(debugEvent);
+			//Only notify about events fired from the active debug target
+			if ((debugEvent.getSource() instanceof SCTDebugTarget) && debugEvent.getSource() == debugTarget)
+				handleDebugEvent(debugEvent);
 		}
 	}
 }
