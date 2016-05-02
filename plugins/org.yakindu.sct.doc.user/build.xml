@@ -6,7 +6,7 @@
          xmlns:unless="ant:unless"
          xmlns:artifact="antlib:org.eclipse.aether.ant">
 
-    <!-- Include platform of machine-specific properties, if any. -->
+    <!-- Include platform-specific or machine-specific properties, if any. -->
     <property file="local.properties" />
 
     <!-- The documentation source files located beneath this directory.
