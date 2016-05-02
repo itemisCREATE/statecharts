@@ -18,6 +18,10 @@
       %license
    </license>
 
+   <requires>
+      <import feature="org.yakindu.sct" version="2.6.1.qualifier"/>
+   </requires>
+
    <plugin
          id="org.yakindu.sct.generator.java"
          download-size="0"
