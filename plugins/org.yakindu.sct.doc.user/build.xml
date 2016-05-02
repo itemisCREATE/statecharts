@@ -42,7 +42,7 @@
     <!-- Wikitext download configuration -->
     <property name="wikitext.zip.version" value="1.0.0.v20140518" />
     <property name="wikitext.zip.checksum"
-              value="a4c9c3c4c6ff21dea10368b2085021088294b5fd7fc19e445d9670cbdb00390e4095fcccca29d6e58fc42d067af49ef86d6f03f7811d47cf212fe8e2418775b9" />
+              value="00d8bf79a9d7baf20e46d2435dd4b6a9963317a2737c731d11029c96aa86f64e8540639b6eefa6f04b8103860f47ff74e998c71b57445179dc20ad7c2847417c" />
     <!--
     <property name="wikitext.zip.src"
               value="http://www.eclipse.org/downloads/download.php?file=/mylyn/snapshots/nightly/docs/wikitext-standalone-latest.zip" />
@@ -70,13 +70,19 @@
     <!-- Download and unpack the wikitext standalone distribution. Unfortunately it is currently available as a nightly build only. -->
     <target name="wikitext.download" description="Download and unpack the wikitext standalone distribution.">
         <condition property="wikitext.zip.file.exists">
-            <available file="${wikitext.zip.file}" />
+            <and>
+                <available file="${wikitext.zip.file}" />
+                <checksum file="${wikitext.zip.file}"
+                          algorithm="SHA-512"
+                          property="${wikitext.zip.checksum}"
+                          verifyproperty="checksum.matches" />
+            </and>
         </condition>
         <sequential unless:set="wikitext.zip.file.exists">
             <mkdir dir="${lib.dir}" />
             <get src="${wikitext.zip.src}"
                  dest="${wikitext.zip.file}"
-                 skipexisting="true"
+                 skipexisting="false"
                  usetimestamp="true"
                  verbose="true" />
             <fail message="Checksum mismatch for ${wikitext.zip.file}. Please delete it and rerun ant to redownload.">
