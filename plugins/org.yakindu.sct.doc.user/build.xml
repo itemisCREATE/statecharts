@@ -6,35 +6,30 @@
          xmlns:unless="ant:unless"
          xmlns:artifact="antlib:org.eclipse.aether.ant">
 
-    <property file="build.properties" />
+    <!-- Include platform of machine-specific properties, if any. -->
     <property file="local.properties" />
 
-    <!-- The documentation source files are located here: -->
-    <property name="src.basename" value="documentation" />
-    <property name="src.dir.name" value="src" />
-    <property name="css.dir.name" value="css" />
-    <property name="img.dir.name" value="images" />
-    <property name="src.dir" location="${basedir}/${src.dir.name}" />
-    <property name="css.dir" location="${basedir}/${css.dir.name}" />
-    <property name="img.dir" location="${src.dir}/${img.dir.name}" />
+    <!-- The documentation source files located beneath this directory.
+         They may be structured into folders of arbitrary depth. -->
+    <property name="src.dir" value="src" />
 
-    <!-- Location of source file with XIncludes resolved: -->
-    <property name="res.basename" value="${src.basename}.resolved" />
-    <property name="res.dir.name" value="src-gen" />
+    <!-- CSS files are located here. -->
+    <property name="css.dir" value="css" />
 
-    <!-- Target directory names and directories for various output formats: -->
-    <property name="help.dir.name" value="help" />
-    <property name="html.dir.name" value="html" />
-    <property name="pdf.dir.name" value="pdf" />
-    <property name="epub.dir.name" value="epub" />
-    <property name="help.dir" location="${basedir}/${help.dir.name}" />
-    <property name="html.dir" location="${basedir}/${html.dir.name}" />
-    <property name="pdf.dir" location="${basedir}/${pdf.dir.name}" />
-    <property name="epub.dir" location="${basedir}/${epub.dir.name}" />
+    <!-- Root CSS file to be referenced by the generated HTML files. -->
+    <property name="css.root.file" value="style.css" />
 
-    <!-- Libraries used by Ant tasks: -->
-    <property name="lib.dir.name" value="lib" />
-    <property name="lib.dir" location="${basedir}/${lib.dir.name}" />
+    <!-- Image files reside in subdirectories with the following name: -->
+    <property name="img.dir" value="images" />
+
+    <!-- Target directories for various output formats: -->
+    <property name="help.dir" value="help" />
+    <property name="html.dir" value="html" />
+    <property name="pdf.dir" value="pdf" />
+    <property name="epub.dir" value="epub" />
+
+    <!-- Libraries used by various Ant tasks are located here: -->
+    <property name="lib.dir" location="${basedir}/lib" />
 
     <!-- Aether Ant Tasks configuration -->
     <property name="aether.jar.version" value="1.0.0.v20140518" />
@@ -62,12 +57,11 @@
     <!-- Remove generated stuff: -->
     <target name="clean">
         <delete includeemptydirs="true" failonerror="false">
-            <fileset dir="${res.dir.name}" />
             <fileset dir="${basedir}" defaultexcludes="false">
-                <include name="${help.dir.name}/**" />
-                <include name="${html.dir.name}/**" />
-                <include name="${pdf.dir.name}/**" />
-                <include name="${epub.dir.name}/**" />
+                <include name="${help.dir}/**" />
+                <include name="${html.dir}/**" />
+                <include name="${pdf.dir}/**" />
+                <include name="${epub.dir}/**" />
             </fileset>
         </delete>
     </target>
@@ -99,6 +93,7 @@
         </sequential>
     </target>
 
+
     <!-- Resolves the necessary dependencies: -->
     <target name="init.wikitext"
             description="Resolves the necessary wikitext dependencies."
@@ -111,6 +106,7 @@
         </path>
     </target>
 
+
     <!-- Generates the documentation in all supported formats. -->
     <target name="generate.all"
             description="Generates the documentation in all supported formats."
@@ -118,18 +114,6 @@
 
 
     <!-- Generates the documentation as Eclipse help. -->
-    <target name="generate.eclipsehelp.old"
-            description="Generates the documentation as Eclipse help from the textile (wikitext) sources."
-            depends="init.wikitext">
-        <wikitext.conversion src.dir="${src.dir.name}"
-                             src.file.name="${src.basename}.textile"
-                             dst.dir="${help.dir.name}"
-                             dst.file.name="---"
-                             style="---" />
-    </target>
-
-
-    
     <target name="generate.eclipsehelp"
             description="Generates the documentation as separate Eclipse help (HTML) files from their respective textile (wikitext) sources."
             depends="init.wikitext">
@@ -138,6 +122,7 @@
             <taskdef classpathref="wikitext.classpath"
                      resource="org/eclipse/mylyn/wikitext/core/ant/tasks.properties" />
 
+            <!-- Convert textile source files to HTML: -->
             <wikitext-to-eclipse-help markupLanguage="Textile"
                                       multipleOutputFiles="false"
                                       navigationImages="true"
@@ -145,93 +130,37 @@
                                       validate="true"
                                       failOnValidationError="true"
                                       failOnValidationWarning="false"
-                                      title="YAKINDU Statechart Tools – Open Edition"
-                                      helpPrefix="help">
-                <fileset dir="src">
+                                      title="YAKINDU Statechart Tools – Open Source Edition"
+                                      helpPrefix="${help.dir}">
+                <fileset dir="${src.dir}">
                     <include name="**/*.textile" />
                 </fileset>
-                <stylesheet url="../css/style.css" />
+                <stylesheet url="../${css.dir}/${css.root.file}" />
             </wikitext-to-eclipse-help>
 
             <!-- Files have been generated in the source directory, which is bad practice. Move them to the destination
                  directory: -->
-            <move todir="help" flatten="no" verbose="no">
-                <fileset dir="src" >
+            <move todir="${help.dir}" flatten="no" verbose="no">
+                <fileset dir="${src.dir}">
                     <include name="**/*.html" />
                     <include name="**/*-toc.xml" />
                 </fileset>
             </move>
 
             <!-- Copy the CSS files to the destination directory: -->
-            <copy todir="help/${css.dir.name}">
+            <copy todir="${help.dir}/${css.dir}">
                 <fileset dir="${css.dir}">
                     <include name="*" />
                 </fileset>
             </copy>
 
             <!-- Copy the image files to the destination directory: -->
-            <copy todir="help">
+            <copy todir="${help.dir}">
                 <fileset dir="src">
-                    <include name="**/images/*" />
+                    <include name="**/${img.dir}/*" />
                 </fileset>
             </copy>
         </sequential>
     </target>
-
-
-
-    <!-- Converts a Textile document into Eclipsehelp format. Produces an HTML document and a corresponding toc.xml -->
-    <macrodef name="wikitext.conversion"
-              description="Converts a textile document into a target format. Produces an HTML document and a corresponding toc.xml">
-        <attribute name="src.dir" />
-        <attribute name="src.file.name" />
-        <attribute name="dst.dir" />
-        <attribute name="dst.file.name" />
-        <attribute name="style" />
-
-        <sequential>
-            <basename property="src.file.basename" file="@{src.file.name}" suffix=".textile" />
-            <taskdef classpathref="wikitext.classpath"
-                     resource="org/eclipse/mylyn/wikitext/core/ant/tasks.properties" />
-            <wikitext-to-eclipse-help markupLanguage="Textile"
-                                      multipleOutputFiles="false"
-                                      navigationImages="true"
-                                      formatoutput="true"
-                                      validate="true"
-                                      failOnValidationError="true"
-                                      failOnValidationWarning="false"
-                                      title="YAKINDU Statechart Tools"
-                                      helpPrefix="@{dst.dir}">
-                <fileset dir="@{src.dir}">
-                    <include name="@{src.file.name}" />
-                </fileset>
-                <stylesheet url="css/style.css" />
-            </wikitext-to-eclipse-help>
-
-            <!-- Files have been generated in the source directory, which is bad practice. Move them to the destination
-                 directory: -->
-            <move todir="@{dst.dir}">
-                <fileset dir="${src.dir}">
-                    <include name="${src.file.basename}.html" />
-                    <include name="${src.file.basename}-toc.xml" />
-                </fileset>
-            </move>
-
-            <!-- Copy the CSS files to the destination directory: -->
-            <copy todir="@{dst.dir}/${css.dir.name}">
-                <fileset dir="${css.dir}">
-                    <include name="*" />
-                </fileset>
-            </copy>
-
-            <!-- Copy the image files to the destination directory: -->
-            <copy todir="@{dst.dir}/${img.dir.name}">
-                <fileset dir="${img.dir}">
-                    <include name="*" />
-                </fileset>
-            </copy>
-
-        </sequential>
-    </macrodef>
 
 </project>
