@@ -70,9 +70,9 @@ public class TransitionPropertySection extends AbstractTwoColumnEditorPropertySe
 	@Override
 	protected void createRightColumnControls(Composite parent) {
 		Label lblDocumentation = getToolkit().createLabel(parent, "Documentation: ");
-		txtDoc = getToolkit().createText(parent, "", SWT.MULTI);
+		txtDoc = getToolkit().createText(parent, "", SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
 		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblDocumentation);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(txtDoc);
+		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(txtDoc);
 	}
 
 	@Override

@@ -84,11 +84,11 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(txtName);
 	}
 
-	protected void createDocumentationControl(Composite rightColumn) {
-		Label lblDocumentation = getToolkit().createLabel(rightColumn, "Documentation: ");
-		txtDoc = getToolkit().createText(rightColumn, "", SWT.MULTI);
+	protected void createDocumentationControl(Composite parent) {
+		Label lblDocumentation = getToolkit().createLabel(parent, "Documentation: ");
+		txtDoc = getToolkit().createText(parent, "", SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
 		GridDataFactory.fillDefaults().applyTo(lblDocumentation);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(txtDoc);
+		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(txtDoc);
 	}
 
 	protected void createSpecificationControl(final Composite parent) {

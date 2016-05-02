@@ -120,12 +120,11 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		GridDataFactory.fillDefaults().span(2, 0).grab(true, false).applyTo(orderElementControl);
 	}
 
-	protected void createDocumentationControl(Composite rightColumn) {
-		Label lblDocumentation = getToolkit().createLabel(rightColumn, "Documentation: ");
-		documentation = getToolkit().createText(rightColumn, "", SWT.MULTI);
+	protected void createDocumentationControl(Composite parent) {
+		Label lblDocumentation = getToolkit().createLabel(parent, "Documentation: ");
+		documentation = getToolkit().createText(parent, "", SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
 		GridDataFactory.fillDefaults().applyTo(lblDocumentation);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(documentation);
-
+		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(documentation);
 	}
 
 	protected void createSpecificationControl(final Composite parent) {
