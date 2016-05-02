@@ -3,7 +3,8 @@
       id="org.yakindu.sct.generator.cpp"
       label="YAKINDU Statechart Tools C++ code generator"
       version="2.6.1.qualifier"
-      provider-name="statecharts.org">
+      provider-name="statecharts.org"
+      plugin="org.yakindu.sct.branding">
 
    <description url="http://www.statecharts.org">
       %description
