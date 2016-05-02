@@ -401,7 +401,7 @@
             class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.wizard.WorkspaceGeneratorProjectWizard"
             icon="icons/GenModel-16.png"
             id="org.yakindu.sct.generator.genmodel.ui.WorkspaceGeneratorProjectWizard"
-            name="Xtend2/Java Generator Project"
+            name="Xtend/Java Generator Project"
             project="true">
       </wizard>
    </extension>
