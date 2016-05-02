@@ -4,7 +4,7 @@
       label="YAKINDU Statechart Tools"
       version="2.6.1.qualifier"
       provider-name="statecharts.org"
-      plugin="org.yakindu.sct.doc.user">
+      plugin="org.yakindu.sct.branding">
 
    <description url="http://www.statecharts.org">
       %description
@@ -230,5 +230,11 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.branding"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>
