@@ -37,22 +37,22 @@ import com.google.inject.Inject;
 public class ExpressionsJavaValidator extends org.yakindu.base.expressions.validation.AbstractExpressionsJavaValidator
 		implements IValidationIssueAcceptor {
 
-	public static final String WARNING_IS_RAW_CODE = "WarningRaw.";
+	public static final String WARNING_IS_RAW_CODE = "WarningRaw";
 	public static final String WARNING_IS_RAW_MSG = "%s is a raw type. References to generic type %s should be parameterized.";
 
-	public static final String ERROR_NOT_GENERIC_CODE = "TypeNotGeneric.";
+	public static final String ERROR_NOT_GENERIC_CODE = "TypeNotGeneric";
 	public static final String ERROR_NOT_GENERIC_MSG = "The type %s is not generic; it cannot be parameterized with arguments %s.";
 
-	public static final String ERROR_ARGUMENTED_SPECIFIER_INCORRECT_ARGUMENT_NR_CODE = "IncorrectNrOfArguments.";
+	public static final String ERROR_ARGUMENTED_SPECIFIER_INCORRECT_ARGUMENT_NR_CODE = "IncorrectNrOfArguments";
 	public static final String ERROR_ARGUMENTED_SPECIFIER_INCORRECT_ARGUMENT_NR_MSG = "Incorrect number of arguments for type %s; it cannot be parameterized with arguments %s.";
 
-	public static final String ERROR_BOUND_MISSMATCH_CODE = "TypeParameterBoundMissmatch.";
+	public static final String ERROR_BOUND_MISSMATCH_CODE = "TypeParameterBoundMissmatch";
 	public static final String ERROR_BOUND_MISSMATCH_MSG = "Bound mismatch: The type %s is not a valid substitute for the bounded parameter %s of the type %s.";
 
-	public static final String ERROR_DUPLICATE_TYPE_PARAMETER_CODE = "DuplicateTypeParameter.";
+	public static final String ERROR_DUPLICATE_TYPE_PARAMETER_CODE = "DuplicateTypeParameter";
 	public static final String ERROR_DUPLICATE_TYPE_PARAMETER_MSG = "Duplicate Type Parameter %s.";
 
-	public static final String ERROR_CYCLE_DETECTED_CODE = "TypeExtendsItself.";
+	public static final String ERROR_CYCLE_DETECTED_CODE = "TypeExtendsItself";
 	public static final String ERROR_CYCLE_DETECTED_MSG = "Cycle detected: the type %s cannot extend itself.";
 
 	@Inject
