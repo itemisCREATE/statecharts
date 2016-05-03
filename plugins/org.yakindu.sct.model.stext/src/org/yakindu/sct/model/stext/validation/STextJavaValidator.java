@@ -518,7 +518,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = call.getArgs();
 			if (parameters.size() != args.size()) {
-				error("Wrong number of arguments, expected " + parameters, null);
+				error("Wrong number of arguments, expected " + parameters + ".", null);
 			}
 		}
 	}
@@ -530,7 +530,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = call.getArgs();
 			if (parameters.size() != args.size()) {
-				error("Wrong number of arguments, expected " + parameters, null);
+				error("Wrong number of arguments, expected " + parameters + ".", null);
 			}
 		}
 	}
@@ -574,7 +574,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			return;
 		}
 		if (call.getFeature() instanceof Scope) {
-			error("A variable, event or operation is required", ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
+			error("A variable, event or operation is required.", ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
 					INSIGNIFICANT_INDEX, FEATURE_CALL_TO_SCOPE);
 		}
 	}
@@ -585,7 +585,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			return;
 		}
 		if (call.getReference() instanceof Scope) {
-			error("A variable, event or operation is required",
+			error("A variable, event or operation is required.",
 					ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
 					FEATURE_CALL_TO_SCOPE);
 		}
@@ -596,7 +596,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		for (EventSpec eventSpec : reactionTrigger.getTriggers()) {
 			if (!(reactionTrigger.eContainer() instanceof LocalReaction)
 					&& (eventSpec instanceof EntryEvent || eventSpec instanceof ExitEvent)) {
-				error("entry and exit events are allowed as local reactions only.",
+				error("Entry and exit events are allowed as local reactions only.",
 						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, INSIGNIFICANT_INDEX,
 						LOCAL_REACTIONS_NOT_ALLOWED);
 			}
@@ -790,7 +790,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkImportExists(Import importDef) {
 		String importedNamespace = importDef.getImportedNamespace();
 		if (!checkImportedNamespaceExists(importDef.getImportedNamespace(), getResource(importDef))) {
-			error("The import " + importedNamespace + " cannot be resolved", importDef,
+			error("The import " + importedNamespace + " cannot be resolved.", importDef,
 					StextPackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORT_NOT_RESOLVED);
 		}
 	}

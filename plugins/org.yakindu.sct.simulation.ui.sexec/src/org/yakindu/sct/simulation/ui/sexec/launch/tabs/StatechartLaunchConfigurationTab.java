@@ -76,7 +76,7 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements I
 	private void createOperationClassGroup(Composite parent) {
 		Group propertyGroup = new Group(parent, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(propertyGroup);
-		propertyGroup.setText("Operation Class:");
+		propertyGroup.setText("Operation class:");
 		propertyGroup.setLayout(new GridLayout(1, false));
 		operationClass = new Text(propertyGroup, SWT.BORDER);
 		operationClass.addListener(SWT.Modify, new UpdateListener());
@@ -86,15 +86,15 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements I
 	private void createExecutionTypeControls(Composite parent) {
 		Group propertyGroup = new Group(parent, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(propertyGroup);
-		propertyGroup.setText("Execution Type:");
+		propertyGroup.setText("Execution type:");
 		propertyGroup.setLayout(new GridLayout(1, true));
 		btnCycle = new Button(propertyGroup, SWT.RADIO);
-		btnCycle.setText("cycle based");
+		btnCycle.setText("cycle-based");
 		btnCycle.addListener(SWT.Selection, new UpdateListener());
 		btnCycle.addListener(SWT.Selection, new EnableStateListener());
 		GridDataFactory.fillDefaults().applyTo(btnCycle);
 		btnEvent = new Button(propertyGroup, SWT.RADIO);
-		btnEvent.setText("event driven");
+		btnEvent.setText("event-driven");
 		btnEvent.addListener(SWT.Selection, new UpdateListener());
 		btnCycle.addListener(SWT.Selection, new EnableStateListener());
 		GridDataFactory.fillDefaults().applyTo(btnEvent);
@@ -103,7 +103,7 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements I
 	private void createCyclePeriodGroup(Composite parent) {
 		Group propertyGroup = new Group(parent, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(propertyGroup);
-		propertyGroup.setText("Cycle Period:");
+		propertyGroup.setText("Cycle period:");
 		propertyGroup.setLayout(new GridLayout(2, false));
 		cyclePeriod = new Text(propertyGroup, SWT.BORDER);
 		cyclePeriod.addListener(SWT.Modify, new UpdateListener());
