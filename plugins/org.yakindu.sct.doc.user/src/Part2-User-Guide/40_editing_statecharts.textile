@@ -80,8 +80,6 @@ Below its title bar, the palette contains a toolbar with the following editing a
 | !images/editor-palette_020_symbol_select.png(Editor palette symbol "Select")! | Select | |
 | !images/editor-palette_030_symbol_zoom_in.png(Editor palette symbol "Zoom in")! | Zoom in | Left-click to zoom in. Press @[Shift]@ and left-click to zoom out. Drag to zoom to selection. |
 | !images/editor-palette_040_symbol_zoom_out.png(Editor palette symbol "Zoom out")! | Zoom out | Left-click to zoom out. Press @[Shift]@ and left-click to zoom in. |
-| !images/editor-palette_050_symbol_rectangle_selection.png(Editor palette symbol "Rectangle selection")! | Rectangle selection | Click and drag to select everything completely included in the selection rectangle. Submenus allow to restrict the selected objects to nodes, labels or transitions, respectively. |
-| !images/editor-palette_060_symbol_intersection_selection.png(Editor palette symbol "Intersection selection")! | Intersection selection | Click and drag to select everything included in or touched by the selection rectangle. Submenus allow to restrict the selected objects to nodes, labels or transitions, respectively. |
 | !images/editor-palette_070_symbol_note.png(Editor palette symbol "Note")! | Note | Create a note, a text or a note attachment. |
 
 h4(#oss-statechart-elements-tools). Statechart elements tools
