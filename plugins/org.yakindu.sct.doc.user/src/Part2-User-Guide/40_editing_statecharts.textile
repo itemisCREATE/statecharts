@@ -162,7 +162,7 @@ When using composite states, a statechart model often becomes too big to give a 
 
 p=. Composite state
 
-When the _Extract Subdiagram_ refactoring is executed on a composite state, all containing regions are extracted into a separate diagram. A small decorator in the lower-right corner of the state indicates the existence of such a subdiagram. When you hover over this decorator with the mouse cursor, you'll see a small preview of the subdiagram's content. The refactoring also creates the required _entry_ and _exit_ points for you.
+When the _Extract Subdiagram_ "refactoring":#refactorings is executed on a composite state, all containing regions are extracted into a separate diagram. A small decorator in the lower-right corner of the state indicates the existence of such a subdiagram. When you hover over this decorator with the mouse cursor, you'll see a small preview of the subdiagram's content. The refactoring also creates the required _entry_ and _exit_ points for you.
 
 !(standard-image)images/extract_subdiagram2.png(Subdiagram popup window)!
 
@@ -176,18 +176,90 @@ p=. Subdiagram editor
 
 h2(#refactorings). Refactorings
 
-Refactoring means modifying certain aspects of states or transitions while maintaining the same semantics.
+Refactoring means modifying certain model aspects while maintaining the same semantics. The statechart editor allows for the refactoring of variables, events, interfaces, states, including composite states and orthogonal states. The states' context menu contains the  _Refactor_ submenu with the following refactoring actions. Depending on the state's (or states') type and on other conditions these refactoring can actually be executed or not.
 
-The statechart editor allows for refactoring states, including composite states and orthogonal states. The states' context menu contains the  _Refactor_ submenu with the following refactoring actions. Depending on the state's (or states') type and on other conditions these refactoring can actually be executed or not.
 
-|_. Refactoring action |_. Description |
-|Fold Incoming Actions|If all actions of all incoming transitions of this state are identical, this refactoring turns them into entry actions of this state and remove them from the transitions.|
-|Fold Outgoing Actions|If all actions of all outgoing transitions of this state are identical, this refactoring turns them into exit actions of this state and remove them from the transitions.|
-|Group States Into Composite|Creates a new composite state containing the selected states. The latter must belong to the same region.|
-|Unfold Entry Actions|Removes all entry actions from the state and attaches them to each incoming transaction.|
-|Unfold Exit Actions|Removes all exit actions from the state and attaches them to each outgoing transaction.|
-|Extract Subdiagram|Extracts the regions of the selected composite or orthogonal state into a subdiagram. Entry and exit node are created as needed.|
-|Inline Subdiagram|Inlines the selected node's subdiagram to show it in the composite state's diagram region.|
+h3(#renaming). Renaming
+
+Using the _Rename_ refactoring, you can rename a variable, event or interface name in your statechart model. Each occurrence of that name will be changed to the new name. To initiate renaming, right-click on the name of a variable, event or interface in the diagram editor, in the definition section, or in a text field in the _Properties_ view, then select _Rename …_.
+
+!(standard-image)images/refactoring-rename_010_renaming-variable.png(Renaming a variable)!
+
+p=. Renaming a variable
+
+h3(#folding-incoming-actions). Folding incoming actions
+
+When building a statechart model step by step, you may come into a situation where you have defined several transitions with similar actions having the same target state. The _Fold Incoming Actions_ refactoring moves these actions to the target state's entry block. To preserve model semantics, only actions that are defined on _all_ incoming transitions will be moved. Therefore, the refactoring algorithm starts at the right-most action and proceeds action by action to the left. As soon as it detects an action that is not defined on _all_ incoming transitions, it stops moving actions to the entry block.
+
+Consider the following model:
+
+!(standard-image)images/refactoring-fold-incoming-actions_010_example_01.png(Moving incoming actions to entry block)!
+
+p=. Moving incoming actions to entry block
+
+Only the most-right action _y += 42_ can be moved to the entry block of the target state. If _x += 1_ would also be moved, the semantics of the _B → Target_ transition would change, since _y = x_ would be executed before _x_ had been incremeted.
+
+Another aspect to take into account are transitions leading to target states that are nested in composite states. Consider the following example:
+
+!(standard-image)images/refactoring-fold-incoming-actions_020_example_02.png(Moving incoming actions into a nested state's entry block)!
+
+p=. Moving incoming actions into a nested state's entry block
+
+The two incoming actions _y = x_ of the transitions leading to the _Target_ state cannot be moved to _Target_'s entry block, because doing so would change the model's semantics. The reason is the the composite state's entry action _x += 1_. It will be executed immediately _after_ the action of transition _A → Target_ and _before_ the entry block of _Target_. Moving  _y = x_ from the transaction to _Target_'s entry block would change the proper order.
+
+To execute this refactoring, right-click on the state to refactor, then select _Refactor → Fold Incoming Actions_ in the context menu. The menu entry is active only if there are actual actions to move into the state's entry block with the above rules applied.
+
+h3(#folding-outgoing-actions). Folding outgoing actions
+
+The _Fold Outgoing Actions_ refactoring is similar to "folding incoming actions":#folding-incoming-actions, except that it moves actions from outgoing transactions to the source state's exit block. To preserve model semantics, only actions that are defined on _all_ outgoing transitions will be moved. Therefore, the refactoring algorithm starts at the left-most action and proceeds action by action to the right. As soon as it detects an action that is not defined on _all_ outgoing transitions, it stops moving actions to the exit block.
+
+Preconditions for this refactoring are analog to "&quot;Folding incoming actions&quot;":#folding-incoming-actions. Consider the following example:
+
+!(standard-image)images/refactoring-fold-outgoing-actions_010_example_01.png(Moving outgoing actions to exit block)!
+
+p=. Moving outgoing actions to exit block
+
+Here, both outgoing actions _y = x_ cannot be moved to the exit block of the source state, because the composite state itself has an exit action. Hence, for transition _Source → A_, first _x += 1_ and then _y = x_ will be processed. Moving _y = x_ to the exit block of _Source_ would change this order.
+
+To execute this refactoring, right-click on the state to refactor, then select _Refactor → Fold Outgoing Actions_ in the context menu. The menu entry is active only if there are actual actions to move into the state's exit block with the above rules applied.
+
+h3(#grouping-states-into-composite). Grouping states into composite
+
+Creates a new composite state containing the selected states. The latter must belong to the same region.
+
+To execute this refactoring, select one or more states from the same region, right-click on one of them, then select _Refactor → Group States Into Composite_ in the context menu. The menu entry is active only if the selected state belong to the same region.
+
+h3(#unfolding-entry-actions). Unfolding entry actions
+
+This refactoring is the reverse operation of "&quot;Folding Incoming Actions&quot;":#folding-incoming-actions. It moves the entry actions from a target state and appends them to each incoming transaction's actions, if possible.
+
+To execute this refactoring, right-click on the state to refactor, then select _Refactor → Unfold Entry Actions_ in the context menu. The menu entry is active only if there are actual actions in the state's entry block that can be moved to the incoming transactions, while maintaining semantic equivalence.
+
+h3(#unfolding-exit-actions). Unfolding exit actions
+
+This refactoring is the reverse operation of "&quot;Folding Outgoing Actions&quot;":#folding-outgoing-actions. It moves the exit actions from a source state and prepends them to each outgoing transaction's actions, if possible.
+
+Transitions crossing the borders of composite states enclosing the source state might inhibit refactoring. Consider the following example:
+
+!(standard-image)images/refactoring-unfold-outgoing-actions_010_example_01.png(Unfolding exit actions to outgoing transactions)!
+
+p=. Unfolding exit actions to outgoing transactions
+
+Unfolding the exit action _y = x_ of the _Source_ state to the two outgoing transitions would be invalid, because the execution order of said action and the composite state's exit action would be reversed.
+
+To execute this refactoring, right-click on the state to refactor, then select _Refactor → Unfold Exit Actions_ in the context menu. The menu entry is active only if there are actual actions in the state's exit block that can be moved to the outgoing transactions, while maintaining semantic equivalence.
+
+h3(#extracting-subdiagram). Extracting subdiagram
+
+Extracts the regions of the selected composite or orthogonal state into a subdiagram. Entry and exit nodes are created as needed. See section "Using subdiagrams":#using-subdiagrams for more details.
+
+To execute this refactoring, right-click on the composite state to refactor, then select _Refactor → Extract Subdiagram_ in the context menu.
+
+h3(#inlining-subdiagram). Inlining subdiagram
+
+Inlines the selected node's subdiagram to show it in the composite state's diagram region. See section "Using subdiagrams":#using-subdiagrams for more details.
+
+To execute this refactoring, right-click on a composite state with a subdiagram, then select _Refactor → Inline Subdiagram_ in the context menu.
 
 h2(#using-editing-proposals). Using editing proposals
 
