@@ -158,7 +158,7 @@ h2(#using-subdiagrams). Using subdiagrams
 
 When using composite states, a statechart model mayeasily become too big to give a comprehensive overview of the whole diagram. Subdiagrams come as a solution.
 
-!(standard-image)images/extract_subdiagram.png(Composite state)!
+!(standard-image)images/subdiagram_010_inline.png(Composite state)!
 
 p=. Composite state
 
@@ -166,13 +166,13 @@ When the _Extract Subdiagram_ "refactoring":#refactorings is executed on a compo
 
 Extracting a subdiagram creates entry and exit nodes in the subdiagram as needed.
 
-!(standard-image)images/extract_subdiagram2.png(Subdiagram popup window)!
+!(standard-image)images/subdiagram_020_preview.png(Subdiagram popup window)!
 
 p=. Subdiagram popup window
 
 A click on the decorator opens the subdiagram in a separate editor tab. The breadcrumb at the top allows easy navigation throughout the hierachy levels.
 
-!(standard-image)images/extract_subdiagram3.png(Subdiagram editor)!
+!(standard-image)images/subdiagram_030_subdiagram-editor.png(Subdiagram editor)!
 
 p=. Subdiagram editor
 
