@@ -11,6 +11,7 @@
 package org.yakindu.base.types.typesystem;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.types.Type;
@@ -50,7 +51,7 @@ public interface ITypeSystem {
 
 	public Type getCommonTypeWithConversion(Type type1, Type type2);
 	
-	public Type getSuperType(Type type);
+	public List<Type> getSuperTypes(Type type);
 
 	public boolean isSuperType(Type subtype, Type supertype);
 
