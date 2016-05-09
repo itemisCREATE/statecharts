@@ -71,7 +71,7 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 
 	@Test
 	public void testGetSuperType() throws Exception {
-		assertTrue(isSame(superType, getSuperType(subType)));
+		assertTrue(isSame(superType, getSuperTypes(subType).get(0)));
 
 	}
 

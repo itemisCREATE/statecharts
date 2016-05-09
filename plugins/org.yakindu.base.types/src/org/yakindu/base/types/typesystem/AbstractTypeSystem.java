@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesFactory;
@@ -64,15 +65,20 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		return result;
 	}
 
-	public Type getSuperType(Type type) {
+	public List<Type> getSuperTypes(Type type) {
+		List<Type> superTypes = new ArrayList<Type>();
 		Set<Entry<Type, Type>> entrySet = extendsRegistry.entrySet();
 		for (Entry<Type, Type> entry : entrySet) {
 			if (isSame(type, entry.getKey())) {
-				return entry.getValue();
+				superTypes.add(entry.getValue());
 			}
-
 		}
-		return null;
+		if (type instanceof ComplexType) {
+			ComplexType complexType = (ComplexType) type;
+			superTypes.addAll(complexType.getSuperTypes());
+		}
+		
+		return superTypes;
 	}
 
 	public boolean isSuperType(Type subtype, Type supertype) {
@@ -86,15 +92,15 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		return false;
 	}
 
-	private void collectSupertypes(Type subtypeClass, List<Type> typehierachy) {
+	private void collectSupertypes(Type subtypeClass, List<Type> typeHierachy) {
 		if (subtypeClass == null)
 			return;
-		Type superType = getSuperType(subtypeClass);
-		if (superType != null) {
-			typehierachy.add(superType);
-			collectSupertypes(superType, typehierachy);
+		
+		List<Type> superTypes = getSuperTypes(subtypeClass);
+		for (Type superType : superTypes) {
+			typeHierachy.add(superType);
+			collectSupertypes(superType, typeHierachy);
 		}
-
 	}
 
 	public Collection<Type> getTypes(EObject context) {

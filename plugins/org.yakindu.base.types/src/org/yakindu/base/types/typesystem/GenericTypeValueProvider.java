@@ -16,6 +16,8 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.REAL;
 import static org.yakindu.base.types.typesystem.ITypeSystem.STRING;
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
+import java.util.List;
+
 import org.yakindu.base.types.Type;
 
 import com.google.inject.Inject;
@@ -48,9 +50,9 @@ public class GenericTypeValueProvider implements ITypeValueProvider {
 		if (is(type, STRING)) {
 			return new String("");
 		}
-		Type superType = typeSystem.getSuperType(type);
-		if (superType != null)
-			return defaultValue(superType);
+		List<Type> superTypes = typeSystem.getSuperTypes(type);
+		if (!superTypes.isEmpty())
+			return defaultValue(superTypes.get(0));
 		throw new IllegalArgumentException("Unknown type " + type);
 	}
 
