@@ -295,12 +295,17 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			return call.getFeature();
 		}
 
-		var variableRef = context.resolve(call)
-		if (variableRef instanceof ExecutionVariable || variableRef instanceof CompositeSlot) {
-			return variableRef.getValue
+		var slot = context.resolve(call)
+		if (slot instanceof ExecutionVariable || slot instanceof CompositeSlot) {
+			return slot.getValue
 		}
-		if (variableRef instanceof ExecutionEvent)
-			return (variableRef as ExecutionEvent).raised
+		if (slot instanceof ExecutionEvent) {
+			if(call.feature instanceof Operation) {
+				(slot as ExecutionEvent).raised = true	
+			}
+			
+			return (slot as ExecutionEvent).raised
+		}
 
 		println("No feature found for " + call.feature.fqn + " -> returning null")
 		return null;
