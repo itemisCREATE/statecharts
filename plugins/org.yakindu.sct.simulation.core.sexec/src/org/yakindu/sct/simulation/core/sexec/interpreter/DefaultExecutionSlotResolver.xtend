@@ -33,6 +33,7 @@ import org.eclipse.xtext.EcoreUtil2
  * Default implementation for resolving execution slots based on expressions.
  * 
  * @author Thomas Kutz
+ * @author axel terfloth
  */
 class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 
@@ -54,6 +55,7 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 	
 	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, EObject feature){
 		return context.getVariable(e.feature.fullyQualifiedName.toString)
+
 	}
 	
 	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Event feature){
