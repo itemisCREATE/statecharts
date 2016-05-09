@@ -39,48 +39,69 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 	@Inject
 	extension IQualifiedNameProvider nameProvider
 
-	def dispatch ExecutionSlot resolve(ExecutionContext context, FeatureCall e) {
-		if (e.feature instanceof VariableDefinition || e.feature instanceof Operation) {
-			return context.getVariable(e.feature.fullyQualifiedName.toString)
-		}
-		if (e.feature instanceof Property || e.feature instanceof Event) {
-			var current = e
-			val List<EObject> calls = newArrayList
-			calls.add(0, e.feature)
-			while (!(current.owner instanceof ElementReferenceExpression)) {
-				current = current.owner as FeatureCall
-				calls.add(0, current.feature)
-			}
-
-			// first: get the root slot where to start the search
-			val root = (current.owner as ElementReferenceExpression).reference
-			var ExecutionSlot featureSlot = null
-			
-			if (root instanceof InterfaceScope) {
-				featureSlot = context.getSlot(calls.get(0).fullyQualifiedName.toString)
-				calls.remove(0)
-			}
-			else {
-				featureSlot = packageNamespaceAwareResolve(context, root)
-				if (featureSlot == null)
-					return null // could not find starting slot for feature call
-			}
-			// go through all calls and traverse execution context hierarchy accordingly
-			for (EObject feature : calls) {
-
-				if (featureSlot instanceof CompositeSlot && (feature instanceof Property || feature instanceof Event)) {
-					featureSlot = (featureSlot as CompositeSlot).slots.findFirst[slot|slot.name == feature.name]
-				}
-				if (featureSlot instanceof ExecutionVariable && feature instanceof Operation) {
-					//					TODO (featureSlot as ExecutionVariable).value
-				}
-			}
-			return featureSlot
-		}
+	def dispatch ExecutionSlot resolve(ExecutionContext context, FeatureCall e) {		
+		return resolveByFeature(context, e, e.feature)		
 	}
 	
 	def dispatch ExecutionSlot resolve(ExecutionContext context, ElementReferenceExpression e) {
 		packageNamespaceAwareResolve(context, e.reference)
+	}
+	
+	def dispatch ExecutionSlot resolve(ExecutionContext context, AssignmentExpression e) {
+		return context.resolve(e.varRef)
+	}
+	
+	
+	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, EObject feature){
+		return context.getVariable(e.feature.fullyQualifiedName.toString)
+	}
+	
+	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Event feature){
+		return resolveCompositeSlot(context, e)
+	}
+	
+	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Property feature){
+		return resolveCompositeSlot(context, e)
+	}
+	
+	
+	def ExecutionSlot resolveCompositeSlot(ExecutionContext context, FeatureCall e){
+		var current = e
+		val List<EObject> calls = newArrayList
+		calls.add(0, e.feature)
+		while (!(current.owner instanceof ElementReferenceExpression)) {
+			current = current.owner as FeatureCall
+			calls.add(0, current.feature)
+		}
+
+
+		// first: get the root slot where to start the search searching
+		val root = (current.owner as ElementReferenceExpression).reference
+		var ExecutionSlot featureSlot = null
+		
+		if (root instanceof InterfaceScope) {
+			featureSlot = context.getSlot(calls.get(0).fullyQualifiedName.toString)
+			calls.remove(0)
+		}
+		else {
+			featureSlot = packageNamespaceAwareResolve(context, root)
+				if (featureSlot == null) {
+					return null // could not find starting slot for feature call
+			}	
+		}
+		// go through all calls and traverse execution context hierarchy accordingly
+		for (EObject feature : calls) {
+
+			if (featureSlot instanceof CompositeSlot && (feature instanceof Property || feature instanceof Event)) {
+				featureSlot = (featureSlot as CompositeSlot).slots.findFirst[slot|slot.name == feature.name]
+			}
+			if (featureSlot instanceof ExecutionVariable && feature instanceof Operation) {
+				//					TODO (featureSlot as ExecutionVariable).value
+			}
+		}
+		
+		return featureSlot
+		
 	}
 	
 	def protected ExecutionSlot packageNamespaceAwareResolve(ExecutionContext context, EObject element) {
@@ -93,11 +114,8 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 		}
 	}
 	
-	def dispatch ExecutionSlot resolve(ExecutionContext context, AssignmentExpression e) {
-		return context.resolve(e.varRef)
-	}
 
-	def private name(EObject e) {
+	def protected name(EObject e) {
 		return SimpleAttributeResolver::NAME_RESOLVER.apply(e)
 	}
 }
