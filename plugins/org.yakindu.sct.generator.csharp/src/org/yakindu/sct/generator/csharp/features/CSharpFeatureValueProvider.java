@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 
 /**
@@ -35,8 +36,9 @@ public class CSharpFeatureValueProvider extends
 	private static final String PACKAGE_NAME_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*\\.)+[a-zA-Z_][a-zA-Z0-9_]*";
 	private static final String SUFFIX_REGEX = "[a-zA-Z0-9_]*";
 
+	
 	@Override
-	protected void setDefaultValue(FeatureParameterValue parameterValue,
+	protected void setDefaultValue(FeatureType featureType, FeatureParameterValue parameterValue,
 			EObject contextElement) {
 		if (parameterValue.getParameter().getName().equals(NAMESPACE_NAME)) {
 			parameterValue.setValue("Yakindu.SCT");
@@ -48,6 +50,7 @@ public class CSharpFeatureValueProvider extends
 		} else if (parameterValue.getParameter().getName().equals(NAME_SUFFIX)) {
 			parameterValue.setValue("");
 		}
+		
 	}
 
 	public boolean isProviderFor(FeatureTypeLibrary library) {

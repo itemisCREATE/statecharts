@@ -9,8 +9,6 @@
  */
 package org.yakindu.sct.generator.csharp;
 
-import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
-
 import org.yakindu.sct.generator.csharp.CSharpNamingService;
 import org.yakindu.sct.generator.csharp.CSharpGenerator;
 import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
@@ -22,25 +20,29 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Binder;
+import com.google.inject.Inject;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
 public class CSharpCodeGenerator extends GenericJavaBasedGenerator {
 
+	@Inject
+	CSharpGenerator delegate;
+	
+	
 	@Override
 	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
-		CSharpGenerator delegate = getInjector(entry).getInstance(
-				CSharpGenerator.class);
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
-		if (isDumpSexec(entry)) {
+		if (debugFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
-		delegate.generate(flow, entry, getFileSystemAccess(entry));
+		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess());
 	}
 
+	
 	@Override
-	protected Module getChildInjectorModule(final GeneratorEntry entry) {
-		Module module = super.getChildInjectorModule(entry);
+	public Module getOverridesModule(final GeneratorEntry entry) {
+		Module module = super.getOverridesModule(entry);
 		return Modules.override(module).with(new Module() {
 			public void configure(Binder binder) {
 				binder.bind(ICodegenTypeSystemAccess.class)
@@ -50,4 +52,5 @@ public class CSharpCodeGenerator extends GenericJavaBasedGenerator {
 			}
 		});
 	}
+	
 }
