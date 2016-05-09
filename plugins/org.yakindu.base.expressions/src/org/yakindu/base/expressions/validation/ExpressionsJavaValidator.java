@@ -150,7 +150,7 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			TypeParameter parameter = typeParameter.get(i);
 			if (parameter.getBound() != null) {
 				Type argument = typedElement.getTypeArguments().get(i);
-				if (!typeSystem.isSuperType(parameter.getBound(), argument)) {
+				if (!typeSystem.isSuperType(argument, parameter.getBound())) {
 					error(String.format(ERROR_BOUND_MISSMATCH_MSG, argument.getName(),
 							(parameter.getBound()).getName(), type.getName()), typedElement,
 							TypesPackage.Literals.TYPED_ELEMENT__TYPE_ARGUMENTS, i, ERROR_BOUND_MISSMATCH_CODE);
