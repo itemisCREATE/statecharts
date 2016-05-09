@@ -65,6 +65,7 @@ import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventType
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.base.types.Event
 
 @Singleton class SexecElementMapping {
 	
@@ -283,7 +284,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 	def dispatch NamedElement resolveRegularEventSpec(RegularEventSpec re, Object context) { if ( re.event != null ) re.event.resolveRegularEventSpec(re) }
 	def dispatch NamedElement resolveRegularEventSpec(FeatureCall fc, Object context) { if (fc.feature != null) fc.feature.resolveRegularEventSpec(fc) }
 	def dispatch NamedElement resolveRegularEventSpec(ElementReferenceExpression ter, Object context) { if (ter.reference != null) ter.reference.resolveRegularEventSpec(ter) }
-	def dispatch NamedElement resolveRegularEventSpec(EventDefinition ed, Object context) { ed }
+	def dispatch NamedElement resolveRegularEventSpec(Event ed, Object context) { ed }
 	
 	
 	def dispatch Expression raised(TimeEventSpec e) {
