@@ -838,7 +838,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (!isResponsible)
 			return false;
 		Statechart statechart = getStatechart(eObject);
-		if (statechart != null && !domainID.equals(statechart.getDomainID())) {
+		if ((statechart != null) && !domainID.equals(statechart.getDomainID())) {
 			return false;
 		}
 		return true;
