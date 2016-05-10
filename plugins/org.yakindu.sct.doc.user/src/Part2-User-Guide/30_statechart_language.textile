@@ -93,7 +93,7 @@ h3(#exit). Exit
 
 An _exit_ is a pseudo state that is used to leave and deactivate a composite state. Exits are counterpart to "entries":#entry. They are also known as exit points, exit states, or exit nodes. See "section &quot;Final state&quot;":#final for a different way to terminate a region or state machine.
 
-An exit may have multiple incoming transistions and has no outgoing one.
+An exit may have multiple incoming transitions and has no outgoing one.
 
 An exit state is depicted as an unfilled circle with an X-shaped cross, see "figure &quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
 
@@ -101,9 +101,9 @@ Within a region, multiple exits are allowed. Each exit must either have a name t
 
 When a composite state reaches an exit in any of its regions, all states in other regions of that composite state, if any, are deactivated immediately. The composite state will be left and be deactivated. It maintains no status information that could be probed from the outside. In other words, reaching an exit in one of a composite state's regions has severe consequences for all the other regions since they are exited and disposed immediately. After that, the containing composite state is also exited. There must be an unguarded transition that catches the exit and leads to another state outside of the composite state. The semantics of exit is different from that of final state; please see "section &quot;Final state&quot;":#final for details.
 
-A transition that has a composite state as its source can specify which exits should triggered it. That is, different exits can lead to different behavior on the outside. A transition specifies the exits to react upon as a so-called _property_ which looks like this:
+A transition that has a composite state as its source can specify which exits should trigger it. That is, different exits can lead to different behavior on the outside. A transition specifies the exits to react upon as a so-called _property_ which looks like this:
 
-@#@ _exit-point-1_@>@ [ _exit-point-2_ @>@ ]…
+@#@ _exit-point-1_@>@ [ _exit-point-2_@>@ ]…
 
 Exits have no equivalent in the UML.
 
