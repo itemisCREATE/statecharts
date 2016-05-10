@@ -103,7 +103,7 @@ When a composite state reaches an exit in any of its regions, all states in othe
 
 A transition that has a composite state as its source can specify which exits should triggered it. That is, different exits can lead to different behavior on the outside. A transition specifies the exits to react upon as a so-called _property_ which looks like this:
 
-@#@ _exit-point-1_@<@ [ _exit-point-2_ @<@ ]…
+@#@ _exit-point-1_@>@ [ _exit-point-2_ @>@ ]…
 
 Exits have no equivalent in the UML.
 
