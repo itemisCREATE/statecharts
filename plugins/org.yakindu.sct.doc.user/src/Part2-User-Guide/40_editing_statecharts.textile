@@ -10,7 +10,7 @@ h3(#creating-a-statechart). Creating a statechart
 
 In order to create a new statechart file, use _Project Explorer_ view:
 # Right-click on a project or on a folder you want to create the new statechart in. The context menu appears.
-# In the context menu, select _New → Other…_. The _New_ dialog appears
+# In the context menu, select _New → Other…_. The _New_ dialog appears.
 # In the _New_ dialog, select _YAKINDU SCT → Statechart Model_. The _New YAKINDU Statechart_ wizard appears.
 # In the wizard, select a statechart domain.
 # Click _Next >_.
@@ -49,8 +49,11 @@ YAKINDU Statechart Tools comes with a *statechart editor*. This section explains
 
 h3(#sc-modeling-perspective). "SC Modeling" perspective
 
-_SC Modeling_ is an Eclipse perspective supporting the statechart editor. It contains a couple of views you typically need during editing:
-* The _Project Explorer_ for a hierarchical display of your projects, folders, and files. You can even use the _Project Explorer_ to view the internal structure of your statechart models.
+_SC Modeling_ is an Eclipse perspective supporting the modeling of statecharts. The perspective defines the following views and their positions:
+* _Project Explorer_ (left): This view displays your workspace and therein contained projects, folders, and files. You can also use the _Project Explorer_ to inspect the internal structure of your statechart models.
+* _Properties_ (bottom): This view displays properties, regarding the semantic model or the graphical appearance, of the selected element in the statechart editor. You can directly edit these properties in this view.
+* _Problems_ (bottom): This view displays errors and warnings existing in your workspace. Double-clicking on an entry typically opens the location of the respective error or warning.
+* _Outline_ (right): This view is a bird's eye view on the opened statechart. It also indicates current the viewport for better orientation in large models.
 
 h3(#canvas). Canvas
 
@@ -59,16 +62,16 @@ The canvas is the statechart editor's drawing area. When you create a new statec
 The following list gives an overview of what kind of actions you can perform on the canvas:
 * Add or remove a region
 ** To add a region to the canvas, select _Region_ in the "editor palette":#editor-palette, then click at the canvas location you want to place the region.
-** To remove a region from the canvas, select the region, then press the @[Del]@ key or select _Edit → Delete_ from the menu bar.
+** To remove a region from the canvas, select the region, then press @[Del]@ or select _Edit → Delete_ from the menu bar.
 * Zooming
-** Press and hold the the @[Ctrl]@ key and turn the mouse wheel not zoom in and out.
+** Press and hold @[Ctrl]@ and turn the mouse wheel to zoom in or out.
 ** Right-click on the canvas to open its context menu. In the context menu, several zooming functions are available in the _Zoom_ submenu.
 
 h3(#editor-palette). Editor palette
 
-The editor palette provides you with a set of various actions and statechart editing tools. By default, the palette is located right from the canvas, but you can drag it to the left, if you like.
+The editor palette provides you with a set of various actions and statechart editing tools. By default, the palette is located right of the canvas, but you can also drag it to the left.
 
-You can hide the palette by clicking at the small triangle in the palette's title bar. Click at the triangle again to make the palette reappear.
+You can hide the palette by clicking the small triangle in the palette's title bar. Click the triangle again to make the palette reappear.
 
 !(standard-image)images/editor-palette_010_overview.png(Editor palette)!
 
@@ -86,18 +89,18 @@ h4(#oss-statechart-elements-tools). Statechart elements tools
 
 The palette comprises a couple of tools serving to add statechart elements to the diagram (from top to bottom):
 
-| !images/editor-palette_210_tool_transition.png(Editor palette element tool "Transition")! | Transition |  |
-| !images/editor-palette_220_tool_state.png(Editor palette element tool "State")! | State |  |
-| !images/editor-palette_230_tool_composite_state.png(Editor palette element tool "Composite state")! | Composite state |  |
-| !images/editor-palette_240_tool_orthogonal_state.png(Editor palette element tool "Orthogonal state")! | Orthogonal state |  |
-| !images/editor-palette_250_tool_region.png(Editor palette element tool "Region")! | Region |  |
-| !images/editor-palette_260_tool_entry.png(Editor palette element tool "Entry")! | Entry |  |
-| !images/editor-palette_270_tool_shallow_history.png(Editor palette element tool "Shallow history")! | Shallow history |  |
-| !images/editor-palette_280_tool_deep_history.png(Editor palette element tool "Deep history")! | Deep history |  |
-| !images/editor-palette_290_tool_final_state.png(Editor palette element tool "Final state")! | Final state |  |
-| !images/editor-palette_300_tool_exit_node.png(Editor palette element tool "Exit node")! | Exit node |  |
-| !images/editor-palette_310_tool_choice.png(Editor palette element tool "Choice")! | Choice |  |
-| !images/editor-palette_320_tool_synchronization.png(Editor palette element tool "Synchronization")! | Synchronization |  |
+| !images/editor-palette_210_tool_transition.png(Editor palette element tool "Transition")! |
+| !images/editor-palette_220_tool_state.png(Editor palette element tool "State")! |
+| !images/editor-palette_230_tool_composite_state.png(Editor palette element tool "Composite state")! |
+| !images/editor-palette_240_tool_orthogonal_state.png(Editor palette element tool "Orthogonal state")! |
+| !images/editor-palette_250_tool_region.png(Editor palette element tool "Region")! |
+| !images/editor-palette_260_tool_entry.png(Editor palette element tool "Entry")! |
+| !images/editor-palette_270_tool_shallow_history.png(Editor palette element tool "Shallow history")! |
+| !images/editor-palette_280_tool_deep_history.png(Editor palette element tool "Deep history")! |
+| !images/editor-palette_290_tool_final_state.png(Editor palette element tool "Final state")! |
+| !images/editor-palette_300_tool_exit_node.png(Editor palette element tool "Exit node")! |
+| !images/editor-palette_310_tool_choice.png(Editor palette element tool "Choice")! |
+| !images/editor-palette_320_tool_synchronization.png(Editor palette element tool "Synchronization")! |
 
 h3(#outline-view). Outline view
 
@@ -107,9 +110,9 @@ h4(#oss-graphical-overview). Graphical overview
 
 Click on the _Overview_ icon in the _Outline_ view's title bar to engage the graphical overview.
 
-While the statechart editor window due to zooming or the size of the whole statechart might display a cutout only, the _Outline_ view shows the whole diagram as an overview. It is scaled down as needed to completely fit into the available area.
+While the statechart editor window, due to zooming or the size of the whole statechart, might display a cutout only, the _Outline_ view shows the whole diagram as an overview. It is scaled down as needed to completely fit into the available area.
 
-A light-grey overlay rectangle represents the statechart editor's "viewport":https://en.wikipedia.org/wiki/Viewport. Drag this rectangle to move the statechart editor's viewport. Click into the outline view to position the rectangle's center to point you have clicked.
+A light-grey overlay rectangle represents the statechart editor's "viewport":https://en.wikipedia.org/wiki/Viewport. Drag this rectangle to move the statechart editor's viewport. Click into the outline view to position the rectangle's center to the point you have clicked.
 
 h4(#oss-hierarchical-outline). Hierarchical outline
 
@@ -121,32 +124,31 @@ The _Problems_ view by default lists all errors, warnings and other types of mes
 
 The messages are grouped by message type, typically error or warning. Click on the show/hide symbol to open or close the respective message group's contents.
 
-Double-clicking at a message in the _Problems_ view takes you directly to the resource or model element causing the problem.
+Double-clicking on an entry in the _Problems_ view takes you directly to the resource or model element causing the problem.
 
-You can configure the problems view in a multitude of ways, e.&nbsp;g. to group entries by different criteria, to sort them in a specific way, or to restrict them to certain projects. You can even define multiple problems views, each with different selection or display criteria.
+You can configure the _Problems_ view in a multitude of ways, e.&nbsp;g. to group entries by different criteria, to sort them in a specific way, or to restrict them to certain projects. You can even define multiple _Problems_ views, each with different selection or display criteria.
 
-To start configuring the problems view, click at the small triangle pointing downwards in the problem view's title bar. A drop-down menu will open and show the options you have.
-
+To configure the view click the small triangle pointing downwards in the view's title bar. A drop-down menu opens and shows the options you have.
 
 h2(#editing-states-and-other-nodes). Editing states and other nodes
 
-Generally there a two different ways to edit states and other nodes:
+Generally, there are two different ways to edit states and other nodes:
 * Use the graphical editor to modify a node in the diagram.
 * Select a node and edit its properties in the _Properties_ view.
 
-There are certain properties you can only edit with one of these methods. For example, to modify a state's position or size, use the statechart editor. To change a state's transitions' priority, use the properties view.
+There are certain properties you can only edit with one of these methods. For example, to modify a state's position or size, use the statechart editor. To change a state's transitions' priority, use the _Properties_ view.
 
 h2(#editing-transitions). Editing transitions
 
-Generally there a two different ways to edit transitions:
+Generally, there are two different ways to edit transitions:
 * Use the graphical editor to modify a transition in the diagram.
 * Select a transition and edit its properties in the _Properties_ view.
 
-There are certain properties you can only edit with one of these methods. For example, to add guidance points to a transition's arrow, use the statechart editor. To change a transition's arrow's color, use the properties view.
+There are certain properties you can only edit with one of these methods. For example, to add guidance points to a transition's arrow, use the statechart editor. To change a transition's arrow's color, use the _Properties_ view.
 
 h2(#editing-hierarchies). Editing hierarchies
 
-Statecharts can get rather big and complex. *"Composite states":30_statechart_language#composite-state* are a way to reduce complexity and thus make statecharts easier to create, comprehend and maintain. A composite state comprises a state machine of its own within a "region":30_statechart_language#region. The states belonging to such a nested state machine are called *substates*. *"Orthogonal states":30_statechart_language#orthogonal-states* are a generalization of composite states, comprising two or more independend state machines in separate regions that are executed in parallel.
+Statecharts can get rather big and complex. *"Composite states":30_statechart_language#composite-state* are a way to reduce complexity and thus make statecharts easier to create, comprehend and maintain. A composite state comprises a state machine of its own within a "region":30_statechart_language#region. The states belonging to such a nested state machine are called *substates*. *"Orthogonal states":30_statechart_language#orthogonal-states* are a generalization of composite states, comprising two or more independent state machines in separate regions that are executed in parallel.
 
 A complementary way to mitigate size are *subdiagrams*. A subdiagram externalizes the possibly large region(s) contained by a composite state into a subdiagram. In this case the composite state no longer displays its substates. Instead it is visualized very similar to a regular state, aside from a small label marking it as a composite state and giving access to its internal structure: the subdiagram. In this way a composite state consumes much less space and gives the user the opportunity to better see the overall picture. Section "Using subdiagrams":#using-subdiagrams explains how to work with subdiagrams, how to create them and how to inline them again, if needed.
 
@@ -156,60 +158,145 @@ The statechart editor provides various "refactorings":#refactorings to support e
 
 h2(#using-subdiagrams). Using subdiagrams
 
-When using composite states, a statechart model often becomes too big to give a comprehensive overview of the whole diagram. Subdiagrams come as a solution.
+When using composite states, a statechart model may easily become too big to give a comprehensive overview of the whole diagram. Subdiagrams come as a solution.
 
-!(standard-image)images/extract_subdiagram.png(Composite state)!
+!(standard-image)images/subdiagram_010_inline.png(Composite state)!
 
 p=. Composite state
 
-When the _Extract Subdiagram_ refactoring is executed on a composite state, all containing regions are extracted into a separate diagram. A small decorator in the lower-right corner of the state indicates the existence of such a subdiagram. When you hover over this decorator with the mouse cursor, you'll see a small preview of the subdiagram's content. The refactoring also creates the required _entry_ and _exit_ points for you.
+When the _Extract Subdiagram_ "refactoring":#refactorings is executed on a composite state, all containing regions are extracted into a separate diagram. The composite state no longer clutters the diagram with all its internal details, but instead appears almost like a normal state. The only difference is a small decorator in the lower-right corner of the state, indicating the existence of a subdiagram. When you hover over this decorator with the mouse cursor, you'll see a small preview of the subdiagram's content.
 
-!(standard-image)images/extract_subdiagram2.png(Subdiagram popup window)!
+Extracting a subdiagram creates entry and exit nodes in the subdiagram as needed.
+
+!(standard-image)images/subdiagram_020_preview.png(Subdiagram popup window)!
 
 p=. Subdiagram popup window
 
 A click on the decorator opens the subdiagram in a separate editor tab. The breadcrumb at the top allows easy navigation throughout the hierachy levels.
 
-!(standard-image)images/extract_subdiagram3.png(Subdiagram editor)!
+!(standard-image)images/subdiagram_030_subdiagram-editor.png(Subdiagram editor)!
 
 p=. Subdiagram editor
 
+Using the "inlining subdiagram refactoring":#inlining-subdiagram, you can move the subdiagram back into the composite state.
+
 h2(#refactorings). Refactorings
 
-Refactoring means modifying certain aspects of states or transitions while maintaining the same semantics.
+Refactoring means modifying certain model aspects while maintaining its semantics. The statechart editor allows for the refactoring of variables, events, interfaces, and states, including composite and orthogonal states. A state's context menu contains the _Refactor_ submenu with the refactoring actions explained below. Depending on certain conditions, a refactoring might be executable or not, which will be explained below.
 
-The statechart editor allows for refactoring states, including composite states and orthogonal states. The states' context menu contains the  _Refactor_ submenu with the following refactoring actions. Depending on the state's (or states') type and on other conditions these refactoring can actually be executed or not.
 
-|_. Refactoring action |_. Description |
-|Fold Incoming Actions|If all actions of all incoming transitions of this state are identical, this refactoring turns them into entry actions of this state and remove them from the transitions.|
-|Fold Outgoing Actions|If all actions of all outgoing transitions of this state are identical, this refactoring turns them into exit actions of this state and remove them from the transitions.|
-|Group States Into Composite|Creates a new composite state containing the selected states. The latter must belong to the same region.|
-|Unfold Entry Actions|Removes all entry actions from the state and attaches them to each incoming transaction.|
-|Unfold Exit Actions|Removes all exit actions from the state and attaches them to each outgoing transaction.|
-|Extract Subdiagram|Extracts the regions of the selected composite or orthogonal state into a subdiagram. Entry and exit node are created as needed.|
-|Inline Subdiagram|Inlines the selected node's subdiagram to show it in the composite state's diagram region.|
+h3(#renaming). Renaming variables, events and interfaces
+
+Using the _Rename_ refactoring, you can change the name of a variable, event or interface throughout your statechart model. Each occurrence of that name will be changed to the new name.
+
+To initiate renaming, right-click on the name of a variable, event or interface in the diagram editor, in the definition section, or in a text field in the _Properties_ view, then select _Rename …_.
+
+!(standard-image)images/refactoring-rename_010_renaming-variable.png(Renaming a variable)!
+
+p=. Renaming a variable
+
+###. FIXME: finish description!
+
+h3(#folding-incoming-actions). Folding incoming actions
+
+When building a statechart model step by step, you may come into a situation where you have defined several transitions having the same target state and share a common set of actions.
+
+The _Fold Incoming Actions_ refactoring moves these actions from the transitions to the target state's entry block. To preserve model semantics, only actions that are defined on _all_ incoming transitions will be moved. Since the execution order must be preserved, the refactoring algorithm starts with the right-most action and proceeds action by action to the left. As soon as it detects an action that is not defined on _all_ incoming transitions, it stops moving actions to the entry block.
+
+Consider the following model:
+
+!(standard-image)images/refactoring-fold-incoming-actions_010_example_01.png(Moving incoming actions to entry block)!
+
+p=. Moving incoming actions to entry block
+
+Only the most-right action _y += 42_ can be moved to the entry block of the target state. Although _x += 1_ is also a common action of both transitions, it cannot be moved to the target state, because the semantics of the _B → Target_ transition would change, in that _y = x_ would be executed before _x_ had been incremented.
+
+Another aspect to take into account are transitions leading to target states that are nested in composite states. Consider the following example:
+
+!(standard-image)images/refactoring-fold-incoming-actions_020_example_02.png(Moving incoming actions into a nested state's entry block)!
+
+p=. Moving incoming actions into a nested state's entry block
+
+The actions _y = x_ of the two incoming transitions leading to the _Target_ state cannot be moved to _Target_'s entry block, because doing so would change the model's semantics. The reason consists in the composite state's entry action _x += 1_. It will be executed immediately _after_ the action of transition _A → Target_ and _before_ the actions in the entry block of _Target_. Moving  _y = x_ from the transition to _Target_'s entry block would change that order. The statechart editor pays regard to this constraint and prohibits the refactoring.
+
+To fold incoming actions, right-click on the state to refactor, then select _Refactor → Fold Incoming Actions_ in the context menu. The menu entry is active only if there are actual actions to move into the target state's entry block with the above rules applied.
+
+h3(#folding-outgoing-actions). Folding outgoing actions
+
+The _Fold Outgoing Actions_ refactoring is similar to "folding incoming actions":#folding-incoming-actions, except that it moves actions from outgoing transitions to the source state's exit block. To preserve model semantics, only actions that are defined on _all_ outgoing transitions will be moved. Since the execution order must be preserved, the refactoring algorithm starts at the left-most action and proceeds action by action to the right. As soon as it detects an action that is not defined on _all_ outgoing transitions, it stops moving actions to the exit block.
+
+Preconditions for this refactoring are analog to "&quot;Folding incoming actions&quot;":#folding-incoming-actions. Consider the following example:
+
+!(standard-image)images/refactoring-fold-outgoing-actions_010_example_01.png(Moving outgoing actions to exit block)!
+
+p=. Moving outgoing actions to exit block
+
+Here, the actions _y = x_ cannot be moved from the outgoing transitions to the exit block of the source state, because the composite state has an exit action. For the _Source → A_ transition, the proper execution order is to first execute _x += 1_ of the nesting composite state's exit block, followed by _y = x_ of the transition. Moving _y = x_ to the exit block of _Source_ would reverse this order and thus will be prohibited by the statechart editor.
+
+To fold outgoing actions, right-click on the state to refactor, then select _Refactor → Fold Outgoing Actions_ in the context menu. The menu entry is active only if there are actual actions to move into the source state's exit block with the above rules applied.
+
+h3(#unfolding-entry-actions). Unfolding entry actions
+
+This refactoring is the reverse of "folding incoming actions":#folding-incoming-actions. It removes all entry actions from a target state and appends them to each of its incoming transition's actions.
+
+Transitions crossing the borders of composite states enclosing the target state might inhibit refactoring, see section "&quot;Unfolding exit actions&quot;":#unfolding-exit-actions for an analogous example.
+
+To unfold entry actions, right-click on the state to refactor, then select _Refactor → Unfold Entry Actions_ in the context menu. The menu entry is active only if there are actual actions in the state's entry block that can be moved to the state's incoming transitions while maintaining semantic equivalence and preserving execution order.
+
+h3(#unfolding-exit-actions). Unfolding exit actions
+
+This refactoring is the reverse of "folding outgoing actions":#folding-outgoing-actions. It moves all exit actions from a source state and prepends them to each of its outgoing transition's actions.
+
+Transitions crossing the borders of composite states enclosing the source state might inhibit refactoring. Consider the following example:
+
+!(standard-image)images/refactoring-unfold-outgoing-actions_010_example_01.png(Unfolding exit actions to outgoing transitions)!
+
+p=. Unfolding exit actions to outgoing transitions
+
+Unfolding the exit action _y = x_ of the _Source_ state to the two outgoing transitions would be invalid, because the execution order of said action and the composite state's exit action would be reversed.
+
+To unfold exit actions, right-click on the state to refactor, then select _Refactor → Unfold Exit Actions_ in the context menu. The menu entry is active only if there are actual actions in the state's exit block that can be moved to the state's incoming transitions, while maintaining semantic equivalence and preserving execution order.
+
+
+h3(#grouping-states-into-composite). Grouping states into composite
+
+This refactoring creates a new composite state containing the selected states. The latter must belong to the same region.
+
+To execute this refactoring, select one or more states from the same region, right-click on one of them, and select _Refactor → Group States Into Composite_ in the context menu. The menu entry is active only if the selected states belong to the same region.
+
+h3(#extracting-subdiagram). Extracting subdiagram
+
+This refactoring extracts the regions of the selected composite or orthogonal state into a subdiagram. Entry and exit nodes are created as needed in the subdiagram. See section "Using subdiagrams":#using-subdiagrams for more details.
+
+To extract a subdiagram, right-click on the composite state to refactor, then select _Refactor → Extract Subdiagram_ in the context menu.
+
+h3(#inlining-subdiagram). Inlining subdiagram
+
+This refactoring inlines the selected node's subdiagram in order to show it directly in the composite state's diagram region. See section "Using subdiagrams":#using-subdiagrams for more details.
+
+To inline the subdiagram, right-click on a composite state with a subdiagram, then select _Refactor → Inline Subdiagram_ in the context menu.
 
 h2(#using-editing-proposals). Using editing proposals
 
 h3(#oss-using-text-proposals). Using text proposals
 
-Proposals assist you when writing statechart language expressions. Whenever editing some text anywhere in the graphical statechart editor or in the properties view, you can always press the @[Ctrl]+[Space]@ key combination to get some context-sensitive help. A popup window opens. It contains a menu proposing possible text choices to complete a phrase.
+Proposals assist you when writing statechart language expressions. Whenever editing some text anywhere in the graphical statechart editor or in the properties view, you can always press the @[Ctrl+Space]@ key combination to get some context-sensitive help.
 
-Certain proposals, like statechart language keywords, have documentation associated to them. When such a proposal is selected either using the mouse or the keyboard, this information is shown in a secondary popup window next to the proposal.
+Certain proposals, like statechart language keywords, have documentation associated with them. When such a proposal is selected either using the mouse or the keyboard, this information is shown in a secondary popup window next to the proposal.
 
-You can either use the mouse or the keyboard to select an insert a proposal in the text:
+You can either use the mouse or the keyboard to select and insert a proposal in the text:
 * Double-click on a proposal for insertion in the text.
-* Use the @[Down]@ and @[Up]@ arrow keys to navigate to the proposal you want to insert in the text, then press @[Return]@ to actually insert the proposal.
+* Use the up and down arrow keys to navigate to the proposal you want to insert in the text, then press @[Return]@ to actually insert the proposal.
 
 h3(#oss-using-action-proposals-on-states). Using actions proposals on states
 
-When a state is selected, press @[Ctrl]+[Space]@ opens a popup window showing a context-sensitive menu with possible action choices to perform on the state.
+When a state is selected, @[Ctrl+Space]@ opens a popup window showing a context-sensitive menu with possible action choices to perform on the state.
 
 These action proposals have additional information associated to them. When a proposal is selected either using the mouse or the keyboard, this information is shown in a secondary popup window next to the proposal.
 
 You can either use the mouse or the keyboard to execute a proposal:
 * Double-click on a proposal to execute it.
-* Use the @[Down]@ and @[Up]@ arrow keys to navigate to the proposal you want to execute, then press @[Return]@ to actually execute it.
+* Use the up and down arrow keys to navigate to the proposal you want to execute, then press @[Return]@ to actually execute it.
 
 h2(#oss_comparing-statecharts). Comparing statecharts
 
@@ -246,7 +333,7 @@ h3(#oss_comparing-three-statecharts). Comparing three statecharts
 
 h2(#exporting-a-statechart-as-an-image-file). Exporting a statechart as an image file
 
-A statechart can be saved as an image file and e. g. be included in some documentation. The following steps explain how to do the export.
+A statechart can be saved as an image file as shown in the following steps:
 
 In the statechart editor, right-click on the main region. The context menu appears.
 
@@ -266,25 +353,17 @@ Enter the name of the export image file into the _File Name_ text field. The fil
 
 Select the image format from the _Image Format_ drop-down menu. YAKINDU Statechart Tools supports the following formats:
 
-<dl>
-<dt>BMP, GIF, PNG</dt>
-<dd><p>Lossless pixel image formats</p></dd>
-<dt>JPG, JPEG</dt>
-<dd><p>Lossy pixel image format. Both JPG and JPEG essentially stand for the same image format. You can specify the image quality via the _Quality (%)_ setting.</p></dd>
-<dt>SVG</dt>
-<dd><p>Scalable Vector Graphics (SVG)</p></dd>
-<dt>PDF</dt>
-<dd><p>Portable Document Format (PDF)</p></dd>
-</dl>
-
-Selecting an image format changes the export file name's extension appropriately, e. g. if the file name you entered was @foobar@, and the you select PNG as image format, the file name will change to @foobar.png@.
+|*BMP, GIF, PNG*|Lossless pixel image formats|
+|*JPG, JPEG*|Lossy pixel image format. You can specify the image quality via the _Quality (%)_ setting.|
+|*SVG*|Scalable Vector Graphics|
+|*PDF*|Portable Document Format|
 
 bq.. *Note*
 
-The image export functionality is subject to the capabilities of your Java runtime environment (JRE). You can export images only in those image formats your JRE actually supports.
+The image export functionality is subject to the capabilities of your Java Runtime Environment (JRE). You can export images only in those image formats your JRE actually supports.
 
 p. The _Quality (%)_ text field is active for JPEG images only. JPEG is a lossy format, and reducing the quality results in a smaller file size. However, due to the nature of statechart images, a lossless format like PNG is most often a better choice, both in quality and in file size.
 
 Check _Overwrite existing file without warning_ if you don't want to be bothered by a confirmation dialog which will appear if the export file already exists.
 
-Check _Export to HTML_ to create both the image file plus an HTML file to include it.
+Check _Export to HTML_ to create both the image file plus an HTML file including it.
