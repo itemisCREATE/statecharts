@@ -53,6 +53,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
 import org.yakindu.base.types.typesystem.GenericTypeSystem
+import org.yakindu.base.types.EnumerationType
 
 /**
  * 
@@ -115,6 +116,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object typeCast(String value, Type type) {
+		if(type instanceof EnumerationType) return value
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.STRING))) return value
 		throw new IllegalArgumentException
 	}
@@ -172,9 +174,9 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
 			}
 		}
-		// for enumeration types just return the referenced enumerator
+		// for enumeration types return the name
 		if (expression.reference instanceof Enumerator) {
-			return expression.reference
+			return (expression.reference as Enumerator).name
 		}
 		
 		val executionSlot = context.resolve(expression)
@@ -292,7 +294,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			}
 
 		} else if (call.getFeature() instanceof Enumerator) {
-			return call.getFeature();
+			return (call.getFeature() as Enumerator).name;
 		}
 
 		var variableRef = context.resolve(call)

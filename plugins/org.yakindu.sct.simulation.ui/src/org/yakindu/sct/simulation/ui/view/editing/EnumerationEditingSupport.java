@@ -86,9 +86,9 @@ public class EnumerationEditingSupport extends ScopeSlotEditingSupport {
 				int index = ((Integer) value).intValue();
 				EnumerationType e = getEnumerationType((ExecutionSlot) element);
 				if (index < 0) {
-					return e.getEnumerator().iterator().next();
+					return e.getEnumerator().iterator().next().getName();
 				}
-				return e.getEnumerator().get(index);
+				return e.getEnumerator().get(index).getName();
 			}
 		}
 		return null;
