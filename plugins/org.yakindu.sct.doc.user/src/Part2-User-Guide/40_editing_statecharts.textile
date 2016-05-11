@@ -58,7 +58,7 @@ The canvas is the statechart editor's drawing area. When you create a new statec
 
 The following list gives an overview of what kind of actions you can perform on the canvas:
 * Add or remove a region
-** To add a region to the canvas, select _Region_ in the "editor palette":#editor-palette, then click at the canvas location you want to place the region.
+** To add a region to the canvas, select _Region_ in the "editor palette":#editor-palette, then click on the canvas location you want to place the region.
 ** To remove a region from the canvas, select the region, then press the @[Del]@ key or select _Edit → Delete_ from the menu bar.
 * Zooming
 ** Press and hold the the @[Ctrl]@ key and turn the mouse wheel not zoom in and out.
@@ -68,7 +68,7 @@ h3(#editor-palette). Editor palette
 
 The editor palette provides you with a set of various actions and statechart editing tools. By default, the palette is located right from the canvas, but you can drag it to the left, if you like.
 
-You can hide the palette by clicking at the small triangle in the palette's title bar. Click at the triangle again to make the palette reappear.
+You can hide the palette by clicking at the small triangle in the palette's title bar. click on the triangle again to make the palette reappear.
 
 !(standard-image)images/editor-palette_010_overview.png(Editor palette)!
 
@@ -125,7 +125,7 @@ Double-clicking at a message in the _Problems_ view takes you directly to the re
 
 You can configure the problems view in a multitude of ways, e.&nbsp;g. to group entries by different criteria, to sort them in a specific way, or to restrict them to certain projects. You can even define multiple problems views, each with different selection or display criteria.
 
-To start configuring the problems view, click at the small triangle pointing downwards in the problem view's title bar. A drop-down menu will open and show the options you have.
+To start configuring the problems view, click on the small triangle pointing downwards in the problem view's title bar. A drop-down menu will open and show the options you have.
 
 
 h2(#editing-states-and-other-nodes). Editing states and other nodes

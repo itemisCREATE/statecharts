@@ -131,7 +131,7 @@ h2(#running-a-generator). Running a generator
 Before you can run a generator, you have to establish a generator model first. This is explained in section "Configuring a generator":#configuring-a-generator and in the sections describing specific generators.
 
 Provided you have created the generator model, proceed as follows:
-# In the project explorer view, right-click at the @.sgen@ file containing the generator model. The context menu opens.
+# In the project explorer view, right-click on the @.sgen@ file containing the generator model. The context menu opens.
 # In the context menu, select _Generate Code Artifacts_.
 # The generator is executed.
 
