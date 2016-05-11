@@ -36,6 +36,7 @@ import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 /**
  * 
@@ -56,6 +57,8 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	@Inject protected extension ExecutionContextExtensions
 	@Inject
 	protected StateVectorExtensions stateVectorExtensions;
+	@Inject
+	protected extension IQualifiedNameProvider
 
 	protected ExecutionFlow flow
 	protected ExecutionContext executionContext
@@ -109,8 +112,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	}
 
 	def ExecutionState toExecutionState(RegularState state) {
-		return flow.eAllContents.filter[
-			it instanceof ExecutionState && EcoreUtil::equals((it as ExecutionState).sourceElement, state)].head as ExecutionState
+		return flow.eAllContents.filter(ExecutionState).findFirst[
+			EcoreUtil.equals(sourceElement, state)
+		]
 	}
 
 	override runCycle() {
