@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.yakindu.base.base.impl.NamedElementImpl;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.TypesPackage;
@@ -36,16 +35,7 @@ public class EnumeratorImpl extends DeclarationImpl implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Object LITERAL_VALUE_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getLiteralValue() <em>Literal Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLiteralValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected Object literalValue = LITERAL_VALUE_EDEFAULT;
+	protected static final int LITERAL_VALUE_EDEFAULT = 0;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -109,22 +99,10 @@ public class EnumeratorImpl extends DeclarationImpl implements Enumerator {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public Object getLiteralValue() {
-		return literalValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLiteralValue(Object newLiteralValue) {
-		Object oldLiteralValue = literalValue;
-		literalValue = newLiteralValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.ENUMERATOR__LITERAL_VALUE, oldLiteralValue, literalValue));
+	public int getLiteralValue() {
+		return getOwningEnumeration().getEnumerator().indexOf(this);
 	}
 
 	/**
@@ -198,9 +176,6 @@ public class EnumeratorImpl extends DeclarationImpl implements Enumerator {
 			case TypesPackage.ENUMERATOR__OWNING_ENUMERATION:
 				setOwningEnumeration((EnumerationType)newValue);
 				return;
-			case TypesPackage.ENUMERATOR__LITERAL_VALUE:
-				setLiteralValue(newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -215,9 +190,6 @@ public class EnumeratorImpl extends DeclarationImpl implements Enumerator {
 		switch (featureID) {
 			case TypesPackage.ENUMERATOR__OWNING_ENUMERATION:
 				setOwningEnumeration((EnumerationType)null);
-				return;
-			case TypesPackage.ENUMERATOR__LITERAL_VALUE:
-				setLiteralValue(LITERAL_VALUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -234,25 +206,9 @@ public class EnumeratorImpl extends DeclarationImpl implements Enumerator {
 			case TypesPackage.ENUMERATOR__OWNING_ENUMERATION:
 				return getOwningEnumeration() != null;
 			case TypesPackage.ENUMERATOR__LITERAL_VALUE:
-				return LITERAL_VALUE_EDEFAULT == null ? literalValue != null : !LITERAL_VALUE_EDEFAULT.equals(literalValue);
+				return getLiteralValue() != LITERAL_VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (literalValue: ");
-		result.append(literalValue);
-		result.append(')');
-		return result.toString();
 	}
 
 } //EnumeratorImpl
