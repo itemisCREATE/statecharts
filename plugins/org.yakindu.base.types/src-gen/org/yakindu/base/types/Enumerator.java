@@ -2,8 +2,6 @@
  */
 package org.yakindu.base.types;
 
-import org.yakindu.base.base.NamedElement;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Enumerator</b></em>'.
@@ -60,20 +58,9 @@ public interface Enumerator extends Declaration {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Literal Value</em>' attribute.
-	 * @see #setLiteralValue(Object)
 	 * @see org.yakindu.base.types.TypesPackage#getEnumerator_LiteralValue()
-	 * @model
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	Object getLiteralValue();
-
-	/**
-	 * Sets the value of the '{@link org.yakindu.base.types.Enumerator#getLiteralValue <em>Literal Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Literal Value</em>' attribute.
-	 * @see #getLiteralValue()
-	 * @generated
-	 */
-	void setLiteralValue(Object value);
+	int getLiteralValue();
 } // Enumerator
