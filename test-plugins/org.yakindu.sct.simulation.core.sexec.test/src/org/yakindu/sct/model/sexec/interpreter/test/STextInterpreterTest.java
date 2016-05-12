@@ -479,7 +479,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testEnumAssignment() {
 		execute("internal: var enumVar : EnumType", "enumVar = EnumType.B");
-		assertEquals(((EnumerationType)typeSystem.getType("EnumType")).getEnumerator().get(1).getName(), getEnumValue());
+		assertEquals(new Long(((EnumerationType)typeSystem.getType("EnumType")).getEnumerator().get(1).getLiteralValue()), getEnumValue());
 	}
 	
 	@Test

@@ -93,6 +93,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object typeCast(Long value, Type type) {
+		if(type instanceof EnumerationType) return value
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException("unknown type "+type.name)
@@ -116,7 +117,6 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object typeCast(String value, Type type) {
-		if(type instanceof EnumerationType) return value
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.STRING))) return value
 		throw new IllegalArgumentException
 	}
@@ -133,8 +133,9 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def Object executeAssignment(AssignmentExpression assignment) {
 		var scopeVariable = context.resolve(assignment.varRef)
 		var result = assignment.expression.execute
-		if (assignment.operator == AssignmentOperator::ASSIGN) {
+		if (result instanceof Enumerator) result = result.literalValue
 
+		if (assignment.operator == AssignmentOperator::ASSIGN) {
 			//Strong typing, use the type of the scopeVariable instead of using new runtime type
 			scopeVariable.value = if(result != null) typeCast(result, scopeVariable.type) else null
 		} else {
@@ -174,9 +175,9 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
 			}
 		}
-		// for enumeration types return the name
+		// for enumeration types return the literal value
 		if (expression.reference instanceof Enumerator) {
-			return (expression.reference as Enumerator).name
+			return new Long((expression.reference as Enumerator).literalValue)
 		}
 		
 		val executionSlot = context.resolve(expression)
@@ -294,7 +295,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			}
 
 		} else if (call.getFeature() instanceof Enumerator) {
-			return (call.getFeature() as Enumerator).name;
+			return new Long((call.getFeature() as Enumerator).literalValue)
 		}
 
 		var variableRef = context.resolve(call)
