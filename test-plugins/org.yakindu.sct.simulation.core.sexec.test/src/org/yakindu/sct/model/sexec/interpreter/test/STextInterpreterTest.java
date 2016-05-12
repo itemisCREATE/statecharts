@@ -470,13 +470,16 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	
 	@Test
 	public void testEnumEqualsExpression() {
-		assertEquals(true, execute("internal: var enumVar : EnumType", "enumVar == EnumType.A"));
+		String scope = "internal: var enumVar : EnumType";
+		execute(scope, "enumVar = EnumType.B");
+		assertEquals(false, execute(scope, "enumVar == EnumType.A"));
+		assertEquals(true, execute(scope, "enumVar == EnumType.B"));
 	}
 
 	@Test
 	public void testEnumAssignment() {
-		execute("internal: var enumVar : EnumType", "enumVar = EnumType.A");
-		assertEquals(((EnumerationType)typeSystem.getType("EnumType")).getEnumerator().get(0), getEnumValue());
+		execute("internal: var enumVar : EnumType", "enumVar = EnumType.B");
+		assertEquals(((EnumerationType)typeSystem.getType("EnumType")).getEnumerator().get(1).getName(), getEnumValue());
 	}
 	
 	@Test
@@ -573,6 +576,10 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		Enumerator enumA = TypesFactory.eINSTANCE.createEnumerator();
 		enumA.setName("A");
 		enumType.getEnumerator().add(enumA);
+		
+		Enumerator enumB = TypesFactory.eINSTANCE.createEnumerator();
+		enumB.setName("B");
+		enumType.getEnumerator().add(enumB);
 		
 		typeSystem.declareType(enumType, enumType.getName());
 		
