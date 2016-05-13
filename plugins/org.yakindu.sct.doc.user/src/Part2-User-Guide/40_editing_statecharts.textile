@@ -71,7 +71,7 @@ h3(#editor-palette). Editor palette
 
 The editor palette provides you with a set of various actions and statechart editing tools. By default, the palette is located right of the canvas, but you can also drag it to the left.
 
-You can hide the palette by clicking at the small triangle in the palette's title bar. Click on the triangle again to make the palette reappear.
+You can hide the palette by clicking on the small triangle in the palette's title bar. Click on the triangle again to make the palette reappear.
 
 !(standard-image)images/editor-palette_010_overview.png(Editor palette)!
 
