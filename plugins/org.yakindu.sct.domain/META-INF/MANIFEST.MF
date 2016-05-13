@@ -9,11 +9,10 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.swt,
  org.eclipse.jface,
  com.google.guava,
- org.yakindu.sct.model.sgraph,
  com.google.inject,
- org.yakindu.base.xtext.utils.jface,
  org.eclipse.xtext,
- org.eclipse.core.resources
+ org.eclipse.core.resources,
+ org.yakindu.base.types
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.domain,
