@@ -61,7 +61,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Enumerator" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningEnumeration" eType="#//EnumerationType"
         eOpposite="#//EnumerationType/enumerator"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="literalValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="literalValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeConstraint">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>

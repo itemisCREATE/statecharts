@@ -109,8 +109,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	}
 
 	def ExecutionState toExecutionState(RegularState state) {
-		return flow.eAllContents.filter[
-			it instanceof ExecutionState && EcoreUtil::equals((it as ExecutionState).sourceElement, state)].head as ExecutionState
+		return flow.eAllContents.filter(ExecutionState).findFirst[
+			EcoreUtil.equals(sourceElement, state)
+		]
 	}
 
 	override runCycle() {
