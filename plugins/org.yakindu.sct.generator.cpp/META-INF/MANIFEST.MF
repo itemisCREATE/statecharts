@@ -20,7 +20,6 @@ Require-Bundle: org.yakindu.sct.model.sexec,
  org.yakindu.sct.generator.core,
  org.yakindu.sct.generator.genmodel,
  org.yakindu.sct.generator.c,
- org.eclipse.xtext.xbase.lib,
  org.eclipse.xtext.builder
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.yakindu.sct.generator.cpp

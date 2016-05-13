@@ -19,7 +19,6 @@ Require-Bundle: org.yakindu.sct.model.sexec,
  org.yakindu.sct.generator.core,
  org.yakindu.sct.generator.genmodel,
  org.yakindu.base.types,
- org.eclipse.xtext.xbase.lib,
  org.eclipse.xtext.builder,
  org.yakindu.sct.domain.generic
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
