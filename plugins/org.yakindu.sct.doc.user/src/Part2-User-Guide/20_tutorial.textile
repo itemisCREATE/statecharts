@@ -35,8 +35,8 @@ You have developed and tested your statechart model, and now you need it as a C,
 As an example, we will take the light switch statechart and generate Java source code from it. Please proceed as follows:
 
 # In the project explorer, right-click on _LightSwitch.sct_ and select _New → Code Generator Model_ in the context menu. <p>!(standard-image)images/5min_110_new_code_generator_model.png(Creating a new code generator model)!</p>
-# In the dialog, replace @default.sgen@ by @light_switch.sgen@, then click _Next >_. <p>!(standard-image)images/5min_120_naming_the_code_generator_model.png(Naming the code generator model)!</p>
-# In the next dialog, check the checkbox left from _LightSwitch.sct_, then click _Finish_. <p>!(standard-image)images/5min_130_selecting_the_statechart_model.png(Selecting the statechart model)!</p>
+# In the dialog, replace @default.sgen@ by @light_switch.sgen@, then click _Next >_.
+# In the next dialog, check the checkbox left from _LightSwitch.sct_, then click _Finish_.
 # Java classes implementing the statechart model are generated. You can find the generated source code in the folders _src_ and _src-gen_ within the _light_switch_ project. <p>!(standard-image)images/5min_140_generated_java_source_code.png(Generated Java source code)!</p>
 
 That's it. If you want to know more, take the time and work through the "Comprehensive Tutorial":#oss_comprehensive-tutorial.
