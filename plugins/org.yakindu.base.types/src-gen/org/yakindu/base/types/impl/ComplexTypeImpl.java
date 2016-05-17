@@ -29,6 +29,7 @@ import org.yakindu.base.types.TypesPackage;
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.ComplexTypeImpl#getFeatures <em>Features</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ComplexTypeImpl#getSuperTypes <em>Super Types</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.ComplexTypeImpl#getId <em>Id</em>}</li>
  * </ul>
  *
  * @generated
@@ -51,6 +52,16 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 	 * @ordered
 	 */
 	protected EList<ComplexType> superTypes;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -89,6 +100,15 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 			superTypes = new EObjectResolvingEList<ComplexType>(ComplexType.class, this, TypesPackage.COMPLEX_TYPE__SUPER_TYPES);
 		}
 		return superTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getId() {
+		return getName();
 	}
 
 	/**
@@ -143,6 +163,8 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 				return getFeatures();
 			case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
 				return getSuperTypes();
+			case TypesPackage.COMPLEX_TYPE__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -195,6 +217,8 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 				return features != null && !features.isEmpty();
 			case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
 				return superTypes != null && !superTypes.isEmpty();
+			case TypesPackage.COMPLEX_TYPE__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
 		return super.eIsSet(featureID);
 	}

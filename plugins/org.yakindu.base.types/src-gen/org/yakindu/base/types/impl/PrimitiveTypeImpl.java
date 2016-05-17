@@ -18,6 +18,7 @@ import org.yakindu.base.types.TypesPackage;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.PrimitiveTypeImpl#getBaseType <em>Base Type</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.PrimitiveTypeImpl#getId <em>Id</em>}</li>
  * </ul>
  *
  * @generated
@@ -32,6 +33,16 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 * @ordered
 	 */
 	protected PrimitiveType baseType;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -93,6 +104,15 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getId() {
+		return getName();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -101,6 +121,8 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 			case TypesPackage.PRIMITIVE_TYPE__BASE_TYPE:
 				if (resolve) return getBaseType();
 				return basicGetBaseType();
+			case TypesPackage.PRIMITIVE_TYPE__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -145,6 +167,8 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 		switch (featureID) {
 			case TypesPackage.PRIMITIVE_TYPE__BASE_TYPE:
 				return baseType != null;
+			case TypesPackage.PRIMITIVE_TYPE__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
 		return super.eIsSet(featureID);
 	}

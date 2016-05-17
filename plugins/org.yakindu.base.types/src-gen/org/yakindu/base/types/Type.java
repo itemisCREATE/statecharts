@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getType()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface Type extends PackageMember {

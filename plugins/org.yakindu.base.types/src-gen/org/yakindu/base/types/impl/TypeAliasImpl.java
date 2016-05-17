@@ -35,6 +35,7 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isVisible <em>Visible</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getId <em>Id</em>}</li>
  * </ul>
  *
  * @generated
@@ -123,6 +124,16 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 * @ordered
 	 */
 	protected boolean visible = VISIBLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -258,6 +269,15 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getId() {
+		return getName();
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
@@ -302,6 +322,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return isAbstract();
 			case TypesPackage.TYPE_ALIAS__VISIBLE:
 				return isVisible();
+			case TypesPackage.TYPE_ALIAS__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -386,6 +408,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case TypesPackage.TYPE_ALIAS__VISIBLE:
 				return visible != VISIBLE_EDEFAULT;
+			case TypesPackage.TYPE_ALIAS__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
 		return super.eIsSet(featureID);
 	}

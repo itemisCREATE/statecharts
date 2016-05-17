@@ -13,6 +13,7 @@ package org.yakindu.base.types;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.PrimitiveType#getBaseType <em>Base Type</em>}</li>
+ *   <li>{@link org.yakindu.base.types.PrimitiveType#getId <em>Id</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getPrimitiveType()
@@ -46,4 +47,19 @@ public interface PrimitiveType extends Type {
 	 * @generated
 	 */
 	void setBaseType(PrimitiveType value);
+
+	/**
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see org.yakindu.base.types.TypesPackage#getPrimitiveType_Id()
+	 * @model id="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getId();
 } // PrimitiveType

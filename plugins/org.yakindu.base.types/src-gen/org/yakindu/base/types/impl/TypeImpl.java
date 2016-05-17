@@ -35,7 +35,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public abstract class TypeImpl extends PackageMemberImpl implements Type {
+public class TypeImpl extends PackageMemberImpl implements Type {
 	/**
 	 * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

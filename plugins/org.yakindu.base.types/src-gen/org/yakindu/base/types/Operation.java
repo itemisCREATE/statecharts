@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.Operation#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.yakindu.base.types.Operation#getId <em>Id</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getOperation()
@@ -42,5 +43,20 @@ public interface Operation extends Declaration {
 	 * @generated
 	 */
 	EList<Parameter> getParameters();
+
+	/**
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see org.yakindu.base.types.TypesPackage#getOperation_Id()
+	 * @model id="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getId();
 
 } // Operation

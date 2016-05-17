@@ -349,13 +349,22 @@ public interface TypesPackage extends EPackage {
 	int OPERATION__PARAMETERS = DECLARATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__ID = DECLARATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
+	int OPERATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -412,13 +421,22 @@ public interface TypesPackage extends EPackage {
 	int PROPERTY__EXTERNAL = DECLARATION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__ID = DECLARATION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 3;
+	int PROPERTY_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -588,13 +606,22 @@ public interface TypesPackage extends EPackage {
 	int PRIMITIVE_TYPE__BASE_TYPE = TYPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__ID = TYPE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Primitive Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
+	int PRIMITIVE_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -640,6 +667,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION_TYPE__BASE_TYPE = PRIMITIVE_TYPE__BASE_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__ID = PRIMITIVE_TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Enumerator</b></em>' containment reference list.
@@ -797,13 +833,22 @@ public interface TypesPackage extends EPackage {
 	int COMPLEX_TYPE__SUPER_TYPES = PARAMETERIZED_TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE__ID = PARAMETERIZED_TYPE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Complex Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_TYPE_FEATURE_COUNT = PARAMETERIZED_TYPE_FEATURE_COUNT + 2;
+	int COMPLEX_TYPE_FEATURE_COUNT = PARAMETERIZED_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.EnumeratorImpl <em>Enumerator</em>}' class.
@@ -1101,13 +1146,22 @@ public interface TypesPackage extends EPackage {
 	int TYPE_ALIAS__VISIBLE = TYPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__ID = TYPED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Type Alias</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 4;
+	int TYPE_ALIAS_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.
@@ -1237,6 +1291,17 @@ public interface TypesPackage extends EPackage {
 	EReference getOperation_Parameters();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Operation#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.yakindu.base.types.Operation#getId()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EAttribute getOperation_Id();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Property <em>Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1278,6 +1343,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getProperty_External();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Property#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.yakindu.base.types.Property#getId()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EAttribute getProperty_Id();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Parameter <em>Parameter</em>}'.
@@ -1396,6 +1472,17 @@ public interface TypesPackage extends EPackage {
 	EReference getPrimitiveType_BaseType();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.PrimitiveType#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.yakindu.base.types.PrimitiveType#getId()
+	 * @see #getPrimitiveType()
+	 * @generated
+	 */
+	EAttribute getPrimitiveType_Id();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.ComplexType <em>Complex Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1426,6 +1513,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getComplexType_SuperTypes();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.ComplexType#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.yakindu.base.types.ComplexType#getId()
+	 * @see #getComplexType()
+	 * @generated
+	 */
+	EAttribute getComplexType_Id();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Enumerator <em>Enumerator</em>}'.
@@ -1596,6 +1694,17 @@ public interface TypesPackage extends EPackage {
 	EClass getTypeAlias();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.TypeAlias#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.yakindu.base.types.TypeAlias#getId()
+	 * @see #getTypeAlias()
+	 * @generated
+	 */
+	EAttribute getTypeAlias_Id();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.types.Direction <em>Direction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1724,6 +1833,14 @@ public interface TypesPackage extends EPackage {
 		EReference OPERATION__PARAMETERS = eINSTANCE.getOperation_Parameters();
 
 		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION__ID = eINSTANCE.getOperation_Id();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.PropertyImpl <em>Property</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1756,6 +1873,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PROPERTY__EXTERNAL = eINSTANCE.getProperty_External();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY__ID = eINSTANCE.getProperty_Id();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -1856,6 +1981,14 @@ public interface TypesPackage extends EPackage {
 		EReference PRIMITIVE_TYPE__BASE_TYPE = eINSTANCE.getPrimitiveType_BaseType();
 
 		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PRIMITIVE_TYPE__ID = eINSTANCE.getPrimitiveType_Id();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ComplexTypeImpl <em>Complex Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1880,6 +2013,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPLEX_TYPE__SUPER_TYPES = eINSTANCE.getComplexType_SuperTypes();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPLEX_TYPE__ID = eINSTANCE.getComplexType_Id();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.EnumeratorImpl <em>Enumerator</em>}' class.
@@ -2024,6 +2165,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TYPE_ALIAS = eINSTANCE.getTypeAlias();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPE_ALIAS__ID = eINSTANCE.getTypeAlias_Id();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.
