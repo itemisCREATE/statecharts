@@ -3,27 +3,10 @@ Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Java Generator
 Bundle-SymbolicName: org.yakindu.sct.generator.java;singleton:=true
 Bundle-Version: 2.6.1.qualifier
-Require-Bundle: org.eclipse.jdt.core,
- org.apache.commons.logging,
- org.apache.log4j;resolution:=optional,
- com.ibm.icu,
- org.antlr.runtime,
- org.eclipse.core.runtime,
- org.eclipse.emf.mwe.utils,
- org.eclipse.emf.ecore.xmi,
- org.eclipse.jface.text,
- org.eclipse.xpand,
- org.eclipse.xtend,
- org.eclipse.xtend.typesystem.emf,
- org.yakindu.sct.model.stext,
+Require-Bundle: org.yakindu.sct.model.stext,
  org.yakindu.sct.generator.core,
- org.eclipse.jdt.launching,
  org.yakindu.sct.generator.genmodel,
- org.eclipse.xtext.xbase,
- org.yakindu.sct.model.resource,
- org.eclipse.xtend.lib,
- com.google.guava,
- org.eclipse.xtext.xbase.lib
+ org.yakindu.sct.model.resource
 Bundle-Vendor: statecharts.org
 Export-Package: org.yakindu.sct.generator.java,
  org.yakindu.sct.generator.java.features,
