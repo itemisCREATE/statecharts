@@ -4,22 +4,10 @@ Bundle-Name: YAKINDU C Generator
 Bundle-SymbolicName: org.yakindu.sct.generator.c;singleton:=true
 Bundle-Version: 2.6.1.qualifier
 Require-Bundle: org.yakindu.sct.model.sexec,
- org.eclipse.jdt.core,
- org.apache.commons.logging,
- org.apache.log4j;resolution:=optional,
- com.ibm.icu,
- org.antlr.runtime,
- org.eclipse.core.runtime,
- org.eclipse.emf.mwe.utils,
- org.eclipse.emf.ecore.xmi,
- org.eclipse.jface.text,
- org.eclipse.xpand,
- org.eclipse.xtend.typesystem.emf,
  org.yakindu.sct.model.stext,
  org.yakindu.sct.generator.core,
  org.yakindu.sct.generator.genmodel,
  org.yakindu.base.types,
- org.eclipse.xtext.builder,
  org.yakindu.sct.domain.generic
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.yakindu.sct.generator.c,
