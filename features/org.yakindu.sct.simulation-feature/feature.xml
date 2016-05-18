@@ -25,40 +25,9 @@
    <requires>
       <import plugin="com.google.inject" version="3.0.0" match="compatible"/>
       <import plugin="com.google.guava" version="12.0.0" match="greaterOrEqual"/>
+      <import plugin="com.google.inject.multibindings" version="3.0.0" match="compatible"/>
       <import feature="org.yakindu.base" version="2.6.1.qualifier"/>
-      <import feature="org.yakindu.sct.editor" version="2.6.1.qualifier" match="compatible"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.xtend.lib"/>
-      <import plugin="org.eclipse.xtext"/>
-      <import plugin="org.yakindu.base.types"/>
-      <import plugin="org.yakindu.base.expressions"/>
-      <import plugin="org.yakindu.sct.model.stext"/>
-      <import plugin="org.yakindu.sct.model.sgraph"/>
-      <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.yakindu.sct.model.sgraph.edit"/>
-      <import plugin="org.yakindu.base.types.edit"/>
-      <import plugin="org.yakindu.base.expressions.edit"/>
-      <import plugin="org.yakindu.sct.commons"/>
-      <import plugin="org.eclipse.emf.workspace"/>
-      <import plugin="org.yakindu.base.xtext.utils.jface"/>
-      <import plugin="org.yakindu.sct.domain"/>
-      <import plugin="org.eclipse.debug.core"/>
-      <import plugin="org.eclipse.debug.ui"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.jdt.debug"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
-      <import plugin="org.yakindu.base.gmf.runtime"/>
-      <import plugin="org.eclipse.gmf.runtime.diagram.ui.resources.editor"/>
-      <import plugin="org.eclipse.gmf.runtime.diagram.ui"/>
-      <import plugin="org.eclipse.jdt.launching"/>
-      <import plugin="org.eclipse.jdt.debug.ui"/>
-      <import plugin="org.yakindu.sct.ui.editor"/>
-      <import plugin="org.yakindu.base.xtext.utils.gmf"/>
-      <import plugin="org.yakindu.sct.ui"/>
-      <import plugin="org.apache.commons.lang"/>
-      <import plugin="org.eclipse.gmf.runtime.diagram.ui.render"/>
+      <import feature="org.yakindu.sct.editor" version="0.0.0.qualifier"/>
    </requires>
 
    <plugin
