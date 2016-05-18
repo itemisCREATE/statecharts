@@ -8,7 +8,9 @@ package org.yakindu.base.types.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypesPackage;
 
@@ -182,6 +184,11 @@ public class PropertyImpl extends DeclarationImpl implements Property {
 	 * @generated NOT
 	 */
 	public String getId() {
+		EObject container = eContainer();
+		if (container instanceof ComplexType) {
+			ComplexType containerType = (ComplexType) container;
+			return containerType.getId() + "." + getName();
+		}
 		return getName();
 	}
 
