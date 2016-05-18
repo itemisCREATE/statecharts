@@ -23,7 +23,6 @@ import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
-import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Guard;
@@ -75,14 +74,14 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	}
 
 	public Object infer(EventValueReferenceExpression e) {
-		EventDefinition definition = deresolve(e.getValue());
+		Event definition = deresolve(e.getValue());
 		if (definition != null)
 			return inferTypeDispatch(definition.getType() != null ? definition.getType() : getType(VOID));
 		return inferTypeDispatch(e.getValue());
 	}
 
 	public Object infer(EventRaisingExpression e) {
-		EventDefinition event = deresolve(e.getEvent());
+		Event event = deresolve(e.getEvent());
 		Type type1 = null;
 		if(event != null)
 			type1 = event.getType();
@@ -97,19 +96,19 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 
 	}
 
-	protected EventDefinition deresolve(Expression e) {
+	protected Event deresolve(Expression e) {
 		// TODO This is ugly -> reuse the TypeTrace to determine the context in
-		// infer(EventDefinition)
+		// infer(Event)
 		if (e instanceof ElementReferenceExpression) {
 			EObject reference = ((ElementReferenceExpression) e).getReference();
-			if (reference instanceof EventDefinition) {
-				return (EventDefinition) reference;
+			if (reference instanceof Event) {
+				return (Event) reference;
 			}
 		}
 		if (e instanceof FeatureCall) {
 			EObject reference = ((FeatureCall) e).getFeature();
-			if (reference instanceof EventDefinition) {
-				return (EventDefinition) reference;
+			if (reference instanceof Event) {
+				return (Event) reference;
 			}
 		}
 		return null;
