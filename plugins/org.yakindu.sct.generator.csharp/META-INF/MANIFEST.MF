@@ -3,27 +3,10 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Yakindu Statechart Tools (SCT) C# Generator
 Bundle-SymbolicName: org.yakindu.sct.generator.csharp;singleton:=true
 Bundle-Version: 2.5.0.qualifier
-Require-Bundle: org.eclipse.jdt.core;bundle-version="3.5.0",
- org.apache.commons.logging,
- org.apache.log4j;resolution:=optional,
- com.ibm.icu;bundle-version="4.0.1",
- org.antlr.runtime;bundle-version="3.0.0",
- org.eclipse.core.runtime;bundle-version="3.5.0",
- org.eclipse.emf.mwe.utils;bundle-version="0.7.0",
- org.eclipse.emf.ecore.xmi;bundle-version="2.5.0",
- org.eclipse.jface.text;bundle-version="3.5.0",
- org.eclipse.xpand;bundle-version="0.7.0",
- org.eclipse.xtend;bundle-version="0.7.0",
- org.eclipse.xtend.typesystem.emf;bundle-version="0.7.0",
- org.yakindu.sct.model.stext;bundle-version="1.0.0",
- org.yakindu.sct.generator.core;bundle-version="1.0.0",
- org.eclipse.jdt.launching;bundle-version="3.6.0",
- org.yakindu.sct.generator.genmodel;bundle-version="1.0.0",
- org.eclipse.xtext.xbase;bundle-version="2.0.0",
- org.yakindu.sct.model.resource;bundle-version="1.0.0",
- org.eclipse.xtend.lib,
- com.google.guava,
- org.eclipse.xtext.xbase.lib
+Require-Bundle: org.yakindu.sct.model.stext,
+ org.yakindu.sct.generator.core,
+ org.yakindu.sct.generator.genmodel,
+ org.yakindu.sct.model.resource
 Bundle-Vendor: statecharts.org
 Export-Package: org.yakindu.sct.generator.csharp,
  org.yakindu.sct.generator.csharp.features
