@@ -23,10 +23,70 @@
    </url>
 
    <requires>
-      <import feature="org.yakindu.base" version="2.6.1.qualifier"/>
       <import plugin="com.google.guava" version="12.0.0" match="greaterOrEqual"/>
       <import plugin="com.google.inject" version="3.0.0" match="compatible"/>
-      <import plugin="com.google.inject.multibindings" version="3.0.0" match="compatible"/>
+      <import feature="org.yakindu.base" version="2.6.1.qualifier"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ui.navigator"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.yakindu.base.xtext.utils.jface"/>
+      <import plugin="org.eclipse.platform"/>
+      <import plugin="org.eclipse.swt"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.xtext"/>
+      <import plugin="org.yakindu.base.types"/>
+      <import plugin="org.yakindu.base.xtext.utils.gmf"/>
+      <import plugin="org.eclipse.gmf.runtime.emf.core"/>
+      <import plugin="org.eclipse.xtext.ui"/>
+      <import plugin="org.yakindu.sct.simulation.core.sexec"/>
+      <import plugin="org.yakindu.sct.model.sexec"/>
+      <import plugin="org.yakindu.sct.simulation.core"/>
+      <import plugin="org.eclipse.xtext.ui.shared"/>
+      <import plugin="org.eclipse.gmf.runtime.notation"/>
+      <import plugin="org.yakindu.sct.generator.core"/>
+      <import plugin="org.eclipse.ui.views"/>
+      <import plugin="org.eclipse.ui.navigator.resources"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.gmf.runtime.emf.commands.core"/>
+      <import plugin="org.eclipse.gmf.runtime.emf.ui.properties"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.ui"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.ui.printing"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.ui.printing.render"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.ui.properties"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.ui.providers"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.ui.providers.ide"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.ui.render"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.ui.resources.editor"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide"/>
+      <import plugin="org.eclipse.draw2d"/>
+      <import plugin="org.eclipse.gmf.runtime.draw2d.ui"/>
+      <import plugin="org.yakindu.base.gmf.runtime"/>
+      <import plugin="org.eclipse.gmf.runtime.notation.providers"/>
+      <import plugin="org.eclipse.help"/>
+      <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.eclipse.xtext.builder"/>
+      <import plugin="org.eclipse.gmf.runtime.emf.type.ui"/>
+      <import plugin="org.eclipse.xtend.lib"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="org.yakindu.base.types.edit"/>
+      <import plugin="org.apache.commons.lang"/>
+      <import plugin="org.apache.log4j"/>
+      <import plugin="org.eclipse.xtext.util"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.antlr.runtime"/>
+      <import plugin="org.yakindu.base.expressions"/>
+      <import plugin="org.apache.commons.logging"/>
+      <import plugin="org.eclipse.xtext.xbase.lib"/>
+      <import plugin="org.yakindu.base.expressions.edit"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.yakindu.base.expressions.ui"/>
+      <import plugin="org.yakindu.sct.doc.user"/>
+      <import plugin="org.eclipse.core.expressions"/>
    </requires>
 
    <plugin
