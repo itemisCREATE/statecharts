@@ -23,87 +23,11 @@
    </url>
 
    <requires>
-      <import feature="org.yakindu.base" version="2.6.1.qualifier"/>
-      <import plugin="com.google.guava" version="12.0.0" match="greaterOrEqual"/>
       <import plugin="com.google.inject" version="3.0.0" match="compatible"/>
-      <import plugin="com.google.inject.multibindings" version="3.0.0" match="compatible"/>
+      <import plugin="com.google.guava" version="12.0.0" match="greaterOrEqual"/>
+      <import feature="org.yakindu.base" version="2.6.1.qualifier"/>
+      <import feature="org.yakindu.sct.editor" version="2.6.1.qualifier" match="compatible"/>
    </requires>
-
-   <plugin
-         id="org.yakindu.sct.compare"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.model.sgraph"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.model.sgraph.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.model.stext"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.model.stext.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.model.stext.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.ui.editor"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.simulation.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.simulation.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.doc.user"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.yakindu.sct.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="org.yakindu.sct.model.sexec"
@@ -114,69 +38,6 @@
 
    <plugin
          id="org.yakindu.sct.model.sexec.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.model.sgen"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.ui.navigator"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.model.sgraph.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.generator.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.generator.genmodel"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.generator.genmodel.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.model.sgen.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.commons"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.refactoring"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -197,44 +58,17 @@
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.sct.ui.intro"
+         id="org.yakindu.sct.simulation.core"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.sct.domain"
+         id="org.yakindu.sct.simulation.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.model.resource"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.domain.generic"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.examples"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.branding"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
 
 </feature>

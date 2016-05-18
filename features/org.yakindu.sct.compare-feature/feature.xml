@@ -35,9 +35,9 @@
       <import plugin="org.eclipse.emf.compare.rcp"/>
       <import plugin="org.eclipse.emf.compare.ide"/>
       <import plugin="org.eclipse.gmf.runtime.notation"/>
-      <import plugin="org.yakindu.sct.model.sgraph"/>
       <import plugin="org.eclipse.emf.compare.diagram"/>
       <import plugin="org.eclipse.emf.compare.edit"/>
+      <import feature="org.yakindu.sct.editor"/>
    </requires>
 
    <plugin
