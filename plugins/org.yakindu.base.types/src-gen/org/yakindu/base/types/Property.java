@@ -19,7 +19,6 @@ package org.yakindu.base.types;
  *   <li>{@link org.yakindu.base.types.Property#isConst <em>Const</em>}</li>
  *   <li>{@link org.yakindu.base.types.Property#isReadonly <em>Readonly</em>}</li>
  *   <li>{@link org.yakindu.base.types.Property#isExternal <em>External</em>}</li>
- *   <li>{@link org.yakindu.base.types.Property#getId <em>Id</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getProperty()
@@ -105,19 +104,4 @@ public interface Property extends Declaration {
 	 * @generated
 	 */
 	void setExternal(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see org.yakindu.base.types.TypesPackage#getProperty_Id()
-	 * @model id="true" transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
-	String getId();
 } // Property

@@ -27,7 +27,6 @@ import org.yakindu.base.types.TypesPackage;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.OperationImpl#getParameters <em>Parameters</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.OperationImpl#getId <em>Id</em>}</li>
  * </ul>
  *
  * @generated
@@ -42,16 +41,6 @@ public class OperationImpl extends DeclarationImpl implements Operation {
 	 * @ordered
 	 */
 	protected EList<Parameter> parameters;
-
-	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,25 +71,6 @@ public class OperationImpl extends DeclarationImpl implements Operation {
 			parameters = new EObjectContainmentWithInverseEList<Parameter>(Parameter.class, this, TypesPackage.OPERATION__PARAMETERS, TypesPackage.PARAMETER__OWNING_OPERATION);
 		}
 		return parameters;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getId() {
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append(getName());
-		sb.append("_");
-		sb.append(getType().getName());
-		for (Parameter p : getParameters()) {
-			sb.append("_");
-			sb.append(p.getType().getName());
-		}
-		
-		return sb.toString();
 	}
 
 	/**
@@ -142,8 +112,6 @@ public class OperationImpl extends DeclarationImpl implements Operation {
 		switch (featureID) {
 			case TypesPackage.OPERATION__PARAMETERS:
 				return getParameters();
-			case TypesPackage.OPERATION__ID:
-				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -190,8 +158,6 @@ public class OperationImpl extends DeclarationImpl implements Operation {
 		switch (featureID) {
 			case TypesPackage.OPERATION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
-			case TypesPackage.OPERATION__ID:
-				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
 		return super.eIsSet(featureID);
 	}

@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesPackage;
@@ -318,5 +319,20 @@ public class LocalReactionImpl extends ReactionImpl implements LocalReaction {
 		result.append(')');
 		return result.toString();
 	}
-
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getId() {
+		if (eContainer() instanceof PackageMember) {
+			return ((PackageMember)eContainer()).getId() + "." + getName();
+		}
+		if (eContainer() instanceof Package) {
+			return ((Package)eContainer()).getName() + "." + getName();
+		}
+		return getName();
+	}
+	
 } //LocalReactionImpl

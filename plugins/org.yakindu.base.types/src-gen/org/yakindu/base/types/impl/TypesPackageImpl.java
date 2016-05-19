@@ -331,15 +331,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getOperation_Id() {
-		return (EAttribute)operationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -372,15 +363,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EAttribute getProperty_External() {
 		return (EAttribute)propertyEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getProperty_Id() {
-		return (EAttribute)propertyEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -478,15 +460,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPrimitiveType_Id() {
-		return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getComplexType() {
 		return complexTypeEClass;
 	}
@@ -507,15 +480,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EReference getComplexType_SuperTypes() {
 		return (EReference)complexTypeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getComplexType_Id() {
-		return (EAttribute)complexTypeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -608,6 +572,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPackageMember_Id() {
+		return (EAttribute)packageMemberEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRangeConstraint() {
 		return rangeConstraintEClass;
 	}
@@ -662,15 +635,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTypeAlias_Id() {
-		return (EAttribute)typeAliasEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getDirection() {
 		return directionEEnum;
 	}
@@ -715,13 +679,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		operationEClass = createEClass(OPERATION);
 		createEReference(operationEClass, OPERATION__PARAMETERS);
-		createEAttribute(operationEClass, OPERATION__ID);
 
 		propertyEClass = createEClass(PROPERTY);
 		createEAttribute(propertyEClass, PROPERTY__CONST);
 		createEAttribute(propertyEClass, PROPERTY__READONLY);
 		createEAttribute(propertyEClass, PROPERTY__EXTERNAL);
-		createEAttribute(propertyEClass, PROPERTY__ID);
 
 		parameterEClass = createEClass(PARAMETER);
 		createEReference(parameterEClass, PARAMETER__OWNING_OPERATION);
@@ -738,12 +700,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
 		createEReference(primitiveTypeEClass, PRIMITIVE_TYPE__BASE_TYPE);
-		createEAttribute(primitiveTypeEClass, PRIMITIVE_TYPE__ID);
 
 		complexTypeEClass = createEClass(COMPLEX_TYPE);
 		createEReference(complexTypeEClass, COMPLEX_TYPE__FEATURES);
 		createEReference(complexTypeEClass, COMPLEX_TYPE__SUPER_TYPES);
-		createEAttribute(complexTypeEClass, COMPLEX_TYPE__ID);
 
 		enumeratorEClass = createEClass(ENUMERATOR);
 		createEReference(enumeratorEClass, ENUMERATOR__OWNING_ENUMERATION);
@@ -759,6 +719,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__PARAMETER);
 
 		packageMemberEClass = createEClass(PACKAGE_MEMBER);
+		createEAttribute(packageMemberEClass, PACKAGE_MEMBER__ID);
 
 		rangeConstraintEClass = createEClass(RANGE_CONSTRAINT);
 		createEAttribute(rangeConstraintEClass, RANGE_CONSTRAINT__LOWER_BOUND);
@@ -768,7 +729,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEAttribute(domainEClass, DOMAIN__DOMAIN_ID);
 
 		typeAliasEClass = createEClass(TYPE_ALIAS);
-		createEAttribute(typeAliasEClass, TYPE_ALIAS__ID);
 
 		// Create enums
 		directionEEnum = createEEnum(DIRECTION);
@@ -842,13 +802,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperation_Parameters(), this.getParameter(), this.getParameter_OwningOperation(), "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getOperation_Id(), ecorePackage.getEString(), "id", null, 0, 1, Operation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProperty_Const(), ecorePackage.getEBoolean(), "const", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProperty_Readonly(), ecorePackage.getEBoolean(), "readonly", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProperty_External(), ecorePackage.getEBoolean(), "external", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProperty_Id(), ecorePackage.getEString(), "id", null, 0, 1, Property.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParameter_OwningOperation(), this.getOperation(), this.getOperation_Parameters(), "owningOperation", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -865,12 +823,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPrimitiveType_BaseType(), this.getPrimitiveType(), null, "baseType", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPrimitiveType_Id(), ecorePackage.getEString(), "id", null, 0, 1, PrimitiveType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(complexTypeEClass, ComplexType.class, "ComplexType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComplexType_Features(), this.getDeclaration(), null, "features", null, 0, -1, ComplexType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComplexType_SuperTypes(), this.getComplexType(), null, "superTypes", null, 0, -1, ComplexType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getComplexType_Id(), ecorePackage.getEString(), "id", null, 0, 1, ComplexType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		addEOperation(complexTypeEClass, this.getDeclaration(), "getAllFeatures", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -888,6 +844,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getParameterizedType_Parameter(), this.getTypeParameter(), null, "parameter", null, 0, -1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(packageMemberEClass, PackageMember.class, "PackageMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPackageMember_Id(), ecorePackage.getEString(), "id", null, 0, 1, PackageMember.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(rangeConstraintEClass, RangeConstraint.class, "RangeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRangeConstraint_LowerBound(), ecorePackage.getELong(), "lowerBound", null, 0, 1, RangeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -897,7 +854,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEAttribute(getDomain_DomainID(), ecorePackage.getEString(), "domainID", null, 0, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeAliasEClass, TypeAlias.class, "TypeAlias", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTypeAlias_Id(), ecorePackage.getEString(), "id", null, 0, 1, TypeAlias.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(directionEEnum, Direction.class, "Direction");

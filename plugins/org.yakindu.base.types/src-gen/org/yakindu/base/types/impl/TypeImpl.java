@@ -272,5 +272,5 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 	public String toString() {
 		return name;
 	}
-
+	
 } //TypeImpl
