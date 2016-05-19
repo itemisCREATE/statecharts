@@ -32,10 +32,10 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isVisible <em>Visible</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getId <em>Id</em>}</li>
  * </ul>
  *
  * @generated
@@ -77,16 +77,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference list.
@@ -134,6 +124,16 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 * @ordered
 	 */
 	protected boolean visible = VISIBLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -307,14 +307,14 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return getTypeArguments();
 			case TypesPackage.TYPE_ALIAS__NAME:
 				return getName();
-			case TypesPackage.TYPE_ALIAS__ID:
-				return getId();
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
 				return getConstraint();
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
 				return isAbstract();
 			case TypesPackage.TYPE_ALIAS__VISIBLE:
 				return isVisible();
+			case TypesPackage.TYPE_ALIAS__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -393,14 +393,14 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return typeArguments != null && !typeArguments.isEmpty();
 			case TypesPackage.TYPE_ALIAS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case TypesPackage.TYPE_ALIAS__ID:
-				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
 				return constraint != null && !constraint.isEmpty();
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case TypesPackage.TYPE_ALIAS__VISIBLE:
 				return visible != VISIBLE_EDEFAULT;
+			case TypesPackage.TYPE_ALIAS__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
 		return super.eIsSet(featureID);
 	}
@@ -419,7 +419,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 		}
 		if (baseClass == PackageMember.class) {
 			switch (derivedFeatureID) {
-				case TypesPackage.TYPE_ALIAS__ID: return TypesPackage.PACKAGE_MEMBER__ID;
 				default: return -1;
 			}
 		}
@@ -428,6 +427,7 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				case TypesPackage.TYPE_ALIAS__CONSTRAINT: return TypesPackage.TYPE__CONSTRAINT;
 				case TypesPackage.TYPE_ALIAS__ABSTRACT: return TypesPackage.TYPE__ABSTRACT;
 				case TypesPackage.TYPE_ALIAS__VISIBLE: return TypesPackage.TYPE__VISIBLE;
+				case TypesPackage.TYPE_ALIAS__ID: return TypesPackage.TYPE__ID;
 				default: return -1;
 			}
 		}
@@ -448,7 +448,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 		}
 		if (baseClass == PackageMember.class) {
 			switch (baseFeatureID) {
-				case TypesPackage.PACKAGE_MEMBER__ID: return TypesPackage.TYPE_ALIAS__ID;
 				default: return -1;
 			}
 		}
@@ -457,6 +456,7 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				case TypesPackage.TYPE__CONSTRAINT: return TypesPackage.TYPE_ALIAS__CONSTRAINT;
 				case TypesPackage.TYPE__ABSTRACT: return TypesPackage.TYPE_ALIAS__ABSTRACT;
 				case TypesPackage.TYPE__VISIBLE: return TypesPackage.TYPE_ALIAS__VISIBLE;
+				case TypesPackage.TYPE__ID: return TypesPackage.TYPE_ALIAS__ID;
 				default: return -1;
 			}
 		}
@@ -480,11 +480,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 */
 	@Override
 	public String getId() {
-		if (eContainer() instanceof PackageMember) {
-			return ((PackageMember)eContainer()).getId() + "." + getName();
-		}
-		if (eContainer() instanceof Package) {
-			return ((Package)eContainer()).getName() + "." + getName();
+		if (eContainer() instanceof Type) {
+			return ((Type)eContainer()).getId() + "." + getName();
 		}
 		return getName();
 	}

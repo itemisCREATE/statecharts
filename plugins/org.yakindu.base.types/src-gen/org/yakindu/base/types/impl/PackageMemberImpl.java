@@ -11,26 +11,10 @@ import org.yakindu.base.types.TypesPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Package Member</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link org.yakindu.base.types.impl.PackageMemberImpl#getId <em>Id</em>}</li>
- * </ul>
  *
  * @generated
  */
 public class PackageMemberImpl extends NamedElementImpl implements PackageMember {
-	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String ID_EDEFAULT = null;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -48,49 +32,6 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 	@Override
 	protected EClass eStaticClass() {
 		return TypesPackage.Literals.PACKAGE_MEMBER;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getId() {
-		if (eContainer() instanceof PackageMember) {
-			return ((PackageMember)eContainer()).getId() + "." + getName();
-		}
-		if (eContainer() instanceof Package) {
-			return ((Package)eContainer()).getName() + "." + getName();
-		}
-		return getName();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case TypesPackage.PACKAGE_MEMBER__ID:
-				return getId();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case TypesPackage.PACKAGE_MEMBER__ID:
-				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
-		}
-		return super.eIsSet(featureID);
 	}
 
 } //PackageMemberImpl

@@ -31,6 +31,7 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#isVisible <em>Visible</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getId <em>Id</em>}</li>
  * </ul>
  *
  * @generated
@@ -85,6 +86,16 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 	 * @ordered
 	 */
 	protected boolean visible = VISIBLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,6 +171,20 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public String getId() {
+		if (eContainer() instanceof Type) {
+			return ((Type)eContainer()).getId() + "." + getName();
+		}
+		return getName();
+	}
+
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
@@ -197,6 +222,8 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 				return isAbstract();
 			case TypesPackage.TYPE__VISIBLE:
 				return isVisible();
+			case TypesPackage.TYPE__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -259,6 +286,8 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case TypesPackage.TYPE__VISIBLE:
 				return visible != VISIBLE_EDEFAULT;
+			case TypesPackage.TYPE__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
 		return super.eIsSet(featureID);
 	}
