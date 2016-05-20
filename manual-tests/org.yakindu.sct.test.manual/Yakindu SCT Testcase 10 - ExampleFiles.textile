@@ -1,0 +1,5 @@
+h1(#Test2). Yakindu SCT Testcase 09 - Templateproposals
+
+|_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
+| 10.1 | Create Example File | Select *File → New → Example…*.<p>Select *YAKINDU SCT Example → Statechart Examples*.</p><p>Click *Next*.</p><p>Select traffic_light.</p><p>Click *Finish*.</p> | The Trafficlight example is created into the workspace  | %{color:red}open% |
+
