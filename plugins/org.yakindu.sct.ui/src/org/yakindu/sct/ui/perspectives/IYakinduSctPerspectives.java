@@ -20,8 +20,6 @@ import org.yakindu.sct.ui.UIPluginActivator;
  */
 public interface IYakinduSctPerspectives {
 
-	public final static String ID_PERSPECTIVE_SCT_MODELING = UIPluginActivator.PLUGIN_ID
-			+ "." + "ModelingPerspective";
-	public final static String ID_PERSPECTIVE_SCT_SIMULATION = UIPluginActivator.PLUGIN_ID
-			+ "." + "SimulationPerspective";
+	public final static String ID_PERSPECTIVE_SCT_MODELING = "org.yakindu.sct.ui.ModelingPerspective";
+	public final static String ID_PERSPECTIVE_SCT_SIMULATION = "org.yakindu.sct.ui.SimulationPerspective";
 }
