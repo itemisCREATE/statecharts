@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.yakindu.sct"
-      label="YAKINDU Statechart Tools"
+      id="org.yakindu.sct.simulation"
+      label="YAKINDU Statechart Tools Simulation"
       version="2.6.1.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.branding">
@@ -22,32 +22,55 @@
       <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.org/sct/mars/releases"/>
    </url>
 
-   <includes
-         id="org.yakindu.sct.compare"
-         version="0.0.0"/>
-
-   <includes
-         id="org.yakindu.sct.documentation"
-         version="0.0.0"/>
-
-   <includes
-         id="org.yakindu.sct.editor"
-         version="0.0.0"/>
-
-   <includes
-         id="org.yakindu.sct.generator.model"
-         version="0.0.0"/>
-
-   <includes
-         id="org.yakindu.sct.simulation"
-         version="0.0.0"/>
-
    <requires>
-      <import feature="org.yakindu.base" version="2.6.1.qualifier"/>
-      <import plugin="com.google.guava" version="12.0.0" match="greaterOrEqual"/>
       <import plugin="com.google.inject" version="3.0.0" match="compatible"/>
+      <import plugin="com.google.guava" version="12.0.0" match="greaterOrEqual"/>
       <import plugin="com.google.inject.multibindings" version="3.0.0" match="compatible"/>
+      <import feature="org.yakindu.base" version="2.6.1.qualifier"/>
+      <import feature="org.yakindu.sct.editor" version="0.0.0.qualifier"/>
    </requires>
+
+   <plugin
+         id="org.yakindu.sct.model.sexec"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.model.sexec.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.simulation.core.sexec"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.simulation.ui.sexec"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.simulation.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.simulation.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="org.yakindu.sct.commons"
@@ -55,25 +78,5 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.ui.intro"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.model.resource"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.branding"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
 
 </feature>
