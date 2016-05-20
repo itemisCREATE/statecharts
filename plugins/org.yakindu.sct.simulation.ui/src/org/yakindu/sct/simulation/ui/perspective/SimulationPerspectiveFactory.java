@@ -8,11 +8,12 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.perspectives;
+package org.yakindu.sct.simulation.ui.perspective;
 
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
+import org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives;
 
 /**
  * 

@@ -62,7 +62,6 @@ import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.factories.FactoryUtils;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
-import org.yakindu.sct.ui.perspectives.PerspectiveUtil;
 import org.yakindu.sct.ui.wizards.ModelCreationWizardPage;
 
 /**

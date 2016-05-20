@@ -10,8 +10,6 @@
 */
 package org.yakindu.sct.ui.perspectives;
 
-import org.yakindu.sct.ui.UIPluginActivator;
-
 /**
  * Ids for the YAKINDU statechart editor perspectives.
  * <p>
@@ -19,9 +17,6 @@ import org.yakindu.sct.ui.UIPluginActivator;
  * or extended.
  */
 public interface IYakinduSctPerspectives {
-
-	public final static String ID_PERSPECTIVE_SCT_MODELING = UIPluginActivator.PLUGIN_ID
-			+ "." + "ModelingPerspective";
-	public final static String ID_PERSPECTIVE_SCT_SIMULATION = UIPluginActivator.PLUGIN_ID
-			+ "." + "SimulationPerspective";
+	public final static String ID_PERSPECTIVE_SCT_MODELING = "org.yakindu.sct.ui.ModelingPerspective";
+	public final static String ID_PERSPECTIVE_SCT_SIMULATION = "org.yakindu.sct.ui.SimulationPerspective";
 }
