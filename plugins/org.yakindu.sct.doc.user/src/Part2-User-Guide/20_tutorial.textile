@@ -1,4 +1,48 @@
-h1(#comprehensive-tutorial). Comprehensive tutorial
+h1(#oss_five-minutes-tutorial). Five-minutes tutorial
+
+The five-minutes tutorial gives you a brief introduction into YAKINDU Statechart Tools by a simple example. It models a light switch, which has the states _on_ and _off_. Operating the switch repeatedly turns the light on, off, back on again, and so forth. You can simulate this behavior in a dynamic statechart model. Here's how this looks like:
+
+!(standard-image full)images/light_switch_330_statechart_simulator_state_on.png(Interactive light switch statechart simulation)!
+
+p=. Interactive light switch statechart simulation
+
+In the simulation screenshot above, the light switch is currently in the _on_ state. To toggle the light switch, the user clicks on _operate_ on the right-hand side of the window.
+
+h2(#oss_importing-light-switch-example). Importing light switch example
+
+Now try this for yourself. We are assuming that you have already installed and started YAKINDU Statechart Tools. If you don't, please see the "Installation Guide":../Part1-Installation-Guide/00_installation.html for details.
+
+# If the "Welcome" page is still open, close it. <p>!(standard-image small)images/5min_010_close_welcome.png(Closing the "Welcome" page)!</p>
+# In the main menu, select _File → New → Example…_.
+# In the dialog, select _YAKINDU SCT Examples → Light Switch Example_, then click _Next >_.
+# In the next dialog, click _Finish_. The sample project named _light_switch_ is created.
+# In the project explorer on the left-hand side of the window, open the _light_switch_ project by clicking on the small triangle left from the project name ("light_switch"). <p>!(standard-image small)images/5min_020_expand_project.png(Expand project)!</p>
+# The light switch statechart is defined in _LightSwitch.sct_. Double click on this file to open the model.
+
+h2(#oss_running-the-light-switch-simulation). Simulating the light switch
+
+# Right-click on _LightSwitch.sct_ and select _Run As → Statechart Simulation_ in the context menu.
+# The statechart simulation starts and shows the light switch model in its _off_ state. The rectangle named *Off* is highlighted in red, meaning it is the active state. <p>!(standard-image)images/light_switch_320_statechart_simulator_state_events.png(Light switch simulation in "off" state)!</p>
+# At the right-bottom side of the window, the simulation view is located. In this view, you can change variable values and raise events during a simulation run. Click on the small triangle left from _internal_
+ to unfold the _operate_ link. This link represents the _operate_ event to switch the light on or off.
+# Click on the _operate_ link. The active state changes accordingly from *Off* to *On*. <p>!(standard-image)images/light_switch_330_statechart_simulator_state_on.png(Light switch simulation in "on" state)!</p>
+# Click on _operate_ again to switch off the light.
+
+h2(standard #oss_generating-statechart-code). Generating statechart code
+
+You have developed and tested your statechart model, and now you need it as a C, C++, or Java implementation? YAKINDU Statechart Tools can create it for you.
+
+As an example, we will take the light switch statechart and generate Java source code from it. Please proceed as follows:
+
+# In the project explorer, right-click on _LightSwitch.sct_ and select _New → Code Generator Model_ in the context menu. <p>!(standard-image)images/5min_110_new_code_generator_model.png(Creating a new code generator model)!</p>
+# In the dialog, replace @default.sgen@ by @light_switch.sgen@, then click _Next >_.
+# In the next dialog, check the checkbox left from _LightSwitch.sct_, then click _Finish_.
+# Java classes implementing the statechart model are generated. You can find the generated source code in the folders _src_ and _src-gen_ within the _light_switch_ project. <p>!(standard-image)images/5min_140_generated_java_source_code.png(Generated Java source code)!</p>
+
+That's it. If you want to know more, take the time and work through the "Comprehensive Tutorial":#oss_comprehensive-tutorial.
+
+
+h1(#oss_comprehensive-tutorial). Comprehensive tutorial
 
 This tutorial introduces YAKINDU Statechart Tools (SCT) which provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of state machines or statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation for C, C&#43;&#43;, or Java.
 
@@ -51,9 +95,9 @@ Select _General → Project_ and click _Next &gt;_.
 
 The wizard shows its next page:
 
-!(standard-image)images/light_switch_040_wizard_new_project.png("Specifying project name and location")!
+!(standard-image)images/light_switch_040_wizard_new_project.png(Specifying project name and location)!
 
-p=. "Specifying project name and location"
+p=. Specifying project name and location
 
 Specify a meaningful _Project name_, e. g. *LightSwitch*, and optionally select a _Location_ to create the project in.
 
