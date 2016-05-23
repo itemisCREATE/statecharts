@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.stext.stext.*;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
@@ -277,6 +278,10 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 				return createTypedElementAdapter();
 			}
 			@Override
+			public Adapter casePackageMember(PackageMember object) {
+				return createPackageMemberAdapter();
+			}
+			@Override
 			public Adapter caseDeclaration(Declaration object) {
 				return createDeclarationAdapter();
 			}
@@ -287,10 +292,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseProperty(Property object) {
 				return createPropertyAdapter();
-			}
-			@Override
-			public Adapter casePackageMember(PackageMember object) {
-				return createPackageMemberAdapter();
 			}
 			@Override
 			public Adapter caseOperation(Operation object) {

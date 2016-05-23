@@ -1335,6 +1335,24 @@ public interface SexecPackage extends EPackage {
 	int TIME_EVENT__NAME = TypesPackage.EVENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_EVENT__ID = TypesPackage.EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Direction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_EVENT__DIRECTION = TypesPackage.EVENT__DIRECTION;
+
+	/**
 	 * The feature id for the '<em><b>Periodic</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

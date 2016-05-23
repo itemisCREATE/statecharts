@@ -35,6 +35,7 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getId <em>Id</em>}</li>
  * </ul>
  *
  * @generated
@@ -79,6 +80,16 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -173,6 +184,15 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getId() {
+		return getName();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -185,6 +205,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return getTypeArguments();
 			case TypesPackage.DECLARATION__NAME:
 				return getName();
+			case TypesPackage.DECLARATION__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -247,6 +269,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return typeArguments != null && !typeArguments.isEmpty();
 			case TypesPackage.DECLARATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case TypesPackage.DECLARATION__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
 		return super.eIsSet(featureID);
 	}
@@ -266,6 +290,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		if (baseClass == PackageMember.class) {
 			switch (derivedFeatureID) {
+				case TypesPackage.DECLARATION__ID: return TypesPackage.PACKAGE_MEMBER__ID;
 				default: return -1;
 			}
 		}
@@ -287,6 +312,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		if (baseClass == PackageMember.class) {
 			switch (baseFeatureID) {
+				case TypesPackage.PACKAGE_MEMBER__ID: return TypesPackage.DECLARATION__ID;
 				default: return -1;
 			}
 		}

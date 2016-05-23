@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesPackage;
@@ -26,12 +27,13 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl#getId <em>Id</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -75,6 +77,16 @@ public class LocalReactionImpl extends ReactionImpl implements LocalReaction {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -181,6 +193,8 @@ public class LocalReactionImpl extends ReactionImpl implements LocalReaction {
 				return getTypeArguments();
 			case StextPackage.LOCAL_REACTION__NAME:
 				return getName();
+			case StextPackage.LOCAL_REACTION__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -243,6 +257,8 @@ public class LocalReactionImpl extends ReactionImpl implements LocalReaction {
 				return typeArguments != null && !typeArguments.isEmpty();
 			case StextPackage.LOCAL_REACTION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case StextPackage.LOCAL_REACTION__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
 		return super.eIsSet(featureID);
 	}
@@ -264,6 +280,12 @@ public class LocalReactionImpl extends ReactionImpl implements LocalReaction {
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
 				case StextPackage.LOCAL_REACTION__NAME: return BasePackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == PackageMember.class) {
+			switch (derivedFeatureID) {
+				case StextPackage.LOCAL_REACTION__ID: return TypesPackage.PACKAGE_MEMBER__ID;
 				default: return -1;
 			}
 		}
@@ -295,6 +317,12 @@ public class LocalReactionImpl extends ReactionImpl implements LocalReaction {
 				default: return -1;
 			}
 		}
+		if (baseClass == PackageMember.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.PACKAGE_MEMBER__ID: return StextPackage.LOCAL_REACTION__ID;
+				default: return -1;
+			}
+		}
 		if (baseClass == Declaration.class) {
 			switch (baseFeatureID) {
 				default: return -1;
@@ -317,6 +345,11 @@ public class LocalReactionImpl extends ReactionImpl implements LocalReaction {
 		result.append(name);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public String getId() {
+		return getName();
 	}
 	
 } //LocalReactionImpl

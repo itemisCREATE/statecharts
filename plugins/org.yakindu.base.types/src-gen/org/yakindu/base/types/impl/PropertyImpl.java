@@ -24,7 +24,6 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.PropertyImpl#isConst <em>Const</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.PropertyImpl#isReadonly <em>Readonly</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.PropertyImpl#isExternal <em>External</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.PropertyImpl#getId <em>Id</em>}</li>
  * </ul>
  *
  * @generated
@@ -84,16 +83,6 @@ public class PropertyImpl extends DeclarationImpl implements Property {
 	 * @ordered
 	 */
 	protected boolean external = EXTERNAL_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -205,8 +194,6 @@ public class PropertyImpl extends DeclarationImpl implements Property {
 				return isReadonly();
 			case TypesPackage.PROPERTY__EXTERNAL:
 				return isExternal();
-			case TypesPackage.PROPERTY__ID:
-				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -267,8 +254,6 @@ public class PropertyImpl extends DeclarationImpl implements Property {
 				return readonly != READONLY_EDEFAULT;
 			case TypesPackage.PROPERTY__EXTERNAL:
 				return external != EXTERNAL_EDEFAULT;
-			case TypesPackage.PROPERTY__ID:
-				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
 		return super.eIsSet(featureID);
 	}

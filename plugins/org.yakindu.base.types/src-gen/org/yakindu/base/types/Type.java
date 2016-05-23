@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.yakindu.base.types.Type#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.Type#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.base.types.Type#isVisible <em>Visible</em>}</li>
- *   <li>{@link org.yakindu.base.types.Type#getId <em>Id</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getType()
@@ -97,21 +96,6 @@ public interface Type extends PackageMember {
 	 * @generated
 	 */
 	void setVisible(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see org.yakindu.base.types.TypesPackage#getType_Id()
-	 * @model id="true" transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
-	String getId();
 
 	/**
 	 * <!-- begin-user-doc -->
