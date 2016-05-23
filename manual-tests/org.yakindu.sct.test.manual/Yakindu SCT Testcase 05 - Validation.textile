@@ -1,0 +1,14 @@
+h1(#Test2). Yakindu SCT Testcase 05 - Validation
+
+
+|_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
+| 5.1 | Expression error check | Open statechart ExpressionError01.sct | There is four error markers with the following error message:<p>"entry, exit, events are allowed as local reactions only."</p> | %{color:red}open% |
+| 5.2 | Expression error check | Open statechart ExpressionError03.sct | There is one error marker at the specification section with the following error message:<p>"In/Out declarations are not allowed in internal scope."</p> | %{color:red}open% |
+| 5.3 | Expression error check | Open statechart ExpressionError04.sct | There is one error marker at the specification section with the following error message:<p>"Local declarations are not allowed in interface scope."</p> | %{color:red}open% |
+| 5.4 | Expression error check | Open statechart ExpressionError05.sct | There is one error marker at the specification section with the following error message:<p>"Only one default/unnamed interface is allowed."</p> | %{color:red}open% |
+| 5.5 | Statechart error check | Open statechart StatechartError01.sct | There is one error marker at the state with the following error message:<p>"A state must have a name."</p> | %{color:red}open% |
+| 5.6 | Statechart error check | Open statechart StatechartError02.sct | There is one error marker on the transition with the following error message:<p>"Outgoing Transitions from Entries can not have a Trigger or Guard."</p> | %{color:red}open% |
+| 5.7 | Statechart error check | Open statechart StatechartError03.sct | There is one error marker on each of the states with the following error message:<p>"Duplicate SpecificationElement 'A' in Region 'main region'"</p> | %{color:red}open% |
+| 5.8 | Statechart error check | Open statechart StatechartError04.sct | There is one error marker on state 'B' with the following error message:<p>"Node is not reachable."</p> | %{color:red}open% |
+| 5.9 | Statechart error check | Open statechart StatechartError05.sct | There is one error marker on the entry node with the following error message:<p>"Entries must not have more than one outgoing transition."</p> | %{color:red}open% |
+| 5.10 | Statechart error check | Open statechart StatechartError06.sct | There is one error marker on the choice with the following error message:<p>"A choice must have at least one outgoing transition."</p><p>There is a warning maker on the choice with the following warning message:</p><p>“Missing trigger. Transition is never taken. Use 'oncycle' or 'always' instead."</p> | %{color:red}open% |
