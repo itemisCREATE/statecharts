@@ -16,9 +16,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.c.GenmodelEntries
-import org.eclipse.core.resources.ResourcesPlugin
-import org.eclipse.core.runtime.Path
-import org.yakindu.sct.generator.core.filesystem.EFSResourceFileSystemAccess
+import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
 
 class Types {
 	
@@ -26,7 +24,7 @@ class Types {
 	@Inject extension GenmodelEntries
 	 
 	def generateTypesHpp(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-			fsa.generateFile(flow.typesModule.h, flow.typesHContent(entry))	
+			fsa.generateFile(flow.typesModule.h,IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT, flow.typesHContent(entry))	
 	}
 	
 	def typesHContent(ExecutionFlow it, GeneratorEntry entry) '''
