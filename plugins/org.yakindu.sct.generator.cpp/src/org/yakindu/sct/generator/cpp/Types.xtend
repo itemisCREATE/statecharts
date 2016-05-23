@@ -17,16 +17,25 @@ import com.google.inject.Inject
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.c.GenmodelEntries
 import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
+import org.yakindu.sct.generator.core.library.IOutletFeatureHelper
 
 class Types {
-	
+
 	@Inject extension Naming
 	@Inject extension GenmodelEntries
-	 
+
+	@Inject
+	protected IOutletFeatureHelper outletFeatureHelper;
+
 	def generateTypesHpp(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-			fsa.generateFile(flow.typesModule.h,IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT, flow.typesHContent(entry))	
+		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null)
+			fsa.generateFile(flow.typesModule.h, IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT,
+				flow.typesHContent(entry))
+		else
+			fsa.generateFile(flow.typesModule.h, flow.typesHContent(entry))
+
 	}
-	
+
 	def typesHContent(ExecutionFlow it, GeneratorEntry entry) '''
 		«entry.licenseText»
 		
