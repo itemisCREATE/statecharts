@@ -21,7 +21,7 @@ Make use of the Eclipse _Tasks_ view and related infrastructure.
 
 #### Feature : Visualisation
 * The task description should contain the comment line starting with _TODO_ or _FIXME_ tags.
-* The tysk type must be _SC Task_ or _Statechart Task_.
+* The task type must be _SC Task_ or _Statechart Task_.
 
 #### Feature : Navigation
 The _Tasks_ view allows navigation to the task location by double clicking. In the case os a stratechart the diagram must be opened 
