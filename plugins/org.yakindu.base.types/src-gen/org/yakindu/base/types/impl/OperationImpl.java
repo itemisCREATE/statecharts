@@ -77,20 +77,6 @@ public class OperationImpl extends DeclarationImpl implements Operation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public String getId() {
-		if (eContainer() instanceof Type) {
-			return ((Type)eContainer()).getId() + "." + getName();
-		}
-		return getName();
-	}
-
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")

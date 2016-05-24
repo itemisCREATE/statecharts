@@ -159,19 +159,6 @@ public class TypeImpl extends PackageMemberImpl implements Type {
 			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE__VISIBLE, oldVisible, visible));
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public String getId() {
-		if (eContainer() instanceof Type) {
-			return ((Type)eContainer()).getId() + "." + getName();
-		}
-		return getName();
-	}
-
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

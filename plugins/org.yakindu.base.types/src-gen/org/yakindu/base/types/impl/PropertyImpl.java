@@ -169,20 +169,6 @@ public class PropertyImpl extends DeclarationImpl implements Property {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public String getId() {
-		if (eContainer() instanceof Type) {
-			return ((Type)eContainer()).getId() + "." + getName();
-		}
-		return getName();
-	}
-
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
