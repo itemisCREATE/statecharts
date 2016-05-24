@@ -14,6 +14,8 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.GenmodelEntries
+import org.yakindu.sct.generator.core.library.IOutletFeatureHelper
+import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
 
 class TimerInterface {
 	
@@ -23,8 +25,15 @@ class TimerInterface {
 	@Inject
 	extension GenmodelEntries
 	
+	@Inject
+	protected IOutletFeatureHelper outletFeatureHelper;
+	
 	def generateITimerService(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		fsa.generateFile(timerInterface.h, flow.content(entry) )
+		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null)
+			fsa.generateFile(timerInterface.h, IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT,
+				flow.content(entry))
+		else
+			fsa.generateFile(timerInterface.h, flow.content(entry))
 	}
 	
 	def protected content(ExecutionFlow it, GeneratorEntry entry) {
