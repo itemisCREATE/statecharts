@@ -120,7 +120,7 @@ Unpacking will provide you with the _YAKINDU SCT_ application bundle.
 
 Move the unpacked application bundle to your _Applications_ folder. Alternatively, you can also move it somewhere else as you see fit. The screenshot below shows the _YAKINDU SCT_ application bundle having been moved to _Applications_.
 
-!(shadowless-standard-image)images/macosx_install_010_applications.png(The YAKINDU Statecharts Tools application in the "Applications" directory)!
+!(standard-image shadowless)images/macosx_install_010_applications.png(The YAKINDU Statecharts Tools application in the "Applications" directory)!
 
 p=. The YAKINDU Statecharts Tools application in the "Applications" directory
 
@@ -134,7 +134,7 @@ To do so, please double-click on the _YAKINDU_ symbol shown in the sample screen
 
 Upon the first start, Mac OS X will verify the application and show you the following security warning, indicating that you did not download the application from Apple's App Store, but from a potentially unsecure source instead:
 
-!(shadowless-standard-image)images/macosx_install_020_security_warning.png(Mac OS X warning)!
+!(standard-image shadowless)images/macosx_install_020_security_warning.png(Mac OS X warning)!
 
 p=. Mac OS X warning
 
@@ -142,7 +142,7 @@ Click _Open_ to continue starting the application. Subsequently starting YAKINDU
 
 While YAKINDU Statechart Tools is starting up, it is showing a splash screen:
 
-!(shadowless-standard-image)images/macosx_install_050_eclipse_splash.png(YAKINDU Statechart Tools starting up and showing a splash screen)!
+!(standard-image shadowless)images/macosx_install_050_eclipse_splash.png(YAKINDU Statechart Tools starting up and showing a splash screen)!
 
 p=. YAKINDU Statechart Tools starting up and showing a splash screen
 
@@ -150,7 +150,7 @@ The software needs a _workspace_ directory where it stores its so-called project
 
 In the example below, we chose the _/Users/joedoe/workspace_ directory as our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, YAKINDU Statechart Tools won't ask for a workspace directory again. Instead it will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the main menu.)
 
-!(shadowless-standard-image)images/macosx_install_060_eclipse_workspace_dialog.png(Selecting a workspace)!
+!(standard-image shadowless)images/macosx_install_060_eclipse_workspace_dialog.png(Selecting a workspace)!
 
 p=. Selecting a workspace
 
@@ -158,13 +158,13 @@ Click on the _OK_ button to proceed.
 
 On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
 
-!(shadowless-standard-image)images/macosx_install_070_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
+!(standard-image shadowless)images/macosx_install_070_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
 
 p=. YAKINDU Statechart Tools presenting the "Welcome" window
 
 You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
 
-!(shadowless-standard-image)images/macosx_install_080_eclipse_workbench.png(The YAKINDU Statechart Tools workbench)!
+!(standard-image shadowless)images/macosx_install_080_eclipse_workbench.png(The YAKINDU Statechart Tools workbench)!
 
 p=. The YAKINDU Statechart Tools workbench
 

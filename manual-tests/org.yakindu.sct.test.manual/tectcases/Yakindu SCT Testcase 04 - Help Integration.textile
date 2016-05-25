@@ -1,0 +1,7 @@
+h1(#Test2). Yakindu SCT Testcase 04 - Help Integration
+
+
+|_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
+| 4.1 | Open Help Documentation | Click on *Help→Help Contents.*<p>Open YAKINDU Statechart Tools.</p> | Top-level entry YAKINDU Statechart Tools is available.<p>Subordinate entries are shown.</p> | %{color:red}open% |
+| 4.2 | Welcome page | Click on *Help→Welcome.* | The YAKINDU Statechart Tools welcome page is shown. | %{color:red}open% |
+| 4.3 | Links on welcome page | Click on each link on the welcome page. | Check whether each link a) works and b) points to what the link text implies. | %{color:red}open% |

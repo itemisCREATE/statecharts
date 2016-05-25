@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.partitioning;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,6 +20,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -26,6 +28,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.diagram.core.DiagramEditingDomainFactory;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
+import org.eclipse.gmf.runtime.emf.core.resources.GMFResource;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
@@ -93,6 +96,36 @@ public class DiagramPartitioningUtil {
 			editingDomain = DiagramEditingDomainFactory.getInstance().createEditingDomain();
 			editingDomain.setID(DOMAIN_ID);
 			TransactionalEditingDomain.Registry.INSTANCE.add(DOMAIN_ID, editingDomain);
+
+			new WorkspaceSynchronizer(editingDomain, new WorkspaceSynchronizer.Delegate() {
+				public boolean handleResourceDeleted(Resource resource) {
+					resource.unload();
+					return true;
+				}
+				public boolean handleResourceMoved(Resource resource, URI newURI) {
+					resource.unload();
+					return true;
+				}
+				public boolean handleResourceChanged(Resource resource) {
+					if (resource instanceof GMFResource) {
+						// do not unload GMF resources as it might be the one
+						// underlying the currently opened editor
+						return true;
+					}
+					resource.unload();
+					try {
+						resource.load(resource.getResourceSet().getLoadOptions());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+					return true;
+				}
+
+				public void dispose() {
+					// nothing to dispose (especially as I am shared)
+				}
+			});
 		}
 		return editingDomain;
 	}

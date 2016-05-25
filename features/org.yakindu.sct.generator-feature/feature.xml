@@ -30,8 +30,19 @@
          id="org.yakindu.sct.generator.cpp"
          version="0.0.0"/>
 
+   <includes
+         id="org.yakindu.sct.generator.model"
+         version="0.0.0"/>
+
    <requires>
-      <import feature="org.yakindu.sct" version="2.6.1.qualifier"/>
+      <import feature="org.yakindu.sct.generator.model" version="2.6.1.qualifier"/>
    </requires>
+
+   <plugin
+         id="org.yakindu.sct.commons"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>

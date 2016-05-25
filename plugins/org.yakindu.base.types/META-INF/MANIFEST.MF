@@ -24,7 +24,6 @@ Require-Bundle: org.eclipse.core.runtime,
  com.google.inject,
  org.eclipse.xtend.lib,
  com.google.guava,
- org.eclipse.xtext.xbase.lib,
  org.eclipse.xtext.util
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j

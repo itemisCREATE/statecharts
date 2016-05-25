@@ -87,7 +87,7 @@ public class ContextPredicateProvider {
 			if (StextPackage.Literals.VARIABLE_DEFINITION.isSuperTypeOf(input.getEClass())) {
 				TypedElement definition = (TypedElement) input.getEObjectOrProxy();
 				EObject element = (EObject) definition.eGet(TypesPackage.Literals.TYPED_ELEMENT__TYPE, false);
-				return (!element.eIsProxy() && definition.getType() instanceof ComplexType);
+				return (element != null && !element.eIsProxy() && definition.getType() instanceof ComplexType);
 			}
 			return false;
 		}

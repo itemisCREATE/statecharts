@@ -25,7 +25,6 @@ Require-Bundle: org.yakindu.sct.generator.genmodel;visibility:=reexport,
  org.yakindu.base.types,
  org.eclipse.help,
  org.yakindu.base.xtext.utils.jface,
- org.eclipse.xtext.xbase.lib,
  org.yakindu.sct.ui,
  org.yakindu.sct.doc.user
 Import-Package: org.apache.commons.logging,

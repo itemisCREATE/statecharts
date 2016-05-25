@@ -10,13 +10,6 @@
             id="org.yakindu.sct.ui.ModelingPerspective"
             name="SC Modeling">
       </perspective>
-      <perspective
-            class="org.yakindu.sct.ui.perspectives.SimulationPerspectiveFactory"
-            fixed="false"
-            icon="icons/simulation_perspective.png"
-            id="org.yakindu.sct.ui.SimulationPerspective"
-            name="SC Simulation">
-      </perspective>
    </extension>
    <extension
          point="org.eclipse.ui.preferencePages">
@@ -30,15 +23,6 @@
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
             targetID="org.yakindu.sct.ui.ModelingPerspective">
-         <newWizardShortcut
-               id="org.yakindu.sct.ui.editor.StatechartDiagramWizard">
-         </newWizardShortcut>
-         <newWizardShortcut
-               id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard">
-         </newWizardShortcut>
-      </perspectiveExtension>
-      <perspectiveExtension
-            targetID="org.yakindu.sct.ui.SimulationPerspective">
          <newWizardShortcut
                id="org.yakindu.sct.ui.editor.StatechartDiagramWizard">
          </newWizardShortcut>

@@ -61,8 +61,8 @@ The canvas is the statechart editor's drawing area. When you create a new statec
 
 The following list gives an overview of what kind of actions you can perform on the canvas:
 * Add or remove a region
-** To add a region to the canvas, select _Region_ in the "editor palette":#editor-palette, then click at the canvas location you want to place the region.
-** To remove a region from the canvas, select the region, then press @[Del]@ or select _Edit → Delete_ from the menu bar.
+** To add a region to the canvas, select _Region_ in the "editor palette":#editor-palette, then click on the canvas location you want to place the region.
+** To remove a region from the canvas, select the region, then press the @[Del]@ key or select _Edit → Delete_ from the menu bar.
 * Zooming
 ** Press and hold @[Ctrl]@ and turn the mouse wheel to zoom in or out.
 ** Right-click on the canvas to open its context menu. In the context menu, several zooming functions are available in the _Zoom_ submenu.
@@ -71,7 +71,7 @@ h3(#editor-palette). Editor palette
 
 The editor palette provides you with a set of various actions and statechart editing tools. By default, the palette is located right of the canvas, but you can also drag it to the left.
 
-You can hide the palette by clicking the small triangle in the palette's title bar. Click the triangle again to make the palette reappear.
+You can hide the palette by clicking on the small triangle in the palette's title bar. Click on the triangle again to make the palette reappear.
 
 !(standard-image)images/editor-palette_010_overview.png(Editor palette)!
 
@@ -127,6 +127,8 @@ The messages are grouped by message type, typically error or warning. Click on t
 Double-clicking on an entry in the _Problems_ view takes you directly to the resource or model element causing the problem.
 
 You can configure the _Problems_ view in a multitude of ways, e.&nbsp;g. to group entries by different criteria, to sort them in a specific way, or to restrict them to certain projects. You can even define multiple _Problems_ views, each with different selection or display criteria.
+
+To start configuring the _Problems_ view, click on the small triangle pointing downwards in the _Problem_ view's title bar. A drop-down menu will open and show the options you have.
 
 To configure the view click the small triangle pointing downwards in the view's title bar. A drop-down menu opens and shows the options you have.
 
@@ -367,3 +369,35 @@ p. The _Quality (%)_ text field is active for JPEG images only. JPEG is a lossy 
 Check _Overwrite existing file without warning_ if you don't want to be bothered by a confirmation dialog which will appear if the export file already exists.
 
 Check _Export to HTML_ to create both the image file plus an HTML file including it.
+
+h2(#oss_working-with-statechart-tasks). Working with statechart tasks
+
+While you are busily developing a statechart, it is quite common that you have ideas about what else you could or should do to improve the statechart, but later, in order to not get side-tracked. Examples are to write a proper documentation for a state, to refine a transition whose final specification you don't have yet etc.
+
+For all these and other purposes you can define _tasks_ anywhere in your statechart where a comment is allowed. A task is a special comment comprising either @FIXME@ or @TODO@. Adding one of these words to a comment is called "tagging" the comment as a task.
+
+The nice thing is that you don't have to remember all the places you took a note and defined a task. YAKINDU Statechart Tools lists all of your tasks in the _Tasks_ view. Figure "&quot;Tasks defined by tags in the statechart showing up in the _Tasks_ view&quot;":oss_fig_tasks-defined-by-tags-in-the-statechart-showing-up-in-the-tasks-view is showing an example with various tasks being defined in a transition, in a state's behavior, in a state's documentation, and in the statecharts definition section.
+
+p(#oss_fig_tasks-defined-by-tags-in-the-statechart-showing-up-in-the-tasks-view). 
+
+!(standard-image)images/task_tags_010_task_view.png(Tasks defined by tags in the statechart showing up in the _Tasks_ view)!
+
+p=. Tasks defined by tags in the statechart showing up in the _Tasks_ view
+
+In the example, state *B* has been selected in the statechart editor (top), so that the tasks defined in the state's behavior and in its documentation are shown in the _Properties_ view (middle).
+
+Task have a priority. While @TODO@ stamps a task as being of normal priority, @FIXME@ indicates a high-priority task.
+
+By default, tasks are ordered by priority in the _Tasks_ view (bottom), and high-priority tasks are accentuated by a red exclamation mark. However, you can change the sorting order and other settings using the view menu. Click on the little triangle on the right-hand side of the _Task_ view's title to open the view menu.
+
+Double-clicking on a task in the _Tasks_ view navigates to the location where the task is defined. If needed, the corresponding statechart diagram is opened. The graphical element holding the task definition is highlighted.
+
+bq. *Note*
+
+The _Tasks_ view is updated only when the statechart is saved.
+
+###.. h3(#oss_defining-task-tags). Defining task tags
+
+# In the main menu, select _Window → Preferences_. The _Preferences_ Dialog opens.
+# In the _Preferences_ Dialog goto _Java → Compiler → Task Tags_ to edit your task tag preferences. A task tag has one of the priorities _High_, _Normal_, or _Low_.
+

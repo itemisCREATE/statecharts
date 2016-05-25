@@ -125,7 +125,8 @@ body {
 }
 
 img {
-    max-width: 60%;
+    max-width: 61.8%;
+    min-width: 38.2%;
     height: auto;
     text-align: center;
     display: block;
@@ -133,21 +134,40 @@ img {
     margin-right: auto;
 }
 
-.standard-image {
-    width:80.0%;
+img.standard-image {
     height:auto;
     box-shadow: 10px 10px 20px #888888;
+    margin-bottom: 20px;
 }
 
-.shadowless-standard-image {
-    width:80.0%;
-    height:auto;
+img.tiny {
+    width:14.6%;
+    min-width:14.6%;
 }
 
-.inlinemediaobject {
+img.small {
+    width:38.2%;
+}
+
+img.large {
+    width:61.8%;
+}
+
+img.full {
+    width:100%;
+    max-width:100%;
+}
+
+img.shadowless {
+    box-shadow: none;
+    margin-bottom: 0px;
+}
+
+img.inlinemediaobject {
     display: inline;
     height: 1.1em;
 }
+
 
 
 /* Tables */

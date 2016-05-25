@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
+import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
 
 /**
@@ -43,6 +44,11 @@ public class EnumeratorImpl extends DeclarationImpl implements Enumerator {
 	 */
 	protected EnumeratorImpl() {
 		super();
+	}
+	
+	@Override
+	public Type getType() {
+		return getOwningEnumeration();
 	}
 
 	/**

@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.domain.extension;
 
-import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
-
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
