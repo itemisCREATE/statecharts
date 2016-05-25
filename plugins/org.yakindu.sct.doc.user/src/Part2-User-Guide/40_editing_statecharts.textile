@@ -372,7 +372,7 @@ Check _Export to HTML_ to create both the image file plus an HTML file including
 
 h2(#oss_working-with-statechart-tasks). Working with statechart tasks
 
-While you are busily developing a statechart, it is quite common that you have ideas about what else you could or should do to improve the statechart, but later, in order to not get side-tracked. Examples are to write a proper documentation for a state, to refine a transition whos final specification you don't have yet etc.
+While you are busily developing a statechart, it is quite common that you have ideas about what else you could or should do to improve the statechart, but later, in order to not get side-tracked. Examples are to write a proper documentation for a state, to refine a transition whose final specification you don't have yet etc.
 
 For all these and other purposes you can define _tasks_ anywhere in your statechart where a comment is allowed. A task is a special comment comprising either @FIXME@ or @TODO@. Adding one of these words to a comment is called "tagging" the comment as a task.
 
