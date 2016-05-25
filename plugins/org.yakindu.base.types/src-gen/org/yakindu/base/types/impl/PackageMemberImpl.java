@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.yakindu.base.base.impl.NamedElementImpl;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.TypesUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -50,13 +51,15 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 		return TypesPackage.Literals.PACKAGE_MEMBER;
 	}
 
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public String getId() {
-		return getName();
+		return TypesUtil.computeQID(this);
 	}
 
 	/**

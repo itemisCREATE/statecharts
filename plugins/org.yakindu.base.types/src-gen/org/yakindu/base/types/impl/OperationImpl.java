@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
-import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
 
 /**

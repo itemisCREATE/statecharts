@@ -5,24 +5,19 @@ package org.yakindu.base.types.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
-
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.TypesUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -184,15 +179,6 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getId() {
-		return getName();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -333,6 +319,16 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		result.append(name);
 		result.append(')');
 		return result.toString();
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public String getId() {
+		return TypesUtil.computeQID(this);
 	}
 
 } //DeclarationImpl

@@ -21,6 +21,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.TypesUtil;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -480,7 +481,7 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 */
 	@Override
 	public String getId() {
-		return getName();
+		return TypesUtil.computeQID(this);
 	}
 
 } // TypeAliasImpl
