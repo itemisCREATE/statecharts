@@ -32,9 +32,9 @@ public class RefactoringProposalProvider implements IEditProposalProvider {
 		proposals.add(new ModificationBasedEditProposal(
 				new ExtractSubdiagramModification(view), 
 				"Refactoring - Extract Subdiagram", 
-				"Extracts all sub regions into a sub diagram.<br> " +
+				"Extracts all sub regions into a sub diagram. " +
 				"Direct transitions into the diagram will be substituted by entries and outgoing transitions will be substituted using exit nodes. " +
-				"<i>Sub diagrams are opened seperately</i>." , 
+				"Sub diagrams are opened seperately." , 
 				null));
 		proposals.add(new ModificationBasedEditProposal(
 				new InlineSubdiagramModification(view), 
