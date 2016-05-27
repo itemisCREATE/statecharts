@@ -33,22 +33,19 @@ public class TypeSystemAwareScope extends AbstractScope {
 
 	private EClass eClass;
 
-	private EObject context;
-
 	public TypeSystemAwareScope(IScope parent, ITypeSystem typeSystemAccess,
-			IQualifiedNameProvider qualifiedNameProvider, EClass eClass, EObject context) {
+			IQualifiedNameProvider qualifiedNameProvider, EClass eClass) {
 		super(parent, false);
 		this.typeSystem = typeSystemAccess;
 		this.qualifiedNameProvider = qualifiedNameProvider;
 		this.eClass = eClass;
-		this.context = context;
 	}
 
 	@Override
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
 		List<IEObjectDescription> result = Lists.newArrayList();
 		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(
-				EcoreUtil2.<EObject> getObjectsByType(typeSystem.getConcreteTypes(context), eClass),
+				EcoreUtil2.<EObject> getObjectsByType(typeSystem.getConcreteTypes(), eClass),
 				qualifiedNameProvider);
 		Iterables.addAll(result, iterable);
 		return result;

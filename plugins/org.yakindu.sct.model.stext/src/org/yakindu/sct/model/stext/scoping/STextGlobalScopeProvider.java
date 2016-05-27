@@ -49,7 +49,7 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 		parentScope = filterExternalDeclarations(context, parentScope);
 		final Statechart statechart = getStatechart(context);
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
-				reference.getEReferenceType(), statechart);
+				reference.getEReferenceType());
 		return new FilteringScope(parentScope, new Predicate<IEObjectDescription>() {
 			@Override
 			public boolean apply(IEObjectDescription input) {

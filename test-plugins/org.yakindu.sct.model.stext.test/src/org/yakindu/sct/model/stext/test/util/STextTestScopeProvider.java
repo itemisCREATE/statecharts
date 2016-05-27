@@ -99,7 +99,6 @@ public class STextTestScopeProvider extends STextScopeProvider {
 		featureX.setType(typeSystem.getType(GenericTypeSystem.INTEGER));
 		complexType.getFeatures().add(featureX);
 
-		typeSystem.declareType(complexType, complexType.getName());
 		Resource resource = new ResourceImpl(URI.createURI("types2"));
 		resource.getContents().add(complexType);
 

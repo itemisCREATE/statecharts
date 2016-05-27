@@ -13,7 +13,6 @@ package org.yakindu.base.types.typesystem;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.types.Type;
 
 import com.google.inject.ImplementedBy;
@@ -35,9 +34,9 @@ public interface ITypeSystem {
 	public static final String VOID = "void";
 	public static final String NULL = "null";
 
-	public Collection<Type> getTypes(EObject context);
+	public Collection<Type> getTypes();
 	
-	public Collection<Type> getConcreteTypes(EObject context);
+	public Collection<Type> getConcreteTypes();
 
 	public Type getType(String name);
 	
@@ -54,8 +53,5 @@ public interface ITypeSystem {
 	public List<Type> getSuperTypes(Type type);
 
 	public boolean isSuperType(Type subtype, Type supertype);
-
-	public void declareType(Type type, String name);
-
 
 }

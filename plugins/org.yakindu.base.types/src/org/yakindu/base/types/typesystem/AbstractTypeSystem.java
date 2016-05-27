@@ -20,7 +20,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -103,13 +102,13 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		}
 	}
 
-	public Collection<Type> getTypes(EObject context) {
+	public Collection<Type> getTypes() {
 		return Collections.unmodifiableCollection(typeRegistry.values());
 	}
 
-	public Collection<Type> getConcreteTypes(EObject context) {
+	public Collection<Type> getConcreteTypes() {
 		List<Type> result = new ArrayList<Type>();
-		for (Type type : getTypes(context)) {
+		for (Type type : getTypes()) {
 			if (!type.isAbstract())
 				result.add(type);
 		}

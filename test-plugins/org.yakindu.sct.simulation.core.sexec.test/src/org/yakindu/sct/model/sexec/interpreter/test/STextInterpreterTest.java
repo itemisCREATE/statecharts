@@ -581,8 +581,6 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		enumB.setName("B");
 		enumType.getEnumerator().add(enumB);
 		
-		typeSystem.declareType(enumType, enumType.getName());
-		
 		Resource resource = new ResourceImpl(URI.createURI("types2"));
 		resource.getContents().add(enumType);
 		return enumType;
