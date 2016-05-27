@@ -114,18 +114,20 @@ public class STextTestScopeProvider extends STextScopeProvider {
 		EnumerationType enumType = TypesFactory.eINSTANCE.createEnumerationType();
 		enumType.setName("EnumType");
 		
-		Enumerator enumA = TypesFactory.eINSTANCE.createEnumerator();
-		enumA.setName("A");
-		enumType.getEnumerator().add(enumA);
-		
-		Enumerator enumB = TypesFactory.eINSTANCE.createEnumerator();
-		enumB.setName("B");
-		enumType.getEnumerator().add(enumB);
+		enumType.getEnumerator().add(createEnumerator("A"));
+		enumType.getEnumerator().add(createEnumerator("B"));
+		enumType.getEnumerator().add(createEnumerator("C"));
 		
 		Resource resource = new ResourceImpl(URI.createURI("types2"));
 		resource.getContents().add(enumType);
 		
 		return enumType;
+	}
+	
+	private Enumerator createEnumerator(String name) {
+		Enumerator enumerator = TypesFactory.eINSTANCE.createEnumerator();
+		enumerator.setName(name);
+		return enumerator;
 	}
 
 }
