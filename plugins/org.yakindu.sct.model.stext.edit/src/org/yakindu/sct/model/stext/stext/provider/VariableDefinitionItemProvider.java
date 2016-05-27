@@ -113,8 +113,10 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 	public String getText(Object object) {
 		VariableDefinition variable = (VariableDefinition) object;
 		StringBuilder builder = new StringBuilder(variable.getName());
-		builder.append(" : ");
-		builder.append(variable.getType().getName());
+		if (variable.getType() != null) {
+			builder.append(" : ");
+			builder.append(variable.getType().getName());
+		}
 		return builder.toString();
 	}
 
