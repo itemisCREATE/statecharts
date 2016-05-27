@@ -1294,6 +1294,15 @@ public interface SGraphPackage extends EPackage {
 	int IMPORT_DECLARATION__NAME = TypesPackage.DECLARATION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_DECLARATION__ID = TypesPackage.DECLARATION__ID;
+
+	/**
 	 * The feature id for the '<em><b>Declaration</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

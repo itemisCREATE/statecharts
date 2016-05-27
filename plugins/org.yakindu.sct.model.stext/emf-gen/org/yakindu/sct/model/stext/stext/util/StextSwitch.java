@@ -21,6 +21,7 @@ import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.stext.stext.*;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
@@ -97,7 +98,7 @@ public class StextSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
@@ -212,6 +213,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseEvent(eventDefinition);
 				if (result == null) result = caseDeclaration(eventDefinition);
 				if (result == null) result = caseTypedElement(eventDefinition);
+				if (result == null) result = casePackageMember(eventDefinition);
 				if (result == null) result = caseNamedElement(eventDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -222,6 +224,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseProperty(variableDefinition);
 				if (result == null) result = caseDeclaration(variableDefinition);
 				if (result == null) result = caseTypedElement(variableDefinition);
+				if (result == null) result = casePackageMember(variableDefinition);
 				if (result == null) result = caseNamedElement(variableDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -231,8 +234,8 @@ public class StextSwitch<T> extends Switch<T> {
 				T result = caseOperationDefinition(operationDefinition);
 				if (result == null) result = caseOperation(operationDefinition);
 				if (result == null) result = caseDeclaration(operationDefinition);
-				if (result == null) result = casePackageMember(operationDefinition);
 				if (result == null) result = caseTypedElement(operationDefinition);
+				if (result == null) result = casePackageMember(operationDefinition);
 				if (result == null) result = caseNamedElement(operationDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -255,6 +258,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseReaction(localReaction);
 				if (result == null) result = caseDeclaration(localReaction);
 				if (result == null) result = caseTypedElement(localReaction);
+				if (result == null) result = casePackageMember(localReaction);
 				if (result == null) result = caseNamedElement(localReaction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

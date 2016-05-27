@@ -14,7 +14,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.Event;
+import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.TypedElement;
+import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -92,7 +96,7 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
@@ -219,6 +223,7 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = caseEvent(timeEvent);
 				if (result == null) result = caseDeclaration(timeEvent);
 				if (result == null) result = caseTypedElement(timeEvent);
+				if (result == null) result = casePackageMember(timeEvent);
 				if (result == null) result = caseNamedElement(timeEvent);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -582,6 +587,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package Member</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package Member</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackageMember(PackageMember object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -592,7 +612,7 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDeclaration(org.yakindu.base.types.Declaration object) {
+	public T caseDeclaration(Declaration object) {
 		return null;
 	}
 
@@ -607,7 +627,7 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEvent(org.yakindu.base.types.Event object) {
+	public T caseEvent(Event object) {
 		return null;
 	}
 

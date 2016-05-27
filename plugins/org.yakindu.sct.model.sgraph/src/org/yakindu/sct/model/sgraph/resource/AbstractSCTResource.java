@@ -122,6 +122,7 @@ public abstract class AbstractSCTResource extends GMFResource {
 
 	public AbstractSCTResource(URI uri) {
 		super(uri);
+		setUseIDAttributes(true);
 		syntaxDiagnostics = HashMultimap.create();
 		linkingDiagnostics = HashMultimap.create();
 	}

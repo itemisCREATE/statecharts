@@ -551,6 +551,15 @@ public interface StextPackage extends EPackage {
 	int EVENT_DEFINITION__NAME = TypesPackage.EVENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_DEFINITION__ID = TypesPackage.EVENT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Direction</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -604,6 +613,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DEFINITION__NAME = TypesPackage.PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DEFINITION__ID = TypesPackage.PROPERTY__ID;
 
 	/**
 	 * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -688,6 +706,15 @@ public interface StextPackage extends EPackage {
 	int OPERATION_DEFINITION__NAME = TypesPackage.OPERATION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_DEFINITION__ID = TypesPackage.OPERATION__ID;
+
+	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -743,6 +770,15 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__NAME = TypesPackage.TYPE_ALIAS__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_DEFINITION__ID = TypesPackage.TYPE_ALIAS__ID;
+
+	/**
 	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -759,6 +795,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_ALIAS_DEFINITION__ABSTRACT = TypesPackage.TYPE_ALIAS__ABSTRACT;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_DEFINITION__VISIBLE = TypesPackage.TYPE_ALIAS__VISIBLE;
 
 	/**
 	 * The number of structural features of the '<em>Type Alias Definition</em>' class.
@@ -834,13 +879,22 @@ public interface StextPackage extends EPackage {
 	int LOCAL_REACTION__NAME = SGraphPackage.REACTION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCAL_REACTION__ID = SGraphPackage.REACTION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Local Reaction</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_REACTION_FEATURE_COUNT = SGraphPackage.REACTION_FEATURE_COUNT + 3;
+	int LOCAL_REACTION_FEATURE_COUNT = SGraphPackage.REACTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.TransitionReactionImpl <em>Transition Reaction</em>}' class.

@@ -25,6 +25,8 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.EnumerationType;
+import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesFactory;
@@ -64,6 +66,9 @@ public class STextTestScopeProvider extends STextScopeProvider {
 
 		Type complexType = createComplexType();
 		descriptions.add(createEObjectDesc(complexType));
+		
+		Type enumType = createEnumType();
+		descriptions.add(createEObjectDesc(enumType));
 
 		TreeIterator<EObject> iterator = complexType.eAllContents();
 		while (iterator.hasNext()) {
@@ -99,11 +104,30 @@ public class STextTestScopeProvider extends STextScopeProvider {
 		featureX.setType(typeSystem.getType(GenericTypeSystem.INTEGER));
 		complexType.getFeatures().add(featureX);
 
-		typeSystem.declareType(complexType, complexType.getName());
 		Resource resource = new ResourceImpl(URI.createURI("types2"));
 		resource.getContents().add(complexType);
 
 		return complexType;
+	}
+	
+	private EnumerationType createEnumType() {
+		EnumerationType enumType = TypesFactory.eINSTANCE.createEnumerationType();
+		enumType.setName("EnumType");
+		
+		enumType.getEnumerator().add(createEnumerator("A"));
+		enumType.getEnumerator().add(createEnumerator("B"));
+		enumType.getEnumerator().add(createEnumerator("C"));
+		
+		Resource resource = new ResourceImpl(URI.createURI("types2"));
+		resource.getContents().add(enumType);
+		
+		return enumType;
+	}
+	
+	private Enumerator createEnumerator(String name) {
+		Enumerator enumerator = TypesFactory.eINSTANCE.createEnumerator();
+		enumerator.setName(name);
+		return enumerator;
 	}
 
 }

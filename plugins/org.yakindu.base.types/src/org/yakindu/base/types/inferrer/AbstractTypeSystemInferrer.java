@@ -66,7 +66,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 
 	@Override
 	public final Type inferType(EObject object, IValidationIssueAcceptor acceptor) {
-		initTypeCache(object);
+		initTypeCache();
 		this.acceptor = (acceptor != null ? acceptor : new ListBasedValidationIssueAcceptor());
 		Type result = inferTypeDispatch(object);
 		typeCache.invalidateAll();
@@ -84,7 +84,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 		return null;
 	}
 
-	private void initTypeCache(final EObject context) {
+	private void initTypeCache() {
 		typeCache = CacheBuilder.newBuilder().maximumSize(100).build(new CacheLoader<EObject, Type>() {
 			public Type load(EObject key) {
 				if (key instanceof TypeAlias) {
@@ -92,7 +92,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 					return (Type) (EObject) dispatcher.invoke(key);
 				}
 				if (key instanceof Type) {
-					Collection<Type> types = registry.getTypes(context);
+					Collection<Type> types = registry.getTypes();
 					for (Type type : types) {
 						if (registry.isSame((Type) key, type))
 							return type;

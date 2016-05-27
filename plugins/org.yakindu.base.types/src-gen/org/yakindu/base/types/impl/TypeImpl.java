@@ -35,7 +35,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public abstract class TypeImpl extends PackageMemberImpl implements Type {
+public class TypeImpl extends PackageMemberImpl implements Type {
 	/**
 	 * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -159,6 +159,7 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE__VISIBLE, oldVisible, visible));
 	}
 
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -272,5 +273,5 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 	public String toString() {
 		return name;
 	}
-
+	
 } //TypeImpl
