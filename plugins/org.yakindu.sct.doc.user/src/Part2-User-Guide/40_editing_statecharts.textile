@@ -50,10 +50,10 @@ YAKINDU Statechart Tools comes with a *statechart editor*. This section explains
 h3(#sc-modeling-perspective). "SC Modeling" perspective
 
 _SC Modeling_ is an Eclipse perspective supporting the modeling of statecharts. The perspective defines the following views and their positions:
-* _Project Explorer_ (left): This view displays your workspace and therein contained projects, folders, and files. You can also use the _Project Explorer_ to inspect the internal structure of your statechart models.
+* _Project Explorer_ (left): This view displays your workspace and projects, folders, and files contained therein. You can also use the _Project Explorer_ to inspect the internal structure of your statechart models.
 * _Properties_ (bottom): This view displays properties, regarding the semantic model or the graphical appearance, of the selected element in the statechart editor. You can directly edit these properties in this view.
 * _Problems_ (bottom): This view displays errors and warnings existing in your workspace. Double-clicking on an entry typically opens the location of the respective error or warning.
-* _Outline_ (right): This view is a bird's eye view on the opened statechart. It also indicates current the viewport for better orientation in large models.
+* _Outline_ (right): This view is a bird's eye view on the opened statechart. It also indicates the current viewport for better orientation in large models.
 
 h3(#canvas). Canvas
 

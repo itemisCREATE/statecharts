@@ -1,60 +1,161 @@
 h1(#simulating-statecharts). Simulating statecharts
 
-Simulating a statechart model means to execute it, raise events manually, have time events and run cycle-based events being triggered automatically, and observe its behaviour.
-
-An introduction to simulation is given in section "&quot;Simulating the light switch model&quot;":20_tutorial#simulating-the-light-switch-model. A future version of this documentation will provide a comprehensive documentation of all simulation features. For now, we are just giving you the overview below. Although it intends to be complete in the sense that it lists all simulation features, the overview does not go into any detailed usage instructions. Section "&quot;Simulating the light switch model&quot;":20_tutorial#simulating-the-light-switch-model will be helpful. Finding out everything not mentioned there is left as an exercise to the reader for now.
-
-h2(#starting-a-simulation). Starting a simulation
-
-# Select _Run As → Statechart Simulation_ in the statechart model file's context menu.
-# Select _Run → Run_ or press @[Ctrl+F11]@.
-# Select _Run History → [model file name]_.
-# Select _Run Configurations…_ to configure your own statechart run configurations. For more details see section "&quot;Configuring a simulation&quot;":#configuring-a-simulation.
+Simulating a statechart model means to execute it, raise events manually, have time-based and other events being triggered automatically, and observe the model's behavior.
 
 You can run multiple state machines in parallel and even multiple instances of the same state machine.
 
-h2(#sc-simulation-perspective). SC Simulation perspective
+h2(#starting-a-simulation). Starting a simulation
 
-The _SC Simulation_ perspective provides selected views that are useful when running a statechart simulation.
+You have several options to start a statechart simulation.
 
-Opening the _SC Simulation_ perspective:
-* _Window → Perspective → Open Perspective → SC Simulation_
-* _Window → Perspective → Open Perspective → Other…_, then select _SC Simulation_ in the dialog.
+h3(#oss_via-statechart-model-file-context-menu). Via statechart model file context menu
+
+The most direct way is to start the simulation based on the statechart model file.
+# In the _Project Explorer_ view, right-click on the statechart model file. The context menu opens.
+# In the context menu, select _Run As → Statechart Simulation_, see figure "&quot;Selecting „Run As → Statechart Simulation” in the context menu&quot;":#oss_fig_run-as-statechart-simulation.
+
+p(#oss_fig_run-as-statechart-simulation). 
+
+!(standard-image)images/light_switch_300_statechart_simulator_run_as_statechart_simulation.png(Selecting "Run As → Statechart Simulation" in the context menu)!
+
+p=. Selecting "Run As → Statechart Simulation" in the context menu
+
+h3(#oss_repeat-the-last-simulation). Repeat the last simulation
+
+In order to re-run the simulation you have most recently executed, simply
+* press @[Ctrl+F11]@ on the keyboard
+or
+* select _Run → Run_ in the main menu.
+
+To be exact, this operation does not necessarily re-run the last _simulation_, but rather the last executed _launch_. So if, for example, you first run a statechart simulation followed by running a Java program, then upon press @[Ctrl+F11]@, that Java program is executed once again, not the statechart simulation.
+
+h3(#oss_repeat-a-former-simulation). Repeat a earlier simulation
+
+Let's consider a scenario where you want to execute a simulation you have run before, but not as the most recently executed launch. So you cannot use the procedure described in section "&quot;Repeat the last simulation&quot;":#oss_repeat-the-last-simulation.
+
+However, as long as you haven't launched too many other programs in between, chances are good to find your simulation in the _history_.
+
+Try the following:
+# In the main menu, open the _Run_ menu and move your mouse pointer over the _Run History_ entry.
+# A submenu attached to the _Run History_ menu entry opens, containing the most recently executed launches. Check whether the simulation you want to execute is available in the submenu. If it is, select it to start the simulation.
+
+h3(#oss_creating-and-executing-a-run-configuration). Creating and executing a launch configuration
+
+Generally speaking, a _launch configuration_ completely describes an application to be executed on the Eclipse platform, i.&nbsp;e. which type of application it is, which parameters and which values are to be used for this particular launch, how the launch environment should look like etc.
+
+A statechart simulation is an application running on Eclipse with the application type _Statechart Simulation_, and – no surprise – you can configure and store as a launch configuration how to launch your statechart simulation. For details on how to create a launch configuration, see section "&quot;Configuring a simulation&quot;":#configuring-a-simulation.
+
+To execute an existing launch configuration, proceed as follows:
+# In the main menu, select _Run → Run Configurations…_. The _Run Configurations_ dialog appears.
+# The list on the left-hand side of the _Run Configurations_ dialog displays all available launch configurations. Select the launch configuration you want to execute.
+# Click on _Run_ to execute the launch configuration.
+
+
+h2(#oss_the-sc-simulation-perspective). The SC Simulation perspective
+
+The _SC Simulation_ perspective provides selected views that are most useful when running a statechart simulation.
+
+h3(#oss_engaging-the-sc-simulation-perspective). Engaging the SC Simulation perspective
+
+When a simulation starts, the perspective usually changes to the _SC Simulation_ perspective. If this doesn't happen, you can manually engage the _SC Simulation_ perspective as follows:
+
+* In the main menu, select _Window → Perspective → Open Perspective → SC Simulation_.
+
+Alternatively, you can do the following:
+* In the main menu, select _Window → Perspective → Open Perspective → Other…_. The _Open Perspective_ dialog appears.
+* In the _Open Perspective_ dialog, select _SC Simulation_.
+* Click on _Okay_. The _SC Simulation_ perspective opens.
+
+h3(#oss_views-contained-in-the-sc-simulation-perspective). Views contained in the SC Simulation perspective
 
 By default, the _SC Simulation_ perspective shows the following views:
-* _Debug_ view
-* _Outline_ view
-* _Simulation_ view
-* _Breakpoints_ view
+* _Project Explorer_ (left): This view displays your workspace and projects, folders, and files contained therein. You can also use the _Project Explorer_ to inspect the internal structure of your statechart models.
+* _Debug_ (top middle): This view is showing all statechart instances and allows to select one of them. YAKINDU Statechart Tools allow multiple executions of the same statechart as well as parallel executions of different statecharts at the same time.
+* _Outline_ (right): This view is a bird's eye view on the opened statechart. It also indicates the current viewport for better orientation in large models.
+* _Simulation_ (right): This view shows the current state of all variables and events during a simulation. A detailed description is available in section "&quot;The Simulation view&quot;":#oss_the-simulation-view.
+* _Breakpoints_ (right): This view shows a list of all breakpoints. You can use it for disabling, enabling, or removing breakpoints as well as for defining conditional breakpoints. *[Professional Edition only]*
+* _Snapshots_ (right): This view contains all snapshots with their respective names and timestamps. *[Professional Edition only]*
 
-h2(#advsim_simulation-view). Simulation view
+h3(#oss_displaying-simulation-progress-in-the-statechart-editor). Displaying simulation progress in the statechart editor
 
-The simulation view shows the current state of all variables and events during a simulation. Variables and events are listed under their corresponding interfaces. The unnamed interface is thereby denoted as _default_. The simulation view allows to change variable values and to invoke events. 
+The _SC Simulation_ perspective also includes the statechart editor. In a running simulation, the statechart editor highlights active states by coloring their backgrounds in red.
 
-"Figure &quot;Simulation view&quot;":#advsim_fig-simulation-view shows a simulation of the _light switch_ statechart at a certain point in time. You can see the state machine model on the left and its events and variables in the _Simulation_ view on the right. Clicking on the underlined events _pressLightOn_ or _pressLightOff_ raises them for the next run cycle. The value of the _brightness_ variable can be changed by directly editing it.
+When a transition is taken, the transition arc leading from the source state to the target state flashes briefly in red. After that, the target state becomes active and changes its background color to red. The source state's background color becomes normal again.
 
-p(#advsim_fig-simulation-view). 
+p(#oss_fig_the-sc-simulation-perspective). 
+
+!(standard-image)images/light_switch_310_statechart_simulator_state_off.png(The _SC Simulation_ perspective)!
+
+p=. The _SC Simulation_ perspective
+
+
+h2(#oss_the-simulation-view). The Simulation view
+
+The _Simulation_ view is used to manually raise events and to inspect and modify variables of a running simulation. By default that view is located on the right-hand side of the "_SC Simulation_":#oss_the-sc-simulation-perspective perspective, see "figure &quot;Simulation view&quot;":#oss_fig-simulation-view for an example.
+
+The _Simulation_ view groups events and variables by their _interfaces_. The unnamed interface appears as _default_ in the interface list. Click on the small triangle left from a interface's name to show or hide the interface's contents, i.&nbsp;e. events and variables.
+
+bq.. *Note*
+
+Depending on your screen resolution and font size settings, you might not be able to spot the _Simulation_ view by its name, because the tab containing it is quite narrow and might not provide enough space for displaying the title. Hover over the tabs to reveal their respective titles in a popup window.
+
+"Figure &quot;The SC Simulation perspective&quot;":#oss_fig_the-sc-simulation-perspective is demonstrating this: The user has hovered the mouse pointer over a tab that is just displaying the starting letter 'S' of its title. However, a popup window right besides the pointer is showing the tab's full title "Simulation".
+
+p(#oss_fig-simulation-view). 
 !(standard-image)images/advsim_010_lightswitch_020_simulation.png(Simulation view)!
 
-p=. Simulation view
+p=. Simulation view – The actual _Simulation_ view is the pane right from the statechart editor.
 
 h2(#controlling-a-simulation). Controlling a simulation
 
-* Terminate the simulation by clicking at the _Terminate_ button or by selecting _Run → Terminate_ in the menu bar.
-* Suspend the simulation by clicking at the _Suspend_ button or by selecting _Run → Suspend_ in the menu bar.
-* Resume a suspended simulation by clicking at the _Resume_ button or by selecting _Run → Resume_ in the menu bar.
-* Use the _Step Over_ button or select _Run → Step Over_ in the menu bar to execute a single run-to-completion step.
+* To terminate the simulation, click on the _Terminate_ button !(inlinemediaobject)images/symbol_terminate.png! or select _Run → Terminate_ in the main menu.
+* To suspend the simulation, click on the _Suspend_ button !(inlinemediaobject)images/symbol_suspend.png! or select _Run → Suspend_ in the main menu.
+* To resume a suspended simulation, click on the _Resume_ button !(inlinemediaobject)images/symbol_resume.png! or select _Run → Resume_ in the main menu.
+* Use the _Step Over_ button !(inlinemediaobject)images/symbol_stepover.png! or select _Run → Step Over_ in the main menu to execute a single run-to-completion step.
 
 h2(#interacting-with-a-simulation). Interacting with a simulation
 
-Use the _Simulation_ view to
-* manually trigger events
-* inspect variable values
-* modify variable values
+You can interact with a running simulation by manually raising events and by inspecting and modifying variables. You can do so at any point in time, but in most cases you will do so while the simulation "sits idle" at its active state and waits for an event to trigger a transition.
+
+h3(#oss_raising-an-event). Raising an event
+
+To raise an event, proceed as follows:
+# In the _Simulation_ view, click on the small triangle to open the interface containing the event, if needed.
+# Click on the event to it for the next run-to-completion step.
+
+h3(#oss_inspecting-a-variable). Inspecting a variable
+
+To inspect a variable's value, proceed as follows:
+# In the _Simulation_ view, click on the small triangle to open the interface containing the variable, if needed.
+# The variables contained in the interface are displayed.
+
+Watch the displayed value change as the simulation progresses and actions in states or transitions are executed that modify the variable's contents.
+
+h3(#oss_Modifying-a-variable). Modifying a variable
+
+To manually modify a variable's value, proceed as follows:
+# In the _Simulation_ view, click on the small triangle to open the interface containing the variable, if needed.
+# Double-click on the variable's name. It is replaced by a text field containing the variable's value.
+# Enter the variable's new value and press @[Enter]@. The former value is replaced by the new one.
+
 
 h2(#configuring-a-simulation). Configuring a simulation
 
-In a statechart simulation's run configuration, the following parameters can be specified:
-* Operation class
-* Execution type (cycle-based versus event-driven)
-* Cycle period
+Section "&quot;Creating and executing a launch configuration&quot;":#oss_creating-and-executing-a-run-configuration describes how to start an existing launch configuration.
+
+The present chapter describes how to create and configure a new launch configuration for a statechart simulation.
+
+# In the main menu, select _Run → Run Configurations…_. The _Run Configurations_ dialog appears. !(standard-image)images/launch_configuration_01.png(The _Run Configurations_ dialog)!
+# In the _Run Configurations_ dialog, right-click on _Statechart Simulation_ and select _New_ in the context menu. !(standard-image)images/launch_configuration_02.png(The _Run Configurations_ dialog)!<br/>Alternatively, you can select _Statechart Simulation_ and then click on the _New_ symbol near the top-left corner of the dialog. !(standard-image)images/launch_configuration_03.png(The _Run Configurations_ dialog)!<br/>However you do it, a new launch configuration is created and displayed in the main area of the _Run Configurations_ dialog. The launch configuration's _Main_ tab is opened.
+# Enter the launch configuration's parameters as necessary:
+** In the _Name_ text field, change the default name @New_configuration@ to something sensible, e.&nbsp;g. @Light switch@.
+** In the _Model file_ text field, enter the path to the statechart model you want to simulate. Click on the _Search_ button to browse for statechart models.
+** If your model uses Java operations, specify the Java class implementing those operations in the _Operation class_ text field. If you have multiple Java classes, specify them as a comma-separated list.
+** Specify the _Execution type_ as being either _cycle-based_ (default) or _event-based_. In a _cycle-based execution_, the simulation performs a run-to-completion step in regular intervalls and processes the events that have occurred since the previous run-to-completion step. See the next field for the period of time between two consecutive run-to-completion steps. – In an _event-based execution_, the simulation performs a run-to-completion step each time an event occurs. _Please note: In contrast to the statechart simulation any generated code does not necessarily conform to the event-based execution semantics._
+** If the execution type is cycle-based, specify the period of time between two run-to-completion steps in the _Cycle time_ text field. If the execution type is event-based, this field is deactivated. !(standard-image)images/launch_configuration_04.png(The _Run Configurations_ dialog)!
+
+bq.. *Note*
+
+Besides the _Main_ tab described above, a statechart simulation launch configuration also has a tab named _Common_. This tab is a common standard to all types of launch configurations and thus not documented here.
+
+p. In addition to create new launch configurations, you can also duplicate or delete launch configurations in the _Run Configurations_ dialog. Right-click on a launch configuration and select _Duplicate_ or _Delete_ from the context menu.

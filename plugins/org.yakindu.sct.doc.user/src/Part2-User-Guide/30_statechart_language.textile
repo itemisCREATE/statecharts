@@ -72,7 +72,7 @@ A region may have at most one default entry.
 
 h4(#named-entries). Named entries
 
-The "default entry":#default-entry specifies a single entry point into a region. A region can provide a multitude of additional or alternative entry points, thus implementing different kinds of behaviour, depending on which entry point has been taken. If a region comprises multiple entries, these entries must be _named_. An entry's name must be unique within its region.
+The "default entry":#default-entry specifies a single entry point into a region. A region can provide a multitude of additional or alternative entry points, thus implementing different kinds of behavior, depending on which entry point has been taken. If a region comprises multiple entries, these entries must be _named_. An entry's name must be unique within its region.
 
 The default entry implicitly has the name @default@. Alternatively, it is possible to explicitly give the name @default@ to the default entry. Semantically both variants are equivalent. Whether an entry has no name or it has the name @default@: in both cases the entry is called _default entry_.
 
