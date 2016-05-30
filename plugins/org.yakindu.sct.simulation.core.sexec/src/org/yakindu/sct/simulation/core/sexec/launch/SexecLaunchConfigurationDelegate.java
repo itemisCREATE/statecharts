@@ -44,8 +44,7 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 	protected ISimulationEngine createExecutionContainer(final ILaunch launch, Statechart statechart) {
 		try {
 
-			Injector injector = DomainRegistry.getDomainDescriptor(statechart).getDomainInjectorProvider()
-					.getSimulationInjector();
+			Injector injector = getInjector(statechart, launch);
 			IFile file = WorkspaceSynchronizer.getFile(statechart.eResource());
 			injector.injectMembers(this);
 			IOperationMockup mockup = injector.getInstance(IOperationMockup.class);
@@ -60,5 +59,10 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	protected Injector getInjector(Statechart statechart, ILaunch launch) {
+		return DomainRegistry.getDomainDescriptor(statechart).getDomainInjectorProvider()
+				.getSimulationInjector();
 	}
 }
