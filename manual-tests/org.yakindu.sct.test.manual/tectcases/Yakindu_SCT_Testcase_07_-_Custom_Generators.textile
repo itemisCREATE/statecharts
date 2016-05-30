@@ -1,0 +1,9 @@
+h1(#Test2). Yakindu SCT Testcase 07 - Custom Generators
+
+|_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
+| 7.1 | Create Xpand Generator | Select the TestProject in the Package Explorer<p>Select *File->New->Project...*</p><p>Select YAKINDU SCT-> *Xpand* *Generator* *Project*</p><p>Click on Next button</p><p>Enter TestProject.generator.xpand as Project name</p><p>Check Configure for Plugin Export with following settings:<p>&emsp;- Generator ID: custom::xpand<br>&emsp;- Generator name: xpand text generator<br>&emsp;- Generator class: testproject.generator.xpand.TextGenerator<br>&emsp;- Generator description: A generator to create text</p><p>Check Create Feature Library checkbox</p><p>Click on Finish button</p> | Project *TestProject.generator.xpand* has been created in the workspace. | %{color:red}open% |
+| 7.2 | Create Xtend2/Java Generator | Select the TestProject in the Package Explorer<p>Select *File->New->Project...*</p><p>Select YAKINDU SCT-> *Xtend2/Java Generator Project*</p><p>Click on Next button</p><p>Enter TestProject.generator.xtend as Project name</p><p>Enter testproject.generator.xtend.XtendGenerator as Generator class</p><p>Check Use Xtend checkbox</p><p>Click on Finish button</p> | Project *TestProject.generator.xtend* has been created in the workspace. | %{color:red}open% |
+
+
+
+

@@ -1,0 +1,13 @@
+h1(#Test2). Yakindu SCT Testcase 12 - Refactor
+
+|_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
+| 12.1 | Group states into composite | Select all states.<p>Right click on a state, then select *Refactor → Group States Into Composite*.</p><p>Rename the new composite state to *LightSwitch*.</p> | No errors occur. The states are wrapped in a compostite state named *LightSwitch*. | %{color:red}open% |
+| 12.1.1 | Simulate | Run simulation. | The behavior of the refactored model is equivalent to its behavior before refactoring. The composite state *LightSwitch* is highlighted in red (active). | %{color:red}open% |
+| 12.2 | Extract subdiagram | Select composite state *LightSwitch*.<p>Right click, then select *Refactor → Extract Subdiagram*.</p><p>Hover over the subdiagram decorator in the lower right corner of the *LightSwitch* state.</p><p>Click on the subdiagram decorator.</p> | No errors occur.<p>Subdiagram extraction leads to a normal-looking *LightSwitch* state, but with a subdiagram decorator in the lower left of state's box.</p><p>Hovering over that decorator shows a preview image of the subdiagram.</p><p>Clicking the decorator opens the subdiagram in a new editor tab.</p> | %{color:red}open% |
+| 12.2.1 | Simulate | Run simulation. | The behavior of the refactored model is equivalent to its behavior before refactoring. The state *LightSwitch* state is highlighted in red. Transitions between *LightOff* and *LightOn* can be observed in the new editor tab mentioned in T12.2. | %{color:red}open% |
+| 12.3 | Inline subdiagram | Select the *LightSwitch* state.<p>Right click, then select *Refactor → Inline Subdiagram*.</p> | See T12.1. | %{color:red}open% |
+| 12.3.1 | Simulate | Run simulation | Behavior should be the same as before re-factoring | %{color:red}open% |
+| 12.4 | Toggle alignment | Create a new statechart model.<p>Delete the state that has been created.</p><p>Add an orthogonal state (see the palette on the right).</p><p>Ignore any errors.</p><p>Right-click on the state and select *Toggle Subregion Alignment* in the shown context menu.</p><p>Repeat the last action.</p> | An orthogonal state without a name is added to the statechart.<p>Its subregions *r1* and *r2* are horizontally aligned.</p><p>Toggling the subregion alignment toggles between horizontal and vertical alignment of the subregions.</p> | %{color:red}open% |
+
+
+

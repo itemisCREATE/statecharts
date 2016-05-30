@@ -1,0 +1,10 @@
+h1(#Test2). Yakindu SCT Testcase 13 - State
+
+|_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
+| 13.1 | State templates available | Select a state. Press *[Ctrl+Space]*. | The following proposals are shown in a drop-down menu:<p>&emsp;@Add subregion@</br>&emsp;@Add outgoing state@</p><p>For each keyword proposal a corresponding documentation popup window opens when the respective keyword is clicked.</p><p>A completion window should appear with the following entries:</p> | %{color:red}open% |
+| 13.2 | Add composite behaviour | Select Add *subregion*. | A subregion should be added to the selected state with an entry, a transition and a substate. The states bounds should enlarge so that the whole content is shown | %{color:red}open% |
+| 9.1 | Add orthogonal behavior | Select Add *outgoing state*. | A new state should be added. A transition should be drawn from the selected state to the new state. | %{color:red}open% |
+
+
+
+
