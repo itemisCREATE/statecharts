@@ -31,7 +31,7 @@ or
 
 To be exact, this operation does not necessarily re-run the last _simulation_, but rather the last executed _launch_. So if, for example, you first run a statechart simulation followed by running a Java program, then upon press @[Ctrl+F11]@, that Java program is executed once again, not the statechart simulation.
 
-h3(#oss_repeat-a-former-simulation). Repeat a earlier simulation
+h3(#oss_repeat-a-former-simulation). Repeat an earlier simulation
 
 Let's consider a scenario where you want to execute a simulation you have run before, but not as the most recently executed launch. So you cannot use the procedure described in section "&quot;Repeat the last simulation&quot;":#oss_repeat-the-last-simulation.
 
@@ -43,9 +43,7 @@ Try the following:
 
 h3(#oss_creating-and-executing-a-run-configuration). Creating and executing a launch configuration
 
-Generally speaking, a _launch configuration_ completely describes an application to be executed on the Eclipse platform, i.&nbsp;e. which type of application it is, which parameters and which values are to be used for this particular launch, how the launch environment should look like etc.
-
-A statechart simulation is an application running on Eclipse with the application type _Statechart Simulation_, and – no surprise – you can configure and store as a launch configuration how to launch your statechart simulation. For details on how to create a launch configuration, see section "&quot;Configuring a simulation&quot;":#configuring-a-simulation.
+When a statechart is simulated for the first time, a _launch configuration_ is automatically created. A _launch configuration_ describes the parameters used for a particular launch. In case of a statechart simulation, it describes which statechart is to be simulated and the simulation mode (event-driven or cycle-based). For details on how to create and modify a launch configuration, see section "&quot;Configuring a simulation&quot;":#configuring-a-simulation.
 
 To execute an existing launch configuration, proceed as follows:
 # In the main menu, select _Run → Run Configurations…_. The _Run Configurations_ dialog appears.
