@@ -2,7 +2,7 @@ h1(#Test2). Yakindu SCT Testcase 05 - Validation
 
 
 |_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
-| 5.1 | Expression error check | Open statechart ExpressionError01.sct | There are two error markers with the following error message:<p>"entry, exit, events are allowed as local reactions only."</p> | %{color:red}open% |
+| 5.1 | Expression error check | Open statechart ExpressionError01.sct | There is four error markers with the following error message:<p>"entry, exit, events are allowed as local reactions only."</p> | %{color:red}open% |
 | 5.2 | Expression error check | Open statechart ExpressionError03.sct | There is one error marker at the specification section with the following error message:<p>"In/Out declarations are not allowed in internal scope."</p> | %{color:red}open% |
 | 5.3 | Expression error check | Open statechart ExpressionError04.sct | There is one error marker at the specification section with the following error message:<p>"Local declarations are not allowed in interface scope."</p> | %{color:red}open% |
 | 5.4 | Expression error check | Open statechart ExpressionError05.sct | There is one error marker at the specification section with the following error message:<p>"Only one default/unnamed interface is allowed."</p> | %{color:red}open% |
