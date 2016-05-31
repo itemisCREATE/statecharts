@@ -40,9 +40,11 @@ import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
+import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Type
+import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
@@ -52,8 +54,6 @@ import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
-import org.yakindu.base.types.typesystem.GenericTypeSystem
-import org.yakindu.base.types.EnumerationType
 
 /**
  * 
@@ -147,7 +147,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		}
 		scopeVariable.value
 	}
-
+	
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
 		var event = context.resolve(eventRaising.event)
 		if (eventRaising.value != null) {
@@ -299,8 +299,11 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		}
 
 		var slot = context.resolve(call)
-		if (slot instanceof ExecutionVariable || slot instanceof CompositeSlot) {
+		if (slot instanceof ExecutionVariable) {
 			return slot.getValue
+		}
+		if (slot instanceof CompositeSlot) {
+			return slot
 		}
 		if (slot instanceof ExecutionEvent) {
 			if(call.feature instanceof Operation) {
