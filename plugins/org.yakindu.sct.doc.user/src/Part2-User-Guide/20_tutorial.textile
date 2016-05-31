@@ -61,9 +61,9 @@ h2(#the-light-switch-example). The light switch example
 
 The most basic example of a state machine that actually does something is a light switch. In this scenario there is a light bulb and a switch to turn the bulb on and off. Of course there's also a power source and some electrical cabling to put it all together, but for the purpose of our model we can omit them.
 
-h3(#the-behaviour-of-a-light-switch). The behaviour of a light switch
+h3(#the-behavior-of-a-light-switch). The behavior of a light switch
 
-When modeling the light switch example as a statechart, we can disregard everything (even the bulb) except for the switch. The behaviour of the switch is very simple:
+When modeling the light switch example as a statechart, we can disregard everything (even the bulb) except for the switch. The behavior of the switch is very simple:
 
 * Initially the light switch is off, i. e. it is in its *Off* state.
 * If the light switch is operated while being in its *Off* state, it changes to its *On* state.
@@ -75,7 +75,7 @@ Now let's model the light switch as a statechart using YAKINDU Statechart Tools.
 
 # Creating an Eclipse project. It will serve as a container for the statechart model.
 # Modeling the light switch using the YAKINDU Statechart Tools editor. The result will be a static statechart model.
-# Simulating the model. We can play around with the model, operate the light switch and observe its behaviour.
+# Simulating the model. We can play around with the model, operate the light switch and observe its behavior.
 
 h3(#creating-an-eclipse-project). Creating an Eclipse project
 
@@ -283,7 +283,7 @@ table(scedit).
 
 h2(#simulating-the-light-switch-model). Simulating the light switch model
 
-Simulating a model means to execute it, raise events manually, have time events and run cycle-based events being triggered automatically, and observe its behaviour.
+Simulating a statechart model means to execute it, raise events manually, have time-based and other events being triggered automatically, and observe the model's behavior.
 
 Start the simulation by right-clicking on the _LightSwitch.sct_ file in the project explorer and selecting _Run As → Statechart Simulation_:
 
@@ -320,7 +320,7 @@ The transition arc leading from the *Off* state to the *On* state flashes briefl
 
 p=. Light switch simulation in "on" state
 
-Click on _operate_ again, and the active state changes back to *Off*. Click on _operate_ several times and enjoy watching the state machine's behaviour.
+Click on _operate_ again, and the active state changes back to *Off*. Click on _operate_ several times and enjoy watching the state machine's behavior.
 
 Stop the simulator by clicking at the little red termination button in the toolbar at the top.
 

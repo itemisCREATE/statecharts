@@ -166,6 +166,8 @@ img.shadowless {
 img.inlinemediaobject {
     display: inline;
     height: 1.1em;
+    max-width: initial;
+    min-width: initial;
 }
 
 
