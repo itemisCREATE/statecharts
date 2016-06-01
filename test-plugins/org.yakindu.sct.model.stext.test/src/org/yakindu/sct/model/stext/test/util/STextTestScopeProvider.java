@@ -79,11 +79,11 @@ public class STextTestScopeProvider extends STextScopeProvider {
 		return new SimpleScope(descriptions);
 	}
 
-	private IEObjectDescription createEObjectDesc(EObject object) {
+	protected IEObjectDescription createEObjectDesc(EObject object) {
 		return new EObjectDescription(qfnProvider.getFullyQualifiedName(object), object, new HashMap<String, String>());
 	}
 
-	private State createDummyModel() {
+	protected State createDummyModel() {
 		Statechart statechart = factory.createStatechart();
 		statechart.setName("chart");
 		Region region = factory.createRegion();
@@ -95,7 +95,7 @@ public class STextTestScopeProvider extends STextScopeProvider {
 		return state;
 	}
 
-	private ComplexType createComplexType() {
+	protected ComplexType createComplexType() {
 		ComplexType complexType = TypesFactory.eINSTANCE.createComplexType();
 		complexType.setName("ComplexType");
 
@@ -110,7 +110,7 @@ public class STextTestScopeProvider extends STextScopeProvider {
 		return complexType;
 	}
 	
-	private EnumerationType createEnumType() {
+	protected EnumerationType createEnumType() {
 		EnumerationType enumType = TypesFactory.eINSTANCE.createEnumerationType();
 		enumType.setName("EnumType");
 		
@@ -124,7 +124,7 @@ public class STextTestScopeProvider extends STextScopeProvider {
 		return enumType;
 	}
 	
-	private Enumerator createEnumerator(String name) {
+	protected Enumerator createEnumerator(String name) {
 		Enumerator enumerator = TypesFactory.eINSTANCE.createEnumerator();
 		enumerator.setName(name);
 		return enumerator;
