@@ -59,13 +59,13 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 
 	public Object infer(Guard e) {
 		Type type = inferTypeDispatch(e.getExpression());
-		assertIsSupertype(type, getType(BOOLEAN), GUARD);
+		assertIsSubType(type, getType(BOOLEAN), GUARD);
 		return inferTypeDispatch(type);
 	}
 
 	public Object infer(TimeEventSpec e) {
 		Type type = inferTypeDispatch(e.getValue());
-		assertSame(type, getType(INTEGER), TIME_SPEC);
+		assertIsSubType(type, getType(INTEGER), TIME_SPEC);
 		return inferTypeDispatch(type);
 	}
 
