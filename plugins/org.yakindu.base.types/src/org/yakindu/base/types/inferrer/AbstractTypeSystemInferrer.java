@@ -159,7 +159,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 		}
 	}
 	
-	protected void assertIsSupertype(Type subtype, Type supertype, String msg) {
+	protected void assertIsSubType(Type subtype, Type supertype, String msg) {
 		if (subtype == null || supertype == null)
 			return;
 		if (!registry.isSuperType(subtype, supertype)) {
