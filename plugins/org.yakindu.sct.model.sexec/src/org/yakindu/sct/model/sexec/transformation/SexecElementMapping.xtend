@@ -238,7 +238,7 @@ import org.yakindu.base.types.Event
 	} 
 
 	def Call newCall(Step step) {
-//	  if (step ==  null) throw new IllegalArgumentException("Attempt to create 'null' call.")
+		if (step ==  null) throw new IllegalArgumentException("Attempt to create 'null' call.")
 		val r = sexecFactory.createCall
 		r.step = step
 		r
