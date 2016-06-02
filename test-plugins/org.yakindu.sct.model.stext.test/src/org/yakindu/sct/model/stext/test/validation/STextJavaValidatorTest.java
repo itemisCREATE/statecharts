@@ -12,8 +12,7 @@
 package org.yakindu.sct.model.stext.test.validation;
 
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCode;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.lang.reflect.Method;
@@ -187,14 +186,30 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult.assertErrorContains(STextJavaValidator.GUARD_EXPRESSION);
 
 		Scope context = createInternalScope("internal: var myInt : integer var myBool : boolean = true");
-		expression = super.parseExpression("[myInt = 5]", context, ReactionTrigger.class.getSimpleName());
-		validationResult = tester.validate(expression);
-		validationResult.assertErrorContains(STextJavaValidator.GUARD_EXPRESSION);
-
 		expression = super.parseExpression("[myInt <= 5 || !myBool ]", context, ReactionTrigger.class.getSimpleName());
 		validationResult = tester.validate(expression);
 		validationResult.assertOK();
+	}
+	
+	@Test 
+	public void checkNoAssignmentInGuard() {
+		Scope context = createInternalScope("internal: var myInt : integer var myBool : boolean = true");
+		EObject expression = super.parseExpression("[myBool = false]", context, ReactionTrigger.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(expression);
+		validationResult.assertErrorContains(STextJavaValidator.GUARD_CONTAINS_ASSIGNMENT);
 
+		expression = super.parseExpression("[myInt = 5]", context, ReactionTrigger.class.getSimpleName());
+		validationResult = tester.validate(expression);
+		Iterator<Diagnostic> diag = validationResult.getAllDiagnostics().iterator();
+		while (diag.hasNext()) {
+			Diagnostic d = diag.next();
+			if (d.getMessage().equals(GUARD_EXPRESSION)) {
+				assertEquals(STextJavaValidator.GUARD_EXPRESSION, d.getMessage());
+			} else {
+				assertEquals(STextJavaValidator.GUARD_CONTAINS_ASSIGNMENT, d.getMessage());
+			}
+		}
+ 		
 	}
 
 	/**
