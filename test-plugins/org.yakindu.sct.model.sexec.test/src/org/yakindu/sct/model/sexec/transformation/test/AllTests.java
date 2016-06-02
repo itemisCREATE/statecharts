@@ -30,7 +30,8 @@ import org.junit.runners.Suite.SuiteClasses;
 		ModelSequencerHistoryTest.class,
 		SelfTransitionTest.class,
 		StatechartEnterExistActionTest.class,
-		DefaultNamingServiceTest.class
+		DefaultNamingServiceTest.class,
+		NullCallTest.class
 		})
 public class AllTests {
 

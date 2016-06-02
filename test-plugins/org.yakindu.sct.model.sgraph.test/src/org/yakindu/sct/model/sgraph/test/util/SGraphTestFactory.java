@@ -17,6 +17,7 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.impl.SGraphFactoryImpl;
@@ -71,6 +72,13 @@ public class SGraphTestFactory extends SGraphFactoryImpl {
 		if (r != null)
 			r.getVertices().add(entry);
 		return entry;
+	}
+
+	public static Synchronization _createSynchronization(Region r) {
+		Synchronization sync = SGraphFactory.eINSTANCE.createSynchronization();
+		if (r != null)
+			r.getVertices().add(sync);
+		return sync;
 	}
 
 	public static Transition _createTransition(Vertex source, Vertex target) {
