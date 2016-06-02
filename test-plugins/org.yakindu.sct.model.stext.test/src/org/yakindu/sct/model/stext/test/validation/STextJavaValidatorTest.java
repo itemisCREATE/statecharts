@@ -206,6 +206,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
  			if(d.getMessage().equals(GUARD_EXPRESSION)) assertEquals(STextJavaValidator.GUARD_EXPRESSION, d.getMessage());
  			else assertEquals(STextJavaValidator.GUARD_CONTAINS_ASSIGNMENT, d.getMessage());
  		}
+ 		
 	}
 
 	/**
