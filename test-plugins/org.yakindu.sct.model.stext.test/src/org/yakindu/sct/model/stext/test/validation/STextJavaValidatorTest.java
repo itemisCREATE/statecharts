@@ -64,6 +64,7 @@ import com.google.common.collect.Lists;
 @InjectWith(STextInjectorProvider.class)
 public class STextJavaValidatorTest extends AbstractSTextValidationTest implements STextValidationMessages {
 
+
 	/**
 	 * @see STextJavaValidator#checkVariableDefinition(org.yakindu.sct.model.stext.stext.VariableDefinition)
 	 */
@@ -153,8 +154,9 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	 */
 	@Test
 	public void checkOperationArguments_FeatureCall() {
-		Scope scope = (Scope) parseExpression("interface if : operation myOperation(param1 : integer, param2: boolean)",
-				null, InterfaceScope.class.getSimpleName());
+		Scope scope = (Scope) parseExpression(
+				"interface if : operation myOperation(param1 : integer, param2: boolean)", null,
+				InterfaceScope.class.getSimpleName());
 		EObject model = super.parseExpression("if.myOperation(5,true)", Expression.class.getSimpleName(), scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
@@ -181,11 +183,16 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult.assertErrorContains(STextJavaValidator.GUARD_EXPRESSION);
 
 		Scope context = createInternalScope("internal: var myInt : integer var myBool : boolean = true");
+		expression = super.parseExpression("[myInt = 5]", context, ReactionTrigger.class.getSimpleName());
+		validationResult = tester.validate(expression);
+		validationResult.assertErrorContains(STextJavaValidator.GUARD_EXPRESSION);
+
 		expression = super.parseExpression("[myInt <= 5 || !myBool ]", context, ReactionTrigger.class.getSimpleName());
 		validationResult = tester.validate(expression);
 		validationResult.assertOK();
-	}
 
+	}
+	
 	@Test
 	public void checkNoAssignmentInGuard() {
 		Scope context = createInternalScope("internal: var myInt : integer var myBool : boolean = true");
@@ -297,7 +304,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		// No in declarations in internal scope
 		model = super.parseExpression("internal: in event Event1", null, InternalScope.class.getSimpleName());
 		result = tester.validate(model);
-		result.assertDiagnosticsCount(1);
+		result.assertDiagnosticsCount(1);		
 		result.assertErrorContains(STextJavaValidator.IN_OUT_DECLARATIONS);
 		// No out declarations in internal scope
 		model = super.parseExpression("internal: out event Event1", null, InternalScope.class.getSimpleName());
@@ -341,11 +348,11 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	public void checkSyntaxErrors() {
 		// Nothing to do
 	}
-
+	
 	@Test
 	public void checkExpression() {
 		// Nothing to do
-	}
+	} 
 
 	/**
 	 * checks tht each @Check method of {@link STextJavaValidator} has a @Test
@@ -381,18 +388,16 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		assertWarning(diagnostics, ENTRY_UNUSED);
 	}
 	@Test
-	public void checkTopLeveEntryIsDefaultEntry() {
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TopLevelEntryIsDefaultEntryError.sct");
+	public void checkTopLeveEntryIsDefaultEntry(){
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "TopLevelEntryIsDefaultEntryError.sct");
 		doValidateAllContents(Entry.class);
-
+		
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY);
 		resetDiagnostics();
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TopLevelEntryIsDefaultEntryWarn.sct");
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "TopLevelEntryIsDefaultEntryWarn.sct");
 		doValidateAllContents(Entry.class);
-
+		
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY);
 	}
@@ -437,16 +442,16 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	@Test
 	public void checkTransitionPropertySpec() {
 		// Test source state isn't composite
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionEntrySpecNotComposite.sct");
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "TransitionEntrySpecNotComposite.sct");
 		doValidateAllContents(Transition.class);
 		// Test target state isn't composite
 		assertIssueCount(diagnostics, 2);
 		assertWarning(diagnostics, TRANSITION_ENTRY_SPEC_NOT_COMPOSITE);
 
 		resetDiagnostics();
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionExitSpecNotComposite.sct");
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "TransitionExitSpecNotComposite.sct");
 		assertAllTransitionsAreValid(Transition.class);
 
 		assertIssueCount(diagnostics, 1);
@@ -454,8 +459,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 		// Test exit spec is used on multiple transition siblings.
 		resetDiagnostics();
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionExitSpecOnMultipleSiblings.sct");
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "TransitionExitSpecOnMultipleSiblings.sct");
 		assertAllTransitionsAreValid(Transition.class);
 
 		assertIssueCount(diagnostics, 4);
@@ -463,13 +468,15 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 		// Test transition unbound named exit point spec.
 		resetDiagnostics();
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionNotExistingNamedExitPoint.sct");
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "TransitionNotExistingNamedExitPoint.sct");
 		doValidateAllContents(Transition.class);
 
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT);
 	}
+
+
 
 	@Test
 	public void checkUnboundEntryPoints() {
@@ -515,8 +522,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	@Test
 	public void checkExitPointSpecWithTrigger() {
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "NoTriggerOnTransitionWithExitPointSpec.sct");
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "NoTriggerOnTransitionWithExitPointSpec.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -531,8 +538,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	@Test
 	public void checkAssignmentToFinalVariable() {
-		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "AssignmentToValue.sct");
+		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "AssignmentToValue.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 2);
 		assertError(diagnostics, ASSIGNMENT_TO_VALUE);
@@ -540,8 +547,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	@Test
 	public void checkValueDefinitionExpression() {
-		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "ConstWithVariable.sct");
+		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "ConstWithVariable.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 2); //
 		assertError(diagnostics, REFERENCE_TO_VARIABLE);
@@ -549,21 +556,22 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	@Test
 	public void checkValueReferenedBeforeDefined() {
-		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "ReferenceBeforeDefined.sct");
+		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "ReferenceBeforeDefined.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 2);
 		assertError(diagnostics, REFERENCE_CONSTANT_BEFORE_DEFINED);
 	}
-
+		
 	@Test
-	public void checkUnusedVariablesInInternalScope() {
-		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedInternalDeclarations.sct");
+	public void checkUnusedVariablesInInternalScope(){
+		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "UnusedInternalDeclarations.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 3);
 		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
 	}
+	
 
 	@Test
 	public void checkImportExists() {
@@ -573,12 +581,11 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		AssertableDiagnostics validationResult = tester.validate(importScope.getImports().get(0));
 		validationResult.assertError(STextJavaValidator.IMPORT_NOT_RESOLVED);
 	}
-
+	
 	/**
 	 * The erelevant testst are implemented by TransitionsWithNoTriggerTest.
 	 */
-	@Test
-	public void transitionsWithNoTrigger() {
+	@Test public void transitionsWithNoTrigger() {
 	}
-
+	
 }
