@@ -196,8 +196,11 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		expression = super.parseExpression("[myInt = 5]", context, ReactionTrigger.class.getSimpleName());
 		validationResult = tester.validate(expression);
 		Iterator<Diagnostic> diag = validationResult.getAllDiagnostics().iterator();
-		assertEquals(STextJavaValidator.GUARD_CONTAINS_ASSIGNMENT, diag.next().getMessage());
-		assertEquals(STextJavaValidator.GUARD_EXPRESSION, diag.next().getMessage());
+		while(diag.hasNext()) {
+			Diagnostic d = diag.next();
+			if(d.getMessage().equals(GUARD_EXPRESSION)) assertEquals(STextJavaValidator.GUARD_EXPRESSION, d.getMessage());
+			else assertEquals(STextJavaValidator.GUARD_CONTAINS_ASSIGNMENT, d.getMessage());
+		}
 	}
 
 	/**
