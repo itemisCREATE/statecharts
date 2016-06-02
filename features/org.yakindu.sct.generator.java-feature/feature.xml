@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.generator.java"
       label="YAKINDU Statechart Tools Java code generator"
-      version="2.6.1.qualifier"
+      version="2.6.2.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.branding">
 
@@ -19,7 +19,7 @@
    </license>
 
    <requires>
-      <import feature="org.yakindu.sct" version="2.6.1.qualifier"/>
+      <import feature="org.yakindu.sct" version="2.6.2.qualifier"/>
    </requires>
 
    <plugin

@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.editor"
       label="YAKINDU Statechart Tools Editor"
-      version="2.6.1.qualifier"
+      version="2.6.2.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.branding">
 

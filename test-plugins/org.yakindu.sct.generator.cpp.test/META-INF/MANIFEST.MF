@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU C++ Generator Tests
 Bundle-SymbolicName: org.yakindu.sct.generator.cpp.test
-Bundle-Version: 2.6.1.qualifier
+Bundle-Version: 2.6.2.qualifier
 Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.yakindu.sct.test.models,
