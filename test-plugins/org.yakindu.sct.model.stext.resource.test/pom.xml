@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.yakindu.sct</groupId>
 		<artifactId>org.yakindu.sct.releng</artifactId>
-		<version>2.6.1-SNAPSHOT</version>
+		<version>2.6.2-SNAPSHOT</version>
 		<relativePath>../../releng/org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
 	<artifactId>org.yakindu.sct.model.stext.resource.test</artifactId>

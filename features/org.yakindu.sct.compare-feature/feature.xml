@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.compare"
       label="YAKINDU Statechart Tools Compare"
-      version="2.6.1.qualifier"
+      version="2.6.2.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.branding">
 
@@ -24,7 +24,7 @@
 
    <requires>
       <import plugin="com.google.guava" version="12.0.0" match="greaterOrEqual"/>
-      <import feature="org.yakindu.base" version="2.6.1.qualifier"/>
+      <import feature="org.yakindu.base" version="2.6.2.qualifier"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.compare"/>

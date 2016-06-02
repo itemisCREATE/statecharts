@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU SGen Edit
 Bundle-SymbolicName: org.yakindu.sct.model.sgen.edit;singleton:=true
-Bundle-Version: 2.6.1.qualifier
+Bundle-Version: 2.6.2.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.yakindu.sct.model.sgen.provider.SgenEditPlugin$Implementation
 Bundle-Vendor: statecharts.org

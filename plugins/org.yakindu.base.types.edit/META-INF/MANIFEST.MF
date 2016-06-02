@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Base Types Edit
 Bundle-SymbolicName: org.yakindu.base.types.edit;singleton:=true
-Bundle-Version: 2.6.1.qualifier
+Bundle-Version: 2.6.2.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.yakindu.base.base.provider.BaseEditPlugin$Implementation
 Bundle-Vendor: statecharts.org

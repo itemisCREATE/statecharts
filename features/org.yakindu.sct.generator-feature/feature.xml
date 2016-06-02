@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.generator"
       label="YAKINDU Generator All-In-One Feature"
-      version="2.6.1.qualifier"
+      version="2.6.2.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.branding">
 
@@ -35,7 +35,7 @@
          version="0.0.0"/>
 
    <requires>
-      <import feature="org.yakindu.sct.generator.model" version="2.6.1.qualifier"/>
+      <import feature="org.yakindu.sct.generator.model" version="2.6.2.qualifier"/>
    </requires>
 
    <plugin

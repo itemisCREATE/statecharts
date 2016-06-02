@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Intro
 Bundle-SymbolicName: org.yakindu.sct.ui.intro;singleton:=true
-Bundle-Version: 2.6.1.qualifier
+Bundle-Version: 2.6.2.qualifier
 Bundle-Activator: org.yakindu.sct.ui.intro.Activator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.ui,

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Standalone
 Bundle-SymbolicName: org.yakindu.sct.standalone
-Bundle-Version: 0.9.0.qualifier
+Bundle-Version: 2.6.2.qualifier
 Bundle-Vendor: itemis AG
 Export-Package: com.yakindu.sct.standalone
 Require-Bundle: org.yakindu.sct.model.sgen,
