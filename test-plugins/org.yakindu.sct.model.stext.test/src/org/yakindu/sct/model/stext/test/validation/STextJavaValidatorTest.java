@@ -203,10 +203,11 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		Iterator<Diagnostic> diag = validationResult.getAllDiagnostics().iterator();
 		while (diag.hasNext()) {
 			Diagnostic d = diag.next();
-			if (d.getMessage().equals(GUARD_EXPRESSION))
+			if (d.getMessage().equals(GUARD_EXPRESSION)) {
 				assertEquals(STextJavaValidator.GUARD_EXPRESSION, d.getMessage());
-			else
+			} else {
 				assertEquals(STextJavaValidator.GUARD_CONTAINS_ASSIGNMENT, d.getMessage());
+			}
 		}
  		
 	}
