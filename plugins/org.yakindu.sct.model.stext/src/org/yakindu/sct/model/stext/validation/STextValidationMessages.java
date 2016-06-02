@@ -29,6 +29,7 @@ public interface STextValidationMessages {
 	public static final String LOCAL_DECLARATIONS = "Local declarations are not allowed in interface scope.";
 	public static final String TIME_EXPRESSION = "The evaluation result of a time expression must be of type integer.";
 	public static final String GUARD_EXPRESSION = "The evaluation result of a guard expression must be of type boolean.";
+	public static final String GUARD_CONTAINS_ASSIGNMENT = "A guard must not contain assignments.";
 	public static final String ASSIGNMENT_EXPRESSION = "No nested assignment of the same variable allowed (different behavior in various programming languages).";
 	public static final String TRANSITION_ENTRY_SPEC_NOT_COMPOSITE = "Target state isn't composite.";
 	public static final String TRANSITION_EXIT_SPEC_NOT_COMPOSITE = "Source state isn't composite.";
