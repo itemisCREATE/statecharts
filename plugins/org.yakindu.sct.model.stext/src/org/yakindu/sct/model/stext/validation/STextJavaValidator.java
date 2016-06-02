@@ -147,6 +147,17 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		typeInferrer.inferType(expression, this);
 	}
 
+	@Check
+	public void checkNoAssignmentInGuard(Guard guard) {
+		TreeIterator<EObject> eAllContents = guard.eAllContents();
+		while(eAllContents.hasNext()) {
+			EObject e = eAllContents.next();
+			if(e instanceof AssignmentExpression) {
+				error(GUARD_CONTAINS_ASSIGNMENT, guard, null);
+			}
+		}
+	}
+	
 	@Check(CheckType.FAST)
 	public void transitionsWithNoTrigger(Transition trans) {
 
