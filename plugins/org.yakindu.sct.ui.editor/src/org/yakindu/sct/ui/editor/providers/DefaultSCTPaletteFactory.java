@@ -20,6 +20,7 @@ import org.eclipse.gef.palette.CombinedTemplateCreationEntry;
 import org.eclipse.gef.palette.PaletteContainer;
 import org.eclipse.gef.palette.PaletteDrawer;
 import org.eclipse.gef.palette.PaletteRoot;
+import org.eclipse.gmf.runtime.diagram.ui.internal.services.palette.PaletteToolEntry;
 import org.eclipse.gmf.runtime.diagram.ui.tools.ConnectionCreationTool;
 import org.eclipse.gmf.runtime.emf.type.core.ElementTypeRegistry;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
@@ -33,9 +34,10 @@ import org.yakindu.sct.ui.editor.DiagramActivator;
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@SuppressWarnings("restriction")
 public class DefaultSCTPaletteFactory implements ISCTPaletteFactory {
-	
-	//Meta model type IDs
+
+	// Meta model type IDs
 	public static final String PLUGIN_ID_PREFIX = "org.yakindu.sct.ui.editor.";
 	public static final String STATECHART_ID = "Statechart";
 	public static final String REGION_ID = "Region";
@@ -47,7 +49,7 @@ public class DefaultSCTPaletteFactory implements ISCTPaletteFactory {
 	public static final String ENTRY_ID = "Entry";
 	public static final String DEEPHISTORY_ID = "DeepHistory";
 	public static final String SHALLOWHISTORY_ID = "ShallowHistory";
-	private static final String EXITNODE_ID = "Exit";
+	public static final String EXITNODE_ID = "Exit";
 	public static final String FINALSTATE_ID = "FinalState";
 	public static final String SYNCHRONIZATION_ID = "Synchronization";
 
@@ -83,7 +85,7 @@ public class DefaultSCTPaletteFactory implements ISCTPaletteFactory {
 				findIcon("icons/obj16/State-16.png"), findIcon("icons/obj32/State-32.png"), true));
 	}
 
-	private void createCompositeStateEntry(PaletteContainer container) {
+	protected void createCompositeStateEntry(PaletteContainer container) {
 		container.add(new CreationToolEntry("Composite State", "Creates a composite state", getType(COMPOSITE_STATE_ID),
 				findIcon("icons/obj16/Composite-State-16.png"), findIcon("icons/obj32/Composite-State-32.png"), true));
 	}
@@ -162,23 +164,35 @@ public class DefaultSCTPaletteFactory implements ISCTPaletteFactory {
 
 		private IElementType elementType;
 		private boolean directEdit;
+		private Tool tool;
 
 		public CreationToolEntry(String label, String shortDesc, IElementType elementType, ImageDescriptor iconSmall,
 				ImageDescriptor iconLarge, boolean directEdit) {
 			super(label, shortDesc, null, iconSmall, iconLarge);
 			this.elementType = elementType;
 			this.directEdit = directEdit;
+			// Use of 'dummy' PaletteToolEntry here is required because of an
+			// instanceof check in PaletteToolTransferDragSourceListener
+			setTemplate(new PaletteToolEntry(null, null, null) {
+				@Override
+				public Tool createTool() {
+					return CreationToolEntry.this.createTool();
+				}
+			});
 		}
 
 		@Override
 		public Tool createTool() {
-			return new DirectEditCreationTool(elementType, directEdit);
+			if (tool == null)
+				tool = new DirectEditCreationTool(elementType, directEdit);
+			return tool;
 		}
 	}
 
 	public static class ConnectionCreationToolEntry extends CombinedTemplateCreationEntry {
 
 		private IElementType elementType;
+		private Tool tool;
 
 		public ConnectionCreationToolEntry(String label, String shortDesc, IElementType elementType,
 				ImageDescriptor iconSmall, ImageDescriptor iconLarge) {
@@ -188,7 +202,9 @@ public class DefaultSCTPaletteFactory implements ISCTPaletteFactory {
 
 		@Override
 		public Tool createTool() {
-			return new ConnectionCreationTool(elementType);
+			if (tool == null)
+				tool = new ConnectionCreationTool(elementType);
+			return tool;
 		}
 
 	}
