@@ -148,6 +148,18 @@ Generally, there are two different ways to edit transitions:
 
 There are certain properties you can only edit with one of these methods. For example, to add guidance points to a transition's arrow, use the statechart editor. To change a transition's arrow's color, use the _Properties_ view.
 
+h2(#editing-regions). Editing regions
+
+To change the size or the location of a region, use the graphical editor. Drag the region to move it elsewhere. Use a selected region's handles to resize it.
+
+You can change the name of a region in the statechart editor as well as in the properties view.
+* In the statechart editor,
+** double-click on the region's current name,
+** edit the name in the text field that appeared after double-clicking,
+** press the @[Return]@ key.
+* In the properties view,
+** modify the _Region Name_ property. It is a region's only property you can access through the properties view.
+
 h2(#editing-hierarchies). Editing hierarchies
 
 Statecharts can get rather big and complex. *"Composite states":30_statechart_language#composite-state* are a way to reduce complexity and thus make statecharts easier to create, comprehend and maintain. A composite state comprises a state machine of its own within a "region":30_statechart_language#region. The states belonging to such a nested state machine are called *substates*. *"Orthogonal states":30_statechart_language#orthogonal-states* are a generalization of composite states, comprising two or more independent state machines in separate regions that are executed in parallel.
