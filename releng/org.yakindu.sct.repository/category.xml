@@ -18,6 +18,7 @@
    <feature url="features/org.yakindu.sct.generator_0.0.0.jar" id="org.yakindu.sct.generator" version="0.0.0">
       <category name="YAKINDU SCT"/>
    </feature>
+   <!--
    <feature url="features/org.yakindu.sct.documentation_0.0.0.jar" id="org.yakindu.sct.documentation" version="0.0.0">
       <category name="YAKINDU SCT"/>
    </feature>
@@ -33,6 +34,7 @@
    <feature url="features/org.yakindu.sct.editor_0.0.0.jar" id="org.yakindu.sct.editor" version="0.0.0">
       <category name="YAKINDU SCT"/>
    </feature>
+   -->
    <category-def name="YAKINDU SCT" label="YAKINDU SCT">
       <description>
          YAKINDU Statechart Tools (SCT)
