@@ -41,9 +41,13 @@ public class StextResource extends AbstractSCTResource {
 	public StextResource(URI uri) {
 		super(uri);
 	}
-	
+
 	protected void serializeStatechart(Statechart statechart) {
 		StringBuilder builder = new StringBuilder();
+		if (statechart.getNamespace() != null) {
+			builder.append("namespace " + statechart.getNamespace());
+			builder.append("\n");
+		}
 		for (Scope scope : statechart.getScopes()) {
 			builder.append(serialize(scope));
 			builder.append("\n");
