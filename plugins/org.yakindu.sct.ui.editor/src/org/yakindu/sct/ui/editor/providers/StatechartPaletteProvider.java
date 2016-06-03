@@ -33,7 +33,7 @@ public class StatechartPaletteProvider extends AbstractProvider implements IPale
 
 	public void contributeToPalette(IEditorPart editor, Object content, PaletteRoot root,
 			@SuppressWarnings("rawtypes") Map predefinedEntries) {
-		IFile adapter = editor.getEditorInput().getAdapter(IFile.class);
+		IFile adapter = (IFile) editor.getEditorInput().getAdapter(IFile.class);
 		String domainID = DomainRegistry
 				.determineDomainID(URI.createPlatformResourceURI(adapter.getFullPath().toOSString(), true));
 		Injector editorInjector = DomainRegistry.getDomainDescriptor(domainID).getDomainInjectorProvider()
