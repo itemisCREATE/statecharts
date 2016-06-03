@@ -37,12 +37,10 @@ import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 import com.google.common.collect.Lists;
-
 /**
- * Groups a set of states into one composite state. All transitions to and from
- * this set of state are preserved, i.e. the new composite state itself will
- * have no incoming or outgoing transitions. <br>
- * <br>
+ * Groups a set of states into one composite state. All transitions to and from this set of state are preserved, i.e.
+ * the new composite state itself will have no incoming or outgoing transitions.
+ * <br><br>
  * Context:
  * <ul>
  * <li>A set of states</li>
@@ -51,11 +49,11 @@ import com.google.common.collect.Lists;
  * <ul>
  * <li>All states are in the same region.</li>
  * </ul>
- * 
  * @author thomas kutz - Initial contribution and API
  * 
  */
-public class GroupStatesIntoCompositeRefactoring extends AbstractRefactoring<GraphicalEditPart> {
+public class GroupStatesIntoCompositeRefactoring extends
+		AbstractRefactoring<GraphicalEditPart> {
 
 	private View parentRegionView;
 	private PreferencesHint preferencesHint = DiagramActivator.DIAGRAM_PREFERENCES_HINT;
@@ -63,7 +61,7 @@ public class GroupStatesIntoCompositeRefactoring extends AbstractRefactoring<Gra
 	private final int PADDING = 55;
 	private State compositeState;
 	private Region innerRegion;
-
+	
 	protected List<State> contextStates;
 
 	@Override
@@ -79,11 +77,11 @@ public class GroupStatesIntoCompositeRefactoring extends AbstractRefactoring<Gra
 
 	protected void doSemanticalRefactoring() {
 		compositeState = createCompositeState();
-
+		
 		innerRegion = SGraphFactory.eINSTANCE.createRegion();
 		innerRegion.setName("inner region"); // TODO check for uniqueness?
 		compositeState.getRegions().add(innerRegion);
-
+		
 		for (State state : contextStates) {
 			innerRegion.getVertices().add(state);
 		}
@@ -91,11 +89,12 @@ public class GroupStatesIntoCompositeRefactoring extends AbstractRefactoring<Gra
 
 	protected void doGraphicalRefactoring() {
 		Node compositeStateView = createNodeForCompositeState(compositeState);
-		Node innerRegionNode = ViewService.createNode(getStateFigureCompartmentView(compositeStateView), innerRegion,
+		Node innerRegionNode = ViewService.createNode(
+				getStateFigureCompartmentView(compositeStateView), innerRegion,
 				SemanticHints.REGION, preferencesHint);
-
+		
 		View regionCompartment = ViewUtil.getChildBySemanticHint(innerRegionNode, SemanticHints.REGION_COMPARTMENT);
-		moveSelectedStateNodesTo(regionCompartment, (Bounds) compositeStateView.getLayoutConstraint());
+		moveSelectedStateNodesTo(regionCompartment, (Bounds)compositeStateView.getLayoutConstraint());
 	}
 
 	protected State createCompositeState() {
@@ -106,8 +105,8 @@ public class GroupStatesIntoCompositeRefactoring extends AbstractRefactoring<Gra
 	}
 
 	protected Node createNodeForCompositeState(State compositeState) {
-		Node compositeStateNode = ViewService.createNode(parentRegionView, compositeState, SemanticHints.STATE,
-				preferencesHint);
+		Node compositeStateNode = ViewService.createNode(parentRegionView,
+				compositeState, SemanticHints.STATE, preferencesHint);
 		setCompositeStateLayoutConstraint(compositeStateNode);
 		return compositeStateNode;
 	}
@@ -120,37 +119,27 @@ public class GroupStatesIntoCompositeRefactoring extends AbstractRefactoring<Gra
 			contextStates.add((State) element);
 		}
 	}
-
+	
 	@Override
 	public void setContextObjects(List<GraphicalEditPart> contextObject) {
 		super.setContextObjects(contextObject);
 		setContextStates();
 	}
-
+	
 	protected void moveSelectedStateNodesTo(View containerView, Bounds compositeBounds) {
 
 		for (GraphicalEditPart editPart : getContextObjects()) {
-			Node stateNode = (Node) editPart.getNotationView();
+			Node stateNode = (Node)editPart.getNotationView();
 			ViewUtil.insertChildView(containerView, stateNode, ViewUtil.APPEND, true);
 			Bounds newBounds = NotationFactory.eINSTANCE.createBounds();
-			Bounds oldBounds = (Bounds) stateNode.getLayoutConstraint();
-			newBounds.setX(oldBounds.getX() - compositeBounds.getX() - 7); // FIXME
-																			// use
-																			// bounds
-																			// of
-																			// region
-																			// view
-			newBounds.setY(oldBounds.getY() - compositeBounds.getY() - 34); // FIXME
-																			// use
-																			// bounds
-																			// of
-																			// region
-																			// view
-
-			((Node) editPart.getNotationView()).setLayoutConstraint(newBounds);
+			Bounds oldBounds = (Bounds)stateNode.getLayoutConstraint();
+			newBounds.setX(oldBounds.getX() - compositeBounds.getX() - 7); //FIXME use bounds of region view
+			newBounds.setY(oldBounds.getY() - compositeBounds.getY() - 34); //FIXME use bounds of region view
+			
+			((Node)editPart.getNotationView()).setLayoutConstraint(newBounds);
 		}
 	}
-
+	
 	/**
 	 * Iterates through all {@link StateEditPart}s of the current selection and
 	 * computes layout constraints for the composite node.
@@ -161,12 +150,12 @@ public class GroupStatesIntoCompositeRefactoring extends AbstractRefactoring<Gra
 	protected void setCompositeStateLayoutConstraint(Node compositeStateNode) {
 
 		Rectangle newbounds = null;
-
+		
 		for (GraphicalEditPart editPart : getContextObjects()) {
 			Rectangle childBounds = editPart.getFigure().getBounds();
 			if (newbounds == null)
 				newbounds = childBounds.getCopy();
-
+			
 			newbounds.union(childBounds);
 		}
 		newbounds.expand(new Insets(PADDING, PADDING, PADDING, PADDING));
@@ -180,7 +169,8 @@ public class GroupStatesIntoCompositeRefactoring extends AbstractRefactoring<Gra
 	}
 
 	protected View getStateFigureCompartmentView(Node compositeStateView) {
-		return ViewUtil.getChildBySemanticHint(compositeStateView, SemanticHints.STATE_FIGURE_COMPARTMENT);
+		return ViewUtil.getChildBySemanticHint(compositeStateView,
+				SemanticHints.STATE_FIGURE_COMPARTMENT);
 	}
 
 	protected String getNameForCompositeState() {
@@ -189,7 +179,7 @@ public class GroupStatesIntoCompositeRefactoring extends AbstractRefactoring<Gra
 			nameBuilder.append("_");
 			nameBuilder.append(state.getName());
 		}
-		makeNameUnique(nameBuilder);
+		makeNameUnique(nameBuilder);	
 		return nameBuilder.toString();
 	}
 
@@ -213,9 +203,9 @@ public class GroupStatesIntoCompositeRefactoring extends AbstractRefactoring<Gra
 		parentRegionView = null;
 		for (IGraphicalEditPart editPart : getContextObjects()) {
 			if (parentRegionView == null) {
-				parentRegionView = (Node) ((Node) editPart.getNotationView()).eContainer();
+				parentRegionView = (Node) ((Node)editPart.getNotationView()).eContainer();
 			} else {
-				Node nextParentRegion = (Node) ((Node) editPart.getNotationView()).eContainer();
+				Node nextParentRegion = (Node) ((Node)editPart.getNotationView()).eContainer();
 				if (!nextParentRegion.equals(parentRegionView)) {
 					return false;
 				}
@@ -228,12 +218,12 @@ public class GroupStatesIntoCompositeRefactoring extends AbstractRefactoring<Gra
 	protected String getCommandLabel() {
 		return "Group states into composite state";
 	}
-
+	
 	@Override
 	protected Resource getResource() {
 		return getContextObject().resolveSemanticElement().eResource();
 	}
-
+	
 	@Override
 	protected void executeCommand(AbstractTransactionalCommand refactoringCommand) {
 		executeCommand(refactoringCommand, getResource(), false);
