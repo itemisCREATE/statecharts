@@ -63,14 +63,21 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 	protected void runCycle() {
 		try {
 			interpreter.runCycle();
-		} catch (WrappedException ex) {
-			handleWrappedException(ex);
+		} catch (Exception e) {
+			handleException(e);
 		}
 	}
 
-	private void handleWrappedException(WrappedException ex) {
+	private void handleException(Exception e) {
+		if (e instanceof WrappedException) {
+			WrappedException e1 = (WrappedException)e;
+			handleException(e1.getCause().getMessage(), e1.getCause());
+		} else handleException(e.getMessage(), e);
+	}
+	
+	private void handleException(String message, Throwable t) {
 		Status errorStatus = new Status(Status.ERROR, Activator.PLUGIN_ID, ERROR_DURING_SIMULATION,
-				ex.getCause().getMessage(), ex.getCause());
+				message, t);
 		IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(errorStatus);
 		try {
 			statusHandler.handleStatus(errorStatus, getDebugTarget());
@@ -116,8 +123,8 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 	public void start() {
 		try {
 			interpreter.enter();
-		} catch (WrappedException ex) {
-			handleWrappedException(ex);
+		} catch (Exception ex) {
+			handleException(ex);
 		}
 	}
 
@@ -130,8 +137,8 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 		try {
 			suspended = false;
 			interpreter.resume();
-		} catch (WrappedException ex) {
-			handleWrappedException(ex);
+		} catch (Exception ex) {
+			handleException(ex);
 		}
 	}
 
@@ -145,8 +152,8 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 			interpreter.resume();
 			interpreter.runCycle();
 			interpreter.suspend();
-		} catch (WrappedException ex) {
-			handleWrappedException(ex);
+		} catch (Exception ex) {
+			handleException(ex);
 		}
 	}
 
