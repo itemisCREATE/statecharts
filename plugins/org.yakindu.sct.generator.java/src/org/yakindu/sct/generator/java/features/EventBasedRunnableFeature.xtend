@@ -37,7 +37,8 @@ class EventBasedRunnableFeature {
 	}
 
 	def getNameSuffix(GeneratorEntry it) {
-		if (featureEventRunnable != null)
+		if (featureEventRunnable != null &&
+			featureEventRunnable.getParameterValue(IJavaFeatureConstants::VALUE_NAME_SUFFIX) != null)
 			featureEventRunnable.getParameterValue(IJavaFeatureConstants::VALUE_NAME_SUFFIX).stringValue
 		else
 			IJavaFeatureConstants::RUNNABLE_WRAPPER_NAME_SUFFIX_DEFAULT
