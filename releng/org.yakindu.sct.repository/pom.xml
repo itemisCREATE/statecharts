@@ -11,4 +11,41 @@
 	</parent>
 	<artifactId>org.yakindu.sct.repository</artifactId>
 	<packaging>eclipse-repository</packaging>
+
+	<properties>
+		<source.update.site>http://updates.yakindu.org/sct/mars/releases</source.update.site>
+		<target.update.site>merged</target.update.site>		
+		<tycho.extras.version>0.24.0</tycho.extras.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-p2-extras-plugin</artifactId>
+				<version>${tycho.extras.version}</version>
+				<inherited>false</inherited>
+				<executions>
+					<execution>
+						<id>append</id>
+						<phase>package</phase>
+						<goals>
+							<goal>mirror</goal>
+						</goals>
+						<configuration>
+							<source>
+								<repository>
+									<url>${source.update.site}</url>
+									<layout>p2</layout>
+								</repository>
+							</source>
+							<destination>${target.update.site}</destination>
+							<compress>true</compress>
+							<append>true</append>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
