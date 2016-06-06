@@ -19,6 +19,7 @@ public class ExamplesWizard extends Wizard implements INewWizard {
 	public ExamplesWizard() {
 		super();
 		setNeedsProgressMonitor(true);
+		
 	}
 	
 	public void addPages() {
