@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.yakindu.sct.examples.ui"
+            name="YAKINDU SCT">
+      </category>
+      <wizard
+            category="org.yakindu.sct.examples.ui"
+            class="org.yakindu.sct.examples.ui.wizards.ExamplesWizard"
+            icon="icons/sample.gif"
+            id="org.yakindu.sct.examples.ui.wizards.ExamplesWizard"
+            name="YAKINDU Examples">
+      </wizard>
+   </extension>
+
+</plugin>
