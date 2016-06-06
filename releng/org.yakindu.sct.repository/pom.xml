@@ -14,7 +14,7 @@
 
 	<properties>
 		<source.update.site>http://updates.yakindu.org/sct/mars/releases</source.update.site>
-		<target.update.site>merged</target.update.site>		
+		<target.update.site>composite</target.update.site>		
 		<tycho.extras.version>0.24.0</tycho.extras.version>
 	</properties>
 
