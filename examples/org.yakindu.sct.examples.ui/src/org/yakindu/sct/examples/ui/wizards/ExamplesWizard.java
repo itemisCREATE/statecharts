@@ -19,9 +19,9 @@ public class ExamplesWizard extends Wizard implements INewWizard {
 	public ExamplesWizard() {
 		super();
 		setNeedsProgressMonitor(true);
-		
+
 	}
-	
+
 	public void addPages() {
 		page = new ExamplesWizardPage(selection);
 		addPage(page);
@@ -50,13 +50,12 @@ public class ExamplesWizard extends Wizard implements INewWizard {
 		}
 		return true;
 	}
-	
-	protected void doFinish(IProgressMonitor monitor)
-		throws CoreException {
-		//TODO: Import selected project
+
+	protected void doFinish(IProgressMonitor monitor) throws CoreException {
+		// TODO: Import selected project
 		monitor.worked(1);
 	}
-	
+
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 	}
