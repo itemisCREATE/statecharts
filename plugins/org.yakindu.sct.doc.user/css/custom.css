@@ -125,6 +125,7 @@ body {
 }
 
 img {
+	*/ it should be considered to move max-width and min-width somewhere else, because it is overwritten everywhere anyhow */
     max-width: 61.8%;
     min-width: 38.2%;
     height: auto;
@@ -166,8 +167,8 @@ img.shadowless {
 img.inlinemediaobject {
     display: inline;
     height: 1.1em;
-    max-width: initial;
-    min-width: initial;
+    width: auto; /* For keeping aspect ratio */
+    min-width: 0; /* Overrides min-width from img, as 'initial' does not work as intended */
 }
 
 
