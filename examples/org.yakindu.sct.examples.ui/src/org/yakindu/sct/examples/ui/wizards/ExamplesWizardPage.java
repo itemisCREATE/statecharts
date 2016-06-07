@@ -29,7 +29,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.yakindu.sct.examples.ui.service.IExampleService;
 import org.yakindu.sct.examples.ui.service.IExampleService.ExampleData;
-import org.yakindu.sct.examples.ui.service.MockExampleService;
+import org.yakindu.sct.examples.ui.service.LocalJsonExampleService;
 import org.yakindu.sct.examples.ui.wizards.provider.ExampleContentProvider;
 import org.yakindu.sct.examples.ui.wizards.provider.ExampleLabelProvider;
 
@@ -42,7 +42,7 @@ public class ExamplesWizardPage extends WizardPage {
 	public static final Path FILEICON = new Path("icons/logo-16.png");
 	public static final Path FOLDERICON = new Path("icons/logo-16.png");
 
-	private IExampleService exampleService = new MockExampleService();
+	private IExampleService exampleService = new LocalJsonExampleService();
 	private TreeViewer viewer;
 	private Label title, description, canvas;
 	private Button btLeft,btRight;
