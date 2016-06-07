@@ -12,7 +12,8 @@ public class MockExampleService implements IExampleService {
 		List<ExampleData> result = new ArrayList<>();
 		try {
 			URL[] url = { new URL("http://fab404.com/wp-content/uploads/2013/06/knockknockfactory404.jpg"),
-						  new URL("http://science-all.com/images/wallpapers/motocross-wallpaper/motocross-wallpaper-22.jpg") };
+						  new URL("http://science-all.com/images/wallpapers/motocross-wallpaper/motocross-wallpaper-22.jpg"), 
+						  new URL("http://www.witze-blogger.de/wp-content/uploads/2014/04/wlan.jpg")};
 			ExampleData[] domain = new ExampleData[2];
 			ExampleData[] edGeneric = new ExampleData[10];
 			for (int i = 0; i < edGeneric.length; i++) {
