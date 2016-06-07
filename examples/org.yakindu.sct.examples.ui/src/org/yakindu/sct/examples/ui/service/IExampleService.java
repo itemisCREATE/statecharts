@@ -1,5 +1,6 @@
 package org.yakindu.sct.examples.ui.service;
 
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public interface IExampleService {
 		private String domain;
 		private String description;
 		private URL[] images;
+		private File projectDir;
 
 		public ExampleData(String domain, String id, String title, String description, URL[] images) {
 			this.domain = domain;
@@ -84,6 +86,14 @@ public interface IExampleService {
 
 		public void setImages(URL[] images) {
 			this.images = images;
+		}
+
+		public File getProjectDir() {
+			return projectDir;
+		}
+
+		public void setProjectDir(File projectDir) {
+			this.projectDir = projectDir;
 		}
 
 		public boolean hasChildren() {
