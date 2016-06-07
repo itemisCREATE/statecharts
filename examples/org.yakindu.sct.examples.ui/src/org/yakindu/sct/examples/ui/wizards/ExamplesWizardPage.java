@@ -126,8 +126,10 @@ public class ExamplesWizardPage extends WizardPage {
 				newBounds.width = rCanvas.width;
 				newBounds.height = (int) Math.round(rCanvas.width / aspectRatio); 
 			}
-			btLeft.setEnabled(false);
-			btRight.setEnabled(true);
+			if(urlnr == 0) {
+				btLeft.setEnabled(false);
+				btRight.setEnabled(true);
+			}
 			canvas.setImage(ImageDescriptor.createFromImageData(image.getImageData().scaledTo(newBounds.width, newBounds.height)).createImage());
 		} else {
 			canvas.setImage(null);
