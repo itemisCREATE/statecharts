@@ -10,14 +10,21 @@
  */
 package org.yakindu.sct.domain.extension;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.EcoreUtil2;
@@ -145,5 +152,25 @@ public class DomainRegistry {
 				? domainElement.getDomainID()
 				: BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 		return getDomainDescriptor(domainID);
+	}
+	
+	public static String determineDomainID(URI uri) {
+		String result = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
+		if (URIConverter.INSTANCE.exists(uri, null)) {
+			XMIResource resource = new XMIResourceImpl(uri);
+			try {
+				resource.load(null);
+				DomainElement element = (DomainElement) EcoreUtil.getObjectByType(resource.getContents(),
+						BasePackage.Literals.DOMAIN_ELEMENT);
+				String domainID = element.getDomainID();
+				Assert.isNotNull(domainID);
+				result = domainID;
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				resource.unload();
+			}
+		}
+		return result;
 	}
 }

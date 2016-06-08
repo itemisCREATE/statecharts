@@ -21,6 +21,7 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
+import org.eclipse.gmf.runtime.diagram.ui.tools.CreationTool;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -35,24 +36,37 @@ import org.eclipse.swt.widgets.Display;
  * @author muehlbrandt
  * 
  */
-public class CreationTool extends
-		org.eclipse.gmf.runtime.diagram.ui.tools.CreationTool {
-	
+public class DirectEditCreationTool extends CreationTool {
+
 	private boolean performDirectEdit;
-	
+
 	/**
 	 * Default constructor
-	 * @param elementType The type the tool should create.
-	 * @param performDirectEdit flag to set direct editing enabled or disabled.
+	 * 
+	 * @param elementType
+	 *            The type the tool should create.
+	 * @param performDirectEdit
+	 *            flag to set direct editing enabled or disabled.
 	 */
-	public CreationTool(IElementType elementType, boolean performDirectEdit) {
+	public DirectEditCreationTool(IElementType elementType, boolean performDirectEdit) {
 		super(elementType);
 		Assert.isNotNull(performDirectEdit);
 		this.performDirectEdit = performDirectEdit;
 	}
-	
+
+	/**
+	 * Default constructor with direct editing enabled
+	 * 
+	 * @param elementType
+	 *            The type the tool should create.
+	 */
+	public DirectEditCreationTool(IElementType elementType) {
+		this(elementType, true);
+	}
+
 	/**
 	 * Select the newly added shape view by default
+	 * 
 	 * @param viewer
 	 * @param objects
 	 */
@@ -62,8 +76,7 @@ public class CreationTool extends
 		for (Iterator i = objects.iterator(); i.hasNext();) {
 			Object object = i.next();
 			if (object instanceof IAdaptable) {
-				Object editPart = viewer.getEditPartRegistry().get(
-						((IAdaptable) object).getAdapter(View.class));
+				Object editPart = viewer.getEditPartRegistry().get(((IAdaptable) object).getAdapter(View.class));
 				if (editPart != null)
 					editparts.add(editPart);
 			}
@@ -81,8 +94,7 @@ public class CreationTool extends
 						// this basically, the editpart has been deleted when
 						// this code is being executed. (see RATLC00527114)
 						if (editPart.isActive()) {
-							editPart.performRequest(new Request(
-									RequestConstants.REQ_DIRECT_EDIT));
+							editPart.performRequest(new Request(RequestConstants.REQ_DIRECT_EDIT));
 							revealEditPart((EditPart) editparts.get(0));
 						}
 					}
@@ -90,17 +102,21 @@ public class CreationTool extends
 			}
 		}
 	}
-	
+
 	/**
 	 * Get the current state of direct editing behavior.
-	 * @return {@code true} if direct editing is enabled on element creation. Otherwise {@code false}.
+	 * 
+	 * @return {@code true} if direct editing is enabled on element creation.
+	 *         Otherwise {@code false}.
 	 */
 	public boolean isPerformDirectEdit() {
 		return performDirectEdit;
 	}
 
 	/**
-	 * Set the direct editing flag to allow or disallow direct editing on element creation
+	 * Set the direct editing flag to allow or disallow direct editing on
+	 * element creation
+	 * 
 	 * @param performDirectEdit
 	 */
 	public void setPerformDirectEdit(boolean performDirectEdit) {

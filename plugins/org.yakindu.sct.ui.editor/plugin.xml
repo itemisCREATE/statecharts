@@ -256,140 +256,18 @@
       </wizard>
    </extension>
    
-   <!-- Palette Provider -->
-   
-   <extension
-         point="org.eclipse.gmf.runtime.diagram.ui.paletteProviders">
-      <paletteProvider
-            class="org.yakindu.sct.ui.editor.providers.StatechartPaletteProvider">
-         <contribution
-               factoryClass="org.yakindu.sct.ui.editor.editor.StatechartDiagramPaletteFactory">
-            <entry
-                  id="tools"
-                  kind="drawer"
-                  label="Tools"
-                  path="/">
-                   <expand
-                         force="true">
-                     </expand>
-            </entry>
-             <entry
-                   description="Creates a transition"
-                   id="org.yakindu.sct.ui.editor.Transition"
-                   kind="tool"
-                   label="Transition"
-                   large_icon="icons/obj32/transition-32.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/transition-16.png">
-             </entry>
-             
-             <entry
-                  description="Creates a state"
-                  id="org.yakindu.sct.ui.editor.State"
-                  kind="tool"
-                  label="State"
-                  large_icon="icons/obj32/State-32.png"
-                  path="/tools/"
-                  small_icon="icons/obj16/State-16.png">
-            </entry>
-             <entry
-                  description="Creates a composite state"
-                  id="org.yakindu.sct.ui.editor.CompositeState"
-                  kind="tool"
-                  label="Composite State"
-                  large_icon="icons/obj32/Composite-State-32.png"
-                  path="/tools/"
-                  small_icon="icons/obj16/Composite-State-16.png">
-            </entry>
-             <entry
-                  description="Creates a orthogonal state"
-                  id="org.yakindu.sct.ui.editor.OrthogonalState"
-                  kind="tool"
-                  label="Orthogonal State"
-                  large_icon="icons/obj32/Orthogonal-State-32.png"
-                  path="/tools/"
-                  small_icon="icons/obj16/Orthogonal-State-16.png">
-            </entry>
-             <entry
-                   description="Creates a region"
-                   id="org.yakindu.sct.ui.editor.Region"
-                   kind="tool"
-                   label="Region"
-                   large_icon="icons/obj32/Region-32.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/Region-16.png">
-             </entry>
-             <entry
-                   description="Creates an initial entry node"
-                   id="org.yakindu.sct.ui.editor.Entry"
-                   kind="tool"
-                   label="Entry"
-                   large_icon="icons/obj32/Initial-State-32.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/Initial-State-16.png">
-             </entry>
-              <entry
-                   description="Creates a shallow history"
-                   id="org.yakindu.sct.ui.editor.ShallowHistory"
-                   kind="tool"
-                   label="Shallow History"
-                   large_icon="icons/obj32/Shallow-History-32.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/Shallow-History-16.png">
-             </entry>
-             <entry
-                   description="Creates a deep history"
-                   id="org.yakindu.sct.ui.editor.DeepHistory"
-                   kind="tool"
-                   label="Deep History"
-                   large_icon="icons/obj32/Deep-History-32.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/Deep-History-16.png">
-             </entry>
-             <entry
-                   description="Creates a final state"
-                   id="org.yakindu.sct.ui.editor.FinalState"
-                   kind="tool"
-                   label="Final State"
-                   large_icon="icons/obj32/Final-State-32.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/Final-State-16.png">
-             </entry>
-             <entry
-                   description="Creates an exit node"
-                   id="org.yakindu.sct.ui.editor.Exit"
-                   kind="tool"
-                   label="Exit Node"
-                   large_icon="icons/obj32/Exit-Point-32.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/Exit-Point-16.png">
-             </entry>
-             <entry
-                   description="Creates a choice"
-                   id="org.yakindu.sct.ui.editor.Choice"
-                   kind="tool"
-                   label="Choice"
-                   large_icon="icons/obj32/Choice-32.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/Choice-16.png">
-             </entry>
-             <entry
-                   description="Creates a synchronization"
-                   id="org.yakindu.sct.ui.editor.Synchronization"
-                   kind="tool"
-                   label="Synchronization"
-                   large_icon="icons/obj32/Synchronization-32.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/Synchronization-16.png">
-             </entry>
-         </contribution>
+<!-- Palette Provider -->
+<extension
+     point="org.eclipse.gmf.runtime.diagram.ui.paletteProviders">
+  <paletteProvider
+        class="org.yakindu.sct.ui.editor.providers.StatechartPaletteProvider">
          <Priority
-               name="Lowest">
-         </Priority>
-         <editor
-               class="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
-         </editor>
-      </paletteProvider>
+           name="High">
+     </Priority>
+     <editor
+           class="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+     </editor>
+  </paletteProvider>
    </extension>
 
 <!-- Property Tabs -->
