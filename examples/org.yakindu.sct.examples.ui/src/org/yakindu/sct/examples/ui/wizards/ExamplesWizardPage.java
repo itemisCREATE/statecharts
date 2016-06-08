@@ -214,4 +214,8 @@ public class ExamplesWizardPage extends WizardPage {
 			}
 		}
 	}
+	
+	public ExampleData getLastValidSelection() {
+		return lastValidSelection;
+	}
 }
