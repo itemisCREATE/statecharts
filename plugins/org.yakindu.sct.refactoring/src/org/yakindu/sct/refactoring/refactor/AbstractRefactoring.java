@@ -110,6 +110,10 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 			}
 
 		};
+		executeCommand(refactoringCommand);
+	}
+
+	protected void executeCommand(AbstractTransactionalCommand refactoringCommand) {
 		executeCommand(refactoringCommand, getResource());
 	}
 
@@ -159,11 +163,15 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 	 *            the resource used for enabling/disabling its serializer
 	 */
 	public static void executeCommand(IUndoableOperation command, Resource resource) {
+		executeCommand(command, resource, true);
+	}
+
+	public static void executeCommand(IUndoableOperation command, Resource resource, boolean serialize) {
 		IOperationHistory history = OperationHistoryFactory.getOperationHistory();
 
 		if (resource instanceof AbstractSCTResource) {
 			// enable serializer
-			((AbstractSCTResource) resource).setSerializerEnabled(true);
+			((AbstractSCTResource) resource).setSerializerEnabled(serialize);
 			try {
 				history.execute(command, new NullProgressMonitor(), null);
 			} catch (ExecutionException e) {
@@ -180,4 +188,5 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 			}
 		}
 	}
+
 }

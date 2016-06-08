@@ -22,6 +22,7 @@ import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.notation.Bounds;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
@@ -221,6 +222,11 @@ public class GroupStatesIntoCompositeRefactoring extends
 	@Override
 	protected Resource getResource() {
 		return getContextObject().resolveSemanticElement().eResource();
+	}
+	
+	@Override
+	protected void executeCommand(AbstractTransactionalCommand refactoringCommand) {
+		executeCommand(refactoringCommand, getResource(), false);
 	}
 
 }
