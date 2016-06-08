@@ -11,6 +11,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
+import org.yakindu.sct.examples.ui.service.IExampleService.ExampleData;
 
 public class ExamplesWizard extends Wizard implements INewWizard {
 	private ExamplesWizardPage page;
@@ -52,7 +53,10 @@ public class ExamplesWizard extends Wizard implements INewWizard {
 	}
 
 	protected void doFinish(IProgressMonitor monitor) throws CoreException {
-		// TODO: Import selected project
+		
+		ExampleData toImport = page.getLastValidSelection();
+		System.out.println(toImport.getProjectDir().getAbsolutePath());
+		
 		monitor.worked(1);
 	}
 

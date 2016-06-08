@@ -3,7 +3,6 @@ package org.yakindu.sct.examples.ui.service;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -51,7 +50,6 @@ public class LocalJsonExampleService implements IExampleService {
 					json += s;
 				}
 				reader.close();
-				System.out.println(json);
 				ExampleData ed = gson.fromJson(json, ExampleData.class);
 				ed.setProjectDir(file.getParentFile());
 				result.add(ed);
