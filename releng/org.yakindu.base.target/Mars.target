@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Mars (SCT)" sequenceNumber="43">
+<?pde version="3.8"?><target name="Mars (SCT)" sequenceNumber="44">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.1.1.201509120604"/>
@@ -31,6 +31,10 @@
 <unit id="com.google.inject.source" version="3.0.0.v201312141243"/>
 <unit id="com.google.inject.multibindings.source" version="3.0.0.v201402270930"/>
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.jgit.feature.group" version="4.3.1.201605051710-r"/>
+<repository location="http://download.eclipse.org/egit/updates/"/>
 </location>
 </locations>
 </target>
