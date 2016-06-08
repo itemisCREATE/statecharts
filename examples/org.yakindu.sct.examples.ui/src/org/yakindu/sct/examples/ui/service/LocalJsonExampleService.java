@@ -51,8 +51,10 @@ public class LocalJsonExampleService implements IExampleService {
 					json += s;
 				}
 				reader.close();
+				System.out.println(json);
 				ExampleData ed = gson.fromJson(json, ExampleData.class);
 				ed.setProjectDir(file.getParentFile());
+				result.add(ed);
 			} catch(Exception e) {e.printStackTrace();}
 		}
 		return result;
@@ -85,6 +87,7 @@ public class LocalJsonExampleService implements IExampleService {
 				}
 			}
 			root[d].setChildren(children);
+			result.add(root[d]);
 		}
 		return result;
 		
