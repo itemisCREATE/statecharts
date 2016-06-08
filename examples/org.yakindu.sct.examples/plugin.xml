@@ -41,6 +41,16 @@
         project="true">
 			<description>YAKINDU Statechart Tools example of a traffic light with java generated source code</description>
 		</wizard>
+		<wizard
+		category="org.eclipse.ui.Examples/org.yakindu.sct.ui.Examples"
+		class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+		finalPerspective="org.yakindu.sct.ui.ModelingPerspective"
+		icon="icons/logo-16.png"
+		id="org.yakindu.sct.examples.ferry"
+		name="Ferry Example (river crossing puzzle)"
+		project="true">
+			<description>YAKINDU Statechart Tools example of a Game based on Statecharts and Java source code</description>
+		</wizard>
 
 	</extension>
 	
@@ -69,5 +79,13 @@
 		 <projectDescriptor name="digital_watch" contentURI="contents/digital_watch.zip" description="Digital watch hierarchies parallel regions, etc..."/>
 	  </example>
    </extension>
+    <extension point="org.eclipse.emf.common.ui.examples">
+      <example
+      	 id="ferry"
+      	 pageImage="icons/logo-16.png"
+      	 wizardID="org.yakindu.sct.examples.ferry">
+      	 <projectDescriptor name="ferry" contentURI="contents/ferry.zip" description="A Puzzle based on java source code and statecharts"/>
+      </example>
+   </extension> 
    
 </plugin>
