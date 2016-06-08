@@ -30,6 +30,7 @@ public interface IExampleService {
 			this.parent = parent;
 			this.children = children;
 			this.title = title;
+			this.domain = title;
 		}
 
 		public ExampleData getParent() {
