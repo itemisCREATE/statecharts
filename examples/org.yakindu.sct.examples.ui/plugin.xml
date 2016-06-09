@@ -9,7 +9,7 @@
             id="org.yakindu.sct.examples.ui.wizards.ExamplesWizard"
             name="YAKINDU Examples">
       	</wizard>
-  	</extension>
+    </extension>
   	<extension point="org.eclipse.ui.newWizards">
   		<category
         	id="YAKINDU"
@@ -24,4 +24,3 @@
       	</wizard>
   	</extension>
 </plugin>
-
