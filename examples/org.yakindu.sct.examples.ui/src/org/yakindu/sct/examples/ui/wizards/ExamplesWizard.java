@@ -11,23 +11,37 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-import org.yakindu.sct.examples.ui.service.IExampleService.ExampleData;
+import org.yakindu.sct.examples.ui.wizards.pages.AskPermissionPage;
+import org.yakindu.sct.examples.ui.wizards.pages.SelectExamplePage;
+import org.yakindu.sct.examples.ui.wizards.pages.UpdateRepositoryPage;
 
-public class ExamplesWizard extends Wizard implements INewWizard {
-	private ExamplesWizardPage page;
+public class ExamplesWizard extends Wizard implements INewWizard,ExampleWizardConstants {
+	
+	private AskPermissionPage page1;
+	private UpdateRepositoryPage page2;
+	private SelectExamplePage page3;
 	private ISelection selection;
 
 	public ExamplesWizard() {
 		super();
+		setWindowTitle(WINDOW_TITLE);
 		setNeedsProgressMonitor(true);
+		
+	}
 
+	public void init(IWorkbench workbench, IStructuredSelection selection) {
+		this.selection = selection;
 	}
 
 	public void addPages() {
-		page = new ExamplesWizardPage(selection);
-		addPage(page);
+		page1 = new AskPermissionPage(selection);
+		page2 = new UpdateRepositoryPage(selection);
+		page3 = new SelectExamplePage(selection);
+		addPage(page1);
+		addPage(page2);
+		addPage(page3);
 	}
-
+	
 	public boolean performFinish() {
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
@@ -53,14 +67,7 @@ public class ExamplesWizard extends Wizard implements INewWizard {
 	}
 
 	protected void doFinish(IProgressMonitor monitor) throws CoreException {
-		
-		ExampleData toImport = page.getLastValidSelection();
-		System.out.println(toImport.getProjectDir().getAbsolutePath());
-		
+		page3.importSelectedExample(monitor);
 		monitor.worked(1);
-	}
-
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		this.selection = selection;
 	}
 }
