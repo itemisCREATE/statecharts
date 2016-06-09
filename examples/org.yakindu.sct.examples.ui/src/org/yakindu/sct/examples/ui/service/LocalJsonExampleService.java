@@ -5,18 +5,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.yakindu.sct.examples.ui.wizards.ExampleWizardConstants;
+
 import java.util.Iterator;
 
 import com.google.gson.Gson;
 
-public class LocalJsonExampleService implements IExampleService {
-
-	private String sep = System.getProperty("file.separator");
-	private File root = new File(System.getProperty("user.home") + "\\Desktop\\jsons");
-
-	public void setRoot(File file) {
-		this.root = file;
-	}
+public class LocalJsonExampleService implements IExampleService,ExampleWizardConstants {
 
 	@Override
 	public List<ExampleData> getAllExamples() {
@@ -28,8 +24,8 @@ public class LocalJsonExampleService implements IExampleService {
 
 	protected List<File> searchMetaInRoot() {
 		List<File> result = new ArrayList<File>();
-		for (int i = 0; i < root.listFiles().length; i++) {
-			File meta = new File(root.listFiles()[i].getPath() + sep + "metadata.json");
+		for (int i = 0; i < LOCAL_REPO_ROOT.listFiles().length; i++) {
+			File meta = new File(LOCAL_REPO_ROOT.listFiles()[i].getPath() + System.getProperty("file.separator") + "metadata.json");
 			if (meta.exists()) {
 				result.add(meta);
 			}
@@ -88,6 +84,11 @@ public class LocalJsonExampleService implements IExampleService {
 			result.add(root[d]);
 		}
 		return result;
+		
+	}
+	
+	@Override
+	public void importSelectedExample(ExampleData edata) {
 		
 	}
 }

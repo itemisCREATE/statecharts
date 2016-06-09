@@ -5,8 +5,10 @@ import java.net.URL;
 import java.util.List;
 
 public interface IExampleService {
-
+	
 	public List<ExampleData> getAllExamples();
+	
+	public void importSelectedExample(ExampleData edata);
 
 	public class ExampleData {
 		private ExampleData parent;
