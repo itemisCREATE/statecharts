@@ -80,7 +80,7 @@ public class GitProgressMonitor extends BatchingProgressMonitor {
 		}
 		if (current > 0) {
 			monitor.setTaskName(display.toString());
-			monitor.worked(current);
+			monitor.worked(1);
 		}
 	}
 }
