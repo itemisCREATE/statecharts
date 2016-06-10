@@ -7,6 +7,15 @@ h1(#Test2). Yakindu SCT Testcase 12 - Refactor
 | 12.2.1 | Simulate | Run simulation. | The behavior of the refactored model is equivalent to its behavior before refactoring. The state *LightSwitch* state is highlighted in red. Transitions between *LightOff* and *LightOn* can be observed in the new editor tab mentioned in T12.2. | %{color:red}open% |
 | 12.3 | Inline subdiagram | Select the *LightSwitch* state.<p>Right click, then select *Refactor → Inline Subdiagram*.</p> | See T12.1. | %{color:red}open% |
 | 12.3.1 | Simulate | Run simulation | Behavior should be the same as before re-factoring | %{color:red}open% |
+
+| 12.4 | Prepare statechart | - Delete the transition from LightOn to LightOff and the state behavior of both states <p>- make a new transition from LightOff to LigtOn <p>- Enter event keypress/light = true as trigger and action for both transitions  | A new transition with trigger and action keypress/light = true is created. The other transition has keypress/light = true as trigger and action | %{color:red}open% |
+
+| 12.5| Fold Incoming Actions | Select LightOn state  <p> Right click on the state <p> Select Fold Incoming Actions | the action is shown in in the state LightOn and only the trigger is shown in the transitions  | %{color:red}open% |
+| 12.5.1 | Simulate | Run simulation | Behavior should be the same as before re-factoring | %{color:red}open% |
+
+| 12.6| Unfold Entry Actions | Select LightOn state  <p> Right click on the state <p> Select Unfold Entry Actions | the action is shown behind the trigger again | %{color:red}open% |
+| 12.6.1 | Simulate | Run simulation | Behavior should be the same as before re-factoring | %{color:red}open% |
+
 | 12.4 | Toggle alignment | Create a new statechart model.<p>Delete the state that has been created.</p><p>Add an orthogonal state (see the palette on the right).</p><p>Ignore any errors.</p><p>Right-click on the state and select *Toggle Subregion Alignment* in the shown context menu.</p><p>Repeat the last action.</p> | An orthogonal state without a name is added to the statechart.<p>Its subregions *r1* and *r2* are horizontally aligned.</p><p>Toggling the subregion alignment toggles between horizontal and vertical alignment of the subregions.</p> | %{color:red}open% |
 
 
