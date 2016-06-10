@@ -13,7 +13,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.wizard.WizardPage;
@@ -47,7 +46,7 @@ public class SelectExamplePage extends WizardPage implements ExampleWizardConsta
 	private ExampleData lastValidSelection;
 	private int urlnr;
 
-	public SelectExamplePage(ISelection selection) {
+	public SelectExamplePage(IStructuredSelection selection) {
 		super(SELECT_PAGE_TITLE);
 		setTitle(SELECT_PAGE_TITLE);
 		setDescription(SELECT_PAGE_DESCRIPTION);
@@ -215,29 +214,31 @@ public class SelectExamplePage extends WizardPage implements ExampleWizardConsta
 			}
 		}
 	}
-	
+
 	protected void addPageChangedListener() {
-		if(getContainer() instanceof IPageChangeProvider) {
+		if (getContainer() instanceof IPageChangeProvider) {
 			IPageChangeProvider provider = (IPageChangeProvider) getContainer();
 			provider.addPageChangedListener(new IPageChangedListener() {
-				
+
 				@Override
 				public void pageChanged(PageChangedEvent event) {
-					if(event.getSelectedPage().equals(SelectExamplePage.this)) {
+					if (event.getSelectedPage().equals(SelectExamplePage.this)) {
 						showExampleRepository();
 					}
 				}
 			});
 		}
 	}
-	
+
 	public void showExampleRepository() {
 		viewer.setInput(exampleService.getAllExamples());
 		viewer.expandToLevel(2);
-		
+
 	}
-	
+
 	public void importSelectedExample(IProgressMonitor monitor) {
-		//TODO import ueber den ExampleService;
+		if (lastValidSelection != null) {
+			exampleService.importSelectedExample(lastValidSelection, monitor);
+		}
 	}
 }
