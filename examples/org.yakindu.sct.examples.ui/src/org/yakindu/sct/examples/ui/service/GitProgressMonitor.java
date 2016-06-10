@@ -8,7 +8,7 @@ public class GitProgressMonitor extends BatchingProgressMonitor {
 
 	private SubMonitor monitor;
 //	private Label log;
-	private String lastValidTaskName;
+	private String lastValidTaskName = "";
 
 	public GitProgressMonitor(IProgressMonitor monitor) {
 		this.monitor = SubMonitor.convert(monitor);

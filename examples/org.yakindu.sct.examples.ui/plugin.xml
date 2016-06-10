@@ -4,9 +4,9 @@
 	<extension point="org.eclipse.ui.newWizards">
       	<wizard
         	category="org.eclipse.ui.Examples"
-            class="org.yakindu.sct.examples.ui.wizards.ExamplesWizard"
+            class="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
             icon="icons/logo-16.png"
-            id="org.yakindu.sct.examples.ui.wizards.ExamplesWizard"
+            id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
             name="YAKINDU Examples">
       	</wizard>
     </extension>
@@ -17,9 +17,9 @@
       	</category>
       	<wizard
       		category="YAKINDU"
-      		class="org.yakindu.sct.examples.ui.wizards.ExamplesWizard"
+      		class="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
       		icon="icons/logo-16.png"
-      		id="org.yakindu.sct.examples.ui.wizards.ExamplesWizard"
+      		id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
       		name="YAKINDU Examples">
       	</wizard>
   	</extension>

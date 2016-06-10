@@ -57,7 +57,7 @@ public class UpdateRepositoryPage extends WizardPage implements ExampleWizardCon
 				
 				@Override
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					UpdateRepositoryPage.this.gitError = !GitRepositoryExampleService.updateExampleRepository(new GitProgressMonitor(monitor));
+					UpdateRepositoryPage.this.gitError = !GitRepositoryExampleService.updateExampleRepository(monitor);
 					monitor.done();
 				}
 			});
