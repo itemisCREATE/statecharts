@@ -4,11 +4,13 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+
 public interface IExampleService {
-	
+
 	public List<ExampleData> getAllExamples();
-	
-	public void importSelectedExample(ExampleData edata);
+
+	public void importSelectedExample(ExampleData edata, IProgressMonitor monitor);
 
 	public class ExampleData {
 		private ExampleData parent;

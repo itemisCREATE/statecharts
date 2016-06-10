@@ -6,7 +6,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
@@ -15,18 +14,18 @@ import org.yakindu.sct.examples.ui.wizards.pages.AskPermissionPage;
 import org.yakindu.sct.examples.ui.wizards.pages.SelectExamplePage;
 import org.yakindu.sct.examples.ui.wizards.pages.UpdateRepositoryPage;
 
-public class ExampleWizard extends Wizard implements INewWizard,ExampleWizardConstants {
-	
+public class ExampleWizard extends Wizard implements INewWizard, ExampleWizardConstants {
+
 	private AskPermissionPage page1;
 	private UpdateRepositoryPage page2;
 	private SelectExamplePage page3;
-	private ISelection selection;
+	private IStructuredSelection selection;
 
 	public ExampleWizard() {
 		super();
 		setWindowTitle(WINDOW_TITLE);
 		setNeedsProgressMonitor(true);
-		
+
 	}
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
@@ -41,7 +40,7 @@ public class ExampleWizard extends Wizard implements INewWizard,ExampleWizardCon
 		addPage(page2);
 		addPage(page3);
 	}
-	
+
 	public boolean performFinish() {
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {

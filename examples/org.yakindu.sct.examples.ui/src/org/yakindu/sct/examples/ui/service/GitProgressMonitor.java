@@ -7,12 +7,10 @@ import org.eclipse.jgit.lib.BatchingProgressMonitor;
 public class GitProgressMonitor extends BatchingProgressMonitor {
 
 	private SubMonitor monitor;
-//	private Label log;
 	private String lastValidTaskName = "";
 
 	public GitProgressMonitor(IProgressMonitor monitor) {
 		this.monitor = SubMonitor.convert(monitor);
-//		this.log = log;
 	}
 
 	@Override
@@ -44,7 +42,7 @@ public class GitProgressMonitor extends BatchingProgressMonitor {
 			s.append(' ');
 		}
 		s.append(workCurr);
-		show(s,taskName, -1, workCurr);
+		show(s, taskName, -1, workCurr);
 	}
 
 	protected void formatAndShow(String taskName, int cmp, int totalWork, int pcnt) {
@@ -72,10 +70,10 @@ public class GitProgressMonitor extends BatchingProgressMonitor {
 		s.append("/");
 		s.append(endStr);
 		s.append(")");
-		show(s,taskName, cmp, totalWork);
+		show(s, taskName, cmp, totalWork);
 	}
 
-	protected void show(StringBuilder display,String taskName, int current, int total) {
+	protected void show(StringBuilder display, String taskName, int current, int total) {
 		if (total > 0 && !lastValidTaskName.equals(taskName)) {
 			lastValidTaskName = taskName;
 			monitor.beginTask(display.toString(), total);
@@ -84,7 +82,5 @@ public class GitProgressMonitor extends BatchingProgressMonitor {
 			monitor.setTaskName(display.toString());
 			monitor.worked(current);
 		}
-		System.out.print(display.toString());
-//		log.setText(log.getText() + display.toString());
 	}
 }

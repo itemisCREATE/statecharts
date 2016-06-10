@@ -12,12 +12,12 @@ public class ExampleContentProvider implements ITreeContentProvider {
 
 	@Override
 	public void dispose() {
-		
+
 	}
 
 	@Override
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		
+
 	}
 
 	@Override
@@ -26,14 +26,14 @@ public class ExampleContentProvider implements ITreeContentProvider {
 		ArrayList<ExampleData> nodes = new ArrayList<ExampleData>();
 		List<ExampleData> exdata = (List<ExampleData>) inputElement;
 		Iterator<ExampleData> iex = exdata.iterator();
-		while(iex.hasNext()) {
+		while (iex.hasNext()) {
 			ExampleData next = iex.next();
-			if(next.getParent() == null) {
+			if (next.getParent() == null) {
 				nodes.add(next);
 			}
 		}
 		ExampleData[] result = nodes.toArray(new ExampleData[nodes.size()]);
-		return result; 
+		return result;
 	}
 
 	@Override
