@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
@@ -17,11 +18,11 @@ import org.yakindu.sct.examples.ui.wizards.ExampleWizardConstants;
 
 public class GitRepositoryExampleService implements ExampleWizardConstants {
 
-	public static boolean updateExampleRepository(GitProgressMonitor monitor) {
+	public static boolean updateExampleRepository(IProgressMonitor iMonitor) {
 		try {
 			System.out.println(InetAddress.getByName("github.com").getHostName() + "is Reachable.");
 			for(int i=0;i<REMOTE_REPOS.length;i++) {
-				if(!updateExampleRepository(REMOTE_REPOS[i],monitor)) {
+				if(!updateExampleRepository(REMOTE_REPOS[i],new GitProgressMonitor(iMonitor))) {
 					return false;
 				}
 			}

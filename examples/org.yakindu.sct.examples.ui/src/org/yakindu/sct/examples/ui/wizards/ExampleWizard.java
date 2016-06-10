@@ -15,14 +15,14 @@ import org.yakindu.sct.examples.ui.wizards.pages.AskPermissionPage;
 import org.yakindu.sct.examples.ui.wizards.pages.SelectExamplePage;
 import org.yakindu.sct.examples.ui.wizards.pages.UpdateRepositoryPage;
 
-public class ExamplesWizard extends Wizard implements INewWizard,ExampleWizardConstants {
+public class ExampleWizard extends Wizard implements INewWizard,ExampleWizardConstants {
 	
 	private AskPermissionPage page1;
 	private UpdateRepositoryPage page2;
 	private SelectExamplePage page3;
 	private ISelection selection;
 
-	public ExamplesWizard() {
+	public ExampleWizard() {
 		super();
 		setWindowTitle(WINDOW_TITLE);
 		setNeedsProgressMonitor(true);
