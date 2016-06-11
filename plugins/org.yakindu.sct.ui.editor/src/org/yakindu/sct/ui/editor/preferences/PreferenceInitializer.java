@@ -66,6 +66,11 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer
 		PreferenceConverter.setDefault(getPreferenceStore(),
 				StatechartPreferenceConstants.PREF_REGION_LINE,
 				StatechartColorConstants.REGION_LINE_COLOR.getRGB());
+		
+		//Transition Priority Labels
+		getPreferenceStore().setDefault(
+				StatechartPreferenceConstants.PREF_PRIORITY_LABELS, false);
+		
 
 	}
 
