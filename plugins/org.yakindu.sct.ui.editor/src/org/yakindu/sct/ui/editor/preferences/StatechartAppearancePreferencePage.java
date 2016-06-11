@@ -13,6 +13,7 @@ package org.yakindu.sct.ui.editor.preferences;
 import org.eclipse.gmf.runtime.common.ui.preferences.ComboFieldEditor;
 import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages;
 import org.eclipse.gmf.runtime.diagram.ui.preferences.IPreferenceConstants;
+import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -49,6 +50,14 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 		Composite main = createPageLayout(parent);
 		createColorEditors(main);
 		createLineStyleEditors(main);
+		createPriorityLabelEditor(main);
+	}
+
+	protected void createPriorityLabelEditor(Composite main) {
+		Composite composite = createGroupComposite(main, "Transition Decorator");
+		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_PRIORITY_LABELS,
+				"Show transition priority", composite);
+		addField(editor);
 	}
 
 	protected void createLineStyleEditors(Composite parent) {

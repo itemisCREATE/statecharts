@@ -459,6 +459,11 @@
 			<Priority name="Lowest" />
  		</decoratorProvider> 
  </extension> 
+ <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders"> 
+		<decoratorProvider class="org.yakindu.sct.ui.editor.providers.TransitionPriorityDecorationProvider"> 
+			<Priority name="Lowest" />
+ 		</decoratorProvider> 
+ </extension>  
    
    <!-- Global Action handler -->
     <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-print-actions">
