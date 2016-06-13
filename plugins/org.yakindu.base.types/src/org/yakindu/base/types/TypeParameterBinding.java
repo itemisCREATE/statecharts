@@ -32,4 +32,8 @@ public class TypeParameterBinding extends AdapterImpl {
 	public Type getActualType() {
 		return actualType;
 	}
+	
+	public void setActualType(Type actualType) {
+		this.actualType = actualType;
+	}
 }

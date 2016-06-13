@@ -18,6 +18,7 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.STRING;
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
@@ -46,7 +47,6 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
-import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
@@ -215,8 +215,16 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		if (type instanceof ParameterizedType && ((ParameterizedType) type).getParameter().size() > 0) {
 			EList<TypeParameter> parameter = ((ParameterizedType) type).getParameter();
 			for (int i = 0; i < parameter.size(); i++) {
-				parameter.get(i).eAdapters()
-						.add(new TypeParameterBinding(typeSpecifier.getTypeArguments().get(i).getType()));
+				TypeParameter param = parameter.get(i);
+				Type actualType = typeSpecifier.getTypeArguments().get(i).getType();
+
+				TypeParameterBinding existingBinding = (TypeParameterBinding) EcoreUtil.getExistingAdapter(param,
+						TypeParameterBinding.class);
+				if (existingBinding != null) {
+					existingBinding.setActualType(actualType);
+				} else {
+					param.eAdapters().add(new TypeParameterBinding(actualType));
+				}
 			}
 		}
 		if (e.isOperationCall())

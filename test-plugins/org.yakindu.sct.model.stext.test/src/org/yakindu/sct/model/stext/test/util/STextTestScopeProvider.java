@@ -29,6 +29,7 @@ import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -101,7 +102,9 @@ public class STextTestScopeProvider extends STextScopeProvider {
 
 		Property featureX = TypesFactory.eINSTANCE.createProperty();
 		featureX.setName("x");
-		featureX.setType(typeSystem.getType(GenericTypeSystem.INTEGER));
+		TypeSpecifier typeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
+		typeSpec.setType(typeSystem.getType(GenericTypeSystem.INTEGER));
+		featureX.setTypeSpecifier(typeSpec);
 		complexType.getFeatures().add(featureX);
 
 		Resource resource = new ResourceImpl(URI.createURI("types2"));
