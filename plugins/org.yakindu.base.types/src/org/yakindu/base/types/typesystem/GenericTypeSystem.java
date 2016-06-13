@@ -14,6 +14,7 @@ import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesFactory;
 
 import com.google.inject.Singleton;
@@ -55,17 +56,24 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 		Operation get = TypesFactory.eINSTANCE.createOperation();
 		get.setName("get");
 		Parameter index = TypesFactory.eINSTANCE.createParameter();
-		index.setType(getType(INTEGER));
+		TypeSpecifier paramTypeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
+		paramTypeSpec.setType(getType(INTEGER));
+		index.setTypeSpecifier(paramTypeSpec);
+		
 		index.setName("index");
 		get.getParameters().add(index);
-		get.setType(baseType);
+		TypeSpecifier getTypeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
+		getTypeSpec.setType(baseType);
+		get.setTypeSpecifier(getTypeSpec);
 		array.getFeatures().add(get);
 		// ADD
 		Operation add = TypesFactory.eINSTANCE.createOperation();
 		add.setName("add");
 		Parameter element = TypesFactory.eINSTANCE.createParameter();
 		element.setName("element");
-		element.setType(baseType);
+		TypeSpecifier addTypeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
+		addTypeSpec.setType(baseType);
+		element.setTypeSpecifier(addTypeSpec);
 		add.getParameters().add(element);
 		array.getFeatures().add(add);
 

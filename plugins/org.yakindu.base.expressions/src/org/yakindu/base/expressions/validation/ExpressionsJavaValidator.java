@@ -20,6 +20,7 @@ import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
@@ -81,7 +82,7 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	}
 
 	@Check
-	public void checkIsRaw(TypedElement typedElement) {
+	public void checkIsRaw(TypeSpecifier typedElement) {
 		Type type = typedElement.getType();
 		if (!(type instanceof ParameterizedType))
 			return;
@@ -89,25 +90,25 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 		if (typedElement.getTypeArguments().size() == 0 && typeParameter.size() > 0) {
 			String s1 = typedElement.getType().getName();
 			String s2 = s1 + printer.concatTypeParameter(typeParameter);
-			warning(String.format(WARNING_IS_RAW_MSG, s1, s2), typedElement, TypesPackage.Literals.TYPED_ELEMENT__TYPE,
+			warning(String.format(WARNING_IS_RAW_MSG, s1, s2), typedElement, TypesPackage.Literals.TYPE_SPECIFIER__TYPE,
 					WARNING_IS_RAW_CODE);
 		}
 	}
 
 	@Check
-	public void checkTypedElementNotGeneric(TypedElement typedElement) {
+	public void checkTypedElementNotGeneric(TypeSpecifier typedElement) {
 		if (typedElement.getTypeArguments().size() > 0
 				&& ((!(typedElement.getType() instanceof ParameterizedType)) || ((ParameterizedType) typedElement
 						.getType()).getParameter().size() == 0)) {
 			String s1 = typedElement.getType().getName();
 			String s2 = printer.concatTypeArguments(typedElement.getTypeArguments());
 			error(String.format(ERROR_NOT_GENERIC_MSG, s1, s2), typedElement,
-					TypesPackage.Literals.TYPED_ELEMENT__TYPE, ERROR_NOT_GENERIC_CODE);
+					TypesPackage.Literals.TYPE_SPECIFIER__TYPE, ERROR_NOT_GENERIC_CODE);
 		}
 	}
 
 	@Check
-	public void checkNofArguments(TypedElement typedElement) {
+	public void checkNofArguments(TypeSpecifier typedElement) {
 		if (!(typedElement.getType() instanceof ParameterizedType)) {
 			return;
 		}
@@ -118,7 +119,7 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			String s1 = type.getName() + printer.concatTypeParameter(typeParameter);
 			String s2 = printer.concatTypeArguments(typedElement.getTypeArguments());
 			error(String.format(ERROR_ARGUMENTED_SPECIFIER_INCORRECT_ARGUMENT_NR_MSG, s1, s2), typedElement,
-					TypesPackage.Literals.TYPED_ELEMENT__TYPE, ERROR_ARGUMENTED_SPECIFIER_INCORRECT_ARGUMENT_NR_CODE);
+					TypesPackage.Literals.TYPE_SPECIFIER__TYPE, ERROR_ARGUMENTED_SPECIFIER_INCORRECT_ARGUMENT_NR_CODE);
 		}
 	}
 
@@ -137,7 +138,7 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	}
 
 	@Check
-	public void checkTypeParameterBounds(TypedElement typedElement) {
+	public void checkTypeParameterBounds(TypeSpecifier typedElement) {
 		if (!(typedElement.getType() instanceof ParameterizedType)) {
 			return;
 		}
@@ -149,11 +150,11 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 		for (int i = 0; i < typeParameter.size(); i++) {
 			TypeParameter parameter = typeParameter.get(i);
 			if (parameter.getBound() != null) {
-				Type argument = typedElement.getTypeArguments().get(i);
+				Type argument = typedElement.getTypeArguments().get(i).getType();
 				if (!typeSystem.isSuperType(argument, parameter.getBound())) {
 					error(String.format(ERROR_BOUND_MISSMATCH_MSG, argument.getName(),
 							(parameter.getBound()).getName(), type.getName()), typedElement,
-							TypesPackage.Literals.TYPED_ELEMENT__TYPE_ARGUMENTS, i, ERROR_BOUND_MISSMATCH_CODE);
+							TypesPackage.Literals.TYPE_SPECIFIER__TYPE_ARGUMENTS, i, ERROR_BOUND_MISSMATCH_CODE);
 				}
 			}
 		}

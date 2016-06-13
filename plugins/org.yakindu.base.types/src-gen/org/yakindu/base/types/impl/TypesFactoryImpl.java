@@ -29,6 +29,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
@@ -81,6 +82,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.OPERATION: return createOperation();
 			case TypesPackage.PROPERTY: return createProperty();
 			case TypesPackage.PARAMETER: return createParameter();
+			case TypesPackage.TYPE_SPECIFIER: return createTypeSpecifier();
 			case TypesPackage.EVENT: return createEvent();
 			case TypesPackage.ENUMERATION_TYPE: return createEnumerationType();
 			case TypesPackage.PRIMITIVE_TYPE: return createPrimitiveType();
@@ -176,6 +178,16 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public Parameter createParameter() {
 		ParameterImpl parameter = new ParameterImpl();
 		return parameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeSpecifier createTypeSpecifier() {
+		TypeSpecifierImpl typeSpecifier = new TypeSpecifierImpl();
+		return typeSpecifier;
 	}
 
 	/**

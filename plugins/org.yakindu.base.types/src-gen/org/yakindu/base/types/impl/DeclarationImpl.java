@@ -2,20 +2,18 @@
  */
 package org.yakindu.base.types.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.TypesUtil;
 
@@ -28,7 +26,7 @@ import org.yakindu.base.types.TypesUtil;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getTypeArguments <em>Type Arguments</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getTypeSpecifier <em>Type Specifier</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getId <em>Id</em>}</li>
  * </ul>
@@ -37,24 +35,14 @@ import org.yakindu.base.types.TypesUtil;
  */
 public abstract class DeclarationImpl extends EObjectImpl implements Declaration {
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * The cached value of the '{@link #getTypeSpecifier() <em>Type Specifier</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #getTypeSpecifier()
 	 * @generated
 	 * @ordered
 	 */
-	protected Type type;
-
-	/**
-	 * The cached value of the '{@link #getTypeArguments() <em>Type Arguments</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTypeArguments()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Type> typeArguments;
+	protected TypeSpecifier typeSpecifier;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -111,48 +99,63 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @generated
 	 */
 	public Type getType() {
-		if (type != null && type.eIsProxy()) {
-			InternalEObject oldType = (InternalEObject)type;
-			type = (Type)eResolveProxy(oldType);
-			if (type != oldType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.DECLARATION__TYPE, oldType, type));
-			}
-		}
-		return type;
+		Type type = basicGetType();
+		return type != null && type.eIsProxy() ? (Type)eResolveProxy((InternalEObject)type) : type;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Type basicGetType() {
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setType(Type newType) {
-		Type oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.DECLARATION__TYPE, oldType, type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Type> getTypeArguments() {
-		if (typeArguments == null) {
-			typeArguments = new EObjectResolvingEList<Type>(Type.class, this, TypesPackage.DECLARATION__TYPE_ARGUMENTS);
+		if (getTypeSpecifier() != null) {
+			return getTypeSpecifier().getType();
 		}
-		return typeArguments;
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeSpecifier getTypeSpecifier() {
+		return typeSpecifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTypeSpecifier(TypeSpecifier newTypeSpecifier, NotificationChain msgs) {
+		TypeSpecifier oldTypeSpecifier = typeSpecifier;
+		typeSpecifier = newTypeSpecifier;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.DECLARATION__TYPE_SPECIFIER, oldTypeSpecifier, newTypeSpecifier);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeSpecifier(TypeSpecifier newTypeSpecifier) {
+		if (newTypeSpecifier != typeSpecifier) {
+			NotificationChain msgs = null;
+			if (typeSpecifier != null)
+				msgs = ((InternalEObject)typeSpecifier).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.DECLARATION__TYPE_SPECIFIER, null, msgs);
+			if (newTypeSpecifier != null)
+				msgs = ((InternalEObject)newTypeSpecifier).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.DECLARATION__TYPE_SPECIFIER, null, msgs);
+			msgs = basicSetTypeSpecifier(newTypeSpecifier, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.DECLARATION__TYPE_SPECIFIER, newTypeSpecifier, newTypeSpecifier));
 	}
 
 	/**
@@ -187,8 +190,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 			case TypesPackage.DECLARATION__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case TypesPackage.DECLARATION__TYPE_ARGUMENTS:
-				return getTypeArguments();
+			case TypesPackage.DECLARATION__TYPE_SPECIFIER:
+				return getTypeSpecifier();
 			case TypesPackage.DECLARATION__NAME:
 				return getName();
 			case TypesPackage.DECLARATION__ID:
@@ -202,16 +205,11 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.DECLARATION__TYPE:
-				setType((Type)newValue);
-				return;
-			case TypesPackage.DECLARATION__TYPE_ARGUMENTS:
-				getTypeArguments().clear();
-				getTypeArguments().addAll((Collection<? extends Type>)newValue);
+			case TypesPackage.DECLARATION__TYPE_SPECIFIER:
+				setTypeSpecifier((TypeSpecifier)newValue);
 				return;
 			case TypesPackage.DECLARATION__NAME:
 				setName((String)newValue);
@@ -228,11 +226,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.DECLARATION__TYPE:
-				setType((Type)null);
-				return;
-			case TypesPackage.DECLARATION__TYPE_ARGUMENTS:
-				getTypeArguments().clear();
+			case TypesPackage.DECLARATION__TYPE_SPECIFIER:
+				setTypeSpecifier((TypeSpecifier)null);
 				return;
 			case TypesPackage.DECLARATION__NAME:
 				setName(NAME_EDEFAULT);
@@ -250,9 +245,9 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TypesPackage.DECLARATION__TYPE:
-				return type != null;
-			case TypesPackage.DECLARATION__TYPE_ARGUMENTS:
-				return typeArguments != null && !typeArguments.isEmpty();
+				return basicGetType() != null;
+			case TypesPackage.DECLARATION__TYPE_SPECIFIER:
+				return typeSpecifier != null;
 			case TypesPackage.DECLARATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TypesPackage.DECLARATION__ID:
@@ -329,6 +324,20 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	@Override
 	public String getId() {
 		return TypesUtil.computeQID(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.DECLARATION__TYPE_SPECIFIER:
+				return basicSetTypeSpecifier(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 } //DeclarationImpl

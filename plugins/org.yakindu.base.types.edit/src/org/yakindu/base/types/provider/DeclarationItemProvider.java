@@ -99,7 +99,7 @@ public class DeclarationItemProvider extends ItemProviderAdapter implements IEdi
 				getResourceLocator(),
 				getString("_UI_TypedElement_typeArguments_feature"),
 				getString("_UI_PropertyDescriptor_description", "_UI_TypedElement_typeArguments_feature",
-						"_UI_TypedElement_type"), TypesPackage.Literals.TYPED_ELEMENT__TYPE_ARGUMENTS, true, false,
+						"_UI_TypedElement_type"), TypesPackage.Literals.TYPE_SPECIFIER__TYPE_ARGUMENTS, true, false,
 				true, null, null, null));
 	}
 

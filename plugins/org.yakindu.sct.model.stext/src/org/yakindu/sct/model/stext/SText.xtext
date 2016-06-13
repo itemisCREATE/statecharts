@@ -81,21 +81,21 @@ enum Direction returns types::Direction:
 	LOCAL='local' | IN='in' | OUT='out';
 
 VariableDefinition:
-	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')? & (external?='external')?) name=XID ':' type=[types::Type|FQN]
-	(('<' (typeArguments+=[types::Type|QID]) (',' typeArguments+=[types::Type|QID])* '>'))?
+	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')? & (external?='external')?) name=XID ':' typeSpecifier=TypeSpecifier
 	('=' initialValue=Expression)?; /* ---- operation definition ---- */ 
 	
 TypeAliasDefinition:
-	{TypeAliasDefinition} 'alias' name=XID ':' type=[types::Type|FQN]
-;
+	{TypeAliasDefinition} 'alias' name=XID ':' type=[types::Type|FQN];
 
 OperationDefinition:
 	{OperationDefinition} 'operation' name=XID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':'
-	type=[types::Type|FQN] (('<' (typeArguments+=[types::Type|QID]) (',' typeArguments+=[types::Type|QID])* '>'))?)?;
+	typeSpecifier=TypeSpecifier)?;
+
+TypeSpecifier returns types::TypeSpecifier:
+	type=[types::Type|FQN] ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)*'>'))?;
 
 Parameter returns types::Parameter:
-	name=XID ':' type=[types::Type|FQN] (('<' (typeArguments+=[types::Type|QID]) (',' typeArguments+=[types::Type|QID])*
-	'>'))?;
+	name=XID ':' typeSpecifier=TypeSpecifier;
 
 Reaction returns sgraph::Reaction:
 	LocalReaction | TransitionReaction;

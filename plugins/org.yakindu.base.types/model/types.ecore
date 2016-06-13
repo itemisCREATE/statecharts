@@ -32,9 +32,15 @@
         eOpposite="#//Operation/parameters"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeSpecifier" eType="#//TypeSpecifier"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeSpecifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
-        eType="#//Type"/>
+        eType="#//TypeSpecifier" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//Direction"/>

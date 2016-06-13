@@ -71,6 +71,15 @@ public interface TypesFactory extends EFactory {
 	Parameter createParameter();
 
 	/**
+	 * Returns a new object of class '<em>Type Specifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Specifier</em>'.
+	 * @generated
+	 */
+	TypeSpecifier createTypeSpecifier();
+
+	/**
 	 * Returns a new object of class '<em>Event</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
