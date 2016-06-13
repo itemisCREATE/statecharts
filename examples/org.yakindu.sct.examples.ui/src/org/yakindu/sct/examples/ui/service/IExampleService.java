@@ -1,22 +1,56 @@
 package org.yakindu.sct.examples.ui.service;
 
+import java.io.File;
+import java.net.URL;
 import java.util.List;
+
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public interface IExampleService {
 
-	List<ExampleData> getAllExamples();
+	public List<ExampleData> getAllExamples();
 
-	public static class ExampleData {
+	public void importSelectedExample(ExampleData edata, IProgressMonitor monitor);
 
+	public class ExampleData {
+		private ExampleData parent;
+		private ExampleData[] children;
 		private String id;
 		private String title;
+		private String domain;
 		private String description;
+		private URL[] images;
+		private File projectDir;
 
-		public ExampleData(String id, String title, String description) {
-			super();
+		public ExampleData(String domain, String id, String title, String description, URL[] images) {
+			this.domain = domain;
 			this.id = id;
 			this.title = title;
 			this.description = description;
+			this.images = images;
+		}
+
+		public ExampleData(ExampleData parent, ExampleData[] children, String title) {
+			this.parent = parent;
+			this.children = children;
+			this.title = title;
+			this.domain = title;
+		}
+
+		public ExampleData getParent() {
+			return parent;
+		}
+
+		public void setParent(ExampleData parent) {
+			this.parent = parent;
+		}
+
+		public ExampleData[] getChildren() {
+			return children;
+		}
+
+		public void setChildren(ExampleData[] children) {
+			this.children = children;
 		}
 
 		public String getId() {
@@ -35,6 +69,14 @@ public interface IExampleService {
 			this.title = title;
 		}
 
+		public String getDomain() {
+			return domain;
+		}
+
+		public void setDomain(String domain) {
+			this.domain = domain;
+		}
+
 		public String getDescription() {
 			return description;
 		}
@@ -43,6 +85,28 @@ public interface IExampleService {
 			this.description = description;
 		}
 
-	}
+		public URL[] getImages() {
+			return images;
+		}
 
+		public void setImages(URL[] images) {
+			this.images = images;
+		}
+
+		public File getProjectDir() {
+			return projectDir;
+		}
+
+		public void setProjectDir(File projectDir) {
+			this.projectDir = projectDir;
+		}
+
+		public boolean hasChildren() {
+			if (children != null) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
 }

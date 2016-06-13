@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="org.eclipse.ui.newWizards">
-      <category
-            id="org.yakindu.sct.examples.ui"
-            name="YAKINDU SCT">
-      </category>
-      <wizard
-            category="org.yakindu.sct.examples.ui"
-            class="org.yakindu.sct.examples.ui.wizards.ExamplesWizard"
-            icon="icons/sample.gif"
-            id="org.yakindu.sct.examples.ui.wizards.ExamplesWizard"
+	<extension point="org.eclipse.ui.newWizards">
+      	<wizard
+        	category="org.eclipse.ui.Examples"
+            class="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
+            icon="icons/logo-16.png"
+            id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
             name="YAKINDU Examples">
-      </wizard>
-   </extension>
-
+      	</wizard>
+    </extension>
+  	<extension point="org.eclipse.ui.newWizards">
+  		<category
+        	id="YAKINDU"
+            name="YAKINDU SCT">
+      	</category>
+      	<wizard
+      		category="YAKINDU"
+      		class="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
+      		icon="icons/logo-16.png"
+      		id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
+      		name="YAKINDU Examples">
+      	</wizard>
+  	</extension>
 </plugin>
