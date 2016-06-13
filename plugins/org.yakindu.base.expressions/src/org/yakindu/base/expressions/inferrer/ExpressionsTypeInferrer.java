@@ -46,13 +46,19 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
+import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypeParameterBinding;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
 
 /**
@@ -181,7 +187,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public Type infer(Type type) {
-		return type;
+		return type.getOriginType();
 	}
 
 	/**
@@ -203,13 +209,27 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public Type infer(ElementReferenceExpression e) {
-		if (e.isOperationCall()) {
+		Declaration declaration = (Declaration) e.getReference();
+		TypeSpecifier typeSpecifier = declaration.getTypeSpecifier();
+		Type type = typeSpecifier.getType();
+		if (type instanceof ParameterizedType && ((ParameterizedType) type).getParameter().size() > 0) {
+			EList<TypeParameter> parameter = ((ParameterizedType) type).getParameter();
+			for (int i = 0; i < parameter.size(); i++) {
+				parameter.get(i).eAdapters()
+						.add(new TypeParameterBinding(typeSpecifier.getTypeArguments().get(i).getType()));
+			}
+		}
+		if (e.isOperationCall())
+
+		{
 			Operation operation = (Operation) e.getReference();
 			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = e.getArgs();
 			inferParameter(parameters, args);
 		}
-		return inferTypeDispatch(e.getReference());
+		return
+
+		inferTypeDispatch(e.getReference());
 	}
 
 	protected void inferParameter(EList<Parameter> parameters, EList<Expression> args) {
@@ -245,8 +265,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	public Type infer(DoubleLiteral literal) {
 		return getType(REAL);
 	}
-	
-	public Type infer(FloatLiteral literal){
+
+	public Type infer(FloatLiteral literal) {
 		return getType(REAL);
 	}
 
@@ -271,4 +291,5 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	public Object infer(Parameter e) {
 		return inferTypeDispatch(e.getType());
 	}
+
 }

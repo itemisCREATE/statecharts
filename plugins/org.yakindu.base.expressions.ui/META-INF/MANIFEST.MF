@@ -16,7 +16,8 @@ Require-Bundle: org.yakindu.base.expressions;visibility:=reexport,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare,
- org.yakindu.base.types
+ org.yakindu.base.types,
+ org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
