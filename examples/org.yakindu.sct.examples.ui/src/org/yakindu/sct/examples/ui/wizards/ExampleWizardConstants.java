@@ -1,12 +1,28 @@
+/**
+ * Copyright (c) 2016 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.examples.ui.wizards;
 
 import java.io.File;
 
 import org.eclipse.core.runtime.Path;
 
+/**
+ * 
+ * @author t00manysecretss
+ * 
+ */
+
 public interface ExampleWizardConstants {
 
-	public static final String WINDOW_TITLE ="YAKINDU Examples";
+	public static final String WINDOW_TITLE = "YAKINDU Examples";
 	public static final String ASK_PAGE_TITLE = "Yakindu Statechart Tools";
 	public static final String ASK_PAGE_DESCRIPTION = "This wizard provides serveral example projects created for and with Yakindu Statechart Tools.";
 	public static final String ASK_PAGE_LABEL_TEXT = "\n\n\n\n\n\n\n\nIn order to provide you with the latest example prjects\nthis wizard need internet access to Github.\n A small amount of hard drive storage is also required.\nBy pressing on \"next\" you agree with these conditions.\nOtherwise close the wizard now by clicking on \"cancel\".";
@@ -20,8 +36,9 @@ public interface ExampleWizardConstants {
 	public static final String WIZARD_ERROR_GIT = "It seems there is a Problem with git\nPlease try again later.";
 	public static final String DEFAULT_PROJECT_TITLE = "Example title";
 	public static final String DEFAULT_PROJECT_DESCRIPTION = "Example discription";
-	public static final String[] REMOTE_REPOS = {"https://github.com/t00manysecretss/statecharts-examples.git"};
-	public static final File LOCAL_REPO_ROOT = new File(System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "org.yakindu.temp");
+	public static final String[] REMOTE_REPOS = { "https://github.com/t00manysecretss/statecharts-examples.git" };
+	public static final File LOCAL_REPO_ROOT = new File(
+			System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "org.yakindu.temp");
 	public static final Path FILEICON = new Path("icons/logo-16.png");
 	public static final Path FOLDERICON = new Path("icons/logo-16.png");
 	public static final Path WAITINGICON = new Path("icons/wait.png");
