@@ -52,6 +52,7 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 		TypeParameter baseType = TypesFactory.eINSTANCE.createTypeParameter();
 		baseType.setName("baseType");
 		array.getParameter().add(baseType);
+		
 		// GET
 		Operation get = TypesFactory.eINSTANCE.createOperation();
 		get.setName("get");
@@ -66,6 +67,7 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 		getTypeSpec.setType(baseType);
 		get.setTypeSpecifier(getTypeSpec);
 		array.getFeatures().add(get);
+		
 		// ADD
 		Operation add = TypesFactory.eINSTANCE.createOperation();
 		add.setName("add");
@@ -80,6 +82,9 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 		// SIZE
 		Operation size = TypesFactory.eINSTANCE.createOperation();
 		size.setName("size");
+		TypeSpecifier sizeTypeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
+		sizeTypeSpec.setType(getType(INTEGER));
+		size.setTypeSpecifier(sizeTypeSpec);
 		array.getFeatures().add(size);
 	}
 }
