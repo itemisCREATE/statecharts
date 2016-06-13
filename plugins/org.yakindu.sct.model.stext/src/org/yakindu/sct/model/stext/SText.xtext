@@ -75,7 +75,7 @@ Declaration returns types::Declaration:
 	EventDefinition | VariableDefinition | OperationDefinition | TypeAliasDefinition | LocalReaction;
 
 EventDefinition:
-	(direction=Direction)? 'event' name=XID (':' type=[types::Type|FQN])?;
+	(direction=Direction)? 'event' name=XID (':' typeSpecifier=TypeSpecifier)?;
 
 enum Direction returns types::Direction:
 	LOCAL='local' | IN='in' | OUT='out';
@@ -85,7 +85,7 @@ VariableDefinition:
 	('=' initialValue=Expression)?; /* ---- operation definition ---- */ 
 	
 TypeAliasDefinition:
-	{TypeAliasDefinition} 'alias' name=XID ':' type=[types::Type|FQN];
+	{TypeAliasDefinition} 'alias' name=XID ':' typeSpecifier=TypeSpecifier;
 
 OperationDefinition:
 	{OperationDefinition} 'operation' name=XID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':'

@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -36,6 +37,7 @@ import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.test.util.STextTestScopeProvider;
 
 import com.google.inject.Inject;
+import static org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrerMessages.ASSIGNMENT_OPERATOR;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -771,6 +773,29 @@ public class TypeInferrerTest extends AbstractSTextTest {
 
 		expectIssue(inferType("(true) ? 4 : false"), "Could not determine a common type for integer and boolean.");
 	}
+	
+	@Test
+	public void testArrayElementAssignment() {
+		Scope scope = createInternalScope("internal: var intArray : array<integer>");
+		assertTrue(isIntegerType(inferType("intArray.get(0)", scope)));
+		assertTrue(isIntegerType(inferType("intArray.get(0)=5", scope)));
+		expectIssue(inferType("intArray.get(0)=5.3", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "real"));
+		expectIssue(inferType("intArray.get(0)='asd'", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "string"));
+		expectIssue(inferType("intArray.get(0)=true", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "boolean"));
+	}
+
+	@Test
+	public void testArrayAssignment() {
+		Scope scope = createInternalScope("internal: var intArray1 : array<integer> var intArray2 : array<integer> var stringArr : array<string>");
+		assertTrue(isArrayIntegerType(inferType("intArray1=intArray2", scope)));
+		expectIssue(inferType("intArray1=stringArr", scope), String.format(ASSIGNMENT_OPERATOR, "=", "array<integer>", "array<string>"));
+	}
+
+	@Test
+	public void testArrayDeclaration() {
+		assertTrue(isArrayIntegerType(inferType("var intArray : array<integer>", VariableDefinition.class.getSimpleName())));
+		assertTrue(isArrayIntegerType(inferType("var intArray : integer[3] = {1,2,3}", VariableDefinition.class.getSimpleName())));
+	}
 
 	protected Type inferType(String expression) {
 		return inferType(expression, super.internalScope(), super.interfaceScope());
@@ -817,6 +842,17 @@ public class TypeInferrerTest extends AbstractSTextTest {
 
 	private boolean isStringType(Type type) {
 		return typeSystem.isSame(type, typeSystem.getType("string"));
+	}
+	
+	private boolean isArrayIntegerType(Type type) {
+		
+		if (type instanceof ComplexType && type.getName().equals("array")) {
+			ComplexType arrayType = (ComplexType) type;
+			Type elemType = arrayType.getParameter().get(0);
+			typeSystem.isSame(elemType, typeSystem.getType("integer"));
+		}
+		
+		return false;
 	}
 
 	private void expectIssue(Type object, String message) {
