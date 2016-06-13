@@ -19,12 +19,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.StateSwitch#getCases <em>Cases</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.StateSwitch#getStateConfigurationIdx <em>State Configuration Idx</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.StateSwitch#getHistoryRegion <em>History Region</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sexec.SexecPackage#getStateSwitch()
  * @model

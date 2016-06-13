@@ -20,6 +20,7 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getStates <em>States</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getNodes <em>Nodes</em>}</li>
@@ -29,7 +30,6 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getExitAction <em>Exit Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getStaticInitSequence <em>Static Init Sequence</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionFlow()
  * @model

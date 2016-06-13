@@ -18,10 +18,10 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.VariableDefinitionImpl#getInitialValue <em>Initial Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

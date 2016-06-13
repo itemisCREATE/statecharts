@@ -533,13 +533,13 @@ public interface StextPackage extends EPackage {
 	int EVENT_DEFINITION__TYPE = TypesPackage.EVENT__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_DEFINITION__TYPE_ARGUMENTS = TypesPackage.EVENT__TYPE_ARGUMENTS;
+	int EVENT_DEFINITION__TYPE_SPECIFIER = TypesPackage.EVENT__TYPE_SPECIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -597,13 +597,13 @@ public interface StextPackage extends EPackage {
 	int VARIABLE_DEFINITION__TYPE = TypesPackage.PROPERTY__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION__TYPE_ARGUMENTS = TypesPackage.PROPERTY__TYPE_ARGUMENTS;
+	int VARIABLE_DEFINITION__TYPE_SPECIFIER = TypesPackage.PROPERTY__TYPE_SPECIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -688,13 +688,13 @@ public interface StextPackage extends EPackage {
 	int OPERATION_DEFINITION__TYPE = TypesPackage.OPERATION__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_DEFINITION__TYPE_ARGUMENTS = TypesPackage.OPERATION__TYPE_ARGUMENTS;
+	int OPERATION_DEFINITION__TYPE_SPECIFIER = TypesPackage.OPERATION__TYPE_SPECIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -752,13 +752,13 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__TYPE = TypesPackage.TYPE_ALIAS__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_DEFINITION__TYPE_ARGUMENTS = TypesPackage.TYPE_ALIAS__TYPE_ARGUMENTS;
+	int TYPE_ALIAS_DEFINITION__TYPE_SPECIFIER = TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -861,13 +861,13 @@ public interface StextPackage extends EPackage {
 	int LOCAL_REACTION__TYPE = SGraphPackage.REACTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_REACTION__TYPE_ARGUMENTS = SGraphPackage.REACTION_FEATURE_COUNT + 1;
+	int LOCAL_REACTION__TYPE_SPECIFIER = SGraphPackage.REACTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

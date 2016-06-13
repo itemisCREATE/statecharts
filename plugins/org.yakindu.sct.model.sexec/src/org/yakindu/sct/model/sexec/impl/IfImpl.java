@@ -26,12 +26,12 @@ import org.yakindu.sct.model.sexec.Step;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.IfImpl#getCheck <em>Check</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.IfImpl#getThenStep <em>Then Step</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.IfImpl#getElseStep <em>Else Step</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

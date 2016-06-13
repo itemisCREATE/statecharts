@@ -34,6 +34,7 @@ import org.yakindu.sct.model.sexec.Step;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getStateVector <em>State Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getSubScopes <em>Sub Scopes</em>}</li>
@@ -45,7 +46,6 @@ import org.yakindu.sct.model.sexec.Step;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getEntryAction <em>Entry Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getExitAction <em>Exit Action</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

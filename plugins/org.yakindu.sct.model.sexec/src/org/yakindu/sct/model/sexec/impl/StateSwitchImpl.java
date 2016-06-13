@@ -31,12 +31,12 @@ import org.yakindu.sct.model.sexec.StateSwitch;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.StateSwitchImpl#getCases <em>Cases</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.StateSwitchImpl#getStateConfigurationIdx <em>State Configuration Idx</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.StateSwitchImpl#getHistoryRegion <em>History Region</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

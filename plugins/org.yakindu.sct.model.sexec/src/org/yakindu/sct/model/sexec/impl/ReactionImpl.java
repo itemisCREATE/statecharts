@@ -28,13 +28,13 @@ import org.yakindu.sct.model.sexec.Step;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ReactionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ReactionImpl#getCheck <em>Check</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ReactionImpl#getEffect <em>Effect</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ReactionImpl#isTransition <em>Transition</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

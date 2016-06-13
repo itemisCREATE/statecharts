@@ -24,10 +24,10 @@ import org.yakindu.sct.model.sexec.TraceNodeExecuted;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.TraceNodeExecutedImpl#getNode <em>Node</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -31,11 +31,11 @@ import org.yakindu.sct.model.sexec.Step;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.StepImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.StepImpl#getCaller <em>Caller</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

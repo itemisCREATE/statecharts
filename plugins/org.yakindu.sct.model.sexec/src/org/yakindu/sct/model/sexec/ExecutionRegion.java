@@ -20,13 +20,13 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionRegion#getDeepEnterSequence <em>Deep Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionRegion#getShallowEnterSequence <em>Shallow Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionRegion#getHistoryVector <em>History Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionRegion#getNodes <em>Nodes</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionRegion()
  * @model

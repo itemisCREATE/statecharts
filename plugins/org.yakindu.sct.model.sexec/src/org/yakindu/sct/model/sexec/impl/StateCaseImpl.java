@@ -27,11 +27,11 @@ import org.yakindu.sct.model.sexec.Step;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.StateCaseImpl#getState <em>State</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.StateCaseImpl#getStep <em>Step</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

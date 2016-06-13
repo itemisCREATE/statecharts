@@ -24,10 +24,10 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.UnscheduleTimeEventImpl#getTimeEvent <em>Time Event</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

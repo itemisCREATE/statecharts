@@ -25,10 +25,10 @@ import org.yakindu.sct.model.sexec.SexecPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.MappedElementImpl#getSourceElement <em>Source Element</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
