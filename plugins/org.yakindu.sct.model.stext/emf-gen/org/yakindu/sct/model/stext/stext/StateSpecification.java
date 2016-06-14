@@ -12,10 +12,10 @@ import org.yakindu.sct.model.sgraph.Scope;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.StateSpecification#getScope <em>Scope</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.stext.stext.StextPackage#getStateSpecification()
  * @model

@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.TransitionSpecification#getReaction <em>Reaction</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.stext.stext.StextPackage#getTransitionSpecification()
  * @model

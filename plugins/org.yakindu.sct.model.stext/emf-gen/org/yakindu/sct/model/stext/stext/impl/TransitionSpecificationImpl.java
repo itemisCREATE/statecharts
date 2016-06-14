@@ -18,10 +18,10 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.TransitionSpecificationImpl#getReaction <em>Reaction</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

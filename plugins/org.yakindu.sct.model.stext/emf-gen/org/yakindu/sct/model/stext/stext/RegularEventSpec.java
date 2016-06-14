@@ -11,10 +11,10 @@ import org.yakindu.base.expressions.expressions.Expression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.RegularEventSpec#getEvent <em>Event</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.stext.stext.StextPackage#getRegularEventSpec()
  * @model

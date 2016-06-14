@@ -24,11 +24,11 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.ReactionTriggerImpl#getTriggers <em>Triggers</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.ReactionTriggerImpl#getGuard <em>Guard</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
