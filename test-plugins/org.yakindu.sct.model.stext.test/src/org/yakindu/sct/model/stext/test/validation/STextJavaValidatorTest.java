@@ -28,6 +28,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.validation.Check;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
@@ -586,6 +587,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult.assertError(STextJavaValidator.IMPORT_NOT_RESOLVED);
 	}
 
+	@Ignore("Test is not executed for TypesPackage elements")
 	@Test
 	public void checkAnnotationTarget() {
 
