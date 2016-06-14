@@ -20,6 +20,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -50,6 +51,8 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
+import org.yakindu.base.types.AnnotatableElement;
+import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Direction;
 import org.yakindu.base.types.Event;
@@ -724,6 +727,25 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 		if (!found)
 			warning(CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
+	}
+	//TODO Extract TypesValidator
+	@Check
+	public void checkAnnotationTarget(final AnnotatableElement element) {
+		EList<Annotation> annotations = element.getAnnotations();
+		for (Annotation annotation : annotations) {
+			EList<EObject> targets = annotation.getTargets();
+			boolean found = Iterables.any(targets, new Predicate<EObject>() {
+				@Override
+				public boolean apply(EObject input) {
+					return ((EClass) input).isInstance(element);
+				}
+			});
+			if (!found) {
+				error(String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getName(), element.eClass()),
+						TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
+						element.getAnnotations().indexOf(annotation), ERROR_WRONG_ANNOTATION_TARGET_CODE);
+			}
+		}
 	}
 
 	protected boolean isDefault(Trigger trigger) {

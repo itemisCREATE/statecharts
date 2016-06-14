@@ -1,13 +1,5 @@
-/** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at 
- * http://www.eclipse.org/legal/epl-v10.html 
- * Contributors:
- * committers of YAKINDU - initial API and implementation
- *
-*/
+/**
+ */
 package org.yakindu.base.types.provider;
 
 
@@ -16,30 +8,41 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.base.base.provider.NamedElementItemProvider;
-import org.yakindu.base.types.Enumerator;
+import org.eclipse.emf.edit.provider.IItemPropertySource;
+import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+
 import org.yakindu.base.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.base.types.Enumerator} object.
+ * This is the item provider adapter for a {@link org.yakindu.base.types.AnnotatableElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class EnumeratorItemProvider
-	extends DeclarationItemProvider {
+public class AnnotatableElementItemProvider 
+	extends ItemProviderAdapter
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
+		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EnumeratorItemProvider(AdapterFactory adapterFactory) {
+	public AnnotatableElementItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -54,42 +57,42 @@ public class EnumeratorItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addLiteralValuePropertyDescriptor(object);
+			addAnnotationsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Literal Value feature.
+	 * This adds a property descriptor for the Annotations feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addLiteralValuePropertyDescriptor(Object object) {
+	protected void addAnnotationsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Enumerator_literalValue_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Enumerator_literalValue_feature", "_UI_Enumerator_type"),
-				 TypesPackage.Literals.ENUMERATOR__LITERAL_VALUE,
+				 getString("_UI_AnnotatableElement_annotations_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AnnotatableElement_annotations_feature", "_UI_AnnotatableElement_type"),
+				 TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
+				 true,
 				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 true,
+				 null,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This returns Enumerator.gif.
+	 * This returns AnnotatableElement.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Enumerator"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/AnnotatableElement"));
 	}
 
 	/**
@@ -100,11 +103,9 @@ public class EnumeratorItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Enumerator)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Enumerator_type") :
-			getString("_UI_Enumerator_type") + " " + label;
+		return getString("_UI_AnnotatableElement_type");
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -116,12 +117,6 @@ public class EnumeratorItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(Enumerator.class)) {
-			case TypesPackage.ENUMERATOR__LITERAL_VALUE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -135,6 +130,17 @@ public class EnumeratorItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return TypesEditPlugin.INSTANCE;
 	}
 
 }

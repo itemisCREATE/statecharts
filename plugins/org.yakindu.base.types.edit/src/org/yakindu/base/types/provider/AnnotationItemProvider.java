@@ -1,13 +1,5 @@
-/** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at 
- * http://www.eclipse.org/legal/epl-v10.html 
- * Contributors:
- * committers of YAKINDU - initial API and implementation
- *
-*/
+/**
+ */
 package org.yakindu.base.types.provider;
 
 
@@ -17,28 +9,26 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.base.types.ComplexType} object.
+ * This is the item provider adapter for a {@link org.yakindu.base.types.Annotation} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ComplexTypeItemProvider
-	extends ParameterizedTypeItemProvider {
+public class AnnotationItemProvider extends PackageMemberItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComplexTypeItemProvider(AdapterFactory adapterFactory) {
+	public AnnotationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -53,31 +43,8 @@ public class ComplexTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSuperTypesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Super Types feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSuperTypesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ComplexType_superTypes_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ComplexType_superTypes_feature", "_UI_ComplexType_type"),
-				 TypesPackage.Literals.COMPLEX_TYPE__SUPER_TYPES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -92,7 +59,7 @@ public class ComplexTypeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.COMPLEX_TYPE__FEATURES);
+			childrenFeatures.add(TypesPackage.Literals.ANNOTATION__PROPERTIES);
 		}
 		return childrenFeatures;
 	}
@@ -111,14 +78,14 @@ public class ComplexTypeItemProvider
 	}
 
 	/**
-	 * This returns ComplexType.gif.
+	 * This returns Annotation.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ComplexType"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Annotation"));
 	}
 
 	/**
@@ -129,11 +96,12 @@ public class ComplexTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ComplexType)object).getName();
+		String label = ((Annotation)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ComplexType_type") :
-			getString("_UI_ComplexType_type") + " " + label;
+			getString("_UI_Annotation_type") :
+			getString("_UI_Annotation_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -146,8 +114,8 @@ public class ComplexTypeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ComplexType.class)) {
-			case TypesPackage.COMPLEX_TYPE__FEATURES:
+		switch (notification.getFeatureID(Annotation.class)) {
+			case TypesPackage.ANNOTATION__PROPERTIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -167,23 +135,8 @@ public class ComplexTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
-				 TypesFactory.eINSTANCE.createOperation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				(TypesPackage.Literals.ANNOTATION__PROPERTIES,
 				 TypesFactory.eINSTANCE.createProperty()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
-				 TypesFactory.eINSTANCE.createEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
-				 TypesFactory.eINSTANCE.createEnumerator()));
 	}
 
 }
