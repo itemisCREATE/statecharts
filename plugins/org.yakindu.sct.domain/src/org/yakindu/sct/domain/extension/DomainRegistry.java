@@ -139,7 +139,10 @@ public class DomainRegistry {
 			});
 		} catch (NoSuchElementException e) {
 			if (defaultDomainID.equals(id)) {
-				throw new IllegalArgumentException("No default domain found!");
+				if (getDomainDescriptors().size() == 1)
+					return getDomainDescriptors().get(0);
+				else
+					throw new IllegalArgumentException("No default domain found!");
 			}
 			System.err.println("Could not find domain descriptor for id " + id + " - > using default domain");
 			return getDomainDescriptor(defaultDomainID);
@@ -153,7 +156,7 @@ public class DomainRegistry {
 				: BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 		return getDomainDescriptor(domainID);
 	}
-	
+
 	public static String determineDomainID(URI uri) {
 		String result = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 		if (URIConverter.INSTANCE.exists(uri, null)) {
@@ -171,6 +174,9 @@ public class DomainRegistry {
 				resource.unload();
 			}
 		}
+		// in special case a default domain is not available
+		if (getDomainDescriptors().size() == 1 && !result.equals(getDomainDescriptors().get(0).getDomainID()))
+			result = getDomainDescriptors().get(0).getDomainID();
 		return result;
 	}
 }
