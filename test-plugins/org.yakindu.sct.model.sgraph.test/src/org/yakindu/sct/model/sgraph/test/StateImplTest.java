@@ -59,12 +59,5 @@ public class StateImplTest extends TestCase {
 
 		region2.getVertices().clear();
 		assertTrue(state.isSimple());
-
-		state.setSubstatechart(factory.createStatechart());
-		assertFalse(state.isSimple());
-
-		state.getRegions().clear();
-		state.setSubstatechart(factory.createStatechart());
-		assertFalse(state.isSimple());
 	}
 }
