@@ -199,6 +199,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public Type infer(FeatureCall e) {
+		resolveTypeParameter(e);
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getFeature();
 			EList<Parameter> parameters = operation.getParameters();
@@ -208,8 +209,24 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		return inferTypeDispatch(e.getFeature());
 	}
 
-	public Type infer(ElementReferenceExpression e) {
-		Declaration declaration = (Declaration) e.getReference();
+	protected void resolveTypeParameter(FeatureCall e) {
+		if (e.getOwner() instanceof ElementReferenceExpression) {
+			ElementReferenceExpression elemRef = (ElementReferenceExpression) e.getOwner();
+			if (elemRef.getReference() instanceof Declaration) {
+				Declaration declaration = (Declaration) elemRef.getReference();
+				createTypeParameterBinding(declaration);
+			}
+		}
+		else if (e.getOwner() instanceof FeatureCall) {
+			FeatureCall featureCall = (FeatureCall) e.getOwner();
+			if (featureCall.getFeature() instanceof Declaration) {
+				Declaration declaration = (Declaration) featureCall.getFeature();
+				createTypeParameterBinding(declaration);
+			}
+		}
+	}
+
+	protected void createTypeParameterBinding(Declaration declaration) {
 		TypeSpecifier typeSpecifier = declaration.getTypeSpecifier();
 		Type type = typeSpecifier.getType();
 		if (type instanceof ParameterizedType && ((ParameterizedType) type).getParameter().size() > 0) {
@@ -227,17 +244,16 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				}
 			}
 		}
-		if (e.isOperationCall())
+	}
 
-		{
+	public Type infer(ElementReferenceExpression e) {
+		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getReference();
 			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = e.getArgs();
 			inferParameter(parameters, args);
 		}
-		return
-
-		inferTypeDispatch(e.getReference());
+		return inferTypeDispatch(e.getReference());
 	}
 
 	protected void inferParameter(EList<Parameter> parameters, EList<Expression> args) {
