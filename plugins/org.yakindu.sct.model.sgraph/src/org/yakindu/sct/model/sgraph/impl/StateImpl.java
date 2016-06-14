@@ -48,7 +48,6 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getLocalReactions <em>Local Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getScopes <em>Scopes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getNamespace <em>Namespace</em>}</li>
@@ -286,12 +285,7 @@ public class StateImpl extends SpecificationElementImpl implements State {
 				Reaction.class);
 		EList<Scope> scopes = getScopes();
 		for (Scope scope : scopes) {
-			EList<Declaration> declarations = scope.getDeclarations();
-			for (Declaration declaration : declarations) {
-				if (declaration instanceof Reaction) {
-					result.add((Reaction) declaration);
-				}
-			}
+			result.addAll(scope.getReactions());
 		}
 		return result;
 	}
@@ -630,8 +624,6 @@ public class StateImpl extends SpecificationElementImpl implements State {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SGraphPackage.STATE__REACTIONS:
-				return getReactions();
 			case SGraphPackage.STATE__LOCAL_REACTIONS:
 				return getLocalReactions();
 			case SGraphPackage.STATE__SCOPES:
@@ -764,8 +756,6 @@ public class StateImpl extends SpecificationElementImpl implements State {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SGraphPackage.STATE__REACTIONS:
-				return !getReactions().isEmpty();
 			case SGraphPackage.STATE__LOCAL_REACTIONS:
 				return !getLocalReactions().isEmpty();
 			case SGraphPackage.STATE__SCOPES:
@@ -810,7 +800,6 @@ public class StateImpl extends SpecificationElementImpl implements State {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ReactiveElement.class) {
 			switch (derivedFeatureID) {
-				case SGraphPackage.STATE__REACTIONS: return SGraphPackage.REACTIVE_ELEMENT__REACTIONS;
 				case SGraphPackage.STATE__LOCAL_REACTIONS: return SGraphPackage.REACTIVE_ELEMENT__LOCAL_REACTIONS;
 				default: return -1;
 			}
@@ -864,7 +853,6 @@ public class StateImpl extends SpecificationElementImpl implements State {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ReactiveElement.class) {
 			switch (baseFeatureID) {
-				case SGraphPackage.REACTIVE_ELEMENT__REACTIONS: return SGraphPackage.STATE__REACTIONS;
 				case SGraphPackage.REACTIVE_ELEMENT__LOCAL_REACTIONS: return SGraphPackage.STATE__LOCAL_REACTIONS;
 				default: return -1;
 			}

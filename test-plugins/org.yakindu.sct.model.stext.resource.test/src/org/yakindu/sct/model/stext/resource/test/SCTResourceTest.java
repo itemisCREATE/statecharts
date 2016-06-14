@@ -143,9 +143,9 @@ public class SCTResourceTest {
 	@Test
 	public void testStateParsing() throws Exception {
 		State state = createState("entry / 3 * 3");
-		assertEquals(0, state.getReactions().size());
+		assertEquals(0, state.getLocalReactions().size());
 		res.getContents().add(state);
-		assertEquals(1, state.getReactions().size());
+		assertEquals(1, state.getLocalReactions().size());
 		assertEquals("" + res.getSyntaxDiagnostics(), 0, res.getSyntaxDiagnostics().size());
 	}
 

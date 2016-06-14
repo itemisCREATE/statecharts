@@ -137,6 +137,7 @@ public class ScopeItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(SGraphPackage.Literals.SCOPE__DECLARATIONS);
+			childrenFeatures.add(SGraphPackage.Literals.SCOPE__REACTIONS);
 		}
 		return childrenFeatures;
 	}
@@ -189,6 +190,7 @@ public class ScopeItemProvider
 
 		switch (notification.getFeatureID(Scope.class)) {
 			case SGraphPackage.SCOPE__DECLARATIONS:
+			case SGraphPackage.SCOPE__REACTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -225,6 +227,16 @@ public class ScopeItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPE__DECLARATIONS,
 				 TypesFactory.eINSTANCE.createEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__DECLARATIONS,
+				 TypesFactory.eINSTANCE.createEnumerator()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__REACTIONS,
+				 SGraphFactory.eINSTANCE.createTransition()));
 	}
 
 	/**

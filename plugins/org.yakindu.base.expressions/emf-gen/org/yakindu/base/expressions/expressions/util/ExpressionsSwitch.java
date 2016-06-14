@@ -4,10 +4,35 @@ package org.yakindu.base.expressions.expressions.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
-import org.yakindu.base.expressions.expressions.*;
+import org.yakindu.base.expressions.expressions.AssignmentExpression;
+import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
+import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
+import org.yakindu.base.expressions.expressions.BitwiseXorExpression;
+import org.yakindu.base.expressions.expressions.BoolLiteral;
+import org.yakindu.base.expressions.expressions.ConditionalExpression;
+import org.yakindu.base.expressions.expressions.DoubleLiteral;
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.expressions.FloatLiteral;
+import org.yakindu.base.expressions.expressions.HexLiteral;
+import org.yakindu.base.expressions.expressions.IntLiteral;
+import org.yakindu.base.expressions.expressions.Literal;
+import org.yakindu.base.expressions.expressions.LogicalAndExpression;
+import org.yakindu.base.expressions.expressions.LogicalNotExpression;
+import org.yakindu.base.expressions.expressions.LogicalOrExpression;
+import org.yakindu.base.expressions.expressions.LogicalRelationExpression;
+import org.yakindu.base.expressions.expressions.NullLiteral;
+import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression;
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression;
+import org.yakindu.base.expressions.expressions.NumericalUnaryExpression;
+import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
+import org.yakindu.base.expressions.expressions.ShiftExpression;
+import org.yakindu.base.expressions.expressions.StringLiteral;
+import org.yakindu.base.expressions.expressions.TypeCastExpression;
 
 /**
  * <!-- begin-user-doc -->

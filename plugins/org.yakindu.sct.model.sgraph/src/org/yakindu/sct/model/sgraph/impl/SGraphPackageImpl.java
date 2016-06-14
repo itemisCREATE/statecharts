@@ -691,17 +691,8 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getReactiveElement_Reactions() {
-		return (EReference)reactiveElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getReactiveElement_LocalReactions() {
-		return (EReference)reactiveElementEClass.getEStructuralFeatures().get(1);
+		return (EReference)reactiveElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -747,6 +738,15 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EReference getScope_Variables() {
 		return (EReference)scopeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getScope_Reactions() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -860,7 +860,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		exitEClass = createEClass(EXIT);
 
 		reactiveElementEClass = createEClass(REACTIVE_ELEMENT);
-		createEReference(reactiveElementEClass, REACTIVE_ELEMENT__REACTIONS);
 		createEReference(reactiveElementEClass, REACTIVE_ELEMENT__LOCAL_REACTIONS);
 
 		reactionEClass = createEClass(REACTION);
@@ -881,6 +880,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		createEReference(scopeEClass, SCOPE__DECLARATIONS);
 		createEReference(scopeEClass, SCOPE__EVENTS);
 		createEReference(scopeEClass, SCOPE__VARIABLES);
+		createEReference(scopeEClass, SCOPE__REACTIONS);
 
 		scopedElementEClass = createEClass(SCOPED_ELEMENT);
 		createEReference(scopedElementEClass, SCOPED_ELEMENT__SCOPES);
@@ -1002,7 +1002,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		initEClass(exitEClass, Exit.class, "Exit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(reactiveElementEClass, ReactiveElement.class, "ReactiveElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReactiveElement_Reactions(), this.getReaction(), null, "reactions", null, 0, -1, ReactiveElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getReactiveElement_LocalReactions(), this.getReaction(), null, "localReactions", null, 0, -1, ReactiveElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(reactionEClass, Reaction.class, "Reaction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1023,6 +1022,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		initEReference(getScope_Declarations(), theTypesPackage.getDeclaration(), null, "declarations", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScope_Events(), theTypesPackage.getEvent(), null, "events", null, 0, -1, Scope.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getScope_Variables(), theTypesPackage.getProperty(), null, "variables", null, 0, -1, Scope.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_Reactions(), this.getReaction(), null, "reactions", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scopedElementEClass, ScopedElement.class, "ScopedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScopedElement_Scopes(), this.getScope(), null, "scopes", null, 0, -1, ScopedElement.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

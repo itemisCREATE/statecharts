@@ -62,7 +62,6 @@ public class StateItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addReactionsPropertyDescriptor(object);
 			addNamespacePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addIncomingTransitionsPropertyDescriptor(object);
@@ -76,28 +75,6 @@ public class StateItemProvider
 			addLeafPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Reactions feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addReactionsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ReactiveElement_reactions_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ReactiveElement_reactions_feature", "_UI_ReactiveElement_type"),
-				 SGraphPackage.Literals.REACTIVE_ELEMENT__REACTIONS,
-				 false,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
