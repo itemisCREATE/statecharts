@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.base.types.Declaration;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
@@ -37,7 +36,6 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 
@@ -58,9 +56,6 @@ import org.yakindu.sct.model.sgraph.Vertex;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getRegions <em>Regions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#isOrthogonal <em>Orthogonal</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getSubstatechart <em>Substatechart</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getSubstatechartId <em>Substatechart Id</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#isSubchart <em>Subchart</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#isSimple <em>Simple</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#isComposite <em>Composite</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#isLeaf <em>Leaf</em>}</li>
@@ -178,45 +173,6 @@ public class StateImpl extends SpecificationElementImpl implements State {
 	 * @ordered
 	 */
 	protected static final boolean ORTHOGONAL_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #getSubstatechart() <em>Substatechart</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @see #getSubstatechart()
-	 * @generated
-	 * @ordered
-	 */
-	protected Statechart substatechart;
-
-	/**
-	 * The default value of the '{@link #getSubstatechartId() <em>Substatechart Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @see #getSubstatechartId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SUBSTATECHART_ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSubstatechartId() <em>Substatechart Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @see #getSubstatechartId()
-	 * @generated
-	 * @ordered
-	 */
-	protected String substatechartId = SUBSTATECHART_ID_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isSubchart() <em>Subchart</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #isSubchart()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean SUBCHART_EDEFAULT = false;
 
 	/**
 	 * The default value of the '{@link #isSimple() <em>Simple</em>}' attribute.
@@ -450,76 +406,10 @@ public class StateImpl extends SpecificationElementImpl implements State {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Statechart getSubstatechart() {
-		if (substatechart != null && substatechart.eIsProxy()) {
-			InternalEObject oldSubstatechart = (InternalEObject)substatechart;
-			substatechart = (Statechart)eResolveProxy(oldSubstatechart);
-			if (substatechart != oldSubstatechart) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SGraphPackage.STATE__SUBSTATECHART, oldSubstatechart, substatechart));
-			}
-		}
-		return substatechart;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Statechart basicGetSubstatechart() {
-		return substatechart;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSubstatechart(Statechart newSubstatechart) {
-		Statechart oldSubstatechart = substatechart;
-		substatechart = newSubstatechart;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATE__SUBSTATECHART, oldSubstatechart, substatechart));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getSubstatechartId() {
-		return substatechartId;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSubstatechartId(String newSubstatechartId) {
-		String oldSubstatechartId = substatechartId;
-		substatechartId = newSubstatechartId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATE__SUBSTATECHART_ID, oldSubstatechartId, substatechartId));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public boolean isSubchart() {
-		return substatechart != null;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
 	public boolean isSimple() {
-		if (isSubchart()) {
-			return false;
-		}
 		if (isComposite()) {
 			for (Region r : getRegions()) {
 				for (Vertex v : r.getVertices()) {
@@ -548,8 +438,6 @@ public class StateImpl extends SpecificationElementImpl implements State {
 	 * @generated NOT
 	 */
 	public boolean isLeaf() {
-		if (isSubchart())
-			return false;
 		EList<Region> subRegions = getRegions();
 		for (Region region : subRegions) {
 			if (region.getVertices().size() > 0)
@@ -645,13 +533,6 @@ public class StateImpl extends SpecificationElementImpl implements State {
 				return getDocumentation();
 			case SGraphPackage.STATE__ORTHOGONAL:
 				return isOrthogonal();
-			case SGraphPackage.STATE__SUBSTATECHART:
-				if (resolve) return getSubstatechart();
-				return basicGetSubstatechart();
-			case SGraphPackage.STATE__SUBSTATECHART_ID:
-				return getSubstatechartId();
-			case SGraphPackage.STATE__SUBCHART:
-				return isSubchart();
 			case SGraphPackage.STATE__SIMPLE:
 				return isSimple();
 			case SGraphPackage.STATE__COMPOSITE:
@@ -698,12 +579,6 @@ public class StateImpl extends SpecificationElementImpl implements State {
 			case SGraphPackage.STATE__DOCUMENTATION:
 				setDocumentation((String)newValue);
 				return;
-			case SGraphPackage.STATE__SUBSTATECHART:
-				setSubstatechart((Statechart)newValue);
-				return;
-			case SGraphPackage.STATE__SUBSTATECHART_ID:
-				setSubstatechartId((String)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -739,12 +614,6 @@ public class StateImpl extends SpecificationElementImpl implements State {
 			case SGraphPackage.STATE__DOCUMENTATION:
 				setDocumentation(DOCUMENTATION_EDEFAULT);
 				return;
-			case SGraphPackage.STATE__SUBSTATECHART:
-				setSubstatechart((Statechart)null);
-				return;
-			case SGraphPackage.STATE__SUBSTATECHART_ID:
-				setSubstatechartId(SUBSTATECHART_ID_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -776,12 +645,6 @@ public class StateImpl extends SpecificationElementImpl implements State {
 				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
 			case SGraphPackage.STATE__ORTHOGONAL:
 				return isOrthogonal() != ORTHOGONAL_EDEFAULT;
-			case SGraphPackage.STATE__SUBSTATECHART:
-				return substatechart != null;
-			case SGraphPackage.STATE__SUBSTATECHART_ID:
-				return SUBSTATECHART_ID_EDEFAULT == null ? substatechartId != null : !SUBSTATECHART_ID_EDEFAULT.equals(substatechartId);
-			case SGraphPackage.STATE__SUBCHART:
-				return isSubchart() != SUBCHART_EDEFAULT;
 			case SGraphPackage.STATE__SIMPLE:
 				return isSimple() != SIMPLE_EDEFAULT;
 			case SGraphPackage.STATE__COMPOSITE:
@@ -913,8 +776,6 @@ public class StateImpl extends SpecificationElementImpl implements State {
 		result.append(name);
 		result.append(", documentation: ");
 		result.append(documentation);
-		result.append(", substatechartId: ");
-		result.append(substatechartId);
 		result.append(')');
 		return result.toString();
 	}

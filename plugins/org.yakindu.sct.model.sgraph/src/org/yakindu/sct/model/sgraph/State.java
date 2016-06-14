@@ -23,9 +23,6 @@ import org.yakindu.base.base.DocumentedElement;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isOrthogonal <em>Orthogonal</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgraph.State#getSubstatechart <em>Substatechart</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgraph.State#getSubstatechartId <em>Substatechart Id</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgraph.State#isSubchart <em>Subchart</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isSimple <em>Simple</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isComposite <em>Composite</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.State#isLeaf <em>Leaf</em>}</li>
@@ -57,73 +54,6 @@ public interface State extends SpecificationElement, ReactiveElement, ScopedElem
 	 * @generated
 	 */
 	boolean isOrthogonal();
-
-	/**
-	 * Returns the value of the '<em><b>Substatechart</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Substatechart</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Substatechart</em>' reference.
-	 * @see #setSubstatechart(Statechart)
-	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_Substatechart()
-	 * @model transient="true"
-	 * @generated
-	 */
-	Statechart getSubstatechart();
-
-	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sgraph.State#getSubstatechart <em>Substatechart</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Substatechart</em>' reference.
-	 * @see #getSubstatechart()
-	 * @generated
-	 */
-	void setSubstatechart(Statechart value);
-
-	/**
-	 * Returns the value of the '<em><b>Substatechart Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Substatechart Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Substatechart Id</em>' attribute.
-	 * @see #setSubstatechartId(String)
-	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_SubstatechartId()
-	 * @model
-	 * @generated
-	 */
-	String getSubstatechartId();
-
-	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sgraph.State#getSubstatechartId <em>Substatechart Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Substatechart Id</em>' attribute.
-	 * @see #getSubstatechartId()
-	 * @generated
-	 */
-	void setSubstatechartId(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Subchart</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Subchart</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Subchart</em>' attribute.
-	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState_Subchart()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
-	boolean isSubchart();
 
 	/**
 	 * Returns the value of the '<em><b>Simple</b></em>' attribute.

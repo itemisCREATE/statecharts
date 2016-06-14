@@ -430,35 +430,8 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getState_Substatechart() {
-		return (EReference)stateEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getState_SubstatechartId() {
-		return (EAttribute)stateEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getState_Subchart() {
-		return (EAttribute)stateEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getState_Simple() {
-		return (EAttribute)stateEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -467,7 +440,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getState_Composite() {
-		return (EAttribute)stateEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -476,7 +449,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getState_Leaf() {
-		return (EAttribute)stateEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -890,9 +863,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		stateEClass = createEClass(STATE);
 		createEAttribute(stateEClass, STATE__ORTHOGONAL);
-		createEReference(stateEClass, STATE__SUBSTATECHART);
-		createEAttribute(stateEClass, STATE__SUBSTATECHART_ID);
-		createEAttribute(stateEClass, STATE__SUBCHART);
 		createEAttribute(stateEClass, STATE__SIMPLE);
 		createEAttribute(stateEClass, STATE__COMPOSITE);
 		createEAttribute(stateEClass, STATE__LEAF);
@@ -1032,9 +1002,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getState_Orthogonal(), ecorePackage.getEBoolean(), "orthogonal", null, 0, 1, State.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getState_Substatechart(), this.getStatechart(), null, "substatechart", null, 0, 1, State.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_SubstatechartId(), ecorePackage.getEString(), "substatechartId", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getState_Subchart(), ecorePackage.getEBoolean(), "subchart", null, 0, 1, State.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_Simple(), ecorePackage.getEBoolean(), "simple", null, 0, 1, State.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_Composite(), ecorePackage.getEBoolean(), "composite", null, 0, 1, State.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getState_Leaf(), ecorePackage.getEBoolean(), "leaf", null, 0, 1, State.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
