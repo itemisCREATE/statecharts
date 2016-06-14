@@ -12,10 +12,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.Root#getRoots <em>Roots</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.stext.stext.StextPackage#getRoot()
  * @model

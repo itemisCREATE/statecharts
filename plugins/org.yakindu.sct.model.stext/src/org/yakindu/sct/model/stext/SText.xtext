@@ -43,7 +43,7 @@ Scope returns sgraph::Scope:
 	(StateScope | StatechartScope);
 
 StateScope returns sgraph::Scope:
-	{SimpleScope} (declarations+=(LocalReaction))*;
+	{SimpleScope} (reactions+=(LocalReaction))*;
 
 StatechartScope:
 	InterfaceScope | InternalScope | ImportScope;
@@ -56,8 +56,8 @@ InterfaceScope:
 	OperationDefinition))*;
 
 InternalScope:
-	{InternalScope} 'internal' ':' (declarations+=(EventDefinition | VariableDefinition | OperationDefinition | TypeAliasDefinition |
-	LocalReaction))*;
+	{InternalScope} 'internal' ':' ((declarations+=(EventDefinition | VariableDefinition | OperationDefinition | TypeAliasDefinition)) | (reactions +=LocalReaction))*
+		;
 	
 ImportScope:
 	 {ImportScope} 'import' ':' (imports+=Import)*;
@@ -72,7 +72,7 @@ QID:
 	ID ('.' ID)*;
 
 Declaration returns types::Declaration:
-	EventDefinition | VariableDefinition | OperationDefinition | TypeAliasDefinition | LocalReaction;
+	EventDefinition | VariableDefinition | OperationDefinition | TypeAliasDefinition;
 
 EventDefinition:
 	(direction=Direction)? 'event' name=XID (':' type=[types::Type|FQN])?;

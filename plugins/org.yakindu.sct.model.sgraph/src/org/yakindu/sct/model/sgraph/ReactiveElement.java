@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sgraph.ReactiveElement#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.ReactiveElement#getLocalReactions <em>Local Reactions</em>}</li>
  * </ul>
  *
@@ -37,22 +36,6 @@ public interface ReactiveElement extends EObject {
 	 * @generated
 	 */
 	String copyright = "Copyright (c) 2011 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n";
-
-	/**
-	 * Returns the value of the '<em><b>Reactions</b></em>' reference list.
-	 * The list contents are of type {@link org.yakindu.sct.model.sgraph.Reaction}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Reactions</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Reactions</em>' reference list.
-	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getReactiveElement_Reactions()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
-	EList<Reaction> getReactions();
 
 	/**
 	 * Returns the value of the '<em><b>Local Reactions</b></em>' reference list.

@@ -130,8 +130,13 @@ public class SimpleScopeItemProvider extends ScopeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__DECLARATIONS,
+				(SGraphPackage.Literals.SCOPE__REACTIONS,
 				 StextFactory.eINSTANCE.createLocalReaction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPE__REACTIONS,
+				 StextFactory.eINSTANCE.createTransitionReaction()));
 	}
 
   /**

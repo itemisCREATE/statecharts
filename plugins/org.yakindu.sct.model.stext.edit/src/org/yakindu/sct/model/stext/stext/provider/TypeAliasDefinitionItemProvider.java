@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.provider.TypeAliasItemProvider;
+import org.yakindu.sct.model.stext.stext.TypeAliasDefinition;
 
 /**
  * This is the item provider adapter for a
@@ -54,9 +55,9 @@ public class TypeAliasDefinitionItemProvider extends TypeAliasItemProvider {
 	}
 
 	/**
-	 * This returns TypeAliasDefinition.gif. <!-- begin-user-doc --> <!--
+	 * This returns TypeAliasDefinition.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -90,11 +91,10 @@ public class TypeAliasDefinitionItemProvider extends TypeAliasItemProvider {
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

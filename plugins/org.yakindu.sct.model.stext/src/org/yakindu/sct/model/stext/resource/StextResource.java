@@ -14,7 +14,6 @@ package org.yakindu.sct.model.stext.resource;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.parser.IParseResult;
-import org.yakindu.base.types.Declaration;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -59,12 +58,12 @@ public class StextResource extends AbstractSCTResource {
 		if (state.getScopes().size() != 1)
 			return;
 		Scope scope = state.getScopes().get(0);
-		EList<Declaration> declarations = scope.getDeclarations();
+		EList<Reaction> reactions = scope.getReactions();
 		StringBuilder builder = new StringBuilder();
-		for (Declaration declaration : declarations) {
+		for (Reaction reaction : reactions) {
 			if (builder.length() > 0)
 				builder.append("\n");
-			builder.append(serializeReaction((Reaction) declaration));
+			builder.append(serializeReaction(reaction));
 		}
 		state.setSpecification(builder.toString());
 	}

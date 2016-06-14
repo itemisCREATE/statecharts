@@ -12,10 +12,10 @@ import org.yakindu.sct.model.sgraph.State;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.stext.stext.StextPackage#getActiveStateReferenceExpression()
  * @model

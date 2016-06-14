@@ -543,22 +543,13 @@ public interface SGraphPackage extends EPackage {
 	int STATECHART__SPECIFICATION = SPECIFICATION_ELEMENT__SPECIFICATION;
 
 	/**
-	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATECHART__REACTIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Local Reactions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__LOCAL_REACTIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 1;
+	int STATECHART__LOCAL_REACTIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
@@ -567,7 +558,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__SCOPES = SPECIFICATION_ELEMENT_FEATURE_COUNT + 2;
+	int STATECHART__SCOPES = SPECIFICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -576,7 +567,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__NAMESPACE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 3;
+	int STATECHART__NAMESPACE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
@@ -585,7 +576,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__REGIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 4;
+	int STATECHART__REGIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -594,7 +585,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__NAME = SPECIFICATION_ELEMENT_FEATURE_COUNT + 5;
+	int STATECHART__NAME = SPECIFICATION_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -603,7 +594,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__DOCUMENTATION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
+	int STATECHART__DOCUMENTATION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Domain ID</b></em>' attribute.
@@ -612,7 +603,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__DOMAIN_ID = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
+	int STATECHART__DOMAIN_ID = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
@@ -621,7 +612,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__IMPORTS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
+	int STATECHART__IMPORTS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Statechart</em>' class.
@@ -630,7 +621,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 9;
+	int STATECHART_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.
@@ -802,22 +793,13 @@ public interface SGraphPackage extends EPackage {
 	int EXIT_FEATURE_COUNT = PSEUDOSTATE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REACTIVE_ELEMENT__REACTIONS = 0;
-
-	/**
 	 * The feature id for the '<em><b>Local Reactions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REACTIVE_ELEMENT__LOCAL_REACTIONS = 1;
+	int REACTIVE_ELEMENT__LOCAL_REACTIONS = 0;
 
 	/**
 	 * The number of structural features of the '<em>Reactive Element</em>' class.
@@ -826,7 +808,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REACTIVE_ELEMENT_FEATURE_COUNT = 2;
+	int REACTIVE_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
@@ -929,13 +911,22 @@ public interface SGraphPackage extends EPackage {
 	int SCOPE__VARIABLES = 2;
 
 	/**
+	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE__REACTIONS = 3;
+
+	/**
 	 * The number of structural features of the '<em>Scope</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE_FEATURE_COUNT = 3;
+	int SCOPE_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ScopedElementImpl <em>Scoped Element</em>}' class.
@@ -1039,22 +1030,13 @@ public interface SGraphPackage extends EPackage {
 	int STATE__SPECIFICATION = SPECIFICATION_ELEMENT__SPECIFICATION;
 
 	/**
-	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__REACTIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Local Reactions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__LOCAL_REACTIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 1;
+	int STATE__LOCAL_REACTIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
@@ -1063,7 +1045,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SCOPES = SPECIFICATION_ELEMENT_FEATURE_COUNT + 2;
+	int STATE__SCOPES = SPECIFICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -1072,7 +1054,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__NAMESPACE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 3;
+	int STATE__NAMESPACE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1081,7 +1063,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__NAME = SPECIFICATION_ELEMENT_FEATURE_COUNT + 4;
+	int STATE__NAME = SPECIFICATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Parent Region</b></em>' container reference.
@@ -1090,7 +1072,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__PARENT_REGION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 5;
+	int STATE__PARENT_REGION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Transitions</b></em>' reference list.
@@ -1099,7 +1081,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__INCOMING_TRANSITIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
+	int STATE__INCOMING_TRANSITIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
@@ -1108,7 +1090,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__OUTGOING_TRANSITIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
+	int STATE__OUTGOING_TRANSITIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
@@ -1117,7 +1099,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__REGIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
+	int STATE__REGIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -1126,7 +1108,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__DOCUMENTATION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 9;
+	int STATE__DOCUMENTATION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Orthogonal</b></em>' attribute.
@@ -1135,34 +1117,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__ORTHOGONAL = SPECIFICATION_ELEMENT_FEATURE_COUNT + 10;
-
-	/**
-	 * The feature id for the '<em><b>Substatechart</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__SUBSTATECHART = SPECIFICATION_ELEMENT_FEATURE_COUNT + 11;
-
-	/**
-	 * The feature id for the '<em><b>Substatechart Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__SUBSTATECHART_ID = SPECIFICATION_ELEMENT_FEATURE_COUNT + 12;
-
-	/**
-	 * The feature id for the '<em><b>Subchart</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATE__SUBCHART = SPECIFICATION_ELEMENT_FEATURE_COUNT + 13;
+	int STATE__ORTHOGONAL = SPECIFICATION_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Simple</b></em>' attribute.
@@ -1171,7 +1126,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SIMPLE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 14;
+	int STATE__SIMPLE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Composite</b></em>' attribute.
@@ -1180,7 +1135,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__COMPOSITE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 15;
+	int STATE__COMPOSITE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
@@ -1189,7 +1144,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__LEAF = SPECIFICATION_ELEMENT_FEATURE_COUNT + 16;
+	int STATE__LEAF = SPECIFICATION_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -1198,7 +1153,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 17;
+	int STATE_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.CompositeElementImpl <em>Composite Element</em>}' class.
@@ -1292,6 +1247,15 @@ public interface SGraphPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPORT_DECLARATION__NAME = TypesPackage.DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_DECLARATION__ANNOTATIONS = TypesPackage.DECLARATION__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1489,39 +1453,6 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getState_Orthogonal();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sgraph.State#getSubstatechart <em>Substatechart</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Substatechart</em>'.
-	 * @see org.yakindu.sct.model.sgraph.State#getSubstatechart()
-	 * @see #getState()
-	 * @generated
-	 */
-	EReference getState_Substatechart();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.State#getSubstatechartId <em>Substatechart Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Substatechart Id</em>'.
-	 * @see org.yakindu.sct.model.sgraph.State#getSubstatechartId()
-	 * @see #getState()
-	 * @generated
-	 */
-	EAttribute getState_SubstatechartId();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.State#isSubchart <em>Subchart</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Subchart</em>'.
-	 * @see org.yakindu.sct.model.sgraph.State#isSubchart()
-	 * @see #getState()
-	 * @generated
-	 */
-	EAttribute getState_Subchart();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.State#isSimple <em>Simple</em>}'.
@@ -1797,17 +1728,6 @@ public interface SGraphPackage extends EPackage {
 	EClass getReactiveElement();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.yakindu.sct.model.sgraph.ReactiveElement#getReactions <em>Reactions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Reactions</em>'.
-	 * @see org.yakindu.sct.model.sgraph.ReactiveElement#getReactions()
-	 * @see #getReactiveElement()
-	 * @generated
-	 */
-	EReference getReactiveElement_Reactions();
-
-	/**
 	 * Returns the meta object for the reference list '{@link org.yakindu.sct.model.sgraph.ReactiveElement#getLocalReactions <em>Local Reactions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1870,6 +1790,17 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getScope_Variables();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgraph.Scope#getReactions <em>Reactions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Reactions</em>'.
+	 * @see org.yakindu.sct.model.sgraph.Scope#getReactions()
+	 * @see #getScope()
+	 * @generated
+	 */
+	EReference getScope_Reactions();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.ScopedElement <em>Scoped Element</em>}'.
@@ -2078,30 +2009,6 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STATE__ORTHOGONAL = eINSTANCE.getState_Orthogonal();
-
-		/**
-		 * The meta object literal for the '<em><b>Substatechart</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATE__SUBSTATECHART = eINSTANCE.getState_Substatechart();
-
-		/**
-		 * The meta object literal for the '<em><b>Substatechart Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STATE__SUBSTATECHART_ID = eINSTANCE.getState_SubstatechartId();
-
-		/**
-		 * The meta object literal for the '<em><b>Subchart</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STATE__SUBCHART = eINSTANCE.getState_Subchart();
 
 		/**
 		 * The meta object literal for the '<em><b>Simple</b></em>' attribute feature.
@@ -2338,14 +2245,6 @@ public interface SGraphPackage extends EPackage {
 		EClass REACTIVE_ELEMENT = eINSTANCE.getReactiveElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Reactions</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference REACTIVE_ELEMENT__REACTIONS = eINSTANCE.getReactiveElement_Reactions();
-
-		/**
 		 * The meta object literal for the '<em><b>Local Reactions</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2396,6 +2295,14 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCOPE__VARIABLES = eINSTANCE.getScope_Variables();
+
+		/**
+		 * The meta object literal for the '<em><b>Reactions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCOPE__REACTIONS = eINSTANCE.getScope_Reactions();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.ScopedElementImpl <em>Scoped Element</em>}' class.

@@ -11,8 +11,6 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Statechart Specification</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

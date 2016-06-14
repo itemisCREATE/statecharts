@@ -21,10 +21,9 @@ import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.yakindu.base.types.PrimitiveType} object. <!-- begin-user-doc -->
+ * This is the item provider adapter for a {@link org.yakindu.base.types.PrimitiveType} object.
+ * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * 
  * @generated
  */
 public class PrimitiveTypeItemProvider extends TypeItemProvider {
@@ -61,13 +60,19 @@ public class PrimitiveTypeItemProvider extends TypeItemProvider {
 	 * @generated
 	 */
 	protected void addBaseTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_PrimitiveType_baseType_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_PrimitiveType_baseType_feature",
-						"_UI_PrimitiveType_type"), TypesPackage.Literals.PRIMITIVE_TYPE__BASE_TYPE, true, false, true,
-				null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PrimitiveType_baseType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PrimitiveType_baseType_feature", "_UI_PrimitiveType_type"),
+				 TypesPackage.Literals.PRIMITIVE_TYPE__BASE_TYPE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -94,11 +99,10 @@ public class PrimitiveTypeItemProvider extends TypeItemProvider {
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

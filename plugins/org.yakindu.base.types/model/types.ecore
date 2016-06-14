@@ -74,7 +74,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1"
         eType="#//TypeParameter" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PackageMember" eSuperTypes="base.ecore#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="PackageMember" eSuperTypes="base.ecore#//NamedElement #//AnnotatableElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true" iD="true"/>
   </eClassifiers>
@@ -86,4 +86,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="domainID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeAlias" eSuperTypes="#//TypedElement #//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Annotation" eSuperTypes="#//PackageMember">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotatableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//Annotation"/>
+  </eClassifiers>
 </ecore:EPackage>

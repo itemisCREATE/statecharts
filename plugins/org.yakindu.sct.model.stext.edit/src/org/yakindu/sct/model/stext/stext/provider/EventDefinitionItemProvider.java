@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.provider.EventItemProvider;
+import org.yakindu.sct.model.stext.stext.EventDefinition;
 
 /**
  * This is the item provider adapter for a
@@ -54,9 +55,9 @@ public class EventDefinitionItemProvider extends EventItemProvider {
 	}
 
 	/**
-	 * This returns EventDefinition.gif. <!-- begin-user-doc --> <!--
+	 * This returns EventDefinition.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -78,11 +79,10 @@ public class EventDefinitionItemProvider extends EventItemProvider {
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

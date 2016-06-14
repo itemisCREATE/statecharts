@@ -120,7 +120,7 @@ public class FoldIncomingActionsRefactoring extends AbstractRefactoring<State> {
 		newLocalReaction.setEffect(newReactionEffect);
 
 		Scope scope = getContextObject().getScopes().get(0);
-		scope.getDeclarations().add(newLocalReaction);
+		scope.getReactions().add(newLocalReaction);
 
 		actionsOriginal = newReactionEffect.getActions();
 		return actionsOriginal;

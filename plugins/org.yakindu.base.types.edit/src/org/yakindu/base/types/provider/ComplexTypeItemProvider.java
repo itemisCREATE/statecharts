@@ -179,6 +179,11 @@ public class ComplexTypeItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
 				 TypesFactory.eINSTANCE.createEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.COMPLEX_TYPE__FEATURES,
+				 TypesFactory.eINSTANCE.createEnumerator()));
 	}
 
 }

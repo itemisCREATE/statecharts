@@ -11,21 +11,17 @@
 package org.yakindu.sct.model.sgraph.test;
 
 import static org.junit.Assert.*;
+import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.firstNamed;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.*;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
-import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.*;
-
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import javax.swing.plaf.synth.SynthGraphicsUtils;
-
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;

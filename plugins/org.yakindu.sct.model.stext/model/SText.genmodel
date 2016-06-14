@@ -3,15 +3,12 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.sct.model.stext/emf-gen" editDirectory="/org.yakindu.sct.model.stext.edit/src"
     editorDirectory="/org.yakindu.sct.model.stext.editor/src" modelPluginID="org.yakindu.sct.model.stext"
     forceOverwrite="true" modelName="SText" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    complianceLevel="5.0" copyrightFields="false" editPluginID="org.yakindu.sct.model.stext.edit"
-    editorPluginID="org.yakindu.sct.model.stext.editor" runtimeVersion="2.8" usedGenPackages="../../org.yakindu.base.expressions/model/Expressions.genmodel#//expressions ../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.base.types/model/types.genmodel#//types ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph">
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    editPluginID="org.yakindu.sct.model.stext.edit" editorPluginID="org.yakindu.sct.model.stext.editor"
+    runtimeVersion="2.8" usedGenPackages="../../org.yakindu.base.expressions/model/Expressions.genmodel#//expressions ../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.base.types/model/types.genmodel#//types ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph">
+  <foreignModel>SText.ecore</foreignModel>
   <genPackages prefix="Stext" basePackage="org.yakindu.sct.model.stext" disposableProviderFactory="true"
       ecorePackage="SText.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="SText.ecore#//Direction">
-      <genEnumLiterals ecoreEnumLiteral="SText.ecore#//Direction/LOCAL"/>
-      <genEnumLiterals ecoreEnumLiteral="SText.ecore#//Direction/IN"/>
-      <genEnumLiterals ecoreEnumLiteral="SText.ecore#//Direction/OUT"/>
-    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="SText.ecore#//TimeEventType">
       <genEnumLiterals ecoreEnumLiteral="SText.ecore#//TimeEventType/after"/>
       <genEnumLiterals ecoreEnumLiteral="SText.ecore#//TimeEventType/every"/>
@@ -51,16 +48,12 @@
     <genClasses ecoreClass="SText.ecore#//Import">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//Import/importedNamespace"/>
     </genClasses>
-    <genClasses ecoreClass="SText.ecore#//EventDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//EventDefinition/direction"/>
-    </genClasses>
+    <genClasses ecoreClass="SText.ecore#//EventDefinition"/>
     <genClasses ecoreClass="SText.ecore#//VariableDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//VariableDefinition/const"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//VariableDefinition/readonly"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//VariableDefinition/external"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//VariableDefinition/initialValue"/>
     </genClasses>
     <genClasses ecoreClass="SText.ecore#//OperationDefinition"/>
+    <genClasses ecoreClass="SText.ecore#//TypeAliasDefinition"/>
     <genClasses ecoreClass="SText.ecore#//LocalReaction"/>
     <genClasses ecoreClass="SText.ecore#//TransitionReaction"/>
     <genClasses ecoreClass="SText.ecore#//Guard">

@@ -19,12 +19,12 @@ import org.yakindu.sct.model.stext.stext.TimeUnit;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.TimeEventSpecImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.TimeEventSpecImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.TimeEventSpecImpl#getUnit <em>Unit</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
