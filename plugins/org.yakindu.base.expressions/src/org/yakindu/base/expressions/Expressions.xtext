@@ -91,7 +91,6 @@ FeatureCall returns Expression:
 		|
 	=> (arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')* 
 	)?)*;
- 	
 
 ElementReferenceExpression returns Expression:
 	{ElementReferenceExpression} reference=[ecore::EObject|ID]

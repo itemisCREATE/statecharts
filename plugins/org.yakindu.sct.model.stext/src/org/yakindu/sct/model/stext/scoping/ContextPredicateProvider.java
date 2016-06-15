@@ -25,7 +25,7 @@ import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Litera
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.SHIFT_EXPRESSION;
-import static org.yakindu.base.types.TypesPackage.Literals.TYPED_ELEMENT__TYPE;
+import static org.yakindu.base.types.TypesPackage.Literals.TYPE_SPECIFIER__TYPE;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION;
@@ -181,7 +181,7 @@ public class ContextPredicateProvider {
 		filter.put(key(TRANSITION_SPECIFICATION), EVENTS);
 		filter.put(key(LOCAL_REACTION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(TRANSITION_REACTION), VARIABLES_AND_OPERATIONS);
-		filter.put(key(VARIABLE_DEFINITION, TYPED_ELEMENT__TYPE), TYPES);
+		filter.put(key(VARIABLE_DEFINITION, TYPE_SPECIFIER__TYPE), TYPES);
 		filter.put(key(VARIABLE_DEFINITION, ELEMENT_REFERENCE_EXPRESSION__REFERENCE),
 				VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
 		filter.put(key(STATE_SPECIFICATION), EVENTS);

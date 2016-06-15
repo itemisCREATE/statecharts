@@ -212,10 +212,26 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		}
 		Type inferred = inferTypeDispatch(e.getFeature());
 		if (e.isArrayAccess() && isArrayType(inferred)) {
-			TypeParameter tp = ((ParameterizedType)inferred).getParameter().get(0);
+			TypeParameter tp = ((ParameterizedType) inferred).getParameter().get(0);
 			return getTypeParameterBinding(tp).getActualType();
 		}
 		return inferred;
+	}
+
+	public Type infer(ElementReferenceExpression e) {
+		resolveTypeParameter(e);
+		if (e.isOperationCall()) {
+			Operation operation = (Operation) e.getReference();
+			EList<Parameter> parameters = operation.getParameters();
+			EList<Expression> args = e.getArgs();
+			inferParameter(parameters, args);
+		}
+		Type inferred = inferTypeDispatch(e.getReference());
+		if (e.isArrayAccess() && isArrayType(inferred)) {
+			TypeParameter tp = ((ParameterizedType) inferred).getParameter().get(0);
+			return getTypeParameterBinding(tp).getActualType();
+		}
+		return inferTypeDispatch(e.getReference());
 	}
 
 	private boolean isArrayType(Type inferred) {
@@ -253,6 +269,12 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			createTypeParameterBinding(declaration);
 		}
 	}
+	
+	protected void resolveTypeParameter(ElementReferenceExpression e) {
+		if (e.getReference() instanceof Declaration) {
+			createTypeParameterBinding((Declaration) e.getReference());
+		}
+	}
 
 	protected void createTypeParameterBinding(Declaration declaration) {
 		TypeSpecifier typeSpecifier = declaration.getTypeSpecifier();
@@ -277,16 +299,6 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		TypeParameterBinding existingBinding = (TypeParameterBinding) EcoreUtil.getExistingAdapter(param,
 				TypeParameterBinding.class);
 		return existingBinding;
-	}
-
-	public Type infer(ElementReferenceExpression e) {
-		if (e.isOperationCall()) {
-			Operation operation = (Operation) e.getReference();
-			EList<Parameter> parameters = operation.getParameters();
-			EList<Expression> args = e.getArgs();
-			inferParameter(parameters, args);
-		}
-		return inferTypeDispatch(e.getReference());
 	}
 
 	protected void inferParameter(EList<Parameter> parameters, EList<Expression> args) {
