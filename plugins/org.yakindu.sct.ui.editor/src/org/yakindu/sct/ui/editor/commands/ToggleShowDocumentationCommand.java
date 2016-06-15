@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.gmf.runtime.common.core.command.CompositeCommand;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
@@ -89,6 +90,9 @@ public class ToggleShowDocumentationCommand extends AbstractHandler {
 		for (@SuppressWarnings("unchecked")
 		Iterator<IGraphicalEditPart> iter = structuredSelection.iterator(); iter.hasNext();) {
 			IGraphicalEditPart next = iter.next();
+			while(next != null && !(next instanceof IPrimaryEditPart)){
+				next = (IGraphicalEditPart) next.getParent();
+			}
 			result.add(next.getNotationView());
 		}
 		return result;
