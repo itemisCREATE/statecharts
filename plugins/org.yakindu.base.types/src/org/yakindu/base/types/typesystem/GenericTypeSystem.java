@@ -10,6 +10,7 @@
  */
 package org.yakindu.base.types.typesystem;
 
+import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
@@ -46,6 +47,10 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 	protected void declareArrayType() {
 		ComplexType array = TypesFactory.eINSTANCE.createComplexType();
 		array.setName("array");
+		Annotation builtInAnnotation = TypesFactory.eINSTANCE.createAnnotation();
+		builtInAnnotation.setName("Built-In-Type");
+		array.getAnnotations().add(builtInAnnotation);
+		
 		declareType(array, array.getName());
 		getResource().getContents().add(array);
 
@@ -67,6 +72,10 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 		getTypeSpec.setType(baseType);
 		get.setTypeSpecifier(getTypeSpec);
 		array.getFeatures().add(get);
+		
+		Annotation indexAnnotation = TypesFactory.eINSTANCE.createAnnotation();
+		indexAnnotation.setName("IndexOperation");
+		get.getAnnotations().add(indexAnnotation);
 		
 		// ADD
 		Operation add = TypesFactory.eINSTANCE.createOperation();

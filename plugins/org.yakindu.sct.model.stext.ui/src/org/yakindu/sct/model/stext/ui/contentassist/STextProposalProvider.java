@@ -131,14 +131,14 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 	protected void suppressKeywords(List<Keyword> suppressKeywords, FeatureCall featureCall) {
 		if (!(featureCall.getFeature() instanceof Operation)) {
-			suppressKeywords.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0());
+			suppressKeywords.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0_0());
 		}
 	}
 
 	protected void suppressKeywords(List<Keyword> suppressKeywords, ElementReferenceExpression referenceExpression) {
 		if (!(referenceExpression.getReference() instanceof Operation)) {
 			suppressKeywords.add(grammarAccess.getElementReferenceExpressionAccess()
-					.getOperationCallLeftParenthesisKeyword_2_0_0());
+					.getOperationCallLeftParenthesisKeyword_2_0_0_0());
 		}
 	}
 

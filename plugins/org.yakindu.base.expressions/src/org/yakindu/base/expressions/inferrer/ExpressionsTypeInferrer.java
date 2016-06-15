@@ -47,6 +47,7 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
@@ -60,6 +61,9 @@ import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeParameterBinding;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -206,7 +210,25 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			EList<Expression> args = e.getArgs();
 			inferParameter(parameters, args);
 		}
-		return inferTypeDispatch(e.getFeature());
+		Type inferred = inferTypeDispatch(e.getFeature());
+		if (e.isArrayAccess() && isArrayType(inferred)) {
+			TypeParameter tp = ((ParameterizedType)inferred).getParameter().get(0);
+			return getTypeParameterBinding(tp).getActualType();
+		}
+		return inferred;
+	}
+
+	private boolean isArrayType(Type inferred) {
+		return inferred.getName().equals("array") && hasAnnotation(inferred, "Built-In-Type");
+	}
+
+	private boolean hasAnnotation(final Type type, final String name) {
+		return Iterables.any(type.getAnnotations(), new Predicate<Annotation>() {
+			@Override
+			public boolean apply(Annotation input) {
+				return input.getName().equals(name);
+			}
+		});
 	}
 
 	protected void resolveTypeParameter(FeatureCall e) {
@@ -215,14 +237,20 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			if (elemRef.getReference() instanceof Declaration) {
 				Declaration declaration = (Declaration) elemRef.getReference();
 				createTypeParameterBinding(declaration);
+				return;
 			}
 		}
-		else if (e.getOwner() instanceof FeatureCall) {
+		if (e.getOwner() instanceof FeatureCall) {
 			FeatureCall featureCall = (FeatureCall) e.getOwner();
 			if (featureCall.getFeature() instanceof Declaration) {
 				Declaration declaration = (Declaration) featureCall.getFeature();
 				createTypeParameterBinding(declaration);
+				return;
 			}
+		}
+		if (e.getFeature() instanceof Declaration) {
+			Declaration declaration = (Declaration) e.getFeature();
+			createTypeParameterBinding(declaration);
 		}
 	}
 
@@ -235,8 +263,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				TypeParameter param = parameter.get(i);
 				Type actualType = typeSpecifier.getTypeArguments().get(i).getType();
 
-				TypeParameterBinding existingBinding = (TypeParameterBinding) EcoreUtil.getExistingAdapter(param,
-						TypeParameterBinding.class);
+				TypeParameterBinding existingBinding = getTypeParameterBinding(param);
 				if (existingBinding != null) {
 					existingBinding.setActualType(actualType);
 				} else {
@@ -244,6 +271,12 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				}
 			}
 		}
+	}
+
+	private TypeParameterBinding getTypeParameterBinding(TypeParameter param) {
+		TypeParameterBinding existingBinding = (TypeParameterBinding) EcoreUtil.getExistingAdapter(param,
+				TypeParameterBinding.class);
+		return existingBinding;
 	}
 
 	public Type infer(ElementReferenceExpression e) {

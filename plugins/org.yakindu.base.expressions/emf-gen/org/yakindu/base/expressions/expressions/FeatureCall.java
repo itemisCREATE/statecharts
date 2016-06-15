@@ -12,13 +12,15 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.FeatureCall#getOwner <em>Owner</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.FeatureCall#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.FeatureCall#isOperationCall <em>Operation Call</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.FeatureCall#getArgs <em>Args</em>}</li>
+ *   <li>{@link org.yakindu.base.expressions.expressions.FeatureCall#getArraySelector <em>Array Selector</em>}</li>
+ *   <li>{@link org.yakindu.base.expressions.expressions.FeatureCall#isArrayAccess <em>Array Access</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getFeatureCall()
  * @model
@@ -118,5 +120,47 @@ public interface FeatureCall extends Expression {
 	 * @generated
 	 */
 	EList<Expression> getArgs();
+
+	/**
+	 * Returns the value of the '<em><b>Array Selector</b></em>' containment reference list.
+	 * The list contents are of type {@link org.yakindu.base.expressions.expressions.Expression}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Array Selector</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Array Selector</em>' containment reference list.
+	 * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getFeatureCall_ArraySelector()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Expression> getArraySelector();
+
+	/**
+	 * Returns the value of the '<em><b>Array Access</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Array Access</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Array Access</em>' attribute.
+	 * @see #setArrayAccess(boolean)
+	 * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getFeatureCall_ArrayAccess()
+	 * @model
+	 * @generated
+	 */
+	boolean isArrayAccess();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.base.expressions.expressions.FeatureCall#isArrayAccess <em>Array Access</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Array Access</em>' attribute.
+	 * @see #isArrayAccess()
+	 * @generated
+	 */
+	void setArrayAccess(boolean value);
 
 } // FeatureCall

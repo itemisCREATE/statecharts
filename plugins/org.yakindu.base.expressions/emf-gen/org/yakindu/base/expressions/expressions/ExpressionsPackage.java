@@ -882,13 +882,31 @@ public interface ExpressionsPackage extends EPackage {
 	int FEATURE_CALL__ARGS = EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Array Selector</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_CALL__ARRAY_SELECTOR = EXPRESSION_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Array Access</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_CALL__ARRAY_ACCESS = EXPRESSION_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Feature Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_CALL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 4;
+	int FEATURE_CALL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ElementReferenceExpressionImpl <em>Element Reference Expression</em>}' class.
@@ -928,13 +946,31 @@ public interface ExpressionsPackage extends EPackage {
 	int ELEMENT_REFERENCE_EXPRESSION__ARGS = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Array Selector</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR = EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Array Access</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_REFERENCE_EXPRESSION__ARRAY_ACCESS = EXPRESSION_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Element Reference Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_REFERENCE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+	int ELEMENT_REFERENCE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ParenthesizedExpressionImpl <em>Parenthesized Expression</em>}' class.
@@ -1765,6 +1801,28 @@ public interface ExpressionsPackage extends EPackage {
 	EReference getFeatureCall_Args();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.expressions.expressions.FeatureCall#getArraySelector <em>Array Selector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Array Selector</em>'.
+	 * @see org.yakindu.base.expressions.expressions.FeatureCall#getArraySelector()
+	 * @see #getFeatureCall()
+	 * @generated
+	 */
+	EReference getFeatureCall_ArraySelector();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.expressions.expressions.FeatureCall#isArrayAccess <em>Array Access</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Array Access</em>'.
+	 * @see org.yakindu.base.expressions.expressions.FeatureCall#isArrayAccess()
+	 * @see #getFeatureCall()
+	 * @generated
+	 */
+	EAttribute getFeatureCall_ArrayAccess();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.ElementReferenceExpression <em>Element Reference Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1806,6 +1864,28 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getElementReferenceExpression_Args();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.expressions.expressions.ElementReferenceExpression#getArraySelector <em>Array Selector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Array Selector</em>'.
+	 * @see org.yakindu.base.expressions.expressions.ElementReferenceExpression#getArraySelector()
+	 * @see #getElementReferenceExpression()
+	 * @generated
+	 */
+	EReference getElementReferenceExpression_ArraySelector();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.expressions.expressions.ElementReferenceExpression#isArrayAccess <em>Array Access</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Array Access</em>'.
+	 * @see org.yakindu.base.expressions.expressions.ElementReferenceExpression#isArrayAccess()
+	 * @see #getElementReferenceExpression()
+	 * @generated
+	 */
+	EAttribute getElementReferenceExpression_ArrayAccess();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.ParenthesizedExpression <em>Parenthesized Expression</em>}'.
@@ -2519,6 +2599,22 @@ public interface ExpressionsPackage extends EPackage {
 		EReference FEATURE_CALL__ARGS = eINSTANCE.getFeatureCall_Args();
 
 		/**
+		 * The meta object literal for the '<em><b>Array Selector</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FEATURE_CALL__ARRAY_SELECTOR = eINSTANCE.getFeatureCall_ArraySelector();
+
+		/**
+		 * The meta object literal for the '<em><b>Array Access</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FEATURE_CALL__ARRAY_ACCESS = eINSTANCE.getFeatureCall_ArrayAccess();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.ElementReferenceExpressionImpl <em>Element Reference Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2551,6 +2647,22 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ELEMENT_REFERENCE_EXPRESSION__ARGS = eINSTANCE.getElementReferenceExpression_Args();
+
+		/**
+		 * The meta object literal for the '<em><b>Array Selector</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR = eINSTANCE.getElementReferenceExpression_ArraySelector();
+
+		/**
+		 * The meta object literal for the '<em><b>Array Access</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ELEMENT_REFERENCE_EXPRESSION__ARRAY_ACCESS = eINSTANCE.getElementReferenceExpression_ArrayAccess();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.ParenthesizedExpressionImpl <em>Parenthesized Expression</em>}' class.
