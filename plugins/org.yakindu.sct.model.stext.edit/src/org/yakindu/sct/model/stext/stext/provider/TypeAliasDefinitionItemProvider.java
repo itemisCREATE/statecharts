@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.provider.TypeAliasItemProvider;
-import org.yakindu.sct.model.stext.stext.TypeAliasDefinition;
 
 /**
  * This is the item provider adapter for a

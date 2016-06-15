@@ -193,6 +193,29 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.TypeSpecifier} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeSpecifierItemProvider typeSpecifierItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.TypeSpecifier}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypeSpecifierAdapter() {
+		if (typeSpecifierItemProvider == null) {
+			typeSpecifierItemProvider = new TypeSpecifierItemProvider(this);
+		}
+
+		return typeSpecifierItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Event} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -618,6 +641,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (operationItemProvider != null) operationItemProvider.dispose();
 		if (propertyItemProvider != null) propertyItemProvider.dispose();
 		if (parameterItemProvider != null) parameterItemProvider.dispose();
+		if (typeSpecifierItemProvider != null) typeSpecifierItemProvider.dispose();
 		if (eventItemProvider != null) eventItemProvider.dispose();
 		if (enumerationTypeItemProvider != null) enumerationTypeItemProvider.dispose();
 		if (primitiveTypeItemProvider != null) primitiveTypeItemProvider.dispose();

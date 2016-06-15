@@ -19,8 +19,7 @@ import org.yakindu.base.types.TypesPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- * <li>{@link org.yakindu.base.types.impl.TypeParameterImpl#getBound
- * <em>Bound</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeParameterImpl#getBound <em>Bound</em>}</li>
  * </ul>
  *
  * @generated
@@ -29,7 +28,6 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	/**
 	 * The cached value of the '{@link #getBound() <em>Bound</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getBound()
 	 * @generated
 	 * @ordered
@@ -38,7 +36,6 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected TypeParameterImpl() {
@@ -47,7 +44,6 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -57,17 +53,15 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Type getBound() {
 		if (bound != null && bound.eIsProxy()) {
-			InternalEObject oldBound = (InternalEObject) bound;
-			bound = (Type) eResolveProxy(oldBound);
+			InternalEObject oldBound = (InternalEObject)bound;
+			bound = (Type)eResolveProxy(oldBound);
 			if (bound != oldBound) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.TYPE_PARAMETER__BOUND,
-							oldBound, bound));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.TYPE_PARAMETER__BOUND, oldBound, bound));
 			}
 		}
 		return bound;
@@ -75,7 +69,6 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Type basicGetBound() {
@@ -84,7 +77,6 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setBound(Type newBound) {
@@ -96,60 +88,55 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case TypesPackage.TYPE_PARAMETER__BOUND:
-			if (resolve)
-				return getBound();
-			return basicGetBound();
+			case TypesPackage.TYPE_PARAMETER__BOUND:
+				if (resolve) return getBound();
+				return basicGetBound();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case TypesPackage.TYPE_PARAMETER__BOUND:
-			setBound((Type) newValue);
-			return;
+			case TypesPackage.TYPE_PARAMETER__BOUND:
+				setBound((Type)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case TypesPackage.TYPE_PARAMETER__BOUND:
-			setBound((Type) null);
-			return;
+			case TypesPackage.TYPE_PARAMETER__BOUND:
+				setBound((Type)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case TypesPackage.TYPE_PARAMETER__BOUND:
-			return bound != null;
+			case TypesPackage.TYPE_PARAMETER__BOUND:
+				return bound != null;
 		}
 		return super.eIsSet(featureID);
 	}
