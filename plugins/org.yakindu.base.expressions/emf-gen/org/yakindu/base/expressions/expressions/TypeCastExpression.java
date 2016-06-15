@@ -11,11 +11,11 @@ import org.yakindu.base.types.Type;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.TypeCastExpression#getOperand <em>Operand</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.TypeCastExpression#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getTypeCastExpression()
  * @model

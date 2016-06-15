@@ -10,10 +10,10 @@ package org.yakindu.base.expressions.expressions;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.HexLiteral#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getHexLiteral()
  * @model

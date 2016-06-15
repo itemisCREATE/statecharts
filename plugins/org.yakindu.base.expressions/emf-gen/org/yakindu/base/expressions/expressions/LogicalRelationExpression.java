@@ -10,12 +10,12 @@ package org.yakindu.base.expressions.expressions;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.LogicalRelationExpression#getLeftOperand <em>Left Operand</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.LogicalRelationExpression#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.LogicalRelationExpression#getRightOperand <em>Right Operand</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getLogicalRelationExpression()
  * @model

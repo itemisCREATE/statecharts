@@ -11,8 +11,6 @@ import org.yakindu.base.expressions.expressions.Literal;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Literal</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

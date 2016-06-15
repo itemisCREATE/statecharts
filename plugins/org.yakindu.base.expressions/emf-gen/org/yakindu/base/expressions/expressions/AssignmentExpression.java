@@ -10,12 +10,12 @@ package org.yakindu.base.expressions.expressions;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.AssignmentExpression#getVarRef <em>Var Ref</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.AssignmentExpression#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.AssignmentExpression#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getAssignmentExpression()
  * @model
