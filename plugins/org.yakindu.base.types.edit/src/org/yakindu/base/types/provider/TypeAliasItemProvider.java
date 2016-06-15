@@ -71,7 +71,10 @@ public class TypeAliasItemProvider
 			addTypePropertyDescriptor(object);
 			addTypeArgumentsPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
+			addAnnotationsPropertyDescriptor(object);
+			addIdPropertyDescriptor(object);
 			addAbstractPropertyDescriptor(object);
+			addVisiblePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -143,6 +146,50 @@ public class TypeAliasItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Annotations feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAnnotationsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AnnotatableElement_annotations_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AnnotatableElement_annotations_feature", "_UI_AnnotatableElement_type"),
+				 TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PackageMember_id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PackageMember_id_feature", "_UI_PackageMember_type"),
+				 TypesPackage.Literals.PACKAGE_MEMBER__ID,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Abstract feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -156,6 +203,28 @@ public class TypeAliasItemProvider
 				 getString("_UI_Type_abstract_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Type_abstract_feature", "_UI_Type_type"),
 				 TypesPackage.Literals.TYPE__ABSTRACT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Visible feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVisiblePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Type_visible_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Type_visible_feature", "_UI_Type_type"),
+				 TypesPackage.Literals.TYPE__VISIBLE,
 				 true,
 				 false,
 				 false,
@@ -245,7 +314,9 @@ public class TypeAliasItemProvider
 
 		switch (notification.getFeatureID(TypeAlias.class)) {
 			case TypesPackage.TYPE_ALIAS__NAME:
+			case TypesPackage.TYPE_ALIAS__ID:
 			case TypesPackage.TYPE_ALIAS__ABSTRACT:
+			case TypesPackage.TYPE_ALIAS__VISIBLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:

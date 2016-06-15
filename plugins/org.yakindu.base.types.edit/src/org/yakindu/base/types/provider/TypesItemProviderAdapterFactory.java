@@ -101,6 +101,29 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Type} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeItemProvider typeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.Type}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypeAdapter() {
+		if (typeItemProvider == null) {
+			typeItemProvider = new TypeItemProvider(this);
+		}
+
+		return typeItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Operation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -446,6 +469,52 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Annotation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AnnotationItemProvider annotationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.Annotation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAnnotationAdapter() {
+		if (annotationItemProvider == null) {
+			annotationItemProvider = new AnnotationItemProvider(this);
+		}
+
+		return annotationItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.AnnotatableElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AnnotatableElementItemProvider annotatableElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.AnnotatableElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAnnotatableElementAdapter() {
+		if (annotatableElementItemProvider == null) {
+			annotatableElementItemProvider = new AnnotatableElementItemProvider(this);
+		}
+
+		return annotatableElementItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -545,6 +614,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 */
 	public void dispose() {
 		if (packageItemProvider != null) packageItemProvider.dispose();
+		if (typeItemProvider != null) typeItemProvider.dispose();
 		if (operationItemProvider != null) operationItemProvider.dispose();
 		if (propertyItemProvider != null) propertyItemProvider.dispose();
 		if (parameterItemProvider != null) parameterItemProvider.dispose();
@@ -560,6 +630,8 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (rangeConstraintItemProvider != null) rangeConstraintItemProvider.dispose();
 		if (domainItemProvider != null) domainItemProvider.dispose();
 		if (typeAliasItemProvider != null) typeAliasItemProvider.dispose();
+		if (annotationItemProvider != null) annotationItemProvider.dispose();
+		if (annotatableElementItemProvider != null) annotatableElementItemProvider.dispose();
 	}
 
 }

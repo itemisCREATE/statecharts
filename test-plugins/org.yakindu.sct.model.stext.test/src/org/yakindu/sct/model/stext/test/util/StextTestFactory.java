@@ -240,7 +240,7 @@ public class StextTestFactory extends StextFactoryImpl {
 
 		Scope scope = getOrCreateSimpleScope(parent);
 
-		scope.getDeclarations().add(reaction);
+		scope.getReactions().add(reaction);
 
 		return reaction;
 	}
@@ -251,7 +251,7 @@ public class StextTestFactory extends StextFactoryImpl {
 
 		Scope scope = getOrCreateInternalScope(parent);
 
-		scope.getDeclarations().add(reaction);
+		scope.getReactions().add(reaction);
 
 		return reaction;
 	}

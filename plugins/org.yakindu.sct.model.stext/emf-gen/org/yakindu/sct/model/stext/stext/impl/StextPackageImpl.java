@@ -1117,7 +1117,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		typeAliasDefinitionEClass.getESuperTypes().add(theTypesPackage.getTypeAlias());
 		typeAliasDefinitionEClass.getESuperTypes().add(theTypesPackage.getDeclaration());
 		localReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
-		localReactionEClass.getESuperTypes().add(theTypesPackage.getDeclaration());
 		transitionReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
 		entryPointSpecEClass.getESuperTypes().add(theSGraphPackage.getReactionProperty());
 		exitPointSpecEClass.getESuperTypes().add(theSGraphPackage.getReactionProperty());

@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Operation;
@@ -215,6 +216,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(eventDefinition);
 				if (result == null) result = casePackageMember(eventDefinition);
 				if (result == null) result = caseNamedElement(eventDefinition);
+				if (result == null) result = caseAnnotatableElement(eventDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -226,6 +228,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(variableDefinition);
 				if (result == null) result = casePackageMember(variableDefinition);
 				if (result == null) result = caseNamedElement(variableDefinition);
+				if (result == null) result = caseAnnotatableElement(variableDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -237,6 +240,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(operationDefinition);
 				if (result == null) result = casePackageMember(operationDefinition);
 				if (result == null) result = caseNamedElement(operationDefinition);
+				if (result == null) result = caseAnnotatableElement(operationDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -249,6 +253,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseType(typeAliasDefinition);
 				if (result == null) result = casePackageMember(typeAliasDefinition);
 				if (result == null) result = caseNamedElement(typeAliasDefinition);
+				if (result == null) result = caseAnnotatableElement(typeAliasDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -256,10 +261,6 @@ public class StextSwitch<T> extends Switch<T> {
 				LocalReaction localReaction = (LocalReaction)theEObject;
 				T result = caseLocalReaction(localReaction);
 				if (result == null) result = caseReaction(localReaction);
-				if (result == null) result = caseDeclaration(localReaction);
-				if (result == null) result = caseTypedElement(localReaction);
-				if (result == null) result = casePackageMember(localReaction);
-				if (result == null) result = caseNamedElement(localReaction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -991,6 +992,21 @@ public class StextSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElement(TypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Annotatable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Annotatable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAnnotatableElement(AnnotatableElement object) {
 		return null;
 	}
 

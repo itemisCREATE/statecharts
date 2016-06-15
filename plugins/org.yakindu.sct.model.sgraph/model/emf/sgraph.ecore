@@ -41,8 +41,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Exit" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReactiveElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
-        eType="#//Reaction" changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="localReactions" upperBound="-1"
         eType="#//Reaction" changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
@@ -70,6 +68,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" unique="false"
         upperBound="-1" eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Property"
         changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
+        eType="#//Reaction" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopedElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
@@ -79,11 +79,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Synchronization" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//SpecificationElement #//ReactiveElement #//ScopedElement #//RegularState #//CompositeElement ../../../org.yakindu.base.types/model/base.ecore#//DocumentedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="orthogonal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="substatechart" eType="#//Statechart"
-        transient="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="substatechartId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subchart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simple" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>

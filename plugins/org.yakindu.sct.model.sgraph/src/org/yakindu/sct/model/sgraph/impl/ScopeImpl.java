@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Property;
+import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.util.DerivedSubsetEObjectEList;
@@ -36,6 +37,7 @@ import org.yakindu.sct.model.sgraph.util.DerivedSubsetEObjectEList;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopeImpl#getDeclarations <em>Declarations</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopeImpl#getEvents <em>Events</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopeImpl#getVariables <em>Variables</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.ScopeImpl#getReactions <em>Reactions</em>}</li>
  * </ul>
  *
  * @generated
@@ -57,6 +59,16 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	 * @ordered
 	 */
 	protected EList<Declaration> declarations;
+
+	/**
+	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReactions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Reaction> reactions;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -113,11 +125,25 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Reaction> getReactions() {
+		if (reactions == null) {
+			reactions = new EObjectContainmentEList.Resolving<Reaction>(Reaction.class, this, SGraphPackage.SCOPE__REACTIONS);
+		}
+		return reactions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SGraphPackage.SCOPE__DECLARATIONS:
 				return ((InternalEList<?>)getDeclarations()).basicRemove(otherEnd, msgs);
+			case SGraphPackage.SCOPE__REACTIONS:
+				return ((InternalEList<?>)getReactions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -135,6 +161,8 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 				return getEvents();
 			case SGraphPackage.SCOPE__VARIABLES:
 				return getVariables();
+			case SGraphPackage.SCOPE__REACTIONS:
+				return getReactions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -151,6 +179,10 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 				getDeclarations().clear();
 				getDeclarations().addAll((Collection<? extends Declaration>)newValue);
 				return;
+			case SGraphPackage.SCOPE__REACTIONS:
+				getReactions().clear();
+				getReactions().addAll((Collection<? extends Reaction>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -164,6 +196,9 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 		switch (featureID) {
 			case SGraphPackage.SCOPE__DECLARATIONS:
 				getDeclarations().clear();
+				return;
+			case SGraphPackage.SCOPE__REACTIONS:
+				getReactions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -182,6 +217,8 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 				return !getEvents().isEmpty();
 			case SGraphPackage.SCOPE__VARIABLES:
 				return !getVariables().isEmpty();
+			case SGraphPackage.SCOPE__REACTIONS:
+				return reactions != null && !reactions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

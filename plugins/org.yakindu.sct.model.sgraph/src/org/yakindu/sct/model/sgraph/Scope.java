@@ -28,6 +28,7 @@ import org.yakindu.base.types.Property;
  *   <li>{@link org.yakindu.sct.model.sgraph.Scope#getDeclarations <em>Declarations</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.Scope#getEvents <em>Events</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.Scope#getVariables <em>Variables</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.Scope#getReactions <em>Reactions</em>}</li>
  * </ul>
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getScope()
@@ -89,5 +90,21 @@ public interface Scope extends EObject {
 	 * @generated
 	 */
 	EList<Property> getVariables();
+
+	/**
+	 * Returns the value of the '<em><b>Reactions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.yakindu.sct.model.sgraph.Reaction}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Reactions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Reactions</em>' containment reference list.
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getScope_Reactions()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<Reaction> getReactions();
 
 } // Scope

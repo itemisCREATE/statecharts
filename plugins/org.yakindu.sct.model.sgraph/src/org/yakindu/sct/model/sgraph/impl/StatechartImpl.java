@@ -26,7 +26,6 @@ import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.base.types.Declaration;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Import;
 import org.yakindu.sct.model.sgraph.Reaction;
@@ -44,7 +43,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getLocalReactions <em>Local Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getScopes <em>Scopes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getNamespace <em>Namespace</em>}</li>
@@ -208,12 +206,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				Reaction.class);
 		EList<Scope> scopes = getScopes();
 		for (Scope scope : scopes) {
-			EList<Declaration> declarations = scope.getDeclarations();
-			for (Declaration declaration : declarations) {
-				if (declaration instanceof Reaction) {
-					result.add((Reaction) declaration);
-				}
-			}
+				result.addAll(scope.getReactions());
 		}
 		return result;
 	}
@@ -370,8 +363,6 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SGraphPackage.STATECHART__REACTIONS:
-				return getReactions();
 			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
 				return getLocalReactions();
 			case SGraphPackage.STATECHART__SCOPES:
@@ -467,8 +458,6 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SGraphPackage.STATECHART__REACTIONS:
-				return !getReactions().isEmpty();
 			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
 				return !getLocalReactions().isEmpty();
 			case SGraphPackage.STATECHART__SCOPES:
@@ -497,7 +486,6 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ReactiveElement.class) {
 			switch (derivedFeatureID) {
-				case SGraphPackage.STATECHART__REACTIONS: return SGraphPackage.REACTIVE_ELEMENT__REACTIONS;
 				case SGraphPackage.STATECHART__LOCAL_REACTIONS: return SGraphPackage.REACTIVE_ELEMENT__LOCAL_REACTIONS;
 				default: return -1;
 			}
@@ -544,7 +532,6 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ReactiveElement.class) {
 			switch (baseFeatureID) {
-				case SGraphPackage.REACTIVE_ELEMENT__REACTIONS: return SGraphPackage.STATECHART__REACTIONS;
 				case SGraphPackage.REACTIVE_ELEMENT__LOCAL_REACTIONS: return SGraphPackage.STATECHART__LOCAL_REACTIONS;
 				default: return -1;
 			}

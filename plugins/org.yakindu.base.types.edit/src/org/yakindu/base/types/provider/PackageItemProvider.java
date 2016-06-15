@@ -18,6 +18,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.base.provider.NamedElementItemProvider;
@@ -53,8 +54,31 @@ public class PackageItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addImportPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Import feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addImportPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Package_import_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Package_import_feature", "_UI_Package_type"),
+				 TypesPackage.Literals.PACKAGE__IMPORT,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -152,7 +176,22 @@ public class PackageItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE__MEMBER,
+				 TypesFactory.eINSTANCE.createType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE__MEMBER,
 				 TypesFactory.eINSTANCE.createOperation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE__MEMBER,
+				 TypesFactory.eINSTANCE.createProperty()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE__MEMBER,
+				 TypesFactory.eINSTANCE.createEvent()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -177,12 +216,22 @@ public class PackageItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE__MEMBER,
+				 TypesFactory.eINSTANCE.createEnumerator()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE__MEMBER,
 				 TypesFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE__MEMBER,
 				 TypesFactory.eINSTANCE.createTypeAlias()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE__MEMBER,
+				 TypesFactory.eINSTANCE.createAnnotation()));
 
 		newChildDescriptors.add
 			(createChildParameter

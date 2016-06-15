@@ -12,6 +12,7 @@
             uri="http://www.yakindu.org/base/base/2.0.0">
       </package>
    </extension>
+
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated base -->
       <package

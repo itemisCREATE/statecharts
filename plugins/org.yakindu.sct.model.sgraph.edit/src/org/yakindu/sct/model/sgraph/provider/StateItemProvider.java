@@ -62,42 +62,16 @@ public class StateItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addReactionsPropertyDescriptor(object);
 			addNamespacePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addIncomingTransitionsPropertyDescriptor(object);
 			addDocumentationPropertyDescriptor(object);
 			addOrthogonalPropertyDescriptor(object);
-			addSubstatechartPropertyDescriptor(object);
-			addSubstatechartIdPropertyDescriptor(object);
-			addSubchartPropertyDescriptor(object);
 			addSimplePropertyDescriptor(object);
 			addCompositePropertyDescriptor(object);
 			addLeafPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Reactions feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addReactionsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ReactiveElement_reactions_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ReactiveElement_reactions_feature", "_UI_ReactiveElement_type"),
-				 SGraphPackage.Literals.REACTIVE_ELEMENT__REACTIONS,
-				 false,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -202,72 +176,6 @@ public class StateItemProvider
 				 getString("_UI_State_orthogonal_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_State_orthogonal_feature", "_UI_State_type"),
 				 SGraphPackage.Literals.STATE__ORTHOGONAL,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Substatechart feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSubstatechartPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_State_substatechart_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_State_substatechart_feature", "_UI_State_type"),
-				 SGraphPackage.Literals.STATE__SUBSTATECHART,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Substatechart Id feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSubstatechartIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_State_substatechartId_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_State_substatechartId_feature", "_UI_State_type"),
-				 SGraphPackage.Literals.STATE__SUBSTATECHART_ID,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Subchart feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSubchartPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_State_subchart_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_State_subchart_feature", "_UI_State_type"),
-				 SGraphPackage.Literals.STATE__SUBCHART,
 				 false,
 				 false,
 				 false,
@@ -416,8 +324,6 @@ public class StateItemProvider
 			case SGraphPackage.STATE__NAME:
 			case SGraphPackage.STATE__DOCUMENTATION:
 			case SGraphPackage.STATE__ORTHOGONAL:
-			case SGraphPackage.STATE__SUBSTATECHART_ID:
-			case SGraphPackage.STATE__SUBCHART:
 			case SGraphPackage.STATE__SIMPLE:
 			case SGraphPackage.STATE__COMPOSITE:
 			case SGraphPackage.STATE__LEAF:

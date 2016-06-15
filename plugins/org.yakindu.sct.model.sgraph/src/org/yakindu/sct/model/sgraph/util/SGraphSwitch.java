@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.TypedElement;
@@ -287,6 +288,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(importDeclaration);
 				if (result == null) result = casePackageMember(importDeclaration);
 				if (result == null) result = caseNamedElement(importDeclaration);
+				if (result == null) result = caseAnnotatableElement(importDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -381,6 +383,21 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElement(TypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Annotatable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Annotatable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAnnotatableElement(AnnotatableElement object) {
 		return null;
 	}
 

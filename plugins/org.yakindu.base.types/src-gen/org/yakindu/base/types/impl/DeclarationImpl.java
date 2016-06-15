@@ -10,6 +10,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.AnnotatableElement;
+import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
@@ -28,6 +30,7 @@ import org.yakindu.base.types.TypesUtil;
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getTypeSpecifier <em>Type Specifier</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getId <em>Id</em>}</li>
  * </ul>
  *
@@ -63,6 +66,16 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Annotation> annotations;
 
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -184,6 +197,18 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Annotation> getAnnotations() {
+		if (annotations == null) {
+			annotations = new EObjectResolvingEList<Annotation>(Annotation.class, this, TypesPackage.DECLARATION__ANNOTATIONS);
+		}
+		return annotations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -194,6 +219,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return getTypeSpecifier();
 			case TypesPackage.DECLARATION__NAME:
 				return getName();
+			case TypesPackage.DECLARATION__ANNOTATIONS:
+				return getAnnotations();
 			case TypesPackage.DECLARATION__ID:
 				return getId();
 		}
@@ -214,6 +241,10 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 			case TypesPackage.DECLARATION__NAME:
 				setName((String)newValue);
 				return;
+			case TypesPackage.DECLARATION__ANNOTATIONS:
+				getAnnotations().clear();
+				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -231,6 +262,9 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return;
 			case TypesPackage.DECLARATION__NAME:
 				setName(NAME_EDEFAULT);
+				return;
+			case TypesPackage.DECLARATION__ANNOTATIONS:
+				getAnnotations().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -250,6 +284,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return typeSpecifier != null;
 			case TypesPackage.DECLARATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case TypesPackage.DECLARATION__ANNOTATIONS:
+				return annotations != null && !annotations.isEmpty();
 			case TypesPackage.DECLARATION__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
@@ -266,6 +302,12 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
 				case TypesPackage.DECLARATION__NAME: return BasePackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == AnnotatableElement.class) {
+			switch (derivedFeatureID) {
+				case TypesPackage.DECLARATION__ANNOTATIONS: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS;
 				default: return -1;
 			}
 		}
@@ -288,6 +330,12 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case BasePackage.NAMED_ELEMENT__NAME: return TypesPackage.DECLARATION__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == AnnotatableElement.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return TypesPackage.DECLARATION__ANNOTATIONS;
 				default: return -1;
 			}
 		}

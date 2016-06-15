@@ -20,7 +20,7 @@ import org.yakindu.base.base.NamedElement;
  * @model
  * @generated
  */
-public interface PackageMember extends NamedElement {
+public interface PackageMember extends NamedElement, AnnotatableElement {
 
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.

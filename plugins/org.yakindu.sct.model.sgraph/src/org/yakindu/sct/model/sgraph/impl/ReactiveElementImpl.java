@@ -25,7 +25,6 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sgraph.impl.ReactiveElementImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ReactiveElementImpl#getLocalReactions <em>Local Reactions</em>}</li>
  * </ul>
  *
@@ -84,8 +83,6 @@ public abstract class ReactiveElementImpl extends EObjectImpl implements Reactiv
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SGraphPackage.REACTIVE_ELEMENT__REACTIONS:
-				return getReactions();
 			case SGraphPackage.REACTIVE_ELEMENT__LOCAL_REACTIONS:
 				return getLocalReactions();
 		}
@@ -100,8 +97,6 @@ public abstract class ReactiveElementImpl extends EObjectImpl implements Reactiv
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SGraphPackage.REACTIVE_ELEMENT__REACTIONS:
-				return !getReactions().isEmpty();
 			case SGraphPackage.REACTIVE_ELEMENT__LOCAL_REACTIONS:
 				return !getLocalReactions().isEmpty();
 		}

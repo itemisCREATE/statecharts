@@ -8,7 +8,6 @@ package org.yakindu.base.types;
 
 import org.yakindu.base.base.NamedElement;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Parameter</b></em>'.
