@@ -1,3 +1,4 @@
+
 h1(#simulating-statecharts). Simulating statecharts
 
 Simulating a statechart model means to execute it, raise events manually, have time-based and other events being triggered automatically, and observe the model's behavior.
@@ -73,8 +74,8 @@ By default, the _SC Simulation_ perspective shows the following views:
 * _Debug_ (top middle): This view is showing all statechart instances and allows to select one of them. YAKINDU Statechart Tools allow multiple executions of the same statechart as well as parallel executions of different statecharts at the same time.
 * _Outline_ (right): This view is a bird's eye view on the opened statechart. It also indicates the current viewport for better orientation in large models.
 * _Simulation_ (right): This view shows the current state of all variables and events during a simulation. A detailed description is available in section "&quot;The Simulation view&quot;":#oss_the-simulation-view.
-* _Breakpoints_ (right): This view shows a list of all breakpoints. You can use it for disabling, enabling, or removing breakpoints as well as for defining conditional breakpoints. *[Professional Edition only]*
-* _Snapshots_ (right): This view contains all snapshots with their respective names and timestamps. *[Professional Edition only]*
+* %(pro-feature)_Breakpoints_ (right): This view shows a list of all breakpoints. You can use it for disabling, enabling, or removing breakpoints as well as for defining conditional breakpoints.%
+* %(pro-feature)_Snapshots_ (right): This view contains all snapshots with their respective names and timestamps.%
 
 h3(#oss_displaying-simulation-progress-in-the-statechart-editor). Displaying simulation progress in the statechart editor
 

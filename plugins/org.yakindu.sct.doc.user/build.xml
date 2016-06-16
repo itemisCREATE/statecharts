@@ -164,6 +164,7 @@
             <copy todir="${help.dir}">
                 <fileset dir="src">
                     <include name="**/${img.dir}/*" />
+                    <exclude name="**/${img.dir}/*.xcf" />
                 </fileset>
             </copy>
         </sequential>

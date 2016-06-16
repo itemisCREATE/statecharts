@@ -119,13 +119,7 @@ body {
 }
 
 
-/* Styling of figures. By default, a figure is rendered as a <div class="figure"> … <img … /> </div> */
-.figure {
-    text-align: center;
-}
-
-img {
-	*/ it should be considered to move max-width and min-width somewhere else, because it is overwritten everywhere anyhow */
+img.standard-image {
     max-width: 61.8%;
     min-width: 38.2%;
     height: auto;
@@ -133,12 +127,11 @@ img {
     display: block;
     margin-left: auto;
     margin-right: auto;
-}
 
-img.standard-image {
-    height:auto;
     box-shadow: 10px 10px 20px #888888;
-    margin-bottom: 20px;
+    border-radius: 4px;
+    margin-top: 1.5ex;
+    margin-bottom: 2.5ex;
 }
 
 img.tiny {
@@ -305,5 +298,3 @@ h5:before {counter-increment: h5; content: counter(h1) "." counter(h2) "." count
 h6:before {counter-increment: h6; content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". "}
 
 h1.nocount:before h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none } 
-
-
