@@ -212,6 +212,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		}
 		Type inferred = inferTypeDispatch(e.getFeature());
 		if (e.isArrayAccess() && isArrayType(inferred)) {
+			// TODO: multi dimensional arrays
 			TypeParameter tp = ((ParameterizedType) inferred).getParameter().get(0);
 			return getTypeParameterBinding(tp).getActualType();
 		}
@@ -228,6 +229,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		}
 		Type inferred = inferTypeDispatch(e.getReference());
 		if (e.isArrayAccess() && isArrayType(inferred)) {
+			// TODO: multi dimensional arrays
 			TypeParameter tp = ((ParameterizedType) inferred).getParameter().get(0);
 			return getTypeParameterBinding(tp).getActualType();
 		}
