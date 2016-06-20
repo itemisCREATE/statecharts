@@ -28,6 +28,11 @@ import com.google.inject.Singleton;
 @Singleton
 public class GenericTypeSystem extends AbstractTypeSystem {
 
+	private static final GenericTypeSystem INSTANCE = new GenericTypeSystem();
+
+	private GenericTypeSystem() {
+	}
+
 	@Override
 	protected void initBuiltInTypes() {
 		declarePrimitive(STRING);
@@ -40,7 +45,7 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 		declareSuperType(getType(INTEGER), getType(REAL));
 
 		getType(NULL).setAbstract(true);
-		
+
 		declareArrayType();
 	}
 
@@ -50,14 +55,14 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 		Annotation builtInAnnotation = TypesFactory.eINSTANCE.createAnnotation();
 		builtInAnnotation.setName("Built-In-Type");
 		array.getAnnotations().add(builtInAnnotation);
-		
+
 		declareType(array, array.getName());
 		getResource().getContents().add(array);
 
 		TypeParameter baseType = TypesFactory.eINSTANCE.createTypeParameter();
 		baseType.setName("baseType");
 		array.getParameter().add(baseType);
-		
+
 		// GET
 		Operation get = TypesFactory.eINSTANCE.createOperation();
 		get.setName("get");
@@ -65,18 +70,18 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 		TypeSpecifier paramTypeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
 		paramTypeSpec.setType(getType(INTEGER));
 		index.setTypeSpecifier(paramTypeSpec);
-		
+
 		index.setName("index");
 		get.getParameters().add(index);
 		TypeSpecifier getTypeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
 		getTypeSpec.setType(baseType);
 		get.setTypeSpecifier(getTypeSpec);
 		array.getFeatures().add(get);
-		
+
 		Annotation indexAnnotation = TypesFactory.eINSTANCE.createAnnotation();
 		indexAnnotation.setName("IndexOperation");
 		get.getAnnotations().add(indexAnnotation);
-		
+
 		// ADD
 		Operation add = TypesFactory.eINSTANCE.createOperation();
 		add.setName("add");
@@ -96,4 +101,9 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 		size.setTypeSpecifier(sizeTypeSpec);
 		array.getFeatures().add(size);
 	}
+
+	public static GenericTypeSystem getInstance() {
+		return INSTANCE;
+	}
+
 }

@@ -90,16 +90,17 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 	}
 
 	protected Module getResourceModule() {
+		
+		
+		
 		Module uiModule = Modules.override(getLanguageRuntimeModule()).with(getLanguageUIModule());
 		Module result = Modules.override(uiModule).with(getSharedStateModule());
 		return Modules.override(result).with(getTypeSystemModule());
 	}
 
 	protected Module getEmbeddedEditorModule(Class<? extends EObject> rule) {
-		Module runtimeModule = Modules.override(getLanguageRuntimeModule()).with(new EntryRuleRuntimeModule(rule));
-		Module uiModule = Modules.override(getLanguageUIModule()).with(new EntryRuleUIModule(rule));
-		Module result = Modules.override(Modules.override(runtimeModule).with(uiModule)).with(getSharedStateModule());
-		return Modules.override(result).with(getTypeSystemModule());
+		Module resource = getResourceModule();
+		return Modules.override(resource).with(new EntryRuleRuntimeModule(rule), new EntryRuleUIModule(rule));
 	}
 
 	@Override

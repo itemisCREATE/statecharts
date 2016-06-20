@@ -36,14 +36,11 @@ public class GenericTypeSystemModule extends AbstractGenericModule {
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(DOMAIN_ID)).toInstance(getDomainID());
+		binder.bind(ITypeSystem.class).toInstance(GenericTypeSystem.getInstance());
 	}
 
 	protected String getDomainID() {
 		return BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
-	}
-
-	public Class<? extends ITypeSystem> bindITypeSystem() {
-		return GenericTypeSystem.class;
 	}
 
 	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
