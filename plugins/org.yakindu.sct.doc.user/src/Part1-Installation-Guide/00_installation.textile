@@ -107,7 +107,7 @@ p=. The YAKINDU Statechart Tools workbench
 
 This is your working environment now. Congratulations, you have just installed YAKINDU Statechart Tools with Eclipse!
 
-You can "proceed":documentation#comprehensive-tutorial now to create your first YAKINDU Statecharts Tools project.
+You can "proceed":../Part2-User-Guide/20_tutorial.html#oss_comprehensive-tutorial now to create your first YAKINDU Statecharts Tools project.
 
 h2(#installing-on-macosx). Installing on Mac OS X
 
@@ -171,7 +171,7 @@ p=. The YAKINDU Statechart Tools workbench
 
 This is your working environment now. Congratulations, you have just installed YAKINDU Statechart Tools with Eclipse!
 
-You can "proceed":documentation#comprehensive-tutorial now to create your first YAKINDU Statecharts Tools project.
+You can "proceed":../Part2-User-Guide/20_tutorial.html#oss_comprehensive-tutorial now to create your first YAKINDU Statecharts Tools project.
 
 h2(#installing-on-linux). Installing on Linux
 
@@ -253,7 +253,7 @@ p=. The YAKINDU Statechart Tools workbench
 
 This is your working environment now. Congratulations, you have just started YAKINDU Statechart Tools!
 
-You can "proceed":documentation#comprehensive-tutorial now to create your first YAKINDU Statecharts Tools project.
+You can "proceed":../Part2-User-Guide/20_tutorial.html#oss_comprehensive-tutorial now to create your first YAKINDU Statecharts Tools project.
 
 h2(#installing-to-an-existing-eclipse-instance). Installing to an existing Eclipse instance
 
