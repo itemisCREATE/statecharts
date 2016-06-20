@@ -1,3 +1,4 @@
+
 h1(#what-are-yakindu-statechart-tools). What are YAKINDU Statechart Tools?
 
 The statechart tools are a central part of YAKINDU: the modular toolkit for model-driven development of embedded systems. It is based on the open-source development platform Eclipse. YAKINDU Statechart Tools (YAKINDU SCT) provide the following tools to deal with state machine diagrams:

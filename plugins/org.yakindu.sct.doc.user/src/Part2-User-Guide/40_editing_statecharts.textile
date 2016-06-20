@@ -1,3 +1,4 @@
+
 h1(#editing-statecharts). Editing statecharts
 
 h2(#creating-and-deleting-statecharts). Creating and deleting statecharts
@@ -388,7 +389,7 @@ While you are busily developing a statechart, it is quite common that you have i
 
 For all these and other purposes you can define _tasks_ anywhere in your statechart where a comment is allowed. A task is a special comment comprising either @FIXME@ or @TODO@. Adding one of these words to a comment is called "tagging" the comment as a task.
 
-The nice thing is that you don't have to remember all the places you took a note and defined a task. YAKINDU Statechart Tools lists all of your tasks in the _Tasks_ view. Figure "&quot;Tasks defined by tags in the statechart showing up in the _Tasks_ view&quot;":oss_fig_tasks-defined-by-tags-in-the-statechart-showing-up-in-the-tasks-view is showing an example with various tasks being defined in a transition, in a state's behavior, in a state's documentation, and in the statecharts definition section.
+The nice thing is that you don't have to remember all the places you took a note and defined a task. YAKINDU Statechart Tools lists all of your tasks in the _Tasks_ view. Figure "&quot;Tasks defined by tags in the statechart showing up in the _Tasks_ view&quot;":#oss_fig_tasks-defined-by-tags-in-the-statechart-showing-up-in-the-tasks-view is showing an example with various tasks being defined in a transition, in a state's behavior, in a state's documentation, and in the statecharts definition section.
 
 p(#oss_fig_tasks-defined-by-tags-in-the-statechart-showing-up-in-the-tasks-view). 
 
