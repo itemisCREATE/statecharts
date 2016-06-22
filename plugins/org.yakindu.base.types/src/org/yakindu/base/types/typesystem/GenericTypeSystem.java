@@ -10,13 +10,14 @@
  */
 package org.yakindu.base.types.typesystem;
 
-import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesFactory;
+import org.yakindu.base.types.annotations.TypeAnnotations;
 
 import com.google.inject.Singleton;
 
@@ -27,10 +28,16 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class GenericTypeSystem extends AbstractTypeSystem {
-
+	
+	private static final String ARRAY_TYPE_NAME = "array";
+	
 	private static final GenericTypeSystem INSTANCE = new GenericTypeSystem();
 
-	private GenericTypeSystem() {
+	
+	protected GenericTypeSystem() {}
+	
+	public static GenericTypeSystem getInstance() {
+		return INSTANCE;
 	}
 
 	@Override
@@ -50,14 +57,15 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 	}
 
 	protected void declareArrayType() {
-		ComplexType array = TypesFactory.eINSTANCE.createComplexType();
-		array.setName("array");
-		Annotation builtInAnnotation = TypesFactory.eINSTANCE.createAnnotation();
-		builtInAnnotation.setName("Built-In-Type");
-		array.getAnnotations().add(builtInAnnotation);
-
+		Type array = createArrayType();
 		declareType(array, array.getName());
 		getResource().getContents().add(array);
+	}
+	
+	public Type createArrayType() {
+		ComplexType array = TypesFactory.eINSTANCE.createComplexType();
+		array.setName(ARRAY_TYPE_NAME);
+		array.getAnnotations().add(TypeAnnotations.createBuiltInTypeAnnotation());
 
 		TypeParameter baseType = TypesFactory.eINSTANCE.createTypeParameter();
 		baseType.setName("baseType");
@@ -78,9 +86,7 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 		get.setTypeSpecifier(getTypeSpec);
 		array.getFeatures().add(get);
 
-		Annotation indexAnnotation = TypesFactory.eINSTANCE.createAnnotation();
-		indexAnnotation.setName("IndexOperation");
-		get.getAnnotations().add(indexAnnotation);
+		get.getAnnotations().add(TypeAnnotations.createIndexOperationAnnotation());
 
 		// ADD
 		Operation add = TypesFactory.eINSTANCE.createOperation();
@@ -100,10 +106,13 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 		sizeTypeSpec.setType(getType(INTEGER));
 		size.setTypeSpecifier(sizeTypeSpec);
 		array.getFeatures().add(size);
+		
+		return array;
 	}
-
-	public static GenericTypeSystem getInstance() {
-		return INSTANCE;
+	
+	@Override
+	public boolean isArrayType(Type type) {
+		return type.getName().equals(ARRAY_TYPE_NAME) && TypeAnnotations.hasBuiltInTypeAnnotation(type);
 	}
-
+	
 }

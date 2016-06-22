@@ -47,7 +47,6 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
-import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
@@ -61,9 +60,6 @@ import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeParameterBinding;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -203,16 +199,16 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public Type infer(FeatureCall e) {
-		resolveTypeParameter(e);
+		Type inferred = inferTypeDispatch(e.getFeature());
+		resolveTypeParameter(e, 1);
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getFeature();
 			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = e.getArgs();
 			inferParameter(parameters, args);
 		}
-		Type inferred = inferTypeDispatch(e.getFeature());
-		if (e.isArrayAccess() && isArrayType(inferred)) {
-			// TODO: multi dimensional arrays
+		if (e.isArrayAccess() && registry.isArrayType(inferred)) {
+			resolveTypeParameter(e, e.getArraySelector().size());
 			TypeParameter tp = ((ParameterizedType) inferred).getParameter().get(0);
 			return inferTypeDispatch(getTypeParameterBinding(tp).getActualType());
 		}
@@ -220,41 +216,28 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public Type infer(ElementReferenceExpression e) {
-		resolveTypeParameter(e);
+		Type inferred = inferTypeDispatch(e.getReference());
+		resolveTypeParameter(e, 1);
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getReference();
 			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = e.getArgs();
 			inferParameter(parameters, args);
 		}
-		Type inferred = inferTypeDispatch(e.getReference());
-		if (e.isArrayAccess() && isArrayType(inferred)) {
-			// TODO: multi dimensional arrays
+		if (e.isArrayAccess() && registry.isArrayType(inferred)) {
+			resolveTypeParameter(e, e.getArraySelector().size());
 			TypeParameter tp = ((ParameterizedType) inferred).getParameter().get(0);
 			return inferTypeDispatch(getTypeParameterBinding(tp).getActualType());
 		}
 		return inferTypeDispatch(e.getReference());
 	}
-
-	private boolean isArrayType(Type inferred) {
-		return inferred.getName().equals("array") && hasAnnotation(inferred, "Built-In-Type");
-	}
-
-	private boolean hasAnnotation(final Type type, final String name) {
-		return Iterables.any(type.getAnnotations(), new Predicate<Annotation>() {
-			@Override
-			public boolean apply(Annotation input) {
-				return input.getName().equals(name);
-			}
-		});
-	}
-
-	protected void resolveTypeParameter(FeatureCall e) {
+	
+	protected void resolveTypeParameter(FeatureCall e, int level) {
 		if (e.getOwner() instanceof ElementReferenceExpression) {
 			ElementReferenceExpression elemRef = (ElementReferenceExpression) e.getOwner();
 			if (elemRef.getReference() instanceof Declaration) {
 				Declaration declaration = (Declaration) elemRef.getReference();
-				createTypeParameterBinding(declaration);
+				createTypeParameterBinding(declaration, level);
 				return;
 			}
 		}
@@ -262,30 +245,46 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			FeatureCall featureCall = (FeatureCall) e.getOwner();
 			if (featureCall.getFeature() instanceof Declaration) {
 				Declaration declaration = (Declaration) featureCall.getFeature();
-				createTypeParameterBinding(declaration);
+				createTypeParameterBinding(declaration, level);
 				return;
 			}
 		}
 		if (e.getFeature() instanceof Declaration) {
 			Declaration declaration = (Declaration) e.getFeature();
-			createTypeParameterBinding(declaration);
+			createTypeParameterBinding(declaration, level);
 		}
 	}
 	
-	protected void resolveTypeParameter(ElementReferenceExpression e) {
+	protected void resolveTypeParameter(ElementReferenceExpression e, int level) {
 		if (e.getReference() instanceof Declaration) {
-			createTypeParameterBinding((Declaration) e.getReference());
+			createTypeParameterBinding((Declaration) e.getReference(), level);
 		}
 	}
 
-	protected void createTypeParameterBinding(Declaration declaration) {
-		TypeSpecifier typeSpecifier = declaration.getTypeSpecifier();
-		Type type = typeSpecifier.getType();
+	protected void createTypeParameterBinding(Declaration declaration, int level) {
+		TypeSpecifier typeSpec = getInnerTypeSpecifier(declaration.getTypeSpecifier(), level);
+		createTypeParameterBinding(typeSpec);
+	}
+
+	private TypeSpecifier getInnerTypeSpecifier(TypeSpecifier outerTypeSpec, int level) {
+		TypeSpecifier result = outerTypeSpec;
+		// assumption: resolving nested type parameter is only relevant for types with exactly one argument (the only usecase is array type)
+		if (level > 1 && outerTypeSpec.getTypeArguments().size() == 1) {
+			TypeSpecifier innerTypeSpec = outerTypeSpec.getTypeArguments().get(0);
+			if (innerTypeSpec.getTypeArguments().size() > 0) {
+				result = getInnerTypeSpecifier(innerTypeSpec, level-1);
+			}
+		}
+		return result;
+	}
+
+	protected void createTypeParameterBinding(TypeSpecifier typeSpec) {
+		Type type = typeSpec.getType();
 		if (type instanceof ParameterizedType && ((ParameterizedType) type).getParameter().size() > 0) {
 			EList<TypeParameter> parameter = ((ParameterizedType) type).getParameter();
 			for (int i = 0; i < parameter.size(); i++) {
 				TypeParameter param = parameter.get(i);
-				Type actualType = typeSpecifier.getTypeArguments().get(i).getType();
+				Type actualType = typeSpec.getTypeArguments().get(i).getType();
 
 				TypeParameterBinding existingBinding = getTypeParameterBinding(param);
 				if (existingBinding != null) {
