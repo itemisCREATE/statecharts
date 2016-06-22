@@ -18,14 +18,13 @@ import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelP
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
-import org.yakindu.sct.examples.ui.service.IExampleService.ExampleData;
+import org.yakindu.sct.examples.ui.wizards.ExampleData;
 
 /**
  * 
  * @author t00manysecretss
  * 
  */
-
 public class ExampleLabelProvider extends LabelProvider implements IStyledLabelProvider {
 
 	private ImageDescriptor fileIcon, folderIcon;
