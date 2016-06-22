@@ -233,6 +233,11 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 	
 	protected void resolveTypeParameter(FeatureCall e, int level) {
+		if (e.getFeature() instanceof Declaration) {
+			Declaration declaration = (Declaration) e.getFeature();
+			createTypeParameterBinding(declaration, level);
+			return;
+		}
 		if (e.getOwner() instanceof ElementReferenceExpression) {
 			ElementReferenceExpression elemRef = (ElementReferenceExpression) e.getOwner();
 			if (elemRef.getReference() instanceof Declaration) {
@@ -249,10 +254,6 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				return;
 			}
 		}
-		if (e.getFeature() instanceof Declaration) {
-			Declaration declaration = (Declaration) e.getFeature();
-			createTypeParameterBinding(declaration, level);
-		}
 	}
 	
 	protected void resolveTypeParameter(ElementReferenceExpression e, int level) {
@@ -268,8 +269,11 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 
 	private TypeSpecifier getInnerTypeSpecifier(TypeSpecifier outerTypeSpec, int level) {
 		TypeSpecifier result = outerTypeSpec;
+		if (outerTypeSpec.getType() instanceof TypeAlias) {
+			result = ((TypeAlias)outerTypeSpec.getType()).getTypeSpecifier();
+		}
 		// assumption: resolving nested type parameter is only relevant for types with exactly one argument (the only usecase is array type)
-		if (level > 1 && outerTypeSpec.getTypeArguments().size() == 1) {
+		else if (level > 1 && outerTypeSpec.getTypeArguments().size() == 1) {
 			TypeSpecifier innerTypeSpec = outerTypeSpec.getTypeArguments().get(0);
 			if (innerTypeSpec.getTypeArguments().size() > 0) {
 				result = getInnerTypeSpecifier(innerTypeSpec, level-1);
