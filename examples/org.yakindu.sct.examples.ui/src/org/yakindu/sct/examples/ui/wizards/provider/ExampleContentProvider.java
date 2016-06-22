@@ -16,7 +16,7 @@ import java.util.List;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.yakindu.sct.examples.ui.service.IExampleService.ExampleData;
+import org.yakindu.sct.examples.ui.wizards.ExampleData;
 
 /**
  * 

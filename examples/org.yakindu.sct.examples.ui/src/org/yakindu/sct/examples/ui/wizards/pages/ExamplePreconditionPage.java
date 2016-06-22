@@ -11,7 +11,6 @@
 package org.yakindu.sct.examples.ui.wizards.pages;
 
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
@@ -25,9 +24,9 @@ import org.yakindu.sct.examples.ui.wizards.ExampleWizardConstants;
  * 
  */
 
-public class AskPermissionPage extends WizardPage implements ExampleWizardConstants {
+public class ExamplePreconditionPage extends WizardPage implements ExampleWizardConstants {
 
-	public AskPermissionPage(ISelection selection) {
+	public ExamplePreconditionPage() {
 		super(ASK_PAGE_TITLE);
 		setPageComplete(true);
 		setTitle(ASK_PAGE_TITLE);
@@ -38,13 +37,10 @@ public class AskPermissionPage extends WizardPage implements ExampleWizardConsta
 		Composite container = new Composite(parent, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(container);
 		GridLayout layout = new GridLayout();
-		layout.numColumns = 1;
 		container.setLayout(layout);
-		Label label = new Label(container, SWT.NONE);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(label);
+		Label label = new Label(container, SWT.WRAP);
 		label.setText(ASK_PAGE_LABEL_TEXT);
-		label.setAlignment(SWT.CENTER);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
 		setControl(container);
 	}
-
 }
