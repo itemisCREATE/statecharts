@@ -199,8 +199,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public Type infer(FeatureCall e) {
-		Type inferred = inferTypeDispatch(e.getFeature());
 		resolveTypeParameter(e, 1);
+		Type inferred = inferTypeDispatch(e.getFeature());
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getFeature();
 			EList<Parameter> parameters = operation.getParameters();
@@ -216,8 +216,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public Type infer(ElementReferenceExpression e) {
-		Type inferred = inferTypeDispatch(e.getReference());
 		resolveTypeParameter(e, 1);
+		Type inferred = inferTypeDispatch(e.getReference());
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getReference();
 			EList<Parameter> parameters = operation.getParameters();
