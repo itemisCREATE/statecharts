@@ -107,12 +107,12 @@ public class DefaultSCTPaletteFactory implements ISCTPaletteFactory {
 	}
 
 	protected void createShallowHistoryEntry(PaletteContainer container) {
-		container.add(new CreationToolEntry("Shallow History", "Creates a shallow state", getType(ENTRY_ID),
+		container.add(new CreationToolEntry("Shallow History", "Creates a shallow state", getType(SHALLOWHISTORY_ID),
 				findIcon("icons/obj16/Shallow-History-16.png"), findIcon("icons/obj32/Shallow-History-32.png"), false));
 	}
 
 	protected void createDeepHistoryEntry(PaletteContainer container) {
-		container.add(new CreationToolEntry("Deep History", "Creates a deep history", getType(ENTRY_ID),
+		container.add(new CreationToolEntry("Deep History", "Creates a deep history", getType(DEEPHISTORY_ID),
 				findIcon("icons/obj16/Deep-History-16.png"), findIcon("icons/obj32/Deep-History-32.png"), false));
 	}
 
