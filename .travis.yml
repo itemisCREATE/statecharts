@@ -1,6 +1,6 @@
 sudo: false
 language: java
-jdk: oraclejdk8
+jdk: oraclejdk7
 addons:
  apt:
   packages:
@@ -22,7 +22,6 @@ env:
   # via the "travis encrypt" command using the project repo's public key
   - secure: "SjGXYhNOkg6SDuiTo8NZYmqqWxTP+8CogkV9whFwonXGOY9xT1LxO8BD5Q3j2WM6I9gHPExsPyo6ejHq2D4yBjp8ylONtAFkR9Hmd/I9qbW2Tcj0MU3dRACu0L4ko1Uh33IvJWZX+XqTZQMRApch9Wuasj0daUSdYo81GSn5JWI="
   matrix:
-  - TARGET=Neon.target
   - TARGET=Mars.target
   - TARGET=Luna.target
 before_script:
