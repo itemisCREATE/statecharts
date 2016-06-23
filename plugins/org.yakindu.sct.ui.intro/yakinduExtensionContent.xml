@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <introContent>
 	<extensionContent id="yakindu-overviewExtension" name="YAKINDU Overview Extension"
-		style="css/style.css" path="overview/@">
+		style="css/style.css" alt-style="css/style.properties" path="overview/@">
 		<group style-id="content-group" id="yakindu-introLink-group">
 			<link label="YAKINDU Statechart Tools" url="http://statecharts.org/"
 				id="yakindu-dokumentation-Link" style-id="content-link">
@@ -13,8 +13,7 @@
 	</extensionContent>
 
 	<extensionContent id="yakindu-sampleExtension" name="YAKINDU Sample Extension"
-		style="css/style.css" path="samples/@">
-
+		style="css/style.css" alt-style="css/style.properties" path="samples/@">
 		<group style-id="content-group" id="yakindu-introLink-group"
 			label="YAKINDU Statechart Tools">
 			<link label="Example project"
@@ -28,7 +27,7 @@
 	</extensionContent>
 
 	<extensionContent id="yakindu-tutorialsExtension"
-		style="css/style.css" name="YAKINDU Tutorials Extension" path="tutorials/@">
+		style="css/style.css" alt-style="css/style.properties" name="YAKINDU Tutorials Extension" path="tutorials/@">
 		<group style-id="content-group" id="yakindu-introLink-group"
 			label="YAKINDU Statechart Tools">
 			<link label="Tutorials" url="http://statecharts.org/documentation/tutorials/"
@@ -38,7 +37,7 @@
 				</text>
 			</link>
 			<link label="User Group" url="https://groups.google.com/forum/embed/?place=forum/yakindu-user#!forum/yakindu-user"
-				id="yakindu-getting-started-Link" style-id="content-link">
+				id="yakindu-user-forum-Link" style-id="content-link">
 				<img id="logo_small" style-id="logo_small" src="img/logo_small.png"></img>
 				<text>Visit the SCT user group …
 				</text>
