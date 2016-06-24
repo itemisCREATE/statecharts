@@ -4,10 +4,8 @@
 		style="css/style.css" alt-style="css/style.properties" path="overview/@">
 		<group style-id="content-group" id="yakindu-introLink-group">
 			<link label="YAKINDU Statechart Tools" url="http://statecharts.org/"
-				id="yakindu-dokumentation-Link" style-id="content-link">
-				<img id="logo_small" style-id="logo_small" src="img/logo_small.png"></img>
-				<text>Learn more about YAKINDU Statechart Tools …
-				</text>
+				id="yakindu-documentation-link" style-id="content-link">
+				<text>Learn more about YAKINDU Statechart Tools …</text>
 			</link>
 		</group>
 	</extensionContent>
@@ -18,10 +16,8 @@
 			label="YAKINDU Statechart Tools">
 			<link label="Example project"
 				url="http://org.eclipse.ui.intro/runAction?pluginId=org.yakindu.sct.ui.intro&amp;class=org.yakindu.sct.ui.intro.OpenExampleIntroAction"
-				id="yakindu-example-Link" style-id="content-link">
-				<img id="logo_small" style-id="logo_small" src="img/logo_small.png"></img>
-				<text>Create the traffic light example …
-				</text>
+				id="yakindu-examples-link" style-id="content-link">
+				<text>Create the traffic light example …</text>
 			</link>
 		</group>
 	</extensionContent>
@@ -31,14 +27,12 @@
 		<group style-id="content-group" id="yakindu-introLink-group"
 			label="YAKINDU Statechart Tools">
 			<link label="Tutorials" url="http://statecharts.org/documentation/tutorials/"
-				id="yakindu-getting-started-Link" style-id="content-link">
-				<img id="logo_small" style-id="logo_small" src="img/logo_small.png"></img>
+				id="yakindu-tutorials-link" style-id="content-link">
 				<text>Read the tutorials …
 				</text>
 			</link>
 			<link label="User Group" url="https://groups.google.com/forum/embed/?place=forum/yakindu-user#!forum/yakindu-user"
-				id="yakindu-user-forum-Link" style-id="content-link">
-				<img id="logo_small" style-id="logo_small" src="img/logo_small.png"></img>
+				id="yakindu-user-forum-link" style-id="content-link">
 				<text>Visit the SCT user group …
 				</text>
 			</link>
