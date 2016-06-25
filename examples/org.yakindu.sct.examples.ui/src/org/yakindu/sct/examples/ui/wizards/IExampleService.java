@@ -21,8 +21,12 @@ import org.eclipse.core.runtime.IStatus;
  * 
  */
 public interface IExampleService {
-
-	public IStatus init(IProgressMonitor monitor);
+	
+	public boolean exists();
+	
+	public boolean isUpToDate();
+	
+	public IStatus fetchAllExamples(IProgressMonitor monitor);
 
 	public List<ExampleData> getExamples(IProgressMonitor monitor);
 

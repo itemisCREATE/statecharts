@@ -10,21 +10,15 @@
  */
 package org.yakindu.sct.examples.ui.wizards.pages;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
 import java.util.List;
 
-import javax.swing.text.html.ImageView;
-
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.resource.FontDescriptor;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -32,38 +26,38 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.events.PaintEvent;
-import org.eclipse.swt.events.PaintListener;
-import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 import org.yakindu.sct.examples.ui.wizards.ExampleData;
 import org.yakindu.sct.examples.ui.wizards.ExampleWizardConstants;
 import org.yakindu.sct.examples.ui.wizards.IExampleService;
-import org.yakindu.sct.examples.ui.wizards.provider.ExampleContentProvider;
-import org.yakindu.sct.examples.ui.wizards.provider.ExampleLabelProvider;
+import org.yakindu.sct.examples.ui.wizards.pages.MessageArea.State;
 
 import com.google.inject.Inject;
 
 /**
  * 
  * @author t00manysecretss
+ * @author andreas muelder - Replace Image Gallery with Browser widget
  * 
  */
 
-public class SelectExamplePage extends WizardPage implements ExampleWizardConstants, ISelectionChangedListener {
+public class SelectExamplePage extends WizardPage
+		implements ExampleWizardConstants, ISelectionChangedListener, SelectionListener {
 
 	@Inject
 	private IExampleService exampleService;
 	private TreeViewer viewer;
-	private Label description;
 	private ExampleData selection;
-	private ImageViewer imageViewer;
+	private Browser browser;
+	private MessageArea messageArea;
 
 	public SelectExamplePage() {
 		super(SELECT_PAGE_TITLE);
@@ -73,7 +67,10 @@ public class SelectExamplePage extends WizardPage implements ExampleWizardConsta
 	}
 
 	public void createControl(Composite parent) {
-		SashForm container = new SashForm(parent, SWT.NONE);
+		Composite root = new Composite(parent, SWT.NONE);
+		root.setLayout(new GridLayout(1, true));
+		createUpdateGroup(root);
+		SashForm container = new SashForm(root, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(container);
 		GridLayout layout = new GridLayout(2, false);
 		container.setLayout(layout);
@@ -83,100 +80,92 @@ public class SelectExamplePage extends WizardPage implements ExampleWizardConsta
 		setControl(container);
 	}
 
+	private void createUpdateGroup(Composite root) {
+		messageArea = new MessageArea(root);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(messageArea);
+		messageArea.addSelectionListener(this);
+		messageArea.hide();
+
+	}
+
 	@Override
 	public void setVisible(boolean visible) {
 		super.setVisible(visible);
 		if (visible) {
-			initialize();
+			try {
+				getWizard().getContainer().run(true, false, new IRunnableWithProgress() {
+					@Override
+					public void run(final IProgressMonitor monitor)
+							throws InvocationTargetException, InterruptedException {
+						init(monitor);
+					}
+				});
+			} catch (InvocationTargetException | InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	private void init(final IProgressMonitor monitor) {
+		if (!exampleService.exists()) {
+			Display.getDefault().syncExec(new Runnable() {
+				@Override
+				public void run() {
+					messageArea.showDownload();
+				}
+			});
+		} else if (!exampleService.isUpToDate()) {
+			Display.getDefault().syncExec(new Runnable() {
+				@Override
+				public void run() {
+					messageArea.showUpdate();
+				}
+			});
+		} else {
+			Display.getDefault().syncExec(new Runnable() {
+				@Override
+				public void run() {
+					setInput(monitor);
+				}
+			});
 		}
 	}
 
-	protected void initialize() {
-		try {
-			getWizard().getContainer().run(true, false, new IRunnableWithProgress() {
+	protected void setInput(final IProgressMonitor monitor) {
+		final List<ExampleData> input = exampleService.getExamples(new NullProgressMonitor());
 
-				@Override
-				public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					final IStatus status = exampleService.init(monitor);
-					final List<ExampleData> input = exampleService.getExamples(new NullProgressMonitor());
-					Display.getDefault().syncExec(new Runnable() {
-						@Override
-						public void run() {
-							if (status.isOK()) {
-								setErrorMessage(null);
-								setPageComplete(true);
-								viewer.setInput(input);
-								viewer.expandAll();
-								getShell().layout();
-							} else {
-								setErrorMessage(status.getMessage());
-								setPageComplete(false);
-							}
-							monitor.done();
-
-						}
-					});
-				}
-			});
-
-		} catch (InvocationTargetException | InterruptedException e) {
-			e.printStackTrace();
-			setErrorMessage(e.getMessage());
-			setPageComplete(true);
-		}
+		messageArea.hide();
+		viewer.setInput(input);
+		viewer.expandAll();
 	}
 
 	protected void createTreeViewer(Composite container) {
 		viewer = new TreeViewer(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(viewer.getControl());
 		viewer.setContentProvider(new ExampleContentProvider());
-		viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(
-				new ExampleLabelProvider(createImageDescriptor(FILEICON), createImageDescriptor(FOLDERICON))));
+		viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(new ExampleLabelProvider()));
 		viewer.addSelectionChangedListener(this);
 	}
 
-	protected ImageDescriptor createImageDescriptor(Path path) {
-		Bundle bundle = FrameworkUtil.getBundle(ExampleLabelProvider.class);
-		URL url = FileLocator.find(bundle, path, null);
-		return ImageDescriptor.createFromURL(url);
-	}
-
 	protected void updateSelection(ExampleData data) {
-		if (!data.hasChildren() && data != selection) {
-			selection = data;
-			description.setText(selection.getDescription());
-			setImageViewerInput(data);
-			setPageComplete(true);
-			setErrorMessage(null);
-		} else if (selection == null && data.hasChildren()) {
-			setErrorMessage(WIZARD_ERROR_NOTHING_SELECTED);
-		}
+		selection = data;
+		setDetailPaneContent(data);
+		setPageComplete(true);
+		setErrorMessage(null);
 		viewer.refresh();
 	}
 
-	protected void setImageViewerInput(ExampleData exampleData) {
-		imageViewer.setViewerInput(exampleData.getFullImagePathes());
-		getShell().layout(true, true);
+	protected void setDetailPaneContent(ExampleData exampleData) {
+		String url = exampleData.getProjectDir().getAbsolutePath() + File.separator + "index.html";
+		browser.setUrl(url);
 	}
 
 	protected void createDetailsPane(Composite parent) {
-		Composite container = new Composite(parent, SWT.NONE);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(container);
-		GridLayout layout = new GridLayout();
-		layout.marginHeight = 0;
-		layout.marginTop = 0;
-		layout.numColumns = 1;
-		container.setLayout(layout);
-		imageViewer = new ImageViewer(container);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(imageViewer);
-		Label descriptionLabel = new Label(container, SWT.NONE);
-		descriptionLabel.setText("Description");
-		FontDescriptor boldDescriptor = FontDescriptor.createFrom(descriptionLabel.getFont()).setStyle(SWT.BOLD);
-		Font boldFont = boldDescriptor.createFont(descriptionLabel.getDisplay());
-		descriptionLabel.setFont(boldFont);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(descriptionLabel);
-		description = new Label(container, SWT.WRAP);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(description);
+		final Composite composite = new Composite(parent, SWT.BORDER);
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		composite.setLayout(new FillLayout());
+		browser = new Browser(composite, SWT.NONE);
 	}
 
 	public ExampleData getSelection() {
@@ -186,6 +175,39 @@ public class SelectExamplePage extends WizardPage implements ExampleWizardConsta
 	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
 		Object firstElement = ((StructuredSelection) event.getSelection()).getFirstElement();
-		updateSelection((ExampleData) firstElement);
+		if (firstElement instanceof ExampleData)
+			updateSelection((ExampleData) firstElement);
 	}
+
+	@Override
+	public void widgetSelected(SelectionEvent e) {
+		try {
+			getWizard().getContainer().run(true, false, new IRunnableWithProgress() {
+				@Override
+				public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+					final IStatus status = exampleService.fetchAllExamples(monitor);
+					Display.getDefault().syncExec(new Runnable() {
+						@Override
+						public void run() {
+							if (status.isOK()) {
+								SelectExamplePage.this.setInput(monitor);
+							} else {
+								messageArea.showError(status.getMessage());
+							}
+						}
+					});
+				}
+			});
+		} catch (InvocationTargetException | InterruptedException e1) {
+			e1.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void widgetDefaultSelected(SelectionEvent e) {
+		widgetSelected(e);
+
+	}
+
 }

@@ -18,7 +18,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-import org.yakindu.sct.examples.ui.wizards.pages.ExamplePreconditionPage;
 import org.yakindu.sct.examples.ui.wizards.pages.SelectExamplePage;
 
 import com.google.inject.Guice;
@@ -35,9 +34,7 @@ public class ExampleWizard extends Wizard implements INewWizard, ExampleWizardCo
 	@Inject
 	private IExampleService exampleService;
 	@Inject
-	private ExamplePreconditionPage page1;
-	@Inject
-	private SelectExamplePage page2;
+	private SelectExamplePage page;
 
 	public ExampleWizard() {
 		super();
@@ -52,12 +49,11 @@ public class ExampleWizard extends Wizard implements INewWizard, ExampleWizardCo
 	}
 
 	public void addPages() {
-//		addPage(page1);
-		addPage(page2);
+		addPage(page);
 	}
 
 	public boolean performFinish() {
-		final ExampleData selection = page2.getSelection();
+		final ExampleData selection = page.getSelection();
 		if (selection != null) {
 			try {
 				getContainer().run(true, true, new IRunnableWithProgress() {

@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.examples.ui.wizards;
 
-import org.eclipse.core.runtime.Path;
-
 /**
  * 
  * @author t00manysecretss
@@ -32,6 +30,4 @@ public interface ExampleWizardConstants {
 	public static final String WIZARD_ERROR_NOTHING_SELECTED = "You have to select an Example in order to continue.";
 	public static final String WIZARD_ERROR_NO_INTERNET_CONNECTION = "You are not connected to the Internet\nPlease check your cable and network configs.";
 	public static final String WIZARD_ERROR_GIT = "It seems there is a Problem with git\nPlease try again later.";
-	public static final Path FILEICON = new Path("icons/logo-16.png");
-	public static final Path FOLDERICON = new Path("icons/logo-16.png");
 }

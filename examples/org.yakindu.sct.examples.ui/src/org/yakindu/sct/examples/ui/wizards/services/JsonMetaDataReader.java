@@ -41,40 +41,6 @@ public class JsonMetaDataReader implements IExampleDataReader {
 				e.printStackTrace();
 			}
 		}
-//		result = sortList(result);
 		return result;
-	}
-
-	protected List<ExampleData> sortList(List<ExampleData> result) {
-		List<String> domains = new ArrayList<String>();
-		for (int i = 0; i < result.size(); i++) {
-			if (!domains.contains(result.get(i).getDomain())) {
-				domains.add(result.get(i).getDomain());
-			}
-		}
-		ExampleData[] root = new ExampleData[domains.size()];
-		for (int i = 0; i < root.length; i++) {
-			root[i] = new ExampleData(null, null, domains.get(i));
-		}
-		for (int d = 0; d < root.length; d++) {
-			int size = 0;
-			for (int i = 0; i < result.size(); i++) {
-				if (result.get(i).getDomain().equals(root[d].getTitle())) {
-					result.get(i).setParent(root[d]);
-					size++;
-				}
-			}
-			ExampleData[] children = new ExampleData[size];
-			for (int i = 0, c = 0; i < result.size(); i++) {
-				if (result.get(i).getParent() == root[d]) {
-					children[c] = result.get(i);
-					c++;
-				}
-			}
-			root[d].setChildren(children);
-			result.add(root[d]);
-		}
-		return result;
-
 	}
 }

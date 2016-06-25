@@ -13,8 +13,6 @@ package org.yakindu.sct.examples.ui.wizards.services;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -28,8 +26,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.PullResult;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.ui.dialogs.IOverwriteQuery;
 import org.eclipse.ui.wizards.datatransfer.FileSystemStructureProvider;
@@ -53,8 +51,9 @@ import com.google.inject.name.Named;
 @Singleton
 public class GitRepositoryExampleService implements IExampleService {
 
+	private String userHome = System.getProperty("user.home");
 	private static final String METADATA_JSON = "metadata.json";
-												 
+
 	@Inject
 	@Named(ExampleWizardModule.REPOSITORY_URL)
 	private String repositoryURL;
@@ -62,26 +61,42 @@ public class GitRepositoryExampleService implements IExampleService {
 	private IExampleDataReader reader;
 	private java.nio.file.Path gitRepo;
 
+	public GitRepositoryExampleService() {
+		gitRepo = java.nio.file.Paths.get(userHome, "sct_examples");
+	}
+
 	@Override
-	public IStatus init(IProgressMonitor monitor) {
-		try {
-			gitRepo = Files.createTempDirectory("sct_examples");
-		} catch (IOException e1) {
-			return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID, "Unable to create temporary file.");
+	public boolean exists() {
+		return Files.exists(gitRepo);
+	}
+
+	@Override
+	public IStatus fetchAllExamples(IProgressMonitor monitor) {
+		if (!exists()) {
+			try {
+				Files.createDirectories(gitRepo);
+			} catch (IOException e1) {
+				return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
+						"Unable to create folder " + gitRepo.getFileName());
+			}
+			return cloneRepository(monitor);
+		} else {
+			return updateRepository(monitor);
 		}
-		gitRepo.toFile().deleteOnExit();
+	}
+
+	protected IStatus updateRepository(IProgressMonitor monitor) {
 		try {
-			SubMonitor subMonitor = SubMonitor.convert(monitor, "Initializing example repository", 10);
-			InetAddress.getByName("statecharts.org").getHostName();
-			subMonitor.worked(1);
-			return cloneRepository(subMonitor.newChild(9));
-		} catch (UnknownHostException e) {
+			PullResult result = Git.open(gitRepo.toFile()).pull().call();
+			if (!result.isSuccessful()) {
+				return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
+						"Unable to update repository " + repositoryURL + "!");
+			}
+		} catch (GitAPIException | IOException e) {
 			return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
-					"Unable to connect to repository " + repositoryURL + "!\n No internet connection available?");
-		} finally {
-			if (monitor != null)
-				monitor.done();
+					"Unable to update repository " + repositoryURL + "!");
 		}
+		return Status.OK_STATUS;
 	}
 
 	protected IStatus cloneRepository(IProgressMonitor monitor) {
@@ -108,11 +123,11 @@ public class GitRepositoryExampleService implements IExampleService {
 			for (java.nio.file.Path entry : stream) {
 				if (Files.isDirectory(entry)) {
 					findMetaData(result, entry);
-				}
-				else if (entry.getFileName().toString().equals(METADATA_JSON)) {
+				} else if (entry.getFileName().toString().equals(METADATA_JSON)) {
 					result.add(entry);
 				}
 			}
+			stream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -155,6 +170,12 @@ public class GitRepositoryExampleService implements IExampleService {
 			result.add(f);
 		}
 		return result;
+	}
+
+	@Override
+	public boolean isUpToDate() {
+		// TODO
+		return true;
 	}
 
 }
