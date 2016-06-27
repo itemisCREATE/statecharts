@@ -36,6 +36,7 @@ import org.yakindu.sct.examples.ui.ExampleActivator;
 import org.yakindu.sct.examples.ui.wizards.ExampleData;
 import org.yakindu.sct.examples.ui.wizards.ExampleWizardModule;
 import org.yakindu.sct.examples.ui.wizards.IExampleService;
+import org.yakindu.sct.examples.ui.wizards.preferences.ExamplesPreferenceConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -51,7 +52,6 @@ import com.google.inject.name.Named;
 @Singleton
 public class GitRepositoryExampleService implements IExampleService {
 
-	private String userHome = System.getProperty("user.home");
 	private static final String METADATA_JSON = "metadata.json";
 
 	@Inject
@@ -62,7 +62,12 @@ public class GitRepositoryExampleService implements IExampleService {
 	private java.nio.file.Path gitRepo;
 
 	public GitRepositoryExampleService() {
-		gitRepo = java.nio.file.Paths.get(userHome, "sct_examples");
+		gitRepo = java.nio.file.Paths.get(getStorageLocation(), "sct_examples");
+	}
+
+	private String getStorageLocation() {
+		return ExampleActivator.getDefault().getPreferenceStore()
+				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION);
 	}
 
 	@Override

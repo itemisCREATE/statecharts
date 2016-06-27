@@ -23,4 +23,19 @@
       		name="YAKINDU Examples">
       	</wizard>
   	</extension>
+  	   <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            category="org.yakindu.sct.ui.preferences.root"
+            class="org.yakindu.sct.examples.ui.wizards.preferences.ExamplesPreferencePage"
+            id="com.yakindu.sct.examples"
+            name="Example Wizard">
+        </page>
+    </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+              class="org.yakindu.sct.examples.ui.wizards.preferences.ExamplesPreferenceInitializer">
+      </initializer>
+   </extension>
 </plugin>
