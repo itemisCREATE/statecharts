@@ -77,10 +77,10 @@ public class STextExpressionParser implements IExpressionParser {
 	}
 
 	public EObject parseExpression(String expression, String ruleName) {
-		return parseExpression(expression, ruleName, (Scope) null);
+		return parseExpression(expression, ruleName, (String) null);
 	}
 
-	public EObject parseExpression(String expression, String ruleName, Scope... context) {
+	public EObject parseExpression(String expression, String ruleName, String specification) {
 		StextResource resource = getResource();
 		resource.setURI(URI.createURI("path", true));
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
@@ -89,19 +89,14 @@ public class STextExpressionParser implements IExpressionParser {
 		EObject rootASTElement = result.getRootASTElement();
 		resource.getContents().add(rootASTElement);
 		ListBasedDiagnosticConsumer diagnosticsConsumer = new ListBasedDiagnosticConsumer();
-		if (context != null) {
-			Statechart sc = SGraphFactory.eINSTANCE.createStatechart();
-			sc.setName("sc");
-			resource.getContents().add(sc);
-			for (Scope scope : context) {
-				if (scope != null) {
-					sc.getScopes().add(scope);
-					linker.linkModel(scope, diagnosticsConsumer);
-				}
-
-			}
+		Statechart sc = SGraphFactory.eINSTANCE.createStatechart();
+		sc.setName("sc");
+		if (specification != null) {
+			sc.setSpecification(specification);
 		}
-		linker.linkModel(result.getRootASTElement(), diagnosticsConsumer);
+		resource.getContents().add(sc);
+		linker.linkModel(sc, diagnosticsConsumer);
+		linker.linkModel(rootASTElement, diagnosticsConsumer);
 		resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);
 		resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);
 		Multimap<SpecificationElement, Diagnostic> diagnostics = resource.getLinkingDiagnostics();

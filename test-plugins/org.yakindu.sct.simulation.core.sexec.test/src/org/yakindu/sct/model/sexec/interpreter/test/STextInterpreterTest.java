@@ -21,7 +21,6 @@ import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
-import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
@@ -582,20 +581,17 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	protected Object executeWithDefaultScope(String expression) {
-		Scope defaultScope = internalScope();
-		Expression statement = (Expression) parseExpression(expression, defaultScope, Expression.class.getSimpleName());
+		Expression statement = (Expression) parseExpression(expression, Expression.class.getSimpleName(), internalScope());
 		return interpreter.evaluateStatement(statement, context);
 	}
 
 	protected Object execute(String scope, String expression) {
-		Scope defaultScope = createInternalScope(scope);
-		Expression statement = (Expression) parseExpression(expression, defaultScope, Expression.class.getSimpleName());
+		Expression statement = (Expression) parseExpression(expression, Expression.class.getSimpleName(), scope);
 		return interpreter.evaluateStatement(statement, context);
 	}
 
 	protected Object executeExpression(String scope, String expression) {
-		Scope defaultScope = createInternalScope(scope);
-		Expression statement = (Expression) parseExpression(expression, defaultScope, Expression.class.getSimpleName());
+		Expression statement = (Expression) parseExpression(expression, Expression.class.getSimpleName(), scope);
 		return interpreter.evaluateStatement(statement, context);
 	}
 

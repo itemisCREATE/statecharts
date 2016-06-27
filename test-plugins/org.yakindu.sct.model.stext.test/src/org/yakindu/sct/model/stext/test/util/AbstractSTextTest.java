@@ -11,10 +11,7 @@
 package org.yakindu.sct.model.stext.test.util;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.expressions.IExpressionParser;
-import org.yakindu.sct.model.stext.stext.InterfaceScope;
-import org.yakindu.sct.model.stext.stext.InternalScope;
 
 import com.google.inject.Inject;
 
@@ -32,20 +29,8 @@ public abstract class AbstractSTextTest {
 		return expressionParser.parseExpression(expression, ruleName);
 	}
 
-	protected EObject parseExpression(String expression, Scope scope, String ruleName) {
-		return parseExpression(expression, ruleName, scope);
-	}
-
-	protected EObject parseExpression(String expression, String ruleName, Scope... context) {
-		return expressionParser.parseExpression(expression, ruleName, context);
-	}
-
-	protected Scope createInternalScope(String contextScope) {
-		return (Scope) expressionParser.parseExpression(contextScope, InternalScope.class.getSimpleName());
-	}
-
-	protected Scope createInterfaceScope(String contextScope) {
-		return (Scope) expressionParser.parseExpression(contextScope, InterfaceScope.class.getSimpleName());
+	protected EObject parseExpression(String expression, String ruleName, String scope) {
+		return expressionParser.parseExpression(expression, ruleName, scope);
 	}
 
 	/**
@@ -64,8 +49,8 @@ public abstract class AbstractSTextTest {
 	 *  event voidEvent : void"
 	 * </pre>
 	 */
-	public Scope internalScope() {
-		return createInternalScope("internal: operation voidOp() operation intOp():integer var intVar : integer var boolVar : boolean var realVar : real var stringVar : string event intEvent : integer  event boolEvent : boolean event realEvent : real event stringEvent : string event voidEvent : void");
+	public String internalScope() {
+		return "internal: operation voidOp() operation intOp():integer var intVar : integer var boolVar : boolean var realVar : real var stringVar : string event intEvent : integer  event boolEvent : boolean event realEvent : real event stringEvent : string event voidEvent : void";
 	}
 
 	/**
@@ -79,8 +64,8 @@ public abstract class AbstractSTextTest {
 	 *  var boolVar : boolean
 	 * </pre>
 	 */
-	public Scope interfaceScope() {
-		return createInterfaceScope("interface ABC : operation paramOp(param1 : integer, param2 : boolean ) : string operation stringOp() in event voidEvent  in event intEvent : integer var intVar : integer var boolVar : boolean");
+	public String interfaceScope() {
+		return "interface ABC : operation paramOp(param1 : integer, param2 : boolean ) : string operation stringOp() in event voidEvent  in event intEvent : integer var intVar : integer var boolVar : boolean";
 	}
 
 }

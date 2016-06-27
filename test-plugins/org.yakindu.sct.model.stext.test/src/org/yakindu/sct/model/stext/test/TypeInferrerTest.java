@@ -32,7 +32,6 @@ import org.yakindu.base.types.TypeParameterBinding;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
-import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
@@ -101,7 +100,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	@Test
 	public void testNumericalAddSubtractExpression() {
 		// add
-		assertTrue(isIntegerType(inferType("1+2", internalScope())));
+		assertTrue(isIntegerType(inferTypeForExpression("1+2", internalScope())));
 		assertTrue(isIntegerType(inferType("1 + 2")));
 		assertTrue(isIntegerType(inferType("1 + 0x0F")));
 		assertTrue(isIntegerType(inferType("0x0F + 0x0F")));
@@ -673,8 +672,8 @@ public class TypeInferrerTest extends AbstractSTextTest {
 
 	@Test
 	public void testEventIsRaisedSuccess() {
-		assertTrue(isBooleanType(inferType("boolVar = intEvent", internalScope())));
-		assertTrue(isBooleanType(inferType("ABC.boolVar = ABC.intEvent", interfaceScope())));
+		assertTrue(isBooleanType(inferTypeForExpression("boolVar = intEvent", internalScope())));
+		assertTrue(isBooleanType(inferTypeForExpression("ABC.boolVar = ABC.intEvent", interfaceScope())));
 	}
 
 	@Test
@@ -782,37 +781,37 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	@Test
 	public void testArrayElementAssignmentByIndexBrackets() {
 		// we need to define two arrays of different type to check if type bindings get overwritten properly
-		Scope scope = createInternalScope("internal: var intArray : array<integer> var boolArray : array<boolean>");
-		assertTrue(isIntegerType(inferType("intArray[0]", scope)));
-		assertTrue(isBooleanType(inferType("boolArray[0]", scope)));
-		assertTrue(isIntegerType(inferType("intArray[0]=5", scope)));
-		assertTrue(isBooleanType(inferType("boolArray[0]=false", scope)));
-		expectIssue(inferType("intArray[0]=5.3", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "real"));
-		expectIssue(inferType("intArray[0]='asd'", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "string"));
-		expectIssue(inferType("boolArray[0]=8", scope), String.format(ASSIGNMENT_OPERATOR, "=", "boolean", "integer"));
-		expectIssue(inferType("intArray[0]=true", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "boolean"));
+		String scope = "internal: var intArray : array<integer> var boolArray : array<boolean>";
+		assertTrue(isIntegerType(inferTypeForExpression("intArray[0]", scope)));
+		assertTrue(isBooleanType(inferTypeForExpression("boolArray[0]", scope)));
+		assertTrue(isIntegerType(inferTypeForExpression("intArray[0]=5", scope)));
+		assertTrue(isBooleanType(inferTypeForExpression("boolArray[0]=false", scope)));
+		expectIssue(inferTypeForExpression("intArray[0]=5.3", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "real"));
+		expectIssue(inferTypeForExpression("intArray[0]='asd'", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "string"));
+		expectIssue(inferTypeForExpression("boolArray[0]=8", scope), String.format(ASSIGNMENT_OPERATOR, "=", "boolean", "integer"));
+		expectIssue(inferTypeForExpression("intArray[0]=true", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "boolean"));
 	}
 	
 	@Test
 	public void testArrayElementAssignmentByIndexOperation() {
 		// we need to define two arrays of different type to check if type bindings get overwritten properly
-		Scope scope = createInternalScope("internal: var intArray : array<integer> var boolArray : array<boolean>");
-		assertTrue(isIntegerType(inferType("intArray.get(0)", scope)));
-		assertTrue(isBooleanType(inferType("boolArray.get(0)", scope)));
-		assertTrue(isIntegerType(inferType("intArray.get(0)=5", scope)));
-		assertTrue(isBooleanType(inferType("boolArray.get(0)=false", scope)));
-		expectIssue(inferType("intArray.get(0)=5.3", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "real"));
-		expectIssue(inferType("intArray.get(0)='asd'", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "string"));
-		expectIssue(inferType("boolArray.get(0)=8", scope), String.format(ASSIGNMENT_OPERATOR, "=", "boolean", "integer"));
-		expectIssue(inferType("intArray.get(0)=true", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "boolean"));
+		String scope = "internal: var intArray : array<integer> var boolArray : array<boolean>";
+		assertTrue(isIntegerType(inferTypeForExpression("intArray.get(0)", scope)));
+		assertTrue(isBooleanType(inferTypeForExpression("boolArray.get(0)", scope)));
+		assertTrue(isIntegerType(inferTypeForExpression("intArray.get(0)=5", scope)));
+		assertTrue(isBooleanType(inferTypeForExpression("boolArray.get(0)=false", scope)));
+		expectIssue(inferTypeForExpression("intArray.get(0)=5.3", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "real"));
+		expectIssue(inferTypeForExpression("intArray.get(0)='asd'", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "string"));
+		expectIssue(inferTypeForExpression("boolArray.get(0)=8", scope), String.format(ASSIGNMENT_OPERATOR, "=", "boolean", "integer"));
+		expectIssue(inferTypeForExpression("intArray.get(0)=true", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "boolean"));
 	}
 
 	@Test
 	@Ignore("Type recursion not yet implemented")
 	public void testArrayAssignment() {
-		Scope scope = createInternalScope("internal: var intArray1 : array<integer> var intArray2 : array<integer> var stringArr : array<string>");
-		assertTrue(isArrayIntegerType(inferType("intArray1=intArray2", scope)));
-		expectIssue(inferType("intArray1=stringArr", scope), String.format(ASSIGNMENT_OPERATOR, "=", "array<integer>", "array<string>"));
+		String scope = "internal: var intArray1 : array<integer> var intArray2 : array<integer> var stringArr : array<string>";
+		assertTrue(isArrayIntegerType(inferTypeForExpression("intArray1=intArray2", scope)));
+		expectIssue(inferTypeForExpression("intArray1=stringArr", scope), String.format(ASSIGNMENT_OPERATOR, "=", "array<integer>", "array<string>"));
 	}
 
 	@Test
@@ -822,18 +821,18 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	}
 
 	protected Type inferType(String expression) {
-		return inferType(expression, super.internalScope(), super.interfaceScope());
+		return inferTypeForExpression(expression, super.internalScope() + "\n" + super.interfaceScope());
 	}
 
 	protected Type inferType(String expression, String parserRule) {
-		return inferType(expression, parserRule, super.internalScope(), super.interfaceScope());
+		return inferType(expression, parserRule, super.internalScope() + "\n" + super.interfaceScope());
 	}
 
-	protected Type inferType(String expression, Scope... scopes) {
+	protected Type inferTypeForExpression(String expression, String scopes) {
 		return inferType(expression, Expression.class.getSimpleName(), scopes);
 	}
 
-	protected Type inferType(String expression, String parserRule, Scope... scopes) {
+	protected Type inferType(String expression, String parserRule, String scopes) {
 		EObject parseResult = super.parseExpression(expression, parserRule, scopes);
 		assertNotNull(parseResult);
 		acceptor = new ListBasedValidationIssueAcceptor();
