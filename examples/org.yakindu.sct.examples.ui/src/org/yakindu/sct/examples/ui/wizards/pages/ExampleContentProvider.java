@@ -59,7 +59,8 @@ public class ExampleContentProvider implements ITreeContentProvider {
 	@Override
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		categories.clear();
-		groupCategories((List<ExampleData>) newInput);
+		if (newInput != null)
+			groupCategories((List<ExampleData>) newInput);
 	}
 
 	protected void groupCategories(List<ExampleData> newInput) {

@@ -38,7 +38,6 @@ import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.examples.ui.wizards.ExampleData;
 import org.yakindu.sct.examples.ui.wizards.ExampleWizardConstants;
 import org.yakindu.sct.examples.ui.wizards.IExampleService;
-import org.yakindu.sct.examples.ui.wizards.pages.MessageArea.State;
 
 import com.google.inject.Inject;
 

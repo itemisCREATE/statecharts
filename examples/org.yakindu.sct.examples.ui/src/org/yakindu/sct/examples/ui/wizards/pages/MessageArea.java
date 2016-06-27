@@ -11,7 +11,10 @@
 package org.yakindu.sct.examples.ui.wizards.pages;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -21,6 +24,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
+import org.eclipse.ui.dialogs.PreferencesUtil;
 
 /**
  * 
@@ -29,8 +34,10 @@ import org.eclipse.swt.widgets.Label;
  */
 public class MessageArea extends Composite {
 
+	protected static final String PREF_PAGE_ID = "org.yakindu.sct.ui.preferences.root";
+	protected static final String DISPLAY_ID  = "com.yakindu.sct.examples";
 	private Label imageLabel;
-	private Label textLabel;
+	private Link textLabel;
 	private Button button;
 	private Group group;
 
@@ -51,7 +58,15 @@ public class MessageArea extends Composite {
 		group.setLayout(new GridLayout(3, false));
 		imageLabel = new Label(group, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(false, false).align(SWT.BEGINNING, SWT.CENTER).applyTo(imageLabel);
-		textLabel = new Label(group, SWT.NONE);
+		textLabel = new Link(group, SWT.WRAP);
+		textLabel.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				PreferenceDialog dialog = PreferencesUtil.createPreferenceDialogOn(getShell(), PREF_PAGE_ID, new String[]  {DISPLAY_ID }, null);
+				dialog.setSelectedNode("DISPLAY_ID");
+				dialog.open();
+			}
+		});
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.CENTER, SWT.CENTER).applyTo(textLabel);
 		button = new Button(group, SWT.FLAT);
 		button.setText("Download");
@@ -61,7 +76,8 @@ public class MessageArea extends Composite {
 	public void showDownload() {
 		state = State.DOWNLOAD;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_INFORMATION));
-		textLabel.setText("No examples found. Please download the latest examples from our repository.");
+		textLabel.setText(
+				"No examples found, please download the latest examples.\nYou can <a>change the storage location here.</a>");
 		button.setText("Download");
 		show();
 	}
