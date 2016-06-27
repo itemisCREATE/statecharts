@@ -119,7 +119,9 @@ public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvi
 		public int getPriority(TransitionEditPart editPart) {
 			Transition transition = ((Transition) editPart.resolveSemanticElement());
 			Vertex container = (Vertex) transition.eContainer();
-			return container.getOutgoingTransitions().indexOf(transition);
+			int indexOf = container.getOutgoingTransitions().indexOf(transition);
+			//visible priorities should start with 1
+			return indexOf+1;
 		}
 	}
 
