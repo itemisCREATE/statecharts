@@ -1912,15 +1912,15 @@ h3(#JavaIntegratingGeneratedCode). Integrating generated code
 
 To get a clue how to integrate a generated Java state machine with your project have a look at the @CrossingDemoCycleBased@ class and its abstract superclass @CrossingDemoBase@. The @main()@ method is in @CrossingDemoCycleBased@:
 
-bc. 
+bc.. 
 public static void main(String[] args) {
 
     new CrossingDemoCycleBased().runTrafficLight();
 }
 
-A new instance of the class is created and the method @runTrafficLight()@ is called. This method can be found in the superclass:
+p. A new instance of the class is created and the method @runTrafficLight()@ is called. This method can be found in the superclass:
 
-bc. 
+bc.. 
 public void runTrafficLight() {
 
         setUpAndRunStatemachine();
@@ -1941,9 +1941,9 @@ public void runTrafficLight() {
         tearDownStatemachine();
 }
 
-This method sets up the state machine and creates the GUI content. In a while loop it reads the content of the state machine and repaints the GUI. If the user exits the GUI shell, the loop terminates and the state machine is torn down. The really interesting methods are setUpAndRunStatemachine(), readStatemachineOutput(), and tearDownStatemachine():
+p. This method sets up the state machine and creates the GUI content. In a while loop it reads the content of the state machine and repaints the GUI. If the user exits the GUI shell, the loop terminates and the state machine is torn down. The really interesting methods are setUpAndRunStatemachine(), readStatemachineOutput(), and tearDownStatemachine():
 
-bc. 
+bc.. 
 protected void setUpAndRunStatemachine() {
 
     statemachine = new TrafficLightWaitingStatemachine();
@@ -1954,7 +1954,7 @@ protected void setUpAndRunStatemachine() {
     RuntimeService.getInstance().registerStatemachine(statemachine, 100);
 }
 
-First a new instance of the generated state machine is created. Since the traffic light statechart uses timing clauses, it is provided with a timer service, here with the default implementation of the @ITimerService@ interface. In the next steps the state machine is initialized and entered. After the @enter()@ method has been executed, the machine is in a defined state.
+p. First a new instance of the generated state machine is created. Since the traffic light statechart uses timing clauses, it is provided with a timer service, here with the default implementation of the @ITimerService@ interface. In the next steps the state machine is initialized and entered. After the @enter()@ method has been executed, the machine is in a defined state.
 
 Finally the state machine is passed to the runtime service. This service executes the @runCycle()@ method of the state machine every 100 ms, that is the state machine executes a run-to-completion step every 100 ms.
 
