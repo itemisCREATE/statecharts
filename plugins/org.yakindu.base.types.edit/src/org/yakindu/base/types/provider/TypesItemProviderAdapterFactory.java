@@ -538,6 +538,29 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.ArrayTypeSpecifier} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ArrayTypeSpecifierItemProvider arrayTypeSpecifierItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.ArrayTypeSpecifier}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createArrayTypeSpecifierAdapter() {
+		if (arrayTypeSpecifierItemProvider == null) {
+			arrayTypeSpecifierItemProvider = new ArrayTypeSpecifierItemProvider(this);
+		}
+
+		return arrayTypeSpecifierItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -656,6 +679,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (typeAliasItemProvider != null) typeAliasItemProvider.dispose();
 		if (annotationItemProvider != null) annotationItemProvider.dispose();
 		if (annotatableElementItemProvider != null) annotatableElementItemProvider.dispose();
+		if (arrayTypeSpecifierItemProvider != null) arrayTypeSpecifierItemProvider.dispose();
 	}
 
 }

@@ -323,6 +323,11 @@ public class TypeAliasItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER,
+				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(TypesPackage.Literals.TYPE__CONSTRAINT,
 				 TypesFactory.eINSTANCE.createTypeConstraint()));
 

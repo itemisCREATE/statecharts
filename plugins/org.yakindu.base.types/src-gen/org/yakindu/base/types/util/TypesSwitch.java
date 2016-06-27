@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Domain;
@@ -278,6 +279,13 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.ANNOTATABLE_ELEMENT: {
 				AnnotatableElement annotatableElement = (AnnotatableElement)theEObject;
 				T result = caseAnnotatableElement(annotatableElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.ARRAY_TYPE_SPECIFIER: {
+				ArrayTypeSpecifier arrayTypeSpecifier = (ArrayTypeSpecifier)theEObject;
+				T result = caseArrayTypeSpecifier(arrayTypeSpecifier);
+				if (result == null) result = caseTypeSpecifier(arrayTypeSpecifier);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -618,6 +626,21 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAnnotatableElement(AnnotatableElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Array Type Specifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Array Type Specifier</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArrayTypeSpecifier(ArrayTypeSpecifier object) {
 		return null;
 	}
 

@@ -237,6 +237,11 @@ public class DeclarationItemProvider extends ItemProviderAdapter implements IEdi
 			(createChildParameter
 				(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER,
 				 TypesFactory.eINSTANCE.createTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER,
+				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
 	}
 
 	/**

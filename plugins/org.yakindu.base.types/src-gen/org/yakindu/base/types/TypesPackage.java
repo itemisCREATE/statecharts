@@ -1473,6 +1473,52 @@ public interface TypesPackage extends EPackage {
 	int ANNOTATABLE_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.ArrayTypeSpecifierImpl <em>Array Type Specifier</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.ArrayTypeSpecifierImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getArrayTypeSpecifier()
+	 * @generated
+	 */
+	int ARRAY_TYPE_SPECIFIER = 22;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_TYPE_SPECIFIER__TYPE = TYPE_SPECIFIER__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_TYPE_SPECIFIER__TYPE_ARGUMENTS = TYPE_SPECIFIER__TYPE_ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_TYPE_SPECIFIER__SIZE = TYPE_SPECIFIER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Array Type Specifier</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_TYPE_SPECIFIER_FEATURE_COUNT = TYPE_SPECIFIER_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1480,7 +1526,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDirection()
 	 * @generated
 	 */
-	int DIRECTION = 22;
+	int DIRECTION = 23;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
@@ -2055,6 +2101,27 @@ public interface TypesPackage extends EPackage {
 	EReference getAnnotatableElement_Annotations();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.ArrayTypeSpecifier <em>Array Type Specifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Array Type Specifier</em>'.
+	 * @see org.yakindu.base.types.ArrayTypeSpecifier
+	 * @generated
+	 */
+	EClass getArrayTypeSpecifier();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.ArrayTypeSpecifier#getSize <em>Size</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Size</em>'.
+	 * @see org.yakindu.base.types.ArrayTypeSpecifier#getSize()
+	 * @see #getArrayTypeSpecifier()
+	 * @generated
+	 */
+	EAttribute getArrayTypeSpecifier_Size();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.types.Direction <em>Direction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2561,6 +2628,24 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ANNOTATABLE_ELEMENT__ANNOTATIONS = eINSTANCE.getAnnotatableElement_Annotations();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ArrayTypeSpecifierImpl <em>Array Type Specifier</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.ArrayTypeSpecifierImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getArrayTypeSpecifier()
+		 * @generated
+		 */
+		EClass ARRAY_TYPE_SPECIFIER = eINSTANCE.getArrayTypeSpecifier();
+
+		/**
+		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARRAY_TYPE_SPECIFIER__SIZE = eINSTANCE.getArrayTypeSpecifier_Size();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.

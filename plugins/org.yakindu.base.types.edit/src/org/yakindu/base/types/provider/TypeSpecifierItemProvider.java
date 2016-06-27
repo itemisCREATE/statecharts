@@ -176,6 +176,11 @@ public class TypeSpecifierItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.TYPE_SPECIFIER__TYPE_ARGUMENTS,
 				 TypesFactory.eINSTANCE.createTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPE_SPECIFIER__TYPE_ARGUMENTS,
+				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
 	}
 
 	/**
