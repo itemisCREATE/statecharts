@@ -143,14 +143,14 @@
                 <fileset dir="${src.dir}">
                     <include name="Part1-Installation-Guide/00_installation.textile" />
                     <include name="Part2-User-Guide/20_tutorial.textile" />
-                    <include name="${src.dir}/Part2-User-Guide/10_overview.textile" />
-                    <include name="${src.dir}/Part2-User-Guide/40_editing_statecharts.textile" />
-                    <include name="${src.dir}/Part2-User-Guide/50_simulating_statecharts.textile" />
-                    <include name="${src.dir}/advanced_simulation/advanced_simulation.textile" />
-                    <include name="${src.dir}/c-domain/c-domain.textile" />
-                    <include name="${src.dir}/Part2-User-Guide/30_statechart_language.textile" />
-                    <include name="${src.dir}/Part2-User-Guide/60_generating_code.textile" />
-                    <!-- <include name="${src.dir}/sctunit/sctunit.textile" /> -->
+                    <include name="Part2-User-Guide/10_overview.textile" />
+                    <include name="Part2-User-Guide/40_editing_statecharts.textile" />
+                    <include name="Part2-User-Guide/50_simulating_statecharts.textile" />
+                    <include name="advanced_simulation/advanced_simulation.textile" />
+                    <include name="c-domain/c-domain.textile" />
+                    <include name="Part2-User-Guide/30_statechart_language.textile" />
+                    <include name="Part2-User-Guide/60_generating_code.textile" />
+                    <!-- <include name="sctunit/sctunit.textile" /> -->
                 </fileset>
                 <stylesheet url="../${css.dir}/${css.root.file}" />
             </wikitext-to-eclipse-help>
