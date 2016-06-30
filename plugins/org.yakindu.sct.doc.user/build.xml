@@ -227,15 +227,15 @@
                      resource="org/eclipse/mylyn/wikitext/core/ant/tasks.properties" />
 
             <!-- Installation Guide -->
-            <create-hubspot-part name="YSCT-installation-guide" title="YAKINDU Statechart Tools Installation Guide">
+            <create-hubspot-part name="YSCT-installation" title="YAKINDU Statechart Tools Installation Guide">
                 <textile-files>
                     <filelist dir="${src.dir}">
-                        <file name="installation.textile" />
+                        <file name="installation/installation.textile" />
                     </filelist>
                 </textile-files>
                 <image-files>
                     <fileset dir="${src.dir}">
-                        <include name="images/**/*" />
+                        <include name="installation/images/**/*" />
                     </fileset>
                 </image-files>
             </create-hubspot-part>
@@ -244,12 +244,12 @@
             <create-hubspot-part name="YSCT-tutorials" title="YAKINDU Statechart Tools Tutorials">
                 <textile-files>
                     <filelist dir="${src.dir}">
-                        <file name="tutorial.textile" />
+                        <file name="tutorials/tutorials.textile" />
                     </filelist>
                 </textile-files>
                 <image-files>
                     <fileset dir="${src.dir}">
-                        <include name="images/**/*" />
+                        <include name="tutorials/images/**/*" />
                     </fileset>
                 </image-files>
             </create-hubspot-part>
@@ -257,20 +257,20 @@
             <!-- User Guide -->
             <create-hubspot-part name="YSCT-user-guide" title="YAKINDU Statechart Tools User Guide">
                 <textile-files>
-                    <filelist dir=".">
-                        <file name="${src.dir}/overview.textile" />
-                        <file name="${src.dir}/editing_statecharts.textile" />
-                        <file name="${src.dir}/simulating_statecharts.textile" />
-                        <file name="${src.dir}/advanced_simulation.textile" />
-                        <file name="${src.dir}/c-domain.textile" />
-                        <file name="${src.dir}/statechart_language.textile" />
-                        <file name="${src.dir}/generating_code.textile" />
-                        <!-- <file name="${src.dir}/sctunit.textile" /> -->
+                    <filelist dir="${src.dir}">
+                        <file name="user-guide/overview.textile" />
+                        <file name="user-guide/editing_statecharts.textile" />
+                        <file name="user-guide/simulating_statecharts.textile" />
+                        <file name="user-guide/advanced_simulation.textile" />
+                        <file name="user-guide/c-domain.textile" />
+                        <file name="user-guide/statechart_language.textile" />
+                        <file name="user-guide/generating_code.textile" />
+                        <!-- <file name="user-guide/sctunit.textile" /> -->
                     </filelist>
                 </textile-files>
                 <image-files>
-                    <fileset dir=".">
-                        <include name="${src.dir}/**/images/*" />
+                    <fileset dir="${src.dir}">
+                        <include name="user-guide/images/**/*" />
                     </fileset>
                 </image-files>
             </create-hubspot-part>
@@ -330,7 +330,7 @@
                 <stylesheet url="${css.dir}/${css.root.file}" />
             </wikitext-to-html>
 
-            <!-- Fragment replacements for Hubspot: -->
+            <!-- Load Hubspot fragments: -->
             <sequential unless:set="hubspot.local.files">
                 <loadfile property="hubspot.header" srcFile="${src.dir}/hubspot/header.htmlf" encoding="UTF-8" />
                 <loadfile property="hubspot.footer" srcFile="${src.dir}/hubspot/footer.htmlf" encoding="UTF-8" />
@@ -339,7 +339,7 @@
                           encoding="UTF-8" />
             </sequential>
 
-            <!-- Fragment replacements for generating local files which should look simular to Hubspot: -->
+            <!-- Load fragments for generating local files which should look simular to Hubspot: -->
             <sequential if:set="hubspot.local.files">
                 <loadfile property="hubspot.header"
                           srcFile="${src.dir}/hubspot/header.local.files.htmlf"
@@ -362,7 +362,7 @@
                 </fileset>
             </replaceregexp>
 
-            <!-- Replace relative image links by absolute ones, unless we are generating local files only: -->
+            <!-- Replace relative image links by absolute ones for Hubspot, unless we are generating local files: -->
             <replaceregexp byline="false"
                            flags="g"
                            match='src="images/'
@@ -373,7 +373,7 @@
                 </fileset>
             </replaceregexp>
 
-            <!-- Remove everything up to and including "<body>": -->
+            <!-- Replace everything up to and including "<body>" by Hubspot-specific header: -->
             <replaceregexp byline="false" flags="s" replace="${hubspot.header}">
                 <regexp pattern="^(.*)&lt;body&gt;" />
                 <fileset dir="${work.dir}">
@@ -381,7 +381,7 @@
                 </fileset>
             </replaceregexp>
 
-            <!-- Remove everything from and including "</body>": -->
+            <!-- Replace everything from and including "</body>" by Hubspot-specific footer: -->
             <replaceregexp byline="false" flags="s" replace="${hubspot.footer}">
                 <regexp pattern="&lt;/body&gt;(.*)$" />
                 <fileset dir="${work.dir}">
@@ -399,79 +399,15 @@
             </replaceregexp>
 
             <!-- Fix links: -->
-            <!-- Beware: this is a hack consisting of handcrafted replacement rules. -->
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;a href="../Part1-Installation-Guide/00_installation.html"&gt;'
-                           replace='&lt;a href="../installation/"&gt;'
-                           unless:set="hubspot.local.files">
-                <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
-                </fileset>
-            </replaceregexp>
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;a href="00_installation.html#installation-guide"&gt;'
-                           replace='&lt;a href="../installation/"&gt;'
-                           unless:set="hubspot.local.files">
-                <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
-                </fileset>
-            </replaceregexp>
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;a href="20_tutorial.html#simulating-the-light-switch-model"&gt;'
-                           replace='&lt;a href="tutorials/#simulating-the-light-switch-model"&gt;'
-                           unless:set="hubspot.local.files">
-                <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
-                </fileset>
-            </replaceregexp>
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;a href="00_installation.html#installation-guide"&gt;'
-                           replace='&lt;a href="../installation/"&gt;'
-                           unless:set="hubspot.local.files">
-                <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
-                </fileset>
-            </replaceregexp>
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;a href="documentation.html#internal-scope"&gt;'
-                           replace='&lt;a href="../#internal-scope"&gt;'
-                           unless:set="hubspot.local.files">
-                <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
-                </fileset>
-            </replaceregexp>
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;a href="../Part2-User-Guide/20_tutorial.html#oss_comprehensive-tutorial"&gt;'
-                           replace='&lt;a href="../tutorials/#oss_comprehensive-tutorial"&gt;'
-                           unless:set="hubspot.local.files">
-                <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
-                </fileset>
-            </replaceregexp>
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;a href=""&gt;'
-                           replace='&lt;a href=""&gt;'
-                           unless:set="hubspot.local.files">
-                <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
-                </fileset>
-            </replaceregexp>
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;a href="30_statechart_language.html(#.*)"&gt;'
-                           replace='&lt;a href="\1"&gt;'
-                           unless:set="hubspot.local.files">
-                <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
-                </fileset>
-            </replaceregexp>
+            <adjust-hubspot-document-links document.dir.name="tutorials"
+                                           work.dir="${work.dir}"
+                                           html.file="${index.html}" />
+            <adjust-hubspot-document-links document.dir.name="user-guide"
+                                           work.dir="${work.dir}"
+                                           html.file="${index.html}" />
+            <adjust-hubspot-document-links document.dir.name="installation"
+                                           work.dir="${work.dir}"
+                                           html.file="${index.html}" />
 
             <!-- Fix "pro-feature" elements -->
             <replaceregexp byline="false"
@@ -508,6 +444,36 @@
             </delete>
         </sequential>
 
+    </macrodef>
+
+    <!-- Adjusts links in the generated HTML document for Hubspot or a local sort of equivalent. -->
+    <macrodef name="adjust-hubspot-document-links"
+              description="Adjusts links in the generated HTML document for Hubspot or a local sort of equivalent.">
+        <attribute name="work.dir" />
+        <attribute name="html.file" />
+        <attribute name="document.dir.name" />
+
+        <sequential>
+            <replaceregexp byline="false"
+                           flags="g"
+                           match='&lt;a href="(\.\./@{document.dir.name})/.+\.html(.*)"&gt;'
+                           replace='&lt;a href="\1/\2"&gt;'
+                           unless:set="hubspot.local.files">
+                <fileset dir="@{work.dir}">
+                    <include name="@{html.file}" />
+                </fileset>
+            </replaceregexp>
+            <replaceregexp byline="false"
+                           flags="g"
+                           match='&lt;a href="\.\.(/@{document.dir.name})/.+\.html(.*)"&gt;'
+                           replace='&lt;a href="YSCT-@{document.dir.name}.html\2"&gt;'
+                           if:set="hubspot.local.files">
+                <fileset dir="@{work.dir}">
+                    <include name="@{html.file}" />
+                </fileset>
+            </replaceregexp>
+
+        </sequential>
     </macrodef>
 
 </project>

@@ -48,7 +48,7 @@ h3(#transition). Transition
 
 A transition is the transfer of one state to another. Transitions are diagrammed as arrows. They can have events and actions, but don't need to.
 
-The syntax of events and actions is defined by a "textual description language":#the-statechart-language. Please refer to section "Events":#events of this documentation for more details! For more details on actions please see chapter "Actions":#reaction-triggers.
+The syntax of events and actions is defined by a "textual description language":#the-statechart-language. Please refer to "section &quot;Events&quot;":#events for more details. "Section &quot;Reaction triggers&quot;":#reaction-triggers has more on actions.
 
 If a state has more than a single outgoing transition without event, then among those transitions the one that has been modeled first will be carried out.
 
