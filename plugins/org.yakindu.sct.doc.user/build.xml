@@ -129,6 +129,27 @@
             <taskdef classpathref="wikitext.classpath"
                      resource="org/eclipse/mylyn/wikitext/core/ant/tasks.properties" />
 
+            <!-- Textile source files to turn into HTML: -->
+            <fileset id="fileset.eclipsehelp" dir="${src.dir}">
+                <include name="installation/installation.textile" />
+                <include name="tutorials/tutorials.textile" />
+                <include name="user-guide/overview.textile" />
+                <include name="user-guide/editing_statecharts.textile" />
+                <include name="user-guide/simulating_statecharts.textile" />
+                <include name="user-guide/advanced_simulation.textile" />
+                <include name="user-guide/c-domain.textile" />
+                <include name="user-guide/statechart_language.textile" />
+                <include name="user-guide/generating_code.textile" />
+                <!-- <include name="user-guide/sctunit.textile" /> -->
+            </fileset>
+
+            <!-- Check whether we have all the expected textile source files – no more, no less: -->
+            <fail message="Number of textile source file(s) doesn't match.">
+                <condition>
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="9" />
+                </condition>
+            </fail>
+
             <!-- Convert textile source files to HTML: -->
             <wikitext-to-eclipse-help markupLanguage="Textile"
                                       multipleOutputFiles="false"
@@ -136,22 +157,11 @@
                                       formatoutput="true"
                                       validate="true"
                                       failOnValidationError="true"
-                                      failOnValidationWarning="false"
+                                      failOnValidationWarning="true"
                                       sourceEncoding="UTF-8"
                                       title="YAKINDU Statechart Tools"
                                       helpPrefix="${help.dir}">
-                <fileset dir="${src.dir}">
-                    <include name="Part1-Installation-Guide/00_installation.textile" />
-                    <include name="Part2-User-Guide/20_tutorial.textile" />
-                    <include name="Part2-User-Guide/10_overview.textile" />
-                    <include name="Part2-User-Guide/40_editing_statecharts.textile" />
-                    <include name="Part2-User-Guide/50_simulating_statecharts.textile" />
-                    <include name="advanced_simulation/advanced_simulation.textile" />
-                    <include name="c-domain/c-domain.textile" />
-                    <include name="Part2-User-Guide/30_statechart_language.textile" />
-                    <include name="Part2-User-Guide/60_generating_code.textile" />
-                    <!-- <include name="sctunit/sctunit.textile" /> -->
-                </fileset>
+                <fileset refid="fileset.eclipsehelp" />
                 <stylesheet url="../${css.dir}/${css.root.file}" />
             </wikitext-to-eclipse-help>
 
@@ -220,12 +230,12 @@
             <create-hubspot-part name="YSCT-installation-guide" title="YAKINDU Statechart Tools Installation Guide">
                 <textile-files>
                     <filelist dir="${src.dir}">
-                        <file name="Part1-Installation-Guide/00_installation.textile" />
+                        <file name="installation.textile" />
                     </filelist>
                 </textile-files>
                 <image-files>
                     <fileset dir="${src.dir}">
-                        <include name="Part1-Installation-Guide/images/**/*" />
+                        <include name="images/**/*" />
                     </fileset>
                 </image-files>
             </create-hubspot-part>
@@ -234,12 +244,12 @@
             <create-hubspot-part name="YSCT-tutorials" title="YAKINDU Statechart Tools Tutorials">
                 <textile-files>
                     <filelist dir="${src.dir}">
-                        <file name="Part2-User-Guide/20_tutorial.textile" />
+                        <file name="tutorial.textile" />
                     </filelist>
                 </textile-files>
                 <image-files>
                     <fileset dir="${src.dir}">
-                        <include name="Part2-User-Guide/images/**/*" />
+                        <include name="images/**/*" />
                     </fileset>
                 </image-files>
             </create-hubspot-part>
@@ -248,14 +258,14 @@
             <create-hubspot-part name="YSCT-user-guide" title="YAKINDU Statechart Tools User Guide">
                 <textile-files>
                     <filelist dir=".">
-                        <file name="${src.dir}/Part2-User-Guide/10_overview.textile" />
-                        <file name="${src.dir}/Part2-User-Guide/40_editing_statecharts.textile" />
-                        <file name="${src.dir}/Part2-User-Guide/50_simulating_statecharts.textile" />
-                        <file name="${src.dir}/advanced_simulation/advanced_simulation.textile" />
-                        <file name="${src.dir}/c-domain/c-domain.textile" />
-                        <file name="${src.dir}/Part2-User-Guide/30_statechart_language.textile" />
-                        <file name="${src.dir}/Part2-User-Guide/60_generating_code.textile" />
-                        <!-- <file name="${src.dir}/sctunit/sctunit.textile" /> -->
+                        <file name="${src.dir}/overview.textile" />
+                        <file name="${src.dir}/editing_statecharts.textile" />
+                        <file name="${src.dir}/simulating_statecharts.textile" />
+                        <file name="${src.dir}/advanced_simulation.textile" />
+                        <file name="${src.dir}/c-domain.textile" />
+                        <file name="${src.dir}/statechart_language.textile" />
+                        <file name="${src.dir}/generating_code.textile" />
+                        <!-- <file name="${src.dir}/sctunit.textile" /> -->
                     </filelist>
                 </textile-files>
                 <image-files>
@@ -322,23 +332,23 @@
 
             <!-- Fragment replacements for Hubspot: -->
             <sequential unless:set="hubspot.local.files">
-                <loadfile property="hubspot.header" srcFile="${src.dir}/hubspot.header.htmlf" encoding="UTF-8" />
-                <loadfile property="hubspot.footer" srcFile="${src.dir}/hubspot.footer.htmlf" encoding="UTF-8" />
+                <loadfile property="hubspot.header" srcFile="${src.dir}/hubspot/header.htmlf" encoding="UTF-8" />
+                <loadfile property="hubspot.footer" srcFile="${src.dir}/hubspot/footer.htmlf" encoding="UTF-8" />
                 <loadfile property="hubspot.calltoaction.download"
-                          srcFile="${src.dir}/hubspot.calltoaction.download.htmlf"
+                          srcFile="${src.dir}/hubspot/calltoaction.download.htmlf"
                           encoding="UTF-8" />
             </sequential>
 
             <!-- Fragment replacements for generating local files which should look simular to Hubspot: -->
             <sequential if:set="hubspot.local.files">
                 <loadfile property="hubspot.header"
-                          srcFile="${src.dir}/hubspot.header.local.files.htmlf"
+                          srcFile="${src.dir}/hubspot/header.local.files.htmlf"
                           encoding="UTF-8" />
                 <loadfile property="hubspot.footer"
-                          srcFile="${src.dir}/hubspot.footer.local.files.htmlf"
+                          srcFile="${src.dir}/hubspot/footer.local.files.htmlf"
                           encoding="UTF-8" />
                 <loadfile property="hubspot.calltoaction.download"
-                          srcFile="${src.dir}/hubspot.calltoaction.download.local.files.htmlf"
+                          srcFile="${src.dir}/hubspot/calltoaction.download.local.files.htmlf"
                           encoding="UTF-8" />
             </sequential>
 

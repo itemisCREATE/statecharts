@@ -58,7 +58,7 @@ _SC Modeling_ is an Eclipse perspective supporting the modeling of statecharts. 
 
 h3(#canvas). Canvas
 
-The canvas is the statechart editor's drawing area. When you create a new statechart model, the canvas comprises the definition section and a single "region":30_statechart_language#region.
+The canvas is the statechart editor's drawing area. When you create a new statechart model, the canvas comprises the definition section and a single "region":../user-guide/statechart_language#region.
 
 The following list gives an overview of what kind of actions you can perform on the canvas:
 * Add or remove a region
@@ -74,34 +74,34 @@ The editor palette provides you with a set of various actions and statechart edi
 
 You can hide the palette by clicking on the small triangle in the palette's title bar. Click on the triangle again to make the palette reappear.
 
-!(standard-image)images/editor-palette_010_overview.png(Editor palette)!
+!(standard-image)images/docu_editor-palette_010_overview.png(Editor palette)!
 
 p=. Editor palette
 
 h4(#oss-editing-action-tools). Editing action tools
 
 Below its title bar, the palette contains a toolbar with the following editing action tools (from left to right):
-| !images/editor-palette_020_symbol_select.png(Editor palette symbol "Select")! | Select | |
-| !images/editor-palette_030_symbol_zoom_in.png(Editor palette symbol "Zoom in")! | Zoom in | Left-click to zoom in. Press @[Shift]@ and left-click to zoom out. Drag to zoom to selection. |
-| !images/editor-palette_040_symbol_zoom_out.png(Editor palette symbol "Zoom out")! | Zoom out | Left-click to zoom out. Press @[Shift]@ and left-click to zoom in. |
-| !images/editor-palette_070_symbol_note.png(Editor palette symbol "Note")! | Note | Create a note, a text or a note attachment. |
+| !images/docu_editor-palette_020_symbol_select.png(Editor palette symbol "Select")! | Select | |
+| !images/docu_editor-palette_030_symbol_zoom_in.png(Editor palette symbol "Zoom in")! | Zoom in | Left-click to zoom in. Press @[Shift]@ and left-click to zoom out. Drag to zoom to selection. |
+| !images/docu_editor-palette_040_symbol_zoom_out.png(Editor palette symbol "Zoom out")! | Zoom out | Left-click to zoom out. Press @[Shift]@ and left-click to zoom in. |
+| !images/docu_editor-palette_070_symbol_note.png(Editor palette symbol "Note")! | Note | Create a note, a text or a note attachment. |
 
 h4(#oss-statechart-elements-tools). Statechart elements tools
 
 The palette comprises a couple of tools serving to add statechart elements to the diagram (from top to bottom):
 
-| !images/editor-palette_210_tool_transition.png(Editor palette element tool "Transition")! |
-| !images/editor-palette_220_tool_state.png(Editor palette element tool "State")! |
-| !images/editor-palette_230_tool_composite_state.png(Editor palette element tool "Composite state")! |
-| !images/editor-palette_240_tool_orthogonal_state.png(Editor palette element tool "Orthogonal state")! |
-| !images/editor-palette_250_tool_region.png(Editor palette element tool "Region")! |
-| !images/editor-palette_260_tool_entry.png(Editor palette element tool "Entry")! |
-| !images/editor-palette_270_tool_shallow_history.png(Editor palette element tool "Shallow history")! |
-| !images/editor-palette_280_tool_deep_history.png(Editor palette element tool "Deep history")! |
-| !images/editor-palette_290_tool_final_state.png(Editor palette element tool "Final state")! |
-| !images/editor-palette_300_tool_exit_node.png(Editor palette element tool "Exit node")! |
-| !images/editor-palette_310_tool_choice.png(Editor palette element tool "Choice")! |
-| !images/editor-palette_320_tool_synchronization.png(Editor palette element tool "Synchronization")! |
+| !images/docu_editor-palette_210_tool_transition.png(Editor palette element tool "Transition")! |
+| !images/docu_editor-palette_220_tool_state.png(Editor palette element tool "State")! |
+| !images/docu_editor-palette_230_tool_composite_state.png(Editor palette element tool "Composite state")! |
+| !images/docu_editor-palette_240_tool_orthogonal_state.png(Editor palette element tool "Orthogonal state")! |
+| !images/docu_editor-palette_250_tool_region.png(Editor palette element tool "Region")! |
+| !images/docu_editor-palette_260_tool_entry.png(Editor palette element tool "Entry")! |
+| !images/docu_editor-palette_270_tool_shallow_history.png(Editor palette element tool "Shallow history")! |
+| !images/docu_editor-palette_280_tool_deep_history.png(Editor palette element tool "Deep history")! |
+| !images/docu_editor-palette_290_tool_final_state.png(Editor palette element tool "Final state")! |
+| !images/docu_editor-palette_300_tool_exit_node.png(Editor palette element tool "Exit node")! |
+| !images/docu_editor-palette_310_tool_choice.png(Editor palette element tool "Choice")! |
+| !images/docu_editor-palette_320_tool_synchronization.png(Editor palette element tool "Synchronization")! |
 
 h3(#outline-view). Outline view
 
@@ -163,7 +163,7 @@ You can change the name of a region in the statechart editor as well as in the p
 
 h2(#editing-hierarchies). Editing hierarchies
 
-Statecharts can get rather big and complex. *"Composite states":30_statechart_language#composite-state* are a way to reduce complexity and thus make statecharts easier to create, comprehend and maintain. A composite state comprises a state machine of its own within a "region":30_statechart_language#region. The states belonging to such a nested state machine are called *substates*. *"Orthogonal states":30_statechart_language#orthogonal-states* are a generalization of composite states, comprising two or more independent state machines in separate regions that are executed in parallel.
+Statecharts can get rather big and complex. *"Composite states":../user-guide/statechart_language#composite-state* are a way to reduce complexity and thus make statecharts easier to create, comprehend and maintain. A composite state comprises a state machine of its own within a "region":../user-guide/statechart_language#region. The states belonging to such a nested state machine are called *substates*. *"Orthogonal states":../user-guide/statechart_language#orthogonal-states* are a generalization of composite states, comprising two or more independent state machines in separate regions that are executed in parallel.
 
 A complementary way to mitigate size are *subdiagrams*. A subdiagram externalizes the possibly large region(s) contained by a composite state into a subdiagram. In this case the composite state no longer displays its substates. Instead it is visualized very similar to a regular state, aside from a small label marking it as a composite state and giving access to its internal structure: the subdiagram. In this way a composite state consumes much less space and gives the user the opportunity to better see the overall picture. Section "Using subdiagrams":#using-subdiagrams explains how to work with subdiagrams, how to create them and how to inline them again, if needed.
 
@@ -175,7 +175,7 @@ h2(#using-subdiagrams). Using subdiagrams
 
 When using composite states, a statechart model may easily become too big to give a comprehensive overview of the whole diagram. Subdiagrams come as a solution.
 
-!(standard-image)images/subdiagram_010_inline.png(Composite state)!
+!(standard-image)images/docu_subdiagram_010_inline.png(Composite state)!
 
 p=. Composite state
 
@@ -183,13 +183,13 @@ When the _Extract Subdiagram_ "refactoring":#refactorings is executed on a compo
 
 Extracting a subdiagram creates entry and exit nodes in the subdiagram as needed.
 
-!(standard-image)images/subdiagram_020_preview.png(Subdiagram popup window)!
+!(standard-image)images/docu_subdiagram_020_preview.png(Subdiagram popup window)!
 
 p=. Subdiagram popup window
 
 A click on the decorator opens the subdiagram in a separate editor tab. The breadcrumb at the top allows easy navigation throughout the hierachy levels.
 
-!(standard-image)images/subdiagram_030_subdiagram-editor.png(Subdiagram editor)!
+!(standard-image)images/docu_subdiagram_030_subdiagram-editor.png(Subdiagram editor)!
 
 p=. Subdiagram editor
 
@@ -206,7 +206,7 @@ Using the _Rename_ refactoring, you can change the name of a variable, event or 
 
 To initiate renaming, right-click on the name of a variable, event or interface in the diagram editor, in the definition section, or in a text field in the _Properties_ view, then select _Rename …_.
 
-!(standard-image)images/refactoring-rename_010_renaming-variable.png(Renaming a variable)!
+!(standard-image)images/docu_refactoring-rename_010_renaming-variable.png(Renaming a variable)!
 
 p=. Renaming a variable
 
@@ -220,7 +220,7 @@ The _Fold Incoming Actions_ refactoring moves these actions from the transitions
 
 Consider the following model:
 
-!(standard-image)images/refactoring-fold-incoming-actions_010_example_01.png(Moving incoming actions to entry block)!
+!(standard-image)images/docu_refactoring-fold-incoming-actions_010_example_01.png(Moving incoming actions to entry block)!
 
 p=. Moving incoming actions to entry block
 
@@ -228,7 +228,7 @@ Only the most-right action _y += 42_ can be moved to the entry block of the targ
 
 Another aspect to take into account are transitions leading to target states that are nested in composite states. Consider the following example:
 
-!(standard-image)images/refactoring-fold-incoming-actions_020_example_02.png(Moving incoming actions into a nested state's entry block)!
+!(standard-image)images/docu_refactoring-fold-incoming-actions_020_example_02.png(Moving incoming actions into a nested state's entry block)!
 
 p=. Moving incoming actions into a nested state's entry block
 
@@ -242,7 +242,7 @@ The _Fold Outgoing Actions_ refactoring is similar to "folding incoming actions"
 
 Preconditions for this refactoring are analog to "&quot;Folding incoming actions&quot;":#folding-incoming-actions. Consider the following example:
 
-!(standard-image)images/refactoring-fold-outgoing-actions_010_example_01.png(Moving outgoing actions to exit block)!
+!(standard-image)images/docu_refactoring-fold-outgoing-actions_010_example_01.png(Moving outgoing actions to exit block)!
 
 p=. Moving outgoing actions to exit block
 
@@ -264,7 +264,7 @@ This refactoring is the reverse of "folding outgoing actions":#folding-outgoing-
 
 Transitions crossing the borders of composite states enclosing the source state might inhibit refactoring. Consider the following example:
 
-!(standard-image)images/refactoring-unfold-outgoing-actions_010_example_01.png(Unfolding exit actions to outgoing transitions)!
+!(standard-image)images/docu_refactoring-unfold-outgoing-actions_010_example_01.png(Unfolding exit actions to outgoing transitions)!
 
 p=. Unfolding exit actions to outgoing transitions
 
@@ -319,7 +319,7 @@ The statechart editor allows for comparing two or even three statecharts to each
 
 p(#oss_fig_comparing_two_statecharts). 
 
-!(standard-image)images/comparing_statecharts_010_result.png(Comparing two statecharts)!
+!(standard-image)images/docu_comparing_statecharts_010_result.png(Comparing two statecharts)!
 
 p=. Comparing two statecharts
 
@@ -352,13 +352,13 @@ A statechart can be saved as an image file as shown in the following steps:
 
 In the statechart editor, right-click on the main region. The context menu appears.
 
-!(standard-image)images/exporting_statechart_as_image_010_save_as_menu_item.png(Selecting the "Save As Image File..." menu item)!
+!(standard-image)images/docu_exporting_statechart_as_image_010_save_as_menu_item.png(Selecting the "Save As Image File..." menu item)!
 
 p=. Selecting the "Save As Image File..." menu item
 
 In the context menu, select File → Save As Image File.... The _Save As Image_ dialog appears.
 
-!(standard-image)images/exporting_statechart_as_image_020_save_as_dialog.png(The "Save As Image File" dialog)!
+!(standard-image)images/docu_exporting_statechart_as_image_020_save_as_dialog.png(The "Save As Image File" dialog)!
 
 p=. The "Save As Image File" dialog
 
@@ -393,7 +393,7 @@ The nice thing is that you don't have to remember all the places you took a note
 
 p(#oss_fig_tasks-defined-by-tags-in-the-statechart-showing-up-in-the-tasks-view). 
 
-!(standard-image)images/task_tags_010_task_view.png(Tasks defined by tags in the statechart showing up in the _Tasks_ view)!
+!(standard-image)images/docu_task_tags_010_task_view.png(Tasks defined by tags in the statechart showing up in the _Tasks_ view)!
 
 p=. Tasks defined by tags in the statechart showing up in the _Tasks_ view
 

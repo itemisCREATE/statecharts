@@ -11,7 +11,7 @@ The statechart tools are a central part of YAKINDU: the modular toolkit for mode
 
 The following graph shows these features and their relation to each other:
 
-!(standard-image)images/YAKINDU_features.png(Features of YAKINDU Statechart Tools)!
+!(standard-image)images/docu_YAKINDU_features.png(Features of YAKINDU Statechart Tools)!
 
 p=. Features of YAKINDU Statechart Tools
 

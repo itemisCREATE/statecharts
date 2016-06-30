@@ -36,7 +36,7 @@ h3(#region). Region
 
 As already mentioned, the YAKINDU statecharts are self-contained. They are organized in regions. Due to this it is possible to organize multiple state machines in different regions and to run them concurrently.
 
-!(standard-image)images/parallelRegions.jpg(Parallel regions)!
+!(standard-image)images/docu_parallelRegions.jpg(Parallel regions)!
 
 p=. Parallel regions
 
@@ -61,7 +61,7 @@ An entry has a single outgoing transistion and no incoming ones. Its outgoing tr
 An entry is depicted as a filled circle, see "figure &quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
 
 p(#fig_state_entry_exit_final_explained). 
-!(standard-image)images/state_entry_exit_final_explained.png(Entry, exit, and final state)!
+!(standard-image)images/docu_state_entry_exit_final_explained.png(Entry, exit, and final state)!
 
 p=. Entry, exit, and final state
 
@@ -86,7 +86,7 @@ Named entries have no equivalent in the UML.
 The sample statechart in "Figure &quot;Entry state&quot;":#fig_state_entry has a composite state named _Handle result_. This composite state has a default entry as well as an entry called _failure_. If state _A_ is active and the _error_ trigger fires, control is transitioned to the _Handle result_ composite state. The notation @error # >failure@ specifies that the _failure_ entry is to be used.
 
 p(#fig_state_entry). 
-!(standard-image)images/state_entry.png(Entry state)!
+!(standard-image)images/docu_state_entry.png(Entry state)!
 
 p=. Entry state
 
@@ -125,13 +125,13 @@ The order of exit and entry points in a transition specification is irrelevant. 
 Alternatively, _Process_ could have been modeled with two different error exit states, say _error&#95;1_ and _error&#95;2_. This would allow to respond differently to different error conditions, while still enabling to catch them both with a single flow. A transition with @# >error_1 >error_2 problem>@ would do so.
 
 p(#fig_state_entry_exit). 
-!(standard-image)images/state_entry_exit.png(Entries and exits)!
+!(standard-image)images/docu_state_entry_exit.png(Entries and exits)!
 
 p=. Entries and exits
 
 h3(#final). Final state
 
-A _final state_ denotes the end of the execution flow of a state machine or region. See "section &quot;Exit state&quot;":#exit for a different way to terminate a composite state.
+A _final state_ denotes the end of the execution flow of a state machine or region. See "section &quot;Exit&quot;":#exit for a different way to terminate a composite state.
 
 A final state is depicted as an unfilled circle with a smaller filled black circle inside, see "figure &quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
 
@@ -139,7 +139,7 @@ A final state can have multiple incoming transitions and has no outgoing ones.
 
 Within a region, only a single final state is allowed, but each region may have its own final state.
 
-When a region reaches its final state, control stops there and waits until all other orthogonal regions, if any, have reached their respective final states, too. The semantics of final states is different from that of exits; please see "section &quot;Exit state&quot;":#exit for details.
+When a region reaches its final state, control stops there and waits until all other orthogonal regions, if any, have reached their respective final states, too. The semantics of final states is different from that of exits; please see "section &quot;Exit&quot;":#exit for details.
 
 bq.. *Note*
 
@@ -165,7 +165,7 @@ A synchronization state is shown as a thick horizontal or vertical line, as can 
 
 p(#fig_state_synchronization). 
 
-!(standard-image)images/state_synchronization.png(Synchronization state)!
+!(standard-image)images/docu_state_synchronization.png(Synchronization state)!
 
 p=. Synchronization state
 
@@ -175,7 +175,7 @@ For a synchronization to actually join the incoming transitions and execute the 
 * All guard conditions that are specified must be fulfilled.
 * If one or more triggers are defined, at least one trigger must fire at a point in time while the conditions above are met.
 
-"Synchronization state":#fig_state_synchronization shows an sample statechart containing a forking and a joining synchronization. After having left the @Initialize@ state, the synchronization state forks the execution flow into two regions @r1@ and @r2@. Both are part of the @Process@ composite state and both are executed in parallel. That is, when activating @Process@, the substates @Line A 1@ and @Line B 1@ also become active. When the flows continues and both @Line A 2@ and @Line B 2@ have been reached, the synchronization state on the right-hand side joins the flows and transitions to substates @Cleanup@, making it the active state. However, as long as only one of them is active, the synchronization will wait for the other one to also become active before proceeding to @Process@.
+"Figure &quot;Synchronization state&quot;":#fig_state_synchronization shows a sample statechart containing a forking and a joining synchronization. After having left the @Initialize@ state, the synchronization state forks the execution flow into two regions @r1@ and @r2@. Both are part of the @Process@ composite state and both are executed in parallel. That is, when activating @Process@, the substates @Line A 1@ and @Line B 1@ also become active. When the flows continues and both @Line A 2@ and @Line B 2@ have been reached, the synchronization state on the right-hand side joins the flows and transitions to substates @Cleanup@, making it the active state. However, as long as only one of them is active, the synchronization will wait for the other one to also become active before proceeding to @Process@.
 
 The example also demonstrates different lengths and orientations of the synchronization symbol. In the statechart editor, first select the synchronization symbol, the use a handle in one of the symbol's corners to change length or orientation. The handles in the middle of the symbol have no effect.
 
@@ -191,7 +191,7 @@ h3(#orthogonal-states). Orthogonal states
 
 In the context of state machines orthogonal states are states that are independent of each other. The presumably most famous example is the keyboard example:
 
-!(standard-image)images/orthogonalState_example.jpg(Orthogonal states)!
+!(standard-image)images/docu_orthogonalState_example.jpg(Orthogonal states)!
 
 p=. Orthogonal states
 
@@ -201,17 +201,17 @@ The shallow history state is a pseudo state that is placed inside regions of com
 
 The following example, showing the answering of a questionaire, explains this:
 
-!(standard-image)images/shallowHistory01.jpg(Shallow history [1])!
+!(standard-image)images/docu_shallowHistory01.jpg(Shallow history [1])!
 
 p=. Shallow history &#91;1]
 
 Particularly interesting in this statechart are the events @checkProgress@ and @goon@. The event @checkProgress@ jumps back to the @init@ state while assigning the current progress count to the variable @temp@. The event @goon@ jumps to the shallow history state that was placed inside the composite state.
 
-!(standard-image)images/shallowHistory02.jpg(Shallow history [2])!
+!(standard-image)images/docu_shallowHistory02.jpg(Shallow history [2])!
 
 p=. Shallow history &#91;2]
 
-!(standard-image)images/shallowHistory03.jpg(Shallow history [3])!
+!(standard-image)images/docu_shallowHistory03.jpg(Shallow history [3])!
 
 p=. Shallow history &#91;3]
 
