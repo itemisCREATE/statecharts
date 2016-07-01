@@ -28,13 +28,11 @@
 			label="YAKINDU Statechart Tools">
 			<link label="Tutorials" url="http://statecharts.org/documentation/tutorials/"
 				id="yakindu-tutorials-link" style-id="content-link">
-				<text>Read the tutorials …
-				</text>
+				<text>Read the tutorials …</text>
 			</link>
 			<link label="User Group" url="https://groups.google.com/forum/embed/?place=forum/yakindu-user#!forum/yakindu-user"
 				id="yakindu-user-forum-link" style-id="content-link">
-				<text>Visit the SCT user group …
-				</text>
+				<text>Visit the SCT user group …</text>
 			</link>
 		</group>
 	</extensionContent>
