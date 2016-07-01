@@ -31,10 +31,9 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.ComplexType;
-import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Type;
-import org.yakindu.base.types.TypeAlias;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -57,6 +56,9 @@ import com.google.inject.Inject;
  */
 public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
+	@Inject
+	private ITypeSystemInferrer typeInferrer;
+	
 	private static class ErrorHandlerDelegate<T> implements ErrorHandler<T> {
 
 		private ErrorHandler<T> delegate;
@@ -99,7 +101,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 	 * Scoping for types and taking imported namespaces into account e.g. in
 	 * variable declarations.
 	 */
-	public IScope scope_TypedElement_type(final EObject context, EReference reference) {
+	public IScope scope_TypeSpecifier_type(final EObject context, EReference reference) {
 		IScope scope = getDelegate().getScope(context, reference);
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
 		return new FilteringScope(scope, predicate);
@@ -131,36 +133,16 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
 		if (element instanceof Scope) {
 			scope = Scopes.scopeFor(((Scope) element).getDeclarations());
-			scope = new FilteringScope(scope, predicate);
+			return new FilteringScope(scope, predicate);
 		}
 
-		if (element instanceof ComplexType) {
-			scope = addScopeForComplexType((ComplexType) element, scope, predicate);
+		Type ownerType = typeInferrer.inferType(owner, null);
+		if (ownerType instanceof ComplexType) {
+			return addScopeForComplexType((ComplexType) ownerType, scope, predicate);
 		}
-
-		// enumerators can be either within enum types or an type alias that refers to an enum type
-		if (element instanceof EnumerationType) {
-			return addScopeForEnumType((EnumerationType) element, scope, predicate);
+		if (ownerType instanceof EnumerationType) {
+			return addScopeForEnumType((EnumerationType) ownerType, scope, predicate);
 		}
-		if (element instanceof TypeAlias) {
-			Type originType = ((TypeAlias) element).getOriginType();
-			if (originType instanceof EnumerationType) {
-				return addScopeForEnumType((EnumerationType) originType, scope, predicate);
-			}
-		}
-		
-		if (element instanceof Declaration) {
-			Declaration decl = (Declaration) element;
-			if (decl.getType() instanceof ComplexType) {
-				scope = addScopeForComplexType((ComplexType) decl.getType(), scope, predicate);
-			} else if (decl.getType() instanceof TypeAlias) {
-				Type originType = ((TypeAlias) decl.getType()).getOriginType();
-				if (originType instanceof ComplexType) {
-					scope = addScopeForComplexType((ComplexType) originType, scope, predicate);
-				}
-			}
-		}
-		
 		return scope;
 	}
 
