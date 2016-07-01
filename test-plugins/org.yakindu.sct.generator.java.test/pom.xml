@@ -28,7 +28,7 @@
 					<useUIHarness>false</useUIHarness>
 					<useUIThread>false</useUIThread>
 					<testFailureIgnore>${testFailureIgnore}</testFailureIgnore>
-					<argLine>${argLine} ${test.vmargs}</argLine>
+					<argLine>${test.vmargs}</argLine>
 				</configuration>
 			</plugin>
 			
