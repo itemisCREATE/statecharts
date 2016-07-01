@@ -49,3 +49,5 @@ deploy:
   on:
     tags: Yakindu/statecharts
     condition: "$TRAVIS_TAG =~ ^release.*$"
+after_success:
+  - bash <(curl -s https://codecov.io/bash)   
