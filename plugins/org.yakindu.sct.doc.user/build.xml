@@ -24,7 +24,7 @@
 
     <!-- Target directories for various output formats: -->
     <property name="help.dir" value="help" />
-    <property name="hubspot.dir" value="hubspot" />
+    <property name="website.dir" value="website" />
     <property name="pdf.dir" value="pdf" />
     <property name="epub.dir" value="epub" />
 
@@ -59,7 +59,7 @@
         <delete includeemptydirs="true" failonerror="false">
             <fileset dir="${basedir}" defaultexcludes="false">
                 <include name="${help.dir}/**" />
-                <include name="${hubspot.dir}/**" />
+                <include name="${website.dir}/**" />
                 <include name="${pdf.dir}/**" />
                 <include name="${epub.dir}/**" />
             </fileset>
@@ -117,7 +117,7 @@
     <!-- Generates the documentation in all supported formats. -->
     <target name="generate.all"
             description="Generates the documentation in all supported formats."
-            depends="generate.eclipsehelp, generate.hubspot" />
+            depends="generate.eclipsehelp, generate.website" />
 
 
     <!-- Generates the documentation as Eclipse help. -->
@@ -209,17 +209,17 @@
     <!-- Generates the documentation as various HTML files, each being composed of selected sections. Each part has a
          name and a title, and consists of a set of source files. The generated documentation structure looks like this:
 
-         hubspot
-             installation-guide.html
-             user-guide.html
-             tutorials.html
+         website
+             YCST-installation.html
+             YCST-user-guide.html
+             YCST-tutorials.html
              css/style.css
                  …
              images/…
     -->
 
-    <target name="generate.hubspot"
-            description="Generates the documentation as various HTML files for hubspot, each being composed of selected sections."
+    <target name="generate.website"
+            description="Generates the documentation as various HTML files for the website, each being composed of selected sections."
             depends="init.wikitext">
 
         <sequential>
@@ -227,7 +227,7 @@
                      resource="org/eclipse/mylyn/wikitext/core/ant/tasks.properties" />
 
             <!-- Installation Guide -->
-            <create-hubspot-part name="YSCT-installation" title="YAKINDU Statechart Tools Installation Guide">
+            <create-website-part name="YSCT-installation" title="YAKINDU Statechart Tools Installation Guide">
                 <textile-files>
                     <filelist dir="${src.dir}">
                         <file name="installation/installation.textile" />
@@ -238,10 +238,10 @@
                         <include name="installation/images/**/*" />
                     </fileset>
                 </image-files>
-            </create-hubspot-part>
+            </create-website-part>
 
             <!-- Tutorials -->
-            <create-hubspot-part name="YSCT-tutorials" title="YAKINDU Statechart Tools Tutorials">
+            <create-website-part name="YSCT-tutorials" title="YAKINDU Statechart Tools Tutorials">
                 <textile-files>
                     <filelist dir="${src.dir}">
                         <file name="tutorials/tutorials.textile" />
@@ -252,10 +252,10 @@
                         <include name="tutorials/images/**/*" />
                     </fileset>
                 </image-files>
-            </create-hubspot-part>
+            </create-website-part>
 
             <!-- User Guide -->
-            <create-hubspot-part name="YSCT-user-guide" title="YAKINDU Statechart Tools User Guide">
+            <create-website-part name="YSCT-user-guide" title="YAKINDU Statechart Tools User Guide">
                 <textile-files>
                     <filelist dir="${src.dir}">
                         <file name="user-guide/overview.textile" />
@@ -273,15 +273,15 @@
                         <include name="user-guide/images/**/*" />
                     </fileset>
                 </image-files>
-            </create-hubspot-part>
+            </create-website-part>
 
         </sequential>
     </target>
 
 
 
-    <!-- Creates a certain part of the HTML documentation for Hubspot. -->
-    <macrodef name="create-hubspot-part" description="Creates a certain part of the HTML documentation for Hubspot.">
+    <!-- Creates a certain part of the HTML documentation for the website. -->
+    <macrodef name="create-website-part" description="Creates a certain part of the HTML documentation for the website.">
         <attribute name="name" />
         <attribute name="title" />
         <element name="textile-files" />
@@ -291,7 +291,7 @@
 
             <!-- The directory for this particular part of the HTML documentation: -->
             <local name="work.dir" />
-            <property name="work.dir" location="${hubspot.dir}" />
+            <property name="work.dir" location="${website.dir}" />
 
             <!-- The names of the concatenated documentation files: -->
             <local name="index.textile" />
@@ -330,25 +330,25 @@
                 <stylesheet url="${css.dir}/${css.root.file}" />
             </wikitext-to-html>
 
-            <!-- Load Hubspot fragments: -->
-            <sequential unless:set="hubspot.local.files">
-                <loadfile property="hubspot.header" srcFile="${src.dir}/hubspot/header.htmlf" encoding="UTF-8" />
-                <loadfile property="hubspot.footer" srcFile="${src.dir}/hubspot/footer.htmlf" encoding="UTF-8" />
-                <loadfile property="hubspot.calltoaction.download"
-                          srcFile="${src.dir}/hubspot/calltoaction.download.htmlf"
+            <!-- Load website fragments: -->
+            <sequential unless:set="website.local.files">
+                <loadfile property="website.header" srcFile="${src.dir}/website/header.htmlf" encoding="UTF-8" />
+                <loadfile property="website.footer" srcFile="${src.dir}/website/footer.htmlf" encoding="UTF-8" />
+                <loadfile property="website.calltoaction.download"
+                          srcFile="${src.dir}/website/calltoaction.download.htmlf"
                           encoding="UTF-8" />
             </sequential>
 
-            <!-- Load fragments for generating local files which should look simular to Hubspot: -->
-            <sequential if:set="hubspot.local.files">
-                <loadfile property="hubspot.header"
-                          srcFile="${src.dir}/hubspot/header.local.files.htmlf"
+            <!-- Load fragments for generating local files which should look simular to the website: -->
+            <sequential if:set="website.local.files">
+                <loadfile property="website.header"
+                          srcFile="${src.dir}/website/header.local.files.htmlf"
                           encoding="UTF-8" />
-                <loadfile property="hubspot.footer"
-                          srcFile="${src.dir}/hubspot/footer.local.files.htmlf"
+                <loadfile property="website.footer"
+                          srcFile="${src.dir}/website/footer.local.files.htmlf"
                           encoding="UTF-8" />
-                <loadfile property="hubspot.calltoaction.download"
-                          srcFile="${src.dir}/hubspot/calltoaction.download.local.files.htmlf"
+                <loadfile property="website.calltoaction.download"
+                          srcFile="${src.dir}/website/calltoaction.download.local.files.htmlf"
                           encoding="UTF-8" />
             </sequential>
 
@@ -362,36 +362,36 @@
                 </fileset>
             </replaceregexp>
 
-            <!-- Replace relative image links by absolute ones for Hubspot, unless we are generating local files: -->
+            <!-- Replace relative image links by absolute ones for the website, unless we are generating local files: -->
             <replaceregexp byline="false"
                            flags="g"
                            match='src="images/'
                            replace='src="http://info.itemis.com/hubfs/Yakindu/Statechart_Tools/Documentation/images/'
-                           unless:set="hubspot.local.files">
+                           unless:set="website.local.files">
                 <fileset dir="${work.dir}">
                     <include name="${index.html}" />
                 </fileset>
             </replaceregexp>
 
-            <!-- Replace everything up to and including "<body>" by Hubspot-specific header: -->
-            <replaceregexp byline="false" flags="s" replace="${hubspot.header}">
+            <!-- Replace everything up to and including "<body>" by website-specific header: -->
+            <replaceregexp byline="false" flags="s" replace="${website.header}">
                 <regexp pattern="^(.*)&lt;body&gt;" />
                 <fileset dir="${work.dir}">
                     <include name="${index.html}" />
                 </fileset>
             </replaceregexp>
 
-            <!-- Replace everything from and including "</body>" by Hubspot-specific footer: -->
-            <replaceregexp byline="false" flags="s" replace="${hubspot.footer}">
+            <!-- Replace everything from and including "</body>" by website-specific footer: -->
+            <replaceregexp byline="false" flags="s" replace="${website.footer}">
                 <regexp pattern="&lt;/body&gt;(.*)$" />
                 <fileset dir="${work.dir}">
                     <include name="${index.html}" />
                 </fileset>
             </replaceregexp>
 
-            <!-- If the generated code contains a table with the ID "updaterepositories", replace it by a Hubspot
-                 Call-To-Action button: -->
-            <replaceregexp byline="false" flags="s" replace="${hubspot.calltoaction.download}">
+            <!-- If the generated code contains a table with the ID "updaterepositories", replace it by a
+                 "call-to-action" button on the website: -->
+            <replaceregexp byline="false" flags="s" replace="${website.calltoaction.download}">
                 <regexp pattern='&lt;table id="updaterepositories"&gt;.*&lt;/table&gt;' />
                 <fileset dir="${work.dir}">
                     <include name="${index.html}" />
@@ -399,13 +399,13 @@
             </replaceregexp>
 
             <!-- Fix links: -->
-            <adjust-hubspot-document-links document.dir.name="tutorials"
+            <adjust-website-document-links document.dir.name="tutorials"
                                            work.dir="${work.dir}"
                                            html.file="${index.html}" />
-            <adjust-hubspot-document-links document.dir.name="user-guide"
+            <adjust-website-document-links document.dir.name="user-guide"
                                            work.dir="${work.dir}"
                                            html.file="${index.html}" />
-            <adjust-hubspot-document-links document.dir.name="installation"
+            <adjust-website-document-links document.dir.name="installation"
                                            work.dir="${work.dir}"
                                            html.file="${index.html}" />
 
@@ -436,9 +436,9 @@
                 <image-files />
             </copy>
 
-            <!-- The textile source file is no longer needed in the Hubspot directory. Remove it: -->
+            <!-- The textile source file is no longer needed in the website directory. Remove it: -->
             <delete includeemptydirs="true" failonerror="false">
-                <fileset dir="${hubspot.dir}" defaultexcludes="false">
+                <fileset dir="${website.dir}" defaultexcludes="false">
                     <include name="${index.textile}" />
                 </fileset>
             </delete>
@@ -446,9 +446,9 @@
 
     </macrodef>
 
-    <!-- Adjusts links in the generated HTML document for Hubspot or a local sort of equivalent. -->
-    <macrodef name="adjust-hubspot-document-links"
-              description="Adjusts links in the generated HTML document for Hubspot or a local sort of equivalent.">
+    <!-- Adjusts links in the generated HTML document for either the website or a local equivalent. -->
+    <macrodef name="adjust-website-document-links"
+              description="Adjusts links in the generated HTML document for either the website or a local equivalent.">
         <attribute name="work.dir" />
         <attribute name="html.file" />
         <attribute name="document.dir.name" />
@@ -458,7 +458,7 @@
                            flags="g"
                            match='&lt;a href="(\.\./@{document.dir.name})/.+\.html(.*)"&gt;'
                            replace='&lt;a href="\1/\2"&gt;'
-                           unless:set="hubspot.local.files">
+                           unless:set="website.local.files">
                 <fileset dir="@{work.dir}">
                     <include name="@{html.file}" />
                 </fileset>
@@ -467,7 +467,7 @@
                            flags="g"
                            match='&lt;a href="\.\.(/@{document.dir.name})/.+\.html(.*)"&gt;'
                            replace='&lt;a href="YSCT-@{document.dir.name}.html\2"&gt;'
-                           if:set="hubspot.local.files">
+                           if:set="website.local.files">
                 <fileset dir="@{work.dir}">
                     <include name="@{html.file}" />
                 </fileset>
