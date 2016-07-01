@@ -15,6 +15,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrerMessages.ASSIGNMENT_OPERATOR;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -32,6 +34,8 @@ import org.yakindu.base.types.TypeParameterBinding;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
+import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue;
+import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
@@ -780,7 +784,6 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	
 	@Test
 	public void testArrayElementAssignmentByIndexBrackets() {
-		// we need to define two arrays of different type to check if type bindings get overwritten properly
 		String scope = "internal: var intArray : array<integer> var boolArray : array<boolean>";
 		assertTrue(isIntegerType(inferTypeForExpression("intArray[0]", scope)));
 		assertTrue(isBooleanType(inferTypeForExpression("boolArray[0]", scope)));
@@ -794,8 +797,8 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	
 	@Test
 	public void testArrayElementAssignmentByIndexOperation() {
-		// we need to define two arrays of different type to check if type bindings get overwritten properly
 		String scope = "internal: var intArray : array<integer> var boolArray : array<boolean>";
+
 		assertTrue(isIntegerType(inferTypeForExpression("intArray.get(0)", scope)));
 		assertTrue(isBooleanType(inferTypeForExpression("boolArray.get(0)", scope)));
 		assertTrue(isIntegerType(inferTypeForExpression("intArray.get(0)=5", scope)));
@@ -804,6 +807,19 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		expectIssue(inferTypeForExpression("intArray.get(0)='asd'", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "string"));
 		expectIssue(inferTypeForExpression("boolArray.get(0)=8", scope), String.format(ASSIGNMENT_OPERATOR, "=", "boolean", "integer"));
 		expectIssue(inferTypeForExpression("intArray.get(0)=true", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "boolean"));
+	}
+	
+	@Test
+	public void testArrayElementAccessMixed() {
+		// we need to define two arrays of different type to check if type bindings get overwritten properly
+		String scope = "internal: var intArray : array<integer> var boolArray : array<boolean>";
+		expectOK("intArray[0]==17 && boolArray.get(0)", scope);
+	}
+	
+	@Test
+	public void testArrayElementAccessFromInterface() {
+		String scope = "internal: var intArray : array<integer> interface A: var boolArray : array<boolean>";
+		expectOK("intArray.get(0)==17 && A.boolArray[0]", scope);
 	}
 
 	@Test
@@ -888,6 +904,19 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				acceptor.getTraces(
 						org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity.ERROR)
 						.iterator().next().getMessage());
+	}
+	
+	private void expectOK(String expression, String scope) {
+		ListBasedValidationIssueAcceptor diagnostics = validate(expression, scope);
+		List<ValidationIssue> errors = diagnostics.getTraces(Severity.ERROR);
+		assertEquals(errors.toString(), 0, errors.size());
+	}
+	
+	private ListBasedValidationIssueAcceptor validate(String expression, String scope) {
+		EObject result = parseExpression(expression, Expression.class.getSimpleName(), scope);
+		ListBasedValidationIssueAcceptor diagnostics = new ListBasedValidationIssueAcceptor();
+		typeInferrer.inferType(result, diagnostics);
+		return diagnostics;
 	}
 
 }

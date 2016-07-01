@@ -233,11 +233,6 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 	
 	protected void resolveTypeParameter(FeatureCall e, int level) {
-		if (e.getFeature() instanceof Declaration) {
-			Declaration declaration = (Declaration) e.getFeature();
-			createTypeParameterBinding(declaration, level);
-			return;
-		}
 		if (e.getOwner() instanceof ElementReferenceExpression) {
 			ElementReferenceExpression elemRef = (ElementReferenceExpression) e.getOwner();
 			if (elemRef.getReference() instanceof Declaration) {
@@ -253,6 +248,11 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				createTypeParameterBinding(declaration, level);
 				return;
 			}
+		}
+		if (e.getFeature() instanceof Declaration) {
+			Declaration declaration = (Declaration) e.getFeature();
+			createTypeParameterBinding(declaration, level);
+			return;
 		}
 	}
 	
