@@ -45,7 +45,6 @@
 	padding: 5px;
 }
 
-.
 .green {
 	background-color: rgba(126, 181, 25, 0.45);
 }
@@ -118,56 +117,17 @@ body {
 	margin: 2%;
 }
 
-
-img.standard-image {
-    max-width: 61.8%;
-    min-width: 38.2%;
-    height: auto;
-    text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-
-    box-shadow: 10px 10px 20px #888888;
-    border-radius: 4px;
-    margin-top: 1.5ex;
-    margin-bottom: 2.5ex;
-}
-
+/* Images */
 img.tiny {
     width:14.6%;
     min-width:14.6%;
-}
-
-img.small {
-    width:38.2%;
 }
 
 img.large {
     width:61.8%;
 }
 
-img.full {
-    width:100%;
-    max-width:100%;
-}
-
-img.shadowless {
-    box-shadow: none;
-    margin-bottom: 0px;
-}
-
-img.inlinemediaobject {
-    display: inline;
-    height: 1.1em;
-    width: auto; /* For keeping aspect ratio */
-    min-width: 0; /* Overrides min-width from img, as 'initial' does not work as intended */
-}
-
-
-
 /* Tables */
-
 .informaltable td {
 	border-color: #000;
 	border-radius: 0%;
@@ -175,37 +135,6 @@ img.inlinemediaobject {
 	border-width: 1px;
 	padding: 1ex;
 	vertical-align: top;
-}
-
-
-
-/* The class "scedit" is used in tables describing working with the statechart editor.
-   These tables typically consist of two columns with a textual description in the
-   left column and a screenshot on the right. */
-
-table.scedit {
-	width: auto;
-	border-collapse: collapse;
-}
-
-tr.scedit {
-	vertical-align: top;
-}
-
-table.scedit td {
-	border-color: #000;
-	border-radius: 0%;
-	border-style: solid;
-	border-width: 0px;
-	padding-bottom: 1ex;
-	vertical-align: top;
-}
-
-table.scedit img {
-	max-width: 100%;
-    margin-left: 0px;
-    margin-right: 0px;
-    box-shadow: 4px 4px 2px #bbb;
 }
 
 .application, .eclipse-view, .guibutton, .guimenuitem, .sct-state, .sct-variable, .sct-event, .sct-trigger {
@@ -216,7 +145,6 @@ table.scedit img {
 	font-weight: bold;
 	color: #555566;
 }
-
 
 .note {
 	padding-left: 1em;
@@ -249,24 +177,18 @@ table.scedit img {
 	line-height: 100%;
 }
 
-
-
 /* Settings for "synopsys" sub-elements: */
 pre.synopsis code.literal {
     font-weight: bold;
     font-style: normal;
 }
-
 pre.synopsis code.varname {
     font-weight: normal;
     font-style: italic;
 }
-
 pre {
     line-height: 100%;
 }
-
-
 
 div.example {
 	padding-left: 2%;
@@ -277,24 +199,6 @@ div.example {
 	border-width: 1px;
 }
 
-
 .to-be-written {
 	background-color: yellow;
 }
-
-
-body {counter-reset: h1}
-h1 {counter-reset: h2}
-h2 {counter-reset: h3}
-h3 {counter-reset: h4}
-h4 {counter-reset: h5}
-h5 {counter-reset: h6}
-
-h1:before {counter-increment: h1; content: counter(h1) ". "}
-h2:before {counter-increment: h2; content: counter(h1) "." counter(h2) ". "}
-h3:before {counter-increment: h3; content: counter(h1) "." counter(h2) "." counter(h3) ". "}
-h4:before {counter-increment: h4; content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". "}
-h5:before {counter-increment: h5; content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". "}
-h6:before {counter-increment: h6; content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". "}
-
-h1.nocount:before h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none } 
