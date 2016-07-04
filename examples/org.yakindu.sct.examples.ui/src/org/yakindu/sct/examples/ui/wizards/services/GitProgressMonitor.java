@@ -98,4 +98,8 @@ public class GitProgressMonitor extends BatchingProgressMonitor {
 			monitor.worked(1);
 		}
 	}
+	@Override
+	public boolean isCancelled() {
+		return monitor.isCanceled();
+	}
 }
