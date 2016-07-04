@@ -8,14 +8,14 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.examples.ui.wizards.pages;
+package org.yakindu.sct.examples.wizard.pages;
 
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
-import org.yakindu.sct.examples.ui.wizards.ExampleData;
-import org.yakindu.sct.examples.ui.wizards.pages.ExampleContentProvider.Category;
+import org.yakindu.sct.examples.wizard.pages.ExampleContentProvider.Category;
+import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.ui.editor.StatechartImages;
 
 /**

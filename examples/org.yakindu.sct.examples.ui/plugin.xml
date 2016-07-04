@@ -4,7 +4,7 @@
 	<extension point="org.eclipse.ui.newWizards">
       	<wizard
         	category="org.eclipse.ui.Examples"
-            class="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
+            class="org.yakindu.sct.examples.wizard.ExampleWizard"
             icon="icons/logo-16.png"
             id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
             name="YAKINDU Examples">
@@ -17,7 +17,7 @@
       	</category>
       	<wizard
       		category="YAKINDU"
-      		class="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
+      		class="org.yakindu.sct.examples.wizard.ExampleWizard"
       		icon="icons/logo-16.png"
       		id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
       		name="YAKINDU Examples">
@@ -27,7 +27,7 @@
             point="org.eclipse.ui.preferencePages">
         <page
             category="org.yakindu.sct.ui.preferences.root"
-            class="org.yakindu.sct.examples.ui.wizards.preferences.ExamplesPreferencePage"
+            class="org.yakindu.sct.examples.wizard.preferences.ExamplesPreferencePage"
             id="com.yakindu.sct.examples"
             name="Example Wizard">
         </page>
@@ -35,7 +35,7 @@
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-              class="org.yakindu.sct.examples.ui.wizards.preferences.ExamplesPreferenceInitializer">
+              class="org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceInitializer">
       </initializer>
    </extension>
 </plugin>

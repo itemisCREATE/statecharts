@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.examples.ui.wizards.services;
+package org.yakindu.sct.examples.wizard.service.git;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,11 +35,11 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.ui.dialogs.IOverwriteQuery;
 import org.eclipse.ui.wizards.datatransfer.FileSystemStructureProvider;
 import org.eclipse.ui.wizards.datatransfer.ImportOperation;
-import org.yakindu.sct.examples.ui.ExampleActivator;
-import org.yakindu.sct.examples.ui.wizards.ExampleData;
-import org.yakindu.sct.examples.ui.wizards.ExampleWizardModule;
-import org.yakindu.sct.examples.ui.wizards.IExampleService;
-import org.yakindu.sct.examples.ui.wizards.preferences.ExamplesPreferenceConstants;
+import org.yakindu.sct.examples.wizard.ExampleActivator;
+import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
+import org.yakindu.sct.examples.wizard.service.ExampleData;
+import org.yakindu.sct.examples.wizard.service.ExampleWizardModule;
+import org.yakindu.sct.examples.wizard.service.IExampleService;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

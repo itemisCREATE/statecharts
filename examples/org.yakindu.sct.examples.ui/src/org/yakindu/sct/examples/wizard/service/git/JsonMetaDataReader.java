@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.examples.ui.wizards.services;
+package org.yakindu.sct.examples.wizard.service.git;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -16,7 +16,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.yakindu.sct.examples.ui.wizards.ExampleData;
+import org.yakindu.sct.examples.wizard.service.ExampleData;
 
 import com.google.gson.Gson;
 

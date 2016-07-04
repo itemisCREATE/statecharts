@@ -8,11 +8,11 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.examples.ui.wizards.preferences;
+package org.yakindu.sct.examples.wizard.preferences;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.yakindu.sct.examples.ui.ExampleActivator;
+import org.yakindu.sct.examples.wizard.ExampleActivator;
 
 /**
  * 

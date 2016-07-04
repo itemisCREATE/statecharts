@@ -8,11 +8,11 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.examples.ui.wizards;
+package org.yakindu.sct.examples.wizard.service;
 
-import org.yakindu.sct.examples.ui.wizards.services.GitRepositoryExampleService;
-import org.yakindu.sct.examples.ui.wizards.services.IExampleDataReader;
-import org.yakindu.sct.examples.ui.wizards.services.JsonMetaDataReader;
+import org.yakindu.sct.examples.wizard.service.git.GitRepositoryExampleService;
+import org.yakindu.sct.examples.wizard.service.git.IExampleDataReader;
+import org.yakindu.sct.examples.wizard.service.git.JsonMetaDataReader;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
