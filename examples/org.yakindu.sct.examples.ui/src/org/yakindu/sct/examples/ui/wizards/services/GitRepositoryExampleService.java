@@ -14,7 +14,10 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.DirectoryStream;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,12 +108,23 @@ public class GitRepositoryExampleService implements IExampleService {
 	}
 
 	protected IStatus cloneRepository(IProgressMonitor monitor) {
+		Git call = null;
 		try {
-			Git.cloneRepository().setURI(repositoryURL).setDirectory(gitRepo.toFile())
+			call = Git.cloneRepository().setURI(repositoryURL).setDirectory(gitRepo.toFile())
 					.setProgressMonitor(new GitProgressMonitor(monitor)).call();
 		} catch (GitAPIException e) {
 			return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
 					"Unable to clone repository " + repositoryURL + "!");
+		} finally {
+			if (call != null)
+				call.close();
+			if (monitor.isCanceled()) {
+				try {
+					deleteFolder(gitRepo);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		return Status.OK_STATUS;
 	}
@@ -175,6 +189,21 @@ public class GitRepositoryExampleService implements IExampleService {
 			result.add(f);
 		}
 		return result;
+	}
+
+	public void deleteFolder(java.nio.file.Path path) throws IOException {
+		Files.walkFileTree(path, new SimpleFileVisitor<java.nio.file.Path>() {
+			@Override
+			public FileVisitResult visitFile(java.nio.file.Path file, BasicFileAttributes attrs) throws IOException {
+				Files.delete(file);
+				return FileVisitResult.CONTINUE;
+			}
+			@Override
+			public FileVisitResult postVisitDirectory(java.nio.file.Path dir, IOException exc) throws IOException {
+				Files.delete(dir);
+				return FileVisitResult.CONTINUE;
+			}
+		});
 	}
 
 	@Override

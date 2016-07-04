@@ -102,6 +102,9 @@ public class SelectExamplePage extends WizardPage
 			} catch (InvocationTargetException | InterruptedException e) {
 				e.printStackTrace();
 			}
+		} else {
+			viewer.setInput(null);
+			browser.setUrl("about:blank");
 		}
 
 	}
@@ -181,7 +184,7 @@ public class SelectExamplePage extends WizardPage
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		try {
-			getWizard().getContainer().run(true, false, new IRunnableWithProgress() {
+			getWizard().getContainer().run(true, true, new IRunnableWithProgress() {
 				@Override
 				public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					final IStatus status = exampleService.fetchAllExamples(monitor);
@@ -197,6 +200,7 @@ public class SelectExamplePage extends WizardPage
 					});
 				}
 			});
+
 		} catch (InvocationTargetException | InterruptedException e1) {
 			e1.printStackTrace();
 		}
