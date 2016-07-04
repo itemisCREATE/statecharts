@@ -1,17 +1,16 @@
-<!doctype html><!-- start coded_template: id:3690193013 path:generated_layouts/3690193003.html --><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en">        <![endif]--><!--[if IE 8]>    <html class="no-js lt-ie9" lang="en">               <![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]--><head>
+<!doctype html><!-- start coded_template: id:4146796469 path:custom/page/YSCT_Templates/YSCT-user-guide.html --><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en" > <![endif]--><!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en" >        <![endif]--><!--[if IE 8]>    <html class="no-js lt-ie9" lang="en" >               <![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]--><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="author" content="itemis AG">
     <meta name="description" content="Read the official YAKINDU Statechart Tools documentation. We provide installation instructions and the YAKINDU Statechart Tools Reference.">
-    <meta name="generator" content="HubSpot">
     <title>YAKINDU Statechart Tools Documentation</title>
-    <link rel="shortcut icon" href="http://info.itemis.com/hubfs/images/favicon.ico?t=1465805720159">
+    <link rel="shortcut icon" href="https://info.itemis.com/hubfs/images/favicon.ico?t=1467623174423">
+    <link rel="stylesheet" href="https://cdn2.hubspot.net/hub/761475/hub_generated/template_assets/1467360277552/custom/system/default/inbound-performance.min.css">
+    
 
-    
-    
     <script type="text/javascript" src="https://static.hsstatic.net/jquery-libs/static-1.4/jquery/jquery-1.11.2.js"></script>
     <script type="text/javascript">hsjQuery = window['jQuery']</script>
-    <link href="https://static.hsstatic.net/content_shared_assets/static-1.4019/css/public_common.css" rel="stylesheet">
+    <link href="https://static.hsstatic.net/content_shared_assets/static-1.4020/css/public_common.css" rel="stylesheet">
     <meta property="og:description" content="Read the official YAKINDU Statechart Tools documentation. We provide installation instructions and the YAKINDU Statechart Tools Reference.">
     <meta property="og:title" content="YAKINDU Statechart Tools Documentation">
     <meta name="twitter:description" content="Read the official YAKINDU Statechart Tools documentation. We provide installation instructions and the YAKINDU Statechart Tools Reference.">
@@ -33,56 +32,159 @@
 <!-- /Added by GoogleAnalytics integration -->
 
     
-    <link rel="canonical" href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/">
+    <link rel="canonical" href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/">
 
 
     <!--[if lt IE 9]>
-    <script src="https://static.hsstatic.net/content_shared_assets/static-1.4019/js/css3-mediaqueries.js"></script>
+    <script src="https://static.hsstatic.net/content_shared_assets/static-1.4020/js/css3-mediaqueries.js"></script>
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- google webfont font replacement -->
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600" type="text/css" media="all"> 
-<meta property="og:url" content="https://www.itemis.com/en/yakindu/statechart-tools/documentation/">
-<link href="http://cdn2.hubspot.net/hub/-1/hub_generated/style_manager/1431123893544/hubspot_default/shared/responsive/layout.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" type="text/css" media="all"> 
+<meta property="og:url" content="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/">
+<link href="https://cdn2.hubspot.net/hub/761475/hub_generated/template_assets/1459932507669/custom/styles/default/hs_default_custom_style.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn2.hubspot.net/hub/761475/hub_generated/template_assets/1452513347905/custom/page/itemis/lightbox.min.css">
 
-<link rel="stylesheet" href="http://cdn2.hubspot.net/hub/761475/hub_generated/template_assets/1452513347905/custom/page/itemis/lightbox.min.css">
-<link rel="stylesheet" href="http://cdn2.hubspot.net/hub/761475/hub_generated/template_assets/1465478178238/custom/system/default/inbound-performance.min.css">
-<link rel="stylesheet" href="http://cdn2.hubspot.net/hub/761475/hub_generated/template_assets/1450273660470/prettify.min.css">
+<link rel="stylesheet" href="https://cdn2.hubspot.net/hub/761475/hub_generated/template_assets/1450273660470/prettify.min.css">
+<link rel="stylesheet" href="/_hcms/raw-resource?portalId=761475&amp;path=custom/page/YSCT_Templates/ysct.css">
 
 <link rel="stylesheet" href="css/style.css">
-
-
-
     <!-- The style tag has been deprecated. Attached stylesheets are included in the required_head_tags page variable. -->
 
-
-</head>
-<body class="scrum-wiki-page sct-docs   hs-content-id-3690239213 hs-site-page page " style="">
+<meta name="generator" content="HubSpot"></head>
+<body class="scrum-wiki-page sct-docs homepage-test   hs-content-id-4146825779 hs-site-page page " style="">
     <div class="header-container-wrapper">
     <div class="header-container container-fluid">
 
-        <div class="row-fluid-wrapper row-depth-1 row-number-1 ">
-        <div class="row-fluid ">
-            <div class="span12 widget-span widget-type-cell site-header page-center" style="" data-widget-type="cell" data-x="0" data-w="12">
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-global_group " style="" data-widget-type="global_group" data-x="0" data-w="12">
+<!-- start coded_template: id:3772713676 path:generated_global_groups/3772713661.html -->
+<div class="" data-global-widget-path="generated_global_groups/3772713661.html"><div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div id="global-site-header" class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
 
-                <div class="row-fluid-wrapper row-depth-1 row-number-2 ">
-                <div class="row-fluid ">
-                    <div class="span2 widget-span widget-type-linked_image " style="min-width: 65px;" data-widget-type="linked_image" data-x="0" data-w="2">
-                        <div class="cell-wrapper layout-widget-wrapper">
-                            <span id="hs_cos_wrapper_module_14504455568452946" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_linked_image" style="" data-hs-cos-general-type="widget" data-hs-cos-type="linked_image"><a href="https://www.itemis.com/en/yakindu/statechart-tools/" id="hs-link-module_14504455568452946" style="border-width:0px;border:0px;"><img src="//info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke-65x60.png?t=1465805720159&amp;width=65" class="hs-image-widget " style="width:65px;border-width:0px;border:0px;" width="65" alt="YAKINDU Statechart Tools Logo" title="YAKINDU Statechart Tools Logo" srcset="//info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke-65x60.png?t=1465805720159&amp;width=33 33w, //info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke-65x60.png?t=1465805720159&amp;width=65 65w, //info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke-65x60.png?t=1465805720159&amp;width=98 98w, //info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke-65x60.png?t=1465805720159&amp;width=130 130w, //info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke-65x60.png?t=1465805720159&amp;width=163 163w, //info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke-65x60.png?t=1465805720159&amp;width=195 195w" sizes="(max-width: 65px) 100vw, 65px"></a></span>
-                        </div><!--end layout-widget-wrapper -->
-                    </div><!--end widget-span -->
-                    <div class="span10 widget-span widget-type-menu menu-primary" style="" data-widget-type="menu" data-x="2" data-w="10">
-                        <div class="cell-wrapper layout-widget-wrapper">
-                            <span id="hs_cos_wrapper_module_142729402815510929" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="menu"><div id="hs_menu_wrapper_module_142729402815510929" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="YAKINDU Statechart tools">
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span1 widget-span widget-type-logo " style="" data-widget-type="logo" data-x="0" data-w="1">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_14533041213082" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_logo" style="" data-hs-cos-general-type="widget" data-hs-cos-type="logo"><a href="https://www.itemis.com" id="hs-link-module_14533041213082" style="border-width:0px;border:0px;"><img src="//info.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png?t=1467623174423&amp;width=200" class="hs-image-widget " style="width:200px;border-width:0px;border:0px;" width="200" alt="itemis AG Logo" title="itemis AG Logo" srcset="//info.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png?t=1467623174423&amp;width=100 100w, //info.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png?t=1467623174423&amp;width=200 200w, //info.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png?t=1467623174423&amp;width=300 300w, //info.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png?t=1467623174423&amp;width=400 400w, //info.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png?t=1467623174423&amp;width=500 500w, //info.itemis.com/hs-fs/hubfs/itemis_Logos/itemis-Marke-200.png?t=1467623174423&amp;width=600 600w" sizes="(max-width: 200px) 100vw, 200px"></a></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+<div class="span8 widget-span widget-type-menu menu-primary" style="" data-widget-type="menu" data-x="1" data-w="8">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_14533041213083" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="menu"><div id="hs_menu_wrapper_module_14533041213083" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="itemis standard navigation">
+ <ul>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children"><a href="https://www.itemis.com">itemis</a>
+   <ul class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2"><a href="https://www.itemis.com/de/events">Events</a></li>
+    <li class="hs-menu-item hs-menu-depth-2"><a href="https://www.itemis.com/de/unternehmen/">Company</a></li>
+    <li class="hs-menu-item hs-menu-depth-2"><a href="https://www.itemis.com/de/jobs/arbeitgeber-itemis/">Jobs</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children"><a href="http://www.yakindu.com">Software</a>
+   <ul class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2 hs-item-has-children"><a href="http://www.yakindu.com">YAKINDU</a>
+     <ul class="hs-menu-children-wrapper">
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://info.itemis.com/yakindu/traceability/ea-bridge/model-validation">EA-Bridge</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://info.itemis.com/yakindu/modelviewer/home">Model Viewer</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://www.itemis.com/en/yakindu/statechart-tools/">Statechart Tools</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="http://www.yakindu.com/traceability/">Traceability</a></li>
+     </ul></li>
+    <li class="hs-menu-item hs-menu-depth-2 hs-item-has-children"><a href="https://www.itemis.com/en/xtext/download/">Xtext</a>
+     <ul class="hs-menu-children-wrapper">
+      <li class="hs-menu-item hs-menu-depth-3"><a href="http://www.eclipse.org/xtend/">Xtend</a></li>
+     </ul></li>
+    <li class="hs-menu-item hs-menu-depth-2"><a href="http://mbeddr.com">mbeddr</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children"><a href="https://www.itemis.com/de/angebot/automotive">Consulting</a>
+   <ul class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2 hs-item-has-children"><a href="https://www.itemis.com/de/angebot/enterprise">Software Development</a>
+     <ul class="hs-menu-children-wrapper">
+      <li class="hs-menu-item hs-menu-depth-3"><a href="http://www.itemis.de">Embedded</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://www.itemis.com/de/angebot/legacy">Legacy</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://www.itemis.com/de/mobile/">Mobile development</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="http://www.itemis.de">Model Based</a></li>
+     </ul></li>
+    <li class="hs-menu-item hs-menu-depth-2 hs-item-has-children"><a href="http://www.itemis.de">Projects</a>
+     <ul class="hs-menu-children-wrapper">
+      <li class="hs-menu-item hs-menu-depth-3 hs-item-has-children"><a href="https://www.itemis.com/de/agile/scrum/">Agile</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="http://www.itemis.de">Requirements Engineering</a></li>
+      <li class="hs-menu-item hs-menu-depth-3"><a href="https://www.itemis.com/de/usability/">Usability</a></li>
+     </ul></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children"><a href="https://blogs.itemis.com">Blog</a>
+   <ul class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2"><a href="https://blogs.itemis.com/topic/agile-softwareentwicklung">Agile</a></li>
+    <li class="hs-menu-item hs-menu-depth-2"><a href="https://blogs.itemis.com/topic/embedded">Engineering</a></li>
+    <li class="hs-menu-item hs-menu-depth-2"><a href="https://blogs.itemis.com/topic/mobile/">Mobile</a></li>
+    <li class="hs-menu-item hs-menu-depth-2"><a href="https://blogs.itemis.com/topic/usability">Usability</a></li>
+    <li class="hs-menu-item hs-menu-depth-2"><a href="https://blogs.itemis.com/topic/xtext">Xtext</a></li>
+   </ul></li>
+ </ul>
+</div></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+<div class="span1 widget-span widget-type-simple_menu language-menu" style="" data-widget-type="simple_menu" data-x="9" data-w="1">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_146295891389227351" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_simple_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="simple_menu"><div id="hs_menu_wrapper_module_146295891389227351" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="">
+ <ul>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="https://www.itemis.com/de/" target="_self">Deutsch</a></li>
+  <li class="hs-menu-item hs-menu-depth-1"><a href="https://www.itemis.com/en/" target="_self">English</a></li>
+ </ul>
+</div></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+<div class="span2 widget-span widget-type-cta " style="" data-widget-type="cta" data-x="10" data-w="2">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_14533041213084" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_cta" style="" data-hs-cos-general-type="widget" data-hs-cos-type="cta"><!--HubSpot Call-to-Action Code --> 
+<span class="hs-cta-wrapper" id="hs-cta-wrapper-548075b6-4e7c-441f-a192-54cbf97e88c7"> <span class="hs-cta-node hs-cta-548075b6-4e7c-441f-a192-54cbf97e88c7" id="hs-cta-548075b6-4e7c-441f-a192-54cbf97e88c7"> 
+  <!--[if lte IE 8]><div id="hs-cta-ie-element"></div><![endif]--> <a href="http://cta-redirect.hubspot.com/cta/redirect/761475/548075b6-4e7c-441f-a192-54cbf97e88c7"><img class="hs-cta-img" id="hs-cta-img-548075b6-4e7c-441f-a192-54cbf97e88c7" style="border-width:0px;" src="https://no-cache.hubspot.com/cta/default/761475/548075b6-4e7c-441f-a192-54cbf97e88c7.png" alt="Contact us"></a> </span> <script charset="utf-8" src="https://js.hscta.net/cta/current.js"></script> <script type="text/javascript">
+        hbspt.cta.load(761475, '548075b6-4e7c-441f-a192-54cbf97e88c7', {});
+    </script> </span> 
+<!-- end HubSpot Call-to-Action Code --></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+</div><!-- end coded_template: id:3772713676 path:generated_global_groups/3772713661.html -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell site-header" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-3 ">
+<div class="row-fluid ">
+<div class="span2 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="2">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_14660785454254323" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_custom_widget" style="" data-hs-cos-general-type="widget" data-hs-cos-type="custom_widget"><div class="site-header-title">
+    
+        <img src="//info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke.png?t=1467623174423&amp;width=105&amp;height=98" width="105" height="98" alt="YAKINDU SCT" srcset="//info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke.png?t=1467623174423&amp;width=53&amp;height=49 53w, //info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke.png?t=1467623174423&amp;width=105&amp;height=98 105w, //info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke.png?t=1467623174423&amp;width=158&amp;height=147 158w, //info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke.png?t=1467623174423&amp;width=210&amp;height=196 210w, //info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke.png?t=1467623174423&amp;width=263&amp;height=245 263w, //info.itemis.com/hs-fs/hubfs/Yakindu-Bildmarke.png?t=1467623174423&amp;width=315&amp;height=294 315w" sizes="(max-width: 105px) 100vw, 105px">
+    
+    
+    YAKINDU SCT
+</div></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+<div class="span10 widget-span widget-type-menu menu-primary" style="" data-widget-type="menu" data-x="2" data-w="10">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_142729402815510929" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="menu"><div id="hs_menu_wrapper_module_142729402815510929" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="YAKINDU Statechart tools">
  <ul class="active-branch">
   <li class="hs-menu-item hs-menu-depth-1"><a href="https://www.itemis.com/en/yakindu/statechart-tools/">Home</a></li>
-  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/">Documentation</a></li>
-  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/tutorials">Tutorials</a>
+  <li class="hs-menu-item hs-menu-depth-1 active hs-item-has-children active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/">Documentation</a>
+   <ul class="hs-menu-children-wrapper active-branch">
+    <li class="hs-menu-item hs-menu-depth-2 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/">User Guide</a></li>
+    <li class="hs-menu-item hs-menu-depth-2"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/installation/">Installation Guide</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children"><a href="javascript:;">Tutorials</a>
    <ul class="hs-menu-children-wrapper">
-    <li class="hs-menu-item hs-menu-depth-2"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/tutorials">Getting started</a></li>
-    <li class="hs-menu-item hs-menu-depth-2"><a href="https://www.itemis.com/en/yakindu/statechart-tools/tutorials/video-tutorials/">Videos</a></li>
+    <li class="hs-menu-item hs-menu-depth-2"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/tutorials/#oss_five-minutes-tutorial">Five-minutes tutorial</a></li>
+    <li class="hs-menu-item hs-menu-depth-2"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/tutorials/#oss_comprehensive-tutorial">Comprehensive tutorial</a></li>
+    <li class="hs-menu-item hs-menu-depth-2"><a href="https://www.itemis.com/en/yakindu/statechart-tools/tutorials/video-tutorials/">Video Tutorials</a></li>
    </ul></li>
   <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children"><a href="javascript:;">Download</a>
    <ul class="hs-menu-children-wrapper">
@@ -94,18 +196,18 @@
     <li class="hs-menu-item hs-menu-depth-2"><a href="http://groups.google.com/forum/embed/?place=forum/yakindu-user#!forum/yakindu-user" target="_blank">Support Forum</a></li>
     <li class="hs-menu-item hs-menu-depth-2"><a href="https://github.com/Yakindu/statecharts/issues" target="_blank">Report a Bug</a></li>
     <li class="hs-menu-item hs-menu-depth-2"><a href="https://github.com/Yakindu/statecharts" target="_blank">Getting involved</a></li>
-    <li class="hs-menu-item hs-menu-depth-2"><a href="https://blogs.itemis.com/topic/embedded">Blog</a></li>
+    <li class="hs-menu-item hs-menu-depth-2"><a href="https://blogs.itemis.com">Blog</a></li>
     <li class="hs-menu-item hs-menu-depth-2"><a href="https://www.itemis.com/en/yakindu/statechart-tools/community/team/">Team</a></li>
    </ul></li>
  </ul>
-</div></span>
-                        </div><!--end layout-widget-wrapper -->
-                    </div><!--end widget-span -->
-                </div><!--end row-->
-                </div><!--end row-wrapper -->
-            </div><!--end widget-span -->
-    </div><!--end row-->
-    </div><!--end row-wrapper -->
+</div></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
 
     </div><!--end header -->
 </div><!--end header wrapper -->
@@ -113,66 +215,78 @@
 <div class="body-container-wrapper">
     <div class="body-container container-fluid">
 
-        <div class="row-fluid-wrapper row-depth-1 row-number-1 ">
-        <div class="row-fluid ">
-            <div class="span12 widget-span widget-type-cell primary-section breadcrumbs" style="" data-widget-type="cell" data-x="0" data-w="12">
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell primary-section breadcrumbs" style="" data-widget-type="cell" data-x="0" data-w="12">
 
-                <div class="row-fluid-wrapper row-depth-1 row-number-2 ">
-                <div class="row-fluid ">
-                    <div class="span12 widget-span widget-type-menu page-center" style="" data-widget-type="menu" data-x="0" data-w="12">
-                        <div class="cell-wrapper layout-widget-wrapper">
-                            <span id="hs_cos_wrapper_module_142730340506520965" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="menu"><div class="hs-breadcrumb-menu-wrapper" id="hs_menu_wrapper_module_142730340506520965" role="navigation" data-sitemap-name="YAKINDU Statechart tools">
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-menu page-center" style="" data-widget-type="menu" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_142730340506520965" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="menu"><div class="hs-breadcrumb-menu-wrapper" id="hs_menu_wrapper_module_142730340506520965" role="navigation" data-sitemap-name="YAKINDU Statechart tools">
  <ul class="hs-breadcrumb-menu">
-  <li class="hs-breadcrumb-menu-item last-crumb"><span class="hs-breadcrumb-label">Documentation</span></li>
+  <li class="hs-breadcrumb-menu-item first-crumb"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/" class="hs-breadcrumb-label">Documentation</a><span class="hs-breadcrumb-menu-divider"></span></li>
+  <li class="hs-breadcrumb-menu-item last-crumb"><span class="hs-breadcrumb-label">User Guide</span></li>
  </ul>
-</div></span>
-                        </div><!--end layout-widget-wrapper -->
-                    </div><!--end widget-span -->
-                </div><!--end row-->
-                </div><!--end row-wrapper -->
-            </div><!--end widget-span -->
-    </div><!--end row-->
-    </div><!--end row-wrapper -->
-    <div class="row-fluid-wrapper row-depth-0 row-number-1 ">
-    <div class="row-fluid ">
-        <div class="span12 widget-span widget-type-cell page-center section content-wrapper" style="" data-widget-type="cell" data-x="0" data-w="12">
+</div></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
 
-            <div class="row-fluid-wrapper row-depth-1 row-number-1 ">
-            <div class="row-fluid ">
-                <div class="span4 widget-span widget-type-cell sidebar" style="" data-widget-type="cell" data-x="0" data-w="4">
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
 
-                    <div class="row-fluid-wrapper row-depth-2 row-number-1 ">
-                    <div class="row-fluid ">
-                        <div class="span12 widget-span widget-type-social_sharing " style="" data-widget-type="social_sharing" data-x="0" data-w="12">
-                            <div class="cell-wrapper layout-widget-wrapper">
-                                <span id="hs_cos_wrapper_module_14504476394501098" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_social_sharing" style="" data-hs-cos-general-type="widget" data-hs-cos-type="social_sharing"><a href="http://www.facebook.com/share.php?u=http%3A%2F%2Fstatecharts.org%2Fdocumentation.html%3Futm_medium%3Dsocial%26utm_source%3Dfacebook" target="_blank" style="width:24px;border-width:0px;border:0px;"><img src="https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=24" class="hs-image-widget hs-image-social-sharing-24" style="max-height:24px;max-width:24px;border-width:0px;border:0px;" width="24" hspace="0" alt="Share on Facebook" srcset="https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=12 12w, https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=24 24w, https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=36 36w, https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=48 48w, https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=60 60w, https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=72 72w" sizes="(max-width: 24px) 100vw, 24px"></a>&nbsp;<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fstatecharts.org%2Fdocumentation.html%3Futm_medium%3Dsocial%26utm_source%3Dlinkedin" target="_blank" style="width:24px;border-width:0px;border:0px;"><img src="https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=24" class="hs-image-widget hs-image-social-sharing-24" style="max-height:24px;max-width:24px;border-width:0px;border:0px;" width="24" hspace="0" alt="Share on LinkedIn" srcset="https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=12 12w, https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=24 24w, https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=36 36w, https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=48 48w, https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=60 60w, https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=72 72w" sizes="(max-width: 24px) 100vw, 24px"></a>&nbsp;<a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fstatecharts.org%2Fdocumentation.html%3Futm_medium%3Dsocial%26utm_source%3Dtwitter&amp;url=http%3A%2F%2Fstatecharts.org%2Fdocumentation.html%3Futm_medium%3Dsocial%26utm_source%3Dtwitter&amp;source=tweetbutton&amp;text=YAKINDU+Statechart+Tools+Documentation" target="_blank" style="width:24px;border-width:0px;border:0px;"><img src="https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=24" class="hs-image-widget hs-image-social-sharing-24" style="max-height:24px;max-width:24px;border-width:0px;border:0px;" width="24" hspace="0" alt="Share on Twitter" srcset="https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=12 12w, https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=24 24w, https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=36 36w, https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=48 48w, https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=60 60w, https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=72 72w" sizes="(max-width: 24px) 100vw, 24px"></a>&nbsp;<a href="https://plus.google.com/share?url=http%3A%2F%2Fstatecharts.org%2Fdocumentation.html%3Futm_medium%3Dsocial%26utm_source%3Dgoogle_plus" target="_blank" style="width:24px;border-width:0px;border:0px;"><img src="https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=24" class="hs-image-widget hs-image-social-sharing-24" style="max-height:24px;max-width:24px;border-width:0px;border:0px;" width="24" hspace="0" alt="Share on Google+" srcset="https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=12 12w, https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=24 24w, https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=36 36w, https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=48 48w, https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=60 60w, https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=72 72w" sizes="(max-width: 24px) 100vw, 24px"></a></span>
-                            </div><!--end layout-widget-wrapper -->
-                        </div><!--end widget-span -->
-                    </div><!--end row-->
-                    </div><!--end row-wrapper -->
-                    <div class="row-fluid-wrapper row-depth-2 row-number-2 ">
-                    <div class="row-fluid ">
-                        <div class="span12 widget-span widget-type-menu " style="" data-widget-type="menu" data-x="0" data-w="12">
-                            <div class="cell-wrapper layout-widget-wrapper">
-                                <span id="hs_cos_wrapper_module_142730384300423107" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="menu"><div id="hs_menu_wrapper_module_142730384300423107" class="hs-menu-wrapper active-branch no-flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="YAKINDU SCT Documentation">
+<div class="row-fluid-wrapper row-depth-1 row-number-3 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell page-center section content-wrapper" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-4 ">
+<div class="row-fluid ">
+<div class="span4 widget-span widget-type-cell sidebar" style="" data-widget-type="cell" data-x="0" data-w="4">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-5 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-social_sharing " style="" data-widget-type="social_sharing" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_14504476394501098" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_social_sharing" style="" data-hs-cos-general-type="widget" data-hs-cos-type="social_sharing"><a href="http://www.facebook.com/share.php?u=http%3A%2F%2Fstatecharts.org%2Fdocumentation.html%3Futm_medium%3Dsocial%26utm_source%3Dfacebook" target="_blank" style="width:24px;border-width:0px;border:0px;"><img src="https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=24" class="hs-image-widget hs-image-social-sharing-24" style="max-height:24px;max-width:24px;border-width:0px;border:0px;" width="24" hspace="0" alt="Share on Facebook" srcset="https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=12 12w, https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=24 24w, https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=36 36w, https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=48 48w, https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=60 60w, https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png?width=72 72w" sizes="(max-width: 24px) 100vw, 24px"></a>&nbsp;<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fstatecharts.org%2Fdocumentation.html%3Futm_medium%3Dsocial%26utm_source%3Dlinkedin" target="_blank" style="width:24px;border-width:0px;border:0px;"><img src="https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=24" class="hs-image-widget hs-image-social-sharing-24" style="max-height:24px;max-width:24px;border-width:0px;border:0px;" width="24" hspace="0" alt="Share on LinkedIn" srcset="https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=12 12w, https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=24 24w, https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=36 36w, https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=48 48w, https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=60 60w, https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png?width=72 72w" sizes="(max-width: 24px) 100vw, 24px"></a>&nbsp;<a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fstatecharts.org%2Fdocumentation.html%3Futm_medium%3Dsocial%26utm_source%3Dtwitter&amp;url=http%3A%2F%2Fstatecharts.org%2Fdocumentation.html%3Futm_medium%3Dsocial%26utm_source%3Dtwitter&amp;source=tweetbutton&amp;text=YAKINDU+Statechart+Tools+Documentation" target="_blank" style="width:24px;border-width:0px;border:0px;"><img src="https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=24" class="hs-image-widget hs-image-social-sharing-24" style="max-height:24px;max-width:24px;border-width:0px;border:0px;" width="24" hspace="0" alt="Share on Twitter" srcset="https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=12 12w, https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=24 24w, https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=36 36w, https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=48 48w, https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=60 60w, https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png?width=72 72w" sizes="(max-width: 24px) 100vw, 24px"></a>&nbsp;<a href="https://plus.google.com/share?url=http%3A%2F%2Fstatecharts.org%2Fdocumentation.html%3Futm_medium%3Dsocial%26utm_source%3Dgoogle_plus" target="_blank" style="width:24px;border-width:0px;border:0px;"><img src="https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=24" class="hs-image-widget hs-image-social-sharing-24" style="max-height:24px;max-width:24px;border-width:0px;border:0px;" width="24" hspace="0" alt="Share on Google+" srcset="https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=12 12w, https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=24 24w, https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=36 36w, https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=48 48w, https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=60 60w, https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png?width=72 72w" sizes="(max-width: 24px) 100vw, 24px"></a></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-6 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-simple_menu " style="" data-widget-type="simple_menu" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_14660785977556957" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_simple_menu" style="" data-hs-cos-general-type="widget" data-hs-cos-type="simple_menu"><div id="hs_menu_wrapper_module_14660785977556957" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="">
  <ul class="active-branch">
-  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/#Overview">Overview</a></li>
-  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/#YAKINDUStatechartToolsReference">YAKINDU Statechart Tools Reference</a></li>
-  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/#the-statechart-language">The statechart language</a></li>
-  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/#editing-statecharts">Editing statecharts</a></li>
-  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/#simulating-statecharts">Simulating statecharts</a></li>
-  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/#generating-state-machine-code">Generating state machine code</a></li>
-  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/#c-code-generator">C code generator</a></li>
-  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/#cpp-code-generator">C++ code generator</a></li>
-  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/#java-code-generator">Java code generator</a></li>
-  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/#custom-code-generator">Custom code generator</a></li>
-  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/#installation-guide">Installation Guide</a></li>
+  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/#what-are-yakindu-statechart-tools" target="_self">Overview</a></li>
+  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/#editing-statecharts" target="_self">Editing statecharts</a></li>
+  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/#simulating-statecharts" target="_self">Simulating statecharts</a></li>
+  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/#advsim_simulation" target="_self">Debugging</a></li>
+  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/#cdom_deep-c-integration" target="_self">Deep C integration</a></li>
+  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/#the-statechart-language" target="_self">The statechart language</a></li>
+  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/#generating-state-machine-code" target="_self">Generating state machine code</a></li>
+  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/#c-code-generator" target="_self">C code generator</a></li>
+  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/#cpp-code-generator" target="_self">C++ code generator</a></li>
+  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/#java-code-generator" target="_self">Java code generator</a></li>
+  <li class="hs-menu-item hs-menu-depth-1 active active-branch"><a href="https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/#custom-code-generators" target="_self">Custom code generator</a></li>
  </ul>
 </div></span>
-                            </div><!--end layout-widget-wrapper -->
-                        </div><!--end widget-span -->
-                    </div><!--end row-->
-                    </div><!--end row-wrapper -->
-                </div><!--end widget-span -->
-            <div class="span8 widget-span widget-type-widget_container primary" style="" data-widget-type="widget_container" data-x="4" data-w="8">
-                <span id="hs_cos_wrapper_module_142730647072025608" class="hs_cos_wrapper hs_cos_wrapper_widget_container hs_cos_wrapper_type_widget_container" style="" data-hs-cos-general-type="widget_container" data-hs-cos-type="widget_container"><div id="hs_cos_wrapper_widget_3690225398" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><h1 id="Overview">Overview</h1>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-7 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cta " style="" data-widget-type="cta" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_146607869290911830" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_cta" style="" data-hs-cos-general-type="widget" data-hs-cos-type="cta"></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+<div class="span8 widget-span widget-type-widget_container primary" style="" data-widget-type="widget_container" data-x="4" data-w="8">
