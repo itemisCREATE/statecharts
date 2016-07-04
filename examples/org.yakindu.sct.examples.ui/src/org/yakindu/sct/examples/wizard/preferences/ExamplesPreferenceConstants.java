@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.examples.ui.wizards.preferences;
+package org.yakindu.sct.examples.wizard.preferences;
 
 /**
  * 

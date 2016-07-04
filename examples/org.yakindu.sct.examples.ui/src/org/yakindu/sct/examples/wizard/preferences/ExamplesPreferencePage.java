@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.examples.ui.wizards.preferences;
+package org.yakindu.sct.examples.wizard.preferences;
 
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.yakindu.sct.examples.ui.ExampleActivator;
+import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 
 /**

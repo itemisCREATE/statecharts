@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.examples.ui.wizards.pages;
+package org.yakindu.sct.examples.wizard.pages;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -35,9 +35,9 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.yakindu.sct.examples.ui.wizards.ExampleData;
-import org.yakindu.sct.examples.ui.wizards.ExampleWizardConstants;
-import org.yakindu.sct.examples.ui.wizards.IExampleService;
+import org.yakindu.sct.examples.wizard.service.ExampleData;
+import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
+import org.yakindu.sct.examples.wizard.service.IExampleService;
 
 import com.google.inject.Inject;
 

@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.examples.ui.wizards;
+package org.yakindu.sct.examples.wizard;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -18,7 +18,11 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-import org.yakindu.sct.examples.ui.wizards.pages.SelectExamplePage;
+import org.yakindu.sct.examples.wizard.pages.SelectExamplePage;
+import org.yakindu.sct.examples.wizard.service.ExampleData;
+import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
+import org.yakindu.sct.examples.wizard.service.ExampleWizardModule;
+import org.yakindu.sct.examples.wizard.service.IExampleService;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;

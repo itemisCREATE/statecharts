@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.examples.ui.wizards.pages;
+package org.yakindu.sct.examples.wizard.pages;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.yakindu.sct.examples.ui.wizards.ExampleData;
+import org.yakindu.sct.examples.wizard.service.ExampleData;
 
 /**
  * 

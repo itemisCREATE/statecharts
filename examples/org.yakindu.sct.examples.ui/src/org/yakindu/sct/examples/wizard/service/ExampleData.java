@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.examples.ui.wizards;
+package org.yakindu.sct.examples.wizard.service;
 
 import java.io.File;
 import java.util.Arrays;
