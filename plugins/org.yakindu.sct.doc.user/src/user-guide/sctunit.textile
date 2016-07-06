@@ -1,0 +1,349 @@
+
+p. 
+
+==<div class="pro-feature">==
+
+h1. SCTUnit
+
+h2. What is SCTUnit for?
+
+!(inlinemediaobject){float: right; height: 10ex}images/sctu_sctunit32.png!
+
+In test driven development, the developer creates automated unit tests before writing the implementation logic. These unit tests define the behavior of a particular piece of code using assertions and are very important to avoid regression when refactoring code.
+
+Test driven development can and should also be used in the context of model-driven development. Since YAKINDU statecharts provide an interface definition for every statechart model, it is possible to write unit tests against these interfaces before creating the implementing statechart model. 
+
+SCTUnit is a testing framework which allows to write unit tests for the YAKINDU Statechart Tools. You can validate the behavior of your statechart by writing a well-defined operational sequence with assertions about active states and values of variables. It allows test driven development of statechart models on the semantic level of statecharts.
+
+Based on these Unit tests, the framework generates JUnit tests to test the generated Java statechart as well as Google Tests for the generated C code. 
+h1. Getting started
+
+h2. Introduction
+
+This tutorial will introduce the YAKINDU Statechart Tools Testing Framework *SCTUnit*. SCTUnit allows to write tests for statecharts in the the well known XUnit style. Now you can act test driven while creating a statechart for your need. 
+
+In this tutorial you will learn how to create a test for a statechart and generate JUnit test code out of the model. You should already be familiar with statecharts and YAKINDU Statechart Tools should be installed.[ref Help SCT] 
+
+
+h2. CallHandling example explained
+
+Let's assume that we want to create a software to control a simple phone. The example application we will create during this tutorial is a system for handling of incoming phone calls. After start up, the system is in an Idle state and waits for incoming calls. If a call comes in, the user can either accept the call and open a connection or dismiss it. If the connection is opened, the system tracks the duration of the call and waits for the user to hang up. After hang up, the system displays the total time of call and returns to its idle state. The complete statechart model is shown below:
+
+!(standard-image)images/sctu_call_example.png!
+ 
+
+h2. Prepare a project
+
+The first step is to create a new Project by choosing _File -> New -> Project_. The dialog offers a couple of different project types. Since we want to generate Java code later on, choose _Java -> Java Project_ from the wizard menu. Give the project a meaningful name, i.e. CallHandling and click finish. It is good practice to separate your models from the source code. Therefore, create a new folder to the projects root by choosing _File -> New -> Folder_ from the projects context menu and call it "model". You also need to create a folder for the generated code, create two more folders with the names "src-gen" and "test-gen". Further you need another folder for the generator file, call this folder "genmodel". At last we need a folder for our test files (.sctunit), call this folder "tests".
+You now need to add **src-gen** (**test-gen** will be automatically added) to the Java build path as source (_Properties-> Java Build Path-> Source Tab-> "AddFolder"_) and add JUnit to the Libraries (_Properties-> Java Build Path-> Libraries Tab->"Add Libary..."-> JUnit -> Next -> Finish_). Your project should now look like this picture:
+
+!(standard-image)images/sctu_project_before.png!
+
+
+h2. Create the statechart model
+
+Next, create a new statechart model by choosing _File -> New -> Other -> YAKINDU -> YAKINDU Statechart Model_. The wizard asks for the parent folder and we choose "CallHandling/model". Name the File CallHandling.sct and finish the wizard. Last, confirm the perspective switch with Yes. The statechart editor opens and show the definition of a very simple statechart. You should know how to create this statechart below (ref SCT help) :
+
+
+!(standard-image)images/sctu_example_final.png!
+
+
+h2. Create SCTUnit Test
+
+Now we create a "CallHandling.sctunit" file in the "tests" folder. In this example there are two tests, in the first test we accept the call and talk for 10s. In the second test we dismiss the call.
+
+!(standard-image)images/sctu_testcase.png!
+
+
+h2. Create Java-Code
+
+You cannot run the SCTUnit file directly, you have to generate Code first. In this tutorial we will generate Java code, but it's also possible to create C code. First of all we have to create a generator file for the tests. For this we create a new file in the folder "genmodel" and call it "tests.sgen".
+In this file you can specify what tests should be generated and where to. It looks like this:
+
+!(standard-image)images/sctu_sgentest.png!
+
+In Java we need also a statemachine which act like the statechart. For this we create another generator file which is called "model.sgen":
+
+ 
+!(standard-image)images/sctu_sgenstatemachine.png!
+
+You now have to create the Java code for both, tests and statemachine. Rightclick on the two generator files ("tests.sgen" and "model.sgen") and *generate the Statechart Artifacts*.
+
+
+!(standard-image)images/sctu_genArtifacts.png!
+
+After you did this, your project should look like this:
+
+!(standard-image)images/sctu_project_after.png!
+
+
+h2. Running the Test
+
+The most important reason to create something is to use it, so do we. For running the test you just have to rightclick on the "CallHandlingTest.java" file in the "test-gen" folder. Now the test should success like this:
+
+!(standard-image)images/sctu_junitSuc2.png!
+
+Grats, you just successfully created your first SCTUnit JUnit test. More details will be provided in the next chapter.
+h1. Details of SCTUnit
+
+
+h2. Creating a Test Group / Test Suite 
+
+A SCTUnit file can contain a Test group or a Test Suite. In this chapter we introduce some useful details about the SCTUnit test files at all.
+
+h3. Test Group
+
+A Test Group is started by the keyword *testgroup* followed by the name of the Test Group. Further it's mandatory to  define a statechart for which the test is written. This happens through the keywords *for statechart* followed by the Name of the statechart. The list of all possible statecharts is provided by *STRG+SPACE* (as seen on next picture).  
+
+!(standard-image)images/sctu_strg_statechart.png!
+
+A Test group needs at least one test and a test needs at least one *enter* statement. It's not allowed to create more than one Test group per file. Following picture shows the minimum of a Test Group.
+
+!(standard-image)images/sctu_minimum_testgrp.png!
+
+h3. Test Suite
+
+In SCTUnit it is also possible to create Test Suites which contains a list of Test Groups that should be executed. Just create a Suite with the keyword *testsuite* followed by a name. Inside you can write the Test Groups you want to execute. In the picture below we have created another Test Group called "CallHandling2". As you can see the Test Groups are seperated by commas.
+
+!(standard-image)images/sctu_minimum_suite.png!
+
+h3. Namespaces
+
+It's not mandatory but you can use packages for your tests. This makes sense when you got a bunch of them. Write "namespace" followed by the name you wish. It's also possible to use full qualified names, look below:
+
+!(standard-image)images/sctu_namespace_sctunit.png!
+
+h2. SGen HowTo
+
+The Generator files (.sgen) are used to specify where the generated files are put. But SGen is not only used for this, you also can define many other attributes like for example a LiscenceHeader or debug information.
+
+A Generator file always starts with the keywords *GeneratorModel for* followed by the kind of generator and the subtype. With *STRG+SPACE* you get a list of possible Generators. As you can see there is not only SCTUnit:
+
+!(standard-image)images/sctu_sgen_generic.png!
+
+For a SCTUnit Generator we choose "sctunit::" followed by "java" for this example. This matches the "SCTUnit Generator for Java". 
+
+!(standard-image)images/sctu_sgen_java_01.png!
+
+Further we need to define a test, started with the keyword "test". With *STRG+SPACE* we get again all possible entries:
+
+!(standard-image)images/sctu_sgen_java_04.png! 
+
+For a test a "Outlet Feature" is mandatory, so we create it. The outlet feature got two attributes which also need to be defined: "target Project" and "targetFolder". There is a macro which can be used to create a default outlet feature.
+
+!(standard-image)images/sctu_sgen_java_02.png!
+
+The "targetProject" describes the Project in the actual Workspace where the test should be created. The default name is the project in which the file exist, but it's also possible to choose another project. For a better overview we change the default "targetFolder" from "src-gen" to "test-gen". This is not a must, just best practise, you can call the directory anything you want.
+ 
+!(standard-image)images/sctu_sgen_java_03.png!
+
+h3. Statemachine
+
+In java we also need a statemachine which is created in a similar way than the tests. We have to create another Generator file. Now we choose a *GeneratorModel for* for "yakindu::java". 
+
+!(standard-image)images/sctu_sgen_yakindu_01.png!
+
+In this Generator file we have to add the stetechart for which the statemachine should be generated. With *STRG+SPACE* we get all possible entries, just like before in the Generator file for the tests. This artifact also need a outlet feature, so we use the macro as we seen before. We can keep the "src-gen" as "targetFolder" because we allready put the tests into "test-gen". The name of the folder is not a must, just best practise, you can call the directory anything you want.
+
+!(standard-image)images/sctu_sgen_yakindu_02.png!
+
+h2. Folders meaning
+
+Take a look at the following picture. There are many different folders. The following list gives an overview about the function of each. 
+
+!(standard-image)images/sctu_project_after.png!
+
+* *src*: This is the default source folder, it's not used by SCTUnit.
+
+* *src-gen*: If you use SCTUnit for java this folder is used for the mandatory statemachine. You can change the name of this directory in the corresponding generator file. 
+
+* *test-gen*: This folder is the output directory for the tests. It's the same in java and C. You can change the name of this directory in the corresponding generator file.
+
+* *genmodel*: This folder contents the Generator files. In java you need two Generator files (statemachine and tests), in C only one Generator file is used (tests). You can execute them by right clicking on them and use *Generate Statechartart Artifacts*.
+
+* *model*: In this directory the statecharts itself should be stored.
+
+* *tests*: This directory contains the SCTUnit files. A SCTUnit file can contain a Test group or a Test Suite.
+
+All names are recommendations, you can change them as you want. 
+
++*Warning:*+ When *Generating Statechart Artifacts* the files in the target folder will be overwritten! Also the directory will not be cleaned from old code. So take care if you change a namespace or something else. Best practise is to delete the generated content in the target folder if you have any issues.
+
+
+h2. Reference
+
+h3. Test Group / Test Suite
+
+A SCTUnit file (*.sctunit*) can contain either a test group or a test suite. A test group contains one or more test cases. A test suite is a composite of tests groups. 
+
+==<!-- Start sctunit_keyword_testgroup -->==
+
+h4. Testgroup
+
+A test group consists of one ore more tests (the namespace is not required and optionally splits the testgroups into packages). Further its possible to create a testsuite or testgroup. In this example we create a testgroup which needs a name and is used for an existing statechart, which is shown with the *for* keyword. A testgroup needs at least one *test* which needs at least one *enter* statement. 
+
+Following example shows a minimal Test Group with namespace:
+
+bc(sctunit). 
+testgroup MyExample for statechart SomeStatechart {
+	test firstTest{
+		enter		
+	}	
+}
+
+p. ==<!-- End sctunit_keyword_testgroup -->==
+==<!-- Start sctunit_keyword_testsuite -->==
+
+h4. Testsuite 
+
+A Test Suite also can contain a namespace, just as seen at Test Group. A Test Suite is made to hold a list of Test Groups. Following example shows a minimal Test Suite:
+
+bc(sctunit). 
+testsuite MySuite{
+	TestGroup1,
+	Testgroup2
+}
+
+p. ==<!-- End sctunit_keyword_testsuite -->==
+
+==<!-- Start sctunit_keyword_test -->==
+
+h4. Test
+
+A Testgroup needs at least one test. A test is like a script with commands and asserts that are executed from above to bottom. A test must at least contain a "enter" statement. An example for a test is shown here:
+
+bc(sctunit). 
+testgroup MyExample for statechart SomeStatechart {
+	test MyTest{
+			enter
+			raise exampleEvent1
+			cycle
+			assert active (StateName)					
+	}	
+}
+
+p. ==<!-- End sctunit_keyword_test -->==
+
+
+==<!-- Start sctunit_keyword_namespace -->==
+
+h4(#namespace). Namespace
+
+It is optional possible to create namespaces. This namespaces work like packages. You can use full qualified names for a namespace.
+
+bc(sctunit). 
+namespace my.namespace.is.here
+testgroup MyTestGroup{
+...
+}
+
+p. ==<!-- End sctunit_keyword_namespace -->==
+
+
+h3. Statements
+
+*SCTUnit* provides a list of statements that should be familiar for most programmers:
+
+==<!-- Start sctunit_keyword_assert -->==
+
+h4. assert
+
+The expression followed by the 'assert' keyword expects a boolean condition to be true, the test will fail otherwise. It is possible to add an optional message to the assertion statement to clarify the expressions intention. The following example shows a statement that asserts if a state is 'active' or not.
+
+bc(prettyprint). assert active(MyStatechart.regionName.StateName) "Expected StateName to be active"
+assert !active(MyStatechart.regionName.AnotherStateName)
+
+It is also possible to assert variable values. You can use any boolean comparator and its also possible to access variables in Interfaces and values of events:
+
+bc(prettyprint). assert myVariable1 == 42
+assert myVariable2 == "Sense of life"
+assert myVariable3 => 41
+assert InterfaceName.MyEvent == 5
+
+p. ==<!-- End sctunit_keyword_assert -->==
+==<!-- Start sctunit_keyword_cycle -->==
+
+h4. cycle
+
+Since SCTUnit does not make any assumptions on the the execution behavior of the statemachine, it is required to execute a cycle manually with the 'cycle' keyword. 
+
+bc(prettyprint). cycle
+
+p. ==<!-- End sctunit_keyword_cycle -->==
+==<!-- Start sctunit_keyword_enter -->==
+==<!-- Start sctunit_keyword_exit -->==
+
+h4. enter / exit
+
+The 'enter' statements marks the entry of a statechart and is mandatory in every test. The 'exit' statement is only used if a statechart is leaved while the test is running. 
+
+bc(prettyprint). enter
+exit
+
+==<!-- End sctunit_keyword_exit -->==
+==<!-- End sctunit_keyword_enter -->==
+==<!-- Start sctunit_keyword_raise -->==
+
+
+h4. raise
+
+With the 'raise' statement it is possible to raise in events. Since SCTUnit tests are considered as black-box-tests, it is only allowed to raise in-events. Internal and out-events are not raisable from SCTUnit.
+
+bc(prettyprint). raise myEvent
+raise MyInterface.myEvent
+
+==<!-- End sctunit_keyword_raise -->==
+==<!-- Start sctunit_keyword_if -->==
+==<!-- Start sctunit_keyword_else -->==
+
+h4. if / else
+
+The 'if' statement works like in every other programming language. The only thing noticeable is, that the condition expression is surrounded by square brackets. The body must contain at least one statement.
+
+bc(prettyprint). if[variable1 > variable2]{
+	raise MyInterface.myEvent		
+} else {
+	raise MyInterface.myEvent2
+}
+
+==<!-- End sctunit_keyword_if -->==
+==<!-- End sctunit_keyword_else -->==
+==<!-- Start sctunit_keyword_while -->==
+
+h4. while
+
+The 'while' statement continually executes a block of statements while a particular condition evaluates to true. The while statement evaluates the conditional expression. If the expression is true, the while statement executes the statement(s) in the while body. The body must contain at least one statement.
+
+bc(prettyprint). while [value < 5] {
+	cycle
+	value=+1
+}
+
+==<!-- End sctunit_keyword_while -->==
+==<!-- Start sctunit_keyword_var -->==
+
+
+h4. var
+
+SCTUnit supports the declaration of local variables. A variable can be declared with the 'var' statement, followed by an unique identifier and a type. Optionally, a default value can be specificed.
+
+bc(prettyprint).  var myVar1 : integer
+var myVar2 : integer = 42
+var readonly const : string = "SCTUnit"
+var external ext : boolean = true	
+
+==<!-- End sctunit_keyword_var -->==
+==<!-- Start sctunit_keyword_wait -->==
+
+h4. wait
+
+The 'wait' statement causes the currently executing test to sleep for the specified time interval. the following time units are supported: seconds (s), milliseconds (ms), microseconds (us) and nanoseconds (ns). This statement depends on the precision and accuracy of system timers and schedulers.
+
+bc(prettyprint). wait 500 ms
+wait 1000 us
+wait 10000 ns
+wait 5s
+
+==<!-- End sctunit_keyword_wait -->==
+
+==</div>==
