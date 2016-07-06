@@ -3,442 +3,59 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.yakindu.sct</groupId>
-	<artifactId>org.yakindu.sct.releng</artifactId>
-	<version>2.6.2-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<parent>
+		<groupId>org.yakindu.sct</groupId>
+		<artifactId>org.yakindu.sct.releng</artifactId>
+		<version>2.6.2-SNAPSHOT</version>
+		<relativePath>../../releng/org.yakindu.sct.releng/pom.xml</relativePath>
+	</parent>
+	<artifactId>org.yakindu.sct.repository</artifactId>
+	<packaging>eclipse-repository</packaging>
 
-	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>0.24.0</tycho-version>
-		<tycho-extras-version>0.24.0</tycho-extras-version>
-		<antrun-version>1.6</antrun-version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<testFailureIgnore>false</testFailureIgnore>
+		<source.update.site>http://updates.yakindu.org/sct/mars/releases</source.update.site>
+		<target.update.site>target/repository</target.update.site>
+		<tycho.extras.version>0.24.0</tycho.extras.version>
 	</properties>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.5.201505241946</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<!-- enable tycho build extension -->
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-maven-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<extensions>true</extensions>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-p2-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<executions>
-					<execution>
-						<id>attached-p2-metadata</id>
-						<phase>package</phase>
-						<goals>
-							<goal>p2-metadata</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- pack plugins with pack200, which are smaller class files (Part I) -->
-			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-pack200a-plugin</artifactId>
-				<version>${tycho-extras-version}</version>
-				<executions>
-					<execution>
-						<id>pack200-normalize</id>
-						<goals>
-							<goal>normalize</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-platform-configuration</artifactId>
-				<version>${tycho-version}</version>
-			</plugin>
-		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!-- Avoid the generation of maven archive information in the META-INF 
-					folder -->
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-packaging-plugin</artifactId>
-					<version>${tycho-version}</version>
-					<configuration>
-						<archive>
-							<addMavenDescriptor>false</addMavenDescriptor>
-						</archive>
-					</configuration>
-				</plugin>
-				<!-- TYCHO -->
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-compiler-plugin</artifactId>
-					<version>${tycho-version}</version>
-					<configuration>
-						<encoding>UTF-8</encoding>
-						<source>7.0</source>
-						<target>7.0</target>
-						<extraClasspathElements>
-							<extraClasspathElement>
-								<groupId>com.google.inject.extensions</groupId>
-								<artifactId>guice-multibindings</artifactId>
-								<version>3.0</version>
-							</extraClasspathElement>
-						</extraClasspathElements>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.7</version>
-					<configuration>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>3.0.0</version>
-				</plugin>
-				<plugin>
-					<groupId>org.fornax.toolsupport</groupId>
-					<artifactId>fornax-oaw-m2-plugin</artifactId>
-					<version>3.6.0</version>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>1.10</version>
-				</plugin>
-				<plugin>
-					<groupId>org.eclipse.xtend</groupId>
-					<artifactId>xtend-maven-plugin</artifactId>
-					<version>2.9.1</version>
-					<configuration>
-						<!-- need to prefix by basedir to generate to currently built module -->
-						<outputDirectory>${basedir}/xtend-gen</outputDirectory>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-p2-repository-plugin</artifactId>
-					<version>${tycho-version}</version>
-				</plugin>
-				<!-- APACHE MAVEN PLUGINS -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-antrun-plugin</artifactId>
-					<version>1.8</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-assembly-plugin</artifactId>
-					<version>2.6</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-release-plugin</artifactId>
-					<configuration>
-						<preparationGoals>clean -DnewVersion=${releaseVersion}
-							-Dprudent=true
-							org.eclipse.tycho:tycho-versions-plugin:set-version
-							verify
-							scm:checkin</preparationGoals>
-						<arguments>-Prelease</arguments>
-					</configuration>
-				</plugin>
-				<plugin>
-					<!-- Base configuration of target environments -->
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>target-platform-configuration</artifactId>
-					<version>${tycho-version}</version>
-					<configuration>
-						<environments>
-							<environment>
-								<os>linux</os>
-								<ws>gtk</ws>
-								<arch>x86</arch>
-							</environment>
-							<environment>
-								<os>linux</os>
-								<ws>gtk</ws>
-								<arch>x86_64</arch>
-							</environment>
-							<environment>
-								<os>win32</os>
-								<ws>win32</ws>
-								<arch>x86</arch>
-							</environment>
-							<environment>
-								<os>win32</os>
-								<ws>win32</ws>
-								<arch>x86_64</arch>
-							</environment>
-							<environment>
-								<os>macosx</os>
-								<ws>cocoa</ws>
-								<arch>x86_64</arch>
-							</environment>
-						</environments>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
-
-	<pluginRepositories>
-		<!-- Fornax Workflow Runner plugin -->
-		<pluginRepository>
-			<id>fornax</id>
-			<url>http://www.fornax-platform.org/m2/repository</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<profiles>
 		<profile>
-			<id>Mars.target</id>
+			<id>CopySource</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>createComposite</name>
+					<value>true</value>
+				</property>
 			</activation>
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>target-platform-configuration</artifactId>
-						<version>${tycho-version}</version>
-						<configuration>
-							<includePackedArtifacts>true</includePackedArtifacts>
-							<target>
-								<artifact>
-									<groupId>org.yakindu.base</groupId>
-									<artifactId>org.yakindu.base.target</artifactId>
-									<version>2.6.2-SNAPSHOT</version>
-									<classifier>Mars</classifier>
-								</artifact>
-							</target>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>Luna.target</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>target-platform-configuration</artifactId>
-						<version>${tycho-version}</version>
-						<configuration>
-							<includePackedArtifacts>true</includePackedArtifacts>
-							<target>
-								<artifact>
-									<groupId>org.yakindu.base</groupId>
-									<artifactId>org.yakindu.base.target</artifactId>
-									<version>2.6.2-SNAPSHOT</version>
-									<classifier>Luna</classifier>
-								</artifact>
-							</target>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>Neon.target</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>target-platform-configuration</artifactId>
-						<version>${tycho-version}</version>
-						<configuration>
-							<includePackedArtifacts>true</includePackedArtifacts>
-							<target>
-								<artifact>
-									<groupId>org.yakindu.base</groupId>
-									<artifactId>org.yakindu.base.target</artifactId>
-									<version>2.6.2-SNAPSHOT</version>
-									<classifier>Neon</classifier>
-								</artifact>
-							</target>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>enableSigning</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>nexus-projects.itemis.de</id>
-					<url>https://projects.itemis.de/nexus/content/groups/maven-plugins/</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-				</pluginRepository>
-			</pluginRepositories>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>de.itemis.signing</groupId>
-						<artifactId>itemis-jarsigner</artifactId>
-						<version>0.0.4</version>
-						<configuration>
-							<sshKey>${ssh.key}</sshKey>
-						</configuration>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-p2-extras-plugin</artifactId>
+						<version>${tycho.extras.version}</version>
+						<inherited>false</inherited>
 						<executions>
 							<execution>
-								<id>sign</id>
-								<goals>
-									<goal>sign</goal>
-								</goals>
+								<id>append</id>
 								<phase>package</phase>
+								<goals>
+									<goal>mirror</goal>
+								</goals>
+								<configuration>
+									<source>
+										<repository>
+											<url>${source.update.site}</url>
+											<layout>p2</layout>
+										</repository>
+									</source>
+									<destination>${target.update.site}</destination>
+									<compress>true</compress>
+									<append>true</append>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>
 				</plugins>
 			</build>
 		</profile>
-		<profile>
-			<id>tests</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<modules>
-				<!-- test plugins -->
-				<module>../../test-plugins/org.yakindu.sct.model.sexec.test</module>
-				<module>../../test-plugins/org.yakindu.sct.model.sgraph.test</module>
-				<module>../../test-plugins/org.yakindu.sct.generator.genmodel.test</module>
-				<module>../../test-plugins/org.yakindu.sct.model.stext.resource.test</module>
-				<module>../../test-plugins/org.yakindu.sct.model.stext.test</module>
-				<module>../../test-plugins/org.yakindu.sct.simulation.core.sexec.test</module>
-				<module>../../test-plugins/org.yakindu.sct.test.models</module>
-				<module>../../test-plugins/org.yakindu.sct.generator.cpp.test</module>
-				<module>../../test-plugins/org.yakindu.sct.generator.java.test</module>
-				<module>../../test-plugins/org.yakindu.sct.refactoring.tests</module>
-				<module>../../test-plugins/org.yakindu.sct.generator.c.test</module>
-				<module>../../plugins/org.yakindu.base.types.test</module>
-				<!-- test feature -->
-				<module>../../features/org.yakindu.sct.test-feature</module>
-				<!-- test releng -->
-				<module>../org.yakindu.sct.repository.full</module>
-
-			</modules>
-		</profile>
 	</profiles>
-	<modules>
-		<!-- Examples -->
-		<module>../../examples/traffic_light</module>
-		<module>../../examples/digital_watch</module>
-		<module>../../examples/light_switch</module>
-		<module>../../examples/org.yakindu.sct.examples</module>
-		<!-- Releng -->
-		<module>../org.yakindu.base.target</module>
-		<module>../org.yakindu.base.repository</module>
-		<module>../org.yakindu.sct.repository</module>
-		<!-- Plugins -->
-		<module>../../plugins/org.yakindu.base.xtext.utils.gmf</module>
-		<module>../../plugins/org.yakindu.base.xtext.utils.jface</module>
-		<module>../../plugins/org.yakindu.base.types</module>
-		<module>../../plugins/org.yakindu.base.types.edit</module>
-		<module>../../plugins/org.yakindu.base.expressions</module>
-		<module>../../plugins/org.yakindu.base.expressions.edit</module>
-		<module>../../plugins/org.yakindu.base.expressions.ui</module>
-		<module>../../plugins/org.yakindu.base.gmf.runtime</module>
-		<module>../../plugins/org.yakindu.sct.commons</module>
-		<module>../../plugins/org.yakindu.sct.compare</module>
-		<module>../../plugins/org.yakindu.sct.domain</module>
-		<module>../../plugins/org.yakindu.sct.domain.generic</module>
-		<module>../../plugins/org.yakindu.sct.doc.user</module>
-		<module>../../plugins/org.yakindu.sct.generator.core</module>
-		<module>../../plugins/org.yakindu.sct.generator.genmodel</module>
-		<module>../../plugins/org.yakindu.sct.generator.genmodel.ui</module>
-		<module>../../plugins/org.yakindu.sct.model.sexec</module>
-		<module>../../plugins/org.yakindu.sct.model.sexec.edit</module>
-		<module>../../plugins/org.yakindu.sct.model.sgen</module>
-		<module>../../plugins/org.yakindu.sct.model.sgen.edit</module>
-		<module>../../plugins/org.yakindu.sct.model.sgraph</module>
-		<module>../../plugins/org.yakindu.sct.model.sgraph.edit</module>
-		<module>../../plugins/org.yakindu.sct.model.sgraph.ui</module>
-		<module>../../plugins/org.yakindu.sct.model.stext</module>
-		<module>../../plugins/org.yakindu.sct.model.stext.edit</module>
-		<module>../../plugins/org.yakindu.sct.model.resource</module>
-		<module>../../plugins/org.yakindu.sct.model.stext.ui</module>
-		<module>../../plugins/org.yakindu.sct.simulation.core</module>
-		<module>../../plugins/org.yakindu.sct.simulation.ui</module>
-		<module>../../plugins/org.yakindu.sct.simulation.core.sexec</module>
-		<module>../../plugins/org.yakindu.sct.simulation.ui.sexec</module>
-		<module>../../plugins/org.yakindu.sct.ui</module>
-		<module>../../plugins/org.yakindu.sct.ui.editor</module>
-		<module>../../plugins/org.yakindu.sct.ui.intro</module>
-		<module>../../plugins/org.yakindu.sct.ui.navigator</module>
-		<module>../../plugins/org.yakindu.sct.generator.c</module>
-		<module>../../plugins/org.yakindu.sct.generator.cpp</module>
-		<module>../../plugins/org.yakindu.sct.generator.java</module>
-		<module>../../plugins/org.yakindu.sct.refactoring</module>
-		<module>../../plugins/org.yakindu.sct.branding</module>
-
-		<!-- Features -->
-		<module>../../features/org.yakindu.base-feature</module>
-		<module>../../features/org.yakindu.base.xtext.utils.gmf-feature</module>
-		<module>../../features/org.yakindu.base.xtext.utils.jface-feature</module>
-		<module>../../features/org.yakindu.base.gmf.runtime-feature</module>
-		<module>../../features/org.yakindu.sct-feature</module>
-		<module>../../features/org.yakindu.sct.compare-feature</module>
-		<module>../../features/org.yakindu.sct.documentation-feature</module>
-		<module>../../features/org.yakindu.sct.editor-feature</module>
-		<module>../../features/org.yakindu.sct.simulation-feature</module>
-		<module>../../features/org.yakindu.sct.generator.c-feature</module>
-		<module>../../features/org.yakindu.sct.generator.cpp-feature</module>
-		<module>../../features/org.yakindu.sct.generator.java-feature</module>
-		<module>../../features/org.yakindu.sct.generator-feature</module>
-		<module>../../features/org.yakindu.sct.generator.model-feature</module>
-
-	</modules>
-
 </project>
