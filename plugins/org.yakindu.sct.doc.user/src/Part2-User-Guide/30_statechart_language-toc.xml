@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<toc topic="help/Part2-User-Guide/30_statechart_language.html" label="YAKINDU Statechart Tools – Open Source Edition">
+	<topic href="help/Part2-User-Guide/30_statechart_language.html" label="The statechart language">
+		<topic href="help/Part2-User-Guide/30_statechart_language.html#statechart" label="Statechart"></topic>
+		<topic href="help/Part2-User-Guide/30_statechart_language.html#graphical-elements" label="Graphical elements">
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#region" label="Region"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#state" label="State"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#transition" label="Transition"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#entry" label="Entry">
+				<topic href="help/Part2-User-Guide/30_statechart_language.html#default-entry" label="Default entry and initial state"></topic>
+				<topic href="help/Part2-User-Guide/30_statechart_language.html#named-entries" label="Named entries"></topic>
+			</topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#exit" label="Exit"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#final" label="Final state"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#choice" label="Choice"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#synchronization" label="Synchronization"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#composite-state" label="Composite state"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#orthogonal-states" label="Orthogonal states"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#shallow-history" label="Shallow history"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#deep-history" label="Deep history"></topic>
+		</topic>
+		<topic href="help/Part2-User-Guide/30_statechart_language.html#types" label="Types">
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#declaring-variables" label="Declaring variables"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#declaring-events" label="Declaring events"></topic>
+		</topic>
+		<topic href="help/Part2-User-Guide/30_statechart_language.html#statements" label="Statements">
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#assignments" label="Assignments"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#raising-an-event" label="Raising an event"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#calling-an-operation" label="Calling an operation"></topic>
+		</topic>
+		<topic href="help/Part2-User-Guide/30_statechart_language.html#expressions" label="Expressions">
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#LogicalAND" label="Logical AND"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#LogicalOR" label="Logical OR"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#LogicalNOT" label="Logical NOT"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#Conditionalexpression" label="Conditional expression"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#BitwiseXOR" label="Bitwise XOR"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#BitwiseOR" label="Bitwise OR"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#BitwiseAND" label="Bitwise AND"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#LogicalRelationsandShiftOperators" label="Logical Relations and Shift Operators"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#Binaryarithmeticoperators" label="Binary arithmetic operators"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#Unaryarithmeticoperators" label="Unary arithmetic operators"></topic>
+		</topic>
+		<topic href="help/Part2-User-Guide/30_statechart_language.html#scopes" label="Scopes">
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#Namespace" label="Namespace"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#interfacescope" label="Interface scope"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#internal-scope" label="Internal scope"></topic>
+		</topic>
+		<topic href="help/Part2-User-Guide/30_statechart_language.html#declarations" label="Declarations">
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#variables" label="Variables"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#constants" label="Constants"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#events" label="Events">
+				<topic href="help/Part2-User-Guide/30_statechart_language.html#incoming-and-outgoing-events" label="Incoming and outgoing events"></topic>
+				<topic href="help/Part2-User-Guide/30_statechart_language.html#events-with-variables" label="Events with variables"></topic>
+			</topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#operations" label="Operations"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#local-reactions" label="Local reactions"></topic>
+		</topic>
+		<topic href="help/Part2-User-Guide/30_statechart_language.html#reaction-triggers" label="Reaction triggers">
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#after" label="after"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#every" label="every"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#always" label="always"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#oncycle" label="oncycle"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#else" label="else"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#default" label="default"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#entry-1" label="entry"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#exit-1" label="exit"></topic>
+		</topic>
+		<topic href="help/Part2-User-Guide/30_statechart_language.html#built-in-functions" label="Built-in functions">
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#valueofevent" label="valueof(event)"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#as" label="as"></topic>
+			<topic href="help/Part2-User-Guide/30_statechart_language.html#activestate" label="active(state)"></topic>
+		</topic>
+	</topic>
+	<anchor id="additions"/>
+</toc>
