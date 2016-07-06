@@ -422,6 +422,7 @@
 		<module>../../plugins/org.yakindu.sct.generator.java</module>
 		<module>../../plugins/org.yakindu.sct.refactoring</module>
 		<module>../../plugins/org.yakindu.sct.branding</module>
+		<module>../../plugins/org.yakindu.sct.examples.wizard</module>
 
 		<!-- Features -->
 		<module>../../features/org.yakindu.base-feature</module>
