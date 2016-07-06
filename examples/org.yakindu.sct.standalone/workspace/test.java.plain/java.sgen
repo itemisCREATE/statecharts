@@ -1,8 +1,0 @@
-GeneratorModel for yakindu::java {
-	statechart default {
-		feature Outlet {
-			targetProject = "test.java.plain"
-			targetFolder = "gen"
-		}
-	}
-}
