@@ -26,6 +26,7 @@ import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
+import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
 import org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureType;
@@ -77,9 +78,12 @@ public class SGenQuickfixProvider extends DefaultQuickfixProvider {
 
 			for (FeatureType featureType : types) {
 				if (featureType.getName().equals(issue.getData()[0])) {
-					return desc.createFeatureValueProvider()
-							.createDefaultFeatureConfiguration(featureType,
-									element);
+					IDefaultFeatureValueProvider valueProvider = desc.createFeatureValueProvider();
+					if(valueProvider != null){
+						return valueProvider
+								.createDefaultFeatureConfiguration(featureType,
+										element);
+					}
 				}
 			}
 		}
