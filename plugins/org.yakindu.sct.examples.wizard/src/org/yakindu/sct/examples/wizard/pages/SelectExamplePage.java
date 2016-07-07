@@ -188,7 +188,7 @@ public class SelectExamplePage extends WizardPage
 				@Override
 				public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					final IStatus status = exampleService.fetchAllExamples(monitor);
-					Display.getDefault().syncExec(new Runnable() {
+					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
 							if (status.isOK()) {

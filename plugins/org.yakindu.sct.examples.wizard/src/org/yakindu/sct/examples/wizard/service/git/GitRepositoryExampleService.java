@@ -29,6 +29,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PullResult;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -95,7 +96,8 @@ public class GitRepositoryExampleService implements IExampleService {
 
 	protected IStatus updateRepository(IProgressMonitor monitor) {
 		try {
-			PullResult result = Git.open(gitRepo.toFile()).pull().call();
+			PullResult result = Git.open(gitRepo.toFile()).pull()
+					.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).call();
 			if (!result.isSuccessful()) {
 				return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
 						"Unable to update repository " + repositoryURL + "!");
@@ -111,7 +113,7 @@ public class GitRepositoryExampleService implements IExampleService {
 		Git call = null;
 		try {
 			call = Git.cloneRepository().setURI(repositoryURL).setDirectory(gitRepo.toFile())
-					.setProgressMonitor(new GitProgressMonitor(monitor)).call();
+					.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).call();
 		} catch (GitAPIException e) {
 			return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
 					"Unable to clone repository " + repositoryURL + "!");
@@ -198,6 +200,7 @@ public class GitRepositoryExampleService implements IExampleService {
 				Files.delete(file);
 				return FileVisitResult.CONTINUE;
 			}
+
 			@Override
 			public FileVisitResult postVisitDirectory(java.nio.file.Path dir, IOException exc) throws IOException {
 				Files.delete(dir);
