@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Yakindu/statecharts.svg?branch=master)](https://travis-ci.org/Yakindu/statecharts)
+[![Gitter](https://badges.gitter.im/Yakindu/statecharts.svg)](https://gitter.im/Yakindu/statecharts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/6091/badge.svg)](https://scan.coverity.com/projects/yakindu-statecharts)
 
 #YAKINDU Statechart Tools 
