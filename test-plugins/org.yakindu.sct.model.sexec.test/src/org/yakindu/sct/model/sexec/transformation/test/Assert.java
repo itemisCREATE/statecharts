@@ -191,19 +191,11 @@ public class Assert {
 	}
 
 	public static String stepListAsString(Sequence seq) {
-		String r = "";
-
+		StringBuilder r = new StringBuilder();
 		for (Step s : seq.getSteps()) {
-			// if (s instanceof Call) r += "call to : " +
-			// ((Call)s).getStep().getComment();
-			// else if (s instanceof StateSwitch) r += "switch on " +
-			// ((StateSwitch)s).getStateConfigurationIdx();
-			// else r += s;
-			//
-			r += stepAsString(s) + "; ";
+			r.append(stepAsString(s) + "; ");
 		}
-
-		return r;
+		return r.toString();
 	}
 
 	public static String stepAsString(Step step) {
