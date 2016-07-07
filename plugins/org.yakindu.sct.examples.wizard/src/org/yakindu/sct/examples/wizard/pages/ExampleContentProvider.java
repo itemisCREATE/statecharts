@@ -65,11 +65,13 @@ public class ExampleContentProvider implements ITreeContentProvider {
 
 	protected void groupCategories(List<ExampleData> newInput) {
 		for (ExampleData exampleData : newInput) {
-			String category = exampleData.getCategory();
-			if (!categories.containsKey(category)) {
-				categories.put(category, new Category(category));
+			String[] category = exampleData.getCategory();
+			for (String string : category) {
+				if (!categories.containsKey(string)) {
+					categories.put(string, new Category(string));
+				}
+				categories.get(string).getChildren().add(exampleData);
 			}
-			categories.get(category).getChildren().add(exampleData);
 		}
 	}
 

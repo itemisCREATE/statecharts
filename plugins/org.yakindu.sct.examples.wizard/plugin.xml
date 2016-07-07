@@ -7,7 +7,7 @@
             class="org.yakindu.sct.examples.wizard.ExampleWizard"
             icon="icons/logo-16.png"
             id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
-            name="YAKINDU Examples">
+            name="YAKINDU Statechart Examples">
       	</wizard>
     </extension>
   	<extension point="org.eclipse.ui.newWizards">
@@ -20,7 +20,7 @@
       		class="org.yakindu.sct.examples.wizard.ExampleWizard"
       		icon="icons/logo-16.png"
       		id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
-      		name="YAKINDU Examples">
+      		name="Examples">
       	</wizard>
   	</extension>
   	   <extension

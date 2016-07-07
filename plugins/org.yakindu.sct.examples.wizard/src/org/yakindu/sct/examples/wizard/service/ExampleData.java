@@ -22,12 +22,12 @@ public class ExampleData {
 
 	private String id;
 	private String title;
-	private String category;
+	private String[] category;
 	private String description;
 	private String[] images;
 	private File projectDir;
 
-	public ExampleData(String category, String id, String title, String description, String[] images) {
+	public ExampleData(String category[], String id, String title, String description, String[] images) {
 		this.category = category;
 		this.id = id;
 		this.title = title;
@@ -51,11 +51,11 @@ public class ExampleData {
 		this.title = title;
 	}
 
-	public String getCategory() {
+	public String[] getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(String[] category) {
 		this.category = category;
 	}
 
