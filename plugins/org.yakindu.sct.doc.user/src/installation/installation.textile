@@ -1,0 +1,396 @@
+
+h1(#installation-guide). Installation Guide
+
+In order to start working with YAKINDU Statechart Tools, you have to install the software on your computer. We are assuming you have downloaded the software package and stored it somewhere on your machine.
+
+The installation process boils down to
+# checking the "system requirements":#system-requirements,
+# unpacking the downloaded ZIP file containing YAKINDU Statechart Tools, and
+# executing the _SCT_ application.
+
+This is explained in more detail in section "&quot;Platform overview&quot;":#platform-overview and the following sections.
+
+Java developers might want to read section "JRE not found":#jre-not-found, in case they encounter a certain problem.
+
+h2(#system-requirements). System requirements
+
+h3(#java). Java
+
+YAKINDU Statechart Tools is based on the Java programming language and requires *Java 7* or higher. A Java Runtime Environment (JRE) must be installed on your computer.
+
+Installation of Java is beyond the scope of this document. You can find more information on Java and download it for free from Oracle Corporation at "https://www.java.com/":https://www.java.com/. Before downloading Java, make sure you are picking the variant with the correct bit size, i.&nbsp;e. either 32 or 64 bit, whichever is appropriate for your computer.
+
+h3(#eclipse). Eclipse
+
+Internally, YAKINDU Statechart Tools are based on *"Eclipse":http://www.eclipse.org/*, an integrated development environment (IDE). YAKINDU Statechart Tools are running inside the Eclipse environment. When you are installing YAKINDU Statechart Tools, a full-fledged Eclipse instance will be put on your computer. Currently (summer 2016) it is the *Mars* release.
+
+If you are new to Eclipse, you might find the "Eclipse Help":http://help.eclipse.org/ useful, especially the "Workbench User Guide".
+
+If you are an experienced Eclipse user, you can install YAKINDU Statechart Tools into a existing Eclipse instance from an update site.
+
+h2(#platform-overview). Platform overview
+
+You can install YAKINDU Statechart Tools as a stand-alone software package under the following operating systems:
+
+* "Installing YAKINDU Statechart Tools on Windows":#installing-on-windows
+* "Installing YAKINDU Statechart Tools on Mac  OS X":#installing-on-macosx
+* "Installing YAKINDU Statechart Tools on Linux":#installing-on-linux
+
+Alternatively you can install YAKINDU Statechart Tools into an existing Eclipse instance.
+
+* "Installing YAKINDU Statechart Tools to an existing Eclipse instance":#installing-to-an-existing-eclipse-instance
+
+h2(#installing-on-windows). Installing on Windows
+
+This chapter describes how to install YAKINDU Statechart Tools on a Windows 7 machine.
+
+h3(#unpacking-the-downloaded-file). Unpacking the downloaded file
+
+Unpack the software distribution file. Use the file explorer to open the directory you downloaded the software distribution file to, right-click on the latter, and select _Extract All..._ in the context menu.
+
+!(standard-image)images/inst_windows7_010_eclipse_extract_1.png(Unpacking the downloaded file on Windows [1])!
+
+p=. Unpacking the downloaded file on Windows &#91;1]
+
+Choose a directory for YAKINDU Statechart Tools (YAKINDU SCT). The example below assumes you want to install the software in the _C:\Program Files\YAKINDU_ directory.
+
+Depending on your permissions, you might not be able to create a directory and install software under _C:\Program Files_. In this case, please choose another installation directory at a location you are allowed to write to.
+
+!(standard-image)images/inst_windows7_020_eclipse_extract_2.png(Unpacking the downloaded file on Windows [2])!
+
+p=. Unpacking the downloaded file on Windows &#91;2]
+
+Click on _Extract_ to start the extraction process. With Window's built-in unpacker, this will take surprisingly much time. Alternatively, you can use a 3rd-party unpacker like "7-Zip":http://www.7-zip.org/. Saves you a lot of time!
+
+After unpacking, you will find a folder _yakindu-sct_ in your installation directory, i. e. _C:\Program Files\YAKINDU\yakindu-sct_ in our example, as shown in the image below:
+
+!(standard-image)images/inst_windows7_030_eclipse_folder.png(The extracted "yakindu-sct" folder)!
+
+p=. The extracted _yakindu-sct_ folder
+
+The contents of the _yakindu-sct_ folder looks like this:
+
+!(standard-image)images/inst_windows7_040_eclipse_contents.png(Contents of the extracted "yakindu-sct" folder)!
+
+p=. Contents of the extracted _yakindu-sct_ folder
+
+There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
+
+h3(#starting-yakindu-statechart-tools). Starting YAKINDU Statechart Tools
+
+Start YAKINDU Statechart Tools by running the _SCT.exe_ executable.
+
+To do so, please double-click (or single-click, depending on your Windows settings) on the _YAKINDU_ symbol shown in the sample screenshot above.
+
+Depending on the Windows settings and your permissions, you might get the following security warning, indicating that you downloaded the application from a potentially unsecure source:
+
+!(standard-image)images/inst_windows7_045_security_warning.png(Windows security warning)!
+
+p=. Windows security warning
+
+Uncheck the _Always ask before opening this file_ option. Click _Run_ to continue starting the application. Subsequently starting YAKINDU Statechart Tools will not show this security warning again.
+
+While YAKINDU Statechart Tools is starting up, it is showing a splash screen:
+
+!(standard-image)images/inst_windows7_050_eclipse_splash.png(YAKINDU Statechart Tools starting up and showing a splash screen)!
+
+p=. YAKINDU Statechart Tools starting up and showing a splash screen
+
+The software needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, the _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please select a new and empty one.
+
+In the example below, we chose the _C:\Users\joedoe\workspace_ directory as our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, YAKINDU Statechart Tools won't ask for a workspace directory again. Instead it will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the main menu.)
+
+!(standard-image)images/inst_windows7_060_eclipse_workspace_dialog.png(Selecting a workspace)!
+
+p=. Selecting a workspace
+
+Click on the _OK_ button to proceed.
+
+On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
+
+!(standard-image)images/inst_windows7_070_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
+
+p=. YAKINDU Statechart Tools presenting the "Welcome" window
+
+You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
+
+!(standard-image)images/inst_windows7_080_eclipse_workbench.png(The YAKINDU Statechart Tools workbench)!
+
+p=. The YAKINDU Statechart Tools workbench
+
+This is your working environment now. Congratulations, you have just installed YAKINDU Statechart Tools with Eclipse!
+
+You can "proceed":../tutorials/tutorials.html now to create your first YAKINDU Statecharts Tools project.
+
+h2(#installing-on-macosx). Installing on Mac OS X
+
+This chapter describes how to install YAKINDU Statechart Tools on a Mac computer under Mac OS X.
+
+h3(#unpacking-the-downloaded-file-1). Unpacking the downloaded file
+
+When downloading the ZIP file containing the software distribution in a browser to your local disk, the _Archive Utility_ automatically unpacks it by default. Upon success, the ZIP file is removed. Alternatively you can unpack the ZIP file manually by double-clicking it.
+
+Unpacking will provide you with the _YAKINDU SCT_ application bundle.
+
+Move the unpacked application bundle to your _Applications_ folder. Alternatively, you can also move it somewhere else as you see fit. The screenshot below shows the _YAKINDU SCT_ application bundle having been moved to _Applications_.
+
+!(standard-image shadowless)images/inst_macosx_010_applications.png(The YAKINDU Statecharts Tools application in the "Applications" directory)!
+
+p=. The YAKINDU Statecharts Tools application in the "Applications" directory
+
+There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
+
+h3(#starting-yakindu-statechart-tools-1). Starting YAKINDU Statechart Tools
+
+Start YAKINDU Statechart Tools by running the _YAKINDU SCT_ application.
+
+To do so, please double-click on the _YAKINDU_ symbol shown in the sample screenshot above.
+
+Upon the first start, Mac OS X will verify the application and show you the following security warning, indicating that you did not download the application from Apple's App Store, but from a potentially unsecure source instead:
+
+!(standard-image shadowless)images/inst_macosx_020_security_warning.png(Mac OS X warning)!
+
+p=. Mac OS X warning
+
+Click _Open_ to continue starting the application. Subsequently starting YAKINDU Statechart Tools will not show that security warning again.
+
+While YAKINDU Statechart Tools is starting up, it is showing a splash screen:
+
+!(standard-image shadowless)images/inst_macosx_050_eclipse_splash.png(YAKINDU Statechart Tools starting up and showing a splash screen)!
+
+p=. YAKINDU Statechart Tools starting up and showing a splash screen
+
+The software needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, the _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please select a new and empty one.
+
+In the example below, we chose the _/Users/joedoe/workspace_ directory as our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, YAKINDU Statechart Tools won't ask for a workspace directory again. Instead it will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the main menu.)
+
+!(standard-image shadowless)images/inst_macosx_060_eclipse_workspace_dialog.png(Selecting a workspace)!
+
+p=. Selecting a workspace
+
+Click on the _OK_ button to proceed.
+
+On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
+
+!(standard-image shadowless)images/inst_macosx_070_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
+
+p=. YAKINDU Statechart Tools presenting the "Welcome" window
+
+You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
+
+!(standard-image shadowless)images/inst_macosx_080_eclipse_workbench.png(The YAKINDU Statechart Tools workbench)!
+
+p=. The YAKINDU Statechart Tools workbench
+
+This is your working environment now. Congratulations, you have just installed YAKINDU Statechart Tools with Eclipse!
+
+You can "proceed":../tutorials/tutorials.html now to create your first YAKINDU Statecharts Tools project.
+
+h2(#installing-on-linux). Installing on Linux
+
+This chapter describes how to install YAKINDU Statechart Tools on a Linux machine using a command-line tool. The installation doesn't require _root_ permissions.
+
+h3(#unpacking-the-downloaded-file-2). Unpacking the downloaded file
+
+Choose a directory for YAKINDU Statechart Tools. The commands below assume you want to install the software in the _/my/software_ directory. Please modify the commands appropriately to install somewhere else!
+
+Go to the installation directory:
+
+bc. cd /my/software/
+
+
+Unpack the software distribution file. If the downloaded file is located in _/download/sct-linux.gtk.x86&#95;64.zip_, use the following command to unpack in the installation directory:
+
+bc. unzip /download/sct-linux.gtk.x86_64.zip
+
+
+This will create a folder _yakindu-sct_ in your installation directory, i. e. _/my/software/yakindu-sct_ in our example, as shown in the image below:
+
+!(standard-image)images/inst_linux_010_eclipse_folder.png(The extracted "yakindu-sct" folder)!
+
+p=. The extracted "yakindu-sct" folder
+
+The contents of the _yakindu-sct_ folder looks like this:
+
+!(standard-image)images/inst_linux_020_eclipse_contents.png(Contents of the extracted "yakindu-sct" folder)!
+
+p=. Contents of the extracted "yakindu-sct" folder
+
+There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
+
+h3(#starting-yakindu-statechart-tools-2). Starting YAKINDU Statechart Tools
+
+Start YAKINDU Statechart Tools by running the _SCT_ executable.
+
+To do so, please enter the command
+
+bc. yakindu-sct/SCT
+
+
+in your installation directory. Or issue the command
+
+bc. /my/software/yakindu-sct/SCT
+
+
+if your command shell is in any other working directory.
+
+From a file browser, you can start YAKINDU Statechart Tools by clicking on the _SCT_ symbol, shown as a gear-wheel in the sample screenshot above.
+
+While YAKINDU Statechart Tools is starting up, it is showing a splash screen:
+
+!(standard-image)images/inst_linux_030_eclipse_splash.png(YAKINDU Statechart Tools starting up and showing a splash screen)!
+
+p=. YAKINDU Statechart Tools starting up and showing a splash screen
+
+The software needs a _workspace_ directory where it stores its so-called projects along with other data. During the first startup, the _Workspace Launcher_ dialog asks you to specify the workspace directory in the _Workspace_ field. Please select a new and empty one.
+
+In the example below, we chose the _/my/workspace_ directory as our workspace. We also checked the _"Use this as the default and do not ask again"_ option. This is sensible, because on subsequent startups, YAKINDU Statechart Tools won't ask for a workspace directory again. Instead it will always use the one we chose once and forever. (You can still change the workspace later via _File → Switch Workspace_ in the main menu.)
+
+!(standard-image)images/inst_linux_040_eclipse_workspace_dialog.png(Selecting a workspace)!
+
+p=. Selecting a workspace
+
+Click on the _OK_ button to proceed.
+
+On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
+
+!(standard-image)images/inst_linux_050_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
+
+p=. YAKINDU Statechart Tools presenting the "Welcome" window
+
+You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
+
+!(standard-image)images/inst_linux_060_eclipse_workbench.png(The YAKINDU Statechart Tools workbench)!
+
+p=. The YAKINDU Statechart Tools workbench
+
+This is your working environment now. Congratulations, you have just started YAKINDU Statechart Tools!
+
+You can "proceed":../tutorials/tutorials.html now to create your first YAKINDU Statecharts Tools project.
+
+h2(#installing-to-an-existing-eclipse-instance). Installing to an existing Eclipse instance
+
+This chapter describes the steps that are needed to install YAKINDU Statechart Tools to an existing Eclipse instance. Let's assume you already have Eclipse up and running and now you want to install YAKINDU Statechart Tools as an additional software item (plugin).
+
+In the the _Help_ menu, select the _Install New Software_ menu item:
+
+!(standard-image)images/inst_eclipse_010_eclipse_menu_install_new_software.png(Selecting "Help → Install New Software" in the main menu)!
+
+p=. Selecting "Help → Install New Software" in the main menu
+
+The _Install_ wizard opens:
+
+!(standard-image)images/inst_eclipse_020_eclipse_install_wizard.png(The "Install" wizard)!
+
+p=. The "Install" wizard
+
+Click on the _Add..._ button near the upper right corner of the wizard.
+
+A dialog opens, asking you to specify the update repository you want to install the new software from. The appropriate update repository depends on your Eclipse version. Please enter the respective update repository into the _Location_ field.
+
+table(#updaterepositories).
+|\2_. Eclipse |\2_. YAKINDU Statechart Tools Update Repository |
+|_. Name |_. Version |_. Release Build |
+|Neon|4.6|"http://updates.yakindu.org/sct/neon/releases/":http://updates.yakindu.org/sct/neon/releases/|
+|Mars|4.5|"http://updates.yakindu.org/sct/mars/releases/":http://updates.yakindu.org/sct/mars/releases/|
+|Luna|4.4|"http://updates.yakindu.org/sct/luna/releases/":http://updates.yakindu.org/sct/luna/releases/|
+
+p. Please note that YAKINDU Statechart Tools might take some time to catch up with more recent Eclipse releases. The corresponding update repositories will not be available until then.
+
+Enter some text into the _Name_ field. This text is abitrary in principle, but you should choose something that makes it easier for you to identify this particular update repository among other update repositories. In the example below, the repository's name is @YAKINDU Statechart Tools (Luna)@. It describes which piece of software the repository provides (YAKINDU Statechart Tools) and which Eclipse release that software is compatible with (Luna, i. e. Eclipse 4.4).
+
+!(standard-image)images/inst_eclipse_030_eclipse_add_repository.png(Adding a software repository)!
+
+p=. Adding a software repository
+
+After entering name and location of the update repository, click _OK_.
+
+Eclipse establishes a network connection to the update repository, asks it for available software items and shows them in the install wizard:
+
+!(standard-image)images/inst_eclipse_040_eclipse_software_items.png(Selecting YAKINDU Statechart Tools software items)!
+
+p=. Selecting YAKINDU Statechart Tools software items
+
+Please check at least _Xtext Integration Utilities_ and – no surprise – _YAKINDU SCT_. (You can also install the respective source code items. However, unless you want to have a look at that source code or even want to modify it, you don't need them.)
+
+Click _Next &gt;_.
+
+Eclipse tries to integrate the new software with the software that is already installed. If it detects any mismatches between requirements and provisions, Eclipse will try to find a solution in order to mitigate this problem. The screenshot below shows such a case:
+
+!(standard-image)images/inst_eclipse_050_eclipse_trouble.png(Install remediation page)!
+
+p=. Install remediation page
+
+Select the most appropriate solution, then click _Next &gt;_.
+
+The wizard shows the software to be installed and gives you the opportunity to review the changes:
+
+!(standard-image)images/inst_eclipse_060_eclipse_review.png(Reviewing the items to be installed)!
+
+p=. Reviewing the items to be installed
+
+Click _Next &gt;_.
+
+The wizard asks you to review and accept the terms of the new software's license agreements.
+
+!(standard-image)images/inst_eclipse_070_eclipse_licenses.png(Accepting the new software's license agreements)!
+
+p=. Accepting the new software's license agreements
+
+Select the radio button labelled _I accept the terms of the license agreements_ (if you do), then click _Finish_.
+
+Eclipse starts to download the software and installs it on your computer. This may take some time.
+
+!(standard-image)images/inst_eclipse_080_eclipse_installation.png(Installing software in progress ...)!
+
+p=. Installing software in progress ...
+
+If the installation was completed successfully, Eclipse needs a restart in order to have the changes take effect. A dialog asks whether you want to restart Eclipse right now or later:
+
+!(standard-image)images/inst_eclipse_090_eclipse_restart.png(Restarting Eclipse after software installation)!
+
+p=. Restarting Eclipse after software installation
+
+After the restart, Eclipse displays its _Welcome_ window, now also featuring YAKINDU Statechart Tools:
+
+!(standard-image)images/inst_eclipse_100_eclipse_sct_help.png(Eclipse presenting the "Welcome" window)!
+
+p=. Eclipse presenting the "Welcome" window
+
+h2(#updating-yakindu-statechart-tools). Updating YAKINDU Statechart Tools
+
+To check whether a new YAKINDU Statechart Tools release is available and to install it, please select the _Help → Check for Updates_ menu item.
+
+!(standard-image)images/inst_eclipse_update_010_eclipse_menu_check_for_updates.png(Selecting "Help → Check for Updates" in the main menu)!
+
+p=. Selecting "Help → Check for Updates" in the main menu
+
+If Eclipse finds any software items to be updated – not just YAKINDU Statechart Tools –, it will guide you through the process of updating them. Generally Eclipse has to be restarted afterwards to have any changes take effect.
+
+You can configure Eclipse as follows to automatically check for updates:
+
+Select the _Window → Preferences_ menu item. The _Preferences_ dialog opens.
+
+Go to the _Install/Update → Automatic Updates_ section. Here you can configure whether and when Eclipse should check for updates and what to do when it finds any.
+
+!(standard-image)images/inst_eclipse_update_020_eclipse_automatic_updates.png(Configuring automatic update)!
+
+p=. Configuring automatic update
+
+h2(#jre-not-found). JRE not found
+
+If you want to develop Java source code, you need a Java Runtime Environment (JRE) or Java Development Kit (JDK) in your workspace.
+
+Usually Eclipse's Java Development Toolkit (JDT), which is bundled with YAKINDU Statechart Tools, automatically finds one or more JREs on your machine. However, under certain circumstances this won't work and even the JRE that is used to run Eclipse cannot be found. In this case, you will have to add a JRE definition to your workspace by hand.
+
+In order to check whether you are affected, proceed as follows:
+
+# In the main menu, select _Window → Preferences_. The _Preferences_ window opens.
+# In the _Preferences_ window, select _Java → Installed JREs_.
+
+If the list of installed JREs is empty, you are affected by the problem and will have to manually add a JRE definition. Click on the _Add…_ button and follow the _Add JRE_ wizard. The Eclipse documentation explains in more detail how to "add a new JRE definition":http://help.eclipse.org/neon/index.jsp?topic=%252Forg.eclipse.jdt.doc.user%252Ftasks%252Ftask-add_new_jre.htm to your workspace.
+
+!(standard-image)images/inst_installed_jres_010.png(Installed JREs)!
+
+p=. Installed JREs
+

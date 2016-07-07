@@ -1,5 +1,15 @@
-.logo_small {
-	margin-left:-60px;
+a#yakindu-documentation-link img,
+a#yakindu-examples-link img,
+a#yakindu-tutorials-link img,
+a#yakindu-user-forum-link img
+{
+    background-image: url(../img/logo_shadowed.png);
 }
 
-
+a#yakindu-documentation-link:hover img,
+a#yakindu-examples-link:hover img,
+a#yakindu-tutorials-link:hover img,
+a#yakindu-user-forum-link:hover img
+{
+    background-image: url(../img/logo_hover.png);
+}

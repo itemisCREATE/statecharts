@@ -1,0 +1,121 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="{{ html_lang }}" {{ html_lang_dir }}> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="{{ html_lang }}" {{ html_lang_dir }}>        <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="{{ html_lang }}" {{ html_lang_dir }}>               <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="{{ html_lang }}" {{ html_lang_dir }}> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="author" content="{{ meta_author }}">
+    <meta name="description" content="{{ page_meta.meta_description }}">
+    <title>{{ page_meta.html_title }}</title>
+    {% if site_settings.favicon_src %}<link rel="shortcut icon" href="{{ site_settings.favicon_src }}" />{% endif %}
+    <link rel="stylesheet" href="{{ get_public_template_url("custom/system/default/inbound-performance.css") }}">
+    
+{{ standard_header_includes }}
+    {% style include_default_custom_css="true" %}
+
+</head>
+<body class="scrum-wiki-page sct-docs homepage-test {{ builtin_body_classes }}" style="">
+    <div class="header-container-wrapper">
+    <div class="header-container container-fluid">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-global_group " style="" data-widget-type="global_group" data-x="0" data-w="12">
+{% include 'generated_global_groups/3772713661.html' %}
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell site-header" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-3 ">
+<div class="row-fluid ">
+<div class="span2 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="2">
+<div class="cell-wrapper layout-widget-wrapper">
+{% custom_widget "module_14660785454254323" overrideable=true, cell=false, cells='[]', ending_html='', root=false, row=false, starting_html='', custom_widget_id=3790169343, widget_name='Site Header Title', label='Site Header Title' %}</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+<div class="span10 widget-span widget-type-menu menu-primary" style="" data-widget-type="menu" data-x="2" data-w="10">
+<div class="cell-wrapper layout-widget-wrapper">
+{% menu "module_142729402815510929" overrideable=false, cell=false, cells='[]', ending_html='', root=false, row=false, starting_html='', flow='horizontal', flyouts='true', max_levels='2', root_type='site_root', site_map_name='YAKINDU Statechart tools', wrapping_html='', label='Advanced Menu' %}</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+    </div><!--end header -->
+</div><!--end header wrapper -->
+
+<div class="body-container-wrapper">
+    <div class="body-container container-fluid">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell primary-section breadcrumbs" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-menu page-center" style="" data-widget-type="menu" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+{% menu "module_142730340506520965" overrideable=false, cell=false, cells='[]', ending_html='', root=false, row=false, starting_html='', flow='horizontal', flyouts='true', max_levels='2', root_type='breadcrumb', site_map_name='YAKINDU Statechart tools', wrapping_html='', label='Breadcrumbs' %}</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-3 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell page-center section content-wrapper" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-4 ">
+<div class="row-fluid ">
+<div class="span4 widget-span widget-type-cell sidebar" style="" data-widget-type="cell" data-x="0" data-w="4">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-5 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-social_sharing " style="" data-widget-type="social_sharing" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+{% widget_block social_sharing "module_14504476394501098" overrideable=true, cell=false, cells='[]', ending_html='', root=false, row=false, starting_html='', use_page_url=true, label='Social Sharing' %}
+{% widget_attribute "email" is_json=True %}{"default":true,"enabled":false,"img_src":"http://info.itemis.com/hubfs/images/social-icons/email-24x24.png","link_format":"mailto:?subject=Check out {{ social_link_url }} &body=Check out {{ social_link_url }}","network":"Email"}{% end_widget_attribute %}
+{% widget_attribute "facebook" is_json=True %}{"default":true,"enabled":false,"img_src":"http://info.itemis.com/hubfs/images/social-icons/facebook-24x24.png","link_format":"http://www.facebook.com/share.php?u={{ social_link_url }}","network":"Facebook"}{% end_widget_attribute %}
+{% widget_attribute "google_plus" is_json=True %}{"default":true,"enabled":false,"img_src":"http://info.itemis.com/hubfs/images/social-icons/googleplus-24x24.png","link_format":"https://plus.google.com/share?url={{ social_link_url }}","network":"Google+"}{% end_widget_attribute %}
+{% widget_attribute "linkedin" is_json=True %}{"default":true,"enabled":false,"img_src":"http://info.itemis.com/hubfs/images/social-icons/linkedin-24x24.png","link_format":"http://www.linkedin.com/shareArticle?mini=true&url={{ social_link_url }}","network":"LinkedIn"}{% end_widget_attribute %}
+{% widget_attribute "pinterest" is_json=True %}{"default":true,"enabled":false,"img_src":"http://info.itemis.com/hubfs/images/social-icons/pinterest-24x24.png","link_format":"http://pinterest.com/pin/create/button/?url={{ social_link_url }}&media={{ pinterest_media }}","network":"Pinterest","secondary_fields":[{"default":"","name":"pinterest_media","type":"image"}]}{% end_widget_attribute %}
+{% widget_attribute "twitter" is_json=True %}{"default":true,"enabled":false,"img_src":"http://info.itemis.com/hubfs/images/social-icons/twitter-24x24.png","link_format":"https://twitter.com/intent/tweet?original_referer={{ social_link_url }}&url={{ social_link_url }}&source=tweetbutton&text={{ social_page_title }}","network":"Twitter"}{% end_widget_attribute %}
+  {% end_widget_block %}
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-6 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-simple_menu " style="" data-widget-type="simple_menu" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+{% widget_block simple_menu "module_14660785977556957" overrideable=true, cell=false, cells='[]', ending_html='', root=false, row=false, starting_html='', label='Simple Menu' %}
+  {% end_widget_block %}
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-7 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cta " style="" data-widget-type="cta" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+{% cta "module_146607869290911830" overrideable=true, embed_code='null', guid='null', image_html='null', image_src='null', label='Call-to-Action' %}</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+<div class="span8 widget-span widget-type-widget_container primary" style="" data-widget-type="widget_container" data-x="4" data-w="8">
