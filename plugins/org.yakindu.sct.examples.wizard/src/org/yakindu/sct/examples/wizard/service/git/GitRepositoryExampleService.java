@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
@@ -29,9 +30,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jgit.api.FetchCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PullResult;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.transport.FetchResult;
+import org.eclipse.jgit.transport.TrackingRefUpdate;
 import org.eclipse.ui.dialogs.IOverwriteQuery;
 import org.eclipse.ui.wizards.datatransfer.FileSystemStructureProvider;
 import org.eclipse.ui.wizards.datatransfer.ImportOperation;
@@ -56,6 +60,8 @@ import com.google.inject.name.Named;
 public class GitRepositoryExampleService implements IExampleService {
 
 	private static final String METADATA_JSON = "metadata.json";
+
+	private static final String RELEASE = "release";
 
 	@Inject
 	@Named(ExampleWizardModule.REPOSITORY_URL)
@@ -112,8 +118,13 @@ public class GitRepositoryExampleService implements IExampleService {
 		Git call = null;
 		try {
 			call = Git.cloneRepository().setURI(repositoryURL).setDirectory(gitRepo.toFile())
-					.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).call();
+					.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).setBranch(RELEASE).call();
 		} catch (GitAPIException e) {
+			try {
+				deleteFolder(gitRepo);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 			return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
 					"Unable to clone repository " + repositoryURL + "!");
 		} finally {
@@ -193,6 +204,8 @@ public class GitRepositoryExampleService implements IExampleService {
 	}
 
 	public void deleteFolder(java.nio.file.Path path) throws IOException {
+		if(!Files.exists(path))
+			return;
 		Files.walkFileTree(path, new SimpleFileVisitor<java.nio.file.Path>() {
 			@Override
 			public FileVisitResult visitFile(java.nio.file.Path file, BasicFileAttributes attrs) throws IOException {
@@ -209,9 +222,20 @@ public class GitRepositoryExampleService implements IExampleService {
 	}
 
 	@Override
-	public boolean isUpToDate() {
-		// TODO
-		return true;
+	public boolean isUpToDate(IProgressMonitor monitor) {
+		try {
+			FetchCommand fetch = Git.open(gitRepo.toFile()).fetch();
+			FetchResult result = fetch.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).setDryRun(true)
+					.call();
+			Collection<TrackingRefUpdate> trackingRefUpdates = result.getTrackingRefUpdates();
+			for (TrackingRefUpdate trackingRefUpdate : trackingRefUpdates) {
+				System.out.println(trackingRefUpdate);
+			}
+			return trackingRefUpdates.size() == 0;
+
+		} catch (Exception ex) {
+			return true;
+		}
 	}
 
 }
