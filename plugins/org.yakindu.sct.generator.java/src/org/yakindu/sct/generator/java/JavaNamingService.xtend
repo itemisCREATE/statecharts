@@ -62,15 +62,15 @@ class JavaNamingService extends DefaultNamingService {
 	}
 
 	override boolean isKeyword(String name) {
-		return Keywords::javaKeywords.isKeyword(name)
+		return Keywords.JAVA_KEYWORD_SET.isKeyword(name)
 	}
 
 	def isStatemachineIdentifier(String name) {
-		return Keywords::statemachineIdentifiers.isKeyword(name);
+		return Keywords.STATEMACHICHNE_KEYWORD_SET.isKeyword(name);
 	}
 
 	def isStatemachineInterfaceIdentifier(String name) {
-		return Keywords::statemachineInterfaceIdentifiers.isKeyword(name)
+		return Keywords.STATEMACHINE_INTERFACE_KEYWORD_SET.isKeyword(name)
 	}
 
 	def isDerivedIdentifier(String name) {
@@ -78,7 +78,7 @@ class JavaNamingService extends DefaultNamingService {
 	}
 	
 	def isStatemachineMethod(String name) {
-		return Keywords::statemachineMethods.isKeyword(name);
+		return Keywords.STATEMACHINE_METHOD_SET.isKeyword(name);
 	}
 
 	private def isKeyword(Set<String> set, String name) {
