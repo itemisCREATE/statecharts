@@ -9,7 +9,6 @@
 */
 package org.yakindu.sct.model.stext.scoping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
