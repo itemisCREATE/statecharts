@@ -8,7 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="author" content="{{ meta_author }}">
     <meta name="description" content="{{ page_meta.meta_description }}">
-    <meta name="generator" content="HubSpot">
     <title>{{ page_meta.html_title }}</title>
     {% if site_settings.favicon_src %}<link rel="shortcut icon" href="{{ site_settings.favicon_src }}" />{% endif %}
     <link rel="stylesheet" href="{{ get_public_template_url("custom/system/default/inbound-performance.css") }}">
@@ -86,12 +85,12 @@
 <div class="span12 widget-span widget-type-social_sharing " style="" data-widget-type="social_sharing" data-x="0" data-w="12">
 <div class="cell-wrapper layout-widget-wrapper">
 {% widget_block social_sharing "module_14504476394501098" overrideable=true, cell=false, cells='[]', ending_html='', root=false, row=false, starting_html='', use_page_url=true, label='Social Sharing' %}
-{% widget_attribute "email" is_json=True %}{"default":true,"enabled":false,"img_src":"https://static.hubspot.com/final/img/common/icons/social/email-24x24.png","link_format":"mailto:?subject=Check out {{ social_link_url }} &body=Check out {{ social_link_url }}","network":"Email"}{% end_widget_attribute %}
-{% widget_attribute "facebook" is_json=True %}{"default":true,"enabled":false,"img_src":"https://static.hubspot.com/final/img/common/icons/social/facebook-24x24.png","link_format":"http://www.facebook.com/share.php?u={{ social_link_url }}","network":"Facebook"}{% end_widget_attribute %}
-{% widget_attribute "google_plus" is_json=True %}{"default":true,"enabled":false,"img_src":"https://static.hubspot.com/final/img/common/icons/social/googleplus-24x24.png","link_format":"https://plus.google.com/share?url={{ social_link_url }}","network":"Google+"}{% end_widget_attribute %}
-{% widget_attribute "linkedin" is_json=True %}{"default":true,"enabled":false,"img_src":"https://static.hubspot.com/final/img/common/icons/social/linkedin-24x24.png","link_format":"http://www.linkedin.com/shareArticle?mini=true&url={{ social_link_url }}","network":"LinkedIn"}{% end_widget_attribute %}
-{% widget_attribute "pinterest" is_json=True %}{"default":true,"enabled":false,"img_src":"https://static.hubspot.com/final/img/common/icons/social/pinterest-24x24.png","link_format":"http://pinterest.com/pin/create/button/?url={{ social_link_url }}&media={{ pinterest_media }}","network":"Pinterest","secondary_fields":[{"default":"","name":"pinterest_media","type":"image"}]}{% end_widget_attribute %}
-{% widget_attribute "twitter" is_json=True %}{"default":true,"enabled":false,"img_src":"https://static.hubspot.com/final/img/common/icons/social/twitter-24x24.png","link_format":"https://twitter.com/intent/tweet?original_referer={{ social_link_url }}&url={{ social_link_url }}&source=tweetbutton&text={{ social_page_title }}","network":"Twitter"}{% end_widget_attribute %}
+{% widget_attribute "email" is_json=True %}{"default":true,"enabled":false,"img_src":"http://info.itemis.com/hubfs/images/social-icons/email-24x24.png","link_format":"mailto:?subject=Check out {{ social_link_url }} &body=Check out {{ social_link_url }}","network":"Email"}{% end_widget_attribute %}
+{% widget_attribute "facebook" is_json=True %}{"default":true,"enabled":false,"img_src":"http://info.itemis.com/hubfs/images/social-icons/facebook-24x24.png","link_format":"http://www.facebook.com/share.php?u={{ social_link_url }}","network":"Facebook"}{% end_widget_attribute %}
+{% widget_attribute "google_plus" is_json=True %}{"default":true,"enabled":false,"img_src":"http://info.itemis.com/hubfs/images/social-icons/googleplus-24x24.png","link_format":"https://plus.google.com/share?url={{ social_link_url }}","network":"Google+"}{% end_widget_attribute %}
+{% widget_attribute "linkedin" is_json=True %}{"default":true,"enabled":false,"img_src":"http://info.itemis.com/hubfs/images/social-icons/linkedin-24x24.png","link_format":"http://www.linkedin.com/shareArticle?mini=true&url={{ social_link_url }}","network":"LinkedIn"}{% end_widget_attribute %}
+{% widget_attribute "pinterest" is_json=True %}{"default":true,"enabled":false,"img_src":"http://info.itemis.com/hubfs/images/social-icons/pinterest-24x24.png","link_format":"http://pinterest.com/pin/create/button/?url={{ social_link_url }}&media={{ pinterest_media }}","network":"Pinterest","secondary_fields":[{"default":"","name":"pinterest_media","type":"image"}]}{% end_widget_attribute %}
+{% widget_attribute "twitter" is_json=True %}{"default":true,"enabled":false,"img_src":"http://info.itemis.com/hubfs/images/social-icons/twitter-24x24.png","link_format":"https://twitter.com/intent/tweet?original_referer={{ social_link_url }}&url={{ social_link_url }}&source=tweetbutton&text={{ social_page_title }}","network":"Twitter"}{% end_widget_attribute %}
   {% end_widget_block %}
 </div><!--end layout-widget-wrapper -->
 </div><!--end widget-span -->
@@ -120,4 +119,3 @@
 
 </div><!--end widget-span -->
 <div class="span8 widget-span widget-type-widget_container primary" style="" data-widget-type="widget_container" data-x="4" data-w="8">
-

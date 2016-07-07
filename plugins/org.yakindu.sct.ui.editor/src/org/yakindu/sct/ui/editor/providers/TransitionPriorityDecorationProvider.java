@@ -13,9 +13,12 @@ package org.yakindu.sct.ui.editor.providers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.editparts.AbstractConnectionEditPart;
+import org.eclipse.gmf.runtime.diagram.core.listener.DiagramEventBroker;
+import org.eclipse.gmf.runtime.diagram.core.listener.NotificationListener;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecorator;
@@ -27,6 +30,8 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.IEditorPart;
 import org.yakindu.base.gmf.runtime.decorators.AbstractDecoratorProvider;
 import org.yakindu.base.gmf.runtime.decorators.BaseDecorator;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.ui.editor.DiagramActivator;
@@ -58,7 +63,7 @@ public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvi
 			if (!(ed instanceof DiagramEditDomain)) {
 				return;
 			}
-			if (shouldInstall(((DiagramEditDomain) ed).getEditorPart())) {
+			if (shouldInstall(((DiagramEditDomain) ed).getEditorPart()) && editPart instanceof TransitionEditPart) {
 				IDecorator decorator = createStatusDecorator(decoratorTarget);
 				decorators.add(decorator);
 				decoratorTarget.installDecorator(getDecoratorKey(), decorator);
@@ -82,6 +87,32 @@ public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvi
 
 		public PriorityDecorator(IDecoratorTarget decoratorTarget) {
 			super(decoratorTarget);
+		}
+
+		protected NotificationListener transitionPriorityChangeListener = new NotificationListener() {
+
+			public void notifyChanged(Notification notification) {
+				if (notification.getFeatureID(State.class) == SGraphPackage.STATE__OUTGOING_TRANSITIONS)
+					refresh();
+			}
+		};
+
+		@Override
+		public void activate() {
+			super.activate();
+			// priorities will be changed via reordering the list of transitions
+			// within the owning element
+			Vertex owningElement = (Vertex) ((Transition) semanticElement).eContainer();
+			DiagramEventBroker.getInstance(gep.getEditingDomain()).addNotificationListener(owningElement,
+					transitionPriorityChangeListener);
+		}
+
+		@Override
+		public void deactivate() {
+			Vertex owningElement = (Vertex) ((Transition) semanticElement).eContainer();
+			DiagramEventBroker.getInstance(gep.getEditingDomain()).removeNotificationListener(owningElement,
+					transitionPriorityChangeListener);
+			super.deactivate();
 		}
 
 		@Override
@@ -119,7 +150,9 @@ public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvi
 		public int getPriority(TransitionEditPart editPart) {
 			Transition transition = ((Transition) editPart.resolveSemanticElement());
 			Vertex container = (Vertex) transition.eContainer();
-			return container.getOutgoingTransitions().indexOf(transition);
+			int indexOf = container.getOutgoingTransitions().indexOf(transition);
+			// visible priorities should start with 1
+			return indexOf + 1;
 		}
 	}
 
