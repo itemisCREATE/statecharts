@@ -21,7 +21,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
-import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 
 /**
  * @author andreas muelder - Initial contribution and API
