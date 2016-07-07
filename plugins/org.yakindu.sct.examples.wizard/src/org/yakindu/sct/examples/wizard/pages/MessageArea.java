@@ -79,6 +79,7 @@ public class MessageArea extends Composite {
 		textLabel.setText(
 				"No examples found, please download the latest examples.\nYou can <a>change the storage location here.</a>");
 		button.setText("Download");
+		button.setVisible(true);
 		show();
 	}
 
@@ -87,6 +88,7 @@ public class MessageArea extends Composite {
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_QUESTION));
 		textLabel.setText("Updates available. Do you want to download the new examples?");
 		button.setText("Update");
+		button.setVisible(true);
 		show();
 	}
 
