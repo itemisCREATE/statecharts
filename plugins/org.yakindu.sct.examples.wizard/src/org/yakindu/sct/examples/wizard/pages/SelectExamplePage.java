@@ -117,10 +117,11 @@ public class SelectExamplePage extends WizardPage
 					messageArea.showDownload();
 				}
 			});
-		} else if (!exampleService.isUpToDate()) {
+		} else if (!exampleService.isUpToDate(monitor)) {
 			Display.getDefault().syncExec(new Runnable() {
 				@Override
 				public void run() {
+					setInput(monitor);
 					messageArea.showUpdate();
 				}
 			});
@@ -194,7 +195,7 @@ public class SelectExamplePage extends WizardPage
 							if (status.isOK()) {
 								SelectExamplePage.this.setInput(monitor);
 							} else {
-								messageArea.showError(status.getMessage());
+								messageArea.showError();
 							}
 						}
 					});

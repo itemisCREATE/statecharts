@@ -19,6 +19,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -34,8 +35,9 @@ import org.eclipse.ui.dialogs.PreferencesUtil;
  */
 public class MessageArea extends Composite {
 
+	private static final String DOWNLOAD_LINK = "http://www.statecharts.org/examples.html";
 	protected static final String PREF_PAGE_ID = "org.yakindu.sct.ui.preferences.root";
-	protected static final String DISPLAY_ID  = "com.yakindu.sct.examples";
+	protected static final String DISPLAY_ID = "com.yakindu.sct.examples";
 	private Label imageLabel;
 	private Link textLabel;
 	private Button button;
@@ -62,9 +64,14 @@ public class MessageArea extends Composite {
 		textLabel.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				PreferenceDialog dialog = PreferencesUtil.createPreferenceDialogOn(getShell(), PREF_PAGE_ID, new String[]  {DISPLAY_ID }, null);
-				dialog.setSelectedNode("DISPLAY_ID");
-				dialog.open();
+				if (DOWNLOAD_LINK.equals(e.text)) {
+					Program.launch(DOWNLOAD_LINK);
+				} else {
+					PreferenceDialog dialog = PreferencesUtil.createPreferenceDialogOn(getShell(), PREF_PAGE_ID,
+							new String[] { DISPLAY_ID }, null);
+					dialog.setSelectedNode("DISPLAY_ID");
+					dialog.open();
+				}
 			}
 		});
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.CENTER, SWT.CENTER).applyTo(textLabel);
@@ -79,6 +86,7 @@ public class MessageArea extends Composite {
 		textLabel.setText(
 				"No examples found, please download the latest examples.\nYou can <a>change the storage location here.</a>");
 		button.setText("Download");
+		textLabel.pack();
 		button.setVisible(true);
 		show();
 	}
@@ -87,15 +95,18 @@ public class MessageArea extends Composite {
 		state = State.UPDATE;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_QUESTION));
 		textLabel.setText("Updates available. Do you want to download the new examples?");
+		textLabel.pack();
 		button.setText("Update");
 		button.setVisible(true);
 		show();
 	}
 
-	public void showError(String message) {
+	public void showError() {
 		state = State.ERROR;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_ERROR));
-		textLabel.setText(message);
+		textLabel.setText(
+				"Unable to download examples. You can manually download them from \n <a>http://www.statecharts.org/examples.html</a>");
+		textLabel.pack();
 		button.setVisible(false);
 		show();
 	}

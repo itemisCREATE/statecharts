@@ -24,7 +24,7 @@ public interface IExampleService {
 	
 	public boolean exists();
 	
-	public boolean isUpToDate();
+	public boolean isUpToDate(IProgressMonitor monitor);
 	
 	public IStatus fetchAllExamples(IProgressMonitor monitor);
 
