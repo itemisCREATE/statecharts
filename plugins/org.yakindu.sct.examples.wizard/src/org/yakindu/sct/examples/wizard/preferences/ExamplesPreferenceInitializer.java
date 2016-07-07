@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.examples.wizard.preferences;
 
+import java.io.File;
+
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
@@ -21,10 +23,13 @@ import org.yakindu.sct.examples.wizard.ExampleActivator;
  */
 public class ExamplesPreferenceInitializer extends AbstractPreferenceInitializer {
 
+	private static final String EXAMPLES = "sct_examples";
+
 	@Override
 	public void initializeDefaultPreferences() {
 		String property = System.getProperty("user.home");
-		getPreferenceStore().setDefault(ExamplesPreferenceConstants.STORAGE_LOCATION, property);
+		getPreferenceStore().setDefault(ExamplesPreferenceConstants.STORAGE_LOCATION,
+				property + File.separator + EXAMPLES);
 	}
 
 	protected IPreferenceStore getPreferenceStore() {

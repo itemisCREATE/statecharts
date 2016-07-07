@@ -12,7 +12,6 @@ package org.yakindu.sct.examples.wizard.service.git;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -25,7 +24,6 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
@@ -34,6 +32,7 @@ import org.eclipse.jgit.api.FetchCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PullResult;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.transport.FetchResult;
 import org.eclipse.jgit.transport.TrackingRefUpdate;
 import org.eclipse.ui.dialogs.IOverwriteQuery;
@@ -71,7 +70,7 @@ public class GitRepositoryExampleService implements IExampleService {
 	private java.nio.file.Path gitRepo;
 
 	public GitRepositoryExampleService() {
-		gitRepo = java.nio.file.Paths.get(getStorageLocation(), "sct_examples");
+		gitRepo = java.nio.file.Paths.get(getStorageLocation());
 	}
 
 	private String getStorageLocation() {
@@ -183,11 +182,7 @@ public class GitRepositoryExampleService implements IExampleService {
 					}, filesToImport);
 			io.run(monitor);
 			project.open(monitor);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -204,7 +199,7 @@ public class GitRepositoryExampleService implements IExampleService {
 	}
 
 	public void deleteFolder(java.nio.file.Path path) throws IOException {
-		if(!Files.exists(path))
+		if (!Files.exists(path))
 			return;
 		Files.walkFileTree(path, new SimpleFileVisitor<java.nio.file.Path>() {
 			@Override
@@ -228,12 +223,12 @@ public class GitRepositoryExampleService implements IExampleService {
 			FetchResult result = fetch.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).setDryRun(true)
 					.call();
 			Collection<TrackingRefUpdate> trackingRefUpdates = result.getTrackingRefUpdates();
-			for (TrackingRefUpdate trackingRefUpdate : trackingRefUpdates) {
-				System.out.println(trackingRefUpdate);
-			}
 			return trackingRefUpdates.size() == 0;
-
+		} catch (RepositoryNotFoundException ex) {
+			// This is the case when the examples are imported manually
+			return true;
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			return true;
 		}
 	}
