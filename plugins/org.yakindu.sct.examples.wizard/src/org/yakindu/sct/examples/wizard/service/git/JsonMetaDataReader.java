@@ -38,6 +38,7 @@ public class JsonMetaDataReader implements IExampleDataReader {
 				ed.setProjectDir(file.toFile().getParentFile());
 				result.add(ed);
 			} catch (Exception e) {
+				System.err.println("Error parsing metadata " + file.toAbsolutePath().toString());
 				e.printStackTrace();
 			}
 		}
