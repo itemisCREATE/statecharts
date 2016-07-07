@@ -39,7 +39,7 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 	@Override
 	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(final EObject context, boolean ignoreCase) {
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
-		List<ImportScope> importScopes = new ArrayList<ImportScope>();
+		List<ImportScope> importScopes = null;
 		if (context instanceof StateSpecification || context instanceof TransitionSpecification) {
 			importScopes = EcoreUtil2.getAllContentsOfType(getStatechart(context), ImportScope.class);
 		} else {
