@@ -195,7 +195,7 @@ public class SCTTestUtil {
 		public Entry entry_r2 = _createEntry(EntryKind.INITIAL, null, r2);
 		public State s3 = _createState("S3", r2);
 		public State s4 = _createState("S4", r2);
-		public Transition t0_r2 = _createTransition(entry_r2, s3);
+//		public Transition t0_r2 = _createTransition(entry_r2, s3);
 		public Transition t1_r2 = _createTransition(s3, s4);
 		public Transition t2_r2 = _createTransition(s3, s4);
 		public ReactionTrigger r2_tr1 = _createReactionTrigger(t1_r2);
