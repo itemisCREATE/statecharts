@@ -35,7 +35,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class SuspendableTimingService implements ITimingService {
 
-	protected class ScheduleEventRunnable implements Runnable {
+	protected static class ScheduleEventRunnable implements Runnable {
 
 		private final ExecutionContext context;
 		private final String eventName;
