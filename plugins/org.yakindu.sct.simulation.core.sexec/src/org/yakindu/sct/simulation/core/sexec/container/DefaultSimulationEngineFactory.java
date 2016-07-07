@@ -72,6 +72,8 @@ public class DefaultSimulationEngineFactory implements ISimulationEngineFactory 
 		try {
 			ResourceSet set = new ResourceSetImpl();
 			Resource resource = set.createResource(URI.createURI("snapshot.xmi"));
+			if(resource == null)
+				return null;
 			set.getResources().add(resource);
 			resource.load(new URIConverter.ReadableInputStream(context, "UTF_8"), Collections.emptyMap());
 			IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(statechart);
