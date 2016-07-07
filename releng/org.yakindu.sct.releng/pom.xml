@@ -372,11 +372,6 @@
 		</profile>
 	</profiles>
 	<modules>
-		<!-- Examples -->
-		<module>../../examples/traffic_light</module>
-		<module>../../examples/digital_watch</module>
-		<module>../../examples/light_switch</module>
-		<module>../../examples/org.yakindu.sct.examples</module>
 		<!-- Releng -->
 		<module>../org.yakindu.base.target</module>
 		<module>../org.yakindu.base.repository</module>
@@ -422,6 +417,7 @@
 		<module>../../plugins/org.yakindu.sct.generator.java</module>
 		<module>../../plugins/org.yakindu.sct.refactoring</module>
 		<module>../../plugins/org.yakindu.sct.branding</module>
+		<module>../../plugins/org.yakindu.sct.examples.wizard</module>
 
 		<!-- Features -->
 		<module>../../features/org.yakindu.base-feature</module>
