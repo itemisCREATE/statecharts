@@ -372,11 +372,6 @@
 		</profile>
 	</profiles>
 	<modules>
-		<!-- Examples -->
-		<module>../../examples/traffic_light</module>
-		<module>../../examples/digital_watch</module>
-		<module>../../examples/light_switch</module>
-		<module>../../examples/org.yakindu.sct.examples</module>
 		<!-- Releng -->
 		<module>../org.yakindu.base.target</module>
 		<module>../org.yakindu.base.repository</module>
