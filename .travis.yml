@@ -27,10 +27,10 @@ env:
   - TARGET=Mars.target
   - TARGET=Luna.target
   - TARGET=Neon.target
-   exclude:
-   - TARGET:Mars.target jdk:oraclejd8k
-   - TARGET:Luna.target jdk:oraclejd8k
-   - TARGET:Neon.target jdk:oraclejd7k
+    exclude:
+    - TARGET:Mars.target jdk:oraclejd8k
+    - TARGET:Luna.target jdk:oraclejd8k
+    - TARGET:Neon.target jdk:oraclejd7k
 before_script:
  - mkdir gtest 
  - cd gtest
