@@ -10,14 +10,19 @@
  */
 package org.yakindu.sct.examples.wizard.pages;
 
+import java.text.Collator;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
+
+import com.google.common.collect.Lists;
 
 /**
  * 
@@ -52,7 +57,7 @@ public class ExampleContentProvider implements ITreeContentProvider {
 	private Map<String, Category> categories;
 
 	public ExampleContentProvider() {
-		categories = new HashMap<>();
+		categories = new LinkedHashMap<>();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -77,7 +82,15 @@ public class ExampleContentProvider implements ITreeContentProvider {
 
 	@Override
 	public Object[] getElements(Object inputElement) {
-		return categories.values().toArray();
+		List<Category> values = Lists.newArrayList();
+		values.addAll(categories.values());
+		Collections.sort(values, new Comparator<Category>() {
+			@Override
+			public int compare(Category o1, Category o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}
+		});
+		return values.toArray();
 	}
 
 	@Override
