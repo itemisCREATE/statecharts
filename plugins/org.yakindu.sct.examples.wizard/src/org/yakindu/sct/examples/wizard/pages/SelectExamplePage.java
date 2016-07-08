@@ -19,6 +19,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -35,6 +37,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.yakindu.sct.examples.wizard.ExampleActivator;
+import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
 import org.yakindu.sct.examples.wizard.service.IExampleService;
@@ -49,7 +53,7 @@ import com.google.inject.Inject;
  */
 
 public class SelectExamplePage extends WizardPage
-		implements ExampleWizardConstants, ISelectionChangedListener, SelectionListener {
+		implements ExampleWizardConstants, ISelectionChangedListener, SelectionListener, IPropertyChangeListener {
 
 	@Inject
 	private IExampleService exampleService;
@@ -63,6 +67,13 @@ public class SelectExamplePage extends WizardPage
 		setTitle(SELECT_PAGE_TITLE);
 		setDescription(SELECT_PAGE_DESCRIPTION);
 		setPageComplete(false);
+		ExampleActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
+	}
+
+	@Override
+	public void dispose() {
+		ExampleActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
+		super.dispose();
 	}
 
 	public void createControl(Composite parent) {
@@ -91,22 +102,25 @@ public class SelectExamplePage extends WizardPage
 	public void setVisible(boolean visible) {
 		super.setVisible(visible);
 		if (visible) {
-			try {
-				getWizard().getContainer().run(true, false, new IRunnableWithProgress() {
-					@Override
-					public void run(final IProgressMonitor monitor)
-							throws InvocationTargetException, InterruptedException {
-						init(monitor);
-					}
-				});
-			} catch (InvocationTargetException | InterruptedException e) {
-				e.printStackTrace();
-			}
+			initAsync();
 		} else {
 			viewer.setInput(null);
 			browser.setUrl("about:blank");
 		}
 
+	}
+
+	private void initAsync() {
+		try {
+			getWizard().getContainer().run(true, false, new IRunnableWithProgress() {
+				@Override
+				public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+					init(monitor);
+				}
+			});
+		} catch (InvocationTargetException | InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void init(final IProgressMonitor monitor) {
@@ -212,6 +226,13 @@ public class SelectExamplePage extends WizardPage
 	public void widgetDefaultSelected(SelectionEvent e) {
 		widgetSelected(e);
 
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		if (ExamplesPreferenceConstants.STORAGE_LOCATION.equals(event.getProperty())) {
+			initAsync();
+		}
 	}
 
 }

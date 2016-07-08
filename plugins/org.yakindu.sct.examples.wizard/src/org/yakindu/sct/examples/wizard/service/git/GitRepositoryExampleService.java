@@ -67,30 +67,26 @@ public class GitRepositoryExampleService implements IExampleService {
 	private String repositoryURL;
 	@Inject
 	private IExampleDataReader reader;
-	private java.nio.file.Path gitRepo;
 
-	public GitRepositoryExampleService() {
-		gitRepo = java.nio.file.Paths.get(getStorageLocation());
-	}
-
-	private String getStorageLocation() {
-		return ExampleActivator.getDefault().getPreferenceStore()
-				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION);
+	protected java.nio.file.Path getStorageLocation() {
+		return java.nio.file.Paths.get(ExampleActivator.getDefault().getPreferenceStore()
+				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION));
 	}
 
 	@Override
 	public boolean exists() {
-		return Files.exists(gitRepo);
+		return Files.exists(getStorageLocation());
 	}
 
 	@Override
 	public IStatus fetchAllExamples(IProgressMonitor monitor) {
 		if (!exists()) {
+			java.nio.file.Path storageLocation = getStorageLocation();
 			try {
-				Files.createDirectories(gitRepo);
+				Files.createDirectories(storageLocation);
 			} catch (IOException e1) {
 				return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
-						"Unable to create folder " + gitRepo.getFileName());
+						"Unable to create folder " + storageLocation.getFileName());
 			}
 			return cloneRepository(monitor);
 		} else {
@@ -100,7 +96,8 @@ public class GitRepositoryExampleService implements IExampleService {
 
 	protected IStatus updateRepository(IProgressMonitor monitor) {
 		try {
-			PullResult result = Git.open(gitRepo.toFile()).pull()
+			java.nio.file.Path storageLocation = getStorageLocation();
+			PullResult result = Git.open(storageLocation.toFile()).pull()
 					.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).call();
 			if (!result.isSuccessful()) {
 				return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
@@ -115,12 +112,13 @@ public class GitRepositoryExampleService implements IExampleService {
 
 	protected IStatus cloneRepository(IProgressMonitor monitor) {
 		Git call = null;
+		java.nio.file.Path storageLocation = getStorageLocation();
 		try {
-			call = Git.cloneRepository().setURI(repositoryURL).setDirectory(gitRepo.toFile())
+			call = Git.cloneRepository().setURI(repositoryURL).setDirectory(storageLocation.toFile())
 					.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).setBranch(RELEASE).call();
 		} catch (GitAPIException e) {
 			try {
-				deleteFolder(gitRepo);
+				deleteFolder(storageLocation);
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
@@ -131,7 +129,7 @@ public class GitRepositoryExampleService implements IExampleService {
 				call.close();
 			if (monitor.isCanceled()) {
 				try {
-					deleteFolder(gitRepo);
+					deleteFolder(storageLocation);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -142,8 +140,9 @@ public class GitRepositoryExampleService implements IExampleService {
 
 	@Override
 	public List<ExampleData> getExamples(IProgressMonitor monitor) {
+		java.nio.file.Path storageLocation = getStorageLocation();
 		List<java.nio.file.Path> projects = new ArrayList<>();
-		findMetaData(projects, gitRepo);
+		findMetaData(projects, storageLocation);
 		List<ExampleData> result = reader.parse(projects);
 		return result;
 	}
@@ -218,8 +217,9 @@ public class GitRepositoryExampleService implements IExampleService {
 
 	@Override
 	public boolean isUpToDate(IProgressMonitor monitor) {
+		java.nio.file.Path storageLocation = getStorageLocation();
 		try {
-			FetchCommand fetch = Git.open(gitRepo.toFile()).fetch();
+			FetchCommand fetch = Git.open(storageLocation.toFile()).fetch();
 			FetchResult result = fetch.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).setDryRun(true)
 					.call();
 			Collection<TrackingRefUpdate> trackingRefUpdates = result.getTrackingRefUpdates();
