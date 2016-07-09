@@ -32,5 +32,9 @@
 <unit id="com.google.inject.multibindings.source" version="3.0.0.v201402270930"/>
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
 </location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.jgit.feature.group" version="4.4.0.201606070830-r"/>
+<repository location="http://download.eclipse.org/egit/updates/"/>
+</location>
 </locations>
 </target>
