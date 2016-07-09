@@ -29,11 +29,11 @@ env:
   - TARGET=Neon.target
 matrix:
   exclude:
-   - jdk: oraclejd8k
+   - jdk: oraclejdk8
      env: TARGET=Mars.target
-   - jdk: oraclejd8k
+   - jdk: oraclejdk8
      env: TARGET=Luna.target
-   - jdk: oraclejd7k
+   - jdk: oraclejdk7
      env: TARGET=Neon.target
 before_script:
  - mkdir gtest 
