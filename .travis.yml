@@ -1,6 +1,8 @@
 sudo: false
 language: java
-jdk: oraclejdk7
+jdk: 
+ - oraclejdk7
+ - oraclejdk8
 addons:
  apt:
   packages:
@@ -24,6 +26,15 @@ env:
   matrix:
   - TARGET=Mars.target
   - TARGET=Luna.target
+  - TARGET=Neon.target
+matrix:
+  exclude:
+   - jdk: oraclejdk8
+     env: TARGET=Mars.target
+   - jdk: oraclejdk8
+     env: TARGET=Luna.target
+   - jdk: oraclejdk7
+     env: TARGET=Neon.target
 before_script:
  - mkdir gtest 
  - cd gtest
