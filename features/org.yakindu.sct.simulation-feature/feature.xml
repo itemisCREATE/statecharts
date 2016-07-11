@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.simulation"
       label="YAKINDU Statechart Tools Simulation"
-      version="2.6.2.qualifier"
+      version="2.7.0.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.branding">
 
@@ -19,14 +19,14 @@
    </license>
 
    <url>
-      <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.org/sct/mars/releases"/>
+      <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.org/sct/neon/releases"/>
    </url>
 
    <requires>
       <import plugin="com.google.inject" version="3.0.0" match="compatible"/>
       <import plugin="com.google.guava" version="12.0.0" match="greaterOrEqual"/>
       <import plugin="com.google.inject.multibindings" version="3.0.0" match="compatible"/>
-      <import feature="org.yakindu.base" version="2.6.2.qualifier"/>
+      <import feature="org.yakindu.base" version="2.7.0.qualifier"/>
       <import feature="org.yakindu.sct.editor" version="0.0.0.qualifier"/>
    </requires>
 

@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.generator.cpp"
       label="YAKINDU Statechart Tools C++ code generator"
-      version="2.6.2.qualifier"
+      version="2.7.0.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.branding">
 
@@ -18,8 +18,12 @@
       %license
    </license>
 
+   <url>
+      <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.org/sct/neon/releases/"/>
+   </url>
+   
    <requires>
-      <import feature="org.yakindu.sct" version="2.6.2.qualifier"/>
+      <import feature="org.yakindu.sct" version="2.7.0.qualifier"/>
    </requires>
 
    <plugin

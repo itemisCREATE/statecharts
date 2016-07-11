@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.generator"
       label="YAKINDU Generator All-In-One Feature"
-      version="2.6.2.qualifier"
+      version="2.7.0.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.branding">
 
@@ -17,7 +17,9 @@
    <license url="%licenseURL">
       %license
    </license>
-
+   <url>
+      <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.org/sct/neon/releases/"/>
+   </url>	
    <includes
          id="org.yakindu.sct.generator.c"
          version="0.0.0"/>
@@ -35,7 +37,7 @@
          version="0.0.0"/>
 
    <requires>
-      <import feature="org.yakindu.sct.generator.model" version="2.6.2.qualifier"/>
+      <import feature="org.yakindu.sct.generator.model" version="2.7.0.qualifier"/>
    </requires>
 
    <plugin
