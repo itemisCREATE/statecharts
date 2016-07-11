@@ -36,7 +36,7 @@ import org.eclipse.ui.dialogs.PreferencesUtil;
 public class MessageArea extends Composite {
 
 	private static final String DOWNLOAD_LINK = "http://www.statecharts.org/examples.html";
-	protected static final String PREF_PAGE_ID = "org.yakindu.sct.ui.preferences.root";
+	protected static final String PREF_PAGE_ID = "com.yakindu.sct.examples";
 	protected static final String DISPLAY_ID = "com.yakindu.sct.examples";
 	private Label imageLabel;
 	private Link textLabel;
