@@ -95,7 +95,6 @@ public class SelectExamplePage extends WizardPage
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(messageArea);
 		messageArea.addSelectionListener(this);
 		messageArea.hide();
-
 	}
 
 	@Override
@@ -151,10 +150,12 @@ public class SelectExamplePage extends WizardPage
 
 	protected void setInput(final IProgressMonitor monitor) {
 		final List<ExampleData> input = exampleService.getExamples(new NullProgressMonitor());
-
+		
 		messageArea.hide();
 		viewer.setInput(input);
 		viewer.expandAll();
+		// explicit layouting required for Unix systems
+		viewer.getControl().getParent().getParent().layout(true);
 	}
 
 	protected void createTreeViewer(Composite container) {

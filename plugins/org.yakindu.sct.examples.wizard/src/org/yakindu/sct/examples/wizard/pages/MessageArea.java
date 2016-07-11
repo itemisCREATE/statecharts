@@ -118,11 +118,10 @@ public class MessageArea extends Composite {
 	}
 
 	public void hide() {
-		state = state.HIDE;
+		state = State.HIDE;
 		setVisible(false);
 		GridData data = (GridData) getLayoutData();
 		data.exclude = true;
-		getParent().pack();
 	}
 
 	public void addSelectionListener(SelectionListener listener) {
