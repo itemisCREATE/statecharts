@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.editor"
       label="YAKINDU Statechart Tools Editor"
-      version="2.6.2.qualifier"
+      version="2.7.0.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.branding">
 
@@ -19,7 +19,7 @@
    </license>
 
    <url>
-      <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.org/sct/mars/releases"/>
+      <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.org/sct/neon/releases"/>
    </url>
 
    <requires>

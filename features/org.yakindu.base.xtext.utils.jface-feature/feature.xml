@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.base.xtext.utils.jface"
       label="Xtext JFace Integration Feature"
-      version="2.6.2.qualifier"
+      version="2.7.0.qualifier"
       provider-name="itemis AG">
 
    <description url="http://www.example.com/description">
@@ -16,7 +16,9 @@
    <license url="%licenseURL">
       %license
    </license>
-
+   <url>
+      <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.org/sct/neon/releases/"/>
+   </url>
    <plugin
          id="org.yakindu.base.xtext.utils.jface"
          download-size="0"

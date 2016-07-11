@@ -18,6 +18,10 @@
       %license
    </license>
 
+   <url>
+      <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.org/sct/neon/releases/"/>
+   </url>
+
    <requires>
       <import feature="org.yakindu.sct" version="2.5.0.qualifier"/>
    </requires>
