@@ -40,7 +40,7 @@ public class EclipseGitProgressTransformer implements ProgressMonitor {
 		lastWorked = 0;
 		totalWork = total;
 		
-		SubMonitor sub = mainTask.split(1);
+		SubMonitor sub = mainTask.newChild(1);
 		
 		if (totalWork == UNKNOWN) {
 			subTask = SubMonitor.convert(sub, IProgressMonitor.UNKNOWN);
