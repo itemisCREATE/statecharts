@@ -104,9 +104,4 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 		assertTrue(isSame(conversionType, getCommonTypeWithConversion(conversionType, conversionSubType)));
 	}
 
-	@Override
-	public boolean isArrayType(Type type) {
-		return false;
-	}
-
 }
