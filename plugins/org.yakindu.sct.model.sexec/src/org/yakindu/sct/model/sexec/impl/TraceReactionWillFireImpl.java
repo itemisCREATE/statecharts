@@ -24,10 +24,10 @@ import org.yakindu.sct.model.sexec.TraceReactionWillFire;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.TraceReactionWillFireImpl#getReaction <em>Reaction</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

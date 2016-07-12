@@ -19,10 +19,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.Sequence#getSteps <em>Steps</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sexec.SexecPackage#getSequence()
  * @model

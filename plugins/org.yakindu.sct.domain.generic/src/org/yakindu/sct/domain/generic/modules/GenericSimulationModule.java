@@ -15,8 +15,6 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
-import org.yakindu.base.types.typesystem.GenericTypeSystem;
-import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
@@ -32,8 +30,8 @@ import org.yakindu.sct.simulation.core.sexec.interpreter.IOperationMockup;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.ITimingService;
 import org.yakindu.sct.simulation.core.sexec.interpreter.JavaOperationMockup;
-import org.yakindu.sct.simulation.core.sexec.interpreter.SuspendableTimingService;
 import org.yakindu.sct.simulation.core.sexec.interpreter.StextStatementInterpreter;
+import org.yakindu.sct.simulation.core.sexec.interpreter.SuspendableTimingService;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl;
 
@@ -96,10 +94,6 @@ public class GenericSimulationModule extends AbstractGenericModule {
 	
 	public Class<? extends IResourceDescriptions> bindIResourceDescriptions() {
 		return ResourceSetBasedResourceDescriptions.class;
-	}
-	
-	public Class<? extends ITypeSystem> bindITypeSystem() {
-		return GenericTypeSystem.class;
 	}
 
 }

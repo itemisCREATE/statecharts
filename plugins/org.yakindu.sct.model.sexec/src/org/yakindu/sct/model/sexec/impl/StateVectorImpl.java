@@ -23,11 +23,11 @@ import org.yakindu.sct.model.sexec.StateVector;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.StateVectorImpl#getSize <em>Size</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.StateVectorImpl#getOffset <em>Offset</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

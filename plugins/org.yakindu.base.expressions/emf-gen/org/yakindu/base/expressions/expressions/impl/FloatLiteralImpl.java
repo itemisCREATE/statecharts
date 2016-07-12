@@ -14,10 +14,10 @@ import org.yakindu.base.expressions.expressions.FloatLiteral;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.FloatLiteralImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -25,10 +25,10 @@ import org.yakindu.sct.model.sexec.Step;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.CallImpl#getStep <em>Step</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -17,10 +17,10 @@ import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.PrimitiveValueExpressionImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -13,6 +13,7 @@ package org.yakindu.base.expressions.validation
 import java.util.List
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypeParameter
+import org.yakindu.base.types.TypeSpecifier
 
 class GenericsPrettyPrinter {
 
@@ -20,7 +21,8 @@ class GenericsPrettyPrinter {
 		return '''<«FOR param : parameter SEPARATOR ', '»«param.name»«IF param.bound != null» extends «(param.bound as Type).name»«ENDIF»«ENDFOR»>'''.toString
 	}
 
-	def concatTypeArguments(List<Type> parameter) {
-		return '''<«FOR param : parameter SEPARATOR ', '»«param.name»«ENDFOR»>'''.toString
+	def concatTypeArguments(List<TypeSpecifier> parameter) {
+		// TODO: type arguments can have multiple hierarches Type1<Type2<T>>
+		return '''<«FOR param : parameter SEPARATOR ', '»«param.type.name»«ENDFOR»>'''.toString
 	}
 }

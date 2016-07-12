@@ -23,13 +23,15 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.FeatureCallImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.FeatureCallImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.FeatureCallImpl#isOperationCall <em>Operation Call</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.FeatureCallImpl#getArgs <em>Args</em>}</li>
+ *   <li>{@link org.yakindu.base.expressions.expressions.impl.FeatureCallImpl#getArraySelector <em>Array Selector</em>}</li>
+ *   <li>{@link org.yakindu.base.expressions.expressions.impl.FeatureCallImpl#isArrayAccess <em>Array Access</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -83,6 +85,36 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 	 * @ordered
 	 */
 	protected EList<Expression> args;
+
+	/**
+	 * The cached value of the '{@link #getArraySelector() <em>Array Selector</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArraySelector()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Expression> arraySelector;
+
+	/**
+	 * The default value of the '{@link #isArrayAccess() <em>Array Access</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isArrayAccess()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ARRAY_ACCESS_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isArrayAccess() <em>Array Access</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isArrayAccess()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean arrayAccess = ARRAY_ACCESS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -222,6 +254,39 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Expression> getArraySelector() {
+		if (arraySelector == null) {
+			arraySelector = new EObjectContainmentEList<Expression>(Expression.class, this, ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR);
+		}
+		return arraySelector;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isArrayAccess() {
+		return arrayAccess;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setArrayAccess(boolean newArrayAccess) {
+		boolean oldArrayAccess = arrayAccess;
+		arrayAccess = newArrayAccess;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.FEATURE_CALL__ARRAY_ACCESS, oldArrayAccess, arrayAccess));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -229,6 +294,8 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 				return basicSetOwner(null, msgs);
 			case ExpressionsPackage.FEATURE_CALL__ARGS:
 				return ((InternalEList<?>)getArgs()).basicRemove(otherEnd, msgs);
+			case ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR:
+				return ((InternalEList<?>)getArraySelector()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -250,6 +317,10 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 				return isOperationCall();
 			case ExpressionsPackage.FEATURE_CALL__ARGS:
 				return getArgs();
+			case ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR:
+				return getArraySelector();
+			case ExpressionsPackage.FEATURE_CALL__ARRAY_ACCESS:
+				return isArrayAccess();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -276,6 +347,13 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 				getArgs().clear();
 				getArgs().addAll((Collection<? extends Expression>)newValue);
 				return;
+			case ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR:
+				getArraySelector().clear();
+				getArraySelector().addAll((Collection<? extends Expression>)newValue);
+				return;
+			case ExpressionsPackage.FEATURE_CALL__ARRAY_ACCESS:
+				setArrayAccess((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -300,6 +378,12 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 			case ExpressionsPackage.FEATURE_CALL__ARGS:
 				getArgs().clear();
 				return;
+			case ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR:
+				getArraySelector().clear();
+				return;
+			case ExpressionsPackage.FEATURE_CALL__ARRAY_ACCESS:
+				setArrayAccess(ARRAY_ACCESS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -320,6 +404,10 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 				return operationCall != OPERATION_CALL_EDEFAULT;
 			case ExpressionsPackage.FEATURE_CALL__ARGS:
 				return args != null && !args.isEmpty();
+			case ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR:
+				return arraySelector != null && !arraySelector.isEmpty();
+			case ExpressionsPackage.FEATURE_CALL__ARRAY_ACCESS:
+				return arrayAccess != ARRAY_ACCESS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -336,6 +424,8 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (operationCall: ");
 		result.append(operationCall);
+		result.append(", arrayAccess: ");
+		result.append(arrayAccess);
 		result.append(')');
 		return result.toString();
 	}

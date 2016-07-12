@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Direction;
 import org.yakindu.base.types.Domain;
@@ -31,6 +32,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
@@ -83,6 +85,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.OPERATION: return createOperation();
 			case TypesPackage.PROPERTY: return createProperty();
 			case TypesPackage.PARAMETER: return createParameter();
+			case TypesPackage.TYPE_SPECIFIER: return createTypeSpecifier();
 			case TypesPackage.EVENT: return createEvent();
 			case TypesPackage.ENUMERATION_TYPE: return createEnumerationType();
 			case TypesPackage.PRIMITIVE_TYPE: return createPrimitiveType();
@@ -97,6 +100,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.TYPE_ALIAS: return createTypeAlias();
 			case TypesPackage.ANNOTATION: return createAnnotation();
 			case TypesPackage.ANNOTATABLE_ELEMENT: return createAnnotatableElement();
+			case TypesPackage.ARRAY_TYPE_SPECIFIER: return createArrayTypeSpecifier();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -180,6 +184,16 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public Parameter createParameter() {
 		ParameterImpl parameter = new ParameterImpl();
 		return parameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeSpecifier createTypeSpecifier() {
+		TypeSpecifierImpl typeSpecifier = new TypeSpecifierImpl();
+		return typeSpecifier;
 	}
 
 	/**
@@ -320,6 +334,16 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public AnnotatableElement createAnnotatableElement() {
 		AnnotatableElementImpl annotatableElement = new AnnotatableElementImpl();
 		return annotatableElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ArrayTypeSpecifier createArrayTypeSpecifier() {
+		ArrayTypeSpecifierImpl arrayTypeSpecifier = new ArrayTypeSpecifierImpl();
+		return arrayTypeSpecifier;
 	}
 
 	/**

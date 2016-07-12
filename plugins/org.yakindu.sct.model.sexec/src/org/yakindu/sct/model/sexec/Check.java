@@ -20,11 +20,11 @@ import org.yakindu.base.expressions.expressions.Expression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.Check#getCondition <em>Condition</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.Check#getRefs <em>Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sexec.SexecPackage#getCheck()
  * @model

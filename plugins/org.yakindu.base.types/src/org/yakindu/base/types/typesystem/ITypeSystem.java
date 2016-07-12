@@ -53,5 +53,7 @@ public interface ITypeSystem {
 	public List<Type> getSuperTypes(Type type);
 
 	public boolean isSuperType(Type subtype, Type supertype);
+	
+	public boolean isArrayType(Type type);
 
 }

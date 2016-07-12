@@ -18,8 +18,6 @@ import org.yakindu.sct.model.sexec.TraceBeginRunCycle;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Trace Begin Run Cycle</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

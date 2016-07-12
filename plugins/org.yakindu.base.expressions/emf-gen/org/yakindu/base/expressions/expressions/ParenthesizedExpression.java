@@ -10,10 +10,10 @@ package org.yakindu.base.expressions.expressions;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.ParenthesizedExpression#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getParenthesizedExpression()
  * @model

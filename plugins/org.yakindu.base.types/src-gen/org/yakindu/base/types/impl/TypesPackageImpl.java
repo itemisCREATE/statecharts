@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Direction;
@@ -33,6 +34,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
@@ -86,6 +88,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass typedElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeSpecifierEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -179,6 +188,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass annotatableElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass arrayTypeSpecifierEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -418,8 +434,35 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTypedElement_TypeArguments() {
+	public EReference getTypedElement_TypeSpecifier() {
 		return (EReference)typedElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTypeSpecifier() {
+		return typeSpecifierEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypeSpecifier_Type() {
+		return (EReference)typeSpecifierEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypeSpecifier_TypeArguments() {
+		return (EReference)typeSpecifierEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -696,6 +739,24 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getArrayTypeSpecifier() {
+		return arrayTypeSpecifierEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getArrayTypeSpecifier_Size() {
+		return (EAttribute)arrayTypeSpecifierEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getDirection() {
 		return directionEEnum;
 	}
@@ -751,7 +812,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		typedElementEClass = createEClass(TYPED_ELEMENT);
 		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE);
-		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE_ARGUMENTS);
+		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE_SPECIFIER);
+
+		typeSpecifierEClass = createEClass(TYPE_SPECIFIER);
+		createEReference(typeSpecifierEClass, TYPE_SPECIFIER__TYPE);
+		createEReference(typeSpecifierEClass, TYPE_SPECIFIER__TYPE_ARGUMENTS);
 
 		eventEClass = createEClass(EVENT);
 		createEAttribute(eventEClass, EVENT__DIRECTION);
@@ -797,6 +862,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		annotatableElementEClass = createEClass(ANNOTATABLE_ELEMENT);
 		createEReference(annotatableElementEClass, ANNOTATABLE_ELEMENT__ANNOTATIONS);
+
+		arrayTypeSpecifierEClass = createEClass(ARRAY_TYPE_SPECIFIER);
+		createEAttribute(arrayTypeSpecifierEClass, ARRAY_TYPE_SPECIFIER__SIZE);
 
 		// Create enums
 		directionEEnum = createEEnum(DIRECTION);
@@ -854,6 +922,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		typeAliasEClass.getESuperTypes().add(this.getTypedElement());
 		typeAliasEClass.getESuperTypes().add(this.getType());
 		annotationEClass.getESuperTypes().add(this.getPackageMember());
+		arrayTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(packageEClass, org.yakindu.base.types.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -882,8 +951,12 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getParameter_OwningOperation(), this.getOperation(), this.getOperation_Parameters(), "owningOperation", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typedElementEClass, TypedElement.class, "TypedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypedElement_Type(), this.getType(), null, "type", null, 0, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTypedElement_TypeArguments(), this.getType(), null, "typeArguments", null, 0, -1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypedElement_Type(), this.getType(), null, "type", null, 0, 1, TypedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getTypedElement_TypeSpecifier(), this.getTypeSpecifier(), null, "typeSpecifier", null, 0, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typeSpecifierEClass, TypeSpecifier.class, "TypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeSpecifier_Type(), this.getType(), null, "type", null, 0, 1, TypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeSpecifier_TypeArguments(), this.getTypeSpecifier(), null, "typeArguments", null, 0, -1, TypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEvent_Direction(), this.getDirection(), "direction", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -931,6 +1004,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(annotatableElementEClass, AnnotatableElement.class, "AnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnnotatableElement_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, AnnotatableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(arrayTypeSpecifierEClass, ArrayTypeSpecifier.class, "ArrayTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getArrayTypeSpecifier_Size(), ecorePackage.getEInt(), "size", null, 0, 1, ArrayTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(directionEEnum, Direction.class, "Direction");

@@ -69,7 +69,6 @@ public class TypeAliasItemProvider
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
-			addTypeArgumentsPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addAnnotationsPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
@@ -93,28 +92,6 @@ public class TypeAliasItemProvider
 				 getString("_UI_TypedElement_type_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TypedElement_type_feature", "_UI_TypedElement_type"),
 				 TypesPackage.Literals.TYPED_ELEMENT__TYPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Type Arguments feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTypeArgumentsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TypedElement_typeArguments_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypedElement_typeArguments_feature", "_UI_TypedElement_type"),
-				 TypesPackage.Literals.TYPED_ELEMENT__TYPE_ARGUMENTS,
 				 true,
 				 false,
 				 true,
@@ -245,6 +222,7 @@ public class TypeAliasItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER);
 			childrenFeatures.add(TypesPackage.Literals.TYPE__CONSTRAINT);
 		}
 		return childrenFeatures;
@@ -319,6 +297,7 @@ public class TypeAliasItemProvider
 			case TypesPackage.TYPE_ALIAS__VISIBLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER:
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -336,6 +315,16 @@ public class TypeAliasItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER,
+				 TypesFactory.eINSTANCE.createTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER,
+				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
 
 		newChildDescriptors.add
 			(createChildParameter

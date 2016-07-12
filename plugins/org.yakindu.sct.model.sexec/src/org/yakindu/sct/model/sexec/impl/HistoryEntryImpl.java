@@ -26,13 +26,13 @@ import org.yakindu.sct.model.sexec.Step;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.HistoryEntryImpl#getInitialStep <em>Initial Step</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.HistoryEntryImpl#isDeep <em>Deep</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.HistoryEntryImpl#getRegion <em>Region</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.HistoryEntryImpl#getHistoryStep <em>History Step</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

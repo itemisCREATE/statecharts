@@ -326,6 +326,8 @@ public enum AssignmentOperator implements Enumerator {
 	 * Returns the '<em><b>Assignment Operator</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static AssignmentOperator get(String literal) {
@@ -342,6 +344,8 @@ public enum AssignmentOperator implements Enumerator {
 	 * Returns the '<em><b>Assignment Operator</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param name the name.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static AssignmentOperator getByName(String name) {
@@ -358,6 +362,8 @@ public enum AssignmentOperator implements Enumerator {
 	 * Returns the '<em><b>Assignment Operator</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value the integer value.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static AssignmentOperator get(int value) {

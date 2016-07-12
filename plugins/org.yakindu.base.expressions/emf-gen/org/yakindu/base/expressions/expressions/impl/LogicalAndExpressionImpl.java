@@ -17,11 +17,11 @@ import org.yakindu.base.expressions.expressions.LogicalAndExpression;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.LogicalAndExpressionImpl#getLeftOperand <em>Left Operand</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.LogicalAndExpressionImpl#getRightOperand <em>Right Operand</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

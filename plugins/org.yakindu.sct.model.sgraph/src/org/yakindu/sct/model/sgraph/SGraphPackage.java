@@ -1231,13 +1231,13 @@ public interface SGraphPackage extends EPackage {
 	int IMPORT_DECLARATION__TYPE = TypesPackage.DECLARATION__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_DECLARATION__TYPE_ARGUMENTS = TypesPackage.DECLARATION__TYPE_ARGUMENTS;
+	int IMPORT_DECLARATION__TYPE_SPECIFIER = TypesPackage.DECLARATION__TYPE_SPECIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

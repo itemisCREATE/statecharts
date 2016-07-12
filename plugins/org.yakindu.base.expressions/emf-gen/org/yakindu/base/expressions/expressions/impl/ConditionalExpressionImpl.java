@@ -17,12 +17,12 @@ import org.yakindu.base.expressions.expressions.ExpressionsPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.ConditionalExpressionImpl#getCondition <em>Condition</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.ConditionalExpressionImpl#getTrueCase <em>True Case</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.ConditionalExpressionImpl#getFalseCase <em>False Case</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -18,11 +18,11 @@ import org.yakindu.base.types.Type;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.TypeCastExpressionImpl#getOperand <em>Operand</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.TypeCastExpressionImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

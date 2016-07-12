@@ -1317,13 +1317,13 @@ public interface SexecPackage extends EPackage {
 	int TIME_EVENT__TYPE = TypesPackage.EVENT__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
+	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TIME_EVENT__TYPE_ARGUMENTS = TypesPackage.EVENT__TYPE_ARGUMENTS;
+	int TIME_EVENT__TYPE_SPECIFIER = TypesPackage.EVENT__TYPE_SPECIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

@@ -18,8 +18,6 @@ import org.yakindu.sct.model.sexec.Trace;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Trace</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

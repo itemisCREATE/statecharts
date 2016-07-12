@@ -6,14 +6,15 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypeParameterBinding;
 import org.yakindu.base.types.TypesPackage;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Type Parameter</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Type Parameter</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
@@ -26,8 +27,7 @@ import org.yakindu.base.types.TypesPackage;
 public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	/**
 	 * The cached value of the '{@link #getBound() <em>Bound</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getBound()
 	 * @generated
 	 * @ordered
@@ -35,8 +35,7 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	protected Type bound;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected TypeParameterImpl() {
@@ -44,8 +43,7 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -54,8 +52,7 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Type getBound() {
@@ -71,8 +68,7 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Type basicGetBound() {
@@ -80,8 +76,7 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setBound(Type newBound) {
@@ -92,8 +87,7 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -107,8 +101,7 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -122,8 +115,7 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -137,8 +129,7 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -150,4 +141,14 @@ public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 		return super.eIsSet(featureID);
 	}
 
-} //TypeParameterImpl
+	@Override
+	public Type getOriginType() {
+		TypeParameterBinding existingAdapter = (TypeParameterBinding) EcoreUtil
+				.getExistingAdapter(this, TypeParameterBinding.class);
+		if (existingAdapter != null && existingAdapter.getActualType() != null) {
+			return existingAdapter.getActualType();
+		}
+		return super.getOriginType();
+	}
+
+} // TypeParameterImpl

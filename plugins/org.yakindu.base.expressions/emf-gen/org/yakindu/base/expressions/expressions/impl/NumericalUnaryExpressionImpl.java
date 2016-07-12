@@ -18,11 +18,11 @@ import org.yakindu.base.expressions.expressions.UnaryOperator;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.NumericalUnaryExpressionImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.NumericalUnaryExpressionImpl#getOperand <em>Operand</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

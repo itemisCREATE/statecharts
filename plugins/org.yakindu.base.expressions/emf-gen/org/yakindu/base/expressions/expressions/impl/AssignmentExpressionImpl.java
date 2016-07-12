@@ -18,12 +18,12 @@ import org.yakindu.base.expressions.expressions.ExpressionsPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.AssignmentExpressionImpl#getVarRef <em>Var Ref</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.AssignmentExpressionImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.AssignmentExpressionImpl#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

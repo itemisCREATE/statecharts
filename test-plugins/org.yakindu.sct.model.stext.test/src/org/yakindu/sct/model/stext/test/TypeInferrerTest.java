@@ -10,32 +10,17 @@
  */
 package org.yakindu.sct.model.stext.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import junit.framework.TestCase;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.yakindu.base.expressions.expressions.Expression;
-import org.yakindu.base.types.Type;
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
-import org.yakindu.base.types.typesystem.ITypeSystem;
-import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
-import org.yakindu.sct.model.sgraph.Scope;
-import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
-import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
+import org.yakindu.sct.model.stext.test.util.AbstractTypeInferrerTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.test.util.STextTestScopeProvider;
-
-import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -45,16 +30,7 @@ import com.google.inject.Inject;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(STextInjectorProvider.class)
-public class TypeInferrerTest extends AbstractSTextTest {
-
-	@Rule
-	public ExpectedException exception = ExpectedException.none();
-	@Inject
-	public ITypeSystem typeSystem;
-	@Inject
-	private ITypeSystemInferrer typeInferrer;
-
-	private ListBasedValidationIssueAcceptor acceptor;
+public class TypeInferrerTest extends AbstractTypeInferrerTest {
 
 	// Unary
 	@Test
@@ -94,7 +70,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	@Test
 	public void testNumericalAddSubtractExpression() {
 		// add
-		assertTrue(isIntegerType(inferType("1+2", internalScope())));
+		assertTrue(isIntegerType(inferTypeForExpression("1+2", internalScope())));
 		assertTrue(isIntegerType(inferType("1 + 2")));
 		assertTrue(isIntegerType(inferType("1 + 0x0F")));
 		assertTrue(isIntegerType(inferType("0x0F + 0x0F")));
@@ -666,8 +642,8 @@ public class TypeInferrerTest extends AbstractSTextTest {
 
 	@Test
 	public void testEventIsRaisedSuccess() {
-		assertTrue(isBooleanType(inferType("boolVar = intEvent", internalScope())));
-		assertTrue(isBooleanType(inferType("ABC.boolVar = ABC.intEvent", interfaceScope())));
+		assertTrue(isBooleanType(inferTypeForExpression("boolVar = intEvent", internalScope())));
+		assertTrue(isBooleanType(inferTypeForExpression("ABC.boolVar = ABC.intEvent", interfaceScope())));
 	}
 
 	@Test
@@ -771,64 +747,4 @@ public class TypeInferrerTest extends AbstractSTextTest {
 
 		expectIssue(inferType("(true) ? 4 : false"), "Could not determine a common type for integer and boolean.");
 	}
-
-	protected Type inferType(String expression) {
-		return inferType(expression, super.internalScope(), super.interfaceScope());
-	}
-
-	protected Type inferType(String expression, String parserRule) {
-		return inferType(expression, parserRule, super.internalScope(), super.interfaceScope());
-	}
-
-	protected Type inferType(String expression, Scope... scopes) {
-		return inferType(expression, Expression.class.getSimpleName(), scopes);
-	}
-
-	protected Type inferType(String expression, String parserRule, Scope... scopes) {
-		EObject parseResult = super.parseExpression(expression, parserRule, scopes);
-		assertNotNull(parseResult);
-		acceptor = new ListBasedValidationIssueAcceptor();
-		if (parseResult instanceof Expression) {
-			return typeInferrer.inferType((Expression) parseResult, acceptor);
-		} else if (parseResult instanceof EventDefinition) {
-			return typeInferrer.inferType((EventDefinition) parseResult, acceptor);
-		} else if (parseResult instanceof VariableDefinition) {
-			return typeInferrer.inferType((VariableDefinition) parseResult, acceptor);
-		} else {
-			throw new IllegalArgumentException("Unsupported parse result.");
-		}
-	}
-
-	private boolean isVoidType(Type type) {
-		return typeSystem.isSame(type, typeSystem.getType("void"));
-	}
-
-	private boolean isIntegerType(Type type) {
-		return typeSystem.isSame(type, typeSystem.getType("integer"));
-	}
-
-	private boolean isRealType(Type type) {
-		return typeSystem.isSame(type, typeSystem.getType("real"));
-	}
-
-	private boolean isBooleanType(Type type) {
-		return typeSystem.isSame(type, typeSystem.getType("boolean"));
-	}
-
-	private boolean isStringType(Type type) {
-		return typeSystem.isSame(type, typeSystem.getType("string"));
-	}
-
-	private void expectIssue(Type object, String message) {
-		if (acceptor.getTraces(
-				org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity.ERROR).isEmpty()) {
-			TestCase.fail("No issue detected.");
-		}
-		assertEquals(
-				message,
-				acceptor.getTraces(
-						org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity.ERROR)
-						.iterator().next().getMessage());
-	}
-
 }

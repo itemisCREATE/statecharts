@@ -20,6 +20,7 @@ import org.yakindu.base.base.NamedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionScope#getStateVector <em>State Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionScope#getSubScopes <em>Sub Scopes</em>}</li>
@@ -28,7 +29,6 @@ import org.yakindu.base.base.NamedElement;
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionScope#getExitSequence <em>Exit Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionScope#getInitSequence <em>Init Sequence</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionScope()
  * @model

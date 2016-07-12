@@ -20,12 +20,12 @@ import org.yakindu.base.base.NamedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionNode#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionNode#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionNode#getReactSequence <em>React Sequence</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionNode()
  * @model

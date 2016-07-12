@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Domain;
@@ -30,6 +31,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesPackage;
 
@@ -115,6 +117,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createTypedElementAdapter();
 			}
 			@Override
+			public Adapter caseTypeSpecifier(TypeSpecifier object) {
+				return createTypeSpecifierAdapter();
+			}
+			@Override
 			public Adapter caseEvent(Event object) {
 				return createEventAdapter();
 			}
@@ -169,6 +175,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAnnotatableElement(AnnotatableElement object) {
 				return createAnnotatableElementAdapter();
+			}
+			@Override
+			public Adapter caseArrayTypeSpecifier(ArrayTypeSpecifier object) {
+				return createArrayTypeSpecifierAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -292,6 +302,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.TypeSpecifier <em>Type Specifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.TypeSpecifier
+	 * @generated
+	 */
+	public Adapter createTypeSpecifierAdapter() {
 		return null;
 	}
 
@@ -502,6 +526,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAnnotatableElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.ArrayTypeSpecifier <em>Array Type Specifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.ArrayTypeSpecifier
+	 * @generated
+	 */
+	public Adapter createArrayTypeSpecifierAdapter() {
 		return null;
 	}
 

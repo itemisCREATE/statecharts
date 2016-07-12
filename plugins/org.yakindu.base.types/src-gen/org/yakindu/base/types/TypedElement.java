@@ -6,7 +6,6 @@
  */
 package org.yakindu.base.types;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -19,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.TypedElement#getType <em>Type</em>}</li>
- *   <li>{@link org.yakindu.base.types.TypedElement#getTypeArguments <em>Type Arguments</em>}</li>
+ *   <li>{@link org.yakindu.base.types.TypedElement#getTypeSpecifier <em>Type Specifier</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getTypedElement()
@@ -36,37 +35,36 @@ public interface TypedElement extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(Type)
 	 * @see org.yakindu.base.types.TypesPackage#getTypedElement_Type()
-	 * @model
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	Type getType();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.base.types.TypedElement#getType <em>Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' reference.
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(Type value);
-
-	/**
-	 * Returns the value of the '<em><b>Type Arguments</b></em>' reference list.
-	 * The list contents are of type {@link org.yakindu.base.types.Type}.
+	 * Returns the value of the '<em><b>Type Specifier</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type Arguments</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Type Specifier</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type Arguments</em>' reference list.
-	 * @see org.yakindu.base.types.TypesPackage#getTypedElement_TypeArguments()
-	 * @model
+	 * @return the value of the '<em>Type Specifier</em>' containment reference.
+	 * @see #setTypeSpecifier(TypeSpecifier)
+	 * @see org.yakindu.base.types.TypesPackage#getTypedElement_TypeSpecifier()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Type> getTypeArguments();
+	TypeSpecifier getTypeSpecifier();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.base.types.TypedElement#getTypeSpecifier <em>Type Specifier</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type Specifier</em>' containment reference.
+	 * @see #getTypeSpecifier()
+	 * @generated
+	 */
+	void setTypeSpecifier(TypeSpecifier value);
 
 } // TypedElement

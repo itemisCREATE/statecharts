@@ -10,12 +10,12 @@ package org.yakindu.base.expressions.expressions;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.ConditionalExpression#getCondition <em>Condition</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.ConditionalExpression#getTrueCase <em>True Case</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.ConditionalExpression#getFalseCase <em>False Case</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getConditionalExpression()
  * @model

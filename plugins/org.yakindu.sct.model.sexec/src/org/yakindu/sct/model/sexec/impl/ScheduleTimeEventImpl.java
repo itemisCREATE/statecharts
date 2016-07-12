@@ -26,11 +26,11 @@ import org.yakindu.sct.model.sexec.TimeEvent;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ScheduleTimeEventImpl#getTimeEvent <em>Time Event</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ScheduleTimeEventImpl#getTimeValue <em>Time Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

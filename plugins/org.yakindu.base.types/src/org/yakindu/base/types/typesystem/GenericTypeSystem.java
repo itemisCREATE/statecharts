@@ -19,6 +19,15 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class GenericTypeSystem extends AbstractTypeSystem {
+	
+	private static final GenericTypeSystem INSTANCE = new GenericTypeSystem();
+
+	
+	protected GenericTypeSystem() {}
+	
+	public static GenericTypeSystem getInstance() {
+		return INSTANCE;
+	}
 
 	@Override
 	protected void initBuiltInTypes() {
@@ -30,7 +39,7 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 		declarePrimitive(NULL);
 
 		declareSuperType(getType(INTEGER), getType(REAL));
-		
+
 		getType(NULL).setAbstract(true);
 	}
 }

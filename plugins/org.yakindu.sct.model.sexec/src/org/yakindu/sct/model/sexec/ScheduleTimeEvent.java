@@ -19,11 +19,11 @@ import org.yakindu.base.expressions.expressions.Expression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.ScheduleTimeEvent#getTimeEvent <em>Time Event</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ScheduleTimeEvent#getTimeValue <em>Time Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sexec.SexecPackage#getScheduleTimeEvent()
  * @model

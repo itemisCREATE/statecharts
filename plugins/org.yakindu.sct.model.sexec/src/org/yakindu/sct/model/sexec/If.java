@@ -18,12 +18,12 @@ package org.yakindu.sct.model.sexec;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.If#getCheck <em>Check</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.If#getThenStep <em>Then Step</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.If#getElseStep <em>Else Step</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sexec.SexecPackage#getIf()
  * @model

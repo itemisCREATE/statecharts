@@ -18,13 +18,13 @@ package org.yakindu.sct.model.sexec;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.HistoryEntry#getInitialStep <em>Initial Step</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.HistoryEntry#isDeep <em>Deep</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.HistoryEntry#getRegion <em>Region</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.HistoryEntry#getHistoryStep <em>History Step</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sexec.SexecPackage#getHistoryEntry()
  * @model

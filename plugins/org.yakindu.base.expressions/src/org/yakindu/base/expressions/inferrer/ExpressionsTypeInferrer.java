@@ -136,7 +136,6 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		assertCompatible(type1, type2, String.format(COMPARSION_OPERATOR, e.getOperator(), type1, type2));
 		Type result = getType(BOOLEAN);
 		return result;
-
 	}
 
 	public Type infer(NumericalAddSubtractExpression e) {
@@ -181,7 +180,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public Type infer(Type type) {
-		return type;
+		return type.getOriginType();
 	}
 
 	/**
@@ -245,8 +244,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	public Type infer(DoubleLiteral literal) {
 		return getType(REAL);
 	}
-	
-	public Type infer(FloatLiteral literal){
+
+	public Type infer(FloatLiteral literal) {
 		return getType(REAL);
 	}
 

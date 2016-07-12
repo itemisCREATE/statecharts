@@ -27,6 +27,9 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.base.types.TypeSpecifier
+import org.yakindu.base.types.ArrayTypeSpecifier
 
 class StatemachineHeader implements IContentTemplate {
 
@@ -35,6 +38,8 @@ class StatemachineHeader implements IContentTemplate {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntries
 	@Inject extension INamingService
+	
+	@Inject extension ITypeSystem
 	
 	@Inject @Named(IGenArtifactConfigurations.DEFAULT)
 	IGenArtifactConfigurations defaultConfigs
@@ -141,10 +146,18 @@ class StatemachineHeader implements IContentTemplate {
 	'''
 
 	def dispatch scopeTypeDeclMember(VariableDefinition it) '''
-		«IF type.name != 'void' && !isConst»«type.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
+		«IF type.isArrayType»
+			«typeSpecifier.typeArguments.get(0).type.name» «name.asEscapedIdentifier»[«typeSpecifier.arraySize»];
+		«ELSE»
+			«IF type.name != 'void' && !isConst»«type.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
+		«ENDIF»
 	'''
 	
 	def dispatch scopeTypeDeclMember(Declaration it) ''''''
+
+	def dispatch arraySize(TypeSpecifier it) ''''''
+	
+	def dispatch arraySize(ArrayTypeSpecifier it) '''«size»'''
 
 	def scopeTypeDecl(Scope scope) '''
 		«val typeRelevantDeclarations = scope.typeRelevantDeclarations.toList»

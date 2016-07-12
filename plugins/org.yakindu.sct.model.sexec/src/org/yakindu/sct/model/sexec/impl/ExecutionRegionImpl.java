@@ -31,13 +31,13 @@ import org.yakindu.sct.model.sexec.StateVector;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl#getDeepEnterSequence <em>Deep Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl#getShallowEnterSequence <em>Shallow Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl#getHistoryVector <em>History Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl#getNodes <em>Nodes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

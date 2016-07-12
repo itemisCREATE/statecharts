@@ -13,6 +13,7 @@ package org.yakindu.sct.model.sexec.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.yakindu.base.types.impl.EventImpl;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.TimeEvent;
 
@@ -22,14 +23,14 @@ import org.yakindu.sct.model.sexec.TimeEvent;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.TimeEventImpl#isPeriodic <em>Periodic</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
-public class TimeEventImpl extends org.yakindu.base.types.impl.EventImpl implements TimeEvent {
+public class TimeEventImpl extends EventImpl implements TimeEvent {
 	/**
 	 * The default value of the '{@link #isPeriodic() <em>Periodic</em>}' attribute.
 	 * <!-- begin-user-doc -->

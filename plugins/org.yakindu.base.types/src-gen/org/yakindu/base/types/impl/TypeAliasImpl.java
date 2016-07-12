@@ -22,6 +22,7 @@ import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeConstraint;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.TypesUtil;
 
@@ -33,7 +34,7 @@ import org.yakindu.base.types.TypesUtil;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getTypeArguments <em>Type Arguments</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getTypeSpecifier <em>Type Specifier</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getId <em>Id</em>}</li>
@@ -46,23 +47,14 @@ import org.yakindu.base.types.TypesUtil;
  */
 public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getType()
+	 * The cached value of the '{@link #getTypeSpecifier() <em>Type Specifier</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeSpecifier()
 	 * @generated
 	 * @ordered
 	 */
-	protected Type type;
-
-	/**
-	 * The cached value of the '{@link #getTypeArguments() <em>Type Arguments</em>}' reference list.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @see #getTypeArguments()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Type> typeArguments;
+	protected TypeSpecifier typeSpecifier;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -171,45 +163,62 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 * @generated
 	 */
 	public Type getType() {
-		if (type != null && type.eIsProxy()) {
-			InternalEObject oldType = (InternalEObject)type;
-			type = (Type)eResolveProxy(oldType);
-			if (type != oldType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.TYPE_ALIAS__TYPE, oldType, type));
-			}
-		}
-		return type;
+		Type type = basicGetType();
+		return type != null && type.eIsProxy() ? (Type)eResolveProxy((InternalEObject)type) : type;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Type basicGetType() {
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setType(Type newType) {
-		Type oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_ALIAS__TYPE, oldType, type));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Type> getTypeArguments() {
-		if (typeArguments == null) {
-			typeArguments = new EObjectResolvingEList<Type>(Type.class, this, TypesPackage.TYPE_ALIAS__TYPE_ARGUMENTS);
+		if (getTypeSpecifier() != null) {
+			return getTypeSpecifier().getType();
 		}
-		return typeArguments;
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeSpecifier getTypeSpecifier() {
+		return typeSpecifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTypeSpecifier(TypeSpecifier newTypeSpecifier, NotificationChain msgs) {
+		TypeSpecifier oldTypeSpecifier = typeSpecifier;
+		typeSpecifier = newTypeSpecifier;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER, oldTypeSpecifier, newTypeSpecifier);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeSpecifier(TypeSpecifier newTypeSpecifier) {
+		if (newTypeSpecifier != typeSpecifier) {
+			NotificationChain msgs = null;
+			if (typeSpecifier != null)
+				msgs = ((InternalEObject)typeSpecifier).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER, null, msgs);
+			if (newTypeSpecifier != null)
+				msgs = ((InternalEObject)newTypeSpecifier).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER, null, msgs);
+			msgs = basicSetTypeSpecifier(newTypeSpecifier, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER, newTypeSpecifier, newTypeSpecifier));
 	}
 
 	/**
@@ -313,6 +322,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER:
+				return basicSetTypeSpecifier(null, msgs);
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
 				return ((InternalEList<?>)getConstraint()).basicRemove(otherEnd, msgs);
 		}
@@ -329,8 +340,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 			case TypesPackage.TYPE_ALIAS__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case TypesPackage.TYPE_ALIAS__TYPE_ARGUMENTS:
-				return getTypeArguments();
+			case TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER:
+				return getTypeSpecifier();
 			case TypesPackage.TYPE_ALIAS__NAME:
 				return getName();
 			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
@@ -355,12 +366,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.TYPE_ALIAS__TYPE:
-				setType((Type)newValue);
-				return;
-			case TypesPackage.TYPE_ALIAS__TYPE_ARGUMENTS:
-				getTypeArguments().clear();
-				getTypeArguments().addAll((Collection<? extends Type>)newValue);
+			case TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER:
+				setTypeSpecifier((TypeSpecifier)newValue);
 				return;
 			case TypesPackage.TYPE_ALIAS__NAME:
 				setName((String)newValue);
@@ -390,11 +397,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE_ALIAS__TYPE:
-				setType((Type)null);
-				return;
-			case TypesPackage.TYPE_ALIAS__TYPE_ARGUMENTS:
-				getTypeArguments().clear();
+			case TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER:
+				setTypeSpecifier((TypeSpecifier)null);
 				return;
 			case TypesPackage.TYPE_ALIAS__NAME:
 				setName(NAME_EDEFAULT);
@@ -423,9 +427,9 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TypesPackage.TYPE_ALIAS__TYPE:
-				return type != null;
-			case TypesPackage.TYPE_ALIAS__TYPE_ARGUMENTS:
-				return typeArguments != null && !typeArguments.isEmpty();
+				return basicGetType() != null;
+			case TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER:
+				return typeSpecifier != null;
 			case TypesPackage.TYPE_ALIAS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:

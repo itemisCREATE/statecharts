@@ -150,7 +150,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	public void testReactionTrigger() {
 		String rule = ReactionTrigger.class.getSimpleName();
 		// Internal Scope
-		parseExpression("intEvent", internalScope(), rule);
+		parseExpression("intEvent", rule, internalScope());
 		parseExpression("after 10 s", rule);
 		parseExpression("after 10 ms", rule);
 		parseExpression("after 10 us", rule);
@@ -160,12 +160,12 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("exit", rule);
 		parseExpression("oncycle", rule);
 		parseExpression("always", rule);
-		parseExpression("intEvent, after 10s", internalScope(), rule);
-		parseExpression("intEvent, after 10s, every 10 ms", internalScope(), rule);
-		parseExpression("intEvent, after 10s [false == true]", internalScope(), rule);
-		parseExpression("intEvent, after 10s ['' != null]", internalScope(), rule);
-		parseExpression("intEvent, after 10s [5  > 10]", internalScope(), rule);
-		parseExpression("ABC.intEvent", interfaceScope(), rule);
+		parseExpression("intEvent, after 10s", rule, internalScope());
+		parseExpression("intEvent, after 10s, every 10 ms", rule, internalScope());
+		parseExpression("intEvent, after 10s [false == true]", rule, internalScope());
+		parseExpression("intEvent, after 10s ['' != null]", rule, internalScope());
+		parseExpression("intEvent, after 10s [5  > 10]", rule, internalScope());
+		parseExpression("ABC.intEvent", rule, interfaceScope());
 	}
 
 	/**
@@ -188,16 +188,16 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	@Test
 	public void testReactionEffect() {
 		String rule = ReactionEffect.class.getSimpleName();
-		parseExpression("raise intEvent", internalScope(), rule);
-		parseExpression("intVar = 5", internalScope(), rule);
-		parseExpression("voidOp()", internalScope(), rule);
-		parseExpression("intVar = intOp()", internalScope(), rule);
+		parseExpression("raise intEvent", rule, internalScope());
+		parseExpression("intVar = 5", rule, internalScope());
+		parseExpression("voidOp()", rule, internalScope());
+		parseExpression("intVar = intOp()", rule, internalScope());
 
-		parseExpression("raise ABC.intEvent : 5", interfaceScope(), rule);
-		parseExpression("ABC.paramOp()", interfaceScope(), rule);
-		parseExpression("ABC.paramOp(5,false)", interfaceScope(), rule);
-		parseExpression("ABC.paramOp(null)", interfaceScope(), rule);
-		parseExpression("ABC.paramOp(); raise ABC.voidEvent ", interfaceScope(), rule);
+		parseExpression("raise ABC.intEvent : 5", rule, interfaceScope());
+		parseExpression("ABC.paramOp()", rule, interfaceScope());
+		parseExpression("ABC.paramOp(5,false)", rule, interfaceScope());
+		parseExpression("ABC.paramOp(null)", rule, interfaceScope());
+		parseExpression("ABC.paramOp(); raise ABC.voidEvent ", rule, interfaceScope());
 
 	}
 
@@ -216,7 +216,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	@Test
 	public void tesLocalReaction() {
 		String rule = LocalReaction.class.getSimpleName();
-		parseExpression("entry [ABC.intVar > 10] / raise ABC.intEvent", interfaceScope(), rule);
+		parseExpression("entry [ABC.intVar > 10] / raise ABC.intEvent", rule, interfaceScope());
 	}
 
 	/**
@@ -226,7 +226,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	@Test
 	public void testTransitionReaction() {
 		String rule = TransitionReaction.class.getSimpleName();
-		parseExpression("after 10 s / raise ABC.intEvent", interfaceScope(), rule);
+		parseExpression("after 10 s / raise ABC.intEvent", rule, interfaceScope());
 	}
 
 	/**
@@ -256,7 +256,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("internal : event voidEvent", rule);
 		parseExpression("internal : var intVar : integer", rule);
 		parseExpression("internal : operation voidOp()", rule);
-		parseExpression("internal : every 10 ms / raise intEvent", internalScope(), rule);
+		parseExpression("internal : every 10 ms / raise intEvent", rule, internalScope());
 	}
 
 	/**

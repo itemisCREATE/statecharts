@@ -18,12 +18,12 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.NumericalMultiplyDivideExpressionImpl#getLeftOperand <em>Left Operand</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.NumericalMultiplyDivideExpressionImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.NumericalMultiplyDivideExpressionImpl#getRightOperand <em>Right Operand</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -10,6 +10,8 @@
 */
 package org.yakindu.sct.model.sexec;
 
+import org.yakindu.base.types.Event;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -18,16 +20,16 @@ package org.yakindu.sct.model.sexec;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sexec.TimeEvent#isPeriodic <em>Periodic</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sexec.SexecPackage#getTimeEvent()
  * @model
  * @generated
  */
-public interface TimeEvent extends org.yakindu.base.types.Event {
+public interface TimeEvent extends Event {
 	/**
 	 * Returns the value of the '<em><b>Periodic</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
