@@ -18,7 +18,6 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.STRING;
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
@@ -47,18 +46,13 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
-import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
-import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
-import org.yakindu.base.types.TypeParameter;
-import org.yakindu.base.types.TypeParameterBinding;
-import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
 
 /**
@@ -142,7 +136,6 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		assertCompatible(type1, type2, String.format(COMPARSION_OPERATOR, e.getOperator(), type1, type2));
 		Type result = getType(BOOLEAN);
 		return result;
-
 	}
 
 	public Type infer(NumericalAddSubtractExpression e) {
@@ -199,111 +192,23 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public Type infer(FeatureCall e) {
-		resolveTypeParameter(e, 1);
-		Type inferred = inferTypeDispatch(e.getFeature());
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getFeature();
 			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = e.getArgs();
 			inferParameter(parameters, args);
 		}
-		if (e.isArrayAccess() && registry.isArrayType(inferred)) {
-			resolveTypeParameter(e, e.getArraySelector().size());
-			TypeParameter tp = ((ParameterizedType) inferred).getParameter().get(0);
-			return inferTypeDispatch(getTypeParameterBinding(tp).getActualType());
-		}
-		return inferred;
+		return inferTypeDispatch(e.getFeature());
 	}
 
 	public Type infer(ElementReferenceExpression e) {
-		resolveTypeParameter(e, 1);
-		Type inferred = inferTypeDispatch(e.getReference());
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getReference();
 			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = e.getArgs();
 			inferParameter(parameters, args);
 		}
-		if (e.isArrayAccess() && registry.isArrayType(inferred)) {
-			resolveTypeParameter(e, e.getArraySelector().size());
-			TypeParameter tp = ((ParameterizedType) inferred).getParameter().get(0);
-			return inferTypeDispatch(getTypeParameterBinding(tp).getActualType());
-		}
 		return inferTypeDispatch(e.getReference());
-	}
-	
-	protected void resolveTypeParameter(FeatureCall e, int level) {
-		if (e.getOwner() instanceof ElementReferenceExpression) {
-			ElementReferenceExpression elemRef = (ElementReferenceExpression) e.getOwner();
-			if (elemRef.getReference() instanceof Declaration) {
-				Declaration declaration = (Declaration) elemRef.getReference();
-				createTypeParameterBinding(declaration, level);
-				return;
-			}
-		}
-		if (e.getOwner() instanceof FeatureCall) {
-			FeatureCall featureCall = (FeatureCall) e.getOwner();
-			if (featureCall.getFeature() instanceof Declaration) {
-				Declaration declaration = (Declaration) featureCall.getFeature();
-				createTypeParameterBinding(declaration, level);
-				return;
-			}
-		}
-		if (e.getFeature() instanceof Declaration) {
-			Declaration declaration = (Declaration) e.getFeature();
-			createTypeParameterBinding(declaration, level);
-			return;
-		}
-	}
-	
-	protected void resolveTypeParameter(ElementReferenceExpression e, int level) {
-		if (e.getReference() instanceof Declaration) {
-			createTypeParameterBinding((Declaration) e.getReference(), level);
-		}
-	}
-
-	protected void createTypeParameterBinding(Declaration declaration, int level) {
-		TypeSpecifier typeSpec = getInnerTypeSpecifier(declaration.getTypeSpecifier(), level);
-		createTypeParameterBinding(typeSpec);
-	}
-
-	private TypeSpecifier getInnerTypeSpecifier(TypeSpecifier outerTypeSpec, int level) {
-		TypeSpecifier result = outerTypeSpec;
-		if (outerTypeSpec.getType() instanceof TypeAlias) {
-			result = ((TypeAlias)outerTypeSpec.getType()).getTypeSpecifier();
-		}
-		// assumption: resolving nested type parameter is only relevant for types with exactly one argument (the only usecase is array type)
-		else if (level > 1 && outerTypeSpec.getTypeArguments().size() == 1) {
-			TypeSpecifier innerTypeSpec = outerTypeSpec.getTypeArguments().get(0);
-			if (innerTypeSpec.getTypeArguments().size() > 0) {
-				result = getInnerTypeSpecifier(innerTypeSpec, level-1);
-			}
-		}
-		return result;
-	}
-
-	protected void createTypeParameterBinding(TypeSpecifier typeSpec) {
-		Type type = typeSpec.getType();
-		if (type instanceof ParameterizedType && ((ParameterizedType) type).getParameter().size() > 0) {
-			EList<TypeParameter> parameter = ((ParameterizedType) type).getParameter();
-			for (int i = 0; i < parameter.size(); i++) {
-				TypeParameter param = parameter.get(i);
-				Type actualType = typeSpec.getTypeArguments().get(i).getType();
-
-				TypeParameterBinding existingBinding = getTypeParameterBinding(param);
-				if (existingBinding != null) {
-					existingBinding.setActualType(actualType);
-				} else {
-					param.eAdapters().add(new TypeParameterBinding(actualType));
-				}
-			}
-		}
-	}
-
-	private TypeParameterBinding getTypeParameterBinding(TypeParameter param) {
-		TypeParameterBinding existingBinding = (TypeParameterBinding) EcoreUtil.getExistingAdapter(param,
-				TypeParameterBinding.class);
-		return existingBinding;
 	}
 
 	protected void inferParameter(EList<Parameter> parameters, EList<Expression> args) {
@@ -365,5 +270,4 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	public Object infer(Parameter e) {
 		return inferTypeDispatch(e.getType());
 	}
-
 }

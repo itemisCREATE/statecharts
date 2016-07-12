@@ -216,4 +216,9 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	public Resource getResource() {
 		return resource;
 	}
+	
+	@Override
+	public boolean isArrayType(Type type) {
+		return false;
+	}
 }

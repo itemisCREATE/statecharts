@@ -10,42 +10,17 @@
  */
 package org.yakindu.sct.model.stext.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrerMessages.ASSIGNMENT_OPERATOR;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.yakindu.base.expressions.expressions.Expression;
-import org.yakindu.base.types.ComplexType;
-import org.yakindu.base.types.Type;
-import org.yakindu.base.types.TypeParameter;
-import org.yakindu.base.types.TypeParameterBinding;
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
-import org.yakindu.base.types.typesystem.ITypeSystem;
-import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
-import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue;
-import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity;
-import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
-import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
+import org.yakindu.sct.model.stext.test.util.AbstractTypeInferrerTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.test.util.STextTestScopeProvider;
-
-import com.google.inject.Inject;
-
-import junit.framework.TestCase;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -55,16 +30,7 @@ import junit.framework.TestCase;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(STextInjectorProvider.class)
-public class TypeInferrerTest extends AbstractSTextTest {
-
-	@Rule
-	public ExpectedException exception = ExpectedException.none();
-	@Inject
-	public ITypeSystem typeSystem;
-	@Inject
-	private ITypeSystemInferrer typeInferrer;
-
-	private ListBasedValidationIssueAcceptor acceptor;
+public class TypeInferrerTest extends AbstractTypeInferrerTest {
 
 	// Unary
 	@Test
@@ -781,142 +747,4 @@ public class TypeInferrerTest extends AbstractSTextTest {
 
 		expectIssue(inferType("(true) ? 4 : false"), "Could not determine a common type for integer and boolean.");
 	}
-	
-	@Test
-	public void testArrayElementAssignmentByIndexBrackets() {
-		String scope = "internal: var intArray : array<integer> var boolArray : array<boolean>";
-		assertTrue(isIntegerType(inferTypeForExpression("intArray[0]", scope)));
-		assertTrue(isBooleanType(inferTypeForExpression("boolArray[0]", scope)));
-		assertTrue(isIntegerType(inferTypeForExpression("intArray[0]=5", scope)));
-		assertTrue(isBooleanType(inferTypeForExpression("boolArray[0]=false", scope)));
-		expectIssue(inferTypeForExpression("intArray[0]=5.3", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "real"));
-		expectIssue(inferTypeForExpression("intArray[0]='asd'", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "string"));
-		expectIssue(inferTypeForExpression("boolArray[0]=8", scope), String.format(ASSIGNMENT_OPERATOR, "=", "boolean", "integer"));
-		expectIssue(inferTypeForExpression("intArray[0]=true", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "boolean"));
-	}
-	
-	@Test
-	public void testArrayElementAssignmentByIndexOperation() {
-		String scope = "internal: var intArray : array<integer> var boolArray : array<boolean>";
-
-		assertTrue(isIntegerType(inferTypeForExpression("intArray.get(0)", scope)));
-		assertTrue(isBooleanType(inferTypeForExpression("boolArray.get(0)", scope)));
-		assertTrue(isIntegerType(inferTypeForExpression("intArray.get(0)=5", scope)));
-		assertTrue(isBooleanType(inferTypeForExpression("boolArray.get(0)=false", scope)));
-		expectIssue(inferTypeForExpression("intArray.get(0)=5.3", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "real"));
-		expectIssue(inferTypeForExpression("intArray.get(0)='asd'", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "string"));
-		expectIssue(inferTypeForExpression("boolArray.get(0)=8", scope), String.format(ASSIGNMENT_OPERATOR, "=", "boolean", "integer"));
-		expectIssue(inferTypeForExpression("intArray.get(0)=true", scope), String.format(ASSIGNMENT_OPERATOR, "=", "integer", "boolean"));
-	}
-	
-	@Test
-	public void testArrayElementAccessMixed() {
-		// we need to define two arrays of different type to check if type bindings get overwritten properly
-		String scope = "internal: var intArray : array<integer> var boolArray : array<boolean>";
-		expectOK("intArray[0]==17 && boolArray.get(0)", scope);
-	}
-	
-	@Test
-	public void testArrayElementAccessFromInterface() {
-		String scope = "internal: var intArray : array<integer> interface A: var boolArray : array<boolean>";
-		expectOK("intArray.get(0)==17 && A.boolArray[0]", scope);
-	}
-
-	@Test
-	@Ignore("Type recursion not yet implemented")
-	public void testArrayAssignment() {
-		String scope = "internal: var intArray1 : array<integer> var intArray2 : array<integer> var stringArr : array<string>";
-		assertTrue(isArrayIntegerType(inferTypeForExpression("intArray1=intArray2", scope)));
-		expectIssue(inferTypeForExpression("intArray1=stringArr", scope), String.format(ASSIGNMENT_OPERATOR, "=", "array<integer>", "array<string>"));
-	}
-
-	@Test
-	public void testArrayDeclaration() {
-		assertTrue(isArrayIntegerType(inferType("var intArray : array<integer>", VariableDefinition.class.getSimpleName())));
-//		assertTrue(isArrayIntegerType(inferType("var intArray : integer[3] = {1,2,3}", VariableDefinition.class.getSimpleName())));
-	}
-
-	protected Type inferType(String expression) {
-		return inferTypeForExpression(expression, super.internalScope() + "\n" + super.interfaceScope());
-	}
-
-	protected Type inferType(String expression, String parserRule) {
-		return inferType(expression, parserRule, super.internalScope() + "\n" + super.interfaceScope());
-	}
-
-	protected Type inferTypeForExpression(String expression, String scopes) {
-		return inferType(expression, Expression.class.getSimpleName(), scopes);
-	}
-
-	protected Type inferType(String expression, String parserRule, String scopes) {
-		EObject parseResult = super.parseExpression(expression, parserRule, scopes);
-		assertNotNull(parseResult);
-		acceptor = new ListBasedValidationIssueAcceptor();
-		if (parseResult instanceof Expression) {
-			return typeInferrer.inferType((Expression) parseResult, acceptor);
-		} else if (parseResult instanceof EventDefinition) {
-			return typeInferrer.inferType((EventDefinition) parseResult, acceptor);
-		} else if (parseResult instanceof VariableDefinition) {
-			return typeInferrer.inferType((VariableDefinition) parseResult, acceptor);
-		} else {
-			throw new IllegalArgumentException("Unsupported parse result.");
-		}
-	}
-
-	private boolean isVoidType(Type type) {
-		return typeSystem.isSame(type, typeSystem.getType("void"));
-	}
-
-	private boolean isIntegerType(Type type) {
-		return typeSystem.isSame(type, typeSystem.getType("integer"));
-	}
-
-	private boolean isRealType(Type type) {
-		return typeSystem.isSame(type, typeSystem.getType("real"));
-	}
-
-	private boolean isBooleanType(Type type) {
-		return typeSystem.isSame(type, typeSystem.getType("boolean"));
-	}
-
-	private boolean isStringType(Type type) {
-		return typeSystem.isSame(type, typeSystem.getType("string"));
-	}
-	
-	private boolean isArrayIntegerType(Type type) {
-		if (type instanceof ComplexType && type.getName().equals("array")) {
-			ComplexType arrayType = (ComplexType) type;
-			TypeParameter typeParam = arrayType.getParameter().get(0);
-			TypeParameterBinding existingBinding = (TypeParameterBinding) EcoreUtil.getExistingAdapter(typeParam, TypeParameterBinding.class);
-			assertNotNull(existingBinding);
-			return typeSystem.isSame(existingBinding.getActualType(), typeSystem.getType("integer"));
-		}
-		return false;
-	}
-
-	private void expectIssue(Type object, String message) {
-		if (acceptor.getTraces(
-				org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity.ERROR).isEmpty()) {
-			TestCase.fail("No issue detected.");
-		}
-		assertEquals(
-				message,
-				acceptor.getTraces(
-						org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity.ERROR)
-						.iterator().next().getMessage());
-	}
-	
-	private void expectOK(String expression, String scope) {
-		ListBasedValidationIssueAcceptor diagnostics = validate(expression, scope);
-		List<ValidationIssue> errors = diagnostics.getTraces(Severity.ERROR);
-		assertEquals(errors.toString(), 0, errors.size());
-	}
-	
-	private ListBasedValidationIssueAcceptor validate(String expression, String scope) {
-		EObject result = parseExpression(expression, Expression.class.getSimpleName(), scope);
-		ListBasedValidationIssueAcceptor diagnostics = new ListBasedValidationIssueAcceptor();
-		typeInferrer.inferType(result, diagnostics);
-		return diagnostics;
-	}
-
 }
