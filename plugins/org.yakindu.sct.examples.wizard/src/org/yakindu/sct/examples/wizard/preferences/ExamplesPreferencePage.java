@@ -28,6 +28,29 @@ import org.yakindu.sct.examples.wizard.ExampleActivator;
  */
 public class ExamplesPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
+	private static class StorageLocationFieldEditor extends DirectoryFieldEditor {
+		
+		public StorageLocationFieldEditor(String name, String labelText, Composite parent) {
+			super(name, labelText, parent);
+			setEmptyStringAllowed(false);
+			setErrorMessage("Storage location must not be empty.");
+		}
+		
+		/**
+		 * Checks only if the input text is not empty, but not if the directory
+		 * exists as in that case it will be created by the example wizard.
+		 */
+		@Override
+		protected boolean doCheckState() {
+			String fileName = getTextControl().getText();
+	        fileName = fileName.trim();
+			if (fileName.length() == 0 && !isEmptyStringAllowed()) {
+				return false;
+			}
+			return true;
+		}
+	};
+	
 	public ExamplesPreferencePage() {
 		super(GRID);
 		setDescription("Examples Preference Page");
@@ -46,8 +69,8 @@ public class ExamplesPreferencePage extends FieldEditorPreferencePage implements
 
 	private void createStorageLocationEditor(Composite main) {
 		Composite composite = createGroupComposite(main, "Storage Location");
-		addField(new DirectoryFieldEditor(ExamplesPreferenceConstants.STORAGE_LOCATION, "Storage Location:",
-				composite));
+		addField(new StorageLocationFieldEditor(ExamplesPreferenceConstants.STORAGE_LOCATION,
+				"Storage Location:", composite));
 	}
 
 	protected Composite createPageLayout(Composite parent) {

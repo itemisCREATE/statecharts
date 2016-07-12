@@ -26,8 +26,8 @@ public interface ExampleWizardConstants {
 	public static final String UPDATE_PAGE_DESCRIPTION = "Please wait while the program updates your local example files.";
 	public static final String UPDATE_PAGE_DESCRIPTION_FINISH = "Finished! Click \"next\" to continue";
 	public static final String SELECT_PAGE_TITLE = "Select an example";
-	public static final String SELECT_PAGE_DESCRIPTION = "Choose an Example Project to import it.";
-	public static final String WIZARD_ERROR_NOTHING_SELECTED = "You have to select an Example in order to continue.";
-	public static final String WIZARD_ERROR_NO_INTERNET_CONNECTION = "You are not connected to the Internet\nPlease check your cable and network configs.";
-	public static final String WIZARD_ERROR_GIT = "It seems there is a Problem with git\nPlease try again later.";
+	public static final String SELECT_PAGE_DESCRIPTION = "Choose an example project to import it.";
+	public static final String WIZARD_ERROR_NOTHING_SELECTED = "You have to select an example in order to continue.";
+	public static final String WIZARD_ERROR_NO_INTERNET_CONNECTION = "You are not connected to the internet.\nPlease check your cable and network configs.";
+	public static final String WIZARD_ERROR_GIT = "It seems there is a problem with git\nPlease try again later.";
 }

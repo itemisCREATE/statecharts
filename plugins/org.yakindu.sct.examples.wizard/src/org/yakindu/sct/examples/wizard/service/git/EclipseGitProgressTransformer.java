@@ -2,16 +2,16 @@
 package org.yakindu.sct.examples.wizard.service.git;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jgit.lib.ProgressMonitor;
 
 /** Create a new Git to Eclipse progress monitor. */
 public class EclipseGitProgressTransformer implements ProgressMonitor {
-	private static final String EMPTY_STRING = "";  //$NON-NLS-1$
 
 	private final IProgressMonitor root;
 
-	private IProgressMonitor task;
+	private SubMonitor mainTask;
+	private SubMonitor subTask;
 
 	private String msg;
 
@@ -31,32 +31,34 @@ public class EclipseGitProgressTransformer implements ProgressMonitor {
 
 	@Override
 	public void start(final int totalTasks) {
-		root.beginTask(EMPTY_STRING, totalTasks * 1000);
+		mainTask = SubMonitor.convert(root, 5);
 	}
 
 	@Override
 	public void beginTask(final String name, final int total) {
-		endTask();
 		msg = name;
 		lastWorked = 0;
 		totalWork = total;
-		task = new SubProgressMonitor(root, 1000);
-		if (totalWork == UNKNOWN)
-			task.beginTask(EMPTY_STRING, IProgressMonitor.UNKNOWN);
-		else
-			task.beginTask(EMPTY_STRING, totalWork);
-		task.subTask(msg);
+		
+		SubMonitor sub = mainTask.newChild(1);
+		
+		if (totalWork == UNKNOWN) {
+			subTask = SubMonitor.convert(sub, IProgressMonitor.UNKNOWN);
+		} else {
+			subTask = SubMonitor.convert(sub, totalWork);
+		}
+		subTask.subTask(msg);
 	}
 
 	@Override
 	public void update(final int work) {
-		if (task == null)
+		if (subTask == null)
 			return;
 
 		final int cmp = lastWorked + work;
 		if (totalWork == UNKNOWN && cmp > 0) {
 			if (lastWorked != cmp)
-				task.subTask(msg + ", " + cmp); //$NON-NLS-1$
+				subTask.subTask(msg + ", " + cmp); //$NON-NLS-1$
 		} else if (totalWork <= 0) {
 			// Do nothing to update the task.
 		} else if (cmp * 100 / totalWork != lastWorked * 100 / totalWork) {
@@ -82,27 +84,27 @@ public class EclipseGitProgressTransformer implements ProgressMonitor {
 			m.append(twstr);
 			m.append(")"); //$NON-NLS-1$
 
-			task.subTask(m.toString());
+			subTask.subTask(m.toString());
 		}
 		lastWorked = cmp;
-		task.worked(work);
+		subTask.worked(work);
 	}
 
 	@Override
 	public void endTask() {
-		if (task != null) {
+		if (subTask != null) {
 			try {
-				task.done();
+				subTask.done();
 			} finally {
-				task = null;
+				subTask = null;
 			}
 		}
 	}
 
 	@Override
 	public boolean isCancelled() {
-		if (task != null)
-			return task.isCanceled();
+		if (subTask != null)
+			return subTask.isCanceled();
 		return root.isCanceled();
 	}
 }

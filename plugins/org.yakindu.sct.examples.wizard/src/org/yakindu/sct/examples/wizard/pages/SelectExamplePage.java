@@ -30,6 +30,7 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
@@ -37,7 +38,10 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.ToolItem;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
+import org.yakindu.sct.examples.wizard.ExampleWizardImages;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
@@ -80,6 +84,7 @@ public class SelectExamplePage extends WizardPage
 		Composite root = new Composite(parent, SWT.NONE);
 		root.setLayout(new GridLayout(1, true));
 		createUpdateGroup(root);
+		createToolbar(root);
 		SashForm container = new SashForm(root, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(container);
 		GridLayout layout = new GridLayout(2, false);
@@ -90,12 +95,32 @@ public class SelectExamplePage extends WizardPage
 		setControl(container);
 	}
 
+	protected void createToolbar(Composite root) {
+		ToolBar tb = new ToolBar(root, SWT.NONE);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(tb);
+		ToolItem collapseAllItem = new ToolItem(tb, SWT.NONE);
+		collapseAllItem.setImage(ExampleWizardImages.COLLAPSE_ALL.image());
+		collapseAllItem.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				viewer.collapseAll();
+			}
+		});
+		ToolItem expandAllItem = new ToolItem(tb, SWT.NONE);
+		expandAllItem.setImage(ExampleWizardImages.EXPAND_ALL.image());
+		expandAllItem.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				viewer.expandAll();
+			}
+		});
+	}
+
 	private void createUpdateGroup(Composite root) {
 		messageArea = new MessageArea(root);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(messageArea);
 		messageArea.addSelectionListener(this);
 		messageArea.hide();
-
 	}
 
 	@Override
@@ -151,10 +176,12 @@ public class SelectExamplePage extends WizardPage
 
 	protected void setInput(final IProgressMonitor monitor) {
 		final List<ExampleData> input = exampleService.getExamples(new NullProgressMonitor());
-
+		
 		messageArea.hide();
 		viewer.setInput(input);
 		viewer.expandAll();
+		// explicit layouting required for Unix systems
+		viewer.getControl().getParent().getParent().layout(true);
 	}
 
 	protected void createTreeViewer(Composite container) {
