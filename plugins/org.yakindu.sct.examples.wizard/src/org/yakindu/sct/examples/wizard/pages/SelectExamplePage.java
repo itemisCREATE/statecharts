@@ -154,6 +154,7 @@ public class SelectExamplePage extends WizardPage
 				@Override
 				public void run() {
 					messageArea.showDownload();
+					messageArea.getParent().layout(true);
 				}
 			});
 		} else if (!exampleService.isUpToDate(monitor)) {
@@ -162,6 +163,7 @@ public class SelectExamplePage extends WizardPage
 				public void run() {
 					setInput(monitor);
 					messageArea.showUpdate();
+					messageArea.getParent().layout(true);
 				}
 			});
 		} else {
