@@ -784,6 +784,31 @@ public class SGraphJavaValidationTest {
 		assertError(diagnostics,
 				ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER);
 	}
+	
+	@Test
+	public void checkStatechartNameIsIdentifier(){
+		Statechart statechart = SGraphFactory.eINSTANCE.createStatechart();
+		statechart.setName("Not a valid identifier");
+		validator.validate(statechart, diagnostics,
+				new HashMap<Object, Object>());
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics,
+				String.format(ISSUE_STATECHART_NAME_NO_IDENTIFIER, statechart.getName()));
+		
+		diagnostics = new BasicDiagnostic();
+		statechart.setName("0Notavalididentifier");
+		validator.validate(statechart, diagnostics,
+				new HashMap<Object, Object>());
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics,
+				String.format(ISSUE_STATECHART_NAME_NO_IDENTIFIER, statechart.getName()));
+		
+		diagnostics = new BasicDiagnostic();
+		statechart.setName("ValidIdentifier");
+		validator.validate(statechart, diagnostics,
+				new HashMap<Object, Object>());
+		assertIssueCount(diagnostics, 0);
+	}
 
 	/**
 	 * checks that each @Check method of {@link STextJavaValidator} has a @Test
@@ -808,7 +833,7 @@ public class SGraphJavaValidationTest {
 					testMethod.getAnnotation(Test.class));
 		}
 	}
-
+	
 	/**
 	 * checks that no two @Check method of {@link STextJavaValidator} have the
 	 * same name. Avoiding overloaded check methods in the validator class
@@ -837,6 +862,7 @@ public class SGraphJavaValidationTest {
 		}
 	}
 
+	
 	protected Transition createTransition(Vertex source, Vertex target) {
 		Transition trans = factory.createTransition();
 		trans.setSource(source);

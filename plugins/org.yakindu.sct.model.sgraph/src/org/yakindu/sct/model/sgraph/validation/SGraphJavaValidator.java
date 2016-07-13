@@ -30,6 +30,7 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Entry;
@@ -82,6 +83,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_SYNCHRONIZATION_TRANSITION_COUNT = "A synchronization should have at least two incoming or two outgoing transitions.";
 	public static final String ISSUE_TRANSITION_ORTHOGONAL = "Source and target of a transition must not be located in orthogonal regions!";
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing Transitions from Entries can only target to sibling or inner states.";
+	public static final String ISSUE_STATECHART_NAME_NO_IDENTIFIER = "%s is not a valid identifier!";
 
 	@Check(CheckType.FAST)
 	public void vertexNotReachable(final Vertex vertex) {
@@ -105,10 +107,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 						if (!stateScopeSet.contains(element)) {
 							externalPredecessors.add(element);
 						} else {
-							elements.addAll(((org.yakindu.sct.model.sgraph.State) element)
-									.getRegions());
-							elements.addAll(((org.yakindu.sct.model.sgraph.State) element)
-									.getIncomingTransitions());
+							elements.addAll(((org.yakindu.sct.model.sgraph.State) element).getRegions());
+							elements.addAll(((org.yakindu.sct.model.sgraph.State) element).getIncomingTransitions());
 						}
 
 					} else if (element instanceof Region) {
@@ -117,13 +117,11 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 						if (!stateScopeSet.contains(element)) {
 							externalPredecessors.add(element);
 						} else {
-							elements.addAll(((Entry) element)
-									.getIncomingTransitions());
+							elements.addAll(((Entry) element).getIncomingTransitions());
 						}
 
 					} else if (element instanceof Vertex) {
-						elements.addAll(((Vertex) element)
-								.getIncomingTransitions());
+						elements.addAll(((Vertex) element).getIncomingTransitions());
 
 					} else if (element instanceof Transition) {
 						elements.add(((Transition) element).getSource());
@@ -155,8 +153,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 	@Check(CheckType.FAST)
 	public void nameIsNotEmpty(org.yakindu.sct.model.sgraph.State state) {
-		if ((state.getName() == null || state.getName().trim().length() == 0)
-				&& !(state instanceof FinalState)) {
+		if ((state.getName() == null || state.getName().trim().length() == 0) && !(state instanceof FinalState)) {
 			error(ISSUE_STATE_WITHOUT_NAME, state, null, -1);
 		}
 	}
@@ -180,16 +177,14 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 	@Check(CheckType.FAST)
 	public void initialEntryWithoutIncomingTransitions(Entry entry) {
-		if (entry.getIncomingTransitions().size() > 0
-				&& entry.getKind().equals(EntryKind.INITIAL)) {
+		if (entry.getIncomingTransitions().size() > 0 && entry.getKind().equals(EntryKind.INITIAL)) {
 			warning(ISSUE_INITIAL_ENTRY_WITH_IN_TRANS, entry, null, -1);
 		}
 	}
 
 	@Check(CheckType.FAST)
 	public void initialEntryWithoutOutgoingTransition(Entry entry) {
-		if (entry.getOutgoingTransitions().size() == 0
-				&& ((Entry) entry).getKind().equals(EntryKind.INITIAL)) {
+		if (entry.getOutgoingTransitions().size() == 0 && ((Entry) entry).getKind().equals(EntryKind.INITIAL)) {
 			warning(ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS, entry, null, -1);
 		}
 	}
@@ -229,16 +224,14 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 	@Check(CheckType.FAST)
 	public void synchronizationTransitionCount(Synchronization sync) {
-		if (sync.getIncomingTransitions().size() < 2
-				&& sync.getOutgoingTransitions().size() < 2) {
+		if (sync.getIncomingTransitions().size() < 2 && sync.getOutgoingTransitions().size() < 2) {
 			warning(ISSUE_SYNCHRONIZATION_TRANSITION_COUNT, sync, null, -1);
 		}
 	}
 
 	@Check(CheckType.FAST)
 	public void initialEntryWithTransitionToContainer(Transition t) {
-		if (t.getSource() instanceof Entry
-				&& !isChildOrSibling(t.getSource(), t.getTarget())) {
+		if (t.getSource() instanceof Entry && !isChildOrSibling(t.getSource(), t.getTarget())) {
 			error(ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER, t, null, -1);
 		}
 	}
@@ -281,8 +274,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 				for (Vertex v : r.getVertices()) {
 					if (v instanceof Entry) {
 						String name = v.getName().trim().toLowerCase();
-						if (name != null || "".equals(name)
-								|| "default".equals(name)) {
+						if (name != null || "".equals(name) || "default".equals(name)) {
 							defaultEntry = (Entry) v;
 							break;
 						}
@@ -291,11 +283,9 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 				// now check error conditions
 				if (defaultEntry == null) {
-					error(ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY,
-							r, null, -1);
+					error(ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY, r, null, -1);
 				} else if (defaultEntry.getOutgoingTransitions().size() != 1) {
-					error(ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY,
-							r, null, -1);
+					error(ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY, r, null, -1);
 				}
 			}
 
@@ -303,83 +293,108 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 	}
 
-	@Check public void orthogonalTransition(Transition transition) {
-		
+	@Check
+	public void orthogonalTransition(Transition transition) {
+
 		Vertex source = transition.getSource();
 		Vertex target = transition.getTarget();
-		
-		if ( (source instanceof Synchronization) || (target instanceof Synchronization) ) return; // ... the check does not apply.
-		
+
+		if ((source instanceof Synchronization) || (target instanceof Synchronization))
+			return; // ... the check does not apply.
+
 		EObject commonAncestor = commonAncestor(source, target);
-		
+
 		if (commonAncestor instanceof CompositeElement) {
-			
-			error(ISSUE_TRANSITION_ORTHOGONAL, transition, null, -1);	
+
+			error(ISSUE_TRANSITION_ORTHOGONAL, transition, null, -1);
 		}
 	}
-	
-	
-	@Check public void orthogonalSourceStates(Synchronization sync) {
-		
+
+	@Check
+	public void orthogonalSourceStates(Synchronization sync) {
+
 		List<Vertex> sourceVertices = sources(sync.getIncomingTransitions());
-		
-		if ( ! areOrthogonal(sourceVertices) ) {
+
+		if (!areOrthogonal(sourceVertices)) {
 			error(ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL, sync, null, -1);
 		}
 	}
 
-	
+	@Check
+	public void orthogonalTargetStates(Synchronization sync) {
 
-	@Check public void orthogonalTargetStates(Synchronization sync) {
-		
 		List<Vertex> sourceVertices = targets(sync.getOutgoingTransitions());
-		
-		if ( ! areOrthogonal(sourceVertices) ) {
+
+		if (!areOrthogonal(sourceVertices)) {
 			error(ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL, sync, null, -1);
 		}
 	}
 
+	@Check
+	public void orthogonalSynchronizedTransition(Synchronization sync) {
 
-
-	@Check public void orthogonalSynchronizedTransition(Synchronization sync) {
-		
-		List<Transition> incoming = sync.getIncomingTransitions();		
+		List<Transition> incoming = sync.getIncomingTransitions();
 		List<List<EObject>> inAncestorsList = new ArrayList<List<EObject>>();
-		for (Transition trans : incoming) { inAncestorsList.add(collectAncestors(trans.getSource(), new ArrayList<EObject>())); }
+		for (Transition trans : incoming) {
+			inAncestorsList.add(collectAncestors(trans.getSource(), new ArrayList<EObject>()));
+		}
 
 		List<Transition> outgoing = sync.getOutgoingTransitions();
-		List<List<EObject>> outAncestorsList = new ArrayList<List<EObject>>(); 
-		for (Transition trans : outgoing) { outAncestorsList.add(collectAncestors(trans.getTarget(), new ArrayList<EObject>())); }
-				
-		
+		List<List<EObject>> outAncestorsList = new ArrayList<List<EObject>>();
+		for (Transition trans : outgoing) {
+			outAncestorsList.add(collectAncestors(trans.getTarget(), new ArrayList<EObject>()));
+		}
+
 		Set<Transition> inOrthogonal = new HashSet<Transition>(incoming);
 		Set<Transition> outOrthogonal = new HashSet<Transition>(outgoing);
-		
-		for ( int i=0; i<incoming.size(); i++) {
-			for ( int j=0; j<outgoing.size(); j++ ) {
-				
+
+		for (int i = 0; i < incoming.size(); i++) {
+			for (int j = 0; j < outgoing.size(); j++) {
+
 				EObject commonAncestor = findCommonAncestor(inAncestorsList.get(i), outAncestorsList.get(j));
 
-				if ( commonAncestor instanceof Region ) {					
+				if (commonAncestor instanceof Region) {
 					inOrthogonal.remove(incoming.get(i));
 					outOrthogonal.remove(outgoing.get(j));
 				}
 			}
 		}
 
-		for ( Transition trans : inOrthogonal ) {
-			error(ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE, trans, null, -1);				
+		for (Transition trans : inOrthogonal) {
+			error(ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE, trans, null, -1);
 		}
-		
-		for ( Transition trans : outOrthogonal ) {
-			error(ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE, trans, null, -1);				
+
+		for (Transition trans : outOrthogonal) {
+			error(ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE, trans, null, -1);
 		}
-		
+
+	}
+
+	@Check
+	public void checkStatechartNameIsIdentifier(Statechart statechart) {
+		if (!isValidJavaIdentifier(statechart.getName())) {
+			error(String.format(ISSUE_STATECHART_NAME_NO_IDENTIFIER, statechart.getName()), statechart, BasePackage.Literals.NAMED_ELEMENT__NAME, -1);
+
+		}
 	}
 	
-	
-	
+	protected boolean isValidJavaIdentifier(String s) {
+		if (s == null || s.length() == 0) {
+			return false;
+		}
 
+		char[] c = s.toCharArray();
+		if (!Character.isJavaIdentifierStart(c[0])) {
+			return false;
+		}
+
+		for (int i = 1; i < c.length; i++) {
+			if (!Character.isJavaIdentifierPart(c[i])) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	@Override
 	public boolean isLanguageSpecific() {
