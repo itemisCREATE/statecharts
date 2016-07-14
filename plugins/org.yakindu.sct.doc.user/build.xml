@@ -140,13 +140,13 @@
                 <include name="user-guide/c-domain.textile" />
                 <include name="user-guide/statechart_language.textile" />
                 <include name="user-guide/generating_code.textile" />
-                <!-- <include name="user-guide/sctunit.textile" /> -->
+                <include name="user-guide/sctunit.textile" />
             </fileset>
 
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="9" />
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="10" />
                 </condition>
             </fail>
 
