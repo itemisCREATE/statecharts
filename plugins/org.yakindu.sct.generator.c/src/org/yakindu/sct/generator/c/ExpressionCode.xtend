@@ -74,9 +74,9 @@ class ExpressionCode {
 
 	def dispatch CharSequence code(Expression it, VariableDefinition target) '''«target.access»'''
 
-	def dispatch CharSequence code(ElementReferenceExpression it, VariableDefinition target) '''«target.access»«FOR arrSel : arraySelector»[«arrSel.code»]«ENDFOR»'''
+	def dispatch CharSequence code(ElementReferenceExpression it, VariableDefinition target) '''«target.access»'''
 
-	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) '''«target.access»«FOR arrSel : arraySelector»[«arrSel.code»]«ENDFOR»'''
+	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) '''«target.access»'''
 
 	def dispatch CharSequence code(ElementReferenceExpression it, OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : args BEFORE ', ' SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
@@ -84,7 +84,7 @@ class ExpressionCode {
 	def dispatch CharSequence code(ElementReferenceExpression it, Operation target) '''«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 
-	def dispatch CharSequence code(ElementReferenceExpression it, org.yakindu.base.types.Property target) '''«target.access»«FOR arrSel : arraySelector»[«arrSel.code»]«ENDFOR»'''
+	def dispatch CharSequence code(ElementReferenceExpression it, org.yakindu.base.types.Property target) '''«target.access»'''
 
 	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : args BEFORE ', ' SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
@@ -92,7 +92,7 @@ class ExpressionCode {
 	def dispatch CharSequence code(FeatureCall it, Operation target) '''«it.owner.code».«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 
-	def dispatch CharSequence code(FeatureCall it, org.yakindu.base.types.Property target) '''«it.owner.code».«target.access»«FOR arrSel : arraySelector»[«arrSel.code»]«ENDFOR»'''
+	def dispatch CharSequence code(FeatureCall it, org.yakindu.base.types.Property target) '''«it.owner.code».«target.access»'''
 	
 	def dispatch CharSequence code(FeatureCall it, Enumerator target) '''«target.access»'''
 
