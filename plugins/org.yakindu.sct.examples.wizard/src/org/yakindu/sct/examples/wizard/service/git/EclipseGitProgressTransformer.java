@@ -31,6 +31,7 @@ public class EclipseGitProgressTransformer implements ProgressMonitor {
 
 	@Override
 	public void start(final int totalTasks) {
+		// the number of sub tasks is 5 in case of a download operation, but we are always called with totalTasks=2
 		mainTask = SubMonitor.convert(root, 5);
 	}
 
@@ -40,7 +41,13 @@ public class EclipseGitProgressTransformer implements ProgressMonitor {
 		lastWorked = 0;
 		totalWork = total;
 		
-		SubMonitor sub = mainTask.newChild(1);
+		SubMonitor sub;
+		if (mainTask != null) {
+			// fork a new child from main task to have accumulated progress bar update
+			sub = mainTask.newChild(1);
+		} else {
+			sub = SubMonitor.convert(root);
+		}
 		
 		if (totalWork == UNKNOWN) {
 			subTask = SubMonitor.convert(sub, IProgressMonitor.UNKNOWN);
