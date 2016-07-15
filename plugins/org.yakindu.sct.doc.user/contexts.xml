@@ -25,7 +25,4 @@
    <context id="stext_keyword">
       <topic href="help/user-guide/statechart_language.html" label="YAKINDU Statechart Tools User Guide"/>
    </context>
-   <context id="sctunit_keyword">
-      <topic href="help/user-guide/sctunit.html" label="YAKINDU Statechart Tools SCT Unit"/>
-   </context>
 </contexts>
