@@ -19,7 +19,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.yakindu.base.types.provider.OperationItemProvider;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.OperationDefinition} object.
@@ -72,14 +71,11 @@ public class OperationDefinitionItemProvider extends OperationItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated Not
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((OperationDefinition)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_OperationDefinition_type") :
-			getString("_UI_OperationDefinition_type") + " " + label;
+		return super.getText(object);
 	}
 
 		/**
