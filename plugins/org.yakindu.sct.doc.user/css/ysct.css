@@ -79,3 +79,38 @@ h1.nocount:before h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.no
         word-wrap: break-word;
     }
 }
+
+.pro-feature {
+    border: 2px solid red;
+    border-color: rgba(255,0,0,0.75);
+    border-width: 2px 0 0 2px;
+    position: relative;
+    overflow: hidden;
+    padding: 10px 20px 0;
+    margin-right: -20px;
+    margin-bottom: 30px;
+}
+.pro-feature:before {
+	content:"PRO";
+	position:absolute;
+	top:-10px;
+	right:-34px;
+	background:red;
+	background:rgba(255,0,0,0.75);
+	color:white;
+	padding:20px 30px 2px;
+	transform:rotate(45deg);
+	z-index:10
+}
+
+span.pro-feature {
+	padding:0;
+	border-width:0
+}
+span.pro-feature:before {
+	transform:initial;
+	padding:0 3px;
+	position:relative;
+	top:initial;
+	left:0
+}
