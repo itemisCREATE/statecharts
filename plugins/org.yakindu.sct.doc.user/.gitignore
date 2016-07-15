@@ -6,11 +6,6 @@ html/
 lib/
 pdf/
 src-gen/
-<<<<<<< Upstream, based on origin/master
 target/
 website/
-=======
-bin/
-website/
-
->>>>>>> 947fa26 Added website subfolder to gitignore
+*~
