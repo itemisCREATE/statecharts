@@ -36,6 +36,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
+import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.yakindu.base.xtext.utils.gmf.resource.DirtyStateListener;
 import org.yakindu.sct.domain.extension.DomainRegistry;
@@ -46,13 +47,13 @@ import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.proposals.ContentProposalViewerKeyHandler;
+import org.yakindu.sct.ui.editor.providers.ISCTOutlineFactory;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 import org.yakindu.sct.ui.editor.validation.SCTValidationJob;
 
 import com.google.inject.Injector;
 
 /**
- * 
  * @author andreas muelder - Initial contribution and API
  * @author martin esser
  */
@@ -93,6 +94,17 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	public StatechartDiagramEditor() {
 		super(true);
+	}
+
+	@Override
+	public Object getAdapter(@SuppressWarnings("rawtypes") Class type) {
+		if (IContentOutlinePage.class.equals(type)) {
+			IDomainInjectorProvider injectorProvider = DomainRegistry.getDomainDescriptor(getDiagram().getElement())
+					.getDomainInjectorProvider();
+			ISCTOutlineFactory instance = injectorProvider.getEditorInjector().getInstance(ISCTOutlineFactory.class);
+			return instance.createOutline(this);
+		}
+		return super.getAdapter(type);
 	}
 
 	@Override
@@ -207,9 +219,14 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		}
 		super.dispose();
 	}
-	
+
 	@Override
 	protected int getInitialPaletteSize() {
 		return 175;
 	}
+
+	public IContentOutlinePage getDefaultOutline() {
+		return (IContentOutlinePage) super.getAdapter(IContentOutlinePage.class);
+	}
+
 }
