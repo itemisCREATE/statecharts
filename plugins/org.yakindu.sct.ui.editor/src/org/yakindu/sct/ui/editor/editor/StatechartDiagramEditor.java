@@ -68,6 +68,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 	private static final int DELAY = 200; // ms
+	
+	private KeyHandler keyHandler;
 
 	private ResourceSetListener validationListener = new ResourceSetListenerImpl() {
 
@@ -174,30 +176,23 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		super.configureGraphicalViewer();
 		disableAnimatedZoom();
 		createContentProposalViewerKeyHandler();
-//		configureZoomKeyBindings();
 	}
 
-	protected void configureZoomKeyBindings() {
-		// Remove old Windows specific key bindings
-		getKeyHandler().remove(KeyStroke.getPressed('=', 0x3d, SWT.CTRL));
-		getKeyHandler().remove(KeyStroke.getPressed('-', 0x2d, SWT.CTRL));
-		
-		// Add key binding for english layout
-		getKeyHandler().put(KeyStroke.getPressed('=', 0x3d, SWT.MOD1), getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
-		getKeyHandler().put(KeyStroke.getPressed('-', 0x2d, SWT.MOD1), getActionRegistry().getAction(GEFActionConstants.ZOOM_OUT));
-		
-		// Add key binding for german layout
-		getKeyHandler().put( /* in OS X [CTRL++] returns character '+' */
-				KeyStroke.getPressed('+', 0x2b, SWT.MOD1), getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
-		getKeyHandler().put( /* in Windows [CTRL++] returns character 0x1d */
-				KeyStroke.getPressed((char) 0x1d, 0x2b, SWT.MOD1), getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
-		getKeyHandler().put(
-				KeyStroke.getPressed('-', 0x2d, SWT.MOD1), getActionRegistry().getAction(GEFActionConstants.ZOOM_OUT));
+	// Disable the animated zoom, it is too slow for bigger models
+	protected void disableAnimatedZoom() {
+		AnimatableZoomManager zoomManager = (AnimatableZoomManager) getGraphicalViewer()
+				.getProperty(ZoomManager.class.toString());
+		zoomManager.setZoomAnimationStyle(ZoomManager.ANIMATE_NEVER);
+	}
+
+	protected void createContentProposalViewerKeyHandler() {
+		ContentProposalViewerKeyHandler contentProposalHandler = new ContentProposalViewerKeyHandler(
+				getGraphicalViewer());
+		contentProposalHandler
+				.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()).setParent(getKeyHandler()));
+		getGraphicalViewer().setKeyHandler(contentProposalHandler);
 	}
 	
-	/** The key handler */
-	private KeyHandler keyHandler;
-
 	/**
 	 * Overrides the GMF key handler to fix key binding for zooming and to remove unused key bindings.
 	 */
@@ -244,20 +239,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		getSelectionActions().add(action.getId());
 	}
 
-	// Disable the animated zoom, it is too slow for bigger models
-	protected void disableAnimatedZoom() {
-		AnimatableZoomManager zoomManager = (AnimatableZoomManager) getGraphicalViewer()
-				.getProperty(ZoomManager.class.toString());
-		zoomManager.setZoomAnimationStyle(ZoomManager.ANIMATE_NEVER);
-	}
-
-	protected void createContentProposalViewerKeyHandler() {
-		ContentProposalViewerKeyHandler contentProposalHandler = new ContentProposalViewerKeyHandler(
-				getGraphicalViewer());
-		contentProposalHandler
-				.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()).setParent(getKeyHandler()));
-		getGraphicalViewer().setKeyHandler(contentProposalHandler);
-	}
 
 	@Override
 	public String getContributorId() {
