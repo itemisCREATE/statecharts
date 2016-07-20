@@ -23,11 +23,14 @@ import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gef.KeyStroke;
 import org.eclipse.gef.editparts.ZoomManager;
+import org.eclipse.gef.ui.actions.GEFActionConstants;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.internal.parts.DiagramGraphicalViewerKeyHandler;
 import org.eclipse.gmf.runtime.gef.ui.internal.editparts.AnimatableZoomManager;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -167,6 +170,19 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		super.configureGraphicalViewer();
 		disableAnimatedZoom();
 		createContentProposalViewerKeyHandler();
+		configureZoomKeyBindings();
+	}
+
+	protected void configureZoomKeyBindings() {
+		// Remove old key bindings
+		getKeyHandler().remove(KeyStroke.getPressed('=', 0x3d, SWT.CTRL));
+		getKeyHandler().remove(KeyStroke.getPressed('-', 0x2d, SWT.CTRL));
+		
+		// Add key binding for Windows [CTRL+]/[CTRL-] and MacOS [CMD+]/[CMD-]
+		getKeyHandler().put(
+				KeyStroke.getPressed('+', 0x2b, SWT.MOD1 & SWT.MODIFIER_MASK), getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
+		getKeyHandler().put(
+				KeyStroke.getPressed('-', 0x2d, SWT.MOD1 & SWT.MODIFIER_MASK), getActionRegistry().getAction(GEFActionConstants.ZOOM_OUT));
 	}
 
 	// Disable the animated zoom, it is too slow for bigger models
@@ -179,7 +195,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	protected void createContentProposalViewerKeyHandler() {
 		ContentProposalViewerKeyHandler contentProposalHandler = new ContentProposalViewerKeyHandler(
 				getGraphicalViewer());
-		contentProposalHandler.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()));
+		contentProposalHandler
+				.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()).setParent(getKeyHandler()));
 		getGraphicalViewer().setKeyHandler(contentProposalHandler);
 	}
 
