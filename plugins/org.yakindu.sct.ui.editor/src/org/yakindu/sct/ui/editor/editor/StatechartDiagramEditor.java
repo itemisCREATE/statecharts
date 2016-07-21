@@ -23,11 +23,18 @@ import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gef.KeyHandler;
+import org.eclipse.gef.KeyStroke;
 import org.eclipse.gef.editparts.ZoomManager;
+import org.eclipse.gef.ui.actions.GEFActionConstants;
+import org.eclipse.gef.ui.actions.ZoomInAction;
+import org.eclipse.gef.ui.actions.ZoomOutAction;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.internal.parts.DiagramGraphicalViewerKeyHandler;
 import org.eclipse.gmf.runtime.gef.ui.internal.editparts.AnimatableZoomManager;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -61,6 +68,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 	private static final int DELAY = 200; // ms
+	
+	private KeyHandler keyHandler;
 
 	private ResourceSetListener validationListener = new ResourceSetListenerImpl() {
 
@@ -179,9 +188,57 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	protected void createContentProposalViewerKeyHandler() {
 		ContentProposalViewerKeyHandler contentProposalHandler = new ContentProposalViewerKeyHandler(
 				getGraphicalViewer());
-		contentProposalHandler.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()));
+		contentProposalHandler
+				.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()).setParent(getKeyHandler()));
 		getGraphicalViewer().setKeyHandler(contentProposalHandler);
 	}
+	
+	/**
+	 * Overrides the GMF key handler to fix key binding for zooming and to remove unused key bindings.
+	 */
+	@Override
+	protected KeyHandler getKeyHandler() {
+		if (keyHandler == null) {
+			keyHandler = new KeyHandler();
+
+			registerZoomActions();
+
+			// Zoom out - all OS - German and English keyboard layout
+			getKeyHandler().put(KeyStroke.getPressed('-', 0x2d, SWT.MOD1),
+					getActionRegistry().getAction(GEFActionConstants.ZOOM_OUT));
+
+			// Zoom in - all OS - English keyboard layout
+			getKeyHandler().put(KeyStroke.getPressed('=', 0x3d, SWT.MOD1),
+					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
+
+			// Zoom in - Unix - German layout ([CTRL++] propagates char '+')
+			getKeyHandler().put(KeyStroke.getPressed('+', 0x2b, SWT.MOD1),
+					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
+
+			// Zoom in - Windows - German layout ([CTRL++] propagates char 0x1d)
+			getKeyHandler().put(KeyStroke.getPressed((char) 0x1d, 0x2b, SWT.MOD1),
+					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
+
+		}
+		return keyHandler;
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void registerZoomActions() {
+		IAction action;
+		action = new ZoomInAction(getZoomManager());
+		action.setText(""); //$NON-NLS-1$ // no text necessary since this
+							// is not a visible action
+		getActionRegistry().registerAction(action);
+		getSelectionActions().add(action.getId());
+
+		action = new ZoomOutAction(getZoomManager());
+		action.setText(""); //$NON-NLS-1$ // no text necessary since this
+							// is not a visible action
+		getActionRegistry().registerAction(action);
+		getSelectionActions().add(action.getId());
+	}
+
 
 	@Override
 	public String getContributorId() {
