@@ -14,7 +14,9 @@ import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.sct.refactoring.proposals.RefactoringProposalProvider;
 import org.yakindu.sct.ui.editor.editor.proposals.SmartEditProposalProvider;
 import org.yakindu.sct.ui.editor.proposals.IEditProposalProvider;
+import org.yakindu.sct.ui.editor.providers.DefaultSCTOutlineFactory;
 import org.yakindu.sct.ui.editor.providers.DefaultSCTPaletteFactory;
+import org.yakindu.sct.ui.editor.providers.ISCTOutlineFactory;
 import org.yakindu.sct.ui.editor.providers.ISCTPaletteFactory;
 
 import com.google.inject.Binder;
@@ -24,6 +26,8 @@ import com.google.inject.multibindings.Multibinder;
  * This module registers services that are intended to be used by the graphical editor.
  * 
  * @author terfloth
+ * @author muelder - add palette factory
+ * @author dicks - add outline factory
  *
  */
 public class GenericEditorModule extends AbstractGenericModule {
@@ -39,5 +43,10 @@ public class GenericEditorModule extends AbstractGenericModule {
 	public Class<? extends ISCTPaletteFactory> bindISCTPaletteFactory() {
 		return DefaultSCTPaletteFactory.class;
 	}
+	public Class<? extends ISCTOutlineFactory> bindISCTOutlineFactory() {
+		return DefaultSCTOutlineFactory.class;
+	}
+	
+	
 	
 }
