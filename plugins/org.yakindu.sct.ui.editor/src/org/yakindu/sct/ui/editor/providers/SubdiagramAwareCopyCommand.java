@@ -63,6 +63,11 @@ public class SubdiagramAwareCopyCommand extends CopyCommand implements ICommand 
 		return new CustomData(DRAWING_SURFACE, copy.getBytes());
 	}
 
+	/**
+	 * This is basically a copy of
+	 * {@link org.eclipse.gmf.runtime.diagram.ui.internal.commands.ClipboardCommand.copyViewsToString(List)}
+	 * which is static and therefore not exchangeable. Only difference is adding of sub diagrams.
+	 */
 	protected String copyWithSubdiagrams(List<EObject> views) {
 		Assert.isNotNull(views);
 		Assert.isTrue(views.size() > 0);
@@ -91,8 +96,10 @@ public class SubdiagramAwareCopyCommand extends CopyCommand implements ICommand 
 		// clipboard support instance
 		selection.add(getMeasurementUnitAnnotation(views));
 
+		// PATCH START
 		// add all sub diagrams of selected states
 		selection.addAll(getSubDiagrams(views));
+		// PATCH END
 
 		/* Copy the selection to the string */
 		return ClipboardUtil.copyElementsToString(selection, new HashMap(), new NullProgressMonitor());
@@ -124,14 +131,12 @@ public class SubdiagramAwareCopyCommand extends CopyCommand implements ICommand 
 			View viewElement = (View) iter.next();
 			if (viewElement != null) {
 				EObject semanticElement = viewElement.getElement();
-
 				if (semanticElement != null && semanticElement instanceof State) {
 					State semanticState = (State) semanticElement;
 					if (semanticState.isComposite()) {
 						subDiagrams.addAll(getAllSubDiagrams(semanticState));
 					}
 				}
-
 			}
 		}
 		return subDiagrams;
