@@ -1,6 +1,7 @@
 package org.yakindu.sct.ui.editor.providers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -88,7 +90,7 @@ public class SubdiagramAwareCopyCommand extends CopyCommand implements ICommand 
 		// the copy list. If the annotation is first, then we get the wrong
 		// clipboard support instance
 		selection.add(getMeasurementUnitAnnotation(views));
-		
+
 		// add all sub diagrams of selected states
 		selection.addAll(getSubDiagrams(views));
 
@@ -122,15 +124,43 @@ public class SubdiagramAwareCopyCommand extends CopyCommand implements ICommand 
 			View viewElement = (View) iter.next();
 			if (viewElement != null) {
 				EObject semanticElement = viewElement.getElement();
+
 				if (semanticElement != null && semanticElement instanceof State) {
-					Diagram subDiagram = DiagramPartitioningUtil.getSubDiagram((State)semanticElement);
-					if (subDiagram != null) {
-						subDiagrams.add(subDiagram);
+					State semanticState = (State) semanticElement;
+					if (semanticState.isComposite()) {
+						subDiagrams.addAll(getAllSubDiagrams(semanticState));
 					}
+				}
+
+			}
+		}
+		return subDiagrams;
+	}
+
+	protected Collection<? extends Diagram> getAllSubDiagrams(State semanticState) {
+		List<Diagram> subDiagrams = new ArrayList<>();
+		addSubDiagram(semanticState, subDiagrams);
+
+		TreeIterator<EObject> iter = semanticState.eAllContents();
+		while (iter.hasNext()) {
+			EObject next = iter.next();
+			if (next instanceof State) {
+				State subState = (State) next;
+				if (subState.isComposite()) {
+					addSubDiagram(subState, subDiagrams);
+				} else {
+					iter.prune();
 				}
 			}
 		}
 		return subDiagrams;
+	}
+
+	protected void addSubDiagram(State semanticState, List<Diagram> subDiagrams) {
+		Diagram subDiagram = DiagramPartitioningUtil.getSubDiagram(semanticState);
+		if (subDiagram != null) {
+			subDiagrams.add(subDiagram);
+		}
 	}
 
 }
