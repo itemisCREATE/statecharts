@@ -29,7 +29,6 @@ import org.yakindu.sct.ui.editor.DiagramActivator;
 
 /**
  * 
- * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
@@ -51,12 +50,20 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 		createColorEditors(main);
 		createLineStyleEditors(main);
 		createPriorityLabelEditor(main);
+		createLiveValidationEditor(main);
 	}
 
 	protected void createPriorityLabelEditor(Composite main) {
 		Composite composite = createGroupComposite(main, "Transition Decorator");
 		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_PRIORITY_LABELS,
 				"Show transition priority", composite);
+		addField(editor);
+	}
+	
+	protected void createLiveValidationEditor(Composite main) {
+		Composite composite = createGroupComposite(main, "Validation");
+		BooleanFieldEditor editor = new BooleanFieldEditor(StatechartPreferenceConstants.PREF_LIVE_VALIDATION,
+				"Enable live validation", composite);
 		addField(editor);
 	}
 

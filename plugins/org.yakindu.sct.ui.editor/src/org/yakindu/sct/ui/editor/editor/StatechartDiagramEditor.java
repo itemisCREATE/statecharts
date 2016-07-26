@@ -53,6 +53,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 import org.yakindu.sct.ui.editor.proposals.ContentProposalViewerKeyHandler;
 import org.yakindu.sct.ui.editor.providers.ISCTOutlineFactory;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
@@ -69,7 +70,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 	private static final int DELAY = 200; // ms
-	
+
 	private KeyHandler keyHandler;
 
 	private ResourceSetListener validationListener = new ResourceSetListenerImpl() {
@@ -83,17 +84,24 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 					EObject eObject = (EObject) notification.getNotifier();
 					if (eObject.eClass().getEPackage() == SGraphPackage.eINSTANCE) {
 						validationJob.cancel();
-						validationJob.schedule(DELAY);
+						if (liveValidationEnabled())
+							validationJob.schedule(DELAY);
 					} else
 						for (EClass eClass : eObject.eClass().getEAllSuperTypes()) {
 							if (SGraphPackage.eINSTANCE == eClass.getEPackage()) {
 								validationJob.cancel();
-								validationJob.schedule(DELAY);
+								if (liveValidationEnabled())
+									validationJob.schedule(DELAY);
 								return;
 							}
 						}
 				}
 			}
+		}
+
+		protected boolean liveValidationEnabled() {
+			return DiagramActivator.getDefault().getPreferenceStore()
+					.getBoolean(StatechartPreferenceConstants.PREF_LIVE_VALIDATION);
 		}
 	};
 
@@ -204,9 +212,10 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 				.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()).setParent(getKeyHandler()));
 		getGraphicalViewer().setKeyHandler(contentProposalHandler);
 	}
-	
+
 	/**
-	 * Overrides the GMF key handler to fix key binding for zooming and to remove unused key bindings.
+	 * Overrides the GMF key handler to fix key binding for zooming and to
+	 * remove unused key bindings.
 	 */
 	@Override
 	protected KeyHandler getKeyHandler() {
@@ -250,7 +259,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		getActionRegistry().registerAction(action);
 		getSelectionActions().add(action.getId());
 	}
-
 
 	@Override
 	public String getContributorId() {
