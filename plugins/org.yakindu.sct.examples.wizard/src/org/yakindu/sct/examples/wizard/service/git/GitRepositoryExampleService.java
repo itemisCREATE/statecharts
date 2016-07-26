@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.examples.wizard.service.git;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileVisitResult;
@@ -21,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -74,7 +74,7 @@ public class GitRepositoryExampleService implements IExampleService {
 		return java.nio.file.Paths.get(ExampleActivator.getDefault().getPreferenceStore()
 				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION));
 	}
-	
+
 	protected java.nio.file.Path getGitMetadataLocation() {
 		return java.nio.file.Paths.get(ExampleActivator.getDefault().getPreferenceStore()
 				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION), GIT_METADATA_FOLDER);
@@ -172,11 +172,27 @@ public class GitRepositoryExampleService implements IExampleService {
 	@Override
 	public void importExample(ExampleData edata, IProgressMonitor monitor) {
 		try {
-			IProjectDescription pDescription = ResourcesPlugin.getWorkspace()
+			IProjectDescription original = ResourcesPlugin.getWorkspace()
 					.loadProjectDescription(new Path(edata.getProjectDir().getAbsolutePath()).append("/.project"));
 			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(edata.getProjectDir().getName());
-			project.create(pDescription, monitor);
-			List<File> filesToImport = findProjectFiles(edata.getProjectDir());
+
+			IProjectDescription clone = ResourcesPlugin.getWorkspace()
+					.newProjectDescription(original.getName());
+			clone.setBuildSpec(original.getBuildSpec());
+			clone.setComment(original.getComment());
+			clone.setDynamicReferences(original
+					.getDynamicReferences());
+			clone.setNatureIds(original.getNatureIds());
+			clone.setReferencedProjects(original
+					.getReferencedProjects());
+			if(project.exists()){
+				return;
+			}
+			project.create(clone, monitor);
+			project.open(monitor);
+			
+			@SuppressWarnings("unchecked")
+			List<IFile> filesToImport = FileSystemStructureProvider.INSTANCE.getChildren(edata.getProjectDir());
 			ImportOperation io = new ImportOperation(project.getFullPath(), edata.getProjectDir(),
 					FileSystemStructureProvider.INSTANCE, new IOverwriteQuery() {
 
@@ -186,22 +202,13 @@ public class GitRepositoryExampleService implements IExampleService {
 						}
 
 					}, filesToImport);
+			io.setOverwriteResources(true);
+			io.setCreateContainerStructure(false);
 			io.run(monitor);
-			project.open(monitor);
+			project.refreshLocal(IProject.DEPTH_INFINITE, monitor);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	protected List<File> findProjectFiles(File file) {
-		List<File> result = new ArrayList<File>();
-		for (File f : file.listFiles()) {
-			if (f.isDirectory()) {
-				result.addAll(findProjectFiles(f));
-			}
-			result.add(f);
-		}
-		return result;
 	}
 
 	public void deleteFolder(java.nio.file.Path path) throws IOException {
