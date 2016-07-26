@@ -85,7 +85,8 @@ public class SCTValidationJob extends Job implements IMarkerType {
 	}
 
 	public SCTValidationJob() {
-		super("validation");
+		super("validate model...");
+		setUser(false);
 	}
 
 	@Override
