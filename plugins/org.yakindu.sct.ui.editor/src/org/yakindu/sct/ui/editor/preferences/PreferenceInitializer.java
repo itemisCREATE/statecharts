@@ -70,6 +70,9 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer
 		//Transition Priority Labels
 		getPreferenceStore().setDefault(
 				StatechartPreferenceConstants.PREF_PRIORITY_LABELS, false);
+		//Live validation
+				getPreferenceStore().setDefault(
+						StatechartPreferenceConstants.PREF_LIVE_VALIDATION, true);
 		
 
 	}

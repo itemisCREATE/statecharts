@@ -15,6 +15,7 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
+import org.eclipse.xtext.validation.CompositeEValidator;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.resource.SCTLinker;
@@ -74,6 +75,8 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 						.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
 				.to(org.yakindu.sct.model.stext.scoping.StextImportAwareScopeProvider.class);
 		binder.bind(ITypeSystem.class).toInstance(getTypeSystem());
+		binder.bind(boolean.class).annotatedWith(
+				Names.named(CompositeEValidator.USE_EOBJECT_VALIDATOR)).toInstance(false);
 	}
 	
 	protected ITypeSystem getTypeSystem() {

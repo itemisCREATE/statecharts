@@ -64,7 +64,9 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 
 	@Check
 	public void checkExpression(Expression expression) {
-		typeInferrer.inferType(expression, this);
+		//Only infer root expressions since inferType infers the expression containment hierarchy
+		if(!(expression.eContainer() instanceof Expression))
+			typeInferrer.inferType(expression, this);
 	}
 
 	public void accept(ValidationIssue issue) {
