@@ -10,14 +10,23 @@
  */
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
+import com.google.inject.Inject
+import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.simulation.core.sruntime.EventDirection
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 
 class ExecutionContextExtensions {
 
+	@Inject
+	extension ITypeValueProvider
+
 	def clearLocalAndInEvents(ExecutionContext executionContext) {
 		executionContext.allEvents.filter[direction == EventDirection.IN || direction == EventDirection.LOCAL].forEach[
-			if(raised) {raised = false; value = null}]
+			if (raised) {
+				raised = false;
+				value = if (type != null) type.defaultValue else null
+			}
+		]
 	}
 
 	def raiseScheduledEvents(ExecutionContext executionContext) {
