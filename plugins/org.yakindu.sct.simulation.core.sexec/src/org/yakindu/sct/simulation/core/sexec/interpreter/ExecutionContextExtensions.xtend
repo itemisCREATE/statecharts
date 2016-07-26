@@ -22,7 +22,11 @@ class ExecutionContextExtensions {
 
 	def clearLocalAndInEvents(ExecutionContext executionContext) {
 		executionContext.allEvents.filter[direction == EventDirection.IN || direction == EventDirection.LOCAL].forEach[
-			if(raised) {raised = false; value = type.defaultValue }]
+			if (raised) {
+				raised = false;
+				value = if (type != null) type.defaultValue else null
+			}
+		]
 	}
 
 	def raiseScheduledEvents(ExecutionContext executionContext) {
