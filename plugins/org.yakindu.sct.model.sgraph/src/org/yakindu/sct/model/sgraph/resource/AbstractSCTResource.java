@@ -12,6 +12,7 @@
 package org.yakindu.sct.model.sgraph.resource;
 
 import java.io.StringReader;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -125,8 +126,10 @@ public abstract class AbstractSCTResource extends GMFResource {
 		setUseIDAttributes(true);
 		syntaxDiagnostics = HashMultimap.create();
 		linkingDiagnostics = HashMultimap.create();
+		setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 	}
-
+	
+	
 	@Override
 	protected void attachedHelper(EObject eObject) {
 		super.attachedHelper(eObject);
