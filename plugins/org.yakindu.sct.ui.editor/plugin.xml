@@ -477,7 +477,7 @@
             </ElementType>
          </ViewId>
       </GlobalActionHandlerProvider>
-      <GlobalActionHandlerProvider class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider" id="global-actions">
+      <GlobalActionHandlerProvider class="org.yakindu.sct.ui.editor.providers.StatechartDiagramGlobalActionHandlerProvider" id="global-actions">
          <Priority name="Lowest">
          </Priority>
          <ViewId id="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">

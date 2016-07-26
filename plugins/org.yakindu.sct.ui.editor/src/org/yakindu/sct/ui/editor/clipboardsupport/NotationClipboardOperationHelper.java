@@ -63,6 +63,8 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * Because this is done in a static method we couldn't inherit from the original
  * NotationClipboardOperationHelper.
  * 
+ * We made also adjustments here to support copying of a state's sub diagram.
+ * 
  * @author muehlbrandt
  */
 @SuppressWarnings("all")
@@ -218,15 +220,14 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 				org.eclipse.gmf.runtime.notation.Node node = (org.eclipse.gmf.runtime.notation.Node) eObject;
 				EObject element = node.getElement();
 				if ((element != null)) {
-					return new PositionalGeneralViewPasteOperation(
-							overriddenChildPasteOperation, true);
+					return new PositionalGeneralViewPasteOperation(overriddenChildPasteOperation, true);
 				} else {
-					return new PositionalGeneralViewPasteOperation(
-							overriddenChildPasteOperation, false);
+					return new PositionalGeneralViewPasteOperation(overriddenChildPasteOperation, false);
 				}
 			} else if (eObject instanceof Edge) {
-				return new ConnectorViewPasteOperation(
-						overriddenChildPasteOperation);
+				return new ConnectorViewPasteOperation(overriddenChildPasteOperation);
+			} else if (eObject instanceof Diagram) {
+				return new DiagramPasteOperation(overriddenChildPasteOperation);
 			}
 		}
 		return null;
@@ -283,7 +284,7 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * This is a quick fix to remove outgoing transitions of copied vertices if
 	 * they have no target.
