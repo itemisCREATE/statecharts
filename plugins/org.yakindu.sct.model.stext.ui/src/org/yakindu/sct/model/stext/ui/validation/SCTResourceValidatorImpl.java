@@ -10,9 +10,14 @@
  */
 package org.yakindu.sct.model.stext.ui.validation;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 
 /**
@@ -28,5 +33,15 @@ public class SCTResourceValidatorImpl extends ResourceValidatorImpl {
 			((AbstractSCTResource) resource).resolveLazyCrossReferences(monitor);
 		} else
 			super.resolveProxies(resource, monitor);
+	}
+
+	protected void validate(Resource resource, final CheckMode mode, final CancelIndicator monitor,
+			IAcceptor<Issue> acceptor) {
+		for (EObject ele : resource.getContents()) {
+			if (ele instanceof Statechart) {
+				if (!monitor.isCanceled())
+					validate(null, ele, mode, monitor, acceptor);
+			}
+		}
 	}
 }
