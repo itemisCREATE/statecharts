@@ -59,6 +59,7 @@ import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 import org.yakindu.sct.ui.editor.validation.SCTValidationJob;
 
 import com.google.inject.Injector;
+import com.google.inject.Key;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -69,7 +70,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 	private static final int DELAY = 200; // ms
-	
+
 	private KeyHandler keyHandler;
 
 	private ResourceSetListener validationListener = new ResourceSetListenerImpl() {
@@ -108,12 +109,22 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	@Override
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class type) {
 		if (IContentOutlinePage.class.equals(type)) {
-			IDomainInjectorProvider injectorProvider = DomainRegistry.getDomainDescriptor(getDiagram().getElement())
-					.getDomainInjectorProvider();
-			ISCTOutlineFactory instance = injectorProvider.getEditorInjector().getInstance(ISCTOutlineFactory.class);
-			return instance.createOutline(this);
+			return createOutline(type);
 		}
 		return super.getAdapter(type);
+	}
+
+	protected Object createOutline(Class<?> type) {
+		Injector editorInjector = DomainRegistry.getDomainDescriptor(getDiagram().getElement())
+				.getDomainInjectorProvider().getEditorInjector();
+		
+		boolean outlineBindingExists = null != editorInjector.getExistingBinding(Key.get(ISCTOutlineFactory.class));
+		if (!outlineBindingExists) {
+			//get the GMF defautl outline
+			return super.getAdapter(type);
+		}
+		ISCTOutlineFactory instance = editorInjector.getInstance(ISCTOutlineFactory.class);
+		return instance.createOutline(this);
 	}
 
 	@Override
@@ -204,9 +215,10 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 				.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()).setParent(getKeyHandler()));
 		getGraphicalViewer().setKeyHandler(contentProposalHandler);
 	}
-	
+
 	/**
-	 * Overrides the GMF key handler to fix key binding for zooming and to remove unused key bindings.
+	 * Overrides the GMF key handler to fix key binding for zooming and to
+	 * remove unused key bindings.
 	 */
 	@Override
 	protected KeyHandler getKeyHandler() {
@@ -251,7 +263,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		getSelectionActions().add(action.getId());
 	}
 
-
 	@Override
 	public String getContributorId() {
 		return ID;
@@ -281,9 +292,4 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	protected int getInitialPaletteSize() {
 		return 175;
 	}
-
-	public IContentOutlinePage getDefaultOutline() {
-		return (IContentOutlinePage) super.getAdapter(IContentOutlinePage.class);
-	}
-
 }
