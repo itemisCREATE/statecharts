@@ -39,7 +39,7 @@ public class StateTextCompartmentExpressionEditPart extends SpecificationElement
 
 	@Override
 	protected int getEditorStyles() {
-		return SWT.MULTI;
+		return SWT.MULTI | SWT.WRAP;
 	}
 
 }

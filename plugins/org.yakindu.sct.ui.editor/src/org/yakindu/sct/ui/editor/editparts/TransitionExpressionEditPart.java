@@ -80,7 +80,7 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 
 	@Override
 	protected int getEditorStyles() {
-		return SWT.MULTI;
+		return SWT.MULTI | SWT.WRAP;
 	}
 
 	@Override
