@@ -36,7 +36,6 @@ public class StatechartTextExpressionEditPart extends SpecificationElementEditPa
 
 	@Override
 	public WrappingLabel getFigure() {
-		// TODO Auto-generated method stub
 		return super.getFigure();
 	}
 
@@ -53,6 +52,6 @@ public class StatechartTextExpressionEditPart extends SpecificationElementEditPa
 
 	@Override
 	protected int getEditorStyles() {
-		return SWT.MULTI | SWT.V_SCROLL;
+		return SWT.MULTI | SWT.V_SCROLL | SWT.WRAP;
 	}
 }
