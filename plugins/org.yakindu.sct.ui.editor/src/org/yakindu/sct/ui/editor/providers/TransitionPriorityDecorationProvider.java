@@ -98,7 +98,7 @@ public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvi
 		public void activate() {
 			super.activate();
 			if (!(semanticElement instanceof Transition)
-					&& !(((Transition) semanticElement).eContainer() instanceof Vertex)) {
+					|| !(((Transition) semanticElement).eContainer() instanceof Vertex)) {
 				return;
 			}
 			Vertex owningElement = (Vertex) ((Transition) semanticElement).eContainer();
@@ -109,7 +109,7 @@ public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvi
 		@Override
 		public void deactivate() {
 			if (!(semanticElement instanceof Transition)
-					&& !(((Transition) semanticElement).eContainer() instanceof Vertex)) {
+					|| !(((Transition) semanticElement).eContainer() instanceof Vertex)) {
 				return;
 			}
 			Vertex owningElement = (Vertex) ((Transition) semanticElement).eContainer();
