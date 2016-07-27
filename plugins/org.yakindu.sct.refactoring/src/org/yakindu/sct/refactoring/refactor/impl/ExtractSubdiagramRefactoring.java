@@ -80,6 +80,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 
 	@Override
 	protected boolean internalDoUndo() {
+		// close the sub diagram before undo will delete it
 		return DiagramPartitioningUtil.closeSubdiagramEditors((State) subdiagram.getElement());
 	}
 
@@ -127,7 +128,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 				SemanticHints.REGION_COMPARTMENT);
 		Node entryNode = ViewService.createNode(entryPointRegionCompartment, entryPoint, SemanticHints.ENTRY,
 				preferencesHint);
-		ViewService.createEdge(entryNode, oldTarget, entryPoint.getOutgoingTransitions().get(0),
+		ViewService.createEdge(entryNode, oldTarget, entryPoint.getOutgoingTransitions().get(0), // TODO: is it always the first, what if there were already entry points with other transitions?
 				SemanticHints.TRANSITION, preferencesHint);
 
 		addEntryPointSpec(transition, entryPoint);
@@ -270,15 +271,16 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 				preferencesHint);
 
 		// re-wire existing transition to new exit point
-		Vertex oldTarget = transition.getTarget();
+		Vertex oldTransitionTarget = transition.getTarget();
 		transition.setTarget(exitPoint);
-		ViewService.createEdge(edge.getSource(), exitNode, transition, SemanticHints.TRANSITION, preferencesHint);
+		View oldEdgeTarget = edge.getTarget();
+		edge.setTarget(exitNode);
 
 		// create transition from selected state to former transition target
 		Transition exitPointTransition = SGraphFactory.eINSTANCE.createTransition();
 		exitPointTransition.setSource((State) subdiagram.getElement());
-		exitPointTransition.setTarget(oldTarget);
-		ViewService.createEdge(getContextObject(), edge.getTarget(), exitPointTransition, SemanticHints.TRANSITION,
+		exitPointTransition.setTarget(oldTransitionTarget);
+		ViewService.createEdge(getContextObject(), oldEdgeTarget, exitPointTransition, SemanticHints.TRANSITION,
 				preferencesHint);
 
 		addExitPointSpec(exitPointTransition, exitPoint);
