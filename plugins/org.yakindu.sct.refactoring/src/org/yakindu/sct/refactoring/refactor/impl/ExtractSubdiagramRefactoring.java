@@ -128,7 +128,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 				SemanticHints.REGION_COMPARTMENT);
 		Node entryNode = ViewService.createNode(entryPointRegionCompartment, entryPoint, SemanticHints.ENTRY,
 				preferencesHint);
-		ViewService.createEdge(entryNode, oldTarget, entryPoint.getOutgoingTransitions().get(0), // TODO: is it always the first, what if there were already entry points with other transitions?
+		ViewService.createEdge(entryNode, oldTarget, entryPoint.getOutgoingTransitions().get(0),
 				SemanticHints.TRANSITION, preferencesHint);
 
 		addEntryPointSpec(transition, entryPoint);
