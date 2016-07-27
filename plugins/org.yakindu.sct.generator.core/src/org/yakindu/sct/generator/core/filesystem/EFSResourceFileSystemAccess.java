@@ -176,11 +176,14 @@ public class EFSResourceFileSystemAccess extends AbstractFileSystemAccess2 imple
 
 	@Override
 	public URI getURI(String path) {
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(Path.fromPortableString(path));
-		if (file != null) {
-			return URI.createFileURI(file.getLocationURI().getPath());
+		URI uri = super.getURI(path);
+		if (uri == null) {
+			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(Path.fromPortableString(path));
+			if (file != null) {
+				uri = URI.createFileURI(file.getLocationURI().getPath());
+			}
 		}
-		return super.getURI(path);
+		return uri;
 	}
 
 	@Override
