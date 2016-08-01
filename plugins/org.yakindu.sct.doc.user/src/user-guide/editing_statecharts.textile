@@ -414,3 +414,98 @@ The _Tasks_ view is updated only when the statechart is saved.
 # In the main menu, select _Window → Preferences_. The _Preferences_ Dialog opens.
 # In the _Preferences_ Dialog goto _Java → Compiler → Task Tags_ to edit your task tag preferences. A task tag has one of the priorities _High_, _Normal_, or _Low_.
 
+h2(#oss_example_wizard). Using the example wizard
+
+The **Example Wizard**, which is part of YAKINDU Statechart Tools since release 2.7, gives you convenient access to the examples in our "examples repository":https://github.com/Yakindu/examples. You can browse the available examples by name or by category and read their documentation in the wizard. By a simple click you can instantiate an example as a new Eclipse project. Within an example project, you can then explore and modify the state machine models using the statechart editor, run the models in the simulator, generate source code, etc.
+
+Upon its first invocation, the example wizard downloads the online examples repository and creates a copy on your local disk. After that, all examples are immediately available to you, even if you are offline. The example wizard will notice when new examples are available in the online repository and offers to download them. It is also possible to download the examples repository out-of-band and later tell the example wizard where it can find the local copy.
+
+h3(#oss_download_example_repository). Downloading the examples repository
+
+When you start the example wizard for the first time, it does not yet have any examples available that it could show to you. Thus downloading the online examples repository is required as a special first step.  
+
+# In order to start the example wizard, select _File → New → Example…_ in the YAKINDU Statechart Tools main menu. The _New Example_ dialog opens.
+# In the _New Example_ dialog, select _YAKINDU Statechart Examples_, then click on _Next >_. The example wizard opens.
+# The example wizard outputs a message saying that it could not find any examples and offers to download them.
+# Click on the _Download_ button. The example wizard downloads the online examples repository and creates a clone of it on your local computer. This can take some time. – Downloading can fail for a variety of reasons, not being able to access the Github server being one of them. If this happens, don't panic – and read how to "manually creating a local copy of the examples repository":#oss_manualy_creating_local_copy.
+
+!(standard-image)images/docu_example_wizard_download.png(Example wizard when invoked the first time)!
+
+When the download is completed, you can "browse the examples repository":#oss_browsing_the_example_repository.
+
+h3(#oss_changing_repository_location). Changing the repository location
+
+You can change the location used by the example wizard to store the online repository's local clone.
+
+# When the example wizard shows the _Download_ button on its first start, click on the link _"change the storage location here"_. The example wizard's preferences dialog opens. Alternatively, open _Window → Preferences_ and select _YAKINDU SCT → Example Wizard_. 
+# On the examples preferences page, enter the desired directory into the _Storage Location_ text field.
+# Click on _OK_. The dialog closes.
+
+You can change the storage location of your local examples repository clone at any time. In fact, it doesn't even need to be a clone of the official examples repository. Any directory containing subdirectories with YAKINDU Statechart Tools examples suffices.
+
+* If the directory exists, the example wizard searches it for examples and displays them.
+* If the directory does not exist, the example wizard behaves as if being called for the first time. That is, it informs the user that it does not have any examples yet and offers to download them.
+
+h3(#oss_browsing_the_example_repository). Browsing the examples repository
+
+The example wizard shows the available examples and their categories on the left-hand side.
+
+Click on an example to select it and show its documentation on the right-hand side.
+
+Click on _Finish_ to create the selected example as a new project in your workspace.
+
+!(standard-image)images/docu_example_wizard_browse.png(Example wizard shows all available examples sorted by their categories)!
+
+h3(#oss_manualy_creating_local_copy). Manually creating a local copy of the examples repository
+
+The example wizard tries to download a copy of the YAKINDU Statechart Tools examples repository and install it on your local machine. However, if your Internet access is restricted or you don't have Internet access at all, this will fail.
+
+To circumvent this problem, you can
+
+# download the examples repository elsewhere, i.&nbsp;e. on a computer with Internet access,
+# copy it to the computer you want to run YAKINDU Statechart Tools, and
+# have the example wizard work with that local copy.
+
+Subsequently we will explain the necessary steps in detail.
+
+Downloading the repository as a ZIP archive:
+
+# On a computer with Internet access, go to the "examples repository's release branch":https://github.com/Yakindu/examples/tree/release.
+# Click on the green _Clone or download_ button. A submenu opens.
+# In the submenu, click on _Download ZIP_.
+# The download starts and transfers the ZIP archive file _examples-release.zip_ to your computer.
+# Copy the _examples-release.zip_ file to the computer without Internet access and continue with the following steps on that machine.
+# Unpack the archive file. A directory named _examples-release_ is created, containing the YAKINDU Statechart Tools examples repository.
+# In YAKINDU SCT, select _Window → Preferences_.
+# Inside there, navigate to _YAKINDU SCT → Example Wizard_.
+# Click on _Browse..._, and select the folder you just extracted from the zip-file and click _OK_.
+# On the next try, the example wizard will now show a catalogue of YAKINDU SCT examples.
+
+Alternatively, you can clone the repository. Cloning the examples repository containing the YAKINDU Statechart Tools examples is more complex than just downloading a ZIP archive. However, you will get certain advantages in return, like the ability to detect and receive updates, the option to create your own examples and submit them as a pull request, or the complete history of the examples repository – which could also be considered a drawback, taking its size into account.
+
+# Clone "https://github.com/Yakindu/examples.git":https://github.com/Yakindu/examples.git to your local computer. If you are using a command-line tool, the proper command is @git clone 'https://github.com/Yakindu/examples.git'@. It will create the directory _examples_ on your disk.
+# Step into that directory: @cd examples@.
+# Checkout the _release_ branch: @git checkout release@. Now the _examples_ directory reflects the current release state.
+# In the YAKINDU Statechart Tools main menu, select _File → New → Example…_. The _New Example_ dialog opens.
+# In the _New Example_ dialog, select _YAKINDU Statechart Examples_ and click on _Next >_. The example wizard opens.
+# When the example wizard is opened for the first time, there are no examples on the local disk yet.
+# In YAKINDU SCT, select _Window → Preferences_.
+# Inside there, navigate to _YAKINDU SCT → Example Wizard_.
+# Click on _Browse..._, and select the folder you just cloned and click _OK_.
+# On the next try, the example wizard will now show a catalogue of YAKINDU SCT examples.
+
+h3(#oss_updating_example_respository). Updating the examples repository
+
+When the example wizard is started and the storage location is a clone of the online examples directory, it checks whether there are any updates in the online examples repository. If new examples are available or existing examples have changed in the online repository the example wizard offers to update your local examples repository clone accordingly.
+
+!(standard-image)images/docu_example_wizard_update.png(Example wizard offers an update of the examples repository)!
+
+* Click on the _Update_ button to update your local repository.
+
+If your storage location is a plain directory and not a clone of the online examples repository, no update is ever done.
+
+h3(#oss_contributing_examples). Contributing own examples
+
+If you have a project that you want to share with the community, you can contribute it as an example. Once your contribution is reviewed and applied by the YAKINDU team, it is available for all users of YAKINDU Statechart Tools via the example wizard's update functionality.
+
+For more information on how to contribute examples, please visit our "Wiki page":https://github.com/Yakindu/examples/wiki/Creating-a-YAKINDU-Statechart-Tools-Example.
