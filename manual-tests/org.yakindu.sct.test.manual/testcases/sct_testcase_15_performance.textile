@@ -1,0 +1,12 @@
+h1(#Test2). Yakindu SCT Testcase 14 - Performance
+
+|_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
+| 15.1 | load model | Open statechart big_file.sct | new Statechart in your Project | |
+| 15.2 | performance check | add a new state  | works the editor smooth? What does it feel like? How long it needs? | |
+| 15.3 | performance check | save the Statechart | It shouldn't need a long time | |
+| 15.4 | change preferences | Window->Preferences->YAKINDU SCT->Diagram Appearance <p> disable "Enable live validation" | | |
+| 15.5 | performance check |  add a new state | There is no error marker at the state  | |
+| 15.6 | performance check | save the Statechart | It shouldn't need a long time. Error marker appears at the state | |
+
+
+
