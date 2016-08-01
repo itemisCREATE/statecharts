@@ -80,16 +80,8 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 
 	@Override
 	protected boolean internalDoUndo() {
-		boolean close = DiagramPartitioningUtil.closeSubdiagramEditors((State) subdiagram.getElement());
-		if (!close)
-			return false;
-		// Since the canonical edit policy creates edges for the semantic
-		// transitions and it is not done within the TransactionalCommand we
-		// have to delete the created edges manually when undo is executed.
-		while (subdiagram.getEdges().size() > 0) {
-			EcoreUtil.delete((EObject) subdiagram.getEdges().get(0));
-		}
-		return true;
+		// close the sub diagram before undo will delete it
+		return DiagramPartitioningUtil.closeSubdiagramEditors((State) subdiagram.getElement());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -279,15 +271,16 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 				preferencesHint);
 
 		// re-wire existing transition to new exit point
-		Vertex oldTarget = transition.getTarget();
+		Vertex oldTransitionTarget = transition.getTarget();
 		transition.setTarget(exitPoint);
-		ViewService.createEdge(edge.getSource(), exitNode, transition, SemanticHints.TRANSITION, preferencesHint);
+		View oldEdgeTarget = edge.getTarget();
+		edge.setTarget(exitNode);
 
 		// create transition from selected state to former transition target
 		Transition exitPointTransition = SGraphFactory.eINSTANCE.createTransition();
 		exitPointTransition.setSource((State) subdiagram.getElement());
-		exitPointTransition.setTarget(oldTarget);
-		ViewService.createEdge(getContextObject(), edge.getTarget(), exitPointTransition, SemanticHints.TRANSITION,
+		exitPointTransition.setTarget(oldTransitionTarget);
+		ViewService.createEdge(getContextObject(), oldEdgeTarget, exitPointTransition, SemanticHints.TRANSITION,
 				preferencesHint);
 
 		addExitPointSpec(exitPointTransition, exitPoint);
