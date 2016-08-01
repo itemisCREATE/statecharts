@@ -31,7 +31,6 @@ import org.eclipse.ui.IEditorPart;
 import org.yakindu.base.gmf.runtime.decorators.AbstractDecoratorProvider;
 import org.yakindu.base.gmf.runtime.decorators.BaseDecorator;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.ui.editor.DiagramActivator;
@@ -41,9 +40,7 @@ import org.yakindu.sct.ui.editor.editparts.TransitionEditPart;
 import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 
 /**
- * 
  * @author andreas muelder - Initial contribution and API
- * 
  */
 public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvider implements IPropertyChangeListener {
 
@@ -92,7 +89,7 @@ public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvi
 		protected NotificationListener transitionPriorityChangeListener = new NotificationListener() {
 
 			public void notifyChanged(Notification notification) {
-				if (notification.getFeatureID(State.class) == SGraphPackage.STATE__OUTGOING_TRANSITIONS)
+				if (notification.getFeatureID(Vertex.class) == SGraphPackage.VERTEX__OUTGOING_TRANSITIONS)
 					refresh();
 			}
 		};
@@ -100,8 +97,10 @@ public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvi
 		@Override
 		public void activate() {
 			super.activate();
-			// priorities will be changed via reordering the list of transitions
-			// within the owning element
+			if (!(semanticElement instanceof Transition)
+					|| !(((Transition) semanticElement).eContainer() instanceof Vertex)) {
+				return;
+			}
 			Vertex owningElement = (Vertex) ((Transition) semanticElement).eContainer();
 			DiagramEventBroker.getInstance(gep.getEditingDomain()).addNotificationListener(owningElement,
 					transitionPriorityChangeListener);
@@ -109,6 +108,10 @@ public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvi
 
 		@Override
 		public void deactivate() {
+			if (!(semanticElement instanceof Transition)
+					|| !(((Transition) semanticElement).eContainer() instanceof Vertex)) {
+				return;
+			}
 			Vertex owningElement = (Vertex) ((Transition) semanticElement).eContainer();
 			DiagramEventBroker.getInstance(gep.getEditingDomain()).removeNotificationListener(owningElement,
 					transitionPriorityChangeListener);
