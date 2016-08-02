@@ -82,6 +82,8 @@ public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvi
 
 	public static class PriorityDecorator extends BaseDecorator {
 
+		private Vertex owningElement;
+
 		public PriorityDecorator(IDecoratorTarget decoratorTarget) {
 			super(decoratorTarget);
 		}
@@ -93,7 +95,6 @@ public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvi
 					refresh();
 			}
 		};
-		private Vertex owningElement;
 
 		@Override
 		public void activate() {
