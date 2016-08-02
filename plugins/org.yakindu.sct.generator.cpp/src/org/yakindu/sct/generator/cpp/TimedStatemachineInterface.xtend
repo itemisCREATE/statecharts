@@ -46,28 +46,24 @@ class TimedStatemachineInterface {
 		#include "«typesModule.h»"
 		#include "«timerInterface.h»"
 		
-		/*
-		* Interface for state machines which use timed event triggers.
+		/*! \file Interface for state machines which use timed event triggers.
 		*/
 		class «timedStatemachineInterface» {
 			public:
 			
 				virtual ~«timedStatemachineInterface»() = 0;
 				
-				/*
-				* Set the ITimerService for the state machine. It must be set
-				* externally on a timed state machine before a run cycle can be correct
-				* executed.
+				/*! Set the ITimerService for the state machine. It must be set
+				    externally on a timed state machine before a run cycle can be correct
+				    executed.
 				*/
 				virtual void setTimer(«timerInterface»* timer) = 0;
 				
-				/*
-				* Returns the currently used timer service.
+				/*! Returns the currently used timer service.
 				*/
 				virtual «timerInterface»* getTimer() = 0;
 				
-				/*
-				* Callback method if a time event occurred.
+				/*! Callback method if a time event occurred.
 				*/
 				virtual void «raiseTimeEventFctID»(sc_eventid event) = 0;
 		};
