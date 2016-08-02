@@ -1,0 +1,26 @@
+
+testgroup ConstOnlyNamedScope for statechart declarations.ConstOnlyNamedScope {
+
+	/*
+	 * Test is the statechart is entered correctly.
+	 */	
+	test statechartEntry { 		
+		enter		 
+		assert active(declarations.ConstOnlyNamedScope.main_region.A)
+	
+	} 
+	
+
+	/*
+	 * Test is the statechart is entered correctly.
+	 */	
+	test stateTransition {
+		
+		enter
+		raise e : 1
+		cycle
+		assert active(declarations.ConstOnlyNamedScope.main_region.B)
+		
+	}
+}
+	
