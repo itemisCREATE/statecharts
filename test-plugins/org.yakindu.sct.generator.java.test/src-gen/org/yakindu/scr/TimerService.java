@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Default timer service implementation.
- * 
+ *
  */
 public class TimerService implements ITimer {
 
@@ -22,7 +22,7 @@ public class TimerService implements ITimer {
 	/**
 	 * Timer task that reflects a time event. It's internally used by
 	 * {@link TimerService}.
-	 * 
+	 *
 	 */
 	private class TimeEventTask extends TimerTask {
 	
@@ -32,11 +32,11 @@ public class TimerService implements ITimer {
 	
 		/**
 		 * Constructor for a time event.
-		 * 
+		 *
 		 * @param callback
 		 *            : Set to {@code true} if event should be repeated
 		 *            periodically.
-		 * 
+		 *
 		 * @param eventID
 		 *            : Index position within the state machine's timeEvent
 		 *            array.

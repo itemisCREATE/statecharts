@@ -42,7 +42,7 @@ public class RuntimeService {
 
 		/**
 		 * Adds the given state machine to the TimerTask.
-		 * 
+		 *
 		 * @param statemachine
 		 * @return {@code true} if state machine is added properly.
 		 */
@@ -55,7 +55,7 @@ public class RuntimeService {
 
 		/**
 		 * Removes the given state machine from the TimerTask.
-		 * 
+		 *
 		 * @param statemachine
 		 * @return {@code true} if state machine is removed properly.
 		 */
@@ -81,7 +81,7 @@ public class RuntimeService {
 
 	/**
 	 * Returns the {@code RuntimeService} instance as singleton.
-	 * 
+	 *
 	 * @return The singleton {@code RuntimeService} instance
 	 */
 	public static RuntimeService getInstance() {
@@ -93,7 +93,7 @@ public class RuntimeService {
 
 	/**
 	 * Registers an {@link IStatemachine} for scheduled fixed rate execution
-	 * 
+	 *
 	 * @param statemachine
 	 *            - The state machine to execute
 	 * @param cyclePeriod
@@ -123,7 +123,7 @@ public class RuntimeService {
 
 	/**
 	 * Removes the given state machine from runtime service.
-	 * 
+	 *
 	 * @param statemachine
 	 *            - the state machine to be removed
 	 * @param cyclePeriod
@@ -145,7 +145,7 @@ public class RuntimeService {
 	 * Cancels the execution of state machines for the given cycle period. This
 	 * stops the execution of state machines which are registered for the given
 	 * cycle period and cancels the executing {@link TimerTask}.
-	 * 
+	 *
 	 * @return {@code true} if poperly cancelled
 	 */
 	public boolean cancelAll(long cyclePeriod) {
@@ -162,10 +162,10 @@ public class RuntimeService {
 	/**
 	 * Pauses the execution of all state machines which are registered for the
 	 * given cyclePeriod.
-	 * 
+	 *
 	 * @param cyclePeriod
 	 * @return {@code true} if properly paused
-	 * 
+	 *
 	 */
 	public boolean pauseAll(long cyclePeriod) {
 		if (timerTasks.containsKey(cyclePeriod)) {
@@ -178,10 +178,10 @@ public class RuntimeService {
 	/**
 	 * Resumes the execution of all state machines which are registered for the
 	 * given cyclePeriod.
-	 * 
+	 *
 	 * @param cyclePeriod
 	 * @return {@code true} if properly resumed
-	 * 
+	 *
 	 */
 	public boolean resumeAll(long cyclePeriod) {
 		if (timerTasks.containsKey(cyclePeriod)) {
