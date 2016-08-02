@@ -1,0 +1,85 @@
+/*
+ * This is the generator configuration for all test models that relate to declarations tests.
+ * These are located in the 'declarations' test model folder.
+ */
+GeneratorModel for sctunit::c {
+	
+	test  ConstOnlyInternalScope {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+
+	}
+
+	test  ConstOnlyDefaultScope {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+
+	}
+
+	
+	test  ConstOnlyNamedScope {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+
+	}
+
+	
+	
+}
