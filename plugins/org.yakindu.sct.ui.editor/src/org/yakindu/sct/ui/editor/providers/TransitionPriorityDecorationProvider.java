@@ -93,6 +93,7 @@ public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvi
 					refresh();
 			}
 		};
+		private Vertex owningElement;
 
 		@Override
 		public void activate() {
@@ -101,20 +102,23 @@ public class TransitionPriorityDecorationProvider extends AbstractDecoratorProvi
 					|| !(((Transition) semanticElement).eContainer() instanceof Vertex)) {
 				return;
 			}
-			Vertex owningElement = (Vertex) ((Transition) semanticElement).eContainer();
-			DiagramEventBroker.getInstance(gep.getEditingDomain()).addNotificationListener(owningElement,
-					transitionPriorityChangeListener);
+			if (((Transition) semanticElement).eContainer() != null) {
+				owningElement = (Vertex) ((Transition) semanticElement).eContainer();
+				DiagramEventBroker.getInstance(gep.getEditingDomain()).addNotificationListener(owningElement,
+						transitionPriorityChangeListener);
+			}
 		}
 
 		@Override
 		public void deactivate() {
-			if (!(semanticElement instanceof Transition)
-					|| !(((Transition) semanticElement).eContainer() instanceof Vertex)) {
+			if (!(semanticElement instanceof Transition)) {
 				return;
 			}
-			Vertex owningElement = (Vertex) ((Transition) semanticElement).eContainer();
-			DiagramEventBroker.getInstance(gep.getEditingDomain()).removeNotificationListener(owningElement,
-					transitionPriorityChangeListener);
+			if (owningElement != null) {
+				DiagramEventBroker.getInstance(gep.getEditingDomain()).removeNotificationListener(owningElement,
+						transitionPriorityChangeListener);
+				owningElement = null;
+			}
 			super.deactivate();
 		}
 
