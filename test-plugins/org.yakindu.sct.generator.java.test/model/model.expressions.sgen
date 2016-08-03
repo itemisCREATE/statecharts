@@ -1,0 +1,26 @@
+GeneratorModel for yakindu::java {
+
+	statechart expressions.TriggerExpressionPrecedence {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+}

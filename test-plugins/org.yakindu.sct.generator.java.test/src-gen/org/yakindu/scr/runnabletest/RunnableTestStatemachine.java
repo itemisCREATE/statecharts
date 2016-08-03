@@ -175,7 +175,7 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	}
 
 	/** 
-	 * @see IStatemachine#isFinal() 
+	 * @see IStatemachine#isFinal()
 	 */
 	public boolean isFinal() {
 		return (stateVector[0] == State.main_region__final_);

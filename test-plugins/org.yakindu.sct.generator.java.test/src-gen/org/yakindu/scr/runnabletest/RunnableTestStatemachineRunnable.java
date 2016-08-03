@@ -8,7 +8,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * the {@link Runnable} interface and can be started in a thread by the client
  * code. The run method then starts the main event processing loop for this
  * state machine.
- * 
+ *
  * Please report bugs and issues...
  */
 

@@ -189,7 +189,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	/** 
 	* Always returns 'false' since this state machine can never become final.
 	*
-	 * @see IStatemachine#isFinal() 
+	 * @see IStatemachine#isFinal()
 	 */
 	public boolean isFinal() {
 		return false;

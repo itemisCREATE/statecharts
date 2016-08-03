@@ -1,0 +1,19 @@
+GeneratorModel for yakindu::c {
+	statechart ConstOnlyDefaultScope {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "ConstOnlyDefaultScope"
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+	}
+}

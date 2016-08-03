@@ -50,7 +50,7 @@ public class PerformanceTestsTest {
 					statemachine.raiseE2();;
 				} else {
 					statemachine.raiseE3();;
-				};
+				} ;
 			}
 			statemachine.runCycle();
 		}
@@ -68,7 +68,7 @@ public class PerformanceTestsTest {
 					statemachine.raiseE2();;
 				} else {
 					statemachine.raiseE3();;
-				};
+				} ;
 			}
 			statemachine.runCycle();
 		}
@@ -86,7 +86,7 @@ public class PerformanceTestsTest {
 					statemachine.raiseE2();;
 				} else {
 					statemachine.raiseE3();;
-				};
+				} ;
 			}
 			statemachine.runCycle();
 		}
