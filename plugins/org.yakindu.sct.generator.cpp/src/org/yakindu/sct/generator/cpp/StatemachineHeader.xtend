@@ -13,8 +13,8 @@ package org.yakindu.sct.generator.cpp
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtend2.lib.StringConcatenation
-import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
@@ -23,7 +23,6 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
@@ -40,21 +39,18 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 
 	protected GeneratorEntry entry
 
-	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
-		fsa.generateFile(flow.module().h, flow.generateStatemachineHeaderContents(entry))
-	}
-
-	def generateStatemachineHeaderContents(ExecutionFlow it, GeneratorEntry entry) '''
+	'''
 		«entry.licenseText»
 		
 		#ifndef «module().define»_H_
 		#define «module().define»_H_
 		
-		#include "«typesModule.h»"
+		#include "«(typesModule.h).relativeTo(module.h)»"
 		#include "«statemachineInterface.h»"
 		«IF timed»
-			#include "«timedStatemachineInterface.h»"
+			#include "«(timedStatemachineInterface.h).relativeTo(module.h)»"
 		«ENDIF»
 		
 		/*! \file Header of the state machine '«name»'.
@@ -91,6 +87,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		«ENDIF»
 		#endif /* «module().define»_H_ */
 	'''
+	}
 
 	def protected getInterfaceExtensions(ExecutionFlow flow) {
 

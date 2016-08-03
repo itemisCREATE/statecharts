@@ -12,7 +12,8 @@ package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
 import java.util.List
-import org.eclipse.xtext.generator.IFileSystemAccess
+import org.yakindu.sct.generator.c.IContentTemplate
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
@@ -21,13 +22,13 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+
 import static org.eclipse.xtext.util.Strings.*
 
-class StatemachineImplementation {
+class StatemachineImplementation implements IContentTemplate {
 	
 	@Inject extension Naming
 	@Inject extension Navigation
@@ -40,12 +41,9 @@ class StatemachineImplementation {
 	
 	protected GeneratorEntry entry
 	
-	def generateStatemachineImplemenation(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
-		fsa.generateFile(flow.module.cpp, flow.statemachineContent)
-	}
-	
-	def statemachineContent(ExecutionFlow it) '''
+	'''	
 		«entry.licenseText»
 		
 		#include "«module.h»"
@@ -83,6 +81,7 @@ class StatemachineImplementation {
 		
 		«functionImplementations»
 	'''
+	}
 	
 	def constructorDefinition(ExecutionFlow it) '''
 		«module»::«module»()

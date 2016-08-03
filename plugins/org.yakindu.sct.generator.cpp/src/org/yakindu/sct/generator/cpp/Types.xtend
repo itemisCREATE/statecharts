@@ -10,33 +10,19 @@
  */
 package org.yakindu.sct.generator.cpp
 
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgraph.Statechart
-import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
-import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.c.GenmodelEntries
-import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
-import org.yakindu.sct.generator.core.library.IOutletFeatureHelper
+import org.yakindu.sct.generator.c.IContentTemplate
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
-class Types {
+class Types implements IContentTemplate {
 
 	@Inject extension Naming
 	@Inject extension GenmodelEntries
 
-	@Inject
-	protected IOutletFeatureHelper outletFeatureHelper;
-
-	def generateTypesHpp(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null)
-			fsa.generateFile(flow.typesModule.h, IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT,
-				flow.typesHContent(entry))
-		else
-			fsa.generateFile(flow.typesModule.h, flow.typesHContent(entry))
-
-	}
-
-	def typesHContent(ExecutionFlow it, GeneratorEntry entry) '''
+	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) '''
 		«entry.licenseText»
 		
 		#ifndef «typesModule.define»_H_
@@ -57,4 +43,5 @@ class Types {
 		
 		#endif /* «typesModule.define»_H_ */
 	'''
+	
 }

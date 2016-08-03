@@ -36,13 +36,26 @@ public class CppCodeGenerator extends GenericJavaBasedGenerator {
 	@Inject
 	private CppGenerator delegate;
 	
+	@Inject
+	private IGenArtifactConfigurations artifactConfigs;
+	
+	@Override
+	protected void prepareGenerator(GeneratorEntry entry) {
+		super.prepareGenerator(entry);
+		initGenArtifactConfigurations();
+	}
+	
+	protected void initGenArtifactConfigurations() {
+		artifactConfigs.setFileSystemAccess(sctFsa);
+	}
+	
 	@Override
 	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
 		if (debugFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
-		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess());
+		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess(), artifactConfigs);
 	}
 
 	@Override
@@ -53,6 +66,9 @@ public class CppCodeGenerator extends GenericJavaBasedGenerator {
 				binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 				binder.bind(INamingService.class).to(CppNamingService.class);
 				binder.bind(GeneratorEntry.class).toInstance(entry);
+				
+				binder.bind(IGenArtifactConfigurations.class).to(GenArtifactConfigurations.class);
+				// default binding to ensure consistency of already used API
 				binder.bind(IGenArtifactConfigurations.class)
 						.annotatedWith(Names.named(IGenArtifactConfigurations.DEFAULT))
 						.toInstance(GenArtifactConfigurations.DEFAULT);

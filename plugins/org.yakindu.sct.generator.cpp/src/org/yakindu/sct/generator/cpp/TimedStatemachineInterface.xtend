@@ -9,15 +9,14 @@
  */
 package org.yakindu.sct.generator.cpp
 
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.GenmodelEntries
-import org.yakindu.sct.generator.core.library.IOutletFeatureHelper
-import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
+import org.yakindu.sct.generator.c.IContentTemplate
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
-class TimedStatemachineInterface {
+class TimedStatemachineInterface implements IContentTemplate {
 	
 	@Inject
 	extension Naming
@@ -25,18 +24,7 @@ class TimedStatemachineInterface {
 	@Inject
 	extension GenmodelEntries
 	
-	@Inject
-	protected IOutletFeatureHelper outletFeatureHelper;
-	
-	def generateITimedStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null)
-			fsa.generateFile(timedStatemachineInterface.h, IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT,
-				flow.content(entry))
-		else
-			fsa.generateFile(timedStatemachineInterface.h, flow.content(entry))
-	}
-	
-	def protected content(ExecutionFlow it, GeneratorEntry entry) {
+	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		'''
 		«entry.licenseText»
 		
