@@ -9,13 +9,14 @@
  */
 package org.yakindu.sct.generator.cpp
 
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.GenmodelEntries
+import org.yakindu.sct.generator.c.IContentTemplate
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
-class StatemachineInterface {
+class StatemachineInterface implements IContentTemplate {
 	
 	@Inject
 	extension Naming
@@ -23,11 +24,7 @@ class StatemachineInterface {
 	@Inject
 	extension GenmodelEntries
 	
-	def generateIStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		fsa.generateFile(statemachineInterface.h, flow.content(entry) )
-	}
-	
-	def private content(ExecutionFlow it, GeneratorEntry entry) {
+	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		'''
 		«entry.licenseText»
 		
