@@ -127,7 +127,7 @@ class StringTreeNode {
 		}
 	}
 
-	def public getSiblings(String fullName) {
+	def public ArrayList<String> getSiblings(String fullName) {
 
 		val nodeChain = getNodeChain(fullName)
 		val lastNode = (nodeChain).get(nodeChain.size() - 1);
@@ -207,6 +207,25 @@ class StringTreeNode {
 
 		return ret;
 	}
+	
+	def public void delete()
+	{
+		/*
+		 * All nodes have a reference to their parent (except the root node, where it's null) and their children.
+		 * Thus, when we want to delete a node, we need to cut it from its parent's children and
+		 * delete the reference to the parent. The rest of the tree is then 'floating' and will be garbage collected.
+		 */
+		if(!isRoot())
+		{
+			this.parent.deleteChild(this);
+			this.parent = null;
+		}
+	}
+	
+	def public deleteChild(StringTreeNode child)
+	{
+		this.children.removeAll(child);
+	}
 
 	def public ArrayList<StringTreeNode> getNodeChain(String name) {
 		/*
@@ -249,6 +268,36 @@ class StringTreeNode {
 		nodeChain.addAll(childrenNodeChain);
 
 		return nodeChain;
+	}
+	
+	def public StringTreeNode navigate(String content)
+	{
+		for(child: children)
+		{
+			if(content.equals(child.getData()))
+			{
+				return child;
+			}
+		}
+		
+		return null;
+	}
+	
+	def public StringTreeNode getParent()
+	{
+		return parent;
+	}
+	
+	def public List<String> getChildrenContents()
+	{
+		var returnList = new ArrayList<String>();
+		
+		for(child : children)
+		{
+			returnList.add(child.getData());
+		}
+		
+		return returnList;
 	}
 
 	/*
@@ -345,7 +394,6 @@ class StringTreeNode {
 			val commonAncestor = this.getCommonAncestor(otherNode);
 			val distance = this.getDepth() + otherNode.getDepth() - 2 * commonAncestor.getDepth();
 			return distance;
-
 		}
 	}
 
