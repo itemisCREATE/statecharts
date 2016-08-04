@@ -105,13 +105,6 @@
 						<encoding>UTF-8</encoding>
 						<source>7.0</source>
 						<target>7.0</target>
-						<extraClasspathElements>
-							<extraClasspathElement>
-								<groupId>com.google.inject.extensions</groupId>
-								<artifactId>guice-multibindings</artifactId>
-								<version>3.0</version>
-							</extraClasspathElement>
-						</extraClasspathElements>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -140,7 +133,7 @@
 				<plugin>
 					<groupId>org.eclipse.xtend</groupId>
 					<artifactId>xtend-maven-plugin</artifactId>
-					<version>2.9.1</version>
+					<version>${xtext-version}</version>
 					<configuration>
 						<!-- need to prefix by basedir to generate to currently built module -->
 						<outputDirectory>${basedir}/xtend-gen</outputDirectory>
@@ -232,6 +225,9 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+			<properties>
+				<xtext-version>2.9.1</xtext-version>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>
@@ -258,6 +254,9 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
+			<properties>
+				<xtext-version>2.7.3</xtext-version>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>
@@ -284,6 +283,9 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
+			<properties>
+				<xtext-version>2.10.0</xtext-version>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>
