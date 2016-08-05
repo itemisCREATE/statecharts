@@ -1,7 +1,7 @@
 h1(#Test2). Yakindu SCT Testcase 14 - Example wizard
 
 |_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
-| 14.1 | Download new example repository | Make sure you don't have sct_examples in your user directory, delete if needed. Start YAKINDU SCT, select File -> New -> Example, select YAKINDU Statechart Examples, and request a Download. | Download succeeds. | |
+| 14.1 | Download new example repository | Make sure you don't have sct_examples in your user directory, delete if needed. Start YAKINDU SCT, select File -> New -> Example, select YAKINDU Statechart Examples, click Next, and request a Download. | Download succeeds. | |
 | 14.2 | Update existing repository 1 | Through a mechanism yet to be defined, force an update of the Repository. E.g., in Eclipse, change the repository location in the sourcecode. Open the example wizard again. | The wizard should ask you to update the repository. | |
 | 14.3 | Update existing repository 2 | Do the update, and check if the changes are reflected, as possible | Update performs successfully | |
 | 14.4 | Prepare Internet connection tests | Download the example repository as zip | - |  |
