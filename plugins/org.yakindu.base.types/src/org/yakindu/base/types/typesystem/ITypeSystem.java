@@ -24,7 +24,6 @@ import com.google.inject.ImplementedBy;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@ImplementedBy(GenericTypeSystem.class)
 public interface ITypeSystem {
 	
 	public static final String STRING = "string";

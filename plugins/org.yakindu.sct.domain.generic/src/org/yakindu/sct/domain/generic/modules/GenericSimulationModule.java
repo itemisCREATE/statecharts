@@ -15,6 +15,8 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.typesystem.GenericTypeSystem;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
@@ -50,6 +52,11 @@ public class GenericSimulationModule extends AbstractGenericModule {
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(Boolean.class).annotatedWith(Names.named(GenericSequencerModule.ADD_TRACES)).toInstance(Boolean.TRUE);
+		binder.bind(ITypeSystem.class).toInstance(getTypeSystem());
+	}
+
+	protected ITypeSystem getTypeSystem() {
+		return GenericTypeSystem.getInstance();
 	}
 
 	public Class<? extends IExecutionContextInitializer> bindIExecutionContextInitializer() {
