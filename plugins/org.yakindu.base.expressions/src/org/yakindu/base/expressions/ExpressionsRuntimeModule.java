@@ -12,9 +12,23 @@ package org.yakindu.base.expressions;
 
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.typesystem.GenericTypeSystem;
+import org.yakindu.base.types.typesystem.ITypeSystem;
+
+import com.google.inject.Binder;
 
 public class ExpressionsRuntimeModule extends org.yakindu.base.expressions.AbstractExpressionsRuntimeModule {
 
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(ITypeSystem.class).toInstance(getTypeSystem());
+	}
+
+	protected ITypeSystem getTypeSystem() {
+		return GenericTypeSystem.getInstance();
+	}
+	
 	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
 		return ExpressionsTypeInferrer.class;
 	}
