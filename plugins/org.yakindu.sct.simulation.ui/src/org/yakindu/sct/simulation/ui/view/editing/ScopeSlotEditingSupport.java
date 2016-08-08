@@ -43,7 +43,7 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 			if (!((ExecutionSlot) element).isWritable())
 				return false;
 			Type type = ((ExecutionSlot) element).getType();
-			return provider.getTypeSystem().isSuperType(getSupportedType(), type);
+			return provider.getTypeSystem().isSuperType(type, getSupportedType());
 		}
 		return false;
 	}
