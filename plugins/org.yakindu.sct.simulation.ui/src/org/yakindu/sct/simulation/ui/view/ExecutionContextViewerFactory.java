@@ -52,8 +52,8 @@ public class ExecutionContextViewerFactory {
 		valueColumn.getColumn().setWidth(100);
 		if (!readOnly)
 			valueColumn.setEditingSupport(new MultiEditingSupport(viewer, 
-					new RealEditingSupport(viewer, provider),
 					new IntegerEditingSupport(viewer, provider), 
+					new RealEditingSupport(viewer, provider), 
 					new BooleanEditingSupport(viewer, provider),
 					new StringEditingSupport(viewer, provider), 
 					new EnumerationEditingSupport(viewer, provider)));
