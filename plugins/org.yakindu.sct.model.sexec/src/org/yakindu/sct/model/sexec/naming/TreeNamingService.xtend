@@ -39,6 +39,7 @@ import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.sexec.Reaction
 import org.eclipse.xtext.naming.QualifiedName
 import java.util.ArrayList
+import org.yakindu.sct.model.sexec.ExecutionRegion
 
 /** Default implementation of the naming service for various identifiers used in the generated code. 
  * It is responsible for identifier construction depending on the thing to be named including different strategies 
@@ -47,12 +48,12 @@ import java.util.ArrayList
 class TreeNamingService implements INamingService {
 
 	@Inject extension SExecExtensions
-	@Inject extension SgraphExtensions
+	//@Inject extension SgraphExtensions
 	@Inject extension StatechartExtensions
 	@Inject extension IQualifiedNameProvider
-	@Inject extension StepDepthComparator stepDepthComparator
-	@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
-	@Inject extension NamingHelper
+	//@Inject extension StepDepthComparator stepDepthComparator
+	//@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
+	//@Inject extension NamingHelper
 
 	@Inject private StextNameProvider provider
 
@@ -81,7 +82,8 @@ class TreeNamingService implements INamingService {
 		this.separator = '_'
 	}
 	
-	override initializeNamingService(Statechart statechart) {
+	override initializeNamingService(Statechart statechart) 
+	{
 		if(tree == null || activeStatechart != statechart)
 		{
 			activeFlow = null;
@@ -92,10 +94,41 @@ class TreeNamingService implements INamingService {
 	
 	def private void createNameTree(Statechart statechart)
 	{
+		tree = new StringTreeNode();
 		
+		addShortVertexNames(statechart);
 	}
 	
-	override initializeNamingService(ExecutionFlow flow) {
+	def protected void addShortVertexNames(CompositeElement element) {
+		for (region : element.regions) {
+			addElement(region);
+			for (vertex : region.vertices) {
+				switch vertex {
+					State:
+						{
+							addElement(vertex)
+							for(scope : vertex.scopes) {
+								for(reaction : scope.reactions) {
+									addElement(reaction);
+								}
+							}
+						}
+					default:
+						addElement(vertex)
+				}
+			}
+		}
+		for (region : element.regions) {
+			for (vertex : region.vertices) {
+				if (vertex instanceof CompositeElement) {
+					addShortVertexNames(vertex as CompositeElement)
+				}
+			}
+		}
+	}
+	
+	override initializeNamingService(ExecutionFlow flow) 
+	{
 		if(tree == null || activeFlow != flow)
 		{
 			activeFlow = flow;
@@ -106,6 +139,17 @@ class TreeNamingService implements INamingService {
 	
 	def private void createNameTree(ExecutionFlow flow)
 	{
+		// Initialize tree
+		tree = new StringTreeNode();
+		
+		for(region : flow.regions)
+		{
+			addElement(region);
+			for(node : region.nodes) {
+				addElement(node);
+			}
+		}
+		
 		for(state : flow.states)
 		{
 			addElement(state);
@@ -138,6 +182,18 @@ class TreeNamingService implements INamingService {
 		}
 	}
 	
+	def protected void addRegionsNodes(ExecutionRegion region)
+	{
+		for(node : region.nodes)
+		{
+			addElement(node);
+			if(node instanceof ExecutionRegion)
+			{
+				addRegionsNodes(node);
+			}
+		}
+	}
+	
 	def protected addShortTimeEventName(NamedElement executionFlowElement, NamedElement sgraphElement) 
 	{
 		var timeEventSpecs = sgraphElement.timeEventSpecs;
@@ -150,13 +206,16 @@ class TreeNamingService implements INamingService {
 		}
 	}
 	
-	def private void addElement(NamedElement elem)
+	def private void addElement(EObject elem)
 	{
-		val name = elem.elementName(NameShorteningStrategy::FQN_NAME);
-		val segments = new ArrayList<String>(name.getSegments());
+		val name = elem.elementName();
+		
 		if(name != null)
 		{
-			tree.addStringList(segments);
+			val segments = new ArrayList<String>(name.getSegments());
+			if(!segments.isEmpty()) {
+				tree.addStringList(segments);
+			}
 			//System.out.println(name);
 		}
 		
@@ -166,52 +225,44 @@ class TreeNamingService implements INamingService {
 	 * elementName
 	 */
 	 
-	 def protected dispatch QualifiedName elementName(ExecutionFlow it, NameShorteningStrategy nameShorteningType) {
+	 def protected dispatch QualifiedName elementName(ExecutionFlow it) {
 		return null;
 	}
 	
-	def protected dispatch QualifiedName elementName(ExecutionScope it, NameShorteningStrategy nameShorteningType) {
-		return sourceElement.elementName(nameShorteningType)
+	def protected dispatch QualifiedName elementName(ExecutionScope it) {
+		return sourceElement.elementName()
 	}
 
-	def protected dispatch QualifiedName elementName(ExecutionState it, NameShorteningStrategy nameShorteningType) {
-		return sourceElement.elementName(nameShorteningType)
+	def protected dispatch QualifiedName elementName(ExecutionState it) {
+		return sourceElement.elementName()
 	}
 	
-	def protected dispatch QualifiedName elementName(EObject it, NameShorteningStrategy nameShorteningType) {
-		eContainer?.elementName(nameShorteningType)
+	def protected dispatch QualifiedName elementName(EObject it) {
+		eContainer?.elementName()
 	}
 
-	def protected dispatch QualifiedName elementName(ExecutionNode it, NameShorteningStrategy nameShorteningType) {
+	def protected dispatch QualifiedName elementName(ExecutionNode it) {
 		return provider.getFullyQualifiedName(it).skipFirst(2)
 	}
 
 	// TODO: we should merge the region/vertex case into this base implementation; we should check whether it is used in any case at all (otherwise it could be replaced with the body of vertexOrRegionName)
-	def protected dispatch QualifiedName elementName(NamedElement it, NameShorteningStrategy nameShorteningType) {
+	def protected dispatch QualifiedName elementName(NamedElement it) {
 		return provider.getFullyQualifiedName(it).skipFirst(2)
 	}
 	
-	def protected dispatch QualifiedName elementName(Reaction it, NameShorteningStrategy nameShorteningType) {
+	def protected dispatch QualifiedName elementName(Reaction it) {
 		return provider.getFullyQualifiedName(it).skipFirst(2)
 	}
 
-	def protected dispatch QualifiedName elementName(Region it, NameShorteningStrategy nameShorteningType) {
+	def protected dispatch QualifiedName elementName(Region it) {
 		return provider.getFullyQualifiedName(it).skipFirst(1)
 	}
 	
-	def protected dispatch QualifiedName elementName(Step it, NameShorteningStrategy nameShorteningType) {
-		var parentName = eContainer.elementName(nameShorteningType)
-		// parent name may be null
-		/*
-		if (( isEnterSequence || isCheckFunction || isEffect ) && (name != null) && (!name.trim.empty))
-			parentName + separator + name
-		else
-			parentName
-	*/
-		parentName
+	def protected dispatch QualifiedName elementName(Step it) {
+		return eContainer.elementName()
 	}
 
-	def protected dispatch QualifiedName elementName(Vertex it, NameShorteningStrategy nameShorteningType) {
+	def protected dispatch QualifiedName elementName(Vertex it) {
 		return provider.getFullyQualifiedName(it).skipFirst(1)
 	}
 	
@@ -230,9 +281,9 @@ class TreeNamingService implements INamingService {
 				return name
 			}
 			case NameShorteningStrategy::REMOVE_VOWELS:
-				return it.elementName(NameShorteningStrategy::SHORT_NAME)
+				return it.elementName()
 			case NameShorteningStrategy::INDEX_POSITION:
-				return asSGraphIndexPosition
+				return asSGraphIndexPosition()
 		}
 	}
 	
@@ -301,7 +352,10 @@ class TreeNamingService implements INamingService {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
-	
+	def public getTreeContents()
+	{
+		return tree.getContents();
+	}
 
 	
 }
