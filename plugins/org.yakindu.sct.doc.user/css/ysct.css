@@ -108,9 +108,9 @@ span.pro-feature {
 	border-width:0
 }
 span.pro-feature:before {
-	transform:initial;
+	transform:none;
 	padding:0 3px;
 	position:relative;
-	top:initial;
+	top:0;
 	left:0
 }
