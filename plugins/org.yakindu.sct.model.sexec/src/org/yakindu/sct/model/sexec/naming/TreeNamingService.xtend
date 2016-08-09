@@ -40,6 +40,7 @@ import org.yakindu.sct.model.sexec.Reaction
 import org.eclipse.xtext.naming.QualifiedName
 import java.util.ArrayList
 import org.yakindu.sct.model.sexec.ExecutionRegion
+import org.yakindu.sct.model.stext.stext.LocalReaction
 
 /** Default implementation of the naming service for various identifiers used in the generated code. 
  * It is responsible for identifier construction depending on the thing to be named including different strategies 
@@ -64,7 +65,9 @@ class TreeNamingService implements INamingService {
 
 	var protected char separator = '_';
 
-	var protected Map<NamedElement, String> map;
+	var protected Map<StringTreeNode, String> map;
+	
+	var protected Map<NamedElement, StringTreeNode> treeMap;
 	
 	var protected StringTreeNode tree;
 
@@ -84,11 +87,21 @@ class TreeNamingService implements INamingService {
 	
 	override initializeNamingService(Statechart statechart) 
 	{
+		map = new HashMap<StringTreeNode, String>
+		treeMap = new HashMap<NamedElement, StringTreeNode>
 		if(tree == null || activeStatechart != statechart)
 		{
 			activeFlow = null;
 			activeStatechart = statechart;
 			createNameTree(statechart);
+		}
+	}
+	
+	def private void createShortNameMap()
+	{
+		for(node : tree.getEndNodes())
+		{
+			map.put(node, node.getContentUpwards())
 		}
 	}
 	
@@ -105,14 +118,7 @@ class TreeNamingService implements INamingService {
 			for (vertex : region.vertices) {
 				switch vertex {
 					State:
-						{
-							addElement(vertex)
-							for(scope : vertex.scopes) {
-								for(reaction : scope.reactions) {
-									addElement(reaction);
-								}
-							}
-						}
+						addElement(vertex)
 					default:
 						addElement(vertex)
 				}
@@ -129,11 +135,14 @@ class TreeNamingService implements INamingService {
 	
 	override initializeNamingService(ExecutionFlow flow) 
 	{
+		map = new HashMap<StringTreeNode, String>
+		treeMap = new HashMap<NamedElement, StringTreeNode>
 		if(tree == null || activeFlow != flow)
 		{
 			activeFlow = flow;
 			activeStatechart = null;
 			createNameTree(flow);
+			createShortNameMap();
 		}
 	}
 	
@@ -206,7 +215,7 @@ class TreeNamingService implements INamingService {
 		}
 	}
 	
-	def private void addElement(EObject elem)
+	def private void addElement(NamedElement elem)
 	{
 		val name = elem.elementName();
 		
@@ -215,6 +224,10 @@ class TreeNamingService implements INamingService {
 			val segments = new ArrayList<String>(name.getSegments());
 			if(!segments.isEmpty()) {
 				tree.addStringList(segments);
+				val nodes = tree.getNodeChain(name.toString())
+				val endNode = nodes.get(nodes.size() - 1);
+				
+				treeMap.put(elem, endNode); // remember for later access
 			}
 			//System.out.println(name);
 		}
@@ -253,7 +266,7 @@ class TreeNamingService implements INamingService {
 	def protected dispatch QualifiedName elementName(Reaction it) {
 		return provider.getFullyQualifiedName(it).skipFirst(2)
 	}
-
+	
 	def protected dispatch QualifiedName elementName(Region it) {
 		return provider.getFullyQualifiedName(it).skipFirst(1)
 	}
@@ -333,15 +346,15 @@ class TreeNamingService implements INamingService {
 	}
 	
 	override asEscapedIdentifier(String string) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		asIdentifier(string);
 	}
 	
 	override asIdentifier(String string) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		string.replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', separator.toString)
 	}
 	
 	override isKeyword(String string) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return false;
 	}
 	
 	override getShortNameMap(Statechart statechart) {
