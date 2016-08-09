@@ -182,11 +182,6 @@
                     <include name="**/*.html" />
                 </fileset>
             </replaceregexp>
-            <replaceregexp byline="false" flags="g" match='&lt;p&gt;&lt;/div&gt;&lt;/p&gt;' replace='&lt;/div&gt;'>
-                <fileset dir="${help.dir}">
-                    <include name="**/*.html" />
-                </fileset>
-            </replaceregexp>
 
             <!-- Fix "pro-feature" DIV elements -->
             <replaceregexp byline="false"
