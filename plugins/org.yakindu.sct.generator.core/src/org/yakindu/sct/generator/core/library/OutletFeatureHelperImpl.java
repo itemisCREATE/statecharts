@@ -31,6 +31,11 @@ public class OutletFeatureHelperImpl extends BaseSGenFeatureHelper implements IO
 	public FeatureParameterValue getLibraryTargetFolderValue(GeneratorEntry entry) {
 		return getFeatureParameter(entry, OUTLET_FEATURE, ICoreFeatureConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER);
 	}
+	
+	@Override
+	public FeatureParameterValue getApiTargetFolderValue(GeneratorEntry entry) {
+		return getFeatureParameter(entry, OUTLET_FEATURE, ICoreFeatureConstants.OUTLET_FEATURE_API_TARGET_FOLDER);
+	}
 
 	@Override
 	public FeatureParameterValue getTargetProjectValue(GeneratorEntry entry) {
@@ -47,8 +52,14 @@ public class OutletFeatureHelperImpl extends BaseSGenFeatureHelper implements IO
 	@Override
 	public String getRelativeLibraryFolder(GeneratorEntry entry) {
 		String projectFolderName = getTargetProjectValue(entry).getStringValue();
-		String libraryFolderName = getLibraryTargetFolderValue(entry).getExpression().toString();
-		return projectFolderName + Path.SEPARATOR
-				+ libraryFolderName;
+		String libraryFolderName = getLibraryTargetFolderValue(entry).getStringValue();
+		return projectFolderName + Path.SEPARATOR + libraryFolderName;
+	}
+	
+	@Override
+	public String getRelativeApiFolder(GeneratorEntry entry) {
+		String projectFolderName = getTargetProjectValue(entry).getStringValue();
+		String apiFolderName = getApiTargetFolderValue(entry).getStringValue();
+		return projectFolderName + Path.SEPARATOR + apiFolderName;
 	}
 }

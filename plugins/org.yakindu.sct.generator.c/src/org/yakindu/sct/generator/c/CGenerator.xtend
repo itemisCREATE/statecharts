@@ -25,7 +25,7 @@ import org.yakindu.sct.generator.c.GenArtifactConfigurations.GenArtifactConfigur
  * @author Axel Terfloth
  */
 class CGenerator implements IExecutionFlowGenerator {
-	 
+	
 	@Inject extension Types types
 	@Inject extension StatemachineHeader statemachineHeader
 	@Inject extension StatemachineSource statemachineSource
@@ -33,8 +33,7 @@ class CGenerator implements IExecutionFlowGenerator {
 	@Inject extension Navigation
 	@Inject extension GenmodelEntries
 	@Inject extension Naming
-	
-	@Inject IOutletFeatureHelper outletFeatureHelper
+	@Inject extension IOutletFeatureHelper
 
 	@Inject @Named(IGenArtifactConfigurations.DEFAULT)
 	IGenArtifactConfigurations defaultConfigs
@@ -59,16 +58,32 @@ class CGenerator implements IExecutionFlowGenerator {
 	}
 	
 	def protected initGenerationArtifacts(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
-		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null) {
-			locations.configure(flow.typesModule.h, IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT, types)
-		} else {
-			locations.configure(flow.typesModule.h, IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT, types)
-		}
-		locations.configure(flow.module.h, IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT, statemachineHeader)
-		locations.configure(flow.module.c, IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT, statemachineSource)
+		locations.configure(flow.typesModule.h, entry.libraryOutput, types)
+		locations.configure(flow.module.h, entry.headerOutput, statemachineHeader)
+		locations.configure(flow.module.c, entry.sourceOutput, statemachineSource)
 		if (flow.timed || !flow.operations.empty || entry.tracingEnterState || entry.tracingExitState) {
-			locations.configure(flow.module.client.h, IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT, statemachineRequiredHeader)
+			locations.configure(flow.module.client.h, entry.headerOutput, statemachineRequiredHeader)
 		}
+	}
+	
+	def protected getHeaderOutput(GeneratorEntry entry) {
+		if (entry.apiTargetFolderValue != null) {
+			IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT
+		} else {
+			IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT
+		}
+	}
+
+	def protected getLibraryOutput(GeneratorEntry entry) {
+		if (entry.libraryTargetFolderValue != null) {
+			IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT
+		} else {
+			entry.headerOutput
+		}
+	}
+	
+	def protected getSourceOutput(GeneratorEntry entry) {
+		IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT
 	}
 	
 }

@@ -52,7 +52,7 @@ public class CCodeGenerator extends GenericJavaBasedGenerator {
 		super.prepareGenerator(entry);
 		initGenArtifactConfigurations();
 	}
-
+	
 	protected void initGenArtifactConfigurations() {
 		artifactConfigs.setFileSystemAccess(sctFsa);
 	}

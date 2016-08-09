@@ -23,6 +23,8 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.generator.core.library.IOutletFeatureHelper
+import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
 
 class StatemachineInterface {
 
@@ -34,11 +36,18 @@ class StatemachineInterface {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension ExpressionCode
 	@Inject Beautifier beautifier
+	
+	@Inject IOutletFeatureHelper outletFeatureHelper
 
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineInterfaceName.java
 		var content = beautifier.format(filename, content(flow, entry))
-		fsa.generateFile(filename, content)
+		if (outletFeatureHelper.getApiTargetFolderValue(entry) != null) {
+			// generate into API target folder in case one is specified, as it is an interface
+			fsa.generateFile(filename, IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT, content)
+		} else {
+			fsa.generateFile(filename, content)
+		}
 	}
 
 	def protected content(ExecutionFlow flow, GeneratorEntry entry) {
