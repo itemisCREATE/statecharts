@@ -3,7 +3,7 @@
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/6091/badge.svg)](https://scan.coverity.com/projects/yakindu-statecharts)
 
 #YAKINDU Statechart Tools 
-# (http://www.statecharts.org)
+# (http://www.statecharts.org/)
 
 The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of Harel statecharts. 
 
@@ -20,7 +20,7 @@ The open source code generators coming with YAKINDU Statechart Tools do not impl
 In addition to the source code provided here on GitHub we also provide ready-tu-use builds for Windows, Linux and OS X along with an Eclipse update site. If you just want to use YAKINDU Statechart Tools we strongly recommend to go this way. 
 
 1. Dowload a package from our <a href="http://www.statecharts.org/download.html" target="_blank">download page</a>.
-2. Follow the <a href="https://github.com/Yakindu/statecharts/blob/master/plugins/org.yakindu.sct.doc.user/src/Part1-Installation-Guide/00_installation.textile" target="_blank">installation instructions</a>.
+2. Follow the <a href="https://github.com/Yakindu/statecharts/blob/master/plugins/org.yakindu.sct.doc.user/src/installation/installation.textile" target="_blank">installation instructions</a>.
 
 ## How to Contribute
 
