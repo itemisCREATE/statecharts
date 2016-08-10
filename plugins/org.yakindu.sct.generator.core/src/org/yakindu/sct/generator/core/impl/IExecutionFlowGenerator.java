@@ -18,6 +18,7 @@ public interface IExecutionFlowGenerator {
 
 	String TARGET_FOLDER_OUTPUT = IFileSystemAccess.DEFAULT_OUTPUT;
 	String LIBRARY_TARGET_FOLDER_OUTPUT = "LIBRARY_TARGET_FOLDER";
+	String API_TARGET_FOLDER_OUTPUT = "API_TARGET_FOLDER";
 
 	/**
 	 * 

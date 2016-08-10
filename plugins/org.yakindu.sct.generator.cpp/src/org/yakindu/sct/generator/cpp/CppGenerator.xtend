@@ -35,8 +35,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineImplementation statemachineSourceContent
 	@Inject extension Navigation
 	@Inject extension Naming
-	
-	@Inject IOutletFeatureHelper outletFeatureHelper
+	@Inject extension IOutletFeatureHelper
 	
 	@Inject @Named(IGenArtifactConfigurations.DEFAULT)
 	IGenArtifactConfigurations defaultConfigs
@@ -61,26 +60,36 @@ class CppGenerator implements IExecutionFlowGenerator {
 	}
 	
 	def initGenerationArtifacts(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
-		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null) {
-			locations.configure(flow.typesModule.h, IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT, typesContent)
-		} else {
-			locations.configure(flow.typesModule.h, IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT, typesContent)
-		}
-		
-		locations.configure(statemachineInterface.h, IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT, statemachineInterfaceContent)
+		locations.configure(flow.typesModule.h, entry.libraryOutput, typesContent)
+		locations.configure(statemachineInterface.h, entry.headerOutput, statemachineInterfaceContent)
 		
 		if (flow.timed) {
-			if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null) {
-				locations.configure(timedStatemachineInterface.h, IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT, timedStatemachineInterfaceContent)
-				locations.configure(timerInterface.h, IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT, timerInterfaceContent)
-			} else {
-				locations.configure(timedStatemachineInterface.h, IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT, timedStatemachineInterfaceContent)
-				locations.configure(timerInterface.h, IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT, timerInterfaceContent)
-			}
+				locations.configure(timedStatemachineInterface.h, entry.libraryOutput, timedStatemachineInterfaceContent)
+				locations.configure(timerInterface.h, entry.libraryOutput, timerInterfaceContent)
 		}
 		
-		locations.configure(flow.module.h, IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT, statemachineHeaderContent)
-		locations.configure(flow.module.cpp, IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT, statemachineSourceContent)
+		locations.configure(flow.module.h, entry.headerOutput, statemachineHeaderContent)
+		locations.configure(flow.module.cpp, entry.sourceOutput, statemachineSourceContent)
+	}
+	
+	def protected getHeaderOutput(GeneratorEntry entry) {
+		if (entry.apiTargetFolderValue != null) {
+			IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT
+		} else {
+			IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT
+		}
+	}
+
+	def protected getLibraryOutput(GeneratorEntry entry) {
+		if (entry.libraryTargetFolderValue != null) {
+			IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT
+		} else {
+			entry.headerOutput
+		}
+	}
+	
+	def protected getSourceOutput(GeneratorEntry entry) {
+		IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT
 	}
 	
 }

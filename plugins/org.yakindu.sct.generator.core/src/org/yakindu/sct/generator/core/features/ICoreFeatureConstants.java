@@ -25,6 +25,7 @@ public interface ICoreFeatureConstants {
 	public static final String OUTLET_FEATURE_TARGET_PROJECT = "targetProject";
 	public static final String OUTLET_FEATURE_TARGET_FOLDER = "targetFolder";
 	public static final String OUTLET_FEATURE_LIBRARY_TARGET_FOLDER = "libraryTargetFolder";
+	public static final String OUTLET_FEATURE_API_TARGET_FOLDER = "apiTargetFolder";
 	
 	public static final String LICENSE_HEADER = "LicenseHeader";
 	public static final String LICENSE_TEXT = "licenseText";

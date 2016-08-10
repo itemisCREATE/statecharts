@@ -15,6 +15,7 @@ import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICE
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_API_TARGET_FOLDER;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -58,7 +59,8 @@ public class CoreLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatu
 				&& !projectOpened(parameterValue.getStringValue()))
 			return error(String.format("The Project %s is not open.", parameterValue.getExpression()));
 		if (OUTLET_FEATURE_TARGET_FOLDER.equals(parameterName)
-				|| OUTLET_FEATURE_LIBRARY_TARGET_FOLDER.equals(parameterName)) {
+				|| OUTLET_FEATURE_LIBRARY_TARGET_FOLDER.equals(parameterName)
+				|| OUTLET_FEATURE_API_TARGET_FOLDER.equals(parameterName)) {
 			FeatureParameterValue targetProjectParam = parameterValue.getFeatureConfiguration()
 					.getParameterValue(OUTLET_FEATURE_TARGET_PROJECT);
 			String targetProjectName = targetProjectParam != null ? targetProjectParam.getStringValue() : null;

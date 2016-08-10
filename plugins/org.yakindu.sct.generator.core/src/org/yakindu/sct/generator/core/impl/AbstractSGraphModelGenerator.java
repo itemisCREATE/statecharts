@@ -188,6 +188,7 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 		initFsaTargetProject(entry);
 		initDefaultOutput(entry);
 		initLibraryTargetFolder(entry);
+		initApiTargetFolder(entry);
 	}
 
 	protected void initLibraryTargetFolder(GeneratorEntry entry) {
@@ -205,6 +206,19 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 			// cleaned.
 			librarytargetFolderOutputConfiguration.setCanClearOutputDirectory(false);
 			librarytargetFolderOutputConfiguration.setOverrideExistingResources(false);
+		}
+	}
+	
+	protected void initApiTargetFolder(GeneratorEntry entry) {
+		FeatureParameterValue apiTargetFolderValue = outletFeatureHelper.getApiTargetFolderValue(entry);
+		if (apiTargetFolderValue != null) {
+			sctFsa.setOutputPath(IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT,
+					apiTargetFolderValue.getStringValue());
+		}
+		OutputConfiguration apiTargetFolderOutputConfiguration = sctFsa.getOutputConfigurations()
+				.get(IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT);
+		if (apiTargetFolderOutputConfiguration != null) {
+			apiTargetFolderOutputConfiguration.setCreateOutputDirectory(true);
 		}
 	}
 

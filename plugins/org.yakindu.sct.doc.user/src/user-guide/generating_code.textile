@@ -60,6 +60,8 @@ The *Outlet* feature specifies target project and target folder for the generate
 # _targetProject_ (String, required): The project to store the generated artifacts to.
 # _targetFolder_ (String, required): The folder to store the generated artifacts to. If a library folder is given, only the dynamic (i. e. model-dependent artifacts) are generated into the target folder, if not all generated artifacts will be generated into it. All artifacts in this folder will be overwritten during re-generation.
 # _libraryTargetFolder_ (String, optional): The folder to store the static (i. e. model-independent artifacts) to. In case this is not specified, all artifacts will be generated into the target folder. All artifacts in this folder will be preserved during re-generation.
+# _apiTargetFolder_ (String, optional): The folder to store API code, e.g. interfaces or header files. In case this is not specified, all artifacts will be generated into the target folder.
+
 
 bq.. *Example:*
 
@@ -67,6 +69,7 @@ bc. feature Outlet {
     targetProject = "SampleProject"
     targetFolder = "src-gen"
     libraryTargetFolder = "src"
+    apiTargetFolder = "api-gen"
 }
 
 ==<!-- End sgen_feature_outlet -->==

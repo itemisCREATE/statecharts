@@ -51,6 +51,11 @@ public abstract class AbstractWorkspaceGenerator extends AbstractSExecModelGener
 		return new File(uri.toFileString());
 	}
 	
+	public final File getApiTargetFolder(GeneratorEntry entry) {
+		URI uri = sctFsa.getURI(outletFeatureHelper.getRelativeApiFolder(entry));
+		return new File(uri.toFileString());
+	}
+	
 	public final void writeToConsole(String line){
 		log.writeToConsole(line);
 	}

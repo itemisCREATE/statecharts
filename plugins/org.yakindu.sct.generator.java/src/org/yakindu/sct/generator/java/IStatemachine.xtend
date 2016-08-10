@@ -28,11 +28,16 @@ class IStatemachine {
 	@Inject IOutletFeatureHelper outletFeatureHelper
 	 
 	def generateIStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null) {	
+		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null) {
 			// generate into library target folder in case one is specified, as the contents are static
-			fsa.generateFile(entry.basePackagePath + '/' + iStatemachine.java, IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT, content(entry))
+			fsa.generateFile(entry.basePackagePath + '/' + iStatemachine.java,
+				IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT, content(entry))
+		} else if (outletFeatureHelper.getApiTargetFolderValue(entry) != null) {
+			// generate into API target folder in case one is specified, as it is an interface
+			fsa.generateFile(entry.basePackagePath + '/' + iStatemachine.java,
+				IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT, content(entry))
 		} else {
-			// use default target folder path in case no library target folder is specified (the file will be overwritten there)
+			// use default target folder path in case no library or API target folder is specified (the file will be overwritten there)
 			fsa.generateFile(entry.basePackagePath + '/' + iStatemachine.java, content(entry))
 		}
 	}
