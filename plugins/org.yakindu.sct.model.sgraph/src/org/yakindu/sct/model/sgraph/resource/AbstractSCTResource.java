@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.EClassImpl;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.gmf.runtime.emf.core.resources.GMFResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ParserRule;
@@ -73,7 +73,7 @@ import com.google.inject.name.Named;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractSCTResource extends GMFResource {
+public abstract class AbstractSCTResource extends XMIResourceImpl {
 
 	public static final String SCT_PREFIX = "SCT_";
 
@@ -123,7 +123,6 @@ public abstract class AbstractSCTResource extends GMFResource {
 
 	public AbstractSCTResource(URI uri) {
 		super(uri);
-		setUseIDAttributes(true);
 		syntaxDiagnostics = HashMultimap.create();
 		linkingDiagnostics = HashMultimap.create();
 		setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
@@ -478,9 +477,16 @@ public abstract class AbstractSCTResource extends GMFResource {
 	 */
 	@Override
 	public void setURI(URI uri) {
-
 		if (getResourceSet() != null) {
 			setRawURI(uri);
 		}
+	}
+	
+	public void setRawURI(URI uri) {
+		URI oldURI = getURI();
+		if ((uri == oldURI) || ((uri != null) && (uri.equals(oldURI))))
+			return;
+
+		super.setURI(uri);
 	}
 }
