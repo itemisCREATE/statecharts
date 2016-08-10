@@ -627,3 +627,48 @@ bc. myBool = active(StateA)
 ==<!-- End stext_keyword_ -->==
 
 
+h2(#complete-statechart-language-grammar). Complete statechart language grammar
+
+This section presents the complete grammar of the statechart language. If you are in doubt how to write down a transition specification, a variable declaration, or any other syntactical construct of the statechart language, this is your definite reference that clarifies all syntactical questions.
+
+The grammar is visualized using "railroad diagrams":https://en.wikipedia.org/wiki/Syntax_diagram. Railroad diagrams are easy to read and comprise all syntactically valid language constructs. Figure "&quot;Railroad diagrams explained&quot;":#fig-railroad-diagrams-explained shows an example:
+
+p(#fig-railroad-diagrams-explained). 
+
+!(standard-image)images/docu_grammar_020_simpleelementreferenceexpression.png(Railroad diagrams explained)!
+
+p=. Railroad diagrams explained
+
+On the left-hand side you'll find the so-called "_non-terminal symbol_":https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols (or _non-terminal_ for short) that is being defined by this particular diagram. Here the non-terminal is _SimpleElementReferenceExpression_. To find out what a _SimpleElementReferenceExpression_ is allowed to look like, follow the "railroad track" just like a train would do. At each junction, the train either keeps its direction or changes it by 45 degrees, but it cannot make sharp turns of 90 degrees or more.
+
+On its way, the train passes several "stations". Each station represents a language element that is valid at this point. In our example, the first station is a rectangle with a grey background. The grey background denotes a non-terminal, and the word inside the rectangle is the non-terminal's name, here: _ID_. You will have to look up this particular non-terminal's railroad diagram to learn more about it. However, for simplicity and because their meanings are more or less obvious a few non-terminals are not refined further. Examples are _STRING_, _INT_, _BOOL_, or _ID_.
+
+In a _SimpleElementReferenceExpression_, a valid ID – a name – is always the first element, e.&nbsp;g. @init42@. If the train turns right at the junction, it moves directly to the railroad diagram's exit. That means just an _ID_ like @init42@ is a valid _SimpleElementReferenceExpression_. Please note that when the train reaches the junction right before the exit, it cannot turn left, because trains don't move that way. That is, the train is unable to travel to the @(@ station from this direction.
+
+The train can reach the @)@ from the opposite direction only. After having left the initial _ID_ station, the train can move to the left at the junction and then run a stretch touching only the @(@ and @)@ stations, in that order. These rectangles have a white background color, denoting a "_terminal symbol_":https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols or _terminal_ for short. A terminal stands for itself; write it down as it is.
+
+Following that rule, @init42()@ is a valid _SimpleElementReferenceExpression_. One or more _Expressions_ inside the paranthesis, separated by the @,@ terminal, are also valid. Example: @init42(foo, bar + 27)@.
+
+bq.. *Please note:*
+
+The railroad diagrams themselves are generated from a textual grammar representation established and maintained with "Xtext":https://eclipse.org/Xtext/. If you suspect the diagrams shown here are lagging behind the actual implementation, look for files with the @.xtext@ extension in the YAKINDU Statechart Tools source code distribution!
+
+h3(#statechart-grammar). Statechart grammar
+
+Figure "&quot;Statechart grammar&quot;":#fig-statechart-grammar shows the statechart grammar. It makes use of the "expressions grammar":#expressions-grammar.
+
+p(#fig-statechart-grammar). 
+
+!(standard-image)images/docu_grammar_010_stext.png(Statechart grammar)!
+
+p=. Statechart grammar
+
+h3(#expressions-grammar). Expressions grammar
+
+Figure "&quot;Expressions grammar&quot;":#fig-expressions-grammar shows the expressions grammar. It is used by the "statechart grammar":#statechart-grammar.
+
+p(#fig-expressions-grammar). 
+
+!(standard-image)images/docu_grammar_010_expressions.png(Expressions grammar)!
+
+p=. Expressions grammar
