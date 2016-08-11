@@ -43,7 +43,10 @@ setup_workdir
 
 # Transition: overview
 create_grammar_image transition-overview \
-    transitionreaction
+    transitionreaction \
+    stexttrigger \
+    reactiontrigger \
+    defaulttrigger \
 
 # Transition: detailed
 create_grammar_image transition-detailed \

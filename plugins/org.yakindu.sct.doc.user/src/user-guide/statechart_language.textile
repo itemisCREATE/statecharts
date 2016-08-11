@@ -46,11 +46,53 @@ States are the central elements of a state machine. A state has to be placed ins
 
 h3(#transition). Transition
 
-A transition is the transfer of one state to another. Transitions are diagrammed as arrows. They can have events and actions, but don't need to.
+A transition is the transfer of one state to another. A transition is diagrammed as a arrow leading from a _source state_ to a _target state_. A transition can also have
+* an _event trigger_, specifying which event(s) trigger the transition,
+* a _guard_, specifying which condition(s) must be fulfilled to trigger the transition,
+* an _effect_, specifying actions like assignments to variables, operations calls etc. that are to take place when this transition is executed.
 
-The syntax of events and actions is defined by a "textual description language":#the-statechart-language. Please refer to "section &quot;Events&quot;":#events for more details. "Section &quot;Reaction triggers&quot;":#reaction-triggers has more on actions.
+All of these three elements are optional, i.&nbsp;e. a transition may have one or more or them, but it doesn't need to. Events triggers, guard conditions, and effects are specified as a text that is attached to the transition arrow in the diagram.
 
-If a state has more than a single outgoing transition without event, then among those transitions the one that has been modeled first will be carried out.
+"Figure &quot;Transition syntax overview&quot;":#fig_transition-syntax-overview shows how the syntax of a transition specification is defined. You can refer to this diagram while reading the subsequent sections.
+
+p(#fig_transition-syntax-overview). 
+!(standard-image)images/docu_grammar_030_transition-overview.png(Transition syntax overview)!
+
+p=. Transition syntax overview
+
+h4(#transition-without-specification). Transition without specification
+
+In the most simple case we have only the transition's arrow leading from a source state to a target state without any additional specification. In other words, there is no text attached to the transition. However, such an event will never be taken, so better make sure to set up a transition specification.
+
+h4(#event-triggers). Event triggers
+
+When an "event":#events occurs, it may trigger a transition to "fire". The transition's source state, which is the currently active state, becomes inactive, control is transferred along the transition's arrow to the latter's target state, and that state becomes the newly active state.
+
+Events must be declared in the definition section, see section "&quot;Events&quot;":#events.
+
+Let's have a look at some sample transition specifications. We are assuming that the transition's source state is active, because otherwise the transition wouldn't fire anyway.
+
+| *Transition specification:* | *Condition for the transition to fire:* |
+| @my_event@ | Event _my_event_ occured. |
+| @my_event_1, my_event_2@ | At least one the events _my_event_1_ and _my_event_2_ occured. |
+| @after 3s@ | Three seconds after activating the source state have passed. |
+| @after 3, my_events@ | Three seconds have passed or event _my_event_ occurred, whatever happens first. |
+| @after 3, after 2@ | Three seconds have passed or two seconds have passed, whatever happens first. :-) |
+| @every 3s@ | Three seconds after activating the source state have passed. |
+| @always@ | Transition fires always. |
+| @default@ | Transition fires always. |
+| @else@ | Transition fires always. |
+| @oncycle@ | Transition fires always. |
+
+For more details on the @after@, @every@, @always@, @default@, @else@, and @oncycle@ specifications, please see "section &quot;Reaction triggers&quot;":#reaction-triggers.
+
+h4(#entry-and-exit-points). Entry and exit points
+
+Unlike transitions as defined by the "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language, transitions in YAKINDU Statecharts may also denote specific entry or exit points when leaving or entering composite states. This is explained in detail in the sections "&quot;Named entries&quot;":#named-entries and "&quot;Exit&quot;":#exit.
+
+h4(#transition-priorities). Transition priorities
+
+If a state has several outgoing transitions, these transitions are _prioritized_. The state machine checks the transitions one by one in their defined order and execute the first transition that fulfills all prerequisites for firing. The order of transitions is a property of their source state and can be changed using the statechart editor.
 
 h3(#entry). Entry
 
@@ -421,6 +463,8 @@ bc. const variable1: real
 
 h3(#events). Events
 
+An _event_ is something of importance that happens at a certain point in time in the context of a state machine, for example a user pushes a button, a temperature sensor delivers a value, a period of time has passed, etc. An event is not necessarily something external; the state machine can raise events itself.
+
 h4(#incoming-and-outgoing-events). Incoming and outgoing events
 
 An event in an interface scope has a direction. It is either ingoing or outgoing:
@@ -652,6 +696,10 @@ Following that rule, @init42()@ is a valid _SimpleElementReferenceExpression_. O
 bq.. *Please note:*
 
 The railroad diagrams themselves are generated from a textual grammar representation established and maintained with "Xtext":https://eclipse.org/Xtext/. If you suspect the diagrams shown here are lagging behind the actual implementation, look for files with the @.xtext@ extension in the YAKINDU Statechart Tools source code distribution!
+
+bq.. *Please also note:*
+
+Not each and every construction that is syntactically allowed does make sense semantically. The statechart editor will flag such constructions as errors.
 
 h3(#statechart-grammar). Statechart grammar
 
