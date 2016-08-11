@@ -48,8 +48,6 @@ import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
-import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter;
-import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.base.xtext.utils.jface.viewers.FilteringMenuManager;
 import org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapter;
 import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
@@ -58,6 +56,8 @@ import org.yakindu.sct.domain.extension.IDomainDescriptor;
 import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
+import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 
 import com.google.inject.Injector;
 

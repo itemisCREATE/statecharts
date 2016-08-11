@@ -35,7 +35,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.yakindu.base.utils.jface.viewers.StyledTextCellEditor;
 import org.yakindu.base.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
-import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.base.xtext.utils.jface.viewers.context.IXtextFakeContextResourcesProvider;
 
 import com.google.inject.Injector;
@@ -59,7 +58,6 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 	private Injector injector;
 	private StyledTextXtextAdapter xtextAdapter;
 	private IXtextFakeContextResourcesProvider contextFakeResourceProvider;
-	private IContextElementProvider provider;
 	private final static String CONTEXTMENUID = "org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu";
 
 	public XtextStyledTextCellEditor(int style, Injector injector,
@@ -70,12 +68,6 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 
 	public XtextStyledTextCellEditor(int style, Injector injector) {
 		setStyle(style);
-		this.injector = injector;
-	}
-
-	public XtextStyledTextCellEditor(int style, Injector injector, IContextElementProvider provider) {
-		setStyle(style);
-		this.provider = provider;
 		this.injector = injector;
 	}
 
@@ -98,10 +90,6 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 				contextFakeResourceProvider == null ? IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER
 						: contextFakeResourceProvider);
 		xtextAdapter.adapt(styledText);
-		if (provider != null) {
-			xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters()
-					.add(new ContextElementAdapter(provider));
-		}
 
 		// configure content assist
 		final IContentAssistant contentAssistant = xtextAdapter.getContentAssistant();

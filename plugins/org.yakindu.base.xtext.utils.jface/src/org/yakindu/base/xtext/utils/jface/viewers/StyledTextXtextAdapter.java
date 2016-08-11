@@ -244,7 +244,6 @@ public class StyledTextXtextAdapter {
 	 */
 	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
 		MarkerAnnotationPreferences annotationPreferences = new MarkerAnnotationPreferences();
-		@SuppressWarnings("unchecked")
 		List<AnnotationPreference> prefs = annotationPreferences.getAnnotationPreferences();
 		for (AnnotationPreference annotationPreference : prefs) {
 			support.setAnnotationPreference(annotationPreference);

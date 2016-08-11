@@ -18,7 +18,6 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.antlr.runtime,
  org.yakindu.sct.model.sgraph;visibility:=reexport,
  org.yakindu.base.types,
- org.yakindu.base.xtext.utils.jface,
  org.yakindu.base.expressions;visibility:=reexport,
  org.yakindu.sct.domain
 Import-Package: org.apache.commons.logging,

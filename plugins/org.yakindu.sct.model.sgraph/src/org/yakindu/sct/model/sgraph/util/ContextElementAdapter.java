@@ -9,7 +9,7 @@
  * 	itemis AG - initial API and implementation
  * 
  */
-package org.yakindu.base.xtext.utils.jface.viewers;
+package org.yakindu.sct.model.sgraph.util;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
