@@ -12,6 +12,7 @@ package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
@@ -26,10 +27,11 @@ import org.yakindu.base.gmf.runtime.parsers.StringAttributeParser;
 import org.yakindu.base.xtext.utils.gmf.directedit.IEAttributeProvider;
 import org.yakindu.base.xtext.utils.gmf.directedit.XtextDirectEditManager;
 import org.yakindu.base.xtext.utils.gmf.directedit.XtextLabelEditPart;
-import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
+import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
+import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.policies.EAttributeDirectEditPolicy;
 
@@ -81,7 +83,7 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart impl
 	@Override
 	protected DirectEditManager createDirectEditManager() {
 		if (injector != null) {
-			return new XtextDirectEditManager(this, injector, getEditorStyles(), this);
+			return new XtextDirectEditManager(this, injector, getEditorStyles());
 		} else {
 			return new TextDirectEditManager(this);
 		}
@@ -140,6 +142,12 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart impl
 	protected void updateLabelText() {
 		String label = (String) resolveSemanticElement().eGet(getAttribute());
 		getFigure().setText(label);
+	}
+	
+	@Override
+	protected void setContext(Resource resource) {
+		resource.eAdapters().add(new ContextElementAdapter(this));
+		
 	}
 
 }

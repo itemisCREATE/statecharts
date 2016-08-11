@@ -16,6 +16,7 @@ import static org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants.REQ_D
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.requests.SelectionRequest;
@@ -29,6 +30,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.base.xtext.utils.gmf.directedit.DoubleClickDirectEditDragTracker.IDoubleClickCallback;
 import org.yakindu.base.xtext.utils.gmf.figures.HighlightingWrappingLabel;
+import org.yakindu.base.xtext.utils.jface.viewers.XtextStyledTextCellEditor;
 
 /**
  * Abstract base implementation for all Labels that that use Xtext for direct
@@ -41,6 +43,8 @@ import org.yakindu.base.xtext.utils.gmf.figures.HighlightingWrappingLabel;
 public abstract class XtextLabelEditPart extends CompartmentEditPart implements IXtextAwareEditPart {
 
 	protected abstract DirectEditManager createDirectEditManager();
+
+	protected abstract void setContext(Resource resource);
 
 	public XtextLabelEditPart(final View view) {
 		super(view);
@@ -115,16 +119,24 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements 
 
 				public void run() {
 					if (isActive()) {
-						if (theRequest.getExtendedData().get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character) {
-							final Character initialChar = (Character) theRequest.getExtendedData().get(
-									REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
+						if (theRequest.getExtendedData()
+								.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character) {
+							final Character initialChar = (Character) theRequest.getExtendedData()
+									.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
 							if (manager instanceof XtextDirectEditManager) {
-								((XtextDirectEditManager) manager).show(initialChar);
+								XtextDirectEditManager xtextDirectEditManager = (XtextDirectEditManager) manager;
+								xtextDirectEditManager.show(initialChar);
 							} else if (manager instanceof TextDirectEditManager) {
 								((TextDirectEditManager) manager).show(initialChar);
 							}
 						} else {
 							manager.show();
+						}
+						if (manager instanceof XtextDirectEditManager) {
+							XtextDirectEditManager xtextDirectEditManager = (XtextDirectEditManager) manager;
+							XtextStyledTextCellEditor cellEditor = (XtextStyledTextCellEditor) xtextDirectEditManager
+									.getCellEditor();
+							setContext(cellEditor.getXtextAdapter().getFakeResourceContext().getFakeResource());
 						}
 					}
 				}

@@ -64,7 +64,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.CellEditorActionHandler;
 import org.yakindu.base.xtext.utils.gmf.viewers.XtextStyledTextCellEditorEx;
-import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 import org.yakindu.base.xtext.utils.jface.viewers.context.IXtextFakeContextResourcesProvider;
 
 import com.google.inject.Injector;
@@ -127,8 +126,6 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 
 	private IXtextFakeContextResourcesProvider fakeProvider;
 
-	private IContextElementProvider contextProvider;
-
 	private static final int LABEL_MIN_WIDTH = 75;
 
 	/**
@@ -147,12 +144,6 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 			IXtextFakeContextResourcesProvider provider) {
 		this(source, null, getTextCellEditorLocator(source), injector, style);
 		this.fakeProvider = provider;
-	}
-
-	public XtextDirectEditManager(IXtextAwareEditPart source, Injector injector, int style,
-			IContextElementProvider provider) {
-		this(source, null, getTextCellEditorLocator(source), injector, style);
-		this.contextProvider = provider;
 	}
 
 	/**
@@ -289,9 +280,6 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 		XtextStyledTextCellEditorEx editor;
 		if (fakeProvider != null) {
 			editor = new XtextStyledTextCellEditorEx(style, injector, fakeProvider);
-			editor.create(composite);
-		} else if (contextProvider != null) {
-			editor = new XtextStyledTextCellEditorEx(style, injector, contextProvider);
 			editor.create(composite);
 		} else {
 			editor = new XtextStyledTextCellEditorEx(style, injector);

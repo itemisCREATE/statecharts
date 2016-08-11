@@ -19,7 +19,7 @@ import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.common.ui.resources.FileModificationValidator;
 import org.eclipse.swt.widgets.Shell;
-import org.yakindu.base.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
+import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
 
 /**
  * Checks the file modification flag before updating the model.
