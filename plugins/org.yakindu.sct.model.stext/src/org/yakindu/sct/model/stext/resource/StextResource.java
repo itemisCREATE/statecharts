@@ -34,11 +34,12 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 public class StextResource extends AbstractSCTResource {
 
 	public StextResource() {
-		super(null);
+		this(null);
 	}
 
 	public StextResource(URI uri) {
 		super(uri);
+		setTrackingModification(true);
 	}
 
 	protected void serializeStatechart(Statechart statechart) {
