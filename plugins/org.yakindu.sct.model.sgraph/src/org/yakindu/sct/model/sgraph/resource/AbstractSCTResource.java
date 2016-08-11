@@ -127,8 +127,17 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 		linkingDiagnostics = HashMultimap.create();
 		setIntrinsicIDToEObjectMap(new HashMap<String, EObject>());
 	}
-	
-	
+
+	@Override
+	protected boolean useUUIDs() {
+		return true;
+	}
+
+	@Override
+	protected boolean useIDAttributes() {
+		return false;
+	}
+
 	@Override
 	protected void attachedHelper(EObject eObject) {
 		super.attachedHelper(eObject);
@@ -446,8 +455,8 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 	}
 
 	// copied from xtext LazyLinkingResource
-	protected static class DiagnosticMessageContext implements
-			ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext {
+	protected static class DiagnosticMessageContext
+			implements ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext {
 
 		private final Triple<EObject, EReference, INode> triple;
 		private final LinkingHelper linkingHelper;
@@ -470,6 +479,7 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 		}
 
 	}
+
 	/**
 	 * overridden because original calls 'Util.denormalizeURI(uri,
 	 * getResourceSet())' which leads into error if there is no platform
@@ -481,7 +491,7 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 			setRawURI(uri);
 		}
 	}
-	
+
 	public void setRawURI(URI uri) {
 		URI oldURI = getURI();
 		if ((uri == oldURI) || ((uri != null) && (uri.equals(oldURI))))
