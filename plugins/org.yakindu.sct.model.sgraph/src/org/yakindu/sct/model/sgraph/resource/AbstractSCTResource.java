@@ -135,7 +135,7 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 
 	@Override
 	protected boolean useIDAttributes() {
-		return false;
+		return true;
 	}
 
 	@Override
