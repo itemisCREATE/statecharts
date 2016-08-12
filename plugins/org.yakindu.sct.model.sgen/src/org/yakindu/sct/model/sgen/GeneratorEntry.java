@@ -20,12 +20,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.GeneratorEntry#getElementRef <em>Element Ref</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.GeneratorEntry#getFeatures <em>Features</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.GeneratorEntry#getContentType <em>Content Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sgen.SGenPackage#getGeneratorEntry()
  * @model
@@ -107,5 +107,13 @@ public interface GeneratorEntry extends EObject {
 	 * @generated
 	 */
 	FeatureConfiguration getFeatureConfiguration(String featureName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	FeatureParameterValue getFeatureParameterValue(String featureName, String paramName);
 
 } // GeneratorEntry

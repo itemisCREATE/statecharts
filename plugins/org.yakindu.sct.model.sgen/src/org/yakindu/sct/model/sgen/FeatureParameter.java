@@ -19,12 +19,12 @@ import org.yakindu.base.base.NamedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureParameter#getFeatureType <em>Feature Type</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureParameter#isOptional <em>Optional</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureParameter#getParameterType <em>Parameter Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sgen.SGenPackage#getFeatureParameter()
  * @model

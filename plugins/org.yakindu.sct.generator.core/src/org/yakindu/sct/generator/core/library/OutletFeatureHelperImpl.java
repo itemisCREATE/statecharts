@@ -20,26 +20,27 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 /**
  * @author Johannes Dicks - Initial contribution and API
  */
-public class OutletFeatureHelperImpl extends BaseSGenFeatureHelper implements IOutletFeatureHelper {
+public class OutletFeatureHelperImpl implements IOutletFeatureHelper {
 
 	@Override
 	public FeatureParameterValue getTargetFolderValue(GeneratorEntry entry) {
-		return getFeatureParameter(entry, OUTLET_FEATURE, ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER);
+		return entry.getFeatureParameterValue(OUTLET_FEATURE, ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER);
 	}
 
 	@Override
 	public FeatureParameterValue getLibraryTargetFolderValue(GeneratorEntry entry) {
-		return getFeatureParameter(entry, OUTLET_FEATURE, ICoreFeatureConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER);
+		return entry.getFeatureParameterValue(OUTLET_FEATURE,
+				ICoreFeatureConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER);
 	}
-	
+
 	@Override
 	public FeatureParameterValue getApiTargetFolderValue(GeneratorEntry entry) {
-		return getFeatureParameter(entry, OUTLET_FEATURE, ICoreFeatureConstants.OUTLET_FEATURE_API_TARGET_FOLDER);
+		return entry.getFeatureParameterValue(OUTLET_FEATURE, ICoreFeatureConstants.OUTLET_FEATURE_API_TARGET_FOLDER);
 	}
 
 	@Override
 	public FeatureParameterValue getTargetProjectValue(GeneratorEntry entry) {
-		return getFeatureParameter(entry, OUTLET_FEATURE, ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT);
+		return entry.getFeatureParameterValue(OUTLET_FEATURE, ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT);
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class OutletFeatureHelperImpl extends BaseSGenFeatureHelper implements IO
 		String libraryFolderName = getLibraryTargetFolderValue(entry).getStringValue();
 		return projectFolderName + Path.SEPARATOR + libraryFolderName;
 	}
-	
+
 	@Override
 	public String getRelativeApiFolder(GeneratorEntry entry) {
 		String projectFolderName = getTargetProjectValue(entry).getStringValue();

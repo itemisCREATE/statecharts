@@ -25,10 +25,10 @@ import org.yakindu.sct.model.sgen.StringLiteral;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.StringLiteralImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

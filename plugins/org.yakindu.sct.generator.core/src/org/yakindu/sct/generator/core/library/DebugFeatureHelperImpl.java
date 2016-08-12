@@ -21,11 +21,11 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
  * @author Johannes Dicks - Initial contribution and API
  *
  */
-public class DebugFeatureHelperImpl extends BaseSGenFeatureHelper implements IDebugFeatureHelper {
+public class DebugFeatureHelperImpl implements IDebugFeatureHelper {
 	
 	@Override
 	public boolean isDumpSexec(GeneratorEntry entry) {
-		FeatureParameterValue dumpSexec = getFeatureParameter(entry, DEBUG_FEATURE, DEBUG_FEATURE_DUMP_SEXEC);
+		FeatureParameterValue dumpSexec = entry.getFeatureParameterValue(DEBUG_FEATURE, DEBUG_FEATURE_DUMP_SEXEC);
 		if (dumpSexec == null) {
 			return false;
 		}

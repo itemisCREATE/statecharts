@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
+import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
@@ -31,12 +32,12 @@ import org.yakindu.sct.model.sgen.SGenPackage;
  * <em><b>Generator Entry</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.GeneratorEntryImpl#getElementRef <em>Element Ref</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.GeneratorEntryImpl#getFeatures <em>Features</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.GeneratorEntryImpl#getContentType <em>Content Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -179,6 +180,20 @@ public class GeneratorEntryImpl extends EObjectImpl implements GeneratorEntry {
 				return configuration;
 		}
 		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public FeatureParameterValue getFeatureParameterValue(String featureName, String paramName) {
+		FeatureConfiguration feature = getFeatureConfiguration(featureName);
+		if (feature != null) {
+			return feature.getParameterValue(paramName);
+		}
+		return null;
+
 	}
 
 	/**
