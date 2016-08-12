@@ -6,7 +6,7 @@
       <FeatureLibrary
             library_id="org.yakindu.generator.core.features.xpand"
             defaultProvider="org.yakindu.sct.generator.xpand.features.XpandLibraryDefaultFeatureValueProvider"
-            uri="platform:/plugin/org.yakindu.sct.generator.core/library/XpandFeatureTypeLibrary.xmi">
+            uri="platform:/plugin/org.yakindu.sct.generator.xpand/library/XpandFeatureTypeLibrary.xmi">
       </FeatureLibrary>
  </extension>
  <extension
