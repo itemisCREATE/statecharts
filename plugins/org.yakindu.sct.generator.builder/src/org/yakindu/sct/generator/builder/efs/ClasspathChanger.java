@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.core.util;
+package org.yakindu.sct.generator.builder.efs;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;

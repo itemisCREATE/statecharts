@@ -8,18 +8,24 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.generator.core.filesystem;
+package org.yakindu.sct.generator.builder.efs;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
@@ -28,17 +34,162 @@ import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
 import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
-import org.yakindu.sct.generator.core.util.ClasspathChanger;
-import org.yakindu.sct.generator.core.util.EFSHelper;
+import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
+import org.yakindu.sct.generator.core.impl.AbstractXpandBasedCodeGenerator;
+import org.yakindu.sct.generator.core.library.IOutletFeatureHelper;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.inject.Inject;
 
+/**
+ * 
+ * @author Johannes Dicks - Initial contribution and API
+ * 
+ */
 public class EFSResourceFileSystemAccess extends AbstractFileSystemAccess2 implements ISCTFileSystemAccess {
 
 	private IProject project;
-
 	@Inject
-	private EFSHelper efsHelper;
+	IOutletFeatureHelper outletFeatureHelper;
+
+	public void refreshTargetProject(GeneratorEntry entry) {
+		if (Platform.isRunning()) {
+
+			try {
+				IProject project = getTargetProject(entry);
+				if (project != null && project.isAccessible())
+					project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+			} catch (CoreException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
+
+	/**
+	 * Returns an IProject for the configured target project. The
+	 * {@link IProject} is returned even if the project does not exist yet.
+	 * 
+	 * @param entry
+	 * @return
+	 */
+	public IProject getTargetProject(GeneratorEntry entry) {
+		String stringValue = outletFeatureHelper.getTargetProjectValue(entry).getStringValue();
+		if (Platform.isRunning()) {
+			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(stringValue);
+			return project;
+		} else
+			throw new IllegalStateException("The " + AbstractXpandBasedCodeGenerator.class.getSimpleName()
+					+ " needs a running eclipse.Platform");
+	}
+
+	/**
+	 */
+	public String getEncoding(IFile file) throws CoreException {
+		return file.getCharset(true);
+	}
+
+	/**
+	 * Copy of
+	 * {@link org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2#getContainer}
+	 * 
+	 * @param outputConfig
+	 * @return
+	 * @see {@link org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2}
+	 */
+	public IContainer getContainer(OutputConfiguration outputConfig, IProject project) {
+		String path = outputConfig.getOutputDirectory();
+		if (isRootPath(path) || project == null) {
+			return project;
+		}
+		return project.getFolder(new Path(path));
+	}
+
+	public boolean isRootPath(String path) {
+		return (".".equals(path) || "/".equals(path) || "./".equals(path) || "".equals(path));
+	}
+
+	public void createContainer(IContainer container) {
+		try {
+			ensureExists(container);
+		} catch (CoreException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
+	public IFile getFile(String fileName, OutputConfiguration config, IProject iProject) {
+		IContainer container = getContainer(config, iProject);
+		if (container != null) {
+			IFile result = container.getFile(new Path(fileName));
+			refreshFileSilently(result, new NullProgressMonitor());
+			return result;
+		}
+		return null;
+	}
+
+	private void refreshFileSilently(IFile result, NullProgressMonitor nullProgressMonitor) {
+		try {
+			result.refreshLocal(IResource.DEPTH_ZERO, new NullProgressMonitor());
+		} catch (CoreException c) {
+			// ignore
+		}
+	}
+
+	public boolean hasContentsChanged(IFile file, StringInputStream newContent) {
+		boolean contentChanged = false;
+		BufferedInputStream oldContent = null;
+		try {
+			oldContent = new BufferedInputStream(file.getContents());
+			int newByte = newContent.read();
+			int oldByte = oldContent.read();
+			while (newByte != -1 && oldByte != -1 && newByte == oldByte) {
+				newByte = newContent.read();
+				oldByte = oldContent.read();
+			}
+			contentChanged = newByte != oldByte;
+		} catch (CoreException e) {
+			contentChanged = true;
+		} catch (IOException e) {
+			contentChanged = true;
+		} finally {
+			if (oldContent != null) {
+				try {
+					oldContent.close();
+				} catch (IOException e) {
+					// ignore
+				}
+			}
+		}
+		return contentChanged;
+	}
+
+	public void setDerived(IFile file, boolean isDerived) throws CoreException {
+		file.setDerived(isDerived, new NullProgressMonitor());
+	}
+
+	public void ensureParentExists(IFile file) throws CoreException {
+		if (!file.exists()) {
+			ensureExists(file.getParent());
+		}
+
+	}
+
+	public StringInputStream getInputStream(String contentsAsString, String encoding) {
+		try {
+			return new StringInputStream(contentsAsString, encoding);
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeIOException(e);
+		}
+	}
+
+	protected void ensureExists(IContainer container) throws CoreException {
+		if (container.exists())
+			return;
+		if (container instanceof IFolder) {
+			ensureExists(container.getParent());
+			((IFolder) container).create(true, true, new NullProgressMonitor());
+		}
+	}
 
 	@Override
 	public void setOutputPath(String outputName, String path) {
@@ -114,30 +265,29 @@ public class EFSResourceFileSystemAccess extends AbstractFileSystemAccess2 imple
 
 		OutputConfiguration outputConfig = getOutputConfig(outputName);
 
-		IContainer container = efsHelper.getContainer(outputConfig, getProject());
+		IContainer container = getContainer(outputConfig, getProject());
 
 		if (container == null || !container.exists()) {
 			if (outputConfig.isCreateOutputDirectory()) {
-				efsHelper.createContainer(container);
+				createContainer(container);
 
 			} else {
 				return;
 			}
 		}
 
-		IFile file = efsHelper.getFile(fileName, getOutputConfig(outputName), getProject());
+		IFile file = getFile(fileName, getOutputConfig(outputName), getProject());
 		CharSequence postProcessedContent = postProcess(fileName, outputName, contents);
 		String contentsAsString = postProcessedContent.toString();
 		if (file.exists()) {
 			if (outputConfig.isOverrideExistingResources()) {
 				try {
-					StringInputStream newContent = efsHelper.getInputStream(contentsAsString,
-							efsHelper.getEncoding(file));
-					if (efsHelper.hasContentsChanged(file, newContent)) {
+					StringInputStream newContent = getInputStream(contentsAsString, getEncoding(file));
+					if (hasContentsChanged(file, newContent)) {
 						newContent.reset();
 						file.setContents(newContent, true, true, null);
 						if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
-							efsHelper.setDerived(file, outputConfig.isSetDerivedProperty());
+							setDerived(file, outputConfig.isSetDerivedProperty());
 						}
 					}
 				} catch (CoreException e) {
@@ -146,10 +296,10 @@ public class EFSResourceFileSystemAccess extends AbstractFileSystemAccess2 imple
 			}
 		} else {
 			try {
-				efsHelper.ensureParentExists(file);
-				file.create(efsHelper.getInputStream(contentsAsString, efsHelper.getEncoding(file)), true, null);
+				ensureParentExists(file);
+				file.create(getInputStream(contentsAsString, getEncoding(file)), true, null);
 				if (outputConfig.isSetDerivedProperty()) {
-					efsHelper.setDerived(file, true);
+					setDerived(file, true);
 				}
 			} catch (CoreException e) {
 				throw new RuntimeException(e);
@@ -205,7 +355,7 @@ public class EFSResourceFileSystemAccess extends AbstractFileSystemAccess2 imple
 	public URI getURI(String path, String outputConfiguration) {
 		OutputConfiguration outputConfig = getOutputConfig(outputConfiguration);
 		String outputDir = outputConfig.getOutputDirectory();
-		if (efsHelper.isRootPath(outputDir) && efsHelper.isRootPath(path)) {
+		if (isRootPath(outputDir) && isRootPath(path)) {
 			return URI.createFileURI(getProject().getLocationURI().getPath());
 		}
 		IFile file = getProject().getFile(outputDir + File.separator + path);
