@@ -8,39 +8,44 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.core.library;
+package org.yakindu.sct.generator.core.library.impl;
 
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.DEBUG_FEATURE;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.DEBUG_FEATURE_DUMP_SEXEC;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_API_TARGET_FOLDER;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_TARGET_FOLDER;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_TARGET_PROJECT;
 
 import org.eclipse.core.runtime.Path;
-import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 /**
  * @author Johannes Dicks - Initial contribution and API
  */
-public class OutletFeatureHelperImpl implements IOutletFeatureHelper {
+public class DefaultCoreLibraryHelper implements ICoreLibraryHelper {
 
 	@Override
 	public FeatureParameterValue getTargetFolderValue(GeneratorEntry entry) {
-		return entry.getFeatureParameterValue(OUTLET_FEATURE, ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER);
+		return entry.getFeatureParameterValue(OUTLET_FEATURE, OUTLET_FEATURE_TARGET_FOLDER);
 	}
 
 	@Override
 	public FeatureParameterValue getLibraryTargetFolderValue(GeneratorEntry entry) {
-		return entry.getFeatureParameterValue(OUTLET_FEATURE,
-				ICoreFeatureConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER);
+		return entry.getFeatureParameterValue(OUTLET_FEATURE, OUTLET_FEATURE_LIBRARY_TARGET_FOLDER);
 	}
 
 	@Override
 	public FeatureParameterValue getApiTargetFolderValue(GeneratorEntry entry) {
-		return entry.getFeatureParameterValue(OUTLET_FEATURE, ICoreFeatureConstants.OUTLET_FEATURE_API_TARGET_FOLDER);
+		return entry.getFeatureParameterValue(OUTLET_FEATURE, OUTLET_FEATURE_API_TARGET_FOLDER);
 	}
 
 	@Override
 	public FeatureParameterValue getTargetProjectValue(GeneratorEntry entry) {
-		return entry.getFeatureParameterValue(OUTLET_FEATURE, ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT);
+		return entry.getFeatureParameterValue(OUTLET_FEATURE, OUTLET_FEATURE_TARGET_PROJECT);
 	}
 
 	@Override
@@ -62,5 +67,14 @@ public class OutletFeatureHelperImpl implements IOutletFeatureHelper {
 		String projectFolderName = getTargetProjectValue(entry).getStringValue();
 		String apiFolderName = getApiTargetFolderValue(entry).getStringValue();
 		return projectFolderName + Path.SEPARATOR + apiFolderName;
+	}
+
+	@Override
+	public boolean isDumpSexec(GeneratorEntry entry) {
+		FeatureParameterValue dumpSexec = entry.getFeatureParameterValue(DEBUG_FEATURE, DEBUG_FEATURE_DUMP_SEXEC);
+		if (dumpSexec == null) {
+			return false;
+		}
+		return dumpSexec.getBooleanValue();
 	}
 }

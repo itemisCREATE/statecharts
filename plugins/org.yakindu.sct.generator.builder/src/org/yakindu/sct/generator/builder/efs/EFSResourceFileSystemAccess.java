@@ -10,6 +10,8 @@
 */
 package org.yakindu.sct.generator.builder.efs;
 
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_TARGET_PROJECT;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -33,9 +35,8 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
-import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
-import org.yakindu.sct.generator.core.library.IOutletFeatureHelper;
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.inject.Inject;
@@ -49,7 +50,7 @@ public class EFSResourceFileSystemAccess extends AbstractFileSystemAccess2 imple
 
 	private IProject project;
 	@Inject
-	IOutletFeatureHelper outletFeatureHelper;
+	ICoreLibraryHelper outletFeatureHelper;
 
 	public void refreshTargetProject(GeneratorEntry entry) {
 		if (Platform.isRunning()) {
@@ -207,7 +208,7 @@ public class EFSResourceFileSystemAccess extends AbstractFileSystemAccess2 imple
 	}
 
 	protected boolean trySetTargetProject(String outputName, String path) {
-		if (outputName.equals(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT)) {
+		if (outputName.equals(OUTLET_FEATURE_TARGET_PROJECT)) {
 			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(path);
 			if (!project.exists()) {
 				createProject(project);

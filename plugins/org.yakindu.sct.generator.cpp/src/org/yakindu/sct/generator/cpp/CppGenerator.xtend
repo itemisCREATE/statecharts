@@ -16,9 +16,9 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.c.GenArtifactConfigurations.GenArtifactConfiguration
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
-import org.yakindu.sct.generator.core.library.IOutletFeatureHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 
 /**
  * This is the CPP code generators main class. 
@@ -35,7 +35,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineImplementation statemachineSourceContent
 	@Inject extension Navigation
 	@Inject extension Naming
-	@Inject extension IOutletFeatureHelper
+	@Inject extension ICoreLibraryHelper
 	
 	@Inject @Named(IGenArtifactConfigurations.DEFAULT)
 	IGenArtifactConfigurations defaultConfigs

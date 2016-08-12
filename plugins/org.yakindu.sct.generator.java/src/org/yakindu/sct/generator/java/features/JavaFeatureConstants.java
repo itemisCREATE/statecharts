@@ -10,62 +10,63 @@
  */
 package org.yakindu.sct.generator.java.features;
 
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICENSE_HEADER;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICENSE_TEXT;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.LICENSE_HEADER;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.LICENSE_TEXT;
+
 /**
  * 
  * @author muehlbrandt
  */
 public final class JavaFeatureConstants implements IJavaFeatureConstants {
-	
+
 	public static final String getNamingFeature() {
 		return NAMING_FEATURE;
 	}
-	
+
 	public static final String getBasePackage() {
 		return BASE_PACKAGE;
 	}
-	
+
 	public static final String getImplementationSuffix() {
 		return IMPLEMENTATION_SUFFIX;
 	}
-		
+
 	public static final String getLicenseHeader() {
 		return LICENSE_HEADER;
 	}
-	
+
 	public static final String getLicenseText() {
 		return LICENSE_TEXT;
 	}
-	
+
 	public static final String getGeneralFeature() {
 		return GENERAL_FEATURES;
 	}
-	
+
 	public static final String getEventBasedStatemachine() {
 		return CREATE_EVENTBASEDSTATEMACHINE;
 	}
-	
+
 	public static final String getRuntimeService() {
 		return RUNTIME_SERVICE;
 	}
-	
+
 	public static final String getTimerService() {
 		return TIMER_SERVICE;
 	}
-	
+
 	public static final String getInterfaceObserverSupport() {
 		return INTERFACE_OBSERVER_SUPPORT;
 	}
-	
+
 	public static final String getGenericInterfaceSupport() {
 		return GENERIC_INTERFACE_SUPPORT;
 	}
-	
+
 	public static final String getStatemachineFactorySupport() {
 		return STATEMACHINE_FACTORY_SUPPORT;
 	}
-	
+
 	public static final String getUseJavaIntForInteger() {
 		return USE_JAVA_INT_FOR_INTEGER;
 	}

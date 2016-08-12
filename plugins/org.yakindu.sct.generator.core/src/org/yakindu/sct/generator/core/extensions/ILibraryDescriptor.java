@@ -1,7 +1,7 @@
 package org.yakindu.sct.generator.core.extensions;
 
 import org.eclipse.emf.common.util.URI;
-import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
+import org.yakindu.sct.generator.core.library.IDefaultFeatureValueProvider;
 
 public interface ILibraryDescriptor {
 

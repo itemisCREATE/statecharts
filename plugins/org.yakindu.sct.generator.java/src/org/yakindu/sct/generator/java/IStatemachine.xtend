@@ -15,7 +15,7 @@ import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
-import org.yakindu.sct.generator.core.library.IOutletFeatureHelper
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 
 class IStatemachine {
 	
@@ -25,7 +25,7 @@ class IStatemachine {
 	@Inject
 	extension GenmodelEntries
 	
-	@Inject IOutletFeatureHelper outletFeatureHelper
+	@Inject ICoreLibraryHelper outletFeatureHelper
 	 
 	def generateIStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null) {

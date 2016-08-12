@@ -8,22 +8,17 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.core.features.impl;
-
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LIBRARY_NAME;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICENSE_TEXT;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_API_TARGET_FOLDER;
+package org.yakindu.sct.generator.core.library.impl;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
+import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider;
+import org.yakindu.sct.model.sgen.BoolLiteral;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.*;
 
 /**
  * 
@@ -48,6 +43,8 @@ public class CoreLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatu
 			parameterValue.setValue(getProject(contextElement).getName());
 		} else if (LICENSE_TEXT.equals(parameterName)) {
 			parameterValue.setValue("Enter license text here");
+		} else if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)) {
+			parameterValue.setValue(false);
 		}
 	}
 
@@ -68,6 +65,10 @@ public class CoreLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatu
 				return warning(String.format("The Folder %s does not exist in Project %s",
 						parameterValue.getExpression(), targetProjectName));
 			}
+		}
+		if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)
+				&& !(parameterValue.getExpression() instanceof BoolLiteral)) {
+			return error("Illegal Value. Must be 'true' or 'false'");
 		}
 		return Status.OK_STATUS;
 	}

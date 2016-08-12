@@ -34,7 +34,7 @@ public class JavaCodeGenerator extends AbstractJavaCodeGenerator {
 
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
 
-		if (debugFeatureHelper.isDumpSexec(entry)) {
+		if (coreFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
 

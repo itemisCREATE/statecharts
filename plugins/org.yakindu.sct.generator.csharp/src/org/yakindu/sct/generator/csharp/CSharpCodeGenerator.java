@@ -9,8 +9,6 @@
  */
 package org.yakindu.sct.generator.csharp;
 
-import org.yakindu.sct.generator.csharp.CSharpNamingService;
-import org.yakindu.sct.generator.csharp.CSharpGenerator;
 import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.csharp.types.CSharpTypeSystemAccess;
@@ -33,7 +31,7 @@ public class CSharpCodeGenerator extends GenericJavaBasedGenerator {
 	@Override
 	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
-		if (debugFeatureHelper.isDumpSexec(entry)) {
+		if (coreFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
 		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess());

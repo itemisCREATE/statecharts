@@ -80,7 +80,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 		if (context.findDefinition(templatePath, targetType, paramTypes) != null) {
 			generatorFound = true;
 			ExecutionFlow flow = createExecutionFlow(statechart, entry);
-			if (debugFeatureHelper.isDumpSexec(entry)) {
+			if (coreFeatureHelper.isDumpSexec(entry)) {
 				dumpSexec(entry, flow);
 			}
 			facade.evaluate(templatePath, flow, entry);
@@ -113,7 +113,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 	}
 
 	protected Output createOutput(GeneratorEntry entry) {
-		String outputPath = outletFeatureHelper.getRelativeTargetFolder(entry);
+		String outputPath = coreFeatureHelper.getRelativeTargetFolder(entry);
 
 		String absoluteTargetFolder = sctFsa.getURI(outputPath).toFileString();
 
@@ -126,7 +126,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 		targetFolderOutlet.setOverwrite(true);
 		output.addOutlet(targetFolderOutlet);
 
-		String relativeLibraryTargetFolder = outletFeatureHelper.getRelativeLibraryFolder(entry);
+		String relativeLibraryTargetFolder = coreFeatureHelper.getRelativeLibraryFolder(entry);
 
 		String absoluteLibraryTargetFolder = sctFsa.getURI(relativeLibraryTargetFolder).toFileString();
 

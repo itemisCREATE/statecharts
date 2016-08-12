@@ -17,8 +17,8 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJavaModelMarker;
-import org.yakindu.sct.generator.core.library.IOutletFeatureHelper;
-import org.yakindu.sct.generator.core.library.OutletFeatureHelperImpl;
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
+import org.yakindu.sct.generator.core.library.impl.DefaultCoreLibraryHelper;
 import org.yakindu.sct.generator.csharp.CSharpCodeGenerator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
@@ -42,7 +42,7 @@ public abstract class AbstractCSharpGeneratorTest {
 	private static final String CONTENT_TYPE = "statechart";
 	private static final String OUTLET_FEATURE = "Outlet";
 	private static final String TARGET_FOLDER = "targetFolder";
-	private static final IOutletFeatureHelper outletFeatureConfigurationHelper = new OutletFeatureHelperImpl();
+	private static final ICoreLibraryHelper outletFeatureConfigurationHelper = new DefaultCoreLibraryHelper();
 
 	@Inject
 	protected CSharpCodeGenerator generator;

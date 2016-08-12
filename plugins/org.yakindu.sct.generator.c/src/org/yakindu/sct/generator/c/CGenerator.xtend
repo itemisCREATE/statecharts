@@ -16,8 +16,8 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.core.library.IOutletFeatureHelper
 import org.yakindu.sct.generator.c.GenArtifactConfigurations.GenArtifactConfiguration
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 
 /**
  * This is the C code generators main class. 
@@ -33,7 +33,7 @@ class CGenerator implements IExecutionFlowGenerator {
 	@Inject extension Navigation
 	@Inject extension GenmodelEntries
 	@Inject extension Naming
-	@Inject extension IOutletFeatureHelper
+	@Inject extension ICoreLibraryHelper
 
 	@Inject @Named(IGenArtifactConfigurations.DEFAULT)
 	IGenArtifactConfigurations defaultConfigs

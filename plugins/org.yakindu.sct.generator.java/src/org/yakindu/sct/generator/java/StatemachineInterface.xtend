@@ -23,8 +23,8 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.generator.core.library.IOutletFeatureHelper
 import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 
 class StatemachineInterface {
 
@@ -37,7 +37,7 @@ class StatemachineInterface {
 	@Inject extension ExpressionCode
 	@Inject Beautifier beautifier
 	
-	@Inject IOutletFeatureHelper outletFeatureHelper
+	@Inject ICoreLibraryHelper outletFeatureHelper
 
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineInterfaceName.java

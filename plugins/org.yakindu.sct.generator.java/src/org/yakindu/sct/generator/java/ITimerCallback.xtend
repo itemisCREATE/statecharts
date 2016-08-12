@@ -14,7 +14,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.generator.core.library.IOutletFeatureHelper
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 
 class ITimerCallback {
 
@@ -24,7 +24,7 @@ class ITimerCallback {
 	@Inject
 	extension GenmodelEntries
 	
-	@Inject IOutletFeatureHelper outletFeatureHelper
+	@Inject ICoreLibraryHelper outletFeatureHelper
 
 	def generateITimerCallback(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null) {

@@ -10,11 +10,11 @@
  */
 package org.yakindu.sct.generator.java;
 
-import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
 import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.*;
 
 abstract public class AbstractJavaCodeGenerator extends GenericJavaBasedGenerator {
 
@@ -26,9 +26,8 @@ abstract public class AbstractJavaCodeGenerator extends GenericJavaBasedGenerato
 	}
 
 	public String getTargetFolderString(GeneratorEntry entry) {
-		FeatureConfiguration outletConfig = entry.getFeatureConfiguration(ICoreFeatureConstants.OUTLET_FEATURE);
-		String projectName = outletConfig.getParameterValue(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER)
-				.getStringValue();
+		FeatureConfiguration outletConfig = entry.getFeatureConfiguration(OUTLET_FEATURE);
+		String projectName = outletConfig.getParameterValue(OUTLET_FEATURE_TARGET_FOLDER).getStringValue();
 		return projectName;
 	}
 }

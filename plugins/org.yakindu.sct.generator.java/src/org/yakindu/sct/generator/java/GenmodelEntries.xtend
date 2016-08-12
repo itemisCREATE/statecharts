@@ -10,18 +10,19 @@
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.core.features.ICoreFeatureConstants
 import org.yakindu.sct.generator.java.features.IJavaFeatureConstants
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.FeatureParameterValue
 import org.yakindu.sct.model.sgen.GeneratorEntry
+
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.*
 
 class GenmodelEntries {
 
 	@Inject extension Naming
 
 	def private getLicenseFeature(GeneratorEntry it) {
-		getFeatureConfiguration(ICoreFeatureConstants::LICENSE_HEADER)
+		getFeatureConfiguration(LICENSE_HEADER)
 	}
 
 	def private getNamingFeature(GeneratorEntry it) {
@@ -41,7 +42,7 @@ class GenmodelEntries {
 	}
 
 	def private FeatureParameterValue getLicenseTextParameter(GeneratorEntry it) {
-		licenseFeature?.getParameterValue(ICoreFeatureConstants::LICENSE_TEXT)
+		licenseFeature?.getParameterValue(LICENSE_TEXT)
 	}
 
 	def private FeatureParameterValue getTimerServiceParameter(GeneratorEntry it) {

@@ -11,19 +11,21 @@
  */
 package org.yakindu.sct.generator.core.library;
 
+import org.yakindu.sct.generator.core.library.impl.DefaultCoreLibraryHelper;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.inject.ImplementedBy;
 
 /**
- * Provides convenience access to SGen outlet features.
+ * Provides convenience access to SGen core library features.
  * 
  * @author Johannes Dicks - Initial contribution and API
  *
  */
-@ImplementedBy(OutletFeatureHelperImpl.class)
-public interface IOutletFeatureHelper {
+@ImplementedBy(DefaultCoreLibraryHelper.class)
+public interface ICoreLibraryHelper {
+	
 	/**
 	 * The targetFolder value defined in SGen.
 	 * @param entry
@@ -66,4 +68,6 @@ public interface IOutletFeatureHelper {
 	 * @return a string representing the relative output path 'targetProject/apiTargetFolder'
 	 */
 	String getRelativeApiFolder(GeneratorEntry entry);
+
+	boolean isDumpSexec(GeneratorEntry entry);
 }

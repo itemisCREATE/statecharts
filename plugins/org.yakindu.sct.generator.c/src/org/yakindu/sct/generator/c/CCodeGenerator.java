@@ -60,7 +60,7 @@ public class CCodeGenerator extends GenericJavaBasedGenerator {
 	@Override
 	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
-		if (debugFeatureHelper.isDumpSexec(entry)) {
+		if (coreFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
 		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess(), artifactConfigs);
