@@ -25,8 +25,6 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.EcoreUtil2;
 import org.osgi.framework.Bundle;
 import org.yakindu.base.base.BasePackage;
@@ -58,7 +56,7 @@ public class DomainRegistry {
 
 		private final IConfigurationElement configElement;
 
-		private Image image;
+		private URL image;
 
 		private IDomainInjectorProvider injectorProvider;
 
@@ -95,17 +93,14 @@ public class DomainRegistry {
 		}
 
 		@Override
-		public Image getImage() {
+		public URL getImagePath() {
 			if (image != null)
 				return image;
 			String path = configElement.getAttribute(IMAGE);
 			if (path == null)
 				return null;
-
 			Bundle extensionBundle = Platform.getBundle(configElement.getContributor().getName());
-			URL entry = extensionBundle.getEntry(path);
-			ImageDescriptor descriptor = ImageDescriptor.createFromURL(entry);
-			image = descriptor.createImage();
+			image = extensionBundle.getEntry(path);
 			return image;
 		}
 	}

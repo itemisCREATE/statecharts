@@ -17,6 +17,8 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
@@ -26,12 +28,14 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomainDescriptor;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 
 /**
  * 
@@ -90,9 +94,18 @@ public class DomainWizardPage extends WizardPage {
 			public void selectionChanged(SelectionChangedEvent event) {
 				IDomainDescriptor domain = unwrap(event.getSelection());
 				description.setText(domain.getDescription());
-				image.setImage(domain.getImage());
+				image.setImage(asImage(domain));
 				domainSelectionGroup.layout();
 
+			}
+
+			private Image asImage(IDomainDescriptor domain) {
+				ImageRegistry imageRegistry = DiagramActivator.getDefault().getImageRegistry();
+				Image image = imageRegistry.get(domain.getImagePath().toString());
+				if (image == null)
+					imageRegistry.put(domain.getImagePath().toString(),
+							ImageDescriptor.createFromURL(domain.getImagePath()).createImage());
+				return imageRegistry.get(domain.getImagePath().toString());
 			}
 
 		});
@@ -127,3 +140,4 @@ public class DomainWizardPage extends WizardPage {
 	}
 
 }
+

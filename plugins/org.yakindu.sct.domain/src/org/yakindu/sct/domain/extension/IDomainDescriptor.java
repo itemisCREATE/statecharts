@@ -1,6 +1,6 @@
 package org.yakindu.sct.domain.extension;
 
-import org.eclipse.swt.graphics.Image;
+import java.net.URL;
 
 public interface IDomainDescriptor {
 
@@ -12,6 +12,6 @@ public interface IDomainDescriptor {
 
 	IDomainInjectorProvider getDomainInjectorProvider();
 
-	Image getImage();
+	URL getImagePath();
 
 }
