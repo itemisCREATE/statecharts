@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.builder.nature;
+package org.yakindu.sct.generator.builder.action;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -24,6 +24,7 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.commands.IElementUpdater;
 import org.eclipse.ui.menus.UIElement;
+import org.yakindu.sct.generator.builder.nature.SCTNature;
 /**
  * 
  * @author andreas muelder - Initial contribution and API

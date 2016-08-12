@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
  * @author holger willebrandt - Initial contribution and API
  * @author Johannes Dicks - refactored because of EFS decoupling
  */ 
+@Deprecated
 public abstract class AbstractWorkspaceGenerator extends AbstractSExecModelGenerator {
 	
 	/**

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<extension
+         id="org.yakindu.sct.builder.SCTBuilder"
+         name="YAKINDU SCT Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder hasNature="true">
+         <run  class="org.yakindu.sct.generator.builder.SCTBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.core.resources.natures"
+         id="org.yakindu.sct.builder.SCTNature"
+         name="YAKINDU SCT Project Nature">
+      <runtime>
+         <run class="org.yakindu.sct.generator.builder.nature.SCTNature">
+         </run>
+      </runtime>
+      <builder
+            id="org.yakindu.sct.builder.SCTBuilder">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="org.yakindu.sct.builder.addNature">
+         <action
+               label="Add YAKINDU SCT Nature"
+               class="org.yakindu.sct.generator.builder.action.ToggleSCTNatureAction"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
+               enablesFor="+"
+               id="org.yakindu.sct.builder.addRemoveNatureAction">
+         </action>
+           <visibility>
+         	<not>
+	            <objectState
+    	              name="nature"
+        	          value="org.yakindu.sct.builder.SCTNature">
+            	</objectState>
+            </not>
+         </visibility>
+      </objectContribution>
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="org.yakindu.sct.builder.removeNature">
+         <action
+               label="Remove YAKINDU SCT Nature"
+               class="org.yakindu.sct.generator.builder.action.ToggleSCTNatureAction"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
+               enablesFor="+"
+               id="org.yakindu.sct.builder.addRemoveNatureAction">
+         </action>
+           <visibility>
+	            <objectState
+    	              name="nature"
+        	          value="org.yakindu.sct.builder.SCTNature">
+            	</objectState>
+         </visibility>
+      </objectContribution>
+   </extension>
+     <extension
+       point="org.eclipse.core.runtime.preferences">
+    	<initializer class="org.yakindu.sct.generator.core.preferences.GenModelPreferenceInitializer">
+    	</initializer>
+ 	</extension>
+ 	  <extension point = "org.eclipse.ui.popupMenus">
+     <objectContribution
+        id="org.yakindu.sct.builder.generate"
+        objectClass="org.eclipse.core.resources.IFile"
+	    nameFilter="*.sgen">
+	    <action
+           class="org.yakindu.sct.generator.builder.action.GenerateModelAction"
+           enablesFor="1"
+           id="org.yakindu.sct.generator.ui.generateaction"
+           label="Generate Code Artifacts"
+           menubarPath="additions">
+	    </action>
+	 </objectContribution>
+	</extension>
+</plugin>

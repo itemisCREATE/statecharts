@@ -8,14 +8,14 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.builder.nature;
+package org.yakindu.sct.generator.builder.nature;
 
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
-import org.yakindu.sct.builder.SCTBuilder;
+import org.yakindu.sct.generator.builder.SCTBuilder;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
