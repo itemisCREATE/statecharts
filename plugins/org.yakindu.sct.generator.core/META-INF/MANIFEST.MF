@@ -13,6 +13,7 @@ Require-Bundle: org.yakindu.sct.model.sexec;visibility:=reexport,
  org.yakindu.sct.domain,
  com.google.guava,
  org.eclipse.emf.workspace,
+ org.eclipse.xtext.xbase,
  org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.core.runtime;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
