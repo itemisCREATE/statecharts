@@ -21,9 +21,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.util.Strings;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
+import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
+import org.yakindu.sct.generator.core.ISGraphGenerator;
 import org.yakindu.sct.generator.core.impl.AbstractSExecModelGenerator;
-import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator;
-import org.yakindu.sct.generator.core.impl.ISGraphGenerator;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -112,7 +112,7 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 			}
 			if (delegate instanceof ISGraphGenerator) {
 				ISGraphGenerator graphGenerator = (ISGraphGenerator) delegate;
-				graphGenerator.generate(statechart, entry);
+				graphGenerator.generate(statechart, entry, sctFsa.getIFileSystemAccess());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

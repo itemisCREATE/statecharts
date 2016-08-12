@@ -13,11 +13,12 @@ package org.yakindu.sct.generator.c
 import com.google.inject.Inject
 import com.google.inject.name.Named
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
+import org.yakindu.sct.generator.c.GenArtifactConfigurations.GenArtifactConfiguration
+import org.yakindu.sct.generator.core.IExecutionFlowGenerator
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.c.GenArtifactConfigurations.GenArtifactConfiguration
-import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
+import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*;
 
 /**
  * This is the C code generators main class. 
@@ -68,22 +69,22 @@ class CGenerator implements IExecutionFlowGenerator {
 	
 	def protected getHeaderOutput(GeneratorEntry entry) {
 		if (entry.apiTargetFolderValue != null) {
-			IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT
+			API_TARGET_FOLDER_OUTPUT
 		} else {
-			IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT
+			TARGET_FOLDER_OUTPUT
 		}
 	}
 
 	def protected getLibraryOutput(GeneratorEntry entry) {
 		if (entry.libraryTargetFolderValue != null) {
-			IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT
+			LIBRARY_TARGET_FOLDER_OUTPUT
 		} else {
 			entry.headerOutput
 		}
 	}
 	
 	def protected getSourceOutput(GeneratorEntry entry) {
-		IExecutionFlowGenerator.TARGET_FOLDER_OUTPUT
+		TARGET_FOLDER_OUTPUT
 	}
 	
 }

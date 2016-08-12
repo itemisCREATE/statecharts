@@ -8,11 +8,21 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.generator.core.impl;
+package org.yakindu.sct.generator.core;
 
+import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
+/**
+ * Basic interface for all CodeGenerators that are build for {@link Statechart}s
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
+
 public interface ISGraphGenerator {
-	abstract void generate(Statechart statechart, GeneratorEntry entry);
+
+	void generate(Statechart statechart, GeneratorEntry entry, IFileSystemAccess fsa);
+
 }

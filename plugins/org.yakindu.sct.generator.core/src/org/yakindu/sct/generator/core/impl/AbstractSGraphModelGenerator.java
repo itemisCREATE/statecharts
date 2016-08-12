@@ -11,12 +11,15 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
+import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.API_TARGET_FOLDER_OUTPUT;
+import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.LIBRARY_TARGET_FOLDER_OUTPUT;
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_TARGET_PROJECT;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.yakindu.sct.generator.core.ISCTGenerator;
+import org.yakindu.sct.generator.core.ISGraphGenerator;
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -33,7 +36,7 @@ import com.google.inject.util.Modules;
  * abstract base class for all code generators that want to generate code based
  * on the {@link ExecutionFlow}
  * 
- * @author Andreas Mülder - Initial contribution and API
+ * @author Andreas MÃ¼lder - Initial contribution and API
  * @author Johannes Dicks - decouple EFS
  * 
  */
@@ -49,7 +52,7 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	protected void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		if (this instanceof ISGraphGenerator) {
 			ISGraphGenerator graphGenerator = (ISGraphGenerator) this;
-			graphGenerator.generate(statechart, entry);
+			graphGenerator.generate(statechart, entry, sctFsa.getIFileSystemAccess());
 		}
 	}
 
@@ -193,12 +196,12 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	protected void initLibraryTargetFolder(GeneratorEntry entry) {
 		FeatureParameterValue libraryTargetFolderValue = coreFeatureHelper.getLibraryTargetFolderValue(entry);
 		if (libraryTargetFolderValue != null) {
-			sctFsa.setOutputPath(IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT,
+			sctFsa.setOutputPath(LIBRARY_TARGET_FOLDER_OUTPUT,
 					libraryTargetFolderValue.getStringValue());
 		}
 
 		OutputConfiguration librarytargetFolderOutputConfiguration = sctFsa.getOutputConfigurations()
-				.get(IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT);
+				.get(LIBRARY_TARGET_FOLDER_OUTPUT);
 		if (librarytargetFolderOutputConfiguration != null) {
 			librarytargetFolderOutputConfiguration.setCreateOutputDirectory(true);
 			// do not overwrite existing resources and ensure the folder is not
@@ -211,11 +214,11 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	protected void initApiTargetFolder(GeneratorEntry entry) {
 		FeatureParameterValue apiTargetFolderValue = coreFeatureHelper.getApiTargetFolderValue(entry);
 		if (apiTargetFolderValue != null) {
-			sctFsa.setOutputPath(IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT,
+			sctFsa.setOutputPath(API_TARGET_FOLDER_OUTPUT,
 					apiTargetFolderValue.getStringValue());
 		}
 		OutputConfiguration apiTargetFolderOutputConfiguration = sctFsa.getOutputConfigurations()
-				.get(IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT);
+				.get(API_TARGET_FOLDER_OUTPUT);
 		if (apiTargetFolderOutputConfiguration != null) {
 			apiTargetFolderOutputConfiguration.setCreateOutputDirectory(true);
 		}

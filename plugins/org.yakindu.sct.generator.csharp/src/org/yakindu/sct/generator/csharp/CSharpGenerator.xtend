@@ -11,7 +11,7 @@ package org.yakindu.sct.generator.csharp
 
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
+import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 

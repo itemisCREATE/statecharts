@@ -30,7 +30,12 @@ import org.eclipse.xtext.generator.OutputConfiguration;
  *
  */
 public interface ISCTFileSystemAccess {
-
+	
+	String TARGET_FOLDER_OUTPUT = IFileSystemAccess.DEFAULT_OUTPUT;
+	String LIBRARY_TARGET_FOLDER_OUTPUT = "LIBRARY_TARGET_FOLDER";
+	String API_TARGET_FOLDER_OUTPUT = "API_TARGET_FOLDER";
+	
+	
 	/**
 	 * Provides an absolute URI for further processing.
 	 * 

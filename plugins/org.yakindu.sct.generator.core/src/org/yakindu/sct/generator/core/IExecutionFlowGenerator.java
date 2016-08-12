@@ -8,17 +8,20 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.generator.core.impl;
+package org.yakindu.sct.generator.core;
 
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
+/**
+ * Basic interface for all CodeGenerators that are built on top of the
+ * {@link ExecutionFlow}
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public interface IExecutionFlowGenerator {
-
-	String TARGET_FOLDER_OUTPUT = IFileSystemAccess.DEFAULT_OUTPUT;
-	String LIBRARY_TARGET_FOLDER_OUTPUT = "LIBRARY_TARGET_FOLDER";
-	String API_TARGET_FOLDER_OUTPUT = "API_TARGET_FOLDER";
 
 	/**
 	 * 
