@@ -48,6 +48,18 @@ create_grammar_image transition-overview \
     reactiontrigger \
     defaulttrigger \
 
+# Transition: event trigger + guard
+create_grammar_image transition-eventtrigger \
+    transitionreaction \
+    stexttrigger \
+    reactiontrigger \
+    defaulttrigger
+
+# Transition: effect
+create_grammar_image transition-effect \
+    reactioneffect \
+    eventraisingexpression
+
 # Transition: detailed
 create_grammar_image transition-detailed \
     transitionspecification \
