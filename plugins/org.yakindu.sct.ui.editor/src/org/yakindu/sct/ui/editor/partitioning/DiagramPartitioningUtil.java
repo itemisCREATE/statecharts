@@ -28,7 +28,6 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.diagram.core.DiagramEditingDomainFactory;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
-import org.eclipse.gmf.runtime.emf.core.resources.GMFResource;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
@@ -46,6 +45,7 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
@@ -107,7 +107,7 @@ public class DiagramPartitioningUtil {
 					return true;
 				}
 				public boolean handleResourceChanged(Resource resource) {
-					if (resource instanceof GMFResource) {
+					if (resource instanceof AbstractSCTResource) {
 						// do not unload GMF resources as it might be the one
 						// underlying the currently opened editor
 						return true;

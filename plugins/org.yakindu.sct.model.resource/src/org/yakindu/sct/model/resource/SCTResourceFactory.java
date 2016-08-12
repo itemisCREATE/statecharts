@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.gmf.runtime.emf.core.resources.GMFResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomainDescriptor;
 
@@ -32,7 +32,7 @@ public class SCTResourceFactory extends XMIResourceFactoryImpl {
 
 		// if file is not existing, AND no generic/default domain is available, resource creation will fail
 		if (!URIConverter.INSTANCE.exists(uri, null)) {
-			return new GMFResource(uri);
+			return new XMIResourceImpl(uri);
 		}
 
 		String determinedDomainID = DomainRegistry.determineDomainID(uri);
