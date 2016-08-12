@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.core.features;
+package org.yakindu.sct.generator.xpand.features;
 
 /**
  * 

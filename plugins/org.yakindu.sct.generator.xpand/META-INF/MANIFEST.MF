@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: YAKINDU Xpand Generator
+Bundle-SymbolicName: org.yakindu.sct.generator.xpand;singleton:=true
+Bundle-Version: 2.7.1.qualifier
+Bundle-Vendor: statecharts.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.yakindu.sct.generator.core,
+ org.yakindu.sct.generator.genmodel,
+ org.yakindu.sct.commons

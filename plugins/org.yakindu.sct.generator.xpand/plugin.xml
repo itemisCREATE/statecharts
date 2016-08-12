@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+ <extension
+         point="org.yakindu.sct.generator.core.featuretypes">
+      <FeatureLibrary
+            library_id="org.yakindu.generator.core.features.xpand"
+            defaultProvider="org.yakindu.sct.generator.core.features.impl.XpandLibraryDefaultFeatureValueProvider"
+            uri="platform:/plugin/org.yakindu.sct.generator.core/library/XpandFeatureTypeLibrary.xmi">
+      </FeatureLibrary>
+ </extension>
+ <extension
+       point="org.yakindu.sct.generator.core.generator">
+    <SCTGenerator
+          class="org.yakindu.sct.generator.xpand.GenericXPandCodeGenerator"
+          contentType="statechart"
+          description="Generate Code using Xpand Templates"
+          elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+          icon="icons/sct.png"
+          id="yakindu::xpand"
+          name="Custom Xpand-based Generator">
+       <FeatureLibrary
+             library_id="org.yakindu.generator.core.features">
+       </FeatureLibrary>
+       <FeatureLibrary
+             library_id="org.yakindu.generator.core.features.xpand">
+       </FeatureLibrary>
+    </SCTGenerator>
+ </extension>
+    <extension
+         point="org.yakindu.sct.generator.core.extensions">
+      <ExtensionGeneratorMapping
+            fileExtension="sct"
+            generatorId="yakindu::xpand">
+      </ExtensionGeneratorMapping>
+   </extension>
+</plugin>

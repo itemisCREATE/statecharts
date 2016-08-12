@@ -8,11 +8,11 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.core.features.impl;
+package org.yakindu.sct.generator.xpand.features;
 
-import static org.yakindu.sct.generator.core.features.IXpandFeatureConstants.LIBRARY_NAME;
-import static org.yakindu.sct.generator.core.features.IXpandFeatureConstants.TEMPLATE_FEATURE_TEMPLATE_PATH;
-import static org.yakindu.sct.generator.core.features.IXpandFeatureConstants.TEMPLATE_FEATURE_TEMPLATE_PROJECT;
+import static org.yakindu.sct.generator.xpand.features.IXpandFeatureConstants.LIBRARY_NAME;
+import static org.yakindu.sct.generator.xpand.features.IXpandFeatureConstants.TEMPLATE_FEATURE_TEMPLATE_PATH;
+import static org.yakindu.sct.generator.xpand.features.IXpandFeatureConstants.TEMPLATE_FEATURE_TEMPLATE_PROJECT;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;

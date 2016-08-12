@@ -8,11 +8,11 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.core.impl;
+package org.yakindu.sct.generator.xpand;
 
-import static org.yakindu.sct.generator.core.features.IXpandFeatureConstants.TEMPLATE_FEATURE;
-import static org.yakindu.sct.generator.core.features.IXpandFeatureConstants.TEMPLATE_FEATURE_TEMPLATE_PATH;
-import static org.yakindu.sct.generator.core.features.IXpandFeatureConstants.TEMPLATE_FEATURE_TEMPLATE_PROJECT;
+import static org.yakindu.sct.generator.xpand.features.IXpandFeatureConstants.TEMPLATE_FEATURE;
+import static org.yakindu.sct.generator.xpand.features.IXpandFeatureConstants.TEMPLATE_FEATURE_TEMPLATE_PATH;
+import static org.yakindu.sct.generator.xpand.features.IXpandFeatureConstants.TEMPLATE_FEATURE_TEMPLATE_PROJECT;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -22,6 +22,7 @@ import org.eclipse.emf.mwe.core.resources.ResourceLoader;
 import org.eclipse.emf.mwe.core.resources.ResourceLoaderFactory;
 import org.eclipse.emf.mwe.core.resources.ResourceLoaderImpl;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
+import org.yakindu.sct.generator.core.impl.AbstractXpandBasedCodeGenerator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
