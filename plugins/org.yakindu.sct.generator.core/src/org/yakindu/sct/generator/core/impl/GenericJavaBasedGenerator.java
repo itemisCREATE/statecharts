@@ -37,6 +37,7 @@ import com.google.inject.util.Modules;
  * 
  * @author holger willebrandt - Initial contribution and API
  */
+@Deprecated
 public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 
 	@Inject

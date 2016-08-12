@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.genmodel.ui.action;
+package org.yakindu.sct.generator.builder.action;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -30,11 +30,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
+import org.yakindu.sct.generator.builder.BuilderActivator;
+import org.yakindu.sct.generator.builder.GeneratorExecutor;
 import org.yakindu.sct.generator.core.GeneratorActivator;
-import org.yakindu.sct.generator.core.GeneratorExecutor;
-import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
-
-import com.google.inject.Inject;
 
 /**
  * 
@@ -45,8 +43,11 @@ public class GenerateModelAction implements IObjectActionDelegate {
 
 	private ISelection selection;
 
-	@Inject
 	private GeneratorExecutor generatorExecutor;
+	
+	public GenerateModelAction() {
+		generatorExecutor = new GeneratorExecutor();
+	}
 
 	public void run(IAction action) {
 		IFile file = unwrap();
@@ -71,9 +72,8 @@ public class GenerateModelAction implements IObjectActionDelegate {
 				}
 			}
 		} catch (CoreException e) {
-			SGenActivator.getInstance().getLog()
-					.log(new Status(IStatus.WARNING, SGenActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN,
-							"Error in determine, if file contains errors", e));
+			BuilderActivator.getDefault().getLog().log(new Status(IStatus.WARNING, BuilderActivator.PLUGIN_ID,
+					"Error in determine, if file contains errors", e));
 		}
 
 		ResourceSet rs = new ResourceSetImpl();
@@ -93,8 +93,8 @@ public class GenerateModelAction implements IObjectActionDelegate {
 				}
 			}
 		} catch (RuntimeException e) {
-			SGenActivator.getInstance().getLog().log(new Status(IStatus.INFO,
-					SGenActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN, "Error in opening Resource", e));
+			BuilderActivator.getDefault().getLog()
+					.log(new Status(IStatus.WARNING, BuilderActivator.PLUGIN_ID, "Error in opening resource", e));
 		}
 		return false;
 	}
