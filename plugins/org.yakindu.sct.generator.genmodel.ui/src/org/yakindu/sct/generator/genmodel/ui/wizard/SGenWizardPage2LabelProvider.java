@@ -22,6 +22,7 @@ import org.eclipse.ui.ide.IDE;
 import org.yakindu.sct.generator.core.extensions.FileExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
+import org.yakindu.sct.generator.genmodel.ui.PathToImageResolver;
 
 /**
  * 
@@ -39,7 +40,7 @@ class SGenWizardPage2LabelProvider extends LabelProvider {
 		} else if (element instanceof IFile) {
 			String generatorID = FileExtensions.getGeneratorForFileExtension(((IFile) element).getFileExtension());
 			IGeneratorDescriptor genDesc = GeneratorExtensions.getGeneratorDescriptor(generatorID);
-			return genDesc.getImage();
+			return PathToImageResolver.toImage(genDesc.getImagePath());
 		}
 		return super.getImage(element);
 	}

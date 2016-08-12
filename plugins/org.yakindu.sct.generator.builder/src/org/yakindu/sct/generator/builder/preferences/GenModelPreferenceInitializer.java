@@ -8,19 +8,18 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.core.preferences;
+package org.yakindu.sct.generator.builder.preferences;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.yakindu.sct.generator.builder.BuilderActivator;
 import org.yakindu.sct.generator.core.GeneratorActivator;
 
-public class GenModelPreferenceInitializer extends
-		AbstractPreferenceInitializer {
+public class GenModelPreferenceInitializer extends AbstractPreferenceInitializer {
 
 	@Override
 	public void initializeDefaultPreferences() {
-		IPreferenceStore store = GeneratorActivator.getDefault()
-				.getPreferenceStore();
+		IPreferenceStore store = BuilderActivator.getDefault().getPreferenceStore();
 		store.setDefault(GeneratorActivator.PREF_GENERATE_AUTOMATICALLY, true);
 	}
 

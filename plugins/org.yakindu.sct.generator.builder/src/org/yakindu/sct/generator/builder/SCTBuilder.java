@@ -109,8 +109,8 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	@Override
 	protected IProject[] build(int kind, @SuppressWarnings("rawtypes") Map args, IProgressMonitor monitor)
 			throws CoreException {
-		
-		IPreferenceStore store = GeneratorActivator.getDefault().getPreferenceStore();
+
+		IPreferenceStore store = BuilderActivator.getDefault().getPreferenceStore();
 		boolean generateAutomatical = store.getBoolean(GeneratorActivator.PREF_GENERATE_AUTOMATICALLY);
 
 		if (generateAutomatical) {
@@ -217,15 +217,15 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	}
 
 	protected void logGenmodelError(String resource) {
-		Status status = new Status(Status.ERROR, BUILDER_ID, String.format(
-				"Cannot execute Genmodel %s. The file contains errors.", resource));
-		Platform.getLog(GeneratorActivator.getDefault().getBundle()).log(status);
+		Status status = new Status(Status.ERROR, BUILDER_ID,
+				String.format("Cannot execute Genmodel %s. The file contains errors.", resource));
+		Platform.getLog(BuilderActivator.getDefault().getBundle()).log(status);
 	}
 
 	protected void logStatechartError(final String resource) {
-		Status status = new Status(Status.ERROR, BUILDER_ID, String.format(
-				"Cannot generate Code for Statechart %s. The file contains errors.", resource));
-		Platform.getLog(GeneratorActivator.getDefault().getBundle()).log(status);
+		Status status = new Status(Status.ERROR, BUILDER_ID,
+				String.format("Cannot generate Code for Statechart %s. The file contains errors.", resource));
+		Platform.getLog(BuilderActivator.getDefault().getBundle()).log(status);
 	}
 
 	private boolean isGenmodelForStatechart(IResource genmodelResource, final Statechart statechart) {
@@ -242,9 +242,8 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 		try {
 			emfResource = set.getResource(uri, true);
 		} catch (WrappedException e) {
-			Platform.getLog(GeneratorActivator.getDefault().getBundle()).log(
-					new Status(IStatus.WARNING, GeneratorActivator.PLUGIN_ID, "Resource " + uri
-							+ " can not be loaded by builder", e));
+			Platform.getLog(BuilderActivator.getDefault().getBundle()).log(new Status(IStatus.WARNING,
+					GeneratorActivator.PLUGIN_ID, "Resource " + uri + " can not be loaded by builder", e));
 			return null;
 		}
 		if (emfResource.getErrors().size() > 0 || emfResource.getContents().size() == 0)

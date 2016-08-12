@@ -11,11 +11,15 @@
  */
 package org.yakindu.sct.generator.core.extensions;
 
+import java.net.URL;
 import java.util.List;
 
-import org.eclipse.swt.graphics.Image;
 import org.yakindu.sct.generator.core.ISCTGenerator;
-
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public interface IGeneratorDescriptor {
 
 	ISCTGenerator createGenerator();
@@ -26,10 +30,7 @@ public interface IGeneratorDescriptor {
 
 	String getName();
 
-	/**
-	 * may return null!!
-	 */
-	Image getImage();
+	URL getImagePath();
 
 	String getContentType();
 

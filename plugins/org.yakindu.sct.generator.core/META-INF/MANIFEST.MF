@@ -5,21 +5,16 @@ Bundle-SymbolicName: org.yakindu.sct.generator.core;singleton:=true
 Bundle-Version: 2.7.1.qualifier
 Bundle-Activator: org.yakindu.sct.generator.core.GeneratorActivator
 Bundle-Vendor: statecharts.org
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime;visibility:=reexport,
- org.yakindu.sct.model.sexec;visibility:=reexport,
- org.eclipse.core.resources;visibility:=reexport,
+Require-Bundle: org.yakindu.sct.model.sexec;visibility:=reexport,
  org.yakindu.sct.model.stext,
- org.eclipse.jdt.core,
- org.eclipse.jdt.launching,
- org.eclipse.xtext.xbase,
  org.yakindu.sct.model.sgen,
  org.eclipse.core.expressions,
  org.yakindu.base.types,
- org.yakindu.sct.commons,
  org.yakindu.sct.domain,
  com.google.guava,
- org.eclipse.emf.workspace
+ org.eclipse.emf.workspace,
+ org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.core.runtime;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.generator.core,
