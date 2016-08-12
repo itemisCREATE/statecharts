@@ -2,6 +2,15 @@ package org.yakindu.sct.model.sexec.naming
 
 import java.util.ArrayList
 import java.util.List
+import java.util.Comparator
+
+class StringTreeNodeDepthComparator implements Comparator<StringTreeNode>
+{
+	override compare(StringTreeNode o1, StringTreeNode o2) {
+		return o1.getDepth() - o2.getDepth();
+	}
+	
+}
 
 class StringTreeNode {
 	/*
@@ -54,7 +63,7 @@ class StringTreeNode {
 		children.add(node);
 	}
 
-	def public void addString(String s) {
+	def public StringTreeNode addString(String s) {
 		/*
 		 * Cut the string into an ArrayList containing the single chars in the string,
 		 * and call addStringList afterwards.
@@ -64,10 +73,10 @@ class StringTreeNode {
 		for (var i = 0; i < s.length(); i++) {
 			sList.add(Character.toString(s.charAt(i)));
 		}
-		this.addStringList(sList);
+		return this.addStringList(sList);
 	}
 
-	def public void addStringList(List<String> sList) {
+	def public StringTreeNode addStringList(List<String> sList) {
 		/*
 		 * Adds an array of strings.
 		 * If the first element is found within own children's data,
@@ -77,11 +86,12 @@ class StringTreeNode {
 		if (sList.size() == 0) {
 			for (child : children) {
 				if (child.isEnd()) {
-					return; // only add one end per node - don't allow double strings
+					return child; // only add one end per node - don't allow double strings
 				}
 			}
-			addChild(new StringTreeNode("")); // mark End
-			return;
+			val newNode = new StringTreeNode("");
+			addChild(newNode); // mark End
+			return newNode;
 		}
 
 		var firstString = sList.get(0); // first element to search in own children. If not found, create new one.
@@ -92,13 +102,13 @@ class StringTreeNode {
 		{
 			if (child.getData().equals(firstString)) {
 				newChild = false;
-				child.addStringList(rest);
+				return child.addStringList(rest);
 			}
 		}
 		if (newChild) {
 			var newNode = new StringTreeNode(firstString);
 			addChild(newNode);
-			newNode.addStringList(rest);
+			return newNode.addStringList(rest);
 		}
 
 	}

@@ -13,6 +13,7 @@
 
 package org.yakindu.sct.model.sexec.naming
 
+import java.util.ArrayList
 import java.util.Comparator
 import java.util.HashMap
 import java.util.List
@@ -38,9 +39,9 @@ import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.sexec.Reaction
 import org.eclipse.xtext.naming.QualifiedName
-import java.util.ArrayList
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.stext.stext.LocalReaction
+import com.google.common.collect.Maps
 
 /** Default implementation of the naming service for various identifiers used in the generated code. 
  * It is responsible for identifier construction depending on the thing to be named including different strategies 
@@ -55,6 +56,10 @@ class TreeNamingService implements INamingService {
 	//@Inject extension StepDepthComparator stepDepthComparator
 	//@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
 	//@Inject extension NamingHelper
+	
+	@Inject extension ElementNameProvider
+	
+	@Inject private StringTreeNodeDepthComparator stringTreeNodeDepthComparator
 
 	@Inject private StextNameProvider provider
 
@@ -65,12 +70,12 @@ class TreeNamingService implements INamingService {
 
 	var protected char separator = '_';
 
-	var protected Map<StringTreeNode, String> map;
+	var protected Map<NamedElement, String> map;
 	
 	var protected Map<NamedElement, StringTreeNode> treeMap;
 	
 	var protected StringTreeNode tree;
-
+	
 	var protected ExecutionFlow activeFlow;
 
 	var protected Statechart activeStatechart;
@@ -87,21 +92,13 @@ class TreeNamingService implements INamingService {
 	
 	override initializeNamingService(Statechart statechart) 
 	{
-		map = new HashMap<StringTreeNode, String>
-		treeMap = new HashMap<NamedElement, StringTreeNode>
+		map = Maps.newHashMap
+		treeMap = Maps.newHashMap
 		if(tree == null || activeStatechart != statechart)
 		{
 			activeFlow = null;
 			activeStatechart = statechart;
 			createNameTree(statechart);
-		}
-	}
-	
-	def private void createShortNameMap()
-	{
-		for(node : tree.getEndNodes())
-		{
-			map.put(node, node.getContentUpwards())
 		}
 	}
 	
@@ -135,14 +132,13 @@ class TreeNamingService implements INamingService {
 	
 	override initializeNamingService(ExecutionFlow flow) 
 	{
-		map = new HashMap<StringTreeNode, String>
-		treeMap = new HashMap<NamedElement, StringTreeNode>
+		map = Maps.newHashMap
+		treeMap = Maps.newHashMap
 		if(tree == null || activeFlow != flow)
 		{
 			activeFlow = flow;
 			activeStatechart = null;
 			createNameTree(flow);
-			createShortNameMap();
 		}
 	}
 	
@@ -223,81 +219,13 @@ class TreeNamingService implements INamingService {
 		{
 			val segments = new ArrayList<String>(name.getSegments());
 			if(!segments.isEmpty()) {
-				tree.addStringList(segments);
-				val nodes = tree.getNodeChain(name.toString())
-				val endNode = nodes.get(nodes.size() - 1);
+				val addedNode = tree.addStringList(segments);
 				
-				treeMap.put(elem, endNode); // remember for later access
+				treeMap.put(elem, addedNode); // remember for later access
 			}
 			//System.out.println(name);
 		}
 		
-	}
-	
-	/*
-	 * elementName
-	 */
-	 
-	 def protected dispatch QualifiedName elementName(ExecutionFlow it) {
-		return null;
-	}
-	
-	def protected dispatch QualifiedName elementName(ExecutionScope it) {
-		return sourceElement.elementName()
-	}
-
-	def protected dispatch QualifiedName elementName(ExecutionState it) {
-		return sourceElement.elementName()
-	}
-	
-	def protected dispatch QualifiedName elementName(EObject it) {
-		eContainer?.elementName()
-	}
-
-	def protected dispatch QualifiedName elementName(ExecutionNode it) {
-		return provider.getFullyQualifiedName(it).skipFirst(2)
-	}
-
-	// TODO: we should merge the region/vertex case into this base implementation; we should check whether it is used in any case at all (otherwise it could be replaced with the body of vertexOrRegionName)
-	def protected dispatch QualifiedName elementName(NamedElement it) {
-		return provider.getFullyQualifiedName(it).skipFirst(2)
-	}
-	
-	def protected dispatch QualifiedName elementName(Reaction it) {
-		return provider.getFullyQualifiedName(it).skipFirst(2)
-	}
-	
-	def protected dispatch QualifiedName elementName(Region it) {
-		return provider.getFullyQualifiedName(it).skipFirst(1)
-	}
-	
-	def protected dispatch QualifiedName elementName(Step it) {
-		return eContainer.elementName()
-	}
-
-	def protected dispatch QualifiedName elementName(Vertex it) {
-		return provider.getFullyQualifiedName(it).skipFirst(1)
-	}
-	
-	/*
-	 * end elementName
-	 */
-	
-	def private vertexOrRegionName(NamedElement it, NameShorteningStrategy nameShorteningType) {
-		switch nameShorteningType {
-			case NameShorteningStrategy::FQN_NAME:
-				return provider.getFullyQualifiedName(it).skipFirst(1).toString(separator.toString)
-			case NameShorteningStrategy::SHORT_NAME: {
-				if (name.nullOrEmpty) {
-					return provider.getFullyQualifiedName(it).lastSegment.toString.substring(1)
-				}
-				return name
-			}
-			case NameShorteningStrategy::REMOVE_VOWELS:
-				return it.elementName()
-			case NameShorteningStrategy::INDEX_POSITION:
-				return asSGraphIndexPosition()
-		}
 	}
 	
 	def protected asIndexPosition(ExecutionScope it) {
@@ -342,7 +270,64 @@ class TreeNamingService implements INamingService {
 	}
 	
 	override getShortName(NamedElement element) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		if(map.containsKey(element)) {
+			return map.get(element);
+		} 
+		else 
+		{
+			if(!treeMap.containsKey(element)) {
+				addElement(element);
+			}
+			createShortname(element);
+			return map.get(element);
+		}
+	}
+	
+	def createShortname(NamedElement element)
+	{
+		if(map.containsKey(element))
+		{
+			return map.get(element);
+		}
+		
+		var HashMap<StringTreeNode, String> treeNames = Maps.newHashMap();
+		var nodes = tree.getEndNodes().sortWith(stringTreeNodeDepthComparator);
+		
+		// Create names for every node in the tree
+		for(node : nodes)
+		{
+			var individualNameFound = false;
+			var currentNode = node.getParent(); // actual end node only contains empty string
+			var name = currentNode.getData();
+			
+			if(element instanceof Step)
+			{
+				currentNode = currentNode.getParent();
+				name = currentNode.getData() + separator + name;
+			}
+			
+			while(!individualNameFound)
+			{
+				if(!map.containsValue(name) && !treeNames.containsValue(name)) {
+					treeNames.put(node, name);
+					individualNameFound = true;
+				} else {
+					currentNode = currentNode.getParent();
+					name = currentNode.getData() + separator + name;
+				}
+			}
+		}
+		
+		val elementNode = treeMap.get(element);
+		val searchedName = treeNames.get(elementNode);
+		
+		map.put(element, searchedName);
+		
+		// save future work and remove already resolved element from the tree. We are done with it. Note: Only END-nodes are removed, no actual content.
+//		treeMap.remove(element);
+//		elementNode.delete();
+		
+		System.out.println(searchedName);
 	}
 	
 	override asEscapedIdentifier(String string) {
