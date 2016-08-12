@@ -17,9 +17,11 @@
    <license url="%licenseURL">
       %license
    </license>
+
    <url>
       <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.org/sct/neon/releases/"/>
-   </url>	
+   </url>
+
    <includes
          id="org.yakindu.sct.generator.c"
          version="0.0.0"/>
@@ -32,12 +34,8 @@
          id="org.yakindu.sct.generator.cpp"
          version="0.0.0"/>
 
-   <includes
-         id="org.yakindu.sct.generator.model"
-         version="0.0.0"/>
-
    <requires>
-      <import feature="org.yakindu.sct.generator.model" version="2.7.1.qualifier"/>
+      <import feature="org.yakindu.sct" version="2.7.1.qualifier"/>
    </requires>
 
    <plugin
