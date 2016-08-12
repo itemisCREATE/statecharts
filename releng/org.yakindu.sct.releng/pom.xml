@@ -393,6 +393,8 @@
 		<module>../../plugins/org.yakindu.sct.domain.generic</module>
 		<module>../../plugins/org.yakindu.sct.doc.user</module>
 		<module>../../plugins/org.yakindu.sct.generator.core</module>
+		<module>../../plugins/org.yakindu.sct.generator.builder</module>
+		<module>../../plugins/org.yakindu.sct.generator.xpand</module>
 		<module>../../plugins/org.yakindu.sct.generator.genmodel</module>
 		<module>../../plugins/org.yakindu.sct.generator.genmodel.ui</module>
 		<module>../../plugins/org.yakindu.sct.model.sexec</module>
