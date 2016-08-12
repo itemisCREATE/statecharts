@@ -8,12 +8,12 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.core.impl;
+package org.yakindu.sct.generator.runner;
 
-import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.CONFIGURATION_MODULE;
-import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_CLASS;
-import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_PROJECT;
-import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.TEMPLATE_FEATURE;
+import static org.yakindu.sct.generator.runner.lib.IGenericJavaFeatureConstants.CONFIGURATION_MODULE;
+import static org.yakindu.sct.generator.runner.lib.IGenericJavaFeatureConstants.GENERATOR_CLASS;
+import static org.yakindu.sct.generator.runner.lib.IGenericJavaFeatureConstants.GENERATOR_PROJECT;
+import static org.yakindu.sct.generator.runner.lib.IGenericJavaFeatureConstants.TEMPLATE_FEATURE;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -21,6 +21,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.util.Strings;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
+import org.yakindu.sct.generator.core.impl.AbstractSExecModelGenerator;
+import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator;
+import org.yakindu.sct.generator.core.impl.ISGraphGenerator;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;

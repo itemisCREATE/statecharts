@@ -11,35 +11,5 @@
             defaultProvider="org.yakindu.sct.generator.core.library.impl.CoreLibraryDefaultFeatureValueProvider"
             uri="platform:/plugin/org.yakindu.sct.generator.core/library/CoreFeatureTypeLibrary.xmi">
       </FeatureLibrary>
-      <FeatureLibrary
-            library_id="org.yakindu.generator.core.features.generic"
-            defaultProvider="org.yakindu.sct.generator.core.library.impl.GenericJavaLibraryDefaultValueProvider"
-            uri="platform:/plugin/org.yakindu.sct.generator.core/library/GenericJavaFeatureTypeLibrary.xmi">
-   	  </FeatureLibrary>   	  
  </extension>
- <extension
-       point="org.yakindu.sct.generator.core.generator">
-   <SCTGenerator
-         class="org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator"
-         contentType="statechart"
-         description="Generate Code using Xpand Templates"
-         elementRefType="org.yakindu.sct.model.sgraph.Statechart"
-         icon="icons/sct.png"
-         id="yakindu::generic"
-         name="Custom Xtend2/Java-based Generator">
-      <FeatureLibrary
-            library_id="org.yakindu.generator.core.features">
-      </FeatureLibrary>
-      <FeatureLibrary
-            library_id="org.yakindu.generator.core.features.generic">
-      </FeatureLibrary>
-    </SCTGenerator>
- </extension>
-    <extension
-         point="org.yakindu.sct.generator.core.extensions">
-      <ExtensionGeneratorMapping
-            fileExtension="sct"
-            generatorId="yakindu::generic">
-      </ExtensionGeneratorMapping>
-   </extension>
 </plugin>

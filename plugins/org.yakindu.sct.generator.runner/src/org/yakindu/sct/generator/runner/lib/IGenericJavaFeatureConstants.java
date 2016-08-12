@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.core.features.impl;
+package org.yakindu.sct.generator.runner.lib;
 
 public interface IGenericJavaFeatureConstants {
 	public static final String LIBRARY_NAME = "Java";

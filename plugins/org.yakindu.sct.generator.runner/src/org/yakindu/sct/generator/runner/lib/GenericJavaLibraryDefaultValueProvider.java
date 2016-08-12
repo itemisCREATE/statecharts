@@ -8,11 +8,11 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.core.library.impl;
+package org.yakindu.sct.generator.runner.lib;
 
-import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_CLASS;
-import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_PROJECT;
-import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.LIBRARY_NAME;
+import static org.yakindu.sct.generator.runner.lib.IGenericJavaFeatureConstants.GENERATOR_CLASS;
+import static org.yakindu.sct.generator.runner.lib.IGenericJavaFeatureConstants.GENERATOR_PROJECT;
+import static org.yakindu.sct.generator.runner.lib.IGenericJavaFeatureConstants.LIBRARY_NAME;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;

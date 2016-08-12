@@ -9,7 +9,7 @@
  */
 package org.yakindu.sct.generator.csharp;
 
-import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
+import org.yakindu.sct.generator.core.impl.AbstractSExecModelGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.csharp.types.CSharpTypeSystemAccess;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -22,12 +22,11 @@ import com.google.inject.Inject;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
-public class CSharpCodeGenerator extends GenericJavaBasedGenerator {
+public class CSharpCodeGenerator extends AbstractSExecModelGenerator {
 
 	@Inject
 	CSharpGenerator delegate;
-	
-	
+
 	@Override
 	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
@@ -37,18 +36,16 @@ public class CSharpCodeGenerator extends GenericJavaBasedGenerator {
 		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess());
 	}
 
-	
 	@Override
 	public Module getOverridesModule(final GeneratorEntry entry) {
 		Module module = super.getOverridesModule(entry);
 		return Modules.override(module).with(new Module() {
 			public void configure(Binder binder) {
-				binder.bind(ICodegenTypeSystemAccess.class)
-				.to(CSharpTypeSystemAccess.class);
+				binder.bind(ICodegenTypeSystemAccess.class).to(CSharpTypeSystemAccess.class);
 				binder.bind(INamingService.class).to(CSharpNamingService.class);
 				binder.bind(GeneratorEntry.class).toInstance(entry);
 			}
 		});
 	}
-	
+
 }

@@ -29,7 +29,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 /**
  * @author holger willebrandt - Initial contribution and API
  */
-public class GenericXPandCodeGenerator extends AbstractXpandBasedCodeGenerator {
+public class GenericXpandCodeGenerator extends AbstractXpandBasedCodeGenerator {
 
 	private String templatePath;
 

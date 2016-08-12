@@ -15,7 +15,7 @@ package org.yakindu.sct.generator.c;
 import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 import org.yakindu.sct.generator.c.features.ICFeatureConstants;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
-import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
+import org.yakindu.sct.generator.core.impl.AbstractSExecModelGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.naming.INamingService;
@@ -37,26 +37,26 @@ import com.google.inject.util.Modules;
  * @author axel terfloth
  * 
  */
-public class CCodeGenerator extends GenericJavaBasedGenerator {
+public class CCodeGenerator extends AbstractSExecModelGenerator {
 
 	public static String GENERATOR_ID = "yakindu::c";
-	
+
 	@Inject
 	private CGenerator delegate;
-	
+
 	@Inject
 	private IGenArtifactConfigurations artifactConfigs;
-	
+
 	@Override
 	protected void prepareGenerator(GeneratorEntry entry) {
 		super.prepareGenerator(entry);
 		initGenArtifactConfigurations();
 	}
-	
+
 	protected void initGenArtifactConfigurations() {
 		artifactConfigs.setFileSystemAccess(sctFsa);
 	}
-	
+
 	@Override
 	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
@@ -76,7 +76,7 @@ public class CCodeGenerator extends GenericJavaBasedGenerator {
 				binder.bind(GeneratorEntry.class).toInstance(entry);
 				binder.bind(INamingService.class).to(CNamingService.class);
 				binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
-				
+
 				binder.bind(IGenArtifactConfigurations.class).to(GenArtifactConfigurations.class);
 				// default binding to ensure consistency of already used API
 				binder.bind(IGenArtifactConfigurations.class)

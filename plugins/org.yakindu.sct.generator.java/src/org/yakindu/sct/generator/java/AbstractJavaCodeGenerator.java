@@ -10,13 +10,15 @@
  */
 package org.yakindu.sct.generator.java;
 
-import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_TARGET_FOLDER;
+
+import org.yakindu.sct.generator.core.impl.AbstractSExecModelGenerator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
-import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.*;
 
-abstract public class AbstractJavaCodeGenerator extends GenericJavaBasedGenerator {
+abstract public class AbstractJavaCodeGenerator extends AbstractSExecModelGenerator {
 
 	abstract public void generate(Statechart statechart, GeneratorEntry entry);
 
