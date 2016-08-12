@@ -35,7 +35,6 @@ import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
 import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
-import org.yakindu.sct.generator.core.impl.AbstractXpandBasedCodeGenerator;
 import org.yakindu.sct.generator.core.library.IOutletFeatureHelper;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
@@ -78,8 +77,7 @@ public class EFSResourceFileSystemAccess extends AbstractFileSystemAccess2 imple
 			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(stringValue);
 			return project;
 		} else
-			throw new IllegalStateException("The " + AbstractXpandBasedCodeGenerator.class.getSimpleName()
-					+ " needs a running eclipse.Platform");
+			throw new IllegalStateException("Eclipse Platform not running.");
 	}
 
 	/**

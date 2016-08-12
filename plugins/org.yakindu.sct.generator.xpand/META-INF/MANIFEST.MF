@@ -7,4 +7,8 @@ Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.yakindu.sct.generator.core,
  org.yakindu.sct.generator.genmodel,
- org.yakindu.sct.commons
+ org.yakindu.sct.commons,
+ org.eclipse.xtend.typesystem.emf,
+ org.eclipse.xtend,
+ org.yakindu.sct.model.stext,
+ org.eclipse.xpand

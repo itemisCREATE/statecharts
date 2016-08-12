@@ -8,24 +8,18 @@ Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime;visibility:=reexport,
  org.yakindu.sct.model.sexec;visibility:=reexport,
- org.eclipse.xpand;visibility:=reexport,
  org.eclipse.core.resources;visibility:=reexport,
- org.eclipse.xtend;visibility:=reexport,
- org.eclipse.xtend.typesystem.emf;visibility:=reexport,
  org.yakindu.sct.model.stext,
  org.eclipse.jdt.core,
  org.eclipse.jdt.launching,
- org.eclipse.ui.console,
  org.eclipse.xtext.xbase,
  org.yakindu.sct.model.sgen,
  org.eclipse.core.expressions,
  org.yakindu.base.types,
- org.eclipse.xtext.builder,
  org.yakindu.sct.commons,
  org.yakindu.sct.domain,
  com.google.guava,
- org.eclipse.emf.workspace,
- org.eclipse.xtext.generator
+ org.eclipse.emf.workspace
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.generator.core,

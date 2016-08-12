@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.core.impl;
+package org.yakindu.sct.generator.xpand;
 
 import java.util.Collections;
 import java.util.Set;
@@ -27,6 +27,7 @@ import org.eclipse.xtend.typesystem.Type;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.sct.generator.core.impl.AbstractSExecModelGenerator;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
