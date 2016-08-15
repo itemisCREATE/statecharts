@@ -206,54 +206,72 @@ class Statemachine {
 		/**
 		* This method resets the incoming events (time events included).
 		*/
+		
 		protected void clearEvents() {
 			«FOR scope : flow.interfaceScopes»
 				«IF scope.hasEvents»
 					«scope.interfaceName.asEscapedIdentifier».clearEvents();
+
 				«ENDIF»
 			«ENDFOR»
 			«FOR scope : flow.internalScopes»
 				«FOR event : scope.eventDefinitions»
 					«event.identifier» = false;
+
 				«ENDFOR»
 			«ENDFOR»
-			
+
 			«IF flow.timed»
 			for (int i=0; i<timeEvents.length; i++) {
+
 				timeEvents[i] = false;
+
 			}
 			«ENDIF»
 		}
+
 	'''
-	
 	def protected clearOutEventsFunction(ExecutionFlow flow) '''
 		/**
 		* This method resets the outgoing events.
 		*/
+
 		protected void clearOutEvents() {
 			«FOR scope : flow.interfaceScopes»
 				«IF scope.hasOutgoingEvents»
 					«scope.interfaceName.asEscapedIdentifier».clearOutEvents();
 				«ENDIF»
 			«ENDFOR»
+
 		}
+
 	'''
 	
 	def protected isStateActiveFunction(ExecutionFlow flow) '''
 		/**
 		* Returns true if the given state is currently active otherwise false.
 		*/
+		
 		public boolean isStateActive(State state) {
+
 			switch (state) {
+
 				«FOR s : flow.states»
-				case «s.stateName.asEscapedIdentifier» : 
+				case «s.stateName.asEscapedIdentifier» :
+				
 					return «IF s.leaf»stateVector[«s.stateVector.offset»] == State.«s.stateName.asEscapedIdentifier»
 					«ELSE»stateVector[«s.stateVector.offset»].ordinal() >= State.«s.stateName.asEscapedIdentifier».ordinal()
 						&& stateVector[«s.stateVector.offset»].ordinal() <= State.«s.subStates.last.stateName.asEscapedIdentifier».ordinal()«ENDIF»;
+
 				«ENDFOR»
-				default: return false;
+				default:
+ 
+					return false;
+
 			}
+
 		}
+
 	'''
 	
 	def protected isActiveFunction(ExecutionFlow flow) '''
@@ -263,8 +281,8 @@ class Statemachine {
 		 
 		public boolean isActive(){
 
-			return	«FOR i : 0 ..< flow.stateVector.size SEPARATOR '||'»stateVector[«i»] != State.«nullStateName»
-					«ENDFOR»;
+			return	«FOR i : 0 ..< flow.stateVector.size SEPARATOR '||'»stateVector[«i»] != State.«nullStateName»;
+					«ENDFOR»
 
 		}
 
@@ -278,14 +296,18 @@ class Statemachine {
 			«IF !finalStateImpactVector.isCompletelyCovered»
 			 * Always returns 'false' since this state machine can never become final.
 			 *
+
 			«ENDIF»
 			 * @see IStatemachine#isFinal()
 			 */
+
 			public boolean isFinal(){
+
 		''' +
-		
+
 		// only if the impact vector is completely covered by final states the state machine
 		// can become final
+
 		{if (finalStateImpactVector.isCompletelyCovered) {'''
 			return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»
 				(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»
@@ -299,12 +321,14 @@ class Statemachine {
 			«ENDFOR»;
 		'''} else {'''
 			return false;
+
 		'''} }
 		
-		+ '''}'''
+		+ '''}
+
+		'''
 	}
-	
-	
+
 	def protected timingFunctions(ExecutionFlow flow) '''
 		«IF flow.timed»
 			/**
@@ -314,29 +338,40 @@ class Statemachine {
 			* 
 			* @param timer
 			*/
+
 			public void setTimer(ITimer timer) {
+
 				this.timer = timer;
+
 			}
-			
+
 			/**
 			* Returns the currently used timer.
 			* 
 			* @return {@link ITimer}
 			*/
+
 			public ITimer getTimer() {
+
 				return timer;
+
 			}
 			
 			public void timeElapsed(int eventID) {
+
 				timeEvents[eventID] = true;
+
 			}
+
 		«ENDIF»
 	'''
 	
 	def protected interfaceAccessors(ExecutionFlow flow) '''
 		«FOR scope : flow.interfaceScopes»
 			public «scope.interfaceName» get«scope.interfaceName»() {
+
 				return «scope.interfaceName.toFirstLower()»;
+
 			}
 		«ENDFOR»
 	'''
@@ -508,18 +543,26 @@ class Statemachine {
 		«FOR event : flow.internalScopeEvents»
 			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 				private void raise«event.name.asEscapedName»(«event.type.targetLanguageName» value) {
+
 					«event.valueIdentifier» = value;
 					«event.identifier» = true;
+
 				}
 				
 				private «event.type.targetLanguageName» get«event.name.asEscapedName»Value() {
+
 					«event.getIllegalAccessValidation()»
 					return «event.valueIdentifier»;
+
 				}
+
 			«ELSE»
 				private void raise«event.name.asEscapedName»() {
+
 					«event.identifier» = true;
+
 				}
+
 			«ENDIF»
 		«ENDFOR»
 		
@@ -527,8 +570,11 @@ class Statemachine {
 			«IF internal.hasOperations»
 				public void set«internal.internalOperationCallbackName»(
 						«internal.internalOperationCallbackName» operationCallback) {
+
 					this.operationCallback = operationCallback;
+
 				}
+
 			«ENDIF»
 		«ENDFOR»
 	'''
