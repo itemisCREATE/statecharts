@@ -56,7 +56,7 @@ All of these three elements are optional, i.&nbsp;e. a transition may have one o
 Here's an example:
 
 p(#fig_transition-example). 
-!(standard-image)images/docu_transition_020_priorities_030_example_01.png(Transition example)!
+!(standard-image)images/docu_transition_030_example_01.png(Transition example)!
 
 p=. Transition example: A simple state machine to launch a rocket. The initial transition's _effect_ sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ – executed as one of a transition's _actions_ – cares for audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the rocket is launched. The countdown can be aborted anytime before launch by a _cancel_ event which _triggers_ the appropriate transition to fire.
 
