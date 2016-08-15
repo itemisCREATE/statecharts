@@ -1,37 +1,33 @@
 /* Images */
 img.standard-image {
-	max-width: 61.8%;
-	min-width: 38.2%;
-	height: auto;
-	text-align: center;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	box-shadow: 10px 10px 20px #888888;
-	-webkit-box-shadow: 10px 10px 20px #888888;
-	-moz-box-shadow: 10px 10px 20px #888888;
-	border-radius: 4px;
-	margin-top: 1.5ex;
-	margin-bottom: 2.5ex;
+    max-width: 61.8%;
+    min-width: 38.2%;
+    height: auto;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 10px 10px 20px #888888;
+    -webkit-box-shadow: 10px 10px 20px #888888;
+    -moz-box-shadow: 10px 10px 20px #888888;
+    border-radius: 4px;
+    margin-top: 1.5ex;
+    margin-bottom: 2.5ex;
 }
-
 img.small {
-	width: 38.2%;
+    width:38.2%;
 }
-
 img.full {
-	width: 100%;
-	max-width: 100%;
+    width:100%;
+    max-width:100%;
 }
-
 img.shadowless {
-	box-shadow: none;
-	margin-bottom: 0px;
+    box-shadow: none;
+    margin-bottom: 0px;
 }
-
 img.inlinemediaobject {
-	line-height: 1;
-	vertical-align: middle;
+    line-height: 1;
+    vertical-align: middle;
 }
 
 /* Tables */
@@ -42,132 +38,81 @@ table.scedit {
 	width: auto;
 	border-collapse: collapse;
 }
-
 tr.scedit {
 	vertical-align: top
 }
-
 table.scedit td {
 	border-color: #000;
 	border-radius: 0%;
 	border-style: solid;
 	border-width: 0px;
 	padding-bottom: 1ex;
-	vertical-align: top;
+	vertical-align: top; 
 }
-
 table.scedit img {
 	max-width: 100%;
-	margin-left: 0px;
-	margin-right: 0px;
-	box-shadow: 4px 4px 2px #bbb;
+    margin-left: 0px;
+    margin-right: 0px;
+    box-shadow: 4px 4px 2px #bbb;
 }
 
 /* Counter */
-body {
-	counter-reset: h1
-}
+body {counter-reset: h1}
+h1 {counter-reset: h2}
+h2 {counter-reset: h3}
+h3 {counter-reset: h4}
+h4 {counter-reset: h5}
+h5 {counter-reset: h6}
 
-h1 {
-	counter-reset: h2
-}
+.body-container h1:before {counter-increment: h1; content: counter(h1) ". "}
+.body-container h2:before {counter-increment: h2; content: counter(h1) "." counter(h2) ". "}
+.body-container h3:before {counter-increment: h3; content: counter(h1) "." counter(h2) "." counter(h3) ". "}
+.body-container h4:before {counter-increment: h4; content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". "}
+.body-container h5:before {counter-increment: h5; content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". "}
+.body-container h6:before {counter-increment: h6; content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". "}
 
-h2 {
-	counter-reset: h3
-}
+h1.nocount:before h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none }
 
-h3 {
-	counter-reset: h4
-}
 
-h4 {
-	counter-reset: h5
-}
-
-h5 {
-	counter-reset: h6
-}
-
-.body-container h1:before {
-	counter-increment: h1;
-	content: counter(h1) ". "
-}
-
-.body-container h2:before {
-	counter-increment: h2;
-	content: counter(h1) "." counter(h2) ". "
-}
-
-.body-container h3:before {
-	counter-increment: h3;
-	content: counter(h1) "." counter(h2) "." counter(h3) ". "
-}
-
-.body-container h4:before {
-	counter-increment: h4;
-	content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4)
-		". "
-}
-
-.body-container h5:before {
-	counter-increment: h5;
-	content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "."
-		counter(h5) ". "
-}
-
-.body-container h6:before {
-	counter-increment: h6;
-	content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "."
-		counter(h5) "." counter(h6) ". "
-}
-
-h1.nocount:before h2.nocount:before, h3.nocount:before, h4.nocount:before,
-	h5.nocount:before, h6.nocount:before {
-	content: "";
-	counter-increment: none
-}
-
-@media ( max-width : 767px) {
-	code {
-		word-wrap: break-word;
-	}
+@media (max-width: 767px) {
+    code {
+        word-wrap: break-word;
+    }
 }
 
 .pro-feature {
-	border: 2px solid red;
-	border-color: rgba(255, 0, 0, 0.75);
-	border-width: 2px 0 0 2px;
-	position: relative;
-	overflow: hidden;
-	padding: 10px 20px 0;
-	margin-right: -20px;
-	margin-bottom: 30px;
+    border: 2px solid red;
+    border-color: rgba(255,0,0,0.75);
+    border-width: 2px 0 0 2px;
+    position: relative;
+    overflow: hidden;
+    padding: 10px 20px 0;
+    margin-right: -20px;
+    margin-bottom: 30px;
 }
-
 .pro-feature:before {
-	content: "PRO";
-	position: absolute;
-	top: -10px;
-	right: -34px;
-	background: red;
-	background: rgba(255, 0, 0, 0.75);
-	color: white;
-	padding: 20px 30px 2px;
-	transform: rotate(45deg);
-	z-index: 10
+	content:"PRO";
+	position:absolute;
+	top:-10px;
+	right:-34px;
+	background:red;
+	background:rgba(255,0,0,0.75);
+	color:white;
+	padding:20px 30px 2px;
+	transform:rotate(45deg);
+	z-index:10
 }
 
 span.pro-feature {
-	padding: 0;
-	border-width: 0
+	padding:0;
+	border-width:0
 }
-
 span.pro-feature:before {
-	transform: none;
-	padding: 0 3px;
-	position: relative;
-	top: 0;
-	left: 0
+	transform:none;
+	padding:0 3px;
+	position:relative;
+	top:0;
+	left:0
 }
 
 .edit-on-github {
