@@ -363,20 +363,6 @@
             extensions="sgen">
     </provider>
   </extension>
-  <extension point = "org.eclipse.ui.popupMenus">
-     <objectContribution
-        id="org.yakindu.sct.generator.ui"
-        objectClass="org.eclipse.core.resources.IFile"
-	    nameFilter="*.sgen">
-	    <action
-           class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.action.GenerateModelAction"
-           enablesFor="1"
-           id="org.yakindu.sct.generator.ui.generateaction"
-           label="Generate Code Artifacts"
-           menubarPath="additions">
-	    </action>
-	 </objectContribution>
-	</extension>	
  <!-- New File Wizard -->
     <extension
          point="org.eclipse.ui.newWizards">

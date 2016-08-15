@@ -5,36 +5,23 @@ Bundle-SymbolicName: org.yakindu.sct.generator.core;singleton:=true
 Bundle-Version: 2.7.1.qualifier
 Bundle-Activator: org.yakindu.sct.generator.core.GeneratorActivator
 Bundle-Vendor: statecharts.org
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime;visibility:=reexport,
- org.yakindu.sct.model.sexec;visibility:=reexport,
- org.eclipse.xpand;visibility:=reexport,
- org.eclipse.core.resources;visibility:=reexport,
- org.eclipse.xtend;visibility:=reexport,
- org.eclipse.xtend.typesystem.emf;visibility:=reexport,
+Require-Bundle: org.yakindu.sct.model.sexec;visibility:=reexport,
  org.yakindu.sct.model.stext,
- org.eclipse.jdt.core,
- org.eclipse.jdt.launching,
- org.eclipse.ui.console,
- org.eclipse.xtext.xbase,
  org.yakindu.sct.model.sgen,
  org.eclipse.core.expressions,
  org.yakindu.base.types,
- org.eclipse.xtext.builder,
- org.yakindu.sct.commons,
  org.yakindu.sct.domain,
  com.google.guava,
  org.eclipse.emf.workspace,
- org.eclipse.xtext.generator
+ org.eclipse.xtext.xbase,
+ org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.core.runtime;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Export-Package: org.yakindu.sct.builder.nature,
- org.yakindu.sct.generator.core,
+Export-Package: org.yakindu.sct.generator.core,
  org.yakindu.sct.generator.core.extensions,
- org.yakindu.sct.generator.core.features,
- org.yakindu.sct.generator.core.features.impl,
+ org.yakindu.sct.generator.core.library.impl,
  org.yakindu.sct.generator.core.filesystem,
  org.yakindu.sct.generator.core.impl,
  org.yakindu.sct.generator.core.library,
- org.yakindu.sct.generator.core.types,
- org.yakindu.sct.generator.core.util
+ org.yakindu.sct.generator.core.types

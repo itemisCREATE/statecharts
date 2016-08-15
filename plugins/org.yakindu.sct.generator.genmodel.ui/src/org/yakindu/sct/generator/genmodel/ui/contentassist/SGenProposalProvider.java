@@ -20,6 +20,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
+import org.yakindu.sct.generator.genmodel.ui.PathToImageResolver;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 
 /**
@@ -53,7 +54,7 @@ public class SGenProposalProvider extends AbstractSGenProposalProvider {
 			ICompletionProposal proposal = createCompletionProposal(
 					desc.getId(),
 					new StyledString((desc.getName() != null) ? desc.getName()
-							: "null"), desc.getImage(), context);
+							: "null"), PathToImageResolver.toImage(desc.getImagePath()), context);
 
 			if (proposal instanceof ConfigurableCompletionProposal) {
 				ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;

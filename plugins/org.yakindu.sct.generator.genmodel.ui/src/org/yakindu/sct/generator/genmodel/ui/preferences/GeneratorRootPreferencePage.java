@@ -14,10 +14,15 @@ import org.eclipse.gmf.runtime.common.ui.preferences.CheckBoxFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.yakindu.sct.generator.builder.BuilderActivator;
 import org.yakindu.sct.generator.core.GeneratorActivator;
 
-public class GeneratorRootPreferencePage extends FieldEditorPreferencePage
-		implements IWorkbenchPreferencePage {
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
+public class GeneratorRootPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
 	public GeneratorRootPreferencePage() {
 		setDescription("Change the behavior of the Generator model");
@@ -25,13 +30,12 @@ public class GeneratorRootPreferencePage extends FieldEditorPreferencePage
 
 	@Override
 	protected void createFieldEditors() {
-		addField(new CheckBoxFieldEditor(
-				GeneratorActivator.PREF_GENERATE_AUTOMATICALLY,
+		addField(new CheckBoxFieldEditor(GeneratorActivator.PREF_GENERATE_AUTOMATICALLY,
 				"Execute SGen Files automatically: ", getFieldEditorParent()));
 	}
 
 	@Override
 	public void init(IWorkbench workbench) {
-		setPreferenceStore(GeneratorActivator.getDefault().getPreferenceStore());
+		setPreferenceStore(BuilderActivator.getDefault().getPreferenceStore());
 	}
 }

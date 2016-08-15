@@ -24,10 +24,10 @@ import org.yakindu.sct.model.sgen.SGenPackage;
  * <em><b>Int Literal</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.IntLiteralImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

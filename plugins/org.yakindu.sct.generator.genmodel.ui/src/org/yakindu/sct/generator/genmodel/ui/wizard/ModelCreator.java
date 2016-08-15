@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
-import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
+import org.yakindu.sct.generator.core.library.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;

@@ -11,14 +11,17 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
+import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.API_TARGET_FOLDER_OUTPUT;
+import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.LIBRARY_TARGET_FOLDER_OUTPUT;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_TARGET_PROJECT;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.yakindu.sct.generator.core.ISCTGenerator;
-import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
+import org.yakindu.sct.generator.core.ISGraphGenerator;
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
-import org.yakindu.sct.generator.core.library.IDebugFeatureHelper;
-import org.yakindu.sct.generator.core.library.IOutletFeatureHelper;
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -42,16 +45,14 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	@Inject
 	protected IGeneratorLog log;
 	@Inject
-	protected IOutletFeatureHelper outletFeatureHelper;
-	@Inject
-	protected IDebugFeatureHelper debugFeatureHelper;
+	protected ICoreLibraryHelper coreFeatureHelper;
 	@Inject
 	protected ISCTFileSystemAccess sctFsa;
 
 	protected void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		if (this instanceof ISGraphGenerator) {
 			ISGraphGenerator graphGenerator = (ISGraphGenerator) this;
-			graphGenerator.generate(statechart, entry);
+			graphGenerator.generate(statechart, entry, sctFsa.getIFileSystemAccess());
 		}
 	}
 
@@ -116,7 +117,8 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	 * includes a {@link Statechart}. Sub-classes may override this method if
 	 * they handle elements with type other than @link {@link Statechart}.
 	 * 
-	 * @param entry the upcomming GeneratorEntry
+	 * @param entry
+	 *            the upcomming GeneratorEntry
 	 * @return true if this instance can handle the given {@link GeneratorEntry}
 	 */
 	protected boolean canHandle(GeneratorEntry entry) {
@@ -146,11 +148,11 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 
 	/**
 	 * Sub-classes might override this method to add custom bindings for a
-	 * specific {@link GeneratorEntry}. 
+	 * specific {@link GeneratorEntry}.
 	 * 
-	 * In normal case sub-classes will just
-	 * override or add custom bindings and ensure all other bindings of
-	 * super-class implementations are still available.
+	 * In normal case sub-classes will just override or add custom bindings and
+	 * ensure all other bindings of super-class implementations are still
+	 * available.
 	 * 
 	 * @param entry
 	 *            the next generator entry
@@ -192,14 +194,14 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	}
 
 	protected void initLibraryTargetFolder(GeneratorEntry entry) {
-		FeatureParameterValue libraryTargetFolderValue = outletFeatureHelper.getLibraryTargetFolderValue(entry);
+		FeatureParameterValue libraryTargetFolderValue = coreFeatureHelper.getLibraryTargetFolderValue(entry);
 		if (libraryTargetFolderValue != null) {
-			sctFsa.setOutputPath(IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT,
+			sctFsa.setOutputPath(LIBRARY_TARGET_FOLDER_OUTPUT,
 					libraryTargetFolderValue.getStringValue());
 		}
 
 		OutputConfiguration librarytargetFolderOutputConfiguration = sctFsa.getOutputConfigurations()
-				.get(IExecutionFlowGenerator.LIBRARY_TARGET_FOLDER_OUTPUT);
+				.get(LIBRARY_TARGET_FOLDER_OUTPUT);
 		if (librarytargetFolderOutputConfiguration != null) {
 			librarytargetFolderOutputConfiguration.setCreateOutputDirectory(true);
 			// do not overwrite existing resources and ensure the folder is not
@@ -208,15 +210,15 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 			librarytargetFolderOutputConfiguration.setOverrideExistingResources(false);
 		}
 	}
-	
+
 	protected void initApiTargetFolder(GeneratorEntry entry) {
-		FeatureParameterValue apiTargetFolderValue = outletFeatureHelper.getApiTargetFolderValue(entry);
+		FeatureParameterValue apiTargetFolderValue = coreFeatureHelper.getApiTargetFolderValue(entry);
 		if (apiTargetFolderValue != null) {
-			sctFsa.setOutputPath(IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT,
+			sctFsa.setOutputPath(API_TARGET_FOLDER_OUTPUT,
 					apiTargetFolderValue.getStringValue());
 		}
 		OutputConfiguration apiTargetFolderOutputConfiguration = sctFsa.getOutputConfigurations()
-				.get(IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT);
+				.get(API_TARGET_FOLDER_OUTPUT);
 		if (apiTargetFolderOutputConfiguration != null) {
 			apiTargetFolderOutputConfiguration.setCreateOutputDirectory(true);
 		}
@@ -224,12 +226,12 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 
 	protected void initDefaultOutput(GeneratorEntry entry) {
 		sctFsa.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
-				outletFeatureHelper.getTargetFolderValue(entry).getExpression().toString());
+				coreFeatureHelper.getTargetFolderValue(entry).getExpression().toString());
 		sctFsa.getOutputConfigurations().get(IFileSystemAccess.DEFAULT_OUTPUT).setCreateOutputDirectory(true);
 	}
 
 	protected void initFsaTargetProject(GeneratorEntry entry) {
-		sctFsa.setOutputPath(ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT,
-				outletFeatureHelper.getTargetProjectValue(entry).getStringValue());
+		sctFsa.setOutputPath(OUTLET_FEATURE_TARGET_PROJECT,
+				coreFeatureHelper.getTargetProjectValue(entry).getStringValue());
 	}
 }

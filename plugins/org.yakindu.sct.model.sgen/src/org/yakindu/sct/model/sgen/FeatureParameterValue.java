@@ -18,12 +18,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureParameterValue#getParameter <em>Parameter</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureParameterValue#getFeatureConfiguration <em>Feature Configuration</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureParameterValue#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sgen.SGenPackage#getFeatureParameterValue()
  * @model

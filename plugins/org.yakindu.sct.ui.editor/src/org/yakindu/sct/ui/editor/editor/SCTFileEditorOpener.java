@@ -11,6 +11,7 @@
 package org.yakindu.sct.ui.editor.editor;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.ui.IEditorPart;
@@ -18,7 +19,6 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
-import org.yakindu.sct.domain.util.URIUtil;
 
 /**
  * Opens <code>.sct</code> files in corresponding statechart diagramm editor.
@@ -31,7 +31,7 @@ public class SCTFileEditorOpener implements IURIEditorOpener {
 	@Override
 	public IEditorPart open(URI uri, boolean select) {
 		try {
-			IFile fileToOpen = URIUtil.toFile(uri);
+			IFile fileToOpen = toFile(uri);
 			if (fileToOpen != null) {
 				return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 						.openEditor(new FileEditorInput(fileToOpen), StatechartDiagramEditor.ID);
@@ -45,6 +45,14 @@ public class SCTFileEditorOpener implements IURIEditorOpener {
 	@Override
 	public IEditorPart open(URI referenceOwnerURI, EReference reference, int indexInList, boolean select) {
 		return open(referenceOwnerURI, select);
+	}
+	
+	public IFile toFile(URI uri) {
+		if (uri.isPlatformResource()) {
+			String platformString = uri.toPlatformString(true);
+			return (IFile) ResourcesPlugin.getWorkspace().getRoot().findMember(platformString);
+		}
+		return null;
 	}
 
 }

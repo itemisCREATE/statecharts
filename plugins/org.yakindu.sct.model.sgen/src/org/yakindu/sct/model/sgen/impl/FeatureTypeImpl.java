@@ -33,6 +33,7 @@ import org.yakindu.sct.model.sgen.SGenPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureTypeImpl#isDeprecated <em>Deprecated</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureTypeImpl#getComment <em>Comment</em>}</li>
@@ -40,7 +41,6 @@ import org.yakindu.sct.model.sgen.SGenPackage;
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureTypeImpl#getLibrary <em>Library</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureTypeImpl#isOptional <em>Optional</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

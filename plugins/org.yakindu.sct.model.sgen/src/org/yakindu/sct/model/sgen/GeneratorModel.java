@@ -20,11 +20,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.GeneratorModel#getEntries <em>Entries</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.GeneratorModel#getGeneratorId <em>Generator Id</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sgen.SGenPackage#getGeneratorModel()
  * @model

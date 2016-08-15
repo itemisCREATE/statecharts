@@ -17,7 +17,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.sct.generator.c.features.ICFeatureConstants;
-import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
+import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.Visibility;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureType;

@@ -10,16 +10,16 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
-import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE;
-import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_CHOICES;
-import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION;
-import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES;
-import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRIES;
-import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS;
-import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS;
-import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION;
-import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES;
-import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_REACTIONS;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.FUNCTION_INLINING_FEATURE;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.FUNCTION_INLINING_FEATURE_INLINE_CHOICES;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRIES;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.FUNCTION_INLINING_FEATURE_INLINE_REACTIONS;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.FlowOptimizer;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;

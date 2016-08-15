@@ -1,12 +1,12 @@
 /**
-  Copyright (c) 2012 committers of YAKINDU and others.
-  All rights reserved. This program and the accompanying materials
-  are made available under the terms of the Eclipse Public License v1.0
-  which accompanies this distribution, and is available at
-  http://www.eclipse.org/legal/epl-v10.html
-  Contributors:
-  	Markus Muehlbrandt - Initial contribution and API
-*/
+ *   Copyright (c) 2012 committers of YAKINDU and others.
+ *   All rights reserved. This program and the accompanying materials
+ *   are made available under the terms of the Eclipse Public License v1.0
+ *   which accompanies this distribution, and is available at
+ *   http://www.eclipse.org/legal/epl-v10.html
+ *   Contributors:
+ *   	Markus Muehlbrandt - Initial contribution and API
+ */
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
@@ -15,6 +15,7 @@ import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -23,8 +24,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.generator.core.library.IOutletFeatureHelper
-import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
+import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*;
 
 class StatemachineInterface {
 
@@ -36,15 +36,15 @@ class StatemachineInterface {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension ExpressionCode
 	@Inject Beautifier beautifier
-	
-	@Inject IOutletFeatureHelper outletFeatureHelper
+
+	@Inject ICoreLibraryHelper outletFeatureHelper
 
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineInterfaceName.java
 		var content = beautifier.format(filename, content(flow, entry))
 		if (outletFeatureHelper.getApiTargetFolderValue(entry) != null) {
 			// generate into API target folder in case one is specified, as it is an interface
-			fsa.generateFile(filename, IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT, content)
+			fsa.generateFile(filename, API_TARGET_FOLDER_OUTPUT, content)
 		} else {
 			fsa.generateFile(filename, content)
 		}
@@ -64,11 +64,11 @@ class StatemachineInterface {
 			
 			public interface «flow.statemachineInterfaceName» extends «flow.statemachineInterfaceExtensions» {
 				«IF flow.internalScope != null»
-				
-				«var constants = flow.internalScope.declarations.filter(VariableDefinition).filter[const]»
-				«FOR constant : constants»
-					«constant.constantFieldDeclaration()»
-				«ENDFOR»
+					
+					«var constants = flow.internalScope.declarations.filter(VariableDefinition).filter[const]»
+					«FOR constant : constants»
+						«constant.constantFieldDeclaration()»
+					«ENDFOR»
 				«ENDIF»
 				«FOR scope : flow.scopes»
 					«scope.createScope(entry)»
@@ -76,10 +76,9 @@ class StatemachineInterface {
 			}
 		'''
 	}
-	
-	
-	
-	def protected constantFieldDeclaration(VariableDefinition variable){
+
+	def protected constantFieldDeclaration(
+		VariableDefinition variable) {
 		'''public static final «variable.type.targetLanguageName» «variable.identifier» = «variable.initialValue.code»;'''
 	}
 
@@ -120,7 +119,7 @@ class StatemachineInterface {
 				public interface «scope.interfaceName» {
 				«var constants = scope.declarations.filter(VariableDefinition).filter[const]»
 				«FOR constant : constants»
-					«constant.constantFieldDeclaration()»
+				«constant.constantFieldDeclaration()»
 				«ENDFOR»
 				«scope.eventAccessors»
 				«scope.variableAccessors»
@@ -171,7 +170,7 @@ class StatemachineInterface {
 		'''
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
-				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+					«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 						public void raise«event.name.asName»(«event.type.targetLanguageName» value);
 					«ELSE»
 						public void raise«event.name.asName»();
