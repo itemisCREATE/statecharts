@@ -1,12 +1,12 @@
 /**
-  Copyright (c) 2012 committers of YAKINDU and others.
-  All rights reserved. This program and the accompanying materials
-  are made available under the terms of the Eclipse Public License v1.0
-  which accompanies this distribution, and is available at
-  http://www.eclipse.org/legal/epl-v10.html
-  Contributors:
-  	Markus Muehlbrandt - Initial contribution and API
-*/
+ *   Copyright (c) 2012 committers of YAKINDU and others.
+ *   All rights reserved. This program and the accompanying materials
+ *   are made available under the terms of the Eclipse Public License v1.0
+ *   which accompanies this distribution, and is available at
+ *   http://www.eclipse.org/legal/epl-v10.html
+ *   Contributors:
+ *   	Markus Muehlbrandt - Initial contribution and API
+ */
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
@@ -25,6 +25,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.generator.core.library.IOutletFeatureHelper
 import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
+import static org.eclipse.xtext.util.Strings.*
 
 class StatemachineInterface {
 
@@ -36,12 +37,12 @@ class StatemachineInterface {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension ExpressionCode
 	@Inject Beautifier beautifier
-	
+
 	@Inject IOutletFeatureHelper outletFeatureHelper
 
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineInterfaceName.java
-		var content = beautifier.format(filename, content(flow, entry))
+		var content = content(flow, entry)
 		if (outletFeatureHelper.getApiTargetFolderValue(entry) != null) {
 			// generate into API target folder in case one is specified, as it is an interface
 			fsa.generateFile(filename, IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT, content)
@@ -54,6 +55,7 @@ class StatemachineInterface {
 		'''
 			«entry.licenseText»
 			package «flow.getImplementationPackageName(entry)»;
+			
 			«IF entry.createInterfaceObserver && flow.hasOutgoingEvents»
 				import java.util.List;
 			«ENDIF»
@@ -63,12 +65,12 @@ class StatemachineInterface {
 			«ENDIF»
 			
 			public interface «flow.statemachineInterfaceName» extends «flow.statemachineInterfaceExtensions» {
+			
 				«IF flow.internalScope != null»
-				
-				«var constants = flow.internalScope.declarations.filter(VariableDefinition).filter[const]»
-				«FOR constant : constants»
-					«constant.constantFieldDeclaration()»
-				«ENDFOR»
+			«var constants = flow.internalScope.declarations.filter(VariableDefinition).filter[const]»
+					«FOR constant : constants»
+				«constant.constantFieldDeclaration()»
+					«ENDFOR»
 				«ENDIF»
 				«FOR scope : flow.scopes»
 					«scope.createScope(entry)»
@@ -76,11 +78,12 @@ class StatemachineInterface {
 			}
 		'''
 	}
-	
-	
-	
-	def protected constantFieldDeclaration(VariableDefinition variable){
-		'''public static final «variable.type.targetLanguageName» «variable.identifier» = «variable.initialValue.code»;'''
+
+	def protected constantFieldDeclaration(
+		VariableDefinition variable) {
+		'''	public static final «variable.type.targetLanguageName» «variable.identifier» = «variable.initialValue.code»;
+
+		'''
 	}
 
 	def protected createScope(Scope scope, GeneratorEntry entry) {
@@ -105,33 +108,36 @@ class StatemachineInterface {
 		'''
 			«IF scope.hasOperations()»
 				public interface «scope.internalOperationCallbackName» {
+				
 					«FOR operation : scope.operations»
 						«operation.operationSignature»
 					«ENDFOR»
 				}
 				
 				public void set«scope.internalOperationCallbackName»(«scope.internalOperationCallbackName» operationCallback);
+				
 			«ENDIF»
 		'''
 	}
 
 	def protected createInterface(InterfaceScope scope, GeneratorEntry entry) {
 		'''
-				public interface «scope.interfaceName» {
-				«var constants = scope.declarations.filter(VariableDefinition).filter[const]»
-				«FOR constant : constants»
-					«constant.constantFieldDeclaration()»
-				«ENDFOR»
+			public interface «scope.interfaceName» {
+			
+			«var constants = scope.declarations.filter(VariableDefinition).filter[const]»
+			«FOR constant : constants»
+				«constant.constantFieldDeclaration()»
+			«ENDFOR»
 				«scope.eventAccessors»
 				«scope.variableAccessors»
-				«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
+			«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
 				public List<«scope.getInterfaceListenerName()»> getListeners();
+			«ENDIF»
+				«IF scope.hasOperations()»
+					public void set«scope.getInterfaceOperationCallbackName()»(«scope.getInterfaceOperationCallbackName()» operationCallback);
+
 				«ENDIF»
-			
-					«IF scope.hasOperations()»
-						public void set«scope.getInterfaceOperationCallbackName()»(«scope.getInterfaceOperationCallbackName()» operationCallback);
-					«ENDIF»
-				}
+			}
 		'''
 	}
 
@@ -140,6 +146,7 @@ class StatemachineInterface {
 			«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
 				
 				public interface «scope.getInterfaceListenerName()» {
+				
 					«FOR event : scope.eventDefinitions»
 						«IF event.direction == Direction::OUT»
 							«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
@@ -159,9 +166,10 @@ class StatemachineInterface {
 			«IF scope.hasOperations»
 				
 				public interface «scope.getInterfaceOperationCallbackName()» {
-				«FOR operation : scope.operations»
-					«operation.operationSignature»
-				«ENDFOR»
+				
+					«FOR operation : scope.operations »
+						«operation.operationSignature»
+					«ENDFOR»
 				}
 			«ENDIF»
 		'''
@@ -171,16 +179,20 @@ class StatemachineInterface {
 		'''
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
-				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
+					«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 						public void raise«event.name.asName»(«event.type.targetLanguageName» value);
+						
 					«ELSE»
 						public void raise«event.name.asName»();
+						
 					«ENDIF»
 				«ELSEIF event.direction == Direction::OUT»
 					public boolean isRaised«event.name.asName»();
+					
 					««« IMPORTANT: An event not specifying a type is regarded to have a void type
 				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 						public «event.type.targetLanguageName» «event.getter»;
+						
 					«ENDIF»	
 				«ENDIF»
 			«ENDFOR»
@@ -190,8 +202,10 @@ class StatemachineInterface {
 	def protected variableAccessors(InterfaceScope scope) '''
 		«FOR variable : scope.variableDefinitions»
 			public «variable.type.targetLanguageName» «variable.getter»;
+			
 			«IF !variable.readonly && !variable.const»
-				public void «variable.setter»(«variable.type.targetLanguageName» value);
+				public void «variable.setter »(«variable.type.targetLanguageName» value);
+				
 			«ENDIF»
 		«ENDFOR»
 	'''
@@ -213,6 +227,7 @@ class StatemachineInterface {
 		'''
 			public «type.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.
 				type.targetLanguageName» «parameter.identifier»«ENDFOR»);
+			
 		'''
 	}
 

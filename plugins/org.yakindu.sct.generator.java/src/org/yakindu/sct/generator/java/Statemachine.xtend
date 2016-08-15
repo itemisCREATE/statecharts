@@ -43,8 +43,7 @@ class Statemachine {
 	
 	def generateStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineClassName.java
-		var content = beautifier.format(filename, content(flow, entry))
-		fsa.generateFile(filename, content)
+		fsa.generateFile(filename, content(flow, entry))
 	}
 	
 	def protected content(ExecutionFlow flow, GeneratorEntry entry) '''
