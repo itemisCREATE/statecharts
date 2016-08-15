@@ -53,6 +53,13 @@ A transition is the transfer of one state to another. A transition is diagrammed
 
 All of these three elements are optional, i.&nbsp;e. a transition may have one or more or them, but it doesn't need to. Events triggers, guard conditions, and effects are specified as a text that is attached to the transition arrow in the diagram.
 
+Here's an example:
+
+p(#fig_transition-example). 
+!(standard-image)images/docu_transition_020_priorities_030_example_01.png(Transition example)!
+
+p=. Transition example: A simple state machine to launch a rocket. The initial transition's _effect_ sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ – executed as one of a transition's _actions_ – cares for audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the rocket is launched. The countdown can be aborted anytime before launch by a _cancel_ event which _triggers_ the appropriate transition to fire.
+
 "Figure &quot;Transition syntax overview&quot;":#fig_transition-syntax-overview shows how the syntax of a transition specification is defined. You can refer to this diagram while reading the subsequent sections.
 
 p(#fig_transition-syntax-overview). 
