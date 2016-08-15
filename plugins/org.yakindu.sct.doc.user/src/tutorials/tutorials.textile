@@ -1,4 +1,6 @@
 
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/tutorials/tutorials.textile
+
 h1(#oss_five-minutes-tutorial). Five-minutes tutorial
 
 The five-minutes tutorial gives you a brief introduction into YAKINDU Statechart Tools by a simple example. It models a light switch, which has the states _on_ and _off_. Operating the switch repeatedly turns the light on, off, back on again, and so forth. You can simulate this behavior in a dynamic statechart model. Here's how this looks like:
@@ -42,6 +44,8 @@ As an example, we will take the light switch statechart and generate Java source
 
 That's it. If you want to know more, take the time and work through the "Comprehensive Tutorial":#oss_comprehensive-tutorial.
 
+
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/tutorials/tutorials.textile
 
 h1(#oss_comprehensive-tutorial). Comprehensive tutorial
 

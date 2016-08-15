@@ -3,6 +3,8 @@ p.
 
 ==<div class="pro-feature">==
 
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/advanced_simulation.textile
+
 h1(#advsim_simulation). Debugging with breakpoints and snapshots
 
 h2(#advsim_introduction). Introduction

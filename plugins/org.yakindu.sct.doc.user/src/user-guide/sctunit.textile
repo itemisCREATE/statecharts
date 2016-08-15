@@ -3,6 +3,8 @@ p.
 
 ==<div class="pro-feature">==
 
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/sctunit.textile
+
 h1. SCTUnit
 
 h2. What is SCTUnit for?

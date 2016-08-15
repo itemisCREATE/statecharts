@@ -1,4 +1,6 @@
 
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/statechart_language.textile
+
 h1(#the-statechart-language). The statechart language
 
 This chapter describes the statechart elements of the YAKINDU Statechart Tools (YAKINDU SCT) editor. The YAKINDU SCT meta model is the model of finite state machines. It is based on the view of a system that is defined by a finite number of states. The behavior of such a system is based on its active states. These states are determined by the history of the state machine. Very important are the theoretical models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (_entry_, _exit_). YAKINDU SCT can model both these types.

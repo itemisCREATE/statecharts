@@ -1,4 +1,6 @@
 
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/simulating_statecharts.textile
+
 h1(#simulating-statecharts). Simulating statecharts
 
 Simulating a statechart model means to execute it, raise events manually, have time-based and other events being triggered automatically, and observe the model's behavior.
