@@ -127,6 +127,18 @@ class StringTreeNode {
 
 		return nodelist;
 	}
+	
+	def public int getWeight()
+	{
+		var weight = 0;
+		
+		for(c : children)
+		{
+			weight += c.getWeight() + 1; // + 1: count children as well
+		}
+		
+		return weight;
+	}
 
 	def public int getDepth() {
 		// Upwards recursion to get distance from root
