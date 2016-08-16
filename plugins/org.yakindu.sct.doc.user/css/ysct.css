@@ -118,3 +118,7 @@ span.pro-feature:before {
 .edit-on-github {
 	text-align: right
 }
+
+.eclipsehelp .edit-on-github {
+	display: none
+}
