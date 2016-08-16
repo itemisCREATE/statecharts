@@ -27,16 +27,17 @@ import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.shared.Access;
 import org.yakindu.base.utils.jface.help.CrossRefObjectTextHover;
 import org.yakindu.base.utils.jface.help.HelpHoverProvider;
+import org.yakindu.sct.generator.core.filesystem.ISCTWorkspaceAccess;
 import org.yakindu.sct.generator.genmodel.ui.help.SGenUserHelpDocumentationProvider;
 import org.yakindu.sct.generator.genmodel.ui.highlighting.SGenHighlightingConfiguration;
 import org.yakindu.sct.generator.genmodel.ui.highlighting.SGenSemanticHighlightingCalculator;
 import org.yakindu.sct.generator.genmodel.ui.templates.SGenTemplateProposalProvider;
+import org.yakindu.sct.generator.genmodel.ui.ws.DefaultSCTWorkspaceAccess;
 
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class SGenUiModule extends
-		org.yakindu.sct.generator.genmodel.ui.AbstractSGenUiModule {
+public class SGenUiModule extends org.yakindu.sct.generator.genmodel.ui.AbstractSGenUiModule {
 	public SGenUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
@@ -92,6 +93,10 @@ public class SGenUiModule extends
 		} else {
 			return ResourceForIEditorInputFactory.class;
 		}
+	}
+
+	public Class<? extends ISCTWorkspaceAccess> bindISCTWorkspaceAccess() {
+		return DefaultSCTWorkspaceAccess.class;
 	}
 
 }

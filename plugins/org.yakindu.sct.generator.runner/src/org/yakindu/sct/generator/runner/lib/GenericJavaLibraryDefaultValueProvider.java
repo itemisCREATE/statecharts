@@ -14,16 +14,21 @@ import static org.yakindu.sct.generator.runner.lib.IGenericJavaFeatureConstants.
 import static org.yakindu.sct.generator.runner.lib.IGenericJavaFeatureConstants.GENERATOR_PROJECT;
 import static org.yakindu.sct.generator.runner.lib.IGenericJavaFeatureConstants.LIBRARY_NAME;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.yakindu.sct.generator.core.filesystem.ISCTWorkspaceAccess;
 import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
+
+import com.google.inject.Inject;
 
 /**
  * 
@@ -31,6 +36,9 @@ import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
  */
 public class GenericJavaLibraryDefaultValueProvider extends AbstractDefaultFeatureValueProvider {
 
+	@Inject
+	protected ISCTWorkspaceAccess access;
+	
 	// (ID.)+ID
 	private static final String GENERATOR_CLASS_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*\\.)+[a-zA-Z_][a-zA-Z0-9_]*"; //$NON-NLS-1$
 
@@ -52,7 +60,7 @@ public class GenericJavaLibraryDefaultValueProvider extends AbstractDefaultFeatu
 	public IStatus validateParameterValue(FeatureParameterValue parameterValue) {
 		String parameterName = parameterValue.getParameter().getName();
 		String value = parameterValue.getStringValue();
-		if (GENERATOR_PROJECT.equals(parameterName) && !projectExists(value)) {
+		if (GENERATOR_PROJECT.equals(parameterName) && !access.projectExists(value)) {
 			return error(String.format("The Project %s does not exist", value));
 		}
 		IJavaProject ijp = JavaCore.create(this.getProject(parameterValue));
@@ -68,5 +76,9 @@ public class GenericJavaLibraryDefaultValueProvider extends AbstractDefaultFeatu
 			return error("Generator class must be a full qualified class name");
 		}
 		return Status.OK_STATUS;
+	}
+
+	protected IProject getProject(EObject contextElement) {
+		return WorkspaceSynchronizer.getFile(contextElement.eResource()).getProject();
 	}
 }

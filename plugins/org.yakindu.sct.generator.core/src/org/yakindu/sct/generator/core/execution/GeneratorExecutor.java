@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
+ * Copyright (c) 2016 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,18 +8,10 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.builder;
+package org.yakindu.sct.generator.core.execution;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.types.typesystem.AbstractTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -39,27 +31,9 @@ import com.google.inject.Module;
  * 
  * @author andreas muelder - Initial contribution and API
  * @author holger willebrandt - refactoring
- * @author markus mühlbrandt - added executeGenerator for generator models
+ * @author markus mÃ¼hlbrandt - added executeGenerator for generator models
  */
 public class GeneratorExecutor {
-
-	public void executeGenerator(IFile file) {
-		Resource resource = loadResource(file);
-		if (resource == null || resource.getContents().size() == 0 || resource.getErrors().size() > 0)
-			return;
-		final GeneratorModel model = (GeneratorModel) resource.getContents().get(0);
-
-
-		Job generatorJob = new Job("Execute SCT Genmodel " + file.getName()) {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				executeGenerator(model);
-				return Status.OK_STATUS;
-			}
-		};
-		generatorJob.setRule(file.getProject().getWorkspace().getRuleFactory().buildRule());
-		generatorJob.schedule();
-	}
 
 	public void executeGenerator(GeneratorModel model) {
 
@@ -87,7 +61,7 @@ public class GeneratorExecutor {
 		Injector injector = domainDescriptor.getDomainInjectorProvider().getGeneratorInjector(model.getGeneratorId(),
 				overridesModule);
 		injector.injectMembers(generator);
-		
+
 		// TODO: refactor location for adding type system resource.
 		ITypeSystem typeSystem = injector.getInstance(ITypeSystem.class);
 		if (typeSystem instanceof AbstractTypeSystem) {
@@ -98,12 +72,4 @@ public class GeneratorExecutor {
 
 		return generator;
 	}
-
-	protected Resource loadResource(IFile file) {
-		Resource resource = null;
-		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-		resource = new ResourceSetImpl().getResource(uri, true);
-		return resource;
-	}
-
 }

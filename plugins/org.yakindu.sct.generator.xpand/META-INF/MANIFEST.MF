@@ -11,4 +11,5 @@ Require-Bundle: org.yakindu.sct.generator.core,
  org.eclipse.xtend.typesystem.emf,
  org.eclipse.xtend,
  org.yakindu.sct.model.stext,
- org.eclipse.xpand
+ org.eclipse.xpand,
+ org.eclipse.core.resources

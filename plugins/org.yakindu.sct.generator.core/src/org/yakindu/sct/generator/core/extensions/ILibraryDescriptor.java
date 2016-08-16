@@ -12,6 +12,8 @@ package org.yakindu.sct.generator.core.extensions;
 
 import org.eclipse.emf.common.util.URI;
 import org.yakindu.sct.generator.core.library.IDefaultFeatureValueProvider;
+
+import com.google.inject.Injector;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -24,5 +26,7 @@ public interface ILibraryDescriptor {
 	String getLibraryId();
 
 	IDefaultFeatureValueProvider createFeatureValueProvider();
+	
+	IDefaultFeatureValueProvider createFeatureValueProvider(Injector injector);
 
 }

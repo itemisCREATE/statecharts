@@ -39,11 +39,9 @@ class Statemachine {
 	@Inject protected extension FlowCode
 	@Inject protected extension StateVectorExtensions
 	
-	@Inject Beautifier beautifier
-	
 	def generateStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineClassName.java
-		var content = beautifier.format(filename, content(flow, entry))
+		var content = content(flow, entry)
 		fsa.generateFile(filename, content)
 	}
 	

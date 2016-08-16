@@ -35,13 +35,12 @@ class StatemachineInterface {
 	@Inject extension ITypeSystem
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension ExpressionCode
-	@Inject Beautifier beautifier
 
 	@Inject ICoreLibraryHelper outletFeatureHelper
 
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineInterfaceName.java
-		var content = beautifier.format(filename, content(flow, entry))
+		var content = content(flow, entry)
 		if (outletFeatureHelper.getApiTargetFolderValue(entry) != null) {
 			// generate into API target folder in case one is specified, as it is an interface
 			fsa.generateFile(filename, API_TARGET_FOLDER_OUTPUT, content)

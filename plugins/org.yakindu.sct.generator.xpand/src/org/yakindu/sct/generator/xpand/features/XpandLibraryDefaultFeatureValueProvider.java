@@ -43,7 +43,7 @@ public class XpandLibraryDefaultFeatureValueProvider extends AbstractDefaultFeat
 			parameterValue.setValue("org::yakindu::sct::generator::xpand::Main::main");
 		}
 		if (TEMPLATE_FEATURE_TEMPLATE_PROJECT.equals(parameterName)) {
-			parameterValue.setValue(getProject(contextElement).getName());
+			parameterValue.setValue(getProjectName(contextElement));
 		}
 	}
 
@@ -54,7 +54,7 @@ public class XpandLibraryDefaultFeatureValueProvider extends AbstractDefaultFeat
 				&& !parameterValue.getStringValue().matches(XPAND_TEMPLATE_PATH_REGEX)) {
 			return error("Xpand Template Path Syntax Error");
 		}
-		if (TEMPLATE_FEATURE_TEMPLATE_PROJECT.equals(parameterName) && !projectExists(value)) {
+		if (TEMPLATE_FEATURE_TEMPLATE_PROJECT.equals(parameterName) && !access.projectExists(value)) {
 			return error(String.format("The Project %s does not exist", value));
 		}
 		return Status.OK_STATUS;

@@ -46,6 +46,8 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * 
@@ -69,12 +71,13 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	// Failure codes
 	public static final String CODE_REQUIRED_FEATURE = "code_req_feature";
 
+	@Inject
+	private Injector injector;
+
 	@Check
 	public void checkContentType(GeneratorEntry entry) {
-		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(entry,
-				GeneratorModel.class);
-		IGeneratorDescriptor descriptor = GeneratorExtensions
-				.getGeneratorDescriptor(generatorModel.getGeneratorId());
+		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(entry, GeneratorModel.class);
+		IGeneratorDescriptor descriptor = GeneratorExtensions.getGeneratorDescriptor(generatorModel.getGeneratorId());
 		if (descriptor == null)
 			return;
 		String contentType = entry.getContentType();
@@ -82,39 +85,32 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			return;
 		}
 		if (!contentType.equals(descriptor.getContentType())) {
-			error(UNKNOWN_CONTENT_TYPE + contentType + "'",
-					SGenPackage.Literals.GENERATOR_ENTRY__CONTENT_TYPE);
+			error(UNKNOWN_CONTENT_TYPE + contentType + "'", SGenPackage.Literals.GENERATOR_ENTRY__CONTENT_TYPE);
 		}
 	}
 
 	@Check
-	public void checkParameterValueType(
-			final FeatureParameterValue parameterValue) {
+	public void checkParameterValueType(final FeatureParameterValue parameterValue) {
 		if (parameterValue == null || parameterValue.getExpression() == null)
 			return;
 		Literal value = parameterValue.getExpression();
-		ParameterTypes parameterType = parameterValue.getParameter()
-				.getParameterType();
+		ParameterTypes parameterType = parameterValue.getParameter().getParameterType();
 		switch (parameterType) {
 		case BOOLEAN:
 			if (!(value instanceof BoolLiteral))
-				error(INCOMPATIBLE_TYPE_BOOLEAN_EXPECTED,
-						SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
+				error(INCOMPATIBLE_TYPE_BOOLEAN_EXPECTED, SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 			break;
 		case INTEGER:
 			if (!(value instanceof IntLiteral))
-				error(INCOMPATIBLE_TYPE_INTEGER_EXPECTED,
-						SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
+				error(INCOMPATIBLE_TYPE_INTEGER_EXPECTED, SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 			break;
 		case FLOAT:
 			if (!(value instanceof RealLiteral))
-				error(INCOMPATIBLE_TYPE_FLOAT_EXPECTED,
-						SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
+				error(INCOMPATIBLE_TYPE_FLOAT_EXPECTED, SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 			break;
 		case STRING:
 			if (!(value instanceof StringLiteral))
-				error(INCOMPATIBLE_TYPE_STRING_EXPECTED,
-						SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
+				error(INCOMPATIBLE_TYPE_STRING_EXPECTED, SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 			break;
 		}
 	}
@@ -123,16 +119,13 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public void checkParameterValue(final FeatureParameterValue value) {
 		if (value.getExpression() == null || value.getExpression() == null)
 			return;
-		GeneratorModel model = (GeneratorModel) EcoreUtil2
-				.getRootContainer(value);
+		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(value);
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptor(model.getGeneratorId());
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
 
-		IDefaultFeatureValueProvider provider = LibraryExtensions
-				.getDefaultFeatureValueProvider(
-						generatorDescriptor.getLibraryIDs(), value
-								.getParameter().getFeatureType().getLibrary());
+		IDefaultFeatureValueProvider provider = LibraryExtensions.getDefaultFeatureValueProvider(
+				generatorDescriptor.getLibraryIDs(), value.getParameter().getFeatureType().getLibrary());
+		injector.injectMembers(provider);
 		IStatus status = provider.validateParameterValue(value);
 		createMarker(status);
 	}
@@ -140,40 +133,33 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	private void createMarker(IStatus status) {
 		switch (status.getSeverity()) {
 		case IStatus.ERROR:
-			super.error(status.getMessage(),
-					SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
+			super.error(status.getMessage(), SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 			break;
 		case IStatus.WARNING:
-			super.warning(status.getMessage(),
-					SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
+			super.warning(status.getMessage(), SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 		}
 	}
 
 	@Check
 	public void checkGeneratorExists(GeneratorModel model) {
-		IGeneratorDescriptor descriptor = GeneratorExtensions
-				.getGeneratorDescriptor(model.getGeneratorId());
+		IGeneratorDescriptor descriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
 		if (descriptor == null) {
-			error(String.format(UNKOWN_GENERATOR + " %s!",
-					model.getGeneratorId()),
+			error(String.format(UNKOWN_GENERATOR + " %s!", model.getGeneratorId()),
 					SGenPackage.Literals.GENERATOR_MODEL__GENERATOR_ID);
 		}
 	}
 
 	@Check
-	public void checkDuplicateGeneratorEntryFeature(
-			final FeatureConfiguration config) {
+	public void checkDuplicateGeneratorEntryFeature(final FeatureConfiguration config) {
 		GeneratorEntry entry = (GeneratorEntry) config.eContainer();
-		Iterable<FeatureConfiguration> filter = Iterables.filter(
-				entry.getFeatures(), new Predicate<FeatureConfiguration>() {
+		Iterable<FeatureConfiguration> filter = Iterables.filter(entry.getFeatures(),
+				new Predicate<FeatureConfiguration>() {
 					public boolean apply(FeatureConfiguration input) {
-						return (input.getType().getName().equals(config
-								.getType().getName()));
+						return (input.getType().getName().equals(config.getType().getName()));
 					}
 				});
 		if (Iterables.size(filter) > 1) {
-			error(DUPLICATE_FEATURE,
-					SGenPackage.Literals.FEATURE_CONFIGURATION__TYPE);
+			error(DUPLICATE_FEATURE, SGenPackage.Literals.FEATURE_CONFIGURATION__TYPE);
 		}
 
 	}
@@ -181,87 +167,73 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	@Check
 	public void checkDuplicateFeatureParameter(final FeatureParameterValue value) {
 		FeatureConfiguration entry = (FeatureConfiguration) value.eContainer();
-		Iterable<FeatureParameterValue> filter = Iterables.filter(
-				entry.getParameterValues(),
+		Iterable<FeatureParameterValue> filter = Iterables.filter(entry.getParameterValues(),
 				new Predicate<FeatureParameterValue>() {
 					public boolean apply(FeatureParameterValue input) {
-						return (input.getParameter().getName().equals(value
-								.getParameter().getName()));
+						return (input.getParameter().getName().equals(value.getParameter().getName()));
 					}
 				});
 		if (Iterables.size(filter) > 1) {
-			error(DUPLICATE_PARAMETER,
-					SGenPackage.Literals.FEATURE_PARAMETER_VALUE__PARAMETER);
+			error(DUPLICATE_PARAMETER, SGenPackage.Literals.FEATURE_PARAMETER_VALUE__PARAMETER);
 		}
 	}
 
 	@Check
 	public void checkRequiredFeatures(GeneratorEntry entry) {
-		GeneratorModel model = (GeneratorModel) EcoreUtil2
-				.getRootContainer(entry);
+		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(entry);
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptor(model.getGeneratorId());
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
 
 		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
 				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
 
 		Iterable<FeatureType> requiredFeatures = filter(
-				concat(transform(
-						transform(libraryDescriptors, getFeatureTypeLibrary()),
-						getFeatureTypes())), isRequired());
+				concat(transform(transform(libraryDescriptors, getFeatureTypeLibrary()), getFeatureTypes())),
+				isRequired());
 		List<String> configuredTypes = Lists.newArrayList();
 		for (FeatureConfiguration featureConfiguration : entry.getFeatures()) {
 			configuredTypes.add(featureConfiguration.getType().getName());
 		}
 		for (FeatureType featureType : requiredFeatures) {
 			if (!configuredTypes.contains(featureType.getName()))
-				error(String.format(MISSING_REQUIRED_FEATURE + " %s",
-						featureType.getName()),
-						SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF,
-						CODE_REQUIRED_FEATURE, featureType.getName());
+				error(String.format(MISSING_REQUIRED_FEATURE + " %s", featureType.getName()),
+						SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, CODE_REQUIRED_FEATURE,
+						featureType.getName());
 		}
 	}
 
 	@Check
 	public void checkDeprecatedFeatures(GeneratorEntry entry) {
 		Iterable<FeatureConfiguration> features = entry.getFeatures();
-		Iterable<FeatureType> deprecatedFeatures = filter(
-				transform(features, getFeatureType()), isDeprecated());
+		Iterable<FeatureType> deprecatedFeatures = filter(transform(features, getFeatureType()), isDeprecated());
 		for (FeatureType feature : deprecatedFeatures) {
-			warning(String.format(DEPRECATED + " %s : %s", feature.getName(),
-					feature.getComment()),
-					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF,
-					feature.getName());
+			warning(String.format(DEPRECATED + " %s : %s", feature.getName(), feature.getComment()),
+					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, feature.getName());
 		}
 	}
 
 	@Check
 	public void checkRequiredParameters(FeatureConfiguration configuration) {
-		GeneratorModel model = (GeneratorModel) EcoreUtil2
-				.getRootContainer(configuration);
+		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(configuration);
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptor(model.getGeneratorId());
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
 
 		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
 				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
 
 		Iterable<String> requiredParameters = transform(
-				filter(concat(transform(
-						filter(concat(transform(
-								transform(libraryDescriptors,
-										getFeatureTypeLibrary()),
-								getFeatureTypes())), hasName(configuration
-								.getType().getName())), getParmeter())),
-						isRequiredParamter()), getName());
+				filter(concat(
+						transform(
+								filter(concat(transform(transform(libraryDescriptors, getFeatureTypeLibrary()),
+										getFeatureTypes())), hasName(configuration.getType().getName())),
+								getParmeter())),
+						isRequiredParamter()),
+				getName());
 
 		List<String> configuredParameters = Lists.newArrayList();
 
-		for (FeatureParameterValue featureParameterValue : configuration
-				.getParameterValues()) {
-			configuredParameters.add(featureParameterValue.getParameter()
-					.getName());
+		for (FeatureParameterValue featureParameterValue : configuration.getParameterValues()) {
+			configuredParameters.add(featureParameterValue.getParameter().getName());
 		}
 		for (String string : requiredParameters) {
 			if (!configuredParameters.contains(string))
@@ -273,14 +245,10 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	@Check
 	public void checkDeprecatedParameters(GeneratorEntry entry) {
 		Iterable<FeatureParameter> deprecatedParameters = filter(
-				concat(transform(
-						transform(entry.getFeatures(), getFeatureType()),
-						getParmeter())), isDeprecated());
+				concat(transform(transform(entry.getFeatures(), getFeatureType()), getParmeter())), isDeprecated());
 		for (FeatureParameter parameter : deprecatedParameters) {
-			warning(String.format(DEPRECATED + " %s : %s", parameter.getName(),
-					parameter.getComment()),
-					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF,
-					parameter.getName());
+			warning(String.format(DEPRECATED + " %s : %s", parameter.getName(), parameter.getComment()),
+					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, parameter.getName());
 		}
 	}
 
@@ -353,8 +321,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		return new Function<ILibraryDescriptor, FeatureTypeLibrary>() {
 
 			public FeatureTypeLibrary apply(ILibraryDescriptor from) {
-				return (FeatureTypeLibrary) new ResourceSetImpl()
-						.getResource(from.getURI(), true).getContents().get(0);
+				return (FeatureTypeLibrary) new ResourceSetImpl().getResource(from.getURI(), true).getContents().get(0);
 			}
 		};
 	}

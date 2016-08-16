@@ -10,21 +10,21 @@
  */
 package org.yakindu.sct.generator.core.library;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.sct.generator.core.GeneratorActivator;
+import org.yakindu.sct.generator.core.filesystem.ISCTWorkspaceAccess;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.SGenFactory;
+
+import com.google.inject.Inject;
 
 /**
  * 
@@ -34,6 +34,9 @@ import org.yakindu.sct.model.sgen.SGenFactory;
 public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFeatureValueProvider {
 
 	protected static final SGenFactory factory = SGenFactory.eINSTANCE;
+	
+	@Inject
+	protected ISCTWorkspaceAccess access;
 
 	protected abstract void setDefaultValue(FeatureType featureType, FeatureParameterValue parameterValue,
 			EObject contextElement);
@@ -64,8 +67,12 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 		return result;
 	}
 
-	protected IProject getProject(EObject contextElement) {
-		return WorkspaceSynchronizer.getFile(contextElement.eResource()).getProject();
+	protected String getProjectName(EObject contextElement) {
+		URI uri = EcoreUtil.getURI(contextElement);
+		if (uri.isPlatformResource() && uri.segmentCount() > 1) {
+			return uri.segment(1); // 0 is resource
+		}
+		return "ProjectName";
 	}
 
 	protected IStatus error(String msg) {
@@ -74,39 +81,5 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 
 	protected IStatus warning(String msg) {
 		return new Status(IStatus.WARNING, GeneratorActivator.PLUGIN_ID, msg);
-	}
-
-	protected boolean projectExists(String value) {
-		try {
-			return ResourcesPlugin.getWorkspace().getRoot().getProject(value).exists();
-		} catch (IllegalArgumentException e) {
-			return false;
-		}
-	}
-
-	protected boolean projectOpened(String value) {
-		try {
-			return ResourcesPlugin.getWorkspace().getRoot().getProject(value).isOpen();
-		} catch (IllegalArgumentException e) {
-			return false;
-		}
-	}
-
-	protected boolean folderExists(String projectName, String folderPath) {
-			try {
-				IPath workspaceRelativePath = Path.fromPortableString(projectName).append(folderPath);
-				return ResourcesPlugin.getWorkspace().getRoot().exists(workspaceRelativePath);
-			} catch (IllegalArgumentException e) {
-				return false;
-			}
-	}
-
-	protected boolean fileExists(String projectName, String folderPath) {
-		try {
-			return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName).getFile(new Path(folderPath))
-					.exists();
-		} catch (IllegalArgumentException e) {
-			return false;
-		}
 	}
 }
