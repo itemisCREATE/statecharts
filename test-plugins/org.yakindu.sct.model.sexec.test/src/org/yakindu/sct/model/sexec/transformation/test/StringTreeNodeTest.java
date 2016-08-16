@@ -242,6 +242,33 @@ public class StringTreeNodeTest {
 		stringListsEqual(expectedContents, tree.getContents());
 	}
 	
+	@Test
+	public void addStringListReturnTest1()
+	{
+		List<String> list = new ArrayList<String>(
+				Arrays.asList("Un", "Deux", "Trois", "Quatre")
+				);
+		StringTreeNode testNode = tree.addStringList(list);
+		
+		assertEquals("UnDeuxTroisQuatre", testNode.getContentUpwards());
+	}
+	
+	@Test
+	public void addStringListReturnTest2()
+	{
+		List<String> list1 = new ArrayList<String>(
+				Arrays.asList("Un", "Deux", "Trois", "Quatre")
+				);
+		List<String> list2 = new ArrayList<String>(list1);
+		list2.add("Cinq");
+		
+		tree.addStringList(list2);
+		
+		StringTreeNode testNode = tree.addStringList(list1);
+		
+		assertEquals("UnDeuxTroisQuatre", testNode.getContentUpwards());
+	}
+	
 	private void testSiblings(String testString, List<String> expectedSiblings)
 	{
 		buildStandardTestTree();

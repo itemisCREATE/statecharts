@@ -17,6 +17,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.Step;
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.naming.TreeNamingService;
 import org.yakindu.sct.model.sexec.transformation.FlowOptimizer;
@@ -40,6 +42,9 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 
 	@Inject
 	protected TreeNamingService statechartNamingService;
+	
+	@Inject 
+	protected TreeNamingService executionflowNamingService;
 
 	private List<Statechart> statecharts;
 
@@ -53,7 +58,7 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 			fail(e.getMessage());
 		}
 
-		optimizer.inlineReactions(true);
+		optimizer.inlineReactions(false);
 		optimizer.inlineExitActions(true);
 		optimizer.inlineEntryActions(true);
 		optimizer.inlineEnterSequences(true);
@@ -74,23 +79,50 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 	}
 	
 	@Test
-	public void testDefaultNamingServiceState_NameMatch_0() {
+	public void testDefaultNamingServiceState_NoDoubles() {
 
 		for (Statechart statechart : statecharts) {
 
 			// Transform statechart
 			ExecutionFlow flow = sequencer.transform(statechart);
 			flow = optimizer.transform(flow);
+			
+			List<String> names = new ArrayList<String>();
 
-			statechartNamingService.setMaxLength(0);
-			statechartNamingService.setSeparator('_');
-
+//			statechartNamingService.setMaxLength(0);
+//			statechartNamingService.setSeparator('_');
+			
+			executionflowNamingService.setMaxLength(0);
+			executionflowNamingService.setSeparator('_');
+			
 			// Initialize naming services for statechart and ExecutionFlow
-			statechartNamingService.initializeNamingService(flow);
-			System.out.println();
+//			statechartNamingService.initializeNamingService(statechart);
+			executionflowNamingService.initializeNamingService(flow);
 
+			for(ExecutionState state : flow.getStates())
+			{
+				String name = executionflowNamingService.getShortName(state);
+				assertEquals(names.contains(name), false);
+				names.add(name);
+			}
+//			SExecExtensions ext = new SExecExtensions();
+//			for(Step step : ext.getAllFunctions(flow))
+//			{
+//				String name = executionflowNamingService.getShortName(step);
+//				assertEquals(names.contains(name), false);
+//				names.add(name);
+//			}
+				
 			// Check for equality
 			//checkNameEquality(flow, statechartNamingService, flowNamingService);
+//			stringListsEqual(statechartNamingService.getTreeContents(), executionflowNamingService.getTreeContents());
 		}
+	}
+	
+	private void stringListsEqual(List<String> onelist, List<String> otherlist)
+	{
+		onelist.sort(null);
+		otherlist.sort(null);
+		assertEquals(onelist, otherlist);
 	}
 }
