@@ -37,7 +37,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-import org.yakindu.sct.generator.builder.GeneratorExecutor;
+import org.yakindu.sct.generator.core.execution.GeneratorExecutor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
