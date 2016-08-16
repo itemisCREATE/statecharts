@@ -42,7 +42,41 @@ p=. Parallel regions
 
 h3(#state). State
 
-States are the central elements of a state machine. A state has to be placed inside a region and must have a name that is unique inside this region. During simulation, each state can be active or passive. An active state has actions that are accomplished. Either an action is carried out on entering a state, during active state, or on exit.
+States are the central elements of a state machine. A state has to be placed inside a region and must have a name that is unique inside this region. During state machine execution, a state can be active or passive.
+
+A state can have a _behavior_. The behavior specifies which _actions_ are executed when the state becomes active, is active or is about to become inactive. The behavior specification is a text inside the state's box and consists of a sequence of so-called _local reactions_.
+
+The state *Countdown* in the following example has three local reactions:
+
+p(#fig_state-example). 
+!(standard-image)images/docu_state_010_example_01.png(State example)!
+
+p=. State example: A simple state machine to launch a rocket. When the *Countdown* state is entered, it sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ cares for audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the *Countdown* state will become inactive and launches the rocket upon exiting. The countdown can be aborted anytime before launch by a _cancel_ event. (See "figure &quot;Transition example&quot;":#fig_transition-example for a different state machine which solves the same task but puts more emphasis on transitions.)
+
+"Figure &quot;State behavior syntax overview&quot;":#fig_state-syntax-overview shows how the syntax of a state's behavior, the state specification, is defined. You can refer to this diagram while reading the subsequent sections.
+
+p(#fig_state-syntax-overview). 
+!(standard-image)images/docu_grammar_030_state-overview.png(State syntax overview)!
+
+p=. State behavior syntax overview
+
+h4(#local-reactions). Local reactions
+
+When an "event":#events occurs, it may trigger a so-called _local reaction_ that is executed inside the active state without leaving it, thus the word "local". As "figure &quot;Local reaction syntax&quot;":#fig_local-reaction-syntax shows, each local reaction consists of three parts:
+* The _reaction trigger_. It specifies the conditions that have to be fulfilled for the local reaction to be executed and consists of one or more "_event specifications_":#event-specifications and a "_guard condition_":#guard-condition. One of event specification(s) or guard condition may be omitted, but not both.
+** The "event specifications":#event-specifications determine which events, separated by comma, trigger this particular local reaction. Occurrence of one of these events is sufficient.
+** The "guard condition":#guard-condition must be fulfilled for the local reaction to be triggered. It is a boolean expression in square brackets.
+** If no event specification is given, this is equivalent to @always@ being specified. That is, the local reaction is always triggered as long as the guard condition evaluates to _true_.
+** If the guard condition is omitted, this is equivalent to the @[true]@ guard condition being specified.
+* The @/@ character.
+* The "_reaction effect_":#reaction-effect. It specifies one or more actions that will be executed if the local reaction is triggered.
+
+p(#fig_local-reaction-syntax). 
+!(standard-image)images/docu_grammar_030_state-localreaction.png(Local reaction syntax)!
+
+p=. Local reaction syntax
+
+More on event specifications, guard condition, and reaction effect in sections "&quot;event specifications&quot;":#event-specifications, "&quot;guard condition&quot;":#guard-condition, and "&quot;reaction effect&quot;":#reaction-effect, respectively.
 
 h3(#transition). Transition
 
@@ -58,7 +92,7 @@ Here's an example:
 p(#fig_transition-example). 
 !(standard-image)images/docu_transition_030_example_01.png(Transition example)!
 
-p=. Transition example: A simple state machine to launch a rocket. The initial transition's _effect_ sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ – executed as one of a transition's _actions_ – cares for audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the rocket is launched. The countdown can be aborted anytime before launch by a _cancel_ event which _triggers_ the appropriate transition to fire.
+p=. Transition example: A simple state machine to launch a rocket. The initial transition's _effect_ sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ – executed as one of a transition's _actions_ – cares for audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the rocket is launched. The countdown can be aborted anytime before launch by a _cancel_ event which _triggers_ the appropriate transition to fire. (See "figure &quot;State example&quot;":#fig_state-example for a different state machine which solves the same task but puts more emphasis on states.)
 
 "Figure &quot;Transition syntax overview&quot;":#fig_transition-syntax-overview shows how the syntax of a transition specification is defined. You can refer to this diagram while reading the subsequent sections.
 
@@ -71,7 +105,9 @@ h4(#unspecified-transition). Unspecified transition
 
 In the most simple case we have only the transition's arrow leading from a source state to a target state without any additional specification. In other words, there is no text attached to the transition. However, such an event will never be taken, so better make sure to set up a transition specification.
 
-h4(#event-triggers). Event triggers
+More on event specifications, guard condition, and reaction effect in sections "&quot;event specifications&quot;":#event-specifications, "&quot;guard condition&quot;":#guard-condition, and "&quot;reaction effect&quot;":#reaction-effect, respectively.
+
+h3(#event-specifications). Event specifications
 
 When an "event":#events occurs, it may trigger a transition to "fire". The transition's source state, which is the currently active state, becomes inactive, control is transferred along the transition's arrow to the transition's target state, and that state becomes the active state.
 
@@ -91,7 +127,7 @@ Let's have a look at some sample transition specifications. We are assuming that
 | @else@ | Transition fires always. |
 | @oncycle@ | Transition fires always. |
 
-h4(#guard-condition). Guard condition
+h3(#guard-condition). Guard condition
 
 A _guard_ applies an additional condition for a transition to fire. It is not sufficient for the specified event to occur, the guard condition must also be fulfilled. It is written in square brackets following the event trigger. It is also possible to specify a guard without any event trigger. In this case the transition is always taken, as long as the guard condition evaluates to _true_.
 
@@ -106,7 +142,7 @@ Please note that the guard condition applies to the whole event trigger, not jus
 
 It is not possible to have event-specific guards as in the illegal @ev_1 [x == 1], ev_2 [x == 2]@. If you need something like this, use multiple transitions with @ev_1 [x == 1]@ on one of them and @ev_2 [x == 2]@ on the other.
 
-h4(#effect). Effect
+h3(#reaction-effect). Reaction effect
 
 A transition specification may contain one or more _actions_ that are executed when the transition fires, like assigning a value to a variable, calling an operation, or raising an event. All actions taken together are called the transition's _effect_.
 
@@ -581,7 +617,7 @@ bc. operation localOperation (xValue : integer, yValue : integer):integer
 ==<!-- End stext_keyword_operation -->==
 
 
-h3(#local-reactions). Local reactions
+h3(#declaration-local-reactions). Local reactions
 
 Local reactions describe the internal behavior of a state. So they have internal scope. A local reaction is declared as follows:
 

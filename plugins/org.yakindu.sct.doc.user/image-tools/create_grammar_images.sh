@@ -18,7 +18,7 @@ setup_workdir()
 	echo "Populating working directory with PPM images."
 	for i in ${nti}*.png
 	do
-	    pngtopnm ${i} >"${wd}/`basename $i .png`.ppm"
+	    pngtopnm ${i} | pnmcrop | pnmmargin -white 10 >"${wd}/`basename $i .png`.ppm"
 	done
     fi
 }
@@ -85,3 +85,19 @@ create_grammar_image transition-detailed \
     transitionproperty \
     entrypointspec \
     exitpointspec
+
+# State: overview
+create_grammar_image state-overview \
+    statespecification \
+    statescope \
+    localreaction \
+    reactiontrigger \
+    eventspec \
+    guard \
+    reactioneffect
+
+# Local reaction
+create_grammar_image state-localreaction \
+    localreaction \
+    reactiontrigger \
+    reactioneffect
