@@ -22,6 +22,8 @@ import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * 
@@ -57,13 +59,22 @@ public class LibraryExtensions {
 		}
 
 		@Override
-		public IDefaultFeatureValueProvider createFeatureValueProvider() {
+		public IDefaultFeatureValueProvider createFeatureValueProvider(Injector injector) {
 			try {
-				return (IDefaultFeatureValueProvider) configElement.createExecutableExtension(DEFAULT_PROVIDER);
+				IDefaultFeatureValueProvider provider = (IDefaultFeatureValueProvider) configElement
+						.createExecutableExtension(DEFAULT_PROVIDER);
+				injector.injectMembers(provider);
+				return provider;
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
 			return null;
+		}
+
+		@Override
+		public IDefaultFeatureValueProvider createFeatureValueProvider() {
+			return createFeatureValueProvider(Guice.createInjector());
+
 		}
 	}
 

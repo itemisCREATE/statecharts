@@ -29,18 +29,19 @@ import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.genmodel.services.SGenGrammarAccess;
+import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 
 import com.google.inject.Inject;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SGenTemplateProposalProvider extends
-		DefaultTemplateProposalProvider {
+public class SGenTemplateProposalProvider extends DefaultTemplateProposalProvider {
 
 	@Inject
 	private SGenGrammarAccess gaccess;
@@ -50,53 +51,47 @@ public class SGenTemplateProposalProvider extends
 	private final ContextTypeIdHelper helper;
 
 	@Inject
-	public SGenTemplateProposalProvider(TemplateStore templateStore,
-			ContextTypeRegistry registry, ContextTypeIdHelper helper) {
+	public SGenTemplateProposalProvider(TemplateStore templateStore, ContextTypeRegistry registry,
+			ContextTypeIdHelper helper) {
 		super(templateStore, registry, helper);
 		this.helper = helper;
 	}
 
 	@Override
-	protected void createTemplates(TemplateContext templateContext,
-			ContentAssistContext context, ITemplateAcceptor acceptor) {
+	protected void createTemplates(TemplateContext templateContext, ContentAssistContext context,
+			ITemplateAcceptor acceptor) {
 		super.createTemplates(templateContext, context, acceptor);
 
 		String id = helper.getId(gaccess.getFeatureConfigurationRule());
 		if (templateContext.getContextType().getId().equals(id)) {
-			createFeatureConfigurationTemplates(templateContext, context,
-					acceptor);
+			createFeatureConfigurationTemplates(templateContext, context, acceptor);
 		}
 	}
 
-	private void createFeatureConfigurationTemplates(
-			TemplateContext templateContext, ContentAssistContext context,
+	private void createFeatureConfigurationTemplates(TemplateContext templateContext, ContentAssistContext context,
 			ITemplateAcceptor acceptor) {
-		GeneratorModel model = (GeneratorModel) EcoreUtil2
-				.getRootContainer(context.getCurrentModel());
+		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(context.getCurrentModel());
 
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptor(model.getGeneratorId());
-		
 		Iterable<ILibraryDescriptor> libraryDescriptor = LibraryExtensions
 				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
-		
+
 		for (ILibraryDescriptor desc : libraryDescriptor) {
 			ResourceSet set = new ResourceSetImpl();
 			Resource resource = set.getResource(desc.getURI(), true);
-			FeatureTypeLibrary lib = (FeatureTypeLibrary) resource
-					.getContents().get(0);
+			FeatureTypeLibrary lib = (FeatureTypeLibrary) resource.getContents().get(0);
 			EList<FeatureType> types = lib.getTypes();
 
 			for (FeatureType featureType : types) {
-				Template template = new Template(featureType.getName()
-						+ " feature", "Creates feature "
-						+ featureType.getName(), featureType.getName(),
+				Template template = new Template(featureType.getName() + " feature",
+						"Creates feature " + featureType.getName(), featureType.getName(),
 						creator.createProposal(featureType,
-								desc.createFeatureValueProvider(),
-								context.getCurrentModel()), false);
-				TemplateProposal proposal = createProposal(template,
-						templateContext, context, getImage(template),
+								desc.createFeatureValueProvider(SGenActivator.getInstance()
+										.getInjector(SGenActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN)),
+								context.getCurrentModel()),
+						false);
+				TemplateProposal proposal = createProposal(template, templateContext, context, getImage(template),
 						getRelevance(template));
 				acceptor.accept(proposal);
 			}
