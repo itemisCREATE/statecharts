@@ -39,6 +39,7 @@ import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
  * <ul>
  * <li>Each outgoing transition has at least one action.</li>
  * <li>No outgoing transition leaves a composite state which has exit actions.</li>
+ * <li>At least one action is foldable.</li>
  * </ul>
  * @author thomas kutz - Initial contribution and API
  * 
@@ -60,7 +61,8 @@ public class FoldOutgoingActionsRefactoring extends AbstractRefactoring<State> {
 	public boolean isExecutable() {
 		return super.isExecutable()
 				&& allOutgoingTransitionsHaveAtLeastOneAction()
-				&& noOutgoingTransitionLeavesCompositeWithExitActions();
+				&& noOutgoingTransitionLeavesCompositeWithExitActions()
+				&& atLeastOneFoldableAction();
 	}
 
 	private boolean noOutgoingTransitionLeavesCompositeWithExitActions() {
@@ -69,6 +71,11 @@ public class FoldOutgoingActionsRefactoring extends AbstractRefactoring<State> {
 
 	private boolean allOutgoingTransitionsHaveAtLeastOneAction() {
 		return helper.haveAllAtLeastOneAction(getContextObject().getOutgoingTransitions());
+	}
+	
+	private boolean atLeastOneFoldableAction() {
+		EList<Transition> transitions = getContextObject().getOutgoingTransitions();
+		return getFirstFoldableAction(helper.getAllActions(transitions), 0) != null;
 	}
 
 	private List<Expression> getFoldableActions(EList<Transition> transitions) {
