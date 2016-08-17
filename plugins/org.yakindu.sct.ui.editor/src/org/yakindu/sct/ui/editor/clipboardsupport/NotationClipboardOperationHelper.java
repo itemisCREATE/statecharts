@@ -130,7 +130,7 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 		if ((eReference.isTransient()) || (eReference.isDerived())) {
 			return false;
 		} else if (eReference.equals(NotationPackage.eINSTANCE
-				.getView_Element()) && !(context instanceof Diagram && value instanceof State)) {
+				.getView_Element()) && !isSubdiagram(context, value)) {
 			return true;
 		} else {
 			return eReference.isContainment();
@@ -161,7 +161,7 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 		// to allow paste into diagram elements
 		if ((parentEObject instanceof View) && (eObject instanceof View)) {
 			EObject semanticChildElement = ((View) eObject).getElement();
-			if (semanticChildElement == null) {
+			if (semanticChildElement == null || isSubdiagram(eObject, semanticChildElement)) {
 				return true;
 			}
 
@@ -211,6 +211,10 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 			return true;
 		}
 		return false;
+	}
+
+	private boolean isSubdiagram(EObject container, Object element) {
+		return (container instanceof Diagram) && (element instanceof State);
 	}
 
 	/**

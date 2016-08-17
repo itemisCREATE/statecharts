@@ -25,7 +25,9 @@ import org.eclipse.gmf.runtime.emf.clipboard.core.ClipboardUtil;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 
 /**
@@ -131,15 +133,28 @@ public class SubdiagramAwareCopyCommand extends CopyCommand implements ICommand 
 			View viewElement = (View) iter.next();
 			if (viewElement != null) {
 				EObject semanticElement = viewElement.getElement();
-				if (semanticElement != null && semanticElement instanceof State) {
-					State semanticState = (State) semanticElement;
-					if (semanticState.isComposite()) {
-						subDiagrams.addAll(getAllSubDiagrams(semanticState));
-					}
+				if (semanticElement instanceof State) {
+					collectSubdiagramsInState(subDiagrams, (State) semanticElement);
+				} else if (semanticElement instanceof Region) {
+					collectSubdiagramsInRegion(subDiagrams, (Region) semanticElement);
 				}
 			}
 		}
 		return subDiagrams;
+	}
+
+	protected void collectSubdiagramsInRegion(List<Diagram> subDiagrams, Region region) {
+		for (Vertex vertex : region.getVertices()) {
+			if (vertex instanceof State) {
+				collectSubdiagramsInState(subDiagrams, (State) vertex);
+			}
+		}
+	}
+
+	protected void collectSubdiagramsInState(List<Diagram> subDiagrams, State state) {
+		if (state.isComposite()) {
+			subDiagrams.addAll(getAllSubDiagrams(state));
+		}
 	}
 
 	protected Collection<? extends Diagram> getAllSubDiagrams(State semanticState) {
