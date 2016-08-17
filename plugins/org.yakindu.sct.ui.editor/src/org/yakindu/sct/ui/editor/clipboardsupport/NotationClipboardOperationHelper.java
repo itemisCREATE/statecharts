@@ -118,13 +118,19 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 	 * containment references and the
 	 * {@linkplain org.eclipse.gmf.runtime.notation.View#getElement() element}
 	 * reference always are copied.
+	 * 
+	 * For diagrams, the
+	 * {@linkplain org.eclipse.gmf.runtime.notation.View#getElement() element}
+	 * reference is not copied when the value is a state which indicates the
+	 * copying of a subdiagram, while the state will be copied with the
+	 * corresponding node.
 	 */
 	public boolean isCopyAlways(EObject context, EReference eReference,
 			Object value) {
 		if ((eReference.isTransient()) || (eReference.isDerived())) {
 			return false;
 		} else if (eReference.equals(NotationPackage.eINSTANCE
-				.getView_Element())) {
+				.getView_Element()) && !(context instanceof Diagram && value instanceof State)) {
 			return true;
 		} else {
 			return eReference.isContainment();
