@@ -29,9 +29,9 @@ public class StandaloneFileSystemAccess extends AbstractFileSystemAccess impleme
 	
 	private static final Logger LOG = Logger.getLogger(StandaloneFileSystemAccess.class);
 	protected Charset encoding = Charset.forName("UTF-8");
-	@Inject
+	@Inject(optional = true)
 	@Named(BASE_DIR)
-	protected String absoluteBaseDir;
+	protected String absoluteBaseDir = "./";
 
 	@Override
 	public void generateFile(String fileName, String outputConfigurationName, CharSequence contents) {

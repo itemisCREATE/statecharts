@@ -8,30 +8,18 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.builder;
+package org.yakindu.sct.generator.core.execution;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.types.typesystem.AbstractTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
-import org.yakindu.sct.generator.builder.console.EclipseConsoleLogger;
-import org.yakindu.sct.generator.builder.efs.EclipseFileSystemAccess;
 import org.yakindu.sct.generator.core.ISCTGenerator;
-import org.yakindu.sct.generator.core.console.IConsoleLogger;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
-import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
 import org.yakindu.sct.generator.core.impl.AbstractSGraphModelGenerator;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
@@ -49,43 +37,23 @@ import com.google.inject.util.Modules;
  */
 public class GeneratorExecutor {
 
-	protected static class EclipseContextModule implements Module {
-		@Override
-		public void configure(Binder binder) {
-			binder.bind(IConsoleLogger.class).to(EclipseConsoleLogger.class);
-			binder.bind(ISCTFileSystemAccess.class).to(EclipseFileSystemAccess.class);
-
-		}
-	}
-
-	public void executeGenerator(IFile file) {
-		Resource resource = loadResource(file);
-		if (resource == null || resource.getContents().size() == 0 || resource.getErrors().size() > 0)
-			return;
-		final GeneratorModel model = (GeneratorModel) resource.getContents().get(0);
-
-		Job generatorJob = new Job("Execute SCT Genmodel " + file.getName()) {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				executeGenerator(model);
-				return Status.OK_STATUS;
-			}
-		};
-		generatorJob.setRule(file.getProject().getWorkspace().getRuleFactory().buildRule());
-		generatorJob.schedule();
-	}
-
-	public void executeGenerator(GeneratorModel model) {
-
+	public void executeGenerator(GeneratorModel model, Module overrides) {
 		final EList<GeneratorEntry> entries = model.getEntries();
-
 		for (GeneratorEntry generatorEntry : entries) {
-			final ISCTGenerator generator = getGenerator(model, generatorEntry);
+			final ISCTGenerator generator = getGenerator(model, generatorEntry, overrides);
 			generator.generate(generatorEntry);
 		}
 	}
+	
+	public void executeGenerator(GeneratorModel model) {
+		executeGenerator(model, new Module() {
+			@Override
+			public void configure(Binder binder) {
+			}
+		});
+	}
 
-	protected ISCTGenerator getGenerator(GeneratorModel model, GeneratorEntry entry) {
+	protected ISCTGenerator getGenerator(GeneratorModel model, GeneratorEntry entry, Module overrides) {
 		String generatorId = model.getGeneratorId();
 		IGeneratorDescriptor description = GeneratorExtensions.getGeneratorDescriptor(generatorId);
 		if (description == null)
@@ -94,7 +62,7 @@ public class GeneratorExecutor {
 		if (generator == null)
 			throw new RuntimeException("Failed to create Generator instance for ID:" + generatorId);
 		IDomain domain = DomainRegistry.getDomain(entry.getElementRef());
-		Module overridesModule = new EclipseContextModule();
+		Module overridesModule = overrides;
 		if (generator instanceof AbstractSGraphModelGenerator) {
 			overridesModule = Modules.combine(overridesModule,
 					((AbstractSGraphModelGenerator) generator).getOverridesModule(entry));
@@ -111,13 +79,6 @@ public class GeneratorExecutor {
 		}
 
 		return generator;
-	}
-
-	protected Resource loadResource(IFile file) {
-		Resource resource = null;
-		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-		resource = new ResourceSetImpl().getResource(uri, true);
-		return resource;
 	}
 
 }
