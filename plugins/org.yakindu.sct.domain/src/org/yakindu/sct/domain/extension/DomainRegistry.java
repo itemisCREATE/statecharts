@@ -30,14 +30,12 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.osgi.framework.Bundle;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DomainElement;
+import org.yakindu.sct.domain.extension.impl.DomainImpl;
+import org.yakindu.sct.domain.extension.impl.ModuleContribution;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
-import com.google.inject.util.Modules;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -48,130 +46,27 @@ public class DomainRegistry {
 	private static final String DOMAIN_EXTENSION_POINT_ID = "org.yakindu.sct.domain";
 	private static final String MODULES_EXTENSION_POINT_ID = "org.yakindu.sct.domain.modules";
 
+	private static final String DOMAIN_ID = "domainID";
+	private static final String DESCRIPTION = "description";
+	private static final String IMAGE = "image";
+	private static final String NAME = "name";
+
+	private static final String FEATURE = "feature";
+	private static final String MODULE_PROVIDER = "moduleProvider";
+
 	private DomainRegistry() {
 	}
 
 	private static List<IDomain> domainDescriptors;
-	private static List<IModule> moduleDescriptors;
-
-	private static final class ConfigElementDomain implements IDomain {
-
-		private static final String DOMAIN_ID = "domainID";
-		private static final String DESCRIPTION = "description";
-		private static final String IMAGE = "image";
-		private static final String NAME = "name";
-
-		private final IConfigurationElement configElement;
-
-		private URL image;
-
-		ConfigElementDomain(IConfigurationElement configElement) {
-			this.configElement = configElement;
-		}
-
-		@Override
-		public String getDomainID() {
-			return configElement.getAttribute(DOMAIN_ID);
-		}
-
-		@Override
-		public String getName() {
-			return configElement.getAttribute(NAME);
-		}
-
-		@Override
-		public String getDescription() {
-			return configElement.getAttribute(DESCRIPTION);
-		}
-
-		@Override
-		public URL getImagePath() {
-			if (image != null)
-				return image;
-			String path = configElement.getAttribute(IMAGE);
-			if (path == null)
-				return null;
-			Bundle extensionBundle = Platform.getBundle(configElement.getContributor().getName());
-			image = extensionBundle.getEntry(path);
-			return image;
-		}
-
-		@Override
-		public Injector getInjector(String feature, String... options) {
-			return getInjector(feature, null, options);
-		}
-
-		@Override
-		public Injector getInjector(String feature, Module overrides, String... options) {
-			List<Module> modules = new ArrayList<>();
-			for (IModule module : moduleDescriptors) {
-				if (getDomainID().equals(module.getDomainID()) && feature.equals(module.getFeature())) {
-					modules.add(module.getModuleProvider().getModule(options));
-				}
-			}
-			Module result = Modules.combine(modules);
-			if (overrides != null)
-				result = Modules.override(result).with(overrides);
-			return Guice.createInjector(result);
-		}
-
-	}
-
-	private static final class ConfigElementModule implements IModule {
-
-		private static final String DOMAIN_ID = "domainID";
-		private static final String FEATURE = "feature";
-		private static final String MODULE_PROVIDER = "moduleProvider";
-		private final IConfigurationElement configElement;
-
-		public ConfigElementModule(IConfigurationElement configElement) {
-			this.configElement = configElement;
-		}
-
-		@Override
-		public String getDomainID() {
-			return configElement.getAttribute(DOMAIN_ID);
-		}
-
-		@Override
-		public String getFeature() {
-			return configElement.getAttribute(FEATURE);
-		}
-
-		@Override
-		public IModuleProvider getModuleProvider() {
-			try {
-				return (IModuleProvider) configElement.createExecutableExtension(MODULE_PROVIDER);
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-
-	}
 
 	public static List<IDomain> getDomains() {
 		if (domainDescriptors == null) {
 			domainDescriptors = Lists.newArrayList();
-			moduleDescriptors = Lists.newArrayList();
 			if (Platform.isRunning()) {
 				initFromExtensions();
 			}
 		}
 		return domainDescriptors;
-	}
-
-	protected static void initFromExtensions() {
-		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
-				.getConfigurationElementsFor(DOMAIN_EXTENSION_POINT_ID);
-		for (IConfigurationElement iConfigurationElement : configurationElements) {
-			domainDescriptors.add(new ConfigElementDomain(iConfigurationElement));
-		}
-
-		configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(MODULES_EXTENSION_POINT_ID);
-		for (IConfigurationElement iConfigurationElement : configurationElements) {
-			moduleDescriptors.add(new ConfigElementModule(iConfigurationElement));
-		}
 	}
 
 	public static IDomain getDomain(final String id) {
@@ -218,4 +113,46 @@ public class DomainRegistry {
 		}
 		return result;
 	}
+
+	protected static void initFromExtensions() {
+		List<ModuleContribution> moduleDescriptors = new ArrayList<>();
+		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(MODULES_EXTENSION_POINT_ID);
+		for (IConfigurationElement element : configurationElements) {
+			moduleDescriptors.add(createModuleContribution(element));
+		}
+		configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(DOMAIN_EXTENSION_POINT_ID);
+		for (IConfigurationElement iConfigurationElement : configurationElements) {
+			domainDescriptors.add(createDomain(iConfigurationElement, moduleDescriptors));
+		}
+	}
+
+	protected static ModuleContribution createModuleContribution(IConfigurationElement element) {
+		IModuleProvider provider;
+		try {
+			provider = (IModuleProvider) element.createExecutableExtension(MODULE_PROVIDER);
+			return new ModuleContribution(element.getAttribute(DOMAIN_ID), element.getAttribute(FEATURE), provider);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	protected static IDomain createDomain(final IConfigurationElement element, List<ModuleContribution> allModules) {
+		String path = element.getAttribute(IMAGE);
+		URL image = null;
+		if (path != null) {
+			Bundle extensionBundle = Platform.getBundle(element.getContributor().getName());
+			image = extensionBundle.getEntry(path);
+		}
+		return new DomainImpl(element.getAttribute(DOMAIN_ID), element.getAttribute(NAME),
+				element.getAttribute(DESCRIPTION), image,
+				Iterables.filter(allModules, new Predicate<ModuleContribution>() {
+					@Override
+					public boolean apply(ModuleContribution input) {
+						return input.getDomainID().equals(element.getAttribute(DOMAIN_ID));
+					}
+				}));
+	}
+
 }
