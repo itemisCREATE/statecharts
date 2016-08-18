@@ -21,6 +21,7 @@ import org.eclipse.gmf.runtime.common.core.service.IOperation;
 import org.eclipse.gmf.runtime.diagram.ui.services.palette.IPaletteProvider;
 import org.eclipse.ui.IEditorPart;
 import org.yakindu.sct.domain.extension.DomainRegistry;
+import org.yakindu.sct.domain.extension.IDomain;
 
 import com.google.inject.Injector;
 
@@ -36,8 +37,7 @@ public class StatechartPaletteProvider extends AbstractProvider implements IPale
 		IFile adapter = (IFile) editor.getEditorInput().getAdapter(IFile.class);
 		String domainID = DomainRegistry
 				.determineDomainID(URI.createPlatformResourceURI(adapter.getFullPath().toOSString(), true));
-		Injector editorInjector = DomainRegistry.getDomainDescriptor(domainID).getDomainInjectorProvider()
-				.getEditorInjector();
+		Injector editorInjector = DomainRegistry.getDomain(domainID).getInjector(IDomain.FEATURE_EDITOR);
 		ISCTPaletteFactory factory = editorInjector.getInstance(ISCTPaletteFactory.class);
 		factory.createPaletteEntries(root);
 	}

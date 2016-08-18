@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: YAKINDU Generic Editor Domain
+Bundle-SymbolicName: org.yakindu.sct.domain.generic.editor;singleton:=true
+Bundle-Version: 2.7.1.qualifier
+Bundle-Vendor: statecharts.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.yakindu.sct.ui.editor,
+ org.yakindu.sct.domain,
+ com.google.inject,
+ org.eclipse.xtext,
+ org.yakindu.sct.refactoring,
+ org.yakindu.sct.model.stext,
+ org.yakindu.sct.model.stext.ui,
+ org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.shared

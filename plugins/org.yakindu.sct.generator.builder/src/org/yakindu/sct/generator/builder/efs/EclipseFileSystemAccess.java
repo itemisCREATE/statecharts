@@ -46,7 +46,7 @@ import com.google.inject.Inject;
  * @author Johannes Dicks - Initial contribution and API
  * 
  */
-public class EFSResourceFileSystemAccess extends AbstractFileSystemAccess2 implements ISCTFileSystemAccess {
+public class EclipseFileSystemAccess extends AbstractFileSystemAccess2 implements ISCTFileSystemAccess {
 
 	private IProject project;
 	@Inject
@@ -198,7 +198,7 @@ public class EFSResourceFileSystemAccess extends AbstractFileSystemAccess2 imple
 		IProject project = getProject();
 		if (!isTargetProject && isValidProject(project)) {
 			if (hasJavaNature(project) && hasClasspath(project)) {
-				new ClasspathChanger().addFolderToClassPath(project, path);
+//				new ClasspathChanger().addFolderToClassPath(project, path);
 			}
 		}
 	}

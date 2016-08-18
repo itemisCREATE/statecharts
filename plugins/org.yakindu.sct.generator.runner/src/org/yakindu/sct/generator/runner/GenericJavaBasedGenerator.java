@@ -67,8 +67,8 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				log.writeToConsole("Overriding module not found: " + overridingModuleClass);
-				log.writeToConsole(e);
+				log.log("Overriding module not found: " + overridingModuleClass);
+				log.logError(e);
 			}
 		}
 		return defaultModule;
@@ -116,7 +116,7 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.writeToConsole(e);
+			log.logError(e);
 		}
 	}
 

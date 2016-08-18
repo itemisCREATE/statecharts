@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.yakindu.sct.domain.modules">
+      <Module
+            domainID="org.yakindu.domain.default"
+            feature="org.yakindu.sct.simulation"
+            moduleProvider="org.yakindu.sct.domain.generic.simulation.SimulationModuleProvider">
+      </Module>
+   </extension>
+</plugin>

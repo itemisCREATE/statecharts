@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.domain.generic.modules;
+package org.yakindu.sct.domain.generic.simulation;
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -51,7 +51,7 @@ public class GenericSimulationModule extends AbstractGenericModule {
 
 	public void configure(Binder binder) {
 		super.configure(binder);
-		binder.bind(Boolean.class).annotatedWith(Names.named(GenericSequencerModule.ADD_TRACES)).toInstance(Boolean.TRUE);
+		binder.bind(Boolean.class).annotatedWith(Names.named(IModelSequencer.ADD_TRACES)).toInstance(Boolean.TRUE);
 		binder.bind(ITypeSystem.class).toInstance(getTypeSystem());
 	}
 
@@ -70,7 +70,7 @@ public class GenericSimulationModule extends AbstractGenericModule {
 	public Class<? extends IModelSequencer> bindIModelSequencer() {
 		return ModelSequencer.class;
 	}
-	
+
 	public Class<? extends IOperationMockup> bindIOperationMockup() {
 		return JavaOperationMockup.class;
 	}
@@ -89,7 +89,7 @@ public class GenericSimulationModule extends AbstractGenericModule {
 
 	public Class<? extends IStatementInterpreter> bindIStatementInterpreter() {
 		return StextStatementInterpreter.class;
-	} 
+	}
 
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return StextNameProvider.class;
@@ -98,7 +98,7 @@ public class GenericSimulationModule extends AbstractGenericModule {
 	public Class<? extends ITypeSystemInferrer> bindISTextTypeInferrer() {
 		return STextTypeInferrer.class;
 	}
-	
+
 	public Class<? extends IResourceDescriptions> bindIResourceDescriptions() {
 		return ResourceSetBasedResourceDescriptions.class;
 	}

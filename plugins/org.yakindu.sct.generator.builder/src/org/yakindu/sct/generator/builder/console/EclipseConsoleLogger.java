@@ -11,6 +11,7 @@
  */
 package org.yakindu.sct.generator.builder.console;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import org.eclipse.core.runtime.Platform;
@@ -20,22 +21,22 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
-import org.yakindu.sct.generator.core.impl.IGeneratorLog;
+import org.yakindu.sct.generator.core.console.IConsoleLogger;
 
 /**
  * @author Johannes Dicks - Initial contribution and API
  */
-public class EclipseConsoleLog implements IGeneratorLog {
-	
+public class EclipseConsoleLogger implements IConsoleLogger {
+
 	public static final String SCT_GENERATOR_CONSOLE = "SCT Generator Console";
-	
+
 	private MessageConsoleStream info;
 	private MessageConsoleStream error;
-	
-	public EclipseConsoleLog() {
+
+	public EclipseConsoleLogger() {
 		init();
 	}
-	
+
 	public void init() {
 		if (Platform.isRunning()) {
 			info = getConsole().newMessageStream();
@@ -51,19 +52,24 @@ public class EclipseConsoleLog implements IGeneratorLog {
 		for (int i = 0; i < existing.length; i++) {
 			if (SCT_GENERATOR_CONSOLE.equals(existing[i].getName())) {
 				return (MessageConsole) existing[i];
-			} 
+			}
 		}
 		MessageConsole myConsole = new MessageConsole(SCT_GENERATOR_CONSOLE, null);
-		conMan.addConsoles(new IConsole[]{myConsole});
+		conMan.addConsoles(new IConsole[] { myConsole });
 		return myConsole;
 	}
-	public void close() throws Throwable {
-		info.close();
-		error.close();
+
+	public void close() {
+		try {
+			info.close();
+			error.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void writeToConsole(Throwable t) {
+	public void logError(Throwable t) {
 		if (error != null && !error.isClosed() && PlatformUI.isWorkbenchRunning()) {
 			PrintWriter printWriter = new PrintWriter(error);
 			t.printStackTrace(printWriter);
@@ -73,7 +79,7 @@ public class EclipseConsoleLog implements IGeneratorLog {
 	}
 
 	@Override
-	public void writeToConsole(String line) {
+	public void log(String line) {
 		if (info != null && !info.isClosed() && PlatformUI.isWorkbenchRunning()) {
 			info.println(line);
 		}

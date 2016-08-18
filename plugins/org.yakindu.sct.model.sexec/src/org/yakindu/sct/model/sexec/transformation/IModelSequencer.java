@@ -15,6 +15,8 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 public interface IModelSequencer {
+	
+	public static final String ADD_TRACES = "ADD_TRACES";
 
 	public ExecutionFlow transform(Statechart statechart, IValidationIssueAcceptor acceptor);
 	

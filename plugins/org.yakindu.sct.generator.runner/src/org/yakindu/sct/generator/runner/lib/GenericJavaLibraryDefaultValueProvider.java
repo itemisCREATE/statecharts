@@ -51,7 +51,7 @@ public class GenericJavaLibraryDefaultValueProvider extends AbstractDefaultFeatu
 			EObject contextElement) {
 		String parameterName = parameterValue.getParameter().getName();
 		if (GENERATOR_PROJECT.equals(parameterName)) {
-			parameterValue.setValue(getProject(contextElement).getName());
+			parameterValue.setValue(getProjectName(contextElement));
 		} else if (GENERATOR_CLASS.equals(parameterName)) {
 			parameterValue.setValue("org.yakindu.sct.generator.Generator");
 		}
@@ -81,4 +81,8 @@ public class GenericJavaLibraryDefaultValueProvider extends AbstractDefaultFeatu
 	protected IProject getProject(EObject contextElement) {
 		return WorkspaceSynchronizer.getFile(contextElement.eResource()).getProject();
 	}
+<<<<<<< Upstream, based on origin/master
+=======
+
+>>>>>>> eac756a Separation of Domains
 }
