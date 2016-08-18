@@ -12,10 +12,15 @@ package org.yakindu.sct.domain.extension.impl;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.yakindu.sct.domain.extension.IDomain;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
@@ -32,6 +37,54 @@ public class DomainImpl implements IDomain {
 	private String description;
 	private URL imagePath;
 	private Iterable<ModuleContribution> modules;
+	private LoadingCache<CacheKey, Injector> injectorCache;
+
+	protected static class CacheKey {
+		private String feature;
+		private String[] options;
+
+		public CacheKey(String feature, String[] options) {
+			this.feature = feature;
+			this.options = options;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((feature == null) ? 0 : feature.hashCode());
+			result = prime * result + Arrays.hashCode(options);
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			CacheKey other = (CacheKey) obj;
+			if (feature == null) {
+				if (other.feature != null)
+					return false;
+			} else if (!feature.equals(other.feature))
+				return false;
+			if (!Arrays.equals(options, other.options))
+				return false;
+			return true;
+		}
+
+		public String getFeature() {
+			return feature;
+		}
+
+		public String[] getOptions() {
+			return options;
+		}
+
+	}
 
 	public DomainImpl(String domainID, String name, String description, URL imagePath,
 			Iterable<ModuleContribution> modules) {
@@ -40,6 +93,17 @@ public class DomainImpl implements IDomain {
 		this.description = description;
 		this.imagePath = imagePath;
 		this.modules = modules;
+		initializeCache();
+
+	}
+
+	protected void initializeCache() {
+		injectorCache = CacheBuilder.newBuilder().build(new CacheLoader<CacheKey, Injector>() {
+			@Override
+			public Injector load(CacheKey key) throws Exception {
+				return createInjector(key.getFeature(), key.getOptions());
+			}
+		});
 	}
 
 	@Override
@@ -64,11 +128,25 @@ public class DomainImpl implements IDomain {
 
 	@Override
 	public Injector getInjector(String feature, String... options) {
-		return getInjector(feature, null, options);
+		try {
+			Injector result = injectorCache.get(new CacheKey(feature, options));
+			return result;
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		return Guice.createInjector();
 	}
 
 	@Override
 	public Injector getInjector(String feature, Module overrides, String... options) {
+		return createInjector(feature, overrides, options);
+	}
+
+	public Injector createInjector(String feature, String... options) {
+		return getInjector(feature, null, options);
+	}
+
+	public Injector createInjector(String feature, Module overrides, String... options) {
 		List<Module> modules = new ArrayList<>();
 		for (ModuleContribution module : this.modules) {
 			if (feature.equals(module.getFeature())) {

@@ -32,8 +32,14 @@ public interface IDomain {
 
 	String getDescription();
 
+	/**
+	 * Injector instances are cached for the features and the specified options
+	 */
 	Injector getInjector(String feature, String... options);
 
+	/**
+	 * when an overrides Module is provided, injectors are not cached
+	 */
 	Injector getInjector(String feature, Module overrides, String... options);
 
 	URL getImagePath();

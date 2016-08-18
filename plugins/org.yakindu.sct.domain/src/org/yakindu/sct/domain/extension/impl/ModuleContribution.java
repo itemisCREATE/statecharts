@@ -23,7 +23,6 @@ public class ModuleContribution {
 	private IModuleProvider provider;
 
 	public ModuleContribution(String domainID, String feature, IModuleProvider provider) {
-		super();
 		this.domainID = domainID;
 		this.feature = feature;
 		this.provider = provider;
