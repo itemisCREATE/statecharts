@@ -10,11 +10,6 @@
  */
 package org.yakindu.sct.generator.core.library;
 
-<<<<<<< Upstream, based on origin/master
-=======
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
->>>>>>> eac756a Separation of Domains
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
@@ -75,11 +70,7 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 	protected String getProjectName(EObject contextElement) {
 		URI uri = EcoreUtil.getURI(contextElement);
 		if (uri.isPlatformResource() && uri.segmentCount() > 1) {
-<<<<<<< Upstream, based on origin/master
 			return uri.segment(1); // 0 is resource
-=======
-			return uri.segment(1);
->>>>>>> eac756a Separation of Domains
 		}
 		return "ProjectName";
 	}
@@ -90,42 +81,5 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 
 	protected IStatus warning(String msg) {
 		return new Status(IStatus.WARNING, GeneratorActivator.PLUGIN_ID, msg);
-<<<<<<< Upstream, based on origin/master
-=======
-	}
-
-	protected boolean projectExists(String value) {
-		try {
-			return ResourcesPlugin.getWorkspace().getRoot().getProject(value).exists();
-		} catch (IllegalArgumentException e) {
-			return false;
-		}
-	}
-
-	protected boolean projectOpened(String value) {
-		try {
-			return ResourcesPlugin.getWorkspace().getRoot().getProject(value).isOpen();
-		} catch (IllegalArgumentException e) {
-			return false;
-		}
-	}
-
-	protected boolean folderExists(String projectName, String folderPath) {
-		try {
-			IPath workspaceRelativePath = Path.fromPortableString(projectName).append(folderPath);
-			return ResourcesPlugin.getWorkspace().getRoot().exists(workspaceRelativePath);
-		} catch (IllegalArgumentException e) {
-			return false;
-		}
-	}
-
-	protected boolean fileExists(String projectName, String folderPath) {
-		try {
-			return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName).getFile(new Path(folderPath))
-					.exists();
-		} catch (IllegalArgumentException e) {
-			return false;
-		}
->>>>>>> eac756a Separation of Domains
 	}
 }

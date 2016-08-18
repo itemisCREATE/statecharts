@@ -10,10 +10,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.generator.genmodel,
  org.yakindu.sct.commons,
  org.eclipse.jdt.core,
-<<<<<<< Upstream, based on origin/master
- org.eclipse.core.resources,
-=======
->>>>>>> eac756a Separation of Domains
  org.eclipse.emf.workspace
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

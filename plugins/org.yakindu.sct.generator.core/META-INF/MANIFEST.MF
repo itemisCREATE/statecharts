@@ -12,16 +12,14 @@ Require-Bundle: org.yakindu.sct.model.sexec;visibility:=reexport,
  org.yakindu.base.types,
  org.yakindu.sct.domain,
  com.google.guava,
+ org.eclipse.emf.workspace,
  org.eclipse.xtext.xbase,
+ org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.core.runtime;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.generator.core,
-<<<<<<< Upstream, based on origin/master
- org.yakindu.sct.generator.core.execution,
-=======
  org.yakindu.sct.generator.core.console,
->>>>>>> eac756a Separation of Domains
  org.yakindu.sct.generator.core.extensions,
  org.yakindu.sct.generator.core.filesystem,
  org.yakindu.sct.generator.core.impl,

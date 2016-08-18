@@ -13,7 +13,8 @@ Require-Bundle: org.eclipse.ui,
  org.yakindu.sct.generator.genmodel,
  org.yakindu.sct.domain,
  org.eclipse.jdt.core,
- org.eclipse.ui.console
+ org.eclipse.ui.console,
+ org.yakindu.sct.generator.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.generator.builder,

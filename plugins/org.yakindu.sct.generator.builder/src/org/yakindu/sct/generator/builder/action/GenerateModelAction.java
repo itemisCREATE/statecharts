@@ -34,8 +34,8 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.yakindu.sct.generator.builder.BuilderActivator;
 import org.yakindu.sct.generator.builder.GenModelLoader;
+import org.yakindu.sct.generator.builder.GeneratorExecutor;
 import org.yakindu.sct.generator.core.GeneratorActivator;
-import org.yakindu.sct.generator.core.execution.GeneratorExecutor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 
 /**
