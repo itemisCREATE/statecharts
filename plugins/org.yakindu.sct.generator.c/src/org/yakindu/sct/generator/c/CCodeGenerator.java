@@ -12,13 +12,13 @@
  */
 package org.yakindu.sct.generator.c;
 
-import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 import org.yakindu.sct.generator.c.features.ICFeatureConstants;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.impl.AbstractSExecModelGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.naming.INamingService;
+import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -98,7 +98,7 @@ public class CCodeGenerator extends AbstractSExecModelGenerator {
 								&& tracingFeatureConfiguration
 										.getParameterValue(ICFeatureConstants.PARAMETER_TRACING_EXIT_STATE)
 										.getBooleanValue() == true))) {
-					binder.bind(Boolean.class).annotatedWith(Names.named(GenericSequencerModule.ADD_TRACES))
+					binder.bind(Boolean.class).annotatedWith(Names.named(IModelSequencer.ADD_TRACES))
 							.toInstance(Boolean.TRUE);
 				}
 			}

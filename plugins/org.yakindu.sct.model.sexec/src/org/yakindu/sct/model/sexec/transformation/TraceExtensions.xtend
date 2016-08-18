@@ -24,9 +24,9 @@ class TraceExtensions {
 	@Inject extension SexecExtensions sexec
 	@Inject extension SexecElementMapping mapping
 
-	@Inject
-	@Named("ADD_TRACES") 
-	boolean _addTraceSteps
+	@Inject(optional = true)
+	@Named(IModelSequencer.ADD_TRACES) 
+	boolean _addTraceSteps = false
 	
 	def isAddTraceSteps() {
 		_addTraceSteps

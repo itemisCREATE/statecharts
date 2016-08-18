@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.yakindu.sct.domain.generic.generator.GenericGeneratorModule;
-import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Guice;
@@ -38,7 +37,6 @@ public class TestModelInjectorProvider implements IInjectorProvider {
 
 	public Injector getInjector() {
 		List<Module> modules = Lists.newArrayList();
-		modules.add(new GenericSequencerModule());
 		modules.add(new GenericGeneratorModule());
 		if(this.module !=null && !this.module.isEmpty())
 		modules.addAll(this.module);

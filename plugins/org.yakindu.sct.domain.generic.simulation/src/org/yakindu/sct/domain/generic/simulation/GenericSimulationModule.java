@@ -21,7 +21,6 @@ import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
-import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.container.DefaultExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.container.DefaultSimulationEngineFactory;
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
@@ -41,8 +40,6 @@ import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 /**
- * Default Module used by the {@link ISimulationEngine}. Override bindings to
- * specify custom behavior.
  * 
  * @author andreas muelder - Initial contribution and API
  * 

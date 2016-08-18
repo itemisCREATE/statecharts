@@ -1,7 +1,14 @@
+/**
+ * Copyright (c) 2016 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */
 package org.yakindu.sct.domain.generic.editor;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
@@ -17,29 +24,35 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.ui.STextUiModule;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public class EditorModuleProvider implements IModuleProvider {
 
-	private static final Map<String, Class<? extends EObject>> semanticTargetToRuleMap = new HashMap<String, Class<? extends EObject>>();
-
-	static {
-		semanticTargetToRuleMap.put(Statechart.class.getName(), StatechartSpecification.class);
-		semanticTargetToRuleMap.put(Transition.class.getName(), TransitionSpecification.class);
-		semanticTargetToRuleMap.put(State.class.getName(), StateSpecification.class);
-		semanticTargetToRuleMap.put(Guard.class.getName(), Guard.class);
-	}
+	private static final ImmutableMap<String, Class<? extends EObject>> GRAMMAR_RULE_MAP = ImmutableMap.of(
+			Statechart.class.getName(), StatechartSpecification.class, Transition.class.getName(),
+			TransitionSpecification.class, State.class.getName(), StateSpecification.class, Guard.class.getName(),
+			Guard.class);
 
 	@Override
 	public Module getModule(String... options) {
 		if (options.length == 0)
 			return new GenericEditorModule();
-		return getEmbeddedEditorModule(options[0]);
+		String semanticTarget = options[0];
+		if (!GRAMMAR_RULE_MAP.containsKey(semanticTarget))
+			throw new IllegalArgumentException(
+					String.format("No grammar rule for semantic target '%s' found", semanticTarget));
+		return getEmbeddedEditorModule(semanticTarget);
 	}
 
-	public Module getEmbeddedEditorModule(String semanticTarget) {
-		Class<? extends EObject> rule = semanticTargetToRuleMap.get(semanticTarget);
+	protected Module getEmbeddedEditorModule(String semanticTarget) {
+		Class<? extends EObject> rule = GRAMMAR_RULE_MAP.get(semanticTarget);
 		Module uiModule = Modules.override(new STextRuntimeModule())
 				.with(new STextUiModule(STextActivator.getInstance()));
 		Module languageModule = Modules.override(uiModule).with(new SharedStateModule());
