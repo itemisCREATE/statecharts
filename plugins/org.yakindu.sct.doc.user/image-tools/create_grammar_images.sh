@@ -55,8 +55,8 @@ create_grammar_image transition-eventtrigger \
     reactiontrigger \
     defaulttrigger
 
-# Transition: effect
-create_grammar_image transition-effect \
+# Transition: reaction effect
+create_grammar_image reaction-effect \
     reactioneffect \
     eventraisingexpression
 
@@ -88,16 +88,29 @@ create_grammar_image transition-detailed \
 
 # State: overview
 create_grammar_image state-overview \
-    statespecification \
     statescope \
     localreaction \
-    reactiontrigger \
-    eventspec \
-    guard \
-    reactioneffect
 
 # Local reaction
 create_grammar_image state-localreaction \
     localreaction \
     reactiontrigger \
     reactioneffect
+
+# Event specification overview
+create_grammar_image event-specification-overview \
+    reactiontrigger \
+    eventspec \
+    regulareventspec \
+    timeeventspec \
+    timeeventtype \
+    timeunit \
+    builtineventspec \
+    entryevent \
+    exitevent \
+    alwaysevent
+
+# Guard condition overview
+create_grammar_image guard-condition-overview \
+    reactiontrigger \
+    guard
