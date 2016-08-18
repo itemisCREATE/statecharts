@@ -20,6 +20,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.yakindu.sct.generator.core.ISCTGenerator;
 import org.yakindu.sct.generator.core.ISGraphGenerator;
+import org.yakindu.sct.generator.core.console.IConsoleLogger;
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -43,7 +44,7 @@ import com.google.inject.util.Modules;
 public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 
 	@Inject
-	protected IGeneratorLog log;
+	protected IConsoleLogger log;
 	@Inject
 	protected ICoreLibraryHelper coreFeatureHelper;
 	@Inject
@@ -80,9 +81,9 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 				logStart(entry);
 				prepareGenerator(entry);
 				doGenerate(entry);
-				log.writeToConsole("Done.");
+				log.log("Done.");
 			} catch (Exception e) {
-				log.writeToConsole(e);
+				log.logError(e);
 			} finally {
 				finishGenerator(entry);
 			}
@@ -96,7 +97,7 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	 */
 	protected void logStart(GeneratorEntry entry) {
 		Statechart statechart = (Statechart) entry.getElementRef();
-		log.writeToConsole(
+		log.log(
 				String.format("Generating %s %s ...", Statechart.class.getSimpleName(), statechart.getName()));
 	}
 
@@ -124,7 +125,7 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	protected boolean canHandle(GeneratorEntry entry) {
 		EObject elementRef = entry.getElementRef();
 		if (elementRef == null || !(elementRef instanceof Statechart)) {
-			log.writeToConsole("No Statechart selected in genmodel (" + entry + ")");
+			log.log("No Statechart selected in genmodel (" + entry + ")");
 			return false;
 		}
 		return true;

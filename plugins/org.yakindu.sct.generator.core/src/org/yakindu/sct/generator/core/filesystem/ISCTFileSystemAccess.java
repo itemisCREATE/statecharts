@@ -17,6 +17,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * Is meant to be some kind of bridge between file system
  * mappings within SCT (SGEN) & the xtext.generator.IFileSystemAccess.
@@ -29,6 +31,7 @@ import org.eclipse.xtext.generator.OutputConfiguration;
  * @author Johannes Dicks - Initial contribution and API
  *
  */
+@ImplementedBy(StandaloneFileSystemAccess.class)
 public interface ISCTFileSystemAccess {
 	
 	String TARGET_FOLDER_OUTPUT = IFileSystemAccess.DEFAULT_OUTPUT;

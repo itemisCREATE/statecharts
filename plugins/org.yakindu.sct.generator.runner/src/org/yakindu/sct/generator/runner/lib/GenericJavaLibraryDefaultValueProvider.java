@@ -14,9 +14,11 @@ import static org.yakindu.sct.generator.runner.lib.IGenericJavaFeatureConstants.
 import static org.yakindu.sct.generator.runner.lib.IGenericJavaFeatureConstants.GENERATOR_PROJECT;
 import static org.yakindu.sct.generator.runner.lib.IGenericJavaFeatureConstants.LIBRARY_NAME;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
@@ -43,7 +45,7 @@ public class GenericJavaLibraryDefaultValueProvider extends AbstractDefaultFeatu
 			EObject contextElement) {
 		String parameterName = parameterValue.getParameter().getName();
 		if (GENERATOR_PROJECT.equals(parameterName)) {
-			parameterValue.setValue(getProject(contextElement).getName());
+			parameterValue.setValue(getProjectName(contextElement));
 		} else if (GENERATOR_CLASS.equals(parameterName)) {
 			parameterValue.setValue("org.yakindu.sct.generator.Generator");
 		}
@@ -69,4 +71,9 @@ public class GenericJavaLibraryDefaultValueProvider extends AbstractDefaultFeatu
 		}
 		return Status.OK_STATUS;
 	}
+
+	protected IProject getProject(EObject contextElement) {
+		return WorkspaceSynchronizer.getFile(contextElement.eResource()).getProject();
+	}
+
 }

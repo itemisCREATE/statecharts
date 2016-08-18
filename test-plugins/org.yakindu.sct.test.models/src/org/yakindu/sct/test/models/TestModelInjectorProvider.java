@@ -13,7 +13,7 @@ package org.yakindu.sct.test.models;
 import java.util.List;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
-import org.yakindu.sct.domain.generic.modules.GenericGeneratorModule;
+import org.yakindu.sct.domain.generic.generator.GenericGeneratorModule;
 import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 
 import com.google.common.collect.Lists;

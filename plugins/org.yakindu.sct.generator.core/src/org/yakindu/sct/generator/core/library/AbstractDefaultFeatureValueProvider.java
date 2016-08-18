@@ -10,15 +10,15 @@
  */
 package org.yakindu.sct.generator.core.library;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.sct.generator.core.GeneratorActivator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
@@ -64,8 +64,12 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 		return result;
 	}
 
-	protected IProject getProject(EObject contextElement) {
-		return WorkspaceSynchronizer.getFile(contextElement.eResource()).getProject();
+	protected String getProjectName(EObject contextElement) {
+		URI uri = EcoreUtil.getURI(contextElement);
+		if (uri.isPlatformResource() && uri.segmentCount() > 1) {
+			return uri.segment(1);
+		}
+		return "ProjectName";
 	}
 
 	protected IStatus error(String msg) {
@@ -93,12 +97,12 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 	}
 
 	protected boolean folderExists(String projectName, String folderPath) {
-			try {
-				IPath workspaceRelativePath = Path.fromPortableString(projectName).append(folderPath);
-				return ResourcesPlugin.getWorkspace().getRoot().exists(workspaceRelativePath);
-			} catch (IllegalArgumentException e) {
-				return false;
-			}
+		try {
+			IPath workspaceRelativePath = Path.fromPortableString(projectName).append(folderPath);
+			return ResourcesPlugin.getWorkspace().getRoot().exists(workspaceRelativePath);
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
 	}
 
 	protected boolean fileExists(String projectName, String folderPath) {

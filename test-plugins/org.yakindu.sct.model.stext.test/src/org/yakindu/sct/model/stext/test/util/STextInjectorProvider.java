@@ -12,7 +12,6 @@ package org.yakindu.sct.model.stext.test.util;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.yakindu.base.base.BasePackage;
-import org.yakindu.sct.domain.generic.modules.GenericSimulationModule;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -27,7 +26,7 @@ import com.google.inject.name.Names;
 public class STextInjectorProvider implements IInjectorProvider {
 
 	public Injector getInjector() {
-		return Guice.createInjector(new STextRuntimeTestModule(), new GenericSimulationModule(), new AbstractModule() {
+		return Guice.createInjector(new STextRuntimeTestModule(), new AbstractModule() {
 
 			@Override
 			protected void configure() {

@@ -52,8 +52,7 @@ import org.yakindu.base.xtext.utils.jface.viewers.FilteringMenuManager;
 import org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapter;
 import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.IDomainDescriptor;
-import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
+import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
@@ -164,9 +163,8 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 			domainId = statechart.getDomainID();
 			resource.unload();
 		}
-		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(domainId);
-		IDomainInjectorProvider injectorProvider = domainDescriptor.getDomainInjectorProvider();
-		return injectorProvider.getEmbeddedEditorInjector(semanticTarget);
+		IDomain domain = DomainRegistry.getDomain(domainId);
+		return domain.getInjector(IDomain.FEATURE_EDITOR, semanticTarget);
 	}
 
 	public EObject getContextObject() {

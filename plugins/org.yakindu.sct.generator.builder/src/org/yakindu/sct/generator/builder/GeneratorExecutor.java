@@ -24,31 +24,45 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.types.typesystem.AbstractTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.IDomainDescriptor;
+import org.yakindu.sct.domain.extension.IDomain;
+import org.yakindu.sct.generator.builder.console.EclipseConsoleLogger;
+import org.yakindu.sct.generator.builder.efs.EclipseFileSystemAccess;
 import org.yakindu.sct.generator.core.ISCTGenerator;
+import org.yakindu.sct.generator.core.console.IConsoleLogger;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
+import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
 import org.yakindu.sct.generator.core.impl.AbstractSGraphModelGenerator;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 
+import com.google.inject.Binder;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * @author holger willebrandt - refactoring
- * @author markus mühlbrandt - added executeGenerator for generator models
+ * @author markus muehlbrandt - added executeGenerator for generator models
  */
 public class GeneratorExecutor {
+
+	protected static class EclipseContextModule implements Module {
+		@Override
+		public void configure(Binder binder) {
+			binder.bind(IConsoleLogger.class).to(EclipseConsoleLogger.class);
+			binder.bind(ISCTFileSystemAccess.class).to(EclipseFileSystemAccess.class);
+
+		}
+	}
 
 	public void executeGenerator(IFile file) {
 		Resource resource = loadResource(file);
 		if (resource == null || resource.getContents().size() == 0 || resource.getErrors().size() > 0)
 			return;
 		final GeneratorModel model = (GeneratorModel) resource.getContents().get(0);
-
 
 		Job generatorJob = new Job("Execute SCT Genmodel " + file.getName()) {
 			@Override
@@ -79,15 +93,15 @@ public class GeneratorExecutor {
 		final ISCTGenerator generator = description.createGenerator();
 		if (generator == null)
 			throw new RuntimeException("Failed to create Generator instance for ID:" + generatorId);
-		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(entry.getElementRef());
-		Module overridesModule = null;
+		IDomain domain = DomainRegistry.getDomain(entry.getElementRef());
+		Module overridesModule = new EclipseContextModule();
 		if (generator instanceof AbstractSGraphModelGenerator) {
-			overridesModule = ((AbstractSGraphModelGenerator) generator).getOverridesModule(entry);
+			overridesModule = Modules.combine(overridesModule,
+					((AbstractSGraphModelGenerator) generator).getOverridesModule(entry));
 		}
-		Injector injector = domainDescriptor.getDomainInjectorProvider().getGeneratorInjector(model.getGeneratorId(),
-				overridesModule);
+		Injector injector = domain.getInjector(IDomain.FEATURE_GENERATOR, overridesModule, model.getGeneratorId());
 		injector.injectMembers(generator);
-		
+
 		// TODO: refactor location for adding type system resource.
 		ITypeSystem typeSystem = injector.getInstance(ITypeSystem.class);
 		if (typeSystem instanceof AbstractTypeSystem) {

@@ -40,7 +40,7 @@ public class CoreLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatu
 		} else if (OUTLET_FEATURE_LIBRARY_TARGET_FOLDER.equals(parameterName)) {
 			parameterValue.setValue("src");
 		} else if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)) {
-			parameterValue.setValue(getProject(contextElement).getName());
+			parameterValue.setValue(getProjectName(contextElement));
 		} else if (LICENSE_TEXT.equals(parameterName)) {
 			parameterValue.setValue("Enter license text here");
 		} else if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)) {

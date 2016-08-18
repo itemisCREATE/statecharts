@@ -28,29 +28,29 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Control;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
+import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.ui.editor.StatechartImages;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
- * As a composite instances of this class provide an array of proposals that are assembled from the a set of proposal providers. 
+ * As a composite instances of this class provide an array of proposals that are
+ * assembled from the a set of proposal providers.
  * 
  * @author terfloth - initial contribution
  */
 public class ContentProposalHandler implements IContentProposalProvider {
 
-	@Inject protected Set<IEditProposalProvider> proposalProviders;
-	
+	@Inject
+	protected Set<IEditProposalProvider> proposalProviders;
+
 	protected GraphicalViewer viewer;
 
 	private IControlContentAdapter proposalControlAdapter;
 
 	private ILabelProvider proposalLabelProvider;
-	
-	
-	
+
 	public ContentProposalHandler(GraphicalViewer viewer) {
 		super();
 		this.viewer = viewer;
@@ -58,59 +58,48 @@ public class ContentProposalHandler implements IContentProposalProvider {
 		this.proposalLabelProvider = new ProposalLabelProvider();
 	}
 
-
 	public IControlContentAdapter getProposalControlAdapter() {
 		return proposalControlAdapter;
 	}
-
 
 	public ILabelProvider getProposalLabelProvider() {
 		return proposalLabelProvider;
 	}
 
-	
 	@Override
 	public IContentProposal[] getProposals(String contents, int position) {
 
-		intProposalProvidersOnDemand();
+		initProposalProvidersOnDemand();
 		List<IEditProposal> editProposals = collectEditProposals();
 		editProposals = sort(editProposals);
-					
+
 		return contentProposalsFrom(editProposals);
 	}
 
-
-	protected void intProposalProvidersOnDemand() {
-	
-		try {
-			if (proposalProviders == null) {
-				IDomainInjectorProvider injectorProvider = DomainRegistry.getDomainDescriptor(getSelectedView().getElement())
-						.getDomainInjectorProvider();
-				
-				Injector injector = injectorProvider.getEditorInjector();
-				injector.injectMembers(this);
-			}
-		} catch (Throwable t) {
-			System.out.println(t);
+	protected void initProposalProvidersOnDemand() {
+		if (proposalProviders == null) {
+			IDomain domain = DomainRegistry.getDomain(getSelectedView().getElement());
+			Injector injector = domain.getInjector(IDomain.FEATURE_EDITOR);
+			injector.injectMembers(this);
 		}
-	
 	}
 
-
-	/**		
+	/**
 	 * Collects all edit proposals from contained poroposal providers.
+	 * 
 	 * @return
 	 */
 	protected List<IEditProposal> collectEditProposals() {
 		List<IEditProposal> proposals = new ArrayList<IEditProposal>();
-		
+
 		// collect all IEditProposals
 		View selectedView = getSelectedView();
-		if ( selectedView != null ) {
+		if (selectedView != null) {
 			if (proposalProviders != null) {
 				for (IEditProposalProvider provider : proposalProviders) {
 					for (IEditProposal editProposal : provider.getProposals(selectedView)) {
-						if (editProposal.isApplicable()) proposals.add(editProposal);
+						if (editProposal.isApplicable())
+							proposals.add(editProposal);
 					}
 				}
 			}
@@ -118,86 +107,85 @@ public class ContentProposalHandler implements IContentProposalProvider {
 		return proposals;
 	}
 
-
 	/**
-	 * @return the first selected view from the graphical viewer or null 
+	 * @return the first selected view from the graphical viewer or null
 	 */
 	protected View getSelectedView() {
 		View selectedView = null;
-		if ( viewer.getSelectedEditParts().size() > 0 )  {
-			if ( viewer.getSelectedEditParts().get(0) instanceof IGraphicalEditPart ){
+		if (viewer.getSelectedEditParts().size() > 0) {
+			if (viewer.getSelectedEditParts().get(0) instanceof IGraphicalEditPart) {
 				selectedView = ((IGraphicalEditPart) viewer.getSelectedEditParts().get(0)).getNotationView();
 			}
 		}
 		return selectedView;
 	}
 
-
 	/**
-	 * A hook for sorting the proposals. 
+	 * A hook for sorting the proposals.
 	 * 
-	 * @param the original list of proposals
+	 * @param the
+	 *            original list of proposals
 	 * @return A sorted proposal list
 	 */
 	protected List<IEditProposal> sort(List<IEditProposal> proposals) {
 		// currently we do nothing here.
 		return proposals;
 	}
-	
-	
+
 	/**
 	 * Wraps the edit proposals in jface IContentProposal instances.
+	 * 
 	 * @param editProposals
 	 * @return
 	 */
 	protected IContentProposal[] contentProposalsFrom(List<IEditProposal> editProposals) {
 		IContentProposal[] contentProposals = new IContentProposal[editProposals.size()];
-		
-		for (int i= 0; i< editProposals.size(); i++) {
+
+		for (int i = 0; i < editProposals.size(); i++) {
 			contentProposals[i] = new EditProposalWrapper(editProposals.get(i));
 		}
-		
+
 		return contentProposals;
 	}
-	
+
 	/**
-	 * @param id The id of a proposal.
+	 * @param id
+	 *            The id of a proposal.
 	 * @return The proposal that matches the specified id or null.
 	 */
 	protected IEditProposal getProposalById(String id) {
 
 		List<IEditProposal> editProposals = collectEditProposals();
-		
+
 		if (id != null) {
 			for (IEditProposal editProposal : editProposals) {
-				if (id.equals(editProposal.getId())) return editProposal;
+				if (id.equals(editProposal.getId()))
+					return editProposal;
 			}
 		}
-		
+
 		return null;
 	}
 
-	
 	/**
 	 * 
 	 * @author terfloth
 	 */
 	protected static class EditProposalWrapper extends ContentProposal {
-		
+
 		protected IEditProposal wrappedProposal;
-		
+
 		public EditProposalWrapper(IEditProposal editProposal) {
 			super(editProposal.getId(), editProposal.getLabel(), editProposal.getDescription());
 			this.wrappedProposal = editProposal;
 		}
-		
-		public IEditProposal getEditProposal(){
+
+		public IEditProposal getEditProposal() {
 			return wrappedProposal;
 		}
-		
+
 	}
-	
-	
+
 	/**
 	 * @author terfloth
 	 */
@@ -219,18 +207,17 @@ public class ContentProposalHandler implements IContentProposalProvider {
 
 		@Override
 		public Image getImage(Object element) {
-			
+
 			Image image = null;
 			if (element instanceof EditProposalWrapper) {
 				image = ((EditProposalWrapper) element).getEditProposal().getImage();
 			}
-			
-			return (image != null)? image : defaultImage;
+
+			return (image != null) ? image : defaultImage;
 		}
 
 	}
 
-	
 	/**
 	 * 
 	 * @author andreas muelder - Initial contribution and API
@@ -248,7 +235,8 @@ public class ContentProposalHandler implements IContentProposalProvider {
 		public void insertControlContents(Control control, String id, int cursorPosition) {
 			IEditProposal proposal = getProposalById(id);
 			// TODO:Multi selection
-			if (proposal.isApplicable()) proposal.apply();
+			if (proposal.isApplicable())
+				proposal.apply();
 		}
 
 		public String getControlContents(Control control) {
