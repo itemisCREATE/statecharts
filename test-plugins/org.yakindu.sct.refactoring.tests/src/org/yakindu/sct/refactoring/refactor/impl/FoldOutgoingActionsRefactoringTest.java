@@ -50,6 +50,9 @@ public class FoldOutgoingActionsRefactoringTest extends
 		
 		testRefactoringIsExecutableOnState(FOLD_OUTGOING_ACTIONS + INITIAL_STATECHART,
 				FOLD_OUTGOING_ACTIONS + EXPECTED_STATECHART, "E", false);
+		
+		testRefactoringIsExecutableOnState(FOLD_OUTGOING_ACTIONS + INITIAL_STATECHART,
+				FOLD_OUTGOING_ACTIONS + EXPECTED_STATECHART, "F", false);
 	}
 
 	@Override

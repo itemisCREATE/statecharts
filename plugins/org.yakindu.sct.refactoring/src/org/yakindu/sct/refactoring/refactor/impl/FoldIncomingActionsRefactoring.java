@@ -39,7 +39,7 @@ import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
  * </ul>
  * Preconditions:
  * <ul>
- * <li>Each incoming transition has at least one action.</li>
+ * <li>At least one action is foldable.</li>
  * <li>No incoming transition enters a composite state which has entry actions.</li>
  * </ul>
  * @author thomas kutz - Initial contribution and API
@@ -59,19 +59,18 @@ public class FoldIncomingActionsRefactoring extends AbstractRefactoring<State> {
 	@Override
 	public boolean isExecutable() {
 		return super.isExecutable()
-				&& allIncomingTransitionsHaveAtLeastOneAction()
+				&& atLeastOneActionIsFoldable()
 				&& noIncomingTransitionEntersCompositeWithEntryActions();
 	}
 
 	private boolean noIncomingTransitionEntersCompositeWithEntryActions() {
 		return !helper.oneIncomingTransitionEntersCompositeWithEntryActions(getContextObject());
 	}
-
-	private boolean allIncomingTransitionsHaveAtLeastOneAction() {
-		return helper.haveAllAtLeastOneAction(getContextObject().getIncomingTransitions());
+	
+	private boolean atLeastOneActionIsFoldable() {
+		EList<Transition> transitions = getContextObject().getIncomingTransitions();
+		return getLastFoldableAction(helper.getAllActions(transitions), 0) != null;
 	}
-
-
 
 	private List<Expression> getFoldableActions() {
 		EList<Transition> transitions = getContextObject()
