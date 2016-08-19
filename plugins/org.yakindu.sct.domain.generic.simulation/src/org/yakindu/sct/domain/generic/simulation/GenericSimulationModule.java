@@ -92,7 +92,7 @@ public class GenericSimulationModule extends AbstractGenericModule {
 		return StextNameProvider.class;
 	}
 
-	public Class<? extends ITypeSystemInferrer> bindISTextTypeInferrer() {
+	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
 		return STextTypeInferrer.class;
 	}
 

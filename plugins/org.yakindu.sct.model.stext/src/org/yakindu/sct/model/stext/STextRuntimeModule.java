@@ -16,11 +16,13 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.validation.CompositeEValidator;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.resource.SCTLinker;
 import org.yakindu.sct.model.sgraph.resource.provider.SCTResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.conversion.StextValueConverterService;
+import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
@@ -81,6 +83,10 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 	
 	protected ITypeSystem getTypeSystem() {
 		return GenericTypeSystem.getInstance();
+	}
+	
+	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
+		return STextTypeInferrer.class;
 	}
 
 }
