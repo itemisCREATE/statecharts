@@ -63,7 +63,7 @@ public class CCodeGenerator extends AbstractSExecModelGenerator {
 		if (coreFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
-		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess(), artifactConfigs);
+		delegate.generate(flow, entry, sctFsa, artifactConfigs);
 	}
 
 	@Override

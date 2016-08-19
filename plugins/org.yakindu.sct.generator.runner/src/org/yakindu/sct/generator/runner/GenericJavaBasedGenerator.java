@@ -104,15 +104,15 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 
 			if (delegate instanceof IExecutionFlowGenerator) {
 				IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) delegate;
-				flowGenerator.generate(flow, entry, sctFsa.getIFileSystemAccess());
+				flowGenerator.generate(flow, entry, sctFsa);
 			}
 			if (iType.isInstance(delegate)) {
 				IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) delegate;
-				flowGenerator.generate(flow, entry, sctFsa.getIFileSystemAccess());
+				flowGenerator.generate(flow, entry, sctFsa);
 			}
 			if (delegate instanceof ISGraphGenerator) {
 				ISGraphGenerator graphGenerator = (ISGraphGenerator) delegate;
-				graphGenerator.generate(statechart, entry, sctFsa.getIFileSystemAccess());
+				graphGenerator.generate(statechart, entry, sctFsa);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

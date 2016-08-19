@@ -13,41 +13,30 @@ package org.yakindu.sct.generator.core.filesystem;
 
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.IFileSystemAccess;
+import org.eclipse.xtext.generator.IFileSystemAccessExtension2;
 import org.eclipse.xtext.generator.OutputConfiguration;
 
 import com.google.inject.ImplementedBy;
 
 /**
- * Is meant to be some kind of bridge between file system
- * mappings within SCT (SGEN) & the xtext.generator.IFileSystemAccess.
+ * Is meant to be some kind of bridge between file system mappings within SCT
+ * (SGEN) & the xtext.generator.IFileSystemAccess.
  *
- * The SCT M2T generators use the minimal functionality provided by the
- * basic interface xtext.generator.IFileSystemAccess during transformation.
+ * The SCT M2T generators use the minimal functionality provided by the basic
+ * interface xtext.generator.IFileSystemAccess during transformation.
  * 
  * @see {@link org.eclipse.xtext.generator.IFileSystemAccess}
  * 
  * @author Johannes Dicks - Initial contribution and API
  *
  */
-@ImplementedBy(StandaloneFileSystemAccess.class)
-public interface ISCTFileSystemAccess {
-	
+@ImplementedBy(SCTJavaIoFileSystemAccess.class)
+public interface ISCTFileSystemAccess extends IFileSystemAccess, IFileSystemAccessExtension2{
+
 	String TARGET_FOLDER_OUTPUT = IFileSystemAccess.DEFAULT_OUTPUT;
 	String LIBRARY_TARGET_FOLDER_OUTPUT = "LIBRARY_TARGET_FOLDER";
 	String API_TARGET_FOLDER_OUTPUT = "API_TARGET_FOLDER";
-	
-	
-	/**
-	 * Provides an absolute URI for further processing.
-	 * 
-	 * @param string
-	 * @return
-	 */
-	URI getURI(String path);
-	
-	URI getURI(String path, String outputName);
 
 	/**
 	 * Add an output path for an output name.
@@ -56,7 +45,7 @@ public interface ISCTFileSystemAccess {
 	 * @param stringValue
 	 */
 	void setOutputPath(String outputName, String relativePath);
-	
+
 	/**
 	 * Set the default output path.
 	 * 
@@ -64,19 +53,10 @@ public interface ISCTFileSystemAccess {
 	 * @see IFileSystemAccess#DEFAULT_OUTPUT
 	 */
 	void setOutputPath(String relativePath);
-	
-	
-	Map<String, OutputConfiguration> getOutputConfigurations();
-	/**
-	 * For convenience... and compatibility reasons, might be removed in further
-	 * versions
-	 * @return
-	 */
-	IFileSystemAccess getIFileSystemAccess();
 
-	/**
-	 * A hook to execute actions after generation.
-	 */
-	void afterGeneration();
+	Map<String, OutputConfiguration> getOutputConfigurations();
+	
+	public void setContext(String projectName);
+	
 
 }

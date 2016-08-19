@@ -29,6 +29,8 @@ public interface ISCTWorkspaceAccess {
 
 	boolean fileExists(String projectName, String folderPath);
 
+	void refreshProject(String projectName);
+
 	/**
 	 *
 	 * @author Andreas Mülder - Initial contribution and API
@@ -54,6 +56,11 @@ public interface ISCTWorkspaceAccess {
 		@Override
 		public boolean fileExists(String projectName, String folderPath) {
 			return true;
+		}
+
+		@Override
+		public void refreshProject(String projectName) {
+			// Nothing to do
 		}
 
 	}
