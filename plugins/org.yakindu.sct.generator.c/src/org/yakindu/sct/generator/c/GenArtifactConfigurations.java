@@ -129,9 +129,19 @@ public class GenArtifactConfigurations implements IGenArtifactConfigurations {
 		
 		URI absUri = getURI(target);
 		if (absUri != null) {
-			return relativePath(absUri.toFileString(), baseUri.toFileString());
+			return relativePath(relative(absUri), relative(baseUri));
 		}
 		throw new IllegalArgumentException(MessageFormat.format(MSG_LOCATION_NOT_FOUND, target));
+	}
+	
+	protected String relative(URI uri){
+		if(uri.isFile()){
+			return uri.toFileString();
+		}
+		else if(uri.isPlatform()){
+			return uri.toPlatformString(true);
+		}
+		throw new IllegalArgumentException("Unknown URI " + uri);
 	}
 	
 	protected String relativePath(String to, String from) {
