@@ -35,6 +35,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.yakindu.sct.generator.builder.EclipseContextModule;
@@ -42,6 +43,8 @@ import org.yakindu.sct.generator.core.execution.GeneratorExecutor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
+
+import com.google.inject.util.Modules;
 
 /**
  * @author Andreas Unger - Initial contribution and API
@@ -87,7 +90,7 @@ public class GTestHelper {
 
 		performFullBuild();
 		
-		new GeneratorExecutor().executeGenerator(model,new EclipseContextModule());
+		new GeneratorExecutor().executeGenerator(model,Modules.combine(new SharedStateModule(), new EclipseContextModule()));
 	}
 	
 	protected GCCCommandExecutor getCommandExecutor() {
