@@ -48,11 +48,120 @@ States are the central elements of a state machine. A state has to be placed ins
 
 h3(#transition). Transition
 
-A transition is the transfer of one state to another. Transitions are diagrammed as arrows. They can have events and actions, but don't need to.
+A transition is the transfer of one state to another. A transition is diagrammed as a arrow leading from a _source state_ to a _target state_. A transition can also have
+* an _event trigger_, specifying which event(s) trigger the transition,
+* a _guard_, specifying which condition(s) must be fulfilled to trigger the transition,
+* an _effect_, specifying actions like assignments to variables, operations calls etc. that are to take place when this transition is executed.
 
-The syntax of events and actions is defined by a "textual description language":#the-statechart-language. Please refer to "section &quot;Events&quot;":#events for more details. "Section &quot;Reaction triggers&quot;":#reaction-triggers has more on actions.
+All of these three elements are optional, i.&nbsp;e. a transition may have one or more or them, but it doesn't need to. Events triggers, guard conditions, and effects are specified as a text that is attached to the transition arrow in the diagram.
 
-If a state has more than a single outgoing transition without event, then among those transitions the one that has been modeled first will be carried out.
+Here's an example:
+
+p(#fig_transition-example). 
+!(standard-image)images/docu_transition_030_example_01.png(Transition example)!
+
+p=. Transition example: A simple state machine to launch a rocket. The initial transition's _effect_ sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ – executed as one of a transition's _actions_ – cares for audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the rocket is launched. The countdown can be aborted anytime before launch by a _cancel_ event which _triggers_ the appropriate transition to fire.
+
+"Figure &quot;Transition syntax overview&quot;":#fig_transition-syntax-overview shows how the syntax of a transition specification is defined. You can refer to this diagram while reading the subsequent sections.
+
+p(#fig_transition-syntax-overview). 
+!(standard-image)images/docu_grammar_030_transition-overview.png(Transition syntax overview)!
+
+p=. Transition syntax overview
+
+h4(#unspecified-transition). Unspecified transition
+
+In the most simple case we have only the transition's arrow leading from a source state to a target state without any additional specification. In other words, there is no text attached to the transition. However, such an event will never be taken, so better make sure to set up a transition specification.
+
+h4(#event-triggers). Event triggers
+
+When an "event":#events occurs, it may trigger a transition to "fire". The transition's source state, which is the currently active state, becomes inactive, control is transferred along the transition's arrow to the transition's target state, and that state becomes the active state.
+
+For a transition to fire, the triggering event or events must be given in the transition specification as an _event trigger_. An event trigger consists of one or more event specifications, separated by comma. An event specification is either the name of an event that has been declared in the definition section, see "section &quot;Events&quot;":#events, or one of the built-in event specifications _after_, _every_, _always_, _default_, _else_, or _oncycle_. The latter are documented in "section &quot;Reaction triggers&quot;":#reaction-triggers.
+
+Let's have a look at some sample transition specifications. We are assuming that the transition's source state is active, because otherwise the transition wouldn't fire anyway.
+
+| *Event trigger:* | *Prerequisites for the transition to fire:* |
+| @ev@ | Event _ev_ occured. |
+| @ev_1, ev_2@ | At least one the events _ev_1_ and _ev_2_ occured. |
+| @after 3s@ | Three seconds after activating the source state have passed. |
+| @after 3s, ev@ | Three seconds have passed or event _ev_ occurred, whatever happens first. |
+| @after 3s, after 2s@ | Three seconds have passed or two seconds have passed, whatever happens first. :-) |
+| @every 3s@ | Three seconds after activating the source state have passed. |
+| @always@ | Transition fires always. |
+| @default@ | Transition fires always. |
+| @else@ | Transition fires always. |
+| @oncycle@ | Transition fires always. |
+
+h4(#guard-condition). Guard condition
+
+A _guard_ applies an additional condition for a transition to fire. It is not sufficient for the specified event to occur, the guard condition must also be fulfilled. It is written in square brackets following the event trigger. It is also possible to specify a guard without any event trigger. In this case the transition is always taken, as long as the guard condition evaluates to _true_.
+
+The following examples assume the _x_ is an integer variable and _isOpen_ is an operation.
+
+| *Transition specification:* | *Prerequisites for the transition to fire:* |
+| @ev [x == 3]@ | Event _ev_ occured and _x_ holds the value 3. |
+| @ev_1, ev_2 [x == 3]@ | At least one the events _ev_1_ and _ev_2_ occured and _x_ holds the value 3. |
+| @after 3s, ev [x == 3 && isOpen(7)]@ | Three seconds have passed or event _ev_ occurred, whatever happens first. Additionally, _x_ holds the value 3 and _isOpen(7)_ returns _true_. |
+
+Please note that the guard condition applies to the whole event trigger, not just to the event specification left from it. That is, the guard condition must be fulfilled regardless of which of the events occured. You might think of the event specifications being enclosed in parentheses, like @(ev_1, ev_2) [x == 3]@, although it would be illegal to actually write down these parentheses.
+
+It is not possible to have event-specific guards as in the illegal @ev_1 [x == 1], ev_2 [x == 2]@. If you need something like this, use multiple transitions with @ev_1 [x == 1]@ on one of them and @ev_2 [x == 2]@ on the other.
+
+h4(#effect). Effect
+
+A transition specification may contain one or more _actions_ that are executed when the transition fires, like assigning a value to a variable, calling an operation, or raising an event. All actions taken together are called the transition's _effect_.
+
+In the transition specification, the effect is written right from event trigger and guard and separated by a @/@ character from them. "Figure &quot;Transition effect syntax&quot;":#fig_transition-effect-syntax shows how the effect's syntax looks like.
+
+p(#fig_transition-effect-syntax). 
+!(standard-image)images/docu_grammar_030_transition-effect.png(Transition effect syntax)!
+
+p=. Transition effect syntax
+
+Example: When the transition specified as @ev1 [x > 3] / x += 1; notify(x); raise ev2@ is taken, it increments variable _x_ by 1, calls the _notify_ operation, and raises event _ev2_.
+
+When a transition raises an event, please note that this event exists in the current run-to-completion step (RTC) only and thus can be dealt with in that RTC only. The following example illustrates this. When the state machine is started, the situation is as shown in "figure &quot;Raising an event (1)&quot;":#fig_raising-an-event_1: *A* and *X* in the parallel regions _r1_ and _r2_ are active states.
+
+p(#fig_raising-an-event_1). 
+!(standard-image)images/docu_transition_010_raise_event_01.png(Raising an event 1)!
+
+p=. Raising an event (1)
+
+Now event _e1_ occurs. It triggers transition *A → B* in _r1_. This transition's effect @raise e2@ causes event _e2_ to be raised. This event triggers transition *X → Y* in _r2_ to fire _within the same RTC_.
+
+After that the situation is now as can be seen in "figure &quot;Raising an event (2)&quot;":#fig_raising-an-event_2: substates *B* and *Y* are now active states. However, the transition *B → C* will not be taken, because that would have to happen in another RTC. By then the particular _e2_ instance raised by *A → B* will be long gone, since it was restricted to the RTC it has been raised in.
+
+p(#fig_raising-an-event_2). 
+!(standard-image)images/docu_transition_010_raise_event_02.png(Raising an event 2)!
+
+p=. Raising an event (2)
+
+h4(#entry-and-exit-points). Entry and exit points
+
+Unlike "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language transitions, transitions in YAKINDU Statecharts can denote specific entry or exit points when leaving or entering composite states. This is denoted by the _TransitionProperties_ non-terminal symbol in "figure &quot;Transition syntax overview&quot;":#fig_transition-syntax-overview and explained in detail in sections "&quot;Named entries&quot;":#named-entries and "&quot;Exit&quot;":#exit.
+
+h4(#transition-priorities). Transition priorities
+
+If a state has several outgoing transitions, based on the events that occured and on guard conditions, several of these transitions could fire at the same time. Here's simple example:
+
+p(#fig_transition-priorities-1). 
+!(standard-image)images/docu_transition_020_priorities_01.png(Transition priorities 1)!
+
+p=. Transition priorities (1)
+
+Which transition will fire when event _e1_ occurs? Fortunately YAKINDU state machines behave deterministically, so this question can be answered unambiguously. Outgoing transitions of a state have a definite order and are _prioritized_ by that order. The state machine checks the transitions one by one in their order and executes the first transition that fulfills all prerequisites for firing.
+
+As you can see in "figure &quot;Transition priorities (1)&quot;":#fig_transition-priorities-1, little numbers indicate the transition priorities. These numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram Appearance_ is activated.
+
+The order of transitions is a property of their source state. In the example above, the transition priorities of state *A* appear like this in the _Properties_ view:
+
+p(#fig_transition-priorities-2). 
+!(standard-image)images/docu_transition_020_priorities_02.png(Transition priorities 2)!
+
+p=. Transition priorities (2)
+
+To change priorities, select a transition in the _Properties_ view and click on the _up_ or _down_ button as appropriate.
 
 h3(#entry). Entry
 
@@ -423,6 +532,8 @@ bc. const variable1: real
 
 h3(#events). Events
 
+An _event_ is something of importance that happens at a certain point in time in the context of a state machine, for example a user pushes a button, a temperature sensor delivers a value, a period of time has passed, etc. An event is not necessarily something external; the state machine can raise events itself.
+
 h4(#incoming-and-outgoing-events). Incoming and outgoing events
 
 An event in an interface scope has a direction. It is either ingoing or outgoing:
@@ -629,3 +740,52 @@ bc. myBool = active(StateA)
 ==<!-- End stext_keyword_ -->==
 
 
+h2(#complete-statechart-language-grammar). Complete statechart language grammar
+
+This section presents the complete grammar of the statechart language. If you are in doubt how to write down a transition specification, a variable declaration, or any other syntactical construct of the statechart language, this is your definite reference that clarifies all syntactical questions.
+
+The grammar is visualized using "railroad diagrams":https://en.wikipedia.org/wiki/Syntax_diagram. Railroad diagrams are easy to read and comprise all syntactically valid language constructs. Figure "&quot;Railroad diagrams explained&quot;":#fig-railroad-diagrams-explained shows an example:
+
+p(#fig-railroad-diagrams-explained). 
+
+!(standard-image)images/docu_grammar_020_simpleelementreferenceexpression.png(Railroad diagrams explained)!
+
+p=. Railroad diagrams explained
+
+On the left-hand side you'll find the so-called "_non-terminal symbol_":https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols (or _non-terminal_ for short) that is being defined by this particular diagram. Here the non-terminal is _SimpleElementReferenceExpression_. To find out what a _SimpleElementReferenceExpression_ is allowed to look like, follow the "railroad track" just like a train would do. At each junction, the train either keeps its direction or changes it by 45 degrees, but it cannot make sharp turns of 90 degrees or more.
+
+On its way, the train passes several "stations". Each station represents a language element that is valid at this point. In our example, the first station is a rectangle with a grey background. The grey background denotes a non-terminal, and the word inside the rectangle is the non-terminal's name, here: _ID_. You will have to look up this particular non-terminal's railroad diagram to learn more about it. However, for simplicity and because their meanings are more or less obvious a few non-terminals are not refined further. Examples are _STRING_, _INT_, _BOOL_, or _ID_.
+
+In a _SimpleElementReferenceExpression_, a valid ID – a name – is always the first element, e.&nbsp;g. @init42@. If the train turns right at the junction, it moves directly to the railroad diagram's exit. That means just an _ID_ like @init42@ is a valid _SimpleElementReferenceExpression_. Please note that when the train reaches the junction right before the exit, it cannot turn left, because trains don't move that way. That is, the train is unable to travel to the @(@ station from this direction.
+
+The train can reach the @)@ from the opposite direction only. After having left the initial _ID_ station, the train can move to the left at the junction and then run a stretch touching only the @(@ and @)@ stations, in that order. These rectangles have a white background color, denoting a "_terminal symbol_":https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols or _terminal_ for short. A terminal stands for itself; write it down as it is.
+
+Following that rule, @init42()@ is a valid _SimpleElementReferenceExpression_. One or more _Expressions_ inside the paranthesis, separated by the @,@ terminal, are also valid. Example: @init42(foo, bar + 27)@.
+
+bq.. *Please note:*
+
+The railroad diagrams themselves are generated from a textual grammar representation established and maintained with "Xtext":https://eclipse.org/Xtext/. If you suspect the diagrams shown here are lagging behind the actual implementation, look for files with the @.xtext@ extension in the YAKINDU Statechart Tools source code distribution!
+
+bq.. *Please also note:*
+
+Not each and every construction that is syntactically allowed does make sense semantically. The statechart editor will flag such constructions as errors.
+
+h3(#statechart-grammar). Statechart grammar
+
+Figure "&quot;Statechart grammar&quot;":#fig-statechart-grammar shows the statechart grammar. It makes use of the "expressions grammar":#expressions-grammar.
+
+p(#fig-statechart-grammar). 
+
+!(standard-image)images/docu_grammar_010_stext.png(Statechart grammar)!
+
+p=. Statechart grammar
+
+h3(#expressions-grammar). Expressions grammar
+
+Figure "&quot;Expressions grammar&quot;":#fig-expressions-grammar shows the expressions grammar. It is used by the "statechart grammar":#statechart-grammar.
+
+p(#fig-expressions-grammar). 
+
+!(standard-image)images/docu_grammar_010_expressions.png(Expressions grammar)!
+
+p=. Expressions grammar
