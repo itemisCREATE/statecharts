@@ -34,7 +34,6 @@ public class SCTEclipseResourceFileSystemAccess extends EclipseResourceFileSyste
 		setMonitor(new NullProgressMonitor());
 	}
 
-	@Override
 	public void setContext(String projectName) {
 		IProject project = ws.getRoot().getProject(projectName);
 		super.setProject(project);

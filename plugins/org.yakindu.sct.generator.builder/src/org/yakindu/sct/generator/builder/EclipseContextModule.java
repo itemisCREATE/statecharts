@@ -11,7 +11,7 @@
 package org.yakindu.sct.generator.builder;
 
 import org.yakindu.sct.generator.builder.console.EclipseConsoleLogger;
-import org.yakindu.sct.generator.builder.efs.EFSResourceFileSystemAccess;
+import org.yakindu.sct.generator.builder.efs.SCTEclipseResourceFileSystemAccess;
 import org.yakindu.sct.generator.core.console.IConsoleLogger;
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
 
@@ -27,7 +27,7 @@ public class EclipseContextModule implements Module {
 	@Override
 	public void configure(Binder binder) {
 		binder.bind(IConsoleLogger.class).to(EclipseConsoleLogger.class);
-		binder.bind(ISCTFileSystemAccess.class).to(EFSResourceFileSystemAccess.class);
+		binder.bind(ISCTFileSystemAccess.class).to(SCTEclipseResourceFileSystemAccess.class);
 
 	}
 }

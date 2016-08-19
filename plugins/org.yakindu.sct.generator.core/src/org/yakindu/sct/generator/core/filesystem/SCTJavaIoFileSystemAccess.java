@@ -28,9 +28,9 @@ public class SCTJavaIoFileSystemAccess extends JavaIoFileSystemAccess implements
 
 public static final String BASE_DIR = "filesystemAccess.absolute.baseDir";
 	
-	@Inject(optional = true)
+	@Inject
 	@Named(BASE_DIR)
-	protected String absoluteBaseDir = "/";
+	protected String absoluteBaseDir;
 
 	@Override
 	public void setContext(String projectName) {
