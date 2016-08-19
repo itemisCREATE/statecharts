@@ -269,6 +269,14 @@ public class StringTreeNodeTest {
 		assertEquals("UnDeuxTroisQuatre", testNode.getContentUpwards());
 	}
 	
+	@Test
+	public void weightTest()
+	{
+		buildStandardTestTree();
+		
+		assertEquals(15, tree.getWeight());
+	}
+	
 	private void testSiblings(String testString, List<String> expectedSiblings)
 	{
 		buildStandardTestTree();
