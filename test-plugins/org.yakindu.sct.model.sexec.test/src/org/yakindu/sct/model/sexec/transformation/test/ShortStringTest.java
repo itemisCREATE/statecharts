@@ -37,6 +37,34 @@ public class ShortStringTest {
 	}
 	
 	@Test
+	public void resetTest()
+	{
+		shortstr = new ShortString("Yakindu");
+		
+		shortstr.removeVocals();
+		
+		assertEquals("Yknd", shortstr.getShortenedString());
+		
+		shortstr.reset();
+		
+		assertEquals("Yakindu", shortstr.getShortenedString());
+	}
+	
+	@Test
+	public void rollBackTest()
+	{
+		shortstr = new ShortString("Yakindu_StatechartTools");
+		
+		shortstr.removeUnderscores();
+		
+		shortstr.removeVocals();
+		
+		shortstr.rollback();
+		
+		assertEquals("YakinduStatechartTools", shortstr.getShortenedString());
+	}
+	
+	@Test
 	public void basicCutCostTest()
 	{
 		shortstr = new ShortString("AAab_7");
