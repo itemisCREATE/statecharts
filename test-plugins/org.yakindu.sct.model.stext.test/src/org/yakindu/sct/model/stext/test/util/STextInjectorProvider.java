@@ -12,6 +12,8 @@ package org.yakindu.sct.model.stext.test.util;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -27,15 +29,12 @@ public class STextInjectorProvider implements IInjectorProvider {
 
 	public Injector getInjector() {
 		return Guice.createInjector(new STextRuntimeTestModule(), new AbstractModule() {
-
 			@Override
 			protected void configure() {
 				bind(String.class).annotatedWith(Names.named("domainId"))
 						.toInstance(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral());
-
+				bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
 			}
-
 		});
 	}
-
 }
