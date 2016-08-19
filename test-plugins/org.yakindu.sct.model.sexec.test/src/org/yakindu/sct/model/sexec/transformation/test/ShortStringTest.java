@@ -28,6 +28,63 @@ public class ShortStringTest {
 		shortstr.removeVocals();
 		
 		assertEquals("YkndSttchrtTls", shortstr.getShortenedString());
+		
+		shortstr = new ShortString("ATest");
+		
+		shortstr.removeVocals();
+		
+		assertEquals("ATst", shortstr.getShortenedString());
+	}
+	
+	@Test
+	public void basicCutCostTest()
+	{
+		shortstr = new ShortString("AAab_7");
+		
+		assertEquals(ShortString.cost_firstLetter + ShortString.cost_Uppercase, shortstr.getBaseCutCost(0));
+		
+		assertEquals(ShortString.cost_Uppercase, shortstr.getBaseCutCost(1));
+		
+		assertEquals(ShortString.cost_lowercase_vocals, shortstr.getBaseCutCost(2));
+		
+		assertEquals(ShortString.cost_lowercase_consonants, shortstr.getBaseCutCost(3));
+		
+		assertEquals(ShortString.cost_underscore, shortstr.getBaseCutCost(4));
+		
+		assertEquals(ShortString.cost_digit, shortstr.getBaseCutCost(5));
+	}
+	
+	@Test
+	public void cutCostFactorTest()
+	{
+		shortstr = new ShortString("012345");
+		
+		shortstr.removeIndex(0);
+		assertEquals(11, shortstr.getCutCostFactor());
+		
+		shortstr.removeIndex(1);
+		assertEquals(13, shortstr.getCutCostFactor());
+		
+		shortstr.removeIndex(2);
+		assertEquals(15, shortstr.getCutCostFactor());
+		
+		shortstr.removeIndex(3);
+		assertEquals(16, shortstr.getCutCostFactor());
+		
+		shortstr.removeIndex(4);
+		assertEquals(18, shortstr.getCutCostFactor());
+		
+		shortstr.removeIndex(5);
+		assertEquals(20, shortstr.getCutCostFactor());
+	}
+	
+	@Test
+	public void cutRatioTest1()
+	{
+		shortstr = new ShortString("ababababab");
+		shortstr.removeVocals();
+		
+		assertEquals(0.5, shortstr.getCutRatio(), 0.01);
 	}
 	
 	@Test
@@ -47,7 +104,9 @@ public class ShortStringTest {
 		
 		shortstr.removeVocals();
 		
-		assertEquals(8*ShortString.cost_lowercase_vocals, shortstr.getCutCost());
+		int expectedCost = 8 * ShortString.cost_lowercase_vocals * shortstr.getCutCostFactor();
+		
+		assertEquals(expectedCost, shortstr.getCutCost());
 	}
 	
 	@Test
@@ -57,9 +116,10 @@ public class ShortStringTest {
 		
 		shortstr.removeVocals();
 		
-		int expectedCost = 
+		int expectedCost = (
 				1 * ShortString.cost_firstLetter +
-				1 * ShortString.cost_lowercase_vocals;
+				1 * ShortString.cost_lowercase_vocals
+				) * shortstr.getCutCostFactor();
 		
 		assertEquals(expectedCost, shortstr.getCutCost());
 	}
@@ -71,9 +131,10 @@ public class ShortStringTest {
 		
 		shortstr.removeIndex(0);
 		
-		int expectedCost = 
+		int expectedCost = (
 				1 * ShortString.cost_firstLetter + 
-				1 * ShortString.cost_Uppercase;
+				1 * ShortString.cost_Uppercase
+				) * shortstr.getCutCostFactor();
 		
 		assertEquals(expectedCost, shortstr.getCutCost());
 	}
