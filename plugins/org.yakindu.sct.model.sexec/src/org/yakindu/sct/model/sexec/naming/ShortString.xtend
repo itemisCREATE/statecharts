@@ -9,6 +9,7 @@ class ShortString {
 	private String originalString;
 	
 	private int[] cutArray;
+	private int[] previous_cutArray;
 	private int size;
 	
 	final static public int cost_lowercase_vocals = 1;
@@ -24,6 +25,7 @@ class ShortString {
 		originalString = s;
 		size = s.length;
 		cutArray = newIntArrayOfSize(size);
+		previous_cutArray = newIntArrayOfSize(size);
 		reset();
 	}
 	
@@ -34,8 +36,23 @@ class ShortString {
 	
 	def public reset()
 	{
+		saveCurrentToPrevious();
 		for(var i=0; i<size; i++) {
 			cutArray.set(i, 1);
+		}
+	}
+	
+	def private saveCurrentToPrevious()
+	{
+		for(var i=0; i<size; i++) {
+			previous_cutArray.set(i, cutArray.get(i));
+		}
+	}
+	
+	def public rollback()
+	{
+		for(var i=0; i<size; i++) {
+			cutArray.set(i, previous_cutArray.get(i));
 		}
 	}
 	
@@ -52,20 +69,25 @@ class ShortString {
 		return ret;
 	}
 	
+	def public int getCutCostFactor()
+	{
+		return 10 + (getCutRatio()*10) as int;
+	}
+	
 	def public int getCutCost()
 	{
 		var cost = 0;
 		
 		for(var i=0; i<size; i++) {
 			if(cutArray.get(i) == 0) {
-				cost += getCutCost(i);
+				cost += getBaseCutCost(i);
 			}
 		}
-		
-		return cost;
+		var int costfactor = 10 + ((getCutRatio()*10) as int);
+		return cost * costfactor;
 	}
 	
-	def public int getCutCost(int index)
+	def public int getBaseCutCost(int index)
 	{
 		var cost = 0;
 		
@@ -95,6 +117,7 @@ class ShortString {
 	
 	def public removeVocals()
 	{
+		saveCurrentToPrevious();
 		for(var i=0; i<size; i++) {
 			if(isLowercaseVocal(i)) {
 				cutArray.set(i, 0);
@@ -104,6 +127,7 @@ class ShortString {
 	
 	def public removeUnderscores()
 	{
+		saveCurrentToPrevious();
 		for(var i=0; i<size; i++) {
 			if(originalString.charAt(i).toString() == "_") {
 				cutArray.set(i, 0);
@@ -121,11 +145,12 @@ class ShortString {
 			}
 		}
 		
-		return rem / size;
+		return rem as float / size as float;
 	}
 	
 	def public removeIndex(int index)
 	{
+		saveCurrentToPrevious();
 		if(index < size) {
 			cutArray.set(index, 0);
 		}
