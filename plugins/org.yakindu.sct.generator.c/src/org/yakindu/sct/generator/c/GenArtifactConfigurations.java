@@ -124,7 +124,7 @@ public class GenArtifactConfigurations implements IGenArtifactConfigurations {
 		
 		Path targetPath = new Path(target);
 		if (targetPath.isAbsolute()) {
-			return relativePath(target, baseUri.toFileString());
+			return relativePath(target, relative(baseUri));
 		}
 		
 		URI absUri = getURI(target);
