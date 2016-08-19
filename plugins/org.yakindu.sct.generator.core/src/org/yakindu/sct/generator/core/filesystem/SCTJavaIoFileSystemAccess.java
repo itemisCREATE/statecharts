@@ -32,7 +32,6 @@ public static final String BASE_DIR = "filesystemAccess.absolute.baseDir";
 	@Named(BASE_DIR)
 	protected String absoluteBaseDir;
 
-	@Override
 	public void setContext(String projectName) {
 		// Nothing to do
 	}
