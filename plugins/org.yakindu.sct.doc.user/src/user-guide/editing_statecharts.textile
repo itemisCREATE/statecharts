@@ -511,3 +511,7 @@ h3(#oss_contributing_examples). Contributing own examples
 If you have a project that you want to share with the community, you can contribute it as an example. Once your contribution is reviewed and applied by the YAKINDU team, it is available for all users of YAKINDU Statechart Tools via the example wizard's update functionality.
 
 For more information on how to contribute examples, please visit our "Wiki page":https://github.com/Yakindu/examples/wiki/Creating-a-YAKINDU-Statechart-Tools-Example.
+
+h2(#statechart-editor-preferences). Statechart editor preferences
+
+Several aspects of the statechart editor's behavior can be controlled by its preferences. 
