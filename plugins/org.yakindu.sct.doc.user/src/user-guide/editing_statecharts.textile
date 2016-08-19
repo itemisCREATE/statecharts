@@ -512,6 +512,124 @@ If you have a project that you want to share with the community, you can contrib
 
 For more information on how to contribute examples, please visit our "Wiki page":https://github.com/Yakindu/examples/wiki/Creating-a-YAKINDU-Statechart-Tools-Example.
 
-h2(#statechart-editor-preferences). Statechart editor preferences
+h2(#Preferences). Preferences
 
-Several aspects of the statechart editor's behavior can be controlled by its preferences. 
+Many aspects of YAKINDU Statechart Tools can be configured by _preferences_. You can find them here:
+
+# In the main menu, select _Window → Preferences_. The _Preferences_ dialog appears.
+# In the navigation on the left-hand side, scroll to _YAKINDU SCT_. Open it and its subentries as needed.
+# Click on an entry to display the associated preference pane on the right-hand side of the _Preferences_ dialog, see e.&nbsp;g. figure "Diagram Appearance":#fig_preferences-diagram-appearance.
+
+In the subsequent sections we will quickly walk through the preferences.
+
+h3(#preferences-dialog-appearance). Diagram appearance
+
+p(#fig_preferences-diagram-appearance). 
+!(standard-image)images/docu_preferences_010_diagram_appearance_01.png(Preferences: Diagram Appearance)!
+
+p=. Preferences: Diagram Appearance
+
+h4. Colors and line styles
+
+The "diagram appearance":#fig_preferences-diagram-appearance preferences define default colors for the backgrounds and borders of states and regions, as well as the default routing style for transitions and other lines, with _oblique_ and _rectilinear_ being the options at your choice.
+
+Please keep in mind that colors and line styles will apply to _new_ elements only. Existing regions, states, etc. will remain as they are. You can always modify the properties of an existing element using the _Properties_ view.
+
+h4. Showing transition priorities
+
+In order to display "transition priorities":statechart_language.html#transition-priorities in a statechart, set a check mark at the respective preference option. Section "&quot;Transition priorities&quot;":statechart_language.html#transition-priorities has an example.
+
+h4. Disabling live validation
+
+While you are editing a statechart, the statechart editor validates your model on each and every modification you make. That's very helpful, because the editor provides you with instant feedback, so you can see immediately what is right, wrong, or dubious, and you can take corrective action, if needed.
+
+However, on very large and complex statechart models, validation may take a considerable amount of time, causing delays and impeding your editing. Remove the check mark from _Enable live validation_, and your model will be validated before it is saved to the model file only.
+
+h3. Example wizard
+
+p(#fig_preferences-example-wizard). 
+!(standard-image)images/docu_preferences_020_examples_01.png(Preferences: Example wizard)!
+
+p=. Preferences: Example wizard
+
+You can change the example wizard storage location here. It is a local directory where the "example wizard":#oss_example_wizard stores your local clone of the examples Git repository. Default is the _sct_examples_ directory in your home directory.
+
+h3. Expressions
+
+p(#fig_preferences-expressions). 
+!(standard-image)images/docu_preferences_030_expressions_01.png(Preferences: Expressions)!
+
+p=. Preferences: Expressions
+
+Certain dialogs in the statechart editor allow you to opt for never seeing them again. By clicking on the _Clear_ button on this preference pane these hidden dialogs will be shown again at their respective locations.
+
+h4. Expression syntax coloring
+
+p(#fig_preferences-expression-syntax-coloring). 
+!(standard-image)images/docu_preferences_040_expressions_syntax_coloring_01.png(Preferences: Expression syntax coloring)!
+
+p=. Preferences: Expression syntax coloring
+
+This preferences pane defines foreground color, background color, font, and style for displaying certain syntactical elements in statechart language texts.
+
+h4. Expression templates
+
+p(#fig_preferences-expression-templates). 
+!(standard-image)images/docu_preferences_050_expressions_template_01.png(Preferences: Expression templates)!
+
+p=. Preferences: Expression templates
+
+Templates are sections of textual code that occur frequently enough that you would like to be able to insert them with a few keystrokes. This function is known as _content assist_; the sections of code that are inserted are known as _templates_.
+
+To insert an existing content assist template, type the initial character, then press @[Ctrl+Space]@. The templates that begin with that character appear. Double-click on a template to insert it.
+
+On this preference pane you can create, edit, and delete statechart language templates.
+
+h3. Generator model
+
+p(#fig_preferences-generator-model). 
+!(standard-image)images/docu_preferences_060_generator_model_01.png(Preferences: Generator model)!
+
+p=. Preferences: Generator model
+
+By default code generators automatically generate artifacts defined by generator models in _.sgen_ files. Using this preference setting, you can switch this behavior off or on.
+
+h4. Generator model refactoring
+
+p(#fig_preferences-generator-model-refactoring). 
+!(standard-image)images/docu_preferences_070_generator_model_refactoring_01.png(Preferences: Generator model refactoring)!
+
+p=. Preferences: Generator model refactoring
+
+Change these preference settings for refactoring in generator models as you see fit.
+
+h4. Generator model syntax coloring
+
+p(#fig_preferences-generator-model-syntax-coloring). 
+!(standard-image)images/docu_preferences_080_generator_syntax_coloring_01.png(Preferences: Generator model syntax coloring)!
+
+p=. Preferences: Generator model syntax coloring
+
+This preferences pane defines foreground color, background color, font, and style for displaying certain syntactical elements in generator model texts.
+
+h4. Generator model templates
+
+p(#fig_preferences-generator-model-templates). 
+!(standard-image)images/docu_preferences_090_generator_templates_01.png(Preferences: Generator model templates)!
+
+p=. Preferences: Generator model templates
+
+Templates are sections of textual code that occur frequently enough that you would like to be able to insert them with a few keystrokes. This function is known as _content assist_; the sections of code that are inserted are known as _templates_.
+
+To insert an existing content assist template, type the initial character, then press @[Ctrl+Space]@. The templates that begin with that character appear. Double-click on a template to insert it.
+
+On this preference pane you can create, edit, and delete generator model language templates.
+
+h3. Simulation
+
+p(#fig_preferences-simulation). 
+!(standard-image)images/docu_preferences_100_simulation_01.png(Preferences: Simulation)!
+
+p=. Preferences: Simulation
+
+Set your color preferences for the statechart simulator on this preference pane.
