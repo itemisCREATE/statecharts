@@ -120,13 +120,14 @@ span.pro-feature:before {
 .sct-docs h1 {
 	/* Make some room for the "Edit on GitHub link": */
 	margin-right: 10rem;
+	clear: left;
 }
 
 .sct-docs .edit-on-github {
 	float: right;
-	text-align: right;
+	line-height: 45px;
 	position: relative;
-	top: 4ex;
+	margin: 0;
 }
 
 .eclipsehelp .edit-on-github {
