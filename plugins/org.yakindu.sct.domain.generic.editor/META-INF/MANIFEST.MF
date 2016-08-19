@@ -13,6 +13,7 @@ Require-Bundle: org.yakindu.sct.ui.editor,
  org.yakindu.sct.model.stext,
  org.yakindu.sct.model.stext.ui,
  org.eclipse.xtext.ui,
- org.eclipse.xtext.ui.shared
+ org.eclipse.xtext.ui.shared,
+ org.yakindu.sct.model.sgraph.ui
 Import-Package: com.google.inject.multibindings;version="1.3.0"
 Export-Package: org.yakindu.sct.domain.generic.editor
