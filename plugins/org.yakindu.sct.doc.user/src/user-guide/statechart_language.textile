@@ -171,7 +171,7 @@ p.
 Figure "&quot;Event specifications syntax overview&quot;":#fig_transition-syntax-overview shows where to put event specifications in a reaction trigger and how their syntax is defined.
 
 p(#fig_event-specifications-syntax-overview). 
-!(standard-image)images/docu_grammar_030_event-specification.png(Event specifications syntax overview)!
+!(standard-image)images/docu_grammar_030_event-specification-overview.png(Event specifications syntax overview)!
 
 p=. Event specifications syntax overview
 
