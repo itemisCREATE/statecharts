@@ -135,6 +135,35 @@ class ShortString {
 		}
 	}
 	
+	def public removeCheapestChar()
+	{
+		// saveCurrentToPrevious(); - done in removeIndex(i);
+		var cheapestOperation_cost = Integer.MAX_VALUE;
+		var cheapestOperation_index = 0;
+		for(var i=0; i<size; i++) {
+			if(cutArray.get(i) != 0) {
+				var cost = getBaseCutCost(i);
+				if(cost < cheapestOperation_cost) {
+					cheapestOperation_cost = cost;
+					cheapestOperation_index = i;
+				}
+			}
+		}
+		
+		removeIndex(cheapestOperation_index);
+	}
+	
+	def public int simulateRemoveCheapestChar()
+	{
+		var current_cost = getCutCost();
+		removeCheapestChar();
+		var cost_difference = getCutCost() - current_cost;
+		
+		rollback();
+		
+		return cost_difference;
+	}
+	
 	def public float getCutRatio()
 	{
 		var rem = 0;
