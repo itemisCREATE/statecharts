@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
+import org.yakindu.sct.generator.builder.EclipseContextModule;
 import org.yakindu.sct.generator.core.execution.GeneratorExecutor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -86,7 +87,7 @@ public class GTestHelper {
 
 		performFullBuild();
 		
-		new GeneratorExecutor().executeGenerator(model);
+		new GeneratorExecutor().executeGenerator(model,new EclipseContextModule());
 	}
 	
 	protected GCCCommandExecutor getCommandExecutor() {
