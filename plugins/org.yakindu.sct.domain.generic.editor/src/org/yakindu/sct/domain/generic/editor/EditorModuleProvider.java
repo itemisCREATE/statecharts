@@ -53,11 +53,13 @@ public class EditorModuleProvider implements IModuleProvider {
 
 	protected Module getEmbeddedEditorModule(String semanticTarget) {
 		Class<? extends EObject> rule = GRAMMAR_RULE_MAP.get(semanticTarget);
+		return Modules.override(getLanguageModule()).with(new EntryRuleRuntimeModule(rule), new EntryRuleUIModule(rule));
+	}
+	
+	protected Module getLanguageModule() {
 		Module uiModule = Modules.override(new STextRuntimeModule())
 				.with(new STextUiModule(STextActivator.getInstance()));
-		Module languageModule = Modules.override(uiModule).with(new SharedStateModule());
-		return Modules.override(languageModule).with(new EntryRuleRuntimeModule(rule), new EntryRuleUIModule(rule));
-
+		return Modules.override(uiModule).with(new SharedStateModule());
 	}
 
 }

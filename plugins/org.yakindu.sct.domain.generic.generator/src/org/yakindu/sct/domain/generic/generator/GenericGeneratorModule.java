@@ -32,7 +32,11 @@ public class GenericGeneratorModule extends AbstractGenericModule {
 
 	public void configure(Binder binder) {
 		super.configure(binder);
-		binder.bind(ITypeSystem.class).toInstance(GenericTypeSystem.getInstance());
+		binder.bind(ITypeSystem.class).toInstance(getTypeSystem());
+	}
+
+	protected ITypeSystem getTypeSystem() {
+		return GenericTypeSystem.getInstance();
 	}
 
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
