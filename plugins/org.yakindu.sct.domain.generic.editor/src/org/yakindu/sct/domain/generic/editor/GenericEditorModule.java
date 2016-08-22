@@ -14,11 +14,9 @@ import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
-import org.eclipse.xtext.validation.IResourceValidator;
+import org.yakindu.sct.model.sgraph.ui.validation.SCTDiagnosticConverterImpl;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerTypeProvider;
-import org.yakindu.sct.model.stext.ui.validation.SCTDiagnosticConverterImpl;
-import org.yakindu.sct.model.stext.ui.validation.SCTResourceValidatorImpl;
 import org.yakindu.sct.refactoring.proposals.RefactoringProposalProvider;
 import org.yakindu.sct.ui.editor.editor.proposals.SmartEditProposalProvider;
 import org.yakindu.sct.ui.editor.proposals.IEditProposalProvider;
@@ -57,9 +55,5 @@ public class GenericEditorModule extends AbstractGenericModule {
 
 	public Class<? extends MarkerTypeProvider> bindMarkerTypeProvider() {
 		return SCTMarkerTypeProvider.class;
-	}
-
-	public Class<? extends IResourceValidator> bindIResourceValidator() {
-		return SCTResourceValidatorImpl.class;
 	}
 }

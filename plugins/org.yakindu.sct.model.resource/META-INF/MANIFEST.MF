@@ -8,11 +8,13 @@ Bundle-Activator: org.yakindu.sct.model.resource.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.yakindu.sct.model.sgraph;visibility:=reexport,
- org.yakindu.sct.model.stext,
  org.eclipse.xtext.ui,
- org.yakindu.sct.model.stext.ui,
  org.yakindu.sct.domain,
- org.eclipse.emf.ecore.xmi
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.xtext.ui.shared,
+ org.yakindu.sct.model.sgraph.ui,
+ org.yakindu.sct.model.stext.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Export-Package: org.yakindu.sct.model.resource
+Export-Package: org.yakindu.sct.model.resource,
+ org.yakindu.sct.model.resource.validation

@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.stext.ui.validation;
+package org.yakindu.sct.model.sgraph.ui.validation;
 
 import java.util.Collection;
 
@@ -25,7 +25,6 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.DiagnosticConverterImpl;
 import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
-import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator;
 
 /**
  * 
