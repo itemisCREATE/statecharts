@@ -88,7 +88,7 @@ class Statemachine {
 		protected «scope.interfaceImplName» «scope.interfaceName.asEscapedIdentifier»;
 		
 	«ENDFOR»
-		private boolean initialized=false;
+		private boolean initialized = false;
 
 		public enum State {
 			«FOR state : flow.states»
@@ -160,7 +160,7 @@ class Statemachine {
 	
 	def protected initFunction(ExecutionFlow flow) '''
 		public void init() {
-			this.initialized=true;
+			this.initialized = true;
 			«IF flow.timed»
 			if (timer == null) {
 				throw new IllegalStateException("timer not set.");
@@ -194,7 +194,7 @@ class Statemachine {
 			«ENDFOR»
 			«FOR scope : flow.internalScopes»
 				«FOR event : scope.eventDefinitions»
-					«event.identifier» = false;
+				«event.identifier» = false;
 				«ENDFOR»
 			«ENDFOR»
 			«IF flow.timed»
@@ -245,8 +245,8 @@ class Statemachine {
 		 * @see IStatemachine#isActive()
 		 */
 		 
-		public boolean isActive(){
-			return	«FOR i : 0 ..< flow.stateVector.size SEPARATOR '||'»stateVector[«i»] != State.«nullStateName»;
+		public boolean isActive() {
+			return «FOR i : 0 ..< flow.stateVector.size SEPARATOR '||'»stateVector[«i»] != State.«nullStateName»;
 					«ENDFOR»
 		}
 
@@ -265,7 +265,7 @@ class Statemachine {
 			 * @see IStatemachine#isFinal()
 			 */
 
-			public boolean isFinal(){
+			public boolean isFinal() {
 		''' +
 
 		// only if the impact vector is completely covered by final states the state machine
@@ -351,6 +351,7 @@ class Statemachine {
 			«generateClearOutEvents(scope)»
 			«ENDIF»
 		}
+
 		'''
 	
 	protected def generateClearOutEvents(InterfaceScope scope) '''
@@ -368,13 +369,11 @@ class Statemachine {
 	
 	protected def generateClearEvents(InterfaceScope scope) '''
 		protected void clearEvents() {
-
-		«FOR event : scope.eventDefinitions»
-			«IF event.direction != Direction::OUT»
-			«event.identifier» = false;
-			«ENDIF»
-		«ENDFOR»
-
+			«FOR event : scope.eventDefinitions»
+				«IF event.direction != Direction::OUT»
+				«event.identifier» = false;
+				«ENDIF»
+			«ENDFOR»
 		}
 	'''
 	
@@ -466,6 +465,7 @@ class Statemachine {
 				«event.identifier» = true;
 			}
 		«ENDIF»
+
 	'''
 	
 	protected def generateOperationCallback(InterfaceScope scope) '''
@@ -567,8 +567,9 @@ class Statemachine {
 	
 	def protected runCycleFunction(ExecutionFlow flow) '''
 		public void runCycle() {
-			if(!initialized)
-				throw new IllegalStateException("The state machine needs to be initialized first by calling the init() function.");
+			if (!initialized)
+				throw new IllegalStateException(
+						"The state machine needs to be initialized first by calling the init() function.");
 			clearOutEvents();
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 				switch (stateVector[nextStateIndex]) {
@@ -589,8 +590,9 @@ class Statemachine {
 	
 	def protected enterFunction(ExecutionFlow it) '''
 		public void enter() {
-			if(!initialized){
-				throw new IllegalStateException("The state machine needs to be initialized first by calling the init() function.");
+			if (!initialized) {
+				throw new IllegalStateException(
+						"The state machine needs to be initialized first by calling the init() function.");
 			}
 			«IF timed»
 			if (timer == null) {
@@ -603,7 +605,7 @@ class Statemachine {
 	'''
 	
 	def protected exitFunction(ExecutionFlow it) '''
-		public void exit(){
+		public void exit() {
 			«exitSequence.code»
 		}
 

@@ -52,9 +52,9 @@ class FlowCode {
 	
 	def dispatch CharSequence code(StateSwitch it) '''
 		«IF historyRegion != null»
-			switch(historyVector[«historyRegion.historyVector.offset»]) {
+			switch (historyVector[«historyRegion.historyVector.offset»]) {
 		«ELSE»
-			switch(stateVector[«stateConfigurationIdx»]) {
+			switch (stateVector[«stateConfigurationIdx»]) {
 		«ENDIF»
 		«FOR stateCase : cases»
 			case «stateCase.state.stateName.asEscapedIdentifier»:
@@ -62,7 +62,7 @@ class FlowCode {
 				break;
 		«ENDFOR»
 		default:
-		break;
+			break;
 		}
 	'''
 	
@@ -106,7 +106,7 @@ class FlowCode {
 	'''
 	
 	def dispatch CharSequence code(Reaction it) {
-		effect.code
+		effect.code;
 	}
 	
 	def dispatch CharSequence code(If it) 
@@ -124,12 +124,13 @@ class FlowCode {
 		«stepComment»
 		nextStateIndex = «state.stateVector.offset»;
 		stateVector[«state.stateVector.offset»] = State.«state.stateName.asEscapedIdentifier»;
-	'''
+		'''
 	
 	def dispatch CharSequence code(ExitState it) '''
 		«stepComment»
 		nextStateIndex = «state.stateVector.offset»;
-		stateVector[«state.stateVector.offset»] = State.«getNullStateName()»; '''
+		stateVector[«state.stateVector.offset»] = State.«getNullStateName()»;
+		'''
 	
 	def dispatch CharSequence code(HistoryEntry it) '''
 		«stepComment»
@@ -137,12 +138,12 @@ class FlowCode {
 			«historyStep.code»
 		} «IF initialStep != null»else {
 			«initialStep.code»
-		} «ENDIF»
+		}«ENDIF»
 	'''
 	
 	def dispatch CharSequence code(SaveHistory it) '''
 	«stepComment»
-		historyVector[«region.historyVector.offset»] = stateVector[«region.stateVector.offset»];
+	historyVector[«region.historyVector.offset»] = stateVector[«region.stateVector.offset»];
 	'''
 	
 	def private getTimeEvents(Step it) {
