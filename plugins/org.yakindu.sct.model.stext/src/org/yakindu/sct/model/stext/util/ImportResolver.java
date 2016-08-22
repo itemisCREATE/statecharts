@@ -121,7 +121,6 @@ public class ImportResolver {
 	}
 
 	protected void initResourceDescriptions(Resource contextResource) {
-		System.out.println(resourceDescriptions.getClass());
 		if (resourceDescriptions instanceof ResourceSetBasedResourceDescriptions) {
 			ResourceSet rset = buildResourceSet(contextResource);
 			((ResourceSetBasedResourceDescriptions) resourceDescriptions).setContext(rset);
