@@ -59,7 +59,7 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 		}
 
 		optimizer.inlineReactions(false);
-		optimizer.inlineExitActions(true);
+		optimizer.inlineExitActions(false);
 		optimizer.inlineEntryActions(true);
 		optimizer.inlineEnterSequences(true);
 		optimizer.inlineExitSequences(true);
@@ -97,14 +97,25 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 			
 			// Initialize naming services for statechart and ExecutionFlow
 //			statechartNamingService.initializeNamingService(statechart);
+			long t0 = System.currentTimeMillis();
 			executionflowNamingService.initializeNamingService(flow);
-
+			executionflowNamingService.test_printTreeContents();
+			System.out.print("Time needed for initialization [ms]: "); System.out.println(System.currentTimeMillis() - t0);
+			System.out.println("Generated names:");
 			for(ExecutionState state : flow.getStates())
 			{
 				String name = executionflowNamingService.getShortName(state);
+				if(names.contains(name)) {
+					System.out.println("Conflicting name: " + name);
+					for(String n : names) {
+						System.out.println(n);
+					}
+				}
 				assertEquals(names.contains(name), false);
 				names.add(name);
+				System.out.println(name);
 			}
+			System.out.println();
 //			SExecExtensions ext = new SExecExtensions();
 //			for(Step step : ext.getAllFunctions(flow))
 //			{
@@ -119,6 +130,112 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 		}
 	}
 	
+	@Test
+	public void nameLengthTest31()
+	{
+		nameLengthTest(31);
+	}
+	
+	@Test
+	public void nameLengthTest20()
+	{
+		nameLengthTest(20);
+	}
+	
+	@Test
+	public void nameLengthTest15()
+	{
+		nameLengthTest(15);
+	}
+	
+	@Test
+	public void nameLengthTest10()
+	{
+		nameLengthTest(10);
+	}
+	
+	@Test
+	public void nameLengthTest8()
+	{
+		nameLengthTest(8);
+	}
+	
+	@Test
+	public void optimizerCombinationsTest()
+	{
+		Statechart toTest = null;
+		
+		for(Statechart statechart : statecharts)
+		{
+			if(statechart.getName().equals("DeepEntry")) {
+				toTest = statechart;
+			}
+		}
+		
+		assertEquals(true, toTest != null);
+		
+		ExecutionFlow flow = sequencer.transform(toTest);
+		
+		executionflowNamingService.setMaxLength(0);
+		executionflowNamingService.setSeparator('_');
+		
+		for(int i=0; i < (1 << 9); i++)
+		{
+			optimizer.inlineReactions((i & (1)) != 0);
+			optimizer.inlineExitActions((i & (1 << 1)) != 0);
+			optimizer.inlineEntryActions((i & (1 << 2)) != 0);
+			optimizer.inlineEnterSequences((i & (1 << 3)) != 0);
+			optimizer.inlineExitSequences((i & (1 << 4)) != 0);
+			optimizer.inlineChoices((i & (1 << 5)) != 0);
+			optimizer.inlineEntries((i & (1 << 6)) != 0);
+			optimizer.inlineEnterRegion((i & (1 << 7)) != 0);
+			optimizer.inlineExitRegion((i & (1 << 8)) != 0);
+			
+			ExecutionFlow optimizedflow = optimizer.transform(flow);
+			
+			List<String> names = new ArrayList<String>();
+
+			executionflowNamingService.initializeNamingService(optimizedflow);
+			for(ExecutionState state : flow.getStates())
+			{
+				String name = executionflowNamingService.getShortName(state);
+				assertEquals(names.contains(name), false);
+				names.add(name);
+			}
+		}
+	}
+	
+	private void nameLengthTest(int maxLength)
+	{
+		int num_statecharts = statecharts.size();
+		long cumulated_time = 0L;
+		for (Statechart statechart : statecharts) {
+
+			// Transform statechart
+			ExecutionFlow flow = sequencer.transform(statechart);
+			flow = optimizer.transform(flow);
+			
+			List<String> names = new ArrayList<String>();
+
+			executionflowNamingService.setMaxLength(maxLength);
+			executionflowNamingService.setSeparator('_');
+			
+			long t0 = System.currentTimeMillis();
+			executionflowNamingService.initializeNamingService(flow);
+			cumulated_time += System.currentTimeMillis() - t0;
+			for(ExecutionState state : flow.getStates())
+			{
+				String name = executionflowNamingService.getShortName(state);
+				assertEquals(names.contains(name), false);
+				assertEquals(true, name.length() <= maxLength);
+				names.add(name);
+			}
+		}
+		
+		System.out.print("Average time for initialization [ms]: ");
+		System.out.println((float)cumulated_time / (float)num_statecharts);
+	}
+
 	private void stringListsEqual(List<String> onelist, List<String> otherlist)
 	{
 		onelist.sort(null);

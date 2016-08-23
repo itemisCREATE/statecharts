@@ -13,9 +13,25 @@ import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.eclipse.xtext.naming.QualifiedName
 import org.yakindu.sct.model.sexec.Reaction
+import java.util.List
+import java.util.ArrayList
 
 class ElementNameProvider {
 	@Inject private StextNameProvider provider
+	
+	def protected List<String> elementNameSegments(NamedElement e)
+	{
+		val name = elementName(e);
+		var ArrayList<String> l;
+		if(name != null) {
+			l = new ArrayList<String>(name.getSegments());
+		}
+		else {
+			l = new ArrayList<String>();
+		}
+		
+		return l;
+	}
 	
 	def protected dispatch QualifiedName elementName(ExecutionFlow it) {
 		return null;
@@ -57,4 +73,6 @@ class ElementNameProvider {
 	def protected dispatch QualifiedName elementName(Vertex it) {
 		return provider.getFullyQualifiedName(it).skipFirst(1)
 	}
+	
+	
 }

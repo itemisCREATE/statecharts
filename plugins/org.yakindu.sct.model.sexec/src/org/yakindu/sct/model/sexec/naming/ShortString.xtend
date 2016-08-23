@@ -22,8 +22,12 @@ class ShortString {
 	
 	new(String s)
 	{
-		originalString = s;
-		size = s.length;
+		if(s == null) {
+			originalString = "";
+		} else {
+			originalString = s;
+		}
+		size = originalString.length;
 		cutArray = newIntArrayOfSize(size);
 		previous_cutArray = newIntArrayOfSize(size);
 		reset();
@@ -58,15 +62,28 @@ class ShortString {
 	
 	def public String getShortenedString()
 	{
-		var ret = "";
+		var sb = new StringBuilder();
 		
 		for(var i=0; i<size; i++) {
 			if(cutArray.get(i) != 0) {
-				ret += originalString.charAt(i);
+				sb.append(originalString.charAt(i));
 			}
 		}
 		
-		return ret;
+		return sb.toString();
+	}
+	
+	def public int getShortenedSize()
+	{
+		var length = 0;
+		for(var i=0; i<size; i++)
+		{
+			if(cutArray.get(i) != 0) {
+				length += 1;
+			}
+		}
+		
+		return length;
 	}
 	
 	def public int getCutCostFactor()
@@ -76,6 +93,9 @@ class ShortString {
 	
 	def public int getCutCost()
 	{
+		if(1.0 - getCutRatio() < 0.001) {
+			return 10000;
+		}
 		var cost = 0;
 		
 		for(var i=0; i<size; i++) {
@@ -83,8 +103,8 @@ class ShortString {
 				cost += getBaseCutCost(i);
 			}
 		}
-		var int costfactor = 10 + ((getCutRatio()*10) as int);
-		return cost * costfactor;
+		
+		return cost * getCutCostFactor;
 	}
 	
 	def public int getBaseCutCost(int index)
