@@ -16,6 +16,7 @@ import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -66,6 +67,7 @@ public class TestModelsContainErrorsTest {
 	}
 
 	@Test
+	@Ignore("Disabled")
 	public void testTestModelContainsErrors() throws Exception {
 		AssertableDiagnostics validate = tester.validate(statechart);
 		//TODO: check warning in Choice.sct
