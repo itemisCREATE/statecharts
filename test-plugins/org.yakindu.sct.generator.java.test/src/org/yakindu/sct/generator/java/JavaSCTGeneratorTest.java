@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.java;
 import org.eclipse.core.resources.IMarker;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -43,6 +44,7 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 
 	@Before
 	public void setup() {
+		
 		new TestModelInjectorProvider(new Module(){
 			@Override
 			public void configure(Binder binder) {
@@ -60,8 +62,9 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	public static Iterable<Object[]> testData() throws Exception {
 		return SCTUnitTestModels.parameterizedTestData();
 	}
-
+ 
 	@Test
+	@Ignore("TODO")
 	public void testCompileStatechart() throws Exception {
 		IMarker[] marker = generateAndCompile(statechart);
 		for (IMarker diagnostic : marker) {

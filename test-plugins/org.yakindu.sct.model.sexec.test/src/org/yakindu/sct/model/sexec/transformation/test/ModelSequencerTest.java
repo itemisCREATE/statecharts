@@ -10,8 +10,12 @@
 */
 package org.yakindu.sct.model.sexec.transformation.test;
 
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.junit.Before;
-import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
+import org.yakindu.base.types.typesystem.GenericTypeSystem;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.naming.DefaultNamingService;
@@ -19,13 +23,13 @@ import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.StructureMapping;
+import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.util.Modules;
 
 /**
  * 
@@ -45,22 +49,24 @@ public class ModelSequencerTest extends Assert {
 
 	@Before
 	public void setup() {
-		Module m = Modules.override(new GenericSequencerModule()).with(new Module(){
+		Module m = new Module(){
 			@Override
 			public void configure(Binder binder) {
 				binder.bind(INamingService.class).to(DefaultNamingService.class);
+				binder.bind(IQualifiedNameProvider.class).to(SGraphNameProvider.class);
+				binder.bind(ITypeSystem.class).toInstance(GenericTypeSystem.getInstance());
+				binder.bind(IResourceDescriptions.class).to(ResourceSetBasedResourceDescriptions.class);
 			}
-		});
+		};
 		Injector injector = Guice.createInjector(m);
 		injector.injectMembers(this);
 	}
-	
-	
-	protected Step firstStep(Step seq){
+
+	protected Step firstStep(Step seq) {
 		org.junit.Assert.assertNotNull(seq);
 		assert (seq instanceof Sequence);
-		
-		return ((Sequence)seq).getSteps().get(0);
+
+		return ((Sequence) seq).getSteps().get(0);
 	}
 
 }

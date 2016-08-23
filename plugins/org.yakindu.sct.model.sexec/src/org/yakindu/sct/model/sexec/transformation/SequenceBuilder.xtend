@@ -52,9 +52,9 @@ class SequenceBuilder {
 
 	@Inject extension ITypeValueProvider 
 
-	@Inject
-	@Named("ADD_TRACES")
-	boolean _addTraceSteps
+	@Inject(optional=true)
+	@Named(IModelSequencer.ADD_TRACES)
+	boolean _addTraceSteps = false
 
 	static String DEFAULT_SEQUENCE_NAME = "default"
 

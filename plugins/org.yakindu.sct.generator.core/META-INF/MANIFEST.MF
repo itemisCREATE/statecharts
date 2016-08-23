@@ -17,6 +17,7 @@ Require-Bundle: org.yakindu.sct.model.sexec;visibility:=reexport,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.generator.core,
+ org.yakindu.sct.generator.core.console,
  org.yakindu.sct.generator.core.execution,
  org.yakindu.sct.generator.core.extensions,
  org.yakindu.sct.generator.core.filesystem,

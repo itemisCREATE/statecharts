@@ -33,7 +33,7 @@ public class CSharpCodeGenerator extends AbstractSExecModelGenerator {
 		if (coreFeatureHelper.isDumpSexec(entry)) {
 			dumpSexec(entry, flow);
 		}
-		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess());
+		delegate.generate(flow, entry, sctFsa);
 	}
 
 	@Override

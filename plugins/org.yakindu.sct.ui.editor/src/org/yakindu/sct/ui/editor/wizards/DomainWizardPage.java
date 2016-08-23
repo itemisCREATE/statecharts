@@ -34,7 +34,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.IDomainDescriptor;
+import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 
 /**
@@ -53,9 +53,9 @@ public class DomainWizardPage extends WizardPage {
 	private Object domainDescriptors;
 
 	protected DomainWizardPage(String pageName) {
-		this(pageName, DomainRegistry.getDomainDescriptors());
+		this(pageName, DomainRegistry.getDomains());
 	}
-	protected DomainWizardPage(String pageName, List<IDomainDescriptor> domainDescriptors) {
+	protected DomainWizardPage(String pageName, List<IDomain> domainDescriptors) {
 		super(pageName);
 		this.domainDescriptors = domainDescriptors;
 	}
@@ -81,7 +81,7 @@ public class DomainWizardPage extends WizardPage {
 		domainCombo.setLabelProvider(new LabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((IDomainDescriptor) element).getName();
+				return ((IDomain) element).getName();
 			}
 		});
 		domainCombo.setInput(domainDescriptors);
@@ -92,14 +92,14 @@ public class DomainWizardPage extends WizardPage {
 		domainCombo.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			public void selectionChanged(SelectionChangedEvent event) {
-				IDomainDescriptor domain = unwrap(event.getSelection());
+				IDomain domain = unwrap(event.getSelection());
 				description.setText(domain.getDescription());
 				image.setImage(asImage(domain));
 				domainSelectionGroup.layout();
 
 			}
 
-			private Image asImage(IDomainDescriptor domain) {
+			private Image asImage(IDomain domain) {
 				ImageRegistry imageRegistry = DiagramActivator.getDefault().getImageRegistry();
 				Image image = imageRegistry.get(domain.getImagePath().toString());
 				if (image == null)
@@ -110,7 +110,7 @@ public class DomainWizardPage extends WizardPage {
 
 		});
 		domainCombo.setSelection(new StructuredSelection(DomainRegistry
-				.getDomainDescriptor(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral())));
+				.getDomain(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral())));
 
 		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
 				.getConfigurationElementsFor("org.yakindu.sct.ui.wizard.create.contribution");
@@ -134,8 +134,8 @@ public class DomainWizardPage extends WizardPage {
 		return unwrap(domainCombo.getSelection()).getDomainID();
 	}
 
-	private IDomainDescriptor unwrap(ISelection selection) {
-		IDomainDescriptor domain = (IDomainDescriptor) ((StructuredSelection) selection).getFirstElement();
+	private IDomain unwrap(ISelection selection) {
+		IDomain domain = (IDomain) ((StructuredSelection) selection).getFirstElement();
 		return domain;
 	}
 

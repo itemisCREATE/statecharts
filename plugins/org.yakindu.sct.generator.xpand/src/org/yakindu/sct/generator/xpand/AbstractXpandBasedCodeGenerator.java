@@ -68,7 +68,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 
 		String templatePath = getTemplatePath();
 
-		log.writeToConsole("Executing Template " + templatePath);
+		log.log("Executing Template " + templatePath);
 		XpandExecutionContext context = createXpandContext(entry, output);
 		XpandFacade facade = XpandFacade.create(context);
 
@@ -92,7 +92,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 			facade.evaluate(templatePath, statechart, entry);
 		}
 		if (!generatorFound) {
-			log.writeToConsole("!!! No matching define in Template found.");
+			log.log("!!! No matching define in Template found.");
 		}
 
 	}

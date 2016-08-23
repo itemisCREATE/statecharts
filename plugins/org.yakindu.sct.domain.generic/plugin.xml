@@ -6,9 +6,16 @@
       <Domain
             description="The default domain for YAKINDU Statechart Tools."
             domainID="org.yakindu.domain.default"
-            domainModuleProvider="org.yakindu.sct.domain.generic.extension.GenericDomainInjectorProvider"
             image="icons/logo_small.png"
             name="Default">
       </Domain>
    </extension>
+<extension
+      point="org.yakindu.sct.domain.modules">
+   <Module
+         domainID="org.yakindu.domain.default"
+         feature="org.yakindu.sct.resource"
+         moduleProvider="org.yakindu.sct.domain.generic.modules.ResourceModuleProvider">
+   </Module>
+</extension>
 </plugin>

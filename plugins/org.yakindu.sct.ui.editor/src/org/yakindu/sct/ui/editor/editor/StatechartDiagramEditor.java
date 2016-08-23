@@ -47,9 +47,8 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.yakindu.base.xtext.utils.gmf.resource.DirtyStateListener;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
+import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
@@ -123,16 +122,14 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	}
 
 	protected Object createOutline(Class<?> type) {
-		Injector editorInjector = DomainRegistry.getDomainDescriptor(getDiagram().getElement())
-				.getDomainInjectorProvider().getEditorInjector();
-		
+		Injector editorInjector = getEditorInjector();
 		boolean outlineBindingExists = null != editorInjector.getExistingBinding(Key.get(ISCTOutlineFactory.class));
 		if (!outlineBindingExists) {
-			//get the GMF defautl outline
+			// get the GMF default outline
 			return super.getAdapter(type);
 		}
-		ISCTOutlineFactory instance = editorInjector.getInstance(ISCTOutlineFactory.class);
-		return instance.createOutline(this);
+		ISCTOutlineFactory outlineFactory = editorInjector.getInstance(ISCTOutlineFactory.class);
+		return outlineFactory.createOutline(this);
 	}
 
 	@Override
@@ -147,11 +144,15 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		final IFile file = ((IFileEditorInput) getEditorInput()).getFile();
 		validationJob = new SCTValidationJob();
 		validationJob.setResource(getDiagram().eResource());
-		IDomainInjectorProvider injectorProvider = DomainRegistry.getDomainDescriptor(getDiagram().getElement())
-				.getDomainInjectorProvider();
-		Injector injector = injectorProvider.getEmbeddedEditorInjector(Statechart.class.getName());
+		Injector injector = getEditorInjector();
 		injector.injectMembers(validationJob);
 		validationJob.setRule(file);
+	}
+
+	protected Injector getEditorInjector() {
+		IDomain domain = DomainRegistry.getDomain(getDiagram().getElement());
+		Injector injector = domain.getInjector(IDomain.FEATURE_EDITOR);
+		return injector;
 	}
 
 	private void checkXtextNature() {

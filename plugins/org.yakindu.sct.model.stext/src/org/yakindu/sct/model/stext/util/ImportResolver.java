@@ -11,6 +11,7 @@
  */
 package org.yakindu.sct.model.stext.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -32,7 +33,8 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
- * Convenience class for retrieving imported elements in the statechart's import scope.
+ * Convenience class for retrieving imported elements in the statechart's import
+ * scope.
  * 
  * @author Thomas Kutz
  *
@@ -45,15 +47,19 @@ public class ImportResolver {
 	private IResourceDescriptions resourceDescriptions;
 
 	/**
-	 * Returns for a given {@link Import} declaration all elements of given type that are defined in the imported {@link Package}.
+	 * Returns for a given {@link Import} declaration all elements of given type
+	 * that are defined in the imported {@link Package}.
 	 * 
-	 * @param importDeclaration the import declaration within an import scope
-	 * @param type type of imported elements to be returned
+	 * @param importDeclaration
+	 *            the import declaration within an import scope
+	 * @param type
+	 *            type of imported elements to be returned
 	 * @return imported elements of given type
 	 */
 	public <T extends EObject> List<T> getImportedElementsOfType(Import importDeclaration, Class<T> type) {
 		List<T> elements = Lists.newArrayList();
-		Package importedPackage = getPackageForNamespace(importDeclaration.eResource(), importDeclaration.getImportedNamespace());
+		Package importedPackage = getPackageForNamespace(importDeclaration.eResource(),
+				importDeclaration.getImportedNamespace());
 		if (importedPackage != null) {
 			if (importedPackage.eIsProxy()) {
 				importedPackage = (Package) EcoreUtil.resolve(importedPackage, importDeclaration);
@@ -70,8 +76,11 @@ public class ImportResolver {
 	/**
 	 * Returns for a given namespace the {@link Package}.
 	 * 
-	 * @param contextResource the resource used to decide which packages are visible
-	 * @param namespace name of the package to be returned; ending wildcards (.*) will be trimmed
+	 * @param contextResource
+	 *            the resource used to decide which packages are visible
+	 * @param namespace
+	 *            name of the package to be returned; ending wildcards (.*) will
+	 *            be trimmed
 	 * @return first found package with name as defined in namespace
 	 */
 	public Package getPackageForNamespace(Resource contextResource, String namespace) {
@@ -80,11 +89,23 @@ public class ImportResolver {
 		if (namespace.endsWith(".*")) {
 			namespace = namespace.substring(0, namespace.length() - 2);
 		}
-		URI uri = contextResource.getURI();
-		IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(uri);
+		List<IEObjectDescription> allVisiblePackages = getAllVisiblePackagesDescriptions(contextResource.getURI());
+		for (IEObjectDescription pkgDesc : allVisiblePackages) {
+			if (pkgDesc.getName().toString().equals(namespace)) {
+				return (Package) pkgDesc.getEObjectOrProxy();
+			}
+		}
+		return null;
+	}
+
+	public List<IEObjectDescription> getAllVisiblePackagesDescriptions(URI contextURI) {
+		List<IEObjectDescription> result = new ArrayList<>();
+
+		IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(contextURI);
 		if (resourceDescription == null) {
-			// no resource description could be found, so package cannot be resolved anyway
-			return null;
+			// no resource description could be found, so package cannot be
+			// resolved anyway
+			return result;
 		}
 		for (IContainer container : containerManager.getVisibleContainers(resourceDescription, resourceDescriptions)) {
 			final Iterable<IResourceDescription> currentDescriptions = container.getResourceDescriptions();
@@ -92,13 +113,11 @@ public class ImportResolver {
 				Iterable<IEObjectDescription> visiblePackages = resDesc
 						.getExportedObjectsByType(TypesPackage.Literals.PACKAGE);
 				for (IEObjectDescription pkgDesc : visiblePackages) {
-					if (pkgDesc.getName().toString().equals(namespace)) {
-						return (Package) pkgDesc.getEObjectOrProxy();
-					}
+					result.add(pkgDesc);
 				}
 			}
 		}
-		return null;
+		return result;
 	}
 
 	protected void initResourceDescriptions(Resource contextResource) {

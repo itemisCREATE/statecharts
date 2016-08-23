@@ -22,7 +22,6 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
-import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
@@ -40,7 +39,7 @@ import com.google.inject.Inject;
  * 
  */
 @RunWith(XtextRunner.class)
-@InjectWith(STextInjectorProvider.class)
+@InjectWith(SimulationInjectorProvider.class)
 public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Inject

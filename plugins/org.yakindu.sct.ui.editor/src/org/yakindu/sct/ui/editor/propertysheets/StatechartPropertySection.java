@@ -40,7 +40,7 @@ import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Text;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.IDomainDescriptor;
+import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.propertysheets.OrderElementControl.ISourceObjectCallback;
@@ -84,16 +84,16 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		domainCombo.setLabelProvider(new LabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((IDomainDescriptor) element).getName();
+				return ((IDomain) element).getName();
 			}
 		});
 
-		List<IDomainDescriptor> domains = DomainRegistry.getDomainDescriptors();
-		for (IDomainDescriptor domainDescriptor : domains) {
+		List<IDomain> domains = DomainRegistry.getDomains();
+		for (IDomain domainDescriptor : domains) {
 			domainCombo.add(domainDescriptor);
 		}
 		domainCombo.setSelection(new StructuredSelection(DomainRegistry
-				.getDomainDescriptor(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral())));
+				.getDomain(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral())));
 
 	}
 
@@ -159,13 +159,13 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		UpdateValueStrategy modelToTarget = new UpdateValueStrategy() {
 			@Override
 			public Object convert(Object value) {
-				return ((IDomainDescriptor) value).getDomainID();
+				return ((IDomain) value).getDomainID();
 			}
 		};
 		UpdateValueStrategy targetToModel = new UpdateValueStrategy() {
 			@Override
 			public Object convert(Object value) {
-				return DomainRegistry.getDomainDescriptor((String) value);
+				return DomainRegistry.getDomain((String) value);
 			}
 		};
 		context.bindValue(observeSingleSelection, property.observe(eObject), modelToTarget, targetToModel);

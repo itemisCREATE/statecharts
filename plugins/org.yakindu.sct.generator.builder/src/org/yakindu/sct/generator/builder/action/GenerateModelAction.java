@@ -32,11 +32,15 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.sct.generator.builder.BuilderActivator;
+import org.yakindu.sct.generator.builder.EclipseContextModule;
 import org.yakindu.sct.generator.builder.GenModelLoader;
 import org.yakindu.sct.generator.core.GeneratorActivator;
 import org.yakindu.sct.generator.core.execution.GeneratorExecutor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
+
+import com.google.inject.util.Modules;
 
 /**
  * 
@@ -64,7 +68,8 @@ public class GenerateModelAction implements IObjectActionDelegate {
 			Job generatorJob = new Job("Execute SCT Genmodel " + file.getName()) {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
-					new GeneratorExecutor().executeGenerator(model);
+					new GeneratorExecutor().executeGenerator(model,
+							Modules.combine(new SharedStateModule(), new EclipseContextModule()));
 					return Status.OK_STATUS;
 				}
 			};

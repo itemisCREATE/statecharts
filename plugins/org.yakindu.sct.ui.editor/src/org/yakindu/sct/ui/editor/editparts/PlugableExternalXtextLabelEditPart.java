@@ -28,7 +28,7 @@ import org.yakindu.base.xtext.utils.gmf.directedit.ExternalXtextLabelEditPart;
 import org.yakindu.base.xtext.utils.gmf.directedit.IEAttributeProvider;
 import org.yakindu.base.xtext.utils.gmf.directedit.XtextDirectEditManager;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
+import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
@@ -69,9 +69,8 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 	}
 
 	private void init(String target) {
-		IDomainInjectorProvider injectorProvider = DomainRegistry.getDomainDescriptor(resolveSemanticElement())
-				.getDomainInjectorProvider();
-		injector = injectorProvider.getEmbeddedEditorInjector(target);
+		IDomain domain = DomainRegistry.getDomain(resolveSemanticElement());
+		injector = domain.getInjector(IDomain.FEATURE_EDITOR, target);
 	}
 
 	@Override

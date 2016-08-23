@@ -38,7 +38,7 @@ public class JavaCodeGenerator extends AbstractJavaCodeGenerator {
 			dumpSexec(entry, flow);
 		}
 
-		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess());
+		delegate.generate(flow, entry, sctFsa);
 	}
 
 	@Override

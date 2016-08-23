@@ -11,11 +11,12 @@
       </parser>
    </extension>
 
-   <!-- Resource Provider -->
+   <!-- Resource Provider      -->
  <extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
            class="org.yakindu.sct.model.resource.SCTExecutableExtensionFactory:org.eclipse.xtext.ui.resource.generic.EmfResourceUIServiceProvider"
             uriExtension="sct">
         </resourceServiceProvider>
     </extension>
+
 </plugin>
