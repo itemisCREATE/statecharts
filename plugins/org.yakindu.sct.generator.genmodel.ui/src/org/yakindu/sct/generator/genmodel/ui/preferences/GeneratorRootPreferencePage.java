@@ -25,13 +25,13 @@ import org.yakindu.sct.generator.core.GeneratorActivator;
 public class GeneratorRootPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
 	public GeneratorRootPreferencePage() {
-		setDescription("Change the behavior of the Generator model");
+		setDescription("Change the behavior of the Generator Model");
 	}
 
 	@Override
 	protected void createFieldEditors() {
 		addField(new CheckBoxFieldEditor(GeneratorActivator.PREF_GENERATE_AUTOMATICALLY,
-				"Execute SGen Files automatically: ", getFieldEditorParent()));
+				"Execute generator model files (.sgen) automatically", getFieldEditorParent()));
 	}
 
 	@Override
