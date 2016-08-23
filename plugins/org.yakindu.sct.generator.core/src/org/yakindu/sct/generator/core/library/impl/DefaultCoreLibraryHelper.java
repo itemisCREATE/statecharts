@@ -70,7 +70,7 @@ public class DefaultCoreLibraryHelper implements ICoreLibraryHelper {
 	}
 
 	@Override
-	public boolean isDumpSexec(GeneratorEntry entry) {
+	public boolean serializeExecutionFlow(GeneratorEntry entry) {
 		FeatureParameterValue dumpSexec = entry.getFeatureParameterValue(DEBUG_FEATURE, DEBUG_FEATURE_DUMP_SEXEC);
 		if (dumpSexec == null) {
 			return false;

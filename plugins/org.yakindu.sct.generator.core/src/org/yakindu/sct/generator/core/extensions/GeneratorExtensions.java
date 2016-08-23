@@ -19,7 +19,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
-import org.yakindu.sct.generator.core.ISCTGenerator;
+import org.yakindu.sct.generator.core.GeneratorModule;
+import org.yakindu.sct.generator.core.execution.IGenModelExecutor;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -31,7 +32,8 @@ import com.google.common.collect.Lists;
 public class GeneratorExtensions {
 
 	private static final String EXTENSION_POINT_ID = "org.yakindu.sct.generator.core.generator";
-	private static final String ATTRIBUTE_CLASS = "class";
+	private static final String ATTRIBUTE_GENERATOR_EXECUTOR = "executor";
+	private static final String ATTRIBUTE_BINDINGS = "bindings";
 	private static final String ATTRIBUTE_ID = "id";
 	private static final String LIBRARY_CONFIG_ELEMENT = "FeatureLibrary";
 	private static final String ATTRIBUTE_LIBRARY_ID = "library_id";
@@ -54,9 +56,19 @@ public class GeneratorExtensions {
 		}
 
 		@Override
-		public ISCTGenerator createGenerator() {
+		public IGenModelExecutor createExecutor() {
 			try {
-				return (ISCTGenerator) configElement.createExecutableExtension(ATTRIBUTE_CLASS);
+				return (IGenModelExecutor) configElement.createExecutableExtension(ATTRIBUTE_GENERATOR_EXECUTOR);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		public GeneratorModule getBindings() {
+			try {
+				return (GeneratorModule) configElement.createExecutableExtension(ATTRIBUTE_BINDINGS);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}

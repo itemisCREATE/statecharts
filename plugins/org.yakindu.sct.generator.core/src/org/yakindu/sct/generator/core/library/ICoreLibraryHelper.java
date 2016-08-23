@@ -69,5 +69,5 @@ public interface ICoreLibraryHelper {
 	 */
 	String getRelativeApiFolder(GeneratorEntry entry);
 
-	boolean isDumpSexec(GeneratorEntry entry);
+	boolean serializeExecutionFlow(GeneratorEntry entry);
 }
