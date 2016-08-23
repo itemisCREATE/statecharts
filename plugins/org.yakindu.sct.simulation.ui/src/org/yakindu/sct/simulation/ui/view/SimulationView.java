@@ -31,7 +31,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.IDomainDescriptor;
+import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.ui.view.actions.CollapseAllAction;
@@ -110,8 +110,8 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	}
 
 	private void updateTypeSystem(final IDebugTarget debugTarget) {
-		IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor((EObject)debugTarget.getAdapter(EObject.class));
-		typeSystem = domainDescriptor.getDomainInjectorProvider().getResourceInjector().getInstance(ITypeSystem.class);
+		IDomain domain = DomainRegistry.getDomain((EObject)debugTarget.getAdapter(EObject.class));
+		typeSystem = domain.getInjector(IDomain.FEATURE_SIMULATION).getInstance(ITypeSystem.class);
 	}
 
 	protected void hookActions() {

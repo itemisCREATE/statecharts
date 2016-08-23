@@ -1,7 +1,11 @@
 package org.yakindu.sct.generator.genmodel.ui.ws;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.yakindu.sct.generator.core.filesystem.ISCTWorkspaceAccess;
 
@@ -38,6 +42,17 @@ public class DefaultSCTWorkspaceAccess implements ISCTWorkspaceAccess {
 					.exists();
 		} catch (IllegalArgumentException e) {
 			return false;
+		}
+	}
+
+	@Override
+	public void refreshProject(String projectName) {
+		try {
+			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+			if (project != null && project.isAccessible())
+				project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+		} catch (CoreException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

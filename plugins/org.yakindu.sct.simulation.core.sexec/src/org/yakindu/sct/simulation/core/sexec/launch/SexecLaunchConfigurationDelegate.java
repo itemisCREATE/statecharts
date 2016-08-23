@@ -17,6 +17,7 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.yakindu.sct.domain.extension.DomainRegistry;
+import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.launch.AbstractSCTLaunchConfigurationDelegate;
@@ -34,8 +35,8 @@ import com.google.inject.Injector;
  *         language type and language providers
  * 
  */
-public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigurationDelegate implements
-		ILaunchConfigurationDelegate {
+public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigurationDelegate
+		implements ILaunchConfigurationDelegate {
 
 	@Inject
 	private ISimulationEngineFactory factory;
@@ -62,7 +63,6 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 	}
 
 	protected Injector getInjector(Statechart statechart, ILaunch launch) {
-		return DomainRegistry.getDomainDescriptor(statechart).getDomainInjectorProvider()
-				.getSimulationInjector();
+		return DomainRegistry.getDomain(statechart).getInjector(IDomain.FEATURE_SIMULATION);
 	}
 }

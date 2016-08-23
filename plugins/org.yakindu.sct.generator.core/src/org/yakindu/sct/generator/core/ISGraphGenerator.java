@@ -20,7 +20,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-
 public interface ISGraphGenerator {
 
 	void generate(Statechart statechart, GeneratorEntry entry, IFileSystemAccess fsa);

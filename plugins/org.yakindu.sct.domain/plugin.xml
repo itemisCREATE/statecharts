@@ -2,4 +2,5 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="org.yakindu.sct.domain" name="org.yakindu.sct.domain" schema="schema/domain.exsd"/>
+   <extension-point id="org.yakindu.sct.domain.modules" name="org.yakindu.sct.domain.modules" schema="schema/modules.exsd"/>
 </plugin>

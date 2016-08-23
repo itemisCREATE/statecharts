@@ -15,8 +15,6 @@ import java.util.List;
 
 import org.yakindu.base.types.Type;
 
-import com.google.inject.ImplementedBy;
-
 /**
  * A Implementation of {@link ITypeSystem} defines all existing types and the
  * type compatibility.

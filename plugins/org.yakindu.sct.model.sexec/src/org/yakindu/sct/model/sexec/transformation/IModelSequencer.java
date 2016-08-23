@@ -14,7 +14,12 @@ import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgraph.Statechart;
 
+import com.google.inject.ImplementedBy;
+
+@ImplementedBy(ModelSequencer.class)
 public interface IModelSequencer {
+	
+	public static final String ADD_TRACES = "ADD_TRACES";
 
 	public ExecutionFlow transform(Statechart statechart, IValidationIssueAcceptor acceptor);
 	
