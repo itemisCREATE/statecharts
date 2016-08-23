@@ -22,10 +22,10 @@ import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.osgi.framework.Bundle;
 import org.yakindu.sct.model.resource.validation.SCTResourceValidatorImpl;
-import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTDiagnosticConverterImpl;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerTypeProvider;
+import org.yakindu.sct.model.stext.naming.StextNameProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -55,7 +55,7 @@ public class SCTExecutableExtensionFactory extends AbstractGuiceAwareExecutableE
 				binder.bind(IResourceValidator.class).to(SCTResourceValidatorImpl.class);
 				binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("sct");
 				binder.bind(IEncodingProvider.class).to(IEncodingProvider.Runtime.class);
-				binder.bind(IQualifiedNameProvider.class).to(SGraphNameProvider.class);
+				binder.bind(IQualifiedNameProvider.class).to(StextNameProvider.class);
 				binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
 						.annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class)
 						.to(DefaultDescriptionLabelProvider.class);
