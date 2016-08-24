@@ -14,5 +14,5 @@ package org.yakindu.sct.generator.genmodel.ui.wizard;
  * @author holger willebrandt - Initial contribution and API
  */
 public enum GeneratorType {
-	Java, Xpand, Xtend
+	Java, Xtend
 }

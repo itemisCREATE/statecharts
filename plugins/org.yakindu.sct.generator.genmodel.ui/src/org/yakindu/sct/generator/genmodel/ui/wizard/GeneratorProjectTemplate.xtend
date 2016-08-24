@@ -10,6 +10,8 @@
  */ 
 package org.yakindu.sct.generator.genmodel.ui.wizard
 
+import com.google.inject.Inject
+import com.google.inject.Provider
 import java.io.BufferedInputStream
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -19,18 +21,16 @@ import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
 import org.eclipse.core.resources.IResource
+import org.eclipse.core.resources.IWorkspace
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.Path
 import org.eclipse.core.runtime.SubProgressMonitor
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.xtext.parser.IEncodingProvider
 import org.yakindu.sct.model.sgen.ParameterTypes
 import org.yakindu.sct.model.sgen.SGenFactory
-import com.google.inject.Provider
-import org.eclipse.core.resources.IWorkspace
-import com.google.inject.Inject
-import org.eclipse.xtext.parser.IEncodingProvider
 
 /**
  * 
@@ -69,10 +69,6 @@ class GeneratorProjectTemplate {
 		project.getFile('META-INF/MANIFEST.MF').write(data.manifest)
 		if (data.pluginExport) {
 			project.getFile('plugin.xml').write(data.plugin)
-			if (data.generatorType == GeneratorType::Xpand) {
-				project.getFile('src/'+data.generatorClass.javaFilename)
-					.write(data.xpandGenerator)
-			}
 			if (data.typeLibrary) {
 				project.createFolder('library')
 				project.getFile('library/FeatureTypeLibrary.xmi')
@@ -86,9 +82,6 @@ class GeneratorProjectTemplate {
 		project.getFile('.classpath').write(data.classpath);
 		project.getFile('.project').write(data.projectFile);
 		switch data.generatorType {
-			case GeneratorType::Xpand :
-				project.getFile('src/'+data.targetPackage.asFolder+'/'+data.templateName+'.xpt').
-					write(resource('XpandDefaultTemplate.xpt'.fromMyFolder,'iso-8859-1'))
 			case GeneratorType::Xtend :
 				project.getFile('src/'+data.generatorClass.xtendFilename).
 					write(data.xtendGenerator)
@@ -107,7 +100,7 @@ class GeneratorProjectTemplate {
 	}
 	
 	def templateName(ProjectData data) {
-		if (data.pluginExport || data.generatorType != GeneratorType::Xpand)
+		if (data.pluginExport)
 			data.generatorClass.simpleName
 		else
 			'Main'
@@ -302,33 +295,32 @@ class GeneratorProjectTemplate {
 		Bundle-Name: «data.projectName»
 		Bundle-SymbolicName: «data.projectName»; singleton:=true
 		Bundle-Version: 1.0.0
-		Require-Bundle: org.eclipse.jdt.core;bundle-version="3.5.0",
+		Require-Bundle: org.eclipse.jdt.core,
 		 org.apache.commons.logging,
 		 org.apache.log4j;resolution:=optional,
-		 com.ibm.icu;bundle-version="4.0.1",
-		 org.antlr.runtime;bundle-version="3.0.0",
-		 org.eclipse.core.runtime;bundle-version="3.5.0",
-		 org.eclipse.emf.mwe.utils;bundle-version="0.7.0",
-		 org.eclipse.emf.ecore.xmi;bundle-version="2.5.0",
-		 org.eclipse.jface.text;bundle-version="3.5.0",
-		«IF data.generatorType == GeneratorType::Xpand || data.generatorType == GeneratorType::Xtend»
-			«' '»org.eclipse.xpand;bundle-version="0.7.0",
+		 com.ibm.icu,
+		 org.antlr.runtime,
+		 org.eclipse.core.runtime",
+		 org.eclipse.emf.mwe.utils",
+		 org.eclipse.emf.ecore.xmi",
+		 org.eclipse.jface.text",
+		«IF data.generatorType == GeneratorType::Xtend»
 			«' '»org.eclipse.xtend;bundle-version="0.7.0",
 			«' '»org.eclipse.xtend.typesystem.emf;bundle-version="0.7.0",
 			«' '»org.eclipse.xtend.profiler;resolution:=optional,
 		«ENDIF»
 		«IF data.generatorType == GeneratorType::Xtend»
-			«' '»org.eclipse.xtext.xbase.lib;bundle-version="2.0.1",
-			«' '»org.eclipse.xtend.lib;bundle-version="2.0.1",
+			«' '»org.eclipse.xtext.xbase.lib,
+			«' '»org.eclipse.xtend.lib,
 		«ENDIF»
-		«IF data.pluginExport || data.generatorType != GeneratorType::Xpand»
-			«' '»org.yakindu.sct.generator.core;bundle-version="1.0.0",
+		«IF data.pluginExport»
+			«' '»org.yakindu.sct.generator.core",
 		«ENDIF»
-		 org.yakindu.sct.model.sgen;bundle-version="1.0.0",
-		 org.yakindu.sct.model.sexec;bundle-version="1.0.0",
-		 org.yakindu.sct.model.stext;bundle-version="1.0.0",
-		 org.yakindu.sct.model.sgraph;bundle-version="1.0.0"
-		Bundle-RequiredExecutionEnvironment: J2SE-1.5
+		 org.yakindu.sct.model.sgen",
+		 org.yakindu.sct.model.sexec",
+		 org.yakindu.sct.model.stext",
+		 org.yakindu.sct.model.sgraph"
+		Bundle-RequiredExecutionEnvironment: J2SE-1.7
 	'''
 	
 	def plugin(ProjectData data) '''
@@ -369,24 +361,6 @@ class GeneratorProjectTemplate {
 		 	</extension>
 		</plugin>
 	'''
-	
-	def xpandGenerator(ProjectData data) '''
-		package «data.generatorClass.packageName»;
-		
-		import org.yakindu.sct.generator.core.impl.AbstractXpandBasedCodeGenerator;
-		
-		/**
-		 * Generator using Xpand template "«data.generatorClass.javaPathToXpand»::main"
-		 */
-		public class «data.generatorClass.simpleName» extends AbstractXpandBasedCodeGenerator {
-		
-			@Override
-			public String getTemplatePath() {
-				return "«data.generatorClass.javaPathToXpand»::main";
-			}
-		}
-	'''
-	
 	def javaGenerator(ProjectData data) '''
 		package «data.generatorClass.packageName»;
 
@@ -397,7 +371,7 @@ class GeneratorProjectTemplate {
 		import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator;
 		import org.eclipse.xtext.generator.IFileSystemAccess;
 		
-		public class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator implements IExecutionFlowGenerator{
+		public class «data.generatorClass.simpleName» implements IExecutionFlowGenerator{
 			private static final String LBR = "\n\r";
 
 			public void generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
@@ -426,7 +400,7 @@ class GeneratorProjectTemplate {
 		import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
 		import org.eclipse.xtext.generator.IFileSystemAccess
 		
-		class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator implements IExecutionFlowGenerator {
+		class «data.generatorClass.simpleName» implements IExecutionFlowGenerator {
 		
 			override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess access) {
 				access.generateFile(flow.name+'.txt',flow.info);

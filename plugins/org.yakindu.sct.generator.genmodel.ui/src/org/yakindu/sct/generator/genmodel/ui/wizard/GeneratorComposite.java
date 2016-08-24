@@ -12,7 +12,9 @@ package org.yakindu.sct.generator.genmodel.ui.wizard;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -21,8 +23,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.yakindu.sct.generator.genmodel.ui.wizard.XpandGeneratorWizardPage1.KeyListenerAdapter;
-import org.yakindu.sct.generator.genmodel.ui.wizard.XpandGeneratorWizardPage1.SelectionListenerAdapter;
 
 public class GeneratorComposite extends Composite {
 
@@ -49,7 +49,7 @@ public class GeneratorComposite extends Composite {
 
 	private final ValidateCallback callback;
 
-	private final KeyListenerAdapter textBoxListener = new KeyListenerAdapter() {
+	private final KeyAdapter textBoxListener = new KeyAdapter() {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			callback.validate();
@@ -72,7 +72,7 @@ public class GeneratorComposite extends Composite {
 		
 		cbGenerator = new Button(generatorCheckboxGroup, SWT.CHECK);
 		cbGenerator.setText("Configure for Plugin Export");
-		cbGenerator.addSelectionListener(new SelectionListenerAdapter() {
+		cbGenerator.addSelectionListener(new SelectionAdapter() {
 
 			public void widgetSelected(SelectionEvent e) {
 				setGroupEnabled(cbGenerator.getSelection());

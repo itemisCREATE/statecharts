@@ -376,14 +376,6 @@
       </wizard>
       <wizard
             category="YAKINDU"
-            class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.wizard.XpandGeneratorProjectWizard"
-            icon="icons/GenModel-16.png"
-            id="org.yakindu.sct.generator.genmodel.ui.XtendGeneratorProjectWizard"
-            name="Xpand Generator Project"
-            project="true">
-      </wizard>
-      <wizard
-            category="YAKINDU"
             class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.wizard.WorkspaceGeneratorProjectWizard"
             icon="icons/GenModel-16.png"
             id="org.yakindu.sct.generator.genmodel.ui.WorkspaceGeneratorProjectWizard"
