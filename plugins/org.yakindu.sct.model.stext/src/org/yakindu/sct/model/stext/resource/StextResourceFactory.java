@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.resource;
+package org.yakindu.sct.model.stext.resource;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -25,7 +25,7 @@ import com.google.inject.Injector;
 /**
  * @author andreas muelder - Initial contribution and API
  */
-public class SCTResourceFactory extends XMIResourceFactoryImpl {
+public class StextResourceFactory extends XMIResourceFactoryImpl {
 
 	@Override
 	public Resource createResource(URI uri) {
