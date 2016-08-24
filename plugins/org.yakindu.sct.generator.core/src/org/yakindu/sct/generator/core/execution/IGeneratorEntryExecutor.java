@@ -19,6 +19,8 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
  */
 public interface IGeneratorEntryExecutor {
 
+	public static final String SKIP_VALIDATION = "skipValidation";
+	
 	public void execute(GeneratorEntry entry);
 
 }

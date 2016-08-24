@@ -23,11 +23,11 @@ import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.osgi.framework.Bundle;
-import org.yakindu.sct.model.resource.validation.SCTResourceValidatorImpl;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTDiagnosticConverterImpl;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerTypeProvider;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
+import org.yakindu.sct.model.stext.resource.SCTResourceValidatorImpl;
 import org.yakindu.sct.ui.editor.editor.SCTFileEditorOpener;
 
 import com.google.inject.Binder;
