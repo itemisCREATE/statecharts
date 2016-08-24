@@ -11,7 +11,6 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
-import com.google.inject.name.Named
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -36,7 +35,7 @@ class StatemachineHeader implements IContentTemplate {
 	@Inject extension GenmodelEntries
 	@Inject extension INamingService
 	
-	@Inject @Named(IGenArtifactConfigurations.DEFAULT)
+	@Inject
 	IGenArtifactConfigurations defaultConfigs
 	
 	override content(ExecutionFlow it, GeneratorEntry entry , IGenArtifactConfigurations artifactConfigs) {

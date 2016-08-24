@@ -10,6 +10,11 @@
  */
 package org.yakindu.sct.generator.runner.lib;
 
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public interface IGenericJavaFeatureConstants {
 	public static final String LIBRARY_NAME = "Java";
 	public static final String TEMPLATE_FEATURE = "Generator";

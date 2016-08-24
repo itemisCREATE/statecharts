@@ -32,9 +32,7 @@ class CppNamingService extends CNamingService {
 	@Inject extension SExecExtensions
 
 	@Inject
-	new(GeneratorEntry entry) {
-		super(entry)
-	}
+	GeneratorEntry entry
 
 	override protected prefix(Step it, char separator) {
 		var prefix = ""

@@ -20,11 +20,14 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 import org.yakindu.sct.generator.core.GeneratorModule;
-import org.yakindu.sct.generator.core.execution.IGenModelExecutor;
+import org.yakindu.sct.generator.core.execution.IGeneratorEntryExecutor;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.inject.Binder;
+import com.google.inject.Module;
 
 /**
  * @author holger willebrandt - Initial contribution and API
@@ -56,9 +59,9 @@ public class GeneratorExtensions {
 		}
 
 		@Override
-		public IGenModelExecutor createExecutor() {
+		public IGeneratorEntryExecutor createExecutor() {
 			try {
-				return (IGenModelExecutor) configElement.createExecutableExtension(ATTRIBUTE_GENERATOR_EXECUTOR);
+				return (IGeneratorEntryExecutor) configElement.createExecutableExtension(ATTRIBUTE_GENERATOR_EXECUTOR);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
@@ -66,9 +69,10 @@ public class GeneratorExtensions {
 		}
 
 		@Override
-		public GeneratorModule getBindings() {
+		public Module getBindings(GeneratorEntry entry) {
 			try {
-				return (GeneratorModule) configElement.createExecutableExtension(ATTRIBUTE_BINDINGS);
+				GeneratorModule module = (GeneratorModule) configElement.createExecutableExtension(ATTRIBUTE_BINDINGS);
+				return new GeneratorModuleAdapter(module, entry);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
@@ -163,6 +167,23 @@ public class GeneratorExtensions {
 		} catch (NoSuchElementException ex) {
 			return null;
 		}
+	}
+
+	public static class GeneratorModuleAdapter implements Module {
+
+		private GeneratorEntry entry;
+		private GeneratorModule module;
+
+		public GeneratorModuleAdapter(GeneratorModule module, GeneratorEntry entry) {
+			this.module = module;
+			this.entry = entry;
+		}
+
+		@Override
+		public void configure(Binder binder) {
+			module.configure(entry, binder);
+		}
+
 	}
 
 }

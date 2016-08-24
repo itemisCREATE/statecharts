@@ -45,7 +45,9 @@ public class DefaultFileSystemAccessFactory {
 	}
 
 	protected void initTargetProject(ISCTFileSystemAccess access, GeneratorEntry entry) {
-		access.setOutputPath(OUTLET_FEATURE_TARGET_PROJECT, helper.getTargetProjectValue(entry).getStringValue());
+		String targetProjectName = helper.getTargetProjectValue(entry).getStringValue();
+		access.setContext(targetProjectName);
+		access.setOutputPath(OUTLET_FEATURE_TARGET_PROJECT, targetProjectName);
 	}
 
 	protected void initDefaultOutput(ISCTFileSystemAccess access, GeneratorEntry entry) {

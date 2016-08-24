@@ -14,8 +14,10 @@ package org.yakindu.sct.generator.core.extensions;
 import java.net.URL;
 import java.util.List;
 
-import org.yakindu.sct.generator.core.GeneratorModule;
-import org.yakindu.sct.generator.core.execution.IGenModelExecutor;
+import org.yakindu.sct.generator.core.execution.IGeneratorEntryExecutor;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
+
+import com.google.inject.Module;
 
 /**
  * 
@@ -24,9 +26,9 @@ import org.yakindu.sct.generator.core.execution.IGenModelExecutor;
  */
 public interface IGeneratorDescriptor {
 
-	IGenModelExecutor createExecutor();
+	IGeneratorEntryExecutor createExecutor();
 
-	GeneratorModule getBindings();
+	Module getBindings(GeneratorEntry entry);
 
 	List<String> getLibraryIDs();
 

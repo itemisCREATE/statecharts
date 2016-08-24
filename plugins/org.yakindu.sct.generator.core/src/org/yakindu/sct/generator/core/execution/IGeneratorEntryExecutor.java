@@ -8,16 +8,17 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.core;
+package org.yakindu.sct.generator.core.execution;
+
+import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 /**
- * Basic marker interface for all CodeGenerators extended by
- * {@link IExecutionFlowGenerator} and {@link ISGraphGenerator}
- * 
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface ISCTGenerator {
+public interface IGeneratorEntryExecutor {
+
+	public void execute(GeneratorEntry entry);
 
 }

@@ -12,15 +12,10 @@
 package org.yakindu.sct.domain.generic.generator;
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
-import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
-import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
+import org.yakindu.sct.model.stext.naming.StextNameProvider;
 
 import com.google.inject.Binder;
 
@@ -40,20 +35,7 @@ public class GenericGeneratorModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return SGraphNameProvider.class;
-	}
-
-	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
-		return STextTypeInferrer.class;
-	}
-
-	public Class<? extends IResourceDescriptions> bindIResourceDescriptions() {
-		return ResourceSetBasedResourceDescriptions.class;
-	}
-	
-	
-	public Class<? extends IEncodingProvider> bindIEncodingProvider() {
-		return IEncodingProvider.Runtime.class;
+		return StextNameProvider.class;
 	}
 
 }

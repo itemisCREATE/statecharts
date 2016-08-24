@@ -4,13 +4,14 @@
    <extension
          point="org.yakindu.sct.generator.core.generator">
        <SCTGenerator
-            class="org.yakindu.sct.generator.csharp.CSharpCodeGenerator"
-            description="YAKINDU SCT C# Code Generator"
-            contentType="statechart"
-            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
-            icon="icons/sct.png"
-            id="yakindu::csharp"
-            name="YAKINDU SCT C# Code Generator">
+             class="org.yakindu.sct.generator.csharp.CSharpCodeGenerator"
+             contentType="statechart"
+             description="YAKINDU SCT C# Code Generator"
+             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+             executor="org.yakindu.sct.generator.core.execution.SExecGeneratorEntryExecutor"
+             icon="icons/sct.png"
+             id="yakindu::csharp"
+             name="YAKINDU SCT C# Code Generator">
           <FeatureLibrary
                 library_id="org.yakindu.generator.core.features">
           </FeatureLibrary>

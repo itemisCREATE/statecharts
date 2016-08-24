@@ -37,10 +37,7 @@ public interface IDomain {
 	 */
 	Injector getInjector(String feature, String... options);
 
-	/**
-	 * when an overrides Module is provided, injectors are not cached
-	 */
-	Injector getInjector(String feature, Module overrides, String... options);
+	Module getModule(String feature, String... options);
 
 	URL getImagePath();
 

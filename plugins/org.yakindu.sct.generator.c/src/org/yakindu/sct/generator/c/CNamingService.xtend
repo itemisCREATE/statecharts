@@ -31,16 +31,10 @@ public class CNamingService extends DefaultNamingService {
 	
 	@Inject
 	extension GenmodelEntries
-	
 	@Inject
 	extension SExecExtensions
-	
-	var protected GeneratorEntry entry
-	
 	@Inject
-	new (GeneratorEntry entry) {
-		this.entry = entry
-	}
+	var GeneratorEntry entry
 	
 	override void initializeNamingService(Statechart statechart) {
 		if (entry.identifierLength != null) {

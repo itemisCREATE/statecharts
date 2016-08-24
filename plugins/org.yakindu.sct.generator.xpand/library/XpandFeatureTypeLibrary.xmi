@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<sgen:FeatureTypeLibrary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:sgen="http://www.yakindu.org/sct/statechart/SGen" xsi:schemaLocation="http://www.yakindu.org/sct/statechart/SGen ../../org.yakindu.sct.model.sgen/model/emf/sgen.ecore" name="Xpand">
-  <types name="Template">
-    <parameters name="templateProject"/>
-    <parameters name="templatePath"/>
-  </types>
-</sgen:FeatureTypeLibrary>

@@ -137,16 +137,12 @@ public class DomainImpl implements IDomain {
 		return Guice.createInjector();
 	}
 
-	@Override
-	public Injector getInjector(String feature, Module overrides, String... options) {
-		return createInjector(feature, overrides, options);
-	}
-
 	public Injector createInjector(String feature, String... options) {
-		return getInjector(feature, null, options);
+		return Guice.createInjector(getModule(feature, options));
 	}
 
-	public Injector createInjector(String feature, Module overrides, String... options) {
+	@Override
+	public Module getModule(String feature, String... options) {
 		List<Module> modules = new ArrayList<>();
 		for (ModuleContribution module : this.modules) {
 			if (feature.equals(module.getFeature())) {
@@ -154,9 +150,8 @@ public class DomainImpl implements IDomain {
 			}
 		}
 		Module result = Modules.combine(modules);
-		if (overrides != null)
-			result = Modules.override(result).with(overrides);
-		return Guice.createInjector(result);
+		return result;
+
 	}
 
 }

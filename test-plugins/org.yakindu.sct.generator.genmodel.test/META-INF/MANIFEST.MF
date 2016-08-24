@@ -17,7 +17,6 @@ Require-Bundle: org.eclipse.xtext.junit4,
  org.eclipse.xtext.ui.shared,
  org.eclipse.core.runtime,
  org.eclipse.ui.workbench;resolution:=optional,
- org.yakindu.sct.generator.xpand,
  org.yakindu.sct.generator.runner
 Import-Package: org.junit.runner;version="4.5.0",
  org.junit.runner.manipulation;version="4.5.0",

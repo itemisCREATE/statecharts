@@ -54,7 +54,7 @@ class IStatemachine {
 			/**
 			 * Initializes the state machine. Used to initialize internal variables etc.
 			 */
-			public void init();
+			public vo id init();
 		
 			/**
 			 * Enters the state machine. Sets the state machine into a defined state.
