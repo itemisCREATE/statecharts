@@ -26,6 +26,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * 
@@ -42,6 +43,9 @@ public abstract class AbstractGeneratorEntryExecutor implements IGeneratorEntryE
 	protected ICoreLibraryHelper helper;
 	@Inject
 	protected IResourceValidator validator;
+	@Inject(optional = true)
+	@Named(SKIP_VALIDATION)
+	protected boolean skipValidation = false;
 
 	protected abstract void execute(ISCTFileSystemAccess access, GeneratorEntry generatorEntry);
 
@@ -63,6 +67,10 @@ public abstract class AbstractGeneratorEntryExecutor implements IGeneratorEntryE
 	}
 
 	protected boolean valid(GeneratorEntry entry) {
+		if (skipValidation) {
+			logger.log("Validation skipped...");
+			return true;
+		}
 		List<Issue> issues = validator.validate(entry.getElementRef().eResource(), CheckMode.ALL, null);
 		Iterable<Issue> errors = Iterables.filter(issues, new Predicate<Issue>() {
 			@Override
