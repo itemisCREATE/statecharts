@@ -6,7 +6,6 @@
          point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
             bindings="org.yakindu.sct.generator.cpp.CppCodeGeneratorModule"
-            class="org.yakindu.sct.generator.cpp.CppCodeGenerator"
             contentType="statechart"
             description="YAKINDU SCT C++ Code Generator"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
@@ -16,9 +15,6 @@
             name="YAKINDU SCT C++ Code Generator">
          <FeatureLibrary
                library_id="org.yakindu.generator.core.features">
-         </FeatureLibrary>
-         <FeatureLibrary
-               library_id="org.yakindu.generator.core.features.sctbase">
          </FeatureLibrary>
          <FeatureLibrary
                library_id="org.yakindu.sct.generator.feature.cpp">

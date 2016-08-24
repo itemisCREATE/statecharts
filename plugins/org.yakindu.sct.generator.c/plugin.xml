@@ -5,7 +5,6 @@
          point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
             bindings="org.yakindu.sct.generator.c.CCodeGeneratorModule"
-            class="org.yakindu.sct.generator.c.CCodeGenerator"
             contentType="statechart"
             description="YAKINDU SCT C Code Generator"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
@@ -18,9 +17,6 @@
          </FeatureLibrary>
          <FeatureLibrary
                library_id="org.yakindu.sct.generator.feature.c">
-         </FeatureLibrary>
-         <FeatureLibrary
-               library_id="org.yakindu.generator.core.features.sctbase">
          </FeatureLibrary>
       </SCTGenerator>
    </extension>
