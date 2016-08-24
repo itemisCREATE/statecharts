@@ -18,8 +18,8 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/StringExpressionsTest/StringExpressionsTest.cc", program = "gtests/StringExpressionsTest/StringExpressions", model = "testmodels/SCTUnit/StringExpressions.sct")
-@RunWith(GTestRunner.class)
+//@GTest(sourceFile = "gtests/StringExpressionsTest/StringExpressionsTest.cc", program = "gtests/StringExpressionsTest/StringExpressions", model = "testmodels/SCTUnit/StringExpressions.sct")
+//@RunWith(GTestRunner.class)
 public class StringExpressionsTest {
 
 	protected final GTestHelper helper = new GTestHelper(this) {
