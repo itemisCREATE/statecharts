@@ -21,7 +21,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface IExecutionFlowGenerator {
+public interface IExecutionFlowGenerator extends ISCTGenerator{
 
 	/**
 	 * 

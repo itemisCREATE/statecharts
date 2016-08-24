@@ -11,14 +11,14 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
-import com.google.inject.name.Named
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.sct.generator.c.GenArtifactConfigurations.GenArtifactConfiguration
+import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations.GenArtifactConfiguration
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*;
+
+import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
 
 /**
  * This is the C code generators main class. 
@@ -36,20 +36,12 @@ class CGenerator implements IExecutionFlowGenerator {
 	@Inject extension Naming
 	@Inject extension ICoreLibraryHelper
 
-	@Inject @Named(IGenArtifactConfigurations.DEFAULT)
-	IGenArtifactConfigurations defaultConfigs
+	@Inject
+	IGenArtifactConfigurations configs
 	
-	/**
-	 * @Deprecated use {@link #generate(ExecutionFlow, GeneratorEntry, IFileSystemAccess, ArtifactLocationProvider)} instead
-	 */
-	@Deprecated
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		generate(flow, entry, fsa, defaultConfigs)
-	}
-	
-	def generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa, IGenArtifactConfigurations locations) {
-		initGenerationArtifacts(flow, entry, locations)
-		generateArtifacts(flow, entry, fsa, locations);
+		initGenerationArtifacts(flow, entry, configs)
+		generateArtifacts(flow, entry, fsa, configs)
 	}
 	
 	def generateArtifacts(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa, IGenArtifactConfigurations locations) {

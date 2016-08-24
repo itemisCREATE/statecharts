@@ -33,7 +33,6 @@ import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 public class CSharpFeatureValueProvider extends
 		AbstractDefaultFeatureValueProvider {
 
-	private static final String PACKAGE_NAME_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*\\.)+[a-zA-Z_][a-zA-Z0-9_]*";
 	private static final String SUFFIX_REGEX = "[a-zA-Z0-9_]*";
 
 	

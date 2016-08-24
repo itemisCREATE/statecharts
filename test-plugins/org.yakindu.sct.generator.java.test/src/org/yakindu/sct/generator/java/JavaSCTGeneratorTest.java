@@ -13,7 +13,6 @@ package org.yakindu.sct.generator.java;
 import org.eclipse.core.resources.IMarker;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -64,7 +63,6 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	}
  
 	@Test
-	@Ignore("TODO")
 	public void testCompileStatechart() throws Exception {
 		IMarker[] marker = generateAndCompile(statechart);
 		for (IMarker diagnostic : marker) {

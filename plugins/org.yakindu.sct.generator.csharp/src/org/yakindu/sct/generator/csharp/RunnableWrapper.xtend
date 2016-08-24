@@ -10,15 +10,15 @@
 
 package org.yakindu.sct.generator.csharp
 
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.base.types.typesystem.ITypeSystem
+import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
 import org.yakindu.base.types.typesystem.GenericTypeSystem
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 /**
  * Generates the runnable wrapper for the statemachine. This wrapper implies event based execution semantics. 
@@ -33,15 +33,10 @@ class RunnableWrapper {
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ICodegenTypeSystemAccess
 	
-	
-	@Inject Beautifier beautifier
-	
-	
 	def generateRunnableWrapper(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		
 		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.runnableWrapperClassName(entry).csharp
 		var content = content(flow, entry)
-//		var content = beautifier.format(filename, content(flow, entry))
 		fsa.generateFile(filename, content)
 	}
 	
@@ -127,7 +122,7 @@ class RunnableWrapper {
 						statemachine.runCycle();
 					}
 				}
-	
+		
 				/**
 				 * This method will start the main execution loop for the statemachine. 
 				 * First it will init and enter the statemachine implicitly and then will start processing events 
@@ -150,7 +145,7 @@ class RunnableWrapper {
 						}
 					}			
 				}
-	
+		
 				
 			}
 		}

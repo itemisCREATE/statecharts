@@ -14,8 +14,6 @@ package org.yakindu.sct.generator.core.filesystem;
 import java.io.File;
 
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
-import org.eclipse.xtext.util.RuntimeIOException;
-import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -26,8 +24,8 @@ import com.google.inject.name.Named;
  */
 public class SCTJavaIoFileSystemAccess extends JavaIoFileSystemAccess implements ISCTFileSystemAccess {
 
-public static final String BASE_DIR = "filesystemAccess.absolute.baseDir";
-	
+	public static final String BASE_DIR = "filesystemAccess.absolute.baseDir";
+
 	@Inject
 	@Named(BASE_DIR)
 	protected String absoluteBaseDir;
@@ -40,11 +38,5 @@ public static final String BASE_DIR = "filesystemAccess.absolute.baseDir";
 	public void setOutputPath(String outputName, String path) {
 		super.setOutputPath(outputName, absoluteBaseDir + File.separator + path);
 	}
-	@Override
-	public void generateFile(String fileName, String outputConfigName, CharSequence contents)
-			throws RuntimeIOException {
-		File file = getFile(fileName, outputConfigName);
-		System.out.println("generting to " + file.getAbsoluteFile().toPath());
-		super.generateFile(fileName, outputConfigName, contents);
-	}
+
 }

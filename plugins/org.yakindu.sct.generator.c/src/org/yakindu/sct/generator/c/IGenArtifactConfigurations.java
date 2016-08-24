@@ -12,8 +12,7 @@ package org.yakindu.sct.generator.c;
 
 import java.util.List;
 
-import org.yakindu.sct.generator.c.GenArtifactConfigurations.GenArtifactConfiguration;
-import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
+import com.google.inject.ImplementedBy;
 
 /**
  * Holds the configuration of generation artifacts. A configuration comprises
@@ -23,19 +22,8 @@ import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
  * @author thomas kutz - Initial API and contribution
  *
  */
+@ImplementedBy(DefaultGenArtifactConfigurations.class)
 public interface IGenArtifactConfigurations {
-
-	/**
-	 * Used as key in Guice to mark a default configuration instance
-	 */
-	String DEFAULT = "DefaultGenArtifactConfigurations";
-
-	/**
-	 * A file system access is needed to define the target location of a
-	 * generation artifact. Without this, relative paths via
-	 * {@link getRelativePath(String, String)} will not work.
-	 */
-	void setFileSystemAccess(ISCTFileSystemAccess sctFsa);
 
 	/**
 	 * Adds a configuration for a generation artifact.
@@ -53,5 +41,30 @@ public interface IGenArtifactConfigurations {
 	 * configuration needs to be stored beforehand.
 	 */
 	String relativeTo(String target, String fromArtifact);
+
+	public static class GenArtifactConfiguration {
+
+		private String outputName;
+		private String name;
+		private IContentTemplate contentTemplate;
+
+		public GenArtifactConfiguration(String name, String outputConfigName, IContentTemplate contentTemplate) {
+			this.name = name;
+			this.outputName = outputConfigName;
+			this.contentTemplate = contentTemplate;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public String getOutputName() {
+			return outputName;
+		}
+
+		public IContentTemplate getContentTemplate() {
+			return contentTemplate;
+		}
+	}
 
 }

@@ -13,7 +13,6 @@ package org.yakindu.sct.generator.builder;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -26,7 +25,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
@@ -35,9 +33,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.sct.generator.core.GeneratorActivator;
-import org.yakindu.sct.generator.core.execution.GeneratorExecutor;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -45,7 +41,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import com.google.inject.util.Modules;
 
 /**
  * 
@@ -218,20 +213,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	}
 
 	protected void executeGenmodelGenerator(IResource resource) {
-		IFile file = resource.getProject().getFile(resource.getProjectRelativePath());
-		final GeneratorModel model = GenModelLoader.load(file);
-		if (model != null) {
-			Job generatorJob = new Job("Execute SCT Genmodel " + file.getName()) {
-				@Override
-				protected IStatus run(IProgressMonitor monitor) {
-					new GeneratorExecutor().executeGenerator(model,
-							Modules.combine(new SharedStateModule(), new EclipseContextModule()));
-					return Status.OK_STATUS;
-				}
-			};
-			generatorJob.setRule(file.getProject().getWorkspace().getRuleFactory().buildRule());
-			generatorJob.schedule();
-		}
+		new EclipseContextGeneratorExecutorLookup().executeGenerator(resource.getProject().getFile(resource.getProjectRelativePath()));
 	}
 
 	protected void logGenmodelError(String resource) {

@@ -14,10 +14,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -32,15 +30,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.sct.generator.builder.BuilderActivator;
-import org.yakindu.sct.generator.builder.EclipseContextModule;
-import org.yakindu.sct.generator.builder.GenModelLoader;
+import org.yakindu.sct.generator.builder.EclipseContextGeneratorExecutorLookup;
 import org.yakindu.sct.generator.core.GeneratorActivator;
-import org.yakindu.sct.generator.core.execution.GeneratorExecutor;
-import org.yakindu.sct.model.sgen.GeneratorModel;
-
-import com.google.inject.util.Modules;
 
 /**
  * 
@@ -51,7 +43,10 @@ public class GenerateModelAction implements IObjectActionDelegate {
 
 	private ISelection selection;
 
+	private EclipseContextGeneratorExecutorLookup generatorExecutor;
+	
 	public GenerateModelAction() {
+		generatorExecutor = new EclipseContextGeneratorExecutorLookup();
 	}
 
 	public void run(IAction action) {
@@ -63,20 +58,7 @@ public class GenerateModelAction implements IObjectActionDelegate {
 					new Status(IStatus.ERROR, GeneratorActivator.PLUGIN_ID, "The file contains errors"));
 			return;
 		}
-		final GeneratorModel model = GenModelLoader.load(file);
-		if (model != null) {
-			Job generatorJob = new Job("Execute SCT Genmodel " + file.getName()) {
-				@Override
-				protected IStatus run(IProgressMonitor monitor) {
-					new GeneratorExecutor().executeGenerator(model,
-							Modules.combine(new SharedStateModule(), new EclipseContextModule()));
-					return Status.OK_STATUS;
-				}
-			};
-			generatorJob.setRule(file.getProject().getWorkspace().getRuleFactory().buildRule());
-			generatorJob.schedule();
-
-		}
+		generatorExecutor.executeGenerator(file);
 	}
 
 	private boolean hasError(IFile file) {
