@@ -5,7 +5,6 @@
          point="org.yakindu.sct.generator.core.generator">
        <SCTGenerator
              bindings="org.yakindu.sct.generator.java.JavaGeneratorModule"
-             class="org.yakindu.sct.generator.java.JavaCodeGenerator"
              contentType="statechart"
              description="YAKINDU SCT Java Code Generator"
              elementRefType="org.yakindu.sct.model.sgraph.Statechart"
