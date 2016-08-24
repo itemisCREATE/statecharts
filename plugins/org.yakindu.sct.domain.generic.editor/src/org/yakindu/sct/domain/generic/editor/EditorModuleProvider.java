@@ -58,9 +58,17 @@ public class EditorModuleProvider implements IModuleProvider {
 	}
 
 	protected Module getLanguageModule() {
-		Module uiModule = Modules.override(new STextRuntimeModule())
-				.with(new STextUiModule(STextActivator.getInstance()));
-		return Modules.override(uiModule).with(new SharedStateModule());
+		Module languageModule = Modules.override(getLanguageRuntimeModule())
+				.with(getLanguageUiModule());
+		return Modules.override(languageModule).with(new SharedStateModule());
+	}
+
+	protected Module getLanguageUiModule() {
+		return new STextUiModule(STextActivator.getInstance());
+	}
+
+	protected Module getLanguageRuntimeModule() {
+		return new STextRuntimeModule();
 	}
 
 }

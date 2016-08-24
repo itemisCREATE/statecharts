@@ -820,9 +820,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	@Check(CheckType.FAST)
 	public void checkImportExists(Import importDef) {
-		String importedNamespace = importDef.getImportedNamespace();
-		if (resolver.getPackageForNamespace(getResource(importDef),importDef.getImportedNamespace()) == null) {
-			error("The import " + importedNamespace + " cannot be resolved.", importDef,
+		String namespace = importDef.getImportedNamespace();
+		if (resolver.getPackageForNamespace(getResource(importDef), namespace) == null) {
+			error("The import " + namespace + " cannot be resolved.", importDef,
 					StextPackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORT_NOT_RESOLVED);
 		}
 	}

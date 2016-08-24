@@ -28,12 +28,16 @@ public class ResourceModuleProvider implements IModuleProvider {
 
 	@Override
 	public Module getModule(String... options) {
-		return Modules.combine(new STextRuntimeModule(), new Module() {
+		return Modules.combine(getLanguageRuntimeModule(), new Module() {
 			@Override
 			public void configure(Binder binder) {
 				binder.bind(Resource.class).to(StextResource.class);
 			}
 		});
+	}
+
+	protected Module getLanguageRuntimeModule() {
+		return new STextRuntimeModule();
 	}
 
 }
