@@ -10,12 +10,14 @@
  */
 package org.yakindu.sct.generator.cpp;
 
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.GeneratorModule;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
+import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
 import com.google.inject.Binder;
 
@@ -32,6 +34,7 @@ public class CppCodeGeneratorModule implements GeneratorModule {
 		binder.bind(IExecutionFlowGenerator.class).to(CppGenerator.class);
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 		binder.bind(INamingService.class).to(CppNamingService.class);
+		binder.bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
 	}
 
 }
