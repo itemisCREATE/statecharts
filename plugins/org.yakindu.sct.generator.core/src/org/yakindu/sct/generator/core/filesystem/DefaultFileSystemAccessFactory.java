@@ -31,9 +31,9 @@ import com.google.inject.Provider;
 public class DefaultFileSystemAccessFactory {
 
 	@Inject
-	private Provider<ISCTFileSystemAccess> fileSystemProvider;
+	protected Provider<ISCTFileSystemAccess> fileSystemProvider;
 	@Inject
-	private ICoreLibraryHelper helper;
+	protected ICoreLibraryHelper helper;
 
 	public ISCTFileSystemAccess create(GeneratorEntry entry) {
 		ISCTFileSystemAccess result = fileSystemProvider.get();
