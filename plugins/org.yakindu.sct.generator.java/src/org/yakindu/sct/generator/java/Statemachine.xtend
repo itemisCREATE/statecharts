@@ -246,8 +246,7 @@ class Statemachine {
 		 */
 		 
 		public boolean isActive() {
-			return «FOR i : 0 ..< flow.stateVector.size SEPARATOR '||'»stateVector[«i»] != State.«nullStateName»;
-					«ENDFOR»
+			return «FOR i : 0 ..< flow.stateVector.size SEPARATOR '||'»stateVector[«i»] != State.«nullStateName»«ENDFOR»;
 		}
 
 	'''
