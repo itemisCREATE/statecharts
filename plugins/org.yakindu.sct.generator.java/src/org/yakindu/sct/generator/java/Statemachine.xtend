@@ -19,6 +19,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -51,37 +52,22 @@ class Statemachine {
 		«flow.createImports(entry)»
 		
 		public class «flow.statemachineClassName» implements «flow.statemachineInterfaceName» {
-			
+
 			«flow.createFieldDeclarations(entry)»
-			
 			«flow.createConstructor»
-			
 			«flow.initFunction»
-			
 			«flow.enterFunction»
-			
 			«flow.exitFunction»
-			
 			«flow.activeFunction»
-			
 			«flow.finalFunction»
-			
 			«flow.clearInEventsFunction»
-			
 			«flow.clearOutEventsFunction»
-			
 			«flow.stateActiveFunction»
-			
 			«flow.timingFunctions»
-			
 			«flow.interfaceAccessors»
-			
 			«flow.internalScopeFunctions»
-			
 			«flow.defaultInterfaceFunctions(entry)»
-			
 			«flow.functionImplementations»
-			
 			«flow.runCycleFunction»
 		}
 	'''
@@ -98,13 +84,11 @@ class Statemachine {
 	
 	def protected createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
 		«FOR scope : flow.interfaceScopes»
-			«scope.toImplementation(entry)»
-			
-			protected «scope.interfaceImplName» «scope.interfaceName.asEscapedIdentifier»;
-			
-			
-		«ENDFOR»
-		private boolean initialized=false;
+		«scope.toImplementation(entry)»
+		protected «scope.interfaceImplName» «scope.interfaceName.asEscapedIdentifier»;
+		
+	«ENDFOR»
+		private boolean initialized = false;
 
 		public enum State {
 			«FOR state : flow.states»
@@ -112,7 +96,7 @@ class Statemachine {
 			«ENDFOR»
 			«getNullStateName()»
 		};
-		
+
 		«IF flow.hasHistory»
 		private State[] historyVector = new State[«flow.historyVector.size»];
 		«ENDIF»
@@ -125,33 +109,30 @@ class Statemachine {
 		
 		private final boolean[] timeEvents = new boolean[«flow.timeEvents.size»];
 		«ENDIF»
-		
 		«FOR event : flow.internalScopeEvents»
 			private boolean «event.identifier»;
 			
 			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 				private «event.type.targetLanguageName» «event.valueIdentifier»;
-				
+
 			«ENDIF»
 		«ENDFOR»
-		
 		«FOR variable : flow.internalScopeVariables SEPARATOR newLine AFTER newLine»
 			«IF !variable.const»
 				«variable.fieldDeclaration»
-				
 				protected void «variable.setter»(«variable.type.targetLanguageName» value) {
 					«variable.identifier» = value;
 				}
-				
+
 			«ENDIF»
 			protected «variable.type.targetLanguageName» «variable.getter» {
 				return «variable.identifier»;
 			}
-			
 			«IF variable.needsAssignMethod»
 				protected «variable.type.targetLanguageName» «variable.assign»(«variable.type.targetLanguageName» value) {
 					return this.«variable.identifier» = value;
 				}
+
 			«ENDIF»
 		«ENDFOR»
 		«FOR internal : flow.internalScopes»
@@ -162,21 +143,23 @@ class Statemachine {
 	'''
 	//reused by interfaces
 	def protected fieldDeclaration(VariableDefinition variable) {
-		'''private «variable.type.targetLanguageName» «variable.identifier»;'''
+		'''private «variable.type.targetLanguageName» «variable.identifier»;
+
+		'''
 	}
 	
 	def protected createConstructor(ExecutionFlow flow) '''
 		public «flow.statemachineClassName»() {
-			
 			«FOR scope : flow.interfaceScopes»
 			«scope.interfaceName.asEscapedIdentifier» = new «scope.getInterfaceImplName()»();
 			«ENDFOR»
 		}
+
 	'''
 	
 	def protected initFunction(ExecutionFlow flow) '''
 		public void init() {
-			this.initialized=true;
+			this.initialized = true;
 			«IF flow.timed»
 			if (timer == null) {
 				throw new IllegalStateException("timer not set.");
@@ -185,7 +168,6 @@ class Statemachine {
 			for (int i = 0; i < «flow.stateVector.size»; i++) {
 				stateVector[i] = State.$NullState$;
 			}
-			
 			«IF flow.hasHistory»
 			for (int i = 0; i < «flow.historyVector.size»; i++) {
 				historyVector[i] = State.$NullState$;
@@ -193,9 +175,9 @@ class Statemachine {
 			«ENDIF»
 			clearEvents();
 			clearOutEvents();
-			
 			«flow.initSequence.code»
 		}
+
 	'''
 	
 	def protected clearInEventsFunction(ExecutionFlow flow) '''
@@ -210,18 +192,17 @@ class Statemachine {
 			«ENDFOR»
 			«FOR scope : flow.internalScopes»
 				«FOR event : scope.eventDefinitions»
-					«event.identifier» = false;
+				«event.identifier» = false;
 				«ENDFOR»
 			«ENDFOR»
-			
 			«IF flow.timed»
 			for (int i=0; i<timeEvents.length; i++) {
 				timeEvents[i] = false;
 			}
 			«ENDIF»
 		}
+
 	'''
-	
 	def protected clearOutEventsFunction(ExecutionFlow flow) '''
 		/**
 		* This method resets the outgoing events.
@@ -233,6 +214,7 @@ class Statemachine {
 				«ENDIF»
 			«ENDFOR»
 		}
+
 	'''
 	
 	def protected isStateActiveFunction(ExecutionFlow flow) '''
@@ -240,29 +222,28 @@ class Statemachine {
 		* Returns true if the given state is currently active otherwise false.
 		*/
 		public boolean isStateActive(State state) {
+
 			switch (state) {
-				«FOR s : flow.states»
-				case «s.stateName.asEscapedIdentifier» : 
-					return «IF s.leaf»stateVector[«s.stateVector.offset»] == State.«s.stateName.asEscapedIdentifier»
-					«ELSE»stateVector[«s.stateVector.offset»].ordinal() >= State.«s.stateName.asEscapedIdentifier».ordinal()
-						&& stateVector[«s.stateVector.offset»].ordinal() <= State.«s.subStates.last.stateName.asEscapedIdentifier».ordinal()«ENDIF»;
-				«ENDFOR»
-				default: return false;
+			«FOR s : flow.states»
+			case «s.stateName.asEscapedIdentifier»:
+				return «IF s.leaf»stateVector[«s.stateVector.offset»] == State.«s.stateName.asEscapedIdentifier»«ELSE»stateVector[«s.stateVector.offset»].ordinal() >= State.
+						«s.stateName.asEscapedIdentifier».ordinal()&& stateVector[«s.stateVector.offset»].ordinal() <= State.«s.subStates.last.stateName.asEscapedIdentifier».ordinal()«ENDIF»;
+			«ENDFOR»
+			default:
+				return false;
 			}
 		}
+
 	'''
 	
 	def protected isActiveFunction(ExecutionFlow flow) '''
 		/**
 		 * @see IStatemachine#isActive()
 		 */
-		public boolean isActive(){
-			
-			return 
-				«FOR i : 0 ..< flow.stateVector.size SEPARATOR '||'»
-				stateVector[«i»] != State.«nullStateName»
-				«ENDFOR»;
+		public boolean isActive() {
+			return «FOR i : 0 ..< flow.stateVector.size SEPARATOR '||'»stateVector[«i»] != State.«nullStateName»«ENDFOR»;
 		}
+
 	'''
 
 	def protected isFinalFunction(ExecutionFlow flow) {
@@ -271,35 +252,33 @@ class Statemachine {
 		'''
 			/** 
 			«IF !finalStateImpactVector.isCompletelyCovered»
-			 * Always returns 'false' since this state machine can never become final.
-			 *
+			* Always returns 'false' since this state machine can never become final.
+			*
 			«ENDIF»
-			 * @see IStatemachine#isFinal()
-			 */
-			public boolean isFinal(){
+			* @see IStatemachine#isFinal()
+			*/
+			public boolean isFinal() {
 		''' +
-		
+
 		// only if the impact vector is completely covered by final states the state machine
 		// can become final
-		{if (finalStateImpactVector.isCompletelyCovered) {'''
-			return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»
-				(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»
-					stateVector[«i»] == «
-					IF fs.stateVector.offset == i
-						»State.«fs.stateName.asEscapedIdentifier»«
-					ELSE
-						»State.«nullStateName»«
-					ENDIF»«
-				ENDFOR»)
-			«ENDFOR»;
-		'''} else {'''
-			return false;
+
+			{if (finalStateImpactVector.isCompletelyCovered) {
+			'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»stateVector[«i»] == «
+								IF fs.stateVector.offset == i
+									»State.«fs.stateName.asEscapedIdentifier»«
+								ELSE
+									»State.«nullStateName»«
+								ENDIF»«
+							ENDFOR»)«ENDFOR»;
+		'''} else {
+		'''	return false;
 		'''} }
 		
-		+ '''}'''
+		+ '''}
+		'''
 	}
-	
-	
+
 	def protected timingFunctions(ExecutionFlow flow) '''
 		«IF flow.timed»
 			/**
@@ -312,7 +291,7 @@ class Statemachine {
 			public void setTimer(ITimer timer) {
 				this.timer = timer;
 			}
-			
+
 			/**
 			* Returns the currently used timer.
 			* 
@@ -325,6 +304,7 @@ class Statemachine {
 			public void timeElapsed(int eventID) {
 				timeEvents[eventID] = true;
 			}
+
 		«ENDIF»
 	'''
 	
@@ -333,100 +313,96 @@ class Statemachine {
 			public «scope.interfaceName» get«scope.interfaceName»() {
 				return «scope.interfaceName.toFirstLower()»;
 			}
+
 		«ENDFOR»
 	'''
 	
 	def protected toImplementation(InterfaceScope scope, GeneratorEntry entry) '''
 		protected class «scope.getInterfaceImplName» implements «scope.getInterfaceName» {
-		
-		«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
+
+			«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
 			«scope.generateListenerSupport»
-		«ENDIF»
-		
-		«IF scope.hasOperations»
+			«ENDIF»
+			«IF scope.hasOperations»
 			«scope.generateOperationCallback»
-		«ENDIF»
-		
-		«FOR event : scope.eventDefinitions BEFORE newLine SEPARATOR newLine»
+			«ENDIF»
+			«FOR event : scope.eventDefinitions»
 			«generateEventDefinition(event, entry, scope)»
-		«ENDFOR»
-		
-		«FOR variable : scope.variableDefinitions BEFORE newLine SEPARATOR newLine»
+			«ENDFOR»
+			«FOR variable : scope.variableDefinitions»
 			«generateVariableDefinition(variable)»
-		«ENDFOR»
-		
-		«IF scope.hasEvents»
+			«ENDFOR»
+			«IF scope.hasEvents»
 			«scope.generateClearEvents»
-		«ENDIF»
-		
-		«IF scope.hasOutgoingEvents()»
+			«ENDIF»
+			«IF scope.hasOutgoingEvents()»
 			«generateClearOutEvents(scope)»
-		«ENDIF»
+			«ENDIF»
 		}
-	'''
+
+		'''
 	
 	protected def generateClearOutEvents(InterfaceScope scope) '''
 		protected void clearOutEvents() {
+
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction == Direction::OUT»
 				«event.identifier» = false;
 			«ENDIF»
 		«ENDFOR»
 		}
+
 	'''
 	
 	
 	protected def generateClearEvents(InterfaceScope scope) '''
 		protected void clearEvents() {
-		«FOR event : scope.eventDefinitions»
-			«IF event.direction != Direction::OUT»
-			«event.identifier» = false;
-			«ENDIF»
-		«ENDFOR»
+			«FOR event : scope.eventDefinitions»
+				«IF event.direction != Direction::OUT»
+				«event.identifier» = false;
+				«ENDIF»
+			«ENDFOR»
 		}
 	'''
 	
 	protected def generateVariableDefinition(VariableDefinition variable) '''
-		«IF !variable.const»
-			«variable.fieldDeclaration»
-			
-		«ENDIF»
-		public «variable.type.targetLanguageName» «variable.getter» {
-			return «variable.identifier»;
-		}
-		
-		«IF !variable.const»
+			«IF !variable.const»
+				«variable.fieldDeclaration»
+			«ENDIF»
+			public «variable.type.targetLanguageName» «variable.getter» {
+				return «variable.identifier»;
+			}
+
+			«IF !variable.const»
 			«IF variable.readonly»protected«ELSE»public«ENDIF» void «variable.setter»(«variable.type.targetLanguageName» value) {
 				this.«variable.identifier» = value;
 			}
-			
-		«ENDIF»
-		
-		«IF variable.needsAssignMethod»
+
+			«ENDIF»
+			«IF variable.needsAssignMethod»
 			protected «variable.type.targetLanguageName» «variable.assign»(«variable.type.targetLanguageName» value) {
 				return this.«variable.identifier» = value;
 			}
-		«ENDIF»
-	'''
+
+			«ENDIF»
+		'''
 	
 	protected def generateEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
 		private boolean «event.identifier»;
-		
+
 		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 			private «event.type.targetLanguageName» «event.valueIdentifier»;
+
 		«ENDIF»
-		
 		«IF event.direction == Direction::IN»
 			«event.generateInEventDefinition»
 		«ENDIF»
-		
 		«IF event.direction == Direction::OUT»
 			«event.generateOutEventDefinition(entry, scope)»
 		«ENDIF»
 	'''
 			
 	protected def generateOutEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
-		
 		public boolean isRaised«event.name.asName»() {
 			return «event.identifier»;
 		}
@@ -446,6 +422,7 @@ class Statemachine {
 				«event.getIllegalAccessValidation()»
 				return «event.valueIdentifier»;
 			}
+
 		«ELSE»
 			protected void raise«event.name.asName»() {
 				«event.identifier» = true;
@@ -455,6 +432,7 @@ class Statemachine {
 					}
 				«ENDIF»
 			}
+
 		«ENDIF»
 	'''
 
@@ -469,13 +447,12 @@ class Statemachine {
 				«event.getIllegalAccessValidation()»
 				return «event.valueIdentifier»;
 			}
-			
 		«ELSE»
 			public void raise«event.name.asName»() {
 				«event.identifier» = true;
 			}
-			
 		«ENDIF»
+
 	'''
 	
 	protected def generateOperationCallback(InterfaceScope scope) '''
@@ -514,21 +491,21 @@ class Statemachine {
 					«event.getIllegalAccessValidation()»
 					return «event.valueIdentifier»;
 				}
+
 			«ELSE»
-			
 				private void raise«event.name.asEscapedName»() {
 					«event.identifier» = true;
 				}
-				
+
 			«ENDIF»
 		«ENDFOR»
-		
 		«FOR internal : flow.internalScopes»
 			«IF internal.hasOperations»
 				public void set«internal.internalOperationCallbackName»(
 						«internal.internalOperationCallbackName» operationCallback) {
 					this.operationCallback = operationCallback;
 				}
+
 			«ENDIF»
 		«ENDFOR»
 	'''
@@ -547,19 +524,21 @@ class Statemachine {
 						«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»();
 					}
 					«ENDIF»
+
 				«ENDIF»
 				«IF event.direction ==  Direction::OUT»
 					public boolean isRaised«event.name.asName»() {
 						return «scope.interfaceName.asEscapedIdentifier».isRaised«event.name.asName»();
 					}
+
 					«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 						public «event.type.targetLanguageName» get«event.name.asName»Value() {
 							return «scope.interfaceName.asEscapedIdentifier».get«event.name.asName»Value();
 						}
+
 					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
-			
 			«FOR variable : scope.variableDefinitions»
 					public «variable.type.targetLanguageName» «variable.getter()» {
 						return «scope.interfaceName.asEscapedIdentifier».«variable.getter()»;
@@ -567,45 +546,43 @@ class Statemachine {
 					
 					«IF !variable.const && !variable.readonly»
 						public void «variable.setter»(«variable.type.targetLanguageName» value) {
-						«scope.interfaceName.asEscapedIdentifier».«variable.setter»(value);
-						}	
+							«scope.interfaceName.asEscapedIdentifier».«variable.setter»(value);
+						}
+
 					«ENDIF»
 			«ENDFOR»
 		«ENDIF»
-		
 	'''
 	
 	def protected runCycleFunction(ExecutionFlow flow) '''
 		public void runCycle() {
-			if(!initialized)
-				throw new IllegalStateException("The state machine needs to be initialized first by calling the init() function.");
-			
+			if (!initialized)
+				throw new IllegalStateException(
+						"The state machine needs to be initialized first by calling the init() function.");
 			clearOutEvents();
-			
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
-				
 				switch (stateVector[nextStateIndex]) {
 				«FOR state : flow.states»
 					«IF state.reactSequence!=null»
 						case «state.stateName.asEscapedIdentifier»:
 							«state.reactSequence.functionName»();
 							break;
-					«ENDIF»
+				«ENDIF»
 				«ENDFOR»
 				default:
 					// «getNullStateName()»
 				}
 			}
-			
 			clearEvents();
 		}
 	'''
 	
 	def protected enterFunction(ExecutionFlow it) '''
 		public void enter() {
-			if(!initialized)
-				throw new IllegalStateException("The state machine needs to be initialized first by calling the init() function.");
-			
+			if (!initialized) {
+				throw new IllegalStateException(
+						"The state machine needs to be initialized first by calling the init() function.");
+			}
 			«IF timed»
 			if (timer == null) {
 				throw new IllegalStateException("timer not set.");
@@ -613,12 +590,14 @@ class Statemachine {
 			«ENDIF»
 			«enterSequences.defaultSequence.code»
 		}
+
 	'''
 	
 	def protected exitFunction(ExecutionFlow it) '''
-		public void exit(){
+		public void exit() {
 			«exitSequence.code»
 		}
+
 	'''
 	
 	def protected functionImplementations(ExecutionFlow it) '''
@@ -640,16 +619,16 @@ class Statemachine {
 	def dispatch functionImplementation(Check it) '''
 		«stepComment»
 		private boolean «functionName»() {
-			return «code»;
+			return «code.toString.trim»;
 		}
-		
+
 	'''
 	
 	def dispatch functionImplementation(Step it) '''
 		«stepComment»
 		private void «functionName»() {
-			«code»
+			«code.toString.trim»
 		}
-		
+
 	'''
 }

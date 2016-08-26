@@ -259,28 +259,28 @@ class ExpressionCode {
 		value.definition.getContext(false) + value.definition.event.getter
 	}
 
-	def dispatch String code(ElementReferenceExpression it) '''
-		«IF it.reference instanceof OperationDefinition»
-			«reference.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)
-		«ELSE»
-			«val def = definition»
-			«IF def instanceof Property && isAssignmentContained»
-				«def.getContext(false) + def.identifier»
-			«ELSEIF def instanceof Property && isPropertyContained»
-				«def.getContext(true) + def.identifier»
-			«ELSE»
-				«definition.code»
-			«ENDIF»
-		«ENDIF»
-	'''
-
-	def dispatch String code(FeatureCall it) '''
-		«IF feature instanceof Operation»
-			«feature.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)
-		«ELSE»
-			«definition.getContext(false) + definition.name.asEscapedIdentifier»
-		«ENDIF»
-	'''
+	def dispatch String code(ElementReferenceExpression it) {
+		if (it.reference instanceof OperationDefinition)
+			'''«reference.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)'''
+		else {
+			val myDef = definition
+			if (myDef instanceof Property && isAssignmentContained) {
+				'''«myDef.getContext(false) + myDef.identifier»'''
+			} else if (myDef instanceof Property && isPropertyContained) {
+				'''«myDef.getContext(true) + myDef.identifier»'''
+			} else {
+				'''«definition.code»'''
+			}
+		}
+	} 
+		
+	def dispatch String code(FeatureCall it) {
+		if (feature instanceof Operation) {
+			return '''«feature.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)'''
+		} else {
+			return '''«definition.getContext(false) + definition.name.asEscapedIdentifier»''' 
+		}
+	} 
 
 	def dispatch String code(Declaration it) {
 		getContext(false) + identifier
