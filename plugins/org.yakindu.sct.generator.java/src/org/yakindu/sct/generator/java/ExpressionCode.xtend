@@ -259,21 +259,6 @@ class ExpressionCode {
 		value.definition.getContext(false) + value.definition.event.getter
 	}
 
-/*
-	def dispatch String code(ElementReferenceExpression it) 
-	'''«IF it.reference instanceof OperationDefinition»
-			«reference.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)
-		«ELSE»
-			«val def = definition»
-			«IF def instanceof Property && isAssignmentContained»
-				«def.getContext(false) + def.identifier»
-			«ELSEIF def instanceof Property && isPropertyContained»
-				«def.getContext(true) + def.identifier»
-			«ELSE»
-				«definition.code»
-			«ENDIF»
-		«ENDIF»'''
-	 */			
 	def dispatch String code(ElementReferenceExpression it) {
 		if (it.reference instanceof OperationDefinition)
 			'''«reference.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)'''
