@@ -95,15 +95,8 @@ class FlowCode {
 			true
  		«ENDIF»
 	'''
-	
-	def dispatch CharSequence code(CheckRef it) '''
-		«IF check != null»
-			«comment»
-			«check.functionName()»()
-		«ELSE»
-			true
-		«ENDIF»
-	'''
+
+	def dispatch CharSequence code(CheckRef it) '''«IF check != null»«comment»«check.functionName()»()«ELSE»true«ENDIF»'''
 	
 	def dispatch CharSequence code(Reaction it) {
 		effect.code;

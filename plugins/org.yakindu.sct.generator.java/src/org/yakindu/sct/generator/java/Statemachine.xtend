@@ -114,12 +114,12 @@ class Statemachine {
 			
 			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 				private «event.type.targetLanguageName» «event.valueIdentifier»;
+
 			«ENDIF»
 		«ENDFOR»
 		«FOR variable : flow.internalScopeVariables SEPARATOR newLine AFTER newLine»
 			«IF !variable.const»
 				«variable.fieldDeclaration»
-				
 				protected void «variable.setter»(«variable.type.targetLanguageName» value) {
 					«variable.identifier» = value;
 				}
@@ -128,7 +128,6 @@ class Statemachine {
 			protected «variable.type.targetLanguageName» «variable.getter» {
 				return «variable.identifier»;
 			}
-			
 			«IF variable.needsAssignMethod»
 				protected «variable.type.targetLanguageName» «variable.assign»(«variable.type.targetLanguageName» value) {
 					return this.«variable.identifier» = value;
@@ -185,7 +184,6 @@ class Statemachine {
 		/**
 		* This method resets the incoming events (time events included).
 		*/
-		
 		protected void clearEvents() {
 			«FOR scope : flow.interfaceScopes»
 				«IF scope.hasEvents»
@@ -209,7 +207,6 @@ class Statemachine {
 		/**
 		* This method resets the outgoing events.
 		*/
-
 		protected void clearOutEvents() {
 			«FOR scope : flow.interfaceScopes»
 				«IF scope.hasOutgoingEvents»
@@ -224,7 +221,6 @@ class Statemachine {
 		/**
 		* Returns true if the given state is currently active otherwise false.
 		*/
-		
 		public boolean isStateActive(State state) {
 
 			switch (state) {
@@ -244,7 +240,6 @@ class Statemachine {
 		/**
 		 * @see IStatemachine#isActive()
 		 */
-		 
 		public boolean isActive() {
 			return «FOR i : 0 ..< flow.stateVector.size SEPARATOR '||'»stateVector[«i»] != State.«nullStateName»«ENDFOR»;
 		}
@@ -257,13 +252,11 @@ class Statemachine {
 		'''
 			/** 
 			«IF !finalStateImpactVector.isCompletelyCovered»
-			 * Always returns 'false' since this state machine can never become final.
-			 *
-
+			* Always returns 'false' since this state machine can never become final.
+			*
 			«ENDIF»
-			 * @see IStatemachine#isFinal()
-			 */
-
+			* @see IStatemachine#isFinal()
+			*/
 			public boolean isFinal() {
 		''' +
 
@@ -298,7 +291,6 @@ class Statemachine {
 			* 
 			* @param timer
 			*/
-
 			public void setTimer(ITimer timer) {
 				this.timer = timer;
 			}
@@ -308,7 +300,6 @@ class Statemachine {
 			* 
 			* @return {@link ITimer}
 			*/
-
 			public ITimer getTimer() {
 				return timer;
 			}
@@ -325,6 +316,7 @@ class Statemachine {
 			public «scope.interfaceName» get«scope.interfaceName»() {
 				return «scope.interfaceName.toFirstLower()»;
 			}
+
 		«ENDFOR»
 	'''
 	
@@ -400,10 +392,10 @@ class Statemachine {
 	
 	protected def generateEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
 		private boolean «event.identifier»;
-		
+
 		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 			private «event.type.targetLanguageName» «event.valueIdentifier»;
-			
+
 		«ENDIF»
 		«IF event.direction == Direction::IN»
 			«event.generateInEventDefinition»
@@ -414,7 +406,6 @@ class Statemachine {
 	'''
 			
 	protected def generateOutEventDefinition(EventDefinition event, GeneratorEntry entry, InterfaceScope scope) '''
-		
 		public boolean isRaised«event.name.asName»() {
 			return «event.identifier»;
 		}
@@ -536,19 +527,21 @@ class Statemachine {
 						«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»();
 					}
 					«ENDIF»
+
 				«ENDIF»
 				«IF event.direction ==  Direction::OUT»
 					public boolean isRaised«event.name.asName»() {
 						return «scope.interfaceName.asEscapedIdentifier».isRaised«event.name.asName»();
 					}
+
 					«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 						public «event.type.targetLanguageName» get«event.name.asName»Value() {
 							return «scope.interfaceName.asEscapedIdentifier».get«event.name.asName»Value();
 						}
+
 					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
-			
 			«FOR variable : scope.variableDefinitions»
 					public «variable.type.targetLanguageName» «variable.getter()» {
 						return «scope.interfaceName.asEscapedIdentifier».«variable.getter()»;
@@ -629,7 +622,7 @@ class Statemachine {
 	def dispatch functionImplementation(Check it) '''
 		«stepComment»
 		private boolean «functionName»() {
-			return «code»;
+			return «code.toString.trim»;
 		}
 
 	'''
