@@ -423,7 +423,7 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
 			shallowEnterSequence_main_region_B_r1();
-		} 
+		}
 	}
 	
 	/* Default react sequence for initial entry  */

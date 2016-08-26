@@ -164,8 +164,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region_A() {
-		if (sCInterface.getGuard()
-		) {
+		if (sCInterface.getGuard()) {
 			sCInterface.setDone(true);
 		}
 	}

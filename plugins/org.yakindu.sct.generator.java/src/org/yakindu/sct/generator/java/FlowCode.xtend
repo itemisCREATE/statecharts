@@ -105,7 +105,7 @@ class FlowCode {
 	def dispatch CharSequence code(If it) 
 	'''
 		«stepComment»
-		if («check.code») {
+		if («check.code.toString.trim») {
 			«thenStep.code»
 		}«IF elseStep != null» else {
 			«elseStep.code»

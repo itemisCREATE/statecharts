@@ -164,8 +164,7 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 	
 	/* Exit action for state 'A'. */
 	private void exitAction_main_region_A() {
-		if (sCInterface.getGuard()
-		) {
+		if (sCInterface.getGuard()) {
 			sCInterface.setDone(true);
 		}
 	}

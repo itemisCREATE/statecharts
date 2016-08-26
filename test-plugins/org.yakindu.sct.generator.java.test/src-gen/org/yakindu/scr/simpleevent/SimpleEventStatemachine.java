@@ -66,10 +66,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	* @see IStatemachine#isFinal()
 	*/
 	public boolean isFinal() {
-		return 
-		(
-		stateVector[0] == State.main_region__final_)
-		;
+		return (stateVector[0] == State.main_region__final_);
 	}
 	/**
 	* This method resets the incoming events (time events included).

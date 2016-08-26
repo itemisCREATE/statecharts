@@ -264,16 +264,13 @@ class Statemachine {
 		// can become final
 
 			{if (finalStateImpactVector.isCompletelyCovered) {
-			'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»
-						(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»
-							stateVector[«i»] == «
+			'''	return «FOR i : 0 ..<finalStateImpactVector.size SEPARATOR ' && '»(«FOR fs : finalStateImpactVector.get(i) SEPARATOR ' || '»stateVector[«i»] == «
 								IF fs.stateVector.offset == i
 									»State.«fs.stateName.asEscapedIdentifier»«
 								ELSE
 									»State.«nullStateName»«
 								ENDIF»«
-							ENDFOR»)
-						«ENDFOR»;
+							ENDFOR»)«ENDFOR»;
 		'''} else {
 		'''	return false;
 		'''} }
@@ -630,7 +627,7 @@ class Statemachine {
 	def dispatch functionImplementation(Step it) '''
 		«stepComment»
 		private void «functionName»() {
-			«code»
+			«code.toString.trim»
 		}
 
 	'''
