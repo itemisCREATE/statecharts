@@ -107,6 +107,9 @@ public class SuspendableTimingService implements ITimingService {
 
 	protected void scheduleTimeEvent(ScheduleEventRunnable eventRunnable) {
 		ScheduledFuture<?> future = null;
+		if (scheduler.isShutdown()) {
+			scheduler = Executors.newScheduledThreadPool(1);
+		}
 		if (eventRunnable.isPeriodical) {
 			future = scheduler.scheduleAtFixedRate(eventRunnable, eventRunnable.initialDuration, eventRunnable.duration,
 					TimeUnit.MILLISECONDS);
