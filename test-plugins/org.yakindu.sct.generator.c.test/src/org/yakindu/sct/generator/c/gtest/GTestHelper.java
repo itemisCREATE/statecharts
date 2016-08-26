@@ -37,7 +37,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-import org.yakindu.sct.generator.core.GeneratorExecutor;
+import org.yakindu.sct.generator.builder.EclipseContextGeneratorExecutorLookup;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
@@ -51,21 +51,17 @@ public class GTestHelper {
 
 	private final Object owner;
 
-	/**
-	 * 
-	 */
 	public GTestHelper(Object owner) {
 		this.owner = owner;
 	}
 
 	public void compile() {
-			copyFilesFromBundleToFolder();
-			IResource resource = ResourcesPlugin.getWorkspace().getRoot()
-					.findMember(getTargetPath());
-			File directory = resource.getLocation().toFile();
-			List<String> command = createCommand();
+		copyFilesFromBundleToFolder();
+		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(getTargetPath());
+		File directory = resource.getLocation().toFile();
+		List<String> command = createCommand();
 
-			getCommandExecutor().execute(command, directory);
+		getCommandExecutor().execute(command, directory);
 	}
 
 	public void generate() {
@@ -74,25 +70,24 @@ public class GTestHelper {
 
 		// copy model to JUnit workspace
 		copyFileFromBundleToFolder(getModelBundle(), getModelPath(), targetPath);
-		
+
 		String sgenFileName = getTestProgram() + ".sgen";
 		copyFileFromBundleToFolder(getTestBundle(), sgenFileName, targetPath);
-		
+
 		IPath path = new Path(sgenFileName);
 		Resource sgenResource = loadResource(getWorkspaceFileFor(path));
-		GeneratorModel model = (GeneratorModel) sgenResource.getContents().get(
-				0);
+		GeneratorModel model = (GeneratorModel) sgenResource.getContents().get(0);
 		model.getEntries().get(0).setElementRef(getStatechart());
 
 		performFullBuild();
-		
-		new GeneratorExecutor().executeGenerator(model);
+
+		new EclipseContextGeneratorExecutorLookup().execute(model);
 	}
-	
+
 	protected GCCCommandExecutor getCommandExecutor() {
 		return new GCCCommandExecutor();
 	}
-	
+
 	protected void performFullBuild() {
 		try {
 			ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, null);
@@ -100,14 +95,13 @@ public class GTestHelper {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	protected IFile getWorkspaceFileFor(IPath filePath) {
 		return ResourcesPlugin.getWorkspace().getRoot().getFile(getTargetProjectPath().append(filePath));
 	}
 
 	protected Statechart getStatechart() {
-		IPath path = new Path(getTargetPath().toString() + "/"
-				+ getModelPath().lastSegment());
+		IPath path = new Path(getTargetPath().toString() + "/" + getModelPath().lastSegment());
 		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 		Resource resource = loadResource(file);
 		return (Statechart) resource.getContents().get(0);
@@ -221,44 +215,37 @@ public class GTestHelper {
 	protected String getModelAnnotation() {
 		return owner.getClass().getAnnotation(GTest.class).model();
 	}
-	
+
 	protected String getTestBundleAnnotation() {
 		return owner.getClass().getAnnotation(GTest.class).testBundle();
 	}
-	
+
 	protected IPath getTargetProjectPath() {
 		return new Path(getTestBundleAnnotation());
 	}
 
-	protected void copyFileFromBundleToFolder(Bundle bundle, String sourcePath,
-			String targetPath) {
-		copyFileFromBundleToFolder(bundle, new Path(sourcePath), new Path(
-				targetPath));
+	protected void copyFileFromBundleToFolder(Bundle bundle, String sourcePath, String targetPath) {
+		copyFileFromBundleToFolder(bundle, new Path(sourcePath), new Path(targetPath));
 	}
 
-	protected void copyFileFromBundleToFolder(Bundle bundle, String sourcePath,
-			IPath targetPath) {
+	protected void copyFileFromBundleToFolder(Bundle bundle, String sourcePath, IPath targetPath) {
 		copyFileFromBundleToFolder(bundle, new Path(sourcePath), targetPath);
 	}
 
-	protected void copyFileFromBundleToFolder(Bundle bundle, IPath sourcePath,
-			IPath targetPath) {
+	protected void copyFileFromBundleToFolder(Bundle bundle, IPath sourcePath, IPath targetPath) {
 		String fileName = sourcePath.lastSegment();
 		copyFileFromBundle(bundle, sourcePath, targetPath.append(fileName));
 	}
 
-	protected void copyFileFromBundle(Bundle bundle, String sourcePath,
-			String targetPath) {
+	protected void copyFileFromBundle(Bundle bundle, String sourcePath, String targetPath) {
 		copyFileFromBundle(bundle, sourcePath, new Path(targetPath));
 	}
 
-	protected void copyFileFromBundle(Bundle bundle, String sourcePath,
-			IPath targetPath) {
+	protected void copyFileFromBundle(Bundle bundle, String sourcePath, IPath targetPath) {
 		copyFileFromBundle(bundle, new Path(sourcePath), targetPath);
 	}
 
-	protected void copyFileFromBundle(Bundle bundle, IPath sourcePath,
-			IPath targetPath) {
+	protected void copyFileFromBundle(Bundle bundle, IPath sourcePath, IPath targetPath) {
 		try {
 			InputStream is = FileLocator.openStream(bundle, sourcePath, false);
 			createFile(targetPath, is);
@@ -292,8 +279,7 @@ public class GTestHelper {
 
 	protected void copyFileFromBundle(IPath sourcePath, IFile targetFile) {
 		try {
-			InputStream is = FileLocator.openStream(getTestBundle(),
-					sourcePath, false);
+			InputStream is = FileLocator.openStream(getTestBundle(), sourcePath, false);
 			createFile(targetFile, is);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -323,13 +309,11 @@ public class GTestHelper {
 	}
 
 	protected IFolder getFolder(String path) {
-		return ensureContainerExists(ResourcesPlugin.getWorkspace().getRoot()
-				.getFolder(new Path(path)));
+		return ensureContainerExists(ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(path)));
 	}
 
 	protected IFolder getFolder(IPath path) {
-		return ensureContainerExists(ResourcesPlugin.getWorkspace().getRoot()
-				.getFolder(path));
+		return ensureContainerExists(ResourcesPlugin.getWorkspace().getRoot().getFolder(path));
 	}
 
 	protected <T extends IContainer> T ensureContainerExists(T container) {
@@ -337,8 +321,7 @@ public class GTestHelper {
 		IProject project = container.getProject();
 		if (project.exists()) {
 			if (!project.isOpen()) {
-				throw new RuntimeException("Project " + project.getName()
-						+ " closed");
+				throw new RuntimeException("Project " + project.getName() + " closed");
 			}
 		} else {
 			try {
@@ -360,8 +343,7 @@ public class GTestHelper {
 
 	private void doEnsureFolderExists(IFolder folder, IProgressMonitor monitor) {
 		if (!folder.exists()) {
-			if (!folder.getParent().exists()
-					&& folder.getParent() instanceof IFolder) {
+			if (!folder.getParent().exists() && folder.getParent() instanceof IFolder) {
 				doEnsureFolderExists((IFolder) folder.getParent(), monitor);
 			}
 			try {

@@ -9,19 +9,20 @@
  */
 package org.yakindu.sct.generator.c
 
-import org.yakindu.sct.generator.core.features.ICoreFeatureConstants
+import org.yakindu.sct.generator.c.features.ICFeatureConstants
 import org.yakindu.sct.model.sgen.FeatureParameterValue
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.c.features.ICFeatureConstants
+
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.*
 
 class GenmodelEntries {
 	
 	def private getLicenseFeature(GeneratorEntry it) {
-		getFeatureConfiguration(ICoreFeatureConstants::LICENSE_HEADER)
+		getFeatureConfiguration(LICENSE_HEADER)
 	}
 	
 	def private FeatureParameterValue getLicenseTextParameter(GeneratorEntry it) {
-		licenseFeature?.getParameterValue(ICoreFeatureConstants::LICENSE_TEXT)
+		licenseFeature?.getParameterValue(LICENSE_TEXT)
 	}
 	
 	def getLicenseText(GeneratorEntry it) {

@@ -51,6 +51,7 @@ import org.eclipse.swt.widgets.Label;
 import org.yakindu.sct.generator.core.extensions.FileExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
+import org.yakindu.sct.generator.genmodel.ui.PathToImageResolver;
 import org.yakindu.sct.ui.wizards.ModelCreationWizardPage;
 
 import com.google.common.collect.Lists;
@@ -218,7 +219,7 @@ public class SGenWizardPage2 extends WizardPage {
 		@Override
 		public Image getImage(Object element) {
 			if (element instanceof IGeneratorDescriptor) {
-				return ((IGeneratorDescriptor) element).getImage();
+				return PathToImageResolver.toImage(((IGeneratorDescriptor) element).getImagePath());
 			}
 			return super.getImage(element);
 		}

@@ -3,6 +3,8 @@ p.
 
 ==<div class="pro-feature">==
 
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/c-domain.textile
+
 h1(#cdom_deep-c-integration). Deep C Integration: Integrating your C source code with your statecharts
 
 h2(#cdom_introduction). Introduction

@@ -148,6 +148,8 @@ public enum ParameterTypes implements Enumerator {
 	 * Returns the '<em><b>Parameter Types</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static ParameterTypes get(String literal) {
@@ -164,6 +166,8 @@ public enum ParameterTypes implements Enumerator {
 	 * Returns the '<em><b>Parameter Types</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param name the name.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static ParameterTypes getByName(String name) {
@@ -180,6 +184,8 @@ public enum ParameterTypes implements Enumerator {
 	 * Returns the '<em><b>Parameter Types</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value the integer value.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static ParameterTypes get(int value) {

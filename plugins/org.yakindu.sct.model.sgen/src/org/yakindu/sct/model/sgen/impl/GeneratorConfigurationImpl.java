@@ -29,10 +29,10 @@ import org.yakindu.sct.model.sgen.SGenPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.GeneratorConfigurationImpl#getConfigurations <em>Configurations</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+ <extension
+         point="org.yakindu.sct.generator.core.featuretypes">
+      <FeatureLibrary
+            library_id="org.yakindu.generator.core.features.generic"
+            defaultProvider="org.yakindu.sct.generator.runner.lib.GenericJavaLibraryDefaultValueProvider"
+            uri="platform:/plugin/org.yakindu.sct.generator.runner/library/GenericJavaFeatureTypeLibrary.xmi">
+   	  </FeatureLibrary>   	  
+ </extension>
+ <extension
+       point="org.yakindu.sct.generator.core.generator">
+   <SCTGenerator
+         bindings="org.yakindu.sct.generator.runner.RunnerModule"
+         contentType="statechart"
+         description="Generate Code using a runtime code generator"
+         elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+         executor="org.yakindu.sct.generator.runner.WorkspaceGeneratorExecutor"
+         icon="icons/sct.png"
+         id="yakindu::generic"
+         name="Custom Xtend2/Java-based Generator">
+      <FeatureLibrary
+            library_id="org.yakindu.generator.core.features">
+      </FeatureLibrary>
+      <FeatureLibrary
+            library_id="org.yakindu.generator.core.features.generic">
+      </FeatureLibrary>
+    </SCTGenerator>
+ </extension>
+    <extension
+         point="org.yakindu.sct.generator.core.extensions">
+      <ExtensionGeneratorMapping
+            fileExtension="sct"
+            generatorId="yakindu::generic">
+      </ExtensionGeneratorMapping>
+   </extension>
+</plugin>

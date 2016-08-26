@@ -52,13 +52,23 @@
          <sequence minOccurs="0" maxOccurs="unbounded">
             <element ref="FeatureLibrary"/>
          </sequence>
-         <attribute name="class" type="string" use="required">
+         <attribute name="executor" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.yakindu.sct.generator.core.ISCTGenerator"/>
+                  <meta.attribute kind="java" basedOn=":org.yakindu.sct.generator.core.execution.IGenModelExecutor"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="bindings" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":org.yakindu.sct.generator.core.GeneratorModule"/>
                </appinfo>
             </annotation>
          </attribute>

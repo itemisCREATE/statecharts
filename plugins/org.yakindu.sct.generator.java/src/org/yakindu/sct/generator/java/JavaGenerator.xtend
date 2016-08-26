@@ -11,12 +11,12 @@ package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.java.features.EventBasedRunnableFeature
+import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.java.features.CycleBasedWrapperFeature
+import org.yakindu.sct.generator.java.features.EventBasedRunnableFeature
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
 /**
  * This is the Java code generators main class.

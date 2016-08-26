@@ -15,6 +15,7 @@ import org.yakindu.base.types.Direction
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -23,9 +24,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.generator.core.library.IOutletFeatureHelper
-import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
-import static org.eclipse.xtext.util.Strings.*
+import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*;
 
 class StatemachineInterface {
 
@@ -36,16 +35,15 @@ class StatemachineInterface {
 	@Inject extension ITypeSystem
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension ExpressionCode
-	@Inject Beautifier beautifier
 
-	@Inject IOutletFeatureHelper outletFeatureHelper
+	@Inject ICoreLibraryHelper outletFeatureHelper
 
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		var filename = flow.getImplementationPackagePath(entry) + '/' + flow.statemachineInterfaceName.java
 		var content = content(flow, entry)
 		if (outletFeatureHelper.getApiTargetFolderValue(entry) != null) {
 			// generate into API target folder in case one is specified, as it is an interface
-			fsa.generateFile(filename, IExecutionFlowGenerator.API_TARGET_FOLDER_OUTPUT, content)
+			fsa.generateFile(filename, API_TARGET_FOLDER_OUTPUT, content)
 		} else {
 			fsa.generateFile(filename, content)
 		}

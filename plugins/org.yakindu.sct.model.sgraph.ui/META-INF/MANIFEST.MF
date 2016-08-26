@@ -11,8 +11,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.shared,
  org.apache.commons.lang,
- org.eclipse.gmf.runtime.emf.core
+ org.eclipse.gmf.runtime.emf.core,
+ org.eclipse.gmf.runtime.notation
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.yakindu.sct.model.sgraph.ui,
- org.yakindu.sct.model.sgraph.ui.refactoring,
  org.yakindu.sct.model.sgraph.ui.validation

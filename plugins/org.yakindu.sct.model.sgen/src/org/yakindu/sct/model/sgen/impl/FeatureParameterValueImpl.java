@@ -30,12 +30,12 @@ import org.yakindu.sct.model.sgen.StringLiteral;
  * <em><b>Feature Parameter Value</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureParameterValueImpl#getParameter <em>Parameter</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureParameterValueImpl#getFeatureConfiguration <em>Feature Configuration</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureParameterValueImpl#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

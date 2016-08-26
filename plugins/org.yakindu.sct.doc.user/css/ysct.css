@@ -114,3 +114,22 @@ span.pro-feature:before {
 	top:0;
 	left:0
 }
+
+/* Edit on GitHub: */
+
+.sct-docs h1 {
+	/* Make some room for the "Edit on GitHub link": */
+	margin-right: 10rem;
+	clear: left;
+}
+
+.sct-docs .edit-on-github {
+	float: right;
+	line-height: 45px;
+	position: relative;
+	margin: 0;
+}
+
+.eclipsehelp .edit-on-github {
+	display: none
+}

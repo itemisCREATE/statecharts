@@ -31,11 +31,11 @@ import org.yakindu.sct.model.sgen.SGenPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.GeneratorModelImpl#getEntries <em>Entries</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.GeneratorModelImpl#getGeneratorId <em>Generator Id</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

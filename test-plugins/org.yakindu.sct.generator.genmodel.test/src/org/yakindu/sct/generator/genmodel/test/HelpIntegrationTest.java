@@ -100,15 +100,6 @@ public class HelpIntegrationTest {
 
 	}
 
-	@Test
-	public void checkXpandGeneratorFeatureDocumentation() {
-		List<String> missingDocumentation = getFeaturesWithoutDocumentation(YAKINDU_XPAND);
-		if (missingDocumentation.size() > 0) {
-			fail("Missing generator feature(s) documentation for generator "
-					+ YAKINDU_XPAND + ": " + missingDocumentation);
-		}
-	}
-
 	private List<String> getFeaturesWithoutDocumentation(String generatorId) {
 		
 		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions

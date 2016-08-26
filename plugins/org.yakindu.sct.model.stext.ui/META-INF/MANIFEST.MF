@@ -9,21 +9,18 @@ Require-Bundle: org.yakindu.sct.model.stext;visibility:=reexport,
  org.eclipse.xtext.ui,
  org.eclipse.ui.editors,
  org.eclipse.ui.ide,
- org.eclipse.xtext.ui.shared,
  org.eclipse.ui;visibility:=reexport,
  org.eclipse.xtext.builder,
  org.antlr.runtime,
  org.yakindu.sct.model.sgraph,
  org.yakindu.sct.model.stext.edit,
  org.eclipse.help,
- org.yakindu.base.xtext.utils.jface,
- org.eclipse.gmf.runtime.notation,
- org.yakindu.sct.model.sgraph.ui,
- org.eclipse.gmf.runtime.emf.core,
  org.yakindu.base.expressions.ui;visibility:=reexport,
  org.yakindu.base.types.edit,
  org.yakindu.sct.ui.editor,
- org.yakindu.sct.doc.user
+ org.yakindu.sct.doc.user,
+ org.yakindu.base.xtext.utils.jface,
+ org.eclipse.xtext.ui.shared
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
@@ -54,6 +51,5 @@ Export-Package: org.yakindu.sct.model.stext.ui;
  org.yakindu.sct.model.stext.ui.internal;uses:="org.eclipse.ui.plugin,org.osgi.framework,com.google.inject",
  org.yakindu.sct.model.stext.ui.labeling;uses:="org.eclipse.emf.edit.ui.provider,org.eclipse.xtext.ui.label",
  org.yakindu.sct.model.stext.ui.outline;uses:="org.eclipse.xtext.ui.editor.outline.impl",
- org.yakindu.sct.model.stext.ui.quickfix;uses:="org.eclipse.xtext.ui.editor.quickfix",
- org.yakindu.sct.model.stext.ui.validation
+ org.yakindu.sct.model.stext.ui.quickfix;uses:="org.eclipse.xtext.ui.editor.quickfix"
 Bundle-Activator: org.yakindu.sct.model.stext.ui.internal.STextActivator

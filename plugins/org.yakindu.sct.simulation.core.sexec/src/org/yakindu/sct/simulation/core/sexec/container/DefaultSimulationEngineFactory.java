@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.types.typesystem.AbstractTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.IDomainDescriptor;
+import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
@@ -76,9 +76,9 @@ public class DefaultSimulationEngineFactory implements ISimulationEngineFactory 
 				return null;
 			set.getResources().add(resource);
 			resource.load(new URIConverter.ReadableInputStream(context, "UTF_8"), Collections.emptyMap());
-			IDomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(statechart);
-			ITypeSystem typeSystem = domainDescriptor.getDomainInjectorProvider().getResourceInjector()
-					.getInstance(ITypeSystem.class);
+			IDomain domain = DomainRegistry.getDomain(statechart);
+			Injector injector = domain.getInjector(IDomain.FEATURE_SIMULATION);
+			ITypeSystem typeSystem = injector.getInstance(ITypeSystem.class);
 			if (typeSystem instanceof AbstractTypeSystem) {
 				set.getResources().add(((AbstractTypeSystem) typeSystem).getResource());
 			}

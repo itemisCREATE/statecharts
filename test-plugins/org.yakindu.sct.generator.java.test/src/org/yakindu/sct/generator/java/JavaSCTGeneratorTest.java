@@ -43,6 +43,7 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 
 	@Before
 	public void setup() {
+		
 		new TestModelInjectorProvider(new Module(){
 			@Override
 			public void configure(Binder binder) {
@@ -60,7 +61,7 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	public static Iterable<Object[]> testData() throws Exception {
 		return SCTUnitTestModels.parameterizedTestData();
 	}
-
+ 
 	@Test
 	public void testCompileStatechart() throws Exception {
 		IMarker[] marker = generateAndCompile(statechart);

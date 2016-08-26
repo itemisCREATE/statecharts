@@ -42,21 +42,19 @@ class RuntimeService {
 			 * 
 			 */
 			public class RuntimeService {
-	
+		
 				private static RuntimeService runtimeService;
-	
-				private Timer timer = null;
-	
+		
+				private Timer timer = null;			
 				private Dictionary<Long, StatemachineTimerTask> timerTasks = new Dictionary<Long, StatemachineTimerTask>();
-	
+		
 				private class StatemachineTimerTask extends TimerTask {
-	
+		
 					private List<IStatemachine> statemachineList = new List<IStatemachine>();
-	
+		
 					private ReaderWriterLock lock = new ReaderWriterLock();
-	
-					private bool isPaused = false;
-	
+		
+					private bool isPaused = false;			
 					public override void run() {
 						lock.AcquireReaderLock(-1);
 						if (!isPaused) {
@@ -66,7 +64,7 @@ class RuntimeService {
 						}
 						lock.ReleaseReaderLock();
 					}
-	
+		
 					/**
 					 * Adds the given state machine to the TimerTask.
 					 * 
@@ -79,7 +77,7 @@ class RuntimeService {
 						lock.ReleaseWriterLock();
 						return true;
 					}
-	
+		
 					/**
 					 * Removes the given state machine from the TimerTask.
 					 * 
@@ -92,20 +90,20 @@ class RuntimeService {
 						lock.ReleaseWriterLock(-1);
 						return ret;
 					}
-	
+		
 					public void pause() {
 						isPaused = true;
 					}
-	
+		
 					public void resume() {
 						isPaused = false;
 					}
 				}
-	
+		
 				private RuntimeService() {
 					// Not intended to be instantiated.
 				}
-	
+		
 				/**
 				 * Returns the {@code RuntimeService} instance as singleton.
 				 * 
@@ -117,7 +115,7 @@ class RuntimeService {
 					}
 					return runtimeService;
 				}
-	
+		
 				/**
 				 * Registers an {@link IStatemachine} for scheduled fixed rate execution
 				 * 
@@ -147,7 +145,7 @@ class RuntimeService {
 						return ret;
 					}
 				}
-	
+		
 				/**
 				 * Removes the given state machine from runtime service.
 				 * 
@@ -167,7 +165,7 @@ class RuntimeService {
 					}
 					return false;
 				}
-	
+		
 				/**
 				 * Cancels the execution of statemachines for the given cycle period. This
 				 * stops the execution of statemachines which are registered for the given
@@ -185,7 +183,7 @@ class RuntimeService {
 					}
 					return false;
 				}
-	
+		
 				/**
 				 * Pauses the execution of all statemachines which are registered for the
 				 * given cyclePeriod.
@@ -201,7 +199,7 @@ class RuntimeService {
 					}
 					return false;
 				}
-	
+		
 				/**
 				 * Resumes the execution of all statemachines which are registered for the
 				 * given cyclePeriod.
@@ -217,7 +215,7 @@ class RuntimeService {
 					}
 					return false;
 				}
-	
+		
 				/**
 				 * Cancels the execution of all registered statemachines. This cancels the
 				 * executing {@link Timer} freeing all allocated resources and terminates

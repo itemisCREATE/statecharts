@@ -17,9 +17,12 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJavaModelMarker;
-import org.yakindu.sct.generator.core.library.IOutletFeatureHelper;
-import org.yakindu.sct.generator.core.library.OutletFeatureHelperImpl;
-import org.yakindu.sct.generator.java.JavaCodeGenerator;
+import org.junit.Assert;
+import org.yakindu.sct.generator.builder.EclipseContextGeneratorExecutorLookup;
+import org.yakindu.sct.generator.core.console.IConsoleLogger;
+import org.yakindu.sct.generator.core.execution.IGeneratorEntryExecutor;
+import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
+import org.yakindu.sct.generator.core.library.impl.DefaultCoreLibraryHelper;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -28,7 +31,9 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.SGenFactory;
 import org.yakindu.sct.model.sgraph.Statechart;
 
-import com.google.inject.Inject;
+import com.google.inject.Binder;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 /**
  * 
@@ -42,23 +47,31 @@ public abstract class AbstractJavaGeneratorTest {
 	private static final String CONTENT_TYPE = "statechart";
 	private static final String OUTLET_FEATURE = "Outlet";
 	private static final String TARGET_FOLDER = "targetFolder";
-	private static final IOutletFeatureHelper outletFeatureConfigurationHelper = new OutletFeatureHelperImpl();
-
-	@Inject
-	protected JavaCodeGenerator generator;
+	private static final ICoreLibraryHelper outletFeatureConfigurationHelper = new DefaultCoreLibraryHelper();
 
 	public IMarker[] generateAndCompile(Statechart statechart) throws Exception {
 		GeneratorEntry entry = createGeneratorEntry(statechart.getName(), SRC_GEN);
 		entry.setElementRef(statechart);
 		IProject targetProject = getProject(entry);
 		targetProject.delete(true, new NullProgressMonitor());
-		generator.generate(entry);
-		targetProject.getWorkspace().build(IncrementalProjectBuilder.INCREMENTAL_BUILD, null);
 		targetProject = getProject(entry);
 		if (!targetProject.exists()) {
 			targetProject.create(new NullProgressMonitor());
 			targetProject.open(new NullProgressMonitor());
 		}
+		IGeneratorEntryExecutor executor = new EclipseContextGeneratorExecutorLookup() {
+			protected Module getContextModule() {
+				return Modules.override(super.getContextModule()).with(new Module() {
+					@Override
+					public void configure(Binder binder) {
+						binder.bind(IConsoleLogger.class).to(TestLogger.class);
+					}
+				});
+			};
+		}.createExecutor(entry, "yakindu::java");
+		executor.execute(entry);
+		targetProject.refreshLocal(IResource.DEPTH_INFINITE, null);
+		targetProject.getWorkspace().build(IncrementalProjectBuilder.INCREMENTAL_BUILD, null);
 		targetProject.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, new NullProgressMonitor());
 		IMarker[] markers = targetProject.findMarkers(IJavaModelMarker.JAVA_MODEL_PROBLEM_MARKER, true,
 				IResource.DEPTH_INFINITE);
@@ -66,7 +79,8 @@ public abstract class AbstractJavaGeneratorTest {
 	}
 
 	protected IProject getProject(GeneratorEntry entry) {
-		return ResourcesPlugin.getWorkspace().getRoot().getProject(outletFeatureConfigurationHelper.getTargetProjectValue(entry).getStringValue());
+		return ResourcesPlugin.getWorkspace().getRoot()
+				.getProject(outletFeatureConfigurationHelper.getTargetProjectValue(entry).getStringValue());
 	}
 
 	private GeneratorEntry createGeneratorEntry(String targetProject, String targetFolder) {
@@ -92,4 +106,20 @@ public abstract class AbstractJavaGeneratorTest {
 		return entry;
 	}
 
+	public static class TestLogger implements IConsoleLogger {
+
+		@Override
+		public void logError(Throwable t) {
+			t.printStackTrace();
+			Assert.fail(t.getMessage());
+		}
+
+		@Override
+		public void log(String line) {
+		}
+
+		@Override
+		public void close() {
+		}
+	}
 }

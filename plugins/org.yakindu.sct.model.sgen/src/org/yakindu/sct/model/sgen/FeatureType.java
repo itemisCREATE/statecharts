@@ -20,12 +20,12 @@ import org.yakindu.base.base.NamedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureType#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureType#getLibrary <em>Library</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.FeatureType#isOptional <em>Optional</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.model.sgen.SGenPackage#getFeatureType()
  * @model

@@ -24,24 +24,16 @@ import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
-import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.shared.Access;
-import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
-import org.eclipse.xtext.validation.IDiagnosticConverter;
-import org.eclipse.xtext.validation.IResourceValidator;
 import org.yakindu.base.utils.jface.help.CrossRefObjectTextHover;
-import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator;
-import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerTypeProvider;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
 import org.yakindu.sct.model.stext.ui.highlighting.SCTHighlightingConfiguration;
 import org.yakindu.sct.model.stext.ui.tasks.STextTaskFinder;
-import org.yakindu.sct.model.stext.ui.validation.SCTDiagnosticConverterImpl;
-import org.yakindu.sct.model.stext.ui.validation.SCTResourceValidatorImpl;
 import org.yakindu.sct.ui.editor.editor.SCTFileEditorOpener;
 
 import com.google.inject.Binder;
@@ -51,8 +43,7 @@ import com.google.inject.name.Names;
  * Use this class to register components to be used within the IDE.
  */
 @SuppressWarnings("restriction")
-public class STextUiModule extends
-		org.yakindu.sct.model.stext.ui.AbstractSTextUiModule {
+public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextUiModule {
 
 	public static final String STEXT_LANGUAGE_NAME = "org.yakindu.sct.model.stext.SText";
 
@@ -81,27 +72,10 @@ public class STextUiModule extends
 		return CustomCSSHelpHoverProvider.class;
 	}
 
-	public Class<? extends IDiagnosticConverter> bindIDiagnosticConverter() {
-		return SCTDiagnosticConverterImpl.class;
-	}
-
-	public Class<? extends MarkerCreator> bindMarkerCreator() {
-		return SCTMarkerCreator.class;
-	}
-
-	public Class<? extends MarkerTypeProvider> bindMarkerTypeProvider() {
-		return SCTMarkerTypeProvider.class;
-	}
-
-	public Class<? extends IResourceValidator> bindIResourceValidator() {
-		return SCTResourceValidatorImpl.class;
-	}
-
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
-		binder.bind(String.class).annotatedWith(Names.named("stylesheet"))
-				.toInstance("/StextHoverStyleSheet.css");
+		binder.bind(String.class).annotatedWith(Names.named("stylesheet")).toInstance("/StextHoverStyleSheet.css");
 	}
 
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
@@ -136,14 +110,14 @@ public class STextUiModule extends
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return SCTHighlightingConfiguration.class;
 	}
-	
+
 	public Class<? extends ITaskFinder> bindITaskFinder() {
 		return STextTaskFinder.class;
 	}
-	
+
 	@Override
 	public void configureLanguageSpecificURIEditorOpener(com.google.inject.Binder binder) {
 		binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(SCTFileEditorOpener.class);
 	}
-	
+
 }

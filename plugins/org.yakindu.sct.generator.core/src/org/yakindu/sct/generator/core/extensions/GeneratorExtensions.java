@@ -18,14 +18,16 @@ import java.util.NoSuchElementException;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.Bundle;
-import org.yakindu.sct.generator.core.ISCTGenerator;
+import org.yakindu.sct.generator.core.GeneratorModule;
+import org.yakindu.sct.generator.core.execution.IGeneratorEntryExecutor;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.inject.Binder;
+import com.google.inject.Module;
 
 /**
  * @author holger willebrandt - Initial contribution and API
@@ -33,7 +35,8 @@ import com.google.common.collect.Lists;
 public class GeneratorExtensions {
 
 	private static final String EXTENSION_POINT_ID = "org.yakindu.sct.generator.core.generator";
-	private static final String ATTRIBUTE_CLASS = "class";
+	private static final String ATTRIBUTE_GENERATOR_EXECUTOR = "executor";
+	private static final String ATTRIBUTE_BINDINGS = "bindings";
 	private static final String ATTRIBUTE_ID = "id";
 	private static final String LIBRARY_CONFIG_ELEMENT = "FeatureLibrary";
 	private static final String ATTRIBUTE_LIBRARY_ID = "library_id";
@@ -49,16 +52,27 @@ public class GeneratorExtensions {
 
 		private final IConfigurationElement configElement;
 
-		private Image image;
+		private URL image;
 
 		GeneratorDescriptor(IConfigurationElement configElement) {
 			this.configElement = configElement;
 		}
 
 		@Override
-		public ISCTGenerator createGenerator() {
+		public IGeneratorEntryExecutor createExecutor() {
 			try {
-				return (ISCTGenerator) configElement.createExecutableExtension(ATTRIBUTE_CLASS);
+				return (IGeneratorEntryExecutor) configElement.createExecutableExtension(ATTRIBUTE_GENERATOR_EXECUTOR);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		public Module getBindings(GeneratorEntry entry) {
+			try {
+				GeneratorModule module = (GeneratorModule) configElement.createExecutableExtension(ATTRIBUTE_BINDINGS);
+				return new GeneratorModuleAdapter(module, entry);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
@@ -88,7 +102,7 @@ public class GeneratorExtensions {
 		}
 
 		@Override
-		public Image getImage() {
+		public URL getImagePath() {
 			if (image != null)
 				return image;
 			String path = configElement.getAttribute(ATTRIBUTE_ICON);
@@ -96,9 +110,7 @@ public class GeneratorExtensions {
 				return null;
 
 			Bundle extensionBundle = Platform.getBundle(configElement.getContributor().getName());
-			URL entry = extensionBundle.getEntry(path);
-			ImageDescriptor descriptor = ImageDescriptor.createFromURL(entry);
-			image = descriptor.createImage();
+			image = extensionBundle.getEntry(path);
 			return image;
 		}
 
@@ -155,6 +167,23 @@ public class GeneratorExtensions {
 		} catch (NoSuchElementException ex) {
 			return null;
 		}
+	}
+
+	public static class GeneratorModuleAdapter implements Module {
+
+		private GeneratorEntry entry;
+		private GeneratorModule module;
+
+		public GeneratorModuleAdapter(GeneratorModule module, GeneratorEntry entry) {
+			this.module = module;
+			this.entry = entry;
+		}
+
+		@Override
+		public void configure(Binder binder) {
+			module.configure(entry, binder);
+		}
+
 	}
 
 }

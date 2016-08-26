@@ -5,18 +5,16 @@
    <extension
          point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
-            class="org.yakindu.sct.generator.cpp.CppCodeGenerator"
+            bindings="org.yakindu.sct.generator.cpp.CppCodeGeneratorModule"
             contentType="statechart"
             description="YAKINDU SCT C++ Code Generator"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+            executor="org.yakindu.sct.generator.core.execution.SExecGeneratorEntryExecutor"
             icon="icons/sct.png"
             id="yakindu::cpp"
             name="YAKINDU SCT C++ Code Generator">
          <FeatureLibrary
                library_id="org.yakindu.generator.core.features">
-         </FeatureLibrary>
-         <FeatureLibrary
-               library_id="org.yakindu.generator.core.features.sctbase">
          </FeatureLibrary>
          <FeatureLibrary
                library_id="org.yakindu.sct.generator.feature.cpp">
@@ -38,30 +36,4 @@
             uri="platform:/plugin/org.yakindu.sct.generator.cpp/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
    </extension>
-   <!-- extension
-         point="org.yakindu.sct.generator.core.generator">
-      <SCTGenerator
-            class="org.yakindu.sct.generator.cpp.CppCodeGenerator"
-            description="YAKINDU.org C++ Code Generator"
-            contentType="statechart"
-            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
-            id="yakindu::cpp"
-            name="YAKINDU C++ Code Generator">
-      </SCTGenerator>
-   </extension>
-   <extension
-         point="org.yakindu.sct.generator.core.featuretypes">
-      <FeatureLibrary
-            defaultProvider="org.yakindu.sct.generator.cpp.features.CPPDefaultFeatureValueProvider"
-            generatorId="yakindu::cpp"
-            uri="platform:/plugin/org.yakindu.sct.generator.cpp/library/FeatureTypeLibrary.xmi">
-      </FeatureLibrary>
-   </extension>
-   <extension
-         point="org.yakindu.sct.generator.core.extensions">
-      <ExtensionGeneratorMapping
-            fileExtension="sct"
-            generatorId="yakindu::cpp">
-      </ExtensionGeneratorMapping>
-   </extension -->
 </plugin>

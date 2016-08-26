@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: YAKINDU Workspace Generator Runner
+Bundle-SymbolicName: org.yakindu.sct.generator.runner;singleton:=true
+Bundle-Version: 2.7.1.qualifier
+Bundle-Activator: org.yakindu.sct.generator.runner.RunnerActivator
+Bundle-Vendor: statecharts.org
+Require-Bundle: org.eclipse.core.runtime,
+ org.yakindu.sct.generator.core,
+ org.yakindu.sct.generator.genmodel,
+ org.yakindu.sct.commons,
+ org.eclipse.jdt.core,
+ org.eclipse.emf.workspace
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy

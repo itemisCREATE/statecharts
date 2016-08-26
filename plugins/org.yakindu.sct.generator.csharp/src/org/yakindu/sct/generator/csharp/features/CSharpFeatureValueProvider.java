@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
+import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
@@ -33,7 +33,6 @@ import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 public class CSharpFeatureValueProvider extends
 		AbstractDefaultFeatureValueProvider {
 
-	private static final String PACKAGE_NAME_REGEX = "([a-zA-Z_][a-zA-Z0-9_]*\\.)+[a-zA-Z_][a-zA-Z0-9_]*";
 	private static final String SUFFIX_REGEX = "[a-zA-Z0-9_]*";
 
 	

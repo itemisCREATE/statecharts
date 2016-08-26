@@ -183,6 +183,13 @@
                 </fileset>
             </replaceregexp>
 
+            <!-- Add CSS class "eclipsehelp" to BODY element -->
+            <replaceregexp byline="true" match='&lt;body&gt;' replace='&lt;body class="eclipsehelp"&gt;'>
+                <fileset dir="${help.dir}">
+                    <include name="**/*.html" />
+                </fileset>
+            </replaceregexp>
+
             <!-- Fix "pro-feature" DIV elements -->
             <replaceregexp byline="false"
                            flags="g"
@@ -290,7 +297,8 @@
 
 
     <!-- Creates a certain part of the HTML documentation for the website. -->
-    <macrodef name="create-website-part" description="Creates a certain part of the HTML documentation for the website.">
+    <macrodef name="create-website-part"
+              description="Creates a certain part of the HTML documentation for the website.">
         <attribute name="name" />
         <attribute name="title" />
         <element name="textile-files" />

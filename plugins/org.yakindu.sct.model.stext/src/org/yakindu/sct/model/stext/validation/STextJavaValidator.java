@@ -19,7 +19,6 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -34,12 +33,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.IContainer;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -99,6 +93,7 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.model.stext.util.ImportResolver;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -127,9 +122,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
 	@Inject
-	private IContainer.Manager containerManager;
-	@Inject
-	private ResourceDescriptionsProvider resourceDescriptionsProvider;
+	private ImportResolver resolver;
 	@Inject(optional = true)
 	@Named("domainId")
 	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
@@ -827,41 +820,14 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	@Check(CheckType.FAST)
 	public void checkImportExists(Import importDef) {
-		String importedNamespace = importDef.getImportedNamespace();
-		if (!checkImportedNamespaceExists(importDef.getImportedNamespace(), getResource(importDef))) {
-			error("The import " + importedNamespace + " cannot be resolved.", importDef,
+		String namespace = importDef.getImportedNamespace();
+		if (resolver.getPackageForNamespace(getResource(importDef), namespace) == null) {
+			error("The import " + namespace + " cannot be resolved.", importDef,
 					StextPackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORT_NOT_RESOLVED);
 		}
 	}
 
-	protected boolean checkImportedNamespaceExists(String importedNamespace, Resource res) {
-		if (importedNamespace.endsWith(".*")) {
-			importedNamespace = importedNamespace.substring(0, importedNamespace.length() - 2); // remove
-																								// wildcard
-		}
-		IResourceDescriptions resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(res);
-		URI uri = res.getURI();
-		IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(uri);
-		if (resourceDescription == null) {
-			return false; // no resource description could be found, so package
-							// cannot be resolved anyway
-		}
-		for (IContainer container : containerManager.getVisibleContainers(resourceDescription, resourceDescriptions)) {
-			final Iterable<IResourceDescription> currentDescriptions = container.getResourceDescriptions();
-			for (IResourceDescription resDesc : currentDescriptions) {
-				Iterable<IEObjectDescription> visiblePackages = resDesc
-						.getExportedObjectsByType(TypesPackage.Literals.PACKAGE);
-				for (IEObjectDescription pkgDesc : visiblePackages) {
-					if (pkgDesc.getName().toString().equals(importedNamespace)) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-
-	private Resource getResource(EObject context) {
+	protected Resource getResource(EObject context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
 				ContextElementAdapter.class);
 		if (provider == null) {

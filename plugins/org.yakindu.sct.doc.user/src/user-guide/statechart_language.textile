@@ -1,4 +1,6 @@
 
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/statechart_language.textile
+
 h1(#the-statechart-language). The statechart language
 
 This chapter describes the statechart elements of the YAKINDU Statechart Tools (YAKINDU SCT) editor. The YAKINDU SCT meta model is the model of finite state machines. It is based on the view of a system that is defined by a finite number of states. The behavior of such a system is based on its active states. These states are determined by the history of the state machine. Very important are the theoretical models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (_entry_, _exit_). YAKINDU SCT can model both these types.
@@ -42,15 +44,215 @@ p=. Parallel regions
 
 h3(#state). State
 
-States are the central elements of a state machine. A state has to be placed inside a region and must have a name that is unique inside this region. During simulation, each state can be active or passive. An active state has actions that are accomplished. Either an action is carried out on entering a state, during active state, or on exit.
+States are the central elements of a state machine. A state has to be placed inside a region and must have a name that is unique inside this region. During state machine execution, a state can be active or passive.
+
+A state can have a _behavior_. The behavior specifies which actions are executed. Such actions can be triggered by entering the state, leaving the state, occurrence of events, conditions becoming true, or time passing. The behavior specification is a text inside the state's box and consists of a sequence of so-called _local reactions_.
+
+The state *Countdown* in the following example has three local reactions:
+
+p(#fig_state-example). 
+!(standard-image)images/docu_state_010_example_01.png(State example)!
+
+p=. State example: A simple state machine to launch a rocket. When the *Countdown* state is entered, it sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ cares for audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the *Countdown* state will become inactive and launches the rocket upon exiting. The countdown can be aborted anytime before launch by a _cancel_ event. (See figure "&quot;Transition example&quot;":#fig_transition-example for a different state machine which solves the same task but puts more emphasis on transitions.)
+
+Figure "&quot;State behavior syntax overview&quot;":#fig_state-syntax-overview shows how the syntax of a state's behavior is defined. It consists of an arbitrary number of _local reactions_, where each local reaction essentially consists of a _reaction trigger_ and a _reaction effect_.
+
+p(#fig_state-syntax-overview). 
+!(standard-image)images/docu_grammar_030_state-overview.png(State syntax overview)!
+
+p=. State behavior syntax overview
+
+h4(#local-reactions). Local reactions
+
+If an "event":#events occurs, it may trigger a so-called _local reaction_ in the active state. It is executed completely inside the active state without leaving it, thus the word "local". The UML calls local reactions "internal transitions".
+
+Each local reaction consists of three parts, as shown by figure "&quot;Local reaction syntax&quot;":#fig_local-reaction-syntax.
+
+p(#fig_local-reaction-syntax). 
+!(standard-image)images/docu_grammar_030_state-localreaction.png(Local reaction syntax)!
+
+p=. Local reaction syntax
+
+* The _reaction trigger_. It specifies the conditions that have to be fulfilled for the local reaction to be executed. It consists of one or more "_event specifications_":#event-specifications and a "_guard condition_":#guard-condition. One of these, i.&nbsp;e. either event specification(s) or guard condition, may be omitted, but not both.
+** The "event specifications":#event-specifications determine which events, separated by comma, will trigger this particular local reaction. Occurrence of one of these events is sufficient. Special events are @entry@ and @exit@, which will trigger when the state becomes active or is about to become passive, respectively. For more on "event specifications":#event-specifications, see section "&quot;Event specifications&quot;":#event-specifications.
+** The "guard condition":#guard-condition must be fulfilled for the local reaction to be triggered. It is a boolean expression, enclosed in square brackets. For more on "guard conditions":#guard-condition, see section "&quot;Guard condition&quot;":#guard-condition.
+** If no event specification is given, this is equivalent to the @always@ event specification being specified. That is, the local reaction is always triggered as long as the guard condition evaluates to _true_.
+** If the guard condition is omitted, this is equivalent to the @[true]@ guard condition being specified.
+* The @/@ character.
+* The "_reaction effect_":#reaction-effect. It specifies one or more actions that will be executed if the local reaction is triggered. For more on "reaction effects":#reaction-effect, see section "&quot;Reaction effect&quot;":#reaction-effect.
 
 h3(#transition). Transition
 
-A transition is the transfer of one state to another. Transitions are diagrammed as arrows. They can have events and actions, but don't need to.
+A transition is the transfer of one state to another. A transition is diagrammed as an arrow leading from a _source state_ to a _target state_.
 
-The syntax of events and actions is defined by a "textual description language":#the-statechart-language. Please refer to "section &quot;Events&quot;":#events for more details. "Section &quot;Reaction triggers&quot;":#reaction-triggers has more on actions.
+A transition usually specifies a _transition reaction_. The transition reaction specifies what the conditions are for this transition to be taken and which actions, if any, are to be executed. The occurrence of an event, a condition becoming true, or time passing can trigger a transition. The transition reaction is attached to the transition's arrow as a text and consists of the following:
 
-If a state has more than a single outgoing transition without event, then among those transitions the one that has been modeled first will be carried out.
+* "_event specifications_":#event-specifications, specifying which event or events can trigger this transition,
+* a "_guard_":#guard-condition, specifying which condition(s) must be fulfilled to trigger this transition,
+* a "_reaction effect_":#reaction-effect, specifying actions that are to be executed when this transition is executed.
+
+All of these three elements are optional, i.&nbsp;e. a transition may have one or more or them, but it doesn't need to. You will find more on "event specifications":#event-specifications, "guard condition":#guard-condition, and "reaction effect":#reaction-effect in sections "&quot;Event specifications&quot;":#event-specifications, "&quot;Guard condition&quot;":#guard-condition, and "&quot;Reaction effect&quot;":#reaction-effect, respectively.
+
+Here's an example:
+
+p(#fig_transition-example). 
+!(standard-image)images/docu_transition_030_example_01.png(Transition example)!
+
+p=. Transition example: A simple state machine to launch a rocket. The initial transition's _effect_ sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ – executed as one of a transition's _actions_ – cares for audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the rocket is launched. The countdown can be aborted anytime before launch by a _cancel_ event which _triggers_ the appropriate transition to fire. (See figure "&quot;State example&quot;":#fig_state-example for a different state machine which solves the same task but puts more emphasis on states.)
+
+Figure "&quot;Transition syntax overview&quot;":#fig_transition-syntax-overview shows how the syntax of a transition reaction is defined.
+
+p(#fig_transition-syntax-overview). 
+!(standard-image)images/docu_grammar_030_transition-overview.png(Transition syntax overview)!
+
+p=. Transition syntax overview
+
+h4(#transitions-without-transition-reaction). Transitions without transition reaction
+
+A transition should specify a transition reaction. However, it is legal to omit it, although the statechart editor will display a warning. The semantics of a missing transition reaction is that this transition is always taken. So you could just as well write @always@ at the transition, thus making things clear and avoiding the warning.
+
+h4(#entry-and-exit-points). Entry and exit points
+
+Unlike "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language transitions, transitions in YAKINDU Statecharts can denote specific entry or exit points when leaving or entering composite states. This is denoted by the _TransitionProperties_ non-terminal symbol in figure "&quot;Transition syntax overview&quot;":#fig_transition-syntax-overview and explained in detail in sections "&quot;Named entries&quot;":#named-entries and "&quot;Exit&quot;":#exit.
+
+h4(#transition-priorities). Transition priorities
+
+If a state has several outgoing transitions, based on the events that occured and on guard conditions, several of these transitions could fire at the same time. Here's simple example:
+
+p(#fig_transition-priorities-1). 
+!(standard-image)images/docu_transition_020_priorities_01.png(Transition priorities 1)!
+
+p=. Transition priorities (1)
+
+Which transition will fire when event _e1_ occurs? Fortunately YAKINDU state machines behave deterministically, so this question can be answered unambiguously. Outgoing transitions of a state have a definite order and are _prioritized_ by that order. The state machine checks the transitions one by one in their order and executes the first transition that fulfills all prerequisites for firing.
+
+As you can see in figure "&quot;Transition priorities (1)&quot;":#fig_transition-priorities-1, little numbers indicate the transition priorities. These numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram Appearance_ is activated.
+
+The order of transitions is a property of their source state. In the example above, the transition priorities of state *A* appear like this in the _Properties_ view:
+
+p(#fig_transition-priorities-2). 
+!(standard-image)images/docu_transition_020_priorities_02.png(Transition priorities 2)!
+
+p=. Transition priorities (2)
+
+To change priorities, select a transition in the _Properties_ view and click on the _up_ or _down_ button as appropriate.
+
+h3(#event-specifications). Event specifications
+
+When an "event":#events occurs, it may impact transitions and states:
+* The event may trigger "transitions":#transition to "fire". The transition's source state, which is the currently active state, becomes inactive, control is transferred along the transition's arrow to the transition's target state, and that state becomes active. See section "&quot;Transition&quot;":#transition for more details.
+* The event may cause "local reactions":#local-reactions within active states to be executed. See section "&quot;State&quot;":#state for more details.
+
+For a transition as well as for a state's local reaction you can specify events that should trigger the transition or local reaction to be executed. Multiple events, separated by comma, can also be specified. If multiple events are specified, the occurrence of a single one is sufficient to trigger the transition or local reaction.
+
+An event specification is either the name of an event that has been declared in the definition section, see section "&quot;Events&quot;":#events, or one of the built-in event specifications @after@, @every@, @always@, or @oncycle@. The latter are documented in detail in section "&quot;Reaction triggers&quot;":#reaction-triggers.
+
+Local reactions have two more built-in event specifiers at their disposal:
+* @entry@: The corresponding "reaction effect":#reaction-effect is executed when the state becomes active.
+* @exit@: The corresponding "reaction effect":#reaction-effect is executed just before the state becomes passive.
+
+bq. *Please note:* A self-transition, leading from a state back to itself, actually first leaves and then enters the state again. That means that its @exit@ effects as well as its @entry@ effects are executed. This is in contrast to a local reaction, which is executed without leaving the active state. Thus @exit@ and @entry@ effects are _not_ executed.
+
+Let's have a look at some sample event specifications:
+
+|_. Event specification: |_. Prerequisites for the transition to fire or the local reaction to be executed: |
+{vertical-align: top}. |{width: 15ex} @ev@ | Event _ev_ occured. |
+{vertical-align: top}. | @ev_1, ev_2@ | At least one of the events _ev_1_ and _ev_2_ occured. |
+{vertical-align: top}. | @after 3s@ | Three seconds after activating the source state have passed. |
+{vertical-align: top}. | @after 3s, ev@ | Three seconds after activating the source state have passed or event _ev_ occurred, whatever happens first. |
+{vertical-align: top}. | @every 3s@ | Three seconds have passed. This event first occurs three seconds after activating the source state and then repeatedly every three seconds. – Within a state, the @every@ event specification is useful to execute a certain "reaction effect":#reaction-effect repeatedly. In a transition reaction without a "guard condition":#guard-condition, however, @every@ behaves just like @after@, because the transition is taken after the specified intervall and the source state becomes passive anyway. However, if the transition has a "guard condition":#guard-condition, @after@ checks it only once, while @every@ checks it periodically according to the specified interval time. |
+{vertical-align: top}. | @always@ | Transition always fires; local reaction is always executed. (Watch out for what you are doing when using @always@ on a local reaction!) |
+{vertical-align: top}. | @oncycle@ | Same as @always@. |
+{vertical-align: top}. | @default@ | Transition always fires. Only meaningful with a "choice":#choice to define a transition to be taken when all other transitions of the choice cannot be taken. Not available on local reactions. |
+{vertical-align: top}. | @else@ | Same as @default@. |
+{vertical-align: top}. | @entry@ | State has just become active. Not available on transitions. |
+{vertical-align: top}. | @exit@ | State is about to become passive. Not available on transitions. |
+
+p. 
+
+Figure "&quot;Event specifications syntax overview&quot;":#fig_transition-syntax-overview shows where to put event specifications in a reaction trigger and how their syntax is defined.
+
+p(#fig_event-specifications-syntax-overview). 
+!(standard-image)images/docu_grammar_030_event-specification-overview.png(Event specifications syntax overview)!
+
+p=. Event specifications syntax overview
+
+h3(#guard-condition). Guard condition
+
+A _guard_ applies an additional condition for a "transition":#transition to fire or a "local reaction":#local-reactions to be executed. It is not sufficient for a specified event to occur, the guard condition must be fulfilled, too. It is written in square brackets following the "event specifications":#event-specifications. You can specify a guard condition without any event specification. In this case the behavior of the transition or the local reaction is as if the @always@ event had been specified. That is, the transition or local reaction are always executed, as long as the guard condition evaluates to _true_.
+
+The following examples assume the _x_ is an integer variable and _isOpen_ is an operation.
+
+|_. Transition specification: |_. Prerequisites for the transition to fire: |
+{vertical-align: top}. |{width: 37ex}  @ev [x == 3]@ | Event _ev_ occured and _x_ holds the value 3. |
+{vertical-align: top}. | @ev_1, ev_2 [x == 3]@ | At least one of the events _ev_1_ and _ev_2_ occured and _x_ holds the value 3. |
+{vertical-align: top}. | @after 3s, ev [x == 3 && isOpen(7)]@ | Three seconds have passed or event _ev_ occurred, whatever happens first. Additionally, _x_ holds the value 3 and _isOpen(7)_ returns _true_. |
+{vertical-align: top}. | @exit [isCanceled]@ | The active state is about to get passivated and the boolean variable _isCanceled_ is _true_. |
+
+p. 
+
+Please note that the guard condition applies to the whole event trigger, not just to the event specification left from it. That is, the guard condition must be fulfilled regardless of which of the events occured. You might think of the event specifications being enclosed in parentheses, like @(ev_1, ev_2) [x == 3]@, although it would be illegal to actually write these parentheses.
+
+It is not possible to have event-specific guards as in (the illegal) @ev_1 [x == 1], ev_2 [x == 2]@. If you need something like this, use multiple transitions or multiple local reactions with @ev_1 [x == 1]@ on one of them and @ev_2 [x == 2]@ on the other.
+
+Please consult figure "&quot;Guard condition syntax overview&quot;":#fig_guard-condition-syntax-overview to find out how a guard condition syntactically fits into a reaction trigger.
+
+p(#fig_guard-condition-syntax-overview). 
+!(standard-image)images/docu_grammar_030_guard-condition-overview.png(Guard condition syntax overview)!
+
+p=. Guard condition syntax overview
+
+h3(#reaction-effect). Reaction effect
+
+A transition specification may contain one or more _actions_ that are executed when the transition fires, like assigning a value to a variable, calling an operation, or raising an event. All actions taken together are called the transition's _reaction effect_.
+
+A local reaction always has a _reaction effect_ with at least one action.
+
+The reaction effect is written right from "event specifications":#event-specifications and "guard condition":#guard-condition. It is separated by a @/@ character from the former. Figure "&quot;Reaction effect syntax&quot;":#fig_reaction-effect-syntax shows the syntax definition.
+
+p(#fig_reaction-effect-syntax). 
+!(standard-image)images/docu_grammar_030_reaction-effect.png(Reaction effect syntax)!
+
+p=. Reaction effect syntax
+
+Example: When a transition or local reaction specified as @ev1 [x > 3] / x += 1; notify(x); raise ev2@ is executed, it increments variable _x_ by 1, calls the _notify_ operation with _x_ as parameter, and raises event _ev2_.
+
+h4. Raising and processing an event
+
+When a transition or local reaction raises an event, please consider two important points:
+* The event exists in the current run-to-completion step (RTC) only and thus can be dealt with during the rest of that particular RTC only.
+* Orthogonal regions are executed sequentially and in a deterministic order.
+
+This has remarkable consequences on where an event is "visible" and where it is not. Let's say we have a state machine at a certain point in time where _n_ orthogonal regions are active. The regions _r<sub>i</sub>_ have a defined execution order: _r<sub>1</sub>_ → _r<sub>2</sub>_ → … → _r<sub>n-1</sub>_ → _r<sub>n</sub>_.
+
+If an event _e_ is raised in region _r<sub>m</sub>_, then _e_ is available only in those regions that have not been processed yet, i.&nbsp;e. in _r<sub>i</sub>_ where _i_ > _m_ and _i_ ≤ _n_.
+
+ The following example illustrates this. When the state machine is started, the situation is as shown in figure "&quot;Raising an event (1)&quot;":#fig_raising-an-event_1: *A* and *X* in the parallel regions _r1_ and _r2_ are active states. Important: Region _r1_ is executed *before* _r2_.
+
+p(#fig_raising-an-event_1). 
+!(standard-image)images/docu_transition_010_raise_event_01.png(Raising an event 1)!
+
+p=. Raising an event (1)
+
+Now event _e1_ occurs. It triggers transition *A → B* in _r1_. This transition's effect @raise e2@ causes event _e2_ to be raised. This event triggers transition *X → Y* in _r2_ to fire _within the same RTC_.
+
+After that the situation is now as can be seen in figure "&quot;Raising an event (2)&quot;":#fig_raising-an-event_2: substates *B* and *Y* are now active states. However, the transition *B → C* will not be taken, because that would have to happen in another RTC. But by then the particular _e2_ instance raised by *A → B* will be long gone, since it was restricted to the RTC it has been raised in.
+
+p(#fig_raising-an-event_2). 
+!(standard-image)images/docu_transition_010_raise_event_02.png(Raising an event 2)!
+
+p=. Raising an event (2)
+
+Orthogonal regions within a state are always executed from left to right or from top to bottom, respectively. On the top level, where orthogonal regions can be graphically arranged at will, the execution order is defined by the statechart model's property _region priority_. To inspect or change it, open the _Properties_ view and select the statechart's definition section.
+
+The region priorities of the example above are shown in figure "&quot;Region priorities&quot;":#fig_region-priorities. Change the execution order and the example will behave differently than described.
+
+p(#fig_region-priorities). 
+!(standard-image)images/docu_regions_010_priorities_01.png(Region priorities)!
+
+p=. Region priorities
+
+Not being able to raise an event and process it in "earlier" regions is a restriction you can overcome using variables. The idea is to set a "communication variable" to a certain value in a region that is processed "later". During the next RTC the earlier region could act on the variables value.
 
 h3(#entry). Entry
 
@@ -58,7 +260,7 @@ When a state machine starts or when the control flow enters a "region":#region, 
 
 An entry has a single outgoing transistion and no incoming ones. Its outgoing transition has neither a trigger nor a guard condition.
 
-An entry is depicted as a filled circle, see "figure &quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
+An entry is depicted as a filled circle, see figure "&quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
 
 p(#fig_state_entry_exit_final_explained). 
 !(standard-image)images/docu_state_entry_exit_final_explained.png(Entry, exit, and final state)!
@@ -83,7 +285,7 @@ An incoming transition specifies a named entry to be used by the entry's _name_.
 
 Named entries have no equivalent in the UML.
 
-The sample statechart in "Figure &quot;Entry state&quot;":#fig_state_entry has a composite state named _Handle result_. This composite state has a default entry as well as an entry called _failure_. If state _A_ is active and the _error_ trigger fires, control is transitioned to the _Handle result_ composite state. The notation @error # >failure@ specifies that the _failure_ entry is to be used.
+The sample statechart in figure "&quot;Entry state&quot;":#fig_state_entry has a composite state named _Handle result_. This composite state has a default entry as well as an entry called _failure_. If state _A_ is active and the _error_ trigger fires, control is transitioned to the _Handle result_ composite state. The notation @error # >failure@ specifies that the _failure_ entry is to be used.
 
 p(#fig_state_entry). 
 !(standard-image)images/docu_state_entry.png(Entry state)!
@@ -92,15 +294,15 @@ p=. Entry state
 
 h3(#exit). Exit
 
-An _exit_ is a pseudo state that is used to leave and deactivate a composite state. Exits are counterpart to "entries":#entry. They are also known as exit points, exit states, or exit nodes. See "section &quot;Final state&quot;":#final for a different way to terminate a region or state machine.
+An _exit_ is a pseudo state that is used to leave and deactivate a composite state. Exits are counterpart to "entries":#entry. They are also known as exit points, exit states, or exit nodes. See section "&quot;Final state&quot;":#final for a different way to terminate a region or state machine.
 
 An exit may have multiple incoming transitions and has no outgoing one.
 
-An exit state is depicted as an unfilled circle with an X-shaped cross, see "figure &quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
+An exit state is depicted as an unfilled circle with an X-shaped cross, see figure "&quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
 
 Within a region, multiple exits are allowed. Each exit must either have a name that is unique within its region or be the _default exit_. The default exit is either unnamed or has the name @default@, which is semantically equivalent. A region may have at most one default exit.
 
-When a composite state reaches an exit in any of its regions, all states in other regions of that composite state, if any, are deactivated immediately. The composite state will be left and be deactivated. It maintains no status information that could be probed from the outside. In other words, reaching an exit in one of a composite state's regions has severe consequences for all the other regions since they are exited and disposed immediately. After that, the containing composite state is also exited. There must be an unguarded transition that catches the exit and leads to another state outside of the composite state. The semantics of exit is different from that of final state; please see "section &quot;Final state&quot;":#final for details.
+When a composite state reaches an exit in any of its regions, all states in other regions of that composite state, if any, are deactivated immediately. The composite state will be left and be deactivated. It maintains no status information that could be probed from the outside. In other words, reaching an exit in one of a composite state's regions has severe consequences for all the other regions since they are exited and disposed immediately. After that, the containing composite state is also exited. There must be an unguarded transition that catches the exit and leads to another state outside of the composite state. The semantics of exit is different from that of final state; please see section "&quot;Final state&quot;":#final for details.
 
 A transition that has a composite state as its source can specify which exits should trigger it. That is, different exits can lead to different behavior on the outside. A transition specifies the exits to react upon as a so-called _property_ which looks like this:
 
@@ -108,7 +310,7 @@ A transition that has a composite state as its source can specify which exits sh
 
 Exits have no equivalent in the UML.
 
-The sample statechart in "figure &quot;Entries and exits&quot;":#fig_state_entry_exit contains two composite states:
+The sample statechart in figure "&quot;Entries and exits&quot;":#fig_state_entry_exit contains two composite states:
 
 * The composite state _Process_ models a process with two passes (states) A and B. If both passes succeed, the composite state is left via the _no&#95;problem_ exit node. However, if an error occurs in either A or B the execution flow proceeds to the _problem_ exit point and leaves the composite state there.
 * The composite state _Handle result_ is intended to handle the processing result, be it success or failure. It has two entry points _success_ and _failure_.
@@ -131,15 +333,15 @@ p=. Entries and exits
 
 h3(#final). Final state
 
-A _final state_ denotes the end of the execution flow of a state machine or region. See "section &quot;Exit&quot;":#exit for a different way to terminate a composite state.
+A _final state_ denotes the end of the execution flow of a state machine or region. See section "&quot;Exit&quot;":#exit for a different way to terminate a composite state.
 
-A final state is depicted as an unfilled circle with a smaller filled black circle inside, see "figure &quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
+A final state is depicted as an unfilled circle with a smaller filled black circle inside, see figure "&quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
 
 A final state can have multiple incoming transitions and has no outgoing ones.
 
 Within a region, only a single final state is allowed, but each region may have its own final state.
 
-When a region reaches its final state, control stops there and waits until all other orthogonal regions, if any, have reached their respective final states, too. The semantics of final states is different from that of exits; please see "section &quot;Exit&quot;":#exit for details.
+When a region reaches its final state, control stops there and waits until all other orthogonal regions, if any, have reached their respective final states, too. The semantics of final states is different from that of exits; please see section "&quot;Exit&quot;":#exit for details.
 
 bq.. *Note*
 
@@ -158,7 +360,7 @@ Synchronization is a means to either split a flow into several parallel regions 
 
 Whether a synchronization state behaves as a fork or as a join depends on its usage.
 
-* A synchronization with a single incoming transition and several outgoing ones _forks_ the flow into several regions of the same substate. These regions are executed in parallel, see "section &quot;Orthogonal states&quot;":#orthogonal-states.
+* A synchronization with a single incoming transition and several outgoing ones _forks_ the flow into several regions of the same substate. These regions are executed in parallel, see section "&quot;Orthogonal states&quot;":#orthogonal-states.
 * A synchronization with several incoming transitions from parallel regions of the same substate and a single outgoing transition _joins_ the incoming flows into a single flow of execution.
 
 A synchronization state is shown as a thick horizontal or vertical line, as can be seen in figure "Synchronization state":#fig_state_synchronization.
@@ -175,7 +377,7 @@ For a synchronization to actually join the incoming transitions and execute the 
 * All guard conditions that are specified must be fulfilled.
 * If one or more triggers are defined, at least one trigger must fire at a point in time while the conditions above are met.
 
-"Figure &quot;Synchronization state&quot;":#fig_state_synchronization shows a sample statechart containing a forking and a joining synchronization. After having left the @Initialize@ state, the synchronization state forks the execution flow into two regions @r1@ and @r2@. Both are part of the @Process@ composite state and both are executed in parallel. That is, when activating @Process@, the substates @Line A 1@ and @Line B 1@ also become active. When the flows continues and both @Line A 2@ and @Line B 2@ have been reached, the synchronization state on the right-hand side joins the flows and transitions to substates @Cleanup@, making it the active state. However, as long as only one of them is active, the synchronization will wait for the other one to also become active before proceeding to @Process@.
+Figure "&quot;Synchronization state&quot;":#fig_state_synchronization shows a sample statechart containing a forking and a joining synchronization. After having left the @Initialize@ state, the synchronization state forks the execution flow into two regions @r1@ and @r2@. Both are part of the @Process@ composite state and both are executed in parallel. That is, when activating @Process@, the substates @Line A 1@ and @Line B 1@ also become active. When the flows continues and both @Line A 2@ and @Line B 2@ have been reached, the synchronization state on the right-hand side joins the flows and transitions to substates @Cleanup@, making it the active state. However, as long as only one of them is active, the synchronization will wait for the other one to also become active before proceeding to @Process@.
 
 The example also demonstrates different lengths and orientations of the synchronization symbol. In the statechart editor, first select the synchronization symbol, the use a handle in one of the symbol's corners to change length or orientation. The handles in the middle of the symbol have no effect.
 
@@ -421,6 +623,8 @@ bc. const variable1: real
 
 h3(#events). Events
 
+An _event_ is something of importance that happens at a certain point in time in the context of a state machine, for example a user pushes a button, a temperature sensor delivers a value, a period of time has passed, etc. An event is not necessarily something external; the state machine can raise events itself.
+
 h4(#incoming-and-outgoing-events). Incoming and outgoing events
 
 An event in an interface scope has a direction. It is either ingoing or outgoing:
@@ -470,7 +674,7 @@ bc. operation localOperation (xValue : integer, yValue : integer):integer
 ==<!-- End stext_keyword_operation -->==
 
 
-h3(#local-reactions). Local reactions
+h3(#declaration-local-reactions). Local reactions
 
 Local reactions describe the internal behavior of a state. So they have internal scope. A local reaction is declared as follows:
 
@@ -627,3 +831,52 @@ bc. myBool = active(StateA)
 ==<!-- End stext_keyword_ -->==
 
 
+h2(#complete-statechart-language-grammar). Complete statechart language grammar
+
+This section presents the complete grammar of the statechart language. If you are in doubt how to write down a transition specification, a variable declaration, or any other syntactical construct of the statechart language, this is your definite reference that clarifies all syntactical questions.
+
+The grammar is visualized using "railroad diagrams":https://en.wikipedia.org/wiki/Syntax_diagram. Railroad diagrams are easy to read and comprise all syntactically valid language constructs. Figure "&quot;Railroad diagrams explained&quot;":#fig-railroad-diagrams-explained shows an example:
+
+p(#fig-railroad-diagrams-explained). 
+
+!(standard-image)images/docu_grammar_020_simpleelementreferenceexpression.png(Railroad diagrams explained)!
+
+p=. Railroad diagrams explained
+
+On the left-hand side you'll find the so-called "_non-terminal symbol_":https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols (or _non-terminal_ for short) that is being defined by this particular diagram. Here the non-terminal is _SimpleElementReferenceExpression_. To find out what a _SimpleElementReferenceExpression_ is allowed to look like, follow the "railroad track" just like a train would do. At each junction, the train either keeps its direction or changes it by 45 degrees, but it cannot make sharp turns of 90 degrees or more.
+
+On its way, the train passes several "stations". Each station represents a language element that is valid at this point. In our example, the first station is a rectangle with a grey background. The grey background denotes a non-terminal, and the word inside the rectangle is the non-terminal's name, here: _ID_. You will have to look up this particular non-terminal's railroad diagram to learn more about it. However, for simplicity and because their meanings are more or less obvious a few non-terminals are not refined further. Examples are _STRING_, _INT_, _BOOL_, or _ID_.
+
+In a _SimpleElementReferenceExpression_, a valid ID – a name – is always the first element, e.&nbsp;g. @init42@. If the train turns right at the junction, it moves directly to the railroad diagram's exit. That means just an _ID_ like @init42@ is a valid _SimpleElementReferenceExpression_. Please note that when the train reaches the junction right before the exit, it cannot turn left, because trains don't move that way. That is, the train is unable to travel to the @(@ station from this direction.
+
+The train can reach the @)@ from the opposite direction only. After having left the initial _ID_ station, the train can move to the left at the junction and then run a stretch touching only the @(@ and @)@ stations, in that order. These rectangles have a white background color, denoting a "_terminal symbol_":https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols or _terminal_ for short. A terminal stands for itself; write it down as it is.
+
+Following that rule, @init42()@ is a valid _SimpleElementReferenceExpression_. One or more _Expressions_ inside the paranthesis, separated by the @,@ terminal, are also valid. Example: @init42(foo, bar + 27)@.
+
+bq.. *Please note:*
+
+The railroad diagrams themselves are generated from a textual grammar representation established and maintained with "Xtext":https://eclipse.org/Xtext/. If you suspect the diagrams shown here are lagging behind the actual implementation, look for files with the @.xtext@ extension in the YAKINDU Statechart Tools source code distribution!
+
+bq.. *Please also note:*
+
+Not each and every construction that is syntactically allowed does make sense semantically. The statechart editor will flag such constructions as errors.
+
+h3(#statechart-grammar). Statechart grammar
+
+Figure "&quot;Statechart grammar&quot;":#fig-statechart-grammar shows the statechart grammar. It makes use of the "expressions grammar":#expressions-grammar.
+
+p(#fig-statechart-grammar). 
+
+!(standard-image)images/docu_grammar_010_stext.png(Statechart grammar)!
+
+p=. Statechart grammar
+
+h3(#expressions-grammar). Expressions grammar
+
+Figure "&quot;Expressions grammar&quot;":#fig-expressions-grammar shows the expressions grammar. It is used by the "statechart grammar":#statechart-grammar.
+
+p(#fig-expressions-grammar). 
+
+!(standard-image)images/docu_grammar_010_expressions.png(Expressions grammar)!
+
+p=. Expressions grammar

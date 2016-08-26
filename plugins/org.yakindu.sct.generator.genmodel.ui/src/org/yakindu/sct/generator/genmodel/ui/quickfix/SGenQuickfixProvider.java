@@ -26,7 +26,8 @@ import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
-import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
+import org.yakindu.sct.generator.core.library.IDefaultFeatureValueProvider;
+import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
 import org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureType;
@@ -42,15 +43,11 @@ import org.yakindu.sct.model.sgen.GeneratorModel;
 public class SGenQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(SGenJavaValidator.CODE_REQUIRED_FEATURE)
-	public void AddRequiredFeature(final Issue issue,
-			IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Add feature " + issue.getData()[0],
-				"Adds the feature " + issue.getData()[0], null,
+	public void AddRequiredFeature(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Add feature " + issue.getData()[0], "Adds the feature " + issue.getData()[0], null,
 				new ISemanticModification() {
-					public void apply(EObject element,
-							IModificationContext context) throws Exception {
-						FeatureConfiguration config = getDefaultFeatureConfiguration(
-								issue, element);
+					public void apply(EObject element, IModificationContext context) throws Exception {
+						FeatureConfiguration config = getDefaultFeatureConfiguration(issue, element);
 						if (config != null) {
 							GeneratorEntry entry = (GeneratorEntry) element;
 							entry.getFeatures().add(config);
@@ -59,30 +56,25 @@ public class SGenQuickfixProvider extends DefaultQuickfixProvider {
 				});
 	}
 
-	private FeatureConfiguration getDefaultFeatureConfiguration(
-			final Issue issue, EObject element) {
-		GeneratorModel model = (GeneratorModel) EcoreUtil2
-				.getRootContainer(element);
-		
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptor(model.getGeneratorId());
-		
+	private FeatureConfiguration getDefaultFeatureConfiguration(final Issue issue, EObject element) {
+		GeneratorModel model = (GeneratorModel) EcoreUtil2.getRootContainer(element);
+
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(model.getGeneratorId());
+
 		Iterable<ILibraryDescriptor> libraryDescriptor = LibraryExtensions
 				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
 		for (ILibraryDescriptor desc : libraryDescriptor) {
 			ResourceSet set = new ResourceSetImpl();
 			Resource resource = set.getResource(desc.getURI(), true);
-			FeatureTypeLibrary lib = (FeatureTypeLibrary) resource
-					.getContents().get(0);
+			FeatureTypeLibrary lib = (FeatureTypeLibrary) resource.getContents().get(0);
 			EList<FeatureType> types = lib.getTypes();
 
 			for (FeatureType featureType : types) {
 				if (featureType.getName().equals(issue.getData()[0])) {
-					IDefaultFeatureValueProvider valueProvider = desc.createFeatureValueProvider();
-					if(valueProvider != null){
-						return valueProvider
-								.createDefaultFeatureConfiguration(featureType,
-										element);
+					IDefaultFeatureValueProvider valueProvider = desc.createFeatureValueProvider(SGenActivator
+							.getInstance().getInjector(SGenActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN));
+					if (valueProvider != null) {
+						return valueProvider.createDefaultFeatureConfiguration(featureType, element);
 					}
 				}
 			}
