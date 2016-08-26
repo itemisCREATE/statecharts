@@ -300,26 +300,21 @@ class GeneratorProjectTemplate {
 		 org.apache.log4j;resolution:=optional,
 		 com.ibm.icu,
 		 org.antlr.runtime,
-		 org.eclipse.core.runtime",
-		 org.eclipse.emf.mwe.utils",
-		 org.eclipse.emf.ecore.xmi",
-		 org.eclipse.jface.text",
+		 org.eclipse.core.runtime,
+		 org.eclipse.emf.mwe.utils,
+		 org.eclipse.emf.ecore.xmi,
+		 org.eclipse.jface.text,
 		«IF data.generatorType == GeneratorType::Xtend»
 			«' '»org.eclipse.xtend;bundle-version="0.7.0",
 			«' '»org.eclipse.xtend.typesystem.emf;bundle-version="0.7.0",
-			«' '»org.eclipse.xtend.profiler;resolution:=optional,
-		«ENDIF»
-		«IF data.generatorType == GeneratorType::Xtend»
 			«' '»org.eclipse.xtext.xbase.lib,
 			«' '»org.eclipse.xtend.lib,
 		«ENDIF»
-		«IF data.pluginExport»
-			«' '»org.yakindu.sct.generator.core",
-		«ENDIF»
-		 org.yakindu.sct.model.sgen",
-		 org.yakindu.sct.model.sexec",
-		 org.yakindu.sct.model.stext",
-		 org.yakindu.sct.model.sgraph"
+		 org.yakindu.sct.generator.core,
+		 org.yakindu.sct.model.sgen,
+		 org.yakindu.sct.model.sexec,
+		 org.yakindu.sct.model.stext,
+		 org.yakindu.sct.model.sgraph
 		Bundle-RequiredExecutionEnvironment: J2SE-1.7
 	'''
 	
@@ -364,11 +359,10 @@ class GeneratorProjectTemplate {
 	def javaGenerator(ProjectData data) '''
 		package «data.generatorClass.packageName»;
 
-		import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator;
 		import org.yakindu.sct.model.sexec.ExecutionFlow;
 		import org.yakindu.sct.model.sexec.ExecutionState;
 		import org.yakindu.sct.model.sgen.GeneratorEntry;
-		import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator;
+		import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 		import org.eclipse.xtext.generator.IFileSystemAccess;
 		
 		public class «data.generatorClass.simpleName» implements IExecutionFlowGenerator{
@@ -396,8 +390,7 @@ class GeneratorProjectTemplate {
 		import org.yakindu.sct.model.sgen.GeneratorEntry
 		import org.yakindu.sct.model.sexec.ExecutionFlow
 		import org.yakindu.sct.model.sexec.ExecutionState
-		import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator
-		import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
+		import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 		import org.eclipse.xtext.generator.IFileSystemAccess
 		
 		class «data.generatorClass.simpleName» implements IExecutionFlowGenerator {
