@@ -173,16 +173,6 @@ class ShortString {
 		removeIndex(cheapestOperation_index);
 	}
 	
-	def public int simulateRemoveCheapestChar()
-	{
-		var current_cost = getCutCost();
-		removeCheapestChar();
-		var cost_difference = getCutCost() - current_cost;
-		
-		rollback();
-		
-		return cost_difference;
-	}
 	
 	def public float getCutRatio()
 	{

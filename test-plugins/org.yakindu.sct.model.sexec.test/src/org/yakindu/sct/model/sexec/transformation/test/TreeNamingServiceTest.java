@@ -92,7 +92,7 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 //			statechartNamingService.setMaxLength(0);
 //			statechartNamingService.setSeparator('_');
 			
-			executionflowNamingService.setMaxLength(0);
+			executionflowNamingService.setMaxLength(15);
 			executionflowNamingService.setSeparator('_');
 			
 			// Initialize naming services for statechart and ExecutionFlow
