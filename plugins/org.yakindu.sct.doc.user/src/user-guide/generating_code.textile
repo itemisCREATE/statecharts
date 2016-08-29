@@ -2121,7 +2121,6 @@ The *Generator* feature allows to configure a custom code generator located in t
 
 # _generatorProject_ (String, required): the name of the generator project
 # _generatorClass_ (String, required): the fully-qualified name of the code generator class
-# _configurationModule_ (String, optional): the fully-qualified class name of a Guice module to configure the code generator
 
 bc. feature Generator {
     generatorProject = "org.yakindu.sct.mygenerator"
