@@ -13,6 +13,8 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
+import org.eclipse.xtext.ui.LanguageSpecific;
+import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
@@ -26,6 +28,7 @@ import org.yakindu.sct.model.sgraph.ui.validation.SCTDiagnosticConverterImpl;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerTypeProvider;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
+import org.yakindu.sct.ui.editor.editor.SCTFileEditorOpener;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -64,6 +67,7 @@ public class SCTExecutableExtensionFactory extends AbstractGuiceAwareExecutableE
 				binder.bind(MarkerCreator.class).to(SCTMarkerCreator.class);
 				binder.bind(MarkerTypeProvider.class).to(SCTMarkerTypeProvider.class);
 				binder.bind(IDiagnosticConverter.class).to(SCTDiagnosticConverterImpl.class);
+				binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(SCTFileEditorOpener.class);
 			}
 		});
 	}
