@@ -17,17 +17,18 @@ Now try this for yourself. We are assuming that you have already installed and s
 
 # If the "Welcome" page is still open, close it. <p>!(standard-image small)images/tuto_5min_010_close_welcome.png(Closing the "Welcome" page)!</p>
 # In the main menu, select _File → New → Example…_.
-# In the dialog, select _YAKINDU SCT Examples → Light Switch Example_, then click _Next >_.
-# In the next dialog, click _Finish_. The sample project named _light_switch_ is created.
-# In the project explorer on the left-hand side of the window, open the _light_switch_ project by clicking on the small triangle left from the project name ("light_switch"). <p>!(standard-image small)images/tuto_5min_020_expand_project.png(Expand project)!</p>
-# The light switch statechart is defined in _LightSwitch.sct_. Double click on this file to open the model.
+# In the dialog, select _YAKINDU SCT Examples_, then click _Next >_.
+# The example wizard opens. If needed, follow the instructions to download the examples repository.
+# On the left-hand side of the example wizard, select _basic → Light Switch_, then click _Finish_.
+# The sample project named _light_switch_ is created.
+# In the project explorer on the left-hand side of the window, open the _light_switch_ project by clicking on the small triangle left from the project name ("light_switch"). Also open the _model_ folder.<p>!(standard-image small)images/tuto_5min_020_expand_project.png(Expand project)!</p>
+# The light switch statechart is defined in the file _light_switch.sct_. Double-click on this file to open the model.
 
 h2(#oss_running-the-light-switch-simulation). Simulating the light switch
 
-# Right-click on _LightSwitch.sct_ and select _Run As → Statechart Simulation_ in the context menu.
+# Right-click on _light_switch.sct_ and select _Run As → Statechart Simulation_ in the context menu.
 # The statechart simulation starts and shows the light switch model in its _off_ state. The rectangle named *Off* is highlighted in red, meaning it is the active state. <p>!(standard-image)images/tuto_light_switch_320_statechart_simulator_state_events.png(Light switch simulation in "off" state)!</p>
-# At the right-bottom side of the window, the simulation view is located. In this view, you can change variable values and raise events during a simulation run. Click on the small triangle left from _internal_
- to unfold the _operate_ link. This link represents the _operate_ event to switch the light on or off.
+# At the right-bottom side of the window, the simulation view is located. In this view, you can change variable values and raise events during a simulation run. Click on the small triangle left from _internal_ to unfold the _operate_ link. This link represents the _operate_ event to switch the light on or off.
 # Click on the _operate_ link. The active state changes accordingly from *Off* to *On*. <p>!(standard-image)images/tuto_light_switch_330_statechart_simulator_state_on.png(Light switch simulation in "on" state)!</p>
 # Click on _operate_ again to switch off the light.
 
@@ -37,9 +38,9 @@ You have developed and tested your statechart model, and now you need it as a C,
 
 As an example, we will take the light switch statechart and generate Java source code from it. Please proceed as follows:
 
-# In the project explorer, right-click on _LightSwitch.sct_ and select _New → Code Generator Model_ in the context menu. <p>!(standard-image)images/tuto_5min_110_new_code_generator_model.png(Creating a new code generator model)!</p>
+# In the project explorer, right-click on _light_switch.sct_ and select _New → Code Generator Model_ in the context menu. <p>!(standard-image)images/tuto_5min_110_new_code_generator_model.png(Creating a new code generator model)!</p>
 # In the dialog, replace @default.sgen@ by @light_switch.sgen@, then click _Next >_.
-# In the next dialog, check the checkbox left from _LightSwitch.sct_, then click _Finish_.
+# In the next dialog, check the checkbox left from _light_switch.sct_, then click _Finish_.
 # Java classes implementing the statechart model are generated. You can find the generated source code in the folders _src_ and _src-gen_ within the _light_switch_ project. <p>!(standard-image)images/tuto_5min_140_generated_java_source_code.png(Generated Java source code)!</p>
 
 That's it. If you want to know more, take the time and work through the "Comprehensive Tutorial":#oss_comprehensive-tutorial.
