@@ -21,27 +21,13 @@ public class ShortStringTest {
 	}
 	
 	@Test
-	public void vocalsTest()
-	{
-		shortstr = new ShortString("YakinduStatechartTools");
-		
-		shortstr.removeVocals();
-		
-		assertEquals("YkndSttchrtTls", shortstr.getShortenedString());
-		
-		shortstr = new ShortString("ATest");
-		
-		shortstr.removeVocals();
-		
-		assertEquals("ATst", shortstr.getShortenedString());
-	}
-	
-	@Test
 	public void resetTest()
 	{
 		shortstr = new ShortString("Yakindu");
 		
-		shortstr.removeVocals();
+		shortstr.removeIndex(1);
+		shortstr.removeIndex(3);
+		shortstr.removeIndex(6);
 		
 		assertEquals("Yknd", shortstr.getShortenedString());
 		
@@ -55,13 +41,11 @@ public class ShortStringTest {
 	{
 		shortstr = new ShortString("Yakindu_StatechartTools");
 		
-		shortstr.removeUnderscores();
-		
-		shortstr.removeVocals();
+		shortstr.removeIndex(0);
 		
 		shortstr.rollback();
 		
-		assertEquals("YakinduStatechartTools", shortstr.getShortenedString());
+		assertEquals("Yakindu_StatechartTools", shortstr.getShortenedString());
 	}
 	
 	@Test
@@ -110,19 +94,13 @@ public class ShortStringTest {
 	public void cutRatioTest1()
 	{
 		shortstr = new ShortString("ababababab");
-		shortstr.removeVocals();
+		shortstr.removeIndex(0);
+		shortstr.removeIndex(2);
+		shortstr.removeIndex(4);
+		shortstr.removeIndex(6);
+		shortstr.removeIndex(8);
 		
 		assertEquals(0.5, shortstr.getCutRatio(), 0.01);
-	}
-	
-	@Test
-	public void underscoreTest()
-	{
-		shortstr = new ShortString("main_region_State_B");
-		
-		shortstr.removeUnderscores();
-		
-		assertEquals("mainregionStateB", shortstr.getShortenedString());
 	}
 	
 	@Test
@@ -130,7 +108,14 @@ public class ShortStringTest {
 	{
 		shortstr = new ShortString("YakinduStatechartTools");
 		
-		shortstr.removeVocals();
+		shortstr.removeIndex(1); //a
+		shortstr.removeIndex(3); //i
+		shortstr.removeIndex(6); //u
+		shortstr.removeIndex(9); //a
+		shortstr.removeIndex(11); //e
+		shortstr.removeIndex(14); // a
+		shortstr.removeIndex(18); // o
+		shortstr.removeIndex(19); // o
 		
 		int expectedCost = 8 * ShortString.cost_lowercase_vocals * shortstr.getCutCostFactor();
 		
@@ -142,7 +127,7 @@ public class ShortStringTest {
 	{
 		shortstr = new ShortString("all");
 		
-		shortstr.removeVocals();
+		shortstr.removeIndex(0);
 		
 		int expectedCost = (
 				1 * ShortString.cost_firstLetter +

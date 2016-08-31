@@ -135,26 +135,6 @@ class ShortString {
 		return cost;
 	}
 	
-	def public removeVocals()
-	{
-		saveCurrentToPrevious();
-		for(var i=0; i<size; i++) {
-			if(isLowercaseVocal(i)) {
-				cutArray.set(i, 0);
-			}
-		}
-	}
-	
-	def public removeUnderscores()
-	{
-		saveCurrentToPrevious();
-		for(var i=0; i<size; i++) {
-			if(originalString.charAt(i).toString() == "_") {
-				cutArray.set(i, 0);
-			}
-		}
-	}
-	
 	def public removeCheapestChar()
 	{
 		// saveCurrentToPrevious(); - done in removeIndex(i);
