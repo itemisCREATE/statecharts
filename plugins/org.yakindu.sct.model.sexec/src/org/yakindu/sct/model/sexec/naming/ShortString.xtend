@@ -94,7 +94,7 @@ class ShortString {
 	def public int getCutCost()
 	{
 		if(1.0 - getCutRatio() < 0.001) {
-			return 10000;
+			return Integer.MAX_VALUE;
 		}
 		var cost = 0;
 		
