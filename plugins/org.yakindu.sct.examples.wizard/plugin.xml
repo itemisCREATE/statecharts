@@ -38,4 +38,10 @@
               class="org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceInitializer">
       </initializer>
    </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="org.yakindu.sct.examples.wizard.drop.ExampleDropSupportRegistrar">
+      </startup>
+   </extension>
 </plugin>

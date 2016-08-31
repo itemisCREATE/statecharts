@@ -45,7 +45,11 @@ public class ExampleWizard extends Wizard implements INewWizard, ExampleWizardCo
 		setWindowTitle(WINDOW_TITLE);
 		setNeedsProgressMonitor(true);
 		Guice.createInjector(new ExampleWizardModule()).injectMembers(this);
-
+	}
+	
+	public ExampleWizard(String exampleId) {
+		this();
+		page.setInstallExampleId(exampleId);
 	}
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {

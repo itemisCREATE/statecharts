@@ -26,6 +26,8 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
@@ -47,6 +49,8 @@ import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
 import org.yakindu.sct.examples.wizard.service.IExampleService;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -57,7 +61,11 @@ import com.google.inject.Inject;
  */
 
 public class SelectExamplePage extends WizardPage
-		implements ExampleWizardConstants, ISelectionChangedListener, SelectionListener, IPropertyChangeListener {
+		implements
+			ExampleWizardConstants,
+			ISelectionChangedListener,
+			SelectionListener,
+			IPropertyChangeListener {
 
 	@Inject
 	private IExampleService exampleService;
@@ -65,6 +73,9 @@ public class SelectExamplePage extends WizardPage
 	private ExampleData selection;
 	private Browser browser;
 	private MessageArea messageArea;
+
+	/** ID of example to be installed */
+	private String exampleIdToInstall;
 
 	public SelectExamplePage() {
 		super(SELECT_PAGE_TITLE);
@@ -91,7 +102,7 @@ public class SelectExamplePage extends WizardPage
 		container.setLayout(layout);
 		createTreeViewer(container);
 		createDetailsPane(container);
-		container.setWeights(new int[] { 1, 2 });
+		container.setWeights(new int[]{1, 2});
 		setControl(container);
 	}
 
@@ -149,7 +160,14 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	private void init(final IProgressMonitor monitor) {
-		if (!exampleService.exists()) {
+		if (exampleIdToInstall != null) {
+			Display.getDefault().syncExec(new Runnable() {
+				@Override
+				public void run() {
+					revealExamples();
+				}
+			});
+		} else if (!exampleService.exists()) {
 			Display.getDefault().syncExec(new Runnable() {
 				@Override
 				public void run() {
@@ -178,12 +196,41 @@ public class SelectExamplePage extends WizardPage
 
 	protected void setInput(final IProgressMonitor monitor) {
 		final List<ExampleData> input = exampleService.getExamples(new NullProgressMonitor());
-		
+
 		messageArea.hide();
 		viewer.setInput(input);
 		viewer.expandAll();
 		// explicit layouting required for Unix systems
 		viewer.getControl().getParent().getParent().layout(true);
+
+		filterAndSelectExampleToInstall(viewer, input);
+	}
+
+	protected void filterAndSelectExampleToInstall(TreeViewer viewer, List<ExampleData> input) {
+		ExampleData exampleToInstall = Iterables.find(input, new Predicate<ExampleData>() {
+			@Override
+			public boolean apply(ExampleData input) {
+				if (exampleIdToInstall != null) {
+					return exampleIdToInstall.equals(input.getId());
+				}
+				return true;
+			}
+
+		});
+		if (exampleToInstall != null) {
+			viewer.addFilter(new ViewerFilter() {
+
+				@Override
+				public boolean select(Viewer viewer, Object parentElement, Object element) {
+					if (element instanceof ExampleData && exampleIdToInstall != null) {
+						ExampleData exampleData = (ExampleData) element;
+						return exampleIdToInstall.equals(exampleData.getId());
+					}
+					return true;
+				}
+			});
+			viewer.setSelection(new StructuredSelection(exampleToInstall), true);
+		}
 	}
 
 	protected void createTreeViewer(Composite container) {
@@ -227,6 +274,10 @@ public class SelectExamplePage extends WizardPage
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
+		revealExamples();
+	}
+
+	protected void revealExamples() {
 		try {
 			getWizard().getContainer().run(true, true, new IRunnableWithProgress() {
 				@Override
@@ -248,13 +299,11 @@ public class SelectExamplePage extends WizardPage
 		} catch (InvocationTargetException | InterruptedException e1) {
 			e1.printStackTrace();
 		}
-
 	}
 
 	@Override
 	public void widgetDefaultSelected(SelectionEvent e) {
 		widgetSelected(e);
-
 	}
 
 	@Override
@@ -262,6 +311,10 @@ public class SelectExamplePage extends WizardPage
 		if (ExamplesPreferenceConstants.STORAGE_LOCATION.equals(event.getProperty())) {
 			initAsync();
 		}
+	}
+
+	public void setInstallExampleId(String exampleId) {
+		this.exampleIdToInstall = exampleId;
 	}
 
 }
