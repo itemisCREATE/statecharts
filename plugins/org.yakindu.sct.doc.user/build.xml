@@ -183,8 +183,8 @@
                 </fileset>
             </replaceregexp>
 
-            <!-- Add CSS class "eclipsehelp" to BODY element -->
-            <replaceregexp byline="true" match='&lt;body&gt;' replace='&lt;body class="eclipsehelp"&gt;'>
+            <!-- Add CSS classes "eclipsehelp" and "body-container" to BODY element -->
+            <replaceregexp byline="true" match='&lt;body&gt;' replace='&lt;body class="eclipsehelp body-container"&gt;'>
                 <fileset dir="${help.dir}">
                     <include name="**/*.html" />
                 </fileset>
