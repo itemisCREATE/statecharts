@@ -205,6 +205,97 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 		}
 	}
 	
+	@Test
+	public void statechartTest1()
+	{
+		Statechart toTest = getNamingServiceStatechart();
+		
+		List<String> names = new ArrayList<String>();
+		
+		List<String> expectedNames = new ArrayList<String>(Arrays.asList(
+						"StateA",
+						"StateB",
+						"second_region_StateA",
+						"third_region_StateA",
+						"AnotherRegion_StateA",
+						"AnotherRegion_StateB",
+						"StateA_AnotherRegion_StateA",
+						"StateA_AnotherRegion_StateB"
+						));
+		
+		ExecutionFlow flow = optimizer.transform(sequencer.transform(toTest));
+		
+		executionflowNamingService.setMaxLength(0);
+		executionflowNamingService.setSeparator('_');
+		executionflowNamingService.initializeNamingService(flow);
+
+		statechartNamingService.setMaxLength(0);
+		statechartNamingService.setSeparator('_');
+		statechartNamingService.initializeNamingService(toTest);
+		
+		for(ExecutionState state : flow.getStates())
+		{
+			String name = executionflowNamingService.getShortName(state);
+			assertEquals(names.contains(name), false);
+			assertEquals(name, statechartNamingService.getShortName(state));
+			names.add(name);
+		}
+		
+		stringListsEqual(expectedNames, names);
+	}
+	
+	@Test
+	public void statechartTest2()
+	{
+		Statechart toTest = getNamingServiceStatechart();
+		
+		List<String> names = new ArrayList<String>();
+		
+		// these names are shorter than 15 characters because there are more elements containing these names, e.g. state actions
+		List<String> expectedNames = new ArrayList<String>(Arrays.asList(
+					"StateA",
+					"StateB",
+					"srgn_StateA",
+					"trgn_SA",
+					"ARgn_SttA", 
+					"ARgn_SttB",
+					"SA_ARn_SA", 
+					"SA_ARn_StB" 
+						));
+		
+		ExecutionFlow flow = optimizer.transform(sequencer.transform(toTest));
+		
+		executionflowNamingService.setMaxLength(15);
+		executionflowNamingService.setSeparator('_');
+		
+		executionflowNamingService.initializeNamingService(flow);
+		
+		for(ExecutionState state : flow.getStates())
+		{
+			String name = executionflowNamingService.getShortName(state);
+			assertEquals(names.contains(name), false);
+			names.add(name);
+		}
+		
+		stringListsEqual(expectedNames, names);
+	}
+	
+	private Statechart getNamingServiceStatechart()
+	{
+		Statechart toTest = null;
+		
+		for(Statechart statechart : statecharts)
+		{
+			if(statechart.getName().equals("namingTest")) {
+				toTest = statechart;
+			}
+		}
+		
+		assertEquals(true, toTest != null);
+		
+		return toTest;
+	}
+	
 	private void nameLengthTest(int maxLength)
 	{
 		int num_statecharts = statecharts.size();
