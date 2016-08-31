@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -27,6 +26,9 @@ import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesFactory;
+
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
 
 /**
  * Abstract base implementation if {@link ITypeSystem}. Provides convenience
@@ -38,7 +40,7 @@ import org.yakindu.base.types.TypesFactory;
 public abstract class AbstractTypeSystem implements ITypeSystem {
 
 	protected Map<String, Type> typeRegistry = new HashMap<String, Type>();
-	protected Map<Type, Type> extendsRegistry = new HashMap<Type, Type>();
+	protected ListMultimap<Type, Type> extendsRegistry = ArrayListMultimap.create();
 	protected Map<Type, Type> conversionRegistry = new HashMap<Type, Type>();
 
 	protected abstract void initBuiltInTypes();
@@ -66,8 +68,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 
 	public List<Type> getSuperTypes(Type type) {
 		List<Type> superTypes = new ArrayList<Type>();
-		Set<Entry<Type, Type>> entrySet = extendsRegistry.entrySet();
-		for (Entry<Type, Type> entry : entrySet) {
+		for (Entry<Type, Type> entry : extendsRegistry.entries()) {
 			if (isSame(type, entry.getKey())) {
 				superTypes.add(entry.getValue());
 			}
@@ -130,7 +131,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	public void removeType(String name) {
 		Type type = typeRegistry.get(name);
 		if (type != null) {
-			extendsRegistry.remove(type);
+			extendsRegistry.removeAll(type);
 			resource.getContents().remove(type);
 			typeRegistry.remove(type);
 		}
