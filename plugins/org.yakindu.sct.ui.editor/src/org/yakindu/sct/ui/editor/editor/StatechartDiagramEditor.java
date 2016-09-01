@@ -77,7 +77,7 @@ import com.google.inject.Key;
 @SuppressWarnings("restriction")
 public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker {
 
-	private static final Font INVALID_DOMAIN_FONT = new Font(null, new FontData("Verdana", 10, SWT.NORMAL));
+	private static final Font INVALID_DOMAIN_FONT = new Font(null, new FontData("Verdana", 10, SWT.BOLD));
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 	private static final int DELAY = 200; // ms
 
@@ -156,7 +156,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		label.setBackground(ColorConstants.white);
 		label.setForeground(ColorConstants.red);
 		label.setImage(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJS_ERROR_TSK));
-		label.setText(domainStatus.getMessage());
+		label.setText(domainStatus.getMessage() + " - editor is in readonly mode.");
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
 		parent.pack(true);
 	}
