@@ -49,7 +49,7 @@ import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.xtext.utils.gmf.resource.DirtyStateListener;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainStatus;
-import org.yakindu.sct.domain.extension.DomainStatus.Status;
+import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
@@ -120,7 +120,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		EObject element = getDiagram().getElement();
 		if (element instanceof DomainElement) {
 			DomainStatus domainStatus = DomainRegistry.getDomainStatus(((DomainElement) element).getDomainID());
-			if (domainStatus.getStatus() != Status.OK)
+			if (domainStatus.getSeverity() != Severity.OK)
 				return false;
 		}
 		return super.isEditable();

@@ -59,7 +59,7 @@ public class StatechartDiagramEditPart extends DiagramEditPart implements IDiagr
 		final DomainElement domainElement = EcoreUtil2.getContainerOfType(resolveSemanticElement(),
 				DomainElement.class);
 		DomainStatus domainStatus = DomainRegistry.getDomainStatus(domainElement.getDomainID());
-		if (domainStatus.getStatus() != DomainStatus.Status.OK) {
+		if (domainStatus.getSeverity() != DomainStatus.Severity.OK) {
 			disableEditor(domainStatus.getMessage());
 		}
 	}

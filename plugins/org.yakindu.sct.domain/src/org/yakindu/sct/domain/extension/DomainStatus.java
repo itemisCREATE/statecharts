@@ -16,25 +16,25 @@ package org.yakindu.sct.domain.extension;
  */
 public class DomainStatus {
 
-	public static final DomainStatus OK = new DomainStatus(Status.OK);
+	public static final DomainStatus OK = new DomainStatus(Severity.OK);
 
-	public static enum Status {
+	public static enum Severity {
 		OK, ERROR
 	}
 
-	private Status status;
+	private Severity status;
 	private String message;
 
-	public DomainStatus(Status status, String message) {
+	public DomainStatus(Severity status, String message) {
 		this.status = status;
 		this.message = message;
 	}
 
-	public DomainStatus(Status status) {
+	public DomainStatus(Severity status) {
 		this.status = status;
 	}
 
-	public Status getStatus() {
+	public Severity getSeverity() {
 		return status;
 	}
 
