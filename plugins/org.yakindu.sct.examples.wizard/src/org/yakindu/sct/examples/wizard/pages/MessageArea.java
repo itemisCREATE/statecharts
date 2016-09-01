@@ -40,7 +40,7 @@ public class MessageArea extends Composite {
 	protected static final String DISPLAY_ID = "com.yakindu.sct.examples";
 	private Label imageLabel;
 	private Link textLabel;
-	private Button button;
+	public Button button;
 	private Group group;
 
 	public static enum State {
