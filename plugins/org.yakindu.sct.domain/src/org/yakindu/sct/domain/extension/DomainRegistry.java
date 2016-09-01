@@ -30,6 +30,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.osgi.framework.Bundle;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DomainElement;
+import org.yakindu.sct.domain.extension.DomainStatus.Status;
 import org.yakindu.sct.domain.extension.impl.DomainImpl;
 import org.yakindu.sct.domain.extension.impl.ModuleContribution;
 
@@ -83,7 +84,6 @@ public class DomainRegistry {
 			if (defaultDomainID.equals(id)) {
 				throw new IllegalArgumentException("No default domain found!");
 			}
-			System.err.println("Could not find domain descriptor for id " + id + " - > using default domain");
 			return getDomain(defaultDomainID);
 		}
 	}
@@ -128,6 +128,16 @@ public class DomainRegistry {
 			}
 		}
 		return result;
+	}
+
+	public static DomainStatus getDomainStatus(String domainID) {
+		if (!DomainRegistry.domainExists(domainID)) {
+			return new DomainStatus(Status.ERROR,
+					String.format(String.format("Domain '%s' is not available!", domainID)));
+		} else {
+			IDomain domain = DomainRegistry.getDomain(domainID);
+			return domain.getAvailabilityStatus();
+		}
 	}
 
 	protected static void initFromExtensions() {
@@ -178,5 +188,4 @@ public class DomainRegistry {
 					}
 				}), provider);
 	}
-
 }

@@ -101,6 +101,7 @@ public class DomainImpl implements IDomain {
 		this.description = description;
 		this.imagePath = imagePath;
 		this.modules = modules;
+		this.statusProvider = provider;
 		initializeCache();
 	}
 
@@ -162,7 +163,7 @@ public class DomainImpl implements IDomain {
 	}
 
 	@Override
-	public DomainStatus isAvailable() {
+	public DomainStatus getAvailabilityStatus() {
 		return statusProvider.getDomainStatus();
 	}
 

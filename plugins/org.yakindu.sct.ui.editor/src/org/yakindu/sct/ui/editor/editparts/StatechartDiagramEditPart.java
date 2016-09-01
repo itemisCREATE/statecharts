@@ -30,7 +30,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.base.DomainElement;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.model.sgraph.validation.DomainValidator;
+import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.policies.CompositeElementCanonicalEditPolicy;
 
@@ -55,27 +55,28 @@ public class StatechartDiagramEditPart extends DiagramEditPart implements IDiagr
 		validateDomain();
 	}
 
-	private void validateDomain() {
+	protected void validateDomain() {
 		final DomainElement domainElement = EcoreUtil2.getContainerOfType(resolveSemanticElement(),
 				DomainElement.class);
-		if (domainElement != null && !DomainRegistry.domainExists(domainElement.getDomainID())) {
-			showInvalidDomainMessage(domainElement.getDomainID());
-			disableEditMode();
+		DomainStatus domainStatus = DomainRegistry.getDomainStatus(domainElement.getDomainID());
+		if (domainStatus.getStatus() != DomainStatus.Status.OK) {
+			disableEditor(domainStatus.getMessage());
 		}
 	}
 
-	private void showInvalidDomainMessage(String id) {
+	private void disableEditor(String msg) {
 		RootEditPart rootEditPart = getRoot();
 		if (rootEditPart instanceof RenderedDiagramRootEditPart) {
 			IFigure layer = ((RenderedDiagramRootEditPart) rootEditPart)
 					.getLayer(SCTRenderedDiagramRootEditPart.WATERMARK_LAYER);
-			Label figure = new Label(String.format(DomainValidator.MSG_DOMAIN_UNAVAILABLE, id));
+			Label figure = new Label(msg);
 			figure.setIcon(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJS_ERROR_TSK));
 			figure.setForegroundColor(org.eclipse.draw2d.ColorConstants.red);
 			figure.setFont(INVALID_DOMAIN_FONT);
 			figure.setSize(figure.getPreferredSize());
 			layer.add(figure);
 		}
+		disableEditMode();
 	}
 
 	@Override

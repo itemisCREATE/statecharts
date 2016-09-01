@@ -29,7 +29,6 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
-import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.Choice;
