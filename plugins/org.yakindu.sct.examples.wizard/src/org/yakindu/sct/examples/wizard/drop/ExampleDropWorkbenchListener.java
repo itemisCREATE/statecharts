@@ -93,7 +93,7 @@ public class ExampleDropWorkbenchListener implements IPartListener2, IPageListen
 		}
 		window.addPageListener(this);
 		window.addPerspectiveListener(this);
-		IPartService partService = window.getService(IPartService.class);
+		IPartService partService = (IPartService) window.getService(IPartService.class);
 		partService.addPartListener(this);
 		windowChanged(window);
 	}
