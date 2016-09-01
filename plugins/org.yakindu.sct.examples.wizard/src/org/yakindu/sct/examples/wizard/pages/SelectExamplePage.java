@@ -21,6 +21,7 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -207,7 +208,7 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	protected void filterAndSelectExampleToInstall(TreeViewer viewer, List<ExampleData> input) {
-		ExampleData exampleToInstall = Iterables.find(input, new Predicate<ExampleData>() {
+		final ExampleData exampleToInstall = Iterables.find(input, new Predicate<ExampleData>() {
 			@Override
 			public boolean apply(ExampleData input) {
 				if (exampleIdToInstall != null) {
@@ -222,9 +223,14 @@ public class SelectExamplePage extends WizardPage
 
 				@Override
 				public boolean select(Viewer viewer, Object parentElement, Object element) {
-					if (element instanceof ExampleData && exampleIdToInstall != null) {
-						ExampleData exampleData = (ExampleData) element;
-						return exampleIdToInstall.equals(exampleData.getId());
+					if (exampleIdToInstall == null) {
+						return true;
+					}
+					if (element instanceof ExampleData) {
+						return exampleIdToInstall.equals(((ExampleData) element).getId());
+					}
+					if (element instanceof ExampleContentProvider.Category) {
+						return ((ExampleContentProvider.Category)element).getChildren().contains(exampleToInstall);
 					}
 					return true;
 				}
