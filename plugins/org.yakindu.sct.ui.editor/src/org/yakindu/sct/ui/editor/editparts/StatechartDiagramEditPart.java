@@ -10,27 +10,14 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
-import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.Label;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IDiagramPreferenceSupport;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.XYLayoutEditPolicy;
-import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
-import org.eclipse.ui.ISharedImages;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.xtext.EcoreUtil2;
-import org.yakindu.base.base.DomainElement;
-import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.policies.CompositeElementCanonicalEditPolicy;
 
@@ -41,42 +28,10 @@ import org.yakindu.sct.ui.editor.policies.CompositeElementCanonicalEditPolicy;
  */
 public class StatechartDiagramEditPart extends DiagramEditPart implements IDiagramPreferenceSupport {
 
-	private static final Font INVALID_DOMAIN_FONT = new Font(null, new FontData("Verdana", 10, SWT.NORMAL));
-
 	private PreferencesHint preferenceHint;
 
 	public StatechartDiagramEditPart(View diagramView) {
 		super(diagramView);
-	}
-
-	@Override
-	public void activate() {
-		super.activate();
-		validateDomain();
-	}
-
-	protected void validateDomain() {
-		final DomainElement domainElement = EcoreUtil2.getContainerOfType(resolveSemanticElement(),
-				DomainElement.class);
-		DomainStatus domainStatus = DomainRegistry.getDomainStatus(domainElement.getDomainID());
-		if (domainStatus.getSeverity() != DomainStatus.Severity.OK) {
-			disableEditor(domainStatus.getMessage());
-		}
-	}
-
-	private void disableEditor(String msg) {
-		RootEditPart rootEditPart = getRoot();
-		if (rootEditPart instanceof RenderedDiagramRootEditPart) {
-			IFigure layer = ((RenderedDiagramRootEditPart) rootEditPart)
-					.getLayer(SCTRenderedDiagramRootEditPart.WATERMARK_LAYER);
-			Label figure = new Label(msg);
-			figure.setIcon(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJS_ERROR_TSK));
-			figure.setForegroundColor(org.eclipse.draw2d.ColorConstants.red);
-			figure.setFont(INVALID_DOMAIN_FONT);
-			figure.setSize(figure.getPreferredSize());
-			layer.add(figure);
-		}
-		disableEditMode();
 	}
 
 	@Override
