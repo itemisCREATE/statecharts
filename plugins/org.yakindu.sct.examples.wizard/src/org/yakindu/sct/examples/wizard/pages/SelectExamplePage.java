@@ -21,7 +21,6 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -147,6 +146,10 @@ public class SelectExamplePage extends WizardPage
 
 	}
 
+	private boolean revealExamplesAutomatically() {
+		return (exampleIdToInstall != null) && (!exampleService.exists() || !exampleService.isUpToDate(null));
+	}
+
 	private void initAsync() {
 		try {
 			getWizard().getContainer().run(true, false, new IRunnableWithProgress() {
@@ -155,20 +158,23 @@ public class SelectExamplePage extends WizardPage
 					init(monitor);
 				}
 			});
+			
+			if (revealExamplesAutomatically()) {
+				Display.getCurrent().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						messageArea.button.setEnabled(false);
+						revealExamples();
+					}
+				});
+			}
 		} catch (InvocationTargetException | InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void init(final IProgressMonitor monitor) {
-		if (exampleIdToInstall != null) {
-			Display.getDefault().syncExec(new Runnable() {
-				@Override
-				public void run() {
-					revealExamples();
-				}
-			});
-		} else if (!exampleService.exists()) {
+		if (!exampleService.exists()) {
 			Display.getDefault().syncExec(new Runnable() {
 				@Override
 				public void run() {
