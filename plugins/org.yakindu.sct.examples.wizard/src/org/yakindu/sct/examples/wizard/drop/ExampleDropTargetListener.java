@@ -133,17 +133,13 @@ public class ExampleDropTargetListener extends DropTargetAdapter {
 	}
 
 	protected void proceedInstallation(String url) {
-		String exampleId = ExampleURLHandler.extractExampleId(url);
-		System.out.println("Installing Example: " + exampleId);
-		
-		createWizardDialog(exampleId);
+		createWizardDialog(ExampleURLHandler.extractExampleId(url));
 	}
 
 	private void createWizardDialog(String exampleId) {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		ExampleWizard exampleWizard = new ExampleWizard(exampleId);
 		WizardDialog dialog = new WizardDialog(shell, exampleWizard);
-		dialog.create();
 		dialog.open();
 	}
 

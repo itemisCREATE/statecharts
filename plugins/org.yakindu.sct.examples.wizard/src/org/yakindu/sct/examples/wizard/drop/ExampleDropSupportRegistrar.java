@@ -28,7 +28,7 @@ import org.eclipse.ui.progress.UIJob;
  */
 public class ExampleDropSupportRegistrar implements IStartup {
 
-	private final ExampleDropWorkbenchListener workbenchListener = new ExampleDropWorkbenchListener();
+	private final DropWorkbenchChangeListener workbenchListener = new DropWorkbenchChangeListener();
 
 	@Override
 	public void earlyStartup() {

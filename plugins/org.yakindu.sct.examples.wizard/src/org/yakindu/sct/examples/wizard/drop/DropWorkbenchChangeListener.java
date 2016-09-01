@@ -12,14 +12,6 @@ package org.yakindu.sct.examples.wizard.drop;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
-import org.eclipse.swt.dnd.DND;
-import org.eclipse.swt.dnd.DropTarget;
-import org.eclipse.swt.dnd.DropTargetAdapter;
-import org.eclipse.swt.dnd.DropTargetListener;
-import org.eclipse.swt.dnd.Transfer;
-import org.eclipse.swt.dnd.URLTransfer;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IPageListener;
@@ -37,27 +29,43 @@ import org.eclipse.ui.IWorkbenchWindow;
  * {@link org.eclipse.epp.internal.mpc.ui.wizards.MarketplaceDropAdapter}.
  * 
  */
-public class ExampleDropWorkbenchListener implements IPartListener2, IPageListener, IPerspectiveListener, IWindowListener {
+public class DropWorkbenchChangeListener
+		implements
+			IPartListener2,
+			IPageListener,
+			IPerspectiveListener,
+			IWindowListener {
 
+	private IDropTargetInstaller dropTargetInstaller = getDropTargetInstaller();
+	
+	protected IDropTargetInstaller getDropTargetInstaller() {
+		return new ExampleDropTargetInstaller();
+	}
+	
+	@Override
 	public void perspectiveActivated(IWorkbenchPage page, IPerspectiveDescriptor perspective) {
 		pageChanged(page);
 	}
 
+	@Override
 	public void perspectiveChanged(IWorkbenchPage page, IPerspectiveDescriptor perspective, String changeId) {
 	}
 
+	@Override
 	public void pageActivated(IWorkbenchPage page) {
 		pageChanged(page);
 	}
 
+	@Override
 	public void pageClosed(IWorkbenchPage page) {
 	}
 
+	@Override
 	public void pageOpened(IWorkbenchPage page) {
 		pageChanged(page);
 	}
 
-	private void pageChanged(IWorkbenchPage page) {
+	protected void pageChanged(IWorkbenchPage page) {
 		if (page == null) {
 			return;
 		}
@@ -65,11 +73,12 @@ public class ExampleDropWorkbenchListener implements IPartListener2, IPageListen
 		windowChanged(workbenchWindow);
 	}
 
+	@Override
 	public void windowActivated(IWorkbenchWindow window) {
 		windowChanged(window);
 	}
 
-	private void windowChanged(IWorkbenchWindow window) {
+	protected void windowChanged(IWorkbenchWindow window) {
 		if (window == null) {
 			return;
 		}
@@ -77,17 +86,20 @@ public class ExampleDropWorkbenchListener implements IPartListener2, IPageListen
 		runUpdate(shell);
 	}
 
+	@Override
 	public void windowDeactivated(IWorkbenchWindow window) {
 	}
 
+	@Override
 	public void windowClosed(IWorkbenchWindow window) {
 	}
 
+	@Override
 	public void windowOpened(IWorkbenchWindow window) {
 		hookWindow(window);
 	}
 
-	public void hookWindow(IWorkbenchWindow window) {
+	protected void hookWindow(IWorkbenchWindow window) {
 		if (window == null) {
 			return;
 		}
@@ -98,37 +110,45 @@ public class ExampleDropWorkbenchListener implements IPartListener2, IPageListen
 		windowChanged(window);
 	}
 
+	@Override
 	public void partOpened(IWorkbenchPartReference partRef) {
 		partUpdate(partRef);
 	}
 
+	@Override
 	public void partActivated(IWorkbenchPartReference partRef) {
 		partUpdate(partRef);
 	}
 
+	@Override
 	public void partBroughtToTop(IWorkbenchPartReference partRef) {
 		partUpdate(partRef);
 	}
 
+	@Override
 	public void partVisible(IWorkbenchPartReference partRef) {
 	}
 
+	@Override
 	public void partClosed(IWorkbenchPartReference partRef) {
 		partUpdate(partRef);
 	}
 
+	@Override
 	public void partDeactivated(IWorkbenchPartReference partRef) {
 		partUpdate(partRef);
 	}
 
+	@Override
 	public void partHidden(IWorkbenchPartReference partRef) {
 		partUpdate(partRef);
 	}
 
+	@Override
 	public void partInputChanged(IWorkbenchPartReference partRef) {
 	}
 
-	private void partUpdate(IWorkbenchPartReference partRef) {
+	protected void partUpdate(IWorkbenchPartReference partRef) {
 		if (partRef == null) {
 			return;
 		}
@@ -136,7 +156,7 @@ public class ExampleDropWorkbenchListener implements IPartListener2, IPageListen
 		pageChanged(page);
 	}
 
-	private void runUpdate(final Shell shell) {
+	protected void runUpdate(final Shell shell) {
 		if (shell == null || shell.isDisposed()) {
 			return;
 		}
@@ -149,7 +169,7 @@ public class ExampleDropWorkbenchListener implements IPartListener2, IPageListen
 
 				public void run() {
 					if (!shell.isDisposed()) {
-						installDropTarget(shell);
+						dropTargetInstaller.installDropTarget(shell);
 					}
 				}
 			});
@@ -158,87 +178,10 @@ public class ExampleDropWorkbenchListener implements IPartListener2, IPageListen
 				// ignore
 				return;
 			}
-			// TODO report
+			ex.printStackTrace();
 		} catch (RuntimeException ex) {
-			// TODO report
+			ex.printStackTrace();
 		}
 	}
 
-	private static final int DROP_OPERATIONS = DND.DROP_MOVE | DND.DROP_COPY | DND.DROP_LINK | DND.DROP_DEFAULT;
-
-	private final DropTargetAdapter dropListener = new ExampleDropTargetListener();
-
-	private Transfer[] transferAgents;
-
-	public void installDropTarget(final Shell shell) {
-		hookUrlTransfer(shell, dropListener);
-	}
-
-	private DropTarget hookUrlTransfer(final Shell shell, DropTargetAdapter dropListener) {
-		DropTarget target = findDropTarget(shell);
-		if (target != null) {
-			// target exists, get it and check proper registration
-			registerWithExistingTarget(target);
-		} else {
-			target = new DropTarget(shell, DROP_OPERATIONS);
-			if (transferAgents == null) {
-				transferAgents = new Transfer[]{URLTransfer.getInstance()};
-			}
-			target.setTransfer(transferAgents);
-		}
-		registerDropListener(target, dropListener);
-
-		Control[] children = shell.getChildren();
-		for (Control child : children) {
-			hookRecursive(child, dropListener);
-		}
-		return target;
-	}
-
-	private void registerDropListener(DropTarget target, DropTargetListener dropListener) {
-		target.removeDropListener(dropListener);
-		target.addDropListener(dropListener);
-	}
-
-	private void hookRecursive(Control child, DropTargetListener dropListener) {
-		DropTarget childTarget = findDropTarget(child);
-		if (childTarget != null) {
-			registerWithExistingTarget(childTarget);
-			registerDropListener(childTarget, dropListener);
-		}
-		if (child instanceof Composite) {
-			Composite composite = (Composite) child;
-			Control[] children = composite.getChildren();
-			for (Control control : children) {
-				hookRecursive(control, dropListener);
-			}
-		}
-	}
-
-	private void registerWithExistingTarget(DropTarget target) {
-		Transfer[] transfers = target.getTransfer();
-		boolean exists = false;
-		if (transfers != null) {
-			for (Transfer transfer : transfers) {
-				if (transfer instanceof URLTransfer) {
-					exists = true;
-					break;
-				}
-			}
-			if (!exists) {
-				Transfer[] newTransfers = new Transfer[transfers.length + 1];
-				System.arraycopy(transfers, 0, newTransfers, 0, transfers.length);
-				newTransfers[transfers.length] = URLTransfer.getInstance();
-				target.setTransfer(newTransfers);
-			}
-		}
-	}
-
-	private DropTarget findDropTarget(Control control) {
-		Object object = control.getData(DND.DROP_TARGET_KEY);
-		if (object instanceof DropTarget) {
-			return (DropTarget) object;
-		}
-		return null;
-	}
 }
