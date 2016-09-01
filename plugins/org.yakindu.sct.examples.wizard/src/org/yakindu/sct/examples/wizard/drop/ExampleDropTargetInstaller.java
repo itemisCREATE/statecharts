@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2016 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.examples.wizard.drop;
 
 import org.eclipse.swt.dnd.DND;
@@ -10,6 +20,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
+/**
+ * Copied from
+ * {@link org.eclipse.epp.internal.mpc.ui.wizards.MarketplaceDropAdapter}.
+ * 
+ */
 public class ExampleDropTargetInstaller implements IDropTargetInstaller {
 
 	private final DropTargetAdapter dropListener = getDropTargetListener();
