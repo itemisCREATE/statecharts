@@ -80,6 +80,16 @@
                </documentation>
             </annotation>
          </attribute>
+         <attribute name="domainStatusProvider" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":org.yakindu.sct.domain.extension.IDomainStatusProvider"/>
+               </appinfo>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 

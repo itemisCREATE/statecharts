@@ -239,7 +239,7 @@
       <editpartProvider
             class="org.yakindu.sct.ui.editor.providers.StatechartDiagramEditPartProvider">
          <Priority
-               name="Lowest">
+               name="Medium">
          </Priority>
       </editpartProvider>
    </extension>

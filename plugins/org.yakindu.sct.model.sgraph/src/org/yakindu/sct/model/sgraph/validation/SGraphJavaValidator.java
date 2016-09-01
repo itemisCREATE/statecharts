@@ -29,6 +29,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
+import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.Choice;
@@ -85,6 +86,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing Transitions from Entries can only target to sibling or inner states.";
 	public static final String ISSUE_STATECHART_NAME_NO_IDENTIFIER = "%s is not a valid identifier!";
 
+	
 	@Check(CheckType.FAST)
 	public void vertexNotReachable(final Vertex vertex) {
 		if (!(vertex instanceof Entry)) {
