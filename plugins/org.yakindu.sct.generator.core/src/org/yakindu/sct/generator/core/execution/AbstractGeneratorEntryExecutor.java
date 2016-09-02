@@ -10,6 +10,12 @@
  */
 package org.yakindu.sct.generator.core.execution;
 
+import java.util.List;
+
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.generator.core.console.IConsoleLogger;
 import org.yakindu.sct.generator.core.filesystem.DefaultFileSystemAccessFactory;
@@ -17,7 +23,10 @@ import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * 
@@ -32,19 +41,29 @@ public abstract class AbstractGeneratorEntryExecutor implements IGeneratorEntryE
 	protected IConsoleLogger logger;
 	@Inject
 	protected ICoreLibraryHelper helper;
+	@Inject
+	protected IResourceValidator validator;
+	@Inject(optional = true)
+	@Named(SKIP_VALIDATION)
+	protected boolean skipValidation = false;
 
 	protected abstract void execute(ISCTFileSystemAccess access, GeneratorEntry generatorEntry);
 
 	@Override
 	public void execute(GeneratorEntry entry) {
-		logStart(entry);
-		try {
-			execute(factory.create(entry), entry);
-		} catch (Exception ex) {
-			logException(ex);
-		} finally {
-			logEnd(entry);
+		NamedElement element = (NamedElement) entry.getElementRef();
+		if (valid(entry)) {
+			logger.log("Generating '" + element.getName() + "' to target project ..."
+					+ helper.getTargetProjectValue(entry).getStringValue());
+			try {
+				execute(factory.create(entry), entry);
+			} catch (Exception ex) {
+				logger.logError(ex);
+			} finally {
+				logger.log("done...");
+			}
 		}
+
 	}
 
 	protected void logStart(GeneratorEntry entry) {
@@ -61,4 +80,25 @@ public abstract class AbstractGeneratorEntryExecutor implements IGeneratorEntryE
 		logger.logError(ex);
 	}
 
+	protected boolean valid(GeneratorEntry entry) {
+		if (skipValidation) {
+			logger.log("Validation skipped...");
+			return true;
+		}
+		List<Issue> issues = validator.validate(entry.getElementRef().eResource(), CheckMode.ALL, null);
+		Iterable<Issue> errors = Iterables.filter(issues, new Predicate<Issue>() {
+			@Override
+			public boolean apply(Issue input) {
+				return input.getSeverity() == Severity.ERROR;
+			}
+		});
+		if (!Iterables.isEmpty(errors)) {
+			logger.log("The referenced model contains errors and could not be generated:");
+			for (Issue issue : errors) {
+				logger.log(issue.getMessage());
+			}
+			return false;
+		}
+		return true;
+	}
 }

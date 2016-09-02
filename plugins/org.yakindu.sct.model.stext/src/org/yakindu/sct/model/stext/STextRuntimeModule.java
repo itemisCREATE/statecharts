@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.validation.CompositeEValidator;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
@@ -22,6 +23,7 @@ import org.yakindu.sct.model.sgraph.resource.SCTLinker;
 import org.yakindu.sct.model.stext.conversion.StextValueConverterService;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
+import org.yakindu.sct.model.stext.resource.SCTResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
 
@@ -37,6 +39,12 @@ import com.google.inject.name.Names;
  */
 public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTextRuntimeModule {
 
+	
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(IDefaultResourceDescriptionStrategy.class).to(SCTResourceDescriptionStrategy.class);
+	}
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return STextGlobalScopeProvider.class;
 	}
