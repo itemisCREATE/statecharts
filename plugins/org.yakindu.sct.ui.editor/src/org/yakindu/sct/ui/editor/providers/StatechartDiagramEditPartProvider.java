@@ -13,8 +13,12 @@ package org.yakindu.sct.ui.editor.providers;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.gef.RootEditPart;
+import org.eclipse.gmf.runtime.common.core.service.IOperation;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.AbstractEditPartProvider;
+import org.eclipse.gmf.runtime.diagram.ui.services.editpart.CreateRootEditPartOperation;
+import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.editparts.BorderItemEditPart;
@@ -26,6 +30,7 @@ import org.yakindu.sct.ui.editor.editparts.NamedElementLabelEditPart;
 import org.yakindu.sct.ui.editor.editparts.RegionCompartmentEditPart;
 import org.yakindu.sct.ui.editor.editparts.RegionEditPart;
 import org.yakindu.sct.ui.editor.editparts.RegionNameEditPart;
+import org.yakindu.sct.ui.editor.editparts.SCTRenderedDiagramRootEditPart;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 import org.yakindu.sct.ui.editor.editparts.StateFigureCompartmentEditPart;
 import org.yakindu.sct.ui.editor.editparts.StateNameEditPart;
@@ -44,8 +49,7 @@ import org.yakindu.sct.ui.editor.editparts.TransitionExpressionEditPart;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
-		implements SemanticHints {
+public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider implements SemanticHints {
 
 	public static final Map<String, Class<? extends IGraphicalEditPart>> editParts;
 	static {
@@ -54,12 +58,10 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 	}
 
 	private static void init() {
-		editParts.put(StatechartDiagramEditor.ID,
-				StatechartDiagramEditPart.class);
+		editParts.put(StatechartDiagramEditor.ID, StatechartDiagramEditPart.class);
 		editParts.put(STATECHART_TEXT, StatechartTextEditPart.class);
 		editParts.put(STATECHART_NAME, StatechartNameEditPart.class);
-		editParts.put(STATECHART_TEXT_EXPRESSION,
-				StatechartTextExpressionEditPart.class);
+		editParts.put(STATECHART_TEXT_EXPRESSION, StatechartTextExpressionEditPart.class);
 		editParts.put(CHOICE, ChoiceEditPart.class);
 		editParts.put(FINALSTATE, FinalStateEditPart.class);
 		editParts.put(ENTRY, EntryEditPart.class);
@@ -67,24 +69,20 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 		editParts.put(BORDER_ITEM_LABEL_CONTAINER, BorderItemEditPart.class);
 		editParts.put(SHALLOWHISTORY, EntryEditPart.class);
 		editParts.put(DEEPHISTORY, EntryEditPart.class);
-		
+
 		editParts.put(REGION_COMPARTMENT, RegionCompartmentEditPart.class);
 		editParts.put(REGION, RegionEditPart.class);
 		editParts.put(REGION_NAME, RegionNameEditPart.class);
-		
+
 		editParts.put(STATE_NAME, StateNameEditPart.class);
-		editParts.put(STATE_TEXT_COMPARTMENT,
-				StateTextCompartmentEditPart.class);
+		editParts.put(STATE_TEXT_COMPARTMENT, StateTextCompartmentEditPart.class);
 		editParts.put(SUBMACHINE_STATE, StateEditPart.class);
 		editParts.put(SUBMACHINE_STATE_NAME, StateNameEditPart.class);
-		editParts.put(STATE_TEXT_COMPARTMENT_EXPRESSION,
-				StateTextCompartmentExpressionEditPart.class);
+		editParts.put(STATE_TEXT_COMPARTMENT_EXPRESSION, StateTextCompartmentExpressionEditPart.class);
 		editParts.put(STATE, StateEditPart.class);
-		editParts.put(STATE_FIGURE_COMPARTMENT,
-				StateFigureCompartmentEditPart.class);
+		editParts.put(STATE_FIGURE_COMPARTMENT, StateFigureCompartmentEditPart.class);
 		editParts.put(TRANSITION, TransitionEditPart.class);
-		editParts
-				.put(TRANSITION_EXPRESSION, TransitionExpressionEditPart.class);
+		editParts.put(TRANSITION_EXPRESSION, TransitionExpressionEditPart.class);
 		editParts.put(EXIT, ExitEditPart.class);
 		editParts.put(SYNCHRONIZATION, SynchronizationEditPart.class);
 
@@ -100,14 +98,24 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 	}
 
 	@Override
-	protected Class<? extends IGraphicalEditPart> getDiagramEditPartClass(
-			View view) {
+	protected Class<? extends IGraphicalEditPart> getDiagramEditPartClass(View view) {
 		return getClass(view.getType());
 	}
 
 	@Override
 	protected Class<? extends IGraphicalEditPart> getEdgeEditPartClass(View view) {
 		return getClass(view.getType());
+	}
+
+	public boolean provides(IOperation operation) {
+		if (operation instanceof CreateRootEditPartOperation) {
+			return true;
+		}
+		return super.provides(operation);
+	}
+
+	public RootEditPart createRootEditPart(Diagram diagram) {
+		return new SCTRenderedDiagramRootEditPart(diagram.getMeasurementUnit());
 	}
 
 }

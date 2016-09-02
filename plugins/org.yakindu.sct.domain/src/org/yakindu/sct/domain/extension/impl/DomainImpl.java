@@ -16,7 +16,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.IDomain;
+import org.yakindu.sct.domain.extension.IDomainStatusProvider;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -36,6 +38,7 @@ public class DomainImpl implements IDomain {
 	private String name;
 	private String description;
 	private URL imagePath;
+	private IDomainStatusProvider statusProvider;
 	private Iterable<ModuleContribution> modules;
 	private LoadingCache<CacheKey, Injector> injectorCache;
 
@@ -88,13 +91,18 @@ public class DomainImpl implements IDomain {
 
 	public DomainImpl(String domainID, String name, String description, URL imagePath,
 			Iterable<ModuleContribution> modules) {
+		this(domainID, name, description, imagePath, modules, new IDomainStatusProvider.DefaultDomainStatusProvider());
+	}
+
+	public DomainImpl(String domainID, String name, String description, URL imagePath,
+			Iterable<ModuleContribution> modules, IDomainStatusProvider provider) {
 		this.domainID = domainID;
 		this.name = name;
 		this.description = description;
 		this.imagePath = imagePath;
 		this.modules = modules;
+		this.statusProvider = provider;
 		initializeCache();
-
 	}
 
 	protected void initializeCache() {
@@ -152,6 +160,11 @@ public class DomainImpl implements IDomain {
 		Module result = Modules.combine(modules);
 		return result;
 
+	}
+
+	@Override
+	public DomainStatus getAvailabilityStatus() {
+		return statusProvider.getDomainStatus();
 	}
 
 }

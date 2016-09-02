@@ -16,6 +16,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -34,19 +35,27 @@ import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.internal.parts.DiagramGraphicalViewerKeyHandler;
 import org.eclipse.gmf.runtime.gef.ui.internal.editparts.AnimatableZoomManager;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CLabel;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.xtext.utils.gmf.resource.DirtyStateListener;
 import org.yakindu.sct.domain.extension.DomainRegistry;
+import org.yakindu.sct.domain.extension.DomainStatus;
+import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
@@ -68,6 +77,7 @@ import com.google.inject.Key;
 @SuppressWarnings("restriction")
 public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker {
 
+	private static final Font INVALID_DOMAIN_FONT = new Font(null, new FontData("Verdana", 10, SWT.BOLD));
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 	private static final int DELAY = 200; // ms
 
@@ -111,6 +121,44 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	public StatechartDiagramEditor() {
 		super(true);
+	}
+
+	public boolean isEditable() {
+		DomainStatus domainStatus = getDomainStatus();
+		if (domainStatus.getSeverity() == Severity.ERROR) {
+			return false;
+		}
+		return super.isEditable();
+	}
+
+	protected DomainStatus getDomainStatus() {
+		EObject element = getDiagram().getElement();
+		if (element instanceof DomainElement) {
+			DomainStatus domainStatus = DomainRegistry.getDomainStatus(((DomainElement) element).getDomainID());
+			return domainStatus;
+		}
+		return null;
+	};
+
+	@Override
+	protected void createBreadcrumbViewer(Composite parent) {
+		DomainStatus domainStatus = getDomainStatus();
+		if (domainStatus.getSeverity() == Severity.ERROR) {
+			createStatusLabel(parent, domainStatus);
+			return;
+		}
+		super.createBreadcrumbViewer(parent);
+	}
+
+	private void createStatusLabel(Composite parent, DomainStatus domainStatus) {
+		CLabel label = new CLabel(parent, SWT.SHADOW_OUT);
+		label.setFont(INVALID_DOMAIN_FONT);
+		label.setBackground(ColorConstants.white);
+		label.setForeground(ColorConstants.red);
+		label.setImage(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJS_ERROR_TSK));
+		label.setText(domainStatus.getMessage() + " - editor is in readonly mode.");
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
+		parent.pack(true);
 	}
 
 	@Override
