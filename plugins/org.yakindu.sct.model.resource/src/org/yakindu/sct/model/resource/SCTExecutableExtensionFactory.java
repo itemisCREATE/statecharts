@@ -27,6 +27,7 @@ import org.yakindu.sct.model.sgraph.ui.validation.SCTDiagnosticConverterImpl;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerTypeProvider;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
+import org.yakindu.sct.model.stext.resource.SCTResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.resource.SCTResourceValidatorImpl;
 import org.yakindu.sct.ui.editor.editor.SCTFileEditorOpener;
 
