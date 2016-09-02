@@ -465,25 +465,6 @@ class TreeNamingService implements INamingService {
 		return true;
 	}
 	
-	def private mapEndNodesToShortStringLists(ArrayList<StringTreeNode> endNodes)
-	{
-		var nodeChains = new HashMap<StringTreeNode, ArrayList<StringTreeNode>>();
-		var shortenedNames = new HashMap<StringTreeNode, ArrayList<ShortString>>();
-		for(node : endNodes)
-		{
-			var nodes = node.getIndividualName()
-			var shortstrings = new ArrayList<ShortString>();
-			for(n : nodes)
-			{
-				shortstrings.add(n.getShortStringForNode());
-			}
-			nodeChains.put(node, nodes);
-			shortenedNames.put(node, shortstrings);
-		}
-		
-		return shortenedNames;
-	}
-	
 	def private Map<StringTreeNode, ShortString> createShortStringMapping()
 	{
 		val HashMap<StringTreeNode, ShortString> mapping = newHashMap;
@@ -528,18 +509,6 @@ class TreeNamingService implements INamingService {
 	def private getShortenedName(NamedElement elem)
 	{
 		return getShortenedName(getNodeForElement(elem));
-	}
-	
-	def private getNodeOfShortString(ShortString shortstring)
-	{
-		for(node : node_shortString_map.keySet())
-		{
-			if(node_shortString_map.get(node) == shortstring)
-			{
-				return node;
-			}
-		}
-		return null;
 	}
 	
 	override asEscapedIdentifier(String string) {
