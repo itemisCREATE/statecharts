@@ -10,7 +10,6 @@ class ShortString {
 	
 	private int[] cutArray;
 	private int[] previous_cutArray;
-	private int size;
 	
 	final static public int cost_lowercase_vocals = 1;
 	final static public int cost_underscore = 1;
@@ -27,19 +26,26 @@ class ShortString {
 		} else {
 			originalString = s;
 		}
-		size = originalString.length;
 		cutArray = newIntArrayOfSize(size);
 		previous_cutArray = newIntArrayOfSize(size);
 		reset();
+		saveCurrentToPrevious();
 	}
 	
 	def public getOriginalString()
 	{
-		return originalString;
+		originalString
+	}
+	
+	def private int size()
+	{
+		// instead of saving originalString.length as an own member
+		originalString.length
 	}
 	
 	def public reset()
 	{
+		// Reset cut_array so that the shortened String is equal to the original String.
 		saveCurrentToPrevious();
 		for(var i=0; i<size; i++) {
 			cutArray.set(i, 1);
@@ -48,6 +54,7 @@ class ShortString {
 	
 	def private saveCurrentToPrevious()
 	{
+		// save current cut-state to previous_cutArray.
 		for(var i=0; i<size; i++) {
 			previous_cutArray.set(i, cutArray.get(i));
 		}
