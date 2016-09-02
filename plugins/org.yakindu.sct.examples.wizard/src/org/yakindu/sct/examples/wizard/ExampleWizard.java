@@ -12,10 +12,17 @@ package org.yakindu.sct.examples.wizard;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.yakindu.sct.examples.wizard.pages.SelectExamplePage;
@@ -46,7 +53,7 @@ public class ExampleWizard extends Wizard implements INewWizard, ExampleWizardCo
 		setNeedsProgressMonitor(true);
 		Guice.createInjector(new ExampleWizardModule()).injectMembers(this);
 	}
-	
+
 	public ExampleWizard(String exampleId) {
 		this();
 		page.setInstallExampleId(exampleId);
@@ -67,7 +74,9 @@ public class ExampleWizard extends Wizard implements INewWizard, ExampleWizardCo
 				getContainer().run(true, true, new IRunnableWithProgress() {
 					@Override
 					public void run(IProgressMonitor monitor) throws InvocationTargetException {
-						exampleService.importExample(selection, monitor);
+						if (overrideIfExists(selection)) {
+							exampleService.importExample(selection, monitor);
+						}
 					}
 				});
 			} catch (InvocationTargetException | InterruptedException e) {
@@ -75,5 +84,46 @@ public class ExampleWizard extends Wizard implements INewWizard, ExampleWizardCo
 			}
 		}
 		return true;
+	}
+
+	protected boolean overrideIfExists(ExampleData selection) {
+		String name = selection.getProjectDir().getName();
+		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(name);
+		if (project.exists()) {
+			OverrideRunnable runnable = new OverrideRunnable(getShell(), name);
+			Display.getDefault().syncExec(runnable);
+			if (runnable.isOverride()) {
+				try {
+					project.delete(true, new NullProgressMonitor());
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+			}
+			return runnable.isOverride();
+		}
+		return true;
+	}
+
+	private static class OverrideRunnable implements Runnable {
+
+		private boolean override = false;
+		private Shell shell;
+		private String name;
+
+		public OverrideRunnable(Shell shell, String name) {
+			this.shell = shell;
+			this.name = name;
+		}
+
+		@Override
+		public void run() {
+			override = MessageDialog.openQuestion(shell, "Project Exists",
+					String.format("Project %s already exists in your workspace. Do you want to override it?", name));
+		}
+
+		public boolean isOverride() {
+			return override;
+		}
+
 	}
 }
