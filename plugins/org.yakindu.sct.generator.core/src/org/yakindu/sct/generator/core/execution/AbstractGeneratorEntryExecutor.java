@@ -101,5 +101,4 @@ public abstract class AbstractGeneratorEntryExecutor implements IGeneratorEntryE
 		}
 		return true;
 	}
-
 }
