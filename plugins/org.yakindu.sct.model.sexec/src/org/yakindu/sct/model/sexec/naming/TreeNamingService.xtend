@@ -397,6 +397,10 @@ class TreeNamingService implements INamingService {
 	
 	def private boolean shortenOneCharacter(ArrayList<StringTreeNode> endnodes, int max_weight)
 	{
+		/*
+		 * takes all end-nodes of the tree, finds their attached individual chain of nodes, their shortstring and shortens the
+		 * longest chain's cheapest shortstring.
+		 */
 		var max_length = 0;
 		var StringTreeNode max_length_node;
 		
@@ -404,6 +408,7 @@ class TreeNamingService implements INamingService {
 		
 		for(node : endnodes)
 		{
+			// iterates over all endnodes and returns the maximum length of all names.
 			var newname = node.getIndividualName.joinShortStrings();
 			names.add(newname);
 			var length = newname.length();
