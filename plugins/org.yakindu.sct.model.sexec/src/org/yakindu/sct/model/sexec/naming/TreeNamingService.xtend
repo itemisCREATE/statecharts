@@ -320,60 +320,109 @@ class TreeNamingService implements INamingService {
 	
 	def private Map<StringTreeNode, ArrayList<StringTreeNode>> constructIndividualNames()
 	{
-		val HashMap<StringTreeNode, ArrayList<StringTreeNode>> mapping = newHashMap;
-		
 		val nodes = tree.getEndNodes().sortWith(stringTreeNodeDepthComparator);
 		
 		val names = new ArrayList<String>();
+		
+		/*
+		 * The map doublets is a three dimensional construct.
+		 * For each end-node-name in the tree, it holds a list of lists describing that name.
+		 * The outer list contains instances representing the same name, and the inner lists hold 
+		 * the current set of nodes that is needed to make the name individual.
+		 * 
+		 * Consider the following simple tree:
+		 * main_region-StateA
+		 * main_region-StateB
+		 * second_region-StateA
+		 * 
+		 * After the initial phase, the map then contains the following:
+		 * {"StateA": [[node(StateA)], [node(StateA)]], "StateB": [[node(StateB)]]}
+		 * 
+		 * The iteration consists of two phases then.
+		 * In Phase 1, all inner lists are extended with the first element's parent - as long as there is more than one list.
+		 * This leads to the following:
+		 * {"StateA": [[node(main_region), node(StateA)], [node(second_region), node(StateA)]], "StateB": [[node(StateB)]]}
+		 * in Phase 2, the map is then resorted with the new names:
+		 * {
+		 * 	"main_region_StateA": [[node(main_region), node(StateA)]],
+		 * 	"second_region_StateA": [[node(second_region), node(StateA)]],
+		 * 	"StateB": [[node(StateB)]] 
+		 * }
+		 * 
+		 * As we can see, all outer lists have exactly length 1, which is the abortion criteria.
+		 * 
+		 * In the finalization phase, we check if there are any weird things happening like randomly created double names.
+		 * For example, someone could create a state named "region_StateA" and two other elements named "region" and "StateA" could
+		 * be clumped together to form an individual name.
+		 * 
+		 */
+		var doublets = new HashMap<String, ArrayList<ArrayList<StringTreeNode>>>();
+		
+		val mapping = new HashMap<StringTreeNode, ArrayList<StringTreeNode>>();
+		
+		// Initialization
 		for(node : nodes)
 		{
-			var individualNameFound = false;
-			
-			var currentNode = node.getParent(); // actual end node only contains empty string
-			var name = currentNode.getData();
-			
-			val nodelist = new ArrayList<StringTreeNode>();
-			
-			mapping.put(node, nodelist); // 'nodelist' is filled further down
-			
-			nodelist.add(currentNode);
-			nodelist.add(node);
-			
-			/*
-			 * elements that point to this node, because we need to check if
-			 * it's a step. In that case, we want to prepend one more node,
-			 * so that - for example - "lr0" becomes "StateA_lr0".
-			 */
-			val loop_nodeElements = getNodeElements(node);
-			
-			var isStep = false;
-			for(elem : loop_nodeElements)
+			if(!doublets.containsKey(node.data)) {
+				doublets.put(node.data, new ArrayList<ArrayList<StringTreeNode>>());
+			}
+			val list = new ArrayList<StringTreeNode>();
+			doublets.get(node.data).add(list);
+			mapping.put(node, list);
+			list.add(node);
+		}
+		
+		var abort = false;
+		// Iteration
+		while(!abort)
+		{
+			// Phase 1
+			for(name : doublets.keySet)
 			{
-				if(elem instanceof Step) {
-					isStep = true;
+				if(doublets.get(name).length > 1)
+				{
+					for(nodelist : doublets.get(name))
+					{
+						nodelist.add(0, nodelist.get(0).parent);
+					}
 				}
 			}
-			if(isStep) {
-				// if this NamedElement is a step, it has a name like "tr0" or "lr0". That's not very descriptive,
-				// so it's prepended with the name of the parent element, like for example "StateA".
-				currentNode = currentNode.getParent();
-				name = currentNode.getData() + separator + name;
-				nodelist.add(0, currentNode);
+			
+			// Phase 2
+			val newDoublets = new HashMap<String, ArrayList<ArrayList<StringTreeNode>>>();
+			
+			for(name : doublets.keySet) // for all keys
+			{
+				for(nodelist : doublets.get(name)) // for inner lists
+				{
+					val sb = new StringBuilder();
+					
+					for(var i=0; i<nodelist.length;i++)
+					{
+						if(i != 0) {
+							sb.append(separator)
+						}
+						sb.append(nodelist.get(i).getData())
+					}
+					
+					if(!newDoublets.containsKey(sb.toString)) {
+						newDoublets.put(sb.toString, new ArrayList<ArrayList<StringTreeNode>>());
+					}
+					
+					newDoublets.get(sb.toString).add(nodelist);
+				}
 			}
 			
-			while(!individualNameFound)
+			doublets = newDoublets;
+			
+			// Abort criterion
+			abort = true;
+			for(name : doublets.keySet)
 			{
-				// prepend further parent elements (walk tree upwards) until an individual name is found.
-				if(!names.contains(name)) {
-					individualNameFound = true;
-					names.add(name);
-				} else {
-					currentNode = currentNode.getParent();
-					name = currentNode.getData() + separator + name;
-					nodelist.add(0, currentNode);
-				}
+				if(doublets.get(name).length > 1) abort = false;
 			}
 		}
+		
 		
 		return mapping;
 	}
