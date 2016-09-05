@@ -8,7 +8,7 @@ The statechart tools are a central part of YAKINDU: the modular toolkit for mode
 * *Statechart diagram editor* to graphically create and edit statecharts
 * *Statechart simulator* to simulate the behavior of statecharts
 * *Code generators for Java, C, C&#43;&#43;* to transform statecharts into code
-* *Custom generator projects* to easily create model-to-text transformations with Xtend/Java or Xpand
+* *Custom generator projects* to easily create model-to-text transformations with Xtend or Java
 * *Integrated validator* to check for syntactical or semantical problems of the statechart model 
 
 The following graph shows these features and their relation to each other:
