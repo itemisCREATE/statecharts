@@ -29,7 +29,6 @@ p. The _[GeneratorId]_ represents the unique ID of the generator. Currently, the
 
 # @yakindu::java@ – Generator ID for the Java code generator 
 # @yakindu::c@ – Generator ID for the C code generator
-# @yakindu::xpand@ – Generator ID for custom Xpand-based code generators
 # @yakindu::generic@ – Generator ID for custom Java-based code generators  
 
 A single generator model can contain several _StatechartReferences_. These are cross references to statechart models for whom code is to be generated. For each reference, the generator process can be configured with _Feature_ zs. Each feature has one or more parameters. These parameters can be configured with _ParameterName_ @=@ _ParameterValue_.
@@ -2062,7 +2061,7 @@ Implementing a custom code generator is no trivial task. Before you get started,
 
 h2(#CreatingCustomCodeGenerators). Creating a new custom code generator project
 
-Creating custom code generators is a first-level concept in YAKINDU Statechart Tools. You can develop custom code generators directly within your project workspace. You have the choice to choose "Xpand":http://www.eclipse.org/modeling/m2t/?project=xpand, "Xtend2":http://www.eclipse.org/xtend/ (preferred) , or simply Java for implementing the code generator templates. 
+Creating custom code generators is a first-level concept in YAKINDU Statechart Tools. You can develop custom code generators directly within your project workspace. You have the choice to choose "Xtend2":http://www.eclipse.org/xtend/ (preferred) or simply Java for implementing the code generator templates. 
 
 To set up a new (Xtend2/Java) generator project, select _File → New → Other... → YAKINDU SCT_ → Xtend2/Java Generator Project_ and click _Next_.
 
@@ -2128,27 +2127,6 @@ bc. feature Generator {
 }
 
 ==<!-- End sgen_feature_generator -->==
-
-
-h2(#executing-a-custom-xpand-code-generator). Executing a custom Xpand code generator
-
-In order to execute an Xpand-based custom code generator, you have to create a new *Generator Model* with the generator ID *yakindu::xpand*, either by using the *New Statechart Generator Model* wizard or by simply creating a new text file with the file extension *.sgen*. The following feature allows to configure your code generator.
-
-==<!-- Start sgen_feature_template -->==
-
-h3(#template). Template
-
-The *Generator* feature allows to configure a custom code generator located in the workspace and written in Java or in another JVM language. It is a *required* feature and has the following parameters:
-
-# _templateProject_ (String, required): the name of the generator project
-# _templatePath_ (String, required): the fully-qualified template path of the main template
-
-bc. feature Template {
-    templateProject = "ExampleProject"
-    templatePath = "org::yakindu::sct::generator::xpand::Main::main"
-}
-
-==<!-- End sgen_feature_template -->==
 
 h2. Different meta models for different use cases
 
