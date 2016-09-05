@@ -15,14 +15,14 @@ You can also create *snapshots* of your statechart simulation. A snapshot contai
 
 h3(#advsim_the-light-switch-example). The light switch example
 
-Throughout this chapter we will be using the _light switch_ statechart as an example. It models a lamp which can be turned on and off and also supports various brightness values.
+Throughout this chapter we will be using the _light switch_ state machine as an example. It models a lamp which can be turned on and off and also supports various brightness values.
 
 If you press the _pressLightOn_ button, the lamp turns on at its lowest brightness value. If you operate _pressLightOn_ repeatedly, each time the lamp becomes brighter until it reaches its maximum brightness. Pressing the _pressLightOff_ button, immediately turns off the light completely. The brightness can only be raised as long as it hasn't yet reached its maximum value of five. After that, the guard condition disallows to raise it any further.
 
-p(#advsim_fig-the-light-switch-sample-statechart). 
-!(standard-image)images/advsim_010_lightswitch_010_statechart.png(The light switch sample statechart)!
+p(#advsim_fig-the-light-switch-sample-state-machine). 
+!(standard-image)images/advsim_010_lightswitch_010_statechart.png(The light switch sample state machine)!
 
-p=. The light switch sample statechart
+p=. The light switch sample state machine
 
 h2(#advsim-breakpoints). Breakpoints
 
@@ -32,7 +32,7 @@ h2(#advsim_executing-in-debugging-mode). Executing in debugging mode
 
 To make use of breakpoints, the statechart simulation needs to be executed in debugging mode:
 
-# Right&#45;click on the statechart model. The context menu opens.
+# Right&#45;click on the state machine model. The context menu opens.
 # Select _Debug As→Statechart Simulation_, see "Figure &quot;Starting a simulation in debugging mode&quot;":#advsim_fig-starting-a-simulation-in-debugging-mode.
 # The statechart simulation starts in the debugging mode.
 
@@ -122,7 +122,7 @@ In order to attach a condition to a breakpoint, proceed as follows:
 
 Enter the condition into the text field. Like in the statechart editor, a content assist is available when pressing @[Ctrl+Space]@. The expression is validated automatically. In the example shown in "figure &quot;Breakpoints view&quot;":#advsim_fig-breakpoints-view the transition suspends the simulation only if the variable _brightness_ has a value of 4.
 
-h2(#advsim_debugging-a-statechart). Debugging a statechart
+h2(#advsim_debugging-a-statechart). Debugging a state machine (statechart)
 
 h3. Changing variable values
 
