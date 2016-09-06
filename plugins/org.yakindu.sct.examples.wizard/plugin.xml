@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-	<extension point="org.eclipse.ui.newWizards">
+  	<extension point="org.eclipse.ui.newWizards">
+  		<category
+        	id="YAKINDU"
+        	parentCategory = "org.eclipse.ui.Examples"
+            name="YAKINDU SCT">
+      	</category>
       	<wizard
-        	category="org.eclipse.ui.Examples"
+        	category="org.eclipse.ui.Examples/YAKINDU"
             class="org.yakindu.sct.examples.wizard.ExampleWizard"
             icon="icons/logo-16.png"
             id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
             name="YAKINDU Statechart Examples">
-      	</wizard>
-    </extension>
-  	<extension point="org.eclipse.ui.newWizards">
-  		<category
-        	id="YAKINDU"
-            name="YAKINDU SCT">
-      	</category>
-      	<wizard
-      		category="YAKINDU"
-      		class="org.yakindu.sct.examples.wizard.ExampleWizard"
-      		icon="icons/logo-16.png"
-      		id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
-      		name="Examples">
       	</wizard>
   	</extension>
   	   <extension
