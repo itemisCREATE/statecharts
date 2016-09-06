@@ -28,6 +28,7 @@ import org.yakindu.sct.test.models.SCTUnitTestModels;
 
 import com.google.inject.Inject;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -329,8 +330,8 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 
 	private void stringListsEqual(List<String> onelist, List<String> otherlist)
 	{
-		onelist.sort(null);
-		otherlist.sort(null);
+		java.util.Collections.sort(onelist, Collator.getInstance());
+		java.util.Collections.sort(otherlist, Collator.getInstance());
 		assertEquals(onelist, otherlist);
 	}
 }
