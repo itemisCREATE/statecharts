@@ -12,12 +12,12 @@ class ShortString {
 	private int[] previous_cutArray; // holds previous state for rollback / undo possibility
 	
 	// cost of cutting operations
-	final static public int cost_lowercase_vocals = 1;
-	final static public int cost_underscore = 1;
-	final static public int cost_lowercase_consonants = 2;
-	final static public int cost_Uppercase = 3;
-	final static public int cost_digit = 10;
-	final static public int cost_firstLetter = 10;
+	final static public int COST_LOWERCASE_VOCALS = 1;
+	final static public int COST_UNDERSCORE = 1;
+	final static public int COST_LOWERCASE_CONSONANTS = 2;
+	final static public int COST_UPPERCASE = 3;
+	final static public int COST_DIGIT = 10;
+	final static public int COST_FIRSTLETTER = 10;
 	
 	
 	new(String s)
@@ -127,22 +127,22 @@ class ShortString {
 		var c = originalString.charAt(index);
 		
 		if(index == 0) {
-			cost += cost_firstLetter;
+			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_FIRSTLETTER;
 		}
 		if(Character.isDigit(c)) {
-			cost += cost_digit;
+			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_DIGIT;
 		}
 		else if(Character.isUpperCase(c)) {
-			cost += cost_Uppercase;
+			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_UPPERCASE;
 		}
 		else if(isLowercaseVocal(c)) {
-			cost += cost_lowercase_vocals;
+			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_LOWERCASE_VOCALS;
 		} 
 		else if(c.toString().equals("_")) {
-			cost += cost_underscore;
+			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_UNDERSCORE;
 		}
 		else {
-			cost += cost_lowercase_consonants;
+			cost += org.yakindu.sct.model.sexec.naming.ShortString.COST_LOWERCASE_CONSONANTS;
 		}
 		
 		return cost;
