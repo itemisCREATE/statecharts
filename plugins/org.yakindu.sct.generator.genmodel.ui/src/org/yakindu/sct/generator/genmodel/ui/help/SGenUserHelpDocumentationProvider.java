@@ -10,6 +10,10 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.help;
 
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.yakindu.base.utils.jface.help.AbstractUserHelpDocumentationProvider;
@@ -57,5 +61,21 @@ public class SGenUserHelpDocumentationProvider extends AbstractUserHelpDocumenta
 			return userHelp.substring(beginIndex, endIndex);
 		}
 		return EMPTY_DOCUMENTATION;
+	}
+	
+	public ArrayList<String> getDocumentedFeatures()
+	{
+		ArrayList<String> features = new ArrayList<String>();
+		String userHelp = getHelp(PLUGIN_ID + "." + CONTEXT_ID);
+		
+		// <!-- Start sgen_feature_naming -->
+		Pattern p = Pattern.compile("\\Q<!-- Start " + CONTEXT_ID + "_\\E" + "(\\S+) -->");
+		Matcher m = p.matcher(userHelp);
+		
+		while(m.find()) {
+			features.add(m.group(1));
+		}
+		
+		return features;
 	}
 }
