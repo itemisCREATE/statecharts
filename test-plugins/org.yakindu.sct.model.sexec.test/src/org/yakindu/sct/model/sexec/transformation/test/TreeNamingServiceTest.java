@@ -213,14 +213,14 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 		List<String> names = new ArrayList<String>();
 		
 		List<String> expectedNames = new ArrayList<String>(Arrays.asList(
-						"StateA",
-						"StateB",
+						"main_region_StateA",
+						"main_region_StateB",
 						"second_region_StateA",
 						"third_region_StateA",
-						"AnotherRegion_StateA",
-						"AnotherRegion_StateB",
-						"StateA_AnotherRegion_StateA",
-						"StateA_AnotherRegion_StateB"
+						"second_region_StateA_AnotherRegion_StateA",
+						"second_region_StateA_AnotherRegion_StateB",
+						"third_region_StateA_AnotherRegion_StateA",
+						"third_region_StateA_AnotherRegion_StateB"
 						));
 		
 		ExecutionFlow flow = optimizer.transform(sequencer.transform(toTest));
@@ -253,14 +253,14 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 		
 		// these names are shorter than 15 characters because there are more elements containing these names, e.g. state actions
 		List<String> expectedNames = new ArrayList<String>(Arrays.asList(
-					"StateA",
-					"StateB",
-					"srgn_StateA",
-					"trgn_SA",
-					"ARgn_SttA", 
-					"ARgn_SttB",
-					"SA_ARn_SA", 
-					"SA_ARn_StB" 
+					"mgn_SA",
+					"mgn_StteB",
+					"s_S",
+					"t_S",
+					"t_S_AR_SA", 
+					"t_S_AR_StB",
+					"s_S_AR_SA", 
+					"s_S_AR_StB"
 						));
 		
 		ExecutionFlow flow = optimizer.transform(sequencer.transform(toTest));

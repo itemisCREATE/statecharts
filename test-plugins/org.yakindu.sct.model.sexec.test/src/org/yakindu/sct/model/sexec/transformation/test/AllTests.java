@@ -29,7 +29,10 @@ import org.junit.runners.Suite.SuiteClasses;
 		ModelSequencerStateVectorTest.class, 
 		ModelSequencerHistoryTest.class,
 		SelfTransitionTest.class,
+		ShortStringTest.class,
 		StatechartEnterExistActionTest.class,
+		StringTreeNodeTest.class,
+		TreeNamingServiceTest.class,
 		DefaultNamingServiceTest.class,
 		NullCallTest.class
 		})

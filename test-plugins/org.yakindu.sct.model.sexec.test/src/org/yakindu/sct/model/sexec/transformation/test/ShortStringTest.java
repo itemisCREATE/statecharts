@@ -53,17 +53,17 @@ public class ShortStringTest {
 	{
 		shortstr = new ShortString("AAab_7");
 		
-		assertEquals(ShortString.cost_firstLetter + ShortString.cost_Uppercase, shortstr.getBaseCutCost(0));
+		assertEquals(ShortString.COST_FIRSTLETTER + ShortString.COST_UPPERCASE, shortstr.getBaseCutCost(0));
 		
-		assertEquals(ShortString.cost_Uppercase, shortstr.getBaseCutCost(1));
+		assertEquals(ShortString.COST_UPPERCASE, shortstr.getBaseCutCost(1));
 		
-		assertEquals(ShortString.cost_lowercase_vocals, shortstr.getBaseCutCost(2));
+		assertEquals(ShortString.COST_LOWERCASE_VOCALS, shortstr.getBaseCutCost(2));
 		
-		assertEquals(ShortString.cost_lowercase_consonants, shortstr.getBaseCutCost(3));
+		assertEquals(ShortString.COST_LOWERCASE_CONSONANTS, shortstr.getBaseCutCost(3));
 		
-		assertEquals(ShortString.cost_underscore, shortstr.getBaseCutCost(4));
+		assertEquals(ShortString.COST_UNDERSCORE, shortstr.getBaseCutCost(4));
 		
-		assertEquals(ShortString.cost_digit, shortstr.getBaseCutCost(5));
+		assertEquals(ShortString.COST_DIGIT, shortstr.getBaseCutCost(5));
 	}
 	
 	@Test
@@ -117,7 +117,7 @@ public class ShortStringTest {
 		shortstr.removeIndex(18); // o
 		shortstr.removeIndex(19); // o
 		
-		int expectedCost = 8 * ShortString.cost_lowercase_vocals * shortstr.getCutCostFactor();
+		int expectedCost = 8 * ShortString.COST_LOWERCASE_VOCALS * shortstr.getCutCostFactor();
 		
 		assertEquals(expectedCost, shortstr.getCutCost());
 	}
@@ -130,8 +130,8 @@ public class ShortStringTest {
 		shortstr.removeIndex(0);
 		
 		int expectedCost = (
-				1 * ShortString.cost_firstLetter +
-				1 * ShortString.cost_lowercase_vocals
+				1 * ShortString.COST_FIRSTLETTER +
+				1 * ShortString.COST_LOWERCASE_VOCALS
 				) * shortstr.getCutCostFactor();
 		
 		assertEquals(expectedCost, shortstr.getCutCost());
@@ -145,8 +145,8 @@ public class ShortStringTest {
 		shortstr.removeIndex(0);
 		
 		int expectedCost = (
-				1 * ShortString.cost_firstLetter + 
-				1 * ShortString.cost_Uppercase
+				1 * ShortString.COST_FIRSTLETTER + 
+				1 * ShortString.COST_UPPERCASE
 				) * shortstr.getCutCostFactor();
 		
 		assertEquals(expectedCost, shortstr.getCutCost());
