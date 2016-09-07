@@ -2060,9 +2060,9 @@ Voilà! The wizard creates a new generator project for you with a structure as s
 
 h3. Executing the custom code generator
 
-To test your custom code generator, create a new project containing a YAKINDU Statechart Tools model as described in the "Getting started" tutorial chapter "Creating a statechart model" (TODO: link).
+To test your custom code generator, create a new project containing a YAKINDU Statechart Tools model as described in section "&quot;Editing statecharts&quot;":../user-guide/editing_statecharts.html#editing-statecharts.
 
-After that, create a new generator model as described in chapter "Generating code". Select _Custom Xtend2/Java based code generator_ as the generator to use. As you may have noticed, the generator model for the @yakindu::generic@ generator contains an additional feature called _Generator_. This is where you can specify the name of your custom generator project and the fully-qualified generator class name as shown below. 
+After that, create a new generator model as described in section "&quot;Configuring a generator&quot;":#configuring-a-generator. Select _Custom Xtend2/Java based code generator_ as the generator to use. As you may have noticed, the generator model for the @yakindu::generic@ generator contains an additional feature called _Generator_. This is where you can specify the name of your custom generator project and the fully-qualified generator class name as shown below. 
 
 bc(prettyprint).. 
 GeneratorModel for yakindu::generic {
