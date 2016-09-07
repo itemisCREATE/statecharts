@@ -63,19 +63,18 @@ public class SGenUserHelpDocumentationProvider extends AbstractUserHelpDocumenta
 		return EMPTY_DOCUMENTATION;
 	}
 	
-	public ArrayList<String> getDocumentedFeatures()
-	{
+	public ArrayList<String> getDocumentedFeatures() {
 		ArrayList<String> features = new ArrayList<String>();
 		String userHelp = getHelp(PLUGIN_ID + "." + CONTEXT_ID);
-		
+
 		// <!-- Start sgen_feature_naming -->
 		Pattern p = Pattern.compile("\\Q<!-- Start " + CONTEXT_ID + "_\\E" + "(\\S+) -->");
 		Matcher m = p.matcher(userHelp);
-		
-		while(m.find()) {
+
+		while (m.find()) {
 			features.add(m.group(1));
 		}
-		
+
 		return features;
 	}
 }

@@ -22,7 +22,6 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
@@ -76,7 +75,6 @@ public class HelpIntegrationTest {
 	}
 
 	@Test
-	@Ignore
 	public void checkCppGeneratorFeatureDocumentation() {
 		checkGeneratorFeatureDocumentation(YAKINDU_CPP);
 	}
@@ -87,14 +85,11 @@ public class HelpIntegrationTest {
 	}
 	
 	@Test
-	public void featuresTest()
-	{
+	public void checkDocumentedFeaturesExist() {
 		List<String> features = getDocumentedFeatures();
 		ArrayList<String> generators = new ArrayList<String>(
-				Arrays.asList(YAKINDU_JAVA, YAKINDU_C, YAKINDU_CPP, YAKINDU_GENERIC)
-			);
-		for(String generator : generators)
-		{
+				Arrays.asList(YAKINDU_JAVA, YAKINDU_C, YAKINDU_CPP, YAKINDU_GENERIC));
+		for (String generator : generators) {
 			Iterable<IEObjectDescription> allElements = getAllElements(generator);
 			for (IEObjectDescription desc : allElements) {
 				if (desc.getEClass() != SGenPackage.Literals.FEATURE_TYPE)
@@ -106,12 +101,10 @@ public class HelpIntegrationTest {
 					if (type != null) {
 						name = type.getName();
 					}
-				}
-				else if (o instanceof FeatureType) {
+				} else if (o instanceof FeatureType) {
 					FeatureType type = (FeatureType) o;
 					if (type != null) {
 						name = type.getName();
-
 					}
 				} else if (o instanceof FeatureParameter) {
 					FeatureType type = ((FeatureParameter) o).getFeatureType();
@@ -119,16 +112,16 @@ public class HelpIntegrationTest {
 						name = type.getName();
 					}
 				}
-				if(name != null) name = name.toLowerCase();
-				if(name != null && features.contains(name)) {
+				if (name != null)
+					name = name.toLowerCase();
+				if (name != null && features.contains(name)) {
 					features.remove(name);
 				}
 			}
 		}
-		
-		if(features.size() > 0) {
-			
-			fail("There are documented features that are not implemented: " + String.join(", ", features));
+
+		if (features.size() > 0) {
+			fail("There are documented features that are not implemented: " + Arrays.toString(features.toArray()));
 		}
 	}
 	
