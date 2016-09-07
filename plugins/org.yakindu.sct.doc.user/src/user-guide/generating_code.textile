@@ -425,7 +425,7 @@ h4(#c-fundamental-statechart-methods). Fundamental statechart methods
 
 The generated code contains fundamental methods to initialize, enter, and exit a state machine, as well as a method to start a run-to-completion step.
 
-In the header file the method names are made up of the statechart name followed by the name of the respective functionality. For example, the methods of the traffic light example are generated as follows:
+In the header file the method names are made up of the state machine name followed by the name of the respective functionality. For example, the methods of the traffic light example are generated as follows:
 
 bc.. 
 /*! Initializes the TrafficLight state machine data structures. Must be called before first usage.*/
