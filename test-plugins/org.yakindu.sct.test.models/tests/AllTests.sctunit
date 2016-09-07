@@ -55,7 +55,8 @@ testsuite AllTests {
 	TransitionWithoutCondition,
 	TriggerGuardExpressions,
 	TriggerExpressionPrecedence,
-	ValuedEvents
+	ValuedEvents,
+	TypeAlias
 	//Add the following tests if sct unit Java and C++ generators
 	// support mock timer service generation
 	//StatemachineKeywords,
