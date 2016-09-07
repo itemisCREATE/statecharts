@@ -4,23 +4,26 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  * Contributors:
- *     committers of YAKINDU - initial API and implementation
+ * 	committers of YAKINDU - initial API and implementation
+ * 
  */
-package org.yakindu.sct.generator.core.execution;
-
-import org.yakindu.sct.model.sgen.GeneratorEntry;
+package org.yakindu.sct.domain.extension;
 
 /**
- * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface IGeneratorEntryExecutor {
+public interface IDomainStatusProvider {
 
-	public static final String SKIP_VALIDATION = "skipValidation";
-	
-	public void execute(GeneratorEntry entry);
+	public DomainStatus getDomainStatus();
 
+	public class DefaultDomainStatusProvider implements IDomainStatusProvider {
+
+		@Override
+		public DomainStatus getDomainStatus() {
+			return DomainStatus.OK;
+		}
+
+	}
 }

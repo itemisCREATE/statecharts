@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.yakindu.sct.model.sgen.ParameterTypes
 import org.yakindu.sct.model.sgen.SGenFactory
+import org.eclipse.xtext.util.Strings
 
 /**
  * 
@@ -324,7 +325,8 @@ class GeneratorProjectTemplate {
 		<plugin>
 		   <extension
 		         point="org.yakindu.sct.generator.core.generator">
-		      <SCTGenerator class="«data.generatorClass»"
+		      <SCTGenerator 
+					executor="org.yakindu.sct.generator.core.execution.SExecGeneratorEntryExecutor"
 		            description="«data.generatorDescription.escapeForXml»"
 		            id="«data.generatorId»"
 		            name="«data.generatorName.escapeForXml»"
@@ -422,7 +424,7 @@ class GeneratorProjectTemplate {
 		import org.eclipse.core.runtime.IStatus;
 		import org.eclipse.core.runtime.Status;
 		import org.eclipse.emf.ecore.EObject;
-		import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
+		import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider;
 		import org.yakindu.sct.model.sgen.FeatureParameterValue;
 		import org.yakindu.sct.model.sgen.FeatureType;
 		import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
@@ -483,9 +485,9 @@ class GeneratorProjectTemplate {
 	'''
 	
 	def buildProperties(ProjectData data) '''
-		source.. = src«IF data.generatorType == GeneratorType::Xtend»,\
+		source.. = src/«IF data.generatorType == GeneratorType::Xtend»,\
 			xtend-gen
-		«ENDIF»
+		«ELSE»«Strings.newLine»«ENDIF»
 		«IF data.pluginExport»
 			bin.includes = META-INF/,.,plugin.xml«IF data.typeLibrary»,library/«ENDIF»
 		«ELSE»

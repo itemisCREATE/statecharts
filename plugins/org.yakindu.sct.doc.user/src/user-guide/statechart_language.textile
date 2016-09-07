@@ -74,7 +74,7 @@ p(#fig_local-reaction-syntax).
 p=. Local reaction syntax
 
 * The _reaction trigger_. It specifies the conditions that have to be fulfilled for the local reaction to be executed. It consists of one or more "_event specifications_":#event-specifications and a "_guard condition_":#guard-condition. One of these, i.&nbsp;e. either event specification(s) or guard condition, may be omitted, but not both.
-** The "event specifications":#event-specifications determine which events, separated by comma, will trigger this particular local reaction. Occurrence of one of these events is sufficient. Special events are @entry@ and @exit@, which will trigger when the state becomes active or is about to become passive, respectively. For more on "event specifications":#event-specifications, see section "&quot;Event specifications&quot;":#event-specifications.
+** The "event specifications":#event-specifications determine which events, separated by comma, will trigger this particular local reaction. Occurrence of one of these events is sufficient. Special events are @entry@ and @exit@, which will trigger when the state is about to become active or just became inactive, respectively. For more on "event specifications":#event-specifications, see section "&quot;Event specifications&quot;":#event-specifications.
 ** The "guard condition":#guard-condition must be fulfilled for the local reaction to be triggered. It is a boolean expression, enclosed in square brackets. For more on "guard conditions":#guard-condition, see section "&quot;Guard condition&quot;":#guard-condition.
 ** If no event specification is given, this is equivalent to the @always@ event specification being specified. That is, the local reaction is always triggered as long as the guard condition evaluates to _true_.
 ** If the guard condition is omitted, this is equivalent to the @[true]@ guard condition being specified.
@@ -148,10 +148,10 @@ For a transition as well as for a state's local reaction you can specify events 
 An event specification is either the name of an event that has been declared in the definition section, see section "&quot;Events&quot;":#events, or one of the built-in event specifications @after@, @every@, @always@, or @oncycle@. The latter are documented in detail in section "&quot;Reaction triggers&quot;":#reaction-triggers.
 
 Local reactions have two more built-in event specifiers at their disposal:
-* @entry@: The corresponding "reaction effect":#reaction-effect is executed when the state becomes active.
-* @exit@: The corresponding "reaction effect":#reaction-effect is executed just before the state becomes passive.
+* @entry@: The corresponding "reaction effect":#reaction-effect is executed just before the state becomes active.
+* @exit@: The corresponding "reaction effect":#reaction-effect is executed just after the state became inactive.
 
-bq. *Please note:* A self-transition, leading from a state back to itself, actually first leaves and then enters the state again. That means that its @exit@ effects as well as its @entry@ effects are executed. This is in contrast to a local reaction, which is executed without leaving the active state. Thus @exit@ and @entry@ effects are _not_ executed.
+bq. *Please note:* A self-transition, leading from a state back to itself, actually first leaves and then re-enters the state. That means that its @exit@ effects as well as its @entry@ effects are executed. This is in contrast to a local reaction, which is executed without leaving the active state. Thus @exit@ and @entry@ effects are _not_ executed in the latter case.
 
 Let's have a look at some sample event specifications:
 
@@ -165,8 +165,8 @@ Let's have a look at some sample event specifications:
 {vertical-align: top}. | @oncycle@ | Same as @always@. |
 {vertical-align: top}. | @default@ | Transition always fires. Only meaningful with a "choice":#choice to define a transition to be taken when all other transitions of the choice cannot be taken. Not available on local reactions. |
 {vertical-align: top}. | @else@ | Same as @default@. |
-{vertical-align: top}. | @entry@ | State has just become active. Not available on transitions. |
-{vertical-align: top}. | @exit@ | State is about to become passive. Not available on transitions. |
+{vertical-align: top}. | @entry@ | State is about to become active. Not available on transitions. |
+{vertical-align: top}. | @exit@ | State has just become inactive. Not available on transitions. |
 
 p. 
 
@@ -786,14 +786,14 @@ This trigger is intended to be used for the outgoing transitions of _choice_ pse
 
 h3(#entry-1). entry
 
-An _entry_ trigger marks actions that are carried out when entering a state or state machine.
+An _entry_ trigger marks actions that are carried out when entering a state or state machine, immediately before making it active.
 
 ==<!-- End stext_keyword_entry -->==
 ==<!-- Start stext_keyword_exit -->==
 
 h3(#exit-1). exit
 
-An _exit_ trigger marks actions that are carried out when exiting a state or state machine.
+An _exit_ trigger marks actions that are carried out when exiting a state or state machine, immediately after making it inactive.
 
 ==<!-- End stext_keyword_exit -->==
 

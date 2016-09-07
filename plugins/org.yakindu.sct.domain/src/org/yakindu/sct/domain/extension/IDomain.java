@@ -41,4 +41,6 @@ public interface IDomain {
 
 	URL getImagePath();
 
+	DomainStatus getAvailabilityStatus();
+
 }

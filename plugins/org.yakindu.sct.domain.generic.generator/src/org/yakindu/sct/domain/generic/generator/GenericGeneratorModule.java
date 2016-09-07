@@ -13,9 +13,11 @@ package org.yakindu.sct.domain.generic.generator;
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.eclipse.xtext.validation.IResourceValidator;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
+import org.yakindu.sct.model.stext.resource.SCTResourceValidatorImpl;
 
 import com.google.inject.Binder;
 
@@ -36,6 +38,10 @@ public class GenericGeneratorModule extends AbstractGenericModule {
 
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return StextNameProvider.class;
+	}
+
+	public Class<? extends IResourceValidator> bindIResourceValidator() {
+		return SCTResourceValidatorImpl.class;
 	}
 
 }

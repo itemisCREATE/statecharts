@@ -133,7 +133,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 		getSite().registerContextMenu(ActionIds.DIAGRAM_EDITOR_CONTEXT_MENU, provider, viewer);
 	}
 
-	private void createBreadcrumbViewer(Composite parent) {
+	protected void createBreadcrumbViewer(Composite parent) {
 		viewer = new DiagramPartitioningBreadcrumbViewer(parent, SWT.READ_ONLY);
 		viewer.addSelectionChangedListener(this);
 		viewer.setContentProvider(new BreadcrumbViewerContentProvider());

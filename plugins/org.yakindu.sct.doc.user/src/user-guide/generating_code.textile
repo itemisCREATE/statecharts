@@ -29,7 +29,6 @@ p. The _[GeneratorId]_ represents the unique ID of the generator. Currently, the
 
 # @yakindu::java@ – Generator ID for the Java code generator 
 # @yakindu::c@ – Generator ID for the C code generator
-# @yakindu::xpand@ – Generator ID for custom Xpand-based code generators
 # @yakindu::generic@ – Generator ID for custom Java-based code generators  
 
 A single generator model can contain several _StatechartReferences_. These are cross references to statechart models for whom code is to be generated. For each reference, the generator process can be configured with _Feature_ zs. Each feature has one or more parameters. These parameters can be configured with _ParameterName_ @=@ _ParameterValue_.
@@ -443,7 +442,7 @@ extern void trafficLight_runCycle(TrafficLight* handle);
 
 p. 
 
-<ul><li><p>The @init()@ method is used to initialize the statechart data structure right after its instantiation. Variables are initialized to their respective default values. If the statechart defines initialized variables, these initializations are also done in the @init()@ method.</p></li><li><p>The @enter()@ method must be called to enter the state machine. It brings the state machine to a well-defined state.</p></li><li><p>The @exit()@ method is used to leave a state machine statefully. If for example a history state is used in one of the top regions, the last active state is stored and the state machine is left via @exit()@. Re-entering it via @enter()@ continues to work with the saved state.</p></li><li><p>The @runCycle()@ method is used to trigger a run-to-completion step in which the state machine evaluates arising events and computes possible state changes. Somewhat simplified, a run-to-completion cycle consists of the following steps:</p><ol style="list-style-type: decimal;"><li><p>Clear list of outgoing events.</p></li><li><p>Check whether events have occurred which are leading to a state change.</p></li><li><p>If a state change has to be done:</p><ol style="list-style-type: decimal;"><li><p>Execute exit actions of the present state.</p></li><li><p>Save history state, if necessary.</p></li><li><p>Make the new state active.</p></li><li><p>Execute entry actions of the new state.</p></li></ol></li><li><p>Clear list of incoming events.</p></li></ol></li></ul>
+<ul><li><p>The @init()@ function is used to initialize the internal objects of the state machine right after its instantiation. Variables are initialized to their respective default values. If the statechart defines initialized variables, these initializations are also done in the @init()@ function.</p></li><li><p>The @enter()@ function must be called to enter the state machine. It brings the state machine to a well-defined state.</p></li><li><p>The @exit()@ function is used to leave a state machine statefully. If for example a history state is used in one of the top regions, the last active state is stored and the state machine is left via @exit()@. Re-entering it via @enter()@ continues to work with the saved state.</p></li><li><p>The @runCycle()@ function is used to trigger a run-to-completion step in which the state machine evaluates arising events and computes possible state changes. Somewhat simplified, a run-to-completion cycle consists of the following steps:</p><ol style="list-style-type:  decimal;"><li><p>Clear list of outgoing events.</p></li><li><p>Check whether events have occurred which are leading to a state change.</p></li><li><p>If a state change has to be done:</p><ol style="list-style-type:  decimal;"><li><p>Make the present state inactive.</p></li><li><p>Execute exit actions of the present state.</p></li><li><p>Save history state, if necessary.</p></li><li><p>Execute transition actions, if any.</p></li><li><p>Execute entry actions of the new state.</p></li><li><p>Make the new state active.</p></li></ol></li><li><p>Clear list of incoming events.</p></li></ol></li></ul>
 
 h4(#accessing-variables-and-events). Accessing variables and events
 
@@ -738,25 +737,6 @@ bc. feature GeneratorOptions {
 }
 
 ==<!-- End sgen_feature_generatoroptions -->==
-==<!-- Start sgen_feature_junitwrapper -->==
-
-h3(#junitwrapper). JUnitWrapper
-
-###. FIXME: This is quite likely a Java feature, at least JUnit is.
-
-Using the _JUnitWrapper_ feature, it is possible to create JUnit tests that will run the generated gtests.
-
-###. FIXME: What a gtests?
-
-# _WrapToJUnit_ (Boolean): This parameter determines whether a JUnit wrapper test is to be generated _&#40;true)_ or not _&#40;false)_.
-
-bq.. *Example:*
-
-bc. feature JUnitWrapper {
-    WrapToJUnit =  "false"
-}
-
-==<!-- End sgen_feature_junitwrapper -->==
 
 
 h2(#cpp-code-specification). Specification of C++ code
@@ -842,7 +822,7 @@ The generated code contains fundamental methods to initialize, enter, and exit a
 
 The @StatemachineInterface@ interface specifies the four functions @init()@, @enter()@, @exit()@ and @runCycle()@.
 
-<ul><li><p>The @init()@ function is used to initialize the internal objects of the state machine right after its instantiation. Variables are initialized to their respective default values. If the statechart defines initialized variables, these initializations are also done in the @init()@ function.</p></li><li><p>The @enter()@ function must be called to enter the state machine. It brings the state machine to a well-defined state.</p></li><li><p>The @exit()@ function is used to leave a state machine statefully. If for example a history state is used in one of the top regions, the last active state is stored and the state machine is left via @exit()@. Re-entering it via @enter()@ continues to work with the saved state.</p></li><li><p>The @runCycle()@ function is used to trigger a run-to-completion step in which the state machine evaluates arising events and computes possible state changes. Somewhat simplified, a run-to-completion cycle consists of the following steps:</p><ol style="list-style-type: decimal;"><li><p>Clear list of outgoing events.</p></li><li><p>Check whether events have occurred which are leading to a state change.</p></li><li><p>If a state change has to be done:</p><ol style="list-style-type: decimal;"><li><p>Execute exit actions of the present state.</p></li><li><p>Save history state, if necessary.</p></li><li><p>Make the new state active.</p></li><li><p>Execute entry actions of the new state.</p></li></ol></li><li><p>Clear list of incoming events.</p></li></ol></li></ul>
+<ul><li><p>The @init()@ function is used to initialize the internal objects of the state machine right after its instantiation. Variables are initialized to their respective default values. If the statechart defines initialized variables, these initializations are also done in the @init()@ function.</p></li><li><p>The @enter()@ function must be called to enter the state machine. It brings the state machine to a well-defined state.</p></li><li><p>The @exit()@ function is used to leave a state machine statefully. If for example a history state is used in one of the top regions, the last active state is stored and the state machine is left via @exit()@. Re-entering it via @enter()@ continues to work with the saved state.</p></li><li><p>The @runCycle()@ function is used to trigger a run-to-completion step in which the state machine evaluates arising events and computes possible state changes. Somewhat simplified, a run-to-completion cycle consists of the following steps:</p><ol style="list-style-type:  decimal;"><li><p>Clear list of outgoing events.</p></li><li><p>Check whether events have occurred which are leading to a state change.</p></li><li><p>If a state change has to be done:</p><ol style="list-style-type:  decimal;"><li><p>Make the present state inactive.</p></li><li><p>Execute exit actions of the present state.</p></li><li><p>Save history state, if necessary.</p></li><li><p>Execute transition actions, if any.</p></li><li><p>Execute entry actions of the new state.</p></li><li><p>Make the new state active.</p></li></ol></li><li><p>Clear list of incoming events.</p></li></ol></li></ul>
 
 h3(#cpp-time-controlled-state-machines). Time-controlled state machines
 
@@ -1327,7 +1307,7 @@ The generated code contains fundamental methods to initialize, enter, and exit a
 
 The @IStatemachine@ interface specifies the four methods @init()@, @enter()@, @exit()@, and @runCycle()@.
 
-<ul><li><p>The @init()@ method is used to initialize the internal objects of the state machine right after its instantiation. Variables are initialized to their respective default values. If the statechart defines initialized variables, these initializations are also done in the @init()@ method.</p></li><li><p>The @enter()@ method must be called to enter the state machine. It brings the state machine to a well-defined state.</p></li><li><p>The @exit()@ method is used to leave a state machine statefully. If for example a history state is used in one of the top regions, the last active state is stored and the state machine is left via @exit()@. Re-entering it via @enter()@ continues to work with the saved state.</p></li><li><p>The @runCycle()@ method is used to trigger a run-to-completion step in which the state machine evaluates arising events and computes possible state changes. Somewhat simplified, a run-to-completion cycle consists of the following steps:</p><ol style="list-style-type: decimal;"><li><p>Clear list of outgoing events.</p></li><li><p>Check whether events have occurred which are leading to a state change.</p></li><li><p>If a state change has to be done:</p><ol style="list-style-type: decimal;"><li><p>Execute exit actions of the present state.</p></li><li><p>Save history state, if necessary.</p></li><li><p>Make the new state active.</p></li><li><p>Execute entry actions of the new state.</p></li></ol></li></ol></li><li><p>Clear list of incoming events.</p></li></ul>
+<ul><li><p>The @init()@ method is used to initialize the internal objects of the state machine right after its instantiation. Variables are initialized to their respective default values. If the statechart defines initialized variables, these initializations are also done in the @init()@ method.</p></li><li><p>The @enter()@ method must be called to enter the state machine. It brings the state machine to a well-defined state.</p></li><li><p>The @exit()@ method is used to leave a state machine statefully. If for example a history state is used in one of the top regions, the last active state is stored and the state machine is left via @exit()@. Re-entering it via @enter()@ continues to work with the saved state.</p></li><li><p>The @runCycle()@ method is used to trigger a run-to-completion step in which the state machine evaluates arising events and computes possible state changes. Somewhat simplified, a run-to-completion cycle consists of the following steps:</p><ol style="list-style-type: decimal;"><li><p>Clear list of outgoing events.</p></li><li><p>Check whether events have occurred which are leading to a state change.</p></li><li><p>If a state change has to be done:</p><ol style="list-style-type: decimal;"><li><p>Make the present state inactive.</p></li><li><p>Execute exit actions of the present state.</p></li><li><p>Save history state, if necessary.</p></li><li><p>Execute transition actions, if any.</p></li><li><p>Execute entry actions of the new state.</p></li><li><p>Make the new state active.</p></li></ol></li><li><p>Clear list of incoming events.</p></li></ol></li></ul>
 
 
 h3(#java-time-controlled-state-machines). Time-controlled state machines
@@ -2062,7 +2042,7 @@ Implementing a custom code generator is no trivial task. Before you get started,
 
 h2(#CreatingCustomCodeGenerators). Creating a new custom code generator project
 
-Creating custom code generators is a first-level concept in YAKINDU Statechart Tools. You can develop custom code generators directly within your project workspace. You have the choice to choose "Xpand":http://www.eclipse.org/modeling/m2t/?project=xpand, "Xtend2":http://www.eclipse.org/xtend/ (preferred) , or simply Java for implementing the code generator templates. 
+Creating custom code generators is a first-level concept in YAKINDU Statechart Tools. You can develop custom code generators directly within your project workspace. You have the choice to choose "Xtend2":http://www.eclipse.org/xtend/ (preferred) or simply Java for implementing the code generator templates. 
 
 To set up a new (Xtend2/Java) generator project, select _File → New → Other... → YAKINDU SCT_ → Xtend2/Java Generator Project_ and click _Next_.
 
@@ -2121,7 +2101,6 @@ The *Generator* feature allows to configure a custom code generator located in t
 
 # _generatorProject_ (String, required): the name of the generator project
 # _generatorClass_ (String, required): the fully-qualified name of the code generator class
-# _configurationModule_ (String, optional): the fully-qualified class name of a Guice module to configure the code generator
 
 bc. feature Generator {
     generatorProject = "org.yakindu.sct.mygenerator"
@@ -2129,27 +2108,6 @@ bc. feature Generator {
 }
 
 ==<!-- End sgen_feature_generator -->==
-
-
-h2(#executing-a-custom-xpand-code-generator). Executing a custom Xpand code generator
-
-In order to execute an Xpand-based custom code generator, you have to create a new *Generator Model* with the generator ID *yakindu::xpand*, either by using the *New Statechart Generator Model* wizard or by simply creating a new text file with the file extension *.sgen*. The following feature allows to configure your code generator.
-
-==<!-- Start sgen_feature_template -->==
-
-h3(#template). Template
-
-The *Generator* feature allows to configure a custom code generator located in the workspace and written in Java or in another JVM language. It is a *required* feature and has the following parameters:
-
-# _templateProject_ (String, required): the name of the generator project
-# _templatePath_ (String, required): the fully-qualified template path of the main template
-
-bc. feature Template {
-    templateProject = "ExampleProject"
-    templatePath = "org::yakindu::sct::generator::xpand::Main::main"
-}
-
-==<!-- End sgen_feature_template -->==
 
 h2. Different meta models for different use cases
 

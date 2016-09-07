@@ -186,6 +186,7 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 				return linkedObjects.get(0);
 			} else {
 				createDiagnostic(triple);
+				return null;
 			}
 		}
 		if (uriFragment != null && uriFragment.startsWith(SCT_PREFIX)) {

@@ -85,6 +85,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing Transitions from Entries can only target to sibling or inner states.";
 	public static final String ISSUE_STATECHART_NAME_NO_IDENTIFIER = "%s is not a valid identifier!";
 
+	
 	@Check(CheckType.FAST)
 	public void vertexNotReachable(final Vertex vertex) {
 		if (!(vertex instanceof Entry)) {
