@@ -12,16 +12,16 @@ package org.yakindu.sct.generator.genmodel.test;
 
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
@@ -31,6 +31,9 @@ import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.genmodel.resource.FeatureResourceDescription;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
 import org.yakindu.sct.generator.genmodel.ui.help.SGenUserHelpDocumentationProvider;
+import org.yakindu.sct.model.sgen.FeatureConfiguration;
+import org.yakindu.sct.model.sgen.FeatureParameter;
+import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
 import com.google.common.collect.Iterables;
@@ -53,9 +56,9 @@ public class HelpIntegrationTest {
 	private static final String YAKINDU_C = "yakindu::c";
 	private static final String YAKINDU_CPP = "yakindu::cpp";
 	private static final String YAKINDU_GENERIC = "yakindu::generic";
-	private static final String YAKINDU_XPAND = "yakindu::xpand";
+		
 	@Inject
-	private IEObjectDocumentationProvider documentationProvider;
+	private SGenUserHelpDocumentationProvider documentationProvider;
 	@Inject
 	private XtextResourceSet resourceSet;
 	@Inject
@@ -63,45 +66,79 @@ public class HelpIntegrationTest {
 
 	@Test
 	public void checkJavaGeneratorFeatureDocumentation() {
-		List<String> missingDocumentation = getFeaturesWithoutDocumentation(YAKINDU_JAVA);
-		if (missingDocumentation.size() > 0) {
-			fail("Missing generator feature(s) documentation for generator "
-					+ YAKINDU_JAVA + ": " + missingDocumentation);
-		}
+		checkGeneratorFeatureDocumentation(YAKINDU_JAVA);
 	}
 
 	@Test
 	public void checkCGeneratorFeatureDocumentation() {
-		List<String> missingDocumentation = getFeaturesWithoutDocumentation(YAKINDU_C);
-		if (missingDocumentation.size() > 0) {
-			fail("Missing generator feature(s) documentation for generator "
-					+ YAKINDU_C + ": " + missingDocumentation);
-		}
+		checkGeneratorFeatureDocumentation(YAKINDU_C);
 	}
 
 	@Test
-	@Ignore
 	public void checkCppGeneratorFeatureDocumentation() {
-		List<String> missingDocumentation = getFeaturesWithoutDocumentation(YAKINDU_CPP);
-		if (missingDocumentation.size() > 0) {
-			fail("Missing generator feature(s) documentation for generator "
-					+ YAKINDU_CPP + ": " + missingDocumentation);
-		}
-
+		checkGeneratorFeatureDocumentation(YAKINDU_CPP);
 	}
 
 	@Test
 	public void checkGenericGeneratorFeatureDocumentation() {
-		List<String> missingDocumentation = getFeaturesWithoutDocumentation(YAKINDU_GENERIC);
-		if (missingDocumentation.size() > 0) {
-			fail("Missing generator feature(s) documentation for generator "
-					+ YAKINDU_GENERIC + ": " + missingDocumentation);
+		checkGeneratorFeatureDocumentation(YAKINDU_GENERIC);
+	}
+	
+	@Test
+	public void checkDocumentedFeaturesExist() {
+		List<String> features = getDocumentedFeatures();
+		ArrayList<String> generators = new ArrayList<String>(
+				Arrays.asList(YAKINDU_JAVA, YAKINDU_C, YAKINDU_CPP, YAKINDU_GENERIC));
+		for (String generator : generators) {
+			Iterable<IEObjectDescription> allElements = getAllElements(generator);
+			for (IEObjectDescription desc : allElements) {
+				if (desc.getEClass() != SGenPackage.Literals.FEATURE_TYPE)
+					continue;
+				EObject o = desc.getEObjectOrProxy();
+				String name = null;
+				if (o instanceof FeatureConfiguration) {
+					FeatureType type = ((FeatureConfiguration) o).getType();
+					if (type != null) {
+						name = type.getName();
+					}
+				} else if (o instanceof FeatureType) {
+					FeatureType type = (FeatureType) o;
+					if (type != null) {
+						name = type.getName();
+					}
+				} else if (o instanceof FeatureParameter) {
+					FeatureType type = ((FeatureParameter) o).getFeatureType();
+					if (type != null) {
+						name = type.getName();
+					}
+				}
+				if (name != null)
+					name = name.toLowerCase();
+				if (name != null && features.contains(name)) {
+					features.remove(name);
+				}
+			}
 		}
 
+		if (features.size() > 0) {
+			fail("There are documented features that are not implemented: " + Arrays.toString(features.toArray()));
+		}
 	}
-
-	private List<String> getFeaturesWithoutDocumentation(String generatorId) {
-		
+	
+	private void checkGeneratorFeatureDocumentation(String generator)
+	{
+		List<String> missingDocumentation = getFeaturesWithoutDocumentation(generator);
+		if (missingDocumentation.size() > 0) {
+			fail("Missing generator feature(s) documentation for generator "
+					+ generator + ": " + missingDocumentation);
+		}
+	}
+	
+	private List<String> getDocumentedFeatures() {
+		return documentationProvider.getDocumentedFeatures();
+	}
+	
+	private Iterable<IEObjectDescription> getAllElements(String generatorId) {
 		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
 				.getGeneratorDescriptor(generatorId);
 		
@@ -117,6 +154,12 @@ public class HelpIntegrationTest {
 			allElements = Iterables.concat(allElements,
 					description.getExportedObjects());
 		}
+		
+		return allElements;
+	}
+
+	private List<String> getFeaturesWithoutDocumentation(String generatorId) {
+		Iterable<IEObjectDescription> allElements = getAllElements(generatorId);
 		List<String> missingDocumentation = Lists.newArrayList();
 		for (IEObjectDescription desc : allElements) {
 			if (desc.getEClass() != SGenPackage.Literals.FEATURE_TYPE)
