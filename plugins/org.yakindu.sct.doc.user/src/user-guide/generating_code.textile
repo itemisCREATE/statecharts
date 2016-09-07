@@ -737,25 +737,6 @@ bc. feature GeneratorOptions {
 }
 
 ==<!-- End sgen_feature_generatoroptions -->==
-==<!-- Start sgen_feature_junitwrapper -->==
-
-h3(#junitwrapper). JUnitWrapper
-
-###. FIXME: This is quite likely a Java feature, at least JUnit is.
-
-Using the _JUnitWrapper_ feature, it is possible to create JUnit tests that will run the generated gtests.
-
-###. FIXME: What a gtests?
-
-# _WrapToJUnit_ (Boolean): This parameter determines whether a JUnit wrapper test is to be generated _&#40;true)_ or not _&#40;false)_.
-
-bq.. *Example:*
-
-bc. feature JUnitWrapper {
-    WrapToJUnit =  "false"
-}
-
-==<!-- End sgen_feature_junitwrapper -->==
 
 
 h2(#cpp-code-specification). Specification of C++ code
