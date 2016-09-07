@@ -5,6 +5,10 @@
          xmlns:if="ant:if"
          xmlns:unless="ant:unless"
          xmlns:artifact="antlib:org.eclipse.aether.ant">
+    
+    <!-- Runtime properties:
+         website.local.files: Generates website as local files
+    -->
 
     <!-- Include platform-specific or machine-specific properties, if any. -->
     <property file="local.properties" />
