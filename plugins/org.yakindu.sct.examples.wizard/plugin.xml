@@ -15,6 +15,20 @@
          name="YAKINDU Statechart Examples">
       </wizard>
    </extension>
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+         id="YAKINDU"
+         name="YAKINDU SCT">
+      </category>
+      <wizard
+          category="YAKINDU"
+          class="org.yakindu.sct.examples.wizard.ExampleWizard"
+          icon="icons/logo-16.png"
+          id="org.yakindu.sct.examples.ui.wizards.ExampleWizard"
+          name="Examples">
+      </wizard>
+    </extension>
+   
    <extension point="org.eclipse.ui.preferencePages">
       <page
          category="org.yakindu.sct.ui.preferences.root"
