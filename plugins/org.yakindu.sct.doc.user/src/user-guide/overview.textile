@@ -5,11 +5,11 @@ h1(#what-are-yakindu-statechart-tools). What are YAKINDU Statechart Tools?
 
 The statechart tools are a central part of YAKINDU: the modular toolkit for model-driven development of embedded systems. It is based on the open-source development platform Eclipse. YAKINDU Statechart Tools (YAKINDU SCT) provide the following tools to deal with state machine diagrams:
 
-* *Statechart diagram editor* to graphically create and edit statecharts
-* *Statechart simulator* to simulate the behavior of statecharts
-* *Code generators for Java, C, C&#43;&#43;* to transform statecharts into code
+* *Statechart diagram editor* to graphically create and edit state machines
+* *Statechart simulator* to simulate the behavior of state machines
+* *Code generators for Java, C, C&#43;&#43;* to transform state machines into code
 * *Custom generator projects* to easily create model-to-text transformations with Xtend or Java
-* *Integrated validator* to check for syntactical or semantical problems of the statechart model 
+* *Integrated validator* to check for syntactical or semantical problems of the state machine model 
 
 The following graph shows these features and their relation to each other:
 
@@ -31,7 +31,7 @@ You may ask: Where does the money for open-source development come from? Well, i
 
 h2(#who-is-using-yakindu-statechart-tools). Who is using YAKINDU Statechart Tools?
 
-Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing benefit to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, or C&#43;&#43; code.
+Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing benefit to everyone who needs to design, simulate and develop behavior with state machines (finite state machines, fsm). People can use YAKINDU Statechart Tools to generate Java, C, or C&#43;&#43; code.
 
 ###.. FIXME: Decide what to do with the following subsection regarding the document structure.
 ###.. FIXME: h3(#what-is-the-structure-of-this-documentation). What is the structure of this documentation?
