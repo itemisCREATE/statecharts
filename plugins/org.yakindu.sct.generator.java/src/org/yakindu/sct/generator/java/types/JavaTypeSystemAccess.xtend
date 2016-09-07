@@ -26,12 +26,13 @@ class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 	private extension ITypeSystem ts
 
 	override String getTargetLanguageName(Type type) {
-		switch (type) {
-			case type == null || ts.isSame(type, getType(VOID)) : 'void'
-			case ts.isSame(type, getType(REAL)): "double"
-			case ts.isSame(type, getType(INTEGER)): "long"
-			case ts.isSame(type, getType(BOOLEAN)): "boolean"
-			case ts.isSame(type, getType(STRING)): "String"
+		val originalType = type?.originType
+		switch (originalType) {
+			case originalType == null || ts.isSame(originalType, getType(VOID)) : 'void'
+			case ts.isSame(originalType, getType(REAL)): "double"
+			case ts.isSame(originalType, getType(INTEGER)): "long"
+			case ts.isSame(originalType, getType(BOOLEAN)): "boolean"
+			case ts.isSame(originalType, getType(STRING)): "String"
 			default: "//" + this
 		};
 	}

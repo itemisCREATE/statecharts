@@ -8,7 +8,6 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 
-	
 	test AlwaysOncycle{
 		
 		feature Outlet{ 
@@ -16,14 +15,14 @@ GeneratorModel for sctunit::java {
 			targetFolder = "test-gen"			
 		}			
 	}
-	
+	 
 	test AssignmentAsExpression{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
 			targetFolder = "test-gen"			
 		}			
-	}
+	} 
 	
 	test BitExpressions{
 		
@@ -445,6 +444,14 @@ GeneratorModel for sctunit::java {
 	}
 
 	test TimedTransitions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test TypeAlias{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
