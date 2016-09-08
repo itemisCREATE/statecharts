@@ -29,6 +29,6 @@ import org.junit.runners.Suite.SuiteClasses;
 		StatechartActiveTest.class, StatechartLocalReactionsTest.class, StateIsActiveTest.class, StaticChoiceTest.class,
 		STextKeywordsInStatesAndRegionsTest.class, StringExpressionsTest.class, SyncForkTest.class, SyncJoinTest.class,
 		TransitionWithoutConditionTest.class, TriggerGuardExpressionsTest.class, TriggerExpressionPrecedenceTest.class,
-		ValuedEventsTest.class})
+		TypeAliasTest.class, ValuedEventsTest.class})
 public class AllTestsTest {
 }

@@ -26,12 +26,13 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 	extension ITypeSystem ts
 
 	override getTargetLanguageName(Type type) {
-		switch (type) {
-			case type == null || ts.isSame(type, getType(VOID)) : 'void'
-			case ts.isSame(type, getType(INTEGER)): 'sc_integer'
-			case ts.isSame(type, getType(REAL)): 'sc_real'
-			case ts.isSame(type, getType(BOOLEAN)): 'sc_boolean'
-			case ts.isSame(type, getType(STRING)): 'sc_string'
+		val originialType = type?.originType
+		switch (originialType) {
+			case originialType == null || ts.isSame(originialType, getType(VOID)) : 'void'
+			case ts.isSame(originialType, getType(INTEGER)): 'sc_integer'
+			case ts.isSame(originialType, getType(REAL)): 'sc_real'
+			case ts.isSame(originialType, getType(BOOLEAN)): 'sc_boolean'
+			case ts.isSame(originialType, getType(STRING)): 'sc_string'
 			default: throw new IllegalArgumentException("Target language name could not be inferred for type " + type)
 		}
 	}
