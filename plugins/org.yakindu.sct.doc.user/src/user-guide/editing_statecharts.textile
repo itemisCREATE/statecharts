@@ -537,7 +537,7 @@ Please keep in mind that colors and line styles will apply to _new_ elements onl
 
 h4. Showing transition priorities
 
-In order to display "transition priorities":statechart_language.html#transition-priorities in a statechart, set a check mark at the respective preference option. Section "&quot;Transition priorities&quot;":statechart_language.html#transition-priorities has an example.
+In order to display "transition priorities":#transition-priorities in a statechart, set a check mark at the respective preference option. Section "&quot;Transition priorities&quot;":#transition-priorities has an example.
 
 h4. Disabling live validation
 
