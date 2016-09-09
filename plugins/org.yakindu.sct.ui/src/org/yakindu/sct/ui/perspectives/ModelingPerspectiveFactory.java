@@ -41,9 +41,9 @@ public class ModelingPerspectiveFactory implements IPerspectiveFactory {
 
 		IFolderLayout bottom = layout.createFolder("bottom",
 				IPageLayout.BOTTOM, 0.65f, editorArea);
-		bottom.addView(IPageLayout.ID_TASK_LIST);
-		bottom.addView(IPageLayout.ID_PROBLEM_VIEW);
 		bottom.addView(IPageLayout.ID_PROP_SHEET);
+		bottom.addView(IPageLayout.ID_PROBLEM_VIEW);
+		bottom.addView(IPageLayout.ID_TASK_LIST);
 	}
 
 	private void defineActions(IPageLayout layout) {
