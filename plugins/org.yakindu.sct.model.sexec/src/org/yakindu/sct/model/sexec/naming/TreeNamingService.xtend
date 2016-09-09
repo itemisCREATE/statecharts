@@ -234,14 +234,6 @@ class TreeNamingService implements INamingService {
 		parentRegion.vertices.toList.indexOf(it).toString
 	}
 
-	def protected removeVowels(String it) {
-		replaceAll('[aeiou]', '')
-	}
-
-	def protected removeSmallLetters(String it) {
-		replaceAll('[a-z]', '');
-	}
-
 	override public setMaxLength(int length) {
 		maxLength = length
 	}
@@ -264,13 +256,15 @@ class TreeNamingService implements INamingService {
 	}
 
 	override getShortName(NamedElement element) {
+		// check if element was named before
 		if (map.containsKey(element)) {
 			return map.get(element);
 		}
+		// if not, check if element is located in the tree
 		if (!treeMap.containsKey(element)) {
 			addElement(element, new ArrayList<String>(), new ArrayList<String>());
 		}
-
+		// check if names are shortened already
 		if (!shortNamesValid) {
 			shortenNames();
 		}
@@ -282,8 +276,6 @@ class TreeNamingService implements INamingService {
 	}
 
 	def private Map<StringTreeNode, ArrayList<StringTreeNode>> constructIndividualNames() {
-		val nodes = tree.getEndNodes().sortWith(stringTreeNodeDepthComparator);
-
 		/*
 		 * The map doublets is a three dimensional construct.
 		 * For each end-node-name in the tree, it holds a list of lists describing that name.
@@ -309,15 +301,17 @@ class TreeNamingService implements INamingService {
 		 * 	"StateB": [[node(StateB)]] 
 		 * }
 		 * 
-		 * As we can see, all outer lists have exactly length 1, which is the abortion criteria.
+		 * As we can see, all outer lists now have exactly length 1, which is the abortion criterion.
 		 * 
 		 * In the finalization phase, we check if there are any weird things happening like randomly created double names.
 		 * For example, someone could create a state named "region_StateA" and two other elements named "region" and "StateA" could
 		 * be clumped together to form an individual name.
 		 * 
 		 */
+		 
+		// get all end-nodes, that is "ends of strings" added to the tree.
+		val nodes = tree.getEndNodes().sortWith(stringTreeNodeDepthComparator);
 		var doublets = new HashMap<String, ArrayList<ArrayList<StringTreeNode>>>();
-
 		val mapping = new HashMap<StringTreeNode, ArrayList<StringTreeNode>>();
 
 		// Initialization
@@ -326,7 +320,9 @@ class TreeNamingService implements INamingService {
 				doublets.put(node.data, new ArrayList<ArrayList<StringTreeNode>>());
 			}
 			val list = new ArrayList<StringTreeNode>();
+			// add new inner list that will hold the nodes going to the end node forming the individual name
 			doublets.get(node.data).add(list);
+			// map this list to the end node. We'll return this map later, but we need to fill the lists first
 			mapping.put(node, list);
 			list.add(node);
 		}
@@ -336,7 +332,9 @@ class TreeNamingService implements INamingService {
 		while (!abort) {
 			// Phase 1
 			for (name : doublets.keySet) {
+				// check outer list. If it contains more than one list, there is more than one element with the same name.
 				if (doublets.get(name).length > 1) {
+					// if that is the case, add one parent node to all inner node lists.
 					for (nodelist : doublets.get(name)) {
 						nodelist.add(0, nodelist.get(0).parent);
 					}
@@ -348,8 +346,9 @@ class TreeNamingService implements INamingService {
 
 			for (name : doublets.keySet) // for all keys
 			{
-				for (nodelist : doublets.get(name)) // for inner lists
+				for (nodelist : doublets.get(name)) // for inner lists in outer lists - returned by doublets.get(name)
 				{
+					// construct names formed by inner lists, now possibly extended by one node
 					val sb = new StringBuilder();
 
 					for (var i = 0; i < nodelist.length; i++) {
@@ -358,7 +357,7 @@ class TreeNamingService implements INamingService {
 						}
 						sb.append(nodelist.get(i).getData())
 					}
-
+					// add string to new map if it doesn't exist already
 					if (!newDoublets.containsKey(sb.toString)) {
 						newDoublets.put(sb.toString, new ArrayList<ArrayList<StringTreeNode>>());
 					}
@@ -369,7 +368,7 @@ class TreeNamingService implements INamingService {
 
 			doublets = newDoublets;
 
-			// Abort criterion
+			// Abort criterion. If there is any name with more than one element, repeat.
 			abort = true;
 			for (name : doublets.keySet) {
 				if(doublets.get(name).length > 1) abort = false;
@@ -380,14 +379,13 @@ class TreeNamingService implements INamingService {
 	}
 
 	def private shortenNames() {
-		if (this.maxLength == 0) {
-			return;
-		}
-
 		if (individualMap == null || individualMap.isEmpty()) {
 			constructIndividualNames();
 		}
-
+		if (this.maxLength == 0) {
+			return;
+		}
+		
 		val max_weight = tree.getWeight();
 
 		while (shortenOneCharacter(tree.getEndNodes(), max_weight)) {
