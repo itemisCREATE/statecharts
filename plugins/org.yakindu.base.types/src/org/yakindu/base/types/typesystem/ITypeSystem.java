@@ -51,6 +51,6 @@ public interface ITypeSystem {
 
 	public boolean isSuperType(Type subtype, Type supertype);
 	
-	public boolean isArrayType(Type type);
+	public boolean isBuiltInType(Type type);
 
 }

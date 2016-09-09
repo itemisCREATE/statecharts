@@ -26,6 +26,7 @@ import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesFactory;
+import org.yakindu.base.types.annotations.TypeAnnotations;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
@@ -46,9 +47,12 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	protected abstract void initBuiltInTypes();
 
 	protected Resource resource;
+	
+	protected TypeAnnotations typeAnnotations;
 
 	public AbstractTypeSystem() {
 		resource = new ResourceImpl(URI.createURI("types"));
+		typeAnnotations = new TypeAnnotations();
 		initBuiltInTypes();
 	}
 
@@ -219,7 +223,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	}
 	
 	@Override
-	public boolean isArrayType(Type type) {
-		return false;
+	public boolean isBuiltInType(Type type) {
+		return typeAnnotations.hasBuiltInTypeAnnotation(type);
 	}
 }

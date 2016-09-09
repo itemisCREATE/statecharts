@@ -103,6 +103,7 @@
         eType="#//Annotation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayTypeSpecifier" eSuperTypes="#//TypeSpecifier">
+    <eOperations name="getElementType" eType="#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
 </ecore:EPackage>

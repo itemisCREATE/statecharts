@@ -46,4 +46,12 @@ public interface ArrayTypeSpecifier extends TypeSpecifier {
 	 */
 	void setSize(int value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	Type getElementType();
+
 } // ArrayTypeSpecifier

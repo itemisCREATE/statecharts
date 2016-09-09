@@ -56,6 +56,7 @@ import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.annotations.TypeAnnotations;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
@@ -124,7 +125,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Inject
 	private ImportResolver resolver;
 	@Inject(optional = true)
-	@Named("domainId")
+	@Named(DomainRegistry.DOMAIN_ID)
 	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 
 	@Check
@@ -216,12 +217,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		Expression varRef = expression.getVarRef();
 		if (varRef instanceof FeatureCall) {
 			EObject referencedObject = ((FeatureCall) varRef).getFeature();
-			if (referencedObject instanceof Operation) {
-				if (!TypeAnnotations.hasIndexOperationAnnotation((Operation)referencedObject)) {
-					error(LEFT_HAND_ASSIGNMENT, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
-				}
-			}
-			else if (!(referencedObject instanceof Property)) {
+		 if (!(referencedObject instanceof Property)) {
 				error(LEFT_HAND_ASSIGNMENT, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
 			}
 		} else if (varRef instanceof ElementReferenceExpression) {

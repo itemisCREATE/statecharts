@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.yakindu.base.types.ArrayTypeSpecifier;
+import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
 
 /**
@@ -83,6 +84,15 @@ public class ArrayTypeSpecifierImpl extends TypeSpecifierImpl implements ArrayTy
 		size = newSize;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.ARRAY_TYPE_SPECIFIER__SIZE, oldSize, size));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Type getElementType() {
+		return getTypeArguments().get(0).getType();
 	}
 
 	/**
