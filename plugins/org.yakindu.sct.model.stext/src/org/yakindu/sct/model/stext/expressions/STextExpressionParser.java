@@ -27,6 +27,7 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -40,6 +41,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.name.Named;
 
 public class STextExpressionParser implements IExpressionParser {
 
@@ -62,6 +64,10 @@ public class STextExpressionParser implements IExpressionParser {
 	private ILinker linker;
 	@Inject
 	private Injector injector;
+	
+	@Inject
+	@Named(DomainRegistry.DOMAIN_ID)
+	private String domainId;
 
 	public StextResource getResource() {
 		final StextResource resource = new StextResource();
@@ -90,6 +96,7 @@ public class STextExpressionParser implements IExpressionParser {
 		resource.getContents().add(rootASTElement);
 		ListBasedDiagnosticConsumer diagnosticsConsumer = new ListBasedDiagnosticConsumer();
 		Statechart sc = SGraphFactory.eINSTANCE.createStatechart();
+		sc.setDomainID(domainId);
 		sc.setName("sc");
 		if (specification != null) {
 			sc.setSpecification(specification);

@@ -47,7 +47,7 @@ public class DomainRegistry {
 	private static final String DOMAIN_EXTENSION_POINT_ID = "org.yakindu.sct.domain";
 	private static final String MODULES_EXTENSION_POINT_ID = "org.yakindu.sct.domain.modules";
 
-	private static final String DOMAIN_ID = "domainID";
+	public static final String DOMAIN_ID = "domainID";
 	private static final String DESCRIPTION = "description";
 	private static final String IMAGE = "image";
 	private static final String NAME = "name";
