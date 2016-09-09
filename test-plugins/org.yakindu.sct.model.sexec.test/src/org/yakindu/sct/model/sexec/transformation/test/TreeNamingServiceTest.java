@@ -1,11 +1,11 @@
 /** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
+ * Copyright (c) 2016 committers of YAKINDU and others. 
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0 
  * which accompanies this distribution, and is available at 
  * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
- * committers of YAKINDU - initial API and implementation
+ * @author René Beckmann (beckmann@itemis.de)
  *
 */
 package org.yakindu.sct.model.sexec.transformation.test;
@@ -43,8 +43,8 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 
 	@Inject
 	protected TreeNamingService statechartNamingService;
-	
-	@Inject 
+
+	@Inject
 	protected TreeNamingService executionflowNamingService;
 
 	private List<Statechart> statecharts;
@@ -78,7 +78,7 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 		}
 		statecharts.remove(statecharttoRemove);
 	}
-	
+
 	@Test
 	public void testDefaultNamingServiceState_NoDoubles() {
 
@@ -87,28 +87,24 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 			// Transform statechart
 			ExecutionFlow flow = sequencer.transform(statechart);
 			flow = optimizer.transform(flow);
-			
+
 			List<String> names = new ArrayList<String>();
 
-//			statechartNamingService.setMaxLength(0);
-//			statechartNamingService.setSeparator('_');
-			
 			executionflowNamingService.setMaxLength(15);
 			executionflowNamingService.setSeparator('_');
-			
+
 			// Initialize naming services for statechart and ExecutionFlow
-//			statechartNamingService.initializeNamingService(statechart);
 			long t0 = System.currentTimeMillis();
 			executionflowNamingService.initializeNamingService(flow);
 			executionflowNamingService.test_printTreeContents();
-			System.out.print("Time needed for initialization [ms]: "); System.out.println(System.currentTimeMillis() - t0);
+			System.out.print("Time needed for initialization [ms]: ");
+			System.out.println(System.currentTimeMillis() - t0);
 			System.out.println("Generated names:");
-			for(ExecutionState state : flow.getStates())
-			{
+			for (ExecutionState state : flow.getStates()) {
 				String name = executionflowNamingService.getShortName(state);
-				if(names.contains(name)) {
+				if (names.contains(name)) {
 					System.out.println("Conflicting name: " + name);
-					for(String n : names) {
+					for (String n : names) {
 						System.out.println(n);
 					}
 				}
@@ -117,71 +113,52 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 				System.out.println(name);
 			}
 			System.out.println();
-//			SExecExtensions ext = new SExecExtensions();
-//			for(Step step : ext.getAllFunctions(flow))
-//			{
-//				String name = executionflowNamingService.getShortName(step);
-//				assertEquals(names.contains(name), false);
-//				names.add(name);
-//			}
-				
-			// Check for equality
-			//checkNameEquality(flow, statechartNamingService, flowNamingService);
-//			stringListsEqual(statechartNamingService.getTreeContents(), executionflowNamingService.getTreeContents());
 		}
 	}
-	
+
 	@Test
-	public void nameLengthTest31()
-	{
+	public void nameLengthTest31() {
 		nameLengthTest(31);
 	}
-	
+
 	@Test
-	public void nameLengthTest20()
-	{
+	public void nameLengthTest20() {
 		nameLengthTest(20);
 	}
-	
+
 	@Test
-	public void nameLengthTest15()
-	{
+	public void nameLengthTest15() {
 		nameLengthTest(15);
 	}
-	
+
 	@Test
-	public void nameLengthTest10()
-	{
+	public void nameLengthTest10() {
 		nameLengthTest(10);
 	}
-	
+
 	@Test
-	public void nameLengthTest8()
-	{
+	public void nameLengthTest8() {
 		nameLengthTest(8);
 	}
-	
+
 	@Test
-	public void optimizerCombinationsTest()
-	{
+	public void optimizerCombinationsTest() {
 		Statechart toTest = null;
-		
-		for(Statechart statechart : statecharts)
-		{
-			if(statechart.getName().equals("DeepEntry")) {
+
+		for (Statechart statechart : statecharts) {
+			if (statechart.getName().equals("DeepEntry")) {
 				toTest = statechart;
 			}
 		}
-		
+
 		assertEquals(true, toTest != null);
-		
+
 		ExecutionFlow flow = sequencer.transform(toTest);
-		
+
 		executionflowNamingService.setMaxLength(0);
 		executionflowNamingService.setSeparator('_');
-		
-		for(int i=0; i < (1 << 9); i++)
-		{
+
+		for (int i = 0; i < (1 << 9); i++) {
 			optimizer.inlineReactions((i & (1)) != 0);
 			optimizer.inlineExitActions((i & (1 << 1)) != 0);
 			optimizer.inlineEntryActions((i & (1 << 2)) != 0);
@@ -191,41 +168,33 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 			optimizer.inlineEntries((i & (1 << 6)) != 0);
 			optimizer.inlineEnterRegion((i & (1 << 7)) != 0);
 			optimizer.inlineExitRegion((i & (1 << 8)) != 0);
-			
+
 			ExecutionFlow optimizedflow = optimizer.transform(flow);
-			
+
 			List<String> names = new ArrayList<String>();
 
 			executionflowNamingService.initializeNamingService(optimizedflow);
-			for(ExecutionState state : flow.getStates())
-			{
+			for (ExecutionState state : flow.getStates()) {
 				String name = executionflowNamingService.getShortName(state);
 				assertEquals(names.contains(name), false);
 				names.add(name);
 			}
 		}
 	}
-	
+
 	@Test
-	public void statechartTest1()
-	{
+	public void statechartTest1() {
 		Statechart toTest = getNamingServiceStatechart();
-		
+
 		List<String> names = new ArrayList<String>();
-		
-		List<String> expectedNames = new ArrayList<String>(Arrays.asList(
-						"main_region_StateA",
-						"main_region_StateB",
-						"second_region_StateA",
-						"third_region_StateA",
-						"second_region_StateA_AnotherRegion_StateA",
-						"second_region_StateA_AnotherRegion_StateB",
-						"third_region_StateA_AnotherRegion_StateA",
-						"third_region_StateA_AnotherRegion_StateB"
-						));
-		
+
+		List<String> expectedNames = new ArrayList<String>(
+				Arrays.asList("main_region_StateA", "main_region_StateB", "second_region_StateA", "third_region_StateA",
+						"second_region_StateA_AnotherRegion_StateA", "second_region_StateA_AnotherRegion_StateB",
+						"third_region_StateA_AnotherRegion_StateA", "third_region_StateA_AnotherRegion_StateB"));
+
 		ExecutionFlow flow = optimizer.transform(sequencer.transform(toTest));
-		
+
 		executionflowNamingService.setMaxLength(0);
 		executionflowNamingService.setSeparator('_');
 		executionflowNamingService.initializeNamingService(flow);
@@ -233,72 +202,59 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 		statechartNamingService.setMaxLength(0);
 		statechartNamingService.setSeparator('_');
 		statechartNamingService.initializeNamingService(toTest);
-		
-		for(ExecutionState state : flow.getStates())
-		{
+
+		for (ExecutionState state : flow.getStates()) {
 			String name = executionflowNamingService.getShortName(state);
 			assertEquals(names.contains(name), false);
 			assertEquals(name, statechartNamingService.getShortName(state));
 			names.add(name);
 		}
-		
+
 		stringListsEqual(expectedNames, names);
 	}
-	
+
 	@Test
-	public void statechartTest2()
-	{
+	public void statechartTest2() {
 		Statechart toTest = getNamingServiceStatechart();
-		
+
 		List<String> names = new ArrayList<String>();
-		
-		// these names are shorter than 15 characters because there are more elements containing these names, e.g. state actions
-		List<String> expectedNames = new ArrayList<String>(Arrays.asList(
-					"mgn_SA",
-					"mgn_StteB",
-					"s_S",
-					"t_S",
-					"t_S_AR_SA", 
-					"t_S_AR_StB",
-					"s_S_AR_SA", 
-					"s_S_AR_StB"
-						));
-		
+
+		// these names are shorter than 15 characters because there are more
+		// elements containing these names, e.g. state actions
+		List<String> expectedNames = new ArrayList<String>(Arrays.asList("mgn_SA", "mgn_StteB", "s_S", "t_S",
+				"t_S_AR_SA", "t_S_AR_StB", "s_S_AR_SA", "s_S_AR_StB"));
+
 		ExecutionFlow flow = optimizer.transform(sequencer.transform(toTest));
-		
+
 		executionflowNamingService.setMaxLength(15);
 		executionflowNamingService.setSeparator('_');
-		
+
 		executionflowNamingService.initializeNamingService(flow);
-		
-		for(ExecutionState state : flow.getStates())
-		{
+
+		for (ExecutionState state : flow.getStates()) {
 			String name = executionflowNamingService.getShortName(state);
 			assertEquals(names.contains(name), false);
 			names.add(name);
 		}
-		
+
 		stringListsEqual(expectedNames, names);
 	}
-	
-	private Statechart getNamingServiceStatechart()
-	{
+
+	private Statechart getNamingServiceStatechart() {
 		Statechart toTest = null;
-		
-		for(Statechart statechart : statecharts)
-		{
-			if(statechart.getName().equals("namingTest")) {
+
+		for (Statechart statechart : statecharts) {
+			if (statechart.getName().equals("namingTest")) {
 				toTest = statechart;
 			}
 		}
-		
+
 		assertEquals(true, toTest != null);
-		
+
 		return toTest;
 	}
-	
-	private void nameLengthTest(int maxLength)
-	{
+
+	private void nameLengthTest(int maxLength) {
 		int num_statecharts = statecharts.size();
 		long cumulated_time = 0L;
 		for (Statechart statechart : statecharts) {
@@ -306,30 +262,28 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 			// Transform statechart
 			ExecutionFlow flow = sequencer.transform(statechart);
 			flow = optimizer.transform(flow);
-			
+
 			List<String> names = new ArrayList<String>();
 
 			executionflowNamingService.setMaxLength(maxLength);
 			executionflowNamingService.setSeparator('_');
-			
+
 			long t0 = System.currentTimeMillis();
 			executionflowNamingService.initializeNamingService(flow);
 			cumulated_time += System.currentTimeMillis() - t0;
-			for(ExecutionState state : flow.getStates())
-			{
+			for (ExecutionState state : flow.getStates()) {
 				String name = executionflowNamingService.getShortName(state);
 				assertEquals(names.contains(name), false);
 				assertEquals(true, name.length() <= maxLength);
 				names.add(name);
 			}
 		}
-		
+
 		System.out.print("Average time for initialization [ms]: ");
-		System.out.println((float)cumulated_time / (float)num_statecharts);
+		System.out.println((float) cumulated_time / (float) num_statecharts);
 	}
 
-	private void stringListsEqual(List<String> onelist, List<String> otherlist)
-	{
+	private void stringListsEqual(List<String> onelist, List<String> otherlist) {
 		java.util.Collections.sort(onelist, Collator.getInstance());
 		java.util.Collections.sort(otherlist, Collator.getInstance());
 		assertEquals(onelist, otherlist);

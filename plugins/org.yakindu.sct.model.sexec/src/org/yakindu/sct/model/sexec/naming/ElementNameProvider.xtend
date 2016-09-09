@@ -1,3 +1,14 @@
+/**
+ *   Copyright (c) 2016 committers of YAKINDU Statechart Tools.
+ *   All rights reserved. This program and the accompanying materials
+ *   are made available under the terms of the Eclipse Public License v1.0
+ *   which accompanies this distribution, and is available at
+ *   http://www.eclipse.org/legal/epl-v10.html
+ *   
+ *   Contributors:
+ * 		@author René Beckmann (beckmann@itemis.de)
+ */
+
 package org.yakindu.sct.model.sexec.naming
 
 import javax.inject.Inject
@@ -18,25 +29,23 @@ import java.util.ArrayList
 
 class ElementNameProvider {
 	@Inject private StextNameProvider provider
-	
-	def protected List<String> elementNameSegments(NamedElement e)
-	{
+
+	def protected List<String> elementNameSegments(NamedElement e) {
 		val name = elementName(e);
 		var ArrayList<String> l;
-		if(name != null) {
+		if (name != null) {
 			l = new ArrayList<String>(name.getSegments());
-		}
-		else {
+		} else {
 			l = new ArrayList<String>();
 		}
-		
+
 		return l;
 	}
-	
+
 	def protected dispatch QualifiedName elementName(ExecutionFlow it) {
 		return null;
 	}
-	
+
 	def protected dispatch QualifiedName elementName(ExecutionScope it) {
 		return sourceElement.elementName()
 	}
@@ -44,7 +53,7 @@ class ElementNameProvider {
 	def protected dispatch QualifiedName elementName(ExecutionState it) {
 		return sourceElement.elementName()
 	}
-	
+
 	def protected dispatch QualifiedName elementName(EObject it) {
 		eContainer?.elementName()
 	}
@@ -57,15 +66,15 @@ class ElementNameProvider {
 	def protected dispatch QualifiedName elementName(NamedElement it) {
 		return provider.getFullyQualifiedName(it).skipFirst(2)
 	}
-	
+
 	def protected dispatch QualifiedName elementName(Reaction it) {
 		return provider.getFullyQualifiedName(it).skipFirst(2)
 	}
-	
+
 	def protected dispatch QualifiedName elementName(Region it) {
 		return provider.getFullyQualifiedName(it).skipFirst(1)
 	}
-	
+
 	def protected dispatch QualifiedName elementName(Step it) {
 		return eContainer.elementName()
 	}
@@ -73,6 +82,5 @@ class ElementNameProvider {
 	def protected dispatch QualifiedName elementName(Vertex it) {
 		return provider.getFullyQualifiedName(it).skipFirst(1)
 	}
-	
-	
+
 }

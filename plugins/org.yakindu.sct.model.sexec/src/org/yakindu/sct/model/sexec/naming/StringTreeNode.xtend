@@ -1,15 +1,24 @@
+/**
+ *   Copyright (c) 2016 committers of YAKINDU Statechart Tools.
+ *   All rights reserved. This program and the accompanying materials
+ *   are made available under the terms of the Eclipse Public License v1.0
+ *   which accompanies this distribution, and is available at
+ *   http://www.eclipse.org/legal/epl-v10.html
+ *   
+ *   Contributors:
+ * 		@author René Beckmann (beckmann@itemis.de)
+ */
+
 package org.yakindu.sct.model.sexec.naming
 
 import java.util.ArrayList
 import java.util.List
 import java.util.Comparator
 
-class StringTreeNodeDepthComparator implements Comparator<StringTreeNode>
-{
+class StringTreeNodeDepthComparator implements Comparator<StringTreeNode> {
 	override compare(StringTreeNode o1, StringTreeNode o2) {
 		return o1.getDepth() - o2.getDepth();
 	}
-	
 }
 
 class StringTreeNode {
@@ -127,16 +136,14 @@ class StringTreeNode {
 
 		return nodelist;
 	}
-	
-	def public int getWeight()
-	{
+
+	def public int getWeight() {
 		var weight = 0;
-		
-		for(c : children)
-		{
+
+		for (c : children) {
 			weight += c.getWeight() + 1; // + 1: count children as well
 		}
-		
+
 		return weight;
 	}
 
@@ -229,23 +236,20 @@ class StringTreeNode {
 
 		return ret;
 	}
-	
-	def public void delete()
-	{
+
+	def public void delete() {
 		/*
 		 * All nodes have a reference to their parent (except the root node, where it's null) and their children.
 		 * Thus, when we want to delete a node, we need to cut it from its parent's children and
 		 * delete the reference to the parent. The rest of the tree is then 'floating' and will be garbage collected.
 		 */
-		if(!isRoot())
-		{
+		if (!isRoot()) {
 			this.parent.deleteChild(this);
 			this.parent = null;
 		}
 	}
-	
-	def public deleteChild(StringTreeNode child)
-	{
+
+	def public deleteChild(StringTreeNode child) {
 		this.children.removeAll(child);
 	}
 
@@ -270,20 +274,18 @@ class StringTreeNode {
 				maxEqualNode = child;
 			}
 		}
-		
-		if(maxEqualNode == null)
-		{
+
+		if (maxEqualNode == null) {
 			return null;
 		}
 
 		var rest = name.substring(maxEquality);
 
 		nodeChain.add(maxEqualNode);
-		
+
 		val childrenNodeChain = maxEqualNode.getNodeChain(rest);
-		
-		if(childrenNodeChain == null)
-		{
+
+		if (childrenNodeChain == null) {
 			return null;
 		}
 
@@ -291,34 +293,28 @@ class StringTreeNode {
 
 		return nodeChain;
 	}
-	
-	def public StringTreeNode navigate(String content)
-	{
-		for(child: children)
-		{
-			if(content.equals(child.getData()))
-			{
+
+	def public StringTreeNode navigate(String content) {
+		for (child : children) {
+			if (content.equals(child.getData())) {
 				return child;
 			}
 		}
-		
+
 		return null;
 	}
-	
-	def public StringTreeNode getParent()
-	{
+
+	def public StringTreeNode getParent() {
 		return parent;
 	}
-	
-	def public List<String> getChildrenContents()
-	{
+
+	def public List<String> getChildrenContents() {
 		var returnList = new ArrayList<String>();
-		
-		for(child : children)
-		{
+
+		for (child : children) {
 			returnList.add(child.getData());
 		}
-		
+
 		return returnList;
 	}
 

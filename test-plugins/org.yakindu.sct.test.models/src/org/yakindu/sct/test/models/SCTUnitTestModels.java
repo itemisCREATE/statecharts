@@ -28,7 +28,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 
 	private static final String TESTMODEL_DIR = "org.yakindu.sct.test.models/testmodels/SCTUnit/";
 	public static final String ALWAYS_ONCYCLE = "AlwaysOncycle.sct";
-	public static final String ASSIGNMENT_AS_EXPRESSION ="AssignmentAsExpression.sct";
+	public static final String ASSIGNMENT_AS_EXPRESSION = "AssignmentAsExpression.sct";
 	public static final String BIT_EXPRESSIONS = "BitExpressions.sct";
 	public static final String BOOLEAN_EXPRESSIONS = "BooleanExpressions.sct";
 	public static final String CAST_EXPRESSIONS = "CastExpressions.sct";
@@ -72,7 +72,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String SHALLOW_HISTORY = "ShallowHistory.sct";
 	public static final String SIMPLE_EVENT = "SimpleEvent.sct";
 	public static final String SIMPLE_HIERACHY = "SimpleHierachy.sct";
-	public static final String STATECHART_LOCAL_REACTIONS = "StatechartLocalReactions.sct";	
+	public static final String STATECHART_LOCAL_REACTIONS = "StatechartLocalReactions.sct";
 	public static final String STATE_ACTIVE = "StateIsActive.sct";
 	public static final String STATIC_CHOICE = "StaticChoice.sct";
 	public static final String STEXT_KEYWORDS_IN_STATES_AND_REGIONS = "STextKeywordsInStatesAndRegions.sct";
@@ -84,7 +84,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String TRIFFER_GUARD_EXPRESSIONS = "TriggerGuardExpressions.sct";
 	public static final String TYPE_ALIAS = "TypeAlias.sct";
 	public static final String VALUED_EVENTS = "ValuedEvents.sct";
-	
+
 	@Override
 	public String getModelDirectory() {
 		return TESTMODEL_DIR;
@@ -106,20 +106,20 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 		List<Statechart> all = models.loadAllStatecharts();
 		return Iterables.transform(all, new Function<Statechart, Object[]>() {
 			public Object[] apply(Statechart input) {
-				return new Object[] { input };
+				return new Object[]{input};
 			}
 		});
 	}
-	
+
 	public Statechart loadStatechartByFilename(String requestedStatechart) throws Exception {
-		Statechart result = null;		
+		Statechart result = null;
 		Field[] fields = getClass().getFields();
-		for (Field field : fields) {			
+		for (Field field : fields) {
 			String value = (String) field.get(this);
 			if (value.endsWith(requestedStatechart)) {
-				result  = (loadStatechartFromResource(value));
+				result = (loadStatechartFromResource(value));
 				break;
-			}			
+			}
 		}
 		return result;
 	}
