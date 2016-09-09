@@ -23,7 +23,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PrimitiveType;
+import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.annotations.TypeAnnotations;
@@ -42,18 +44,21 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 
 	protected Map<String, Type> typeRegistry = new HashMap<String, Type>();
 	protected ListMultimap<Type, Type> extendsRegistry = ArrayListMultimap.create();
+	protected ListMultimap<Type, Operation> extensionOperationRegistry = ArrayListMultimap.create();
+	protected ListMultimap<Type, Property> extensionPropertyRegistry = ArrayListMultimap.create();
+
 	protected Map<Type, Type> conversionRegistry = new HashMap<Type, Type>();
 
-	protected abstract void initBuiltInTypes();
+	protected abstract void initRegistries();
 
 	protected Resource resource;
-	
+
 	protected TypeAnnotations typeAnnotations;
 
 	public AbstractTypeSystem() {
 		resource = new ResourceImpl(URI.createURI("types"));
 		typeAnnotations = new TypeAnnotations();
-		initBuiltInTypes();
+		initRegistries();
 	}
 
 	protected void reset() {
@@ -81,7 +86,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 			ComplexType complexType = (ComplexType) type;
 			superTypes.addAll(complexType.getSuperTypes());
 		}
-		
+
 		return superTypes;
 	}
 
@@ -99,7 +104,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	private void collectSupertypes(Type subtypeClass, List<Type> typeHierachy) {
 		if (subtypeClass == null)
 			return;
-		
+
 		List<Type> superTypes = getSuperTypes(subtypeClass);
 		for (Type superType : superTypes) {
 			typeHierachy.add(superType);
@@ -217,13 +222,35 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	protected Type getConversionType(Type sourceType) {
 		return conversionRegistry.get(sourceType);
 	}
-	
+
 	public Resource getResource() {
 		return resource;
 	}
-	
+
 	@Override
 	public boolean isBuiltInType(Type type) {
 		return typeAnnotations.hasBuiltInTypeAnnotation(type);
+	}
+
+	@Override
+	public List<Operation> getOperationExtensions(Type type) {
+		List<Operation> result = new ArrayList<>();
+		result.addAll(extensionOperationRegistry.get(type));
+		List<Type> superTypes = getSuperTypes(type);
+		for (Type superType : superTypes) {
+			result.addAll(extensionOperationRegistry.get(superType));
+		}
+		return result;
+	}
+
+	@Override
+	public List<Property> getPropertyExtensions(Type type) {
+		List<Property> result = new ArrayList<>();
+		result.addAll(extensionPropertyRegistry.get(type));
+		List<Type> superTypes = getSuperTypes(type);
+		for (Type superType : superTypes) {
+			result.addAll(extensionPropertyRegistry.get(superType));
+		}
+		return result;
 	}
 }

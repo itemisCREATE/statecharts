@@ -13,6 +13,8 @@ package org.yakindu.base.types.typesystem;
 import java.util.Collection;
 import java.util.List;
 
+import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 
 /**
@@ -23,7 +25,7 @@ import org.yakindu.base.types.Type;
  * 
  */
 public interface ITypeSystem {
-	
+
 	public static final String STRING = "string";
 	public static final String REAL = "real";
 	public static final String INTEGER = "integer";
@@ -32,11 +34,11 @@ public interface ITypeSystem {
 	public static final String NULL = "null";
 
 	public Collection<Type> getTypes();
-	
+
 	public Collection<Type> getConcreteTypes();
 
 	public Type getType(String name);
-	
+
 	public boolean isSame(Type type1, Type type2);
 
 	public boolean haveCommonType(Type type1, Type type2);
@@ -46,11 +48,15 @@ public interface ITypeSystem {
 	public boolean haveCommonTypeWithConversion(Type type1, Type type2);
 
 	public Type getCommonTypeWithConversion(Type type1, Type type2);
-	
+
 	public List<Type> getSuperTypes(Type type);
 
 	public boolean isSuperType(Type subtype, Type supertype);
-	
+
 	public boolean isBuiltInType(Type type);
+
+	public List<Operation> getOperationExtensions(Type type);
+
+	public List<Property> getPropertyExtensions(Type type);
 
 }

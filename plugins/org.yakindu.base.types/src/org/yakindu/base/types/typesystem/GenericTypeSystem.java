@@ -30,7 +30,7 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 	}
 
 	@Override
-	protected void initBuiltInTypes() {
+	protected void initRegistries() {
 		declarePrimitive(STRING);
 		declarePrimitive(REAL);
 		declarePrimitive(INTEGER);
