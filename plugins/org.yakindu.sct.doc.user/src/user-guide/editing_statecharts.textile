@@ -1,13 +1,13 @@
 
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/editing_statecharts.textile
 
-h1(#editing-statecharts). Editing statecharts (state machines)
+h1(#editing-statecharts). Editing statecharts
 
-h2(#creating-and-deleting-statecharts). Creating and deleting state machines
+h2(#creating-and-deleting-statecharts). Creating and deleting statecharts
 
-State machines are comprised in *statechart model files*. The filename extension of these files is @.sct@. Their internal format is "XML Metadata Interchange":https://en.wikipedia.org/wiki/XML_Metadata_Interchange or "XMI":https://en.wikipedia.org/wiki/XML_Metadata_Interchange, which is an XML language.
+Statecharts are comprised in *statechart model files*. The filename extension of these files is @.sct@. Their internal format is "XML Metadata Interchange":https://en.wikipedia.org/wiki/XML_Metadata_Interchange or "XMI":https://en.wikipedia.org/wiki/XML_Metadata_Interchange, which is an XML language.
 
-h3(#creating-a-statechart). Creating a state machine
+h3(#creating-a-statechart). Creating a statechart
 
 ###. FIXME: Unify the following with the tutorial text!
 
@@ -23,7 +23,7 @@ In order to create a new statechart file, use _Project Explorer_ view:
 # If the _Confirm Perspective Switch_ dialog appears, answer its question as you see fit.
 # The new statechart file is created in the location you specified and opened in the "statechart editor":#editor-ui.
 
-h3(#copying-an-existing-statechart). Copying an existing state machine
+h3(#copying-an-existing-statechart). Copying an existing statechart
 
 In order to copy an existing statechart file, proceed as follows:
 # Right-click on its filename in the _Project Explorer_ view. The context menu appears.
@@ -36,7 +36,7 @@ In order to copy an existing statechart file, proceed as follows:
 ## Click _Cancel_ to cancel to copying operation.
 ## Click _Yes_ to overwrite the target file.
 
-h3(#deleting-a-statechart). Deleting a state machine
+h3(#deleting-a-statechart). Deleting a statechart
 
 In order to delete a statechart file, proceed as follows:
 # Right-click on its filename in the _Project Explorer_ view. The context menu appears.
@@ -52,11 +52,11 @@ YAKINDU Statechart Tools comes with a *statechart editor*. This section explains
 
 h3(#sc-modeling-perspective). "SC Modeling" perspective
 
-_SC Modeling_ is an Eclipse perspective supporting the modeling of state machines. The perspective defines the following views and their positions:
+_SC Modeling_ is an Eclipse perspective supporting the modeling of statecharts. The perspective defines the following views and their positions:
 * _Project Explorer_ (left): This view displays your workspace and projects, folders, and files contained therein. You can also use the _Project Explorer_ to inspect the internal structure of your statechart models.
 * _Properties_ (bottom): This view displays properties, regarding the semantic model or the graphical appearance, of the selected element in the statechart editor. You can directly edit these properties in this view.
 * _Problems_ (bottom): This view displays errors and warnings existing in your workspace. Double-clicking on an entry typically opens the location of the respective error or warning.
-* _Outline_ (right): This view is a bird's eye view on the opened state machine. It also indicates the current viewport for better orientation in large models.
+* _Outline_ (right): This view is a bird's eye view on the opened statechart. It also indicates the current viewport for better orientation in large models.
 
 h3(#canvas). Canvas
 
@@ -165,7 +165,7 @@ You can change the name of a region in the statechart editor as well as in the p
 
 h2(#editing-hierarchies). Editing hierarchies
 
-State machines can get rather big and complex. *"Composite states":../user-guide/statechart_language#composite-state* are a way to reduce complexity and thus make statecharts easier to create, comprehend and maintain. A composite state comprises a state machine of its own within a "region":../user-guide/statechart_language#region. The states belonging to such a nested state machine are called *substates*. *"Orthogonal states":../user-guide/statechart_language#orthogonal-states* are a generalization of composite states, comprising two or more independent state machines in separate regions that are executed in parallel.
+Statecharts can get rather big and complex. *"Composite states":../user-guide/statechart_language#composite-state* are a way to reduce complexity and thus make statecharts easier to create, comprehend and maintain. A composite state comprises a state machine of its own within a "region":../user-guide/statechart_language#region. The states belonging to such a nested state machine are called *substates*. *"Orthogonal states":../user-guide/statechart_language#orthogonal-states* are a generalization of composite states, comprising two or more independent state machines in separate regions that are executed in parallel.
 
 A complementary way to mitigate size are *subdiagrams*. A subdiagram externalizes the possibly large region(s) contained by a composite state into a subdiagram. In this case the composite state no longer displays its substates. Instead it is visualized very similar to a regular state, aside from a small label marking it as a composite state and giving access to its internal structure: the subdiagram. In this way a composite state consumes much less space and gives the user the opportunity to better see the overall picture. Section "Using subdiagrams":#using-subdiagrams explains how to work with subdiagrams, how to create them and how to inline them again, if needed.
 
@@ -216,7 +216,7 @@ p=. Renaming a variable
 
 h3(#folding-incoming-actions). Folding incoming actions
 
-When building a state machine model step by step, you may come into a situation where you have defined several transitions having the same target state and share a common set of actions.
+When building a statechart model step by step, you may come into a situation where you have defined several transitions having the same target state and share a common set of actions.
 
 The _Fold Incoming Actions_ refactoring moves these actions from the transitions to the target state's entry block. To preserve model semantics, only actions that are defined on _all_ incoming transitions will be moved. Since the execution order must be preserved, the refactoring algorithm starts with the right-most action and proceeds action by action to the left. As soon as it detects an action that is not defined on _all_ incoming transitions, it stops moving actions to the entry block.
 
@@ -348,9 +348,9 @@ h3(#oss_comparing-three-statecharts). Comparing three statecharts
 # The comparison results are shown.
 
 
-h2(#exporting-a-statechart-as-an-image-file). Exporting a state machine as an image file
+h2(#exporting-a-statechart-as-an-image-file). Exporting a statechart as an image file
 
-A state machine can be saved as an image file as shown in the following steps:
+A statechart can be saved as an image file as shown in the following steps:
 
 In the statechart editor, right-click on the main region. The context menu appears.
 
