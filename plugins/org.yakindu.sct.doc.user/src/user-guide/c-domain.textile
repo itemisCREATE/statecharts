@@ -22,7 +22,7 @@ bq.. *Please also note:*
 
 This preliminary version of *YAKINDU Statechart Tools Professional Edition* does not support pointers and arrays yet. These types will be supported in the full version.
 
-p. The subsequent sections will explain how to use the C integration in practice, using a sample project. In this example, we will define some geometry types like _Point_ or _Triangle_ in C header files and demonstrate how to make them available and use them in a state machine model.
+p. The subsequent sections will explain how to use the C integration in practice, using a sample project. In this example, we will define some geometry types like _Point_ or _Triangle_ in C header files and demonstrate how to make them available and use them in a statechart model.
 
 
 h2(#cdom_creating_a_new_c_project). Creating a new C project
@@ -52,7 +52,7 @@ Now we can create a C header file specifying our own C type definitions which we
 
 h2(#cdom_defining_a_c_struct). Defining a C struct
 
-In the created header file we define a struct type named *Point*, which we will later use in a state machine. A (two-dimensional) point consists of an _x_ and a _y_ coordinate. We choose *int16_t* to represent a coordinate, i.&#8239;e. a 16-bit signed integer. The complete header file containing the struct definition looks like this:
+In the created header file we define a struct type named *Point*, which we will later use in a statechart. A (two-dimensional) point consists of an _x_ and a _y_ coordinate. We choose *int16_t* to represent a coordinate, i.&#8239;e. a 16-bit signed integer. The complete header file containing the struct definition looks like this:
 
 bc.. 
 /*
@@ -76,21 +76,21 @@ bq.. *Please note:*
 
 In C it is possible to define structs, unions and enums without a _typedef_. They can be referenced by using the corresponding qualifying keyword (_struct_, _union_, or _enum_, respectively). As the statechart language does *not* support these qualifiers, the usage of struct, union and enumeration types is currently restricted to those defined by a _typedef_.
 
-h2(#cdom_using_a_c_struct_in_a_statechart). Using C types in a state machine
+h2(#cdom_using_a_c_struct_in_a_statechart). Using C types in a statechart
 
-h3(#cdom_creating_a_statechart_model). Creating a state machine model
+h3(#cdom_creating_a_statechart_model). Creating a statechart model
 
-Let's create a state machine model now to make use of the C type _Point_ we have just defined.
+Let's create a statechart model now to make use of the C type _Point_ we have just defined.
 
 # Right-click on the project. The context menu opens.
 # Select _New → C Statechart Model …_. The _New YAKINDU Statechart_ wizard is shown.
 # In the dialog, specify the directory and the filename for the new statechart model file. The filename should end with @.sct@.
 # Click _Finish_. If Eclipse asks you whether to switch to the _YAKINDU Modeling_ perspective, please confirm.
-# The new statechart model is created:<br/>!(standard-image)images/cdom_geometry_030_new_statechart_model_030.png(New state machine model)!
+# The new statechart model is created:<br/>!(standard-image)images/cdom_geometry_030_new_statechart_model_030.png(New statechart model)!
 
-h3(#cdom_defining_a_c_type_variable). Defining a C-type variable in a state machine
+h3(#cdom_defining_a_c_type_variable). Defining a C-type variable in a statechart
 
-Variables are defined in the definition section on the left-hand side of the state machine editor. Double-click into the section to edit it.
+Variables are defined in the definition section on the left-hand side of the statechart editor. Double-click into the section to edit it.
 
 Let's declare a variable *pointA* of the _Point_ type defined above. In the statechart's definition section, enter the following text:
 
@@ -113,9 +113,9 @@ Selecting the _Point_ menu entry completes the variable definition:
 
 p=. A Point variable
 
-h3(#cdom_using_a_c_type_variable_in_a_statechart). Using a C-type variable in a state machine
+h3(#cdom_using_a_c_type_variable_in_a_statechart). Using a C-type variable in a statechart
 
-A state machine variable with a C type can be used everywhere a "normal" state machine variable can be used.
+A statechart variable with a C type can be used everywhere a "normal" statechart variable can be used.
 
 Let's consider the above example extended by an additional *count* variable of the C99 _int8_t_ standard type. Additionally, we add an event that will be used as a trigger to switch between states.
 
@@ -124,7 +124,7 @@ bc. interface:
     var pointA: point.Point
     in event tick
 
-The state machine below uses these variables in various places, i.&#8239;e. in transition actions, in internal actions, and in guard conditions.
+The statechart below uses these variables in various places, i.&#8239;e. in transition actions, in internal actions, and in guard conditions.
 
 !(standard-image)images/cdom_geometry_050_using_c_type_variables_010.png(Using C-type variables)!
 
@@ -188,9 +188,9 @@ bc. typedef struct {
     double z;
 } Point;
 
-On the C side we would run into problems if we tried to use both _Point_ definitions simultaneously. However, in a state machine this is possible, because each header file represents a different namespace.
+On the C side we would run into problems if we tried to use both _Point_ definitions simultaneously. However, in a statechart this is possible, because each header file represents a different namespace.
 
-A state machine definition section using a two-dimensional *pointA* and a three-dimensional *pointB* would look like this:
+A statechart definition section using a two-dimensional *pointA* and a three-dimensional *pointB* would look like this:
 
 bc. interface:
     var pointA: point.Point
@@ -257,15 +257,15 @@ p=. Content assist in data structure traversal
 
 h2(#cdom_simulation). Simulation
 
-During a state machine model simulation full access to the C data structures is possible on all layers. The user can inspect them as well as modify them in the simulation view.
+During a state machine simulation full access to the C data structures is possible on all layers. The user can inspect them as well as modify them in the simulation view.
 
 The state machine below exemplifies this. Initially it defines two rectangles _a_ and _b_ with certain widths and heights. The state machine calculates the rectangles' respective area size, stores their sizes in two _int32_t_ variables named _area_a_ and _area_b_, and compares them. Depending on the result, it proceeds to state *A is larger* or to *A is smaller*. Only if both _a_ and _b_ have the same area – not necessarily the same width and height –, the state machine proceeds to its final state.
 
 When one of the states *A is larger* or *A is smaller* is active, the rectangles' properties can be changed. Triggering the _compare_size_ event transitions to the *Check* state which repeats the area size comparison as described above.
 
-!(standard-image)images/cdom_geometry_080_simulation_010_statechart.png(The rectangle comparison state machine)!
+!(standard-image)images/cdom_geometry_080_simulation_010_statechart.png(The rectangle comparison statechart)!
 
-p=. The rectangle comparison state machine
+p=. The rectangle comparison statechart
 
 The state machine's definitions are as follows:
 
@@ -289,7 +289,7 @@ typedef struct {
     int16_t width, height;
 } Rectangle;
 
-p. In order to simulate the state machine, right-click on the state machine file in the project explorer and select _Run As → Statechart Simulation_ from the context menu.
+p. In order to simulate the statechart, right-click on the statechart file in the project explorer and select _Run As → Statechart Simulation_ from the context menu.
 
 The statechart simulation
 * starts,
@@ -449,7 +449,7 @@ Macro definitions declared in a C header file via the @#define@ keyword are also
 
 h2(#cdom_generating_c_source_code). Generating C source code
 
-Code generation, i.&#8239;e. turning a state machine model into source code of a programming language, is explained in the section _Generating state machine code_. Therefore we won't go into the details here, but instead only put some emphasis on code generation specialties of the _Deep C Integration_.
+Code generation, i.&#8239;e. turning a statechart model into source code of a programming language, is explained in the section _Generating state machine code_. Therefore we won't go into the details here, but instead only put some emphasis on code generation specialties of the _Deep C Integration_.
 
 h3(#cdom_creating_a_generator_model). Creating a generator model
 
@@ -545,7 +545,7 @@ The current beta version of the YAKINDU Statechart Tools is still missing some e
 
 h3(#cdom_current_restrictions_arrays_pointers). Arrays and pointers
 
-Currently YAKINDU Statechart Tools cannot handle arrays and pointers. This also means that all structs containing arrays or pointer types as members, or operations using these types as parameters can not be accessed. Usage of these types will produce error markers in the state machine, stating "The used type is not supported".
+Currently YAKINDU Statechart Tools cannot handle arrays and pointers. This also means that all structs containing arrays or pointer types as members, or operations using these types as parameters can not be accessed. Usage of these types will produce error markers in the statechart, stating "The used type is not supported".
 
 h3(#cdom_current_restrictions_ranges). Type range checks
 
