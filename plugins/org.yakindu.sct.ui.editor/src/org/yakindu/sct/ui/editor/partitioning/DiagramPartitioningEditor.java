@@ -47,11 +47,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.xtext.util.Arrays;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -85,6 +87,18 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 	@Override
 	public IDocumentProvider getDocumentProvider() {
 		return documentProvider;
+	}
+	
+	@Override
+	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
+		if(input instanceof FileStoreEditorInput) {
+			throw new PartInitException(
+					"An error occured while opening the file.\n\n"
+					+ "This might have happened because you tried to open a statechart with File->Open File.\n"
+            		+ "This is not supported. Please import the file into a project instead."
+	            		);
+		}
+		super.init(site, input);
 	}
 
 	@Override
@@ -160,7 +174,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 	}
 
 	protected void closeSubdiagramEditors() {
-		if (getDiagram().getElement() instanceof Statechart) {
+		if (getDiagram() != null && getDiagram().getElement() instanceof Statechart) {
 			List<IEditorReference> references = new ArrayList<IEditorReference>();
 			IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 			if (workbenchWindow == null)
