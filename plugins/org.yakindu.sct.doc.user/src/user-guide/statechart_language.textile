@@ -3,7 +3,7 @@ p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/
 
 h1(#the-statechart-language). The statechart language
 
-This chapter describes the statechart elements of the YAKINDU Statechart Tools (YAKINDU SCT) editor. The YAKINDU SCT meta model is the model of finite state machines (fsm). It is based on the view of a system that is defined by a finite number of states. The behavior of such a system is based on its active states. These states are determined by the history of the state machine. Very important are the theoretical models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (_entry_, _exit_). YAKINDU SCT can model both these types.
+This chapter describes the statechart elements of the YAKINDU Statechart Tools (YAKINDU SCT) editor. The YAKINDU SCT meta model is the model of Finite State Machines (FSM). It is based on the view of a system that is defined by a finite number of states. The behavior of such a system is based on its active states. These states are determined by the history of the state machine. Very important are the theoretical models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (_entry_, _exit_). YAKINDU SCT can model both these types.
 
 The YAKINDU SCT meta model is designed similar to the UML statechart meta model with the following differences:
 
@@ -22,7 +22,7 @@ A textual description language is used to declare and describe behaviors in a st
 
 h2(#statechart). Statechart
 
-A statechart or statechart model or state machine model consists of several components.
+A statechart or statechart model consists of several components.
 
 The most important part is the *state diagram*, comprising "states":#state and "transitions":#transition. They are organized into zero or more "regions":#region.
 
@@ -243,7 +243,7 @@ p(#fig_raising-an-event_2).
 
 p=. Raising an event (2)
 
-Orthogonal regions within a state are always executed from left to right or from top to bottom, respectively. On the top level, where orthogonal regions can be graphically arranged at will, the execution order is defined by the state machine model's property _region priority_. To inspect or change it, open the _Properties_ view and select the statechart's definition section.
+Orthogonal regions within a state are always executed from left to right or from top to bottom, respectively. On the top level, where orthogonal regions can be graphically arranged at will, the execution order is defined by the statechart model's property _region priority_. To inspect or change it, open the _Properties_ view and select the statechart's definition section.
 
 The region priorities of the example above are shown in figure "&quot;Region priorities&quot;":#fig_region-priorities. Change the execution order and the example will behave differently than described.
 
@@ -310,7 +310,7 @@ A transition that has a composite state as its source can specify which exits sh
 
 Exits have no equivalent in the UML.
 
-The sample state machine in figure "&quot;Entries and exits&quot;":#fig_state_entry_exit contains two composite states:
+The sample statechart in figure "&quot;Entries and exits&quot;":#fig_state_entry_exit contains two composite states:
 
 * The composite state _Process_ models a process with two passes (states) A and B. If both passes succeed, the composite state is left via the _no&#95;problem_ exit node. However, if an error occurs in either A or B the execution flow proceeds to the _problem_ exit point and leaves the composite state there.
 * The composite state _Handle result_ is intended to handle the processing result, be it success or failure. It has two entry points _success_ and _failure_.
@@ -648,7 +648,7 @@ bc. internal:
 event localEvent1: integer = 25
 
 
-Read access to the value of an event is possible in the state machine using the @valueof()@ built-in method. Please note that reading an event's value is possible only when the event actually occurs, for example in a guard:
+Read access to the value of an event is possible in the statechart using the @valueof()@ built-in method. Please note that reading an event's value is possible only when the event actually occurs, for example in a guard:
 
 bc. localEvent1 [valueof(localEvent1) == 6]
 
