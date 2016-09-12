@@ -5,7 +5,7 @@ h1(#oss_five-minutes-tutorial). Five-minutes tutorial
 
 The five-minutes tutorial gives you a brief introduction into modeling state machines with YAKINDU Statechart Tools by a simple example. It models a light switch, which has the states _on_ and _off_. Operating the switch repeatedly turns the light on, off, back on again, and so forth. You can simulate this behavior in a dynamic statechart model (state machine model). Here's how this looks like:
 
-!(standard-image full)images/tuto_light_switch_330_statechart_simulator_state_on.png(Interactive light switch statechart simulation
+!(standard-image full)images/tuto_light_switch_330_statechart_simulator_state_on.png(Interactive light switch statechart simulation)!
 
 p=. Interactive light switch statechart simulation
 
@@ -50,7 +50,7 @@ p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/
 
 h1(#oss_comprehensive-tutorial). Comprehensive tutorial
 
-This tutorial introduces YAKINDU Statechart Tools (SCT) which provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of Finite State Machines (FSM) or statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation for C, C&#43;&#43;, or Java.
+This tutorial introduces YAKINDU Statechart Tools (SCT) which provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concepts of Finite State Machines (FSM) and Harel Statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation for C, C&#43;&#43;, or Java.
 
 This tutorial you will teach how to
 
@@ -79,7 +79,7 @@ h2(#modeling-the-light-switch-as-a-statechart). Modeling the light switch as a s
 
 Now let's model the light switch as a statechart using YAKINDU Statechart Tools. This involves the following steps:
 
-# Creating an Eclipse project. It will serve as a container for the model.
+# Creating an Eclipse project. It will serve as a container for the statechart model.
 # Modeling the light switch using the YAKINDU Statechart Tools editor. The result will be a static statechart model.
 # Simulating the model. We can play around with the model, operate the light switch and observe its behavior.
 
@@ -169,7 +169,7 @@ Since there's a dedicated perspective for statechart models, Eclipse asks you wh
 
 p=. Dialog "Confirm Perspective Switch"
 
-Please answer the question regarding switching to the _YAKINDU Modeling_ perspective by clicking on the _Yes_ button. The _YAKINDU Modeling_ perspective has a graphical editor for models, and you will need it to create and modify state machines. On the other hand your answer really doesn't matter that much, because you can switch perspectives at any time. If you check _Do not offer to switch perspective in the future_ before clicking _Yes_, Eclipse will never ask this question again, at least regarding the _YAKINDU Modeling_ perspective.
+Please answer the question regarding switching to the _YAKINDU Modeling_ perspective by clicking on the _Yes_ button. The _YAKINDU Modeling_ perspective has a graphical editor for statechart models, and you will need it to create and modify them. On the other hand your answer really doesn't matter that much, because you can switch perspectives at any time. If you check _Do not offer to switch perspective in the future_ before clicking _Yes_, Eclipse will never ask this question again, at least regarding the _YAKINDU Modeling_ perspective.
 
 bq. *Please note:* If the _Confirm Perspective Switch_ dialog does not appear as described above you probably have already confirmed _Do not offer to switch perspective in the future_ once before.
 
@@ -200,7 +200,7 @@ The error marker is also shown in the _Project Explorer_ view at the left-hand s
 
 h4(#validation-principles). Validation principles
 
-This error marker exemplifies YAKINDU Statechart Tools' model validation capabilities. Statechart validation includes syntactical and semantical checks of the whole state machine. For example, a state machine is checked for unreachable states, dead ends, or references to unknown events. These validation constraints are checked during editing. In case any constraints are violated, error or warning markers are attached to the faulty model elements. Thus the user receives direct and immediate feedback on the validation state of his statechart.
+This error marker exemplifies YAKINDU Statechart Tools' model validation capabilities. Statechart validation includes syntactical and semantical checks of the whole statechart. For example, a statechart is checked for unreachable states, dead ends, or references to unknown events. These validation constraints are checked during editing. In case any constraints are violated, error or warning markers are attached to the faulty model elements. Thus the user receives direct and immediate feedback on the validation state of his statechart.
 
 Hovering with the mouse over the error marker in the statechart editor reveals what the problem is. A small popup appears and displays the error description: "A state must have a name."
 
@@ -299,7 +299,7 @@ p=. Selecting "Run As → Statechart Simulation" in the context menu
 
 The perspective changes from _SC Modeling_ to _SC Simulation_. This perspective defines two additional views:
 
-* The _Debug_ view at the top shows all running state machines and allows to select one of them. YAKINDU Statechart Tools allow multiple executions of the same state machine as well as parallel executions of different state machines at the same time.
+* The _Debug_ view at the top shows all running state machine instances and allows to select one of them. YAKINDU Statechart Tools allow multiple executions of the same state machine as well as parallel executions of different state machines at the same time.
 * The _Simulation_ view on the right-hand side is used to raise events and to inspect and modify variables. Depending on your screen resolution and font size settings, you might not be able to spot the _Simulation_ view by its name, because the tab containing it is quite narrow and might not provide enough space for displaying the title. Hover over the tabs to reveal their respective titles in a popup window. Figure "&quot;Light switch simulation in &quot;off&quot; state&quot;":#fig_light_switch_simulation_in_off_state is demonstrating this: The user has hovered the mouse pointer over a tab that is just displaying the starting letter 'S' of its title. However, a popup window right besides the pointer is showing the tab's full title "Simulation View".
 
 Not surprisingly, the simulation starts at the initial state and then transitions to the *Off* state immediately. The latter becomes the active state now. It is highlighted by a red background:
@@ -361,7 +361,7 @@ In addition to what we have learned above already, there is one new concept: int
 
 h4(#creating-interfaces). Creating interfaces
 
-State machines can describe very complex interactions between a multitude of actors and an even bigger multitude of events these actors can receive or trigger. It is therefore good practice to structure such events and associate them with their respective actors. For this purpose YAKINDU Statecharts Tools provides the concept of so-called _interfaces_.
+Statecharts can describe very complex interactions between a multitude of actors and an even bigger multitude of events these actors can receive or trigger. It is therefore good practice to structure such events and associate them with their respective actors. For this purpose YAKINDU Statecharts Tools provides the concept of so-called _interfaces_.
 
 In the _CallHandling_ example, we have two actors: the user and the phone. Let's model their communication as two interfaces:
 
