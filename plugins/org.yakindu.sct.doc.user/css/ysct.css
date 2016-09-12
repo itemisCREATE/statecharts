@@ -39,7 +39,7 @@ img.inlinemediaobject {
    These tables typically consist of two columns with a textual description in the
    left column and a screenshot on the right. */
 table.scedit {
-	width: auto;
+	width: 90%;
 	border-collapse: collapse;
 }
 
@@ -48,7 +48,6 @@ tr.scedit {
 }
 
 table.scedit td {
-	border-color: #000;
 	border-radius: 0%;
 	border-style: solid;
 	border-width: 0px;
@@ -56,10 +55,21 @@ table.scedit td {
 	vertical-align: top;
 }
 
+table.scedit td:nth-child(1) {
+	width: 75%;
+	padding-right: 5%;
+}
+
+table.scedit td:nth-child(2) {
+	width: 25%;
+}
+
 table.scedit img {
 	max-width: 100%;
+	margin-top: 0px;
 	margin-left: 0px;
-	margin-right: 0px;
+	margin-right: auto;
+	margin-bottom: auto;
 	box-shadow: 4px 4px 2px #bbb;
 }
 
