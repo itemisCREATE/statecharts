@@ -3,7 +3,7 @@ p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/
 
 h1(#oss_five-minutes-tutorial). Five-minutes tutorial
 
-The five-minutes tutorial gives you a brief introduction into YAKINDU Statechart Tools by a simple example. It models a light switch, which has the states _on_ and _off_. Operating the switch repeatedly turns the light on, off, back on again, and so forth. You can simulate this behavior in a dynamic statechart model. Here's how this looks like:
+The five-minutes tutorial gives you a brief introduction into modeling state machines with YAKINDU Statechart Tools by a simple example. It models a light switch, which has the states _on_ and _off_. Operating the switch repeatedly turns the light on, off, back on again, and so forth. You can simulate this behavior in a dynamic statechart model (state machine model). Here's how this looks like:
 
 !(standard-image full)images/tuto_light_switch_330_statechart_simulator_state_on.png(Interactive light switch statechart simulation)!
 
@@ -27,7 +27,7 @@ Now try this for yourself. We are assuming that you have already installed and s
 h2(#oss_running-the-light-switch-simulation). Simulating the light switch
 
 # Right-click on _light_switch.sct_ and select _Run As → Statechart Simulation_ in the context menu.
-# The statechart simulation starts and shows the light switch model in its _off_ state. The rectangle named *Off* is highlighted in red, meaning it is the active state. <p>!(standard-image)images/tuto_light_switch_320_statechart_simulator_state_events.png(Light switch simulation in "off" state)!</p>
+# The simulation starts and shows the light switch model in its _off_ state. The rectangle named *Off* is highlighted in red, meaning it is the active state. <p>!(standard-image)images/tuto_light_switch_320_statechart_simulator_state_events.png(Light switch simulation in "off" state)!</p>
 # At the right-bottom side of the window, the simulation view is located. In this view, you can change variable values and raise events during a simulation run. Click on the small triangle left from _internal_ to unfold the _operate_ link. This link represents the _operate_ event to switch the light on or off.
 # Click on the _operate_ link. The active state changes accordingly from *Off* to *On*. <p>!(standard-image)images/tuto_light_switch_330_statechart_simulator_state_on.png(Light switch simulation in "on" state)!</p>
 # Click on _operate_ again to switch off the light.
@@ -50,7 +50,7 @@ p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/
 
 h1(#oss_comprehensive-tutorial). Comprehensive tutorial
 
-This tutorial introduces YAKINDU Statechart Tools (SCT) which provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of state machines or statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation for C, C&#43;&#43;, or Java.
+This tutorial introduces YAKINDU Statechart Tools (SCT) which provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concepts of Finite State Machines (FSM) and Harel Statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation for C, C&#43;&#43;, or Java.
 
 This tutorial you will teach how to
 
@@ -59,7 +59,7 @@ This tutorial you will teach how to
 
 Please note that this tutorial will not explain statecharts in general, so you should familiarize yourself with the basic concepts of state machines first, see "UML state machine":http://en.wikipedia.org/wiki/UML_state_machine.
 
-In order to get a fully-working statechart implementation that you can integrate with your project, you will have to familiarize yourself with _code generation_, which is covered by chapter "Code generation":#code-generation in this documentation. You can generate your state machine implementation as source code in C, C++, and Java out of the box. Alternatively, you can write your own code generator for other programming languages or for other purposes.
+In order to get a fully-working state machine implementation that you can integrate with your project, you will have to familiarize yourself with _code generation_, which is covered by chapter "Code generation":#code-generation in this documentation. You can generate your state machine implementation as source code in C, C++, and Java out of the box. Alternatively, you can write your own code generator for other programming languages or for other purposes.
 
 Before we get started, make sure you have YAKINDU Statechart Tools installed. For installation instructions, see the "YAKINDU Statechart Tools Installation Guide":../installation/installation.html.
 
@@ -169,7 +169,7 @@ Since there's a dedicated perspective for statechart models, Eclipse asks you wh
 
 p=. Dialog "Confirm Perspective Switch"
 
-Please answer the question regarding switching to the _YAKINDU Modeling_ perspective by clicking on the _Yes_ button. The _YAKINDU Modeling_ perspective has a graphical editor for statechart models, and you will need it to create and modify statecharts. On the other hand your answer really doesn't matter that much, because you can switch perspectives at any time. If you check _Do not offer to switch perspective in the future_ before clicking _Yes_, Eclipse will never ask this question again, at least regarding the _YAKINDU Modeling_ perspective.
+Please answer the question regarding switching to the _YAKINDU Modeling_ perspective by clicking on the _Yes_ button. The _YAKINDU Modeling_ perspective has a graphical editor for statechart models, and you will need it to create and modify them. On the other hand your answer really doesn't matter that much, because you can switch perspectives at any time. If you check _Do not offer to switch perspective in the future_ before clicking _Yes_, Eclipse will never ask this question again, at least regarding the _YAKINDU Modeling_ perspective.
 
 bq. *Please note:* If the _Confirm Perspective Switch_ dialog does not appear as described above you probably have already confirmed _Do not offer to switch perspective in the future_ once before.
 
@@ -299,7 +299,7 @@ p=. Selecting "Run As → Statechart Simulation" in the context menu
 
 The perspective changes from _SC Modeling_ to _SC Simulation_. This perspective defines two additional views:
 
-* The _Debug_ view at the top shows all running statechart instances and allows to select one of them. YAKINDU Statechart Tools allow multiple executions of the same statechart as well as parallel executions of different statecharts at the same time.
+* The _Debug_ view at the top shows all running state machine instances and allows to select one of them. YAKINDU Statechart Tools allow multiple executions of the same state machine as well as parallel executions of different state machines at the same time.
 * The _Simulation_ view on the right-hand side is used to raise events and to inspect and modify variables. Depending on your screen resolution and font size settings, you might not be able to spot the _Simulation_ view by its name, because the tab containing it is quite narrow and might not provide enough space for displaying the title. Hover over the tabs to reveal their respective titles in a popup window. Figure "&quot;Light switch simulation in &quot;off&quot; state&quot;":#fig_light_switch_simulation_in_off_state is demonstrating this: The user has hovered the mouse pointer over a tab that is just displaying the starting letter 'S' of its title. However, a popup window right besides the pointer is showing the tab's full title "Simulation View".
 
 Not surprisingly, the simulation starts at the initial state and then transitions to the *Off* state immediately. The latter becomes the active state now. It is highlighted by a red background:
@@ -533,7 +533,7 @@ p. Let's have a detailed look at this client code:
 
 * First, this program creates a new instance of the state machine by calling the default @CallHandlingStatemachine@ constructor:
 ** @CallHandlingStatemachine sm = new CallHandlingStatemachine();@
-* Since we are using time events, the statechart implementation requires an implementation of the @ITimer@ interface. And since we added the @TimerService@ feature to the generator model, the code generator creates a default implementation @org.yakindu.scr.TimerService@ that uses the @java.util.Timer@ class. A new instance of the default @TimerService@ is created and set to the state machine:
+* Since we are using time events, the state machine implementation requires an implementation of the @ITimer@ interface. And since we added the @TimerService@ feature to the generator model, the code generator creates a default implementation @org.yakindu.scr.TimerService@ that uses the @java.util.Timer@ class. A new instance of the default @TimerService@ is created and set to the state machine:
 ** @sm.setTimer(new TimerService());@
 * The state machine and its internal data structures are initialized:
 ** @sm.init();@

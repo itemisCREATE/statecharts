@@ -31,7 +31,7 @@ You may ask: Where does the money for open-source development come from? Well, i
 
 h2(#who-is-using-yakindu-statechart-tools). Who is using YAKINDU Statechart Tools?
 
-Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing benefit to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, or C&#43;&#43; code.
+Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing the benefits of Finite State Machines (FSM) and Harel Statecharts to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, or C&#43;&#43; code.
 
 ###.. FIXME: Decide what to do with the following subsection regarding the document structure.
 ###.. FIXME: h3(#what-is-the-structure-of-this-documentation). What is the structure of this documentation?
