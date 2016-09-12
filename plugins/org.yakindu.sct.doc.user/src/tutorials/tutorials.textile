@@ -353,7 +353,7 @@ In order to eventually obtain the *CallHandling* example in the form of executab
 
 h3(#creating-the-statechart-model). Creating the statechart model
 
-In the "previous section":#starting-with-an-empty-state-machine-model we have seen how to work with the statechart editor. So let's create a new project now and use the statechart editor to create the *CallHandling* state machine model as outlined above.
+In the "previous section":#starting-with-an-empty-statechart-model we have seen how to work with the statechart editor. So let's create a new project now and use the statechart editor to create the *CallHandling* statechart model as outlined above.
 
 Since we are going to generate Java code, we should use a Java project to host the statechart model. Use _File → New → Java Project_ and follow the _New Java Project_ wizard to create one.
 
