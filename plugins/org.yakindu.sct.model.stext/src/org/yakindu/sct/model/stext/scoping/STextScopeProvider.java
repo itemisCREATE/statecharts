@@ -133,7 +133,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 
 		IScope scope = IScope.NULLSCOPE;
-		Type ownerType = typeInferrer.inferType(owner, null);
+		Type ownerType = typeInferrer.infer(owner).getType();
 
 		if (element instanceof Scope) {
 			scope = Scopes.scopeFor(((Scope) element).getDeclarations());

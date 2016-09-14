@@ -20,7 +20,6 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
 import org.yakindu.base.types.Event;
-import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
@@ -41,57 +40,59 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	public static final String TIME_SPEC = "The evaluation result of a time expression must be of type integer.";
 	public static final String MISSING_VALUE = "Need to assign a value to an event of type %s.";
 
-	public Object infer(VariableDefinition e) {
-		Type type = inferTypeDispatch(e.getType());
-		assertNotType(type, VARIABLE_VOID_TYPE, getType(VOID));
+	public InferenceResult infer(VariableDefinition e) {
+		InferenceResult type = inferTypeDispatch(e.getTypeSpecifier());
+		assertNotType(type, VARIABLE_VOID_TYPE, getResultFor(VOID));
 		if (e.getInitialValue() == null)
-			return inferTypeDispatch(type);
-		Type type2 = inferTypeDispatch(e.getInitialValue());
+			return type;
+		InferenceResult type2 = inferTypeDispatch(e.getInitialValue());
 		assertAssignable(type, type2, String.format(VARIABLE_DEFINITION, type2, type));
-		return inferTypeDispatch(type);
+		return type;
 	}
 
-	public Object infer(Event e) {
+	
+	
+	public InferenceResult infer(Event e) {
 		// if an event is used within an expression, the type is boolean and the
 		// value indicates if the event is raised or not
-		return getType(BOOLEAN);
+		return getResultFor(BOOLEAN);
 	}
 
-	public Object infer(Guard e) {
-		Type type = inferTypeDispatch(e.getExpression());
-		assertIsSubType(type, getType(BOOLEAN), GUARD);
-		return inferTypeDispatch(type);
+	public InferenceResult infer(Guard e) {
+		InferenceResult type = inferTypeDispatch(e.getExpression());
+		assertIsSubType(type, getResultFor(BOOLEAN), GUARD);
+		return inferTypeDispatch(type.getType());
 	}
 
-	public Object infer(TimeEventSpec e) {
-		Type type = inferTypeDispatch(e.getValue());
-		assertIsSubType(type, getType(INTEGER), TIME_SPEC);
-		return inferTypeDispatch(type);
+	public InferenceResult infer(TimeEventSpec e) {
+		InferenceResult type = inferTypeDispatch(e.getValue());
+		assertIsSubType(type, getResultFor(INTEGER), TIME_SPEC);
+		return inferTypeDispatch(type.getType());
 	}
 
-	public Object infer(Scope scope) {
-		return getType(VOID);
+	public InferenceResult infer(Scope scope) {
+		return getResultFor(VOID);
 	}
 
-	public Object infer(EventValueReferenceExpression e) {
+	public InferenceResult infer(EventValueReferenceExpression e) {
 		Event definition = deresolve(e.getValue());
 		if (definition != null)
-			return inferTypeDispatch(definition.getType() != null ? definition.getType() : getType(VOID));
+			return definition.getTypeSpecifier() == null ? getResultFor(VOID) : inferTypeDispatch(definition.getTypeSpecifier());
 		return inferTypeDispatch(e.getValue());
 	}
 
-	public Object infer(EventRaisingExpression e) {
+	public InferenceResult infer(EventRaisingExpression e) {
 		Event event = deresolve(e.getEvent());
-		Type type1 = null;
+		InferenceResult eventType = null;
 		if(event != null)
-			type1 = event.getType();
-		type1 = type1 != null ? type1 : getType(VOID);
+			eventType = inferTypeDispatch(event.getType());
+		eventType = eventType != null ? eventType : getResultFor(VOID);
 		if (e.getValue() == null) {
-			assertSame(type1, getType(VOID), String.format(MISSING_VALUE, type1));
-			return getType(VOID);
+			assertSame(eventType, getResultFor(VOID), String.format(MISSING_VALUE, eventType));
+			return getResultFor(VOID);
 		}
-		Type type2 = inferTypeDispatch(e.getValue());
-		assertAssignable(type1, type2, String.format(EVENT_DEFINITION, type2, type1));
+		InferenceResult valueType = inferTypeDispatch(e.getValue());
+		assertAssignable(eventType, valueType, String.format(EVENT_DEFINITION, valueType, eventType));
 		return inferTypeDispatch(e.getValue());
 
 	}
@@ -114,8 +115,8 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		return null;
 	}
 
-	public Object infer(ActiveStateReferenceExpression e) {
-		return getType(BOOLEAN);
+	public InferenceResult infer(ActiveStateReferenceExpression e) {
+		return getResultFor(BOOLEAN);
 	}
 
 }

@@ -92,7 +92,9 @@ public class ArrayTypeSpecifierImpl extends TypeSpecifierImpl implements ArrayTy
 	 * @generated NOT
 	 */
 	public Type getElementType() {
-		return getTypeArguments().get(0).getType();
+		if (getTypeArguments().size() > 0)
+			return getTypeArguments().get(0).getType();
+		return null;
 	}
 
 	/**

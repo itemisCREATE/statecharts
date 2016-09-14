@@ -13,6 +13,7 @@ package org.yakindu.base.types.inferrer;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -40,7 +41,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	protected static final String ASSERT_NOT_TYPE = "Expected type is not %s.";
 	protected static final String ASSERT_SAME = "Expected types %s and %s are same.";
 	protected static final String ASSERT_COMPATIBLE = "Incompatible types %s and %s.";
-	
+
 	private static final String METHOD_NAME = "infer";
 
 	@Inject
@@ -50,30 +51,35 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 
 	private PolymorphicDispatcher<Object> dispatcher;
 
-	private LoadingCache<EObject, Type> typeCache;
+	private LoadingCache<EObject, InferenceResult> typeCache;
 
 	public AbstractTypeSystemInferrer() {
 		initDispatcher();
 	}
 
-	protected Type getType(String name) {
-		return registry.getType(name);
+	protected InferenceResult getResultFor(String name) {
+		return InferenceResult.from(registry.getType(name));
 	}
 
-	protected Type getCommonType(EObject object1, EObject object2) {
-		return registry.getCommonType(inferTypeDispatch(object1), inferTypeDispatch(object2));
+	protected InferenceResult getCommonType(InferenceResult result1, InferenceResult result2) {
+		return InferenceResult.from(registry.getCommonType(result1.getType(), result2.getType()));
 	}
 
 	@Override
-	public final Type inferType(EObject object, IValidationIssueAcceptor acceptor) {
+	public final InferenceResult infer(EObject object) {
+		return infer(object, null);
+	}
+
+	@Override
+	public final InferenceResult infer(EObject object, IValidationIssueAcceptor acceptor) {
 		initTypeCache();
 		this.acceptor = (acceptor != null ? acceptor : new ListBasedValidationIssueAcceptor());
-		Type result = inferTypeDispatch(object);
+		InferenceResult result = inferTypeDispatch(object);
 		typeCache.invalidateAll();
 		return result;
 	}
 
-	protected Type inferTypeDispatch(EObject object) {
+	protected InferenceResult inferTypeDispatch(EObject object) {
 		if (object == null || object.eIsProxy())
 			return null;
 		try {
@@ -85,22 +91,23 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	}
 
 	private void initTypeCache() {
-		typeCache = CacheBuilder.newBuilder().maximumSize(100).build(new CacheLoader<EObject, Type>() {
-			
-			public Type load(EObject key) {
-				// TODO: this is not relevant anymore as we do not declare type aliases in type system
+		typeCache = CacheBuilder.newBuilder().maximumSize(100).build(new CacheLoader<EObject, InferenceResult>() {
+
+			public InferenceResult load(EObject key) {
+				// TODO: this is not relevant anymore as we do not declare type
+				// aliases in type system
 				if (key instanceof TypeAlias) {
 					// for type aliases we want to infer their base types
-					return (Type) (EObject) dispatcher.invoke(key);
+					return (InferenceResult) dispatcher.invoke(key);
 				}
 				if (key instanceof Type) {
 					Collection<Type> types = registry.getTypes();
 					for (Type type : types) {
 						if (registry.isSame((Type) key, type))
-							return type;
+							return InferenceResult.from(type);
 					}
 				}
-				return (Type) (EObject) dispatcher.invoke(key);
+				return (InferenceResult) dispatcher.invoke(key);
 			}
 		});
 	}
@@ -120,52 +127,64 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 				});
 	}
 
-	protected void assertNotType(Type currentType, String msg, Type... candidates) {
-		if (currentType == null)
+	protected void assertNotType(InferenceResult currentResult, String msg, InferenceResult... candidates) {
+		if (currentResult == null)
 			return;
-		for (Type type : candidates) {
-			if (registry.isSame(currentType, type)) {
-				error(msg != null ? msg : String.format(ASSERT_NOT_TYPE, currentType), NOT_TYPE_CODE);
+		for (InferenceResult type : candidates) {
+			if (registry.isSame(currentResult.getType(), type.getType())) {
+				error(msg != null ? msg : String.format(ASSERT_NOT_TYPE, currentResult), NOT_TYPE_CODE);
 			}
 		}
 	}
 
-	protected void assertSame(Type type1, Type type2, String msg) {
-		if (type1 == null || type2 == null)
+	protected void assertSame(InferenceResult result1, InferenceResult result2, String msg) {
+		if (result1 == null || result2 == null)
 			return;
-		if (!registry.isSame(type1, type2)) {
-			error(msg != null ? msg : String.format(ASSERT_SAME, type1, type2), NOT_SAME_CODE);
+		if (!registry.isSame(result1.getType(), result2.getType())) {
+			error(msg != null ? msg : String.format(ASSERT_SAME, result1, result2), NOT_SAME_CODE);
+		}
+
+		assertTypeBindingsSame(result1, result2, msg);
+	}
+
+	protected void assertCompatible(InferenceResult result1, InferenceResult result2, String msg) {
+		if (result1 == null || result2 == null)
+			return;
+		if (!registry.haveCommonType(result1.getType(), result2.getType())) {
+			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2), NOT_COMPATIBLE_CODE);
+			return;
+		}
+		assertTypeBindingsSame(result1, result2, msg);
+
+	}
+
+	protected void assertAssignable(InferenceResult varResult, InferenceResult valueResult, String msg) {
+		if (varResult == null || valueResult == null)
+			return;
+		if (!registry.isSuperType(valueResult.getType(), varResult.getType())) {
+			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, varResult, valueResult), NOT_COMPATIBLE_CODE);
+			return;
+		}
+		assertTypeBindingsSame(varResult, valueResult, msg);
+	}
+
+	protected void assertTypeBindingsSame(InferenceResult result1, InferenceResult result2, String msg) {
+		List<InferenceResult> bindings1 = result1.getBindings();
+		List<InferenceResult> bindings2 = result2.getBindings();
+		if (bindings1.size() != bindings2.size()) {
+			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2), NOT_COMPATIBLE_CODE);
+			return;
+		}
+		for (int i = 0; i < bindings1.size(); i++) {
+			assertSame(bindings1.get(i), bindings2.get(i), msg);
 		}
 	}
 
-	protected void assertCompatible(Type type1, Type type2, String msg) {
-		if (type1 == null || type2 == null)
+	protected void assertIsSubType(InferenceResult subResult, InferenceResult superResult, String msg) {
+		if (subResult == null || superResult == null)
 			return;
-		if (!registry.haveCommonType(type1, type2)) {
-			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, type1, type2), NOT_COMPATIBLE_CODE);
-		}
-	}
-	protected void assertCompatibleWithConversion(Type type1, Type type2, String msg) {
-		if (type1 == null || type2 == null)
-			return;
-		if (!registry.haveCommonTypeWithConversion(type1, type2)) {
-			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, type1, type2), NOT_COMPATIBLE_CODE);
-		}
-	}
-	
-	protected void assertAssignable(Type varType, Type valueType, String msg) {
-		if (varType == null || valueType == null)
-			return;
-		if (!registry.isSuperType(valueType, varType)) {
-			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, varType, valueType), NOT_COMPATIBLE_CODE);
-		}
-	}
-	
-	protected void assertIsSubType(Type subtype, Type supertype, String msg) {
-		if (subtype == null || supertype == null)
-			return;
-		if (!registry.isSuperType(subtype, supertype)) {
-			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, subtype, supertype), NOT_COMPATIBLE_CODE);
+		if (!registry.isSuperType(subResult.getType(), superResult.getType())) {
+			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, subResult, superResult), NOT_COMPATIBLE_CODE);
 		}
 	}
 
