@@ -17,13 +17,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 
-import com.google.inject.ImplementedBy;
-
 /**
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@ImplementedBy(ITypeSystemInferrer.NullTypeInferrer.class)
 public interface ITypeSystemInferrer {
 
 	public static final String EXCEPTION_CODE = "RuntimeExcpetion";
@@ -82,18 +79,7 @@ public interface ITypeSystemInferrer {
 	}
 
 	public InferenceResult infer(EObject object, IValidationIssueAcceptor acceptor);
-	
-	public InferenceResult infer(EObject object);
 
-	public static class NullTypeInferrer implements ITypeSystemInferrer {
-		@Override
-		public InferenceResult infer(EObject object, IValidationIssueAcceptor acceptor) {
-			return null;
-		}
-		@Override
-		public InferenceResult infer(EObject object) {
-			return null;
-		}
-	}
+	public InferenceResult infer(EObject object);
 
 }
