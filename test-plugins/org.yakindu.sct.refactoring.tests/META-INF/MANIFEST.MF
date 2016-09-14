@@ -9,7 +9,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.junit,
  org.eclipse.xtext.junit4,
  org.yakindu.sct.model.sexec,
- org.yakindu.sct.test.models
+ org.yakindu.sct.test.models,
+ org.yakindu.sct.domain.generic.resource
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 
