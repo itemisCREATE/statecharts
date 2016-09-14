@@ -11,7 +11,7 @@ Require-Bundle: org.yakindu.sct.model.sgraph,
  org.yakindu.sct.model.stext,
  org.eclipse.xtext.junit4,
  org.yakindu.sct.test.models,
- org.yakindu.sct.model.stext.ui
+ org.yakindu.sct.domain.generic.resource
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-Vendor: statecharts.org
