@@ -12,7 +12,6 @@ package org.yakindu.sct.model.sgraph.test;
 
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.Constants;
-import org.yakindu.sct.model.stext.resource.StextResource;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
@@ -29,7 +28,6 @@ public class SGraphTestModule implements Module {
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME))
 				.toInstance("org.yakindu.sct.model.sgraph");
 		binder.bind(EValidator.Registry.class).toInstance(EValidator.Registry.INSTANCE);
-		binder.bind(org.eclipse.emf.ecore.resource.Resource.class).to(StextResource.class);
 	}
 
 }
