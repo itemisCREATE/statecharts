@@ -17,6 +17,9 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.REAL;
 import static org.yakindu.base.types.typesystem.ITypeSystem.STRING;
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
@@ -53,6 +56,7 @@ import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
 
 /**
@@ -61,137 +65,141 @@ import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
  */
 public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements ExpressionsTypeInferrerMessages {
 
-	public Type infer(AssignmentExpression e) {
-		Type type1 = inferTypeDispatch(e.getVarRef());
-		Type type2 = inferTypeDispatch(e.getExpression());
-		assertAssignable(type1, type2, String.format(ASSIGNMENT_OPERATOR, e.getOperator(), type1, type2));
+	public InferenceResult infer(AssignmentExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getVarRef());
+		InferenceResult result2 = inferTypeDispatch(e.getExpression());
+		assertAssignable(result1, result2, String.format(ASSIGNMENT_OPERATOR, e.getOperator(), result1, result2));
 		return inferTypeDispatch(e.getVarRef());
 	}
 
-	public Type infer(ConditionalExpression e) {
-		Type type1 = inferTypeDispatch(e.getTrueCase());
-		Type type2 = inferTypeDispatch(e.getFalseCase());
-		assertCompatible(type1, type2, String.format(COMMON_TYPE, type1, type2));
-		assertIsSubType(inferTypeDispatch(e.getCondition()), getType(BOOLEAN), CONDITIONAL_BOOLEAN);
-		return getCommonType(type1, type2);
+	public InferenceResult infer(ConditionalExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getTrueCase());
+		InferenceResult result2 = inferTypeDispatch(e.getFalseCase());
+		assertCompatible(result1, result2, String.format(COMMON_TYPE, result1, result2));
+		assertIsSubType(inferTypeDispatch(e.getCondition()), getResultFor(BOOLEAN), CONDITIONAL_BOOLEAN);
+		return getCommonType(result1, result2);
 	}
 
-	public Type infer(LogicalOrExpression e) {
-		Type type1 = inferTypeDispatch(e.getLeftOperand());
-		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertIsSubType(type1, getType(BOOLEAN), String.format(LOGICAL_OPERATORS, "||", type1, type2));
-		assertIsSubType(type2, getType(BOOLEAN), String.format(LOGICAL_OPERATORS, "||", type1, type2));
-		return getType(BOOLEAN);
+	public InferenceResult infer(LogicalOrExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
+		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
+		assertIsSubType(result1, getResultFor(BOOLEAN), String.format(LOGICAL_OPERATORS, "||", result1, result2));
+		assertIsSubType(result2, getResultFor(BOOLEAN), String.format(LOGICAL_OPERATORS, "||", result1, result2));
+		return getResultFor(BOOLEAN);
 	}
 
-	public Type infer(LogicalAndExpression e) {
-		Type type1 = inferTypeDispatch(e.getLeftOperand());
-		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertIsSubType(type1, getType(BOOLEAN), String.format(LOGICAL_OPERATORS, "&&", type1, type2));
-		assertIsSubType(type2, getType(BOOLEAN), String.format(LOGICAL_OPERATORS, "&&", type1, type2));
-		return getType(BOOLEAN);
+	public InferenceResult infer(LogicalAndExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
+		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
+		assertIsSubType(result1, getResultFor(BOOLEAN), String.format(LOGICAL_OPERATORS, "&&", result1, result2));
+		assertIsSubType(result2, getResultFor(BOOLEAN), String.format(LOGICAL_OPERATORS, "&&", result1, result2));
+		return getResultFor(BOOLEAN);
 	}
 
-	public Type infer(LogicalNotExpression e) {
-		Type type = inferTypeDispatch(e.getOperand());
-		assertIsSubType(type, getType(BOOLEAN), String.format(LOGICAL_OPERATOR, "!", type));
-		return getType(BOOLEAN);
+	public InferenceResult infer(LogicalNotExpression e) {
+		InferenceResult type = inferTypeDispatch(e.getOperand());
+		assertIsSubType(type, getResultFor(BOOLEAN), String.format(LOGICAL_OPERATOR, "!", type));
+		return getResultFor(BOOLEAN);
 	}
 
-	public Type infer(BitwiseXorExpression e) {
-		Type type1 = inferTypeDispatch(e.getLeftOperand());
-		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertIsSubType(type1, getType(INTEGER), String.format(BITWISE_OPERATORS, "^", type1, type2));
-		assertIsSubType(type2, getType(INTEGER), String.format(BITWISE_OPERATORS, "^", type1, type2));
-		return getType(INTEGER);
+	public InferenceResult infer(BitwiseXorExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
+		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
+		assertIsSubType(result1, getResultFor(INTEGER), String.format(BITWISE_OPERATORS, "^", result1, result2));
+		assertIsSubType(result2, getResultFor(INTEGER), String.format(BITWISE_OPERATORS, "^", result1, result2));
+		return getResultFor(INTEGER);
 	}
 
-	public Type infer(BitwiseOrExpression e) {
-		Type type1 = inferTypeDispatch(e.getLeftOperand());
-		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertIsSubType(type1, getType(INTEGER), String.format(BITWISE_OPERATORS, "|", type1, type2));
-		assertIsSubType(type2, getType(INTEGER), String.format(BITWISE_OPERATORS, "|", type1, type2));
-		return getType(INTEGER);
+	public InferenceResult infer(BitwiseOrExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
+		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
+		assertIsSubType(result1, getResultFor(INTEGER), String.format(BITWISE_OPERATORS, "|", result1, result2));
+		assertIsSubType(result2, getResultFor(INTEGER), String.format(BITWISE_OPERATORS, "|", result1, result2));
+		return getResultFor(INTEGER);
 	}
 
-	public Type infer(BitwiseAndExpression e) {
-		Type type1 = inferTypeDispatch(e.getLeftOperand());
-		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertIsSubType(type1, getType(INTEGER), String.format(BITWISE_OPERATORS, "&", type1, type2));
-		assertIsSubType(type2, getType(INTEGER), String.format(BITWISE_OPERATORS, "&", type1, type2));
-		return getType(INTEGER);
+	public InferenceResult infer(BitwiseAndExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
+		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
+		assertIsSubType(result1, getResultFor(INTEGER), String.format(BITWISE_OPERATORS, "&", result1, result2));
+		assertIsSubType(result2, getResultFor(INTEGER), String.format(BITWISE_OPERATORS, "&", result1, result2));
+		return getResultFor(INTEGER);
 	}
 
-	public Type infer(ShiftExpression e) {
-		Type type1 = inferTypeDispatch(e.getLeftOperand());
-		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertIsSubType(type1, getType(INTEGER), String.format(BITWISE_OPERATORS, e.getOperator(), type1, type2));
-		assertIsSubType(type2, getType(INTEGER), String.format(BITWISE_OPERATORS, e.getOperator(), type1, type2));
-		return getType(INTEGER);
+	public InferenceResult infer(ShiftExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
+		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
+		assertIsSubType(result1, getResultFor(INTEGER),
+				String.format(BITWISE_OPERATORS, e.getOperator(), result1, result2));
+		assertIsSubType(result2, getResultFor(INTEGER),
+				String.format(BITWISE_OPERATORS, e.getOperator(), result1, result2));
+		return getResultFor(INTEGER);
 	}
 
-	public Type infer(LogicalRelationExpression e) {
-		Type type1 = inferTypeDispatch(e.getLeftOperand());
-		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertCompatible(type1, type2, String.format(COMPARSION_OPERATOR, e.getOperator(), type1, type2));
-		Type result = getType(BOOLEAN);
+	public InferenceResult infer(LogicalRelationExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
+		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
+		assertCompatible(result1, result2, String.format(COMPARSION_OPERATOR, e.getOperator(), result1, result2));
+		InferenceResult result = getResultFor(BOOLEAN);
 		return result;
 	}
 
-	public Type infer(NumericalAddSubtractExpression e) {
-		Type type1 = inferTypeDispatch(e.getLeftOperand());
-		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertCompatible(type1, type2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2));
-		assertIsSubType(type1, getType(REAL), String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2));
-		return getCommonType(e.getLeftOperand(), e.getRightOperand());
+	public InferenceResult infer(NumericalAddSubtractExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
+		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
+		assertCompatible(result1, result2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), result1, result2));
+		assertIsSubType(result1, getResultFor(REAL),
+				String.format(ARITHMETIC_OPERATORS, e.getOperator(), result1, result2));
+		return getCommonType(inferTypeDispatch(e.getLeftOperand()), inferTypeDispatch(e.getRightOperand()));
 	}
 
-	public Type infer(NumericalMultiplyDivideExpression e) {
-		Type type1 = inferTypeDispatch(e.getLeftOperand());
-		Type type2 = inferTypeDispatch(e.getRightOperand());
-		assertCompatible(type1, type2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2));
-		assertIsSubType(type1, getType(REAL), String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2));
-		return getCommonType(type1, type2);
+	public InferenceResult infer(NumericalMultiplyDivideExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
+		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
+		assertCompatible(result1, result2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), result1, result2));
+		assertIsSubType(result1, getResultFor(REAL),
+				String.format(ARITHMETIC_OPERATORS, e.getOperator(), result1, result2));
+		return getCommonType(result1, result2);
 	}
 
-	public Type infer(NumericalUnaryExpression e) {
-		Type type1 = inferTypeDispatch(e.getOperand());
+	public InferenceResult infer(NumericalUnaryExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getOperand());
 		if (e.getOperator() == UnaryOperator.COMPLEMENT)
-			assertIsSubType(type1, getType(INTEGER), String.format(BITWISE_OPERATOR, '~', type1));
+			assertIsSubType(result1, getResultFor(INTEGER), String.format(BITWISE_OPERATOR, '~', result1));
 		else {
-			assertIsSubType(type1, getType(REAL), String.format(ARITHMETIC_OPERATOR, e.getOperator(), type1));
+			assertIsSubType(result1, getResultFor(REAL), String.format(ARITHMETIC_OPERATOR, e.getOperator(), result1));
 		}
-		return type1;
+		return result1;
 	}
 
-	public Type infer(TypeCastExpression e) {
-		Type type1 = inferTypeDispatch(e.getOperand());
-		Type type2 = inferTypeDispatch(e.getType());
-		assertCompatible(type1, type2, String.format(CAST_OPERATORS, type1, type2));
+	public InferenceResult infer(TypeCastExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getOperand());
+		InferenceResult result2 = inferTypeDispatch(e.getType());
+		assertCompatible(result1, result2, String.format(CAST_OPERATORS, result1, result2));
 		return inferTypeDispatch(e.getType());
 	}
 
-	public Type infer(EnumerationType enumType) {
-		return enumType;
+	public InferenceResult infer(EnumerationType enumType) {
+		return InferenceResult.from(enumType);
 	}
 
-	public Type infer(Enumerator enumerator) {
-		return EcoreUtil2.getContainerOfType(enumerator, Type.class);
+	public InferenceResult infer(Enumerator enumerator) {
+		return InferenceResult.from(EcoreUtil2.getContainerOfType(enumerator, Type.class));
 	}
 
-	public Type infer(Type type) {
-		return type.getOriginType();
+	public InferenceResult infer(Type type) {
+		return InferenceResult.from(type.getOriginType());
 	}
 
 	/**
 	 * The type of a type alias is its (recursively inferred) base type, i.e.
 	 * type aliases are assignable if their inferred base types are assignable.
 	 */
-	public Object infer(TypeAlias typeAlias) {
-		return inferTypeDispatch(typeAlias.getType());
+	public InferenceResult infer(TypeAlias typeAlias) {
+		return inferTypeDispatch(typeAlias.getTypeSpecifier());
 	}
 
-	public Type infer(FeatureCall e) {
+	public InferenceResult infer(FeatureCall e) {
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getFeature();
 			EList<Parameter> parameters = operation.getParameters();
@@ -201,7 +209,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		return inferTypeDispatch(e.getFeature());
 	}
 
-	public Type infer(ElementReferenceExpression e) {
+	public InferenceResult infer(ElementReferenceExpression e) {
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getReference();
 			EList<Parameter> parameters = operation.getParameters();
@@ -214,60 +222,70 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	protected void inferParameter(EList<Parameter> parameters, EList<Expression> args) {
 		if (parameters.size() == args.size()) {
 			for (int i = 0; i < parameters.size(); i++) {
-				Type type1 = inferTypeDispatch(parameters.get(i));
-				Type type2 = inferTypeDispatch(args.get(i));
-				assertCompatible(type2, type1, String.format(INCOMPATIBLE_TYPES, type2, type1));
+				InferenceResult result1 = inferTypeDispatch(parameters.get(i));
+				InferenceResult result2 = inferTypeDispatch(args.get(i));
+				assertCompatible(result2, result1, String.format(INCOMPATIBLE_TYPES, result2, result1));
 			}
 		}
 	}
 
-	public Type infer(ParenthesizedExpression e) {
+	public InferenceResult infer(ParenthesizedExpression e) {
 		return inferTypeDispatch(e.getExpression());
 	}
 
-	public Type infer(PrimitiveValueExpression e) {
+	public InferenceResult infer(PrimitiveValueExpression e) {
 		return inferTypeDispatch(e.getValue());
 	}
 
-	public Type infer(BoolLiteral literal) {
-		return getType(BOOLEAN);
+	public InferenceResult infer(BoolLiteral literal) {
+		return getResultFor(BOOLEAN);
 	}
 
-	public Type infer(IntLiteral literal) {
-		return getType(INTEGER);
+	public InferenceResult infer(IntLiteral literal) {
+		return getResultFor(INTEGER);
 	}
 
-	public Type infer(HexLiteral literal) {
-		return getType(INTEGER);
+	public InferenceResult infer(HexLiteral literal) {
+		return getResultFor(INTEGER);
 	}
 
-	public Type infer(DoubleLiteral literal) {
-		return getType(REAL);
+	public InferenceResult infer(DoubleLiteral literal) {
+		return getResultFor(REAL);
 	}
 
-	public Type infer(FloatLiteral literal) {
-		return getType(REAL);
+	public InferenceResult infer(FloatLiteral literal) {
+		return getResultFor(REAL);
 	}
 
-	public Type infer(StringLiteral literal) {
-		return getType(STRING);
+	public InferenceResult infer(StringLiteral literal) {
+		return getResultFor(STRING);
 	}
 
-	public Type infer(NullLiteral literal) {
-		return getType(NULL);
+	public InferenceResult infer(NullLiteral literal) {
+		return getResultFor(NULL);
 	}
 
-	public Object infer(Property p) {
-		Type type = inferTypeDispatch(p.getType());
-		assertNotType(type, VARIABLE_VOID_TYPE, getType(VOID));
-		return inferTypeDispatch(type);
+	public InferenceResult infer(Property p) {
+		InferenceResult type = inferTypeDispatch(p.getTypeSpecifier());
+		assertNotType(type, VARIABLE_VOID_TYPE, getResultFor(VOID));
+		return type;
 	}
 
-	public Object infer(Operation e) {
-		return inferTypeDispatch(e.getType() != null ? e.getType() : getType(VOID));
+	public InferenceResult infer(Operation e) {
+		return e.getTypeSpecifier() == null ? getResultFor(VOID) : inferTypeDispatch(e.getTypeSpecifier());
 	}
 
-	public Object infer(Parameter e) {
-		return inferTypeDispatch(e.getType());
+	public InferenceResult infer(Parameter e) {
+		return inferTypeDispatch(e.getTypeSpecifier());
+	}
+
+	public InferenceResult infer(TypeSpecifier specifier) {
+		List<InferenceResult> bindings = new ArrayList<>();
+		EList<TypeSpecifier> arguments = specifier.getTypeArguments();
+		for (TypeSpecifier typeSpecifier : arguments) {
+			bindings.add(inferTypeDispatch(typeSpecifier));
+		}
+		return InferenceResult.from(inferTypeDispatch(specifier.getType()).getType(), bindings);
+
 	}
 }

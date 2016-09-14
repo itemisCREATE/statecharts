@@ -34,6 +34,7 @@ import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -58,6 +59,8 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
+	@Inject 
+	private ITypeSystem typeSystem;
 	
 	private static class ErrorHandlerDelegate<T> implements ErrorHandler<T> {
 
@@ -130,13 +133,16 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 
 		IScope scope = IScope.NULLSCOPE;
+		Type ownerType = typeInferrer.infer(owner).getType();
 
 		if (element instanceof Scope) {
 			scope = Scopes.scopeFor(((Scope) element).getDeclarations());
 			return new FilteringScope(scope, predicate);
+		}else{
+			scope = Scopes.scopeFor(typeSystem.getPropertyExtensions(ownerType));
+			scope = Scopes.scopeFor(typeSystem.getOperationExtensions(ownerType),scope);
 		}
-
-		Type ownerType = typeInferrer.inferType(owner, null);
+		
 		if (ownerType instanceof ComplexType) {
 			return addScopeForComplexType((ComplexType) ownerType, scope, predicate);
 		}

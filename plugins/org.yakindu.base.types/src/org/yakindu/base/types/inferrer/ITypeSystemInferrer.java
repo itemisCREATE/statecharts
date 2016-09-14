@@ -10,17 +10,17 @@
  */
 package org.yakindu.base.types.inferrer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor;
-
-import com.google.inject.ImplementedBy;
 
 /**
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@ImplementedBy(ITypeSystemInferrer.NullTypeInferrer.class)
 public interface ITypeSystemInferrer {
 
 	public static final String EXCEPTION_CODE = "RuntimeExcpetion";
@@ -30,15 +30,56 @@ public interface ITypeSystemInferrer {
 	public static final String NOT_SAME_CODE = "NotSame";
 	public static final String NOT_COMPATIBLE_CODE = "IncompatibleTypes";
 
-	public Type inferType(EObject object, IValidationIssueAcceptor acceptor);
+	public static class InferenceResult {
 
-	public static class NullTypeInferrer implements ITypeSystemInferrer {
+		private Type type;
+		private List<InferenceResult> bindings = new ArrayList<>();
 
-		@Override
-		public Type inferType(EObject object, IValidationIssueAcceptor acceptor) {
-			return null;
+		protected InferenceResult(Type type) {
+			this.type = type;
 		}
 
+		protected InferenceResult(Type type, List<InferenceResult> bindings) {
+			this.type = type;
+			this.bindings.addAll(bindings);
+		}
+
+		public static InferenceResult from(Type type) {
+			return new InferenceResult(type);
+		}
+
+		public static InferenceResult from(Type type, List<InferenceResult> bindings) {
+			return new InferenceResult(type, bindings);
+		}
+
+		public Type getType() {
+			return type;
+		}
+
+		public List<InferenceResult> getBindings() {
+			return bindings;
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder builder = new StringBuilder();
+			builder.append(type.toString());
+			if (bindings.size() > 0) {
+				builder.append("<");
+				String sep = "";
+				for (InferenceResult type : bindings) {
+					builder.append(sep);
+					builder.append(type.toString());
+					sep = ",";
+				}
+				builder.append(">");
+			}
+			return builder.toString();
+		}
 	}
+
+	public InferenceResult infer(EObject object, IValidationIssueAcceptor acceptor);
+
+	public InferenceResult infer(EObject object);
 
 }

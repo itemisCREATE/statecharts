@@ -8,12 +8,15 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.domain.generic.modules;
+package org.yakindu.sct.domain.generic.resource;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.sct.domain.extension.IModuleProvider;
 import org.yakindu.sct.model.stext.STextRuntimeModule;
 import org.yakindu.sct.model.stext.resource.StextResource;
+import org.yakindu.sct.model.stext.ui.STextUiModule;
+import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
@@ -28,12 +31,17 @@ public class ResourceModuleProvider implements IModuleProvider {
 
 	@Override
 	public Module getModule(String... options) {
-		return Modules.combine(getLanguageRuntimeModule(), new Module() {
+
+		Module module = Modules.override(getLanguageRuntimeModule())
+				.with(new STextUiModule(STextActivator.getInstance()));
+		module = Modules.override(module).with(new Module() {
 			@Override
 			public void configure(Binder binder) {
 				binder.bind(Resource.class).to(StextResource.class);
 			}
 		});
+
+		return Modules.override(module).with(new SharedStateModule());
 	}
 
 	protected Module getLanguageRuntimeModule() {

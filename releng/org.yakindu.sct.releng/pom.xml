@@ -394,6 +394,7 @@
 		<module>../../plugins/org.yakindu.sct.domain.generic.editor</module>
 		<module>../../plugins/org.yakindu.sct.domain.generic.generator</module>
 		<module>../../plugins/org.yakindu.sct.domain.generic.simulation</module>
+		<module>../../plugins/org.yakindu.sct.domain.generic.resource</module>
 		<module>../../plugins/org.yakindu.sct.doc.user</module>
 		<module>../../plugins/org.yakindu.sct.generator.core</module>
 		<module>../../plugins/org.yakindu.sct.generator.builder</module>

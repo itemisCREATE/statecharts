@@ -41,7 +41,7 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 	private Type conversionSubType;
 
 	@Override
-	protected void initBuiltInTypes() {
+	protected void initRegistries() {
 		// SubType extends SuperType
 		superType = createPrimitive(SUPER_TYPE);
 		declareType(superType, SUPER_TYPE);

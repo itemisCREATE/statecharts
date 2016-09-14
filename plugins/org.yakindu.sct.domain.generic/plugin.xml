@@ -10,12 +10,4 @@
             name="Default">
       </Domain>
    </extension>
-<extension
-      point="org.yakindu.sct.domain.modules">
-   <Module
-         domainID="org.yakindu.domain.default"
-         feature="org.yakindu.sct.resource"
-         moduleProvider="org.yakindu.sct.domain.generic.modules.ResourceModuleProvider">
-   </Module>
-</extension>
 </plugin>

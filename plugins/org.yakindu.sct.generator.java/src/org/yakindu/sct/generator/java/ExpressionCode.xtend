@@ -175,7 +175,7 @@ class ExpressionCode {
 	}
 
 	def dispatch String code(LogicalRelationExpression expression) {
-		if (isSame(expression.leftOperand.inferType(null), getType(GenericTypeSystem.STRING))) {
+		if (isSame(expression.leftOperand.infer.type, getType(GenericTypeSystem.STRING))) {
 			expression.logicalString
 		} else
 			expression.leftOperand.code + expression.operator.code + expression.rightOperand.code;

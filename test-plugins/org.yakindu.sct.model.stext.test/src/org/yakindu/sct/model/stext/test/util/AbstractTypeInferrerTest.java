@@ -12,6 +12,7 @@ import org.junit.rules.ExpectedException;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue;
@@ -46,20 +47,30 @@ public abstract class AbstractTypeInferrerTest extends AbstractSTextTest {
 		return inferType(expression, parserRule, super.internalScope() + "\n" + super.interfaceScope());
 	}
 
+	protected InferenceResult inferTypeResultForExpression(String expression, String scopes) {
+		return inferTypeResult(expression, Expression.class.getSimpleName(), scopes);
+	}
+	
+	@Deprecated
 	protected Type inferTypeForExpression(String expression, String scopes) {
 		return inferType(expression, Expression.class.getSimpleName(), scopes);
 	}
 
+	@Deprecated
 	protected Type inferType(String expression, String parserRule, String scopes) {
+		return inferTypeResult(expression, parserRule, scopes).getType();
+	}
+	
+	protected InferenceResult inferTypeResult(String expression, String parserRule, String scopes) {
 		EObject parseResult = super.parseExpression(expression, parserRule, scopes);
 		assertNotNull(parseResult);
 		acceptor = new ListBasedValidationIssueAcceptor();
 		if (parseResult instanceof Expression) {
-			return typeInferrer.inferType((Expression) parseResult, acceptor);
+			return typeInferrer.infer((Expression) parseResult, acceptor);
 		} else if (parseResult instanceof EventDefinition) {
-			return typeInferrer.inferType((EventDefinition) parseResult, acceptor);
+			return typeInferrer.infer((EventDefinition) parseResult, acceptor);
 		} else if (parseResult instanceof VariableDefinition) {
-			return typeInferrer.inferType((VariableDefinition) parseResult, acceptor);
+			return typeInferrer.infer((VariableDefinition) parseResult, acceptor);
 		} else {
 			throw new IllegalArgumentException("Unsupported parse result.");
 		}
@@ -131,7 +142,7 @@ public abstract class AbstractTypeInferrerTest extends AbstractSTextTest {
 	protected ListBasedValidationIssueAcceptor validate(String expression, String scope) {
 		EObject exp = parseExpression(expression, Expression.class.getSimpleName(), scope);
 		ListBasedValidationIssueAcceptor diagnostics = new ListBasedValidationIssueAcceptor();
-		typeInferrer.inferType(exp, diagnostics);
+		typeInferrer.infer(exp, diagnostics);
 		return diagnostics;
 	}
 }
