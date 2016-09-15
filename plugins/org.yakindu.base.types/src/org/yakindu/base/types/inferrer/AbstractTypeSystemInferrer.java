@@ -133,6 +133,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 		for (InferenceResult type : candidates) {
 			if (registry.isSame(currentResult.getType(), type.getType())) {
 				error(msg != null ? msg : String.format(ASSERT_NOT_TYPE, currentResult), NOT_TYPE_CODE);
+				return;
 			}
 		}
 	}
@@ -140,21 +141,24 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	protected void assertSame(InferenceResult result1, InferenceResult result2, String msg) {
 		if (result1 == null || result2 == null)
 			return;
+		String errorMsg = msg != null ? msg : String.format(ASSERT_SAME, result1, result2);
 		if (!registry.isSame(result1.getType(), result2.getType())) {
-			error(msg != null ? msg : String.format(ASSERT_SAME, result1, result2), NOT_SAME_CODE);
+			error(errorMsg, NOT_SAME_CODE);
+			return;
 		}
 
-		assertTypeBindingsSame(result1, result2, msg);
+		assertTypeBindingsSame(result1, result2, errorMsg);
 	}
 
 	protected void assertCompatible(InferenceResult result1, InferenceResult result2, String msg) {
 		if (result1 == null || result2 == null)
 			return;
+		String errorMsg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2);
 		if (!registry.haveCommonType(result1.getType(), result2.getType())) {
-			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2), NOT_COMPATIBLE_CODE);
+			error(errorMsg, NOT_COMPATIBLE_CODE);
 			return;
 		}
-		assertTypeBindingsSame(result1, result2, msg);
+		assertTypeBindingsSame(result1, result2, errorMsg);
 
 	}
 
@@ -171,12 +175,13 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	protected void assertTypeBindingsSame(InferenceResult result1, InferenceResult result2, String msg) {
 		List<InferenceResult> bindings1 = result1.getBindings();
 		List<InferenceResult> bindings2 = result2.getBindings();
+		String errorMsg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2);
 		if (bindings1.size() != bindings2.size()) {
-			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2), NOT_COMPATIBLE_CODE);
+			error(errorMsg, NOT_COMPATIBLE_CODE);
 			return;
 		}
 		for (int i = 0; i < bindings1.size(); i++) {
-			assertSame(bindings1.get(i), bindings2.get(i), msg);
+			assertSame(bindings1.get(i), bindings2.get(i), errorMsg);
 		}
 	}
 
@@ -184,7 +189,8 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 		if (subResult == null || superResult == null)
 			return;
 		if (!registry.isSuperType(subResult.getType(), superResult.getType())) {
-			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, subResult, superResult), NOT_COMPATIBLE_CODE);
+			String msg2 = msg != null ? msg : String.format(ASSERT_COMPATIBLE, subResult, superResult);
+			error(msg2, NOT_COMPATIBLE_CODE);
 		}
 	}
 
