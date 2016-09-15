@@ -30,13 +30,15 @@ public class SCTJavaIoFileSystemAccess extends JavaIoFileSystemAccess implements
 	@Named(BASE_DIR)
 	protected String absoluteBaseDir;
 
+	private String projectName;
+
 	public void setContext(String projectName) {
-		// Nothing to do
+		this.projectName = projectName;
 	}
 
 	@Override
 	public void setOutputPath(String outputName, String path) {
-		super.setOutputPath(outputName, absoluteBaseDir + File.separator + path);
+		super.setOutputPath(outputName, absoluteBaseDir + File.separator + projectName + File.separator + path);
 	}
 
 }
