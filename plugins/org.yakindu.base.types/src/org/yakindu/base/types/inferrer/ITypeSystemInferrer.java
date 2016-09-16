@@ -51,6 +51,10 @@ public interface ITypeSystemInferrer {
 		public static InferenceResult from(Type type, List<InferenceResult> bindings) {
 			return new InferenceResult(type, bindings);
 		}
+		
+		public static InferenceResult nullResult() {
+			return new InferenceResult(null);
+		}
 
 		public Type getType() {
 			return type;
