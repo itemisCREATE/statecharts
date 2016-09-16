@@ -13,6 +13,7 @@ package org.yakindu.base.types.inferrer;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor;
@@ -36,10 +37,13 @@ public interface ITypeSystemInferrer {
 		private List<InferenceResult> bindings = new ArrayList<>();
 
 		protected InferenceResult(Type type) {
+			Assert.isNotNull(type);
 			this.type = type;
 		}
 
 		protected InferenceResult(Type type, List<InferenceResult> bindings) {
+			Assert.isNotNull(type);
+			Assert.isNotNull(bindings);
 			this.type = type;
 			this.bindings.addAll(bindings);
 		}
