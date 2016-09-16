@@ -39,6 +39,6 @@ class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 	}
 	
 	override getTargetLanguageName(TypeSpecifier typeSpecifier) {
-		return getTargetLanguageName(typeSpecifier.type)
+		return getTargetLanguageName(typeSpecifier?.type)
 	}
 }
