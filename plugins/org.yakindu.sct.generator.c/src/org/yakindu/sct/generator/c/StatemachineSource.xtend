@@ -276,7 +276,7 @@ class StatemachineSource implements IContentTemplate {
 					return «event.access»;
 				}
 				«IF event.hasValue» 
-					«event.type.targetLanguageName» «event.asGetter»(const «scHandleDecl»)
+					«event.typeSpecifier.targetLanguageName» «event.asGetter»(const «scHandleDecl»)
 					{
 						return «event.valueAccess»;
 					}
@@ -284,12 +284,12 @@ class StatemachineSource implements IContentTemplate {
 			«ENDFOR»
 			
 			«FOR variable : scope.variableDefinitions»
-				«IF variable.const»const «ENDIF»«variable.type.targetLanguageName» «variable.asGetter»(const «scHandleDecl»)
+				«IF variable.const»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «variable.asGetter»(const «scHandleDecl»)
 				{
 					return «variable.access»;
 				}
 				«IF !variable.readonly && !variable.const»
-				void «variable.asSetter»(«scHandleDecl», «variable.type.targetLanguageName» value)
+				void «variable.asSetter»(«scHandleDecl», «variable.typeSpecifier.targetLanguageName» value)
 				{
 					«variable.access» = value;
 				}
@@ -319,7 +319,7 @@ class StatemachineSource implements IContentTemplate {
 	def constantDefinitions(ExecutionFlow it) '''
 		«FOR scope : scopes.filter(typeof(StatechartScope))»
 			«FOR d : scope.declarations.filter(typeof(VariableDefinition)).filter[const]»
-				«IF d.type.name != 'void'»const «d.type.targetLanguageName» «d.access» = «d.initialValue.resolveConstants»;«ENDIF»
+				«IF d.type.name != 'void'»const «d.typeSpecifier.targetLanguageName» «d.access» = «d.initialValue.resolveConstants»;«ENDIF»
 			«ENDFOR»
 		«ENDFOR»
 	'''

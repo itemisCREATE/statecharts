@@ -119,7 +119,7 @@ class EventBasedRunnableWrapper {
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction == Direction::IN»
 				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-					public void raise«event.name.asName»(final «event.type.targetLanguageName» value) {
+					public void raise«event.name.asName»(final «event.typeSpecifier.targetLanguageName» value) {
 						
 						eventQueue.add( new Runnable() {
 							

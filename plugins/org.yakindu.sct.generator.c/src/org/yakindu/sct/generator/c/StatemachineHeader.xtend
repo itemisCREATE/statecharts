@@ -132,7 +132,7 @@ class StatemachineHeader implements IContentTemplate {
 
 	def dispatch scopeTypeDeclMember(EventDefinition it) '''
 		sc_boolean «name.asIdentifier»_raised;
-		«IF type != null && type.name != 'void'»«type.targetLanguageName» «name.asIdentifier»_value;«ENDIF»
+		«IF type != null && type.name != 'void'»«typeSpecifier.targetLanguageName» «name.asIdentifier»_value;«ENDIF»
 	'''
 
 	def dispatch scopeTypeDeclMember(TimeEvent it) '''
@@ -140,7 +140,7 @@ class StatemachineHeader implements IContentTemplate {
 	'''
 
 	def dispatch scopeTypeDeclMember(VariableDefinition it) '''
-		«IF type.name != 'void' && !isConst»«type.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
+		«IF type.name != 'void' && !isConst»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
 	
 	def dispatch scopeTypeDeclMember(Declaration it) ''''''
@@ -163,7 +163,7 @@ class StatemachineHeader implements IContentTemplate {
 		«IF !(scope instanceof InternalScope) && !scope.constDeclarations.empty»
 			/* Declaration of constants for scope «scope.type». */
 			«FOR d : scope.constDeclarations AFTER newLine»
-				«IF d.type.name != 'void'»extern const «d.type.targetLanguageName» «d.constantName»;«ENDIF»
+				«IF d.type.name != 'void'»extern const «d.typeSpecifier.targetLanguageName» «d.constantName»;«ENDIF»
 			«ENDFOR»
 		«ENDIF»
 	'''
@@ -220,7 +220,7 @@ class StatemachineHeader implements IContentTemplate {
 			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */ 
-				extern «type.targetLanguageName» «asGetter»(const «scHandleDecl»);
+				extern «typeSpecifier.targetLanguageName» «asGetter»(const «scHandleDecl»);
 				
 			«ENDIF»
 		«ENDIF»
@@ -228,10 +228,10 @@ class StatemachineHeader implements IContentTemplate {
 
 	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-		extern «IF const»const «ENDIF»«type.targetLanguageName» «it.asGetter»(const «scHandleDecl»);
+		extern «IF const»const «ENDIF»«typeSpecifier.targetLanguageName» «it.asGetter»(const «scHandleDecl»);
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-			extern void «asSetter»(«scHandleDecl», «type.targetLanguageName» value);
+			extern void «asSetter»(«scHandleDecl», «typeSpecifier.targetLanguageName» value);
 		«ENDIF»
 	'''
 }

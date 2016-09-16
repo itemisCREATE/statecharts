@@ -237,7 +237,7 @@ class Naming {
 	def scHandle() { 'handle' }
 
 	def valueParams(EventDefinition it) {
-		if(hasValue) ', ' + type.targetLanguageName + ' value' else ''
+		if(hasValue) ', ' + typeSpecifier.targetLanguageName + ' value' else ''
 	}
 
 	def dispatch access(VariableDefinition it) {

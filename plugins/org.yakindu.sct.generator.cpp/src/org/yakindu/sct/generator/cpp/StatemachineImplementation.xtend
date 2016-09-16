@@ -274,7 +274,7 @@ class StatemachineImplementation implements IContentTemplate {
 	def constantDefinitions(ExecutionFlow it) '''
 		«FOR scope : statechartScopes»
 			«FOR d : scope.declarations.filter(typeof(VariableDefinition)).filter[const] AFTER newLine»
-				«IF d.type.name != 'void'»const «d.type.targetLanguageName» «d.access» = «d.initialValue.code»;«ENDIF»
+				«IF d.type.name != 'void'»const «d.typeSpecifier.targetLanguageName» «d.access» = «d.initialValue.code»;«ENDIF»
 			«ENDFOR»
 		«ENDFOR»
 	'''
@@ -323,13 +323,13 @@ class StatemachineImplementation implements IContentTemplate {
 					
 				«ENDIF»
 				«IF event.hasValue»
-					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»()
+					«event.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»()
 					{
 						return «event.localValueAccess»;
 					}
 					
 					«IF scope.defaultInterface»
-						«event.type.targetLanguageName» «module»::«event.asGetter»()
+						«event.typeSpecifier.targetLanguageName» «module»::«event.asGetter»()
 						{
 							return «scope.instance».«event.asGetter»();
 						}
@@ -353,7 +353,7 @@ class StatemachineImplementation implements IContentTemplate {
 				}
 				
 				«IF event.hasValue» 
-					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»()
+					«event.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»()
 					{
 						return «event.localValueAccess»;
 					}
@@ -361,26 +361,26 @@ class StatemachineImplementation implements IContentTemplate {
 				«ENDIF»
 			«ENDFOR»
 			«FOR variable : scope.variableDefinitions»
-				«IF variable.const»const «ENDIF»«variable.type.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»()
+				«IF variable.const»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»()
 				{
 					return «variable.localAccess»;
 				}
 				
 				«IF scope.defaultInterface»
-					«IF variable.const»const «ENDIF»«variable.type.targetLanguageName» «module»::«variable.asGetter»()
+					«IF variable.const»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«variable.asGetter»()
 					{
 						return «variable.access»;
 					}
 					
 				«ENDIF»
 				«IF !variable.readonly && !variable.const»
-					void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.type.targetLanguageName» value)
+					void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.typeSpecifier.targetLanguageName» value)
 					{
 						«variable.localAccess» = value;
 					}
 					
 					«IF scope.defaultInterface»
-						void «module»::«variable.asSetter»(«variable.type.targetLanguageName» value)
+						void «module»::«variable.asSetter»(«variable.typeSpecifier.targetLanguageName» value)
 						{
 							«variable.access» = value;
 						}

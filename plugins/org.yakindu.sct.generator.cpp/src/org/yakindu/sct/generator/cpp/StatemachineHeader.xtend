@@ -156,7 +156,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 	'''
 
 	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
-		«IF type.name != 'void'»«IF const»static const «ENDIF»«type.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
+		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
 
 	def createOCBInterface(StatechartScope scope) {
@@ -256,7 +256,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */
-				«type.targetLanguageName» «asGetter»();
+				«typeSpecifier.targetLanguageName» «asGetter»();
 				
 			«ENDIF»
 		«ELSEIF direction == Direction::IN»
@@ -269,7 +269,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */
-				«type.targetLanguageName» «asGetter»();
+				«typeSpecifier.targetLanguageName» «asGetter»();
 				
 			«ENDIF»
 		«ENDIF»
@@ -277,11 +277,11 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 
 	override dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
-		«IF const»const «ENDIF»«type.targetLanguageName» «it.asGetter»();
+		«IF const»const «ENDIF»«typeSpecifier.targetLanguageName» «it.asGetter»();
 
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
-			void «asSetter»(«type.targetLanguageName» value);
+			void «asSetter»(«typeSpecifier.targetLanguageName» value);
 			
 		«ENDIF»
 	'''

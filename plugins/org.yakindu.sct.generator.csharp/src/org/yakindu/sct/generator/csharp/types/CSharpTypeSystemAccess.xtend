@@ -16,6 +16,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.*
+import org.yakindu.base.types.TypeSpecifier
 
 /**
  * @author andreas muelder
@@ -35,4 +36,9 @@ class CSharpTypeSystemAccess implements ICodegenTypeSystemAccess {
 			default: "//" + this
 		};
 	}
+	
+	override getTargetLanguageName(TypeSpecifier typeSpecifier) {
+		return getTargetLanguageName(typeSpecifier?.type)
+	}
+	
 }

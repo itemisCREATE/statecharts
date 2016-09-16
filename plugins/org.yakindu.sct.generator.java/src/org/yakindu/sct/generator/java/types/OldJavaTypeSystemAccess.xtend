@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.java.types
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Type
+import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
@@ -35,5 +36,9 @@ class OldJavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 			case ts.isSame(type, getType(STRING)): "String"
 			default: "//" + this
 		};
+	}
+	
+	override getTargetLanguageName(TypeSpecifier typeSpecifier) {
+		return getTargetLanguageName(typeSpecifier?.type)
 	}
 }
