@@ -80,7 +80,7 @@ class StatemachineInterface {
 	}
 	
 	def protected constantFieldDeclaration(VariableDefinition variable){
-		'''static readonly «variable.type.targetLanguageName» «variable.symbol» = «variable.initialValue.code»;'''
+		'''static readonly «variable.typeSpecifier.targetLanguageName» «variable.symbol» = «variable.initialValue.code»;'''
 	}
 
 	def protected createScope(Scope scope, GeneratorEntry entry) {
@@ -140,7 +140,7 @@ class StatemachineInterface {
 					«FOR event : scope.eventDefinitions»
 						«IF event.direction == Direction::OUT»
 							«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-								void on«event.name.toFirstUpper()»Raised(«event.type.targetLanguageName» value);
+								void on«event.name.toFirstUpper()»Raised(«event.typeSpecifier.targetLanguageName» value);
 							«ELSE»
 								void on«event.name.toFirstUpper()»Raised();
 							«ENDIF»	
@@ -169,7 +169,7 @@ class StatemachineInterface {
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
 				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-						void raise«event.name.asName»(«event.type.targetLanguageName» value);
+						void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value);
 					«ELSE»
 						void raise«event.name.asName»();
 					«ENDIF»
@@ -177,7 +177,7 @@ class StatemachineInterface {
 					bool isRaised«event.name.asName»();
 					««« IMPORTANT: An event not specifying a type is regarded to have a void type
 				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-						«event.type.targetLanguageName» get«event.name.asName»Value();
+						«event.typeSpecifier.targetLanguageName» get«event.name.asName»Value();
 					«ENDIF»	
 				«ENDIF»
 			«ENDFOR»
@@ -186,9 +186,9 @@ class StatemachineInterface {
 
 	def protected variableAccessors(InterfaceScope scope) '''
 		«FOR variable : scope.variableDefinitions»
-			«variable.type.targetLanguageName» «variable.getter»;
+			«variable.typeSpecifier.targetLanguageName» «variable.getter»;
 			«IF !variable.readonly && !variable.const»
-				void «variable.setter»(«variable.type.targetLanguageName» value);	
+				void «variable.setter»(«variable.typeSpecifier.targetLanguageName» value);	
 			«ENDIF»
 		«ENDFOR»
 	'''
@@ -208,8 +208,8 @@ class StatemachineInterface {
 
 	def protected operationSignature(OperationDefinition it) {
 		'''
-			«type.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.
-				type.targetLanguageName» «parameter.identifier»«ENDFOR»);
+			«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.
+				typeSpecifier.targetLanguageName» «parameter.identifier»«ENDFOR»);
 		'''
 	}
 

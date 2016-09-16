@@ -113,23 +113,23 @@ class Statemachine {
 			private boolean «event.identifier»;
 			
 			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-				private «event.type.targetLanguageName» «event.valueIdentifier»;
+				private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
 
 			«ENDIF»
 		«ENDFOR»
 		«FOR variable : flow.internalScopeVariables SEPARATOR newLine AFTER newLine»
 			«IF !variable.const»
 				«variable.fieldDeclaration»
-				protected void «variable.setter»(«variable.type.targetLanguageName» value) {
+				protected void «variable.setter»(«variable.typeSpecifier.targetLanguageName» value) {
 					«variable.identifier» = value;
 				}
 
 			«ENDIF»
-			protected «variable.type.targetLanguageName» «variable.getter» {
+			protected «variable.typeSpecifier.targetLanguageName» «variable.getter» {
 				return «variable.identifier»;
 			}
 			«IF variable.needsAssignMethod»
-				protected «variable.type.targetLanguageName» «variable.assign»(«variable.type.targetLanguageName» value) {
+				protected «variable.typeSpecifier.targetLanguageName» «variable.assign»(«variable.typeSpecifier.targetLanguageName» value) {
 					return this.«variable.identifier» = value;
 				}
 
@@ -143,7 +143,7 @@ class Statemachine {
 	'''
 	//reused by interfaces
 	def protected fieldDeclaration(VariableDefinition variable) {
-		'''private «variable.type.targetLanguageName» «variable.identifier»;
+		'''private «variable.typeSpecifier.targetLanguageName» «variable.identifier»;
 
 		'''
 	}
@@ -369,18 +369,18 @@ class Statemachine {
 			«IF !variable.const»
 				«variable.fieldDeclaration»
 			«ENDIF»
-			public «variable.type.targetLanguageName» «variable.getter» {
+			public «variable.typeSpecifier.targetLanguageName» «variable.getter» {
 				return «variable.identifier»;
 			}
 
 			«IF !variable.const»
-			«IF variable.readonly»protected«ELSE»public«ENDIF» void «variable.setter»(«variable.type.targetLanguageName» value) {
+			«IF variable.readonly»protected«ELSE»public«ENDIF» void «variable.setter»(«variable.typeSpecifier.targetLanguageName» value) {
 				this.«variable.identifier» = value;
 			}
 
 			«ENDIF»
 			«IF variable.needsAssignMethod»
-			protected «variable.type.targetLanguageName» «variable.assign»(«variable.type.targetLanguageName» value) {
+			protected «variable.typeSpecifier.targetLanguageName» «variable.assign»(«variable.typeSpecifier.targetLanguageName» value) {
 				return this.«variable.identifier» = value;
 			}
 
@@ -391,7 +391,7 @@ class Statemachine {
 		private boolean «event.identifier»;
 
 		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-			private «event.type.targetLanguageName» «event.valueIdentifier»;
+			private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
 
 		«ENDIF»
 		«IF event.direction == Direction::IN»
@@ -408,7 +408,7 @@ class Statemachine {
 		}
 		
 		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-			protected void raise«event.name.asName»(«event.type.targetLanguageName» value) {
+			protected void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 				«event.identifier» = true;
 				«event.valueIdentifier» = value;
 				«IF entry.createInterfaceObserver»
@@ -418,7 +418,7 @@ class Statemachine {
 				«ENDIF»
 			}
 			
-			public «event.type.targetLanguageName» get«event.name.asName»Value() {
+			public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 				«event.getIllegalAccessValidation()»
 				return «event.valueIdentifier»;
 			}
@@ -438,12 +438,12 @@ class Statemachine {
 
 	protected def generateInEventDefinition(EventDefinition event) '''
 		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-			public void raise«event.name.asName»(«event.type.targetLanguageName» value) {
+			public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 				«event.identifier» = true;
 				«event.valueIdentifier» = value;
 			}
 			
-			protected «event.type.targetLanguageName» get«event.name.asName»Value() {
+			protected «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 				«event.getIllegalAccessValidation()»
 				return «event.valueIdentifier»;
 			}
@@ -482,12 +482,12 @@ class Statemachine {
 	def protected internalScopeFunctions (ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
 			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-				private void raise«event.name.asEscapedName»(«event.type.targetLanguageName» value) {
+				private void raise«event.name.asEscapedName»(«event.typeSpecifier.targetLanguageName» value) {
 					«event.valueIdentifier» = value;
 					«event.identifier» = true;
 				}
 				
-				private «event.type.targetLanguageName» get«event.name.asEscapedName»Value() {
+				private «event.typeSpecifier.targetLanguageName» get«event.name.asEscapedName»Value() {
 					«event.getIllegalAccessValidation()»
 					return «event.valueIdentifier»;
 				}
@@ -516,7 +516,7 @@ class Statemachine {
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
 					«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-					public void raise«event.name.asName»(«event.type.targetLanguageName» value) {
+					public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 						«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»(value);
 					}
 					«ELSE»
@@ -532,7 +532,7 @@ class Statemachine {
 					}
 
 					«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-						public «event.type.targetLanguageName» get«event.name.asName»Value() {
+						public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 							return «scope.interfaceName.asEscapedIdentifier».get«event.name.asName»Value();
 						}
 
@@ -540,12 +540,12 @@ class Statemachine {
 				«ENDIF»
 			«ENDFOR»
 			«FOR variable : scope.variableDefinitions»
-					public «variable.type.targetLanguageName» «variable.getter()» {
+					public «variable.typeSpecifier.targetLanguageName» «variable.getter()» {
 						return «scope.interfaceName.asEscapedIdentifier».«variable.getter()»;
 					}
 					
 					«IF !variable.const && !variable.readonly»
-						public void «variable.setter»(«variable.type.targetLanguageName» value) {
+						public void «variable.setter»(«variable.typeSpecifier.targetLanguageName» value) {
 							«scope.interfaceName.asEscapedIdentifier».«variable.setter»(value);
 						}
 

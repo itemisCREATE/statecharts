@@ -178,7 +178,7 @@ class CycleBasedSynchronizedWrapper {
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction == Direction::IN»
 				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-					public void raise«event.name.asName»(final «event.type.targetLanguageName» value) {
+					public void raise«event.name.asName»(final «event.typeSpecifier.targetLanguageName» value) {
 						
 						synchronized (statemachine) {
 							statemachine.get«scope.interfaceName»().raise«event.name.asName»(value);
@@ -205,7 +205,7 @@ class CycleBasedSynchronizedWrapper {
 				}
 				
 				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-					public «event.type.targetLanguageName» get«event.name.asName»Value() {
+					public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 						synchronized(statemachine) {
 							return statemachine.get«scope.interfaceName»().get«event.name.asName»Value();
 						}
@@ -214,14 +214,14 @@ class CycleBasedSynchronizedWrapper {
 			«ENDIF»
 		«ENDFOR»
 		«FOR variable : scope.variableDefinitions»
-			public «variable.type.targetLanguageName» «variable.getter» {
+			public «variable.typeSpecifier.targetLanguageName» «variable.getter» {
 				synchronized(statemachine) {
 					return statemachine.get«scope.interfaceName»().«variable.getter»;
 				}
 			}
 			
 			«IF !variable.readonly && !variable.const»
-				public void «variable.setter»(final «variable.type.targetLanguageName» value) {
+				public void «variable.setter»(final «variable.typeSpecifier.targetLanguageName» value) {
 					synchronized(statemachine) {
 						statemachine.get«scope.interfaceName»().«variable.setter»(value);
 					}

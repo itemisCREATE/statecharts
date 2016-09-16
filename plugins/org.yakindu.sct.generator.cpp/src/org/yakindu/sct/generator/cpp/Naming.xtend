@@ -69,7 +69,7 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	}
 
 	def protected signature(OperationDefinition it) '''
-	«type.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.type.
+	«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.typeSpecifier.
 		targetLanguageName» «parameter.identifier»«ENDFOR»)'''
 
 	def protected OCB_InterfaceSetterDeclaration(StatechartScope scope, boolean fqn) '''
@@ -187,7 +187,7 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 
 	override valueParams(EventDefinition it) {
 		if (hasValue)
-			type.targetLanguageName + ' value'
+			typeSpecifier.targetLanguageName + ' value'
 		else
 			''
 	}

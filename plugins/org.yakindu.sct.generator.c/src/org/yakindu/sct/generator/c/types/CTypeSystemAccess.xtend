@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.c.types
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Type
+import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
@@ -35,6 +36,10 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 			case ts.isSame(originialType, getType(STRING)): 'sc_string'
 			default: throw new IllegalArgumentException("Target language name could not be inferred for type " + type)
 		}
+	}
+	
+	override getTargetLanguageName(TypeSpecifier typeSpecifier) {
+		return getTargetLanguageName(typeSpecifier.type)
 	}
 
 }

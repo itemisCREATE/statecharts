@@ -196,7 +196,7 @@ class RunnableWrapper {
 		«FOR event : scope.eventDefinitions»
 			«IF event.direction == Direction::IN»
 				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-					public void raise«event.name.asName»(«event.type.targetLanguageName» value) {
+					public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 						
 						eventQueue.Add( new Runnable() {
 							
@@ -232,7 +232,7 @@ class RunnableWrapper {
 				}
 				
 				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-					public «event.type.targetLanguageName» get«event.name.asName»Value() {
+					public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 						lock(statemachine) {
 							return statemachine.get«scope.interfaceName»().get«event.name.asName»Value();
 						}
@@ -241,14 +241,14 @@ class RunnableWrapper {
 			«ENDIF»
 		«ENDFOR»
 		«FOR variable : scope.variableDefinitions»
-			public «variable.type.targetLanguageName» «variable.getter» {
+			public «variable.typeSpecifier.targetLanguageName» «variable.getter» {
 				lock(statemachine) {
 					return statemachine.get«scope.interfaceName»().«variable.getter»;
 				}
 			}
 			
 			«IF !variable.readonly && !variable.const»
-				public void «variable.setter»(«variable.type.targetLanguageName» value) {
+				public void «variable.setter»(«variable.typeSpecifier.targetLanguageName» value) {
 					lock(statemachine) {
 						statemachine.get«scope.interfaceName»().«variable.setter»(value);
 					}
