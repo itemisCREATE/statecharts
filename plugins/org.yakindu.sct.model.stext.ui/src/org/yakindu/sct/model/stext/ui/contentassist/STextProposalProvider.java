@@ -13,7 +13,6 @@ package org.yakindu.sct.model.stext.ui.contentassist;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -23,11 +22,11 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextFactory;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
@@ -39,12 +38,12 @@ import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
+import com.google.common.base.Function;
 import com.google.inject.Inject;
 
 /**
@@ -166,77 +165,29 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		}
 		return keywords;
 	}
-	@Override
-	public void completeElementReferenceExpression_OperationCall(EObject model, Assignment assignment,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		super.completeElementReferenceExpression_OperationCall(model, assignment, context,
-				getOperationAwareAcceptor(model, acceptor)
-		);
-	}
 
-	@Override
-	public void completeSimpleElementReferenceExpression_OperationCall(EObject model, Assignment assignment,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		super.completeSimpleElementReferenceExpression_OperationCall(model, assignment, context,
-				getOperationAwareAcceptor(model, acceptor)
-		);
-	}
-	@Override
-	public void completeElementReferenceExpression_Reference(EObject model, Assignment assignment,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		super.completeElementReferenceExpression_Reference(model, assignment, context,
-				getOperationAwareAcceptor(model, acceptor)
-		);
-	}
-	@Override
-	public void completeSimpleElementReferenceExpression_Reference(EObject model, Assignment assignment,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		super.completeSimpleElementReferenceExpression_Reference(model, assignment, context,
-				getOperationAwareAcceptor(model, acceptor)
-		);
-	}
-
-	protected ICompletionProposalAcceptor getOperationAwareAcceptor(EObject model, ICompletionProposalAcceptor acceptor) {
-		ICompletionProposalAcceptor operationParameterAcceptor = acceptor;
-		operationParameterAcceptor = new ICompletionProposalAcceptor.Delegate(acceptor) {
+	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName,
+			ContentAssistContext contentAssistContext) {
+		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter()) {
 			@Override
-			public void accept(ICompletionProposal proposal) {
-				if (proposal != null && (proposal instanceof ConfigurableCompletionProposal)) {
-					ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) proposal;
-
-					if (!isOperationProposal(configurableProposal))
-						return;
-
-					Matcher matcher = OPERATION_PATTERN.matcher(configurableProposal.getDisplayString());
-					if (matcher.matches()) {
-						if (hasParameter(matcher)) {
-							addBrackets(configurableProposal);
-						}
+			public ICompletionProposal apply(IEObjectDescription candidate) {
+				ICompletionProposal proposal = super.apply(candidate);
+				EObject eObjectOrProxy = candidate.getEObjectOrProxy();
+				if (eObjectOrProxy.eIsProxy()) {
+					return proposal;
+				}
+				if (eObjectOrProxy instanceof Operation) {
+					Operation operation = (Operation) eObjectOrProxy;
+					if (operation.getParameters().size() > 0 && (proposal instanceof ConfigurableCompletionProposal)) {
+						ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) proposal;
+						configurableProposal.setReplacementString(configurableProposal.getReplacementString() + "()");
+						configurableProposal.setCursorPosition(configurableProposal.getCursorPosition() + 1);
 					}
 				}
-				getDelegate().accept(proposal);
-			}
 
-			private boolean hasParameter(Matcher matcher) {
-				String parameterString = matcher.group(OPERATION_PATTERN_OP_PARAMS);
-				if (parameterString != null&&!parameterString.isEmpty()) {
-					return true;
-				}
-				return false;
-			}
-
-			private void addBrackets(ConfigurableCompletionProposal castedProposal) {
-				castedProposal.setReplacementString(castedProposal.getReplacementString() + "()");
-				castedProposal.setCursorPosition(castedProposal.getCursorPosition()+ 1);
-
-			}
-
-			private boolean isOperationProposal(ConfigurableCompletionProposal castedProposal) {
-				String additionalProposalInfo = castedProposal.getAdditionalProposalInfo();
-				return additionalProposalInfo.contains(OperationDefinition.class.getSimpleName());
+				return proposal;
 			}
 		};
-		return operationParameterAcceptor;
 	}
 
 	@Override
