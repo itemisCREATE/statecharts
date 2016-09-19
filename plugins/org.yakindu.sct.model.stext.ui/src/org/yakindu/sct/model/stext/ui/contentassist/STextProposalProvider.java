@@ -13,6 +13,8 @@ package org.yakindu.sct.model.stext.ui.contentassist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -21,6 +23,7 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -36,11 +39,13 @@ import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -49,6 +54,16 @@ import com.google.inject.Inject;
  * @author muehlbrandt
  */
 public class STextProposalProvider extends AbstractSTextProposalProvider {
+
+	private static final String PARAMETER_TYPE_SEPERATOR = ":";
+
+	private static final String PARAMETER_SEPERATOR = ",";
+
+	private static final int OPERATION_PATTERN_OP_PARAMS = 2;
+
+	private static final int OPERATION_PATTERN_OP_NAME = 1;
+
+	private static final Pattern OPERATION_PATTERN = Pattern.compile("(.*)\\((.*)\\)(.*)");
 
 	@Inject
 	protected STextGrammarAccess grammarAccess;
@@ -131,7 +146,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 	protected void suppressKeywords(List<Keyword> suppressKeywords, FeatureCall featureCall) {
 		if (!(featureCall.getFeature() instanceof Operation)) {
-			suppressKeywords.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0_0());
+			suppressKeywords
+					.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0_0());
 		}
 	}
 
@@ -158,13 +174,111 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		}
 		return keywords;
 	}
+	@Override
+	public void completeElementReferenceExpression_OperationCall(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("TEST_IT");
+		super.completeElementReferenceExpression_OperationCall(model, assignment, context,
+				getOperationAcceptor(model, acceptor)
+		// acceptor
+		);
+	}
+
+	@Override
+	public void completeSimpleElementReferenceExpression_OperationCall(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		System.out.println("TEST_IT");
+		super.completeSimpleElementReferenceExpression_OperationCall(model, assignment, context,
+				getOperationAcceptor(model, acceptor)
+		// acceptor
+		);
+	}
+	@Override
+	public void completeElementReferenceExpression_Reference(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.completeElementReferenceExpression_Reference(model, assignment, context,
+				getOperationAcceptor(model, acceptor)
+		);
+	}
+	@Override
+	public void completeSimpleElementReferenceExpression_Reference(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.completeSimpleElementReferenceExpression_Reference(model, assignment, context,
+				getOperationAcceptor(model, acceptor)
+		);
+	}
+
+	protected ICompletionProposalAcceptor getOperationAcceptor(EObject model, ICompletionProposalAcceptor acceptor) {
+		ICompletionProposalAcceptor operationParameterAcceptor = acceptor;
+		operationParameterAcceptor = new ICompletionProposalAcceptor.Delegate(acceptor) {
+			@Override
+			public void accept(ICompletionProposal proposal) {
+				if (proposal != null && (proposal instanceof ConfigurableCompletionProposal)) {
+					ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) proposal;
+
+					if (!isOperationProposal(configurableProposal))
+						return;
+
+					Matcher matcher = OPERATION_PATTERN.matcher(configurableProposal.getDisplayString());
+					if (matcher.matches()) {
+						String[] parameterNames = getParameterNames(matcher);
+						if (parameterNames != null) {
+							reconfigureOperationProposal(configurableProposal, parameterNames, matcher.group(OPERATION_PATTERN_OP_NAME));
+						}
+					}
+				}
+				getDelegate().accept(proposal);
+			}
+
+			private String[] getParameterNames(Matcher matcher) {
+				String parameterString = matcher.group(OPERATION_PATTERN_OP_PARAMS);
+				if (parameterString != null&&!parameterString.isEmpty()) {
+					List<String> parameterNames = Lists.newArrayList();
+					String[] parameterWithTypes = parameterString.split(PARAMETER_SEPERATOR);
+					for (String parameter : parameterWithTypes) {
+						parameterNames.add(parameter.split(PARAMETER_TYPE_SEPERATOR)[0].trim());
+					}
+					return parameterNames.toArray(new String[parameterNames.size()]);
+				}
+				return null;
+			}
+
+			private void reconfigureOperationProposal(ConfigurableCompletionProposal castedProposal,
+					String[] parameterNames, String operationName) {
+				String replacementString = operationName + getParameterReplacementString(parameterNames);
+				castedProposal.setReplacementString(replacementString);
+				// select the first parameter
+				castedProposal.setSelectionStart(castedProposal.getSelectionStart() + 1);
+				castedProposal.setSelectionLength(parameterNames[0].length());
+
+			}
+
+			private boolean isOperationProposal(ConfigurableCompletionProposal castedProposal) {
+				String additionalProposalInfo = castedProposal.getAdditionalProposalInfo();
+				return additionalProposalInfo.contains(OperationDefinition.class.getSimpleName());
+			}
+
+			private String getParameterReplacementString(String[] parameters) {
+				String parameterReplacementString = "(";
+				boolean first = true;
+				for (String parameterName : parameters) {
+					if (!first)
+						parameterReplacementString += PARAMETER_SEPERATOR;
+					parameterReplacementString += parameterName;
+					first = false;
+				}
+				return parameterReplacementString + ")";
+			}
+		};
+		return operationParameterAcceptor;
+	}
 
 	@Override
 	public void complete_BOOL(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(model, "boolean", acceptor);
 
-		for (String s : new String[] { "true", "false", "yes", "no" }) {
+		for (String s : new String[]{"true", "false", "yes", "no"}) {
 			ICompletionProposal proposal = createCompletionProposal(s, s + " - " + ruleCall.getRule().getName(), null,
 					context);
 
@@ -195,8 +309,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		if (element instanceof Type) {
 			return super.getDisplayString(element, qualifiedNameAsString, shortName);
 		}
-		
-		if(element == null || element.eIsProxy()){
+
+		if (element == null || element.eIsProxy()) {
 			return qualifiedNameAsString;
 		}
 		IItemLabelProvider adapter = (IItemLabelProvider) composedAdapterFactory.adapt(element,
@@ -210,7 +324,6 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	@Override
 	public void complete_STRING(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-
 		super.complete_STRING(model, ruleCall, context, getCustomAcceptor(model, "string", acceptor));
 	}
 
@@ -231,8 +344,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(model, "integer", acceptor);
 
 		String proposalText = "0x1";
-		ICompletionProposal proposal = createCompletionProposal(proposalText, proposalText + " - "
-				+ ruleCall.getRule().getName(), null, context);
+		ICompletionProposal proposal = createCompletionProposal(proposalText,
+				proposalText + " - " + ruleCall.getRule().getName(), null, context);
 
 		if (proposal instanceof ConfigurableCompletionProposal) {
 			ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;
@@ -251,8 +364,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(model, "real", acceptor);
 
 		String proposalText = "0.1";
-		ICompletionProposal proposal = createCompletionProposal(proposalText, proposalText + " - "
-				+ ruleCall.getRule().getName(), null, context);
+		ICompletionProposal proposal = createCompletionProposal(proposalText,
+				proposalText + " - " + ruleCall.getRule().getName(), null, context);
 		priorityOptimizer.accept(proposal);
 	}
 
