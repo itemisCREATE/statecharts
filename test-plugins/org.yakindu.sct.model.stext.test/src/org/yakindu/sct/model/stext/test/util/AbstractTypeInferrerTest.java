@@ -58,7 +58,10 @@ public abstract class AbstractTypeInferrerTest extends AbstractSTextTest {
 
 	@Deprecated
 	protected Type inferType(String expression, String parserRule, String scopes) {
-		return inferTypeResult(expression, parserRule, scopes).getType();
+ 		InferenceResult inferTypeResult = inferTypeResult(expression, parserRule, scopes);
+		if(inferTypeResult == null)
+			return null;
+		return inferTypeResult.getType();
 	}
 	
 	protected InferenceResult inferTypeResult(String expression, String parserRule, String scopes) {

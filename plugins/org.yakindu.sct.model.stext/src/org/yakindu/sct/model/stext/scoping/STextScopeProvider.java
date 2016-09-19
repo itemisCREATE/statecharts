@@ -34,6 +34,7 @@ import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -133,12 +134,13 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 
 		IScope scope = IScope.NULLSCOPE;
-		Type ownerType = typeInferrer.infer(owner).getType();
+		InferenceResult result = typeInferrer.infer(owner);
+		Type ownerType = result != null ? result.getType() : null;
 
 		if (element instanceof Scope) {
 			scope = Scopes.scopeFor(((Scope) element).getDeclarations());
 			return new FilteringScope(scope, predicate);
-		}else{
+		}else if(ownerType != null){
 			scope = Scopes.scopeFor(typeSystem.getPropertyExtensions(ownerType));
 			scope = Scopes.scopeFor(typeSystem.getOperationExtensions(ownerType),scope);
 		}
