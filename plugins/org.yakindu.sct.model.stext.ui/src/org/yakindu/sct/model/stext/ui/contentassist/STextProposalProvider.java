@@ -45,7 +45,6 @@ import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -55,15 +54,9 @@ import com.google.inject.Inject;
  */
 public class STextProposalProvider extends AbstractSTextProposalProvider {
 
-	private static final String PARAMETER_TYPE_SEPERATOR = ":";
+	private static final int OPERATION_PATTERN_OP_PARAMS = 1;
 
-	private static final String PARAMETER_SEPERATOR = ",";
-
-	private static final int OPERATION_PATTERN_OP_PARAMS = 2;
-
-	private static final int OPERATION_PATTERN_OP_NAME = 1;
-
-	private static final Pattern OPERATION_PATTERN = Pattern.compile("(.*)\\((.*)\\)(.*)");
+	private static final Pattern OPERATION_PATTERN = Pattern.compile(".*\\((.*)\\).*");
 
 	@Inject
 	protected STextGrammarAccess grammarAccess;
@@ -216,53 +209,31 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 					Matcher matcher = OPERATION_PATTERN.matcher(configurableProposal.getDisplayString());
 					if (matcher.matches()) {
-						String[] parameterNames = getParameterNames(matcher);
-						if (parameterNames != null) {
-							reconfigureOperationProposal(configurableProposal, parameterNames, matcher.group(OPERATION_PATTERN_OP_NAME));
+						if (getParameterNames(matcher)) {
+							addBrackets(configurableProposal);
 						}
 					}
 				}
 				getDelegate().accept(proposal);
 			}
 
-			private String[] getParameterNames(Matcher matcher) {
+			private boolean getParameterNames(Matcher matcher) {
 				String parameterString = matcher.group(OPERATION_PATTERN_OP_PARAMS);
 				if (parameterString != null&&!parameterString.isEmpty()) {
-					List<String> parameterNames = Lists.newArrayList();
-					String[] parameterWithTypes = parameterString.split(PARAMETER_SEPERATOR);
-					for (String parameter : parameterWithTypes) {
-						parameterNames.add(parameter.split(PARAMETER_TYPE_SEPERATOR)[0].trim());
-					}
-					return parameterNames.toArray(new String[parameterNames.size()]);
+					return true;
 				}
-				return null;
+				return false;
 			}
 
-			private void reconfigureOperationProposal(ConfigurableCompletionProposal castedProposal,
-					String[] parameterNames, String operationName) {
-				String replacementString = operationName + getParameterReplacementString(parameterNames);
-				castedProposal.setReplacementString(replacementString);
-				// select the first parameter
-				castedProposal.setSelectionStart(castedProposal.getSelectionStart() + 1);
-				castedProposal.setSelectionLength(parameterNames[0].length());
+			private void addBrackets(ConfigurableCompletionProposal castedProposal) {
+				castedProposal.setReplacementString(castedProposal.getReplacementString() + "()");
+				castedProposal.setCursorPosition(castedProposal.getCursorPosition()+ 1);
 
 			}
 
 			private boolean isOperationProposal(ConfigurableCompletionProposal castedProposal) {
 				String additionalProposalInfo = castedProposal.getAdditionalProposalInfo();
 				return additionalProposalInfo.contains(OperationDefinition.class.getSimpleName());
-			}
-
-			private String getParameterReplacementString(String[] parameters) {
-				String parameterReplacementString = "(";
-				boolean first = true;
-				for (String parameterName : parameters) {
-					if (!first)
-						parameterReplacementString += PARAMETER_SEPERATOR;
-					parameterReplacementString += parameterName;
-					first = false;
-				}
-				return parameterReplacementString + ")";
 			}
 		};
 		return operationParameterAcceptor;
