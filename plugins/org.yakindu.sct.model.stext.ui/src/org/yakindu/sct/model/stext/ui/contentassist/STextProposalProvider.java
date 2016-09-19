@@ -146,8 +146,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 	protected void suppressKeywords(List<Keyword> suppressKeywords, FeatureCall featureCall) {
 		if (!(featureCall.getFeature() instanceof Operation)) {
-			suppressKeywords
-					.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0_0());
+			suppressKeywords.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0_0());
 		}
 	}
 
@@ -177,20 +176,16 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	@Override
 	public void completeElementReferenceExpression_OperationCall(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		System.out.println("TEST_IT");
 		super.completeElementReferenceExpression_OperationCall(model, assignment, context,
 				getOperationAcceptor(model, acceptor)
-		// acceptor
 		);
 	}
 
 	@Override
 	public void completeSimpleElementReferenceExpression_OperationCall(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		System.out.println("TEST_IT");
 		super.completeSimpleElementReferenceExpression_OperationCall(model, assignment, context,
 				getOperationAcceptor(model, acceptor)
-		// acceptor
 		);
 	}
 	@Override
@@ -278,7 +273,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(model, "boolean", acceptor);
 
-		for (String s : new String[]{"true", "false", "yes", "no"}) {
+		for (String s : new String[] { "true", "false", "yes", "no" }) {
 			ICompletionProposal proposal = createCompletionProposal(s, s + " - " + ruleCall.getRule().getName(), null,
 					context);
 
@@ -309,8 +304,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		if (element instanceof Type) {
 			return super.getDisplayString(element, qualifiedNameAsString, shortName);
 		}
-
-		if (element == null || element.eIsProxy()) {
+		
+		if(element == null || element.eIsProxy()){
 			return qualifiedNameAsString;
 		}
 		IItemLabelProvider adapter = (IItemLabelProvider) composedAdapterFactory.adapt(element,
@@ -324,6 +319,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	@Override
 	public void complete_STRING(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
+
 		super.complete_STRING(model, ruleCall, context, getCustomAcceptor(model, "string", acceptor));
 	}
 
@@ -344,8 +340,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(model, "integer", acceptor);
 
 		String proposalText = "0x1";
-		ICompletionProposal proposal = createCompletionProposal(proposalText,
-				proposalText + " - " + ruleCall.getRule().getName(), null, context);
+		ICompletionProposal proposal = createCompletionProposal(proposalText, proposalText + " - "
+				+ ruleCall.getRule().getName(), null, context);
 
 		if (proposal instanceof ConfigurableCompletionProposal) {
 			ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;
@@ -364,8 +360,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(model, "real", acceptor);
 
 		String proposalText = "0.1";
-		ICompletionProposal proposal = createCompletionProposal(proposalText,
-				proposalText + " - " + ruleCall.getRule().getName(), null, context);
+		ICompletionProposal proposal = createCompletionProposal(proposalText, proposalText + " - "
+				+ ruleCall.getRule().getName(), null, context);
 		priorityOptimizer.accept(proposal);
 	}
 
