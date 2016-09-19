@@ -209,7 +209,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 					Matcher matcher = OPERATION_PATTERN.matcher(configurableProposal.getDisplayString());
 					if (matcher.matches()) {
-						if (getParameterNames(matcher)) {
+						if (hasParameter(matcher)) {
 							addBrackets(configurableProposal);
 						}
 					}
@@ -217,7 +217,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 				getDelegate().accept(proposal);
 			}
 
-			private boolean getParameterNames(Matcher matcher) {
+			private boolean hasParameter(Matcher matcher) {
 				String parameterString = matcher.group(OPERATION_PATTERN_OP_PARAMS);
 				if (parameterString != null&&!parameterString.isEmpty()) {
 					return true;
