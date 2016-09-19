@@ -177,7 +177,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	public void completeElementReferenceExpression_OperationCall(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		super.completeElementReferenceExpression_OperationCall(model, assignment, context,
-				getOperationAcceptor(model, acceptor)
+				getOperationAwareAcceptor(model, acceptor)
 		);
 	}
 
@@ -185,25 +185,25 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	public void completeSimpleElementReferenceExpression_OperationCall(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		super.completeSimpleElementReferenceExpression_OperationCall(model, assignment, context,
-				getOperationAcceptor(model, acceptor)
+				getOperationAwareAcceptor(model, acceptor)
 		);
 	}
 	@Override
 	public void completeElementReferenceExpression_Reference(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		super.completeElementReferenceExpression_Reference(model, assignment, context,
-				getOperationAcceptor(model, acceptor)
+				getOperationAwareAcceptor(model, acceptor)
 		);
 	}
 	@Override
 	public void completeSimpleElementReferenceExpression_Reference(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		super.completeSimpleElementReferenceExpression_Reference(model, assignment, context,
-				getOperationAcceptor(model, acceptor)
+				getOperationAwareAcceptor(model, acceptor)
 		);
 	}
 
-	protected ICompletionProposalAcceptor getOperationAcceptor(EObject model, ICompletionProposalAcceptor acceptor) {
+	protected ICompletionProposalAcceptor getOperationAwareAcceptor(EObject model, ICompletionProposalAcceptor acceptor) {
 		ICompletionProposalAcceptor operationParameterAcceptor = acceptor;
 		operationParameterAcceptor = new ICompletionProposalAcceptor.Delegate(acceptor) {
 			@Override
