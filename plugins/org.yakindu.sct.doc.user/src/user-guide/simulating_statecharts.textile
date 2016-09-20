@@ -111,10 +111,10 @@ p=. Simulation view – The actual _Simulation_ view is the pane right from the 
 
 h2(#controlling-a-simulation). Controlling a simulation
 
-* To terminate the simulation, click on the _Terminate_ button !(inlinemediaobject)images/docu_symbol_terminate.png! or select _Run → Terminate_ in the main menu.
-* To suspend the simulation, click on the _Suspend_ button !(inlinemediaobject)images/docu_symbol_suspend.png! or select _Run → Suspend_ in the main menu.
-* To resume a suspended simulation, click on the _Resume_ button !(inlinemediaobject)images/docu_symbol_resume.png! or select _Run → Resume_ in the main menu.
-* Use the _Step Over_ button !(inlinemediaobject)images/docu_symbol_stepover.png! or select _Run → Step Over_ in the main menu to execute a single run-to-completion step.
+* To terminate the simulation, click on the _Terminate_ button !(inlinemediaobject)images/docu_symbol_terminate.png(Symbol: Terminate)! or select _Run → Terminate_ in the main menu.
+* To suspend the simulation, click on the _Suspend_ button !(inlinemediaobject)images/docu_symbol_suspend.png(Symbol: Suspend)! or select _Run → Suspend_ in the main menu.
+* To resume a suspended simulation, click on the _Resume_ button !(inlinemediaobject)images/docu_symbol_resume.png(Symbol: Resume)! or select _Run → Resume_ in the main menu.
+* Use the _Step Over_ button !(inlinemediaobject)images/docu_symbol_stepover.png(Symbol: Step Over)! or select _Run → Step Over_ in the main menu to execute a single run-to-completion step.
 
 h2(#interacting-with-a-simulation). Interacting with a simulation
 
