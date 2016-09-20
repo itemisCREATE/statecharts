@@ -50,6 +50,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.xtext.utils.gmf.resource.DirtyStateListener;
@@ -125,7 +126,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	public boolean isEditable() {
 		DomainStatus domainStatus = getDomainStatus();
-		if (domainStatus.getSeverity() == Severity.ERROR) {
+		if (domainStatus == null || domainStatus.getSeverity() == Severity.ERROR) {
 			return false;
 		}
 		return super.isEditable();
@@ -133,8 +134,9 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	protected DomainStatus getDomainStatus() {
 		EObject element = getDiagram().getElement();
-		if (element instanceof DomainElement) {
-			DomainStatus domainStatus = DomainRegistry.getDomainStatus(((DomainElement) element).getDomainID());
+		DomainElement domainElement = EcoreUtil2.getContainerOfType(element, DomainElement.class);
+		if (domainElement != null) {
+			DomainStatus domainStatus = DomainRegistry.getDomainStatus(domainElement.getDomainID());
 			return domainStatus;
 		}
 		return null;
@@ -143,7 +145,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	@Override
 	protected void createBreadcrumbViewer(Composite parent) {
 		DomainStatus domainStatus = getDomainStatus();
-		if (domainStatus.getSeverity() == Severity.ERROR) {
+		if (domainStatus != null && domainStatus.getSeverity() == Severity.ERROR) {
 			createStatusLabel(parent, domainStatus);
 			return;
 		}
