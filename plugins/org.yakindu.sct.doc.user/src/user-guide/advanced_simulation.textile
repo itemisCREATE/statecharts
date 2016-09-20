@@ -51,7 +51,7 @@ p(#advsim_fig-setting-a-breakpoint).
 
 p=. Setting a breakpoint
 
-States and transitions having a breakpoint attached are labeled with a !(inlinemediaobject)images/advsim_symbol_breakpoint_enabled.png! symbol. "Figure &quot;Breakpoints on transition and state&quot;":#advsim_fig-breakpoints-on-transition-and-state shows an example.
+States and transitions having a breakpoint attached are labeled with a !(inlinemediaobject)images/advsim_symbol_breakpoint_enabled.png(Symbol: Breakpoint enabled)! symbol. "Figure &quot;Breakpoints on transition and state&quot;":#advsim_fig-breakpoints-on-transition-and-state shows an example.
 
 p(#advsim_fig-breakpoints-on-transition-and-state). 
 !(standard-image)images/advsim_030_breakpoint_020_transition_and_state_with_breakpoints.png(Breakpoints on transition and state)!
@@ -77,8 +77,8 @@ h3(#advsim_continuing-the-simulation). Continuing the simulation
 
 In order to continue from a breakpoint, you have two options:
 
-* To continue execution, click the resume button !(inlinemediaobject)images/advsim_symbol_resume.png! or select _Run → Resume_ in the main menu. The statechart simulation continues until the next breakpoint is hit or the simulation is terminated.
-* To execute the next run-cycle of the simulation only and then suspend again, click the step-over button !(inlinemediaobject)images/advsim_symbol_stepover.png! or select _Run → Step Over_ in the main menu.
+* To continue execution, click the resume button !(inlinemediaobject)images/advsim_symbol_resume.png(Symbol: Resume)! or select _Run → Resume_ in the main menu. The statechart simulation continues until the next breakpoint is hit or the simulation is terminated.
+* To execute the next run-cycle of the simulation only and then suspend again, click the step-over button !(inlinemediaobject)images/advsim_symbol_stepover.png(Symbol: Step Over)! or select _Run → Step Over_ in the main menu.
 
 h3(#advsim_using-the-breakpoints-view). Using the breakpoints view
 
@@ -95,14 +95,14 @@ h3(#advsim_enabling-and-disabling-breakpoints). Enabling and disabling breakpoin
 
 A breakpoint is either enabled or disabled.
 
-* An enabled breakpoint causes the statechart simulation to suspend when reaching it. In the statechart and in the _breakpoints_ view, an enabled breakpoint is visualized by a filled light blue circle with a grey border: !(inlinemediaobject)images/advsim_symbol_breakpoint_enabled.png!.
-* A disabled breakpoint is ignored by the statechart simulation. In the statechart and in the _breakpoints_ view, a disabled breakpoint is visualized by a hollow circle with a grey border: !(inlinemediaobject)images/advsim_symbol_breakpoint_disabled.png!.
+* An enabled breakpoint causes the statechart simulation to suspend when reaching it. In the statechart and in the _breakpoints_ view, an enabled breakpoint is visualized by a filled light blue circle with a grey border: !(inlinemediaobject)images/advsim_symbol_breakpoint_enabled.png(Symbol: Breakpoint enabled)!.
+* A disabled breakpoint is ignored by the statechart simulation. In the statechart and in the _breakpoints_ view, a disabled breakpoint is visualized by a hollow circle with a grey border: !(inlinemediaobject)images/advsim_symbol_breakpoint_disabled.png(Symbol: Breakpoint disabled)!.
 
 "Figure &quot;Breakpoints view&quot;":#advsim_fig-breakpoints-view is showing an enabled and a disabled breakpoint in the statechart editor and in the breakpoints view, respectively.
 
-You can instruct the  statechart simulation to skip all breakpoints by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_disengaged.png! button in the breakpoints view. The button will appear "pressed", and while it is, the "skip breakpoints" functionality is engaged. That means, the simulation will not suspend at any breakpoint.
+You can instruct the statechart simulation to skip all breakpoints by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_disengaged.png(Button (disengaged): Skip all breakpoints)! button in the breakpoints view. The button will appear "pressed", and while it is, the "skip breakpoints" functionality is engaged. That means, the simulation will not suspend at any breakpoint.
 
-This is different from disabling all breakpoints, in that each breakpoint keeps its state of being enabled or disabled. Once you disengage the skip breakpoints functionality by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_engaged.png! button again, the simulation will suspend again at enabled breakpoints and will not suspend at disabled breakpoints.
+This is different from disabling all breakpoints, in that each breakpoint keeps its state of being enabled or disabled. Once you disengage the skip breakpoints functionality by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_engaged.png(Button (engaged): Skip all breakpoints)! button again, the simulation will suspend again at enabled breakpoints and will not suspend at disabled breakpoints.
 
 h3(#advsim_removing-breakpoints). Removing breakpoints
 
@@ -151,7 +151,7 @@ p=. Raising multiple events simultaneously 2
 
 * Clicking at an event raises it and adds a blue triangle to the event symbol: !(inlinemediaobject)images/advsim_symbol_event_raised.png(event raised)!. Since the simulation remains suspended, the user can raise multiple events.
 
-Both events are raised and will be handled by the state machine during the next run-to-completion step. The latter will be performed as soon as the user clicks on the step&#45;over button !(inlinemediaobject)images/advsim_symbol_stepover.png! or the resume button !(inlinemediaobject)images/advsim_symbol_resume.png!.
+Both events are raised and will be handled by the state machine during the next run-to-completion step. The latter will be performed as soon as the user clicks on the step&#45;over button !(inlinemediaobject)images/advsim_symbol_stepover.png(Symbol: Step Over)! or the resume button !(inlinemediaobject)images/advsim_symbol_resume.png(Symbol: Resume)!.
 
 bq. Please note: While the execution is still suspended, you can "unraise" an already raised event by clicking at the event symbol !(inlinemediaobject)images/advsim_symbol_event_raised.png(event raised)! a second time. The blue triangle will disappear, and upon continuation of the simulation the event will not be handled.
 
