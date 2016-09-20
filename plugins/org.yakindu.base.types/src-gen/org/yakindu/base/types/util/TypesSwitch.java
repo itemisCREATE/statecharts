@@ -140,6 +140,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				T result = caseParameter(parameter);
 				if (result == null) result = caseTypedElement(parameter);
 				if (result == null) result = caseNamedElement(parameter);
+				if (result == null) result = caseAnnotatableElement(parameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

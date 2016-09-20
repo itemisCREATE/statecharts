@@ -24,7 +24,7 @@ import org.yakindu.base.base.NamedElement;
  * @model
  * @generated
  */
-public interface Parameter extends TypedElement, NamedElement {
+public interface Parameter extends TypedElement, NamedElement, AnnotatableElement {
 	/**
 	 * Returns the value of the '<em><b>Owning Operation</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.base.types.Operation#getParameters <em>Parameters</em>}'.
