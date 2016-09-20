@@ -13,6 +13,7 @@ package org.yakindu.sct.model.stext.ui.contentassist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextFactory;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
@@ -41,6 +43,7 @@ import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
+import com.google.common.base.Function;
 import com.google.inject.Inject;
 
 /**
@@ -49,6 +52,10 @@ import com.google.inject.Inject;
  * @author muehlbrandt
  */
 public class STextProposalProvider extends AbstractSTextProposalProvider {
+
+	private static final int OPERATION_PATTERN_OP_PARAMS = 1;
+
+	private static final Pattern OPERATION_PATTERN = Pattern.compile(".*\\((.*)\\).*");
 
 	@Inject
 	protected STextGrammarAccess grammarAccess;
@@ -157,6 +164,30 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			}
 		}
 		return keywords;
+	}
+
+	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName,
+			ContentAssistContext contentAssistContext) {
+		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter()) {
+			@Override
+			public ICompletionProposal apply(IEObjectDescription candidate) {
+				ICompletionProposal proposal = super.apply(candidate);
+				EObject eObjectOrProxy = candidate.getEObjectOrProxy();
+				if (eObjectOrProxy.eIsProxy()) {
+					return proposal;
+				}
+				if (eObjectOrProxy instanceof Operation) {
+					Operation operation = (Operation) eObjectOrProxy;
+					if (operation.getParameters().size() > 0 && (proposal instanceof ConfigurableCompletionProposal)) {
+						ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) proposal;
+						configurableProposal.setReplacementString(configurableProposal.getReplacementString() + "()");
+						configurableProposal.setCursorPosition(configurableProposal.getCursorPosition() + 1);
+					}
+				}
+
+				return proposal;
+			}
+		};
 	}
 
 	@Override
