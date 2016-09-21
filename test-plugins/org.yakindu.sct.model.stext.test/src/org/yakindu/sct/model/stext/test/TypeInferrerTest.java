@@ -16,6 +16,8 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractTypeInferrerTest;
@@ -746,5 +748,21 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		assertTrue(isBooleanType(inferType("(true) ? false : true")));
 
 		expectIssue(inferType("(true) ? 4 : false"), "Could not determine a common type for integer and boolean.");
+	}
+	
+	@Test
+	public void testParameterizedType() {
+		assertTrue(isIntegerType(
+				inferTypeResultForExpression("t.x", "internal var t:ComplexParameterizedType<integer>").getType()));
+		assertTrue(isIntegerType(inferTypeResultForExpression("t.x.x",
+				"internal var t:ComplexParameterizedType<ComplexParameterizedType<integer> >").getType()));
+
+		assertTrue(
+				isAnyType(inferTypeResultForExpression("t.x", "internal var t:ComplexParameterizedType<>").getType()));
+
+		assertTrue(isAnyType(inferTypeResultForExpression("t.x", "internal var t:ComplexParameterizedType").getType()));
+
+		assertTrue(isAnyType(inferTypeResultForExpression("t.x.x",
+				"internal var t:ComplexParameterizedType<ComplexParameterizedType<> >").getType()));
 	}
 }

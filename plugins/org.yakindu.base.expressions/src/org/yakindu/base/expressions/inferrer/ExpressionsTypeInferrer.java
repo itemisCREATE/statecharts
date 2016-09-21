@@ -16,6 +16,7 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.NULL;
 import static org.yakindu.base.types.typesystem.ITypeSystem.REAL;
 import static org.yakindu.base.types.typesystem.ITypeSystem.STRING;
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
+import static org.yakindu.base.types.typesystem.ITypeSystem.ANY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,7 @@ import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
+import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
 
@@ -206,7 +208,16 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			EList<Expression> args = e.getArgs();
 			inferParameter(parameters, args);
 		}
-		return inferTypeDispatch(e.getFeature());
+		InferenceResult result = inferTypeDispatch(e.getFeature());
+		if (result != null && result.getType() instanceof TypeParameter) {
+			InferenceResult ownerResult = inferTypeDispatch(e.getOwner());
+			if (ownerResult.getBindings().isEmpty()) {
+				result = getResultFor(ANY);
+			} else {
+				result = InferenceResult.from(ownerResult.getBindings().get(0).getType(), ownerResult.getBindings().get(0).getBindings());
+			}
+		}
+		return result;
 	}
 
 	public InferenceResult infer(ElementReferenceExpression e) {
@@ -283,7 +294,10 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		List<InferenceResult> bindings = new ArrayList<>();
 		EList<TypeSpecifier> arguments = specifier.getTypeArguments();
 		for (TypeSpecifier typeSpecifier : arguments) {
-			bindings.add(inferTypeDispatch(typeSpecifier));
+			InferenceResult binding = inferTypeDispatch(typeSpecifier);
+			if (binding != null) {
+				bindings.add(binding);
+			}
 		}
 		return InferenceResult.from(inferTypeDispatch(specifier.getType()).getType(), bindings);
 

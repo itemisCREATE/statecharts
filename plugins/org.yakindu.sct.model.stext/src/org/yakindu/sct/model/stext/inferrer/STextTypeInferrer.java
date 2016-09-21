@@ -41,13 +41,13 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	public static final String MISSING_VALUE = "Need to assign a value to an event of type %s.";
 
 	public InferenceResult infer(VariableDefinition e) {
-		InferenceResult type = inferTypeDispatch(e.getTypeSpecifier());
-		assertNotType(type, VARIABLE_VOID_TYPE, getResultFor(VOID));
+		InferenceResult result = inferTypeDispatch(e.getTypeSpecifier());
+		assertNotType(result, VARIABLE_VOID_TYPE, getResultFor(VOID));
 		if (e.getInitialValue() == null)
-			return type;
-		InferenceResult type2 = inferTypeDispatch(e.getInitialValue());
-		assertAssignable(type, type2, String.format(VARIABLE_DEFINITION, type2, type));
-		return type;
+			return result;
+		InferenceResult result2 = inferTypeDispatch(e.getInitialValue());
+		assertAssignable(result, result2, String.format(VARIABLE_DEFINITION, result2, result));
+		return result;
 	}
 
 	
@@ -59,15 +59,15 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	}
 
 	public InferenceResult infer(Guard e) {
-		InferenceResult type = inferTypeDispatch(e.getExpression());
-		assertIsSubType(type, getResultFor(BOOLEAN), GUARD);
-		return inferTypeDispatch(type.getType());
+		InferenceResult result = inferTypeDispatch(e.getExpression());
+		assertIsSubType(result, getResultFor(BOOLEAN), GUARD);
+		return result;
 	}
 
 	public InferenceResult infer(TimeEventSpec e) {
-		InferenceResult type = inferTypeDispatch(e.getValue());
-		assertIsSubType(type, getResultFor(INTEGER), TIME_SPEC);
-		return inferTypeDispatch(type.getType());
+		InferenceResult result = inferTypeDispatch(e.getValue());
+		assertIsSubType(result, getResultFor(INTEGER), TIME_SPEC);
+		return inferTypeDispatch(result.getType());
 	}
 
 	public InferenceResult infer(Scope scope) {
@@ -85,7 +85,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		Event event = deresolve(e.getEvent());
 		InferenceResult eventType = null;
 		if(event != null)
-			eventType = inferTypeDispatch(event.getType());
+			eventType = inferTypeDispatch(event.getTypeSpecifier());
 		eventType = eventType != null ? eventType : getResultFor(VOID);
 		if (e.getValue() == null) {
 			assertSame(eventType, getResultFor(VOID), String.format(MISSING_VALUE, eventType));
@@ -93,7 +93,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		}
 		InferenceResult valueType = inferTypeDispatch(e.getValue());
 		assertAssignable(eventType, valueType, String.format(EVENT_DEFINITION, valueType, eventType));
-		return inferTypeDispatch(e.getValue());
+		return valueType;
 
 	}
 

@@ -29,6 +29,7 @@ import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
@@ -74,7 +75,14 @@ public class STextTestScopeProvider extends STextScopeProvider {
 		for (Declaration feature : complexType.getFeatures()) {
 			descriptions.add(createEObjectDesc(feature));
 		}
-
+		
+		ComplexType cmplxParamType = createComplexParameterizedType();
+		descriptions.add(createEObjectDesc(cmplxParamType));
+		
+		for (Declaration feature : cmplxParamType.getFeatures()) {
+			descriptions.add(createEObjectDesc(feature));
+		}
+		
 		return new SimpleScope(descriptions);
 	}
 
@@ -129,6 +137,26 @@ public class STextTestScopeProvider extends STextScopeProvider {
 		Enumerator enumerator = TypesFactory.eINSTANCE.createEnumerator();
 		enumerator.setName(name);
 		return enumerator;
+	}
+	
+	protected ComplexType createComplexParameterizedType() {
+		ComplexType complexType = TypesFactory.eINSTANCE.createComplexType();
+		complexType.setName("ComplexParameterizedType");
+		
+		TypeParameter typeParam = TypesFactory.eINSTANCE.createTypeParameter();
+		complexType.getParameter().add(typeParam);
+
+		Property featureX = TypesFactory.eINSTANCE.createProperty();
+		featureX.setName("x");
+		TypeSpecifier typeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
+		typeSpec.setType(typeParam);
+		featureX.setTypeSpecifier(typeSpec);
+		complexType.getFeatures().add(featureX);
+
+		Resource resource = new ResourceImpl(URI.createURI("types2"));
+		resource.getContents().add(complexType);
+
+		return complexType;
 	}
 
 }
