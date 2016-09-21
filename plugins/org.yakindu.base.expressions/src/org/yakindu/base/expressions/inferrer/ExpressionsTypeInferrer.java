@@ -56,6 +56,7 @@ import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
+import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
 
@@ -206,7 +207,12 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			EList<Expression> args = e.getArgs();
 			inferParameter(parameters, args);
 		}
-		return inferTypeDispatch(e.getFeature());
+		InferenceResult result = inferTypeDispatch(e.getFeature());
+		if (result != null && result.getType() instanceof TypeParameter) {
+			InferenceResult ownerResult = inferTypeDispatch(e.getOwner());
+			result = InferenceResult.from(ownerResult.getBindings().get(0).getType(), ownerResult.getBindings().get(0).getBindings());
+		}
+		return result;
 	}
 
 	public InferenceResult infer(ElementReferenceExpression e) {
