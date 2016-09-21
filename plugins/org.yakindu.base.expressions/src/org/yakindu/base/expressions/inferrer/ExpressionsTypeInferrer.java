@@ -16,6 +16,7 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.NULL;
 import static org.yakindu.base.types.typesystem.ITypeSystem.REAL;
 import static org.yakindu.base.types.typesystem.ITypeSystem.STRING;
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
+import static org.yakindu.base.types.typesystem.ITypeSystem.ANY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -210,7 +211,11 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		InferenceResult result = inferTypeDispatch(e.getFeature());
 		if (result != null && result.getType() instanceof TypeParameter) {
 			InferenceResult ownerResult = inferTypeDispatch(e.getOwner());
-			result = InferenceResult.from(ownerResult.getBindings().get(0).getType(), ownerResult.getBindings().get(0).getBindings());
+			if (ownerResult.getBindings().isEmpty()) {
+				result = getResultFor(ANY);
+			} else {
+				result = InferenceResult.from(ownerResult.getBindings().get(0).getType(), ownerResult.getBindings().get(0).getBindings());
+			}
 		}
 		return result;
 	}
@@ -289,7 +294,10 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		List<InferenceResult> bindings = new ArrayList<>();
 		EList<TypeSpecifier> arguments = specifier.getTypeArguments();
 		for (TypeSpecifier typeSpecifier : arguments) {
-			bindings.add(inferTypeDispatch(typeSpecifier));
+			InferenceResult binding = inferTypeDispatch(typeSpecifier);
+			if (binding != null) {
+				bindings.add(binding);
+			}
 		}
 		return InferenceResult.from(inferTypeDispatch(specifier.getType()).getType(), bindings);
 

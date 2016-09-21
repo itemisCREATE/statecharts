@@ -84,23 +84,27 @@ public abstract class AbstractTypeInferrerTest extends AbstractSTextTest {
 	}
 
 	protected boolean isVoidType(Type type) {
-		return isType(type, "void");
+		return isType(type, ITypeSystem.VOID);
 	}
 
 	protected boolean isIntegerType(Type type) {
-		return isType(type, "integer");
+		return isType(type, ITypeSystem.INTEGER);
 	}
 
 	protected boolean isRealType(Type type) {
-		return isType(type, "real");
+		return isType(type, ITypeSystem.REAL);
 	}
 
 	protected boolean isBooleanType(Type type) {
-		return isType(type, "boolean");
+		return isType(type, ITypeSystem.BOOLEAN);
 	}
 
 	protected boolean isStringType(Type type) {
-		return isType(type, "string");
+		return isType(type, ITypeSystem.STRING);
+	}
+	
+	protected boolean isAnyType(Type type) {
+		return isType(type, ITypeSystem.ANY);
 	}
 	
 	protected void expectIssue(Type object, String message) {

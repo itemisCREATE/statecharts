@@ -32,6 +32,7 @@ public interface ITypeSystem {
 	public static final String BOOLEAN = "boolean";
 	public static final String VOID = "void";
 	public static final String NULL = "null";
+	public static final String ANY = "any";
 
 	public Collection<Type> getTypes();
 
