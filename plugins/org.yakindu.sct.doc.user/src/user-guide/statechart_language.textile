@@ -16,7 +16,7 @@ The YAKINDU SCT meta model is designed similar to the UML statechart meta model 
 
 The model interpreter and different flavors of generated code are following these same core semantics.
 
-Please refer to the Wikipedia article "UML state machine":http://en.wikipedia.org/wiki/UML_state_machine for more details.
+Please refer to the Wikipedia article "UML state machine":https://en.wikipedia.org/wiki/UML_state_machine for more details.
 
 A textual description language is used to declare and describe behaviors in a state machine. It is case sensitive.
 
