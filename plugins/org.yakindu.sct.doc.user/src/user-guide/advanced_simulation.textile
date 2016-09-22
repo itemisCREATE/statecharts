@@ -100,9 +100,9 @@ A breakpoint is either enabled or disabled.
 
 "Figure &quot;Breakpoints view&quot;":#advsim_fig-breakpoints-view is showing an enabled and a disabled breakpoint in the statechart editor and in the breakpoints view, respectively.
 
-You can instruct the statechart simulation to skip all breakpoints by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_disengaged.png(Button (disengaged): Skip all breakpoints)! button in the breakpoints view. The button will appear "pressed", and while it is, the "skip breakpoints" functionality is engaged. That means, the simulation will not suspend at any breakpoint.
+You can instruct the statechart simulation to skip all breakpoints by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_disengaged.png(Button (disengaged&#41;: Skip all breakpoints)! button in the breakpoints view. The button will appear "pressed", and while it is, the "skip breakpoints" functionality is engaged. That means, the simulation will not suspend at any breakpoint.
 
-This is different from disabling all breakpoints, in that each breakpoint keeps its state of being enabled or disabled. Once you disengage the skip breakpoints functionality by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_engaged.png(Button (engaged): Skip all breakpoints)! button again, the simulation will suspend again at enabled breakpoints and will not suspend at disabled breakpoints.
+This is different from disabling all breakpoints, in that each breakpoint keeps its state of being enabled or disabled. Once you disengage the skip breakpoints functionality by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_engaged.png(Button (engaged&#41;: Skip all breakpoints)! button again, the simulation will suspend again at enabled breakpoints and will not suspend at disabled breakpoints.
 
 h3(#advsim_removing-breakpoints). Removing breakpoints
 
