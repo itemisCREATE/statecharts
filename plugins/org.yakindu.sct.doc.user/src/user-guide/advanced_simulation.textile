@@ -5,7 +5,7 @@ p.
 
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/advanced_simulation.textile
 
-h1(#advsim_simulation). Debugging with breakpoints and snapshots
+h1(#advsim_debugging-with-breakpoints-and-snapshots). Debugging with breakpoints and snapshots
 
 h2(#advsim_introduction). Introduction
 
@@ -124,11 +124,11 @@ Enter the condition into the text field. Like in the statechart editor, a conten
 
 h2(#advsim_debugging-a-statechart). Debugging a statechart
 
-h3. Changing variable values
+h3(#advsim_changing-variable-values). Changing variable values
 
 In the suspended status of a statechart simulation you can change variable values using the _simulation_ view. When continuing execution – see section "Continuing the simulation":#advsim_continuing-the-simulation – you can observe how your state machine behaves with those modified values.
 
-h3. Raising multiple events simultaneously
+h3(#advsim_raising-multiple-events-simultaneously). Raising multiple events simultaneously
 
 If you click on an event's name in the _simulation_ view to raise that event in normal simulation, i.&#8239;e. while execution isn't suspended, the state machine immediately processes that event and takes the corresponding transition, if any.
 
@@ -155,7 +155,7 @@ Both events are raised and will be handled by the state machine during the next 
 
 bq. Please note: While the execution is still suspended, you can "unraise" an already raised event by clicking at the event symbol !(inlinemediaobject)images/advsim_symbol_event_raised.png(event raised)! a second time. The blue triangle will disappear, and upon continuation of the simulation the event will not be handled.
 
-h4. Transition priorities
+h4(#advsim_transition-priorities). Transition priorities
 
 It is important to understand that there is not queue of events. That is, in case several events occur simultaneously, the state machine consults the active state's transitions priorities in the order that is specified in the corresponding property, see "figure &quot;Transition priorities&quot;":#advsim_fig-transition-priorities. You can change the transitions priorities by selecting a transition and moving it up or down by clicking at the respective button.
 
@@ -172,7 +172,7 @@ The snapshot feature allows to store and restore the state of a simulation run. 
 
 This feature is especially useful when testing complex state machines in which a number of steps need to be taken before reaching a desired situation. Using snapshots, you can store this desired situation once and simply restore it again without repeating all the steps to reach it. Depending on the complexity of the usecase, this can be a huge time-saver.
 
-h3. Creating a snapshot
+h3(#advsim_creating-a-snapshot). Creating a snapshot
 
 To create a snapshot of the current statechart simulation, proceed as follows:
 
@@ -186,7 +186,7 @@ p(#advsim_fig-a-freshly-taken-snapshot).
 p=. A freshly taken snapshot
 
 
-h3. The snapshots view
+h3(#advsim_the-snapshots-view). The snapshots view
 
 The _snapshots_ view consists of two parts.
 * The _snapshot list_ contains all snapshots with their respective names and timestamps.
@@ -199,7 +199,7 @@ p(#advsim_fig-inspecting-the-variables-of-a-snapshots).
 
 p=. Inspecting snapshot details, on the left variables and the right its active elements
 
-h3. Restoring a snapshot
+h3(#advsim_restoring-a-snapshot). Restoring a snapshot
 
 To restore a snapshot for execution, proceed as follows:
 # Select the snapshot to be restored.
@@ -208,13 +208,13 @@ To restore a snapshot for execution, proceed as follows:
 
 bq. Please note: When the semantics of the underlying state machine have been changed, it might not be possible to restore a snapshot, e.g. when the active state has been deleted.
 
-h3. Naming a snapshot
+h3(#advsim_naming-a-snapshot). Naming a snapshot
 
 The label of a snapshot can be changed as follows:
 # Click at its label. The label becomes an editable field.
 # Enter the new snapshot name and press @[Return]@ or click anywhere outside the editable field.
 
-h3. Deleting a snapshot
+h3(#advsim_deleting-a-snapshot). Deleting a snapshot
 
 * To delete one or more snapshots, select the snapshots to be deleted, then click at the _remove_ button !(inlinemediaobject)images/advsim_button_remove_red.png(remove)!.
 * To delete _all_ snapshots, click at the _remove all_ button !(inlinemediaobject)images/advsim_button_remove_all.png(remove all)!.
