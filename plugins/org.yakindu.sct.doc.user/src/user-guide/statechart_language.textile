@@ -217,7 +217,7 @@ p=. Reaction effect syntax
 
 Example: When a transition or local reaction specified as @ev1 [x > 3] / x += 1; notify(x); raise ev2@ is executed, it increments variable _x_ by 1, calls the _notify_ operation with _x_ as parameter, and raises event _ev2_.
 
-h4. Raising and processing an event
+h4(#raising-and-processing-an-event). Raising and processing an event
 
 When a transition or local reaction raises an event, please consider two important points:
 * The event exists in the current run-to-completion step (RTC) only and thus can be dealt with during the rest of that particular RTC only.
@@ -267,7 +267,7 @@ p(#fig_state_entry_exit_final_explained).
 
 p=. Entry, exit, and final state
 
-h4(#default-entry). Default entry and initial state
+h4(#default-entry-and-initial-state). Default entry and initial state
 
 An entry without a name is called the _default entry_. It is similar to the UML's _initial state_. However, while the transition from the initial state to an ordinary state may specify a guard, the transition sourced at an entry cannot.
 
@@ -275,7 +275,7 @@ A region may have at most one default entry.
 
 h4(#named-entries). Named entries
 
-The "default entry":#default-entry specifies a single entry point into a region. A region can provide a multitude of additional or alternative entry points, thus implementing different kinds of behavior, depending on which entry point has been taken. If a region comprises multiple entries, these entries must be _named_. An entry's name must be unique within its region.
+The "default entry":#default-entry-and-initial-state specifies a single entry point into a region. A region can provide a multitude of additional or alternative entry points, thus implementing different kinds of behavior, depending on which entry point has been taken. If a region comprises multiple entries, these entries must be _named_. An entry's name must be unique within its region.
 
 The default entry implicitly has the name @default@. Alternatively, it is possible to explicitly give the name @default@ to the default entry. Semantically both variants are equivalent. Whether an entry has no name or it has the name @default@: in both cases the entry is called _default entry_.
 
@@ -294,7 +294,7 @@ p=. Entry state
 
 h3(#exit). Exit
 
-An _exit_ is a pseudo state that is used to leave and deactivate a composite state. Exits are counterpart to "entries":#entry. They are also known as exit points, exit states, or exit nodes. See section "&quot;Final state&quot;":#final for a different way to terminate a region or state machine.
+An _exit_ is a pseudo state that is used to leave and deactivate a composite state. Exits are counterpart to "entries":#entry. They are also known as exit points, exit states, or exit nodes. See section "&quot;Final state&quot;":#final-state for a different way to terminate a region or state machine.
 
 An exit may have multiple incoming transitions and has no outgoing one.
 
@@ -302,7 +302,7 @@ An exit state is depicted as an unfilled circle with an X-shaped cross, see figu
 
 Within a region, multiple exits are allowed. Each exit must either have a name that is unique within its region or be the _default exit_. The default exit is either unnamed or has the name @default@, which is semantically equivalent. A region may have at most one default exit.
 
-When a composite state reaches an exit in any of its regions, all states in other regions of that composite state, if any, are deactivated immediately. The composite state will be left and be deactivated. It maintains no status information that could be probed from the outside. In other words, reaching an exit in one of a composite state's regions has severe consequences for all the other regions since they are exited and disposed immediately. After that, the containing composite state is also exited. There must be an unguarded transition that catches the exit and leads to another state outside of the composite state. The semantics of exit is different from that of final state; please see section "&quot;Final state&quot;":#final for details.
+When a composite state reaches an exit in any of its regions, all states in other regions of that composite state, if any, are deactivated immediately. The composite state will be left and be deactivated. It maintains no status information that could be probed from the outside. In other words, reaching an exit in one of a composite state's regions has severe consequences for all the other regions since they are exited and disposed immediately. After that, the containing composite state is also exited. There must be an unguarded transition that catches the exit and leads to another state outside of the composite state. The semantics of exit is different from that of final state; please see section "&quot;Final state&quot;":#final-state for details.
 
 A transition that has a composite state as its source can specify which exits should trigger it. That is, different exits can lead to different behavior on the outside. A transition specifies the exits to react upon as a so-called _property_ which looks like this:
 
@@ -331,7 +331,7 @@ p(#fig_state_entry_exit).
 
 p=. Entries and exits
 
-h3(#final). Final state
+h3(#final-state). Final state
 
 A _final state_ denotes the end of the execution flow of a state machine or region. See section "&quot;Exit&quot;":#exit for a different way to terminate a composite state.
 
@@ -486,42 +486,42 @@ Expressions in YAKINDU Statechart Tools are similar to expressions in other prog
 
 The type of a logical expression is *boolean*.
 
-h3(#LogicalAND). Logical AND
+h3(#Logical-and). Logical AND
 
 bc. expr1 && expr2
 
 
-h3(#LogicalOR). Logical OR
+h3(#Logical-or). Logical OR
 
 bc. expr1 ||  expr2
 
 
-h3(#LogicalNOT). Logical NOT
+h3(#Logical-not). Logical NOT
 
 bc. !expr1
 
 
-h3(#Conditionalexpression). Conditional expression
+h3(#conditional-expression). Conditional expression
 
 bc. expr1 ? expr2 : expr3
 
 
-h3(#BitwiseXOR). Bitwise XOR
+h3(#bitwise-xor). Bitwise XOR
 
 bc. expr1 ^ expr2
 
 
-h3(#BitwiseOR). Bitwise OR
+h3(#bitwise-or). Bitwise OR
 
 bc. expr1 | expr2
 
 
-h3(#BitwiseAND). Bitwise AND
+h3(#bitwise-and). Bitwise AND
 
 bc. expr1 & expr2
 
 
-h3(#LogicalRelationsandShiftOperators). Logical Relations and Shift Operators
+h3(#logical-relations-and-shift-operators). Logical Relations and Shift Operators
 
 |<. less than|<. @<@|
 |<. equal or less than|<. @<=@|
@@ -532,7 +532,7 @@ h3(#LogicalRelationsandShiftOperators). Logical Relations and Shift Operators
 |<. shift left|<. @<<@|
 |<. shift right|<. @>>@|
 
-h3(#Binaryarithmeticoperators). Binary arithmetic operators
+h3(#binary-arithmetic-operators). Binary arithmetic operators
 
 |<. plus|<. @+@|
 |<. minus|<. @-@|
@@ -540,7 +540,7 @@ h3(#Binaryarithmeticoperators). Binary arithmetic operators
 |<. divide|<. @/@|
 |<. modulo|<. @%@|
 
-h3(#Unaryarithmeticoperators). Unary arithmetic operators
+h3(#unary-arithmetic-operators). Unary arithmetic operators
 
 |<. positive|<. @+@|
 |<. negative|<. @-@|
@@ -550,7 +550,7 @@ h2(#scopes). Scopes
 
 ==<!-- Start stext_keyword_namespace -->==
 
-h3(#Namespace). Namespace
+h3(#namespace). Namespace
 
 The language allows to define unique namespaces which can be used to qualify references to the statechart.
 
@@ -559,7 +559,7 @@ bc. namespace trafficlights
 ==<!-- End stext_keyword_namespace -->==
 ==<!-- Start stext_keyword_interface -->==
 
-h3(#interfacescope). Interface scope
+h3(#interface-scope). Interface scope
 
 Declarations in the interface scope are externally visible. They can be shared within the environment.
 
@@ -674,7 +674,7 @@ bc. operation localOperation (xValue : integer, yValue : integer):integer
 ==<!-- End stext_keyword_operation -->==
 
 
-h3(#declaration-local-reactions). Local reactions
+h3(#declaring-local-reactions). Declaring local reactions
 
 Local reactions describe the internal behavior of a state. So they have internal scope. A local reaction is declared as follows:
 
@@ -710,7 +710,7 @@ Actions are key constructs in state machines to model behavior. YAKINDU SCT know
 
 ==<!-- Start stext_keyword_after -->==
 
-h3(#after). after
+h3(#reaction-trigger-after). Reaction trigger "after"
 
 The _after_ trigger specifies a one-shot time event.
 
@@ -733,7 +733,7 @@ The time _unit_ is one of:
 ==<!-- End stext_keyword_after -->==
 ==<!-- Start stext_keyword_every -->==
 
-h3(#every). every
+h3(#reaction-trigger-every). Reaction trigger "every"
 
 The _every_ trigger specifies periodic time events.
 
@@ -756,42 +756,42 @@ The time _unit_ is one of:
 ==<!-- End stext_keyword_every -->==
 ==<!-- Start stext_keyword_always -->==
 
-h3(#always). always
+h3(#reaction-trigger-always). Reaction trigger "always"
 
 This trigger is always true and enables a reaction to be executed in every run-to-completion step (RTC). The _always_ trigger is equivalent to the _oncycle_ trigger.
 
 ==<!-- End stext_keyword_always -->==
 ==<!-- Start stext_keyword_oncycle -->==
 
-h3(#oncycle). oncycle
+h3(#reaction-trigger-oncycle). Reaction trigger "oncycle"
 
 This trigger is always true and enables a reaction to be executed in every run-to-completion step (RTC). The _always_ trigger is equivalent to the _oncycle_ trigger.
 
 ==<!-- End stext_keyword_oncycle -->==
 ==<!-- Start stext_keyword_else -->==
 
-h3(#else). else
+h3(#reaction-trigger-else). Reaction trigger "else"
 
 This trigger is intended to be used for the outgoing transitions of _choice_ pseudo states to make sure that there is always an outgoing transition that can be taken. It can only be be used in transitions and implies the lowest evaluation priority for that transition. The _default_ trigger is equivalent to the _else_ trigger.
 
 ==<!-- End stext_keyword_else -->==
 ==<!-- Start stext_keyword_default -->==
 
-h3(#default). default
+h3(#reaction-trigger-default). Reaction trigger "default"
 
 This trigger is intended to be used for the outgoing transitions of _choice_ pseudo states to make sure that there is always an outgoing transition that can be taken. It can only be be used in transitions and implies the lowest evaluation priority for that transition. The _default_ trigger is equivalent to the _else_ trigger.
 
 ==<!-- End stext_keyword_default -->==
 ==<!-- Start stext_keyword_entry -->==
 
-h3(#entry-1). entry
+h3(#reaction-trigger-entry). Reaction trigger "entry"
 
 An _entry_ trigger marks actions that are carried out when entering a state or state machine, immediately before making it active.
 
 ==<!-- End stext_keyword_entry -->==
 ==<!-- Start stext_keyword_exit -->==
 
-h3(#exit-1). exit
+h3(#reaction-trigger-exit). Reaction trigger "exit"
 
 An _exit_ trigger marks actions that are carried out when exiting a state or state machine, immediately after making it inactive.
 
@@ -802,7 +802,7 @@ h2(#built-in-functions). Built-in functions
 
 ==<!-- Start stext_keyword_valueof -->==
 
-h3(#valueofevent). valueof(event)
+h3(#value-of-event). valueof(event)
 
 An event can have a value. This function returns the value of the specified event.
 
@@ -822,7 +822,7 @@ bc. myReal = 12 as real
 ==<!-- End stext_keyword_as -->==
 ==<!-- Start stext_keyword_active -->==
 
-h3(#activestate). active(state)
+h3(#active-state). active(state)
 
 Returns _true_ if the specified state is active and _false_ otherwise.
 
