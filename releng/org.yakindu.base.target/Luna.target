@@ -2,7 +2,7 @@
 <?pde version="3.8"?><target name="Luna (SCT)" sequenceNumber="28">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.jgit.feature.group" version="4.4.1.201607150455-r"/>
+<unit id="org.eclipse.jgit.feature.group" version="4.5.0.201609210915-r"/>
 <repository location="http://download.eclipse.org/egit/updates/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
