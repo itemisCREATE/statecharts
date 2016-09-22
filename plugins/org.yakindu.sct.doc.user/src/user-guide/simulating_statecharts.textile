@@ -21,7 +21,7 @@ The most direct way is to start the simulation based on the statechart model fil
 
 p(#oss_fig_run-as-statechart-simulation). 
 
-!(standard-image)images/tuto_light_switch_300_statechart_simulator_run_as_statechart_simulation.png(Selecting "Run As → Statechart Simulation" in the context menu)!
+!(standard-image)images/tuto_light_switch_300_statechart_simulator_run_as_statechart_simulation.png(Selecting &quot;Run As → Statechart Simulation&quot; in the context menu)!
 
 p=. Selecting "Run As → Statechart Simulation" in the context menu
 
