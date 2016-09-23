@@ -24,16 +24,16 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.*
 class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 
 	@Inject
-	extension ITypeSystem ts
+	extension ITypeSystem
 
 	override getTargetLanguageName(Type type) {
-		val originialType = type?.originType
-		switch (originialType) {
-			case originialType == null || ts.isSame(originialType, getType(VOID)) : 'void'
-			case ts.isSame(originialType, getType(INTEGER)): 'sc_integer'
-			case ts.isSame(originialType, getType(REAL)): 'sc_real'
-			case ts.isSame(originialType, getType(BOOLEAN)): 'sc_boolean'
-			case ts.isSame(originialType, getType(STRING)): 'sc_string'
+		val originalType = type?.originType
+		switch (originalType) {
+			case originalType == null || isSame(originalType, getType(VOID)) : 'void'
+			case isSame(originalType, getType(INTEGER)): 'sc_integer'
+			case isSame(originalType, getType(REAL)): 'sc_real'
+			case isSame(originalType, getType(BOOLEAN)): 'sc_boolean'
+			case isSame(originalType, getType(STRING)): 'sc_string'
 			default: throw new IllegalArgumentException("Target language name could not be inferred for type " + type)
 		}
 	}
