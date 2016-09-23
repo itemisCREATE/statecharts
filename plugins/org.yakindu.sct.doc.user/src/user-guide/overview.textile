@@ -17,7 +17,7 @@ The following graph shows these features and their relation to each other:
 
 p=. Features of YAKINDU Statechart Tools
 
-h2(#oss_which-licensing-rules-do-apply). Which licensing rules do apply to YAKINDU Statechart Tools?
+h2(#which-licensing-rules-do-apply-to-yakindu-statechart-tools). Which licensing rules do apply to YAKINDU Statechart Tools?
 
 The source code of YAKINDU Statechart Tools is provided under the "Eclipse Public License":http://www.eclipse.org/legal/epl-v10.html.
 

@@ -80,7 +80,7 @@ You can hide the palette by clicking on the small triangle in the palette's titl
 
 p=. Editor palette
 
-h4(#oss-editing-action-tools). Editing action tools
+h4(#editing-action-tools). Editing action tools
 
 Below its title bar, the palette contains a toolbar with the following editing action tools (from left to right):
 | !images/docu_editor-palette_020_symbol_select.png(Editor palette symbol "Select")! | Select | |
@@ -88,7 +88,7 @@ Below its title bar, the palette contains a toolbar with the following editing a
 | !images/docu_editor-palette_040_symbol_zoom_out.png(Editor palette symbol "Zoom out")! | Zoom out | Left-click to zoom out. Press @[Shift]@ and left-click to zoom in. |
 | !images/docu_editor-palette_070_symbol_note.png(Editor palette symbol "Note")! | Note | Create a note, a text or a note attachment. |
 
-h4(#oss-statechart-elements-tools). Statechart elements tools
+h4(#statechart-elements-tools). Statechart elements tools
 
 The palette comprises a couple of tools serving to add statechart elements to the diagram (from top to bottom):
 
@@ -109,7 +109,7 @@ h3(#outline-view). Outline view
 
 The _Outline_ view allows you to keep the big picture of your statechart model and navigate it easily. It displays the model outline either as a graphical overview or as a hierarchical outline.
 
-h4(#oss-graphical-overview). Graphical overview
+h4(#graphical-overview). Graphical overview
 
 Click on the _Overview_ icon in the _Outline_ view's title bar to engage the graphical overview.
 
@@ -117,7 +117,7 @@ While the statechart editor window, due to zooming or the size of the whole stat
 
 A light-grey overlay rectangle represents the statechart editor's "viewport":https://en.wikipedia.org/wiki/Viewport. Drag this rectangle to move the statechart editor's viewport. Click into the outline view to position the rectangle's center to the point you have clicked.
 
-h4(#oss-hierarchical-outline). Hierarchical outline
+h4(#hierarchical-outline). Hierarchical outline
 
 Click on the _Outline_ icon in the _Outline_ view's title bar to engage the hierarchical outline.
 
@@ -202,7 +202,7 @@ h2(#refactorings). Refactorings
 Refactoring means modifying certain model aspects while maintaining its semantics. The statechart editor allows for the refactoring of variables, events, interfaces, and states, including composite and orthogonal states. A state's context menu contains the _Refactor_ submenu with the refactoring actions explained below. Depending on certain conditions, a refactoring might be executable or not, which will be explained below.
 
 
-h3(#renaming). Renaming variables, events and interfaces
+h3(#renaming-variables-events-and-interfaces). Renaming variables, events and interfaces
 
 Using the _Rename_ refactoring, you can change the name of a variable, event or interface throughout your statechart model. Each occurrence of that name will be changed to the new name.
 
@@ -295,7 +295,7 @@ To inline the subdiagram, right-click on a composite state with a subdiagram, th
 
 h2(#using-editing-proposals). Using editing proposals
 
-h3(#oss-using-text-proposals). Using text proposals
+h3(#using-text-proposals). Using text proposals
 
 Proposals assist you when writing statechart language expressions. Whenever editing some text anywhere in the graphical statechart editor or in the properties view, you can always press the @[Ctrl+Space]@ key combination to get some context-sensitive help.
 
@@ -305,7 +305,7 @@ You can either use the mouse or the keyboard to select and insert a proposal in 
 * Double-click on a proposal for insertion in the text.
 * Use the up and down arrow keys to navigate to the proposal you want to insert in the text, then press @[Return]@ to actually insert the proposal.
 
-h3(#oss-using-action-proposals-on-states). Using actions proposals on states
+h3(#using-action-proposals-on-states). Using actions proposals on states
 
 When a state is selected, @[Ctrl+Space]@ opens a popup window showing a context-sensitive menu with possible action choices to perform on the state.
 
@@ -315,7 +315,7 @@ You can either use the mouse or the keyboard to execute a proposal:
 * Double-click on a proposal to execute it.
 * Use the up and down arrow keys to navigate to the proposal you want to execute, then press @[Return]@ to actually execute it.
 
-h2(#oss_comparing-statecharts). Comparing statecharts
+h2(#comparing-statecharts). Comparing statecharts
 
 The statechart editor allows for comparing two or even three statecharts to each other, displaying the results, and possibly merging selected differences. Figure "&quot;Comparing two statecharts&quot;":#oss_fig_comparing_two_statecharts shows a sample comparison result.
 
@@ -325,21 +325,21 @@ p(#oss_fig_comparing_two_statecharts).
 
 p=. Comparing two statecharts
 
-h3(#oss_Comparing-a-statechart-to-its-local-history). Comparing a statechart to its local history
+h3(#comparing-a-statechart-to-its-local-history). Comparing a statechart to its local history
 
 # In the _project_ view, right-click on a single statechart model file. The context menu opens.
 # In the context menu, select _Compare With → Local History…_.
 # In the local history, double-click on the file's version to compare to.
 # The comparison results are shown.
 
-h3(#oss_comparing-two-statecharts). Comparing two statecharts
+h3(#comparing-two-statecharts). Comparing two statecharts
 
 # In the _project_ view, select two statechart model files.
 # Right-click on one of the selected statechart model files. The context menu opens.
 # In the context menu, select _Compare With → Each Other_.
 # The comparison results are shown.
 
-h3(#oss_comparing-three-statecharts). Comparing three statecharts
+h3(#comparing-three-statecharts). Comparing three statecharts
 
 # In the _project_ view, select three statechart model files.
 # Right-click on one of the selected statechart model files. The context menu opens.
@@ -385,7 +385,7 @@ Check _Overwrite existing file without warning_ if you don't want to be bothered
 
 Check _Export to HTML_ to create both the image file plus an HTML file including it.
 
-h2(#oss_working-with-statechart-tasks). Working with statechart tasks
+h2(#working-with-statechart-tasks). Working with statechart tasks
 
 While you are busily developing a statechart, it is quite common that you have ideas about what else you could or should do to improve the statechart, but later, in order to not get side-tracked. Examples are to write a proper documentation for a state, to refine a transition whose final specification you don't have yet etc.
 
@@ -416,26 +416,26 @@ The _Tasks_ view is updated only when the statechart is saved.
 # In the main menu, select _Window → Preferences_. The _Preferences_ Dialog opens.
 # In the _Preferences_ Dialog goto _Java → Compiler → Task Tags_ to edit your task tag preferences. A task tag has one of the priorities _High_, _Normal_, or _Low_.
 
-h2(#oss_example_wizard). Using the example wizard
+h2(#using-the-example_wizard). Using the example wizard
 
 The **Example Wizard**, which is part of YAKINDU Statechart Tools since release 2.7, gives you convenient access to the examples in our "examples repository":https://github.com/Yakindu/examples. You can browse the available examples by name or by category and read their documentation in the wizard. By a simple click you can instantiate an example as a new Eclipse project. Within an example project, you can then explore and modify the state machine models using the statechart editor, run the models in the simulator, generate source code, etc.
 
 Upon its first invocation, the example wizard downloads the online examples repository and creates a copy on your local disk. After that, all examples are immediately available to you, even if you are offline. The example wizard will notice when new examples are available in the online repository and offers to download them. It is also possible to download the examples repository out-of-band and later tell the example wizard where it can find the local copy.
 
-h3(#oss_download_example_repository). Downloading the examples repository
+h3(#downloading-the-examples-repository). Downloading the examples repository
 
 When you start the example wizard for the first time, it does not yet have any examples available that it could show to you. Thus downloading the online examples repository is required as a special first step.  
 
 # In order to start the example wizard, select _File → New → Example…_ in the YAKINDU Statechart Tools main menu. The _New Example_ dialog opens.
 # In the _New Example_ dialog, select _YAKINDU Statechart Examples_, then click on _Next >_. The example wizard opens.
 # The example wizard outputs a message saying that it could not find any examples and offers to download them.
-# Click on the _Download_ button. The example wizard downloads the online examples repository and creates a clone of it on your local computer. This can take some time. – Downloading can fail for a variety of reasons, not being able to access the Github server being one of them. If this happens, don't panic – and read how to "manually creating a local copy of the examples repository":#oss_manualy_creating_local_copy.
+# Click on the _Download_ button. The example wizard downloads the online examples repository and creates a clone of it on your local computer. This can take some time. – Downloading can fail for a variety of reasons, not being able to access the Github server being one of them. If this happens, don't panic – and read how to "manually create a local copy of the examples repository":#manually-creating-a-local-copy-of-the-examples-repository.
 
 !(standard-image)images/docu_example_wizard_download.png(Example wizard when invoked the first time)!
 
-When the download is completed, you can "browse the examples repository":#oss_browsing_the_example_repository.
+When the download is completed, you can "browse the examples repository":#browsing-the-example-repository.
 
-h3(#oss_changing_repository_location). Changing the repository location
+h3(#changing-the-repository-location). Changing the repository location
 
 You can change the location used by the example wizard to store the online repository's local clone.
 
@@ -448,7 +448,7 @@ You can change the storage location of your local examples repository clone at a
 * If the directory exists, the example wizard searches it for examples and displays them.
 * If the directory does not exist, the example wizard behaves as if being called for the first time. That is, it informs the user that it does not have any examples yet and offers to download them.
 
-h3(#oss_browsing_the_example_repository). Browsing the examples repository
+h3(#browsing-the-example-repository). Browsing the examples repository
 
 The example wizard shows the available examples and their categories on the left-hand side.
 
@@ -458,7 +458,7 @@ Click on _Finish_ to create the selected example as a new project in your worksp
 
 !(standard-image)images/docu_example_wizard_browse.png(Example wizard shows all available examples sorted by their categories)!
 
-h3(#oss_manualy_creating_local_copy). Manually creating a local copy of the examples repository
+h3(#manually-creating-a-local-copy-of-the-examples-repository). Manually creating a local copy of the examples repository
 
 The example wizard tries to download a copy of the YAKINDU Statechart Tools examples repository and install it on your local machine. However, if your Internet access is restricted or you don't have Internet access at all, this will fail.
 
@@ -496,7 +496,7 @@ Alternatively, you can clone the repository. Cloning the examples repository con
 # Click on _Browse..._, and select the folder you just cloned and click _OK_.
 # On the next try, the example wizard will now show a catalogue of YAKINDU SCT examples.
 
-h3(#oss_updating_example_respository). Updating the examples repository
+h3(#updating-the-examples-respository). Updating the examples repository
 
 When the example wizard is started and the storage location is a clone of the online examples directory, it checks whether there are any updates in the online examples repository. If new examples are available or existing examples have changed in the online repository the example wizard offers to update your local examples repository clone accordingly.
 
@@ -506,13 +506,13 @@ When the example wizard is started and the storage location is a clone of the on
 
 If your storage location is a plain directory and not a clone of the online examples repository, no update is ever done.
 
-h3(#oss_contributing_examples). Contributing own examples
+h3(#contributing-your-own-examples). Contributing your own examples
 
 If you have a project that you want to share with the community, you can contribute it as an example. Once your contribution is reviewed and applied by the YAKINDU team, it is available for all users of YAKINDU Statechart Tools via the example wizard's update functionality.
 
 For more information on how to contribute examples, please visit our "Wiki page":https://github.com/Yakindu/examples/wiki/Creating-a-YAKINDU-Statechart-Tools-Example.
 
-h2(#Preferences). Preferences
+h2(#preferences). Preferences
 
 Many aspects of YAKINDU Statechart Tools can be configured by _preferences_. You can find them here:
 
@@ -522,39 +522,39 @@ Many aspects of YAKINDU Statechart Tools can be configured by _preferences_. You
 
 In the subsequent sections we will quickly walk through the preferences.
 
-h3(#preferences-dialog-appearance). Diagram appearance
+h3(#diagram-appearance). Diagram appearance
 
 p(#fig_preferences-diagram-appearance). 
 !(standard-image)images/docu_preferences_010_diagram_appearance_01.png(Preferences: Diagram Appearance)!
 
 p=. Preferences: Diagram Appearance
 
-h4. Colors and line styles
+h4(#colors-and-line-styles). Colors and line styles
 
 The "diagram appearance":#fig_preferences-diagram-appearance preferences define default colors for the backgrounds and borders of states and regions, as well as the default routing style for transitions and other lines, with _oblique_ and _rectilinear_ being the options at your choice.
 
 Please keep in mind that colors and line styles will apply to _new_ elements only. Existing regions, states, etc. will remain as they are. You can always modify the properties of an existing element using the _Properties_ view.
 
-h4. Showing transition priorities
+h4(#showing-transition-priorities). Showing transition priorities
 
 In order to display "transition priorities":../user-guide/statechart_language.html#transition-priorities in a statechart, set a check mark at the respective preference option. Section "&quot;Transition priorities&quot;":../user-guide/statechart_language.html#transition-priorities has an example.
 
-h4. Disabling live validation
+h4(#disabling-live-validation). Disabling live validation
 
 While you are editing a statechart, the statechart editor validates your model on each and every modification you make. That's very helpful, because the editor provides you with instant feedback, so you can see immediately what is right, wrong, or dubious, and you can take corrective action, if needed.
 
 However, on very large and complex statechart models, validation may take a considerable amount of time, causing delays and impeding your editing. Remove the check mark from _Enable live validation_, and your model will be validated before it is saved to the model file only.
 
-h3. Example wizard
+h3(#example-wizard). Example wizard
 
 p(#fig_preferences-example-wizard). 
 !(standard-image)images/docu_preferences_020_examples_01.png(Preferences: Example wizard)!
 
 p=. Preferences: Example wizard
 
-You can change the example wizard storage location here. It is a local directory where the "example wizard":#oss_example_wizard stores your local clone of the examples Git repository. Default is the _sct_examples_ directory in your home directory.
+You can change the example wizard storage location here. It is a local directory where the "example wizard":#example-wizard stores your local clone of the examples Git repository. Default is the _sct_examples_ directory in your home directory.
 
-h3. Expressions
+h3(#expressions-preferences). Expressions preferences
 
 p(#fig_preferences-expressions). 
 !(standard-image)images/docu_preferences_030_expressions_01.png(Preferences: Expressions)!
@@ -563,7 +563,7 @@ p=. Preferences: Expressions
 
 Certain dialogs in the statechart editor allow you to opt for never seeing them again. By clicking on the _Clear_ button on this preference pane these hidden dialogs will be shown again at their respective locations.
 
-h4. Expression syntax coloring
+h4(#expression-syntax-coloring). Expression syntax coloring
 
 p(#fig_preferences-expression-syntax-coloring). 
 !(standard-image)images/docu_preferences_040_expressions_syntax_coloring_01.png(Preferences: Expression syntax coloring)!
@@ -572,7 +572,7 @@ p=. Preferences: Expression syntax coloring
 
 This preferences pane defines foreground color, background color, font, and style for displaying certain syntactical elements in statechart language texts.
 
-h4. Expression templates
+h4(#expression-templates). Expression templates
 
 p(#fig_preferences-expression-templates). 
 !(standard-image)images/docu_preferences_050_expressions_template_01.png(Preferences: Expression templates)!
@@ -585,7 +585,7 @@ To insert an existing content assist template, type the initial character, then 
 
 On this preference pane you can create, edit, and delete statechart language templates.
 
-h3. Generator model
+h3(#generator-model). Generator model
 
 p(#fig_preferences-generator-model). 
 !(standard-image)images/docu_preferences_060_generator_model_01.png(Preferences: Generator model)!
@@ -594,7 +594,7 @@ p=. Preferences: Generator model
 
 By default code generators automatically generate artifacts defined by generator models in _.sgen_ files. Using this preference setting, you can switch this behavior off or on.
 
-h4. Generator model refactoring
+h4(#generator-model-refactoring). Generator model refactoring
 
 p(#fig_preferences-generator-model-refactoring). 
 !(standard-image)images/docu_preferences_070_generator_model_refactoring_01.png(Preferences: Generator model refactoring)!
@@ -603,7 +603,7 @@ p=. Preferences: Generator model refactoring
 
 Change these preference settings for refactoring in generator models as you see fit.
 
-h4. Generator model syntax coloring
+h4(#generator-model-syntax-coloring). Generator model syntax coloring
 
 p(#fig_preferences-generator-model-syntax-coloring). 
 !(standard-image)images/docu_preferences_080_generator_syntax_coloring_01.png(Preferences: Generator model syntax coloring)!
@@ -612,7 +612,7 @@ p=. Preferences: Generator model syntax coloring
 
 This preferences pane defines foreground color, background color, font, and style for displaying certain syntactical elements in generator model texts.
 
-h4. Generator model templates
+h4(#generator-model-templates). Generator model templates
 
 p(#fig_preferences-generator-model-templates). 
 !(standard-image)images/docu_preferences_090_generator_templates_01.png(Preferences: Generator model templates)!
@@ -625,7 +625,7 @@ To insert an existing content assist template, type the initial character, then 
 
 On this preference pane you can create, edit, and delete generator model language templates.
 
-h3. Simulation
+h3(#simulation). Simulation
 
 p(#fig_preferences-simulation). 
 !(standard-image)images/docu_preferences_100_simulation_01.png(Preferences: Simulation)!
