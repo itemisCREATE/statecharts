@@ -244,6 +244,11 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	}
 
 	@Override
+	public boolean isExtensionOperation(Operation op) {
+		return extensionOperationRegistry.containsValue(op);
+	}
+
+	@Override
 	public List<Property> getPropertyExtensions(Type type) {
 		List<Property> result = new ArrayList<>();
 		result.addAll(extensionPropertyRegistry.get(type));
@@ -252,5 +257,10 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 			result.addAll(extensionPropertyRegistry.get(superType));
 		}
 		return result;
+	}
+
+	@Override
+	public boolean isExtensionProperty(Property prop) {
+		return extensionPropertyRegistry.containsValue(prop);
 	}
 }

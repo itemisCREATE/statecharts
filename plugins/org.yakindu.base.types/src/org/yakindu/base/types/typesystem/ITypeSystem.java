@@ -60,4 +60,8 @@ public interface ITypeSystem {
 
 	public List<Property> getPropertyExtensions(Type type);
 
+	public boolean isExtensionOperation(Operation op);
+
+	public boolean isExtensionProperty(Property prop);
+
 }
