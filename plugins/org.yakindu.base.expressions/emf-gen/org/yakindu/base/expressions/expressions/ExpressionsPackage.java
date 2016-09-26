@@ -633,14 +633,14 @@ public interface ExpressionsPackage extends EPackage {
 	int LOGICAL_RELATION_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ShiftExpressionImpl <em>Shift Expression</em>}' class.
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.LeftShiftExpressionImpl <em>Left Shift Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.ShiftExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftExpression()
+	 * @see org.yakindu.base.expressions.expressions.impl.LeftShiftExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLeftShiftExpression()
 	 * @generated
 	 */
-	int SHIFT_EXPRESSION = 18;
+	int LEFT_SHIFT_EXPRESSION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -649,16 +649,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SHIFT_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Operator</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SHIFT_EXPRESSION__OPERATOR = EXPRESSION_FEATURE_COUNT + 1;
+	int LEFT_SHIFT_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -667,16 +658,53 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SHIFT_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 2;
+	int LEFT_SHIFT_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Shift Expression</em>' class.
+	 * The number of structural features of the '<em>Left Shift Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SHIFT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+	int LEFT_SHIFT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.RightShiftExpressionImpl <em>Right Shift Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.RightShiftExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getRightShiftExpression()
+	 * @generated
+	 */
+	int RIGHT_SHIFT_EXPRESSION = 19;
+
+	/**
+	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RIGHT_SHIFT_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RIGHT_SHIFT_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Right Shift Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RIGHT_SHIFT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalAddSubtractExpressionImpl <em>Numerical Add Subtract Expression</em>}' class.
@@ -686,7 +714,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalAddSubtractExpression()
 	 * @generated
 	 */
-	int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 19;
+	int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 20;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -732,7 +760,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalMultiplyDivideExpression()
 	 * @generated
 	 */
-	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 20;
+	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 21;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -778,7 +806,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalUnaryExpression()
 	 * @generated
 	 */
-	int NUMERICAL_UNARY_EXPRESSION = 21;
+	int NUMERICAL_UNARY_EXPRESSION = 22;
 
 	/**
 	 * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -815,7 +843,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getPrimitiveValueExpression()
 	 * @generated
 	 */
-	int PRIMITIVE_VALUE_EXPRESSION = 22;
+	int PRIMITIVE_VALUE_EXPRESSION = 23;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -843,7 +871,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getFeatureCall()
 	 * @generated
 	 */
-	int FEATURE_CALL = 23;
+	int FEATURE_CALL = 24;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' containment reference.
@@ -916,7 +944,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getElementReferenceExpression()
 	 * @generated
 	 */
-	int ELEMENT_REFERENCE_EXPRESSION = 24;
+	int ELEMENT_REFERENCE_EXPRESSION = 25;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' reference.
@@ -980,7 +1008,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getParenthesizedExpression()
 	 * @generated
 	 */
-	int PARENTHESIZED_EXPRESSION = 25;
+	int PARENTHESIZED_EXPRESSION = 26;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1008,7 +1036,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getTypeCastExpression()
 	 * @generated
 	 */
-	int TYPE_CAST_EXPRESSION = 26;
+	int TYPE_CAST_EXPRESSION = 27;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1045,17 +1073,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAssignmentOperator()
 	 * @generated
 	 */
-	int ASSIGNMENT_OPERATOR = 27;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.ShiftOperator <em>Shift Operator</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.ShiftOperator
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftOperator()
-	 * @generated
-	 */
-	int SHIFT_OPERATOR = 28;
+	int ASSIGNMENT_OPERATOR = 28;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -1565,47 +1583,68 @@ public interface ExpressionsPackage extends EPackage {
 	EReference getLogicalRelationExpression_RightOperand();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.ShiftExpression <em>Shift Expression</em>}'.
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.LeftShiftExpression <em>Left Shift Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Shift Expression</em>'.
-	 * @see org.yakindu.base.expressions.expressions.ShiftExpression
+	 * @return the meta object for class '<em>Left Shift Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.LeftShiftExpression
 	 * @generated
 	 */
-	EClass getShiftExpression();
+	EClass getLeftShiftExpression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.ShiftExpression#getLeftOperand <em>Left Operand</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.LeftShiftExpression#getLeftOperand <em>Left Operand</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.ShiftExpression#getLeftOperand()
-	 * @see #getShiftExpression()
+	 * @see org.yakindu.base.expressions.expressions.LeftShiftExpression#getLeftOperand()
+	 * @see #getLeftShiftExpression()
 	 * @generated
 	 */
-	EReference getShiftExpression_LeftOperand();
+	EReference getLeftShiftExpression_LeftOperand();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.base.expressions.expressions.ShiftExpression#getOperator <em>Operator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Operator</em>'.
-	 * @see org.yakindu.base.expressions.expressions.ShiftExpression#getOperator()
-	 * @see #getShiftExpression()
-	 * @generated
-	 */
-	EAttribute getShiftExpression_Operator();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.ShiftExpression#getRightOperand <em>Right Operand</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.LeftShiftExpression#getRightOperand <em>Right Operand</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.ShiftExpression#getRightOperand()
-	 * @see #getShiftExpression()
+	 * @see org.yakindu.base.expressions.expressions.LeftShiftExpression#getRightOperand()
+	 * @see #getLeftShiftExpression()
 	 * @generated
 	 */
-	EReference getShiftExpression_RightOperand();
+	EReference getLeftShiftExpression_RightOperand();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.RightShiftExpression <em>Right Shift Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Right Shift Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.RightShiftExpression
+	 * @generated
+	 */
+	EClass getRightShiftExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.RightShiftExpression#getLeftOperand <em>Left Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
+	 * @see org.yakindu.base.expressions.expressions.RightShiftExpression#getLeftOperand()
+	 * @see #getRightShiftExpression()
+	 * @generated
+	 */
+	EReference getRightShiftExpression_LeftOperand();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.RightShiftExpression#getRightOperand <em>Right Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
+	 * @see org.yakindu.base.expressions.expressions.RightShiftExpression#getRightOperand()
+	 * @see #getRightShiftExpression()
+	 * @generated
+	 */
+	EReference getRightShiftExpression_RightOperand();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression <em>Numerical Add Subtract Expression</em>}'.
@@ -1949,16 +1988,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getAssignmentOperator();
-
-	/**
-	 * Returns the meta object for enum '{@link org.yakindu.base.expressions.expressions.ShiftOperator <em>Shift Operator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Shift Operator</em>'.
-	 * @see org.yakindu.base.expressions.expressions.ShiftOperator
-	 * @generated
-	 */
-	EEnum getShiftOperator();
 
 	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.expressions.expressions.AdditiveOperator <em>Additive Operator</em>}'.
@@ -2411,14 +2440,14 @@ public interface ExpressionsPackage extends EPackage {
 		EReference LOGICAL_RELATION_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getLogicalRelationExpression_RightOperand();
 
 		/**
-		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.ShiftExpressionImpl <em>Shift Expression</em>}' class.
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.LeftShiftExpressionImpl <em>Left Shift Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.expressions.expressions.impl.ShiftExpressionImpl
-		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftExpression()
+		 * @see org.yakindu.base.expressions.expressions.impl.LeftShiftExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLeftShiftExpression()
 		 * @generated
 		 */
-		EClass SHIFT_EXPRESSION = eINSTANCE.getShiftExpression();
+		EClass LEFT_SHIFT_EXPRESSION = eINSTANCE.getLeftShiftExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
@@ -2426,15 +2455,7 @@ public interface ExpressionsPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SHIFT_EXPRESSION__LEFT_OPERAND = eINSTANCE.getShiftExpression_LeftOperand();
-
-		/**
-		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SHIFT_EXPRESSION__OPERATOR = eINSTANCE.getShiftExpression_Operator();
+		EReference LEFT_SHIFT_EXPRESSION__LEFT_OPERAND = eINSTANCE.getLeftShiftExpression_LeftOperand();
 
 		/**
 		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
@@ -2442,7 +2463,33 @@ public interface ExpressionsPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SHIFT_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getShiftExpression_RightOperand();
+		EReference LEFT_SHIFT_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getLeftShiftExpression_RightOperand();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.RightShiftExpressionImpl <em>Right Shift Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.RightShiftExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getRightShiftExpression()
+		 * @generated
+		 */
+		EClass RIGHT_SHIFT_EXPRESSION = eINSTANCE.getRightShiftExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RIGHT_SHIFT_EXPRESSION__LEFT_OPERAND = eINSTANCE.getRightShiftExpression_LeftOperand();
+
+		/**
+		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RIGHT_SHIFT_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getRightShiftExpression_RightOperand();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalAddSubtractExpressionImpl <em>Numerical Add Subtract Expression</em>}' class.
@@ -2717,16 +2764,6 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum ASSIGNMENT_OPERATOR = eINSTANCE.getAssignmentOperator();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.ShiftOperator <em>Shift Operator</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.expressions.expressions.ShiftOperator
-		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftOperator()
-		 * @generated
-		 */
-		EEnum SHIFT_OPERATOR = eINSTANCE.getShiftOperator();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.

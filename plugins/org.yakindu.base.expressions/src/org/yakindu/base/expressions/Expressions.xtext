@@ -50,12 +50,16 @@ BitwiseAndExpression returns Expression:
 	rightOperand=LogicalRelationExpression)*;
 
 LogicalRelationExpression returns Expression:
-	ShiftExpression
+	LeftShiftExpression
 	({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
-	rightOperand=ShiftExpression)*;
+	rightOperand=LeftShiftExpression)*;
 
-ShiftExpression returns Expression:
-	NumericalAddSubtractExpression ({ShiftExpression.leftOperand=current} operator=ShiftOperator
+LeftShiftExpression returns Expression:
+	RightShiftExpression ({LeftShiftExpression.leftOperand=current} LeftShiftOperator
+	rightOperand=RightShiftExpression)*;
+
+RightShiftExpression returns Expression:
+	NumericalAddSubtractExpression ({RightShiftExpression.leftOperand=current} RightShiftOperator
 	rightOperand=NumericalAddSubtractExpression)*;
 
 NumericalAddSubtractExpression returns Expression:
@@ -144,6 +148,13 @@ BitwiseOrOperator:
 BitwiseAndOperator:
 	'&';
 
+LeftShiftOperator:
+	'<''<'
+;
+
+RightShiftOperator:
+	'>''>'
+;
 enum AssignmentOperator:
 	assign='='
 	| multAssign='*='
@@ -151,15 +162,9 @@ enum AssignmentOperator:
 	| modAssign='%='
 	| addAssign='+='
 	| subAssign='-='
-	| leftShiftAssign='<<='
-	| rightShiftAssign='>>='
 	| andAssign='&='
 	| xorAssign='^='
 	| orAssign='|=';
-
-enum ShiftOperator:
-	left='<<'
-	| right='>>';
 
 enum AdditiveOperator:
 	plus='+' | minus='-';

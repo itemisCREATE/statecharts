@@ -24,6 +24,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
+import org.yakindu.base.expressions.expressions.LeftShiftExpression
 import org.yakindu.base.expressions.expressions.Literal
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
@@ -35,7 +36,7 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
-import org.yakindu.base.expressions.expressions.ShiftExpression
+import org.yakindu.base.expressions.expressions.RightShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.types.Event
@@ -133,7 +134,9 @@ class ExpressionCode {
 
 	def dispatch CharSequence code(BitwiseXorExpression it) '''«leftOperand.code» ^ «rightOperand.code»'''
 
-	def dispatch CharSequence code(ShiftExpression it) '''«leftOperand.code» «operator.literal» «rightOperand.code»'''
+	def dispatch CharSequence code(LeftShiftExpression it) '''«leftOperand.code» << «rightOperand.code»'''
+	
+	def dispatch CharSequence code(RightShiftExpression it) '''«leftOperand.code» >> «rightOperand.code»'''
 
 	/* Numerical operations */
 	def dispatch CharSequence code(NumericalAddSubtractExpression it) '''«leftOperand.code» «operator.literal» «rightOperand.

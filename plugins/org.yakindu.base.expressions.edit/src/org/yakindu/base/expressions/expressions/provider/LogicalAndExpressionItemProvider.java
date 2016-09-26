@@ -188,7 +188,12 @@ public class LogicalAndExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.LOGICAL_AND_EXPRESSION__LEFT_OPERAND,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.LOGICAL_AND_EXPRESSION__LEFT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -278,7 +283,12 @@ public class LogicalAndExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.LOGICAL_AND_EXPRESSION__RIGHT_OPERAND,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.LOGICAL_AND_EXPRESSION__RIGHT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

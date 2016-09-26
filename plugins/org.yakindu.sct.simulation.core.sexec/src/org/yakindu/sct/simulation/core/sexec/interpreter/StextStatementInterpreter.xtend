@@ -27,6 +27,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
+import org.yakindu.base.expressions.expressions.LeftShiftExpression
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
@@ -37,7 +38,7 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
-import org.yakindu.base.expressions.expressions.ShiftExpression
+import org.yakindu.base.expressions.expressions.RightShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.types.EnumerationType
@@ -96,7 +97,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		if(type instanceof EnumerationType) return value
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
-		throw new IllegalArgumentException("unknown type "+type.name)
+		throw new IllegalArgumentException("unknown type " + type.name)
 	}
 
 	def dispatch Object typeCast(Float value, Type type) {
@@ -133,10 +134,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def Object executeAssignment(AssignmentExpression assignment) {
 		var scopeVariable = context.resolve(assignment.varRef)
 		var result = assignment.expression.execute
-		if (result instanceof Enumerator) result = result.literalValue
+		if(result instanceof Enumerator) result = result.literalValue
 
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
-			//Strong typing, use the type of the scopeVariable instead of using new runtime type
+			// Strong typing, use the type of the scopeVariable instead of using new runtime type
 			scopeVariable.value = if(result != null) typeCast(result, scopeVariable.type) else null
 		} else {
 			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.getName())
@@ -147,7 +148,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		}
 		scopeVariable.value
 	}
-	
+
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
 		var event = context.resolve(eventRaising.event)
 		if (eventRaising.value != null) {
@@ -179,7 +180,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		if (expression.reference instanceof Enumerator) {
 			return new Long((expression.reference as Enumerator).literalValue)
 		}
-		
+
 		val executionSlot = context.resolve(expression)
 		if (executionSlot instanceof ExecutionVariable)
 			return executionSlot.getValue
@@ -261,8 +262,12 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.getName())
 	}
 
-	def dispatch Object execute(ShiftExpression expression) {
-		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.getName())
+	def dispatch Object execute(LeftShiftExpression expression) {
+		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, CoreFunction.BIT_RSHIFT)
+	}
+
+	def dispatch Object execute(RightShiftExpression expression) {
+		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, CoreFunction.BIT_RSHIFT)
 	}
 
 	def dispatch Object execute(NumericalUnaryExpression expression) {
@@ -306,10 +311,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			return slot
 		}
 		if (slot instanceof ExecutionEvent) {
-			if(call.feature instanceof Operation) {
-				(slot as ExecutionEvent).raised = true	
+			if (call.feature instanceof Operation) {
+				(slot as ExecutionEvent).raised = true
 			}
-			
+
 			return (slot as ExecutionEvent).raised
 		}
 

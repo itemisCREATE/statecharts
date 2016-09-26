@@ -270,7 +270,12 @@ public class TimeEventSpecItemProvider extends EventSpecItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

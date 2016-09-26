@@ -219,7 +219,12 @@ public class NumericalUnaryExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

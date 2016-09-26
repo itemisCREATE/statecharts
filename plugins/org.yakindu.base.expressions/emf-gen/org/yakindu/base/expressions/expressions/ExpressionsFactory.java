@@ -166,13 +166,22 @@ public interface ExpressionsFactory extends EFactory {
 	LogicalRelationExpression createLogicalRelationExpression();
 
 	/**
-	 * Returns a new object of class '<em>Shift Expression</em>'.
+	 * Returns a new object of class '<em>Left Shift Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Shift Expression</em>'.
+	 * @return a new object of class '<em>Left Shift Expression</em>'.
 	 * @generated
 	 */
-	ShiftExpression createShiftExpression();
+	LeftShiftExpression createLeftShiftExpression();
+
+	/**
+	 * Returns a new object of class '<em>Right Shift Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Right Shift Expression</em>'.
+	 * @generated
+	 */
+	RightShiftExpression createRightShiftExpression();
 
 	/**
 	 * Returns a new object of class '<em>Numerical Add Subtract Expression</em>'.

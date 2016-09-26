@@ -186,7 +186,12 @@ public class ParenthesizedExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

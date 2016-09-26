@@ -190,7 +190,12 @@ public class ConditionalExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__CONDITION,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -280,7 +285,12 @@ public class ConditionalExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__TRUE_CASE,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__TRUE_CASE,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -370,7 +380,12 @@ public class ConditionalExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__FALSE_CASE,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION__FALSE_CASE,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

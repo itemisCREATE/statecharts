@@ -211,7 +211,12 @@ public class RegularEventSpecItemProvider extends EventSpecItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
