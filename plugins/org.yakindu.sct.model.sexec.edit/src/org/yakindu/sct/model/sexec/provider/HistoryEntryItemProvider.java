@@ -197,22 +197,12 @@ public class HistoryEntryItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
 				 SexecFactory.eINSTANCE.createCheck()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
 				 SexecFactory.eINSTANCE.createCheckRef()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
-				 SexecFactory.eINSTANCE.createIf()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -297,22 +287,12 @@ public class HistoryEntryItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
 				 SexecFactory.eINSTANCE.createCheck()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
 				 SexecFactory.eINSTANCE.createCheckRef()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
-				 SexecFactory.eINSTANCE.createIf()));
 
 		newChildDescriptors.add
 			(createChildParameter
