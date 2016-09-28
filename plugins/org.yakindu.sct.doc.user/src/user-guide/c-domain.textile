@@ -18,10 +18,6 @@ bq.. *Please note:*
 
 Instead of "types, structs, and unions", subsequently we will speak of "types" only. While this does not precisely confirm with the C programming language nomenclature, it is much easier to read in a text. From a statechart's point of view, there is no relevant difference between types, structs, and unions anyway. Should it become necessary to differentiate between types, structs, and unions, we will do so explicitly.
 
-bq.. *Please also note:*
-
-This preliminary version of *YAKINDU Statechart Tools Professional Edition* does not support pointers and arrays yet. These types will be supported in the full version.
-
 p. The subsequent sections will explain how to use the C integration in practice, using a sample project. In this example, we will define some geometry types like _Point_ or _Triangle_ in C header files and demonstrate how to make them available and use them in a statechart model.
 
 
@@ -101,7 +97,8 @@ interface:
 On the right-hand side of the colon in the variable declaration, the variable's type must follow. In order to see which types are available, press @[Ctrl+Space]@. The content assist opens and shows the C types available in our C project, i.&#8239;e.
 * the C basic standard types,
 * the C99 types provided by including _stdint.h_,
-* the self-defined _Point_ type.
+* the self-defined _Point_ type,
+* the qualifiers _array_ and _pointer_.
 
 !(standard-image)images/cdom_geometry_040_c_types_010.png(Using the content assist to display available types)!
 
@@ -196,7 +193,7 @@ bc. interface:
     var pointA: point.Point
     var pointB: three_d.point.Point
 
-The example above shows that pathnames of header files are mapped to namespace names. The example also shows that characters that are valid in a filesystem pathname (here: '-') are mapped to replacement characters that are allowed to occur in statechart type names (here: '_'). If you are unsure how to map a pathname to a type name, you can always use the content assist to do the mapping for you.
+The example above shows that pathnames of header files are mapped to namespace names. The example also shows that characters which are valid in a filesystem pathname (here: '-') are mapped to replacement characters that are allowed to occur in statechart type names (here: '_'). If you are unsure how to map a pathname to a type name, you can always use the content assist to do the mapping for you.
 
 Although it is possible to *import* both namespaces as described in section "&quot;Importing a namespace&quot;":#cdom_importing-a-namespace, it is not advisable. Consider the following example:
 
@@ -207,7 +204,7 @@ interface:
     var pointA: Point
     var pointB: Point
 
-p. This won't work, because _Point_ is ambiguous. To define *pointA* and *pointB* correctly, you would still have to fully-qualify the _Point_ types:
+p. This won't work, because _Point_ is ambiguous. To define *pointA* and *pointB* correctly, you would still have to fully qualify the _Point_ types:
 
 bc.. import: point
 import: three_d.point
@@ -253,6 +250,138 @@ p. With this definition we can use expressions like @t.a.x@, see the image below
 !(standard-image)images/cdom_geometry_170_data_structure_traversal_010.png(Content assist in data structure traversal)!
 
 p=. Content assist in data structure traversal
+
+
+h2(#cdom_pointers). Pointers
+
+Pointers are a core feature of the C programming language. YAKINDU Statechart Tools' Deep C Integration is making C pointers available to you in your statecharts. In particular, you can
+* declare typed pointer variables,
+* assign a pointer to a pointer variable of the same type,
+* retrieve the pointer pointing to a given variable,
+* pass pointers as parameters to functions, and
+* receive a pointer as a functions return value.
+
+h3(#cdom_declaring-pointer-variables). Declaring pointer variables
+
+Pointer variables are declared in a statechart's definition section as shown in the following example:
+
+bc. var n: int32_t
+var pInt: pointer<int32_t>
+var ppInt: pointer<pointer<int32_t> >
+var pTriangle: pointer<Triangle>;
+
+
+The declarations above declare
+* _n_ as a (non-pointer) variable of type _int32_t_,
+* _pInt_ as a pointer variable that is pointing to a variable of type _int32_t_,
+* _ppInt_ as a pointer that is pointing to a pointer that is pointing to a variable of type _int32_t_, and
+* _pTriangle_ as a pointer to a variable of the self-defined type _Triangle_.
+
+bq.. *Please note:*
+
+When closing the type specification in a pointer declaration with angle brackets, e.&nbsp;g. @pointer<pointer<int32_t> >@, the @>@ characters must be separated from each other by one or more white space characters. Writing e.&nbsp;g. @pointer<pointer<int32_t>>@ would result in an error.
+
+
+h3(#cdom_using-pointer-variables). Using pointer variables
+
+In order to actually assign a pointer to a pointer variable, you have to get hold of that pointer. To retrieve the pointer to a variable _v_, use _v_'s extension function _pointer_. That is, for a variable _v_, the expression _v.pointer_ evaluates to a pointer to _v_. Each variable has the _pointer_ extension function.
+
+Example: Let's say the pointer variable _pInt_ (declared in the example above) should point to the variable _n_. The following assignment accomplishes this:
+
+bc. pInt = n.pointer
+
+Similarly, a pointer to a pointer to a base type can be retrieved as follows:
+
+bc. ppInt = pInt.pointer;
+
+Or even:
+
+bc. ppInt = n.pointer.pointer
+
+In order to deference a pointer, i.&nbsp;e. to retrieve the value of what the pointer is pointing to, use the _value_ extension function, which is available on all pointer-type variables.
+
+Example: Let's say the pointer variable _pInt_ (declared in the example above) is pointing to some _int32_t_ variable. The value of the variable _pInt_ is pointing to should be assigned to the _int32_t_ variable _n_. The following assignment accomplishes this:
+
+bc. n = pInt.value;
+
+Similarly, if _ppInt_ points to a pointer pointing to some _int32_t_ variable, the following statement retrieves the latter's value:
+
+bc. n = ppInt.value.value;
+
+Passing pointer parameters to C functions is straightforward. Let's say you have a C function to rotate a triangle around a center point by a given angle. The C function is defined like this:
+
+bc. Triangle* rotateTriangle(Triangle* triangle, Point* centerPoint, float angle) { … }
+
+Provided the function is declared in an imported C header file, you can call it directly like this:
+
+bc. pTriangle2 = rotateTriangle(pTriangle, pCenterPoint, 45.0);
+
+bq.. *Please note:
+
+Assigning a pointer to a pointer variable is only possible if the pointer types are the same.
+
+
+h2(#cdom_arrays). Arrays
+
+Unlike other variables, arrays are not defined in a statechart's definition section, but rather on the C side in header files. Importing a C header containing an array definition makes the array available to a statechart.
+
+While YAKINDU Statechart Tool's Deep C Integration provides mechanisms for accessing individual elements of an existent array, arrays must be allocated statically or dynamically in C. Initializing the array elements is possible in C as well as in the statechart. However, depending on the concrete application it might generally be easier in C.
+
+The header file _sample_arrays.h_ defines a couple of sample arrays:
+
+bc.. #ifndef SAMPLE_ARRAYS_H_
+#define SAMPLE_ARRAYS_H_
+
+#include <stdint.h>
+#include "triangle.h"
+
+int32_t coordinates[] = {0, 0, 10, 0, 5, 5};
+
+Triangle manyTriangles[200];
+
+int32_t * pArray[10];
+
+#endif /* SAMPLE_ARRAYS_H_ */
+
+p. The following arrays are defined:
+* _coordinates_ is statically allocated to hold six _int32_t_ elements and it is initialized with values for all six of them. More precisely, the number of elements in the initializer determines the size of the array.
+* _manyTriangles_ is statically allocated with enough memory to hold 200 elements of the self-defined _Triangle_ type. However, these elements are not initialized. This can and should be done either in C or in the state machine. An example is given below.
+* _pArray_ is of size 10 and holds pointers to _int32_t_ values.
+
+As mentioned above, importing a header file containing array definitions into the statechart's definition section is sufficient to make the arrays available in a statechart. Example:
+
+bc. import: sample_arrays
+
+With this import, you can access the arrays in statechart language expressions, for example in a state's local reactions:
+
+bc. entry /
+coordinates[2] = 42
+
+Writing to array elements is as straightforward as you would expect. Examples:
+
+bc. coordinates[0] = coordinates[0] + 1;
+pArray[3] = n.pointer;
+pArray[4] = coordinates[0].pointer
+
+Passing arrays as parameters to C functions is straightforward. Let's say you have a C function _sort_ to sort the elements of a one-dimensional _int32_t_ array and return a pointer to the sorted array:
+
+bc. int32_t* sort(int32_t data[], int size) {…}
+
+Please note that in C a function cannot return an array as such, but only a pointer to it. Analogously you cannot pass an array as such as a parameter to a function, but only a pointer to that array. To express this in the function's parameter type, you could specify the _sort_ function equivalently as follows. The _data_ parameter is now specified as @int32_t* data@ instead of @int32_t data[]@, but the meaning is the same.
+
+bc. int32_t* sort(int32_t* data, int size) {…}
+
+Within the statechart, declare a corresponding operation:
+
+bc. operation rotateTriangle(triangle: pointer<Triangle>, center: pointer<Point>,  angle: float): pointer<Triangle>
+
+Provided the function is declared in an imported C header file, you can call it directly like this:
+
+bc. sort(coordinates, 6)
+
+bq.. *Please note:*
+
+The current YAKINDU Statecharts Tools release only supports statically allocated arrays. Arrays dynamically allocated using _malloc()_ or _calloc()_ will be supported in a later version.
 
 
 h2(#cdom_simulation). Simulation
@@ -440,10 +569,9 @@ State machines calling C functions as operations are debarred from simulation an
 
 h2(#cdom_macro-definitions). Macro Definitions
 
-Macro definitions declared in a C header file via the @#define@ keyword are also accessible in the statechart. There are two kinds of macro definitions leading to different interpretations in the context of state machines:
+Macro definitions declared in a C header file via the @#define@ keyword are also accessible in the statechart. There are two kinds of macro definitions, leading to different interpretations in the context of state machines:
 
-* Constant definitions, e.g. @#define PI 3.14@, are translated into _const_ properties. They can be used within a statechart just like normal variables, but are not changeable during a simulation. The value of such a constant is derived from the value part of the macro definition. However, there are cases where this derivation is not successful, e.g. when other macros are referenced.
-
+* Constant definitions, e.&nbsp;g. @#define PI 3.14@, are translated into _const_ properties. They can be used within a statechart just like normal variables, but are not changeable during a simulation. The value of such a constant is derived from the value part of the macro definition. However, there are cases where this derivation is not successful, e.&nbsp;g. when other macros are referenced.
 * Parameterized macros, like @#define MIN(x,y) ((x<y) ? x : y)@, are translated into operations. They can be used within a statechart just like normal operations, but are not interpreted during a simulation.
 
 
@@ -542,10 +670,6 @@ The _Deep C Integration_ natively supports the following primitive C types. That
 h2(#cdom_current-restrictions). Current restrictions
 
 The current beta version of the YAKINDU Statechart Tools is still missing some essential C functionalities that will be approached as soon as possible by subsequent releases. Among others, the following issues are known to be not available yet:
-
-h3(#cdom_arrays-and-pointers). Arrays and pointers
-
-Currently YAKINDU Statechart Tools cannot handle arrays and pointers. This also means that all structs containing arrays or pointer types as members, or operations using these types as parameters can not be accessed. Usage of these types will produce error markers in the statechart, stating "The used type is not supported".
 
 h3(#cdom_current-type-range-checks). Type range checks
 
