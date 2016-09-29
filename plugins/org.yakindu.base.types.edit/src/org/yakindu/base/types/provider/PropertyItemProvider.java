@@ -147,7 +147,10 @@ public class PropertyItemProvider
 		Property variable = (Property)object;
 		StringBuilder builder = new StringBuilder(variable.getName());
 		builder.append(" : ");
-		builder.append(variable.getType().getName());
+		if(variable.getType() != null)
+			builder.append(variable.getType().getName());
+		else
+			builder.append("unknown");
 		return builder.toString();
 	}
 
