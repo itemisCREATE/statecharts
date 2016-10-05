@@ -39,12 +39,14 @@ import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@Singleton
 public class SCTValidationJob extends Job implements IMarkerType {
 
 	@Inject
@@ -54,6 +56,7 @@ public class SCTValidationJob extends Job implements IMarkerType {
 
 	private Resource resource;
 
+	
 	/**
 	 * Wrappes the {@link IResourceValidator} validate within a
 	 * {@link RunnableWithResult} to execute within a read only transaction

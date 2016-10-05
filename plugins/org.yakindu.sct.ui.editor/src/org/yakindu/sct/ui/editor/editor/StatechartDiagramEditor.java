@@ -10,19 +10,13 @@
  */
 package org.yakindu.sct.ui.editor.editor;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.draw2d.ColorConstants;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.transaction.ResourceSetChangeEvent;
-import org.eclipse.emf.transaction.ResourceSetListener;
-import org.eclipse.emf.transaction.ResourceSetListenerImpl;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.KeyHandler;
 import org.eclipse.gef.KeyStroke;
@@ -58,15 +52,12 @@ import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.domain.extension.IDomain;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
-import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 import org.yakindu.sct.ui.editor.proposals.ContentProposalViewerKeyHandler;
 import org.yakindu.sct.ui.editor.providers.ISCTOutlineFactory;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
-import org.yakindu.sct.ui.editor.validation.SCTValidationJob;
 
 import com.google.inject.Injector;
 import com.google.inject.Key;
@@ -80,45 +71,11 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	private static final Font INVALID_DOMAIN_FONT = new Font(null, new FontData("Verdana", 10, SWT.BOLD));
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
-	private static final int DELAY = 200; // ms
 
 	private KeyHandler keyHandler;
 
-	private ResourceSetListener validationListener = new ResourceSetListenerImpl() {
-
-		@Override
-		public void resourceSetChanged(ResourceSetChangeEvent event) {
-			for (Notification notification : event.getNotifications()) {
-				if (notification.getNotifier() instanceof EObject
-						&& notification.getEventType() != Notification.REMOVING_ADAPTER
-						&& notification.getEventType() != Notification.RESOLVE) {
-					EObject eObject = (EObject) notification.getNotifier();
-					if (eObject.eClass().getEPackage() == SGraphPackage.eINSTANCE) {
-						validationJob.cancel();
-						if (liveValidationEnabled())
-							validationJob.schedule(DELAY);
-					} else
-						for (EClass eClass : eObject.eClass().getEAllSuperTypes()) {
-							if (SGraphPackage.eINSTANCE == eClass.getEPackage()) {
-								validationJob.cancel();
-								if (liveValidationEnabled())
-									validationJob.schedule(DELAY);
-								return;
-							}
-						}
-				}
-			}
-		}
-
-		protected boolean liveValidationEnabled() {
-			return DiagramActivator.getDefault().getPreferenceStore()
-					.getBoolean(StatechartPreferenceConstants.PREF_LIVE_VALIDATION);
-		}
-	};
-
 	private DirtyStateListener domainAdapter;
-
-	private SCTValidationJob validationJob;
+	private ResourceSetValidationListener validationListener;
 
 	public StatechartDiagramEditor() {
 		super(true);
@@ -185,18 +142,14 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
-		getEditingDomain().addResourceSetListener(validationListener);
 		checkXtextNature();
-		initValidationJob();
+		registerValidationListener();
 	}
 
-	private void initValidationJob() {
-		final IFile file = ((IFileEditorInput) getEditorInput()).getFile();
-		validationJob = new SCTValidationJob();
-		validationJob.setResource(getDiagram().eResource());
-		Injector injector = getEditorInjector();
-		injector.injectMembers(validationJob);
-		validationJob.setRule(file);
+	private void registerValidationListener() {
+		validationListener = getEditorInjector().getInstance(ResourceSetValidationListener.class);
+		validationListener.setResource(getDiagram().eResource());
+		getEditingDomain().addResourceSetListener(validationListener);
 	}
 
 	protected Injector getEditorInjector() {
@@ -329,8 +282,9 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	@Override
 	public void dispose() {
-		if (validationJob != null)
-			validationJob.cancel();
+		if (validationListener != null) {
+			validationListener.dispose();
+		}
 		getEditingDomain().removeResourceSetListener(validationListener);
 		getEditingDomain().removeResourceSetListener(domainAdapter);
 		if (domainAdapter != null)
