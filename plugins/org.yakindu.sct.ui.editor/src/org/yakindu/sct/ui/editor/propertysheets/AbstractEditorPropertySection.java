@@ -10,14 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.diagram.ui.properties.sections.AbstractModelerPropertySection;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.bindings.keys.KeyStroke;
@@ -34,9 +28,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -46,17 +38,15 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ImageHyperlink;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
-import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
 import org.yakindu.base.xtext.utils.jface.viewers.FilteringMenuManager;
 import org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapter;
 import org.yakindu.base.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter.IContextElementProvider;
+import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 
 import com.google.inject.Injector;
 
@@ -65,8 +55,8 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractEditorPropertySection extends AbstractModelerPropertySection implements
-		IContextElementProvider {
+public abstract class AbstractEditorPropertySection extends AbstractModelerPropertySection
+		implements IContextElementProvider {
 
 	public abstract void createControls(Composite parent);
 
@@ -148,23 +138,12 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 
 	protected Injector getInjector(String semanticTarget) {
 		IEditorPart editor = ActiveEditorTracker.getLastActiveEditor();
-		IEditorInput editorInput = editor.getEditorInput();
-		String domainId =BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
-		// Since the context object is not set when getInjector is called from
-		// createControls, we have to determine the active domain id via the
-		// current editor input.
-		if (editorInput instanceof IFileEditorInput) {
-			IFile file = ((IFileEditorInput) editorInput).getFile();
-			ResourceSet set = new ResourceSetImpl();
-			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-			Resource resource = set.getResource(uri, true);
-			Statechart statechart = (Statechart) EcoreUtil.getObjectByType(resource.getContents(),
-					SGraphPackage.Literals.STATECHART);
-			domainId = statechart.getDomainID();
-			resource.unload();
+		if (editor instanceof StatechartDiagramEditor) {
+			IDomain domain = DomainRegistry.getDomain(((StatechartDiagramEditor) editor).getDiagram().getElement());
+			return domain.getInjector(IDomain.FEATURE_EDITOR, semanticTarget);
 		}
-		IDomain domain = DomainRegistry.getDomain(domainId);
-		return domain.getInjector(IDomain.FEATURE_EDITOR, semanticTarget);
+		throw new IllegalArgumentException("Unknown editor " + editor);
+
 	}
 
 	public EObject getContextObject() {
