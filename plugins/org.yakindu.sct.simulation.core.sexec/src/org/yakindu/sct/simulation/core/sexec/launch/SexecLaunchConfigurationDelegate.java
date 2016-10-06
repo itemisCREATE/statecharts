@@ -63,6 +63,6 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 	}
 
 	protected Injector getInjector(Statechart statechart, ILaunch launch) {
-		return DomainRegistry.getDomain(statechart).getInjector(IDomain.FEATURE_SIMULATION);
+		return DomainRegistry.getDomain(statechart).getInjector(IDomain.FEATURE_SIMULATION, false);
 	}
 }

@@ -34,6 +34,13 @@ public interface IDomain {
 
 	/**
 	 * Injector instances are cached for the features and the specified options
+	 * 
+	 * @param useCache specifies whether to use cached instances or not
+	 */
+	Injector getInjector(String feature, boolean useCache, String... options);
+	
+	/**
+	 * Injector instances are cached for the features and the specified options
 	 */
 	Injector getInjector(String feature, String... options);
 
