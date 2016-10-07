@@ -19,6 +19,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.FloatLiteral;
 import org.yakindu.base.expressions.expressions.HexLiteral;
 import org.yakindu.base.expressions.expressions.IntLiteral;
+import org.yakindu.base.expressions.expressions.LeftShiftExpression;
 import org.yakindu.base.expressions.expressions.Literal;
 import org.yakindu.base.expressions.expressions.LogicalAndExpression;
 import org.yakindu.base.expressions.expressions.LogicalNotExpression;
@@ -30,7 +31,7 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression;
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
-import org.yakindu.base.expressions.expressions.ShiftExpression;
+import org.yakindu.base.expressions.expressions.RightShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 
@@ -52,7 +53,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated 
 	 */
 	protected static ExpressionsPackage modelPackage;
 
@@ -215,10 +216,17 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ExpressionsPackage.SHIFT_EXPRESSION: {
-				ShiftExpression shiftExpression = (ShiftExpression)theEObject;
-				T result = caseShiftExpression(shiftExpression);
-				if (result == null) result = caseExpression(shiftExpression);
+			case ExpressionsPackage.LEFT_SHIFT_EXPRESSION: {
+				LeftShiftExpression leftShiftExpression = (LeftShiftExpression)theEObject;
+				T result = caseLeftShiftExpression(leftShiftExpression);
+				if (result == null) result = caseExpression(leftShiftExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ExpressionsPackage.RIGHT_SHIFT_EXPRESSION: {
+				RightShiftExpression rightShiftExpression = (RightShiftExpression)theEObject;
+				T result = caseRightShiftExpression(rightShiftExpression);
+				if (result == null) result = caseExpression(rightShiftExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -553,17 +561,32 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Shift Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Left Shift Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Shift Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Left Shift Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseShiftExpression(ShiftExpression object) {
+	public T caseLeftShiftExpression(LeftShiftExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Right Shift Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Right Shift Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRightShiftExpression(RightShiftExpression object) {
 		return null;
 	}
 

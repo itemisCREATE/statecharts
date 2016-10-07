@@ -189,18 +189,12 @@ public class ExecutionFlowItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACTIONS);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__STATES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__NODES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__REGIONS);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__HISTORY_VECTOR);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__STATIC_INIT_SEQUENCE);
 		}
 		return childrenFeatures;
 	}
@@ -260,18 +254,12 @@ public class ExecutionFlowItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
-			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCES:
-			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
-			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
-			case SexecPackage.EXECUTION_FLOW__REACTIONS:
-			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__STATES:
 			case SexecPackage.EXECUTION_FLOW__NODES:
 			case SexecPackage.EXECUTION_FLOW__REGIONS:
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 			case SexecPackage.EXECUTION_FLOW__ENTRY_ACTION:
 			case SexecPackage.EXECUTION_FLOW__EXIT_ACTION:
-			case SexecPackage.EXECUTION_FLOW__STATIC_INIT_SEQUENCE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -293,31 +281,6 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR,
 				 SexecFactory.eINSTANCE.createStateVector()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_NODE__REACTIONS,
-				 SexecFactory.eINSTANCE.createReaction()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE,
-				 SexecFactory.eINSTANCE.createSequence()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -372,22 +335,12 @@ public class ExecutionFlowItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
 				 SexecFactory.eINSTANCE.createCheck()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
 				 SexecFactory.eINSTANCE.createCheckRef()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
-				 SexecFactory.eINSTANCE.createIf()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -472,22 +425,12 @@ public class ExecutionFlowItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
-				 SexecFactory.eINSTANCE.createSequence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createCheck()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createCheckRef()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
-				 SexecFactory.eINSTANCE.createIf()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -568,11 +511,6 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__STATIC_INIT_SEQUENCE,
-				 SexecFactory.eINSTANCE.createSequence()));
 	}
 
 	/**
@@ -589,15 +527,10 @@ public class ExecutionFlowItemProvider
 		boolean qualify =
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__HISTORY_VECTOR ||
-			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES ||
-			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE ||
-			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE ||
-			childFeature == SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE ||
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION ||
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION ||
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATIC_INIT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATES ||
-			childFeature == SexecPackage.Literals.EXECUTION_FLOW__NODES;
+			childFeature == SexecPackage.Literals.EXECUTION_FLOW__NODES ||
+			childFeature == SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION ||
+			childFeature == SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION;
 
 		if (qualify) {
 			return getString

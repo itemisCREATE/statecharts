@@ -56,6 +56,7 @@ public class FeatureCallItemProvider
 
 			addFeaturePropertyDescriptor(object);
 			addOperationCallPropertyDescriptor(object);
+			addArrayAccessPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -105,6 +106,28 @@ public class FeatureCallItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Array Access feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addArrayAccessPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FeatureCall_arrayAccess_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FeatureCall_arrayAccess_feature", "_UI_FeatureCall_type"),
+				 ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_ACCESS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -118,6 +141,7 @@ public class FeatureCallItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ExpressionsPackage.Literals.FEATURE_CALL__OWNER);
 			childrenFeatures.add(ExpressionsPackage.Literals.FEATURE_CALL__ARGS);
+			childrenFeatures.add(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR);
 		}
 		return childrenFeatures;
 	}
@@ -171,10 +195,12 @@ public class FeatureCallItemProvider
 
 		switch (notification.getFeatureID(FeatureCall.class)) {
 			case ExpressionsPackage.FEATURE_CALL__OPERATION_CALL:
+			case ExpressionsPackage.FEATURE_CALL__ARRAY_ACCESS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case ExpressionsPackage.FEATURE_CALL__OWNER:
 			case ExpressionsPackage.FEATURE_CALL__ARGS:
+			case ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -240,7 +266,12 @@ public class FeatureCallItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__OWNER,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -330,7 +361,12 @@ public class FeatureCallItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.FEATURE_CALL__ARGS,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARGS,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -371,6 +407,101 @@ public class FeatureCallItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.FEATURE_CALL__ARGS,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createConditionalExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR,
+				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
 	}
 
 	/**
@@ -386,7 +517,8 @@ public class FeatureCallItemProvider
 
 		boolean qualify =
 			childFeature == ExpressionsPackage.Literals.FEATURE_CALL__OWNER ||
-			childFeature == ExpressionsPackage.Literals.FEATURE_CALL__ARGS;
+			childFeature == ExpressionsPackage.Literals.FEATURE_CALL__ARGS ||
+			childFeature == ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR;
 
 		if (qualify) {
 			return getString

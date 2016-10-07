@@ -446,26 +446,49 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.ShiftExpression} instances.
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.LeftShiftExpression} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ShiftExpressionItemProvider shiftExpressionItemProvider;
+	protected LeftShiftExpressionItemProvider leftShiftExpressionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.ShiftExpression}.
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.LeftShiftExpression}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createShiftExpressionAdapter() {
-		if (shiftExpressionItemProvider == null) {
-			shiftExpressionItemProvider = new ShiftExpressionItemProvider(this);
+	public Adapter createLeftShiftExpressionAdapter() {
+		if (leftShiftExpressionItemProvider == null) {
+			leftShiftExpressionItemProvider = new LeftShiftExpressionItemProvider(this);
 		}
 
-		return shiftExpressionItemProvider;
+		return leftShiftExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.RightShiftExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RightShiftExpressionItemProvider rightShiftExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.RightShiftExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRightShiftExpressionAdapter() {
+		if (rightShiftExpressionItemProvider == null) {
+			rightShiftExpressionItemProvider = new RightShiftExpressionItemProvider(this);
+		}
+
+		return rightShiftExpressionItemProvider;
 	}
 
 	/**
@@ -767,7 +790,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 		if (bitwiseOrExpressionItemProvider != null) bitwiseOrExpressionItemProvider.dispose();
 		if (bitwiseAndExpressionItemProvider != null) bitwiseAndExpressionItemProvider.dispose();
 		if (logicalRelationExpressionItemProvider != null) logicalRelationExpressionItemProvider.dispose();
-		if (shiftExpressionItemProvider != null) shiftExpressionItemProvider.dispose();
+		if (leftShiftExpressionItemProvider != null) leftShiftExpressionItemProvider.dispose();
+		if (rightShiftExpressionItemProvider != null) rightShiftExpressionItemProvider.dispose();
 		if (numericalAddSubtractExpressionItemProvider != null) numericalAddSubtractExpressionItemProvider.dispose();
 		if (numericalMultiplyDivideExpressionItemProvider != null) numericalMultiplyDivideExpressionItemProvider.dispose();
 		if (numericalUnaryExpressionItemProvider != null) numericalUnaryExpressionItemProvider.dispose();

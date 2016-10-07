@@ -24,6 +24,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.FloatLiteral;
 import org.yakindu.base.expressions.expressions.HexLiteral;
 import org.yakindu.base.expressions.expressions.IntLiteral;
+import org.yakindu.base.expressions.expressions.LeftShiftExpression;
 import org.yakindu.base.expressions.expressions.LogicalAndExpression;
 import org.yakindu.base.expressions.expressions.LogicalNotExpression;
 import org.yakindu.base.expressions.expressions.LogicalOrExpression;
@@ -36,8 +37,7 @@ import org.yakindu.base.expressions.expressions.NumericalUnaryExpression;
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.base.expressions.expressions.RelationalOperator;
-import org.yakindu.base.expressions.expressions.ShiftExpression;
-import org.yakindu.base.expressions.expressions.ShiftOperator;
+import org.yakindu.base.expressions.expressions.RightShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
@@ -102,7 +102,8 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.BITWISE_OR_EXPRESSION: return createBitwiseOrExpression();
 			case ExpressionsPackage.BITWISE_AND_EXPRESSION: return createBitwiseAndExpression();
 			case ExpressionsPackage.LOGICAL_RELATION_EXPRESSION: return createLogicalRelationExpression();
-			case ExpressionsPackage.SHIFT_EXPRESSION: return createShiftExpression();
+			case ExpressionsPackage.LEFT_SHIFT_EXPRESSION: return createLeftShiftExpression();
+			case ExpressionsPackage.RIGHT_SHIFT_EXPRESSION: return createRightShiftExpression();
 			case ExpressionsPackage.NUMERICAL_ADD_SUBTRACT_EXPRESSION: return createNumericalAddSubtractExpression();
 			case ExpressionsPackage.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION: return createNumericalMultiplyDivideExpression();
 			case ExpressionsPackage.NUMERICAL_UNARY_EXPRESSION: return createNumericalUnaryExpression();
@@ -126,8 +127,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 		switch (eDataType.getClassifierID()) {
 			case ExpressionsPackage.ASSIGNMENT_OPERATOR:
 				return createAssignmentOperatorFromString(eDataType, initialValue);
-			case ExpressionsPackage.SHIFT_OPERATOR:
-				return createShiftOperatorFromString(eDataType, initialValue);
 			case ExpressionsPackage.ADDITIVE_OPERATOR:
 				return createAdditiveOperatorFromString(eDataType, initialValue);
 			case ExpressionsPackage.MULTIPLICATIVE_OPERATOR:
@@ -151,8 +150,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 		switch (eDataType.getClassifierID()) {
 			case ExpressionsPackage.ASSIGNMENT_OPERATOR:
 				return convertAssignmentOperatorToString(eDataType, instanceValue);
-			case ExpressionsPackage.SHIFT_OPERATOR:
-				return convertShiftOperatorToString(eDataType, instanceValue);
 			case ExpressionsPackage.ADDITIVE_OPERATOR:
 				return convertAdditiveOperatorToString(eDataType, instanceValue);
 			case ExpressionsPackage.MULTIPLICATIVE_OPERATOR:
@@ -331,9 +328,19 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ShiftExpression createShiftExpression() {
-		ShiftExpressionImpl shiftExpression = new ShiftExpressionImpl();
-		return shiftExpression;
+	public LeftShiftExpression createLeftShiftExpression() {
+		LeftShiftExpressionImpl leftShiftExpression = new LeftShiftExpressionImpl();
+		return leftShiftExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RightShiftExpression createRightShiftExpression() {
+		RightShiftExpressionImpl rightShiftExpression = new RightShiftExpressionImpl();
+		return rightShiftExpression;
 	}
 
 	/**
@@ -433,26 +440,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * @generated
 	 */
 	public String convertAssignmentOperatorToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ShiftOperator createShiftOperatorFromString(EDataType eDataType, String initialValue) {
-		ShiftOperator result = ShiftOperator.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertShiftOperatorToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

@@ -10,13 +10,13 @@
  */
 package org.yakindu.base.expressions.inferrer;
 
+import static org.yakindu.base.types.typesystem.ITypeSystem.ANY;
 import static org.yakindu.base.types.typesystem.ITypeSystem.BOOLEAN;
 import static org.yakindu.base.types.typesystem.ITypeSystem.INTEGER;
 import static org.yakindu.base.types.typesystem.ITypeSystem.NULL;
 import static org.yakindu.base.types.typesystem.ITypeSystem.REAL;
 import static org.yakindu.base.types.typesystem.ITypeSystem.STRING;
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
-import static org.yakindu.base.types.typesystem.ITypeSystem.ANY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +36,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.FloatLiteral;
 import org.yakindu.base.expressions.expressions.HexLiteral;
 import org.yakindu.base.expressions.expressions.IntLiteral;
+import org.yakindu.base.expressions.expressions.LeftShiftExpression;
 import org.yakindu.base.expressions.expressions.LogicalAndExpression;
 import org.yakindu.base.expressions.expressions.LogicalNotExpression;
 import org.yakindu.base.expressions.expressions.LogicalOrExpression;
@@ -46,7 +47,7 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression;
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
-import org.yakindu.base.expressions.expressions.ShiftExpression;
+import org.yakindu.base.expressions.expressions.RightShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
@@ -128,13 +129,23 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		return getResultFor(INTEGER);
 	}
 
-	public InferenceResult infer(ShiftExpression e) {
+	public InferenceResult infer(LeftShiftExpression e) {
 		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
 		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
 		assertIsSubType(result1, getResultFor(INTEGER),
-				String.format(BITWISE_OPERATORS, e.getOperator(), result1, result2));
+				String.format(BITWISE_OPERATORS, "<<", result1, result2));
 		assertIsSubType(result2, getResultFor(INTEGER),
-				String.format(BITWISE_OPERATORS, e.getOperator(), result1, result2));
+				String.format(BITWISE_OPERATORS, "<<", result1, result2));
+		return getResultFor(INTEGER);
+	}
+	
+	public InferenceResult infer(RightShiftExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
+		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
+		assertIsSubType(result1, getResultFor(INTEGER),
+				String.format(BITWISE_OPERATORS, ">>", result1, result2));
+		assertIsSubType(result2, getResultFor(INTEGER),
+				String.format(BITWISE_OPERATORS, ">>", result1, result2));
 		return getResultFor(INTEGER);
 	}
 

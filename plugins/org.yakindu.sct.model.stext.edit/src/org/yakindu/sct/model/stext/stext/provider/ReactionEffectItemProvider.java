@@ -213,7 +213,12 @@ public class ReactionEffectItemProvider extends EffectItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

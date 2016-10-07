@@ -36,10 +36,6 @@
     <eLiterals name="xorAssign" value="9" literal="^="/>
     <eLiterals name="orAssign" value="10" literal="|="/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="ShiftOperator">
-    <eLiterals name="left" literal="&lt;&lt;"/>
-    <eLiterals name="right" value="1" literal=">>"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AdditiveOperator">
     <eLiterals name="plus" literal="+"/>
     <eLiterals name="minus" value="1" literal="-"/>
@@ -118,10 +114,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ShiftExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="LeftShiftExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//ShiftOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RightShiftExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//Expression"
         containment="true"/>
   </eClassifiers>

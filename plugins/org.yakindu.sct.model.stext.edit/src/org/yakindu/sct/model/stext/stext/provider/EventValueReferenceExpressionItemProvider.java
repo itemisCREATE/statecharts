@@ -213,7 +213,12 @@ public class EventValueReferenceExpressionItemProvider extends ExpressionItemPro
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

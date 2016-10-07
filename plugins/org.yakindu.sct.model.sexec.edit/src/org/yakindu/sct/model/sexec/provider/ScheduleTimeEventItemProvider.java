@@ -213,7 +213,12 @@ public class ScheduleTimeEventItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

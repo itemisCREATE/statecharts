@@ -24,6 +24,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
+import org.yakindu.base.expressions.expressions.LeftShiftExpression
 import org.yakindu.base.expressions.expressions.Literal
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
@@ -35,10 +36,13 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
-import org.yakindu.base.expressions.expressions.ShiftExpression
+import org.yakindu.base.expressions.expressions.RightShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
+import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
+import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
@@ -49,8 +53,6 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.types.Operation
-import org.yakindu.base.types.Enumerator
 
 class ExpressionCode {
 
@@ -84,7 +86,7 @@ class ExpressionCode {
 	def dispatch CharSequence code(ElementReferenceExpression it, Operation target) '''«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 
-	def dispatch CharSequence code(ElementReferenceExpression it, org.yakindu.base.types.Property target) '''«target.access»'''
+	def dispatch CharSequence code(ElementReferenceExpression it, Property target) '''«target.access»'''
 
 	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : args BEFORE ', ' SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
@@ -92,7 +94,7 @@ class ExpressionCode {
 	def dispatch CharSequence code(FeatureCall it, Operation target) '''«it.owner.code».«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 
-	def dispatch CharSequence code(FeatureCall it, org.yakindu.base.types.Property target) '''«it.owner.code».«target.access»'''
+	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code».«target.access»'''
 	
 	def dispatch CharSequence code(FeatureCall it, Enumerator target) '''«target.access»'''
 
@@ -149,7 +151,9 @@ class ExpressionCode {
 
 	def dispatch CharSequence code(BitwiseXorExpression it) '''«leftOperand.code» ^ «rightOperand.code»'''
 
-	def dispatch CharSequence code(ShiftExpression it) '''«leftOperand.code» «operator.literal» «rightOperand.code»'''
+	def dispatch CharSequence code(LeftShiftExpression it) '''«leftOperand.code» << «rightOperand.code»'''
+	
+	def dispatch CharSequence code(RightShiftExpression it) '''«leftOperand.code» >> «rightOperand.code»'''
 
 	/* Numerical operations */
 	def dispatch CharSequence code(NumericalAddSubtractExpression it) '''«leftOperand.code» «operator.literal» «rightOperand.

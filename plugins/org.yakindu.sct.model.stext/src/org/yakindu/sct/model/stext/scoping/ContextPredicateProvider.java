@@ -24,7 +24,8 @@ import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Litera
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.NUMERICAL_ADD_SUBTRACT_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION;
-import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.SHIFT_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LEFT_SHIFT_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.RIGHT_SHIFT_EXPRESSION;
 import static org.yakindu.base.types.TypesPackage.Literals.TYPE_SPECIFIER__TYPE;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE;
@@ -167,7 +168,8 @@ public class ContextPredicateProvider {
 		filter.put(key(BITWISE_XOR_EXPRESSION), VARIABLES);
 		filter.put(key(BITWISE_OR_EXPRESSION), VARIABLES);
 		filter.put(key(BITWISE_AND_EXPRESSION), VARIABLES);
-		filter.put(key(SHIFT_EXPRESSION), VARIABLES);
+		filter.put(key(LEFT_SHIFT_EXPRESSION), VARIABLES);
+		filter.put(key(RIGHT_SHIFT_EXPRESSION), VARIABLES);
 		filter.put(key(LOGICAL_RELATION_EXPRESSION), VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
 		filter.put(key(NUMERICAL_ADD_SUBTRACT_EXPRESSION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION), VARIABLES_AND_OPERATIONS);

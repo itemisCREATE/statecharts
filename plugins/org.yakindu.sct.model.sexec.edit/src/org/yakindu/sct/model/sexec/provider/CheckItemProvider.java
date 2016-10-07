@@ -213,7 +213,12 @@ public class CheckItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.CHECK__CONDITION,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.CHECK__CONDITION,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -20,6 +20,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.FloatLiteral;
 import org.yakindu.base.expressions.expressions.HexLiteral;
 import org.yakindu.base.expressions.expressions.IntLiteral;
+import org.yakindu.base.expressions.expressions.LeftShiftExpression;
 import org.yakindu.base.expressions.expressions.Literal;
 import org.yakindu.base.expressions.expressions.LogicalAndExpression;
 import org.yakindu.base.expressions.expressions.LogicalNotExpression;
@@ -31,7 +32,7 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression;
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
-import org.yakindu.base.expressions.expressions.ShiftExpression;
+import org.yakindu.base.expressions.expressions.RightShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 
@@ -164,8 +165,12 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createLogicalRelationExpressionAdapter();
 			}
 			@Override
-			public Adapter caseShiftExpression(ShiftExpression object) {
-				return createShiftExpressionAdapter();
+			public Adapter caseLeftShiftExpression(LeftShiftExpression object) {
+				return createLeftShiftExpressionAdapter();
+			}
+			@Override
+			public Adapter caseRightShiftExpression(RightShiftExpression object) {
+				return createRightShiftExpressionAdapter();
 			}
 			@Override
 			public Adapter caseNumericalAddSubtractExpression(NumericalAddSubtractExpression object) {
@@ -472,16 +477,30 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.ShiftExpression <em>Shift Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.LeftShiftExpression <em>Left Shift Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.base.expressions.expressions.ShiftExpression
+	 * @see org.yakindu.base.expressions.expressions.LeftShiftExpression
 	 * @generated
 	 */
-	public Adapter createShiftExpressionAdapter() {
+	public Adapter createLeftShiftExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.RightShiftExpression <em>Right Shift Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.expressions.expressions.RightShiftExpression
+	 * @generated
+	 */
+	public Adapter createRightShiftExpressionAdapter() {
 		return null;
 	}
 

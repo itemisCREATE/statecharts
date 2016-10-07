@@ -25,6 +25,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.FloatLiteral;
 import org.yakindu.base.expressions.expressions.HexLiteral;
 import org.yakindu.base.expressions.expressions.IntLiteral;
+import org.yakindu.base.expressions.expressions.LeftShiftExpression;
 import org.yakindu.base.expressions.expressions.Literal;
 import org.yakindu.base.expressions.expressions.LogicalAndExpression;
 import org.yakindu.base.expressions.expressions.LogicalNotExpression;
@@ -38,8 +39,7 @@ import org.yakindu.base.expressions.expressions.NumericalUnaryExpression;
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.base.expressions.expressions.RelationalOperator;
-import org.yakindu.base.expressions.expressions.ShiftExpression;
-import org.yakindu.base.expressions.expressions.ShiftOperator;
+import org.yakindu.base.expressions.expressions.RightShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
@@ -183,7 +183,14 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass shiftExpressionEClass = null;
+	private EClass leftShiftExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass rightShiftExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -247,13 +254,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EEnum assignmentOperatorEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum shiftOperatorEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -748,8 +748,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getShiftExpression() {
-		return shiftExpressionEClass;
+	public EClass getLeftShiftExpression() {
+		return leftShiftExpressionEClass;
 	}
 
 	/**
@@ -757,8 +757,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getShiftExpression_LeftOperand() {
-		return (EReference)shiftExpressionEClass.getEStructuralFeatures().get(0);
+	public EReference getLeftShiftExpression_LeftOperand() {
+		return (EReference)leftShiftExpressionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -766,8 +766,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getShiftExpression_Operator() {
-		return (EAttribute)shiftExpressionEClass.getEStructuralFeatures().get(1);
+	public EReference getLeftShiftExpression_RightOperand() {
+		return (EReference)leftShiftExpressionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -775,8 +775,26 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getShiftExpression_RightOperand() {
-		return (EReference)shiftExpressionEClass.getEStructuralFeatures().get(2);
+	public EClass getRightShiftExpression() {
+		return rightShiftExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRightShiftExpression_LeftOperand() {
+		return (EReference)rightShiftExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRightShiftExpression_RightOperand() {
+		return (EReference)rightShiftExpressionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1072,15 +1090,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getShiftOperator() {
-		return shiftOperatorEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getAdditiveOperator() {
 		return additiveOperatorEEnum;
 	}
@@ -1202,10 +1211,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEAttribute(logicalRelationExpressionEClass, LOGICAL_RELATION_EXPRESSION__OPERATOR);
 		createEReference(logicalRelationExpressionEClass, LOGICAL_RELATION_EXPRESSION__RIGHT_OPERAND);
 
-		shiftExpressionEClass = createEClass(SHIFT_EXPRESSION);
-		createEReference(shiftExpressionEClass, SHIFT_EXPRESSION__LEFT_OPERAND);
-		createEAttribute(shiftExpressionEClass, SHIFT_EXPRESSION__OPERATOR);
-		createEReference(shiftExpressionEClass, SHIFT_EXPRESSION__RIGHT_OPERAND);
+		leftShiftExpressionEClass = createEClass(LEFT_SHIFT_EXPRESSION);
+		createEReference(leftShiftExpressionEClass, LEFT_SHIFT_EXPRESSION__LEFT_OPERAND);
+		createEReference(leftShiftExpressionEClass, LEFT_SHIFT_EXPRESSION__RIGHT_OPERAND);
+
+		rightShiftExpressionEClass = createEClass(RIGHT_SHIFT_EXPRESSION);
+		createEReference(rightShiftExpressionEClass, RIGHT_SHIFT_EXPRESSION__LEFT_OPERAND);
+		createEReference(rightShiftExpressionEClass, RIGHT_SHIFT_EXPRESSION__RIGHT_OPERAND);
 
 		numericalAddSubtractExpressionEClass = createEClass(NUMERICAL_ADD_SUBTRACT_EXPRESSION);
 		createEReference(numericalAddSubtractExpressionEClass, NUMERICAL_ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND);
@@ -1248,7 +1260,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		// Create enums
 		assignmentOperatorEEnum = createEEnum(ASSIGNMENT_OPERATOR);
-		shiftOperatorEEnum = createEEnum(SHIFT_OPERATOR);
 		additiveOperatorEEnum = createEEnum(ADDITIVE_OPERATOR);
 		multiplicativeOperatorEEnum = createEEnum(MULTIPLICATIVE_OPERATOR);
 		unaryOperatorEEnum = createEEnum(UNARY_OPERATOR);
@@ -1302,7 +1313,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		bitwiseOrExpressionEClass.getESuperTypes().add(this.getExpression());
 		bitwiseAndExpressionEClass.getESuperTypes().add(this.getExpression());
 		logicalRelationExpressionEClass.getESuperTypes().add(this.getExpression());
-		shiftExpressionEClass.getESuperTypes().add(this.getExpression());
+		leftShiftExpressionEClass.getESuperTypes().add(this.getExpression());
+		rightShiftExpressionEClass.getESuperTypes().add(this.getExpression());
 		numericalAddSubtractExpressionEClass.getESuperTypes().add(this.getExpression());
 		numericalMultiplyDivideExpressionEClass.getESuperTypes().add(this.getExpression());
 		numericalUnaryExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -1375,10 +1387,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEAttribute(getLogicalRelationExpression_Operator(), this.getRelationalOperator(), "operator", null, 0, 1, LogicalRelationExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLogicalRelationExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, LogicalRelationExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(shiftExpressionEClass, ShiftExpression.class, "ShiftExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getShiftExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, ShiftExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getShiftExpression_Operator(), this.getShiftOperator(), "operator", null, 0, 1, ShiftExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getShiftExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, ShiftExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(leftShiftExpressionEClass, LeftShiftExpression.class, "LeftShiftExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLeftShiftExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, LeftShiftExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLeftShiftExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, LeftShiftExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(rightShiftExpressionEClass, RightShiftExpression.class, "RightShiftExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRightShiftExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, RightShiftExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRightShiftExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, RightShiftExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(numericalAddSubtractExpressionEClass, NumericalAddSubtractExpression.class, "NumericalAddSubtractExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNumericalAddSubtractExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, NumericalAddSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1432,10 +1447,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		addEEnumLiteral(assignmentOperatorEEnum, AssignmentOperator.AND_ASSIGN);
 		addEEnumLiteral(assignmentOperatorEEnum, AssignmentOperator.XOR_ASSIGN);
 		addEEnumLiteral(assignmentOperatorEEnum, AssignmentOperator.OR_ASSIGN);
-
-		initEEnum(shiftOperatorEEnum, ShiftOperator.class, "ShiftOperator");
-		addEEnumLiteral(shiftOperatorEEnum, ShiftOperator.LEFT);
-		addEEnumLiteral(shiftOperatorEEnum, ShiftOperator.RIGHT);
 
 		initEEnum(additiveOperatorEEnum, AdditiveOperator.class, "AdditiveOperator");
 		addEEnumLiteral(additiveOperatorEEnum, AdditiveOperator.PLUS);

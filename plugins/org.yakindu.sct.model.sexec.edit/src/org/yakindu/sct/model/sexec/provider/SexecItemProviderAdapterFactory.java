@@ -262,29 +262,6 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.Reaction} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ReactionItemProvider reactionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.Reaction}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createReactionAdapter() {
-		if (reactionItemProvider == null) {
-			reactionItemProvider = new ReactionItemProvider(this);
-		}
-
-		return reactionItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.MappedElement} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -328,52 +305,6 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		}
 
 		return checkItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.Sequence} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SequenceItemProvider sequenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.Sequence}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSequenceAdapter() {
-		if (sequenceItemProvider == null) {
-			sequenceItemProvider = new SequenceItemProvider(this);
-		}
-
-		return sequenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.If} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected IfItemProvider ifItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.If}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createIfAdapter() {
-		if (ifItemProvider == null) {
-			ifItemProvider = new IfItemProvider(this);
-		}
-
-		return ifItemProvider;
 	}
 
 	/**
@@ -968,13 +899,10 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (executionExitItemProvider != null) executionExitItemProvider.dispose();
 		if (executionChoiceItemProvider != null) executionChoiceItemProvider.dispose();
 		if (executionSynchronizationItemProvider != null) executionSynchronizationItemProvider.dispose();
-		if (reactionItemProvider != null) reactionItemProvider.dispose();
 		if (stateVectorItemProvider != null) stateVectorItemProvider.dispose();
 		if (timeEventItemProvider != null) timeEventItemProvider.dispose();
-		if (sequenceItemProvider != null) sequenceItemProvider.dispose();
 		if (checkItemProvider != null) checkItemProvider.dispose();
 		if (checkRefItemProvider != null) checkRefItemProvider.dispose();
-		if (ifItemProvider != null) ifItemProvider.dispose();
 		if (executionItemProvider != null) executionItemProvider.dispose();
 		if (enterStateItemProvider != null) enterStateItemProvider.dispose();
 		if (exitStateItemProvider != null) exitStateItemProvider.dispose();

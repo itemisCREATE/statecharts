@@ -215,7 +215,12 @@ public class EventRaisingExpressionItemProvider extends ExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -320,7 +325,12 @@ public class EventRaisingExpressionItemProvider extends ExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

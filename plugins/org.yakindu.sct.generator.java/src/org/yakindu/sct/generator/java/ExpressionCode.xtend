@@ -6,8 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
  * committers of YAKINDU - initial API and implementation
- *
-*/
+ * 
+ */
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
@@ -28,6 +28,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
+import org.yakindu.base.expressions.expressions.LeftShiftExpression
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
@@ -40,7 +41,7 @@ import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
-import org.yakindu.base.expressions.expressions.ShiftExpression
+import org.yakindu.base.expressions.expressions.RightShiftExpression
 import org.yakindu.base.expressions.expressions.ShiftOperator
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
@@ -203,8 +204,12 @@ class ExpressionCode {
 		expression.leftOperand.code + " ^ " + expression.rightOperand.code
 	}
 
-	def dispatch String code(ShiftExpression expression) {
-		expression.leftOperand.code + expression.operator.code + expression.rightOperand.code
+	def dispatch String code(LeftShiftExpression expression) {
+		expression.leftOperand.code + " << " + expression.rightOperand.code
+	}
+
+	def dispatch String code(RightShiftExpression expression) {
+		expression.leftOperand.code + " >> " + expression.rightOperand.code
 	}
 
 	def dispatch String code(NumericalAddSubtractExpression expression) {
@@ -260,9 +265,8 @@ class ExpressionCode {
 	}
 
 	def dispatch String code(ElementReferenceExpression it) {
-		if (it.reference instanceof OperationDefinition)
-			'''«reference.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)'''
-		else {
+		if (it.
+			reference instanceof OperationDefinition) '''«reference.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)''' else {
 			val myDef = definition
 			if (myDef instanceof Property && isAssignmentContained) {
 				'''«myDef.getContext(false) + myDef.identifier»'''
@@ -272,15 +276,15 @@ class ExpressionCode {
 				'''«definition.code»'''
 			}
 		}
-	} 
-		
+	}
+
 	def dispatch String code(FeatureCall it) {
 		if (feature instanceof Operation) {
 			return '''«feature.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)'''
 		} else {
-			return '''«definition.getContext(false) + definition.name.asEscapedIdentifier»''' 
+			return '''«definition.getContext(false) + definition.name.asEscapedIdentifier»'''
 		}
-	} 
+	}
 
 	def dispatch String code(Declaration it) {
 		getContext(false) + identifier

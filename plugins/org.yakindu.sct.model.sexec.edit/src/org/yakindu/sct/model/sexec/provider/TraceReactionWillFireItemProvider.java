@@ -50,31 +50,8 @@ public class TraceReactionWillFireItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addReactionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Reaction feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addReactionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TraceReactionWillFire_reaction_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TraceReactionWillFire_reaction_feature", "_UI_TraceReactionWillFire_type"),
-				 SexecPackage.Literals.TRACE_REACTION_WILL_FIRE__REACTION,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**

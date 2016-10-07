@@ -225,7 +225,12 @@ public class GuardItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.GUARD__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+				 ExpressionsFactory.eINSTANCE.createLeftShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.GUARD__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createRightShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -21,6 +21,7 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.yakindu.base.types.provider.EventItemProvider;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.TimeEvent;
 
@@ -31,7 +32,7 @@ import org.yakindu.sct.model.sexec.TimeEvent;
  * @generated
  */
 public class TimeEventItemProvider
-	extends org.yakindu.base.types.provider.EventItemProvider {
+	extends EventItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
