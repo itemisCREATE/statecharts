@@ -135,14 +135,20 @@ public class DomainImpl implements IDomain {
 	}
 
 	@Override
-	public Injector getInjector(String feature, String... options) {
-		try {
-			Injector result = injectorCache.get(new CacheKey(feature, options));
-			return result;
-		} catch (ExecutionException e) {
-			e.printStackTrace();
+	public Injector getInjector(String feature, boolean useCache, String... options) {
+		if (useCache) {
+			try {
+				return injectorCache.get(new CacheKey(feature, options));
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			}
 		}
-		return Guice.createInjector();
+		return createInjector(feature, options);
+	}
+	
+	@Override
+	public Injector getInjector(String feature, String... options) {
+		return getInjector(feature, true, options);
 	}
 
 	public Injector createInjector(String feature, String... options) {
