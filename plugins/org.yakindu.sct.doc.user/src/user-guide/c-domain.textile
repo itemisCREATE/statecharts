@@ -98,7 +98,7 @@ On the right-hand side of the colon in the variable declaration, the variable's 
 * the C basic standard types,
 * the C99 types provided by including _stdint.h_,
 * the self-defined _Point_ type,
-* the qualifiers _array_ and _pointer_.
+* the qualifier _pointer_.
 
 !(standard-image)images/cdom_geometry_040_c_types_010.png(Using the content assist to display available types)!
 
@@ -279,7 +279,7 @@ The declarations above declare
 
 bq.. *Please note:*
 
-When closing the type specification in a pointer declaration with angle brackets, e.&nbsp;g. @pointer<pointer<int32_t> >@, the @>@ characters must be separated from each other by one or more white space characters. Writing e.&nbsp;g. @pointer<pointer<int32_t>>@ would result in an error.
+When closing the type specification in a pointer declaration with angle brackets, e.&nbsp;g. @pointer<pointer<int32_t> >@, the @>@ characters must be separated from each other by one or more white space characters. Writing e.&nbsp;g. @pointer<pointer<int32_t>>@ would result in an error. This restrictions pertains to the current beta release of YAKINDU Statechart Tools PRO only and will be fixed in the final release.
 
 
 h3(#cdom_using-pointer-variables). Using pointer variables
@@ -370,10 +370,6 @@ bc. int32_t* sort(int32_t data[], int size) {…}
 Please note that in C a function cannot return an array as such, but only a pointer to it. Analogously you cannot pass an array as such as a parameter to a function, but only a pointer to that array. To express this in the function's parameter type, you could specify the _sort_ function equivalently as follows. The _data_ parameter is now specified as @int32_t* data@ instead of @int32_t data[]@, but the meaning is the same.
 
 bc. int32_t* sort(int32_t* data, int size) {…}
-
-Within the statechart, declare a corresponding operation:
-
-bc. operation rotateTriangle(triangle: pointer<Triangle>, center: pointer<Point>,  angle: float): pointer<Triangle>
 
 Provided the function is declared in an imported C header file, you can call it directly like this:
 
