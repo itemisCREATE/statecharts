@@ -86,14 +86,14 @@ PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
 
 FeatureCall returns Expression:
-	ElementReferenceExpression ({FeatureCall.owner=current} '.' feature=[ecore::EObject]
+	ElementReferenceExpression ({FeatureCall.owner=current} '.' feature=[types::Declaration|ID]
 	(=> operationCall?= '('(args+=Expression (',' args+=Expression)*)?')'
 		|
 	=> (arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')* 
 	)?)*;
 
 ElementReferenceExpression returns Expression:
-	{ElementReferenceExpression} reference=[ecore::EObject|ID]
+	{ElementReferenceExpression} reference=[types::Declaration|ID]
 	(=> operationCall?='('	(args+=Expression (',' args+=Expression)*)?	')' 
 		|
 	=> (arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')*
