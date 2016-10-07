@@ -131,7 +131,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Inject
 	private ContextPredicateProvider contextPredicateProvider;
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkContextElement(ElementReferenceExpression expression) {
 		Predicate<IEObjectDescription> predicate = contextPredicateProvider.calculateFilterPredicate(expression,
 				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
@@ -144,24 +144,24 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkExpression(VariableDefinition expression) {
 		if (expression.getType() == null || expression.getType().eIsProxy())
 			return;
 		typeInferrer.infer(expression, this);
 	}
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkExpression(TimeEventSpec expression) {
 		typeInferrer.infer(expression, this);
 	}
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkExpression(Guard expression) {
 		typeInferrer.infer(expression, this);
 	}
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkNoAssignmentInGuard(Guard guard) {
 		TreeIterator<EObject> eAllContents = guard.eAllContents();
 		while (eAllContents.hasNext()) {
@@ -342,7 +342,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	}
 
-	@Check(CheckType.FAST)
+	@Check(CheckType.NORMAL)
 	public void checkValueReferenedBeforeDefined(Scope scope) {
 		EList<Declaration> declarations = scope.getDeclarations();
 		Set<QualifiedName> defined = Sets.newHashSet();
@@ -376,7 +376,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-	@Check(CheckType.FAST)
+	@Check(CheckType.NORMAL)
 	public void checkUnusedExit(final Exit exit) {
 		if (exit.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State
 				&& exit.getOutgoingTransitions().isEmpty()) {
@@ -459,7 +459,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-	@Check(CheckType.FAST)
+	@Check(CheckType.NORMAL)
 	public void checkUnboundEntryPoints(final org.yakindu.sct.model.sgraph.State state) {
 		if (state.isComposite()) {
 			final List<Transition>[] transitions = STextValidationModelUtils
@@ -513,7 +513,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-	@Check(CheckType.FAST)
+	@Check(CheckType.NORMAL)
 	public void checkTopLeveEntryIsDefaultEntry(final Entry entry) {
 		Region parentRegion = entry.getParentRegion();
 		EObject eContainer = parentRegion.eContainer();
@@ -582,18 +582,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-	private String getVariableName(AssignmentExpression exp) {
-		Expression varRef = exp.getVarRef();
-		if (varRef instanceof ElementReferenceExpression
-				&& ((ElementReferenceExpression) varRef).getReference() instanceof Property) {
-			Property reference = (Property) ((ElementReferenceExpression) varRef).getReference();
-			return reference.getName();
-		} else if (varRef instanceof FeatureCall && ((FeatureCall) varRef).getFeature() instanceof Property) {
-			Property reference = (Property) ((FeatureCall) varRef).getFeature();
-			return reference.getName();
-		}
-		return null;
-	}
 
 	@Check(CheckType.FAST)
 	public void checkFeatureCall(FeatureCall call) {
@@ -673,26 +661,19 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-	protected void checkElementReferenceEffect(ElementReferenceExpression refExp) {
-		if (!(refExp.getReference() instanceof Operation)) {
-			if (refExp.getReference() instanceof Property) {
-				error("Access to property '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-						+ "' has no effect.", refExp,
-						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-						FEATURE_CALL_HAS_NO_EFFECT);
-			} else if (refExp.getReference() instanceof Event) {
-				error("Access to event '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-						+ "' has no effect.", refExp,
-						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-						FEATURE_CALL_HAS_NO_EFFECT);
-			} else {
-				error("Access to feature '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-						+ "' has no effect.", refExp,
-						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-						FEATURE_CALL_HAS_NO_EFFECT);
-			}
+	private String getVariableName(AssignmentExpression exp) {
+		Expression varRef = exp.getVarRef();
+		if (varRef instanceof ElementReferenceExpression
+				&& ((ElementReferenceExpression) varRef).getReference() instanceof Property) {
+			Property reference = (Property) ((ElementReferenceExpression) varRef).getReference();
+			return reference.getName();
+		} else if (varRef instanceof FeatureCall && ((FeatureCall) varRef).getFeature() instanceof Property) {
+			Property reference = (Property) ((FeatureCall) varRef).getFeature();
+			return reference.getName();
 		}
+		return null;
 	}
+	
 
 	@Check(CheckType.FAST)
 	public void checkEventDefinition(EventDefinition event) {
@@ -729,7 +710,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkChoiceWithoutDefaultTransition(final Choice choice) {
 		boolean found = false;
 		for (Transition transition : choice.getOutgoingTransitions()) {
@@ -742,8 +723,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			warning(CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
 	}
 
-	// TODO Extract TypesValidator
-	@Check
+	@Check(CheckType.FAST)
 	public void checkAnnotationTarget(final AnnotatableElement element) {
 		EList<Annotation> annotations = element.getAnnotations();
 		for (Annotation annotation : annotations) {
@@ -761,9 +741,38 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	public void checkImportExists(Import importDef) {
+		String namespace = importDef.getImportedNamespace();
+		if (resolver.getPackageForNamespace(getResource(importDef), namespace) == null) {
+			error("The import " + namespace + " cannot be resolved.", importDef,
+					StextPackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORT_NOT_RESOLVED);
+		}
+	}
+
+	protected void checkElementReferenceEffect(ElementReferenceExpression refExp) {
+		if (!(refExp.getReference() instanceof Operation)) {
+			if (refExp.getReference() instanceof Property) {
+				error("Access to property '" + nameProvider.getFullyQualifiedName(refExp.getReference())
+				+ "' has no effect.", refExp,
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+				FEATURE_CALL_HAS_NO_EFFECT);
+			} else if (refExp.getReference() instanceof Event) {
+				error("Access to event '" + nameProvider.getFullyQualifiedName(refExp.getReference())
+				+ "' has no effect.", refExp,
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+				FEATURE_CALL_HAS_NO_EFFECT);
+			} else {
+				error("Access to feature '" + nameProvider.getFullyQualifiedName(refExp.getReference())
+				+ "' has no effect.", refExp,
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+				FEATURE_CALL_HAS_NO_EFFECT);
+			}
+		}
+	}
 
 	protected boolean isDefault(Trigger trigger) {
-
 		return trigger == null || trigger instanceof DefaultTrigger
 				|| ((trigger instanceof ReactionTrigger) && ((ReactionTrigger) trigger).getTriggers().size() == 0
 						&& ((ReactionTrigger) trigger).getGuard() == null);
@@ -831,15 +840,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		List<EPackage> result = super.getEPackages();
 		result.add(ExpressionsPackage.eINSTANCE);
 		return result;
-	}
-
-	@Check(CheckType.FAST)
-	public void checkImportExists(Import importDef) {
-		String namespace = importDef.getImportedNamespace();
-		if (resolver.getPackageForNamespace(getResource(importDef), namespace) == null) {
-			error("The import " + namespace + " cannot be resolved.", importDef,
-					StextPackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORT_NOT_RESOLVED);
-		}
 	}
 
 	protected Resource getResource(EObject context) {
