@@ -58,6 +58,8 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 				} else {
 					cell.setText(value.toString());
 				}
+			} else {
+				cell.setText("");
 			}
 		}
 	}
