@@ -20,13 +20,13 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.model.stext.expressions.STextExpressionParser.LinkingException;
-import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
+import org.yakindu.sct.model.stext.validation.ContextPredicateProvider;
 
 /**
  * @author andreas muelder - Initial contribution and API
