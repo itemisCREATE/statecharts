@@ -18,10 +18,10 @@ package org.yakindu.sct.simulation.core.sruntime;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ReferenceSlot#getReference <em>Reference</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getReferenceSlot()
  * @model
@@ -37,12 +37,12 @@ public interface ReferenceSlot extends CompositeSlot {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reference</em>' reference.
-	 * @see #setReference(CompositeSlot)
+	 * @see #setReference(ExecutionSlot)
 	 * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getReferenceSlot_Reference()
 	 * @model
 	 * @generated
 	 */
-	CompositeSlot getReference();
+	ExecutionSlot getReference();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.simulation.core.sruntime.ReferenceSlot#getReference <em>Reference</em>}' reference.
@@ -52,6 +52,6 @@ public interface ReferenceSlot extends CompositeSlot {
 	 * @see #getReference()
 	 * @generated
 	 */
-	void setReference(CompositeSlot value);
+	void setReference(ExecutionSlot value);
 
 } // ReferenceSlot

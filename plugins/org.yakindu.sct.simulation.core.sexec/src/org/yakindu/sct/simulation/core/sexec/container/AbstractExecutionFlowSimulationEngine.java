@@ -64,6 +64,7 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 		try {
 			interpreter.runCycle();
 		} catch (Exception e) {
+			e.printStackTrace();
 			handleException(e);
 		}
 	}

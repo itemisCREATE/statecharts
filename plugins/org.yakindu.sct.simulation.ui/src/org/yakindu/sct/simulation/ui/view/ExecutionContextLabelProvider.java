@@ -19,6 +19,7 @@ import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
+import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot;
 import org.yakindu.sct.simulation.ui.SimulationImages;
 
 /**
@@ -48,7 +49,16 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 
 	private void updateValueCell(ViewerCell cell) {
 		Object element = cell.getElement();
-		if (element instanceof ExecutionSlot) {
+		if (element instanceof ReferenceSlot) {
+			ReferenceSlot refSlot = (ReferenceSlot) element;
+			String label = "";
+			if (refSlot.getReference() != null) {
+				String refFqn = refSlot.getReference().getFqName();
+				Object refValue = refSlot.getReference().getValue();
+				label = refValue != null ? refFqn + " = " + refValue : refFqn;
+			}
+			cell.setText(label);
+		} else if (element instanceof ExecutionSlot) {
 			Object value = ((ExecutionSlot) element).getValue();
 			if (value != null) {
 				if (((ExecutionSlot) element).getType().getOriginType() instanceof EnumerationType) {
