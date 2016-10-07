@@ -33,6 +33,8 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.EObjectDescription;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
@@ -54,7 +56,6 @@ import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypesPackage;
-import org.yakindu.base.types.annotations.TypeAnnotations;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.Choice;
@@ -127,6 +128,21 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Inject(optional = true)
 	@Named(DomainRegistry.DOMAIN_ID)
 	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
+	@Inject
+	private ContextPredicateProvider contextPredicateProvider;
+
+	@Check
+	public void checkContextElement(ElementReferenceExpression expression) {
+		Predicate<IEObjectDescription> predicate = contextPredicateProvider.calculateFilterPredicate(expression,
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
+
+		IEObjectDescription desc = EObjectDescription
+				.create(nameProvider.getFullyQualifiedName(expression.getReference()), expression.getReference());
+		if (!predicate.apply(desc)) {
+			error("Element of type " + expression.getReference().eClass().getName()
+					+ " is not allowed in this context.", null);
+		}
+	}
 
 	@Check
 	public void checkExpression(VariableDefinition expression) {
@@ -144,27 +160,27 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkExpression(Guard expression) {
 		typeInferrer.infer(expression, this);
 	}
-	
+
 	@Check
 	public void checkNoAssignmentInGuard(Guard guard) {
 		TreeIterator<EObject> eAllContents = guard.eAllContents();
-		while(eAllContents.hasNext()) {
+		while (eAllContents.hasNext()) {
 			EObject e = eAllContents.next();
-			if(e instanceof AssignmentExpression) {
+			if (e instanceof AssignmentExpression) {
 				error(GUARD_CONTAINS_ASSIGNMENT, guard, null);
 			}
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void transitionsWithNoTrigger(Transition trans) {
 
-		if (trans.getSource() instanceof Entry 
-			|| trans.getSource() instanceof Choice
-			|| trans.getSource() instanceof Synchronization
-			|| (trans.getTarget() instanceof Synchronization && (trans.getTarget().getIncomingTransitions().size() > 1))
-			) { return; }
-		
+		if (trans.getSource() instanceof Entry || trans.getSource() instanceof Choice
+				|| trans.getSource() instanceof Synchronization || (trans.getTarget() instanceof Synchronization
+						&& (trans.getTarget().getIncomingTransitions().size() > 1))) {
+			return;
+		}
+
 		if (trans.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
 			org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) trans.getSource();
 			if (state.isComposite()) {
@@ -217,7 +233,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		Expression varRef = expression.getVarRef();
 		if (varRef instanceof FeatureCall) {
 			EObject referencedObject = ((FeatureCall) varRef).getFeature();
-		 if (!(referencedObject instanceof Property)) {
+			if (!(referencedObject instanceof Property)) {
 				error(LEFT_HAND_ASSIGNMENT, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
 			}
 		} else if (varRef instanceof ElementReferenceExpression) {
@@ -496,26 +512,28 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 		}
 	}
+
 	@Check(CheckType.FAST)
 	public void checkTopLeveEntryIsDefaultEntry(final Entry entry) {
 		Region parentRegion = entry.getParentRegion();
 		EObject eContainer = parentRegion.eContainer();
-	
+
 		boolean isTopLevelRegionEntry = eContainer instanceof Statechart;
 
-		//1. check if is toplevel
+		// 1. check if is toplevel
 		if (isTopLevelRegionEntry) {
 			boolean isDefaultEntry = STextValidationModelUtils.isDefault(entry);
-			//2. check if is default entry
+			// 2. check if is default entry
 			if (!isDefaultEntry) {
-				Map<Region, List<Entry>> regionsWithoutDefaultEntry = STextValidationModelUtils.getRegionsWithoutDefaultEntry(Lists.newArrayList(parentRegion));
+				Map<Region, List<Entry>> regionsWithoutDefaultEntry = STextValidationModelUtils
+						.getRegionsWithoutDefaultEntry(Lists.newArrayList(parentRegion));
 				List<Entry> list = regionsWithoutDefaultEntry.get(parentRegion);
-				if(list!=null)
-					error(TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY, entry,
-							SGraphPackage.Literals.ENTRY__KIND,-1);
+				if (list != null)
+					error(TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY, entry, SGraphPackage.Literals.ENTRY__KIND,
+							-1);
 				else
 					warning(TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY, entry,
-							SGraphPackage.Literals.ENTRY__KIND,-1);
+							SGraphPackage.Literals.ENTRY__KIND, -1);
 			}
 		}
 	}
@@ -723,7 +741,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (!found)
 			warning(CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
 	}
-	//TODO Extract TypesValidator
+
+	// TODO Extract TypesValidator
 	@Check
 	public void checkAnnotationTarget(final AnnotatableElement element) {
 		EList<Annotation> annotations = element.getAnnotations();
