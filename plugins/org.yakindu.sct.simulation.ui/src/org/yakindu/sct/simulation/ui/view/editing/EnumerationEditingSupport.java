@@ -73,7 +73,11 @@ public class EnumerationEditingSupport extends ScopeSlotEditingSupport {
 		if (element instanceof ExecutionSlot) {
 			if (!((ExecutionSlot) element).isWritable())
 				return false;
-			Type type = ((ExecutionSlot) element).getType().getOriginType();
+			
+			Type type = ((ExecutionSlot) element).getType();
+			if (type != null) {
+				type = type.getOriginType();
+			}
 			return type instanceof EnumerationType;
 		}
 		return false;

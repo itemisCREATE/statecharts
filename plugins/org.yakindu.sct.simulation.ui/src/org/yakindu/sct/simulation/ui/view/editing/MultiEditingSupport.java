@@ -13,6 +13,8 @@ package org.yakindu.sct.simulation.ui.view.editing;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.EditingSupport;
+import org.eclipse.jface.viewers.ViewerCell;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -32,6 +34,9 @@ public class MultiEditingSupport extends EditingSupport {
 
 	@Override
 	protected boolean canEdit(Object element) {
+		if (element instanceof ExecutionSlot && !((ExecutionSlot) element).isWritable()) {
+			return false;
+		}
 		for (PublicEditingSupport current : support) {
 			if (current.canEdit(element)) {
 				currentActive = current;
@@ -60,6 +65,13 @@ public class MultiEditingSupport extends EditingSupport {
 		return support;
 	}
 	
-	
+	@Override
+	protected void initializeCellEditorValue(CellEditor cellEditor, ViewerCell cell) {
+		try {
+			super.initializeCellEditorValue(cellEditor, cell);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
