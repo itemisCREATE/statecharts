@@ -347,6 +347,11 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	public void checkExpression() {
 		// Nothing to do
 	}
+	
+	@Test
+	public void checkContextElement(){
+		//Nothing to do -> this is covered by ContextPredicateProviderTest
+	}
 
 	/**
 	 * checks tht each @Check method of {@link STextJavaValidator} has a @Test

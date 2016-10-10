@@ -72,10 +72,10 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	public void accept(ValidationIssue issue) {
 		switch (issue.getSeverity()) {
 		case ERROR:
-			error(issue.getMessage(), null);
+			error(issue.getMessage(), null, issue.getIssueCode());
 			break;
 		case WARNING:
-			warning(issue.getMessage(), null);
+			warning(issue.getMessage(), null, issue.getIssueCode());
 			break;
 		case INFO:
 			break;

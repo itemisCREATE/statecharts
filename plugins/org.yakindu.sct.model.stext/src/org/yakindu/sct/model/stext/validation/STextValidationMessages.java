@@ -53,5 +53,7 @@ public interface STextValidationMessages {
 	public static final String INTERNAL_DECLARATION_UNUSED = "Internal declaration is not used in statechart.";
 	public static final String ERROR_WRONG_ANNOTATION_TARGET_CODE = "WrongAnnotationTarget";
 	public static final String ERROR_WRONG_ANNOTATION_TARGET_MSG = "Annotation '%s' can not be applied on %s ";
+	public static final String ERROR_WRONG_CONTEXT_ELEMENT_MSG = "Element of type '%s' is not allowed in this context.";
+	public static final String ERROR_WRONG_CONTEXT_ELEMENT_CODE = "ElementNotAllowedInContext";
 
 }
