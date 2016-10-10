@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.core.sruntime.EventDirection;
@@ -141,7 +142,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		// Initialize simple dependencies
 		SGraphPackage.eINSTANCE.eClass();
-		org.yakindu.base.types.TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theSRuntimePackage.createPackageContents();
@@ -433,7 +433,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		// Obtain other dependent packages
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 		SGraphPackage theSGraphPackage = (SGraphPackage)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI);
-		org.yakindu.base.types.TypesPackage theTypesPackage = (org.yakindu.base.types.TypesPackage)EPackage.Registry.INSTANCE.getEPackage(org.yakindu.base.types.TypesPackage.eNS_URI);
+		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -493,7 +493,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		initEReference(getCompositeSlot_Slots(), this.getExecutionSlot(), null, "slots", null, 0, -1, CompositeSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(referenceSlotEClass, ReferenceSlot.class, "ReferenceSlot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReferenceSlot_Reference(), this.getCompositeSlot(), null, "reference", null, 0, 1, ReferenceSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getReferenceSlot_Reference(), this.getExecutionSlot(), null, "reference", null, 0, 1, ReferenceSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(eventDirectionEEnum, EventDirection.class, "EventDirection");

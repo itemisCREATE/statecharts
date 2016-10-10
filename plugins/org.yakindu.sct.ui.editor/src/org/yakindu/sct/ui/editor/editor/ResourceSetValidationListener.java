@@ -43,15 +43,18 @@ public class ResourceSetValidationListener extends ResourceSetListenerImpl {
 				EObject eObject = (EObject) notification.getNotifier();
 				if (eObject.eClass().getEPackage() == SGraphPackage.eINSTANCE) {
 					validationJob.cancel();
-					if (liveValidationEnabled())
+					if (liveValidationEnabled()) {
 						validationJob.schedule(DELAY);
+						break;
+					}
 				} else
 					for (EClass eClass : eObject.eClass().getEAllSuperTypes()) {
 						if (SGraphPackage.eINSTANCE == eClass.getEPackage()) {
 							validationJob.cancel();
-							if (liveValidationEnabled())
+							if (liveValidationEnabled()) {
 								validationJob.schedule(DELAY);
-							return;
+								return;
+							}
 						}
 					}
 			}

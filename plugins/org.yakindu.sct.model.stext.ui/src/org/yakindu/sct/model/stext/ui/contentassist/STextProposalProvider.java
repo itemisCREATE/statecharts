@@ -13,7 +13,6 @@ package org.yakindu.sct.model.stext.ui.contentassist;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -22,6 +21,8 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Type;
@@ -42,8 +44,10 @@ import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.model.stext.validation.ContextPredicateProvider;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -52,10 +56,6 @@ import com.google.inject.Inject;
  * @author muehlbrandt
  */
 public class STextProposalProvider extends AbstractSTextProposalProvider {
-
-	private static final int OPERATION_PATTERN_OP_PARAMS = 1;
-
-	private static final Pattern OPERATION_PATTERN = Pattern.compile(".*\\((.*)\\).*");
 
 	@Inject
 	protected STextGrammarAccess grammarAccess;
@@ -138,7 +138,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 	protected void suppressKeywords(List<Keyword> suppressKeywords, FeatureCall featureCall) {
 		if (!(featureCall.getFeature() instanceof Operation)) {
-			suppressKeywords.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0_0());
+			suppressKeywords
+					.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0_0());
 		}
 	}
 
@@ -190,6 +191,16 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		};
 	}
 
+	@Inject
+	private ContextPredicateProvider contextProvider;
+
+	public void completeElementReferenceExpression_Reference(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		Predicate<IEObjectDescription> predicate = contextProvider.calculateFilterPredicate(context.getCurrentModel(),
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
+		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor, predicate);
+	}
+
 	@Override
 	public void complete_BOOL(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
@@ -226,8 +237,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		if (element instanceof Type) {
 			return super.getDisplayString(element, qualifiedNameAsString, shortName);
 		}
-		
-		if(element == null || element.eIsProxy()){
+
+		if (element == null || element.eIsProxy()) {
 			return qualifiedNameAsString;
 		}
 		IItemLabelProvider adapter = (IItemLabelProvider) composedAdapterFactory.adapt(element,
@@ -236,6 +247,13 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			return adapter.getText(element);
 		}
 		return super.getDisplayString(element, qualifiedNameAsString, shortName);
+	}
+
+	@Override
+	public void complete_ElementReferenceExpression(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		// TODO Auto-generated method stub
+		super.complete_ElementReferenceExpression(model, ruleCall, context, acceptor);
 	}
 
 	@Override
@@ -262,8 +280,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(model, "integer", acceptor);
 
 		String proposalText = "0x1";
-		ICompletionProposal proposal = createCompletionProposal(proposalText, proposalText + " - "
-				+ ruleCall.getRule().getName(), null, context);
+		ICompletionProposal proposal = createCompletionProposal(proposalText,
+				proposalText + " - " + ruleCall.getRule().getName(), null, context);
 
 		if (proposal instanceof ConfigurableCompletionProposal) {
 			ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;
@@ -282,8 +300,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(model, "real", acceptor);
 
 		String proposalText = "0.1";
-		ICompletionProposal proposal = createCompletionProposal(proposalText, proposalText + " - "
-				+ ruleCall.getRule().getName(), null, context);
+		ICompletionProposal proposal = createCompletionProposal(proposalText,
+				proposalText + " - " + ruleCall.getRule().getName(), null, context);
 		priorityOptimizer.accept(proposal);
 	}
 

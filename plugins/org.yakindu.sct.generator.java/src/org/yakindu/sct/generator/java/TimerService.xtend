@@ -64,8 +64,8 @@ class TimerService {
 				 * Constructor for a time event.
 				 *
 				 * @param callback
-				 *            : Set to {@code true} if event should be repeated
-				 *            periodically.
+				 *            : Object that implements ITimerCallback, is called
+				 *            when the timer expires.
 				 *
 				 * @param eventID
 				 *            : Index position within the state machine's timeEvent
@@ -79,7 +79,8 @@ class TimerService {
 				public void run() {
 					callback.timeElapsed(eventID);
 				}
-			
+				
+				@Override
 				public boolean equals(Object obj) {
 					if (obj instanceof TimeEventTask) {
 						return ((TimeEventTask) obj).callback.equals(callback)
@@ -87,6 +88,19 @@ class TimerService {
 					}
 					return super.equals(obj);
 				}
+				
+				@Override
+				public int hashCode() {
+					int prime = 37;
+					int result = 1;
+					
+					int c = (int) this.eventID;
+					result = prime * result + c;
+					c = this.callback.hashCode();
+					result = prime * result + c;
+					return result;
+				}
+				
 			}
 			
 			public void setTimer(final ITimerCallback callback, final int eventID,

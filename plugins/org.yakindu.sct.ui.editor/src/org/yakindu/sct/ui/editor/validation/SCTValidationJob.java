@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.WrappedException;
@@ -56,7 +57,6 @@ public class SCTValidationJob extends Job implements IMarkerType {
 
 	private Resource resource;
 
-	
 	/**
 	 * Wrappes the {@link IResourceValidator} validate within a
 	 * {@link RunnableWithResult} to execute within a read only transaction
@@ -81,9 +81,13 @@ public class SCTValidationJob extends Job implements IMarkerType {
 		}
 
 		public void run() {
-			List<Issue> result = validator.validate(resource, checkMode, indicator);
-			setResult(result);
-			setStatus(Status.OK_STATUS);
+			try {
+				List<Issue> result = validator.validate(resource, checkMode, indicator);
+				setResult(result);
+				setStatus(Status.OK_STATUS);
+			} catch (OperationCanceledException ex) {
+				setStatus(Status.CANCEL_STATUS);
+			}
 		}
 	}
 
@@ -94,6 +98,7 @@ public class SCTValidationJob extends Job implements IMarkerType {
 
 	@Override
 	public IStatus run(final IProgressMonitor monitor) {
+//		long t = System.currentTimeMillis();
 		try {
 			if (!resource.isLoaded())
 				return Status.CANCEL_STATUS;
@@ -103,7 +108,7 @@ public class SCTValidationJob extends Job implements IMarkerType {
 			if (monitor.isCanceled())
 				return Status.CANCEL_STATUS;
 			TransactionalValidationRunner runner = new TransactionalValidationRunner(validator, resource,
-					CheckMode.ALL, new CancelIndicator() {
+					CheckMode.FAST_ONLY, new CancelIndicator() {
 						public boolean isCanceled() {
 							return monitor.isCanceled();
 
@@ -112,7 +117,12 @@ public class SCTValidationJob extends Job implements IMarkerType {
 			TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(resource);
 			if (editingDomain == null)
 				return Status.CANCEL_STATUS;
-			editingDomain.runExclusive(runner);
+			try {
+				editingDomain.runExclusive(runner);
+			} catch (Throwable ex) {
+				//Since xtext 2.8 this may throw an OperationCanceledError
+				return Status.CANCEL_STATUS;
+			}
 			final List<Issue> issues = runner.getResult();
 			if (issues == null)
 				return Status.CANCEL_STATUS;
@@ -123,6 +133,7 @@ public class SCTValidationJob extends Job implements IMarkerType {
 			ex.printStackTrace();
 			return new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID, ex.getMessage());
 		}
+//		System.out.println("Validation took " + (System.currentTimeMillis() - t));
 		return Status.OK_STATUS;
 	}
 
@@ -131,7 +142,7 @@ public class SCTValidationJob extends Job implements IMarkerType {
 	 * problem markers // will flicker otherwise
 	 */
 	private void refreshMarkers(final IFile target, final List<Issue> issues, final IProgressMonitor monitor) {
-		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 			public void run() {
 				try {
 					target.deleteMarkers(SCT_MARKER_TYPE, true, IResource.DEPTH_ZERO);
@@ -152,8 +163,8 @@ public class SCTValidationJob extends Job implements IMarkerType {
 	 */
 	protected void relinkModel(final IProgressMonitor monitor, final AbstractSCTResource eResource)
 			throws ExecutionException {
-		AbstractTransactionalCommand cmd = new AbstractTransactionalCommand(
-				TransactionUtil.getEditingDomain(eResource), "", null) {
+		AbstractTransactionalCommand cmd = new AbstractTransactionalCommand(TransactionUtil.getEditingDomain(eResource),
+				"", null) {
 			@Override
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {

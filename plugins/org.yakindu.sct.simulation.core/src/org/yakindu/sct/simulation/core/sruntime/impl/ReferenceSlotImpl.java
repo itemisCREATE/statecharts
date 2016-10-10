@@ -27,10 +27,10 @@ import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ReferenceSlotImpl#getReference <em>Reference</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -43,7 +43,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	 * @generated
 	 * @ordered
 	 */
-	protected CompositeSlot reference;
+	protected ExecutionSlot reference;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,10 +69,10 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CompositeSlot getReference() {
+	public ExecutionSlot getReference() {
 		if (reference != null && reference.eIsProxy()) {
 			InternalEObject oldReference = (InternalEObject)reference;
-			reference = (CompositeSlot)eResolveProxy(oldReference);
+			reference = (ExecutionSlot)eResolveProxy(oldReference);
 			if (reference != oldReference) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SRuntimePackage.REFERENCE_SLOT__REFERENCE, oldReference, reference));
@@ -86,7 +86,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CompositeSlot basicGetReference() {
+	public ExecutionSlot basicGetReference() {
 		return reference;
 	}
 
@@ -95,8 +95,8 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReference(CompositeSlot newReference) {
-		CompositeSlot oldReference = reference;
+	public void setReference(ExecutionSlot newReference) {
+		ExecutionSlot oldReference = reference;
 		reference = newReference;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.REFERENCE_SLOT__REFERENCE, oldReference, reference));
@@ -126,7 +126,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SRuntimePackage.REFERENCE_SLOT__REFERENCE:
-				setReference((CompositeSlot)newValue);
+				setReference((ExecutionSlot)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -141,7 +141,7 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SRuntimePackage.REFERENCE_SLOT__REFERENCE:
-				setReference((CompositeSlot)null);
+				setReference((ExecutionSlot)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -166,10 +166,21 @@ public class ReferenceSlotImpl extends CompositeSlotImpl implements ReferenceSlo
 	 */
 	@Override
 	public List<ExecutionSlot> getSlots() {
-		if (getReference() != null) {
-			return getReference().getSlots();
+		if (getReference() != null && getReference() instanceof CompositeSlot) {
+			return ((CompositeSlot)getReference()).getSlots();
 		}
 		return super.getSlots();
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	public Object getValue() {
+		if (getReference() != null) {
+			return getReference().getValue();
+		}
+		return super.getValue();
 	}
 
 } //ReferenceSlotImpl

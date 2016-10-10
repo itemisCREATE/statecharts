@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.model.stext.scoping;
+package org.yakindu.sct.model.stext.validation;
 
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION;
@@ -32,10 +32,10 @@ import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_VALU
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.LOCAL_REACTION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REACTION_EFFECT;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REGULAR_EVENT_SPEC;
+import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.STATE_SPECIFICATION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_REACTION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_SPECIFICATION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.VARIABLE_DEFINITION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.STATE_SPECIFICATION;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,10 +46,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.yakindu.base.types.ComplexType;
-import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesPackage;
-import org.yakindu.sct.model.stext.stext.StextPackage;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -63,15 +61,18 @@ public class ContextPredicateProvider {
 
 	public static class TypePredicate implements Predicate<IEObjectDescription> {
 		public boolean apply(IEObjectDescription input) {
-			return TypesPackage.Literals.TYPE.isSuperTypeOf(input.getEClass())
-					&& !TypesPackage.Literals.TYPE_PARAMETER.isSuperTypeOf(input.getEClass());
+			EClass eClass = input.getEClass();
+			return TypesPackage.Literals.TYPE.isSuperTypeOf(eClass)
+					&& !TypesPackage.Literals.TYPE_PARAMETER.isSuperTypeOf(eClass);
 		}
 	}
 
 	public static class FeaturedTypePredicate implements Predicate<IEObjectDescription> {
 		public boolean apply(IEObjectDescription input) {
-			return TypesPackage.Literals.TYPE.isSuperTypeOf(input.getEClass())
-					&& TypesPackage.Literals.DECLARATION.isSuperTypeOf(input.getEClass());
+			EClass eClass = input.getEClass();
+			return SGraphPackage.Literals.SCOPE.isSuperTypeOf(eClass)
+					|| (TypesPackage.Literals.TYPE.isSuperTypeOf(eClass)
+							&& TypesPackage.Literals.DECLARATION.isSuperTypeOf(eClass));
 		}
 	}
 
@@ -80,16 +81,7 @@ public class ContextPredicateProvider {
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
 				return true;
-			return TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass()) || isComplexTypeVariable(input);
-		}
-
-		protected boolean isComplexTypeVariable(IEObjectDescription input) {
-			if (StextPackage.Literals.VARIABLE_DEFINITION.isSuperTypeOf(input.getEClass())) {
-				TypedElement definition = (TypedElement) input.getEObjectOrProxy();
-				EObject element = (EObject) definition.eGet(TypesPackage.Literals.TYPED_ELEMENT__TYPE, false);
-				return (element != null && !element.eIsProxy() && definition.getType() instanceof ComplexType);
-			}
-			return false;
+			return TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass());
 		}
 	}
 
@@ -108,8 +100,9 @@ public class ContextPredicateProvider {
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
 				return true;
-			return (TypesPackage.Literals.PROPERTY.isSuperTypeOf(input.getEClass()) || TypesPackage.Literals.OPERATION
-					.isSuperTypeOf(input.getEClass()));
+			EClass eClass = input.getEClass();
+			return (TypesPackage.Literals.PROPERTY.isSuperTypeOf(eClass)
+					|| TypesPackage.Literals.OPERATION.isSuperTypeOf(eClass));
 		}
 	}
 
@@ -118,11 +111,12 @@ public class ContextPredicateProvider {
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
 				return true;
-			return (TypesPackage.Literals.PROPERTY.isSuperTypeOf(input.getEClass()) //
-					|| TypesPackage.Literals.OPERATION.isSuperTypeOf(input.getEClass()) //
-					|| TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass()) //
-					|| TypesPackage.Literals.ENUMERATOR.isSuperTypeOf(input.getEClass()) //
-					|| TypesPackage.Literals.ENUMERATION_TYPE.isSuperTypeOf(input.getEClass()));
+			EClass eClass = input.getEClass();
+			return (TypesPackage.Literals.PROPERTY.isSuperTypeOf(eClass)
+					|| TypesPackage.Literals.OPERATION.isSuperTypeOf(eClass)
+					|| TypesPackage.Literals.EVENT.isSuperTypeOf(eClass)
+					|| TypesPackage.Literals.ENUMERATOR.isSuperTypeOf(eClass)
+					|| TypesPackage.Literals.ENUMERATION_TYPE.isSuperTypeOf(eClass));
 		}
 	}
 
@@ -187,13 +181,28 @@ public class ContextPredicateProvider {
 		filter.put(key(STATE_SPECIFICATION), EVENTS);
 	}
 
-	public Predicate<IEObjectDescription> getPredicate(EClass clazz, EReference reference) {
+	protected Predicate<IEObjectDescription> getPredicate(EClass clazz, EReference reference) {
 		Predicate<IEObjectDescription> predicate = filter.get(key(clazz, reference));
 		if (predicate == null) {
 			predicate = filter.get(key(clazz, null));
 			if (predicate == null) {
 				return EMPTY_PREDICATE;
 			}
+		}
+		return predicate;
+	}
+
+	public Predicate<IEObjectDescription> calculateFilterPredicate(final EObject context, final EReference reference) {
+		Predicate<IEObjectDescription> predicate = null;
+		EObject container = context;
+		EReference ref = reference;
+		while (container != null) {
+			predicate = getPredicate(container.eClass(), ref);
+			if (!(predicate instanceof EmptyPredicate)) {
+				break;
+			}
+			ref = (EReference) container.eContainingFeature();
+			container = container.eContainer();
 		}
 		return predicate;
 	}
