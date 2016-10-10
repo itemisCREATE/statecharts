@@ -135,12 +135,11 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkContextElement(ElementReferenceExpression expression) {
 		Predicate<IEObjectDescription> predicate = contextPredicateProvider.calculateFilterPredicate(expression,
 				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
-
 		IEObjectDescription desc = EObjectDescription
 				.create(nameProvider.getFullyQualifiedName(expression.getReference()), expression.getReference());
 		if (!predicate.apply(desc)) {
-			error("Element of type " + expression.getReference().eClass().getName()
-					+ " is not allowed in this context.", null);
+			String name = expression.getReference().eClass().getName();
+			error(String.format(ERROR_WRONG_CONTEXT_ELEMENT_MSG, name), null, -1, ERROR_WRONG_CONTEXT_ELEMENT_CODE);
 		}
 	}
 
