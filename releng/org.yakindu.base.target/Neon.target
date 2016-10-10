@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Neon (SCT)" sequenceNumber="30">
+<?pde version="3.8"?><target name="Neon (SCT)" sequenceNumber="32">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="de.itemis.xtext.antlr.feature.feature.group" version="2.1.1.v201405091103"/>
@@ -7,21 +7,21 @@
 <repository location="http://download.itemis.com/updates/releases/2.1.1/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.platform.ide" version="4.6.0.I20160606-1100"/>
-<unit id="org.eclipse.pde.source.feature.group" version="3.12.0.v20160606-1100"/>
+<unit id="org.eclipse.platform.ide" version="4.6.1.M20160907-1200"/>
+<unit id="org.eclipse.pde.source.feature.group" version="3.12.1.v20160907-1200"/>
 <repository location="http://download.eclipse.org/eclipse/updates/4.6"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.10.0.201606071959"/>
-<unit id="org.eclipse.epp.mpc.feature.group" version="1.5.0.v20160608-1804"/>
-<unit id="org.eclipse.cdt.sdk.feature.group" version="9.0.0.201606062011"/>
+<unit id="org.eclipse.epp.mpc.feature.group" version="1.5.1.v20160913-1450"/>
+<unit id="org.eclipse.cdt.sdk.feature.group" version="9.1.0.201609121658"/>
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.12.0.v20160526-0356"/>
-<unit id="org.eclipse.emf.compare.diagram.papyrus.feature.group" version="3.2.0.201605311222"/>
+<unit id="org.eclipse.emf.compare.diagram.papyrus.feature.group" version="3.2.1.201608311750"/>
 <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.10.0.201606071631"/>
-<unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.2.0.201605311222"/>
-<unit id="org.eclipse.jdt.feature.group" version="3.12.0.v20160606-1100"/>
+<unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.2.1.201608311750"/>
+<unit id="org.eclipse.jdt.feature.group" version="3.12.1.v20160907-1200"/>
 <unit id="org.eclipse.xtext.sdk.feature.group" version="2.10.0.v201605250459"/>
-<unit id="org.eclipse.uml2.sdk.feature.group" version="5.2.0.v20160516-0939"/>
+<unit id="org.eclipse.uml2.sdk.feature.group" version="5.2.1.v20160822-0739"/>
 <repository location="http://download.eclipse.org/releases/neon"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
