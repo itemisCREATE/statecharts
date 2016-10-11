@@ -575,7 +575,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	@Test
 	public void checkImportExists() {
-		ImportScope importScope = (ImportScope) parseExpression("import: not.existing.*",
+		ImportScope importScope = (ImportScope) parseExpression("import: not.existing",
 				ImportScope.class.getSimpleName());
 
 		AssertableDiagnostics validationResult = tester.validate(importScope.getImports().get(0));
