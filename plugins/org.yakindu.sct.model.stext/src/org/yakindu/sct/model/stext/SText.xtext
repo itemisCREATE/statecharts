@@ -64,12 +64,6 @@ InternalScope:
 ImportScope:
 	 {ImportScope} 'import' ':' (imports+=[types::Package|QID])*;
 
-Import:
-	importedNamespace=QIDWithWildcards;
-
-QIDWithWildcards:
-	QID ('.*')?;
-
 QID:
 	ID ('.' ID)*;
 
