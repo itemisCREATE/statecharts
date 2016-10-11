@@ -106,7 +106,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 			case StextPackage.INTERFACE_SCOPE: return createInterfaceScope();
 			case StextPackage.INTERNAL_SCOPE: return createInternalScope();
 			case StextPackage.IMPORT_SCOPE: return createImportScope();
-			case StextPackage.IMPORT: return createImport();
 			case StextPackage.EVENT_DEFINITION: return createEventDefinition();
 			case StextPackage.VARIABLE_DEFINITION: return createVariableDefinition();
 			case StextPackage.OPERATION_DEFINITION: return createOperationDefinition();
@@ -287,16 +286,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	public ImportScope createImportScope() {
 		ImportScopeImpl importScope = new ImportScopeImpl();
 		return importScope;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Import createImport() {
-		ImportImpl import_ = new ImportImpl();
-		return import_;
 	}
 
 	/**

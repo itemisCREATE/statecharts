@@ -85,7 +85,6 @@ import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Guard;
-import org.yakindu.sct.model.stext.stext.Import;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
@@ -741,15 +740,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 	
-	@Check(CheckType.FAST)
-	public void checkImportExists(Import importDef) {
-		String namespace = importDef.getImportedNamespace();
-		if (resolver.getPackageForNamespace(getResource(importDef), namespace) == null) {
-			error("The import " + namespace + " cannot be resolved.", importDef,
-					StextPackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORT_NOT_RESOLVED);
-		}
-	}
-
 	protected void checkElementReferenceEffect(ElementReferenceExpression refExp) {
 		if (!(refExp.getReference() instanceof Operation)) {
 			if (refExp.getReference() instanceof Property) {
