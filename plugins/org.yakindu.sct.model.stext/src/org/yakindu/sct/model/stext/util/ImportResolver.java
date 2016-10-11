@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -27,8 +26,6 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.yakindu.base.types.Package;
 import org.yakindu.base.types.TypesPackage;
-import org.yakindu.sct.model.stext.stext.Import;
-
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -56,14 +53,9 @@ public class ImportResolver {
 	 *            type of imported elements to be returned
 	 * @return imported elements of given type
 	 */
-	public <T extends EObject> List<T> getImportedElementsOfType(Import importDeclaration, Class<T> type) {
+	public <T extends EObject> List<T> getImportedElementsOfType(Package importedPackage, Class<T> type) {
 		List<T> elements = Lists.newArrayList();
-		Package importedPackage = getPackageForNamespace(importDeclaration.eResource(),
-				importDeclaration.getImportedNamespace());
 		if (importedPackage != null) {
-			if (importedPackage.eIsProxy()) {
-				importedPackage = (Package) EcoreUtil.resolve(importedPackage, importDeclaration);
-			}
 			for (EObject content : importedPackage.eContents()) {
 				if (type.isInstance(content)) {
 					elements.add(type.cast(content));
@@ -85,10 +77,6 @@ public class ImportResolver {
 	 */
 	public Package getPackageForNamespace(Resource contextResource, String namespace) {
 		initResourceDescriptions(contextResource);
-		// remove wildcard
-		if (namespace.endsWith(".*")) {
-			namespace = namespace.substring(0, namespace.length() - 2);
-		}
 		List<IEObjectDescription> allVisiblePackages = getAllVisiblePackagesDescriptions(contextResource.getURI());
 		for (IEObjectDescription pkgDesc : allVisiblePackages) {
 			if (pkgDesc.getName().toString().equals(namespace)) {

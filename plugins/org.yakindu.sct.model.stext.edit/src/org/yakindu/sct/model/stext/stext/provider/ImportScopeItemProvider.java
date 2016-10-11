@@ -19,8 +19,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.sct.model.stext.stext.ImportScope;
-import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
@@ -150,7 +150,7 @@ public class ImportScopeItemProvider extends StatechartScopeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.IMPORT_SCOPE__IMPORTS,
-				 StextFactory.eINSTANCE.createImport()));
+				 TypesFactory.eINSTANCE.createPackage()));
 	}
 
 }

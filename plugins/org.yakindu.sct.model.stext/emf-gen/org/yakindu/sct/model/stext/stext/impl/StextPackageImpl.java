@@ -26,7 +26,6 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Guard;
-import org.yakindu.sct.model.stext.stext.Import;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -143,13 +142,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * @generated
 	 */
 	private EClass importScopeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass importEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -560,24 +552,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 */
 	public EReference getImportScope_Imports() {
 		return (EReference)importScopeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getImport() {
-		return importEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getImport_ImportedNamespace() {
-		return (EAttribute)importEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -999,9 +973,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		importScopeEClass = createEClass(IMPORT_SCOPE);
 		createEReference(importScopeEClass, IMPORT_SCOPE__IMPORTS);
 
-		importEClass = createEClass(IMPORT);
-		createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
-
 		eventDefinitionEClass = createEClass(EVENT_DEFINITION);
 
 		variableDefinitionEClass = createEClass(VARIABLE_DEFINITION);
@@ -1164,10 +1135,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEClass(internalScopeEClass, InternalScope.class, "InternalScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(importScopeEClass, ImportScope.class, "ImportScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getImportScope_Imports(), this.getImport(), null, "imports", null, 0, -1, ImportScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImportScope_Imports(), theTypesPackage.getPackage(), null, "imports", null, 0, -1, ImportScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventDefinitionEClass, EventDefinition.class, "EventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

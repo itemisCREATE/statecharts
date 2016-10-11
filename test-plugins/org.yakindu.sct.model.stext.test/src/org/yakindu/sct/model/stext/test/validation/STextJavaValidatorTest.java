@@ -46,7 +46,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
-import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
@@ -571,15 +570,6 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 3);
 		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
-	}
-
-	@Test
-	public void checkImportExists() {
-		ImportScope importScope = (ImportScope) parseExpression("import: not.existing.*",
-				ImportScope.class.getSimpleName());
-
-		AssertableDiagnostics validationResult = tester.validate(importScope.getImports().get(0));
-		validationResult.assertError(STextJavaValidator.IMPORT_NOT_RESOLVED);
 	}
 
 	@Ignore("Test is not executed for TypesPackage elements")

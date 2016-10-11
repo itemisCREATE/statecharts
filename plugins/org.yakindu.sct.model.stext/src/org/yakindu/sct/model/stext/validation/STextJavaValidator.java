@@ -85,7 +85,6 @@ import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Guard;
-import org.yakindu.sct.model.stext.stext.Import;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
@@ -95,7 +94,6 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
-import org.yakindu.sct.model.stext.util.ImportResolver;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -123,8 +121,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
-	@Inject
-	private ImportResolver resolver;
 	@Inject(optional = true)
 	@Named(DomainRegistry.DOMAIN_ID)
 	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
@@ -741,15 +737,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 	
-	@Check(CheckType.FAST)
-	public void checkImportExists(Import importDef) {
-		String namespace = importDef.getImportedNamespace();
-		if (resolver.getPackageForNamespace(getResource(importDef), namespace) == null) {
-			error("The import " + namespace + " cannot be resolved.", importDef,
-					StextPackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORT_NOT_RESOLVED);
-		}
-	}
-
 	protected void checkElementReferenceEffect(ElementReferenceExpression refExp) {
 		if (!(refExp.getReference() instanceof Operation)) {
 			if (refExp.getReference() instanceof Property) {

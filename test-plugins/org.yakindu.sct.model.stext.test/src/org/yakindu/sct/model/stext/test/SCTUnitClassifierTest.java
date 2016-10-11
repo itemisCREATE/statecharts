@@ -52,10 +52,10 @@ public class SCTUnitClassifierTest {
 			StextPackage.Literals.STATECHART_ROOT, StextPackage.Literals.STATECHART_SPECIFICATION,
 			StextPackage.Literals.TRANSITION_SPECIFICATION, StextPackage.Literals.DEF_ROOT,
 			StextPackage.Literals.STATE_ROOT, StextPackage.Literals.STATE_ROOT, StextPackage.Literals.TRANSITION_ROOT,
-			StextPackage.Literals.BUILTIN_EVENT_SPEC, StextPackage.Literals.EVENT_SPEC, StextPackage.Literals.IMPORT,
+			StextPackage.Literals.BUILTIN_EVENT_SPEC, StextPackage.Literals.EVENT_SPEC,
 			StextPackage.Literals.IMPORT_SCOPE, StextPackage.Literals.STATECHART_SCOPE,
-			StextPackage.Literals.TRANSITION_REACTION, SGraphPackage.Literals.IMPORT,
 			SGraphPackage.Literals.IMPORT_DECLARATION, SGraphPackage.Literals.SCOPE,
+			StextPackage.Literals.TRANSITION_REACTION,
 			SGraphPackage.Literals.REACTION_PROPERTY);
 
 	@Test

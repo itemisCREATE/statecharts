@@ -37,7 +37,6 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Guard;
-import org.yakindu.sct.model.stext.stext.Import;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -164,10 +163,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseImportScope(ImportScope object) {
 				return createImportScopeAdapter();
-			}
-			@Override
-			public Adapter caseImport(Import object) {
-				return createImportAdapter();
 			}
 			@Override
 			public Adapter caseEventDefinition(EventDefinition object) {
@@ -514,20 +509,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImportScopeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.Import <em>Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.stext.stext.Import
-	 * @generated
-	 */
-	public Adapter createImportAdapter() {
 		return null;
 	}
 

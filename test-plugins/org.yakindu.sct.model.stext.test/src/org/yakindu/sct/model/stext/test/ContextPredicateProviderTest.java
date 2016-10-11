@@ -12,7 +12,6 @@ package org.yakindu.sct.model.stext.test;
 
 import java.util.Arrays;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.junit.Test;

@@ -26,7 +26,6 @@ import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
-import org.yakindu.sct.model.sgraph.Import;
 import org.yakindu.sct.model.sgraph.ImportDeclaration;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.Reaction;
@@ -115,13 +114,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	private EClass compositeElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass importEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -484,24 +476,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getImport() {
-		return importEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getImport_ImportedNamespace() {
-		return (EAttribute)importEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getImportDeclaration() {
 		return importDeclarationEClass;
 	}
@@ -540,15 +514,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getStatechart() {
 		return statechartEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getStatechart_Imports() {
-		return (EReference)statechartEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -825,7 +790,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		createEAttribute(choiceEClass, CHOICE__KIND);
 
 		statechartEClass = createEClass(STATECHART);
-		createEReference(statechartEClass, STATECHART__IMPORTS);
 
 		entryEClass = createEClass(ENTRY);
 		createEAttribute(entryEClass, ENTRY__KIND);
@@ -871,9 +835,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		compositeElementEClass = createEClass(COMPOSITE_ELEMENT);
 		createEReference(compositeElementEClass, COMPOSITE_ELEMENT__REGIONS);
-
-		importEClass = createEClass(IMPORT);
-		createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
 
 		importDeclarationEClass = createEClass(IMPORT_DECLARATION);
 		createEReference(importDeclarationEClass, IMPORT_DECLARATION__DECLARATION);
@@ -964,7 +925,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		initEAttribute(getChoice_Kind(), this.getChoiceKind(), "kind", null, 0, 1, Choice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statechartEClass, Statechart.class, "Statechart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStatechart_Imports(), this.getImport(), null, "imports", null, 0, -1, Statechart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(entryEClass, Entry.class, "Entry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEntry_Kind(), this.getEntryKind(), "kind", null, 0, 1, Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1010,9 +970,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		initEClass(compositeElementEClass, CompositeElement.class, "CompositeElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeElement_Regions(), this.getRegion(), this.getRegion_Composite(), "regions", null, 0, -1, CompositeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(importDeclarationEClass, ImportDeclaration.class, "ImportDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getImportDeclaration_Declaration(), theTypesPackage.getDeclaration(), null, "declaration", null, 0, 1, ImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

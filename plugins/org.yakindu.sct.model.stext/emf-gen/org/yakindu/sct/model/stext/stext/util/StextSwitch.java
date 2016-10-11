@@ -36,7 +36,6 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Guard;
-import org.yakindu.sct.model.stext.stext.Import;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -198,12 +197,6 @@ public class StextSwitch<T> extends Switch<T> {
 				T result = caseImportScope(importScope);
 				if (result == null) result = caseStatechartScope(importScope);
 				if (result == null) result = caseScope(importScope);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StextPackage.IMPORT: {
-				Import import_ = (Import)theEObject;
-				T result = caseImport(import_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -571,21 +564,6 @@ public class StextSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseImportScope(ImportScope object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Import</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Import</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseImport(Import object) {
 		return null;
 	}
 

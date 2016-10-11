@@ -338,29 +338,6 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.Import} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ImportItemProvider importItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sgraph.Import}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createImportAdapter() {
-		if (importItemProvider == null) {
-			importItemProvider = new ImportItemProvider(this);
-		}
-
-		return importItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.ImportDeclaration} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -493,7 +470,6 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 		if (scopeItemProvider != null) scopeItemProvider.dispose();
 		if (synchronizationItemProvider != null) synchronizationItemProvider.dispose();
 		if (stateItemProvider != null) stateItemProvider.dispose();
-		if (importItemProvider != null) importItemProvider.dispose();
 		if (importDeclarationItemProvider != null) importDeclarationItemProvider.dispose();
 	}
 
