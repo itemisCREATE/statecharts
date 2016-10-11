@@ -15,6 +15,9 @@ import java.util.ArrayList
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Package
+import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionScope
@@ -29,7 +32,6 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.Import
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
@@ -71,12 +73,12 @@ class StructureMapping {
 	 */
 	def dispatch Scope mapScope(ImportScope scope) {
 		val _scope = scope.createScope
-		for (org.yakindu.base.types.Package imp : scope.imports) {
-			val props = resolver.getImportedElementsOfType(imp, org.yakindu.base.types.Property)
+		for (Package imp : scope.imports) {
+			val props = resolver.getImportedElementsOfType(imp, Property)
 			for (Declaration decl : props) {
 				_scope.declarations.add(decl.createImportDeclaration)
 			}
-			val operations = resolver.getImportedElementsOfType(imp, org.yakindu.base.types.Operation) 
+			val operations = resolver.getImportedElementsOfType(imp, Operation) 
 			for (Declaration decl : operations) {
 				_scope.declarations.add(decl.createImportDeclaration)
 			}

@@ -26,8 +26,6 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.yakindu.base.types.Package;
 import org.yakindu.base.types.TypesPackage;
-import org.yakindu.sct.model.stext.stext.Import;
-
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -79,10 +77,6 @@ public class ImportResolver {
 	 */
 	public Package getPackageForNamespace(Resource contextResource, String namespace) {
 		initResourceDescriptions(contextResource);
-		// remove wildcard
-		if (namespace.endsWith(".*")) {
-			namespace = namespace.substring(0, namespace.length() - 2);
-		}
 		List<IEObjectDescription> allVisiblePackages = getAllVisiblePackagesDescriptions(contextResource.getURI());
 		for (IEObjectDescription pkgDesc : allVisiblePackages) {
 			if (pkgDesc.getName().toString().equals(namespace)) {

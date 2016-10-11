@@ -94,7 +94,6 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
-import org.yakindu.sct.model.stext.util.ImportResolver;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -122,8 +121,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
-	@Inject
-	private ImportResolver resolver;
 	@Inject(optional = true)
 	@Named(DomainRegistry.DOMAIN_ID)
 	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
