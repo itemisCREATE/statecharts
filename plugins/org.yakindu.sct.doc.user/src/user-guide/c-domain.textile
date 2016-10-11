@@ -367,7 +367,7 @@ Passing arrays as parameters to C functions is straightforward. Let's say you ha
 
 bc. int32_t* sort(int32_t data[], int size) {…}
 
-Please note that in C a function cannot return an array as such, but only a pointer to it. Analogously you cannot pass an array as such as a parameter to a function, but only a pointer to that array. To express this in the function's parameter type, you could specify the _sort_ function equivalently as follows. The _data_ parameter is now specified as @int32_t* data@ instead of @int32_t data[]@, but the meaning is the same.
+Please note that in C a function cannot return an array as such, but only a pointer to it. Analogously you cannot pass an array by value as a parameter to a function, i.&nbsp;e. the data bytes the array is consisting of are not copied into the function's formal parameter. Instead a pointer to the array is passed to the function, or – to be more exact – a pointer to the array's first element. To express this in the function's formal parameter type, you can specify the _sort_ function equivalently to the above definition as follows. The _data_ parameter is now specified as @int32_t* data@ instead of @int32_t data[]@, but the meaning is exactly the same.
 
 bc. int32_t* sort(int32_t* data, int size) {…}
 
