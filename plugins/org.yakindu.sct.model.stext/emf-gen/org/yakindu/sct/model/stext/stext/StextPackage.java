@@ -504,7 +504,7 @@ public interface StextPackage extends EPackage {
 	int IMPORT_SCOPE__REACTIONS = STATECHART_SCOPE__REACTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Imports</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1671,10 +1671,10 @@ public interface StextPackage extends EPackage {
 	EClass getImportScope();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.stext.stext.ImportScope#getImports <em>Imports</em>}'.
+	 * Returns the meta object for the reference list '{@link org.yakindu.sct.model.stext.stext.ImportScope#getImports <em>Imports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Imports</em>'.
+	 * @return the meta object for the reference list '<em>Imports</em>'.
 	 * @see org.yakindu.sct.model.stext.stext.ImportScope#getImports()
 	 * @see #getImportScope()
 	 * @generated
@@ -2308,7 +2308,7 @@ public interface StextPackage extends EPackage {
 		EClass IMPORT_SCOPE = eINSTANCE.getImportScope();
 
 		/**
-		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Imports</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

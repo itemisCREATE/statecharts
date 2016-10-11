@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -56,14 +55,9 @@ public class ImportResolver {
 	 *            type of imported elements to be returned
 	 * @return imported elements of given type
 	 */
-	public <T extends EObject> List<T> getImportedElementsOfType(Import importDeclaration, Class<T> type) {
+	public <T extends EObject> List<T> getImportedElementsOfType(Package importedPackage, Class<T> type) {
 		List<T> elements = Lists.newArrayList();
-		Package importedPackage = getPackageForNamespace(importDeclaration.eResource(),
-				importDeclaration.getImportedNamespace());
 		if (importedPackage != null) {
-			if (importedPackage.eIsProxy()) {
-				importedPackage = (Package) EcoreUtil.resolve(importedPackage, importDeclaration);
-			}
 			for (EObject content : importedPackage.eContents()) {
 				if (type.isInstance(content)) {
 					elements.add(type.cast(content));

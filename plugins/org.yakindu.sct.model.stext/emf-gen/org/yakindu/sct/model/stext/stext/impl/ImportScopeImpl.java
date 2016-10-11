@@ -9,6 +9,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.stext.stext.Import;
 import org.yakindu.sct.model.stext.stext.ImportScope;
@@ -29,14 +30,14 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  */
 public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope {
 	/**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+	 * The cached value of the '{@link #getImports() <em>Imports</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getImports()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Import> imports;
+	protected EList<org.yakindu.base.types.Package> imports;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -62,25 +63,11 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Import> getImports() {
+	public EList<org.yakindu.base.types.Package> getImports() {
 		if (imports == null) {
-			imports = new EObjectContainmentEList<Import>(Import.class, this, StextPackage.IMPORT_SCOPE__IMPORTS);
+			imports = new EObjectResolvingEList<org.yakindu.base.types.Package>(org.yakindu.base.types.Package.class, this, StextPackage.IMPORT_SCOPE__IMPORTS);
 		}
 		return imports;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case StextPackage.IMPORT_SCOPE__IMPORTS:
-				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -108,7 +95,7 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 		switch (featureID) {
 			case StextPackage.IMPORT_SCOPE__IMPORTS:
 				getImports().clear();
-				getImports().addAll((Collection<? extends Import>)newValue);
+				getImports().addAll((Collection<? extends org.yakindu.base.types.Package>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -71,7 +71,7 @@ class StructureMapping {
 	 */
 	def dispatch Scope mapScope(ImportScope scope) {
 		val _scope = scope.createScope
-		for (Import imp : scope.imports) {
+		for (org.yakindu.base.types.Package imp : scope.imports) {
 			val props = resolver.getImportedElementsOfType(imp, org.yakindu.base.types.Property)
 			for (Declaration decl : props) {
 				_scope.declarations.add(decl.createImportDeclaration)

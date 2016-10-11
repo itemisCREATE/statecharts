@@ -12,16 +12,18 @@ package org.yakindu.sct.model.stext.scoping;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
+import org.yakindu.base.types.Package;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
-import org.yakindu.sct.model.stext.stext.Import;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
@@ -35,6 +37,23 @@ import com.google.common.collect.Lists;
  */
 public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
 
+	
+	@Override
+	public IScope getScope(EObject context, EReference reference) {
+		if (context == null)
+			throw new NullPointerException("context");
+		IScope result = null;
+		if(context instanceof ImportScope){
+			result = getResourceScope(context.eResource(), reference);
+		}
+		else if (context.eContainer() != null) {
+			result = getScope(context.eContainer(), reference);
+		} else {
+			result = getResourceScope(context.eResource(), reference);
+		}
+		return getLocalElementsScope(result, context, reference);
+	}
+	
 	@Override
 	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(final EObject context, boolean ignoreCase) {
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
@@ -49,17 +68,18 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 		}
 		return importedNamespaceResolvers;
 	}
-	
+
 	@Override
-	protected ImportNormalizer doCreateImportNormalizer(QualifiedName importedNamespace, boolean wildcard, boolean ignoreCase) {
+	protected ImportNormalizer doCreateImportNormalizer(QualifiedName importedNamespace, boolean wildcard,
+			boolean ignoreCase) {
 		// all imports should be treated as if they had a wild card
 		return new ImportNormalizer(importedNamespace, true, ignoreCase);
 	}
-	
+
 	protected List<ImportNormalizer> createNamespaceResolver(Scope scope, boolean ignoreCase) {
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
 		ImportScope importScope = (ImportScope) scope;
-		for (Import child : importScope.getImports()) {
+		for (org.yakindu.base.types.Package child : importScope.getImports()) {
 			String value = getImportedNamespace(child);
 			ImportNormalizer resolver = createImportedNamespaceResolver(value, ignoreCase);
 			if (resolver != null)
@@ -67,9 +87,16 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 		}
 		return importedNamespaceResolvers;
 	}
-	
+
+	@Override
+	protected String getImportedNamespace(EObject object) {
+		if (object instanceof Package)
+			return ((Package) object).getName();
+		return super.getImportedNamespace(object);
+	}
+
 	protected Statechart getStatechart(EObject context) {
-		
+
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
 				ContextElementAdapter.class);
 
@@ -80,5 +107,5 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 					SGraphPackage.Literals.STATECHART);
 		}
 	}
-	
+
 }
