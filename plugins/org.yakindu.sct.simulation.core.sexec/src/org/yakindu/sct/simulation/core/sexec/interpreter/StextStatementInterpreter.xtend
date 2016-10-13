@@ -103,32 +103,32 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def dispatch Object typeCast(Float value, Type type) {
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value.longValue
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
-		throw new IllegalArgumentException
+		throw new IllegalArgumentException("Invalid cast from Float to " + type.name)
 	}
 
 	def dispatch Object typeCast(Double value, Type type) {
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value.longValue
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
-		throw new IllegalArgumentException
+		throw new IllegalArgumentException("Invalid cast from Double to " + type.name)
 	}
 
 	def dispatch Object typeCast(Boolean value, Type type) {
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.BOOLEAN))) return value
-		throw new IllegalArgumentException
+		throw new IllegalArgumentException("Invalid cast from Boolean to " + type.name)
 	}
 
 	def dispatch Object typeCast(String value, Type type) {
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.STRING))) return value
-		throw new IllegalArgumentException
+		throw new IllegalArgumentException("Invalid cast from String to " + type.name)
 	}
 
 	def dispatch Object typeCast(Enumerator value, Type type) {
 		if(ts.isSuperType(type, value.owningEnumeration)) return value
-		throw new IllegalArgumentException
+		throw new IllegalArgumentException("Invalid cast from Enumerator to " + type.name)
 	}
 
 	def dispatch Object typeCast(Object value, Type type) {
-		throw new IllegalArgumentException("Invalid cast " + value.class + " to " + type.name)
+		return value
 	}
 
 	def Object executeAssignment(AssignmentExpression assignment) {
