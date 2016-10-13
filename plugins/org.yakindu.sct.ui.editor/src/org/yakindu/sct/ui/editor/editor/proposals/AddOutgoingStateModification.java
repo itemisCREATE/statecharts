@@ -114,10 +114,10 @@ public class AddOutgoingStateModification extends AbstractSemanticModification {
 			Node mynode = (Node)sourceView;
 			LayoutConstraint layoutConstraint = mynode.getLayoutConstraint();
 			if(layoutConstraint instanceof Bounds){
-				sourceBounds = (Bounds) layoutConstraint;
+				return (Bounds) layoutConstraint;
 			}
 		}
-		return sourceBounds;
+		throw new IllegalStateException("Given  view does not have a bounds element. ["+sourceView+"]");
 	}
 	/**
 	 * @see org.yakindu.sct.ui.editor.factories.FactoryUtils.getRegionCompartmentView(View)
