@@ -10,17 +10,13 @@
  */
 package org.yakindu.sct.ui.editor.editor.proposals;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
 import org.eclipse.gmf.runtime.notation.Bounds;
-import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.LayoutConstraint;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.xtext.EcoreUtil2;
-import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
@@ -105,6 +101,14 @@ public class AddOutgoingStateModification extends AbstractSemanticModification {
 		Node stateNode = ViewService.createNode(region, newState, SemanticHints.STATE,
 				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		
+		Bounds sourceBounds = getSourceBounds(sourceView);
+		Bounds newStateBounds = NotationFactory.eINSTANCE.createBounds();
+		newStateBounds.setX(sourceBounds.getX()+150);
+		newStateBounds.setY(sourceBounds.getY()+50);
+		stateNode.setLayoutConstraint(newStateBounds);
+		return stateNode;
+	}
+	private Bounds getSourceBounds(View sourceView) {
 		Bounds sourceBounds = null;
 		if(sourceView instanceof Node){
 			Node mynode = (Node)sourceView;
@@ -113,28 +117,12 @@ public class AddOutgoingStateModification extends AbstractSemanticModification {
 				sourceBounds = (Bounds) layoutConstraint;
 			}
 		}
-		Bounds newStateBounds = NotationFactory.eINSTANCE.createBounds();
-		newStateBounds.setX(sourceBounds.getX()+200);
-		newStateBounds.setY(sourceBounds.getY());
-		stateNode.setLayoutConstraint(newStateBounds);
-		return stateNode;
+		return sourceBounds;
 	}
 	/**
 	 * @see org.yakindu.sct.ui.editor.factories.FactoryUtils.getRegionCompartmentView(View)
 	 */
-	private View getRegionCompartmentView(View view) {
-		EObject element = view.getElement();
-		Region containerOfType = EcoreUtil2.getContainerOfType(element, Region.class);
-		Diagram diagram = view.getDiagram();
-		TreeIterator<EObject> eAllContents = diagram.eAllContents();
-		while (eAllContents.hasNext()) {
-			EObject eObject = (EObject) eAllContents.next();
-			if(eObject instanceof View){
-				View view2 = (View) eObject;
-				if(view2.getElement() == containerOfType)
-					return (View) view2.getChildren().get(1);
-			}
-		}
-		return null;
+	private View getRegionCompartmentView(View stateView) {
+		return (View) stateView.eContainer();
 	}
 }
