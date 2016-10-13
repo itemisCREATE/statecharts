@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -153,6 +154,9 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	protected void assertCompatible(InferenceResult result1, InferenceResult result2, String msg) {
 		if (result1 == null || result2 == null)
 			return;
+		if (isNullOnComplexType(result1, result2) || isNullOnComplexType(result2, result1)) {
+			return;
+		}
 		String errorMsg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2);
 		if (!registry.haveCommonType(result1.getType(), result2.getType())) {
 			error(errorMsg, NOT_COMPATIBLE_CODE);
@@ -165,6 +169,9 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	protected void assertAssignable(InferenceResult varResult, InferenceResult valueResult, String msg) {
 		if (varResult == null || valueResult == null)
 			return;
+		if (isNullOnComplexType(varResult, valueResult)) {
+			return;
+		}
 		if (!registry.isSuperType(valueResult.getType(), varResult.getType())) {
 			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, varResult, valueResult), NOT_COMPATIBLE_CODE);
 			return;
@@ -192,6 +199,11 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 			String msg2 = msg != null ? msg : String.format(ASSERT_COMPATIBLE, subResult, superResult);
 			error(msg2, NOT_COMPATIBLE_CODE);
 		}
+	}
+	
+	protected boolean isNullOnComplexType(InferenceResult result1, InferenceResult result2) {
+		return result1.getType() instanceof ComplexType
+				&& registry.isSame(result2.getType(), registry.getType(ITypeSystem.NULL));
 	}
 
 	protected void info(String msg, String issueCode) {

@@ -54,6 +54,7 @@ import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
+import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot
 
 /**
  * 
@@ -270,9 +271,16 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def executeBinaryCoreFunction(Expression leftStatement, Expression rightStatement, String operator) {
-		var leftResult = leftStatement.execute()
-		var rightResult = rightStatement.execute()
+		var leftResult = leftStatement.execute().resolveReference
+		var rightResult = rightStatement.execute().resolveReference
 		return evaluate(operator, leftResult, rightResult)
+	}
+	
+	protected def Object resolveReference(Object element) {
+		if (element instanceof ReferenceSlot) {
+			return element.reference
+		}
+		return element
 	}
 
 	def executeUnaryCoreFunction(Expression statement, String operator) {

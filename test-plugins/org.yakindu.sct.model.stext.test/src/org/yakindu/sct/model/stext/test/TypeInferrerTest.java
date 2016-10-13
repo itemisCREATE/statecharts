@@ -16,6 +16,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractTypeInferrerTest;
@@ -762,5 +763,21 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 
 		assertTrue(isAnyType(inferTypeResultForExpression("t.x.x",
 				"internal var t:ComplexParameterizedType<ComplexParameterizedType<> >").getType()));
+	}
+	
+	@Test
+	public void testNullType() {
+		String scope = "internal var cp:ComplexType var i:integer";
+
+		expectNoErrors("cp == null", scope);
+		expectNoErrors("null != cp", scope);
+		expectNoErrors("cp = null", scope);
+
+		expectIssue(inferTypeResult("null = cp", Expression.class.getSimpleName(), scope).getType(),
+				"Assignment operator '=' may only be applied on compatible types, not on null and ComplexType.");
+		expectIssue(inferTypeResult("i == null", Expression.class.getSimpleName(), scope).getType(),
+				"Comparison operator '==' may only be applied on compatible types, not on integer and null.");
+		expectIssue(inferTypeResult("i = null", Expression.class.getSimpleName(), scope).getType(),
+				"Assignment operator '=' may only be applied on compatible types, not on integer and null.");
 	}
 }
