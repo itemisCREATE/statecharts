@@ -11,18 +11,11 @@
 package org.yakindu.sct.ui.editor.editor.proposals;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
-import org.eclipse.gmf.runtime.notation.Bounds;
-import org.eclipse.gmf.runtime.notation.LayoutConstraint;
-import org.eclipse.gmf.runtime.notation.Node;
-import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.modifications.AbstractSemanticModification;
-import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
  * This modification add a new outgoing transition to a new target state to a source state.
@@ -74,52 +67,15 @@ public class AddOutgoingStateModification extends AbstractSemanticModification {
 	}
 
 	@Override
-	protected void execute(EObject semanticElement, View sourceView) {
+	protected void execute(EObject semanticElement, View view) {
 		State state = (State) semanticElement;
-		
-		//add semantic state
 		State newState = SGraphFactory.eINSTANCE.createState();
-		state.getParentRegion().getVertices().add(newState);
-		
-		//add notation elements for state
-		Node stateNode = addStateNotations(sourceView, newState);
-		
-		//add semantic transition
 		Transition transition = SGraphFactory.eINSTANCE.createTransition();
+		state.getParentRegion().getVertices().add(newState);
 		transition.setSource(state);
 		transition.setTarget(newState);
 		
-		//add notation element for transition
-		ViewService.createEdge(sourceView, stateNode, transition, SemanticHints.TRANSITION, DiagramActivator.DIAGRAM_PREFERENCES_HINT);
-		
 		if (transitionSpecification != null) transition.setSpecification(transitionSpecification);
 		if (stateName != null) newState.setName(stateName);
-
-	}
-	private Node addStateNotations(View sourceView, State newState) {
-		View region = getParentRegionCompartmentView(sourceView);
-		Node stateNode = ViewService.createNode(region, newState, SemanticHints.STATE,
-				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
-		
-		Bounds sourceBounds = getSourceBounds(sourceView);
-		Bounds newStateBounds = NotationFactory.eINSTANCE.createBounds();
-		newStateBounds.setX(sourceBounds.getX()+150);
-		newStateBounds.setY(sourceBounds.getY()+50);
-		stateNode.setLayoutConstraint(newStateBounds);
-		return stateNode;
-	}
-	private Bounds getSourceBounds(View sourceView) {
-		if(sourceView instanceof Node){
-			Node mynode = (Node)sourceView;
-			LayoutConstraint layoutConstraint = mynode.getLayoutConstraint();
-			if(layoutConstraint instanceof Bounds){
-				return (Bounds) layoutConstraint;
-			}
-		}
-		throw new IllegalStateException("Given  view does not have a bounds element. ["+sourceView+"]");
-	}
-
-	private View getParentRegionCompartmentView(View stateView) {
-		return (View) stateView.eContainer();
 	}
 }
