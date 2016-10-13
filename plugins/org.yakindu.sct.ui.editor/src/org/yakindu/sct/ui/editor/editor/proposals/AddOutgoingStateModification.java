@@ -109,7 +109,6 @@ public class AddOutgoingStateModification extends AbstractSemanticModification {
 		return stateNode;
 	}
 	private Bounds getSourceBounds(View sourceView) {
-		Bounds sourceBounds = null;
 		if(sourceView instanceof Node){
 			Node mynode = (Node)sourceView;
 			LayoutConstraint layoutConstraint = mynode.getLayoutConstraint();
