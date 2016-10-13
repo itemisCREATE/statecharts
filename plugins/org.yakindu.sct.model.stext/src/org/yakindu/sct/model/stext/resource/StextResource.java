@@ -113,7 +113,6 @@ public class StextResource extends AbstractSCTResource {
 	protected void parseTransition(Transition transition) {
 		IParseResult parseResult = parse(transition, TransitionSpecification.class.getSimpleName());
 		TransitionSpecification rootASTElement = (TransitionSpecification) parseResult.getRootASTElement();
-		transition.getProperties().clear();
 		if (rootASTElement.getReaction() != null) {
 			TransitionReaction reaction = rootASTElement.getReaction();
 			transition.setEffect(reaction.getEffect());
