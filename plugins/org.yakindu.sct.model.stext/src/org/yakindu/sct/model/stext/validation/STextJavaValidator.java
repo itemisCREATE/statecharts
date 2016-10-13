@@ -35,7 +35,9 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -126,16 +128,26 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 	@Inject
 	private ContextPredicateProvider contextPredicateProvider;
+	@Inject
+	private IResourceDescriptions index;
 
 	@Check(CheckType.FAST)
-	public void checkContextElement(ElementReferenceExpression expression) {
-		Predicate<IEObjectDescription> predicate = contextPredicateProvider.calculateFilterPredicate(expression,
+	public void checkContextElement(final ElementReferenceExpression expression) {
+		Iterable<IEObjectDescription> description = null;
+		QualifiedName fqn = nameProvider.getFullyQualifiedName(expression.getReference());
+		if (index instanceof ResourceSetBasedResourceDescriptions) {
+			description = Lists.newArrayList(EObjectDescription.create(fqn, expression.getReference()));
+		} else {
+			//This is the fallback for headless execution
+			description = index.getExportedObjects(expression.getReference().eClass(), fqn, false);
+		}
+		final Predicate<IEObjectDescription> predicate = contextPredicateProvider.calculateFilterPredicate(expression,
 				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
-		IEObjectDescription desc = EObjectDescription
-				.create(nameProvider.getFullyQualifiedName(expression.getReference()), expression.getReference());
-		if (!predicate.apply(desc)) {
-			String name = expression.getReference().eClass().getName();
-			error(String.format(ERROR_WRONG_CONTEXT_ELEMENT_MSG, name), null, -1, ERROR_WRONG_CONTEXT_ELEMENT_CODE);
+		for (IEObjectDescription desc : description) {
+			if (!predicate.apply(desc)) {
+				String name = expression.getReference().eClass().getName();
+				error(String.format(ERROR_WRONG_CONTEXT_ELEMENT_MSG, name), null, -1, ERROR_WRONG_CONTEXT_ELEMENT_CODE);
+			}
 		}
 	}
 
@@ -577,7 +589,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-
 	@Check(CheckType.FAST)
 	public void checkFeatureCall(FeatureCall call) {
 		if (call.eContainer() instanceof FeatureCall) {
@@ -668,7 +679,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 		return null;
 	}
-	
 
 	@Check(CheckType.FAST)
 	public void checkEventDefinition(EventDefinition event) {
@@ -736,24 +746,24 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 		}
 	}
-	
+
 	protected void checkElementReferenceEffect(ElementReferenceExpression refExp) {
 		if (!(refExp.getReference() instanceof Operation)) {
 			if (refExp.getReference() instanceof Property) {
 				error("Access to property '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-				+ "' has no effect.", refExp,
-				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-				FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", refExp,
+						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (refExp.getReference() instanceof Event) {
 				error("Access to event '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-				+ "' has no effect.", refExp,
-				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-				FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", refExp,
+						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
 				error("Access to feature '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-				+ "' has no effect.", refExp,
-				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
-				FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", refExp,
+						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 	}
