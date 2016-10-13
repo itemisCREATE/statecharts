@@ -97,7 +97,7 @@ public class AddOutgoingStateModification extends AbstractSemanticModification {
 
 	}
 	private Node addStateNotations(View sourceView, State newState) {
-		View region = getRegionCompartmentView(sourceView);
+		View region = getParentRegionCompartmentView(sourceView);
 		Node stateNode = ViewService.createNode(region, newState, SemanticHints.STATE,
 				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		
@@ -118,10 +118,8 @@ public class AddOutgoingStateModification extends AbstractSemanticModification {
 		}
 		throw new IllegalStateException("Given  view does not have a bounds element. ["+sourceView+"]");
 	}
-	/**
-	 * @see org.yakindu.sct.ui.editor.factories.FactoryUtils.getRegionCompartmentView(View)
-	 */
-	private View getRegionCompartmentView(View stateView) {
+
+	private View getParentRegionCompartmentView(View stateView) {
 		return (View) stateView.eContainer();
 	}
 }
