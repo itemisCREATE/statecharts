@@ -97,7 +97,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		if(type instanceof EnumerationType) return value
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
-		throw new IllegalArgumentException("unknown type "+type.name)
+		throw new IllegalArgumentException("unknown type " + type.name)
 	}
 
 	def dispatch Object typeCast(Float value, Type type) {
@@ -107,18 +107,18 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object typeCast(Double value, Type type) {
-		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value.longValue
-		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
+		if(ts.isSuperType(type, ts.getType(ITypeSystem.INTEGER))) return value.longValue
+		if(ts.isSuperType(type, ts.getType(ITypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException("Invalid cast from Double to " + type.name)
 	}
 
 	def dispatch Object typeCast(Boolean value, Type type) {
-		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.BOOLEAN))) return value
+		if(ts.isSuperType(type, ts.getType(ITypeSystem.BOOLEAN))) return value
 		throw new IllegalArgumentException("Invalid cast from Boolean to " + type.name)
 	}
 
 	def dispatch Object typeCast(String value, Type type) {
-		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.STRING))) return value
+		if(ts.isSuperType(type, ts.getType(ITypeSystem.STRING))) return value
 		throw new IllegalArgumentException("Invalid cast from String to " + type.name)
 	}
 
@@ -128,16 +128,17 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object typeCast(Object value, Type type) {
+		if(ts.isSame(type, ts.getType(ITypeSystem.ANY))) return value
 		return value
 	}
 
 	def Object executeAssignment(AssignmentExpression assignment) {
 		var scopeVariable = context.resolve(assignment.varRef)
 		var result = assignment.expression.execute
-		if (result instanceof Enumerator) result = result.literalValue
+		if(result instanceof Enumerator) result = result.literalValue
 
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
-			//Strong typing, use the type of the scopeVariable instead of using new runtime type
+			// Strong typing, use the type of the scopeVariable instead of using new runtime type
 			scopeVariable.value = if(result != null) typeCast(result, scopeVariable.type) else null
 		} else {
 			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.getName())
@@ -148,7 +149,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		}
 		scopeVariable.value
 	}
-	
+
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
 		var event = context.resolve(eventRaising.event)
 		if (eventRaising.value != null) {
@@ -180,7 +181,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		if (expression.reference instanceof Enumerator) {
 			return new Long((expression.reference as Enumerator).literalValue)
 		}
-		
+
 		val executionSlot = context.resolve(expression)
 		if (executionSlot instanceof ExecutionVariable)
 			return executionSlot.getValue
@@ -275,7 +276,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		var rightResult = rightStatement.execute().resolveReference
 		return evaluate(operator, leftResult, rightResult)
 	}
-	
+
 	protected def Object resolveReference(Object element) {
 		if (element instanceof ReferenceSlot) {
 			return element.reference
@@ -314,10 +315,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			return slot
 		}
 		if (slot instanceof ExecutionEvent) {
-			if(call.feature instanceof Operation) {
-				(slot as ExecutionEvent).raised = true	
+			if (call.feature instanceof Operation) {
+				(slot as ExecutionEvent).raised = true
 			}
-			
+
 			return (slot as ExecutionEvent).raised
 		}
 
