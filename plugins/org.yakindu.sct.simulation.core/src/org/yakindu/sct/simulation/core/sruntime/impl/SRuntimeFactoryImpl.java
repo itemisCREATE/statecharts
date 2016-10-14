@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.sct.simulation.core.sruntime.Any;
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.core.sruntime.EventDirection;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
@@ -192,6 +193,8 @@ public class SRuntimeFactoryImpl extends EFactoryImpl implements SRuntimeFactory
 			return Double.parseDouble(value);
 		if (Integer.class.getName().equals(className))
 			return Integer.parseInt(value);
+		if(Any.class.getName().equals(className))
+			return new Any();
 		return super.createFromString(eDataType, initialValue);
 	}
 
