@@ -79,7 +79,7 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 		if (root instanceof InterfaceScope) {
 			featureSlot = context.getSlot(callStack.pop.feature.fullyQualifiedName.toString)
 		} else {
-			featureSlot = packageNamespaceAwareResolve(context, root)
+			featureSlot = resolve(context, current.owner)
 			if (featureSlot == null) {
 				return null // could not find starting slot for feature call
 			}
