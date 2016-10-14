@@ -316,7 +316,7 @@ Provided the function is declared in an imported C header file, you can call it 
 
 bc. pTriangle2 = rotateTriangle(pTriangle, pCenterPoint, 45.0);
 
-bq.. *Please note:
+bq.. *Please note:*
 
 Assigning a pointer to a pointer variable is only possible if the pointer types are the same.
 
