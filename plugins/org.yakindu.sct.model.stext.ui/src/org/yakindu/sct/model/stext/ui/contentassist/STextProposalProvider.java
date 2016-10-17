@@ -37,6 +37,7 @@ import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -192,12 +193,21 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 
 	@Inject
-	private ContextPredicateProvider contextProvider;
+	protected ContextPredicateProvider contextProvider;
 
+	@Override
 	public void completeElementReferenceExpression_Reference(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		Predicate<IEObjectDescription> predicate = contextProvider.calculateFilterPredicate(context.getCurrentModel(),
 				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
+		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor, predicate);
+	}
+	
+	@Override
+	public void completeTypeSpecifier_Type(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		Predicate<IEObjectDescription> predicate = contextProvider.calculateFilterPredicate(context.getCurrentModel(),
+				TypesPackage.Literals.TYPE_SPECIFIER__TYPE);
 		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor, predicate);
 	}
 
