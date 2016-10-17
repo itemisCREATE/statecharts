@@ -40,7 +40,7 @@
 </div><!--end widget-span -->
 <div class="span10 widget-span widget-type-menu menu-primary" style="" data-widget-type="menu" data-x="2" data-w="10">
 <div class="cell-wrapper layout-widget-wrapper">
-{% menu "module_142729402815510929" overrideable=false, cell=false, cells='[]', ending_html='', root=false, row=false, starting_html='', flow='horizontal', flyouts='true', max_levels='2', root_type='site_root', site_map_name='YAKINDU Statechart tools', wrapping_html='', label='Advanced Menu' %}</div><!--end layout-widget-wrapper -->
+{% menu "module_142729402815510929" overrideable=false, cell=false, cells='[]', ending_html='', root=false, row=false, starting_html='', flow='horizontal', flyouts='true', max_levels='3', root_type='site_root', site_map_name='YAKINDU Statechart tools', wrapping_html='', label='Advanced Menu' %}</div><!--end layout-widget-wrapper -->
 </div><!--end widget-span -->
 </div><!--end row-->
 </div><!--end row-wrapper -->
