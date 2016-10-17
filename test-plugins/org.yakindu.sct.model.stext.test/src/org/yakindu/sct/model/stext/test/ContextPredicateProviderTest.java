@@ -14,6 +14,7 @@ import java.util.Arrays;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -72,6 +73,7 @@ public class ContextPredicateProviderTest extends AbstractSTextValidationTest {
 	}
 
 	@Test
+	@Ignore
 	public void test() {
 		EObject expression = parseExpression(statement, ruleName, scopes);
 		AssertableDiagnostics validationResult = tester.validate(expression);
