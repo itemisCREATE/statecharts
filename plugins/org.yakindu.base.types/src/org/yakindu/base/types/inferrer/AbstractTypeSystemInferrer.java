@@ -43,7 +43,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	protected static final String ASSERT_SAME = "Expected types %s and %s are same.";
 	protected static final String ASSERT_COMPATIBLE = "Incompatible types %s and %s.";
 
-	private static final String METHOD_NAME = "infer";
+	private static final String METHOD_NAME = "doInfer";
 
 	@Inject
 	protected ITypeSystem registry;
