@@ -29,7 +29,6 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.GridLayout;
@@ -74,6 +73,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 	}
 
 	protected void createDomainCombo(Composite leftColumn) {
+
 		Label label = getToolkit().createLabel(leftColumn, "Statechart domain");
 		GridDataFactory.fillDefaults().span(2, 1).align(SWT.FILL, SWT.CENTER).applyTo(label);
 		domainCombo = new ComboViewer(leftColumn);
@@ -92,8 +92,10 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		for (IDomain domainDescriptor : domains) {
 			domainCombo.add(domainDescriptor);
 		}
-		domainCombo.setSelection(new StructuredSelection(DomainRegistry
-				.getDomain(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral())));
+
+		if (domains.size() <= 1) {
+			domainCombo.getControl().setVisible(false);
+		}
 
 	}
 
