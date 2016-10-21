@@ -94,8 +94,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		}
 
 		if (domains.size() <= 1) {
-			label.setVisible(false);
-			domainCombo.getControl().setVisible(false);
+			domainCombo.getControl().setEnabled(false);
 		}
 
 	}
