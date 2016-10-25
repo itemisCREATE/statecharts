@@ -120,7 +120,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		mgr.add(collapse);
 		IAction expand = new ExpandAllAction(viewer);
 		mgr.add(expand);
-		IAction hideTimeEvent = new HideTimeEventsAction(true);
+		IAction hideTimeEvent = new HideTimeEventsAction(false);
 		mgr.add(hideTimeEvent);
 	}
 
