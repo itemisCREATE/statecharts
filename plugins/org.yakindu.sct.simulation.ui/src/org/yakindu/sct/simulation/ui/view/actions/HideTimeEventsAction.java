@@ -27,7 +27,7 @@ public class HideTimeEventsAction extends Action {
 	public HideTimeEventsAction(boolean show) {
 		super("Hide TimeEvents");
 		getStore().setValue(HIDE_KEY, show);
-		setToolTipText("Show TimeEvents");
+		setToolTipText("Show Time Events");
 		setImageDescriptor(SimulationImages.TIMEEVENT.imageDescriptor());
 		setChecked(!(getStore().getBoolean(HIDE_KEY)));
 	}
