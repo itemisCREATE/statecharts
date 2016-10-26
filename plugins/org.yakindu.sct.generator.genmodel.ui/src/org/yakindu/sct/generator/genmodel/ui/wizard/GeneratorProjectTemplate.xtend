@@ -12,9 +12,7 @@ package org.yakindu.sct.generator.genmodel.ui.wizard
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.io.BufferedInputStream
 import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
 import java.util.Collections
 import org.apache.commons.lang.StringEscapeUtils
 import org.eclipse.core.resources.IContainer
@@ -24,14 +22,14 @@ import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.IWorkspace
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.Path
-import org.eclipse.core.runtime.SubProgressMonitor
+import org.eclipse.core.runtime.SubMonitor
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.xtext.parser.IEncodingProvider
+import org.eclipse.xtext.util.Strings
 import org.yakindu.sct.model.sgen.ParameterTypes
 import org.yakindu.sct.model.sgen.SGenFactory
-import org.eclipse.xtext.util.Strings
 
 /**
  * 
@@ -62,14 +60,15 @@ class GeneratorProjectTemplate {
 			.write(data.projectSettings(encodingProvider.getEncoding(URI::createPlatformResourceURI(project.location.toString, true))))
 		project.getFile('.settings/org.eclipse.jdt.core.prefs')
 			.write(data.jdtSettings())
-		if (data.generatorType != GeneratorType::Java) {
+		if (data.generatorType == GeneratorType::Xtend) {
 			project.getFile('.settings/org.eclipse.xtend.shared.ui.prefs')
-				.write(data.xpandSettings)
+				.write(data.xtendSettings)
 		}
 		project.getFile('build.properties').write(data.buildProperties)
 		project.getFile('META-INF/MANIFEST.MF').write(data.manifest)
 		if (data.pluginExport) {
 			project.getFile('plugin.xml').write(data.plugin)
+			project.getFile('src/'+data.moduleClass.javaFilename).write(data.module)
 			if (data.typeLibrary) {
 				project.createFolder('library')
 				project.getFile('library/FeatureTypeLibrary.xmi')
@@ -92,60 +91,38 @@ class GeneratorProjectTemplate {
 		}
 	}
 	
-	def fromMyFolder(String s) {
-		'org/yakindu/sct/generator/genmodel/ui/wizard/'+s
+	def protected sub(IProgressMonitor mon) {
+		SubMonitor.convert(mon, 1)
 	}
 	
-	def sub(IProgressMonitor mon) {
-		new SubProgressMonitor(mon,1)
-	}
-	
-	def templateName(ProjectData data) {
-		if (data.pluginExport)
-			data.generatorClass.simpleName
-		else
-			'Main'
-	}
-	
-	def targetPackage(ProjectData data) {
-		if (data.pluginExport)
-			data.generatorClass.packageName
-		else
-			'org.yakindu.sct.generator.xpand'
-	}
-	
-	def asFolder(String s) {
-		s.replaceAll('\\.','/')
-	}
-	
-	def javaPathToXpand(String s) {
-		s.replaceAll('\\.','::')
-	}
-	
-	def simpleName(String s) {
+	def protected simpleName(String s) {
 		s.substring(s.lastIndexOf('.')+1)
 	}
 	
-	def packageName(String s) {
+	def protected packageName(String s) {
 		s.substring(0, s.lastIndexOf('.'))	
 	}
 	
-	def providerClass(ProjectData data){
+	def protected moduleClass(ProjectData data) {
+		data.generatorClass+'Module'
+	}
+	
+	def protected providerClass(ProjectData data){
 		data.generatorClass+'DefaultValueProvider'
 	}
 
-	def libraryConstantsClass(ProjectData data){
+	def protected libraryConstantsClass(ProjectData data){
 		data.providerClass.packageName+'.IFeatureConstants'
 	}
 	
-	def javaFilename(String s) {
+	def protected javaFilename(String s) {
 		s.replaceAll('\\.','/')+'.java'
 	}
-	def xtendFilename(String s) {
+	def protected xtendFilename(String s) {
 		s.replaceAll('\\.','/')+'.xtend'
 	}
 	
-	def featureLibrary(ProjectData data) {
+	def protected featureLibrary(ProjectData data) {
 		val factory = SGenFactory::eINSTANCE
 		val lib = factory.createFeatureTypeLibrary
 		lib.name=data.generatorName
@@ -159,7 +136,7 @@ class GeneratorProjectTemplate {
 		return lib		
 	}
 	
-	def write(IFile file, EObject object) {
+	def protected write(IFile file, EObject object) {
 		val uri = URI::createPlatformResourceURI(file.fullPath.toString,true)
 		val resourceSet = new ResourceSetImpl()
 		val resource = resourceSet.createResource(uri)
@@ -167,11 +144,11 @@ class GeneratorProjectTemplate {
 		resource.save(Collections::emptyMap)
 	}
 	
-	def write(IFile file, CharSequence content) {
+	def protected write(IFile file, CharSequence content) {
 		file.write(content.toString)
 	}
 
-	def write(IFile file, String content) {
+	def protected write(IFile file, String content) {
 		if (!file.parent.exists) {
 			createFolderHierarchy(file.parent as IFolder,monitor.sub)
 		}
@@ -192,12 +169,12 @@ class GeneratorProjectTemplate {
 		monitor.worked(1)
 	}
 	
-	def createFolder(IContainer container, String folderPath) {
+	def protected createFolder(IContainer container, String folderPath) {
 		createFolderHierarchy(container.getFolder(new Path(folderPath)),monitor.sub);
 		monitor.worked(1)
 	}
 
-	 def void createFolderHierarchy(IFolder folder, IProgressMonitor submonitor) {
+	def protected void createFolderHierarchy(IFolder folder, IProgressMonitor submonitor) {
 		if (!folder.exists) {
 			if (!folder.parent.exists
 					&& folder.parent.type == IResource::FOLDER) {
@@ -207,26 +184,11 @@ class GeneratorProjectTemplate {
 		}
 	}
 	
-	def escapeForXml(String s) {
+	def protected escapeForXml(String s) {
 		StringEscapeUtils::escapeXml(s)
 	}
 	
-	def resource(String path, String encoding) {
-		val inStream = Thread::currentThread.contextClassLoader.getResourceAsStream(path)
-		val outStream = new ByteArrayOutputStream()
-		try {
-			val buffer = new BufferedInputStream(inStream)
-			var result=0;
-			while ((result=buffer.read) != -1 ) {
-				outStream.write(result as byte)
-			}
-			outStream.toString(encoding)
-		} finally {
-			inStream.close
-		}
-	}
-	
-	def projectFile(ProjectData data) '''
+	def protected projectFile(ProjectData data) '''
 		<?xml version="1.0" encoding="UTF-8"?>
 		<projectDescription>
 			<name>«data.projectName»</name>
@@ -277,7 +239,7 @@ class GeneratorProjectTemplate {
 		</projectDescription>
 	'''
 	
-	def classpath(ProjectData data) '''
+	def protected classpath(ProjectData data) '''
 		<?xml version="1.0" encoding="UTF-8"?>
 		<classpath>
 			«IF data.generatorType == GeneratorType::Xtend»
@@ -290,7 +252,7 @@ class GeneratorProjectTemplate {
 		</classpath>
 	'''
 	
-	def manifest(ProjectData data)'''
+	def protected manifest(ProjectData data)'''
 		Manifest-Version: 1.0
 		Bundle-ManifestVersion: 2
 		Bundle-Name: «data.projectName»
@@ -316,10 +278,10 @@ class GeneratorProjectTemplate {
 		 org.yakindu.sct.model.sexec,
 		 org.yakindu.sct.model.stext,
 		 org.yakindu.sct.model.sgraph
-		Bundle-RequiredExecutionEnvironment: J2SE-1.7
+		Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 	'''
 	
-	def plugin(ProjectData data) '''
+	def protected plugin(ProjectData data) '''
 		<?xml version="1.0" encoding="UTF-8"?>
 		<?eclipse version="3.4"?>
 		<plugin>
@@ -327,6 +289,7 @@ class GeneratorProjectTemplate {
 		         point="org.yakindu.sct.generator.core.generator">
 		      <SCTGenerator 
 					executor="org.yakindu.sct.generator.core.execution.SExecGeneratorEntryExecutor"
+		            bindings="«data.generatorClass.escapeForXml»Module"
 		            description="«data.generatorDescription.escapeForXml»"
 		            id="«data.generatorId»"
 		            name="«data.generatorName.escapeForXml»"
@@ -358,7 +321,7 @@ class GeneratorProjectTemplate {
 		 	</extension>
 		</plugin>
 	'''
-	def javaGenerator(ProjectData data) '''
+	def protected javaGenerator(ProjectData data) '''
 		package «data.generatorClass.packageName»;
 
 		import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -386,7 +349,8 @@ class GeneratorProjectTemplate {
 			}
 		}
 	'''
-	def xtendGenerator(ProjectData data) '''
+	
+	def protected xtendGenerator(ProjectData data) '''
 		package «data.generatorClass.packageName»
 
 		import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -414,8 +378,7 @@ class GeneratorProjectTemplate {
 		}
 	'''
 	
-	
-	def defaultProvider(ProjectData data) '''
+	def protected defaultProvider(ProjectData data) '''
 		package «data.providerClass.packageName»;
 		
 		import static «data.libraryConstantsClass».LIBRARY_NAME;
@@ -456,7 +419,7 @@ class GeneratorProjectTemplate {
 		}
 	'''
 	
-	def libraryConstants(ProjectData data) '''
+	def protected libraryConstants(ProjectData data) '''
 		package «data.libraryConstantsClass.packageName»;
 		
 		public interface «data.libraryConstantsClass.simpleName» {
@@ -466,25 +429,25 @@ class GeneratorProjectTemplate {
 		}
 	'''
 	
-	def projectSettings(ProjectData data, String encoding) '''
+	def protected projectSettings(ProjectData data, String encoding) '''
 		eclipse.preferences.version=1
 		encoding/<project>=«encoding»
 	'''
 
-	def xpandSettings(ProjectData data) '''
+	def protected xtendSettings(ProjectData data) '''
 		eclipse.preferences.version=1
 		project.specific.metamodel=true
 		metamodelContributor=org.eclipse.xtend.typesystem.emf.ui.EmfMetamodelContributor
 	'''
 	
-	def jdtSettings(ProjectData data) '''
+	def protected jdtSettings(ProjectData data) '''
 		eclipse.preferences.version=1
 		org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5
 		org.eclipse.jdt.core.compiler.compliance=1.5
 		org.eclipse.jdt.core.compiler.source=1.5
 	'''
 	
-	def buildProperties(ProjectData data) '''
+	def protected buildProperties(ProjectData data) '''
 		source.. = src/«IF data.generatorType == GeneratorType::Xtend»,\
 			xtend-gen
 		«ELSE»«Strings.newLine»«ENDIF»
@@ -494,5 +457,21 @@ class GeneratorProjectTemplate {
 			bin.includes = META-INF/,.
 		«ENDIF»
 	'''
-	 
+	
+	def protected module(ProjectData data) '''
+		package «data.generatorClass.packageName»;
+		
+		import org.yakindu.sct.generator.core.GeneratorModule;
+		import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
+		import org.yakindu.sct.model.sgen.GeneratorEntry;
+		
+		import com.google.inject.Binder;
+		
+		public class «data.moduleClass.simpleName» implements GeneratorModule {
+		
+		    public void configure(GeneratorEntry entry, Binder binder) {
+		        binder.bind(IExecutionFlowGenerator.class).to(«data.generatorClass.simpleName».class);
+		    }
+		}
+	'''
  }
