@@ -26,15 +26,15 @@ public class HideTimeEventsAction extends Action {
 
 	public HideTimeEventsAction(boolean show) {
 		super("Hide TimeEvents");
-		setToolTipText("Show TimeEvents");
+		getStore().setValue(HIDE_KEY, show);
+		setToolTipText("Show Time Events");
 		setImageDescriptor(SimulationImages.TIMEEVENT.imageDescriptor());
-		setChecked(getStore().getBoolean(HIDE_KEY));
+		setChecked(!(getStore().getBoolean(HIDE_KEY)));
 	}
 
 	@Override
 	public void run() {
-		boolean hide = getStore().getBoolean(HIDE_KEY);
-		getStore().setValue(HIDE_KEY, !hide);
+		getStore().setValue(HIDE_KEY, !(getStore().getBoolean(HIDE_KEY)));
 	}
 
 	private IPreferenceStore getStore() {
