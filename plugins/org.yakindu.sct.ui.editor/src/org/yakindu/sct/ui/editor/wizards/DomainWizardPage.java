@@ -109,8 +109,8 @@ public class DomainWizardPage extends WizardPage {
 			}
 
 		});
-		domainCombo.setSelection(new StructuredSelection(DomainRegistry
-				.getDomain(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral())));
+		
+		trySelectDefaultDomain();
 
 		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
 				.getConfigurationElementsFor("org.yakindu.sct.ui.wizard.create.contribution");
@@ -127,6 +127,17 @@ public class DomainWizardPage extends WizardPage {
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+	
+	private void trySelectDefaultDomain() {
+		try {
+			domainCombo.setSelection(new StructuredSelection(
+					DomainRegistry.getDomain(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral())));
+		} catch (IllegalArgumentException e) {
+			// Can be ignored, if no default domain available no explicit domain
+			// selection will be done and the first one initialized in
+			// comboViewer will be selected implicitly
 		}
 	}
 

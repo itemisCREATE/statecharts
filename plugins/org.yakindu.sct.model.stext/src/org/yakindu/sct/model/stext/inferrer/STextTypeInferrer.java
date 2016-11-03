@@ -40,7 +40,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	public static final String TIME_SPEC = "The evaluation result of a time expression must be of type integer.";
 	public static final String MISSING_VALUE = "Need to assign a value to an event of type %s.";
 
-	public InferenceResult infer(VariableDefinition e) {
+	public InferenceResult doInfer(VariableDefinition e) {
 		InferenceResult result = inferTypeDispatch(e.getTypeSpecifier());
 		assertNotType(result, VARIABLE_VOID_TYPE, getResultFor(VOID));
 		if (e.getInitialValue() == null)
@@ -52,36 +52,36 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 
 	
 	
-	public InferenceResult infer(Event e) {
+	public InferenceResult doInfer(Event e) {
 		// if an event is used within an expression, the type is boolean and the
 		// value indicates if the event is raised or not
 		return getResultFor(BOOLEAN);
 	}
 
-	public InferenceResult infer(Guard e) {
+	public InferenceResult doInfer(Guard e) {
 		InferenceResult result = inferTypeDispatch(e.getExpression());
 		assertIsSubType(result, getResultFor(BOOLEAN), GUARD);
 		return result;
 	}
 
-	public InferenceResult infer(TimeEventSpec e) {
+	public InferenceResult doInfer(TimeEventSpec e) {
 		InferenceResult result = inferTypeDispatch(e.getValue());
 		assertIsSubType(result, getResultFor(INTEGER), TIME_SPEC);
 		return inferTypeDispatch(result.getType());
 	}
 
-	public InferenceResult infer(Scope scope) {
+	public InferenceResult doInfer(Scope scope) {
 		return getResultFor(VOID);
 	}
 
-	public InferenceResult infer(EventValueReferenceExpression e) {
+	public InferenceResult doInfer(EventValueReferenceExpression e) {
 		Event definition = deresolve(e.getValue());
 		if (definition != null)
 			return definition.getTypeSpecifier() == null ? getResultFor(VOID) : inferTypeDispatch(definition.getTypeSpecifier());
 		return inferTypeDispatch(e.getValue());
 	}
 
-	public InferenceResult infer(EventRaisingExpression e) {
+	public InferenceResult doInfer(EventRaisingExpression e) {
 		Event event = deresolve(e.getEvent());
 		InferenceResult eventType = null;
 		if(event != null)
@@ -115,7 +115,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		return null;
 	}
 
-	public InferenceResult infer(ActiveStateReferenceExpression e) {
+	public InferenceResult doInfer(ActiveStateReferenceExpression e) {
 		return getResultFor(BOOLEAN);
 	}
 
