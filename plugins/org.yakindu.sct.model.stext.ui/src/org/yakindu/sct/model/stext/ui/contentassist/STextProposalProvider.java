@@ -204,6 +204,14 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 	
 	@Override
+	public void completeSimpleElementReferenceExpression_Reference(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		Predicate<IEObjectDescription> predicate = contextProvider.calculateFilterPredicate(context.getCurrentModel(),
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
+		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor, predicate);
+	}
+		
+	@Override	
 	public void completeTypeSpecifier_Type(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		Predicate<IEObjectDescription> predicate = contextProvider.calculateFilterPredicate(context.getCurrentModel(),
@@ -260,16 +268,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 
 	@Override
-	public void complete_ElementReferenceExpression(EObject model, RuleCall ruleCall, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		// TODO Auto-generated method stub
-		super.complete_ElementReferenceExpression(model, ruleCall, context, acceptor);
-	}
-
-	@Override
 	public void complete_STRING(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-
 		super.complete_STRING(model, ruleCall, context, getCustomAcceptor(model, "string", acceptor));
 	}
 
