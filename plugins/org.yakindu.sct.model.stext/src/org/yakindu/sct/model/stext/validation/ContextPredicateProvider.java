@@ -194,16 +194,16 @@ public class ContextPredicateProvider {
 
 	public Predicate<IEObjectDescription> calculateFilterPredicate(final EObject context, final EReference reference) {
 		Predicate<IEObjectDescription> predicate = Predicates.alwaysTrue();
-//		EObject container = context;
-//		EReference ref = reference;
-//		while (container != null) {
-//			predicate = getPredicate(container.eClass(), ref);
-//			if (!(predicate instanceof EmptyPredicate)) {
-//				break;
-//			}
-//			ref = (EReference) container.eContainingFeature();
-//			container = container.eContainer();
-//		}
+		EObject container = context;
+		EReference ref = reference;
+		while (container != null) {
+			predicate = getPredicate(container.eClass(), ref);
+			if (!(predicate instanceof EmptyPredicate)) {
+				break;
+			}
+			ref = (EReference) container.eContainingFeature();
+			container = container.eContainer();
+		}
 		return predicate;
 	}
 }
