@@ -65,5 +65,12 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 		return new IProject[] { resource.getProject() };
 
 	}
+	
+	@Override
+	public boolean buildForLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
+			throws CoreException {
+		//Never build the workspace before simulation
+		return false;
+	}
 
 }
