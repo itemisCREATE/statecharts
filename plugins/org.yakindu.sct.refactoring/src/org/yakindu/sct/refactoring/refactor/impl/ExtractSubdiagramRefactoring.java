@@ -166,7 +166,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		stringBuilder.append(transition.getTarget().getName());
 		int index = transition.getSource().getOutgoingTransitions().indexOf(transition);
 		stringBuilder.append(index);
-		return stringBuilder.toString();
+		return asIdentifier(stringBuilder.toString());
 	}
 
 	protected String getExitPointName(Transition transition) {
@@ -175,7 +175,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		stringBuilder.append(transition.getSource().getName());
 		int index = transition.getSource().getOutgoingTransitions().indexOf(transition);
 		stringBuilder.append(index);
-		return stringBuilder.toString();
+		return asIdentifier(stringBuilder.toString());
 	}
 
 	protected Entry createSemanticEntryPoint(Transition transition) {
