@@ -41,6 +41,15 @@ public class ExtractSubdiagramRefactoringTest extends ViewBasedRefactoringTest {
 				"Composite_Composite_A");
 	}
 
+	// #990
+	@Test
+	public void testStateWithWhitespace() {
+		testRefactoring(
+				EXTRACT_SUBDIAGRAM + "before_whitespaceStateName.sct", 
+				EXTRACT_SUBDIAGRAM + "after_whitespaceStateName.sct", 
+				"A");
+	}
+	
 	@Override
 	protected AbstractRefactoring<View> getRefactoring() {
 		return new ExtractSubdiagramRefactoring();
