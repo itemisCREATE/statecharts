@@ -217,13 +217,13 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	}
 
 	protected void logGenmodelError(String resource) {
-		Status status = new Status(Status.ERROR, BUILDER_ID,
+		Status status = new Status(Status.WARNING, BUILDER_ID,
 				String.format("Cannot execute Genmodel %s. The file contains errors.", resource));
 		Platform.getLog(BuilderActivator.getDefault().getBundle()).log(status);
 	}
 
 	protected void logStatechartError(final String resource) {
-		Status status = new Status(Status.ERROR, BUILDER_ID,
+		Status status = new Status(Status.WARNING, BUILDER_ID,
 				String.format("Cannot generate Code for Statechart %s. The file contains errors.", resource));
 		Platform.getLog(BuilderActivator.getDefault().getBundle()).log(status);
 	}
