@@ -53,6 +53,7 @@ import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.ui.editor.DiagramActivator;
+import org.yakindu.sct.ui.editor.partitioning.DiagramEditorInput;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.proposals.ContentProposalViewerKeyHandler;
@@ -291,9 +292,11 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			domainAdapter.dispose();
 		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
 		try {
+
 			// Touch the file for revalidation, when the user did not save
-			// the changes
-			if (editorInput != null && isDirty() && editorInput.getFile() != null && editorInput.getFile().exists()) {
+			// the changes, only for the "root editor"
+			if (editorInput != null && !(editorInput instanceof DiagramEditorInput) && isDirty()
+					&& editorInput.getFile() != null && editorInput.getFile().exists()) {
 				editorInput.getFile().touch(new NullProgressMonitor());
 			}
 		} catch (CoreException e) {
