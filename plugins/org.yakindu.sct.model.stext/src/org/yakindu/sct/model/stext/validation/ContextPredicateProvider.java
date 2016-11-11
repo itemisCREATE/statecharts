@@ -46,8 +46,13 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.resource.TypedResourceDescriptionStrategy;
+import org.yakindu.base.types.typesystem.GenericTypeValueProvider;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.stext.stext.StextPackage;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -70,12 +75,21 @@ public class ContextPredicateProvider {
 	public static class FeaturedTypePredicate implements Predicate<IEObjectDescription> {
 		public boolean apply(IEObjectDescription input) {
 			EClass eClass = input.getEClass();
-			return SGraphPackage.Literals.SCOPE.isSuperTypeOf(eClass)
-					|| (TypesPackage.Literals.TYPE.isSuperTypeOf(eClass)
-							&& TypesPackage.Literals.DECLARATION.isSuperTypeOf(eClass));
+			
+			return (SGraphPackage.Literals.SCOPE.isSuperTypeOf(eClass)) 
+				|| (TypesPackage.Literals.DECLARATION.isSuperTypeOf(eClass) && hasComplexType(input))
+				|| (StextPackage.Literals.VARIABLE_DEFINITION.isSuperTypeOf(eClass) && TypesPackage.Literals.COMPLEX_TYPE.isSuperTypeOf(getVariableType(input)));				
 		}
 	}
 
+	protected static EClass getVariableType(IEObjectDescription ieod) {
+		 EObject eObj = ieod.getEObjectOrProxy();
+		 if (! eObj.eIsProxy()) {
+			 return ((VariableDefinition)eObj).getType().eClass();
+		 }
+		 return TypesPackage.Literals.TYPE;
+	}
+	
 	public static class EventPredicate extends FeaturedTypePredicate {
 		@Override
 		public boolean apply(IEObjectDescription input) {
@@ -206,4 +220,11 @@ public class ContextPredicateProvider {
 		}
 		return predicate;
 	}
+	
+	
+	protected static boolean hasComplexType(IEObjectDescription input) {
+		String hasComplexType = input.getUserData(TypedResourceDescriptionStrategy.HAS_COMPLEX_TYPE);
+		return hasComplexType != null && Boolean.valueOf(hasComplexType);
+	}
+
 }
