@@ -226,8 +226,7 @@ class ExpressionCode {
 		«IF it.reference instanceof OperationDefinition»
 			«reference.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)
 		«ELSE»
-			«definition.code»
-		«ENDIF»
+			«definition.code»«ENDIF»
 	'''
 
 	def dispatch String code(FeatureCall it) '''
