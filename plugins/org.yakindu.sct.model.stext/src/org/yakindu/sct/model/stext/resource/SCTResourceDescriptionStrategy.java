@@ -16,6 +16,8 @@ import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.IAcceptor;
+import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.resource.TypedResourceDescriptionStrategy;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
@@ -25,9 +27,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {
-
-	public static final String IS_COMPLEX_TYPE = "IS_COMPLEX_TYPE";
+public class SCTResourceDescriptionStrategy extends TypedResourceDescriptionStrategy {
 
 	@Override
 	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
@@ -35,5 +35,6 @@ public class SCTResourceDescriptionStrategy extends DefaultResourceDescriptionSt
 			return super.createEObjectDescriptions(eObject, acceptor);
 		return false;
 	}
+	
 
 }

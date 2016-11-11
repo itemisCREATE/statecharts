@@ -15,6 +15,7 @@ Export-Package: org.yakindu.base.base,
  org.yakindu.base.types.impl,
  org.yakindu.base.types.inferrer,
  org.yakindu.base.types.interpreter,
+ org.yakindu.base.types.resource,
  org.yakindu.base.types.typesystem,
  org.yakindu.base.types.util,
  org.yakindu.base.types.validation
@@ -25,7 +26,8 @@ Require-Bundle: org.eclipse.core.runtime,
  com.google.inject,
  org.eclipse.xtend.lib,
  com.google.guava,
- org.eclipse.xtext.util
+ org.eclipse.xtext.util,
+ org.eclipse.xtext
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j
 
