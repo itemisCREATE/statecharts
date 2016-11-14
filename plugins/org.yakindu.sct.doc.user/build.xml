@@ -5,7 +5,7 @@
          xmlns:if="ant:if"
          xmlns:unless="ant:unless"
          xmlns:artifact="antlib:org.eclipse.aether.ant">
-    
+
     <!-- Runtime properties:
          website.local.files: Generates website as local files
     -->
@@ -239,7 +239,7 @@
     -->
 
     <target name="generate.website"
-            description="Generates the documentation as various HTML files for the website, each being composed of selected sections."
+            description="Generates the documentation as various HTML files for the website, each being composed of selected sections. Use -Dwebsite.local.files=true to generate the website as local files for preview."
             depends="init.wikitext">
 
         <sequential>
