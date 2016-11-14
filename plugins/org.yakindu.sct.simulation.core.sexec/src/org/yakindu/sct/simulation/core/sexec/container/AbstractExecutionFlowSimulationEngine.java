@@ -22,7 +22,7 @@ import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssu
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.simulation.core.Activator;
+import org.yakindu.sct.simulation.core.SimulationCoreActivator;
 import org.yakindu.sct.simulation.core.engine.IExecutionControl;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
@@ -69,16 +69,17 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 		}
 	}
 
-	private void handleException(Exception e) {
+	protected void handleException(Exception e) {
 		if (e instanceof WrappedException) {
 			WrappedException e1 = (WrappedException)e;
 			handleException(e1.getCause().getMessage(), e1.getCause());
 		} else handleException(e.getMessage(), e);
 	}
 	
-	private void handleException(String message, Throwable t) {
-		Status errorStatus = new Status(Status.ERROR, Activator.PLUGIN_ID, ERROR_DURING_SIMULATION,
+	protected void handleException(String message, Throwable t) {
+		Status errorStatus = new Status(Status.ERROR, SimulationCoreActivator.PLUGIN_ID, ERROR_DURING_SIMULATION,
 				message, t);
+		SimulationCoreActivator.getDefault().getLog().log(errorStatus);
 		IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(errorStatus);
 		try {
 			statusHandler.handleStatus(errorStatus, getDebugTarget());
@@ -105,7 +106,7 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 		ListBasedValidationIssueAcceptor acceptor = new ListBasedValidationIssueAcceptor();
 		ExecutionFlow flow = sequencer.transform(statechart, acceptor);
 		if (acceptor.getTraces(Severity.ERROR).size() > 0) {
-			Status errorStatus = new Status(Status.ERROR, Activator.PLUGIN_ID, ERROR_DURING_SIMULATION,
+			Status errorStatus = new Status(Status.ERROR, SimulationCoreActivator.PLUGIN_ID, ERROR_DURING_SIMULATION,
 					acceptor.getTraces(Severity.ERROR).iterator().next().toString(), null);
 			IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(errorStatus);
 			try {

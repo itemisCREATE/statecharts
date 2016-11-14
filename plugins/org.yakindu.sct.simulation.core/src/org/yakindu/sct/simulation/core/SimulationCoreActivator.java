@@ -10,28 +10,33 @@
 */
 package org.yakindu.sct.simulation.core;
 
+import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.yakindu.sct.simulation.core.hmr.SCTHotModelReplacementManager;
 
-public class Activator implements BundleActivator {
-
-	private static BundleContext context;
+public class SimulationCoreActivator extends Plugin implements BundleActivator {
 
 	public static final String PLUGIN_ID = "org.yakindu.sct.simulation.core";
 
-	static BundleContext getContext() {
-		return context;
-	}
+	private static SimulationCoreActivator plugin;
+		
 
 	public void start(BundleContext bundleContext) throws Exception {
-		Activator.context = bundleContext;
+		super.start(bundleContext);
+		plugin = this;
 		SCTHotModelReplacementManager.INSTANCE.startup();
+		
 	}
 
 	public void stop(BundleContext bundleContext) throws Exception {
-		Activator.context = null;
+		super.stop(bundleContext);
+		plugin = this;
 		SCTHotModelReplacementManager.INSTANCE.tearDown();
+	}
+	
+	public static SimulationCoreActivator getDefault() {
+		return plugin;
 	}
 
 }

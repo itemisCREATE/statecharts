@@ -14,13 +14,16 @@ package org.yakindu.sct.generator.builder.console;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
+import org.yakindu.sct.generator.builder.BuilderActivator;
 import org.yakindu.sct.generator.core.console.IConsoleLogger;
 
 /**
@@ -75,6 +78,8 @@ public class EclipseConsoleLogger implements IConsoleLogger {
 			t.printStackTrace(printWriter);
 			printWriter.flush();
 			printWriter.close();
+			BuilderActivator.getDefault().getLog()
+					.log(new Status(IStatus.ERROR, BuilderActivator.PLUGIN_ID, t.getMessage(), t));
 		}
 	}
 
