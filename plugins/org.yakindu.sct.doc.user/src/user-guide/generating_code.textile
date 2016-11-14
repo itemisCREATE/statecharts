@@ -1916,7 +1916,7 @@ public static void main(String[] args) {
 }
 
 
-h3(#-java-integrating-generated-code). Integrating generated code
+h3(#java-integrating-generated-code). Integrating generated code
 
 To get a clue how to integrate a generated Java state machine with your project have a look at the @CrossingDemoCycleBased@ class and its abstract superclass @CrossingDemoBase@. The @main()@ method is in @CrossingDemoCycleBased@:
 
