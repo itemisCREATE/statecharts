@@ -58,7 +58,7 @@ p=. State example: A simple state machine to launch a rocket. When the *Countdow
 Figure "&quot;State behavior syntax overview&quot;":#fig_state-syntax-overview shows how the syntax of a state's behavior is defined. It consists of an arbitrary number of _local reactions_, where each local reaction essentially consists of a _reaction trigger_ and a _reaction effect_.
 
 p(#fig_state-syntax-overview). 
-!(standard-image)images/docu_grammar_030_state-overview.png(State syntax overview)!
+!(standard-image)images/docu_grammar_030_state-overview.png(State behavior syntax overview)!
 
 p=. State behavior syntax overview
 
@@ -120,9 +120,9 @@ h4(#transition-priorities). Transition priorities
 If a state has several outgoing transitions, based on the events that occured and on guard conditions, several of these transitions could fire at the same time. Here's simple example:
 
 p(#fig_transition-priorities-1). 
-!(standard-image)images/docu_transition_020_priorities_01.png(Transition priorities 1)!
+!(standard-image)images/docu_transition_020_priorities_01.png(Transition priorities [1])!
 
-p=. Transition priorities (1)
+p=. Transition priorities &#91;1]
 
 Which transition will fire when event _e1_ occurs? Fortunately YAKINDU state machines behave deterministically, so this question can be answered unambiguously. Outgoing transitions of a state have a definite order and are _prioritized_ by that order. The state machine checks the transitions one by one in their order and executes the first transition that fulfills all prerequisites for firing.
 
@@ -131,9 +131,9 @@ As you can see in figure "&quot;Transition priorities (1)&quot;":#fig_transition
 The order of transitions is a property of their source state. In the example above, the transition priorities of state *A* appear like this in the _Properties_ view:
 
 p(#fig_transition-priorities-2). 
-!(standard-image)images/docu_transition_020_priorities_02.png(Transition priorities 2)!
+!(standard-image)images/docu_transition_020_priorities_02.png(Transition priorities [2])!
 
-p=. Transition priorities (2)
+p=. Transition priorities &#91;2]
 
 To change priorities, select a transition in the _Properties_ view and click on the _up_ or _down_ button as appropriate.
 
@@ -227,21 +227,21 @@ This has remarkable consequences on where an event is "visible" and where it is 
 
 If an event _e_ is raised in region _r<sub>m</sub>_, then _e_ is available only in those regions that have not been processed yet, i.&nbsp;e. in _r<sub>i</sub>_ where _i_ > _m_ and _i_ ≤ _n_.
 
- The following example illustrates this. When the state machine is started, the situation is as shown in figure "&quot;Raising an event (1)&quot;":#fig_raising-an-event_1: *A* and *X* in the parallel regions _r1_ and _r2_ are active states. Important: Region _r1_ is executed *before* _r2_.
+ The following example illustrates this. When the state machine is started, the situation is as shown in figure "&quot;Raising an event &#91;1]&quot;":#fig_raising-an-event_1: *A* and *X* in the parallel regions _r1_ and _r2_ are active states. Important: Region _r1_ is executed *before* _r2_.
 
 p(#fig_raising-an-event_1). 
-!(standard-image)images/docu_transition_010_raise_event_01.png(Raising an event 1)!
+!(standard-image)images/docu_transition_010_raise_event_01.png(Raising an event [1])!
 
-p=. Raising an event (1)
+p=. Raising an event &#91;1]
 
 Now event _e1_ occurs. It triggers transition *A → B* in _r1_. This transition's effect @raise e2@ causes event _e2_ to be raised. This event triggers transition *X → Y* in _r2_ to fire _within the same RTC_.
 
-After that the situation is now as can be seen in figure "&quot;Raising an event (2)&quot;":#fig_raising-an-event_2: substates *B* and *Y* are now active states. However, the transition *B → C* will not be taken, because that would have to happen in another RTC. But by then the particular _e2_ instance raised by *A → B* will be long gone, since it was restricted to the RTC it has been raised in.
+After that the situation is now as can be seen in figure "&quot;Raising an event &#91;2]&quot;":#fig_raising-an-event_2: substates *B* and *Y* are now active states. However, the transition *B → C* will not be taken, because that would have to happen in another RTC. But by then the particular _e2_ instance raised by *A → B* will be long gone, since it was restricted to the RTC it has been raised in.
 
 p(#fig_raising-an-event_2). 
-!(standard-image)images/docu_transition_010_raise_event_02.png(Raising an event 2)!
+!(standard-image)images/docu_transition_010_raise_event_02.png(Raising an event [2])!
 
-p=. Raising an event (2)
+p=. Raising an event &#91;2]
 
 Orthogonal regions within a state are always executed from left to right or from top to bottom, respectively. On the top level, where orthogonal regions can be graphically arranged at will, the execution order is defined by the statechart model's property _region priority_. To inspect or change it, open the _Properties_ view and select the statechart's definition section.
 

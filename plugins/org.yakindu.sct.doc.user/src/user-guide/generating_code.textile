@@ -12,7 +12,9 @@ To create a generator model with the wizard, proceed as follows:
 # Choose the desired generator, i.&nbsp;e. _YAKINDU SCT Java Code Generator_.
 # Check the model(s) to generate code from and click _Finish_.
 
-!images/docu_genmodelwizardchooselanguage.jpg(Selecting code generator and models)!
+!(standard-image)images/docu_genmodelwizardchooselanguage.jpg(Selecting code generator and models)!
+
+p=. Selecting code generator and models
 
 The result is an @.sgen@ file of the following format: 
  
@@ -2054,7 +2056,9 @@ The wizard asks for a *Project name* and the name of the *Generator class*, whic
 
 The check box *Configure for Plugin Export* adds all required extension point registrations to the new project for exporting it as a plugin. The generator model can refer to the new generator plugin via its unique *Generator ID*. If you want to contribute custom generator features for your code generator, check the *Create Feature Library* check box. Click _Finish_ to close the wizard.
 
-!images/docu_generatornavigator.png(Created generator project)!
+!(standard-image)images/docu_generatornavigator.png(Created generator project)!
+
+p=. Created generator project
 
 Voilà! The wizard creates a new generator project for you with a structure as shown above. The file _CustomGenerator.xtend_ contains a simple default code generator that simply prints the name of the statechart and all of its states to the target file.
 
@@ -2114,7 +2118,9 @@ h2(#different-meta-models-for-different-use-cases). Different meta models for di
 *The SGraph meta model*
 The SGraph meta model defines the structural aspects of the Statechart model and is similiar to the statemachine model defined by the Unified Modeling Language (UML). A simplified version is shown in the following diagram.   
 
-!images/docu_sgraph_simple.png(Simplified SGraph meta model)!
+!(standard-image)images/docu_sgraph_simple.png(Simplified SGraph meta model)!
+
+p=. Simplified SGraph meta model
 
 * *Statechart* extends __CompositeElement__, therefore it contains 0..* __Regions__. It is the root element of the model.
 * *CompositeElement* is an abstract type that contains __Regions__. Known subclasses are __Statechart__ and __State__.

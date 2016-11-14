@@ -89,13 +89,13 @@ The first step is to create a new Eclipse project that can serve as a container 
 
 !(standard-image)images/tuto_light_switch_010_menu_file_new_project.png(Selecting "File → New → Project..." in the main menu)!
 
-p=. Selecting "File → New → Project..." in the main menu
+p=. Selecting _File → New → Project..._ in the main menu
 
 The _New Project_ wizard opens, showing a couple of different project types structured in various folders.
 
 !(standard-image)images/tuto_light_switch_020_wizard_new_project_general_project.png(The "New Project" wizard)!
 
-p=. The "New Project" wizard
+p=. The _New Project_ wizard
 
 Select _General → Project_ and click _Next &gt;_.
 
@@ -113,7 +113,7 @@ Eclipse creates the new project:
 
 !(standard-image)images/tuto_light_switch_060_project_created.png(Project "LightSwitch" created)!
 
-p=. Project "LightSwitch" created
+p=. Project _LightSwitch_ created
 
 h3(#creating-a-folder-for-the-model). Creating a folder for the model
 
@@ -123,13 +123,13 @@ Right-click on the project's root, i. e. on *LightSwitch*, then select _New →
 
 !(standard-image)images/tuto_light_switch_100_menu_new_folder.png(Selecting "New → Folder" in the context menu)!
 
-p=. Selecting "New → Folder" in the context menu
+p=. Selecting _New → Folder_ in the context menu
 
 The _New Folder_ wizard opens:
 
 !(standard-image)images/tuto_light_switch_110_wizard_new_folder.png(The "New Folder" wizard)!
 
-p=. The "New Folder" wizard
+p=. The _New Folder_ wizard
 
 Give the model folder a reasonable name, e. g. *model*, and type it into the _Folder Name_ text field. Then click _Finish_.
 
@@ -143,19 +143,19 @@ Now we are going to create an empty statechart model in the _model_ folder. Righ
 
 !(standard-image)images/tuto_light_switch_120_menu_new_other.png(Selecting "New → Other" in the context menu)!
 
-p=. Selecting "New → Other" in the context menu
+p=. Selecting _New → Other_ in the context menu
 
 The _New_ wizard opens. Select _YAKINDU SCT → Statechart model_
 
 !(standard-image)images/tuto_light_switch_130_wizard_new.png(Selecting "YAKINDU SCT → Statechart model")!
 
-p=. Selecting "YAKINDU SCT → Statechart model"
+p=. Selecting _YAKINDU SCT → Statechart model_
 
 Click _Next &gt;_. The wizard shows the _New YAKINDU Statechart_ dialog:
 
 !(standard-image)images/tuto_light_switch_140_wizard_new_yakindu_statechart.png(The "New YAKINDU Statechart" dialog)!
 
-p=. The "New YAKINDU Statechart" dialog
+p=. The _New YAKINDU Statechart_ dialog
 
 The dialog asks you for the project, the directory, and the name of the model file to be created. Eclipse project and directory should be preset correctly already. In our case the corresponding text field contains *LightSwitch/model* which means the directory named *model* in the *LightSwitch* project. You can change that if you wish, but most likely you won't.
 
@@ -167,7 +167,7 @@ Since there's a dedicated perspective for statechart models, Eclipse asks you wh
 
 !(standard-image)images/tuto_light_switch_150_dialog_confirm_perspective_switch.png(Dialog "Confirm Perspective Switch")!
 
-p=. Dialog "Confirm Perspective Switch"
+p=. Dialog _Confirm Perspective Switch_
 
 Please answer the question regarding switching to the _YAKINDU Modeling_ perspective by clicking on the _Yes_ button. The _YAKINDU Modeling_ perspective has a graphical editor for statechart models, and you will need it to create and modify them. On the other hand your answer really doesn't matter that much, because you can switch perspectives at any time. If you check _Do not offer to switch perspective in the future_ before clicking _Yes_, Eclipse will never ask this question again, at least regarding the _YAKINDU Modeling_ perspective.
 
@@ -226,37 +226,37 @@ As we have seen, the initial statechart is erroneous insofar as the state does n
 Remember the requirements of our light switch example? The first requirement demands the switch to be off initially. The erroneous state is reached from the initial state immediately, so it is appropriate to name it *Off*.
 
 table(scedit).
-|<. Double-click on the string @<name>@ in the state object. The string turns into a text input field with @<name>@ being highlighted:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_01.png!|
-|<. Type the state's new name, i. e. @Off@:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_02.png!|
-|<. Hit the @[Enter]@ key or click anywhere outside the text field. Bingo! The state now has a proper name and the error marker disappears:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_03.png!|
+|<. Double-click on the string @<name>@ in the state object. The string turns into a text input field with @<name>@ being highlighted:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_01.png(Double-clicking on the state name)!|
+|<. Type the state's new name, i. e. @Off@:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_02.png(Typing the new state name)!|
+|<. Hit the @[Enter]@ key or click anywhere outside the text field. Bingo! The state now has a proper name and the error marker disappears:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_03.png(Completing the state name change)!|
 |<. However, since the state box's size is smaller than before now while the box's left position remains unchanged, the graph looks crooked.|<. |
-|<. We can improve it by dragging the state box a little bit to the right. When it is centered below the initial state symbol, a vertical blue line appears giving the user a visual hint:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_04.png!|
-|<. Drop the state box at this very place, and everything looks much better now:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_05.png!|
-|<. Alternatively, we could have used the state box's handles to resize it. However, we just deselect the box by clicking elsewhere:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_06.png!|
+|<. We can improve it by dragging the state box a little bit to the right. When it is centered below the initial state symbol, a vertical blue line appears giving the user a visual hint:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_04.png(Dragging the state)!|
+|<. Drop the state box at this very place, and everything looks much better now:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_05.png(Dropping the state)!|
+|<. Alternatively, we could have used the state box's handles to resize it. However, we just deselect the box by clicking elsewhere:|<. !(standard-image)images/tuto_light_switch_230_statechart_editor_change_state_name_06.png(Deselecting the state)!|
 
 h3(#creating-a-state). Creating a state
 
 With the *Off* state only, the light switch statechart isn't complete yet. We also need an *On* state, and we going to create it now.
 
 table(scedit).
-|<. In order to add another state, move the mouse pointer to the _Palette_ compartment at the right-hand side of the statechart editor. Click on the _State_ symbol in the palette without releasing the mouse button, and drag the symbol over to the editing area.|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_01.png!|
-|<. Release the mouse button over a gray area, a region:|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_02.png!|
-|<. The new state appears in the model graph:|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_03.png!|
-|<. Rename the new state to *On*. Vertically align it to the *Off* state, if you like:|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_04.png!|
+|<. In order to add another state, move the mouse pointer to the _Palette_ compartment at the right-hand side of the statechart editor. Click on the _State_ symbol in the palette without releasing the mouse button, and drag the symbol over to the editing area.|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_01.png(Dragging a new state from the palette to the editing area)!|
+|<. Release the mouse button over a gray area, a region:|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_02.png(Dropping a new state in a region)!|
+|<. The new state appears in the model graph:|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_03.png(A new state)!|
+|<. Rename the new state to *On*. Vertically align it to the *Off* state, if you like:|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_04.png(Renaming the new state)!|
 |<. You'll notice that the new state is showing an error marker. The reason is that it is not yet possible to reach the *On* state.|<. |
-|<. Before we'll go on and fix that problem, here's another way to create a new state. When you are hovering with the mouse pointer over the main region, i. e. the large rectangle with a gray background, a popup menu shows up. If you click on the ‘S' symbol in that menu, a new state will be created. Other options in this menu are to create an initial state, a final state, or a choice.|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_05.png!|
+|<. Before we'll go on and fix that problem, here's another way to create a new state. When you are hovering with the mouse pointer over the main region, i. e. the large rectangle with a gray background, a popup menu shows up. If you click on the ‘S' symbol in that menu, a new state will be created. Other options in this menu are to create an initial state, a final state, or a choice.|<. !(standard-image)images/tuto_light_switch_240_statechart_editor_create_state_05.png(Creating a state using the popup menu)!|
 
 h3(#creating-a-transition). Creating a transition
 
 As we have seen above, the *On* state is not reachable as of yet. So let's model switching the light switch from "off" to "on" as a transition leading from the *Off* state to the *On* state.
 
 table(scedit).
-|<. In the _Palette_, click on the _Transition_ symbol. The symbol's background turns blue.|<. !(standard-image)images/tuto_light_switch_250_statechart_editor_create_transition_01.png!|
-|<. Click on the *Off* state, but don't release the mouse button. Drag the mouse pointer towards the *On* state. The arrow representing the transition to be established is drawn.:|<. !(standard-image)images/tuto_light_switch_250_statechart_editor_create_transition_02.png!|
-|<. Once the mouse pointer reaches the target state, it changes its shape:|<. !(standard-image)images/tuto_light_switch_250_statechart_editor_create_transition_03.png!|
-|<. Releasing the mouse button establishes the transition. A text input field to specify event trigger, guard condition and effect appears. We want the transition to be triggered when the light switch is operated, so let's type @operate@ into the text field.|<. !(standard-image)images/tuto_light_switch_250_statechart_editor_create_transition_04.png!|
+|<. In the _Palette_, click on the _Transition_ symbol. The symbol's background turns blue.|<. !(standard-image)images/tuto_light_switch_250_statechart_editor_create_transition_01.png(Clicking on the _Transition_ symbol in the palette)!|
+|<. Click on the *Off* state, but don't release the mouse button. Drag the mouse pointer towards the *On* state. The arrow representing the transition to be established is drawn.|<. !(standard-image)images/tuto_light_switch_250_statechart_editor_create_transition_02.png(Drawing a new transition)!|
+|<. Once the mouse pointer reaches the target state, it changes its shape.|<. !(standard-image)images/tuto_light_switch_250_statechart_editor_create_transition_03.png(The mouse pointer reaching a possible target state)!|
+|<. Releasing the mouse button establishes the transition. A text input field to specify event trigger, guard condition and effect appears. We want the transition to be triggered when the light switch is operated, so let's type @operate@ into the text field.|<. !(standard-image)images/tuto_light_switch_250_statechart_editor_create_transition_04.png(Editing a transition)!|
 |<. If you suspect that something is not in order, because the input text is underlined in red, you are right. We will explain and deal with that in a minute.|<. |
-|<. Clicking anywhere outside the text field terminates the editing mode:|<. !(standard-image)images/tuto_light_switch_250_statechart_editor_create_transition_05.png!|
+|<. Clicking anywhere outside the text field terminates the editing mode:|<. !(standard-image)images/tuto_light_switch_250_statechart_editor_create_transition_05.png(Completing the transition editing mode)!|
 
 The event trigger _operate_ is flagged as an error. The reason is that an event with that name is not known yet. The screenshot below shows how to change that:
 
@@ -283,9 +283,9 @@ p=. Creating definitions &#91;2]
 In its current state the model would not allow to turn the light switch off again, which is somewhat unsatisfactory. Operating the light switch while it is on should turn it off again. Let's model this by adding another transition. It should lead from the source state *On* to the target state *Off*.
 
 table(scedit).
-|<. However, in order to not get two straight lines being close together in the graph, let's first make some room and turn the present line into an arc. Move the mouse pointer over the transition line, but not over the text. The mouse pointer changes its shape to indicate that you can insert a control point. Click and hold to add the control point, then drag it to an appropriate position.|<. !(standard-image)images/tuto_light_switch_270_statechart_editor_create_transition_01.png!|
-|<. Now let's insert the second transition. This time we won't use the palette, but instead use another method. Hover the mouse pointer over the source state, i. e. *On*. An incoming and an outgoing arrow appear, both with a handle. Click and hold the handle of the outgoing arrow and drag it to the *Off* target state.|<. !(standard-image)images/tuto_light_switch_270_statechart_editor_create_transition_02.png!|
-|<. Upon releasing the mouse button the transition is established. Type @operate@ as the transition's event trigger into the text field. Reshape the transition arrow to make the graph look nice.|<. !(standard-image)images/tuto_light_switch_270_statechart_editor_create_transition_03.png!|
+|<. However, in order to not get two straight lines being close together in the graph, let's first make some room and turn the present line into an arc. Move the mouse pointer over the transition line, but not over the text. The mouse pointer changes its shape to indicate that you can insert a control point. Click and hold to add the control point, then drag it to an appropriate position.|<. !(standard-image)images/tuto_light_switch_270_statechart_editor_create_transition_01.png(Inserting a control point)!|
+|<. Now let's insert the second transition. This time we won't use the palette, but instead use another method. Hover the mouse pointer over the source state, i. e. *On*. An incoming and an outgoing arrow appear, both with a handle. Click and hold the handle of the outgoing arrow and drag it to the *Off* target state.|<. !(standard-image)images/tuto_light_switch_270_statechart_editor_create_transition_02.png(Creating a transition by using the source state's outgoing arrow handle)!|
+|<. Upon releasing the mouse button the transition is established. Type @operate@ as the transition's event trigger into the text field. Reshape the transition arrow to make the graph look nice.|<. !(standard-image)images/tuto_light_switch_270_statechart_editor_create_transition_03.png(Completing the transition creation)!|
 
 h2(#simulating-the-light-switch-model). Simulating the light switch model
 
@@ -295,7 +295,7 @@ Start the simulation by right-clicking on the _LightSwitch.sct_ file in the proj
 
 !(standard-image)images/tuto_light_switch_300_statechart_simulator_run_as_statechart_simulation.png(Selecting "Run As → Statechart Simulation" in the context menu)!
 
-p=. Selecting "Run As → Statechart Simulation" in the context menu
+p=. Selecting _Run As → Statechart Simulation_ in the context menu
 
 The perspective changes from _SC Modeling_ to _SC Simulation_. This perspective defines two additional views:
 
@@ -314,7 +314,7 @@ Now that the light switch is off, let's turn the lights on by operating the swit
 
 In the _Simulation_ view at the right-hand side of the Eclipse workbench, click on the _internal_ entry's show/hide symbol to display its contents.
 
-!(standard-image)images/tuto_light_switch_320_statechart_simulator_state_events.png(Displaying event names in the statechart simulator's _Simulation_ view)!
+!(standard-image)images/tuto_light_switch_320_statechart_simulator_state_events.png(Displaying event names in the statechart simulator's "Simulation" view)!
 
 p=. Displaying event names in the statechart simulator's _Simulation_ view
 
@@ -394,7 +394,7 @@ The first step to code generation is to create a new SGen model. Right-click on 
 
 !(standard-image)images/tuto_callhandling_200_generation_create_generator_model.png(Selecting "New → Code Generator Model" in the context menu)!
 
-p=. Selecting "New → Code Generator Model" in the context menu
+p=. Selecting _New → Code Generator Model_ in the context menu
 
 The _YAKINDU Generator Model_ wizard opens. Change the _File name_ to *CallHandling.sgen*, then click _Next &gt;_.
 
@@ -468,7 +468,7 @@ Add the generated artifacts to the Java build path by right-clicking on the _src
 
 !(standard-image)images/tuto_callhandling_250_generation_use_as_source_folder.png(Declaring "src-gen" as a source folder)!
 
-p=. Declaring "src-gen" as a source folder
+p=. Declaring _src-gen_ as a source folder
 
 If you want to execute your generator model manually, select _Generate Code Artifacts_ from the @.sgen@ file's context menu in the project explorer.
 
@@ -482,7 +482,7 @@ Let's establish a new Java class _CallHandlingClient_ and integrate the state ma
 
 # Right-click on the _src_ folder.
 # Select _New → Class_ in the context menu.
-# Name it _CallHandlingClient_.<br/>!(standard-image)images/tuto_callhandling_300_java_integration_create_new_class.png!
+# Name it _CallHandlingClient_.<br/>!(standard-image)images/tuto_callhandling_300_java_integration_create_new_class.png(Creating a class containing the client code)!
 # Click _Finish_.
 
 Next, copy the following code into the created class:
