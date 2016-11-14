@@ -35,7 +35,7 @@ public class DomainValidator implements EValidator {
 
 	@Override
 	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class DomainValidator implements EValidator {
 	@Override
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		return false;
+		return true;
 	}
 
 }
