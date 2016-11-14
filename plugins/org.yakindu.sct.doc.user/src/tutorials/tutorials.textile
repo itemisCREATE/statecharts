@@ -57,7 +57,7 @@ This tutorial you will teach how to
 * create a new statechart model, and
 * execute it using the simulation engine.
 
-Please note that this tutorial will not explain statecharts in general, so you should familiarize yourself with the basic concepts of state machines first, see "UML state machine":http://en.wikipedia.org/wiki/UML_state_machine.
+Please note that this tutorial will not explain statecharts in general, so you should familiarize yourself with the basic concepts of state machines first, see "UML state machine":https://en.wikipedia.org/wiki/UML_state_machine.
 
 In order to get a fully-working state machine implementation that you can integrate with your project, you will have to familiarize yourself with _code generation_, which is covered by chapter "Code generation":#code-generation in this documentation. You can generate your state machine implementation as source code in C, C++, and Java out of the box. Alternatively, you can write your own code generator for other programming languages or for other purposes.
 

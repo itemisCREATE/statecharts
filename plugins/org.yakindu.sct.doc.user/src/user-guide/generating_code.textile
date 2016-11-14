@@ -2039,8 +2039,8 @@ Although YAKINDU Statechart Tools are shipped with powerful code generators for 
 
 h2(#prerequisits). Prerequisits
 
-Implementing a custom code generator is no trivial task. Before you get started, you should have a basic understanding about the "Eclipse Modeling Framework":https://www.eclipse.org/modeling/emf/ that we are using to structure our data model. Furthermore, we highly recommend to use "Xtend":http://www.eclipse.org/xtend/ as your code generator's template language, although plain old Java is still supported. Xtend provides some great features like "Template Expressions":http://www.eclipse.org/xtend/documentation.html#templates, 
-"Lambdas":http://www.eclipse.org/xtend/documentation.html#lambdas and "Polymorphic Method Invocation":http://www.eclipse.org/xtend/documentation.html#polymorphicDispatch, boosting readability and productivity. 
+Implementing a custom code generator is no trivial task. Before you get started, you should have a basic understanding about the "Eclipse Modeling Framework":https://www.eclipse.org/modeling/emf/ that we are using to structure our data model. Furthermore, we highly recommend to use "Xtend":http://www.eclipse.org/xtend/ as your code generator's template language, although plain old Java is still supported. Xtend provides some great features like "Template Expressions":http://www.eclipse.org/xtend/documentation/203_xtend_expressions.html#templates, 
+"Lambdas":http://www.eclipse.org/xtend/documentation/203_xtend_expressions.html#lambdas and "Polymorphic Method Invocation":http://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#polymorphic-dispatch, boosting readability and productivity.
 
 h2(#creating-a-new-custom-code-generator-project). Creating a new custom code generator project
 
