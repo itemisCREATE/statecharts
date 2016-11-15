@@ -55,7 +55,7 @@ deploy:
   skip_cleanup: true
   provider: releases
   api_key: 
-   secure: BSEYtMYXInrXum0eOmisxDIUw5puH1WycKmXvnBJKn3GeekCWV2UCF4Elocmkil8MBzYQ3LlpiihncBalvVEzpgyVEo1Z0wnxiQtatZU0gMuw6piu+Owi5Om/kB6J4DvZShLt5qWYGVynBRhGsC4jFYpakCSHySy3icg1wI1sfI=
+   secure: f48bN42ninJcN0yp8T9DU7ay9aQVjbEcxEvD/UCEMBNBOnBFgomtFGa0jFMtbIwQk6Vx5yYcs0dDtNWqPsoq6v5m9eihVujhLx456yhzpin03kjydSQipjTbpZjsw+yUHx79QfqAIjGsAilU3uWVTBhTXEjEm0DFuJvOYgpuJA8=
   file: releng/org.yakindu.sct.repository/target/updatesite.zip
   on:
     tags: Yakindu/statecharts
