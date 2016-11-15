@@ -29,9 +29,13 @@ import com.google.inject.util.Modules;
  */
 public class ResourceModuleProvider implements IModuleProvider {
 
+	public static final String HEADLESS = "Headless";
+
 	@Override
 	public Module getModule(String... options) {
-
+		if (options.length == 1 && HEADLESS.equals(options[0])) {
+			return getLanguageRuntimeModule();
+		}
 		Module module = Modules.override(getLanguageRuntimeModule())
 				.with(new STextUiModule(STextActivator.getInstance()));
 		module = Modules.override(module).with(new Module() {
@@ -40,7 +44,6 @@ public class ResourceModuleProvider implements IModuleProvider {
 				binder.bind(Resource.class).to(StextResource.class);
 			}
 		});
-
 		return Modules.override(module).with(new SharedStateModule());
 	}
 

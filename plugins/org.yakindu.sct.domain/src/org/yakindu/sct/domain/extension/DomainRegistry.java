@@ -37,6 +37,7 @@ import org.yakindu.sct.domain.extension.impl.ModuleContribution;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.inject.Module;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -90,7 +91,8 @@ public class DomainRegistry {
 
 	public static IDomain getDomain(EObject object) {
 		DomainElement domainElement = EcoreUtil2.getContainerOfType(object, DomainElement.class);
-		String domainID = domainElement != null ? domainElement.getDomainID()
+		String domainID = domainElement != null
+				? domainElement.getDomainID()
 				: BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 		return getDomain(domainID);
 	}
@@ -101,7 +103,8 @@ public class DomainRegistry {
 				@Override
 				public boolean apply(IDomain input) {
 					return input.getDomainID().equals(domainID == null || domainID.isEmpty()
-							? BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral() : domainID);
+							? BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral()
+							: domainID);
 				}
 			});
 		} catch (NoSuchElementException e) {
@@ -155,13 +158,8 @@ public class DomainRegistry {
 
 	protected static ModuleContribution createModuleContribution(IConfigurationElement element) {
 		IModuleProvider provider;
-		try {
-			provider = (IModuleProvider) element.createExecutableExtension(MODULE_PROVIDER);
-			return new ModuleContribution(element.getAttribute(DOMAIN_ID), element.getAttribute(FEATURE), provider);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-		return null;
+		provider = new ModuleProviderProxy(element);
+		return new ModuleContribution(element.getAttribute(DOMAIN_ID), element.getAttribute(FEATURE), provider);
 	}
 
 	protected static IDomain createDomain(final IConfigurationElement element, List<ModuleContribution> allModules) {
@@ -187,5 +185,28 @@ public class DomainRegistry {
 						return input.getDomainID().equals(element.getAttribute(DOMAIN_ID));
 					}
 				}), provider);
+	}
+
+	protected static class ModuleProviderProxy implements IModuleProvider {
+
+		private IConfigurationElement element;
+
+		private IModuleProvider provider;
+
+		public ModuleProviderProxy(IConfigurationElement element) {
+			this.element = element;
+		}
+
+		@Override
+		public Module getModule(String... options) throws IllegalArgumentException {
+			if (provider == null) {
+				try {
+					provider = (IModuleProvider) element.createExecutableExtension(MODULE_PROVIDER);
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+			}
+			return provider.getModule(options);
+		}
 	}
 }
