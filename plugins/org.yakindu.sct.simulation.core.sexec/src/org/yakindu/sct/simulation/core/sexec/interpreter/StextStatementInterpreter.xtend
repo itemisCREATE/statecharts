@@ -93,41 +93,45 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		typeCast(operand, expression.type.originType)
 	}
 
-	def dispatch Object typeCast(Long value, Type type) {
+	def Object cast(Object value, Type type){
+		typeCast(value, type.originType)
+	}
+
+	def protected dispatch Object typeCast(Long value, Type type) {
 		if(type instanceof EnumerationType) return value
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException("unknown type " + type.name)
 	}
 
-	def dispatch Object typeCast(Float value, Type type) {
+	def protected dispatch Object typeCast(Float value, Type type) {
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value.longValue
 		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException("Invalid cast from Float to " + type.name)
 	}
 
-	def dispatch Object typeCast(Double value, Type type) {
+	def protected dispatch Object typeCast(Double value, Type type) {
 		if(ts.isSuperType(type, ts.getType(ITypeSystem.INTEGER))) return value.longValue
 		if(ts.isSuperType(type, ts.getType(ITypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException("Invalid cast from Double to " + type.name)
 	}
 
-	def dispatch Object typeCast(Boolean value, Type type) {
+	def protected dispatch Object typeCast(Boolean value, Type type) {
 		if(ts.isSuperType(type, ts.getType(ITypeSystem.BOOLEAN))) return value
 		throw new IllegalArgumentException("Invalid cast from Boolean to " + type.name)
 	}
 
-	def dispatch Object typeCast(String value, Type type) {
+	def protected dispatch Object typeCast(String value, Type type) {
 		if(ts.isSuperType(type, ts.getType(ITypeSystem.STRING))) return value
 		throw new IllegalArgumentException("Invalid cast from String to " + type.name)
 	}
 
-	def dispatch Object typeCast(Enumerator value, Type type) {
+	def protected dispatch Object typeCast(Enumerator value, Type type) {
 		if(ts.isSuperType(type, value.owningEnumeration)) return value
 		throw new IllegalArgumentException("Invalid cast from Enumerator to " + type.name)
 	}
 
-	def dispatch Object typeCast(Object value, Type type) {
+	def protected dispatch Object typeCast(Object value, Type type) {
 		if(ts.isSame(type, ts.getType(ITypeSystem.ANY))) return value
 		return value
 	}
@@ -139,11 +143,11 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
 			// Strong typing, use the type of the scopeVariable instead of using new runtime type
-			scopeVariable.value = if(result != null) typeCast(result, scopeVariable.type) else null
+			scopeVariable.value = if(result != null) cast(result, scopeVariable.type) else null
 		} else {
 			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.getName())
 			scopeVariable.value = if (result != null)
-				typeCast(evaluate(operator, scopeVariable.getValue, result), scopeVariable.type)
+				cast(evaluate(operator, scopeVariable.getValue, result), scopeVariable.type)
 			else
 				null
 		}

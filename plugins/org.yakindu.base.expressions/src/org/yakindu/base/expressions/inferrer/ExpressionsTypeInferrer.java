@@ -10,13 +10,13 @@
  */
 package org.yakindu.base.expressions.inferrer;
 
+import static org.yakindu.base.types.typesystem.ITypeSystem.ANY;
 import static org.yakindu.base.types.typesystem.ITypeSystem.BOOLEAN;
 import static org.yakindu.base.types.typesystem.ITypeSystem.INTEGER;
 import static org.yakindu.base.types.typesystem.ITypeSystem.NULL;
 import static org.yakindu.base.types.typesystem.ITypeSystem.REAL;
 import static org.yakindu.base.types.typesystem.ITypeSystem.STRING;
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
-import static org.yakindu.base.types.typesystem.ITypeSystem.ANY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +54,7 @@ import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
@@ -291,15 +292,20 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public InferenceResult doInfer(TypeSpecifier specifier) {
-		List<InferenceResult> bindings = new ArrayList<>();
-		EList<TypeSpecifier> arguments = specifier.getTypeArguments();
-		for (TypeSpecifier typeSpecifier : arguments) {
-			InferenceResult binding = inferTypeDispatch(typeSpecifier);
-			if (binding != null) {
-				bindings.add(binding);
+		if (specifier.getType() instanceof ParameterizedType
+				&& ((ParameterizedType) specifier.getType()).getParameter().size() > 0) {
+			List<InferenceResult> bindings = new ArrayList<>();
+			EList<TypeSpecifier> arguments = specifier.getTypeArguments();
+			for (TypeSpecifier typeSpecifier : arguments) {
+				InferenceResult binding = inferTypeDispatch(typeSpecifier);
+				if (binding != null) {
+					bindings.add(binding);
+				}
+				Type type = inferTypeDispatch(specifier.getType()).getType();
+				return InferenceResult.from(type, bindings);
 			}
 		}
-		return InferenceResult.from(inferTypeDispatch(specifier.getType()).getType(), bindings);
+		return inferTypeDispatch(specifier.getType());
 
 	}
 }

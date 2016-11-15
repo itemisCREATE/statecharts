@@ -40,6 +40,8 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractExecutionFlowSimulationEngine implements ISimulationEngine, IExecutionControl {
 
+	private static final String ERROR_MSG = "An unexpected error ocurred during simulation.";
+
 	public static final int ERROR_DURING_SIMULATION = 765;
 
 	@Inject
@@ -69,16 +71,12 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 		}
 	}
 
-	protected void handleException(Exception e) {
-		if (e instanceof WrappedException) {
-			WrappedException e1 = (WrappedException)e;
-			handleException(e1.getCause().getMessage(), e1.getCause());
-		} else handleException(e.getMessage(), e);
-	}
-	
-	protected void handleException(String message, Throwable t) {
+	protected void handleException(Throwable t) {
+		if (t instanceof WrappedException) {
+			t = ((WrappedException) t).getCause();
+		}
 		Status errorStatus = new Status(Status.ERROR, SimulationCoreActivator.PLUGIN_ID, ERROR_DURING_SIMULATION,
-				message, t);
+				ERROR_MSG, t);
 		SimulationCoreActivator.getDefault().getLog().log(errorStatus);
 		IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(errorStatus);
 		try {
