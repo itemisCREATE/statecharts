@@ -155,7 +155,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	}
 	
 	private boolean check_main_region_Mid_tr0_tr0() {
-		return sCInterface.getMyString()=="TypeSystem";
+		return (sCInterface.getMyString()== null?"TypeSystem" ==null :sCInterface.getMyString().equals("TypeSystem"));
 	}
 	
 	private boolean check_main_region_Mid2_tr0_tr0() {

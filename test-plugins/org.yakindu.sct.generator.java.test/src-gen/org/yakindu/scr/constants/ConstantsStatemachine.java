@@ -210,19 +210,19 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	
 	private void effect_main_region_C_tr0() {
 		exitSequence_main_region_C();
-		sCInterface.setResult(sCInterface.getE2Value()*sCInterface.x*sCINamed.two*internalConstant);
+		sCInterface.setResult(sCInterface.getE2Value()*SCInterface.x*SCINamed.two*IConstantsStatemachine.internalConstant);
 		
 		enterSequence_main_region_A_default();
 	}
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.setResult(sCINamed.two*sCInterface.x);
+		sCInterface.setResult(SCINamed.two*SCInterface.x);
 	}
 	
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
-		sCInterface.setResult(sCInterface.result*internalConstant);
+		sCInterface.setResult(sCInterface.result*IConstantsStatemachine.internalConstant);
 	}
 	
 	/* 'default' enter sequence for state A */

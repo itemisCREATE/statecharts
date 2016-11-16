@@ -5,6 +5,7 @@ package org.yakindu.base.expressions.expressions.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.yakindu.base.expressions.expressions.*;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
@@ -253,6 +254,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.FEATURE_CALL: {
 				FeatureCall featureCall = (FeatureCall)theEObject;
 				T result = caseFeatureCall(featureCall);
+				if (result == null) result = caseArgumentExpression(featureCall);
 				if (result == null) result = caseExpression(featureCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -260,6 +262,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION: {
 				ElementReferenceExpression elementReferenceExpression = (ElementReferenceExpression)theEObject;
 				T result = caseElementReferenceExpression(elementReferenceExpression);
+				if (result == null) result = caseArgumentExpression(elementReferenceExpression);
 				if (result == null) result = caseExpression(elementReferenceExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -275,6 +278,13 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				TypeCastExpression typeCastExpression = (TypeCastExpression)theEObject;
 				T result = caseTypeCastExpression(typeCastExpression);
 				if (result == null) result = caseExpression(typeCastExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ExpressionsPackage.ARGUMENT_EXPRESSION: {
+				ArgumentExpression argumentExpression = (ArgumentExpression)theEObject;
+				T result = caseArgumentExpression(argumentExpression);
+				if (result == null) result = caseExpression(argumentExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -684,6 +694,21 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypeCastExpression(TypeCastExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Argument Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Argument Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArgumentExpression(ArgumentExpression object) {
 		return null;
 	}
 

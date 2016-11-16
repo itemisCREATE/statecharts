@@ -28,14 +28,13 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.FeatureCallImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.FeatureCallImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.FeatureCallImpl#isOperationCall <em>Operation Call</em>}</li>
- *   <li>{@link org.yakindu.base.expressions.expressions.impl.FeatureCallImpl#getArgs <em>Args</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.FeatureCallImpl#getArraySelector <em>Array Selector</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.FeatureCallImpl#isArrayAccess <em>Array Access</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
+public class FeatureCallImpl extends ArgumentExpressionImpl implements FeatureCall {
 	/**
 	 * The cached value of the '{@link #getOwner() <em>Owner</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -75,16 +74,6 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 	 * @ordered
 	 */
 	protected boolean operationCall = OPERATION_CALL_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getArgs() <em>Args</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getArgs()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Expression> args;
 
 	/**
 	 * The cached value of the '{@link #getArraySelector() <em>Array Selector</em>}' containment reference list.
@@ -242,18 +231,6 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Expression> getArgs() {
-		if (args == null) {
-			args = new EObjectContainmentEList<Expression>(Expression.class, this, ExpressionsPackage.FEATURE_CALL__ARGS);
-		}
-		return args;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Expression> getArraySelector() {
 		if (arraySelector == null) {
 			arraySelector = new EObjectContainmentEList<Expression>(Expression.class, this, ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR);
@@ -292,8 +269,6 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 		switch (featureID) {
 			case ExpressionsPackage.FEATURE_CALL__OWNER:
 				return basicSetOwner(null, msgs);
-			case ExpressionsPackage.FEATURE_CALL__ARGS:
-				return ((InternalEList<?>)getArgs()).basicRemove(otherEnd, msgs);
 			case ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR:
 				return ((InternalEList<?>)getArraySelector()).basicRemove(otherEnd, msgs);
 		}
@@ -315,8 +290,6 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 				return basicGetFeature();
 			case ExpressionsPackage.FEATURE_CALL__OPERATION_CALL:
 				return isOperationCall();
-			case ExpressionsPackage.FEATURE_CALL__ARGS:
-				return getArgs();
 			case ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR:
 				return getArraySelector();
 			case ExpressionsPackage.FEATURE_CALL__ARRAY_ACCESS:
@@ -342,10 +315,6 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 				return;
 			case ExpressionsPackage.FEATURE_CALL__OPERATION_CALL:
 				setOperationCall((Boolean)newValue);
-				return;
-			case ExpressionsPackage.FEATURE_CALL__ARGS:
-				getArgs().clear();
-				getArgs().addAll((Collection<? extends Expression>)newValue);
 				return;
 			case ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR:
 				getArraySelector().clear();
@@ -375,9 +344,6 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 			case ExpressionsPackage.FEATURE_CALL__OPERATION_CALL:
 				setOperationCall(OPERATION_CALL_EDEFAULT);
 				return;
-			case ExpressionsPackage.FEATURE_CALL__ARGS:
-				getArgs().clear();
-				return;
 			case ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR:
 				getArraySelector().clear();
 				return;
@@ -402,8 +368,6 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 				return feature != null;
 			case ExpressionsPackage.FEATURE_CALL__OPERATION_CALL:
 				return operationCall != OPERATION_CALL_EDEFAULT;
-			case ExpressionsPackage.FEATURE_CALL__ARGS:
-				return args != null && !args.isEmpty();
 			case ExpressionsPackage.FEATURE_CALL__ARRAY_SELECTOR:
 				return arraySelector != null && !arraySelector.isEmpty();
 			case ExpressionsPackage.FEATURE_CALL__ARRAY_ACCESS:

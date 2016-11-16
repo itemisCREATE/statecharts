@@ -6,8 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
  * committers of YAKINDU - initial API and implementation
- *
-*/
+ * 
+ */
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
@@ -58,6 +58,7 @@ import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.base.expressions.expressions.ArgumentExpression
 
 class ExpressionCode {
 
@@ -259,31 +260,33 @@ class ExpressionCode {
 		value.definition.getContext + value.definition.event.getter
 	}
 
-	def dispatch String code(ElementReferenceExpression it) {
-		if (it.reference instanceof OperationDefinition)
-			'''«reference.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)'''
-		else {
-			val myDef = definition
-			if (myDef instanceof Property && isAssignmentContained) {
-				'''«myDef.getContext + myDef.identifier»'''
-			} else if (myDef instanceof Property && isPropertyContained) {
-				'''«myDef.getStaticContext + myDef.identifier»'''
-			} else {
-				'''«definition.code»'''
-			}
+	def protected dispatch String code(ElementReferenceExpression it) {
+		(it.reference as Declaration).codeDeclaration(it)
+	}
+
+	def protected dispatch String code(FeatureCall it) {
+		(it.feature as Declaration).codeDeclaration(it)
+	}
+
+	def protected codeDeclaration(Declaration it, ArgumentExpression exp) {
+		switch it {
+			Operation:
+				return operationCall(it, exp.args)
+			Property case exp.isAssignmentContained:
+				return getStaticContext + identifier
+			Property case exp.isPropertyContained:
+				return getStaticContext + identifier
+			Declaration:
+				return exp.definition.code
 		}
-	} 
-		
-	def dispatch String code(FeatureCall it) {
-		if (feature instanceof Operation) {
-			return '''«feature.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)'''
-		} else {
-			return '''«definition.getContext + definition.name.asEscapedIdentifier»''' 
-		}
-	} 
+	}
+
+	def protected String operationCall(Operation it, List<Expression> args) {
+		'''«code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)'''
+	}
 
 	def dispatch String code(Declaration it) {
-		getContext+ identifier
+		getContext + identifier
 	}
 
 	def dispatch String code(Property it) {
@@ -305,14 +308,20 @@ class ExpressionCode {
 		return ""
 	}
 	
-	def dispatch String getContext(Event it) {
-		if (scope != null) {
-			return scope.interfaceName.asEscapedIdentifier + "."
+	def dispatch String getStaticContext(Property it) {
+		if (it.const) {
+			if (scope != null) {
+				var result = scope.interfaceName + "."
+				return result
+			} else {
+				var result = it.flow.statemachineInterfaceName + "."
+				return result
+			}
 		}
-		return ""
+		return getContext()
 	}
 
-	def dispatch String getContext(OperationDefinition it) {
+	def dispatch String getContext(Declaration it) {
 		if (scope != null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}
@@ -322,29 +331,10 @@ class ExpressionCode {
 	def dispatch String getContext(EObject it) {
 		return "//ERROR: No context for " + it
 	}
-	
-	def dispatch String getStaticContext(Property it) {
-		if (it.const) {
-			return getConstContext(it)
-		}
-		if (scope != null) {
-			return scope.interfaceName.asEscapedIdentifier + "."
-		}
-		return ""
-	}
-	
+
 	def dispatch String getStaticContext(EObject it) {
 		return "//ERROR: No context for " + it
 	}
-
-	def getConstContext(Property it) {
-		if (scope != null) {
-			return scope.interfaceName + "."
-		} else {
-			return it.flow.statemachineInterfaceName + "."
-		}
-	}
-
 
 	def boolean isAssignmentContained(Expression it) {
 		if (it instanceof AssignmentExpression) {

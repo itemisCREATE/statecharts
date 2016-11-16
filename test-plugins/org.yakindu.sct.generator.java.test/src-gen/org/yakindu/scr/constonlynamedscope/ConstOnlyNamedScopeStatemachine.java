@@ -137,11 +137,11 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 	}
 	
 	private boolean check_ConstOnlyNamedScope_main_region_A_tr0_tr0() {
-		return (sCInterface.e) && (sCInterface.getEValue()==sCIA.b);
+		return (sCInterface.e) && (sCInterface.getEValue()==sCIA.getB());
 	}
 	
 	private boolean check_ConstOnlyNamedScope_main_region_A_tr1_tr1() {
-		return (sCInterface.e) && (sCInterface.getEValue()==sCIA.c);
+		return (sCInterface.e) && (sCInterface.getEValue()==sCIA.getC());
 	}
 	
 	private void effect_ConstOnlyNamedScope_main_region_A_tr0() {

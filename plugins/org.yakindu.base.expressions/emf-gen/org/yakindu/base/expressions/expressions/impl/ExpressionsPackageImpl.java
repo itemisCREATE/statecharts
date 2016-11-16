@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.expressions.expressions.AdditiveOperator;
+import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
@@ -240,6 +241,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EClass typeCastExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass argumentExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -937,7 +945,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFeatureCall_Args() {
+	public EReference getFeatureCall_ArraySelector() {
 		return (EReference)featureCallEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -946,17 +954,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFeatureCall_ArraySelector() {
-		return (EReference)featureCallEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getFeatureCall_ArrayAccess() {
-		return (EAttribute)featureCallEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)featureCallEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -991,7 +990,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getElementReferenceExpression_Args() {
+	public EReference getElementReferenceExpression_ArraySelector() {
 		return (EReference)elementReferenceExpressionEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1000,17 +999,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getElementReferenceExpression_ArraySelector() {
-		return (EReference)elementReferenceExpressionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getElementReferenceExpression_ArrayAccess() {
-		return (EAttribute)elementReferenceExpressionEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)elementReferenceExpressionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1056,6 +1046,24 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 */
 	public EReference getTypeCastExpression_Type() {
 		return (EReference)typeCastExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getArgumentExpression() {
+		return argumentExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getArgumentExpression_Args() {
+		return (EReference)argumentExpressionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1228,14 +1236,12 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEReference(featureCallEClass, FEATURE_CALL__OWNER);
 		createEReference(featureCallEClass, FEATURE_CALL__FEATURE);
 		createEAttribute(featureCallEClass, FEATURE_CALL__OPERATION_CALL);
-		createEReference(featureCallEClass, FEATURE_CALL__ARGS);
 		createEReference(featureCallEClass, FEATURE_CALL__ARRAY_SELECTOR);
 		createEAttribute(featureCallEClass, FEATURE_CALL__ARRAY_ACCESS);
 
 		elementReferenceExpressionEClass = createEClass(ELEMENT_REFERENCE_EXPRESSION);
 		createEReference(elementReferenceExpressionEClass, ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
 		createEAttribute(elementReferenceExpressionEClass, ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL);
-		createEReference(elementReferenceExpressionEClass, ELEMENT_REFERENCE_EXPRESSION__ARGS);
 		createEReference(elementReferenceExpressionEClass, ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR);
 		createEAttribute(elementReferenceExpressionEClass, ELEMENT_REFERENCE_EXPRESSION__ARRAY_ACCESS);
 
@@ -1245,6 +1251,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		typeCastExpressionEClass = createEClass(TYPE_CAST_EXPRESSION);
 		createEReference(typeCastExpressionEClass, TYPE_CAST_EXPRESSION__OPERAND);
 		createEReference(typeCastExpressionEClass, TYPE_CAST_EXPRESSION__TYPE);
+
+		argumentExpressionEClass = createEClass(ARGUMENT_EXPRESSION);
+		createEReference(argumentExpressionEClass, ARGUMENT_EXPRESSION__ARGS);
 
 		// Create enums
 		assignmentOperatorEEnum = createEEnum(ASSIGNMENT_OPERATOR);
@@ -1307,10 +1316,11 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		numericalMultiplyDivideExpressionEClass.getESuperTypes().add(this.getExpression());
 		numericalUnaryExpressionEClass.getESuperTypes().add(this.getExpression());
 		primitiveValueExpressionEClass.getESuperTypes().add(this.getExpression());
-		featureCallEClass.getESuperTypes().add(this.getExpression());
-		elementReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
+		featureCallEClass.getESuperTypes().add(this.getArgumentExpression());
+		elementReferenceExpressionEClass.getESuperTypes().add(this.getArgumentExpression());
 		parenthesizedExpressionEClass.getESuperTypes().add(this.getExpression());
 		typeCastExpressionEClass.getESuperTypes().add(this.getExpression());
+		argumentExpressionEClass.getESuperTypes().add(this.getExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1401,14 +1411,12 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEReference(getFeatureCall_Owner(), this.getExpression(), null, "owner", null, 0, 1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFeatureCall_Feature(), ecorePackage.getEObject(), null, "feature", null, 0, 1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFeatureCall_OperationCall(), ecorePackage.getEBoolean(), "operationCall", null, 0, 1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFeatureCall_Args(), this.getExpression(), null, "args", null, 0, -1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFeatureCall_ArraySelector(), this.getExpression(), null, "arraySelector", null, 0, -1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFeatureCall_ArrayAccess(), ecorePackage.getEBoolean(), "arrayAccess", null, 0, 1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elementReferenceExpressionEClass, ElementReferenceExpression.class, "ElementReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getElementReferenceExpression_Reference(), ecorePackage.getEObject(), null, "reference", null, 0, 1, ElementReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getElementReferenceExpression_OperationCall(), ecorePackage.getEBoolean(), "operationCall", null, 0, 1, ElementReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getElementReferenceExpression_Args(), this.getExpression(), null, "args", null, 0, -1, ElementReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getElementReferenceExpression_ArraySelector(), this.getExpression(), null, "arraySelector", null, 0, -1, ElementReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getElementReferenceExpression_ArrayAccess(), ecorePackage.getEBoolean(), "arrayAccess", null, 0, 1, ElementReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1418,6 +1426,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEClass(typeCastExpressionEClass, TypeCastExpression.class, "TypeCastExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeCastExpression_Operand(), this.getExpression(), null, "operand", null, 0, 1, TypeCastExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeCastExpression_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, TypeCastExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(argumentExpressionEClass, ArgumentExpression.class, "ArgumentExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getArgumentExpression_Args(), this.getExpression(), null, "args", null, 0, -1, ArgumentExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(assignmentOperatorEEnum, AssignmentOperator.class, "AssignmentOperator");

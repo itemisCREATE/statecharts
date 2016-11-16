@@ -27,14 +27,13 @@ import org.yakindu.base.expressions.expressions.ExpressionsPackage;
  * <ul>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.ElementReferenceExpressionImpl#getReference <em>Reference</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.ElementReferenceExpressionImpl#isOperationCall <em>Operation Call</em>}</li>
- *   <li>{@link org.yakindu.base.expressions.expressions.impl.ElementReferenceExpressionImpl#getArgs <em>Args</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.ElementReferenceExpressionImpl#getArraySelector <em>Array Selector</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.impl.ElementReferenceExpressionImpl#isArrayAccess <em>Array Access</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ElementReferenceExpressionImpl extends ExpressionImpl implements ElementReferenceExpression {
+public class ElementReferenceExpressionImpl extends ArgumentExpressionImpl implements ElementReferenceExpression {
 	/**
 	 * The cached value of the '{@link #getReference() <em>Reference</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -64,16 +63,6 @@ public class ElementReferenceExpressionImpl extends ExpressionImpl implements El
 	 * @ordered
 	 */
 	protected boolean operationCall = OPERATION_CALL_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getArgs() <em>Args</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getArgs()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Expression> args;
 
 	/**
 	 * The cached value of the '{@link #getArraySelector() <em>Array Selector</em>}' containment reference list.
@@ -188,18 +177,6 @@ public class ElementReferenceExpressionImpl extends ExpressionImpl implements El
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Expression> getArgs() {
-		if (args == null) {
-			args = new EObjectContainmentEList<Expression>(Expression.class, this, ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS);
-		}
-		return args;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Expression> getArraySelector() {
 		if (arraySelector == null) {
 			arraySelector = new EObjectContainmentEList<Expression>(Expression.class, this, ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR);
@@ -236,8 +213,6 @@ public class ElementReferenceExpressionImpl extends ExpressionImpl implements El
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
-				return ((InternalEList<?>)getArgs()).basicRemove(otherEnd, msgs);
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR:
 				return ((InternalEList<?>)getArraySelector()).basicRemove(otherEnd, msgs);
 		}
@@ -257,8 +232,6 @@ public class ElementReferenceExpressionImpl extends ExpressionImpl implements El
 				return basicGetReference();
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
 				return isOperationCall();
-			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
-				return getArgs();
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR:
 				return getArraySelector();
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_ACCESS:
@@ -281,10 +254,6 @@ public class ElementReferenceExpressionImpl extends ExpressionImpl implements El
 				return;
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
 				setOperationCall((Boolean)newValue);
-				return;
-			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
-				getArgs().clear();
-				getArgs().addAll((Collection<? extends Expression>)newValue);
 				return;
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR:
 				getArraySelector().clear();
@@ -311,9 +280,6 @@ public class ElementReferenceExpressionImpl extends ExpressionImpl implements El
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
 				setOperationCall(OPERATION_CALL_EDEFAULT);
 				return;
-			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
-				getArgs().clear();
-				return;
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR:
 				getArraySelector().clear();
 				return;
@@ -336,8 +302,6 @@ public class ElementReferenceExpressionImpl extends ExpressionImpl implements El
 				return reference != null;
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
 				return operationCall != OPERATION_CALL_EDEFAULT;
-			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
-				return args != null && !args.isEmpty();
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR:
 				return arraySelector != null && !arraySelector.isEmpty();
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_ACCESS:
