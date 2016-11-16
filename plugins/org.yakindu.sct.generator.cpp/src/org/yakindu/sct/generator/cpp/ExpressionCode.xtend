@@ -12,11 +12,7 @@ package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
 import org.yakindu.base.expressions.expressions.AssignmentExpression
-import org.yakindu.base.expressions.expressions.BitwiseAndExpression
-import org.yakindu.base.expressions.expressions.BitwiseOrExpression
-import org.yakindu.base.expressions.expressions.BitwiseXorExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
-import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
@@ -25,23 +21,17 @@ import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.Literal
-import org.yakindu.base.expressions.expressions.LogicalAndExpression
-import org.yakindu.base.expressions.expressions.LogicalNotExpression
-import org.yakindu.base.expressions.expressions.LogicalOrExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.NullLiteral
-import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression
-import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
-import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
-import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.core.templates.Expressions
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
@@ -50,7 +40,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
-class ExpressionCode {
+class ExpressionCode extends Expressions {
 
 	@Inject extension Naming
 	@Inject extension Navigation
@@ -59,7 +49,7 @@ class ExpressionCode {
 	@Inject extension INamingService
 	@Inject extension ICodegenTypeSystemAccess
 
-	/* Refering to declared elements */
+	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
 		it.code(it.definition)
 	}
@@ -112,37 +102,10 @@ class ExpressionCode {
 	«ENDIF»
 	«event.definition.event.access» = true'''
 
-	/* Logical Expressions */
-	def dispatch CharSequence code(LogicalOrExpression it) '''«leftOperand.code» || «rightOperand.code»'''
-
-	def dispatch CharSequence code(ConditionalExpression it) '''«condition.code» ? «trueCase.code» : «falseCase.code»'''
-
-	def dispatch CharSequence code(LogicalAndExpression it) '''«leftOperand.code» && «rightOperand.code»'''
-
-	def dispatch CharSequence code(LogicalNotExpression it) '''! «operand.code»'''
-
 	def dispatch CharSequence code(LogicalRelationExpression it) '''
 	«IF isSame(leftOperand.infer.type, getType(GenericTypeSystem.STRING))»
 		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
 	«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
-
-	/* Bitwise Operations */
-	def dispatch CharSequence code(BitwiseAndExpression it) '''«leftOperand.code» & «rightOperand.code»'''
-
-	def dispatch CharSequence code(BitwiseOrExpression it) '''«leftOperand.code» | «rightOperand.code»'''
-
-	def dispatch CharSequence code(BitwiseXorExpression it) '''«leftOperand.code» ^ «rightOperand.code»'''
-
-	def dispatch CharSequence code(ShiftExpression it) '''«leftOperand.code» «operator.literal» «rightOperand.code»'''
-
-	/* Numerical operations */
-	def dispatch CharSequence code(NumericalAddSubtractExpression it) '''«leftOperand.code» «operator.literal» «rightOperand.
-		code»'''
-
-	def dispatch CharSequence code(NumericalMultiplyDivideExpression it) '''«leftOperand.code» «operator.literal» «rightOperand.
-		code»'''
-
-	def dispatch CharSequence code(NumericalUnaryExpression it) '''«operator.literal» «operand.code»'''
 
 	/* TODO: check if event is active */
 	def dispatch CharSequence code(EventValueReferenceExpression it) '''«value.definition.event.valueAccess»'''
