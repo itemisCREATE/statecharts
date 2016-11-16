@@ -42,7 +42,7 @@ Now we can create a C header file specifying our own C type definitions which we
 
 # In the project explorer view, right-click on the project. The context menu opens.
 # In the context menu, select _New → Header File_.<br/>!(standard-image)images/cdom_geometry_020_new_header_file_010.png(Creating a C header file)!
-# The dialog _New Header File_ is shown. Specify the name of the header file. Here we choose *point.h*.<br/>!(standard-image)images/cdom_geometry_020_new_header_file_020.png(Select a header file name)!
+# The dialog _New Header File_ is shown. Specify the name of the header file. Here we choose *point.h*.<br/>!(standard-image)images/cdom_geometry_020_new_header_file_020.png(Selecting a header file name)!
 # Click _Finish_. 
 # The header file *point.h* is created.<br/>
 
@@ -100,15 +100,15 @@ On the right-hand side of the colon in the variable declaration, the variable's 
 * the self-defined _Point_ type,
 * the qualifier _pointer_.
 
-!(standard-image)images/cdom_geometry_040_c_types_010.png(Using the content assist to display available types)!
+!(standard-image)images/cdom_geometry_040_c_types_010.png(Using content assist to display available types)!
 
-p=. Using the content assist to display available types
+p=. Using content assist to display available types
 
 Selecting the _Point_ menu entry completes the variable definition:
 
-!(standard-image)images/cdom_geometry_040_c_types_020.png(A Point variable)!
+!(standard-image)images/cdom_geometry_040_c_types_020.png(A "Point" variable)!
 
-p=. A Point variable
+p=. A _Point_ variable
 
 h3(#cdom_using-a-c-type-variable-in-a-statechart). Using a C-type variable in a statechart
 
@@ -150,7 +150,7 @@ At the beginning of the definition section, enter @import:@ and hit @[Ctrl+Space
 
 !(standard-image)images/cdom_geometry_060_importing_namespace_010.png(Selecting a namespace to import)!
 
-p=. Using C-type variables
+p=. Selecting a namespace to import
 
 If we had more than a single header file in the project, we would see them all. The content assist shows all header files in a project, including those in subdirectories.
 
@@ -553,9 +553,9 @@ p=. Using content assist to enter a C function call
 
 Here's the complete example with the area calculations done by the _area_ function:
 
-!(standard-image)images/cdom_geometry_090_operations_020_calling_area.png(Using content assist to enter a C function call)!
+!(standard-image)images/cdom_geometry_090_operations_020_calling_area.png(Example calling the "area" function)!
 
-p=. Using content assist to enter a C function call
+p=. Example calling the "area" function
 
 
 bq.. *Please note:*

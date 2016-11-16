@@ -87,9 +87,9 @@ The _breakpoints_ view shows a list of all breakpoints. The respective breakpoin
 You can use the _breakpoints_ view for disabling, enabling, and removing breakpoints as well as defining "conditional breakpoints":#advsim_conditional-breakpoints.
 
 p(#advsim_fig-breakpoints-view). 
-!(standard-image)images/advsim_030_breakpoint_050_enabled_and_disabled_breakpoints.png(Breakpoints view)!
+!(standard-image)images/advsim_030_breakpoint_050_enabled_and_disabled_breakpoints.png(The "Breakpoints" view)!
 
-p=. Breakpoints view
+p=. The _Breakpoints_ view
 
 h3(#advsim_enabling-and-disabling-breakpoints). Enabling and disabling breakpoints
 
@@ -100,15 +100,15 @@ A breakpoint is either enabled or disabled.
 
 "Figure &quot;Breakpoints view&quot;":#advsim_fig-breakpoints-view is showing an enabled and a disabled breakpoint in the statechart editor and in the breakpoints view, respectively.
 
-You can instruct the statechart simulation to skip all breakpoints by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_disengaged.png(Button (disengaged&#41;: Skip all breakpoints)! button in the breakpoints view. The button will appear "pressed", and while it is, the "skip breakpoints" functionality is engaged. That means, the simulation will not suspend at any breakpoint.
+You can instruct the statechart simulation to skip all breakpoints by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_disengaged.png(Button [disengaged]: Skip all breakpoints)! button in the breakpoints view. The button will appear "pressed", and while it is, the "skip breakpoints" functionality is engaged. That means, the simulation will not suspend at any breakpoint.
 
-This is different from disabling all breakpoints, in that each breakpoint keeps its state of being enabled or disabled. Once you disengage the skip breakpoints functionality by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_engaged.png(Button (engaged&#41;: Skip all breakpoints)! button again, the simulation will suspend again at enabled breakpoints and will not suspend at disabled breakpoints.
+This is different from disabling all breakpoints, in that each breakpoint keeps its state of being enabled or disabled. Once you disengage the skip breakpoints functionality by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_engaged.png(Button [engaged]: Skip all breakpoints)! button again, the simulation will suspend again at enabled breakpoints and will not suspend at disabled breakpoints.
 
 h3(#advsim_removing-breakpoints). Removing breakpoints
 
-In order to remove _some_ breakpoints, select these breakpoints in the breakpoints view, then click at the !(inlinemediaobject)images/advsim_button_remove.png(remove)! button. The selected breakpoints will be removed.
+In order to remove _some_ breakpoints, select these breakpoints in the breakpoints view, then click at the !(inlinemediaobject)images/advsim_button_remove.png(Button: Remove)! button. The selected breakpoints will be removed.
 
-To remove _all_ breakpoints, click at the !(inlinemediaobject)images/advsim_button_remove_all.png(remove all)! button
+To remove _all_ breakpoints, click at the !(inlinemediaobject)images/advsim_button_remove_all.png(Button: Remove all)! button
 
 h3(#advsim_conditional-breakpoints). Conditional breakpoints
 
@@ -137,23 +137,23 @@ However, while the simulation is suspended, you can raise multiple events, witho
 Consider for example, you want to press the &quot;light on&quot; and &quot;light off&quot; buttons at the same time and observe what happens. "Figure &quot;Raising multiple events simultaneously&quot;":#advsim_fig-raising-multiple-events-simultaneously-1 is showing the scenario:
 
 p(#advsim_fig-raising-multiple-events-simultaneously-1). 
-!(standard-image)images/advsim_040_multiple_events_010_events_not_raised.png(Raising multiple events simultaneously 1)!
+!(standard-image)images/advsim_040_multiple_events_010_events_not_raised.png(Raising multiple events simultaneously [1])!
 
-p=. Raising multiple events simultaneously 1
+p=. Raising multiple events simultaneously &#91;1]
 
 * The simulation has encountered a breakpoint at the _LightOn_ state and has been suspended there.
-* The _simulation_ view shows the _LightOn_ and the _LightOff_ events. Both events are labeled with a !(inlinemediaobject)images/advsim_symbol_event.png(event)! symbol, meaning the respective event is not raised.
+* The _simulation_ view shows the _LightOn_ and the _LightOff_ events. Both events are labeled with a !(inlinemediaobject)images/advsim_symbol_event.png(Symbol: Event [not raised])! symbol, meaning the respective event is not raised.
 
 p(#advsim_fig-raising-multiple-events-simultaneously-2). 
-!(standard-image)images/advsim_040_multiple_events_020_events_raised.png(Raising multiple events simultaneously 2)!
+!(standard-image)images/advsim_040_multiple_events_020_events_raised.png(Raising multiple events simultaneously [2])!
 
-p=. Raising multiple events simultaneously 2
+p=. Raising multiple events simultaneously &#91;2]
 
-* Clicking at an event raises it and adds a blue triangle to the event symbol: !(inlinemediaobject)images/advsim_symbol_event_raised.png(event raised)!. Since the simulation remains suspended, the user can raise multiple events.
+* Clicking at an event raises it and adds a blue triangle to the event symbol: !(inlinemediaobject)images/advsim_symbol_event_raised.png(Symbol: Event [raised])!. Since the simulation remains suspended, the user can raise multiple events.
 
 Both events are raised and will be handled by the state machine during the next run-to-completion step. The latter will be performed as soon as the user clicks on the step&#45;over button !(inlinemediaobject)images/advsim_symbol_stepover.png(Symbol: Step Over)! or the resume button !(inlinemediaobject)images/advsim_symbol_resume.png(Symbol: Resume)!.
 
-bq. Please note: While the execution is still suspended, you can "unraise" an already raised event by clicking at the event symbol !(inlinemediaobject)images/advsim_symbol_event_raised.png(event raised)! a second time. The blue triangle will disappear, and upon continuation of the simulation the event will not be handled.
+bq. Please note: While the execution is still suspended, you can "unraise" an already raised event by clicking at the event symbol !(inlinemediaobject)images/advsim_symbol_event_raised.png(Symbol: Event [raised])! a second time. The blue triangle will disappear, and upon continuation of the simulation the event will not be handled.
 
 h4(#advsim_transition-priorities). Transition priorities
 
@@ -177,7 +177,7 @@ h3(#advsim_creating-a-snapshot). Creating a snapshot
 To create a snapshot of the current statechart simulation, proceed as follows:
 
 # Change to _Snapshots_ view.
-# Click at the camera button !(inlinemediaobject)images/advsim_button_camera.png(camera)! in the view's toolbar.
+# Click at the camera button !(inlinemediaobject)images/advsim_button_camera.png(Button: Camera)! in the view's toolbar.
 # The snapshot is taken and appears in the snapshot list. It is labeled as "Snapshot" and tagged with the current timestamp. See "figure &quot;A freshly taken snapshot&quot;":#advsim_fig-a-freshly-taken-snapshot.
 
 p(#advsim_fig-a-freshly-taken-snapshot). 
@@ -191,19 +191,19 @@ h3(#advsim_the-snapshots-view). The snapshots view
 The _snapshots_ view consists of two parts.
 * The _snapshot list_ contains all snapshots with their respective names and timestamps.
 * The _snapshot details_ part displays the contents of the snapshot. It contains two different views which can be toggled via the toolbar buttons:
-** !(inlinemediaobject)images/advsim_button_snapshot_variable_overview.png(image overview)!: shows all variable values
-** !(inlinemediaobject)images/advsim_button_snapshot_image_overview.png(image overview)!: shows an image of the state machine with highlighted active elements
+** !(inlinemediaobject)images/advsim_button_snapshot_variable_overview.png(Button: Show all variable values)!: shows all variable values
+** !(inlinemediaobject)images/advsim_button_snapshot_image_overview.png(Button: Show image overview)!: shows an image of the state machine with highlighted active elements
 
 p(#advsim_fig-inspecting-the-variables-of-a-snapshots). 
-!(standard-image)images/advsim_050_snapshots_025_details_view.png(Inspecting the variables of a snapshots)!
+!(standard-image)images/advsim_050_snapshots_025_details_view.png(Inspecting snapshot details: variables overview [left], image overview [right])!
 
-p=. Inspecting snapshot details, on the left variables and the right its active elements
+p=. Inspecting snapshot details: variables overview [left], image overview [right]
 
 h3(#advsim_restoring-a-snapshot). Restoring a snapshot
 
 To restore a snapshot for execution, proceed as follows:
 # Select the snapshot to be restored.
-# Click at the _restore_ button !(inlinemediaobject)images/advsim_button_snapshot_restore.png(restore snapshot)!.
+# Click at the _restore_ button !(inlinemediaobject)images/advsim_button_snapshot_restore.png(Button: Restore snapshot)!.
 # The snapshot is restored as an additional executing state machine instance.
 
 bq. Please note: When the semantics of the underlying state machine have been changed, it might not be possible to restore a snapshot, e.g. when the active state has been deleted.
@@ -216,8 +216,8 @@ The label of a snapshot can be changed as follows:
 
 h3(#advsim_deleting-a-snapshot). Deleting a snapshot
 
-* To delete one or more snapshots, select the snapshots to be deleted, then click at the _remove_ button !(inlinemediaobject)images/advsim_button_remove_red.png(remove)!.
-* To delete _all_ snapshots, click at the _remove all_ button !(inlinemediaobject)images/advsim_button_remove_all.png(remove all)!.
+* To delete one or more snapshots, select the snapshots to be deleted, then click at the _remove_ button !(inlinemediaobject)images/advsim_button_remove_red.png(Button: Remove)!.
+* To delete _all_ snapshots, click at the _remove all_ button !(inlinemediaobject)images/advsim_button_remove_all.png(Button: Remove all)!.
 
 ==</div>==
 
