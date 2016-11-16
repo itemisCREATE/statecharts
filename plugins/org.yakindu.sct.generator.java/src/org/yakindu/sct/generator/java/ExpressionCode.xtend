@@ -305,6 +305,24 @@ class ExpressionCode {
 		return ""
 	}
 	
+	def dispatch String getContext(Event it) {
+		if (scope != null) {
+			return scope.interfaceName.asEscapedIdentifier + "."
+		}
+		return ""
+	}
+
+	def dispatch String getContext(OperationDefinition it) {
+		if (scope != null) {
+			return scope.interfaceName.asEscapedIdentifier + "."
+		}
+		return ""
+	}
+
+	def dispatch String getContext(EObject it) {
+		return "//ERROR: No context for " + it
+	}
+	
 	def dispatch String getStaticContext(Property it) {
 		if (it.const) {
 			return getConstContext(it)
@@ -327,23 +345,6 @@ class ExpressionCode {
 		}
 	}
 
-	def dispatch String getContext(Event it) {
-		if (scope != null) {
-			return scope.interfaceName.asEscapedIdentifier + "."
-		}
-		return ""
-	}
-
-	def dispatch String getContext(OperationDefinition it) {
-		if (scope != null) {
-			return scope.interfaceName.asEscapedIdentifier + "."
-		}
-		return ""
-	}
-
-	def dispatch String getContext(EObject it) {
-		return "//ERROR: No context for " + it
-	}
 
 	def boolean isAssignmentContained(Expression it) {
 		if (it instanceof AssignmentExpression) {
