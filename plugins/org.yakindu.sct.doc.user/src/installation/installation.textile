@@ -112,7 +112,7 @@ On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
 
 !(standard-image)images/inst_windows7_070_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
 
-p=. YAKINDU Statechart Tools presenting the "Welcome" window
+p=. YAKINDU Statechart Tools presenting the _Welcome_ window
 
 You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
 
@@ -138,7 +138,7 @@ Move the unpacked application bundle to your _Applications_ folder. Alternativel
 
 !(standard-image shadowless)images/inst_macosx_010_applications.png(The YAKINDU Statecharts Tools application in the "Applications" directory)!
 
-p=. The YAKINDU Statecharts Tools application in the "Applications" directory
+p=. The YAKINDU Statecharts Tools application in the _Applications_ directory
 
 There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
 
@@ -176,7 +176,7 @@ On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
 
 !(standard-image shadowless)images/inst_macosx_070_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
 
-p=. YAKINDU Statechart Tools presenting the "Welcome" window
+p=. YAKINDU Statechart Tools presenting the _Welcome_ window
 
 You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
 
@@ -210,13 +210,13 @@ This will create a folder _yakindu-sct_ in your installation directory, i. e. _
 
 !(standard-image)images/inst_linux_010_eclipse_folder.png(The extracted "yakindu-sct" folder)!
 
-p=. The extracted "yakindu-sct" folder
+p=. The extracted _yakindu-sct_ folder
 
 The contents of the _yakindu-sct_ folder looks like this:
 
 !(standard-image)images/inst_linux_020_eclipse_contents.png(Contents of the extracted "yakindu-sct" folder)!
 
-p=. Contents of the extracted "yakindu-sct" folder
+p=. Contents of the extracted _yakindu-sct_ folder
 
 There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
 
@@ -258,7 +258,7 @@ On the first start, YAKINDU Statechart Tools presents a _Welcome_ window:
 
 !(standard-image)images/inst_linux_050_eclipse_welcome.png(YAKINDU Statechart Tools presenting the "Welcome" window)!
 
-p=. YAKINDU Statechart Tools presenting the "Welcome" window
+p=. YAKINDU Statechart Tools presenting the _Welcome_ window
 
 You can browse the material shown here, if you want. When you are done, please close the _Welcome_ tab or click on _Workbench_ at the upper right. Both actions are leading to the workbench:
 
@@ -278,13 +278,13 @@ In the the _Help_ menu, select the _Install New Software_ menu item:
 
 !(standard-image)images/inst_eclipse_010_eclipse_menu_install_new_software.png(Selecting "Help → Install New Software" in the main menu)!
 
-p=. Selecting "Help → Install New Software" in the main menu
+p=. Selecting _Help → Install New Software_ in the main menu
 
 The _Install_ wizard opens:
 
 !(standard-image)images/inst_eclipse_020_eclipse_install_wizard.png(The "Install" wizard)!
 
-p=. The "Install" wizard
+p=. The _Install_ wizard
 
 Click on the _Add..._ button near the upper right corner of the wizard.
 
@@ -357,7 +357,7 @@ After the restart, Eclipse displays its _Welcome_ window, now also featuring YAK
 
 !(standard-image)images/inst_eclipse_100_eclipse_sct_help.png(Eclipse presenting the "Welcome" window)!
 
-p=. Eclipse presenting the "Welcome" window
+p=. Eclipse presenting the _Welcome_ window
 
 h2(#updating-yakindu-statechart-tools). Updating YAKINDU Statechart Tools
 
@@ -365,7 +365,7 @@ To check whether a new YAKINDU Statechart Tools release is available and to inst
 
 !(standard-image)images/inst_eclipse_update_010_eclipse_menu_check_for_updates.png(Selecting "Help → Check for Updates" in the main menu)!
 
-p=. Selecting "Help → Check for Updates" in the main menu
+p=. Selecting _Help → Check for Updates_ in the main menu
 
 If Eclipse finds any software items to be updated – not just YAKINDU Statechart Tools –, it will guide you through the process of updating them. Generally Eclipse has to be restarted afterwards to have any changes take effect.
 

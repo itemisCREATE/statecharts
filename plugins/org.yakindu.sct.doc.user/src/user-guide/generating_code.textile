@@ -12,7 +12,9 @@ To create a generator model with the wizard, proceed as follows:
 # Choose the desired generator, i.&nbsp;e. _YAKINDU SCT Java Code Generator_.
 # Check the model(s) to generate code from and click _Finish_.
 
-!images/docu_genmodelwizardchooselanguage.jpg(Selecting code generator and models)!
+!(standard-image)images/docu_genmodelwizardchooselanguage.jpg(Selecting code generator and models)!
+
+p=. Selecting code generator and models
 
 The result is an @.sgen@ file of the following format: 
  
@@ -1914,7 +1916,7 @@ public static void main(String[] args) {
 }
 
 
-h3(#-java-integrating-generated-code). Integrating generated code
+h3(#java-integrating-generated-code). Integrating generated code
 
 To get a clue how to integrate a generated Java state machine with your project have a look at the @CrossingDemoCycleBased@ class and its abstract superclass @CrossingDemoBase@. The @main()@ method is in @CrossingDemoCycleBased@:
 
@@ -2037,8 +2039,8 @@ Although YAKINDU Statechart Tools are shipped with powerful code generators for 
 
 h2(#prerequisits). Prerequisits
 
-Implementing a custom code generator is no trivial task. Before you get started, you should have a basic understanding about the "Eclipse Modeling Framework":https://www.eclipse.org/modeling/emf/ that we are using to structure our data model. Furthermore, we highly recommend to use "Xtend":http://www.eclipse.org/xtend/ as your code generator's template language, although plain old Java is still supported. Xtend provides some great features like "Template Expressions":http://www.eclipse.org/xtend/documentation.html#templates, 
-"Lambdas":http://www.eclipse.org/xtend/documentation.html#lambdas and "Polymorphic Method Invocation":http://www.eclipse.org/xtend/documentation.html#polymorphicDispatch, boosting readability and productivity. 
+Implementing a custom code generator is no trivial task. Before you get started, you should have a basic understanding about the "Eclipse Modeling Framework":https://www.eclipse.org/modeling/emf/ that we are using to structure our data model. Furthermore, we highly recommend to use "Xtend":http://www.eclipse.org/xtend/ as your code generator's template language, although plain old Java is still supported. Xtend provides some great features like "Template Expressions":http://www.eclipse.org/xtend/documentation/203_xtend_expressions.html#templates, 
+"Lambdas":http://www.eclipse.org/xtend/documentation/203_xtend_expressions.html#lambdas and "Polymorphic Method Invocation":http://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#polymorphic-dispatch, boosting readability and productivity.
 
 h2(#creating-a-new-custom-code-generator-project). Creating a new custom code generator project
 
@@ -2054,7 +2056,9 @@ The wizard asks for a *Project name* and the name of the *Generator class*, whic
 
 The check box *Configure for Plugin Export* adds all required extension point registrations to the new project for exporting it as a plugin. The generator model can refer to the new generator plugin via its unique *Generator ID*. If you want to contribute custom generator features for your code generator, check the *Create Feature Library* check box. Click _Finish_ to close the wizard.
 
-!images/docu_generatornavigator.png(Created generator project)!
+!(standard-image)images/docu_generatornavigator.png(Created generator project)!
+
+p=. Created generator project
 
 Voilà! The wizard creates a new generator project for you with a structure as shown above. The file _CustomGenerator.xtend_ contains a simple default code generator that simply prints the name of the statechart and all of its states to the target file.
 
@@ -2114,7 +2118,9 @@ h2(#different-meta-models-for-different-use-cases). Different meta models for di
 *The SGraph meta model*
 The SGraph meta model defines the structural aspects of the Statechart model and is similiar to the statemachine model defined by the Unified Modeling Language (UML). A simplified version is shown in the following diagram.   
 
-!images/docu_sgraph_simple.png(Simplified SGraph meta model)!
+!(standard-image)images/docu_sgraph_simple.png(Simplified SGraph meta model)!
+
+p=. Simplified SGraph meta model
 
 * *Statechart* extends __CompositeElement__, therefore it contains 0..* __Regions__. It is the root element of the model.
 * *CompositeElement* is an abstract type that contains __Regions__. Known subclasses are __Statechart__ and __State__.

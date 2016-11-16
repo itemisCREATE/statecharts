@@ -17,13 +17,13 @@ h3(#using-the-statechart-model-file-context-menu). Using the statechart model fi
 
 The most direct way is to start the simulation based on the statechart model file.
 # In the _Project Explorer_ view, right-click on the statechart model file. The context menu opens.
-# In the context menu, select _Run As → Statechart Simulation_, see figure "&quot;Selecting „Run As → Statechart Simulation” in the context menu&quot;":#oss_fig_run-as-statechart-simulation.
+# In the context menu, select _Run As → Statechart Simulation_, see figure "&quot;Selecting _Run As → Statechart Simulation_ in the context menu&quot;":#oss_fig_run-as-statechart-simulation.
 
 p(#oss_fig_run-as-statechart-simulation). 
 
-!(standard-image)images/tuto_light_switch_300_statechart_simulator_run_as_statechart_simulation.png(Selecting &quot;Run As → Statechart Simulation&quot; in the context menu)!
+!(standard-image)images/tuto_light_switch_300_statechart_simulator_run_as_statechart_simulation.png(Selecting "Run As → Statechart Simulation" in the context menu)!
 
-p=. Selecting "Run As → Statechart Simulation" in the context menu
+p=. Selecting _Run As → Statechart Simulation_ in the context menu
 
 h3(#repeating-the-last-simulation). Repeating the last simulation
 
@@ -87,7 +87,7 @@ When a transition is taken, the transition arc leading from the source state to 
 
 p(#oss_fig_the-sc-simulation-perspective). 
 
-!(standard-image)images/tuto_light_switch_310_statechart_simulator_state_off.png(The _SC Simulation_ perspective)!
+!(standard-image)images/tuto_light_switch_310_statechart_simulator_state_off.png(The "SC Simulation" perspective)!
 
 p=. The _SC Simulation_ perspective
 
@@ -105,7 +105,7 @@ Depending on your screen resolution and font size settings, you might not be abl
 "Figure &quot;The SC Simulation perspective&quot;":#oss_fig_the-sc-simulation-perspective is demonstrating this: The user has hovered the mouse pointer over a tab that is just displaying the starting letter 'S' of its title. However, a popup window right besides the pointer is showing the tab's full title "Simulation".
 
 p(#oss_fig-simulation-view). 
-!(standard-image)images/docu_advsim_010_lightswitch_020_simulation.png(Simulation view)!
+!(standard-image)images/docu_advsim_010_lightswitch_020_simulation.png(Simulation view – The actual "Simulation" view is the pane right from the statechart editor.)!
 
 p=. Simulation view – The actual _Simulation_ view is the pane right from the statechart editor.
 
@@ -148,14 +148,14 @@ Section "&quot;Creating and executing a launch configuration&quot;":#creating-an
 
 The present chapter describes how to create and configure a new launch configuration for a statechart simulation.
 
-# In the main menu, select _Run → Run Configurations…_. The _Run Configurations_ dialog appears. !(standard-image)images/docu_launch_configuration_01.png(The _Run Configurations_ dialog)!
-# In the _Run Configurations_ dialog, right-click on _Statechart Simulation_ and select _New_ in the context menu. !(standard-image)images/docu_launch_configuration_02.png(The _Run Configurations_ dialog)!<br/>Alternatively, you can select _Statechart Simulation_ and then click on the _New_ symbol near the top-left corner of the dialog. !(standard-image)images/docu_launch_configuration_03.png(The _Run Configurations_ dialog)!<br/>However you do it, a new launch configuration is created and displayed in the main area of the _Run Configurations_ dialog. The launch configuration's _Main_ tab is opened.
+# In the main menu, select _Run → Run Configurations…_. The _Run Configurations_ dialog appears. !(standard-image)images/docu_launch_configuration_01.png(The "Run Configurations" dialog)!
+# In the _Run Configurations_ dialog, right-click on _Statechart Simulation_ and select _New_ in the context menu. !(standard-image)images/docu_launch_configuration_02.png(The "Run Configurations" dialog)!<br/>Alternatively, you can select _Statechart Simulation_ and then click on the _New_ symbol near the top-left corner of the dialog. !(standard-image)images/docu_launch_configuration_03.png(The "Run Configurations" dialog)!<br/>However you do it, a new launch configuration is created and displayed in the main area of the _Run Configurations_ dialog. The launch configuration's _Main_ tab is opened.
 # Enter the launch configuration's parameters as necessary:
 ** In the _Name_ text field, change the default name @New_configuration@ to something sensible, e.&nbsp;g. @Light switch@.
 ** In the _Model file_ text field, enter the path to the statechart model you want to simulate. Click on the _Search_ button to browse for statechart models.
 ** If your model uses Java operations, specify the Java class implementing those operations in the _Operation class_ text field. If you have multiple Java classes, specify them as a comma-separated list.
 ** Specify the _Execution type_ as being either _cycle-based_ (default) or _event-based_. In a _cycle-based execution_, the simulation performs a run-to-completion step in regular intervalls and processes the events that have occurred since the previous run-to-completion step. See the next field for the period of time between two consecutive run-to-completion steps. – In an _event-based execution_, the simulation performs a run-to-completion step each time an event occurs. _Please note: In contrast to the statechart simulation any generated code does not necessarily conform to the event-based execution semantics._
-** If the execution type is cycle-based, specify the period of time between two run-to-completion steps in the _Cycle time_ text field. If the execution type is event-based, this field is deactivated. !(standard-image)images/docu_launch_configuration_04.png(The _Run Configurations_ dialog)!
+** If the execution type is cycle-based, specify the period of time between two run-to-completion steps in the _Cycle time_ text field. If the execution type is event-based, this field is deactivated. !(standard-image)images/docu_launch_configuration_04.png(The "Run Configurations" dialog)!
 
 bq.. *Note*
 
