@@ -83,7 +83,7 @@ class ExpressionCode {
 	'''
 
 	def dispatch String code(OperationDefinition it) {
-		return getContext(false) + "operationCallback." + name.asEscapedIdentifier;
+		return getContext + "operationCallback." + name.asEscapedIdentifier;
 	}
 
 	def dispatch String code(PrimitiveValueExpression primValue) {
@@ -99,9 +99,9 @@ class ExpressionCode {
 		if (varRef.definition instanceof Property) {
 			var property = varRef.definition as Property
 			if (eContainer instanceof Expression) {
-				return '''«property.getContext(false)»«property.assign»(«assignCmdArgument(property)»)'''
+				return '''«property.getContext»«property.assign»(«assignCmdArgument(property)»)'''
 			} else {
-				return '''«property.getContext(false)»«property.setter»(«assignCmdArgument(property)»)'''
+				return '''«property.getContext»«property.setter»(«assignCmdArgument(property)»)'''
 			}
 		}
 	}
@@ -109,7 +109,7 @@ class ExpressionCode {
 	def assignCmdArgument(AssignmentExpression it, Property property) {
 		var cmd = ""
 		if (!AssignmentOperator.ASSIGN.equals(operator)) {
-			cmd = property.getContext(false) + property.getter + " " + operator.code.replaceFirst("=", "") + " "
+			cmd = property.getContext + property.getter + " " + operator.code.replaceFirst("=", "") + " "
 
 			if (expression instanceof PrimitiveValueExpression || expression instanceof ElementReferenceExpression ||
 				expression instanceof AssignmentExpression) {
@@ -249,14 +249,14 @@ class ExpressionCode {
 
 	def dispatch String code(EventRaisingExpression it) {
 		if (value != null) {
-			event.definition.getContext(false) + "raise" + event.definition.name.toFirstUpper + "(" + value.code + ")"
+			event.definition.getContext + "raise" + event.definition.name.toFirstUpper + "(" + value.code + ")"
 		} else {
-			event.definition.getContext(false) + "raise" + event.definition.name.toFirstUpper + "()"
+			event.definition.getContext + "raise" + event.definition.name.toFirstUpper + "()"
 		}
 	}
 
 	def dispatch String code(EventValueReferenceExpression it) {
-		value.definition.getContext(false) + value.definition.event.getter
+		value.definition.getContext + value.definition.event.getter
 	}
 
 	def dispatch String code(ElementReferenceExpression it) {
@@ -265,9 +265,9 @@ class ExpressionCode {
 		else {
 			val myDef = definition
 			if (myDef instanceof Property && isAssignmentContained) {
-				'''«myDef.getContext(false) + myDef.identifier»'''
+				'''«myDef.getContext + myDef.identifier»'''
 			} else if (myDef instanceof Property && isPropertyContained) {
-				'''«myDef.getContext(true) + myDef.identifier»'''
+				'''«myDef.getStaticContext + myDef.identifier»'''
 			} else {
 				'''«definition.code»'''
 			}
@@ -278,16 +278,16 @@ class ExpressionCode {
 		if (feature instanceof Operation) {
 			return '''«feature.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)'''
 		} else {
-			return '''«definition.getContext(false) + definition.name.asEscapedIdentifier»''' 
+			return '''«definition.getContext + definition.name.asEscapedIdentifier»''' 
 		}
 	} 
 
 	def dispatch String code(Declaration it) {
-		getContext(false) + identifier
+		getContext+ identifier
 	}
 
 	def dispatch String code(Property it) {
-		getContext(false) + getter
+		getContext + getter
 	}
 
 	def dispatch String code(TimeEvent it) {
@@ -298,14 +298,25 @@ class ExpressionCode {
 		'''((«type.getTargetLanguageName») «operand.code»)'''
 	}
 
-	def dispatch String getContext(Property it, boolean staticAccess) {
-		if (it.const && staticAccess) {
+	def dispatch String getContext(Property it) {
+		if (scope != null) {
+			return scope.interfaceName.asEscapedIdentifier + "."
+		}
+		return ""
+	}
+	
+	def dispatch String getStaticContext(Property it) {
+		if (it.const) {
 			return getConstContext(it)
 		}
 		if (scope != null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
+	}
+	
+	def dispatch String getStaticContext(EObject it) {
+		return "//ERROR: No context for " + it
 	}
 
 	def getConstContext(Property it) {
@@ -316,21 +327,21 @@ class ExpressionCode {
 		}
 	}
 
-	def dispatch String getContext(Event it, boolean staticAccess) {
+	def dispatch String getContext(Event it) {
 		if (scope != null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
 	}
 
-	def dispatch String getContext(OperationDefinition it, boolean staticAccess) {
+	def dispatch String getContext(OperationDefinition it) {
 		if (scope != null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
 	}
 
-	def dispatch String getContext(EObject it, boolean staticAccess) {
+	def dispatch String getContext(EObject it) {
 		return "//ERROR: No context for " + it
 	}
 
