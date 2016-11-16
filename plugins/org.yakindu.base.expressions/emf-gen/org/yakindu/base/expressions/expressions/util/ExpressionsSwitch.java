@@ -98,6 +98,27 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ExpressionsPackage.BINARY_EXPRESSION: {
+				BinaryExpression binaryExpression = (BinaryExpression)theEObject;
+				T result = caseBinaryExpression(binaryExpression);
+				if (result == null) result = caseExpression(binaryExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ExpressionsPackage.UNARY_EXPRESSION: {
+				UnaryExpression unaryExpression = (UnaryExpression)theEObject;
+				T result = caseUnaryExpression(unaryExpression);
+				if (result == null) result = caseExpression(unaryExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ExpressionsPackage.ARGUMENT_EXPRESSION: {
+				ArgumentExpression argumentExpression = (ArgumentExpression)theEObject;
+				T result = caseArgumentExpression(argumentExpression);
+				if (result == null) result = caseExpression(argumentExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ExpressionsPackage.LITERAL: {
 				Literal literal = (Literal)theEObject;
 				T result = caseLiteral(literal);
@@ -170,6 +191,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.LOGICAL_OR_EXPRESSION: {
 				LogicalOrExpression logicalOrExpression = (LogicalOrExpression)theEObject;
 				T result = caseLogicalOrExpression(logicalOrExpression);
+				if (result == null) result = caseBinaryExpression(logicalOrExpression);
 				if (result == null) result = caseExpression(logicalOrExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -177,6 +199,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.LOGICAL_AND_EXPRESSION: {
 				LogicalAndExpression logicalAndExpression = (LogicalAndExpression)theEObject;
 				T result = caseLogicalAndExpression(logicalAndExpression);
+				if (result == null) result = caseBinaryExpression(logicalAndExpression);
 				if (result == null) result = caseExpression(logicalAndExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -184,6 +207,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.LOGICAL_NOT_EXPRESSION: {
 				LogicalNotExpression logicalNotExpression = (LogicalNotExpression)theEObject;
 				T result = caseLogicalNotExpression(logicalNotExpression);
+				if (result == null) result = caseUnaryExpression(logicalNotExpression);
 				if (result == null) result = caseExpression(logicalNotExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -191,6 +215,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.BITWISE_XOR_EXPRESSION: {
 				BitwiseXorExpression bitwiseXorExpression = (BitwiseXorExpression)theEObject;
 				T result = caseBitwiseXorExpression(bitwiseXorExpression);
+				if (result == null) result = caseBinaryExpression(bitwiseXorExpression);
 				if (result == null) result = caseExpression(bitwiseXorExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -198,6 +223,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.BITWISE_OR_EXPRESSION: {
 				BitwiseOrExpression bitwiseOrExpression = (BitwiseOrExpression)theEObject;
 				T result = caseBitwiseOrExpression(bitwiseOrExpression);
+				if (result == null) result = caseBinaryExpression(bitwiseOrExpression);
 				if (result == null) result = caseExpression(bitwiseOrExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -205,6 +231,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.BITWISE_AND_EXPRESSION: {
 				BitwiseAndExpression bitwiseAndExpression = (BitwiseAndExpression)theEObject;
 				T result = caseBitwiseAndExpression(bitwiseAndExpression);
+				if (result == null) result = caseBinaryExpression(bitwiseAndExpression);
 				if (result == null) result = caseExpression(bitwiseAndExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -212,6 +239,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.LOGICAL_RELATION_EXPRESSION: {
 				LogicalRelationExpression logicalRelationExpression = (LogicalRelationExpression)theEObject;
 				T result = caseLogicalRelationExpression(logicalRelationExpression);
+				if (result == null) result = caseBinaryExpression(logicalRelationExpression);
 				if (result == null) result = caseExpression(logicalRelationExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -219,6 +247,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.SHIFT_EXPRESSION: {
 				ShiftExpression shiftExpression = (ShiftExpression)theEObject;
 				T result = caseShiftExpression(shiftExpression);
+				if (result == null) result = caseBinaryExpression(shiftExpression);
 				if (result == null) result = caseExpression(shiftExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -226,6 +255,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.NUMERICAL_ADD_SUBTRACT_EXPRESSION: {
 				NumericalAddSubtractExpression numericalAddSubtractExpression = (NumericalAddSubtractExpression)theEObject;
 				T result = caseNumericalAddSubtractExpression(numericalAddSubtractExpression);
+				if (result == null) result = caseBinaryExpression(numericalAddSubtractExpression);
 				if (result == null) result = caseExpression(numericalAddSubtractExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -233,6 +263,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION: {
 				NumericalMultiplyDivideExpression numericalMultiplyDivideExpression = (NumericalMultiplyDivideExpression)theEObject;
 				T result = caseNumericalMultiplyDivideExpression(numericalMultiplyDivideExpression);
+				if (result == null) result = caseBinaryExpression(numericalMultiplyDivideExpression);
 				if (result == null) result = caseExpression(numericalMultiplyDivideExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -240,6 +271,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.NUMERICAL_UNARY_EXPRESSION: {
 				NumericalUnaryExpression numericalUnaryExpression = (NumericalUnaryExpression)theEObject;
 				T result = caseNumericalUnaryExpression(numericalUnaryExpression);
+				if (result == null) result = caseUnaryExpression(numericalUnaryExpression);
 				if (result == null) result = caseExpression(numericalUnaryExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -278,13 +310,6 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				TypeCastExpression typeCastExpression = (TypeCastExpression)theEObject;
 				T result = caseTypeCastExpression(typeCastExpression);
 				if (result == null) result = caseExpression(typeCastExpression);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ExpressionsPackage.ARGUMENT_EXPRESSION: {
-				ArgumentExpression argumentExpression = (ArgumentExpression)theEObject;
-				T result = caseArgumentExpression(argumentExpression);
-				if (result == null) result = caseExpression(argumentExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -709,6 +734,36 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseArgumentExpression(ArgumentExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Binary Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Binary Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBinaryExpression(BinaryExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unary Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unary Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnaryExpression(UnaryExpression object) {
 		return null;
 	}
 

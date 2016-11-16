@@ -141,6 +141,11 @@ public class ParenthesizedExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PARENTHESIZED_EXPRESSION__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
 		newChildDescriptors.add

@@ -97,6 +97,18 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createExpressionAdapter();
 			}
 			@Override
+			public Adapter caseBinaryExpression(BinaryExpression object) {
+				return createBinaryExpressionAdapter();
+			}
+			@Override
+			public Adapter caseUnaryExpression(UnaryExpression object) {
+				return createUnaryExpressionAdapter();
+			}
+			@Override
+			public Adapter caseArgumentExpression(ArgumentExpression object) {
+				return createArgumentExpressionAdapter();
+			}
+			@Override
 			public Adapter caseLiteral(Literal object) {
 				return createLiteralAdapter();
 			}
@@ -199,10 +211,6 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTypeCastExpression(TypeCastExpression object) {
 				return createTypeCastExpressionAdapter();
-			}
-			@Override
-			public Adapter caseArgumentExpression(ArgumentExpression object) {
-				return createArgumentExpressionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -613,6 +621,34 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createArgumentExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.BinaryExpression <em>Binary Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.expressions.expressions.BinaryExpression
+	 * @generated
+	 */
+	public Adapter createBinaryExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.UnaryExpression <em>Unary Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.expressions.expressions.UnaryExpression
+	 * @generated
+	 */
+	public Adapter createUnaryExpressionAdapter() {
 		return null;
 	}
 

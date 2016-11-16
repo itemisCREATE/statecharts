@@ -12,7 +12,9 @@ import org.yakindu.base.expressions.expressions.AdditiveOperator;
 import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;
+import org.yakindu.base.expressions.expressions.BinaryExpression;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
+import org.yakindu.base.expressions.expressions.BitwiseOperator;
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression;
 import org.yakindu.base.expressions.expressions.BoolLiteral;
@@ -29,6 +31,7 @@ import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.expressions.Literal;
 import org.yakindu.base.expressions.expressions.LogicalAndExpression;
 import org.yakindu.base.expressions.expressions.LogicalNotExpression;
+import org.yakindu.base.expressions.expressions.LogicalOperator;
 import org.yakindu.base.expressions.expressions.LogicalOrExpression;
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression;
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator;
@@ -43,6 +46,7 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.ShiftOperator;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
+import org.yakindu.base.expressions.expressions.UnaryExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
 import org.yakindu.base.types.TypesPackage;
 
@@ -254,6 +258,20 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass binaryExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unaryExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum assignmentOperatorEEnum = null;
 
 	/**
@@ -290,6 +308,20 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EEnum relationalOperatorEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum logicalOperatorEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum bitwiseOperatorEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -576,44 +608,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLogicalOrExpression_LeftOperand() {
-		return (EReference)logicalOrExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getLogicalOrExpression_RightOperand() {
-		return (EReference)logicalOrExpressionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getLogicalAndExpression() {
 		return logicalAndExpressionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getLogicalAndExpression_LeftOperand() {
-		return (EReference)logicalAndExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getLogicalAndExpression_RightOperand() {
-		return (EReference)logicalAndExpressionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -630,35 +626,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLogicalNotExpression_Operand() {
-		return (EReference)logicalNotExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getBitwiseXorExpression() {
 		return bitwiseXorExpressionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBitwiseXorExpression_LeftOperand() {
-		return (EReference)bitwiseXorExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBitwiseXorExpression_RightOperand() {
-		return (EReference)bitwiseXorExpressionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -675,44 +644,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBitwiseOrExpression_LeftOperand() {
-		return (EReference)bitwiseOrExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBitwiseOrExpression_RightOperand() {
-		return (EReference)bitwiseOrExpressionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getBitwiseAndExpression() {
 		return bitwiseAndExpressionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBitwiseAndExpression_LeftOperand() {
-		return (EReference)bitwiseAndExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBitwiseAndExpression_RightOperand() {
-		return (EReference)bitwiseAndExpressionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -729,26 +662,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLogicalRelationExpression_LeftOperand() {
-		return (EReference)logicalRelationExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getLogicalRelationExpression_Operator() {
-		return (EAttribute)logicalRelationExpressionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getLogicalRelationExpression_RightOperand() {
-		return (EReference)logicalRelationExpressionEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)logicalRelationExpressionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -765,26 +680,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getShiftExpression_LeftOperand() {
-		return (EReference)shiftExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getShiftExpression_Operator() {
-		return (EAttribute)shiftExpressionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getShiftExpression_RightOperand() {
-		return (EReference)shiftExpressionEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)shiftExpressionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -801,26 +698,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNumericalAddSubtractExpression_LeftOperand() {
-		return (EReference)numericalAddSubtractExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getNumericalAddSubtractExpression_Operator() {
-		return (EAttribute)numericalAddSubtractExpressionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getNumericalAddSubtractExpression_RightOperand() {
-		return (EReference)numericalAddSubtractExpressionEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)numericalAddSubtractExpressionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -837,26 +716,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNumericalMultiplyDivideExpression_LeftOperand() {
-		return (EReference)numericalMultiplyDivideExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getNumericalMultiplyDivideExpression_Operator() {
-		return (EAttribute)numericalMultiplyDivideExpressionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getNumericalMultiplyDivideExpression_RightOperand() {
-		return (EReference)numericalMultiplyDivideExpressionEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)numericalMultiplyDivideExpressionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -875,15 +736,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 */
 	public EAttribute getNumericalUnaryExpression_Operator() {
 		return (EAttribute)numericalUnaryExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getNumericalUnaryExpression_Operand() {
-		return (EReference)numericalUnaryExpressionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1071,6 +923,51 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBinaryExpression() {
+		return binaryExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBinaryExpression_LeftOperand() {
+		return (EReference)binaryExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBinaryExpression_RightOperand() {
+		return (EReference)binaryExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnaryExpression() {
+		return unaryExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnaryExpression_Operand() {
+		return (EReference)unaryExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getAssignmentOperator() {
 		return assignmentOperatorEEnum;
 	}
@@ -1125,6 +1022,24 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getLogicalOperator() {
+		return logicalOperatorEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getBitwiseOperator() {
+		return bitwiseOperatorEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ExpressionsFactory getExpressionsFactory() {
 		return (ExpressionsFactory)getEFactoryInstance();
 	}
@@ -1149,6 +1064,16 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		// Create classes and their features
 		expressionEClass = createEClass(EXPRESSION);
+
+		binaryExpressionEClass = createEClass(BINARY_EXPRESSION);
+		createEReference(binaryExpressionEClass, BINARY_EXPRESSION__LEFT_OPERAND);
+		createEReference(binaryExpressionEClass, BINARY_EXPRESSION__RIGHT_OPERAND);
+
+		unaryExpressionEClass = createEClass(UNARY_EXPRESSION);
+		createEReference(unaryExpressionEClass, UNARY_EXPRESSION__OPERAND);
+
+		argumentExpressionEClass = createEClass(ARGUMENT_EXPRESSION);
+		createEReference(argumentExpressionEClass, ARGUMENT_EXPRESSION__ARGS);
 
 		literalEClass = createEClass(LITERAL);
 
@@ -1183,51 +1108,31 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEReference(conditionalExpressionEClass, CONDITIONAL_EXPRESSION__FALSE_CASE);
 
 		logicalOrExpressionEClass = createEClass(LOGICAL_OR_EXPRESSION);
-		createEReference(logicalOrExpressionEClass, LOGICAL_OR_EXPRESSION__LEFT_OPERAND);
-		createEReference(logicalOrExpressionEClass, LOGICAL_OR_EXPRESSION__RIGHT_OPERAND);
 
 		logicalAndExpressionEClass = createEClass(LOGICAL_AND_EXPRESSION);
-		createEReference(logicalAndExpressionEClass, LOGICAL_AND_EXPRESSION__LEFT_OPERAND);
-		createEReference(logicalAndExpressionEClass, LOGICAL_AND_EXPRESSION__RIGHT_OPERAND);
 
 		logicalNotExpressionEClass = createEClass(LOGICAL_NOT_EXPRESSION);
-		createEReference(logicalNotExpressionEClass, LOGICAL_NOT_EXPRESSION__OPERAND);
 
 		bitwiseXorExpressionEClass = createEClass(BITWISE_XOR_EXPRESSION);
-		createEReference(bitwiseXorExpressionEClass, BITWISE_XOR_EXPRESSION__LEFT_OPERAND);
-		createEReference(bitwiseXorExpressionEClass, BITWISE_XOR_EXPRESSION__RIGHT_OPERAND);
 
 		bitwiseOrExpressionEClass = createEClass(BITWISE_OR_EXPRESSION);
-		createEReference(bitwiseOrExpressionEClass, BITWISE_OR_EXPRESSION__LEFT_OPERAND);
-		createEReference(bitwiseOrExpressionEClass, BITWISE_OR_EXPRESSION__RIGHT_OPERAND);
 
 		bitwiseAndExpressionEClass = createEClass(BITWISE_AND_EXPRESSION);
-		createEReference(bitwiseAndExpressionEClass, BITWISE_AND_EXPRESSION__LEFT_OPERAND);
-		createEReference(bitwiseAndExpressionEClass, BITWISE_AND_EXPRESSION__RIGHT_OPERAND);
 
 		logicalRelationExpressionEClass = createEClass(LOGICAL_RELATION_EXPRESSION);
-		createEReference(logicalRelationExpressionEClass, LOGICAL_RELATION_EXPRESSION__LEFT_OPERAND);
 		createEAttribute(logicalRelationExpressionEClass, LOGICAL_RELATION_EXPRESSION__OPERATOR);
-		createEReference(logicalRelationExpressionEClass, LOGICAL_RELATION_EXPRESSION__RIGHT_OPERAND);
 
 		shiftExpressionEClass = createEClass(SHIFT_EXPRESSION);
-		createEReference(shiftExpressionEClass, SHIFT_EXPRESSION__LEFT_OPERAND);
 		createEAttribute(shiftExpressionEClass, SHIFT_EXPRESSION__OPERATOR);
-		createEReference(shiftExpressionEClass, SHIFT_EXPRESSION__RIGHT_OPERAND);
 
 		numericalAddSubtractExpressionEClass = createEClass(NUMERICAL_ADD_SUBTRACT_EXPRESSION);
-		createEReference(numericalAddSubtractExpressionEClass, NUMERICAL_ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND);
 		createEAttribute(numericalAddSubtractExpressionEClass, NUMERICAL_ADD_SUBTRACT_EXPRESSION__OPERATOR);
-		createEReference(numericalAddSubtractExpressionEClass, NUMERICAL_ADD_SUBTRACT_EXPRESSION__RIGHT_OPERAND);
 
 		numericalMultiplyDivideExpressionEClass = createEClass(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION);
-		createEReference(numericalMultiplyDivideExpressionEClass, NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND);
 		createEAttribute(numericalMultiplyDivideExpressionEClass, NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__OPERATOR);
-		createEReference(numericalMultiplyDivideExpressionEClass, NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__RIGHT_OPERAND);
 
 		numericalUnaryExpressionEClass = createEClass(NUMERICAL_UNARY_EXPRESSION);
 		createEAttribute(numericalUnaryExpressionEClass, NUMERICAL_UNARY_EXPRESSION__OPERATOR);
-		createEReference(numericalUnaryExpressionEClass, NUMERICAL_UNARY_EXPRESSION__OPERAND);
 
 		primitiveValueExpressionEClass = createEClass(PRIMITIVE_VALUE_EXPRESSION);
 		createEReference(primitiveValueExpressionEClass, PRIMITIVE_VALUE_EXPRESSION__VALUE);
@@ -1252,9 +1157,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEReference(typeCastExpressionEClass, TYPE_CAST_EXPRESSION__OPERAND);
 		createEReference(typeCastExpressionEClass, TYPE_CAST_EXPRESSION__TYPE);
 
-		argumentExpressionEClass = createEClass(ARGUMENT_EXPRESSION);
-		createEReference(argumentExpressionEClass, ARGUMENT_EXPRESSION__ARGS);
-
 		// Create enums
 		assignmentOperatorEEnum = createEEnum(ASSIGNMENT_OPERATOR);
 		shiftOperatorEEnum = createEEnum(SHIFT_OPERATOR);
@@ -1262,6 +1164,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		multiplicativeOperatorEEnum = createEEnum(MULTIPLICATIVE_OPERATOR);
 		unaryOperatorEEnum = createEEnum(UNARY_OPERATOR);
 		relationalOperatorEEnum = createEEnum(RELATIONAL_OPERATOR);
+		logicalOperatorEEnum = createEEnum(LOGICAL_OPERATOR);
+		bitwiseOperatorEEnum = createEEnum(BITWISE_OPERATOR);
 	}
 
 	/**
@@ -1295,6 +1199,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		binaryExpressionEClass.getESuperTypes().add(this.getExpression());
+		unaryExpressionEClass.getESuperTypes().add(this.getExpression());
+		argumentExpressionEClass.getESuperTypes().add(this.getExpression());
 		boolLiteralEClass.getESuperTypes().add(this.getLiteral());
 		intLiteralEClass.getESuperTypes().add(this.getLiteral());
 		doubleLiteralEClass.getESuperTypes().add(this.getLiteral());
@@ -1304,26 +1211,39 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		nullLiteralEClass.getESuperTypes().add(this.getLiteral());
 		assignmentExpressionEClass.getESuperTypes().add(this.getExpression());
 		conditionalExpressionEClass.getESuperTypes().add(this.getExpression());
-		logicalOrExpressionEClass.getESuperTypes().add(this.getExpression());
-		logicalAndExpressionEClass.getESuperTypes().add(this.getExpression());
-		logicalNotExpressionEClass.getESuperTypes().add(this.getExpression());
-		bitwiseXorExpressionEClass.getESuperTypes().add(this.getExpression());
-		bitwiseOrExpressionEClass.getESuperTypes().add(this.getExpression());
-		bitwiseAndExpressionEClass.getESuperTypes().add(this.getExpression());
-		logicalRelationExpressionEClass.getESuperTypes().add(this.getExpression());
-		shiftExpressionEClass.getESuperTypes().add(this.getExpression());
-		numericalAddSubtractExpressionEClass.getESuperTypes().add(this.getExpression());
-		numericalMultiplyDivideExpressionEClass.getESuperTypes().add(this.getExpression());
-		numericalUnaryExpressionEClass.getESuperTypes().add(this.getExpression());
+		logicalOrExpressionEClass.getESuperTypes().add(this.getBinaryExpression());
+		logicalAndExpressionEClass.getESuperTypes().add(this.getBinaryExpression());
+		logicalNotExpressionEClass.getESuperTypes().add(this.getUnaryExpression());
+		bitwiseXorExpressionEClass.getESuperTypes().add(this.getBinaryExpression());
+		bitwiseOrExpressionEClass.getESuperTypes().add(this.getBinaryExpression());
+		bitwiseAndExpressionEClass.getESuperTypes().add(this.getBinaryExpression());
+		logicalRelationExpressionEClass.getESuperTypes().add(this.getBinaryExpression());
+		shiftExpressionEClass.getESuperTypes().add(this.getBinaryExpression());
+		numericalAddSubtractExpressionEClass.getESuperTypes().add(this.getBinaryExpression());
+		numericalMultiplyDivideExpressionEClass.getESuperTypes().add(this.getBinaryExpression());
+		numericalUnaryExpressionEClass.getESuperTypes().add(this.getUnaryExpression());
 		primitiveValueExpressionEClass.getESuperTypes().add(this.getExpression());
 		featureCallEClass.getESuperTypes().add(this.getArgumentExpression());
 		elementReferenceExpressionEClass.getESuperTypes().add(this.getArgumentExpression());
 		parenthesizedExpressionEClass.getESuperTypes().add(this.getExpression());
 		typeCastExpressionEClass.getESuperTypes().add(this.getExpression());
-		argumentExpressionEClass.getESuperTypes().add(this.getExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(binaryExpressionEClass, BinaryExpression.class, "BinaryExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBinaryExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, BinaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBinaryExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, BinaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(binaryExpressionEClass, ecorePackage.getEEnumerator(), "getOperator", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(unaryExpressionEClass, UnaryExpression.class, "UnaryExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnaryExpression_Operand(), this.getExpression(), null, "operand", null, 0, 1, UnaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(unaryExpressionEClass, ecorePackage.getEEnumerator(), "getOperator", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(argumentExpressionEClass, ArgumentExpression.class, "ArgumentExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getArgumentExpression_Args(), this.getExpression(), null, "args", null, 0, -1, ArgumentExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(literalEClass, Literal.class, "Literal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1358,51 +1278,31 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEReference(getConditionalExpression_FalseCase(), this.getExpression(), null, "falseCase", null, 0, 1, ConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(logicalOrExpressionEClass, LogicalOrExpression.class, "LogicalOrExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLogicalOrExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, LogicalOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLogicalOrExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, LogicalOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(logicalAndExpressionEClass, LogicalAndExpression.class, "LogicalAndExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLogicalAndExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, LogicalAndExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLogicalAndExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, LogicalAndExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(logicalNotExpressionEClass, LogicalNotExpression.class, "LogicalNotExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLogicalNotExpression_Operand(), this.getExpression(), null, "operand", null, 0, 1, LogicalNotExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bitwiseXorExpressionEClass, BitwiseXorExpression.class, "BitwiseXorExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBitwiseXorExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, BitwiseXorExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBitwiseXorExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, BitwiseXorExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bitwiseOrExpressionEClass, BitwiseOrExpression.class, "BitwiseOrExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBitwiseOrExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, BitwiseOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBitwiseOrExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, BitwiseOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bitwiseAndExpressionEClass, BitwiseAndExpression.class, "BitwiseAndExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBitwiseAndExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, BitwiseAndExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBitwiseAndExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, BitwiseAndExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(logicalRelationExpressionEClass, LogicalRelationExpression.class, "LogicalRelationExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLogicalRelationExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, LogicalRelationExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLogicalRelationExpression_Operator(), this.getRelationalOperator(), "operator", null, 0, 1, LogicalRelationExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLogicalRelationExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, LogicalRelationExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(shiftExpressionEClass, ShiftExpression.class, "ShiftExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getShiftExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, ShiftExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getShiftExpression_Operator(), this.getShiftOperator(), "operator", null, 0, 1, ShiftExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getShiftExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, ShiftExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(numericalAddSubtractExpressionEClass, NumericalAddSubtractExpression.class, "NumericalAddSubtractExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNumericalAddSubtractExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, NumericalAddSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNumericalAddSubtractExpression_Operator(), this.getAdditiveOperator(), "operator", null, 0, 1, NumericalAddSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNumericalAddSubtractExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, NumericalAddSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(numericalMultiplyDivideExpressionEClass, NumericalMultiplyDivideExpression.class, "NumericalMultiplyDivideExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNumericalMultiplyDivideExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, NumericalMultiplyDivideExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNumericalMultiplyDivideExpression_Operator(), this.getMultiplicativeOperator(), "operator", null, 0, 1, NumericalMultiplyDivideExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNumericalMultiplyDivideExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, NumericalMultiplyDivideExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(numericalUnaryExpressionEClass, NumericalUnaryExpression.class, "NumericalUnaryExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNumericalUnaryExpression_Operator(), this.getUnaryOperator(), "operator", null, 0, 1, NumericalUnaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNumericalUnaryExpression_Operand(), this.getExpression(), null, "operand", null, 0, 1, NumericalUnaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primitiveValueExpressionEClass, PrimitiveValueExpression.class, "PrimitiveValueExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPrimitiveValueExpression_Value(), this.getLiteral(), null, "value", null, 0, 1, PrimitiveValueExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1426,9 +1326,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEClass(typeCastExpressionEClass, TypeCastExpression.class, "TypeCastExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeCastExpression_Operand(), this.getExpression(), null, "operand", null, 0, 1, TypeCastExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeCastExpression_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, TypeCastExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(argumentExpressionEClass, ArgumentExpression.class, "ArgumentExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArgumentExpression_Args(), this.getExpression(), null, "args", null, 0, -1, ArgumentExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(assignmentOperatorEEnum, AssignmentOperator.class, "AssignmentOperator");
@@ -1469,6 +1366,16 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		addEEnumLiteral(relationalOperatorEEnum, RelationalOperator.GREATER_EQUAL);
 		addEEnumLiteral(relationalOperatorEEnum, RelationalOperator.EQUALS);
 		addEEnumLiteral(relationalOperatorEEnum, RelationalOperator.NOT_EQUALS);
+
+		initEEnum(logicalOperatorEEnum, LogicalOperator.class, "LogicalOperator");
+		addEEnumLiteral(logicalOperatorEEnum, LogicalOperator.AND);
+		addEEnumLiteral(logicalOperatorEEnum, LogicalOperator.OR);
+		addEEnumLiteral(logicalOperatorEEnum, LogicalOperator.NOT);
+
+		initEEnum(bitwiseOperatorEEnum, BitwiseOperator.class, "BitwiseOperator");
+		addEEnumLiteral(bitwiseOperatorEEnum, BitwiseOperator.XOR);
+		addEEnumLiteral(bitwiseOperatorEEnum, BitwiseOperator.AND);
+		addEEnumLiteral(bitwiseOperatorEEnum, BitwiseOperator.OR);
 
 		// Create resource
 		createResource(eNS_URI);

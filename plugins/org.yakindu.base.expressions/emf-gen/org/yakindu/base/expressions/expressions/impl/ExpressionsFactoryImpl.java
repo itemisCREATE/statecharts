@@ -8,11 +8,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.yakindu.base.expressions.expressions.*;
 import org.yakindu.base.expressions.expressions.AdditiveOperator;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
+import org.yakindu.base.expressions.expressions.BitwiseOperator;
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression;
 import org.yakindu.base.expressions.expressions.BoolLiteral;
@@ -27,6 +27,7 @@ import org.yakindu.base.expressions.expressions.HexLiteral;
 import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.expressions.LogicalAndExpression;
 import org.yakindu.base.expressions.expressions.LogicalNotExpression;
+import org.yakindu.base.expressions.expressions.LogicalOperator;
 import org.yakindu.base.expressions.expressions.LogicalOrExpression;
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression;
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator;
@@ -41,6 +42,7 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.ShiftOperator;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
+import org.yakindu.base.expressions.expressions.UnaryExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
 
 /**
@@ -87,6 +89,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case ExpressionsPackage.UNARY_EXPRESSION: return createUnaryExpression();
 			case ExpressionsPackage.BOOL_LITERAL: return createBoolLiteral();
 			case ExpressionsPackage.INT_LITERAL: return createIntLiteral();
 			case ExpressionsPackage.DOUBLE_LITERAL: return createDoubleLiteral();
@@ -137,6 +140,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 				return createUnaryOperatorFromString(eDataType, initialValue);
 			case ExpressionsPackage.RELATIONAL_OPERATOR:
 				return createRelationalOperatorFromString(eDataType, initialValue);
+			case ExpressionsPackage.LOGICAL_OPERATOR:
+				return createLogicalOperatorFromString(eDataType, initialValue);
+			case ExpressionsPackage.BITWISE_OPERATOR:
+				return createBitwiseOperatorFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -162,9 +169,23 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 				return convertUnaryOperatorToString(eDataType, instanceValue);
 			case ExpressionsPackage.RELATIONAL_OPERATOR:
 				return convertRelationalOperatorToString(eDataType, instanceValue);
+			case ExpressionsPackage.LOGICAL_OPERATOR:
+				return convertLogicalOperatorToString(eDataType, instanceValue);
+			case ExpressionsPackage.BITWISE_OPERATOR:
+				return convertBitwiseOperatorToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnaryExpression createUnaryExpression() {
+		UnaryExpressionImpl unaryExpression = new UnaryExpressionImpl();
+		return unaryExpression;
 	}
 
 	/**
@@ -534,6 +555,46 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * @generated
 	 */
 	public String convertRelationalOperatorToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LogicalOperator createLogicalOperatorFromString(EDataType eDataType, String initialValue) {
+		LogicalOperator result = LogicalOperator.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertLogicalOperatorToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BitwiseOperator createBitwiseOperatorFromString(EDataType eDataType, String initialValue) {
+		BitwiseOperator result = BitwiseOperator.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertBitwiseOperatorToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
