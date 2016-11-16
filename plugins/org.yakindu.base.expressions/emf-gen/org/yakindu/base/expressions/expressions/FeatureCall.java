@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.yakindu.base.expressions.expressions.FeatureCall#getOwner <em>Owner</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.FeatureCall#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.FeatureCall#isOperationCall <em>Operation Call</em>}</li>
- *   <li>{@link org.yakindu.base.expressions.expressions.FeatureCall#getArgs <em>Args</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.FeatureCall#getArraySelector <em>Array Selector</em>}</li>
  *   <li>{@link org.yakindu.base.expressions.expressions.FeatureCall#isArrayAccess <em>Array Access</em>}</li>
  * </ul>
@@ -26,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface FeatureCall extends Expression {
+public interface FeatureCall extends ArgumentExpression {
 	/**
 	 * Returns the value of the '<em><b>Owner</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -104,22 +103,6 @@ public interface FeatureCall extends Expression {
 	 * @generated
 	 */
 	void setOperationCall(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Args</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.base.expressions.expressions.Expression}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Args</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Args</em>' containment reference list.
-	 * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getFeatureCall_Args()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Expression> getArgs();
 
 	/**
 	 * Returns the value of the '<em><b>Array Selector</b></em>' containment reference list.

@@ -32,7 +32,7 @@ import org.yakindu.base.expressions.expressions.ExpressionsPackage;
  * @generated
  */
 public class ElementReferenceExpressionItemProvider
-	extends ExpressionItemProvider {
+	extends ArgumentExpressionItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -56,6 +56,7 @@ public class ElementReferenceExpressionItemProvider
 
 			addReferencePropertyDescriptor(object);
 			addOperationCallPropertyDescriptor(object);
+			addArrayAccessPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -105,6 +106,28 @@ public class ElementReferenceExpressionItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Array Access feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addArrayAccessPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ElementReferenceExpression_arrayAccess_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ElementReferenceExpression_arrayAccess_feature", "_UI_ElementReferenceExpression_type"),
+				 ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_ACCESS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -116,7 +139,7 @@ public class ElementReferenceExpressionItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS);
+			childrenFeatures.add(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR);
 		}
 		return childrenFeatures;
 	}
@@ -170,9 +193,10 @@ public class ElementReferenceExpressionItemProvider
 
 		switch (notification.getFeatureID(ElementReferenceExpression.class)) {
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
+			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_ACCESS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
+			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -192,93 +216,116 @@ public class ElementReferenceExpressionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createConditionalExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS ||
+			childFeature == ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }
