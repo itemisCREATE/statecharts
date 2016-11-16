@@ -335,23 +335,21 @@ class ExpressionCode {
 	}
 
 	def boolean isAssignmentContained(Expression it) {
-		var ret = false
 		if (it instanceof AssignmentExpression) {
 			return true
 		} else if (eContainer instanceof Expression) {
-			ret = isAssignmentContained(eContainer as Expression)
+			return isAssignmentContained(eContainer as Expression)
 		}
-		return ret
+		return false // default
 	}
 
 	def boolean isPropertyContained(Expression it) {
-		var ret = false
 		if (eContainer instanceof Property) {
 			return true
 		} else if (eContainer instanceof Expression) {
-			ret = isPropertyContained(eContainer as Expression)
+			return isPropertyContained(eContainer as Expression)
 		}
-		return ret
+		return false // default
 	}
 
 }
