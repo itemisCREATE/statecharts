@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
-import org.yakindu.base.expressions.expressions.BinaryExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
@@ -26,10 +25,8 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
-import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.NullLiteral
-import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
@@ -41,15 +38,15 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.core.templates.Expressions
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.base.expressions.expressions.UnaryExpression
 
-class ExpressionCode {
+class ExpressionCode extends Expressions {
 
 	@Inject extension Naming
 	@Inject extension JavaNamingService
@@ -67,17 +64,12 @@ class ExpressionCode {
 		return timeEvents
 	}
 
-	def dispatch String code(EObject it) '''
-		//ERROR: Template in ExpressionCode.xtend for class '«getClass().name»' not define.
-		//Container: «eContainer?.getClass().name»
-	'''
-
 	def dispatch String code(OperationDefinition it) {
 		return getContext + "operationCallback." + name.asEscapedIdentifier;
 	}
 
 	def dispatch String code(PrimitiveValueExpression primValue) {
-		primValue.value.code;
+		primValue.value.code.toString;
 	}
 
 	def dispatch String code(ParenthesizedExpression e) {
@@ -109,7 +101,7 @@ class ExpressionCode {
 			}
 
 		} else {
-			cmd = expression.code
+			cmd = expression.code.toString
 		}
 		return cmd
 	}
@@ -169,14 +161,6 @@ class ExpressionCode {
 		}
 	}
 
-	def dispatch String code(BinaryExpression expression) {
-		expression.leftOperand.code + " " + expression.operator.literal + " " + expression.rightOperand.code
-	}
-
-	def dispatch String code(UnaryExpression expression) {
-		expression.operator.literal + expression.operand.code
-	}
-
 	def dispatch String code(ActiveStateReferenceExpression it) {
 		"isStateActive(State." + value.stateName.asEscapedIdentifier + ")";
 	}
@@ -194,11 +178,11 @@ class ExpressionCode {
 	}
 
 	def protected dispatch String code(ElementReferenceExpression it) {
-		(it.reference as Declaration).codeDeclaration(it)
+		(it.reference as Declaration).codeDeclaration(it).toString
 	}
 
 	def protected dispatch String code(FeatureCall it) {
-		(it.feature as Declaration).codeDeclaration(it)
+		(it.feature as Declaration).codeDeclaration(it).toString
 	}
 
 	def protected codeDeclaration(Declaration it, ArgumentExpression exp) {
