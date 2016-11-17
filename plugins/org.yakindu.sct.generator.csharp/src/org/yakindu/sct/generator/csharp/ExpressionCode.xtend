@@ -79,12 +79,12 @@ class ExpressionCode {
 	}
 
 	def dispatch String code(ParenthesizedExpression e) {
-		"(" + e.expression.code + ")";
+		"(" + e.expression.code.toString.trim + ")";
 	}
 
 	/* Assignment */
 	def dispatch String code(AssignmentExpression it) {
-		varRef.code + operator.code + expression.code
+		varRef.code.toString.trim  + " " +  operator.code.toString.trim  + " " + expression.code.toString.trim
 	}
 
 	/* Literals */
@@ -126,7 +126,7 @@ class ExpressionCode {
 	}
 
 	def dispatch String code(ConditionalExpression expression) {
-		expression.condition.code + ' ? ' + expression.trueCase.code + ' : ' + expression.falseCase.code
+		expression.condition.code.toString.trim + ' ? ' + expression.trueCase.code + ' : ' + expression.falseCase.code
 	}
 
 	def dispatch String code(LogicalAndExpression expression) {
@@ -141,7 +141,7 @@ class ExpressionCode {
 		if (isSame(expression.leftOperand.infer.type, getType(GenericTypeSystem.STRING))) {
 			expression.logicalString
 		} else
-			expression.leftOperand.code + expression.operator.code + expression.rightOperand.code;
+			expression.leftOperand.code.toString.trim + expression.operator.code + expression.rightOperand.code;
 	}
 
 	def String logicalString(LogicalRelationExpression expression) {
@@ -155,31 +155,31 @@ class ExpressionCode {
 	}
 
 	def dispatch String code(BitwiseAndExpression expression) {
-		expression.leftOperand.code + " & " + expression.rightOperand.code
+		expression.leftOperand.code.toString.trim + " & " + expression.rightOperand.code
 	}
 
 	def dispatch String code(BitwiseOrExpression expression) {
-		expression.leftOperand.code + " | " + expression.rightOperand.code
+		expression.leftOperand.code.toString.trim + " | " + expression.rightOperand.code
 	}
 
 	def dispatch String code(BitwiseXorExpression expression) {
-		expression.leftOperand.code + " ^ " + expression.rightOperand.code
+		expression.leftOperand.code.toString.trim + " ^ " + expression.rightOperand.code
 	}
 
 	def dispatch String code(ShiftExpression expression) {
-		expression.leftOperand.code + expression.operator.code + expression.rightOperand.code
+		expression.leftOperand.code.toString.trim + " " + expression.operator.code + " " + expression.rightOperand.code
 	}
 
 	def dispatch String code(NumericalAddSubtractExpression expression) {
-		expression.leftOperand.code + expression.operator.code + expression.rightOperand.code
+		expression.leftOperand.code.toString.trim + " " + expression.operator.code + " " + expression.rightOperand.code
 	}
 
 	def dispatch String code(NumericalMultiplyDivideExpression expression) {
-		expression.leftOperand.code + expression.operator.code + expression.rightOperand.code
+		expression.leftOperand.code.toString.trim + " " + expression.operator.code + " " + expression.rightOperand.code
 	}
 
 	def dispatch String code(NumericalUnaryExpression expression) {
-		expression.operator.code + expression.operand.code
+		expression.operator.code + " " + expression.operand.code
 	}
 
 	def dispatch String code(ActiveStateReferenceExpression it) {
@@ -239,7 +239,7 @@ class ExpressionCode {
 
 	def dispatch String code(Declaration it) {
 		context + name.asEscapedIdentifier
-	}
+		}
 
 	def dispatch String code(TimeEvent it) {
 		"timeEvents[" + getTimeEvents.indexOf(it) + "]"
@@ -255,9 +255,9 @@ class ExpressionCode {
 		}
 		if (scope != null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
-		}
+			}
 		return ""
-	}
+		}
 	
 	def getConstContext(Property it){
 		if (scope != null) {
