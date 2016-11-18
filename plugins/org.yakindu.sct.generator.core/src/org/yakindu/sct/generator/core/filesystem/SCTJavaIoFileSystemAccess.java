@@ -13,15 +13,19 @@ package org.yakindu.sct.generator.core.filesystem;
 
 import java.io.File;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipse.xtext.parser.IEncodingProvider;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 /**
  * @author Johannes Dicks - Initial contribution and API
  *
  */
+@Singleton
 public class SCTJavaIoFileSystemAccess extends JavaIoFileSystemAccess implements ISCTFileSystemAccess {
 
 	public static final String BASE_DIR = "filesystemAccess.absolute.baseDir";
@@ -29,6 +33,8 @@ public class SCTJavaIoFileSystemAccess extends JavaIoFileSystemAccess implements
 	@Inject
 	@Named(BASE_DIR)
 	protected String absoluteBaseDir;
+	@Inject
+	private IEncodingProvider encodingProvider;
 
 	private String projectName;
 
@@ -39,6 +45,11 @@ public class SCTJavaIoFileSystemAccess extends JavaIoFileSystemAccess implements
 	@Override
 	public void setOutputPath(String outputName, String path) {
 		super.setOutputPath(outputName, absoluteBaseDir + File.separator + projectName + File.separator + path);
+	}
+	
+	@Override
+	protected String getEncoding(URI fileURI) {
+		return encodingProvider.getEncoding(fileURI);
 	}
 
 }
