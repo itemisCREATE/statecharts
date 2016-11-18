@@ -21,18 +21,18 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
@@ -40,10 +40,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.ToolBar;
-import org.eclipse.swt.widgets.ToolItem;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
-import org.yakindu.sct.examples.wizard.ExampleWizardImages;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
@@ -69,7 +66,7 @@ public class SelectExamplePage extends WizardPage
 
 	@Inject
 	private IExampleService exampleService;
-	private TreeViewer viewer;
+	private TableViewer viewer;
 	private ExampleData selection;
 	private Browser browser;
 	private MessageArea messageArea;
@@ -95,7 +92,6 @@ public class SelectExamplePage extends WizardPage
 		Composite root = new Composite(parent, SWT.NONE);
 		root.setLayout(new GridLayout(1, true));
 		createUpdateGroup(root);
-		createToolbar(root);
 		SashForm container = new SashForm(root, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(container);
 		GridLayout layout = new GridLayout(2, false);
@@ -104,27 +100,6 @@ public class SelectExamplePage extends WizardPage
 		createDetailsPane(container);
 		container.setWeights(new int[]{1, 2});
 		setControl(container);
-	}
-
-	protected void createToolbar(Composite root) {
-		ToolBar tb = new ToolBar(root, SWT.NONE);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(tb);
-		ToolItem collapseAllItem = new ToolItem(tb, SWT.NONE);
-		collapseAllItem.setImage(ExampleWizardImages.COLLAPSE_ALL.image());
-		collapseAllItem.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				viewer.collapseAll();
-			}
-		});
-		ToolItem expandAllItem = new ToolItem(tb, SWT.NONE);
-		expandAllItem.setImage(ExampleWizardImages.EXPAND_ALL.image());
-		expandAllItem.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				viewer.expandAll();
-			}
-		});
 	}
 
 	private void createUpdateGroup(Composite root) {
@@ -206,14 +181,13 @@ public class SelectExamplePage extends WizardPage
 
 		messageArea.hide();
 		viewer.setInput(input);
-		viewer.expandAll();
 		// explicit layouting required for Unix systems
 		viewer.getControl().getParent().getParent().layout(true);
 
 		filterAndSelectExampleToInstall(viewer, input);
 	}
 
-	protected void filterAndSelectExampleToInstall(TreeViewer viewer, List<ExampleData> input) {
+	protected void filterAndSelectExampleToInstall(TableViewer viewer, List<ExampleData> input) {
 		final ExampleData exampleToInstall = Iterables.find(input, new Predicate<ExampleData>() {
 			@Override
 			public boolean apply(ExampleData input) {
@@ -246,9 +220,9 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	protected void createTreeViewer(Composite container) {
-		viewer = new TreeViewer(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
+		viewer = new TableViewer(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(viewer.getControl());
-		viewer.setContentProvider(new ExampleContentProvider());
+		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(new ExampleLabelProvider()));
 		viewer.addSelectionChangedListener(this);
 	}

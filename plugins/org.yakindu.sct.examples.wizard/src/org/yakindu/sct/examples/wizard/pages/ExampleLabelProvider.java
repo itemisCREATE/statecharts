@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.examples.wizard.pages;
 
+import java.util.Arrays;
+
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
@@ -38,7 +40,11 @@ public class ExampleLabelProvider extends LabelProvider implements IStyledLabelP
 	@Override
 	public Image getImage(Object element) {
 		if (element instanceof ExampleData) {
-			return StatechartImages.LOGO.image();
+			if (Arrays.asList(((ExampleData) element).getCategory()).contains("professional")) {
+				return StatechartImages.PRO_EDITION.image();
+			} else {
+				return StatechartImages.LOGO.image();
+			}
 		}
 		return StatechartImages.MENU.image();
 	}
