@@ -33,11 +33,15 @@ public class StextResourceFactory extends XMIResourceFactoryImpl {
 			return new XMIResourceImpl(uri);
 		}
 		IDomain domain = DomainRegistry.getDomain(domainID);
-		Injector injector = domain.getInjector(IDomain.FEATURE_RESOURCE);
+		Injector injector = getInjector(domain);
 		Resource resource = injector.getInstance(Resource.class);
 		ResourceSet set = new ResourceSetImpl();
 		set.getResources().add(resource);
 		resource.setURI(uri);
 		return resource;
+	}
+
+	protected Injector getInjector(IDomain domain) {
+		return domain.getInjector(IDomain.FEATURE_RESOURCE);
 	}
 }
