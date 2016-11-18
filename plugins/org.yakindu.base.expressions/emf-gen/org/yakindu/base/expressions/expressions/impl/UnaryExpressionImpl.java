@@ -25,7 +25,7 @@ import org.yakindu.base.expressions.expressions.UnaryExpression;
  *
  * @generated
  */
-public class UnaryExpressionImpl extends ExpressionImpl implements UnaryExpression {
+public abstract class UnaryExpressionImpl extends ExpressionImpl implements UnaryExpression {
 	/**
 	 * The cached value of the '{@link #getOperand() <em>Operand</em>}' containment reference.
 	 * <!-- begin-user-doc -->

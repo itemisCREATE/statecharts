@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.base.expressions.expressions.*;
 import org.yakindu.base.expressions.expressions.AdditiveOperator;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;
@@ -89,7 +90,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ExpressionsPackage.UNARY_EXPRESSION: return createUnaryExpression();
 			case ExpressionsPackage.BOOL_LITERAL: return createBoolLiteral();
 			case ExpressionsPackage.INT_LITERAL: return createIntLiteral();
 			case ExpressionsPackage.DOUBLE_LITERAL: return createDoubleLiteral();
@@ -176,16 +176,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public UnaryExpression createUnaryExpression() {
-		UnaryExpressionImpl unaryExpression = new UnaryExpressionImpl();
-		return unaryExpression;
 	}
 
 	/**

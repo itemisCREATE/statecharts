@@ -78,29 +78,6 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.UnaryExpression} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected UnaryExpressionItemProvider unaryExpressionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.UnaryExpression}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createUnaryExpressionAdapter() {
-		if (unaryExpressionItemProvider == null) {
-			unaryExpressionItemProvider = new UnaryExpressionItemProvider(this);
-		}
-
-		return unaryExpressionItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.BoolLiteral} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -774,7 +751,6 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	 * @generated
 	 */
 	public void dispose() {
-		if (unaryExpressionItemProvider != null) unaryExpressionItemProvider.dispose();
 		if (boolLiteralItemProvider != null) boolLiteralItemProvider.dispose();
 		if (intLiteralItemProvider != null) intLiteralItemProvider.dispose();
 		if (doubleLiteralItemProvider != null) doubleLiteralItemProvider.dispose();

@@ -22,15 +22,6 @@ public interface ExpressionsFactory extends EFactory {
 	ExpressionsFactory eINSTANCE = org.yakindu.base.expressions.expressions.impl.ExpressionsFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Unary Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unary Expression</em>'.
-	 * @generated
-	 */
-	UnaryExpression createUnaryExpression();
-
-	/**
 	 * Returns a new object of class '<em>Bool Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

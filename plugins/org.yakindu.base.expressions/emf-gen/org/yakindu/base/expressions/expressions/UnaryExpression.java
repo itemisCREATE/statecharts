@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * </ul>
  *
  * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getUnaryExpression()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface UnaryExpression extends Expression {

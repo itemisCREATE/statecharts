@@ -1237,7 +1237,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		addEOperation(binaryExpressionEClass, ecorePackage.getEEnumerator(), "getOperator", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(unaryExpressionEClass, UnaryExpression.class, "UnaryExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(unaryExpressionEClass, UnaryExpression.class, "UnaryExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUnaryExpression_Operand(), this.getExpression(), null, "operand", null, 0, 1, UnaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(unaryExpressionEClass, ecorePackage.getEEnumerator(), "getOperator", 0, 1, IS_UNIQUE, IS_ORDERED);
