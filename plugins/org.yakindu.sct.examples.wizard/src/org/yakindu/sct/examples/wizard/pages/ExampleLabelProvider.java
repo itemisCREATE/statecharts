@@ -41,7 +41,7 @@ public class ExampleLabelProvider extends LabelProvider implements IStyledLabelP
 	public Image getImage(Object element) {
 		if (element instanceof ExampleData) {
 			if (Arrays.asList(((ExampleData) element).getCategory()).contains("professional")) {
-				return StatechartImages.PRO_EDITION.image();
+				return StatechartImages.PRO_LOGO.image();
 			} else {
 				return StatechartImages.LOGO.image();
 			}
