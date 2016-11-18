@@ -44,7 +44,7 @@ public class MessageArea extends Composite {
 	private Group group;
 
 	public static enum State {
-		DOWNLOAD, UPDATE, ERROR, HIDE
+		DOWNLOAD, UPDATE, INSTALL, ERROR, HIDE
 	}
 
 	private State state = State.HIDE;
@@ -97,6 +97,16 @@ public class MessageArea extends Composite {
 		textLabel.setText("Updates available. Do you want to download the new examples?");
 		textLabel.pack();
 		button.setText("Update");
+		button.setVisible(true);
+		show();
+	}
+	
+	public void showProInstall() {
+		state = State.INSTALL;
+		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_INFORMATION));
+		textLabel.setText("This example requires YAKINDU Statechart Tools professional. Do you want to download it?");
+		textLabel.pack();
+		button.setText("Download");
 		button.setVisible(true);
 		show();
 	}

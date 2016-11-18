@@ -38,7 +38,11 @@ public class ExampleLabelProvider extends LabelProvider implements IStyledLabelP
 	@Override
 	public Image getImage(Object element) {
 		if (element instanceof ExampleData) {
-			return StatechartImages.LOGO.image();
+			if (((ExampleData) element).isProfessional()) {
+				return StatechartImages.PRO_LOGO.image();
+			} else {
+				return StatechartImages.LOGO.image();
+			}
 		}
 		return StatechartImages.MENU.image();
 	}
