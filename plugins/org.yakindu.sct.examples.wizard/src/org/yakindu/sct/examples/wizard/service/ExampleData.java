@@ -20,6 +20,7 @@ import java.util.Arrays;
  */
 public class ExampleData {
 
+	private static final String PRO_EXAMPLE = "professional";
 	private String id;
 	private String title;
 	private String[] category;
@@ -90,6 +91,10 @@ public class ExampleData {
 
 	public void setProjectDir(File projectDir) {
 		this.projectDir = projectDir;
+	}
+
+	public boolean isProfessional() {
+		return Arrays.asList(getCategory()).contains(PRO_EXAMPLE);
 	}
 
 	@Override

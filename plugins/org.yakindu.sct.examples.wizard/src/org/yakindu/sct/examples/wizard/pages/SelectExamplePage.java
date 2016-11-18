@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.util.IPropertyChangeListener;
@@ -38,6 +39,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
@@ -58,12 +60,10 @@ import com.google.inject.Inject;
  */
 
 public class SelectExamplePage extends WizardPage
-		implements
-			ExampleWizardConstants,
-			ISelectionChangedListener,
-			SelectionListener,
-			IPropertyChangeListener {
+		implements ExampleWizardConstants, ISelectionChangedListener, SelectionListener, IPropertyChangeListener {
 
+	private static final String PRO_BUNDLE = "com.yakindu.sct.domain.c";
+	private static final String PRO_UPDATE_SITE = "https://info.itemis.com/yakindu/statecharts/pro/";
 	@Inject
 	private IExampleService exampleService;
 	private TableViewer viewer;
@@ -98,7 +98,7 @@ public class SelectExamplePage extends WizardPage
 		container.setLayout(layout);
 		createTreeViewer(container);
 		createDetailsPane(container);
-		container.setWeights(new int[]{1, 2});
+		container.setWeights(new int[] { 1, 2 });
 		setControl(container);
 	}
 
@@ -133,7 +133,7 @@ public class SelectExamplePage extends WizardPage
 					init(monitor);
 				}
 			});
-			
+
 			if (revealExamplesAutomatically()) {
 				Display.getCurrent().asyncExec(new Runnable() {
 					@Override
@@ -159,6 +159,7 @@ public class SelectExamplePage extends WizardPage
 			});
 		} else if (!exampleService.isUpToDate(monitor)) {
 			Display.getDefault().syncExec(new Runnable() {
+
 				@Override
 				public void run() {
 					setInput(monitor);
@@ -174,6 +175,7 @@ public class SelectExamplePage extends WizardPage
 				}
 			});
 		}
+
 	}
 
 	protected void setInput(final IProgressMonitor monitor) {
@@ -210,7 +212,7 @@ public class SelectExamplePage extends WizardPage
 						return exampleIdToInstall.equals(((ExampleData) element).getId());
 					}
 					if (element instanceof ExampleContentProvider.Category) {
-						return ((ExampleContentProvider.Category)element).getChildren().contains(exampleToInstall);
+						return ((ExampleContentProvider.Category) element).getChildren().contains(exampleToInstall);
 					}
 					return true;
 				}
@@ -232,7 +234,18 @@ public class SelectExamplePage extends WizardPage
 		setDetailPaneContent(data);
 		setPageComplete(true);
 		setErrorMessage(null);
+		checkInstalledPlugins(data);
 		viewer.refresh();
+	}
+
+	private void checkInstalledPlugins(ExampleData data) {
+		if (data.isProfessional() && Platform.getBundle(PRO_BUNDLE) == null) {
+			messageArea.showProInstall();
+		} else {
+			messageArea.hide();
+		}
+		messageArea.getParent().layout(true);
+		this.getControl().update();
 	}
 
 	protected void setDetailPaneContent(ExampleData exampleData) {
@@ -260,7 +273,16 @@ public class SelectExamplePage extends WizardPage
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		revealExamples();
+		switch (messageArea.getState()) {
+		case UPDATE:
+			revealExamples();
+			break;
+		case INSTALL:
+			Program.launch(PRO_UPDATE_SITE);
+			break;
+		default:
+			break;
+		}
 	}
 
 	protected void revealExamples() {
