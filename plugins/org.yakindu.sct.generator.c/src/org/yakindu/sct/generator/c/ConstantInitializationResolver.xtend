@@ -21,16 +21,16 @@ class ConstantInitializationResolver extends ExpressionCode {
 		code
 	}
 	
-	override dispatch CharSequence code(Expression it, VariableDefinition target) {
-		target.initialValue.code
+	override dispatch String code(Expression it, VariableDefinition target) {
+		target.initialValue.code.toString
 	}
 		
-	override dispatch CharSequence code(FeatureCall it, VariableDefinition target) {
-		target.initialValue.code
+	override dispatch String code(FeatureCall it, VariableDefinition target) {
+		target.initialValue.code.toString
 	}
 		
-	override dispatch CharSequence code(ElementReferenceExpression it, VariableDefinition target) {
-		target.initialValue.code
+	override dispatch String code(ElementReferenceExpression it, VariableDefinition target) {
+		target.initialValue.code.toString
 	}
 		
 }

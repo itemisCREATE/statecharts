@@ -83,16 +83,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLiteral()
 	 * @generated
 	 */
-	int LITERAL = 1;
-
-	/**
-	 * The number of structural features of the '<em>Literal</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL_FEATURE_COUNT = 0;
+	int LITERAL = 4;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BoolLiteralImpl <em>Bool Literal</em>}' class.
@@ -102,7 +93,309 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBoolLiteral()
 	 * @generated
 	 */
-	int BOOL_LITERAL = 2;
+	int BOOL_LITERAL = 5;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.IntLiteralImpl <em>Int Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.IntLiteralImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getIntLiteral()
+	 * @generated
+	 */
+	int INT_LITERAL = 6;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.DoubleLiteralImpl <em>Double Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.DoubleLiteralImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getDoubleLiteral()
+	 * @generated
+	 */
+	int DOUBLE_LITERAL = 7;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.FloatLiteralImpl <em>Float Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.FloatLiteralImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getFloatLiteral()
+	 * @generated
+	 */
+	int FLOAT_LITERAL = 8;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.HexLiteralImpl <em>Hex Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.HexLiteralImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getHexLiteral()
+	 * @generated
+	 */
+	int HEX_LITERAL = 9;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.StringLiteralImpl <em>String Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.StringLiteralImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getStringLiteral()
+	 * @generated
+	 */
+	int STRING_LITERAL = 10;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NullLiteralImpl <em>Null Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.NullLiteralImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNullLiteral()
+	 * @generated
+	 */
+	int NULL_LITERAL = 11;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.AssignmentExpressionImpl <em>Assignment Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.AssignmentExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAssignmentExpression()
+	 * @generated
+	 */
+	int ASSIGNMENT_EXPRESSION = 12;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ConditionalExpressionImpl <em>Conditional Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.ConditionalExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getConditionalExpression()
+	 * @generated
+	 */
+	int CONDITIONAL_EXPRESSION = 13;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BinaryExpressionImpl <em>Binary Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.BinaryExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBinaryExpression()
+	 * @generated
+	 */
+	int BINARY_EXPRESSION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINARY_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINARY_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Binary Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINARY_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.UnaryExpressionImpl <em>Unary Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.UnaryExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getUnaryExpression()
+	 * @generated
+	 */
+	int UNARY_EXPRESSION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNARY_EXPRESSION__OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Unary Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNARY_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalOrExpressionImpl <em>Logical Or Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.LogicalOrExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalOrExpression()
+	 * @generated
+	 */
+	int LOGICAL_OR_EXPRESSION = 14;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalAndExpressionImpl <em>Logical And Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.LogicalAndExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalAndExpression()
+	 * @generated
+	 */
+	int LOGICAL_AND_EXPRESSION = 15;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalNotExpressionImpl <em>Logical Not Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.LogicalNotExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalNotExpression()
+	 * @generated
+	 */
+	int LOGICAL_NOT_EXPRESSION = 16;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BitwiseXorExpressionImpl <em>Bitwise Xor Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.BitwiseXorExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseXorExpression()
+	 * @generated
+	 */
+	int BITWISE_XOR_EXPRESSION = 17;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BitwiseOrExpressionImpl <em>Bitwise Or Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.BitwiseOrExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseOrExpression()
+	 * @generated
+	 */
+	int BITWISE_OR_EXPRESSION = 18;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BitwiseAndExpressionImpl <em>Bitwise And Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.BitwiseAndExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseAndExpression()
+	 * @generated
+	 */
+	int BITWISE_AND_EXPRESSION = 19;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalRelationExpressionImpl <em>Logical Relation Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.LogicalRelationExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalRelationExpression()
+	 * @generated
+	 */
+	int LOGICAL_RELATION_EXPRESSION = 20;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ShiftExpressionImpl <em>Shift Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.ShiftExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftExpression()
+	 * @generated
+	 */
+	int SHIFT_EXPRESSION = 21;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalAddSubtractExpressionImpl <em>Numerical Add Subtract Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.NumericalAddSubtractExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalAddSubtractExpression()
+	 * @generated
+	 */
+	int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 22;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalMultiplyDivideExpressionImpl <em>Numerical Multiply Divide Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.NumericalMultiplyDivideExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalMultiplyDivideExpression()
+	 * @generated
+	 */
+	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 23;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalUnaryExpressionImpl <em>Numerical Unary Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.NumericalUnaryExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalUnaryExpression()
+	 * @generated
+	 */
+	int NUMERICAL_UNARY_EXPRESSION = 24;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.PrimitiveValueExpressionImpl <em>Primitive Value Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.PrimitiveValueExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getPrimitiveValueExpression()
+	 * @generated
+	 */
+	int PRIMITIVE_VALUE_EXPRESSION = 25;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ArgumentExpressionImpl <em>Argument Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.ArgumentExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getArgumentExpression()
+	 * @generated
+	 */
+	int ARGUMENT_EXPRESSION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Args</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EXPRESSION__ARGS = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Argument Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_FEATURE_COUNT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -123,16 +416,6 @@ public interface ExpressionsPackage extends EPackage {
 	int BOOL_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.IntLiteralImpl <em>Int Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.IntLiteralImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getIntLiteral()
-	 * @generated
-	 */
-	int INT_LITERAL = 3;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -149,16 +432,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int INT_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.DoubleLiteralImpl <em>Double Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.DoubleLiteralImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getDoubleLiteral()
-	 * @generated
-	 */
-	int DOUBLE_LITERAL = 4;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -179,16 +452,6 @@ public interface ExpressionsPackage extends EPackage {
 	int DOUBLE_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.FloatLiteralImpl <em>Float Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.FloatLiteralImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getFloatLiteral()
-	 * @generated
-	 */
-	int FLOAT_LITERAL = 5;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -205,16 +468,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int FLOAT_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.HexLiteralImpl <em>Hex Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.HexLiteralImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getHexLiteral()
-	 * @generated
-	 */
-	int HEX_LITERAL = 6;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -235,16 +488,6 @@ public interface ExpressionsPackage extends EPackage {
 	int HEX_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.StringLiteralImpl <em>String Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.StringLiteralImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getStringLiteral()
-	 * @generated
-	 */
-	int STRING_LITERAL = 7;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -263,16 +506,6 @@ public interface ExpressionsPackage extends EPackage {
 	int STRING_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NullLiteralImpl <em>Null Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.NullLiteralImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNullLiteral()
-	 * @generated
-	 */
-	int NULL_LITERAL = 8;
-
-	/**
 	 * The number of structural features of the '<em>Null Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -280,16 +513,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int NULL_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.AssignmentExpressionImpl <em>Assignment Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.AssignmentExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAssignmentExpression()
-	 * @generated
-	 */
-	int ASSIGNMENT_EXPRESSION = 9;
 
 	/**
 	 * The feature id for the '<em><b>Var Ref</b></em>' containment reference.
@@ -328,16 +551,6 @@ public interface ExpressionsPackage extends EPackage {
 	int ASSIGNMENT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ConditionalExpressionImpl <em>Conditional Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.ConditionalExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getConditionalExpression()
-	 * @generated
-	 */
-	int CONDITIONAL_EXPRESSION = 10;
-
-	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -374,23 +587,13 @@ public interface ExpressionsPackage extends EPackage {
 	int CONDITIONAL_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalOrExpressionImpl <em>Logical Or Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.LogicalOrExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalOrExpression()
-	 * @generated
-	 */
-	int LOGICAL_OR_EXPRESSION = 11;
-
-	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_OR_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+	int LOGICAL_OR_EXPRESSION__LEFT_OPERAND = BINARY_EXPRESSION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -399,7 +602,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_OR_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 1;
+	int LOGICAL_OR_EXPRESSION__RIGHT_OPERAND = BINARY_EXPRESSION__RIGHT_OPERAND;
 
 	/**
 	 * The number of structural features of the '<em>Logical Or Expression</em>' class.
@@ -408,17 +611,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_OR_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalAndExpressionImpl <em>Logical And Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.LogicalAndExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalAndExpression()
-	 * @generated
-	 */
-	int LOGICAL_AND_EXPRESSION = 12;
+	int LOGICAL_OR_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -427,7 +620,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_AND_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+	int LOGICAL_AND_EXPRESSION__LEFT_OPERAND = BINARY_EXPRESSION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -436,7 +629,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_AND_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 1;
+	int LOGICAL_AND_EXPRESSION__RIGHT_OPERAND = BINARY_EXPRESSION__RIGHT_OPERAND;
 
 	/**
 	 * The number of structural features of the '<em>Logical And Expression</em>' class.
@@ -445,17 +638,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_AND_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalNotExpressionImpl <em>Logical Not Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.LogicalNotExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalNotExpression()
-	 * @generated
-	 */
-	int LOGICAL_NOT_EXPRESSION = 13;
+	int LOGICAL_AND_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -464,7 +647,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_NOT_EXPRESSION__OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+	int LOGICAL_NOT_EXPRESSION__OPERAND = UNARY_EXPRESSION__OPERAND;
 
 	/**
 	 * The number of structural features of the '<em>Logical Not Expression</em>' class.
@@ -473,17 +656,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_NOT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BitwiseXorExpressionImpl <em>Bitwise Xor Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.BitwiseXorExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseXorExpression()
-	 * @generated
-	 */
-	int BITWISE_XOR_EXPRESSION = 14;
+	int LOGICAL_NOT_EXPRESSION_FEATURE_COUNT = UNARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -492,7 +665,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BITWISE_XOR_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+	int BITWISE_XOR_EXPRESSION__LEFT_OPERAND = BINARY_EXPRESSION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -501,7 +674,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BITWISE_XOR_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 1;
+	int BITWISE_XOR_EXPRESSION__RIGHT_OPERAND = BINARY_EXPRESSION__RIGHT_OPERAND;
 
 	/**
 	 * The number of structural features of the '<em>Bitwise Xor Expression</em>' class.
@@ -510,17 +683,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BITWISE_XOR_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BitwiseOrExpressionImpl <em>Bitwise Or Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.BitwiseOrExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseOrExpression()
-	 * @generated
-	 */
-	int BITWISE_OR_EXPRESSION = 15;
+	int BITWISE_XOR_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -529,7 +692,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BITWISE_OR_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+	int BITWISE_OR_EXPRESSION__LEFT_OPERAND = BINARY_EXPRESSION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -538,7 +701,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BITWISE_OR_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 1;
+	int BITWISE_OR_EXPRESSION__RIGHT_OPERAND = BINARY_EXPRESSION__RIGHT_OPERAND;
 
 	/**
 	 * The number of structural features of the '<em>Bitwise Or Expression</em>' class.
@@ -547,17 +710,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BITWISE_OR_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BitwiseAndExpressionImpl <em>Bitwise And Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.BitwiseAndExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseAndExpression()
-	 * @generated
-	 */
-	int BITWISE_AND_EXPRESSION = 16;
+	int BITWISE_OR_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -566,7 +719,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BITWISE_AND_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+	int BITWISE_AND_EXPRESSION__LEFT_OPERAND = BINARY_EXPRESSION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -575,7 +728,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BITWISE_AND_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 1;
+	int BITWISE_AND_EXPRESSION__RIGHT_OPERAND = BINARY_EXPRESSION__RIGHT_OPERAND;
 
 	/**
 	 * The number of structural features of the '<em>Bitwise And Expression</em>' class.
@@ -584,17 +737,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BITWISE_AND_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalRelationExpressionImpl <em>Logical Relation Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.LogicalRelationExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalRelationExpression()
-	 * @generated
-	 */
-	int LOGICAL_RELATION_EXPRESSION = 17;
+	int BITWISE_AND_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -603,16 +746,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_RELATION_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Operator</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOGICAL_RELATION_EXPRESSION__OPERATOR = EXPRESSION_FEATURE_COUNT + 1;
+	int LOGICAL_RELATION_EXPRESSION__LEFT_OPERAND = BINARY_EXPRESSION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -621,7 +755,16 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_RELATION_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 2;
+	int LOGICAL_RELATION_EXPRESSION__RIGHT_OPERAND = BINARY_EXPRESSION__RIGHT_OPERAND;
+
+	/**
+	 * The feature id for the '<em><b>Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOGICAL_RELATION_EXPRESSION__OPERATOR = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Logical Relation Expression</em>' class.
@@ -630,17 +773,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGICAL_RELATION_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ShiftExpressionImpl <em>Shift Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.ShiftExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftExpression()
-	 * @generated
-	 */
-	int SHIFT_EXPRESSION = 18;
+	int LOGICAL_RELATION_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -649,16 +782,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SHIFT_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Operator</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SHIFT_EXPRESSION__OPERATOR = EXPRESSION_FEATURE_COUNT + 1;
+	int SHIFT_EXPRESSION__LEFT_OPERAND = BINARY_EXPRESSION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -667,7 +791,16 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SHIFT_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 2;
+	int SHIFT_EXPRESSION__RIGHT_OPERAND = BINARY_EXPRESSION__RIGHT_OPERAND;
+
+	/**
+	 * The feature id for the '<em><b>Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHIFT_EXPRESSION__OPERATOR = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Shift Expression</em>' class.
@@ -676,17 +809,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SHIFT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalAddSubtractExpressionImpl <em>Numerical Add Subtract Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.NumericalAddSubtractExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalAddSubtractExpression()
-	 * @generated
-	 */
-	int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 19;
+	int SHIFT_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -695,16 +818,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMERICAL_ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Operator</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERICAL_ADD_SUBTRACT_EXPRESSION__OPERATOR = EXPRESSION_FEATURE_COUNT + 1;
+	int NUMERICAL_ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND = BINARY_EXPRESSION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -713,7 +827,16 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMERICAL_ADD_SUBTRACT_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 2;
+	int NUMERICAL_ADD_SUBTRACT_EXPRESSION__RIGHT_OPERAND = BINARY_EXPRESSION__RIGHT_OPERAND;
+
+	/**
+	 * The feature id for the '<em><b>Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_ADD_SUBTRACT_EXPRESSION__OPERATOR = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Numerical Add Subtract Expression</em>' class.
@@ -722,17 +845,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMERICAL_ADD_SUBTRACT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalMultiplyDivideExpressionImpl <em>Numerical Multiply Divide Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.NumericalMultiplyDivideExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalMultiplyDivideExpression()
-	 * @generated
-	 */
-	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 20;
+	int NUMERICAL_ADD_SUBTRACT_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -741,16 +854,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Operator</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__OPERATOR = EXPRESSION_FEATURE_COUNT + 1;
+	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND = BINARY_EXPRESSION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -759,26 +863,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Numerical Multiply Divide Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalUnaryExpressionImpl <em>Numerical Unary Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.NumericalUnaryExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalUnaryExpression()
-	 * @generated
-	 */
-	int NUMERICAL_UNARY_EXPRESSION = 21;
+	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__RIGHT_OPERAND = BINARY_EXPRESSION__RIGHT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -787,7 +872,16 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMERICAL_UNARY_EXPRESSION__OPERATOR = EXPRESSION_FEATURE_COUNT + 0;
+	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__OPERATOR = BINARY_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Numerical Multiply Divide Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -796,7 +890,16 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMERICAL_UNARY_EXPRESSION__OPERAND = EXPRESSION_FEATURE_COUNT + 1;
+	int NUMERICAL_UNARY_EXPRESSION__OPERAND = UNARY_EXPRESSION__OPERAND;
+
+	/**
+	 * The feature id for the '<em><b>Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERICAL_UNARY_EXPRESSION__OPERATOR = UNARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Numerical Unary Expression</em>' class.
@@ -805,17 +908,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMERICAL_UNARY_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.PrimitiveValueExpressionImpl <em>Primitive Value Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.PrimitiveValueExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getPrimitiveValueExpression()
-	 * @generated
-	 */
-	int PRIMITIVE_VALUE_EXPRESSION = 22;
+	int NUMERICAL_UNARY_EXPRESSION_FEATURE_COUNT = UNARY_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -836,34 +929,6 @@ public interface ExpressionsPackage extends EPackage {
 	int PRIMITIVE_VALUE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ArgumentExpressionImpl <em>Argument Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.ArgumentExpressionImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getArgumentExpression()
-	 * @generated
-	 */
-	int ARGUMENT_EXPRESSION = 27;
-
-	/**
-	 * The feature id for the '<em><b>Args</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT_EXPRESSION__ARGS = EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Argument Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.FeatureCallImpl <em>Feature Call</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -871,7 +936,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getFeatureCall()
 	 * @generated
 	 */
-	int FEATURE_CALL = 23;
+	int FEATURE_CALL = 26;
 
 	/**
 	 * The feature id for the '<em><b>Args</b></em>' containment reference list.
@@ -944,7 +1009,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getElementReferenceExpression()
 	 * @generated
 	 */
-	int ELEMENT_REFERENCE_EXPRESSION = 24;
+	int ELEMENT_REFERENCE_EXPRESSION = 27;
 
 	/**
 	 * The feature id for the '<em><b>Args</b></em>' containment reference list.
@@ -1008,7 +1073,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getParenthesizedExpression()
 	 * @generated
 	 */
-	int PARENTHESIZED_EXPRESSION = 25;
+	int PARENTHESIZED_EXPRESSION = 28;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1036,7 +1101,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getTypeCastExpression()
 	 * @generated
 	 */
-	int TYPE_CAST_EXPRESSION = 26;
+	int TYPE_CAST_EXPRESSION = 29;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1073,7 +1138,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAssignmentOperator()
 	 * @generated
 	 */
-	int ASSIGNMENT_OPERATOR = 28;
+	int ASSIGNMENT_OPERATOR = 30;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.ShiftOperator <em>Shift Operator</em>}' enum.
@@ -1083,7 +1148,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftOperator()
 	 * @generated
 	 */
-	int SHIFT_OPERATOR = 29;
+	int SHIFT_OPERATOR = 31;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -1093,7 +1158,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAdditiveOperator()
 	 * @generated
 	 */
-	int ADDITIVE_OPERATOR = 30;
+	int ADDITIVE_OPERATOR = 32;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -1103,7 +1168,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getMultiplicativeOperator()
 	 * @generated
 	 */
-	int MULTIPLICATIVE_OPERATOR = 31;
+	int MULTIPLICATIVE_OPERATOR = 33;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -1113,7 +1178,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getUnaryOperator()
 	 * @generated
 	 */
-	int UNARY_OPERATOR = 32;
+	int UNARY_OPERATOR = 34;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -1123,7 +1188,28 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getRelationalOperator()
 	 * @generated
 	 */
-	int RELATIONAL_OPERATOR = 33;
+	int RELATIONAL_OPERATOR = 35;
+
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.LogicalOperator <em>Logical Operator</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.LogicalOperator
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalOperator()
+	 * @generated
+	 */
+	int LOGICAL_OPERATOR = 36;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.BitwiseOperator <em>Bitwise Operator</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.BitwiseOperator
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseOperator()
+	 * @generated
+	 */
+	int BITWISE_OPERATOR = 37;
 
 
 	/**
@@ -1379,28 +1465,6 @@ public interface ExpressionsPackage extends EPackage {
 	EClass getLogicalOrExpression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.LogicalOrExpression#getLeftOperand <em>Left Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.LogicalOrExpression#getLeftOperand()
-	 * @see #getLogicalOrExpression()
-	 * @generated
-	 */
-	EReference getLogicalOrExpression_LeftOperand();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.LogicalOrExpression#getRightOperand <em>Right Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.LogicalOrExpression#getRightOperand()
-	 * @see #getLogicalOrExpression()
-	 * @generated
-	 */
-	EReference getLogicalOrExpression_RightOperand();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.LogicalAndExpression <em>Logical And Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1409,28 +1473,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getLogicalAndExpression();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.LogicalAndExpression#getLeftOperand <em>Left Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.LogicalAndExpression#getLeftOperand()
-	 * @see #getLogicalAndExpression()
-	 * @generated
-	 */
-	EReference getLogicalAndExpression_LeftOperand();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.LogicalAndExpression#getRightOperand <em>Right Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.LogicalAndExpression#getRightOperand()
-	 * @see #getLogicalAndExpression()
-	 * @generated
-	 */
-	EReference getLogicalAndExpression_RightOperand();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.LogicalNotExpression <em>Logical Not Expression</em>}'.
@@ -1443,17 +1485,6 @@ public interface ExpressionsPackage extends EPackage {
 	EClass getLogicalNotExpression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.LogicalNotExpression#getOperand <em>Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.LogicalNotExpression#getOperand()
-	 * @see #getLogicalNotExpression()
-	 * @generated
-	 */
-	EReference getLogicalNotExpression_Operand();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.BitwiseXorExpression <em>Bitwise Xor Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1462,28 +1493,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBitwiseXorExpression();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.BitwiseXorExpression#getLeftOperand <em>Left Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.BitwiseXorExpression#getLeftOperand()
-	 * @see #getBitwiseXorExpression()
-	 * @generated
-	 */
-	EReference getBitwiseXorExpression_LeftOperand();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.BitwiseXorExpression#getRightOperand <em>Right Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.BitwiseXorExpression#getRightOperand()
-	 * @see #getBitwiseXorExpression()
-	 * @generated
-	 */
-	EReference getBitwiseXorExpression_RightOperand();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.BitwiseOrExpression <em>Bitwise Or Expression</em>}'.
@@ -1496,28 +1505,6 @@ public interface ExpressionsPackage extends EPackage {
 	EClass getBitwiseOrExpression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.BitwiseOrExpression#getLeftOperand <em>Left Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.BitwiseOrExpression#getLeftOperand()
-	 * @see #getBitwiseOrExpression()
-	 * @generated
-	 */
-	EReference getBitwiseOrExpression_LeftOperand();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.BitwiseOrExpression#getRightOperand <em>Right Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.BitwiseOrExpression#getRightOperand()
-	 * @see #getBitwiseOrExpression()
-	 * @generated
-	 */
-	EReference getBitwiseOrExpression_RightOperand();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.BitwiseAndExpression <em>Bitwise And Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1528,28 +1515,6 @@ public interface ExpressionsPackage extends EPackage {
 	EClass getBitwiseAndExpression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.BitwiseAndExpression#getLeftOperand <em>Left Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.BitwiseAndExpression#getLeftOperand()
-	 * @see #getBitwiseAndExpression()
-	 * @generated
-	 */
-	EReference getBitwiseAndExpression_LeftOperand();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.BitwiseAndExpression#getRightOperand <em>Right Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.BitwiseAndExpression#getRightOperand()
-	 * @see #getBitwiseAndExpression()
-	 * @generated
-	 */
-	EReference getBitwiseAndExpression_RightOperand();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.LogicalRelationExpression <em>Logical Relation Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1558,17 +1523,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getLogicalRelationExpression();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.LogicalRelationExpression#getLeftOperand <em>Left Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.LogicalRelationExpression#getLeftOperand()
-	 * @see #getLogicalRelationExpression()
-	 * @generated
-	 */
-	EReference getLogicalRelationExpression_LeftOperand();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.base.expressions.expressions.LogicalRelationExpression#getOperator <em>Operator</em>}'.
@@ -1582,17 +1536,6 @@ public interface ExpressionsPackage extends EPackage {
 	EAttribute getLogicalRelationExpression_Operator();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.LogicalRelationExpression#getRightOperand <em>Right Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.LogicalRelationExpression#getRightOperand()
-	 * @see #getLogicalRelationExpression()
-	 * @generated
-	 */
-	EReference getLogicalRelationExpression_RightOperand();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.ShiftExpression <em>Shift Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1601,17 +1544,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getShiftExpression();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.ShiftExpression#getLeftOperand <em>Left Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.ShiftExpression#getLeftOperand()
-	 * @see #getShiftExpression()
-	 * @generated
-	 */
-	EReference getShiftExpression_LeftOperand();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.base.expressions.expressions.ShiftExpression#getOperator <em>Operator</em>}'.
@@ -1625,17 +1557,6 @@ public interface ExpressionsPackage extends EPackage {
 	EAttribute getShiftExpression_Operator();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.ShiftExpression#getRightOperand <em>Right Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.ShiftExpression#getRightOperand()
-	 * @see #getShiftExpression()
-	 * @generated
-	 */
-	EReference getShiftExpression_RightOperand();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression <em>Numerical Add Subtract Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1644,17 +1565,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getNumericalAddSubtractExpression();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression#getLeftOperand <em>Left Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression#getLeftOperand()
-	 * @see #getNumericalAddSubtractExpression()
-	 * @generated
-	 */
-	EReference getNumericalAddSubtractExpression_LeftOperand();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression#getOperator <em>Operator</em>}'.
@@ -1668,17 +1578,6 @@ public interface ExpressionsPackage extends EPackage {
 	EAttribute getNumericalAddSubtractExpression_Operator();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression#getRightOperand <em>Right Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression#getRightOperand()
-	 * @see #getNumericalAddSubtractExpression()
-	 * @generated
-	 */
-	EReference getNumericalAddSubtractExpression_RightOperand();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression <em>Numerical Multiply Divide Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1687,17 +1586,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getNumericalMultiplyDivideExpression();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression#getLeftOperand <em>Left Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression#getLeftOperand()
-	 * @see #getNumericalMultiplyDivideExpression()
-	 * @generated
-	 */
-	EReference getNumericalMultiplyDivideExpression_LeftOperand();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression#getOperator <em>Operator</em>}'.
@@ -1709,17 +1597,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getNumericalMultiplyDivideExpression_Operator();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression#getRightOperand <em>Right Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression#getRightOperand()
-	 * @see #getNumericalMultiplyDivideExpression()
-	 * @generated
-	 */
-	EReference getNumericalMultiplyDivideExpression_RightOperand();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.NumericalUnaryExpression <em>Numerical Unary Expression</em>}'.
@@ -1741,17 +1618,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getNumericalUnaryExpression_Operator();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.NumericalUnaryExpression#getOperand <em>Operand</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Operand</em>'.
-	 * @see org.yakindu.base.expressions.expressions.NumericalUnaryExpression#getOperand()
-	 * @see #getNumericalUnaryExpression()
-	 * @generated
-	 */
-	EReference getNumericalUnaryExpression_Operand();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.PrimitiveValueExpression <em>Primitive Value Expression</em>}'.
@@ -1968,6 +1834,59 @@ public interface ExpressionsPackage extends EPackage {
 	EReference getArgumentExpression_Args();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.BinaryExpression <em>Binary Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Binary Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.BinaryExpression
+	 * @generated
+	 */
+	EClass getBinaryExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.BinaryExpression#getLeftOperand <em>Left Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
+	 * @see org.yakindu.base.expressions.expressions.BinaryExpression#getLeftOperand()
+	 * @see #getBinaryExpression()
+	 * @generated
+	 */
+	EReference getBinaryExpression_LeftOperand();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.BinaryExpression#getRightOperand <em>Right Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
+	 * @see org.yakindu.base.expressions.expressions.BinaryExpression#getRightOperand()
+	 * @see #getBinaryExpression()
+	 * @generated
+	 */
+	EReference getBinaryExpression_RightOperand();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.UnaryExpression <em>Unary Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unary Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.UnaryExpression
+	 * @generated
+	 */
+	EClass getUnaryExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.UnaryExpression#getOperand <em>Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Operand</em>'.
+	 * @see org.yakindu.base.expressions.expressions.UnaryExpression#getOperand()
+	 * @see #getUnaryExpression()
+	 * @generated
+	 */
+	EReference getUnaryExpression_Operand();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.expressions.expressions.AssignmentOperator <em>Assignment Operator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2026,6 +1945,26 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getRelationalOperator();
+
+	/**
+	 * Returns the meta object for enum '{@link org.yakindu.base.expressions.expressions.LogicalOperator <em>Logical Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Logical Operator</em>'.
+	 * @see org.yakindu.base.expressions.expressions.LogicalOperator
+	 * @generated
+	 */
+	EEnum getLogicalOperator();
+
+	/**
+	 * Returns the meta object for enum '{@link org.yakindu.base.expressions.expressions.BitwiseOperator <em>Bitwise Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Bitwise Operator</em>'.
+	 * @see org.yakindu.base.expressions.expressions.BitwiseOperator
+	 * @generated
+	 */
+	EEnum getBitwiseOperator();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2266,22 +2205,6 @@ public interface ExpressionsPackage extends EPackage {
 		EClass LOGICAL_OR_EXPRESSION = eINSTANCE.getLogicalOrExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LOGICAL_OR_EXPRESSION__LEFT_OPERAND = eINSTANCE.getLogicalOrExpression_LeftOperand();
-
-		/**
-		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LOGICAL_OR_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getLogicalOrExpression_RightOperand();
-
-		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalAndExpressionImpl <em>Logical And Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2290,22 +2213,6 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LOGICAL_AND_EXPRESSION = eINSTANCE.getLogicalAndExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LOGICAL_AND_EXPRESSION__LEFT_OPERAND = eINSTANCE.getLogicalAndExpression_LeftOperand();
-
-		/**
-		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LOGICAL_AND_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getLogicalAndExpression_RightOperand();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalNotExpressionImpl <em>Logical Not Expression</em>}' class.
@@ -2318,14 +2225,6 @@ public interface ExpressionsPackage extends EPackage {
 		EClass LOGICAL_NOT_EXPRESSION = eINSTANCE.getLogicalNotExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LOGICAL_NOT_EXPRESSION__OPERAND = eINSTANCE.getLogicalNotExpression_Operand();
-
-		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.BitwiseXorExpressionImpl <em>Bitwise Xor Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2334,22 +2233,6 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass BITWISE_XOR_EXPRESSION = eINSTANCE.getBitwiseXorExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BITWISE_XOR_EXPRESSION__LEFT_OPERAND = eINSTANCE.getBitwiseXorExpression_LeftOperand();
-
-		/**
-		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BITWISE_XOR_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getBitwiseXorExpression_RightOperand();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.BitwiseOrExpressionImpl <em>Bitwise Or Expression</em>}' class.
@@ -2362,22 +2245,6 @@ public interface ExpressionsPackage extends EPackage {
 		EClass BITWISE_OR_EXPRESSION = eINSTANCE.getBitwiseOrExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BITWISE_OR_EXPRESSION__LEFT_OPERAND = eINSTANCE.getBitwiseOrExpression_LeftOperand();
-
-		/**
-		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BITWISE_OR_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getBitwiseOrExpression_RightOperand();
-
-		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.BitwiseAndExpressionImpl <em>Bitwise And Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2386,22 +2253,6 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass BITWISE_AND_EXPRESSION = eINSTANCE.getBitwiseAndExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BITWISE_AND_EXPRESSION__LEFT_OPERAND = eINSTANCE.getBitwiseAndExpression_LeftOperand();
-
-		/**
-		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BITWISE_AND_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getBitwiseAndExpression_RightOperand();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalRelationExpressionImpl <em>Logical Relation Expression</em>}' class.
@@ -2414,28 +2265,12 @@ public interface ExpressionsPackage extends EPackage {
 		EClass LOGICAL_RELATION_EXPRESSION = eINSTANCE.getLogicalRelationExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LOGICAL_RELATION_EXPRESSION__LEFT_OPERAND = eINSTANCE.getLogicalRelationExpression_LeftOperand();
-
-		/**
 		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute LOGICAL_RELATION_EXPRESSION__OPERATOR = eINSTANCE.getLogicalRelationExpression_Operator();
-
-		/**
-		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LOGICAL_RELATION_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getLogicalRelationExpression_RightOperand();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.ShiftExpressionImpl <em>Shift Expression</em>}' class.
@@ -2448,28 +2283,12 @@ public interface ExpressionsPackage extends EPackage {
 		EClass SHIFT_EXPRESSION = eINSTANCE.getShiftExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SHIFT_EXPRESSION__LEFT_OPERAND = eINSTANCE.getShiftExpression_LeftOperand();
-
-		/**
 		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute SHIFT_EXPRESSION__OPERATOR = eINSTANCE.getShiftExpression_Operator();
-
-		/**
-		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SHIFT_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getShiftExpression_RightOperand();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalAddSubtractExpressionImpl <em>Numerical Add Subtract Expression</em>}' class.
@@ -2482,28 +2301,12 @@ public interface ExpressionsPackage extends EPackage {
 		EClass NUMERICAL_ADD_SUBTRACT_EXPRESSION = eINSTANCE.getNumericalAddSubtractExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NUMERICAL_ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND = eINSTANCE.getNumericalAddSubtractExpression_LeftOperand();
-
-		/**
 		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute NUMERICAL_ADD_SUBTRACT_EXPRESSION__OPERATOR = eINSTANCE.getNumericalAddSubtractExpression_Operator();
-
-		/**
-		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NUMERICAL_ADD_SUBTRACT_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getNumericalAddSubtractExpression_RightOperand();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalMultiplyDivideExpressionImpl <em>Numerical Multiply Divide Expression</em>}' class.
@@ -2516,28 +2319,12 @@ public interface ExpressionsPackage extends EPackage {
 		EClass NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = eINSTANCE.getNumericalMultiplyDivideExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND = eINSTANCE.getNumericalMultiplyDivideExpression_LeftOperand();
-
-		/**
 		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__OPERATOR = eINSTANCE.getNumericalMultiplyDivideExpression_Operator();
-
-		/**
-		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getNumericalMultiplyDivideExpression_RightOperand();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalUnaryExpressionImpl <em>Numerical Unary Expression</em>}' class.
@@ -2556,14 +2343,6 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NUMERICAL_UNARY_EXPRESSION__OPERATOR = eINSTANCE.getNumericalUnaryExpression_Operator();
-
-		/**
-		 * The meta object literal for the '<em><b>Operand</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NUMERICAL_UNARY_EXPRESSION__OPERAND = eINSTANCE.getNumericalUnaryExpression_Operand();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.PrimitiveValueExpressionImpl <em>Primitive Value Expression</em>}' class.
@@ -2738,6 +2517,50 @@ public interface ExpressionsPackage extends EPackage {
 		EReference ARGUMENT_EXPRESSION__ARGS = eINSTANCE.getArgumentExpression_Args();
 
 		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.BinaryExpressionImpl <em>Binary Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.BinaryExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBinaryExpression()
+		 * @generated
+		 */
+		EClass BINARY_EXPRESSION = eINSTANCE.getBinaryExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BINARY_EXPRESSION__LEFT_OPERAND = eINSTANCE.getBinaryExpression_LeftOperand();
+
+		/**
+		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BINARY_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getBinaryExpression_RightOperand();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.UnaryExpressionImpl <em>Unary Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.UnaryExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getUnaryExpression()
+		 * @generated
+		 */
+		EClass UNARY_EXPRESSION = eINSTANCE.getUnaryExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNARY_EXPRESSION__OPERAND = eINSTANCE.getUnaryExpression_Operand();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.AssignmentOperator <em>Assignment Operator</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2796,6 +2619,26 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum RELATIONAL_OPERATOR = eINSTANCE.getRelationalOperator();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.LogicalOperator <em>Logical Operator</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.LogicalOperator
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalOperator()
+		 * @generated
+		 */
+		EEnum LOGICAL_OPERATOR = eINSTANCE.getLogicalOperator();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.BitwiseOperator <em>Bitwise Operator</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.BitwiseOperator
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseOperator()
+		 * @generated
+		 */
+		EEnum BITWISE_OPERATOR = eINSTANCE.getBitwiseOperator();
 
 	}
 

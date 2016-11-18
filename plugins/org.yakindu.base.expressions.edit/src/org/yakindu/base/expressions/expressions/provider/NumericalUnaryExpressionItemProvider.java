@@ -33,7 +33,7 @@ import org.yakindu.base.expressions.expressions.UnaryOperator;
  * @generated
  */
 public class NumericalUnaryExpressionItemProvider
-	extends ExpressionItemProvider {
+	extends UnaryExpressionItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -83,36 +83,6 @@ public class NumericalUnaryExpressionItemProvider
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
 	 * This returns NumericalUnaryExpression.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -153,9 +123,6 @@ public class NumericalUnaryExpressionItemProvider
 			case ExpressionsPackage.NUMERICAL_UNARY_EXPRESSION__OPERATOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case ExpressionsPackage.NUMERICAL_UNARY_EXPRESSION__OPERAND:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -170,96 +137,6 @@ public class NumericalUnaryExpressionItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createConditionalExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
 	}
 
 }

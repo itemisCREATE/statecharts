@@ -13,12 +13,9 @@ package org.yakindu.sct.generator.java
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.EObject
-import org.yakindu.base.expressions.expressions.AdditiveOperator
+import org.yakindu.base.expressions.expressions.ArgumentExpression
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
-import org.yakindu.base.expressions.expressions.BitwiseAndExpression
-import org.yakindu.base.expressions.expressions.BitwiseOrExpression
-import org.yakindu.base.expressions.expressions.BitwiseXorExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
@@ -28,39 +25,28 @@ import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
-import org.yakindu.base.expressions.expressions.LogicalAndExpression
-import org.yakindu.base.expressions.expressions.LogicalNotExpression
-import org.yakindu.base.expressions.expressions.LogicalOrExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
-import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NullLiteral
-import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression
-import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
-import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
-import org.yakindu.base.expressions.expressions.ShiftExpression
-import org.yakindu.base.expressions.expressions.ShiftOperator
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
-import org.yakindu.base.expressions.expressions.UnaryOperator
 import org.yakindu.base.types.Declaration
-import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.core.templates.Expressions
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.base.expressions.expressions.ArgumentExpression
 
-class ExpressionCode {
+class ExpressionCode extends Expressions {
 
 	@Inject extension Naming
 	@Inject extension JavaNamingService
@@ -78,17 +64,12 @@ class ExpressionCode {
 		return timeEvents
 	}
 
-	def dispatch String code(EObject it) '''
-		//ERROR: Template in ExpressionCode.xtend for class '«getClass().name»' not define.
-		//Container: «eContainer?.getClass().name»
-	'''
-
 	def dispatch String code(OperationDefinition it) {
 		return getContext + "operationCallback." + name.asEscapedIdentifier;
 	}
 
 	def dispatch String code(PrimitiveValueExpression primValue) {
-		primValue.value.code;
+		primValue.value.code.toString;
 	}
 
 	def dispatch String code(ParenthesizedExpression e) {
@@ -110,7 +91,7 @@ class ExpressionCode {
 	def assignCmdArgument(AssignmentExpression it, Property property) {
 		var cmd = ""
 		if (!AssignmentOperator.ASSIGN.equals(operator)) {
-			cmd = property.getContext + property.getter + " " + operator.code.replaceFirst("=", "") + " "
+			cmd = property.getContext + property.getter + " " + operator.literal.replaceFirst("=", "") + " "
 
 			if (expression instanceof PrimitiveValueExpression || expression instanceof ElementReferenceExpression ||
 				expression instanceof AssignmentExpression) {
@@ -120,7 +101,7 @@ class ExpressionCode {
 			}
 
 		} else {
-			cmd = expression.code
+			cmd = expression.code.toString
 		}
 		return cmd
 	}
@@ -158,28 +139,16 @@ class ExpressionCode {
 		return it.replace("\"", "\\\"");
 	}
 
-	/* Logical Expressions */
-	def dispatch String code(LogicalOrExpression expression) {
-		expression.leftOperand.code + " || " + expression.rightOperand.code
-	}
 
 	def dispatch String code(ConditionalExpression expression) {
 		expression.condition.code + ' ? ' + expression.trueCase.code + ' : ' + expression.falseCase.code
-	}
-
-	def dispatch String code(LogicalAndExpression expression) {
-		expression.leftOperand.code + " && " + expression.rightOperand.code
-	}
-
-	def dispatch String code(LogicalNotExpression expression) {
-		" !" + expression.operand.code
 	}
 
 	def dispatch String code(LogicalRelationExpression expression) {
 		if (isSame(expression.leftOperand.infer.type, getType(GenericTypeSystem.STRING))) {
 			expression.logicalString
 		} else
-			expression.leftOperand.code + expression.operator.code + expression.rightOperand.code;
+			expression.leftOperand.code + expression.operator.literal + expression.rightOperand.code;
 	}
 
 	def String logicalString(LogicalRelationExpression expression) {
@@ -192,60 +161,8 @@ class ExpressionCode {
 		}
 	}
 
-	def dispatch String code(BitwiseAndExpression expression) {
-		expression.leftOperand.code + " & " + expression.rightOperand.code
-	}
-
-	def dispatch String code(BitwiseOrExpression expression) {
-		expression.leftOperand.code + " | " + expression.rightOperand.code
-	}
-
-	def dispatch String code(BitwiseXorExpression expression) {
-		expression.leftOperand.code + " ^ " + expression.rightOperand.code
-	}
-
-	def dispatch String code(ShiftExpression expression) {
-		expression.leftOperand.code + expression.operator.code + expression.rightOperand.code
-	}
-
-	def dispatch String code(NumericalAddSubtractExpression expression) {
-		expression.leftOperand.code + expression.operator.code + expression.rightOperand.code
-	}
-
-	def dispatch String code(NumericalMultiplyDivideExpression expression) {
-		expression.leftOperand.code + expression.operator.code + expression.rightOperand.code
-	}
-
-	def dispatch String code(NumericalUnaryExpression expression) {
-		expression.operator.code + expression.operand.code
-	}
-
 	def dispatch String code(ActiveStateReferenceExpression it) {
 		"isStateActive(State." + value.stateName.asEscapedIdentifier + ")";
-	}
-
-	def dispatch String code(AdditiveOperator operator) {
-		operator.literal
-	}
-
-	def dispatch String code(ShiftOperator operator) {
-		operator.literal
-	}
-
-	def dispatch String code(UnaryOperator operator) {
-		operator.literal
-	}
-
-	def dispatch String code(MultiplicativeOperator operator) {
-		operator.literal
-	}
-
-	def dispatch String code(RelationalOperator operator) {
-		operator.literal
-	}
-
-	def dispatch String code(AssignmentOperator operator) {
-		operator.literal
 	}
 
 	def dispatch String code(EventRaisingExpression it) {
@@ -261,11 +178,11 @@ class ExpressionCode {
 	}
 
 	def protected dispatch String code(ElementReferenceExpression it) {
-		(it.reference as Declaration).codeDeclaration(it)
+		(it.reference as Declaration).codeDeclaration(it).toString
 	}
 
 	def protected dispatch String code(FeatureCall it) {
-		(it.feature as Declaration).codeDeclaration(it)
+		(it.feature as Declaration).codeDeclaration(it).toString
 	}
 
 	def protected codeDeclaration(Declaration it, ArgumentExpression exp) {
