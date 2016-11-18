@@ -610,5 +610,9 @@ class SequenceBuilder {
 
 		pve
 	}
+	
+	def dispatch Expression buildValue(Object o) {
+		null
+	}
 
 }
