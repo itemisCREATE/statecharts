@@ -39,6 +39,7 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.base.expressions.expressions.ConditionalExpression
 
 class ExpressionCode extends Expressions {
 
@@ -67,6 +68,8 @@ class ExpressionCode extends Expressions {
 
 	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) '''«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
+		
+	def dispatch CharSequence code(ConditionalExpression it) '''«condition.code» ? «trueCase.code» : «falseCase.code»'''
 
 	def dispatch CharSequence code(Expression it) '''#error TODO: generate code for «getClass().name»'''
 
