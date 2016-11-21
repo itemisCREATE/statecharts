@@ -77,8 +77,8 @@ public class ContextPredicateProvider {
 		public boolean apply(IEObjectDescription input) {
 			EClass eClass = input.getEClass();
 			
-			return (SGraphPackage.Literals.SCOPE.isSuperTypeOf(eClass)) 
-					|| (TypesPackage.Literals.DECLARATION.isSuperTypeOf(eClass));
+			return (SGraphPackage.Literals.SCOPE.isSuperTypeOf(eClass)); 
+//					|| (TypesPackage.Literals.DECLARATION.isSuperTypeOf(eClass));
 		}
 	}
 
@@ -102,7 +102,7 @@ public class ContextPredicateProvider {
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
 				return true;
-			return TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass());
+			return TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass())	 || (TypesPackage.Literals.DECLARATION.isSuperTypeOf(input.getEClass()));
 		}
 	}
 

@@ -250,7 +250,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	@Test
 	public void checkReactionTriggerRegularEvent(){
 		
-		String scope = "interface : in event e  var x : integer  var y : integer";
+		String scope = "interface : in event e  var x : integer  var y : integer  operation op():integer";
 
 		EObject model = super.parseExpression("e", TransitionSpecification.class.getSimpleName(), scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
@@ -264,6 +264,10 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult = tester.validate(model);
 		validationResult.assertError(TRIGGER_IS_NO_EVENT);
 
+		model = super.parseExpression("op()", TransitionSpecification.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertError(TRIGGER_IS_NO_EVENT);
+		
 		model = super.parseExpression("x, y", TransitionSpecification.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertAll(errorMsg("Trigger 'x' is no event."), errorMsg("Trigger 'y' is no event."));
@@ -308,6 +312,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	}
 
+	
+	
 	/**
 	 * @see STextJavaValidator#checkEventDefinition(org.yakindu.sct.model.stext.stext.EventDefinition)
 	 */
@@ -376,6 +382,33 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		//Nothing to do -> this is covered by ContextPredicateProviderTest
 	}
 
+	@Test
+	public void checkValueOfNoEvent(){
+		String decl = "interface: in event e1:integer var x:integer operation op():integer interface i: in event e2:integer var y:integer";
+
+		EObject model = super.parseExpression("valueof(e1)", Expression.class.getSimpleName(), decl);
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertOK();
+	
+		model = super.parseExpression("valueof(i.e2)", Expression.class.getSimpleName(), decl);
+		result = tester.validate(model);
+		result.assertOK();
+	
+		model = super.parseExpression("valueof(x)", Expression.class.getSimpleName(), decl);
+		result = tester.validate(model);
+		result.assertError(VALUE_OF_REQUIRES_EVENT);
+		
+		model = super.parseExpression("valueof(i.y)", Expression.class.getSimpleName(), decl);
+		result = tester.validate(model);
+		result.assertError(VALUE_OF_REQUIRES_EVENT);
+		
+		model = super.parseExpression("valueof(op())", Expression.class.getSimpleName(), decl);
+		result = tester.validate(model);
+		result.assertError(VALUE_OF_REQUIRES_EVENT);
+		
+	}
+	
+	
 	/**
 	 * checks tht each @Check method of {@link STextJavaValidator} has a @Test
 	 * method in this class with the same name
