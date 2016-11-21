@@ -43,6 +43,7 @@ import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
@@ -93,6 +94,7 @@ import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
@@ -619,11 +621,39 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					&& (eventSpec instanceof EntryEvent || eventSpec instanceof ExitEvent)) {
 				error("Entry and exit events are allowed as local reactions only.",
 						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, INSIGNIFICANT_INDEX,
-						LOCAL_REACTIONS_NOT_ALLOWED);
+						ENTRY_EXIT_TRIGGER_NOT_ALLOWED);
 			}
 		}
 	}
 
+	@Check(CheckType.FAST)
+	public void checkReactionTriggerRegularEvent(ReactionTrigger reactionTrigger) {
+		for (int i=0; i<reactionTrigger.getTriggers().size(); i++) {
+			EventSpec eventSpec = reactionTrigger.getTriggers().get(i);
+			if (eventSpec instanceof RegularEventSpec) {
+
+				Expression eventExpression = ((RegularEventSpec) eventSpec).getEvent();
+				EObject element = null;
+				if (eventExpression instanceof ElementReferenceExpression) {
+					element =  ((ElementReferenceExpression) eventExpression).getReference();
+				} else if (eventExpression instanceof FeatureCall) {
+					element = ((FeatureCall) eventExpression).getFeature();
+				}
+				
+				if (element != null && (! (element instanceof Event))) {
+					String elementName = "";
+					if ( element instanceof NamedElement ) {
+						elementName = "'" + ((NamedElement) element).getName() +"' ";
+					}
+					error("Trigger " + elementName + "is no event.",
+							StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, i,
+							TRIGGER_IS_NO_EVENT);
+				}
+			}
+		}
+	}
+
+	
 	/**
 	 * Only Expressions that produce an effect should be used as actions.
 	 * 

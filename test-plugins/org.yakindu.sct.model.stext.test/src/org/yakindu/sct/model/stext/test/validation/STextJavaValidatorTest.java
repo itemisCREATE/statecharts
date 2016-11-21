@@ -12,6 +12,7 @@
 package org.yakindu.sct.model.stext.test.validation;
 
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCode;
+import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorMsg;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -231,11 +232,11 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		String scope = "internal : event a : integer var myVar : integer";
 		EObject model = super.parseExpression("entry / myVar = 5", TransitionSpecification.class.getSimpleName(), scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
-		validationResult.assertError(LOCAL_REACTIONS_NOT_ALLOWED);
+		validationResult.assertError(ENTRY_EXIT_TRIGGER_NOT_ALLOWED);
 
 		model = super.parseExpression("exit / myVar = 5", TransitionSpecification.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
-		validationResult.assertError(LOCAL_REACTIONS_NOT_ALLOWED);
+		validationResult.assertError(ENTRY_EXIT_TRIGGER_NOT_ALLOWED);
 
 		model = super.parseExpression("oncycle / myVar = 5", TransitionSpecification.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
@@ -244,6 +245,29 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = super.parseExpression("always / myVar = 5", TransitionSpecification.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
+	}
+	
+	@Test
+	public void checkReactionTriggerRegularEvent(){
+		
+		String scope = "interface : in event e  var x : integer  var y : integer";
+
+		EObject model = super.parseExpression("e", TransitionSpecification.class.getSimpleName(), scope);
+		AssertableDiagnostics validationResult = tester.validate(model);
+		validationResult.assertOK();
+		
+		model = super.parseExpression("x", TransitionSpecification.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertError(TRIGGER_IS_NO_EVENT);
+
+		model = super.parseExpression("e, x", TransitionSpecification.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertError(TRIGGER_IS_NO_EVENT);
+
+		model = super.parseExpression("x, y", TransitionSpecification.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertAll(errorMsg("Trigger 'x' is no event."), errorMsg("Trigger 'y' is no event."));
+		
 	}
 
 	/**
