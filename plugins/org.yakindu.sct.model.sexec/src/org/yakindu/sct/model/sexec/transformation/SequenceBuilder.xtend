@@ -558,25 +558,25 @@ class SequenceBuilder {
 	}
 	
 
-	def dispatch Expression buildValue(boolean b) {
+	def dispatch Expression buildValue(Boolean b) {
 		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
 		val BoolLiteral lit = factory.createBoolLiteral
-		lit.value = b
+		lit.value = b.booleanValue
 		pve.value = lit
 
 		pve
 	}
 
-	def dispatch Expression buildValue(int i) {
+	def dispatch Expression buildValue(Integer i) {
 		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
 		val IntLiteral lit = factory.createIntLiteral
-		lit.value = i
+		lit.value = i.intValue
 		pve.value = lit
 
 		pve
 	}
 	
-	def dispatch Expression buildValue(long i) {
+	def dispatch Expression buildValue(Long i) {
 		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
 		val IntLiteral lit = factory.createIntLiteral
 		lit.value = i.intValue
@@ -585,19 +585,19 @@ class SequenceBuilder {
 		pve
 	}
 
-	def dispatch Expression buildValue(double d) {
+	def dispatch Expression buildValue(Double d) {
 		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
 		val DoubleLiteral lit = factory.createDoubleLiteral
-		lit.value = d
+		lit.value = d.doubleValue
 		pve.value = lit
 
 		pve
 	}
 	
-	def dispatch Expression buildValue(float d) {
+	def dispatch Expression buildValue(Float d) {
 		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
 		val FloatLiteral lit = factory.createFloatLiteral
-		lit.value = d
+		lit.value = d.floatValue
 		pve.value = lit
 
 		pve
@@ -612,7 +612,7 @@ class SequenceBuilder {
 		pve
 	}
 	
-	def dispatch Expression buildValue(Any o) {
+	def dispatch Expression buildValue(Object o) {
 		null
 	}
 
