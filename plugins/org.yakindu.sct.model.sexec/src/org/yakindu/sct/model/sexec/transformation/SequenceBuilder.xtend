@@ -40,7 +40,6 @@ import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeUnit
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.simulation.core.sruntime.Any 
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
