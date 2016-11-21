@@ -37,6 +37,7 @@ import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_SPECIFICATION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.VARIABLE_DEFINITION;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,18 +78,24 @@ public class ContextPredicateProvider {
 			EClass eClass = input.getEClass();
 			
 			return (SGraphPackage.Literals.SCOPE.isSuperTypeOf(eClass)) 
-				|| (TypesPackage.Literals.DECLARATION.isSuperTypeOf(eClass) && hasComplexType(input))
-				|| (StextPackage.Literals.VARIABLE_DEFINITION.isSuperTypeOf(eClass) && TypesPackage.Literals.COMPLEX_TYPE.isSuperTypeOf(getVariableType(input)));				
+					|| (TypesPackage.Literals.DECLARATION.isSuperTypeOf(eClass));
 		}
 	}
 
 	protected static EClass getVariableType(IEObjectDescription ieod) {
 		 EObject eObj = ieod.getEObjectOrProxy();
-		 if (! eObj.eIsProxy()) {
-			 return ((VariableDefinition)eObj).getType().eClass();
+		 if (eObj != null && (! eObj.eIsProxy()) ) {
+			 EObject eTS = (EObject) eObj.eGet(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER, false);
+			 if (eTS != null && (! eTS.eIsProxy())) {
+				 EObject eT = (EObject) eObj.eGet(TypesPackage.Literals.TYPE_SPECIFIER__TYPE, false);
+				 if (eT != null) {
+					 return eT.eClass();
+				 }
+			 }
 		 }
 		 return TypesPackage.Literals.TYPE;
 	}
+	
 	
 	public static class EventPredicate extends FeaturedTypePredicate {
 		@Override
