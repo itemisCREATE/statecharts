@@ -37,6 +37,7 @@ import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_SPECIFICATION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.VARIABLE_DEFINITION;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,8 +47,13 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.resource.TypedResourceDescriptionStrategy;
+import org.yakindu.base.types.typesystem.GenericTypeValueProvider;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.stext.stext.StextPackage;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -70,18 +76,33 @@ public class ContextPredicateProvider {
 	public static class FeaturedTypePredicate implements Predicate<IEObjectDescription> {
 		public boolean apply(IEObjectDescription input) {
 			EClass eClass = input.getEClass();
-			return SGraphPackage.Literals.SCOPE.isSuperTypeOf(eClass)
-					|| (TypesPackage.Literals.TYPE.isSuperTypeOf(eClass)
-							&& TypesPackage.Literals.DECLARATION.isSuperTypeOf(eClass));
+			
+			return (SGraphPackage.Literals.SCOPE.isSuperTypeOf(eClass)); 
+//					|| (TypesPackage.Literals.DECLARATION.isSuperTypeOf(eClass));
 		}
 	}
 
+	protected static EClass getVariableType(IEObjectDescription ieod) {
+		 EObject eObj = ieod.getEObjectOrProxy();
+		 if (eObj != null && (! eObj.eIsProxy()) ) {
+			 EObject eTS = (EObject) eObj.eGet(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER, false);
+			 if (eTS != null && (! eTS.eIsProxy())) {
+				 EObject eT = (EObject) eObj.eGet(TypesPackage.Literals.TYPE_SPECIFIER__TYPE, false);
+				 if (eT != null) {
+					 return eT.eClass();
+				 }
+			 }
+		 }
+		 return TypesPackage.Literals.TYPE;
+	}
+	
+	
 	public static class EventPredicate extends FeaturedTypePredicate {
 		@Override
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
 				return true;
-			return TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass());
+			return TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass())	 || (TypesPackage.Literals.DECLARATION.isSuperTypeOf(input.getEClass()));
 		}
 	}
 
@@ -206,4 +227,11 @@ public class ContextPredicateProvider {
 		}
 		return predicate;
 	}
+	
+	
+	protected static boolean hasComplexType(IEObjectDescription input) {
+		String hasComplexType = input.getUserData(TypedResourceDescriptionStrategy.HAS_COMPLEX_TYPE);
+		return hasComplexType != null && Boolean.valueOf(hasComplexType);
+	}
+
 }

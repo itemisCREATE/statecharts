@@ -36,6 +36,7 @@ public interface STextValidationMessages {
 	public static final String TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT = "Target state has regions without 'default' entries.";
 	public static final String TRANSITION_UNBOUND_NAMED_ENTRY_POINT = "Target state has regions without named entries: ";
 	public static final String TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT = "Source State needs at least one region with the named exit point.";
+	public static final String TRIGGER_IS_NO_EVENT = "Trigger is no event.";
 	public static final String TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY = "Entry of top level region have to be a default entry.";
 	public static final String REGION_UNBOUND_DEFAULT_ENTRY_POINT = "Region must have a 'default' entry.";
 	public static final String REGION_UNBOUND_NAMED_ENTRY_POINT = "Region should have a named entry to support transitions entry specification: ";
@@ -55,5 +56,8 @@ public interface STextValidationMessages {
 	public static final String ERROR_WRONG_ANNOTATION_TARGET_MSG = "Annotation '%s' can not be applied on %s ";
 	public static final String ERROR_WRONG_CONTEXT_ELEMENT_MSG = "Element of type '%s' is not allowed in this context.";
 	public static final String ERROR_WRONG_CONTEXT_ELEMENT_CODE = "ElementNotAllowedInContext";
+	
+	public static final String VALUE_OF_REQUIRES_EVENT = "valueof() expression requires event as argument.";
+
 
 }

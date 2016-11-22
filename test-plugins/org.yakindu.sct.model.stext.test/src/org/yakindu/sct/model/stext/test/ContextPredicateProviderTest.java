@@ -229,8 +229,8 @@ public class ContextPredicateProviderTest extends AbstractSTextValidationTest {
 				 * filter.put(key(EVENT_VALUE_REFERENCE_EXPRESSION), EVENTS)
 				 */
 				{ "valueof(e2)", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
-				{ "valueof(myInt)", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
-				{ "valueof(myOpp3())", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				// { "valueof(myInt)", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, // context predicates can't validate this expression. This will be done in the SText validation instead.
+				// { "valueof(myOpp3())", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, // context predicates can't validate this expression. This will be done in the SText validation instead.
 				/*
 				 * filter.put(key(VARIABLE_DEFINITION, TYPED_ELEMENT__TYPE),
 				 * TYPES)
@@ -238,8 +238,8 @@ public class ContextPredicateProviderTest extends AbstractSTextValidationTest {
 				{ "var x : integer", VariableDefinition.class.getSimpleName(), INTERNAL_SCOPE, true }, //
 				/* filter.put(key(REGULAR_EVENT_SPEC), EVENTS) */
 				{ "e1 / myInt = 0", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, true }, //
-				{ "myOpp(4) / myInt = 10", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, false }, //
-				{ "myInt / myInt = 10", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				//{ "myOpp(4) / myInt = 10", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, true }, // context predicates can't validate this expression. This will be done in the SText validation instead.
+				//{ "myInt / myInt = 10", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, true }, // context predicates can't validate this expression. This will be done in the SText validation instead.
 		});
 	}
 }
