@@ -18,6 +18,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -151,6 +152,7 @@ public class GitRepositoryExampleService implements IExampleService {
 		List<java.nio.file.Path> projects = new ArrayList<>();
 		findMetaData(projects, storageLocation);
 		List<ExampleData> result = reader.parse(projects);
+		Collections.sort(result);
 		return result;
 	}
 
