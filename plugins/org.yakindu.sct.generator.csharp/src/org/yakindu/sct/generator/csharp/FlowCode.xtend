@@ -48,7 +48,6 @@ class FlowCode {
 				case State.«stateCase.state.stateName.asEscapedIdentifier» : 
 					«stateCase.step.code»
 					break;
-				
 			«ENDFOR»
 			default: 
 				break;
@@ -67,9 +66,7 @@ class FlowCode {
 	'''
 	
 	def dispatch CharSequence code(Execution it) {
-		'''
-		«statement.code»;
-		'''
+		'''«statement.code.toString.trim»;'''
 	}
 	
 	def dispatch CharSequence code(Call it) '''
@@ -103,11 +100,9 @@ class FlowCode {
 	
 	def dispatch CharSequence code(If it) '''
 		«stepComment»
-		if («check.code») { 
+		if («check.code.toString.trim») { 
 			«thenStep.code»
-		}
-		«IF elseStep != null»
-		else {
+		}«IF elseStep != null» else {
 			«elseStep.code»
 		}
 		«ENDIF»
