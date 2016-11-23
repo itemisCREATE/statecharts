@@ -1,0 +1,25 @@
+h1(#Test2). Yakindu SCT Testcase 16 - Error Report
+
+|_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
+| 16.1 |  | open the SC Modeling view <p> Press *"Ctrl + Alt + l"* |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
+| 16. |  |  |  | %{color:red}open% |
