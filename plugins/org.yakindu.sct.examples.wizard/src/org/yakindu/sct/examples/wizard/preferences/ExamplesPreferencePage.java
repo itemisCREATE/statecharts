@@ -13,11 +13,11 @@ package org.yakindu.sct.examples.wizard.preferences;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
@@ -28,14 +28,14 @@ import org.yakindu.sct.examples.wizard.ExampleActivator;
  */
 public class ExamplesPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-	private static class StorageLocationFieldEditor extends DirectoryFieldEditor {
-		
+	protected static class StorageLocationFieldEditor extends DirectoryFieldEditor {
+
 		public StorageLocationFieldEditor(String name, String labelText, Composite parent) {
 			super(name, labelText, parent);
 			setEmptyStringAllowed(false);
 			setErrorMessage("Storage location must not be empty.");
 		}
-		
+
 		/**
 		 * Checks only if the input text is not empty, but not if the directory
 		 * exists as in that case it will be created by the example wizard.
@@ -43,14 +43,15 @@ public class ExamplesPreferencePage extends FieldEditorPreferencePage implements
 		@Override
 		protected boolean doCheckState() {
 			String fileName = getTextControl().getText();
-	        fileName = fileName.trim();
+			fileName = fileName.trim();
 			if (fileName.length() == 0 && !isEmptyStringAllowed()) {
 				return false;
 			}
 			return true;
 		}
+
 	};
-	
+
 	public ExamplesPreferencePage() {
 		super(GRID);
 		setDescription("Examples Preference Page");
@@ -62,37 +63,23 @@ public class ExamplesPreferencePage extends FieldEditorPreferencePage implements
 		addFields(parent);
 	}
 
-	protected void addFields(Composite parent) {
-		Composite main = createPageLayout(parent);
-		createStorageLocationEditor(main);
+	protected void addFields(Composite main) {
+		addField(new StorageLocationFieldEditor(ExamplesPreferenceConstants.STORAGE_LOCATION, "Storage Location:",
+				main));
+		separator();
+		StringFieldEditor remoteLocationEditor = new StringFieldEditor(ExamplesPreferenceConstants.REMOTE_LOCATION,
+				"Remote Location", main);
+		remoteLocationEditor.getTextControl(main).setEditable(false);
+		addField(remoteLocationEditor);
+		separator();
+		StringFieldEditor remoteBranchEditor = new StringFieldEditor(ExamplesPreferenceConstants.REMOTE_BRANCH,
+				"Remote Branch:", main);
+		addField(remoteBranchEditor);
 	}
 
-	private void createStorageLocationEditor(Composite main) {
-		Composite composite = createGroupComposite(main, "Storage Location");
-		addField(new StorageLocationFieldEditor(ExamplesPreferenceConstants.STORAGE_LOCATION,
-				"Storage Location:", composite));
-	}
-
-	protected Composite createPageLayout(Composite parent) {
-		Composite main = new Composite(parent, SWT.NULL);
-		main.setLayout(new GridLayout());
-		main.setLayoutData(new GridData(GridData.GRAB_HORIZONTAL | GridData.HORIZONTAL_ALIGN_FILL));
-		return main;
-	}
-
-	protected Composite createGroupComposite(Composite parent, String title) {
-		Group group = new Group(parent, SWT.NONE);
-		group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		group.setLayout(new GridLayout(3, false));
-		Composite composite = new Composite(group, SWT.NONE);
-		GridLayout gridLayout = new GridLayout(3, false);
-		composite.setLayout(gridLayout);
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.horizontalSpan = 3;
-		composite.setLayoutData(gridData);
-		group.setText(title);
-		return composite;
+	private void separator() {
+		Label label = new Label(getFieldEditorParent(), SWT.NONE);
+		label.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1));
 	}
 
 	public void init(IWorkbench workbench) {
