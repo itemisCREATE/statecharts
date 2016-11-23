@@ -65,7 +65,7 @@ class ExpressionCode extends Expressions {
 
 	/* Assignment */
 	def dispatch CharSequence code(AssignmentExpression it) {
-		varRef.code.toString.trim  + " " +  operator.value.toString.trim  + " " + expression.code.toString.trim
+		varRef.code.toString.trim  + " " +  operator.literal + " " + expression.code.toString.trim
 	}
 
 	/* Literals */
