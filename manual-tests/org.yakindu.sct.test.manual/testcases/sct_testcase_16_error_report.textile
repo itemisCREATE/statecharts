@@ -5,7 +5,7 @@ h1(#Test2). Yakindu SCT Testcase 16 - Error Report
 | 16.2 |  | Hit enable at the dialog <p> Press Next | A window should open <p> on the second site should stand YAKINDU <br> The hook behind the YAKINDU should be set | %{color:red}open% |
 | 16.3 |  | Press *configure* -> *privacy policy* | the browser should open and link you to the itemis AGB site | %{color:red}open% |
 | 16.4 |  | Press *enable* -> *enable* | Dialog window appears. Problem looged in ... | %{color:red}open% |
-| 16.5 |  | Press *deatils* | There should be an *Strack Trace* | %{color:red}open% |
+| 16.5 |  | Press *deatils* | There should be an *Strack Trace* shown in a window | %{color:red}open% |
 | 16.6 |  | Cklick on *send* | Thank you dialog appears | %{color:red}open% |
 
 
