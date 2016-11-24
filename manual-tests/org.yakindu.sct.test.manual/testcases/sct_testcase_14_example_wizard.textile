@@ -1,12 +1,14 @@
 h1(#Test2). Yakindu SCT Testcase 14 - Example wizard
 
 |_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
-| 14.1 | Download new example repository | Make sure you don't have sct_examples in your user directory, delete if needed. Start YAKINDU SCT, select File -> New -> Example, select YAKINDU Statechart Examples, click Next, and request a Download. | Download succeeds. | |
-| 14.2 | Update existing repository 1 | Through a mechanism yet to be defined, force an update of the Repository. E.g., in Eclipse, change the repository location in the sourcecode. Open the example wizard again. | The wizard should ask you to update the repository. | |
-| 14.3 | Update existing repository 2 | Do the update, and check if the changes are reflected, as possible | Update performs successfully | |
-| 14.4 | Prepare Internet connection tests | Download the example repository as zip | - |  |
-| 14.5 | Internet connection 1 | Disconnect from the internet, start the example wizard with no existing repo available. Press the Download-Button. | The example wizard tries to Download and fails with 'Unable to download examples' etc | |
-| 14.6 | Internet connection 2 | After the wizard has failed, go back and next, and select to use another storage location. In the settings window, navigate to the Exmaple Wizard settings, and browse to the downloaded & unzipped github repo. | After selecting 'OK', the wizard should refresh its contents to the downloaded folder. | |
-
+| 14.1 | Download new example repository | Make sure you don't have sct_examples in your user directory, delete if needed. Start YAKINDU SCT, select File -> New -> Example, select YAKINDU Statechart Examples, click Next, and request a Download. | Download succeeds. | %{color:red}open% |
+| 14.2 | Update existing repository 1 | Through a mechanism yet to be defined, force an update of the Repository. E.g., in Eclipse, change the repository location in the sourcecode. Open the example wizard again. | The wizard should ask you to update the repository. | %{color:red}open% |
+| 14.3 | Update existing repository 2 | Do the update, and check if the changes are reflected, as possible | Update performs successfully | %{color:red}open% |
+| 14.4 | Prepare Internet connection tests | Download the example repository as zip | - | %{color:red}open% |
+| 14.5 | Internet connection 1 | Disconnect from the internet, start the example wizard with no existing repo available. Press the Download-Button. | The example wizard tries to Download and fails with 'Unable to download examples' etc | %{color:red}open% |
+| 14.6 | Internet connection 2 | After the wizard has failed, go back and next, and select to use another storage location. In the settings window, navigate to the Exmaple Wizard settings, and browse to the downloaded & unzipped github repo. | After selecting 'OK', the wizard should refresh its contents to the downloaded folder. | %{color:red}open% |
+| 14.7 | version compatibility | File -> New -> Example -> YAKINDU Statechart Example -> Next| There should be pro and normal examples <p> The pro examples should be highlighted with an pro icon and a red boarder around the information text| %{color:red}open% |
+| 14.7.2| version compatibility | hit a pro example| In the top of the window should be an information that this is an pro example <p> Also there should be a link where you can download the pro version| %{color:red}open% |
+| 14.8 | download link test | Click on the link to download the pro version | The browser should be open and the link send you to the download site of statecharts| %{color:red}open% |
 
 

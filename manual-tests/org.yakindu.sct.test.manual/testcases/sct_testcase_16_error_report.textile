@@ -1,0 +1,11 @@
+h1(#Test2). Yakindu SCT Testcase 16 - Error Report
+
+|_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
+| 16.1 | trigger error  | open the SC Modeling view <p> Press *"Ctrl + Alt + l"* | in the left down corner should appear an error dialog | %{color:red}open% |
+| 16.2 | check error settings | Hit *enable* at the dialog <p> Press Next | A window opens <p> on the second site YAKINDU should listed <br> The hook behind YAKINDU should be set | %{color:red}open% |
+| 16.3 | check privacy policy | Press *configure* -> *privacy policy* | the browser should open and link you to the itemis AGB site | %{color:red}open% |
+| 16.4 | Error selected | Press *enable* -> *enable* | Dialog window appears. Problem looged in ... | %{color:red}open% |
+| 16.5 | Check the error | Press *deatils* | There should be an *Strack Trace* shown in a window | %{color:red}open% |
+| 16.6 | Error sended | Cklick on *send* | "Thank you" dialog appears | %{color:red}open% |
+
+
