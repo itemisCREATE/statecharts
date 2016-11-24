@@ -51,29 +51,25 @@ public abstract class AbstractGeneratorEntryExecutor implements IGeneratorEntryE
 
 	@Override
 	public void execute(GeneratorEntry entry) {
-		NamedElement element = (NamedElement) entry.getElementRef();
+		logStart(entry);
 		if (valid(entry)) {
-			logger.log("Generating '" + element.getName() + "' to target project ..."
-					+ helper.getTargetProjectValue(entry).getStringValue());
 			try {
 				execute(factory.create(entry), entry);
 			} catch (Exception ex) {
 				logger.logError(ex);
-			} finally {
-				logger.log("done...");
 			}
 		}
-
+		logEnd(entry);
 	}
 
 	protected void logStart(GeneratorEntry entry) {
 		String elementName = ((NamedElement) entry.getElementRef()).getName();
 		String targetProject = helper.getTargetProjectValue(entry).getStringValue();
-		logger.log(String.format("Generating %s to target project %s ...", elementName, targetProject));
+		logger.log(String.format("Generating '%s' to target project '%s' ...", elementName, targetProject));
 	}
 
 	protected void logEnd(GeneratorEntry entry) {
-		logger.log("done...");
+		logger.log(((NamedElement) entry.getElementRef()).getName()+" done.");
 	}
 
 	protected void logException(Exception ex) {
@@ -93,7 +89,7 @@ public abstract class AbstractGeneratorEntryExecutor implements IGeneratorEntryE
 			}
 		});
 		if (!Iterables.isEmpty(errors)) {
-			logger.log("The referenced model contains errors and could not be generated:");
+			logger.log("The referenced model("+((NamedElement) entry.getElementRef()).getName()+") contains errors and could not be generated:");
 			for (Issue issue : errors) {
 				logger.log(issue.getMessage());
 			}
