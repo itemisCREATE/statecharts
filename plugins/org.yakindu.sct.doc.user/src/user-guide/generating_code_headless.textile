@@ -8,5 +8,25 @@ The new release (2.9.0) provides a headless code generator infrastructure that a
 And here is the good news: The headless code generator can simply be called from the command line and thus can be integrated with different CI-Tools easily. No matter if you use Gradle (link:https://gradle.org/ ), Maven (link https://maven.apache.org/)
 or Make (link:) all you need is a java runtime on your build machine.
 
-
 !(standard-image)images/docu_headless_updatesite.png(Selecting headless code generator feature)!
+
+in pro ausgeliefert 
+in open source > gehe zu pro update site > install 'headless generator' 
+
+call cmd line > eclipsec.exe --launcher -haedless.ini 
+
+h2(##generating-state-machine-code-headless-output) . Sample output
+-------------------------------------------------------- 
+YAKINDU Statechart Tools Headless Generator (by itemis AG)
+  Visit 
+	http://www.statecharts.org
+  Get Pro Integration *(-15%)
+	https://www.itemis.com/en/yakindu/statechart-tools/licences/
+--------------------------------------------------------
+baseDir = E:\sctHeadless\workspace
+sgen path = E:\sctHeadless\workspace\test.standalone\c.sgen
+model path = E:\sctHeadless\workspace\test.standalone\default.sct
+1 gen model(s) and 1 statechart(s) loaded.
+Generating 'default' to target project 'test.standalone' ...
+default done.
+executed (1/1) gen model(s) in 357ms.
