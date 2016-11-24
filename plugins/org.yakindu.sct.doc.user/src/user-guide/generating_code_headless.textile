@@ -15,13 +15,12 @@ in open source > gehe zu pro update site > install 'headless generator'
 
 call cmd line > eclipsec.exe --launcher -haedless.ini 
 
-h2(##generating-state-machine-code-headless-output) . Sample output
--------------------------------------------------------- 
+h2(#generating-state-machine-code-headless-output). Sample output
+
+--------------------------------------------------------
 YAKINDU Statechart Tools Headless Generator (by itemis AG)
   Visit 
 	http://www.statecharts.org
-  Get Pro Integration *(-15%)
-	https://www.itemis.com/en/yakindu/statechart-tools/licences/
 --------------------------------------------------------
 baseDir = E:\sctHeadless\workspace
 sgen path = E:\sctHeadless\workspace\test.standalone\c.sgen
@@ -29,4 +28,4 @@ model path = E:\sctHeadless\workspace\test.standalone\default.sct
 1 gen model(s) and 1 statechart(s) loaded.
 Generating 'default' to target project 'test.standalone' ...
 default done.
-executed (1/1) gen model(s) in 357ms.
+executed (1/1) gen model(s) in 381ms.
