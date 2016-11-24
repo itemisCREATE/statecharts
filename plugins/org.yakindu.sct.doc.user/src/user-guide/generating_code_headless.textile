@@ -2,3 +2,8 @@
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/generating_code_headless.textile
 
 h1(#generating-state-machine-code-headless). Headless code generation
+
+The new release (2.9.0) provides a headless code generator infrastructure that allows easy integration in continuous build environments. As the state machine code is fully derived from the statechart model, it is best practice to generate it on the fly during a CI-build instead of polluting your version control system with generated artifacts. 
+
+And here is the good news: The headless code generator can simply be called from the command line and thus can be integrated with different CI-Tools easily. No matter if you use Gradle (link:https://gradle.org/ ), Maven (link https://maven.apache.org/)
+or Make (link:) all you need is a java runtime on your build machine.
