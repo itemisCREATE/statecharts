@@ -69,7 +69,7 @@ public abstract class AbstractGeneratorEntryExecutor implements IGeneratorEntryE
 	}
 
 	protected void logEnd(GeneratorEntry entry) {
-		logger.log("done.");
+		logger.log(((NamedElement) entry.getElementRef()).getName()+" done.");
 	}
 
 	protected void logException(Exception ex) {
