@@ -7,3 +7,6 @@ The new release (2.9.0) provides a headless code generator infrastructure that a
 
 And here is the good news: The headless code generator can simply be called from the command line and thus can be integrated with different CI-Tools easily. No matter if you use Gradle (link:https://gradle.org/ ), Maven (link https://maven.apache.org/)
 or Make (link:) all you need is a java runtime on your build machine.
+
+
+!(standard-image)images/docu_headless_updatesite.png(Selecting headless code generator feature)!
