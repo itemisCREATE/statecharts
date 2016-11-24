@@ -63,7 +63,8 @@ public abstract class AbstractGeneratorEntryExecutor implements IGeneratorEntryE
 	}
 
 	protected void logStart(GeneratorEntry entry) {
-		String elementName = ((NamedElement) entry.getElementRef()).getName();
+		EObject elementRef = entry.getElementRef();
+		String elementName = elementRef instanceof NamedElement ?((NamedElement) elementRef).getName():elementRef.toString();
 		String targetProject = helper.getTargetProjectValue(entry).getStringValue();
 		logger.log(String.format("Generating '%s' to target project '%s' ...", elementName, targetProject));
 	}
