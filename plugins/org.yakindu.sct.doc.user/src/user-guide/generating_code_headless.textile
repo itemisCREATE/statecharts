@@ -44,7 +44,7 @@ Linux
 bc. 
 ./SCT --launcher.ini headless.ini -h
 
-Mac //TODO
+Mac
 
 bc. 
 ./SCT --launcher.ini headless.ini -h
