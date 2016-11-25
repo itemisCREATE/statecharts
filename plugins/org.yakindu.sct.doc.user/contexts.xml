@@ -22,6 +22,9 @@
    <context id="sgen_feature" title="Genmodel Features">
       <topic href="help/user-guide/generating_code.html" label="Generating state machine code"/>
    </context>
+   <context id="headless_feature" title="Headless Features">
+      <topic href="help/user-guide/generating_code_headless.html" label="Headless Generating"/>
+   </context>
    <context id="stext_keyword">
       <topic href="help/user-guide/statechart_language.html" label="YAKINDU Statechart Tools User Guide"/>
    </context>

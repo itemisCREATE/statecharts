@@ -144,13 +144,14 @@
                 <include name="user-guide/c-domain.textile" />
                 <include name="user-guide/statechart_language.textile" />
                 <include name="user-guide/generating_code.textile" />
+                <include name="user-guide/generating_code_headless.textile" />
                 <include name="user-guide/sctunit.textile" />
             </fileset>
 
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="10" />
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="11" />
                 </condition>
             </fail>
 
@@ -285,6 +286,7 @@
                         <file name="user-guide/c-domain.textile" />
                         <file name="user-guide/statechart_language.textile" />
                         <file name="user-guide/generating_code.textile" />
+                        <file name="user-guide/generating_code_headless.textile" />
                         <!-- <file name="user-guide/sctunit.textile" /> -->
                     </filelist>
                 </textile-files>

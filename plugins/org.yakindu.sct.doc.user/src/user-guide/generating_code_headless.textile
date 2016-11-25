@@ -1,0 +1,148 @@
+
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/generating_code_headless.textile
+
+h1(#generating-state-machine-code-headless). Headless code generation
+
+As the state machine code is fully derived from the statechart model, it is best practice to generate it on the fly during a CI-build instead of polluting your version control system with generated artifacts. Since the release 2.9.0 of YAKINDU Statechart Tools provides a headless code generator infrastructure that allows integration in continuous build environments.  
+
+The headless code generator can simply be called from the command line and thus can be integrated with different CI-Tools easily. No matter if you use Gradle (link:https://gradle.org/ ), Maven (link:https://maven.apache.org/)
+or Make (link:https://de.wikipedia.org/wiki/Make) all you need is a java runtime on your build machine.
+
+h2(#generating-state-machine-code-headless-installation). Installation
+
+The headless code generator comes as an OSGi application which can generally be installed into every eclipse installation.
+
+If you download the "Professional Edition":https://info.itemis.com/yakindu/statecharts/pro the headless code generation feature is already available and no further installation is required.
+When you download the "Open Edition":https://info.itemis.com/download-yakindu-statechart-tools you have to install the headless code generation feature from the SCT Pro update site.
+
+To do so open the 'Help > Install New Software...' wizard, open the "SCT Pro update site":https://info.itemis.com/yakindu/statecharts/pro and choose the "YAKINDU headless Code Generator" feature.
+Even if it is just available on the SCT Pro update site the headless code generation application is free to use for all users of YAKINDU Statechart Tools.
+
+!(standard-image)images/docu_headless_updatesite.png(Professional Edition Update Site)!
+
+After clicking "Finish" the installation process will start. If the 'Install New Software...' wizard successfully finished, you have to restart your application. Afterwards you should have a look into the root folder of your installation directory.
+
+!images/docu_headless_distro.png(Installation Folder including Headless)!
+
+There you will find a new file called headless.ini which is needed for headless generator execution described in the following chapters.
+
+h2(#generating-state-machine-code-headless-execute). Executing the headless code generation
+
+Once you have installed the headless code generation feature you might want to test if everything is fine firstly. To do so open a shell and go to the root folder (eclipse root directory) of your SCT installation. 
+
+h3(#generating-state-machine-code-headless-execute-test). A first call
+
+By typing in one of the following platform specific commands into the shell the headless application will be triggered. The '-h' parameter leads into showing the integrated help information.
+
+Windows
+
+bc. 
+eclipsec.exe --launcher.ini headless.ini -h
+
+Linux
+
+bc. 
+./SCT --launcher.ini headless.ini -h
+
+Mac
+
+bc. 
+./SCT --launcher.ini headless.ini -h
+
+If you can see the help contents similar to the following, the general installation of the headless code generation application is properly done.
+
+bc. 
+--------------------------------------------------------
+YAKINDU Statechart Tools Headless Generator (by itemis AG)
+  Visit 
+	http://www.statecharts.org
+--------------------------------------------------------
+usage: eclipsec.exe -launcher.ini headless.ini [-basedir <path>] [-h] [-m <path>] [-sgen <path>]
+ -basedir,--baseDirectory <path>   Relative/absolute path to the working directory that contains your statechart
+                                   projects. If not set the current directory is used.
+ -h                                Shows help content.
+ -m,--model <path>                 Relative/absolute path to directory or file of model(s) (*.sct) referenced within
+                                   generator model(s). If not set the runtime value of basedir is used.
+ -sgen,--genmodel <path>           Relative/absolute path to directory or file containing generator model(s). If not set
+                                   the runtime value of basedir is used.
+                          
+h3(#generating-state-machine-code-headless-execute-gen). Lets generate Code
+
+As now we know everything is installed correctly we can go ahead to execute the code generation a first time. For this documentation we assume the following simple directory structure including SCT related files like generator models and statechart models.
+
+!images/docu_headless_directory_structure.png(Headless Directory Structure)!
+
+If you use the standard eclipse workspace layout where the workspace root includes projects without an additional hierarchy, which than include your model files everything would be fine without a change.
+
+Open a shell within the root folder of your SCT installation and enter one of the following platform specific commands after replacing [pathToBasedir] with the concrete path of the base directory.
+
+Windows
+
+bc. 
+eclipsec.exe --launcher headless.ini -basedir [pathToBasedir] -sgen project/default.sgen -m project/default.sct
+
+Mac
+
+bc. 
+./SCT --launcher.ini headless.ini -basedir [pathToBasedir] -sgen project/default.sgen -m project/default.sct
+
+Linux
+
+bc. 
+./SCT --launcher.ini headless.ini -basedir [pathToBasedir] -sgen project/default.sgen -m project/default.sct
+
+h4(#generating-state-machine-code-headless-execute-gen-output). Sample Output
+
+See the following output as a result of the command line call. 
+
+bc. 
+--------------------------------------------------------
+YAKINDU Statechart Tools Headless Generator ((c) by itemis AG)
+	  Visit http://www.statecharts.org
+--------------------------------------------------------
+1 gen model(s) and 1 statechart(s) loaded.
+Generating 'default' to target project 'project' ...
+default done.
+Generated (1 of 1) gen model(s).
+
+As you can see the headless code generation has properly executed. The generated code will be placed in a folder depending from the values configured within your generator model file. Within our sample the generator modepl contains the following content.
+
+bc. 
+GeneratorModel for yakindu::java {
+	statechart default {
+		feature Outlet {
+			targetProject = "project"
+			targetFolder = "src-gen"
+		}
+	}
+}
+
+So for our example this means the generated code can be found in 
+
+	**[basedir] / project / src-gen/...**
+ 
+h3(#generating-state-machine-code-headless-sample-parameter). Parameter
+
+By having a closer look to the parameters you will notice that all parameters are optional. This is because if you have a directory structure based on the eclipse workspace standard (projects within root, no additional hierarchies) everything can be calculated automatically.
+
+h4(#generating-state-machine-code-headless-sample-parameter-basedir). Base Directory
+
+The base directory (-basedir) is used for two major tasks. Firstly it is used to calculate the absolute paths to model & genmodel locations if they are given as relative values. Secondly it is used as the base directory to calculate the target generation folder depending on the values given within a generator model.
+
+The target folder for generated artifacts will ever be calculated by the the rule 
+
+	**[basedir] / [sgen.targetProject] / [sgen.targetFolder]**
+
+h4(#generating-state-machine-code-headless-sample-parameter-genmodel). Generator Model
+
+The parameter genmodel (-sgen) can be used to select generator models (*.sgen) more specifically. The value can be absolute or relative and can be a file or folder. 
+* If the value is relative the resulting folder during runtime would be calculated by the rule *[basedir]/[-sgen value]*
+* If a folder is given the generator application will search for all *.sgen recursively 
+
+h4(#generating-state-machine-code-headless-sample-parameter-model). Model Files
+
+The parameter model (-m) can be used to select models (*.sct) more specifically. The value can be absolute or relative and can be a file or folder. 
+* If the value is relative the resulting folder during runtime would be calculated by the rule *[basedir]/[-m value]*
+* If a folder is given the generator application will search for all *.sct recursively 
+
+                                   
