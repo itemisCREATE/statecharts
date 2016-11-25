@@ -3,20 +3,101 @@ p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/
 
 h1(#generating-state-machine-code-headless). Headless code generation
 
-The new release (2.9.0) provides a headless code generator infrastructure that allows easy integration in continuous build environments. As the state machine code is fully derived from the statechart model, it is best practice to generate it on the fly during a CI-build instead of polluting your version control system with generated artifacts. 
+As the state machine code is fully derived from the statechart model, it is best practice to generate it on the fly during a CI-build instead of polluting your version control system with generated artifacts. Since the release 2.9.0 of YAKINDU Statechart Tools provides a headless code generator infrastructure that allows integration in continuous build environments.  
 
-And here is the good news: The headless code generator can simply be called from the command line and thus can be integrated with different CI-Tools easily. No matter if you use Gradle (link:https://gradle.org/ ), Maven (link https://maven.apache.org/)
-or Make (link:) all you need is a java runtime on your build machine.
+The headless code generator can simply be called from the command line and thus can be integrated with different CI-Tools easily. No matter if you use Gradle (link:https://gradle.org/ ), Maven (link:https://maven.apache.org/)
+or Make (link:https://de.wikipedia.org/wiki/Make) all you need is a java runtime on your build machine.
 
-!(standard-image)images/docu_headless_updatesite.png(Selecting headless code generator feature)!
+h2(#generating-state-machine-code-headless-installation). Installation
 
-in pro ausgeliefert 
-in open source > gehe zu pro update site > install 'headless generator' 
+The headless code generator comes as an OSGi application which can generally be installed into every eclipse installation.
 
-call cmd line > eclipsec.exe --launcher -haedless.ini 
+If you download the "Professional Edition":https://info.itemis.com/yakindu/statecharts/pro the headless code generation feature is already available and no further installation is required.
+When you download the "Open Edition":https://info.itemis.com/download-yakindu-statechart-tools you have to install the headless code generation feature from the SCT Pro update site.
 
-h2(#generating-state-machine-code-headless-output). Sample output
+To do so open the 'Help > Install New Software...' wizard, open the "SCT Pro update site":https://info.itemis.com/yakindu/statecharts/pro and choose the "YAKINDU headless Code Generator" feature.
+Even if it is just available on the SCT Pro update site the headless code generation application is free to use for all users of YAKINDU Statechart Tools.
 
+!(standard-image)images/docu_headless_updatesite.png(Professional Edition Update Site)!
+
+After clicking "Finish" the installation process will start. If the 'Install New Software...' wizard successfully finished, you have to restart your application. Afterwards you should have a look into the root folder of your installation directory.
+
+!images/docu_headless_distro.png(Installation Folder including Headless)!
+
+There you will find a new file called headless.ini which is needed for headless generator execution described in the following chapters.
+
+h2(#generating-state-machine-code-headless-execute). Executing the headless code generation
+
+Once you have installed the headless code generation feature you might want to test if everything is fine firstly. To do so open a shell and go to the root folder (eclipse root directory) of your SCT installation. 
+
+h3(#generating-state-machine-code-headless-execute-test). A first call
+
+By typing in one of the following platform specific commands into the shell the headless application will be triggered. The '-h' parameter leads into showing the integrated help information.
+
+Windows
+
+bc. 
+eclipsec.exe --launcher.ini headless.ini -h
+
+Linux
+
+bc. 
+./SCT --launcher.ini headless.ini -h
+
+Mac //TODO
+
+bc. 
+./SCT --launcher.ini headless.ini -h
+
+If you can see the help contents similar to the following, the general installation of the headless code generation application is properly done.
+
+bc. 
+--------------------------------------------------------
+YAKINDU Statechart Tools Headless Generator (by itemis AG)
+  Visit 
+	http://www.statecharts.org
+--------------------------------------------------------
+usage: eclipsec.exe -launcher.ini headless.ini [-basedir <path>] [-h] [-m <path>] [-sgen <path>]
+ -basedir,--baseDirectory <path>   Relative/absolute path to the working directory that contains your statechart
+                                   projects. If not set the current directory is used.
+ -h                                Shows help content.
+ -m,--model <path>                 Relative/absolute path to directory or file of model(s) (*.sct) referenced within
+                                   generator model(s). If not set the runtime value of basedir is used.
+ -sgen,--genmodel <path>           Relative/absolute path to directory or file containing generator model(s). If not set
+                                   the runtime value of basedir is used.
+                          
+h3(#generating-state-machine-code-headless-execute-gen). Lets generate Code
+
+As now we know everything is installed correctly we can go ahead to execute the code generation a first time. For this documentation we assume the following simple directory structure including SCT related files like generator models and statechart models.
+
+!images/docu_headless_directory_structure.png(Headless Directory Structure)!
+
+If you use the standard eclipse workspace layout where the workspace root includes projects without an additional hierarchy, which than include your model files everything would be fine without a change.
+
+Pick one of the following commands depending on your platform 
+
+Windows
+
+bc. 
+eclipsec.exe --launcher headless.ini -basedir E:\sctHeadless\workspace -m test.standalone\default.sct -sgen test.standalone\c.sgen
+
+Linux
+
+bc. 
+./SCT --launcher.ini headless.ini -basedir E:\sctHeadless\workspace -m test.standalone\default.sct -sgen test.standalone\c.sgen
+
+Mac //TODO
+
+bc.. 
+./SCT --launcher.ini headless.ini -basedir E:\sctHeadless\workspace -m test.standalone\default.sct -sgen test.standalone\c.sgen
+
+
+
+h4(#generating-state-machine-code-headless-execute-gen-output). Sample Output
+
+See the following output as a result of the command line call.
+
+bc.. 
 --------------------------------------------------------
 YAKINDU Statechart Tools Headless Generator (by itemis AG)
   Visit 
@@ -29,3 +110,11 @@ model path = E:\sctHeadless\workspace\test.standalone\default.sct
 Generating 'default' to target project 'test.standalone' ...
 default done.
 executed (1/1) gen model(s) in 381ms.
+ 
+h3(#generating-state-machine-code-headless-sample-parameter). Parameter
+
+h4(#generating-state-machine-code-headless-sample-parameter-help). Parameter
+h4(#generating-state-machine-code-headless-sample-parameter-basedir). Base Directory
+h4(#generating-state-machine-code-headless-sample-parameter-model). Model Files
+h4(#generating-state-machine-code-headless-sample-parameter-genmodel). generator Model
+                                   
