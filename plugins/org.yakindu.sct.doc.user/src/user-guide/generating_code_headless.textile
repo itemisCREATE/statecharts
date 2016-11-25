@@ -74,22 +74,22 @@ As now we know everything is installed correctly we can go ahead to execute the 
 
 If you use the standard eclipse workspace layout where the workspace root includes projects without an additional hierarchy, which than include your model files everything would be fine without a change.
 
-Pick one of the following commands depending on your platform 
+Open a shell within the root folder of your SCT installation and enter one of the following platform specific commands after replacing [pathToBasedir] with the concrete path to your base directory. Besides if you will not enter a 'basedir' value the execution path will be taken.
 
 Windows
 
 bc. 
-eclipsec.exe --launcher headless.ini -basedir E:\sctHeadless\workspace -m test.standalone\default.sct -sgen test.standalone\c.sgen
+eclipsec.exe --launcher headless.ini -basedir [pathToBasedir] -sgen project/default.sgen -m project/default.sct
 
 Linux
 
 bc. 
-./SCT --launcher.ini headless.ini -basedir E:\sctHeadless\workspace -m test.standalone\default.sct -sgen test.standalone\c.sgen
+./SCT --launcher.ini headless.ini -basedir [pathToBasedir] -sgen project/default.sgen -m project/default.sct
 
 Mac //TODO
 
 bc.. 
-./SCT --launcher.ini headless.ini -basedir E:\sctHeadless\workspace -m test.standalone\default.sct -sgen test.standalone\c.sgen
+./SCT --launcher.ini headless.ini -basedir [pathToBasedir] -sgen project/default.sgen -m project/default.sct
 
 
 
