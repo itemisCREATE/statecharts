@@ -74,47 +74,75 @@ As now we know everything is installed correctly we can go ahead to execute the 
 
 If you use the standard eclipse workspace layout where the workspace root includes projects without an additional hierarchy, which than include your model files everything would be fine without a change.
 
-Open a shell within the root folder of your SCT installation and enter one of the following platform specific commands after replacing [pathToBasedir] with the concrete path to your base directory. Besides if you will not enter a 'basedir' value the execution path will be taken.
+Open a shell within the root folder of your SCT installation and enter one of the following platform specific commands after replacing [pathToBasedir] with the concrete path of the base directory.
 
 Windows
 
 bc. 
 eclipsec.exe --launcher headless.ini -basedir [pathToBasedir] -sgen project/default.sgen -m project/default.sct
 
+Mac
+
+bc. 
+./SCT --launcher.ini headless.ini -basedir [pathToBasedir] -sgen project/default.sgen -m project/default.sct
+
 Linux
 
 bc. 
 ./SCT --launcher.ini headless.ini -basedir [pathToBasedir] -sgen project/default.sgen -m project/default.sct
 
-Mac //TODO
-
-bc.. 
-./SCT --launcher.ini headless.ini -basedir [pathToBasedir] -sgen project/default.sgen -m project/default.sct
-
-
-
 h4(#generating-state-machine-code-headless-execute-gen-output). Sample Output
 
-See the following output as a result of the command line call.
+See the following output as a result of the command line call. 
 
-bc.. 
+bc. 
 --------------------------------------------------------
-YAKINDU Statechart Tools Headless Generator (by itemis AG)
-  Visit 
-	http://www.statecharts.org
+YAKINDU Statechart Tools Headless Generator ((c) by itemis AG)
+	  Visit http://www.statecharts.org
 --------------------------------------------------------
-baseDir = E:\sctHeadless\workspace
-sgen path = E:\sctHeadless\workspace\test.standalone\c.sgen
-model path = E:\sctHeadless\workspace\test.standalone\default.sct
 1 gen model(s) and 1 statechart(s) loaded.
-Generating 'default' to target project 'test.standalone' ...
+Generating 'default' to target project 'project' ...
 default done.
-executed (1/1) gen model(s) in 381ms.
+Generated (1 of 1) gen model(s).
+
+As you can see the headless code generation has properly executed. The generated code will be placed in a folder depending from the values configured within your generator model file. Within our sample the generator modepl contains the following content.
+
+bc. 
+GeneratorModel for yakindu::java {
+	statechart default {
+		feature Outlet {
+			targetProject = "project"
+			targetFolder = "src-gen"
+		}
+	}
+}
+
+So for our example this means the generated code can be found in 
+
+	**[basedir] / project / src-gen/...**
  
 h3(#generating-state-machine-code-headless-sample-parameter). Parameter
 
-h4(#generating-state-machine-code-headless-sample-parameter-help). Parameter
+By having a closer look to the parameters you will notice that all parameters are optional. This is because if you have a directory structure based on the eclipse workspace standard (projects within root, no additional hierarchies) everything can be calculated automatically.
+
 h4(#generating-state-machine-code-headless-sample-parameter-basedir). Base Directory
+
+The base directory (-basedir) is used for two major tasks. Firstly it is used to calculate the absolute paths to model & genmodel locations if they are given as relative values. Secondly it is used as the base directory to calculate the target generation folder depending on the values given within a generator model.
+
+The target folder for generated artifacts will ever be calculated by the the rule 
+
+	**[basedir] / [sgen.targetProject] / [sgen.targetFolder]**
+
+h4(#generating-state-machine-code-headless-sample-parameter-genmodel). Generator Model
+
+The parameter genmodel (-sgen) can be used to select generator models (*.sgen) more specifically. The value can be absolute or relative and can be a file or folder. 
+* If the value is relative the resulting folder during runtime would be calculated by the rule *[basedir]/[-sgen value]*
+* If a folder is given the generator application will search for all *.sgen recursively 
+
 h4(#generating-state-machine-code-headless-sample-parameter-model). Model Files
-h4(#generating-state-machine-code-headless-sample-parameter-genmodel). generator Model
+
+The parameter model (-m) can be used to select models (*.sct) more specifically. The value can be absolute or relative and can be a file or folder. 
+* If the value is relative the resulting folder during runtime would be calculated by the rule *[basedir]/[-m value]*
+* If a folder is given the generator application will search for all *.sct recursively 
+
                                    
