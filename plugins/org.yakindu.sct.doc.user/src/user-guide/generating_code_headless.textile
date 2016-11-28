@@ -7,6 +7,8 @@ As the state machine code is fully derived from the statechart model, it is best
 
 The headless code generator can simply be called from the command line and thus can be integrated with different CI-Tools easily. No matter if you use Gradle, Maven or Make all you need is a java runtime on your build machine.
 
+*NOTE:* The headless code generation is restricted to the open source generators. This means generating code for e.g. 'Deep C Integration' statecharts or your custom generators might fail.
+
 h2(#generating-state-machine-code-headless-installation). Installation
 
 The headless code generator comes as an OSGi application which can be installed into every eclipse installation.
@@ -36,35 +38,34 @@ By typing in one of the following platform specific commands into the shell the 
 Windows
 
 bc. 
-eclipsec.exe --launcher.ini headless.ini -h
+scc -h
 
 Linux
 
 bc. 
-./SCT --launcher.ini headless.ini -h
+./scc -h
 
 Mac
 
 bc. 
-cd SCT.app/Contents/MacOS/
-./SCT --launcher.ini ../Eclipse/headless.ini -h
+cd SCT.app/Contents/Eclipse/
+./scc -h
 
 If you can see the help contents similar to the following, the installation of the headless code generator was successful.
 
 bc. 
 --------------------------------------------------------
-YAKINDU Statechart Tools Headless Generator (by itemis AG)
-  Visit 
-	http://www.statecharts.org
+YAKINDU Statechart Tools Headless Generator ((c) by itemis AG)
+	  Visit http://www.statecharts.org
 --------------------------------------------------------
-usage: -launcher.ini headless.ini [--basedir <path>] [-h] [--model <path>] [--sgen <path>]
- -d,--baseDir <path>   Relative/absolute path to the working directory that contains your statechart
-                                   projects. If not set the current directory is used.
- -h                                Shows help content.
- -m,--model <path>                 Relative/absolute path to directory or file of model(s) (*.sct) referenced within
-                                   generator model(s). If not set the runtime value of basedir is used.
- -s,--sgen <path>           Relative/absolute path to directory or file containing generator model(s). If not set
-                                   the runtime value of basedir is used.
+usage: -launcher.ini headless.ini [-d <path>] [-h] [-m <path>] [-s <path>]
+ -d,--baseDir <path>   Relative/absolute path to the working directory that contains your statechart projects. If not
+                       set the current directory is used.
+ -h                    Shows help content.
+ -m,--model <path>     Relative/absolute path to directory or file of model(s) (*.sct) referenced within generator
+                       model(s). If not set the runtime value of basedir is used.
+ -s,--sgen <path>      Relative/absolute path to directory or file containing generator model(s). If not set the runtime
+                       value of basedir is used.
                           
 h3(#generating-state-machine-code-headless-execute-gen). Generating Code
 
@@ -77,18 +78,20 @@ Open a shell within the root folder of your SCT installation and enter one of th
 Windows
 
 bc. 
-eclipsec.exe --launcher headless.ini -d [pathToBasedir] -s project/default.sgen -m project/default.sct
-
-Mac
-
-bc. 
-cd SCT.app/Contents/MacOS/
-./SCT --launcher.ini ../Eclipse/headless.ini -d [pathToBasedir] -s project/default.sgen -m project/default.sct
+scc -d [pathToBasedir] -s project/default.sgen -m project/default.sct
 
 Linux
 
 bc. 
-./SCT --launcher.ini headless.ini -d [pathToBasedir] -s project/default.sgen -m project/default.sct
+./scc -d [pathToBasedir] -s project/default.sgen -m project/default.sct
+
+Mac
+
+bc. 
+cd SCT.app/Contents/Eclipse/
+./scc -d [pathToBasedir] -s project/default.sgen -m project/default.sct
+
+
 
 h4(#generating-state-machine-code-headless-execute-gen-output). Sample Output
 
@@ -118,7 +121,8 @@ GeneratorModel for yakindu::java {
 
 So for our example this means the generated code can be found in 
 
-	**[basedir] / project / src-gen/...**
+	**[basedir] / project / src-gen/...** 
+
  
 h3(#generating-state-machine-code-headless-sample-parameter). Parameter
 
@@ -126,7 +130,7 @@ By having a closer look to the parameters you will notice that all parameters ar
 
 h4(#generating-state-machine-code-headless-sample-parameter-basedir). Base Directory
 
-The base directory (-basedir) is used for two major tasks. Firstly it is used to calculate the absolute paths to model & genmodel locations if they are given as relative values. Secondly it is used as the base directory to calculate the target generation folder depending on the values given within a generator model.
+The base directory (-d) is used for two major tasks. Firstly it is used to calculate the absolute paths to model & genmodel locations if they are given as relative values. Secondly it is used as the base directory to calculate the target generation folder depending on the values given within a generator model.
 
 The target folder for generated artifacts will be calculated by the rule 
 
