@@ -30,8 +30,6 @@ public interface IHighlightingSupport {
 
 	void highlight(List<? extends EObject> semanticElement, HighlightingParameters parameters);
 
-	void flash(List<? extends EObject> semanticElemesnt, HighlightingParameters parameters, int highlightTime);
-
 	void executeAsync(List<Action> actions);
 
 	public static interface Action {
@@ -57,28 +55,6 @@ public interface IHighlightingSupport {
 		}
 	}
 
-	public static class Flash implements Action {
-
-		protected List<? extends EObject> semanticElements;
-		protected HighlightingParameters highligtingParams;
-		private int flashTime;
-
-		public Flash(EObject semanticElement, HighlightingParameters parameters, int flashTime) {
-			this(Collections.singletonList(semanticElement), parameters, flashTime);
-		}
-
-		public Flash(List<? extends EObject> semanticElements, HighlightingParameters parameters, int flashTime) {
-			this.semanticElements = semanticElements;
-			this.highligtingParams = parameters;
-			this.flashTime = flashTime;
-		}
-
-		public void execute(IHighlightingSupport hs) {
-			hs.flash(semanticElements, highligtingParams, flashTime);
-		}
-
-	}
-
 	public static class HighlightingSupportNullImpl implements IHighlightingSupport {
 
 		@Override
@@ -102,12 +78,6 @@ public interface IHighlightingSupport {
 
 		@Override
 		public void highlight(List<? extends EObject> semanticElement, HighlightingParameters parameters) {
-
-		}
-
-		@Override
-		public void flash(List<? extends EObject> semanticElemesnt, HighlightingParameters parameters,
-				int highlightTime) {
 
 		}
 

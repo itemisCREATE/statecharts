@@ -24,8 +24,6 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
  */
 public class DefaultDynamicNotationHandler extends AbstractDynamicNotationHandler {
 
-	private static final int FLASHTIME = 500;
-
 	ExecutionContextVisualizer visualizer = new ExecutionContextVisualizer(NULL_SUPPORT);
 
 	protected ExecutionContext currentContext;
@@ -45,8 +43,7 @@ public class DefaultDynamicNotationHandler extends AbstractDynamicNotationHandle
 	protected void restoreNotationState(ExecutionContext context) {
 		List<IHighlightingSupport.Action> actions = new ArrayList<IHighlightingSupport.Action>();
 		actions.add(new IHighlightingSupport.Highlight(context.getAllActiveStates(), HighlightingParameters.DEFAULT));
-		actions.add(new IHighlightingSupport.Flash(context.getExecutedElements(), HighlightingParameters.DEFAULT,
-				FLASHTIME));
+		actions.add(new IHighlightingSupport.Highlight(context.getExecutedElements(), HighlightingParameters.DEFAULT));
 		actions.add(new IHighlightingSupport.Highlight(context.getSuspendedElements(), SUSPENDED_PARAMS));
 		getHighlightingSupport().executeAsync(actions);
 	}

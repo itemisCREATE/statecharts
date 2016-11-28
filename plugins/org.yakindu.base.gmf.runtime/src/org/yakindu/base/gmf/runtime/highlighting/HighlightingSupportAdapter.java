@@ -19,6 +19,7 @@ import java.util.Map;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.figures.BorderedNodeFigure;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
@@ -50,44 +51,6 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		protected void restore() {
 			figure.setForegroundColor(foregroundColor);
 			figure.setBackgroundColor(backgroundColor);
-		}
-	}
-
-	private class Fader implements Runnable {
-
-		private final int fadingTime;
-		private final Color sourceForegroundColor;
-		private final Color targetForegroundColor;
-		private final IFigure figure;
-		private final boolean shouldFadeBack;
-		private final Color sourceBackgroundColor;
-		private final Color targetBackgroundColor;
-
-		private Fader(IFigure figure, Color sourceForegroundColor, Color targetForegroundColor,
-				Color sourceBackgroundColor, Color targetBackgroundColor, int fadingTime, boolean shouldFadeBack) {
-			this.figure = figure;
-			this.sourceForegroundColor = sourceForegroundColor;
-			this.targetForegroundColor = targetForegroundColor;
-			this.sourceBackgroundColor = sourceBackgroundColor;
-			this.targetBackgroundColor = targetBackgroundColor;
-			this.shouldFadeBack = shouldFadeBack;
-			this.fadingTime = fadingTime;
-		}
-
-		public void run() {
-			if (!locked) {
-				// if we were started as "back-fader" via timer and editor
-				// was released in the meantime, don't perform fading back
-				return;
-			}
-
-			figure.setForegroundColor(targetForegroundColor);
-			figure.setBackgroundColor(targetBackgroundColor);
-			figure.invalidate();
-			if (shouldFadeBack) {
-				Display.getCurrent().timerExec(fadingTime, new Fader(figure, targetForegroundColor,
-						sourceForegroundColor, targetBackgroundColor, sourceBackgroundColor, fadingTime, false));
-			}
 		}
 	}
 
@@ -138,7 +101,7 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 	private void lockEditorInternal() {
 		setSanityCheckEnablementState(false);
 		for (Object editPart : diagramWorkbenchPart.getDiagramGraphicalViewer().getEditPartRegistry().values()) {
-			if (editPart instanceof IGraphicalEditPart) {
+			if (editPart instanceof IPrimaryEditPart) {
 				IGraphicalEditPart graphicalEditPart = (IGraphicalEditPart) editPart;
 				IFigure figure = getTargetFigure(graphicalEditPart);
 				figureStates.put(figure, new ColorMemento(figure));
@@ -204,20 +167,6 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 		}
 	}
 
-	public void flash(List<? extends EObject> semanticElements, HighlightingParameters parameters, int flashTime) {
-		synchronized (semanticElements) {
-			for (EObject semanticElement : semanticElements) {
-				IGraphicalEditPart editPartForSemanticElement = getEditPartForSemanticElement(semanticElement);
-				if (editPartForSemanticElement != null) {
-					IFigure figure = getTargetFigure(editPartForSemanticElement);
-					Fader fader = new Fader(figure, figure.getForegroundColor(), parameters.foregroundFadingColor,
-							figure.getBackgroundColor(), parameters.backgroundFadingColor, (int) flashTime, true);
-					Display.getCurrent().asyncExec(fader);
-				}
-			}
-		}
-	}
-
 	public boolean isLocked() {
 		return locked;
 	}
@@ -234,7 +183,7 @@ public class HighlightingSupportAdapter implements IHighlightingSupport {
 			});
 		}
 	}
-	public void executeSync(final List<Action> actions) {
+	protected void executeSync(final List<Action> actions) {
 		if (actions != null) {
 
 			Display.getDefault().syncExec(new Runnable() {
