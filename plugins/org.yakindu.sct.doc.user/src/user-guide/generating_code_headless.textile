@@ -7,7 +7,7 @@ As the state machine code is fully derived from the statechart model, it is best
 
 The headless code generator can simply be called from the command line and thus can be integrated with different CI-Tools easily. No matter if you use Gradle, Maven or Make all you need is a java runtime on your build machine.
 
-*NOTE:* The headless code generation is restricted to the open source generators. This means generating code for e.g. 'Deep C Integration' statecharts or your custom generators might fail.
+*NOTE:* The headless code generation is restricted to the open source generators. This means generating code for e.g. 'Deep C Integration' statecharts or your custom generators might fail. Support for C statecharts will be added with the next release.
 
 h2(#generating-state-machine-code-headless-installation). Installation
 
@@ -23,15 +23,11 @@ Even if it is just available on the SCT Pro update site the headless code genera
 
 After clicking "Finish" the installation process will start. If the 'Install New Software...' wizard successfully finished, you have to restart your application. Afterwards you should have a look into the root folder of your installation directory.
 
-!images/docu_headless_distro.png(Installation Folder including Headless)!
+In the installation directory you will find the statechart compiler - _scc_ . 
 
-There you will find a new file called headless.ini which is needed for headless generator execution described in the following chapters.
-
-h2(#generating-state-machine-code-headless-execute). Executing the headless code generation
+h3(#generating-state-machine-code-headless-installation-check). Check the installation
 
 Once you have installed the headless code generation feature you might want to test if everything is working fine. To do so open a shell and go to the root folder (eclipse root directory) of your SCT installation. 
-
-h3(#generating-state-machine-code-headless-execute-test). A first call
 
 By typing in one of the following platform specific commands into the shell the headless application will be triggered. The '-h' parameter shows the integrated help information.
 
@@ -66,34 +62,81 @@ usage: -launcher.ini headless.ini [-d <path>] [-h] [-m <path>] [-s <path>]
                        model(s). If not set the runtime value of basedir is used.
  -s,--sgen <path>      Relative/absolute path to directory or file containing generator model(s). If not set the runtime
                        value of basedir is used.
-                          
-h3(#generating-state-machine-code-headless-execute-gen). Generating Code
+
+
+
+h2(#generating-state-machine-code-headless-execute). Generating code
 
 For this documentation we assume the following simple directory structure including SCT related files like generator models and statechart models.
 
 !images/docu_headless_directory_structure.png(Headless Directory Structure)!
+
+Within our sample the generator model _default.sgen_ contains the following content.
+
+bc. 
+GeneratorModel for yakindu::java {
+	statechart default {
+		feature Outlet {
+			targetProject = "project1"
+			targetFolder = "src-gen"
+		}
+	}
+}
+
+
+h3(#generating-state-machine-code-headless-execute-simple). Simple case
+
+The most simple way to invoke the code generator on the command line is to generate the code for a single project. A project directory contains a file called _.project_ . On the shell change to the projects directory e.g.
+
+bc. 
+cd [somepath]/basedir/project1
+
+
+Then simply invoke the statechart compiler without parameters.
+
+bc. 
+scc
+
+Please be aware to have scc on your path environment variable or specify the path in the call.
+
+bc. 
+--------------------------------------------------------
+YAKINDU Statechart Tools Headless Generator ((c) by itemis AG)
+	  Visit http://www.statecharts.org
+--------------------------------------------------------
+1 gen model(s) and 1 statechart(s) loaded.
+Generating 'default' to target project 'project' ...
+default done.
+Generated (1 of 1) gen model(s).
+
+The statechart compiler will invoke the code generator for all sgen files contained in the project directory. It will lookup these recursively. You'll find the generated code at the location specified in the sgen file: 
+
+bc. 
+[somepath]/basedir/[sgen.targetProject]/[sgen.targetFolder]
+
+                          
+                          
+h3(#generating-state-machine-code-headless-execute-using-parameters). Using parameters
+
 
 Open a shell within the root folder of your SCT installation and enter one of the following platform specific commands after replacing [pathToBasedir] with the concrete path of the base directory.
 
 Windows
 
 bc. 
-scc -d [pathToBasedir] -s project/default.sgen -m project/default.sct
+scc -d [pathToBasedir] -s project1/default.sgen -m project1/default.sct
 
 Linux
 
 bc. 
-./scc -d [pathToBasedir] -s project/default.sgen -m project/default.sct
+./scc -d [pathToBasedir] -s project1/default.sgen -m project1/default.sct
 
 Mac
 
 bc. 
 cd SCT.app/Contents/Eclipse/
-./scc -d [pathToBasedir] -s project/default.sgen -m project/default.sct
+./scc -d [pathToBasedir] -s project1/default.sgen -m project1/default.sct
 
-
-
-h4(#generating-state-machine-code-headless-execute-gen-output). Sample Output
 
 See the following output as a result of the command line call. 
 
@@ -107,21 +150,11 @@ Generating 'default' to target project 'project' ...
 default done.
 Generated (1 of 1) gen model(s).
 
-As you can see the headless code generation has properly executed. The generated code will be placed in a folder depending from the values configured within your generator model file. Within our sample the generator modepl contains the following content.
-
-bc. 
-GeneratorModel for yakindu::java {
-	statechart default {
-		feature Outlet {
-			targetProject = "project"
-			targetFolder = "src-gen"
-		}
-	}
-}
+As you can see the headless code generation has properly executed. The generated code will be placed in a folder depending from the values configured within your generator model file.
 
 So for our example this means the generated code can be found in 
 
-	**[basedir] / project / src-gen/...** 
+	**[basedir] / project1 / src-gen/...** 
 
  
 h3(#generating-state-machine-code-headless-sample-parameter). Parameter
