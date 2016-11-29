@@ -13,10 +13,10 @@ h2(#generating-state-machine-code-headless-installation). Installation
 
 The headless code generator comes as an OSGi application which can be installed into every eclipse installation.
 
-If you download the "Professional Edition":https://info.itemis.com/yakindu/statecharts/pro the headless code generation feature is already available and no further installation is required.
+If you download the "Professional Edition":https://info.itemis.com/yakindu/statecharts/pro the headless code generation feature is already included and no further installation is required.
 When you download the "Open Edition":https://info.itemis.com/download-yakindu-statechart-tools you can install the headless code generation feature from the SCT Pro update site.
 
-To do so open the 'Help > Install New Software...' wizard, open the "SCT Pro update site":https://info.itemis.com/yakindu/statecharts/pro and choose the "YAKINDU headless Code Generator" feature.
+To do so, "register as usual":https://info.itemis.com/yakindu/statecharts/pro, select "Download" and "Install from update site". You will obtain the URL of the update site. To use it, open the 'Help > Install New Software...' wizard, select "Add...", paste the URL and choose the "YAKINDU headless Code Generator" feature.
 Even if it is just available on the SCT Pro update site the headless code generation application is free to use for all users of YAKINDU Statechart Tools.
 
 !(standard-image)images/docu_headless_updatesite.png(Professional Edition Update Site)!
@@ -47,7 +47,7 @@ bc.
 cd SCT.app/Contents/Eclipse/
 ./scc -h
 
-If you can see the help contents similar to the following, the installation of the headless code generator was successful.
+If you can see the help contents similar to the following, the installation of the headless code generator was successful. If you don't, please refer to the section "Troubleshooting" below.
 
 bc. 
 --------------------------------------------------------
@@ -179,6 +179,34 @@ h4(#generating-state-machine-code-headless-sample-parameter-model). Model Files
 
 The parameter model (-m) can be used to select models (*.sct) more specifically. The value can be absolute or relative and can be a file or folder. 
 * If the value is relative the resulting folder during runtime would be calculated by the rule *[basedir]/[-m value]*
-* If a folder is given the generator application will search for all *.sct recursively 
+* If a folder is given the generator application will search for all *.sct recursively
+
+h2(#generating-state-machine-code-headless-troubleshooting). Troubleshooting
+
+If the call to _scc_ fails, here are some tips and fixes.
+
+h3(#generating-state-machine-code-headless-troubleshooting-error-executable). [ERROR] Neither 'SCT' nor 'eclipse' executable found!
+
+If you encounter this error message on linux, this means the _scc_ launcher was not able to locate a _SCT_ executable binary or one named _eclipse_. This would happen if the _scc_ launcher is not in the same directory as the executable. In a standalone installation of YAKINDU Statechart Tools, the executable is named _SCT_, and _eclipse_ when you are launching eclipse with the SCT plugins installed. The _scc_ launcher automatically checks which one does exist and launches the correct one.
+
+h3(#generating-state-machine-code-headless-troubleshooting-error-library). The Eclipse executable launcher was unable to locate its companion shared library
+
+This error message often happens when you use the SCT plugins in your normal eclipse installation, which you installed via the Eclipse Installer / Oomph. You will have to change one line in the _headless.ini_ to repair it.
+
+At first, open the _eclipse.ini_ (both in your normal eclipse directory where _scc_ resides as well) and search for the entry _--launcher.library_. Copy the path from the next line. It might look like this:
+
+bc. 
+--launcher.library
+/home/user/.p2/pool/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.400.v20160518-1444
+
+You'll find an entry like this in the _headless.ini_ as well, probably looking like this:
+
+bc. 
+--launcher.library
+plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.400.v20160518-1444
+
+Just replace the path in the _headless.ini_ with the one from _eclipse.ini_. After saving, _scc_ should work.
+
+
 
                                    
