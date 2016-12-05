@@ -31,17 +31,25 @@ p. The _[GeneratorId]_ represents the unique ID of the generator. Currently, the
 
 # @yakindu::java@ – Generator ID for the Java code generator 
 # @yakindu::c@ – Generator ID for the C code generator
+# @yakindu::cpp@ – Generator ID for the C++ code generator
 # @yakindu::generic@ – Generator ID for custom Java-based code generators  
 
 A single generator model can contain several _StatechartReferences_. These are cross references to statechart models for whom code is to be generated. For each reference, the generator process can be configured with _Feature_ zs. Each feature has one or more parameters. These parameters can be configured with _ParameterName_ @=@ _ParameterValue_.
  
-The generator model is executed by a so-called Eclipse builder. Thus, the artifacts are generated automatically if _Project → Build Automatically_ is checked. If you want to execute your Generator Model manually, select _Generate Statechart Artifacts_ from the _Package Explorer_'s context menu.
+h2(#running-a-generator). Running a generator
+
+Provided you have created the generator model, proceed as follows:
+# In the project explorer view, right-click on the @.sgen@ file containing the generator model. The context menu opens.
+# In the context menu, select _Generate Code Artifacts_.
+# The generator is executed.
+
+The source files the generator produces depend on the generator itself. The generators make use of their respective language and their features and best practices, i.&nbsp;e. the Java-generator generates a Java-Interface, and the C and the C++ generator generate header files. The _location_ of these source files can be changed with the generator model options explained in the following section.
+
+The generator model is executed by a so-called Eclipse builder. Thus, the artifacts are generated automatically if _Project → Build Automatically_ is checked. If you want or need to execute your Generator Model manually, select _Generate Statechart Artifacts_ from the _Package Explorer_'s context menu.
 
 h2(#configuring-a-generator). Configuring a generator
 
-All generators can be customized by a generator model. This is a textual model in a file, specifying generator features, i. e. the outlet path. The following screenshot shows a sample configuration for the Java code generator.
-
-To get started with the generator model, YAKINDU Statechart Tools includes a wizard that creates a basic configuration file with default values.
+As mentioned above, all generators can be set up and customized by a generator model. The following screenshot shows a sample configuration for the Java code generator.
 
 !(standard-image)images/docu_sGenEditor.png(SGen generator model with default values)!
 
@@ -49,10 +57,7 @@ p=. SGen generator model with default values
 
 ###. FIXME: Explain what a "builder" is!
 
-The generator model is associated with a builder. If _Project → Build Automatically_ is checked, the generator automatically creates its output files for each modification the user makes to the statechart model. The sections below explain the specific customizing features of the generator models.
-
 The following section describes the *Core Features* which are available for all code generators.
-
 
 ==<!-- Start sgen_feature_outlet -->==
 
@@ -107,6 +112,8 @@ The *FunctionInlining* feature enables the inlining of expressions instead of ge
 # _inlineExitRegion_ (Boolean, optional): inlines the expression for exit regions
 # _inlineEntries_ (Boolean, optional): inlines the expression for entries
 
+ALl parameters of the *FunctionInlining* feature are @false@ by default.
+
 bq.. *Example:*
 
 bc. feature FunctionInlining {
@@ -122,7 +129,7 @@ h3(#debug-feature). Debug feature
 
 The *Debug* feature dumps the execution model to the target folder as an XMI model. It is an *optional* feature and has the following parameter:
 
-# _dumpSexec_ (Boolean, required): dumps the execution model as XMI model
+# _dumpSexec_ (Boolean, required): dumps the execution model as XMI model (default: @false@)
 
 bq.. *Example:*
 
@@ -132,19 +139,22 @@ bc. feature Debug {
 
 ==<!-- End sgen_feature_debug -->==
 
-
-h2(#running-a-generator). Running a generator
-
-Before you can run a generator, you have to establish a generator model first. This is explained in section "Configuring a generator":#configuring-a-generator and in the sections describing specific generators.
-
-Provided you have created the generator model, proceed as follows:
-# In the project explorer view, right-click on the @.sgen@ file containing the generator model. The context menu opens.
-# In the context menu, select _Generate Code Artifacts_.
-# The generator is executed.
-
-Please note that depending on the generator you are using you don't always need to explicitly run the generator manually as described above. Instead an Eclipse builder will do that for you automatically whenever the associated statechart model is changed. However, if that doesn't work for one or the other reason, you can always execute the generator by hand.
-
 h2(#general-concepts-of-the-state-machine-code). General concepts of the state machine code
+
+h3(#cycle-based-execution). Cycle-based execution
+
+The generated state machine code implements a so-called _cycle-based execution scheme_. Each run cycle consists of two different phases:
+# In the first phase, incoming events are collected.
+# In the second phase, _runCycle()_ is executed.
+
+This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.&nbsp;g. something like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the IPO (input processing output) model.
+
+In other cases an event-driven approach might be more suitable. This can be implemented e.&nbsp;g. by directly calling _runCycle()_ as soon as a certain event occurs, like in:
+
+bc. sc_raiseEventA(handle);
+sc_runCycle(handle);
+
+More sophisticated approaches could care about buffering of events, managing an event queue, dealing with priority events, and so on. However, since this is out of the the generated code's scope, it is the client code's responsibility.
 
 h3(#responsibilities-of-generated-code). Responsibilities of generated code
 
@@ -170,20 +180,6 @@ All these things are out of the generated code's scope, since the code generator
 
 In order to have a better code generator support for specific usage patterns, you would have to implement corresponding code generator extensions.
 
-h3(#cycle-based-execution). Cycle-based execution
-
-The generated state machine code implements a so-called _cycle-based execution scheme_. Each run cycle consists of two different phases:
-# In the first phase, incoming events are collected.
-# In the second phase, _runCycle()_ is executed.
-
-This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.&nbsp;g. something like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the IPO (input processing output) model.
-
-In other cases an event-driven approach might be more suitable. This can be implemented e.&nbsp;g. by directly calling _runCycle()_ as soon as a certain event occurs, like in:
-
-bc. sc_raiseEventA(handle);
-sc_runCycle(handle);
-
-More sophisticated approaches could care about buffering of events, managing an event queue, dealing with priority events, and so on. However, since this is out of the the generated code's scope, it is the client code's responsibility.
 
 h3(#thread-safe-execution). Thread-safe execution
 
@@ -195,7 +191,44 @@ h1(#c-code-generator). C code generator
 
 h2(#c-generator-features). C generator features
 
-The C generator features are the same a the "C&#43;&#43; generator features":#cpp-generator-features.
+==<!-- Start sgen_feature_identifiersettings -->==
+
+h3(#cpp-identifiersettings-feature). IdentifierSettings feature
+
+The *IdentifierSettings* feature allows the configuration of module names and identifier character length:
+
+# _moduleName_ (String, optional): name for header and implementation, default: statechart name
+# _statemachinePrefix_ (Boolean, optional): prefix which is prepended to function, state, and type names.
+# _maxIdentifierLength_ (Integer, optional): maximum number of characters of an identifier, default: 31 characters, which is complying with the ANSI C99 standard.
+# _separator_ (String, optional): character to replace whitespace and otherwise illegal characters in manes.
+
+bq.. *Example:*
+
+bc. feature IdentifierSettings {
+    moduleName =  "MyStatechart"
+    statemachinePrefix =  "myStatechart"
+    maxIdentifierLength = 31
+    separator =  "_"
+}
+
+==<!-- End sgen_feature_identifiersettings -->==
+==<!-- Start sgen_feature_tracing -->==
+
+h3(#cpp-tracing-feature). Tracing feature
+
+The *Tracing* feature enables the generation of tracing callback functions:
+
+* _enterState_ (boolean, optional): specifies whether to generate a callback function that is used to notify about state entering events
+* _exitState_ (boolean, optional): specifies whether to generate a callback that is used to notify about state exiting events.
+
+bq.. *Example:*
+
+bc. feature Tracing {
+    enterState = true
+    exitState  = true
+}
+
+==<!-- End sgen_feature_tracing -->==
 
 h2(#c-specification-of-c-code). Specification of C code
 
@@ -457,13 +490,15 @@ For example, the getter of the @red@ variable of the @Pedestrian@ interface is n
 
 h3(#c-time-controlled-state-machines). Time-controlled state machines
 
-If a statechart uses timing functionality or external operations, an additional header file is generated. Its name matches the following pattern:
+If a statechart uses timing functionality or external operations or tracing is activated in the generator model, an additional header file is generated. Its name matches the following pattern:
 
 _statechart_name_@Required.h@
 
-This header file defines method hooks the client code has to implement externally.
+This header file declares methods the client code has to implement externally.
 
-The traffic light example uses timing funtionality, namely _after_ clauses. To support time-controlled behavior, the additional header file _TrafficLightRequired.h_ is generated.
+h4(#c-time-controlled-state-machines-example). Example
+
+The traffic light example uses timing functionality, namely _after_ clauses. To support time-controlled behavior, the additional header file _TrafficLightRequired.h_ is generated. Note the two functions @trafficLight_setTimer@ and @trafficLight_unsetTimer@.
 
 bc.. 
 
@@ -545,21 +580,21 @@ The state machine calls the method @trafficLight_setTimer(TrafficLight* handle, 
 
 h4(#c-method-raisetimeevent). Method raiseTimeEvent
 
-In order to notify the state machine about the occurence of a time event after a period of time has expired, the @raiseTimeEvent()@ method – defined in the header file of the state machine – is called on the state machine. In the case of the traffic light example it is named @trafficLight_raiseTimeEvent(const TrafficLight* handle, sc_eventid evid)@ (in file _TrafficLight.h_).
+In order to notify the state machine about the occurence of a time event after a period of time has expired, the @raiseTimeEvent()@ method – defined in the header file of the state machine – needs to be called on the state machine. In the case of the traffic light example it is named @trafficLight_raiseTimeEvent(const TrafficLight* handle, sc_eventid evid)@ (in file _TrafficLight.h_).
 
 The time event is recognized by the state machine and will be processed during the next run cycle.
 
-You can conclude that in order to process the time events raised by the timing service without too much latency, the runtime environment has to call the state machine's @runCycle()@ method as frequently as needed. Consider for example a time event which is raised by the timer service after 500 ms. However, if the runtime environment calls the state machine's @runCycle()@ method with a frequency of once per 1000 ms only, the event will quite likely not be processed at the correct points in time.
+You can conclude that in order to process the time events raised by the timing service without too much latency, the runtime environment has to call the state machine's @runCycle()@ method as frequently as needed. Consider for example a time event which is raised by the timer service after 500 ms. However, if the runtime environment calls the state machine's @runCycle()@ method only once per 1000 ms, the event will quite likely not be processed at the correct points in time.
 
 h3(#c-operation-callbacks). Operation callbacks
 
-YAKINDU Statechart Tools support client code operations that can be used by a state machine and are executed as as actions. These operations have to be implemented in order to make a statechart executable. The figure below shows a sample statechart using an operation:
+YAKINDU Statechart Tools support client code operations that can be used by a state machine and are executed as actions. These operations have to be implemented in order to make a statechart executable. The figure below shows a sample statechart using an operation:
 
 !(standard-image)images/docu_operationExample.png(Specifying an operation callback in the model)!
 
 p=. Specifying an operation callback in the model
 
-Let's have a look at the generated code:
+Let's have a look at the generated code in @DefaultSMRequired.h@:
 
 bc.. 
 
@@ -597,17 +632,15 @@ extern sc_integer defaultSMIfaceSample_myOperation(DefaultSM* handle, const sc_i
 
 #endif /* DEFAULTSMREQUIRED_H_ */
 
-p. An additional method @sc_integer defaultSMIfaceSample_myOperation(DefaultSM* handle, const sc_integer p1, const sc_boolean p2)@ has been generated. This method has to be implemented and linked with the generated code, so that the state machine can use it.
+p. An additional method declaration @sc_integer defaultSMIfaceSample_myOperation(DefaultSM* handle, const sc_integer p1, const sc_boolean p2)@ has been generated. This method has to be implemented and linked with the generated code, so that the state machine can use it.
 
 h3(#c-integrating-generated-code). Integrating generated code
 
-To get a clue how to integrate a generated C state machines with your project have a look at the @main.c@ file and its @main()@ method:
+To get a clue how to integrate a generated C state machines with your project have a look at this @main.c@ file and its @main()@ method (note the @trafficLight_setTimer@ and @trafficLight_unsetTimer@ implemented here as well):
 
 bc.. 
 #include "org_yakindu_sct_examples_c_trafficlight.h"
 
-#include
-#include
 #include "src-gen/sc_types.h"
 #include "src-gen/TrafficLight.h"
 #include "statemachine/TrafficLightTimer.h"
@@ -617,11 +650,11 @@ TrafficLightTimer *timer;
 
 int main(int argc, char *argv[]) {
     TrafficLight handle;
-    trafficLight_init(&amp;handle);
-    timer = new TrafficLightTimer(&amp;handle);
-    trafficLight_enter(&amp;handle);
+    trafficLight_init(&handle);
+    timer = new TrafficLightTimer(&handle);
+    trafficLight_enter(&handle);
     QApplication a(argc, argv);
-    TrafficLightRunner *runner = new TrafficLightRunner(&amp;handle, 100);
+    TrafficLightRunner *runner = new TrafficLightRunner(&handle, 100);
     org_yakindu_sct_examples_c_trafficlight w(0, runner);
     w.show();
     int ret = a.exec();
@@ -630,11 +663,11 @@ int main(int argc, char *argv[]) {
 
 void trafficLight_setTimer(const sc_eventid evid,
         const sc_integer time_ms, const sc_boolean periodic) {
-    timer-&gt;setTimer(evid, time_ms, periodic);
+    timer->setTimer(evid, time_ms, periodic);
 }
 
 void trafficLight_unsetTimer(const sc_eventid evid) {
-    timer-&gt;unsetTimer(evid);
+    timer->unsetTimer(evid);
 }
 
 p. First an instance of the statechart data structure is created and initialized by the @trafficLight_init(&handle)@ method. The next step instantiates the timer. The class @TrafficLightTimer@ represents an implementation of a timer service and uses the timer functionality of the Qt framework. The @TrafficLightRunner@ is a runtime service which executes a run-to-completion step of the state machine every 100 ms. The runner class and the GUI are wired in the class @org_yakindu_sct_examples_c_trafficlight@:
@@ -650,29 +683,29 @@ org_yakindu_sct_examples_c_trafficlight::org_yakindu_sct_examples_c_trafficlight
     crossing = new CrossingWidget(this);
 
     trafficLight = new TrafficLightWidget(crossing);
-    trafficLight-&gt;setGeometry(275, 75, 30, 90);
+    trafficLight->setGeometry(275, 75, 30, 90);
 
     pedestrianLight = new PedestrianLightWidget(crossing);
-    pedestrianLight-&gt;setGeometry(50, 10, 70, 20);
+    pedestrianLight->setGeometry(50, 10, 70, 20);
 
     connect(runner, SIGNAL(cycleDone(TrafficLight*)), this, SLOT(update(TrafficLight*)));
 
     pedestrianReq = new QPushButton("pedestrian request", this);
-    pedestrianReq-&gt;setGeometry(1, 365, 150, 30);
+    pedestrianReq->setGeometry(1, 365, 150, 30);
     connect(pedestrianReq, SIGNAL(released()), runner, SLOT(raisePedestrianRequest()));
 
 
     off = new QPushButton("off / on", this);
-    off-&gt;setGeometry(249, 365, 150, 30);
+    off->setGeometry(249, 365, 150, 30);
     connect(off, SIGNAL(released()), runner, SLOT(raiseOnOff()));
 }
 
 void org_yakindu_sct_examples_c_trafficlight::update(
         TrafficLight *handle) {
-    trafficLight-&gt;setSignals(handle-&gt;ifaceTrafficLight.red,
-            handle-&gt;ifaceTrafficLight.yellow, handle-&gt;ifaceTrafficLight.green);
-    pedestrianLight-&gt;setSignals(handle-&gt;ifacePedestrian.request,
-            handle-&gt;ifacePedestrian.red, handle-&gt;ifacePedestrian.green);
+    trafficLight->setSignals(handle-&gt;ifaceTrafficLight.red,
+            handle->ifaceTrafficLight.yellow, handle->ifaceTrafficLight.green);
+    pedestrianLight->setSignals(handle->ifacePedestrian.request,
+            handle->ifacePedestrian.red, handle->ifacePedestrian.green);
     QMainWindow::update();
 }
 
@@ -684,49 +717,13 @@ h1(#cpp-code-generator). C++ code generator
 
 h2(#cpp-generator-features). C++ generator features
 
-==<!-- Start sgen_feature_identifiersettings -->==
+The C++ generator features are the same a the "C generator features":#c-generator-features, plus one:
 
-h3(#cpp-identifiersettings-feature). IdentifierSettings feature
-
-The *IdentifierSettings* feature allows the configuration of module names and identifier character length:
-
-# _moduleName_ (String, optional): name for header and implementation, default: statechart name
-# _statemachinePrefix_ (Boolean, optional): prefix which is prepended to function, state, and type names.
-# _maxIdentifierLength_ (Integer, optional): maximum number of characters of an identifier, default: 31 characters, which is complying with the ANSI C99 standard.
-# _separator_ (String, optional): character to replace whitespace and otherwise illegal characters in manes.
-
-bq.. *Example:*
-
-bc. feature IdentifierSettings {
-    moduleName =  "MyStatechart"
-    statemachinePrefix =  "myStatechart"
-    maxIdentifierLength = 31
-    separator =  "_"
-}
-
-==<!-- End sgen_feature_identifiersettings -->==
-==<!-- Start sgen_feature_tracing -->==
-
-h3(#cpp-tracing-feature). Tracing feature
-
-The *Tracing* feature enables the generation of tracing callback functions:
-
-* _enterState_ (boolean, optional): specifies whether to generate a callback function that is used to notify about state entering events
-* _exitState_ (boolean, optional): specifies whether to generate a callback that is used to notify about state exiting events.
-
-bq.. *Example:*
-
-bc. feature Tracing {
-    enterState = true
-    exitState  = true
-}
-
-==<!-- End sgen_feature_tracing -->==
 ==<!-- Start sgen_feature_generatoroptions -->==
 
 h3(#cpp-generatoroptions-feature). GeneratorOptions feature
 
-The *GeneratorOptions* feature allows to change the behavior of the C&#43;&#43; generator:
+The *GeneratorOptions* feature allows to change the behavior of the C++ generator:
 
 # _innerFunctionVisibility_ (String, optional): This parameter is used to change the visibility of inner functions and variables. By default @private@ visibility is used. It can be changed to @protected@ to allow function overriding for a class which inherits from the generated state machine base class.
 # _staticOperationCallback_ (Boolean, optional): If this parameter is set to _true_, the callback function declaration for statechart operations is static and the functions are called statically by the state machine code.
@@ -739,7 +736,6 @@ bc. feature GeneratorOptions {
 }
 
 ==<!-- End sgen_feature_generatoroptions -->==
-
 
 h2(#cpp-specification-of-cpp-code). Specification of C++ code
 
@@ -1546,6 +1542,7 @@ You can conclude that in order to process time events without too much latency, 
 h3(#java-runtime-service). Runtime service
 
 The @RuntimeService@ class maintains all state machines that are expected to execute run-to-completion steps periodically. A client application can retrieve the @RuntimeService@ singleton using @RuntimeService.getInstance()@. It can then pause, resume or cancel all state machines that are poised to run at a specified intervall.
+Note: This is only available with the _RuntimeService_ parameter of *GeneralFeatures* set to @true@, see "Java: General Features":#java-GeneralFeatures. 
 
 h3(#java-accessing-interfaces-variables-and-events). Accessing interfaces, variables and events
 
