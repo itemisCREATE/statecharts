@@ -3,15 +3,15 @@ p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/
 
 h1(#the-statechart-language). The statechart language
 
-This chapter describes the language used to add behaviour to the statechart.
+This chapter describes the language used to add behavior to the statechart.
 
 h2(#the-statechart-language-basics). State machine basics
 
 h3(#the-statechart-language-basics-wording). Words and Definitions
 
-To prevent any confusion, some definitions:
+To prevent any confusion, some definitions should be made:
 
-* A *finite state machine* (FSM) is an abstract machine that consists of a finite set of states and its behaviour.
+* A *finite state machine* (FSM) is an abstract machine that consists of a finite set of states and its behavior.
 * A *state diagram* is one of many possible representations of the FSM. A state transition table would be another way to describe a FSM.
 * A *statechart* is an expanded form of the classic state diagram, but the principles are the same.
 
@@ -43,11 +43,11 @@ It adds the following things and possibilities:
 ** Composite states and regions that contain other states
 ** Orthogonal states that allow to run two nested state machines concurrently
 ** History states that allow to re-enter composite states and regions at the point where they were left
-** Actions and activities that include real-world-behaviour instead of only defining output symbols that trigger behaviour elsewhere
+** Actions and activities that include real-world-behavior instead of only defining output symbols that trigger behavior elsewhere
 
 Because Harel's statecharts are a super-set of classic Mealy / Moore machines, it is very much possible to model those in YAKINDU SCT as well.
 
-To define the behaviour in the statechart, YAKINDU SCT uses its own statechart language, explained in this chapter.
+To define the behavior in the statechart, YAKINDU SCT uses its own statechart language, explained in this chapter.
 
 p. 
 
@@ -76,7 +76,9 @@ Most objects defined in the definition section are _typed_. For example, a varia
 
 A type system or *domain* specifies which types are available. YAKINDU Statechart Tools has a built-in type system. %(pro-feature)The Professional Edition allows for additional domains to be installed.%
 
-h2(#graphical-elements). Graphical elements
+h2(#graphical-elements). Graphical elements of the statechart
+
+In this section, the diagram components are explained. The section "Behavior definition":#behavior-definition explains how to define the behavior of the statechart with YAKINDU SCT's statechart language.
 
 h3(#region). Region
 
@@ -86,12 +88,26 @@ As already mentioned, the YAKINDU statecharts are self-contained. They are organ
 
 p=. Parallel regions
 
-h3(#state). State
+h3(#state-graphical). State
 
 States are the central elements of a state machine. A state has to be placed inside a region and must have a name that is unique inside this region. During state machine execution, a state can be active or passive.
 
-A state can have a _behavior_. The behavior specifies which actions are executed. Such actions can be triggered by entering the state, leaving the state, occurrence of events, conditions becoming true, or time passing. The behavior specification is a text inside the state's box and consists of a sequence of so-called _local reactions_.
+A state can have a _behavior_. The behavior specifies which actions are executed. Such actions can be triggered by entering the state, leaving the state, occurrence of events, conditions becoming true, or time passing. The behavior specification is a text inside the state's box and consists of a sequence of so-called _local reactions_, see "State behavior":#state.
 
+h3(#transition-graphical). Transition
+
+A transition is the transfer of one state to another. A transition is diagrammed as an arrow leading from a _source state_ to a _target state_.
+
+A transition usually specifies a _transition reaction_. The transition reaction specifies what the conditions are for this transition to be taken and which actions, if any, are to be executed. The occurrence of an event, a condition becoming true, or time passing can trigger a transition. The transition reaction is attached to the transition's arrow as a text.
+
+p(#fig_transition-example). 
+!(standard-image)images/docu_transition_030_example_01.png(Transition example)!
+
+h2(#behavior-definition). Behavior of the statechart
+
+h3(#state). State
+
+The behavior of states is defined by _local reactions_.
 The state *Countdown* in the following example has three local reactions:
 
 p(#fig_state-example). 
@@ -127,9 +143,7 @@ p=. Local reaction syntax
 
 h3(#transition). Transition
 
-A transition is the transfer of one state to another. A transition is diagrammed as an arrow leading from a _source state_ to a _target state_.
-
-A transition usually specifies a _transition reaction_. The transition reaction specifies what the conditions are for this transition to be taken and which actions, if any, are to be executed. The occurrence of an event, a condition becoming true, or time passing can trigger a transition. The transition reaction is attached to the transition's arrow as a text and consists of the following:
+The transition behavior is attached to the transition's arrow as a text and consists of the following:
 
 * "_event specifications_":#event-specifications, specifying which event or events can trigger this transition,
 * a "_guard_":#guard-condition, specifying which condition(s) must be fulfilled to trigger this transition,
@@ -153,7 +167,7 @@ p=. Transition syntax overview
 
 h4(#transitions-without-transition-reaction). Transitions without transition reaction
 
-A transition should specify a transition reaction. However, it is legal to omit it, although the statechart editor will display a warning. The semantics of a missing transition reaction is that this transition is always taken. So you could just as well write @always@ at the transition, thus making things clear and avoiding the warning.
+A transition should specify a transition reaction. However, it is legal to omit it, although the statechart editor will display a warning. A transition without transition reaction is _never_ taken.
 
 h4(#entry-and-exit-points). Entry and exit points
 
