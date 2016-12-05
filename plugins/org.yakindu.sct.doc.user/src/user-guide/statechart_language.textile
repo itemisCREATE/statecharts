@@ -3,9 +3,55 @@ p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/
 
 h1(#the-statechart-language). The statechart language
 
-This chapter describes the statechart elements of the YAKINDU Statechart Tools (YAKINDU SCT) editor. The YAKINDU SCT meta model is the model of Finite State Machines (FSM) and Harel Statecharts. It is based on the view of a system that is defined by a finite number of states. The behavior of such a system is based on its active states. These states are determined by the history of the state machine. Very important are the theoretical models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (_entry_, _exit_). YAKINDU SCT can model both these types.
+This chapter describes the language used to add behaviour to the statechart.
 
-The YAKINDU SCT meta model is designed similar to the UML statechart meta model with the following differences:
+h2(#the-statechart-language-basics). State machine basics
+
+h3(#the-statechart-language-basics-wording). Words and Definitions
+
+To prevent any confusion, some definitions:
+
+* A *finite state machine* (FSM) is an abstract machine that consists of a finite set of states and its behaviour.
+* A *state diagram* is one of many possible representations of the FSM. A state transition table would be another way to describe a FSM.
+* A *statechart* is an expanded form of the classic state diagram, but the principles are the same.
+
+h3(#the-statechart-language-basics-theory). Automaton theory
+
+YAKINDU SCT was designed to create statecharts according to Harel's statechart theory, which is the base for the UML definition.
+Harel's statecharts are an expansion to the classic state diagrams, which describe finite state machines (FSM) and only consist of the following things:
+
+* A (finite) set of possible states
+* A set of transitions connecting states
+* A set of input symbols
+* A set of output symbols
+* An output function, defining the connection of all elements noted above.
+
+These parameters describe a finite state machine completely.
+In classic automata theory, two distinct types of finite state machines exist:
+
+* The Moore machine, where the output of the machine only depends on its current state
+* The Mealy machine, where the output of the machine depends on its current state and its input.
+
+It is possible to transform those types into each other, but the set of states, the transitions and the output functions needs to be changed to achieve this.
+
+Harel's statecharts expand these classic state diagrams, producing a representation that can't be described as easily and concise mathematically as the types above, but is much more readable and usable in day-to-day usage.
+
+It adds the following things and possibilities:
+
+* Input and output is possible everywhere
+* New elements are added:
+** Composite states and regions that contain other states
+** Orthogonal states that allow to run two nested state machines concurrently
+** History states that allow to re-enter composite states and regions at the point where they were left
+** Actions and activities that include real-world-behaviour instead of only defining output symbols that trigger behaviour elsewhere
+
+Because Harel's statecharts are a super-set of classic Mealy / Moore machines, it is very much possible to model those in YAKINDU SCT as well.
+
+To define the behaviour in the statechart, YAKINDU SCT uses its own statechart language, explained in this chapter.
+
+p. 
+
+For those who are familiar with UML Statecharts, some words about differences between those and the YAKINDU SCT model:
 
 * YAKINDU SCT statecharts are self-contained with interfaces defined by events and variables.
 * Core execution semantics are run cycle-driven, not event-driven.
@@ -17,8 +63,6 @@ The YAKINDU SCT meta model is designed similar to the UML statechart meta model 
 The model interpreter and different flavors of generated code are following these same core semantics.
 
 Please refer to the Wikipedia article "UML state machine":https://en.wikipedia.org/wiki/UML_state_machine for more details.
-
-A textual description language is used to declare and describe behaviors in a state machine. It is case sensitive.
 
 h2(#statechart). Statechart
 
