@@ -3,7 +3,7 @@ p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/
 
 h1(#the-statechart-language). The statechart language
 
-This chapter describes the language used to add behaviour to the statechart.
+This chapter describes the language used to add behavior to a statechart.
 
 h2(#the-statechart-language-basics). State machine basics
 
@@ -11,14 +11,14 @@ h3(#the-statechart-language-basics-wording). Words and Definitions
 
 To prevent any confusion, some definitions:
 
-* A *finite state machine* (FSM) is an abstract machine that consists of a finite set of states and its behaviour.
+* A *finite state machine* (FSM) is an abstract machine that consists of a finite set of states and its behavior.
 * A *state diagram* is one of many possible representations of the FSM. A state transition table would be another way to describe a FSM.
-* A *statechart* is an expanded form of the classic state diagram, but the principles are the same.
+* A *statechart* is an extended form of the classic state diagram, but the principles are the same. In this documentation, statechart can also refer to the state machine to improve the readability.
 
-h3(#the-statechart-language-basics-theory). Automaton theory
+h3(#the-statechart-language-basics-theory). Automata theory
 
 YAKINDU SCT was designed to create statecharts according to Harel's statechart theory, which is the base for the UML definition.
-Harel's statecharts are an expansion to the classic state diagrams, which describe finite state machines (FSM) and only consist of the following things:
+Harel's statecharts are an extension to the classic state diagrams, which describe finite state machines (FSM) and only consist of the following things:
 
 * A (finite) set of possible states
 * A set of transitions connecting states
@@ -32,22 +32,23 @@ In classic automata theory, two distinct types of finite state machines exist:
 * The Moore machine, where the output of the machine only depends on its current state
 * The Mealy machine, where the output of the machine depends on its current state and its input.
 
-It is possible to transform those types into each other, but the set of states, the transitions and the output functions needs to be changed to achieve this.
+It is possible to transform those types into each other, but the set of states, the transitions and the output functions need to be changed to achieve this.
 
-Harel's statecharts expand these classic state diagrams, producing a representation that can't be described as easily and concise mathematically as the types above, but is much more readable and usable in day-to-day usage.
+Harel's statecharts extend these classic state diagrams, producing a representation that can't be described as easily and  mathematically concise as the types above, but is much more readable and usable in day-to-day usage.
 
-It adds the following things and possibilities:
+It adds the following elements and possibilities:
 
-* Input and output is possible everywhere
+* Input and output is possible everywhere (states and transitions)
 * New elements are added:
 ** Composite states and regions that contain other states
-** Orthogonal states that allow to run two nested state machines concurrently
+** Orthogonal states that allow to run two nested state machines virtually concurrently
 ** History states that allow to re-enter composite states and regions at the point where they were left
-** Actions and activities that include real-world-behaviour instead of only defining output symbols that trigger behaviour elsewhere
+** Actions and activities (operations) that include real-world-behavior instead of only defining output symbols that trigger behavior elsewhere
+* Variables and events are introduced, giving the machine an "inner memory". In classic state diagrams, the currently active state is the only state the machine has. Other than that, it is memoryless.
 
 Because Harel's statecharts are a super-set of classic Mealy / Moore machines, it is very much possible to model those in YAKINDU SCT as well.
 
-To define the behaviour in the statechart, YAKINDU SCT uses its own statechart language, explained in this chapter.
+To define the behavior in the statechart, YAKINDU SCT uses its own statechart language, explained in this chapter.
 
 p. 
 
@@ -80,13 +81,63 @@ h2(#definition-section). The definition section
 
 The definition section is a text area. Per default, it is located to the left of the drawing area. It is a graphical element which you can move, resize, and so on like all other elements in the drawing area.
 
-You need to declare everything you want to use in your statechart inside of the definition section. This includes "variables":#variables, "events":#events and "operations":#operations. Variables and events have to be declared inside of an "interface":#interface-scope, which can be an "internal interface":#internal-scope.
+You need to declare everything you want to use in your statechart inside of the definition section. This includes "variables":#variables, "events":#events and "operations":#operations. Variables and events have to be declared inside of an "interface":#interface-scope, which can be an "internal interface":#internal-scope. Especially useful for larger features is the possibility to use "namespaces":#namespace. All these elements are properly reflected in the generated code as much as the language supports it.
+
+h3(#scopes). Scopes
+
+==<!-- Start stext_keyword_namespace -->==
+
+h4(#namespace). Namespace
+
+The language allows to define unique namespaces which can be used to qualify references to the statechart.
+
+bc. namespace trafficlights
+
+==<!-- End stext_keyword_namespace -->==
+==<!-- Start stext_keyword_interface -->==
+
+h4(#interface-scope). Interface scope
+
+Declarations in the interface scope are externally visible. They can be shared within the environment.
+
+bc. 
+interface NamedInterface:
+  in event event1
+  out event event3 : integer
+  var variable1 : integer
+
+It is also possible have one unnamed interface, which is externally visible as well:
+
+bc. 
+interface:
+  in event event1
+
+It behaves exactly the same as a named interface.
+
+==<!-- End stext_keyword_interface -->==
+==<!-- Start stext_keyword_internal -->==
+
+h4(#internal-scope). Internal scope
+
+Declarations made in an internal scope are visible to the statechart only. You are not meant to access them from your code.
+
+bc. internal:
+  var localVariable1: integer
+  event localEvent: integer
+  operation localOperation (int1 : integer, int2 : integer): integer
+  localEvent2 / raise NamedInterface.event3 :
+  localOperation(valueof(localEvent) , NamedInterface.variable1)
+
+==<!-- End stext_keyword_internal -->==
+
 
 h3(#variables). Variables
 
-Variables can have different visibilities. They can be visible for the environment:
+Variables need to be declared inside of an "internal":#internal-scope or "external":#interface-scope interface. Variables inside of an internal scope are not visible for the code outside the statechart.
 
 bc. var variable1: real
+
+Variables are always typed, see "types":#types.
 
 
 Variables can be _readonly_ (constants):
@@ -112,29 +163,41 @@ bc. const variable1: real
 
 h3(#events). Events
 
-An _event_ is something of importance that happens at a certain point in time in the context of a state machine, for example a user pushes a button, a temperature sensor delivers a value, a period of time has passed, etc. An event is not necessarily something external; the state machine can raise events itself.
+An _event_ is something of importance that happens at a certain point in time in the context of a state machine, for example a user pushes a button, a temperature sensor delivers a value, a period of time has passed, etc. An event can be of three basic types: 
+
+* Internal events are meant to be raised and processed by the statemachine.
+* External events (in an "interface scope":#interface-scope ) can be incoming or outgoing, so they are either raised by the environment and processed by the statechart or they are raised in the statechart and can be processed outside.
 
 h4(#incoming-and-outgoing-events). Incoming and outgoing events
 
 An event in an interface scope has a direction. It is either incoming or outgoing:
 
-bc. interface NamedInterface:
-in event event1
-out event event2
+bc. 
+interface NamedInterface:
+  in event event1
+  out event event2
+  
+Events in the internal scope do not have a direction, because they do not leave the statechart:
+
+bc. 
+internal:
+  event ev1
 
 
 h4(#events-with-variables). Events with variables
 
 Events can be typed and carry a value:
 
-bc. internal:
-event event1 : integer
+bc. 
+internal:
+  event event1 : integer
 
 
 An event can have a value assignment:
 
-bc. internal:
-event event1: integer = 25
+bc. 
+internal:
+  event event1: integer = 25
 
 
 Read access to the value of an event is possible in the statechart using the @valueof()@ built-in method. Please note that reading an event's value is possible only when the event actually occurs, for example in a guard:
@@ -156,9 +219,9 @@ p.
 
 h3(#operations). Operations
 
-Operations can have none, one or multiple parameters. A parameter is declared with a name and a type. An operation may have a single return type similar to Java.
+Operations can have none, one or multiple parameters. A parameter is declared with a name and a type. An operation may have a single return type similar to all standard programming languages. Again, see "types":#types for details.
 
-bc. operation localOperation (xValue : integer, yValue : integer):integer
+bc. operation myOperation (xValue: integer, yValue: integer): integer
 
 ==<!-- End stext_keyword_operation -->==
 
@@ -168,7 +231,7 @@ h2(#graphical-elements). Statechart elements
 
 h3(#region). Region
 
-As already mentioned, the YAKINDU statecharts are self-contained. They are organized in regions. Due to this it is possible to organize multiple state machines in different regions and to run them concurrently.
+As already mentioned, the YAKINDU statecharts are self-contained. They are organized in regions. Due to this it is possible to organize multiple state machines in different regions and to run them virtually concurrently.
 
 !(standard-image)images/docu_parallelRegions.jpg(Parallel regions)!
 
@@ -679,46 +742,6 @@ h3(#unary-arithmetic-operators). Unary arithmetic operators
 |<. positive|<. @+@|
 |<. negative|<. @-@|
 |<. complement|<. @~@|
-
-h2(#scopes). Scopes
-
-==<!-- Start stext_keyword_namespace -->==
-
-h3(#namespace). Namespace
-
-The language allows to define unique namespaces which can be used to qualify references to the statechart.
-
-bc. namespace trafficlights
-
-==<!-- End stext_keyword_namespace -->==
-==<!-- Start stext_keyword_interface -->==
-
-h3(#interface-scope). Interface scope
-
-Declarations in the interface scope are externally visible. They can be shared within the environment.
-
-bc. interface NamedInterface:
-in event event1
-out event event3 : integer
-var variable1 : integer
-
-==<!-- End stext_keyword_interface -->==
-==<!-- Start stext_keyword_internal -->==
-
-h3(#internal-scope). Internal scope
-
-Declarations made in an internal scope are visible to contained states only.
-
-bc. internal:
-var localVariable1: integer
-event localEvent: integer
-local event localEvent2
-operation localOperation (int1 : integer, int2 : integer): integer
-localEvent2 / raise NamedInterface.event3 :
-localOperation(valueof(localEvent) , NamedInterface.variable1)
-
-==<!-- End stext_keyword_internal -->==
-
 
 h2(#declarations). Declarations
 
