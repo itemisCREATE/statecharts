@@ -69,7 +69,7 @@ h2(#statechart). Statechart
 
 A statechart or statechart model consists of several components.
 
-The most important part is the *state diagram*, comprising "states":#state and "transitions":#transition. They are organized into zero or more "regions":#region. For hints how to use the graphical editor to change the statechart, see the chapter "Editing statecharts".
+The most important part is the *state diagram*, comprising "states":#state and "transitions":#transition. They are organized into zero or more "regions":#region. For hints how to use the graphical editor to modify the statechart, see the chapter "Editing statecharts".
 
 The *definition section* is a textual statechart component. It contains definitions of "namespaces":#namespace, "interfaces":#interface-scope, "variables":#variables, events, operations, etc.
 
@@ -517,11 +517,13 @@ bc. Trigger [Guard] / Effect
 
 The possible values for the trigger depend on the context, either a state or a transition.
 
-All three components are grammatically optional, though a reaction with no trigger or guard will never happen. Reactions with no effect are useful for transitions, the slash @/@ can be ommitted as well then.
+All three components are grammatically optional, though a reaction with no trigger or guard will never happen. Reactions with no effect are useful for transitions, the slash @/@ can be omitted as well then.
 
 h3(#event-specifications). Trigger specifications
 
 Reactions can define a _trigger_ that needs to happen to activate the reaction. "Events":#events are possible triggers, as well as certain keywords defined in the statechart language.
+
+Triggers can be combined with "_guards_":#guard-condition to further define the execution conditions of the reaction. In that case, the reaction is only executed when both the trigger fires and the guard is true.
 
 You can define multiple triggers for the reaction: @trigger1, trigger2@. When at least one of them occurs, the reaction's trigger fires.
 
@@ -645,23 +647,17 @@ bq. *Please note:* A self-transition, leading from a state back to itself, actua
 
 h3(#guard-condition). Guard condition
 
-A _guard_ applies an additional condition for a "transition":#transition to fire or a "local reaction":#local-reactions to be executed. It is not sufficient for a specified event to occur, the guard condition must be fulfilled, too. It is written in square brackets following the "event specifications":#event-specifications. You can specify a guard condition without any event specification. In this case the behavior of the transition or the local reaction is as if the @always@ event had been specified. That is, the transition or local reaction are always executed, as long as the guard condition evaluates to _true_.
+A _guard_ is another option to specify when a reaction should be executed. They can be used on their own or in conjunction with a specified "_trigger_":#event-specifications. In the latter case, the trigger needs to be fired _and_ the guard needs to be true for the reaction to fire its effect.
 
-The following examples assume the _x_ is an integer variable and _isOpen_ is an operation.
+As a reminder, the complete reaction syntax is as follows:
 
-|_. Transition specification: |_. Prerequisites for the transition to fire: |
-{vertical-align: top}. |{width: 37ex}  @ev [x == 3]@ | Event _ev_ occured and _x_ holds the value 3. |
-{vertical-align: top}. | @ev_1, ev_2 [x == 3]@ | At least one of the events _ev_1_ and _ev_2_ occured and _x_ holds the value 3. |
-{vertical-align: top}. | @after 3s, ev [x == 3 && isOpen(7)]@ | Three seconds have passed or event _ev_ occurred, whatever happens first. Additionally, _x_ holds the value 3 and _isOpen(7)_ returns _true_. |
-{vertical-align: top}. | @exit [isCanceled]@ | The active state is about to get passivated and the boolean variable _isCanceled_ is _true_. |
+bc. 
+Trigger [Guard] / Effect
 
-p. 
+In the square brackets you can use any "expression":#expressions that evaluates to a boolean - boolean variables, all kinds of comparisons and operations that return a boolean fall into this category. Please note: YAKINDU SCT does not support the concept of "truthy and falsey" seen in C, Javascript or Python. 
+@[x]@ is not a valid guard condition unless the type of x is boolean.
 
-Please note that the guard condition applies to the whole event trigger, not just to the event specification left from it. That is, the guard condition must be fulfilled regardless of which of the events occured. You might think of the event specifications being enclosed in parentheses, like @(ev_1, ev_2) [x == 3]@, although it would be illegal to actually write these parentheses.
-
-It is not possible to have event-specific guards as in (the illegal) @ev_1 [x == 1], ev_2 [x == 2]@. If you need something like this, use multiple transitions or multiple local reactions with @ev_1 [x == 1]@ on one of them and @ev_2 [x == 2]@ on the other.
-
-Please consult figure "&quot;Guard condition syntax overview&quot;":#fig_guard-condition-syntax-overview to find out how a guard condition syntactically fits into a reaction trigger.
+Please consult figure "&quot;Guard condition syntax overview&quot;":#fig_guard-condition-syntax-overview to find out how a guard condition syntactically fits into a reaction.
 
 p(#fig_guard-condition-syntax-overview). 
 !(standard-image)images/docu_grammar_030_guard-condition-overview.png(Guard condition syntax overview)!
