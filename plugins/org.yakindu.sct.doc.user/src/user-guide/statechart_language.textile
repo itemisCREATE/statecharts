@@ -105,6 +105,8 @@ interface NamedInterface:
   in event event1
   out event event3 : integer
   var variable1 : integer
+  
+Note: All elements defined inside of a named interface _must_ be referenced using that interface's name, such as @NamedInterface.event1@, @NamedInterface.event3@, and @NamedInterface.variable1@.
 
 It is also possible have one unnamed interface, which is externally visible as well:
 
@@ -137,6 +139,8 @@ Variables need to be declared inside of an "internal":#internal-scope or "extern
 
 bc. var variable1: real
 
+Variables that are defined inside of a named interface need to be referenced using the interface name, see "interfaces":#interface-scope.
+
 Variables are always typed, see "types":#types.
 
 
@@ -167,6 +171,10 @@ An _event_ is something of importance that happens at a certain point in time in
 
 * Internal events are meant to be raised and processed by the statemachine.
 * External events (in an "interface scope":#interface-scope ) can be incoming or outgoing, so they are either raised by the environment and processed by the statechart or they are raised in the statechart and can be processed outside.
+
+Events that are defined inside of a named interface need to be referenced using the interface name, see "interfaces":#interface-scope.
+
+Events can be processed in triggers, see "Trigger specification":#event-specifications. For raising events from the statechart, see "raising an event":#raising-an-event, and for details concerning the processing of events see "raising and processing an event":#raising-and-processing-an-event.
 
 h4(#incoming-and-outgoing-events). Incoming and outgoing events
 
@@ -212,7 +220,7 @@ bc. raise event1 : 3+3
 
 p. 
 
-###. FIXME: Explain how and where an event can be raised!
+For the syntax of event raising, see "Raising an event":#raising-an-event. For the more complicated details of processing an event, see "Raising and processing an event":#raising-and-processing-an-event.
 
 ==<!-- End stext_keyword_event -->==
 ==<!-- Start stext_keyword_operation -->==
@@ -691,6 +699,9 @@ Example: When a transition or local reaction specified as @ev1 [x > 3] / x += 1;
 
 h4(#raising-and-processing-an-event). Raising and processing an event
 
+For the syntax of event raising, see "Raising an event":#raising-an-event.
+For the syntax of event declaration, see "Events":#events.
+
 When a reaction raises an event, please consider two important points:
 * The event exists in the current run-to-completion step (RTC) only and thus can be dealt with during the rest of that particular RTC only.
 * Orthogonal regions are executed sequentially and in a deterministic order.
@@ -736,27 +747,6 @@ The language has a small integrated type system consisting of the following simp
 * string
 * void
 
-h3(#declaring-variables). Declaring variables
-
-Variables are typed. A variable is declared specifying its type:
-
-bc. var intVar : integer
-var realVar : real
-var boolVar : boolean
-var stringVar : string
-
-
-h3(#declaring-events). Declaring events
-
-Events are typed. An event is declared specifying its type:
-
-bc. event addInt : integer
-event addReal : real
-event checkValidity : boolean
-event stringEvent : string
-event voidEvent : void
-
-
 h2(#statements). Statements
 
 A statement is one of three kinds:
@@ -784,7 +774,9 @@ interface intrfc:
 Usage in the statechart:
 
 bc. 
-always / raise intrfc.ev 
+always / raise intrfc.ev
+
+See also "Declaring events":#events and "Processing events":#raising-and-processing-an-event.
 
 h3(#calling-an-operation). Calling an operation
 
