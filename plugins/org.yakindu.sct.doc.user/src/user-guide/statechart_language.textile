@@ -251,40 +251,14 @@ h3(#state). State
 
 States are the central elements of a state machine. A state has to be placed inside a region and must have a name that is unique inside this region. During state machine execution, a state can be active or passive.
 
-A state can have a _behavior_. The behavior specifies which actions are executed. Such actions can be triggered by entering the state, leaving the state, occurrence of events, conditions becoming true, or time passing. The behavior specification is a text inside the state's box and consists of a sequence of so-called _local reactions_.
+A state can have a _behavior_. The behavior specifies which actions are executed. Such actions can be triggered by entering the state, leaving the state, occurrence of events, conditions becoming true, or time passing. The behavior specification is a text inside the state's box and consists of a sequence of so-called "_local reactions_":#reactions. 
 
 The state *Countdown* in the following example has three local reactions:
 
 p(#fig_state-example). 
 !(standard-image)images/docu_state_010_example_01.png(State example)!
 
-p=. State example: A simple state machine to launch a rocket. When the *Countdown* state is entered, it sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ cares for audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the *Countdown* state will become inactive and launches the rocket upon exiting. The countdown can be aborted anytime before launch by a _cancel_ event. (See figure "&quot;Transition example&quot;":#fig_transition-example for a different state machine which solves the same task but puts more emphasis on transitions.)
-
-Figure "&quot;State behavior syntax overview&quot;":#fig_state-syntax-overview shows how the syntax of a state's behavior is defined. It consists of an arbitrary number of _local reactions_, where each local reaction essentially consists of a _reaction trigger_ and a _reaction effect_.
-
-p(#fig_state-syntax-overview). 
-!(standard-image)images/docu_grammar_030_state-overview.png(State behavior syntax overview)!
-
-p=. State behavior syntax overview
-
-h4(#local-reactions). Local reactions
-
-If an "event":#events occurs, it may trigger a so-called _local reaction_ in the active state. It is executed completely inside the active state without leaving it, thus the word "local". The UML calls local reactions "internal transitions".
-
-Each local reaction consists of three parts, as shown by figure "&quot;Local reaction syntax&quot;":#fig_local-reaction-syntax.
-
-p(#fig_local-reaction-syntax). 
-!(standard-image)images/docu_grammar_030_state-localreaction.png(Local reaction syntax)!
-
-p=. Local reaction syntax
-
-* The _reaction trigger_. It specifies the conditions that have to be fulfilled for the local reaction to be executed. It consists of one or more "_event specifications_":#event-specifications and a "_guard condition_":#guard-condition. One of these, i.&nbsp;e. either event specification(s) or guard condition, may be omitted, but not both.
-** The "event specifications":#event-specifications determine which events, separated by comma, will trigger this particular local reaction. Occurrence of one of these events is sufficient. Special events are @entry@ and @exit@, which will trigger when the state is about to become active or just became inactive, respectively. For more on "event specifications":#event-specifications, see section "&quot;Event specifications&quot;":#event-specifications.
-** The "guard condition":#guard-condition must be fulfilled for the local reaction to be triggered. It is a boolean expression, enclosed in square brackets. For more on "guard conditions":#guard-condition, see section "&quot;Guard condition&quot;":#guard-condition.
-** If no event specification is given, this is equivalent to the @always@ event specification being specified. That is, the local reaction is always triggered as long as the guard condition evaluates to _true_.
-** If the guard condition is omitted, this is equivalent to the @[true]@ guard condition being specified.
-* The @/@ character.
-* The "_reaction effect_":#reaction-effect. It specifies one or more actions that will be executed if the local reaction is triggered. For more on "reaction effects":#reaction-effect, see section "&quot;Reaction effect&quot;":#reaction-effect.
+p=. State example: A simple state machine to launch a rocket. When the *Countdown* state is entered, it sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ provides audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the *Countdown* state will become inactive and launches the rocket upon exiting. The countdown can be aborted anytime before launch by a _cancel_ event. (See figure "&quot;Transition example&quot;":#fig_transition-example for a different state machine which solves the same task but puts more emphasis on transitions.)
 
 h3(#transition). Transition
 
@@ -682,7 +656,6 @@ Trigger [Guard] / Effect
 This means that the effect will only be executed when the trigger fires or does not exist _and_ the guard condition evaluates to true or does not exist _and_ at least a trigger or a guard exist. See the sections about "triggers":#event-specifications and "guard conditions":#guard-condition.
 
 Normally, actions are "statements":#statements. Note that you can also use the "conditional expression":#conditional-expression to make some constructs more elegant.
-
 
 If an effect shall consist of multiple actions, they need to be _separated_ by a semicolon @;@. That means the last action is _not_ followed by a semicolon: @Trigger [Guard] / action1; action2; action3@
 
