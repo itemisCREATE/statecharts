@@ -72,7 +72,7 @@ class GenmodelEntries {
 		if (basePackageParameter != null) {
 			return basePackageParameter.stringValue
 		}
-		return "org.yakindu.scr"
+		return "org.yakindu.sct"
 	}
 
 	def getImplementationSuffix(GeneratorEntry it, ExecutionFlow flow) {
