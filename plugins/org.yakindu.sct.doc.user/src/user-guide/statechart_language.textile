@@ -68,15 +68,103 @@ h2(#statechart). Statechart
 
 A statechart or statechart model consists of several components.
 
-The most important part is the *state diagram*, comprising "states":#state and "transitions":#transition. They are organized into zero or more "regions":#region.
+The most important part is the *state diagram*, comprising "states":#state and "transitions":#transition. They are organized into zero or more "regions":#region. For hints how to use the graphical editor to change the statechart, see the chapter "Editing statecharts".
 
-The *definition sections* is a textual statechart component. It contains definitions of namespaces, interfaces, variables, events, operations, etc.
+The *definition section* is a textual statechart component. It contains definitions of "namespaces":#namespace, "interfaces":#interface-scope, "variables":#variables, events, operations, etc.
 
-Most objects defined in the definition section are _typed_. For example, a variable could be of type _integer_. As another example, the type of an operation is by defined by the number and types of its parameters and its return type, if any.
+Most objects defined in the definition section are _typed_. For example, a variable could be of type _integer_. As another example, the type of an operation is by defined by its return type, if any. Events can be typed as well. For details, see "the section about types":#types.
 
 A type system or *domain* specifies which types are available. YAKINDU Statechart Tools has a built-in type system. %(pro-feature)The Professional Edition allows for additional domains to be installed.%
 
-h2(#graphical-elements). Graphical elements
+h2(#definition-section). The definition section
+
+The definition section is a text area. Per default, it is located to the left of the drawing area. It is a graphical element which you can move, resize, and so on like all other elements in the drawing area.
+
+You need to declare everything you want to use in your statechart inside of the definition section. This includes "variables":#variables, "events":#events and "operations":#operations. Variables and events have to be declared inside of an "interface":#interface-scope, which can be an "internal interface":#internal-scope.
+
+h3(#variables). Variables
+
+Variables can have different visibilities. They can be visible for the environment:
+
+bc. var variable1: real
+
+
+Variables can be _readonly_ (constants):
+
+bc. var readonly pi: real = 3.1415
+
+
+Variables can be referenced by the environment.
+
+bc. var external variable3: integer = 34
+
+==<!-- End stext_keyword_var -->==
+==<!-- Start stext_keyword_const -->==
+
+h3(#constants). Constants
+
+Variables can be immutable. For this special variable the keyword @const@ is used:
+
+bc. const variable1: real
+
+==<!-- End stext_keyword_const -->==
+==<!-- Start stext_keyword_event -->==
+
+h3(#events). Events
+
+An _event_ is something of importance that happens at a certain point in time in the context of a state machine, for example a user pushes a button, a temperature sensor delivers a value, a period of time has passed, etc. An event is not necessarily something external; the state machine can raise events itself.
+
+h4(#incoming-and-outgoing-events). Incoming and outgoing events
+
+An event in an interface scope has a direction. It is either incoming or outgoing:
+
+bc. interface NamedInterface:
+in event event1
+out event event2
+
+
+h4(#events-with-variables). Events with variables
+
+Events can be typed and carry a value:
+
+bc. internal:
+event event1 : integer
+
+
+An event can have a value assignment:
+
+bc. internal:
+event event1: integer = 25
+
+
+Read access to the value of an event is possible in the statechart using the @valueof()@ built-in method. Please note that reading an event's value is possible only when the event actually occurs, for example in a guard:
+
+bc. event1 [valueof(event1) == 6]
+
+
+An event parameter can be specified when raising an event, as in the following example:
+
+bc. raise event1 : 3+3
+
+
+p. 
+
+###. FIXME: Explain how and where an event can be raised!
+
+==<!-- End stext_keyword_event -->==
+==<!-- Start stext_keyword_operation -->==
+
+h3(#operations). Operations
+
+Operations can have none, one or multiple parameters. A parameter is declared with a name and a type. An operation may have a single return type similar to Java.
+
+bc. operation localOperation (xValue : integer, yValue : integer):integer
+
+==<!-- End stext_keyword_operation -->==
+
+
+
+h2(#graphical-elements). Statechart elements
 
 h3(#region). Region
 
@@ -85,6 +173,8 @@ As already mentioned, the YAKINDU statecharts are self-contained. They are organ
 !(standard-image)images/docu_parallelRegions.jpg(Parallel regions)!
 
 p=. Parallel regions
+
+Regions can contain "states":#state. Regions can be contained in states as well, turning them into "composite states":#composite-state.
 
 h3(#state). State
 
@@ -302,7 +392,7 @@ h3(#entry). Entry
 
 When a state machine starts or when the control flow enters a "region":#region, an _entry_ defines which state is to be activated first. The flow passes through the state machine's or the region's entry and transitions to the target state the entry's transition is pointing to. This state becomes active.
 
-An entry has a single outgoing transistion and no incoming ones. Its outgoing transition has neither a trigger nor a guard condition.
+An entry has a single outgoing transition and no incoming ones. Its outgoing transition has neither a trigger nor a guard condition.
 
 An entry is depicted as a filled circle, see figure "&quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
 
@@ -632,93 +722,7 @@ localOperation(valueof(localEvent) , NamedInterface.variable1)
 
 h2(#declarations). Declarations
 
-Within scopes, variables, constants, events, variables, operations, and local reactions can be declared.
-
-
-==<!-- Start stext_keyword_var -->==
-
-h3(#variables). Variables
-
-Variables can have different visibilities. They can be visible for the environment:
-
-bc. var variable1: real
-
-
-Variables can be _readonly_ (constants):
-
-bc. var readonly pi: real = 3.1415
-
-
-Variables can be referenced by the environment.
-
-bc. var external variable3: integer = 34
-
-==<!-- End stext_keyword_var -->==
-==<!-- Start stext_keyword_const -->==
-
-h3(#constants). Constants
-
-Variables can be immutable. For this special variable the keyword @const@ is used:
-
-bc. const variable1: real
-
-==<!-- End stext_keyword_const -->==
-==<!-- Start stext_keyword_event -->==
-
-h3(#events). Events
-
-An _event_ is something of importance that happens at a certain point in time in the context of a state machine, for example a user pushes a button, a temperature sensor delivers a value, a period of time has passed, etc. An event is not necessarily something external; the state machine can raise events itself.
-
-h4(#incoming-and-outgoing-events). Incoming and outgoing events
-
-An event in an interface scope has a direction. It is either ingoing or outgoing:
-
-bc. interface NamedInterface:
-in event event1
-out event event2
-
-
-h4(#events-with-variables). Events with variables
-
-An event in the local scope can carry variables:
-
-bc. internal:
-event localEvent1 : integer
-
-
-A local event can have a value assignment:
-
-bc. internal:
-event localEvent1: integer = 25
-
-
-Read access to the value of an event is possible in the statechart using the @valueof()@ built-in method. Please note that reading an event's value is possible only when the event actually occurs, for example in a guard:
-
-bc. localEvent1 [valueof(localEvent1) == 6]
-
-
-An event parameter can be specified when raising an event, as in the following example:
-
-bc. raise event1 : 3+3
-
-
-p. 
-
-###. FIXME: Explain how and where an event can be raised!
-
-==<!-- End stext_keyword_event -->==
-==<!-- Start stext_keyword_operation -->==
-
-h3(#operations). Operations
-
-Operations can have none, one or multiple parameters. A parameter is declared with a name and a type. An operation may have a single return type similar to Java.
-
-bc. operation localOperation (xValue : integer, yValue : integer):integer
-
-==<!-- End stext_keyword_operation -->==
-
-
-h3(#declaring-local-reactions). Declaring local reactions
+h3(#declaring-local-reactions1). Declaring local reactions
 
 Local reactions describe the internal behavior of a state. So they have internal scope. A local reaction is declared as follows:
 
