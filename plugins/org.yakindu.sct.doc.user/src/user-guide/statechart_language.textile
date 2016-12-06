@@ -334,123 +334,6 @@ p=. Transition priorities &#91;2]
 
 To change priorities, select a transition in the _Properties_ view and click on the _up_ or _down_ button as appropriate.
 
-h3(#event-specifications). Event specifications
-
-When an "event":#events occurs, it may impact transitions and states:
-* The event may trigger "transitions":#transition to "fire". The transition's source state, which is the currently active state, becomes inactive, control is transferred along the transition's arrow to the transition's target state, and that state becomes active. See section "&quot;Transition&quot;":#transition for more details.
-* The event may cause "local reactions":#local-reactions within active states to be executed. See section "&quot;State&quot;":#state for more details.
-
-For a transition as well as for a state's local reaction you can specify events that should trigger the transition or local reaction to be executed. Multiple events, separated by comma, can also be specified. If multiple events are specified, the occurrence of a single one is sufficient to trigger the transition or local reaction.
-
-An event specification is either the name of an event that has been declared in the definition section, see section "&quot;Events&quot;":#events, or one of the built-in event specifications @after@, @every@, @always@, or @oncycle@. The latter are documented in detail in section "&quot;Reaction triggers&quot;":#reaction-triggers.
-
-Local reactions have two more built-in event specifiers at their disposal:
-* @entry@: The corresponding "reaction effect":#reaction-effect is executed just before the state becomes active.
-* @exit@: The corresponding "reaction effect":#reaction-effect is executed just after the state became inactive.
-
-bq. *Please note:* A self-transition, leading from a state back to itself, actually first leaves and then re-enters the state. That means that its @exit@ effects as well as its @entry@ effects are executed. This is in contrast to a local reaction, which is executed without leaving the active state. Thus @exit@ and @entry@ effects are _not_ executed in the latter case.
-
-Let's have a look at some sample event specifications:
-
-|_. Event specification: |_. Prerequisites for the transition to fire or the local reaction to be executed: |
-{vertical-align: top}. |{width: 15ex} @ev@ | Event _ev_ occured. |
-{vertical-align: top}. | @ev_1, ev_2@ | At least one of the events _ev_1_ and _ev_2_ occured. |
-{vertical-align: top}. | @after 3s@ | Three seconds after activating the source state have passed. |
-{vertical-align: top}. | @after 3s, ev@ | Three seconds after activating the source state have passed or event _ev_ occurred, whatever happens first. |
-{vertical-align: top}. | @every 3s@ | Three seconds have passed. This event first occurs three seconds after activating the source state and then repeatedly every three seconds. – Within a state, the @every@ event specification is useful to execute a certain "reaction effect":#reaction-effect repeatedly. In a transition reaction without a "guard condition":#guard-condition, however, @every@ behaves just like @after@, because the transition is taken after the specified intervall and the source state becomes passive anyway. However, if the transition has a "guard condition":#guard-condition, @after@ checks it only once, while @every@ checks it periodically according to the specified interval time. |
-{vertical-align: top}. | @always@ | Transition always fires; local reaction is always executed. (Watch out for what you are doing when using @always@ on a local reaction!) |
-{vertical-align: top}. | @oncycle@ | Same as @always@. |
-{vertical-align: top}. | @default@ | Transition always fires. Only meaningful with a "choice":#choice to define a transition to be taken when all other transitions of the choice cannot be taken. Not available on local reactions. |
-{vertical-align: top}. | @else@ | Same as @default@. |
-{vertical-align: top}. | @entry@ | State is about to become active. Not available on transitions. |
-{vertical-align: top}. | @exit@ | State has just become inactive. Not available on transitions. |
-
-p. 
-
-Figure "&quot;Event specifications syntax overview&quot;":#fig_transition-syntax-overview shows where to put event specifications in a reaction trigger and how their syntax is defined.
-
-p(#fig_event-specifications-syntax-overview). 
-!(standard-image)images/docu_grammar_030_event-specification-overview.png(Event specifications syntax overview)!
-
-p=. Event specifications syntax overview
-
-h3(#guard-condition). Guard condition
-
-A _guard_ applies an additional condition for a "transition":#transition to fire or a "local reaction":#local-reactions to be executed. It is not sufficient for a specified event to occur, the guard condition must be fulfilled, too. It is written in square brackets following the "event specifications":#event-specifications. You can specify a guard condition without any event specification. In this case the behavior of the transition or the local reaction is as if the @always@ event had been specified. That is, the transition or local reaction are always executed, as long as the guard condition evaluates to _true_.
-
-The following examples assume the _x_ is an integer variable and _isOpen_ is an operation.
-
-|_. Transition specification: |_. Prerequisites for the transition to fire: |
-{vertical-align: top}. |{width: 37ex}  @ev [x == 3]@ | Event _ev_ occured and _x_ holds the value 3. |
-{vertical-align: top}. | @ev_1, ev_2 [x == 3]@ | At least one of the events _ev_1_ and _ev_2_ occured and _x_ holds the value 3. |
-{vertical-align: top}. | @after 3s, ev [x == 3 && isOpen(7)]@ | Three seconds have passed or event _ev_ occurred, whatever happens first. Additionally, _x_ holds the value 3 and _isOpen(7)_ returns _true_. |
-{vertical-align: top}. | @exit [isCanceled]@ | The active state is about to get passivated and the boolean variable _isCanceled_ is _true_. |
-
-p. 
-
-Please note that the guard condition applies to the whole event trigger, not just to the event specification left from it. That is, the guard condition must be fulfilled regardless of which of the events occured. You might think of the event specifications being enclosed in parentheses, like @(ev_1, ev_2) [x == 3]@, although it would be illegal to actually write these parentheses.
-
-It is not possible to have event-specific guards as in (the illegal) @ev_1 [x == 1], ev_2 [x == 2]@. If you need something like this, use multiple transitions or multiple local reactions with @ev_1 [x == 1]@ on one of them and @ev_2 [x == 2]@ on the other.
-
-Please consult figure "&quot;Guard condition syntax overview&quot;":#fig_guard-condition-syntax-overview to find out how a guard condition syntactically fits into a reaction trigger.
-
-p(#fig_guard-condition-syntax-overview). 
-!(standard-image)images/docu_grammar_030_guard-condition-overview.png(Guard condition syntax overview)!
-
-p=. Guard condition syntax overview
-
-h3(#reaction-effect). Reaction effect
-
-A transition specification may contain one or more _actions_ that are executed when the transition fires, like assigning a value to a variable, calling an operation, or raising an event. All actions taken together are called the transition's _reaction effect_.
-
-A local reaction always has a _reaction effect_ with at least one action.
-
-The reaction effect is written right from "event specifications":#event-specifications and "guard condition":#guard-condition. It is separated by a @/@ character from the former. Figure "&quot;Reaction effect syntax&quot;":#fig_reaction-effect-syntax shows the syntax definition.
-
-p(#fig_reaction-effect-syntax). 
-!(standard-image)images/docu_grammar_030_reaction-effect.png(Reaction effect syntax)!
-
-p=. Reaction effect syntax
-
-Example: When a transition or local reaction specified as @ev1 [x > 3] / x += 1; notify(x); raise ev2@ is executed, it increments variable _x_ by 1, calls the _notify_ operation with _x_ as parameter, and raises event _ev2_.
-
-h4(#raising-and-processing-an-event). Raising and processing an event
-
-When a transition or local reaction raises an event, please consider two important points:
-* The event exists in the current run-to-completion step (RTC) only and thus can be dealt with during the rest of that particular RTC only.
-* Orthogonal regions are executed sequentially and in a deterministic order.
-
-This has remarkable consequences on where an event is "visible" and where it is not. Let's say we have a state machine at a certain point in time where _n_ orthogonal regions are active. The regions _r<sub>i</sub>_ have a defined execution order: _r<sub>1</sub>_ → _r<sub>2</sub>_ → … → _r<sub>n-1</sub>_ → _r<sub>n</sub>_.
-
-If an event _e_ is raised in region _r<sub>m</sub>_, then _e_ is available only in those regions that have not been processed yet, i.&nbsp;e. in _r<sub>i</sub>_ where _i_ > _m_ and _i_ ≤ _n_.
-
- The following example illustrates this. When the state machine is started, the situation is as shown in figure "&quot;Raising an event &#91;1]&quot;":#fig_raising-an-event_1: *A* and *X* in the parallel regions _r1_ and _r2_ are active states. Important: Region _r1_ is executed *before* _r2_.
-
-p(#fig_raising-an-event_1). 
-!(standard-image)images/docu_transition_010_raise_event_01.png(Raising an event [1])!
-
-p=. Raising an event &#91;1]
-
-Now event _e1_ occurs. It triggers transition *A → B* in _r1_. This transition's effect @raise e2@ causes event _e2_ to be raised. This event triggers transition *X → Y* in _r2_ to fire _within the same RTC_.
-
-After that the situation is now as can be seen in figure "&quot;Raising an event &#91;2]&quot;":#fig_raising-an-event_2: substates *B* and *Y* are now active states. However, the transition *B → C* will not be taken, because that would have to happen in another RTC. But by then the particular _e2_ instance raised by *A → B* will be long gone, since it was restricted to the RTC it has been raised in.
-
-p(#fig_raising-an-event_2). 
-!(standard-image)images/docu_transition_010_raise_event_02.png(Raising an event [2])!
-
-p=. Raising an event &#91;2]
-
-Orthogonal regions within a state are always executed from left to right or from top to bottom, respectively. On the top level, where orthogonal regions can be graphically arranged at will, the execution order is defined by the statechart model's property _region priority_. To inspect or change it, open the _Properties_ view and select the statechart's definition section.
-
-The region priorities of the example above are shown in figure "&quot;Region priorities&quot;":#fig_region-priorities. Change the execution order and the example will behave differently than described.
-
-p(#fig_region-priorities). 
-!(standard-image)images/docu_regions_010_priorities_01.png(Region priorities)!
-
-p=. Region priorities
-
-Not being able to raise an event and process it in "earlier" regions is a restriction you can overcome using variables. The idea is to set a "communication variable" to a certain value in a region that is processed "later". During the next RTC the earlier region could act on the variables value.
-
 h3(#entry). Entry
 
 When a state machine starts or when the control flow enters a "region":#region, an _entry_ defines which state is to be activated first. The flow passes through the state machine's or the region's entry and transitions to the target state the entry's transition is pointing to. This state becomes active.
@@ -620,6 +503,223 @@ h3(#deep-history). Deep history
 
 Deep history is similar to shallow history, but more complex. With a deep history the latest state of multiple nested states is remembered.
 
+h2(#reactions). Reactions
+
+Reactions are one of the most important features of YAKINDU SCT's statechart language. Basically everything that happens in a statechart happens in a reaction.
+
+Reactions can be attached to states as well as transitions.
+
+The syntax follows the standards of automata theory, where the output is put into relation to the input of the automaton using the following notation (especially Mealy automata):  @input / output@
+
+YAKINDU SCT uses the following syntax for all reactions:
+
+bc. Trigger [Guard] / Effect
+
+The possible values for the trigger depend on the context, either a state or a transition.
+
+All three components are grammatically optional, though a reaction with no trigger or guard will never happen. Reactions with no effect are useful for transitions, the slash @/@ can be ommitted as well then.
+
+h3(#event-specifications). Trigger specifications
+
+Reactions can define a _trigger_ that needs to happen to activate the reaction. "Events":#events are possible triggers, as well as certain keywords defined in the statechart language.
+
+You can define multiple triggers for the reaction: @trigger1, trigger2@. When at least one of them occurs, the reaction's trigger fires.
+
+The special triggers defined by the statechart language are the following:
+* "@after@: execute after given time":#reaction-trigger-after 
+* "@every@: execute periodically after given time":#reaction-trigger-every
+* "@always@: execute always":#reaction-trigger-always
+* "@oncycle@: same as @always@":#reaction-trigger-oncycle
+* "@else@: useful for choice states":#reaction-trigger-else
+* "@default@: same as @else@":#reaction-trigger-default
+* "@entry@: execute on state entry":#reaction-trigger-entry
+* "@exit@: execute on state exit":#reaction-trigger-exit
+
+Examples:
+
+* A reaction shall occur when an event named @ev1@ happens: @ev1 / effect@
+* A reaction shall occur when @ev1@ or @ev2@ happen: @ev1, ev2 / effect@
+* A reaction shall occur when @ev1@ happened or three seconds passed: @ev1, after 3s / effect@
+
+p. 
+
+Figure "&quot;Event specifications syntax overview&quot;":#fig_transition-syntax-overview shows where to put event specifications in a reaction trigger and how their syntax is defined.
+
+p(#fig_event-specifications-syntax-overview). 
+!(standard-image)images/docu_grammar_030_event-specification-overview.png(Event specifications syntax overview)!
+
+p=. Event specifications syntax overview
+
+==<!-- Start stext_keyword_after -->==
+
+h4(#reaction-trigger-after). Reaction trigger "after"
+
+The _after_ trigger specifies a one-shot time event.
+
+After the specified time the reaction is triggered. An _after_ trigger can be used in transitions of states as well as in local reactions of states and statecharts. The specified time starts when the state or statechart is entered.
+
+bc. after 20 s
+
+Synopsis: @after@ _time_ _unit_
+
+
+The _time_ value is a integer literal or an expression with an integer value.
+
+The time _unit_ is one of:
+
+* ==<!-- Start stext_keyword_s -->== @s@: seconds ==<!-- End stext_keyword_s -->==
+* ==<!-- Start stext_keyword_ms -->==@ms@: milliseconds ==<!-- End stext_keyword_ms -->==
+* ==<!-- Start stext_keyword_us -->==@us@: microseconds ==<!-- End stext_keyword_us -->==
+* ==<!-- Start stext_keyword_ns -->==@ns@: nanoseconds ==<!-- End stext_keyword_ns -->==
+
+==<!-- End stext_keyword_after -->==
+==<!-- Start stext_keyword_every -->==
+
+h4(#reaction-trigger-every). Reaction trigger "every"
+
+The _every_ trigger specifies periodic time events.
+
+The reaction is triggered recurrently after each passing of the specified period of time. An _every_ trigger can be used in transitions as well as in local reactions of states and statecharts. The specified period of time starts when the state or statechart is entered and repeats periodically.
+
+bc. every 200 ms
+
+
+Synopsis: @every@ _time_ _unit_
+
+The _time_ value is a integer literal or an expression with an integer value.
+
+The time _unit_ is one of:
+
+* @s@: seconds
+* @ms@: milliseconds
+* @us@: microseconds
+* @ns@: nanoseconds
+
+==<!-- End stext_keyword_every -->==
+==<!-- Start stext_keyword_always -->==
+
+h4(#reaction-trigger-always). Reaction trigger "always"
+
+This trigger is always true and enables a reaction to be executed in every run-to-completion step (RTC). The _always_ trigger is equivalent to the _oncycle_ trigger.
+
+==<!-- End stext_keyword_always -->==
+==<!-- Start stext_keyword_oncycle -->==
+
+h4(#reaction-trigger-oncycle). Reaction trigger "oncycle"
+
+This trigger is always true and enables a reaction to be executed in every run-to-completion step (RTC). The _always_ trigger is equivalent to the _oncycle_ trigger.
+
+==<!-- End stext_keyword_oncycle -->==
+==<!-- Start stext_keyword_else -->==
+
+h4(#reaction-trigger-else). Reaction trigger "else"
+
+This trigger is intended to be used for the outgoing transitions of _choice_ pseudo states to make sure that there is always an outgoing transition that can be taken. It can only be be used in transitions and implies the lowest evaluation priority for that transition. The _default_ trigger is equivalent to the _else_ trigger.
+
+==<!-- End stext_keyword_else -->==
+==<!-- Start stext_keyword_default -->==
+
+h4(#reaction-trigger-default). Reaction trigger "default"
+
+This trigger is intended to be used for the outgoing transitions of _choice_ pseudo states to make sure that there is always an outgoing transition that can be taken. It can only be be used in transitions and implies the lowest evaluation priority for that transition. The _default_ trigger is equivalent to the _else_ trigger.
+
+==<!-- End stext_keyword_default -->==
+==<!-- Start stext_keyword_entry -->==
+
+h4(#reaction-trigger-entry). Reaction trigger "entry"
+
+An _entry_ trigger marks actions that are carried out when entering a state or state machine, immediately _before_ making it active.
+
+bq. *Please note:* A self-transition, leading from a state back to itself, actually first leaves and then re-enters the state. That means that its @exit@ effects as well as its @entry@ effects are executed. This is in contrast to a local reaction, which is executed without leaving the active state. Thus @exit@ and @entry@ effects are _not_ executed in the latter case.
+
+==<!-- End stext_keyword_entry -->==
+==<!-- Start stext_keyword_exit -->==
+
+h4(#reaction-trigger-exit). Reaction trigger "exit"
+
+An _exit_ trigger marks actions that are carried out when exiting a state or state machine, immediately _after_ making it inactive.
+
+bq. *Please note:* A self-transition, leading from a state back to itself, actually first leaves and then re-enters the state. That means that its @exit@ effects as well as its @entry@ effects are executed. This is in contrast to a local reaction, which is executed without leaving the active state. Thus @exit@ and @entry@ effects are _not_ executed in the latter case.
+
+==<!-- End stext_keyword_exit -->==
+
+h3(#guard-condition). Guard condition
+
+A _guard_ applies an additional condition for a "transition":#transition to fire or a "local reaction":#local-reactions to be executed. It is not sufficient for a specified event to occur, the guard condition must be fulfilled, too. It is written in square brackets following the "event specifications":#event-specifications. You can specify a guard condition without any event specification. In this case the behavior of the transition or the local reaction is as if the @always@ event had been specified. That is, the transition or local reaction are always executed, as long as the guard condition evaluates to _true_.
+
+The following examples assume the _x_ is an integer variable and _isOpen_ is an operation.
+
+|_. Transition specification: |_. Prerequisites for the transition to fire: |
+{vertical-align: top}. |{width: 37ex}  @ev [x == 3]@ | Event _ev_ occured and _x_ holds the value 3. |
+{vertical-align: top}. | @ev_1, ev_2 [x == 3]@ | At least one of the events _ev_1_ and _ev_2_ occured and _x_ holds the value 3. |
+{vertical-align: top}. | @after 3s, ev [x == 3 && isOpen(7)]@ | Three seconds have passed or event _ev_ occurred, whatever happens first. Additionally, _x_ holds the value 3 and _isOpen(7)_ returns _true_. |
+{vertical-align: top}. | @exit [isCanceled]@ | The active state is about to get passivated and the boolean variable _isCanceled_ is _true_. |
+
+p. 
+
+Please note that the guard condition applies to the whole event trigger, not just to the event specification left from it. That is, the guard condition must be fulfilled regardless of which of the events occured. You might think of the event specifications being enclosed in parentheses, like @(ev_1, ev_2) [x == 3]@, although it would be illegal to actually write these parentheses.
+
+It is not possible to have event-specific guards as in (the illegal) @ev_1 [x == 1], ev_2 [x == 2]@. If you need something like this, use multiple transitions or multiple local reactions with @ev_1 [x == 1]@ on one of them and @ev_2 [x == 2]@ on the other.
+
+Please consult figure "&quot;Guard condition syntax overview&quot;":#fig_guard-condition-syntax-overview to find out how a guard condition syntactically fits into a reaction trigger.
+
+p(#fig_guard-condition-syntax-overview). 
+!(standard-image)images/docu_grammar_030_guard-condition-overview.png(Guard condition syntax overview)!
+
+p=. Guard condition syntax overview
+
+h3(#reaction-effect). Reaction effect
+
+A transition specification may contain one or more _actions_ that are executed when the transition fires, like assigning a value to a variable, calling an operation, or raising an event. All actions taken together are called the transition's _reaction effect_.
+
+A local reaction always has a _reaction effect_ with at least one action.
+
+The reaction effect is written right from "event specifications":#event-specifications and "guard condition":#guard-condition. It is separated by a @/@ character from the former. Figure "&quot;Reaction effect syntax&quot;":#fig_reaction-effect-syntax shows the syntax definition.
+
+p(#fig_reaction-effect-syntax). 
+!(standard-image)images/docu_grammar_030_reaction-effect.png(Reaction effect syntax)!
+
+p=. Reaction effect syntax
+
+Example: When a transition or local reaction specified as @ev1 [x > 3] / x += 1; notify(x); raise ev2@ is executed, it increments variable _x_ by 1, calls the _notify_ operation with _x_ as parameter, and raises event _ev2_.
+
+h4(#raising-and-processing-an-event). Raising and processing an event
+
+When a transition or local reaction raises an event, please consider two important points:
+* The event exists in the current run-to-completion step (RTC) only and thus can be dealt with during the rest of that particular RTC only.
+* Orthogonal regions are executed sequentially and in a deterministic order.
+
+This has remarkable consequences on where an event is "visible" and where it is not. Let's say we have a state machine at a certain point in time where _n_ orthogonal regions are active. The regions _r<sub>i</sub>_ have a defined execution order: _r<sub>1</sub>_ → _r<sub>2</sub>_ → … → _r<sub>n-1</sub>_ → _r<sub>n</sub>_.
+
+If an event _e_ is raised in region _r<sub>m</sub>_, then _e_ is available only in those regions that have not been processed yet, i.&nbsp;e. in _r<sub>i</sub>_ where _i_ > _m_ and _i_ ≤ _n_.
+
+ The following example illustrates this. When the state machine is started, the situation is as shown in figure "&quot;Raising an event &#91;1]&quot;":#fig_raising-an-event_1: *A* and *X* in the parallel regions _r1_ and _r2_ are active states. Important: Region _r1_ is executed *before* _r2_.
+
+p(#fig_raising-an-event_1). 
+!(standard-image)images/docu_transition_010_raise_event_01.png(Raising an event [1])!
+
+p=. Raising an event &#91;1]
+
+Now event _e1_ occurs. It triggers transition *A → B* in _r1_. This transition's effect @raise e2@ causes event _e2_ to be raised. This event triggers transition *X → Y* in _r2_ to fire _within the same RTC_.
+
+After that the situation is now as can be seen in figure "&quot;Raising an event &#91;2]&quot;":#fig_raising-an-event_2: substates *B* and *Y* are now active states. However, the transition *B → C* will not be taken, because that would have to happen in another RTC. But by then the particular _e2_ instance raised by *A → B* will be long gone, since it was restricted to the RTC it has been raised in.
+
+p(#fig_raising-an-event_2). 
+!(standard-image)images/docu_transition_010_raise_event_02.png(Raising an event [2])!
+
+p=. Raising an event &#91;2]
+
+Orthogonal regions within a state are always executed from left to right or from top to bottom, respectively. On the top level, where orthogonal regions can be graphically arranged at will, the execution order is defined by the statechart model's property _region priority_. To inspect or change it, open the _Properties_ view and select the statechart's definition section.
+
+The region priorities of the example above are shown in figure "&quot;Region priorities&quot;":#fig_region-priorities. Change the execution order and the example will behave differently than described.
+
+p(#fig_region-priorities). 
+!(standard-image)images/docu_regions_010_priorities_01.png(Region priorities)!
+
+p=. Region priorities
+
+Not being able to raise an event and process it in "earlier" regions is a restriction you can overcome using variables. The idea is to set a "communication variable" to a certain value in a region that is processed "later". During the next RTC the earlier region could act on the variables value.
+
 h2(#types). Types
 
 The language has a small integrated type system consisting of the following simple types:
@@ -774,99 +874,7 @@ bc. localEvent2 / NamedInterface.variable2 += 3; #1
 localEvent3 / NamedInterface.variable4 += 2.0; #2
 
 
-h2(#reaction-triggers). Reaction triggers
 
-Actions are key constructs in state machines to model behavior. YAKINDU SCT knows about the following kinds of actions.
-
-
-==<!-- Start stext_keyword_after -->==
-
-h3(#reaction-trigger-after). Reaction trigger "after"
-
-The _after_ trigger specifies a one-shot time event.
-
-After the specified time the reaction is triggered. An _after_ trigger can be used in transitions of states as well as in local reactions of states and statecharts. The specified time starts when the state or statechart is entered.
-
-bc. after 20 s
-
-Synopsis: @after@ _time_ _unit_
-
-
-The _time_ value is a integer literal or an expression with an integer value.
-
-The time _unit_ is one of:
-
-* ==<!-- Start stext_keyword_s -->== @s@: seconds ==<!-- End stext_keyword_s -->==
-* ==<!-- Start stext_keyword_ms -->==@ms@: milliseconds ==<!-- End stext_keyword_ms -->==
-* ==<!-- Start stext_keyword_us -->==@us@: microseconds ==<!-- End stext_keyword_us -->==
-* ==<!-- Start stext_keyword_ns -->==@ns@: nanoseconds ==<!-- End stext_keyword_ns -->==
-
-==<!-- End stext_keyword_after -->==
-==<!-- Start stext_keyword_every -->==
-
-h3(#reaction-trigger-every). Reaction trigger "every"
-
-The _every_ trigger specifies periodic time events.
-
-The reaction is triggered recurrently after each passing of the specified period of time. An _every_ trigger can be used in transitions as well as in local reactions of states and statecharts. The specified period of time starts when the state or statechart is entered and repeats periodically.
-
-bc. every 200 ms
-
-
-Synopsis: @every@ _time_ _unit_
-
-The _time_ value is a integer literal or an expression with an integer value.
-
-The time _unit_ is one of:
-
-* @s@: seconds
-* @ms@: milliseconds
-* @us@: microseconds
-* @ns@: nanoseconds
-
-==<!-- End stext_keyword_every -->==
-==<!-- Start stext_keyword_always -->==
-
-h3(#reaction-trigger-always). Reaction trigger "always"
-
-This trigger is always true and enables a reaction to be executed in every run-to-completion step (RTC). The _always_ trigger is equivalent to the _oncycle_ trigger.
-
-==<!-- End stext_keyword_always -->==
-==<!-- Start stext_keyword_oncycle -->==
-
-h3(#reaction-trigger-oncycle). Reaction trigger "oncycle"
-
-This trigger is always true and enables a reaction to be executed in every run-to-completion step (RTC). The _always_ trigger is equivalent to the _oncycle_ trigger.
-
-==<!-- End stext_keyword_oncycle -->==
-==<!-- Start stext_keyword_else -->==
-
-h3(#reaction-trigger-else). Reaction trigger "else"
-
-This trigger is intended to be used for the outgoing transitions of _choice_ pseudo states to make sure that there is always an outgoing transition that can be taken. It can only be be used in transitions and implies the lowest evaluation priority for that transition. The _default_ trigger is equivalent to the _else_ trigger.
-
-==<!-- End stext_keyword_else -->==
-==<!-- Start stext_keyword_default -->==
-
-h3(#reaction-trigger-default). Reaction trigger "default"
-
-This trigger is intended to be used for the outgoing transitions of _choice_ pseudo states to make sure that there is always an outgoing transition that can be taken. It can only be be used in transitions and implies the lowest evaluation priority for that transition. The _default_ trigger is equivalent to the _else_ trigger.
-
-==<!-- End stext_keyword_default -->==
-==<!-- Start stext_keyword_entry -->==
-
-h3(#reaction-trigger-entry). Reaction trigger "entry"
-
-An _entry_ trigger marks actions that are carried out when entering a state or state machine, immediately before making it active.
-
-==<!-- End stext_keyword_entry -->==
-==<!-- Start stext_keyword_exit -->==
-
-h3(#reaction-trigger-exit). Reaction trigger "exit"
-
-An _exit_ trigger marks actions that are carried out when exiting a state or state machine, immediately after making it inactive.
-
-==<!-- End stext_keyword_exit -->==
 
 
 h2(#built-in-functions). Built-in functions
