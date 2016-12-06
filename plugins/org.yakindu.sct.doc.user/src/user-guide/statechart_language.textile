@@ -773,9 +773,18 @@ The language has the following assignment operators:
 
 h3(#raising-an-event). Raising an event
 
-An event is raised by calling a method whose name consists of the word @raise@, immediately followed by the event name, e. g. @raiseIncoming_call()@. If the event is an interface event, the name of the interface must also be appended.
+An event is raised by using the keyword @raise@, followed by the event name, e. g. @raise Incoming_call@. If the event is an interface event, the name of the interface must also be prepended as usual.
 
-###. FIXME: Add an example!
+Example:
+
+bc. 
+interface intrfc:
+  out event ev
+  
+Usage in the statechart:
+
+bc. 
+always / raise intrfc.ev 
 
 h3(#calling-an-operation). Calling an operation
 
