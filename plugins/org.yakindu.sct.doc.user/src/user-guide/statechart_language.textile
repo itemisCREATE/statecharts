@@ -666,11 +666,21 @@ p=. Guard condition syntax overview
 
 h3(#reaction-effect). Reaction effect
 
-A transition specification may contain one or more _actions_ that are executed when the transition fires, like assigning a value to a variable, calling an operation, or raising an event. All actions taken together are called the transition's _reaction effect_.
+A transition specification may contain zero, one or more _actions_ that are executed when the transition fires, like assigning a value to a variable, calling an operation, or raising an event. All actions taken together are called the transition's _reaction effect_. The complete syntax for reactions is as follows:
 
-A local reaction always has a _reaction effect_ with at least one action.
+bc. 
+Trigger [Guard] / Effect
 
-The reaction effect is written right from "event specifications":#event-specifications and "guard condition":#guard-condition. It is separated by a @/@ character from the former. Figure "&quot;Reaction effect syntax&quot;":#fig_reaction-effect-syntax shows the syntax definition.
+This means that the effect will only be executed when the trigger fires or does not exist _and_ the guard condition evaluates to true or does not exist _and_ at least a trigger or a guard exist. See the sections about "triggers":#event-specifications and "guard conditions":#guard-condition.
+
+Normally, actions are "statements":#statements. Note that you can also use the "conditional expression":#conditional-expression to make some constructs more elegant.
+
+
+If an effect shall consist of multiple actions, they need to be _separated_ by a semicolon @;@. That means the last action is _not_ followed by a semicolon: @Trigger [Guard] / action1; action2; action3@
+
+A reaction in a state always has a _reaction effect_ with at least one action.
+
+Figure "&quot;Reaction effect syntax&quot;":#fig_reaction-effect-syntax shows the syntax definition.
 
 p(#fig_reaction-effect-syntax). 
 !(standard-image)images/docu_grammar_030_reaction-effect.png(Reaction effect syntax)!
@@ -681,7 +691,7 @@ Example: When a transition or local reaction specified as @ev1 [x > 3] / x += 1;
 
 h4(#raising-and-processing-an-event). Raising and processing an event
 
-When a transition or local reaction raises an event, please consider two important points:
+When a reaction raises an event, please consider two important points:
 * The event exists in the current run-to-completion step (RTC) only and thus can be dealt with during the rest of that particular RTC only.
 * Orthogonal regions are executed sequentially and in a deterministic order.
 
