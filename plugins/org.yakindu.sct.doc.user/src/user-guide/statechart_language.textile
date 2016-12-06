@@ -306,7 +306,7 @@ p=. Transition syntax overview
 
 h4(#transitions-without-transition-reaction). Transitions without transition reaction
 
-A transition should specify a transition reaction. However, it is legal to omit it, although the statechart editor will display a warning. The semantics of a missing transition reaction is that this transition is always taken. So you could just as well write @always@ at the transition, thus making things clear and avoiding the warning.
+A transition should specify a transition reaction. However, it is legal to omit it, although the statechart editor will display a warning. The semantics of a missing transition reaction is that this transition is _never_ taken. So you could just as well write @always@ at the transition, thus making things clear and avoiding the warning.
 
 h4(#entry-and-exit-points). Entry and exit points
 
