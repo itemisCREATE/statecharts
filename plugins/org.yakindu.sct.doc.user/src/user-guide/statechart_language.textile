@@ -34,7 +34,7 @@ In classic automata theory, two distinct types of finite state machines exist:
 
 It is possible to transform those types into each other, but the set of states, the transitions and the output functions need to be changed to achieve this.
 
-Harel's statecharts extend these classic state diagrams, producing a representation that can't be described as easily and  mathematically concise as the types above, but is much more readable and usable in day-to-day usage.
+Harel's statecharts extend these classic state diagrams, producing a representation that cannot be described as easily and  mathematically concise as the types above, but is much more readable and usable in day-to-day usage.
 
 It adds the following elements and possibilities:
 
