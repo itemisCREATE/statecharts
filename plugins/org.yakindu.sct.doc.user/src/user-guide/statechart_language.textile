@@ -366,7 +366,7 @@ An incoming transition to a composite state can specify a named entry it shall l
 
 Named entries have no equivalent in the UML.
 
-The sample statechart in figure "&quot;Entry state&quot;":#fig_state_entry has a composite state named _Handle result_. This composite state has a default entry as well as an entry called _failure_. If state _A_ is active and the _error_ trigger fires, control is transitioned to the _Handle result_ composite state. The notation @error # >failure@ specifies that the _failure_ entry is to be used.
+The sample statechart in figure "&quot;Entry state&quot;":#fig_state_entry has a composite state named _Handle result_. This composite state has a default entry as well as an entry called _failure_. If state _A_ is active and the _error_ trigger fires, control is transitioned to the _Handle result_ composite state. The notation @error # >failure@ specifies that the _failure_ entry is to be used; see "Entry and exit points":#entry-and-exit-points.
 
 p(#fig_state_entry). 
 !(standard-image)images/docu_state_entry.png(Entry state)!
@@ -439,15 +439,15 @@ The example also demonstrates different lengths and orientations of the synchron
 
 h3(#composite-state). Composite state
 
-A composite state is a state comprising one or more state machines. These state machines are also organized in regions within the composite state.
+A composite state is a state containing a "region":#region. All usual characteristics of regions apply - they can have entry states, exit states, and so on. "Transitions":#transition can connect inner states of composite states with states that are at the same hierarchical level as the composite state, or they can directly be sourced at the composite states. This is useful for constructs like "cancel", where the operation of a composite state should be able to be aborted every time.
 
-Besides the simple composite state YAKINDU SCT knows about two kinds of composite states: orthogonal states and submachine states.
-
-Composite states contain other state machine branches.
+See "entry state":#entry, "exit state":#exit, "final state":#final-state and "connecting entries and exits to transitions":#entry-and-exit-points for further information.
 
 h3(#orthogonal-states). Orthogonal states
 
-In the context of state machines orthogonal states are states that are independent of each other. The presumably most famous example is the keyboard example:
+Orthogonal states are basically "composite states":#composite-state with more than one region. These regions are executed virtually concurrently. *Please note* the word _virtually_. YAKINDU SCT does _not_ guarantee in any way that orthogonal regions are really executed concurrently. At the time being, no code generator utilizes threads to achieve this. It should rather be understood as a manner to have two sub-statecharts working together, but they are executed _after each other_ every cycle, in a defined order: top to bottom, left to right. The same warnings apply for multiple regions in the statechart itself. Consult the section "raising and processing events":#raising-and-processing-an-event for further information on region priority and its meanings for the statechart execution.
+
+The presumably most famous example for orthogonal states is the keyboard example:
 
 !(standard-image)images/docu_orthogonalState_example.jpg(Orthogonal states)!
 
@@ -455,7 +455,7 @@ p=. Orthogonal states
 
 h3(#shallow-history). Shallow history
 
-The shallow history state is a pseudo state that is placed inside regions of composite states. It is used to remember the last active state inside a composite state. This makes it possible to jump back to the remembered state instead of starting at the inner initial state again.
+The shallow history state is a pseudo state that is placed inside regions of composite states. It is used to remember the last active state inside a composite state. This makes it possible to jump back to the remembered state instead of starting at the inner initial state again. History states save the current state exactly when their containing region is left.
 
 The following example, showing the answering of a questionaire, explains this:
 
@@ -830,39 +830,6 @@ h3(#unary-arithmetic-operators). Unary arithmetic operators
 |<. positive|<. @+@|
 |<. negative|<. @-@|
 |<. complement|<. @~@|
-
-h2(#declarations). Declarations
-
-h3(#declaring-local-reactions1). Declaring local reactions
-
-Local reactions describe the internal behavior of a state. So they have internal scope. A local reaction is declared as follows:
-
-bc.. 
-LocalReaction: ReactionTrigger '/' ReactionEffect ('#' ReactionProperties)?
-
-ReactionTrigger: (Event ("," Event  )*  (=&gt; '[' Expression ']')?) | '[' Expression ']'
-
-ReactionEffect:  Statement (';' Statement )* (';')?
-
-Statement: Assignment | EventRaising | OperationCall
-
-ReactionProperties: (EntryPoint | ExitPoint)*
-
-p. Within a local reaction an interface event can be raised:
-
-bc. internal:
-localEvent1 / raise NamedInterface.event3 : localOperation (valueof(localEvent), NamedInterface.variable1);
-
-
-A local reaction can have a priority value. The latter is defined by appending the character @#@ and the numeric priority value to the local reaction's definition. Examples:
-
-###. FIXME: Describe the meaning of priorities!
-
-bc. localEvent2 / NamedInterface.variable2 += 3; #1
-localEvent3 / NamedInterface.variable4 += 2.0; #2
-
-
-
 
 
 h2(#built-in-functions). Built-in functions
