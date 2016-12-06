@@ -264,13 +264,9 @@ h3(#transition). Transition
 
 A transition is the transfer of one state to another. A transition is diagrammed as an arrow leading from a _source state_ to a _target state_.
 
-A transition usually specifies a _transition reaction_. The transition reaction specifies what the conditions are for this transition to be taken and which actions, if any, are to be executed. The occurrence of an event, a condition becoming true, or time passing can trigger a transition. The transition reaction is attached to the transition's arrow as a text and consists of the following:
+A transition should have a _transition reaction_. The transition reaction specifies what the conditions are for this transition to be taken and which actions, if any, are to be executed. The occurrence of an event, a condition becoming true, or time passing can trigger a transition. The transition reaction is attached to the transition's arrow as a text. Its syntax can be found in the section about "Reactions":#reactions.
 
-* "_event specifications_":#event-specifications, specifying which event or events can trigger this transition,
-* a "_guard_":#guard-condition, specifying which condition(s) must be fulfilled to trigger this transition,
-* a "_reaction effect_":#reaction-effect, specifying actions that are to be executed when this transition is executed.
-
-All of these three elements are optional, i.&nbsp;e. a transition may have one or more or them, but it doesn't need to. You will find more on "event specifications":#event-specifications, "guard condition":#guard-condition, and "reaction effect":#reaction-effect in sections "&quot;Event specifications&quot;":#event-specifications, "&quot;Guard condition&quot;":#guard-condition, and "&quot;Reaction effect&quot;":#reaction-effect, respectively.
+Note: Transitions without any reaction are possible, but useless. They will never be taken.
 
 Here's an example:
 
@@ -286,13 +282,38 @@ p(#fig_transition-syntax-overview).
 
 p=. Transition syntax overview
 
-h4(#transitions-without-transition-reaction). Transitions without transition reaction
-
-A transition should specify a transition reaction. However, it is legal to omit it, although the statechart editor will display a warning. The semantics of a missing transition reaction is that this transition is _never_ taken. So you could just as well write @always@ at the transition, thus making things clear and avoiding the warning.
-
 h4(#entry-and-exit-points). Entry and exit points
 
-Unlike "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language transitions, transitions in YAKINDU Statecharts can denote specific entry or exit points when leaving or entering composite states. This is denoted by the _TransitionProperties_ non-terminal symbol in figure "&quot;Transition syntax overview&quot;":#fig_transition-syntax-overview and explained in detail in sections "&quot;Named entries&quot;":#named-entries and "&quot;Exit&quot;":#exit.
+Unlike "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language transitions, transitions in YAKINDU Statecharts can denote specific entry or exit points when leaving or entering composite states. This is denoted by the _TransitionProperties_ non-terminal symbol in figure "&quot;Transition syntax overview&quot;":#fig_transition-syntax-overview.
+
+The syntax to connect a transition to a "named Entry":#entry is as follows:
+
+@# >_entry-name_@
+
+A "named exit":#exit can be used as follows:
+
+@# _exit-point-1_> [ _exit-point-2_> ]…@
+
+It is also possible to have both in one transition specification. The order of exit and entry points is irrelevant. Instead, the position of the @>@ character is decisive:
+
+* If the @>@ character is to the _right_ of a name, like in @exit_name>@, that name denotes an _exit_.
+* If the @>@ character is to the _left_ of a name, like in @>entry_name@, that name denotes an _entry_.
+
+The sample statechart in figure "&quot;Entries and exits&quot;":#fig_state_entry_exit contains two composite states:
+
+* The composite state _Process_ models a process with two passes (states) A and B. If both passes succeed, the composite state is left via the _no&#95;problem_ exit node. However, if an error occurs in either A or B the execution flow proceeds to the _problem_ exit point and leaves the composite state there.
+* The composite state _Handle result_ is intended to handle the processing result, be it success or failure. It has two entry points _success_ and _failure_.
+
+The question is how to connect the exit points of _Process_ to the corresponding entry points of _Handle result_. This is done by two transitions leading from _Process_ to _Handle result_ and appropriate specifications.
+
+The transition shown on the left specifies @# no_problem> >success@. This means: If the source composite state is left via the _no&#95;problem_ exit point, enter the target composite state at the _success_ entry point. The specification of the transition on the right is analogous: If the source state is left via the _problem_ exit point, enter the target state at the _failure_ entry point.
+
+Alternatively, _Process_ could have been modeled with two different error exit states, say _error&#95;1_ and _error&#95;2_. This would allow to respond differently to different error conditions, while still enabling to catch them both with a single flow. A transition with @# >error_1 >error_2 problem>@ would do so.
+
+p(#fig_state_entry_exit). 
+!(standard-image)images/docu_state_entry_exit.png(Entries and exits)!
+
+p=. Entries and exits
 
 h4(#transition-priorities). Transition priorities
 
@@ -305,7 +326,7 @@ p=. Transition priorities &#91;1]
 
 Which transition will fire when event _e1_ occurs? Fortunately YAKINDU state machines behave deterministically, so this question can be answered unambiguously. Outgoing transitions of a state have a definite order and are _prioritized_ by that order. The state machine checks the transitions one by one in their order and executes the first transition that fulfills all prerequisites for firing.
 
-As you can see in figure "&quot;Transition priorities (1)&quot;":#fig_transition-priorities-1, little numbers indicate the transition priorities. These numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram Appearance_ is activated.
+As you can see in figure "&quot;Transition priorities (1)&quot;":#fig_transition-priorities-1, little numbers indicate the transition priorities. These numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram Appearance_ is activated, which it is not by default.
 
 The order of transitions is a property of their source state. In the example above, the transition priorities of state *A* appear like this in the _Properties_ view:
 
@@ -341,9 +362,7 @@ The "default entry":#default-entry-and-initial-state specifies a single entry po
 
 The default entry implicitly has the name @default@. Alternatively, it is possible to explicitly give the name @default@ to the default entry. Semantically both variants are equivalent. Whether an entry has no name or it has the name @default@: in both cases the entry is called _default entry_.
 
-An incoming transition specifies a named entry to be used by the entry's _name_. This is done in a so-called _transition property_ of the transition, according to the following format:
-
-@# >@ _entry-name_
+An incoming transition to a composite state can specify a named entry it shall lead to. For details, see "Entry and Exit points":#entry-and-exit-points.
 
 Named entries have no equivalent in the UML.
 
@@ -362,36 +381,11 @@ An exit may have multiple incoming transitions and has no outgoing one.
 
 An exit state is depicted as an unfilled circle with an X-shaped cross, see figure "&quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
 
-Within a region, multiple exits are allowed. Each exit must either have a name that is unique within its region or be the _default exit_. The default exit is either unnamed or has the name @default@, which is semantically equivalent. A region may have at most one default exit.
+Within a region, multiple exits are allowed. Each exit must either have a name that is unique within its region or be the _default exit_. The default exit is either unnamed or has the name @default@, which is semantically equivalent. A region may have at most one default exit. For details on how to connect named exits with transitions, see "Entry and exit points":#entry-and-exit-points in the section about transitions.
 
 When a composite state reaches an exit in any of its regions, all states in other regions of that composite state, if any, are deactivated immediately. The composite state will be left and be deactivated. It maintains no status information that could be probed from the outside. In other words, reaching an exit in one of a composite state's regions has severe consequences for all the other regions since they are exited and disposed immediately. After that, the containing composite state is also exited. There must be an unguarded transition that catches the exit and leads to another state outside of the composite state. The semantics of exit is different from that of final state; please see section "&quot;Final state&quot;":#final-state for details.
 
-A transition that has a composite state as its source can specify which exits should trigger it. That is, different exits can lead to different behavior on the outside. A transition specifies the exits to react upon as a so-called _property_ which looks like this:
-
-@#@ _exit-point-1_@>@ [ _exit-point-2_@>@ ]…
-
 Exits have no equivalent in the UML.
-
-The sample statechart in figure "&quot;Entries and exits&quot;":#fig_state_entry_exit contains two composite states:
-
-* The composite state _Process_ models a process with two passes (states) A and B. If both passes succeed, the composite state is left via the _no&#95;problem_ exit node. However, if an error occurs in either A or B the execution flow proceeds to the _problem_ exit point and leaves the composite state there.
-* The composite state _Handle result_ is intended to handle the processing result, be it success or failure. It has two entry points _success_ and _failure_.
-
-The question is how to connect the exit points of _Process_ to the corresponding entry points of _Handle result_. This is done by two transitions leading from _Process_ to _Handle result_ and appropriate specifications.
-
-The transition shown on the left specifies @# no_problem> >success@. This means: If the source composite state is left via the _no&#95;problem_ exit point, enter the target composite state at the _success_ entry point. The specification of the transition on the right is analogous: If the source state is left via the _problem_ exit point, enter the target state at the _failure_ entry point.
-
-The order of exit and entry points in a transition specification is irrelevant. Instead, the position of the @>@ character is decisive:
-
-* If the @>@ character is to the _right_ of a name, like in @exit_name>@, that name denotes an _exit_.
-* If the @>@ character is to the _left_ of a name, like in @>entry_name@, that name denotes an _entry_.
-
-Alternatively, _Process_ could have been modeled with two different error exit states, say _error&#95;1_ and _error&#95;2_. This would allow to respond differently to different error conditions, while still enabling to catch them both with a single flow. A transition with @# >error_1 >error_2 problem>@ would do so.
-
-p(#fig_state_entry_exit). 
-!(standard-image)images/docu_state_entry_exit.png(Entries and exits)!
-
-p=. Entries and exits
 
 h3(#final-state). Final state
 
