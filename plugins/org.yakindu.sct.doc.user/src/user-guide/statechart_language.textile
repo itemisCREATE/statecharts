@@ -788,7 +788,7 @@ always / raise intrfc.ev
 
 h3(#calling-an-operation). Calling an operation
 
-An operation is called similar to other programming languages with the operation name and passing concrete parameters. The parameters can be expressions.
+An operation is called similar to other programming languages with the operation name and passing concrete parameters. The parameters can be expressions. The parenthesis can be omitted when no parameters are needed.
 
 ###. FIXME: Add an example!
 
@@ -816,6 +816,20 @@ bc. !expr1
 h3(#conditional-expression). Conditional expression
 
 bc. expr1 ? expr2 : expr3
+
+When @expr1@ evaluates to true, this returns @expr2@, else @exp3@. This can be used to assign values to variables: 
+
+bc. 
+y = x > 5 ? 1 : 2
+
+This does the same as the following snippet of C code:
+
+bc. 
+if(x > 5) {
+  y = 1;
+} else {
+  y = 2;
+}
 
 
 h3(#bitwise-xor). Bitwise XOR
