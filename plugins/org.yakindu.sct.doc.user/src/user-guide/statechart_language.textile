@@ -124,7 +124,7 @@ interface NamedInterface:
   
 Note: All elements defined inside of a named interface _must_ be referenced using that interface's name, such as @NamedInterface.event1@, @NamedInterface.event3@, and @NamedInterface.variable1@.
 
-It is also possible have one unnamed interface, which is externally visible as well:
+It is also possible to have one unnamed interface, which is externally visible as well:
 
 bc. 
 interface:
@@ -186,7 +186,7 @@ h3(#events). Events
 An _event_ is something of importance that happens at a certain point in time in the context of a state machine, for example a user pushes a button, a temperature sensor delivers a value, a period of time has passed, etc. An event can be of three basic types: 
 
 * Internal events are meant to be raised and processed by the statemachine.
-* External events (in an "interface scope":#interface-scope ) can be incoming or outgoing, so they are either raised by the environment and processed by the statechart or they are raised in the statechart and can be processed outside.
+* External events (in an "interface scope":#interface-scope ) can be _incoming_ or _outgoing_, so they are either raised by the environment and processed by the statechart or they are raised in the statechart and can be processed outside.
 
 Events that are defined inside of a named interface need to be referenced using the interface name, see "interfaces":#interface-scope.
 
@@ -224,7 +224,7 @@ internal:
   event event1: integer = 25
 
 
-Read access to the value of an event is possible in the statechart using the @valueof()@ built-in method. Please note that reading an event's value is possible only when the event actually occurs, for example in a guard:
+Read access to the value of an event is possible in the statechart using the @valueof()@ built-in method (see "built-in methods":#built-in-functions for details). Please note that reading an event's value is possible only when the event actually occurs, for example in a guard:
 
 bc. event1 [valueof(event1) == 6]
 
@@ -275,6 +275,8 @@ p(#fig_state-example).
 !(standard-image)images/docu_state_010_example_01.png(State example)!
 
 p=. State example: A simple state machine to launch a rocket. When the *Countdown* state is entered, it sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ provides audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the *Countdown* state will become inactive and launches the rocket upon exiting. The countdown can be aborted anytime before launch by a _cancel_ event. (See figure "&quot;Transition example&quot;":#fig_transition-example for a different state machine which solves the same task but puts more emphasis on transitions.)
+
+_Can you find the mistake in the state behavior?_
 
 h3(#transition). Transition
 
@@ -499,7 +501,7 @@ h2(#reactions). Reactions
 
 Reactions are one of the most important features of YAKINDU SCT's statechart language. Basically everything that happens in a statechart happens in a reaction.
 
-Reactions can be attached to states as well as transitions.
+Reactions can be attached to states as well as transitions. While states can have as many reactions as you wish, transitions can only have one.
 
 The syntax follows the standards of automata theory, where the output is put into relation to the input of the automaton using the following notation (especially Mealy automata):  @input / output@
 
@@ -509,7 +511,7 @@ bc. Trigger [Guard] / Effect
 
 The possible values for the trigger depend on the context, either a state or a transition.
 
-All three components are grammatically optional, though a reaction with no trigger or guard will never happen. Reactions with no effect are useful for transitions, the slash @/@ can be omitted as well then.
+All three components are grammatically optional, though a reaction with neither a trigger nor a guard will never happen. Reactions with no effect are useful for transitions, the slash @/@ can be omitted as well then.
 
 h3(#event-specifications). Trigger specifications
 
