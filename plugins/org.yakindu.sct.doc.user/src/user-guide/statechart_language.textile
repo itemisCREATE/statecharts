@@ -65,6 +65,22 @@ The model interpreter and different flavors of generated code are following thes
 
 Please refer to the Wikipedia article "UML state machine":https://en.wikipedia.org/wiki/UML_state_machine for more details.
 
+h2(#why-statechart-language). Why another language?
+
+Before you get too intrigued by learning yet another language, even one you can't use anywhere outside of YAKINDU SCT, you should know _why_ YAKINDU SCT uses its own domain specific language.
+
+There are other tools out there that allow you to draw state diagrams, add behavior to them and even generate code out of them. Some of those tools even offer a much wider palette of languages you can generate to. What they do not have is their own language. The text you type in is directly copied to the generated code instead. One might argue that this is pretty good, because you can then use any possible language construct of your target language, which is true. If you ever want to switch to another language, because maybe you need the exact same construct in two parts of a multi-language project, those constructs don not work anymore. Even worse, the tool cannot inform you that your input is invalid, because all it does is pass raw text through to the generated code.
+
+With the use of its own language, YAKINDU SCT is able to:
+
+* Verify the input (syntax and semantic)
+* Offer refactorings
+* Offer special triggers for reactions, for example timed ones
+* Correctly transform all language statements into the target language
+* Simulate the statechart, so the correct behavior can be verified before any line of code is written or generated
+
+Also, YAKINDU SCT's language is not complicated at all. If something is not clear, this chapter should be able to help you.
+
 h2(#statechart). Statechart
 
 A statechart or statechart model consists of several components.
