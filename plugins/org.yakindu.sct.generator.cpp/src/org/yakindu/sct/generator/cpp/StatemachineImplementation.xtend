@@ -48,6 +48,7 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		#include "«module.h»"
 		#include <string.h>
+		
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		
@@ -220,10 +221,10 @@ class StatemachineImplementation implements IContentTemplate {
 			
 			void «module»::«raiseTimeEventFctID»(sc_eventid evid)
 			{
-				if ((evid >= &timeEvents) && (evid < &timeEvents + sizeof(timeEvents)))
+				if ((evid >= (sc_eventid)«timeEventsInstance») && (evid < (sc_eventid)(&«timeEventsInstance»[«timeEventsCountConst»])))
 				{
 					*(sc_boolean*)evid = true;
-				}
+				}				
 			}
 		«ENDIF»
 	'''

@@ -188,12 +188,14 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 		static const sc_integer «orthogonalStatesConst» = «stateVector.size»;
 		«IF hasHistory»
-			//! dimension of the state configuration vector for history states
+		//! dimension of the state configuration vector for history states
 		static const sc_integer «historyStatesConst» = «historyVector.size»;«ENDIF»
 		
 		«IF timed»
+			//! number of time events used by the state machine.
+			static const sc_integer «timeEventsCountConst» = «timeEvents.size»;
 			«timerInterface»* «timerInstance»;
-			sc_boolean «timeEventsInstance»[«timeEvents.size»];
+			sc_boolean «timeEventsInstance»[«timeEventsCountConst»];
 		«ENDIF»
 		
 		«statesEnumType» stateConfVector[«orthogonalStatesConst»];

@@ -71,12 +71,12 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 
 	override dispatch CharSequence code(ScheduleTimeEvent it) '''
 		«stepComment»
-		«timerInstance»->setTimer(this, &«timeEventsInstance»[«timeEvent.indexOf»], «timeValue.code», «IF timeEvent.periodic»true«ELSE»false«ENDIF»);
+		«timerInstance»->setTimer(this, (sc_eventid)(&«timeEventsInstance»[«timeEvent.indexOf»]), «timeValue.code», «IF timeEvent.periodic»true«ELSE»false«ENDIF»);
 	'''
 
 	override dispatch CharSequence code(UnscheduleTimeEvent it) '''
 		«stepComment»
-		«timerInstance»->unsetTimer(this, &«timeEventsInstance»[«timeEvent.indexOf»]);
+		«timerInstance»->unsetTimer(this, (sc_eventid)(&«timeEventsInstance»[«timeEvent.indexOf»]));
 	'''
 	
 	override dispatch CharSequence code(Execution it) 
