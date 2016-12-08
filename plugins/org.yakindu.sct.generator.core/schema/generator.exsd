@@ -58,7 +58,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.yakindu.sct.generator.core.execution.IGenModelExecutor"/>
+                  <meta.attribute kind="java" basedOn=":org.yakindu.sct.generator.core.execution.IGeneratorEntryExecutor"/>
                </appinfo>
             </annotation>
          </attribute>
