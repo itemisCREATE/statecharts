@@ -28,7 +28,8 @@ class Types implements IContentTemplate {
 		#ifndef «typesModule.define»_H_
 		#define «typesModule.define»_H_
 		
-		#include <cstdint>
+		//#include <cstdint>
+		#include <stdint.h>
 		
 		#define sc_string      char*
 		
