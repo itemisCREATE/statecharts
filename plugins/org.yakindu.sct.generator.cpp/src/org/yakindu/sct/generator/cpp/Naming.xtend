@@ -64,6 +64,10 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		'timer'
 	}
 
+	def timeEventsCountConst() {
+		'timeEventsCount'
+	}
+
 	def timeEventsInstance() {
 		'timeEvents'
 	}
