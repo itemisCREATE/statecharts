@@ -1,0 +1,13 @@
+h1(#Test2). Yakindu SCT Testcase 17 - Headless Code Generation
+
+|_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
+| 17.1 | Installing | Klick of the Link "generating-state-machine-code-headless":https://www.itemis.com/en/yakindu/statechart-tools/documentation/user-guide/#generating-state-machine-code-headless and follow the introductions in *"12.1. Installation"*  to install the tool | "You have 2 new files in your root folder:<p>- headless.ini<p>- scc.bat" | %{color:red}open% |
+| 17.2 | Path variable | Go to your environment variables<p>Make a *new Path variable*<p>Use the path where you install the headless code generator ( there must be the scc.bat file )<p>Click Ok and go back |  | %{color:red}open% |
+| 17.3 | helpful commands | cd [path]<p> cd .. <p> dir <p> tab key  |  | %{color:red}open% |
+| 17.4 | check installation | Open your command line <p>Go to the root folder of your SCT installation<p>Type in @"scc -h"@ | You should see the help content | %{color:red}open% |
+| 17.5 | download test files | Check out "test-workspace":https://github.com/Yakindu/sctpro/tree/master/test-plugins/com.yakindu.sct.generator.standalone.tests in your git <p>Copy the folder "test-workspace" in your root folder |  | %{color:red}open% |
+| 17.6 | generating | Open your command line<p>go to the "test-workspace" folder<p>type in @"scc"@ | "the generator should find 8 gen models and 4 statecharts and generate them" | %{color:red}open% |
+| 17.7 | generating | go to the "A_test.standalone" folder in the command line<p>type in @"scc"@ | "the generator should find 3 gen models and 1 statecharts and generate them" | %{color:red}open% |
+| 17.8 | generating | type in @"scc -s c.sgen"@ | the generator should find only 1 gen file to generate | %{color:red}open% |
+| 17.9 | generating | type in @"scc -s c.sgen -m default.sct"@ | the generator should find only 1 gen file and the sct wihch belong to it and generate it | %{color:red}open% |
+| 17.10 | generating | go back to the "test-workspace"<p>type in @"scc -d A_test.standalone"@ | "the generator should find 3 gen models and 1 statecharts and generate them" | %{color:red}open% |
