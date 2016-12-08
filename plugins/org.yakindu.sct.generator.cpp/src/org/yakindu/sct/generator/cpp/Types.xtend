@@ -28,14 +28,17 @@ class Types implements IContentTemplate {
 		#ifndef «typesModule.define»_H_
 		#define «typesModule.define»_H_
 		
-		#define sc_string		char*
+		#include <cstdint>
 		
-		typedef unsigned char	sc_ushort;
-		typedef int				sc_integer;
-		typedef double			sc_real;
-		typedef bool			sc_boolean;
+		#define sc_string      char*
 		
-		typedef void*			sc_eventid;
+		typedef int_fast16_t   sc_short;
+		typedef uint_fast16_t  sc_ushort;
+		typedef int32_t        sc_integer;
+		typedef double         sc_real;
+		typedef bool           sc_boolean;
+		
+		typedef intptr_t       sc_eventid;
 		
 		#ifndef «Naming::NULL_STRING»
 			#define «Naming::NULL_STRING» 0
