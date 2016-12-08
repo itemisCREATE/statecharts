@@ -28,9 +28,11 @@ class Types implements IContentTemplate {
 		#ifndef «typesModule.define»_H_
 		#define «typesModule.define»_H_
 		
-		//#include <cstdint>
+		/* As <cstdint> is not available on all platforms we choose to include <stdint.h>. You can switch to <cstdint> by commenting and uncommenting the lines below.*/
+		// #include <cstdint>
 		#include <stdint.h>
 		
+
 		#define sc_string      char*
 		
 		typedef int_fast16_t   sc_short;
