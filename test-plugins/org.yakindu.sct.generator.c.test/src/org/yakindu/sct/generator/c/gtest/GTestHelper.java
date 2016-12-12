@@ -39,8 +39,6 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.yakindu.sct.generator.builder.EclipseContextGeneratorExecutorLookup;
 import org.yakindu.sct.generator.core.execution.IGeneratorEntryExecutor;
-import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
-import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
@@ -91,8 +89,8 @@ public class GTestHelper {
 
 		new EclipseContextGeneratorExecutorLookup() {
 			@Override
-			protected Module getContextModule(GeneratorEntry entry, IGeneratorDescriptor description) {
-				return Modules.override(super.getContextModule(entry, description)).with(new Module() {
+			protected Module getContextModule() {
+				return Modules.override(super.getContextModule()).with(new Module() {
 					@Override
 					public void configure(Binder binder) {
 						binder.bind(boolean.class).annotatedWith(Names.named(IGeneratorEntryExecutor.SKIP_VALIDATION))

@@ -25,6 +25,8 @@ public interface IDomain {
 	public static final String FEATURE_SIMULATION = "org.yakindu.sct.simulation";
 	public static final String FEATURE_GENERATOR = "org.yakindu.sct.generator";
 	public static final String FEATURE_RESOURCE = "org.yakindu.sct.resource";
+	public static final String OPTION_HEADLESS = "org.yakindu.sct.headless";
+	public static final String FEATURE_RESOURCE_FILE_EXTENSION = "org.yakindu.sct.resource.file.ext";
 
 	String getDomainID();
 
@@ -35,10 +37,11 @@ public interface IDomain {
 	/**
 	 * Injector instances are cached for the features and the specified options
 	 * 
-	 * @param useCache specifies whether to use cached instances or not
+	 * @param useCache
+	 *            specifies whether to use cached instances or not
 	 */
 	Injector getInjector(String feature, boolean useCache, String... options);
-	
+
 	/**
 	 * Injector instances are cached for the features and the specified options
 	 */

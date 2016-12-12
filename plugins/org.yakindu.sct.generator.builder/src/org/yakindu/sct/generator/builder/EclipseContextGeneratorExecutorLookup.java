@@ -17,8 +17,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.sct.generator.core.execution.GeneratorExecutorLookup;
-import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
-import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 
 import com.google.inject.Module;
@@ -32,7 +30,7 @@ import com.google.inject.util.Modules;
 public class EclipseContextGeneratorExecutorLookup extends GeneratorExecutorLookup {
 
 	@Override
-	protected Module getContextModule(GeneratorEntry entry, IGeneratorDescriptor description) {
+	protected Module getContextModule() {
 		return Modules.combine(new EclipseContextModule(), new SharedStateModule());
 	}
 
