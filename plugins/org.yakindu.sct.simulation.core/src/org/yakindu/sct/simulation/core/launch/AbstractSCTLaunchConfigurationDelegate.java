@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.simulation.core.launch;
 
+import java.util.Collections;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -20,6 +22,8 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
@@ -38,6 +42,16 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 
 	protected abstract ISimulationEngine createExecutionContainer(ILaunch launch, Statechart statechart);
 
+	@Override
+	public boolean preLaunchCheck(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
+			throws CoreException {
+		String filename = configuration.getAttribute(FILE_NAME, DEFAULT_FILE_NAME);
+		URI uri = URI.createPlatformResourceURI(filename, true);
+		if (!URIConverter.INSTANCE.exists(uri, Collections.emptyMap()))
+			return false;
+		return super.preLaunchCheck(configuration, mode, monitor);
+	}
+	
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
 		String filename = configuration.getAttribute(FILE_NAME, DEFAULT_FILE_NAME);
