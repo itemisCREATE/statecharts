@@ -69,9 +69,6 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 
 	public Type getType(String type) {
 		Type result = typeRegistry.get(type);
-		if (result == null) {
-			System.err.println("Could not find type " + type);
-		}
 		return result;
 	}
 
