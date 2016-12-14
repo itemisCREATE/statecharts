@@ -3,7 +3,7 @@ p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/
 
 h1(#the-statechart-language). The statechart language
 
-This chapter describes the language used to add behavior to a statechart.
+This chapter describes the language used to describe statecharts. It consists of graphical and textual elements.
 
 h2(#the-statechart-language-basics). State machine basics
 
@@ -11,243 +11,109 @@ h3(#the-statechart-language-basics-wording). Words and Definitions
 
 To prevent any confusion, some definitions:
 
-* A *finite state machine* (FSM) is an abstract machine that consists of a finite set of states and its behavior.
-* A *state diagram* is one of many possible representations of the FSM. A state transition table would be another way to describe a FSM.
-* A *statechart* is an extended form of the classic state diagram, but the principles are the same. In this documentation, statechart can also refer to the state machine to improve the readability.
+* A *"finite state machine":https://en.wikipedia.org/wiki/Finite-state_machine* (FSM) is an abstract machine that consists of a finite set of states and its behavior.
+* A *"state diagram":https://en.wikipedia.org/wiki/State_diagram* is one of many possible representations of an FSM. A "state transition table":https://en.wikipedia.org/wiki/State_transition_table would be different way to describe an FSM.
+* A *"statechart":https://en.wikipedia.org/wiki/State_diagram#Harel_statechart* is an extended form of the classic state diagram. However, the basic principles are the same. In this documentation, the term "statechart" usually means the graphical representation of a state machine, while the term "state machine" usually pertains to its dynamic aspects.
 
 h3(#the-statechart-language-basics-theory). Automata theory
 
-YAKINDU SCT was designed to create statecharts according to Harel's statechart theory, which is the base for the UML definition.
-Harel's statecharts are an extension to the classic state diagrams, which describe finite state machines (FSM) and only consist of the following things:
+YAKINDU SCT was designed to create statecharts according to "David Harel's":https://en.wikipedia.org/wiki/David_Harel statechart theory. Harel statecharts have become part of the "Unified Modeling Language":https://en.wikipedia.org/wiki/Unified_Modeling_Language (UML). Harel introduced a couple of extensions to convetional state diagrams, making them more concise and more readable.
+
+h4(#classic_state_diagrams). Classic state diagrams
+
+Classic state diagrams describe finite state machines (FSM) and consist of the following things only:
 
 * A (finite) set of possible states
+* A start state
+* An accepting or final state
 * A set of transitions connecting states
 * A set of input symbols
 * A set of output symbols
-* An output function, defining the connection of all elements noted above.
+* An output function, mapping pairs of input symbols and states to output symbols
 
 These parameters describe a finite state machine completely.
+
+h4(#moore_and_mealy_machines). Moore and Mealy machines
+
 In classic automata theory, two distinct types of finite state machines exist:
 
-* The Moore machine, where the output of the machine only depends on its current state
-* The Mealy machine, where the output of the machine depends on its current state and its input.
+* The *"Moore machine":https://en.wikipedia.org/wiki/Moore_machine*, where the output of the machine depends on its current state only
+* The *"Mealy machine":https://en.wikipedia.org/wiki/Mealy_machine*, where the output of the machine depends on its current state and its input.
 
-It is possible to transform those types into each other, but the set of states, the transitions and the output functions need to be changed to achieve this.
+It is possible to transform these types of machine into each other, however, states, transitions and the output function need to be changed to achieve this.
 
-Harel's statecharts extend these classic state diagrams, producing a representation that cannot be described as easily and  mathematically concise as the types above, but is much more readable and usable in day-to-day usage.
+h4(#harel_statecharts). Harel statecharts
 
-It adds the following elements and possibilities:
+Harel statecharts extend the classic state diagrams by a couple of additional aspects, resulting in representations that need much less states and transitions, making them much more compact, expressive, manageable and comprehensible – though not as mathematically concise as Moore or Mealy machines.
 
-* Input and output is possible everywhere (states and transitions)
-* New elements are added:
-** Composite states and regions that contain other states
-** Orthogonal states that allow to run two nested state machines virtually concurrently
-** History states that allow to re-enter composite states and regions at the point where they were left
-** Actions and activities (operations) that include real-world-behavior instead of only defining output symbols that trigger behavior elsewhere
-* Variables and events are introduced, giving the machine an "inner memory". In classic state diagrams, the currently active state is the only state the machine has. Other than that, it is memoryless.
+Harel added the following notations, dealing with _hierarchy_, _concurrency_, and _communication_:
 
-Because Harel's statecharts are a super-set of classic Mealy / Moore machines, it is very much possible to model those in YAKINDU SCT as well.
+* _Composite states_ and _regions_, containing nested states or regions.
+* _History states_, allowing to re-enter a composite state or region at the point where they had been left.
+* _Orthogonal states_, allowing to run state machines concurrently.
+* _Events_, allowing for communication between orthogonal states.
+* _Variables_, allowing to memorize values and reducing the necessary number of states drastically.
+* _Actions_ (output) can not only occur along transitions, but additionally inside of states, especially as entry actions or exit actions.
+* _Activities_ (operations), bridging the gap between a state machine and real-world behavior.
 
-To define the behavior in the statechart, YAKINDU SCT uses its own statechart language, explained in this chapter.
+Since Harel statecharts are a superset of Mealy and Moore machines, it is possible to model the latter in YAKINDU Statechart Tools as well.
 
-p. 
+###. FIXME: The subsequent section a) doesn't cover all the differences between the YAKINDU statechart language and the UML and b) contains implementation-specific aspects that are unrelated to the language. For now, let's omit that section and refine it later.
 
-For those who are familiar with UML Statecharts, some words about differences between those and the YAKINDU SCT model:
+###. h4(#yakindu_statecharts_and_statecharts). YAKINDU statecharts and UML statecharts
 
-* YAKINDU SCT statecharts are self-contained with interfaces defined by events and variables.
-* Core execution semantics are run cycle-driven, not event-driven.
-** This allows to process concurrent events.
-** Event-driven behavior can be defined on top.
-* Time is an abstract concept for statecharts.
-* Time control is delegated to the environment.
+###. To define the behavior in the statechart, YAKINDU Statechart Tools uses its own statechart language, explained in this chapter.
 
-The model interpreter and different flavors of generated code are following these same core semantics.
+###. YAKINDU statecharts are very similar to UML statecharts. For readers who are familiar with the latter, some words about differences between the two:
 
-Please refer to the Wikipedia article "UML state machine":https://en.wikipedia.org/wiki/UML_state_machine for more details.
+###. * YAKINDU statecharts are self-contained with interfaces defining events and variables.
+###. * Core execution semantics are run cycle-driven, not event-driven.
+###. ** This allows to process concurrent events.
+###. ** Event-driven behavior can be defined on top.
+###. * Time is an abstract concept for statecharts.
+###. * Time control is delegated to the environment.
 
-h2(#why-statechart-language). Why another language?
+###. The model interpreter and different flavors of generated code are following these same core semantics.
 
-Before you get too intrigued by learning yet another language, even one you can't use anywhere outside of YAKINDU SCT, you should know _why_ YAKINDU SCT uses its own domain specific language.
+###. Please refer to the Wikipedia article "UML state machine":https://en.wikipedia.org/wiki/UML_state_machine for more details.
 
-There are other tools out there that allow you to draw state diagrams, add behavior to them and even generate code out of them. Some of those tools even offer a much wider palette of languages you can generate to. What they do not have is their own language. The text you type in is directly copied to the generated code instead. One might argue that this is pretty good, because you can then use any possible language construct of your target language, which is true. If you ever want to switch to another language, because maybe you need the exact same construct in two parts of a multi-language project, those constructs don not work anymore. Even worse, the tool cannot inform you that your input is invalid, because all it does is pass raw text through to the generated code.
 
-With the use of its own language, YAKINDU SCT is able to:
 
-* Verify the input (syntax and semantic)
-* Offer refactorings
-* Offer special triggers for reactions, for example timed ones
-* Correctly transform all language statements into the target language
-* Simulate the statechart, so the correct behavior can be verified before any line of code is written or generated
+###. FIXME: I (Rainer) didn't get the purpose of the following section.
 
-Also, YAKINDU SCT's language is not complicated at all. If something is not clear, this chapter should be able to help you.
+###. h2(#why-statechart-language). Why another language?
 
-h2(#statechart). Statechart
+###. Before you get too intrigued by learning yet another language, even one you can't use anywhere outside of YAKINDU SCT, you should know _why_ YAKINDU SCT uses its own domain specific language.
 
-A statechart or statechart model consists of several components.
+###. There are other tools out there that allow you to draw state diagrams, add behavior to them and even generate code out of them. Some of these tools are even offering a much wider palette of languages you can generate to. What they do not have is their own language. The text you type in is directly copied to the generated code instead. One might argue that this is pretty good, because you can then use any possible language construct of your target language, which is true. If you ever want to switch to another language, because maybe you need the exact same construct in two parts of a multi-language project, those constructs don not work anymore. Even worse, the tool cannot inform you that your input is invalid, because all it does is pass raw text through to the generated code.
 
-The most important part is the *state diagram*, comprising "states":#state and "transitions":#transition. They are organized into zero or more "regions":#region. For hints how to use the graphical editor to modify the statechart, see the chapter "Editing statecharts".
+###. With the use of its own language, YAKINDU SCT is able to:
 
-The *definition section* is a textual statechart component. It contains definitions of "namespaces":#namespace, "interfaces":#interface-scope, "variables":#variables, events, operations, etc.
+###. * Verify the input (syntax and semantic)
+###. * Offer refactorings
+###. * Offer special triggers for reactions, for example timed ones
+###. * Correctly transform all language statements into the target language
+###. * Simulate the statechart, so the correct behavior can be verified before any line of code is written or generated
 
-Most objects defined in the definition section are _typed_. For example, a variable could be of type _integer_. As another example, the type of an operation is by defined by its return type, if any. Events can be typed as well. For details, see "the section about types":#types.
+###. Also, YAKINDU SCT's language is not complicated at all. If something is not clear, this chapter should be able to help you.
 
-A type system or *domain* specifies which types are available. YAKINDU Statechart Tools has a built-in type system. %(pro-feature)The Professional Edition allows for additional domains to be installed.%
 
-h2(#definition-section). The definition section
 
-The definition section is a text area. Per default, it is located to the left of the drawing area. It is a graphical element which you can move, resize, and so on like all other elements in the drawing area.
+h2(#statechart_model). Statechart model
 
-You need to declare everything you want to use in your statechart inside of the definition section. This includes "variables":#variables, "events":#events and "operations":#operations. Variables and events have to be declared inside of an "interface":#interface-scope, which can be an "internal interface":#internal-scope. Especially useful for larger features is the possibility to use "namespaces":#namespace. All these elements are properly reflected in the generated code as much as the language supports it.
+A _statechart_ or _statechart model_ consists of several components.
 
-h3(#scopes). Scopes
+The most important part is the _diagram_, comprising "states":#state and "transitions":#transition. They are organized into zero or more "regions":#region. For hints how to use the statechart editor to modify a statechart, see section "Editing statecharts".
 
-==<!-- Start stext_keyword_namespace -->==
+The _definition section_ is a textual statechart model component. It contains definitions of "namespaces":#namespace, "interfaces":#interface-scope, "variables":#variables, events, operations, etc.
 
-h4(#namespace). Namespace
+Most objects defined in the definition section have a _type_. For example, a variable could be of the _integer_ type. Another example is the return type of an operation (if any). Events can be typed as well. For details, see "the section about types":#types.
 
-The language allows to define unique namespaces which can be used to qualify references to the statechart.
+A type system or _domain_ specifies which types are available. YAKINDU Statechart Tools has a built-in type system.
 
-bc. namespace trafficlights
-
-==<!-- End stext_keyword_namespace -->==
-==<!-- Start stext_keyword_interface -->==
-
-h4(#interface-scope). Interface scope
-
-Declarations in the interface scope are externally visible. They can be shared within the environment.
-
-bc. 
-interface NamedInterface:
-  in event event1
-  out event event3 : integer
-  var variable1 : integer
-  
-Note: All elements defined inside of a named interface _must_ be referenced using that interface's name, such as @NamedInterface.event1@, @NamedInterface.event3@, and @NamedInterface.variable1@.
-
-It is also possible to have one unnamed interface, which is externally visible as well:
-
-bc. 
-interface:
-  in event event1
-
-It behaves exactly the same as a named interface.
-
-==<!-- End stext_keyword_interface -->==
-==<!-- Start stext_keyword_internal -->==
-
-h4(#internal-scope). Internal scope
-
-Declarations made in an internal scope are visible to the statechart only. You are not meant to access them from your code.
-
-bc. internal:
-  var localVariable1: integer
-  event localEvent: integer
-  operation localOperation (int1 : integer, int2 : integer): integer
-  localEvent2 / raise NamedInterface.event3 :
-  localOperation(valueof(localEvent) , NamedInterface.variable1)
-
-==<!-- End stext_keyword_internal -->==
-
-
-h3(#variables). Variables
-
-Variables need to be declared inside of an "internal":#internal-scope or "external":#interface-scope interface. Variables inside of an internal scope are not visible for the code outside the statechart.
-
-bc. var variable1: real
-
-Variables that are defined inside of a named interface need to be referenced using the interface name, see "interfaces":#interface-scope.
-
-Variables are always typed, see "types":#types.
-
-
-Variables can be _readonly_ (constants):
-
-bc. var readonly pi: real = 3.1415
-
-
-Variables can be referenced by the environment.
-
-bc. var external variable3: integer = 34
-
-==<!-- End stext_keyword_var -->==
-==<!-- Start stext_keyword_const -->==
-
-h3(#constants). Constants
-
-Variables can be immutable. For this special variable the keyword @const@ is used:
-
-bc. const variable1: real
-
-==<!-- End stext_keyword_const -->==
-==<!-- Start stext_keyword_event -->==
-
-h3(#events). Events
-
-An _event_ is something of importance that happens at a certain point in time in the context of a state machine, for example a user pushes a button, a temperature sensor delivers a value, a period of time has passed, etc. An event can be of three basic types: 
-
-* Internal events are meant to be raised and processed by the statemachine.
-* External events (in an "interface scope":#interface-scope ) can be _incoming_ or _outgoing_, so they are either raised by the environment and processed by the statechart or they are raised in the statechart and can be processed outside.
-
-Events that are defined inside of a named interface need to be referenced using the interface name, see "interfaces":#interface-scope.
-
-Events can be processed in triggers, see "Trigger specification":#event-specifications. For raising events from the statechart, see "raising an event":#raising-an-event, and for details concerning the processing of events see "raising and processing an event":#raising-and-processing-an-event.
-
-h4(#incoming-and-outgoing-events). Incoming and outgoing events
-
-An event in an interface scope has a direction. It is either incoming or outgoing:
-
-bc. 
-interface NamedInterface:
-  in event event1
-  out event event2
-  
-Events in the internal scope do not have a direction, because they do not leave the statechart:
-
-bc. 
-internal:
-  event ev1
-
-
-h4(#events-with-variables). Events with variables
-
-Events can be typed and carry a value:
-
-bc. 
-internal:
-  event event1 : integer
-
-
-An event can have a value assignment:
-
-bc. 
-internal:
-  event event1: integer = 25
-
-
-Read access to the value of an event is possible in the statechart using the @valueof()@ built-in method (see "built-in methods":#built-in-functions for details). Please note that reading an event's value is possible only when the event actually occurs, for example in a guard:
-
-bc. event1 [valueof(event1) == 6]
-
-
-An event parameter can be specified when raising an event, as in the following example:
-
-bc. raise event1 : 3+3
-
-
-p. 
-
-For the syntax of event raising, see "Raising an event":#raising-an-event. For the more complicated details of processing an event, see "Raising and processing an event":#raising-and-processing-an-event.
-
-==<!-- End stext_keyword_event -->==
-==<!-- Start stext_keyword_operation -->==
-
-h3(#operations). Operations
-
-Operations can have none, one or multiple parameters. A parameter is declared with a name and a type. An operation may have a single return type similar to all standard programming languages. Again, see "types":#types for details.
-
-bc. operation myOperation (xValue: integer, yValue: integer): integer
-
-==<!-- End stext_keyword_operation -->==
+==<div class="pro-feature">==
+YAKINDU Statechart Tools Professional Edition allows for additional domains to be installed and includes and domain for the C programming language.
+==</div>==
 
 
 
@@ -255,7 +121,7 @@ h2(#graphical-elements). Statechart elements
 
 h3(#region). Region
 
-As already mentioned, the YAKINDU statecharts are self-contained. They are organized in regions. Due to this it is possible to organize multiple state machines in different regions and to run them virtually concurrently.
+YAKINDU statecharts are organized in regions. Hence it is possible to organize multiple state machines in different regions and to run them virtually concurrently.
 
 !(standard-image)images/docu_parallelRegions.jpg(Parallel regions)!
 
@@ -263,35 +129,41 @@ p=. Parallel regions
 
 Regions can contain "states":#state. Regions can be contained in states as well, turning them into "composite states":#composite-state.
 
+
 h3(#state). State
 
-States are the central elements of a state machine. A state has to be placed inside a region and must have a name that is unique inside this region. During state machine execution, a state can be active or passive.
+States are the central elements of a state machine. A state has to be placed inside a "region":#region and must have a name that is unique inside this region. During state machine execution, a state can be active or passive.
 
-A state can have a _behavior_. The behavior specifies which actions are executed. Such actions can be triggered by entering the state, leaving the state, occurrence of events, conditions becoming true, or time passing. The behavior specification is a text inside the state's box and consists of a sequence of so-called "_local reactions_":#reactions. 
+A state can have _behavior_. The behavior specifies which "actions":#reactions are executed. Such actions can be triggered by entering the state, leaving the state, occurrence of events, conditions becoming true, or time passing. The behavior specification is a text inside the state's box and consists of a sequence of so-called "_local reactions_":#reactions. 
 
 The state *Countdown* in the following example has three local reactions:
 
 p(#fig_state-example). 
 !(standard-image)images/docu_state_010_example_01.png(State example)!
 
-p=. State example: A simple state machine to launch a rocket. When the *Countdown* state is entered, it sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ provides audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the *Countdown* state will become inactive and launches the rocket upon exiting. The countdown can be aborted anytime before launch by a _cancel_ event. (See figure "&quot;Transition example&quot;":#fig_transition-example for a different state machine which solves the same task but puts more emphasis on transitions.)
+p=. State example: A simple state machine to launch a rocket.
+
+When the *Countdown* state is entered, it sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ provides audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the *Countdown* state will become inactive and launches the rocket upon exiting. The countdown can be aborted anytime before launch by a _cancel_ event. (See figure "&quot;Transition example&quot;":#fig_transition-example for a different state machine which solves the same task but puts more emphasis on transitions.)
 
 _Can you find the mistake in the state behavior?_
 
+
 h3(#transition). Transition
 
-A transition is the transfer of one state to another. A transition is diagrammed as an arrow leading from a _source state_ to a _target state_.
+A transition is the transfer of one "state":#state to another. A transition is diagrammed as an arrow leading from a _source state_ to a _target state_.
 
-A transition should have a _transition reaction_. The transition reaction specifies what the conditions are for this transition to be taken and which actions, if any, are to be executed. The occurrence of an event, a condition becoming true, or time passing can trigger a transition. The transition reaction is attached to the transition's arrow as a text. Its syntax can be found in the section about "Reactions":#reactions.
+A transition should have a _transition "reaction":#reactions_. The transition reaction specifies what the conditions are for this transition to be taken and which actions, if any, are to be executed. The occurrence of an event, a condition becoming true, or time passing can trigger a transition. The transition's reaction is attached to the transition's arrow as a text. Its syntax can be found in the section on "reactions":#reactions.
 
-Note: Transitions without any reaction are possible, but useless. They will never be taken.
+*Please note:* Transitions without any reaction are possible, but useless. They will never be taken.
 
 Here's an example:
 
 p(#fig_transition-example). 
 !(standard-image)images/docu_transition_030_example_01.png(Transition example)!
 
-p=. Transition example: A simple state machine to launch a rocket. The initial transition's _effect_ sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ – executed as one of a transition's _actions_ – cares for audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the rocket is launched. The countdown can be aborted anytime before launch by a _cancel_ event which _triggers_ the appropriate transition to fire. (See figure "&quot;State example&quot;":#fig_state-example for a different state machine which solves the same task but puts more emphasis on states.)
+p=. Transition example: A simple state machine to launch a rocket.
+
+The initial transition's _effect_ sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ – executed as one of a transition's _actions_ – cares for audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the rocket is launched. The countdown can be aborted anytime before launch by a _cancel_ event which _triggers_ the appropriate transition to fire. (See figure "&quot;State example&quot;":#fig_state-example for a different state machine which solves the same task but puts more emphasis on states.)
 
 Figure "&quot;Transition syntax overview&quot;":#fig_transition-syntax-overview shows how the syntax of a transition reaction is defined.
 
@@ -302,15 +174,15 @@ p=. Transition syntax overview
 
 h4(#entry-and-exit-points). Entry and exit points
 
-Unlike "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language transitions, transitions in YAKINDU Statecharts can denote specific entry or exit points when leaving or entering composite states. This is denoted by the _TransitionProperties_ non-terminal symbol in figure "&quot;Transition syntax overview&quot;":#fig_transition-syntax-overview.
+Unlike "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language transitions, transitions in YAKINDU statecharts can denote specific entry or exit points when leaving or entering composite states. This is denoted by the _TransitionProperties_ non-terminal symbol in figure "&quot;Transition syntax overview&quot;":#fig_transition-syntax-overview.
 
-The syntax to connect a transition to a "named Entry":#entry is as follows:
+The syntax to connect a transition to a "named entry":#entry is as follows:
 
-@# >_entry-name_@
+<code># ><em>entry-name</em></code>
 
 A "named exit":#exit can be used as follows:
 
-@# _exit-point-1_> [ _exit-point-2_> ]…@
+<code># <em>exit-point-1</em>> [ <em>exit-point-2</em>> ]…</code>
 
 It is also possible to have both in one transition specification. The order of exit and entry points is irrelevant. Instead, the position of the @>@ character is decisive:
 
@@ -324,7 +196,7 @@ The sample statechart in figure "&quot;Entries and exits&quot;":#fig_state_entry
 
 The question is how to connect the exit points of _Process_ to the corresponding entry points of _Handle result_. This is done by two transitions leading from _Process_ to _Handle result_ and appropriate specifications.
 
-The transition shown on the left specifies @# no_problem> >success@. This means: If the source composite state is left via the _no&#95;problem_ exit point, enter the target composite state at the _success_ entry point. The specification of the transition on the right is analogous: If the source state is left via the _problem_ exit point, enter the target state at the _failure_ entry point.
+The transition shown on the left specifies @# no_problem> >success@. This means: If the source composite state is left via the _no&#95;problem_ exit point, then enter the target composite state at the _success_ entry point. The specification of the transition on the right is analogous: If the source state is left via the _problem_ exit point, then enter the target state at the _failure_ entry point.
 
 Alternatively, _Process_ could have been modeled with two different error exit states, say _error&#95;1_ and _error&#95;2_. This would allow to respond differently to different error conditions, while still enabling to catch them both with a single flow. A transition with @# >error_1 >error_2 problem>@ would do so.
 
@@ -342,9 +214,9 @@ p(#fig_transition-priorities-1).
 
 p=. Transition priorities &#91;1]
 
-Which transition will fire when event _e1_ occurs? Fortunately YAKINDU state machines behave deterministically, so this question can be answered unambiguously. Outgoing transitions of a state have a definite order and are _prioritized_ by that order. The state machine checks the transitions one by one in their order and executes the first transition that fulfills all prerequisites for firing.
+Which transition will fire when the state machine is in state *A* and event _e1_ occurs? Fortunately YAKINDU state machines behave deterministically, so this question can be answered unambiguously. Outgoing transitions of a state have a definite order and are _prioritized_ by that order. The state machine checks the transitions one by one in their order and executes the first transition that fulfills all prerequisites for firing.
 
-As you can see in figure "&quot;Transition priorities (1)&quot;":#fig_transition-priorities-1, little numbers indicate the transition priorities. These numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram Appearance_ is activated, which it is not by default.
+As you can see in figure "&quot;Transition priorities &#91;1]&quot;":#fig_transition-priorities-1, little numbers indicate the transition priorities. These numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram Appearance_ is activated. By default, this option is _not_ activated.
 
 The order of transitions is a property of their source state. In the example above, the transition priorities of state *A* appear like this in the _Properties_ view:
 
@@ -355,11 +227,12 @@ p=. Transition priorities &#91;2]
 
 To change priorities, select a transition in the _Properties_ view and click on the _up_ or _down_ button as appropriate.
 
+
 h3(#entry). Entry
 
-When a state machine starts or when the control flow enters a "region":#region, an _entry_ defines which state is to be activated first. The flow passes through the state machine's or the region's entry and transitions to the target state the entry's transition is pointing to. This state becomes active.
+When a state machine starts or when the control flow enters a "region":#region, an _entry_ defines which "state":#state is to be activated first. The flow passes through the state machine's or the region's entry and transitions to the target state the entry's transition is pointing to. This state becomes active.
 
-An entry has a single outgoing transition and no incoming ones. Its outgoing transition has neither a trigger nor a guard condition.
+An entry has a single outgoing transition and no incoming ones. Its outgoing transition has neither a trigger nor a guard condition. It is always taken immediately.
 
 An entry is depicted as a filled circle, see figure "&quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
 
@@ -384,12 +257,13 @@ An incoming transition to a composite state can specify a named entry it shall l
 
 Named entries have no equivalent in the UML.
 
-The sample statechart in figure "&quot;Entry state&quot;":#fig_state_entry has a composite state named _Handle result_. This composite state has a default entry as well as an entry called _failure_. If state _A_ is active and the _error_ trigger fires, control is transitioned to the _Handle result_ composite state. The notation @error # >failure@ specifies that the _failure_ entry is to be used; see "Entry and exit points":#entry-and-exit-points.
+The sample statechart in figure "&quot;Entry state&quot;":#fig_state_entry has a composite state named _Handle result_. This composite state has a default entry as well as an entry called _failure_. If state *A* is active and the _error_ trigger fires, control is transitioned to the _Handle result_ composite state. The notation @error # >failure@ specifies that the _failure_ entry is to be used; see "Entry and exit points":#entry-and-exit-points.
 
 p(#fig_state_entry). 
 !(standard-image)images/docu_state_entry.png(Entry state)!
 
 p=. Entry state
+
 
 h3(#exit). Exit
 
@@ -399,11 +273,12 @@ An exit may have multiple incoming transitions and has no outgoing one.
 
 An exit state is depicted as an unfilled circle with an X-shaped cross, see figure "&quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
 
-Within a region, multiple exits are allowed. Each exit must either have a name that is unique within its region or be the _default exit_. The default exit is either unnamed or has the name @default@, which is semantically equivalent. A region may have at most one default exit. For details on how to connect named exits with transitions, see "Entry and exit points":#entry-and-exit-points in the section about transitions.
+Within a region, multiple exits are allowed. Each exit must either have a name that is unique within its region or be the _default exit_. The default exit is either unnamed or has the name @default@, which is semantically equivalent. A region may have at most one default exit. For details on how to connect named exits to transitions, see subsection "&quot;Entry and exit points&quot;":#entry-and-exit-points in the section on transitions.
 
 When a composite state reaches an exit in any of its regions, all states in other regions of that composite state, if any, are deactivated immediately. The composite state will be left and be deactivated. It maintains no status information that could be probed from the outside. In other words, reaching an exit in one of a composite state's regions has severe consequences for all the other regions since they are exited and disposed immediately. After that, the containing composite state is also exited. There must be an unguarded transition that catches the exit and leads to another state outside of the composite state. The semantics of exit is different from that of final state; please see section "&quot;Final state&quot;":#final-state for details.
 
 Exits have no equivalent in the UML.
+
 
 h3(#final-state). Final state
 
@@ -419,7 +294,7 @@ When a region reaches its final state, control stops there and waits until all o
 
 bq.. *Note*
 
-Final states are proper states. This is different from the UML, where a final state is a pseudo state, i. e. in the UML, it cannot have any properties normal states can have, except for a name.
+Final states are proper states. This is different from the UML, where a final state is a pseudo state, i.e. in the UML a final state cannot have any properties normal states can have, except for a name.
 
 
 h3(#choice). Choice
@@ -427,6 +302,9 @@ h3(#choice). Choice
 A choice is a pseudo state. It can be used to model a conditional path. A choice node divides a transition into multiple parts.
 
 Usually the first transition points towards the choice node. One of the choice's outgoing transitions can carry a condition.
+
+###. FIXME: An example and more explanation is needed here.
+
 
 h3(#synchronization). Synchronization
 
@@ -437,7 +315,7 @@ Whether a synchronization state behaves as a fork or as a join depends on its us
 * A synchronization with a single incoming transition and several outgoing ones _forks_ the flow into several regions of the same substate. These regions are executed in parallel, see section "&quot;Orthogonal states&quot;":#orthogonal-states.
 * A synchronization with several incoming transitions from parallel regions of the same substate and a single outgoing transition _joins_ the incoming flows into a single flow of execution.
 
-A synchronization state is shown as a thick horizontal or vertical line, as can be seen in figure "Synchronization state":#fig_state_synchronization.
+A synchronization state is shown as a thick horizontal or vertical line, as can be seen in figure "&quot;Synchronization state&quot;":#fig_state_synchronization.
 
 p(#fig_state_synchronization). 
 
@@ -451,25 +329,30 @@ For a synchronization to actually join the incoming transitions and execute the 
 * All guard conditions that are specified must be fulfilled.
 * If one or more triggers are defined, at least one trigger must fire at a point in time while the conditions above are met.
 
-Figure "&quot;Synchronization state&quot;":#fig_state_synchronization shows a sample statechart containing a forking and a joining synchronization. After having left the @Initialize@ state, the synchronization state forks the execution flow into two regions @r1@ and @r2@. Both are part of the @Process@ composite state and both are executed in parallel. That is, when activating @Process@, the substates @Line A 1@ and @Line B 1@ also become active. When the flows continues and both @Line A 2@ and @Line B 2@ have been reached, the synchronization state on the right-hand side joins the flows and transitions to substates @Cleanup@, making it the active state. However, as long as only one of them is active, the synchronization will wait for the other one to also become active before proceeding to @Process@.
+Figure "&quot;Synchronization state&quot;":#fig_state_synchronization shows a sample statechart containing a forking and a joining synchronization. After having left the *Initialize* state, the synchronization state forks the execution flow into two regions _r1_ and _r2_. Both are part of the *Process* composite state and both are executed virtually concurrently. That is, when activating *Process*, the substates *Line A 1* and *Line B 1* also become active. When the flows continues and both *Line A 2* and *Line B 2* have been reached, the synchronization state on the right-hand side joins the flows and transitions to substates *Cleanup*, making it the active state. However, as long as only one of *Line A 2* and *Line B 2* is active, the synchronization will wait for the other one to also become active, before proceeding to *Process*.
 
-The example also demonstrates different lengths and orientations of the synchronization symbol. In the statechart editor, first select the synchronization symbol, the use a handle in one of the symbol's corners to change length or orientation. The handles in the middle of the symbol have no effect.
+The example also demonstrates different lengths and orientations of the synchronization symbol. In the statechart editor, first select the synchronization symbol, then use a handle in one of the symbol's corners to change length or orientation. The handles in the middle of the symbol have no effect.
+
 
 h3(#composite-state). Composite state
 
-A composite state is a state containing a "region":#region. All usual characteristics of regions apply - they can have entry states, exit states, and so on. "Transitions":#transition can connect inner states of composite states with states that are at the same hierarchical level as the composite state, or they can directly be sourced at the composite states. This is useful for constructs like "cancel", where the operation of a composite state should be able to be aborted every time.
+A composite state is a "state":#state containing a "region":#region. All usual characteristics of regions apply - they can have entry states, exit states, and so on. "Transitions":#transition can connect inner states of composite states to states that are at the same hierarchical level as the composite state, or they can directly be sourced at the composite states. This is useful for constructs like "cancel", where the operation of a composite state should be able to be aborted every time, no matter the active substate.
 
 See "entry state":#entry, "exit state":#exit, "final state":#final-state and "connecting entries and exits to transitions":#entry-and-exit-points for further information.
 
+
 h3(#orthogonal-states). Orthogonal states
 
-Orthogonal states are basically "composite states":#composite-state with more than one region. These regions are executed virtually concurrently. *Please note* the word _virtually_. YAKINDU SCT does _not_ guarantee in any way that orthogonal regions are really executed concurrently. At the time being, no code generator utilizes threads to achieve this. It should rather be understood as a manner to have two sub-statecharts working together, but they are executed _after each other_ every cycle, in a defined order: top to bottom, left to right. The same warnings apply for multiple regions in the statechart itself. Consult the section "raising and processing events":#raising-and-processing-an-event for further information on region priority and its meanings for the statechart execution.
+Orthogonal states are basically "composite states":#composite-state with more than one region. These regions are executed virtually concurrently. *Please note* the word _virtually_! YAKINDU SCT does _not_ guarantee in any way that orthogonal regions are really executed concurrently. At the time being, no code generator utilizes threads to achieve this. Orthogonal states should rather be understood as a manner to have two or more sub-statecharts working together, however, they are executed _one after the other other_ in every cycle, in a defined order: top to bottom, left to right. The same applies to multiple regions in the statechart itself. Consult section "raising and processing events":#raising-and-processing-an-event for further information on region priorities and their meanings for the statechart execution.
+
+###. CHECK the time-related statement in the paragraph above!
 
 The presumably most famous example for orthogonal states is the keyboard example:
 
 !(standard-image)images/docu_orthogonalState_example.jpg(Orthogonal states)!
 
 p=. Orthogonal states
+
 
 h3(#shallow-history). Shallow history
 
@@ -481,7 +364,7 @@ The following example, showing the answering of a questionaire, explains this:
 
 p=. Shallow history &#91;1]
 
-Particularly interesting in this statechart are the events @checkProgress@ and @goon@. The event @checkProgress@ jumps back to the @init@ state while assigning the current progress count to the variable @temp@. The event @goon@ jumps to the shallow history state that was placed inside the composite state.
+Particularly interesting in this statechart are the _checkProgress_ and _goon_ events. The _checkProgress_ event jumps back to the *init* state while assigning the current progress count to the variable _temp_. The event _goon_ jumps to the shallow history state that was placed inside the composite state.
 
 !(standard-image)images/docu_shallowHistory02.jpg(Shallow history [2])!
 
@@ -491,11 +374,180 @@ p=. Shallow history &#91;2]
 
 p=. Shallow history &#91;3]
 
-When the @goon@ event is triggered, the most recent active state inside of the composite state @answeringQuestions@ is activated again.
+When the _goon_ event is triggered, the most recent active state inside of the composite state *answeringQuestions* is activated again.
+
 
 h3(#deep-history). Deep history
 
 Deep history is similar to shallow history, but more complex. With a deep history the latest state of multiple nested states is remembered.
+
+
+
+h2(#definition-section). Definition section
+
+###. FIXME: This is very "dry" stuff! Examples are needed!
+
+###. FIXME: Relation between definition section and the concept of code generation should be explained, since the statechart model is intrinsically independend of code generation. We should discuss whether to mention code generation at all here.
+
+The _definition section_ is a text area. Per default, it is located to the left of the drawing area. You can move or resize it like other elements in the drawing area.
+
+In the definition section you have to define entities you want to use in your statechart. This includes "variables":#variables, "events":#events, and "operations":#operations. Variables and events have to be defined in the scope of a named "interface":#interface-scope or an "internal interface":#internal-scope. Especially useful for larger parts of a statechart model is the possibility to use "namespaces":#namespace. All these elements are properly reflected in generated source code as much as the respective target language supports it.
+
+
+h3(#scopes). Scopes
+
+==<!-- Start stext_keyword_namespace -->==
+
+h4(#namespace). Namespace
+
+The statechart language allows to define unique namespaces. They can be used to qualify references to statechart elements.
+
+bc. namespace trafficlights
+
+==<!-- End stext_keyword_namespace -->==
+
+==<!-- Start stext_keyword_interface -->==
+
+h4(#interface-scope). Interface scope
+
+Declarations in the interface scope are externally visible. They can be shared within the environment.
+
+bc. 
+interface NamedInterface:
+  in event event1
+  out event event3 : integer
+  var variable1 : integer
+  
+Note: All elements defined in a named interface _must_ be referenced using that interface's name, such as @NamedInterface.event1@, @NamedInterface.event3@, or @NamedInterface.variable1@.
+
+It is also possible to have a single unnamed interface, which is externally visible as well:
+
+bc. 
+interface:
+  in event event1
+
+It behaves exactly the same as a named interface.
+
+==<!-- End stext_keyword_interface -->==
+
+==<!-- Start stext_keyword_internal -->==
+
+h4(#internal-scope). Internal scope
+
+Definitions made in the internal scope are visible to the statechart only. It is not possible to access them from client code.
+
+bc. internal:
+  var localVariable1: integer
+  event localEvent: integer
+  operation localOperation (int1 : integer, int2 : integer): integer
+  localEvent2 / raise NamedInterface.event3 :
+  localOperation(valueof(localEvent) , NamedInterface.variable1)
+
+==<!-- End stext_keyword_internal -->==
+
+
+h3(#variables). Variables
+
+Variables have to be defined in an "internal":#internal-scope or "external":#interface-scope interface. Variables in the internal scope are not visible to any client code outside of generated state machine code.
+
+bc. var variable1: real
+
+Variables that are defined in a named interface have to be referenced using the interface name, see section "&quot;Interfaces&quot;":#interface-scope.
+
+Variables are always typed, see section "&quot;Types&quot;":#types.
+
+Variables can be _readonly_ (constants):
+
+bc. var readonly pi: real = 3.1415
+
+Variables can be referenced by the environment.
+
+bc. var external variable3: integer = 34
+
+==<!-- End stext_keyword_var -->==
+
+
+==<!-- Start stext_keyword_const -->==
+
+h3(#constants). Constants
+
+Variables can be immutable. For this special variable the keyword @const@ is used:
+
+bc. const variable1: real
+
+==<!-- End stext_keyword_const -->==
+
+
+==<!-- Start stext_keyword_event -->==
+
+h3(#events). Events
+
+An _event_ is something of importance that happens at a certain point in time in the context of a state machine, for example a user pushes a button, a temperature sensor delivers a value, a period of time has passed, etc. An event can be of three basic types:
+
+* Internal events are meant to be raised and processed by the state machine internally only.
+* External events are defined in an "interface scope":#interface-scope and can be _incoming_ or _outgoing_. An external event is either raised by the environment and processed by the state machine or it is raised within the state machine and can be processed outside.
+
+Events that are defined in a named interface need to be referenced using the interface's name, see section "&quot;Interfaces&quot;":#interface-scope.
+
+Events can be processed in triggers, see section "&quot;Trigger specification&quot;":#event-specifications. In order to raise an event in the state machine, see section "&quot;Raising an event&quot;":#raising-an-event. For details on the processing of events see section "&quot;Raising and processing an event&quot;":#raising-and-processing-an-event.
+
+h4(#incoming-and-outgoing-events). Incoming and outgoing events
+
+An event in an interface scope has a _direction_. It is either incoming or outgoing.
+
+bc. 
+interface NamedInterface:
+  in event event1
+  out event event2
+  
+Events in the internal scope do not have a direction, because they do not leave the state machine.
+
+bc. 
+internal:
+  event ev1
+
+
+h4(#events-with-variables). Events with variables
+
+An event can be typed and can carry a value:
+
+bc. 
+internal:
+  event event1 : integer
+
+
+An event can have a value assignment:
+
+bc. 
+internal:
+  event event1: integer = 25
+
+
+Read access to the value of an event is possible in the statechart using the @valueof()@ built-in method, see section "&quot;Built-in methods&quot;":#built-in-functions for details. Please note that reading an event's value is possible only when the event actually occurs, for example in a guard:
+
+bc. event1 [valueof(event1) == 6]
+
+
+An event parameter can be specified when raising an event, as in the following example:
+
+bc. raise event1 : 3+3
+
+Regarding the syntax of event raising, see section "&quot;Raising an event&quot;":#raising-an-event. Regarding the more complicated details of processing an event, see section "&quot;Raising and processing an event&quot;":#raising-and-processing-an-event.
+
+==<!-- End stext_keyword_event -->==
+
+
+==<!-- Start stext_keyword_operation -->==
+
+h3(#operations). Operations
+
+Operations can have none, one or multiple parameters. A parameter is declared with a name and a type. An operation may have a single return type similar to usual programming languages. Again, see section "&quot;Types&quot;":#types for details.
+
+bc. operation myOperation (xValue: integer, yValue: integer): integer
+
+==<!-- End stext_keyword_operation -->==
+
+
 
 h2(#reactions). Reactions
 
