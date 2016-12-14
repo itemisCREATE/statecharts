@@ -1,53 +1,81 @@
 
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/generating_code_headless.textile
 
-h1(#generating-state-machine-code-headless). Headless code generation
+h1(#hdls_headless_code_generation). Headless code generation
 
-As the state machine code is fully derived from the statechart model, it is best practice to generate it on the fly during a CI-build instead of polluting your version control system with generated artifacts. Since the release 2.9.0 of YAKINDU Statechart Tools provides a headless code generator infrastructure that allows integration in continuous build environments.  
+State machine code is fully derived from a statechart model, and section "Generating state machine code":../user-guide/generating_code.html explains how to interactively run a code generator. Since release 2.9.0, YAKINDU Statechart Tools additionally provides a headless code generator infrastructure. This allows for code generation without a user interface which in turn allows to integrate code generation into continuous integration (CI) build environments.
 
-The headless code generator can simply be called from the command line and thus can be integrated with different CI-Tools easily. No matter if you use Gradle, Maven or Make all you need is a java runtime on your build machine.
+Best practice is to generate code on the fly during a continuous integration build instead of cluttering your version control system with generated artifacts.
 
-*NOTE:* The headless code generation is restricted to the open source generators. This means generating code for e.g. 'Deep C Integration' statecharts or your custom generators might fail. Support for C statecharts will be added with the next release.
+The headless code generator can simply be called from a command line and thus can be integrated with different CI tools easily. No matter if you are using Gradle, Maven or make, all you need is a Java runtime on your build machine.
 
-h2(#generating-state-machine-code-headless-installation). Installation
+###. FIXME: time-specific
 
-The headless code generator comes as an OSGi application which can be installed into every eclipse installation.
+bq.. *Please note:*
 
-If you download the "Professional Edition":https://info.itemis.com/yakindu/statecharts/pro the headless code generation feature is already included and no further installation is required.
-When you download the "Open Edition":https://info.itemis.com/download-yakindu-statechart-tools you can install the headless code generation feature from the SCT Pro update site.
+At the moment, headless code generation is available for the open-source generators only. This means generating source code for e.g. "Deep C Integration":../user-guide/c-domain.html#cdom_deep-c-integration statecharts or for your custom generators might fail. Support for C statecharts will be added with the next YAKINDU Statecharts release.
 
-To do so, "register as usual":https://info.itemis.com/yakindu/statecharts/pro, select "Download" and "Install from update site". You will obtain the URL of the update site. To use it, open the 'Help > Install New Software...' wizard, select "Add...", paste the URL and choose the "YAKINDU headless Code Generator" feature.
-Even if it is just available on the SCT Pro update site the headless code generation application is free to use for all users of YAKINDU Statechart Tools.
+h2(#hdls_installation). Installation
 
-!(standard-image)images/docu_headless_updatesite.png(Professional Edition Update Site)!
+If you are working with the "Professional Edition":https://info.itemis.com/yakindu/statecharts/pro of YAKINDU Statechart Tools, the headless code generation feature is already included and no further installation is required.
 
-After clicking "Finish" the installation process will start. If the 'Install New Software...' wizard successfully finished, you have to restart your application. Afterwards you should have a look into the root folder of your installation directory.
+As a user of the "Open Edition":https://info.itemis.com/download-yakindu-statechart-tools you can install the headless code generation feature from the YAKINDU Statechart Tools Pro update site.
 
-In the installation directory you will find the statechart compiler - _scc_ . 
+bq.. *Please note:*
 
-h3(#generating-state-machine-code-headless-installation-check). Check the installation
+Don't worry! Even though the headless generation feature is coming to you from the YAKINDU Statechart Tools Professional update site, no license fees will incur. Headless generation is completely free to use.
 
-Once you have installed the headless code generation feature you might want to test if everything is working fine. To do so open a shell and go to the root folder (eclipse root directory) of your SCT installation. 
+p. 
 
-By typing in one of the following platform specific commands into the shell the headless application will be triggered. The '-h' parameter shows the integrated help information.
+# Open the "registration form":https://info.itemis.com/yakindu/statecharts/pro with your web browser. Fill in your name, profession, and e-mail address. Click on _Send_.
+# You will receive an e-mail containing a download link. In that e-mail, click on _Download SCT Pro Edition_.
+# Your personalized download page will open in your web browser.
+# Click on _Install from update site_. The browser will take to another page and display the URL of the YAKINDU Statechart Tools Pro update site. You will need it subsequently.
+# In the Eclipse main menu, select _Help → Install New Software…_.
+# The _Install_ wizard opens.
+# Click on the _Add…_ button. The _Add Repository_ dialog opens.
+# Paste the above-mentioned URL into the _Location_ text field. Enter a meaningful name into the _Name_ field, e.g. "YAKINDU Statechart Tools Professional".
+# Click on _OK_.
+# In the _Install_ wizard, open the _YAKINDU Statechart Tools Professional Edition_ entry.
+# Select _YAKINDU Headless Code Generator_, see figure "&quot;Installing the headless code generation feature&quot;":#hdls_fig_installing_the_headless_code_generation_feature. Click on _Next >_.
+# The _Install_ wizard displays all items to be installed, i.e. _YAKINDU Headless Code Generator_. Click on _Next >_.
+# The license agreements for the software to be installed are displayed. Accept them and click on _Finish_.
+# The headless generation feature is installed.
 
-Windows
+p(#hdls_fig_installing_the_headless_code_generation_feature). 
+
+!(standard-image)images/docu_headless_updatesite.png(Installing the headless code generation feature)!
+
+p=. Installing the headless code generation feature
+
+When the _Install_ wizard successfully finishes, you have to restart your application to activate the new components. After that, you should have a look into the root folder of your YAKINDU Statechart Tools installation directory. You will find the statechart compiler there:
+
+p{margin-left: 3em}. _scc_
+
+
+h3(#hdls_checking_the_installation). Checking the installation
+
+Once you have installed the headless code generation feature you might want to check if everything works fine. To do so, open a command-line shell and go to the root folder (Eclipse root directory) of your YAKINDU Statechart Tools installation.
+
+Executing the command @scc -h@ runs the headless statechart compiler. The @-h@ option shows the integrated help information. The exact format of the command is platform-specific.
+
+Windows:
 
 bc. 
 scc -h
 
-Linux
+Linux:
 
 bc. 
 ./scc -h
 
-Mac
+macOS:
 
 bc. 
 cd SCT.app/Contents/Eclipse/
 ./scc -h
 
-If you can see the help contents similar to the following, the installation of the headless code generator was successful. If you don't, please refer to the section "Troubleshooting" below.
+If the command's output is similar to the help contents shown below, the installation of the headless code generator was successful. If not, please refer to section "Troubleshooting":#hdls_troubleshooting.
 
 bc. 
 --------------------------------------------------------
@@ -65,13 +93,13 @@ usage: -launcher.ini headless.ini [-d <path>] [-h] [-m <path>] [-s <path>]
 
 
 
-h2(#generating-state-machine-code-headless-execute). Generating code
+h2(#hdls_generating_code). Generating code
 
-For this documentation we assume the following simple directory structure including SCT related files like generator models and statechart models.
+For the purpose of this documentation we are assuming the following directory structure. This includes SCT-related files like generator models and statechart models.
 
 !images/docu_headless_directory_structure.png(Headless Directory Structure)!
 
-Within our sample the generator model _default.sgen_ contains the following content.
+Within our sample directory structure the generator model _project1/default.sgen_ contains the following:
 
 bc. 
 GeneratorModel for yakindu::java {
@@ -84,20 +112,19 @@ GeneratorModel for yakindu::java {
 }
 
 
-h3(#generating-state-machine-code-headless-execute-simple). Simple case
+h3(#hdls_generating_code_for_an_eclipse_project). Generating code for an Eclipse project
 
-The most simple way to invoke the code generator on the command line is to generate the code for a single project. A project directory contains a file called _.project_ . On the shell change to the projects directory e.g.
+The most simple way to invoke the code generator on the command line is to generate the code for a single Eclipse project. Using a commend-line shell, change to the project directory you want to generate code. Example:
 
 bc. 
 cd [somepath]/basedir/project1
 
-
-Then simply invoke the statechart compiler without parameters.
+Then invoke the statechart compiler without any parameters:
 
 bc. 
 scc
 
-Please be aware to have scc on your path environment variable or specify the path in the call.
+Please make sure _scc_ is on your PATH environment variable. Alternatively specify the path to the _scc_ executable in the command.
 
 bc. 
 --------------------------------------------------------
@@ -105,40 +132,37 @@ YAKINDU Statechart Tools Headless Generator ((c) by itemis AG)
 	  Visit http://www.statecharts.org
 --------------------------------------------------------
 1 gen model(s) and 1 statechart(s) loaded.
-Generating 'default' to target project 'project' ...
+Generating 'default' to target project 'project1' ...
 default done.
 Generated (1 of 1) gen model(s).
 
-The statechart compiler will invoke the code generator for all sgen files contained in the project directory. It will lookup these recursively. You'll find the generated code at the location specified in the sgen file: 
+The statechart compiler will invoke the code generator for all _.sgen_ files contained in the project directory. It will look them up recursively. You'll find the generated code at the location specified in the _.sgen_ file: 
 
 bc. 
 [somepath]/basedir/[sgen.targetProject]/[sgen.targetFolder]
 
-                          
-                          
-h3(#generating-state-machine-code-headless-execute-using-parameters). Using parameters
 
+h3(#hdls_using_scc_options). Using scc options
 
-Open a shell within the root folder of your SCT installation and enter one of the following platform specific commands after replacing [pathToBasedir] with the concrete path of the base directory.
+Within the root folder of your YAKINDU Statechart Tools installation enter one of the following platform-specific commands. The string @[pathToBasedir]@ must be replaced by the concrete path to the base directory, i.e. the common parent directory of the project directories.
 
-Windows
+Windows:
 
 bc. 
 scc -d [pathToBasedir] -s project1/default.sgen -m project1/default.sct
 
-Linux
+Linux:
 
 bc. 
 ./scc -d [pathToBasedir] -s project1/default.sgen -m project1/default.sct
 
-Mac
+macOS:
 
 bc. 
 cd SCT.app/Contents/Eclipse/
 ./scc -d [pathToBasedir] -s project1/default.sgen -m project1/default.sct
 
-
-See the following output as a result of the command line call. 
+Please see the following sample output as a result of the command:
 
 bc. 
 --------------------------------------------------------
@@ -146,67 +170,79 @@ YAKINDU Statechart Tools Headless Generator ((c) by itemis AG)
 	  Visit http://www.statecharts.org
 --------------------------------------------------------
 1 gen model(s) and 1 statechart(s) loaded.
-Generating 'default' to target project 'project' ...
+Generating 'default' to target project 'project1' ...
 default done.
 Generated (1 of 1) gen model(s).
 
-As you can see the headless code generation has properly executed. The generated code will be placed in a folder depending from the values configured within your generator model file.
+As you can see the headless code generation has properly executed. The generated code will be placed into a folder depending on the values configured within your generator model file.
 
-So for our example this means the generated code can be found in 
+For our example this means the generated code can be found in
 
-	**[basedir] / project1 / src-gen/...** 
+<code>_basedir_/project1/src-gen/</code>
 
- 
-h3(#generating-state-machine-code-headless-sample-parameter). Parameter
 
-By having a closer look to the parameters you will notice that all parameters are optional. This is because if you have a directory structure based on the eclipse workspace standard (projects within root, no additional hierarchies) everything can be calculated automatically.
+h3(#hdls_available_scc_options). Available scc options
 
-h4(#generating-state-machine-code-headless-sample-parameter-basedir). Base Directory
+All parameters are essentially optional. The reason is that for a directory structure adhering to Eclipse workspace standards like projects within a root folder, or no additional hierarchies, everything can be calculated automatically.
 
-The base directory (-d) is used for two major tasks. Firstly it is used to calculate the absolute paths to model & genmodel locations if they are given as relative values. Secondly it is used as the base directory to calculate the target generation folder depending on the values given within a generator model.
+h4(#hdls_specifying_a_base_directory). Specifying a base directory
 
-The target folder for generated artifacts will be calculated by the rule 
+You can specify a base directory using the <code>-d _basedir_</code> option. It is used for two major tasks:
 
-	**[basedir] / [sgen.targetProject] / [sgen.targetFolder]**
+# It is used to evaluate the absolute paths to model and genmodel locations, provided they are given as relative paths.
+# It is used to evaluate the respective generation target folders, depending on the values given in the generator models.
 
-h4(#generating-state-machine-code-headless-sample-parameter-genmodel). Generator Model
+*Default:* If the @-d@ option is not specified, this is equivalent to @-d .@, i.e. the current working directory will be the base directory.
 
-The parameter genmodel (-sgen) can be used to select generator models (*.sgen) more specifically. The value can be absolute or relative and can be a file or folder. 
-* If the value is relative the resulting folder during runtime would be calculated by the rule *[basedir]/[-s value]*
-* If a folder is given the generator application will search for all *.sgen recursively 
+The target folder of generated artifacts will be evaluated as follows:
 
-h4(#generating-state-machine-code-headless-sample-parameter-model). Model Files
+<code><em>basedir</em>/<em>sgen.targetProject</em>/<em>sgen.targetFolder</em></code>
 
-The parameter model (-m) can be used to select models (*.sct) more specifically. The value can be absolute or relative and can be a file or folder. 
-* If the value is relative the resulting folder during runtime would be calculated by the rule *[basedir]/[-m value]*
-* If a folder is given the generator application will search for all *.sct recursively
+h4(#hdls_specifying_a_generator_model). Specifying a generator model
 
-h2(#generating-state-machine-code-headless-troubleshooting). Troubleshooting
+Use the <code>-s _genmodel_</code> option to select certain generator models, i.e. _.sgen_ files. The value can be absolute or relative and can be a file or folder.
 
-If the call to _scc_ fails, here are some tips and fixes.
+* If _genmodel_ is relative, the resulting folder is evaluated as <code><em>basedir</em>/<em>genmodel</em></code>.
+* If _genmodel_ is a folder, the generator will search recursively for all _.sgen_ files within <code><em>basedir</em>/<em>genmodel</em></code>.
 
-h3(#generating-state-machine-code-headless-troubleshooting-error-executable). [ERROR] Neither 'SCT' nor 'eclipse' executable found!
+*Default:* If the @-s@ option is not specified, this is equivalent to <code>-s <em>basedir</em></code>, i.e. all _.sgen_ files in and beneath _basedir_ are processed.
 
-If you encounter this error message on linux, this means the _scc_ launcher was not able to locate a _SCT_ executable binary or one named _eclipse_. This would happen if the _scc_ launcher is not in the same directory as the executable. In a standalone installation of YAKINDU Statechart Tools, the executable is named _SCT_, and _eclipse_ when you are launching eclipse with the SCT plugins installed. The _scc_ launcher automatically checks which one does exist and launches the correct one.
+h4(#hdls_specifying_statechart_model_files). Specifying statechart model files
 
-h3(#generating-state-machine-code-headless-troubleshooting-error-library). The Eclipse executable launcher was unable to locate its companion shared library
+Use the <code>-m <em>statechart_model</em></code> option to select certain statechart models, i.e. _.sct_ files. The can be absolute or relative and can be a file or folder.
 
-This error message often happens when you use the SCT plugins in your normal eclipse installation, which you installed via the Eclipse Installer / Oomph. You will have to change one line in the _headless.ini_ to repair it.
+* If _statechart_model_ is relative, the resulting folder is evaluated as <code><em>basedir</em>/<em>statechart_model</em></code>.
+* If _statechart_model_ is a folder, the generator will search recursively for all _.sct_ files within <code><em>basedir</em>/<em>statechart_model</em></code>.
 
-At first, open the _eclipse.ini_ (both in your normal eclipse directory where _scc_ resides as well) and search for the entry _--launcher.library_. Copy the path from the next line. It might look like this:
+*Default:* If the @-m@ option is not specified, this is equivalent to <code>-m <em>basedir</em></code>, i.e. all _.sct_ files in and beneath _basedir_ are processed.
+
+
+
+h2(#hdls_troubleshooting). Troubleshooting
+
+If the _scc_ command fails, here are some tips and fixes.
+
+h3(#hdls_troubleshooting_error_executable). [ERROR] Neither 'SCT' nor 'eclipse' executable found!
+
+If you encounter this error message on Linux, this means the _scc_ command was neither able to locate a _SCT_ executable binary nor an _eclipse_ executable. This happens if the _scc_ executable, which is really only a launcher, is not in the same directory as the _SCT_ or _eclipse_ executables. In a YAKINDU Statechart Tools stand-alone installation, the executable binary is named _SCT_. However, its name is _eclipse_ if you have installed YAKINDU Statechart Tools from an update site into an already existing Eclipse installation. The _scc_ launcher tries to find one of _SCT_ or _eclipse_ and launches the correct one.
+
+
+h3(#hdls_troubleshooting_error_library). The Eclipse executable launcher was unable to locate its companion shared library
+
+This error message is usually issued if you have installed YAKINDU Statechart Tools from an update site into an already existing Eclipse installation _and_ you installed the latter using the _Eclipse Installer / Oomph_.
+
+Fixing this is easy: You have to change a single line in the _headless.ini_ file in the Eclipse installation directory.
+
+At first, open the _eclipse.ini_ file in the same directory and search for the _--launcher.library_ line. Copy the path that is on the next line. The two lines might look like this:
 
 bc. 
 --launcher.library
 /home/user/.p2/pool/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.400.v20160518-1444
 
-You'll find an entry like this in the _headless.ini_ as well, probably looking like this:
+You'll find a similar entry like in the _headless.ini_ as well, probably looking like this:
 
 bc. 
 --launcher.library
 plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.400.v20160518-1444
 
-Just replace the path in the _headless.ini_ with the one from _eclipse.ini_. After saving, _scc_ should work.
-
-
-
-                                   
+Replace the path in the _headless.ini_ file with the path from _eclipse.ini_. After saving _headless.ini_, _scc_ should work.
