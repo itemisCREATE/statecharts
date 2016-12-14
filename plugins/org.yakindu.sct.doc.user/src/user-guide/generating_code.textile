@@ -1597,81 +1597,6 @@ The @RuntimeService@ class maintains all state machines that are expected to exe
 Please note: To enable this feature, set the _RuntimeService_ parameter of *GeneralFeatures* to @true@, see "Java: General Features":#java-GeneralFeatures. 
 
 
-
-h2(#creating-a-new-custom-code-generator-project). Creating a new custom code generator project
-
-Creating custom code generators is a first-level concept in YAKINDU Statechart Tools. You can develop custom code generators directly within your project workspace. You have the choice to choose "Xtend2":http://www.eclipse.org/xtend/ (preferred) or simply Java for implementing the code generator templates. 
-
-To set up a new (Xtend2/Java) generator project, select _File → New → Other... → YAKINDU SCT_ → Xtend2/Java Generator Project_ and click _Next_.
-
-!(standard-image)images/docu_xtendGenerator.png(Creating an Xtend2 generator project)!
-
-p=. Creating an Xtend2 generator project
-
-The wizard asks for a *Project name* and the name of the *Generator class*, which has to be the fully-qualified class name. If you check the *Use Xtend* checkbox, the generator class will initially be created as an "Xtend":http://www.eclipse.org/xtend/ class. Otherwise, Java will be used for the generator.
-
-The check box *Configure for Plugin Export* adds all required extension point registrations to the new project for exporting it as a plugin. The generator model can refer to the new generator plugin via its unique *Generator ID*. If you want to contribute custom generator features for your code generator, check the *Create Feature Library* check box. Click _Finish_ to close the wizard.
-
-!(standard-image)images/docu_generatornavigator.png(Created generator project)!
-
-p=. Created generator project
-
-Voilà! The wizard creates a new generator project for you with a structure as shown above. The file _CustomGenerator.xtend_ contains a simple default code generator that simply prints the name of the statechart and all of its states to the target file.
-
-
-h3(#executing-the-custom-code-generator). Executing the custom code generator
-
-To test your custom code generator, create a new project containing a YAKINDU Statechart Tools model as described in section "&quot;Editing statecharts&quot;":../user-guide/editing_statecharts.html#editing-statecharts.
-
-After that, create a new generator model as described in section "&quot;Configuring a generator&quot;":#configuring-a-generator. Select _Custom Xtend2/Java based code generator_ as the generator to use. As you may have noticed, the generator model for the @yakindu::generic@ generator contains an additional feature called _Generator_. This is where you can specify the name of your custom generator project and the fully-qualified generator class name as shown below. 
-
-bc(prettyprint).. 
-GeneratorModel for yakindu::generic {
-	statechart MyStatechart {
-		feature Outlet {
-			targetProject = "SCTExample"
-			targetFolder = "src-gen"
-		}
-		feature Generator {
-			generatorProject = "MyCustomGenerator"
-			generatorClass = "org.yakindu.CustomGenerator"
-		}
-	}
-}
-p. If you right click the @.sgen@ file and select "Generate Statechart Artifacts" from the context menu the generator is executed and creates a new file _src-gen/MyStatechart.txt_ with the following content.
-
-bc(prettyprint).. 
-The name of the Statemachine is 'MyStatechart'
-The Statemachine has the following states:
-main_region.A
-main_region.B
-p. Congratulations, you successfully created a custom generator project! Add 
-
-bc. 
-The Statemachine contains «flow.states.size» states
-
-to the _CustomGenerator.xtend_ file and regenerate. This results in _MyStatechart.txt_ being updated immediately. This is a very powerful feature of YAKINDU Statechart Tools. You can develop your code generator at runtime with zero turnaround time. Just click _generate_ and see the results.
-
-
-h3(#sgen-features-for-custom-code-generators). SGen features for custom code generators
-
-==<!-- Start sgen_feature_generator -->==
-
-h4(#sgen-generator-feature). Generator feature
-
-The *Generator* feature allows to configure a custom code generator located in the workspace and written in Java or in another JVM language. It is a *required* feature and has the following parameters:
-
-# _generatorProject_ (String, required): the name of the generator project
-# _generatorClass_ (String, required): the fully-qualified name of the code generator class
-
-bc. feature Generator {
-    generatorProject = "org.yakindu.sct.mygenerator"
-    generatorClass = "org.yakindu.sct.MyGenerator"
-}
-
-==<!-- End sgen_feature_generator -->==
-
-
 h3(#java-accessing-interfaces-variables-and-events). Accessing interfaces, variables and events
 
 In a YAKINDU statechart, variables and events are contained in so-called *interfaces*. There can be at most one default, unnamed interface plus zero or more named interfaces. In the generated Java code, these interfaces can be found as inner interface of the interface specifying the state machine. The outer interface's name is derived from the statechart's name while the inner interfaces' names are derived from the respective names of the statechart interfaces.
@@ -2158,20 +2083,87 @@ When the simulation is executed, the variable _result_ gets the value 2.
 
 p=. Configuring an operations class
 
-
-
-
 h1(#custom-code-generators). Custom code generators
 
 Although YAKINDU Statechart Tools are shipped with powerful code generators for C, C++ and Java, it may be necessary to create a custom code generator to support a variety of use cases. One reason for a custom code generator could be to support additional programming languages – in this case we would be happy to receive a contribution! – or to generate code for an existing framework. 
-
-
 
 h2(#prerequisits). Prerequisits
 
 Implementing a custom code generator is no trivial task. Before you get started, you should have a basic understanding about the "Eclipse Modeling Framework":https://www.eclipse.org/modeling/emf/ that we are using to structure our data model. Furthermore, we highly recommend to use "Xtend":http://www.eclipse.org/xtend/ as your code generator's template language, although plain old Java is still supported. Xtend provides some great features like "Template Expressions":http://www.eclipse.org/xtend/documentation/203_xtend_expressions.html#templates, 
 "Lambdas":http://www.eclipse.org/xtend/documentation/203_xtend_expressions.html#lambdas and "Polymorphic Method Invocation":http://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#polymorphic-dispatch, boosting readability and productivity.
 
+h2(#creating-a-new-custom-code-generator-project). Creating a new custom code generator project
+
+Creating custom code generators is a first-level concept in YAKINDU Statechart Tools. You can develop custom code generators directly within your project workspace. You have the choice to choose "Xtend2":http://www.eclipse.org/xtend/ (preferred) or simply Java for implementing the code generator templates. 
+
+To set up a new (Xtend2/Java) generator project, select _File → New → Other... → YAKINDU SCT_ → Xtend2/Java Generator Project_ and click _Next_.
+
+!(standard-image)images/docu_xtendGenerator.png(Creating an Xtend2 generator project)!
+
+p=. Creating an Xtend2 generator project
+
+The wizard asks for a *Project name* and the name of the *Generator class*, which has to be the fully-qualified class name. If you check the *Use Xtend* checkbox, the generator class will initially be created as an "Xtend":http://www.eclipse.org/xtend/ class. Otherwise, Java will be used for the generator.
+
+The check box *Configure for Plugin Export* adds all required extension point registrations to the new project for exporting it as a plugin. The generator model can refer to the new generator plugin via its unique *Generator ID*. If you want to contribute custom generator features for your code generator, check the *Create Feature Library* check box. Click _Finish_ to close the wizard.
+
+!(standard-image)images/docu_generatornavigator.png(Created generator project)!
+
+p=. Created generator project
+
+Voilà! The wizard creates a new generator project for you with a structure as shown above. The file _CustomGenerator.xtend_ contains a simple default code generator that simply prints the name of the statechart and all of its states to the target file.
+
+
+h3(#executing-the-custom-code-generator). Executing the custom code generator
+
+To test your custom code generator, create a new project containing a YAKINDU Statechart Tools model as described in section "&quot;Editing statecharts&quot;":../user-guide/editing_statecharts.html#editing-statecharts.
+
+After that, create a new generator model as described in section "&quot;Configuring a generator&quot;":#configuring-a-generator. Select _Custom Xtend2/Java based code generator_ as the generator to use. As you may have noticed, the generator model for the @yakindu::generic@ generator contains an additional feature called _Generator_. This is where you can specify the name of your custom generator project and the fully-qualified generator class name as shown below. 
+
+bc(prettyprint).. 
+GeneratorModel for yakindu::generic {
+	statechart MyStatechart {
+		feature Outlet {
+			targetProject = "SCTExample"
+			targetFolder = "src-gen"
+		}
+		feature Generator {
+			generatorProject = "MyCustomGenerator"
+			generatorClass = "org.yakindu.CustomGenerator"
+		}
+	}
+}
+p. If you right click the @.sgen@ file and select "Generate Statechart Artifacts" from the context menu the generator is executed and creates a new file _src-gen/MyStatechart.txt_ with the following content.
+
+bc(prettyprint).. 
+The name of the Statemachine is 'MyStatechart'
+The Statemachine has the following states:
+main_region.A
+main_region.B
+p. Congratulations, you successfully created a custom generator project! Add 
+
+bc. 
+The Statemachine contains «flow.states.size» states
+
+to the _CustomGenerator.xtend_ file and regenerate. This results in _MyStatechart.txt_ being updated immediately. This is a very powerful feature of YAKINDU Statechart Tools. You can develop your code generator at runtime with zero turnaround time. Just click _generate_ and see the results.
+
+
+h3(#sgen-features-for-custom-code-generators). SGen features for custom code generators
+
+==<!-- Start sgen_feature_generator -->==
+
+h4(#sgen-generator-feature). Generator feature
+
+The *Generator* feature allows to configure a custom code generator located in the workspace and written in Java or in another JVM language. It is a *required* feature and has the following parameters:
+
+# _generatorProject_ (String, required): the name of the generator project
+# _generatorClass_ (String, required): the fully-qualified name of the code generator class
+
+bc. feature Generator {
+    generatorProject = "org.yakindu.sct.mygenerator"
+    generatorClass = "org.yakindu.sct.MyGenerator"
+}
+
+==<!-- End sgen_feature_generator -->==
 
 
 h2(#different-meta-models-for-different-use-cases). Different meta models for different use cases
