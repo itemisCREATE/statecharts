@@ -13,7 +13,7 @@ The headless code generator can simply be called from a command line and thus ca
 
 bq.. *Please note:*
 
-At the moment, headless code generation is available for the open-source generators only. This means generating source code for e.g. "Deep C Integration":../user-guide/c-domain.html#cdom_deep-c-integration statecharts or for your custom generators might fail. Support for C statecharts will be added with the next YAKINDU Statecharts release release.
+At the moment, headless code generation is available for the open-source generators only. This means generating source code for e.g. "Deep C Integration":../user-guide/c-domain.html#cdom_deep-c-integration statecharts or for your custom generators might fail. Support for C statecharts will be added with the next YAKINDU Statecharts release.
 
 h2(#hdls_installation). Installation
 

@@ -2094,7 +2094,7 @@ Implementing a custom code generator is no trivial task. Before you get started,
 
 h2(#creating-a-new-custom-code-generator-project). Creating a new custom code generator project
 
-Creating custom code generators is a first-level concept in YAKINDU Statechart Tools. You can develop custom code generators directly within your project workspace. You have the choice to choose "Xtend2":http://www.eclipse.org/xtend/ (preferred) or simply Java for implementing the code generator templates. 
+Creating custom code generators is a built-in concept in YAKINDU Statechart Tools. You can develop custom code generators directly within your project workspace. You can choose between "Xtend2":http://www.eclipse.org/xtend/ (preferred) or simply Java for implementing the code generator templates. 
 
 To set up a new (Xtend2/Java) generator project, select _File → New → Other... → YAKINDU SCT_ → Xtend2/Java Generator Project_ and click _Next_.
 
