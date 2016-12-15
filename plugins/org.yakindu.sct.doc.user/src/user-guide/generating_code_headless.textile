@@ -9,49 +9,46 @@ Best practice is to generate code on the fly during a continuous integration bui
 
 The headless code generator can simply be called from a command line and thus can be integrated with different CI tools easily. No matter if you are using Gradle, Maven or make, all you need is a Java runtime on your build machine.
 
-###. FIXME: time-specific
-
-bq.. *Please note:*
-
-At the moment, headless code generation is available for the open-source generators only. This means generating source code for e.g. "Deep C Integration":../user-guide/c-domain.html#cdom_deep-c-integration statecharts or for your custom generators might fail. Support for C statecharts will be added with the next YAKINDU Statecharts release.
-
 h2(#hdls_installation). Installation
 
 If you are working with the "Professional Edition":https://info.itemis.com/yakindu/statecharts/pro of YAKINDU Statechart Tools, the headless code generation feature is already included and no further installation is required.
 
 As a user of the "Open Edition":https://info.itemis.com/download-yakindu-statechart-tools you can install the headless code generation feature from the YAKINDU Statechart Tools Pro update site.
 
-bq.. *Please note:*
-
+*Please note:*
 Don't worry! Even though the headless generation feature is coming to you from the YAKINDU Statechart Tools Professional update site, no license fees will incur. Headless generation is completely free to use.
 
 p. 
 
-# Open the "registration form":https://info.itemis.com/yakindu/statecharts/pro with your web browser. Fill in your name, profession, and e-mail address. Click on _Send_.
-# You will receive an e-mail containing a download link. In that e-mail, click on _Download SCT Pro Edition_.
-# Your personalized download page will open in your web browser.
-# Click on _Install from update site_. The browser will take to another page and display the URL of the YAKINDU Statechart Tools Pro update site. You will need it subsequently.
-# In the Eclipse main menu, select _Help → Install New Software…_.
-# The _Install_ wizard opens.
-# Click on the _Add…_ button. The _Add Repository_ dialog opens.
-# Paste the above-mentioned URL into the _Location_ text field. Enter a meaningful name into the _Name_ field, e.g. "YAKINDU Statechart Tools Professional".
-# Click on _OK_.
-# In the _Install_ wizard, open the _YAKINDU Statechart Tools Professional Edition_ entry.
-# Select _YAKINDU Headless Code Generator_, see figure "&quot;Installing the headless code generation feature&quot;":#hdls_fig_installing_the_headless_code_generation_feature. Click on _Next >_.
-# The _Install_ wizard displays all items to be installed, i.e. _YAKINDU Headless Code Generator_. Click on _Next >_.
-# The license agreements for the software to be installed are displayed. Accept them and click on _Finish_.
-# The headless generation feature is installed.
+To install the headless generation feature into the open edition or another eclpse instance please follow the following steps.
+
+* Open the "registration form":https://info.itemis.com/yakindu/statecharts/pro with your web browser. If never done before fill in your name, profession, and e-mail address. Click on _Send_.
+* You will receive an e-mail containing a download link. In that e-mail, click on _Download SCT Pro Edition_.
+* Your personalized download page will open in your web browser, showing the following download options.
+
+p(#hdls_fig_sct_professional_download_options). 
+
+!(standard-image)images/docu_headless_downloadpage.png(SCT Pro download page)!
+
+p=. SCT Professional download options
+
+* Click on _Install from update site_. The browser will take to another page and display the URL of the YAKINDU Statechart Tools Pro update site. You will need it subsequently.
+* In the Eclipse main menu, select _Help → Install New Software…_.
+* The _Install_ wizard opens.
+* Click on the _Add…_ button. The _Add Repository_ dialog opens.
+* Paste the above-mentioned URL into the _Location_ text field. Enter a meaningful name into the _Name_ field, e.g. "YAKINDU Statechart Tools Professional".
+* Click on _OK_.
+* In the _Install_ wizard, open the _YAKINDU Statechart Tools Professional Edition_ entry.
+* Select _YAKINDU Headless Code Generator_, see figure "&quot;Installing the headless code generation feature&quot;":#hdls_fig_installing_the_headless_code_generation_feature. Click on _Next >_.
+* The _Install_ wizard displays all items to be installed, i.e. _YAKINDU Headless Code Generator_. Click on _Next >_.
+* The license agreements for the software to be installed are displayed. Accept them and click on _Finish_.
+* The headless generation feature is installed.
 
 p(#hdls_fig_installing_the_headless_code_generation_feature). 
 
 !(standard-image)images/docu_headless_updatesite.png(Installing the headless code generation feature)!
 
 p=. Installing the headless code generation feature
-
-When the _Install_ wizard successfully finishes, you have to restart your application to activate the new components. After that, you should have a look into the root folder of your YAKINDU Statechart Tools installation directory. You will find the statechart compiler there:
-
-p{margin-left: 3em}. _scc_
-
 
 h3(#hdls_checking_the_installation). Checking the installation
 
@@ -77,21 +74,19 @@ cd SCT.app/Contents/Eclipse/
 
 If the command's output is similar to the help contents shown below, the installation of the headless code generator was successful. If not, please refer to section "Troubleshooting":#hdls_troubleshooting.
 
-bc. 
+bc.. 
 --------------------------------------------------------
 YAKINDU Statechart Tools Headless Generator ((c) by itemis AG)
-	  Visit http://www.statecharts.org
+
+          Visit http://www.statecharts.org
 --------------------------------------------------------
-usage: -launcher.ini headless.ini [-d <path>] [-h] [-m <path>] [-s <path>]
+usage: scc [-d <path>] [-h] [-m <path>{,<path>}…]
  -d,--baseDir <path>   Relative/absolute path to the working directory that contains your statechart projects. If not
                        set the current directory is used.
  -h                    Shows help content.
- -m,--model <path>     Relative/absolute path to directory or file of model(s) (*.sct) referenced within generator
-                       model(s). If not set the runtime value of basedir is used.
- -s,--sgen <path>      Relative/absolute path to directory or file containing generator model(s). If not set the runtime
-                       value of basedir is used.
-
-
+ -m,--model <path>{,<path>}…  A list of comma separated Relative/absolute paths
+                              to model(s) used during execution. If not set
+                              the runtime value of basedir is used.
 
 h2(#hdls_generating_code). Generating code
 
@@ -141,6 +136,8 @@ The statechart compiler will invoke the code generator for all _.sgen_ files con
 bc. 
 [somepath]/basedir/[sgen.targetProject]/[sgen.targetFolder]
 
+In this case the statechart compiler determines whether a _.project_ file is available in the current directory and will automatically adjust the generation target to be the parent of the actual project directory to ensure the parameters defined in an _.sgen_ file are interpreted correctly.
+
 
 h3(#hdls_using_scc_options). Using scc options
 
@@ -149,18 +146,18 @@ Within the root folder of your YAKINDU Statechart Tools installation enter one o
 Windows:
 
 bc. 
-scc -d [pathToBasedir] -s project1/default.sgen -m project1/default.sct
+scc -d [pathToBasedir] -m project1/default.sgen,project2/default.sct
 
 Linux:
 
 bc. 
-./scc -d [pathToBasedir] -s project1/default.sgen -m project1/default.sct
+./scc -d [pathToBasedir] -m project1/default.sgen,project2/default.sct
 
 macOS:
 
 bc. 
 cd SCT.app/Contents/Eclipse/
-./scc -d [pathToBasedir] -s project1/default.sgen -m project1/default.sct
+./scc -d [pathToBasedir] -m project1/default.sgen,project2/default.sct
 
 Please see the following sample output as a result of the command:
 
@@ -189,7 +186,7 @@ h4(#hdls_specifying_a_base_directory). Specifying a base directory
 
 You can specify a base directory using the <code>-d _basedir_</code> option. It is used for two major tasks:
 
-# It is used to evaluate the absolute paths to model and genmodel locations, provided they are given as relative paths.
+# It is used to evaluate the absolute paths to model locations, provided they are given as relative paths.
 # It is used to evaluate the respective generation target folders, depending on the values given in the generator models.
 
 *Default:* If the @-d@ option is not specified, this is equivalent to @-d .@, i.e. the current working directory will be the base directory.
@@ -198,25 +195,15 @@ The target folder of generated artifacts will be evaluated as follows:
 
 <code><em>basedir</em>/<em>sgen.targetProject</em>/<em>sgen.targetFolder</em></code>
 
-h4(#hdls_specifying_a_generator_model). Specifying a generator model
+h4(#hdls_specifying_statechart_model_files). Specifying model files
 
-Use the <code>-s _genmodel_</code> option to select certain generator models, i.e. _.sgen_ files. The value can be absolute or relative and can be a file or folder.
+Use the <code>-m <em>models</em></code> option to select certain models known by the statechart compiler. Usually these will be _.sgen_ or _.sct_ files. However, other model files that are supported by particular code generators, can be specified, too, e.g. C header files for YAKINDU Statechart Tool PRO's deep C integration. The @-m@ option's value can be absolute or relative, can be a file or a folder and can be a single value or a comma-separated list of values.
 
-* If _genmodel_ is relative, the resulting folder is evaluated as <code><em>basedir</em>/<em>genmodel</em></code>.
-* If _genmodel_ is a folder, the generator will search recursively for all _.sgen_ files within <code><em>basedir</em>/<em>genmodel</em></code>.
+* If _model_ is a comma-separated list of values, the statechart compiler will handle each value as described for _model_ in the subsequent bullet points.
+* If _model_ is relative, it is evaluated as <code><em>basedir</em>/<em>model</em></code>.
+* If _model_ is a folder, the generator will search recursively for all model files known by the statechart compiler within <code><em>basedir</em>/<em>statechart_model</em></code>.
 
-*Default:* If the @-s@ option is not specified, this is equivalent to <code>-s <em>basedir</em></code>, i.e. all _.sgen_ files in and beneath _basedir_ are processed.
-
-h4(#hdls_specifying_statechart_model_files). Specifying statechart model files
-
-Use the <code>-m <em>statechart_model</em></code> option to select certain statechart models, i.e. _.sct_ files. The can be absolute or relative and can be a file or folder.
-
-* If _statechart_model_ is relative, the resulting folder is evaluated as <code><em>basedir</em>/<em>statechart_model</em></code>.
-* If _statechart_model_ is a folder, the generator will search recursively for all _.sct_ files within <code><em>basedir</em>/<em>statechart_model</em></code>.
-
-*Default:* If the @-m@ option is not specified, this is equivalent to <code>-m <em>basedir</em></code>, i.e. all _.sct_ files in and beneath _basedir_ are processed.
-
-
+*Default:* If the @-m@ option is not specified, this is equivalent to <code>-m <em>basedir</em></code>, i.e. all model files in and beneath _basedir_ are processed.
 
 h2(#hdls_troubleshooting). Troubleshooting
 
