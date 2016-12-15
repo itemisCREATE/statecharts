@@ -80,12 +80,13 @@ YAKINDU Statechart Tools Headless Generator ((c) by itemis AG)
 
           Visit http://www.statecharts.org
 --------------------------------------------------------
-usage: scc [-d <path>] [-h] [-m <path>]
+usage: scc [-d <path>] [-h] [-m <path>{,<path>}…]
  -d,--baseDir <path>   Relative/absolute path to the working directory that contains your statechart projects. If not
                        set the current directory is used.
  -h                    Shows help content.
- -m,--model <path>     A list of comma separated Relative/absolute paths to model(s) used during execution. If not set
-                       the runtime value of basedir is used.
+ -m,--model <path>{,<path>}…  A list of comma separated Relative/absolute paths
+                              to model(s) used during execution. If not set
+                              the runtime value of basedir is used.
 
 h2(#hdls_generating_code). Generating code
 
@@ -135,7 +136,8 @@ The statechart compiler will invoke the code generator for all _.sgen_ files con
 bc. 
 [somepath]/basedir/[sgen.targetProject]/[sgen.targetFolder]
 
-In this case the statechart compiler determines a _.project_ file is available in the current directory and will automatically adjust the generation target to be the parent of the actual project dir to ensure the parameters defined within a _.sgen_ file could be interpreted correctly.   
+In this case the statechart compiler determines whether a _.project_ file is available in the current directory and will automatically adjust the generation target to be the parent of the actual project directory to ensure the parameters defined in an _.sgen_ file are interpreted correctly.
+
 
 h3(#hdls_using_scc_options). Using scc options
 
@@ -144,18 +146,18 @@ Within the root folder of your YAKINDU Statechart Tools installation enter one o
 Windows:
 
 bc. 
-scc -d [pathToBasedir] -m project1/default.sgen,project1/default.sct
+scc -d [pathToBasedir] -m project1/default.sgen,project2/default.sct
 
 Linux:
 
 bc. 
-./scc -d [pathToBasedir] -m project1/default.sgen,project1/default.sct
+./scc -d [pathToBasedir] -m project1/default.sgen,project2/default.sct
 
 macOS:
 
 bc. 
 cd SCT.app/Contents/Eclipse/
-./scc -d [pathToBasedir] -m project1/default.sgen,project1/default.sct
+./scc -d [pathToBasedir] -m project1/default.sgen,project2/default.sct
 
 Please see the following sample output as a result of the command:
 
@@ -195,11 +197,11 @@ The target folder of generated artifacts will be evaluated as follows:
 
 h4(#hdls_specifying_statechart_model_files). Specifying model files
 
-Use the <code>-m <em>model</em></code> option to select certain models known by the statechart compiler runtime, basically _.sgen_ and _.sct_ files, but other model files used by particular generators (C header for deep C integration) also. The parameter value can be absolute or relative, can be a file or folder and can be a single value or a comma separated list of values.
+Use the <code>-m <em>models</em></code> option to select certain models known by the statechart compiler. Usually these will be _.sgen_ or _.sct_ files. However, other model files that are supported by particular code generators, can be specified, too, e.g. C header files for YAKINDU Statechart Tool PRO's deep C integration. The @-m@ option's value can be absolute or relative, can be a file or a folder and can be a single value or a comma-separated list of values.
 
-* If _model_ is relative, the resulting folder is evaluated as <code><em>basedir</em>/<em>model</em></code>.
-* If _model_ is a folder, the generator will search recursively for all model files known by the statechart compiler runtime within <code><em>basedir</em>/<em>statechart_model</em></code>.
-* If _model_ is a comma separated list of files or folders, the statechart compiler will do the same for each given value 
+* If _model_ is a comma-separated list of values, the statechart compiler will handle each value as described for _model_ in the subsequent bullet points.
+* If _model_ is relative, it is evaluated as <code><em>basedir</em>/<em>model</em></code>.
+* If _model_ is a folder, the generator will search recursively for all model files known by the statechart compiler within <code><em>basedir</em>/<em>statechart_model</em></code>.
 
 *Default:* If the @-m@ option is not specified, this is equivalent to <code>-m <em>basedir</em></code>, i.e. all model files in and beneath _basedir_ are processed.
 
