@@ -33,11 +33,12 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.EObjectDescription;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -133,15 +134,17 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	private ContextPredicateProvider contextPredicateProvider;
 	@Inject
 	private IResourceDescriptions index;
+	@Inject
+	private IDefaultResourceDescriptionStrategy strategy;
 
 	@Check(CheckType.FAST)
 	public void checkContextElement(final ElementReferenceExpression expression) {
 		Iterable<IEObjectDescription> description = null;
 		QualifiedName fqn = nameProvider.getFullyQualifiedName(expression.getReference());
 		if (index instanceof ResourceSetBasedResourceDescriptions) {
-			description = Lists.newArrayList(EObjectDescription.create(fqn, expression.getReference()));
-		} else {
 			//This is the fallback for headless execution
+			description = createEObjectDescription(expression);
+		} else {
 			description = index.getExportedObjects(expression.getReference().eClass(), fqn, false);
 		}
 		final Predicate<IEObjectDescription> predicate = contextPredicateProvider.calculateFilterPredicate(expression,
@@ -152,6 +155,17 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				error(String.format(ERROR_WRONG_CONTEXT_ELEMENT_MSG, name), null, -1, ERROR_WRONG_CONTEXT_ELEMENT_CODE);
 			}
 		}
+	}
+
+	protected List<IEObjectDescription> createEObjectDescription(final ElementReferenceExpression expression) {
+		final List<IEObjectDescription> result = Lists.newArrayList();
+		strategy.createEObjectDescriptions(expression.getReference(),new IAcceptor<IEObjectDescription>() {
+			@Override
+			public void accept(IEObjectDescription t) {
+				result.add(t);
+			}
+		} );
+		return result;
 	}
 
 	@Check(CheckType.FAST)

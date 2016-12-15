@@ -8,7 +8,6 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.IAcceptor;
-import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
