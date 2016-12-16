@@ -9,28 +9,33 @@ Best practice is to generate code on the fly during a continuous integration bui
 
 The headless code generator can simply be called from a command line and thus can be integrated with different CI tools easily. No matter if you are using Gradle, Maven or make, all you need is a Java runtime on your build machine.
 
+bq.. *Please note:*
+
+Headless code generation is a new feature the YAKINDU team wants to make available as quickly as possible. Since it is still at an early development stage it might still have some rough edges. If you encounter any problems, please consider section "&quot;Troubleshooting&quot;":#hdls_troubleshooting for help, ask a question in the "support forum":https://groups.google.com/forum/embed/?place=forum%2Fyakindu-user, or file a bug report to the "issue tracker":https://github.com/Yakindu/statecharts/issues.
+
+###. CHECK: Does headless code generation still have some rough edges?
+
 h2(#hdls_installation). Installation
 
-If you are working with the "Professional Edition":https://info.itemis.com/yakindu/statecharts/pro of YAKINDU Statechart Tools, the headless code generation feature is already included and no further installation is required.
+If you are working with the "Professional Edition":https://info.itemis.com/yakindu/statecharts/pro of YAKINDU Statechart Tools, the headless code generation feature is already included and no further installation procedure is required. You can skip this section and continue reading at "&quot;The scc statechart compiler&quot;":#hdls_the_scc_statechart_compiler.
 
-As a user of the "Open Edition":https://info.itemis.com/download-yakindu-statechart-tools you can install the headless code generation feature from the YAKINDU Statechart Tools Pro update site.
+As a user of the "Open Edition":https://info.itemis.com/download-yakindu-statechart-tools you can install the headless code generation feature from the YAKINDU Statechart Tools Professional update site.
 
-*Please note:*
-Don't worry! Even though the headless generation feature is coming to you from the YAKINDU Statechart Tools Professional update site, no license fees will incur. Headless generation is completely free to use.
+bq.. *Please note:*
 
-p. 
+Don't worry! Even though the headless generation feature is coming to you from the YAKINDU Statechart Tools Professional update site, no license fees will be incurred. Headless generation is completely free to use, though not open source.
 
-To install the headless generation feature into the open edition or another eclpse instance please follow the following steps.
+p. To install the headless generation feature into the open edition or another eclpse instance please follow the following steps.
 
-* Open the "registration form":https://info.itemis.com/yakindu/statecharts/pro with your web browser. If never done before fill in your name, profession, and e-mail address. Click on _Send_.
+* Open the "registration form":https://info.itemis.com/yakindu/statecharts/pro with your web browser. If you have never registered before, please fill in your name, profession, and e-mail address. Click on _Send_.
 * You will receive an e-mail containing a download link. In that e-mail, click on _Download SCT Pro Edition_.
 * Your personalized download page will open in your web browser, showing the following download options.
 
-p(#hdls_fig_sct_professional_download_options). 
+p(#hdls_fig_yakindu_statechart_tools_professional_edition_download_options). 
 
-!(standard-image)images/docu_headless_downloadpage.png(SCT Pro download page)!
+!(standard-image)images/docu_headless_downloadpage.png(YAKINDU Statechart Tools Professional Edition download options)!
 
-p=. SCT Professional download options
+p=. YAKINDU Statechart Tools Professional Edition download options
 
 * Click on _Install from update site_. The browser will take to another page and display the URL of the YAKINDU Statechart Tools Pro update site. You will need it subsequently.
 * In the Eclipse main menu, select _Help → Install New Software…_.
@@ -50,29 +55,22 @@ p(#hdls_fig_installing_the_headless_code_generation_feature).
 
 p=. Installing the headless code generation feature
 
-h3(#hdls_checking_the_installation). Checking the installation
 
-Once you have installed the headless code generation feature you might want to check if everything works fine. To do so, open a command-line shell and go to the root folder (Eclipse root directory) of your YAKINDU Statechart Tools installation.
+h3(#hdls_the_scc_statechart_compiler). The scc statechart compiler
 
-Executing the command @scc -h@ runs the headless statechart compiler. The @-h@ option shows the integrated help information. The exact format of the command is platform-specific.
+The SCT installation directory contains the file _scc_ (Linux, macOS) resp. _scc.bat_ (Windows): the _statechart compiler_. Technically, it is a script file launching the SCT executable, passing proper parameters for headless code generation.
 
-Windows:
+Please include the SCT installation directory in your PATH environment variable, so the _scc_ command can be executed anywhere from a command-line shell!
 
-bc. 
-scc -h
+The following Linux example assumes YAKINDU Statechart Tools to be installed in _/opt/software/yakindu-sct_:
 
-Linux:
+bc. export PATH="/opt/software/yakindu-sct:${PATH}"
 
-bc. 
-./scc -h
+Calling _scc_ with the @-h@ option prints the the integrated help information. In a command-line shell enter the command:
 
-macOS:
+bc. scc -h
 
-bc. 
-cd SCT.app/Contents/Eclipse/
-./scc -h
-
-If the command's output is similar to the help contents shown below, the installation of the headless code generator was successful. If not, please refer to section "Troubleshooting":#hdls_troubleshooting.
+This produces the following output:
 
 bc.. 
 --------------------------------------------------------
@@ -87,6 +85,8 @@ usage: scc [-d <path>] [-h] [-m <path>{,<path>}…]
  -m,--model <path>{,<path>}…  A list of comma separated Relative/absolute paths
                               to model(s) used during execution. If not set
                               the runtime value of basedir is used.
+
+
 
 h2(#hdls_generating_code). Generating code
 
@@ -204,6 +204,8 @@ Use the <code>-m <em>models</em></code> option to select certain models known by
 * If _model_ is a folder, the generator will search recursively for all model files known by the statechart compiler within <code><em>basedir</em>/<em>statechart_model</em></code>.
 
 *Default:* If the @-m@ option is not specified, this is equivalent to <code>-m <em>basedir</em></code>, i.e. all model files in and beneath _basedir_ are processed.
+
+
 
 h2(#hdls_troubleshooting). Troubleshooting
 
