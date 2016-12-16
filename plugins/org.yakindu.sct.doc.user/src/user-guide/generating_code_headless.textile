@@ -9,6 +9,12 @@ Best practice is to generate code on the fly during a continuous integration bui
 
 The headless code generator can simply be called from a command line and thus can be integrated with different CI tools easily. No matter if you are using Gradle, Maven or make, all you need is a Java runtime on your build machine.
 
+bq.. *Please note:*
+
+Headless code generation is a new feature the YAKINDU team wants to make available as quickly as possible. It might still have some rough edges, though.
+
+###. CHECK: Does headless code generation still have some rough edges?
+
 h2(#hdls_installation). Installation
 
 If you are working with the "Professional Edition":https://info.itemis.com/yakindu/statecharts/pro of YAKINDU Statechart Tools, the headless code generation feature is already included and no further installation is required.
