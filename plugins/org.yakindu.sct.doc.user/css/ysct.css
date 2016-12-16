@@ -1,3 +1,8 @@
+/* Blockquote: */
+blockquote {
+	font-size: inherit;
+}
+
 /* Images */
 img.standard-image {
 	max-width: 61.8%;
