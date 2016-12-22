@@ -599,7 +599,7 @@ In order to have the timer service raise the time event periodically, the parame
 
 h4(#c-method-unsettimer). Method unsetTimer
 
-The state machine calls the method @trafficLight_setTimer(TrafficLight* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic)@ to notify the timer service to unset the timer for the given event ID.
+The state machine calls the function @trafficLight_unsetTimer(TrafficLight* handle, const sc_eventid evid)@ to notify the timer service to unset the timer for the given event ID.
 
 h4(#c-method-raisetimeevent). Method raiseTimeEvent
 
