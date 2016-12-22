@@ -66,11 +66,11 @@ The following Linux example assumes YAKINDU Statechart Tools to be installed in 
 
 bc. export PATH="/opt/software/yakindu-sct:${PATH}"
 
-Calling _scc_ with the @-h@ option prints the the integrated help information. In a command-line shell enter the command:
+Calling _scc_ with the @-h@ option prints the the integrated help information. In a command-line shell, enter the following command:
 
 bc. scc -h
 
-This produces the following output:
+The output should be similar to the following:
 
 bc.. 
 --------------------------------------------------------
