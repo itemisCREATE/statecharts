@@ -476,13 +476,13 @@ extern sc_boolean trafficLight_isStateActive(const TrafficLight* handle, Traffic
 
 #endif /* TRAFFICLIGHT_H_ */
 
-p. Within this header file an @enum@ containing the state names is defined as well as data structures for each of the statechart's interfaces. Additionally a structure for the statechart's time events is defined. The interfaces' and time events' data structures are nested into the parent structure @TrafficLight@. The client has to allocate this structure. It is a common parameter of most methods the statechart defines. Below this structure is called the _statechart data structure_.
+p. Within this header file an @enum@ containing the state names is defined as well as data structures for each of the statechart's interfaces. Additionally a structure for the statechart's time events is defined. The interfaces' and time events' data structures are nested into the parent structure @TrafficLight@. The client has to allocate this structure. It is a common parameter of most functions the statechart defines. Below this structure is called the _statechart data structure_.
 
-h4(#c-fundamental-statechart-methods). Fundamental statechart methods
+h4(#c-fundamental-statechart-functions). Fundamental statechart functions
 
-The generated code contains fundamental methods to initialize, enter, and exit a state machine, as well as a method to start a run-to-completion step.
+The generated code contains fundamental functions to initialize, enter, and exit a state machine, as well as a function to start a run-to-completion step.
 
-In the header file the method names are made up of the state machine name followed by the name of the respective functionality. For example, the methods of the traffic light example are generated as follows:
+In the header file the function names are made up of the state machine name followed by the name of the respective functionality. For example, the functions of the traffic light example are generated as follows:
 
 bc.. 
 /*! Initializes the TrafficLight state machine data structures. Must be called before first usage.*/
@@ -503,7 +503,7 @@ p.
 
 h4(#c-accessing-variables-and-events). Accessing variables and events
 
-The getters and setters for each variable and event are also contained in the header file. The method names are matching the following pattern:
+The getters and setters for each variable and event are also contained in the header file. The function names are matching the following pattern:
 
 _statechart_name_ @Iface@ _interface_name_@_@ [ @set@ | @get@ | @raise@ ] @_@ [_variable_name_|_event_name_]
 
@@ -517,7 +517,7 @@ If a statechart uses timing functionality or external operations or tracing is a
 
 _statechart_name_@Required.h@
 
-This header file declares methods the client code has to implement externally.
+This header file declares functions the client code has to implement externally.
 
 h4(#c-time-controlled-state-machines-example). Example
 
@@ -587,27 +587,27 @@ extern void trafficLight_unsetTimer(TrafficLight* handle, const sc_eventid evid)
 
 #endif /* TRAFFICLIGHTREQUIRED_H_ */
 
-p. Basically the proper time handling has to be implemented by the developer, because timer functions generally depend on the hardware target used. So for each hardware target the client code must provide a method to set a timer and another method to unset it. These methods have to be implemented externally and linked to the generated code.
+p. Basically the proper time handling has to be implemented by the developer, because timer functions generally depend on the hardware target used. So for each hardware target the client code must provide a function to set a timer and another function to unset it. These functions have to be implemented externally and linked to the generated code.
 
-The following methods are dealing with timing functionality:
+The following functions are dealing with timing functionality:
 
-h4(#c-method-settimer). Method setTimer
+h4(#c-function-settimer). Function setTimer
 
-A state machine calls the @setTimer()@ method – short for the method's full name like e. g. @void trafficLight_setTimer(TrafficLight* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic)@ – to tell the timer service that it has to start a timer for the given time event identifier and raise it after the period of time specified by the _time&#95;ms_ parameter has expired. It is important to only start a timer thread or a hardware timer interrupt within the @setTimer()@ method and avoid any time-consuming operations like extensive computations, sleeping or waiting. Never call the statechart API functions from within these functions! Otherwise the state machine execution might hang within the timer service or might not show the expected runtime behavior.
+A state machine calls the @setTimer()@ function – short for the function's full name like e. g. @void trafficLight_setTimer(TrafficLight* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic)@ – to tell the timer service that it has to start a timer for the given time event identifier and raise it after the period of time specified by the _time&#95;ms_ parameter has expired. It is important to only start a timer thread or a hardware timer interrupt within the @setTimer()@ function and avoid any time-consuming operations like extensive computations, sleeping or waiting. Never call the statechart API functions from within these functions! Otherwise the state machine execution might hang within the timer service or might not show the expected runtime behavior.
 
 In order to have the timer service raise the time event periodically, the parameter _periodic_ must be _true_.
 
-h4(#c-method-unsettimer). Method unsetTimer
+h4(#c-function-unsettimer). Function unsetTimer
 
 The state machine calls the function @trafficLight_unsetTimer(TrafficLight* handle, const sc_eventid evid)@ to notify the timer service to unset the timer for the given event ID.
 
-h4(#c-method-raisetimeevent). Method raiseTimeEvent
+h4(#c-function-raisetimeevent). Function raiseTimeEvent
 
-In order to notify the state machine about the occurence of a time event after a period of time has expired, the @raiseTimeEvent()@ method – defined in the header file of the state machine – needs to be called on the state machine. In the case of the traffic light example it is named @trafficLight_raiseTimeEvent(const TrafficLight* handle, sc_eventid evid)@ (in file _TrafficLight.h_).
+In order to notify the state machine about the occurence of a time event after a period of time has expired, the @raiseTimeEvent()@ function – defined in the header file of the state machine – needs to be called on the state machine. In the case of the traffic light example it is named @trafficLight_raiseTimeEvent(const TrafficLight* handle, sc_eventid evid)@ (in file _TrafficLight.h_).
 
 The time event is recognized by the state machine and will be processed during the next run cycle.
 
-You can conclude that in order to process the time events raised by the timing service without too much latency, the runtime environment has to call the state machine's @runCycle()@ method as frequently as needed. Consider for example a time event which is raised by the timer service after 500 ms. However, if the runtime environment calls the state machine's @runCycle()@ method only once per 1000 ms, the event will quite likely not be processed at the correct points in time.
+You can conclude that in order to process the time events raised by the timing service without too much latency, the runtime environment has to call the state machine's @runCycle()@ function as frequently as needed. Consider for example a time event which is raised by the timer service after 500 ms. However, if the runtime environment calls the state machine's @runCycle()@ function only once per 1000 ms, the event will quite likely not be processed at the correct points in time.
 
 
 h3(#c-operation-callbacks). Operation callbacks
@@ -661,7 +661,7 @@ p. An additional external function declaration @sc_integer defaultSMIfaceSample_
 
 h3(#c-integrating-generated-code). Integrating generated code
 
-To get a clue how to integrate a generated C state machine with your project have a look at this @main.c@ file and its @main()@ method. Please note that the @trafficLight_setTimer@ and @trafficLight_unsetTimer@ functions are implemented here as well:
+To get a clue how to integrate a generated C state machine with your project have a look at this @main.c@ file and its @main()@ function. Please note that the @trafficLight_setTimer@ and @trafficLight_unsetTimer@ functions are implemented here as well:
 
 bc.. 
 #include "org_yakindu_sct_examples_c_trafficlight.h"
@@ -695,7 +695,7 @@ void trafficLight_unsetTimer(const sc_eventid evid) {
     timer->unsetTimer(evid);
 }
 
-p. First an instance of the statechart data structure is created and initialized by the @trafficLight_init(&handle)@ method. The next step instantiates the timer. The class @TrafficLightTimer@ represents an implementation of a timer service and uses the timer functionality of the Qt framework. The @TrafficLightRunner@ is a runtime service which executes a run-to-completion step of the state machine every 100 ms. The runner class and the GUI are wired in the class @org_yakindu_sct_examples_c_trafficlight@:
+p. First an instance of the statechart data structure is created and initialized by the @trafficLight_init(&handle)@ function. The next step instantiates the timer. The class @TrafficLightTimer@ represents an implementation of a timer service and uses the timer functionality of the Qt framework. The @TrafficLightRunner@ is a runtime service which executes a run-to-completion step of the state machine every 100 ms. The runner class and the GUI are wired in the class @org_yakindu_sct_examples_c_trafficlight@:
 
 bc.. 
 #include "org_yakindu_sct_examples_c_trafficlight.h"
