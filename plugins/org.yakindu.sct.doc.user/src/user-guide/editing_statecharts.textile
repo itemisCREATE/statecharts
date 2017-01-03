@@ -418,7 +418,7 @@ The _Tasks_ view is updated only when the statechart is saved.
 
 h2(#using-the-example_wizard). Using the example wizard
 
-The **Example Wizard**, which is part of YAKINDU Statechart Tools since release 2.7, gives you convenient access to the examples in our "examples repository":https://github.com/Yakindu/examples. You can browse the available examples by name or by category and read their documentation in the wizard. By a simple click you can instantiate an example as a new Eclipse project. Within an example project, you can then explore and modify the state machine models using the statechart editor, run the models in the simulator, generate source code, etc.
+The **Example Wizard**, which is part of YAKINDU Statechart Tools since release 2.7, gives you convenient access to the examples in our "examples repository":https://github.com/Yakindu/examples. You can browse the available examples and read their documentation in the wizard. By a simple click you can instantiate an example as a new Eclipse project. Within an example project, you can then explore and modify the state machine models using the statechart editor, run the models in the simulator, generate source code, etc.
 
 Upon its first invocation, the example wizard downloads the online examples repository and creates a copy on your local disk. After that, all examples are immediately available to you, even if you are offline. The example wizard will notice when new examples are available in the online repository and offers to download them. It is also possible to download the examples repository out-of-band and later tell the example wizard where it can find the local copy.
 
@@ -452,15 +452,15 @@ You can change the storage location of your local examples repository clone at a
 
 h3(#browsing-the-example-repository). Browsing the examples repository
 
-The example wizard shows the available examples and their categories on the left-hand side.
+The example wizard shows the available examples on the left-hand side.
 
 Click on an example to select it and show its documentation on the right-hand side.
 
 Click on _Finish_ to create the selected example as a new project in your workspace.
 
-!(standard-image)images/docu_example_wizard_browse.png(Example wizard showing all available examples grouped by category)!
+!(standard-image)images/docu_example_wizard_browse.png(Example wizard showing all available examples)!
 
-p=. Example wizard showing all available examples grouped by category
+p=. Example wizard showing all available examples
 
 
 h3(#manually-creating-a-local-copy-of-the-examples-repository). Manually creating a local copy of the examples repository
