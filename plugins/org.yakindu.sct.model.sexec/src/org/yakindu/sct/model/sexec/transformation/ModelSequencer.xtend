@@ -180,7 +180,7 @@ class ModelSequencer implements IModelSequencer {
 	}
 	
 	// avoid useless error messages
-	def dispatch replaced(Property pi) {
+	def dispatch replaced(Declaration decl) {
 		null;
 	}
 	
