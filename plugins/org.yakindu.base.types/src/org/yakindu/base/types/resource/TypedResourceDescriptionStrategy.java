@@ -39,17 +39,12 @@ public  class TypedResourceDescriptionStrategy extends DefaultResourceDescriptio
 	 * This flag indicates the if the type of a TypedElelemnt is complex or not
 	 */
 	public static final String HAS_COMPLEX_TYPE = "has_complex_type";
-
 	
-	public TypedResourceDescriptionStrategy() {
-		super();
-	}
-
-
 	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
 		if (getQualifiedNameProvider() == null)
 			return false;
-		
+		if(!shouldCreateDescription(eObject))
+			return false;
 		try {
 			QualifiedName qualifiedName = getQualifiedNameProvider().getFullyQualifiedName(eObject);
 			if (qualifiedName != null) {
@@ -60,6 +55,10 @@ public  class TypedResourceDescriptionStrategy extends DefaultResourceDescriptio
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
+		return true;
+	}
+	
+	protected boolean shouldCreateDescription(EObject object){
 		return true;
 	}
 
