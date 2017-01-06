@@ -14,10 +14,10 @@
 		style="css/style.css" alt-style="css/style.properties" path="samples/@">
 		<group style-id="content-group" id="yakindu-introLink-group"
 			label="YAKINDU Statechart Tools">
-			<link label="Example project"
+			<link label="Example projects"
 				url="http://org.eclipse.ui.intro/runAction?pluginId=org.yakindu.sct.ui.intro&amp;class=org.yakindu.sct.ui.intro.OpenExampleIntroAction"
 				id="yakindu-examples-link" style-id="content-link">
-				<text>Create the traffic light example …</text>
+				<text>Learn how to use YAKINDU Statechart Tools by example …</text>
 			</link>
 		</group>
 	</extensionContent>

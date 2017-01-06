@@ -28,7 +28,7 @@ import org.eclipse.ui.wizards.IWizardDescriptor;
  */
 public class OpenExampleIntroAction implements IIntroAction {
 
-	private final String TRAFFICLIGHT_EXAMPLE_WIZARD = "org.yakindu.sct.example.trafficlight";
+	private final String TRAFFICLIGHT_EXAMPLE_WIZARD = "org.yakindu.sct.examples.ui.wizards.ExampleWizard";
 
 	@Override
 	public void run(IIntroSite site, Properties params) {
