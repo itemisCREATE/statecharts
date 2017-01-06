@@ -153,7 +153,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	}
 
 	def run() {
-		while (!executionStack.empty && !suspended) {
+		while (!executionStack.empty) {
 			var head = executionStack.head
 			executionStack.remove(head)
 			head.execute
