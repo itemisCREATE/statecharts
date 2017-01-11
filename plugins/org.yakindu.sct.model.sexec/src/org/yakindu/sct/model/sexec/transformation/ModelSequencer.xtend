@@ -32,6 +32,7 @@ import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.base.types.Property
 
 class ModelSequencer implements IModelSequencer {
 	 
@@ -149,17 +150,16 @@ class ModelSequencer implements IModelSequencer {
 	
 	
 	def dispatch Declaration replaced(EObject ne) {
+		var err = if (ne == null) "Replace called with null" else {
+			"Replace with unknown EObject (" + ne.class.simpleName + ") called: " 
+			+ ne.fullyQualifiedName + " in " + ne.eResource.URI.toString
+		}
+		
 		try {
-			var name = if (ne == null) "null" else ne.fullyQualifiedName
-			var type = if (ne == null) "unknown type" else ne.class.simpleName
-			var resource = if (ne == null) "unknown resource" else ne.eResource.URI.toString
-			
-			println("Replace with unknown EObject ("+type+") called: " + name + " in " + resource)
-			
-			LogFactory::getLog(typeof(ModelSequencer)).error("Replace with unknown EObject ("+type+") called: " + name + " in " + resource)
+			LogFactory::getLog(typeof(ModelSequencer)).error(err)
 		} catch (LogConfigurationException e) {
 			e.printStackTrace
-			println("Replace with unknown NamedElement called: "+if (ne ==null) "null" else ne.fullyQualifiedName)
+			println(err)
 		}
 		null;
 	}
@@ -177,6 +177,11 @@ class ModelSequencer implements IModelSequencer {
 
 	def dispatch replaced(TimeEvent ed) {
 		ed
+	}
+	
+	// avoid useless error messages
+	def dispatch replaced(Declaration decl) {
+		null;
 	}
 	
 		 	

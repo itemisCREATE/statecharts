@@ -113,11 +113,11 @@ import org.yakindu.base.types.Event
 	}
 	
 	
-	def EventDefinition create r : EcoreUtil::copy(event) create(EventDefinition event) {}
+	def EventDefinition create r : EcoreUtil.copy(event) create(EventDefinition event) {}
 	
-	def VariableDefinition create r : EcoreUtil::copy(v) create(VariableDefinition v) {}
+	def VariableDefinition create r : EcoreUtil.copy(v) create(VariableDefinition v) {}
 	
-	def OperationDefinition create r : EcoreUtil::copy(v) create(OperationDefinition v) {}
+	def OperationDefinition create r : EcoreUtil.copy(v) create(OperationDefinition v) {}
 	
 	 
 	def ExecutionState create r : sexecFactory.createExecutionState create(RegularState state){
