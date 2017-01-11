@@ -88,7 +88,7 @@ public class SimulationImageRenderer {
 	}
 
 	public void highlightActiveStates(final ExecutionContext context, final Diagram diagram) {
-		highlightElements(context.getActiveStates(), diagram);
+		highlightElements(context.getAllActiveStates(), diagram);
 	}
 
 	public void highlightElements(final List<? extends EObject> objects, final Diagram diagram) {
@@ -103,8 +103,9 @@ public class SimulationImageRenderer {
 						SimulationPreferenceConstants.STATE_FOREGROUND_HIGHLIGHTING_COLOR);
 				RGB rgbBackGround = PreferenceConverter.getColor(SimulationActivator.getDefault().getPreferenceStore(),
 						SimulationPreferenceConstants.STATE_BACKGROUND_HIGHLIGHTING_COLOR);
-				RGB rgbTransitionActive = PreferenceConverter.getColor(SimulationActivator.getDefault()
-						.getPreferenceStore(), SimulationPreferenceConstants.TRANSITION_HIGHLIGHTING_COLOR);
+				RGB rgbTransitionActive = PreferenceConverter.getColor(
+						SimulationActivator.getDefault().getPreferenceStore(),
+						SimulationPreferenceConstants.TRANSITION_HIGHLIGHTING_COLOR);
 
 				Color color = new Color(Display.getDefault(), rgbForeGround);
 				Integer foreGround = FigureUtilities.colorToInteger(color);
@@ -130,10 +131,12 @@ public class SimulationImageRenderer {
 								element = ((Edge) next).getElement();
 							}
 
-							if(element == null){ //next instanceof BasicDecorationNode || next instanceof Shape
+							if (element == null) { // next instanceof
+													// BasicDecorationNode ||
+													// next instanceof Shape
 								continue;
 							}
-							
+
 							if (EcoreUtil.getURI(elementToHighlight).equals(EcoreUtil.getURI(element))) {
 								if (next instanceof Node) {
 									ShapeStyle style = (ShapeStyle) ((Node) next)
