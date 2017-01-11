@@ -88,7 +88,7 @@ public class SimulationImageRenderer {
 	}
 
 	public void highlightActiveStates(final ExecutionContext context, final Diagram diagram) {
-		highlightElements(context.getActiveStates(), diagram);
+		highlightElements(context.getAllActiveStates(), diagram);
 	}
 
 	public void highlightElements(final List<? extends EObject> objects, final Diagram diagram) {
