@@ -27,6 +27,8 @@ import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
+import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
@@ -139,19 +141,60 @@ public class STextTestScopeProvider extends STextScopeProvider {
 		return enumerator;
 	}
 	
+	/**
+	 * ComplexParameterizedType<T1,T2> {
+	 * 		T1 prop1;
+	 * 		T2 prop2;
+	 * 		T1 op(T1 param1, T2 param2);
+	 * }
+	 * @return
+	 */
 	protected ComplexType createComplexParameterizedType() {
 		ComplexType complexType = TypesFactory.eINSTANCE.createComplexType();
 		complexType.setName("ComplexParameterizedType");
 		
-		TypeParameter typeParam = TypesFactory.eINSTANCE.createTypeParameter();
-		complexType.getParameter().add(typeParam);
+		TypeParameter typeParam1 = TypesFactory.eINSTANCE.createTypeParameter();
+		typeParam1.setName("T1");
+		complexType.getParameter().add(typeParam1);
+		TypeParameter typeParam2 = TypesFactory.eINSTANCE.createTypeParameter();
+		typeParam2.setName("T2");
+		complexType.getParameter().add(typeParam2);
 
-		Property featureX = TypesFactory.eINSTANCE.createProperty();
-		featureX.setName("x");
-		TypeSpecifier typeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
-		typeSpec.setType(typeParam);
-		featureX.setTypeSpecifier(typeSpec);
-		complexType.getFeatures().add(featureX);
+		Property prop1 = TypesFactory.eINSTANCE.createProperty();
+		prop1.setName("prop1");
+		TypeSpecifier prop1typeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
+		prop1typeSpec.setType(typeParam1);
+		prop1.setTypeSpecifier(prop1typeSpec);
+		complexType.getFeatures().add(prop1);
+		
+		Property prop2 = TypesFactory.eINSTANCE.createProperty();
+		prop2.setName("prop2");
+		TypeSpecifier prop2typeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
+		prop2typeSpec.setType(typeParam2);
+		prop2.setTypeSpecifier(prop2typeSpec);
+		complexType.getFeatures().add(prop2);
+		
+		Operation operation = TypesFactory.eINSTANCE.createOperation();
+		operation.setName("op");
+		TypeSpecifier returnTypeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
+		returnTypeSpec.setType(typeParam1);
+		operation.setTypeSpecifier(returnTypeSpec);
+
+		Parameter opParam1 = TypesFactory.eINSTANCE.createParameter();
+		opParam1.setName("param1");
+		TypeSpecifier param1TypeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
+		param1TypeSpec.setType(typeParam1);
+		opParam1.setTypeSpecifier(param1TypeSpec);
+		operation.getParameters().add(opParam1);
+		
+		Parameter opParam2 = TypesFactory.eINSTANCE.createParameter();
+		opParam2.setName("param2");
+		TypeSpecifier param2TypeSpec = TypesFactory.eINSTANCE.createTypeSpecifier();
+		param2TypeSpec.setType(typeParam2);
+		opParam2.setTypeSpecifier(param2TypeSpec);
+		operation.getParameters().add(opParam2);
+		
+		complexType.getFeatures().add(operation);
 
 		Resource resource = new ResourceImpl(URI.createURI("types2"));
 		resource.getContents().add(complexType);

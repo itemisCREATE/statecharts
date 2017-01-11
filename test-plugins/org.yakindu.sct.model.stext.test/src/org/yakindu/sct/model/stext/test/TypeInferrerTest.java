@@ -751,18 +751,29 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 	
 	@Test
 	public void testParameterizedType() {
+		assertTrue(isBooleanType(
+				inferTypeResultForExpression("t.prop1", "internal var t:ComplexParameterizedType<boolean, integer>").getType()));
 		assertTrue(isIntegerType(
-				inferTypeResultForExpression("t.x", "internal var t:ComplexParameterizedType<integer>").getType()));
-		assertTrue(isIntegerType(inferTypeResultForExpression("t.x.x",
-				"internal var t:ComplexParameterizedType<ComplexParameterizedType<integer> >").getType()));
+				inferTypeResultForExpression("t.prop2", "internal var t:ComplexParameterizedType<boolean, integer>").getType()));
+		
+		assertTrue(isBooleanType(inferTypeResultForExpression("t.prop1.prop1",
+				"internal var t:ComplexParameterizedType<ComplexParameterizedType<boolean, integer>, integer>").getType()));
 
+		expectNoErrors("b = t.op(true, 10)",
+				"internal var t:ComplexParameterizedType<boolean, integer> var b:boolean");
+
+		assertTrue(isBooleanType(inferTypeResultForExpression("b = t.op(true, 10)",
+				"internal var t:ComplexParameterizedType<integer> var b:boolean").getType()));
+		
 		assertTrue(
-				isAnyType(inferTypeResultForExpression("t.x", "internal var t:ComplexParameterizedType<>").getType()));
+				isAnyType(inferTypeResultForExpression("t.prop1", "internal var t:ComplexParameterizedType<>").getType()));
 
-		assertTrue(isAnyType(inferTypeResultForExpression("t.x", "internal var t:ComplexParameterizedType").getType()));
-
-		assertTrue(isAnyType(inferTypeResultForExpression("t.x.x",
-				"internal var t:ComplexParameterizedType<ComplexParameterizedType<> >").getType()));
+		assertTrue(isAnyType(inferTypeResultForExpression("t.prop1", "internal var t:ComplexParameterizedType").getType()));
+		
+		assertTrue(isAnyType(inferTypeResultForExpression("t.op(1, 2)", "internal var t:ComplexParameterizedType").getType()));
+		
+		assertTrue(isAnyType(inferTypeResultForExpression("t.prop1.prop1",
+				"internal var t:ComplexParameterizedType<ComplexParameterizedType<>, integer>").getType()));
 	}
 	
 	@Test

@@ -207,37 +207,44 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			Operation operation = (Operation) e.getFeature();
 			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = e.getArgs();
-			inferParameter(parameters, args);
+			inferParameter(parameters, args, e.getOwner());
 		}
 		InferenceResult result = inferTypeDispatch(e.getFeature());
 		if (result != null && result.getType() instanceof TypeParameter) {
-			InferenceResult ownerResult = inferTypeDispatch(e.getOwner());
-			if (ownerResult.getBindings().isEmpty()) {
-				result = getResultFor(ANY);
-			} else {
-				result = InferenceResult.from(ownerResult.getBindings().get(0).getType(), ownerResult.getBindings().get(0).getBindings());
-			}
+			result = inferTypeParameter((TypeParameter) result.getType(), inferTypeDispatch(e.getOwner()));
 		}
 		return result;
 	}
-
+	
 	public InferenceResult doInfer(ElementReferenceExpression e) {
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getReference();
 			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = e.getArgs();
-			inferParameter(parameters, args);
+			inferParameter(parameters, args, null);
 		}
 		return inferTypeDispatch(e.getReference());
 	}
 
-	protected void inferParameter(EList<Parameter> parameters, EList<Expression> args) {
+	protected void inferParameter(EList<Parameter> parameters, EList<Expression> args, Expression operationOwner) {
 		if (parameters.size() == args.size()) {
 			for (int i = 0; i < parameters.size(); i++) {
 				InferenceResult result1 = inferTypeDispatch(parameters.get(i));
+				if (operationOwner != null && result1 != null && result1.getType() instanceof TypeParameter) {
+					result1 = inferTypeParameter((TypeParameter) result1.getType(), inferTypeDispatch(operationOwner));
+				}
 				InferenceResult result2 = inferTypeDispatch(args.get(i));
 				assertCompatible(result2, result1, String.format(INCOMPATIBLE_TYPES, result2, result1));
 			}
+		}
+	}
+	
+	protected InferenceResult inferTypeParameter(TypeParameter typeParameter, InferenceResult ownerResult) {
+		if (ownerResult.getBindings().isEmpty() || !(ownerResult.getType() instanceof ParameterizedType)) {
+			return getResultFor(ANY);
+		} else {
+			int index = ((ParameterizedType) ownerResult.getType()).getParameter().indexOf(typeParameter);
+			return InferenceResult.from(ownerResult.getBindings().get(index).getType(), ownerResult.getBindings().get(index).getBindings());
 		}
 	}
 
@@ -301,9 +308,9 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				if (binding != null) {
 					bindings.add(binding);
 				}
-				Type type = inferTypeDispatch(specifier.getType()).getType();
-				return InferenceResult.from(type, bindings);
 			}
+			Type type = inferTypeDispatch(specifier.getType()).getType();
+			return InferenceResult.from(type, bindings);
 		}
 		return inferTypeDispatch(specifier.getType());
 
