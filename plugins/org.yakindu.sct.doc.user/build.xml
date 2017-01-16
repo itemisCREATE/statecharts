@@ -195,11 +195,11 @@
                 </fileset>
             </replaceregexp>
 
-            <!-- Fix "pro-feature" DIV elements -->
+            <!-- Fix DIV elements -->
             <replaceregexp byline="false"
                            flags="g"
-                           match='&lt;p&gt;&lt;div class="pro-feature"&gt;&lt;/p&gt;'
-                           replace='&lt;div class="pro-feature"&gt;'>
+                           match='&lt;p&gt;&lt;div(.*)&gt;&lt;/p&gt;'
+                           replace='&lt;div\1&gt;'>
                 <fileset dir="${help.dir}">
                     <include name="**/*.html" />
                 </fileset>
