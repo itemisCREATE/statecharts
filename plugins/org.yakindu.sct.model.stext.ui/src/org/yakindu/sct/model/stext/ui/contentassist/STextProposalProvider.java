@@ -33,9 +33,11 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -43,8 +45,10 @@ import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.model.stext.validation.ContextPredicateProvider;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -188,22 +192,31 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		};
 	}
 
+	@Inject
+	protected ContextPredicateProvider contextProvider;
+
 	@Override
 	public void completeElementReferenceExpression_Reference(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor);
+		Predicate<IEObjectDescription> predicate = contextProvider.calculateFilterPredicate(context.getCurrentModel(),
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
+		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor, predicate);
 	}
-
+	
 	@Override
 	public void completeSimpleElementReferenceExpression_Reference(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor);
+		Predicate<IEObjectDescription> predicate = contextProvider.calculateFilterPredicate(context.getCurrentModel(),
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
+		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor, predicate);
 	}
-
-	@Override
-	public void completeTypeSpecifier_Type(EObject model, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor);
+		
+	@Override	
+	public void completeTypeSpecifier_Type(EObject model, Assignment assignment,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		Predicate<IEObjectDescription> predicate = contextProvider.calculateFilterPredicate(context.getCurrentModel(),
+				TypesPackage.Literals.TYPE_SPECIFIER__TYPE);
+		lookupCrossReference(((CrossReference) assignment.getTerminal()), context, acceptor, predicate);
 	}
 
 	@Override

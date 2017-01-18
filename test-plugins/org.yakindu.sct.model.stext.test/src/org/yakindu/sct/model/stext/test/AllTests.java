@@ -24,7 +24,7 @@ import org.yakindu.sct.model.stext.test.validation.TransitionsWithNoTriggerTest;
 @RunWith(value = Suite.class)
 @SuiteClasses(value = { TypeInferrerTest.class, StextParserRuleTest.class, TestModelsContainErrorsTest.class,
 		SCTUnitClassifierTest.class, STextJavaValidatorTest.class, TransitionsWithNoTriggerTest.class,
-		STextScopeProviderTest.class })
+		ContextPredicateProviderTest.class })
 
 public class AllTests {
 }

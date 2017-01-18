@@ -33,7 +33,12 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -125,6 +130,43 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Inject(optional = true)
 	@Named(DomainRegistry.DOMAIN_ID)
 	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
+	@Inject
+	private ContextPredicateProvider contextPredicateProvider;
+	@Inject
+	private IResourceDescriptions index;
+	@Inject
+	private IDefaultResourceDescriptionStrategy strategy;
+
+	@Check(CheckType.FAST)
+	public void checkContextElement(final ElementReferenceExpression expression) {
+		Iterable<IEObjectDescription> description = null;
+		QualifiedName fqn = nameProvider.getFullyQualifiedName(expression.getReference());
+		if (index instanceof ResourceSetBasedResourceDescriptions) {
+			//This is the fallback for headless execution
+			description = createEObjectDescription(expression);
+		} else {
+			description = index.getExportedObjects(expression.getReference().eClass(), fqn, false);
+		}
+		final Predicate<IEObjectDescription> predicate = contextPredicateProvider.calculateFilterPredicate(expression,
+				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
+		for (IEObjectDescription desc : description) {
+			if (!predicate.apply(desc)) {
+				String name = expression.getReference().eClass().getName();
+				error(String.format(ERROR_WRONG_CONTEXT_ELEMENT_MSG, name), null, -1, ERROR_WRONG_CONTEXT_ELEMENT_CODE);
+			}
+		}
+	}
+
+	protected List<IEObjectDescription> createEObjectDescription(final ElementReferenceExpression expression) {
+		final List<IEObjectDescription> result = Lists.newArrayList();
+		strategy.createEObjectDescriptions(expression.getReference(),new IAcceptor<IEObjectDescription>() {
+			@Override
+			public void accept(IEObjectDescription t) {
+				result.add(t);
+			}
+		} );
+		return result;
+	}
 
 	@Check(CheckType.FAST)
 	public void checkExpression(VariableDefinition expression) {
@@ -324,28 +366,31 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	}
 
+	
 	@Check(CheckType.FAST)
-	public void checkValueOfNoEvent(EventValueReferenceExpression exp) {
-
+	public void checkValueOfNoEvent(EventValueReferenceExpression exp){
+		
 		Expression eventExpr = exp.getValue();
-
+		
 		EObject element = null;
 		if (eventExpr instanceof ElementReferenceExpression) {
-			element = ((ElementReferenceExpression) eventExpr).getReference();
+			element =  ((ElementReferenceExpression) eventExpr).getReference();
 		} else if (eventExpr instanceof FeatureCall) {
 			element = ((FeatureCall) eventExpr).getFeature();
 		}
-
-		if (element != null && (!(element instanceof Event))) {
+		
+		if (element != null && (! (element instanceof Event))) {
 			String elementName = "";
-			if (element instanceof NamedElement) {
-				elementName = "'" + ((NamedElement) element).getName() + "' ";
+			if ( element instanceof NamedElement ) {
+				elementName = "'" + ((NamedElement) element).getName() +"' ";
 			}
-			error(elementName + "is no event.", StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, 0,
+			error( elementName + "is no event.",
+					StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, 0,
 					VALUE_OF_REQUIRES_EVENT);
 		}
 	}
 
+	
 	@Check(CheckType.NORMAL)
 	public void checkValueReferenedBeforeDefined(Scope scope) {
 		EList<Declaration> declarations = scope.getDeclarations();
@@ -623,30 +668,32 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	@Check(CheckType.FAST)
 	public void checkReactionTriggerRegularEvent(ReactionTrigger reactionTrigger) {
-		for (int i = 0; i < reactionTrigger.getTriggers().size(); i++) {
+		for (int i=0; i<reactionTrigger.getTriggers().size(); i++) {
 			EventSpec eventSpec = reactionTrigger.getTriggers().get(i);
 			if (eventSpec instanceof RegularEventSpec) {
 
 				Expression eventExpression = ((RegularEventSpec) eventSpec).getEvent();
 				EObject element = null;
 				if (eventExpression instanceof ElementReferenceExpression) {
-					element = ((ElementReferenceExpression) eventExpression).getReference();
+					element =  ((ElementReferenceExpression) eventExpression).getReference();
 				} else if (eventExpression instanceof FeatureCall) {
 					element = ((FeatureCall) eventExpression).getFeature();
 				}
-
-				if (element != null && (!(element instanceof Event))) {
+				
+				if (element != null && (! (element instanceof Event))) {
 					String elementName = "";
-					if (element instanceof NamedElement) {
-						elementName = "'" + ((NamedElement) element).getName() + "' ";
+					if ( element instanceof NamedElement ) {
+						elementName = "'" + ((NamedElement) element).getName() +"' ";
 					}
-					error("Trigger " + elementName + "is no event.", StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
-							i, TRIGGER_IS_NO_EVENT);
+					error("Trigger " + elementName + "is no event.",
+							StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, i,
+							TRIGGER_IS_NO_EVENT);
 				}
 			}
 		}
 	}
 
+	
 	/**
 	 * Only Expressions that produce an effect should be used as actions.
 	 * 
