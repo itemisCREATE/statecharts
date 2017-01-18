@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.model.stext.validation;
+package org.yakindu.sct.model.stext.scoping;
 
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION;
@@ -37,7 +37,6 @@ import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_SPECIFICATION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.VARIABLE_DEFINITION;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,13 +46,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.resource.TypedResourceDescriptionStrategy;
-import org.yakindu.base.types.typesystem.GenericTypeValueProvider;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
