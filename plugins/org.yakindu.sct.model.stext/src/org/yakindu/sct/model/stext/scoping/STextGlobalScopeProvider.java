@@ -114,7 +114,6 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 					if (!EcoreUtil2.isValidUri(resource, uriIter.next()))
 						uriIter.remove();
 				}
-				System.out.println(uniqueImportURIs);
 				return uniqueImportURIs;
 			}
 
