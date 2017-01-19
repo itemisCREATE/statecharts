@@ -103,10 +103,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 				for (ImportScope object : importScopes) {
 					EList<Package> imports = object.getImports();
 					for (Package package1 : imports) {
-						EcoreUtil.resolveAll(package1);
-						if (package1.eIsProxy())
-							continue;
-						collector.accept(EcoreUtil.getURI(package1).trimFragment().toString());
+						collectPackageImports(package1, collector, uniqueImportURIs);
 					}
 				}
 				Iterator<URI> uriIter = uniqueImportURIs.iterator();
@@ -128,6 +125,21 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 				}
 			}
 		});
+	}
+
+	protected void collectPackageImports(Package package1, IAcceptor<String> acceptor,
+			LinkedHashSet<URI> uniqueImportURIs) {
+		EcoreUtil.resolveAll(package1);
+		if (package1.eIsProxy())
+			return;
+		String uri = EcoreUtil.getURI(package1).trimFragment().toString();
+		if (uniqueImportURIs.contains(uri))
+			return;
+		acceptor.accept(uri);
+		EList<Package> import1 = package1.getImport();
+		for (Package package2 : import1) {
+			collectPackageImports(package2, acceptor, uniqueImportURIs);
+		}
 	}
 
 	private Statechart getStatechart(Resource context) {
