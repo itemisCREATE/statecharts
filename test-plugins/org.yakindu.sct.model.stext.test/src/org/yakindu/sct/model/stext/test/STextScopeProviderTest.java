@@ -88,150 +88,161 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	/**
 	 * @see {@link ContextPredicateProvider#filter}
 	 */
-	@Parameters(name = "{index}: parse {0} in rule {1} expected linkable = {3}")
+	@Parameters(name = "{index}: {0} in rule {1} expected to be invalid = {3}")
 	public static Iterable<Object[]> data1() {
-		return Arrays
-				.asList(new Object[][]{//
-						/* testGuardScopingSuccess */
-						{"[e1]", ReactionTrigger.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"[Interface1.e3]", ReactionTrigger.class.getSimpleName(), INTERFACE_SCOPE, true}, //
-						{"[e1 && e2]", ReactionTrigger.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"[e1 && Interface1.e3]", ReactionTrigger.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"[Interface1.e4 && Interface1.e3]", ReactionTrigger.class.getSimpleName(), INTERFACE_SCOPE, true}, //
-						/*
-						 * filter.put(key(ASSIGNMENT_EXPRESSION),
-						 * VARIABLES_OPERATIONS_EVENTS_ENUMERATORS)
-						 */
-						{"myInt = 0", ReactionEffect.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt = Interface1.myInt2", ReactionEffect.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myInt = myOpp3()", ReactionEffect.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myBool = e1", ReactionEffect.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						/*
-						 * filter.put(key(CONDITIONAL_EXPRESSION),
-						 * VARIABLES_AND_OPERATIONS)
-						 */
-						{"myBool ? myOpp(1) : myOpp(2)", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myOpp4() ? myInt : myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myBool ? e1 : myOpp(2)", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						/*
-						 * filter.put(key(LOGICAL_OR_EXPRESSION),
-						 * VARIABLES_OPERATIONS_EVENTS_ENUMERATORS)
-						 */
-						{"myInt || Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myInt || myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt || e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						/*
-						 * filter.put(key(LOGICAL_AND_EXPRESSION),
-						 * VARIABLES_OPERATIONS_EVENTS_ENUMERATORS)
-						 */
-						{"myInt && Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myInt && myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt && e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						/*
-						 * filter.put(key(BITWISE_XOR_EXPRESSION), VARIABLES)
-						 */
-						{"myInt ^ Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"e1 ^ e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						{"myOpp1(1) ^ myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						/*
-						 * filter.put(key(BITWISE_OR_EXPRESSION), VARIABLES)
-						 */
-						{"myInt | Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"e1 | e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						{"myOpp1(1) | myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						/*
-						 * filter.put(key(BITWISE_AND_EXPRESSION), VARIABLES)
-						 */
-						{"myInt & Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"e1 & e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						{"myOpp1(1) & myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						/*
-						 * filter.put(key(SHIFT_EXPRESSION), VARIABLES)
-						 */
-						{"myInt << Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myInt >> Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"e1 >> e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						{"e1 >> e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						{"myOpp1(1) >> myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						{"myOpp1(1) << myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						/*
-						 * filter.put(key(LOGICAL_NOT_EXPRESSION),
-						 * VARIABLES_OPERATIONS_EVENTS_ENUMERATORS)
-						 */
-						{"!Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"!myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"!e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						/*
-						 * filter.put(key(LOGICAL_RELATION_EXPRESSION),
-						 * VARIABLES_OPERATIONS_EVENTS_ENUMERATORS)
-						 */
-						{"myInt < Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myInt < myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt < e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt > Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myInt > myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt > e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt <= Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myInt <= myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt <= e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt >= Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myInt >= myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt >= e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt == Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myInt == myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt == e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt != Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myInt != myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt != e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						/*
-						 * filter.put(key(NUMERICAL_ADD_SUBTRACT_EXPRESSION),
-						 * VARIABLES_AND_OPERATIONS)
-						 */
-						{"myInt + Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myInt - Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myOpp3() + myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt - myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myOpp3() + myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myOpp3() - myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"e1 + e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						{"e1 - e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						/*
-						 * filter.put(key(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION),
-						 * VARIABLES_AND_OPERATIONS)
-						 */
-						{"myInt * Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myInt / Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true}, //
-						{"myOpp3() * myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myInt / myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myOpp3() * myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"e1 * e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						{"e1 / e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						/*
-						 * filter.put(key(NUMERICAL_UNARY_EXPRESSION),
-						 * VARIABLES_AND_OPERATIONS)
-						 */
-						{"-myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"+myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"-myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"+myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"-e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						{"+e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						/*
-						 * filter.put(key(EVENT_VALUE_REFERENCE_EXPRESSION), EVENTS)
-						 */
-						{"valueof(e2)", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"valueof(myInt)", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						{"valueof(myOpp3())", Expression.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						/*
-						 * filter.put(key(VARIABLE_DEFINITION, TYPED_ELEMENT__TYPE),
-						 * TYPES)
-						 */
-						{"var x : integer", VariableDefinition.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"var x : e1", VariableDefinition.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						/* filter.put(key(REGULAR_EVENT_SPEC), EVENTS) */
-						{"e1 / myInt = 0", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, true}, //
-						{"myOpp(4) / myInt = 10", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, false}, //
-						{"myInt / myInt = 10", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, false}, //
+		return Arrays.asList(new Object[][] { //
+				/* testGuardScopingSuccess */
+				{ "[e1]", ReactionTrigger.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "[Interface1.e3]", ReactionTrigger.class.getSimpleName(), INTERFACE_SCOPE, true }, //
+				{ "[e1 && e2]", ReactionTrigger.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "[e1 && Interface1.e3]", ReactionTrigger.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "[Interface1.e4 && Interface1.e3]", ReactionTrigger.class.getSimpleName(), INTERFACE_SCOPE, true }, //
+				/*
+				 * filter.put(key(ASSIGNMENT_EXPRESSION),
+				 * VARIABLES_OPERATIONS_EVENTS_ENUMERATORS)
+				 */
+				{ "myInt = 0", ReactionEffect.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myInt = Interface1.myInt2", ReactionEffect.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myInt = myOpp3()", ReactionEffect.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myBool = e1", ReactionEffect.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				/*
+				 * filter.put(key(CONDITIONAL_EXPRESSION),
+				 * VARIABLES_AND_OPERATIONS)
+				 */
+				{ "myBool ? myOpp(1) : myOpp(2)", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myOpp4() ? myInt : myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true}, //
+				{ "myBool ? e1 : myOpp(2)", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				/*
+				 * filter.put(key(LOGICAL_OR_EXPRESSION),
+				 * VARIABLES_OPERATIONS_EVENTS_ENUMERATORS)
+				 */
+				{ "myBool || Interface1.myBool2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myBool || myOpp4()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myBool || e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				/*
+				 * filter.put(key(LOGICAL_AND_EXPRESSION),
+				 * VARIABLES_OPERATIONS_EVENTS_ENUMERATORS)
+				 */
+				{ "myBool && Interface1.myBool2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myBool && myOpp4()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myBool && e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				/*
+				 * filter.put(key(BITWISE_XOR_EXPRESSION), VARIABLES)
+				 */
+				{ "myInt ^ Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "e1 ^ e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				{ "myOpp(1) ^ myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				/*
+				 * filter.put(key(BITWISE_OR_EXPRESSION), VARIABLES)
+				 */
+				{ "myInt | Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "e1 | e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				{ "myOpp(1) | myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				/*
+				 * filter.put(key(BITWISE_AND_EXPRESSION), VARIABLES)
+				 */
+				{ "myInt & Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "e1 & e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				{ "myOpp(1) & myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				/*
+				 * filter.put(key(SHIFT_EXPRESSION), VARIABLES)
+				 */
+				{ "myInt << Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myInt >> Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "e1 >> e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				{ "e1 >> e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				{ "myOpp(1) >> myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				{ "myOpp(1) << myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				/*
+				 * filter.put(key(LOGICAL_NOT_EXPRESSION),
+				 * VARIABLES_OPERATIONS_EVENTS_ENUMERATORS)
+				 */
+				{ "!Interface1.myBool2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE, true }, //
+				{ "!myOpp4()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "!e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				/*
+				 * filter.put(key(LOGICAL_RELATION_EXPRESSION),
+				 * VARIABLES_OPERATIONS_EVENTS_ENUMERATORS)
+				 */
+				{ "myInt < Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myInt < myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myInt > Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myInt > myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myInt <= Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myInt <= myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myInt >= Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myInt >= myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myInt == Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myInt == myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myInt != Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myInt != myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				/*
+				 * filter.put(key(NUMERICAL_ADD_SUBTRACT_EXPRESSION),
+				 * VARIABLES_AND_OPERATIONS)
+				 */
+				{ "myInt + Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myInt - Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myOpp3() + myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myInt - myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myOpp3() + myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myOpp3() - myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "e1 + e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				{ "e1 - e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				/*
+				 * filter.put(key(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION),
+				 * VARIABLES_AND_OPERATIONS)
+				 */
+				{ "myInt * Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myInt / Interface1.myInt2", Expression.class.getSimpleName(), INTERFACE_SCOPE_AND_INTERNAL_SCOPE,
+						true }, //
+				{ "myOpp3() * myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myInt / myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "myOpp3() * myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "e1 * e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				{ "e1 / e2", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				/*
+				 * filter.put(key(NUMERICAL_UNARY_EXPRESSION),
+				 * VARIABLES_AND_OPERATIONS)
+				 */
+				{ "-myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "+myInt", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "-myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "+myOpp3()", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{ "-e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				{ "+e1", Expression.class.getSimpleName(), INTERNAL_SCOPE, false }, //
+				/*
+				 * filter.put(key(EVENT_VALUE_REFERENCE_EXPRESSION), EVENTS)
+				 */
+				{ "valueof(e2)", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				// { "valueof(myInt)", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, // context predicates can't validate this expression. This will be done in the SText validation instead.
+				// { "valueof(myOpp3())", Expression.class.getSimpleName(), INTERNAL_SCOPE, true }, // context predicates can't validate this expression. This will be done in the SText validation instead.
+				/*
+				 * filter.put(key(VARIABLE_DEFINITION, TYPED_ELEMENT__TYPE),
+				 * TYPES)
+				 */
+				{ "var x : integer", VariableDefinition.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				/* filter.put(key(REGULAR_EVENT_SPEC), EVENTS) */
+				{ "e1 / myInt = 0", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				//{ "myOpp(4) / myInt = 10", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, true }, // context predicates can't validate this expression. This will be done in the SText validation instead.
+				//{ "myInt / myInt = 10", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, true }, // context predicates can't validate this expression. This will be done in the SText validation instead.
 		});
 	}
 }
