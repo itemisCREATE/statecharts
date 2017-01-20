@@ -133,13 +133,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		if (package1.eIsProxy())
 			return;
 		String uri = EcoreUtil.getURI(package1).trimFragment().toString();
-		if (uniqueImportURIs.contains(uri))
-			return;
 		acceptor.accept(uri);
-		EList<Package> import1 = package1.getImport();
-		for (Package package2 : import1) {
-			collectPackageImports(package2, acceptor, uniqueImportURIs);
-		}
 	}
 
 	private Statechart getStatechart(Resource context) {
