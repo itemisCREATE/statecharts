@@ -55,12 +55,12 @@ import org.yakindu.sct.generator.core.templates.Expressions
 
 class ExpressionCode extends Expressions {
 
-	@Inject extension Naming
-	@Inject extension Navigation
-	@Inject extension ITypeSystem
-	@Inject extension ITypeSystemInferrer
-	@Inject extension INamingService
-	@Inject extension ICodegenTypeSystemAccess
+	@Inject protected extension Naming
+	@Inject protected extension Navigation
+	@Inject protected extension ITypeSystem
+	@Inject protected extension ITypeSystemInferrer
+	@Inject protected extension INamingService
+	@Inject protected extension ICodegenTypeSystemAccess
 
 	/* Referring to declared elements */
 	def dispatch String code(ElementReferenceExpression it) {
