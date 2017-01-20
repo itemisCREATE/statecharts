@@ -12,11 +12,7 @@ package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
 import org.yakindu.base.expressions.expressions.AssignmentExpression
-import org.yakindu.base.expressions.expressions.BitwiseAndExpression
-import org.yakindu.base.expressions.expressions.BitwiseOrExpression
-import org.yakindu.base.expressions.expressions.BitwiseXorExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
-import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
@@ -30,18 +26,18 @@ import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.NullLiteral
-import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression
-import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
-import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
-import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
+import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
+import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.core.templates.Expressions
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
@@ -49,9 +45,6 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.types.Operation
-import org.yakindu.base.types.Enumerator
-import org.yakindu.sct.generator.core.templates.Expressions
 
 class ExpressionCode extends Expressions {
 
@@ -85,7 +78,7 @@ class ExpressionCode extends Expressions {
 	def dispatch String code(ElementReferenceExpression it, Operation target) '''«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 
-	def dispatch String code(ElementReferenceExpression it, org.yakindu.base.types.Property target) '''«target.access»'''
+	def dispatch String code(ElementReferenceExpression it, Property target) '''«target.access»'''
 
 	def dispatch String code(FeatureCall it, OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : args BEFORE ', ' SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
@@ -93,7 +86,7 @@ class ExpressionCode extends Expressions {
 	def dispatch String code(FeatureCall it, Operation target) '''«it.owner.code».«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 
-	def dispatch String code(FeatureCall it, org.yakindu.base.types.Property target) '''«it.owner.code».«target.access»'''
+	def dispatch String code(FeatureCall it, Property target) '''«it.owner.code».«target.access»'''
 	
 	def dispatch String code(FeatureCall it, Enumerator target) '''«target.access»'''
 
