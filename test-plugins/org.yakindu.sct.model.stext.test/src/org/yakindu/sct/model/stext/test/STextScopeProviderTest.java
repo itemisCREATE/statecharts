@@ -10,30 +10,30 @@
 */
 package org.yakindu.sct.model.stext.test;
 
+import static org.junit.Assert.fail;
+
 import java.util.Arrays;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.sct.model.stext.expressions.STextExpressionParser.LinkingException;
+import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
-import org.yakindu.sct.model.stext.test.validation.AbstractSTextValidationTest;
-import org.yakindu.sct.model.stext.validation.ContextPredicateProvider;
-import org.yakindu.sct.model.stext.validation.STextValidationMessages;
 
 /**
  * @author andreas muelder - Initial contribution and API
  * @author Johannes Dicks - Add tests covering {@link ContextPredicateProvider}
  */
 @RunWith(Parameterized.class)
-public class ContextPredicateProviderTest extends AbstractSTextValidationTest {
+public class STextScopeProviderTest extends AbstractSTextTest {
 
 	public static final String INTERNAL_SCOPE = "" + //
 			"internal: " + //
@@ -59,13 +59,13 @@ public class ContextPredicateProviderTest extends AbstractSTextValidationTest {
 	private String statement;
 	private String ruleName;
 	private String scopes;
-	private boolean valid;
-
-	public ContextPredicateProviderTest(String statement, String ruleName, String scopes, Boolean isLinkable) {
+	private boolean isLinkable;
+	
+	public STextScopeProviderTest(String statement, String ruleName, String scopes, Boolean isLinkable) {
 		this.statement = statement;
 		this.ruleName = ruleName;
 		this.scopes = scopes;
-		this.valid = isLinkable;
+		this.isLinkable = isLinkable;
 
 		STextInjectorProvider provider = new STextInjectorProvider();
 		provider.getInjector().injectMembers(this);
@@ -73,12 +73,15 @@ public class ContextPredicateProviderTest extends AbstractSTextValidationTest {
 
 	@Test
 	public void test() {
-		EObject expression = parseExpression(statement, ruleName, scopes);
-		AssertableDiagnostics validationResult = tester.validate(expression);
-		if (!valid) {
-			validationResult.assertAny(AssertableDiagnostics.errorCode(STextValidationMessages.ERROR_WRONG_CONTEXT_ELEMENT_CODE));
-		} else {
-			validationResult.assertOK();
+		try {
+			parseExpression(statement, ruleName, scopes);
+			if (!isLinkable)
+				fail(String.format(
+						"Expected not to be linkable [parse '%s' in rule '%s' for scope '%s' expected linkable = '%s']",
+						statement, ruleName, scopes, isLinkable));
+		} catch (LinkingException e) {
+			if (isLinkable)
+				throw new RuntimeException("Expected linkable but : "+e.getMessage(),e);
 		}
 	}
 
