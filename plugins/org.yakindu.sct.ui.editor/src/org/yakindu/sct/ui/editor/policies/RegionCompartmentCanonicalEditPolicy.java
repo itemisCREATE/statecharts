@@ -112,10 +112,6 @@ public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEdi
 		return SemanticHints.TRANSITION;
 	}
 
-	/**
-	 * This method is overridden to prevent the execution of
-	 * DeferredLayoutCommand
-	 */
 	@Override
 	protected void refreshSemantic() {
 		List<IAdaptable> createdViews = super.refreshSemanticChildren();
@@ -124,5 +120,14 @@ public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEdi
 		allViews.addAll(createdViews);
 		allViews.addAll(createdConnectionViews);
 		makeViewsImmutable(allViews);
+		persistTransientViews(createdViews);
+	}
+
+	protected void persistTransientViews(List<IAdaptable> createdViews) {
+		for (IAdaptable iAdaptable : createdViews) {
+			((View) iAdaptable.getAdapter(View.class)).persist();
+		}
+		// View#persist is not overridden for Edges in GMF Notation (Bug)
+		getHost().getNotationView().getDiagram().persistEdges();
 	}
 }
