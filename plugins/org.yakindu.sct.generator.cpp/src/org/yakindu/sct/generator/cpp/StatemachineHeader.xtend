@@ -28,6 +28,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.ImportScope
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader {
 
@@ -47,11 +48,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		#ifndef «module().define»_H_
 		#define «module().define»_H_
 		
-		#include "«(typesModule.h).relativeTo(module.h)»"
-		#include "«statemachineInterface.h»"
-		«IF timed»
-			#include "«(timedStatemachineInterface.h).relativeTo(module.h)»"
-		«ENDIF»
+		«includes(artifactConfigs)»
 		
 		/*! \file Header of the state machine '«name»'.
 		*/
@@ -88,6 +85,14 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		#endif /* «module().define»_H_ */
 	'''
 	}
+	
+	override includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) '''
+		#include "«(typesModule.h).relativeTo(module.h)»"
+		#include "«statemachineInterface.h»"
+		«IF timed»
+			#include "«(timedStatemachineInterface.h).relativeTo(module.h)»"
+		«ENDIF»
+	'''
 
 	def protected getInterfaceExtensions(ExecutionFlow flow) {
 
@@ -203,7 +208,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		«IF hasHistory»«statesEnumType» historyVector[«historyStatesConst»];«ENDIF»
 		sc_ushort stateConfVectorPosition;
 		
-		«FOR s : scopes.filter(typeof(StatechartScope))»
+		«FOR s : scopes.filter(typeof(StatechartScope)).filter[!(it instanceof ImportScope)]»
 			«s.interfaceName» «s.instance»;
 			«IF s.hasOperations && !entry.useStaticOPC»«s.interfaceOCBName»* «s.OCB_Instance»;«ENDIF»
 		«ENDFOR»
