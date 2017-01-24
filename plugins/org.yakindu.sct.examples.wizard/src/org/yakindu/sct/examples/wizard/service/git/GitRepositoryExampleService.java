@@ -57,8 +57,6 @@ import com.google.inject.Singleton;
 @Singleton
 public class GitRepositoryExampleService implements IExampleService {
 
-	private static final String GIT_METADATA_FOLDER = ".git";
-
 	private static final String METADATA_JSON = "metadata.json";
 
 	@Inject
@@ -69,14 +67,9 @@ public class GitRepositoryExampleService implements IExampleService {
 				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION));
 	}
 
-	protected java.nio.file.Path getGitMetadataLocation() {
-		return java.nio.file.Paths.get(ExampleActivator.getDefault().getPreferenceStore()
-				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION), GIT_METADATA_FOLDER);
-	}
-
 	@Override
 	public boolean exists() {
-		return Files.exists(getGitMetadataLocation());
+		return Files.exists(getStorageLocation()) && hasMetaData(getStorageLocation());
 	}
 
 	@Override
@@ -169,6 +162,12 @@ public class GitRepositoryExampleService implements IExampleService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	protected boolean hasMetaData(java.nio.file.Path root) {
+		List<java.nio.file.Path> result = new ArrayList<>();
+		findMetaData(result, root);
+		return !result.isEmpty();
 	}
 
 	@Override
