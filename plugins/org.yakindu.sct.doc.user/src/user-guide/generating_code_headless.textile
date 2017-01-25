@@ -86,6 +86,9 @@ usage: scc [-d <path>] [-h] [-m <path>{,<path>}…]
                               to model(s) used during execution. If not set
                               the runtime value of basedir is used.
 
+h3(#hdls_custom_generator). Integrating custom code generators
+
+YAKINDU Statechart Tools supports custom generators as described in "Custom code generators":../user-guide/generating_code.html#custom-code-generators. These custom code generators can be executed by use of the headless code generator infrastructure also. To do so the custom code generator has to be installed as an eclipse plug-in within the distribution where the headless code generator feature was installed as described in "Installation":#hdls_installation - thats it: the custom generator will be used whenever a generator model (*.sgen), loaded by the headless generator infrastructure, referencing the custom code generator id.
 
 
 h2(#hdls_generating_code). Generating code
