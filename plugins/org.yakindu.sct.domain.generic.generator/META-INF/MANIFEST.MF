@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Generic Domain Generator
 Bundle-SymbolicName: org.yakindu.sct.domain.generic.generator;singleton:=true
-Bundle-Version: 2.9.1.qualifier
+Bundle-Version: 2.9.2.qualifier
 Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.yakindu.sct.domain,
