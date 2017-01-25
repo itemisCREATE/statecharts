@@ -30,12 +30,14 @@ import org.yakindu.sct.simulation.ui.dialogs.SimulationLaunchErrorDialog;
 @SuppressWarnings("restriction")
 public class TerminateLaunchStatusHandler implements IStatusHandler {
 
+	private static final String ERROR_MSG = "An unexpected error ocurred during simulation.";
+	
 	public Object handleStatus(final IStatus status, final Object source) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				Shell shell = DebugUIPlugin.getShell();
 				SimulationLaunchErrorDialog dialog = new SimulationLaunchErrorDialog(shell,
-						"Exception occured during simulation", status.getMessage(), status, Collections
+						"Exception occured during simulation", ERROR_MSG, status, Collections
 								.singletonList((IDebugTarget) source));
 				dialog.setBlockOnOpen(false);
 				dialog.open();
