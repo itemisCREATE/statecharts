@@ -20,7 +20,7 @@ Throughout this chapter we will be using the _light switch_ statechart as an exa
 If you press the _pressLightOn_ button, the lamp turns on at its lowest brightness value. If you operate _pressLightOn_ repeatedly, each time the lamp becomes brighter until it reaches its maximum brightness. Pressing the _pressLightOff_ button, immediately turns off the light completely. The brightness can only be raised as long as it hasn't yet reached its maximum value of five. After that, the guard condition disallows to raise it any further.
 
 p(#advsim_fig-the-light-switch-sample-statechart). 
-!(standard-image)images/advsim_010_lightswitch_010_statechart.png(The light switch sample statechart)!
+!images/advsim_010_lightswitch_010_statechart.png(The light switch sample statechart)!
 
 p=. The light switch sample statechart
 
@@ -37,7 +37,7 @@ To make use of breakpoints, the statechart simulation needs to be executed in de
 # The statechart simulation starts in the debugging mode.
 
 p(#advsim_fig-starting-a-simulation-in-debugging-mode). 
-!(standard-image)images/advsim_020_start_debugging_010_debug_as_menu.png(Starting a simulation in debugging mode)!
+!images/advsim_020_start_debugging_010_debug_as_menu.png(Starting a simulation in debugging mode)!
 
 p=. Starting a simulation in debugging mode
 
@@ -47,14 +47,14 @@ h3(#advsim_setting-a-breakpoint). Setting a breakpoint
 # Select _Toggle Breakpoint_ from the context menu, see "Figure &quot;Setting a breakpoint&quot;":#advsim_fig-setting-a-breakpoint.
 
 p(#advsim_fig-setting-a-breakpoint). 
-!(standard-image)images/advsim_030_breakpoint_010_setting_on_transition.png(Setting a breakpoint)!
+!images/advsim_030_breakpoint_010_setting_on_transition.png(Setting a breakpoint)!
 
 p=. Setting a breakpoint
 
 States and transitions having a breakpoint attached are labeled with a !(inlinemediaobject)images/advsim_symbol_breakpoint_enabled.png(Symbol: Breakpoint enabled)! symbol. "Figure &quot;Breakpoints on transition and state&quot;":#advsim_fig-breakpoints-on-transition-and-state shows an example.
 
 p(#advsim_fig-breakpoints-on-transition-and-state). 
-!(standard-image)images/advsim_030_breakpoint_020_transition_and_state_with_breakpoints.png(Breakpoints on transition and state)!
+!images/advsim_030_breakpoint_020_transition_and_state_with_breakpoints.png(Breakpoints on transition and state)!
 
 p=. Breakpoints on transition and state
 
@@ -62,13 +62,13 @@ h3(#advsim_hitting-a-breakpoint). Hitting a breakpoint
 
 If the simulation runs into a state with a breakpoint, the state's entry actions, if any, are executed. After that, execution of the state machine is suspended. The state is highlighted by a small green border.
 
-!(standard-image)images/advsim_030_breakpoint_030_suspending_at_state.png(Highlighting a suspended state)!
+!images/advsim_030_breakpoint_030_suspending_at_state.png(Highlighting a suspended state)!
 
 p=. Highlighting a suspended state
 
 If the simulation runs into a transition with a breakpoint, execution of the state machine is suspended. The transition is highlighted by drawing the transition arrow in green. The transition's actions, if any, are executed when the state machine is resumed.
 
-!(standard-image)images/advsim_030_breakpoint_040_suspending_at_transition.png(Highlighting a suspended transition)!
+!images/advsim_030_breakpoint_040_suspending_at_transition.png(Highlighting a suspended transition)!
 
 p=. Highlighting a suspended transition
 
@@ -87,7 +87,7 @@ The _breakpoints_ view shows a list of all breakpoints. The respective breakpoin
 You can use the _breakpoints_ view for disabling, enabling, and removing breakpoints as well as defining "conditional breakpoints":#advsim_conditional-breakpoints.
 
 p(#advsim_fig-breakpoints-view). 
-!(standard-image)images/advsim_030_breakpoint_050_enabled_and_disabled_breakpoints.png(The "Breakpoints" view)!
+!images/advsim_030_breakpoint_050_enabled_and_disabled_breakpoints.png(The "Breakpoints" view)!
 
 p=. The _Breakpoints_ view
 
@@ -137,7 +137,7 @@ However, while the simulation is suspended, you can raise multiple events, witho
 Consider for example, you want to press the &quot;light on&quot; and &quot;light off&quot; buttons at the same time and observe what happens. "Figure &quot;Raising multiple events simultaneously&quot;":#advsim_fig-raising-multiple-events-simultaneously-1 is showing the scenario:
 
 p(#advsim_fig-raising-multiple-events-simultaneously-1). 
-!(standard-image)images/advsim_040_multiple_events_010_events_not_raised.png(Raising multiple events simultaneously [1])!
+!images/advsim_040_multiple_events_010_events_not_raised.png(Raising multiple events simultaneously [1])!
 
 p=. Raising multiple events simultaneously &#91;1]
 
@@ -145,7 +145,7 @@ p=. Raising multiple events simultaneously &#91;1]
 * The _simulation_ view shows the _LightOn_ and the _LightOff_ events. Both events are labeled with a !(inlinemediaobject)images/advsim_symbol_event.png(Symbol: Event [not raised])! symbol, meaning the respective event is not raised.
 
 p(#advsim_fig-raising-multiple-events-simultaneously-2). 
-!(standard-image)images/advsim_040_multiple_events_020_events_raised.png(Raising multiple events simultaneously [2])!
+!images/advsim_040_multiple_events_020_events_raised.png(Raising multiple events simultaneously [2])!
 
 p=. Raising multiple events simultaneously &#91;2]
 
@@ -162,7 +162,7 @@ It is important to understand that there is not queue of events. That is, in cas
 The first transition whose condition is fulfilled will be executed. All remaining events are quashed.
 
 p(#advsim_fig-transition-priorities). 
-!(standard-image)images/advsim_040_multiple_events_030_transition-priorities.png(Transition priorities)!
+!images/advsim_040_multiple_events_030_transition-priorities.png(Transition priorities)!
 
 p=. Transition priorities
 
@@ -181,7 +181,7 @@ To create a snapshot of the current statechart simulation, proceed as follows:
 # The snapshot is taken and appears in the snapshot list. It is labeled as "Snapshot" and tagged with the current timestamp. See "figure &quot;A freshly taken snapshot&quot;":#advsim_fig-a-freshly-taken-snapshot.
 
 p(#advsim_fig-a-freshly-taken-snapshot). 
-!(standard-image)images/advsim_050_snapshots_010_a-freshly-taken-snapshot.png(A freshly taken snapshot)!
+!images/advsim_050_snapshots_010_a-freshly-taken-snapshot.png(A freshly taken snapshot)!
 
 p=. A freshly taken snapshot
 
@@ -195,7 +195,7 @@ The _snapshots_ view consists of two parts.
 ** !(inlinemediaobject)images/advsim_button_snapshot_image_overview.png(Button: Show image overview)!: shows an image of the state machine with highlighted active elements
 
 p(#advsim_fig-inspecting-the-variables-of-a-snapshots). 
-!(standard-image)images/advsim_050_snapshots_025_details_view.png(Inspecting snapshot details: variables overview [left], image overview [right])!
+!images/advsim_050_snapshots_025_details_view.png(Inspecting snapshot details: variables overview [left], image overview [right])!
 
 p=. Inspecting snapshot details: variables overview [left], image overview [right]
 

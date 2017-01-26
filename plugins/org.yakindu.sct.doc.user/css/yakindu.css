@@ -1,0 +1,233 @@
+/*
+ * This file contains common CSS styling for documentation artifacts of all YAKINDU projects. It reverts some changes
+ * introduced by the bootstrap framework.
+ *
+ * Any project-specific changes should not be done here, but rather in the <projectname>.css file.
+ */
+
+/*
+ * The font size in a blockquote should be the same as specified by the parent element:
+ */
+blockquote {
+    font-size: inherit;
+}
+
+/*
+ * Establish a margin around the body:
+ */
+body {
+    margin: 4%;
+}
+
+/*
+ * Revert bootstrap's fancy "code" rendering:
+ */
+code {
+    padding: 0;
+    color: #111111;
+    background-color: transparent;
+    font-size: 100%;
+    border-radius: 0;
+}
+
+/*
+ * On small screens, allow "unbreakable" words in "code" elements to be broken:
+ */
+@media ( max-width : 767px) {
+    code {
+        word-wrap: break-word;
+    }
+}
+
+/*
+ * Add some vertical space above and below images and tables to separate them from the text:
+ */
+img, table {
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+/*
+ * Images should look uniquely. The default settings are as follows:
+ * - According to the Golden Cut, the image width is between 38.2 and 61.8 percent. However, this is not suited for all
+ *   images. There are CSS classes to e.g. render an image at full width or at a small fraction of the view port size.
+ * - Images are centered.
+ * - Images have a shadow with a certain corner radius.
+ */
+img {
+    height: auto;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0px 0px 20px #888888;
+    -webkit-box-shadow: 05px 05px 20px #888888;
+    -moz-box-shadow: 0px 0px 20px #888888;
+    border-radius: 4px;
+}
+
+/*
+ * Use the CSS class "inlinemediaobject" to include small images like symbols or buttons within a paragraph of text
+ * similar to a character. The image is scaled to have the height of the line.
+ */
+img.inlinemediaobject {
+    line-height: 1;
+    vertical-align: baseline;
+    min-width: inherit;
+    max-width: inherit;
+    width: inherit;
+    height: 1em;
+    text-align: inherit;
+    display: inline;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    box-shadow: none;
+    border-radius: 0px;
+}
+
+/*
+ * CSS class "shadowless" for images that should not have a shadow.
+ */
+img.shadowless {
+    box-shadow: none;
+    margin-bottom: 0px;
+}
+
+/*
+ * Responsive design: image widths for normal and wide viewports:
+ */
+@media ( min-width : 30em) {
+    img {
+        max-width: 61.8%;
+        min-width: 38.2%;
+    }
+    img.small {
+        width: 38.2%;
+        max-width: 38.2%;
+    }
+    img.normal {
+        width: 61.8%;
+        min-width: 38.2%;
+    }
+    img.large {
+        width: 76.4%;
+        max-width: 76.4%;
+    }
+    img.full {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/*
+ * Responsive design: image widths for small viewports:
+ */
+@media ( max-width : 30em) {
+    img {
+        width: 100%;
+        max-width: 100%;
+    }
+    img.small {
+        width: 76.4%;
+        max-width: 76.4%;
+    }
+    img.normal img.large img.full {
+        max-width: 100%;
+        min-width: 100%;
+    }
+}
+
+/*
+ * Tables:
+ */
+table, th, td {
+    border: 0px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    max-width: 100%;
+}
+
+th {
+    color: #ffffff;
+    background-color: #575757;
+}
+
+th, td {
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    text-align: left;
+    vertical-align: top;
+}
+
+tr:nth-child(even) {
+    background-color: #cfe3fc;
+}
+
+/*
+ * Chapter numbering:
+ */
+body {
+    counter-reset: h1
+}
+
+h1 {
+    counter-reset: h2
+}
+
+h2 {
+    counter-reset: h3
+}
+
+h3 {
+    counter-reset: h4
+}
+
+h4 {
+    counter-reset: h5
+}
+
+h5 {
+    counter-reset: h6
+}
+
+.body-container h1:before {
+    counter-increment: h1;
+    content: counter(h1) ". "
+}
+
+.body-container h2:before {
+    counter-increment: h2;
+    content: counter(h1) "." counter(h2) ". "
+}
+
+.body-container h3:before {
+    counter-increment: h3;
+    content: counter(h1) "." counter(h2) "." counter(h3) ". "
+}
+
+.body-container h4:before {
+    counter-increment: h4;
+    content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". "
+}
+
+.body-container h5:before {
+    counter-increment: h5;
+    content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". "
+}
+
+.body-container h6:before {
+    counter-increment: h6;
+    content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". "
+}
+
+h1.nocount:before h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before {
+    content: "";
+    counter-increment: none
+}
+

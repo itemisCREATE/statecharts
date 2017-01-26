@@ -33,7 +33,7 @@ p. To install the headless generation feature into the open edition or another e
 
 p(#hdls_fig_yakindu_statechart_tools_professional_edition_download_options). 
 
-!(standard-image)images/docu_headless_downloadpage.png(YAKINDU Statechart Tools Professional Edition download options)!
+!images/docu_headless_downloadpage.png(YAKINDU Statechart Tools Professional Edition download options)!
 
 p=. YAKINDU Statechart Tools Professional Edition download options
 
@@ -51,7 +51,7 @@ p=. YAKINDU Statechart Tools Professional Edition download options
 
 p(#hdls_fig_installing_the_headless_code_generation_feature). 
 
-!(standard-image)images/docu_headless_updatesite.png(Installing the headless code generation feature)!
+!images/docu_headless_updatesite.png(Installing the headless code generation feature)!
 
 p=. Installing the headless code generation feature
 
