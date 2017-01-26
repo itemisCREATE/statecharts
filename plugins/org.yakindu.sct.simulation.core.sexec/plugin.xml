@@ -6,7 +6,7 @@
     	<launchConfigurationType
           delegate="org.yakindu.sct.simulation.core.sexec.launch.SexecLaunchConfigurationDelegate"
           id="org.yakindu.sct.simulation.core.launch.statechart"
-          modes="run,debug"
+          modes="run"
           name="Statechart Simulation">
     	</launchConfigurationType>
 	</extension>
