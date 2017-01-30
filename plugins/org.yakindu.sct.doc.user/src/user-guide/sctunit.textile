@@ -31,7 +31,7 @@ h2. CallHandling example explained
 
 Let's assume that we want to create a software to control a simple phone. The example application we will create during this tutorial is a system for handling of incoming phone calls. After start up, the system is in an Idle state and waits for incoming calls. If a call comes in, the user can either accept the call and open a connection or dismiss it. If the connection is opened, the system tracks the duration of the call and waits for the user to hang up. After hang up, the system displays the total time of call and returns to its idle state. The complete statechart model is shown below:
 
-!(standard-image)images/sctu_call_example.png!
+!images/sctu_call_example.png!
  
 
 h2. Prepare a project
@@ -39,7 +39,7 @@ h2. Prepare a project
 The first step is to create a new Project by choosing _File -> New -> Project_. The dialog offers a couple of different project types. Since we want to generate Java code later on, choose _Java -> Java Project_ from the wizard menu. Give the project a meaningful name, i.e. CallHandling and click finish. It is good practice to separate your models from the source code. Therefore, create a new folder to the projects root by choosing _File -> New -> Folder_ from the projects context menu and call it "model". You also need to create a folder for the generated code, create two more folders with the names "src-gen" and "test-gen". Further you need another folder for the generator file, call this folder "genmodel". At last we need a folder for our test files (.sctunit), call this folder "tests".
 You now need to add **src-gen** (**test-gen** will be automatically added) to the Java build path as source (_Properties-> Java Build Path-> Source Tab-> "AddFolder"_) and add JUnit to the Libraries (_Properties-> Java Build Path-> Libraries Tab->"Add Libary..."-> JUnit -> Next -> Finish_). Your project should now look like this picture:
 
-!(standard-image)images/sctu_project_before.png!
+!images/sctu_project_before.png!
 
 
 h2. Create the statechart model
@@ -47,14 +47,14 @@ h2. Create the statechart model
 Next, create a new statechart model by choosing _File -> New -> Other -> YAKINDU -> YAKINDU Statechart Model_. The wizard asks for the parent folder and we choose "CallHandling/model". Name the File CallHandling.sct and finish the wizard. Last, confirm the perspective switch with Yes. The statechart editor opens and show the definition of a very simple statechart. You should know how to create this statechart below (ref SCT help) :
 
 
-!(standard-image)images/sctu_example_final.png!
+!images/sctu_example_final.png!
 
 
 h2. Create SCTUnit Test
 
 Now we create a "CallHandling.sctunit" file in the "tests" folder. In this example there are two tests, in the first test we accept the call and talk for 10s. In the second test we dismiss the call.
 
-!(standard-image)images/sctu_testcase.png!
+!images/sctu_testcase.png!
 
 
 h2. Create Java-Code
@@ -62,28 +62,28 @@ h2. Create Java-Code
 You cannot run the SCTUnit file directly, you have to generate Code first. In this tutorial we will generate Java code, but it's also possible to create C code. First of all we have to create a generator file for the tests. For this we create a new file in the folder "genmodel" and call it "tests.sgen".
 In this file you can specify what tests should be generated and where to. It looks like this:
 
-!(standard-image)images/sctu_sgentest.png!
+!images/sctu_sgentest.png!
 
 In Java we need also a statemachine which act like the statechart. For this we create another generator file which is called "model.sgen":
 
  
-!(standard-image)images/sctu_sgenstatemachine.png!
+!images/sctu_sgenstatemachine.png!
 
 You now have to create the Java code for both, tests and statemachine. Rightclick on the two generator files ("tests.sgen" and "model.sgen") and *generate the Statechart Artifacts*.
 
 
-!(standard-image)images/sctu_genArtifacts.png!
+!images/sctu_genArtifacts.png!
 
 After you did this, your project should look like this:
 
-!(standard-image)images/sctu_project_after.png!
+!images/sctu_project_after.png!
 
 
 h2. Running the Test
 
 The most important reason to create something is to use it, so do we. For running the test you just have to rightclick on the "CallHandlingTest.java" file in the "test-gen" folder. Now the test should success like this:
 
-!(standard-image)images/sctu_junitSuc2.png!
+!images/sctu_junitSuc2.png!
 
 Grats, you just successfully created your first SCTUnit JUnit test. More details will be provided in the next chapter.
 h1. Details of SCTUnit
@@ -97,23 +97,23 @@ h3. Test Group
 
 A Test Group is started by the keyword *testgroup* followed by the name of the Test Group. Further it's mandatory to  define a statechart for which the test is written. This happens through the keywords *for statechart* followed by the Name of the statechart. The list of all possible statecharts is provided by *STRG+SPACE* (as seen on next picture).  
 
-!(standard-image)images/sctu_strg_statechart.png!
+!images/sctu_strg_statechart.png!
 
 A Test group needs at least one test and a test needs at least one *enter* statement. It's not allowed to create more than one Test group per file. Following picture shows the minimum of a Test Group.
 
-!(standard-image)images/sctu_minimum_testgrp.png!
+!images/sctu_minimum_testgrp.png!
 
 h3. Test Suite
 
 In SCTUnit it is also possible to create Test Suites which contains a list of Test Groups that should be executed. Just create a Suite with the keyword *testsuite* followed by a name. Inside you can write the Test Groups you want to execute. In the picture below we have created another Test Group called "CallHandling2". As you can see the Test Groups are seperated by commas.
 
-!(standard-image)images/sctu_minimum_suite.png!
+!images/sctu_minimum_suite.png!
 
 h3. Namespaces
 
 It's not mandatory but you can use packages for your tests. This makes sense when you got a bunch of them. Write "namespace" followed by the name you wish. It's also possible to use full qualified names, look below:
 
-!(standard-image)images/sctu_namespace_sctunit.png!
+!images/sctu_namespace_sctunit.png!
 
 h2. SGen HowTo
 
@@ -121,39 +121,39 @@ The Generator files (.sgen) are used to specify where the generated files are pu
 
 A Generator file always starts with the keywords *GeneratorModel for* followed by the kind of generator and the subtype. With *STRG+SPACE* you get a list of possible Generators. As you can see there is not only SCTUnit:
 
-!(standard-image)images/sctu_sgen_generic.png!
+!images/sctu_sgen_generic.png!
 
 For a SCTUnit Generator we choose "sctunit::" followed by "java" for this example. This matches the "SCTUnit Generator for Java". 
 
-!(standard-image)images/sctu_sgen_java_01.png!
+!images/sctu_sgen_java_01.png!
 
 Further we need to define a test, started with the keyword "test". With *STRG+SPACE* we get again all possible entries:
 
-!(standard-image)images/sctu_sgen_java_04.png! 
+!images/sctu_sgen_java_04.png! 
 
 For a test a "Outlet Feature" is mandatory, so we create it. The outlet feature got two attributes which also need to be defined: "target Project" and "targetFolder". There is a macro which can be used to create a default outlet feature.
 
-!(standard-image)images/sctu_sgen_java_02.png!
+!images/sctu_sgen_java_02.png!
 
 The "targetProject" describes the Project in the actual Workspace where the test should be created. The default name is the project in which the file exist, but it's also possible to choose another project. For a better overview we change the default "targetFolder" from "src-gen" to "test-gen". This is not a must, just best practise, you can call the directory anything you want.
  
-!(standard-image)images/sctu_sgen_java_03.png!
+!images/sctu_sgen_java_03.png!
 
 h3. Statemachine
 
 In java we also need a statemachine which is created in a similar way than the tests. We have to create another Generator file. Now we choose a *GeneratorModel for* for "yakindu::java". 
 
-!(standard-image)images/sctu_sgen_yakindu_01.png!
+!images/sctu_sgen_yakindu_01.png!
 
 In this Generator file we have to add the stetechart for which the statemachine should be generated. With *STRG+SPACE* we get all possible entries, just like before in the Generator file for the tests. This artifact also need a outlet feature, so we use the macro as we seen before. We can keep the "src-gen" as "targetFolder" because we allready put the tests into "test-gen". The name of the folder is not a must, just best practise, you can call the directory anything you want.
 
-!(standard-image)images/sctu_sgen_yakindu_02.png!
+!images/sctu_sgen_yakindu_02.png!
 
 h2. Folders meaning
 
 Take a look at the following picture. There are many different folders. The following list gives an overview about the function of each. 
 
-!(standard-image)images/sctu_project_after.png!
+!images/sctu_project_after.png!
 
 * *src*: This is the default source folder, it's not used by SCTUnit.
 
