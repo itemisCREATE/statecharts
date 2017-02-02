@@ -183,6 +183,29 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
 		
+		model = super.parseExpression("myOperation()", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+		model = super.parseExpression("myOperation(5)", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+		model = super.parseExpression("myOperation(5,5,5)", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+		model = super.parseExpression("myOperation2('')", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+		model = super.parseExpression("myOperation2('',5)", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+		model = super.parseExpression("myOperation2('',5,5,5)", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+		
+		model = super.parseExpression("myOperation2('','')", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertErrorContains("Incompatible types string and integer.");
+		
 		scope = "internal: operation myOperation(param1... : integer, param2...: integer)";
 		model = super.parseExpression(scope, InternalScope.class.getSimpleName());
 		validationResult = tester.validate(model);
@@ -192,6 +215,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = super.parseExpression(scope, InternalScope.class.getSimpleName());
 		validationResult = tester.validate(model);
 		validationResult.assertError(STextJavaValidator.VAR_ARGS_LAST_CODE);
+
 	}
 
 	/**
