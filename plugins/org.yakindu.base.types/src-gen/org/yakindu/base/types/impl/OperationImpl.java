@@ -90,11 +90,7 @@ public class OperationImpl extends DeclarationImpl implements Operation {
 	 * @generated NOT
 	 */
 	public boolean isVariadic() {
-		for(Parameter p : getParameters()){
-			if(p.isVarArgs())
-				return true;
-		}
-		return false;
+		return getVarArgIndex() > -1;
 	}
 
 	/**
