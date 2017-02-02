@@ -567,13 +567,18 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	@Check(CheckType.FAST)
+	public void checkVarArgParameterIsLast(Operation operation) {
+		if (operation.isVariadic() && operation.getVarArgIndex() != operation.getParameters().size() - 1) {
+			error(VAR_ARGS_LAST_MSG, operation.getParameters().get(operation.getVarArgIndex()),
+					null, VAR_ARGS_LAST_CODE);
+		}
+	}
+
+	@Check(CheckType.FAST)
 	public void checkAssignmentExpression(final AssignmentExpression exp) {
-
 		final String name = getVariableName(exp);
-
 		List<AssignmentExpression> contents = EcoreUtil2.eAllOfType(exp, AssignmentExpression.class);
 		contents.remove(exp);
-
 		Iterable<AssignmentExpression> filter = Iterables.filter(contents, new Predicate<AssignmentExpression>() {
 			public boolean apply(final AssignmentExpression ex) {
 				String variableName = getVariableName(ex);

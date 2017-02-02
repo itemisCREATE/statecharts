@@ -172,6 +172,27 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
 	}
+	/**
+	 * @see STextJavaValidator#checkVarArgParameterIsLast(Operation)
+	 */
+	@Test
+	public void checkVarArgParameterIsLast(){
+		String scope = "internal: operation myOperation(param1... : integer)"
+					+ "operation myOperation2(param0 : string, param1 ... : integer)";
+		EObject model = super.parseExpression(scope, InternalScope.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(model);
+		validationResult.assertOK();
+		
+		scope = "internal: operation myOperation(param1... : integer, param2...: integer)";
+		model = super.parseExpression(scope, InternalScope.class.getSimpleName());
+		validationResult = tester.validate(model);
+		validationResult.assertError(STextJavaValidator.VAR_ARGS_LAST_CODE);
+		
+		scope = "internal: operation myOperation2(param1 ... : integer, param0 : string)";
+		model = super.parseExpression(scope, InternalScope.class.getSimpleName());
+		validationResult = tester.validate(model);
+		validationResult.assertError(STextJavaValidator.VAR_ARGS_LAST_CODE);
+	}
 
 	/**
 	 * @see STextJavaValidator#checkGuardHasBooleanExpression(org.yakindu.sct.model.stext.stext.ReactionTrigger)
