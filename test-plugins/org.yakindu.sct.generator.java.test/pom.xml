@@ -15,23 +15,30 @@
 	<build>
 		<plugins>
 			<plugin>
+				<dependencies>
+					<dependency>
+						<groupId>org.mockito</groupId>
+						<artifactId>mockito-all</artifactId>
+						<version>2.0.2-beta</version>
+					</dependency>
+				</dependencies>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-					 						 		
+
 					<includes>
 						<include>**/AllTestsTest.class</include>
 						<include>**/AllTestsTestCustom.class</include>
 					</includes>
-					 	 		
+
 					<useUIHarness>false</useUIHarness>
 					<useUIThread>false</useUIThread>
 					<testFailureIgnore>${testFailureIgnore}</testFailureIgnore>
 					<argLine>${test.vmargs}</argLine>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 </project>
