@@ -91,7 +91,6 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 
 			// Initialize naming services for statechart and ExecutionFlow
 			executionflowNamingService.initializeNamingService(flow);
-			executionflowNamingService.test_printTreeContents();
 			for (ExecutionState state : flow.getStates()) {
 				String name = executionflowNamingService.getShortName(state);
 				assertEquals(names.contains(name), false);

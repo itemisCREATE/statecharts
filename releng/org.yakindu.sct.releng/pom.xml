@@ -172,7 +172,6 @@
 					<artifactId>target-platform-configuration</artifactId>
 					<version>${tycho-version}</version>
 					<configuration>
-					 <pomDependencies>consider</pomDependencies>
 						<environments>
 							<environment>
 								<os>linux</os>
