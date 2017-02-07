@@ -607,8 +607,9 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		Statechart statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "ConstWithVariable.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
-		assertIssueCount(diagnostics, 2); //
+		assertIssueCount(diagnostics, 3); //
 		assertError(diagnostics, REFERENCE_TO_VARIABLE);
+		assertError(diagnostics, CONST_MUST_HAVE_VALUE_MSG);
 	}
 
 	@Test

@@ -250,6 +250,10 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (!definition.isConst())
 			return;
 		Expression initialValue = definition.getInitialValue();
+		if (initialValue == null) {
+			error(CONST_MUST_HAVE_VALUE_MSG, definition, null, CONST_MUST_HAVE_VALUE_CODE);
+			return;
+		}
 		List<Expression> toCheck = Lists.newArrayList(initialValue);
 		TreeIterator<EObject> eAllContents = initialValue.eAllContents();
 		while (eAllContents.hasNext()) {
