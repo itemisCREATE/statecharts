@@ -494,6 +494,14 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 	
+	test VariadicFunctions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test StatemachineKeywords {
 
 		feature Outlet {

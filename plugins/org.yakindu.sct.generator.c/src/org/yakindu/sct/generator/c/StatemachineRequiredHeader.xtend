@@ -128,7 +128,7 @@ class StatemachineRequiredHeader implements IContentTemplate {
 	def dispatch functionPrototypes(Declaration it) ''''''
 
 	def dispatch functionPrototypes(OperationDefinition it) '''
-		extern «typeSpecifier.targetLanguageName» «asFunction»(const «scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDFOR»);
+		extern «typeSpecifier.targetLanguageName» «asFunction»(const «scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»«IF p.varArgs»...«ELSE»const «p.typeSpecifier.targetLanguageName» «p.name.asIdentifier»«ENDIF»«ENDFOR»);
 	'''
 
 }

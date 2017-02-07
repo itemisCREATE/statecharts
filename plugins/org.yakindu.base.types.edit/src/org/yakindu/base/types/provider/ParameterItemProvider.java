@@ -71,6 +71,7 @@ public class ParameterItemProvider
 			addTypePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addAnnotationsPropertyDescriptor(object);
+			addVarArgsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -137,6 +138,28 @@ public class ParameterItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Var Args feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVarArgsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Parameter_varArgs_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Parameter_varArgs_feature", "_UI_Parameter_type"),
+				 TypesPackage.Literals.PARAMETER__VAR_ARGS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -209,6 +232,7 @@ public class ParameterItemProvider
 
 		switch (notification.getFeatureID(Parameter.class)) {
 			case TypesPackage.PARAMETER__NAME:
+			case TypesPackage.PARAMETER__VAR_ARGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.PARAMETER__TYPE_SPECIFIER:

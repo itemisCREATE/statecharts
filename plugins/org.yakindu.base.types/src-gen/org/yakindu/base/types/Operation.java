@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.Operation#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.yakindu.base.types.Operation#isVariadic <em>Variadic</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getOperation()
@@ -42,5 +43,28 @@ public interface Operation extends Declaration {
 	 * @generated
 	 */
 	EList<Parameter> getParameters();
+
+	/**
+	 * Returns the value of the '<em><b>Variadic</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Variadic</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Variadic</em>' attribute.
+	 * @see org.yakindu.base.types.TypesPackage#getOperation_Variadic()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	boolean isVariadic();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	int getVarArgIndex();
 
 } // Operation

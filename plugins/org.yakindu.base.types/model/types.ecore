@@ -19,8 +19,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="#//TypedElement base.ecore#//NamedElement #//PackageMember"/>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Declaration">
+    <eOperations name="getVarArgIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true" eOpposite="#//Parameter/owningOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variadic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="const" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -30,6 +33,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypedElement base.ecore#//NamedElement #//AnnotatableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningOperation" eType="#//Operation"
         eOpposite="#//Operation/parameters"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="varArgs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type" changeable="false"

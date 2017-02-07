@@ -13,26 +13,22 @@ package org.yakindu.sct.model.sexec.transformation.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.yakindu.sct.model.sexec.ExecutionFlow;
-import org.yakindu.sct.model.sexec.ExecutionState;
-import org.yakindu.sct.model.sexec.Step;
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions;
-import org.yakindu.sct.model.sexec.naming.INamingService;
-import org.yakindu.sct.model.sexec.naming.TreeNamingService;
-import org.yakindu.sct.model.sexec.transformation.FlowOptimizer;
-import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.test.models.SCTUnitTestModels;
-
-import com.google.inject.Inject;
-
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.naming.TreeNamingService;
+import org.yakindu.sct.model.sexec.transformation.FlowOptimizer;
+import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.test.models.SCTUnitTestModels;
+
+import com.google.inject.Inject;
 
 public class TreeNamingServiceTest extends ModelSequencerTest {
 	@Inject
@@ -94,25 +90,12 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 			executionflowNamingService.setSeparator('_');
 
 			// Initialize naming services for statechart and ExecutionFlow
-			long t0 = System.currentTimeMillis();
 			executionflowNamingService.initializeNamingService(flow);
-			executionflowNamingService.test_printTreeContents();
-			System.out.print("Time needed for initialization [ms]: ");
-			System.out.println(System.currentTimeMillis() - t0);
-			System.out.println("Generated names:");
 			for (ExecutionState state : flow.getStates()) {
 				String name = executionflowNamingService.getShortName(state);
-				if (names.contains(name)) {
-					System.out.println("Conflicting name: " + name);
-					for (String n : names) {
-						System.out.println(n);
-					}
-				}
 				assertEquals(names.contains(name), false);
 				names.add(name);
-				System.out.println(name);
 			}
-			System.out.println();
 		}
 	}
 
@@ -278,9 +261,6 @@ public class TreeNamingServiceTest extends ModelSequencerTest {
 				names.add(name);
 			}
 		}
-
-		System.out.print("Average time for initialization [ms]: ");
-		System.out.println((float) cumulated_time / (float) num_statecharts);
 	}
 
 	private void stringListsEqual(List<String> onelist, List<String> otherlist) {

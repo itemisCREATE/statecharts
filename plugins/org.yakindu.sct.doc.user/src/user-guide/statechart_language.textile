@@ -123,7 +123,7 @@ h3(#region). Region
 
 YAKINDU statecharts are organized in regions. Hence it is possible to organize multiple state machines in different regions and to run them virtually concurrently.
 
-!(standard-image)images/docu_parallelRegions.jpg(Parallel regions)!
+!images/docu_parallelRegions.jpg(Parallel regions)!
 
 p=. Parallel regions
 
@@ -139,7 +139,7 @@ A state can have _behavior_. The behavior specifies which "actions":#reactions a
 The state *Countdown* in the following example has three local reactions:
 
 p(#fig_state-example). 
-!(standard-image)images/docu_state_010_example_01.png(State example)!
+!images/docu_state_010_example_01.png(State example)!
 
 p=. State example: A simple state machine to launch a rocket.
 
@@ -159,7 +159,7 @@ A transition should have a _transition "reaction":#reactions_. The transition re
 Here's an example:
 
 p(#fig_transition-example). 
-!(standard-image)images/docu_transition_030_example_01.png(Transition example)!
+!images/docu_transition_030_example_01.png(Transition example)!
 
 p=. Transition example: A simple state machine to launch a rocket.
 
@@ -168,7 +168,7 @@ The initial transition's _effect_ sets the counting variable _t_ to 10. As long 
 Figure "&quot;Transition syntax overview&quot;":#fig_transition-syntax-overview shows how the syntax of a transition reaction is defined.
 
 p(#fig_transition-syntax-overview). 
-!(standard-image)images/docu_grammar_030_transition-overview.png(Transition syntax overview)!
+!images/docu_grammar_030_transition-overview.png(Transition syntax overview)!
 
 p=. Transition syntax overview
 
@@ -201,7 +201,7 @@ The transition shown on the left specifies @# no_problem> >success@. This means:
 Alternatively, _Process_ could have been modeled with two different error exit states, say _error&#95;1_ and _error&#95;2_. This would allow to respond differently to different error conditions, while still enabling to catch them both with a single flow. A transition with @# >error_1 >error_2 problem>@ would do so.
 
 p(#fig_state_entry_exit). 
-!(standard-image)images/docu_state_entry_exit.png(Entries and exits)!
+!images/docu_state_entry_exit.png(Entries and exits)!
 
 p=. Entries and exits
 
@@ -210,7 +210,7 @@ h4(#transition-priorities). Transition priorities
 If a state has several outgoing transitions, based on the events that occured and on guard conditions, several of these transitions could fire at the same time. Here's simple example:
 
 p(#fig_transition-priorities-1). 
-!(standard-image)images/docu_transition_020_priorities_01.png(Transition priorities [1])!
+!images/docu_transition_020_priorities_01.png(Transition priorities [1])!
 
 p=. Transition priorities &#91;1]
 
@@ -221,7 +221,7 @@ As you can see in figure "&quot;Transition priorities &#91;1]&quot;":#fig_transi
 The order of transitions is a property of their source state. In the example above, the transition priorities of state *A* appear like this in the _Properties_ view:
 
 p(#fig_transition-priorities-2). 
-!(standard-image)images/docu_transition_020_priorities_02.png(Transition priorities [2])!
+!images/docu_transition_020_priorities_02.png(Transition priorities [2])!
 
 p=. Transition priorities &#91;2]
 
@@ -237,7 +237,7 @@ An entry has a single outgoing transition and no incoming ones. Its outgoing tra
 An entry is depicted as a filled circle, see figure "&quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
 
 p(#fig_state_entry_exit_final_explained). 
-!(standard-image)images/docu_state_entry_exit_final_explained.png(Entry, exit, and final state)!
+!(large)images/docu_state_entry_exit_final_explained.png(Entry, exit, and final state)!
 
 p=. Entry, exit, and final state
 
@@ -260,7 +260,7 @@ Named entries have no equivalent in the UML.
 The sample statechart in figure "&quot;Entry state&quot;":#fig_state_entry has a composite state named _Handle result_. This composite state has a default entry as well as an entry called _failure_. If state *A* is active and the _error_ trigger fires, control is transitioned to the _Handle result_ composite state. The notation @error # >failure@ specifies that the _failure_ entry is to be used; see "Entry and exit points":#entry-and-exit-points.
 
 p(#fig_state_entry). 
-!(standard-image)images/docu_state_entry.png(Entry state)!
+!images/docu_state_entry.png(Entry state)!
 
 p=. Entry state
 
@@ -319,7 +319,7 @@ A synchronization state is shown as a thick horizontal or vertical line, as can 
 
 p(#fig_state_synchronization). 
 
-!(standard-image)images/docu_state_synchronization.png(Synchronization state)!
+!images/docu_state_synchronization.png(Synchronization state)!
 
 p=. Synchronization state
 
@@ -349,7 +349,7 @@ Orthogonal states are basically "composite states":#composite-state with more th
 
 The presumably most famous example for orthogonal states is the keyboard example:
 
-!(standard-image)images/docu_orthogonalState_example.jpg(Orthogonal states)!
+!images/docu_orthogonalState_example.jpg(Orthogonal states)!
 
 p=. Orthogonal states
 
@@ -360,17 +360,17 @@ The shallow history state is a pseudo state that is placed inside regions of com
 
 The following example, showing the answering of a questionaire, explains this:
 
-!(standard-image)images/docu_shallowHistory01.jpg(Shallow history [1])!
+!images/docu_shallowHistory01.jpg(Shallow history [1])!
 
 p=. Shallow history &#91;1]
 
 Particularly interesting in this statechart are the _checkProgress_ and _goon_ events. The _checkProgress_ event jumps back to the *init* state while assigning the current progress count to the variable _temp_. The event _goon_ jumps to the shallow history state that was placed inside the composite state.
 
-!(standard-image)images/docu_shallowHistory02.jpg(Shallow history [2])!
+!images/docu_shallowHistory02.jpg(Shallow history [2])!
 
 p=. Shallow history &#91;2]
 
-!(standard-image)images/docu_shallowHistory03.jpg(Shallow history [3])!
+!images/docu_shallowHistory03.jpg(Shallow history [3])!
 
 p=. Shallow history &#91;3]
 
@@ -594,7 +594,7 @@ p.
 Figure "&quot;Event specifications syntax overview&quot;":#fig_transition-syntax-overview shows where to put event specifications in a reaction trigger and how their syntax is defined.
 
 p(#fig_event-specifications-syntax-overview). 
-!(standard-image)images/docu_grammar_030_event-specification-overview.png(Event specifications syntax overview)!
+!images/docu_grammar_030_event-specification-overview.png(Event specifications syntax overview)!
 
 p=. Event specifications syntax overview
 
@@ -706,7 +706,7 @@ In the square brackets you can use any "expression":#expressions that evaluates 
 Please consult figure "&quot;Guard condition syntax overview&quot;":#fig_guard-condition-syntax-overview to find out how a guard condition syntactically fits into a reaction.
 
 p(#fig_guard-condition-syntax-overview). 
-!(standard-image)images/docu_grammar_030_guard-condition-overview.png(Guard condition syntax overview)!
+!images/docu_grammar_030_guard-condition-overview.png(Guard condition syntax overview)!
 
 p=. Guard condition syntax overview
 
@@ -728,7 +728,7 @@ A reaction in a state always has a _reaction effect_ with at least one action.
 Figure "&quot;Reaction effect syntax&quot;":#fig_reaction-effect-syntax shows the syntax definition.
 
 p(#fig_reaction-effect-syntax). 
-!(standard-image)images/docu_grammar_030_reaction-effect.png(Reaction effect syntax)!
+!images/docu_grammar_030_reaction-effect.png(Reaction effect syntax)!
 
 p=. Reaction effect syntax
 
@@ -750,7 +750,7 @@ If an event _e_ is raised in region _r<sub>m</sub>_, then _e_ is available only 
  The following example illustrates this. When the state machine is started, the situation is as shown in figure "&quot;Raising an event &#91;1]&quot;":#fig_raising-an-event_1: *A* and *X* in the parallel regions _r1_ and _r2_ are active states. Important: Region _r1_ is executed *before* _r2_.
 
 p(#fig_raising-an-event_1). 
-!(standard-image)images/docu_transition_010_raise_event_01.png(Raising an event [1])!
+!images/docu_transition_010_raise_event_01.png(Raising an event [1])!
 
 p=. Raising an event &#91;1]
 
@@ -759,7 +759,7 @@ Now event _e1_ occurs. It triggers transition *A → B* in _r1_. This transition
 After that the situation is now as can be seen in figure "&quot;Raising an event &#91;2]&quot;":#fig_raising-an-event_2: substates *B* and *Y* are now active states. However, the transition *B → C* will not be taken, because that would have to happen in another RTC. But by then the particular _e2_ instance raised by *A → B* will be long gone, since it was restricted to the RTC it has been raised in.
 
 p(#fig_raising-an-event_2). 
-!(standard-image)images/docu_transition_010_raise_event_02.png(Raising an event [2])!
+!images/docu_transition_010_raise_event_02.png(Raising an event [2])!
 
 p=. Raising an event &#91;2]
 
@@ -768,7 +768,7 @@ Orthogonal regions within a state are always executed from left to right or from
 The region priorities of the example above are shown in figure "&quot;Region priorities&quot;":#fig_region-priorities. Change the execution order and the example will behave differently than described.
 
 p(#fig_region-priorities). 
-!(standard-image)images/docu_regions_010_priorities_01.png(Region priorities)!
+!images/docu_regions_010_priorities_01.png(Region priorities)!
 
 p=. Region priorities
 
@@ -876,7 +876,7 @@ h3(#bitwise-and). Bitwise AND
 bc. expr1 & expr2
 
 
-h3(#logical-relations-and-shift-operators). Logical Relations and Shift Operators
+h3(#logical-relations-and-shift-operators). Logical relations and shift operators
 
 |<. less than|<. @<@|
 |<. equal or less than|<. @<=@|
@@ -943,7 +943,7 @@ The grammar is visualized using "railroad diagrams":https://en.wikipedia.org/wik
 
 p(#fig-railroad-diagrams-explained). 
 
-!(standard-image)images/docu_grammar_020_simpleelementreferenceexpression.png(Railroad diagrams explained)!
+!images/docu_grammar_020_simpleelementreferenceexpression.png(Railroad diagrams explained)!
 
 p=. Railroad diagrams explained
 
@@ -971,7 +971,7 @@ Figure "&quot;Statechart grammar&quot;":#fig-statechart-grammar shows the statec
 
 p(#fig-statechart-grammar). 
 
-!(standard-image)images/docu_grammar_010_stext.png(Statechart grammar)!
+!images/docu_grammar_010_stext.png(Statechart grammar)!
 
 p=. Statechart grammar
 
@@ -981,6 +981,6 @@ Figure "&quot;Expressions grammar&quot;":#fig-expressions-grammar shows the expr
 
 p(#fig-expressions-grammar). 
 
-!(standard-image)images/docu_grammar_010_expressions.png(Expressions grammar)!
+!images/docu_grammar_010_expressions.png(Expressions grammar)!
 
 p=. Expressions grammar

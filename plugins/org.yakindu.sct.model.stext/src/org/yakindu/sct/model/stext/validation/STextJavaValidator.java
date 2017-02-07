@@ -550,11 +550,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkOperationArguments_FeatureCall(final FeatureCall call) {
 		if (call.getFeature() instanceof Operation) {
 			Operation operation = (Operation) call.getFeature();
-			EList<Parameter> parameters = operation.getParameters();
-			EList<Expression> args = call.getArgs();
-			if (parameters.size() != args.size()) {
-				error("Wrong number of arguments, expected " + parameters + ".", null);
-			}
+			assertOperationArguments(operation, call.getArgs());
 		}
 	}
 
@@ -562,22 +558,31 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkOperationArguments_TypedElementReferenceExpression(final ElementReferenceExpression call) {
 		if (call.getReference() instanceof Operation) {
 			Operation operation = (Operation) call.getReference();
-			EList<Parameter> parameters = operation.getParameters();
-			EList<Expression> args = call.getArgs();
-			if (parameters.size() != args.size()) {
-				error("Wrong number of arguments, expected " + parameters + ".", null);
-			}
+			assertOperationArguments(operation, call.getArgs());
+		}
+	}
+
+	protected void assertOperationArguments(Operation operation, List<Expression> args) {
+		EList<Parameter> parameters = operation.getParameters();
+		if ((operation.isVariadic() && operation.getVarArgIndex() > args.size())
+				|| !operation.isVariadic() && parameters.size() != args.size()) {
+			error("Wrong number of arguments, expected " + parameters + ".", null);
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkVarArgParameterIsLast(Operation operation) {
+		if (operation.isVariadic() && operation.getVarArgIndex() != operation.getParameters().size() - 1) {
+			error(VAR_ARGS_LAST_MSG, operation.getParameters().get(operation.getVarArgIndex()),
+					null, VAR_ARGS_LAST_CODE);
 		}
 	}
 
 	@Check(CheckType.FAST)
 	public void checkAssignmentExpression(final AssignmentExpression exp) {
-
 		final String name = getVariableName(exp);
-
 		List<AssignmentExpression> contents = EcoreUtil2.eAllOfType(exp, AssignmentExpression.class);
 		contents.remove(exp);
-
 		Iterable<AssignmentExpression> filter = Iterables.filter(contents, new Predicate<AssignmentExpression>() {
 			public boolean apply(final AssignmentExpression ex) {
 				String variableName = getVariableName(ex);

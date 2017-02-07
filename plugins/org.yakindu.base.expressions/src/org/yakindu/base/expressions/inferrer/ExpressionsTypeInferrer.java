@@ -205,9 +205,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	public InferenceResult doInfer(FeatureCall e) {
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getFeature();
-			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = e.getArgs();
-			inferParameter(parameters, args, e.getOwner());
+			inferParameter(operation, args, e.getOwner());
 		}
 		InferenceResult result = inferTypeDispatch(e.getFeature());
 		if (result != null && result.getType() instanceof TypeParameter) {
@@ -219,24 +218,35 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	public InferenceResult doInfer(ElementReferenceExpression e) {
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getReference();
-			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = e.getArgs();
-			inferParameter(parameters, args, null);
+			inferParameter(operation, args, null);
 		}
 		return inferTypeDispatch(e.getReference());
 	}
 
-	protected void inferParameter(EList<Parameter> parameters, EList<Expression> args, Expression operationOwner) {
-		if (parameters.size() == args.size()) {
+	protected void inferParameter(Operation operation, EList<Expression> args, Expression operationOwner) {
+		EList<Parameter> parameters = operation.getParameters();
+		if (parameters.size() <= args.size()) {
 			for (int i = 0; i < parameters.size(); i++) {
-				InferenceResult result1 = inferTypeDispatch(parameters.get(i));
-				if (operationOwner != null && result1 != null && result1.getType() instanceof TypeParameter) {
-					result1 = inferTypeParameter((TypeParameter) result1.getType(), inferTypeDispatch(operationOwner));
-				}
-				InferenceResult result2 = inferTypeDispatch(args.get(i));
-				assertCompatible(result2, result1, String.format(INCOMPATIBLE_TYPES, result2, result1));
+				assertArgumentIsCompatible(operationOwner, parameters.get(i), args.get(i));
 			}
 		}
+		if(operation.isVariadic() && args.size() - 1 >= operation.getVarArgIndex()){
+			Parameter parameter = operation.getParameters().get(operation.getVarArgIndex());
+			List<Expression> varArgs = args.subList(operation.getVarArgIndex(), args.size() - 1);
+			for (Expression expression : varArgs) {
+				assertArgumentIsCompatible(operationOwner, parameter, expression);
+			}
+		}
+	}
+
+	protected void assertArgumentIsCompatible(Expression operationOwner, Parameter parameter, Expression argument) {
+		InferenceResult result1 = inferTypeDispatch(parameter);
+		if (operationOwner != null && result1 != null && result1.getType() instanceof TypeParameter) {
+			result1 = inferTypeParameter((TypeParameter) result1.getType(), inferTypeDispatch(operationOwner));
+		}
+		InferenceResult result2 = inferTypeDispatch(argument);
+		assertCompatible(result2, result1, String.format(INCOMPATIBLE_TYPES, result2, result1));
 	}
 	
 	protected InferenceResult inferTypeParameter(TypeParameter typeParameter, InferenceResult ownerResult) {

@@ -39,6 +39,7 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getOwningOperation <em>Owning Operation</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#isVarArgs <em>Var Args</em>}</li>
  * </ul>
  *
  * @generated
@@ -83,6 +84,26 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * @ordered
 	 */
 	protected EList<Annotation> annotations;
+
+	/**
+	 * The default value of the '{@link #isVarArgs() <em>Var Args</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVarArgs()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VAR_ARGS_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isVarArgs() <em>Var Args</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVarArgs()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean varArgs = VAR_ARGS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -247,6 +268,27 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isVarArgs() {
+		return varArgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVarArgs(boolean newVarArgs) {
+		boolean oldVarArgs = varArgs;
+		varArgs = newVarArgs;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.PARAMETER__VAR_ARGS, oldVarArgs, varArgs));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -307,6 +349,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return getAnnotations();
 			case TypesPackage.PARAMETER__OWNING_OPERATION:
 				return getOwningOperation();
+			case TypesPackage.PARAMETER__VAR_ARGS:
+				return isVarArgs();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -333,6 +377,9 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 			case TypesPackage.PARAMETER__OWNING_OPERATION:
 				setOwningOperation((Operation)newValue);
 				return;
+			case TypesPackage.PARAMETER__VAR_ARGS:
+				setVarArgs((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -357,6 +404,9 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 			case TypesPackage.PARAMETER__OWNING_OPERATION:
 				setOwningOperation((Operation)null);
 				return;
+			case TypesPackage.PARAMETER__VAR_ARGS:
+				setVarArgs(VAR_ARGS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -379,6 +429,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return annotations != null && !annotations.isEmpty();
 			case TypesPackage.PARAMETER__OWNING_OPERATION:
 				return getOwningOperation() != null;
+			case TypesPackage.PARAMETER__VAR_ARGS:
+				return varArgs != VAR_ARGS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
