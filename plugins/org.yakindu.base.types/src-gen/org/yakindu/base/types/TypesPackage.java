@@ -421,13 +421,22 @@ public interface TypesPackage extends EPackage {
 	int OPERATION__PARAMETERS = DECLARATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Variadic</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__VARIADIC = DECLARATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
+	int OPERATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -556,13 +565,22 @@ public interface TypesPackage extends EPackage {
 	int PARAMETER__OWNING_OPERATION = TYPED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Var Args</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__VAR_ARGS = TYPED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 3;
+	int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 4;
 
 
 	/**
@@ -1655,6 +1673,17 @@ public interface TypesPackage extends EPackage {
 	EReference getOperation_Parameters();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Operation#isVariadic <em>Variadic</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Variadic</em>'.
+	 * @see org.yakindu.base.types.Operation#isVariadic()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EAttribute getOperation_Variadic();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Property <em>Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1717,6 +1746,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getParameter_OwningOperation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Parameter#isVarArgs <em>Var Args</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Var Args</em>'.
+	 * @see org.yakindu.base.types.Parameter#isVarArgs()
+	 * @see #getParameter()
+	 * @generated
+	 */
+	EAttribute getParameter_VarArgs();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}'.
@@ -2259,6 +2299,14 @@ public interface TypesPackage extends EPackage {
 		EReference OPERATION__PARAMETERS = eINSTANCE.getOperation_Parameters();
 
 		/**
+		 * The meta object literal for the '<em><b>Variadic</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION__VARIADIC = eINSTANCE.getOperation_Variadic();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.PropertyImpl <em>Property</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2309,6 +2357,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PARAMETER__OWNING_OPERATION = eINSTANCE.getParameter_OwningOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Var Args</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAMETER__VAR_ARGS = eINSTANCE.getParameter_VarArgs();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}' class.

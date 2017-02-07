@@ -27,6 +27,7 @@ import org.yakindu.base.types.TypesPackage;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.OperationImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.OperationImpl#isVariadic <em>Variadic</em>}</li>
  * </ul>
  *
  * @generated
@@ -41,6 +42,16 @@ public class OperationImpl extends DeclarationImpl implements Operation {
 	 * @ordered
 	 */
 	protected EList<Parameter> parameters;
+
+	/**
+	 * The default value of the '{@link #isVariadic() <em>Variadic</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVariadic()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VARIADIC_EDEFAULT = false;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -71,6 +82,28 @@ public class OperationImpl extends DeclarationImpl implements Operation {
 			parameters = new EObjectContainmentWithInverseEList<Parameter>(Parameter.class, this, TypesPackage.OPERATION__PARAMETERS, TypesPackage.PARAMETER__OWNING_OPERATION);
 		}
 		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isVariadic() {
+		return getVarArgIndex() > -1;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public int getVarArgIndex() {
+		for (int i = 0; i < getParameters().size(); i++) {
+			if (getParameters().get(i).isVarArgs())
+				return i;
+		}
+		return -1;
 	}
 
 	/**
@@ -112,6 +145,8 @@ public class OperationImpl extends DeclarationImpl implements Operation {
 		switch (featureID) {
 			case TypesPackage.OPERATION__PARAMETERS:
 				return getParameters();
+			case TypesPackage.OPERATION__VARIADIC:
+				return isVariadic();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,6 +193,8 @@ public class OperationImpl extends DeclarationImpl implements Operation {
 		switch (featureID) {
 			case TypesPackage.OPERATION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
+			case TypesPackage.OPERATION__VARIADIC:
+				return isVariadic() != VARIADIC_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
