@@ -169,6 +169,14 @@ tr:nth-child(even) {
     background-color: #cfe3fc;
 }
 
+tr.odd {
+    background-color: inherit;
+}
+
+tr.even {
+    background-color: #cfe3fc;
+}
+
 /*
  * Chapter numbering:
  */
