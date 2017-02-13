@@ -22,7 +22,7 @@ import org.yakindu.base.expressions.expressions.UnaryExpression
 class Expressions {
 	
 	def dispatch CharSequence code(BinaryExpression expression) {
-		expression.leftOperand.code + " " + expression.operator.literal + " " + expression.rightOperand.code
+		expression.leftOperand.code.toString.trim + " " + expression.operator.literal.toString.trim + " " + expression.rightOperand.code
 	}
 
 	def dispatch CharSequence code(UnaryExpression expression) {

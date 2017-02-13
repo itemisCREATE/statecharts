@@ -19,7 +19,7 @@ Now try this for yourself. We are assuming that you have already installed and s
 # In the main menu, select _File → New → Example…_.
 # In the dialog, select _YAKINDU SCT Examples_, then click _Next >_.
 # The example wizard opens. If needed, follow the instructions to download the examples repository.
-# On the left-hand side of the example wizard, select _basic → Light Switch_, then click _Finish_.
+# On the left-hand side of the example wizard, select _Light Switch Example_, then click _Finish_.
 # The sample project named _light_switch_ is created.
 # In the project explorer on the left-hand side of the window, open the _light_switch_ project by clicking on the small triangle left from the project name ("light_switch"). Also open the _model_ folder.<p>!(standard-image small)images/tuto_5min_020_expand_project.png(Expand project)!</p>
 # The light switch statechart is defined in the file _light_switch.sct_. Double-click on this file to open the model.

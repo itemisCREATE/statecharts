@@ -18,6 +18,7 @@ import org.yakindu.base.base.NamedElement;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.Parameter#getOwningOperation <em>Owning Operation</em>}</li>
+ *   <li>{@link org.yakindu.base.types.Parameter#isVarArgs <em>Var Args</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getParameter()
@@ -52,5 +53,32 @@ public interface Parameter extends TypedElement, NamedElement, AnnotatableElemen
 	 * @generated
 	 */
 	void setOwningOperation(Operation value);
+
+	/**
+	 * Returns the value of the '<em><b>Var Args</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Var Args</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Var Args</em>' attribute.
+	 * @see #setVarArgs(boolean)
+	 * @see org.yakindu.base.types.TypesPackage#getParameter_VarArgs()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isVarArgs();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.base.types.Parameter#isVarArgs <em>Var Args</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Var Args</em>' attribute.
+	 * @see #isVarArgs()
+	 * @generated
+	 */
+	void setVarArgs(boolean value);
 
 } // Parameter

@@ -274,6 +274,7 @@ public class SelectExamplePage extends WizardPage
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		switch (messageArea.getState()) {
+		case DOWNLOAD:
 		case UPDATE:
 			revealExamples();
 			break;

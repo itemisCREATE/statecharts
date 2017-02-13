@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.cpp
 import com.google.inject.Inject
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
@@ -39,16 +40,15 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.expressions.expressions.ConditionalExpression
 
 class ExpressionCode extends Expressions {
 
-	@Inject extension Naming
-	@Inject extension Navigation
-	@Inject extension ITypeSystem
-	@Inject extension ITypeSystemInferrer
-	@Inject extension INamingService
-	@Inject extension ICodegenTypeSystemAccess
+	@Inject protected extension Naming
+	@Inject protected extension Navigation
+	@Inject protected extension ITypeSystem
+	@Inject protected extension ITypeSystemInferrer
+	@Inject protected extension INamingService
+	@Inject protected extension ICodegenTypeSystemAccess
 
 	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
@@ -65,10 +65,10 @@ class ExpressionCode extends Expressions {
 
 	def dispatch CharSequence code(ElementReferenceExpression it, OperationDefinition target) '''«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
-
+		
 	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) '''«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
-		
+
 	def dispatch CharSequence code(ConditionalExpression it) '''«condition.code» ? «trueCase.code» : «falseCase.code»'''
 
 	def dispatch CharSequence code(Expression it) '''#error TODO: generate code for «getClass().name»'''

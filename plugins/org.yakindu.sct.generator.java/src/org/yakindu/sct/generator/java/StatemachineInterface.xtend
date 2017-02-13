@@ -224,7 +224,7 @@ class StatemachineInterface {
 	def protected operationSignature(OperationDefinition it) {
 		'''
 			public «typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.
-				typeSpecifier.targetLanguageName» «parameter.identifier»«ENDFOR»);
+				typeSpecifier.targetLanguageName»«IF parameter.isVarArgs»...«ENDIF» «parameter.identifier»«ENDFOR»);
 			
 		'''
 	}

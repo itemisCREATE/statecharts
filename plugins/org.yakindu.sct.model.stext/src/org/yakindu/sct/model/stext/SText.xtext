@@ -91,7 +91,7 @@ TypeSpecifier returns types::TypeSpecifier:
 	type=[types::Type|FQN] ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)*'>'))?;
 
 Parameter returns types::Parameter:
-	name=XID ':' typeSpecifier=TypeSpecifier;
+	 name=XID (varArgs?='...')? ':' typeSpecifier=TypeSpecifier;
 
 Reaction returns sgraph::Reaction:
 	LocalReaction | TransitionReaction;

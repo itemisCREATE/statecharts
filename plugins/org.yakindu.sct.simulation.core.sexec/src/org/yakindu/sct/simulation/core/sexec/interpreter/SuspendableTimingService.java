@@ -122,7 +122,8 @@ public class SuspendableTimingService implements ITimingService {
 
 	public synchronized void unscheduleTimeEvent(String eventName) {
 		ScheduledFuture<?> future = futures.remove(eventName);
-		future.cancel(false);
+		if(future != null)
+			future.cancel(false);
 		runnables.remove(eventName);
 	}
 

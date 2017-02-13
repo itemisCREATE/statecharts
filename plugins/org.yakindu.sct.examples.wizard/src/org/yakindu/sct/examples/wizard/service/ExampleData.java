@@ -11,6 +11,7 @@
 package org.yakindu.sct.examples.wizard.service;
 
 import java.io.File;
+import java.text.Collator;
 import java.util.Arrays;
 
 /**
@@ -18,7 +19,7 @@ import java.util.Arrays;
  * @author t00manysecretss
  * 
  */
-public class ExampleData {
+public class ExampleData implements Comparable<ExampleData> {
 
 	private static final String PRO_EXAMPLE = "professional";
 	private String id;
@@ -147,6 +148,11 @@ public class ExampleData {
 		} else if (!title.equals(other.title))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(ExampleData other) {
+		return Collator.getInstance().compare(this.title, other.title);
 	}
 
 }

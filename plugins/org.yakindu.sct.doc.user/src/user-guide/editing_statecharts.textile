@@ -76,7 +76,7 @@ The editor palette provides you with a set of various actions and statechart edi
 
 You can hide the palette by clicking on the small triangle in the palette's title bar. Click on the triangle again to make the palette reappear.
 
-!(standard-image)images/docu_editor-palette_010_overview.png(Editor palette)!
+!images/docu_editor-palette_010_overview.png(Editor palette)!
 
 p=. Editor palette
 
@@ -177,7 +177,7 @@ h2(#using-subdiagrams). Using subdiagrams
 
 When using composite states, a statechart model may easily become too big to give a comprehensive overview of the whole diagram. Subdiagrams come as a solution.
 
-!(standard-image)images/docu_subdiagram_010_inline.png(Composite state)!
+!images/docu_subdiagram_010_inline.png(Composite state)!
 
 p=. Composite state
 
@@ -185,13 +185,13 @@ When the _Extract Subdiagram_ "refactoring":#refactorings is executed on a compo
 
 Extracting a subdiagram creates entry and exit nodes in the subdiagram as needed.
 
-!(standard-image)images/docu_subdiagram_020_preview.png(Subdiagram popup window)!
+!images/docu_subdiagram_020_preview.png(Subdiagram popup window)!
 
 p=. Subdiagram popup window
 
 A click on the decorator opens the subdiagram in a separate editor tab. The breadcrumb at the top allows easy navigation throughout the hierachy levels.
 
-!(standard-image)images/docu_subdiagram_030_subdiagram-editor.png(Subdiagram editor)!
+!images/docu_subdiagram_030_subdiagram-editor.png(Subdiagram editor)!
 
 p=. Subdiagram editor
 
@@ -208,7 +208,7 @@ Using the _Rename_ refactoring, you can change the name of a variable, event or 
 
 To initiate renaming, right-click on the name of a variable, event or interface in the diagram editor, in the definition section, or in a text field in the _Properties_ view, then select _Rename …_.
 
-!(standard-image)images/docu_refactoring-rename_010_renaming-variable.png(Renaming a variable)!
+!images/docu_refactoring-rename_010_renaming-variable.png(Renaming a variable)!
 
 p=. Renaming a variable
 
@@ -222,7 +222,7 @@ The _Fold Incoming Actions_ refactoring moves these actions from the transitions
 
 Consider the following model:
 
-!(standard-image)images/docu_refactoring-fold-incoming-actions_010_example_01.png(Moving incoming actions to entry block)!
+!images/docu_refactoring-fold-incoming-actions_010_example_01.png(Moving incoming actions to entry block)!
 
 p=. Moving incoming actions to entry block
 
@@ -230,7 +230,7 @@ Only the most-right action _y += 42_ can be moved to the entry block of the targ
 
 Another aspect to take into account are transitions leading to target states that are nested in composite states. Consider the following example:
 
-!(standard-image)images/docu_refactoring-fold-incoming-actions_020_example_02.png(Moving incoming actions into a nested state's entry block)!
+!images/docu_refactoring-fold-incoming-actions_020_example_02.png(Moving incoming actions into a nested state's entry block)!
 
 p=. Moving incoming actions into a nested state's entry block
 
@@ -244,7 +244,7 @@ The _Fold Outgoing Actions_ refactoring is similar to "folding incoming actions"
 
 Preconditions for this refactoring are analog to "&quot;Folding incoming actions&quot;":#folding-incoming-actions. Consider the following example:
 
-!(standard-image)images/docu_refactoring-fold-outgoing-actions_010_example_01.png(Moving outgoing actions to exit block)!
+!images/docu_refactoring-fold-outgoing-actions_010_example_01.png(Moving outgoing actions to exit block)!
 
 p=. Moving outgoing actions to exit block
 
@@ -266,7 +266,7 @@ This refactoring is the reverse of "folding outgoing actions":#folding-outgoing-
 
 Transitions crossing the borders of composite states enclosing the source state might inhibit refactoring. Consider the following example:
 
-!(standard-image)images/docu_refactoring-unfold-outgoing-actions_010_example_01.png(Unfolding exit actions to outgoing transitions)!
+!images/docu_refactoring-unfold-outgoing-actions_010_example_01.png(Unfolding exit actions to outgoing transitions)!
 
 p=. Unfolding exit actions to outgoing transitions
 
@@ -321,7 +321,7 @@ The statechart editor allows for comparing two or even three statecharts to each
 
 p(#oss_fig_comparing_two_statecharts). 
 
-!(standard-image)images/docu_comparing_statecharts_010_result.png(Comparing two statecharts)!
+!images/docu_comparing_statecharts_010_result.png(Comparing two statecharts)!
 
 p=. Comparing two statecharts
 
@@ -354,13 +354,13 @@ A statechart can be saved as an image file as shown in the following steps:
 
 In the statechart editor, right-click on the main region. The context menu appears.
 
-!(standard-image)images/docu_exporting_statechart_as_image_010_save_as_menu_item.png(Selecting the "Save As Image File..." menu item)!
+!images/docu_exporting_statechart_as_image_010_save_as_menu_item.png(Selecting the "Save As Image File..." menu item)!
 
 p=. Selecting the _Save As Image File..._ menu item
 
 In the context menu, select File → Save As Image File.... The _Save As Image_ dialog appears.
 
-!(standard-image)images/docu_exporting_statechart_as_image_020_save_as_dialog.png(The "Save As Image File" dialog)!
+!images/docu_exporting_statechart_as_image_020_save_as_dialog.png(The "Save As Image File" dialog)!
 
 p=. The _Save As Image File_ dialog
 
@@ -395,7 +395,7 @@ The nice thing is that you don't have to remember all the places you took a note
 
 p(#oss_fig_tasks-defined-by-tags-in-the-statechart-showing-up-in-the-tasks-view). 
 
-!(standard-image)images/docu_task_tags_010_task_view.png(Tasks defined by tags in the statechart showing up in the "Tasks" view)!
+!images/docu_task_tags_010_task_view.png(Tasks defined by tags in the statechart showing up in the "Tasks" view)!
 
 p=. Tasks defined by tags in the statechart showing up in the _Tasks_ view
 
@@ -418,7 +418,7 @@ The _Tasks_ view is updated only when the statechart is saved.
 
 h2(#using-the-example_wizard). Using the example wizard
 
-The **Example Wizard**, which is part of YAKINDU Statechart Tools since release 2.7, gives you convenient access to the examples in our "examples repository":https://github.com/Yakindu/examples. You can browse the available examples by name or by category and read their documentation in the wizard. By a simple click you can instantiate an example as a new Eclipse project. Within an example project, you can then explore and modify the state machine models using the statechart editor, run the models in the simulator, generate source code, etc.
+The **Example Wizard**, which is part of YAKINDU Statechart Tools since release 2.7, gives you convenient access to the examples in our "examples repository":https://github.com/Yakindu/examples. You can browse the available examples and read their documentation in the wizard. By a simple click you can instantiate an example as a new Eclipse project. Within an example project, you can then explore and modify the state machine models using the statechart editor, run the models in the simulator, generate source code, etc.
 
 Upon its first invocation, the example wizard downloads the online examples repository and creates a copy on your local disk. After that, all examples are immediately available to you, even if you are offline. The example wizard will notice when new examples are available in the online repository and offers to download them. It is also possible to download the examples repository out-of-band and later tell the example wizard where it can find the local copy.
 
@@ -431,7 +431,7 @@ When you start the example wizard for the first time, it does not yet have any e
 # The example wizard outputs a message saying that it could not find any examples and offers to download them.
 # Click on the _Download_ button. The example wizard downloads the online examples repository and creates a clone of it on your local computer. This can take some time. – Downloading can fail for a variety of reasons, not being able to access the Github server being one of them. If this happens, don't panic – and read how to "manually create a local copy of the examples repository":#manually-creating-a-local-copy-of-the-examples-repository.
 
-!(standard-image)images/docu_example_wizard_download.png(Example wizard when invoked for the first time)!
+!images/docu_example_wizard_download.png(Example wizard when invoked for the first time)!
 
 p=. Example wizard when invoked for the first time
 
@@ -452,15 +452,15 @@ You can change the storage location of your local examples repository clone at a
 
 h3(#browsing-the-example-repository). Browsing the examples repository
 
-The example wizard shows the available examples and their categories on the left-hand side.
+The example wizard shows the available examples on the left-hand side.
 
 Click on an example to select it and show its documentation on the right-hand side.
 
 Click on _Finish_ to create the selected example as a new project in your workspace.
 
-!(standard-image)images/docu_example_wizard_browse.png(Example wizard showing all available examples grouped by category)!
+!images/docu_example_wizard_browse.png(Example wizard showing all available examples)!
 
-p=. Example wizard showing all available examples grouped by category
+p=. Example wizard showing all available examples
 
 
 h3(#manually-creating-a-local-copy-of-the-examples-repository). Manually creating a local copy of the examples repository
@@ -505,7 +505,7 @@ h3(#updating-the-examples-respository). Updating the examples repository
 
 When the example wizard is started and the storage location is a clone of the online examples directory, it checks whether there are any updates in the online examples repository. If new examples are available or existing examples have changed in the online repository the example wizard offers to update your local examples repository clone accordingly.
 
-!(standard-image)images/docu_example_wizard_update.png(Example wizard offering to update the examples repository)!
+!images/docu_example_wizard_update.png(Example wizard offering to update the examples repository)!
 
 p=. Example wizard offering to update the examples repository
 
@@ -532,7 +532,7 @@ In the subsequent sections we will quickly walk through the preferences.
 h3(#diagram-appearance). Diagram appearance
 
 p(#fig_preferences-diagram-appearance). 
-!(standard-image)images/docu_preferences_010_diagram_appearance_01.png(Preferences: Diagram Appearance)!
+!images/docu_preferences_010_diagram_appearance_01.png(Preferences: Diagram Appearance)!
 
 p=. Preferences: Diagram Appearance
 
@@ -555,7 +555,7 @@ However, on very large and complex statechart models, validation may take a cons
 h3(#example-wizard). Example wizard
 
 p(#fig_preferences-example-wizard). 
-!(standard-image)images/docu_preferences_020_examples_01.png(Preferences: Example wizard)!
+!images/docu_preferences_020_examples_01.png(Preferences: Example wizard)!
 
 p=. Preferences: Example wizard
 
@@ -564,7 +564,7 @@ You can change the example wizard storage location here. It is a local directory
 h3(#expressions-preferences). Expressions preferences
 
 p(#fig_preferences-expressions). 
-!(standard-image)images/docu_preferences_030_expressions_01.png(Preferences: Expressions)!
+!images/docu_preferences_030_expressions_01.png(Preferences: Expressions)!
 
 p=. Preferences: Expressions
 
@@ -573,7 +573,7 @@ Certain dialogs in the statechart editor allow you to opt for never seeing them 
 h4(#expression-syntax-coloring). Expression syntax coloring
 
 p(#fig_preferences-expression-syntax-coloring). 
-!(standard-image)images/docu_preferences_040_expressions_syntax_coloring_01.png(Preferences: Expression syntax coloring)!
+!images/docu_preferences_040_expressions_syntax_coloring_01.png(Preferences: Expression syntax coloring)!
 
 p=. Preferences: Expression syntax coloring
 
@@ -582,7 +582,7 @@ This preferences pane defines foreground color, background color, font, and styl
 h4(#expression-templates). Expression templates
 
 p(#fig_preferences-expression-templates). 
-!(standard-image)images/docu_preferences_050_expressions_template_01.png(Preferences: Expression templates)!
+!images/docu_preferences_050_expressions_template_01.png(Preferences: Expression templates)!
 
 p=. Preferences: Expression templates
 
@@ -595,7 +595,7 @@ On this preference pane you can create, edit, and delete statechart language tem
 h3(#generator-model). Generator model
 
 p(#fig_preferences-generator-model). 
-!(standard-image)images/docu_preferences_060_generator_model_01.png(Preferences: Generator model)!
+!images/docu_preferences_060_generator_model_01.png(Preferences: Generator model)!
 
 p=. Preferences: Generator model
 
@@ -604,7 +604,7 @@ By default code generators automatically generate artifacts defined by generator
 h4(#generator-model-refactoring). Generator model refactoring
 
 p(#fig_preferences-generator-model-refactoring). 
-!(standard-image)images/docu_preferences_070_generator_model_refactoring_01.png(Preferences: Generator model refactoring)!
+!images/docu_preferences_070_generator_model_refactoring_01.png(Preferences: Generator model refactoring)!
 
 p=. Preferences: Generator model refactoring
 
@@ -613,7 +613,7 @@ Change these preference settings for refactoring in generator models as you see 
 h4(#generator-model-syntax-coloring). Generator model syntax coloring
 
 p(#fig_preferences-generator-model-syntax-coloring). 
-!(standard-image)images/docu_preferences_080_generator_syntax_coloring_01.png(Preferences: Generator model syntax coloring)!
+!images/docu_preferences_080_generator_syntax_coloring_01.png(Preferences: Generator model syntax coloring)!
 
 p=. Preferences: Generator model syntax coloring
 
@@ -622,7 +622,7 @@ This preferences pane defines foreground color, background color, font, and styl
 h4(#generator-model-templates). Generator model templates
 
 p(#fig_preferences-generator-model-templates). 
-!(standard-image)images/docu_preferences_090_generator_templates_01.png(Preferences: Generator model templates)!
+!images/docu_preferences_090_generator_templates_01.png(Preferences: Generator model templates)!
 
 p=. Preferences: Generator model templates
 
@@ -635,7 +635,7 @@ On this preference pane you can create, edit, and delete generator model languag
 h3(#simulation). Simulation
 
 p(#fig_preferences-simulation). 
-!(standard-image)images/docu_preferences_100_simulation_01.png(Preferences: Simulation)!
+!images/docu_preferences_100_simulation_01.png(Preferences: Simulation)!
 
 p=. Preferences: Simulation
 

@@ -14,9 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.IAcceptor;
-import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.resource.TypedResourceDescriptionStrategy;
 import org.yakindu.sct.model.sgraph.Statechart;
 

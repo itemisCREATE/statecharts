@@ -13,15 +13,21 @@ package org.yakindu.base.types.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
@@ -53,8 +59,31 @@ public class OperationItemProvider extends DeclarationItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addVariadicPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Variadic feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVariadicPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Operation_variadic_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_variadic_feature", "_UI_Operation_type"),
+				 TypesPackage.Literals.OPERATION__VARIADIC,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -100,7 +129,7 @@ public class OperationItemProvider extends DeclarationItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		Operation operation = (Operation)object;
+		Operation operation = (Operation) object;
 		StringBuilder builder = new StringBuilder(operation.getName());
 		builder.append("(");
 		EList<Parameter> parameters = operation.getParameters();
@@ -108,18 +137,32 @@ public class OperationItemProvider extends DeclarationItemProvider {
 		for (Parameter parameter : parameters) {
 			builder.append(sep);
 			builder.append(parameter.getName());
-			builder.append(" : " );
-			Type type = parameter.getType();
-			builder.append(type != null? type.getName() : "null");
+			builder.append(" : ");
+			String typeName = getTypeName(parameter.getTypeSpecifier());
+			builder.append(typeName);
 			sep = ", ";
 		}
 		builder.append(")");
-		if(operation.getType() != null){
+		if (operation.getType() != null) {
 			builder.append(" : ");
-			String name = operation.getType().getName();
+			String name = getTypeName(operation.getTypeSpecifier());
 			builder.append(name == null ? "void" : name);
 		}
 		return builder.toString();
+	}
+
+	protected String getTypeName(TypeSpecifier typeSpecifier) {
+		Type type = (Type) typeSpecifier.eGet(TypesPackage.Literals.TYPE_SPECIFIER__TYPE, false);
+		String typeName = "";
+		if (type == null) {
+			typeName = "null";
+		} else if (type.eIsProxy()) {
+			URI eProxyURI = ((InternalEObject) type).eProxyURI();
+			typeName = StringUtils.substringAfterLast(eProxyURI.fragment(), ".");
+		} else {
+			typeName = type.getName();
+		}
+		return typeName;
 	}
 
 	/**
@@ -134,6 +177,9 @@ public class OperationItemProvider extends DeclarationItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Operation.class)) {
+			case TypesPackage.OPERATION__VARIADIC:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case TypesPackage.OPERATION__PARAMETERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

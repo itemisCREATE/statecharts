@@ -64,13 +64,17 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		'timer'
 	}
 
+	def timeEventsCountConst() {
+		'timeEventsCount'
+	}
+
 	def timeEventsInstance() {
 		'timeEvents'
 	}
 
 	def protected signature(OperationDefinition it) '''
-	«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.typeSpecifier.
-		targetLanguageName» «parameter.identifier»«ENDFOR»)'''
+	«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«IF parameter.isVarArgs»...«ELSE»«parameter.typeSpecifier.
+		targetLanguageName» «parameter.identifier»«ENDIF»«ENDFOR»)'''
 
 	def protected OCB_InterfaceSetterDeclaration(StatechartScope scope, boolean fqn) '''
 	void «IF fqn»«scope.flow.module»::«ENDIF»set«scope.interfaceOCBName»(«scope.interfaceOCBName»* operationCallback)'''

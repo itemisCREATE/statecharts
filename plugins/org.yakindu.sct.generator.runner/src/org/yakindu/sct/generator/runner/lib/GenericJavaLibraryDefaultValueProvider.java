@@ -36,6 +36,12 @@ import com.google.inject.Inject;
  */
 public class GenericJavaLibraryDefaultValueProvider extends AbstractDefaultFeatureValueProvider {
 
+	private static final String GENERATOR_CLASS_DEFAULT = "org.yakindu.sct.generator.Generator";
+	
+	private static final String CLASS_FORMAT_ERROR = "Generator class must be a full qualified class name";
+	private static final String CLASS_NOT_FOUND_ERROR = "Generator class %s could not be found. Please make sure the generator project lies on this project's build path.";
+	private static final String PROJECT_NOT_FOUND_ERROR = "Project %s does not exist";
+
 	@Inject
 	protected ISCTWorkspaceAccess access;
 	
@@ -53,27 +59,42 @@ public class GenericJavaLibraryDefaultValueProvider extends AbstractDefaultFeatu
 		if (GENERATOR_PROJECT.equals(parameterName)) {
 			parameterValue.setValue(getProject(contextElement).getName());
 		} else if (GENERATOR_CLASS.equals(parameterName)) {
-			parameterValue.setValue("org.yakindu.sct.generator.Generator");
+			parameterValue.setValue(GENERATOR_CLASS_DEFAULT);
 		}
 	}
 
 	public IStatus validateParameterValue(FeatureParameterValue parameterValue) {
 		String parameterName = parameterValue.getParameter().getName();
-		String value = parameterValue.getStringValue();
-		if (GENERATOR_PROJECT.equals(parameterName) && !access.projectExists(value)) {
-			return error(String.format("The Project %s does not exist", value));
+		
+		if (GENERATOR_PROJECT.equals(parameterName)) {
+			return validateGeneratorProject(parameterValue);
 		}
+		if (GENERATOR_CLASS.equals(parameterName)) {
+			return validateGeneratorClass(parameterValue);
+		}
+		return Status.OK_STATUS;
+	}
+	
+	private IStatus validateGeneratorProject(FeatureParameterValue parameterValue) {
+		String value = parameterValue.getStringValue();
+		if (!access.projectExists(value)) {
+			return error(String.format(PROJECT_NOT_FOUND_ERROR, value));
+		}
+		return Status.OK_STATUS;
+	}
+
+	private IStatus validateGeneratorClass(FeatureParameterValue parameterValue) {
+		String value = parameterValue.getStringValue();
 		IJavaProject ijp = JavaCore.create(this.getProject(parameterValue));
 		try {
-			if (ijp.findType(value) == null && GENERATOR_CLASS.equals(parameterName)) {
-				return error("Generator class does not exist.");
+			if (ijp.findType(value) == null) {
+				return error(String.format(CLASS_NOT_FOUND_ERROR, value));
 			}
 		} catch (JavaModelException e) {
-			// Stacktrace
 			e.printStackTrace();
 		}
-		if (GENERATOR_CLASS.equals(parameterName) && !value.matches(GENERATOR_CLASS_REGEX)) {
-			return error("Generator class must be a full qualified class name");
+		if (!value.matches(GENERATOR_CLASS_REGEX)) {
+			return error(CLASS_FORMAT_ERROR);
 		}
 		return Status.OK_STATUS;
 	}

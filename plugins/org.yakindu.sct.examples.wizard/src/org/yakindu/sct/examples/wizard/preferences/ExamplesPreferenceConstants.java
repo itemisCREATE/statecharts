@@ -18,4 +18,8 @@ package org.yakindu.sct.examples.wizard.preferences;
 public interface ExamplesPreferenceConstants {
 
 	public static final String STORAGE_LOCATION = "storageLocation";
+	
+	public static final String REMOTE_LOCATION = "remoteLocation";
+	
+	public static final String REMOTE_BRANCH = "remoteBranch";
 }

@@ -84,4 +84,11 @@
             </attribute>
         </markerResolutionGenerator>
     </extension>
+    
+     <extension
+        point="org.eclipse.xtext.ui.shared.overridingGuiceModule">
+     <module
+           class="org.yakindu.sct.model.stext.ui.OverridingGuiceModule">
+     </module>
+  </extension>
 </plugin>

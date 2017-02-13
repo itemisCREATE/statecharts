@@ -18,6 +18,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -41,12 +42,10 @@ import org.eclipse.ui.wizards.datatransfer.ImportOperation;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
-import org.yakindu.sct.examples.wizard.service.ExampleWizardModule;
 import org.yakindu.sct.examples.wizard.service.IExampleService;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 /**
  * 
@@ -58,15 +57,8 @@ import com.google.inject.name.Named;
 @Singleton
 public class GitRepositoryExampleService implements IExampleService {
 
-	private static final String GIT_METADATA_FOLDER = ".git";
-
 	private static final String METADATA_JSON = "metadata.json";
 
-	private static final String RELEASE = "release";
-
-	@Inject
-	@Named(ExampleWizardModule.REPOSITORY_URL)
-	private String repositoryURL;
 	@Inject
 	private IExampleDataReader reader;
 
@@ -75,14 +67,9 @@ public class GitRepositoryExampleService implements IExampleService {
 				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION));
 	}
 
-	protected java.nio.file.Path getGitMetadataLocation() {
-		return java.nio.file.Paths.get(ExampleActivator.getDefault().getPreferenceStore()
-				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION), GIT_METADATA_FOLDER);
-	}
-
 	@Override
 	public boolean exists() {
-		return Files.exists(getGitMetadataLocation());
+		return Files.exists(getStorageLocation()) && hasMetaData(getStorageLocation());
 	}
 
 	@Override
@@ -102,27 +89,34 @@ public class GitRepositoryExampleService implements IExampleService {
 	}
 
 	protected IStatus updateRepository(IProgressMonitor monitor) {
+		String repoURL = getPreference(ExamplesPreferenceConstants.REMOTE_LOCATION);
 		try {
 			java.nio.file.Path storageLocation = getStorageLocation();
 			PullResult result = Git.open(storageLocation.toFile()).pull()
 					.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).call();
 			if (!result.isSuccessful()) {
 				return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
-						"Unable to update repository " + repositoryURL + "!");
+						"Unable to update repository " + repoURL + "!");
 			}
 		} catch (GitAPIException | IOException e) {
 			return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
-					"Unable to update repository " + repositoryURL + "!");
+					"Unable to update repository " + repoURL + "!");
 		}
 		return Status.OK_STATUS;
 	}
-
+	
+	protected String getPreference(String constant){
+		return ExampleActivator.getDefault().getPreferenceStore().getString(constant);
+	}
+	
 	protected IStatus cloneRepository(IProgressMonitor monitor) {
+		String repoURL = getPreference(ExamplesPreferenceConstants.REMOTE_LOCATION);
+		String remoteBranch = getPreference(ExamplesPreferenceConstants.REMOTE_BRANCH);
 		Git call = null;
 		java.nio.file.Path storageLocation = getStorageLocation();
 		try {
-			call = Git.cloneRepository().setURI(repositoryURL).setDirectory(storageLocation.toFile())
-					.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).setBranch(RELEASE).call();
+			call = Git.cloneRepository().setURI(repoURL).setDirectory(storageLocation.toFile())
+					.setProgressMonitor(new EclipseGitProgressTransformer(monitor)).setBranch(remoteBranch).call();
 		} catch (GitAPIException e) {
 			try {
 				deleteFolder(storageLocation);
@@ -130,7 +124,7 @@ public class GitRepositoryExampleService implements IExampleService {
 				ex.printStackTrace();
 			}
 			return new Status(IStatus.ERROR, ExampleActivator.PLUGIN_ID,
-					"Unable to clone repository " + repositoryURL + "!");
+					"Unable to clone repository " + repoURL + "!");
 		} finally {
 			if (call != null)
 				call.close();
@@ -151,6 +145,7 @@ public class GitRepositoryExampleService implements IExampleService {
 		List<java.nio.file.Path> projects = new ArrayList<>();
 		findMetaData(projects, storageLocation);
 		List<ExampleData> result = reader.parse(projects);
+		Collections.sort(result);
 		return result;
 	}
 
@@ -167,6 +162,12 @@ public class GitRepositoryExampleService implements IExampleService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	protected boolean hasMetaData(java.nio.file.Path root) {
+		List<java.nio.file.Path> result = new ArrayList<>();
+		findMetaData(result, root);
+		return !result.isEmpty();
 	}
 
 	@Override

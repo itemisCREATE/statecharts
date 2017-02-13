@@ -14,7 +14,9 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -28,6 +30,7 @@ import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.internal.parts.DiagramGraphicalViewerKeyHandler;
 import org.eclipse.gmf.runtime.gef.ui.internal.editparts.AnimatableZoomManager;
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
@@ -255,6 +258,16 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			// Zoom in - Windows - German layout ([CTRL++] propagates char 0x1d)
 			getKeyHandler().put(KeyStroke.getPressed((char) 0x1d, 0x2b, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
+			
+			// Test Error - for AERI testing only
+//			DOWN: stateMask=0x50000 CTRL ALT, keyCode=0x6c 'l', character=0xc ''
+			getKeyHandler().put(KeyStroke.getPressed((char)0xc, 0x6c,  0x50000), new Action() {
+				@Override
+				public void run() {
+					DiagramActivator.getDefault().getLog()
+							.log(new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID, "AERI Testing error"));
+				}
+			});
 
 		}
 		return keyHandler;

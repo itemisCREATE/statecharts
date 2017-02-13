@@ -140,7 +140,7 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 	@Override
 	protected void updateLabelText() {
 		String label = (String) resolveSemanticElement().eGet(getAttribute());
-		getFigure().setText(label);
+		getFigure().setText(label == null ? "" : label);
 	}
 	
 	@Override

@@ -16,7 +16,6 @@ import org.yakindu.sct.examples.wizard.service.git.JsonMetaDataReader;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
-import com.google.inject.name.Names;
 
 /**
  * 
@@ -25,12 +24,9 @@ import com.google.inject.name.Names;
  */
 public class ExampleWizardModule implements Module {
 
-	public static final String REPOSITORY_URL = "repository_url";
-
 	@Override
 	public void configure(Binder binder) {
 		binder.bind(IExampleService.class).to(GitRepositoryExampleService.class);
-		binder.bindConstant().annotatedWith(Names.named(REPOSITORY_URL)).to("https://github.com/Yakindu/examples");
 		binder.bind(IExampleDataReader.class).to(JsonMetaDataReader.class);
 	}
 

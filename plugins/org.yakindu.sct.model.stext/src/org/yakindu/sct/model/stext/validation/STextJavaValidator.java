@@ -33,11 +33,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.EObjectDescription;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -129,30 +125,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Inject(optional = true)
 	@Named(DomainRegistry.DOMAIN_ID)
 	private String domainID = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
-	@Inject
-	private ContextPredicateProvider contextPredicateProvider;
-	@Inject
-	private IResourceDescriptions index;
-
-	@Check(CheckType.FAST)
-	public void checkContextElement(final ElementReferenceExpression expression) {
-		Iterable<IEObjectDescription> description = null;
-		QualifiedName fqn = nameProvider.getFullyQualifiedName(expression.getReference());
-		if (index instanceof ResourceSetBasedResourceDescriptions) {
-			description = Lists.newArrayList(EObjectDescription.create(fqn, expression.getReference()));
-		} else {
-			//This is the fallback for headless execution
-			description = index.getExportedObjects(expression.getReference().eClass(), fqn, false);
-		}
-		final Predicate<IEObjectDescription> predicate = contextPredicateProvider.calculateFilterPredicate(expression,
-				ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
-		for (IEObjectDescription desc : description) {
-			if (!predicate.apply(desc)) {
-				String name = expression.getReference().eClass().getName();
-				error(String.format(ERROR_WRONG_CONTEXT_ELEMENT_MSG, name), null, -1, ERROR_WRONG_CONTEXT_ELEMENT_CODE);
-			}
-		}
-	}
 
 	@Check(CheckType.FAST)
 	public void checkExpression(VariableDefinition expression) {
@@ -278,6 +250,10 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (!definition.isConst())
 			return;
 		Expression initialValue = definition.getInitialValue();
+		if (initialValue == null) {
+			error(CONST_MUST_HAVE_VALUE_MSG, definition, null, CONST_MUST_HAVE_VALUE_CODE);
+			return;
+		}
 		List<Expression> toCheck = Lists.newArrayList(initialValue);
 		TreeIterator<EObject> eAllContents = initialValue.eAllContents();
 		while (eAllContents.hasNext()) {
@@ -352,31 +328,28 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	}
 
-	
 	@Check(CheckType.FAST)
-	public void checkValueOfNoEvent(EventValueReferenceExpression exp){
-		
+	public void checkValueOfNoEvent(EventValueReferenceExpression exp) {
+
 		Expression eventExpr = exp.getValue();
-		
+
 		EObject element = null;
 		if (eventExpr instanceof ElementReferenceExpression) {
-			element =  ((ElementReferenceExpression) eventExpr).getReference();
+			element = ((ElementReferenceExpression) eventExpr).getReference();
 		} else if (eventExpr instanceof FeatureCall) {
 			element = ((FeatureCall) eventExpr).getFeature();
 		}
-		
-		if (element != null && (! (element instanceof Event))) {
+
+		if (element != null && (!(element instanceof Event))) {
 			String elementName = "";
-			if ( element instanceof NamedElement ) {
-				elementName = "'" + ((NamedElement) element).getName() +"' ";
+			if (element instanceof NamedElement) {
+				elementName = "'" + ((NamedElement) element).getName() + "' ";
 			}
-			error( elementName + "is no event.",
-					StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, 0,
+			error(elementName + "is no event.", StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE, 0,
 					VALUE_OF_REQUIRES_EVENT);
 		}
 	}
 
-	
 	@Check(CheckType.NORMAL)
 	public void checkValueReferenedBeforeDefined(Scope scope) {
 		EList<Declaration> declarations = scope.getDeclarations();
@@ -577,11 +550,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkOperationArguments_FeatureCall(final FeatureCall call) {
 		if (call.getFeature() instanceof Operation) {
 			Operation operation = (Operation) call.getFeature();
-			EList<Parameter> parameters = operation.getParameters();
-			EList<Expression> args = call.getArgs();
-			if (parameters.size() != args.size()) {
-				error("Wrong number of arguments, expected " + parameters + ".", null);
-			}
+			assertOperationArguments(operation, call.getArgs());
 		}
 	}
 
@@ -589,22 +558,31 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkOperationArguments_TypedElementReferenceExpression(final ElementReferenceExpression call) {
 		if (call.getReference() instanceof Operation) {
 			Operation operation = (Operation) call.getReference();
-			EList<Parameter> parameters = operation.getParameters();
-			EList<Expression> args = call.getArgs();
-			if (parameters.size() != args.size()) {
-				error("Wrong number of arguments, expected " + parameters + ".", null);
-			}
+			assertOperationArguments(operation, call.getArgs());
+		}
+	}
+
+	protected void assertOperationArguments(Operation operation, List<Expression> args) {
+		EList<Parameter> parameters = operation.getParameters();
+		if ((operation.isVariadic() && operation.getVarArgIndex() > args.size())
+				|| !operation.isVariadic() && parameters.size() != args.size()) {
+			error("Wrong number of arguments, expected " + parameters + ".", null);
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkVarArgParameterIsLast(Operation operation) {
+		if (operation.isVariadic() && operation.getVarArgIndex() != operation.getParameters().size() - 1) {
+			error(VAR_ARGS_LAST_MSG, operation.getParameters().get(operation.getVarArgIndex()),
+					null, VAR_ARGS_LAST_CODE);
 		}
 	}
 
 	@Check(CheckType.FAST)
 	public void checkAssignmentExpression(final AssignmentExpression exp) {
-
 		final String name = getVariableName(exp);
-
 		List<AssignmentExpression> contents = EcoreUtil2.eAllOfType(exp, AssignmentExpression.class);
 		contents.remove(exp);
-
 		Iterable<AssignmentExpression> filter = Iterables.filter(contents, new Predicate<AssignmentExpression>() {
 			public boolean apply(final AssignmentExpression ex) {
 				String variableName = getVariableName(ex);
@@ -654,32 +632,30 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	@Check(CheckType.FAST)
 	public void checkReactionTriggerRegularEvent(ReactionTrigger reactionTrigger) {
-		for (int i=0; i<reactionTrigger.getTriggers().size(); i++) {
+		for (int i = 0; i < reactionTrigger.getTriggers().size(); i++) {
 			EventSpec eventSpec = reactionTrigger.getTriggers().get(i);
 			if (eventSpec instanceof RegularEventSpec) {
 
 				Expression eventExpression = ((RegularEventSpec) eventSpec).getEvent();
 				EObject element = null;
 				if (eventExpression instanceof ElementReferenceExpression) {
-					element =  ((ElementReferenceExpression) eventExpression).getReference();
+					element = ((ElementReferenceExpression) eventExpression).getReference();
 				} else if (eventExpression instanceof FeatureCall) {
 					element = ((FeatureCall) eventExpression).getFeature();
 				}
-				
-				if (element != null && (! (element instanceof Event))) {
+
+				if (element != null && (!(element instanceof Event))) {
 					String elementName = "";
-					if ( element instanceof NamedElement ) {
-						elementName = "'" + ((NamedElement) element).getName() +"' ";
+					if (element instanceof NamedElement) {
+						elementName = "'" + ((NamedElement) element).getName() + "' ";
 					}
-					error("Trigger " + elementName + "is no event.",
-							StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, i,
-							TRIGGER_IS_NO_EVENT);
+					error("Trigger " + elementName + "is no event.", StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
+							i, TRIGGER_IS_NO_EVENT);
 				}
 			}
 		}
 	}
 
-	
 	/**
 	 * Only Expressions that produce an effect should be used as actions.
 	 * 

@@ -14,6 +14,8 @@ This is explained in more detail in section "&quot;Platform overview&quot;":#pla
 
 Java developers might want to read section "JRE not found":#jre-not-found, in case they encounter a certain problem.
 
+
+
 h2(#system-requirements). System requirements
 
 h3(#java). Java
@@ -22,13 +24,18 @@ YAKINDU Statechart Tools is based on the Java programming language and requires 
 
 Installation of Java is beyond the scope of this document. You can find more information on Java and download it for free from Oracle Corporation at "https://www.java.com/":https://www.java.com/. Before downloading Java, make sure you are picking the variant with the correct bit size, i.&nbsp;e. either 32 or 64 bit, whichever is appropriate for your computer.
 
+
 h3(#eclipse). Eclipse
 
-Internally, YAKINDU Statechart Tools are based on *"Eclipse":http://www.eclipse.org/*, an integrated development environment (IDE). YAKINDU Statechart Tools are running inside the Eclipse environment. When you are installing YAKINDU Statechart Tools, a full-fledged Eclipse instance will be put on your computer. Currently (summer 2016) it is the *Mars* release.
+Internally, YAKINDU Statechart Tools are based on *"Eclipse":http://www.eclipse.org/*, an integrated development environment (IDE). YAKINDU Statechart Tools are running inside the Eclipse environment. When you are installing YAKINDU Statechart Tools, a full-fledged Eclipse instance will be put on your computer. Currently (winter 2016) it is the *Neon* release.
+
+###. CHECK: Is the time still winter 2016? Is SCT still based on *Neon*?
 
 If you are new to Eclipse, you might find the "Eclipse Help":http://help.eclipse.org/ useful, especially the "Workbench User Guide".
 
 If you are an experienced Eclipse user, you can install YAKINDU Statechart Tools into a existing Eclipse instance from an update site.
+
+
 
 h2(#platform-overview). Platform overview
 
@@ -42,9 +49,12 @@ Alternatively you can install YAKINDU Statechart Tools into an existing Eclipse 
 
 * "Installing YAKINDU Statechart Tools to an existing Eclipse instance":#installing-to-an-existing-eclipse-instance
 
+
+
 h2(#installing-on-windows). Installing on Windows
 
 This chapter describes how to install YAKINDU Statechart Tools on a Windows 7 machine.
+
 
 h3(#unpacking-the-downloaded-file). Unpacking the downloaded file
 
@@ -77,6 +87,7 @@ The contents of the _yakindu-sct_ folder looks like this:
 p=. Contents of the extracted _yakindu-sct_ folder
 
 There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
+
 
 h3(#starting-yakindu-statechart-tools). Starting YAKINDU Statechart Tools
 
@@ -124,9 +135,12 @@ This is your working environment now. Congratulations, you have just installed Y
 
 You can "proceed":../tutorials/tutorials.html now to create your first YAKINDU Statecharts Tools project.
 
+
+
 h2(#installing-on-macosx). Installing on Mac OS X
 
 This chapter describes how to install YAKINDU Statechart Tools on a Mac computer under Mac OS X.
+
 
 h3(#unpacking-the-downloaded-file-1). Unpacking the downloaded file
 
@@ -141,6 +155,7 @@ Move the unpacked application bundle to your _Applications_ folder. Alternativel
 p=. The YAKINDU Statecharts Tools application in the _Applications_ directory
 
 There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
+
 
 h3(#starting-yakindu-statechart-tools-1). Starting YAKINDU Statechart Tools
 
@@ -188,9 +203,64 @@ This is your working environment now. Congratulations, you have just installed Y
 
 You can "proceed":../tutorials/tutorials.html now to create your first YAKINDU Statecharts Tools project.
 
+
+
 h2(#installing-on-linux). Installing on Linux
 
-This chapter describes how to install YAKINDU Statechart Tools on a Linux machine using a command-line tool. The installation doesn't require _root_ permissions.
+This chapter describes how to install YAKINDU Statechart Tools on a Linux machine using a command-line tool.
+
+
+h3(#inst_linux_installing_required_packages). Installing required packages
+
+Depending on your Linux distribution and version, you might need to install additional packages for *Webkit GTK* and *Java* from your distribution's repository (or elsewhere). Below please find the necessary commands for some Linux distributions. To execute them, you have to have system administrator permissions. So please create a _root_ command-line shell or use the _sudo_ command, which is the typical procedure on Ubuntu.
+
+The list of Linux distributions mentioned below is in no way meant to be exhaustive. If your Linux distribution is not yet among them and you manage to find out the proper commands for it, please let us know – e.g. by directly editing this document:
+
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/installation/installation.textile
+
+
+h4(#inst_linux_webkit_gtk). Webkit GTK
+
+On Linux, you might encounter certain user interface problems or display irregularities when working with Eclipse-based software, e.g. when viewing the welcome page. This is a general problem that can also affect YAKINDU Statechart Tools. It is due to Eclipse on Linux needing specific versions of the _libwebkitgtk_ library to function properly. Depending on your Linux distribution and version, you already have a suitable _libwebkitgtk_ library installed or not.
+
+Commands for installing proper _libwebkitgtk_ versions:
+
+
+*Ubuntu Desktop 16.04 LTS:*
+
+bc. 
+sudo apt-get install libwebkitgtk-1.0.0
+sudo apt-get install libwebkitgtk-3.0.0
+
+
+*Fedora 25 Workstation:*
+
+bc. yum install webkitgtk
+
+
+*openSUSE Leap 42.2:*
+
+_Works out of the box; nothing to be done._
+
+
+*Red Hat Workstation 7.3:*
+
+# Download the RPM file _webkitgtk-2.4.9-1.el7.x86_64.rpm_ from e.g. "http://rpm.pbone.net/index.php3/stat/4/idpl/31819125/dir/redhat_el_7/com/webkitgtk-2.4.9-1.el7.x86_64.rpm.html":http://rpm.pbone.net/index.php3/stat/4/idpl/31819125/dir/redhat_el_7/com/webkitgtk-2.4.9-1.el7.x86_64.rpm.html.
+# Install the downloaded RPM file using the following command, assuming you downloaded the file to _/opt/software/webkitgtk-2.4.9-1.el7.x86_64.rpm_:
+
+==<div style="margin-left: 4em">==
+
+bc. rpm -ihv /opt/software/webkitgtk-2.4.9-1.el7.x86_64.rpm
+
+==</div>==
+
+h4(#inst_linux_java). Java
+
+*Ubuntu Desktop 16.04 LTS:*
+
+bc. 
+sudo apt-get install default-jre
+
 
 h3(#unpacking-the-downloaded-file-2). Unpacking the downloaded file
 
@@ -219,6 +289,7 @@ The contents of the _yakindu-sct_ folder looks like this:
 p=. Contents of the extracted _yakindu-sct_ folder
 
 There you are: You have installed YAKINDU Statechart Tools. Now you should start it.
+
 
 h3(#starting-yakindu-statechart-tools-2). Starting YAKINDU Statechart Tools
 
@@ -269,6 +340,8 @@ p=. The YAKINDU Statechart Tools workbench
 This is your working environment now. Congratulations, you have just started YAKINDU Statechart Tools!
 
 You can "proceed":../tutorials/tutorials.html now to create your first YAKINDU Statecharts Tools project.
+
+
 
 h2(#installing-to-an-existing-eclipse-instance). Installing to an existing Eclipse instance
 
@@ -359,6 +432,8 @@ After the restart, Eclipse displays its _Welcome_ window, now also featuring YAK
 
 p=. Eclipse presenting the _Welcome_ window
 
+
+
 h2(#updating-yakindu-statechart-tools). Updating YAKINDU Statechart Tools
 
 To check whether a new YAKINDU Statechart Tools release is available and to install it, please select the _Help → Check for Updates_ menu item.
@@ -378,6 +453,8 @@ Go to the _Install/Update → Automatic Updates_ section. Here you can configure
 !(standard-image)images/inst_eclipse_update_020_eclipse_automatic_updates.png(Configuring automatic update)!
 
 p=. Configuring automatic update
+
+
 
 h2(#jre-not-found). JRE not found
 

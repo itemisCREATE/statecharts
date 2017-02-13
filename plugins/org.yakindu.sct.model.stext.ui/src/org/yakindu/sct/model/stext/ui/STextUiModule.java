@@ -12,6 +12,8 @@ package org.yakindu.sct.model.stext.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy;
+import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
@@ -110,6 +112,10 @@ public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextU
 
 	public Class<? extends ITaskFinder> bindITaskFinder() {
 		return STextTaskFinder.class;
+	}
+	
+	public Class<? extends IResourceClusteringPolicy> bindIResourceClusteringPolicy() {
+		return DynamicResourceClusteringPolicy.class;
 	}
 
 }

@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.simulation.core.sexec.interpreter;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,13 +43,13 @@ public abstract class AbstractStatementInterpreter extends CoreFunction
 	public Object evaluate(String name, Object... params) {
 		Function lookup = lookup(name, params);
 		if(lookup == null)
-			throw new RuntimeException("Unknown Function " + name);
+			throw new RuntimeException(
+					"No function definition found for '" + name + "' with parameters: " + Arrays.toString(params));
+		
 		return lookup.execute(params);
-
 	}
 
 	public Function lookup(String name, Object... params) {
-
 		Signature sig = new Signature(name, toParamTypes(params));
 		Function f = functionMap.get(sig);
 		if (f == null) {
