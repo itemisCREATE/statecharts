@@ -171,15 +171,11 @@ class StatemachineHeader implements IContentTemplate {
 	private def typeRelevantDeclarations(Scope scope){
 		return scope.declarations.filter[
 			switch it {
-				case it instanceof EventDefinition: true
-				case it instanceof TimeEvent: true
-				case it instanceof VariableDefinition: {
-					val vd = it as VariableDefinition
-					!vd.const && vd.type.name != "void"
-				}
+				EventDefinition: true
+				TimeEvent: true
+				VariableDefinition: !it.const
 				default: false
 			}
-//			it instanceof EventDefinition || it instanceof VariableDefinition || it instanceof TimeEvent
 		]
 	}
 	
