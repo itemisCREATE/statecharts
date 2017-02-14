@@ -541,9 +541,19 @@ Regarding the syntax of event raising, see section "&quot;Raising an event&quot;
 
 h3(#operations). Operations
 
-Operations can have none, one or multiple parameters. A parameter is declared with a name and a type. An operation may have a single return type similar to usual programming languages. Again, see section "&quot;Types&quot;":#types for details.
+An operation makes external behaviour defined as a function or method of a programming language accessible to a state machine. It is mapped to a suitable construct in a target language, see section "Generating state machine code":../user-guide/generating_code.html.
+
+Operations can have none, one or multiple parameters. A parameter is declared with a name and a type. An operation may have a single or no return type similar to usual programming languages. Please see section "&quot;Types&quot;":#types for details.
 
 bc. operation myOperation (xValue: integer, yValue: integer): integer
+
+Operations with a variable number of parameters are supported, too. To be more exact, it is possible to specify an operation's last parameter as being allowed to occur an arbitrary number of times. This is usually called "varargs", short for "variable number of arguments". Compared to a "regular" operation parameter declaration, the varargs parameter name is followed by three dots (@...@) to indicate it may occur zero or more times.
+
+For example, an operation _sum_ adding a variable number of summands and returning their sum could be defined as follows:
+
+bc. operation sum(count: integer, summand...: integer): integer
+
+Sample calls of this operation are @sum(1, 42)@, @sum(2, 4711, 815)@, @sum(7, 555, 338, 881, 192, 69, 999, 610)@, or even @sum(0)@. In this example the first parameter advises the called function or method of how many instances of the last parameter it should expect. Whether such information is needed or not depends on the target language. For example, a C function needs to receive this information while a Java method does not.
 
 ==<!-- End stext_keyword_operation -->==
 
@@ -700,7 +710,7 @@ As a reminder, the complete reaction syntax is as follows:
 bc. 
 Trigger [Guard] / Effect
 
-In the square brackets you can use any "expression":#expressions that evaluates to a boolean - boolean variables, all kinds of comparisons and operations that return a boolean fall into this category. Please note: YAKINDU SCT does not support the concept of "truthy and falsey" seen in C, Javascript or Python. 
+In the square brackets you can use any "expression":#expressions that evaluates to a boolean - boolean variables, all kinds of comparisons and operations returning a boolean fall into this category. Please note: YAKINDU SCT does not support the concept of "truthy and falsey" seen in C, Javascript or Python. 
 @[x]@ is not a valid guard condition unless the type of x is boolean.
 
 Please consult figure "&quot;Guard condition syntax overview&quot;":#fig_guard-condition-syntax-overview to find out how a guard condition syntactically fits into a reaction.
@@ -817,9 +827,7 @@ See also "Declaring events":#events and "Processing events":#raising-and-process
 
 h3(#calling-an-operation). Calling an operation
 
-An operation is called similar to other programming languages with the operation name and passing concrete parameters. The parameters can be expressions. The parenthesis can be omitted when no parameters are needed.
-
-###. FIXME: Add an example!
+An operation is called similarly to other programming languages using the operation name and passing concrete parameters in parenthesis and separated by comma. The parameters can be expressions. The parenthesis can be omitted when no parameters are needed. Please see section "&quot;Operations&quot;":#operations for an example.
 
 h2(#expressions). Expressions
 
