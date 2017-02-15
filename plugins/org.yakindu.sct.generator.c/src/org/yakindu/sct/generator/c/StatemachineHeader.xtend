@@ -169,7 +169,14 @@ class StatemachineHeader implements IContentTemplate {
 	'''
 	
 	private def typeRelevantDeclarations(Scope scope){
-		return scope.declarations.filter[it instanceof EventDefinition || it instanceof VariableDefinition || it instanceof TimeEvent]
+		return scope.declarations.filter[
+			switch it {
+				EventDefinition: true
+				TimeEvent: true
+				VariableDefinition: !it.const
+				default: false
+			}
+		]
 	}
 	
 	private def constDeclarations(Scope scope){
