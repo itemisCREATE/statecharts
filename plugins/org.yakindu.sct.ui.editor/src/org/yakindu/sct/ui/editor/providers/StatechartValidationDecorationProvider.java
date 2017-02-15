@@ -10,12 +10,22 @@
  */
 package org.yakindu.sct.ui.editor.providers;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Label;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.BasicNotifierImpl.EAdapterList;
+import org.eclipse.emf.common.notify.impl.BasicNotifierImpl.EObservableAdapterList.Listener;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.services.decorator.AbstractDecorator;
+import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecorator;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorProvider;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
 import org.eclipse.gmf.runtime.notation.Edge;
@@ -24,75 +34,133 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.validation.Issue;
 import org.yakindu.base.gmf.runtime.decorators.AbstractMarkerBasedDecorationProvider;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
-import org.yakindu.sct.ui.editor.validation.IMarkerType;
+import org.yakindu.sct.ui.editor.validation.LiveValidationIssueProcessor.IssueAdapter;
 
-public class StatechartValidationDecorationProvider extends AbstractMarkerBasedDecorationProvider implements
-		IDecoratorProvider, IMarkerType {
+public class StatechartValidationDecorationProvider extends AbstractMarkerBasedDecorationProvider
+		implements IDecoratorProvider {
 
 	private static final String KEY = "org.yakindu.sct.ui.editor.validation";
 
-	@Override
 	protected boolean shouldInstall(IEditorPart part) {
 		return part instanceof StatechartDiagramEditor;
 	}
 
-	@Override
 	protected String getDecoratorKey() {
 		return KEY;
 	}
 
-	@Override
-	protected StatusDecorator createStatusDecorator(IDecoratorTarget decoratorTarget) {
+	protected ValidationDecorator createStatusDecorator(IDecoratorTarget decoratorTarget) {
 		return new ValidationDecorator(decoratorTarget);
 	}
 
-	public static class ValidationDecorator extends StatusDecorator {
+	public class ValidationDecorator extends AbstractDecorator implements Listener {
+
+		private String viewId;
 
 		public ValidationDecorator(IDecoratorTarget decoratorTarget) {
 			super(decoratorTarget);
+			try {
+				final View view = (View) getDecoratorTarget().getAdapter(View.class);
+				TransactionUtil.getEditingDomain(view).runExclusive(new Runnable() {
+					public void run() {
+						ValidationDecorator.this.viewId = view != null ? ViewUtil.getIdStr(view) : null;
+					}
+				});
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
-		@Override
-		protected void createDecorators(View view, List<IMarker> markers) {
+		public void refresh() {
+			removeDecoration();
+			View view = (View) getDecoratorTarget().getAdapter(View.class);
+			if (view == null || view.eResource() == null) {
+				return;
+			}
+			EditPart editPart = (EditPart) getDecoratorTarget().getAdapter(EditPart.class);
+			if (editPart == null || editPart.getViewer() == null || !(editPart instanceof IPrimaryEditPart)) {
+				return;
+			}
+			decorate(view);
+		}
+
+		public void activate() {
+			View view = (View) getDecoratorTarget().getAdapter(View.class);
+			if (view == null || view.eResource() == null) {
+				return;
+			}
+			// add self to global decorators registry
+			List<IDecorator> list = allDecorators.get(viewId);
+			if (list == null) {
+				list = new ArrayList<IDecorator>(2);
+				list.add(this);
+				allDecorators.put(viewId, list);
+			} else if (!list.contains(this)) {
+				list.add(this);
+			}
+			EAdapterList<?> adapterList = (EAdapterList<?>) view.getElement().eAdapters();
+			adapterList.addListener(this);
+		}
+
+		public void deactivate() {
+			if (viewId == null) {
+				return;
+			}
+			List<IDecorator> list = allDecorators.get(viewId);
+			if (list != null) {
+				list.remove(this);
+				if (list.isEmpty()) {
+					allDecorators.remove(viewId);
+				}
+			}
+			View view = (View) getDecoratorTarget().getAdapter(View.class);
+			if (view == null || view.eResource() == null) {
+				return;
+			}
+			EAdapterList<?> adapterList = (EAdapterList<?>) view.getElement().eAdapters();
+			adapterList.removeListener(this);
+			super.deactivate();
+		}
+
+		protected void decorate(View view) {
 			String elementId = ViewUtil.getIdStr(view);
 			if (elementId == null) {
 				return;
 			}
-			int severity = IMarker.SEVERITY_INFO;
-			IMarker foundMarker = null;
-			Label toolTip = null;
-			for (int i = 0; i < markers.size(); i++) {
-				IMarker marker = markers.get(i);
-				String attribute = marker.getAttribute(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
-						"");
-				if (attribute.equals(elementId)) {
-					int nextSeverity = marker.getAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
-					Image nextImage = getImage(nextSeverity);
-					if (foundMarker == null) {
-						foundMarker = marker;
-						toolTip = new Label(marker.getAttribute(IMarker.MESSAGE, ""), //$NON-NLS-1$
-								nextImage);
-					} else {
-						if (toolTip.getChildren().isEmpty()) {
-							Label comositeLabel = new Label();
-							FlowLayout fl = new FlowLayout(false);
-							fl.setMinorSpacing(0);
-							comositeLabel.setLayoutManager(fl);
-							comositeLabel.add(toolTip);
-							toolTip = comositeLabel;
-						}
-						toolTip.add(new Label(marker.getAttribute(IMarker.MESSAGE, ""), //$NON-NLS-1$
-								nextImage));
-					}
-					severity = (nextSeverity > severity) ? nextSeverity : severity;
-				}
-			}
-			if (foundMarker == null) {
+
+			IssueAdapter existingAdapter = (IssueAdapter) EcoreUtil.getExistingAdapter(view.getElement(),
+					IssueAdapter.class);
+			if (existingAdapter == null)
 				return;
+			Severity severity = Severity.INFO;
+			Label toolTip = null;
+			List<Issue> issues = existingAdapter.getIssues();
+			if (issues.isEmpty())
+				return;
+			for (int i = 0; i < issues.size(); i++) {
+				Issue issue = issues.get(i);
+				Severity nextSeverity = issue.getSeverity();
+				Image nextImage = getImage(nextSeverity);
+				if (toolTip == null) {
+					toolTip = new Label(issue.getMessage(), nextImage);
+				} else {
+					if (toolTip.getChildren().isEmpty()) {
+						Label comositeLabel = new Label();
+						FlowLayout fl = new FlowLayout(false);
+						fl.setMinorSpacing(0);
+						comositeLabel.setLayoutManager(fl);
+						comositeLabel.add(toolTip);
+						toolTip = comositeLabel;
+					}
+					toolTip.add(new Label(issue.getMessage(), nextImage));
+				}
+				severity = (nextSeverity.ordinal() < severity.ordinal()) ? nextSeverity : severity;
 			}
 
 			if (view instanceof Edge) {
@@ -107,24 +175,29 @@ public class StatechartValidationDecorationProvider extends AbstractMarkerBasedD
 			}
 		}
 
-		@Override
-		protected String getMarkerType() {
-			return SCT_MARKER_TYPE;
-		}
-
-		private Image getImage(int severity) {
+		protected Image getImage(Severity severity) {
 			String imageName = ISharedImages.IMG_OBJS_ERROR_TSK;
 			switch (severity) {
-			case IMarker.SEVERITY_ERROR:
+			case ERROR:
 				imageName = ISharedImages.IMG_OBJS_ERROR_TSK;
 				break;
-			case IMarker.SEVERITY_WARNING:
+			case WARNING:
 				imageName = ISharedImages.IMG_OBJS_WARN_TSK;
 				break;
 			default:
 				imageName = ISharedImages.IMG_OBJS_INFO_TSK;
 			}
 			return PlatformUI.getWorkbench().getSharedImages().getImage(imageName);
+		}
+
+		@Override
+		public void added(Notifier notifier, Adapter adapter) {
+			refresh();
+		}
+
+		@Override
+		public void removed(Notifier notifier, Adapter adapter) {
+			refresh();
 		}
 	}
 }
