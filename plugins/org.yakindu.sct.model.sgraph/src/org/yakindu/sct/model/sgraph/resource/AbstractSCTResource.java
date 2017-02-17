@@ -178,12 +178,10 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 
 	@Override
 	public synchronized EObject getEObject(String uriFragment) {
-		long t = System.currentTimeMillis();
 		if (encoder.isCrossLinkFragment(this, uriFragment)) {
 			Triple<EObject, EReference, INode> triple = encoder.decode(this, uriFragment);
 			List<EObject> linkedObjects = null;
 			linkedObjects = linkingService.getLinkedObjects(triple.getFirst(), triple.getSecond(), triple.getThird());
-			System.out.println("Cross link fragment took" + (System.currentTimeMillis() - t));
 			if (!linkedObjects.isEmpty()) {
 				return linkedObjects.get(0);
 			} else {
@@ -192,10 +190,8 @@ public abstract class AbstractSCTResource extends XMIResourceImpl {
 			}
 		}
 		if (uriFragment != null && uriFragment.startsWith(SCT_PREFIX)) {
-			System.out.println("URI Fragment took " + (System.currentTimeMillis() - t) );
 			return super.getEObject(uriFragment.substring(SCT_PREFIX.length()));
 		}
-		System.out.println("super Fragment took " + (System.currentTimeMillis() - t) );
 		return super.getEObject(uriFragment);
 	}
 
