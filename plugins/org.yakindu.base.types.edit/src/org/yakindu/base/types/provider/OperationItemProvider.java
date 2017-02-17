@@ -97,6 +97,7 @@ public class OperationItemProvider extends DeclarationItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
 			childrenFeatures.add(TypesPackage.Literals.OPERATION__PARAMETERS);
 		}
 		return childrenFeatures;
@@ -180,6 +181,7 @@ public class OperationItemProvider extends DeclarationItemProvider {
 			case TypesPackage.OPERATION__VARIADIC:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case TypesPackage.OPERATION__TYPE_PARAMETERS:
 			case TypesPackage.OPERATION__PARAMETERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -197,6 +199,11 @@ public class OperationItemProvider extends DeclarationItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS,
+				 TypesFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter

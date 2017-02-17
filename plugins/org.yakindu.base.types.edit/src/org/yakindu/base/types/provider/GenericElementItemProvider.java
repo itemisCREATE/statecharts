@@ -1,13 +1,5 @@
-/** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at 
- * http://www.eclipse.org/legal/epl-v10.html 
- * Contributors:
- * committers of YAKINDU - initial API and implementation
- *
-*/
+/**
+ */
 package org.yakindu.base.types.provider;
 
 
@@ -16,28 +8,30 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.base.types.ParameterizedType;
+import org.yakindu.base.base.provider.NamedElementItemProvider;
+import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.base.types.ParameterizedType} object.
+ * This is the item provider adapter for a {@link org.yakindu.base.types.GenericElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ParameterizedTypeItemProvider
-	extends TypeItemProvider {
+public class GenericElementItemProvider 
+	extends NamedElementItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ParameterizedTypeItemProvider(AdapterFactory adapterFactory) {
+	public GenericElementItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -68,7 +62,7 @@ public class ParameterizedTypeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.PARAMETERIZED_TYPE__PARAMETER);
+			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
 		}
 		return childrenFeatures;
 	}
@@ -87,14 +81,14 @@ public class ParameterizedTypeItemProvider
 	}
 
 	/**
-	 * This returns ParameterizedType.gif.
+	 * This returns GenericElement.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ParameterizedType"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/GenericElement"));
 	}
 
 	/**
@@ -105,11 +99,12 @@ public class ParameterizedTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ParameterizedType)object).getName();
+		String label = ((GenericElement)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ParameterizedType_type") :
-			getString("_UI_ParameterizedType_type") + " " + label;
+			getString("_UI_GenericElement_type") :
+			getString("_UI_GenericElement_type") + " " + label;
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -122,8 +117,8 @@ public class ParameterizedTypeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ParameterizedType.class)) {
-			case TypesPackage.PARAMETERIZED_TYPE__PARAMETER:
+		switch (notification.getFeatureID(GenericElement.class)) {
+			case TypesPackage.GENERIC_ELEMENT__TYPE_PARAMETERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -143,8 +138,19 @@ public class ParameterizedTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.PARAMETERIZED_TYPE__PARAMETER,
+				(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS,
 				 TypesFactory.eINSTANCE.createTypeParameter()));
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return TypesEditPlugin.INSTANCE;
 	}
 
 }

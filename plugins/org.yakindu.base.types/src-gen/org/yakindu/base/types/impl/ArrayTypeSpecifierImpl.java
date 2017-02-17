@@ -3,11 +3,8 @@
 package org.yakindu.base.types.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;

@@ -19,10 +19,10 @@ import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
-import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.RangeConstraint;
@@ -117,6 +117,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				Operation operation = (Operation)theEObject;
 				T result = caseOperation(operation);
 				if (result == null) result = caseDeclaration(operation);
+				if (result == null) result = caseGenericElement(operation);
 				if (result == null) result = caseTypedElement(operation);
 				if (result == null) result = casePackageMember(operation);
 				if (result == null) result = caseNamedElement(operation);
@@ -191,7 +192,7 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.COMPLEX_TYPE: {
 				ComplexType complexType = (ComplexType)theEObject;
 				T result = caseComplexType(complexType);
-				if (result == null) result = caseParameterizedType(complexType);
+				if (result == null) result = caseGenericElement(complexType);
 				if (result == null) result = caseType(complexType);
 				if (result == null) result = casePackageMember(complexType);
 				if (result == null) result = caseNamedElement(complexType);
@@ -226,13 +227,10 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.PARAMETERIZED_TYPE: {
-				ParameterizedType parameterizedType = (ParameterizedType)theEObject;
-				T result = caseParameterizedType(parameterizedType);
-				if (result == null) result = caseType(parameterizedType);
-				if (result == null) result = casePackageMember(parameterizedType);
-				if (result == null) result = caseNamedElement(parameterizedType);
-				if (result == null) result = caseAnnotatableElement(parameterizedType);
+			case TypesPackage.GENERIC_ELEMENT: {
+				GenericElement genericElement = (GenericElement)theEObject;
+				T result = caseGenericElement(genericElement);
+				if (result == null) result = caseNamedElement(genericElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -526,17 +524,17 @@ public class TypesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parameterized Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Generic Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parameterized Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Generic Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseParameterizedType(ParameterizedType object) {
+	public T caseGenericElement(GenericElement object) {
 		return null;
 	}
 

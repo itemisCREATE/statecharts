@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.validation.Check;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.ComplexType;
-import org.yakindu.base.types.ParameterizedType;
+import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
@@ -85,9 +85,9 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	@Check
 	public void checkIsRaw(TypeSpecifier typedElement) {
 		Type type = typedElement.getType();
-		if (!(type instanceof ParameterizedType))
+		if (!(type instanceof GenericElement))
 			return;
-		EList<TypeParameter> typeParameter = ((ParameterizedType) type).getParameter();
+		EList<TypeParameter> typeParameter = ((GenericElement) type).getTypeParameters();
 		if (typedElement.getTypeArguments().size() == 0 && typeParameter.size() > 0) {
 			String s1 = typedElement.getType().getName();
 			String s2 = s1 + printer.concatTypeParameter(typeParameter);
@@ -99,8 +99,8 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	@Check
 	public void checkTypedElementNotGeneric(TypeSpecifier typedElement) {
 		if (typedElement.getTypeArguments().size() > 0
-				&& ((!(typedElement.getType() instanceof ParameterizedType)) || ((ParameterizedType) typedElement
-						.getType()).getParameter().size() == 0)) {
+				&& ((!(typedElement.getType() instanceof GenericElement)) || ((GenericElement) typedElement
+						.getType()).getTypeParameters().size() == 0)) {
 			String s1 = typedElement.getType().getName();
 			String s2 = printer.concatTypeArguments(typedElement.getTypeArguments());
 			error(String.format(ERROR_NOT_GENERIC_MSG, s1, s2), typedElement,
@@ -110,11 +110,11 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 
 	@Check
 	public void checkNofArguments(TypeSpecifier typedElement) {
-		if (!(typedElement.getType() instanceof ParameterizedType)) {
+		if (!(typedElement.getType() instanceof GenericElement)) {
 			return;
 		}
-		ParameterizedType type = (ParameterizedType) typedElement.getType();
-		EList<TypeParameter> typeParameter = type.getParameter();
+		GenericElement type = (GenericElement) typedElement.getType();
+		EList<TypeParameter> typeParameter = type.getTypeParameters();
 		if (typedElement.getTypeArguments().size() > 0
 				&& (typedElement.getTypeArguments().size() != typeParameter.size()) && typeParameter.size() > 0) {
 			String s1 = type.getName() + printer.concatTypeParameter(typeParameter);
@@ -125,14 +125,14 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	}
 
 	@Check
-	public void checkDuplicateTypeParameter(ParameterizedType type) {
+	public void checkDuplicateTypeParameter(GenericElement type) {
 		Set<String> names = Sets.newHashSet();
-		EList<TypeParameter> typeParameter = type.getParameter();
+		EList<TypeParameter> typeParameter = type.getTypeParameters();
 		for (TypeParameter param : typeParameter) {
 			String name = param.getName();
 			if (names.contains(name)) {
 				error(String.format(ERROR_DUPLICATE_TYPE_PARAMETER_MSG, name), type,
-						TypesPackage.Literals.PARAMETERIZED_TYPE__PARAMETER, ERROR_DUPLICATE_TYPE_PARAMETER_CODE);
+						TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS, ERROR_DUPLICATE_TYPE_PARAMETER_CODE);
 			}
 			names.add(name);
 		}
@@ -140,11 +140,11 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 
 	@Check
 	public void checkTypeParameterBounds(TypeSpecifier typedElement) {
-		if (!(typedElement.getType() instanceof ParameterizedType)) {
+		if (!(typedElement.getType() instanceof GenericElement)) {
 			return;
 		}
-		ParameterizedType type = (ParameterizedType) typedElement.getType();
-		EList<TypeParameter> typeParameter = type.getParameter();
+		GenericElement type = (GenericElement) typedElement.getType();
+		EList<TypeParameter> typeParameter = type.getTypeParameters();
 		if (typedElement.getTypeArguments().size() == 0
 				|| (typedElement.getTypeArguments().size() != typeParameter.size()))
 			return;

@@ -155,10 +155,10 @@ public class STextTestScopeProvider extends STextScopeProvider {
 		
 		TypeParameter typeParam1 = TypesFactory.eINSTANCE.createTypeParameter();
 		typeParam1.setName("T1");
-		complexType.getParameter().add(typeParam1);
+		complexType.getTypeParameters().add(typeParam1);
 		TypeParameter typeParam2 = TypesFactory.eINSTANCE.createTypeParameter();
 		typeParam2.setName("T2");
-		complexType.getParameter().add(typeParam2);
+		complexType.getTypeParameters().add(typeParam2);
 
 		Property prop1 = TypesFactory.eINSTANCE.createProperty();
 		prop1.setName("prop1");

@@ -18,7 +18,7 @@
         defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="#//TypedElement base.ecore#//NamedElement #//PackageMember"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Declaration">
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Declaration #//GenericElement">
     <eOperations name="getVarArgIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true" eOpposite="#//Parameter/owningOperation"/>
@@ -62,7 +62,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//Type">
     <eStructuralFeatures xsi:type="ecore:EReference" name="baseType" eType="#//PrimitiveType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ComplexType" eSuperTypes="#//ParameterizedType">
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexType" eSuperTypes="#//GenericElement #//Type">
     <eOperations name="getAllFeatures" upperBound="-1" eType="#//Declaration"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
         eType="#//Declaration" containment="true"/>
@@ -81,8 +81,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="TypeParameter" eSuperTypes="#//Type">
     <eStructuralFeatures xsi:type="ecore:EReference" name="bound" eType="#//Type"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" eSuperTypes="#//Type">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1"
+  <eClassifiers xsi:type="ecore:EClass" name="GenericElement" eSuperTypes="base.ecore#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameters" upperBound="-1"
         eType="#//TypeParameter" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageMember" eSuperTypes="base.ecore#//NamedElement #//AnnotatableElement">

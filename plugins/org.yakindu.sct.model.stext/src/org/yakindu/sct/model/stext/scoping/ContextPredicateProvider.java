@@ -73,7 +73,6 @@ public class ContextPredicateProvider {
 			EClass eClass = input.getEClass();
 			
 			return (SGraphPackage.Literals.SCOPE.isSuperTypeOf(eClass)); 
-//					|| (TypesPackage.Literals.DECLARATION.isSuperTypeOf(eClass));
 		}
 	}
 

@@ -20,10 +20,10 @@ import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
-import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.RangeConstraint;
@@ -149,8 +149,8 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createTypeParameterAdapter();
 			}
 			@Override
-			public Adapter caseParameterizedType(ParameterizedType object) {
-				return createParameterizedTypeAdapter();
+			public Adapter caseGenericElement(GenericElement object) {
+				return createGenericElementAdapter();
 			}
 			@Override
 			public Adapter casePackageMember(PackageMember object) {
@@ -432,16 +432,16 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.ParameterizedType <em>Parameterized Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.GenericElement <em>Generic Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.base.types.ParameterizedType
+	 * @see org.yakindu.base.types.GenericElement
 	 * @generated
 	 */
-	public Adapter createParameterizedTypeAdapter() {
+	public Adapter createGenericElementAdapter() {
 		return null;
 	}
 
