@@ -10,17 +10,18 @@
  */
 package org.yakindu.sct.ui.editor.providers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Label;
-import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.editparts.AbstractConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.AbstractDecorator;
-import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecorator;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorProvider;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
 import org.eclipse.gmf.runtime.notation.Edge;
@@ -31,7 +32,7 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.Issue;
-import org.yakindu.base.gmf.runtime.decorators.AbstractMarkerBasedDecorationProvider;
+import org.yakindu.base.gmf.runtime.decorators.AbstractDecoratorProvider;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
@@ -39,12 +40,29 @@ import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore.IResourceIssueStoreListener;
 
-public class StatechartValidationDecorationProvider extends AbstractMarkerBasedDecorationProvider
-		implements IDecoratorProvider {
+/**
+ * 
+ * @author Andreas Muelder - Initial contribution and API
+ *
+ */
+public class StatechartValidationDecorationProvider extends AbstractDecoratorProvider implements IDecoratorProvider {
 
 	private static final String KEY = "org.yakindu.sct.ui.editor.validation";
 
 	private IValidationIssueStore issueStore;
+
+	public void createDecorators(IDecoratorTarget decoratorTarget) {
+		EditPart editPart = (EditPart) decoratorTarget.getAdapter(EditPart.class);
+		if (editPart instanceof GraphicalEditPart || editPart instanceof AbstractConnectionEditPart) {
+			EditDomain ed = editPart.getViewer().getEditDomain();
+			if (!(ed instanceof DiagramEditDomain)) {
+				return;
+			}
+			if (shouldInstall(((DiagramEditDomain) ed).getEditorPart())) {
+				decoratorTarget.installDecorator(getDecoratorKey(), createStatusDecorator(decoratorTarget));
+			}
+		}
+	}
 
 	protected boolean shouldInstall(IEditorPart part) {
 		if (part instanceof StatechartDiagramEditor) {
@@ -64,20 +82,8 @@ public class StatechartValidationDecorationProvider extends AbstractMarkerBasedD
 
 	public class ValidationDecorator extends AbstractDecorator implements IResourceIssueStoreListener {
 
-		private String viewId;
-
 		public ValidationDecorator(IDecoratorTarget decoratorTarget) {
 			super(decoratorTarget);
-			try {
-				final View view = (View) getDecoratorTarget().getAdapter(View.class);
-				TransactionUtil.getEditingDomain(view).runExclusive(new Runnable() {
-					public void run() {
-						ValidationDecorator.this.viewId = view != null ? ViewUtil.getIdStr(view) : null;
-					}
-				});
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 
 		public void refresh() {
@@ -94,38 +100,10 @@ public class StatechartValidationDecorationProvider extends AbstractMarkerBasedD
 		}
 
 		public void activate() {
-			View view = (View) getDecoratorTarget().getAdapter(View.class);
-			if (view == null || view.eResource() == null) {
-				return;
-			}
-			// add self to global decorators registry
-			List<IDecorator> list = allDecorators.get(viewId);
-			if (list == null) {
-				list = new ArrayList<IDecorator>(2);
-				list.add(this);
-				allDecorators.put(viewId, list);
-			} else if (!list.contains(this)) {
-				list.add(this);
-			}
 			issueStore.addIssueStoreListener(this);
 		}
 
 		public void deactivate() {
-			if (viewId == null) {
-				return;
-			}
-			List<IDecorator> list = allDecorators.get(viewId);
-			if (list != null) {
-				list.remove(this);
-				if (list.isEmpty()) {
-					allDecorators.remove(viewId);
-				}
-			}
-			View view = (View) getDecoratorTarget().getAdapter(View.class);
-			if (view == null || view.eResource() == null) {
-				return;
-			}
-			issueStore.removeIssueStoreListener(this);
 			super.deactivate();
 		}
 
