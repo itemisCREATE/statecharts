@@ -34,7 +34,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.yakindu.base.gmf.runtime.decorators.AbstractMarkerBasedDecorationProvider;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Pseudostate;
-import org.yakindu.sct.model.sgraph.ui.validation.StatechartIssue;
+import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore.IResourceIssueStoreListener;
@@ -134,7 +134,7 @@ public class StatechartValidationDecorationProvider extends AbstractMarkerBasedD
 			if (elementId == null) {
 				return;
 			}
-			List<StatechartIssue> issues = issueStore.getIssues(elementId);
+			List<SCTIssue> issues = issueStore.getIssues(elementId);
 			Severity severity = Severity.INFO;
 			Label toolTip = null;
 			if (issues.isEmpty())

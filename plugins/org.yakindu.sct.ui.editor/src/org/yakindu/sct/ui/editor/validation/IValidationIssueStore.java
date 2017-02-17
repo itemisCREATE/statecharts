@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
-import org.yakindu.sct.model.sgraph.ui.validation.StatechartIssue;
+import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 
 import com.google.inject.ImplementedBy;
 
@@ -41,5 +41,5 @@ public interface IValidationIssueStore extends IValidationIssueProcessor {
 
 	public void disconnect(Resource resource);
 
-	public List<StatechartIssue> getIssues(String uri);
+	public List<SCTIssue> getIssues(String uri);
 }

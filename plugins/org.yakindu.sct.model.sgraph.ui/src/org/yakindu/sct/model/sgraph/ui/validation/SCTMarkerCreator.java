@@ -28,8 +28,8 @@ public class SCTMarkerCreator extends MarkerCreator {
 	@Override
 	protected void setMarkerAttributes(Issue issue, IResource resource, IMarker marker) throws CoreException {
 		super.setMarkerAttributes(issue, resource, marker);
-		if (issue instanceof StatechartIssue) {
-			marker.setAttribute(ELEMENT_ID, ((StatechartIssue) issue).getNotationViewURI());
+		if (issue instanceof SCTIssue) {
+			marker.setAttribute(ELEMENT_ID, ((SCTIssue) issue).getNotationViewURI());
 		}
 	}
 

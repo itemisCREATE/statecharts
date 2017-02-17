@@ -18,9 +18,10 @@ import org.eclipse.xtext.validation.Issue.IssueImpl;
 
 /**
  * 
- * @author andreas muelder - Initial contribution and API x
+ * @author andreas muelder - Initial contribution and API
+ * 
  */
-public class StatechartIssue extends IssueImpl {
+public class SCTIssue extends IssueImpl {
 
 	private final Issue delegate;
 
@@ -28,7 +29,7 @@ public class StatechartIssue extends IssueImpl {
 
 	private boolean stale;
 
-	public StatechartIssue(final Issue delegate, String notationViewURI) {
+	public SCTIssue(final Issue delegate, String notationViewURI) {
 		this.delegate = delegate;
 		this.notationViewURI = notationViewURI;
 	}
@@ -84,45 +85,4 @@ public class StatechartIssue extends IssueImpl {
 	public String[] getData() {
 		return delegate.getData();
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((getCode() == null) ? 0 : getCode().hashCode());
-		result = prime * result + ((getMessage() == null) ? 0 : getMessage().hashCode());
-		result = prime * result + ((notationViewURI == null) ? 0 : notationViewURI.hashCode());
-		result = prime * result + ((getSeverity() == null) ? 0 : getSeverity().hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		StatechartIssue other = (StatechartIssue) obj;
-		if (getCode() == null) {
-			if (other.getCode() != null)
-				return false;
-		} else if (!getCode().equals(other.getCode()))
-			return false;
-		if (getCode() == null) {
-			if (other.getCode() != null)
-				return false;
-		} else if (!getMessage().equals(other.getMessage()))
-			return false;
-		if (notationViewURI == null) {
-			if (other.notationViewURI != null)
-				return false;
-		} else if (!notationViewURI.equals(other.notationViewURI))
-			return false;
-		if (getSeverity() != other.getSeverity())
-			return false;
-		return true;
-	}
-
 }

@@ -22,7 +22,7 @@ public class SCTMarkerTypeProvider extends MarkerTypeProvider {
 
 	@Override
 	public String getMarkerType(Issue issue) {
-		if (issue instanceof StatechartIssue) {
+		if (issue instanceof SCTIssue) {
 			return "org.yakindu.sct.ui.editor.diagnostic";
 		}
 		return super.getMarkerType(issue);

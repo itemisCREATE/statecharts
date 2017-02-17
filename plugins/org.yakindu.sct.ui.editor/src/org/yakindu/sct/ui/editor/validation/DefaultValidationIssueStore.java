@@ -28,7 +28,7 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.Issue;
-import org.yakindu.sct.model.sgraph.ui.validation.StatechartIssue;
+import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 
@@ -51,8 +51,8 @@ public class DefaultValidationIssueStore
 
 	private List<IResourceIssueStoreListener> listener;
 	// the URI of the notation element
-	private Multimap<String, StatechartIssue> persistentIssues;
-	private Multimap<String, StatechartIssue> liveIssues;
+	private Multimap<String, SCTIssue> persistentIssues;
+	private Multimap<String, SCTIssue> liveIssues;
 	private boolean connected = false;
 
 	private Resource resource;
@@ -109,7 +109,7 @@ public class DefaultValidationIssueStore
 			e.printStackTrace();
 		}
 		for (IMarker iMarker : markers) {
-			StatechartIssue issue = createFromMarker(iMarker);
+			SCTIssue issue = createFromMarker(iMarker);
 			persistentIssues.put(issue.getNotationViewURI(), issue);
 		}
 		notifyListeners();
@@ -125,10 +125,10 @@ public class DefaultValidationIssueStore
 		connected = false;
 	}
 
-	protected StatechartIssue createFromMarker(IMarker marker) {
+	protected SCTIssue createFromMarker(IMarker marker) {
 		String notationURI = marker.getAttribute(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID, "");
 		Issue delegate = issueCreator.createIssue(marker);
-		StatechartIssue issue = new StatechartIssue(delegate, notationURI);
+		SCTIssue issue = new SCTIssue(delegate, notationURI);
 		return issue;
 	}
 
@@ -136,17 +136,17 @@ public class DefaultValidationIssueStore
 	public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
 		liveIssues.clear();
 		for (Issue issue : issues) {
-			if (issue instanceof StatechartIssue) {
-				String notationViewURI = ((StatechartIssue) issue).getNotationViewURI();
-				liveIssues.put(notationViewURI, (StatechartIssue) issue);
+			if (issue instanceof SCTIssue) {
+				String notationViewURI = ((SCTIssue) issue).getNotationViewURI();
+				liveIssues.put(notationViewURI, (SCTIssue) issue);
 			}
 		}
 		notifyListeners();
 	}
 
 	@Override
-	public List<StatechartIssue> getIssues(String uri) {
-		List<StatechartIssue> result = Lists.newArrayList();
+	public List<SCTIssue> getIssues(String uri) {
+		List<SCTIssue> result = Lists.newArrayList();
 		if (!liveValidationEnabled()) {
 			result.addAll(persistentIssues.get(uri));
 			return result;
