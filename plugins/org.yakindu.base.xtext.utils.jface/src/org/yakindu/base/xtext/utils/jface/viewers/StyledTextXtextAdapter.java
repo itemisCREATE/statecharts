@@ -198,7 +198,7 @@ public class StyledTextXtextAdapter {
 		decoration.setShowOnlyOnFocus(true);
 
 		final Image image = ImageDescriptor.createFromFile(XtextStyledTextCellEditor.class,
-				"images/lamp.png").createImage();
+				"images/content_assist_cue.gif").createImage();
 		decoration.setImage(image);
 		decoration.setDescriptionText("Content Assist Available (CTRL + Space)");
 		decoration.setMarginWidth(2);
