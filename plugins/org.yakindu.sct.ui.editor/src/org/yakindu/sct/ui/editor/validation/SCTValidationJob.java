@@ -25,6 +25,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -43,8 +44,8 @@ public class SCTValidationJob extends Job {
 
 	@Inject
 	private IResourceValidator validator;
-	@Inject
-	private ISCTIssueProcessor validationIssueProcessor;
+
+	private IValidationIssueProcessor validationIssueProcessor;
 
 	private Resource resource;
 
@@ -117,7 +118,7 @@ public class SCTValidationJob extends Job {
 			if (issues == null)
 				return Status.CANCEL_STATUS;
 
-			validationIssueProcessor.processIssues(resource, issues, monitor);
+			validationIssueProcessor.processIssues(issues, monitor);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -150,6 +151,10 @@ public class SCTValidationJob extends Job {
 
 	public void setResource(Resource resource) {
 		this.resource = resource;
+	}
+	
+	public void setValidationIssueProcessor(IValidationIssueProcessor validationIssueProcessor) {
+		this.validationIssueProcessor = validationIssueProcessor;
 	}
 
 }

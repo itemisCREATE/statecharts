@@ -60,6 +60,7 @@ import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.proposals.ContentProposalViewerKeyHandler;
 import org.yakindu.sct.ui.editor.providers.ISCTOutlineFactory;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
+import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
 import org.yakindu.sct.ui.editor.validation.LiveValidationListener;
 
 import com.google.inject.Injector;
@@ -80,6 +81,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	private DirtyStateListener domainAdapter;
 	private LiveValidationListener validationListener;
+	private IValidationIssueStore issueStore;
 
 	public StatechartDiagramEditor() {
 		super(true);
@@ -143,10 +145,13 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	}
 
 	private void registerValidationListener() {
+		issueStore = getEditorInjector().getInstance(IValidationIssueStore.class);
+		issueStore.connect(getDiagram().eResource());
 		validationListener = getEditorInjector().getInstance(LiveValidationListener.class);
 		validationListener.setResource(getDiagram().eResource());
+		validationListener.setValidationIssueProcessor(issueStore);
 		getEditingDomain().addResourceSetListener(validationListener);
-		validationListener.forceValidation();
+		validationListener.scheduleValidation();
 	}
 
 	protected Injector getEditorInjector() {
@@ -293,6 +298,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		if (validationListener != null) {
 			validationListener.dispose();
 		}
+		issueStore.disconnect(getDiagram().eResource());
 		getEditingDomain().removeResourceSetListener(validationListener);
 		getEditingDomain().removeResourceSetListener(domainAdapter);
 		if (domainAdapter != null)
@@ -309,6 +315,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class type) {
 		if (IContentOutlinePage.class.equals(type)) {
 			return createOutline(type);
+		} else if (IValidationIssueStore.class.equals(type)) {
+			return issueStore;
 		}
 		return super.getAdapter(type);
 	}

@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
@@ -60,8 +61,10 @@ public class LiveValidationListener extends ResourceSetListenerImpl {
 		}
 	}
 
-	public void forceValidation() {
-		validationJob.schedule();
+	public void scheduleValidation() {
+		if (liveValidationEnabled()) {
+			validationJob.schedule();
+		}
 	}
 
 	protected boolean liveValidationEnabled() {
@@ -74,8 +77,13 @@ public class LiveValidationListener extends ResourceSetListenerImpl {
 		validationJob.setRule(WorkspaceSynchronizer.getFile(resource));
 	}
 
+	public void setValidationIssueProcessor(IValidationIssueProcessor validationIssueProcessor) {
+		validationJob.setValidationIssueProcessor(validationIssueProcessor);
+	}
+
 	public void dispose() {
 		if (validationJob != null)
 			validationJob.cancel();
 	}
+
 }

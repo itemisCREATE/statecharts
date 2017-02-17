@@ -47,8 +47,8 @@ public class SCTDiagnosticConverterImpl extends DiagnosticConverterImpl {
 						if (eObject != null && eObject.eResource() != null) {
 							View notationView = findNotationView(eObject);
 							if (notationView != null && notationView.eResource() != null) {
-								acceptor.accept(new SCTMarkerCreator.WrappingIssue(t, notationView.eResource()
-										.getURIFragment(notationView)));
+								acceptor.accept(
+										new StatechartIssue(t, notationView.eResource().getURIFragment(notationView)));
 								notAccepted = false;
 							}
 						}

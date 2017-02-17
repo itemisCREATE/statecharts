@@ -15,11 +15,6 @@ import java.util.List;
 
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Label;
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.notify.impl.BasicNotifierImpl.EAdapterList;
-import org.eclipse.emf.common.notify.impl.BasicNotifierImpl.EObservableAdapterList.Listener;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
@@ -39,16 +34,24 @@ import org.eclipse.xtext.validation.Issue;
 import org.yakindu.base.gmf.runtime.decorators.AbstractMarkerBasedDecorationProvider;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Pseudostate;
+import org.yakindu.sct.model.sgraph.ui.validation.StatechartIssue;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
-import org.yakindu.sct.ui.editor.validation.LiveValidationIssueProcessor.IssueAdapter;
+import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
+import org.yakindu.sct.ui.editor.validation.IValidationIssueStore.IResourceIssueStoreListener;
 
 public class StatechartValidationDecorationProvider extends AbstractMarkerBasedDecorationProvider
 		implements IDecoratorProvider {
 
 	private static final String KEY = "org.yakindu.sct.ui.editor.validation";
 
+	private IValidationIssueStore issueStore;
+
 	protected boolean shouldInstall(IEditorPart part) {
-		return part instanceof StatechartDiagramEditor;
+		if (part instanceof StatechartDiagramEditor) {
+			issueStore = (IValidationIssueStore) part.getAdapter(IValidationIssueStore.class);
+			return true;
+		}
+		return false;
 	}
 
 	protected String getDecoratorKey() {
@@ -59,7 +62,7 @@ public class StatechartValidationDecorationProvider extends AbstractMarkerBasedD
 		return new ValidationDecorator(decoratorTarget);
 	}
 
-	public class ValidationDecorator extends AbstractDecorator implements Listener {
+	public class ValidationDecorator extends AbstractDecorator implements IResourceIssueStoreListener {
 
 		private String viewId;
 
@@ -104,8 +107,7 @@ public class StatechartValidationDecorationProvider extends AbstractMarkerBasedD
 			} else if (!list.contains(this)) {
 				list.add(this);
 			}
-			EAdapterList<?> adapterList = (EAdapterList<?>) view.getElement().eAdapters();
-			adapterList.addListener(this);
+			issueStore.addIssueStoreListener(this);
 		}
 
 		public void deactivate() {
@@ -123,8 +125,7 @@ public class StatechartValidationDecorationProvider extends AbstractMarkerBasedD
 			if (view == null || view.eResource() == null) {
 				return;
 			}
-			EAdapterList<?> adapterList = (EAdapterList<?>) view.getElement().eAdapters();
-			adapterList.removeListener(this);
+			issueStore.removeIssueStoreListener(this);
 			super.deactivate();
 		}
 
@@ -133,14 +134,9 @@ public class StatechartValidationDecorationProvider extends AbstractMarkerBasedD
 			if (elementId == null) {
 				return;
 			}
-
-			IssueAdapter existingAdapter = (IssueAdapter) EcoreUtil.getExistingAdapter(view.getElement(),
-					IssueAdapter.class);
-			if (existingAdapter == null)
-				return;
+			List<StatechartIssue> issues = issueStore.getIssues(elementId);
 			Severity severity = Severity.INFO;
 			Label toolTip = null;
-			List<Issue> issues = existingAdapter.getIssues();
 			if (issues.isEmpty())
 				return;
 			for (int i = 0; i < issues.size(); i++) {
@@ -191,12 +187,7 @@ public class StatechartValidationDecorationProvider extends AbstractMarkerBasedD
 		}
 
 		@Override
-		public void added(Notifier notifier, Adapter adapter) {
-			refresh();
-		}
-
-		@Override
-		public void removed(Notifier notifier, Adapter adapter) {
+		public void issuesChanged() {
 			refresh();
 		}
 	}
