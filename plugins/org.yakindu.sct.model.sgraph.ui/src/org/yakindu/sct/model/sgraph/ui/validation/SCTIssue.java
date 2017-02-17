@@ -27,19 +27,9 @@ public class SCTIssue extends IssueImpl {
 
 	private final String notationViewURI;
 
-	private boolean stale;
-
 	public SCTIssue(final Issue delegate, String notationViewURI) {
 		this.delegate = delegate;
 		this.notationViewURI = notationViewURI;
-	}
-
-	public boolean isStale() {
-		return stale;
-	}
-
-	public void setStale(boolean stale) {
-		this.stale = stale;
 	}
 
 	public String getNotationViewURI() {
