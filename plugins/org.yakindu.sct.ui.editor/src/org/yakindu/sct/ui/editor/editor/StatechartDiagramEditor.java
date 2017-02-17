@@ -144,7 +144,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		registerValidationListener();
 	}
 
-	private void registerValidationListener() {
+	protected void registerValidationListener() {
 		issueStore = getEditorInjector().getInstance(IValidationIssueStore.class);
 		issueStore.connect(getDiagram().eResource());
 		validationListener = getEditorInjector().getInstance(LiveValidationListener.class);
@@ -160,7 +160,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		return injector;
 	}
 
-	private void checkXtextNature() {
+	protected void checkXtextNature() {
 		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
 		IProject project = editorInput.getFile().getProject();
 		if (project != null && !XtextProjectHelper.hasNature(project) && project.isAccessible()
