@@ -21,22 +21,25 @@ import org.eclipse.ui.dialogs.PropertyPage;
  */
 public class YakinduRootPropertyPage extends PropertyPage {
 
+	private YakinduRootPageContent yakinduRootPageContent;
+
 	/**
 	 * Constructor for SamplePropertyPage.
 	 */
 	public YakinduRootPropertyPage() {
 		super();
+		yakinduRootPageContent = new YakinduRootPageContent();
 	}
 
 	@Override
 	protected Control createContents(Composite parent) {
-		new YakinduRootPageContent().createContents(parent);
+		yakinduRootPageContent.createContents(parent);
 		return parent;
 	}
 
 	@Override
 	public void createControl(Composite parent) {
-		setControl(new YakinduRootPageContent().createControl(parent));
+		setControl(yakinduRootPageContent.createControl(parent));
 	}
 
 	protected void performDefaults() {

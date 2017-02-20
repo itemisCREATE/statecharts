@@ -24,15 +24,21 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 public class YakinduRootPreferencePage extends PreferencePage implements
 		IWorkbenchPreferencePage {
 
+	private YakinduRootPageContent yakinduRootPageContent;
+
+	public YakinduRootPreferencePage() {
+		yakinduRootPageContent = new YakinduRootPageContent();
+	}
+
 	@Override
 	protected Control createContents(Composite parent) {
-		new YakinduRootPageContent().createContents(parent);
+		yakinduRootPageContent.createContents(parent);
 		return parent;
 	}
 
 	@Override
 	public void createControl(Composite parent) {
-		setControl(new YakinduRootPageContent().createControl(parent));
+		setControl(yakinduRootPageContent.createControl(parent));
 	}
 
 	public void init(IWorkbench workbench) {
