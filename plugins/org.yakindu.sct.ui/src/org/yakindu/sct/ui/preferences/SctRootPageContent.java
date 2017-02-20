@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Listener;
  * @author johannes dicks - Initial contribution and API
  * 
  */
-public class YakinduRootPageContent {
+public class SctRootPageContent {
 
 	// Visit us ;-)
 	private static final String YAKINDU_ORG = "http://www.statecharts.org/";

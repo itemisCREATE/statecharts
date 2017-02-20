@@ -14,7 +14,7 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="org.yakindu.sct.ui.preferences.YakinduRootPreferencePage"
+            class="org.yakindu.sct.ui.preferences.SctRootPreferencePage"
             id="org.yakindu.sct.ui.preferences.root"
             name="YAKINDU SCT">
       </page>
@@ -34,7 +34,7 @@
    <extension
          point="org.eclipse.ui.propertyPages">
       <page
-            class="org.yakindu.sct.ui.preferences.YakinduRootPropertyPage"
+            class="org.yakindu.sct.ui.preferences.SctRootPropertyPage"
             id="org.yakindu.sct.ui.properties.root"
             name="YAKINDU SCT">
          <enabledWhen>

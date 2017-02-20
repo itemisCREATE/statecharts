@@ -10,24 +10,22 @@
  */
 package org.yakindu.sct.ui.preferences;
 
-import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.eclipse.ui.dialogs.PropertyPage;
 
 /**
  * 
- * @author andreas muelder - Initial contribution and API
+ * @author johannes dicks - Initial contribution and API
  * 
  */
-public class YakinduRootPreferencePage extends PreferencePage implements
-		IWorkbenchPreferencePage {
+public class SctRootPropertyPage extends PropertyPage {
 
-	private YakinduRootPageContent yakinduRootPageContent;
+	private SctRootPageContent yakinduRootPageContent;
 
-	public YakinduRootPreferencePage() {
-		yakinduRootPageContent = new YakinduRootPageContent();
+	public SctRootPropertyPage() {
+		super();
+		yakinduRootPageContent = new SctRootPageContent();
 	}
 
 	@Override
@@ -41,8 +39,12 @@ public class YakinduRootPreferencePage extends PreferencePage implements
 		setControl(yakinduRootPageContent.createControl(parent));
 	}
 
-	public void init(IWorkbench workbench) {
-		// Nothing to do
+	protected void performDefaults() {
+		super.performDefaults();
+	}
+	
+	public boolean performOk() {
+		return true;
 	}
 
 }
