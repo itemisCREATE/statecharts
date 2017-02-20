@@ -23,9 +23,6 @@ public class YakinduRootPropertyPage extends PropertyPage {
 
 	private YakinduRootPageContent yakinduRootPageContent;
 
-	/**
-	 * Constructor for SamplePropertyPage.
-	 */
 	public YakinduRootPropertyPage() {
 		super();
 		yakinduRootPageContent = new YakinduRootPageContent();
