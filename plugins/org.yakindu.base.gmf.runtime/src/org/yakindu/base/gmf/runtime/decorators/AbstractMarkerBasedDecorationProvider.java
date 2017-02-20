@@ -48,18 +48,18 @@ import org.eclipse.ui.PlatformUI;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractMarkerBasedDecorationProvider extends AbstractDecoratorProvider implements
-		IDecoratorProvider {
+public abstract class AbstractMarkerBasedDecorationProvider extends AbstractDecoratorProvider
+		implements IDecoratorProvider {
 
 	private static MarkerObserver fileObserver;
 
-	private static Map<String, List<IDecorator>> allDecorators = new HashMap<String, List<IDecorator>>();
+	protected static Map<String, List<IDecorator>> allDecorators = new HashMap<String, List<IDecorator>>();
 
 	protected abstract boolean shouldInstall(IEditorPart part);
 
 	protected abstract String getDecoratorKey();
 
-	protected abstract StatusDecorator createStatusDecorator(IDecoratorTarget decoratorTarget);
+	protected abstract IDecorator createStatusDecorator(IDecoratorTarget decoratorTarget);
 
 	public void createDecorators(IDecoratorTarget decoratorTarget) {
 		EditPart editPart = (EditPart) decoratorTarget.getAdapter(EditPart.class);

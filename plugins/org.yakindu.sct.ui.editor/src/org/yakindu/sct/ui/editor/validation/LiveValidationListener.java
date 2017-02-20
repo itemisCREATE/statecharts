@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.ui.editor.editor;
+package org.yakindu.sct.ui.editor.validation;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
@@ -17,17 +17,17 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
-import org.yakindu.sct.ui.editor.validation.SCTValidationJob;
 
 import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
  */
-public class ResourceSetValidationListener extends ResourceSetListenerImpl {
+public class LiveValidationListener extends ResourceSetListenerImpl {
 
 	private static final int DELAY = 200; // ms
 
@@ -61,6 +61,12 @@ public class ResourceSetValidationListener extends ResourceSetListenerImpl {
 		}
 	}
 
+	public void scheduleValidation() {
+		if (liveValidationEnabled()) {
+			validationJob.schedule();
+		}
+	}
+
 	protected boolean liveValidationEnabled() {
 		return DiagramActivator.getDefault().getPreferenceStore()
 				.getBoolean(StatechartPreferenceConstants.PREF_LIVE_VALIDATION);
@@ -71,8 +77,13 @@ public class ResourceSetValidationListener extends ResourceSetListenerImpl {
 		validationJob.setRule(WorkspaceSynchronizer.getFile(resource));
 	}
 
+	public void setValidationIssueProcessor(IValidationIssueProcessor validationIssueProcessor) {
+		validationJob.setValidationIssueProcessor(validationIssueProcessor);
+	}
+
 	public void dispose() {
 		if (validationJob != null)
 			validationJob.cancel();
 	}
+
 }

@@ -12,7 +12,6 @@ package org.yakindu.sct.model.sgraph.ui.validation;
 
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.Issue;
-import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator.WrappingIssue;
 
 /**
  * 
@@ -23,7 +22,7 @@ public class SCTMarkerTypeProvider extends MarkerTypeProvider {
 
 	@Override
 	public String getMarkerType(Issue issue) {
-		if (issue instanceof WrappingIssue) {
+		if (issue instanceof SCTIssue) {
 			return "org.yakindu.sct.ui.editor.diagnostic";
 		}
 		return super.getMarkerType(issue);

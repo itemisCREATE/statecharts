@@ -13,25 +13,19 @@ package org.yakindu.sct.ui.editor.validation;
 import java.util.List;
 
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
+import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -40,20 +34,18 @@ import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@Singleton
-public class SCTValidationJob extends Job implements IMarkerType {
+public class SCTValidationJob extends Job {
 
 	@Inject
 	private IResourceValidator validator;
-	@Inject
-	private MarkerCreator creator;
+
+	private IValidationIssueProcessor validationIssueProcessor;
 
 	private Resource resource;
 
@@ -98,7 +90,6 @@ public class SCTValidationJob extends Job implements IMarkerType {
 
 	@Override
 	public IStatus run(final IProgressMonitor monitor) {
-//		long t = System.currentTimeMillis();
 		try {
 			if (!resource.isLoaded())
 				return Status.CANCEL_STATUS;
@@ -120,42 +111,20 @@ public class SCTValidationJob extends Job implements IMarkerType {
 			try {
 				editingDomain.runExclusive(runner);
 			} catch (Throwable ex) {
-				//Since xtext 2.8 this may throw an OperationCanceledError
+				// Since xtext 2.8 this may throw an OperationCanceledError
 				return Status.CANCEL_STATUS;
 			}
 			final List<Issue> issues = runner.getResult();
 			if (issues == null)
 				return Status.CANCEL_STATUS;
-			final IFile target = WorkspaceSynchronizer.getFile(resource);
-			refreshMarkers(target, issues, monitor);
+
+			validationIssueProcessor.processIssues(issues, monitor);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID, ex.getMessage());
 		}
-//		System.out.println("Validation took " + (System.currentTimeMillis() - t));
 		return Status.OK_STATUS;
-	}
-
-	/**
-	 * Updates the markers. Execute the marker update in the UI thread, the
-	 * problem markers // will flicker otherwise
-	 */
-	private void refreshMarkers(final IFile target, final List<Issue> issues, final IProgressMonitor monitor) {
-		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-			public void run() {
-				try {
-					target.deleteMarkers(SCT_MARKER_TYPE, true, IResource.DEPTH_ZERO);
-					for (Issue issue : issues) {
-						if (monitor.isCanceled())
-							return;
-						creator.createMarker(issue, target, SCT_MARKER_TYPE);
-					}
-				} catch (CoreException e) {
-					throw new WrappedException(e);
-				}
-			}
-		});
 	}
 
 	/**
@@ -182,6 +151,10 @@ public class SCTValidationJob extends Job implements IMarkerType {
 
 	public void setResource(Resource resource) {
 		this.resource = resource;
+	}
+	
+	public void setValidationIssueProcessor(IValidationIssueProcessor validationIssueProcessor) {
+		this.validationIssueProcessor = validationIssueProcessor;
 	}
 
 }

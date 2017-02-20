@@ -15,7 +15,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
@@ -56,12 +55,13 @@ import org.yakindu.sct.domain.extension.DomainStatus;
 import org.yakindu.sct.domain.extension.DomainStatus.Severity;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.ui.editor.DiagramActivator;
-import org.yakindu.sct.ui.editor.partitioning.DiagramEditorInput;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.proposals.ContentProposalViewerKeyHandler;
 import org.yakindu.sct.ui.editor.providers.ISCTOutlineFactory;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
+import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
+import org.yakindu.sct.ui.editor.validation.LiveValidationListener;
 
 import com.google.inject.Injector;
 import com.google.inject.Key;
@@ -73,13 +73,15 @@ import com.google.inject.Key;
 @SuppressWarnings("restriction")
 public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker {
 
+	private static final int INITIAL_PALETTE_SIZE = 175;
 	private static final Font INVALID_DOMAIN_FONT = new Font(null, new FontData("Verdana", 10, SWT.BOLD));
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 
 	private KeyHandler keyHandler;
 
 	private DirtyStateListener domainAdapter;
-	private ResourceSetValidationListener validationListener;
+	private LiveValidationListener validationListener;
+	private IValidationIssueStore issueStore;
 
 	public StatechartDiagramEditor() {
 		super(true);
@@ -124,14 +126,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		parent.pack(true);
 	}
 
-	@Override
-	public Object getAdapter(@SuppressWarnings("rawtypes") Class type) {
-		if (IContentOutlinePage.class.equals(type)) {
-			return createOutline(type);
-		}
-		return super.getAdapter(type);
-	}
-
 	protected Object createOutline(Class<?> type) {
 		Injector editorInjector = getEditorInjector();
 		boolean outlineBindingExists = null != editorInjector.getExistingBinding(Key.get(ISCTOutlineFactory.class));
@@ -150,10 +144,14 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		registerValidationListener();
 	}
 
-	private void registerValidationListener() {
-		validationListener = getEditorInjector().getInstance(ResourceSetValidationListener.class);
+	protected void registerValidationListener() {
+		issueStore = getEditorInjector().getInstance(IValidationIssueStore.class);
+		issueStore.connect(getDiagram().eResource());
+		validationListener = getEditorInjector().getInstance(LiveValidationListener.class);
 		validationListener.setResource(getDiagram().eResource());
+		validationListener.setValidationIssueProcessor(issueStore);
 		getEditingDomain().addResourceSetListener(validationListener);
+		validationListener.scheduleValidation();
 	}
 
 	protected Injector getEditorInjector() {
@@ -162,7 +160,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		return injector;
 	}
 
-	private void checkXtextNature() {
+	protected void checkXtextNature() {
 		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
 		IProject project = editorInput.getFile().getProject();
 		if (project != null && !XtextProjectHelper.hasNature(project) && project.isAccessible()
@@ -258,10 +256,11 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			// Zoom in - Windows - German layout ([CTRL++] propagates char 0x1d)
 			getKeyHandler().put(KeyStroke.getPressed((char) 0x1d, 0x2b, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
-			
+
 			// Test Error - for AERI testing only
-//			DOWN: stateMask=0x50000 CTRL ALT, keyCode=0x6c 'l', character=0xc ''
-			getKeyHandler().put(KeyStroke.getPressed((char)0xc, 0x6c,  0x50000), new Action() {
+			// DOWN: stateMask=0x50000 CTRL ALT, keyCode=0x6c 'l', character=0xc
+			// ' '
+			getKeyHandler().put(KeyStroke.getPressed((char) 0xc, 0x6c, 0x50000), new Action() {
 				@Override
 				public void run() {
 					DiagramActivator.getDefault().getLog()
@@ -299,27 +298,26 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		if (validationListener != null) {
 			validationListener.dispose();
 		}
+		issueStore.disconnect(getDiagram().eResource());
 		getEditingDomain().removeResourceSetListener(validationListener);
 		getEditingDomain().removeResourceSetListener(domainAdapter);
 		if (domainAdapter != null)
 			domainAdapter.dispose();
-		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
-		try {
-
-			// Touch the file for revalidation, when the user did not save
-			// the changes, only for the "root editor"
-			if (editorInput != null && !(editorInput instanceof DiagramEditorInput) && isDirty()
-					&& editorInput.getFile() != null && editorInput.getFile().exists()) {
-				editorInput.getFile().touch(new NullProgressMonitor());
-			}
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
 		super.dispose();
 	}
 
 	@Override
 	protected int getInitialPaletteSize() {
-		return 175;
+		return INITIAL_PALETTE_SIZE;
+	}
+
+	@Override
+	public Object getAdapter(@SuppressWarnings("rawtypes") Class type) {
+		if (IContentOutlinePage.class.equals(type)) {
+			return createOutline(type);
+		} else if (IValidationIssueStore.class.equals(type)) {
+			return issueStore;
+		}
+		return super.getAdapter(type);
 	}
 }
