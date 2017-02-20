@@ -9,6 +9,7 @@
 */
 package org.yakindu.sct.model.stext.scoping;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -16,6 +17,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
@@ -86,6 +88,25 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 				importedNamespaceResolvers.add(resolver);
 		}
 		return importedNamespaceResolvers;
+	}
+	
+	@Override
+	protected IScope getLocalElementsScope(IScope parent, final EObject context,
+			final EReference reference) {
+		IScope result = parent;
+		ISelectable allDescriptions = getAllDescriptions(context.eResource());
+		QualifiedName name = getQualifiedNameOfLocalElement(context);
+		boolean ignoreCase = isIgnoreCase(reference);
+		final List<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context, ignoreCase);
+		if (!namespaceResolvers.isEmpty()) {
+			if (isRelativeImport() && name!=null && !name.isEmpty()) {
+				ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase); 
+				result = createImportScope(result, Collections.singletonList(localNormalizer), allDescriptions, reference.getEReferenceType(), isIgnoreCase(reference));
+			}
+			result = createImportScope(result, namespaceResolvers, null, reference.getEReferenceType(), isIgnoreCase(reference));
+		}
+		//We don't want to add an implicit local ImportNormalizer here...
+		return result;
 	}
 
 	@Override
