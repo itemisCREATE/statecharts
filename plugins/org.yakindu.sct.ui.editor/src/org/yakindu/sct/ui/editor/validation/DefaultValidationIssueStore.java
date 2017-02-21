@@ -24,15 +24,16 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.common.ui.resources.FileChangeManager;
 import org.eclipse.gmf.runtime.common.ui.resources.IFileObserver;
-import org.eclipse.jface.util.IPropertyChangeListener;
-import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.xtext.ui.util.IssueUtil;
+import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -43,8 +44,7 @@ import com.google.inject.Inject;
  * @author Andreas Mülder - Initial contribution and API
  *
  */
-public class DefaultValidationIssueStore
-		implements IValidationIssueStore, IFileObserver, IMarkerType, IPropertyChangeListener {
+public class DefaultValidationIssueStore implements IValidationIssueStore, IFileObserver, IMarkerType {
 
 	@Inject
 	private IssueUtil issueCreator;
@@ -61,7 +61,6 @@ public class DefaultValidationIssueStore
 		listener = Lists.newArrayList();
 		persistentIssues = ArrayListMultimap.create();
 		liveIssues = ArrayListMultimap.create();
-		DiagramActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 	}
 
 	protected String getMarkerType() {
@@ -90,21 +89,21 @@ public class DefaultValidationIssueStore
 			throw new IllegalStateException("Issue store is already connected to a resource");
 		connected = true;
 		this.resource = resource;
+		IFile file = WorkspaceSynchronizer.getFile(resource);
+		if (file != null && file.isAccessible()) {
+			FileChangeManager.getInstance().addFileObserver(this);
+		}
 		reloadMarkerIssues();
 	}
 
 	protected void reloadMarkerIssues() {
 		persistentIssues.clear();
-		if (liveValidationEnabled())
-			return;
-		IFile file = WorkspaceSynchronizer.getFile(resource);
-		if (file != null && file.isAccessible()) {
-			FileChangeManager.getInstance().addFileObserver(this);
-		}
-
 		List<IMarker> markers = new ArrayList<IMarker>();
 		try {
-			markers.addAll(Arrays.asList(file.findMarkers(getMarkerType(), true, IResource.DEPTH_INFINITE)));
+			IFile file = WorkspaceSynchronizer.getFile(resource);
+			if (file != null && file.isAccessible()) {
+				markers.addAll(Arrays.asList(file.findMarkers(getMarkerType(), true, IResource.DEPTH_INFINITE)));
+			}
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
@@ -152,6 +151,11 @@ public class DefaultValidationIssueStore
 			return result;
 		} else {
 			result.addAll(liveIssues.get(uri));
+			Iterables.addAll(result, Iterables.filter(persistentIssues.get(uri), new Predicate<SCTIssue>() {
+				public boolean apply(SCTIssue input) {
+					return input.getType() == CheckType.NORMAL || input.getType() == CheckType.FAST;
+				}
+			}));
 		}
 		return result;
 
@@ -176,13 +180,6 @@ public class DefaultValidationIssueStore
 	@Override
 	public void handleMarkerChanged(IMarker marker) {
 		reloadMarkerIssues();
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent event) {
-		if (StatechartPreferenceConstants.PREF_LIVE_VALIDATION.equals(event.getProperty())) {
-			reloadMarkerIssues();
-		}
 	}
 
 	@Override
