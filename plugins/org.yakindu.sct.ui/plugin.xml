@@ -14,7 +14,7 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="org.yakindu.sct.ui.preferences.YakinduRootPreferencePage"
+            class="org.yakindu.sct.ui.preferences.SctRootPreferencePage"
             id="org.yakindu.sct.ui.preferences.root"
             name="YAKINDU SCT">
       </page>
@@ -30,5 +30,17 @@
                id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard">
          </newWizardShortcut>
       </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            class="org.yakindu.sct.ui.preferences.SctRootPropertyPage"
+            id="org.yakindu.sct.ui.properties.root"
+            name="YAKINDU SCT">
+         <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	     <filter name="projectNature" value="org.yakindu.sct.builder.SCTNature"/>
+      </page>
    </extension>
 </plugin>
