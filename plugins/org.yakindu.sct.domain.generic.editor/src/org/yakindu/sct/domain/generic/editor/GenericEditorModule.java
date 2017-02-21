@@ -11,6 +11,7 @@
 package org.yakindu.sct.domain.generic.editor;
 
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
@@ -24,6 +25,7 @@ import org.yakindu.sct.ui.editor.editor.proposals.SmartEditProposalProvider;
 import org.yakindu.sct.ui.editor.proposals.IEditProposalProvider;
 import org.yakindu.sct.ui.editor.providers.DefaultSCTPaletteFactory;
 import org.yakindu.sct.ui.editor.providers.ISCTPaletteFactory;
+import org.yakindu.sct.ui.editor.validation.DefaultValidationIssueStore;
 
 import com.google.inject.Binder;
 import com.google.inject.multibindings.Multibinder;
@@ -42,6 +44,7 @@ public class GenericEditorModule extends AbstractGenericModule {
 		proposalProviderBinder.addBinding().to(SmartEditProposalProvider.class);
 		proposalProviderBinder.addBinding().to(RefactoringProposalProvider.class);
 		binder.bind(IResourceValidator.class).to(SCTResourceValidatorImpl.class);
+		binder.bind(IValidationIssueProcessor.class).to(DefaultValidationIssueStore.class);
 	}
 
 	public Class<? extends ISCTPaletteFactory> bindISCTPaletteFactory() {

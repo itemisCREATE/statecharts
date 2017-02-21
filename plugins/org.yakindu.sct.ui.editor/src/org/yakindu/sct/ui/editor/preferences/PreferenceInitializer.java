@@ -14,6 +14,7 @@ import org.eclipse.gef.ui.palette.DefaultPaletteViewerPreferences;
 import org.eclipse.gmf.runtime.diagram.ui.figures.DiagramColorConstants;
 import org.eclipse.gmf.runtime.diagram.ui.preferences.DiagramPreferenceInitializer;
 import org.eclipse.gmf.runtime.diagram.ui.preferences.IPreferenceConstants;
+import org.eclipse.gmf.runtime.notation.Routing;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.SWT;
@@ -36,6 +37,9 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer
 		Color lineColor = DiagramColorConstants.darkGray;
 		PreferenceConverter.setDefault(getPreferenceStore(),
 				IPreferenceConstants.PREF_LINE_COLOR, lineColor.getRGB());
+		
+		getPreferenceStore().setDefault(IPreferenceConstants.PREF_LINE_STYLE,
+				Routing.RECTILINEAR);
 
 		// rulers and grid defaults
 		getPreferenceStore().setDefault(
