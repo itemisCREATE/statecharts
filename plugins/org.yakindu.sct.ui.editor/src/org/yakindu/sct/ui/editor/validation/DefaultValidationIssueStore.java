@@ -12,6 +12,7 @@ package org.yakindu.sct.ui.editor.validation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -150,10 +151,11 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 			result.addAll(persistentIssues.get(uri));
 			return result;
 		} else {
-			result.addAll(liveIssues.get(uri));
+			Collection<SCTIssue> collection = liveIssues.get(uri);
+			result.addAll(collection);
 			Iterables.addAll(result, Iterables.filter(persistentIssues.get(uri), new Predicate<SCTIssue>() {
 				public boolean apply(SCTIssue input) {
-					return input.getType() == CheckType.NORMAL || input.getType() == CheckType.FAST;
+					return input.getType() == CheckType.NORMAL || input.getType() == CheckType.EXPENSIVE;
 				}
 			}));
 		}
