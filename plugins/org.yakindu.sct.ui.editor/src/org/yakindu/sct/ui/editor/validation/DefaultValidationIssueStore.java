@@ -151,8 +151,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 			result.addAll(persistentIssues.get(uri));
 			return result;
 		} else {
-			Collection<SCTIssue> collection = liveIssues.get(uri);
-			result.addAll(collection);
+			result.addAll(liveIssues.get(uri));
 			Iterables.addAll(result, Iterables.filter(persistentIssues.get(uri), new Predicate<SCTIssue>() {
 				public boolean apply(SCTIssue input) {
 					return input.getType() == CheckType.NORMAL || input.getType() == CheckType.EXPENSIVE;
