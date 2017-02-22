@@ -175,7 +175,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 
 	protected void closeSubdiagramEditors() {
 		if (getDiagram() != null && getDiagram().getElement() instanceof Statechart) {
-			List<IEditorReference> references = new ArrayList<IEditorReference>();
+			List<IEditorReference> refsToClose = new ArrayList<IEditorReference>();
 			IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 			if (workbenchWindow == null)
 				return;
@@ -188,19 +188,19 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 					if (ref.getEditorInput() instanceof IDiagramEditorInput) {
 						IDiagramEditorInput diagramInput = (IDiagramEditorInput) ref.getEditorInput();
 						if (diagramInput.getDiagram().eResource() == getDiagram().eResource()) {
-							references.add(ref);
+							refsToClose.add(ref);
 						}
 					}
 				} catch (PartInitException e) {
 					e.printStackTrace();
 				}
 			}
-			if (references.size() > 0) {
+			if (refsToClose.size() > 0) {
 				boolean close = MessageDialog.openQuestion(activePage.getActivePart().getSite().getShell(),
 						"Close subdiagram editors?",
 						"There are still subdiagram editors open. Do you want to close them?");
 				if (close) {
-					for (IEditorReference ref : refs) {
+					for (IEditorReference ref : refsToClose) {
 						activePage.closeEditor(ref.getEditor(false), false);
 					}
 				}
