@@ -59,7 +59,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 				return;
 			}
 			if (shouldInstall(((DiagramEditDomain) ed).getEditorPart())) {
-				decoratorTarget.installDecorator(getDecoratorKey(), createStatusDecorator(decoratorTarget));
+				decoratorTarget.installDecorator(getDecoratorKey(), createStatusDecorator(decoratorTarget, issueStore));
 			}
 		}
 	}
@@ -76,14 +76,17 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		return KEY;
 	}
 
-	protected ValidationDecorator createStatusDecorator(IDecoratorTarget decoratorTarget) {
-		return new ValidationDecorator(decoratorTarget);
+	protected ValidationDecorator createStatusDecorator(IDecoratorTarget decoratorTarget, IValidationIssueStore store) {
+		return new ValidationDecorator(decoratorTarget, store);
 	}
 
-	public class ValidationDecorator extends AbstractDecorator implements IResourceIssueStoreListener {
+	public static class ValidationDecorator extends AbstractDecorator implements IResourceIssueStoreListener {
 
-		public ValidationDecorator(IDecoratorTarget decoratorTarget) {
+		private IValidationIssueStore store;
+
+		public ValidationDecorator(IDecoratorTarget decoratorTarget, IValidationIssueStore store) {
 			super(decoratorTarget);
+			this.store = store;
 		}
 
 		public void refresh() {
@@ -100,7 +103,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		public void activate() {
-			issueStore.addIssueStoreListener(this);
+			store.addIssueStoreListener(this);
 		}
 
 		public void deactivate() {
@@ -112,7 +115,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 			if (elementId == null) {
 				return;
 			}
-			List<SCTIssue> issues = issueStore.getIssues(elementId);
+			List<SCTIssue> issues = store.getIssues(elementId);
 			Severity severity = Severity.INFO;
 			Label toolTip = null;
 			if (issues.isEmpty())
