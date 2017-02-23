@@ -15,7 +15,6 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
-import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.validation.CompositeEValidator;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
@@ -79,7 +78,7 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
 				.annotatedWith(com.google.inject.name.Names
 						.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
-				.to(ImportedNamespaceAwareLocalScopeProvider.class);
+				.to(org.yakindu.sct.model.stext.scoping.StextImportAwareScopeProvider.class);
 		binder.bind(ITypeSystem.class).toInstance(getTypeSystem());
 		binder.bind(boolean.class).annotatedWith(
 				Names.named(CompositeEValidator.USE_EOBJECT_VALIDATOR)).toInstance(false);
