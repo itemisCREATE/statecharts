@@ -21,7 +21,6 @@ env:
   global:
   - DISPLAY=:99.0
   - GTEST_DIR=${TRAVIS_BUILD_DIR}/gtest
-  - GMOCK_DIR=${TRAVIS_BUILD_DIR}/gmock
   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
   # via the "travis encrypt" command using the project repo's public key
   - secure: "e6AtFe0HJAHRdmzp4uXx4b+xZaEUUd2jeYiLdIkYuRa84op9iSzCmPj5uT3Vkvqps5snBrDx47Wl1EO9rl+Z91WYp1JgTT5Ek37SKj/ikhJ0HfAYBycU/MRTMO5wXEfwL29G0gjygzFxlUe7t/Y92M/VsvlEQ9nHrtqJ4hQA968="
@@ -41,13 +40,6 @@ before_script:
  - mkdir gtest 
  - cd gtest
  - cp -r /usr/src/gtest/. .
- - ls
- - cmake CMakeLists.txt
- - make
- - cd ..
- - mkdir gmock
- - cd gmock
- - cp -r /usr/src/gmock/. .
  - ls
  - cmake CMakeLists.txt
  - make
