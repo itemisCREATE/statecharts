@@ -343,7 +343,7 @@ See "entry state":#entry, "exit state":#exit, "final state":#final-state and "co
 
 h3(#orthogonal-states). Orthogonal states
 
-Orthogonal states are basically "composite states":#composite-state with more than one region. These regions are executed virtually concurrently. *Please note* the word _virtually_! YAKINDU SCT does _not_ guarantee in any way that orthogonal regions are really executed concurrently. At the time being, no code generator utilizes threads to achieve this. Orthogonal states should rather be understood as a manner to have two or more sub-statecharts working together, however, they are executed _one after the other other_ in every cycle, in a defined order: top to bottom, left to right. The same applies to multiple regions in the statechart itself. Consult section "raising and processing events":#raising-and-processing-an-event for further information on region priorities and their meanings for the statechart execution.
+Orthogonal states are basically "composite states":#composite-state with more than one region. These regions are executed virtually concurrently. *Please note* the word _virtually_! YAKINDU SCT does _not_ guarantee in any way that orthogonal regions are really executed concurrently. At the time being, no code generator utilizes threads to achieve this. Orthogonal states should rather be understood as a manner to have two or more sub-statecharts working together, however, they are executed _one after the other other_ in every cycle, in a defined order: top to bottom, left to right. The same applies to multiple regions in the statechart itself. Consult section "&quot;Raising and processing an event&quot;":#raising-and-processing-an-event for further information on region priorities and their meanings for the statechart execution.
 
 ###. CHECK Are there still no code generators taking advantage of threads and executing regions in parallel?
 
@@ -823,7 +823,7 @@ Usage in the statechart:
 bc. 
 always / raise intrfc.ev
 
-See also "Declaring events":#events and "Processing events":#raising-and-processing-an-event.
+See also sections "&quot;Declaring events&quot;":#events and "&quot;Raising and processing an event&quot;":#raising-and-processing-an-event.
 
 h3(#calling-an-operation). Calling an operation
 
