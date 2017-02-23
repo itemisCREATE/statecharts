@@ -38,6 +38,7 @@ matrix:
    - jdk: oraclejdk7
      env: TARGET=Neon.target
 before_script:
+ - ls /usr/src
  - mkdir gtest 
  - cd gtest
  - cp -r /usr/src/gtest/. .
