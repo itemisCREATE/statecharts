@@ -706,6 +706,7 @@ Aside from the buttons mentioned above, the blacklist dialog has three more butt
 * _Cancel:_ Closes the dialog without making your changes permanent – as long as you haven't applied them yet.
 * _Restore Defaults:_ Empties the list.
 
+After changing the blacklist, please perform a _clean_ on the project, followed by a _build_. This is needed for your changes to take effect. After that, any imports excluded by the blacklist will no longer show up in your statechart's content assist.
 
 
 h3(#cdom_please-get-in-touch-with-us). Please get in touch with us
