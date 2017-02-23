@@ -37,10 +37,9 @@
             class="org.yakindu.sct.ui.preferences.SctRootPropertyPage"
             id="org.yakindu.sct.ui.properties.root"
             name="YAKINDU SCT">
-         <enabledWhen>
+         	<enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
-	     <filter name="projectNature" value="org.yakindu.sct.builder.SCTNature"/>
       </page>
    </extension>
 </plugin>
