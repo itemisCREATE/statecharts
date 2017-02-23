@@ -471,6 +471,8 @@ p=. Looking up a C type
 
 Click on the hyperlink to open the header file containing the respective type declaration.
 
+!images/cdom_geometry_160_type_lookup_020.png(Showing the C type definition)!
+
 p=. Showing the C type definition
 
 
