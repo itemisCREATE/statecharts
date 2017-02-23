@@ -671,9 +671,43 @@ h3(#cdom_current-type-range-checks). Type range checks
 
 Type range validations are currently not implemented. As a consequence, it is possible to e.&#8239;g. assign an _int32_t_ value to an _int8_t_ variable one without any warning.
 
+###. CHECK: Are type range validations still not implemented in the C domain?
+
 h3(#cdom_plain-struct-union-and-enum-types). Plain struct, union, and enum types
 
 In C it is possible to define structs, unions and enums without a _typedef_. They can be referenced by using the corresponding qualifying keyword (_struct_, _union_, or _enum_, respectively). As the statechart language does *not* support these qualifiers, the usage of struct, union and enumeration types is currently restricted to those defined by a _typedef_.
+
+###. CHECK: C domain: Are "struct", "union", and "enum" types still only supported if used in a typedef
+
+h3(#cdom_performance-issues-with-very-large-c-projects). Performance issues with very large C projects
+
+Statecharts that
+* include a very large number of header files (_.h_ files), or
+* use a very large number of preprocessor macro definitions (@#define@)
+* or both,
+might cause YAKINDU Statechart Tools to spend a considerable amount of time processing ("parse") them.
+
+Typically, @#define@ directives are coded in header files. Header files in turn can include further header files using the @#include@ directive. The total amount of header files and @#define@ directives involved is not always transparent to the developer, especially if system header files or header files of a programming framework are included.
+
+YAKINDU Statechart Tools parses header files to make types and names defined therein available to your statechart. However, you typically won't need all of them. In order to save processing time you can explicitly exclude header files or folders from parsing.
+
+YAKINDU Statechart Tools maintains excluded header files and folders in a blacklist. Initially that list is empty. To modify the blacklist, proceed as follows:
+
+# In the project explorer, right-click on your project. The context menu opens.
+# Select the _Properties_ context menu entry. The _Properties_ dialog opens.
+# In the navigation menu on the left hand side of the dialog, open the _YAKINDU SCT_ entry.
+# Click on the _C Domain_ entry. The blacklist appears at the right.
+# To add one or more header files or folders to the blacklist, click on the _Add_ button. A file selection dialog appears, allowing you to select files with a _.h_ extension or folders.<br/>!images/cdom_blacklist_010_blacklist_for_c_domain_010.png(Excluding C header files from parsing)!
+# To remove files or folders from the blacklist, select them in the list and click on the _Remove_ button.
+# Click on the _OK_ button to make your changes permanent and close the dialog.
+
+Aside from the buttons mentioned above, the blacklist dialog has three more buttons:
+* _Apply:_ Makes your changes permanent, but leaves the dialog open.
+* _Cancel:_ Closes the dialog without making your changes permanent – as long as you haven't applied them yet.
+* _Restore Defaults:_ Empties the list.
+
+After changing the blacklist, please perform a _clean_ on the project, followed by a _build_. This is needed for your changes to take effect. After that, any imports excluded by the blacklist will no longer show up in your statechart's content assist.
+
 
 h3(#cdom_please-get-in-touch-with-us). Please get in touch with us
 
