@@ -62,7 +62,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//Type">
     <eStructuralFeatures xsi:type="ecore:EReference" name="baseType" eType="#//PrimitiveType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ComplexType" eSuperTypes="#//GenericElement #//Type">
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexType" eSuperTypes="#//Type #//GenericElement">
     <eOperations name="getAllFeatures" upperBound="-1" eType="#//Declaration"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
         eType="#//Declaration" containment="true"/>

@@ -192,8 +192,8 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.COMPLEX_TYPE: {
 				ComplexType complexType = (ComplexType)theEObject;
 				T result = caseComplexType(complexType);
-				if (result == null) result = caseGenericElement(complexType);
 				if (result == null) result = caseType(complexType);
+				if (result == null) result = caseGenericElement(complexType);
 				if (result == null) result = casePackageMember(complexType);
 				if (result == null) result = caseNamedElement(complexType);
 				if (result == null) result = caseAnnotatableElement(complexType);
