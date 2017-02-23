@@ -38,6 +38,7 @@ matrix:
    - jdk: oraclejdk7
      env: TARGET=Neon.target
 before_script:
+ - sudo apt-get install google-mock
  - ls /usr/src
  - mkdir gtest 
  - cd gtest
