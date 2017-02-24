@@ -21,10 +21,10 @@ import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
-import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.RangeConstraint;
@@ -93,7 +93,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.ENUMERATOR: return createEnumerator();
 			case TypesPackage.TYPE_CONSTRAINT: return createTypeConstraint();
 			case TypesPackage.TYPE_PARAMETER: return createTypeParameter();
-			case TypesPackage.PARAMETERIZED_TYPE: return createParameterizedType();
+			case TypesPackage.GENERIC_ELEMENT: return createGenericElement();
 			case TypesPackage.PACKAGE_MEMBER: return createPackageMember();
 			case TypesPackage.RANGE_CONSTRAINT: return createRangeConstraint();
 			case TypesPackage.DOMAIN: return createDomain();
@@ -271,9 +271,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ParameterizedType createParameterizedType() {
-		ParameterizedTypeImpl parameterizedType = new ParameterizedTypeImpl();
-		return parameterizedType;
+	public GenericElement createGenericElement() {
+		GenericElementImpl genericElement = new GenericElementImpl();
+		return genericElement;
 	}
 
 	/**

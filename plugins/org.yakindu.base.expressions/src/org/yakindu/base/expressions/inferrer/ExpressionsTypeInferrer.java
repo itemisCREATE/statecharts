@@ -52,9 +52,9 @@ import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
+import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
-import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
@@ -214,7 +214,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		}
 		return result;
 	}
-	
+
 	public InferenceResult doInfer(ElementReferenceExpression e) {
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getReference();
@@ -231,7 +231,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				assertArgumentIsCompatible(operationOwner, parameters.get(i), args.get(i));
 			}
 		}
-		if(operation.isVariadic() && args.size() - 1 >= operation.getVarArgIndex()){
+		if (operation.isVariadic() && args.size() - 1 >= operation.getVarArgIndex()) {
 			Parameter parameter = operation.getParameters().get(operation.getVarArgIndex());
 			List<Expression> varArgs = args.subList(operation.getVarArgIndex(), args.size() - 1);
 			for (Expression expression : varArgs) {
@@ -248,13 +248,14 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		InferenceResult result2 = inferTypeDispatch(argument);
 		assertCompatible(result2, result1, String.format(INCOMPATIBLE_TYPES, result2, result1));
 	}
-	
+
 	protected InferenceResult inferTypeParameter(TypeParameter typeParameter, InferenceResult ownerResult) {
-		if (ownerResult.getBindings().isEmpty() || !(ownerResult.getType() instanceof ParameterizedType)) {
+		if (ownerResult.getBindings().isEmpty() || !(ownerResult.getType() instanceof GenericElement)) {
 			return getResultFor(ANY);
 		} else {
-			int index = ((ParameterizedType) ownerResult.getType()).getParameter().indexOf(typeParameter);
-			return InferenceResult.from(ownerResult.getBindings().get(index).getType(), ownerResult.getBindings().get(index).getBindings());
+			int index = ((GenericElement) ownerResult.getType()).getTypeParameters().indexOf(typeParameter);
+			return InferenceResult.from(ownerResult.getBindings().get(index).getType(),
+					ownerResult.getBindings().get(index).getBindings());
 		}
 	}
 
@@ -309,8 +310,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public InferenceResult doInfer(TypeSpecifier specifier) {
-		if (specifier.getType() instanceof ParameterizedType
-				&& ((ParameterizedType) specifier.getType()).getParameter().size() > 0) {
+		if (specifier.getType() instanceof GenericElement
+				&& ((GenericElement) specifier.getType()).getTypeParameters().size() > 0) {
 			List<InferenceResult> bindings = new ArrayList<>();
 			EList<TypeSpecifier> arguments = specifier.getTypeArguments();
 			for (TypeSpecifier typeSpecifier : arguments) {

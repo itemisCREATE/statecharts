@@ -206,11 +206,6 @@ public class PackageItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE__MEMBER,
-				 TypesFactory.eINSTANCE.createParameterizedType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.PACKAGE__MEMBER,
 				 TypesFactory.eINSTANCE.createComplexType()));
 
 		newChildDescriptors.add

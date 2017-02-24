@@ -23,10 +23,10 @@ import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
-import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.RangeConstraint;
@@ -145,7 +145,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass parameterizedTypeEClass = null;
+	private EClass genericElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -622,8 +622,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getParameterizedType() {
-		return parameterizedTypeEClass;
+	public EClass getGenericElement() {
+		return genericElementEClass;
 	}
 
 	/**
@@ -631,8 +631,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameterizedType_Parameter() {
-		return (EReference)parameterizedTypeEClass.getEStructuralFeatures().get(0);
+	public EReference getGenericElement_TypeParameters() {
+		return (EReference)genericElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -861,8 +861,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		typeParameterEClass = createEClass(TYPE_PARAMETER);
 		createEReference(typeParameterEClass, TYPE_PARAMETER__BOUND);
 
-		parameterizedTypeEClass = createEClass(PARAMETERIZED_TYPE);
-		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__PARAMETER);
+		genericElementEClass = createEClass(GENERIC_ELEMENT);
+		createEReference(genericElementEClass, GENERIC_ELEMENT__TYPE_PARAMETERS);
 
 		packageMemberEClass = createEClass(PACKAGE_MEMBER);
 		createEAttribute(packageMemberEClass, PACKAGE_MEMBER__ID);
@@ -926,6 +926,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		declarationEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		declarationEClass.getESuperTypes().add(this.getPackageMember());
 		operationEClass.getESuperTypes().add(this.getDeclaration());
+		operationEClass.getESuperTypes().add(this.getGenericElement());
 		propertyEClass.getESuperTypes().add(this.getDeclaration());
 		parameterEClass.getESuperTypes().add(this.getTypedElement());
 		parameterEClass.getESuperTypes().add(theBasePackage.getNamedElement());
@@ -933,10 +934,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		eventEClass.getESuperTypes().add(this.getDeclaration());
 		enumerationTypeEClass.getESuperTypes().add(this.getPrimitiveType());
 		primitiveTypeEClass.getESuperTypes().add(this.getType());
-		complexTypeEClass.getESuperTypes().add(this.getParameterizedType());
+		complexTypeEClass.getESuperTypes().add(this.getType());
+		complexTypeEClass.getESuperTypes().add(this.getGenericElement());
 		enumeratorEClass.getESuperTypes().add(this.getDeclaration());
 		typeParameterEClass.getESuperTypes().add(this.getType());
-		parameterizedTypeEClass.getESuperTypes().add(this.getType());
+		genericElementEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		packageMemberEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		packageMemberEClass.getESuperTypes().add(this.getAnnotatableElement());
 		rangeConstraintEClass.getESuperTypes().add(this.getTypeConstraint());
@@ -1008,8 +1010,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(typeParameterEClass, TypeParameter.class, "TypeParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeParameter_Bound(), this.getType(), null, "bound", null, 0, 1, TypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(parameterizedTypeEClass, ParameterizedType.class, "ParameterizedType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getParameterizedType_Parameter(), this.getTypeParameter(), null, "parameter", null, 0, -1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(genericElementEClass, GenericElement.class, "GenericElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getGenericElement_TypeParameters(), this.getTypeParameter(), null, "typeParameters", null, 0, -1, GenericElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(packageMemberEClass, PackageMember.class, "PackageMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPackageMember_Id(), ecorePackage.getEString(), "id", null, 0, 1, PackageMember.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

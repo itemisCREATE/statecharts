@@ -377,26 +377,26 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.ParameterizedType} instances.
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.GenericElement} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ParameterizedTypeItemProvider parameterizedTypeItemProvider;
+	protected GenericElementItemProvider genericElementItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.yakindu.base.types.ParameterizedType}.
+	 * This creates an adapter for a {@link org.yakindu.base.types.GenericElement}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createParameterizedTypeAdapter() {
-		if (parameterizedTypeItemProvider == null) {
-			parameterizedTypeItemProvider = new ParameterizedTypeItemProvider(this);
+	public Adapter createGenericElementAdapter() {
+		if (genericElementItemProvider == null) {
+			genericElementItemProvider = new GenericElementItemProvider(this);
 		}
 
-		return parameterizedTypeItemProvider;
+		return genericElementItemProvider;
 	}
 
 	/**
@@ -672,7 +672,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (enumeratorItemProvider != null) enumeratorItemProvider.dispose();
 		if (typeConstraintItemProvider != null) typeConstraintItemProvider.dispose();
 		if (typeParameterItemProvider != null) typeParameterItemProvider.dispose();
-		if (parameterizedTypeItemProvider != null) parameterizedTypeItemProvider.dispose();
+		if (genericElementItemProvider != null) genericElementItemProvider.dispose();
 		if (packageMemberItemProvider != null) packageMemberItemProvider.dispose();
 		if (rangeConstraintItemProvider != null) rangeConstraintItemProvider.dispose();
 		if (domainItemProvider != null) domainItemProvider.dispose();

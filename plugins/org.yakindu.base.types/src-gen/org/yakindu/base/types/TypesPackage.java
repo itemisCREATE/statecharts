@@ -412,13 +412,22 @@ public interface TypesPackage extends EPackage {
 	int OPERATION__ID = DECLARATION__ID;
 
 	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__TYPE_PARAMETERS = DECLARATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__PARAMETERS = DECLARATION_FEATURE_COUNT + 0;
+	int OPERATION__PARAMETERS = DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Variadic</b></em>' attribute.
@@ -427,7 +436,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__VARIADIC = DECLARATION_FEATURE_COUNT + 1;
+	int OPERATION__VARIADIC = DECLARATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
@@ -436,7 +445,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 2;
+	int OPERATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -868,86 +877,14 @@ public interface TypesPackage extends EPackage {
 	int ENUMERATION_TYPE_FEATURE_COUNT = PRIMITIVE_TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.types.impl.ParameterizedTypeImpl <em>Parameterized Type</em>}' class.
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.GenericElementImpl <em>Generic Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.types.impl.ParameterizedTypeImpl
-	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getParameterizedType()
+	 * @see org.yakindu.base.types.impl.GenericElementImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getGenericElement()
 	 * @generated
 	 */
-	int PARAMETERIZED_TYPE = 15;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__NAME = TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__ANNOTATIONS = TYPE__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__ID = TYPE__ID;
-
-	/**
-	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__CONSTRAINT = TYPE__CONSTRAINT;
-
-	/**
-	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__ABSTRACT = TYPE__ABSTRACT;
-
-	/**
-	 * The feature id for the '<em><b>Visible</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__VISIBLE = TYPE__VISIBLE;
-
-	/**
-	 * The feature id for the '<em><b>Parameter</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__PARAMETER = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Parameterized Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
+	int GENERIC_ELEMENT = 15;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.ComplexTypeImpl <em>Complex Type</em>}' class.
@@ -966,7 +903,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_TYPE__NAME = PARAMETERIZED_TYPE__NAME;
+	int COMPLEX_TYPE__NAME = TYPE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' reference list.
@@ -975,7 +912,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_TYPE__ANNOTATIONS = PARAMETERIZED_TYPE__ANNOTATIONS;
+	int COMPLEX_TYPE__ANNOTATIONS = TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -984,7 +921,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_TYPE__ID = PARAMETERIZED_TYPE__ID;
+	int COMPLEX_TYPE__ID = TYPE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
@@ -993,7 +930,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_TYPE__CONSTRAINT = PARAMETERIZED_TYPE__CONSTRAINT;
+	int COMPLEX_TYPE__CONSTRAINT = TYPE__CONSTRAINT;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1002,7 +939,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_TYPE__ABSTRACT = PARAMETERIZED_TYPE__ABSTRACT;
+	int COMPLEX_TYPE__ABSTRACT = TYPE__ABSTRACT;
 
 	/**
 	 * The feature id for the '<em><b>Visible</b></em>' attribute.
@@ -1011,16 +948,16 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_TYPE__VISIBLE = PARAMETERIZED_TYPE__VISIBLE;
+	int COMPLEX_TYPE__VISIBLE = TYPE__VISIBLE;
 
 	/**
-	 * The feature id for the '<em><b>Parameter</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_TYPE__PARAMETER = PARAMETERIZED_TYPE__PARAMETER;
+	int COMPLEX_TYPE__TYPE_PARAMETERS = TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Features</b></em>' containment reference list.
@@ -1029,7 +966,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_TYPE__FEATURES = PARAMETERIZED_TYPE_FEATURE_COUNT + 0;
+	int COMPLEX_TYPE__FEATURES = TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
@@ -1038,7 +975,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_TYPE__SUPER_TYPES = PARAMETERIZED_TYPE_FEATURE_COUNT + 1;
+	int COMPLEX_TYPE__SUPER_TYPES = TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Complex Type</em>' class.
@@ -1047,7 +984,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_TYPE_FEATURE_COUNT = PARAMETERIZED_TYPE_FEATURE_COUNT + 2;
+	int COMPLEX_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.EnumeratorImpl <em>Enumerator</em>}' class.
@@ -1241,6 +1178,33 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_PARAMETER_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_ELEMENT__NAME = BasePackage.NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_ELEMENT__TYPE_PARAMETERS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Generic Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_ELEMENT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.RangeConstraintImpl <em>Range Constraint</em>}' class.
@@ -1992,25 +1956,25 @@ public interface TypesPackage extends EPackage {
 	EReference getTypeParameter_Bound();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.base.types.ParameterizedType <em>Parameterized Type</em>}'.
+	 * Returns the meta object for class '{@link org.yakindu.base.types.GenericElement <em>Generic Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Parameterized Type</em>'.
-	 * @see org.yakindu.base.types.ParameterizedType
+	 * @return the meta object for class '<em>Generic Element</em>'.
+	 * @see org.yakindu.base.types.GenericElement
 	 * @generated
 	 */
-	EClass getParameterizedType();
+	EClass getGenericElement();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.ParameterizedType#getParameter <em>Parameter</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.GenericElement#getTypeParameters <em>Type Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameter</em>'.
-	 * @see org.yakindu.base.types.ParameterizedType#getParameter()
-	 * @see #getParameterizedType()
+	 * @return the meta object for the containment reference list '<em>Type Parameters</em>'.
+	 * @see org.yakindu.base.types.GenericElement#getTypeParameters()
+	 * @see #getGenericElement()
 	 * @generated
 	 */
-	EReference getParameterizedType_Parameter();
+	EReference getGenericElement_TypeParameters();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.PackageMember <em>Package Member</em>}'.
@@ -2561,22 +2525,22 @@ public interface TypesPackage extends EPackage {
 		EReference TYPE_PARAMETER__BOUND = eINSTANCE.getTypeParameter_Bound();
 
 		/**
-		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ParameterizedTypeImpl <em>Parameterized Type</em>}' class.
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.GenericElementImpl <em>Generic Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.types.impl.ParameterizedTypeImpl
-		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getParameterizedType()
+		 * @see org.yakindu.base.types.impl.GenericElementImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getGenericElement()
 		 * @generated
 		 */
-		EClass PARAMETERIZED_TYPE = eINSTANCE.getParameterizedType();
+		EClass GENERIC_ELEMENT = eINSTANCE.getGenericElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Parameter</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Type Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARAMETERIZED_TYPE__PARAMETER = eINSTANCE.getParameterizedType_Parameter();
+		EReference GENERIC_ELEMENT__TYPE_PARAMETERS = eINSTANCE.getGenericElement_TypeParameters();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.PackageMemberImpl <em>Package Member</em>}' class.

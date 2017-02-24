@@ -143,13 +143,13 @@ public interface TypesFactory extends EFactory {
 	TypeParameter createTypeParameter();
 
 	/**
-	 * Returns a new object of class '<em>Parameterized Type</em>'.
+	 * Returns a new object of class '<em>Generic Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parameterized Type</em>'.
+	 * @return a new object of class '<em>Generic Element</em>'.
 	 * @generated
 	 */
-	ParameterizedType createParameterizedType();
+	GenericElement createGenericElement();
 
 	/**
 	 * Returns a new object of class '<em>Package Member</em>'.
