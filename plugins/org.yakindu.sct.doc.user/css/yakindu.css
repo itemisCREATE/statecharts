@@ -8,21 +8,22 @@
 /*
  * The font size in a blockquote should be the same as specified by the parent element:
  */
-blockquote {
+.body-container .primary blockquote {
     font-size: inherit;
 }
 
 /*
- * Establish a margin around the body:
+ * For Eclipsehelp, establish proper left and right margins for the body: 
  */
-body {
-    margin: 4%;
+body.eclipsehelp {
+    margin-left: 2%;
+    margin-right: 3%;
 }
 
 /*
  * Revert bootstrap's fancy "code" rendering:
  */
-code {
+.body-container .primary code {
     padding: 0;
     color: #111111;
     background-color: transparent;
@@ -34,7 +35,7 @@ code {
  * On small screens, allow "unbreakable" words in "code" elements to be broken:
  */
 @media ( max-width : 767px) {
-    code {
+    .body-container .primary code {
         word-wrap: break-word;
     }
 }
@@ -42,7 +43,7 @@ code {
 /*
  * Add some vertical space above and below images and tables to separate them from the text:
  */
-img, table {
+.body-container .primary img, .body-container .primary table {
     margin-top: 1em;
     margin-bottom: 2em;
 }
@@ -54,7 +55,7 @@ img, table {
  * - Images are centered.
  * - Images have a shadow with a certain corner radius.
  */
-img {
+.body-container .primary img {
     height: auto;
     text-align: center;
     display: block;
@@ -70,7 +71,7 @@ img {
  * Use the CSS class "inlinemediaobject" to include small images like symbols or buttons within a paragraph of text
  * similar to a character. The image is scaled to have the height of the line.
  */
-img.inlinemediaobject {
+.body-container .primary img.inlinemediaobject {
     line-height: 1;
     vertical-align: baseline;
     min-width: inherit;
@@ -90,7 +91,7 @@ img.inlinemediaobject {
 /*
  * CSS class "shadowless" for images that should not have a shadow.
  */
-img.shadowless {
+.body-container .primary img.shadowless {
     box-shadow: none;
     margin-bottom: 0px;
 }
@@ -99,23 +100,23 @@ img.shadowless {
  * Responsive design: image widths for normal and wide viewports:
  */
 @media ( min-width : 30em) {
-    img {
+    .body-container .primary img {
         max-width: 61.8%;
         min-width: 38.2%;
     }
-    img.small {
+    .body-container .primary img.small {
         width: 38.2%;
         max-width: 38.2%;
     }
-    img.normal {
+    .body-container .primary img.normal {
         width: 61.8%;
         min-width: 38.2%;
     }
-    img.large {
+    .body-container .primary img.large {
         width: 76.4%;
         max-width: 76.4%;
     }
-    img.full {
+    .body-container .primary img.full {
         width: 100%;
         max-width: 100%;
     }
@@ -125,15 +126,15 @@ img.shadowless {
  * Responsive design: image widths for small viewports:
  */
 @media ( max-width : 30em) {
-    img {
+    .body-container .primary img {
         width: 100%;
         max-width: 100%;
     }
-    img.small {
+    .body-container .primary img.small {
         width: 76.4%;
         max-width: 76.4%;
     }
-    img.normal img.large img.full {
+    .body-container .primary img.normal, .body-container .primary img.large, .body-container .primary img.full {
         max-width: 100%;
         min-width: 100%;
     }
@@ -142,21 +143,21 @@ img.shadowless {
 /*
  * Tables:
  */
-table, th, td {
+.body-container .primary table, .body-container .primary th, .body-container .primary td {
     border: 0px solid black;
 }
 
-table {
+.body-container .primary table {
     border-collapse: collapse;
     max-width: 100%;
 }
 
-th {
+.body-container .primary th {
     color: #ffffff;
     background-color: #575757;
 }
 
-th, td {
+.body-container .primary th, .body-container .primary td {
     padding-top: 0.2em;
     padding-bottom: 0.2em;
     padding-left: 0.5em;
@@ -165,77 +166,76 @@ th, td {
     vertical-align: top;
 }
 
-tr:nth-child(even) {
+.body-container .primary tr:nth-child(even) {
     background-color: #cfe3fc;
 }
 
-tr.odd {
+.body-container .primary tr.odd {
     background-color: inherit;
 }
 
-tr.even {
+.body-container .primary tr.even {
     background-color: #cfe3fc;
 }
 
 /*
  * Chapter numbering:
  */
-body {
+.body-container .primary {
     counter-reset: h1
 }
 
-h1 {
+.body-container .primary h1 {
     counter-reset: h2
 }
 
-h2 {
+.body-container .primary h2 {
     counter-reset: h3
 }
 
-h3 {
+.body-container .primary h3 {
     counter-reset: h4
 }
 
-h4 {
+.body-container .primary h4 {
     counter-reset: h5
 }
 
-h5 {
+.body-container .primary h5 {
     counter-reset: h6
 }
 
-.body-container h1:before {
+.body-container .primary  h1:before {
     counter-increment: h1;
     content: counter(h1) ". "
 }
 
-.body-container h2:before {
+.body-container .primary h2:before {
     counter-increment: h2;
     content: counter(h1) "." counter(h2) ". "
 }
 
-.body-container h3:before {
+.body-container .primary h3:before {
     counter-increment: h3;
     content: counter(h1) "." counter(h2) "." counter(h3) ". "
 }
 
-.body-container h4:before {
+.body-container .primary h4:before {
     counter-increment: h4;
     content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". "
 }
 
-.body-container h5:before {
+.body-container .primary h5:before {
     counter-increment: h5;
     content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". "
 }
 
-.body-container h6:before {
+.body-container .primary h6:before {
     counter-increment: h6;
     content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". "
 }
 
-h1.nocount:before h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before {
+.body-container .primary .nocount:before {
     content: "";
     counter-increment: none
 }
-

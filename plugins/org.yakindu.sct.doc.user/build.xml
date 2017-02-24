@@ -188,8 +188,14 @@
                 </fileset>
             </replaceregexp>
 
-            <!-- Add CSS classes "eclipsehelp" and "body-container" to BODY element -->
-            <replaceregexp byline="true" match='&lt;body&gt;' replace='&lt;body class="eclipsehelp body-container"&gt;'>
+            <!-- Add CSS classes "eclipsehelp" and "body-container" to BODY element and
+                 nest a DIV child with CSS class "primary" into the BODY element. -->
+            <replaceregexp byline="true" match='&lt;body&gt;' replace='&lt;body class="eclipsehelp body-container"&gt;&lt;div class="primary"&gt;'>
+                <fileset dir="${help.dir}">
+                    <include name="**/*.html" />
+                </fileset>
+            </replaceregexp>
+            <replaceregexp byline="true" match='&lt;/body&gt;' replace='&lt;/div&gt;&lt;/body&gt;'>
                 <fileset dir="${help.dir}">
                     <include name="**/*.html" />
                 </fileset>
