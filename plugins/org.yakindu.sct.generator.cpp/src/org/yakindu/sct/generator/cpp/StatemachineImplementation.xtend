@@ -230,7 +230,7 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	
 	def isStateActiveFunction(ExecutionFlow it) '''
-		sc_boolean «module»::«stateActiveFctID»(«statesEnumType» state)
+		sc_boolean «module»::«stateActiveFctID»(«statesEnumType» state) const
 		{
 			switch (state)
 			{
@@ -247,7 +247,7 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	
 	def isActiveFunction(ExecutionFlow it) '''
-		sc_boolean «module»::isActive()
+		sc_boolean «module»::isActive() const
 		{
 			return «FOR i : 0 ..< stateVector.size SEPARATOR '||'»stateConfVector[«i»] != «null_state»«ENDFOR»;
 		}
@@ -261,7 +261,7 @@ class StatemachineImplementation implements IContentTemplate {
 			 * Always returns 'false' since this state machine can never become final.
 			 */
 			«ENDIF»
-			sc_boolean «module»::isFinal()
+			sc_boolean «module»::isFinal() const
 			{
 		''' +
 		// only if the impact vector is completely covered by final states the state machine 
@@ -311,26 +311,26 @@ class StatemachineImplementation implements IContentTemplate {
 				«ENDIF»
 			«ENDFOR»
 			«FOR event : scope.outgoingEvents»
-				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»()
+				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() const
 				{
 					return «event.localAccess»;
 				}
 				
 				«IF scope.defaultInterface»
-					sc_boolean «module»::«event.asRaised»()
+					sc_boolean «module»::«event.asRaised»() const
 					{
 						return «scope.instance».«event.asRaised»();
 					}
 					
 				«ENDIF»
 				«IF event.hasValue»
-					«event.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»()
+					«event.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() const
 					{
 						return «event.localValueAccess»;
 					}
 					
 					«IF scope.defaultInterface»
-						«event.typeSpecifier.targetLanguageName» «module»::«event.asGetter»()
+						«event.typeSpecifier.targetLanguageName» «module»::«event.asGetter»() const
 						{
 							return «scope.instance».«event.asGetter»();
 						}
@@ -348,13 +348,13 @@ class StatemachineImplementation implements IContentTemplate {
 					«event.localAccess» = true;
 				}
 				
-				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»()
+				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() const
 				{
 					return «event.localAccess»;
 				}
 				
 				«IF event.hasValue» 
-					«event.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»()
+					«event.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() const
 					{
 						return «event.localValueAccess»;
 					}
@@ -362,13 +362,13 @@ class StatemachineImplementation implements IContentTemplate {
 				«ENDIF»
 			«ENDFOR»
 			«FOR variable : scope.variableDefinitions»
-				«IF variable.const»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»()
+				«IF variable.const»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() const
 				{
 					return «variable.localAccess»;
 				}
 				
 				«IF scope.defaultInterface»
-					«IF variable.const»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«variable.asGetter»()
+					«IF variable.const»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«variable.asGetter»() const
 					{
 						return «variable.access»;
 					}
