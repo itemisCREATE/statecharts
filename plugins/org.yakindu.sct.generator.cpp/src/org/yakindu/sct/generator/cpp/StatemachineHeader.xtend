@@ -223,34 +223,40 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 	'''
 
 	def protected IStatemachineFunctions() '''
-		void init();
+		/*
+		 * Functions inherited from StatemachineInterface
+		 */
+		virtual void init();
 		
-		void enter();
+		virtual void enter();
 		
-		void exit();
+		virtual void exit();
 		
-		void runCycle();
+		virtual void runCycle();
 		
 		/*!
 		* Checks if the state machine is active (until 2.4.1 this method was used for states).
 		* A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
 		*/
-		sc_boolean isActive();
+		virtual sc_boolean isActive();
 		
 		
 		/*!
 		* Checks if all active states are final. 
 		* If there are no active states then the state machine is considered being inactive. In this case this method returns false.
 		*/
-		sc_boolean isFinal();
+		virtual sc_boolean isFinal();
 	'''
 	
 	def timedStatemachineFunctions(ExecutionFlow it) '''
-		void setTimer(«timerInterface»* timer);
+		/*
+		 * Functions inherited from TimedStatemachineInterface
+		 */
+		virtual void setTimer(«timerInterface»* timer);
 		
-		«timerInterface»* getTimer();
+		virtual «timerInterface»* getTimer();
 		
-		void «raiseTimeEventFctID»(sc_eventid event);
+		virtual void «raiseTimeEventFctID»(sc_eventid event);
 	'''
 
 	override dispatch functionPrototypes(EventDefinition it) '''
