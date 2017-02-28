@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.validation.CompositeEValidator;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
@@ -44,6 +45,8 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(IDefaultResourceDescriptionStrategy.class).to(SCTResourceDescriptionStrategy.class);
+		//https://github.com/Yakindu/statecharts/issues/1199
+		binder.bind(IReferableElementsUnloader.class).to(IReferableElementsUnloader.NullUnloader.class);
 	}
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return STextGlobalScopeProvider.class;
