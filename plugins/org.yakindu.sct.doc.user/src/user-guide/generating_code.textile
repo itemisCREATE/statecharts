@@ -781,7 +781,7 @@ bc. feature GeneratorOptions {
 
 ==<!-- Start sgen_feature_includes -->==
 
-h3(#c-includes-feature). Includes feature
+h3(#cpp-includes-feature). Includes feature
 
 The *Includes* feature allows to change how include statements are generated:
 
