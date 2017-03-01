@@ -16,7 +16,6 @@ import org.eclipse.gmf.runtime.diagram.ui.preferences.IPreferenceConstants;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -110,11 +109,6 @@ public class StatechartAppearancePreferencePage extends FieldEditorPreferencePag
 	}
 
 	public void init(IWorkbench workbench) {
-		new PreferenceInitializer().initializeDefaultPreferences();
-	}
-
-	@Override
-	protected IPreferenceStore doGetPreferenceStore() {
-		return DiagramActivator.getDefault().getPreferenceStore();
+		setPreferenceStore(DiagramActivator.getDefault().getPreferenceStore());
 	}
 }
