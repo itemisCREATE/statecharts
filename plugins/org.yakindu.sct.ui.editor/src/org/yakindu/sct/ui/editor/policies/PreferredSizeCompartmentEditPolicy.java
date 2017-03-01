@@ -45,10 +45,10 @@ public class PreferredSizeCompartmentEditPolicy extends ResizableEditPolicyEx {
 	}
 
 	protected void adjustRequest(ChangeBoundsRequest request) {
-		final IFigure figure = getHostFigure();
+		final IFigure figure = getPreferredSizeFigure();
 		final Dimension prefSize = figure.getPreferredSize().getCopy();
 		figure.translateToAbsolute(prefSize);
-		Rectangle bounds = figure.getBounds().getCopy();
+		Rectangle bounds = getHostFigure().getBounds().getCopy();
 		figure.translateToAbsolute(bounds);
 		bounds = request.getTransformedRectangle(bounds);
 		if (bounds.width < prefSize.width) {
@@ -58,6 +58,10 @@ public class PreferredSizeCompartmentEditPolicy extends ResizableEditPolicyEx {
 			request.getSizeDelta().height = request.getSizeDelta().height + (prefSize.height - bounds.height);
 		}
 		request.setSizeDelta(request.getSizeDelta());
+	}
+
+	protected IFigure getPreferredSizeFigure() {
+		return getHostFigure();
 	}
 
 }
