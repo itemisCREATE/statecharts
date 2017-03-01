@@ -60,6 +60,8 @@ public class CPPDefaultFeatureValueProvider extends AbstractDefaultFeatureValueP
 			parameterValue.setValue(Visibility.PRIVATE.toString().toLowerCase());
 		} else if (parameterValue.getParameter().getName().equals(CPPFeatureConstants.PARAMETER_STATIC_OPC)) {
 			parameterValue.setValue(false);
+		} else if (parameterValue.getParameter().getName().equals(CPPFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS)) {
+			parameterValue.setValue(true);
 		}
 	}
 

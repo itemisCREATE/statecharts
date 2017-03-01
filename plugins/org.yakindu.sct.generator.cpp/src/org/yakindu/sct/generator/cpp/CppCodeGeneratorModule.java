@@ -10,12 +10,19 @@
  */
 package org.yakindu.sct.generator.cpp;
 
+import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.FEATURE_INCLUDES;
+import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS;
+
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
+import org.yakindu.sct.generator.c.SimpleGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.GeneratorModule;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
+import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
@@ -35,6 +42,18 @@ public class CppCodeGeneratorModule implements GeneratorModule {
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 		binder.bind(INamingService.class).to(CppNamingService.class);
 		binder.bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
+		bindIGenArtifactConfigurations(entry, binder);
+	}
+	
+	protected void bindIGenArtifactConfigurations(GeneratorEntry entry, Binder binder) {
+		FeatureParameterValue useRelativePathParam = entry.getFeatureParameterValue(FEATURE_INCLUDES,
+				PARAMETER_INCLUDES_USE_RELATIVE_PATHS);
+		boolean useRelativePath = useRelativePathParam != null ? useRelativePathParam.getBooleanValue() : true;
+		if (useRelativePath) {
+			binder.bind(IGenArtifactConfigurations.class).to(DefaultGenArtifactConfigurations.class);
+		} else {
+			binder.bind(IGenArtifactConfigurations.class).to(SimpleGenArtifactConfigurations.class);
+		}
 	}
 
 }
