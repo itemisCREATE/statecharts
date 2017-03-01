@@ -69,7 +69,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 				«publicFunctionPrototypes»
 				
 				/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-				sc_boolean «stateActiveFctID»(«statesEnumType» state);
+				sc_boolean «stateActiveFctID»(«statesEnumType» state) const;
 			
 			«entry.innerClassVisibility»:
 			
@@ -238,14 +238,14 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		* Checks if the state machine is active (until 2.4.1 this method was used for states).
 		* A state machine is active if it has been entered. It is inactive if it has not been entered at all or if it has been exited.
 		*/
-		virtual sc_boolean isActive();
+		virtual sc_boolean isActive() const;
 		
 		
 		/*!
 		* Checks if all active states are final. 
 		* If there are no active states then the state machine is considered being inactive. In this case this method returns false.
 		*/
-		virtual sc_boolean isFinal();
+		virtual sc_boolean isFinal() const;
 	'''
 	
 	def timedStatemachineFunctions(ExecutionFlow it) '''
@@ -265,11 +265,11 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			void «asRaiser»(«valueParams»);
 			
 			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */
-			sc_boolean «asRaised»();
+			sc_boolean «asRaised»() const;
 			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */
-				«typeSpecifier.targetLanguageName» «asGetter»();
+				«typeSpecifier.targetLanguageName» «asGetter»() const;
 				
 			«ENDIF»
 		«ELSEIF direction == Direction::IN»
@@ -278,11 +278,11 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			
 		«ELSE»
 			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */
-			sc_boolean «asRaised»();
+			sc_boolean «asRaised»() const;
 			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */
-				«typeSpecifier.targetLanguageName» «asGetter»();
+				«typeSpecifier.targetLanguageName» «asGetter»() const;
 				
 			«ENDIF»
 		«ENDIF»
@@ -290,7 +290,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 
 	override dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
-		«IF const»const «ENDIF»«typeSpecifier.targetLanguageName» «it.asGetter»();
+		«IF const»const «ENDIF»«typeSpecifier.targetLanguageName» «it.asGetter»() const;
 
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
