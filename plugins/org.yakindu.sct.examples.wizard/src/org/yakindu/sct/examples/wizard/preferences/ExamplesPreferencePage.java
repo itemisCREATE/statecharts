@@ -12,7 +12,6 @@ package org.yakindu.sct.examples.wizard.preferences;
 
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -83,11 +82,7 @@ public class ExamplesPreferencePage extends FieldEditorPreferencePage implements
 	}
 
 	public void init(IWorkbench workbench) {
-		new ExamplesPreferenceInitializer().initializeDefaultPreferences();
+		setPreferenceStore(ExampleActivator.getDefault().getPreferenceStore());
 	}
 
-	@Override
-	protected IPreferenceStore doGetPreferenceStore() {
-		return ExampleActivator.getDefault().getPreferenceStore();
-	}
 }
