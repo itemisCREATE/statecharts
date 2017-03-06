@@ -14,8 +14,16 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
 
 import org.yakindu.scr.operations.IOperationsStatemachine.SCIInterface1OperationCallback;
 import org.yakindu.scr.operations.IOperationsStatemachine.SCInterfaceOperationCallback;
@@ -26,21 +34,24 @@ import org.yakindu.scr.operations.OperationsStatemachine.State;
  *  Unit TestCase for Operations
  */
 @SuppressWarnings("all")
-public class OperationsTestCustom implements InternalOperationCallback, SCIInterface1OperationCallback, SCInterfaceOperationCallback{
+public class OperationsTestCustom{
 
 	private OperationsStatemachine statemachine;
-
-	private boolean internalOpration1visited = false;
-	private boolean interfaceOperation1visited = false;
-	private boolean unnamedInterfaceOperation1visited = false;
+	private InternalOperationCallback internalMock;
+	private SCInterfaceOperationCallback interfaceMock;
+	private SCIInterface1OperationCallback interface2Mock;
 	
 	@Before
 	public void setUp() {
+		internalMock = mock(InternalOperationCallback.class);
+		interfaceMock = mock(SCInterfaceOperationCallback.class);
+		interface2Mock = mock(SCIInterface1OperationCallback.class);
+		when(interfaceMock.alwaysTrue()).thenReturn(true);
 		statemachine = new OperationsStatemachine();
 		statemachine.init();
-		statemachine.setInternalOperationCallback(this);
-		statemachine.getSCInterface().setSCInterfaceOperationCallback(this);
-		statemachine.getSCIInterface1().setSCIInterface1OperationCallback(this);
+		statemachine.setInternalOperationCallback(internalMock);
+		statemachine.getSCInterface().setSCInterfaceOperationCallback(interfaceMock);
+		statemachine.getSCIInterface1().setSCIInterface1OperationCallback(interface2Mock);
 	}
 
 	@After
@@ -58,124 +69,99 @@ public class OperationsTestCustom implements InternalOperationCallback, SCIInter
 	
 	@Test
 	public void testOperationsTest() {
+		ArgumentCaptor<Boolean> booleanCapture = ArgumentCaptor.forClass(Boolean.class);
+		ArgumentCaptor<Double> doubleCapture = ArgumentCaptor.forClass(Double.class);
+		ArgumentCaptor<Long> longCapture = ArgumentCaptor.forClass(Long.class);
+		ArgumentCaptor<String> stringCapture = ArgumentCaptor.forClass(String.class);
+		
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.runCycle();
+		
+		//State is active
+	    
 		assertTrue(statemachine.isStateActive(State.main_region_B));
+		
+		//Operations in State B used 
+		
+		verify(internalMock).internalOperation1();
+		
+		verify(internalMock).internalOperation2(longCapture.capture());
+		assertThat(longCapture.getValue(), is(4L));
+		
+		verify(internalMock).internalOperation3();
+		
+		verify(internalMock).internalOperation3a(doubleCapture.capture());
+		assertThat(doubleCapture.getValue(), is(1.0));
+		
+		verify(internalMock).internalOperation4();
+		
+		verify(internalMock).internalOperation4a(longCapture.capture());
+		assertThat(longCapture.getValue(), is(5L));
+		
+		verify(internalMock).internalOperation5();
+		
+		verify(internalMock).internalOperation5a(stringCapture.capture());
+		assertThat(stringCapture.getValue(),is(""));
+		
+		
 		statemachine.raiseEv();
 		statemachine.runCycle();
+		
+		//State is active
+		
 		assertTrue(statemachine.isStateActive(State.main_region_C));
+		
+		//Operations in State C used
+		
+		verify(interface2Mock).interfaceOperation1();
+		
+		verify(interface2Mock).interfaceOperation2(longCapture.capture());
+		assertThat(longCapture.getValue(), is(4L));
+		
+		verify(interface2Mock).interfaceOperation3();
+		
+		verify(interface2Mock).interfaceOperation3a(doubleCapture.capture());
+		assertThat(doubleCapture.getValue(), is(1.0));
+		
+		verify(interface2Mock).interfaceOperation4();
+		
+		verify(interface2Mock).interfaceOperation4a(longCapture.capture());
+		assertThat(longCapture.getValue(), is(5L));
+		
+		verify(interface2Mock).interfaceOperation5();
+		
+		verify(interface2Mock).interfaceOperation5a(stringCapture.capture());
+		assertThat(stringCapture.getValue(),is(""));
+		
+		
 		statemachine.raiseEv();
 		statemachine.runCycle();
+		
+		//State is active
+		
 		assertTrue(statemachine.isStateActive(State.main_region_D));
 		
-		// Operations used
-		assertTrue(interfaceOperation1visited && internalOpration1visited && unnamedInterfaceOperation1visited);
+		//Operations in State D used
+		
+		verify(interfaceMock).unnamedInterfaceOperation1();
+		
+		verify(interfaceMock).unnamedInterfaceOperation2(longCapture.capture());
+		assertThat(longCapture.getValue(), is(4L));
+		
+		verify(interfaceMock).unnamedOperation3();
+		
+		verify(interfaceMock).unnamedOperation3a(doubleCapture.capture());
+		assertThat(doubleCapture.getValue(), is(1.0));
+		
+		verify(interfaceMock).unnamedOperation4();
+		
+		verify(interfaceMock).unnamedOperation4a(longCapture.capture());
+		assertThat(longCapture.getValue(), is(5L));
+		
+		verify(interfaceMock).unnamedOperation5();
+		
+		verify(interfaceMock).unnamedOperation5a(stringCapture.capture());
+		assertThat(stringCapture.getValue(),is(""));
 	}
-
-	public void internalOperation1() {
-		internalOpration1visited = true;
-	}
-
-	public boolean internalOperation2(long param1) {
-		assertTrue(param1 == 4);		
-		return false;
-	}
-
-	public void interfaceOperation1() {
-		interfaceOperation1visited = true;		
-	}
-
-	public boolean interfaceOperation2(long param1) {
-		assertTrue(param1 == 4);	
-		return false;
-	}
-
-	public void unnamedInterfaceOperation1() {
-		unnamedInterfaceOperation1visited = true;
-	}
-
-	public boolean unnamedInterfaceOperation2(long param1) {
-		assertTrue(param1 == 4);	
-		return false;
-	}
-
-	public boolean alwaysTrue() {
-		return true;
-	}
-
-	public String interfaceOperation5a(String param1) {
-		return param1;
-	}
-
-	public double unnamedOperation3a(double param1) {
-		return param1;
-	}
-	
-	public long unnamedOperation4a(long param1) {
-		return param1;
-	}
-	
-	public String unnamedOperation5a(String param1) {
-		return param1;
-	}
-
-	public double unnamedOperation3() {
-		return 1.0;
-	}
-
-	public long unnamedOperation4() {
-		return 0;
-	}
-
-	public String unnamedOperation5() {
-		return "";
-	}
-
-	public double interfaceOperation3() {
-		return 0.0;
-	}
-
-	public double interfaceOperation3a(double param1) {
-		return param1;
-	}
-
-	public long interfaceOperation4() {
-		return 0;
-	}
-
-	public long interfaceOperation4a(long param1) {
-		return param1;
-	}
-
-	public String interfaceOperation5() {
-		return "";
-	}
-
-	public double internalOperation3() {
-		return 0.0;
-	}
-
-	public double internalOperation3a(double param1) {
-		return param1;
-	}
-
-	public long internalOperation4() {
-		return 0;
-	}
-
-	public long internalOperation4a(long param1) {
-		return 0;
-	}
-
-	public String internalOperation5() {
-		return "";
-	}
-
-	public String internalOperation5a(String param1) {
-		return param1;
-	}
-	
-	
-	
 }
