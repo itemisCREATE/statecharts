@@ -151,6 +151,21 @@ Generally, there are two different ways to edit transitions:
 
 There are certain properties you can only edit with one of these methods. For example, to add guidance points to a transition's arrow, use the statechart editor. To change a transition's arrow's color, use the _Properties_ view.
 
+h2(#editing-documentation-of-states-and-transitions). Editing documentation of states and transitions
+
+You can attach documentation to states and transitions. This is some text offering additional information to a human reader. In the model, it does not serve any functional purpose.
+
+By default, a state's rectangle shows the state's behaviour and a transition shows its expression alongside its arrow. You can instead display an objects's documentation, i.e. the documentation of a state or transition:
+# Right-click on the object.
+# In the context menu, select _Toggle documentation_.
+# The object now shows its documentation in place of the formerly displayed text.
+
+In order to return back to the object's normal view, select _Toggle documentation_ again.
+
+While the documentation is shown, you can modify it in the statechart editor. Double-click on the documentation text field to start editing the documentation. Click outside the state to quit editing.
+
+The _Properties_ view of states and transition always shows both documentation and statechart language elements side by side in different compartments. This might be a alternative and more comfortable way of editing any of them.
+
 h2(#editing-regions). Editing regions
 
 To change the size or the location of a region, use the graphical editor. Drag the region to move it elsewhere. Use a selected region's handles to resize it.
