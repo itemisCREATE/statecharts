@@ -104,6 +104,10 @@ body.eclipsehelp {
         max-width: 61.8%;
         min-width: 38.2%;
     }
+    .body-container .primary img.tiny {
+        width: 23.6%;
+        max-width: 23.6%;
+    }
     .body-container .primary img.small {
         width: 38.2%;
         max-width: 38.2%;
@@ -129,6 +133,10 @@ body.eclipsehelp {
     .body-container .primary img {
         width: 100%;
         max-width: 100%;
+    }
+    .body-container .primary img.tiny {
+        width: 61.8%;
+        max-width: 61.8%;
     }
     .body-container .primary img.small {
         width: 76.4%;
