@@ -50,6 +50,8 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.GenericElement;
@@ -61,6 +63,7 @@ import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -207,6 +210,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			Operation operation = (Operation) e.getFeature();
 			EList<Expression> args = e.getArgs();
 			inferParameter(operation, args, e.getOwner());
+			
+//			return inferReturnType(operation, args); TODO: Find correct way
 		}
 		InferenceResult result = inferTypeDispatch(e.getFeature());
 		if (result != null && result.getType() instanceof TypeParameter) {
@@ -214,12 +219,14 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		}
 		return result;
 	}
-
+	
 	public InferenceResult doInfer(ElementReferenceExpression e) {
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getReference();
 			EList<Expression> args = e.getArgs();
+			
 			inferParameter(operation, args, null);
+			
 			return inferReturnType(operation, args);
 		}
 		return inferTypeDispatch(e.getReference());
@@ -230,29 +237,63 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			EList<Parameter> parameters = operation.getParameters();
 			if (operation.getParameters().size() != args.size())
 				return null;
-			Type commonType = null;
+			InferenceResult commonType = null;
 			for (int i = 0; i < parameters.size(); i++) {
-				if (registry.isSame(operation.getType(), parameters.get(i).getType())) {
-					Expression expression = args.get(i);
-					InferenceResult result = inferTypeDispatch(expression);
+				Parameter param = parameters.get(i);
+				Expression expression = args.get(i);
+				InferenceResult inferredArgument = inferTypeDispatch(expression);
+				InferenceResult result = checkForNestedGenericType(operation, param, inferredArgument);
+				if (result != null) {
 					if (commonType == null)
-						commonType = result.getType();
+						commonType = result;
 					else {
-						commonType = registry.getCommonType(commonType, result.getType());
+						commonType = InferenceResult.from(registry.getCommonType(commonType.getType(), result.getType()), commonType.getBindings());
 					}
 				}
 			}
-			return InferenceResult.from(commonType);
+			return commonType;
 		}
 		return inferTypeDispatch(operation);
+	}
+
+	/*
+	 * Check if the searched TypeArgument (T) is part of the ComplexType
+	 * parameter. Consider the following operation: 
+	 * <T> T getFirst(List<T>)
+	 * Called like this: 
+	 * getFirst(ArrayList<String>) 
+	 * Then the return type String
+	 * should be inferred.
+	 */
+	protected InferenceResult checkForNestedGenericType(Operation op, Parameter param, InferenceResult expType) {
+		Type needle = op.getType();
+		Type haystack = param.getType();
+		if (registry.isSame(haystack, needle)) {
+			return expType;
+		}
+		if (haystack instanceof GenericElement) {
+			return findTypeParameterInGenericElement(needle, param.getTypeSpecifier(), expType);
+		}
+		return null;
+	}
+	
+	protected InferenceResult findTypeParameterInGenericElement(Type type, TypeSpecifier elementType, InferenceResult expType) {
+		for (int i = 0; i < elementType.getTypeArguments().size(); i++) {
+			TypeSpecifier typeSpecifier = elementType.getTypeArguments().get(i);
+			
+			if(registry.isSame(type, typeSpecifier.getType())) {
+				return expType.getBindings().get(i);
+			}
+		}
+		return null;
 	}
 
 	protected void inferParameter(Operation operation, EList<Expression> args, Expression operationOwner) {
 		EList<Parameter> parameters = operation.getParameters();
 		if (parameters.size() <= args.size()) {
 			for (int i = 0; i < parameters.size(); i++) {
-				if(parameters.get(i).getType() instanceof TypeParameter){
-					return;
+				if(parameters.get(i).getType() instanceof TypeParameter) {
+					return; //yolo
 				}
 				assertArgumentIsCompatible(operationOwner, parameters.get(i), args.get(i));
 			}

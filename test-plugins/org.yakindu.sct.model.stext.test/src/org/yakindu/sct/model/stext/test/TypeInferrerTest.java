@@ -14,9 +14,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractTypeInferrerTest;
@@ -777,6 +779,17 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 	}
 	
 	@Test
+	public void testOperationWithParameterizedType() {
+		String scopes = ""
+				+ "internal "
+				+ "var t1:ComplexParameterizedType<boolean, integer>"
+				+ "var t2:ComplexParameterizedType<integer, boolean>"
+				+ "operation op(p:ComplexParameterizedType<boolean, integer>) : void";
+		expectNoErrors("op(t1)", scopes);
+		expectErrors("op(t2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2);
+	}
+	
+	@Test
 	public void testNullType() {
 		String scope = "internal var cp:ComplexType var i:integer";
 
@@ -790,5 +803,54 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 				"Comparison operator '==' may only be applied on compatible types, not on integer and null.");
 		expectIssue(inferTypeResult("i = null", Expression.class.getSimpleName(), scope).getType(),
 				"Assignment operator '=' may only be applied on compatible types, not on integer and null.");
+	}
+	
+	@Test
+	public void testOperationWithTypeParameters() {
+		String scopes = ""
+				+ "internal "
+				+ "var myI : integer "
+				+ "var myF : real "
+				+ "var myB: boolean "
+				+ "var myCPT: ComplexParameterizedType<boolean, integer> "
+				+ "var myCPT2: ComplexParameterizedType<integer, boolean> ";
+		
+		expectNoErrors("myI = genericOp(myI, myI)", scopes);
+		expectNoErrors("myF = genericOp(3+5, 2.3)", scopes);
+		expectNoErrors("myCPT = genericOp(myCPT, myCPT)", scopes);
+		
+		expectError("myB = genericOp(myI, myI)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+		expectError("myB = genericOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+		
+		expectError("myCPT2 = genericOp(myCPT, myCPT)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+		expectError("myCPT = genericOp(myCPT, myCPT2)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+	}
+	
+	@Test
+	public void testNestedGenericElementInferrer()
+	{
+		String scope = ""
+				+ "import nestedTemplate "
+				+ "internal: "
+				+ "var nestedCPT: ComplexParameterizedType<boolean, integer> "
+				+ "var myI: integer "
+				+ "var myB: boolean ";
+		
+		expectNoErrors("myI = nestedOp(nestedCPT)", scope);
+		expectError("myB = nestedOp(nestedCPT)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+	}
+	
+	@Test
+	public void testNestedNestedGenericElementInferrer()
+	{
+		String scope = ""
+				+ "import nestedNestedTemplate "
+				+ "internal: "
+				+ "var nestedCPT: ComplexParameterizedType<ComplexParameterizedType<boolean, string>, integer> "
+				+ "var myS: string "
+				+ "var b: boolean ";
+		
+		expectNoErrors("myS = nestedNestedOp(nestedCPT)", scope);
+		expectError("b = nestedNestedOp(nestedCPT)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 	}
 }

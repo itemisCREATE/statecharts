@@ -137,6 +137,12 @@ public abstract class AbstractTypeInferrerTest extends AbstractSTextTest {
 		assertEquals(Arrays.toString(traces.toArray()), 1, issues.size());
 	}
 	
+	protected void expectErrors(String expression, String scope, String code, int noOfErrors) {
+		List<ValidationIssue> traces = validate(expression, scope).getTraces(Severity.ERROR);
+		List<ValidationIssue> issues = filterForIssueCode(traces, code);
+		assertEquals(Arrays.toString(traces.toArray()), noOfErrors, issues.size());
+	}
+	
 	private List<ValidationIssue> filterForIssueCode(List<ValidationIssue> traces, final String code) {
 		return Lists.newArrayList(Iterables.filter(traces, new Predicate<ValidationIssue>() {
 			@Override

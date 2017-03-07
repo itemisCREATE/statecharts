@@ -24,7 +24,7 @@ import org.yakindu.base.types.validation.IValidationIssueAcceptor;
  */
 public interface ITypeSystemInferrer {
 
-	public static final String EXCEPTION_CODE = "RuntimeExcpetion";
+	public static final String EXCEPTION_CODE = "RuntimeException";
 	public static final String NO_INFER_METHOD_CODE = "NoInferMethod";
 	public static final String IS_TYPE_CODE = "NotExpectedType.";
 	public static final String NOT_TYPE_CODE = "NotType";
