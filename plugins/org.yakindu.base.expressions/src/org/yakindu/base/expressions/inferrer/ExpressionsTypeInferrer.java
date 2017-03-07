@@ -220,14 +220,40 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			Operation operation = (Operation) e.getReference();
 			EList<Expression> args = e.getArgs();
 			inferParameter(operation, args, null);
+			return inferReturnType(operation, args);
 		}
 		return inferTypeDispatch(e.getReference());
+	}
+
+	protected InferenceResult inferReturnType(Operation operation, EList<Expression> args) {
+		if (operation.getType() instanceof TypeParameter) {
+			EList<Parameter> parameters = operation.getParameters();
+			if (operation.getParameters().size() != args.size())
+				return null;
+			Type commonType = null;
+			for (int i = 0; i < parameters.size(); i++) {
+				if (registry.isSame(operation.getType(), parameters.get(i).getType())) {
+					Expression expression = args.get(i);
+					InferenceResult result = inferTypeDispatch(expression);
+					if (commonType == null)
+						commonType = result.getType();
+					else {
+						commonType = registry.getCommonType(commonType, result.getType());
+					}
+				}
+			}
+			return InferenceResult.from(commonType);
+		}
+		return inferTypeDispatch(operation);
 	}
 
 	protected void inferParameter(Operation operation, EList<Expression> args, Expression operationOwner) {
 		EList<Parameter> parameters = operation.getParameters();
 		if (parameters.size() <= args.size()) {
 			for (int i = 0; i < parameters.size(); i++) {
+				if(parameters.get(i).getType() instanceof TypeParameter){
+					return;
+				}
 				assertArgumentIsCompatible(operationOwner, parameters.get(i), args.get(i));
 			}
 		}
