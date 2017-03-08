@@ -20,6 +20,7 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.EcoreUtil2;
@@ -50,8 +51,6 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
-import org.yakindu.base.types.ComplexType;
-import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.GenericElement;
@@ -63,7 +62,8 @@ import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
+
+import com.google.common.collect.Maps;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -225,75 +225,61 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			Operation operation = (Operation) e.getReference();
 			EList<Expression> args = e.getArgs();
 			
-			inferParameter(operation, args, null);
-			
-			return inferReturnType(operation, args);
+			Map<TypeParameter, InferenceResult> typeParameterMapping = inferParameter(operation, args, null);
+			return inferReturnType(operation, typeParameterMapping);
 		}
 		return inferTypeDispatch(e.getReference());
 	}
 
-	protected InferenceResult inferReturnType(Operation operation, EList<Expression> args) {
+	protected InferenceResult inferReturnType(Operation operation, Map<TypeParameter, InferenceResult> typeParameterMapping) {
 		if (operation.getType() instanceof TypeParameter) {
-			EList<Parameter> parameters = operation.getParameters();
-			if (operation.getParameters().size() != args.size())
-				return null;
-			InferenceResult commonType = null;
-			for (int i = 0; i < parameters.size(); i++) {
-				Parameter param = parameters.get(i);
-				Expression expression = args.get(i);
-				InferenceResult inferredArgument = inferTypeDispatch(expression);
-				InferenceResult result = checkForNestedGenericType(operation, param, inferredArgument);
-				if (result != null) {
-					if (commonType == null)
-						commonType = result;
-					else {
-						commonType = InferenceResult.from(registry.getCommonType(commonType.getType(), result.getType()), commonType.getBindings());
-					}
-				}
+			TypeParameter typeParameter = (TypeParameter) operation.getType();
+			InferenceResult mappedType = typeParameterMapping.get(typeParameter);
+			if (mappedType == null) {
+				// TODO: use proper code for all these type parameter resolution problems?!
+				error("Could not infer type for return type " + typeParameter.getName(), NOT_COMPATIBLE_CODE);
+				return InferenceResult.from(registry.getType(ANY));
+			} else {
+				return mappedType;
 			}
-			return commonType;
+		}
+		if (operation.getType() instanceof GenericElement) {
+			return buildInferenceResult(operation.getTypeSpecifier(), typeParameterMapping);
+			
 		}
 		return inferTypeDispatch(operation);
 	}
 
-	/*
-	 * Check if the searched TypeArgument (T) is part of the ComplexType
-	 * parameter. Consider the following operation: 
-	 * <T> T getFirst(List<T>)
-	 * Called like this: 
-	 * getFirst(ArrayList<String>) 
-	 * Then the return type String
-	 * should be inferred.
-	 */
-	protected InferenceResult checkForNestedGenericType(Operation op, Parameter param, InferenceResult expType) {
-		Type needle = op.getType();
-		Type haystack = param.getType();
-		if (registry.isSame(haystack, needle)) {
-			return expType;
+	protected InferenceResult buildInferenceResult(TypeSpecifier typeSpecifier, Map<TypeParameter, InferenceResult> typeParameterMapping) {
+		if (typeSpecifier.getType() instanceof TypeParameter) {
+			// get already inferred type from type parameter map
+			TypeParameter typeParameter = (TypeParameter) typeSpecifier.getType();
+			InferenceResult mappedType = typeParameterMapping.get(typeParameter);
+			if (mappedType == null) {
+				error("Could not infer return type", NOT_COMPATIBLE_CODE);
+				return InferenceResult.from(registry.getType(ANY));
+			} else {
+				return mappedType;
+			}
+		} else {
+			InferenceResult result = InferenceResult.from(typeSpecifier.getType());
+			for (TypeSpecifier typeArgSpecifier : typeSpecifier.getTypeArguments()) {
+				buildInferenceResult(typeArgSpecifier, typeParameterMapping);
+			}
+			return result;
 		}
-		if (haystack instanceof GenericElement) {
-			return findTypeParameterInGenericElement(needle, param.getTypeSpecifier(), expType);
-		}
-		return null;
 	}
 	
-	protected InferenceResult findTypeParameterInGenericElement(Type type, TypeSpecifier elementType, InferenceResult expType) {
-		for (int i = 0; i < elementType.getTypeArguments().size(); i++) {
-			TypeSpecifier typeSpecifier = elementType.getTypeArguments().get(i);
-			
-			if(registry.isSame(type, typeSpecifier.getType())) {
-				return expType.getBindings().get(i);
-			}
-		}
-		return null;
-	}
-
-	protected void inferParameter(Operation operation, EList<Expression> args, Expression operationOwner) {
+	protected Map<TypeParameter, InferenceResult> inferParameter(Operation operation, EList<Expression> args, Expression operationOwner) {
+		Map<TypeParameter, InferenceResult> typeParameterMapping = Maps.newHashMap();
 		EList<Parameter> parameters = operation.getParameters();
 		if (parameters.size() <= args.size()) {
 			for (int i = 0; i < parameters.size(); i++) {
-				if(parameters.get(i).getType() instanceof TypeParameter) {
-					return; //yolo
+				if (parameters.get(i).getType() instanceof TypeParameter || parameters.get(i).getType() instanceof GenericElement) {
+					buildTypeParameterMapping(typeParameterMapping, parameters.get(i), args.get(i));
+					if (!typeParameterMapping.isEmpty()) {
+						continue;
+					}
 				}
 				assertArgumentIsCompatible(operationOwner, parameters.get(i), args.get(i));
 			}
@@ -305,11 +291,55 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				assertArgumentIsCompatible(operationOwner, parameter, expression);
 			}
 		}
+		return typeParameterMapping;
+	}
+
+	protected void buildTypeParameterMapping(Map<TypeParameter, InferenceResult> typeParameterMapping, Parameter parameter,
+			Expression argument) {
+		
+		InferenceResult argumentType = inferTypeDispatch(argument);
+		buildTypeParameterMapping(typeParameterMapping, parameter.getTypeSpecifier(), argumentType);
+	}
+
+	protected void buildTypeParameterMapping(Map<TypeParameter, InferenceResult> typeParameterMapping, TypeSpecifier typeSpecifier,
+			InferenceResult argumentType) {
+		
+		if (typeSpecifier.getType() instanceof TypeParameter) {
+			Type newMappedType = argumentType.getType();
+			TypeParameter typeParameter = (TypeParameter)typeSpecifier.getType();
+			InferenceResult oldMappedType = typeParameterMapping.get(typeParameter);
+			if (oldMappedType != null) {
+				Type commonType = registry.getCommonType(newMappedType, oldMappedType.getType());
+				if (commonType == null) {
+					error("Could not infer common type for type parameter " + typeSpecifier.getType().getName()
+							+ " from argument types " + newMappedType.getName() + " and " + oldMappedType.getType().getName(), NOT_COMPATIBLE_CODE);
+					typeParameterMapping.put(typeParameter, null);
+					return;
+				} else {
+					typeParameterMapping.put(typeParameter, InferenceResult.from(commonType, argumentType.getBindings()));
+				}
+			} else {
+				typeParameterMapping.put(typeParameter, InferenceResult.from(newMappedType, argumentType.getBindings()));
+			}
+		}
+		if (typeSpecifier.getType() instanceof GenericElement) {
+			for (int i = 0; i < typeSpecifier.getTypeArguments().size(); i++) {
+				TypeSpecifier typeParameter = typeSpecifier.getTypeArguments().get(i);
+				if (argumentType.getBindings().size() <= i) {
+					error("Could not infer type for " + typeParameter.getType().getName(), NOT_COMPATIBLE_CODE);
+					return;
+				}
+				InferenceResult typeArgument = argumentType.getBindings().get(i);
+				buildTypeParameterMapping(typeParameterMapping, typeParameter, typeArgument);
+			}
+		}
+		
 	}
 
 	protected void assertArgumentIsCompatible(Expression operationOwner, Parameter parameter, Expression argument) {
 		InferenceResult result1 = inferTypeDispatch(parameter);
 		if (operationOwner != null && result1 != null && result1.getType() instanceof TypeParameter) {
+			// resolve type parameter based on operation owner type arguments
 			result1 = inferTypeParameter((TypeParameter) result1.getType(), inferTypeDispatch(operationOwner));
 		}
 		InferenceResult result2 = inferTypeDispatch(argument);

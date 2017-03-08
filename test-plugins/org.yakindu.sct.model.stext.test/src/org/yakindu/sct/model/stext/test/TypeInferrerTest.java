@@ -785,7 +785,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 				+ "var t2:ComplexParameterizedType<integer, boolean>"
 				+ "operation op(p:ComplexParameterizedType<boolean, integer>) : void";
 		expectNoErrors("op(t1)", scopes);
-		expectErrors("op(t2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2);
+		expectError("op(t2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE);
 	}
 	
 	@Test
@@ -815,14 +815,19 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 				+ "var myCPT2: ComplexParameterizedType<integer, boolean> ";
 		
 		expectNoErrors("myI = genericOp(myI, myI)", scopes);
+		assertTrue(isIntegerType(inferTypeResultForExpression("myI = genericOp(myI, myI)", scopes).getType()));
+		
 		expectNoErrors("myF = genericOp(3+5, 2.3)", scopes);
+		assertTrue(isRealType(inferTypeResultForExpression("myF = genericOp(3+5, 2.3)", scopes).getType()));
+		
 		expectNoErrors("myCPT = genericOp(myCPT, myCPT)", scopes);
 		
 		expectError("myB = genericOp(myI, myI)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
-		expectError("myB = genericOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+		// expecting two error: (1) can not infer common type for integer and boolean; (2) can not infer type for return type
+		expectErrors("myB = genericOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2);
 		
-		expectError("myCPT2 = genericOp(myCPT, myCPT)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
-		expectError("myCPT = genericOp(myCPT, myCPT2)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+		expectError("myCPT2 = genericOp(myCPT, myCPT)", scopes, ITypeSystemInferrer.NOT_SAME_CODE);
+		expectError("myCPT = genericOp(myCPT, myCPT2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE);
 	}
 	
 	@Test
