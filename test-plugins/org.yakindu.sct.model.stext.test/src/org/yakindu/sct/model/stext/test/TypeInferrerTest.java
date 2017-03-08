@@ -14,7 +14,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
@@ -827,8 +826,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 	}
 	
 	@Test
-	public void testNestedGenericElementInferrer()
-	{
+	public void testNestedGenericElementInferrer() {
 		String scope = ""
 				+ "import nestedTemplate "
 				+ "internal: "
@@ -841,8 +839,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 	}
 	
 	@Test
-	public void testNestedNestedGenericElementInferrer()
-	{
+	public void testNestedNestedGenericElementInferrer() {
 		String scope = ""
 				+ "import nestedNestedTemplate "
 				+ "internal: "

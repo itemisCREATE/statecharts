@@ -9,12 +9,13 @@
  */
 package org.yakindu.sct.model.stext.test.util
 
+import com.google.common.collect.Lists
+import com.google.inject.Inject
 import java.util.HashMap
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.resource.EObjectDescription
@@ -24,53 +25,39 @@ import org.eclipse.xtext.scoping.impl.SimpleScope
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.EnumerationType
-import org.yakindu.base.types.Enumerator
-import org.yakindu.base.types.Operation
-import org.yakindu.base.types.Parameter
-import org.yakindu.base.types.Property
-import org.yakindu.base.types.Type
-import org.yakindu.base.types.TypeParameter
-import org.yakindu.base.types.TypeSpecifier
+import org.yakindu.base.types.Package
 import org.yakindu.base.types.TypesFactory
-import org.yakindu.base.types.typesystem.GenericTypeSystem
-import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.scoping.STextScopeProvider
-import com.google.common.collect.Lists
-import com.google.inject.Inject
-import org.yakindu.base.types.Package
+
+import static org.yakindu.base.types.typesystem.ITypeSystem.*
 
 /** 
  * @author andreas muelder - Initial contribution and API
  */
-class STextTestScopeProvider extends STextScopeProvider { 
-	static final SGraphFactory sgraphfactory = SGraphFactory.eINSTANCE
-	@Inject IQualifiedNameProvider qfnProvider
-	@Inject ITypeSystem typeSystem
-	protected ComplexType cmplxParamType
+class STextTestScopeProvider extends STextScopeProvider {
 	
-	protected TypesFactory factory = TypesFactory.eINSTANCE;
+	@Inject 
+	protected IQualifiedNameProvider qfnProvider
+	
+	@Inject
+	protected extension TypesTestFactory = TypesTestFactory.INSTANCE
+	protected extension SGraphFactory sgraphfactory = SGraphFactory.eINSTANCE
+	protected extension TypesFactory factory = TypesFactory.eINSTANCE;
+	
+
+	protected ComplexType cmplxParamType
 
 	override IScope getScope(EObject context, EReference reference) {
 		var IScope parentScope = super.getScope(context, reference)
 		var List<IEObjectDescription> descriptions = Lists.newArrayList(parentScope.getAllElements())
-		var State dummyState = createDummyModel()
-		descriptions.add(createEObjectDesc(dummyState))
-		var ComplexType complexType = createComplexType()
-		descriptions.add(createEObjectDesc(complexType))
-		var Type enumType = createEnumType()
-		descriptions.add(createEObjectDesc(enumType))
-		for (Declaration feature : complexType.getFeatures()) {
-			descriptions.add(createEObjectDesc(feature))
-		}
+		
+		addToIndex(descriptions, createDummyModel)
+		addToIndex(descriptions, createComplexType)
+		addToIndex(descriptions, createEnumType)
 		cmplxParamType = createComplexParameterizedType()
-		descriptions.add(createEObjectDesc(cmplxParamType))
-		for (Declaration feature : cmplxParamType.getFeatures()) {
-			descriptions.add(createEObjectDesc(feature))
-		}
+		addToIndex(descriptions, cmplxParamType)
 		
 		val simpleTemplate = createPackageWithTemplateFunction()
 		addToIndex(descriptions, simpleTemplate)
@@ -88,59 +75,56 @@ class STextTestScopeProvider extends STextScopeProvider {
 	}
 	
 	def protected void addToIndex(List<IEObjectDescription> descriptions, EObject element) {
-		descriptions.add(createEObjectDesc(element));
+		descriptions += element.toEObjectDesc
 		if (element instanceof ComplexType) {
-			for (Declaration feature : (element as ComplexType).getFeatures()) {
-				descriptions.add(createEObjectDesc(feature));
+			for (Declaration feature : element.features) {
+				descriptions += feature.toEObjectDesc;
 			}
 		}
 	}
 
-	def protected IEObjectDescription createEObjectDesc(EObject object) {
+	def protected IEObjectDescription toEObjectDesc(EObject object) {
 		return new EObjectDescription(qfnProvider.getFullyQualifiedName(object), object, new HashMap<String, String>())
 	}
 
 	def protected State createDummyModel() {
-		var Statechart statechart = sgraphfactory.createStatechart()
-		statechart.setName("chart")
-		var Region region = sgraphfactory.createRegion()
-		region.setName("r1")
-		statechart.getRegions().add(region)
-		var State state = sgraphfactory.createState()
-		state.setName("A")
-		region.getVertices().add(state)
-		return state
+		val stateA = createState => [
+			name = "A"
+		]
+		createStatechart => [
+			name = "chart"
+			regions += createRegion => [
+				name = "r1"
+				vertices += stateA
+			]
+		]
+		stateA
 	}
 
 	def protected ComplexType createComplexType() {
-		var ComplexType complexType = TypesFactory.eINSTANCE.createComplexType()
-		complexType.setName("ComplexType")
-		var Property featureX = TypesFactory.eINSTANCE.createProperty()
-		featureX.setName("x")
-		var TypeSpecifier typeSpec = TypesFactory.eINSTANCE.createTypeSpecifier()
-		typeSpec.setType(typeSystem.getType(GenericTypeSystem.INTEGER))
-		featureX.setTypeSpecifier(typeSpec)
-		complexType.getFeatures().add(featureX)
-		var Resource resource = new ResourceImpl(URI.createURI("types2"))
-		resource.getContents().add(complexType)
-		return complexType
+		val complexType = factory.createComplexType => [
+			name = "ComplexType"
+			features += createProperty("x", INTEGER)
+		]
+		complexType.addToResource
+		complexType
 	}
 
 	def protected EnumerationType createEnumType() {
-		var EnumerationType enumType = TypesFactory.eINSTANCE.createEnumerationType()
-		enumType.setName("EnumType")
-		enumType.getEnumerator().add(createEnumerator("A"))
-		enumType.getEnumerator().add(createEnumerator("B"))
-		enumType.getEnumerator().add(createEnumerator("C"))
-		var Resource resource = new ResourceImpl(URI.createURI("types2"))
-		resource.getContents().add(enumType)
-		return enumType
+		val enumType = createEnumerationType => [
+			name = "EnumType"
+			enumerator += createEnumerator("A")
+			enumerator += createEnumerator("B")
+			enumerator += createEnumerator("C")
+		]
+		enumType.addToResource
+		enumType
 	}
-
-	def protected Enumerator createEnumerator(String name) {
-		var Enumerator enumerator = TypesFactory.eINSTANCE.createEnumerator()
-		enumerator.setName(name)
-		return enumerator
+	
+	// TODO: check if needed to add into resource
+	def protected addToResource(EObject element) {
+		val resource = new ResourceImpl(URI.createURI("types2"))
+		resource.contents += element
 	}
 
 	/** 
@@ -152,47 +136,21 @@ class STextTestScopeProvider extends STextScopeProvider {
 	 * @return
 	 */
 	def protected ComplexType createComplexParameterizedType() {
-		var ComplexType complexType = TypesFactory.eINSTANCE.createComplexType()
-		complexType.setName("ComplexParameterizedType")
-		var TypeParameter typeParam1 = TypesFactory.eINSTANCE.createTypeParameter()
-		typeParam1.setName("T1")
-		complexType.getTypeParameters().add(typeParam1)
-		var TypeParameter typeParam2 = TypesFactory.eINSTANCE.createTypeParameter()
-		typeParam2.setName("T2")
-		complexType.getTypeParameters().add(typeParam2)
-		var Property prop1 = TypesFactory.eINSTANCE.createProperty()
-		prop1.setName("prop1")
-		var TypeSpecifier prop1typeSpec = TypesFactory.eINSTANCE.createTypeSpecifier()
-		prop1typeSpec.setType(typeParam1)
-		prop1.setTypeSpecifier(prop1typeSpec)
-		complexType.getFeatures().add(prop1)
-		var Property prop2 = TypesFactory.eINSTANCE.createProperty()
-		prop2.setName("prop2")
-		var TypeSpecifier prop2typeSpec = TypesFactory.eINSTANCE.createTypeSpecifier()
-		prop2typeSpec.setType(typeParam2)
-		prop2.setTypeSpecifier(prop2typeSpec)
-		complexType.getFeatures().add(prop2)
-		var Operation operation = TypesFactory.eINSTANCE.createOperation()
-		operation.setName("op")
-		var TypeSpecifier returnTypeSpec = TypesFactory.eINSTANCE.createTypeSpecifier()
-		returnTypeSpec.setType(typeParam1)
-		operation.setTypeSpecifier(returnTypeSpec)
-		var Parameter opParam1 = TypesFactory.eINSTANCE.createParameter()
-		opParam1.setName("param1")
-		var TypeSpecifier param1TypeSpec = TypesFactory.eINSTANCE.createTypeSpecifier()
-		param1TypeSpec.setType(typeParam1)
-		opParam1.setTypeSpecifier(param1TypeSpec)
-		operation.getParameters().add(opParam1)
-		var Parameter opParam2 = TypesFactory.eINSTANCE.createParameter()
-		opParam2.setName("param2")
-		var TypeSpecifier param2TypeSpec = TypesFactory.eINSTANCE.createTypeSpecifier()
-		param2TypeSpec.setType(typeParam2)
-		opParam2.setTypeSpecifier(param2TypeSpec)
-		operation.getParameters().add(opParam2)
-		complexType.getFeatures().add(operation)
-		var Resource resource = new ResourceImpl(URI.createURI("types2"))
-		resource.getContents().add(complexType)
-		return complexType
+		val complexType = createComplexType => [ct |
+			ct.name = "ComplexParameterizedType"
+			ct.typeParameters += createTypeParameter("T1")
+			ct.typeParameters += createTypeParameter("T2")
+			ct.features += createProperty("prop1", ct.typeParameters.get(0))
+			ct.features += createProperty("prop2", ct.typeParameters.get(1))
+			ct.features += createOperation => [op |
+				op.name = "op"
+				op.typeSpecifier = ct.typeParameters.get(0).toTypeSpecifier
+				op.parameters += createParameter("param1", ct.typeParameters.get(0).toTypeSpecifier)
+				op.parameters += createParameter("param2", ct.typeParameters.get(1).toTypeSpecifier)
+			]
+		]
+		complexType.addToResource
+		complexType
 	}
 	
 	/*
@@ -207,24 +165,16 @@ class STextTestScopeProvider extends STextScopeProvider {
 		createRootPackage("simpleTemplate") => [ types |
 			types.member += factory.createOperation => [ op |
 				op.name = "genericOp"
-				op.typeParameters += factory.createTypeParameter => [
-					name = "T"
-				]
+				op.typeParameters += createTypeParameter("T")
 				op.parameters += factory.createParameter => [
 					name = "a"
-					typeSpecifier = factory.createTypeSpecifier => [
-						type = op.typeParameters.head
-					]
+					typeSpecifier = op.typeParameters.head.toTypeSpecifier
 				]
 				op.parameters += factory.createParameter => [
 					name = "b"
-					typeSpecifier = factory.createTypeSpecifier => [
-						type = op.typeParameters.head
-					]
+					typeSpecifier = op.typeParameters.head.toTypeSpecifier
 				]
-				op.typeSpecifier = factory.createTypeSpecifier => [
-					type = op.typeParameters.head
-				]
+				op.typeSpecifier = op.typeParameters.head.toTypeSpecifier
 			]
 		]
 	}
@@ -241,27 +191,16 @@ class STextTestScopeProvider extends STextScopeProvider {
 		createRootPackage("nestedTemplate") => [ types |
 			types.member += factory.createOperation => [ op |
 				op.name = "nestedOp"
-				op.typeParameters += factory.createTypeParameter => [
-					name = "T"
-				]
-				op.typeParameters += factory.createTypeParameter => [
-					name = "T2"
-				]
+				op.typeParameters += createTypeParameter("T")
+				op.typeParameters += createTypeParameter("T2")
 				op.parameters += factory.createParameter => [
 					name = "a"
-					typeSpecifier = factory.createTypeSpecifier => [
-						type = cmplxParamType
-						typeArguments += factory.createTypeSpecifier => [
-							type = op.typeParameters.get(0)
-						]
-						typeArguments += factory.createTypeSpecifier => [
-							type = op.typeParameters.get(1)
-						]
+					typeSpecifier = cmplxParamType.toTypeSpecifier => [
+						typeArguments += op.typeParameters.get(0).toTypeSpecifier
+						typeArguments += op.typeParameters.get(1).toTypeSpecifier
 					]
 				]
-				op.typeSpecifier = factory.createTypeSpecifier => [
-					type = op.typeParameters.get(1)
-				]
+				op.typeSpecifier = op.typeParameters.get(1).toTypeSpecifier
 			]
 		]
 	}
@@ -278,30 +217,18 @@ class STextTestScopeProvider extends STextScopeProvider {
 		createRootPackage("nestedNestedTemplate") => [ types |
 			types.member += factory.createOperation => [ op |
 				op.name = "nestedNestedOp"
-				op.typeParameters += factory.createTypeParameter => [
-					name = "T"
-				]
+				op.typeParameters += createTypeParameter("T")
 				op.parameters += factory.createParameter => [
 					name = "a"
-					typeSpecifier = factory.createTypeSpecifier => [
-						type = cmplxParamType
-						typeArguments += factory.createTypeSpecifier => [
-							type = cmplxParamType
-							typeArguments += factory.createTypeSpecifier => [
-								type = typeSystem.getType(GenericTypeSystem.BOOLEAN) 
-							]
-							typeArguments += factory.createTypeSpecifier => [
-								type = op.typeParameters.head
-							]
+					typeSpecifier = cmplxParamType.toTypeSpecifier => [
+						typeArguments += cmplxParamType.toTypeSpecifier => [
+							typeArguments += BOOLEAN.toTypeSpecifier
+							typeArguments += op.typeParameters.head.toTypeSpecifier
 						]
-						typeArguments += factory.createTypeSpecifier => [
-							type = typeSystem.getType(GenericTypeSystem.INTEGER)
-						]
+						typeArguments += INTEGER.toTypeSpecifier
 					]
 				]
-				op.typeSpecifier = factory.createTypeSpecifier => [
-					type = op.typeParameters.head
-				]
+				op.typeSpecifier = op.typeParameters.head.toTypeSpecifier
 			]
 		]
 	}
