@@ -14,6 +14,7 @@ import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.Enumerator
+import org.yakindu.base.types.Package
 
 class TypesTestFactory {
 	
@@ -23,6 +24,12 @@ class TypesTestFactory {
 	protected ITypeSystem ts;
 	
 	protected TypesFactory factory = TypesFactory.eINSTANCE
+	
+	def Package createRootPackage(String filename) {
+		factory.createPackage => [
+			it.name = filename
+		]
+	}
 	
 	def createParameter(String name, String typeName) {
 		createParameter(name, toTypeSpecifier(ts.getType(typeName)));

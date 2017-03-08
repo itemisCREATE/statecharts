@@ -46,7 +46,6 @@ class STextTestScopeProvider extends STextScopeProvider {
 	protected extension SGraphFactory sgraphfactory = SGraphFactory.eINSTANCE
 	protected extension TypesFactory factory = TypesFactory.eINSTANCE;
 	
-
 	protected ComplexType cmplxParamType
 
 	override IScope getScope(EObject context, EReference reference) {
@@ -232,10 +231,5 @@ class STextTestScopeProvider extends STextScopeProvider {
 			]
 		]
 	}
-	
-	def Package createRootPackage(String filename) {
-		TypesFactory.eINSTANCE.createPackage => [
-			it.name = filename
-		]
-	}
+
 }
