@@ -87,10 +87,12 @@ This section shows how the TypeScript variable we have defined above can actuall
 
 For this purpose, let's consider the following scenario. In the user interface, the blank screen is show. After three seconds, it should change to the main screen.
 
-Figure "Diagram Appearance":#tsdom-fig-change-screen-model show how this is modeled. When the specified time has elapsed, a transition takes place with _blankScreen_ as its origin and with _mainScreen_ as its target state.
+Figure "Diagram Appearance":#tsdom-fig-sample-screen-changing-statechart-model show how this is modeled. When the specified time has elapsed, a transition takes place with _blankScreen_ as its origin and with _mainScreen_ as its target state.
 
-p(#tsdom-fig-change-screen-model). 
-!images/tsdomain_sct_var.png(Change screen model)!
+p(#tsdom-fig-sample-screen-changing-statechart-model). 
+!images/tsdomain_sct_var.png(Sample screen-changing statechart model)!
+
+p=. Sample screen-changing statechart model
 
 The clou is in the _mainScreen_ state's entry action, because it connects the statechart model with the actual user interface implementation, say, a browser. The connection is done via the _routerService_ variable. The entry action calls _routerService_'s _navigate_ method, passes the parameter @"/mainScreen"@, and this in turn – in this case – directs the browser to open the "/mainScreen" URL.
 
