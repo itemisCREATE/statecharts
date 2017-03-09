@@ -566,7 +566,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		EList<Parameter> parameters = operation.getParameters();
 		if ((operation.isVariadic() && operation.getVarArgIndex() > args.size())
 				|| !operation.isVariadic() && parameters.size() != args.size()) {
-			error("Wrong number of arguments, expected " + parameters + ".", null);
+			error(String.format(WRONG_NUMBER_OF_OPERATIONARGUMENTS, parameters), null);
 		}
 	}
 

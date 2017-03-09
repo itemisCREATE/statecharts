@@ -224,7 +224,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		return inferTypeDispatch(e.getReference());
 	}
 
-	protected void inferParameter(Operation operation, EList<Expression> args, Expression operationOwner) {
+	public void inferParameter(Operation operation, EList<Expression> args, Expression operationOwner) {
 		EList<Parameter> parameters = operation.getParameters();
 		if (parameters.size() <= args.size()) {
 			for (int i = 0; i < parameters.size(); i++) {
