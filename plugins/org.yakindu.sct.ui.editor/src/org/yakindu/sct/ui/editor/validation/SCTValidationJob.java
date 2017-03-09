@@ -20,11 +20,10 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.transaction.RunnableWithResult;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
@@ -33,6 +32,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -49,40 +49,6 @@ public class SCTValidationJob extends Job {
 
 	private Resource resource;
 
-	/**
-	 * Wrappes the {@link IResourceValidator} validate within a
-	 * {@link RunnableWithResult} to execute within a read only transaction
-	 * 
-	 * @author andreas muelder - Initial contribution and API
-	 * 
-	 */
-	public static class TransactionalValidationRunner extends RunnableWithResult.Impl<List<Issue>> {
-
-		private IResourceValidator validator;
-		private Resource resource;
-		private CheckMode checkMode;
-		private CancelIndicator indicator;
-
-		public TransactionalValidationRunner(IResourceValidator validator, Resource resource, CheckMode checkMode,
-				CancelIndicator indicator) {
-			this.validator = validator;
-			this.resource = resource;
-			this.checkMode = checkMode;
-			this.indicator = indicator;
-
-		}
-
-		public void run() {
-			try {
-				List<Issue> result = validator.validate(resource, checkMode, indicator);
-				setResult(result);
-				setStatus(Status.OK_STATUS);
-			} catch (OperationCanceledException ex) {
-				setStatus(Status.CANCEL_STATUS);
-			}
-		}
-	}
-
 	public SCTValidationJob() {
 		super("validate model...");
 		setUser(false);
@@ -98,29 +64,21 @@ public class SCTValidationJob extends Job {
 			}
 			if (monitor.isCanceled())
 				return Status.CANCEL_STATUS;
-			TransactionalValidationRunner runner = new TransactionalValidationRunner(validator, resource,
-					CheckMode.FAST_ONLY, new CancelIndicator() {
-						public boolean isCanceled() {
-							return monitor.isCanceled();
-
-						}
-					});
-			TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(resource);
-			if (editingDomain == null)
-				return Status.CANCEL_STATUS;
+			List<Issue> result = Lists.newArrayList();
 			try {
-				editingDomain.runExclusive(runner);
-			} catch (Throwable ex) {
-				// Since xtext 2.8 this may throw an OperationCanceledError
+				result.addAll(validator.validate(resource, CheckMode.FAST_ONLY, new CancelIndicator() {
+					@Override
+					public boolean isCanceled() {
+						return monitor.isCanceled();
+					}
+				}));
+			} catch (OperationCanceledError | OperationCanceledException ex) {
 				return Status.CANCEL_STATUS;
 			}
-			final List<Issue> issues = runner.getResult();
-			if (issues == null)
-				return Status.CANCEL_STATUS;
+			if (!result.isEmpty())
+				validationIssueProcessor.processIssues(result, monitor);
 
-			validationIssueProcessor.processIssues(issues, monitor);
-
-		} catch (Exception ex) {
+		} catch (Throwable ex) {
 			ex.printStackTrace();
 			return new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID, ex.getMessage());
 		}
@@ -152,7 +110,7 @@ public class SCTValidationJob extends Job {
 	public void setResource(Resource resource) {
 		this.resource = resource;
 	}
-	
+
 	public void setValidationIssueProcessor(IValidationIssueProcessor validationIssueProcessor) {
 		this.validationIssueProcessor = validationIssueProcessor;
 	}
