@@ -562,7 +562,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 	}
 
-	protected void assertOperationArguments(Operation operation, List<Expression> args) {
+	public void assertOperationArguments(Operation operation, List<Expression> args) {
 		EList<Parameter> parameters = operation.getParameters();
 		if ((operation.isVariadic() && operation.getVarArgIndex() > args.size())
 				|| !operation.isVariadic() && parameters.size() != args.size()) {
