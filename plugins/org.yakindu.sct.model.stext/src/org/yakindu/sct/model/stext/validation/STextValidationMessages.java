@@ -59,6 +59,7 @@ public interface STextValidationMessages {
 	public static final String VALUE_OF_REQUIRES_EVENT = "valueof() expression requires event as argument.";
 	public static final String VAR_ARGS_LAST_CODE = "VarArgsMustBeLast";
 	public static final String VAR_ARGS_LAST_MSG = "The variable argument type must be the last argument.";
+	public static final String WRONG_NUMBER_OF_OPERATIONARGUMENTS = "Wrong number of arguments, expected %s .";
 
 
 }
