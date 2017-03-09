@@ -30,7 +30,6 @@ import org.yakindu.base.types.TypesFactory
 import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.scoping.STextScopeProvider
-
 import static org.yakindu.base.types.typesystem.ITypeSystem.*
 
 /** 
@@ -40,7 +39,6 @@ class STextTestScopeProvider extends STextScopeProvider {
 	
 	@Inject 
 	protected IQualifiedNameProvider qfnProvider
-	
 	@Inject
 	protected extension TypesTestFactory = TypesTestFactory.INSTANCE
 	protected extension SGraphFactory sgraphfactory = SGraphFactory.eINSTANCE
@@ -61,6 +59,23 @@ class STextTestScopeProvider extends STextScopeProvider {
 		val simpleTemplate = createPackageWithTemplateFunction()
 		addToIndex(descriptions, simpleTemplate)
 		addToIndex(descriptions, simpleTemplate.member.head)
+		
+		val intTemplate = createPackageWithTemplateFunctionInt()
+		addToIndex(descriptions, intTemplate)
+		addToIndex(descriptions, intTemplate.member.head)
+
+		val boolTemplate = createPackageWithTemplateFunctionBool()
+		addToIndex(descriptions, boolTemplate)
+		addToIndex(descriptions, boolTemplate.member.head)
+		
+		val mixedTemplate = createPackageWithTemplateFunctionTwoParams()
+		addToIndex(descriptions, mixedTemplate)
+		addToIndex(descriptions, mixedTemplate.member.head)
+		
+		val cptTemplate = createComplexParameterizedTypeTemplateTest()
+		addToIndex(descriptions, cptTemplate)
+		addToIndex(descriptions, cptTemplate.member.head)
+		
 		
 		val nestedTemplate = createPackageWithNestedComplexTypeFunction()
 		addToIndex(descriptions, nestedTemplate)
@@ -152,7 +167,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 		complexType
 	}
 	
-	/*
+	/**
 	 * Returns a model of the following function:
 	 * 
 	 * template <typename T>
@@ -178,7 +193,98 @@ class STextTestScopeProvider extends STextScopeProvider {
 		]
 	}
 	
-		/*
+	/**
+	 * Returns a model of the following function:
+	 * 
+	 * template <typename T>
+	 * int intGenericOp(T a, T b) {
+	 * 		return a > b ? a : b;
+	 * }
+	 */
+	def Package createPackageWithTemplateFunctionInt() {
+		createRootPackage("intTemplate") => [ types |
+			types.member += factory.createOperation => [ op |
+				op.name = "intGenericOp"
+				op.typeParameters += createTypeParameter("T")
+				op.parameters += factory.createParameter => [
+					name = "a"
+					typeSpecifier = op.typeParameters.head.toTypeSpecifier
+				]
+				op.parameters += factory.createParameter => [
+					name = "b"
+					typeSpecifier = op.typeParameters.head.toTypeSpecifier
+				]
+				op.typeSpecifier = factory.createTypeSpecifier => [
+					type = ts.getType(INTEGER)
+				]
+			]
+		]
+	}
+	
+	/**
+	 * Returns a model of the following function:
+	 * 
+	 * template <typename T>
+	 * T boolGenericOp(T a, T b, bool c) {
+	 * 		if(c) return a > b ? a : b;
+	 * 		return a < b ? a : b;
+	 * }
+	 */
+	def Package createPackageWithTemplateFunctionBool() {
+		createRootPackage("boolTemplate") => [ types |
+			types.member += factory.createOperation => [ op |
+				op.name = "boolGenericOp"
+				op.typeParameters += createTypeParameter("T")
+				op.parameters += factory.createParameter => [
+					name = "a"
+					typeSpecifier = op.typeParameters.head.toTypeSpecifier
+				]
+				op.parameters += factory.createParameter => [
+					name = "b"
+					typeSpecifier = op.typeParameters.head.toTypeSpecifier
+				]
+				op.parameters += factory.createParameter => [
+					name = "c"
+					typeSpecifier = BOOLEAN.toTypeSpecifier
+				]
+				op.typeSpecifier = op.typeParameters.head.toTypeSpecifier
+			]
+		]
+	}
+	
+	/**
+	 * Returns a model of the following function:
+	 * 
+	 * template <typename T, typename T2>
+	 * T2 mixedGenericOp(T a, T2 b, bool c) {
+	 * 		if(c) return a > b ? a : b;
+	 * 		return a < b ? a : b;
+	 * }
+	 */
+	def Package createPackageWithTemplateFunctionTwoParams() {
+		createRootPackage("mixedTemplate") => [ types |
+			types.member += factory.createOperation => [ op |
+				op.name = "mixedGenericOp"
+				op.typeParameters += createTypeParameter("T")
+				op.typeParameters += createTypeParameter("T2")
+				op.parameters += factory.createParameter => [
+					name = "a"
+					typeSpecifier = op.typeParameters.get(0).toTypeSpecifier
+				]
+				op.parameters += factory.createParameter => [
+					name = "b"
+					typeSpecifier = op.typeParameters.get(1).toTypeSpecifier
+				]
+				op.parameters += factory.createParameter => [
+					name = "c"
+					typeSpecifier = BOOLEAN.toTypeSpecifier
+				]
+				op.typeSpecifier = op.typeParameters.get(1).toTypeSpecifier
+			]
+		]
+	}
+	
+	/**
 	 * Returns a model of the following function:
 	 * 
 	 * template <typename T, typename T2>
@@ -204,7 +310,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 		]
 	}
 	
-	/*
+	/**
 	 * Returns a model of the following function:
 	 * 
 	 * template <typename T>
@@ -225,6 +331,36 @@ class STextTestScopeProvider extends STextScopeProvider {
 							typeArguments += op.typeParameters.head.toTypeSpecifier
 						]
 						typeArguments += INTEGER.toTypeSpecifier
+					]
+				]
+				op.typeSpecifier = op.typeParameters.head.toTypeSpecifier
+			]
+		]
+	}
+	
+
+
+	/**
+	 * Returns a model of the following function:
+	 * 
+	 * template<typename T, typename T2>
+	 * T getProp(ComplexParameterizedType<T,T2> cpt) {
+	 * 	   return ctp.prop1;
+	 * }
+	 */
+	def createComplexParameterizedTypeTemplateTest() { 
+		createRootPackage("cptTemplate") => [ types |
+			types.member += factory.createOperation => [ op |
+				op.name = "getProp"
+				op.typeParameters += createTypeParameter("T")
+				op.typeParameters += createTypeParameter("T2")
+				
+				op.parameters += factory.createParameter => [
+					name = "cpt"
+					typeSpecifier = factory.createTypeSpecifier => [
+						type = cmplxParamType
+						typeArguments += op.typeParameters.get(0).toTypeSpecifier
+						typeArguments += op.typeParameters.get(1).toTypeSpecifier
 					]
 				]
 				op.typeSpecifier = op.typeParameters.head.toTypeSpecifier
