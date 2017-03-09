@@ -182,7 +182,16 @@
             <!-- Add HTML META element for Internet Explorer :-( -->
             <replaceregexp byline="false"
                            match='(\s*)(&lt;title&gt;)'
-                           replace='\1&lt;meta http-equiv="X-UA-Compatible" content="IE=edge" /&gt;\1\2'>
+                           replace='\1&lt;meta http-equiv="X-UA-Compatible" content="IE=edge"/&gt;\1\2'>
+                <fileset dir="${help.dir}">
+                    <include name="**/*.html" />
+                </fileset>
+            </replaceregexp>
+
+            <!-- Add HTML META element to support viewport scaling -->
+            <replaceregexp byline="false"
+                           match='(\s*)(&lt;title&gt;)'
+                           replace='\1&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;\1\2'>
                 <fileset dir="${help.dir}">
                     <include name="**/*.html" />
                 </fileset>
@@ -216,6 +225,25 @@
                 </fileset>
             </replaceregexp>
 
+            <!-- Validate the generated and modified HTML: -->
+            <xmlvalidate failonerror="yes" lenient="yes" warn="no">
+                <fileset dir="${help.dir}" includes="**/*.html" />
+                <attribute name="http://xml.org/sax/features/validation" value="false" />
+                <attribute name="http://apache.org/xml/features/validation/schema" value="false" />
+                <attribute name="http://apache.org/xml/features/validation/schema-full-checking" value="false" />
+                <attribute name="http://apache.org/xml/features/validation/warn-on-undeclared-elemdef" value="false" />
+                <attribute name="http://apache.org/xml/features/validation/dynamic" value="false" />
+                <attribute name="http://apache.org/xml/features/nonvalidating/load-dtd-grammar" value="false" />
+                <attribute name="http://apache.org/xml/features/nonvalidating/load-external-dtd" value="false" />
+                <attribute name="http://xml.org/sax/features/namespaces" value="false" />
+                <attribute name="http://xml.org/sax/features/external-general-entities" value="false" />
+                <attribute name="http://xml.org/sax/features/external-parameter-entities" value="false" />
+                <attribute name="http://xml.org/sax/features/resolve-dtd-uris" value="false" />
+                <attribute name="http://xml.org/sax/features/use-entity-resolver2" value="false" />
+                <attribute name="http://xml.org/sax/features/namespace-prefixes" value="false" />
+                <attribute name="http://xml.org/sax/features/namespaces" value="false" />
+            </xmlvalidate>
+
             <!-- Copy the CSS files to the destination directory: -->
             <copy todir="${help.dir}/${css.dir}">
                 <fileset dir="${css.dir}">
@@ -240,7 +268,8 @@
              YCST-installation.html
              YCST-user-guide.html
              YCST-tutorials.html
-             css/style.css
+             css/yakindu.css
+             css/ysct.css
                  …
              images/…
     -->
