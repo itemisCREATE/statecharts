@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
@@ -53,6 +52,7 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.expressions.inferrer.TypeParameterResolver.TypeInferrenceBindingException;
 import org.yakindu.base.expressions.inferrer.TypeParameterResolver.TypeInferrenceException;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
@@ -66,7 +66,6 @@ import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
@@ -244,10 +243,12 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		List<Parameter> parameters = op.getParameters();
 		try {
 			typeParameterResolver.resolveTypeParametersFromOperationArguments(typeParameterMapping, argumentTypes, parameters);
+			validateParameters(typeParameterMapping, op, e.getArgs());
+		} catch (TypeInferrenceBindingException ex) {
+			error(ex.getMessage(), NOT_SAME_CODE);
 		} catch (TypeInferrenceException ex) {
 			error(ex.getMessage(), NOT_COMPATIBLE_CODE);
 		}
-		validateParameters(typeParameterMapping, op, e.getArgs());
 		return inferReturnType(op, typeParameterMapping);
 	}
 	
@@ -258,18 +259,6 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		}
 		return argumentTypes;
 	}
-
-//	public InferenceResult inferOperation(Operation op, ArgumentExpression e) {
-//		EList<Expression> args = e.getArgs();
-//
-//		Expression operationOwner = null;
-//		if (e instanceof FeatureCall) {
-//			operationOwner = ((FeatureCall) e).getOwner();
-//		}
-//
-//		Map<TypeParameter, InferenceResult> typeParameterMapping = inferParameters(op, args, operationOwner);
-//		return inferReturnType(op, typeParameterMapping);
-//	}
 
 	protected InferenceResult inferReturnType(Operation operation,
 			Map<TypeParameter, InferenceResult> typeParameterMapping) {
@@ -284,59 +273,6 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		}
 		return inferTypeDispatch(operation);
 	}
-	
-//	protected InferenceResult inferFeatureType(EObject feature,
-//			Map<TypeParameter, InferenceResult> typeParameterMapping) {
-//		InferenceResult featureType = inferTypeDispatch(feature);
-//		
-//		if (featureType.getType() instanceof TypeParameter || featureType.getType() instanceof GenericElement) {
-//			try {
-//				return typeParameterResolver.inferType(operation.getTypeSpecifier(), typeParameterMapping);
-//			} catch (TypeInferrenceException e) {
-//				error(e.getMessage(), NOT_COMPATIBLE_CODE);
-//				return InferenceResult.from(registry.getType(ANY));
-//			}
-//
-//		}
-//		return featureType;
-//	}
-
-//	protected Map<TypeParameter, InferenceResult> inferParameters(Operation operation, EList<Expression> args,
-//			Expression operationOwner) {
-//		Map<TypeParameter, InferenceResult> typeParameterMapping = Maps.newHashMap();
-//		// Get type parameters from FeatureCall owner, if available
-//		if (operationOwner != null) {
-//			InferenceResult operationOwnerResult = inferTypeDispatch(operationOwner);
-//			typeParameterResolver.buildOwnerTypeParameterBinding(typeParameterMapping, operationOwnerResult);
-//		}
-//		EList<Parameter> parameters = operation.getParameters();
-//		if (parameters.size() <= args.size()) {
-//			for (int i = 0; i < parameters.size(); i++) {
-//				Parameter parameter = parameters.get(i);
-//				Expression argument = args.get(i);
-//				if (parameter.getType() instanceof TypeParameter || parameter.getType() instanceof GenericElement) {
-//					try {
-//						typeParameterResolver.buildTypeParameterMapping(typeParameterMapping,
-//								parameter.getTypeSpecifier(), inferTypeDispatch(argument));
-//					} catch (TypeInferrenceException e) {
-//						error(e.getMessage(), NOT_COMPATIBLE_CODE);
-//					}
-//					if (!typeParameterMapping.isEmpty()) {
-//						continue;
-//					}
-//				}
-//				assertArgumentIsCompatible(operationOwner, parameter, argument);
-//			}
-//		}
-//		if (operation.isVariadic() && args.size() - 1 >= operation.getVarArgIndex()) {
-//			Parameter parameter = operation.getParameters().get(operation.getVarArgIndex());
-//			List<Expression> varArgs = args.subList(operation.getVarArgIndex(), args.size() - 1);
-//			for (Expression expression : varArgs) {
-//				assertArgumentIsCompatible(operationOwner, parameter, expression);
-//			}
-//		}
-//		return typeParameterMapping;
-//	}
 
 	protected Map<TypeParameter, InferenceResult> validateParameters(
 			Map<TypeParameter, InferenceResult> typeParameterMapping, Operation operation, List<Expression> args) {
@@ -353,6 +289,14 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 						InferenceResult argumentType = inferTypeDispatch(argument);
 						assertCompatible(argumentType, resolvedParameterType, String.format(INCOMPATIBLE_TYPES, argumentType, resolvedParameterType));
 //					}
+				} else if (parameter.getType() instanceof GenericElement) {
+					InferenceResult argumentType = inferTypeDispatch(argument);
+					try {
+						InferenceResult parameterType = typeParameterResolver.buildInferenceResult(parameter.getTypeSpecifier(), typeParameterMapping);
+						assertCompatible(argumentType, parameterType, String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
+					} catch(TypeInferrenceException e) {
+						error(e.getMessage(), NOT_COMPATIBLE_CODE);
+					}
 				} else {
 					assertArgumentIsCompatible(parameter, argument);
 					
@@ -368,18 +312,6 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			}
 		}
 		return typeParameterMapping;
-	}
-
-	protected void buildTypeParameterMapping(Map<TypeParameter, InferenceResult> typeParameterMapping,
-			Parameter parameter, Expression argument) {
-
-		InferenceResult argumentType = inferTypeDispatch(argument);
-		TypeSpecifier typeSpecifier = parameter.getTypeSpecifier();
-		try {
-			typeParameterResolver.buildTypeParameterMapping(typeParameterMapping, typeSpecifier, argumentType);
-		} catch (TypeInferrenceException e) {
-			error(e.getMessage(), NOT_COMPATIBLE_CODE);
-		}
 	}
 
 	protected void assertArgumentIsCompatible(Parameter parameter, Expression argument) {

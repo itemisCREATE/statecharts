@@ -15,6 +15,7 @@ import java.util.List
 import java.util.Map
 import org.yakindu.base.types.GenericElement
 import org.yakindu.base.types.Parameter
+import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypeParameter
 import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult
@@ -26,9 +27,12 @@ class TypeParameterResolver {
 
 	@Inject ITypeSystem registry;
 
+	/**
+	 * Goes through the parameters and the arguments of the operation and the operation call
+	 * and tries to infer the type of the TypeParameters for this operation call.
+	 */
 	def void resolveTypeParametersFromOperationArguments(Map<TypeParameter, InferenceResult> typeParameterMapping,
-		List<InferenceResult> arguments, List<Parameter> parameters)
-		throws TypeInferrenceException {
+		List<InferenceResult> arguments, List<Parameter> parameters) throws TypeInferrenceException {
 		if (parameters.size() <= arguments.size()) {
 			for (var i = 0; i < parameters.size(); i++) {
 				val parameter = parameters.get(i);
@@ -40,33 +44,13 @@ class TypeParameterResolver {
 		}
 	}
 
-	def void buildTypeParameterMapping(Map<TypeParameter, InferenceResult> typeParameterMapping,
+	def protected void buildTypeParameterMapping(Map<TypeParameter, InferenceResult> typeParameterMapping,
 		TypeSpecifier parameterTypeSpecifier, InferenceResult argumentType) throws TypeInferrenceException {
 		val parameterType = parameterTypeSpecifier.getType()
 		if (parameterType instanceof TypeParameter) {
 			resolveTypeParameter(parameterType, argumentType, typeParameterMapping)
 		} else if (parameterType instanceof GenericElement) {
 			resolveGenericElement(parameterTypeSpecifier, argumentType, typeParameterMapping)
-		}
-	}
-
-	def protected resolveTypeParameter(TypeParameter parameterType, InferenceResult argumentType,
-		Map<TypeParameter, InferenceResult> typeParameterMapping) {
-
-		val newMappedType = argumentType.getType();
-		val typeInMap = typeParameterMapping.get(parameterType);
-		if (typeInMap == null) {
-			typeParameterMapping.put(parameterType, InferenceResult.from(newMappedType, argumentType.getBindings()));
-		} else {
-			val commonType = registry.getCommonType(newMappedType, typeInMap.getType());
-			if (commonType == null) {
-				typeParameterMapping.put(parameterType, null);
-				val errorMsg = String.format(INFER_COMMON_TYPE, parameterType.getName(), newMappedType.getName(),
-					typeInMap.getType().getName());
-				throw new TypeInferrenceException(errorMsg);
-			} else {
-				typeParameterMapping.put(parameterType, InferenceResult.from(commonType, argumentType.getBindings()));
-			}
 		}
 	}
 
@@ -84,6 +68,52 @@ class TypeParameterResolver {
 		}
 	}
 
+	def protected resolveTypeParameter(TypeParameter parameterType, InferenceResult argumentType,
+		Map<TypeParameter, InferenceResult> typeParameterMapping) {
+
+		val newMappedType = argumentType.getType();
+		val typeInMap = typeParameterMapping.get(parameterType);
+		if (typeInMap == null) {
+			typeParameterMapping.put(parameterType, InferenceResult.from(newMappedType, argumentType.getBindings()));
+		} else {
+			val commonType = getCommonType(argumentType, typeInMap);
+			if (commonType == null) {
+				typeParameterMapping.put(parameterType, null);
+				val errorMsg = String.format(INFER_COMMON_TYPE, parameterType.getName(), newMappedType.getName(),
+					typeInMap.getType().getName());
+				throw new TypeInferrenceException(errorMsg);
+			} else {
+				typeParameterMapping.put(parameterType, InferenceResult.from(commonType, argumentType.getBindings()));
+			}
+		}
+	}
+
+	protected def Type getCommonType(InferenceResult newMappedType, InferenceResult typeInMap) {
+		val result = registry.getCommonType(newMappedType.getType(), typeInMap.getType())
+		if (result == null) {
+			return null
+		}
+		val errorMsg = String.format(INCOMPATIBLE_TYPES, newMappedType.toString, typeInMap.toString)
+		assertBindingsSame(newMappedType.bindings, typeInMap.bindings, errorMsg)
+		return result
+	}
+
+	def assertBindingsSame(List<InferenceResult> bindings1, List<InferenceResult> bindings2, String errorMsg) {
+		if (bindings1.size() != bindings2.size()) {
+			throw new TypeInferrenceBindingException(errorMsg)
+		}
+		for (var i = 0; i < bindings1.size(); i++) {
+			if (!registry.isSame(bindings1.get(i).type, bindings2.get(i).type)) {
+				throw new TypeInferrenceBindingException(errorMsg)
+			}
+		}
+	}
+
+	/**
+	 * Returns the InferenceResult for a given TypeSpecifier.
+	 * If the TypeSpecifier is a GenericElement, it calls itself recursively to fill all 
+	 * nested TypeParameters.
+	 */
 	def protected InferenceResult buildInferenceResult(TypeSpecifier typeSpecifier,
 		Map<TypeParameter, InferenceResult> typeParameterMapping) throws TypeInferrenceException {
 		if (typeSpecifier.getType() instanceof TypeParameter) {
@@ -97,10 +127,11 @@ class TypeParameterResolver {
 				return mappedType;
 			}
 		} else {
-			val result = InferenceResult.from(typeSpecifier.getType());
+			val List<InferenceResult> bindings = newArrayList()
 			for (TypeSpecifier typeArgSpecifier : typeSpecifier.getTypeArguments()) {
-				buildInferenceResult(typeArgSpecifier, typeParameterMapping);
+				bindings.add( buildInferenceResult(typeArgSpecifier, typeParameterMapping))
 			}
+			val result = InferenceResult.from(typeSpecifier.getType(), bindings);
 			return result;
 		}
 	}
@@ -145,6 +176,12 @@ class TypeParameterResolver {
 	}
 
 	static class TypeInferrenceException extends Exception {
+		new(String message) {
+			super(message)
+		}
+	}
+
+	static class TypeInferrenceBindingException extends TypeInferrenceException {
 		new(String message) {
 			super(message)
 		}
