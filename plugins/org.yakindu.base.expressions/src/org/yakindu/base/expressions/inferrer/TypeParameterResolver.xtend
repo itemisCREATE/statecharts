@@ -18,32 +18,35 @@ class TypeParameterResolver {
 
 	def void buildTypeParameterMapping(Map<TypeParameter, InferenceResult> typeParameterMapping,
 		TypeSpecifier parameterTypeSpecifier, InferenceResult argumentType) throws TypeInferrenceException {
-		buildTypeParameterMap(parameterTypeSpecifier.getType(), parameterTypeSpecifier, argumentType,
-			typeParameterMapping)
+		val parameterType = parameterTypeSpecifier.getType()
+		if(parameterType instanceof TypeParameter) {
+			resolveTypeParameter(parameterType, argumentType, typeParameterMapping)
+		} else if(parameterType instanceof GenericElement) {
+			resolveGenericElement(parameterTypeSpecifier, argumentType, typeParameterMapping)
+		}
 	}
 
-	def protected dispatch buildTypeParameterMap(TypeParameter parameterTypeSpecifierType, TypeSpecifier parameterTypeSpecifier,
+	def protected resolveTypeParameter(TypeParameter parameterType, 
 		InferenceResult argumentType, Map<TypeParameter, InferenceResult> typeParameterMapping) {
 
 		val newMappedType = argumentType.getType();
-		val typeParameter = parameterTypeSpecifier.getType() as TypeParameter;
-		val typeInMap = typeParameterMapping.get(typeParameter);
+		val typeInMap = typeParameterMapping.get(parameterType);
 		if (typeInMap == null) {
-			typeParameterMapping.put(typeParameter, InferenceResult.from(newMappedType, argumentType.getBindings()));
+			typeParameterMapping.put(parameterType, InferenceResult.from(newMappedType, argumentType.getBindings()));
 		} else {
 			val commonType = registry.getCommonType(newMappedType, typeInMap.getType());
 			if (commonType == null) {
-				typeParameterMapping.put(typeParameter, null);
-				val errorMsg = String.format(INFER_COMMON_TYPE, parameterTypeSpecifier.getType().getName(),
+				typeParameterMapping.put(parameterType, null);
+				val errorMsg = String.format(INFER_COMMON_TYPE, parameterType.getName(),
 					newMappedType.getName(), typeInMap.getType().getName());
 				throw new TypeInferrenceException(errorMsg);
 			} else {
-				typeParameterMapping.put(typeParameter, InferenceResult.from(commonType, argumentType.getBindings()));
+				typeParameterMapping.put(parameterType, InferenceResult.from(commonType, argumentType.getBindings()));
 			}
 		}
 	}
 
-	def protected dispatch buildTypeParameterMap(GenericElement parameterTypeSpecifierType, TypeSpecifier parameterTypeSpecifier,
+	def protected resolveGenericElement(TypeSpecifier parameterTypeSpecifier,
 		InferenceResult argumentType, Map<TypeParameter, InferenceResult> typeParameterMapping) {
 		for (var i = 0; i < parameterTypeSpecifier.getTypeArguments().size(); i++) {
 			val typeParameter = parameterTypeSpecifier.getTypeArguments().get(i);
@@ -55,11 +58,6 @@ class TypeParameterResolver {
 				buildTypeParameterMapping(typeParameterMapping, typeParameter, typeArgument);
 			}
 		}
-	}
-
-	def protected dispatch buildTypeParameterMap(EObject parameterTypeSpecifierType, TypeSpecifier parameterTypeSpecifier,
-		InferenceResult argumentType, Map<TypeParameter, InferenceResult> typeParameterMapping) {
-			// Fallback for uninteresting case
 	}
 
 	def protected InferenceResult buildInferenceResult(TypeSpecifier typeSpecifier,
