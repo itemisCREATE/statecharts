@@ -55,6 +55,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 		addToIndex(descriptions, createEnumType)
 		cmplxParamType = createComplexParameterizedType()
 		addToIndex(descriptions, cmplxParamType)
+		addToIndex(descriptions, createParameterizedMethodOwner)
 		
 		val simpleTemplate = createPackageWithTemplateFunction()
 		addToIndex(descriptions, simpleTemplate)
@@ -164,6 +165,26 @@ class STextTestScopeProvider extends STextScopeProvider {
 			]
 		]
 		complexType.addToResource
+		complexType
+	}
+	
+	/**
+	 * ParameterizedMethodOwner {
+	 * 	T1 genericOp<T1, T2>(T1 p1, T2 p1);
+	 * }
+	 */
+	def protected ComplexType createParameterizedMethodOwner() {
+		val complexType = createComplexType => [ct |
+	 		ct.name = "ParameterizedMethodOwner"
+	 		ct.features += createOperation => [op |
+	 			op.name = "genericOp"
+	 			op.typeParameters += createTypeParameter("T1")
+	 			op.typeParameters += createTypeParameter("T2")
+	 			op.typeSpecifier = op.typeParameters.get(0).toTypeSpecifier
+	 			op.parameters += createParameter("p1", op.typeParameters.get(0).toTypeSpecifier)
+	 			op.parameters += createParameter("p2", op.typeParameters.get(1).toTypeSpecifier)
+	 		]
+	 	]
 		complexType
 	}
 	

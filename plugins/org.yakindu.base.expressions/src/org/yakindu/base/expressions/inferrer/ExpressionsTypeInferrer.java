@@ -209,9 +209,9 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getFeature();
 			EList<Expression> args = e.getArgs();
-			inferParameter(operation, args, e.getOwner());
+			Map<TypeParameter, InferenceResult> typeParameterMapping = inferParameter(operation, args, e.getOwner());
 			
-//			return inferReturnType(operation, args); TODO: Find correct way
+//			return inferReturnType(operation, typeParameterMapping); 
 		}
 		InferenceResult result = inferTypeDispatch(e.getFeature());
 		if (result != null && result.getType() instanceof TypeParameter) {

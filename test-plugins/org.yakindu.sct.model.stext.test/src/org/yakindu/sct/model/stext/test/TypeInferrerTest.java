@@ -771,7 +771,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 
 		assertTrue(isAnyType(inferTypeResultForExpression("t.prop1", "internal var t:ComplexParameterizedType").getType()));
 		
-		assertTrue(isAnyType(inferTypeResultForExpression("t.op(1, 2)", "internal var t:ComplexParameterizedType").getType()));
+		assertTrue(isIntegerType(inferTypeResultForExpression("t.op(1, 2)", "internal var t:ComplexParameterizedType").getType()));
 		
 		assertTrue(isAnyType(inferTypeResultForExpression("t.prop1.prop1",
 				"internal var t:ComplexParameterizedType<ComplexParameterizedType<>, integer>").getType()));
@@ -824,7 +824,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		
 		expectError("myB = genericOp(myI, myI)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 		// expecting two error: (1) can not infer common type for integer and boolean; (2) can not infer type for return type
-		expectErrors("myB = genericOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2);
+		expectError("myB = genericOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 		
 		expectError("myCPT2 = genericOp(myCPT, myCPT)", scopes, ITypeSystemInferrer.NOT_SAME_CODE);
 		expectError("myCPT = genericOp(myCPT, myCPT2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE);
@@ -854,5 +854,24 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		
 		expectNoErrors("myS = nestedNestedOp(nestedCPT)", scope);
 		expectError("b = nestedNestedOp(nestedCPT)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+	}
+	
+	@Test
+	public void testGenericFeatureCall() {
+		String scope = ""
+				+ "internal: "
+				+ "var cmo: ParameterizedMethodOwner "
+				+ "var i: integer "
+				+ "var r: real "
+				+ "var b: boolean ";
+		
+		expectNoErrors("i = cmo.genericOp(1, 2)", scope);
+		expectNoErrors("r = cmo.genericOp(1.3, 2)", scope);
+		expectNoErrors("r = cmo.genericOp(1, 2)", scope);
+		expectNoErrors("b = cmo.genericOp(true, 2)", scope);
+		expectNoErrors("b = cmo.genericOp(true, 2)", scope);
+		expectError("i = cmo.genericOp(1.3, 2)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+		expectError("r = cmo.genericOp(false, 2)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+		expectError("b = cmo.genericOp(1.3, 2)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 	}
 }
