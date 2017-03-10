@@ -824,7 +824,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		
 		expectError("myB = genericOp(myI, myI)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 		// expecting two error: (1) can not infer common type for integer and boolean; (2) can not infer type for return type
-		expectError("myB = genericOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
+		expectErrors("myB = genericOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2);
 		
 		expectError("myCPT2 = genericOp(myCPT, myCPT)", scopes, ITypeSystemInferrer.NOT_SAME_CODE);
 		expectError("myCPT = genericOp(myCPT, myCPT2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE);

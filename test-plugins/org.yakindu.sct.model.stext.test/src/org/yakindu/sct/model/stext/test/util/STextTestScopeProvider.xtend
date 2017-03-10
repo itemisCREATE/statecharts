@@ -31,6 +31,7 @@ import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.scoping.STextScopeProvider
 import static org.yakindu.base.types.typesystem.ITypeSystem.*
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy
 
 /** 
  * @author andreas muelder - Initial contribution and API
@@ -39,6 +40,8 @@ class STextTestScopeProvider extends STextScopeProvider {
 	
 	@Inject 
 	protected IQualifiedNameProvider qfnProvider
+	@Inject
+	protected DefaultResourceDescriptionStrategy descriptionStrategy
 	@Inject
 	protected extension TypesTestFactory = TypesTestFactory.INSTANCE
 	protected extension SGraphFactory sgraphfactory = SGraphFactory.eINSTANCE
@@ -90,16 +93,12 @@ class STextTestScopeProvider extends STextScopeProvider {
 	}
 	
 	def protected void addToIndex(List<IEObjectDescription> descriptions, EObject element) {
-		descriptions += element.toEObjectDesc
+		descriptionStrategy.createEObjectDescriptions(element, [descriptions+=it])
 		if (element instanceof ComplexType) {
 			for (Declaration feature : element.features) {
-				descriptions += feature.toEObjectDesc;
+				descriptionStrategy.createEObjectDescriptions(element, [descriptions+=it])
 			}
 		}
-	}
-
-	def protected IEObjectDescription toEObjectDesc(EObject object) {
-		return new EObjectDescription(qfnProvider.getFullyQualifiedName(object), object, new HashMap<String, String>())
 	}
 
 	def protected State createDummyModel() {
