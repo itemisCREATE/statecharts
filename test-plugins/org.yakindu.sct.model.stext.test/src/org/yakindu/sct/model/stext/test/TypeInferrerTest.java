@@ -773,6 +773,8 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		
 		assertTrue(isIntegerType(inferTypeResultForExpression("t.op(1, 2)", "internal var t:ComplexParameterizedType").getType()));
 		
+		expectNoErrors("b = t.op2()", "internal: var t:ComplexParameterizedType<integer, boolean> var b: boolean");
+
 		assertTrue(isAnyType(inferTypeResultForExpression("t.prop1.prop1",
 				"internal var t:ComplexParameterizedType<ComplexParameterizedType<>, integer>").getType()));
 	}

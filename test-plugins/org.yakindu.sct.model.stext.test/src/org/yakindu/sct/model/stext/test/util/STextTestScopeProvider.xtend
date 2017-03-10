@@ -146,6 +146,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 	 * T1 prop1;
 	 * T2 prop2;
 	 * T1 op(T1 param1, T2 param2);
+	 * T2 op2();
 	 * }
 	 * @return
 	 */
@@ -161,6 +162,10 @@ class STextTestScopeProvider extends STextScopeProvider {
 				op.typeSpecifier = ct.typeParameters.get(0).toTypeSpecifier
 				op.parameters += createParameter("param1", ct.typeParameters.get(0).toTypeSpecifier)
 				op.parameters += createParameter("param2", ct.typeParameters.get(1).toTypeSpecifier)
+			]
+			ct.features += createOperation => [op |
+				op.name = "op2"
+				op.typeSpecifier = ct.typeParameters.get(1).toTypeSpecifier
 			]
 		]
 		complexType.addToResource
