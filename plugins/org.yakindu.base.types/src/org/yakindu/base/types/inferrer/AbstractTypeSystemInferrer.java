@@ -49,7 +49,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	@Inject
 	protected ITypeSystem registry;
 
-	private IValidationIssueAcceptor acceptor;
+	protected IValidationIssueAcceptor acceptor;
 
 	private PolymorphicDispatcher<Object> dispatcher;
 

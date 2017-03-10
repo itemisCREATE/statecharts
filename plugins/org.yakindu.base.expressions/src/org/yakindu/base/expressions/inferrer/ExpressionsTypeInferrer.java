@@ -24,6 +24,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.EcoreUtil2;
+import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
@@ -51,6 +52,7 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.expressions.inferrer.TypeParameterResolver.TypeInferrenceException;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.GenericElement;
@@ -64,12 +66,15 @@ import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
 
 import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
  * 
  */
 public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements ExpressionsTypeInferrerMessages {
+	@Inject
+	private TypeParameterResolver typeParameterResolver;
 
 	public InferenceResult doInfer(AssignmentExpression e) {
 		InferenceResult result1 = inferTypeDispatch(e.getVarRef());
@@ -207,82 +212,63 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 
 	public InferenceResult doInfer(FeatureCall e) {
 		if (e.isOperationCall()) {
-			Operation operation = (Operation) e.getFeature();
-			EList<Expression> args = e.getArgs();
-			Map<TypeParameter, InferenceResult> typeParameterMapping = inferParameter(operation, args, e.getOwner());
-			
-			return inferReturnType(operation, typeParameterMapping); 
+			return inferOperation((Operation) e.getFeature(), e);
 		}
 		InferenceResult result = inferTypeDispatch(e.getFeature());
 		if (result != null && result.getType() instanceof TypeParameter) {
-			result = inferTypeParameter((TypeParameter) result.getType(), inferTypeDispatch(e.getOwner()));
+			result = typeParameterResolver.inferTypeParameter((TypeParameter) result.getType(), inferTypeDispatch(e.getOwner()));
 		}
 		return result;
 	}
 	
 	public InferenceResult doInfer(ElementReferenceExpression e) {
 		if (e.isOperationCall()) {
-			Operation operation = (Operation) e.getReference();
-			EList<Expression> args = e.getArgs();
-			
-			Map<TypeParameter, InferenceResult> typeParameterMapping = inferParameter(operation, args, null);
-			return inferReturnType(operation, typeParameterMapping);
+			return inferOperation((Operation) e.getReference(), e);
 		}
 		return inferTypeDispatch(e.getReference());
 	}
+	
+	
+	public InferenceResult inferOperation(Operation op, ArgumentExpression e) {
+		EList<Expression> args = e.getArgs();
+		
+		Map<TypeParameter, InferenceResult> typeParameterMapping = inferParameters(op, args, null);
+		return inferReturnType(op, typeParameterMapping);
+	}
 
 	protected InferenceResult inferReturnType(Operation operation, Map<TypeParameter, InferenceResult> typeParameterMapping) {
-		if (operation.getType() instanceof TypeParameter) {
-			TypeParameter typeParameter = (TypeParameter) operation.getType();
-			InferenceResult mappedType = typeParameterMapping.get(typeParameter);
-			if (mappedType == null) {
-				// TODO: use proper code for all these type parameter resolution problems?!
-				error("Could not infer type for return type " + typeParameter.getName(), NOT_COMPATIBLE_CODE);
-				return InferenceResult.from(registry.getType(ANY));
-			} else {
-				return mappedType;
+		if (operation.getType() instanceof TypeParameter || operation.getType() instanceof GenericElement) {
+			try {
+				return typeParameterResolver.inferReturnType(operation, typeParameterMapping);
 			}
-		}
-		if (operation.getType() instanceof GenericElement) {
-			return buildInferenceResult(operation.getTypeSpecifier(), typeParameterMapping);
+			catch (TypeInferrenceException e) {
+				error(e.getMessage(), NOT_COMPATIBLE_CODE);
+				return InferenceResult.from(registry.getType(ANY));
+			}
 			
 		}
 		return inferTypeDispatch(operation);
 	}
-
-	protected InferenceResult buildInferenceResult(TypeSpecifier typeSpecifier, Map<TypeParameter, InferenceResult> typeParameterMapping) {
-		if (typeSpecifier.getType() instanceof TypeParameter) {
-			// get already inferred type from type parameter map
-			TypeParameter typeParameter = (TypeParameter) typeSpecifier.getType();
-			InferenceResult mappedType = typeParameterMapping.get(typeParameter);
-			if (mappedType == null) {
-				String errorMsg = String.format(INFER_RETURN_TYPE, typeParameter.getName().toString());
-				error(errorMsg, NOT_COMPATIBLE_CODE);
-				return InferenceResult.from(registry.getType(ANY));
-			} else {
-				return mappedType;
-			}
-		} else {
-			InferenceResult result = InferenceResult.from(typeSpecifier.getType());
-			for (TypeSpecifier typeArgSpecifier : typeSpecifier.getTypeArguments()) {
-				buildInferenceResult(typeArgSpecifier, typeParameterMapping);
-			}
-			return result;
-		}
-	}
 	
-	protected Map<TypeParameter, InferenceResult> inferParameter(Operation operation, EList<Expression> args, Expression operationOwner) {
+	protected Map<TypeParameter, InferenceResult> inferParameters(Operation operation, EList<Expression> args, Expression operationOwner) {
 		Map<TypeParameter, InferenceResult> typeParameterMapping = Maps.newHashMap();
 		EList<Parameter> parameters = operation.getParameters();
 		if (parameters.size() <= args.size()) {
 			for (int i = 0; i < parameters.size(); i++) {
-				if (parameters.get(i).getType() instanceof TypeParameter || parameters.get(i).getType() instanceof GenericElement) {
-					buildTypeParameterMapping(typeParameterMapping, parameters.get(i), args.get(i));
+				Parameter parameter = parameters.get(i);
+				Expression argument = args.get(i);
+				if (parameter.getType() instanceof TypeParameter || parameter.getType() instanceof GenericElement) {
+					try {
+						typeParameterResolver.buildTypeParameterMapping(typeParameterMapping, parameter.getTypeSpecifier(), inferTypeDispatch(argument));
+					}
+					catch (TypeInferrenceException e) {
+						error(e.getMessage(), NOT_COMPATIBLE_CODE);
+					}
 					if (!typeParameterMapping.isEmpty()) {
 						continue;
 					}
 				}
-				assertArgumentIsCompatible(operationOwner, parameters.get(i), args.get(i));
+				assertArgumentIsCompatible(operationOwner, parameter, argument);
 			}
 		}
 		if (operation.isVariadic() && args.size() - 1 >= operation.getVarArgIndex()) {
@@ -299,67 +285,23 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			Expression argument) {
 		
 		InferenceResult argumentType = inferTypeDispatch(argument);
-		buildTypeParameterMapping(typeParameterMapping, parameter.getTypeSpecifier(), argumentType);
-	}
-
-	protected void buildTypeParameterMapping(Map<TypeParameter, InferenceResult> typeParameterMapping, TypeSpecifier typeSpecifier,
-			InferenceResult argumentType) {
-		
-		if (typeSpecifier.getType() instanceof TypeParameter) {
-			Type newMappedType = argumentType.getType();
-			TypeParameter typeParameter = (TypeParameter)typeSpecifier.getType();
-			InferenceResult oldMappedType = typeParameterMapping.get(typeParameter);
-			if (oldMappedType != null) {
-				Type commonType = registry.getCommonType(newMappedType, oldMappedType.getType());
-				if (commonType == null) {
-					String errorMsg = String.format(
-							INFER_PARAM_TYPE, 
-							typeSpecifier.getType().getName(), 
-							newMappedType.getName(), 
-							oldMappedType.getType().getName());
-					error(errorMsg, NOT_COMPATIBLE_CODE);
-					typeParameterMapping.put(typeParameter, null);
-					return;
-				} else {
-					typeParameterMapping.put(typeParameter, InferenceResult.from(commonType, argumentType.getBindings()));
-				}
-			} else {
-				typeParameterMapping.put(typeParameter, InferenceResult.from(newMappedType, argumentType.getBindings()));
-			}
+		TypeSpecifier typeSpecifier = parameter.getTypeSpecifier();
+		try {
+			typeParameterResolver.buildTypeParameterMapping(typeParameterMapping, typeSpecifier, argumentType);
 		}
-		if (typeSpecifier.getType() instanceof GenericElement) {
-			for (int i = 0; i < typeSpecifier.getTypeArguments().size(); i++) {
-				TypeSpecifier typeParameter = typeSpecifier.getTypeArguments().get(i);
-				if (argumentType.getBindings().size() <= i) {
-					String errorMsg = String.format(INFER_TYPE, typeParameter.getType().getName());
-					error(errorMsg, NOT_COMPATIBLE_CODE);
-					return;
-				}
-				InferenceResult typeArgument = argumentType.getBindings().get(i);
-				buildTypeParameterMapping(typeParameterMapping, typeParameter, typeArgument);
-			}
+		catch (TypeInferrenceException e) {
+			error(e.getMessage(), NOT_COMPATIBLE_CODE);
 		}
-		
 	}
 
 	protected void assertArgumentIsCompatible(Expression operationOwner, Parameter parameter, Expression argument) {
 		InferenceResult result1 = inferTypeDispatch(parameter);
 		if (operationOwner != null && result1 != null && result1.getType() instanceof TypeParameter) {
 			// resolve type parameter based on operation owner type arguments
-			result1 = inferTypeParameter((TypeParameter) result1.getType(), inferTypeDispatch(operationOwner));
+			result1 = typeParameterResolver.inferTypeParameter((TypeParameter) result1.getType(), inferTypeDispatch(operationOwner));
 		}
 		InferenceResult result2 = inferTypeDispatch(argument);
 		assertCompatible(result2, result1, String.format(INCOMPATIBLE_TYPES, result2, result1));
-	}
-
-	protected InferenceResult inferTypeParameter(TypeParameter typeParameter, InferenceResult ownerResult) {
-		if (ownerResult.getBindings().isEmpty() || !(ownerResult.getType() instanceof GenericElement)) {
-			return getResultFor(ANY);
-		} else {
-			int index = ((GenericElement) ownerResult.getType()).getTypeParameters().indexOf(typeParameter);
-			return InferenceResult.from(ownerResult.getBindings().get(index).getType(),
-					ownerResult.getBindings().get(index).getBindings());
-		}
 	}
 
 	public InferenceResult doInfer(ParenthesizedExpression e) {
