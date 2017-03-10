@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2017 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	Thomas Kutz, René Beckmann - initial API and implementation
+ * 
+ */
 package org.yakindu.base.expressions.inferrer
 
 import com.google.inject.Inject
