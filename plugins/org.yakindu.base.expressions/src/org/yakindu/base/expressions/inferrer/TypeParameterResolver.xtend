@@ -22,7 +22,7 @@ class TypeParameterResolver {
 			typeParameterMapping)
 	}
 
-	def dispatch buildTypeParameterMap(TypeParameter parameterTypeSpecifierType, TypeSpecifier parameterTypeSpecifier,
+	def protected dispatch buildTypeParameterMap(TypeParameter parameterTypeSpecifierType, TypeSpecifier parameterTypeSpecifier,
 		InferenceResult argumentType, Map<TypeParameter, InferenceResult> typeParameterMapping) {
 
 		val newMappedType = argumentType.getType();
@@ -43,7 +43,7 @@ class TypeParameterResolver {
 		}
 	}
 
-	def dispatch buildTypeParameterMap(GenericElement parameterTypeSpecifierType, TypeSpecifier parameterTypeSpecifier,
+	def protected dispatch buildTypeParameterMap(GenericElement parameterTypeSpecifierType, TypeSpecifier parameterTypeSpecifier,
 		InferenceResult argumentType, Map<TypeParameter, InferenceResult> typeParameterMapping) {
 		for (var i = 0; i < parameterTypeSpecifier.getTypeArguments().size(); i++) {
 			val typeParameter = parameterTypeSpecifier.getTypeArguments().get(i);
@@ -57,12 +57,12 @@ class TypeParameterResolver {
 		}
 	}
 
-	def dispatch buildTypeParameterMap(EObject parameterTypeSpecifierType, TypeSpecifier parameterTypeSpecifier,
+	def protected dispatch buildTypeParameterMap(EObject parameterTypeSpecifierType, TypeSpecifier parameterTypeSpecifier,
 		InferenceResult argumentType, Map<TypeParameter, InferenceResult> typeParameterMapping) {
 			// Fallback for uninteresting case
 	}
 
-	def InferenceResult buildInferenceResult(TypeSpecifier typeSpecifier,
+	def protected InferenceResult buildInferenceResult(TypeSpecifier typeSpecifier,
 		Map<TypeParameter, InferenceResult> typeParameterMapping) throws TypeInferrenceException {
 		if (typeSpecifier.getType() instanceof TypeParameter) {
 			// get already inferred type from type parameter map
