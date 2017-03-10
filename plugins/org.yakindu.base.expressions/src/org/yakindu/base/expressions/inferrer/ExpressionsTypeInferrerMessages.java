@@ -32,5 +32,6 @@ public interface ExpressionsTypeInferrerMessages {
 	public static final String VARIABLE_VOID_TYPE = "'void' is an invalid type for variables";
 	public static final String INFER_RETURN_TYPE = "Could not infer return type for Type Parameter %s.";
 	public static final String INFER_PARAM_TYPE = "Could not infer common type for type parameter %s from argument types %s and %s.";
+	public static final String INFER_TYPE = "Could not infer type for %s.";
 
 }
