@@ -136,7 +136,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		acceptor.accept(uri);
 	}
 
-	private Statechart getStatechart(Resource context) {
+	protected Statechart getStatechart(Resource context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context,
 				ContextElementAdapter.class);
 		if (provider == null) {
