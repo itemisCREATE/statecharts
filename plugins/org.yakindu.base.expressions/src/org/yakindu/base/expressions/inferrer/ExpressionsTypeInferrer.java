@@ -65,6 +65,7 @@ import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
+import org.yakindu.base.types.validation.TypeValidationException;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -248,6 +249,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			error(ex.getMessage(), NOT_SAME_CODE);
 		} catch (TypeInferrenceException ex) {
 			error(ex.getMessage(), NOT_COMPATIBLE_CODE);
+		} catch (TypeValidationException ex) {
+			error(ex);
 		}
 		return inferReturnType(op, typeParameterMapping);
 	}

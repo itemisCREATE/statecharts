@@ -22,17 +22,20 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult
 import org.yakindu.base.types.typesystem.ITypeSystem
 
 import static org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrerMessages.*
+import org.yakindu.base.types.validation.TypeValidator
+import org.yakindu.base.types.validation.TypeValidationException
 
 class TypeParameterResolver {
 
 	@Inject ITypeSystem registry;
+	@Inject TypeValidator typeValidator;
 
 	/**
 	 * Goes through the parameters and the arguments of the operation and the operation call
 	 * and tries to infer the type of the TypeParameters for this operation call.
 	 */
 	def void resolveTypeParametersFromOperationArguments(Map<TypeParameter, InferenceResult> typeParameterMapping,
-		List<InferenceResult> arguments, List<Parameter> parameters) throws TypeInferrenceException {
+		List<InferenceResult> arguments, List<Parameter> parameters) throws TypeInferrenceException, TypeValidationException {
 		if (parameters.size() <= arguments.size()) {
 			for (var i = 0; i < parameters.size(); i++) {
 				val parameter = parameters.get(i);
@@ -94,19 +97,8 @@ class TypeParameterResolver {
 			return null
 		}
 		val errorMsg = String.format(INCOMPATIBLE_TYPES, newMappedType.toString, typeInMap.toString)
-		assertBindingsSame(newMappedType.bindings, typeInMap.bindings, errorMsg)
+		typeValidator.assertTypeBindingsSame(newMappedType, typeInMap, errorMsg)
 		return result
-	}
-
-	def assertBindingsSame(List<InferenceResult> bindings1, List<InferenceResult> bindings2, String errorMsg) {
-		if (bindings1.size() != bindings2.size()) {
-			throw new TypeInferrenceBindingException(errorMsg)
-		}
-		for (var i = 0; i < bindings1.size(); i++) {
-			if (!registry.isSame(bindings1.get(i).type, bindings2.get(i).type)) {
-				throw new TypeInferrenceBindingException(errorMsg)
-			}
-		}
 	}
 
 	/**
