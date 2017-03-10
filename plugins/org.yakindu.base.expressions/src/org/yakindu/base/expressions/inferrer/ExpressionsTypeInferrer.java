@@ -256,7 +256,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			TypeParameter typeParameter = (TypeParameter) typeSpecifier.getType();
 			InferenceResult mappedType = typeParameterMapping.get(typeParameter);
 			if (mappedType == null) {
-				error("Could not infer return type", NOT_COMPATIBLE_CODE);
+				String errorMsg = String.format(INFER_RETURN_TYPE, typeParameter.getName().toString());
+				error(errorMsg, NOT_COMPATIBLE_CODE);
 				return InferenceResult.from(registry.getType(ANY));
 			} else {
 				return mappedType;
@@ -311,8 +312,12 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			if (oldMappedType != null) {
 				Type commonType = registry.getCommonType(newMappedType, oldMappedType.getType());
 				if (commonType == null) {
-					error("Could not infer common type for type parameter " + typeSpecifier.getType().getName()
-							+ " from argument types " + newMappedType.getName() + " and " + oldMappedType.getType().getName(), NOT_COMPATIBLE_CODE);
+					String errorMsg = String.format(
+							INFER_PARAM_TYPE, 
+							typeSpecifier.getType().getName(), 
+							newMappedType.getName(), 
+							oldMappedType.getType().getName());
+					error(errorMsg, NOT_COMPATIBLE_CODE);
 					typeParameterMapping.put(typeParameter, null);
 					return;
 				} else {
@@ -326,7 +331,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			for (int i = 0; i < typeSpecifier.getTypeArguments().size(); i++) {
 				TypeSpecifier typeParameter = typeSpecifier.getTypeArguments().get(i);
 				if (argumentType.getBindings().size() <= i) {
-					error("Could not infer type for " + typeParameter.getType().getName(), NOT_COMPATIBLE_CODE);
+					String errorMsg = String.format(INFER_TYPE, typeParameter.getType().getName());
+					error(errorMsg, NOT_COMPATIBLE_CODE);
 					return;
 				}
 				InferenceResult typeArgument = argumentType.getBindings().get(i);
