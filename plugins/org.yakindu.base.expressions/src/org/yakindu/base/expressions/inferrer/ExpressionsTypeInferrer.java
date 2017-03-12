@@ -221,10 +221,14 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			return inferOperation(e, (Operation)e.getFeature(), inferredTypeParameterTypes);
 		}
 		InferenceResult result = inferTypeDispatch(e.getFeature());
-		if (result != null && result.getType() instanceof TypeParameter) { // TODO: what about generic element?
-			// TODO: use buildInferenceResult here, but with different error message
-			result = typeParameterInferrer.inferTypeParameter((TypeParameter) result.getType(),
-					inferTypeDispatch(e.getOwner()));
+		if (result != null && (result.getType() instanceof TypeParameter ||result.getType() instanceof GenericElement)) {
+			try {
+				result = typeParameterInferrer.buildInferenceResult(result, inferredTypeParameterTypes);
+			} catch (TypeInferrenceException e1) {
+				// TODO: at least a warning here?
+//				error(e1.getMessage(), NOT_COMPATIBLE_CODE);
+				result = InferenceResult.from(registry.getType(ANY));
+			}
 		}
 		return result;
 	}

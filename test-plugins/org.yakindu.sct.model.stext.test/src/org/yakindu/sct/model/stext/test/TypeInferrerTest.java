@@ -777,6 +777,17 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 
 		assertTrue(isAnyType(inferTypeResultForExpression("t.prop1.prop1",
 				"internal var t:ComplexParameterizedType<ComplexParameterizedType<>, integer>").getType()));
+		
+		expectNoErrors("t2 = t.prop3",
+				"internal "
+				+ "var t:ComplexParameterizedType<boolean, integer> "
+				+ "var t2:ComplexParameterizedType<integer, boolean>");
+		
+		expectError("t = t.prop3",
+				"internal "
+				+ "var t:ComplexParameterizedType<boolean, integer> "
+				+ "var t2:ComplexParameterizedType<integer, boolean>", 
+				ITypeSystemInferrer.NOT_SAME_CODE);
 	}
 	
 	@Test
@@ -825,7 +836,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		expectNoErrors("myCPT = genericOp(myCPT, myCPT)", scopes);
 		
 		expectError("myB = genericOp(myI, myI)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
-		// expecting two error: (1) can not infer common type for integer and boolean; (2) can not infer type for return type
+		// expecting two errors: (1) can not infer common type for integer and boolean; (2) can not infer type for return type
 		expectErrors("myB = genericOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2);
 		
 		expectError("myCPT2 = genericOp(myCPT, myCPT)", scopes, ITypeSystemInferrer.NOT_SAME_CODE);

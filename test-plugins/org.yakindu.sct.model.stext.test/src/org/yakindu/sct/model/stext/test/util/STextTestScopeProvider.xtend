@@ -11,15 +11,14 @@ package org.yakindu.sct.model.stext.test.util
 
 import com.google.common.collect.Lists
 import com.google.inject.Inject
-import java.util.HashMap
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl
 import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.eclipse.xtext.resource.EObjectDescription
 import org.eclipse.xtext.resource.IEObjectDescription
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy
 import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.impl.SimpleScope
 import org.yakindu.base.types.ComplexType
@@ -30,8 +29,8 @@ import org.yakindu.base.types.TypesFactory
 import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.scoping.STextScopeProvider
+
 import static org.yakindu.base.types.typesystem.ITypeSystem.*
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy
 
 /** 
  * @author andreas muelder - Initial contribution and API
@@ -142,11 +141,14 @@ class STextTestScopeProvider extends STextScopeProvider {
 	}
 
 	/** 
-	 * ComplexParameterizedType<T1,T2> {
-	 * T1 prop1;
-	 * T2 prop2;
-	 * T1 op(T1 param1, T2 param2);
-	 * T2 op2();
+	 * ComplexParameterizedType&lt;T1,T2&gt; {
+	 * <ul>
+	 * <li>T1 prop1;
+	 * <li>T2 prop2;
+	 * <li>ComplexParameterizedType&lt;T2,T1&gt; prop3;
+	 * <li>T1 op(T1 param1, T2 param2);
+	 * <li>T2 op2();
+	 * </ul>
 	 * }
 	 * @return
 	 */
@@ -157,6 +159,10 @@ class STextTestScopeProvider extends STextScopeProvider {
 			ct.typeParameters += createTypeParameter("T2")
 			ct.features += createProperty("prop1", ct.typeParameters.get(0))
 			ct.features += createProperty("prop2", ct.typeParameters.get(1))
+			ct.features += createProperty("prop3", ct.toTypeSpecifier => [
+				typeArguments+=ct.typeParameters.get(1).toTypeSpecifier
+				typeArguments+=ct.typeParameters.get(0).toTypeSpecifier
+			])
 			ct.features += createOperation => [op |
 				op.name = "op"
 				op.typeSpecifier = ct.typeParameters.get(0).toTypeSpecifier

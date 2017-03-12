@@ -143,6 +143,29 @@ class TypeParameterInferrer {
 			return result;
 		}
 	}
+	
+	def protected InferenceResult buildInferenceResult(InferenceResult oldInferenceResult,
+		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) throws TypeInferrenceException {
+		if (oldInferenceResult.getType() instanceof TypeParameter) {
+			// get already inferred type from type parameter map
+			val typeParameter = oldInferenceResult.getType() as TypeParameter
+			val mappedType = inferredTypeParameterTypes.get(typeParameter);
+			if (mappedType == null) {
+				val errorMsg = String.format(INFER_RETURN_TYPE, typeParameter.getName().toString());
+				throw new TypeInferrenceException(errorMsg)
+			} else {
+				return mappedType;
+			}
+		} else if (oldInferenceResult.getType() instanceof GenericElement) {
+			val List<InferenceResult> newBindings = newArrayList()
+			for (InferenceResult oldBinding : oldInferenceResult.getBindings()) {
+				newBindings.add(buildInferenceResult(oldBinding, inferredTypeParameterTypes))
+			}
+			val result = InferenceResult.from(oldInferenceResult.getType(), newBindings);
+			return result;
+		}
+		return oldInferenceResult;
+	}
 
 	/**
 	 * TODO: check if can be replaced by buildInferenceResult
