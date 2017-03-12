@@ -20,10 +20,10 @@ import org.yakindu.base.types.TypeParameter
 import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.base.types.validation.TypeValidationException
+import org.yakindu.base.types.validation.TypeValidator
 
 import static org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrerMessages.*
-import org.yakindu.base.types.validation.TypeValidator
-import org.yakindu.base.types.validation.TypeValidationException
 
 /**
  * Infers the actual type for a type parameter used in generic elements like operations or complex types.
@@ -58,9 +58,7 @@ class TypeParameterInferrer {
 			for (var i = 0; i < parameters.size(); i++) {
 				val parameter = parameters.get(i);
 				val argument = arguments.get(i);
-				if (parameter.getType() instanceof TypeParameter || parameter.getType() instanceof GenericElement) {
-					inferTypeParameterFromOperationArgument(parameter.getTypeSpecifier(), argument, inferredTypeParameterTypes);
-				}
+				inferTypeParameterFromOperationArgument(parameter.getTypeSpecifier(), argument, inferredTypeParameterTypes);
 			}
 		}
 	}
@@ -119,31 +117,10 @@ class TypeParameterInferrer {
 	}
 
 	/**
-	 * Returns the inference result for a given type specifier by taking the type parameter inference map into account.
+	 * Returns the inference result for a given inference result with potentially unresolved type parameters which will 
+	 * be resolved by taking the type parameter inference map into account.
 	 * If the type specifier is a generic element, it calls itself recursively to fill all nested type parameters.
 	 */
-	def protected InferenceResult buildInferenceResult(TypeSpecifier typeSpecifier,
-		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) throws TypeInferrenceException {
-		if (typeSpecifier.getType() instanceof TypeParameter) {
-			// get already inferred type from type parameter map
-			val typeParameter = typeSpecifier.getType() as TypeParameter
-			val mappedType = inferredTypeParameterTypes.get(typeParameter);
-			if (mappedType == null) {
-				val errorMsg = String.format(INFER_RETURN_TYPE, typeParameter.getName().toString());
-				throw new TypeInferrenceException(errorMsg)
-			} else {
-				return mappedType;
-			}
-		} else {
-			val List<InferenceResult> bindings = newArrayList()
-			for (TypeSpecifier typeArgSpecifier : typeSpecifier.getTypeArguments()) {
-				bindings.add(buildInferenceResult(typeArgSpecifier, inferredTypeParameterTypes))
-			}
-			val result = InferenceResult.from(typeSpecifier.getType(), bindings);
-			return result;
-		}
-	}
-	
 	def protected InferenceResult buildInferenceResult(InferenceResult oldInferenceResult,
 		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) throws TypeInferrenceException {
 		if (oldInferenceResult.getType() instanceof TypeParameter) {
@@ -165,34 +142,6 @@ class TypeParameterInferrer {
 			return result;
 		}
 		return oldInferenceResult;
-	}
-
-	/**
-	 * TODO: check if can be replaced by buildInferenceResult
-	 */
-	def InferenceResult inferType(TypeSpecifier genericType,
-		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) throws TypeInferrenceException {
-		val type = genericType.getType()
-		if (type instanceof TypeParameter) {
-			val mappedType = inferredTypeParameterTypes.get(type)
-			if (mappedType == null) {
-				throw new TypeInferrenceException(String.format(INFER_RETURN_TYPE, type.getName()));
-			} else {
-				return mappedType;
-			}
-		} else if (type instanceof GenericElement) {
-			return buildInferenceResult(genericType, inferredTypeParameterTypes);
-		}
-	}
-
-	def InferenceResult inferTypeParameter(TypeParameter typeParameter, InferenceResult ownerResult) {
-		if (ownerResult.getBindings().isEmpty() || !(ownerResult.getType() instanceof GenericElement)) {
-			return InferenceResult.from(registry.getType(ITypeSystem.ANY));
-		} else {
-			val index = (ownerResult.getType() as GenericElement).getTypeParameters().indexOf(typeParameter);
-			return InferenceResult.from(ownerResult.getBindings().get(index).getType(),
-				ownerResult.getBindings().get(index).getBindings());
-		}
 	}
 
 	def void inferTypeParametersFromOwner(InferenceResult operationOwnerResult, Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) {

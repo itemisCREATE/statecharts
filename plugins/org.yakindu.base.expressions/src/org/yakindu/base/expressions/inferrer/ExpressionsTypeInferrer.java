@@ -266,17 +266,20 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	protected InferenceResult inferReturnType(Operation operation,
-			Map<TypeParameter, InferenceResult> typeParameterMapping) {
-		if (operation.getType() instanceof TypeParameter || operation.getType() instanceof GenericElement) {
+			Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) {
+		InferenceResult returnType = inferTypeDispatch(operation);
+		if (returnType.getType() instanceof TypeParameter || returnType.getType() instanceof GenericElement) {
 			try {
-				return typeParameterInferrer.inferType(operation.getTypeSpecifier(), typeParameterMapping);
+				returnType = typeParameterInferrer.buildInferenceResult(returnType, inferredTypeParameterTypes);
 			} catch (TypeInferrenceException e) {
+				// TODO: is exception handling at this level correct? If
+				// inference of List<T> throws exception, we return ANY instead
+				// of List<ANY>
 				error(e.getMessage(), NOT_COMPATIBLE_CODE);
 				return InferenceResult.from(registry.getType(ANY));
 			}
-
 		}
-		return inferTypeDispatch(operation);
+		return returnType;
 	}
 
 	protected Map<TypeParameter, InferenceResult> validateParameters(
@@ -295,9 +298,10 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 						assertCompatible(argumentType, resolvedParameterType, String.format(INCOMPATIBLE_TYPES, argumentType, resolvedParameterType));
 //					}
 				} else if (parameter.getType() instanceof GenericElement) {
-					InferenceResult argumentType = inferTypeDispatch(argument);
 					try {
-						InferenceResult parameterType = typeParameterInferrer.buildInferenceResult(parameter.getTypeSpecifier(), typeParameterMapping);
+						InferenceResult parameterType = inferTypeDispatch(parameter);
+						parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping);
+						InferenceResult argumentType = inferTypeDispatch(argument);
 						assertCompatible(argumentType, parameterType, String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
 					} catch(TypeInferrenceException e) {
 						error(e.getMessage(), NOT_COMPATIBLE_CODE);
