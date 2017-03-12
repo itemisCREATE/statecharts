@@ -52,8 +52,8 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
-import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.TypeInferrenceBindingException;
-import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.TypeInferrenceException;
+import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.MultiTypeParameterInferrenceException;
+import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.TypeParameterInferrenceException;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.GenericElement;
@@ -221,12 +221,11 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			return inferOperation(e, (Operation)e.getFeature(), inferredTypeParameterTypes);
 		}
 		InferenceResult result = inferTypeDispatch(e.getFeature());
-		if (result != null && (result.getType() instanceof TypeParameter ||result.getType() instanceof GenericElement)) {
+		if (result != null) {
 			try {
 				result = typeParameterInferrer.buildInferenceResult(result, inferredTypeParameterTypes);
-			} catch (TypeInferrenceException e1) {
-				// TODO: at least a warning here?
-//				error(e1.getMessage(), NOT_COMPATIBLE_CODE);
+			} catch (TypeParameterInferrenceException e1) {
+				warning(e1.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 				result = InferenceResult.from(registry.getType(ANY));
 			}
 		}
@@ -247,10 +246,10 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		try {
 			typeParameterInferrer.inferTypeParametersFromOperationArguments(parameters, argumentTypes, typeParameterMapping);
 			validateParameters(typeParameterMapping, op, e.getArgs());
-		} catch (TypeInferrenceBindingException ex) {
-			error(ex.getMessage(), NOT_SAME_CODE);
-		} catch (TypeInferrenceException ex) {
-			error(ex.getMessage(), NOT_COMPATIBLE_CODE);
+		} catch (MultiTypeParameterInferrenceException ex) {
+			error(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
+		} catch (TypeParameterInferrenceException ex) {
+			warning(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 		} catch (TypeValidationException ex) {
 			error(ex);
 		}
@@ -268,16 +267,14 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	protected InferenceResult inferReturnType(Operation operation,
 			Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) {
 		InferenceResult returnType = inferTypeDispatch(operation);
-		if (returnType.getType() instanceof TypeParameter || returnType.getType() instanceof GenericElement) {
-			try {
-				returnType = typeParameterInferrer.buildInferenceResult(returnType, inferredTypeParameterTypes);
-			} catch (TypeInferrenceException e) {
-				// TODO: is exception handling at this level correct? If
-				// inference of List<T> throws exception, we return ANY instead
-				// of List<ANY>
-				error(e.getMessage(), NOT_COMPATIBLE_CODE);
-				return InferenceResult.from(registry.getType(ANY));
-			}
+		try {
+			returnType = typeParameterInferrer.buildInferenceResult(returnType, inferredTypeParameterTypes);
+		} catch (TypeParameterInferrenceException ex) {
+			// TODO: is exception handling at this level correct? If
+			// inference of List<T> throws exception, we return ANY instead
+			// of List<ANY>
+			warning(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
+			return InferenceResult.from(registry.getType(ANY));
 		}
 		return returnType;
 	}
@@ -291,20 +288,19 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				Expression argument = args.get(i);
 				if (parameter.getType() instanceof TypeParameter) {
 					InferenceResult resolvedParameterType = typeParameterMapping.get(parameter.getType());
-					/*if(resolvedParameterType == null) {
-						error(String.format(INFER_TYPE, args.get(i)), NOT_COMPATIBLE_CODE);
-					} else {*/
-						InferenceResult argumentType = inferTypeDispatch(argument);
-						assertCompatible(argumentType, resolvedParameterType, String.format(INCOMPATIBLE_TYPES, argumentType, resolvedParameterType));
-//					}
+					InferenceResult argumentType = inferTypeDispatch(argument);
+					assertCompatible(argumentType, resolvedParameterType, String.format(INCOMPATIBLE_TYPES, argumentType, resolvedParameterType));
 				} else if (parameter.getType() instanceof GenericElement) {
 					try {
 						InferenceResult parameterType = inferTypeDispatch(parameter);
 						parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping);
 						InferenceResult argumentType = inferTypeDispatch(argument);
 						assertCompatible(argumentType, parameterType, String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
-					} catch(TypeInferrenceException e) {
-						error(e.getMessage(), NOT_COMPATIBLE_CODE);
+					} catch(TypeParameterInferrenceException ex) {
+						// TODO: is exception handling at this level correct? If
+						// inference of List<T> throws exception, we return ANY instead
+						// of List<ANY>
+						warning(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 					}
 				} else {
 					assertArgumentIsCompatible(parameter, argument);

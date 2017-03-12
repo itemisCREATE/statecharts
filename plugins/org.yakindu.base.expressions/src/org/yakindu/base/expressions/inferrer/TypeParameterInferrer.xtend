@@ -53,7 +53,7 @@ class TypeParameterInferrer {
 	 * @param arguments the inferred types of operation call's arguments
 	 * @param inferredTypeParameterTypes map of type parameters to their inference result which will be filled by this method
 	 */
-	def void inferTypeParametersFromOperationArguments(List<Parameter> parameters, List<InferenceResult> arguments, Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) throws TypeInferrenceException, TypeValidationException {
+	def void inferTypeParametersFromOperationArguments(List<Parameter> parameters, List<InferenceResult> arguments, Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) throws TypeParameterInferrer.TypeParameterInferrenceException, TypeValidationException {
 		if (parameters.size() <= arguments.size()) {
 			for (var i = 0; i < parameters.size(); i++) {
 				val parameter = parameters.get(i);
@@ -63,7 +63,7 @@ class TypeParameterInferrer {
 		}
 	}
 
-	def protected void inferTypeParameterFromOperationArgument(TypeSpecifier parameterTypeSpecifier, InferenceResult argumentType, Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) throws TypeInferrenceException {
+	def protected void inferTypeParameterFromOperationArgument(TypeSpecifier parameterTypeSpecifier, InferenceResult argumentType, Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) throws TypeParameterInferrer.TypeParameterInferrenceException {
 		val parameterType = parameterTypeSpecifier.getType()
 		if (parameterType instanceof TypeParameter) {
 			doInferTypeParameterFromOperationArgument(parameterType, argumentType, inferredTypeParameterTypes)
@@ -77,8 +77,7 @@ class TypeParameterInferrer {
 		for (var i = 0; i < parameterTypeSpecifier.getTypeArguments().size(); i++) {
 			val typeParameter = parameterTypeSpecifier.getTypeArguments().get(i);
 			if (argumentType.getBindings().size() <= i) {
-				val errorMsg = String.format(INFER_TYPE, typeParameter.getType().getName())
-				throw new TypeInferrenceException(errorMsg);
+				throw new TypeParameterInferrenceException(typeParameter);
 			} else {
 				val typeArgument = argumentType.getBindings().get(i);
 				inferTypeParameterFromOperationArgument(typeParameter, typeArgument, inferredTypeParameterTypes);
@@ -86,22 +85,21 @@ class TypeParameterInferrer {
 		}
 	}
 
-	def protected doInferTypeParameterFromOperationArgument(TypeParameter parameterType, InferenceResult argumentType,
+	def protected doInferTypeParameterFromOperationArgument(TypeParameter typeParameter, InferenceResult argumentType,
 		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) {
 
 		val newMappedType = argumentType.getType();
-		val typeInMap = inferredTypeParameterTypes.get(parameterType);
+		val typeInMap = inferredTypeParameterTypes.get(typeParameter);
 		if (typeInMap == null) {
-			inferredTypeParameterTypes.put(parameterType, InferenceResult.from(newMappedType, argumentType.getBindings()));
+			inferredTypeParameterTypes.put(typeParameter, InferenceResult.from(newMappedType, argumentType.getBindings()));
 		} else {
 			val commonType = getCommonType(argumentType, typeInMap);
 			if (commonType == null) {
-				inferredTypeParameterTypes.put(parameterType, null);
-				val errorMsg = String.format(INFER_COMMON_TYPE, parameterType.getName(), newMappedType.getName(),
-					typeInMap.getType().getName());
-				throw new TypeInferrenceException(errorMsg);
+				inferredTypeParameterTypes.put(typeParameter, null);
+				throw new MultiTypeParameterInferrenceException(typeParameter,
+					newArrayList(argumentType.type.name, typeInMap.type.name));
 			} else {
-				inferredTypeParameterTypes.put(parameterType, InferenceResult.from(commonType, argumentType.getBindings()));
+				inferredTypeParameterTypes.put(typeParameter, InferenceResult.from(commonType, argumentType.getBindings()));
 			}
 		}
 	}
@@ -117,19 +115,18 @@ class TypeParameterInferrer {
 	}
 
 	/**
-	 * Returns the inference result for a given inference result with potentially unresolved type parameters which will 
-	 * be resolved by taking the type parameter inference map into account.
-	 * If the type specifier is a generic element, it calls itself recursively to fill all nested type parameters.
+	 * For a given inference result with potentially unresolved type parameters a new inference result is built by 
+	 * resolving type parameters based on the given type parameter inference map.
+	 * For generic types this method calls itself recursively to fill all nested type parameters.
 	 */
 	def protected InferenceResult buildInferenceResult(InferenceResult oldInferenceResult,
-		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) throws TypeInferrenceException {
+		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) throws TypeParameterInferrer.TypeParameterInferrenceException {
 		if (oldInferenceResult.getType() instanceof TypeParameter) {
 			// get already inferred type from type parameter map
 			val typeParameter = oldInferenceResult.getType() as TypeParameter
 			val mappedType = inferredTypeParameterTypes.get(typeParameter);
 			if (mappedType == null) {
-				val errorMsg = String.format(INFER_RETURN_TYPE, typeParameter.getName().toString());
-				throw new TypeInferrenceException(errorMsg)
+				throw new TypeParameterInferrenceException(typeParameter)
 			} else {
 				return mappedType;
 			}
@@ -154,18 +151,24 @@ class TypeParameterInferrer {
 				inferredTypeParameterTypes.put(typeParameter, binding)
 			}
 		}
-
 	}
-
-	static class TypeInferrenceException extends Exception {
-		new(String message) {
+	
+	static class TypeParameterInferrenceException extends Exception {
+		new(TypeParameter typeParameter) {
+			super(String.format(INFER_TYPE_PARAMETER, typeParameter.name))
+		}
+		new(TypeSpecifier typeSpecifier) {
+			super(String.format(INFER_TYPE_PARAMETER, typeSpecifier.type.name))
+		}
+		new (String message) {
 			super(message)
 		}
 	}
-
-	static class TypeInferrenceBindingException extends TypeInferrenceException {
-		new(String message) {
-			super(message)
+	
+	static class MultiTypeParameterInferrenceException extends TypeParameterInferrenceException {
+		new(TypeParameter typeParameter, List<String> inferredTypes) {
+			super(String.format(INFER_COMMON_TYPE, typeParameter.name, inferredTypes))
 		}
 	}
+
 }

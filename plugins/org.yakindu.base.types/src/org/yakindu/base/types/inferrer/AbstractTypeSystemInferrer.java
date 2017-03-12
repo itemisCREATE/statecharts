@@ -13,7 +13,6 @@ package org.yakindu.base.types.inferrer;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -22,11 +21,11 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor;
-import org.yakindu.base.types.validation.TypeValidator;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity;
 import org.yakindu.base.types.validation.TypeValidationException;
+import org.yakindu.base.types.validation.TypeValidator;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;

@@ -30,6 +30,7 @@ public interface ITypeSystemInferrer {
 	public static final String NOT_TYPE_CODE = "NotType";
 	public static final String NOT_SAME_CODE = "NotSame";
 	public static final String NOT_COMPATIBLE_CODE = "IncompatibleTypes";
+	public static final String NOT_INFERRABLE_TYPE_PARAMETER_CODE = "NotInferrableTypeParameter";
 
 	public static class InferenceResult {
 
