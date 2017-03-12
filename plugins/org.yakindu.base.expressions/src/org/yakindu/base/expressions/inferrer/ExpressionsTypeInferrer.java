@@ -52,8 +52,8 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
-import org.yakindu.base.expressions.inferrer.TypeParameterResolver.TypeInferrenceBindingException;
-import org.yakindu.base.expressions.inferrer.TypeParameterResolver.TypeInferrenceException;
+import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.TypeInferrenceBindingException;
+import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.TypeInferrenceException;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.GenericElement;
@@ -76,7 +76,7 @@ import com.google.inject.Inject;
  */
 public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements ExpressionsTypeInferrerMessages {
 	@Inject
-	private TypeParameterResolver typeParameterResolver;
+	protected TypeParameterInferrer typeParameterInferrer;
 
 	public InferenceResult doInfer(AssignmentExpression e) {
 		InferenceResult result1 = inferTypeDispatch(e.getVarRef());
@@ -213,37 +213,35 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public InferenceResult doInfer(FeatureCall e) {
-		// create type map
-		Map<TypeParameter, InferenceResult> typeParameterMapping = Maps.newHashMap();
-		// resolve type parameters from owner
-		typeParameterResolver.resolveTypeParametersFromOwner(typeParameterMapping, inferTypeDispatch(e.getOwner()));
+		// map to hold inference results for type parameters
+		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes = Maps.newHashMap();
+		typeParameterInferrer.inferTypeParametersFromOwner(inferTypeDispatch(e.getOwner()), inferredTypeParameterTypes);
 		
 		if (e.isOperationCall()) {
-			return inferOperation(typeParameterMapping, e, (Operation)e.getFeature(), e.getOwner());
+			return inferOperation(e, (Operation)e.getFeature(), inferredTypeParameterTypes);
 		}
 		InferenceResult result = inferTypeDispatch(e.getFeature());
-		if (result != null && result.getType() instanceof TypeParameter) {
-			result = typeParameterResolver.inferTypeParameter((TypeParameter) result.getType(),
+		if (result != null && result.getType() instanceof TypeParameter) { // TODO: what about generic element?
+			// TODO: use buildInferenceResult here, but with different error message
+			result = typeParameterInferrer.inferTypeParameter((TypeParameter) result.getType(),
 					inferTypeDispatch(e.getOwner()));
 		}
 		return result;
 	}
 
 	public InferenceResult doInfer(ElementReferenceExpression e) {
-		// create type map
-		Map<TypeParameter, InferenceResult> typeParameterMapping = Maps.newHashMap();
 		if (e.isOperationCall()) {
-			return inferOperation(typeParameterMapping, e, (Operation) e.getReference(), null);
+			return inferOperation(e, (Operation) e.getReference(), Maps.<TypeParameter, InferenceResult>newHashMap());
 		}
 		return inferTypeDispatch(e.getReference());
 	}
 
-	private InferenceResult inferOperation(Map<TypeParameter, InferenceResult> typeParameterMapping, ArgumentExpression e, Operation op, Expression operationOwner) {
+	protected InferenceResult inferOperation(ArgumentExpression e, Operation op, Map<TypeParameter, InferenceResult> typeParameterMapping) {
 		// resolve type parameter from operation call
 		List<InferenceResult> argumentTypes = getArgumentTypes(e.getArgs());
 		List<Parameter> parameters = op.getParameters();
 		try {
-			typeParameterResolver.resolveTypeParametersFromOperationArguments(typeParameterMapping, argumentTypes, parameters);
+			typeParameterInferrer.inferTypeParametersFromOperationArguments(parameters, argumentTypes, typeParameterMapping);
 			validateParameters(typeParameterMapping, op, e.getArgs());
 		} catch (TypeInferrenceBindingException ex) {
 			error(ex.getMessage(), NOT_SAME_CODE);
@@ -267,7 +265,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			Map<TypeParameter, InferenceResult> typeParameterMapping) {
 		if (operation.getType() instanceof TypeParameter || operation.getType() instanceof GenericElement) {
 			try {
-				return typeParameterResolver.inferType(operation.getTypeSpecifier(), typeParameterMapping);
+				return typeParameterInferrer.inferType(operation.getTypeSpecifier(), typeParameterMapping);
 			} catch (TypeInferrenceException e) {
 				error(e.getMessage(), NOT_COMPATIBLE_CODE);
 				return InferenceResult.from(registry.getType(ANY));
@@ -295,7 +293,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				} else if (parameter.getType() instanceof GenericElement) {
 					InferenceResult argumentType = inferTypeDispatch(argument);
 					try {
-						InferenceResult parameterType = typeParameterResolver.buildInferenceResult(parameter.getTypeSpecifier(), typeParameterMapping);
+						InferenceResult parameterType = typeParameterInferrer.buildInferenceResult(parameter.getTypeSpecifier(), typeParameterMapping);
 						assertCompatible(argumentType, parameterType, String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
 					} catch(TypeInferrenceException e) {
 						error(e.getMessage(), NOT_COMPATIBLE_CODE);
