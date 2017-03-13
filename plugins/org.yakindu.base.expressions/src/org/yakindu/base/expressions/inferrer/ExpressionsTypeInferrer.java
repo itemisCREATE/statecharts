@@ -241,11 +241,11 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 
 	protected InferenceResult inferOperation(ArgumentExpression e, Operation op, Map<TypeParameter, InferenceResult> typeParameterMapping) {
 		// resolve type parameter from operation call
-		List<InferenceResult> argumentTypes = getArgumentTypes(e.getArgs());
+		List<InferenceResult> argumentTypes = getArgumentTypes(getOperationArguments(e));
 		List<Parameter> parameters = op.getParameters();
 		try {
 			typeParameterInferrer.inferTypeParametersFromOperationArguments(parameters, argumentTypes, typeParameterMapping);
-			validateParameters(typeParameterMapping, op, e.getArgs());
+			validateParameters(typeParameterMapping, op, getOperationArguments(e));
 		} catch (MultiTypeParameterInferrenceException ex) {
 			error(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 		} catch (TypeParameterInferrenceException ex) {
@@ -256,7 +256,14 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		return inferReturnType(op, typeParameterMapping);
 	}
 	
-	private List<InferenceResult> getArgumentTypes(EList<Expression> args) {
+	/**
+	 * Can be extended to e.g. add operation caller to argument list for extension methods
+	 */
+	protected List<Expression> getOperationArguments(ArgumentExpression e) {
+		return e.getArgs();
+	}
+	
+	protected List<InferenceResult> getArgumentTypes(List<Expression> args) {
 		List<InferenceResult> argumentTypes = new ArrayList<>();
 		for (Expression arg : args) {
 			argumentTypes.add(inferTypeDispatch(arg));
