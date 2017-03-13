@@ -40,7 +40,7 @@ h2(#tsdom-modeling-behavior-with-yakindu-statechart-tools-professional). Modelin
 
 In this section we will model two statecharts. The first one controls the screens, the second statechart controls the music player.
 
-h3(#tsdom-importing-the-sample-angular-2-project-into-eclipse). Importing the sample Angular&nbsp;2 project into Eclipse
+h3(#tsdom-importing-the-sample-angular-2-project-into-eclipse). Importing the sample Angular project into Eclipse
 
 ###. FIXME: The example should come from the Github example repository as announced above.
 
@@ -48,9 +48,9 @@ The sample application has to be imported into the Eclipse workspace.
 # In the Eclipse main menu, select _File → Import_. The _Import_ dialog opens.
 # Select _General → Projects from Folder or Archive_. <br/>!images/tsdomain_import_dialog.png(Import dialog)!
 # Click _Next_. The _Import Projects from File System or Archive_ dialog appears.
-# Open the directory folder of the Angular&nbsp;2 application by clicking on the _Directory_ button.<br/>!images/tsdomain_import2_dialog.png(Import dialog)!
+# Open the directory folder of the Angular application by clicking on the _Directory_ button.<br/>!images/tsdomain_import2_dialog.png(Import dialog)!
 # Click _Finish_. The project explorer should now look like this:<br/>!images/tsdomain_project_explorer.png(Project explorer)!
-# Open the project's context menu and add the _YAKINDU SCT Nature_.<br/>!images/tsdomain_add_sct_nature.gif(Add Yakindu SCT nature)!
+# Open the project's context menu and add the _YAKINDU SCT Nature_. !images/tsdomain_add_sct_nature.gif(Add Yakindu SCT nature)!
 
 h3(#tsdom-creating-a-new-project-for-statechart-models). Creating a new project for statechart models
 
@@ -75,7 +75,7 @@ Now that we have a statechart project, let's create a statechart model using the
 # In the context menu, select _New → Statechart Model_. The _New YAKINDU Statechart Wizard_ opens.
 # In the dialog, specify directory and filename for the new statechart model file. The filename must end with _.sct_.
 # Click _Finish_. If Eclipse asks you whether to switch to the _YAKINDU Modeling perspective_, please confirm.
-# The new statechart model is created.<br/>!images/tsdomain_create_statechart_model.png(Statechart model)!
+# The new statechart model is created. !images/tsdomain_create_statechart_model.png(Statechart model)!
 
 h4(#tsdom-Defining-a-typescript-type-variable-in-a-statechart). Defining a TypeScript-type variable in a statechart
 
