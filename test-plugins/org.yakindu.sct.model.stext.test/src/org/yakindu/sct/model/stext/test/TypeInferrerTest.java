@@ -783,11 +783,11 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 				+ "var t:ComplexParameterizedType<boolean, integer> "
 				+ "var t2:ComplexParameterizedType<integer, boolean>");
 		
-		expectError("t = t.prop3",
+		expectErrors("t = t.prop3",
 				"internal "
 				+ "var t:ComplexParameterizedType<boolean, integer> "
 				+ "var t2:ComplexParameterizedType<integer, boolean>", 
-				ITypeSystemInferrer.NOT_SAME_CODE);
+				ITypeSystemInferrer.NOT_SAME_CODE, 2);
 	}
 	
 	@Test
@@ -798,7 +798,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 				+ "var t2:ComplexParameterizedType<integer, boolean>"
 				+ "operation op(p:ComplexParameterizedType<boolean, integer>) : void";
 		expectNoErrors("op(t1)", scopes);
-		expectError("op(t2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE);
+		expectErrors("op(t2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2);
 	}
 	
 	@Test
@@ -838,8 +838,8 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		expectError("myB = genericOp(myI, myI)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 		expectError("myB = genericOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 		
-		expectError("myCPT2 = genericOp(myCPT, myCPT)", scopes, ITypeSystemInferrer.NOT_SAME_CODE);
-		expectError("myCPT = genericOp(myCPT, myCPT2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE);
+		expectErrors("myCPT2 = genericOp(myCPT, myCPT)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2);
+		expectErrors("myCPT = genericOp(myCPT, myCPT2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2);
 	}
 	
 	@Test

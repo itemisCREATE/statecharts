@@ -7,6 +7,7 @@ import static org.yakindu.base.types.inferrer.ITypeSystemInferrer.NOT_COMPATIBLE
 import static org.yakindu.base.types.inferrer.ITypeSystemInferrer.NOT_SAME_CODE;
 import static org.yakindu.base.types.inferrer.ITypeSystemInferrer.NOT_TYPE_CODE;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.yakindu.base.types.ComplexType;
@@ -19,77 +20,88 @@ public class TypeValidator {
 	@Inject
 	protected ITypeSystem registry;
 	
-	public void assertNotType(InferenceResult currentResult, String msg, InferenceResult... candidates) throws TypeValidationException {
+	public List<TypeValidationError> assertNotType(InferenceResult currentResult, String msg, InferenceResult... candidates) {
+		List<TypeValidationError> errors = new ArrayList<>();
 		if (currentResult == null)
-			return;
+			return errors;
 		for (InferenceResult type : candidates) {
 			if (registry.isSame(currentResult.getType(), type.getType())) {
-				msg = msg != null ? msg : String.format(ASSERT_NOT_TYPE, currentResult); 
-				throw new TypeValidationException(msg, NOT_TYPE_CODE);
+				msg = msg != null ? msg : String.format(ASSERT_NOT_TYPE, currentResult);
+				errors.add(new TypeValidationError(msg, NOT_TYPE_CODE));
 			}
 		}
+		return errors;
 	}
 
-	public boolean assertSame(InferenceResult result1, InferenceResult result2, String msg) throws TypeValidationException {
+	public List<TypeValidationError> assertSame(InferenceResult result1, InferenceResult result2, String msg) {
+		List<TypeValidationError> errors = new ArrayList<>();
 		if (result1 == null || result2 == null)
-			return true;
+			return errors;
 		if (!registry.isSame(result1.getType(), result2.getType())) {
 			msg = msg != null ? msg : String.format(ASSERT_SAME, result1, result2);
-			throw new TypeValidationException(msg, NOT_SAME_CODE);
+			errors.add(new TypeValidationError(msg, NOT_SAME_CODE));
+			return errors;
 		}
 
 		return assertTypeBindingsSame(result1, result2, msg);
 	}
 
-	public void assertCompatible(InferenceResult result1, InferenceResult result2, String msg) throws TypeValidationException {
+	public List<TypeValidationError> assertCompatible(InferenceResult result1, InferenceResult result2, String msg) {
+		List<TypeValidationError> errors = new ArrayList<>();
 		if (result1 == null || result2 == null)
-			return;
+			return errors;
 		if (isNullOnComplexType(result1, result2) || isNullOnComplexType(result2, result1)) {
-			return;
+			return errors;
 		}
 		if (!registry.haveCommonType(result1.getType(), result2.getType())) {
 			msg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2);
-			throw new TypeValidationException(msg, NOT_COMPATIBLE_CODE);
+			errors.add(new TypeValidationError(msg, NOT_COMPATIBLE_CODE));
+			return errors;
 		}
-		assertTypeBindingsSame(result1, result2, msg);
+		return assertTypeBindingsSame(result1, result2, msg);
 
 	}
 
-	public void assertAssignable(InferenceResult varResult, InferenceResult valueResult, String msg) throws TypeValidationException {
+	public List<TypeValidationError> assertAssignable(InferenceResult varResult, InferenceResult valueResult, String msg) {
+		List<TypeValidationError> errors = new ArrayList<>();
 		if (varResult == null || valueResult == null)
-			return;
+			return errors;
 		if (isNullOnComplexType(varResult, valueResult)) {
-			return;
+			return errors;
 		}
 		if (!registry.isSuperType(valueResult.getType(), varResult.getType())) {
 			msg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, varResult, valueResult);
-			throw new TypeValidationException(msg, NOT_COMPATIBLE_CODE);
+			errors.add(new TypeValidationError(msg, NOT_COMPATIBLE_CODE));
+			return errors;
 		}
-		assertTypeBindingsSame(varResult, valueResult, msg);
+		return assertTypeBindingsSame(varResult, valueResult, msg);
 	}
 
-	public boolean assertTypeBindingsSame(InferenceResult result1, InferenceResult result2, String msg) throws TypeValidationException {
+	public List<TypeValidationError> assertTypeBindingsSame(InferenceResult result1, InferenceResult result2, String msg) {
+		List<TypeValidationError> errors = new ArrayList<>();
 		List<InferenceResult> bindings1 = result1.getBindings();
 		List<InferenceResult> bindings2 = result2.getBindings();
-		String errorMsg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2);
+		msg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2);
 		if (bindings1.size() != bindings2.size()) {
-			throw new TypeValidationException(errorMsg, NOT_COMPATIBLE_CODE);
+			errors.add(new TypeValidationError(msg, NOT_COMPATIBLE_CODE));
+			return errors;
 		}
 		for (int i = 0; i < bindings1.size(); i++) {
-			if (!assertSame(bindings1.get(i), bindings2.get(i), errorMsg)) {
-				return false;
-			};
+			errors.addAll(assertSame(bindings1.get(i), bindings2.get(i), msg));
 		}
-		return true;
+		return errors;
 	}
 
-	public void assertIsSubType(InferenceResult subResult, InferenceResult superResult, String msg) throws TypeValidationException {
+	public List<TypeValidationError> assertIsSubType(InferenceResult subResult, InferenceResult superResult, String msg) {
+		List<TypeValidationError> errors = new ArrayList<>();
 		if (subResult == null || superResult == null)
-			return;
+			return errors;
 		if (!registry.isSuperType(subResult.getType(), superResult.getType())) {
-			String msg2 = msg != null ? msg : String.format(ASSERT_COMPATIBLE, subResult, superResult);
-			throw new TypeValidationException(msg2, NOT_COMPATIBLE_CODE);
+			msg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, subResult, superResult);
+			errors.add(new TypeValidationError(msg, NOT_COMPATIBLE_CODE));
+			return errors;
 		}
+		return errors;
 	}
 	
 	public boolean isNullOnComplexType(InferenceResult result1, InferenceResult result2) {

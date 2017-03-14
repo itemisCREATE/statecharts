@@ -20,10 +20,10 @@ import org.yakindu.base.types.TypeParameter
 import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.base.types.validation.TypeValidationException
 import org.yakindu.base.types.validation.TypeValidator
 
 import static org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrerMessages.*
+import org.yakindu.base.types.validation.TypeValidationError
 
 /**
  * Infers the actual type for a type parameter used in generic elements like operations or complex types.
@@ -53,7 +53,7 @@ class TypeParameterInferrer {
 	 * @param arguments the inferred types of operation call's arguments
 	 * @param inferredTypeParameterTypes map of type parameters to their inference result which will be filled by this method
 	 */
-	def void inferTypeParametersFromOperationArguments(List<Parameter> parameters, List<InferenceResult> arguments, Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) throws TypeParameterInferrer.TypeParameterInferrenceException, TypeValidationException {
+	def void inferTypeParametersFromOperationArguments(List<Parameter> parameters, List<InferenceResult> arguments, Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) throws TypeParameterInferrenceException, TypeValidationException {
 		if (parameters.size() <= arguments.size()) {
 			for (var i = 0; i < parameters.size(); i++) {
 				val parameter = parameters.get(i);
@@ -94,8 +94,13 @@ class TypeParameterInferrer {
 			inferredTypeParameterTypes.put(typeParameter, InferenceResult.from(newMappedType, argumentType.getBindings()));
 		} else {
 			val commonType = getCommonType(argumentType, typeInMap);
-			if (commonType == null) {
+			val errorMsg = String.format(INCOMPATIBLE_TYPES, argumentType.toString, typeInMap.toString)
+			val errors = typeValidator.assertTypeBindingsSame(argumentType, typeInMap, errorMsg)
+			if (commonType == null || !errors.empty) {
 				inferredTypeParameterTypes.put(typeParameter, null);
+				if(!errors.empty) {
+					throw new TypeValidationException(errors)
+				}
 				throw new MultiTypeParameterInferrenceException(typeParameter,
 					newArrayList(argumentType.type.name, typeInMap.type.name));
 			} else {
@@ -106,11 +111,6 @@ class TypeParameterInferrer {
 
 	def protected Type getCommonType(InferenceResult type1, InferenceResult type2) {
 		val result = registry.getCommonType(type1.getType(), type2.getType())
-		if (result == null) {
-			return null
-		}
-		val errorMsg = String.format(INCOMPATIBLE_TYPES, type1.toString, type2.toString)
-		typeValidator.assertTypeBindingsSame(type1, type2, errorMsg)
 		return result
 	}
 
@@ -162,6 +162,18 @@ class TypeParameterInferrer {
 		}
 		new (String message) {
 			super(message)
+		}
+	}
+	
+	static class TypeValidationException extends Exception {
+		private List<TypeValidationError> errors
+		
+		new(List<TypeValidationError> errors) {
+			this.errors = errors
+		}
+		
+		def getErrors() {
+			return errors
 		}
 	}
 	

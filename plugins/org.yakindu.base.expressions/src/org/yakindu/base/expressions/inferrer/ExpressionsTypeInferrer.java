@@ -54,6 +54,7 @@ import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
 import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.MultiTypeParameterInferrenceException;
 import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.TypeParameterInferrenceException;
+import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.TypeValidationException;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.GenericElement;
@@ -65,7 +66,7 @@ import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
-import org.yakindu.base.types.validation.TypeValidationException;
+import org.yakindu.base.types.validation.TypeValidationError;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -251,7 +252,9 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		} catch (TypeParameterInferrenceException ex) {
 			warning(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 		} catch (TypeValidationException ex) {
-			error(ex);
+			for(TypeValidationError err : ex.getErrors()) {
+				error(err);
+			}
 		}
 		return inferReturnType(op, typeParameterMapping);
 	}

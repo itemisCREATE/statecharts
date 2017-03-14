@@ -16,7 +16,6 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -24,7 +23,7 @@ import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity;
-import org.yakindu.base.types.validation.TypeValidationException;
+import org.yakindu.base.types.validation.TypeValidationError;
 import org.yakindu.base.types.validation.TypeValidator;
 
 import com.google.common.cache.CacheBuilder;
@@ -132,59 +131,43 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	}
 
 	protected void assertNotType(InferenceResult currentResult, String msg, InferenceResult... candidates) {
-		try {
-			typeValidator.assertNotType(currentResult, msg, candidates);
-		} catch (TypeValidationException e) {
+		for(TypeValidationError e: typeValidator.assertNotType(currentResult, msg, candidates)) {
 			error(e);
 		}
 	}
 
-	protected boolean assertSame(InferenceResult result1, InferenceResult result2, String msg) {
-		try {
-			return typeValidator.assertSame(result1, result2, msg);
-		} catch (TypeValidationException e) {
+	protected void assertSame(InferenceResult result1, InferenceResult result2, String msg) {
+		for(TypeValidationError e: typeValidator.assertSame(result1, result2, msg)) {
 			error(e);
-			return false;
 		}
 	}
 
 	protected void assertCompatible(InferenceResult result1, InferenceResult result2, String msg) {
-		try {
-			typeValidator.assertCompatible(result1, result2, msg);
-		} catch (TypeValidationException e) {
+		for(TypeValidationError e: typeValidator.assertCompatible(result1, result2, msg)) {
 			error(e);
 		}
-
 	}
 
 	protected void assertAssignable(InferenceResult varResult, InferenceResult valueResult, String msg) {
-		try {
-			typeValidator.assertAssignable(varResult, valueResult, msg);
-		} catch (TypeValidationException e) {
+		for(TypeValidationError e: typeValidator.assertAssignable(varResult, valueResult, msg)) {
 			error(e);
 		}
 	}
 
-	protected boolean assertTypeBindingsSame(InferenceResult result1, InferenceResult result2, String msg) {
-		try {
-			return typeValidator.assertTypeBindingsSame(result1, result2, msg);
-		} catch (TypeValidationException e) {
+	protected void assertTypeBindingsSame(InferenceResult result1, InferenceResult result2, String msg) {
+		for(TypeValidationError e: typeValidator.assertTypeBindingsSame(result1, result2, msg)) {
 			error(e);
-			return false;
 		}
 	}
 
 	protected void assertIsSubType(InferenceResult subResult, InferenceResult superResult, String msg) {
-		try {
-			typeValidator.assertIsSubType(subResult, superResult, msg);
-		} catch (TypeValidationException e) {
+		for(TypeValidationError e: typeValidator.assertIsSubType(subResult, superResult, msg)) {
 			error(e);
 		}
 	}
 	
 	protected boolean isNullOnComplexType(InferenceResult result1, InferenceResult result2) {
-		return result1.getType() instanceof ComplexType
-				&& registry.isSame(result2.getType(), registry.getType(ITypeSystem.NULL));
+		return typeValidator.isNullOnComplexType(result1, result2);
 	}
 
 	protected void info(String msg, String issueCode) {
@@ -199,7 +182,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 		acceptor.accept(new ValidationIssue(Severity.ERROR, msg, issueCode));
 	}
 	
-	protected void error(TypeValidationException e) {
+	protected void error(TypeValidationError e) {
 		error(e.getMessage(), e.getErrorCode());
 	}
 }
