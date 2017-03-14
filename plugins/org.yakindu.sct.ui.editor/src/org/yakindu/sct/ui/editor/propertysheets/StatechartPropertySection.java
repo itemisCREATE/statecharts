@@ -56,7 +56,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 
 	private Control textControl;
 	private Text txtName;
-	private OrderElementControl orderElementControl;
+	protected OrderElementControl orderElementControl;
 	private Text documentation;
 	private ComboViewer domainCombo;
 
@@ -153,7 +153,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		orderElementControl.refreshInput();
 	}
 
-	private void bindDomainCombo(EMFDataBindingContext context) {
+	protected void bindDomainCombo(EMFDataBindingContext context) {
 		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID);
 
@@ -173,7 +173,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		context.bindValue(observeSingleSelection, property.observe(eObject), modelToTarget, targetToModel);
 	}
 
-	private void bindDocumentationControl(EMFDataBindingContext context) {
+	protected void bindDocumentationControl(EMFDataBindingContext context) {
 		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION);
 		ISWTObservableValue observe = WidgetProperties.text(new int[]{SWT.FocusOut, SWT.DefaultSelection})
