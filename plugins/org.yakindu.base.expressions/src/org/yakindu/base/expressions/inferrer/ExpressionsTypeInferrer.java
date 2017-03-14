@@ -66,6 +66,7 @@ import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.base.types.validation.TypeValidationError;
 
 import com.google.common.collect.Maps;
@@ -219,7 +220,11 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		typeParameterInferrer.inferTypeParametersFromOwner(inferTypeDispatch(e.getOwner()), inferredTypeParameterTypes);
 		
 		if (e.isOperationCall()) {
-			return inferOperation(e, (Operation)e.getFeature(), inferredTypeParameterTypes);
+			if(e.getFeature().eIsProxy()) {
+				return inferOperation(e, (Operation)e.getFeature(), inferredTypeParameterTypes);
+			} else {
+				return InferenceResult.from(registry.getType(ANY));
+			}
 		}
 		InferenceResult result = inferTypeDispatch(e.getFeature());
 		if (result != null) {
@@ -235,7 +240,12 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 
 	public InferenceResult doInfer(ElementReferenceExpression e) {
 		if (e.isOperationCall()) {
-			return inferOperation(e, (Operation) e.getReference(), Maps.<TypeParameter, InferenceResult>newHashMap());
+			if(!e.getReference().eIsProxy()) {
+				return inferOperation(e, (Operation) e.getReference(), Maps.<TypeParameter, InferenceResult>newHashMap());
+			} else {
+				// Hopefully, there is "cannot resolve" in the user's workspace already
+				return InferenceResult.from(registry.getType(ANY));
+			}
 		}
 		return inferTypeDispatch(e.getReference());
 	}
@@ -289,6 +299,11 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		return returnType;
 	}
 
+	/**
+	 * Takes the operation parameter type and performs a lookup for all contained type parameters
+	 * by using the given type parameter inference map.<br>
+	 * The parameter types are validated against the operation call's argument types.
+	 */
 	protected Map<TypeParameter, InferenceResult> validateParameters(
 			Map<TypeParameter, InferenceResult> typeParameterMapping, Operation operation, List<Expression> args) {
 		List<Parameter> parameters = operation.getParameters();
