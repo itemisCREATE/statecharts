@@ -53,6 +53,7 @@ import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
 import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.MultiTypeParameterInferrenceException;
+import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.TypeParameterBindingsException;
 import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.TypeParameterInferrenceException;
 import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.TypeValidationException;
 import org.yakindu.base.types.EnumerationType;
@@ -256,8 +257,9 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		List<Parameter> parameters = op.getParameters();
 		try {
 			typeParameterInferrer.inferTypeParametersFromOperationArguments(parameters, argumentTypes, typeParameterMapping);
-			validateParameters(typeParameterMapping, op, getOperationArguments(e));
 		} catch (MultiTypeParameterInferrenceException ex) {
+			error(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
+		} catch (TypeParameterBindingsException ex) {
 			error(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 		} catch (TypeParameterInferrenceException ex) {
 			warning(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
@@ -265,6 +267,11 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			for(TypeValidationError err : ex.getErrors()) {
 				error(err);
 			}
+		}
+		try {
+			validateParameters(typeParameterMapping, op, getOperationArguments(e));
+		} catch (TypeParameterInferrenceException e1) {
+			error(e1.getMessage(), NOT_COMPATIBLE_CODE);
 		}
 		return inferReturnType(op, typeParameterMapping);
 	}
@@ -293,7 +300,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			// TODO: is exception handling at this level correct? If
 			// inference of List<T> throws exception, we return ANY instead
 			// of List<ANY>
-			warning(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
+			warning(String.format(INFER_RETURN_TYPE_PARAMETER, returnType), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
 			return InferenceResult.from(registry.getType(ANY));
 		}
 		return returnType;
@@ -303,34 +310,24 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	 * Takes the operation parameter type and performs a lookup for all contained type parameters
 	 * by using the given type parameter inference map.<br>
 	 * The parameter types are validated against the operation call's argument types.
+	 * @throws TypeParameterInferrenceException 
 	 */
 	protected Map<TypeParameter, InferenceResult> validateParameters(
-			Map<TypeParameter, InferenceResult> typeParameterMapping, Operation operation, List<Expression> args) {
+			Map<TypeParameter, InferenceResult> typeParameterMapping, Operation operation, List<Expression> args) throws TypeParameterInferrenceException {
 		List<Parameter> parameters = operation.getParameters();
 		if (parameters.size() <= args.size()) {
 			for (int i = 0; i < parameters.size(); i++) {
 				Parameter parameter = parameters.get(i);
 				Expression argument = args.get(i);
-				if (parameter.getType() instanceof TypeParameter) {
-					InferenceResult resolvedParameterType = typeParameterMapping.get(parameter.getType());
-					InferenceResult argumentType = inferTypeDispatch(argument);
-					assertCompatible(argumentType, resolvedParameterType, String.format(INCOMPATIBLE_TYPES, argumentType, resolvedParameterType));
-				} else if (parameter.getType() instanceof GenericElement) {
-					try {
-						InferenceResult parameterType = inferTypeDispatch(parameter);
-						parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping);
-						InferenceResult argumentType = inferTypeDispatch(argument);
-						assertCompatible(argumentType, parameterType, String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
-					} catch(TypeParameterInferrenceException ex) {
-						// TODO: is exception handling at this level correct? If
-						// inference of List<T> throws exception, we return ANY instead
-						// of List<ANY>
-						warning(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
-					}
-				} else {
-					assertArgumentIsCompatible(parameter, argument);
-					
+				InferenceResult parameterType = inferTypeDispatch(parameter);
+				InferenceResult argumentType = inferTypeDispatch(argument);
+				try {
+					parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping);
+				} catch (TypeParameterInferrenceException ex){
+					// We ignore the thrown exception because we want to throw the one from assertCompatible.
+					// If this is not ignored, assigning an integer to a ComplexTypeParameter only throws "could not infer T"
 				}
+				assertCompatible(argumentType, parameterType, String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
 			}
 		}
 		if (operation.isVariadic() && args.size() - 1 >= operation.getVarArgIndex()) {

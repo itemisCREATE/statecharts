@@ -851,6 +851,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 				+ "var myI: integer "
 				+ "var myB: boolean ";
 		
+		expectError("myI = nestedOp(3)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 		expectNoErrors("myI = nestedOp(nestedCPT)", scope);
 		expectError("myB = nestedOp(nestedCPT)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 	}

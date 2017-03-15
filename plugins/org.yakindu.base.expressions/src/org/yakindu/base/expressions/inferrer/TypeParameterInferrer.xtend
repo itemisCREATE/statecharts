@@ -77,7 +77,7 @@ class TypeParameterInferrer {
 		for (var i = 0; i < parameterTypeSpecifier.getTypeArguments().size(); i++) {
 			val typeParameter = parameterTypeSpecifier.getTypeArguments().get(i);
 			if (argumentType.getBindings().size() <= i) {
-				throw new TypeParameterInferrenceException(typeParameter);
+				throw new TypeParameterBindingsException(typeParameter);
 			} else {
 				val typeArgument = argumentType.getBindings().get(i);
 				inferTypeParameterFromOperationArgument(typeParameter, typeArgument, inferredTypeParameterTypes);
@@ -159,6 +159,18 @@ class TypeParameterInferrer {
 		}
 		new(TypeSpecifier typeSpecifier) {
 			super(String.format(INFER_TYPE_PARAMETER, typeSpecifier.type.name))
+		}
+		new (String message) {
+			super(message)
+		}
+	}
+	
+	static class TypeParameterBindingsException extends TypeParameterInferrenceException {
+		new(TypeParameter typeParameter) {
+			super(typeParameter)
+		}
+		new(TypeSpecifier typeSpecifier) {
+			super(typeSpecifier)
 		}
 		new (String message) {
 			super(message)
