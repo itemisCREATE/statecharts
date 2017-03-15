@@ -220,7 +220,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		typeParameterInferrer.inferTypeParametersFromOwner(inferTypeDispatch(e.getOwner()), inferredTypeParameterTypes);
 		
 		if (e.isOperationCall()) {
-			if(e.getFeature().eIsProxy()) {
+			if(!e.getFeature().eIsProxy()) {
 				return inferOperation(e, (Operation)e.getFeature(), inferredTypeParameterTypes);
 			} else {
 				return InferenceResult.from(registry.getType(ANY));
