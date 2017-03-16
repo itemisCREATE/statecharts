@@ -19,11 +19,10 @@ In this example, we will use an Angular project and demonstrate how the TypeScri
 
 h2(#tsdom-a-sample-hmi-application). A sample HMI application
 
-p(#tsdom-fig-hmimain). 
+p(#tsdom-fig-hmi-main-screen). 
 !images/tsdomain_hmimain.png(HMI main screen)!
 
 p=. HMI main screen
-
 
 In this example, we have a look at a simple HMI that represents an infotainment system for cars. You can find it in the YAKINDU Statechart Tools "example repository on Github":https://github.com/Yakindu/examples/wiki.
 
@@ -32,12 +31,14 @@ This application consists of three screens:
 * Start screen: shows a welcome animation
 * Main screen: consist of severals components (speedometer, light widgets, infotainment, etc.)
 
-p(#tsdom-fig-hmimain2). 
-!images/tsdomain_hmimain2.png(HMI main screen)!
+p(#tsdom-fig-hmi-main-screen-explained). 
+!images/tsdomain_hmimain2.png(HMI main screen explained)!
+
+p=. HMI main screen explained
 
 The infotainment component represents a container for further components like _infotainment menu_, _weather_, _music player_, and _phone_.
 
-p(#tsdom-fig-screens). 
+p(#tsdom-fig-hmi-screens). 
 !images/tsdomain_screens.png(HMI screens)!
 
 p=. HMI screens
@@ -46,7 +47,7 @@ h2(#tsdom-modeling-behavior-with-yakindu-statechart-tools-professional). Modelin
 
 In this section we will model two statecharts. The first one controls the screens, the second statechart controls the music player.
 
-h3(#tsdom-importing-the-sample-angular-2-project-into-eclipse). Importing the sample Angular project into Eclipse
+h3(#tsdom-importing-the-sample-angular-project-into-eclipse). Importing the sample Angular project into Eclipse
 
 ###. FIXME: The example should come from the Github example repository as announced above.
 
@@ -54,9 +55,9 @@ The sample application has to be imported into the Eclipse workspace.
 # In the Eclipse main menu, select _File → Import_. The _Import_ dialog opens.
 # Select _General → Projects from Folder or Archive_. <br/>!images/tsdomain_import_dialog.png(Import dialog)!
 # Click _Next_. The _Import Projects from File System or Archive_ dialog appears.
-# Open the directory folder of the Angular application by clicking on the _Directory_ button.<br/>!images/tsdomain_import2_dialog.png(Import dialog)!
+# Open the directory folder of the Angular application by clicking on the _Directory_ button.<br/>!images/tsdomain_import2_dialog.png(Import Projects from File System or Archive dialog)!
 # Click _Finish_. The project explorer should now look like this:<br/>!images/tsdomain_project_explorer.png(Project explorer)!
-# Open the project's context menu and add the _YAKINDU SCT Nature_. !images/tsdomain_add_sct_nature.gif(Add Yakindu SCT nature)!
+# Open the project's context menu and add the _YAKINDU SCT Nature_. !images/tsdomain_add_sct_nature.gif(Adding YAKINDU SCT Nature)!
 
 h3(#tsdom-creating-a-new-project-for-statechart-models). Creating a new project for statechart models
 
@@ -81,7 +82,7 @@ Now that we have a statechart project, let's create a statechart model using the
 # In the context menu, select _New → Statechart Model_. The _New YAKINDU Statechart Wizard_ opens.
 # In the dialog, specify directory and filename for the new statechart model file. The filename must end with _.sct_.
 # Click _Finish_. If Eclipse asks you whether to switch to the _YAKINDU Modeling perspective_, please confirm.
-# The new statechart model is created. !images/tsdomain_create_statechart_model.png(Statechart model)!
+# The new statechart model is created.<br/>!images/tsdomain_create_statechart_model.png(Statechart model)!
 
 h4(#tsdom-Defining-a-typescript-type-variable-in-a-statechart). Defining a TypeScript-type variable in a statechart
 
@@ -89,14 +90,19 @@ Statechart variables are defined in the definition section on the left-hand side
 
 Let's declare a variable _routerService_ of type _RouterService_. Type @var routerService:@, then press @[Ctrl+Space]@ in order to see which types are available.
 
-The content assist opens and shows the TypeScript types available in the Angular TypeScript sample application.<br/>!images/tsdomain_var.png(Content assist)!
+The content assist opens and shows the TypeScript types available in the Angular TypeScript sample application.
+
+p(#tsdom-fig-selecting-routerservice-using-content-assist). 
+!images/tsdomain_var.png(Selecting RouterService using content assist)!
+
+p=. Selecting _RouterService_ using content assist
 
 In the content assist menu, select the _RouterService_ entry to complete the variable definition.
 
-p(#tsdom-fig-routerservice). 
-!images/tsdomain_routerService_var.png(Definition section - routerService)!
+p(#tsdom-fig-variable-routerservice-defined-in-the-definition-section). 
+!images/tsdomain_routerService_var.png(Variable _routerService_ defined in the definition section)!
 
-p=. Definition section - routerService
+p=. Variable _routerService_ defined in the definition section
 
 h4(#tsdom-using-a-typescript-variable-in-a-statechart). Using a TypeScript variable in a statechart
 
@@ -120,23 +126,25 @@ h3(#tsdom-creating-a-statechart-generator-model). Creating a statechart generato
 Our goal is that the statechart is generated into the Angular&nbsp;2 project. For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called _SGen_. It can be created either by using the _YAKINDU Statechart Generator Model_ wizard or by manually creating a text file containing the SGen model. Such a file must have the filename extension _.sgen_.
 
 To create a generator model with the wizard, proceed as follows:
-# In the main menu, select _File → New → YAKINDU SCT → Code Generator Model_. The wizzard opens.
+# In the main menu, select _File → New → YAKINDU SCT → Code Generator Model_. The wizard opens.
 # Enter a name and click _Next_.
 # Choose the _YAKINDU SCT TypeScript Generator_ generator.
 # Check the model(s) to generate code from.
 # Click _Finish_.
 
-p(#tsdom-fig-genmodel-config-wizard). 
-!images/tsdomain_genmodel_config.png(SCT generator model configuration wizzard)!
+###. FIXME (Rainer): In the above text, please specify the wizard's exact name, that is, not just "The wizard opens", but something like "The _Explore the Universe_ wizard opens".
 
-p=. SCT generator model configuration wizard
+p(#tsdom-fig-yakindu-statechart-tools-generator-model-configuration-wizard). 
+!images/tsdomain_genmodel_config.png(YAKINDU Statechart Tools generator model configuration wizard)!
+
+p=. YAKINDU Statechart Tools generator model configuration wizard
 
 The result is an _.sgen_ file of the following format:
 
-p(#tsdom-fig-sgen-model). 
-!images/tsdomain_sgen.png(SCT generator model)!
+p(#tsdom-fig-yakindu-statechart-tools-generator-model). 
+!images/tsdomain_sgen.png(YAKINDU Statechart Tools generator model)!
 
-p=. SCT generator model
+p=. YAKINDU Statechart Tools generator model
 
 The *Outlet* feature specifies target project and target folder for the generated artifacts. It is a _required_ feature and has the following parameters:
 
@@ -147,21 +155,21 @@ The *Outlet* feature specifies target project and target folder for the generate
 
 In our example the generator model looks like this:
 
-p(#tsdom-fig-sgen-model2). 
-!images/tsdomain_sgen2.png(SCT generator model example configuration)!
+p(#tsdom-fig-yakindu-statechart-tools-generator-model-sample-configuration). 
+!images/tsdomain_sgen2.png(YAKINDU Statechart Tools generator model sample configuration)!
 
-p=. SCT generator model example configuration
+p=. YAKINDU Statechart Tools generator model sample configuration
 
 That is, the Angular project _ycarApp_ is augmented by the _src/app/gen_ folder containing the generated artifacts. In order to start generating TypeScript code from your statechart, just save the statechart model.
 
 After generation is done, you can find the generated TypeScript code in the specified _gen_ directory:
 
-p(#tsdom-fig-genfolder). 
+p(#tsdom-fig-generated-file-structure). 
 !images/tsdomain_genfolder.png(Generated file structure)!
 
 p=. Generated file structure
 
-h3(#tsdom-integrating-the-generated-typescript-statemachine-into-an-angular-2-application). Integrating the generated TypeScript statemachine into an Angular application
+h3(#tsdom-integrating-the-generated-typescript-statemachine-into-an-angular-application). Integrating the generated TypeScript statemachine into an Angular application
 
 In the context of Angular, the generated statechart is a _service_. To integrate it with the application, proceed as follows:
 
@@ -170,7 +178,7 @@ In the context of Angular, the generated statechart is a _service_. To integrate
 
 When you start the Angular application, it should behave like this:
 
-p(#tsdom-fig-hmi-behaviour). 
+p(#tsdom-fig-generated-hmi-behaviour). 
 !images/tsdomain_hmi.gif(Generated HMI behaviour)!
 
 p=. Generated HMI behaviour
