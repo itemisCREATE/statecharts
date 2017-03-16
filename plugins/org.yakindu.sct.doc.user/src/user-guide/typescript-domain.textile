@@ -1,4 +1,10 @@
 
+p. 
+
+==<div class="pro-feature">==
+
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/typescript-domain.textile
+
 h1(#tsdom-using-typescript-in-statecharts). Using TypeScript in statecharts
 
 h2(#tsdom-introduction). Introduction
@@ -168,3 +174,5 @@ p(#tsdom-fig-hmi-behaviour).
 !images/tsdomain_hmi.gif(Generated HMI behaviour)!
 
 p=. Generated HMI behaviour
+
+==</div>==

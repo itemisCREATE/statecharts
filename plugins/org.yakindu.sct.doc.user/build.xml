@@ -142,6 +142,7 @@
                 <include name="user-guide/simulating_statecharts.textile" />
                 <include name="user-guide/advanced_simulation.textile" />
                 <include name="user-guide/c-domain.textile" />
+                <include name="user-guide/typescript-domain.textile" />
                 <include name="user-guide/statechart_language.textile" />
                 <include name="user-guide/generating_code.textile" />
                 <include name="user-guide/generating_code_headless.textile" />
@@ -151,7 +152,7 @@
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="11" />
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="12" />
                 </condition>
             </fail>
 
@@ -199,7 +200,9 @@
 
             <!-- Add CSS classes "eclipsehelp" and "body-container" to BODY element and
                  nest a DIV child with CSS class "primary" into the BODY element. -->
-            <replaceregexp byline="true" match='&lt;body&gt;' replace='&lt;body class="eclipsehelp body-container"&gt;&lt;div class="primary"&gt;'>
+            <replaceregexp byline="true"
+                           match='&lt;body&gt;'
+                           replace='&lt;body class="eclipsehelp body-container"&gt;&lt;div class="primary"&gt;'>
                 <fileset dir="${help.dir}">
                     <include name="**/*.html" />
                 </fileset>
@@ -211,10 +214,7 @@
             </replaceregexp>
 
             <!-- Fix DIV elements -->
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;p&gt;&lt;div(.*)&gt;&lt;/p&gt;'
-                           replace='&lt;div\1&gt;'>
+            <replaceregexp byline="false" flags="g" match='&lt;p&gt;&lt;div(.*)&gt;&lt;/p&gt;' replace='&lt;div\1&gt;'>
                 <fileset dir="${help.dir}">
                     <include name="**/*.html" />
                 </fileset>
@@ -319,6 +319,7 @@
                         <file name="user-guide/simulating_statecharts.textile" />
                         <file name="user-guide/advanced_simulation.textile" />
                         <file name="user-guide/c-domain.textile" />
+                        <file name="user-guide/typescript-domain.textile" />
                         <file name="user-guide/statechart_language.textile" />
                         <file name="user-guide/generating_code.textile" />
                         <file name="user-guide/generating_code_headless.textile" />
