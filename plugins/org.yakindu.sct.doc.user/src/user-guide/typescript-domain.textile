@@ -13,7 +13,7 @@ In this example, we will use an Angular project and demonstrate how the TypeScri
 
 h2(#tsdom-a-sample-hmi-application). A sample HMI application
 
-p(#tsdom-fig-hmimain).
+p(#tsdom-fig-hmimain). 
 !images/tsdomain_hmimain.png(HMI main screen)!
 
 p=. HMI main screen
@@ -26,12 +26,12 @@ This application consists of three screens:
 * Start screen: shows a welcome animation
 * Main screen: consist of severals components (speedometer, light widgets, infotainment, etc.)
 
-p(#tsdom-fig-hmimain2).
+p(#tsdom-fig-hmimain2). 
 !images/tsdomain_hmimain2.png(HMI main screen)!
 
 The infotainment component represents a container for further components like _infotainment menu_, _weather_, _music player_, and _phone_.
 
-p(#tsdom-fig-screens).
+p(#tsdom-fig-screens). 
 !images/tsdomain_screens.png(HMI screens)!
 
 p=. HMI screens
@@ -87,7 +87,7 @@ The content assist opens and shows the TypeScript types available in the Angular
 
 In the content assist menu, select the _RouterService_ entry to complete the variable definition.
 
-p(#tsdom-fig-routerservice).
+p(#tsdom-fig-routerservice). 
 !images/tsdomain_routerService_var.png(Definition section - routerService)!
 
 p=. Definition section - routerService
@@ -120,14 +120,14 @@ To create a generator model with the wizard, proceed as follows:
 # Check the model(s) to generate code from.
 # Click _Finish_.
 
-p(#tsdom-fig-genmodel-config-wizard).
+p(#tsdom-fig-genmodel-config-wizard). 
 !images/tsdomain_genmodel_config.png(SCT generator model configuration wizzard)!
 
 p=. SCT generator model configuration wizard
 
 The result is an _.sgen_ file of the following format:
 
-p(#tsdom-fig-sgen-model).
+p(#tsdom-fig-sgen-model). 
 !images/tsdomain_sgen.png(SCT generator model)!
 
 p=. SCT generator model
@@ -141,7 +141,7 @@ The *Outlet* feature specifies target project and target folder for the generate
 
 In our example the generator model looks like this:
 
-p(#tsdom-fig-sgen-model2).
+p(#tsdom-fig-sgen-model2). 
 !images/tsdomain_sgen2.png(SCT generator model example configuration)!
 
 p=. SCT generator model example configuration
@@ -150,7 +150,7 @@ That is, the Angular project _ycarApp_ is augmented by the _src/app/gen_ folder 
 
 After generation is done, you can find the generated TypeScript code in the specified _gen_ directory:
 
-p(#tsdom-fig-genfolder).
+p(#tsdom-fig-genfolder). 
 !images/tsdomain_genfolder.png(Generated file structure)!
 
 p=. Generated file structure
@@ -164,7 +164,7 @@ In the context of Angular, the generated statechart is a _service_. To integrate
 
 When you start the Angular application, it should behave like this:
 
-p(#tsdom-fig-hmi-behaviour).
+p(#tsdom-fig-hmi-behaviour). 
 !images/tsdomain_hmi.gif(Generated HMI behaviour)!
 
 p=. Generated HMI behaviour
