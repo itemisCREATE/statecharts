@@ -11,6 +11,7 @@
     <title>{{ page_meta.html_title }}</title>
     {% if site_settings.favicon_src %}<link rel="shortcut icon" href="{{ site_settings.favicon_src }}" />{% endif %}
     <link rel="stylesheet" href="{{ get_public_template_url("custom/system/default/inbound-performance.css") }}">
+    <link rel="stylesheet" href="{{ get_public_template_url("custom/page/itemis/itemis-relaunch-2017.css") }}">
     
 {{ standard_header_includes }}
     {% style include_default_custom_css="true" %}
