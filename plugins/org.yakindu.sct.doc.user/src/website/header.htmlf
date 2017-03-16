@@ -16,7 +16,7 @@
     {% style include_default_custom_css="true" %}
 
 </head>
-<body class="scrum-wiki-page sct-docs homepage-test {{ builtin_body_classes }}" style="">
+<body class="sct-docs homepage-test {{ builtin_body_classes }}" style="">
     <div class="header-container-wrapper">
     <div class="header-container container-fluid">
 
@@ -30,25 +30,9 @@
 
 <div class="row-fluid-wrapper row-depth-1 row-number-2 ">
 <div class="row-fluid ">
-<div class="span12 widget-span widget-type-cell site-header" style="" data-widget-type="cell" data-x="0" data-w="12">
-
-<div class="row-fluid-wrapper row-depth-1 row-number-3 ">
-<div class="row-fluid ">
-<div class="span2 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="2">
+<div class="span12 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="12">
 <div class="cell-wrapper layout-widget-wrapper">
-{% custom_widget "module_14660785454254323" overrideable=true, cell=false, cells='[]', ending_html='', root=false, row=false, starting_html='', custom_widget_id=3790169343, widget_name='Site Header Title', label='Site Header Title' %}</div><!--end layout-widget-wrapper -->
-</div><!--end widget-span -->
-<div class="span9 widget-span widget-type-menu menu-primary" style="" data-widget-type="menu" data-x="2" data-w="10">
-<div class="cell-wrapper layout-widget-wrapper">
-{% menu "module_142729402815510929" overrideable=false, cell=false, cells='[]', ending_html='', root=false, row=false, starting_html='', flow='horizontal', flyouts='true', max_levels='3', root_type='site_root', site_map_name='YAKINDU Statechart tools', wrapping_html='', label='Advanced Menu' %}</div><!--end layout-widget-wrapper -->
-</div><!--end widget-span -->
-<div class="span1 widget-span widget-type-cta " style="" data-widget-type="cta" data-x="11" data-w="1">
-<div class="cell-wrapper layout-widget-wrapper">
-{% cta "module_14819021594131476" overrideable=true, embed_code='<!--HubSpot Call-to-Action Code -->\n<span class="hs-cta-wrapper" id="hs-cta-wrapper-c0a897c3-9891-4fa3-bc68-45198d9b0016">\n    <span class="hs-cta-node hs-cta-c0a897c3-9891-4fa3-bc68-45198d9b0016" id="hs-cta-c0a897c3-9891-4fa3-bc68-45198d9b0016">\n        <!--[if lte IE 8]><div id="hs-cta-ie-element"></div><![endif]-->\n        <a href="http://cta-redirect.hubspot.com/cta/redirect/761475/c0a897c3-9891-4fa3-bc68-45198d9b0016" ><img class="hs-cta-img" id="hs-cta-img-c0a897c3-9891-4fa3-bc68-45198d9b0016" style="border-width:0px;" src="https://no-cache.hubspot.com/cta/default/761475/c0a897c3-9891-4fa3-bc68-45198d9b0016.png"  alt="Download"/></a>\n    </span>\n    <script charset="utf-8" src="https://js.hscta.net/cta/current.js"></script>\n    <script type="text/javascript">\n        hbspt.cta.load(761475, \'c0a897c3-9891-4fa3-bc68-45198d9b0016\', {});\n    </script>\n</span>\n<!-- end HubSpot Call-to-Action Code -->\n', guid='c0a897c3-9891-4fa3-bc68-45198d9b0016', image_html='<!--HubSpot Call-to-Action Code -->\n<span class="hs-cta-wrapper" data-hs-img-pg="c0a897c3-9891-4fa3-bc68-45198d9b0016" id="hs-cta-wrapper-c0a897c3-9891-4fa3-bc68-45198d9b0016">\n    <span class="hs-cta-node hs-cta-c0a897c3-9891-4fa3-bc68-45198d9b0016" id="hs-cta-c0a897c3-9891-4fa3-bc68-45198d9b0016">\n        <a href="https://info.itemis.com/cs/ci/?pg=c0a897c3-9891-4fa3-bc68-45198d9b0016&pid=761475&ecid={{encrypted_contact_id}}" > <img class="hs-cta-img" id="hs-cta-img-c0a897c3-9891-4fa3-bc68-45198d9b0016" style="border-width:0px;" mce_noresize="1" src="https://info.itemis.com/cs/il/?pg=c0a897c3-9891-4fa3-bc68-45198d9b0016&pid=761475&ecid={{encrypted_contact_id}}"  alt="Download"/></a>\n    </span>\n</span>\n<!-- end HubSpot Call-to-Action Code -->\n', image_src='https://no-cache.hubspot.com/cta/default/761475/c0a897c3-9891-4fa3-bc68-45198d9b0016.png', label='Call-to-Action' %}</div><!--end layout-widget-wrapper -->
-</div><!--end widget-span -->
-</div><!--end row-->
-</div><!--end row-wrapper -->
-
+{% custom_widget "module_1489666761477965" overrideable=true, ending_html='', starting_html='', custom_widget_id=4933503264, widget_name='Site Header (itemis)', label='Site Header (itemis)' %}</div><!--end layout-widget-wrapper -->
 </div><!--end widget-span -->
 </div><!--end row-->
 </div><!--end row-wrapper -->
