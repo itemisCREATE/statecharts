@@ -298,7 +298,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		if (validationListener != null) {
 			validationListener.dispose();
 		}
-		issueStore.disconnect(getDiagram().eResource());
+		if (issueStore != null)
+			issueStore.disconnect(getDiagram().eResource());
 		getEditingDomain().removeResourceSetListener(validationListener);
 		getEditingDomain().removeResourceSetListener(domainAdapter);
 		if (domainAdapter != null)
