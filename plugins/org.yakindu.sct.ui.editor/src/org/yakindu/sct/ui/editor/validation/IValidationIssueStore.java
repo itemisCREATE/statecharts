@@ -30,6 +30,8 @@ public interface IValidationIssueStore extends IValidationIssueProcessor {
 	public interface IResourceIssueStoreListener {
 
 		public void issuesChanged();
+		
+		public String getNotationURI();
 
 	}
 

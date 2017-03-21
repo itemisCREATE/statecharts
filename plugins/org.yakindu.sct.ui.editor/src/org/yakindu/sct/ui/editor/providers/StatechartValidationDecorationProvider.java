@@ -83,6 +83,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 	public static class ValidationDecorator extends AbstractDecorator implements IResourceIssueStoreListener {
 
 		private IValidationIssueStore store;
+		private String elementId;
 
 		public ValidationDecorator(IDecoratorTarget decoratorTarget, IValidationIssueStore store) {
 			super(decoratorTarget);
@@ -90,11 +91,12 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		public void refresh() {
-			removeDecoration();
 			View view = (View) getDecoratorTarget().getAdapter(View.class);
 			if (view == null || view.eResource() == null) {
 				return;
 			}
+			elementId = ViewUtil.getIdStr(view);
+			removeDecoration();
 			EditPart editPart = (EditPart) getDecoratorTarget().getAdapter(EditPart.class);
 			if (editPart == null || editPart.getViewer() == null || !(editPart instanceof IPrimaryEditPart)) {
 				return;
@@ -111,10 +113,6 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		protected void decorate(View view) {
-			String elementId = ViewUtil.getIdStr(view);
-			if (elementId == null) {
-				return;
-			}
 			List<SCTIssue> issues = store.getIssues(elementId);
 			Severity severity = Severity.INFO;
 			Label toolTip = null;
@@ -170,6 +168,11 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		@Override
 		public void issuesChanged() {
 			refresh();
+		}
+
+		@Override
+		public String getNotationURI() {
+			return elementId;
 		}
 	}
 }
