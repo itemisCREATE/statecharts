@@ -12,6 +12,8 @@ package org.yakindu.sct.ui.editor.validation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -85,6 +87,15 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 		synchronized (this.listener) {
 			for (IResourceIssueStoreListener iResourceIssueStoreListener : listener) {
 				iResourceIssueStoreListener.issuesChanged();
+			}
+		}
+	}
+
+	protected void notifyListeners(String notationURI) {
+		synchronized (this.listener) {
+			for (IResourceIssueStoreListener iResourceIssueStoreListener : listener) {
+				if (notationURI.equals(iResourceIssueStoreListener.getNotationURI()))
+					iResourceIssueStoreListener.issuesChanged();
 			}
 		}
 	}
@@ -174,12 +185,23 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 
 	@Override
 	public void handleMarkerAdded(IMarker marker) {
-		reloadMarkerIssues();
+		SCTIssue issue = createFromMarker(marker);
+		persistentIssues.put(issue.getNotationViewURI(), issue);
+		notifyListeners(issue.getNotationViewURI());
 	}
 
 	@Override
 	public void handleMarkerDeleted(IMarker marker, @SuppressWarnings("rawtypes") Map attributes) {
-		reloadMarkerIssues();
+		String viewId = (String) attributes.get(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID);
+		String message = (String) attributes.get(IMarker.MESSAGE);
+		Collection<SCTIssue> collection = persistentIssues.get(viewId);
+		Iterator<SCTIssue> iterator = collection.iterator();
+		while (iterator.hasNext()) {
+			SCTIssue sctIssue = (SCTIssue) iterator.next();
+			if (sctIssue.getMessage().equals(message))
+				iterator.remove();
+		}
+		notifyListeners(viewId);
 
 	}
 
