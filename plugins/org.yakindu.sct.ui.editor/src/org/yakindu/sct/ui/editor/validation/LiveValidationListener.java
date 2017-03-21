@@ -32,7 +32,7 @@ public class LiveValidationListener extends ResourceSetListenerImpl {
 	private static final int DELAY = 200; // ms
 
 	@Inject
-	private SCTValidationJob validationJob;
+	private ValidationJob validationJob;
 
 	@Override
 	public void resourceSetChanged(ResourceSetChangeEvent event) {

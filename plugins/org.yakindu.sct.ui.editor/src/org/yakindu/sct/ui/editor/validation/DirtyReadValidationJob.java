@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 committers of YAKINDU and others.
+ * Copyright (c) 2017 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,43 +16,26 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
-import org.eclipse.xtext.service.OperationCanceledError;
-import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
-import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 
 /**
+ * This validates the model without a read transaction (dirty read) Potentially
+ * thrown exceptions are catched and ignores, results are not processed then.
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTValidationJob extends Job {
-
-	@Inject
-	private IResourceValidator validator;
-
-	private IValidationIssueProcessor validationIssueProcessor;
-
-	private Resource resource;
-
-	public SCTValidationJob() {
-		super("validate model...");
-		setUser(false);
-	}
+public class DirtyReadValidationJob extends ValidationJob {
 
 	@Override
 	public IStatus run(final IProgressMonitor monitor) {
@@ -72,22 +55,21 @@ public class SCTValidationJob extends Job {
 						return monitor.isCanceled();
 					}
 				}));
-			} catch (OperationCanceledError | OperationCanceledException ex) {
+			} catch (Throwable t) {
+				// Exceptions may occur, for example
+				// ConcurrentModificationException due to running outside of a
+				// transaction. Just cancel the job, it is rescheduled then.
 				return Status.CANCEL_STATUS;
 			}
 			if (!result.isEmpty())
 				validationIssueProcessor.processIssues(result, monitor);
 
 		} catch (Throwable ex) {
-			ex.printStackTrace();
 			return new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID, ex.getMessage());
 		}
 		return Status.OK_STATUS;
 	}
 
-	/**
-	 * relinks the model before validation is executed
-	 */
 	protected void relinkModel(final IProgressMonitor monitor, final AbstractSCTResource eResource)
 			throws ExecutionException {
 		AbstractTransactionalCommand cmd = new AbstractTransactionalCommand(TransactionUtil.getEditingDomain(eResource),
@@ -101,18 +83,6 @@ public class SCTValidationJob extends Job {
 			}
 		};
 		cmd.execute(monitor, null);
-	}
-
-	public Resource getResource() {
-		return resource;
-	}
-
-	public void setResource(Resource resource) {
-		this.resource = resource;
-	}
-
-	public void setValidationIssueProcessor(IValidationIssueProcessor validationIssueProcessor) {
-		this.validationIssueProcessor = validationIssueProcessor;
 	}
 
 }
