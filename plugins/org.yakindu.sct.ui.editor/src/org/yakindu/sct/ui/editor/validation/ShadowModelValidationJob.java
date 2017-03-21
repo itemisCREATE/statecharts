@@ -49,7 +49,7 @@ public class ShadowModelValidationJob extends ValidationJob {
 	private ResourceCopier copier;
 
 	@Override
-	public IStatus runInternal(final IProgressMonitor monitor) {
+	protected IStatus runInternal(final IProgressMonitor monitor) {
 		ResourceSet set = new ResourceSetImpl();
 		try {
 			if (!resource.isLoaded())

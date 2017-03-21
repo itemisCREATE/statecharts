@@ -69,7 +69,7 @@ public class DefaultValidationJob extends ValidationJob {
 	}
 
 	@Override
-	public IStatus runInternal(final IProgressMonitor monitor) {
+	protected IStatus runInternal(final IProgressMonitor monitor) {
 		try {
 			if (!resource.isLoaded())
 				return Status.CANCEL_STATUS;
