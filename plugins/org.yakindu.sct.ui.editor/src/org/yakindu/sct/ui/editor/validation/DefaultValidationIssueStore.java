@@ -69,17 +69,23 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 
 	@Override
 	public void addIssueStoreListener(IResourceIssueStoreListener listener) {
-		this.listener.add(listener);
+		synchronized (this.listener) {
+			this.listener.add(listener);
+		}
 	}
 
 	@Override
 	public void removeIssueStoreListener(IResourceIssueStoreListener listener) {
-		this.listener.remove(listener);
+		synchronized (this.listener) {
+			this.listener.remove(listener);
+		}
 	}
 
 	protected void notifyListeners() {
-		for (IResourceIssueStoreListener iResourceIssueStoreListener : listener) {
-			iResourceIssueStoreListener.issuesChanged();
+		synchronized (this.listener) {
+			for (IResourceIssueStoreListener iResourceIssueStoreListener : listener) {
+				iResourceIssueStoreListener.issuesChanged();
+			}
 		}
 	}
 
@@ -96,7 +102,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 		reloadMarkerIssues();
 	}
 
-	protected void reloadMarkerIssues() {
+	protected synchronized void reloadMarkerIssues() {
 		persistentIssues.clear();
 		List<IMarker> markers = new ArrayList<IMarker>();
 		try {
@@ -132,7 +138,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 	}
 
 	@Override
-	public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
+	public synchronized void processIssues(List<Issue> issues, IProgressMonitor monitor) {
 		liveIssues.clear();
 		for (Issue issue : issues) {
 			if (issue instanceof SCTIssue) {
@@ -144,7 +150,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 	}
 
 	@Override
-	public List<SCTIssue> getIssues(String uri) {
+	public synchronized List<SCTIssue> getIssues(String uri) {
 		List<SCTIssue> result = Lists.newArrayList();
 		if (!liveValidationEnabled()) {
 			result.addAll(persistentIssues.get(uri));

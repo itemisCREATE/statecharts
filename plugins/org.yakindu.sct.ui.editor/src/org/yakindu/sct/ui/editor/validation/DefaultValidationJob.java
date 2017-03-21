@@ -18,14 +18,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
-import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -33,29 +31,16 @@ import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 
-import com.google.inject.Inject;
-
 /**
+ * The default implementation executes the validation within a readonly
+ * transaction on the transactional editing domain. during validation the model
+ * is locked and can not be changed.
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTValidationJob extends Job {
+public class DefaultValidationJob extends ValidationJob {
 
-	@Inject
-	private IResourceValidator validator;
-
-	private IValidationIssueProcessor validationIssueProcessor;
-
-	private Resource resource;
-
-	/**
-	 * Wrappes the {@link IResourceValidator} validate within a
-	 * {@link RunnableWithResult} to execute within a read only transaction
-	 * 
-	 * @author andreas muelder - Initial contribution and API
-	 * 
-	 */
 	public static class TransactionalValidationRunner extends RunnableWithResult.Impl<List<Issue>> {
 
 		private IResourceValidator validator;
@@ -83,13 +68,8 @@ public class SCTValidationJob extends Job {
 		}
 	}
 
-	public SCTValidationJob() {
-		super("validate model...");
-		setUser(false);
-	}
-
 	@Override
-	public IStatus run(final IProgressMonitor monitor) {
+	protected IStatus runInternal(final IProgressMonitor monitor) {
 		try {
 			if (!resource.isLoaded())
 				return Status.CANCEL_STATUS;
@@ -127,9 +107,6 @@ public class SCTValidationJob extends Job {
 		return Status.OK_STATUS;
 	}
 
-	/**
-	 * relinks the model before validation is executed
-	 */
 	protected void relinkModel(final IProgressMonitor monitor, final AbstractSCTResource eResource)
 			throws ExecutionException {
 		AbstractTransactionalCommand cmd = new AbstractTransactionalCommand(TransactionUtil.getEditingDomain(eResource),
@@ -144,17 +121,4 @@ public class SCTValidationJob extends Job {
 		};
 		cmd.execute(monitor, null);
 	}
-
-	public Resource getResource() {
-		return resource;
-	}
-
-	public void setResource(Resource resource) {
-		this.resource = resource;
-	}
-	
-	public void setValidationIssueProcessor(IValidationIssueProcessor validationIssueProcessor) {
-		this.validationIssueProcessor = validationIssueProcessor;
-	}
-
 }
