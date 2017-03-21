@@ -63,7 +63,7 @@ public class LiveValidationListener extends ResourceSetListenerImpl {
 
 	public void scheduleValidation() {
 		if (liveValidationEnabled()) {
-			validationJob.schedule();
+			validationJob.schedule(DELAY);
 		}
 	}
 
