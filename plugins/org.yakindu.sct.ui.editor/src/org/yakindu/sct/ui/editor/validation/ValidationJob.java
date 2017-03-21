@@ -10,6 +10,8 @@
 */
 package org.yakindu.sct.ui.editor.validation;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
@@ -32,9 +34,19 @@ public abstract class ValidationJob extends Job {
 
 	protected Resource resource;
 
+	protected abstract IStatus runInternal(final IProgressMonitor monitor);
+
 	public ValidationJob() {
 		super("validate model...");
 		setUser(false);
+	}
+
+	@Override
+	public final IStatus run(final IProgressMonitor monitor) {
+		long t = System.currentTimeMillis();
+		IStatus status = runInternal(monitor);
+		System.out.println("Validation took " + (System.currentTimeMillis() - t));
+		return status;
 	}
 
 	public Resource getResource() {

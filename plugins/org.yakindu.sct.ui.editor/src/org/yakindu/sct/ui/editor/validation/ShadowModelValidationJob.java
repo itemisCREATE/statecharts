@@ -50,15 +50,13 @@ public class ShadowModelValidationJob extends ValidationJob {
 	private ResourceCopier copier;
 
 	@Override
-	public IStatus run(final IProgressMonitor monitor) {
+	public IStatus runInternal(final IProgressMonitor monitor) {
 		ResourceSet set = new ResourceSetImpl();
 		try {
 			if (!resource.isLoaded())
 				return Status.CANCEL_STATUS;
-
 			final Resource shadowResource = set.createResource(resource.getURI());
 			cloneResource(monitor, shadowResource);
-
 			if (monitor.isCanceled())
 				return Status.CANCEL_STATUS;
 

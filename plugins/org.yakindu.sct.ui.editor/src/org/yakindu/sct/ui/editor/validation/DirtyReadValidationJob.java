@@ -38,7 +38,7 @@ import com.google.common.collect.Lists;
 public class DirtyReadValidationJob extends ValidationJob {
 
 	@Override
-	public IStatus run(final IProgressMonitor monitor) {
+	public IStatus runInternal(final IProgressMonitor monitor) {
 		try {
 			if (!resource.isLoaded())
 				return Status.CANCEL_STATUS;
