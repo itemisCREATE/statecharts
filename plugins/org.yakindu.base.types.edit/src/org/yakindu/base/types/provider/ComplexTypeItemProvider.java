@@ -32,7 +32,7 @@ import org.yakindu.base.types.TypesPackage;
  * @generated
  */
 public class ComplexTypeItemProvider
-	extends GenericElementItemProvider {
+	extends TypeItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -54,101 +54,9 @@ public class ComplexTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addAnnotationsPropertyDescriptor(object);
-			addIdPropertyDescriptor(object);
-			addAbstractPropertyDescriptor(object);
-			addVisiblePropertyDescriptor(object);
 			addSuperTypesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Annotations feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAnnotationsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AnnotatableElement_annotations_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AnnotatableElement_annotations_feature", "_UI_AnnotatableElement_type"),
-				 TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Id feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_PackageMember_id_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PackageMember_id_feature", "_UI_PackageMember_type"),
-				 TypesPackage.Literals.PACKAGE_MEMBER__ID,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Abstract feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAbstractPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Type_abstract_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Type_abstract_feature", "_UI_Type_type"),
-				 TypesPackage.Literals.TYPE__ABSTRACT,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Visible feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addVisiblePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Type_visible_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Type_visible_feature", "_UI_Type_type"),
-				 TypesPackage.Literals.TYPE__VISIBLE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -185,7 +93,7 @@ public class ComplexTypeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.TYPE__CONSTRAINT);
+			childrenFeatures.add(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS);
 			childrenFeatures.add(TypesPackage.Literals.COMPLEX_TYPE__FEATURES);
 		}
 		return childrenFeatures;
@@ -241,12 +149,7 @@ public class ComplexTypeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ComplexType.class)) {
-			case TypesPackage.COMPLEX_TYPE__ID:
-			case TypesPackage.COMPLEX_TYPE__ABSTRACT:
-			case TypesPackage.COMPLEX_TYPE__VISIBLE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case TypesPackage.COMPLEX_TYPE__CONSTRAINT:
+			case TypesPackage.COMPLEX_TYPE__TYPE_PARAMETERS:
 			case TypesPackage.COMPLEX_TYPE__FEATURES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -267,13 +170,8 @@ public class ComplexTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.TYPE__CONSTRAINT,
-				 TypesFactory.eINSTANCE.createTypeConstraint()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.TYPE__CONSTRAINT,
-				 TypesFactory.eINSTANCE.createRangeConstraint()));
+				(TypesPackage.Literals.GENERIC_ELEMENT__TYPE_PARAMETERS,
+				 TypesFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -72,6 +72,7 @@ public class ParameterItemProvider
 			addNamePropertyDescriptor(object);
 			addAnnotationsPropertyDescriptor(object);
 			addVarArgsPropertyDescriptor(object);
+			addOptionalPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -165,6 +166,28 @@ public class ParameterItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Optional feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOptionalPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Parameter_optional_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Parameter_optional_feature", "_UI_Parameter_type"),
+				 TypesPackage.Literals.PARAMETER__OPTIONAL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -233,6 +256,7 @@ public class ParameterItemProvider
 		switch (notification.getFeatureID(Parameter.class)) {
 			case TypesPackage.PARAMETER__NAME:
 			case TypesPackage.PARAMETER__VAR_ARGS:
+			case TypesPackage.PARAMETER__OPTIONAL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.PARAMETER__TYPE_SPECIFIER:
