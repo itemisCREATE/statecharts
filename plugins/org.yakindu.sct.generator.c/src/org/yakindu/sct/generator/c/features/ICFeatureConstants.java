@@ -42,4 +42,8 @@ public interface ICFeatureConstants {
 	public static final String PARAMETER_TRACING_ENTER_STATE = "enterState";
 	
 	public static final String PARAMETER_TRACING_EXIT_STATE = "exitState";
+	
+	public static final String FEATURE_INCLUDES = "Includes";
+	
+	public static final String PARAMETER_INCLUDES_USE_RELATIVE_PATHS = "useRelativePaths";
 }

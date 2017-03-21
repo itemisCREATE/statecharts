@@ -249,7 +249,21 @@ bc. feature Tracing {
 
 ==<!-- End sgen_feature_tracing -->==
 
+==<!-- Start sgen_feature_includes -->==
 
+h3(#c-includes-feature). Includes feature
+
+The *Includes* feature allows to change how include statements are generated:
+
+# _useRelativePaths_ (Boolean, optional): If this parameter is set to _true_, relative paths are calculated for include statements, otherwise simple includes are used. Default value is _true_.
+
+bq.. *Example:*
+
+bc. feature Includes {
+    useRelativePaths = false
+}
+
+==<!-- End sgen_feature_includes -->==
 
 h2(#c-specification-of-c-code). Specification of C code
 
@@ -765,7 +779,21 @@ bc. feature GeneratorOptions {
 
 ==<!-- End sgen_feature_generatoroptions -->==
 
+==<!-- Start sgen_feature_includes -->==
 
+h3(#cpp-includes-feature). Includes feature
+
+The *Includes* feature allows to change how include statements are generated:
+
+# _useRelativePaths_ (Boolean, optional): If this parameter is set to _true_, relative paths are calculated for include statements, otherwise simple includes are used. Default value is _true_.
+
+bq.. *Example:*
+
+bc. feature Includes {
+    useRelativePaths = false
+}
+
+==<!-- End sgen_feature_includes -->==
 
 h2(#cpp-specification-of-cpp-code). Specification of C++ code
 

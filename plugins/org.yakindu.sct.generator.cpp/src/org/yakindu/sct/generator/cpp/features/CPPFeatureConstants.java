@@ -29,4 +29,8 @@ public interface CPPFeatureConstants {
 	public static final String PARAMETER_INNER_FUNCTION_VISIBILITY = "innerFunctionVisibility";
 	
 	public static final String PARAMETER_STATIC_OPC = "staticOperationCallback";
+	
+	public static final String FEATURE_INCLUDES = "Includes";
+	
+	public static final String PARAMETER_INCLUDES_USE_RELATIVE_PATHS = "useRelativePaths";
 }

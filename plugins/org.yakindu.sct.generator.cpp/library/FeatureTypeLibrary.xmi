@@ -32,4 +32,12 @@
         optional="true"
         parameterType="BOOLEAN"/>
   </types>
+  <types name="Includes"
+      optional="true">
+    <parameters
+        name="useRelativePaths"
+        comment="If set to 'true' relative paths are calculated for include statements, otherwise simple includes are used."
+        optional="true"
+        parameterType="BOOLEAN"/>
+  </types>
 </sgen:FeatureTypeLibrary>
