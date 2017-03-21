@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -88,7 +87,9 @@ public class ShadowModelValidationJob extends ValidationJob {
 			protected CommandResult doExecuteWithResult(final IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				try {
+					long t = System.currentTimeMillis();
 					copier.cloneResource(resource, shadowResource);
+					System.out.println("Copier took " + (System.currentTimeMillis() - t));
 				} catch (Throwable t) {
 					return CommandResult.newErrorCommandResult(t.getMessage());
 				}
@@ -104,9 +105,6 @@ public class ShadowModelValidationJob extends ValidationJob {
 
 		public void cloneResource(Resource original, Resource clone) {
 			clone.setURI(original.getURI());
-			ResourceSetImpl resultRS = new ResourceSetImpl();
-			ECrossReferenceAdapter adapter = new ECrossReferenceAdapter();
-			resultRS.eAdapters().add(adapter);
 			clone.getContents().addAll(super.copyAll(original.getContents()));
 			copyReferences();
 			copyXMIIds(original, clone);
