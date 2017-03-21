@@ -87,9 +87,7 @@ public class ShadowModelValidationJob extends ValidationJob {
 			protected CommandResult doExecuteWithResult(final IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				try {
-					long t = System.currentTimeMillis();
 					copier.cloneResource(resource, shadowResource);
-					System.out.println("Copier took " + (System.currentTimeMillis() - t));
 				} catch (Throwable t) {
 					return CommandResult.newErrorCommandResult(t.getMessage());
 				}

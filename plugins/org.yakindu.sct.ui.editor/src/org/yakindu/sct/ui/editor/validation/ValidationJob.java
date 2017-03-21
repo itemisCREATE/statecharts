@@ -43,9 +43,7 @@ public abstract class ValidationJob extends Job {
 
 	@Override
 	public final IStatus run(final IProgressMonitor monitor) {
-		long t = System.currentTimeMillis();
 		IStatus status = runInternal(monitor);
-		System.out.println("Validation took " + (System.currentTimeMillis() - t));
 		return status;
 	}
 
