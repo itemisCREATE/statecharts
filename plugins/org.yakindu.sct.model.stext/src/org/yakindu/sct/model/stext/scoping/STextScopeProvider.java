@@ -45,7 +45,6 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -112,11 +111,11 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 	}
 
 	public IScope scope_ElementReferenceExpression_reference(final EObject context, EReference reference) {
-		IScope namdScope = getNamedTopLevelScope(context, reference);
+		IScope namedScope = getNamedTopLevelScope(context, reference);
 		IScope unnamedScope = getUnnamedTopLevelScope(context, reference);
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
 		unnamedScope = new FilteringScope(unnamedScope, predicate);
-		return new SimpleScope(Iterables.concat(namdScope.getAllElements(), unnamedScope.getAllElements()));
+		return new SimpleScope(unnamedScope, namedScope.getAllElements());
 	}
 
 	public IScope scope_FeatureCall_feature(final FeatureCall context, EReference reference) {
