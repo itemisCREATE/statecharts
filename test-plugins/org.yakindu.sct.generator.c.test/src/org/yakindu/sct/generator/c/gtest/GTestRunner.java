@@ -38,6 +38,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.runner.Description;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.Failure;
@@ -59,6 +60,8 @@ public class GTestRunner extends Runner {
 
 	private Class<?> testClass;
 
+	private boolean ignore;
+
 	private Map<String, List<String>> testCases = new LinkedHashMap<String, List<String>>();
 
 	/**
@@ -72,10 +75,13 @@ public class GTestRunner extends Runner {
 			throw new InitializationError("Test class must specify " + GTest.class.getCanonicalName() + " annotation");
 		}
 
+		ignore = testClass.getAnnotation(Ignore.class) != null;
+
 		String sourceFile = annotation.sourceFile();
 		try {
 			CharSequence charSequence = readSourceFile(sourceFile);
-			String s = ML_COMMENT_PATTERN.matcher(SL_COMMENT_PATTERN.matcher(charSequence).replaceAll("")).replaceAll("");
+			String s = ML_COMMENT_PATTERN.matcher(SL_COMMENT_PATTERN.matcher(charSequence).replaceAll(""))
+					.replaceAll("");
 			Matcher matcher = TEST_PATTERN.matcher(s);
 			while (matcher.find()) {
 				String testCaseName = matcher.group(1);
@@ -98,8 +104,7 @@ public class GTestRunner extends Runner {
 
 	private CharSequence readSourceFile(String sourceFile) throws IOException {
 		Bundle bundle = getTestBundle();
-		InputStream is = FileLocator.openStream(bundle, new Path(sourceFile),
-				false);
+		InputStream is = FileLocator.openStream(bundle, new Path(sourceFile), false);
 		Reader reader = new InputStreamReader(is);
 		char[] buffer = new char[4096];
 		StringBuilder sb = new StringBuilder(buffer.length);
@@ -111,7 +116,7 @@ public class GTestRunner extends Runner {
 		is.close();
 		return sb;
 	}
-	
+
 	protected Bundle getTestBundle() {
 		String testProject = testClass.getAnnotation(GTest.class).testBundle();
 		if (!testProject.isEmpty()) {
@@ -159,28 +164,32 @@ public class GTestRunner extends Runner {
 	 */
 	@Override
 	public void run(RunNotifier notifier) {
-		try {
-			Object test = testClass.newInstance();
-			Method[] methods = testClass.getMethods();
+		if (ignore) {
+			notifier.fireTestIgnored(getDescription());
+		} else {
+			try {
+				Object test = testClass.newInstance();
+				Method[] methods = testClass.getMethods();
 
-			for (Method method : methods) {
-				if (method.isAnnotationPresent(Before.class)) {
-					method.invoke(test);
+				for (Method method : methods) {
+					if (method.isAnnotationPresent(Before.class)) {
+						method.invoke(test);
+					}
 				}
-			}
 
-			runGTests(notifier);
+				runGTests(notifier);
 
-			for (Method method : methods) {
-				if (method.isAnnotationPresent(After.class)) {
-					method.invoke(test);
+				for (Method method : methods) {
+					if (method.isAnnotationPresent(After.class)) {
+						method.invoke(test);
+					}
 				}
+			} catch (InvocationTargetException e) {
+				Throwable targetException = ((InvocationTargetException) e).getTargetException();
+				notifier.fireTestFailure(new Failure(getDescription(), targetException));
+			} catch (Throwable throwable) {
+				notifier.fireTestFailure(new Failure(getDescription(), throwable));
 			}
-		} catch (InvocationTargetException e) {
-			Throwable targetException = ((InvocationTargetException) e).getTargetException();
-			notifier.fireTestFailure(new Failure(getDescription(), targetException));
-		} catch (Throwable throwable) {
-			notifier.fireTestFailure(new Failure(getDescription(), throwable));
 		}
 	}
 
@@ -194,11 +203,13 @@ public class GTestRunner extends Runner {
 		IResource programFile = ResourcesPlugin.getWorkspace().getRoot().findMember(programPath);
 		IContainer programContainer = programFile.getParent();
 		if (!programContainer.isAccessible()) {
-			throw new RuntimeException("Test program container " + programContainer.getLocation().toOSString() + " inaccessible");
+			throw new RuntimeException(
+					"Test program container " + programContainer.getLocation().toOSString() + " inaccessible");
 		}
-		
+
 		File directory = programContainer.getLocation().toFile();
-		Process process = new ProcessBuilder(programFile.getLocation().toOSString()).redirectErrorStream(true).directory(directory).start();
+		Process process = new ProcessBuilder(programFile.getLocation().toOSString()).redirectErrorStream(true)
+				.directory(directory).start();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
 		boolean started = false;
@@ -220,20 +231,21 @@ public class GTestRunner extends Runner {
 				if (testOutput != null) {
 					Description description = testOutput.toDescription();
 					switch (testOutput.getStatus()) {
-					case TestOutput.RUN:
-						running = true;
-						message.setLength(0);
-						notifier.fireTestStarted(description);
-						break;
-					case TestOutput.OK:
-						running = false;
-						notifier.fireTestFinished(description);
-						break;
-					default:
-						running = false;
-						notifier.fireTestFailure(new Failure(description, new AssertionFailedError(message.toString())));
-						notifier.fireTestFinished(description);
-						break;
+						case TestOutput.RUN :
+							running = true;
+							message.setLength(0);
+							notifier.fireTestStarted(description);
+							break;
+						case TestOutput.OK :
+							running = false;
+							notifier.fireTestFinished(description);
+							break;
+						default :
+							running = false;
+							notifier.fireTestFailure(
+									new Failure(description, new AssertionFailedError(message.toString())));
+							notifier.fireTestFinished(description);
+							break;
 					}
 				} else if (running) {
 					message.append(line);
@@ -243,7 +255,7 @@ public class GTestRunner extends Runner {
 		}
 
 		process.waitFor();
-		
+
 		if (started) {
 			throw new RuntimeException("Test quit unexpectedly (exit status " + process.exitValue() + "):\n" + message);
 		}
