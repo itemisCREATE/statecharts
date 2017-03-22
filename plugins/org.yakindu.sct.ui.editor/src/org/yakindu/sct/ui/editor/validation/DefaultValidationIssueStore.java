@@ -32,6 +32,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
+import org.yakindu.sct.ui.editor.validation.IValidationIssueStore.IResourceIssueStoreListener;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
@@ -85,7 +86,6 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 
 	protected void notifyListeners() {
 		synchronized (this.listener) {
-			System.out.println("Size " + this.listener.size());
 			for (IResourceIssueStoreListener iResourceIssueStoreListener : listener) {
 				iResourceIssueStoreListener.issuesChanged();
 			}
@@ -94,7 +94,6 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 
 	protected void notifyListeners(String semanticURI) {
 		synchronized (this.listener) {
-			System.out.println("Size " + this.listener.size());
 			for (IResourceIssueStoreListener iResourceIssueStoreListener : listener) {
 				if (semanticURI.equals(iResourceIssueStoreListener.getSemanticURI()))
 					iResourceIssueStoreListener.issuesChanged();
