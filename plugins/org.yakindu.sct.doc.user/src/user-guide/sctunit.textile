@@ -263,11 +263,11 @@ assert myVariable3 => 41
 assert InterfaceName.MyEvent == 5
 
 p. ==<!-- End sctunit_keyword_assert -->==
-==<!-- Start sctunit_keyword_assert_called -->==
+==<!-- Start sctunit_keyword_called -->==
 
-h4. assert called
+h4. called
 
-The expression followed by the 'assert called' keywords expects a reference to an operation that will be called and optional the keyword 'with' and the parameters of the call. If the referenced operation wasn't called or wasn't called with the right parameters, the test will fail. The following example shows a statement that asserts if a operation was called or not.
+The expression followed by the 'called' keyword expects a reference to an operation that will be called and optional the keyword 'with' and the parameters of the call. If the referenced operation wasn't called or wasn't called with the right parameters, the test will fail. The following example shows a statement that asserts if a operation was called or not.
 
 bc(prettyprint). assert called operationname
 assert called operationname with (param1, param2)
