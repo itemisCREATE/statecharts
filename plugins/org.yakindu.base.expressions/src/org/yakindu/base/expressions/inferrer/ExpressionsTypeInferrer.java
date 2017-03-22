@@ -52,10 +52,6 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
-import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.MultiTypeParameterInferrenceException;
-import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.TypeParameterBindingsException;
-import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.TypeParameterInferrenceException;
-import org.yakindu.base.expressions.inferrer.TypeParameterInferrer.TypeValidationException;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.GenericElement;
@@ -67,8 +63,7 @@ import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
-import org.yakindu.base.types.typesystem.ITypeSystem;
-import org.yakindu.base.types.validation.TypeValidationError;
+import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -219,70 +214,55 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		// map to hold inference results for type parameters
 		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes = Maps.newHashMap();
 		typeParameterInferrer.inferTypeParametersFromOwner(inferTypeDispatch(e.getOwner()), inferredTypeParameterTypes);
-		
+
 		if (e.isOperationCall()) {
-			if(!e.getFeature().eIsProxy()) {
-				return inferOperation(e, (Operation)e.getFeature(), inferredTypeParameterTypes);
+			if (!e.getFeature().eIsProxy()) {
+				return inferOperation(e, (Operation) e.getFeature(), inferredTypeParameterTypes);
 			} else {
-				return InferenceResult.from(registry.getType(ANY));
+				return getAnyType();
 			}
 		}
 		InferenceResult result = inferTypeDispatch(e.getFeature());
 		if (result != null) {
-			try {
-				result = typeParameterInferrer.buildInferenceResult(result, inferredTypeParameterTypes);
-			} catch (TypeParameterInferrenceException e1) {
-				warning(e1.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
-				result = InferenceResult.from(registry.getType(ANY));
-			}
+			result = typeParameterInferrer.buildInferenceResult(result, inferredTypeParameterTypes, acceptor);
+		}
+		if (result == null) {
+			return getAnyType();
 		}
 		return result;
 	}
 
 	public InferenceResult doInfer(ElementReferenceExpression e) {
 		if (e.isOperationCall()) {
-			if(!e.getReference().eIsProxy()) {
-				return inferOperation(e, (Operation) e.getReference(), Maps.<TypeParameter, InferenceResult>newHashMap());
+			if (!e.getReference().eIsProxy()) {
+				return inferOperation(e, (Operation) e.getReference(),
+						Maps.<TypeParameter, InferenceResult> newHashMap());
 			} else {
-				// Hopefully, there is "cannot resolve" in the user's workspace already
-				return InferenceResult.from(registry.getType(ANY));
+				return getAnyType();
 			}
 		}
 		return inferTypeDispatch(e.getReference());
 	}
 
-	protected InferenceResult inferOperation(ArgumentExpression e, Operation op, Map<TypeParameter, InferenceResult> typeParameterMapping) {
+	protected InferenceResult inferOperation(ArgumentExpression e, Operation op,
+			Map<TypeParameter, InferenceResult> typeParameterMapping) {
 		// resolve type parameter from operation call
 		List<InferenceResult> argumentTypes = getArgumentTypes(getOperationArguments(e));
 		List<Parameter> parameters = op.getParameters();
-		try {
-			typeParameterInferrer.inferTypeParametersFromOperationArguments(parameters, argumentTypes, typeParameterMapping);
-		} catch (MultiTypeParameterInferrenceException ex) {
-			error(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
-		} catch (TypeParameterBindingsException ex) {
-			error(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
-		} catch (TypeParameterInferrenceException ex) {
-			warning(ex.getMessage(), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
-		} catch (TypeValidationException ex) {
-			for(TypeValidationError err : ex.getErrors()) {
-				error(err);
-			}
-		}
-		try {
-			validateParameters(typeParameterMapping, op, getOperationArguments(e));
-		} catch (TypeParameterInferrenceException e1) {
-			error(e1.getMessage(), NOT_COMPATIBLE_CODE);
-		}
+		typeParameterInferrer.inferTypeParametersFromOperationArguments(parameters, argumentTypes, typeParameterMapping,
+				acceptor);
+		validateParameters(typeParameterMapping, op, getOperationArguments(e), acceptor);
 		return inferReturnType(op, typeParameterMapping);
 	}
-	
+
 	/**
-	 * Can be extended to e.g. add operation caller to argument list for extension methods
+	 * Can be extended to e.g. add operation caller to argument list for
+	 * extension methods
 	 */
 	protected List<Expression> getOperationArguments(ArgumentExpression e) {
 		return e.getArgs();
 	}
-	
+
 	protected List<InferenceResult> getArgumentTypes(List<Expression> args) {
 		List<InferenceResult> argumentTypes = new ArrayList<>();
 		for (Expression arg : args) {
@@ -294,26 +274,29 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	protected InferenceResult inferReturnType(Operation operation,
 			Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) {
 		InferenceResult returnType = inferTypeDispatch(operation);
-		try {
-			returnType = typeParameterInferrer.buildInferenceResult(returnType, inferredTypeParameterTypes);
-		} catch (TypeParameterInferrenceException ex) {
-			// TODO: is exception handling at this level correct? If
-			// inference of List<T> throws exception, we return ANY instead
-			// of List<ANY>
-			warning(String.format(INFER_RETURN_TYPE_PARAMETER, returnType), NOT_INFERRABLE_TYPE_PARAMETER_CODE);
-			return InferenceResult.from(registry.getType(ANY));
-		}
+			returnType = typeParameterInferrer.buildInferenceResult(returnType, inferredTypeParameterTypes, acceptor);
+			if(returnType == null) {
+				return getAnyType();
+			}
 		return returnType;
 	}
 
+	private InferenceResult getAnyType() {
+		return InferenceResult.from(registry.getType(ANY));
+	}
+
 	/**
-	 * Takes the operation parameter type and performs a lookup for all contained type parameters
-	 * by using the given type parameter inference map.<br>
-	 * The parameter types are validated against the operation call's argument types.
-	 * @throws TypeParameterInferrenceException 
+	 * Takes the operation parameter type and performs a lookup for all
+	 * contained type parameters by using the given type parameter inference
+	 * map.<br>
+	 * The parameter types are validated against the operation call's argument
+	 * types.
+	 * 
+	 * @throws TypeParameterInferrenceException
 	 */
 	protected Map<TypeParameter, InferenceResult> validateParameters(
-			Map<TypeParameter, InferenceResult> typeParameterMapping, Operation operation, List<Expression> args) throws TypeParameterInferrenceException {
+			Map<TypeParameter, InferenceResult> typeParameterMapping, Operation operation, List<Expression> args,
+			IValidationIssueAcceptor acceptor) {
 		List<Parameter> parameters = operation.getParameters();
 		if (parameters.size() <= args.size()) {
 			for (int i = 0; i < parameters.size(); i++) {
@@ -321,13 +304,10 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				Expression argument = args.get(i);
 				InferenceResult parameterType = inferTypeDispatch(parameter);
 				InferenceResult argumentType = inferTypeDispatch(argument);
-				try {
-					parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping);
-				} catch (TypeParameterInferrenceException ex){
-					// We ignore the thrown exception because we want to throw the one from assertCompatible.
-					// If this is not ignored, assigning an integer to a ComplexTypeParameter only throws "could not infer T"
-				}
-				assertCompatible(argumentType, parameterType, String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
+				parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping,
+						acceptor);
+				assertCompatible(argumentType, parameterType,
+						String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
 			}
 		}
 		if (operation.isVariadic() && args.size() - 1 >= operation.getVarArgIndex()) {
@@ -412,6 +392,5 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			return InferenceResult.from(type, bindings);
 		}
 		return inferTypeDispatch(specifier.getType());
-
 	}
 }

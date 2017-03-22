@@ -817,6 +817,14 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 				"Assignment operator '=' may only be applied on compatible types, not on integer and null.");
 	}
 	
+	/**
+	 * Uses a model of the following function:
+	 * 
+	 * template <typename T>
+	 * T genericOp(T a, T b) {
+	 * 		return a > b ? a : b;
+	 * }
+	 */
 	@Test
 	public void testOperationWithTypeParameters() {
 		String scopes = ""
