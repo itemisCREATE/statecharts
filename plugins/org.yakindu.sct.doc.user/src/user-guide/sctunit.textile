@@ -272,7 +272,7 @@ The expression followed by the 'called' keyword expects a reference to an operat
 bc(prettyprint). assert called operationname
 assert called operationname with (param1, param2)
 
-p. ==<!-- End sctunit_keyword_assert_called -->==
+p. ==<!-- End sctunit_keyword_called -->==
 ==<!-- Start sctunit_keyword_mock -->==
 
 h4. mock
