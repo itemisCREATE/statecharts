@@ -25,15 +25,15 @@ public class SCTIssue extends IssueImpl {
 
 	private final Issue delegate;
 
-	private final String notationViewURI;
+	private final String semanticURI;
 
-	public SCTIssue(final Issue delegate, String notationViewURI) {
+	public SCTIssue(final Issue delegate, String semanticURI) {
 		this.delegate = delegate;
-		this.notationViewURI = notationViewURI;
+		this.semanticURI = semanticURI;
 	}
 
-	public String getNotationViewURI() {
-		return notationViewURI;
+	public String getSemanticURI() {
+		return semanticURI;
 	}
 
 	public Severity getSeverity() {

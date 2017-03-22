@@ -31,7 +31,7 @@ public interface IValidationIssueStore extends IValidationIssueProcessor {
 
 		public void issuesChanged();
 		
-		public String getNotationURI();
+		public String getSemanticURI();
 
 	}
 

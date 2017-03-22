@@ -52,7 +52,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 	private IssueUtil issueCreator;
 
 	private List<IResourceIssueStoreListener> listener;
-	// the URI of the notation element
+	// the URI of the semantic element
 	private Multimap<String, SCTIssue> persistentIssues;
 	private Multimap<String, SCTIssue> liveIssues;
 	private boolean connected = false;
@@ -85,16 +85,18 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 
 	protected void notifyListeners() {
 		synchronized (this.listener) {
+			System.out.println("Size " + this.listener.size());
 			for (IResourceIssueStoreListener iResourceIssueStoreListener : listener) {
 				iResourceIssueStoreListener.issuesChanged();
 			}
 		}
 	}
 
-	protected void notifyListeners(String notationURI) {
+	protected void notifyListeners(String semanticURI) {
 		synchronized (this.listener) {
+			System.out.println("Size " + this.listener.size());
 			for (IResourceIssueStoreListener iResourceIssueStoreListener : listener) {
-				if (notationURI.equals(iResourceIssueStoreListener.getNotationURI()))
+				if (semanticURI.equals(iResourceIssueStoreListener.getSemanticURI()))
 					iResourceIssueStoreListener.issuesChanged();
 			}
 		}
@@ -126,7 +128,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 		}
 		for (IMarker iMarker : markers) {
 			SCTIssue issue = createFromMarker(iMarker);
-			persistentIssues.put(issue.getNotationViewURI(), issue);
+			persistentIssues.put(issue.getSemanticURI(), issue);
 		}
 		notifyListeners();
 	}
@@ -142,9 +144,9 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 	}
 
 	protected SCTIssue createFromMarker(IMarker marker) {
-		String notationURI = marker.getAttribute(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID, "");
+		String semanticURI = marker.getAttribute(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID, "");
 		Issue delegate = issueCreator.createIssue(marker);
-		SCTIssue issue = new SCTIssue(delegate, notationURI);
+		SCTIssue issue = new SCTIssue(delegate, semanticURI);
 		return issue;
 	}
 
@@ -153,8 +155,8 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 		liveIssues.clear();
 		for (Issue issue : issues) {
 			if (issue instanceof SCTIssue) {
-				String notationViewURI = ((SCTIssue) issue).getNotationViewURI();
-				liveIssues.put(notationViewURI, (SCTIssue) issue);
+				String semanticURI = ((SCTIssue) issue).getSemanticURI();
+				liveIssues.put(semanticURI, (SCTIssue) issue);
 			}
 		}
 		notifyListeners();
@@ -186,8 +188,8 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 	@Override
 	public void handleMarkerAdded(IMarker marker) {
 		SCTIssue issue = createFromMarker(marker);
-		persistentIssues.put(issue.getNotationViewURI(), issue);
-		notifyListeners(issue.getNotationViewURI());
+		persistentIssues.put(issue.getSemanticURI(), issue);
+		notifyListeners(issue.getSemanticURI());
 	}
 
 	@Override

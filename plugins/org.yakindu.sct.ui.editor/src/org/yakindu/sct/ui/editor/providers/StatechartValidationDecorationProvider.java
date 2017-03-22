@@ -17,7 +17,6 @@ import org.eclipse.draw2d.Label;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.editparts.AbstractConnectionEditPart;
-import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
@@ -53,7 +52,8 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 
 	public void createDecorators(IDecoratorTarget decoratorTarget) {
 		EditPart editPart = (EditPart) decoratorTarget.getAdapter(EditPart.class);
-		if (editPart instanceof GraphicalEditPart || editPart instanceof AbstractConnectionEditPart) {
+		if (editPart instanceof IPrimaryEditPart
+				&& (editPart instanceof GraphicalEditPart || editPart instanceof AbstractConnectionEditPart)) {
 			EditDomain ed = editPart.getViewer().getEditDomain();
 			if (!(ed instanceof DiagramEditDomain)) {
 				return;
@@ -83,7 +83,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 	public static class ValidationDecorator extends AbstractDecorator implements IResourceIssueStoreListener {
 
 		private IValidationIssueStore store;
-		private String elementId;
+		private String semanticID;
 
 		public ValidationDecorator(IDecoratorTarget decoratorTarget, IValidationIssueStore store) {
 			super(decoratorTarget);
@@ -95,7 +95,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 			if (view == null || view.eResource() == null) {
 				return;
 			}
-			elementId = ViewUtil.getIdStr(view);
+			semanticID = view.getElement().eResource().getURIFragment(view.getElement());
 			removeDecoration();
 			EditPart editPart = (EditPart) getDecoratorTarget().getAdapter(EditPart.class);
 			if (editPart == null || editPart.getViewer() == null || !(editPart instanceof IPrimaryEditPart)) {
@@ -113,7 +113,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		protected void decorate(View view) {
-			List<SCTIssue> issues = store.getIssues(elementId);
+			List<SCTIssue> issues = store.getIssues(semanticID);
 			Severity severity = Severity.INFO;
 			Label toolTip = null;
 			if (issues.isEmpty())
@@ -171,8 +171,8 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		@Override
-		public String getNotationURI() {
-			return elementId;
+		public String getSemanticURI() {
+			return semanticID;
 		}
 	}
 }
