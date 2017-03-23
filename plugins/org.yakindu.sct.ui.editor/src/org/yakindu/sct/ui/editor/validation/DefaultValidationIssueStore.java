@@ -30,9 +30,9 @@ import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
+import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
-import org.yakindu.sct.ui.editor.validation.IValidationIssueStore.IResourceIssueStoreListener;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
@@ -186,13 +186,30 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 
 	@Override
 	public void handleMarkerAdded(IMarker marker) {
+		if (!isSctMarker(marker))
+			return;
 		SCTIssue issue = createFromMarker(marker);
 		persistentIssues.put(issue.getSemanticURI(), issue);
 		notifyListeners(issue.getSemanticURI());
 	}
 
+	protected boolean isSctMarker(IMarker marker) {
+		try {
+			return isSctMarker(marker.getAttributes());
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	protected boolean isSctMarker(Map<?, ?> markerAttributes) {
+		return markerAttributes.get(SCTMarkerCreator.ELEMENT_ID) != null;
+	}
+
 	@Override
 	public void handleMarkerDeleted(IMarker marker, @SuppressWarnings("rawtypes") Map attributes) {
+		if (!isSctMarker(attributes))
+			return;
 		String viewId = (String) attributes.get(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID);
 		String message = (String) attributes.get(IMarker.MESSAGE);
 		Collection<SCTIssue> collection = persistentIssues.get(viewId);
@@ -208,6 +225,8 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 
 	@Override
 	public void handleMarkerChanged(IMarker marker) {
+		if (!isSctMarker(marker))
+			return;
 		reloadMarkerIssues();
 	}
 
