@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
@@ -61,11 +62,7 @@ public class ShadowModelValidationJob extends ValidationJob {
 
 			final List<Issue> issues = Lists.newArrayList();
 			try {
-				issues.addAll(validator.validate(shadowResource, CheckMode.FAST_ONLY, new CancelIndicator() {
-					public boolean isCanceled() {
-						return monitor.isCanceled();
-					}
-				}));
+				issues.addAll(doValidation(monitor, shadowResource));
 			} catch (Throwable ex) {
 				return Status.CANCEL_STATUS;
 			}
@@ -79,7 +76,16 @@ public class ShadowModelValidationJob extends ValidationJob {
 		return Status.OK_STATUS;
 	}
 
-	private void cloneResource(final IProgressMonitor monitor, final Resource shadowResource)
+	protected List<Issue> doValidation(final IProgressMonitor monitor, final Resource shadowResource)
+			throws OperationCanceledError {
+		return validator.validate(shadowResource, CheckMode.FAST_ONLY, new CancelIndicator() {
+			public boolean isCanceled() {
+				return monitor.isCanceled();
+			}
+		});
+	}
+
+	protected void cloneResource(final IProgressMonitor monitor, final Resource shadowResource)
 			throws ExecutionException {
 		AbstractTransactionalCommand cmd = new AbstractTransactionalCommand(TransactionUtil.getEditingDomain(resource),
 				"", null) {
