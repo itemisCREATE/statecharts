@@ -193,7 +193,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 		notifyListeners(issue.getSemanticURI());
 	}
 
-	private boolean isSctMarker(IMarker marker) {
+	protected boolean isSctMarker(IMarker marker) {
 		try {
 			return isSctMarker(marker.getAttributes());
 		} catch (CoreException e) {
@@ -201,7 +201,8 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 		}
 		return false;
 	}
-	private boolean isSctMarker(Map<?,?> markerAttributes) {
+
+	protected boolean isSctMarker(Map<?, ?> markerAttributes) {
 		return markerAttributes.get(SCTMarkerCreator.ELEMENT_ID) != null;
 	}
 
