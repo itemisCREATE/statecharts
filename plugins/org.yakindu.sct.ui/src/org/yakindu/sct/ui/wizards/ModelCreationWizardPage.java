@@ -64,10 +64,10 @@ public class ModelCreationWizardPage extends WizardNewFileCreationPage {
 	protected boolean validatePage() {
 		if (!super.validatePage()) {
 			return false;
-		}
+		}		
 		String extension = getExtension();
 		if (extension != null && !getFilePath().toString().endsWith("." + extension)) {
-			setErrorMessage(NLS.bind("file extension is not valid!", extension));
+			setErrorMessage(NLS.bind("file extension is not valid! The valid extension is: " + "." + fileExtension, extension));
 			return false;
 		}
 		return true;
