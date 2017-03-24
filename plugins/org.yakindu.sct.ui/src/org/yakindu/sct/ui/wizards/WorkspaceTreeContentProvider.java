@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.genmodel.ui.wizard;
+package org.yakindu.sct.ui.wizards;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,9 +27,16 @@ import org.eclipse.jface.viewers.Viewer;
  * @author oliver bohl - Initial contribution and API
  * 
  */
-public class SGenWizardPage2ContentProvider implements ITreeContentProvider {
+public class WorkspaceTreeContentProvider implements ITreeContentProvider {
 
 	protected String fileExtension;
+
+	public WorkspaceTreeContentProvider() {
+	}
+
+	public WorkspaceTreeContentProvider(String fileExtension) {
+		this.fileExtension = fileExtension;
+	}
 
 	public Object[] getElements(Object inputElement) {
 		if (inputElement instanceof IContainer) {
@@ -66,9 +73,7 @@ public class SGenWizardPage2ContentProvider implements ITreeContentProvider {
 					return false;
 				}
 				// check if file extension is proper
-				else if (member instanceof IFile
-						&& ((IFile) member).getFileExtension().equals(
-								fileExtension)) {
+				else if (member instanceof IFile && ((IFile) member).getFileExtension().equals(fileExtension)) {
 					return true;
 				} else if (member instanceof IFolder) {
 					return containsFile((IFolder) member);
@@ -79,25 +84,20 @@ public class SGenWizardPage2ContentProvider implements ITreeContentProvider {
 		return false;
 	}
 
-	public Object[] filterForContent(Object[] inputElements)
-			throws CoreException {
+	public Object[] filterForContent(Object[] inputElements) throws CoreException {
 		final Set<Object> result = new HashSet<Object>();
 		for (final Object obj : inputElements) {
 			((IResource) obj).accept(new IResourceVisitor() {
 				public boolean visit(IResource resource) throws CoreException {
 					// no file extension check
-					if (resource instanceof IFile
-							&& hasFileExtension((IFile) resource)) {
+					if (resource instanceof IFile && hasFileExtension((IFile) resource)) {
 						return false;
 					}
 					// check if file extension is proper
-					else if (resource instanceof IFile
-							&& resource.getFileExtension()
-									.equals(fileExtension)) {
+					else if (resource instanceof IFile && resource.getFileExtension().equals(fileExtension)) {
 						result.add(obj);
 						return true;
-					} else if (resource instanceof IFolder
-							&& containsFile((IFolder) resource)) {
+					} else if (resource instanceof IFolder && containsFile((IFolder) resource)) {
 						result.add(obj);
 						return true;
 					}

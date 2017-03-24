@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.genmodel.ui.wizard;
+package org.yakindu.sct.ui.wizards;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -19,17 +19,15 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
-import org.yakindu.sct.generator.core.extensions.FileExtensions;
-import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
-import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
-import org.yakindu.sct.generator.genmodel.ui.PathToImageResolver;
 
 /**
  * 
  * @author oliver bohl - Initial contribution and API
  * 
  */
-class SGenWizardPage2LabelProvider extends LabelProvider {
+public abstract class AbstractWorkspaceLabelProvider extends LabelProvider {
+
+	protected abstract Image createImageForFile(IFile file);
 
 	@Override
 	public Image getImage(Object element) {
@@ -38,9 +36,7 @@ class SGenWizardPage2LabelProvider extends LabelProvider {
 		} else if (element instanceof IProject) {
 			return PlatformUI.getWorkbench().getSharedImages().getImage(IDE.SharedImages.IMG_OBJ_PROJECT);
 		} else if (element instanceof IFile) {
-			String generatorID = FileExtensions.getGeneratorForFileExtension(((IFile) element).getFileExtension());
-			IGeneratorDescriptor genDesc = GeneratorExtensions.getGeneratorDescriptor(generatorID);
-			return PathToImageResolver.toImage(genDesc.getImagePath());
+			return createImageForFile((IFile) element);
 		}
 		return super.getImage(element);
 	}
@@ -50,3 +46,4 @@ class SGenWizardPage2LabelProvider extends LabelProvider {
 		return ((IResource) element).getName();
 	}
 };
+ 

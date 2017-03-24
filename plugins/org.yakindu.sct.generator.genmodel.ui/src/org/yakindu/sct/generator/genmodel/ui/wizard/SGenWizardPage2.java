@@ -52,7 +52,9 @@ import org.yakindu.sct.generator.core.extensions.FileExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.genmodel.ui.PathToImageResolver;
+import org.yakindu.sct.ui.wizards.AbstractWorkspaceLabelProvider;
 import org.yakindu.sct.ui.wizards.ModelCreationWizardPage;
+import org.yakindu.sct.ui.wizards.WorkspaceTreeContentProvider;
 
 import com.google.common.collect.Lists;
 
@@ -108,8 +110,8 @@ public class SGenWizardPage2 extends WizardPage {
 		resourceTree = new CheckboxTreeViewer(container, SWT.BORDER);
 		resourceTree.getTree().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
-		resourceTree.setContentProvider(new SGenWizardPage2ContentProvider());
-		resourceTree.setLabelProvider(new SGenWizardPage2LabelProvider());
+		resourceTree.setContentProvider(new WorkspaceTreeContentProvider());
+		resourceTree.setLabelProvider(new SGenWorkspaceLabelProvider());
 
 		TreePropagatingCheckStateListener checkStateListener = new TreePropagatingCheckStateListener(resourceTree) {
 			@Override
@@ -120,7 +122,7 @@ public class SGenWizardPage2 extends WizardPage {
 		resourceTree.addCheckStateListener(checkStateListener);
 		resourceTree.addDoubleClickListener(new TreeExpandingDoubleClickListener(resourceTree, checkStateListener));
 		resourceTree.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
-		resourceTree.setFilters(new ViewerFilter[]{new ViewerFilter() {
+		resourceTree.setFilters(new ViewerFilter[] { new ViewerFilter() {
 			@Override
 			public boolean select(Viewer viewer, Object parentElement, Object element) {
 				// TODO: Filter by common navigator filter instead of supressing
@@ -130,7 +132,7 @@ public class SGenWizardPage2 extends WizardPage {
 				}
 				return true;
 			}
-		}});
+		} });
 	}
 
 	private void createGeneratorCombo(Composite container) {
@@ -153,7 +155,7 @@ public class SGenWizardPage2 extends WizardPage {
 
 	protected void refreshInput() {
 		lblNewLabel.setText("Choose: " + getSelectedGenerator().getContentType());
-		((SGenWizardPage2ContentProvider) resourceTree.getContentProvider())
+		((WorkspaceTreeContentProvider) resourceTree.getContentProvider())
 				.setFileExtension(FileExtensions.getFileExtension(getSelectedGenerator().getId()));
 		resourceTree.setInput(getSelectedProject());
 	}
@@ -223,5 +225,15 @@ public class SGenWizardPage2 extends WizardPage {
 			}
 			return super.getImage(element);
 		}
+	}
+	
+	protected static class SGenWorkspaceLabelProvider extends AbstractWorkspaceLabelProvider {
+
+		protected Image createImageForFile(IFile file) {
+			String generatorID = FileExtensions.getGeneratorForFileExtension(file.getFileExtension());
+			IGeneratorDescriptor genDesc = GeneratorExtensions.getGeneratorDescriptor(generatorID);
+			return PathToImageResolver.toImage(genDesc.getImagePath());
+		}
+
 	}
 }
