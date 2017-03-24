@@ -11,6 +11,7 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Property;
@@ -291,6 +292,10 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseProperty(Property object) {
 				return createPropertyAdapter();
+			}
+			@Override
+			public Adapter caseGenericElement(GenericElement object) {
+				return createGenericElementAdapter();
 			}
 			@Override
 			public Adapter caseOperation(Operation object) {
@@ -943,6 +948,20 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPropertyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.GenericElement <em>Generic Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.GenericElement
+	 * @generated
+	 */
+	public Adapter createGenericElementAdapter() {
 		return null;
 	}
 

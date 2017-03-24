@@ -46,7 +46,6 @@ public interface STextValidationMessages {
 	public static final String TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS = "ExitPointSpec can't be used on transition siblings.";
 	public static final String LEFT_HAND_ASSIGNMENT = "The left-hand side of an assignment must be a variable.";
 	public static final String ISSUE_TRANSITION_WITHOUT_TRIGGER = "Missing trigger. Transition is never taken. Use 'oncycle' or 'always' instead.";
-	public static final String IMPORT_NOT_RESOLVED = "Import cannot be resolved.";
 	public static final String EXITPOINTSPEC_WITH_TRIGGER = "Transitions with an exit point spec does not have a trigger or guard.";
 	public static final String ASSIGNMENT_TO_VALUE = "Assignment constant not allowed.";
 	public static final String REFERENCE_TO_VARIABLE = "Cannot reference a variable in a constant initialization.";

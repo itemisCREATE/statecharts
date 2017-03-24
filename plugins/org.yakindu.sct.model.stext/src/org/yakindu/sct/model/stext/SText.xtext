@@ -62,7 +62,7 @@ InternalScope:
 		;
 	
 ImportScope:
-	 {ImportScope} 'import' ':' (imports+=[types::Package|QID])*;
+	 {ImportScope} 'import' ':' (imports+=QID | imports+=STRING)*;
 
 QID:
 	ID ('.' ID)*;

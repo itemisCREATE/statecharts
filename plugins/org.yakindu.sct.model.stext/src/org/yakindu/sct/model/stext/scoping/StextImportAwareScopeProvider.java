@@ -26,11 +26,13 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * 
@@ -39,23 +41,24 @@ import com.google.common.collect.Lists;
  */
 public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
 
-	
+	@Inject
+	private IPackageImport2URIMapper mapper;
+
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (context == null)
 			throw new NullPointerException("context");
 		IScope result = null;
-		if(context instanceof ImportScope){
+		if (context instanceof ImportScope) {
 			result = getResourceScope(context.eResource(), reference);
-		}
-		else if (context.eContainer() != null) {
+		} else if (context.eContainer() != null) {
 			result = getScope(context.eContainer(), reference);
 		} else {
 			result = getResourceScope(context.eResource(), reference);
 		}
 		return getLocalElementsScope(result, context, reference);
 	}
-	
+
 	@Override
 	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(final EObject context, boolean ignoreCase) {
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
@@ -81,31 +84,35 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 	protected List<ImportNormalizer> createNamespaceResolver(Scope scope, boolean ignoreCase) {
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
 		ImportScope importScope = (ImportScope) scope;
-		for (org.yakindu.base.types.Package child : importScope.getImports()) {
-			String value = getImportedNamespace(child);
-			ImportNormalizer resolver = createImportedNamespaceResolver(value, ignoreCase);
-			if (resolver != null)
-				importedNamespaceResolvers.add(resolver);
+		for (String child : importScope.getImports()) {
+			PackageImport pkgImport = mapper.findPackageImport(scope.eResource(), child);
+			if (pkgImport != null) {
+				ImportNormalizer resolver = createImportedNamespaceResolver(pkgImport.getNamespace(),
+						ignoreCase);
+				if (resolver != null)
+					importedNamespaceResolvers.add(resolver);
+			}
 		}
 		return importedNamespaceResolvers;
 	}
-	
+
 	@Override
-	protected IScope getLocalElementsScope(IScope parent, final EObject context,
-			final EReference reference) {
+	protected IScope getLocalElementsScope(IScope parent, final EObject context, final EReference reference) {
 		IScope result = parent;
 		ISelectable allDescriptions = getAllDescriptions(context.eResource());
 		QualifiedName name = getQualifiedNameOfLocalElement(context);
 		boolean ignoreCase = isIgnoreCase(reference);
 		final List<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context, ignoreCase);
 		if (!namespaceResolvers.isEmpty()) {
-			if (isRelativeImport() && name!=null && !name.isEmpty()) {
-				ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase); 
-				result = createImportScope(result, Collections.singletonList(localNormalizer), allDescriptions, reference.getEReferenceType(), isIgnoreCase(reference));
+			if (isRelativeImport() && name != null && !name.isEmpty()) {
+				ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase);
+				result = createImportScope(result, Collections.singletonList(localNormalizer), allDescriptions,
+						reference.getEReferenceType(), isIgnoreCase(reference));
 			}
-			result = createImportScope(result, namespaceResolvers, null, reference.getEReferenceType(), isIgnoreCase(reference));
+			result = createImportScope(result, namespaceResolvers, null, reference.getEReferenceType(),
+					isIgnoreCase(reference));
 		}
-		//We don't want to add an implicit local ImportNormalizer here...
+		// We don't want to add an implicit local ImportNormalizer here...
 		return result;
 	}
 

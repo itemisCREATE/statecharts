@@ -72,17 +72,18 @@ class StructureMapping {
 	 * Import scope has imports which needs to be resolved to get all imported variable and operation definitions
 	 */
 	def dispatch Scope mapScope(ImportScope scope) {
+		//FIXME!!!
 		val _scope = scope.createScope
-		for (Package imp : scope.imports) {
-			val props = resolver.getImportedElementsOfType(imp, Property)
-			for (Declaration decl : props) {
-				_scope.declarations.add(decl.createImportDeclaration)
-			}
-			val operations = resolver.getImportedElementsOfType(imp, Operation) 
-			for (Declaration decl : operations) {
-				_scope.declarations.add(decl.createImportDeclaration)
-			}
-		}
+//		for (Package imp : scope.imports) {
+//			val props = resolver.getImportedElementsOfType(imp, Property)
+//			for (Declaration decl : props) {
+//				_scope.declarations.add(decl.createImportDeclaration)
+//			}
+//			val operations = resolver.getImportedElementsOfType(imp, Operation) 
+//			for (Declaration decl : operations) {
+//				_scope.declarations.add(decl.createImportDeclaration)
+//			}
+//		}
 		return _scope
 	}
 	

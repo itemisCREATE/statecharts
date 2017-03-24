@@ -504,7 +504,7 @@ public interface StextPackage extends EPackage {
 	int IMPORT_SCOPE__REACTIONS = STATECHART_SCOPE__REACTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Imports</b></em>' reference list.
+	 * The feature id for the '<em><b>Imports</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -750,6 +750,15 @@ public interface StextPackage extends EPackage {
 	int OPERATION_DEFINITION__ID = TypesPackage.OPERATION__ID;
 
 	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_DEFINITION__TYPE_PARAMETERS = TypesPackage.OPERATION__TYPE_PARAMETERS;
+
+	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -757,6 +766,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_DEFINITION__PARAMETERS = TypesPackage.OPERATION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Variadic</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_DEFINITION__VARIADIC = TypesPackage.OPERATION__VARIADIC;
 
 	/**
 	 * The number of structural features of the '<em>Operation Definition</em>' class.
@@ -1643,15 +1661,15 @@ public interface StextPackage extends EPackage {
 	EClass getImportScope();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.yakindu.sct.model.stext.stext.ImportScope#getImports <em>Imports</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.yakindu.sct.model.stext.stext.ImportScope#getImports <em>Imports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Imports</em>'.
+	 * @return the meta object for the attribute list '<em>Imports</em>'.
 	 * @see org.yakindu.sct.model.stext.stext.ImportScope#getImports()
 	 * @see #getImportScope()
 	 * @generated
 	 */
-	EReference getImportScope_Imports();
+	EAttribute getImportScope_Imports();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.EventDefinition <em>Event Definition</em>}'.
@@ -2259,12 +2277,12 @@ public interface StextPackage extends EPackage {
 		EClass IMPORT_SCOPE = eINSTANCE.getImportScope();
 
 		/**
-		 * The meta object literal for the '<em><b>Imports</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Imports</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IMPORT_SCOPE__IMPORTS = eINSTANCE.getImportScope_Imports();
+		EAttribute IMPORT_SCOPE__IMPORTS = eINSTANCE.getImportScope_Imports();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.EventDefinitionImpl <em>Event Definition</em>}' class.
