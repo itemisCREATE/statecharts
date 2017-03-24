@@ -18,6 +18,7 @@ import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypeParameter
 import org.yakindu.base.types.TypeSpecifier
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
@@ -30,6 +31,7 @@ import static org.yakindu.base.types.inferrer.ITypeSystemInferrer.NOT_INFERRABLE
 import static org.yakindu.base.types.inferrer.ITypeSystemInferrer.NOT_COMPATIBLE_CODE
 import org.yakindu.base.types.validation.TypeValidationError
 import org.yakindu.base.types.PrimitiveType
+import org.yakindu.base.types.ComplexType
 
 /**
  * Infers the actual type for a type parameter used in generic elements like operations or complex types.
@@ -65,11 +67,34 @@ class TypeParameterInferrer {
 			for (var i = 0; i < parameters.size(); i++) {
 				val parameter = parameters.get(i).typeSpecifier;
 				val argument = arguments.get(i);
-				if (assertArgumentAndParameterSoftCompatible(argument, parameter, acceptor)) {
+				if (parameterContainsTypeParameter(parameter) && assertArgumentAndParameterSoftCompatible(argument, parameter, acceptor)) {
 					inferTypeParameterFromOperationArgument(parameter, argument, inferredTypeParameterTypes, acceptor);
 				}
 			}
 		}
+	}
+	
+	def boolean parameterContainsTypeParameter(TypeSpecifier specifier) {
+		val type = specifier.type
+		if (type instanceof PrimitiveType) {
+			return false
+		} 
+		if(type instanceof TypeParameter) {
+			return true
+		} 
+		if(type instanceof ComplexType) {
+			val complexType = type as ComplexType
+			if(complexType.typeParameters != null) {
+				return true;
+			} else {
+				for(prop : complexType.features.filter(Property)) {
+					if(prop.typeSpecifier.parameterContainsTypeParameter) {
+						return true
+					}
+				}
+			}
+		}
+		return false
 	}
 
 	def protected void inferTypeParameterFromOperationArgument(TypeSpecifier parameterTypeSpecifier,
@@ -199,8 +224,8 @@ class TypeParameterInferrer {
 		if (parameter.type instanceof TypeParameter) {
 			return true
 		}
-		val result1 = InferenceResult.from(parameter.type)
-		var result2 = InferenceResult.from(argumentResult.type) // ignore bindings
+		var result1 = InferenceResult.from(argumentResult.type) // ignore bindings
+		val result2 = InferenceResult.from(parameter.type)
 		val errors = typeValidator.assertCompatible(result1, result2, null)
 		// check for correct number of TypeParameters / Argument's type parameters
 		if (errors.empty && parameter.typeArguments != null &&
