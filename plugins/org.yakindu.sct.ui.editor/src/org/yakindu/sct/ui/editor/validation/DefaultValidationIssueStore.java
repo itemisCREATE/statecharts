@@ -54,11 +54,11 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 
 	private List<IResourceIssueStoreListener> listener;
 	// the URI of the semantic element
-	private Multimap<String, SCTIssue> persistentIssues;
-	private Multimap<String, SCTIssue> liveIssues;
+	protected Multimap<String, SCTIssue> persistentIssues;
+	protected Multimap<String, SCTIssue> liveIssues;
 	private boolean connected = false;
 
-	private Resource resource;
+	protected Resource resource;
 
 	public DefaultValidationIssueStore() {
 		listener = Lists.newArrayList();
@@ -138,6 +138,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IFile
 		if (file != null && file.isAccessible()) {
 			FileChangeManager.getInstance().removeFileObserver(this);
 		}
+		this.resource = null;
 		persistentIssues.clear();
 		connected = false;
 	}
