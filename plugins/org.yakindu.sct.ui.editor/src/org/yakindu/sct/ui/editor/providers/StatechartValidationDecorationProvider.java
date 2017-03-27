@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Label;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.editparts.AbstractConnectionEditPart;
@@ -95,7 +96,9 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 			if (view == null || view.eResource() == null) {
 				return;
 			}
-			semanticID = view.getElement().eResource().getURIFragment(view.getElement());
+			EObject element = view.getElement();
+			if (element != null)
+				semanticID = element.eResource().getURIFragment(element);
 			removeDecoration();
 			EditPart editPart = (EditPart) getDecoratorTarget().getAdapter(EditPart.class);
 			if (editPart == null || editPart.getViewer() == null || !(editPart instanceof IPrimaryEditPart)) {
