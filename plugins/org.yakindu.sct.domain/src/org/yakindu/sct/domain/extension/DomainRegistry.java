@@ -11,6 +11,7 @@
 package org.yakindu.sct.domain.extension;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -177,7 +178,7 @@ public class DomainRegistry {
 	/**
 	 * Efficient parser to determine the DomainId without loading the whole resource
 	 *
-	 * @author Andreas Mülder - Initial contribution and API
+	 * @author Andreas Mï¿½lder - Initial contribution and API
 	 *
 	 */
 	protected static class DomainIDParser {
@@ -194,9 +195,9 @@ public class DomainRegistry {
 		public static String parse(URI uri) {
 			final StringBuilder result = new StringBuilder();
 			SAXParserFactory f = SAXParserFactory.newInstance();
-			try {
+			try (InputStream is = URIConverter.INSTANCE.createInputStream(uri, null)) {
 				SAXParser newSAXParser = f.newSAXParser();
-				newSAXParser.parse(URIConverter.INSTANCE.createInputStream(uri, null), new DefaultHandler() {
+				newSAXParser.parse(is, new DefaultHandler() {
 					@Override
 					public void startElement(String uri, String localName, String qName, Attributes attributes)
 							throws SAXException {
