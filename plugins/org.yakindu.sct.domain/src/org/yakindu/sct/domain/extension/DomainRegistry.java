@@ -178,7 +178,7 @@ public class DomainRegistry {
 	/**
 	 * Efficient parser to determine the DomainId without loading the whole resource
 	 *
-	 * @author Andreas M�lder - Initial contribution and API
+	 * @author Andreas Muelder - Initial contribution and API
 	 *
 	 */
 	protected static class DomainIDParser {
