@@ -1,5 +1,6 @@
-testgroup SameNameDifferentRegion for statechart SameNameDifferentRegion {
-	test sameNameDifferenRegionTest {
+package tests
+testclass SameNameDifferentRegion for statechart SameNameDifferentRegion {
+	operation sameNameDifferenRegionTest(){
 		
 		enter		
 		

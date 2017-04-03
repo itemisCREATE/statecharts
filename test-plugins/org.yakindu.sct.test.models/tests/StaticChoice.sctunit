@@ -1,7 +1,7 @@
-
-testgroup StaticChoice for statechart StaticChoice{
+package tests
+testclass StaticChoice for statechart StaticChoice{
 	
-	test StaticChoiceTest { 
+	operation StaticChoiceTest(){ 
 		enter
 		assert active(StaticChoice.main_region.Start)
 		cycle

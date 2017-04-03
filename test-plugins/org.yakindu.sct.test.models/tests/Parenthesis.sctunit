@@ -1,6 +1,7 @@
-testgroup Parenthesis for statechart Parenthesis {
+package tests
+testclass Parenthesis for statechart Parenthesis {
 	
-	test simple {
+	operation simple(){
 		
 		enter
 		

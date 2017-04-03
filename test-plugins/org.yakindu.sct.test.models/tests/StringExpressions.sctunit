@@ -1,5 +1,6 @@
-testgroup StringExpressions for statechart StringExpressions	{
-	test StringExpressionsTest {
+package tests
+testclass StringExpressions for statechart StringExpressions	{
+	operation StringExpressionsTest(){
 		
 		assert quotedStringX == '"X"'
 		assert quotedStringY == "\"Y\""

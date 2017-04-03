@@ -1,5 +1,6 @@
-testgroup EntryChoice for statechart EntryChoice {
-	test EntryChoiceTest {
+package tests
+testclass EntryChoice for statechart EntryChoice {
+	operation EntryChoiceTest(){
 		enter
 		cycle
 		cycle

@@ -1,7 +1,7 @@
-
-testgroup TransitionWithoutCondition for statechart TransitionWithoutCondition{
+package tests
+testclass TransitionWithoutCondition for statechart TransitionWithoutCondition{
 	
-	test  TransitionWithoutConditionTest{ 
+	operation TransitionWithoutConditionTest(){ 
 		enter
 		
 		assert active(TransitionWithoutCondition.main_region.A)

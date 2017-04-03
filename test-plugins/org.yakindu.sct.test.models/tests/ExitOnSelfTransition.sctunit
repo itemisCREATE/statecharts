@@ -1,6 +1,6 @@
-
-testgroup ExitOnSelfTransition for statechart ExitOnSelfTransition {
-	test ExitOnSelfTransitionTest { 
+package tests
+testclass ExitOnSelfTransition for statechart ExitOnSelfTransition {
+	operation ExitOnSelfTransitionTest(){ 
 		
 		enter
 		

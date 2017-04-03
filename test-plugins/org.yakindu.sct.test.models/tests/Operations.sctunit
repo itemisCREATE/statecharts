@@ -1,22 +1,53 @@
+package tests
+testclass Operations for statechart Operations {
 
-testgroup Operations for statechart Operations{
-	test OperationsTest { 
+	operation operationsCalled (){
+		mock alwaysTrue returns ( true )
+		mock internalOperation3a returns (param1 + 1.0)
+		
 		enter
-		 
+		assert active ( Operations.main_region.A )
 		cycle
-		assert active (Operations.main_region.B)
+
+		assert active ( Operations.main_region.B )
+		assert called internalOperation1 
+		assert called InternalOperation2 with ( 4 )
+		assert called internalOperation3 
+		assert called internalOperation3a
+		assert called internalOperation4
+		assert called internalOperation4a with ( 5 )
+		assert called internalOperation5 
+		assert called internalOperation5a with ( "" )
+		assert called InternalOperation2 with ( 4 )
 		
 		
 		raise ev
 		cycle
-		
+
 		assert active(Operations.main_region.C)
+		assert called Interface1.interfaceOperation1  
+		assert called Interface1.InterfaceOperation2 with ( 4 ) 
+		assert called Interface1.interfaceOperation3
+		assert called Interface1.interfaceOperation3a with ( 1.0 )
+		assert called Interface1.interfaceOperation4
+		assert called Interface1.interfaceOperation4a with ( 5 )
+		assert called Interface1.interfaceOperation5
+		assert called Interface1.interfaceOperation5a with ( "" )
 		
 		raise ev
 		cycle
+		
 		
 		assert active(Operations.main_region.D)
-		 
-	} 
+		assert called unnamedInterfaceOperation1 
+		assert called UnnamedInterfaceOperation2 with ( 4 )
+		assert called unnamedOperation3 
+		assert called unnamedOperation3a with ( 1.0 )
+		assert called unnamedOperation4
+		assert called unnamedOperation4a with ( 5 )
+		assert called unnamedOperation5 
+		assert called unnamedOperation5a with ( "" )
+			
+	}
 }
-	
+

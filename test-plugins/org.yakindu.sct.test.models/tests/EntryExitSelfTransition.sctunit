@@ -1,7 +1,7 @@
+package tests
+testclass EntryExitSelfTransition for statechart EntryExitSelfTransition{
 
-testgroup EntryExitSelfTransition for statechart EntryExitSelfTransition{
-
-	test SelfTransitionToChildState { 
+	operation SelfTransitionToChildState(){ 
 		enter
 		
 		cycle
@@ -17,7 +17,7 @@ testgroup EntryExitSelfTransition for statechart EntryExitSelfTransition{
 	} 
 
 
-	test SelfTransitionFromChildState { 
+	operation SelfTransitionFromChildState(){ 
 		enter
 		
 		cycle

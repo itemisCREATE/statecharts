@@ -1,6 +1,6 @@
-
-testgroup LocalReactions for statechart LocalReactions{
-	test LocalReactionsTest { 
+package tests
+testclass LocalReactions for statechart LocalReactions{
+	operation LocalReactionsTest(){ 
 		
 		enter
 		assert active(LocalReactions.main_region.A) 

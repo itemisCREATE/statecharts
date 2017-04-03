@@ -1,10 +1,10 @@
-
-testgroup ConstOnlyInternalScope for statechart declarations.ConstOnlyInternalScope {
+package declarations
+testclass ConstOnlyInternalScope for statechart declarations.ConstOnlyInternalScope {
 
 	/*
 	 * Test is the statechart is entered correctly.
 	 */	
-	test statechartEntry { 		
+	operation statechartEntry(){ 		
 		enter		 
 		assert active(declarations.ConstOnlyInternalScope.main_region.A)
 	
@@ -14,7 +14,7 @@ testgroup ConstOnlyInternalScope for statechart declarations.ConstOnlyInternalSc
 	/*
 	 * Test is the statechart is entered correctly.
 	 */	
-	test stateTransition {
+	operation stateTransition(){
 		
 		enter
 		raise e : 1

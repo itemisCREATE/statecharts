@@ -1,5 +1,6 @@
-testgroup PriorityValues for statechart PriorityValues {
-	test transitionPriority {
+package tests
+testclass PriorityValues for statechart PriorityValues {
+	operation transitionPriority(){
 		
 		enter
 		
@@ -9,7 +10,7 @@ testgroup PriorityValues for statechart PriorityValues {
 		assert active(PriorityValues.main_region.C)
 	}
 	
-	test regionPriority{
+	operation regionPriority(){
 		
 		enter
 		

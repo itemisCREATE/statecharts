@@ -1,6 +1,6 @@
-
-testgroup ReadOnlyVariable for statechart ReadOnlyVariable{
-	test ReadOnlyVariableTest { 
+package tests
+testclass ReadOnlyVariable for statechart ReadOnlyVariable{
+	operation ReadOnlyVariableTest(){ 
 		enter
 		
 		assert active(ReadOnlyVariable.main_region.StateA)

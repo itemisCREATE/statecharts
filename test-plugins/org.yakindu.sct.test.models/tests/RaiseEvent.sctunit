@@ -1,5 +1,6 @@
-testgroup RaiseEvent for statechart RaiseEvent {
-	test raiseEvent {
+package tests
+testclass RaiseEvent for statechart RaiseEvent {
+	operation raiseEvent(){
 		
 		enter
 		

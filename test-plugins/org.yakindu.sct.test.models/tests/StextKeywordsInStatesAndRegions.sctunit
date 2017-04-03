@@ -1,5 +1,6 @@
-testgroup STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAndRegions{
-	test activeCheckWithSTextNamedStates { 
+package tests
+testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAndRegions{
+	operation activeCheckWithSTextNamedStates(){ 
 		
 		enter
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)

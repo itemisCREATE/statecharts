@@ -1,6 +1,7 @@
-testgroup AlwaysOncycle for statechart AlwaysOncycle {
+package tests
+testclass AlwaysOncycle for statechart AlwaysOncycle {
 
-	 test alwaysOncycleTest {
+	 operation alwaysOncycleTest (){
 	 	
 	 	enter
 		assert active (AlwaysOncycle.main_region.StateA)

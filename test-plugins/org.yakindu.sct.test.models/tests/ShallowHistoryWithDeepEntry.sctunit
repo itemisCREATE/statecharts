@@ -1,10 +1,10 @@
-
+package tests
 /**
  * A shallow history must also for child states that are only indirectly entered through one of the childs.  
  */
-testgroup ShallowHistoryWithDeepEntry for statechart ShallowHistoryWithDeepEntry{
+testclass ShallowHistoryWithDeepEntry for statechart ShallowHistoryWithDeepEntry{
 	
-	test noDeepEntryWithinHistory { 
+	operation noDeepEntryWithinHistory(){ 
 		enter
 		assert active(ShallowHistoryWithDeepEntry.main_region.Y) 
 		
@@ -23,7 +23,7 @@ testgroup ShallowHistoryWithDeepEntry for statechart ShallowHistoryWithDeepEntry
 	} 
 	
 	
-	test deepEntryWithinHistory {
+	operation deepEntryWithinHistory(){
 		enter
 		assert active(ShallowHistoryWithDeepEntry.main_region.Y) 
 		
@@ -47,7 +47,7 @@ testgroup ShallowHistoryWithDeepEntry for statechart ShallowHistoryWithDeepEntry
 		
 	}
 	
-	test directDeepEntryIntoHistory {
+	operation directDeepEntryIntoHistory(){
 		enter
 		assert active(ShallowHistoryWithDeepEntry.main_region.Y) 
 		

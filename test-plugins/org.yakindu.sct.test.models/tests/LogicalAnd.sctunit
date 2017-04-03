@@ -1,7 +1,7 @@
-
-testgroup LogicalAndTests for statechart LogicalAnd {
+package tests
+testclass LogicalAndTests for statechart LogicalAnd {
 	
-	test operandEvaluationOrder {
+	operation operandEvaluationOrder(){
 		
 		enter
 		cycle

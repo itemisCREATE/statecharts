@@ -1,10 +1,10 @@
-
-testgroup ConstOnlyDefaultScope for statechart declarations.ConstOnlyDefaultScope {
+package declarations
+testclass ConstOnlyDefaultScope for statechart declarations.ConstOnlyDefaultScope {
 
 	/*
 	 * Test is the statechart is entered correctly.
 	 */	
-	test statechartEntry { 		
+	operation statechartEntry(){ 		
 		enter		 
 		assert active(declarations.ConstOnlyDefaultScope.main_region.A)
 	
@@ -14,7 +14,7 @@ testgroup ConstOnlyDefaultScope for statechart declarations.ConstOnlyDefaultScop
 	/*
 	 * Test is the statechart is entered correctly.
 	 */	
-	test stateTransition {
+	operation stateTransition(){
 		
 		enter
 		raise A.e : 1

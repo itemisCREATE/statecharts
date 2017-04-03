@@ -1,5 +1,6 @@
-testgroup BooleanExpressions for statechart BooleanExpressions {
-	test booleanExpressions {
+package tests
+testclass BooleanExpressions for statechart BooleanExpressions {
+	operation booleanExpressions(){
 		enter
 		assert active (BooleanExpressions.main_region.StateA)
 		assert myBool1 == true

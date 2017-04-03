@@ -1,8 +1,8 @@
-
-testgroup TriggerGuardExpressions for statechart TriggerGuardExpressions {
+package tests
+testclass TriggerGuardExpressions for statechart TriggerGuardExpressions {
 	
 	/** If the guard is true then the transition will be taken on any event that matches a trigger.  */
-	test trueGuard {
+	operation trueGuard(){
 
 		enter
 		assert active (TriggerGuardExpressions.main_region.A)
@@ -27,7 +27,7 @@ testgroup TriggerGuardExpressions for statechart TriggerGuardExpressions {
 	}
 	
 	/** If the guard is false then the transition will be taken on any event that matches a trigger.  */
-	test falseGuard {
+	operation falseGuard(){
 
 		enter
 		assert active (TriggerGuardExpressions.main_region.A)

@@ -1,5 +1,6 @@
-testgroup FeatureCalls for statechart FeatureCalls {
-	test FeatureCalls {
+package tests
+testclass FeatureCalls for statechart FeatureCalls {
+	operation FeatureCalls(){
 		enter
 		assert active ( FeatureCalls.main_region.A)
 		//assert MyInterface.myInt == 0

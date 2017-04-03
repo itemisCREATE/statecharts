@@ -1,5 +1,6 @@
-testgroup SyncFork for statechart SyncFork {
-	test syncForkTest{
+package tests
+testclass SyncFork for statechart SyncFork {
+	operation syncForkTest(){
 		
 		enter
 		

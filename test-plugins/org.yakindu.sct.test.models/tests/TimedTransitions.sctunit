@@ -1,6 +1,7 @@
-testgroup TimedTransitions for statechart TimedTransitions{
+package tests
+testclass TimedTransitions for statechart TimedTransitions{
 		
-	test Timer01{
+	operation Timer01(){
 		enter 
 		assert active (TimedTransitions.main_region.Start)
 		

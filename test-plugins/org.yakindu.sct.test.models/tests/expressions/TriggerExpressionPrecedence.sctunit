@@ -1,13 +1,14 @@
+package expressions
 /**
  * These test cases check the precedence issues that occured with the construction of the trigger condition 
  * that consists of the trigger and guard part. 
  * The condition for a local reaction and transition depends on the trigger and guard part.
  */
-testgroup TriggerExpressionPrecedence for statechart expressions.TriggerExpressionPrecedence {
+testclass TriggerExpressionPrecedence for statechart expressions.TriggerExpressionPrecedence {
 	
 	
 	/** If a trigger is specified and not active then the trigger condition should not become true. */
-	test unsatisfiedTriggerAndFGuardFalseOrFalse {
+	operation unsatisfiedTriggerAndFGuardFalseOrFalse(){
 
 		enter
 		
@@ -21,7 +22,7 @@ testgroup TriggerExpressionPrecedence for statechart expressions.TriggerExpressi
 
 
 	/** If a trigger is specified and not active then the trigger condition should not become true. */
-	test unsatisfiedTriggerAndFGuardTrueOrFalse {
+	operation unsatisfiedTriggerAndFGuardTrueOrFalse(){
 
 		enter
 		
@@ -35,7 +36,7 @@ testgroup TriggerExpressionPrecedence for statechart expressions.TriggerExpressi
 
 
 	/** If a trigger is specified and not active then the trigger condition should not become true. */
-	test unsatisfiedTriggerAndFGuardFalseOrTrue {
+	operation unsatisfiedTriggerAndFGuardFalseOrTrue(){
 
 		enter
 		
@@ -49,7 +50,7 @@ testgroup TriggerExpressionPrecedence for statechart expressions.TriggerExpressi
 
 
 	/** If a trigger is specified and not active then the trigger condition should not become true. */
-	test unsatisfiedTriggerAndFGuardTrueOrTrue {
+	operation unsatisfiedTriggerAndFGuardTrueOrTrue(){
 
 		enter
 		

@@ -1,5 +1,6 @@
-testgroup StatechartLocalReactions for statechart StatechartLocalReactions {
-	test statechartLocalReactionsTest {
+package tests
+testclass StatechartLocalReactions for statechart StatechartLocalReactions {
+	operation statechartLocalReactionsTest(){
 		
 		enter
 				
