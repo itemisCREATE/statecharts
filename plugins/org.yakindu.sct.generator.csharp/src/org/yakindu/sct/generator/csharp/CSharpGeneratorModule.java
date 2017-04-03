@@ -15,6 +15,7 @@ import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.csharp.types.CSharpTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
+import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.inject.Binder;
@@ -31,6 +32,7 @@ public class CSharpGeneratorModule implements GeneratorModule {
 		binder.bind(IExecutionFlowGenerator.class).to(CSharpGenerator.class);
 		binder.bind(ICodegenTypeSystemAccess.class).to(CSharpTypeSystemAccess.class);
 		binder.bind(INamingService.class).to(CSharpNamingService.class);
+		binder.bind(NamingServiceUtilities.class).to(CSharpNamingServiceUtilities.class);
 		binder.bind(GeneratorEntry.class).toInstance(entry);
 	}
 }

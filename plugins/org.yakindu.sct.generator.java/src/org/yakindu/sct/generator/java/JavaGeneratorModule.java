@@ -16,6 +16,7 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.JavaTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.OldJavaTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
+import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.inject.Binder;
@@ -38,5 +39,6 @@ public class JavaGeneratorModule implements GeneratorModule {
 			binder.bind(ICodegenTypeSystemAccess.class).to(JavaTypeSystemAccess.class);
 		}
 		binder.bind(INamingService.class).to(JavaNamingService.class).in(Scopes.SINGLETON);
+		binder.bind(NamingServiceUtilities.class).to(JavaNamingServiceUtilities.class);
 	}
 }

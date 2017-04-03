@@ -22,6 +22,7 @@ import org.yakindu.sct.generator.core.GeneratorModule;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
+import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
@@ -39,6 +40,7 @@ public class CCodeGeneratorModule implements GeneratorModule {
 		binder.bind(GeneratorEntry.class).toInstance(entry);
 		binder.bind(IExecutionFlowGenerator.class).to(CGenerator.class);
 		binder.bind(INamingService.class).to(CNamingService.class);
+		binder.bind(NamingServiceUtilities.class).to(CNamingServiceUtilities.class);
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 		bindIGenArtifactConfigurations(entry, binder);
 		bindTracingProperty(entry, binder);
