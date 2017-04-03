@@ -39,23 +39,21 @@ import com.google.common.collect.Lists;
  */
 public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
 
-	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (context == null)
 			throw new NullPointerException("context");
 		IScope result = null;
-		if(context instanceof ImportScope){
+		if (context instanceof ImportScope) {
 			result = getResourceScope(context.eResource(), reference);
-		}
-		else if (context.eContainer() != null) {
+		} else if (context.eContainer() != null) {
 			result = getScope(context.eContainer(), reference);
 		} else {
 			result = getResourceScope(context.eResource(), reference);
 		}
 		return getLocalElementsScope(result, context, reference);
 	}
-	
+
 	@Override
 	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(final EObject context, boolean ignoreCase) {
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
@@ -67,6 +65,14 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 		}
 		for (ImportScope scope : importScopes) {
 			importedNamespaceResolvers.addAll(createNamespaceResolver(scope, ignoreCase));
+		}
+
+		// Add implicit import for statechart name here:
+		Statechart statechart = getStatechart(context);
+		if (statechart != null && statechart.getName() != null) {
+			ImportNormalizer localNormalizer = doCreateImportNormalizer(QualifiedName.create(statechart.getName()),
+					true, ignoreCase);
+			importedNamespaceResolvers.add(localNormalizer);
 		}
 		return importedNamespaceResolvers;
 	}
@@ -89,23 +95,24 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 		}
 		return importedNamespaceResolvers;
 	}
-	
+
 	@Override
-	protected IScope getLocalElementsScope(IScope parent, final EObject context,
-			final EReference reference) {
+	protected IScope getLocalElementsScope(IScope parent, final EObject context, final EReference reference) {
 		IScope result = parent;
 		ISelectable allDescriptions = getAllDescriptions(context.eResource());
 		QualifiedName name = getQualifiedNameOfLocalElement(context);
 		boolean ignoreCase = isIgnoreCase(reference);
 		final List<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context, ignoreCase);
 		if (!namespaceResolvers.isEmpty()) {
-			if (isRelativeImport() && name!=null && !name.isEmpty()) {
-				ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase); 
-				result = createImportScope(result, Collections.singletonList(localNormalizer), allDescriptions, reference.getEReferenceType(), isIgnoreCase(reference));
+			if (isRelativeImport() && name != null && !name.isEmpty()) {
+				ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase);
+				result = createImportScope(result, Collections.singletonList(localNormalizer), allDescriptions,
+						reference.getEReferenceType(), isIgnoreCase(reference));
 			}
-			result = createImportScope(result, namespaceResolvers, null, reference.getEReferenceType(), isIgnoreCase(reference));
+			result = createImportScope(result, namespaceResolvers, null, reference.getEReferenceType(),
+					isIgnoreCase(reference));
 		}
-		//We don't want to add an implicit local ImportNormalizer here...
+		// We don't want to add an implicit local ImportNormalizer here...
 		return result;
 	}
 
