@@ -107,8 +107,8 @@ class DefaultNamingService implements INamingService {
 		if (map == null || activeStatechart != statechart) {
 			activeFlow = null
 			activeStatechart = statechart
-			map = statechart.createShortNameMap(maxLength, separator)
 			utilities.initialize(maxLength, separator, activeStatechart, activeFlow)
+			map = statechart.createShortNameMap(maxLength, separator)
 		}
 	}
 
@@ -116,8 +116,8 @@ class DefaultNamingService implements INamingService {
 		if (map == null || activeFlow != flow) {
 			activeFlow = flow
 			activeStatechart = null
-			map = flow.createShortNameMap(maxLength, separator)
 			utilities.initialize(maxLength, separator, activeStatechart, activeFlow)
+			map = flow.createShortNameMap(maxLength, separator)
 		}
 	}
 
