@@ -1,9 +1,0 @@
-
-testgroup StatemachineKeywords for statechart StatechartKeywords {
-	test statemachineKeywords { 
-		enter
-		assert active(StatechartKeywords.main_region.Timer) 
-		 
-	} 
-}
-	
