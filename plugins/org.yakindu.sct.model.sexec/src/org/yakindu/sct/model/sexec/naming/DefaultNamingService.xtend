@@ -76,6 +76,7 @@ class DefaultNamingService implements INamingService {
 	@Inject extension StepDepthComparator stepDepthComparator
 	@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
 	@Inject extension NamingHelper
+	@Inject extension NamingServiceUtilities
 
 	@Inject private StextNameProvider provider
 
@@ -167,12 +168,12 @@ class DefaultNamingService implements INamingService {
 		for (region : element.regions) {
 			for (vertex : region.vertices) {
 				if (vertex instanceof CompositeElement) {
-					map.addShortVertexNames(vertex as CompositeElement, maxLength, separator)
+					map.addShortVertexNames(vertex as CompositeElement, maxLength, separator) 
 				}
 			}
 		}
 	}
-
+	
 	def Map<NamedElement, String> createShortNameMap(ExecutionFlow flow, int maxLength, char separator) {
 		var HashMap<NamedElement, String> map = new HashMap<NamedElement, String>
 		map.addShortStateNames(flow, maxLength, separator)
@@ -233,57 +234,7 @@ class DefaultNamingService implements INamingService {
 		}
 	}
 
-	def protected prefix(Step it, char separator) {
-		var prefix = flow.name.toFirstLower
-
-		switch (it) {
-			case isCheckFunction: prefix + separator + "check"
-			case isEntryAction: prefix + separator + "enact"
-			case isExitAction: prefix + separator + "exact"
-			case isEffect: prefix + separator + "effect"
-			case isEnterSequence: prefix + separator + "enseq"
-			case isDeepEnterSequence: prefix + separator + "dhenseq"
-			case isShallowEnterSequence: prefix + separator + "shenseq"
-			case isExitSequence: prefix + separator + "exseq"
-			case isReactSequence: prefix + separator + "react"
-			default: ""
-		}
-	}
-
-	def protected suffix(Step it, char separator) {
-		""
-	}
-
-	def protected prefix(ExecutionState it, char separator) {
-		flow.name
-	}
-
-	def protected suffix(ExecutionState it, char separator) {
-		""
-	}
-
-	def protected prefix(TimeEventSpec it, NamedElement element, char separator) {
-		activeFlow.name
-	}
-
-	def protected suffix(TimeEventSpec it, NamedElement element, char separator) {
-		switch (element) {
-			Statechart: "tev" + element.timeEventSpecs.indexOf(it)
-			State: "tev" + element.timeEventSpecs.indexOf(it)
-		}
-	}
-
-	def protected prefix(State it, char separator) {
-		activeStatechart.name
-	}
-
-	def protected prefix(Vertex it, char separator) {
-		""
-	}
-
-	def protected suffix(Vertex it, char separator) {
-		""
-	}
+	
 
 	override asIdentifier(String string) {
 		string.replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', separator.toString)
