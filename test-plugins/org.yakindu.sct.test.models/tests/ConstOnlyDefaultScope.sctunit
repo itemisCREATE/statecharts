@@ -1,4 +1,4 @@
-package declarations
+package tests
 testclass ConstOnlyDefaultScope for statechart declarations.ConstOnlyDefaultScope {
 
 	/*

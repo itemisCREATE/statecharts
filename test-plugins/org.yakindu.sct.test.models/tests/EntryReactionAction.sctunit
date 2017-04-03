@@ -1,4 +1,4 @@
-package entries
+package tests
 testclass EntryReactionAction for statechart entries.EntryReactionAction {
 
 	/*

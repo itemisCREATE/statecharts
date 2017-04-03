@@ -1,12 +1,12 @@
-package declarations
-testclass ConstOnlyNamedScope for statechart declarations.ConstOnlyNamedScope {
+package tests
+testclass ConstOnlyInternalScope for statechart declarations.ConstOnlyInternalScope {
 
 	/*
 	 * Test is the statechart is entered correctly.
 	 */	
 	operation statechartEntry(){ 		
 		enter		 
-		assert active(declarations.ConstOnlyNamedScope.main_region.A)
+		assert active(declarations.ConstOnlyInternalScope.main_region.A)
 	
 	} 
 	
@@ -19,7 +19,7 @@ testclass ConstOnlyNamedScope for statechart declarations.ConstOnlyNamedScope {
 		enter
 		raise e : 1
 		cycle
-		assert active(declarations.ConstOnlyNamedScope.main_region.B)
+		assert active(declarations.ConstOnlyInternalScope.main_region.B)
 		
 	}
 }

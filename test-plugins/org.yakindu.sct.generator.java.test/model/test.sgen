@@ -4,15 +4,15 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 
-	test AlwaysOncycle{
+	test AlwaysOncycle{ 
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	 
@@ -20,7 +20,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	} 
 	
@@ -28,7 +28,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -36,7 +36,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
 		}			
 	}
 	
@@ -44,7 +44,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
 		}			
 	}
 	
@@ -52,7 +52,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 
@@ -60,7 +60,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"	
 		}			
 	}
 
@@ -68,7 +68,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
 		}			
 	}
 	
@@ -76,15 +76,40 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
 		}			
 	}
+	
+	test ConstOnlyInternalScope{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
+		}			
+	}	
+	
+	
+	test ConstOnlyDefaultScope{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
+		}			
+	}		
+		
+	test ConstOnlyNamedScope{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
+		}			
+	}		
 	
 	test Declarations{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -92,7 +117,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -100,7 +125,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
 		}			
 	}
 	
@@ -108,7 +133,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 		
@@ -116,7 +141,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"	
 		}			
 	}	
 		
@@ -124,7 +149,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -132,7 +157,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -140,7 +165,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -148,7 +173,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -156,7 +181,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
 		}			
 	}
 	
@@ -164,7 +189,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -172,7 +197,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -180,7 +205,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -188,7 +213,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -196,7 +221,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -204,7 +229,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -212,7 +237,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
 		}			
 	}
 	
@@ -220,7 +245,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
 		}			
 	}
 	
@@ -228,7 +253,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -236,7 +261,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}	
 	
@@ -244,7 +269,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 		
@@ -253,7 +278,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"	
 		}			
 	}	
 		
@@ -262,7 +287,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 		
@@ -270,7 +295,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 		
@@ -278,7 +303,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
 		}			
 	}
 
@@ -286,15 +311,29 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
+	}
+	
+	test Operations{
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
+		}	
+	}
+	
+	test OperationsWithoutBraces{
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
+		}
 	}
 	
 	test OutEventLifeCycle{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}	
 	
@@ -302,7 +341,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 		
@@ -310,7 +349,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -318,7 +357,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}	
 	
@@ -326,7 +365,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -334,7 +373,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 			
@@ -342,7 +381,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}	
 	
@@ -351,7 +390,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -359,7 +398,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -367,7 +406,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -375,7 +414,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -383,7 +422,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -391,7 +430,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -399,7 +438,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -407,7 +446,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -415,7 +454,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -423,7 +462,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -431,7 +470,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -439,7 +478,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 
@@ -447,7 +486,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
@@ -455,7 +494,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 
@@ -464,7 +503,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 
@@ -473,7 +512,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 
@@ -481,7 +520,7 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 
@@ -490,23 +529,16 @@ GeneratorModel for sctunit::java {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
 		}			
 	}
 	
-	test VariadicFunctions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
-		}			
-	}
 	
 	test StatemachineKeywords {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
-			targetFolder = "test-gen"
+			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"
 		}
 	}
 }
