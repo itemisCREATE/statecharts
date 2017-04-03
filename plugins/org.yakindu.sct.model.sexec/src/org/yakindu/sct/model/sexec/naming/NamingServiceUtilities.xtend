@@ -13,6 +13,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.sct.model.sexec.ExecutionFlow
 
 class NamingServiceUtilities {
 	@Inject extension SExecExtensions
@@ -54,7 +55,7 @@ class NamingServiceUtilities {
 		""
 	}
 
-	def public prefix(TimeEventSpec it, NamedElement element, char separator) {
+	def public prefix(TimeEventSpec it, ExecutionFlow flow, NamedElement element, char separator) {
 		flow.name
 	}
 

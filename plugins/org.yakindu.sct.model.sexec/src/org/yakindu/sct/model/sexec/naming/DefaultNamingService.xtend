@@ -221,7 +221,7 @@ class DefaultNamingService implements INamingService {
 				timeEventSpecs.indexOf(tes))
 			if (timeEvent != null) {
 				map.put(timeEvent,
-					executionFlowElement.getShortName(tes.prefix(sgraphElement, separator),
+					executionFlowElement.getShortName(tes.prefix(activeFlow, sgraphElement, separator),
 						tes.suffix(sgraphElement, separator), map.values.toList, maxLength, separator))
 			}
 		}
