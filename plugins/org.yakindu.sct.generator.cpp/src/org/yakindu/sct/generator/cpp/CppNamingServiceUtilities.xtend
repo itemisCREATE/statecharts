@@ -10,6 +10,7 @@ import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.base.base.NamedElement
+import org.yakindu.sct.model.sexec.ExecutionFlow
 
 class CppNamingServiceUtilities extends NamingServiceUtilities {
 	@Inject extension SExecExtensions
@@ -51,7 +52,7 @@ class CppNamingServiceUtilities extends NamingServiceUtilities {
 		}
 	}
 
-	override public prefix(TimeEventSpec it, NamedElement element, char separator) {
+	override public prefix(TimeEventSpec it, ExecutionFlow flow, NamedElement element, char separator) {
 		if (entry.statemachinePrefix.nullOrEmpty) {
 			""
 		} else {
