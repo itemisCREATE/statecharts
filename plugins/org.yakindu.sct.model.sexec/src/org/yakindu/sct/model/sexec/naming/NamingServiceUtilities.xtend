@@ -1,8 +1,8 @@
 package org.yakindu.sct.model.sexec.naming
 
 import com.google.inject.Inject
-import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.base.NamedElement
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
@@ -11,21 +11,49 @@ import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.sexec.ExecutionFlow
 
 class NamingServiceUtilities {
 	@Inject extension SExecExtensions
 	@Inject extension SgraphExtensions
 	@Inject extension StatechartExtensions
-	@Inject extension IQualifiedNameProvider
-	@Inject extension StepDepthComparator stepDepthComparator
-	@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
-	@Inject extension NamingHelper
-	
-	@Inject private StextNameProvider provider
-	
+
+	var protected int maxLength = 0
+
+	var protected char separator = '_'
+
+	var protected Statechart activeStatechart
+
+	var protected ExecutionFlow activeFlow
+
+	def initialize(int maxLength, char separator, Statechart statechart, ExecutionFlow flow) {
+		this.maxLength = maxLength
+		this.separator = separator
+		this.activeStatechart = statechart
+		this.activeFlow = flow
+
+	}
+
+	def asIdentifier(String string) {
+		string.replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', separator.toString)
+	}
+
+	def asEscapedIdentifier(String string) {
+		string.asIdentifier
+	}
+
+	def isKeyword(String string) {
+		return false
+	}
+
+	def public setSeparator(char sep) {
+		separator = sep
+	}
+
+	def public setMaxLength(int maxLength) {
+		this.maxLength = maxLength
+	}
+
 	def public prefix(Step it, char separator) {
 		var prefix = flow.name.toFirstLower
 
@@ -55,11 +83,11 @@ class NamingServiceUtilities {
 		""
 	}
 
-	def public prefix(TimeEventSpec it, ExecutionFlow flow, NamedElement element, char separator) {
-		flow.name
+	def public prefix(TimeEventSpec it, NamedElement element) {
+		activeFlow.name
 	}
 
-	def public suffix(TimeEventSpec it, NamedElement element, char separator) {
+	def public suffix(TimeEventSpec it, NamedElement element) {
 		switch (element) {
 			Statechart: "tev" + element.timeEventSpecs.indexOf(it)
 			State: "tev" + element.timeEventSpecs.indexOf(it)
@@ -77,4 +105,5 @@ class NamingServiceUtilities {
 	def public suffix(Vertex it, char separator) {
 		""
 	}
+
 }

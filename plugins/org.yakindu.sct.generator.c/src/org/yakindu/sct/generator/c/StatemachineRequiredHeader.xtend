@@ -14,7 +14,7 @@ import com.google.inject.Inject
 import org.yakindu.base.types.Declaration
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
@@ -25,7 +25,7 @@ class StatemachineRequiredHeader implements IContentTemplate {
 	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntries
-	@Inject extension INamingService
+	@Inject extension NamingServiceUtilities
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) '''
 		«entry.licenseText»

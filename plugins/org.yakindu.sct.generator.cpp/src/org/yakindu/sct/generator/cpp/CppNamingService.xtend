@@ -11,33 +11,7 @@
 
 package org.yakindu.sct.generator.cpp
 
-import com.google.inject.Inject
-import java.util.Arrays
 import org.yakindu.sct.generator.c.CNamingService
-import org.yakindu.sct.generator.c.GenmodelEntries
-import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.stext.stext.TimeEventSpec
-
-import static org.yakindu.sct.generator.cpp.CppKeywords.*
-import org.yakindu.base.base.NamedElement
 
 class CppNamingService extends CNamingService {
-
-	@Inject extension GenmodelEntries
-
-	@Inject extension SExecExtensions
-
-	@Inject
-	GeneratorEntry entry
-
-	
-
-	override isKeyword(String name) {
-		var isKeyword = !Arrays::asList(CPP_KEYWORDS).findFirst[it.equalsIgnoreCase(name)].nullOrEmpty
-		return isKeyword || super.isKeyword(name)
-	}
 }

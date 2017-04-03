@@ -17,11 +17,12 @@ import com.google.inject.Inject
 import org.yakindu.sct.generator.java.Naming
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.generator.java.JavaNamingService
+import org.yakindu.sct.generator.java.JavaNamingServiceUtilities
 
 class CycleBasedWrapperFeature {
 
 	@Inject extension Naming
-	@Inject extension JavaNamingService
+	@Inject extension JavaNamingServiceUtilities
 
 	def getFeatureCycleWrapper(GeneratorEntry it) {
 		getFeatureConfiguration(IJavaFeatureConstants::FEATURE_SYCHRONIZED_WRAPPER);

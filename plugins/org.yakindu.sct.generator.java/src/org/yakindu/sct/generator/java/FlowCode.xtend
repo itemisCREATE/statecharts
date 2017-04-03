@@ -34,7 +34,7 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 class FlowCode {
 	
 	@Inject extension Naming
-	@Inject extension INamingService
+	@Inject extension JavaNamingServiceUtilities
 	@Inject extension ExpressionCode
 	@Inject extension SExecExtensions
 	

@@ -1,11 +1,13 @@
 package org.yakindu.sct.generator.csharp
 
-import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import com.google.inject.Inject
+import java.util.Arrays
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities
 
-class CSharpNamingServiceUtilities extends NamingServiceUtilities {
+
+class CSharpNamingServiceUtilities extends NamingServiceUtilities implements CSharpKeywords {
 	@Inject extension SExecExtensions
 	
 	override public prefix(Step it, char separator) {
@@ -21,5 +23,9 @@ class CSharpNamingServiceUtilities extends NamingServiceUtilities {
 			case isReactSequence: "react"
 			default: ""
 		}
+	}
+	
+	override boolean isKeyword(String name) {
+		return !Arrays::asList(KEYWORDS).findFirst[it.equalsIgnoreCase(name)].nullOrEmpty
 	}
 }

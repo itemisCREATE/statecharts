@@ -24,15 +24,12 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
-import static org.yakindu.sct.generator.c.CKeywords.*
 import org.yakindu.sct.model.sgraph.Statechart
 
 public class CNamingService extends DefaultNamingService {
 	
 	@Inject
 	extension GenmodelEntries
-	@Inject
-	extension SExecExtensions
 	@Inject
 	var GeneratorEntry entry
 	
@@ -82,19 +79,5 @@ public class CNamingService extends DefaultNamingService {
 		}
 		
 		return super.getShortNameMap(statechart)
-	}
-	
-	
-	
-	override asEscapedIdentifier(String it) {
-		var s = it
-		if (s.isKeyword) {
-			s = s + separator +'ID'
-		}
-		return s.asIdentifier
-	}
-	
-	override boolean isKeyword(String name) {
-		return !Arrays::asList(C_KEYWORDS).findFirst[it.equalsIgnoreCase(name)].nullOrEmpty
 	}
 }

@@ -1,15 +1,18 @@
 package org.yakindu.sct.generator.c
 
-import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities
-import org.yakindu.sct.model.sexec.Step
 import com.google.inject.Inject
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import java.util.Arrays
 import org.yakindu.base.base.NamedElement
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.stext.stext.TimeEventSpec
+
+import static org.yakindu.sct.generator.c.CKeywords.*
 
 class CNamingServiceUtilities extends NamingServiceUtilities{
 	@Inject extension SExecExtensions
@@ -51,11 +54,23 @@ class CNamingServiceUtilities extends NamingServiceUtilities{
 		}
 	}
 	
-	override public prefix(TimeEventSpec it, ExecutionFlow flow, NamedElement element, char separator) {
+	override public prefix(TimeEventSpec it, NamedElement element) {
 		if (entry.statemachinePrefix.nullOrEmpty) {
-			super.prefix(it, flow, element, separator).toFirstLower
+			super.prefix(it, element).toFirstLower
 		} else {
 			entry.statemachinePrefix
 		}
+	}
+	
+	override asEscapedIdentifier(String it) {
+		var s = it
+		if (s.isKeyword) {
+			s = s + separator +'ID'
+		}
+		return s.asIdentifier
+	}
+	
+	override boolean isKeyword(String name) {
+		return !Arrays::asList(C_KEYWORDS).findFirst[it.equalsIgnoreCase(name)].nullOrEmpty
 	}
 }

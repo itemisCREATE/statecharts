@@ -29,7 +29,7 @@ import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*;
 class StatemachineInterface {
 
 	@Inject extension Naming
-	@Inject extension JavaNamingService
+	@Inject extension JavaNamingServiceUtilities
 	@Inject extension GenmodelEntries
 	@Inject extension Navigation
 	@Inject extension ITypeSystem

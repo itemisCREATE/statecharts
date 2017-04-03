@@ -64,31 +64,6 @@ public interface INamingService {
 	String getShortName(NamedElement element);
 
 	/**
-	 * Convert string to a valid identifier (e.g. removes blanks and invalid
-	 * characters)
-	 * 
-	 * @param string
-	 * @return
-	 */
-	String asIdentifier(String string);
-
-	/**
-	 * If the given string equals a target language keyword it is escaped.
-	 * 
-	 * @param string
-	 * @return
-	 */
-	String asEscapedIdentifier(String string);
-
-	/**
-	 * Checks if the given string is a target language keyword
-	 * 
-	 * @param string
-	 * @return
-	 */
-	boolean isKeyword(String string);
-
-	/**
 	 * Sets the maximum length for shorted names.
 	 * 
 	 * @param int

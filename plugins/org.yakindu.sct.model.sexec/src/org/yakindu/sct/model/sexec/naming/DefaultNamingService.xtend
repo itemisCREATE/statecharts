@@ -76,7 +76,7 @@ class DefaultNamingService implements INamingService {
 	@Inject extension StepDepthComparator stepDepthComparator
 	@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
 	@Inject extension NamingHelper
-	@Inject extension NamingServiceUtilities
+	@Inject extension NamingServiceUtilities utilities
 
 	@Inject private StextNameProvider provider
 
@@ -108,6 +108,7 @@ class DefaultNamingService implements INamingService {
 			activeFlow = null
 			activeStatechart = statechart
 			map = statechart.createShortNameMap(maxLength, separator)
+			utilities.initialize(maxLength, separator, activeStatechart, activeFlow)
 		}
 	}
 
@@ -116,6 +117,7 @@ class DefaultNamingService implements INamingService {
 			activeFlow = flow
 			activeStatechart = null
 			map = flow.createShortNameMap(maxLength, separator)
+			utilities.initialize(maxLength, separator, activeStatechart, activeFlow)
 		}
 	}
 
@@ -221,8 +223,8 @@ class DefaultNamingService implements INamingService {
 				timeEventSpecs.indexOf(tes))
 			if (timeEvent != null) {
 				map.put(timeEvent,
-					executionFlowElement.getShortName(tes.prefix(activeFlow, sgraphElement, separator),
-						tes.suffix(sgraphElement, separator), map.values.toList, maxLength, separator))
+					executionFlowElement.getShortName(tes.prefix(sgraphElement),
+						tes.suffix(sgraphElement), map.values.toList, maxLength, separator))
 			}
 		}
 	}
@@ -232,20 +234,6 @@ class DefaultNamingService implements INamingService {
 		if (!map.containsKey(element)) {
 			map.put(element, element.getShortName(prefix, suffix, map.values.toList, maxLength, separator))
 		}
-	}
-
-	
-
-	override asIdentifier(String string) {
-		string.replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', separator.toString)
-	}
-
-	override asEscapedIdentifier(String string) {
-		string.asIdentifier
-	}
-
-	override isKeyword(String string) {
-		return false
 	}
 
 	def protected String getShortName(NamedElement element, String prefix, String suffix, List<String> nameList,
@@ -456,6 +444,7 @@ class DefaultNamingService implements INamingService {
 
 	override public setMaxLength(int length) {
 		maxLength = length
+		utilities.maxLength = length
 	}
 
 	override public setSeparator(char sep) {
@@ -465,6 +454,7 @@ class DefaultNamingService implements INamingService {
 			throw new IllegalArgumentException
 		}
 		separator = sep
+		utilities.separator = sep
 	}
 
 	override public getMaxLength() {

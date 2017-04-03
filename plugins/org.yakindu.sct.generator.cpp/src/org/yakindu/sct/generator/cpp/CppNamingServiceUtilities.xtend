@@ -1,18 +1,18 @@
 package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.base.base.NamedElement
+import org.yakindu.sct.generator.c.CNamingServiceUtilities
 import org.yakindu.sct.generator.c.GenmodelEntries
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.base.base.NamedElement
-import org.yakindu.sct.model.sexec.ExecutionFlow
 
-class CppNamingServiceUtilities extends NamingServiceUtilities {
+class CppNamingServiceUtilities extends CNamingServiceUtilities {
 	@Inject extension SExecExtensions
 	@Inject extension GenmodelEntries
 	@Inject var GeneratorEntry entry
@@ -52,7 +52,7 @@ class CppNamingServiceUtilities extends NamingServiceUtilities {
 		}
 	}
 
-	override public prefix(TimeEventSpec it, ExecutionFlow flow, NamedElement element, char separator) {
+	override public prefix(TimeEventSpec it, NamedElement element) {
 		if (entry.statemachinePrefix.nullOrEmpty) {
 			""
 		} else {

@@ -1,9 +1,14 @@
 package org.yakindu.sct.generator.java
 
-import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities
 import com.google.inject.Inject
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import java.util.HashSet
+import java.util.Set
+import org.yakindu.base.types.Declaration
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.InternalScope
 
 class JavaNamingServiceUtilities extends NamingServiceUtilities {
 	@Inject extension SExecExtensions
@@ -20,6 +25,80 @@ class JavaNamingServiceUtilities extends NamingServiceUtilities {
 			case isExitSequence: "exitSequence"
 			case isReactSequence: "react"
 			default: ""
+		}
+	}
+	
+	private Set<String> derivedIdentifiers = new HashSet
+
+	override asIdentifier(String string) {
+		super.asIdentifier(string).toFirstLower
+	}
+
+	override asEscapedIdentifier(String it) {
+		var s = it
+		if (s.isKeyword) {
+			s = s + separator + 'ID'
+		}
+		return s.asIdentifier
+	}
+
+	override boolean isKeyword(String name) {
+		return Keywords.JAVA_KEYWORD_SET.isKeyword(name)
+	}
+
+	def isStatemachineIdentifier(String name) {
+		return Keywords.STATEMACHICHNE_KEYWORD_SET.isKeyword(name);
+	}
+
+	def isStatemachineInterfaceIdentifier(String name) {
+		return Keywords.STATEMACHINE_INTERFACE_KEYWORD_SET.isKeyword(name)
+	}
+
+	def isDerivedIdentifier(String name) {
+		return getDerivedIdentifiers.isKeyword(name);
+	}
+	
+	def isStatemachineMethod(String name) {
+		return Keywords.STATEMACHINE_METHOD_SET.isKeyword(name);
+	}
+
+	private def isKeyword(Set<String> set, String name) {
+		return !set.findFirst [
+			it.equalsIgnoreCase(name)
+		].nullOrEmpty
+	}
+	
+	def isKeyword(Declaration it) {
+		
+		if (name.isKeyword)
+			return true
+
+		switch eContainer {
+			InterfaceScope: {
+				return name.isStatemachineInterfaceIdentifier;
+			}
+			InternalScope: {
+				return name.isStatemachineIdentifier || name.isDerivedIdentifier
+			}
+		}
+
+		return false;
+	}
+
+	protected def getDerivedIdentifiers() {
+		if (derivedIdentifiers.isEmpty) {
+			if (activeFlow != null) {
+				activeFlow.interfaceScopes.forEach[derivedIdentifiers.add(interfaceName.asEscapedIdentifier)]
+			}
+		}
+		return derivedIdentifiers
+	}
+
+	def String getInterfaceName(InterfaceScope it) {
+		if (name != null) {
+			return "SCI" + name.toFirstUpper()
+		} else {
+			return "SCInterface";
 		}
 	}
 }
