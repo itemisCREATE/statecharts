@@ -1,3 +1,4 @@
+package tests
 testsuite AllTests {
 	AlwaysOncycle, 
 	AssignmentAsExpression,
@@ -8,6 +9,9 @@ testsuite AllTests {
 	CKeywords,
 	ConditionalExpression,
 	ConstantsTests,
+	ConstOnlyDefaultScope,
+	ConstOnlyInternalScope,
+	ConstOnlyNamedScope,
 	Declarations, 
 	DeepEntry,
 	DeepHistory,
@@ -33,6 +37,7 @@ testsuite AllTests {
 	LogicalAndTests, 
 	LogicalOrTests,
 	NamedInterfaceAccess,
+	Operations,
 //	OperationsWithoutBraces,
 	OutEventLifeCycle,
 	Parenthesis,

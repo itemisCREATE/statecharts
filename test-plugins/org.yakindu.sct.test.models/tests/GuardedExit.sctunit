@@ -1,7 +1,7 @@
- 
-testgroup GuardedExit for statechart GuardedExit {
+package tests
+testclass GuardedExit for statechart GuardedExit {
 		 
-	test ExitTaken { 
+	operation ExitTaken(){ 
 
 		enter
 
@@ -15,7 +15,7 @@ testgroup GuardedExit for statechart GuardedExit {
 		assert ! done 
 	} 
 		
-	test ExitNotTaken {
+	operation ExitNotTaken(){
 		
 		enter 
 

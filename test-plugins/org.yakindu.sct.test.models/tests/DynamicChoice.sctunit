@@ -1,7 +1,7 @@
-
-testgroup DynamicChoice for statechart DynamicChoice{
+package tests
+testclass DynamicChoice for statechart DynamicChoice{
 	
-	test DynamicChoiceTest { 
+	operation DynamicChoiceTest(){ 
 		enter		
 		assert active(DynamicChoice.main_region.Start)
 		cycle

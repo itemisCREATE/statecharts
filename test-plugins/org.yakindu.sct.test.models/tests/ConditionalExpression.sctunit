@@ -1,7 +1,7 @@
-
-testgroup ConditionalExpression for statechart ConditionalExpressions{
+package tests
+testclass ConditionalExpression for statechart ConditionalExpressions{
 	
-	test ConditionalExpressionTest { 
+	operation ConditionalExpressionTest(){ 
 		enter
 		assert active (ConditionalExpressions.main_region.A)
 		assert condition == 1

@@ -1,6 +1,6 @@
-
-testgroup NamedInterfaceAccess for statechart NamedInterfaceAccess{
-	test SafeOpenSuccess { 
+package tests
+testclass NamedInterfaceAccess for statechart NamedInterfaceAccess{
+	operation SafeOpenSuccess(){ 
 		enter
 		
 		cycle

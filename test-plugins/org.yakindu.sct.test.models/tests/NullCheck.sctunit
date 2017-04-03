@@ -1,7 +1,7 @@
-
-testgroup NullCheck for statechart NullCheck {
+package tests
+testclass NullCheck for statechart NullCheck {
 	
-	test SimpleNullCheckTest { 
+	operation SimpleNullCheckTest(){ 
 		enter
 				
 		assert active(NullCheck.main_region.A)

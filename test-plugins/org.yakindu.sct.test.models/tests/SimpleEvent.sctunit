@@ -1,5 +1,6 @@
-testgroup SimpleEvent for statechart SimpleEvent {
-	test simpleEventTest {
+package tests
+testclass SimpleEvent for statechart SimpleEvent {
+	operation simpleEventTest(){
 		
 		enter
 		

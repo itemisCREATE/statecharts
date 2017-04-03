@@ -1,6 +1,7 @@
-testgroup Declarations for statechart Declarations {
+package tests
+testclass Declarations for statechart Declarations {
 	
-	test declarationsTest {
+	operation declarationsTest(){
 		enter
 	}
 }

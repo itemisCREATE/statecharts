@@ -1,6 +1,7 @@
-testgroup Choice for statechart Choice { 
+package tests
+testclass Choice for statechart Choice { 
 
-	test elseChoiceUsingNonDefaultTransition {
+	operation elseChoiceUsingNonDefaultTransition(){
 		enter
 		
 		assert active (Choice.main_region.A)
@@ -11,7 +12,7 @@ testgroup Choice for statechart Choice {
 		assert active (Choice.main_region.C)
 	}
 	
-	test elseChoiceUsingDefaultTransition {
+	operation elseChoiceUsingDefaultTransition(){
 		enter
 		
 		assert active (Choice.main_region.A)
@@ -22,7 +23,7 @@ testgroup Choice for statechart Choice {
 		assert active (Choice.main_region.B)
 	}
 	
-	test defaultChoiceUsingNonDefaultTransition {
+	operation defaultChoiceUsingNonDefaultTransition(){
 		enter
 		
 		assert active (Choice.main_region.A)
@@ -33,7 +34,7 @@ testgroup Choice for statechart Choice {
 		assert active (Choice.main_region.C)
 	}
 	
-	test defaultChoiceUsingDefaultTransition {
+	operation defaultChoiceUsingDefaultTransition(){
 		enter
 		
 		assert active (Choice.main_region.A)
@@ -44,7 +45,7 @@ testgroup Choice for statechart Choice {
 		assert active (Choice.main_region.B)
 	}
 	
-	test uncheckedChoiceUsingNonDefaultTransition {
+	operation uncheckedChoiceUsingNonDefaultTransition(){
 		enter
 		
 		assert active (Choice.main_region.A)
@@ -59,7 +60,7 @@ testgroup Choice for statechart Choice {
 	 * An outgiong transition with an empty trigger 
 	 * will be handled like a default transition. 
 	 */
-	test uncheckedChoiceUsingDefaultTransition {
+	operation uncheckedChoiceUsingDefaultTransition(){
 		enter
 		
 		assert active (Choice.main_region.A)
@@ -76,7 +77,7 @@ testgroup Choice for statechart Choice {
 	 * This test case makes sure that default transition reordering
 	 * does not impact these transitions.
 	 */
-	test alwaysTrueTransitionInChoice {
+	operation alwaysTrueTransitionInChoice(){
 		enter
 		
 		assert active (Choice.main_region.A)

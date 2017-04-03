@@ -1,0 +1,72 @@
+package tests
+testclass EntryReactionAction for statechart entries.EntryReactionAction {
+
+	/*
+	 * Actions on an entry transition should be executed during entering the state machine.
+	 */	
+	operation entryTransitionActionOnStatechartEnter(){ 
+		
+		enter		 
+		assert enteredR1
+		assert enteredR2
+		assert enteredBdefault
+		assert ! enteredBother
+		
+	} 
+	
+	/*
+	 * Actions on an entry transition should be executed if it is used during a run to completion step.
+	 */
+	operation entryOnRTS(){
+		enter
+		
+		raise b 
+		cycle 
+		raise d 
+		cycle
+		
+		enteredR1 = false
+		enteredR2 = false
+		enteredBdefault = false
+		enteredBother = false
+		raise b
+		cycle
+		
+		assert ! enteredR1
+		assert ! enteredR2
+		assert ! enteredBdefault
+		assert enteredBother		
+		
+	}
+	
+	
+	/*
+	 * Actions on an entry transition should not be executed if be executed when entering 
+	 * a region using a history.
+	 */
+	operation noEntryTransitionActionOnHistory(){
+		
+		enter
+		
+		raise b
+		cycle
+		raise d
+		cycle
+		
+		enteredR1 = false
+		enteredR2 = false
+		enteredBdefault = false
+		enteredBother = false
+		raise d
+		cycle
+		
+		assert ! enteredR1
+		assert ! enteredR2
+		assert ! enteredBdefault
+		assert ! enteredBother		
+	}
+
+
+	
+}
+	

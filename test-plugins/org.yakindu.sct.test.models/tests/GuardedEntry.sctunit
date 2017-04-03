@@ -1,7 +1,7 @@
-
-testgroup GuardedEntry for statechart GuardedEntry{
+package tests
+testclass GuardedEntry for statechart GuardedEntry{
 	
-	test EntryNotTakenOnStatechartEnter { 
+	operation EntryNotTakenOnStatechartEnter(){ 
 		
 		assert guard == false
 		
@@ -12,7 +12,7 @@ testgroup GuardedEntry for statechart GuardedEntry{
 		  
 	} 
 
-	test EntryTakenOnStatechartEnter 
+	operation EntryTakenOnStatechartEnter()
 	{  
 		
 		guard = true
@@ -24,7 +24,7 @@ testgroup GuardedEntry for statechart GuardedEntry{
 		assert done == true
 	}   
 	 
-	test EntryTakenInTransition {
+	operation EntryTakenInTransition(){
 		
 		enter 
 
@@ -41,7 +41,7 @@ testgroup GuardedEntry for statechart GuardedEntry{
 		assert done
 	} 
 		
-	test EntryNotTakenInTransition { 
+	operation EntryNotTakenInTransition(){ 
 
 		enter
 

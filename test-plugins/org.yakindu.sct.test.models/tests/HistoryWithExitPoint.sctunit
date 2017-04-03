@@ -1,7 +1,7 @@
-
-testgroup HistoryWithExitPoint for statechart HistoryWithExitPoint {
+package tests
+testclass HistoryWithExitPoint for statechart HistoryWithExitPoint {
 	
-	test historyEntryAfterExit {
+	operation historyEntryAfterExit(){
 		enter
 		
 		assert active ( HistoryWithExitPoint.mr.A.r.X1 )

@@ -1,5 +1,6 @@
-testgroup IntegerExpressions for statechart IntegerExpressions {
-	test integerExpressions {
+package tests
+testclass IntegerExpressions for statechart IntegerExpressions {
+	operation integerExpressions(){
 		
 		enter
 		

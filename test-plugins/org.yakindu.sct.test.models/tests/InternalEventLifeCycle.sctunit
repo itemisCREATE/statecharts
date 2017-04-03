@@ -1,10 +1,10 @@
-
+package tests
 /** 
  * @author axel terfloth
  */
-testgroup InternalEventLifeCycle for statechart InternalEventLifeCycle {
+testclass InternalEventLifeCycle for statechart InternalEventLifeCycle {
 
-	test InternalEventLifeCycleTest {
+	operation InternalEventLifeCycleTest(){
 		 
 		enter
 		 

@@ -1,8 +1,8 @@
-
-testgroup HistoryWithoutInitialStep for statechart HistoryWithoutInitialStep {
+package tests
+testclass HistoryWithoutInitialStep for statechart HistoryWithoutInitialStep {
 	
 	
-	test enterThroughInitialEntry { 
+	operation enterThroughInitialEntry(){ 
 		
 		enter
 		assert active(HistoryWithoutInitialStep.main_region.A) 
@@ -17,7 +17,7 @@ testgroup HistoryWithoutInitialStep for statechart HistoryWithoutInitialStep {
 	}
 	
 
-	test enterCThroughHistory {
+	operation enterCThroughHistory(){
 		enter
 		assert active(HistoryWithoutInitialStep.main_region.A) 
 		
@@ -35,7 +35,7 @@ testgroup HistoryWithoutInitialStep for statechart HistoryWithoutInitialStep {
 	}
 		 
 
-	test enterDThroughHistory {
+	operation enterDThroughHistory(){
 		enter
 		assert active(HistoryWithoutInitialStep.main_region.A) 
 		

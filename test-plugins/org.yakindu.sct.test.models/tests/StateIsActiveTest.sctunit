@@ -1,5 +1,6 @@
-testgroup StateIsActive for statechart StateIsActive {
-	test stateIsActive{
+package tests
+testclass StateIsActive for statechart StateIsActive {
+	operation stateIsActive(){
 		
 		enter
 		

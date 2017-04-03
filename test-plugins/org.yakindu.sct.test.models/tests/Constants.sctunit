@@ -1,7 +1,7 @@
+package tests
+testclass ConstantsTests for statechart Constants {
 
-testgroup ConstantsTests for statechart Constants {
-
-	test constantDefinition { 
+	operation constantDefinition(){ 
 		enter
 		assert active(Constants.main_region.A)
 		//After initialization, constant values must be set
