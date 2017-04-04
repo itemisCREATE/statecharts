@@ -27,7 +27,7 @@ import com.google.common.collect.Multimap;
 public interface IMarkerChangeProcessor extends IResourceDeltaVisitor {
 
     /**
-     * Returns the current visible issues.
+     * Returns the issues processed in time after {@link #setCurrentIssues(Multimap)}.
      *
      * @return the current visible issues
      */

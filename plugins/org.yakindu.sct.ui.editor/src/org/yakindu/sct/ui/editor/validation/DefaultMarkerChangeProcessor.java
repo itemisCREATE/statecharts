@@ -43,9 +43,7 @@ public class DefaultMarkerChangeProcessor implements IMarkerChangeProcessor {
 
     @Override
     public void setCurrentIssues(final Multimap<String, SCTIssue> liveIssues) {
-        // copy the current visible issues, so we can maintain...
         currentIssues = ArrayListMultimap.create(liveIssues);
-        // reset maintained element IDs
         relatedElementIDs = Sets.newHashSet();
     }
 
@@ -59,23 +57,18 @@ public class DefaultMarkerChangeProcessor implements IMarkerChangeProcessor {
         if ((IResourceDelta.CHANGED == delta.getKind()) && ((delta.getFlags() & IResourceDelta.MARKERS) != 0)) {
             processMarkerDelta(delta);
         }
-        return true; // visit the children
+        return true;
     }
 
     protected void processMarkerDelta(final IResourceDelta delta) {
-        // to process a marker change...
         final IMarkerDelta[] markerDeltas = delta.getMarkerDeltas();
 
-        // iterate over all marker changes...
         for (final IMarkerDelta markerDelta : markerDeltas) {
             final Object elementID =
                     markerDelta.getAttribute(org.eclipse.gmf.runtime.common.core.resources.IMarker.ELEMENT_ID);
-            //exclude markers from processing which does not have a element ID
             if (elementID == null) {
                 continue;
             }
-
-            // maintain the copy of next visible issues...
             dispatchMarkerDelta(markerDelta, elementID.toString());
         }
     }
@@ -99,13 +92,11 @@ public class DefaultMarkerChangeProcessor implements IMarkerChangeProcessor {
 
     protected void addSCTIssue(final IMarkerDelta iMarkerDelta, final String elementID) {
         currentIssues.put(elementID, createFromMarker(iMarkerDelta.getMarker(), elementID));
-        // maintain the set of interested listeners...
         relatedElementIDs.add(elementID);
     }
 
     protected void removeSCTIssue(final IMarkerDelta iMarkerDelta, final String elementID) {
         final String message = (String) iMarkerDelta.getAttributes().get(IMarker.MESSAGE);
-        //get list of current issues for the given element ID
         final Iterator<SCTIssue> iterator = currentIssues.get(elementID).iterator();
         while (iterator.hasNext()) {
             final SCTIssue sctIssue = iterator.next();
@@ -113,7 +104,6 @@ public class DefaultMarkerChangeProcessor implements IMarkerChangeProcessor {
                 iterator.remove();
             }
         }
-        // maintain the set of related objects...
         relatedElementIDs.add(elementID);
     }
 

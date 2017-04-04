@@ -192,27 +192,21 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 
     @Override
     public void resourceChanged(final IResourceChangeEvent event) {
-        // after a change...
         if ((IResourceChangeEvent.POST_CHANGE != event.getType())) {
             return;
         }
         final IFile file = WorkspaceSynchronizer.getFile(connectedResource);
         final IResourceDelta deltaForFile = getDeltaForFile(event, file);
-        // if the current resource was changed...
         if (deltaForFile == null) {
             return;
         }
         try {
             synchronized (visibleIssues) {
                 markerChangeProcessor.setCurrentIssues(visibleIssues);
-                // visit and prepare future visible issues
                 deltaForFile.accept(markerChangeProcessor);
-                //don't forget to clear current issues
                 visibleIssues.clear();
-                // set the issues visible in future...
                 visibleIssues.putAll(markerChangeProcessor.getCurrentIssues());
             }
-            // notify interested listeners...
             for (final String string : markerChangeProcessor.getChangedElementIDs()) {
                 notifyListeners(string);
             }
@@ -227,15 +221,11 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
         for (final String segment : segments) {
             final IResourceDelta matchingDelta = currentDelta.findMember(new Path(segment));
             if (matchingDelta != null) {
-            	//found the path segment within the current delta...
                 currentDelta = matchingDelta;
-                //continue finding the next segement within the previously matched delta.
                 continue;
             }
-            //...this delta does not include the given file
             return null;
         }
-        //all segments matched, this is the delta for the given file
         return currentDelta;
     }
 
