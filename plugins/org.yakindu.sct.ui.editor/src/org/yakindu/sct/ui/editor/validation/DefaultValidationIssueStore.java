@@ -216,7 +216,6 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
             for (final String string : markerChangeProcessor.getChangedElementIDs()) {
                 notifyListeners(string);
             }
-
         } catch (final CoreException e) {
             e.printStackTrace();
         }
@@ -228,12 +227,15 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
         for (final String segment : segments) {
             final IResourceDelta matchingDelta = currentDelta.findMember(new Path(segment));
             if (matchingDelta != null) {
+            	//found the path segment within the current delta...
                 currentDelta = matchingDelta;
+                //continue finding the next segement within the previously matched delta.
                 continue;
             }
             //...this delta does not include the given file
             return null;
         }
+        //all segments matched, this is the delta for the given file
         return currentDelta;
     }
 
