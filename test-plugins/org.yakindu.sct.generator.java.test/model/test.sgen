@@ -1,544 +1,874 @@
 GeneratorModel for sctunit::java {
 
-	test AllTests{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-
-	test AlwaysOncycle{ 
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	 
-	test AssignmentAsExpression{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	} 
-	
-	test BitExpressions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test BooleanExpressions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
-		}			
-	}
-	
-	test Choice{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
-		}			
-	}
-	
-	test CastExpressions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-
-	test CKeywords{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"	
-		}			
-	}
-
-	test ConditionalExpression{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
-		}			
-	}
-	
-	test ConstantsTests{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
-		}			
-	}
-	
-	test ConstOnlyInternalScope{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}	
-	
-	
-	test ConstOnlyDefaultScope{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}		
-		
-	test ConstOnlyNamedScope{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}		
-	
-	test Declarations{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test DeepHistory{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test DeepEntry{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
-		}			
-	}
-	
-	test DynamicChoice{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-		
-	test EmptyTransition{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"	
-		}			
-	}	
-		
-	test EnterState{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test EntryChoice{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test EntryExitSelfTransition{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test EntryReactionAction{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test ExitOnSelfTransition{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
-		}			
-	}
-	
-	test ExitState{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test FeatureCalls{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test FinalState{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test Guard{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test GuardedEntry{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test GuardedExit{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test HistoryWithExitPoint {
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
-		}			
-	}
-	
-	test HistoryWithoutInitialStep{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
-		}			
-	}
-	
-	test InEventLifeCycle{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test IntegerExpressions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}	
-	
-	test InternalEventLifeCycle{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-		
-		
-	test LocalReactions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"	
-		}			
-	}	
-		
-		
-	test LogicalAndTests{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-		
-	test LogicalOrTests{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-		
-	test NamedInterfaceAccess{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"		
-		}			
-	}
-
-	test NullCheck{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test Operations{
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}	
-	}
-	
-	test OperationsWithoutBraces{
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
+	test AllTests {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
 		}
-	}
-	
-	test OutEventLifeCycle{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}	
-	
-	test Parenthesis{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-		
-	test PerformanceTests{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test PriorityValues{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}	
-	
-	test RaiseEvent{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test ReadOnlyVariable{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-			
-	test SameNameDifferentRegion{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}	
-	
-	
-	test ShallowHistory{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test ShallowHistoryWithDeepEntry{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test SimpleEvent{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test SimpleHierachy{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test StatechartLocalReactions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test StatechartActive {
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test StateIsActive{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test StaticChoice{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test STextKeywordsInStatesAndRegions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test StringExpressions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test SyncFork{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test SyncJoin{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-
-	test TimedTransitions{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	test TypeAlias{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-
-
-	test TransitionWithoutCondition{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-
-
-	test TriggerGuardExpressions {
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-
-	test TriggerExpressionPrecedence {
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-
-
-	test ValuedEvents{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"			
-		}			
-	}
-	
-	
-	test StatemachineKeywords {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
-			targetFolder = "test-gen/org/yakindu/sct/generator/java/test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+
+	}
+
+	test AlwaysOncycle {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test AssignmentAsExpression {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test BitExpressions {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test BooleanExpressions {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test Choice {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test CastExpressions {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test CKeywords {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test ConditionalExpression {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test ConstantsTests {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test ConstOnlyInternalScope {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test ConstOnlyDefaultScope {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test ConstOnlyNamedScope {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test Declarations {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test DeepHistory {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test DeepEntry {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test DynamicChoice {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test EmptyTransition {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test EnterState {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test EntryChoice {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test EntryExitSelfTransition {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test EntryReactionAction {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test ExitOnSelfTransition {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test ExitState {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test FeatureCalls {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test FinalState {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test Guard {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test GuardedEntry {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test GuardedExit {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test HistoryWithExitPoint {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test HistoryWithoutInitialStep {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test InEventLifeCycle {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test IntegerExpressions {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test InternalEventLifeCycle {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test LocalReactions {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test LogicalAndTests {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test LogicalOrTests {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test NamedInterfaceAccess {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test NullCheck {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test Operations {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test OperationsWithoutBraces {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test OutEventLifeCycle {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test Parenthesis {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test PerformanceTests {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test PriorityValues {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test RaiseEvent {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test ReadOnlyVariable {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test SameNameDifferentRegion {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test ShallowHistory {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test ShallowHistoryWithDeepEntry {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test SimpleEvent {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test SimpleHierachy {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test StatechartLocalReactions {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test StatechartActive {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test StateIsActive {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test StaticChoice {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test STextKeywordsInStatesAndRegions {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test StringExpressions {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test SyncFork {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test SyncJoin {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test TimedTransitions {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test TypeAlias {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test TransitionWithoutCondition {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test TriggerGuardExpressions {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test TriggerExpressionPrecedence {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test ValuedEvents {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
+		}
+	}
+
+	test StatemachineKeywords {
+		feature Naming {
+			basePackage = "org.yakindu.sct"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+			libraryTargetFolder = "test-gen"
+			apiTargetFolder = ""
 		}
 	}
 }
