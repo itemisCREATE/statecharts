@@ -64,19 +64,19 @@ public class DefaultMarkerChangeProcessor implements IMarkerChangeProcessor {
 
     protected void processMarkerDelta(final IResourceDelta delta) {
         // to process a marker change...
-        final IMarkerDelta[] markers = delta.getMarkerDeltas();
+        final IMarkerDelta[] markerDeltas = delta.getMarkerDeltas();
 
         // iterate over all marker changes...
-        for (final IMarkerDelta iMarkerDelta : markers) {
+        for (final IMarkerDelta markerDelta : markerDeltas) {
             final Object elementID =
-                    iMarkerDelta.getAttribute(org.eclipse.gmf.runtime.common.core.resources.IMarker.ELEMENT_ID);
+                    markerDelta.getAttribute(org.eclipse.gmf.runtime.common.core.resources.IMarker.ELEMENT_ID);
             //exclude markers from processing which does not have a element ID
             if (elementID == null) {
-                return;
+                continue;
             }
 
             // maintain the copy of next visible issues...
-            dispatchMarkerDelta(iMarkerDelta, elementID.toString());
+            dispatchMarkerDelta(markerDelta, elementID.toString());
         }
     }
 
