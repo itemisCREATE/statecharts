@@ -51,7 +51,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
     protected final Multimap<String, SCTIssue> visibleIssues;
     protected boolean connected = false;
 
-    protected Resource currentResource;
+    protected Resource connectedResource;
 
     @Inject
     private IMarkerChangeProcessor markerChangeProcessor;
@@ -101,7 +101,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
         final Multimap<String, SCTIssue> newLiveIssues = ArrayListMultimap.create();
         final List<IMarker> markers = Lists.newArrayList();
         try {
-            final IFile file = WorkspaceSynchronizer.getFile(currentResource);
+            final IFile file = WorkspaceSynchronizer.getFile(connectedResource);
             if ((file != null) && file.isAccessible()) {
                 markers.addAll(Arrays.asList(file.findMarkers(getMarkerType(), true, IResource.DEPTH_INFINITE)));
             }
@@ -121,7 +121,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
         if (connected) {
             throw new IllegalStateException("Issue store is already connected to a resource");
         }
-        currentResource = resource;
+        connectedResource = resource;
         final IFile file = WorkspaceSynchronizer.getFile(resource);
         if ((file != null) && file.isAccessible()) {
             ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
@@ -136,7 +136,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
         if ((file != null) && file.isAccessible()) {
             ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
             connected = false;
-            currentResource = null;
+            connectedResource = null;
             synchronized (listener) {
                 listener.clear();
             }
@@ -196,7 +196,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
         if ((IResourceChangeEvent.POST_CHANGE != event.getType())) {
             return;
         }
-        final IFile file = WorkspaceSynchronizer.getFile(currentResource);
+        final IFile file = WorkspaceSynchronizer.getFile(connectedResource);
         final IResourceDelta deltaForFile = getDeltaForFile(event, file);
         // if the current resource was changed...
         if (deltaForFile == null) {
