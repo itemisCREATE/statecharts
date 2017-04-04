@@ -25,7 +25,9 @@ import org.yakindu.sct.ui.editor.editor.proposals.SmartEditProposalProvider;
 import org.yakindu.sct.ui.editor.proposals.IEditProposalProvider;
 import org.yakindu.sct.ui.editor.providers.DefaultSCTPaletteFactory;
 import org.yakindu.sct.ui.editor.providers.ISCTPaletteFactory;
+import org.yakindu.sct.ui.editor.validation.DefaultMarkerChangeProcessor;
 import org.yakindu.sct.ui.editor.validation.DefaultValidationIssueStore;
+import org.yakindu.sct.ui.editor.validation.IMarkerChangeProcessor;
 
 import com.google.inject.Binder;
 import com.google.inject.multibindings.Multibinder;
@@ -45,6 +47,7 @@ public class GenericEditorModule extends AbstractGenericModule {
 		proposalProviderBinder.addBinding().to(RefactoringProposalProvider.class);
 		binder.bind(IResourceValidator.class).to(SCTResourceValidatorImpl.class);
 		binder.bind(IValidationIssueProcessor.class).to(DefaultValidationIssueStore.class);
+		binder.bind(IMarkerChangeProcessor.class).to(DefaultMarkerChangeProcessor.class);
 	}
 
 	public Class<? extends ISCTPaletteFactory> bindISCTPaletteFactory() {
