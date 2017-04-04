@@ -10,31 +10,30 @@
  */
 package org.yakindu.sct.ui.editor.validation;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
-import org.eclipse.gmf.runtime.common.ui.resources.FileChangeManager;
-import org.eclipse.gmf.runtime.common.ui.resources.IFileObserver;
-import org.eclipse.xtext.ui.util.IssueUtil;
-import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
+import org.yakindu.sct.ui.editor.validation.IMarkerType;
+import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -42,212 +41,200 @@ import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
- * 
+ * Maintains the list of current issues based on persistent markers and live validation results.
  *
- * @author Andreas Mülder - Initial contribution and API
- *
+ * @author Johannes Dicks - Initial contribution and API
  */
-public class DefaultValidationIssueStore implements IValidationIssueStore, IFileObserver, IMarkerType {
+public class DefaultValidationIssueStore implements IValidationIssueStore, IResourceChangeListener {
 
-	@Inject
-	private IssueUtil issueCreator;
+    protected final List<IResourceIssueStoreListener> listeners;
+    protected final Multimap<String, SCTIssue> visibleIssues;
+    protected boolean connected = false;
 
-	private List<IResourceIssueStoreListener> listener;
-	// the URI of the semantic element
-	protected Multimap<String, SCTIssue> persistentIssues;
-	protected Multimap<String, SCTIssue> liveIssues;
-	private boolean connected = false;
+    protected Resource currentResource;
 
-	protected Resource resource;
+    @Inject
+    private IMarkerChangeProcessor markerChangeProcessor;
+ 
+    public DefaultValidationIssueStore() {
+        listeners = Lists.newArrayList();
+        visibleIssues = ArrayListMultimap.create();
+    }
 
-	public DefaultValidationIssueStore() {
-		listener = Lists.newArrayList();
-		persistentIssues = ArrayListMultimap.create();
-		liveIssues = ArrayListMultimap.create();
-	}
+    protected String getMarkerType() {
+        return IMarkerType.SCT_MARKER_TYPE;
+    }
 
-	protected String getMarkerType() {
-		return SCT_MARKER_TYPE;
-	}
+    @Override
+    public void addIssueStoreListener(final IResourceIssueStoreListener newListener) {
+        synchronized (listeners) {
+            listeners.add(newListener);
+        }
+    }
 
-	@Override
-	public void addIssueStoreListener(IResourceIssueStoreListener listener) {
-		synchronized (this.listener) {
-			this.listener.add(listener);
-		}
-	}
+    @Override
+    public void removeIssueStoreListener(final IResourceIssueStoreListener oldListener) {
+        synchronized (listeners) {
+            listeners.remove(oldListener);
+        }
+    }
 
-	@Override
-	public void removeIssueStoreListener(IResourceIssueStoreListener listener) {
-		synchronized (this.listener) {
-			this.listener.remove(listener);
-		}
-	}
+    protected void notifyListeners() {
+        synchronized (listeners) {
+            for (final IResourceIssueStoreListener iResourceIssueStoreListener : listeners) {
+                iResourceIssueStoreListener.issuesChanged();
+            }
+        }
+    }
 
-	protected void notifyListeners() {
-		synchronized (this.listener) {
-			for (IResourceIssueStoreListener iResourceIssueStoreListener : listener) {
-				iResourceIssueStoreListener.issuesChanged();
-			}
-		}
-	}
+    protected void notifyListeners(final String semanticURI) {
+        synchronized (listeners) {
+            for (final IResourceIssueStoreListener iResourceIssueStoreListener : listeners) {
+                if (semanticURI.equals(iResourceIssueStoreListener.getSemanticURI())) {
+                    iResourceIssueStoreListener.issuesChanged();
+                }
+            }
+        }
+    }
 
-	protected void notifyListeners(String semanticURI) {
-		synchronized (this.listener) {
-			for (IResourceIssueStoreListener iResourceIssueStoreListener : listener) {
-				if (semanticURI.equals(iResourceIssueStoreListener.getSemanticURI()))
-					iResourceIssueStoreListener.issuesChanged();
-			}
-		}
-	}
+    protected synchronized void reloadMarkerIssues() {
+        final Multimap<String, SCTIssue> newLiveIssues = ArrayListMultimap.create();
+        final List<IMarker> markers = Lists.newArrayList();
+        try {
+            final IFile file = WorkspaceSynchronizer.getFile(currentResource);
+            if ((file != null) && file.isAccessible()) {
+                markers.addAll(Arrays.asList(file.findMarkers(getMarkerType(), true, IResource.DEPTH_INFINITE)));
+            }
+        } catch (final CoreException e) {
+           e.printStackTrace();
+        }
+        for (final IMarker iMarker : markers) {
+            final SCTIssue issue = markerChangeProcessor.createFromMarker(iMarker,
+                    iMarker.getAttribute(org.eclipse.gmf.runtime.common.core.resources.IMarker.ELEMENT_ID, ""));
+            newLiveIssues.put(issue.getSemanticURI(), issue);
+        }
+        switchLiveIssues(newLiveIssues);
+    }
 
-	@Override
-	public void connect(Resource resource) {
-		if (connected)
-			throw new IllegalStateException("Issue store is already connected to a resource");
-		connected = true;
-		this.resource = resource;
-		IFile file = WorkspaceSynchronizer.getFile(resource);
-		if (file != null && file.isAccessible()) {
-			FileChangeManager.getInstance().addFileObserver(this);
-		}
-		reloadMarkerIssues();
-	}
+    @Override
+    public void connect(final Resource resource) {
+        if (connected) {
+            throw new IllegalStateException("Issue store is already connected to a resource");
+        }
+        currentResource = resource;
+        final IFile file = WorkspaceSynchronizer.getFile(resource);
+        if ((file != null) && file.isAccessible()) {
+            ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
+            connected = true;
+        }
+        reloadMarkerIssues();
+    }
 
-	protected synchronized void reloadMarkerIssues() {
-		persistentIssues.clear();
-		List<IMarker> markers = new ArrayList<IMarker>();
-		try {
-			IFile file = WorkspaceSynchronizer.getFile(resource);
-			if (file != null && file.isAccessible()) {
-				markers.addAll(Arrays.asList(file.findMarkers(getMarkerType(), true, IResource.DEPTH_INFINITE)));
-			}
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-		for (IMarker iMarker : markers) {
-			SCTIssue issue = createFromMarker(iMarker);
-			persistentIssues.put(issue.getSemanticURI(), issue);
-		}
-		notifyListeners();
-	}
+    @Override
+    public void disconnect(final Resource resource) {
+        final IFile file = WorkspaceSynchronizer.getFile(resource);
+        if ((file != null) && file.isAccessible()) {
+            ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
+            connected = false;
+            currentResource = null;
+            synchronized (listeners) {
+                listeners.clear();
+            }
+        }
+    }
 
-	@Override
-	public void disconnect(Resource resource) {
-		IFile file = WorkspaceSynchronizer.getFile(resource);
-		if (file != null && file.isAccessible()) {
-			FileChangeManager.getInstance().removeFileObserver(this);
-		}
-		this.resource = null;
-		persistentIssues.clear();
-		connected = false;
-	}
+    @Override
+    public synchronized void processIssues(final List<Issue> issues, final IProgressMonitor monitor) {
+        final Multimap<String, SCTIssue> newLiveIssues = ArrayListMultimap.create();
+        for (final Issue issue : issues) {
+            if (issue instanceof SCTIssue) {
+                final String semanticURI = ((SCTIssue) issue).getSemanticURI();
+                newLiveIssues.put(semanticURI, (SCTIssue) issue);
+            }
+        }
+        switchLiveIssues(newLiveIssues);
+    }
 
-	protected SCTIssue createFromMarker(IMarker marker) {
-		String semanticURI = marker.getAttribute(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID, "");
-		Issue delegate = issueCreator.createIssue(marker);
-		SCTIssue issue = new SCTIssue(delegate, semanticURI);
-		return issue;
-	}
+    protected void switchLiveIssues(final Multimap<String, SCTIssue> newLiveIssues) {
+        synchronized (visibleIssues) {
+            visibleIssues.clear();
+            visibleIssues.putAll(newLiveIssues);
+        }
+        notifyListeners();
+    }
 
-	@Override
-	public synchronized void processIssues(List<Issue> issues, IProgressMonitor monitor) {
-		liveIssues.clear();
-		for (Issue issue : issues) {
-			if (issue instanceof SCTIssue) {
-				String semanticURI = ((SCTIssue) issue).getSemanticURI();
-				liveIssues.put(semanticURI, (SCTIssue) issue);
-			}
-		}
-		notifyListeners();
-	}
+    @Override
+    public synchronized List<SCTIssue> getIssues(final String uri) {
+        final List<SCTIssue> result = Lists.newArrayList();
+        synchronized (visibleIssues) {
+            Iterables.addAll(result, visibleIssues.get(uri));
+        }
+        return result;
+    }
 
-	@Override
-	public synchronized List<SCTIssue> getIssues(String uri) {
-		List<SCTIssue> result = Lists.newArrayList();
-		if (!liveValidationEnabled()) {
-			result.addAll(persistentIssues.get(uri));
-			return result;
-		} else {
-			result.addAll(liveIssues.get(uri));
-			Iterables.addAll(result, Iterables.filter(persistentIssues.get(uri), new Predicate<SCTIssue>() {
-				public boolean apply(SCTIssue input) {
-					return input.getType() == CheckType.NORMAL || input.getType() == CheckType.EXPENSIVE;
-				}
-			}));
-		}
-		return result;
+    protected boolean liveValidationEnabled() {
+        return DiagramActivator.getDefault().getPreferenceStore()
+                .getBoolean(StatechartPreferenceConstants.PREF_LIVE_VALIDATION);
+    }
 
-	}
+    protected boolean isSctMarker(final IMarker marker) {
+        try {
+            return isSctMarker(marker.getAttributes());
+        } catch (final CoreException e) {
+           e.printStackTrace();
+        }
+        return false;
+    }
 
-	protected boolean liveValidationEnabled() {
-		return DiagramActivator.getDefault().getPreferenceStore()
-				.getBoolean(StatechartPreferenceConstants.PREF_LIVE_VALIDATION);
-	}
+    protected boolean isSctMarker(final Map<?, ?> markerAttributes) {
+        return markerAttributes.get(SCTMarkerCreator.ELEMENT_ID) != null;
+    }
 
-	@Override
-	public void handleMarkerAdded(IMarker marker) {
-		if (!isSctMarker(marker))
-			return;
-		SCTIssue issue = createFromMarker(marker);
-		persistentIssues.put(issue.getSemanticURI(), issue);
-		notifyListeners(issue.getSemanticURI());
-	}
+    @Override
+    public void resourceChanged(final IResourceChangeEvent event) {
+        // after a change...
+        if ((IResourceChangeEvent.POST_CHANGE != event.getType())) {
+            return;
+        }
+        final IFile file = WorkspaceSynchronizer.getFile(currentResource);
+        final IResourceDelta deltaForFile = getDeltaForFile(event, file);
+        // if the current resource was changed...
+        if (deltaForFile == null) {
+            return;
+        }
+        try {
+            synchronized (visibleIssues) {
+                markerChangeProcessor.setCurrentIssues(visibleIssues);
+                // visit and prepare future visible issues
+                deltaForFile.accept(markerChangeProcessor);
+                //don't forget to clear current issues
+                visibleIssues.clear();
+                // set the issues visible in future...
+                visibleIssues.putAll(markerChangeProcessor.getCurrentIssues());
+            }
+            // notify interested listeners...
+            for (final String string : markerChangeProcessor.getChangedElementIDs()) {
+                notifyListeners(string);
+            }
 
-	protected boolean isSctMarker(IMarker marker) {
-		try {
-			return isSctMarker(marker.getAttributes());
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
+        } catch (final CoreException e) {
+            e.printStackTrace();
+        }
+    }
 
-	protected boolean isSctMarker(Map<?, ?> markerAttributes) {
-		return markerAttributes.get(SCTMarkerCreator.ELEMENT_ID) != null;
-	}
+    protected IResourceDelta getDeltaForFile(final IResourceChangeEvent event, final IFile file) {
+        final String[] segments = file.getFullPath().segments();
+        IResourceDelta currentDelta = event.getDelta();
+        for (final String segment : segments) {
+            final IResourceDelta matchingDelta = currentDelta.findMember(new Path(segment));
+            if (matchingDelta != null) {
+                currentDelta = matchingDelta;
+                continue;
+            }
+            //...this delta does not include the given file
+            return null;
+        }
+        return currentDelta;
+    }
 
-	@Override
-	public void handleMarkerDeleted(IMarker marker, @SuppressWarnings("rawtypes") Map attributes) {
-		if (!isSctMarker(attributes))
-			return;
-		String viewId = (String) attributes.get(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID);
-		String message = (String) attributes.get(IMarker.MESSAGE);
-		Collection<SCTIssue> collection = persistentIssues.get(viewId);
-		Iterator<SCTIssue> iterator = collection.iterator();
-		while (iterator.hasNext()) {
-			SCTIssue sctIssue = (SCTIssue) iterator.next();
-			if (sctIssue.getMessage().equals(message))
-				iterator.remove();
-		}
-		notifyListeners(viewId);
-
-	}
-
-	@Override
-	public void handleMarkerChanged(IMarker marker) {
-		if (!isSctMarker(marker))
-			return;
-		reloadMarkerIssues();
-	}
-
-	@Override
-	public void handleFileRenamed(IFile oldFile, IFile file) {
-		// Nothing to do
-	}
-
-	@Override
-	public void handleFileMoved(IFile oldFile, IFile file) {
-		// Nothing to do
-	}
-
-	@Override
-	public void handleFileDeleted(IFile file) {
-		// Nothing to do
-	}
-
-	@Override
-	public void handleFileChanged(IFile file) {
-		// Nothing to do
-	}
 }
