@@ -47,7 +47,7 @@ import com.google.inject.Inject;
  */
 public class DefaultValidationIssueStore implements IValidationIssueStore, IResourceChangeListener {
 
-    protected final List<IResourceIssueStoreListener> listeners;
+    protected final List<IResourceIssueStoreListener> listener;
     protected final Multimap<String, SCTIssue> visibleIssues;
     protected boolean connected = false;
 
@@ -57,7 +57,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
     private IMarkerChangeProcessor markerChangeProcessor;
  
     public DefaultValidationIssueStore() {
-        listeners = Lists.newArrayList();
+        listener = Lists.newArrayList();
         visibleIssues = ArrayListMultimap.create();
     }
 
@@ -67,29 +67,29 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 
     @Override
     public void addIssueStoreListener(final IResourceIssueStoreListener newListener) {
-        synchronized (listeners) {
-            listeners.add(newListener);
+        synchronized (listener) {
+            listener.add(newListener);
         }
     }
 
     @Override
     public void removeIssueStoreListener(final IResourceIssueStoreListener oldListener) {
-        synchronized (listeners) {
-            listeners.remove(oldListener);
+        synchronized (listener) {
+            listener.remove(oldListener);
         }
     }
 
     protected void notifyListeners() {
-        synchronized (listeners) {
-            for (final IResourceIssueStoreListener iResourceIssueStoreListener : listeners) {
+        synchronized (listener) {
+            for (final IResourceIssueStoreListener iResourceIssueStoreListener : listener) {
                 iResourceIssueStoreListener.issuesChanged();
             }
         }
     }
 
     protected void notifyListeners(final String semanticURI) {
-        synchronized (listeners) {
-            for (final IResourceIssueStoreListener iResourceIssueStoreListener : listeners) {
+        synchronized (listener) {
+            for (final IResourceIssueStoreListener iResourceIssueStoreListener : listener) {
                 if (semanticURI.equals(iResourceIssueStoreListener.getSemanticURI())) {
                     iResourceIssueStoreListener.issuesChanged();
                 }
@@ -137,8 +137,8 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
             ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
             connected = false;
             currentResource = null;
-            synchronized (listeners) {
-                listeners.clear();
+            synchronized (listener) {
+                listener.clear();
             }
         }
     }
