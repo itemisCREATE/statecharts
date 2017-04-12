@@ -5,13 +5,13 @@ testclass AlwaysOncycle for statechart AlwaysOncycle {
 	 	
 	 	enter
 		assert active (AlwaysOncycle.main_region.StateA)
-		while [value < 5] {
+		while (value < 5) {
 			cycle
 			assert active (AlwaysOncycle.main_region.StateA)
 		}
 		cycle
 		assert active ( AlwaysOncycle.main_region.StateB)
-		while [value < 5] {
+		while (value < 5) {
 			cycle
 			assert active (AlwaysOncycle.main_region.StateB)
 		}

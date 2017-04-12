@@ -6,7 +6,7 @@ testclass LogicalAndTests for statechart LogicalAnd {
 		enter
 		cycle
 		
-		assert x == 4 && b "logical and expression was executed in wrong order..."	
+		assert x == 4 && b message "logical and expression was executed in wrong order..."	
 	}
 
 }

@@ -6,9 +6,9 @@ testclass StatechartLocalReactions for statechart StatechartLocalReactions {
 				
 		assert active (StatechartLocalReactions.main_region.S1)
 		assert active (StatechartLocalReactions.region2.a)
-		while [ myInt < 10 ] {
+		while (myInt < 10) {
 			assert active (StatechartLocalReactions.region2.a)
-			if[myInt%2 == 0]{
+			if(myInt%2 == 0){
 				assert active (StatechartLocalReactions.main_region.S1)
 			}else {
 				assert active (StatechartLocalReactions.main_region.S2)
