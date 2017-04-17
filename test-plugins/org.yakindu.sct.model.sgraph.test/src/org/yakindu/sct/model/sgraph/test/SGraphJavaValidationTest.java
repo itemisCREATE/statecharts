@@ -124,7 +124,7 @@ public class SGraphJavaValidationTest {
 		prepareStateTest();
 
 		state.setName("");
-		assertFalse(validator.validate(state, diagnostics,
+		assertTrue(validator.validate(state, diagnostics,
 				new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_STATE_WITHOUT_NAME);
 	}
