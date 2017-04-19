@@ -3,7 +3,7 @@ p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/
 
 h1(#installation-guide). Installation Guide
 
-In order to start working with YAKINDU Statechart Tools, you have to install the software on your computer. We are assuming you have downloaded the software package and stored it somewhere on your machine.
+In order to modeling state machines with YAKINDU Statechart Tools, you have to install the software on your computer. We are assuming you have downloaded the software package and stored it somewhere on your machine.
 
 The installation process boils down to
 # checking the "system requirements":#system-requirements,
