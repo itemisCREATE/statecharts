@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.raiseevent.RaiseEventStatemachine;
 import org.yakindu.scr.raiseevent.RaiseEventStatemachine.State;
@@ -37,7 +35,8 @@ public class RaiseEventTest {
 	}
 	
 	@Test
-	public void testraiseEvent() {
+	public void testRaiseEvent
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.second_region_SateA));
 		 

@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.entryexitselftransition.EntryExitSelfTransitionStatemachine;
 import org.yakindu.scr.entryexitselftransition.EntryExitSelfTransitionStatemachine.State;
@@ -37,7 +35,8 @@ public class EntryExitSelfTransitionTest {
 	}
 	
 	@Test
-	public void testSelfTransitionToChildState() {
+	public void testSelfTransitionToChildState
+	() {
 		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue(statemachine.getEntries() == 1l);
@@ -55,7 +54,8 @@ public class EntryExitSelfTransitionTest {
 		 
 	}
 	@Test
-	public void testSelfTransitionFromChildState() {
+	public void testSelfTransitionFromChildState
+	() {
 		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue(statemachine.getEntries() == 1l);

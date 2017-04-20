@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.timedtransitions.TimedTransitionsStatemachine;
 import org.yakindu.scr.timedtransitions.TimedTransitionsStatemachine.State;
@@ -39,7 +37,8 @@ public class TimedTransitionsTest {
 	}
 	
 	@Test
-	public void testTimer01() {
+	public void testTimer01
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
 		 

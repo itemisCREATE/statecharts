@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.triggerexpressionprecedence.TriggerExpressionPrecedenceStatemachine;
 import org.yakindu.scr.triggerexpressionprecedence.TriggerExpressionPrecedenceStatemachine.State;
@@ -37,7 +35,8 @@ public class TriggerExpressionPrecedenceTest {
 	}
 	
 	@Test
-	public void testunsatisfiedTriggerAndFGuardFalseOrFalse() {
+	public void testUnsatisfiedTriggerAndFGuardFalseOrFalse
+	() {
 		statemachine.enter();
 		statemachine.setC1(false);
 		statemachine.setC2(false);
@@ -46,7 +45,8 @@ public class TriggerExpressionPrecedenceTest {
 		 
 	}
 	@Test
-	public void testunsatisfiedTriggerAndFGuardTrueOrFalse() {
+	public void testUnsatisfiedTriggerAndFGuardTrueOrFalse
+	() {
 		statemachine.enter();
 		statemachine.setC1(true);
 		statemachine.setC2(false);
@@ -55,7 +55,8 @@ public class TriggerExpressionPrecedenceTest {
 		 
 	}
 	@Test
-	public void testunsatisfiedTriggerAndFGuardFalseOrTrue() {
+	public void testUnsatisfiedTriggerAndFGuardFalseOrTrue
+	() {
 		statemachine.enter();
 		statemachine.setC1(false);
 		statemachine.setC2(true);
@@ -64,7 +65,8 @@ public class TriggerExpressionPrecedenceTest {
 		 
 	}
 	@Test
-	public void testunsatisfiedTriggerAndFGuardTrueOrTrue() {
+	public void testUnsatisfiedTriggerAndFGuardTrueOrTrue
+	() {
 		statemachine.enter();
 		statemachine.setC1(true);
 		statemachine.setC2(true);

@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.stringexpressions.StringExpressionsStatemachine;
 import org.yakindu.scr.stringexpressions.StringExpressionsStatemachine.State;
@@ -37,7 +35,8 @@ public class StringExpressionsTest {
 	}
 	
 	@Test
-	public void testStringExpressionsTest() {
+	public void testStringExpressionsTest
+	() {
 		assertTrue(statemachine.getQuotedStringX().equals("\"X\""));
 		 
 		assertTrue(statemachine.getQuotedStringY().equals("\"Y\""));

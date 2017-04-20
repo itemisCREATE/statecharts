@@ -1,5 +1,6 @@
 package tests
 testclass FeatureCalls for statechart FeatureCalls {
+	@Test
 	operation FeatureCalls(){
 		enter
 		assert active ( FeatureCalls.main_region.A)

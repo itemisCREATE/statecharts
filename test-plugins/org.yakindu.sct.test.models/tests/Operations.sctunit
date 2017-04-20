@@ -1,6 +1,6 @@
 package tests
 testclass Operations for statechart Operations {
-
+	@Test
 	operation operationsCalled (){
 		mock alwaysTrue returns ( true )
 		mock internalOperation3a returns (param1 + 1.0)

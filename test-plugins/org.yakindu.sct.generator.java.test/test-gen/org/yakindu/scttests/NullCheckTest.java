@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.nullcheck.NullCheckStatemachine;
 import org.yakindu.scr.nullcheck.NullCheckStatemachine.State;
@@ -37,7 +35,8 @@ public class NullCheckTest {
 	}
 	
 	@Test
-	public void testSimpleNullCheckTest() {
+	public void testSimpleNullCheckTest
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

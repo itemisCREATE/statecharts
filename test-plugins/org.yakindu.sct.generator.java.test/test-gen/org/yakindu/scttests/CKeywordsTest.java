@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.ckeywords.CKeywordsStatemachine;
 import org.yakindu.scr.ckeywords.CKeywordsStatemachine.State;
@@ -37,7 +35,8 @@ public class CKeywordsTest {
 	}
 	
 	@Test
-	public void testCKeywordsTest() {
+	public void testCKeywordsTest
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.auto_char));
 		 

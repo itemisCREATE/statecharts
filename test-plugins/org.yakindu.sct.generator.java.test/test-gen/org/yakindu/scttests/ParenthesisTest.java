@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.parenthesis.ParenthesisStatemachine;
 import org.yakindu.scr.parenthesis.ParenthesisStatemachine.State;
@@ -37,7 +35,8 @@ public class ParenthesisTest {
 	}
 	
 	@Test
-	public void testsimple() {
+	public void testSimple
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mainRegion_A));
 		 

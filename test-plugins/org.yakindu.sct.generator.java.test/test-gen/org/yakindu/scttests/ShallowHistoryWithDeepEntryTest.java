@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.shallowhistorywithdeepentry.ShallowHistoryWithDeepEntryStatemachine;
 import org.yakindu.scr.shallowhistorywithdeepentry.ShallowHistoryWithDeepEntryStatemachine.State;
@@ -37,7 +35,8 @@ public class ShallowHistoryWithDeepEntryTest {
 	}
 	
 	@Test
-	public void testnoDeepEntryWithinHistory() {
+	public void testNoDeepEntryWithinHistory
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Y));
 		 
@@ -55,7 +54,8 @@ public class ShallowHistoryWithDeepEntryTest {
 		 
 	}
 	@Test
-	public void testdeepEntryWithinHistory() {
+	public void testDeepEntryWithinHistory
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Y));
 		 
@@ -81,7 +81,8 @@ public class ShallowHistoryWithDeepEntryTest {
 		 
 	}
 	@Test
-	public void testdirectDeepEntryIntoHistory() {
+	public void testDirectDeepEntryIntoHistory
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Y));
 		 

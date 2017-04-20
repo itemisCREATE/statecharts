@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.simpleevent.SimpleEventStatemachine;
 import org.yakindu.scr.simpleevent.SimpleEventStatemachine.State;
@@ -37,7 +35,8 @@ public class SimpleEventTest {
 	}
 	
 	@Test
-	public void testsimpleEventTest() {
+	public void testSimpleEventTest
+	() {
 		statemachine.enter();
 		assertTrue("Expected A to be active",statemachine.isStateActive(State.main_region_A));
 		 

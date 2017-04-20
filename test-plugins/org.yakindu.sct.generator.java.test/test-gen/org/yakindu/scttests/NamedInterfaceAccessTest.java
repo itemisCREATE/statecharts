@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.namedinterfaceaccess.NamedInterfaceAccessStatemachine;
 import org.yakindu.scr.namedinterfaceaccess.NamedInterfaceAccessStatemachine.State;
@@ -37,7 +35,8 @@ public class NamedInterfaceAccessTest {
 	}
 	
 	@Test
-	public void testSafeOpenSuccess() {
+	public void testSafeOpenSuccess
+	() {
 		statemachine.enter();
 		statemachine.runCycle();
 		statemachine.getSCIUser().raiseNumberPressed(3l);

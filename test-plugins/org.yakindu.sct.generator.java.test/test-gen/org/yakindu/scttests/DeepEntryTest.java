@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.deepentry.DeepEntryStatemachine;
 import org.yakindu.scr.deepentry.DeepEntryStatemachine.State;
@@ -37,7 +35,8 @@ public class DeepEntryTest {
 	}
 	
 	@Test
-	public void testenterToSubstate() {
+	public void testEnterToSubstate
+	() {
 		assertTrue(statemachine.getX() == 0l);
 		 
 		assertTrue(statemachine.getY() == 0l);

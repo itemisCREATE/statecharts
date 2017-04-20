@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.guardedexit.GuardedExitStatemachine;
 import org.yakindu.scr.guardedexit.GuardedExitStatemachine.State;
@@ -37,7 +35,8 @@ public class GuardedExitTest {
 	}
 	
 	@Test
-	public void testExitTaken() {
+	public void testExitTaken
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -51,7 +50,8 @@ public class GuardedExitTest {
 		 
 	}
 	@Test
-	public void testExitNotTaken() {
+	public void testExitNotTaken
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.shallowhistory.ShallowHistoryStatemachine;
 import org.yakindu.scr.shallowhistory.ShallowHistoryStatemachine.State;
@@ -37,7 +35,8 @@ public class ShallowHistoryTest {
 	}
 	
 	@Test
-	public void testshallowHistoryTest() {
+	public void testShallowHistoryTest
+	() {
 		statemachine.enter();
 		statemachine.raiseEvent1();
 		statemachine.runCycle();

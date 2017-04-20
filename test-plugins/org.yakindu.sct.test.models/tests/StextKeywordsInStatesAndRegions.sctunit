@@ -1,5 +1,6 @@
 package tests
 testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAndRegions{
+	@Test
 	operation activeCheckWithSTextNamedStates(){ 
 		
 		enter

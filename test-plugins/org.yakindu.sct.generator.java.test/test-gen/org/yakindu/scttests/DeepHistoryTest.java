@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.deephistory.DeepHistoryStatemachine;
 import org.yakindu.scr.deephistory.DeepHistoryStatemachine.State;
@@ -37,7 +35,8 @@ public class DeepHistoryTest {
 	}
 	
 	@Test
-	public void testdeepHistoryTest() {
+	public void testDeepHistoryTest
+	() {
 		statemachine.enter();
 		statemachine.raiseEvent1();
 		statemachine.runCycle();

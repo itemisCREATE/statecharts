@@ -1,5 +1,6 @@
 package tests
 testclass PriorityValues for statechart PriorityValues {
+	@Test
 	operation transitionPriority(){
 		
 		enter
@@ -9,7 +10,7 @@ testclass PriorityValues for statechart PriorityValues {
 		cycle
 		assert active(PriorityValues.main_region.C)
 	}
-	
+	@Test
 	operation regionPriority(){
 		
 		enter

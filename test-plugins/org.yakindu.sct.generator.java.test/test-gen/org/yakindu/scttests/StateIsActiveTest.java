@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.stateisactive.StateIsActiveStatemachine;
 import org.yakindu.scr.stateisactive.StateIsActiveStatemachine.State;
@@ -37,7 +35,8 @@ public class StateIsActiveTest {
 	}
 	
 	@Test
-	public void teststateIsActive() {
+	public void testStateIsActive
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r1_R1A));
 		 

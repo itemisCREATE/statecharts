@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.castexpressions.CastExpressionsStatemachine;
 import org.yakindu.scr.castexpressions.CastExpressionsStatemachine.State;
@@ -37,7 +35,8 @@ public class CastExpressionsTest {
 	}
 	
 	@Test
-	public void testCastExpressionTest() {
+	public void testCastExpressionTest
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.getRealValue() == 5l);
 		 

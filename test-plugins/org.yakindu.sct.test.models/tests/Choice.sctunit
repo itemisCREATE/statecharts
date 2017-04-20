@@ -1,6 +1,6 @@
 package tests
 testclass Choice for statechart Choice { 
-
+	@Test
 	operation elseChoiceUsingNonDefaultTransition(){
 		enter
 		
@@ -11,7 +11,7 @@ testclass Choice for statechart Choice {
 		cycle		
 		assert active (Choice.main_region.C)
 	}
-	
+	@Test
 	operation elseChoiceUsingDefaultTransition(){
 		enter
 		
@@ -22,7 +22,7 @@ testclass Choice for statechart Choice {
 		cycle		
 		assert active (Choice.main_region.B)
 	}
-	
+	@Test
 	operation defaultChoiceUsingNonDefaultTransition(){
 		enter
 		
@@ -33,7 +33,7 @@ testclass Choice for statechart Choice {
 		cycle		
 		assert active (Choice.main_region.C)
 	}
-	
+	@Test
 	operation defaultChoiceUsingDefaultTransition(){
 		enter
 		
@@ -44,7 +44,7 @@ testclass Choice for statechart Choice {
 		cycle		
 		assert active (Choice.main_region.B)
 	}
-	
+	@Test
 	operation uncheckedChoiceUsingNonDefaultTransition(){
 		enter
 		
@@ -60,6 +60,7 @@ testclass Choice for statechart Choice {
 	 * An outgiong transition with an empty trigger 
 	 * will be handled like a default transition. 
 	 */
+	@Test
 	operation uncheckedChoiceUsingDefaultTransition(){
 		enter
 		
@@ -77,6 +78,7 @@ testclass Choice for statechart Choice {
 	 * This test case makes sure that default transition reordering
 	 * does not impact these transitions.
 	 */
+	@Test
 	operation alwaysTrueTransitionInChoice(){
 		enter
 		

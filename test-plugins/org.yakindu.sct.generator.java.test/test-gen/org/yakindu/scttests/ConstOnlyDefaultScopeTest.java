@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.constonlydefaultscope.ConstOnlyDefaultScopeStatemachine;
 import org.yakindu.scr.constonlydefaultscope.ConstOnlyDefaultScopeStatemachine.State;
@@ -37,13 +35,15 @@ public class ConstOnlyDefaultScopeTest {
 	}
 	
 	@Test
-	public void teststatechartEntry() {
+	public void testStatechartEntry
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.constOnlyDefaultScope_main_region_A));
 		 
 	}
 	@Test
-	public void teststateTransition() {
+	public void testStateTransition
+	() {
 		statemachine.enter();
 		statemachine.getSCIA().raiseE(1l);
 		statemachine.runCycle();

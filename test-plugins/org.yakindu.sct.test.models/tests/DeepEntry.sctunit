@@ -1,6 +1,7 @@
 package tests
 testclass DeepEntry for statechart DeepEntry {
 	
+	@Test
 	operation enterToSubstate(){
 		
 		assert x == 0

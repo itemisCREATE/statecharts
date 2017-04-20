@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.readonlyvariable.ReadOnlyVariableStatemachine;
 import org.yakindu.scr.readonlyvariable.ReadOnlyVariableStatemachine.State;
@@ -37,7 +35,8 @@ public class ReadOnlyVariableTest {
 	}
 	
 	@Test
-	public void testReadOnlyVariableTest() {
+	public void testReadOnlyVariableTest
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		 

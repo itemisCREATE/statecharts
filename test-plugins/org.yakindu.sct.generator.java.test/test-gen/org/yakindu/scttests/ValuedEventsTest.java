@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.valuedevents.ValuedEventsStatemachine;
 import org.yakindu.scr.valuedevents.ValuedEventsStatemachine.State;
@@ -37,7 +35,8 @@ public class ValuedEventsTest {
 	}
 	
 	@Test
-	public void testvaluedEventsTest() {
+	public void testValuedEventsTest
+	() {
 		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue(statemachine.getMyString().equals("sct"));

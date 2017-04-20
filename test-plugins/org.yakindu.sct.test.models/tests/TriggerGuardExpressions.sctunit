@@ -2,6 +2,7 @@ package tests
 testclass TriggerGuardExpressions for statechart TriggerGuardExpressions {
 	
 	/** If the guard is true then the transition will be taken on any event that matches a trigger.  */
+	@Test
 	operation trueGuard(){
 
 		enter
@@ -27,6 +28,7 @@ testclass TriggerGuardExpressions for statechart TriggerGuardExpressions {
 	}
 	
 	/** If the guard is false then the transition will be taken on any event that matches a trigger.  */
+	@Test
 	operation falseGuard(){
 
 		enter

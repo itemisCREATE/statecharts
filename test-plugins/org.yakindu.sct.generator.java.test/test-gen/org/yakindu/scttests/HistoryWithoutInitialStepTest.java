@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.historywithoutinitialstep.HistoryWithoutInitialStepStatemachine;
 import org.yakindu.scr.historywithoutinitialstep.HistoryWithoutInitialStepStatemachine.State;
@@ -37,7 +35,8 @@ public class HistoryWithoutInitialStepTest {
 	}
 	
 	@Test
-	public void testenterThroughInitialEntry() {
+	public void testEnterThroughInitialEntry
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -51,7 +50,8 @@ public class HistoryWithoutInitialStepTest {
 		 
 	}
 	@Test
-	public void testenterCThroughHistory() {
+	public void testEnterCThroughHistory
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -69,7 +69,8 @@ public class HistoryWithoutInitialStepTest {
 		 
 	}
 	@Test
-	public void testenterDThroughHistory() {
+	public void testEnterDThroughHistory
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

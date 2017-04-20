@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.stextkeywordsinstatesandregions.STextKeywordsInStatesAndRegionsStatemachine;
 import org.yakindu.scr.stextkeywordsinstatesandregions.STextKeywordsInStatesAndRegionsStatemachine.State;
@@ -37,7 +35,8 @@ public class STextKeywordsInStatesAndRegionsTest {
 	}
 	
 	@Test
-	public void testactiveCheckWithSTextNamedStates() {
+	public void testActiveCheckWithSTextNamedStates
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		 

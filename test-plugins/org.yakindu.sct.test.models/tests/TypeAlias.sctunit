@@ -1,5 +1,6 @@
 package tests
 testclass TypeAlias for statechart TypeAlias{
+	@Test
 	operation TypeAliasTest(){ 
 		enter
 		assert active(TypeAlias.main_region.Start)

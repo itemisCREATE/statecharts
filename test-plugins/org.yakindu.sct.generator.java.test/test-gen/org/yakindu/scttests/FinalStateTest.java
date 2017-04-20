@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.finalstate.FinalStateStatemachine;
 import org.yakindu.scr.finalstate.FinalStateStatemachine.State;
@@ -37,7 +35,8 @@ public class FinalStateTest {
 	}
 	
 	@Test
-	public void testStatechartNameTest() {
+	public void testStatechartNameTest
+	() {
 		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue(statemachine.isFinal());

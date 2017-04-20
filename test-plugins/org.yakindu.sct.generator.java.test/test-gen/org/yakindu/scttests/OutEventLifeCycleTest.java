@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.outeventlifecycle.OutEventLifeCycleStatemachine;
 import org.yakindu.scr.outeventlifecycle.OutEventLifeCycleStatemachine.State;
@@ -37,7 +35,8 @@ public class OutEventLifeCycleTest {
 	}
 	
 	@Test
-	public void testavailableAfterCycle() {
+	public void testAvailableAfterCycle
+	() {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.runCycle();
@@ -45,7 +44,8 @@ public class OutEventLifeCycleTest {
 		 
 	}
 	@Test
-	public void testavailableWithinCycle() {
+	public void testAvailableWithinCycle
+	() {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.runCycle();
@@ -53,7 +53,8 @@ public class OutEventLifeCycleTest {
 		 
 	}
 	@Test
-	public void testunvailableWithin2ndCycle() {
+	public void testUnvailableWithin2ndCycle
+	() {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.runCycle();
@@ -62,7 +63,8 @@ public class OutEventLifeCycleTest {
 		 
 	}
 	@Test
-	public void testunvailableAfter2ndCycle() {
+	public void testUnvailableAfter2ndCycle
+	() {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.runCycle();

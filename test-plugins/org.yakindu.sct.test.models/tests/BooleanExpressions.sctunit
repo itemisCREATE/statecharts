@@ -1,5 +1,6 @@
 package tests
 testclass BooleanExpressions for statechart BooleanExpressions {
+	@Test
 	operation booleanExpressions(){
 		enter
 		assert active (BooleanExpressions.main_region.StateA)

@@ -3,7 +3,7 @@ package tests
  * A shallow history must also for child states that are only indirectly entered through one of the childs.  
  */
 testclass ShallowHistoryWithDeepEntry for statechart ShallowHistoryWithDeepEntry{
-	
+	@Test
 	operation noDeepEntryWithinHistory(){ 
 		enter
 		assert active(ShallowHistoryWithDeepEntry.main_region.Y) 
@@ -22,7 +22,7 @@ testclass ShallowHistoryWithDeepEntry for statechart ShallowHistoryWithDeepEntry
 		 
 	} 
 	
-	
+	@Test
 	operation deepEntryWithinHistory(){
 		enter
 		assert active(ShallowHistoryWithDeepEntry.main_region.Y) 
@@ -46,7 +46,7 @@ testclass ShallowHistoryWithDeepEntry for statechart ShallowHistoryWithDeepEntry
 		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B)
 		
 	}
-	
+	@Test
 	operation directDeepEntryIntoHistory(){
 		enter
 		assert active(ShallowHistoryWithDeepEntry.main_region.Y) 

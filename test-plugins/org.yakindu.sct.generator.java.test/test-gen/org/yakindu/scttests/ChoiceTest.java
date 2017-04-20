@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.choice.ChoiceStatemachine;
 import org.yakindu.scr.choice.ChoiceStatemachine.State;
@@ -37,7 +35,8 @@ public class ChoiceTest {
 	}
 	
 	@Test
-	public void testelseChoiceUsingNonDefaultTransition() {
+	public void testElseChoiceUsingNonDefaultTransition
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -48,7 +47,8 @@ public class ChoiceTest {
 		 
 	}
 	@Test
-	public void testelseChoiceUsingDefaultTransition() {
+	public void testElseChoiceUsingDefaultTransition
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -59,7 +59,8 @@ public class ChoiceTest {
 		 
 	}
 	@Test
-	public void testdefaultChoiceUsingNonDefaultTransition() {
+	public void testDefaultChoiceUsingNonDefaultTransition
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -70,7 +71,8 @@ public class ChoiceTest {
 		 
 	}
 	@Test
-	public void testdefaultChoiceUsingDefaultTransition() {
+	public void testDefaultChoiceUsingDefaultTransition
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -81,7 +83,8 @@ public class ChoiceTest {
 		 
 	}
 	@Test
-	public void testuncheckedChoiceUsingNonDefaultTransition() {
+	public void testUncheckedChoiceUsingNonDefaultTransition
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -92,7 +95,8 @@ public class ChoiceTest {
 		 
 	}
 	@Test
-	public void testuncheckedChoiceUsingDefaultTransition() {
+	public void testUncheckedChoiceUsingDefaultTransition
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -103,7 +107,8 @@ public class ChoiceTest {
 		 
 	}
 	@Test
-	public void testalwaysTrueTransitionInChoice() {
+	public void testAlwaysTrueTransitionInChoice
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

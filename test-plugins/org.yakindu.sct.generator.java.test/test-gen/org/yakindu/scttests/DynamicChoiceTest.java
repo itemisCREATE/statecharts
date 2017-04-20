@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.dynamicchoice.DynamicChoiceStatemachine;
 import org.yakindu.scr.dynamicchoice.DynamicChoiceStatemachine.State;
@@ -37,7 +35,8 @@ public class DynamicChoiceTest {
 	}
 	
 	@Test
-	public void testDynamicChoiceTest() {
+	public void testDynamicChoiceTest
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
 		 

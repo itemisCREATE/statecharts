@@ -1,5 +1,6 @@
 package tests
 testclass CKeywords for statechart CKeywords { 
+	@Test
 	operation CKeywordsTest(){ 
 		enter
 		assert active ( CKeywords.auto.char ) 

@@ -1,6 +1,6 @@
 package tests
 testclass PerformanceTests for statechart PerformanceTest {
-
+	@Test
 	operation test_100_000 () {
 
 		enter
@@ -23,6 +23,7 @@ testclass PerformanceTests for statechart PerformanceTest {
 
 		assert a > 2
 	} //----------------
+	@Test
 	operation test_1_000_000 () {
 
 		enter
@@ -44,7 +45,9 @@ testclass PerformanceTests for statechart PerformanceTest {
 		}
 
 		assert a > 2
-	} operation test_10_000_000 () {
+	}
+	@Test 
+	operation test_10_000_000 () {
 
 		enter
 

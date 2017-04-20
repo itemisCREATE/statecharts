@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.entrychoice.EntryChoiceStatemachine;
 import org.yakindu.scr.entrychoice.EntryChoiceStatemachine.State;
@@ -37,7 +35,8 @@ public class EntryChoiceTest {
 	}
 	
 	@Test
-	public void testEntryChoiceTest() {
+	public void testEntryChoiceTest
+	() {
 		statemachine.enter();
 		statemachine.runCycle();
 		statemachine.runCycle();

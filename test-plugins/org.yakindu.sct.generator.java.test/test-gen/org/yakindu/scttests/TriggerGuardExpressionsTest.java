@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.triggerguardexpressions.TriggerGuardExpressionsStatemachine;
 import org.yakindu.scr.triggerguardexpressions.TriggerGuardExpressionsStatemachine.State;
@@ -37,7 +35,8 @@ public class TriggerGuardExpressionsTest {
 	}
 	
 	@Test
-	public void testtrueGuard() {
+	public void testTrueGuard
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -63,7 +62,8 @@ public class TriggerGuardExpressionsTest {
 		 
 	}
 	@Test
-	public void testfalseGuard() {
+	public void testFalseGuard
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

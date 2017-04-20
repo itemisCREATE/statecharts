@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.samenamedifferentregion.SameNameDifferentRegionStatemachine;
 import org.yakindu.scr.samenamedifferentregion.SameNameDifferentRegionStatemachine.State;
@@ -37,7 +35,8 @@ public class SameNameDifferentRegionTest {
 	}
 	
 	@Test
-	public void testsameNameDifferenRegionTest() {
+	public void testSameNameDifferenRegionTest
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		 

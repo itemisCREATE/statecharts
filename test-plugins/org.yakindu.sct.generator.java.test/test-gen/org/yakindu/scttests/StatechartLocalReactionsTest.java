@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.statechartlocalreactions.StatechartLocalReactionsStatemachine;
 import org.yakindu.scr.statechartlocalreactions.StatechartLocalReactionsStatemachine.State;
@@ -37,7 +35,8 @@ public class StatechartLocalReactionsTest {
 	}
 	
 	@Test
-	public void teststatechartLocalReactionsTest() {
+	public void testStatechartLocalReactionsTest
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_S1));
 		 
@@ -47,15 +46,13 @@ public class StatechartLocalReactionsTest {
 			assertTrue(statemachine.isStateActive(State.region2_a));
 			 
 			if (statemachine.getMyInt()%2l == 0l) {
-						assertTrue(statemachine.isStateActive(State.main_region_S1));
-						 
-						;
-					  }
-					else {
-						assertTrue(statemachine.isStateActive(State.main_region_S2));
-						 
-						;
-					}
+				assertTrue(statemachine.isStateActive(State.main_region_S1));
+				 
+			}
+			else {
+				assertTrue(statemachine.isStateActive(State.main_region_S2));
+				 
+			}
 			statemachine.runCycle();
 		}
 	}

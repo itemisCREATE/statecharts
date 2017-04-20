@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.emptytransition.EmptyTransitionStatemachine;
 import org.yakindu.scr.emptytransition.EmptyTransitionStatemachine.State;
@@ -37,7 +35,8 @@ public class EmptyTransitionTest {
 	}
 	
 	@Test
-	public void testEmptyTransitionTest() {
+	public void testEmptyTransitionTest
+	() {
 		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue(!statemachine.isStateActive(State.main_region_B));

@@ -1,5 +1,6 @@
 package tests
 testclass DeepHistory for statechart DeepHistory {
+	@Test
 	operation deepHistoryTest(){
 		// Change active states to State9;
 		

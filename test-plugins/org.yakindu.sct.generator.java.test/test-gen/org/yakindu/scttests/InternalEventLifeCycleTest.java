@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.internaleventlifecycle.InternalEventLifeCycleStatemachine;
 import org.yakindu.scr.internaleventlifecycle.InternalEventLifeCycleStatemachine.State;
@@ -37,7 +35,8 @@ public class InternalEventLifeCycleTest {
 	}
 	
 	@Test
-	public void testInternalEventLifeCycleTest() {
+	public void testInternalEventLifeCycleTest
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r1_A));
 		 

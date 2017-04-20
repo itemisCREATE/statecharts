@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.syncfork.SyncForkStatemachine;
 import org.yakindu.scr.syncfork.SyncForkStatemachine.State;
@@ -37,7 +35,8 @@ public class SyncForkTest {
 	}
 	
 	@Test
-	public void testsyncForkTest() {
+	public void testSyncForkTest
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

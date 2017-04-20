@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.conditionalexpressions.ConditionalExpressionsStatemachine;
 import org.yakindu.scr.conditionalexpressions.ConditionalExpressionsStatemachine.State;
@@ -37,7 +35,8 @@ public class ConditionalExpressionTest {
 	}
 	
 	@Test
-	public void testConditionalExpressionTest() {
+	public void testConditionalExpressionTest
+	() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
