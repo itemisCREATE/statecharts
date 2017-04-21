@@ -36,7 +36,7 @@ import com.google.inject.util.Modules;
  */
 public class GeneratorExecutorLookup {
 
-	protected Module getContextModule() {
+	protected Module getContextModule(GeneratorEntry entry, IGeneratorDescriptor description) {
 		return new Module() {
 			@Override
 			public void configure(Binder binder) {
@@ -74,7 +74,7 @@ public class GeneratorExecutorLookup {
 
 	protected Injector createInjector(GeneratorEntry entry, IGeneratorDescriptor description, String generatorId) {
 		Module generatorSpecificModule = description.getBindings(entry);
-		Module executionContextModule = getContextModule();
+		Module executionContextModule = getContextModule(entry, description);
 		Module domainModule = DomainRegistry.getDomain(entry.getElementRef()).getModule(IDomain.FEATURE_GENERATOR,
 				generatorId);
 		Module combined = Modules.override(Modules.combine(generatorSpecificModule, executionContextModule))

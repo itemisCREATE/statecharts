@@ -21,6 +21,7 @@ import org.junit.Assert;
 import org.yakindu.sct.generator.builder.EclipseContextGeneratorExecutorLookup;
 import org.yakindu.sct.generator.core.console.IConsoleLogger;
 import org.yakindu.sct.generator.core.execution.IGeneratorEntryExecutor;
+import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
 import org.yakindu.sct.generator.core.library.impl.DefaultCoreLibraryHelper;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
@@ -60,8 +61,8 @@ public abstract class AbstractJavaGeneratorTest {
 			targetProject.open(new NullProgressMonitor());
 		}
 		IGeneratorEntryExecutor executor = new EclipseContextGeneratorExecutorLookup() {
-			protected Module getContextModule() {
-				return Modules.override(super.getContextModule()).with(new Module() {
+			protected Module getContextModule(GeneratorEntry entry, IGeneratorDescriptor description) {
+				return Modules.override(super.getContextModule(entry, description)).with(new Module() {
 					@Override
 					public void configure(Binder binder) {
 						binder.bind(IConsoleLogger.class).to(TestLogger.class);
