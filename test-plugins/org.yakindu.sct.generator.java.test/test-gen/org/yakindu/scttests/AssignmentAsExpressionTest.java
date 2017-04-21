@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.assignmentasexpression.AssignmentAsExpressionStatemachine;
 import org.yakindu.scr.assignmentasexpression.AssignmentAsExpressionStatemachine.State;
@@ -37,7 +35,7 @@ public class AssignmentAsExpressionTest {
 	}
 	
 	@Test
-	public void testsimpleAssignment() {
+	public void testSimpleAssignment() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Add));
 		 

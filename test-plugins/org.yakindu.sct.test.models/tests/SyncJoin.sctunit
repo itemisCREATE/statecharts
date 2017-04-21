@@ -1,7 +1,7 @@
 package tests
 testclass SyncJoin for statechart SyncJoin {
 //	test syncJoin_C2_Waits 'test intention' { 
-  
+  	@Test
 	operation syncJoin_C2_Waits(){   
 		
 		enter
@@ -56,7 +56,7 @@ testclass SyncJoin for statechart SyncJoin {
 		cycle
 		assert active (SyncJoin.main_region.A)
 	}
-	
+	@Test
 	operation syncJoin_D2_Waits(){   
 		
 		enter
@@ -98,6 +98,7 @@ testclass SyncJoin for statechart SyncJoin {
 	 * 
 	 * There was a bug that lead to a multiple entry action call depending on the number of joined transitions.
 	 */
+	 @Test
 	operation doubleEntryActionBug(){
 		enter
 		

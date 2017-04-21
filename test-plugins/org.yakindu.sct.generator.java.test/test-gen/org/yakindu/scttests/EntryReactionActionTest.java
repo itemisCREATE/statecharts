@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.entryreactionaction.EntryReactionActionStatemachine;
 import org.yakindu.scr.entryreactionaction.EntryReactionActionStatemachine.State;
@@ -37,7 +35,7 @@ public class EntryReactionActionTest {
 	}
 	
 	@Test
-	public void testentryTransitionActionOnStatechartEnter() {
+	public void testEntryTransitionActionOnStatechartEnter() {
 		statemachine.enter();
 		assertTrue(statemachine.getEnteredR1());
 		 
@@ -49,7 +47,7 @@ public class EntryReactionActionTest {
 		 
 	}
 	@Test
-	public void testentryOnRTS() {
+	public void testEntryOnRTS() {
 		statemachine.enter();
 		statemachine.raiseB();
 		statemachine.runCycle();
@@ -71,7 +69,7 @@ public class EntryReactionActionTest {
 		 
 	}
 	@Test
-	public void testnoEntryTransitionActionOnHistory() {
+	public void testNoEntryTransitionActionOnHistory() {
 		statemachine.enter();
 		statemachine.raiseB();
 		statemachine.runCycle();

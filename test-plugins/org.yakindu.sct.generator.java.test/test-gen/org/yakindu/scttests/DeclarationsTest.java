@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.declarations.DeclarationsStatemachine;
 import org.yakindu.scr.declarations.DeclarationsStatemachine.State;
@@ -37,7 +35,7 @@ public class DeclarationsTest {
 	}
 	
 	@Test
-	public void testdeclarationsTest() {
+	public void testDeclarationsTest() {
 		statemachine.enter();
 	}
 }

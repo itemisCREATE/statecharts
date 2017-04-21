@@ -4,6 +4,7 @@ testclass ConstOnlyDefaultScope for statechart declarations.ConstOnlyDefaultScop
 	/*
 	 * Test is the statechart is entered correctly.
 	 */	
+	@Test 
 	operation statechartEntry(){ 		
 		enter		 
 		assert active(declarations.ConstOnlyDefaultScope.main_region.A)
@@ -14,6 +15,7 @@ testclass ConstOnlyDefaultScope for statechart declarations.ConstOnlyDefaultScop
 	/*
 	 * Test is the statechart is entered correctly.
 	 */	
+	@Test
 	operation stateTransition(){
 		
 		enter

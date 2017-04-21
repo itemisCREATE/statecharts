@@ -1,8 +1,8 @@
 package tests
 testclass AlwaysOncycle for statechart AlwaysOncycle {
-
-	 operation alwaysOncycleTest (){
-	 	
+	
+	@Test
+ 	operation alwaysOncycleTest (){
 	 	enter
 		assert active (AlwaysOncycle.main_region.StateA)
 		while (value < 5) {

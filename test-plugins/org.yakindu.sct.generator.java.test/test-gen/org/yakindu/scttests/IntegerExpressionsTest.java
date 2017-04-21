@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.integerexpressions.IntegerExpressionsStatemachine;
 import org.yakindu.scr.integerexpressions.IntegerExpressionsStatemachine.State;
@@ -37,7 +35,7 @@ public class IntegerExpressionsTest {
 	}
 	
 	@Test
-	public void testintegerExpressions() {
+	public void testIntegerExpressions() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		 

@@ -1,5 +1,6 @@
 package tests
 testclass EntryChoice for statechart EntryChoice {
+	@Test
 	operation EntryChoiceTest(){
 		enter
 		cycle

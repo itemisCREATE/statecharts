@@ -1,5 +1,6 @@
 package tests
 testclass EmptyTransition for statechart EmptyTransition{
+	@Test
 	operation EmptyTransitionTest(){ 
 		enter
 		cycle

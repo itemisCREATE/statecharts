@@ -1,8 +1,8 @@
 package tests
 testclass AssignmentAsExpression for statechart AssignmentAsExpression{
 	
-	 
-	  operation simpleAssignment(){ 
+	@Test 
+  	operation simpleAssignment(){ 
 	  	enter
 	  	assert active(AssignmentAsExpression.main_region.Add)
 	  		  	

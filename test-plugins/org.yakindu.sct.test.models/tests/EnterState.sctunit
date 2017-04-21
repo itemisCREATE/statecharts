@@ -4,6 +4,7 @@ testclass EnterState for statechart EnterState {
 		
 	/* An entry without a specified entry point must enter the region through the default entry.
 	 */
+	@Test
 	operation defaultEntry(){ 
 		enter
 		assert active(EnterState.r.A)
@@ -15,6 +16,7 @@ testclass EnterState for statechart EnterState {
 
 	/* An entry with a specified entry point must take the entry node with the specified name.
 	 */
+	@Test
 	operation namedEntryThroughNamedTransition(){ 
 		enter
 		assert active(EnterState.r.A)
@@ -26,6 +28,7 @@ testclass EnterState for statechart EnterState {
 
 	/* An entry with a specified entry point that does not match any entry node by name must be taken through the default entry node.
 	 */
+	@Test
 	operation namedEntryThroughDefaultTransition(){ 
 		enter
 		assert active(EnterState.r.A)

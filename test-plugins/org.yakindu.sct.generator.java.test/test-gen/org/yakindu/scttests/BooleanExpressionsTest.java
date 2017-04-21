@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.booleanexpressions.BooleanExpressionsStatemachine;
 import org.yakindu.scr.booleanexpressions.BooleanExpressionsStatemachine.State;
@@ -37,7 +35,7 @@ public class BooleanExpressionsTest {
 	}
 	
 	@Test
-	public void testbooleanExpressions() {
+	public void testBooleanExpressions() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		 

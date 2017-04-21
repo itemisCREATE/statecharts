@@ -1,5 +1,6 @@
 package tests
 testclass IntegerExpressions for statechart IntegerExpressions {
+	@Test
 	operation integerExpressions(){
 		
 		enter

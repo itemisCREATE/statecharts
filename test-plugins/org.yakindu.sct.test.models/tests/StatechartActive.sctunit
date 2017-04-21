@@ -2,17 +2,20 @@ package tests
 testclass StatechartActive for statechart StatechartActive {
 	
 	/** A state machine must be inactive before it has been entered.  */
+	@Test
 	operation inactiveBeforeEnter(){
 		assert !is_active
 	}
 	
 	/** A state machine must be active after it has been entered. */
+	@Test
 	operation activeAfterEnter(){
 		enter
 		assert is_active
 	}
 	
 	/** A state machine must be inactive after it has been exited. */
+	@Test
 	operation inactiveAfterExit(){
 		enter
 		exit
@@ -20,6 +23,7 @@ testclass StatechartActive for statechart StatechartActive {
 	}
 
 	/** A state machine must be active after it has been exited and reentered. */
+	@Test
 	operation activeAfterReenter(){
 		enter
 		exit

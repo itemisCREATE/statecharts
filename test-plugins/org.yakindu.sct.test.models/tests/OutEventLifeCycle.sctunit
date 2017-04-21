@@ -6,6 +6,7 @@ testclass OutEventLifeCycle for statechart OutEventLifeCycle {
 	
 	
 	/* an outgoing event must be accessible after the cycle that raised the event. */
+	@Test
 	operation availableAfterCycle(){
 		enter
 
@@ -17,6 +18,7 @@ testclass OutEventLifeCycle for statechart OutEventLifeCycle {
 	} 
 		
 	/* an outgoing event must be accessible within the cycle that raised the event. */
+	@Test
 	operation availableWithinCycle(){
 		enter
 
@@ -28,6 +30,7 @@ testclass OutEventLifeCycle for statechart OutEventLifeCycle {
 		
 		
 	/* an outgoing event that was raised in one cycle is not available within the next cycle */
+	@Test
 	operation unvailableWithin2ndCycle(){
 		enter
 
@@ -40,6 +43,7 @@ testclass OutEventLifeCycle for statechart OutEventLifeCycle {
 		
 		
 	/* an outgoing event that was raised in one cycle is not available after the following cycle */
+	@Test
 	operation unvailableAfter2ndCycle(){
 		enter
 

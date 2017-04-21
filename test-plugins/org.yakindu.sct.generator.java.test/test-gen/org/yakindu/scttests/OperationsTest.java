@@ -19,9 +19,7 @@ import org.mockito.ArgumentCaptor;
 import static org.mockito.ArgumentCaptor.forClass;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.operations.OperationsStatemachine;
 import org.yakindu.scr.operations.OperationsStatemachine.State;
@@ -57,7 +55,7 @@ public class OperationsTest {
 	}
 	
 	@Test
-	public void testoperationsCalled() {
+	public void testOperationsCalled() {
 		when(defaultMock.alwaysTrue()).thenReturn(true);
 		 
 		when(internalMock.internalOperation3a(anyDouble())).thenAnswer(new Answer<Double>() {

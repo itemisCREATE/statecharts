@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.priorityvalues.PriorityValuesStatemachine;
 import org.yakindu.scr.priorityvalues.PriorityValuesStatemachine.State;
@@ -37,7 +35,7 @@ public class PriorityValuesTest {
 	}
 	
 	@Test
-	public void testtransitionPriority() {
+	public void testTransitionPriority() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -47,7 +45,7 @@ public class PriorityValuesTest {
 		 
 	}
 	@Test
-	public void testregionPriority() {
+	public void testRegionPriority() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.someRegion_A));
 		 

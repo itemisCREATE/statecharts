@@ -1,5 +1,6 @@
 package tests
 testclass LocalReactions for statechart LocalReactions{
+	@Test
 	operation LocalReactionsTest(){ 
 		
 		enter

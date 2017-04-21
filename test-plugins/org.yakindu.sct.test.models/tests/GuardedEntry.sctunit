@@ -1,6 +1,6 @@
 package tests
 testclass GuardedEntry for statechart GuardedEntry{
-	
+	@Test
 	operation EntryNotTakenOnStatechartEnter(){ 
 		
 		assert guard == false
@@ -11,7 +11,7 @@ testclass GuardedEntry for statechart GuardedEntry{
 		assert done == false
 		  
 	} 
-
+	@Test
 	operation EntryTakenOnStatechartEnter()
 	{  
 		
@@ -23,7 +23,7 @@ testclass GuardedEntry for statechart GuardedEntry{
 		assert active(GuardedEntry.main_region.A)
 		assert done == true
 	}   
-	 
+	@Test
 	operation EntryTakenInTransition(){
 		
 		enter 
@@ -40,7 +40,7 @@ testclass GuardedEntry for statechart GuardedEntry{
 		assert active(GuardedEntry.main_region.A)
 		assert done
 	} 
-		
+	@Test
 	operation EntryNotTakenInTransition(){ 
 
 		enter

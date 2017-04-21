@@ -8,6 +8,7 @@ testclass TriggerExpressionPrecedence for statechart expressions.TriggerExpressi
 	
 	
 	/** If a trigger is specified and not active then the trigger condition should not become true. */
+	@Test
 	operation unsatisfiedTriggerAndFGuardFalseOrFalse(){
 
 		enter
@@ -22,6 +23,7 @@ testclass TriggerExpressionPrecedence for statechart expressions.TriggerExpressi
 
 
 	/** If a trigger is specified and not active then the trigger condition should not become true. */
+	@Test
 	operation unsatisfiedTriggerAndFGuardTrueOrFalse(){
 
 		enter
@@ -36,6 +38,7 @@ testclass TriggerExpressionPrecedence for statechart expressions.TriggerExpressi
 
 
 	/** If a trigger is specified and not active then the trigger condition should not become true. */
+	@Test
 	operation unsatisfiedTriggerAndFGuardFalseOrTrue(){
 
 		enter
@@ -50,6 +53,7 @@ testclass TriggerExpressionPrecedence for statechart expressions.TriggerExpressi
 
 
 	/** If a trigger is specified and not active then the trigger condition should not become true. */
+	@Test
 	operation unsatisfiedTriggerAndFGuardTrueOrTrue(){
 
 		enter

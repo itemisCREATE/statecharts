@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.exitstate.ExitStateStatemachine;
 import org.yakindu.scr.exitstate.ExitStateStatemachine.State;
@@ -37,7 +35,7 @@ public class ExitStateTest {
 	}
 	
 	@Test
-	public void testdefaultExit() {
+	public void testDefaultExit() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		 
@@ -47,7 +45,7 @@ public class ExitStateTest {
 		 
 	}
 	@Test
-	public void testnamedExitThroughNamedTransition() {
+	public void testNamedExitThroughNamedTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		 
@@ -57,7 +55,7 @@ public class ExitStateTest {
 		 
 	}
 	@Test
-	public void testnamedExitThroughDefaultTransition() {
+	public void testNamedExitThroughDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		 
@@ -67,7 +65,7 @@ public class ExitStateTest {
 		 
 	}
 	@Test
-	public void testremainInA() {
+	public void testRemainInA() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		 

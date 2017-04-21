@@ -1,6 +1,6 @@
 package tests
 testclass EntryExitSelfTransition for statechart EntryExitSelfTransition{
-
+	@Test
 	operation SelfTransitionToChildState(){ 
 		enter
 		
@@ -16,7 +16,7 @@ testclass EntryExitSelfTransition for statechart EntryExitSelfTransition{
 		assert active(EntryExitSelfTransition.main_region.A._region0.C)
 	} 
 
-
+	@Test
 	operation SelfTransitionFromChildState(){ 
 		enter
 		

@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.syncjoin.SyncJoinStatemachine;
 import org.yakindu.scr.syncjoin.SyncJoinStatemachine.State;
@@ -37,7 +35,7 @@ public class SyncJoinTest {
 	}
 	
 	@Test
-	public void testsyncJoin_C2_Waits() {
+	public void testSyncJoin_C2_Waits() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		 
@@ -95,7 +93,7 @@ public class SyncJoinTest {
 		 
 	}
 	@Test
-	public void testsyncJoin_D2_Waits() {
+	public void testSyncJoin_D2_Waits() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		 
@@ -136,7 +134,7 @@ public class SyncJoinTest {
 		 
 	}
 	@Test
-	public void testdoubleEntryActionBug() {
+	public void testDoubleEntryActionBug() {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.raiseF();

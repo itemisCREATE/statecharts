@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.logicalor.LogicalOrStatemachine;
 import org.yakindu.scr.logicalor.LogicalOrStatemachine.State;
@@ -37,7 +35,7 @@ public class LogicalOrTestsTest {
 	}
 	
 	@Test
-	public void testoperandEvaluationOrder() {
+	public void testOperandEvaluationOrder() {
 		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue("logical or expression was executed in wrong order...",statemachine.getX() == 4l && statemachine.getB());

@@ -1,6 +1,6 @@
 package tests
 testclass GuardedExit for statechart GuardedExit {
-		 
+	@Test
 	operation ExitTaken(){ 
 
 		enter
@@ -14,7 +14,7 @@ testclass GuardedExit for statechart GuardedExit {
 		assert active(GuardedExit.main_region.B)
 		assert ! done 
 	} 
-		
+	@Test
 	operation ExitNotTaken(){
 		
 		enter 

@@ -1,5 +1,6 @@
 package tests
 testclass OperationsWithoutBraces for statechart OperationsWithoutBraces{
+	@Test
 	operation OperationsWithoutBracesTest(){ 
 		enter
 		assert active (OperationsWithoutBraces.main_region.A)

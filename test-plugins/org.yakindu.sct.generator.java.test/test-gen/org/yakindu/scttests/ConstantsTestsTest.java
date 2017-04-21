@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.constants.ConstantsStatemachine;
 import org.yakindu.scr.constants.ConstantsStatemachine.State;
@@ -37,7 +35,7 @@ public class ConstantsTestsTest {
 	}
 	
 	@Test
-	public void testconstantDefinition() {
+	public void testConstantDefinition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

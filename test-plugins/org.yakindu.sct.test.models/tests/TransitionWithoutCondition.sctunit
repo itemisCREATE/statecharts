@@ -1,6 +1,6 @@
 package tests
 testclass TransitionWithoutCondition for statechart TransitionWithoutCondition{
-	
+	@Test
 	operation TransitionWithoutConditionTest(){ 
 		enter
 		

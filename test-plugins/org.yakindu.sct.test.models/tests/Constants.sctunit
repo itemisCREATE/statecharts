@@ -1,6 +1,6 @@
 package tests
 testclass ConstantsTests for statechart Constants {
-
+	@Test
 	operation constantDefinition(){ 
 		enter
 		assert active(Constants.main_region.A)

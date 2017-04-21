@@ -1,6 +1,6 @@
 package tests
 testclass LogicalOrTests for statechart LogicalOr {
-	
+	@Test
 	operation operandEvaluationOrder(){
 		
 		enter

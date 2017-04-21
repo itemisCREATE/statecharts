@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.guard.GuardStatemachine;
 import org.yakindu.scr.guard.GuardStatemachine.State;
@@ -37,7 +35,7 @@ public class GuardTest {
 	}
 	
 	@Test
-	public void testguardTest() {
+	public void testGuardTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.statechartactive.StatechartActiveStatemachine;
 import org.yakindu.scr.statechartactive.StatechartActiveStatemachine.State;
@@ -37,25 +35,25 @@ public class StatechartActiveTest {
 	}
 	
 	@Test
-	public void testinactiveBeforeEnter() {
+	public void testInactiveBeforeEnter() {
 		assertTrue(!statemachine.isActive());
 		 
 	}
 	@Test
-	public void testactiveAfterEnter() {
+	public void testActiveAfterEnter() {
 		statemachine.enter();
 		assertTrue(statemachine.isActive());
 		 
 	}
 	@Test
-	public void testinactiveAfterExit() {
+	public void testInactiveAfterExit() {
 		statemachine.enter();
 		statemachine.exit();
 		assertTrue(!statemachine.isActive());
 		 
 	}
 	@Test
-	public void testactiveAfterReenter() {
+	public void testActiveAfterReenter() {
 		statemachine.enter();
 		statemachine.exit();
 		statemachine.enter();

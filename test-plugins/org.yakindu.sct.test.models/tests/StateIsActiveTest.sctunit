@@ -1,5 +1,6 @@
 package tests
 testclass StateIsActive for statechart StateIsActive {
+	@Test
 	operation stateIsActive(){
 		
 		enter

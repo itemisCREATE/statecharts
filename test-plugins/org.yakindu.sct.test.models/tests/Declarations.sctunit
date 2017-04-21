@@ -1,6 +1,6 @@
 package tests
 testclass Declarations for statechart Declarations {
-	
+	@Test
 	operation declarationsTest(){
 		enter
 	}

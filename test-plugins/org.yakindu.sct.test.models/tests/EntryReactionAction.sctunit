@@ -3,7 +3,8 @@ testclass EntryReactionAction for statechart entries.EntryReactionAction {
 
 	/*
 	 * Actions on an entry transition should be executed during entering the state machine.
-	 */	
+	 */
+	@Test
 	operation entryTransitionActionOnStatechartEnter(){ 
 		
 		enter		 
@@ -17,6 +18,7 @@ testclass EntryReactionAction for statechart entries.EntryReactionAction {
 	/*
 	 * Actions on an entry transition should be executed if it is used during a run to completion step.
 	 */
+	@Test
 	operation entryOnRTS(){
 		enter
 		
@@ -44,6 +46,7 @@ testclass EntryReactionAction for statechart entries.EntryReactionAction {
 	 * Actions on an entry transition should not be executed if be executed when entering 
 	 * a region using a history.
 	 */
+	@Test
 	operation noEntryTransitionActionOnHistory(){
 		
 		enter

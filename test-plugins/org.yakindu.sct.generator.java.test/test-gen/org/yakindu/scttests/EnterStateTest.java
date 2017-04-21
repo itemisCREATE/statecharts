@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.enterstate.EnterStateStatemachine;
 import org.yakindu.scr.enterstate.EnterStateStatemachine.State;
@@ -37,7 +35,7 @@ public class EnterStateTest {
 	}
 	
 	@Test
-	public void testdefaultEntry() {
+	public void testDefaultEntry() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		 
@@ -47,7 +45,7 @@ public class EnterStateTest {
 		 
 	}
 	@Test
-	public void testnamedEntryThroughNamedTransition() {
+	public void testNamedEntryThroughNamedTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		 
@@ -57,7 +55,7 @@ public class EnterStateTest {
 		 
 	}
 	@Test
-	public void testnamedEntryThroughDefaultTransition() {
+	public void testNamedEntryThroughDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		 

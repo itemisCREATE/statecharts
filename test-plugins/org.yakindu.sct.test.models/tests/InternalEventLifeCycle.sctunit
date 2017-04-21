@@ -3,7 +3,7 @@ package tests
  * @author axel terfloth
  */
 testclass InternalEventLifeCycle for statechart InternalEventLifeCycle {
-
+	@Test
 	operation InternalEventLifeCycleTest(){
 		 
 		enter

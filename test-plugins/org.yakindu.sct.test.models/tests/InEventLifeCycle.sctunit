@@ -5,6 +5,7 @@ package tests
 testclass InEventLifeCycle for statechart InEventLifeCycle {
 	
 	/** TODO: we require a probe interface for white box testing */
+	@Test
 	operation eventLifeCycle(){
 		
 		enter

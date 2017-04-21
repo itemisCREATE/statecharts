@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.statechartkeywords.StatechartKeywordsStatemachine;
 import org.yakindu.scr.statechartkeywords.StatechartKeywordsStatemachine.State;
@@ -39,7 +37,7 @@ public class StatemachineKeywordsTest {
 	}
 	
 	@Test
-	public void teststatemachineKeywords() {
+	public void testStatemachineKeywords() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Timer));
 		 

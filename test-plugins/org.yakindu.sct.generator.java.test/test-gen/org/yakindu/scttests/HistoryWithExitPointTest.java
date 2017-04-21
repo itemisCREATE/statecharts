@@ -11,9 +11,7 @@
 
 package org.yakindu.scttests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.historywithexitpoint.HistoryWithExitPointStatemachine;
 import org.yakindu.scr.historywithexitpoint.HistoryWithExitPointStatemachine.State;
@@ -37,7 +35,7 @@ public class HistoryWithExitPointTest {
 	}
 	
 	@Test
-	public void testhistoryEntryAfterExit() {
+	public void testHistoryEntryAfterExit() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X1));
 		 
