@@ -35,8 +35,7 @@ public class SyncForkTest {
 	}
 	
 	@Test
-	public void testSyncForkTest
-	() {
+	public void testSyncForkTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

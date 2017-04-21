@@ -35,8 +35,7 @@ public class DeepHistoryTest {
 	}
 	
 	@Test
-	public void testDeepHistoryTest
-	() {
+	public void testDeepHistoryTest() {
 		statemachine.enter();
 		statemachine.raiseEvent1();
 		statemachine.runCycle();

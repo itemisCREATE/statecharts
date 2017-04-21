@@ -35,15 +35,13 @@ public class ConstOnlyInternalScopeTest {
 	}
 	
 	@Test
-	public void testStatechartEntry
-	() {
+	public void testStatechartEntry() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.constOnlyInternalScope_main_region_A));
 		 
 	}
 	@Test
-	public void testStateTransition
-	() {
+	public void testStateTransition() {
 		statemachine.enter();
 		statemachine.raiseE(1l);
 		statemachine.runCycle();

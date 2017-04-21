@@ -35,8 +35,7 @@ public class DeepEntryTest {
 	}
 	
 	@Test
-	public void testEnterToSubstate
-	() {
+	public void testEnterToSubstate() {
 		assertTrue(statemachine.getX() == 0l);
 		 
 		assertTrue(statemachine.getY() == 0l);

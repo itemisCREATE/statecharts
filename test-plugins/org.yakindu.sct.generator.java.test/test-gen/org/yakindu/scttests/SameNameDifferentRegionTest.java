@@ -35,8 +35,7 @@ public class SameNameDifferentRegionTest {
 	}
 	
 	@Test
-	public void testSameNameDifferenRegionTest
-	() {
+	public void testSameNameDifferenRegionTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		 

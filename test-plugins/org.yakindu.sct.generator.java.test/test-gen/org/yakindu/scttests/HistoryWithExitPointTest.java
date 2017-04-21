@@ -35,8 +35,7 @@ public class HistoryWithExitPointTest {
 	}
 	
 	@Test
-	public void testHistoryEntryAfterExit
-	() {
+	public void testHistoryEntryAfterExit() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X1));
 		 

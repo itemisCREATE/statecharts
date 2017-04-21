@@ -55,8 +55,7 @@ public class OperationsTest {
 	}
 	
 	@Test
-	public void testOperationsCalled
-	() {
+	public void testOperationsCalled() {
 		when(defaultMock.alwaysTrue()).thenReturn(true);
 		 
 		when(internalMock.internalOperation3a(anyDouble())).thenAnswer(new Answer<Double>() {

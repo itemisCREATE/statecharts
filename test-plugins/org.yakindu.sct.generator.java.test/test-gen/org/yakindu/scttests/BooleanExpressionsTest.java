@@ -35,8 +35,7 @@ public class BooleanExpressionsTest {
 	}
 	
 	@Test
-	public void testBooleanExpressions
-	() {
+	public void testBooleanExpressions() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		 

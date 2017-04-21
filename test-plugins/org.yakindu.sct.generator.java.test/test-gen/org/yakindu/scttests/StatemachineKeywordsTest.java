@@ -37,8 +37,7 @@ public class StatemachineKeywordsTest {
 	}
 	
 	@Test
-	public void testStatemachineKeywords
-	() {
+	public void testStatemachineKeywords() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Timer));
 		 

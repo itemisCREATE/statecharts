@@ -35,8 +35,7 @@ public class InEventLifeCycleTest {
 	}
 	
 	@Test
-	public void testEventLifeCycle
-	() {
+	public void testEventLifeCycle() {
 		statemachine.enter();
 		statemachine.raiseE();
 		assertTrue(statemachine.getI() == 0l);

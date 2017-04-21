@@ -35,8 +35,7 @@ public class EntryChoiceTest {
 	}
 	
 	@Test
-	public void testEntryChoiceTest
-	() {
+	public void testEntryChoiceTest() {
 		statemachine.enter();
 		statemachine.runCycle();
 		statemachine.runCycle();

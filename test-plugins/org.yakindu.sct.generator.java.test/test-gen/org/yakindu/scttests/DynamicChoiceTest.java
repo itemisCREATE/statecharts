@@ -35,8 +35,7 @@ public class DynamicChoiceTest {
 	}
 	
 	@Test
-	public void testDynamicChoiceTest
-	() {
+	public void testDynamicChoiceTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
 		 

@@ -35,8 +35,7 @@ public class EntryReactionActionTest {
 	}
 	
 	@Test
-	public void testEntryTransitionActionOnStatechartEnter
-	() {
+	public void testEntryTransitionActionOnStatechartEnter() {
 		statemachine.enter();
 		assertTrue(statemachine.getEnteredR1());
 		 
@@ -48,8 +47,7 @@ public class EntryReactionActionTest {
 		 
 	}
 	@Test
-	public void testEntryOnRTS
-	() {
+	public void testEntryOnRTS() {
 		statemachine.enter();
 		statemachine.raiseB();
 		statemachine.runCycle();
@@ -71,8 +69,7 @@ public class EntryReactionActionTest {
 		 
 	}
 	@Test
-	public void testNoEntryTransitionActionOnHistory
-	() {
+	public void testNoEntryTransitionActionOnHistory() {
 		statemachine.enter();
 		statemachine.raiseB();
 		statemachine.runCycle();

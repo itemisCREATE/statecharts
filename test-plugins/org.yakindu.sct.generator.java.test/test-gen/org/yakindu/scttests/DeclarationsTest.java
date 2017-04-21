@@ -35,8 +35,7 @@ public class DeclarationsTest {
 	}
 	
 	@Test
-	public void testDeclarationsTest
-	() {
+	public void testDeclarationsTest() {
 		statemachine.enter();
 	}
 }

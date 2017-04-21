@@ -35,8 +35,7 @@ public class NamedInterfaceAccessTest {
 	}
 	
 	@Test
-	public void testSafeOpenSuccess
-	() {
+	public void testSafeOpenSuccess() {
 		statemachine.enter();
 		statemachine.runCycle();
 		statemachine.getSCIUser().raiseNumberPressed(3l);

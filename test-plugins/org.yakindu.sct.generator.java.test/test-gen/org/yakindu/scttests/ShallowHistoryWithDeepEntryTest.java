@@ -35,8 +35,7 @@ public class ShallowHistoryWithDeepEntryTest {
 	}
 	
 	@Test
-	public void testNoDeepEntryWithinHistory
-	() {
+	public void testNoDeepEntryWithinHistory() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Y));
 		 
@@ -54,8 +53,7 @@ public class ShallowHistoryWithDeepEntryTest {
 		 
 	}
 	@Test
-	public void testDeepEntryWithinHistory
-	() {
+	public void testDeepEntryWithinHistory() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Y));
 		 
@@ -81,8 +79,7 @@ public class ShallowHistoryWithDeepEntryTest {
 		 
 	}
 	@Test
-	public void testDirectDeepEntryIntoHistory
-	() {
+	public void testDirectDeepEntryIntoHistory() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Y));
 		 

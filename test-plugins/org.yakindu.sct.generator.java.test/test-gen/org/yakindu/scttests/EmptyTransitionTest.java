@@ -35,8 +35,7 @@ public class EmptyTransitionTest {
 	}
 	
 	@Test
-	public void testEmptyTransitionTest
-	() {
+	public void testEmptyTransitionTest() {
 		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue(!statemachine.isStateActive(State.main_region_B));

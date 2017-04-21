@@ -35,8 +35,7 @@ public class GuardedExitTest {
 	}
 	
 	@Test
-	public void testExitTaken
-	() {
+	public void testExitTaken() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -50,8 +49,7 @@ public class GuardedExitTest {
 		 
 	}
 	@Test
-	public void testExitNotTaken
-	() {
+	public void testExitNotTaken() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

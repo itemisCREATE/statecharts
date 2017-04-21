@@ -35,8 +35,7 @@ public class RaiseEventTest {
 	}
 	
 	@Test
-	public void testRaiseEvent
-	() {
+	public void testRaiseEvent() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.second_region_SateA));
 		 

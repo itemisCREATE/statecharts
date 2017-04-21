@@ -35,8 +35,7 @@ public class ConstantsTestsTest {
 	}
 	
 	@Test
-	public void testConstantDefinition
-	() {
+	public void testConstantDefinition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

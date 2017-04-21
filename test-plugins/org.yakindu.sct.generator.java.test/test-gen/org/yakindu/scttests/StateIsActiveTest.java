@@ -35,8 +35,7 @@ public class StateIsActiveTest {
 	}
 	
 	@Test
-	public void testStateIsActive
-	() {
+	public void testStateIsActive() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r1_R1A));
 		 

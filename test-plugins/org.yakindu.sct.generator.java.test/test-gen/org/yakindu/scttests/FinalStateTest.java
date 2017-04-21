@@ -35,8 +35,7 @@ public class FinalStateTest {
 	}
 	
 	@Test
-	public void testStatechartNameTest
-	() {
+	public void testStatechartNameTest() {
 		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue(statemachine.isFinal());

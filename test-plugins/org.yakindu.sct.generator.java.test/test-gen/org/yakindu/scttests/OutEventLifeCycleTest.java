@@ -35,8 +35,7 @@ public class OutEventLifeCycleTest {
 	}
 	
 	@Test
-	public void testAvailableAfterCycle
-	() {
+	public void testAvailableAfterCycle() {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.runCycle();
@@ -44,8 +43,7 @@ public class OutEventLifeCycleTest {
 		 
 	}
 	@Test
-	public void testAvailableWithinCycle
-	() {
+	public void testAvailableWithinCycle() {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.runCycle();
@@ -53,8 +51,7 @@ public class OutEventLifeCycleTest {
 		 
 	}
 	@Test
-	public void testUnvailableWithin2ndCycle
-	() {
+	public void testUnvailableWithin2ndCycle() {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.runCycle();
@@ -63,8 +60,7 @@ public class OutEventLifeCycleTest {
 		 
 	}
 	@Test
-	public void testUnvailableAfter2ndCycle
-	() {
+	public void testUnvailableAfter2ndCycle() {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.runCycle();

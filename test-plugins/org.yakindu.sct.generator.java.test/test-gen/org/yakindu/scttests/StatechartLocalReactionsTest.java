@@ -35,8 +35,7 @@ public class StatechartLocalReactionsTest {
 	}
 	
 	@Test
-	public void testStatechartLocalReactionsTest
-	() {
+	public void testStatechartLocalReactionsTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_S1));
 		 

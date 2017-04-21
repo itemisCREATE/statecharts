@@ -37,8 +37,7 @@ public class TimedTransitionsTest {
 	}
 	
 	@Test
-	public void testTimer01
-	() {
+	public void testTimer01() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
 		 

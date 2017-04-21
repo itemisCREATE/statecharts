@@ -35,8 +35,7 @@ public class AssignmentAsExpressionTest {
 	}
 	
 	@Test
-	public void testSimpleAssignment
-	() {
+	public void testSimpleAssignment() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Add));
 		 

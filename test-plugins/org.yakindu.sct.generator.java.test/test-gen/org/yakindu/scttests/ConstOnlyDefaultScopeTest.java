@@ -35,15 +35,13 @@ public class ConstOnlyDefaultScopeTest {
 	}
 	
 	@Test
-	public void testStatechartEntry
-	() {
+	public void testStatechartEntry() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.constOnlyDefaultScope_main_region_A));
 		 
 	}
 	@Test
-	public void testStateTransition
-	() {
+	public void testStateTransition() {
 		statemachine.enter();
 		statemachine.getSCIA().raiseE(1l);
 		statemachine.runCycle();

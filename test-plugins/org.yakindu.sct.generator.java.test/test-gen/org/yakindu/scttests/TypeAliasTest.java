@@ -35,8 +35,7 @@ public class TypeAliasTest {
 	}
 	
 	@Test
-	public void testTypeAliasTest
-	() {
+	public void testTypeAliasTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
 		 

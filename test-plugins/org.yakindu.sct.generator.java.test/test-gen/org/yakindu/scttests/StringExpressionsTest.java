@@ -35,8 +35,7 @@ public class StringExpressionsTest {
 	}
 	
 	@Test
-	public void testStringExpressionsTest
-	() {
+	public void testStringExpressionsTest() {
 		assertTrue(statemachine.getQuotedStringX().equals("\"X\""));
 		 
 		assertTrue(statemachine.getQuotedStringY().equals("\"Y\""));

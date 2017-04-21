@@ -35,8 +35,7 @@ public class SimpleHierachyTest {
 	}
 	
 	@Test
-	public void testSimpleHierachyTest
-	() {
+	public void testSimpleHierachyTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

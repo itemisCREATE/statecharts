@@ -35,8 +35,7 @@ public class CastExpressionsTest {
 	}
 	
 	@Test
-	public void testCastExpressionTest
-	() {
+	public void testCastExpressionTest() {
 		statemachine.enter();
 		assertTrue(statemachine.getRealValue() == 5l);
 		 

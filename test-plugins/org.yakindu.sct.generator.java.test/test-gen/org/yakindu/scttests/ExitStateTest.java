@@ -35,8 +35,7 @@ public class ExitStateTest {
 	}
 	
 	@Test
-	public void testDefaultExit
-	() {
+	public void testDefaultExit() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		 
@@ -46,8 +45,7 @@ public class ExitStateTest {
 		 
 	}
 	@Test
-	public void testNamedExitThroughNamedTransition
-	() {
+	public void testNamedExitThroughNamedTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		 
@@ -57,8 +55,7 @@ public class ExitStateTest {
 		 
 	}
 	@Test
-	public void testNamedExitThroughDefaultTransition
-	() {
+	public void testNamedExitThroughDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		 
@@ -68,8 +65,7 @@ public class ExitStateTest {
 		 
 	}
 	@Test
-	public void testRemainInA
-	() {
+	public void testRemainInA() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		 

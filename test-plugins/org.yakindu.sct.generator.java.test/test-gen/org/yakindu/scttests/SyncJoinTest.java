@@ -35,8 +35,7 @@ public class SyncJoinTest {
 	}
 	
 	@Test
-	public void testSyncJoin_C2_Waits
-	() {
+	public void testSyncJoin_C2_Waits() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		 
@@ -94,8 +93,7 @@ public class SyncJoinTest {
 		 
 	}
 	@Test
-	public void testSyncJoin_D2_Waits
-	() {
+	public void testSyncJoin_D2_Waits() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		 
@@ -136,8 +134,7 @@ public class SyncJoinTest {
 		 
 	}
 	@Test
-	public void testDoubleEntryActionBug
-	() {
+	public void testDoubleEntryActionBug() {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.raiseF();

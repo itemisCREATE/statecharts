@@ -35,8 +35,7 @@ public class STextKeywordsInStatesAndRegionsTest {
 	}
 	
 	@Test
-	public void testActiveCheckWithSTextNamedStates
-	() {
+	public void testActiveCheckWithSTextNamedStates() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		 

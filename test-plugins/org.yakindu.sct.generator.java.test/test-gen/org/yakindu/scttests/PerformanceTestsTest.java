@@ -37,8 +37,7 @@ public class PerformanceTestsTest {
 	}
 	
 	@Test
-	public void testTest_100_000
-	() {
+	public void testTest_100_000() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A));
 		 
@@ -60,8 +59,7 @@ public class PerformanceTestsTest {
 		 
 	}
 	@Test
-	public void testTest_1_000_000
-	() {
+	public void testTest_1_000_000() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A));
 		 
@@ -83,8 +81,7 @@ public class PerformanceTestsTest {
 		 
 	}
 	@Test
-	public void testTest_10_000_000
-	() {
+	public void testTest_10_000_000() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A));
 		 

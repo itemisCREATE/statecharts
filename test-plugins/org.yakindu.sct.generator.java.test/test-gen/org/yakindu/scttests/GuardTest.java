@@ -35,8 +35,7 @@ public class GuardTest {
 	}
 	
 	@Test
-	public void testGuardTest
-	() {
+	public void testGuardTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

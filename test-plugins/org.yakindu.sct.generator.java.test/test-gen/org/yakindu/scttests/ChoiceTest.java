@@ -35,8 +35,7 @@ public class ChoiceTest {
 	}
 	
 	@Test
-	public void testElseChoiceUsingNonDefaultTransition
-	() {
+	public void testElseChoiceUsingNonDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -47,8 +46,7 @@ public class ChoiceTest {
 		 
 	}
 	@Test
-	public void testElseChoiceUsingDefaultTransition
-	() {
+	public void testElseChoiceUsingDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -59,8 +57,7 @@ public class ChoiceTest {
 		 
 	}
 	@Test
-	public void testDefaultChoiceUsingNonDefaultTransition
-	() {
+	public void testDefaultChoiceUsingNonDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -71,8 +68,7 @@ public class ChoiceTest {
 		 
 	}
 	@Test
-	public void testDefaultChoiceUsingDefaultTransition
-	() {
+	public void testDefaultChoiceUsingDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -83,8 +79,7 @@ public class ChoiceTest {
 		 
 	}
 	@Test
-	public void testUncheckedChoiceUsingNonDefaultTransition
-	() {
+	public void testUncheckedChoiceUsingNonDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -95,8 +90,7 @@ public class ChoiceTest {
 		 
 	}
 	@Test
-	public void testUncheckedChoiceUsingDefaultTransition
-	() {
+	public void testUncheckedChoiceUsingDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -107,8 +101,7 @@ public class ChoiceTest {
 		 
 	}
 	@Test
-	public void testAlwaysTrueTransitionInChoice
-	() {
+	public void testAlwaysTrueTransitionInChoice() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

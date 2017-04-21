@@ -35,8 +35,7 @@ public class StaticChoiceTest {
 	}
 	
 	@Test
-	public void testStaticChoiceTest
-	() {
+	public void testStaticChoiceTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
 		 

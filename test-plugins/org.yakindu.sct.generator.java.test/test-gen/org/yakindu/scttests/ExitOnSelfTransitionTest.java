@@ -35,8 +35,7 @@ public class ExitOnSelfTransitionTest {
 	}
 	
 	@Test
-	public void testExitOnSelfTransitionTest
-	() {
+	public void testExitOnSelfTransitionTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

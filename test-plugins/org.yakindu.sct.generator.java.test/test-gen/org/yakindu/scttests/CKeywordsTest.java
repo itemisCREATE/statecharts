@@ -35,8 +35,7 @@ public class CKeywordsTest {
 	}
 	
 	@Test
-	public void testCKeywordsTest
-	() {
+	public void testCKeywordsTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.auto_char));
 		 

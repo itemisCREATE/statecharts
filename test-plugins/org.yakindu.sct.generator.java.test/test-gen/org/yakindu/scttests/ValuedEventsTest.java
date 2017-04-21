@@ -35,8 +35,7 @@ public class ValuedEventsTest {
 	}
 	
 	@Test
-	public void testValuedEventsTest
-	() {
+	public void testValuedEventsTest() {
 		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue(statemachine.getMyString().equals("sct"));

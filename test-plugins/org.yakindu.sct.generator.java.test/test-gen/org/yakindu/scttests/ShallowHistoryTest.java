@@ -35,8 +35,7 @@ public class ShallowHistoryTest {
 	}
 	
 	@Test
-	public void testShallowHistoryTest
-	() {
+	public void testShallowHistoryTest() {
 		statemachine.enter();
 		statemachine.raiseEvent1();
 		statemachine.runCycle();

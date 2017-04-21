@@ -35,8 +35,7 @@ public class AlwaysOncycleTest {
 	}
 	
 	@Test
-	public void testAlwaysOncycleTest
-	() {
+	public void testAlwaysOncycleTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		 

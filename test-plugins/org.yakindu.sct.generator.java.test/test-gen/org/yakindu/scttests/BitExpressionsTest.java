@@ -35,8 +35,7 @@ public class BitExpressionsTest {
 	}
 	
 	@Test
-	public void testBitExpressions
-	() {
+	public void testBitExpressions() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		 

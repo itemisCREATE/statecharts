@@ -35,8 +35,7 @@ public class InternalEventLifeCycleTest {
 	}
 	
 	@Test
-	public void testInternalEventLifeCycleTest
-	() {
+	public void testInternalEventLifeCycleTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r1_A));
 		 

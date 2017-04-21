@@ -35,8 +35,7 @@ public class ReadOnlyVariableTest {
 	}
 	
 	@Test
-	public void testReadOnlyVariableTest
-	() {
+	public void testReadOnlyVariableTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		 

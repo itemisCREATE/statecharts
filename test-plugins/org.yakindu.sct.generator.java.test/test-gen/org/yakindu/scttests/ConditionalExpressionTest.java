@@ -35,8 +35,7 @@ public class ConditionalExpressionTest {
 	}
 	
 	@Test
-	public void testConditionalExpressionTest
-	() {
+	public void testConditionalExpressionTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

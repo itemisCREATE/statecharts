@@ -35,8 +35,7 @@ public class EntryExitSelfTransitionTest {
 	}
 	
 	@Test
-	public void testSelfTransitionToChildState
-	() {
+	public void testSelfTransitionToChildState() {
 		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue(statemachine.getEntries() == 1l);
@@ -54,8 +53,7 @@ public class EntryExitSelfTransitionTest {
 		 
 	}
 	@Test
-	public void testSelfTransitionFromChildState
-	() {
+	public void testSelfTransitionFromChildState() {
 		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue(statemachine.getEntries() == 1l);

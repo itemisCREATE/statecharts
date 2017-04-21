@@ -35,8 +35,7 @@ public class TransitionWithoutConditionTest {
 	}
 	
 	@Test
-	public void testTransitionWithoutConditionTest
-	() {
+	public void testTransitionWithoutConditionTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

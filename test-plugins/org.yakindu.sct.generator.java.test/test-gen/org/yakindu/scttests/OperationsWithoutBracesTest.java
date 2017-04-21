@@ -35,8 +35,7 @@ public class OperationsWithoutBracesTest {
 	}
 	
 	@Test
-	public void testOperationsWithoutBracesTest
-	() {
+	public void testOperationsWithoutBracesTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

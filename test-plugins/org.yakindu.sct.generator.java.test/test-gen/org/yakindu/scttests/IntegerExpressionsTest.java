@@ -35,8 +35,7 @@ public class IntegerExpressionsTest {
 	}
 	
 	@Test
-	public void testIntegerExpressions
-	() {
+	public void testIntegerExpressions() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		 

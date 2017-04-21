@@ -35,8 +35,7 @@ public class ParenthesisTest {
 	}
 	
 	@Test
-	public void testSimple
-	() {
+	public void testSimple() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mainRegion_A));
 		 

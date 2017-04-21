@@ -35,8 +35,7 @@ public class GuardedEntryTest {
 	}
 	
 	@Test
-	public void testEntryNotTakenOnStatechartEnter
-	() {
+	public void testEntryNotTakenOnStatechartEnter() {
 		assertTrue(statemachine.getGuard() == false);
 		 
 		statemachine.enter();
@@ -46,8 +45,7 @@ public class GuardedEntryTest {
 		 
 	}
 	@Test
-	public void testEntryTakenOnStatechartEnter
-	() {
+	public void testEntryTakenOnStatechartEnter() {
 		statemachine.setGuard(true);
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
@@ -56,8 +54,7 @@ public class GuardedEntryTest {
 		 
 	}
 	@Test
-	public void testEntryTakenInTransition
-	() {
+	public void testEntryTakenInTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -75,8 +72,7 @@ public class GuardedEntryTest {
 		 
 	}
 	@Test
-	public void testEntryNotTakenInTransition
-	() {
+	public void testEntryNotTakenInTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

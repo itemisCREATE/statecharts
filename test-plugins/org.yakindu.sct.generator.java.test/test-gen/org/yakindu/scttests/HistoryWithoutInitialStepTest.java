@@ -35,8 +35,7 @@ public class HistoryWithoutInitialStepTest {
 	}
 	
 	@Test
-	public void testEnterThroughInitialEntry
-	() {
+	public void testEnterThroughInitialEntry() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -50,8 +49,7 @@ public class HistoryWithoutInitialStepTest {
 		 
 	}
 	@Test
-	public void testEnterCThroughHistory
-	() {
+	public void testEnterCThroughHistory() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -69,8 +67,7 @@ public class HistoryWithoutInitialStepTest {
 		 
 	}
 	@Test
-	public void testEnterDThroughHistory
-	() {
+	public void testEnterDThroughHistory() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

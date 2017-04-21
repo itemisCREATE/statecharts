@@ -35,8 +35,7 @@ public class SimpleEventTest {
 	}
 	
 	@Test
-	public void testSimpleEventTest
-	() {
+	public void testSimpleEventTest() {
 		statemachine.enter();
 		assertTrue("Expected A to be active",statemachine.isStateActive(State.main_region_A));
 		 

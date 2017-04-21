@@ -35,8 +35,7 @@ public class LocalReactionsTest {
 	}
 	
 	@Test
-	public void testLocalReactionsTest
-	() {
+	public void testLocalReactionsTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

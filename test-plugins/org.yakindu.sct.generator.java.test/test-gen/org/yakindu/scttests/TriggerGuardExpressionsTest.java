@@ -35,8 +35,7 @@ public class TriggerGuardExpressionsTest {
 	}
 	
 	@Test
-	public void testTrueGuard
-	() {
+	public void testTrueGuard() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 
@@ -62,8 +61,7 @@ public class TriggerGuardExpressionsTest {
 		 
 	}
 	@Test
-	public void testFalseGuard
-	() {
+	public void testFalseGuard() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		 

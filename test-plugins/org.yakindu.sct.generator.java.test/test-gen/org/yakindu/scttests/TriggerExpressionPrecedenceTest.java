@@ -35,8 +35,7 @@ public class TriggerExpressionPrecedenceTest {
 	}
 	
 	@Test
-	public void testUnsatisfiedTriggerAndFGuardFalseOrFalse
-	() {
+	public void testUnsatisfiedTriggerAndFGuardFalseOrFalse() {
 		statemachine.enter();
 		statemachine.setC1(false);
 		statemachine.setC2(false);
@@ -45,8 +44,7 @@ public class TriggerExpressionPrecedenceTest {
 		 
 	}
 	@Test
-	public void testUnsatisfiedTriggerAndFGuardTrueOrFalse
-	() {
+	public void testUnsatisfiedTriggerAndFGuardTrueOrFalse() {
 		statemachine.enter();
 		statemachine.setC1(true);
 		statemachine.setC2(false);
@@ -55,8 +53,7 @@ public class TriggerExpressionPrecedenceTest {
 		 
 	}
 	@Test
-	public void testUnsatisfiedTriggerAndFGuardFalseOrTrue
-	() {
+	public void testUnsatisfiedTriggerAndFGuardFalseOrTrue() {
 		statemachine.enter();
 		statemachine.setC1(false);
 		statemachine.setC2(true);
@@ -65,8 +62,7 @@ public class TriggerExpressionPrecedenceTest {
 		 
 	}
 	@Test
-	public void testUnsatisfiedTriggerAndFGuardTrueOrTrue
-	() {
+	public void testUnsatisfiedTriggerAndFGuardTrueOrTrue() {
 		statemachine.enter();
 		statemachine.setC1(true);
 		statemachine.setC2(true);
