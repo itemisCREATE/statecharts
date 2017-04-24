@@ -45,6 +45,7 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.base.expressions.expressions.ConditionalExpression
 
 class ExpressionCode extends Expressions {
 
@@ -56,67 +57,69 @@ class ExpressionCode extends Expressions {
 	@Inject protected extension ICodegenTypeSystemAccess
 
 	/* Referring to declared elements */
-	def dispatch String code(ElementReferenceExpression it) {
+	def dispatch CharSequence code(ElementReferenceExpression it) {
 		it.code(it.definition)
 	}
 
-	def dispatch String code(FeatureCall it) {
+	def dispatch CharSequence code(FeatureCall it) {
 		it.code(it.definition)
 	}
 
-	def dispatch String code(Expression it, Event target) '''«target.access»'''
+	def dispatch CharSequence code(Expression it, Event target) '''«target.access»'''
 
-	def dispatch String code(Expression it, VariableDefinition target) '''«target.access»'''
+	def dispatch CharSequence code(Expression it, VariableDefinition target) '''«target.access»'''
 
-	def dispatch String code(ElementReferenceExpression it, VariableDefinition target) '''«target.access»'''
+	def dispatch CharSequence code(ElementReferenceExpression it, VariableDefinition target) '''«target.access»'''
 
-	def dispatch String code(FeatureCall it, VariableDefinition target) '''«target.access»'''
-
-	def dispatch String code(ElementReferenceExpression it, OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : args BEFORE ', ' SEPARATOR ', '»«arg.
-		code»«ENDFOR»)'''
-
-	def dispatch String code(ElementReferenceExpression it, Operation target) '''«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
-		code»«ENDFOR»)'''
-
-	def dispatch String code(ElementReferenceExpression it, Property target) '''«target.access»'''
-
-	def dispatch String code(FeatureCall it, OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : args BEFORE ', ' SEPARATOR ', '»«arg.
-		code»«ENDFOR»)'''
-
-	def dispatch String code(FeatureCall it, Operation target) '''«it.owner.code».«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
-		code»«ENDFOR»)'''
-
-	def dispatch String code(FeatureCall it, Property target) '''«it.owner.code».«target.access»'''
+	def dispatch CharSequence code(FeatureCall it, VariableDefinition target) '''«target.access»'''
 	
-	def dispatch String code(FeatureCall it, Enumerator target) '''«target.access»'''
+	def dispatch CharSequence code(ElementReferenceExpression it, OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : args BEFORE ', ' SEPARATOR ', '»«arg.
+		code»«ENDFOR»)'''
+
+	def dispatch CharSequence code(ElementReferenceExpression it, Operation target) '''«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
+		code»«ENDFOR»)'''
+	
+	def dispatch CharSequence code(ElementReferenceExpression it, Property target) '''«target.access»'''
+	
+	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) '''«target.access»(«scHandle»«FOR arg : args BEFORE ', ' SEPARATOR ', '»«arg.
+		code»«ENDFOR»)'''
+
+	def dispatch CharSequence code(FeatureCall it, Operation target) '''«it.owner.code».«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
+		code»«ENDFOR»)'''
+		
+	def dispatch CharSequence code(FeatureCall it, Property target) '''«it.owner.code».«target.access»'''
+	
+	def dispatch CharSequence code(FeatureCall it, Enumerator target) '''«target.access»'''
+	
+	def dispatch CharSequence code(ConditionalExpression it) '''«condition.code» ? «trueCase.code» : «falseCase.code»'''
 
 	/* HANDLING LITERALS */
-	def dispatch String code(Literal it) '''#error unknown literal type «getClass().name» '''
+	def dispatch CharSequence code(Literal it) '''#error unknown literal type «getClass().name» '''
 	
-	def dispatch String code(NullLiteral it) '''«Naming::NULL_STRING»'''
+	def dispatch CharSequence code(NullLiteral it) '''«Naming::NULL_STRING»'''
 
-	def dispatch String code(StringLiteral it) '''"«value.escaped»"'''
+	def dispatch CharSequence code(StringLiteral it) '''"«value.escaped»"'''
 
 	def String escaped(String it) {
 		return it.replace("\"", "\\\"");
 	}
 
-	def dispatch String code(BoolLiteral it) '''«IF value»bool_true«ELSE»bool_false«ENDIF»'''
+	def dispatch CharSequence code(BoolLiteral it) '''«IF value»bool_true«ELSE»bool_false«ENDIF»'''
 
-	def dispatch String code(IntLiteral it) '''«value.toString»'''
+	def dispatch CharSequence code(IntLiteral it) '''«value.toString»'''
 
-	def dispatch String code(DoubleLiteral it) '''«value.toString»'''
+	def dispatch CharSequence code(DoubleLiteral it) '''«value.toString»'''
 	
-	def dispatch String code(FloatLiteral it) '''«value.toString»'''
+	def dispatch CharSequence code(FloatLiteral it) '''«value.toString»'''
 
-	def dispatch String code(HexLiteral it) '''0x«Integer::toHexString(value)»'''
+	def dispatch CharSequence code(HexLiteral it) '''0x«Integer::toHexString(value)»'''
 
-	def dispatch String code(PrimitiveValueExpression it) '''«value.code»'''
+	def dispatch CharSequence code(PrimitiveValueExpression it) '''«value.code»'''
 
 	/* Statements */
-	def dispatch String code(AssignmentExpression it) '''«varRef.code» «operator.literal» «expression.code»'''
+	def dispatch CharSequence code(AssignmentExpression it) '''«varRef.code» «operator.literal» «expression.code»'''
 
-	def dispatch String code(EventRaisingExpression it) '''
+	def dispatch CharSequence code(EventRaisingExpression it) '''
 	«IF value != null»
 		«event.definition.event.valueAccess» = «value.code»;
 	«ENDIF»
@@ -124,33 +127,32 @@ class ExpressionCode extends Expressions {
 
 	/* Logical Expressions */
 
-	def dispatch String code(LogicalRelationExpression it) '''
+	def dispatch CharSequence code(LogicalRelationExpression it) '''
 	«IF isSame(leftOperand.infer.type, getType(GenericTypeSystem.STRING))»
 		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
 	«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
 
 
 	/* TODO: check if event is active */
-	def dispatch String code(EventValueReferenceExpression it) '''«value.definition.event.valueAccess»'''
-
-	def dispatch String code(ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«scHandle», «value.shortName»)'''
-
-	def dispatch String code(ParenthesizedExpression it) '''(«expression.code»)'''
+	def dispatch CharSequence code(EventValueReferenceExpression it) '''«value.definition.event.valueAccess»'''
 	
-	def dispatch String code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
+	def dispatch CharSequence code(ActiveStateReferenceExpression it) '''«flow.stateActiveFctID»(«scHandle», «value.shortName»)'''
 
+	def dispatch CharSequence code(ParenthesizedExpression it) '''(«expression.code»)'''
+	
+	def dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
 	
 	// ensure we obtain an expression of type sc_boolean
 	
-	def dispatch String sc_boolean_code(Expression it) '''«it.code»'''
+	def dispatch CharSequence sc_boolean_code(Expression it) '''«it.code»'''
 	
-	def dispatch String sc_boolean_code(LogicalOrExpression it) '''(«it.code») ? bool_true : bool_false'''
+	def dispatch CharSequence sc_boolean_code(LogicalOrExpression it) '''(«it.code») ? bool_true : bool_false'''
 	
-	def dispatch String sc_boolean_code(LogicalAndExpression it) '''(«it.code») ? bool_true : bool_false'''
+	def dispatch CharSequence sc_boolean_code(LogicalAndExpression it) '''(«it.code») ? bool_true : bool_false'''
 	
-	def dispatch String sc_boolean_code(LogicalNotExpression it) '''(«it.code») ? bool_true : bool_false'''
+	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) '''(«it.code») ? bool_true : bool_false'''
 	
-	def dispatch String sc_boolean_code(LogicalRelationExpression it) '''(«it.code») ? bool_true : bool_false'''
+	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) '''(«it.code») ? bool_true : bool_false'''
 	
 	
 
