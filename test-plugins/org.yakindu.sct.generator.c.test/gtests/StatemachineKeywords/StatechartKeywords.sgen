@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart StatechartKeywords {
 		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "StatemachineKeywords"
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/StatemachineKeywords"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

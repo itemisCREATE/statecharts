@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart LogicalOr {
 		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "LogicalOrTests"
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/LogicalOrTests"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

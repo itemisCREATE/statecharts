@@ -1,0 +1,23 @@
+GeneratorModel for yakindu::c {
+	statechart StringExpressions {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/StringExpressionsTest"
+		}
+		feature IdentifierSettings {
+			maxIdentifierLength = 254
+			separator =  "_" 
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+	}
+}
