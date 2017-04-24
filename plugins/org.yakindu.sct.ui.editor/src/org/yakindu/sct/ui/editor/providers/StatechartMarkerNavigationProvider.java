@@ -34,15 +34,15 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerType;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
-import org.yakindu.sct.ui.editor.validation.IMarkerType;
 
 /**
  * 
  * @author andreas muelder
  * 
  */
-public class StatechartMarkerNavigationProvider extends AbstractModelMarkerNavigationProvider implements IMarkerType {
+public class StatechartMarkerNavigationProvider extends AbstractModelMarkerNavigationProvider {
 
 	@Override
 	@SuppressWarnings("rawtypes")
@@ -71,8 +71,7 @@ public class StatechartMarkerNavigationProvider extends AbstractModelMarkerNavig
 		}
 
 		try {
-			String type = marker.getType();
-			if (type.equals(SCT_MARKER_TYPE)) {
+			if (marker.isSubtypeOf(SCTMarkerType.SUPERTYPE)) {
 				final DirectEditRequest request = new DirectEditRequest();
 				request.setDirectEditFeature(SGraphPackage.eINSTANCE.getSpecificationElement_Specification());
 				List<EObject> allNotationElements = EcoreUtil2.eAllContentsAsList(view);

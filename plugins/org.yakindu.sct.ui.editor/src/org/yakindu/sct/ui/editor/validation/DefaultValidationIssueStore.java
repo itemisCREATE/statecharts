@@ -26,6 +26,7 @@ import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
+import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerType;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
 import org.yakindu.sct.ui.editor.validation.IResourceChangeToIssueProcessor.ResourceDeltaToIssueResult;
 
@@ -60,10 +61,6 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 	public DefaultValidationIssueStore() {
 		listener = Lists.newArrayList();
 		visibleIssues = ArrayListMultimap.create();
-	}
-
-	protected String getMarkerType() {
-		return IMarkerType.SCT_MARKER_TYPE;
 	}
 
 	@Override
@@ -132,7 +129,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 		try {
 			IFile file = WorkspaceSynchronizer.getFile(connectedResource);
 			if ((file != null) && file.isAccessible()) {
-				markers.addAll(Arrays.asList(file.findMarkers(getMarkerType(), true, IResource.DEPTH_INFINITE)));
+				markers.addAll(Arrays.asList(file.findMarkers(SCTMarkerType.SUPERTYPE, true, IResource.DEPTH_INFINITE)));
 			}
 		} catch (CoreException e) {
 			e.printStackTrace();
