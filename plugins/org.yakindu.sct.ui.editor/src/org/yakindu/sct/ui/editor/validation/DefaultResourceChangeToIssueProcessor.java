@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.validation;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -75,8 +77,8 @@ public class DefaultResourceChangeToIssueProcessor implements IResourceChangeToI
 
 
 	protected void processMarkerDelta(final IResourceDelta delta) {
-		final IMarkerDelta[] markerDeltas = delta.getMarkerDeltas();
-
+		final IMarkerDelta[] markerDeltas = getSortedMarkerDelta(delta);
+		
 		for (final IMarkerDelta markerDelta : markerDeltas) {
 			final Object elementID = markerDelta
 					.getAttribute(SCTMarkerType.SEMANTIC_ELEMENT_ID);
@@ -85,6 +87,20 @@ public class DefaultResourceChangeToIssueProcessor implements IResourceChangeToI
 			}
 			dispatchMarkerDelta(markerDelta, elementID.toString());
 		}
+	}
+
+
+	private IMarkerDelta[] getSortedMarkerDelta(final IResourceDelta delta) {
+		IMarkerDelta[] markerDeltas = delta.getMarkerDeltas();
+		//sort IResourceDelta.CHANGED > IResourceDelta.REMOVED > IResourceDelta.ADDED 
+		Arrays.sort(markerDeltas, new Comparator<IMarkerDelta>(){
+			@Override
+			public int compare(IMarkerDelta o1, IMarkerDelta o2) {
+				return -((Integer)o1.getKind()).compareTo(o2.getKind());
+			}
+		});
+	
+		return markerDeltas;
 	}
 
 	protected void dispatchMarkerDelta(final IMarkerDelta iMarkerDelta, final String elementID) {
