@@ -48,7 +48,7 @@ public class StatechartMarkerNavigationProvider extends AbstractModelMarkerNavig
 	@SuppressWarnings("rawtypes")
 	protected void doGotoMarker(IMarker marker) {
 
-		String elementId = marker.getAttribute(org.eclipse.gmf.runtime.common.core.resources.IMarker.ELEMENT_ID, null);
+		String elementId = marker.getAttribute(SCTMarkerType.SEMANTIC_ELEMENT_ID, null);
 		if (elementId == null || !(getEditor() instanceof DiagramEditor)) {
 			return;
 		}

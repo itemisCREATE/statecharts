@@ -1,4 +1,3 @@
-
 /**
  * Copyright (c) 2017 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
@@ -9,28 +8,21 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.editor.validation;
+package org.yakindu.sct.model.sgraph.ui.validation;
 
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.Issue;
-import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 
-import com.google.inject.Inject;
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Johannes Dicks - Initial contribution and API
  */
-public class SctIssueCreator implements ISctIssueCreator {
+@ImplementedBy(SctIssueCreator.class)
+public interface ISctIssueCreator {
 
-	@Inject
-	IssueUtil issueCreator;
+    SCTIssue createFromMarker(IMarker marker, String elementID);
 
-	@Override
-	public SCTIssue createFromMarker(final IMarker marker, final String id) {
-		final Issue delegate = issueCreator.createIssue(marker);
-		final SCTIssue issue = new SCTIssue(delegate, id);
-		return issue;
-	}
-
+	SCTIssue create(Issue t, String uriFragment);
+    
 }

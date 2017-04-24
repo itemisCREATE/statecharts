@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.Issue;
+import org.yakindu.sct.model.sgraph.ui.validation.ISctIssueCreator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerType;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
@@ -114,7 +115,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 		List<IMarker> markers = getMarkersOfConnectedResource();
 		for (IMarker iMarker : markers) {
 			SCTIssue issue = issueCreator.createFromMarker(iMarker,
-					iMarker.getAttribute(org.eclipse.gmf.runtime.common.core.resources.IMarker.ELEMENT_ID, ""));
+					iMarker.getAttribute(SCTMarkerType.SEMANTIC_ELEMENT_ID, ""));
 			newVisibleIssues.put(issue.getSemanticURI(), issue);
 		}
 		synchronized (visibleIssues) {

@@ -21,7 +21,9 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.yakindu.sct.model.sgraph.ui.validation.ISctIssueCreator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
+import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerType;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -77,7 +79,7 @@ public class DefaultResourceChangeToIssueProcessor implements IResourceChangeToI
 
 		for (final IMarkerDelta markerDelta : markerDeltas) {
 			final Object elementID = markerDelta
-					.getAttribute(org.eclipse.gmf.runtime.common.core.resources.IMarker.ELEMENT_ID);
+					.getAttribute(SCTMarkerType.SEMANTIC_ELEMENT_ID);
 			if (elementID == null) {
 				continue;
 			}

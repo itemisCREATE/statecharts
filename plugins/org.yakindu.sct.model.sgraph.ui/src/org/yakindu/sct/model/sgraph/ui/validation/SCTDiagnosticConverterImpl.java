@@ -19,6 +19,8 @@ import org.eclipse.xtext.validation.DiagnosticConverterImpl;
 import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 
+import com.google.inject.Inject;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -26,6 +28,9 @@ import org.yakindu.sct.model.sgraph.SpecificationElement;
  */
 public class SCTDiagnosticConverterImpl extends DiagnosticConverterImpl {
 
+	@Inject
+	ISctIssueCreator issueCreator;
+	
 	@Override
 	public void convertValidatorDiagnostic(final Diagnostic diagnostic, final IAcceptor<Issue> acceptor) {
 		super.convertValidatorDiagnostic(diagnostic, new IAcceptor<Issue>() {
@@ -38,7 +43,7 @@ public class SCTDiagnosticConverterImpl extends DiagnosticConverterImpl {
 							eObject = EcoreUtil2.getContainerOfType(eObject, SpecificationElement.class);
 						}
 						if (eObject != null && eObject.eResource() != null) {
-							acceptor.accept(new SCTIssue(t, eObject.eResource().getURIFragment(eObject)));
+							acceptor.accept(issueCreator.create(t, eObject.eResource().getURIFragment(eObject)));
 							notAccepted = false;
 						}
 					}
