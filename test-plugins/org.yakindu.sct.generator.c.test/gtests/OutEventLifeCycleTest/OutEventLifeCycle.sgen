@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart OutEventLifeCycle {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/OutEventLifeCycleTest"
+			targetProject = "gtests"
+			targetFolder = "OutEventLifeCycleTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart Parenthesis {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/ParenthesisTest"
+			targetProject = "gtests"
+			targetFolder = "ParenthesisTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

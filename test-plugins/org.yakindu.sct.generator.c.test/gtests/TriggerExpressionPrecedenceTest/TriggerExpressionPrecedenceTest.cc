@@ -18,8 +18,8 @@ TEST(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrFalse) {
 	triggerExpressionPrecedence_init(&handle);
 	
 	triggerExpressionPrecedence_enter(&handle);
-	triggerExpressionPrecedenceIface_set_c1(false);
-	triggerExpressionPrecedenceIface_set_c2(false);
+	triggerExpressionPrecedenceIface_set_c1(&handle,false);
+	triggerExpressionPrecedenceIface_set_c2(&handle,false);
 	triggerExpressionPrecedence_runCycle(&handle);
 	EXPECT_TRUE(!triggerExpressionPrecedenceIface_get_e1_transition(&handle));
 }
@@ -27,8 +27,8 @@ TEST(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrFalse) {
 	triggerExpressionPrecedence_init(&handle);
 	
 	triggerExpressionPrecedence_enter(&handle);
-	triggerExpressionPrecedenceIface_set_c1(true);
-	triggerExpressionPrecedenceIface_set_c2(false);
+	triggerExpressionPrecedenceIface_set_c1(&handle,true);
+	triggerExpressionPrecedenceIface_set_c2(&handle,false);
 	triggerExpressionPrecedence_runCycle(&handle);
 	EXPECT_TRUE(!triggerExpressionPrecedenceIface_get_e1_transition(&handle));
 }
@@ -36,8 +36,8 @@ TEST(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrTrue) {
 	triggerExpressionPrecedence_init(&handle);
 	
 	triggerExpressionPrecedence_enter(&handle);
-	triggerExpressionPrecedenceIface_set_c1(false);
-	triggerExpressionPrecedenceIface_set_c2(true);
+	triggerExpressionPrecedenceIface_set_c1(&handle,false);
+	triggerExpressionPrecedenceIface_set_c2(&handle,true);
 	triggerExpressionPrecedence_runCycle(&handle);
 	EXPECT_TRUE(!triggerExpressionPrecedenceIface_get_e1_transition(&handle));
 }
@@ -45,8 +45,8 @@ TEST(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {
 	triggerExpressionPrecedence_init(&handle);
 	
 	triggerExpressionPrecedence_enter(&handle);
-	triggerExpressionPrecedenceIface_set_c1(true);
-	triggerExpressionPrecedenceIface_set_c2(true);
+	triggerExpressionPrecedenceIface_set_c1(&handle,true);
+	triggerExpressionPrecedenceIface_set_c2(&handle,true);
 	triggerExpressionPrecedence_runCycle(&handle);
 	EXPECT_TRUE(!triggerExpressionPrecedenceIface_get_e1_transition(&handle));
 }

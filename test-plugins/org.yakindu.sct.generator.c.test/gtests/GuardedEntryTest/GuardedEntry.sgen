@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart GuardedEntry {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/GuardedEntryTest"
+			targetProject = "gtests"
+			targetFolder = "GuardedEntryTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

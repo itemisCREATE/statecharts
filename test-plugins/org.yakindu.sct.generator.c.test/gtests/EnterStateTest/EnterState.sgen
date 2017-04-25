@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart EnterState {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/EnterStateTest"
+			targetProject = "gtests"
+			targetFolder = "EnterStateTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

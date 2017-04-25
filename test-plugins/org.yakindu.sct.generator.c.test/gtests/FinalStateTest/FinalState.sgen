@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart FinalState {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/FinalStateTest"
+			targetProject = "gtests"
+			targetFolder = "FinalStateTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

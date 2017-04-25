@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart EntryExitSelfTransition {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/EntryExitSelfTransitionTest"
+			targetProject = "gtests"
+			targetFolder = "EntryExitSelfTransitionTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

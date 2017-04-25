@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart Declarations {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/DeclarationsTest"
+			targetProject = "gtests"
+			targetFolder = "DeclarationsTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

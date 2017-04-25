@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart AlwaysOncycle {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/AlwaysOncycleTest"
+			targetProject = "gtests"
+			targetFolder = "AlwaysOncycleTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

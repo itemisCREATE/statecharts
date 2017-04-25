@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart SameNameDifferentRegion {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/SameNameDifferentRegionTest"
+			targetProject = "gtests"
+			targetFolder = "SameNameDifferentRegionTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

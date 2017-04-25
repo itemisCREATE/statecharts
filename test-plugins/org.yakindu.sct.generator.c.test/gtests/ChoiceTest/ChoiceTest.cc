@@ -19,7 +19,7 @@ TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
 	
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(true);
+	choiceIface_set_c(&handle,true);
 	choiceIface_raise_e(&handle);
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
@@ -29,7 +29,7 @@ TEST(StatemachineTest, elseChoiceUsingDefaultTransition) {
 	
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(false);
+	choiceIface_set_c(&handle,false);
 	choiceIface_raise_e(&handle);
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_B));
@@ -39,7 +39,7 @@ TEST(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
 	
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(true);
+	choiceIface_set_c(&handle,true);
 	choiceIface_raise_g(&handle);
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
@@ -49,7 +49,7 @@ TEST(StatemachineTest, defaultChoiceUsingDefaultTransition) {
 	
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(false);
+	choiceIface_set_c(&handle,false);
 	choiceIface_raise_g(&handle);
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_B));
@@ -59,7 +59,7 @@ TEST(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
 	
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(true);
+	choiceIface_set_c(&handle,true);
 	choiceIface_raise_f(&handle);
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
@@ -69,7 +69,7 @@ TEST(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
 	
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(false);
+	choiceIface_set_c(&handle,false);
 	choiceIface_raise_f(&handle);
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_B));
@@ -79,7 +79,7 @@ TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
 	
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(true);
+	choiceIface_set_c(&handle,true);
 	choiceIface_raise_h(&handle);
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));

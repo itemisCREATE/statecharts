@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart TypeAlias {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/TypeAliasTest"
+			targetProject = "gtests"
+			targetFolder = "TypeAliasTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

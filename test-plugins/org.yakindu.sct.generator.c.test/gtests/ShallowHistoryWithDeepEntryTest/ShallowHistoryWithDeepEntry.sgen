@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart ShallowHistoryWithDeepEntry {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/ShallowHistoryWithDeepEntryTest"
+			targetProject = "gtests"
+			targetFolder = "ShallowHistoryWithDeepEntryTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart FeatureCalls {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/FeatureCallsTest"
+			targetProject = "gtests"
+			targetFolder = "FeatureCallsTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart declarations.ConstOnlyInternalScope {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/ConstOnlyInternalScopeTest"
+			targetProject = "gtests"
+			targetFolder = "ConstOnlyInternalScopeTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

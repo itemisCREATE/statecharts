@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart StaticChoice {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/StaticChoiceTest"
+			targetProject = "gtests"
+			targetFolder = "StaticChoiceTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

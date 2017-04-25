@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart HistoryWithExitPoint {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/HistoryWithExitPointTest"
+			targetProject = "gtests"
+			targetFolder = "HistoryWithExitPointTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

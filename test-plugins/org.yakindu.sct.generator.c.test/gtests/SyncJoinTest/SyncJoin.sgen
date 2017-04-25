@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart SyncJoin {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/SyncJoinTest"
+			targetProject = "gtests"
+			targetFolder = "SyncJoinTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

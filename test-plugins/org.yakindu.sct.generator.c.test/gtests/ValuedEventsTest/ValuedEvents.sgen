@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart ValuedEvents {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/ValuedEventsTest"
+			targetProject = "gtests"
+			targetFolder = "ValuedEventsTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

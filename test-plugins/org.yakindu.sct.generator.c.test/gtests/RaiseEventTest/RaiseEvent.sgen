@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart RaiseEvent {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/RaiseEventTest"
+			targetProject = "gtests"
+			targetFolder = "RaiseEventTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart SyncFork {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/SyncForkTest"
+			targetProject = "gtests"
+			targetFolder = "SyncForkTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

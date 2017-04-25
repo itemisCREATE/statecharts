@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart EmptyTransition {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/EmptyTransitionTest"
+			targetProject = "gtests"
+			targetFolder = "EmptyTransitionTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

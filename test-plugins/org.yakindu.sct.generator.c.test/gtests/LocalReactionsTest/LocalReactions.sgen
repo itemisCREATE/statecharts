@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart LocalReactions {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/LocalReactionsTest"
+			targetProject = "gtests"
+			targetFolder = "LocalReactionsTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart expressions.TriggerExpressionPrecedence {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/TriggerExpressionPrecedenceTest"
+			targetProject = "gtests"
+			targetFolder = "TriggerExpressionPrecedenceTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

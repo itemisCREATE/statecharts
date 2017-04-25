@@ -104,7 +104,7 @@ public class GTestRunner extends Runner {
 
 	private CharSequence readSourceFile(String sourceFile) throws IOException {
 		Bundle bundle = getTestBundle();
-		System.out.println("[GTestRunner] Loaded bundle " + bundle.getSymbolicName());
+//		System.out.println("[GTestRunner] Loaded bundle " + bundle.getSymbolicName());
 		InputStream is = FileLocator.openStream(bundle, new Path(sourceFile), false);
 		Reader reader = new InputStreamReader(is);
 		char[] buffer = new char[4096];
