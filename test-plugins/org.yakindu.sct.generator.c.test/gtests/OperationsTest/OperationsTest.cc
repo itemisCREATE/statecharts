@@ -14,7 +14,7 @@
 #include "OperationsRequired.h"
 class InternalOperation3aMock{
 	public:
-	sc_real (InternalOperation3aMock::*internalOperation3aBehavior)(sc_real) = NULL;
+	sc_real (InternalOperation3aMock::*internalOperation3aBehavior)(sc_real);
 	sc_real internalOperation3a1(const sc_real param1){
 		return (param1+1.0);
 	}
@@ -26,7 +26,7 @@ static InternalOperation3aMock* internalOperation3aMock;
 
 class AlwaysTrueMock{
 	public:
-	sc_boolean (AlwaysTrueMock::*alwaysTrueBehavior)() = NULL;
+	sc_boolean (AlwaysTrueMock::*alwaysTrueBehavior)();
 	sc_boolean alwaysTrue1(){
 		return (true);
 	}
