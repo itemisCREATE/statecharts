@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart Constants {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/ConstantsTests"
+			targetProject = "gtests"
+			targetFolder = "ConstantsTests"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

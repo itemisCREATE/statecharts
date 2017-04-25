@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2017 committers of YAKINDU and others.
+* Copyright (c) 2016 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -16,14 +16,12 @@ ConditionalExpressions handle;
 
 TEST(StatemachineTest, ConditionalExpressionTest) {
 	conditionalExpressions_init(&handle);
-	
 	conditionalExpressions_enter(&handle);
 	EXPECT_TRUE(conditionalExpressions_isStateActive(&handle, ConditionalExpressions_main_region_A));
-	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&handle)== 1l);
+	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&handle) == 1l);
 	conditionalExpressionsIface_raise_e(&handle);
 	conditionalExpressions_runCycle(&handle);
 	EXPECT_TRUE(conditionalExpressions_isStateActive(&handle, ConditionalExpressions_main_region_B));
-	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&handle)== 2l);
+	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&handle) == 2l);
 }
-
 

@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart ConditionalExpressions {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/ConditionalExpression"
+			targetProject = "gtests"
+			targetFolder = "ConditionalExpression"
 		}
 		feature FunctionInlining {
 			inlineReactions = false
