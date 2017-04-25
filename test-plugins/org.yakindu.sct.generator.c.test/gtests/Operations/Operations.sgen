@@ -1,8 +1,0 @@
-GeneratorModel for yakindu::c {
-	statechart Operations {
-		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "Operations"
-		}
-	}
-}

@@ -1,0 +1,19 @@
+GeneratorModel for yakindu::c {
+	statechart TransitionWithoutCondition {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "TransitionWithoutConditionTest"
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+	}
+}
