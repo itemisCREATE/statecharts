@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart OperationsWithoutBraces {
 		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "OperationsWithoutBraces"
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/OperationsWithoutBraces"
 		}
 	}
 }

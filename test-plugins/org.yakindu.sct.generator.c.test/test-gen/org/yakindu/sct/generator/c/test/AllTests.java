@@ -15,7 +15,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	AlwaysOncycle.class,
+	AlwaysOncycleTest.class,
 	AssignmentAsExpressionTest.class,
 	BitExpressionsTest.class,
 	BooleanExpressionsTest.class,

@@ -25,7 +25,6 @@ GeneratorModel for sctunit::c {
 
 	}
 
-
 	test AlwaysOncycle {
 
 		feature Outlet {
@@ -242,7 +241,83 @@ GeneratorModel for sctunit::c {
 			inlineEntries = false
 		}
 	}
+	
+	test  ConstOnlyInternalScope {
 
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+
+	}
+
+	test  ConstOnlyDefaultScope {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+
+	}
+
+	
+	test  ConstOnlyNamedScope {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+
+	}
+	
 	test Declarations {
 
 		feature Outlet {
@@ -433,6 +508,31 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+	}
+
+	test EntryReactionAction {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+
 	}
 
 	test ExitOnSelfTransition {
@@ -773,6 +873,29 @@ GeneratorModel for sctunit::c {
 
 	test LogicalOrTests {
 
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+	
+	test Operations {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "test-gen"
@@ -1328,7 +1451,30 @@ GeneratorModel for sctunit::c {
 		}
 	}
 
+	test TriggerExpressionPrecedence {
 
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "test-gen"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
+	
 	test TriggerGuardExpressions {
 
 		feature Outlet {
@@ -1376,7 +1522,7 @@ GeneratorModel for sctunit::c {
 			inlineEntries = false
 		}
 	}
-	
+
 	test StatemachineKeywords {
 
 		feature Outlet {
@@ -1400,7 +1546,7 @@ GeneratorModel for sctunit::c {
 			inlineEntries = false
 		}
 	}
-	
+
 	test TypeAlias {
 
 		feature Outlet {

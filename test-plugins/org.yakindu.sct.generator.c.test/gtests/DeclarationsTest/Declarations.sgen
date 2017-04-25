@@ -1,0 +1,19 @@
+GeneratorModel for yakindu::c {
+	statechart Declarations {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/DeclarationsTest"
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+	}
+}
