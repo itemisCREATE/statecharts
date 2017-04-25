@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
 	statechart VariadicFunctions {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "gtests/VariadicOperations"
+			targetProject = "gtests"
+			targetFolder = "VariadicOperations"
 		}
 	}
 }
