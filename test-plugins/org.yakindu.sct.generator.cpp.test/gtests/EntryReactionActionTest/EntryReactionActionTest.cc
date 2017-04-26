@@ -13,11 +13,11 @@
 #include "EntryReactionAction.h"
 #include "sc_types.h"
 EntryReactionAction* statechart = new EntryReactionAction();
+statechart->init();
 
 TEST(StatemachineTest, entryTransitionActionOnStatechartEnter) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredR1());
@@ -33,7 +33,6 @@ TEST(StatemachineTest, entryTransitionActionOnStatechartEnter) {
 TEST(StatemachineTest, entryOnRTS) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->raise_b();
@@ -69,7 +68,6 @@ TEST(StatemachineTest, entryOnRTS) {
 TEST(StatemachineTest, noEntryTransitionActionOnHistory) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->raise_b();

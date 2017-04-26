@@ -13,11 +13,11 @@
 #include "LocalReactions.h"
 #include "sc_types.h"
 LocalReactions* statechart = new LocalReactions();
+statechart->init();
 
 TEST(StatemachineTest, LocalReactionsTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(LocalReactions::main_region_A));

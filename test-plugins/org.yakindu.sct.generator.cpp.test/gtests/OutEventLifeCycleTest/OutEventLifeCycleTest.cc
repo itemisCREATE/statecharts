@@ -13,11 +13,11 @@
 #include "OutEventLifeCycle.h"
 #include "sc_types.h"
 OutEventLifeCycle* statechart = new OutEventLifeCycle();
+statechart->init();
 
 TEST(StatemachineTest, availableAfterCycle) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->raise_e();
@@ -31,7 +31,6 @@ TEST(StatemachineTest, availableAfterCycle) {
 TEST(StatemachineTest, availableWithinCycle) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->raise_e();
@@ -45,7 +44,6 @@ TEST(StatemachineTest, availableWithinCycle) {
 TEST(StatemachineTest, unvailableWithin2ndCycle) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->raise_e();
@@ -61,7 +59,6 @@ TEST(StatemachineTest, unvailableWithin2ndCycle) {
 TEST(StatemachineTest, unvailableAfter2ndCycle) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->raise_e();

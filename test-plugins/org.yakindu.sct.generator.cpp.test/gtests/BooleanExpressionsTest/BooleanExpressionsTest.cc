@@ -13,11 +13,11 @@
 #include "BooleanExpressions.h"
 #include "sc_types.h"
 BooleanExpressions* statechart = new BooleanExpressions();
+statechart->init();
 
 TEST(StatemachineTest, booleanExpressions) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(BooleanExpressions::main_region_StateA));

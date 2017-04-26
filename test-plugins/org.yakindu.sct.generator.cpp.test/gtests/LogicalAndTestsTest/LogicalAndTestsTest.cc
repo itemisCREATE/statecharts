@@ -13,11 +13,11 @@
 #include "LogicalAnd.h"
 #include "sc_types.h"
 LogicalAnd* statechart = new LogicalAnd();
+statechart->init();
 
 TEST(StatemachineTest, operandEvaluationOrder) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->runCycle();

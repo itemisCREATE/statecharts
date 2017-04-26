@@ -13,11 +13,11 @@
 #include "TransitionWithoutCondition.h"
 #include "sc_types.h"
 TransitionWithoutCondition* statechart = new TransitionWithoutCondition();
+statechart->init();
 
 TEST(StatemachineTest, TransitionWithoutConditionTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(TransitionWithoutCondition::main_region_A));

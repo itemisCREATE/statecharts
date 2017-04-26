@@ -13,11 +13,11 @@
 #include "NamedInterfaceAccess.h"
 #include "sc_types.h"
 NamedInterfaceAccess* statechart = new NamedInterfaceAccess();
+statechart->init();
 
 TEST(StatemachineTest, SafeOpenSuccess) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->runCycle();

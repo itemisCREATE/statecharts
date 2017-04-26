@@ -13,11 +13,11 @@
 #include "SameNameDifferentRegion.h"
 #include "sc_types.h"
 SameNameDifferentRegion* statechart = new SameNameDifferentRegion();
+statechart->init();
 
 TEST(StatemachineTest, sameNameDifferenRegionTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateA));

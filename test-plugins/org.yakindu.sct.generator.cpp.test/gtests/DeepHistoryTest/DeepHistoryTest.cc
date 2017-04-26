@@ -13,11 +13,11 @@
 #include "DeepHistory.h"
 #include "sc_types.h"
 DeepHistory* statechart = new DeepHistory();
+statechart->init();
 
 TEST(StatemachineTest, deepHistoryTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->raise_event1();

@@ -13,11 +13,11 @@
 #include "ShallowHistory.h"
 #include "sc_types.h"
 ShallowHistory* statechart = new ShallowHistory();
+statechart->init();
 
 TEST(StatemachineTest, shallowHistoryTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->raise_event1();

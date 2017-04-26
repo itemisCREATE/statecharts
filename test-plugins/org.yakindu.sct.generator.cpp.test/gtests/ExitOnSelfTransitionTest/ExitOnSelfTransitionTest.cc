@@ -13,11 +13,11 @@
 #include "ExitOnSelfTransition.h"
 #include "sc_types.h"
 ExitOnSelfTransition* statechart = new ExitOnSelfTransition();
+statechart->init();
 
 TEST(StatemachineTest, ExitOnSelfTransitionTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitOnSelfTransition::main_region_A));

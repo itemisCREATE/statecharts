@@ -13,11 +13,11 @@
 #include "StatechartActive.h"
 #include "sc_types.h"
 StatechartActive* statechart = new StatechartActive();
+statechart->init();
 
 TEST(StatemachineTest, inactiveBeforeEnter) {
 	
 	
-	statechart->init();
 	EXPECT_TRUE(!statechart->isActive());
 	
 	delete statechart;
@@ -25,7 +25,6 @@ TEST(StatemachineTest, inactiveBeforeEnter) {
 TEST(StatemachineTest, activeAfterEnter) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isActive());
@@ -35,7 +34,6 @@ TEST(StatemachineTest, activeAfterEnter) {
 TEST(StatemachineTest, inactiveAfterExit) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->exit();
@@ -47,7 +45,6 @@ TEST(StatemachineTest, inactiveAfterExit) {
 TEST(StatemachineTest, activeAfterReenter) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->exit();

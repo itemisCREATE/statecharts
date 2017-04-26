@@ -13,11 +13,11 @@
 #include "AssignmentAsExpression.h"
 #include "sc_types.h"
 AssignmentAsExpression* statechart = new AssignmentAsExpression();
+statechart->init();
 
 TEST(StatemachineTest, simpleAssignment) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(AssignmentAsExpression::main_region_Add));

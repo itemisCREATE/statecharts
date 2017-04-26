@@ -13,11 +13,11 @@
 #include "EntryExitSelfTransition.h"
 #include "sc_types.h"
 EntryExitSelfTransition* statechart = new EntryExitSelfTransition();
+statechart->init();
 
 TEST(StatemachineTest, SelfTransitionToChildState) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->runCycle();
@@ -43,7 +43,6 @@ TEST(StatemachineTest, SelfTransitionToChildState) {
 TEST(StatemachineTest, SelfTransitionFromChildState) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->runCycle();

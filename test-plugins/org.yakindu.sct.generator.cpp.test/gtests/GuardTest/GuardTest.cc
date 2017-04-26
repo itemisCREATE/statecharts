@@ -13,11 +13,11 @@
 #include "Guard.h"
 #include "sc_types.h"
 Guard* statechart = new Guard();
+statechart->init();
 
 TEST(StatemachineTest, guardTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));

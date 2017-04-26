@@ -13,11 +13,11 @@
 #include "HistoryWithoutInitialStep.h"
 #include "sc_types.h"
 HistoryWithoutInitialStep* statechart = new HistoryWithoutInitialStep();
+statechart->init();
 
 TEST(StatemachineTest, enterThroughInitialEntry) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_A));
@@ -39,7 +39,6 @@ TEST(StatemachineTest, enterThroughInitialEntry) {
 TEST(StatemachineTest, enterCThroughHistory) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_A));
@@ -67,7 +66,6 @@ TEST(StatemachineTest, enterCThroughHistory) {
 TEST(StatemachineTest, enterDThroughHistory) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_A));

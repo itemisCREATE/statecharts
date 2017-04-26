@@ -13,11 +13,11 @@
 #include "TypeAlias.h"
 #include "sc_types.h"
 TypeAlias* statechart = new TypeAlias();
+statechart->init();
 
 TEST(StatemachineTest, TypeAliasTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_Start));

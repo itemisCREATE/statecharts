@@ -13,11 +13,11 @@
 #include "LogicalOr.h"
 #include "sc_types.h"
 LogicalOr* statechart = new LogicalOr();
+statechart->init();
 
 TEST(StatemachineTest, operandEvaluationOrder) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->runCycle();

@@ -13,11 +13,11 @@
 #include "DeepEntry.h"
 #include "sc_types.h"
 DeepEntry* statechart = new DeepEntry();
+statechart->init();
 
 TEST(StatemachineTest, enterToSubstate) {
 	
 	
-	statechart->init();
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 0l);

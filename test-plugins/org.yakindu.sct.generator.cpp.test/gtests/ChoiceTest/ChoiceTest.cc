@@ -13,11 +13,11 @@
 #include "Choice.h"
 #include "sc_types.h"
 Choice* statechart = new Choice();
+statechart->init();
 
 TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
@@ -35,7 +35,6 @@ TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
 TEST(StatemachineTest, elseChoiceUsingDefaultTransition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
@@ -53,7 +52,6 @@ TEST(StatemachineTest, elseChoiceUsingDefaultTransition) {
 TEST(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
@@ -71,7 +69,6 @@ TEST(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
 TEST(StatemachineTest, defaultChoiceUsingDefaultTransition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
@@ -89,7 +86,6 @@ TEST(StatemachineTest, defaultChoiceUsingDefaultTransition) {
 TEST(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
@@ -107,7 +103,6 @@ TEST(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
 TEST(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
@@ -125,7 +120,6 @@ TEST(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
 TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));

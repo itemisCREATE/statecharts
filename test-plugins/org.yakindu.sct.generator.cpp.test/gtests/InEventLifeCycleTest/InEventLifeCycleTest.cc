@@ -13,11 +13,11 @@
 #include "InEventLifeCycle.h"
 #include "sc_types.h"
 InEventLifeCycle* statechart = new InEventLifeCycle();
+statechart->init();
 
 TEST(StatemachineTest, eventLifeCycle) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->raise_e();

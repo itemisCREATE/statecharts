@@ -13,11 +13,11 @@
 #include "ShallowHistoryWithDeepEntry.h"
 #include "sc_types.h"
 ShallowHistoryWithDeepEntry* statechart = new ShallowHistoryWithDeepEntry();
+statechart->init();
 
 TEST(StatemachineTest, noDeepEntryWithinHistory) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
@@ -45,7 +45,6 @@ TEST(StatemachineTest, noDeepEntryWithinHistory) {
 TEST(StatemachineTest, deepEntryWithinHistory) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
@@ -83,7 +82,6 @@ TEST(StatemachineTest, deepEntryWithinHistory) {
 TEST(StatemachineTest, directDeepEntryIntoHistory) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));

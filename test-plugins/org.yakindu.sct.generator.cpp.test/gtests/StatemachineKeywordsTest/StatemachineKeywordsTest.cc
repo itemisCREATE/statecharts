@@ -13,11 +13,11 @@
 #include "StatechartKeywords.h"
 #include "sc_types.h"
 StatechartKeywords* statechart = new StatechartKeywords();
+statechart->init();
 
 TEST(StatemachineTest, statemachineKeywords) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(StatechartKeywords::main_region_Timer));

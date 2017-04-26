@@ -13,11 +13,11 @@
 #include "NullCheck.h"
 #include "sc_types.h"
 NullCheck* statechart = new NullCheck();
+statechart->init();
 
 TEST(StatemachineTest, SimpleNullCheckTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(NullCheck::main_region_A));

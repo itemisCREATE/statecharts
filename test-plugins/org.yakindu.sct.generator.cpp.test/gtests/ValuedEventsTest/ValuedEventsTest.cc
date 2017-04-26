@@ -13,11 +13,11 @@
 #include "ValuedEvents.h"
 #include "sc_types.h"
 ValuedEvents* statechart = new ValuedEvents();
+statechart->init();
 
 TEST(StatemachineTest, valuedEventsTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->runCycle();

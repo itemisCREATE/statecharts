@@ -13,11 +13,11 @@
 #include "RaiseEvent.h"
 #include "sc_types.h"
 RaiseEvent* statechart = new RaiseEvent();
+statechart->init();
 
 TEST(StatemachineTest, raiseEvent) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(RaiseEvent::second_region_SateA));

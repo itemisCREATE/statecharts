@@ -13,11 +13,11 @@
 #include "STextKeywordsInStatesAndRegions.h"
 #include "sc_types.h"
 STextKeywordsInStatesAndRegions* statechart = new STextKeywordsInStatesAndRegions();
+statechart->init();
 
 TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));

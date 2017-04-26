@@ -13,11 +13,11 @@
 #include "ExitState.h"
 #include "sc_types.h"
 ExitState* statechart = new ExitState();
+statechart->init();
 
 TEST(StatemachineTest, defaultExit) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
@@ -33,7 +33,6 @@ TEST(StatemachineTest, defaultExit) {
 TEST(StatemachineTest, namedExitThroughNamedTransition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
@@ -49,7 +48,6 @@ TEST(StatemachineTest, namedExitThroughNamedTransition) {
 TEST(StatemachineTest, namedExitThroughDefaultTransition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
@@ -65,7 +63,6 @@ TEST(StatemachineTest, namedExitThroughDefaultTransition) {
 TEST(StatemachineTest, remainInA) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));

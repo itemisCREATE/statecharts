@@ -13,11 +13,11 @@
 #include "IntegerExpressions.h"
 #include "sc_types.h"
 IntegerExpressions* statechart = new IntegerExpressions();
+statechart->init();
 
 TEST(StatemachineTest, integerExpressions) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(IntegerExpressions::main_region_StateA));

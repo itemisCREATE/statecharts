@@ -13,11 +13,11 @@
 #include "ConstOnlyNamedScope.h"
 #include "sc_types.h"
 ConstOnlyNamedScope* statechart = new ConstOnlyNamedScope();
+statechart->init();
 
 TEST(StatemachineTest, statechartEntry) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(ConstOnlyNamedScope::ConstOnlyNamedScope_main_region_A));
@@ -27,7 +27,6 @@ TEST(StatemachineTest, statechartEntry) {
 TEST(StatemachineTest, stateTransition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->raise_e( 1l);

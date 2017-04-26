@@ -13,11 +13,11 @@
 #include "HistoryWithExitPoint.h"
 #include "sc_types.h"
 HistoryWithExitPoint* statechart = new HistoryWithExitPoint();
+statechart->init();
 
 TEST(StatemachineTest, historyEntryAfterExit) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_A_r_X1));

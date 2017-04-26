@@ -13,11 +13,11 @@
 #include "InternalEventLifeCycle.h"
 #include "sc_types.h"
 InternalEventLifeCycle* statechart = new InternalEventLifeCycle();
+statechart->init();
 
 TEST(StatemachineTest, InternalEventLifeCycleTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r1_A));

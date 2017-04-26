@@ -58,13 +58,13 @@ class ReturnInternalOperation3a
 {
 	public:
 		sc_real static internalOperation3a_1(sc_real param1){
-			return param1+1.0;
+			return param1 +1.0;
 		}
 };
-Operations* statechart = new Operations();
-statechart->init();
 
 TEST(StatemachineTest, operationsCalled) {
+	Operations* statechart = new Operations();
+	
 	MockDefault defaultMock;
 	
 	MockInternal internalMock;
@@ -131,6 +131,7 @@ TEST(StatemachineTest, operationsCalled) {
 	statechart->setInternalSCI_OCB(&internalMock);
 	statechart->setSCI_Interface1_OCB(&interface1Mock);
 	
+	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(Operations::main_region_A));

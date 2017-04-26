@@ -13,11 +13,11 @@
 #include "ConditionalExpressions.h"
 #include "sc_types.h"
 ConditionalExpressions* statechart = new ConditionalExpressions();
+statechart->init();
 
 TEST(StatemachineTest, ConditionalExpressionTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_A));

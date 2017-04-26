@@ -13,11 +13,11 @@
 #include "AlwaysOncycle.h"
 #include "sc_types.h"
 AlwaysOncycle* statechart = new AlwaysOncycle();
+statechart->init();
 
 TEST(StatemachineTest, alwaysOncycleTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));

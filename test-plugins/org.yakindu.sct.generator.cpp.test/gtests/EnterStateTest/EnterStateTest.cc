@@ -13,11 +13,11 @@
 #include "EnterState.h"
 #include "sc_types.h"
 EnterState* statechart = new EnterState();
+statechart->init();
 
 TEST(StatemachineTest, defaultEntry) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_A));
@@ -33,7 +33,6 @@ TEST(StatemachineTest, defaultEntry) {
 TEST(StatemachineTest, namedEntryThroughNamedTransition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_A));
@@ -49,7 +48,6 @@ TEST(StatemachineTest, namedEntryThroughNamedTransition) {
 TEST(StatemachineTest, namedEntryThroughDefaultTransition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_A));

@@ -13,11 +13,11 @@
 #include "Constants.h"
 #include "sc_types.h"
 Constants* statechart = new Constants();
+statechart->init();
 
 TEST(StatemachineTest, constantDefinition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(Constants::main_region_A));

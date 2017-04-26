@@ -13,11 +13,11 @@
 #include "SimpleEvent.h"
 #include "sc_types.h"
 SimpleEvent* statechart = new SimpleEvent();
+statechart->init();
 
 TEST(StatemachineTest, simpleEventTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(SimpleEvent::main_region_A)) << "Expected A to be active" ;

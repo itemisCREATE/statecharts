@@ -13,11 +13,11 @@
 #include "TimedTransitions.h"
 #include "sc_types.h"
 TimedTransitions* statechart = new TimedTransitions();
+statechart->init();
 
 TEST(StatemachineTest, Timer01) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(TimedTransitions::main_region_Start));

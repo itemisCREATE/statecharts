@@ -13,11 +13,11 @@
 #include "BitExpressions.h"
 #include "sc_types.h"
 BitExpressions* statechart = new BitExpressions();
+statechart->init();
 
 TEST(StatemachineTest, BitExpressions) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(BitExpressions::main_region_StateA));

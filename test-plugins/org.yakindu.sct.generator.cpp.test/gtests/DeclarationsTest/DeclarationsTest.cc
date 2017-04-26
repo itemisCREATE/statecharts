@@ -13,11 +13,11 @@
 #include "Declarations.h"
 #include "sc_types.h"
 Declarations* statechart = new Declarations();
+statechart->init();
 
 TEST(StatemachineTest, declarationsTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	delete statechart;

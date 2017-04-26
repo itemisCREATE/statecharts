@@ -13,11 +13,11 @@
 #include "TriggerExpressionPrecedence.h"
 #include "sc_types.h"
 TriggerExpressionPrecedence* statechart = new TriggerExpressionPrecedence();
+statechart->init();
 
 TEST(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrFalse) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->getDefaultSCI()->set_c1(false);
@@ -33,7 +33,6 @@ TEST(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrFalse) {
 TEST(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrFalse) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->getDefaultSCI()->set_c1(true);
@@ -49,7 +48,6 @@ TEST(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrFalse) {
 TEST(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrTrue) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->getDefaultSCI()->set_c1(false);
@@ -65,7 +63,6 @@ TEST(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrTrue) {
 TEST(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->getDefaultSCI()->set_c1(true);

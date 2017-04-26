@@ -13,11 +13,11 @@
 #include "FeatureCalls.h"
 #include "sc_types.h"
 FeatureCalls* statechart = new FeatureCalls();
+statechart->init();
 
 TEST(StatemachineTest, FeatureCalls) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(FeatureCalls::main_region_A));

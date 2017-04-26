@@ -13,11 +13,11 @@
 #include "CKeywords.h"
 #include "sc_types.h"
 CKeywords* statechart = new CKeywords();
+statechart->init();
 
 TEST(StatemachineTest, CKeywordsTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_char));

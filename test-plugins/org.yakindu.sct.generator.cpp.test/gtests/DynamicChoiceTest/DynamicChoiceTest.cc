@@ -13,11 +13,11 @@
 #include "DynamicChoice.h"
 #include "sc_types.h"
 DynamicChoice* statechart = new DynamicChoice();
+statechart->init();
 
 TEST(StatemachineTest, DynamicChoiceTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(DynamicChoice::main_region_Start));

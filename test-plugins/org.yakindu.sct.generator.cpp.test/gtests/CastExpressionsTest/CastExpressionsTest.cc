@@ -13,11 +13,11 @@
 #include "CastExpressions.h"
 #include "sc_types.h"
 CastExpressions* statechart = new CastExpressions();
+statechart->init();
 
 TEST(StatemachineTest, CastExpressionTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 5l);

@@ -13,11 +13,11 @@
 #include "FinalState.h"
 #include "sc_types.h"
 FinalState* statechart = new FinalState();
+statechart->init();
 
 TEST(StatemachineTest, StatechartNameTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->runCycle();

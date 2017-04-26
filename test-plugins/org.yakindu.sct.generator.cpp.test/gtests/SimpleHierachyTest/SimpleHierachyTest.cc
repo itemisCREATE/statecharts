@@ -13,11 +13,11 @@
 #include "SimpleHierachy.h"
 #include "sc_types.h"
 SimpleHierachy* statechart = new SimpleHierachy();
+statechart->init();
 
 TEST(StatemachineTest, simpleHierachyTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(SimpleHierachy::main_region_A));

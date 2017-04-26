@@ -13,11 +13,11 @@
 #include "TriggerGuardExpressions.h"
 #include "sc_types.h"
 TriggerGuardExpressions* statechart = new TriggerGuardExpressions();
+statechart->init();
 
 TEST(StatemachineTest, trueGuard) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
@@ -57,7 +57,6 @@ TEST(StatemachineTest, trueGuard) {
 TEST(StatemachineTest, falseGuard) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));

@@ -13,11 +13,11 @@
 #include "GuardedExit.h"
 #include "sc_types.h"
 GuardedExit* statechart = new GuardedExit();
+statechart->init();
 
 TEST(StatemachineTest, ExitTaken) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_A));
@@ -37,7 +37,6 @@ TEST(StatemachineTest, ExitTaken) {
 TEST(StatemachineTest, ExitNotTaken) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_A));

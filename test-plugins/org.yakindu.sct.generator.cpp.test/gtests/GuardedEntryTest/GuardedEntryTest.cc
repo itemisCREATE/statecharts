@@ -13,11 +13,11 @@
 #include "GuardedEntry.h"
 #include "sc_types.h"
 GuardedEntry* statechart = new GuardedEntry();
+statechart->init();
 
 TEST(StatemachineTest, EntryNotTakenOnStatechartEnter) {
 	
 	
-	statechart->init();
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_guard()== false);
 	
 	statechart->enter();
@@ -31,7 +31,6 @@ TEST(StatemachineTest, EntryNotTakenOnStatechartEnter) {
 TEST(StatemachineTest, EntryTakenOnStatechartEnter) {
 	
 	
-	statechart->init();
 	statechart->getDefaultSCI()->set_guard(true);
 	
 	statechart->enter();
@@ -45,7 +44,6 @@ TEST(StatemachineTest, EntryTakenOnStatechartEnter) {
 TEST(StatemachineTest, EntryTakenInTransition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
@@ -73,7 +71,6 @@ TEST(StatemachineTest, EntryTakenInTransition) {
 TEST(StatemachineTest, EntryNotTakenInTransition) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));

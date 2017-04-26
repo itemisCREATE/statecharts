@@ -13,11 +13,11 @@
 #include "StateIsActive.h"
 #include "sc_types.h"
 StateIsActive* statechart = new StateIsActive();
+statechart->init();
 
 TEST(StatemachineTest, stateIsActive) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(StateIsActive::R1_R1A));

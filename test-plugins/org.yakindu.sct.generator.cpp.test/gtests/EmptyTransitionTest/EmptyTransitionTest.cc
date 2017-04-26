@@ -13,11 +13,11 @@
 #include "EmptyTransition.h"
 #include "sc_types.h"
 EmptyTransition* statechart = new EmptyTransition();
+statechart->init();
 
 TEST(StatemachineTest, EmptyTransitionTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->runCycle();

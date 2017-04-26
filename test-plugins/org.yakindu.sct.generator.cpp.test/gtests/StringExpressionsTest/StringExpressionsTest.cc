@@ -13,11 +13,11 @@
 #include "StringExpressions.h"
 #include "sc_types.h"
 StringExpressions* statechart = new StringExpressions();
+statechart->init();
 
 TEST(StatemachineTest, StringExpressionsTest) {
 	
 	
-	statechart->init();
 	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_quotedStringX(), "\"X\"") == 0);
 	
 	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_quotedStringY(), "\"Y\"") == 0);

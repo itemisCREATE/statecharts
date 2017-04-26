@@ -13,11 +13,11 @@
 #include "ReadOnlyVariable.h"
 #include "sc_types.h"
 ReadOnlyVariable* statechart = new ReadOnlyVariable();
+statechart->init();
 
 TEST(StatemachineTest, ReadOnlyVariableTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(ReadOnlyVariable::main_region_StateA));

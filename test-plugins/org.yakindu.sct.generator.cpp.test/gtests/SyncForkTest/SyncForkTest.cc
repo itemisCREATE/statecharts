@@ -13,11 +13,11 @@
 #include "SyncFork.h"
 #include "sc_types.h"
 SyncFork* statechart = new SyncFork();
+statechart->init();
 
 TEST(StatemachineTest, syncForkTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_A));

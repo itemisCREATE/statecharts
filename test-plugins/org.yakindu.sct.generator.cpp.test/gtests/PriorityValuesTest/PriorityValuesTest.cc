@@ -13,11 +13,11 @@
 #include "PriorityValues.h"
 #include "sc_types.h"
 PriorityValues* statechart = new PriorityValues();
+statechart->init();
 
 TEST(StatemachineTest, transitionPriority) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(PriorityValues::main_region_A));
@@ -33,7 +33,6 @@ TEST(StatemachineTest, transitionPriority) {
 TEST(StatemachineTest, regionPriority) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(PriorityValues::someRegion_A));

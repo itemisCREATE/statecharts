@@ -13,11 +13,11 @@
 #include "EntryChoice.h"
 #include "sc_types.h"
 EntryChoice* statechart = new EntryChoice();
+statechart->init();
 
 TEST(StatemachineTest, EntryChoiceTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->runCycle();

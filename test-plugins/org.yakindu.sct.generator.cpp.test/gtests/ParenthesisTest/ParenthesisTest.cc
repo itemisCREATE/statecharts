@@ -13,11 +13,11 @@
 #include "Parenthesis.h"
 #include "sc_types.h"
 Parenthesis* statechart = new Parenthesis();
+statechart->init();
 
 TEST(StatemachineTest, simple) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(Parenthesis::mainRegion_A));

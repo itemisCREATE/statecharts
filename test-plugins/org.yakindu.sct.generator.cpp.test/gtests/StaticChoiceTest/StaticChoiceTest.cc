@@ -13,11 +13,11 @@
 #include "StaticChoice.h"
 #include "sc_types.h"
 StaticChoice* statechart = new StaticChoice();
+statechart->init();
 
 TEST(StatemachineTest, StaticChoiceTest) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(StaticChoice::main_region_Start));

@@ -13,11 +13,11 @@
 #include "SyncJoin.h"
 #include "sc_types.h"
 SyncJoin* statechart = new SyncJoin();
+statechart->init();
 
 TEST(StatemachineTest, syncJoin_C2_Waits) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B));
@@ -97,7 +97,6 @@ TEST(StatemachineTest, syncJoin_C2_Waits) {
 TEST(StatemachineTest, syncJoin_D2_Waits) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B));
@@ -153,7 +152,6 @@ TEST(StatemachineTest, syncJoin_D2_Waits) {
 TEST(StatemachineTest, doubleEntryActionBug) {
 	
 	
-	statechart->init();
 	statechart->enter();
 	
 	statechart->raise_e();
