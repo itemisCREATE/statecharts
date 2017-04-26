@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,19 +11,32 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "SameNameDifferentRegion.h"
+#include "sc_types.h"
+SameNameDifferentRegion* statechart = new SameNameDifferentRegion();
 
 TEST(StatemachineTest, sameNameDifferenRegionTest) {
-	SameNameDifferentRegion* statechart = new SameNameDifferentRegion();
+	
+	
 	statechart->init();
 	statechart->enter();
+	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateA));
+	
 	statechart->raise_e1();
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB));
+	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB_r1_StateA));
+	
 	statechart->raise_e1();
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB));
+	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB_r1_StateB));
+	
 	delete statechart;
 }

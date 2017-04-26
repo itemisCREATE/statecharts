@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,13 +11,20 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "EntryChoice.h"
+#include "sc_types.h"
+EntryChoice* statechart = new EntryChoice();
 
 TEST(StatemachineTest, EntryChoiceTest) {
-	EntryChoice* statechart = new EntryChoice();
+	
+	
 	statechart->init();
 	statechart->enter();
+	
 	statechart->runCycle();
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(EntryChoice::main_region_A));
+	
 	delete statechart;
 }

@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,43 +11,68 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "ExitState.h"
+#include "sc_types.h"
+ExitState* statechart = new ExitState();
 
 TEST(StatemachineTest, defaultExit) {
-	ExitState* statechart = new ExitState();
+	
+	
 	statechart->init();
 	statechart->enter();
+	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
+	
 	statechart->raise_e();
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_E));
+	
 	delete statechart;
 }
 TEST(StatemachineTest, namedExitThroughNamedTransition) {
-	ExitState* statechart = new ExitState();
+	
+	
 	statechart->init();
 	statechart->enter();
+	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
+	
 	statechart->raise_f();
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_F));
+	
 	delete statechart;
 }
 TEST(StatemachineTest, namedExitThroughDefaultTransition) {
-	ExitState* statechart = new ExitState();
+	
+	
 	statechart->init();
 	statechart->enter();
+	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
+	
 	statechart->raise_g();
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_E));
+	
 	delete statechart;
 }
 TEST(StatemachineTest, remainInA) {
-	ExitState* statechart = new ExitState();
+	
+	
 	statechart->init();
 	statechart->enter();
+	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
+	
 	delete statechart;
 }

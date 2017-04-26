@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,14 +11,22 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "InEventLifeCycle.h"
+#include "sc_types.h"
+InEventLifeCycle* statechart = new InEventLifeCycle();
 
 TEST(StatemachineTest, eventLifeCycle) {
-	InEventLifeCycle* statechart = new InEventLifeCycle();
+	
+	
 	statechart->init();
 	statechart->enter();
+	
 	statechart->raise_e();
+	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 0l);
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 1l);
+	
 	delete statechart;
 }

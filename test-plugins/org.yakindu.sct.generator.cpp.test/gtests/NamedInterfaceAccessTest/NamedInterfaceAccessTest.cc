@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,18 +11,30 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "NamedInterfaceAccess.h"
+#include "sc_types.h"
+NamedInterfaceAccess* statechart = new NamedInterfaceAccess();
 
 TEST(StatemachineTest, SafeOpenSuccess) {
-	NamedInterfaceAccess* statechart = new NamedInterfaceAccess();
+	
+	
 	statechart->init();
 	statechart->enter();
+	
 	statechart->runCycle();
+	
 	statechart->getSCI_User()->raise_numberPressed(3l);
+	
 	statechart->runCycle();
+	
 	statechart->getSCI_User()->raise_numberPressed(7l);
+	
 	statechart->runCycle();
+	
 	statechart->getSCI_User()->raise_numberPressed(5l);
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->getSCI_Safe()->isRaised_open());
+	
 	delete statechart;
 }

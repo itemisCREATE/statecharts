@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,34 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "TypeAlias.h"
+#include "sc_types.h"
+TypeAlias* statechart = new TypeAlias();
 
 TEST(StatemachineTest, TypeAliasTest) {
-	TypeAlias* statechart = new TypeAlias();
+	
+	
 	statechart->init();
 	statechart->enter();
+	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_Start));
+	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myVar()== 1l);
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_Mid));
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myString()== "TypeSystem");
+	
+	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "TypeSystem") == 0);
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_Mid2));
+	
 	statechart->raise_myEvent();
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_End));
+	
 	delete statechart;
 }
