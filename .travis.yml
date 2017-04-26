@@ -40,7 +40,7 @@ before_script:
  - unzip release-1.8.0.zip
  - cd googletest-release-1.8.0/googlemock
  - mkdir build && cd build && cmake .. && make
- - cd ../googletest
+ - cd ../../googletest
  - mkdir build && cd build && cmake .. && make
  - cd ../..
  - export GMOCK_HOME=`pwd`
