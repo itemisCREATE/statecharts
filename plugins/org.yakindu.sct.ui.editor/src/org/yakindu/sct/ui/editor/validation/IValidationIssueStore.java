@@ -27,7 +27,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultValidationIssueStore.class)
 public interface IValidationIssueStore extends IValidationIssueProcessor {
 
-	public interface IResourceIssueStoreListener {
+	public interface IValidationIssueStoreListener {
 
 		public void issuesChanged();
 		
@@ -35,9 +35,9 @@ public interface IValidationIssueStore extends IValidationIssueProcessor {
 
 	}
 
-	public void addIssueStoreListener(IResourceIssueStoreListener listener);
+	public void addIssueStoreListener(IValidationIssueStoreListener listener);
 
-	public void removeIssueStoreListener(IResourceIssueStoreListener listener);
+	public void removeIssueStoreListener(IValidationIssueStoreListener listener);
 
 	public void connect(Resource resource);
 

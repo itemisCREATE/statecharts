@@ -75,4 +75,35 @@ public class SCTIssue extends IssueImpl {
 	public String[] getData() {
 		return delegate.getData();
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((delegate == null) ? 0 : delegate.hashCode());
+		result = prime * result + ((semanticURI == null) ? 0 : semanticURI.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SCTIssue other = (SCTIssue) obj;
+		if (delegate == null) {
+			if (other.delegate != null)
+				return false;
+		} else if (!getMessage().equals(other.getMessage()))
+			return false;
+		if (getSemanticURI() == null) {
+			if (other.getSemanticURI() != null)
+				return false;
+		} else if (!getSemanticURI().equals(other.getSemanticURI()))
+			return false;
+		return true;
+	}
 }
