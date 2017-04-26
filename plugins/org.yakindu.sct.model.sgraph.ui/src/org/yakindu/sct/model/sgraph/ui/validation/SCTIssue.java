@@ -80,7 +80,7 @@ public class SCTIssue extends IssueImpl {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((delegate == null) ? 0 : delegate.hashCode());
+		result = prime * result + ((getMessage() == null) ? 0 : getMessage().hashCode());
 		result = prime * result + ((semanticURI == null) ? 0 : semanticURI.hashCode());
 		return result;
 	}
