@@ -126,25 +126,23 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 			activeStateIndex = activeStateIndex + 1
 		}
 		executionContext.clearLocalAndInEvents
-		while ( 0 < executionContext.internalEventQueue.size )
-		{
+		while (0 < executionContext.internalEventQueue.size) {
 			var LocalInternalEvent event = executionContext.internalEventQueue.poll
-			if ( event.doesContainValue )
-			{
+			if (event.doesContainValue) {
 				executionContext.getEvent(event.eventname).value = event.value;
 			}
-			 executionContext.getEvent(event.eventname).raised = true; 
-			 		executionContext.raiseScheduledEvents
-		activeStateIndex = 0
-		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
-		executionContext.clearOutEvents
-		while (activeStateIndex < activeStateConfiguration.size) {
-			var state = activeStateConfiguration.get(activeStateIndex)
-			state?.reactSequence?.scheduleAndRun
-			activeStateIndex = activeStateIndex + 1
+			executionContext.getEvent(event.eventname).raised = true;
+			executionContext.raiseScheduledEvents
+			activeStateIndex = 0
+			if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
+			executionContext.clearOutEvents
+			while (activeStateIndex < activeStateConfiguration.size) {
+				var state = activeStateConfiguration.get(activeStateIndex)
+				state?.reactSequence?.scheduleAndRun
+				activeStateIndex = activeStateIndex + 1
+			}
+			executionContext.clearLocalAndInEvents
 		}
-		executionContext.clearLocalAndInEvents
-		}  
 	}
 
 	override resume() {

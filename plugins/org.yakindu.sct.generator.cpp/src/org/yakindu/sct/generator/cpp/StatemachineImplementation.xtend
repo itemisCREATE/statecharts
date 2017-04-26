@@ -69,6 +69,7 @@ class StatemachineImplementation implements IContentTemplate {
 		«finalFunction»
 		
 		«runCycleInternFunction»
+
 		«runCycleFunction»
 		
 		«clearInEventsFunction»
