@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "NullCheck.h"
 #include "sc_types.h"
-NullCheck* statechart = new NullCheck();
-statechart->init();
+NullCheck* statechart;
 
-TEST(StatemachineTest, SimpleNullCheckTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new NullCheck();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, SimpleNullCheckTest) {
 	
 	
 	statechart->enter();
@@ -26,5 +36,4 @@ TEST(StatemachineTest, SimpleNullCheckTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(NullCheck::main_region_B));
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "HistoryWithoutInitialStep.h"
 #include "sc_types.h"
-HistoryWithoutInitialStep* statechart = new HistoryWithoutInitialStep();
-statechart->init();
+HistoryWithoutInitialStep* statechart;
 
-TEST(StatemachineTest, enterThroughInitialEntry) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new HistoryWithoutInitialStep();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, enterThroughInitialEntry) {
 	
 	
 	statechart->enter();
@@ -34,9 +44,8 @@ TEST(StatemachineTest, enterThroughInitialEntry) {
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_D));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, enterCThroughHistory) {
+TEST_F(StatemachineTest, enterCThroughHistory) {
 	
 	
 	statechart->enter();
@@ -61,9 +70,8 @@ TEST(StatemachineTest, enterCThroughHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_C));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, enterDThroughHistory) {
+TEST_F(StatemachineTest, enterDThroughHistory) {
 	
 	
 	statechart->enter();
@@ -92,5 +100,4 @@ TEST(StatemachineTest, enterDThroughHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_D));
 	
-	delete statechart;
 }

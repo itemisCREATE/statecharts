@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "OutEventLifeCycle.h"
 #include "sc_types.h"
-OutEventLifeCycle* statechart = new OutEventLifeCycle();
-statechart->init();
+OutEventLifeCycle* statechart;
 
-TEST(StatemachineTest, availableAfterCycle) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new OutEventLifeCycle();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, availableAfterCycle) {
 	
 	
 	statechart->enter();
@@ -26,9 +36,8 @@ TEST(StatemachineTest, availableAfterCycle) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_f());
 	
-	delete statechart;
 }
-TEST(StatemachineTest, availableWithinCycle) {
+TEST_F(StatemachineTest, availableWithinCycle) {
 	
 	
 	statechart->enter();
@@ -39,9 +48,8 @@ TEST(StatemachineTest, availableWithinCycle) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_f_available_in_cycle());
 	
-	delete statechart;
 }
-TEST(StatemachineTest, unvailableWithin2ndCycle) {
+TEST_F(StatemachineTest, unvailableWithin2ndCycle) {
 	
 	
 	statechart->enter();
@@ -54,9 +62,8 @@ TEST(StatemachineTest, unvailableWithin2ndCycle) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_f_available_in_next_cycle());
 	
-	delete statechart;
 }
-TEST(StatemachineTest, unvailableAfter2ndCycle) {
+TEST_F(StatemachineTest, unvailableAfter2ndCycle) {
 	
 	
 	statechart->enter();
@@ -69,5 +76,4 @@ TEST(StatemachineTest, unvailableAfter2ndCycle) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->isRaised_f());
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "SameNameDifferentRegion.h"
 #include "sc_types.h"
-SameNameDifferentRegion* statechart = new SameNameDifferentRegion();
-statechart->init();
+SameNameDifferentRegion* statechart;
 
-TEST(StatemachineTest, sameNameDifferenRegionTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new SameNameDifferentRegion();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, sameNameDifferenRegionTest) {
 	
 	
 	statechart->enter();
@@ -38,5 +48,4 @@ TEST(StatemachineTest, sameNameDifferenRegionTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB_r1_StateB));
 	
-	delete statechart;
 }

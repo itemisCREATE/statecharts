@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "SimpleHierachy.h"
 #include "sc_types.h"
-SimpleHierachy* statechart = new SimpleHierachy();
-statechart->init();
+SimpleHierachy* statechart;
 
-TEST(StatemachineTest, simpleHierachyTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new SimpleHierachy();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, simpleHierachyTest) {
 	
 	
 	statechart->enter();
@@ -34,5 +44,4 @@ TEST(StatemachineTest, simpleHierachyTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SimpleHierachy::main_region_B_subregion1_B1));
 	
-	delete statechart;
 }

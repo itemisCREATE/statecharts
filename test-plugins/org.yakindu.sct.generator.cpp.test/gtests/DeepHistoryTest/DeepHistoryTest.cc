@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "DeepHistory.h"
 #include "sc_types.h"
-DeepHistory* statechart = new DeepHistory();
-statechart->init();
+DeepHistory* statechart;
 
-TEST(StatemachineTest, deepHistoryTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new DeepHistory();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, deepHistoryTest) {
 	
 	
 	statechart->enter();
@@ -56,5 +66,4 @@ TEST(StatemachineTest, deepHistoryTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	
-	delete statechart;
 }

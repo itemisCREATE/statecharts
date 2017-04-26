@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "NamedInterfaceAccess.h"
 #include "sc_types.h"
-NamedInterfaceAccess* statechart = new NamedInterfaceAccess();
-statechart->init();
+NamedInterfaceAccess* statechart;
 
-TEST(StatemachineTest, SafeOpenSuccess) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new NamedInterfaceAccess();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, SafeOpenSuccess) {
 	
 	
 	statechart->enter();
@@ -36,5 +46,4 @@ TEST(StatemachineTest, SafeOpenSuccess) {
 	
 	EXPECT_TRUE(statechart->getSCI_Safe()->isRaised_open());
 	
-	delete statechart;
 }

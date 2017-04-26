@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "ShallowHistoryWithDeepEntry.h"
 #include "sc_types.h"
-ShallowHistoryWithDeepEntry* statechart = new ShallowHistoryWithDeepEntry();
-statechart->init();
+ShallowHistoryWithDeepEntry* statechart;
 
-TEST(StatemachineTest, noDeepEntryWithinHistory) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new ShallowHistoryWithDeepEntry();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, noDeepEntryWithinHistory) {
 	
 	
 	statechart->enter();
@@ -40,9 +50,8 @@ TEST(StatemachineTest, noDeepEntryWithinHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_A));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, deepEntryWithinHistory) {
+TEST_F(StatemachineTest, deepEntryWithinHistory) {
 	
 	
 	statechart->enter();
@@ -77,9 +86,8 @@ TEST(StatemachineTest, deepEntryWithinHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_B));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, directDeepEntryIntoHistory) {
+TEST_F(StatemachineTest, directDeepEntryIntoHistory) {
 	
 	
 	statechart->enter();
@@ -108,5 +116,4 @@ TEST(StatemachineTest, directDeepEntryIntoHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_B));
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "TypeAlias.h"
 #include "sc_types.h"
-TypeAlias* statechart = new TypeAlias();
-statechart->init();
+TypeAlias* statechart;
 
-TEST(StatemachineTest, TypeAliasTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new TypeAlias();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, TypeAliasTest) {
 	
 	
 	statechart->enter();
@@ -40,5 +50,4 @@ TEST(StatemachineTest, TypeAliasTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_End));
 	
-	delete statechart;
 }

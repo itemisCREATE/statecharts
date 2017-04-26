@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "ShallowHistory.h"
 #include "sc_types.h"
-ShallowHistory* statechart = new ShallowHistory();
-statechart->init();
+ShallowHistory* statechart;
 
-TEST(StatemachineTest, shallowHistoryTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new ShallowHistory();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, shallowHistoryTest) {
 	
 	
 	statechart->enter();
@@ -80,5 +90,4 @@ TEST(StatemachineTest, shallowHistoryTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "BooleanExpressions.h"
 #include "sc_types.h"
-BooleanExpressions* statechart = new BooleanExpressions();
-statechart->init();
+BooleanExpressions* statechart;
 
-TEST(StatemachineTest, booleanExpressions) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new BooleanExpressions();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, booleanExpressions) {
 	
 	
 	statechart->enter();
@@ -42,5 +52,4 @@ TEST(StatemachineTest, booleanExpressions) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_notequal()== true);
 	
-	delete statechart;
 }

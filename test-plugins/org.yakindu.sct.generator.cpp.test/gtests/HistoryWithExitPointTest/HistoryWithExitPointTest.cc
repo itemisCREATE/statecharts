@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "HistoryWithExitPoint.h"
 #include "sc_types.h"
-HistoryWithExitPoint* statechart = new HistoryWithExitPoint();
-statechart->init();
+HistoryWithExitPoint* statechart;
 
-TEST(StatemachineTest, historyEntryAfterExit) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new HistoryWithExitPoint();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, historyEntryAfterExit) {
 	
 	
 	statechart->enter();
@@ -52,5 +62,4 @@ TEST(StatemachineTest, historyEntryAfterExit) {
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_A_r_X2));
 	
-	delete statechart;
 }

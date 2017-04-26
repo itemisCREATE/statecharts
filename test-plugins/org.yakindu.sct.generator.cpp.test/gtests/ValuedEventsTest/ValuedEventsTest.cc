@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "ValuedEvents.h"
 #include "sc_types.h"
-ValuedEvents* statechart = new ValuedEvents();
-statechart->init();
+ValuedEvents* statechart;
 
-TEST(StatemachineTest, valuedEventsTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new ValuedEvents();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, valuedEventsTest) {
 	
 	
 	statechart->enter();
@@ -50,5 +60,4 @@ TEST(StatemachineTest, valuedEventsTest) {
 	
 	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "tool") == 0);
 	
-	delete statechart;
 }

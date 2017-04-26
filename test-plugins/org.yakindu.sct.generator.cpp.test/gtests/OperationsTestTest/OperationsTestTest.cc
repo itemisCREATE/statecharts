@@ -61,10 +61,20 @@ class ReturnInternalOperation3a
 			return param1+1.0;
 		}
 };
-Operations* statechart = new Operations();
-statechart->init();
+Operations* statechart;
 
-TEST(StatemachineTest, operationsCalled) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new Operations();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, operationsCalled) {
 	MockDefault defaultMock;
 	
 	MockInternal internalMock;
@@ -151,5 +161,4 @@ TEST(StatemachineTest, operationsCalled) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Operations::main_region_D));
 	
-	delete statechart;
 }

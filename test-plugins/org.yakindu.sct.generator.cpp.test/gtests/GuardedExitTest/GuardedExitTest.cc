@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "GuardedExit.h"
 #include "sc_types.h"
-GuardedExit* statechart = new GuardedExit();
-statechart->init();
+GuardedExit* statechart;
 
-TEST(StatemachineTest, ExitTaken) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new GuardedExit();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, ExitTaken) {
 	
 	
 	statechart->enter();
@@ -32,9 +42,8 @@ TEST(StatemachineTest, ExitTaken) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_done());
 	
-	delete statechart;
 }
-TEST(StatemachineTest, ExitNotTaken) {
+TEST_F(StatemachineTest, ExitNotTaken) {
 	
 	
 	statechart->enter();
@@ -51,5 +60,4 @@ TEST(StatemachineTest, ExitNotTaken) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_done());
 	
-	delete statechart;
 }

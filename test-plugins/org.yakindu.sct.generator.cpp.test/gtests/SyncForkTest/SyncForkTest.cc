@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "SyncFork.h"
 #include "sc_types.h"
-SyncFork* statechart = new SyncFork();
-statechart->init();
+SyncFork* statechart;
 
-TEST(StatemachineTest, syncForkTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new SyncFork();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, syncForkTest) {
 	
 	
 	statechart->enter();
@@ -58,5 +68,4 @@ TEST(StatemachineTest, syncForkTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_B_r2_D1));
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "PriorityValues.h"
 #include "sc_types.h"
-PriorityValues* statechart = new PriorityValues();
-statechart->init();
+PriorityValues* statechart;
 
-TEST(StatemachineTest, transitionPriority) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new PriorityValues();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, transitionPriority) {
 	
 	
 	statechart->enter();
@@ -28,9 +38,8 @@ TEST(StatemachineTest, transitionPriority) {
 	
 	EXPECT_TRUE(statechart->isStateActive(PriorityValues::main_region_C));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, regionPriority) {
+TEST_F(StatemachineTest, regionPriority) {
 	
 	
 	statechart->enter();
@@ -45,5 +54,4 @@ TEST(StatemachineTest, regionPriority) {
 	
 	EXPECT_TRUE(!statechart->isStateActive(PriorityValues::main_region_E));
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "StringExpressions.h"
 #include "sc_types.h"
-StringExpressions* statechart = new StringExpressions();
-statechart->init();
+StringExpressions* statechart;
 
-TEST(StatemachineTest, StringExpressionsTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new StringExpressions();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, StringExpressionsTest) {
 	
 	
 	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_quotedStringX(), "\"X\"") == 0);
@@ -82,5 +92,4 @@ TEST(StatemachineTest, StringExpressionsTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarNotEqual());
 	
-	delete statechart;
 }

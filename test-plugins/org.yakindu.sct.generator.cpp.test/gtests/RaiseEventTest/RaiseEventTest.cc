@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "RaiseEvent.h"
 #include "sc_types.h"
-RaiseEvent* statechart = new RaiseEvent();
-statechart->init();
+RaiseEvent* statechart;
 
-TEST(StatemachineTest, raiseEvent) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new RaiseEvent();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, raiseEvent) {
 	
 	
 	statechart->enter();
@@ -34,5 +44,4 @@ TEST(StatemachineTest, raiseEvent) {
 	
 	EXPECT_TRUE(statechart->isStateActive(RaiseEvent::main_region_StateB));
 	
-	delete statechart;
 }

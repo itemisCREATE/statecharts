@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "EntryExitSelfTransition.h"
 #include "sc_types.h"
-EntryExitSelfTransition* statechart = new EntryExitSelfTransition();
-statechart->init();
+EntryExitSelfTransition* statechart;
 
-TEST(StatemachineTest, SelfTransitionToChildState) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new EntryExitSelfTransition();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, SelfTransitionToChildState) {
 	
 	
 	statechart->enter();
@@ -38,9 +48,8 @@ TEST(StatemachineTest, SelfTransitionToChildState) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_C));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, SelfTransitionFromChildState) {
+TEST_F(StatemachineTest, SelfTransitionFromChildState) {
 	
 	
 	statechart->enter();
@@ -71,5 +80,4 @@ TEST(StatemachineTest, SelfTransitionFromChildState) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 1l);
 	
-	delete statechart;
 }

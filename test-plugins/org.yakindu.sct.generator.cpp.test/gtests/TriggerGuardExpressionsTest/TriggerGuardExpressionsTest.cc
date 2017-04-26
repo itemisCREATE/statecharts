@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "TriggerGuardExpressions.h"
 #include "sc_types.h"
-TriggerGuardExpressions* statechart = new TriggerGuardExpressions();
-statechart->init();
+TriggerGuardExpressions* statechart;
 
-TEST(StatemachineTest, trueGuard) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new TriggerGuardExpressions();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, trueGuard) {
 	
 	
 	statechart->enter();
@@ -52,9 +62,8 @@ TEST(StatemachineTest, trueGuard) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_B));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, falseGuard) {
+TEST_F(StatemachineTest, falseGuard) {
 	
 	
 	statechart->enter();
@@ -83,5 +92,4 @@ TEST(StatemachineTest, falseGuard) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
 	
-	delete statechart;
 }

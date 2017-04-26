@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "CKeywords.h"
 #include "sc_types.h"
-CKeywords* statechart = new CKeywords();
-statechart->init();
+CKeywords* statechart;
 
-TEST(StatemachineTest, CKeywordsTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new CKeywords();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, CKeywordsTest) {
 	
 	
 	statechart->enter();
@@ -32,5 +42,4 @@ TEST(StatemachineTest, CKeywordsTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_loop_switch_case_enum_asm));
 	
-	delete statechart;
 }

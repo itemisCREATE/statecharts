@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "ExitState.h"
 #include "sc_types.h"
-ExitState* statechart = new ExitState();
-statechart->init();
+ExitState* statechart;
 
-TEST(StatemachineTest, defaultExit) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new ExitState();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, defaultExit) {
 	
 	
 	statechart->enter();
@@ -28,9 +38,8 @@ TEST(StatemachineTest, defaultExit) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_E));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, namedExitThroughNamedTransition) {
+TEST_F(StatemachineTest, namedExitThroughNamedTransition) {
 	
 	
 	statechart->enter();
@@ -43,9 +52,8 @@ TEST(StatemachineTest, namedExitThroughNamedTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_F));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, namedExitThroughDefaultTransition) {
+TEST_F(StatemachineTest, namedExitThroughDefaultTransition) {
 	
 	
 	statechart->enter();
@@ -58,9 +66,8 @@ TEST(StatemachineTest, namedExitThroughDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_E));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, remainInA) {
+TEST_F(StatemachineTest, remainInA) {
 	
 	
 	statechart->enter();
@@ -71,5 +78,4 @@ TEST(StatemachineTest, remainInA) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "ConditionalExpressions.h"
 #include "sc_types.h"
-ConditionalExpressions* statechart = new ConditionalExpressions();
-statechart->init();
+ConditionalExpressions* statechart;
 
-TEST(StatemachineTest, ConditionalExpressionTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new ConditionalExpressions();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, ConditionalExpressionTest) {
 	
 	
 	statechart->enter();
@@ -32,5 +42,4 @@ TEST(StatemachineTest, ConditionalExpressionTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 2l);
 	
-	delete statechart;
 }

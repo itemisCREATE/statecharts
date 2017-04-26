@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "AlwaysOncycle.h"
 #include "sc_types.h"
-AlwaysOncycle* statechart = new AlwaysOncycle();
-statechart->init();
+AlwaysOncycle* statechart;
 
-TEST(StatemachineTest, alwaysOncycleTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new AlwaysOncycle();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, alwaysOncycleTest) {
 	
 	
 	statechart->enter();
@@ -40,5 +50,4 @@ TEST(StatemachineTest, alwaysOncycleTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
 	
-	delete statechart;
 }

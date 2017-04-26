@@ -12,13 +12,22 @@
 #include "gtest/gtest.h"
 #include "Declarations.h"
 #include "sc_types.h"
-Declarations* statechart = new Declarations();
-statechart->init();
+Declarations* statechart;
 
-TEST(StatemachineTest, declarationsTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new Declarations();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, declarationsTest) {
 	
 	
 	statechart->enter();
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "StaticChoice.h"
 #include "sc_types.h"
-StaticChoice* statechart = new StaticChoice();
-statechart->init();
+StaticChoice* statechart;
 
-TEST(StatemachineTest, StaticChoiceTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new StaticChoice();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, StaticChoiceTest) {
 	
 	
 	statechart->enter();
@@ -24,5 +34,4 @@ TEST(StatemachineTest, StaticChoiceTest) {
 	
 	statechart->runCycle();
 	
-	delete statechart;
 }

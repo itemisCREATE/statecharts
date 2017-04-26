@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "TimedTransitions.h"
 #include "sc_types.h"
-TimedTransitions* statechart = new TimedTransitions();
-statechart->init();
+TimedTransitions* statechart;
 
-TEST(StatemachineTest, Timer01) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new TimedTransitions();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, Timer01) {
 	
 	
 	statechart->enter();
@@ -28,5 +38,4 @@ TEST(StatemachineTest, Timer01) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TimedTransitions::main_region_End));
 	
-	delete statechart;
 }

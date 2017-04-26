@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "DeepEntry.h"
 #include "sc_types.h"
-DeepEntry* statechart = new DeepEntry();
-statechart->init();
+DeepEntry* statechart;
 
-TEST(StatemachineTest, enterToSubstate) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new DeepEntry();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, enterToSubstate) {
 	
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
@@ -52,5 +62,4 @@ TEST(StatemachineTest, enterToSubstate) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 1l);
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "EmptyTransition.h"
 #include "sc_types.h"
-EmptyTransition* statechart = new EmptyTransition();
-statechart->init();
+EmptyTransition* statechart;
 
-TEST(StatemachineTest, EmptyTransitionTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new EmptyTransition();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, EmptyTransitionTest) {
 	
 	
 	statechart->enter();
@@ -26,5 +36,4 @@ TEST(StatemachineTest, EmptyTransitionTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EmptyTransition::main_region_A));
 	
-	delete statechart;
 }

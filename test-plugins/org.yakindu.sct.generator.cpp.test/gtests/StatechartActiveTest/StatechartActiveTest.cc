@@ -12,26 +12,34 @@
 #include "gtest/gtest.h"
 #include "StatechartActive.h"
 #include "sc_types.h"
-StatechartActive* statechart = new StatechartActive();
-statechart->init();
+StatechartActive* statechart;
 
-TEST(StatemachineTest, inactiveBeforeEnter) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new StatechartActive();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, inactiveBeforeEnter) {
 	
 	
 	EXPECT_TRUE(!statechart->isActive());
 	
-	delete statechart;
 }
-TEST(StatemachineTest, activeAfterEnter) {
+TEST_F(StatemachineTest, activeAfterEnter) {
 	
 	
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isActive());
 	
-	delete statechart;
 }
-TEST(StatemachineTest, inactiveAfterExit) {
+TEST_F(StatemachineTest, inactiveAfterExit) {
 	
 	
 	statechart->enter();
@@ -40,9 +48,8 @@ TEST(StatemachineTest, inactiveAfterExit) {
 	
 	EXPECT_TRUE(!statechart->isActive());
 	
-	delete statechart;
 }
-TEST(StatemachineTest, activeAfterReenter) {
+TEST_F(StatemachineTest, activeAfterReenter) {
 	
 	
 	statechart->enter();
@@ -53,5 +60,4 @@ TEST(StatemachineTest, activeAfterReenter) {
 	
 	EXPECT_TRUE(statechart->isActive());
 	
-	delete statechart;
 }

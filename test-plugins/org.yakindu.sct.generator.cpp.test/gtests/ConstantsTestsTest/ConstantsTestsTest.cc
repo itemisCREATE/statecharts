@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "Constants.h"
 #include "sc_types.h"
-Constants* statechart = new Constants();
-statechart->init();
+Constants* statechart;
 
-TEST(StatemachineTest, constantDefinition) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new Constants();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, constantDefinition) {
 	
 	
 	statechart->enter();
@@ -50,5 +60,4 @@ TEST(StatemachineTest, constantDefinition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Constants::main_region_A));
 	
-	delete statechart;
 }

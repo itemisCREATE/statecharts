@@ -12,15 +12,24 @@
 #include "gtest/gtest.h"
 #include "StatechartKeywords.h"
 #include "sc_types.h"
-StatechartKeywords* statechart = new StatechartKeywords();
-statechart->init();
+StatechartKeywords* statechart;
 
-TEST(StatemachineTest, statemachineKeywords) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new StatechartKeywords();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, statemachineKeywords) {
 	
 	
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(StatechartKeywords::main_region_Timer));
 	
-	delete statechart;
 }

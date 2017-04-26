@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "TransitionWithoutCondition.h"
 #include "sc_types.h"
-TransitionWithoutCondition* statechart = new TransitionWithoutCondition();
-statechart->init();
+TransitionWithoutCondition* statechart;
 
-TEST(StatemachineTest, TransitionWithoutConditionTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new TransitionWithoutCondition();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, TransitionWithoutConditionTest) {
 	
 	
 	statechart->enter();
@@ -26,5 +36,4 @@ TEST(StatemachineTest, TransitionWithoutConditionTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TransitionWithoutCondition::main_region_B));
 	
-	delete statechart;
 }

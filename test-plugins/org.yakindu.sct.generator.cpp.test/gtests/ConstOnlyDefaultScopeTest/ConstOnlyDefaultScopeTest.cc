@@ -12,19 +12,28 @@
 #include "gtest/gtest.h"
 #include "ConstOnlyDefaultScope.h"
 #include "sc_types.h"
-ConstOnlyDefaultScope* statechart = new ConstOnlyDefaultScope();
-statechart->init();
+ConstOnlyDefaultScope* statechart;
 
-TEST(StatemachineTest, statechartEntry) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new ConstOnlyDefaultScope();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, statechartEntry) {
 	
 	
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(ConstOnlyDefaultScope::ConstOnlyDefaultScope_main_region_A));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, stateTransition) {
+TEST_F(StatemachineTest, stateTransition) {
 	
 	
 	statechart->enter();
@@ -35,5 +44,4 @@ TEST(StatemachineTest, stateTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ConstOnlyDefaultScope::ConstOnlyDefaultScope_main_region_B));
 	
-	delete statechart;
 }

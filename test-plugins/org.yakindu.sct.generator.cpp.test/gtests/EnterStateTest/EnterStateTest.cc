@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "EnterState.h"
 #include "sc_types.h"
-EnterState* statechart = new EnterState();
-statechart->init();
+EnterState* statechart;
 
-TEST(StatemachineTest, defaultEntry) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new EnterState();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, defaultEntry) {
 	
 	
 	statechart->enter();
@@ -28,9 +38,8 @@ TEST(StatemachineTest, defaultEntry) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_E));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, namedEntryThroughNamedTransition) {
+TEST_F(StatemachineTest, namedEntryThroughNamedTransition) {
 	
 	
 	statechart->enter();
@@ -43,9 +52,8 @@ TEST(StatemachineTest, namedEntryThroughNamedTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_F));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, namedEntryThroughDefaultTransition) {
+TEST_F(StatemachineTest, namedEntryThroughDefaultTransition) {
 	
 	
 	statechart->enter();
@@ -58,5 +66,4 @@ TEST(StatemachineTest, namedEntryThroughDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_E));
 	
-	delete statechart;
 }

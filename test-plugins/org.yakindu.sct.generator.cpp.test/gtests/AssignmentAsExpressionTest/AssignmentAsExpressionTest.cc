@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "AssignmentAsExpression.h"
 #include "sc_types.h"
-AssignmentAsExpression* statechart = new AssignmentAsExpression();
-statechart->init();
+AssignmentAsExpression* statechart;
 
-TEST(StatemachineTest, simpleAssignment) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new AssignmentAsExpression();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, simpleAssignment) {
 	
 	
 	statechart->enter();
@@ -78,5 +88,4 @@ TEST(StatemachineTest, simpleAssignment) {
 	
 	statechart->exit();
 	
-	delete statechart;
 }

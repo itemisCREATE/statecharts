@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "FinalState.h"
 #include "sc_types.h"
-FinalState* statechart = new FinalState();
-statechart->init();
+FinalState* statechart;
 
-TEST(StatemachineTest, StatechartNameTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new FinalState();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, StatechartNameTest) {
 	
 	
 	statechart->enter();
@@ -24,5 +34,4 @@ TEST(StatemachineTest, StatechartNameTest) {
 	
 	EXPECT_TRUE(statechart->isFinal());
 	
-	delete statechart;
 }

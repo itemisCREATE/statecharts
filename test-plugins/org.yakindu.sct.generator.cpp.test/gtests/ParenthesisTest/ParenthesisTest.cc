@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "Parenthesis.h"
 #include "sc_types.h"
-Parenthesis* statechart = new Parenthesis();
-statechart->init();
+Parenthesis* statechart;
 
-TEST(StatemachineTest, simple) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new Parenthesis();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, simple) {
 	
 	
 	statechart->enter();
@@ -24,5 +34,4 @@ TEST(StatemachineTest, simple) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_erg()== 8l);
 	
-	delete statechart;
 }

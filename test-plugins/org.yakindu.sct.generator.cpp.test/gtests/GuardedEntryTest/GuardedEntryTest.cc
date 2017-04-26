@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "GuardedEntry.h"
 #include "sc_types.h"
-GuardedEntry* statechart = new GuardedEntry();
-statechart->init();
+GuardedEntry* statechart;
 
-TEST(StatemachineTest, EntryNotTakenOnStatechartEnter) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new GuardedEntry();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, EntryNotTakenOnStatechartEnter) {
 	
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_guard()== false);
@@ -26,9 +36,8 @@ TEST(StatemachineTest, EntryNotTakenOnStatechartEnter) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_done()== false);
 	
-	delete statechart;
 }
-TEST(StatemachineTest, EntryTakenOnStatechartEnter) {
+TEST_F(StatemachineTest, EntryTakenOnStatechartEnter) {
 	
 	
 	statechart->getDefaultSCI()->set_guard(true);
@@ -39,9 +48,8 @@ TEST(StatemachineTest, EntryTakenOnStatechartEnter) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_done()== true);
 	
-	delete statechart;
 }
-TEST(StatemachineTest, EntryTakenInTransition) {
+TEST_F(StatemachineTest, EntryTakenInTransition) {
 	
 	
 	statechart->enter();
@@ -66,9 +74,8 @@ TEST(StatemachineTest, EntryTakenInTransition) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_done());
 	
-	delete statechart;
 }
-TEST(StatemachineTest, EntryNotTakenInTransition) {
+TEST_F(StatemachineTest, EntryNotTakenInTransition) {
 	
 	
 	statechart->enter();
@@ -93,5 +100,4 @@ TEST(StatemachineTest, EntryNotTakenInTransition) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_done());
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "Guard.h"
 #include "sc_types.h"
-Guard* statechart = new Guard();
-statechart->init();
+Guard* statechart;
 
-TEST(StatemachineTest, guardTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new Guard();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, guardTest) {
 	
 	
 	statechart->enter();
@@ -52,5 +62,4 @@ TEST(StatemachineTest, guardTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
 	
-	delete statechart;
 }

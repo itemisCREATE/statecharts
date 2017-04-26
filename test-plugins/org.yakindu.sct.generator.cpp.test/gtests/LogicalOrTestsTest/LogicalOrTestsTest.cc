@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "LogicalOr.h"
 #include "sc_types.h"
-LogicalOr* statechart = new LogicalOr();
-statechart->init();
+LogicalOr* statechart;
 
-TEST(StatemachineTest, operandEvaluationOrder) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new LogicalOr();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, operandEvaluationOrder) {
 	
 	
 	statechart->enter();
@@ -24,5 +34,4 @@ TEST(StatemachineTest, operandEvaluationOrder) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 4l && statechart->getDefaultSCI()->get_b()) << "logical or expression was executed in wrong order..." ;
 	
-	delete statechart;
 }

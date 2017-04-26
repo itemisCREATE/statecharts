@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "ReadOnlyVariable.h"
 #include "sc_types.h"
-ReadOnlyVariable* statechart = new ReadOnlyVariable();
-statechart->init();
+ReadOnlyVariable* statechart;
 
-TEST(StatemachineTest, ReadOnlyVariableTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new ReadOnlyVariable();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, ReadOnlyVariableTest) {
 	
 	
 	statechart->enter();
@@ -58,5 +68,4 @@ TEST(StatemachineTest, ReadOnlyVariableTest) {
 	
 	EXPECT_TRUE(statechart->getSCI_A()->get_myReal()== 7.7);
 	
-	delete statechart;
 }

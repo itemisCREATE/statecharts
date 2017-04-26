@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "InternalEventLifeCycle.h"
 #include "sc_types.h"
-InternalEventLifeCycle* statechart = new InternalEventLifeCycle();
-statechart->init();
+InternalEventLifeCycle* statechart;
 
-TEST(StatemachineTest, InternalEventLifeCycleTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new InternalEventLifeCycle();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, InternalEventLifeCycleTest) {
 	
 	
 	statechart->enter();
@@ -52,5 +62,4 @@ TEST(StatemachineTest, InternalEventLifeCycleTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r2_C));
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "STextKeywordsInStatesAndRegions.h"
 #include "sc_types.h"
-STextKeywordsInStatesAndRegions* statechart = new STextKeywordsInStatesAndRegions();
-statechart->init();
+STextKeywordsInStatesAndRegions* statechart;
 
-TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new STextKeywordsInStatesAndRegions();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	
 	statechart->enter();
@@ -940,5 +950,4 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_valueof));
 	
-	delete statechart;
 }

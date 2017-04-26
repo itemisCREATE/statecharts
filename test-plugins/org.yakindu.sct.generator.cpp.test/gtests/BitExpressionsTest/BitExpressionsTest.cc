@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "BitExpressions.h"
 #include "sc_types.h"
-BitExpressions* statechart = new BitExpressions();
-statechart->init();
+BitExpressions* statechart;
 
-TEST(StatemachineTest, BitExpressions) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new BitExpressions();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, BitExpressions) {
 	
 	
 	statechart->enter();
@@ -44,5 +54,4 @@ TEST(StatemachineTest, BitExpressions) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_bitwiseXor()== 2l);
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "SimpleEvent.h"
 #include "sc_types.h"
-SimpleEvent* statechart = new SimpleEvent();
-statechart->init();
+SimpleEvent* statechart;
 
-TEST(StatemachineTest, simpleEventTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new SimpleEvent();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, simpleEventTest) {
 	
 	
 	statechart->enter();
@@ -34,5 +44,4 @@ TEST(StatemachineTest, simpleEventTest) {
 	
 	EXPECT_TRUE(!statechart->isStateActive(SimpleEvent::main_region_B));
 	
-	delete statechart;
 }

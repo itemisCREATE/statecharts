@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "InEventLifeCycle.h"
 #include "sc_types.h"
-InEventLifeCycle* statechart = new InEventLifeCycle();
-statechart->init();
+InEventLifeCycle* statechart;
 
-TEST(StatemachineTest, eventLifeCycle) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new InEventLifeCycle();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, eventLifeCycle) {
 	
 	
 	statechart->enter();
@@ -28,5 +38,4 @@ TEST(StatemachineTest, eventLifeCycle) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 1l);
 	
-	delete statechart;
 }

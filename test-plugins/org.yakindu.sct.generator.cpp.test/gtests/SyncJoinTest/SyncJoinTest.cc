@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "SyncJoin.h"
 #include "sc_types.h"
-SyncJoin* statechart = new SyncJoin();
-statechart->init();
+SyncJoin* statechart;
 
-TEST(StatemachineTest, syncJoin_C2_Waits) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new SyncJoin();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, syncJoin_C2_Waits) {
 	
 	
 	statechart->enter();
@@ -92,9 +102,8 @@ TEST(StatemachineTest, syncJoin_C2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_A));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, syncJoin_D2_Waits) {
+TEST_F(StatemachineTest, syncJoin_D2_Waits) {
 	
 	
 	statechart->enter();
@@ -147,9 +156,8 @@ TEST(StatemachineTest, syncJoin_D2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, doubleEntryActionBug) {
+TEST_F(StatemachineTest, doubleEntryActionBug) {
 	
 	
 	statechart->enter();
@@ -170,5 +178,4 @@ TEST(StatemachineTest, doubleEntryActionBug) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1l);
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "StatechartLocalReactions.h"
 #include "sc_types.h"
-StatechartLocalReactions* statechart = new StatechartLocalReactions();
-statechart->init();
+StatechartLocalReactions* statechart;
 
-TEST(StatemachineTest, statechartLocalReactionsTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new StatechartLocalReactions();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, statechartLocalReactionsTest) {
 	
 	
 	statechart->enter();
@@ -35,5 +45,4 @@ TEST(StatemachineTest, statechartLocalReactionsTest) {
 		statechart->runCycle();
 	}
 	
-	delete statechart;
 }

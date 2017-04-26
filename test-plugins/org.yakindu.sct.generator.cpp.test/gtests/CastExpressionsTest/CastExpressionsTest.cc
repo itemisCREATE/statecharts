@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "CastExpressions.h"
 #include "sc_types.h"
-CastExpressions* statechart = new CastExpressions();
-statechart->init();
+CastExpressions* statechart;
 
-TEST(StatemachineTest, CastExpressionTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new CastExpressions();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, CastExpressionTest) {
 	
 	
 	statechart->enter();
@@ -34,5 +44,4 @@ TEST(StatemachineTest, CastExpressionTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 757l);
 	
-	delete statechart;
 }

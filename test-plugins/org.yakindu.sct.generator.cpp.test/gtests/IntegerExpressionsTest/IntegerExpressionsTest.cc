@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "IntegerExpressions.h"
 #include "sc_types.h"
-IntegerExpressions* statechart = new IntegerExpressions();
-statechart->init();
+IntegerExpressions* statechart;
 
-TEST(StatemachineTest, integerExpressions) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new IntegerExpressions();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, integerExpressions) {
 	
 	
 	statechart->enter();
@@ -64,5 +74,4 @@ TEST(StatemachineTest, integerExpressions) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_moduloAssign()== 0l);
 	
-	delete statechart;
 }

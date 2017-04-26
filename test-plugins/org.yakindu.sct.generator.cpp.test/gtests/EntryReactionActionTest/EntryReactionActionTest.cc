@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "EntryReactionAction.h"
 #include "sc_types.h"
-EntryReactionAction* statechart = new EntryReactionAction();
-statechart->init();
+EntryReactionAction* statechart;
 
-TEST(StatemachineTest, entryTransitionActionOnStatechartEnter) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new EntryReactionAction();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, entryTransitionActionOnStatechartEnter) {
 	
 	
 	statechart->enter();
@@ -28,9 +38,8 @@ TEST(StatemachineTest, entryTransitionActionOnStatechartEnter) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBother());
 	
-	delete statechart;
 }
-TEST(StatemachineTest, entryOnRTS) {
+TEST_F(StatemachineTest, entryOnRTS) {
 	
 	
 	statechart->enter();
@@ -63,9 +72,8 @@ TEST(StatemachineTest, entryOnRTS) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_enteredBother());
 	
-	delete statechart;
 }
-TEST(StatemachineTest, noEntryTransitionActionOnHistory) {
+TEST_F(StatemachineTest, noEntryTransitionActionOnHistory) {
 	
 	
 	statechart->enter();
@@ -98,5 +106,4 @@ TEST(StatemachineTest, noEntryTransitionActionOnHistory) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredBother());
 	
-	delete statechart;
 }

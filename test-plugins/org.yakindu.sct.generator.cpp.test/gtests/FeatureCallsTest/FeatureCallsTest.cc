@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "FeatureCalls.h"
 #include "sc_types.h"
-FeatureCalls* statechart = new FeatureCalls();
-statechart->init();
+FeatureCalls* statechart;
 
-TEST(StatemachineTest, FeatureCalls) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new FeatureCalls();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, FeatureCalls) {
 	
 	
 	statechart->enter();
@@ -26,5 +36,4 @@ TEST(StatemachineTest, FeatureCalls) {
 	
 	EXPECT_TRUE(statechart->isStateActive(FeatureCalls::main_region_A));
 	
-	delete statechart;
 }

@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "ExitOnSelfTransition.h"
 #include "sc_types.h"
-ExitOnSelfTransition* statechart = new ExitOnSelfTransition();
-statechart->init();
+ExitOnSelfTransition* statechart;
 
-TEST(StatemachineTest, ExitOnSelfTransitionTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new ExitOnSelfTransition();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, ExitOnSelfTransitionTest) {
 	
 	
 	statechart->enter();
@@ -42,5 +52,4 @@ TEST(StatemachineTest, ExitOnSelfTransitionTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 2l);
 	
-	delete statechart;
 }

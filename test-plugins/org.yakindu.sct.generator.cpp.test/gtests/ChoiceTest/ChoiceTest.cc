@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "Choice.h"
 #include "sc_types.h"
-Choice* statechart = new Choice();
-statechart->init();
+Choice* statechart;
 
-TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new Choice();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
 	
 	
 	statechart->enter();
@@ -30,9 +40,8 @@ TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, elseChoiceUsingDefaultTransition) {
+TEST_F(StatemachineTest, elseChoiceUsingDefaultTransition) {
 	
 	
 	statechart->enter();
@@ -47,9 +56,8 @@ TEST(StatemachineTest, elseChoiceUsingDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
+TEST_F(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
 	
 	
 	statechart->enter();
@@ -64,9 +72,8 @@ TEST(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, defaultChoiceUsingDefaultTransition) {
+TEST_F(StatemachineTest, defaultChoiceUsingDefaultTransition) {
 	
 	
 	statechart->enter();
@@ -81,9 +88,8 @@ TEST(StatemachineTest, defaultChoiceUsingDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
+TEST_F(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
 	
 	
 	statechart->enter();
@@ -98,9 +104,8 @@ TEST(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
+TEST_F(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
 	
 	
 	statechart->enter();
@@ -115,9 +120,8 @@ TEST(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
 	
-	delete statechart;
 }
-TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
+TEST_F(StatemachineTest, alwaysTrueTransitionInChoice) {
 	
 	
 	statechart->enter();
@@ -132,5 +136,4 @@ TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
 	
-	delete statechart;
 }

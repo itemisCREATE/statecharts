@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "TriggerExpressionPrecedence.h"
 #include "sc_types.h"
-TriggerExpressionPrecedence* statechart = new TriggerExpressionPrecedence();
-statechart->init();
+TriggerExpressionPrecedence* statechart;
 
-TEST(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrFalse) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new TriggerExpressionPrecedence();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrFalse) {
 	
 	
 	statechart->enter();
@@ -28,9 +38,8 @@ TEST(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrFalse) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
 	
-	delete statechart;
 }
-TEST(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrFalse) {
+TEST_F(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrFalse) {
 	
 	
 	statechart->enter();
@@ -43,9 +52,8 @@ TEST(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrFalse) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
 	
-	delete statechart;
 }
-TEST(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrTrue) {
+TEST_F(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrTrue) {
 	
 	
 	statechart->enter();
@@ -58,9 +66,8 @@ TEST(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrTrue) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
 	
-	delete statechart;
 }
-TEST(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {
+TEST_F(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {
 	
 	
 	statechart->enter();
@@ -73,5 +80,4 @@ TEST(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
 	
-	delete statechart;
 }

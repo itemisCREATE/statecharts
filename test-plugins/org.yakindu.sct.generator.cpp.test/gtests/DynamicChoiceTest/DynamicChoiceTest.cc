@@ -12,10 +12,20 @@
 #include "gtest/gtest.h"
 #include "DynamicChoice.h"
 #include "sc_types.h"
-DynamicChoice* statechart = new DynamicChoice();
-statechart->init();
+DynamicChoice* statechart;
 
-TEST(StatemachineTest, DynamicChoiceTest) {
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new DynamicChoice();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, DynamicChoiceTest) {
 	
 	
 	statechart->enter();
@@ -26,5 +36,4 @@ TEST(StatemachineTest, DynamicChoiceTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(DynamicChoice::main_region_A));
 	
-	delete statechart;
 }
