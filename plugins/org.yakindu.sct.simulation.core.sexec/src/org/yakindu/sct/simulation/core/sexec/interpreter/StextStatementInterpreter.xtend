@@ -160,7 +160,15 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			event.value = eventRaising.value.execute
 		}
 		if (event instanceof ExecutionEvent) {
-			(event as ExecutionEvent).raised = true
+			if (eventRaising.value != null)
+			{
+				context.getInternalEventQueue().add(new LocalInternalEvent(event.name,false,eventRaising.value));	
+			}
+			else
+			{
+				context.getInternalEventQueue().add(new LocalInternalEvent(event.name,false,null));	
+			}
+			//(event as ExecutionEvent).raised = true
 		}
 		null
 	}

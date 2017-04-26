@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.cpp
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtend2.lib.StringConcatenation
+import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -23,6 +24,7 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
@@ -78,6 +80,9 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 				«statemachineTypeDecl»
 				
 				«prototypes»
+			private:
+			void runCycleIntern();
+			std::deque<std::function<void()>> InternalEventQueue; 	
 		};
 		«IF !entry.useStaticOPC»
 			«scopes.filter(typeof(StatechartScope)).map[createInlineOCB_Destructor].filterNullOrEmptyAndJoin»
@@ -87,6 +92,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 	}
 	
 	override includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) '''
+		#include <deque>
+		#include <functional>
 		#include "«(typesModule.h).relativeTo(module.h)»"
 		#include "«statemachineInterface.h»"
 		«IF timed»
