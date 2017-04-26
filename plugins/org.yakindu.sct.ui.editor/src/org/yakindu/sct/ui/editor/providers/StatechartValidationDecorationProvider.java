@@ -38,7 +38,7 @@ import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
-import org.yakindu.sct.ui.editor.validation.IValidationIssueStore.IResourceIssueStoreListener;
+import org.yakindu.sct.ui.editor.validation.IValidationIssueStore.IValidationIssueStoreListener;
 
 /**
  * 
@@ -81,7 +81,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		return new ValidationDecorator(decoratorTarget, store);
 	}
 
-	public static class ValidationDecorator extends AbstractDecorator implements IResourceIssueStoreListener {
+	public static class ValidationDecorator extends AbstractDecorator implements IValidationIssueStoreListener {
 
 		private IValidationIssueStore store;
 		private String semanticID;
