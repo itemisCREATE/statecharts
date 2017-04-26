@@ -36,6 +36,8 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
+import com.google.common.collect.Sets.SetView;
 import com.google.inject.Inject;
 
 /**
@@ -54,7 +56,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 
 	protected final List<IValidationIssueStoreListener> listener;
 	protected Multimap<String, SCTIssue> visibleIssues;
-	
+
 	protected boolean connected = false;
 
 	protected Resource connectedResource;
@@ -109,7 +111,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 		}
 		initFromPersistentMarkers();
 	}
-	
+
 	protected synchronized void initFromPersistentMarkers() {
 		Multimap<String, SCTIssue> newVisibleIssues = ArrayListMultimap.create();
 		List<IMarker> markers = getMarkersOfConnectedResource();
@@ -130,7 +132,8 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 		try {
 			IFile file = WorkspaceSynchronizer.getFile(connectedResource);
 			if ((file != null) && file.isAccessible()) {
-				markers.addAll(Arrays.asList(file.findMarkers(SCTMarkerType.SUPERTYPE, true, IResource.DEPTH_INFINITE)));
+				markers.addAll(
+						Arrays.asList(file.findMarkers(SCTMarkerType.SUPERTYPE, true, IResource.DEPTH_INFINITE)));
 			}
 		} catch (CoreException e) {
 			e.printStackTrace();
@@ -161,7 +164,9 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 			}
 		}
 
+		final Multimap<String, SCTIssue> oldVisibleIssues = ArrayListMultimap.create();
 		synchronized (visibleIssues) {
+			oldVisibleIssues.putAll(visibleIssues);
 			// normal and expensive checks will not be executed by the live
 			// validation, so persistent markers have to be copied
 			Iterable<SCTIssue> persistentIssues = Iterables.filter(visibleIssues.values(), new Predicate<SCTIssue>() {
@@ -175,8 +180,11 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 			visibleIssues.clear();
 			visibleIssues.putAll(newVisibleIssues);
 		}
-
-		notifyListeners();
+		
+		SetView<String> changes = Sets.symmetricDifference(oldVisibleIssues.keySet(), newVisibleIssues.keySet());
+		for (String semanticElementID : changes) {
+			notifyListeners(semanticElementID);
+		}
 	}
 
 	@Override
