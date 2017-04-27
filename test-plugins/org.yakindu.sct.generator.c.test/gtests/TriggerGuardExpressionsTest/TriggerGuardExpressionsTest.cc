@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "TriggerGuardExpressions.h"
 
 TriggerGuardExpressions handle;
 
-TEST(StatemachineTest, trueGuard) {
-	triggerGuardExpressions_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		triggerGuardExpressions_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, trueGuard) {					
 	triggerGuardExpressions_enter(&handle);
 	EXPECT_TRUE(triggerGuardExpressions_isStateActive(&handle, TriggerGuardExpressions_main_region_A));
 	triggerGuardExpressionsIface_raise_e1(&handle);
@@ -35,9 +39,7 @@ TEST(StatemachineTest, trueGuard) {
 	triggerGuardExpressions_runCycle(&handle);
 	EXPECT_TRUE(triggerGuardExpressions_isStateActive(&handle, TriggerGuardExpressions_main_region_B));
 }
-TEST(StatemachineTest, falseGuard) {
-	triggerGuardExpressions_init(&handle);
-	
+TEST_F(StatemachineTest, falseGuard) {					
 	triggerGuardExpressions_enter(&handle);
 	EXPECT_TRUE(triggerGuardExpressions_isStateActive(&handle, TriggerGuardExpressions_main_region_A));
 	triggerGuardExpressionsIface_set_b(&handle,false);

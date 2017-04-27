@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "Guard.h"
 
 Guard handle;
 
-TEST(StatemachineTest, guardTest) {
-	guard_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		guard_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, guardTest) {					
 	guard_enter(&handle);
 	EXPECT_TRUE(guard_isStateActive(&handle, Guard_main_region_A));
 	guardIface_raise_event1(&handle);

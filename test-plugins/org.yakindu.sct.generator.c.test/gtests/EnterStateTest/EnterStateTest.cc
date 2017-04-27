@@ -8,33 +8,33 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "EnterState.h"
 
 EnterState handle;
 
-TEST(StatemachineTest, defaultEntry) {
-	enterState_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		enterState_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, defaultEntry) {					
 	enterState_enter(&handle);
 	EXPECT_TRUE(enterState_isStateActive(&handle, EnterState_r_A));
 	enterStateIface_raise_e(&handle);
 	enterState_runCycle(&handle);
 	EXPECT_TRUE(enterState_isStateActive(&handle, EnterState_r_B_r_E));
 }
-TEST(StatemachineTest, namedEntryThroughNamedTransition) {
-	enterState_init(&handle);
-	
+TEST_F(StatemachineTest, namedEntryThroughNamedTransition) {					
 	enterState_enter(&handle);
 	EXPECT_TRUE(enterState_isStateActive(&handle, EnterState_r_A));
 	enterStateIface_raise_f(&handle);
 	enterState_runCycle(&handle);
 	EXPECT_TRUE(enterState_isStateActive(&handle, EnterState_r_B_r_F));
 }
-TEST(StatemachineTest, namedEntryThroughDefaultTransition) {
-	enterState_init(&handle);
-	
+TEST_F(StatemachineTest, namedEntryThroughDefaultTransition) {					
 	enterState_enter(&handle);
 	EXPECT_TRUE(enterState_isStateActive(&handle, EnterState_r_A));
 	enterStateIface_raise_g(&handle);

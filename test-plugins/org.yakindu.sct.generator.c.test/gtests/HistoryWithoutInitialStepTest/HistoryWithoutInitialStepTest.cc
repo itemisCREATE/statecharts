@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "HistoryWithoutInitialStep.h"
 
 HistoryWithoutInitialStep handle;
 
-TEST(StatemachineTest, enterThroughInitialEntry) {
-	historyWithoutInitialStep_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		historyWithoutInitialStep_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, enterThroughInitialEntry) {					
 	historyWithoutInitialStep_enter(&handle);
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_A));
 	historyWithoutInitialStepIface_raise_toB(&handle);
@@ -26,9 +30,7 @@ TEST(StatemachineTest, enterThroughInitialEntry) {
 	historyWithoutInitialStep_runCycle(&handle);
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_D));
 }
-TEST(StatemachineTest, enterCThroughHistory) {
-	historyWithoutInitialStep_init(&handle);
-	
+TEST_F(StatemachineTest, enterCThroughHistory) {					
 	historyWithoutInitialStep_enter(&handle);
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_A));
 	historyWithoutInitialStepIface_raise_toB(&handle);
@@ -41,9 +43,7 @@ TEST(StatemachineTest, enterCThroughHistory) {
 	historyWithoutInitialStep_runCycle(&handle);
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_C));
 }
-TEST(StatemachineTest, enterDThroughHistory) {
-	historyWithoutInitialStep_init(&handle);
-	
+TEST_F(StatemachineTest, enterDThroughHistory) {					
 	historyWithoutInitialStep_enter(&handle);
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_A));
 	historyWithoutInitialStepIface_raise_toB(&handle);

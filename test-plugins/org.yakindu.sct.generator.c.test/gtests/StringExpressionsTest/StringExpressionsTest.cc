@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "StringExpressions.h"
 
 StringExpressions handle;
 
-TEST(StatemachineTest, StringExpressionsTest) {
-	stringExpressions_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		stringExpressions_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, StringExpressionsTest) {					
 	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringX(&handle), "\"X\"") == 0);
 	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringY(&handle), "\"Y\"") == 0);
 	stringExpressions_enter(&handle);

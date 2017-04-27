@@ -8,40 +8,38 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "OutEventLifeCycle.h"
 
 OutEventLifeCycle handle;
 
-TEST(StatemachineTest, availableAfterCycle) {
-	outEventLifeCycle_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		outEventLifeCycle_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, availableAfterCycle) {					
 	outEventLifeCycle_enter(&handle);
 	outEventLifeCycleIface_raise_e(&handle);
 	outEventLifeCycle_runCycle(&handle);
 	EXPECT_TRUE(outEventLifeCycleIface_israised_f(&handle));
 }
-TEST(StatemachineTest, availableWithinCycle) {
-	outEventLifeCycle_init(&handle);
-	
+TEST_F(StatemachineTest, availableWithinCycle) {					
 	outEventLifeCycle_enter(&handle);
 	outEventLifeCycleIface_raise_e(&handle);
 	outEventLifeCycle_runCycle(&handle);
 	EXPECT_TRUE(outEventLifeCycleIface_get_f_available_in_cycle(&handle));
 }
-TEST(StatemachineTest, unvailableWithin2ndCycle) {
-	outEventLifeCycle_init(&handle);
-	
+TEST_F(StatemachineTest, unvailableWithin2ndCycle) {					
 	outEventLifeCycle_enter(&handle);
 	outEventLifeCycleIface_raise_e(&handle);
 	outEventLifeCycle_runCycle(&handle);
 	outEventLifeCycle_runCycle(&handle);
 	EXPECT_TRUE(!outEventLifeCycleIface_get_f_available_in_next_cycle(&handle));
 }
-TEST(StatemachineTest, unvailableAfter2ndCycle) {
-	outEventLifeCycle_init(&handle);
-	
+TEST_F(StatemachineTest, unvailableAfter2ndCycle) {					
 	outEventLifeCycle_enter(&handle);
 	outEventLifeCycleIface_raise_e(&handle);
 	outEventLifeCycle_runCycle(&handle);

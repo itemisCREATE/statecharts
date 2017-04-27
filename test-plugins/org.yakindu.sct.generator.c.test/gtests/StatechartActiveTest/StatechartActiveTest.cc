@@ -8,33 +8,31 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "StatechartActive.h"
 
 StatechartActive handle;
 
-TEST(StatemachineTest, inactiveBeforeEnter) {
-	statechartActive_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechartActive_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, inactiveBeforeEnter) {					
 	EXPECT_TRUE(!statechartActive_isActive(&handle));
 }
-TEST(StatemachineTest, activeAfterEnter) {
-	statechartActive_init(&handle);
-	
+TEST_F(StatemachineTest, activeAfterEnter) {					
 	statechartActive_enter(&handle);
 	EXPECT_TRUE(statechartActive_isActive(&handle));
 }
-TEST(StatemachineTest, inactiveAfterExit) {
-	statechartActive_init(&handle);
-	
+TEST_F(StatemachineTest, inactiveAfterExit) {					
 	statechartActive_enter(&handle);
 	statechartActive_exit(&handle);
 	EXPECT_TRUE(!statechartActive_isActive(&handle));
 }
-TEST(StatemachineTest, activeAfterReenter) {
-	statechartActive_init(&handle);
-	
+TEST_F(StatemachineTest, activeAfterReenter) {					
 	statechartActive_enter(&handle);
 	statechartActive_exit(&handle);
 	statechartActive_enter(&handle);

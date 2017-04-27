@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "TransitionWithoutCondition.h"
 
 TransitionWithoutCondition handle;
 
-TEST(StatemachineTest, TransitionWithoutConditionTest) {
-	transitionWithoutCondition_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		transitionWithoutCondition_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, TransitionWithoutConditionTest) {					
 	transitionWithoutCondition_enter(&handle);
 	EXPECT_TRUE(transitionWithoutCondition_isStateActive(&handle, TransitionWithoutCondition_main_region_A));
 	transitionWithoutCondition_runCycle(&handle);

@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "AlwaysOncycle.h"
 
 AlwaysOncycle handle;
 
-TEST(StatemachineTest, alwaysOncycleTest) {
-	alwaysOncycle_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		alwaysOncycle_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, alwaysOncycleTest) {					
 	alwaysOncycle_enter(&handle);
 	EXPECT_TRUE(alwaysOncycle_isStateActive(&handle, AlwaysOncycle_main_region_StateA));
 	while (alwaysOncycleIface_get_value(&handle)< 5l) {

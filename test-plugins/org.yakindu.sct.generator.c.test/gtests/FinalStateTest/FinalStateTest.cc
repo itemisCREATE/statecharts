@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "FinalState.h"
 
 FinalState handle;
 
-TEST(StatemachineTest, StatechartNameTest) {
-	finalState_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		finalState_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, StatechartNameTest) {					
 	finalState_enter(&handle);
 	finalState_runCycle(&handle);
 	EXPECT_TRUE(finalState_isFinal(&handle));

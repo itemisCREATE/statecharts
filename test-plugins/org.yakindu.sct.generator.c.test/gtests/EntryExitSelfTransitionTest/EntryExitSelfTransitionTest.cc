@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "EntryExitSelfTransition.h"
 
 EntryExitSelfTransition handle;
 
-TEST(StatemachineTest, SelfTransitionToChildState) {
-	entryExitSelfTransition_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		entryExitSelfTransition_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, SelfTransitionToChildState) {					
 	entryExitSelfTransition_enter(&handle);
 	entryExitSelfTransition_runCycle(&handle);
 	EXPECT_TRUE(entryExitSelfTransitionIface_get_entries(&handle)== 1l);
@@ -28,9 +32,7 @@ TEST(StatemachineTest, SelfTransitionToChildState) {
 	EXPECT_TRUE(entryExitSelfTransitionIface_get_exits(&handle)== 1l);
 	EXPECT_TRUE(entryExitSelfTransition_isStateActive(&handle, EntryExitSelfTransition_main_region_A__region0_C));
 }
-TEST(StatemachineTest, SelfTransitionFromChildState) {
-	entryExitSelfTransition_init(&handle);
-	
+TEST_F(StatemachineTest, SelfTransitionFromChildState) {					
 	entryExitSelfTransition_enter(&handle);
 	entryExitSelfTransition_runCycle(&handle);
 	EXPECT_TRUE(entryExitSelfTransitionIface_get_entries(&handle)== 1l);

@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "Choice.h"
 
 Choice handle;
 
-TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
-	choice_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		choice_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, elseChoiceUsingNonDefaultTransition) {					
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle,true);
@@ -24,9 +28,7 @@ TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
 }
-TEST(StatemachineTest, elseChoiceUsingDefaultTransition) {
-	choice_init(&handle);
-	
+TEST_F(StatemachineTest, elseChoiceUsingDefaultTransition) {					
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle,false);
@@ -34,9 +36,7 @@ TEST(StatemachineTest, elseChoiceUsingDefaultTransition) {
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_B));
 }
-TEST(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
-	choice_init(&handle);
-	
+TEST_F(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {					
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle,true);
@@ -44,9 +44,7 @@ TEST(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
 }
-TEST(StatemachineTest, defaultChoiceUsingDefaultTransition) {
-	choice_init(&handle);
-	
+TEST_F(StatemachineTest, defaultChoiceUsingDefaultTransition) {					
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle,false);
@@ -54,9 +52,7 @@ TEST(StatemachineTest, defaultChoiceUsingDefaultTransition) {
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_B));
 }
-TEST(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
-	choice_init(&handle);
-	
+TEST_F(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {					
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle,true);
@@ -64,9 +60,7 @@ TEST(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
 }
-TEST(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
-	choice_init(&handle);
-	
+TEST_F(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {					
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle,false);
@@ -74,9 +68,7 @@ TEST(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_B));
 }
-TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
-	choice_init(&handle);
-	
+TEST_F(StatemachineTest, alwaysTrueTransitionInChoice) {					
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
 	choiceIface_set_c(&handle,true);

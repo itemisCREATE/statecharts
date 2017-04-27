@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "EmptyTransition.h"
 
 EmptyTransition handle;
 
-TEST(StatemachineTest, EmptyTransitionTest) {
-	emptyTransition_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		emptyTransition_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, EmptyTransitionTest) {					
 	emptyTransition_enter(&handle);
 	emptyTransition_runCycle(&handle);
 	EXPECT_TRUE(!emptyTransition_isStateActive(&handle, EmptyTransition_main_region_B));

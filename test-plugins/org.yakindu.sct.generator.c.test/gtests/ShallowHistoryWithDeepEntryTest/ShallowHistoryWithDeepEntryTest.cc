@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "ShallowHistoryWithDeepEntry.h"
 
 ShallowHistoryWithDeepEntry handle;
 
-TEST(StatemachineTest, noDeepEntryWithinHistory) {
-	shallowHistoryWithDeepEntry_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		shallowHistoryWithDeepEntry_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, noDeepEntryWithinHistory) {					
 	shallowHistoryWithDeepEntry_enter(&handle);
 	EXPECT_TRUE(shallowHistoryWithDeepEntry_isStateActive(&handle, ShallowHistoryWithDeepEntry_main_region_Y));
 	shallowHistoryWithDeepEntryIface_raise_toZ(&handle);
@@ -29,9 +33,7 @@ TEST(StatemachineTest, noDeepEntryWithinHistory) {
 	shallowHistoryWithDeepEntry_runCycle(&handle);
 	EXPECT_TRUE(shallowHistoryWithDeepEntry_isStateActive(&handle, ShallowHistoryWithDeepEntry_main_region_Z__region0_A));
 }
-TEST(StatemachineTest, deepEntryWithinHistory) {
-	shallowHistoryWithDeepEntry_init(&handle);
-	
+TEST_F(StatemachineTest, deepEntryWithinHistory) {					
 	shallowHistoryWithDeepEntry_enter(&handle);
 	EXPECT_TRUE(shallowHistoryWithDeepEntry_isStateActive(&handle, ShallowHistoryWithDeepEntry_main_region_Y));
 	shallowHistoryWithDeepEntryIface_raise_toZ(&handle);
@@ -49,9 +51,7 @@ TEST(StatemachineTest, deepEntryWithinHistory) {
 	EXPECT_TRUE(shallowHistoryWithDeepEntry_isStateActive(&handle, ShallowHistoryWithDeepEntry_main_region_Z__region0_B__region0_C));
 	EXPECT_TRUE(shallowHistoryWithDeepEntry_isStateActive(&handle, ShallowHistoryWithDeepEntry_main_region_Z__region0_B));
 }
-TEST(StatemachineTest, directDeepEntryIntoHistory) {
-	shallowHistoryWithDeepEntry_init(&handle);
-	
+TEST_F(StatemachineTest, directDeepEntryIntoHistory) {					
 	shallowHistoryWithDeepEntry_enter(&handle);
 	EXPECT_TRUE(shallowHistoryWithDeepEntry_isStateActive(&handle, ShallowHistoryWithDeepEntry_main_region_Y));
 	shallowHistoryWithDeepEntryIface_raise_toC(&handle);

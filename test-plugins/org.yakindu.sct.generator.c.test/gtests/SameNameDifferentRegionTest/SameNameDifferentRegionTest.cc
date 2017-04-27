@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "SameNameDifferentRegion.h"
 
 SameNameDifferentRegion handle;
 
-TEST(StatemachineTest, sameNameDifferenRegionTest) {
-	sameNameDifferentRegion_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		sameNameDifferentRegion_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, sameNameDifferenRegionTest) {					
 	sameNameDifferentRegion_enter(&handle);
 	EXPECT_TRUE(sameNameDifferentRegion_isStateActive(&handle, SameNameDifferentRegion_main_region_StateA));
 	sameNameDifferentRegionIface_raise_e1(&handle);

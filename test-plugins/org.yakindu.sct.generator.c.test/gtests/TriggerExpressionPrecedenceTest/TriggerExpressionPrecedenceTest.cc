@@ -8,42 +8,40 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "TriggerExpressionPrecedence.h"
 
 TriggerExpressionPrecedence handle;
 
-TEST(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrFalse) {
-	triggerExpressionPrecedence_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		triggerExpressionPrecedence_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrFalse) {					
 	triggerExpressionPrecedence_enter(&handle);
 	triggerExpressionPrecedenceIface_set_c1(&handle,false);
 	triggerExpressionPrecedenceIface_set_c2(&handle,false);
 	triggerExpressionPrecedence_runCycle(&handle);
 	EXPECT_TRUE(!triggerExpressionPrecedenceIface_get_e1_transition(&handle));
 }
-TEST(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrFalse) {
-	triggerExpressionPrecedence_init(&handle);
-	
+TEST_F(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrFalse) {					
 	triggerExpressionPrecedence_enter(&handle);
 	triggerExpressionPrecedenceIface_set_c1(&handle,true);
 	triggerExpressionPrecedenceIface_set_c2(&handle,false);
 	triggerExpressionPrecedence_runCycle(&handle);
 	EXPECT_TRUE(!triggerExpressionPrecedenceIface_get_e1_transition(&handle));
 }
-TEST(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrTrue) {
-	triggerExpressionPrecedence_init(&handle);
-	
+TEST_F(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrTrue) {					
 	triggerExpressionPrecedence_enter(&handle);
 	triggerExpressionPrecedenceIface_set_c1(&handle,false);
 	triggerExpressionPrecedenceIface_set_c2(&handle,true);
 	triggerExpressionPrecedence_runCycle(&handle);
 	EXPECT_TRUE(!triggerExpressionPrecedenceIface_get_e1_transition(&handle));
 }
-TEST(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {
-	triggerExpressionPrecedence_init(&handle);
-	
+TEST_F(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {					
 	triggerExpressionPrecedence_enter(&handle);
 	triggerExpressionPrecedenceIface_set_c1(&handle,true);
 	triggerExpressionPrecedenceIface_set_c2(&handle,true);

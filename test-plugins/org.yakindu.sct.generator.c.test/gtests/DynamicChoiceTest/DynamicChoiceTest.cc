@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "DynamicChoice.h"
 
 DynamicChoice handle;
 
-TEST(StatemachineTest, DynamicChoiceTest) {
-	dynamicChoice_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		dynamicChoice_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, DynamicChoiceTest) {					
 	dynamicChoice_enter(&handle);
 	EXPECT_TRUE(dynamicChoice_isStateActive(&handle, DynamicChoice_main_region_Start));
 	dynamicChoice_runCycle(&handle);

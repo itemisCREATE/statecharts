@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "DeepEntry.h"
 
 DeepEntry handle;
 
-TEST(StatemachineTest, enterToSubstate) {
-	deepEntry_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		deepEntry_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, enterToSubstate) {					
 	EXPECT_TRUE(deepEntryIface_get_x(&handle)== 0l);
 	EXPECT_TRUE(deepEntryIface_get_y(&handle)== 0l);
 	EXPECT_TRUE(deepEntryIface_get_z(&handle)== 0l);

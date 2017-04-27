@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "DeepHistory.h"
 
 DeepHistory handle;
 
-TEST(StatemachineTest, deepHistoryTest) {
-	deepHistory_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		deepHistory_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, deepHistoryTest) {					
 	deepHistory_enter(&handle);
 	deepHistoryIface_raise_event1(&handle);
 	deepHistory_runCycle(&handle);

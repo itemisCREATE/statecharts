@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "ConditionalExpressions.h"
 
 ConditionalExpressions handle;
 
-TEST(StatemachineTest, ConditionalExpressionTest) {
-	conditionalExpressions_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		conditionalExpressions_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, ConditionalExpressionTest) {					
 	conditionalExpressions_enter(&handle);
 	EXPECT_TRUE(conditionalExpressions_isStateActive(&handle, ConditionalExpressions_main_region_A));
 	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&handle)== 1l);

@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "EntryChoice.h"
 
 EntryChoice handle;
 
-TEST(StatemachineTest, EntryChoiceTest) {
-	entryChoice_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		entryChoice_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, EntryChoiceTest) {					
 	entryChoice_enter(&handle);
 	entryChoice_runCycle(&handle);
 	entryChoice_runCycle(&handle);

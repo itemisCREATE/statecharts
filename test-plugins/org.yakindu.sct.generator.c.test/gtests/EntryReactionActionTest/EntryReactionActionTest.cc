@@ -8,24 +8,26 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "EntryReactionAction.h"
 
 EntryReactionAction handle;
 
-TEST(StatemachineTest, entryTransitionActionOnStatechartEnter) {
-	entryReactionAction_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		entryReactionAction_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, entryTransitionActionOnStatechartEnter) {					
 	entryReactionAction_enter(&handle);
 	EXPECT_TRUE(entryReactionActionIface_get_enteredR1(&handle));
 	EXPECT_TRUE(entryReactionActionIface_get_enteredR2(&handle));
 	EXPECT_TRUE(entryReactionActionIface_get_enteredBdefault(&handle));
 	EXPECT_TRUE(!entryReactionActionIface_get_enteredBother(&handle));
 }
-TEST(StatemachineTest, entryOnRTS) {
-	entryReactionAction_init(&handle);
-	
+TEST_F(StatemachineTest, entryOnRTS) {					
 	entryReactionAction_enter(&handle);
 	entryReactionActionIface_raise_b(&handle);
 	entryReactionAction_runCycle(&handle);
@@ -42,9 +44,7 @@ TEST(StatemachineTest, entryOnRTS) {
 	EXPECT_TRUE(!entryReactionActionIface_get_enteredBdefault(&handle));
 	EXPECT_TRUE(entryReactionActionIface_get_enteredBother(&handle));
 }
-TEST(StatemachineTest, noEntryTransitionActionOnHistory) {
-	entryReactionAction_init(&handle);
-	
+TEST_F(StatemachineTest, noEntryTransitionActionOnHistory) {					
 	entryReactionAction_enter(&handle);
 	entryReactionActionIface_raise_b(&handle);
 	entryReactionAction_runCycle(&handle);

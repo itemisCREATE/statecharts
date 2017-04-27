@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "BooleanExpressions.h"
 
 BooleanExpressions handle;
 
-TEST(StatemachineTest, booleanExpressions) {
-	booleanExpressions_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		booleanExpressions_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, booleanExpressions) {					
 	booleanExpressions_enter(&handle);
 	EXPECT_TRUE(booleanExpressions_isStateActive(&handle, BooleanExpressions_main_region_StateA));
 	EXPECT_TRUE(booleanExpressionsIface_get_myBool1(&handle)== true);

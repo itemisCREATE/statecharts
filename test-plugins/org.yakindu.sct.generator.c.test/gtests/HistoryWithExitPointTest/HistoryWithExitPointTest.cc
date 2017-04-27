@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "HistoryWithExitPoint.h"
 
 HistoryWithExitPoint handle;
 
-TEST(StatemachineTest, historyEntryAfterExit) {
-	historyWithExitPoint_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		historyWithExitPoint_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, historyEntryAfterExit) {					
 	historyWithExitPoint_enter(&handle);
 	EXPECT_TRUE(historyWithExitPoint_isStateActive(&handle, HistoryWithExitPoint_mr_A_r_X1));
 	historyWithExitPointIface_raise_push(&handle);

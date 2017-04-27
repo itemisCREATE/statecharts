@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "InEventLifeCycle.h"
 
 InEventLifeCycle handle;
 
-TEST(StatemachineTest, eventLifeCycle) {
-	inEventLifeCycle_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		inEventLifeCycle_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, eventLifeCycle) {					
 	inEventLifeCycle_enter(&handle);
 	inEventLifeCycleIface_raise_e(&handle);
 	EXPECT_TRUE(inEventLifeCycleIface_get_i(&handle)== 0l);

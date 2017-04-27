@@ -8,24 +8,26 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "PriorityValues.h"
 
 PriorityValues handle;
 
-TEST(StatemachineTest, transitionPriority) {
-	priorityValues_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		priorityValues_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, transitionPriority) {					
 	priorityValues_enter(&handle);
 	EXPECT_TRUE(priorityValues_isStateActive(&handle, PriorityValues_main_region_A));
 	priorityValuesIface_raise_event1(&handle);
 	priorityValues_runCycle(&handle);
 	EXPECT_TRUE(priorityValues_isStateActive(&handle, PriorityValues_main_region_C));
 }
-TEST(StatemachineTest, regionPriority) {
-	priorityValues_init(&handle);
-	
+TEST_F(StatemachineTest, regionPriority) {					
 	priorityValues_enter(&handle);
 	EXPECT_TRUE(priorityValues_isStateActive(&handle, PriorityValues_someRegion_A));
 	priorityValuesIface_raise_event2(&handle);

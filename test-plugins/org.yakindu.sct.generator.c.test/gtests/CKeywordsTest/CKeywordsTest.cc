@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "CKeywords.h"
 
 CKeywords handle;
 
-TEST(StatemachineTest, CKeywordsTest) {
-	cKeywords_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		cKeywords_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, CKeywordsTest) {					
 	cKeywords_enter(&handle);
 	EXPECT_TRUE(cKeywords_isStateActive(&handle, CKeywords_auto_char));
 	cKeywordsIface_raise_auto(&handle);

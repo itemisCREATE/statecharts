@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "IntegerExpressions.h"
 
 IntegerExpressions handle;
 
-TEST(StatemachineTest, integerExpressions) {
-	integerExpressions_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		integerExpressions_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, integerExpressions) {					
 	integerExpressions_enter(&handle);
 	EXPECT_TRUE(integerExpressions_isStateActive(&handle, IntegerExpressions_main_region_StateA));
 	EXPECT_TRUE(integerExpressionsIface_get_myInt1(&handle)== 10l);

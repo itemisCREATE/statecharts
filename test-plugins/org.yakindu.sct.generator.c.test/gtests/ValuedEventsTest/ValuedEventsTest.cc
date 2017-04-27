@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "ValuedEvents.h"
 
 ValuedEvents handle;
 
-TEST(StatemachineTest, valuedEventsTest) {
-	valuedEvents_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		valuedEvents_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, valuedEventsTest) {					
 	valuedEvents_enter(&handle);
 	valuedEvents_runCycle(&handle);
 	EXPECT_TRUE(strcmp(valuedEventsIface_get_myString(&handle), "sct") == 0);

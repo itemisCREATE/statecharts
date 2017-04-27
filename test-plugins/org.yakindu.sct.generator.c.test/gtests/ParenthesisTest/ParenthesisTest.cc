@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "Parenthesis.h"
 
 Parenthesis handle;
 
-TEST(StatemachineTest, simple) {
-	parenthesis_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		parenthesis_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, simple) {					
 	parenthesis_enter(&handle);
 	EXPECT_TRUE(parenthesis_isStateActive(&handle, Parenthesis_mainRegion_A));
 	EXPECT_TRUE(parenthesisIface_get_erg(&handle)== 8l);

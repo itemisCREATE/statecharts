@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "Declarations.h"
 
 Declarations handle;
 
-TEST(StatemachineTest, declarationsTest) {
-	declarations_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		declarations_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, declarationsTest) {					
 	declarations_enter(&handle);
 }
 
