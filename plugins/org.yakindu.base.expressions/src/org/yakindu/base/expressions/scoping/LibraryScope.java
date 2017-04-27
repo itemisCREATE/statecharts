@@ -10,9 +10,9 @@
 */
 package org.yakindu.base.expressions.scoping;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -33,18 +33,19 @@ import com.google.common.collect.Lists;
  */
 public class LibraryScope extends AbstractScope {
 
-	private URI[] uris;
+	private List<URI> uris;
+	private List<IEObjectDescription> result;
+	private ResourceSet set;
 
 	public LibraryScope(IScope parent, URI... uris) {
 		super(parent, false);
+		this.uris = new ArrayList<URI>();
 		for (URI uri : uris) {
-			Assert.isTrue(URIConverter.INSTANCE.exists(uri, null));
+			if (URIConverter.INSTANCE.exists(uri, null)) {
+				this.uris.add(uri);
+			}
 		}
-		this.uris = uris;
 	}
-
-	private List<IEObjectDescription> result;
-	private ResourceSet set;
 
 	@Override
 	protected Iterable<IEObjectDescription> getAllLocalElements() {

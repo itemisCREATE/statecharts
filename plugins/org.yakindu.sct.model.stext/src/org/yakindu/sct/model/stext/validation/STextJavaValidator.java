@@ -554,8 +554,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			assertOperationArguments(operation, call.getArgs());
 		}
 	}
+
 	@Check(CheckType.FAST)
-	public void checkAnnotationArguments(AnnotationDefinition annotation){
+	public void checkAnnotationArguments(AnnotationDefinition annotation) {
 		if (annotation.getArgs().size() != annotation.getType().getProperties().size()) {
 			error(String.format(WRONG_NUMBER_OF_OPERATIONARGUMENTS, annotation), null);
 		}
@@ -580,8 +581,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Check(CheckType.FAST)
 	public void checkVarArgParameterIsLast(Operation operation) {
 		if (operation.isVariadic() && operation.getVarArgIndex() != operation.getParameters().size() - 1) {
-			error(VAR_ARGS_LAST_MSG, operation.getParameters().get(operation.getVarArgIndex()),
-					null, VAR_ARGS_LAST_CODE);
+			error(VAR_ARGS_LAST_MSG, operation.getParameters().get(operation.getVarArgIndex()), null,
+					VAR_ARGS_LAST_CODE);
 		}
 	}
 
@@ -779,8 +780,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				}
 			});
 			if (!found) {
-				error(String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getType().getName(), element.eClass()),
-						TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
+				error(String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getType().getName(),
+						element.eClass()), TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
 						element.getAnnotations().indexOf(annotation), ERROR_WRONG_ANNOTATION_TARGET_CODE);
 			}
 		}

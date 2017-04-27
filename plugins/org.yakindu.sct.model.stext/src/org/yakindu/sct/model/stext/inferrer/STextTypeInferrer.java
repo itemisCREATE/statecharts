@@ -14,12 +14,15 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.BOOLEAN;
 import static org.yakindu.base.types.typesystem.ITypeSystem.INTEGER;
 import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
+import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.Property;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AnnotationDefinition;
@@ -51,8 +54,6 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		return result;
 	}
 
-	
-	
 	public InferenceResult doInfer(Event e) {
 		// if an event is used within an expression, the type is boolean and the
 		// value indicates if the event is raised or not
@@ -78,14 +79,15 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	public InferenceResult doInfer(EventValueReferenceExpression e) {
 		Event definition = deresolve(e.getValue());
 		if (definition != null)
-			return definition.getTypeSpecifier() == null ? getResultFor(VOID) : inferTypeDispatch(definition.getTypeSpecifier());
+			return definition.getTypeSpecifier() == null ? getResultFor(VOID)
+					: inferTypeDispatch(definition.getTypeSpecifier());
 		return inferTypeDispatch(e.getValue());
 	}
 
 	public InferenceResult doInfer(EventRaisingExpression e) {
 		Event event = deresolve(e.getEvent());
 		InferenceResult eventType = null;
-		if(event != null)
+		if (event != null)
 			eventType = inferTypeDispatch(event.getTypeSpecifier());
 		eventType = eventType != null ? eventType : getResultFor(VOID);
 		if (e.getValue() == null) {
@@ -119,9 +121,22 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	public InferenceResult doInfer(ActiveStateReferenceExpression e) {
 		return getResultFor(BOOLEAN);
 	}
-	
+
 	public InferenceResult doInfer(AnnotationDefinition ad) {
+		EList<Expression> arguments = ad.getArgs();
+		inferAnnotationProperty(ad.getType(), arguments);
 		return getResultFor(VOID);
 	}
-	
+
+	protected void inferAnnotationProperty(AnnotationType type, EList<Expression> arguments) {
+		EList<Property> properties = type.getProperties();
+		if (properties.size() == arguments.size()) {
+			for (int i = 0; i < properties.size(); i++) {
+				InferenceResult type1 = inferTypeDispatch(properties.get(i));
+				InferenceResult type2 = inferTypeDispatch(arguments.get(i));
+				assertCompatible(type1, type2, String.format(INCOMPATIBLE_TYPES, type1, type2));
+			}
+		}
+	}
+
 }
