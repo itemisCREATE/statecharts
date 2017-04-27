@@ -246,19 +246,21 @@ public class PropertyImpl extends DeclarationImpl implements Property {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
+	 */
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (const: ");
-		result.append(const_);
-		result.append(", readonly: ");
-		result.append(readonly);
-		result.append(", external: ");
-		result.append(external);
+		StringBuffer result = new StringBuffer();
+		result.append(" (name: ");
+		result.append(name);
+		result.append(" type: ");
+		result.append(getType());
 		result.append(')');
 		return result.toString();
 	}

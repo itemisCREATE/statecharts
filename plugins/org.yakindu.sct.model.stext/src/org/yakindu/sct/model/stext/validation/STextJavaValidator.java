@@ -558,7 +558,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Check(CheckType.FAST)
 	public void checkAnnotationArguments(AnnotationDefinition annotation) {
 		if (annotation.getArgs().size() != annotation.getType().getProperties().size()) {
-			error(String.format(WRONG_NUMBER_OF_OPERATIONARGUMENTS, annotation), null);
+			error(String.format(WRONG_NUMBER_OF_OPERATIONARGUMENTS, annotation.getType().getProperties()), null);
 		}
 	}
 
