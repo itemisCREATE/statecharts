@@ -211,6 +211,29 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult.assertError(STextJavaValidator.VAR_ARGS_LAST_CODE);
 
 	}
+	
+	/**
+	 * @see STextJavaValidator#checkAnnotationArguments(org.yakindu.sct.model.stext.stext.AnnotationDefinition)
+	 */
+	@Test
+	public void checkAnnotationArguments() {
+		String scope = "@Execution()";
+		EObject model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(model);
+		validationResult.assertError(STextJavaValidator.WRONG_NUMBER_OF_ARGUMENTS_CODE);;
+		
+		scope = "@Execution(EVENT_DRIVEN)";
+		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		 validationResult = tester.validate(model);
+		validationResult.assertOK();
+	}
+	/**
+	 * @see STextJavaValidator#checkAnnotationTarget(org.yakindu.base.types.AnnotatableElement)
+	 */
+	@Test
+	public void checkAnnotationTarget(){
+		//TODO: Implement me when default annotation for target is available
+	}
 
 	/**
 	 * @see STextJavaValidator#checkGuardHasBooleanExpression(org.yakindu.sct.model.stext.stext.ReactionTrigger)
