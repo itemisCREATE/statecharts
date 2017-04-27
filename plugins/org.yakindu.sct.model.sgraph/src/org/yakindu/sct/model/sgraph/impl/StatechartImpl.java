@@ -26,6 +26,7 @@ import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.Annotation;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
@@ -49,6 +50,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDomainID <em>Domain ID</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getAnnotation <em>Annotation</em>}</li>
  * </ul>
  *
  * @generated
@@ -154,6 +156,16 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected String domainID = DOMAIN_ID_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getAnnotation() <em>Annotation</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotation()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Annotation> annotation;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -300,6 +312,18 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Annotation> getAnnotation() {
+		if (annotation == null) {
+			annotation = new EObjectContainmentEList.Resolving<Annotation>(Annotation.class, this, SGraphPackage.STATECHART__ANNOTATION);
+		}
+		return annotation;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -326,6 +350,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 			case SGraphPackage.STATECHART__REGIONS:
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
+			case SGraphPackage.STATECHART__ANNOTATION:
+				return ((InternalEList<?>)getAnnotation()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -351,6 +377,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return getDocumentation();
 			case SGraphPackage.STATECHART__DOMAIN_ID:
 				return getDomainID();
+			case SGraphPackage.STATECHART__ANNOTATION:
+				return getAnnotation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -383,6 +411,10 @@ public class StatechartImpl extends SpecificationElementImpl implements
 			case SGraphPackage.STATECHART__DOMAIN_ID:
 				setDomainID((String)newValue);
 				return;
+			case SGraphPackage.STATECHART__ANNOTATION:
+				getAnnotation().clear();
+				getAnnotation().addAll((Collection<? extends Annotation>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -412,6 +444,9 @@ public class StatechartImpl extends SpecificationElementImpl implements
 			case SGraphPackage.STATECHART__DOMAIN_ID:
 				setDomainID(DOMAIN_ID_EDEFAULT);
 				return;
+			case SGraphPackage.STATECHART__ANNOTATION:
+				getAnnotation().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -437,6 +472,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
 			case SGraphPackage.STATECHART__DOMAIN_ID:
 				return DOMAIN_ID_EDEFAULT == null ? domainID != null : !DOMAIN_ID_EDEFAULT.equals(domainID);
+			case SGraphPackage.STATECHART__ANNOTATION:
+				return annotation != null && !annotation.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

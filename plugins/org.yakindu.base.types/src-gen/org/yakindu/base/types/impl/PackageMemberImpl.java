@@ -4,9 +4,12 @@ package org.yakindu.base.types.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.impl.NamedElementImpl;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
@@ -30,7 +33,7 @@ import org.yakindu.base.types.TypesUtil;
  */
 public class PackageMemberImpl extends NamedElementImpl implements PackageMember {
 	/**
-	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' reference list.
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAnnotations()
@@ -75,7 +78,7 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 	 */
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
-			annotations = new EObjectResolvingEList<Annotation>(Annotation.class, this, TypesPackage.PACKAGE_MEMBER__ANNOTATIONS);
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.PACKAGE_MEMBER__ANNOTATIONS);
 		}
 		return annotations;
 	}
@@ -88,6 +91,20 @@ public class PackageMemberImpl extends NamedElementImpl implements PackageMember
 	@Override
 	public String getId() {
 		return TypesUtil.computeQID(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.PACKAGE_MEMBER__ANNOTATIONS:
+				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

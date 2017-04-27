@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface AnnotatableElement extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Annotations</b></em>' reference list.
+	 * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.base.types.Annotation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -31,9 +31,9 @@ public interface AnnotatableElement extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Annotations</em>' reference list.
+	 * @return the value of the '<em>Annotations</em>' containment reference list.
 	 * @see org.yakindu.base.types.TypesPackage#getAnnotatableElement_Annotations()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Annotation> getAnnotations();

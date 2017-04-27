@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
@@ -75,7 +74,7 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' reference list.
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAnnotations()
@@ -247,7 +246,7 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 */
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
-			annotations = new EObjectResolvingEList<Annotation>(Annotation.class, this, TypesPackage.TYPE_ALIAS__ANNOTATIONS);
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.TYPE_ALIAS__ANNOTATIONS);
 		}
 		return annotations;
 	}
@@ -324,6 +323,8 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 		switch (featureID) {
 			case TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER:
 				return basicSetTypeSpecifier(null, msgs);
+			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
+				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
 				return ((InternalEList<?>)getConstraint()).basicRemove(otherEnd, msgs);
 		}

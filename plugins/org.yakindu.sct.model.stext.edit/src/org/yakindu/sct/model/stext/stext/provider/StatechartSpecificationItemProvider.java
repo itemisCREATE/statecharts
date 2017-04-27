@@ -17,11 +17,14 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.provider.ScopedElementItemProvider;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.StatechartSpecification} object.
@@ -59,6 +62,36 @@ public class StatechartSpecificationItemProvider extends ScopedElementItemProvid
 	}
 
   /**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(StextPackage.Literals.STATECHART_SPECIFICATION__ANNOTATION);
+		}
+		return childrenFeatures;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
+	}
+
+		/**
 	 * This returns StatechartSpecification.gif.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -97,6 +130,12 @@ public class StatechartSpecificationItemProvider extends ScopedElementItemProvid
   public void notifyChanged(Notification notification)
   {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(StatechartSpecification.class)) {
+			case StextPackage.STATECHART_SPECIFICATION__ANNOTATION:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -136,6 +175,11 @@ public class StatechartSpecificationItemProvider extends ScopedElementItemProvid
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
 				 StextFactory.eINSTANCE.createSimpleScope()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.STATECHART_SPECIFICATION__ANNOTATION,
+				 StextFactory.eINSTANCE.createAnnotationDefinition()));
 	}
 
   /**

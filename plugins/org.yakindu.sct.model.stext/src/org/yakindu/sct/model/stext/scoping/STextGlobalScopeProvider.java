@@ -29,6 +29,7 @@ import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.IResourceScopeCache;
+import org.yakindu.base.expressions.scoping.LibraryScope;
 import org.yakindu.base.types.Package;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -49,7 +50,9 @@ import com.google.inject.Provider;
  * 
  */
 public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
-
+	
+	public static final URI STEXT_LIB = URI.createURI("platform:/plugin/org.yakindu.sct.model.stext.lib/lib/STextLib.xmi");
+	
 	@Inject
 	private ITypeSystem typeSystem;
 	@Inject
@@ -72,6 +75,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		IScope parentScope = super.getScope(context, reference, filter);
 		parentScope = new SimpleScope(parentScope, delegate.getScope(context, reference, filter).getAllElements());
 		parentScope = filterExternalDeclarations(context, parentScope);
+		parentScope = new LibraryScope(parentScope, STEXT_LIB);
 		final Statechart statechart = getStatechart(context);
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
 				reference.getEReferenceType());

@@ -561,6 +561,29 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.AnnotationType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AnnotationTypeItemProvider annotationTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.AnnotationType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAnnotationTypeAdapter() {
+		if (annotationTypeItemProvider == null) {
+			annotationTypeItemProvider = new AnnotationTypeItemProvider(this);
+		}
+
+		return annotationTypeItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -680,6 +703,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (annotationItemProvider != null) annotationItemProvider.dispose();
 		if (annotatableElementItemProvider != null) annotatableElementItemProvider.dispose();
 		if (arrayTypeSpecifierItemProvider != null) arrayTypeSpecifierItemProvider.dispose();
+		if (annotationTypeItemProvider != null) annotationTypeItemProvider.dispose();
 	}
 
 }

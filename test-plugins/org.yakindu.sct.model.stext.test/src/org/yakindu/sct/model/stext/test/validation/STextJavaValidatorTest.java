@@ -29,16 +29,10 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.validation.Check;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
-import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Operation;
-import org.yakindu.base.types.Package;
-import org.yakindu.base.types.Type;
-import org.yakindu.base.types.TypesFactory;
-import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -673,35 +667,6 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 3);
 		assertWarning(diagnostics, INTERNAL_DECLARATION_UNUSED);
-	}
-
-	@Ignore("Test is not executed for TypesPackage elements")
-	@Test
-	public void checkAnnotationTarget() {
-
-		Package pack = TypesFactory.eINSTANCE.createPackage();
-		pack.setName("package");
-		
-		Annotation annotation = TypesFactory.eINSTANCE.createAnnotation();
-		annotation.setName("OperationAnnotation");
-		annotation.getTargets().add(TypesPackage.Literals.OPERATION);
-		pack.getMember().add(annotation);
-		
-		Operation operation = TypesFactory.eINSTANCE.createOperation();
-		operation.setName("MyOp");
-		operation.getAnnotations().add(annotation);
-		pack.getMember().add(operation);
-
-		AssertableDiagnostics validationResult = tester.validate(pack);
-		validationResult.assertOK();
-
-		Type type = TypesFactory.eINSTANCE.createType();
-		type.setName("primitive");
-		type.getAnnotations().add(annotation);
-		pack.getMember().add(type);
-
-		validationResult = tester.validate(pack);
-		validationResult.assertError(ERROR_WRONG_ANNOTATION_TARGET_CODE);
 	}
 
 	@Test

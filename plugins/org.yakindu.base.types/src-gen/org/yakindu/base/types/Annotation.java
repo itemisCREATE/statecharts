@@ -2,7 +2,6 @@
  */
 package org.yakindu.base.types;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,45 +13,38 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.base.types.Annotation#getProperties <em>Properties</em>}</li>
- *   <li>{@link org.yakindu.base.types.Annotation#getTargets <em>Targets</em>}</li>
+ *   <li>{@link org.yakindu.base.types.Annotation#getType <em>Type</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getAnnotation()
  * @model
  * @generated
  */
-public interface Annotation extends PackageMember {
+public interface Annotation extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.base.types.Property}.
+	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Type</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Properties</em>' containment reference list.
-	 * @see org.yakindu.base.types.TypesPackage#getAnnotation_Properties()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Property> getProperties();
-
-	/**
-	 * Returns the value of the '<em><b>Targets</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Targets</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Targets</em>' reference list.
-	 * @see org.yakindu.base.types.TypesPackage#getAnnotation_Targets()
+	 * @return the value of the '<em>Type</em>' reference.
+	 * @see #setType(AnnotationType)
+	 * @see org.yakindu.base.types.TypesPackage#getAnnotation_Type()
 	 * @model
 	 * @generated
 	 */
-	EList<EObject> getTargets();
+	AnnotationType getType();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.base.types.Annotation#getType <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' reference.
+	 * @see #getType()
+	 * @generated
+	 */
+	void setType(AnnotationType value);
 
 } // Annotation

@@ -75,6 +75,7 @@ import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
+import org.yakindu.sct.model.stext.stext.AnnotationDefinition;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
@@ -553,6 +554,12 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			assertOperationArguments(operation, call.getArgs());
 		}
 	}
+	@Check(CheckType.FAST)
+	public void checkAnnotationArguments(AnnotationDefinition annotation){
+		if (annotation.getArgs().size() != annotation.getType().getProperties().size()) {
+			error(String.format(WRONG_NUMBER_OF_OPERATIONARGUMENTS, annotation), null);
+		}
+	}
 
 	@Check(CheckType.FAST)
 	public void checkOperationArguments_TypedElementReferenceExpression(final ElementReferenceExpression call) {
@@ -764,7 +771,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkAnnotationTarget(final AnnotatableElement element) {
 		EList<Annotation> annotations = element.getAnnotations();
 		for (Annotation annotation : annotations) {
-			EList<EObject> targets = annotation.getTargets();
+			EList<EObject> targets = annotation.getType().getTargets();
 			boolean found = Iterables.any(targets, new Predicate<EObject>() {
 				@Override
 				public boolean apply(EObject input) {
@@ -772,7 +779,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				}
 			});
 			if (!found) {
-				error(String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getName(), element.eClass()),
+				error(String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getType().getName(), element.eClass()),
 						TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
 						element.getAnnotations().indexOf(annotation), ERROR_WRONG_ANNOTATION_TARGET_CODE);
 			}

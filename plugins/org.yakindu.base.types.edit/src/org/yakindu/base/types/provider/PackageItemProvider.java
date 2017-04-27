@@ -226,7 +226,7 @@ public class PackageItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE__MEMBER,
-				 TypesFactory.eINSTANCE.createAnnotation()));
+				 TypesFactory.eINSTANCE.createAnnotationType()));
 
 		newChildDescriptors.add
 			(createChildParameter

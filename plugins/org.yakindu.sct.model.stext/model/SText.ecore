@@ -18,7 +18,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="def" eType="#//TransitionSpecification"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StatechartSpecification" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ScopedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StatechartSpecification" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ScopedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" upperBound="-1"
+        eType="#//AnnotationDefinition" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StateSpecification">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Scope"
         containment="true"/>
@@ -104,4 +107,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="ActiveStateReferenceExpression" eSuperTypes="../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//State"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotationDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Annotation ../../org.yakindu.base.expressions/model/Expressions.ecore#//ArgumentExpression"/>
 </ecore:EPackage>
