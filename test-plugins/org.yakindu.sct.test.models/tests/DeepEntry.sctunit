@@ -1,4 +1,3 @@
-package tests
 testclass DeepEntry for statechart DeepEntry {
 	
 	@Test

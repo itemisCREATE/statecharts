@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, TypeAliasTest) {					
 	typeAlias_enter(&handle);
 	EXPECT_TRUE(typeAlias_isStateActive(&handle, TypeAlias_main_region_Start));

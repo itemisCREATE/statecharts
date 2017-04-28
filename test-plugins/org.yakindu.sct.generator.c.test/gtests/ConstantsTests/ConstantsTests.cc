@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, constantDefinition) {					
 	constants_enter(&handle);
 	EXPECT_TRUE(constants_isStateActive(&handle, Constants_main_region_A));

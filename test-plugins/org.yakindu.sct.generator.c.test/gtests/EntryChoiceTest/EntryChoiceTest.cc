@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, EntryChoiceTest) {					
 	entryChoice_enter(&handle);
 	entryChoice_runCycle(&handle);

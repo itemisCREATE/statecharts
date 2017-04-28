@@ -20,23 +20,24 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+void checkDone(bool shouldBeDone){
+	guardedExitIface_raise_e(&handle);
+	guardedExit_runCycle(&handle);
+	EXPECT_TRUE(guardedExit_isStateActive(&handle, GuardedExit_main_region_B));
+	EXPECT_TRUE(shouldBeDone ? guardedExitIface_get_done(&handle)  : !guardedExitIface_get_done(&handle));
+}
+
 TEST_F(StatemachineTest, ExitTaken) {					
 	guardedExit_enter(&handle);
 	EXPECT_TRUE(guardedExit_isStateActive(&handle, GuardedExit_main_region_A));
 	EXPECT_TRUE(!guardedExitIface_get_guard(&handle));
-	guardedExitIface_raise_e(&handle);
-	guardedExit_runCycle(&handle);
-	EXPECT_TRUE(guardedExit_isStateActive(&handle, GuardedExit_main_region_B));
-	EXPECT_TRUE(!guardedExitIface_get_done(&handle));
+	checkDone(false);
 }
 TEST_F(StatemachineTest, ExitNotTaken) {					
 	guardedExit_enter(&handle);
 	EXPECT_TRUE(guardedExit_isStateActive(&handle, GuardedExit_main_region_A));
 	guardedExitIface_set_guard(&handle,true);
-	guardedExitIface_raise_e(&handle);
-	guardedExit_runCycle(&handle);
-	EXPECT_TRUE(guardedExit_isStateActive(&handle, GuardedExit_main_region_B));
-	EXPECT_TRUE(guardedExitIface_get_done(&handle));
+	checkDone(true);
 }
 
 

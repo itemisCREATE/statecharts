@@ -36,54 +36,40 @@ public class HistoryWithoutInitialStepTest {
 	
 	@Test
 	public void testEnterThroughInitialEntry() {
-		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
-		statemachine.raiseToB();
-		statemachine.runCycle();
+		init();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
-		 
 		statemachine.raiseNext();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
-		 
 	}
 	@Test
 	public void testEnterCThroughHistory() {
-		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
-		statemachine.raiseToB();
-		statemachine.runCycle();
+		init();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
-		 
 		statemachine.raiseToA();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		statemachine.raiseToHistory();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
-		 
 	}
 	@Test
 	public void testEnterDThroughHistory() {
-		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
-		statemachine.raiseToB();
-		statemachine.runCycle();
+		init();
 		statemachine.raiseNext();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
-		 
 		statemachine.raiseToA();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		statemachine.raiseToHistory();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
-		 
+	}
+	public void init() {
+		statemachine.enter();
+		assertTrue(statemachine.isStateActive(State.main_region_A));
+		statemachine.raiseToB();
+		statemachine.runCycle();
 	}
 }

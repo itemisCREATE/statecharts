@@ -1,4 +1,3 @@
-package tests
 testclass DeepHistory for statechart DeepHistory {
 	@Test
 	operation deepHistoryTest(){

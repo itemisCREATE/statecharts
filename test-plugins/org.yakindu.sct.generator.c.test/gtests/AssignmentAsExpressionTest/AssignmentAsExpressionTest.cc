@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, simpleAssignment) {					
 	assignmentAsExpression_enter(&handle);
 	EXPECT_TRUE(assignmentAsExpression_isStateActive(&handle, AssignmentAsExpression_main_region_Add));

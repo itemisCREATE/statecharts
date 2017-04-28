@@ -1,4 +1,3 @@
-package tests
 testclass ValuedEvents for statechart ValuedEvents {
 	@Test
 	operation valuedEventsTest(){

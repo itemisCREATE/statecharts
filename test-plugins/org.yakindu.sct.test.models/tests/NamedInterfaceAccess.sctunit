@@ -1,4 +1,3 @@
-package tests
 testclass NamedInterfaceAccess for statechart NamedInterfaceAccess{
 	@Test
 	operation SafeOpenSuccess(){ 

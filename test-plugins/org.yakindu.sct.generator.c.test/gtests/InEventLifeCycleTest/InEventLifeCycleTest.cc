@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, eventLifeCycle) {					
 	inEventLifeCycle_enter(&handle);
 	inEventLifeCycleIface_raise_e(&handle);

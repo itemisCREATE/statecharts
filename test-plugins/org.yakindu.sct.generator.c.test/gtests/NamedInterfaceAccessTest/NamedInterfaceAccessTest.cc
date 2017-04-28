@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, SafeOpenSuccess) {					
 	namedInterfaceAccess_enter(&handle);
 	namedInterfaceAccess_runCycle(&handle);

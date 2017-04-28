@@ -1,4 +1,3 @@
-package tests
 testclass Guard for statechart Guard {
 	@Test
 	operation guardTest(){

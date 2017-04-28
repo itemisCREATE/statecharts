@@ -38,14 +38,11 @@ public class SimpleHierachyTest {
 	public void testSimpleHierachyTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		statemachine.raiseEvent1();
 		statemachine.raiseEvent1();
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		 
 		assertTrue(statemachine.isStateActive(State.main_region_B_subregion1_B1));
-		 
 	}
 }

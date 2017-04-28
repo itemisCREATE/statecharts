@@ -25,6 +25,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, simpleAssignment) {
 	
 	

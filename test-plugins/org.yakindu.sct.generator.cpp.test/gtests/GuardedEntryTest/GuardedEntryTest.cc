@@ -25,6 +25,19 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+void initEntryInTransition(bool guardVar, bool doneVar){
+	statechart->enter();
+	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
+	statechart->raise_e();
+	statechart->runCycle();
+	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_B));
+	statechart->getDefaultSCI()->set_guard(guardVar);
+	statechart->getDefaultSCI()->set_done(doneVar);
+	statechart->raise_e();
+	statechart->runCycle();
+	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
+}
+
 TEST_F(StatemachineTest, EntryNotTakenOnStatechartEnter) {
 	
 	
@@ -52,25 +65,7 @@ TEST_F(StatemachineTest, EntryTakenOnStatechartEnter) {
 TEST_F(StatemachineTest, EntryTakenInTransition) {
 	
 	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
-	
-	statechart->raise_e();
-	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_B));
-	
-	statechart->getDefaultSCI()->set_guard(true);
-	
-	statechart->getDefaultSCI()->set_done(false);
-	
-	statechart->raise_e();
-	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
+	initEntryInTransition(true,false);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_done());
 	
@@ -78,25 +73,7 @@ TEST_F(StatemachineTest, EntryTakenInTransition) {
 TEST_F(StatemachineTest, EntryNotTakenInTransition) {
 	
 	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
-	
-	statechart->raise_e();
-	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_B));
-	
-	statechart->getDefaultSCI()->set_guard(false);
-	
-	statechart->getDefaultSCI()->set_done(false);
-	
-	statechart->raise_e();
-	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
+	initEntryInTransition(false,false);
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_done());
 	

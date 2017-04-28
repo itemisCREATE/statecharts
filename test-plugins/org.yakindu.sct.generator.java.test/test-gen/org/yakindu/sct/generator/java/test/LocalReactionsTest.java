@@ -38,9 +38,7 @@ public class LocalReactionsTest {
 	public void testLocalReactionsTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		statemachine.runCycle();
 		assertTrue(statemachine.getX() == 1l);
-		 
 	}
 }

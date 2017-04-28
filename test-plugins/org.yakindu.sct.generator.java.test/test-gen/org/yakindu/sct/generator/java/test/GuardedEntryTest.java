@@ -37,56 +37,37 @@ public class GuardedEntryTest {
 	@Test
 	public void testEntryNotTakenOnStatechartEnter() {
 		assertTrue(statemachine.getGuard() == false);
-		 
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		assertTrue(statemachine.getDone() == false);
-		 
 	}
 	@Test
 	public void testEntryTakenOnStatechartEnter() {
 		statemachine.setGuard(true);
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		assertTrue(statemachine.getDone() == true);
-		 
 	}
 	@Test
 	public void testEntryTakenInTransition() {
-		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
-		statemachine.raiseE();
-		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_B));
-		 
-		statemachine.setGuard(true);
-		statemachine.setDone(false);
-		statemachine.raiseE();
-		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
+		initEntryInTransition(true,false);
 		assertTrue(statemachine.getDone());
-		 
 	}
 	@Test
 	public void testEntryNotTakenInTransition() {
+		initEntryInTransition(false,false);
+		assertTrue(!statemachine.getDone());
+	}
+	public void initEntryInTransition(boolean guardVar, boolean doneVar) {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		statemachine.raiseE();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		 
-		statemachine.setGuard(false);
-		statemachine.setDone(false);
+		statemachine.setGuard(guardVar);
+		statemachine.setDone(doneVar);
 		statemachine.raiseE();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
-		assertTrue(!statemachine.getDone());
-		 
 	}
 }

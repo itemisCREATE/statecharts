@@ -11,18 +11,6 @@
 #include "gtest/gtest.h"
 #include "Operations.h"
 #include "OperationsRequired.h"
-class InternalOperation3aMock{
-	public:
-	sc_real (InternalOperation3aMock::*internalOperation3aBehavior)(sc_real);
-	sc_real internalOperation3a1(const sc_real param1){
-		return (param1+1.0);
-	}
-	void setInternalOperation3aBehavior(sc_real (InternalOperation3aMock::*func)(sc_real)){
-		internalOperation3aBehavior = func;
-	}
-};
-static InternalOperation3aMock* internalOperation3aMock;
-
 class AlwaysTrueMock{
 	public:
 	sc_boolean (AlwaysTrueMock::*alwaysTrueBehavior)();
@@ -153,11 +141,10 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, operationsCalled) {					
 	alwaysTrueMock = new AlwaysTrueMock();
-	internalOperation3aMock = new InternalOperation3aMock();
 	alwaysTrueMock->setAlwaysTrueBehavior(&AlwaysTrueMock::alwaysTrue1);
-	internalOperation3aMock->setInternalOperation3aBehavior(&InternalOperation3aMock::internalOperation3a1);
 	operations_enter(&handle);
 	EXPECT_TRUE(operations_isStateActive(&handle, Operations_main_region_A));
 	operations_runCycle(&handle);
@@ -167,14 +154,12 @@ TEST_F(StatemachineTest, operationsCalled) {
 	EXPECT_TRUE(internalOperation2.param1 == 4l);
 	EXPECT_TRUE(internalOperation3.called);
 	EXPECT_TRUE(internalOperation3a.called);
+	EXPECT_TRUE(internalOperation3a.param1 == 1.0);
 	EXPECT_TRUE(internalOperation4.called);
 	EXPECT_TRUE(internalOperation4a.called);
 	EXPECT_TRUE(internalOperation4a.param1 == 5l);
 	EXPECT_TRUE(internalOperation5.called);
 	EXPECT_TRUE(internalOperation5a.called);
-	EXPECT_TRUE(strcmp(internalOperation5a.param1, "") == 0);
-	EXPECT_TRUE(internalOperation2.called);
-	EXPECT_TRUE(internalOperation2.param1 == 4l);
 	operationsIface_raise_ev(&handle);
 	operations_runCycle(&handle);
 	EXPECT_TRUE(operations_isStateActive(&handle, Operations_main_region_C));
@@ -189,7 +174,6 @@ TEST_F(StatemachineTest, operationsCalled) {
 	EXPECT_TRUE(interface1InterfaceOperation4a.param1 == 5l);
 	EXPECT_TRUE(interface1InterfaceOperation5.called);
 	EXPECT_TRUE(interface1InterfaceOperation5a.called);
-	EXPECT_TRUE(strcmp(interface1InterfaceOperation5a.param1, "") == 0);
 	operationsIface_raise_ev(&handle);
 	operations_runCycle(&handle);
 	EXPECT_TRUE(operations_isStateActive(&handle, Operations_main_region_D));
@@ -204,7 +188,6 @@ TEST_F(StatemachineTest, operationsCalled) {
 	EXPECT_TRUE(unnamedOperation4a.param1 == 5l);
 	EXPECT_TRUE(unnamedOperation5.called);
 	EXPECT_TRUE(unnamedOperation5a.called);
-	EXPECT_TRUE(strcmp(unnamedOperation5a.param1, "") == 0);
 }
 
 
@@ -223,9 +206,7 @@ return 0.0d;
 sc_real operationsInternal_internalOperation3a(const Operations* handle, const sc_real param1){
 internalOperation3a.called = true;
 internalOperation3a.param1 = param1;
-sc_real (InternalOperation3aMock::*func)(sc_real) = internalOperation3aMock->internalOperation3aBehavior;
-return (internalOperation3aMock->*func)(param1);
-
+return 0.0d;
 }
 sc_integer operationsInternal_internalOperation4(const Operations* handle){
 internalOperation4.called = true;

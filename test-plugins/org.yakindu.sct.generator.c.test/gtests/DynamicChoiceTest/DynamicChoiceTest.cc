@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, DynamicChoiceTest) {					
 	dynamicChoice_enter(&handle);
 	EXPECT_TRUE(dynamicChoice_isStateActive(&handle, DynamicChoice_main_region_Start));

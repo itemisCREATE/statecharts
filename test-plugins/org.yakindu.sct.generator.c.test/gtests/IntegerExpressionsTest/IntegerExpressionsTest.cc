@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, integerExpressions) {					
 	integerExpressions_enter(&handle);
 	EXPECT_TRUE(integerExpressions_isStateActive(&handle, IntegerExpressions_main_region_StateA));

@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, historyEntryAfterExit) {					
 	historyWithExitPoint_enter(&handle);
 	EXPECT_TRUE(historyWithExitPoint_isStateActive(&handle, HistoryWithExitPoint_mr_A_r_X1));

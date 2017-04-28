@@ -25,18 +25,18 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+void init(){
+	statechart->enter();
+	statechart->runCycle();
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
+	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_B));
+	statechart->getDefaultSCI()->set_entries(0l);
+}
+
 TEST_F(StatemachineTest, SelfTransitionToChildState) {
 	
 	
-	statechart->enter();
-	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
-	
-	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_B));
-	
-	statechart->getDefaultSCI()->set_entries(0l);
+	init();
 	
 	statechart->raise_e();
 	
@@ -52,13 +52,7 @@ TEST_F(StatemachineTest, SelfTransitionToChildState) {
 TEST_F(StatemachineTest, SelfTransitionFromChildState) {
 	
 	
-	statechart->enter();
-	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
-	
-	statechart->getDefaultSCI()->set_entries(0l);
+	init();
 	
 	statechart->raise_e1();
 	

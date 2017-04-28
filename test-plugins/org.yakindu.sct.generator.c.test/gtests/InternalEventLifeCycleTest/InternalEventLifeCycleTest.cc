@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, InternalEventLifeCycleTest) {					
 	internalEventLifeCycle_enter(&handle);
 	EXPECT_TRUE(internalEventLifeCycle_isStateActive(&handle, InternalEventLifeCycle_r1_A));

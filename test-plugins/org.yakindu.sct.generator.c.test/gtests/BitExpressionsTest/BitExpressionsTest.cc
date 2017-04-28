@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, BitExpressions) {					
 	bitExpressions_enter(&handle);
 	EXPECT_TRUE(bitExpressions_isStateActive(&handle, BitExpressions_main_region_StateA));

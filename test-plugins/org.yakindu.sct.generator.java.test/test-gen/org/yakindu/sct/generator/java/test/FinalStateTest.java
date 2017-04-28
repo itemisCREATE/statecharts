@@ -39,6 +39,5 @@ public class FinalStateTest {
 		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue(statemachine.isFinal());
-		 
 	}
 }

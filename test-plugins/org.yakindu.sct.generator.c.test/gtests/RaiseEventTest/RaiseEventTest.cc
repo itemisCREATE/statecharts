@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, raiseEvent) {					
 	raiseEvent_enter(&handle);
 	EXPECT_TRUE(raiseEvent_isStateActive(&handle, RaiseEvent_second_region_SateA));

@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, statechartEntry) {					
 	constOnlyDefaultScope_enter(&handle);
 	EXPECT_TRUE(constOnlyDefaultScope_isStateActive(&handle, ConstOnlyDefaultScope_ConstOnlyDefaultScope_main_region_A));

@@ -1,4 +1,3 @@
-package tests
 /**
  * A shallow history must also for child states that are only indirectly entered through one of the childs.  
  */

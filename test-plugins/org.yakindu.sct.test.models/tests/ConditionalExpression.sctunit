@@ -1,4 +1,3 @@
-package tests
 testclass ConditionalExpression for statechart ConditionalExpressions{
 	@Test
 	operation ConditionalExpressionTest(){ 

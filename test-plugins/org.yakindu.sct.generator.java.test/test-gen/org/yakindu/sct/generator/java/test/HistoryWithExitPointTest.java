@@ -38,26 +38,20 @@ public class HistoryWithExitPointTest {
 	public void testHistoryEntryAfterExit() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X1));
-		 
 		statemachine.raisePush();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.mr_B));
-		 
 		statemachine.raiseBack();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X1));
-		 
 		statemachine.raiseNext();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X2));
-		 
 		statemachine.raisePush();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.mr_B));
-		 
 		statemachine.raiseBack();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X2));
-		 
 	}
 }

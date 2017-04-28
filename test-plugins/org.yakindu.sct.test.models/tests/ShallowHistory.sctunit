@@ -1,4 +1,3 @@
-package tests
 testclass ShallowHistory for statechart ShallowHistory {
 	@Test
 	operation shallowHistoryTest(){

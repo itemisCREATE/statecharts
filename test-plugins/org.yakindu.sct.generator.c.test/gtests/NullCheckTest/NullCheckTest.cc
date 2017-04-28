@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, SimpleNullCheckTest) {					
 	nullCheck_enter(&handle);
 	EXPECT_TRUE(nullCheck_isStateActive(&handle, NullCheck_main_region_A));

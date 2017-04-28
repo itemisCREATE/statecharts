@@ -38,22 +38,17 @@ public class AlwaysOncycleTest {
 	public void testAlwaysOncycleTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
-		 
 		while (statemachine.getValue() < 5l) {
 			statemachine.runCycle();
 			assertTrue(statemachine.isStateActive(State.main_region_StateA));
-			 
 		}
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
-		 
 		while (statemachine.getValue() < 5l) {
 			statemachine.runCycle();
 			assertTrue(statemachine.isStateActive(State.main_region_StateB));
-			 
 		}
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
-		 
 	}
 }

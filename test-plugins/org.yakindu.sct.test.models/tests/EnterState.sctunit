@@ -1,4 +1,3 @@
-package tests
 testclass EnterState for statechart EnterState {
 	
 		

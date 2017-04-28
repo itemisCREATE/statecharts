@@ -100,7 +100,7 @@ public class OperationsTest {
 		verify(internalMock, atLeastOnce()).internalOperation2(longCaptureinternalOperation2_14_0.capture());
 		assertThat(longCaptureinternalOperation2_14_0.getValue(), is(4l));
 		 
-		statemachine.raiseEv();
+		statemachine.raiseEv();;
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 		 
@@ -128,7 +128,7 @@ public class OperationsTest {
 		verify(interface1Mock, atLeastOnce()).interfaceOperation5a(stringCaptureinterfaceOperation5a_25_0.capture());
 		assertThat(stringCaptureinterfaceOperation5a_25_0.getValue(), is(""));
 		 
-		statemachine.raiseEv();
+		statemachine.raiseEv();;
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_D));
 		 

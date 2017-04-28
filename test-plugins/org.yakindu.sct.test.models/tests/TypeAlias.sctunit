@@ -1,4 +1,3 @@
-package tests
 testclass TypeAlias for statechart TypeAlias{
 	@Test
 	operation TypeAliasTest(){ 

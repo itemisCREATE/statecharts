@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, sameNameDifferenRegionTest) {					
 	sameNameDifferentRegion_enter(&handle);
 	EXPECT_TRUE(sameNameDifferentRegion_isStateActive(&handle, SameNameDifferentRegion_main_region_StateA));

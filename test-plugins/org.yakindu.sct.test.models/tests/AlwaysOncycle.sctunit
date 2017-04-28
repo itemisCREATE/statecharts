@@ -1,4 +1,3 @@
-package tests
 testclass AlwaysOncycle for statechart AlwaysOncycle {
 	
 	@Test

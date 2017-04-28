@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, FeatureCalls) {					
 	featureCalls_enter(&handle);
 	EXPECT_TRUE(featureCalls_isStateActive(&handle, FeatureCalls_main_region_A));

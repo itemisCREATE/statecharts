@@ -20,6 +20,18 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+void init(){
+	entryReactionAction_enter(&handle);
+	entryReactionActionIface_raise_b(&handle);
+	entryReactionAction_runCycle(&handle);
+	entryReactionActionIface_raise_d(&handle);
+	entryReactionAction_runCycle(&handle);
+	entryReactionActionIface_set_enteredR1(&handle,false);
+	entryReactionActionIface_set_enteredR2(&handle,false);
+	entryReactionActionIface_set_enteredBdefault(&handle,false);
+	entryReactionActionIface_set_enteredBother(&handle,false);
+}
+
 TEST_F(StatemachineTest, entryTransitionActionOnStatechartEnter) {					
 	entryReactionAction_enter(&handle);
 	EXPECT_TRUE(entryReactionActionIface_get_enteredR1(&handle));
@@ -28,15 +40,7 @@ TEST_F(StatemachineTest, entryTransitionActionOnStatechartEnter) {
 	EXPECT_TRUE(!entryReactionActionIface_get_enteredBother(&handle));
 }
 TEST_F(StatemachineTest, entryOnRTS) {					
-	entryReactionAction_enter(&handle);
-	entryReactionActionIface_raise_b(&handle);
-	entryReactionAction_runCycle(&handle);
-	entryReactionActionIface_raise_d(&handle);
-	entryReactionAction_runCycle(&handle);
-	entryReactionActionIface_set_enteredR1(&handle,false);
-	entryReactionActionIface_set_enteredR2(&handle,false);
-	entryReactionActionIface_set_enteredBdefault(&handle,false);
-	entryReactionActionIface_set_enteredBother(&handle,false);
+	init();
 	entryReactionActionIface_raise_b(&handle);
 	entryReactionAction_runCycle(&handle);
 	EXPECT_TRUE(!entryReactionActionIface_get_enteredR1(&handle));
@@ -45,15 +49,7 @@ TEST_F(StatemachineTest, entryOnRTS) {
 	EXPECT_TRUE(entryReactionActionIface_get_enteredBother(&handle));
 }
 TEST_F(StatemachineTest, noEntryTransitionActionOnHistory) {					
-	entryReactionAction_enter(&handle);
-	entryReactionActionIface_raise_b(&handle);
-	entryReactionAction_runCycle(&handle);
-	entryReactionActionIface_raise_d(&handle);
-	entryReactionAction_runCycle(&handle);
-	entryReactionActionIface_set_enteredR1(&handle,false);
-	entryReactionActionIface_set_enteredR2(&handle,false);
-	entryReactionActionIface_set_enteredBdefault(&handle,false);
-	entryReactionActionIface_set_enteredBother(&handle,false);
+	init();
 	entryReactionActionIface_raise_d(&handle);
 	entryReactionAction_runCycle(&handle);
 	EXPECT_TRUE(!entryReactionActionIface_get_enteredR1(&handle));

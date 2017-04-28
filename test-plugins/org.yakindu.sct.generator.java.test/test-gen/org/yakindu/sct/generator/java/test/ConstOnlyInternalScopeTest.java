@@ -38,7 +38,6 @@ public class ConstOnlyInternalScopeTest {
 	public void testStatechartEntry() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.constOnlyInternalScope_main_region_A));
-		 
 	}
 	@Test
 	public void testStateTransition() {
@@ -46,6 +45,5 @@ public class ConstOnlyInternalScopeTest {
 		statemachine.raiseE(1l);
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.constOnlyInternalScope_main_region_B));
-		 
 	}
 }

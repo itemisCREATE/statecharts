@@ -38,16 +38,11 @@ public class CastExpressionsTest {
 	public void testCastExpressionTest() {
 		statemachine.enter();
 		assertTrue(statemachine.getRealValue() == 5l);
-		 
 		assertTrue(statemachine.getIntValue() == 5l);
-		 
 		statemachine.runCycle();
 		assertTrue(statemachine.getRealValue() == 15l);
-		 
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_C));
-		 
 		assertTrue(statemachine.getRealValue() == 757l);
-		 
 	}
 }

@@ -38,14 +38,10 @@ public class CKeywordsTest {
 	public void testCKeywordsTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.auto_char));
-		 
 		statemachine.raiseAuto();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.auto_loop));
-		 
 		assertTrue(statemachine.isStateActive(State.auto_loop_switch_case));
-		 
 		assertTrue(statemachine.isStateActive(State.auto_loop_switch_case_enum_asm));
-		 
 	}
 }

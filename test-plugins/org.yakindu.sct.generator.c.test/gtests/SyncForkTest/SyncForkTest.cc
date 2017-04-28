@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, syncForkTest) {					
 	syncFork_enter(&handle);
 	EXPECT_TRUE(syncFork_isStateActive(&handle, SyncFork_main_region_A));

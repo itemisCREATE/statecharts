@@ -45,6 +45,5 @@ public class NamedInterfaceAccessTest {
 		statemachine.getSCIUser().raiseNumberPressed(5l);
 		statemachine.runCycle();
 		assertTrue(statemachine.getSCISafe().isRaisedOpen());
-		 
 	}
 }

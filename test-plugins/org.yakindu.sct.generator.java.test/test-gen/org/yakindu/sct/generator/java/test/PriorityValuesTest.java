@@ -38,22 +38,17 @@ public class PriorityValuesTest {
 	public void testTransitionPriority() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_C));
-		 
 	}
 	@Test
 	public void testRegionPriority() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.someRegion_A));
-		 
 		statemachine.raiseEvent2();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.someRegion_B));
-		 
 		assertTrue(!statemachine.isStateActive(State.main_region_E));
-		 
 	}
 }

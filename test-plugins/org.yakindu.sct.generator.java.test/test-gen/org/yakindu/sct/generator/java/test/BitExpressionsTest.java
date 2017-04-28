@@ -38,26 +38,16 @@ public class BitExpressionsTest {
 	public void testBitExpressions() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
-		 
 		assertTrue(statemachine.getMyBit1() == 5l);
-		 
 		assertTrue(statemachine.getMyBit2() == 7l);
-		 
 		statemachine.raiseE1();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
-		 
 		assertTrue(statemachine.getLeftBitshift() == 10l);
-		 
 		assertTrue(statemachine.getRightBitshift() == 2l);
-		 
 		assertTrue(statemachine.getComplementBitshift() == - 6l );
-		 
 		assertTrue(statemachine.getBitwiseAnd() == 5l);
-		 
 		assertTrue(statemachine.getBitwiseOr() == 7l);
-		 
 		assertTrue(statemachine.getBitwiseXor() == 2l);
-		 
 	}
 }

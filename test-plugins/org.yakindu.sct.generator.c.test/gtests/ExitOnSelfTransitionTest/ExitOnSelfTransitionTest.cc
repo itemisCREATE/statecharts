@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, ExitOnSelfTransitionTest) {					
 	exitOnSelfTransition_enter(&handle);
 	EXPECT_TRUE(exitOnSelfTransition_isStateActive(&handle, ExitOnSelfTransition_main_region_A));

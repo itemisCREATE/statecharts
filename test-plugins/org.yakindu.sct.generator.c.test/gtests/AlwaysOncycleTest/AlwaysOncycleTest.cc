@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, alwaysOncycleTest) {					
 	alwaysOncycle_enter(&handle);
 	EXPECT_TRUE(alwaysOncycle_isStateActive(&handle, AlwaysOncycle_main_region_StateA));

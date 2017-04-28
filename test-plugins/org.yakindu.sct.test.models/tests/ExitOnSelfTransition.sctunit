@@ -1,4 +1,3 @@
-package tests
 testclass ExitOnSelfTransition for statechart ExitOnSelfTransition {
 	@Test
 	operation ExitOnSelfTransitionTest(){ 

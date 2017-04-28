@@ -1,4 +1,3 @@
-package tests
 testclass SameNameDifferentRegion for statechart SameNameDifferentRegion {
 	@Test
 	operation sameNameDifferenRegionTest(){

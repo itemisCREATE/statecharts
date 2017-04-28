@@ -53,7 +53,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	LogicalAndTestsTest.class,
 	LogicalOrTestsTest.class,
 	NamedInterfaceAccessTest.class,
-	OperationsTest.class,
+	OperationsTestTest.class,
 	OutEventLifeCycleTest.class,
 	ParenthesisTest.class,
 	PriorityValuesTest.class,

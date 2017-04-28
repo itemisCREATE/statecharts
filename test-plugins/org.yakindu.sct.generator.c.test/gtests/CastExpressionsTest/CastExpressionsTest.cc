@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, CastExpressionTest) {					
 	castExpressions_enter(&handle);
 	EXPECT_TRUE(castExpressionsIface_get_realValue(&handle)== 5l);

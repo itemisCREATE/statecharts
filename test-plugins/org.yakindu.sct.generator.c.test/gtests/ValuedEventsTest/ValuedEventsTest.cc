@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, valuedEventsTest) {					
 	valuedEvents_enter(&handle);
 	valuedEvents_runCycle(&handle);

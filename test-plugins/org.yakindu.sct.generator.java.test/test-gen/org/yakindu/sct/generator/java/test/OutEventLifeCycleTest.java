@@ -40,32 +40,28 @@ public class OutEventLifeCycleTest {
 		statemachine.raiseE();
 		statemachine.runCycle();
 		assertTrue(statemachine.isRaisedF());
-		 
 	}
 	@Test
 	public void testAvailableWithinCycle() {
-		statemachine.enter();
-		statemachine.raiseE();
-		statemachine.runCycle();
+		init(false);
 		assertTrue(statemachine.getF_available_in_cycle());
-		 
 	}
 	@Test
 	public void testUnvailableWithin2ndCycle() {
-		statemachine.enter();
-		statemachine.raiseE();
-		statemachine.runCycle();
-		statemachine.runCycle();
+		init(true);
 		assertTrue(!statemachine.getF_available_in_next_cycle());
-		 
 	}
 	@Test
 	public void testUnvailableAfter2ndCycle() {
+		init(true);
+		assertTrue(!statemachine.isRaisedF());
+	}
+	public void init(boolean sndCycle) {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.runCycle();
-		statemachine.runCycle();
-		assertTrue(!statemachine.isRaisedF());
-		 
+		if (sndCycle) {
+			statemachine.runCycle();
+		}
 	}
 }

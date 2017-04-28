@@ -1,4 +1,3 @@
-package tests
 testclass CastExpressions for statechart CastExpressions{
 	@Test
 	operation CastExpressionTest(){ 

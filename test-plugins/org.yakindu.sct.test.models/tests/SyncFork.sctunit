@@ -1,4 +1,3 @@
-package tests
 testclass SyncFork for statechart SyncFork {
 	@Test
 	operation syncForkTest(){

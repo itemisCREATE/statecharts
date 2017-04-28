@@ -1,4 +1,3 @@
-package tests
 testclass Parenthesis for statechart Parenthesis {
 	@Test
 	operation simple(){

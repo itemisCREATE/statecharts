@@ -1,4 +1,3 @@
-package tests
 testclass SyncJoin for statechart SyncJoin {
 //	test syncJoin_C2_Waits 'test intention' { 
   	@Test

@@ -38,7 +38,6 @@ public class StaticChoiceTest {
 	public void testStaticChoiceTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
-		 
 		statemachine.runCycle();
 	}
 }

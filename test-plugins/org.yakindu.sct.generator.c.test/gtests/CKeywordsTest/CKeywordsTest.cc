@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, CKeywordsTest) {					
 	cKeywords_enter(&handle);
 	EXPECT_TRUE(cKeywords_isStateActive(&handle, CKeywords_auto_char));

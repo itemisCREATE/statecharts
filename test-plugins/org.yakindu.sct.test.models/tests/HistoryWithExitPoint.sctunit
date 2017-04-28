@@ -1,4 +1,3 @@
-package tests
 testclass HistoryWithExitPoint for statechart HistoryWithExitPoint {
 	@Test
 	operation historyEntryAfterExit(){
