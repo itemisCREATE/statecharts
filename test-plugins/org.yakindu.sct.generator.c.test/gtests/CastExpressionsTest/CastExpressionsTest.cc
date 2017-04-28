@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "CastExpressions.h"
 
 CastExpressions handle;
 
-TEST(StatemachineTest, CastExpressionTest) {
-	castExpressions_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		castExpressions_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, CastExpressionTest) {					
 	castExpressions_enter(&handle);
 	EXPECT_TRUE(castExpressionsIface_get_realValue(&handle)== 5l);
 	EXPECT_TRUE(castExpressionsIface_get_intValue(&handle)== 5l);

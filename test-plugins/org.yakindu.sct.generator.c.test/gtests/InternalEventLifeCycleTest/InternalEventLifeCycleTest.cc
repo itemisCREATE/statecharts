@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "InternalEventLifeCycle.h"
 
 InternalEventLifeCycle handle;
 
-TEST(StatemachineTest, InternalEventLifeCycleTest) {
-	internalEventLifeCycle_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		internalEventLifeCycle_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, InternalEventLifeCycleTest) {					
 	internalEventLifeCycle_enter(&handle);
 	EXPECT_TRUE(internalEventLifeCycle_isStateActive(&handle, InternalEventLifeCycle_r1_A));
 	EXPECT_TRUE(internalEventLifeCycle_isStateActive(&handle, InternalEventLifeCycle_r2_C));

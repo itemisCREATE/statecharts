@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "StatechartLocalReactions.h"
 
 StatechartLocalReactions handle;
 
-TEST(StatemachineTest, statechartLocalReactionsTest) {
-	statechartLocalReactions_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechartLocalReactions_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, statechartLocalReactionsTest) {					
 	statechartLocalReactions_enter(&handle);
 	EXPECT_TRUE(statechartLocalReactions_isStateActive(&handle, StatechartLocalReactions_main_region_S1));
 	EXPECT_TRUE(statechartLocalReactions_isStateActive(&handle, StatechartLocalReactions_region2_a));

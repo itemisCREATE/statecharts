@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "SyncJoin.h"
 
 SyncJoin handle;
 
-TEST(StatemachineTest, syncJoin_C2_Waits) {
-	syncJoin_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		syncJoin_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, syncJoin_C2_Waits) {					
 	syncJoin_enter(&handle);
 	EXPECT_TRUE(syncJoin_isStateActive(&handle, SyncJoin_main_region_B));
 	EXPECT_TRUE(syncJoin_isStateActive(&handle, SyncJoin_main_region_B_r1_C1));
@@ -55,9 +59,7 @@ TEST(StatemachineTest, syncJoin_C2_Waits) {
 	syncJoin_runCycle(&handle);
 	EXPECT_TRUE(syncJoin_isStateActive(&handle, SyncJoin_main_region_A));
 }
-TEST(StatemachineTest, syncJoin_D2_Waits) {
-	syncJoin_init(&handle);
-	
+TEST_F(StatemachineTest, syncJoin_D2_Waits) {					
 	syncJoin_enter(&handle);
 	EXPECT_TRUE(syncJoin_isStateActive(&handle, SyncJoin_main_region_B));
 	EXPECT_TRUE(syncJoin_isStateActive(&handle, SyncJoin_main_region_B_r1_C1));
@@ -84,9 +86,7 @@ TEST(StatemachineTest, syncJoin_D2_Waits) {
 	EXPECT_TRUE(syncJoin_isStateActive(&handle, SyncJoin_main_region_B_r1_C2));
 	EXPECT_TRUE(syncJoin_isStateActive(&handle, SyncJoin_main_region_B_r2_D2));
 }
-TEST(StatemachineTest, doubleEntryActionBug) {
-	syncJoin_init(&handle);
-	
+TEST_F(StatemachineTest, doubleEntryActionBug) {					
 	syncJoin_enter(&handle);
 	syncJoinIface_raise_e(&handle);
 	syncJoinIface_raise_f(&handle);

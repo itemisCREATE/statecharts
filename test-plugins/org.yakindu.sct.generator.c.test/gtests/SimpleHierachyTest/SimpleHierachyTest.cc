@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "SimpleHierachy.h"
 
 SimpleHierachy handle;
 
-TEST(StatemachineTest, simpleHierachyTest) {
-	simpleHierachy_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		simpleHierachy_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, simpleHierachyTest) {					
 	simpleHierachy_enter(&handle);
 	EXPECT_TRUE(simpleHierachy_isStateActive(&handle, SimpleHierachy_main_region_A));
 	simpleHierachyIface_raise_event1(&handle);

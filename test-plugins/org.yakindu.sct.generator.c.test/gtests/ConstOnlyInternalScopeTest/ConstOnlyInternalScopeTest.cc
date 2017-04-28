@@ -8,21 +8,23 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "ConstOnlyInternalScope.h"
 
 ConstOnlyInternalScope handle;
 
-TEST(StatemachineTest, statechartEntry) {
-	constOnlyInternalScope_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		constOnlyInternalScope_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, statechartEntry) {					
 	constOnlyInternalScope_enter(&handle);
 	EXPECT_TRUE(constOnlyInternalScope_isStateActive(&handle, ConstOnlyInternalScope_ConstOnlyInternalScope_main_region_A));
 }
-TEST(StatemachineTest, stateTransition) {
-	constOnlyInternalScope_init(&handle);
-	
+TEST_F(StatemachineTest, stateTransition) {					
 	constOnlyInternalScope_enter(&handle);
 	constOnlyInternalScopeIface_raise_e(&handle, 1l);
 	constOnlyInternalScope_runCycle(&handle);

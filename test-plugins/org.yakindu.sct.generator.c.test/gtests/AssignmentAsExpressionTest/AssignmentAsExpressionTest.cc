@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "AssignmentAsExpression.h"
 
 AssignmentAsExpression handle;
 
-TEST(StatemachineTest, simpleAssignment) {
-	assignmentAsExpression_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		assignmentAsExpression_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, simpleAssignment) {					
 	assignmentAsExpression_enter(&handle);
 	EXPECT_TRUE(assignmentAsExpression_isStateActive(&handle, AssignmentAsExpression_main_region_Add));
 	EXPECT_TRUE(assignmentAsExpressionIface_get_b(&handle)== 5l);

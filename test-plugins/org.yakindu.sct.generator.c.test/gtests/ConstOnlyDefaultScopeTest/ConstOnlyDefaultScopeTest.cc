@@ -8,21 +8,23 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "ConstOnlyDefaultScope.h"
 
 ConstOnlyDefaultScope handle;
 
-TEST(StatemachineTest, statechartEntry) {
-	constOnlyDefaultScope_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		constOnlyDefaultScope_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, statechartEntry) {					
 	constOnlyDefaultScope_enter(&handle);
 	EXPECT_TRUE(constOnlyDefaultScope_isStateActive(&handle, ConstOnlyDefaultScope_ConstOnlyDefaultScope_main_region_A));
 }
-TEST(StatemachineTest, stateTransition) {
-	constOnlyDefaultScope_init(&handle);
-	
+TEST_F(StatemachineTest, stateTransition) {					
 	constOnlyDefaultScope_enter(&handle);
 	constOnlyDefaultScopeIfaceA_raise_e(&handle, 1l);
 	constOnlyDefaultScope_runCycle(&handle);

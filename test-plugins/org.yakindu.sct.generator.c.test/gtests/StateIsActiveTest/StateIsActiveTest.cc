@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "StateIsActive.h"
 
 StateIsActive handle;
 
-TEST(StatemachineTest, stateIsActive) {
-	stateIsActive_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		stateIsActive_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, stateIsActive) {					
 	stateIsActive_enter(&handle);
 	EXPECT_TRUE(stateIsActive_isStateActive(&handle, StateIsActive_R1_R1A));
 	EXPECT_TRUE(stateIsActive_isStateActive(&handle, StateIsActive_R2_R2A));

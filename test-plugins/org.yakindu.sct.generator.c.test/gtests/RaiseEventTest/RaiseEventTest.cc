@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "RaiseEvent.h"
 
 RaiseEvent handle;
 
-TEST(StatemachineTest, raiseEvent) {
-	raiseEvent_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		raiseEvent_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, raiseEvent) {					
 	raiseEvent_enter(&handle);
 	EXPECT_TRUE(raiseEvent_isStateActive(&handle, RaiseEvent_second_region_SateA));
 	EXPECT_TRUE(raiseEvent_isStateActive(&handle, RaiseEvent_main_region_StateA));

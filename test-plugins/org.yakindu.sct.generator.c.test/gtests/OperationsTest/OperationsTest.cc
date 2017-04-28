@@ -8,7 +8,6 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "Operations.h"
 #include "OperationsRequired.h"
@@ -147,9 +146,14 @@ static struct {
 
 Operations handle;
 
-TEST(StatemachineTest, operationsCalled) {
-	operations_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		operations_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, operationsCalled) {					
 	alwaysTrueMock = new AlwaysTrueMock();
 	internalOperation3aMock = new InternalOperation3aMock();
 	alwaysTrueMock->setAlwaysTrueBehavior(&AlwaysTrueMock::alwaysTrue1);

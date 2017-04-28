@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "StaticChoice.h"
 
 StaticChoice handle;
 
-TEST(StatemachineTest, StaticChoiceTest) {
-	staticChoice_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		staticChoice_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, StaticChoiceTest) {					
 	staticChoice_enter(&handle);
 	EXPECT_TRUE(staticChoice_isStateActive(&handle, StaticChoice_main_region_Start));
 	staticChoice_runCycle(&handle);

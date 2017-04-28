@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,44 +11,85 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "TriggerGuardExpressions.h"
+#include "sc_types.h"
+TriggerGuardExpressions* statechart;
 
-TEST(StatemachineTest, trueGuard) {
-	TriggerGuardExpressions* statechart = new TriggerGuardExpressions();
-	statechart->init();
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new TriggerGuardExpressions();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+TEST_F(StatemachineTest, trueGuard) {
+	
+	
 	statechart->enter();
+	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
+	
 	statechart->raise_e1();
+	
 	statechart->getDefaultSCI()->set_b(true);
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_B));
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
+	
 	statechart->raise_e2();
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_B));
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
+	
 	statechart->raise_e1();
+	
 	statechart->raise_e2();
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_B));
-	delete statechart;
+	
 }
-TEST(StatemachineTest, falseGuard) {
-	TriggerGuardExpressions* statechart = new TriggerGuardExpressions();
-	statechart->init();
+TEST_F(StatemachineTest, falseGuard) {
+	
+	
 	statechart->enter();
+	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
+	
 	statechart->getDefaultSCI()->set_b(false);
+	
 	statechart->raise_e1();
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
+	
 	statechart->raise_e2();
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
+	
 	statechart->raise_e1();
+	
 	statechart->raise_e2();
+	
 	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
-	delete statechart;
+	
 }

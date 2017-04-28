@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "STextKeywordsInStatesAndRegions.h"
 
 STextKeywordsInStatesAndRegions handle;
 
-TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
-	sTextKeywordsInStatesAndRegions_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		sTextKeywordsInStatesAndRegions_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {					
 	sTextKeywordsInStatesAndRegions_enter(&handle);
 	EXPECT_TRUE(sTextKeywordsInStatesAndRegions_isStateActive(&handle, STextKeywordsInStatesAndRegions_default_namespace));
 	EXPECT_TRUE(sTextKeywordsInStatesAndRegions_isStateActive(&handle, STextKeywordsInStatesAndRegions_operation_interface));

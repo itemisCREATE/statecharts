@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "FeatureCalls.h"
 
 FeatureCalls handle;
 
-TEST(StatemachineTest, FeatureCalls) {
-	featureCalls_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		featureCalls_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, FeatureCalls) {					
 	featureCalls_enter(&handle);
 	EXPECT_TRUE(featureCalls_isStateActive(&handle, FeatureCalls_main_region_A));
 	featureCalls_runCycle(&handle);

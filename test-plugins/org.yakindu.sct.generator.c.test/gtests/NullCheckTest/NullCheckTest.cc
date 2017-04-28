@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "NullCheck.h"
 
 NullCheck handle;
 
-TEST(StatemachineTest, SimpleNullCheckTest) {
-	nullCheck_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		nullCheck_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, SimpleNullCheckTest) {					
 	nullCheck_enter(&handle);
 	EXPECT_TRUE(nullCheck_isStateActive(&handle, NullCheck_main_region_A));
 	nullCheck_runCycle(&handle);

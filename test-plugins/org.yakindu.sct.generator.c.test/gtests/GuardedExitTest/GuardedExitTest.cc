@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "GuardedExit.h"
 
 GuardedExit handle;
 
-TEST(StatemachineTest, ExitTaken) {
-	guardedExit_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		guardedExit_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, ExitTaken) {					
 	guardedExit_enter(&handle);
 	EXPECT_TRUE(guardedExit_isStateActive(&handle, GuardedExit_main_region_A));
 	EXPECT_TRUE(!guardedExitIface_get_guard(&handle));
@@ -25,9 +29,7 @@ TEST(StatemachineTest, ExitTaken) {
 	EXPECT_TRUE(guardedExit_isStateActive(&handle, GuardedExit_main_region_B));
 	EXPECT_TRUE(!guardedExitIface_get_done(&handle));
 }
-TEST(StatemachineTest, ExitNotTaken) {
-	guardedExit_init(&handle);
-	
+TEST_F(StatemachineTest, ExitNotTaken) {					
 	guardedExit_enter(&handle);
 	EXPECT_TRUE(guardedExit_isStateActive(&handle, GuardedExit_main_region_A));
 	guardedExitIface_set_guard(&handle,true);

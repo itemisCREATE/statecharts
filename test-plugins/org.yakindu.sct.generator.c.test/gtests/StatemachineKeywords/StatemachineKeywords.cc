@@ -8,16 +8,20 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "StatechartKeywords.h"
 #include "StatechartKeywordsRequired.h"
 
 StatechartKeywords handle;
 
-TEST(StatemachineTest, statemachineKeywords) {
-	statechartKeywords_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechartKeywords_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, statemachineKeywords) {					
 	statechartKeywords_enter(&handle);
 	EXPECT_TRUE(statechartKeywords_isStateActive(&handle, StatechartKeywords_main_region_Timer));
 }

@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "ShallowHistory.h"
 
 ShallowHistory handle;
 
-TEST(StatemachineTest, shallowHistoryTest) {
-	shallowHistory_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		shallowHistory_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, shallowHistoryTest) {					
 	shallowHistory_enter(&handle);
 	shallowHistoryIface_raise_event1(&handle);
 	shallowHistory_runCycle(&handle);

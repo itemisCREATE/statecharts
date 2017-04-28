@@ -1,5 +1,5 @@
 GeneratorModel for yakindu::cpp {
-	statechart ConstOnlyNamedScope {
+	statechart declarations.ConstOnlyNamedScope {
 		feature Outlet {
 			targetProject = "gtests"
 			targetFolder = "ConstOnlyNamedScopeTest"

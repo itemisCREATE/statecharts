@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "BitExpressions.h"
 
 BitExpressions handle;
 
-TEST(StatemachineTest, BitExpressions) {
-	bitExpressions_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		bitExpressions_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, BitExpressions) {					
 	bitExpressions_enter(&handle);
 	EXPECT_TRUE(bitExpressions_isStateActive(&handle, BitExpressions_main_region_StateA));
 	EXPECT_TRUE(bitExpressionsIface_get_myBit1(&handle)== 5l);

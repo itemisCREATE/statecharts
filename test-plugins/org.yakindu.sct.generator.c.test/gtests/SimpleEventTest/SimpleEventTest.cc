@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "SimpleEvent.h"
 
 SimpleEvent handle;
 
-TEST(StatemachineTest, simpleEventTest) {
-	simpleEvent_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		simpleEvent_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, simpleEventTest) {					
 	simpleEvent_enter(&handle);
 	EXPECT_TRUE(simpleEvent_isStateActive(&handle, SimpleEvent_main_region_A)) << "Expected A to be active" ;
 	EXPECT_TRUE(5l== 5l);

@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "Constants.h"
 
 Constants handle;
 
-TEST(StatemachineTest, constantDefinition) {
-	constants_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		constants_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, constantDefinition) {					
 	constants_enter(&handle);
 	EXPECT_TRUE(constants_isStateActive(&handle, Constants_main_region_A));
 	EXPECT_TRUE(constantsIface_get_x(&handle)== 10l);

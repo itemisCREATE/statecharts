@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "ReadOnlyVariable.h"
 
 ReadOnlyVariable handle;
 
-TEST(StatemachineTest, ReadOnlyVariableTest) {
-	readOnlyVariable_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		readOnlyVariable_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, ReadOnlyVariableTest) {					
 	readOnlyVariable_enter(&handle);
 	EXPECT_TRUE(readOnlyVariable_isStateActive(&handle, ReadOnlyVariable_main_region_StateA));
 	EXPECT_TRUE(readOnlyVariableIface_get_myInt(&handle)== 0l);

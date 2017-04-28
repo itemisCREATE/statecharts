@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "SyncFork.h"
 
 SyncFork handle;
 
-TEST(StatemachineTest, syncForkTest) {
-	syncFork_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		syncFork_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, syncForkTest) {					
 	syncFork_enter(&handle);
 	EXPECT_TRUE(syncFork_isStateActive(&handle, SyncFork_main_region_A));
 	syncForkIface_raise_f(&handle);

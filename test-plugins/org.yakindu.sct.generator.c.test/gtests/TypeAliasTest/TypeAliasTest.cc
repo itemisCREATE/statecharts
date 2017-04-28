@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "TypeAlias.h"
 
 TypeAlias handle;
 
-TEST(StatemachineTest, TypeAliasTest) {
-	typeAlias_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		typeAlias_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, TypeAliasTest) {					
 	typeAlias_enter(&handle);
 	EXPECT_TRUE(typeAlias_isStateActive(&handle, TypeAlias_main_region_Start));
 	EXPECT_TRUE(typeAliasIface_get_myVar(&handle)== 1l);

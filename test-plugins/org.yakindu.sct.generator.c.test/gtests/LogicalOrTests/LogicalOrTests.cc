@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "LogicalOr.h"
 
 LogicalOr handle;
 
-TEST(StatemachineTest, operandEvaluationOrder) {
-	logicalOr_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		logicalOr_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, operandEvaluationOrder) {					
 	logicalOr_enter(&handle);
 	logicalOr_runCycle(&handle);
 	EXPECT_TRUE(logicalOrIface_get_x(&handle)== 4l && logicalOrIface_get_b(&handle)) << "logical or expression was executed in wrong order..." ;

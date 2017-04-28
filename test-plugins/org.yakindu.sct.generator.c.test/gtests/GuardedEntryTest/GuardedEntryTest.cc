@@ -8,31 +8,31 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "GuardedEntry.h"
 
 GuardedEntry handle;
 
-TEST(StatemachineTest, EntryNotTakenOnStatechartEnter) {
-	guardedEntry_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		guardedEntry_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, EntryNotTakenOnStatechartEnter) {					
 	EXPECT_TRUE(guardedEntryIface_get_guard(&handle)== false);
 	guardedEntry_enter(&handle);
 	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_A));
 	EXPECT_TRUE(guardedEntryIface_get_done(&handle)== false);
 }
-TEST(StatemachineTest, EntryTakenOnStatechartEnter) {
-	guardedEntry_init(&handle);
-	
+TEST_F(StatemachineTest, EntryTakenOnStatechartEnter) {					
 	guardedEntryIface_set_guard(&handle,true);
 	guardedEntry_enter(&handle);
 	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_A));
 	EXPECT_TRUE(guardedEntryIface_get_done(&handle)== true);
 }
-TEST(StatemachineTest, EntryTakenInTransition) {
-	guardedEntry_init(&handle);
-	
+TEST_F(StatemachineTest, EntryTakenInTransition) {					
 	guardedEntry_enter(&handle);
 	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_A));
 	guardedEntryIface_raise_e(&handle);
@@ -45,9 +45,7 @@ TEST(StatemachineTest, EntryTakenInTransition) {
 	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_A));
 	EXPECT_TRUE(guardedEntryIface_get_done(&handle));
 }
-TEST(StatemachineTest, EntryNotTakenInTransition) {
-	guardedEntry_init(&handle);
-	
+TEST_F(StatemachineTest, EntryNotTakenInTransition) {					
 	guardedEntry_enter(&handle);
 	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_A));
 	guardedEntryIface_raise_e(&handle);

@@ -8,16 +8,20 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "TimedTransitions.h"
 #include "TimedTransitionsRequired.h"
 
 TimedTransitions handle;
 
-TEST(StatemachineTest, Timer01) {
-	timedTransitions_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		timedTransitions_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, Timer01) {					
 	timedTransitions_enter(&handle);
 	EXPECT_TRUE(timedTransitions_isStateActive(&handle, TimedTransitions_main_region_Start));
 	// here should be waited 2030 Seconds

@@ -8,15 +8,19 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
-#include <string>
 #include "gtest/gtest.h"
 #include "NamedInterfaceAccess.h"
 
 NamedInterfaceAccess handle;
 
-TEST(StatemachineTest, SafeOpenSuccess) {
-	namedInterfaceAccess_init(&handle);
-	
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		namedInterfaceAccess_init(&handle);
+	}
+};
+
+TEST_F(StatemachineTest, SafeOpenSuccess) {					
 	namedInterfaceAccess_enter(&handle);
 	namedInterfaceAccess_runCycle(&handle);
 	namedInterfaceAccessIfaceUser_raise_numberPressed(&handle, 3l);
