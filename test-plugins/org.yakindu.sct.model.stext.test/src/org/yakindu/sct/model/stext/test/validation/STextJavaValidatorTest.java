@@ -29,6 +29,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.validation.Check;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
@@ -76,7 +77,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult.assertErrorContains(STextTypeInferrer.VARIABLE_VOID_TYPE);
 	}
 
-	/**
+	/**b
 	 * @see STextJavaValidator#checkAssignmentExpression(org.yakindu.sct.model.stext.stext.AssignmentExpression)
 	 */
 	@Test
@@ -216,6 +217,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	 * @see STextJavaValidator#checkAnnotationArguments(org.yakindu.sct.model.stext.stext.AnnotationDefinition)
 	 */
 	@Test
+	@Ignore("Library Scope is not visible during tests")
 	public void checkAnnotationArguments() {
 		String scope = "@Execution()";
 		EObject model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());

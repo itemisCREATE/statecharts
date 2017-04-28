@@ -10,6 +10,7 @@
 */
 package org.yakindu.base.expressions.scoping;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -18,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
@@ -42,7 +44,16 @@ import com.google.common.collect.Lists;
 public abstract class AbstractLibraryGlobalScopeProvider extends AbstractGlobalScopeProvider
 		implements IGlobalScopeProvider {
 
-	public abstract Set<URI> getLibraries();
+	protected abstract Set<URI> getLibraries();
+
+	protected Iterable<URI> getValidLibraries() {
+		return Iterables.filter(getLibraries(), new Predicate<URI>() {
+			@Override
+			public boolean apply(URI input) {
+				return URIConverter.INSTANCE.exists(input, Collections.EMPTY_MAP);
+			}
+		});
+	}
 
 	private LoadingCache<URI, Iterable<IEObjectDescription>> libraryCache;
 
@@ -58,7 +69,7 @@ public abstract class AbstractLibraryGlobalScopeProvider extends AbstractGlobalS
 	@Override
 	public IScope getScope(Resource context, EReference reference, Predicate<IEObjectDescription> filter) {
 		List<IEObjectDescription> descriptions = Lists.newArrayList();
-		for (URI uri : getLibraries()) {
+		for (URI uri : getValidLibraries()) {
 			try {
 				Iterables.addAll(descriptions, libraryCache.get(uri));
 			} catch (ExecutionException e) {
