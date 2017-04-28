@@ -48,15 +48,10 @@ import org.yakindu.sct.simulation.ui.SimulationImages;
  */
 public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements ISCTLaunchParameters {
 
-
 	public static final String LAUNCH_TAB_ID = "org.yakindu.sct.simulation.sexec.launchTab";
-	
-	
+
 	private Text modelfile;
-	private Text cyclePeriod;
 	private Text operationClass;
-	private Button btnCycle;
-	private Button btnEvent;
 
 	public void createControl(Composite parent) {
 		Composite comp = new Composite(parent, SWT.NONE);
@@ -69,8 +64,6 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements I
 	private void createFileSelectionGroup(Composite comp) {
 		createModelFileGroup(comp);
 		createOperationClassGroup(comp);
-		createExecutionTypeControls(comp);
-		createCyclePeriodGroup(comp);
 	}
 
 	private void createOperationClassGroup(Composite parent) {
@@ -81,36 +74,6 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements I
 		operationClass = new Text(propertyGroup, SWT.BORDER);
 		operationClass.addListener(SWT.Modify, new UpdateListener());
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(operationClass);
-	}
-
-	private void createExecutionTypeControls(Composite parent) {
-		Group propertyGroup = new Group(parent, SWT.NONE);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(propertyGroup);
-		propertyGroup.setText("Execution type:");
-		propertyGroup.setLayout(new GridLayout(1, true));
-		btnCycle = new Button(propertyGroup, SWT.RADIO);
-		btnCycle.setText("cycle-based");
-		btnCycle.addListener(SWT.Selection, new UpdateListener());
-		btnCycle.addListener(SWT.Selection, new EnableStateListener());
-		GridDataFactory.fillDefaults().applyTo(btnCycle);
-		btnEvent = new Button(propertyGroup, SWT.RADIO);
-		btnEvent.setText("event-driven");
-		btnEvent.addListener(SWT.Selection, new UpdateListener());
-		btnCycle.addListener(SWT.Selection, new EnableStateListener());
-		GridDataFactory.fillDefaults().applyTo(btnEvent);
-	}
-
-	private void createCyclePeriodGroup(Composite parent) {
-		Group propertyGroup = new Group(parent, SWT.NONE);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(propertyGroup);
-		propertyGroup.setText("Cycle period:");
-		propertyGroup.setLayout(new GridLayout(2, false));
-		cyclePeriod = new Text(propertyGroup, SWT.BORDER);
-		cyclePeriod.addListener(SWT.Modify, new UpdateListener());
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(cyclePeriod);
-		Label lblMs = new Label(propertyGroup, SWT.NONE);
-		lblMs.setText("ms");
-		GridDataFactory.fillDefaults().applyTo(lblMs);
 	}
 
 	private void createModelFileGroup(Composite comp) {
@@ -174,10 +137,6 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements I
 		try {
 			modelfile.setText(configuration.getAttribute(FILE_NAME, DEFAULT_FILE_NAME));
 			operationClass.setText(configuration.getAttribute(OPERATION_CLASS, DEFAULT_OPERATION_CLASS));
-			cyclePeriod.setText(String.valueOf(configuration.getAttribute(CYCLE_PERIOD, DEFAULT_CYCLE_PERIOD)));
-			btnCycle.setSelection(configuration.getAttribute(IS_CYCLE_BASED, DEFAULT_IS_CYCLE_BASED));
-			btnEvent.setSelection(configuration.getAttribute(IS_EVENT_DRIVEN, DEFAULT_IS_EVENT_DRIVEN));
-			cyclePeriod.setEnabled(btnCycle.getSelection());
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
@@ -186,15 +145,6 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements I
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(FILE_NAME, modelfile.getText());
 		configuration.setAttribute(OPERATION_CLASS, operationClass.getText());
-		if (isCyclePeriodValid()) {
-			configuration.setAttribute(CYCLE_PERIOD, getCyclePeriod());
-		}
-		configuration.setAttribute(IS_CYCLE_BASED, btnCycle.getSelection());
-		configuration.setAttribute(IS_EVENT_DRIVEN, btnEvent.getSelection());
-	}
-
-	private int getCyclePeriod() {
-		return Integer.parseInt(cyclePeriod.getText());
 	}
 
 	public String getName() {
@@ -228,22 +178,14 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements I
 				setErrorMessage("file " + model + " does not exist!");
 				return false;
 			}
-		String cyclePeriod = this.cyclePeriod.getText();
-		if (cyclePeriod.length() == 0) {
-			setErrorMessage("Empty cycle period!");
-			return false;
-		} else if (!isCyclePeriodValid()) {
-			setErrorMessage("Cycle Period must be a number!");
-			return false;
-		}
 		Set<String> operationClasses = getOperationClasses();
 		if (operationClasses.size() > 0) {
 			for (String clazz : operationClasses) {
 				// check if class exists
 				IProject project = ResourcesPlugin.getWorkspace().getRoot().findMember(model).getProject();
 				if (project != null) {
-					ClassLoader classLoader = new WorkspaceClassLoaderFactory().createClassLoader(project, getClass()
-							.getClassLoader());
+					ClassLoader classLoader = new WorkspaceClassLoaderFactory().createClassLoader(project,
+							getClass().getClassLoader());
 					try {
 						Class<?> loadClass = classLoader.loadClass(clazz);
 						loadClass.newInstance();
@@ -251,13 +193,13 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements I
 						setErrorMessage("Class " + clazz + " not found in project " + project.getName() + "!");
 						return false;
 					} catch (InstantiationException e) {
-						setErrorMessage("Could not instantiate class " + clazz
-								+ "! (No default constructor available?) ");
+						setErrorMessage(
+								"Could not instantiate class " + clazz + "! (No default constructor available?) ");
 						return false;
 					} catch (IllegalAccessException e) {
 						setErrorMessage("Could not access class constructor for class" + clazz + "!");
 						return false;
-					}catch(Throwable t){
+					} catch (Throwable t) {
 						setErrorMessage(t.getMessage());
 						return false;
 					}
@@ -268,30 +210,9 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements I
 		return super.isValid(launchConfig);
 	}
 
-	private boolean isCyclePeriodValid() {
-		try {
-			getCyclePeriod();
-		} catch (NumberFormatException ex) {
-			return false;
-		}
-		return true;
-	}
-	
-	
-	
-
 	@Override
 	public String getId() {
 		return LAUNCH_TAB_ID;
-	}
-
-
-
-
-	private class EnableStateListener implements Listener {
-		public void handleEvent(Event event) {
-			cyclePeriod.setEnabled(btnCycle.getSelection());
-		}
 	}
 
 	private class UpdateListener implements Listener {

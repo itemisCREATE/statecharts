@@ -13,11 +13,13 @@ package org.yakindu.sct.model.sgraph.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.sct.model.sgraph.AnnotatableElement;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.ChoiceKind;
 import org.yakindu.sct.model.sgraph.CompositeElement;
@@ -121,6 +123,13 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	private EClass importDeclarationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass annotatableElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -494,6 +503,24 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAnnotatableElement() {
+		return annotatableElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAnnotatableElement_Annotations() {
+		return (EReference)annotatableElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getChoice() {
 		return choiceEClass;
 	}
@@ -514,15 +541,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EClass getStatechart() {
 		return statechartEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getStatechart_Annotation() {
-		return (EReference)statechartEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -799,7 +817,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		createEAttribute(choiceEClass, CHOICE__KIND);
 
 		statechartEClass = createEClass(STATECHART);
-		createEReference(statechartEClass, STATECHART__ANNOTATION);
 
 		entryEClass = createEClass(ENTRY);
 		createEAttribute(entryEClass, ENTRY__KIND);
@@ -848,6 +865,9 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		importDeclarationEClass = createEClass(IMPORT_DECLARATION);
 		createEReference(importDeclarationEClass, IMPORT_DECLARATION__DECLARATION);
+
+		annotatableElementEClass = createEClass(ANNOTATABLE_ELEMENT);
+		createEReference(annotatableElementEClass, ANNOTATABLE_ELEMENT__ANNOTATIONS);
 
 		// Create enums
 		entryKindEEnum = createEEnum(ENTRY_KIND);
@@ -901,6 +921,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		statechartEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		statechartEClass.getESuperTypes().add(theBasePackage.getDocumentedElement());
 		statechartEClass.getESuperTypes().add(theBasePackage.getDomainElement());
+		statechartEClass.getESuperTypes().add(this.getAnnotatableElement());
 		entryEClass.getESuperTypes().add(this.getPseudostate());
 		exitEClass.getESuperTypes().add(this.getPseudostate());
 		synchronizationEClass.getESuperTypes().add(this.getPseudostate());
@@ -935,7 +956,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		initEAttribute(getChoice_Kind(), this.getChoiceKind(), "kind", null, 0, 1, Choice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statechartEClass, Statechart.class, "Statechart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStatechart_Annotation(), theTypesPackage.getAnnotation(), null, "annotation", null, 0, -1, Statechart.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(entryEClass, Entry.class, "Entry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEntry_Kind(), this.getEntryKind(), "kind", null, 0, 1, Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -984,6 +1004,12 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		initEClass(importDeclarationEClass, ImportDeclaration.class, "ImportDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getImportDeclaration_Declaration(), theTypesPackage.getDeclaration(), null, "declaration", null, 0, 1, ImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(annotatableElementEClass, AnnotatableElement.class, "AnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAnnotatableElement_Annotations(), theTypesPackage.getAnnotation(), null, "annotations", null, 0, -1, AnnotatableElement.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		EOperation op = addEOperation(annotatableElementEClass, theTypesPackage.getAnnotation(), "getAnnotationOfType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "typeName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(entryKindEEnum, EntryKind.class, "EntryKind");

@@ -145,6 +145,15 @@ public interface SGraphFactory extends EFactory {
 	ImportDeclaration createImportDeclaration();
 
 	/**
+	 * Returns a new object of class '<em>Annotatable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Annotatable Element</em>'.
+	 * @generated
+	 */
+	AnnotatableElement createAnnotatableElement();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

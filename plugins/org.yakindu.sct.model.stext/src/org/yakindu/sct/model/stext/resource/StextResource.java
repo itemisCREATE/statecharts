@@ -50,7 +50,7 @@ public class StextResource extends AbstractSCTResource {
 			builder.append("namespace " + statechart.getNamespace());
 			builder.append("\n");
 		}
-		for(Annotation annotation : statechart.getAnnotation()){
+		for(Annotation annotation : statechart.getAnnotations()){
 			builder.append(serialize(annotation));
 			builder.append("\n");
 		}
@@ -108,10 +108,10 @@ public class StextResource extends AbstractSCTResource {
 			statechart.getScopes().addAll(definitionScopes);
 		}
 		
-		statechart.getAnnotation().clear();
+		statechart.getAnnotations().clear();
 		EList<AnnotationDefinition> annotations = rootASTElement.getAnnotation();
 		if(annotations != null){
-			statechart.getAnnotation().addAll(annotations);
+			statechart.getAnnotations().addAll(annotations);
 		}
 		
 	}

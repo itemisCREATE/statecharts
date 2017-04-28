@@ -27,6 +27,7 @@ import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Annotation;
+import org.yakindu.sct.model.sgraph.AnnotatableElement;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
@@ -50,7 +51,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDomainID <em>Domain ID</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getAnnotation <em>Annotation</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getAnnotations <em>Annotations</em>}</li>
  * </ul>
  *
  * @generated
@@ -158,14 +159,14 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	protected String domainID = DOMAIN_ID_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getAnnotation() <em>Annotation</em>}' containment reference list.
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAnnotation()
+	 * @see #getAnnotations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Annotation> annotation;
+	protected EList<Annotation> annotations;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -316,11 +317,27 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Annotation> getAnnotation() {
-		if (annotation == null) {
-			annotation = new EObjectContainmentEList.Resolving<Annotation>(Annotation.class, this, SGraphPackage.STATECHART__ANNOTATION);
+	public EList<Annotation> getAnnotations() {
+		if (annotations == null) {
+			annotations = new EObjectContainmentEList.Resolving<Annotation>(Annotation.class, this, SGraphPackage.STATECHART__ANNOTATIONS);
 		}
-		return annotation;
+		return annotations;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> 
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Annotation getAnnotationOfType(final String typeName) {
+		EList<Annotation> annotations = getAnnotations();
+		for (Annotation annotation : annotations) {
+			if (typeName.equals(annotation.getType().getName())) {
+				return annotation;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -350,8 +367,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 			case SGraphPackage.STATECHART__REGIONS:
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
-			case SGraphPackage.STATECHART__ANNOTATION:
-				return ((InternalEList<?>)getAnnotation()).basicRemove(otherEnd, msgs);
+			case SGraphPackage.STATECHART__ANNOTATIONS:
+				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -377,8 +394,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return getDocumentation();
 			case SGraphPackage.STATECHART__DOMAIN_ID:
 				return getDomainID();
-			case SGraphPackage.STATECHART__ANNOTATION:
-				return getAnnotation();
+			case SGraphPackage.STATECHART__ANNOTATIONS:
+				return getAnnotations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -411,9 +428,9 @@ public class StatechartImpl extends SpecificationElementImpl implements
 			case SGraphPackage.STATECHART__DOMAIN_ID:
 				setDomainID((String)newValue);
 				return;
-			case SGraphPackage.STATECHART__ANNOTATION:
-				getAnnotation().clear();
-				getAnnotation().addAll((Collection<? extends Annotation>)newValue);
+			case SGraphPackage.STATECHART__ANNOTATIONS:
+				getAnnotations().clear();
+				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -444,8 +461,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 			case SGraphPackage.STATECHART__DOMAIN_ID:
 				setDomainID(DOMAIN_ID_EDEFAULT);
 				return;
-			case SGraphPackage.STATECHART__ANNOTATION:
-				getAnnotation().clear();
+			case SGraphPackage.STATECHART__ANNOTATIONS:
+				getAnnotations().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -472,8 +489,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
 			case SGraphPackage.STATECHART__DOMAIN_ID:
 				return DOMAIN_ID_EDEFAULT == null ? domainID != null : !DOMAIN_ID_EDEFAULT.equals(domainID);
-			case SGraphPackage.STATECHART__ANNOTATION:
-				return annotation != null && !annotation.isEmpty();
+			case SGraphPackage.STATECHART__ANNOTATIONS:
+				return annotations != null && !annotations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -521,6 +538,12 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				default: return -1;
 			}
 		}
+		if (baseClass == AnnotatableElement.class) {
+			switch (derivedFeatureID) {
+				case SGraphPackage.STATECHART__ANNOTATIONS: return SGraphPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -564,6 +587,12 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		if (baseClass == DomainElement.class) {
 			switch (baseFeatureID) {
 				case BasePackage.DOMAIN_ELEMENT__DOMAIN_ID: return SGraphPackage.STATECHART__DOMAIN_ID;
+				default: return -1;
+			}
+		}
+		if (baseClass == AnnotatableElement.class) {
+			switch (baseFeatureID) {
+				case SGraphPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return SGraphPackage.STATECHART__ANNOTATIONS;
 				default: return -1;
 			}
 		}

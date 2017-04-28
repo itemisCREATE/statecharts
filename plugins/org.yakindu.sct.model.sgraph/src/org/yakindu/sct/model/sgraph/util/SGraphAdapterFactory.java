@@ -197,6 +197,10 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 				return createImportDeclarationAdapter();
 			}
 			@Override
+			public Adapter caseAnnotatableElement(org.yakindu.sct.model.sgraph.AnnotatableElement object) {
+				return createAnnotatableElementAdapter();
+			}
+			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
 			}
@@ -213,8 +217,8 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 				return createTypedElementAdapter();
 			}
 			@Override
-			public Adapter caseAnnotatableElement(AnnotatableElement object) {
-				return createAnnotatableElementAdapter();
+			public Adapter caseTypes_AnnotatableElement(AnnotatableElement object) {
+				return createTypes_AnnotatableElementAdapter();
 			}
 			@Override
 			public Adapter casePackageMember(PackageMember object) {
@@ -336,6 +340,20 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.yakindu.base.types.AnnotatableElement
+	 * @generated
+	 */
+	public Adapter createTypes_AnnotatableElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.AnnotatableElement <em>Annotatable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sgraph.AnnotatableElement
 	 * @generated
 	 */
 	public Adapter createAnnotatableElementAdapter() {

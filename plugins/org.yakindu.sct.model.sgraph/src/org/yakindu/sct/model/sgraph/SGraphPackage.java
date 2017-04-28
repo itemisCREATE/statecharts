@@ -606,13 +606,13 @@ public interface SGraphPackage extends EPackage {
 	int STATECHART__DOMAIN_ID = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART__ANNOTATION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
+	int STATECHART__ANNOTATIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Statechart</em>' class.
@@ -1257,6 +1257,34 @@ public interface SGraphPackage extends EPackage {
 	int IMPORT_DECLARATION_FEATURE_COUNT = TypesPackage.DECLARATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.AnnotatableElementImpl <em>Annotatable Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgraph.impl.AnnotatableElementImpl
+	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getAnnotatableElement()
+	 * @generated
+	 */
+	int ANNOTATABLE_ELEMENT = 22;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATABLE_ELEMENT__ANNOTATIONS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Annotatable Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATABLE_ELEMENT_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.EntryKind <em>Entry Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1264,7 +1292,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEntryKind()
 	 * @generated
 	 */
-	int ENTRY_KIND = 22;
+	int ENTRY_KIND = 23;
 
 
 	/**
@@ -1275,7 +1303,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getChoiceKind()
 	 * @generated
 	 */
-	int CHOICE_KIND = 23;
+	int CHOICE_KIND = 24;
 
 
 	/**
@@ -1512,6 +1540,27 @@ public interface SGraphPackage extends EPackage {
 	EReference getImportDeclaration_Declaration();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.AnnotatableElement <em>Annotatable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Annotatable Element</em>'.
+	 * @see org.yakindu.sct.model.sgraph.AnnotatableElement
+	 * @generated
+	 */
+	EClass getAnnotatableElement();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgraph.AnnotatableElement#getAnnotations <em>Annotations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Annotations</em>'.
+	 * @see org.yakindu.sct.model.sgraph.AnnotatableElement#getAnnotations()
+	 * @see #getAnnotatableElement()
+	 * @generated
+	 */
+	EReference getAnnotatableElement_Annotations();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Choice <em>Choice</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1541,17 +1590,6 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getStatechart();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgraph.Statechart#getAnnotation <em>Annotation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Annotation</em>'.
-	 * @see org.yakindu.sct.model.sgraph.Statechart#getAnnotation()
-	 * @see #getStatechart()
-	 * @generated
-	 */
-	EReference getStatechart_Annotation();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Entry <em>Entry</em>}'.
@@ -2032,6 +2070,24 @@ public interface SGraphPackage extends EPackage {
 		EReference IMPORT_DECLARATION__DECLARATION = eINSTANCE.getImportDeclaration_Declaration();
 
 		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.AnnotatableElementImpl <em>Annotatable Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgraph.impl.AnnotatableElementImpl
+		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getAnnotatableElement()
+		 * @generated
+		 */
+		EClass ANNOTATABLE_ELEMENT = eINSTANCE.getAnnotatableElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ANNOTATABLE_ELEMENT__ANNOTATIONS = eINSTANCE.getAnnotatableElement_Annotations();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.ChoiceImpl <em>Choice</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2058,14 +2114,6 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STATECHART = eINSTANCE.getStatechart();
-
-		/**
-		 * The meta object literal for the '<em><b>Annotation</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATECHART__ANNOTATION = eINSTANCE.getStatechart_Annotation();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.
