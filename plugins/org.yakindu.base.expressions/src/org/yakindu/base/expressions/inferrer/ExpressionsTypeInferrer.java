@@ -211,7 +211,6 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public InferenceResult doInfer(FeatureCall e) {
-		System.out.println("ExpressionsTypeInferrer.doInfer(FeatureCall)");
 		// map to hold inference results for type parameters
 		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes = Maps.newHashMap();
 		typeParameterInferrer.inferTypeParametersFromOwner(inferTypeDispatch(e.getOwner()), inferredTypeParameterTypes);
@@ -234,7 +233,6 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public InferenceResult doInfer(ElementReferenceExpression e) {
-		System.out.println("ExpressionsTypeInferrer.doInfer(ElementReferenceExpression)");
 		if (e.isOperationCall()) {
 			if (!e.getReference().eIsProxy()) {
 				return inferOperation(e, (Operation) e.getReference(),
