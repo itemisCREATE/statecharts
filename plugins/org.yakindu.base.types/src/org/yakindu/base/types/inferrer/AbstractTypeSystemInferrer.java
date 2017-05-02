@@ -13,11 +13,9 @@ package org.yakindu.base.types.inferrer;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -25,6 +23,8 @@ import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity;
+import org.yakindu.base.types.validation.TypeValidationError;
+import org.yakindu.base.types.validation.TypeValidator;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -39,16 +39,18 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 
 	protected static final String NO_INFER_METHOD = "No infer method for type(s) %s";
 	protected static final String ASSERT_IS_TYPE = "Expected one of %s, but was %s.";
-	protected static final String ASSERT_NOT_TYPE = "Expected type is not %s.";
-	protected static final String ASSERT_SAME = "Expected types %s and %s are same.";
-	protected static final String ASSERT_COMPATIBLE = "Incompatible types %s and %s.";
+	public static final String ASSERT_NOT_TYPE = "Expected type is not %s.";
+	public static final String ASSERT_SAME = "Expected types %s and %s are same.";
+	public static final String ASSERT_COMPATIBLE = "Incompatible types %s and %s.";
 
 	private static final String METHOD_NAME = "doInfer";
 
 	@Inject
 	protected ITypeSystem registry;
+	
+	@Inject TypeValidator typeValidator;
 
-	private IValidationIssueAcceptor acceptor;
+	protected IValidationIssueAcceptor acceptor;
 
 	private PolymorphicDispatcher<Object> dispatcher;
 
@@ -129,81 +131,43 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	}
 
 	protected void assertNotType(InferenceResult currentResult, String msg, InferenceResult... candidates) {
-		if (currentResult == null)
-			return;
-		for (InferenceResult type : candidates) {
-			if (registry.isSame(currentResult.getType(), type.getType())) {
-				error(msg != null ? msg : String.format(ASSERT_NOT_TYPE, currentResult), NOT_TYPE_CODE);
-				return;
-			}
+		for(TypeValidationError e: typeValidator.assertNotType(currentResult, msg, candidates)) {
+			error(e);
 		}
 	}
 
 	protected void assertSame(InferenceResult result1, InferenceResult result2, String msg) {
-		if (result1 == null || result2 == null)
-			return;
-		String errorMsg = msg != null ? msg : String.format(ASSERT_SAME, result1, result2);
-		if (!registry.isSame(result1.getType(), result2.getType())) {
-			error(errorMsg, NOT_SAME_CODE);
-			return;
+		for(TypeValidationError e: typeValidator.assertSame(result1, result2, msg)) {
+			error(e);
 		}
-
-		assertTypeBindingsSame(result1, result2, errorMsg);
 	}
 
 	protected void assertCompatible(InferenceResult result1, InferenceResult result2, String msg) {
-		if (result1 == null || result2 == null)
-			return;
-		if (isNullOnComplexType(result1, result2) || isNullOnComplexType(result2, result1)) {
-			return;
+		for(TypeValidationError e: typeValidator.assertCompatible(result1, result2, msg)) {
+			error(e);
 		}
-		String errorMsg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2);
-		if (!registry.haveCommonType(result1.getType(), result2.getType())) {
-			error(errorMsg, NOT_COMPATIBLE_CODE);
-			return;
-		}
-		assertTypeBindingsSame(result1, result2, errorMsg);
-
 	}
 
 	protected void assertAssignable(InferenceResult varResult, InferenceResult valueResult, String msg) {
-		if (varResult == null || valueResult == null)
-			return;
-		if (isNullOnComplexType(varResult, valueResult)) {
-			return;
+		for(TypeValidationError e: typeValidator.assertAssignable(varResult, valueResult, msg)) {
+			error(e);
 		}
-		if (!registry.isSuperType(valueResult.getType(), varResult.getType())) {
-			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, varResult, valueResult), NOT_COMPATIBLE_CODE);
-			return;
-		}
-		assertTypeBindingsSame(varResult, valueResult, msg);
 	}
 
 	protected void assertTypeBindingsSame(InferenceResult result1, InferenceResult result2, String msg) {
-		List<InferenceResult> bindings1 = result1.getBindings();
-		List<InferenceResult> bindings2 = result2.getBindings();
-		String errorMsg = msg != null ? msg : String.format(ASSERT_COMPATIBLE, result1, result2);
-		if (bindings1.size() != bindings2.size()) {
-			error(errorMsg, NOT_COMPATIBLE_CODE);
-			return;
-		}
-		for (int i = 0; i < bindings1.size(); i++) {
-			assertSame(bindings1.get(i), bindings2.get(i), errorMsg);
+		for(TypeValidationError e: typeValidator.assertTypeBindingsSame(result1, result2, msg)) {
+			error(e);
 		}
 	}
 
 	protected void assertIsSubType(InferenceResult subResult, InferenceResult superResult, String msg) {
-		if (subResult == null || superResult == null)
-			return;
-		if (!registry.isSuperType(subResult.getType(), superResult.getType())) {
-			String msg2 = msg != null ? msg : String.format(ASSERT_COMPATIBLE, subResult, superResult);
-			error(msg2, NOT_COMPATIBLE_CODE);
+		for(TypeValidationError e: typeValidator.assertIsSubType(subResult, superResult, msg)) {
+			error(e);
 		}
 	}
 	
 	protected boolean isNullOnComplexType(InferenceResult result1, InferenceResult result2) {
-		return result1.getType() instanceof ComplexType
-				&& registry.isSame(result2.getType(), registry.getType(ITypeSystem.NULL));
+		return typeValidator.isNullOnComplexType(result1, result2);
 	}
 
 	protected void info(String msg, String issueCode) {
@@ -216,5 +180,9 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 
 	protected void error(String msg, String issueCode) {
 		acceptor.accept(new ValidationIssue(Severity.ERROR, msg, issueCode));
+	}
+	
+	protected void error(TypeValidationError e) {
+		error(e.getMessage(), e.getErrorCode());
 	}
 }

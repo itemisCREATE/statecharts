@@ -131,6 +131,9 @@ public class OperationItemProvider extends DeclarationItemProvider {
 	@Override
 	public String getText(Object object) {
 		Operation operation = (Operation) object;
+		if (operation.getName() == null) {
+			return "null";
+		}
 		StringBuilder builder = new StringBuilder(operation.getName());
 		builder.append("(");
 		EList<Parameter> parameters = operation.getParameters();

@@ -68,34 +68,34 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 
 	@Override
 	public void addIssueStoreListener(IValidationIssueStoreListener newListener) {
-		synchronized (this.listener) {
-			this.listener.add(newListener);
-		}
+//		synchronized (this.listener) {
+//			this.listener.add(newListener);
+//		}
 	}
 
 	@Override
 	public void removeIssueStoreListener(IValidationIssueStoreListener oldListener) {
-		synchronized (listener) {
-			listener.remove(oldListener);
-		}
+//		synchronized (listener) {
+//			listener.remove(oldListener);
+//		}
 	}
 
 	protected void notifyListeners() {
-		synchronized (listener) {
-			for (IValidationIssueStoreListener iResourceIssueStoreListener : listener) {
-				iResourceIssueStoreListener.issuesChanged();
-			}
-		}
+//		synchronized (listener) {
+//			for (IValidationIssueStoreListener iResourceIssueStoreListener : listener) {
+//				iResourceIssueStoreListener.issuesChanged();
+//			}
+//		}
 	}
 
 	protected void notifyListeners(String semanticURI) {
-		synchronized (listener) {
-			for (IValidationIssueStoreListener iResourceIssueStoreListener : listener) {
-				if (semanticURI.equals(iResourceIssueStoreListener.getSemanticURI())) {
-					iResourceIssueStoreListener.issuesChanged();
-				}
-			}
-		}
+//		synchronized (listener) {
+//			for (IValidationIssueStoreListener iResourceIssueStoreListener : listener) {
+//				if (semanticURI.equals(iResourceIssueStoreListener.getSemanticURI())) {
+//					iResourceIssueStoreListener.issuesChanged();
+//				}
+//			}
+//		}
 	}
 
 	@Override
@@ -120,10 +120,10 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 					iMarker.getAttribute(SCTMarkerType.SEMANTIC_ELEMENT_ID, ""));
 			newVisibleIssues.put(issue.getSemanticURI(), issue);
 		}
-		synchronized (visibleIssues) {
-			visibleIssues.clear();
-			visibleIssues.putAll(newVisibleIssues);
-		}
+//		synchronized (visibleIssues) {
+//			visibleIssues.clear();
+//			visibleIssues.putAll(newVisibleIssues);
+//		}
 		notifyListeners();
 	}
 
@@ -148,9 +148,9 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 			ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
 			connected = false;
 			connectedResource = null;
-			synchronized (listener) {
-				listener.clear();
-			}
+//			synchronized (listener) {
+//				listener.clear();
+//			}
 		}
 	}
 
@@ -165,22 +165,22 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 		}
 
 		final Multimap<String, SCTIssue> oldVisibleIssues = ArrayListMultimap.create();
-		synchronized (visibleIssues) {
-			oldVisibleIssues.putAll(visibleIssues);
-			// normal and expensive checks will not be executed by the live
-			// validation, so persistent markers have to be copied
-			Iterable<SCTIssue> persistentIssues = Iterables.filter(visibleIssues.values(), new Predicate<SCTIssue>() {
-				public boolean apply(SCTIssue input) {
-					return input.getType() == CheckType.NORMAL || input.getType() == CheckType.EXPENSIVE;
-				}
-			});
-			for (SCTIssue sctIssue : persistentIssues) {
-				newVisibleIssues.put(sctIssue.getSemanticURI(), sctIssue);
-			}
-			visibleIssues.clear();
-			visibleIssues.putAll(newVisibleIssues);
-		}
-		
+//		synchronized (visibleIssues) {
+//			oldVisibleIssues.putAll(visibleIssues);
+//			// normal and expensive checks will not be executed by the live
+//			// validation, so persistent markers have to be copied
+//			Iterable<SCTIssue> persistentIssues = Iterables.filter(visibleIssues.values(), new Predicate<SCTIssue>() {
+//				public boolean apply(SCTIssue input) {
+//					return input.getType() == CheckType.NORMAL || input.getType() == CheckType.EXPENSIVE;
+//				}
+//			});
+//			for (SCTIssue sctIssue : persistentIssues) {
+//				newVisibleIssues.put(sctIssue.getSemanticURI(), sctIssue);
+//			}
+//			visibleIssues.clear();
+//			visibleIssues.putAll(newVisibleIssues);
+//		}
+//		
 		SetView<String> changes = Sets.symmetricDifference(oldVisibleIssues.keySet(), newVisibleIssues.keySet());
 		for (String semanticElementID : changes) {
 			notifyListeners(semanticElementID);
@@ -203,11 +203,11 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 		}
 
 		ResourceDeltaToIssueResult markerChangeResult = null;
-		synchronized (visibleIssues) {
-			markerChangeResult = resourceChangeToIssues.process(event, connectedResource, visibleIssues);
-			if (markerChangeResult != null)
-				visibleIssues = markerChangeResult.getIssues();
-		}
+//		synchronized (visibleIssues) {
+//			markerChangeResult = resourceChangeToIssues.process(event, connectedResource, visibleIssues);
+//			if (markerChangeResult != null)
+//				visibleIssues = markerChangeResult.getIssues();
+//		}
 
 		if (markerChangeResult != null)
 			for (String elementID : markerChangeResult.getChangedElementIDs()) {

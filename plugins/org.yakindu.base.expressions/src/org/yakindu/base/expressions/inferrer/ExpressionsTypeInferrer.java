@@ -20,9 +20,11 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.EcoreUtil2;
+import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
@@ -61,12 +63,18 @@ import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
+import org.yakindu.base.types.validation.IValidationIssueAcceptor;
+
+import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
  * 
  */
 public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements ExpressionsTypeInferrerMessages {
+	@Inject
+	protected TypeParameterInferrer typeParameterInferrer;
 
 	public InferenceResult doInfer(AssignmentExpression e) {
 		InferenceResult result1 = inferTypeDispatch(e.getVarRef());
@@ -203,60 +211,120 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public InferenceResult doInfer(FeatureCall e) {
+		// map to hold inference results for type parameters
+		Map<TypeParameter, InferenceResult> inferredTypeParameterTypes = Maps.newHashMap();
+		typeParameterInferrer.inferTypeParametersFromOwner(inferTypeDispatch(e.getOwner()), inferredTypeParameterTypes);
+
 		if (e.isOperationCall()) {
-			Operation operation = (Operation) e.getFeature();
-			EList<Expression> args = e.getArgs();
-			inferParameter(operation, args, e.getOwner());
+			if (!e.getFeature().eIsProxy()) {
+				return inferOperation(e, (Operation) e.getFeature(), inferredTypeParameterTypes);
+			} else {
+				return getAnyType();
+			}
 		}
 		InferenceResult result = inferTypeDispatch(e.getFeature());
-		if (result != null && result.getType() instanceof TypeParameter) {
-			result = inferTypeParameter((TypeParameter) result.getType(), inferTypeDispatch(e.getOwner()));
+		if (result != null) {
+			result = typeParameterInferrer.buildInferenceResult(result, inferredTypeParameterTypes, acceptor);
+		}
+		if (result == null) {
+			return getAnyType();
 		}
 		return result;
 	}
 
 	public InferenceResult doInfer(ElementReferenceExpression e) {
 		if (e.isOperationCall()) {
-			Operation operation = (Operation) e.getReference();
-			EList<Expression> args = e.getArgs();
-			inferParameter(operation, args, null);
+			if (!e.getReference().eIsProxy()) {
+				return inferOperation(e, (Operation) e.getReference(),
+						Maps.<TypeParameter, InferenceResult> newHashMap());
+			} else {
+				return getAnyType();
+			}
 		}
 		return inferTypeDispatch(e.getReference());
 	}
 
-	public void inferParameter(Operation operation, EList<Expression> args, Expression operationOwner) {
-		EList<Parameter> parameters = operation.getParameters();
+	protected InferenceResult inferOperation(ArgumentExpression e, Operation op,
+			Map<TypeParameter, InferenceResult> typeParameterMapping) {
+		// resolve type parameter from operation call
+		List<InferenceResult> argumentTypes = getArgumentTypes(getOperationArguments(e));
+		List<Parameter> parameters = op.getParameters();
+		typeParameterInferrer.inferTypeParametersFromOperationArguments(parameters, argumentTypes, typeParameterMapping,
+				acceptor);
+		validateParameters(typeParameterMapping, op, getOperationArguments(e), acceptor);
+		return inferReturnType(op, typeParameterMapping);
+	}
+
+	/**
+	 * Can be extended to e.g. add operation caller to argument list for
+	 * extension methods
+	 */
+	protected List<Expression> getOperationArguments(ArgumentExpression e) {
+		return e.getArgs();
+	}
+
+	protected List<InferenceResult> getArgumentTypes(List<Expression> args) {
+		List<InferenceResult> argumentTypes = new ArrayList<>();
+		for (Expression arg : args) {
+			argumentTypes.add(inferTypeDispatch(arg));
+		}
+		return argumentTypes;
+	}
+
+	protected InferenceResult inferReturnType(Operation operation,
+			Map<TypeParameter, InferenceResult> inferredTypeParameterTypes) {
+		InferenceResult returnType = inferTypeDispatch(operation);
+			returnType = typeParameterInferrer.buildInferenceResult(returnType, inferredTypeParameterTypes, acceptor);
+			if(returnType == null) {
+				return getAnyType();
+			}
+		return returnType;
+	}
+
+	private InferenceResult getAnyType() {
+		return InferenceResult.from(registry.getType(ANY));
+	}
+
+	/**
+	 * Takes the operation parameter type and performs a lookup for all
+	 * contained type parameters by using the given type parameter inference
+	 * map.<br>
+	 * The parameter types are validated against the operation call's argument
+	 * types.
+	 * 
+	 * @throws TypeParameterInferrenceException
+	 */
+	protected Map<TypeParameter, InferenceResult> validateParameters(
+			Map<TypeParameter, InferenceResult> typeParameterMapping, Operation operation, List<Expression> args,
+			IValidationIssueAcceptor acceptor) {
+		List<Parameter> parameters = operation.getParameters();
 		if (parameters.size() <= args.size()) {
 			for (int i = 0; i < parameters.size(); i++) {
-				assertArgumentIsCompatible(operationOwner, parameters.get(i), args.get(i));
+				Parameter parameter = parameters.get(i);
+				Expression argument = args.get(i);
+				InferenceResult parameterType = inferTypeDispatch(parameter);
+				InferenceResult argumentType = inferTypeDispatch(argument);
+				parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping,
+						acceptor);
+				assertCompatible(argumentType, parameterType,
+						String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
 			}
 		}
 		if (operation.isVariadic() && args.size() - 1 >= operation.getVarArgIndex()) {
 			Parameter parameter = operation.getParameters().get(operation.getVarArgIndex());
 			List<Expression> varArgs = args.subList(operation.getVarArgIndex(), args.size() - 1);
 			for (Expression expression : varArgs) {
-				assertArgumentIsCompatible(operationOwner, parameter, expression);
+				// TODO: handle op(T...)
+				assertArgumentIsCompatible(parameter, expression);
 			}
 		}
+		return typeParameterMapping;
 	}
 
-	protected void assertArgumentIsCompatible(Expression operationOwner, Parameter parameter, Expression argument) {
+	protected void assertArgumentIsCompatible(Parameter parameter, Expression argument) {
 		InferenceResult result1 = inferTypeDispatch(parameter);
-		if (operationOwner != null && result1 != null && result1.getType() instanceof TypeParameter) {
-			result1 = inferTypeParameter((TypeParameter) result1.getType(), inferTypeDispatch(operationOwner));
-		}
 		InferenceResult result2 = inferTypeDispatch(argument);
 		assertCompatible(result2, result1, String.format(INCOMPATIBLE_TYPES, result2, result1));
-	}
-
-	protected InferenceResult inferTypeParameter(TypeParameter typeParameter, InferenceResult ownerResult) {
-		if (ownerResult.getBindings().isEmpty() || !(ownerResult.getType() instanceof GenericElement)) {
-			return getResultFor(ANY);
-		} else {
-			int index = ((GenericElement) ownerResult.getType()).getTypeParameters().indexOf(typeParameter);
-			return InferenceResult.from(ownerResult.getBindings().get(index).getType(),
-					ownerResult.getBindings().get(index).getBindings());
-		}
 	}
 
 	public InferenceResult doInfer(ParenthesizedExpression e) {
@@ -324,6 +392,5 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			return InferenceResult.from(type, bindings);
 		}
 		return inferTypeDispatch(specifier.getType());
-
 	}
 }
