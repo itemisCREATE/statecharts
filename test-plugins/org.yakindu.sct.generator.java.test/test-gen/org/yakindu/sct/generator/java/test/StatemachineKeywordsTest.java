@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,21 +11,19 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.statechartkeywords.StatechartKeywordsStatemachine;
 import org.yakindu.scr.statechartkeywords.StatechartKeywordsStatemachine.State;
 import org.yakindu.scr.TimerService;
+
 /**
- *  Unit TestCase for StatechartKeywords
+ * Unit TestCase for StatechartKeywords
  */
 @SuppressWarnings("all")
 public class StatemachineKeywordsTest {
-
-	private StatechartKeywordsStatemachine statemachine;
-
+	private StatechartKeywordsStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new StatechartKeywordsStatemachine();
@@ -37,9 +35,9 @@ public class StatemachineKeywordsTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void teststatemachineKeywords() {
+	public void testStatemachineKeywords() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Timer));
 	}

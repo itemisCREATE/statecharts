@@ -1,12 +1,11 @@
-
-testgroup LogicalAndTests for statechart LogicalAnd {
-	
-	test operandEvaluationOrder {
+testclass LogicalAndTests for statechart LogicalAnd {
+	@Test
+	operation operandEvaluationOrder(){
 		
 		enter
 		cycle
 		
-		assert x == 4 && b "logical and expression was executed in wrong order..."	
+		assert x == 4 && b message "logical and expression was executed in wrong order..."	
 	}
 
 }

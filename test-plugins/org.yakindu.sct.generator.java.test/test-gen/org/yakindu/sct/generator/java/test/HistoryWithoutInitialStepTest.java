@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.historywithoutinitialstep.HistoryWithoutInitialStepStatemachine;
 import org.yakindu.scr.historywithoutinitialstep.HistoryWithoutInitialStepStatemachine.State;
+
 /**
- *  Unit TestCase for HistoryWithoutInitialStep
+ * Unit TestCase for HistoryWithoutInitialStep
  */
 @SuppressWarnings("all")
 public class HistoryWithoutInitialStepTest {
-
-	private HistoryWithoutInitialStepStatemachine statemachine;
-
+	private HistoryWithoutInitialStepStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new HistoryWithoutInitialStepStatemachine();
@@ -35,24 +33,18 @@ public class HistoryWithoutInitialStepTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void testenterThroughInitialEntry() {
-		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.raiseToB();
-		statemachine.runCycle();
+	public void testEnterThroughInitialEntry() {
+		init();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
 		statemachine.raiseNext();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
 	}
 	@Test
-	public void testenterCThroughHistory() {
-		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.raiseToB();
-		statemachine.runCycle();
+	public void testEnterCThroughHistory() {
+		init();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
 		statemachine.raiseToA();
 		statemachine.runCycle();
@@ -62,11 +54,8 @@ public class HistoryWithoutInitialStepTest {
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
 	}
 	@Test
-	public void testenterDThroughHistory() {
-		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.raiseToB();
-		statemachine.runCycle();
+	public void testEnterDThroughHistory() {
+		init();
 		statemachine.raiseNext();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
@@ -76,5 +65,11 @@ public class HistoryWithoutInitialStepTest {
 		statemachine.raiseToHistory();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
+	}
+	public void init() {
+		statemachine.enter();
+		assertTrue(statemachine.isStateActive(State.main_region_A));
+		statemachine.raiseToB();
+		statemachine.runCycle();
 	}
 }

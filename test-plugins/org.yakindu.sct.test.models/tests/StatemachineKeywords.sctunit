@@ -1,6 +1,6 @@
-
-testgroup StatemachineKeywords for statechart StatechartKeywords {
-	test statemachineKeywords { 
+testclass StatemachineKeywords for statechart StatechartKeywords {
+	@Test
+	operation statemachineKeywords(){ 
 		enter
 		assert active(StatechartKeywords.main_region.Timer) 
 		 

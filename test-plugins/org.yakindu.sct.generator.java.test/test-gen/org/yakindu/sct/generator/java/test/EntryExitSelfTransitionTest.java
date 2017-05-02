@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.entryexitselftransition.EntryExitSelfTransitionStatemachine;
 import org.yakindu.scr.entryexitselftransition.EntryExitSelfTransitionStatemachine.State;
+
 /**
- *  Unit TestCase for EntryExitSelfTransition
+ * Unit TestCase for EntryExitSelfTransition
  */
 @SuppressWarnings("all")
 public class EntryExitSelfTransitionTest {
-
-	private EntryExitSelfTransitionStatemachine statemachine;
-
+	private EntryExitSelfTransitionStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new EntryExitSelfTransitionStatemachine();
@@ -35,14 +33,10 @@ public class EntryExitSelfTransitionTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
 	public void testSelfTransitionToChildState() {
-		statemachine.enter();
-		statemachine.runCycle();
-		assertTrue(statemachine.getEntries() == 1l);
-		assertTrue(statemachine.isStateActive(State.main_region_A__region0_B));
-		statemachine.setEntries(0l);
+		init();
 		statemachine.raiseE();
 		statemachine.runCycle();
 		assertTrue(statemachine.getEntries() == 1l);
@@ -51,10 +45,7 @@ public class EntryExitSelfTransitionTest {
 	}
 	@Test
 	public void testSelfTransitionFromChildState() {
-		statemachine.enter();
-		statemachine.runCycle();
-		assertTrue(statemachine.getEntries() == 1l);
-		statemachine.setEntries(0l);
+		init();
 		statemachine.raiseE1();
 		statemachine.runCycle();
 		assertTrue(statemachine.getEntries() == 0l);
@@ -65,5 +56,12 @@ public class EntryExitSelfTransitionTest {
 		assertTrue(statemachine.isStateActive(State.main_region_A__region0_B));
 		assertTrue(statemachine.getEntries() == 1l);
 		assertTrue(statemachine.getExits() == 1l);
+	}
+	public void init() {
+		statemachine.enter();
+		statemachine.runCycle();
+		assertTrue(statemachine.getEntries() == 1l);
+		assertTrue(statemachine.isStateActive(State.main_region_A__region0_B));
+		statemachine.setEntries(0l);
 	}
 }

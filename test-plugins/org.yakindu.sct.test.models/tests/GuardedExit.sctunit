@@ -1,33 +1,30 @@
- 
-testgroup GuardedExit for statechart GuardedExit {
-		 
-	test ExitTaken { 
+testclass GuardedExit for statechart GuardedExit {
+	@Test
+	operation ExitTaken(){ 
 
 		enter
 
 		assert active(GuardedExit.main_region.A)
 		assert ! guard
-		raise e
-		
-		cycle
-
-		assert active(GuardedExit.main_region.B)
-		assert ! done 
+		checkDone(false) 
 	} 
+	@Test
+	operation ExitNotTaken(){
 		
-	test ExitNotTaken {
-		
-		enter 
+		enter
 
 		assert active(GuardedExit.main_region.A)
 		guard = true
+		checkDone(true)
+	} 
+	
+	operation checkDone(shouldBeDone : boolean){
 		raise e
 		
 		cycle
 
 		assert active(GuardedExit.main_region.B)
-		assert done 
-	} 
-		
+		assert shouldBeDone ? done : !done
+	}
 }
 	

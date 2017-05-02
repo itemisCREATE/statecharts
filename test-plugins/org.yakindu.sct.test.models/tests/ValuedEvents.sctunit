@@ -1,5 +1,6 @@
-testgroup ValuedEvents for statechart ValuedEvents {
-	test valuedEventsTest {
+testclass ValuedEvents for statechart ValuedEvents {
+	@Test
+	operation valuedEventsTest(){
 		
 		enter
 		cycle

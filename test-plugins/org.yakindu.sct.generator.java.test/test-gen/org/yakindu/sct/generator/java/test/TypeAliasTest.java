@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.typealias.TypeAliasStatemachine;
 import org.yakindu.scr.typealias.TypeAliasStatemachine.State;
+
 /**
- *  Unit TestCase for TypeAlias
+ * Unit TestCase for TypeAlias
  */
 @SuppressWarnings("all")
 public class TypeAliasTest {
-
-	private TypeAliasStatemachine statemachine;
-
+	private TypeAliasStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new TypeAliasStatemachine();
@@ -35,7 +33,7 @@ public class TypeAliasTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
 	public void testTypeAliasTest() {
 		statemachine.enter();
@@ -43,7 +41,7 @@ public class TypeAliasTest {
 		assertTrue(statemachine.getMyVar() == 1l);
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_Mid));
-		assertTrue(statemachine.getMyString() == "TypeSystem");
+		assertTrue(statemachine.getMyString().equals("TypeSystem"));
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_Mid2));
 		statemachine.raiseMyEvent();

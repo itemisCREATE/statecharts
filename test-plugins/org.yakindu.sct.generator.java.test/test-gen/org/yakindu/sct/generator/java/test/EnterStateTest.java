@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.enterstate.EnterStateStatemachine;
 import org.yakindu.scr.enterstate.EnterStateStatemachine.State;
+
 /**
- *  Unit TestCase for EnterState
+ * Unit TestCase for EnterState
  */
 @SuppressWarnings("all")
 public class EnterStateTest {
-
-	private EnterStateStatemachine statemachine;
-
+	private EnterStateStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new EnterStateStatemachine();
@@ -35,9 +33,9 @@ public class EnterStateTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void testdefaultEntry() {
+	public void testDefaultEntry() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		statemachine.raiseE();
@@ -45,7 +43,7 @@ public class EnterStateTest {
 		assertTrue(statemachine.isStateActive(State.r_B_r_E));
 	}
 	@Test
-	public void testnamedEntryThroughNamedTransition() {
+	public void testNamedEntryThroughNamedTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		statemachine.raiseF();
@@ -53,7 +51,7 @@ public class EnterStateTest {
 		assertTrue(statemachine.isStateActive(State.r_B_r_F));
 	}
 	@Test
-	public void testnamedEntryThroughDefaultTransition() {
+	public void testNamedEntryThroughDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		statemachine.raiseG();

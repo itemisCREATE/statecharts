@@ -10,21 +10,16 @@
  */
 package org.yakindu.sct.model.sgraph.ui.validation;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.gmf.runtime.notation.NotationPackage;
-import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.DiagnosticConverterImpl;
 import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
+
+import com.google.inject.Inject;
 
 /**
  * 
@@ -33,6 +28,9 @@ import org.yakindu.sct.model.sgraph.SpecificationElement;
  */
 public class SCTDiagnosticConverterImpl extends DiagnosticConverterImpl {
 
+	@Inject
+	ISctIssueCreator issueCreator;
+	
 	@Override
 	public void convertValidatorDiagnostic(final Diagnostic diagnostic, final IAcceptor<Issue> acceptor) {
 		super.convertValidatorDiagnostic(diagnostic, new IAcceptor<Issue>() {
@@ -45,12 +43,8 @@ public class SCTDiagnosticConverterImpl extends DiagnosticConverterImpl {
 							eObject = EcoreUtil2.getContainerOfType(eObject, SpecificationElement.class);
 						}
 						if (eObject != null && eObject.eResource() != null) {
-							View notationView = findNotationView(eObject);
-							if (notationView != null && notationView.eResource() != null) {
-								acceptor.accept(
-										new SCTIssue(t, notationView.eResource().getURIFragment(notationView)));
-								notAccepted = false;
-							}
+							acceptor.accept(issueCreator.create(t, eObject.eResource().getURIFragment(eObject)));
+							notAccepted = false;
 						}
 					}
 				}
@@ -59,23 +53,6 @@ public class SCTDiagnosticConverterImpl extends DiagnosticConverterImpl {
 				}
 			}
 		});
-	}
-
-	protected View findNotationView(EObject semanticElement) {
-		Collection<Diagram> objects = EcoreUtil.getObjectsByType(semanticElement.eResource().getContents(),
-				NotationPackage.Literals.DIAGRAM);
-		for (Diagram diagram : objects) {
-			TreeIterator<EObject> eAllContents = diagram.eAllContents();
-			while (eAllContents.hasNext()) {
-				EObject next = eAllContents.next();
-				if (next instanceof View) {
-					if (((View) next).getElement() == semanticElement) {
-						return ((View) next);
-					}
-				}
-			}
-		}
-		return null;
 	}
 
 }

@@ -1,8 +1,7 @@
-
-
-testgroup DeepEntry for statechart DeepEntry {
+testclass DeepEntry for statechart DeepEntry {
 	
-	test enterToSubstate {
+	@Test
+	operation enterToSubstate(){
 		
 		assert x == 0
 		assert y == 0

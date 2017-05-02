@@ -1,5 +1,6 @@
-testgroup StateIsActive for statechart StateIsActive {
-	test stateIsActive{
+testclass StateIsActive for statechart StateIsActive {
+	@Test
+	operation stateIsActive(){
 		
 		enter
 		

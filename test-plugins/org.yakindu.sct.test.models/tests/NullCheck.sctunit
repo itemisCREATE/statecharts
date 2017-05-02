@@ -1,7 +1,6 @@
-
-testgroup NullCheck for statechart NullCheck {
-	
-	test SimpleNullCheckTest { 
+testclass NullCheck for statechart NullCheck {
+	@Test
+	operation SimpleNullCheckTest(){ 
 		enter
 				
 		assert active(NullCheck.main_region.A)

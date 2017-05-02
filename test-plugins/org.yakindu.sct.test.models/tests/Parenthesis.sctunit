@@ -1,6 +1,6 @@
-testgroup Parenthesis for statechart Parenthesis {
-	
-	test simple {
+testclass Parenthesis for statechart Parenthesis {
+	@Test
+	operation simple(){
 		
 		enter
 		

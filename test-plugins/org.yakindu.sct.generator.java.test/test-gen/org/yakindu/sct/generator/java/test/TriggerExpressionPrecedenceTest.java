@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.triggerexpressionprecedence.TriggerExpressionPrecedenceStatemachine;
 import org.yakindu.scr.triggerexpressionprecedence.TriggerExpressionPrecedenceStatemachine.State;
+
 /**
- *  Unit TestCase for TriggerExpressionPrecedence
+ * Unit TestCase for TriggerExpressionPrecedence
  */
 @SuppressWarnings("all")
 public class TriggerExpressionPrecedenceTest {
-
-	private TriggerExpressionPrecedenceStatemachine statemachine;
-
+	private TriggerExpressionPrecedenceStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new TriggerExpressionPrecedenceStatemachine();
@@ -35,9 +33,9 @@ public class TriggerExpressionPrecedenceTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void testunsatisfiedTriggerAndFGuardFalseOrFalse() {
+	public void testUnsatisfiedTriggerAndFGuardFalseOrFalse() {
 		statemachine.enter();
 		statemachine.setC1(false);
 		statemachine.setC2(false);
@@ -45,7 +43,7 @@ public class TriggerExpressionPrecedenceTest {
 		assertTrue(!statemachine.getE1_transition());
 	}
 	@Test
-	public void testunsatisfiedTriggerAndFGuardTrueOrFalse() {
+	public void testUnsatisfiedTriggerAndFGuardTrueOrFalse() {
 		statemachine.enter();
 		statemachine.setC1(true);
 		statemachine.setC2(false);
@@ -53,7 +51,7 @@ public class TriggerExpressionPrecedenceTest {
 		assertTrue(!statemachine.getE1_transition());
 	}
 	@Test
-	public void testunsatisfiedTriggerAndFGuardFalseOrTrue() {
+	public void testUnsatisfiedTriggerAndFGuardFalseOrTrue() {
 		statemachine.enter();
 		statemachine.setC1(false);
 		statemachine.setC2(true);
@@ -61,7 +59,7 @@ public class TriggerExpressionPrecedenceTest {
 		assertTrue(!statemachine.getE1_transition());
 	}
 	@Test
-	public void testunsatisfiedTriggerAndFGuardTrueOrTrue() {
+	public void testUnsatisfiedTriggerAndFGuardTrueOrTrue() {
 		statemachine.enter();
 		statemachine.setC1(true);
 		statemachine.setC2(true);

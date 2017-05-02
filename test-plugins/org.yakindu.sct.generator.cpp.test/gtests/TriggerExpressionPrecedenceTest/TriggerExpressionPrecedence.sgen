@@ -1,5 +1,5 @@
 GeneratorModel for yakindu::cpp {
-	statechart TriggerExpressionPrecedence {
+	statechart expressions.TriggerExpressionPrecedence {
 		feature Outlet {
 			targetProject = "gtests"
 			targetFolder = "TriggerExpressionPrecedenceTest"

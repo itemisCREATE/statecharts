@@ -1,5 +1,6 @@
-testgroup Guard for statechart Guard {
-	test guardTest {
+testclass Guard for statechart Guard {
+	@Test
+	operation guardTest(){
 		enter
 		assert active (Guard.main_region.A)
 		raise Event1

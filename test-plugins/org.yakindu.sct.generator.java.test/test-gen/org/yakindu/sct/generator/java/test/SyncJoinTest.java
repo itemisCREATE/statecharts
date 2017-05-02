@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.syncjoin.SyncJoinStatemachine;
 import org.yakindu.scr.syncjoin.SyncJoinStatemachine.State;
+
 /**
- *  Unit TestCase for SyncJoin
+ * Unit TestCase for SyncJoin
  */
 @SuppressWarnings("all")
 public class SyncJoinTest {
-
-	private SyncJoinStatemachine statemachine;
-
+	private SyncJoinStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new SyncJoinStatemachine();
@@ -35,9 +33,9 @@ public class SyncJoinTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void testsyncJoin_C2_Waits() {
+	public void testSyncJoin_C2_Waits() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C1));
@@ -77,7 +75,7 @@ public class SyncJoinTest {
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 	@Test
-	public void testsyncJoin_D2_Waits() {
+	public void testSyncJoin_D2_Waits() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C1));
@@ -105,7 +103,7 @@ public class SyncJoinTest {
 		assertTrue(statemachine.isStateActive(State.main_region_B_r2_D2));
 	}
 	@Test
-	public void testdoubleEntryActionBug() {
+	public void testDoubleEntryActionBug() {
 		statemachine.enter();
 		statemachine.raiseE();
 		statemachine.raiseF();

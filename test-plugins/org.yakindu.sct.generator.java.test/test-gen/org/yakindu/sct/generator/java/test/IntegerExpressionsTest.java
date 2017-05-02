@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.integerexpressions.IntegerExpressionsStatemachine;
 import org.yakindu.scr.integerexpressions.IntegerExpressionsStatemachine.State;
+
 /**
- *  Unit TestCase for IntegerExpressions
+ * Unit TestCase for IntegerExpressions
  */
 @SuppressWarnings("all")
 public class IntegerExpressionsTest {
-
-	private IntegerExpressionsStatemachine statemachine;
-
+	private IntegerExpressionsStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new IntegerExpressionsStatemachine();
@@ -35,9 +33,9 @@ public class IntegerExpressionsTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void testintegerExpressions() {
+	public void testIntegerExpressions() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyInt1() == 10l);
@@ -55,11 +53,11 @@ public class IntegerExpressionsTest {
 		assertTrue(statemachine.getMultiply() == 50l);
 		assertTrue(statemachine.getDivision() == 2l);
 		assertTrue(statemachine.getModulo() == 0l);
-		assertTrue(statemachine.getNegat() == -10l);
+		assertTrue(statemachine.getNegat() == - 10l );
 		assertTrue(statemachine.getMultiAssign() == 20l);
 		assertTrue(statemachine.getDivAssign() == 2l);
 		assertTrue(statemachine.getPlusAssign() == 12l);
-		assertTrue(statemachine.getMinusAssign() == -8l);
+		assertTrue(statemachine.getMinusAssign() == - 8l );
 		assertTrue(statemachine.getModuloAssign() == 0l);
 	}
 }

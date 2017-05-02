@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,81 +11,102 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "Choice.h"
+#include "sc_types.h"
+Choice* statechart;
 
-TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
-	Choice* statechart = new Choice();
-	statechart->init();
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new Choice();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+void initForEventE(bool valueForC){
 	statechart->enter();
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	statechart->getDefaultSCI()->set_c(true);
+	statechart->getDefaultSCI()->set_c(valueForC);
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
-	delete statechart;
 }
-TEST(StatemachineTest, elseChoiceUsingDefaultTransition) {
-	Choice* statechart = new Choice();
-	statechart->init();
+void initForEventF(bool valueForC){
 	statechart->enter();
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	statechart->getDefaultSCI()->set_c(false);
-	statechart->raise_e();
-	statechart->runCycle();
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
-	delete statechart;
-}
-TEST(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
-	Choice* statechart = new Choice();
-	statechart->init();
-	statechart->enter();
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	statechart->getDefaultSCI()->set_c(true);
-	statechart->raise_g();
-	statechart->runCycle();
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
-	delete statechart;
-}
-TEST(StatemachineTest, defaultChoiceUsingDefaultTransition) {
-	Choice* statechart = new Choice();
-	statechart->init();
-	statechart->enter();
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	statechart->getDefaultSCI()->set_c(false);
-	statechart->raise_g();
-	statechart->runCycle();
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
-	delete statechart;
-}
-TEST(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
-	Choice* statechart = new Choice();
-	statechart->init();
-	statechart->enter();
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	statechart->getDefaultSCI()->set_c(true);
+	statechart->getDefaultSCI()->set_c(valueForC);
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
-	delete statechart;
 }
-TEST(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
-	Choice* statechart = new Choice();
-	statechart->init();
+void initForEventG(bool valueForC){
 	statechart->enter();
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	statechart->getDefaultSCI()->set_c(false);
-	statechart->raise_f();
+	statechart->getDefaultSCI()->set_c(valueForC);
+	statechart->raise_g();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
-	delete statechart;
 }
-TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
-	Choice* statechart = new Choice();
-	statechart->init();
+void initForEventH(bool valueForC){
 	statechart->enter();
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	statechart->getDefaultSCI()->set_c(true);
+	statechart->getDefaultSCI()->set_c(valueForC);
 	statechart->raise_h();
 	statechart->runCycle();
+}
+
+TEST_F(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
+	
+	
+	initForEventE(true);
+	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
-	delete statechart;
+	
+}
+TEST_F(StatemachineTest, elseChoiceUsingDefaultTransition) {
+	
+	
+	initForEventE(false);
+	
+	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
+	
+}
+TEST_F(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
+	
+	
+	initForEventG(true);
+	
+	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
+	
+}
+TEST_F(StatemachineTest, defaultChoiceUsingDefaultTransition) {
+	
+	
+	initForEventG(false);
+	
+	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
+	
+}
+TEST_F(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
+	
+	
+	initForEventF(true);
+	
+	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
+	
+}
+TEST_F(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
+	
+	
+	initForEventF(false);
+	
+	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
+	
+}
+TEST_F(StatemachineTest, alwaysTrueTransitionInChoice) {
+	
+	
+	initForEventH(true);
+	
+	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
+	
 }

@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.constonlynamedscope.ConstOnlyNamedScopeStatemachine;
 import org.yakindu.scr.constonlynamedscope.ConstOnlyNamedScopeStatemachine.State;
+
 /**
- *  Unit TestCase for ConstOnlyNamedScope
+ * Unit TestCase for ConstOnlyNamedScope
  */
 @SuppressWarnings("all")
 public class ConstOnlyNamedScopeTest {
-
-	private ConstOnlyNamedScopeStatemachine statemachine;
-
+	private ConstOnlyNamedScopeStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new ConstOnlyNamedScopeStatemachine();
@@ -35,14 +33,14 @@ public class ConstOnlyNamedScopeTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void teststatechartEntry() {
+	public void testStatechartEntry() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.constOnlyNamedScope_main_region_A));
 	}
 	@Test
-	public void teststateTransition() {
+	public void testStateTransition() {
 		statemachine.enter();
 		statemachine.raiseE(1l);
 		statemachine.runCycle();

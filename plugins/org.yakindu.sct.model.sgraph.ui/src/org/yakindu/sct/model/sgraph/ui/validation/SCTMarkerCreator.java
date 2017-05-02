@@ -23,13 +23,11 @@ import org.eclipse.xtext.validation.Issue;
  */
 public class SCTMarkerCreator extends MarkerCreator {
 
-	public static final String ELEMENT_ID = "elementId";
-
 	@Override
 	protected void setMarkerAttributes(Issue issue, IResource resource, IMarker marker) throws CoreException {
 		super.setMarkerAttributes(issue, resource, marker);
 		if (issue instanceof SCTIssue) {
-			marker.setAttribute(ELEMENT_ID, ((SCTIssue) issue).getNotationViewURI());
+			marker.setAttribute(SCTMarkerType.SEMANTIC_ELEMENT_ID, ((SCTIssue) issue).getSemanticURI());
 		}
 	}
 

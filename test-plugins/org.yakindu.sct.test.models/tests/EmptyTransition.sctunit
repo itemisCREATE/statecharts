@@ -1,6 +1,6 @@
-
-testgroup EmptyTransition for statechart EmptyTransition{
-	test EmptyTransitionTest { 
+testclass EmptyTransition for statechart EmptyTransition{
+	@Test
+	operation EmptyTransitionTest(){ 
 		enter
 		cycle
 		assert !active (EmptyTransition.main_region.B)

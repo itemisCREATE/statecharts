@@ -1,11 +1,11 @@
-
 /**
  * @author axel terfloth
  */
-testgroup InEventLifeCycle for statechart InEventLifeCycle {
+testclass InEventLifeCycle for statechart InEventLifeCycle {
 	
 	/** TODO: we require a probe interface for white box testing */
-	test eventLifeCycle {
+	@Test
+	operation eventLifeCycle(){
 		
 		enter
 		

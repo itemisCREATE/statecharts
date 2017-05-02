@@ -1,5 +1,6 @@
-testgroup SimpleHierachy for statechart SimpleHierachy {
-	test simpleHierachyTest {
+testclass SimpleHierachy for statechart SimpleHierachy {
+	@Test
+	operation simpleHierachyTest(){
 		
 		enter
 		

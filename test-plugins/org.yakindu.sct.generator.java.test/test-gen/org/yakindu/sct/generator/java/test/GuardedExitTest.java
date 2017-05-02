@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.guardedexit.GuardedExitStatemachine;
 import org.yakindu.scr.guardedexit.GuardedExitStatemachine.State;
+
 /**
- *  Unit TestCase for GuardedExit
+ * Unit TestCase for GuardedExit
  */
 @SuppressWarnings("all")
 public class GuardedExitTest {
-
-	private GuardedExitStatemachine statemachine;
-
+	private GuardedExitStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new GuardedExitStatemachine();
@@ -35,25 +33,25 @@ public class GuardedExitTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
 	public void testExitTaken() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(!statemachine.getGuard());
-		statemachine.raiseE();
-		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_B));
-		assertTrue(!statemachine.getDone());
+		checkDone(false);
 	}
 	@Test
 	public void testExitNotTaken() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setGuard(true);
+		checkDone(true);
+	}
+	public void checkDone(boolean shouldBeDone) {
 		statemachine.raiseE();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		assertTrue(statemachine.getDone());
+		assertTrue(shouldBeDone ? statemachine.getDone()  : !statemachine.getDone());
 	}
 }

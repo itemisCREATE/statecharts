@@ -1,5 +1,6 @@
-testgroup EntryChoice for statechart EntryChoice {
-	test EntryChoiceTest {
+testclass EntryChoice for statechart EntryChoice {
+	@Test
+	operation EntryChoiceTest(){
 		enter
 		cycle
 		cycle

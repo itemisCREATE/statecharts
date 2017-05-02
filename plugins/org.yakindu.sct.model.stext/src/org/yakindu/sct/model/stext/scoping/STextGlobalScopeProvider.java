@@ -26,6 +26,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.yakindu.base.types.Package;
@@ -69,6 +70,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 			return delegate.getScope(context, reference, filter);
 		}
 		IScope parentScope = super.getScope(context, reference, filter);
+		parentScope = new SimpleScope(parentScope, delegate.getScope(context, reference, filter).getAllElements());
 		parentScope = filterExternalDeclarations(context, parentScope);
 		final Statechart statechart = getStatechart(context);
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
@@ -136,7 +138,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		acceptor.accept(uri);
 	}
 
-	private Statechart getStatechart(Resource context) {
+	protected Statechart getStatechart(Resource context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context,
 				ContextElementAdapter.class);
 		if (provider == null) {

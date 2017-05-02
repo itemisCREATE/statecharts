@@ -1,5 +1,6 @@
-testgroup RaiseEvent for statechart RaiseEvent {
-	test raiseEvent {
+testclass RaiseEvent for statechart RaiseEvent {
+	@Test
+	operation raiseEvent(){
 		
 		enter
 		

@@ -583,13 +583,22 @@ public interface TypesPackage extends EPackage {
 	int PARAMETER__VAR_ARGS = TYPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__OPTIONAL = TYPED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 4;
+	int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 5;
 
 
 	/**
@@ -1723,6 +1732,17 @@ public interface TypesPackage extends EPackage {
 	EAttribute getParameter_VarArgs();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Parameter#isOptional <em>Optional</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Optional</em>'.
+	 * @see org.yakindu.base.types.Parameter#isOptional()
+	 * @see #getParameter()
+	 * @generated
+	 */
+	EAttribute getParameter_Optional();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2329,6 +2349,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARAMETER__VAR_ARGS = eINSTANCE.getParameter_VarArgs();
+
+		/**
+		 * The meta object literal for the '<em><b>Optional</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAMETER__OPTIONAL = eINSTANCE.getParameter_Optional();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}' class.

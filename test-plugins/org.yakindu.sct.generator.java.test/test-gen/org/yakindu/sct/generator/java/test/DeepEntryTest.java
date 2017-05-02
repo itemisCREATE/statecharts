@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.deepentry.DeepEntryStatemachine;
 import org.yakindu.scr.deepentry.DeepEntryStatemachine.State;
+
 /**
- *  Unit TestCase for DeepEntry
+ * Unit TestCase for DeepEntry
  */
 @SuppressWarnings("all")
 public class DeepEntryTest {
-
-	private DeepEntryStatemachine statemachine;
-
+	private DeepEntryStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new DeepEntryStatemachine();
@@ -35,9 +33,9 @@ public class DeepEntryTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void testenterToSubstate() {
+	public void testEnterToSubstate() {
 		assertTrue(statemachine.getX() == 0l);
 		assertTrue(statemachine.getY() == 0l);
 		assertTrue(statemachine.getZ() == 0l);

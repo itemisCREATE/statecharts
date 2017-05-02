@@ -1,6 +1,6 @@
-
-testgroup FinalState for statechart FinalState{
-	test StatechartNameTest { 
+testclass FinalState for statechart FinalState{
+	@Test
+	operation StatechartNameTest(){ 
 		enter
 		cycle
 		assert is_final

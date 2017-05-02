@@ -424,24 +424,37 @@
    </extension>
    
    <!-- marker && validation -->
-    <extension id="org.yakindu.sct.ui.editor.diagnostic" name="Statechart Diagram problems" point="org.eclipse.core.resources.markers">
+    <extension id="org.yakindu.sct.ui.editor.diagnostic" name="Statechart Check" point="org.eclipse.core.resources.markers">
       <super type="org.eclipse.core.resources.problemmarker"/>
       <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
-      <super type="org.eclipse.xtext.ui.check.fast" />
+      <super type="org.eclipse.xtext.ui.marker" />
+      <super type="org.eclipse.xtext.ui.check" />
       <persistent value="true"/>
    </extension>   
    
-    <extension id="org.yakindu.sct.ui.editor.xtext.diagnostic" name="Statechart Expression problems" point="org.eclipse.core.resources.markers">
-      <super type="org.eclipse.core.resources.problemmarker"/>
-      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
-      <super type="org.eclipse.xtext.ui.check.fast" />
+    <extension id="org.yakindu.sct.ui.editor.diagnostic.fast" name="Statechart Check (Fast)" point="org.eclipse.core.resources.markers">
+      <super type="org.yakindu.sct.ui.editor.diagnostic"/>
+      <super type="org.eclipse.xtext.ui.check.fast"/>
+      <persistent value="true"/>
+   </extension>   
+    <extension id="org.yakindu.sct.ui.editor.diagnostic.normal" name="Statechart Check (Normal)" point="org.eclipse.core.resources.markers">
+      <super type="org.yakindu.sct.ui.editor.diagnostic"/>
+      <super type="org.eclipse.xtext.ui.check.normal"/>
+      <persistent value="true"/>
+   </extension>   
+    <extension id="org.yakindu.sct.ui.editor.diagnostic.expensive" name="Statechart Check (Expensive)" point="org.eclipse.core.resources.markers">
+      <super type="org.yakindu.sct.ui.editor.diagnostic"/>
+      <super type="org.eclipse.xtext.ui.check.expensive"/>
       <persistent value="true"/>
    </extension>   
   
    <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
       <MarkerNavigationProvider class="org.yakindu.sct.ui.editor.providers.StatechartMarkerNavigationProvider">
          <MarkerType name="org.yakindu.sct.ui.editor.diagnostic"/>
-           <MarkerType name="org.yakindu.sct.ui.editor.xtext.diagnostic"/>
+         <MarkerType name="org.yakindu.sct.ui.editor.diagnostic.fast"/>
+         <MarkerType name="org.yakindu.sct.ui.editor.diagnostic.normal"/>
+         <MarkerType name="org.yakindu.sct.ui.editor.diagnostic.expensive"/>
+         <MarkerType name="org.yakindu.sct.ui.editor.xtext.diagnostic"/>
          <Priority name="Medium"/>
       </MarkerNavigationProvider>
    </extension>

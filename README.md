@@ -1,8 +1,7 @@
 [![Build Status](https://travis-ci.org/Yakindu/statecharts.svg?branch=master)](https://travis-ci.org/Yakindu/statecharts)
-[![Gitter](https://badges.gitter.im/Yakindu/statecharts.svg)](https://gitter.im/Yakindu/statecharts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/6091/badge.svg)](https://scan.coverity.com/projects/yakindu-statecharts)
 
-#YAKINDU Statechart Tools 
+# YAKINDU Statechart Tools 
 # (http://www.statecharts.org/)
 
 The free to use, open source toolkit YAKINDU Statechart Tools (SCT) provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of Harel statecharts. 

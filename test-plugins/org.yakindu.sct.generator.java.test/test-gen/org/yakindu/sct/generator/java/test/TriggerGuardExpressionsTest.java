@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.triggerguardexpressions.TriggerGuardExpressionsStatemachine;
 import org.yakindu.scr.triggerguardexpressions.TriggerGuardExpressionsStatemachine.State;
+
 /**
- *  Unit TestCase for TriggerGuardExpressions
+ * Unit TestCase for TriggerGuardExpressions
  */
 @SuppressWarnings("all")
 public class TriggerGuardExpressionsTest {
-
-	private TriggerGuardExpressionsStatemachine statemachine;
-
+	private TriggerGuardExpressionsStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new TriggerGuardExpressionsStatemachine();
@@ -35,9 +33,9 @@ public class TriggerGuardExpressionsTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void testtrueGuard() {
+	public void testTrueGuard() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseE1();
@@ -57,7 +55,7 @@ public class TriggerGuardExpressionsTest {
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 	}
 	@Test
-	public void testfalseGuard() {
+	public void testFalseGuard() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setB(false);

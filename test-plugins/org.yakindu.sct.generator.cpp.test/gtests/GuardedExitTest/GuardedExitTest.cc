@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,28 +11,48 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "GuardedExit.h"
+#include "sc_types.h"
+GuardedExit* statechart;
 
-TEST(StatemachineTest, ExitTaken) {
-	GuardedExit* statechart = new GuardedExit();
-	statechart->init();
-	statechart->enter();
-	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_A));
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_guard());
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new GuardedExit();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+void checkDone(bool shouldBeDone){
 	statechart->raise_e();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_B));
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_done());
-	delete statechart;
+	EXPECT_TRUE(shouldBeDone ? statechart->getDefaultSCI()->get_done()  : !statechart->getDefaultSCI()->get_done());
 }
-TEST(StatemachineTest, ExitNotTaken) {
-	GuardedExit* statechart = new GuardedExit();
-	statechart->init();
+
+TEST_F(StatemachineTest, ExitTaken) {
+	
+	
 	statechart->enter();
+	
 	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_A));
+	
+	EXPECT_TRUE(!statechart->getDefaultSCI()->get_guard());
+	
+	checkDone(false);
+	
+}
+TEST_F(StatemachineTest, ExitNotTaken) {
+	
+	
+	statechart->enter();
+	
+	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_A));
+	
 	statechart->getDefaultSCI()->set_guard(true);
-	statechart->raise_e();
-	statechart->runCycle();
-	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_B));
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_done());
-	delete statechart;
+	
+	checkDone(true);
+	
 }

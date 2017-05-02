@@ -1,7 +1,6 @@
-
-testgroup StaticChoice for statechart StaticChoice{
-	
-	test StaticChoiceTest { 
+testclass StaticChoice for statechart StaticChoice{
+	@Test
+	operation StaticChoiceTest(){ 
 		enter
 		assert active(StaticChoice.main_region.Start)
 		cycle

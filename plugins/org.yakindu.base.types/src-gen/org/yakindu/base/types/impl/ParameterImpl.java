@@ -41,6 +41,7 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getOwningOperation <em>Owning Operation</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#isVarArgs <em>Var Args</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#isOptional <em>Optional</em>}</li>
  * </ul>
  *
  * @generated
@@ -105,6 +106,26 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * @ordered
 	 */
 	protected boolean varArgs = VAR_ARGS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isOptional() <em>Optional</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOptional()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OPTIONAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOptional() <em>Optional</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOptional()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean optional = OPTIONAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -290,6 +311,27 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isOptional() {
+		return optional;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOptional(boolean newOptional) {
+		boolean oldOptional = optional;
+		optional = newOptional;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.PARAMETER__OPTIONAL, oldOptional, optional));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -352,6 +394,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return getOwningOperation();
 			case TypesPackage.PARAMETER__VAR_ARGS:
 				return isVarArgs();
+			case TypesPackage.PARAMETER__OPTIONAL:
+				return isOptional();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -381,6 +425,9 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 			case TypesPackage.PARAMETER__VAR_ARGS:
 				setVarArgs((Boolean)newValue);
 				return;
+			case TypesPackage.PARAMETER__OPTIONAL:
+				setOptional((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -408,6 +455,9 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 			case TypesPackage.PARAMETER__VAR_ARGS:
 				setVarArgs(VAR_ARGS_EDEFAULT);
 				return;
+			case TypesPackage.PARAMETER__OPTIONAL:
+				setOptional(OPTIONAL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -432,6 +482,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return getOwningOperation() != null;
 			case TypesPackage.PARAMETER__VAR_ARGS:
 				return varArgs != VAR_ARGS_EDEFAULT;
+			case TypesPackage.PARAMETER__OPTIONAL:
+				return optional != OPTIONAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

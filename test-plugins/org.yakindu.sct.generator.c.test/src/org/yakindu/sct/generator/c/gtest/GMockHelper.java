@@ -14,4 +14,9 @@ public class GMockHelper extends GTestHelper {
 		command.add("-lgmock_main");
 		return command;
 	}
+	
+	@Override
+	protected String getCompilerCommand() {
+		return "g++";
+	}
 }

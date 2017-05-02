@@ -1,5 +1,6 @@
-testgroup IntegerExpressions for statechart IntegerExpressions {
-	test integerExpressions {
+testclass IntegerExpressions for statechart IntegerExpressions {
+	@Test
+	operation integerExpressions(){
 		
 		enter
 		

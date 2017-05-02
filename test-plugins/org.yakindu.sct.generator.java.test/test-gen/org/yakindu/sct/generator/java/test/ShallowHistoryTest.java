@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.shallowhistory.ShallowHistoryStatemachine;
 import org.yakindu.scr.shallowhistory.ShallowHistoryStatemachine.State;
+
 /**
- *  Unit TestCase for ShallowHistory
+ * Unit TestCase for ShallowHistory
  */
 @SuppressWarnings("all")
 public class ShallowHistoryTest {
-
-	private ShallowHistoryStatemachine statemachine;
-
+	private ShallowHistoryStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new ShallowHistoryStatemachine();
@@ -35,9 +33,9 @@ public class ShallowHistoryTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void testshallowHistoryTest() {
+	public void testShallowHistoryTest() {
 		statemachine.enter();
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
@@ -51,18 +49,15 @@ public class ShallowHistoryTest {
 		assertTrue(statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
 		statemachine.raiseEvent6();
 		statemachine.runCycle();
-		assertTrue(
-				!statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
+		assertTrue(!statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
 		assertTrue(statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State6));
 		statemachine.raiseEvent5();
 		statemachine.runCycle();
-		assertTrue(
-				!statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State8));
+		assertTrue(!statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State8));
 		assertTrue(statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
 		statemachine.raiseEvent2();
 		statemachine.runCycle();
-		assertTrue(
-				!statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
+		assertTrue(!statemachine.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
 		assertTrue(statemachine.isStateActive(State.mainRegion_State1));
 		statemachine.raiseEvent1();
 		statemachine.runCycle();

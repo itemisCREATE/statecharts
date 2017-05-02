@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.ckeywords.CKeywordsStatemachine;
 import org.yakindu.scr.ckeywords.CKeywordsStatemachine.State;
+
 /**
- *  Unit TestCase for CKeywords
+ * Unit TestCase for CKeywords
  */
 @SuppressWarnings("all")
 public class CKeywordsTest {
-
-	private CKeywordsStatemachine statemachine;
-
+	private CKeywordsStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new CKeywordsStatemachine();
@@ -35,7 +33,7 @@ public class CKeywordsTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
 	public void testCKeywordsTest() {
 		statemachine.enter();

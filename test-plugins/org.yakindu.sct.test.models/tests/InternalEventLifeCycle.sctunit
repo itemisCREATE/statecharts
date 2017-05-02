@@ -1,10 +1,9 @@
-
 /** 
  * @author axel terfloth
  */
-testgroup InternalEventLifeCycle for statechart InternalEventLifeCycle {
-
-	test InternalEventLifeCycleTest {
+testclass InternalEventLifeCycle for statechart InternalEventLifeCycle {
+	@Test
+	operation InternalEventLifeCycleTest(){
 		 
 		enter
 		 

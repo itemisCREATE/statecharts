@@ -1,5 +1,6 @@
-testgroup ShallowHistory for statechart ShallowHistory {
-	test shallowHistoryTest {
+testclass ShallowHistory for statechart ShallowHistory {
+	@Test
+	operation shallowHistoryTest(){
 		
 		enter
 		

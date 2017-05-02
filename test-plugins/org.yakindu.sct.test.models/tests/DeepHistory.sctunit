@@ -1,5 +1,6 @@
-testgroup DeepHistory for statechart DeepHistory {
-	test deepHistoryTest {
+testclass DeepHistory for statechart DeepHistory {
+	@Test
+	operation deepHistoryTest(){
 		// Change active states to State9;
 		
 		enter

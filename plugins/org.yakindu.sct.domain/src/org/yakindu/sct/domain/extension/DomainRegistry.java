@@ -11,23 +11,27 @@
 package org.yakindu.sct.domain.extension;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.eclipse.core.runtime.Assert;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.xtext.EcoreUtil2;
 import org.osgi.framework.Bundle;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DomainElement;
 import org.yakindu.sct.domain.extension.DomainStatus.Severity;
@@ -91,8 +95,7 @@ public class DomainRegistry {
 
 	public static IDomain getDomain(EObject object) {
 		DomainElement domainElement = EcoreUtil2.getContainerOfType(object, DomainElement.class);
-		String domainID = domainElement != null
-				? domainElement.getDomainID()
+		String domainID = domainElement != null ? domainElement.getDomainID()
 				: BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 		return getDomain(domainID);
 	}
@@ -103,8 +106,7 @@ public class DomainRegistry {
 				@Override
 				public boolean apply(IDomain input) {
 					return input.getDomainID().equals(domainID == null || domainID.isEmpty()
-							? BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral()
-							: domainID);
+							? BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral() : domainID);
 				}
 			});
 		} catch (NoSuchElementException e) {
@@ -114,23 +116,10 @@ public class DomainRegistry {
 	}
 
 	public static String determineDomainID(URI uri) {
-		String result = BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 		if (URIConverter.INSTANCE.exists(uri, null)) {
-			XMIResource resource = new XMIResourceImpl(uri);
-			try {
-				resource.load(null);
-				DomainElement element = (DomainElement) EcoreUtil.getObjectByType(resource.getContents(),
-						BasePackage.Literals.DOMAIN_ELEMENT);
-				String domainID = element.getDomainID();
-				Assert.isNotNull(domainID);
-				result = domainID;
-			} catch (IOException e) {
-				e.printStackTrace();
-			} finally {
-				resource.unload();
-			}
+			return DomainIDParser.parse(uri);
 		}
-		return result;
+		return BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral();
 	}
 
 	public static DomainStatus getDomainStatus(String domainID) {
@@ -185,6 +174,51 @@ public class DomainRegistry {
 						return input.getDomainID().equals(element.getAttribute(DOMAIN_ID));
 					}
 				}), provider);
+	}
+	/**
+	 * Efficient parser to determine the DomainId without loading the whole resource
+	 *
+	 * @author Andreas Muelder - Initial contribution and API
+	 *
+	 */
+	protected static class DomainIDParser {
+
+		private static final String SGRAPH_STATECHART = "sgraph:Statechart";
+		private static final String DOMAIN_ID = "domainID";
+
+		protected static class StopParsingException extends SAXException {
+
+			private static final long serialVersionUID = 1L;
+
+		}
+
+		public static String parse(URI uri) {
+			final StringBuilder result = new StringBuilder();
+			SAXParserFactory f = SAXParserFactory.newInstance();
+			try (InputStream is = URIConverter.INSTANCE.createInputStream(uri, null)) {
+				SAXParser newSAXParser = f.newSAXParser();
+				newSAXParser.parse(is, new DefaultHandler() {
+					@Override
+					public void startElement(String uri, String localName, String qName, Attributes attributes)
+							throws SAXException {
+						if (SGRAPH_STATECHART.equals(qName)) {
+							String domainId = attributes.getValue(DOMAIN_ID);
+							if (domainId != null) {
+								result.append(domainId);
+							}
+							throw new StopParsingException();
+						}
+					}
+				});
+			} catch (StopParsingException e) {
+				// Intentional to cancel parsing
+			} catch (SAXException | IOException | ParserConfigurationException e) {
+				e.printStackTrace();
+			}
+			if (result.length() == 0)
+				result.append(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral());
+			return result.toString();
+		}
 	}
 
 	protected static class ModuleProviderProxy implements IModuleProvider {

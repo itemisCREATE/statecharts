@@ -1,5 +1,6 @@
-testgroup CKeywords for statechart CKeywords { 
-	test CKeywordsTest { 
+testclass CKeywords for statechart CKeywords { 
+	@Test
+	operation CKeywordsTest(){ 
 		enter
 		assert active ( CKeywords.auto.char ) 
 		raise auto 

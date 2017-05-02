@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.stateisactive.StateIsActiveStatemachine;
 import org.yakindu.scr.stateisactive.StateIsActiveStatemachine.State;
+
 /**
- *  Unit TestCase for StateIsActive
+ * Unit TestCase for StateIsActive
  */
 @SuppressWarnings("all")
 public class StateIsActiveTest {
-
-	private StateIsActiveStatemachine statemachine;
-
+	private StateIsActiveStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new StateIsActiveStatemachine();
@@ -35,9 +33,9 @@ public class StateIsActiveTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void teststateIsActive() {
+	public void testStateIsActive() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r1_R1A));
 		assertTrue(statemachine.isStateActive(State.r2_R2A));

@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,42 +11,62 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "OutEventLifeCycle.h"
+#include "sc_types.h"
+OutEventLifeCycle* statechart;
 
-TEST(StatemachineTest, availableAfterCycle) {
-	OutEventLifeCycle* statechart = new OutEventLifeCycle();
-	statechart->init();
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new OutEventLifeCycle();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
+};
+
+void init(bool sndCycle){
 	statechart->enter();
 	statechart->raise_e();
 	statechart->runCycle();
+	if (sndCycle) {
+		statechart->runCycle();
+	}
+}
+
+TEST_F(StatemachineTest, availableAfterCycle) {
+	
+	
+	statechart->enter();
+	
+	statechart->raise_e();
+	
+	statechart->runCycle();
+	
 	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_f());
-	delete statechart;
+	
 }
-TEST(StatemachineTest, availableWithinCycle) {
-	OutEventLifeCycle* statechart = new OutEventLifeCycle();
-	statechart->init();
-	statechart->enter();
-	statechart->raise_e();
-	statechart->runCycle();
+TEST_F(StatemachineTest, availableWithinCycle) {
+	
+	
+	init(false);
+	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_f_available_in_cycle());
-	delete statechart;
+	
 }
-TEST(StatemachineTest, unvailableWithin2ndCycle) {
-	OutEventLifeCycle* statechart = new OutEventLifeCycle();
-	statechart->init();
-	statechart->enter();
-	statechart->raise_e();
-	statechart->runCycle();
-	statechart->runCycle();
+TEST_F(StatemachineTest, unvailableWithin2ndCycle) {
+	
+	
+	init(true);
+	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_f_available_in_next_cycle());
-	delete statechart;
+	
 }
-TEST(StatemachineTest, unvailableAfter2ndCycle) {
-	OutEventLifeCycle* statechart = new OutEventLifeCycle();
-	statechart->init();
-	statechart->enter();
-	statechart->raise_e();
-	statechart->runCycle();
-	statechart->runCycle();
+TEST_F(StatemachineTest, unvailableAfter2ndCycle) {
+	
+	
+	init(true);
+	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->isRaised_f());
-	delete statechart;
+	
 }

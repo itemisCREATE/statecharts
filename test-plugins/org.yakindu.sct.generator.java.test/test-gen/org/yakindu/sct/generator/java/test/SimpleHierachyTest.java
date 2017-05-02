@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.simplehierachy.SimpleHierachyStatemachine;
 import org.yakindu.scr.simplehierachy.SimpleHierachyStatemachine.State;
+
 /**
- *  Unit TestCase for SimpleHierachy
+ * Unit TestCase for SimpleHierachy
  */
 @SuppressWarnings("all")
 public class SimpleHierachyTest {
-
-	private SimpleHierachyStatemachine statemachine;
-
+	private SimpleHierachyStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new SimpleHierachyStatemachine();
@@ -35,9 +33,9 @@ public class SimpleHierachyTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void testsimpleHierachyTest() {
+	public void testSimpleHierachyTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseEvent1();

@@ -1,13 +1,14 @@
-testgroup SimpleEvent for statechart SimpleEvent {
-	test simpleEventTest {
+testclass SimpleEvent for statechart SimpleEvent {
+	@Test
+	operation simpleEventTest(){
 		
 		enter
 		
-		assert active (SimpleEvent.main_region.A) "Expected A to be active"
+		assert active (SimpleEvent.main_region.A) message "Expected A to be active"
 		assert 5 == 5
 		raise Event1
 		cycle
-		assert active (SimpleEvent.main_region.B) "Expected B to be active"
+		assert active (SimpleEvent.main_region.B) message "Expected B to be active"
 		
 		cycle
 		assert !active (SimpleEvent.main_region.B)	

@@ -1,6 +1,6 @@
-
-testgroup OperationsWithoutBraces for statechart OperationsWithoutBraces{
-	test OperationsWithoutBracesTest { 
+testclass OperationsWithoutBraces for statechart OperationsWithoutBraces{
+	@Test
+	operation OperationsWithoutBracesTest(){ 
 		enter
 		assert active (OperationsWithoutBraces.main_region.A)
 		assert active (OperationsWithoutBraces.another_region.A)

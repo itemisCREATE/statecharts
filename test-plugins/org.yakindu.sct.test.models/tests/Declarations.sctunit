@@ -1,6 +1,6 @@
-testgroup Declarations for statechart Declarations {
-	
-	test declarationsTest {
+testclass Declarations for statechart Declarations {
+	@Test
+	operation declarationsTest(){
 		enter
 	}
 }

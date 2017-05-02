@@ -60,13 +60,13 @@ ShiftExpression returns Expression:
 
 NumericalAddSubtractExpression returns Expression:
 	NumericalMultiplyDivideExpression
-	({NumericalAddSubtractExpression.leftOperand=current}
+	=>({NumericalAddSubtractExpression.leftOperand=current}
 	operator=AdditiveOperator
 	rightOperand=NumericalMultiplyDivideExpression)*;
 
 NumericalMultiplyDivideExpression returns Expression:
 	NumericalUnaryExpression
-	({NumericalMultiplyDivideExpression.leftOperand=current}
+	=>({NumericalMultiplyDivideExpression.leftOperand=current}
 	operator=MultiplicativeOperator
 	rightOperand=NumericalUnaryExpression)*;
 

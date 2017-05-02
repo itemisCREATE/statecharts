@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.simpleevent.SimpleEventStatemachine;
 import org.yakindu.scr.simpleevent.SimpleEventStatemachine.State;
+
 /**
- *  Unit TestCase for SimpleEvent
+ * Unit TestCase for SimpleEvent
  */
 @SuppressWarnings("all")
 public class SimpleEventTest {
-
-	private SimpleEventStatemachine statemachine;
-
+	private SimpleEventStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new SimpleEventStatemachine();
@@ -35,15 +33,15 @@ public class SimpleEventTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void testsimpleEventTest() {
+	public void testSimpleEventTest() {
 		statemachine.enter();
-		assertTrue("Expected A to be active", statemachine.isStateActive(State.main_region_A));
+		assertTrue("Expected A to be active",statemachine.isStateActive(State.main_region_A));
 		assertTrue(5l == 5l);
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
-		assertTrue("Expected B to be active", statemachine.isStateActive(State.main_region_B));
+		assertTrue("Expected B to be active",statemachine.isStateActive(State.main_region_B));
 		statemachine.runCycle();
 		assertTrue(!statemachine.isStateActive(State.main_region_B));
 	}

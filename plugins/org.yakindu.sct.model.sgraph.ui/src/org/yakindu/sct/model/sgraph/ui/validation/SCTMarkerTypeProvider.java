@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.sgraph.ui.validation;
 
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
+import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.Issue;
 
 /**
@@ -18,13 +19,28 @@ import org.eclipse.xtext.validation.Issue;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTMarkerTypeProvider extends MarkerTypeProvider {
+public class SCTMarkerTypeProvider extends MarkerTypeProvider  {
 
+	
+	
 	@Override
 	public String getMarkerType(Issue issue) {
-		if (issue instanceof SCTIssue) {
-			return "org.yakindu.sct.ui.editor.diagnostic";
+		switch(issue.getType()) {
+			case FAST: return SCTMarkerType.FAST_VALIDATION;
+			case NORMAL: return SCTMarkerType.NORMAL_VALIDATION;
+			case EXPENSIVE: return SCTMarkerType.EXPENSIVE_VALIDATION;
+			default: return SCTMarkerType.SUPERTYPE;
 		}
-		return super.getMarkerType(issue);
+	}
+	@Override
+	public CheckType getCheckType(String markerType) {
+		if (SCTMarkerType.FAST_VALIDATION.equals(markerType))
+			return CheckType.FAST;
+		if (SCTMarkerType.NORMAL_VALIDATION.equals(markerType))
+			return CheckType.NORMAL;
+		if (SCTMarkerType.EXPENSIVE_VALIDATION.equals(markerType))
+			return CheckType.EXPENSIVE;
+		// default
+		return CheckType.FAST;
 	}
 }

@@ -1,57 +1,27 @@
-testgroup Choice for statechart Choice { 
-
-	test elseChoiceUsingNonDefaultTransition {
-		enter
-		
-		assert active (Choice.main_region.A)
-		c = true
-		raise e
-		
-		cycle		
+testclass Choice for statechart Choice { 
+	@Test
+	operation elseChoiceUsingNonDefaultTransition(){
+		initForEventE(true)	
 		assert active (Choice.main_region.C)
 	}
-	
-	test elseChoiceUsingDefaultTransition {
-		enter
-		
-		assert active (Choice.main_region.A)
-		c = false
-		raise e
-		
-		cycle		
+	@Test
+	operation elseChoiceUsingDefaultTransition(){
+		initForEventE(false)	
 		assert active (Choice.main_region.B)
 	}
-	
-	test defaultChoiceUsingNonDefaultTransition {
-		enter
-		
-		assert active (Choice.main_region.A)
-		c = true
-		raise g
-		
-		cycle		
+	@Test
+	operation defaultChoiceUsingNonDefaultTransition(){
+		initForEventG(true)
 		assert active (Choice.main_region.C)
 	}
-	
-	test defaultChoiceUsingDefaultTransition {
-		enter
-		
-		assert active (Choice.main_region.A)
-		c = false
-		raise g
-		
-		cycle		
+	@Test
+	operation defaultChoiceUsingDefaultTransition(){
+		initForEventG(false)		
 		assert active (Choice.main_region.B)
 	}
-	
-	test uncheckedChoiceUsingNonDefaultTransition {
-		enter
-		
-		assert active (Choice.main_region.A)
-		c = true
-		raise f
-		
-		cycle		
+	@Test
+	operation uncheckedChoiceUsingNonDefaultTransition(){
+		initForEventF(true)
 		assert active (Choice.main_region.C)
 	}
 	
@@ -59,14 +29,9 @@ testgroup Choice for statechart Choice {
 	 * An outgiong transition with an empty trigger 
 	 * will be handled like a default transition. 
 	 */
-	test uncheckedChoiceUsingDefaultTransition {
-		enter
-		
-		assert active (Choice.main_region.A)
-		c = false
-		raise f
-		
-		cycle		
+	@Test
+	operation uncheckedChoiceUsingDefaultTransition(){
+		initForEventF(false)
 		assert active (Choice.main_region.B)
 	}
 	
@@ -76,16 +41,49 @@ testgroup Choice for statechart Choice {
 	 * This test case makes sure that default transition reordering
 	 * does not impact these transitions.
 	 */
-	test alwaysTrueTransitionInChoice {
+	@Test
+	operation alwaysTrueTransitionInChoice(){
+		initForEventH(true)
+		assert active (Choice.main_region.C)
+	}
+	
+	operation initForEventE(valueForC : boolean){
 		enter
 		
 		assert active (Choice.main_region.A)
-		c = true
+		c = valueForC
+		raise e
+		
+		cycle
+	}
+	
+	operation initForEventF(valueForC : boolean){
+		enter
+		
+		assert active (Choice.main_region.A)
+		c = valueForC
+		raise f
+		
+		cycle
+	}
+	
+	operation initForEventG(valueForC : boolean){
+		enter
+		
+		assert active (Choice.main_region.A)
+		c = valueForC
+		raise g
+		
+		cycle
+	}
+	
+	operation initForEventH(valueForC : boolean){
+		enter
+		
+		assert active (Choice.main_region.A)
+		c = valueForC
 		raise h
 		
-		cycle		
-		assert active (Choice.main_region.C)
+		cycle
 	}
-		
-	
 }

@@ -14,10 +14,10 @@ import java.util.List;
 
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Label;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.editparts.AbstractConnectionEditPart;
-import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
@@ -38,7 +38,7 @@ import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
-import org.yakindu.sct.ui.editor.validation.IValidationIssueStore.IResourceIssueStoreListener;
+import org.yakindu.sct.ui.editor.validation.IValidationIssueStore.IValidationIssueStoreListener;
 
 /**
  * 
@@ -53,7 +53,8 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 
 	public void createDecorators(IDecoratorTarget decoratorTarget) {
 		EditPart editPart = (EditPart) decoratorTarget.getAdapter(EditPart.class);
-		if (editPart instanceof GraphicalEditPart || editPart instanceof AbstractConnectionEditPart) {
+		if (editPart instanceof IPrimaryEditPart
+				&& (editPart instanceof GraphicalEditPart || editPart instanceof AbstractConnectionEditPart)) {
 			EditDomain ed = editPart.getViewer().getEditDomain();
 			if (!(ed instanceof DiagramEditDomain)) {
 				return;
@@ -80,9 +81,10 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		return new ValidationDecorator(decoratorTarget, store);
 	}
 
-	public static class ValidationDecorator extends AbstractDecorator implements IResourceIssueStoreListener {
+	public static class ValidationDecorator extends AbstractDecorator implements IValidationIssueStoreListener {
 
 		private IValidationIssueStore store;
+		private String semanticID;
 
 		public ValidationDecorator(IDecoratorTarget decoratorTarget, IValidationIssueStore store) {
 			super(decoratorTarget);
@@ -90,11 +92,14 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		public void refresh() {
-			removeDecoration();
 			View view = (View) getDecoratorTarget().getAdapter(View.class);
 			if (view == null || view.eResource() == null) {
 				return;
 			}
+			EObject element = view.getElement();
+			if (element != null)
+				semanticID = element.eResource().getURIFragment(element);
+			removeDecoration();
 			EditPart editPart = (EditPart) getDecoratorTarget().getAdapter(EditPart.class);
 			if (editPart == null || editPart.getViewer() == null || !(editPart instanceof IPrimaryEditPart)) {
 				return;
@@ -111,11 +116,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		protected void decorate(View view) {
-			String elementId = ViewUtil.getIdStr(view);
-			if (elementId == null) {
-				return;
-			}
-			List<SCTIssue> issues = store.getIssues(elementId);
+			List<SCTIssue> issues = store.getIssues(semanticID);
 			Severity severity = Severity.INFO;
 			Label toolTip = null;
 			if (issues.isEmpty())
@@ -170,6 +171,11 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		@Override
 		public void issuesChanged() {
 			refresh();
+		}
+
+		@Override
+		public String getSemanticURI() {
+			return semanticID;
 		}
 	}
 }

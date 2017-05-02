@@ -1,7 +1,6 @@
-
-testgroup CastExpressions for statechart CastExpressions{
-	
-	test CastExpressionTest { 
+testclass CastExpressions for statechart CastExpressions{
+	@Test
+	operation CastExpressionTest(){ 
 		enter
 		assert realValue == 5
 		assert intValue == 5

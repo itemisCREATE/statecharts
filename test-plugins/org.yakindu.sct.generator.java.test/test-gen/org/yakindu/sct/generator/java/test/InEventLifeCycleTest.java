@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -11,20 +11,18 @@
 
 package org.yakindu.sct.generator.java.test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.ineventlifecycle.InEventLifeCycleStatemachine;
 import org.yakindu.scr.ineventlifecycle.InEventLifeCycleStatemachine.State;
+
 /**
- *  Unit TestCase for InEventLifeCycle
+ * Unit TestCase for InEventLifeCycle
  */
 @SuppressWarnings("all")
 public class InEventLifeCycleTest {
-
-	private InEventLifeCycleStatemachine statemachine;
-
+	private InEventLifeCycleStatemachine statemachine;	
+	
 	@Before
 	public void setUp() {
 		statemachine = new InEventLifeCycleStatemachine();
@@ -35,9 +33,9 @@ public class InEventLifeCycleTest {
 	public void tearDown() {
 		statemachine = null;
 	}
-
+	
 	@Test
-	public void testeventLifeCycle() {
+	public void testEventLifeCycle() {
 		statemachine.enter();
 		statemachine.raiseE();
 		assertTrue(statemachine.getI() == 0l);
