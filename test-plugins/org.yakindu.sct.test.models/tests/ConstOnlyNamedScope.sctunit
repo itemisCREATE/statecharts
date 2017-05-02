@@ -1,4 +1,3 @@
-package tests
 testclass ConstOnlyNamedScope for statechart declarations.ConstOnlyNamedScope {
 
 	/*

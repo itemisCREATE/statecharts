@@ -1,4 +1,3 @@
-package tests
 testclass BitExpressions for statechart BitExpressions {
 	@Test
 	operation BitExpressions () {

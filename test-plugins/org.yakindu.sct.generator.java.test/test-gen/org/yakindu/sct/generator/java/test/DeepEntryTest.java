@@ -37,31 +37,21 @@ public class DeepEntryTest {
 	@Test
 	public void testEnterToSubstate() {
 		assertTrue(statemachine.getX() == 0l);
-		 
 		assertTrue(statemachine.getY() == 0l);
-		 
 		assertTrue(statemachine.getZ() == 0l);
-		 
 		statemachine.enter();
 		assertTrue(statemachine.getX() == 1l);
-		 
 		assertTrue(statemachine.getY() == 1l);
-		 
 		assertTrue(statemachine.getZ() == 2l);
-		 
 		statemachine.raiseE();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r2_B_r_BB));
-		 
 		statemachine.raiseF();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r2_C));
-		 
 		statemachine.raiseF();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r2_B_r_BB));
-		 
 		assertTrue(statemachine.getY() == 1l);
-		 
 	}
 }

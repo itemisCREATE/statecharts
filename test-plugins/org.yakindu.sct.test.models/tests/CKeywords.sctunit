@@ -1,4 +1,3 @@
-package tests
 testclass CKeywords for statechart CKeywords { 
 	@Test
 	operation CKeywordsTest(){ 

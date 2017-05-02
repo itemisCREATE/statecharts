@@ -38,8 +38,6 @@ public class ParenthesisTest {
 	public void testSimple() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mainRegion_A));
-		 
 		assertTrue(statemachine.getErg() == 8l);
-		 
 	}
 }

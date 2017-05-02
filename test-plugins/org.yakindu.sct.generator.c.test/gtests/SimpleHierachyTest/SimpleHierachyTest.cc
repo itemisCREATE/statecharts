@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, simpleHierachyTest) {					
 	simpleHierachy_enter(&handle);
 	EXPECT_TRUE(simpleHierachy_isStateActive(&handle, SimpleHierachy_main_region_A));

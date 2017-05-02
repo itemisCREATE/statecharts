@@ -38,9 +38,7 @@ public class FeatureCallsTest {
 	public void testFeatureCalls() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 	}
 }

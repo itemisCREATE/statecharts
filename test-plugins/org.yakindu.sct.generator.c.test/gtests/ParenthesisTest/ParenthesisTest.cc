@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, simple) {					
 	parenthesis_enter(&handle);
 	EXPECT_TRUE(parenthesis_isStateActive(&handle, Parenthesis_mainRegion_A));

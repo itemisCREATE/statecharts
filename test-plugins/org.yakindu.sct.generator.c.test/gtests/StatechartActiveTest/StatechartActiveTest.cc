@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, inactiveBeforeEnter) {					
 	EXPECT_TRUE(!statechartActive_isActive(&handle));
 }

@@ -1,4 +1,3 @@
-package tests
 testclass SimpleEvent for statechart SimpleEvent {
 	@Test
 	operation simpleEventTest(){

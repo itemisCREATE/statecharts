@@ -1,4 +1,3 @@
-package tests
 testclass PriorityValues for statechart PriorityValues {
 	@Test
 	operation transitionPriority(){

@@ -40,6 +40,5 @@ public class EntryChoiceTest {
 		statemachine.runCycle();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 	}
 }

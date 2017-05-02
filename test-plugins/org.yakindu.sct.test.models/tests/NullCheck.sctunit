@@ -1,4 +1,3 @@
-package tests
 testclass NullCheck for statechart NullCheck {
 	@Test
 	operation SimpleNullCheckTest(){ 

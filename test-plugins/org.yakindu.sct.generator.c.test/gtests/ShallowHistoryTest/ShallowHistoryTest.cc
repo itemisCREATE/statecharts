@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, shallowHistoryTest) {					
 	shallowHistory_enter(&handle);
 	shallowHistoryIface_raise_event1(&handle);

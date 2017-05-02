@@ -1,4 +1,3 @@
-package tests
 testclass StringExpressions for statechart StringExpressions	{
 	@Test
 	operation StringExpressionsTest(){

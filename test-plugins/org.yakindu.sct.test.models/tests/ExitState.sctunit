@@ -1,4 +1,3 @@
-package tests
 testclass ExitState for statechart ExitState {
 	
 	/* An exit through an unnamed exit point must be taken by the transition without exit point spec (it must also be unguarded). */

@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, ConditionalExpressionTest) {					
 	conditionalExpressions_enter(&handle);
 	EXPECT_TRUE(conditionalExpressions_isStateActive(&handle, ConditionalExpressions_main_region_A));

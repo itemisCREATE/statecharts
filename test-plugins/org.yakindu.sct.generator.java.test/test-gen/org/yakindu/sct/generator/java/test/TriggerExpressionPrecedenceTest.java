@@ -41,7 +41,6 @@ public class TriggerExpressionPrecedenceTest {
 		statemachine.setC2(false);
 		statemachine.runCycle();
 		assertTrue(!statemachine.getE1_transition());
-		 
 	}
 	@Test
 	public void testUnsatisfiedTriggerAndFGuardTrueOrFalse() {
@@ -50,7 +49,6 @@ public class TriggerExpressionPrecedenceTest {
 		statemachine.setC2(false);
 		statemachine.runCycle();
 		assertTrue(!statemachine.getE1_transition());
-		 
 	}
 	@Test
 	public void testUnsatisfiedTriggerAndFGuardFalseOrTrue() {
@@ -59,7 +57,6 @@ public class TriggerExpressionPrecedenceTest {
 		statemachine.setC2(true);
 		statemachine.runCycle();
 		assertTrue(!statemachine.getE1_transition());
-		 
 	}
 	@Test
 	public void testUnsatisfiedTriggerAndFGuardTrueOrTrue() {
@@ -68,6 +65,5 @@ public class TriggerExpressionPrecedenceTest {
 		statemachine.setC2(true);
 		statemachine.runCycle();
 		assertTrue(!statemachine.getE1_transition());
-		 
 	}
 }

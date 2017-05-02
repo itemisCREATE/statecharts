@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, trueGuard) {					
 	triggerGuardExpressions_enter(&handle);
 	EXPECT_TRUE(triggerGuardExpressions_isStateActive(&handle, TriggerGuardExpressions_main_region_A));

@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, simpleEventTest) {					
 	simpleEvent_enter(&handle);
 	EXPECT_TRUE(simpleEvent_isStateActive(&handle, SimpleEvent_main_region_A)) << "Expected A to be active" ;

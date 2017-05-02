@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrFalse) {					
 	triggerExpressionPrecedence_enter(&handle);
 	triggerExpressionPrecedenceIface_set_c1(&handle,false);

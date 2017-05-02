@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, stateIsActive) {					
 	stateIsActive_enter(&handle);
 	EXPECT_TRUE(stateIsActive_isStateActive(&handle, StateIsActive_R1_R1A));

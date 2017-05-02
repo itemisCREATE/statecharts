@@ -1,58 +1,27 @@
-package tests
 testclass Choice for statechart Choice { 
 	@Test
 	operation elseChoiceUsingNonDefaultTransition(){
-		enter
-		
-		assert active (Choice.main_region.A)
-		c = true
-		raise e
-		
-		cycle		
+		initForEventE(true)	
 		assert active (Choice.main_region.C)
 	}
 	@Test
 	operation elseChoiceUsingDefaultTransition(){
-		enter
-		
-		assert active (Choice.main_region.A)
-		c = false
-		raise e
-		
-		cycle		
+		initForEventE(false)	
 		assert active (Choice.main_region.B)
 	}
 	@Test
 	operation defaultChoiceUsingNonDefaultTransition(){
-		enter
-		
-		assert active (Choice.main_region.A)
-		c = true
-		raise g
-		
-		cycle		
+		initForEventG(true)
 		assert active (Choice.main_region.C)
 	}
 	@Test
 	operation defaultChoiceUsingDefaultTransition(){
-		enter
-		
-		assert active (Choice.main_region.A)
-		c = false
-		raise g
-		
-		cycle		
+		initForEventG(false)		
 		assert active (Choice.main_region.B)
 	}
 	@Test
 	operation uncheckedChoiceUsingNonDefaultTransition(){
-		enter
-		
-		assert active (Choice.main_region.A)
-		c = true
-		raise f
-		
-		cycle		
+		initForEventF(true)
 		assert active (Choice.main_region.C)
 	}
 	
@@ -62,13 +31,7 @@ testclass Choice for statechart Choice {
 	 */
 	@Test
 	operation uncheckedChoiceUsingDefaultTransition(){
-		enter
-		
-		assert active (Choice.main_region.A)
-		c = false
-		raise f
-		
-		cycle		
+		initForEventF(false)
 		assert active (Choice.main_region.B)
 	}
 	
@@ -80,15 +43,47 @@ testclass Choice for statechart Choice {
 	 */
 	@Test
 	operation alwaysTrueTransitionInChoice(){
+		initForEventH(true)
+		assert active (Choice.main_region.C)
+	}
+	
+	operation initForEventE(valueForC : boolean){
 		enter
 		
 		assert active (Choice.main_region.A)
-		c = true
+		c = valueForC
+		raise e
+		
+		cycle
+	}
+	
+	operation initForEventF(valueForC : boolean){
+		enter
+		
+		assert active (Choice.main_region.A)
+		c = valueForC
+		raise f
+		
+		cycle
+	}
+	
+	operation initForEventG(valueForC : boolean){
+		enter
+		
+		assert active (Choice.main_region.A)
+		c = valueForC
+		raise g
+		
+		cycle
+	}
+	
+	operation initForEventH(valueForC : boolean){
+		enter
+		
+		assert active (Choice.main_region.A)
+		c = valueForC
 		raise h
 		
-		cycle		
-		assert active (Choice.main_region.C)
+		cycle
 	}
-		
-	
 }

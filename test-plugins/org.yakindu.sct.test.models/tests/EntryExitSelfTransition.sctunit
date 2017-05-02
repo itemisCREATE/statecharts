@@ -1,14 +1,7 @@
-package tests
 testclass EntryExitSelfTransition for statechart EntryExitSelfTransition{
 	@Test
 	operation SelfTransitionToChildState(){ 
-		enter
-		
-		cycle
-		assert entries == 1 
-		assert active(EntryExitSelfTransition.main_region.A._region0.B)
-		
-		entries = 0
+		init()
 		raise e
 		cycle
 		assert entries == 1
@@ -18,12 +11,7 @@ testclass EntryExitSelfTransition for statechart EntryExitSelfTransition{
 
 	@Test
 	operation SelfTransitionFromChildState(){ 
-		enter
-		
-		cycle
-		assert entries == 1 
-		
-		entries = 0
+		init()
 		raise e1
 		cycle
 		assert entries == 0
@@ -36,6 +24,15 @@ testclass EntryExitSelfTransition for statechart EntryExitSelfTransition{
 		assert entries == 1
 		assert exits == 1 
 	} 
-
+	
+	operation init(){
+		enter
+		cycle
+		
+		assert entries == 1 
+		assert active(EntryExitSelfTransition.main_region.A._region0.B)
+		
+		entries = 0
+	}
 }
 	

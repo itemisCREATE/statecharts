@@ -38,30 +38,24 @@ public class EnterStateTest {
 	public void testDefaultEntry() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
-		 
 		statemachine.raiseE();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r_B_r_E));
-		 
 	}
 	@Test
 	public void testNamedEntryThroughNamedTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
-		 
 		statemachine.raiseF();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r_B_r_F));
-		 
 	}
 	@Test
 	public void testNamedEntryThroughDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
-		 
 		statemachine.raiseG();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r_B_r_E));
-		 
 	}
 }

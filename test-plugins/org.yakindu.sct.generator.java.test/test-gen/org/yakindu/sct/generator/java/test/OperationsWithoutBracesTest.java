@@ -38,23 +38,15 @@ public class OperationsWithoutBracesTest {
 	public void testOperationsWithoutBracesTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		assertTrue(statemachine.isStateActive(State.another_region_A));
-		 
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		 
 		assertTrue(statemachine.isStateActive(State.another_region_B));
-		 
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_C));
-		 
 		assertTrue(statemachine.isStateActive(State.another_region_C));
-		 
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_D));
-		 
 		assertTrue(statemachine.isStateActive(State.another_region_D));
-		 
 	}
 }

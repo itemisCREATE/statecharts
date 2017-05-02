@@ -21,6 +21,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, Timer01) {					
 	timedTransitions_enter(&handle);
 	EXPECT_TRUE(timedTransitions_isStateActive(&handle, TimedTransitions_main_region_Start));

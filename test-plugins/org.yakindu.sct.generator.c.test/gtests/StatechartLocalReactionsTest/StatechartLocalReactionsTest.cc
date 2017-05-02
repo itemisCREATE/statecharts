@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, statechartLocalReactionsTest) {					
 	statechartLocalReactions_enter(&handle);
 	EXPECT_TRUE(statechartLocalReactions_isStateActive(&handle, StatechartLocalReactions_main_region_S1));

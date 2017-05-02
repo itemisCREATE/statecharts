@@ -1,4 +1,3 @@
-package tests
 testclass SimpleHierachy for statechart SimpleHierachy {
 	@Test
 	operation simpleHierachyTest(){

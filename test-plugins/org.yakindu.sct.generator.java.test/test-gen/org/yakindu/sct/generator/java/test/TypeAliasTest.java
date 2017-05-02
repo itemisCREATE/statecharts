@@ -38,20 +38,14 @@ public class TypeAliasTest {
 	public void testTypeAliasTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
-		 
 		assertTrue(statemachine.getMyVar() == 1l);
-		 
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_Mid));
-		 
 		assertTrue(statemachine.getMyString().equals("TypeSystem"));
-		 
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_Mid2));
-		 
 		statemachine.raiseMyEvent();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_End));
-		 
 	}
 }

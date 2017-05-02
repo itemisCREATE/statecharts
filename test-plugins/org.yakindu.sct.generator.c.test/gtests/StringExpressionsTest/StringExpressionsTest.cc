@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, StringExpressionsTest) {					
 	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringX(&handle), "\"X\"") == 0);
 	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringY(&handle), "\"Y\"") == 0);

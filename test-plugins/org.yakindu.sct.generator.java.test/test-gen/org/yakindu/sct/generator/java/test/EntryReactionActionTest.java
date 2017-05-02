@@ -38,38 +38,31 @@ public class EntryReactionActionTest {
 	public void testEntryTransitionActionOnStatechartEnter() {
 		statemachine.enter();
 		assertTrue(statemachine.getEnteredR1());
-		 
 		assertTrue(statemachine.getEnteredR2());
-		 
 		assertTrue(statemachine.getEnteredBdefault());
-		 
 		assertTrue(!statemachine.getEnteredBother());
-		 
 	}
 	@Test
 	public void testEntryOnRTS() {
-		statemachine.enter();
-		statemachine.raiseB();
-		statemachine.runCycle();
-		statemachine.raiseD();
-		statemachine.runCycle();
-		statemachine.setEnteredR1(false);
-		statemachine.setEnteredR2(false);
-		statemachine.setEnteredBdefault(false);
-		statemachine.setEnteredBother(false);
+		init();
 		statemachine.raiseB();
 		statemachine.runCycle();
 		assertTrue(!statemachine.getEnteredR1());
-		 
 		assertTrue(!statemachine.getEnteredR2());
-		 
 		assertTrue(!statemachine.getEnteredBdefault());
-		 
 		assertTrue(statemachine.getEnteredBother());
-		 
 	}
 	@Test
 	public void testNoEntryTransitionActionOnHistory() {
+		init();
+		statemachine.raiseD();
+		statemachine.runCycle();
+		assertTrue(!statemachine.getEnteredR1());
+		assertTrue(!statemachine.getEnteredR2());
+		assertTrue(!statemachine.getEnteredBdefault());
+		assertTrue(!statemachine.getEnteredBother());
+	}
+	public void init() {
 		statemachine.enter();
 		statemachine.raiseB();
 		statemachine.runCycle();
@@ -79,15 +72,5 @@ public class EntryReactionActionTest {
 		statemachine.setEnteredR2(false);
 		statemachine.setEnteredBdefault(false);
 		statemachine.setEnteredBother(false);
-		statemachine.raiseD();
-		statemachine.runCycle();
-		assertTrue(!statemachine.getEnteredR1());
-		 
-		assertTrue(!statemachine.getEnteredR2());
-		 
-		assertTrue(!statemachine.getEnteredBdefault());
-		 
-		assertTrue(!statemachine.getEnteredBother());
-		 
 	}
 }

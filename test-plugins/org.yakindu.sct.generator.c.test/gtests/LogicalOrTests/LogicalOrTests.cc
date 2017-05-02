@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, operandEvaluationOrder) {					
 	logicalOr_enter(&handle);
 	logicalOr_runCycle(&handle);

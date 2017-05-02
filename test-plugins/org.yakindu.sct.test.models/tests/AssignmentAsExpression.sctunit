@@ -1,4 +1,3 @@
-package tests
 testclass AssignmentAsExpression for statechart AssignmentAsExpression{
 	
 	@Test 

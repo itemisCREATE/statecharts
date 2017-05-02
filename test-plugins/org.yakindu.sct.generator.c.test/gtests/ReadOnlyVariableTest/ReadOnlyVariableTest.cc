@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, ReadOnlyVariableTest) {					
 	readOnlyVariable_enter(&handle);
 	EXPECT_TRUE(readOnlyVariable_isStateActive(&handle, ReadOnlyVariable_main_region_StateA));

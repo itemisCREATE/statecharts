@@ -38,26 +38,20 @@ public class GuardTest {
 	public void testGuardTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		statemachine.raiseEvent2();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		 
 		statemachine.raiseReturn();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		 
 		statemachine.raiseReturn();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 	}
 }

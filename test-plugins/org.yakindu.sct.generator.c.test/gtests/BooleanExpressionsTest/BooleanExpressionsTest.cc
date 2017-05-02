@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, booleanExpressions) {					
 	booleanExpressions_enter(&handle);
 	EXPECT_TRUE(booleanExpressions_isStateActive(&handle, BooleanExpressions_main_region_StateA));

@@ -25,6 +25,15 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+void init(bool sndCycle){
+	statechart->enter();
+	statechart->raise_e();
+	statechart->runCycle();
+	if (sndCycle) {
+		statechart->runCycle();
+	}
+}
+
 TEST_F(StatemachineTest, availableAfterCycle) {
 	
 	
@@ -40,11 +49,7 @@ TEST_F(StatemachineTest, availableAfterCycle) {
 TEST_F(StatemachineTest, availableWithinCycle) {
 	
 	
-	statechart->enter();
-	
-	statechart->raise_e();
-	
-	statechart->runCycle();
+	init(false);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_f_available_in_cycle());
 	
@@ -52,13 +57,7 @@ TEST_F(StatemachineTest, availableWithinCycle) {
 TEST_F(StatemachineTest, unvailableWithin2ndCycle) {
 	
 	
-	statechart->enter();
-	
-	statechart->raise_e();
-	
-	statechart->runCycle();
-	
-	statechart->runCycle();
+	init(true);
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_f_available_in_next_cycle());
 	
@@ -66,13 +65,7 @@ TEST_F(StatemachineTest, unvailableWithin2ndCycle) {
 TEST_F(StatemachineTest, unvailableAfter2ndCycle) {
 	
 	
-	statechart->enter();
-	
-	statechart->raise_e();
-	
-	statechart->runCycle();
-	
-	statechart->runCycle();
+	init(true);
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->isRaised_f());
 	

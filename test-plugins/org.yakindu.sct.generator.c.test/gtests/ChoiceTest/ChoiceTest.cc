@@ -20,60 +20,61 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
-TEST_F(StatemachineTest, elseChoiceUsingNonDefaultTransition) {					
+void initForEventE(bool valueForC){
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(&handle,true);
+	choiceIface_set_c(&handle,valueForC);
 	choiceIface_raise_e(&handle);
 	choice_runCycle(&handle);
+}
+void initForEventF(bool valueForC){
+	choice_enter(&handle);
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
+	choiceIface_set_c(&handle,valueForC);
+	choiceIface_raise_f(&handle);
+	choice_runCycle(&handle);
+}
+void initForEventG(bool valueForC){
+	choice_enter(&handle);
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
+	choiceIface_set_c(&handle,valueForC);
+	choiceIface_raise_g(&handle);
+	choice_runCycle(&handle);
+}
+void initForEventH(bool valueForC){
+	choice_enter(&handle);
+	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
+	choiceIface_set_c(&handle,valueForC);
+	choiceIface_raise_h(&handle);
+	choice_runCycle(&handle);
+}
+
+TEST_F(StatemachineTest, elseChoiceUsingNonDefaultTransition) {					
+	initForEventE(true);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
 }
 TEST_F(StatemachineTest, elseChoiceUsingDefaultTransition) {					
-	choice_enter(&handle);
-	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(&handle,false);
-	choiceIface_raise_e(&handle);
-	choice_runCycle(&handle);
+	initForEventE(false);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_B));
 }
 TEST_F(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {					
-	choice_enter(&handle);
-	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(&handle,true);
-	choiceIface_raise_g(&handle);
-	choice_runCycle(&handle);
+	initForEventG(true);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
 }
 TEST_F(StatemachineTest, defaultChoiceUsingDefaultTransition) {					
-	choice_enter(&handle);
-	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(&handle,false);
-	choiceIface_raise_g(&handle);
-	choice_runCycle(&handle);
+	initForEventG(false);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_B));
 }
 TEST_F(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {					
-	choice_enter(&handle);
-	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(&handle,true);
-	choiceIface_raise_f(&handle);
-	choice_runCycle(&handle);
+	initForEventF(true);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
 }
 TEST_F(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {					
-	choice_enter(&handle);
-	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(&handle,false);
-	choiceIface_raise_f(&handle);
-	choice_runCycle(&handle);
+	initForEventF(false);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_B));
 }
 TEST_F(StatemachineTest, alwaysTrueTransitionInChoice) {					
-	choice_enter(&handle);
-	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_A));
-	choiceIface_set_c(&handle,true);
-	choiceIface_raise_h(&handle);
-	choice_runCycle(&handle);
+	initForEventH(true);
 	EXPECT_TRUE(choice_isStateActive(&handle, Choice_main_region_C));
 }
 

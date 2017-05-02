@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, StatechartNameTest) {					
 	finalState_enter(&handle);
 	finalState_runCycle(&handle);

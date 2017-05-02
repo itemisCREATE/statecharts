@@ -25,16 +25,17 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+void init(){
+	statechart->enter();
+	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_A));
+	statechart->raise_toB();
+	statechart->runCycle();
+}
+
 TEST_F(StatemachineTest, enterThroughInitialEntry) {
 	
 	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_A));
-	
-	statechart->raise_toB();
-	
-	statechart->runCycle();
+	init();
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_C));
 	
@@ -48,13 +49,7 @@ TEST_F(StatemachineTest, enterThroughInitialEntry) {
 TEST_F(StatemachineTest, enterCThroughHistory) {
 	
 	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_A));
-	
-	statechart->raise_toB();
-	
-	statechart->runCycle();
+	init();
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_C));
 	
@@ -74,13 +69,7 @@ TEST_F(StatemachineTest, enterCThroughHistory) {
 TEST_F(StatemachineTest, enterDThroughHistory) {
 	
 	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_A));
-	
-	statechart->raise_toB();
-	
-	statechart->runCycle();
+	init();
 	
 	statechart->raise_next();
 	

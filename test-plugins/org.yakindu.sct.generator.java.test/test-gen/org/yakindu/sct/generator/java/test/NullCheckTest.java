@@ -38,9 +38,7 @@ public class NullCheckTest {
 	public void testSimpleNullCheckTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		 
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		 
 	}
 }

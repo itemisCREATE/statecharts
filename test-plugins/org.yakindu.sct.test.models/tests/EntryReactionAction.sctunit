@@ -1,4 +1,3 @@
-package tests
 testclass EntryReactionAction for statechart entries.EntryReactionAction {
 
 	/*
@@ -20,17 +19,7 @@ testclass EntryReactionAction for statechart entries.EntryReactionAction {
 	 */
 	@Test
 	operation entryOnRTS(){
-		enter
-		
-		raise b 
-		cycle 
-		raise d 
-		cycle
-		
-		enteredR1 = false
-		enteredR2 = false
-		enteredBdefault = false
-		enteredBother = false
+		init()
 		raise b
 		cycle
 		
@@ -48,18 +37,7 @@ testclass EntryReactionAction for statechart entries.EntryReactionAction {
 	 */
 	@Test
 	operation noEntryTransitionActionOnHistory(){
-		
-		enter
-		
-		raise b
-		cycle
-		raise d
-		cycle
-		
-		enteredR1 = false
-		enteredR2 = false
-		enteredBdefault = false
-		enteredBother = false
+		init()
 		raise d
 		cycle
 		
@@ -69,7 +47,19 @@ testclass EntryReactionAction for statechart entries.EntryReactionAction {
 		assert ! enteredBother		
 	}
 
-
+	operation init(){
+		enter
+		
+		raise b 
+		cycle 
+		raise d 
+		cycle
+		
+		enteredR1 = false
+		enteredR2 = false
+		enteredBdefault = false
+		enteredBother = false
+	}
 	
 }
 	

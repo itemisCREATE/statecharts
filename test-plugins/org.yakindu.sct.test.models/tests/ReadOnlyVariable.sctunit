@@ -1,4 +1,3 @@
-package tests
 testclass ReadOnlyVariable for statechart ReadOnlyVariable{
 	@Test
 	operation ReadOnlyVariableTest(){ 

@@ -65,6 +65,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, operationsCalled) {
 	MockDefault defaultMock;
 	

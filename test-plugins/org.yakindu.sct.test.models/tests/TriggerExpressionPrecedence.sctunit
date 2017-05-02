@@ -1,4 +1,3 @@
-package tests
 /**
  * These test cases check the precedence issues that occured with the construction of the trigger condition 
  * that consists of the trigger and guard part. 

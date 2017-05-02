@@ -1,4 +1,3 @@
-package tests
 /**
  * @author axel terfloth
  */
@@ -20,10 +19,7 @@ testclass OutEventLifeCycle for statechart OutEventLifeCycle {
 	/* an outgoing event must be accessible within the cycle that raised the event. */
 	@Test
 	operation availableWithinCycle(){
-		enter
-
-		raise e
-		cycle
+		init(false)
 		assert f_available_in_cycle
 		
 	} 
@@ -32,12 +28,7 @@ testclass OutEventLifeCycle for statechart OutEventLifeCycle {
 	/* an outgoing event that was raised in one cycle is not available within the next cycle */
 	@Test
 	operation unvailableWithin2ndCycle(){
-		enter
-
-		raise e
-		cycle
-		
-		cycle
+		init(true)
 		assert ! f_available_in_next_cycle 
 	}
 		
@@ -45,13 +36,17 @@ testclass OutEventLifeCycle for statechart OutEventLifeCycle {
 	/* an outgoing event that was raised in one cycle is not available after the following cycle */
 	@Test
 	operation unvailableAfter2ndCycle(){
+		init(true)
+		assert !f
+	}
+		
+	operation init(sndCycle : boolean){
 		enter
 
 		raise e
 		cycle
-		
-		cycle
-		assert !f
+		if(sndCycle){
+			cycle
+		}	
 	}
-		
 }

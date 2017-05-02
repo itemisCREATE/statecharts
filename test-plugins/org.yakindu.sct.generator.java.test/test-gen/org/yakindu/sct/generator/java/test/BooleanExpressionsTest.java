@@ -38,24 +38,15 @@ public class BooleanExpressionsTest {
 	public void testBooleanExpressions() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
-		 
 		assertTrue(statemachine.getMyBool1() == true);
-		 
 		assertTrue(statemachine.getMyBool2() == false);
-		 
 		statemachine.raiseE1();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
-		 
 		assertTrue(statemachine.getAnd() == false);
-		 
 		assertTrue(statemachine.getOr() == true);
-		 
 		assertTrue(statemachine.getNot() == false);
-		 
 		assertTrue(statemachine.getEqual() == false);
-		 
 		assertTrue(statemachine.getNotequal() == true);
-		 
 	}
 }

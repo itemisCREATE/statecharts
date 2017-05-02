@@ -1,4 +1,3 @@
-package tests
 testclass StatechartActive for statechart StatechartActive {
 	
 	/** A state machine must be inactive before it has been entered.  */

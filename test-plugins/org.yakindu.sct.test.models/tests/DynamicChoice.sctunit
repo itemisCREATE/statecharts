@@ -1,4 +1,3 @@
-package tests
 testclass DynamicChoice for statechart DynamicChoice{
 	@Test
 	operation DynamicChoiceTest(){ 

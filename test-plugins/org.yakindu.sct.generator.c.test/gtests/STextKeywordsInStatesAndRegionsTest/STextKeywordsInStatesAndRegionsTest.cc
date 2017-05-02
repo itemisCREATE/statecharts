@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {					
 	sTextKeywordsInStatesAndRegions_enter(&handle);
 	EXPECT_TRUE(sTextKeywordsInStatesAndRegions_isStateActive(&handle, STextKeywordsInStatesAndRegions_default_namespace));

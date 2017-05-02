@@ -1,4 +1,3 @@
-package tests
 testclass FeatureCalls for statechart FeatureCalls {
 	@Test
 	operation FeatureCalls(){

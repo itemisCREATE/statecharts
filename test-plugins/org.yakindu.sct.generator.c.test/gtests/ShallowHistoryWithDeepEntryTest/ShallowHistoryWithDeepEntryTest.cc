@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, noDeepEntryWithinHistory) {					
 	shallowHistoryWithDeepEntry_enter(&handle);
 	EXPECT_TRUE(shallowHistoryWithDeepEntry_isStateActive(&handle, ShallowHistoryWithDeepEntry_main_region_Y));

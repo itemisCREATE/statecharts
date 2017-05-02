@@ -20,6 +20,15 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+void init(bool sndCycle){
+	outEventLifeCycle_enter(&handle);
+	outEventLifeCycleIface_raise_e(&handle);
+	outEventLifeCycle_runCycle(&handle);
+	if (sndCycle) {
+		outEventLifeCycle_runCycle(&handle);
+	}
+}
+
 TEST_F(StatemachineTest, availableAfterCycle) {					
 	outEventLifeCycle_enter(&handle);
 	outEventLifeCycleIface_raise_e(&handle);
@@ -27,23 +36,15 @@ TEST_F(StatemachineTest, availableAfterCycle) {
 	EXPECT_TRUE(outEventLifeCycleIface_israised_f(&handle));
 }
 TEST_F(StatemachineTest, availableWithinCycle) {					
-	outEventLifeCycle_enter(&handle);
-	outEventLifeCycleIface_raise_e(&handle);
-	outEventLifeCycle_runCycle(&handle);
+	init(false);
 	EXPECT_TRUE(outEventLifeCycleIface_get_f_available_in_cycle(&handle));
 }
 TEST_F(StatemachineTest, unvailableWithin2ndCycle) {					
-	outEventLifeCycle_enter(&handle);
-	outEventLifeCycleIface_raise_e(&handle);
-	outEventLifeCycle_runCycle(&handle);
-	outEventLifeCycle_runCycle(&handle);
+	init(true);
 	EXPECT_TRUE(!outEventLifeCycleIface_get_f_available_in_next_cycle(&handle));
 }
 TEST_F(StatemachineTest, unvailableAfter2ndCycle) {					
-	outEventLifeCycle_enter(&handle);
-	outEventLifeCycleIface_raise_e(&handle);
-	outEventLifeCycle_runCycle(&handle);
-	outEventLifeCycle_runCycle(&handle);
+	init(true);
 	EXPECT_TRUE(!outEventLifeCycleIface_israised_f(&handle));
 }
 

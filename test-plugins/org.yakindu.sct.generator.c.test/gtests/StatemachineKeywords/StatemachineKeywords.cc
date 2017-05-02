@@ -21,6 +21,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, statemachineKeywords) {					
 	statechartKeywords_enter(&handle);
 	EXPECT_TRUE(statechartKeywords_isStateActive(&handle, StatechartKeywords_main_region_Timer));

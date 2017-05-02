@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, transitionPriority) {					
 	priorityValues_enter(&handle);
 	EXPECT_TRUE(priorityValues_isStateActive(&handle, PriorityValues_main_region_A));

@@ -20,6 +20,19 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+void initEntryInTransition(bool guardVar, bool doneVar){
+	guardedEntry_enter(&handle);
+	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_A));
+	guardedEntryIface_raise_e(&handle);
+	guardedEntry_runCycle(&handle);
+	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_B));
+	guardedEntryIface_set_guard(&handle,guardVar);
+	guardedEntryIface_set_done(&handle,doneVar);
+	guardedEntryIface_raise_e(&handle);
+	guardedEntry_runCycle(&handle);
+	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_A));
+}
+
 TEST_F(StatemachineTest, EntryNotTakenOnStatechartEnter) {					
 	EXPECT_TRUE(guardedEntryIface_get_guard(&handle)== false);
 	guardedEntry_enter(&handle);
@@ -33,29 +46,11 @@ TEST_F(StatemachineTest, EntryTakenOnStatechartEnter) {
 	EXPECT_TRUE(guardedEntryIface_get_done(&handle)== true);
 }
 TEST_F(StatemachineTest, EntryTakenInTransition) {					
-	guardedEntry_enter(&handle);
-	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_A));
-	guardedEntryIface_raise_e(&handle);
-	guardedEntry_runCycle(&handle);
-	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_B));
-	guardedEntryIface_set_guard(&handle,true);
-	guardedEntryIface_set_done(&handle,false);
-	guardedEntryIface_raise_e(&handle);
-	guardedEntry_runCycle(&handle);
-	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_A));
+	initEntryInTransition(true,false);
 	EXPECT_TRUE(guardedEntryIface_get_done(&handle));
 }
 TEST_F(StatemachineTest, EntryNotTakenInTransition) {					
-	guardedEntry_enter(&handle);
-	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_A));
-	guardedEntryIface_raise_e(&handle);
-	guardedEntry_runCycle(&handle);
-	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_B));
-	guardedEntryIface_set_guard(&handle,false);
-	guardedEntryIface_set_done(&handle,false);
-	guardedEntryIface_raise_e(&handle);
-	guardedEntry_runCycle(&handle);
-	EXPECT_TRUE(guardedEntry_isStateActive(&handle, GuardedEntry_main_region_A));
+	initEntryInTransition(false,false);
 	EXPECT_TRUE(!guardedEntryIface_get_done(&handle));
 }
 

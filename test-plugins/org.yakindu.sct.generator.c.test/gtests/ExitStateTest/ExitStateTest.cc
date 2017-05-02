@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, defaultExit) {					
 	exitState_enter(&handle);
 	EXPECT_TRUE(exitState_isStateActive(&handle, ExitState_r_A));

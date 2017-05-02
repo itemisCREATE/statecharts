@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, enterToSubstate) {					
 	EXPECT_TRUE(deepEntryIface_get_x(&handle)== 0l);
 	EXPECT_TRUE(deepEntryIface_get_y(&handle)== 0l);

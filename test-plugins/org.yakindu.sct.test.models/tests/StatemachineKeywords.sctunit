@@ -1,4 +1,3 @@
-package tests
 testclass StatemachineKeywords for statechart StatechartKeywords {
 	@Test
 	operation statemachineKeywords(){ 

@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, TransitionWithoutConditionTest) {					
 	transitionWithoutCondition_enter(&handle);
 	EXPECT_TRUE(transitionWithoutCondition_isStateActive(&handle, TransitionWithoutCondition_main_region_A));

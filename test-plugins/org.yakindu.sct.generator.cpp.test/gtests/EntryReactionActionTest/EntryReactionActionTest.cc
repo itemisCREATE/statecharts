@@ -25,6 +25,18 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+void init(){
+	statechart->enter();
+	statechart->raise_b();
+	statechart->runCycle();
+	statechart->raise_d();
+	statechart->runCycle();
+	statechart->getDefaultSCI()->set_enteredR1(false);
+	statechart->getDefaultSCI()->set_enteredR2(false);
+	statechart->getDefaultSCI()->set_enteredBdefault(false);
+	statechart->getDefaultSCI()->set_enteredBother(false);
+}
+
 TEST_F(StatemachineTest, entryTransitionActionOnStatechartEnter) {
 	
 	
@@ -42,23 +54,7 @@ TEST_F(StatemachineTest, entryTransitionActionOnStatechartEnter) {
 TEST_F(StatemachineTest, entryOnRTS) {
 	
 	
-	statechart->enter();
-	
-	statechart->raise_b();
-	
-	statechart->runCycle();
-	
-	statechart->raise_d();
-	
-	statechart->runCycle();
-	
-	statechart->getDefaultSCI()->set_enteredR1(false);
-	
-	statechart->getDefaultSCI()->set_enteredR2(false);
-	
-	statechart->getDefaultSCI()->set_enteredBdefault(false);
-	
-	statechart->getDefaultSCI()->set_enteredBother(false);
+	init();
 	
 	statechart->raise_b();
 	
@@ -76,23 +72,7 @@ TEST_F(StatemachineTest, entryOnRTS) {
 TEST_F(StatemachineTest, noEntryTransitionActionOnHistory) {
 	
 	
-	statechart->enter();
-	
-	statechart->raise_b();
-	
-	statechart->runCycle();
-	
-	statechart->raise_d();
-	
-	statechart->runCycle();
-	
-	statechart->getDefaultSCI()->set_enteredR1(false);
-	
-	statechart->getDefaultSCI()->set_enteredR2(false);
-	
-	statechart->getDefaultSCI()->set_enteredBdefault(false);
-	
-	statechart->getDefaultSCI()->set_enteredBother(false);
+	init();
 	
 	statechart->raise_d();
 	

@@ -25,6 +25,13 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+void checkDone(bool shouldBeDone){
+	statechart->raise_e();
+	statechart->runCycle();
+	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_B));
+	EXPECT_TRUE(shouldBeDone ? statechart->getDefaultSCI()->get_done()  : !statechart->getDefaultSCI()->get_done());
+}
+
 TEST_F(StatemachineTest, ExitTaken) {
 	
 	
@@ -34,13 +41,7 @@ TEST_F(StatemachineTest, ExitTaken) {
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_guard());
 	
-	statechart->raise_e();
-	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_B));
-	
-	EXPECT_TRUE(!statechart->getDefaultSCI()->get_done());
+	checkDone(false);
 	
 }
 TEST_F(StatemachineTest, ExitNotTaken) {
@@ -52,12 +53,6 @@ TEST_F(StatemachineTest, ExitNotTaken) {
 	
 	statechart->getDefaultSCI()->set_guard(true);
 	
-	statechart->raise_e();
-	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_B));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_done());
+	checkDone(true);
 	
 }

@@ -1,4 +1,3 @@
-package tests
 testclass OperationsWithoutBraces for statechart OperationsWithoutBraces{
 	@Test
 	operation OperationsWithoutBracesTest(){ 

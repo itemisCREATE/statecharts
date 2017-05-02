@@ -38,54 +38,20 @@ public class PerformanceTestsTest {
 	
 	@Test
 	public void testTest_100_000() {
-		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.mr_A));
-		 
-		while (statemachine.getC() < 100000l) {
-			if (statemachine.isStateActive(State.mr_A)) {
-				statemachine.raiseE1();
-			}
-			else {
-				if (statemachine.getC()%2l == 0l) {
-					statemachine.raiseE2();
-				}
-				else {
-					statemachine.raiseE3();
-				}
-			}
-			statemachine.runCycle();
-		}
-		assertTrue(statemachine.getA() > 2l);
-		 
+		performance(100000l);
 	}
 	@Test
 	public void testTest_1_000_000() {
-		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.mr_A));
-		 
-		while (statemachine.getC() < 1000000l) {
-			if (statemachine.isStateActive(State.mr_A)) {
-				statemachine.raiseE1();
-			}
-			else {
-				if (statemachine.getC()%2l == 0l) {
-					statemachine.raiseE2();
-				}
-				else {
-					statemachine.raiseE3();
-				}
-			}
-			statemachine.runCycle();
-		}
-		assertTrue(statemachine.getA() > 2l);
-		 
+		performance(1000000l);
 	}
 	@Test
 	public void testTest_10_000_000() {
+		performance(10000000l);
+	}
+	public void performance(long perf) {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A));
-		 
-		while (statemachine.getC() < 10000000l) {
+		while (statemachine.getC() < perf) {
 			if (statemachine.isStateActive(State.mr_A)) {
 				statemachine.raiseE1();
 			}
@@ -100,6 +66,5 @@ public class PerformanceTestsTest {
 			statemachine.runCycle();
 		}
 		assertTrue(statemachine.getA() > 2l);
-		 
 	}
 }

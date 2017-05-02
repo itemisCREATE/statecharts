@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, syncJoin_C2_Waits) {					
 	syncJoin_enter(&handle);
 	EXPECT_TRUE(syncJoin_isStateActive(&handle, SyncJoin_main_region_B));

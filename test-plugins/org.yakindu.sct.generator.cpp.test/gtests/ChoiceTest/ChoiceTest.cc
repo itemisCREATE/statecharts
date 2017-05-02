@@ -25,18 +25,39 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+void initForEventE(bool valueForC){
+	statechart->enter();
+	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
+	statechart->getDefaultSCI()->set_c(valueForC);
+	statechart->raise_e();
+	statechart->runCycle();
+}
+void initForEventF(bool valueForC){
+	statechart->enter();
+	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
+	statechart->getDefaultSCI()->set_c(valueForC);
+	statechart->raise_f();
+	statechart->runCycle();
+}
+void initForEventG(bool valueForC){
+	statechart->enter();
+	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
+	statechart->getDefaultSCI()->set_c(valueForC);
+	statechart->raise_g();
+	statechart->runCycle();
+}
+void initForEventH(bool valueForC){
+	statechart->enter();
+	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
+	statechart->getDefaultSCI()->set_c(valueForC);
+	statechart->raise_h();
+	statechart->runCycle();
+}
+
 TEST_F(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
 	
 	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	
-	statechart->getDefaultSCI()->set_c(true);
-	
-	statechart->raise_e();
-	
-	statechart->runCycle();
+	initForEventE(true);
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
 	
@@ -44,15 +65,7 @@ TEST_F(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
 TEST_F(StatemachineTest, elseChoiceUsingDefaultTransition) {
 	
 	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	
-	statechart->getDefaultSCI()->set_c(false);
-	
-	statechart->raise_e();
-	
-	statechart->runCycle();
+	initForEventE(false);
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
 	
@@ -60,15 +73,7 @@ TEST_F(StatemachineTest, elseChoiceUsingDefaultTransition) {
 TEST_F(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
 	
 	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	
-	statechart->getDefaultSCI()->set_c(true);
-	
-	statechart->raise_g();
-	
-	statechart->runCycle();
+	initForEventG(true);
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
 	
@@ -76,15 +81,7 @@ TEST_F(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
 TEST_F(StatemachineTest, defaultChoiceUsingDefaultTransition) {
 	
 	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	
-	statechart->getDefaultSCI()->set_c(false);
-	
-	statechart->raise_g();
-	
-	statechart->runCycle();
+	initForEventG(false);
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
 	
@@ -92,15 +89,7 @@ TEST_F(StatemachineTest, defaultChoiceUsingDefaultTransition) {
 TEST_F(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
 	
 	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	
-	statechart->getDefaultSCI()->set_c(true);
-	
-	statechart->raise_f();
-	
-	statechart->runCycle();
+	initForEventF(true);
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
 	
@@ -108,15 +97,7 @@ TEST_F(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
 TEST_F(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
 	
 	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	
-	statechart->getDefaultSCI()->set_c(false);
-	
-	statechart->raise_f();
-	
-	statechart->runCycle();
+	initForEventF(false);
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_B));
 	
@@ -124,15 +105,7 @@ TEST_F(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
 TEST_F(StatemachineTest, alwaysTrueTransitionInChoice) {
 	
 	
-	statechart->enter();
-	
-	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
-	
-	statechart->getDefaultSCI()->set_c(true);
-	
-	statechart->raise_h();
-	
-	statechart->runCycle();
+	initForEventH(true);
 	
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_C));
 	

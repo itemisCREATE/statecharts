@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, guardTest) {					
 	guard_enter(&handle);
 	EXPECT_TRUE(guard_isStateActive(&handle, Guard_main_region_A));

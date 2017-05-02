@@ -20,21 +20,22 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
-TEST_F(StatemachineTest, enterThroughInitialEntry) {					
+void init(){
 	historyWithoutInitialStep_enter(&handle);
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_A));
 	historyWithoutInitialStepIface_raise_toB(&handle);
 	historyWithoutInitialStep_runCycle(&handle);
+}
+
+TEST_F(StatemachineTest, enterThroughInitialEntry) {					
+	init();
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_C));
 	historyWithoutInitialStepIface_raise_next(&handle);
 	historyWithoutInitialStep_runCycle(&handle);
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_D));
 }
 TEST_F(StatemachineTest, enterCThroughHistory) {					
-	historyWithoutInitialStep_enter(&handle);
-	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_A));
-	historyWithoutInitialStepIface_raise_toB(&handle);
-	historyWithoutInitialStep_runCycle(&handle);
+	init();
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_C));
 	historyWithoutInitialStepIface_raise_toA(&handle);
 	historyWithoutInitialStep_runCycle(&handle);
@@ -44,10 +45,7 @@ TEST_F(StatemachineTest, enterCThroughHistory) {
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_C));
 }
 TEST_F(StatemachineTest, enterDThroughHistory) {					
-	historyWithoutInitialStep_enter(&handle);
-	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_A));
-	historyWithoutInitialStepIface_raise_toB(&handle);
-	historyWithoutInitialStep_runCycle(&handle);
+	init();
 	historyWithoutInitialStepIface_raise_next(&handle);
 	historyWithoutInitialStep_runCycle(&handle);
 	EXPECT_TRUE(historyWithoutInitialStep_isStateActive(&handle, HistoryWithoutInitialStep_main_region_B_r1_D));

@@ -40,10 +40,8 @@ public class TimedTransitionsTest {
 	public void testTimer01() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
-		 
 		try {Thread.sleep(2030);} catch (InterruptedException e) {}
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_End));
-		 
 	}
 }

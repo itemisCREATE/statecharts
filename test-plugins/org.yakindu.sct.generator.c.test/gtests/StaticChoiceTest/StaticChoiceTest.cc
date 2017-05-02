@@ -20,6 +20,7 @@ class StatemachineTest : public ::testing::Test{
 	}
 };
 
+
 TEST_F(StatemachineTest, StaticChoiceTest) {					
 	staticChoice_enter(&handle);
 	EXPECT_TRUE(staticChoice_isStateActive(&handle, StaticChoice_main_region_Start));

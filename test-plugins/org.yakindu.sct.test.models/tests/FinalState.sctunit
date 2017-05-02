@@ -1,4 +1,3 @@
-package tests
 testclass FinalState for statechart FinalState{
 	@Test
 	operation StatechartNameTest(){ 

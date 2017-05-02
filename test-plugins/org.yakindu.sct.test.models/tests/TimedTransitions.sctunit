@@ -1,4 +1,3 @@
-package tests
 testclass TimedTransitions for statechart TimedTransitions{
 	@Test
 	operation Timer01(){

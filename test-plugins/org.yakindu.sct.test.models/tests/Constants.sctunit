@@ -1,4 +1,3 @@
-package tests
 testclass ConstantsTests for statechart Constants {
 	@Test
 	operation constantDefinition(){ 
