@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.provider.PropertyItemProvider;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -147,6 +148,11 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
+				(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS,
+				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
 				 StextFactory.eINSTANCE.createEventRaisingExpression()));
 
@@ -159,6 +165,11 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 			(createChildParameter
 				(StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
 				 StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -249,6 +260,29 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 			(createChildParameter
 				(StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
 				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS ||
+			childFeature == StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

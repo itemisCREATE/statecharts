@@ -10,11 +10,6 @@
  */
 package org.yakindu.sct.simulation.core.sexec.container;
 
-import static org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters.CYCLE_PERIOD;
-import static org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters.DEFAULT_CYCLE_PERIOD;
-import static org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters.DEFAULT_IS_CYCLE_BASED;
-import static org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters.IS_CYCLE_BASED;
-
 import java.util.Collections;
 
 import org.eclipse.core.runtime.CoreException;
@@ -30,9 +25,12 @@ import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
+import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -44,18 +42,16 @@ import com.google.inject.Injector;
  */
 public class DefaultSimulationEngineFactory implements ISimulationEngineFactory {
 
+	private static final int DEFAULT_CYCLE_PERIOD = 200;
+	private static final String CYCLE_BASED_ANNOTATION = "CycleBased";
+	private static final String EVENT_DRIVEN_ANNOTATION = "EventDriven";
 	@Inject
 	private Injector injector;
+	@Inject
+	private IStatementInterpreter interpreter;
 
 	public ISimulationEngine createExecutionContainer(Statechart statechart, ILaunch launch) throws CoreException {
-		ISimulationEngine controller = null;
-		boolean isCycleBased = launch.getLaunchConfiguration().getAttribute(IS_CYCLE_BASED, DEFAULT_IS_CYCLE_BASED);
-		if (isCycleBased) {
-			long cyclePeriod = launch.getLaunchConfiguration().getAttribute(CYCLE_PERIOD, DEFAULT_CYCLE_PERIOD);
-			controller = new CycleBasedSimulationEngine(statechart, cyclePeriod);
-		} else {
-			controller = new EventDrivenSimulationEngine(statechart);
-		}
+		ISimulationEngine controller = createController(statechart);
 		injector.injectMembers(controller);
 
 		// For restoring execution context
@@ -68,11 +64,26 @@ public class DefaultSimulationEngineFactory implements ISimulationEngineFactory 
 		return controller;
 	}
 
+	protected ISimulationEngine createController(Statechart statechart) throws CoreException {
+		ArgumentedAnnotation cycleBased = (ArgumentedAnnotation) statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
+		ArgumentedAnnotation eventDriven = (ArgumentedAnnotation) statechart
+				.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
+		if (cycleBased != null) {
+			Long result = (Long) interpreter.evaluateStatement(cycleBased.getArgs().get(0),
+					SRuntimeFactory.eINSTANCE.createExecutionContext());
+			return new CycleBasedSimulationEngine(statechart, result);
+		}
+		if (eventDriven != null) {
+			return new EventDrivenSimulationEngine(statechart);
+		}
+		return new CycleBasedSimulationEngine(statechart, DEFAULT_CYCLE_PERIOD);
+	}
+
 	protected ExecutionContext restore(String context, Statechart statechart) {
 		try {
 			ResourceSet set = new ResourceSetImpl();
 			Resource resource = set.createResource(URI.createURI("snapshot.xmi"));
-			if(resource == null)
+			if (resource == null)
 				return null;
 			set.getResources().add(resource);
 			resource.load(new URIConverter.ReadableInputStream(context, "UTF_8"), Collections.emptyMap());

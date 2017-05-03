@@ -22,6 +22,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.types.TypesFactory;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -173,6 +174,7 @@ public class StatechartItemProvider
 			childrenFeatures.add(SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS);
 			childrenFeatures.add(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES);
 			childrenFeatures.add(SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS);
+			childrenFeatures.add(SGraphPackage.Literals.STATECHART__ANNOTATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -236,6 +238,7 @@ public class StatechartItemProvider
 			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
 			case SGraphPackage.STATECHART__SCOPES:
 			case SGraphPackage.STATECHART__REGIONS:
+			case SGraphPackage.STATECHART__ANNOTATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -267,6 +270,11 @@ public class StatechartItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS,
 				 SGraphFactory.eINSTANCE.createRegion()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.STATECHART__ANNOTATIONS,
+				 TypesFactory.eINSTANCE.createAnnotation()));
 	}
 
 }

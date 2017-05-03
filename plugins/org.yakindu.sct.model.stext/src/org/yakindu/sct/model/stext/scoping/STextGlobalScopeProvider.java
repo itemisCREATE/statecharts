@@ -50,6 +50,9 @@ import com.google.inject.Provider;
  */
 public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 
+	public static final URI STEXT_LIB = URI
+			.createURI("platform:/plugin/org.yakindu.sct.model.stext.lib/lib/STextLib.xmi");
+
 	@Inject
 	private ITypeSystem typeSystem;
 	@Inject
@@ -58,6 +61,8 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	private IResourceScopeCache cache;
 	@Inject
 	private DefaultGlobalScopeProvider delegate;
+	@Inject
+	private STextLibraryGlobalScopeProvider libraryScope;
 
 	public void setCache(IResourceScopeCache cache) {
 		this.cache = cache;
@@ -72,6 +77,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		IScope parentScope = super.getScope(context, reference, filter);
 		parentScope = new SimpleScope(parentScope, delegate.getScope(context, reference, filter).getAllElements());
 		parentScope = filterExternalDeclarations(context, parentScope);
+		parentScope = new SimpleScope(parentScope, libraryScope.getScope(context, reference, filter).getAllElements());
 		final Statechart statechart = getStatechart(context);
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
 				reference.getEReferenceType());

@@ -2,18 +2,13 @@
  */
 package org.yakindu.base.types.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.yakindu.base.types.Annotation;
-import org.yakindu.base.types.Property;
+import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.TypesPackage;
 
 /**
@@ -24,32 +19,21 @@ import org.yakindu.base.types.TypesPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.base.types.impl.AnnotationImpl#getProperties <em>Properties</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.AnnotationImpl#getTargets <em>Targets</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.AnnotationImpl#getType <em>Type</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class AnnotationImpl extends PackageMemberImpl implements Annotation {
+public class AnnotationImpl extends EObjectImpl implements Annotation {
 	/**
-	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getProperties()
+	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Property> properties;
-
-	/**
-	 * The cached value of the '{@link #getTargets() <em>Targets</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTargets()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EObject> targets;
+	protected AnnotationType type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,11 +59,16 @@ public class AnnotationImpl extends PackageMemberImpl implements Annotation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Property> getProperties() {
-		if (properties == null) {
-			properties = new EObjectContainmentEList<Property>(Property.class, this, TypesPackage.ANNOTATION__PROPERTIES);
+	public AnnotationType getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (AnnotationType)eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.ANNOTATION__TYPE, oldType, type));
+			}
 		}
-		return properties;
+		return type;
 	}
 
 	/**
@@ -87,11 +76,8 @@ public class AnnotationImpl extends PackageMemberImpl implements Annotation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EObject> getTargets() {
-		if (targets == null) {
-			targets = new EObjectResolvingEList<EObject>(EObject.class, this, TypesPackage.ANNOTATION__TARGETS);
-		}
-		return targets;
+	public AnnotationType basicGetType() {
+		return type;
 	}
 
 	/**
@@ -99,13 +85,11 @@ public class AnnotationImpl extends PackageMemberImpl implements Annotation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TypesPackage.ANNOTATION__PROPERTIES:
-				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+	public void setType(AnnotationType newType) {
+		AnnotationType oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.ANNOTATION__TYPE, oldType, type));
 	}
 
 	/**
@@ -116,10 +100,9 @@ public class AnnotationImpl extends PackageMemberImpl implements Annotation {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.ANNOTATION__PROPERTIES:
-				return getProperties();
-			case TypesPackage.ANNOTATION__TARGETS:
-				return getTargets();
+			case TypesPackage.ANNOTATION__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -129,17 +112,11 @@ public class AnnotationImpl extends PackageMemberImpl implements Annotation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.ANNOTATION__PROPERTIES:
-				getProperties().clear();
-				getProperties().addAll((Collection<? extends Property>)newValue);
-				return;
-			case TypesPackage.ANNOTATION__TARGETS:
-				getTargets().clear();
-				getTargets().addAll((Collection<? extends EObject>)newValue);
+			case TypesPackage.ANNOTATION__TYPE:
+				setType((AnnotationType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -153,11 +130,8 @@ public class AnnotationImpl extends PackageMemberImpl implements Annotation {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.ANNOTATION__PROPERTIES:
-				getProperties().clear();
-				return;
-			case TypesPackage.ANNOTATION__TARGETS:
-				getTargets().clear();
+			case TypesPackage.ANNOTATION__TYPE:
+				setType((AnnotationType)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -171,10 +145,8 @@ public class AnnotationImpl extends PackageMemberImpl implements Annotation {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.ANNOTATION__PROPERTIES:
-				return properties != null && !properties.isEmpty();
-			case TypesPackage.ANNOTATION__TARGETS:
-				return targets != null && !targets.isEmpty();
+			case TypesPackage.ANNOTATION__TYPE:
+				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}

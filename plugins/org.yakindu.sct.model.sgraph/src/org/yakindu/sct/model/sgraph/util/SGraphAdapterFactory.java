@@ -209,12 +209,12 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 				return createDomainElementAdapter();
 			}
 			@Override
-			public Adapter caseTypedElement(TypedElement object) {
-				return createTypedElementAdapter();
-			}
-			@Override
 			public Adapter caseAnnotatableElement(AnnotatableElement object) {
 				return createAnnotatableElementAdapter();
+			}
+			@Override
+			public Adapter caseTypedElement(TypedElement object) {
+				return createTypedElementAdapter();
 			}
 			@Override
 			public Adapter casePackageMember(PackageMember object) {

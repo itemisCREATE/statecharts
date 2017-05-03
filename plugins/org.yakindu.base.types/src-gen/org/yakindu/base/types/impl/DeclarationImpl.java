@@ -11,7 +11,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
@@ -34,8 +35,8 @@ import org.yakindu.base.types.TypesUtil;
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getTypeSpecifier <em>Type Specifier</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getAnnotations <em>Annotations</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,16 +73,6 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAnnotations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Annotation> annotations;
-
-	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,6 +81,16 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Annotation> annotations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -203,9 +204,25 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 */
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
-			annotations = new EObjectResolvingEList<Annotation>(Annotation.class, this, TypesPackage.DECLARATION__ANNOTATIONS);
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.DECLARATION__ANNOTATIONS);
 		}
 		return annotations;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> 
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Annotation getAnnotationOfType(final String typeName) {
+		EList<Annotation> annotations = getAnnotations();
+		for (Annotation annotation : annotations) {
+			if (typeName.equals(annotation.getType().getName())) {
+				return annotation;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -223,10 +240,10 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return getTypeSpecifier();
 			case TypesPackage.DECLARATION__NAME:
 				return getName();
-			case TypesPackage.DECLARATION__ANNOTATIONS:
-				return getAnnotations();
 			case TypesPackage.DECLARATION__ID:
 				return getId();
+			case TypesPackage.DECLARATION__ANNOTATIONS:
+				return getAnnotations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -289,10 +306,10 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return typeSpecifier != null;
 			case TypesPackage.DECLARATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case TypesPackage.DECLARATION__ANNOTATIONS:
-				return annotations != null && !annotations.isEmpty();
 			case TypesPackage.DECLARATION__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+			case TypesPackage.DECLARATION__ANNOTATIONS:
+				return annotations != null && !annotations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -312,13 +329,13 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		if (baseClass == AnnotatableElement.class) {
 			switch (derivedFeatureID) {
-				case TypesPackage.DECLARATION__ANNOTATIONS: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS;
 				default: return -1;
 			}
 		}
 		if (baseClass == PackageMember.class) {
 			switch (derivedFeatureID) {
 				case TypesPackage.DECLARATION__ID: return TypesPackage.PACKAGE_MEMBER__ID;
+				case TypesPackage.DECLARATION__ANNOTATIONS: return TypesPackage.PACKAGE_MEMBER__ANNOTATIONS;
 				default: return -1;
 			}
 		}
@@ -340,13 +357,13 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		}
 		if (baseClass == AnnotatableElement.class) {
 			switch (baseFeatureID) {
-				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return TypesPackage.DECLARATION__ANNOTATIONS;
 				default: return -1;
 			}
 		}
 		if (baseClass == PackageMember.class) {
 			switch (baseFeatureID) {
 				case TypesPackage.PACKAGE_MEMBER__ID: return TypesPackage.DECLARATION__ID;
+				case TypesPackage.PACKAGE_MEMBER__ANNOTATIONS: return TypesPackage.DECLARATION__ANNOTATIONS;
 				default: return -1;
 			}
 		}
@@ -389,6 +406,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		switch (featureID) {
 			case TypesPackage.DECLARATION__TYPE_SPECIFIER:
 				return basicSetTypeSpecifier(null, msgs);
+			case TypesPackage.DECLARATION__ANNOTATIONS:
+				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

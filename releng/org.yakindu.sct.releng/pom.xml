@@ -409,6 +409,7 @@
 		<module>../../plugins/org.yakindu.sct.model.sgraph.edit</module>
 		<module>../../plugins/org.yakindu.sct.model.sgraph.ui</module>
 		<module>../../plugins/org.yakindu.sct.model.stext</module>
+		<module>../../plugins/org.yakindu.sct.model.stext.lib</module>
 		<module>../../plugins/org.yakindu.sct.model.stext.edit</module>
 		<module>../../plugins/org.yakindu.sct.model.resource</module>
 		<module>../../plugins/org.yakindu.sct.model.stext.ui</module>

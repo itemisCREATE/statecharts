@@ -75,6 +75,7 @@ import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
+import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
@@ -555,6 +556,14 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	@Check(CheckType.FAST)
+	public void checkAnnotationArguments(ArgumentedAnnotation annotation) {
+		if (annotation.getArgs().size() != annotation.getType().getProperties().size()) {
+			error(String.format(WRONG_NUMBER_OF_ARGUMENTS_MSG, annotation.getType().getProperties()), null,
+					WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		}
+	}
+
+	@Check(CheckType.FAST)
 	public void checkOperationArguments_TypedElementReferenceExpression(final ElementReferenceExpression call) {
 		if (call.getReference() instanceof Operation) {
 			Operation operation = (Operation) call.getReference();
@@ -566,15 +575,15 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		EList<Parameter> parameters = operation.getParameters();
 		if ((operation.isVariadic() && operation.getVarArgIndex() > args.size())
 				|| !operation.isVariadic() && parameters.size() != args.size()) {
-			error(String.format(WRONG_NUMBER_OF_OPERATIONARGUMENTS, parameters), null);
+			error(String.format(WRONG_NUMBER_OF_ARGUMENTS_MSG, parameters), null, WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		}
 	}
 
 	@Check(CheckType.FAST)
 	public void checkVarArgParameterIsLast(Operation operation) {
 		if (operation.isVariadic() && operation.getVarArgIndex() != operation.getParameters().size() - 1) {
-			error(VAR_ARGS_LAST_MSG, operation.getParameters().get(operation.getVarArgIndex()),
-					null, VAR_ARGS_LAST_CODE);
+			error(VAR_ARGS_LAST_MSG, operation.getParameters().get(operation.getVarArgIndex()), null,
+					VAR_ARGS_LAST_CODE);
 		}
 	}
 
@@ -764,7 +773,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkAnnotationTarget(final AnnotatableElement element) {
 		EList<Annotation> annotations = element.getAnnotations();
 		for (Annotation annotation : annotations) {
-			EList<EObject> targets = annotation.getTargets();
+			EList<EObject> targets = annotation.getType().getTargets();
 			boolean found = Iterables.any(targets, new Predicate<EObject>() {
 				@Override
 				public boolean apply(EObject input) {
@@ -772,8 +781,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				}
 			});
 			if (!found) {
-				error(String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getName(), element.eClass()),
-						TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
+				error(String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getType().getName(),
+						element.eClass()), null,
 						element.getAnnotations().indexOf(annotation), ERROR_WRONG_ANNOTATION_TARGET_CODE);
 			}
 		}

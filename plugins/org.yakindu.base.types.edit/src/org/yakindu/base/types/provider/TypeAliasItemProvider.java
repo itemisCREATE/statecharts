@@ -70,7 +70,6 @@ public class TypeAliasItemProvider
 
 			addTypePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
-			addAnnotationsPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
 			addAbstractPropertyDescriptor(object);
 			addVisiblePropertyDescriptor(object);
@@ -118,28 +117,6 @@ public class TypeAliasItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Annotations feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAnnotationsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AnnotatableElement_annotations_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AnnotatableElement_annotations_feature", "_UI_AnnotatableElement_type"),
-				 TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}
@@ -223,6 +200,7 @@ public class TypeAliasItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER);
+			childrenFeatures.add(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS);
 			childrenFeatures.add(TypesPackage.Literals.TYPE__CONSTRAINT);
 		}
 		return childrenFeatures;
@@ -298,6 +276,7 @@ public class TypeAliasItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER:
+			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -325,6 +304,11 @@ public class TypeAliasItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER,
 				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS,
+				 TypesFactory.eINSTANCE.createAnnotation()));
 
 		newChildDescriptors.add
 			(createChildParameter

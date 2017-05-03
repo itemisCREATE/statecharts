@@ -12,8 +12,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Direction;
@@ -99,8 +99,8 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.DOMAIN: return createDomain();
 			case TypesPackage.TYPE_ALIAS: return createTypeAlias();
 			case TypesPackage.ANNOTATION: return createAnnotation();
-			case TypesPackage.ANNOTATABLE_ELEMENT: return createAnnotatableElement();
 			case TypesPackage.ARRAY_TYPE_SPECIFIER: return createArrayTypeSpecifier();
+			case TypesPackage.ANNOTATION_TYPE: return createAnnotationType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -331,9 +331,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AnnotatableElement createAnnotatableElement() {
-		AnnotatableElementImpl annotatableElement = new AnnotatableElementImpl();
-		return annotatableElement;
+	public ArrayTypeSpecifier createArrayTypeSpecifier() {
+		ArrayTypeSpecifierImpl arrayTypeSpecifier = new ArrayTypeSpecifierImpl();
+		return arrayTypeSpecifier;
 	}
 
 	/**
@@ -341,9 +341,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArrayTypeSpecifier createArrayTypeSpecifier() {
-		ArrayTypeSpecifierImpl arrayTypeSpecifier = new ArrayTypeSpecifierImpl();
-		return arrayTypeSpecifier;
+	public AnnotationType createAnnotationType() {
+		AnnotationTypeImpl annotationType = new AnnotationTypeImpl();
+		return annotationType;
 	}
 
 	/**

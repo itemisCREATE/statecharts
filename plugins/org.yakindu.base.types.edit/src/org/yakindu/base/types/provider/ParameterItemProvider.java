@@ -70,7 +70,6 @@ public class ParameterItemProvider
 
 			addTypePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
-			addAnnotationsPropertyDescriptor(object);
 			addVarArgsPropertyDescriptor(object);
 			addOptionalPropertyDescriptor(object);
 		}
@@ -117,28 +116,6 @@ public class ParameterItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Annotations feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAnnotationsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_AnnotatableElement_annotations_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_AnnotatableElement_annotations_feature", "_UI_AnnotatableElement_type"),
-				 TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}
@@ -200,6 +177,7 @@ public class ParameterItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER);
+			childrenFeatures.add(TypesPackage.Literals.PARAMETER__ANNOTATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -260,6 +238,7 @@ public class ParameterItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.PARAMETER__TYPE_SPECIFIER:
+			case TypesPackage.PARAMETER__ANNOTATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -286,6 +265,11 @@ public class ParameterItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER,
 				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PARAMETER__ANNOTATIONS,
+				 TypesFactory.eINSTANCE.createAnnotation()));
 	}
 
 	/**

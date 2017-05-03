@@ -18,7 +18,9 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.yakindu.base.types.TypeAlias;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.provider.TypeAliasItemProvider;
+import org.yakindu.sct.model.stext.stext.StextFactory;
 
 /**
  * This is the item provider adapter for a
@@ -112,6 +114,11 @@ public class TypeAliasDefinitionItemProvider extends TypeAliasItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS,
+				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
 	}
 
 	/**

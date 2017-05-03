@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<types:Package
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:types="http://www.yakindu.org/base/types/2.0.0"
+    xsi:schemaLocation="http://www.yakindu.org/base/types/2.0.0 ../../org.yakindu.base.types/model/types.ecore"
+    name="">
+  <member xsi:type="types:AnnotationType"
+      name="EventDriven"/>
+  <member xsi:type="types:AnnotationType"
+      name="CycleBased">
+    <properties
+        name="period">
+      <typeSpecifier
+          type="//@member.2"/>
+    </properties>
+  </member>
+  <member xsi:type="types:PrimitiveType"
+      name="integer"/>
+  <member xsi:type="types:AnnotationType"
+      name="ExecutionOrder">
+    <properties
+        name="order">
+      <typeSpecifier
+          type="//@member.4"/>
+    </properties>
+  </member>
+  <member xsi:type="types:EnumerationType"
+      name="ExecutionOrder">
+    <enumerator
+        name="CHILD_FIRST"/>
+    <enumerator
+        name="PARENT_FIRST"/>
+  </member>
+</types:Package>

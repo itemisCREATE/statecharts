@@ -7,7 +7,6 @@
 package org.yakindu.base.types.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -15,8 +14,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
@@ -38,10 +38,10 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getTypeSpecifier <em>Type Specifier</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getOwningOperation <em>Owning Operation</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#isVarArgs <em>Var Args</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#isOptional <em>Optional</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getAnnotations <em>Annotations</em>}</li>
  * </ul>
  *
  * @generated
@@ -76,16 +76,6 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAnnotations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Annotation> annotations;
 
 	/**
 	 * The default value of the '{@link #isVarArgs() <em>Var Args</em>}' attribute.
@@ -126,6 +116,16 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * @ordered
 	 */
 	protected boolean optional = OPTIONAL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Annotation> annotations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -239,9 +239,25 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 */
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
-			annotations = new EObjectResolvingEList<Annotation>(Annotation.class, this, TypesPackage.PARAMETER__ANNOTATIONS);
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.PARAMETER__ANNOTATIONS);
 		}
 		return annotations;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> 
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Annotation getAnnotationOfType(final String typeName) {
+		EList<Annotation> annotations = getAnnotations();
+		for (Annotation annotation : annotations) {
+			if (typeName.equals(annotation.getType().getName())) {
+				return annotation;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -355,6 +371,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return basicSetTypeSpecifier(null, msgs);
 			case TypesPackage.PARAMETER__OWNING_OPERATION:
 				return basicSetOwningOperation(null, msgs);
+			case TypesPackage.PARAMETER__ANNOTATIONS:
+				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -388,14 +406,14 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return getTypeSpecifier();
 			case TypesPackage.PARAMETER__NAME:
 				return getName();
-			case TypesPackage.PARAMETER__ANNOTATIONS:
-				return getAnnotations();
 			case TypesPackage.PARAMETER__OWNING_OPERATION:
 				return getOwningOperation();
 			case TypesPackage.PARAMETER__VAR_ARGS:
 				return isVarArgs();
 			case TypesPackage.PARAMETER__OPTIONAL:
 				return isOptional();
+			case TypesPackage.PARAMETER__ANNOTATIONS:
+				return getAnnotations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -415,10 +433,6 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 			case TypesPackage.PARAMETER__NAME:
 				setName((String)newValue);
 				return;
-			case TypesPackage.PARAMETER__ANNOTATIONS:
-				getAnnotations().clear();
-				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
-				return;
 			case TypesPackage.PARAMETER__OWNING_OPERATION:
 				setOwningOperation((Operation)newValue);
 				return;
@@ -427,6 +441,10 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return;
 			case TypesPackage.PARAMETER__OPTIONAL:
 				setOptional((Boolean)newValue);
+				return;
+			case TypesPackage.PARAMETER__ANNOTATIONS:
+				getAnnotations().clear();
+				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -446,9 +464,6 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 			case TypesPackage.PARAMETER__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case TypesPackage.PARAMETER__ANNOTATIONS:
-				getAnnotations().clear();
-				return;
 			case TypesPackage.PARAMETER__OWNING_OPERATION:
 				setOwningOperation((Operation)null);
 				return;
@@ -457,6 +472,9 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return;
 			case TypesPackage.PARAMETER__OPTIONAL:
 				setOptional(OPTIONAL_EDEFAULT);
+				return;
+			case TypesPackage.PARAMETER__ANNOTATIONS:
+				getAnnotations().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -476,14 +494,14 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return typeSpecifier != null;
 			case TypesPackage.PARAMETER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case TypesPackage.PARAMETER__ANNOTATIONS:
-				return annotations != null && !annotations.isEmpty();
 			case TypesPackage.PARAMETER__OWNING_OPERATION:
 				return getOwningOperation() != null;
 			case TypesPackage.PARAMETER__VAR_ARGS:
 				return varArgs != VAR_ARGS_EDEFAULT;
 			case TypesPackage.PARAMETER__OPTIONAL:
 				return optional != OPTIONAL_EDEFAULT;
+			case TypesPackage.PARAMETER__ANNOTATIONS:
+				return annotations != null && !annotations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -503,7 +521,6 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 		}
 		if (baseClass == AnnotatableElement.class) {
 			switch (derivedFeatureID) {
-				case TypesPackage.PARAMETER__ANNOTATIONS: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS;
 				default: return -1;
 			}
 		}
@@ -525,7 +542,6 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 		}
 		if (baseClass == AnnotatableElement.class) {
 			switch (baseFeatureID) {
-				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return TypesPackage.PARAMETER__ANNOTATIONS;
 				default: return -1;
 			}
 		}

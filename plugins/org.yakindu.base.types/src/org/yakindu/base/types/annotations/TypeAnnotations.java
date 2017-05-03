@@ -13,6 +13,7 @@ package org.yakindu.base.types.annotations;
 
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.TypesFactory;
 
 import com.google.common.base.Predicate;
@@ -28,8 +29,8 @@ public class TypeAnnotations {
 	private static final String INDEX_OPERATION = "IndexOperation";
 	private static final String BUILT_IN_TYPE = "Built-In-Type";
 
-	public Annotation createBuiltInTypeAnnotation() {
-		Annotation builtInAnnotation = TypesFactory.eINSTANCE.createAnnotation();
+	public AnnotationType createBuiltInTypeAnnotationType() {
+		AnnotationType builtInAnnotation = TypesFactory.eINSTANCE.createAnnotationType();
 		builtInAnnotation.setName(BUILT_IN_TYPE);
 		return builtInAnnotation;
 	}
@@ -38,8 +39,8 @@ public class TypeAnnotations {
 		return hasAnnotation(element, BUILT_IN_TYPE);
 	}
 
-	public Annotation createIndexOperationAnnotation() {
-		Annotation indexAnnotation = TypesFactory.eINSTANCE.createAnnotation();
+	public AnnotationType createIndexOperationAnnotationType() {
+		AnnotationType indexAnnotation = TypesFactory.eINSTANCE.createAnnotationType();
 		indexAnnotation.setName(INDEX_OPERATION);
 		return indexAnnotation;
 	}
@@ -52,7 +53,7 @@ public class TypeAnnotations {
 		return Iterables.any(element.getAnnotations(), new Predicate<Annotation>() {
 			@Override
 			public boolean apply(Annotation input) {
-				return input.getName().equals(name);
+				return input.getType().getName().equals(name);
 			}
 		});
 	}

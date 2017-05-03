@@ -14,6 +14,7 @@ package org.yakindu.sct.model.stext.resource;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.parser.IParseResult;
+import org.yakindu.base.types.Annotation;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -21,6 +22,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
+import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
@@ -48,10 +50,17 @@ public class StextResource extends AbstractSCTResource {
 			builder.append("namespace " + statechart.getNamespace());
 			builder.append("\n");
 		}
+		for(Annotation annotation : statechart.getAnnotations()){
+			builder.append(serialize(annotation));
+			builder.append("\n");
+		}
+
 		for (Scope scope : statechart.getScopes()) {
 			builder.append(serialize(scope));
 			builder.append("\n");
 		}
+		
+		
 		statechart.setSpecification(builder.toString());
 	}
 
@@ -91,14 +100,20 @@ public class StextResource extends AbstractSCTResource {
 
 	protected void parseStatechart(Statechart statechart) {
 		IParseResult parseResult = parse(statechart, StatechartSpecification.class.getSimpleName());
-
 		StatechartSpecification rootASTElement = (StatechartSpecification) parseResult.getRootASTElement();
-		EList<Scope> definitionScopes = rootASTElement.getScopes();
-		statechart.getScopes().clear();
 		statechart.setNamespace(rootASTElement.getNamespace());
+		statechart.getScopes().clear();
+		EList<Scope> definitionScopes = rootASTElement.getScopes();
 		if (definitionScopes != null) {
 			statechart.getScopes().addAll(definitionScopes);
 		}
+		
+		statechart.getAnnotations().clear();
+		EList<ArgumentedAnnotation> annotations = rootASTElement.getAnnotations();
+		if(annotations != null){
+			statechart.getAnnotations().addAll(annotations);
+		}
+		
 	}
 
 	protected void parseState(State state) {

@@ -515,29 +515,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.AnnotatableElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AnnotatableElementItemProvider annotatableElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.base.types.AnnotatableElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAnnotatableElementAdapter() {
-		if (annotatableElementItemProvider == null) {
-			annotatableElementItemProvider = new AnnotatableElementItemProvider(this);
-		}
-
-		return annotatableElementItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.ArrayTypeSpecifier} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -558,6 +535,29 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		}
 
 		return arrayTypeSpecifierItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.AnnotationType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AnnotationTypeItemProvider annotationTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.AnnotationType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAnnotationTypeAdapter() {
+		if (annotationTypeItemProvider == null) {
+			annotationTypeItemProvider = new AnnotationTypeItemProvider(this);
+		}
+
+		return annotationTypeItemProvider;
 	}
 
 	/**
@@ -678,8 +678,8 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (domainItemProvider != null) domainItemProvider.dispose();
 		if (typeAliasItemProvider != null) typeAliasItemProvider.dispose();
 		if (annotationItemProvider != null) annotationItemProvider.dispose();
-		if (annotatableElementItemProvider != null) annotatableElementItemProvider.dispose();
 		if (arrayTypeSpecifierItemProvider != null) arrayTypeSpecifierItemProvider.dispose();
+		if (annotationTypeItemProvider != null) annotationTypeItemProvider.dispose();
 	}
 
 }
