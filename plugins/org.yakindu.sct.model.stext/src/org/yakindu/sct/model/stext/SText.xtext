@@ -27,8 +27,6 @@ TransitionRoot:
 /* ---- start rules ----
 Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
 */
-ScopedElement returns sgraph::ScopedElement:
-	StatechartSpecification;
 
 StatechartSpecification:
 	{StatechartSpecification} ('namespace' namespace=FQN)?
@@ -41,17 +39,11 @@ StateSpecification:
 TransitionSpecification:
 	reaction=TransitionReaction;
 
-Scope returns sgraph::Scope:
-	(StateScope | StatechartScope);
-
 StateScope returns sgraph::Scope:
 	{SimpleScope} (reactions+=(LocalReaction))*;
 
 StatechartScope:
 	InterfaceScope | InternalScope | ImportScope;
-
-NamedInterfaceScope returns base::NamedElement:
-	InterfaceScope;
 
 InterfaceScope:
 	{InterfaceScope} 'interface' (name=XID)? ':' (declarations+=InterfaceScopeDeclaration)*;
@@ -70,9 +62,6 @@ ImportScope:
 
 QID:
 	ID ('.' ID)*;
-
-Declaration returns types::Declaration:
-	EventDefinition | VariableDefinition | OperationDefinition | TypeAliasDefinition;
 
 EventDefinition:
 	(direction=Direction)? 'event' name=XID (':' typeSpecifier=TypeSpecifier)?;
@@ -100,9 +89,6 @@ TypeSpecifier returns types::TypeSpecifier:
 
 Parameter returns types::Parameter:
 	 name=XID (varArgs?='...')? ':' typeSpecifier=TypeSpecifier;
-
-Reaction returns sgraph::Reaction:
-	LocalReaction | TransitionReaction;
 
 LocalReaction:
 	(trigger=ReactionTrigger) => ('/' effect=ReactionEffect);
