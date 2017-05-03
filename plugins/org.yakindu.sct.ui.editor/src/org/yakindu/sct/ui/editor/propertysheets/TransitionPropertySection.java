@@ -28,7 +28,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Layout;
-import org.eclipse.swt.widgets.Text;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Transition;
@@ -44,8 +43,8 @@ import com.google.inject.Injector;
 public class TransitionPropertySection extends AbstractTwoColumnEditorPropertySection {
 
 	private Control textControl;
-	private Text txtDoc;
 
+	@Override
 	protected Layout createLeftColumnLayout() {
 		return new GridLayout(2, false);
 	}
@@ -69,10 +68,15 @@ public class TransitionPropertySection extends AbstractTwoColumnEditorPropertySe
 
 	@Override
 	protected void createRightColumnControls(Composite parent) {
-		Label lblDocumentation = getToolkit().createLabel(parent, "Documentation: ");
-		txtDoc = getToolkit().createText(parent, "", SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
-		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblDocumentation);
-		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(txtDoc);
+	    createDocumentationControl(parent);
+	}
+	
+	@Override
+	protected void createDocumentationControl(Composite parent) {
+        Label lblDocumentation = getToolkit().createLabel(parent, "Documentation: ");
+        documentation = getToolkit().createText(parent, "", SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
+        GridDataFactory.fillDefaults().span(2, 1).applyTo(lblDocumentation);
+        GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).minSize(100, documentation.getLineHeight() * 3).applyTo(documentation);
 	}
 
 	@Override
@@ -92,7 +96,7 @@ public class TransitionPropertySection extends AbstractTwoColumnEditorPropertySe
 		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION);
 		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
-				txtDoc);
+		        documentation);
 		context.bindValue(observe, property.observe(eObject));
 
 	}

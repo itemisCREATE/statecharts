@@ -10,11 +10,14 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets;
 
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Layout;
+import org.eclipse.swt.widgets.Text;
 
 /**
  * 
@@ -24,7 +27,9 @@ import org.eclipse.swt.widgets.Layout;
 public abstract class AbstractTwoColumnEditorPropertySection extends
 		AbstractEditorPropertySection {
 
-	protected abstract void createRightColumnControls(Composite rightColumn);
+    protected Text documentation;
+
+    protected abstract void createRightColumnControls(Composite rightColumn);
 
 	protected abstract void createLeftColumnControls(Composite leftColumn);
 
@@ -56,5 +61,12 @@ public abstract class AbstractTwoColumnEditorPropertySection extends
 	protected Layout createRightColumnLayout() {
 		return createBodyLayout();
 	}
+
+    protected void createDocumentationControl(Composite parent) {
+        Label lblDocumentation = getToolkit().createLabel(parent, "Documentation: ");
+        documentation = getToolkit().createText(parent, "", SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
+        GridDataFactory.fillDefaults().applyTo(lblDocumentation);
+        GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).minSize(100, documentation.getLineHeight() * 3).applyTo(documentation);
+    }
 
 }
