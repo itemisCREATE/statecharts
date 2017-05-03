@@ -6,28 +6,36 @@
 * 	Thomas Kutz - itemis AG
 *
 */
-package org.yakindu.sct.model.stext.test.util
+package org.yakindu.base.types.util
 
 import com.google.inject.Inject
+import java.util.List
+import org.yakindu.base.types.Enumerator
+import org.yakindu.base.types.Package
 import org.yakindu.base.types.Type
+import org.yakindu.base.types.TypeParameter
 import org.yakindu.base.types.TypeSpecifier
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.base.types.Enumerator
-import org.yakindu.base.types.Package
 
 class TypesTestFactory {
 	
 	public static final TypesTestFactory INSTANCE = new TypesTestFactory();
 	
 	@Inject 
-	protected ITypeSystem ts;
+	public ITypeSystem ts;
 	
 	protected TypesFactory factory = TypesFactory.eINSTANCE
 	
 	def Package createRootPackage(String filename) {
 		factory.createPackage => [
 			it.name = filename
+		]
+	}
+	
+	def createComplexType(String name) {
+		factory.createComplexType => [
+			it.name = name
 		]
 	}
 	

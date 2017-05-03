@@ -26,6 +26,7 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.TypesFactory
+import org.yakindu.base.types.util.TypesTestFactory
 import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.scoping.STextScopeProvider
