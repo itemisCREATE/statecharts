@@ -145,13 +145,22 @@ public interface TypesPackage extends EPackage {
 	int PACKAGE_MEMBER__ID = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE_MEMBER__ANNOTATIONS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Package Member</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_MEMBER_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int PACKAGE_MEMBER_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.TypeImpl <em>Type</em>}' class.
@@ -220,6 +229,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE__ID = PACKAGE_MEMBER__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__ANNOTATIONS = PACKAGE_MEMBER__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
@@ -565,13 +583,22 @@ public interface TypesPackage extends EPackage {
 	int PARAMETER__OPTIONAL = TYPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__ANNOTATIONS = TYPED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 4;
+	int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 5;
 
 
 	/**
@@ -724,6 +751,15 @@ public interface TypesPackage extends EPackage {
 	int PRIMITIVE_TYPE__ID = TYPE__ID;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__ANNOTATIONS = TYPE__ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -785,6 +821,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION_TYPE__ID = PRIMITIVE_TYPE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__ANNOTATIONS = PRIMITIVE_TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
@@ -877,6 +922,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPLEX_TYPE__ID = TYPE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE__ANNOTATIONS = TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
@@ -1081,6 +1135,15 @@ public interface TypesPackage extends EPackage {
 	int TYPE_PARAMETER__ID = TYPE__ID;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PARAMETER__ANNOTATIONS = TYPE__ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1273,13 +1336,22 @@ public interface TypesPackage extends EPackage {
 	int TYPE_ALIAS__ID = TYPED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__ANNOTATIONS = TYPED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__CONSTRAINT = TYPED_ELEMENT_FEATURE_COUNT + 2;
+	int TYPE_ALIAS__CONSTRAINT = TYPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1288,7 +1360,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__ABSTRACT = TYPED_ELEMENT_FEATURE_COUNT + 3;
+	int TYPE_ALIAS__ABSTRACT = TYPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Visible</b></em>' attribute.
@@ -1297,7 +1369,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS__VISIBLE = TYPED_ELEMENT_FEATURE_COUNT + 4;
+	int TYPE_ALIAS__VISIBLE = TYPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Type Alias</em>' class.
@@ -1306,7 +1378,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 5;
+	int TYPE_ALIAS_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.AnnotationImpl <em>Annotation</em>}' class.
@@ -1428,6 +1500,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ANNOTATION_TYPE__ID = TYPE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_TYPE__ANNOTATIONS = TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
@@ -1590,17 +1671,6 @@ public interface TypesPackage extends EPackage {
 	EClass getDeclaration();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.Declaration#getAnnotations <em>Annotations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Annotations</em>'.
-	 * @see org.yakindu.base.types.Declaration#getAnnotations()
-	 * @see #getDeclaration()
-	 * @generated
-	 */
-	EReference getDeclaration_Annotations();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1717,6 +1787,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getParameter_Optional();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.Parameter#getAnnotations <em>Annotations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Annotations</em>'.
+	 * @see org.yakindu.base.types.Parameter#getAnnotations()
+	 * @see #getParameter()
+	 * @generated
+	 */
+	EReference getParameter_Annotations();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}'.
@@ -1994,6 +2075,17 @@ public interface TypesPackage extends EPackage {
 	EAttribute getPackageMember_Id();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.PackageMember#getAnnotations <em>Annotations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Annotations</em>'.
+	 * @see org.yakindu.base.types.PackageMember#getAnnotations()
+	 * @see #getPackageMember()
+	 * @generated
+	 */
+	EReference getPackageMember_Annotations();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.RangeConstraint <em>Range Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2251,14 +2343,6 @@ public interface TypesPackage extends EPackage {
 		EClass DECLARATION = eINSTANCE.getDeclaration();
 
 		/**
-		 * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DECLARATION__ANNOTATIONS = eINSTANCE.getDeclaration_Annotations();
-
-		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.OperationImpl <em>Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2351,6 +2435,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARAMETER__OPTIONAL = eINSTANCE.getParameter_Optional();
+
+		/**
+		 * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETER__ANNOTATIONS = eINSTANCE.getParameter_Annotations();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}' class.
@@ -2581,6 +2673,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PACKAGE_MEMBER__ID = eINSTANCE.getPackageMember_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PACKAGE_MEMBER__ANNOTATIONS = eINSTANCE.getPackageMember_Annotations();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.RangeConstraintImpl <em>Range Constraint</em>}' class.

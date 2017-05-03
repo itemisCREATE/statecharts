@@ -2,6 +2,7 @@
  */
 package org.yakindu.base.types;
 
+import org.eclipse.emf.common.util.EList;
 import org.yakindu.base.base.NamedElement;
 
 /**
@@ -14,6 +15,7 @@ import org.yakindu.base.base.NamedElement;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.types.PackageMember#getId <em>Id</em>}</li>
+ *   <li>{@link org.yakindu.base.types.PackageMember#getAnnotations <em>Annotations</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getPackageMember()
@@ -36,5 +38,21 @@ public interface PackageMember extends NamedElement, AnnotatableElement {
 	 * @generated
 	 */
 	String getId();
+
+	/**
+	 * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
+	 * The list contents are of type {@link org.yakindu.base.types.Annotation}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Annotations</em>' containment reference list.
+	 * @see org.yakindu.base.types.TypesPackage#getPackageMember_Annotations()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Annotation> getAnnotations();
 
 } // PackageMember

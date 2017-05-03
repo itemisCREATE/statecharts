@@ -3,6 +3,7 @@
 package org.yakindu.base.types.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -334,6 +335,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		if (baseClass == PackageMember.class) {
 			switch (derivedFeatureID) {
 				case TypesPackage.DECLARATION__ID: return TypesPackage.PACKAGE_MEMBER__ID;
+				case TypesPackage.DECLARATION__ANNOTATIONS: return TypesPackage.PACKAGE_MEMBER__ANNOTATIONS;
 				default: return -1;
 			}
 		}
@@ -361,6 +363,7 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		if (baseClass == PackageMember.class) {
 			switch (baseFeatureID) {
 				case TypesPackage.PACKAGE_MEMBER__ID: return TypesPackage.DECLARATION__ID;
+				case TypesPackage.PACKAGE_MEMBER__ANNOTATIONS: return TypesPackage.DECLARATION__ANNOTATIONS;
 				default: return -1;
 			}
 		}

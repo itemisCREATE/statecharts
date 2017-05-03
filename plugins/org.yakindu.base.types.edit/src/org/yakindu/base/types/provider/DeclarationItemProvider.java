@@ -147,7 +147,7 @@ public class DeclarationItemProvider extends ItemProviderAdapter implements IEdi
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER);
-			childrenFeatures.add(TypesPackage.Literals.DECLARATION__ANNOTATIONS);
+			childrenFeatures.add(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -224,7 +224,7 @@ public class DeclarationItemProvider extends ItemProviderAdapter implements IEdi
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.DECLARATION__ANNOTATIONS,
+				(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS,
 				 TypesFactory.eINSTANCE.createAnnotation()));
 	}
 

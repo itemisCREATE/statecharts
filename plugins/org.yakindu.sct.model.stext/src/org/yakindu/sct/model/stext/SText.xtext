@@ -85,7 +85,8 @@ TypeAliasDefinition:
 	{TypeAliasDefinition} 'alias' name=XID ':' typeSpecifier=TypeSpecifier;
 
 OperationDefinition:
-	{OperationDefinition} 'operation' name=XID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':'
+	{OperationDefinition} 
+	'operation' name=XID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':'
 	typeSpecifier=TypeSpecifier)?;
 	
 ArgumentedAnnotation returns types::Annotation:

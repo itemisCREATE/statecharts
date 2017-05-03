@@ -177,6 +177,7 @@ public class ParameterItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER);
+			childrenFeatures.add(TypesPackage.Literals.PARAMETER__ANNOTATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -237,6 +238,7 @@ public class ParameterItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.PARAMETER__TYPE_SPECIFIER:
+			case TypesPackage.PARAMETER__ANNOTATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -263,6 +265,11 @@ public class ParameterItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.TYPED_ELEMENT__TYPE_SPECIFIER,
 				 TypesFactory.eINSTANCE.createArrayTypeSpecifier()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PARAMETER__ANNOTATIONS,
+				 TypesFactory.eINSTANCE.createAnnotation()));
 	}
 
 	/**

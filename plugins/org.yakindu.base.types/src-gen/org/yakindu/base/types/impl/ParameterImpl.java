@@ -6,6 +6,7 @@
  */
 package org.yakindu.base.types.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -13,7 +14,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
@@ -38,6 +41,7 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getOwningOperation <em>Owning Operation</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#isVarArgs <em>Var Args</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#isOptional <em>Optional</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getAnnotations <em>Annotations</em>}</li>
  * </ul>
  *
  * @generated
@@ -112,6 +116,16 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * @ordered
 	 */
 	protected boolean optional = OPTIONAL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Annotation> annotations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -224,20 +238,26 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * @generated
 	 */
 	public EList<Annotation> getAnnotations() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (annotations == null) {
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.PARAMETER__ANNOTATIONS);
+		}
+		return annotations;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc --> 
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * 
+	 * @generated NOT
 	 */
-	public Annotation getAnnotationOfType(String typeName) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public Annotation getAnnotationOfType(final String typeName) {
+		EList<Annotation> annotations = getAnnotations();
+		for (Annotation annotation : annotations) {
+			if (typeName.equals(annotation.getType().getName())) {
+				return annotation;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -351,6 +371,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return basicSetTypeSpecifier(null, msgs);
 			case TypesPackage.PARAMETER__OWNING_OPERATION:
 				return basicSetOwningOperation(null, msgs);
+			case TypesPackage.PARAMETER__ANNOTATIONS:
+				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -390,6 +412,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return isVarArgs();
 			case TypesPackage.PARAMETER__OPTIONAL:
 				return isOptional();
+			case TypesPackage.PARAMETER__ANNOTATIONS:
+				return getAnnotations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -399,6 +423,7 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -416,6 +441,10 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return;
 			case TypesPackage.PARAMETER__OPTIONAL:
 				setOptional((Boolean)newValue);
+				return;
+			case TypesPackage.PARAMETER__ANNOTATIONS:
+				getAnnotations().clear();
+				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -444,6 +473,9 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 			case TypesPackage.PARAMETER__OPTIONAL:
 				setOptional(OPTIONAL_EDEFAULT);
 				return;
+			case TypesPackage.PARAMETER__ANNOTATIONS:
+				getAnnotations().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -468,6 +500,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return varArgs != VAR_ARGS_EDEFAULT;
 			case TypesPackage.PARAMETER__OPTIONAL:
 				return optional != OPTIONAL_EDEFAULT;
+			case TypesPackage.PARAMETER__ANNOTATIONS:
+				return annotations != null && !annotations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
