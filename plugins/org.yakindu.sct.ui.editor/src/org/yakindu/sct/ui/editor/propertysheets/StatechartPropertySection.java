@@ -57,7 +57,6 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 	private Control textControl;
 	private Text txtName;
 	protected OrderElementControl orderElementControl;
-	private Text documentation;
 	private ComboViewer domainCombo;
 
 	@Override
@@ -120,13 +119,6 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		orderElementControl = new OrderElementControl(rightColumn, SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS,
 				this, "Statechart contains no regions");
 		GridDataFactory.fillDefaults().span(2, 0).grab(true, false).applyTo(orderElementControl);
-	}
-
-	protected void createDocumentationControl(Composite parent) {
-		Label lblDocumentation = getToolkit().createLabel(parent, "Documentation: ");
-		documentation = getToolkit().createText(parent, "", SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
-		GridDataFactory.fillDefaults().applyTo(lblDocumentation);
-		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(documentation);
 	}
 
 	protected void createSpecificationControl(final Composite parent) {

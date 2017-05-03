@@ -29,7 +29,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Layout;
-import org.eclipse.swt.widgets.Text;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
@@ -47,7 +46,6 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 
 	private Control txtSpecification;
 	private Control txtName;
-	private Text txtDoc;
 
 	private OrderElementControl orderElementControl;
 
@@ -82,13 +80,6 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblName);
 		new Label(parent, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(txtName);
-	}
-
-	protected void createDocumentationControl(Composite parent) {
-		Label lblDocumentation = getToolkit().createLabel(parent, "Documentation: ");
-		txtDoc = getToolkit().createText(parent, "", SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
-		GridDataFactory.fillDefaults().applyTo(lblDocumentation);
-		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(txtDoc);
 	}
 
 	protected void createSpecificationControl(final Composite parent) {
@@ -130,7 +121,7 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION);
 		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection })
-				.observe(txtDoc);
+				.observe(documentation);
 		context.bindValue(observe, property.observe(eObject));
 	}
 
