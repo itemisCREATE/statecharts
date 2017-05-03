@@ -180,7 +180,7 @@ public class GuardItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.GUARD__EXPRESSION,
-				 StextFactory.eINSTANCE.createAnnotationDefinition()));
+				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
 
 		newChildDescriptors.add
 			(createChildParameter

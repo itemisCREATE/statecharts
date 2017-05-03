@@ -25,7 +25,7 @@ public interface StatechartSpecification extends ScopedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Annotation</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.sct.model.stext.stext.AnnotationDefinition}.
+	 * The list contents are of type {@link org.yakindu.sct.model.stext.stext.ArgumentedAnnotation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Annotation</em>' containment reference list isn't clear,
@@ -37,5 +37,5 @@ public interface StatechartSpecification extends ScopedElement {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<AnnotationDefinition> getAnnotation();
+	EList<ArgumentedAnnotation> getAnnotation();
 } // StatechartSpecification

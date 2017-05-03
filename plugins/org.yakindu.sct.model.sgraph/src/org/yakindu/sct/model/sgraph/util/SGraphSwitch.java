@@ -281,13 +281,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(importDeclaration);
 				if (result == null) result = casePackageMember(importDeclaration);
 				if (result == null) result = caseNamedElement(importDeclaration);
-				if (result == null) result = caseTypes_AnnotatableElement(importDeclaration);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SGraphPackage.ANNOTATABLE_ELEMENT: {
-				org.yakindu.sct.model.sgraph.AnnotatableElement annotatableElement = (org.yakindu.sct.model.sgraph.AnnotatableElement)theEObject;
-				T result = caseAnnotatableElement(annotatableElement);
+				if (result == null) result = caseAnnotatableElement(importDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -371,6 +365,21 @@ public class SGraphSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Annotatable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Annotatable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAnnotatableElement(AnnotatableElement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Typed Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -382,21 +391,6 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElement(TypedElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Annotatable Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Annotatable Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypes_AnnotatableElement(AnnotatableElement object) {
 		return null;
 	}
 
@@ -532,21 +526,6 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseImportDeclaration(ImportDeclaration object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Annotatable Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Annotatable Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAnnotatableElement(org.yakindu.sct.model.sgraph.AnnotatableElement object) {
 		return null;
 	}
 

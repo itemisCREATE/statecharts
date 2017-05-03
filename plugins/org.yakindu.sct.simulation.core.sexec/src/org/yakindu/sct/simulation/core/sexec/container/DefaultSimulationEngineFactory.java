@@ -25,7 +25,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.stext.stext.AnnotationDefinition;
+import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
@@ -65,8 +65,8 @@ public class DefaultSimulationEngineFactory implements ISimulationEngineFactory 
 	}
 
 	protected ISimulationEngine createController(Statechart statechart) throws CoreException {
-		AnnotationDefinition cycleBased = (AnnotationDefinition) statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
-		AnnotationDefinition eventDriven = (AnnotationDefinition) statechart
+		ArgumentedAnnotation cycleBased = (ArgumentedAnnotation) statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
+		ArgumentedAnnotation eventDriven = (ArgumentedAnnotation) statechart
 				.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
 		if (cycleBased != null) {
 			Long result = (Long) interpreter.evaluateStatement(cycleBased.getArgs().get(0),

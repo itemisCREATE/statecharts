@@ -10,32 +10,30 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Annotatable Element</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.yakindu.base.types.AnnotatableElement#getAnnotations <em>Annotations</em>}</li>
- * </ul>
  *
  * @see org.yakindu.base.types.TypesPackage#getAnnotatableElement()
- * @model
+ * @model interface="true" abstract="true"
  * @generated
  */
 public interface AnnotatableElement extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.base.types.Annotation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Annotations</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Annotations</em>' containment reference list.
-	 * @see org.yakindu.base.types.TypesPackage#getAnnotatableElement_Annotations()
-	 * @model containment="true"
+	 * @model kind="operation"
 	 * @generated
 	 */
 	EList<Annotation> getAnnotations();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Annotation getAnnotationOfType(String typeName);
 
 } // AnnotatableElement

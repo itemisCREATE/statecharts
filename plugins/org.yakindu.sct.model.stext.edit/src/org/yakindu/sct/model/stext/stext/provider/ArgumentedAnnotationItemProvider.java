@@ -21,24 +21,24 @@ import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 
 import org.yakindu.base.types.provider.AnnotationItemProvider;
 
-import org.yakindu.sct.model.stext.stext.AnnotationDefinition;
+import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.AnnotationDefinition} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.ArgumentedAnnotation} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class AnnotationDefinitionItemProvider extends AnnotationItemProvider {
+public class ArgumentedAnnotationItemProvider extends AnnotationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AnnotationDefinitionItemProvider(AdapterFactory adapterFactory) {
+	public ArgumentedAnnotationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -88,14 +88,14 @@ public class AnnotationDefinitionItemProvider extends AnnotationItemProvider {
 	}
 
 	/**
-	 * This returns AnnotationDefinition.gif.
+	 * This returns ArgumentedAnnotation.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/AnnotationDefinition"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ArgumentedAnnotation"));
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class AnnotationDefinitionItemProvider extends AnnotationItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_AnnotationDefinition_type");
+		return getString("_UI_ArgumentedAnnotation_type");
 	}
 	
 
@@ -121,8 +121,8 @@ public class AnnotationDefinitionItemProvider extends AnnotationItemProvider {
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(AnnotationDefinition.class)) {
-			case StextPackage.ANNOTATION_DEFINITION__ARGS:
+		switch (notification.getFeatureID(ArgumentedAnnotation.class)) {
+			case StextPackage.ARGUMENTED_ANNOTATION__ARGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -158,7 +158,7 @@ public class AnnotationDefinitionItemProvider extends AnnotationItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createAnnotationDefinition()));
+				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
 
 		newChildDescriptors.add
 			(createChildParameter

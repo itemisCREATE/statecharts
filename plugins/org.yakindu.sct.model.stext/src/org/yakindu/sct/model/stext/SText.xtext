@@ -18,13 +18,13 @@ DefRoot:
 	StatechartRoot | StateRoot | TransitionRoot;
 
 StatechartRoot:
-	'§§statechart§§' def=StatechartSpecification;
+	'@@statechart@@' def=StatechartSpecification;
 
 StateRoot:
-	'§§state§§' def=StateSpecification;
+	'@@state@@' def=StateSpecification;
 
 TransitionRoot:
-	'§§transition§§' def=TransitionSpecification;
+	'@@transition@@' def=TransitionSpecification;
 /* ---- start rules ----
 Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
 */
@@ -33,7 +33,7 @@ ScopedElement returns sgraph::ScopedElement:
 
 StatechartSpecification:
 	{StatechartSpecification} ('namespace' namespace=FQN)?
-	(annotation+=AnnotationDefinition)*
+	(annotations+=ArgumentedAnnotation)*
 	(scopes+=StatechartScope)*;
 
 StateSpecification:
@@ -88,8 +88,8 @@ OperationDefinition:
 	{OperationDefinition} 'operation' name=XID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':'
 	typeSpecifier=TypeSpecifier)?;
 	
-AnnotationDefinition returns types::Annotation:
-	{AnnotationDefinition} '@' type=[types::AnnotationType|QID] ('('(args+=Expression (',' args+=Expression)*)? ')')?
+ArgumentedAnnotation returns types::Annotation:
+	{ArgumentedAnnotation} '@' type=[types::AnnotationType|QID] ('('(args+=Expression (',' args+=Expression)*)? ')')?
 ;
 TypeSpecifier returns types::TypeSpecifier:
 	type=[types::Type|FQN] ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)*'>'))?;

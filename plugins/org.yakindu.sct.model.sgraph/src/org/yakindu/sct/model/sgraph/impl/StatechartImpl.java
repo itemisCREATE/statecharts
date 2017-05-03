@@ -27,7 +27,6 @@ import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Annotation;
-import org.yakindu.sct.model.sgraph.AnnotatableElement;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
@@ -538,9 +537,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				default: return -1;
 			}
 		}
-		if (baseClass == AnnotatableElement.class) {
+		if (baseClass == org.yakindu.base.types.AnnotatableElement.class) {
 			switch (derivedFeatureID) {
-				case SGraphPackage.STATECHART__ANNOTATIONS: return SGraphPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS;
 				default: return -1;
 			}
 		}
@@ -590,9 +588,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				default: return -1;
 			}
 		}
-		if (baseClass == AnnotatableElement.class) {
+		if (baseClass == org.yakindu.base.types.AnnotatableElement.class) {
 			switch (baseFeatureID) {
-				case SGraphPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return SGraphPackage.STATECHART__ANNOTATIONS;
 				default: return -1;
 			}
 		}

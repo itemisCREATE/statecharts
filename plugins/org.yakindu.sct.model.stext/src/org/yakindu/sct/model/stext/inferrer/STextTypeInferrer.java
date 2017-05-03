@@ -25,7 +25,7 @@ import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Property;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
-import org.yakindu.sct.model.stext.stext.AnnotationDefinition;
+import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Guard;
@@ -122,7 +122,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		return getResultFor(BOOLEAN);
 	}
 
-	public InferenceResult doInfer(AnnotationDefinition ad) {
+	public InferenceResult doInfer(ArgumentedAnnotation ad) {
 		EList<Expression> arguments = ad.getArgs();
 		inferAnnotationProperty(ad.getType(), arguments);
 		return getResultFor(VOID);

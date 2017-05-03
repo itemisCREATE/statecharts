@@ -35,7 +35,6 @@ import org.yakindu.base.types.TypesUtil;
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getTypeSpecifier <em>Type Specifier</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isAbstract <em>Abstract</em>}</li>
@@ -72,16 +71,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAnnotations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Annotation> annotations;
 
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -245,10 +234,20 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	 * @generated
 	 */
 	public EList<Annotation> getAnnotations() {
-		if (annotations == null) {
-			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, TypesPackage.TYPE_ALIAS__ANNOTATIONS);
-		}
-		return annotations;
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Annotation getAnnotationOfType(String typeName) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -323,8 +322,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 		switch (featureID) {
 			case TypesPackage.TYPE_ALIAS__TYPE_SPECIFIER:
 				return basicSetTypeSpecifier(null, msgs);
-			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
-				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
 				return ((InternalEList<?>)getConstraint()).basicRemove(otherEnd, msgs);
 		}
@@ -345,8 +342,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return getTypeSpecifier();
 			case TypesPackage.TYPE_ALIAS__NAME:
 				return getName();
-			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
-				return getAnnotations();
 			case TypesPackage.TYPE_ALIAS__ID:
 				return getId();
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
@@ -372,10 +367,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return;
 			case TypesPackage.TYPE_ALIAS__NAME:
 				setName((String)newValue);
-				return;
-			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
-				getAnnotations().clear();
-				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
 				return;
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
 				getConstraint().clear();
@@ -404,9 +395,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 			case TypesPackage.TYPE_ALIAS__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
-				getAnnotations().clear();
-				return;
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
 				getConstraint().clear();
 				return;
@@ -433,8 +421,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 				return typeSpecifier != null;
 			case TypesPackage.TYPE_ALIAS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case TypesPackage.TYPE_ALIAS__ANNOTATIONS:
-				return annotations != null && !annotations.isEmpty();
 			case TypesPackage.TYPE_ALIAS__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
@@ -461,7 +447,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 		}
 		if (baseClass == AnnotatableElement.class) {
 			switch (derivedFeatureID) {
-				case TypesPackage.TYPE_ALIAS__ANNOTATIONS: return TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS;
 				default: return -1;
 			}
 		}
@@ -496,7 +481,6 @@ public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 		}
 		if (baseClass == AnnotatableElement.class) {
 			switch (baseFeatureID) {
-				case TypesPackage.ANNOTATABLE_ELEMENT__ANNOTATIONS: return TypesPackage.TYPE_ALIAS__ANNOTATIONS;
 				default: return -1;
 			}
 		}

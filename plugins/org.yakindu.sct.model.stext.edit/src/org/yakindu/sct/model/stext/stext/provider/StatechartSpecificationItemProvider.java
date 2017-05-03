@@ -179,7 +179,7 @@ public class StatechartSpecificationItemProvider extends ScopedElementItemProvid
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.STATECHART_SPECIFICATION__ANNOTATION,
-				 StextFactory.eINSTANCE.createAnnotationDefinition()));
+				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
 	}
 
   /**

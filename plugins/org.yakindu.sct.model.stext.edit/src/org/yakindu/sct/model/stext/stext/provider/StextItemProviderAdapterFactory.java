@@ -919,26 +919,26 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 	}
 
   /**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.AnnotationDefinition} instances.
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ArgumentedAnnotation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AnnotationDefinitionItemProvider annotationDefinitionItemProvider;
+	protected ArgumentedAnnotationItemProvider argumentedAnnotationItemProvider;
 
 		/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.AnnotationDefinition}.
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ArgumentedAnnotation}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createAnnotationDefinitionAdapter() {
-		if (annotationDefinitionItemProvider == null) {
-			annotationDefinitionItemProvider = new AnnotationDefinitionItemProvider(this);
+	public Adapter createArgumentedAnnotationAdapter() {
+		if (argumentedAnnotationItemProvider == null) {
+			argumentedAnnotationItemProvider = new ArgumentedAnnotationItemProvider(this);
 		}
 
-		return annotationDefinitionItemProvider;
+		return argumentedAnnotationItemProvider;
 	}
 
 		/**
@@ -1084,7 +1084,7 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 		if (eventRaisingExpressionItemProvider != null) eventRaisingExpressionItemProvider.dispose();
 		if (eventValueReferenceExpressionItemProvider != null) eventValueReferenceExpressionItemProvider.dispose();
 		if (activeStateReferenceExpressionItemProvider != null) activeStateReferenceExpressionItemProvider.dispose();
-		if (annotationDefinitionItemProvider != null) annotationDefinitionItemProvider.dispose();
+		if (argumentedAnnotationItemProvider != null) argumentedAnnotationItemProvider.dispose();
 	}
 
 }

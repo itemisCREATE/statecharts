@@ -9,6 +9,7 @@ package org.yakindu.base.types.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -352,6 +353,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EClass getDeclaration() {
 		return declarationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDeclaration_Annotations() {
+		return (EReference)declarationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -756,15 +766,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAnnotatableElement_Annotations() {
-		return (EReference)annotatableElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getArrayTypeSpecifier() {
 		return arrayTypeSpecifierEClass;
 	}
@@ -851,6 +852,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEAttribute(typeEClass, TYPE__VISIBLE);
 
 		declarationEClass = createEClass(DECLARATION);
+		createEReference(declarationEClass, DECLARATION__ANNOTATIONS);
 
 		operationEClass = createEClass(OPERATION);
 		createEReference(operationEClass, OPERATION__PARAMETERS);
@@ -916,7 +918,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(annotationEClass, ANNOTATION__TYPE);
 
 		annotatableElementEClass = createEClass(ANNOTATABLE_ELEMENT);
-		createEReference(annotatableElementEClass, ANNOTATABLE_ELEMENT__ANNOTATIONS);
 
 		arrayTypeSpecifierEClass = createEClass(ARRAY_TYPE_SPECIFIER);
 		createEAttribute(arrayTypeSpecifierEClass, ARRAY_TYPE_SPECIFIER__SIZE);
@@ -1000,6 +1001,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		addEOperation(typeEClass, this.getType(), "getOriginType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(declarationEClass, Declaration.class, "Declaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDeclaration_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, Declaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperation_Parameters(), this.getParameter(), this.getParameter_OwningOperation(), "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1068,8 +1070,12 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(annotationEClass, Annotation.class, "Annotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnnotation_Type(), this.getAnnotationType(), null, "type", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(annotatableElementEClass, AnnotatableElement.class, "AnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAnnotatableElement_Annotations(), this.getAnnotation(), null, "annotations", null, 0, -1, AnnotatableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(annotatableElementEClass, AnnotatableElement.class, "AnnotatableElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(annotatableElementEClass, this.getAnnotation(), "getAnnotations", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		EOperation op = addEOperation(annotatableElementEClass, this.getAnnotation(), "getAnnotationOfType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "typeName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(arrayTypeSpecifierEClass, ArrayTypeSpecifier.class, "ArrayTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getArrayTypeSpecifier_Size(), ecorePackage.getEInt(), "size", null, 0, 1, ArrayTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

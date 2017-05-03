@@ -17,7 +17,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="#//TypedElement base.ecore#//NamedElement #//PackageMember"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="#//TypedElement base.ecore#//NamedElement #//PackageMember">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//Annotation" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Declaration #//GenericElement">
     <eOperations name="getVarArgIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
@@ -102,9 +105,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="Annotation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//AnnotationType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AnnotatableElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-        eType="#//Annotation" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotatableElement" abstract="true"
+      interface="true">
+    <eOperations name="getAnnotations" upperBound="-1" eType="#//Annotation"/>
+    <eOperations name="getAnnotationOfType" eType="#//Annotation">
+      <eParameters name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayTypeSpecifier" eSuperTypes="#//TypeSpecifier">
     <eOperations name="getElementType" eType="#//Type"/>

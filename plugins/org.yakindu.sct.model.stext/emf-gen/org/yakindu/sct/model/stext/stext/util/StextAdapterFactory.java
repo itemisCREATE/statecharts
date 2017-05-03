@@ -261,8 +261,8 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 				return createActiveStateReferenceExpressionAdapter();
 			}
 			@Override
-			public Adapter caseAnnotationDefinition(AnnotationDefinition object) {
-				return createAnnotationDefinitionAdapter();
+			public Adapter caseArgumentedAnnotation(ArgumentedAnnotation object) {
+				return createArgumentedAnnotationAdapter();
 			}
 			@Override
 			public Adapter caseScopedElement(ScopedElement object) {
@@ -855,16 +855,16 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.AnnotationDefinition <em>Annotation Definition</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.ArgumentedAnnotation <em>Argumented Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.stext.stext.AnnotationDefinition
+	 * @see org.yakindu.sct.model.stext.stext.ArgumentedAnnotation
 	 * @generated
 	 */
-	public Adapter createAnnotationDefinitionAdapter() {
+	public Adapter createArgumentedAnnotationAdapter() {
 		return null;
 	}
 

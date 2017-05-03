@@ -27,7 +27,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//ChoiceKind"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//SpecificationElement #//ReactiveElement #//ScopedElement #//CompositeElement ../../../org.yakindu.base.types/model/base.ecore#//NamedElement ../../../org.yakindu.base.types/model/base.ecore#//DocumentedElement ../../../org.yakindu.base.types/model/base.ecore#//DomainElement #//AnnotatableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//SpecificationElement #//ReactiveElement #//ScopedElement #//CompositeElement ../../../org.yakindu.base.types/model/base.ecore#//NamedElement ../../../org.yakindu.base.types/model/base.ecore#//DocumentedElement ../../../org.yakindu.base.types/model/base.ecore#//DomainElement ../../../org.yakindu.base.types/model/types.ecore#//AnnotatableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Annotation"
+        transient="true" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entry" eSuperTypes="#//Pseudostate">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//EntryKind"/>
   </eClassifiers>
@@ -95,13 +99,5 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImportDeclaration" eSuperTypes="../../../org.yakindu.base.types/model/types.ecore#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Declaration"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AnnotatableElement">
-    <eOperations name="getAnnotationOfType" eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Annotation">
-      <eParameters name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-        eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Annotation"
-        transient="true" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

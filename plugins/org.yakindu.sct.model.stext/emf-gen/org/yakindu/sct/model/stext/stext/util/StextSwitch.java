@@ -388,12 +388,12 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StextPackage.ANNOTATION_DEFINITION: {
-				AnnotationDefinition annotationDefinition = (AnnotationDefinition)theEObject;
-				T result = caseAnnotationDefinition(annotationDefinition);
-				if (result == null) result = caseAnnotation(annotationDefinition);
-				if (result == null) result = caseArgumentExpression(annotationDefinition);
-				if (result == null) result = caseExpression(annotationDefinition);
+			case StextPackage.ARGUMENTED_ANNOTATION: {
+				ArgumentedAnnotation argumentedAnnotation = (ArgumentedAnnotation)theEObject;
+				T result = caseArgumentedAnnotation(argumentedAnnotation);
+				if (result == null) result = caseAnnotation(argumentedAnnotation);
+				if (result == null) result = caseArgumentExpression(argumentedAnnotation);
+				if (result == null) result = caseExpression(argumentedAnnotation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -927,17 +927,17 @@ public class StextSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Annotation Definition</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Argumented Annotation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Annotation Definition</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Argumented Annotation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAnnotationDefinition(AnnotationDefinition object) {
+	public T caseArgumentedAnnotation(ArgumentedAnnotation object) {
 		return null;
 	}
 

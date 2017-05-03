@@ -197,15 +197,6 @@ public interface TypesFactory extends EFactory {
 	Annotation createAnnotation();
 
 	/**
-	 * Returns a new object of class '<em>Annotatable Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Annotatable Element</em>'.
-	 * @generated
-	 */
-	AnnotatableElement createAnnotatableElement();
-
-	/**
 	 * Returns a new object of class '<em>Array Type Specifier</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

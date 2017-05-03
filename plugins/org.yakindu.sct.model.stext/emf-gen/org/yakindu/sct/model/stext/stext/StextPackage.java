@@ -568,15 +568,6 @@ public interface StextPackage extends EPackage {
 	int EVENT_DEFINITION__NAME = TypesPackage.EVENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_DEFINITION__ANNOTATIONS = TypesPackage.EVENT__ANNOTATIONS;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -584,6 +575,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int EVENT_DEFINITION__ID = TypesPackage.EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_DEFINITION__ANNOTATIONS = TypesPackage.EVENT__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Direction</b></em>' attribute.
@@ -641,15 +641,6 @@ public interface StextPackage extends EPackage {
 	int VARIABLE_DEFINITION__NAME = TypesPackage.PROPERTY__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__ANNOTATIONS = TypesPackage.PROPERTY__ANNOTATIONS;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -657,6 +648,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DEFINITION__ID = TypesPackage.PROPERTY__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DEFINITION__ANNOTATIONS = TypesPackage.PROPERTY__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -741,15 +741,6 @@ public interface StextPackage extends EPackage {
 	int OPERATION_DEFINITION__NAME = TypesPackage.OPERATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_DEFINITION__ANNOTATIONS = TypesPackage.OPERATION__ANNOTATIONS;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -757,6 +748,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_DEFINITION__ID = TypesPackage.OPERATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_DEFINITION__ANNOTATIONS = TypesPackage.OPERATION__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -832,15 +832,6 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__NAME = TypesPackage.TYPE_ALIAS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS_DEFINITION__ANNOTATIONS = TypesPackage.TYPE_ALIAS__ANNOTATIONS;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -877,13 +868,22 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__VISIBLE = TypesPackage.TYPE_ALIAS__VISIBLE;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_DEFINITION__ANNOTATIONS = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Type Alias Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 0;
+	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl <em>Local Reaction</em>}' class.
@@ -1463,14 +1463,14 @@ public interface StextPackage extends EPackage {
 	int ACTIVE_STATE_REFERENCE_EXPRESSION_FEATURE_COUNT = ExpressionsPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.AnnotationDefinitionImpl <em>Annotation Definition</em>}' class.
+	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.ArgumentedAnnotationImpl <em>Argumented Annotation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.stext.stext.impl.AnnotationDefinitionImpl
-	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getAnnotationDefinition()
+	 * @see org.yakindu.sct.model.stext.stext.impl.ArgumentedAnnotationImpl
+	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getArgumentedAnnotation()
 	 * @generated
 	 */
-	int ANNOTATION_DEFINITION = 35;
+	int ARGUMENTED_ANNOTATION = 35;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1479,7 +1479,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_DEFINITION__TYPE = TypesPackage.ANNOTATION__TYPE;
+	int ARGUMENTED_ANNOTATION__TYPE = TypesPackage.ANNOTATION__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Args</b></em>' containment reference list.
@@ -1488,16 +1488,16 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_DEFINITION__ARGS = TypesPackage.ANNOTATION_FEATURE_COUNT + 0;
+	int ARGUMENTED_ANNOTATION__ARGS = TypesPackage.ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Annotation Definition</em>' class.
+	 * The number of structural features of the '<em>Argumented Annotation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_DEFINITION_FEATURE_COUNT = TypesPackage.ANNOTATION_FEATURE_COUNT + 1;
+	int ARGUMENTED_ANNOTATION_FEATURE_COUNT = TypesPackage.ANNOTATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.
@@ -2124,14 +2124,14 @@ public interface StextPackage extends EPackage {
 	EReference getActiveStateReferenceExpression_Value();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.AnnotationDefinition <em>Annotation Definition</em>}'.
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.ArgumentedAnnotation <em>Argumented Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Annotation Definition</em>'.
-	 * @see org.yakindu.sct.model.stext.stext.AnnotationDefinition
+	 * @return the meta object for class '<em>Argumented Annotation</em>'.
+	 * @see org.yakindu.sct.model.stext.stext.ArgumentedAnnotation
 	 * @generated
 	 */
-	EClass getAnnotationDefinition();
+	EClass getArgumentedAnnotation();
 
 	/**
 	 * Returns the meta object for enum '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}'.
@@ -2710,14 +2710,14 @@ public interface StextPackage extends EPackage {
 		EReference ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE = eINSTANCE.getActiveStateReferenceExpression_Value();
 
 		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.AnnotationDefinitionImpl <em>Annotation Definition</em>}' class.
+		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.ArgumentedAnnotationImpl <em>Argumented Annotation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.stext.stext.impl.AnnotationDefinitionImpl
-		 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getAnnotationDefinition()
+		 * @see org.yakindu.sct.model.stext.stext.impl.ArgumentedAnnotationImpl
+		 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getArgumentedAnnotation()
 		 * @generated
 		 */
-		EClass ANNOTATION_DEFINITION = eINSTANCE.getAnnotationDefinition();
+		EClass ARGUMENTED_ANNOTATION = eINSTANCE.getArgumentedAnnotation();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.

@@ -170,7 +170,7 @@ public class EventRaisingExpressionItemProvider extends ExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-				 StextFactory.eINSTANCE.createAnnotationDefinition()));
+				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -280,7 +280,7 @@ public class EventRaisingExpressionItemProvider extends ExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-				 StextFactory.eINSTANCE.createAnnotationDefinition()));
+				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
 
 		newChildDescriptors.add
 			(createChildParameter

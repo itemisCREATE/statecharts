@@ -128,7 +128,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 			case StextPackage.EVENT_RAISING_EXPRESSION: return createEventRaisingExpression();
 			case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION: return createEventValueReferenceExpression();
 			case StextPackage.ACTIVE_STATE_REFERENCE_EXPRESSION: return createActiveStateReferenceExpression();
-			case StextPackage.ANNOTATION_DEFINITION: return createAnnotationDefinition();
+			case StextPackage.ARGUMENTED_ANNOTATION: return createArgumentedAnnotation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -523,9 +523,9 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AnnotationDefinition createAnnotationDefinition() {
-		AnnotationDefinitionImpl annotationDefinition = new AnnotationDefinitionImpl();
-		return annotationDefinition;
+	public ArgumentedAnnotation createArgumentedAnnotation() {
+		ArgumentedAnnotationImpl argumentedAnnotation = new ArgumentedAnnotationImpl();
+		return argumentedAnnotation;
 	}
 
 	/**

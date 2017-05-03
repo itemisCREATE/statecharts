@@ -20,23 +20,23 @@ import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 
 import org.yakindu.base.types.impl.AnnotationImpl;
 
-import org.yakindu.sct.model.stext.stext.AnnotationDefinition;
+import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Annotation Definition</b></em>'.
+ * An implementation of the model object '<em><b>Argumented Annotation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.AnnotationDefinitionImpl#getArgs <em>Args</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.ArgumentedAnnotationImpl#getArgs <em>Args</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class AnnotationDefinitionImpl extends AnnotationImpl implements AnnotationDefinition {
+public class ArgumentedAnnotationImpl extends AnnotationImpl implements ArgumentedAnnotation {
 	/**
 	 * The cached value of the '{@link #getArgs() <em>Args</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -52,7 +52,7 @@ public class AnnotationDefinitionImpl extends AnnotationImpl implements Annotati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AnnotationDefinitionImpl() {
+	protected ArgumentedAnnotationImpl() {
 		super();
 	}
 
@@ -63,7 +63,7 @@ public class AnnotationDefinitionImpl extends AnnotationImpl implements Annotati
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StextPackage.Literals.ANNOTATION_DEFINITION;
+		return StextPackage.Literals.ARGUMENTED_ANNOTATION;
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class AnnotationDefinitionImpl extends AnnotationImpl implements Annotati
 	 */
 	public EList<Expression> getArgs() {
 		if (args == null) {
-			args = new EObjectContainmentEList<Expression>(Expression.class, this, StextPackage.ANNOTATION_DEFINITION__ARGS);
+			args = new EObjectContainmentEList<Expression>(Expression.class, this, StextPackage.ARGUMENTED_ANNOTATION__ARGS);
 		}
 		return args;
 	}
@@ -86,7 +86,7 @@ public class AnnotationDefinitionImpl extends AnnotationImpl implements Annotati
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StextPackage.ANNOTATION_DEFINITION__ARGS:
+			case StextPackage.ARGUMENTED_ANNOTATION__ARGS:
 				return ((InternalEList<?>)getArgs()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -100,7 +100,7 @@ public class AnnotationDefinitionImpl extends AnnotationImpl implements Annotati
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StextPackage.ANNOTATION_DEFINITION__ARGS:
+			case StextPackage.ARGUMENTED_ANNOTATION__ARGS:
 				return getArgs();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -115,7 +115,7 @@ public class AnnotationDefinitionImpl extends AnnotationImpl implements Annotati
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StextPackage.ANNOTATION_DEFINITION__ARGS:
+			case StextPackage.ARGUMENTED_ANNOTATION__ARGS:
 				getArgs().clear();
 				getArgs().addAll((Collection<? extends Expression>)newValue);
 				return;
@@ -131,7 +131,7 @@ public class AnnotationDefinitionImpl extends AnnotationImpl implements Annotati
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StextPackage.ANNOTATION_DEFINITION__ARGS:
+			case StextPackage.ARGUMENTED_ANNOTATION__ARGS:
 				getArgs().clear();
 				return;
 		}
@@ -146,7 +146,7 @@ public class AnnotationDefinitionImpl extends AnnotationImpl implements Annotati
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StextPackage.ANNOTATION_DEFINITION__ARGS:
+			case StextPackage.ARGUMENTED_ANNOTATION__ARGS:
 				return args != null && !args.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -166,7 +166,7 @@ public class AnnotationDefinitionImpl extends AnnotationImpl implements Annotati
 		}
 		if (baseClass == ArgumentExpression.class) {
 			switch (derivedFeatureID) {
-				case StextPackage.ANNOTATION_DEFINITION__ARGS: return ExpressionsPackage.ARGUMENT_EXPRESSION__ARGS;
+				case StextPackage.ARGUMENTED_ANNOTATION__ARGS: return ExpressionsPackage.ARGUMENT_EXPRESSION__ARGS;
 				default: return -1;
 			}
 		}
@@ -187,11 +187,11 @@ public class AnnotationDefinitionImpl extends AnnotationImpl implements Annotati
 		}
 		if (baseClass == ArgumentExpression.class) {
 			switch (baseFeatureID) {
-				case ExpressionsPackage.ARGUMENT_EXPRESSION__ARGS: return StextPackage.ANNOTATION_DEFINITION__ARGS;
+				case ExpressionsPackage.ARGUMENT_EXPRESSION__ARGS: return StextPackage.ARGUMENTED_ANNOTATION__ARGS;
 				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-} //AnnotationDefinitionImpl
+} //ArgumentedAnnotationImpl

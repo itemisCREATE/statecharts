@@ -361,29 +361,6 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.AnnotatableElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AnnotatableElementItemProvider annotatableElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sgraph.AnnotatableElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAnnotatableElementAdapter() {
-		if (annotatableElementItemProvider == null) {
-			annotatableElementItemProvider = new AnnotatableElementItemProvider(this);
-		}
-
-		return annotatableElementItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -494,7 +471,6 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 		if (synchronizationItemProvider != null) synchronizationItemProvider.dispose();
 		if (stateItemProvider != null) stateItemProvider.dispose();
 		if (importDeclarationItemProvider != null) importDeclarationItemProvider.dispose();
-		if (annotatableElementItemProvider != null) annotatableElementItemProvider.dispose();
 	}
 
 }

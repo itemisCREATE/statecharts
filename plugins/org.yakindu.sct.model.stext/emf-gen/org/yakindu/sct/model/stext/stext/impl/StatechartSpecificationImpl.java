@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
-import org.yakindu.sct.model.stext.stext.AnnotationDefinition;
+import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -37,7 +37,7 @@ public class StatechartSpecificationImpl extends ScopedElementImpl implements St
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AnnotationDefinition> annotation;
+	protected EList<ArgumentedAnnotation> annotation;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,9 +63,9 @@ public class StatechartSpecificationImpl extends ScopedElementImpl implements St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AnnotationDefinition> getAnnotation() {
+	public EList<ArgumentedAnnotation> getAnnotation() {
 		if (annotation == null) {
-			annotation = new EObjectContainmentEList<AnnotationDefinition>(AnnotationDefinition.class, this, StextPackage.STATECHART_SPECIFICATION__ANNOTATION);
+			annotation = new EObjectContainmentEList<ArgumentedAnnotation>(ArgumentedAnnotation.class, this, StextPackage.STATECHART_SPECIFICATION__ANNOTATION);
 		}
 		return annotation;
 	}
@@ -109,7 +109,7 @@ public class StatechartSpecificationImpl extends ScopedElementImpl implements St
 		switch (featureID) {
 			case StextPackage.STATECHART_SPECIFICATION__ANNOTATION:
 				getAnnotation().clear();
-				getAnnotation().addAll((Collection<? extends AnnotationDefinition>)newValue);
+				getAnnotation().addAll((Collection<? extends ArgumentedAnnotation>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

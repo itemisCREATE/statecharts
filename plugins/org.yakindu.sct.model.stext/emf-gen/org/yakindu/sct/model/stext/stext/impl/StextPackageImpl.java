@@ -14,7 +14,7 @@ import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
-import org.yakindu.sct.model.stext.stext.AnnotationDefinition;
+import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
 import org.yakindu.sct.model.stext.stext.DefRoot;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
@@ -310,7 +310,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass annotationDefinitionEClass = null;
+	private EClass argumentedAnnotationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -918,8 +918,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAnnotationDefinition() {
-		return annotationDefinitionEClass;
+	public EClass getArgumentedAnnotation() {
+		return argumentedAnnotationEClass;
 	}
 
 	/**
@@ -1061,7 +1061,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		activeStateReferenceExpressionEClass = createEClass(ACTIVE_STATE_REFERENCE_EXPRESSION);
 		createEReference(activeStateReferenceExpressionEClass, ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE);
 
-		annotationDefinitionEClass = createEClass(ANNOTATION_DEFINITION);
+		argumentedAnnotationEClass = createEClass(ARGUMENTED_ANNOTATION);
 
 		// Create enums
 		timeEventTypeEEnum = createEEnum(TIME_EVENT_TYPE);
@@ -1133,8 +1133,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		eventRaisingExpressionEClass.getESuperTypes().add(theExpressionsPackage.getExpression());
 		eventValueReferenceExpressionEClass.getESuperTypes().add(theExpressionsPackage.getExpression());
 		activeStateReferenceExpressionEClass.getESuperTypes().add(theExpressionsPackage.getExpression());
-		annotationDefinitionEClass.getESuperTypes().add(theTypesPackage.getAnnotation());
-		annotationDefinitionEClass.getESuperTypes().add(theExpressionsPackage.getArgumentExpression());
+		argumentedAnnotationEClass.getESuperTypes().add(theTypesPackage.getAnnotation());
+		argumentedAnnotationEClass.getESuperTypes().add(theExpressionsPackage.getArgumentExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1152,7 +1152,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEReference(getTransitionRoot_Def(), this.getTransitionSpecification(), null, "def", null, 0, 1, TransitionRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statechartSpecificationEClass, StatechartSpecification.class, "StatechartSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStatechartSpecification_Annotation(), this.getAnnotationDefinition(), null, "annotation", null, 0, -1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStatechartSpecification_Annotation(), this.getArgumentedAnnotation(), null, "annotation", null, 0, -1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateSpecificationEClass, StateSpecification.class, "StateSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStateSpecification_Scope(), theSGraphPackage.getScope(), null, "scope", null, 0, 1, StateSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1230,7 +1230,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEClass(activeStateReferenceExpressionEClass, ActiveStateReferenceExpression.class, "ActiveStateReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getActiveStateReferenceExpression_Value(), theSGraphPackage.getState(), null, "value", null, 0, 1, ActiveStateReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(annotationDefinitionEClass, AnnotationDefinition.class, "AnnotationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(argumentedAnnotationEClass, ArgumentedAnnotation.class, "ArgumentedAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(timeEventTypeEEnum, TimeEventType.class, "TimeEventType");

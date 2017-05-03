@@ -75,7 +75,7 @@ import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
-import org.yakindu.sct.model.stext.stext.AnnotationDefinition;
+import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
@@ -556,7 +556,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	@Check(CheckType.FAST)
-	public void checkAnnotationArguments(AnnotationDefinition annotation) {
+	public void checkAnnotationArguments(ArgumentedAnnotation annotation) {
 		if (annotation.getArgs().size() != annotation.getType().getProperties().size()) {
 			error(String.format(WRONG_NUMBER_OF_ARGUMENTS_MSG, annotation.getType().getProperties()), null,
 					WRONG_NUMBER_OF_ARGUMENTS_CODE);
@@ -782,7 +782,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			});
 			if (!found) {
 				error(String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getType().getName(),
-						element.eClass()), TypesPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
+						element.eClass()), null,
 						element.getAnnotations().indexOf(annotation), ERROR_WRONG_ANNOTATION_TARGET_CODE);
 			}
 		}

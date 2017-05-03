@@ -174,7 +174,7 @@ public class StatechartItemProvider
 			childrenFeatures.add(SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS);
 			childrenFeatures.add(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES);
 			childrenFeatures.add(SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS);
-			childrenFeatures.add(SGraphPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS);
+			childrenFeatures.add(SGraphPackage.Literals.STATECHART__ANNOTATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -273,7 +273,7 @@ public class StatechartItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGraphPackage.Literals.ANNOTATABLE_ELEMENT__ANNOTATIONS,
+				(SGraphPackage.Literals.STATECHART__ANNOTATIONS,
 				 TypesFactory.eINSTANCE.createAnnotation()));
 	}
 
