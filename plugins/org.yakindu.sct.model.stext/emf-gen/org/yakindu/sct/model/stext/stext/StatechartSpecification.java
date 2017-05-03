@@ -14,7 +14,7 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.sct.model.stext.stext.StatechartSpecification#getAnnotation <em>Annotation</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.StatechartSpecification#getAnnotations <em>Annotations</em>}</li>
  * </ul>
  *
  * @see org.yakindu.sct.model.stext.stext.StextPackage#getStatechartSpecification()
@@ -24,18 +24,18 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
 public interface StatechartSpecification extends ScopedElement {
 
 	/**
-	 * Returns the value of the '<em><b>Annotation</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.sct.model.stext.stext.ArgumentedAnnotation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Annotation</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Annotation</em>' containment reference list.
-	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getStatechartSpecification_Annotation()
+	 * @return the value of the '<em>Annotations</em>' containment reference list.
+	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getStatechartSpecification_Annotations()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ArgumentedAnnotation> getAnnotation();
+	EList<ArgumentedAnnotation> getAnnotations();
 } // StatechartSpecification

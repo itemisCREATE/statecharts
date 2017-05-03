@@ -148,7 +148,7 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.DECLARATION__ANNOTATIONS,
+				(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS,
 				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
 
 		newChildDescriptors.add
@@ -274,7 +274,7 @@ public class VariableDefinitionItemProvider extends PropertyItemProvider {
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == TypesPackage.Literals.DECLARATION__ANNOTATIONS ||
+			childFeature == TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS ||
 			childFeature == StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE;
 
 		if (qualify) {

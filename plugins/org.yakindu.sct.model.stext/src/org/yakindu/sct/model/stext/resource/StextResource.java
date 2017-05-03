@@ -109,7 +109,7 @@ public class StextResource extends AbstractSCTResource {
 		}
 		
 		statechart.getAnnotations().clear();
-		EList<ArgumentedAnnotation> annotations = rootASTElement.getAnnotation();
+		EList<ArgumentedAnnotation> annotations = rootASTElement.getAnnotations();
 		if(annotations != null){
 			statechart.getAnnotations().addAll(annotations);
 		}

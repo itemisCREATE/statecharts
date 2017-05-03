@@ -23,22 +23,21 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.StatechartSpecificationImpl#getAnnotation <em>Annotation</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.StatechartSpecificationImpl#getAnnotations <em>Annotations</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class StatechartSpecificationImpl extends ScopedElementImpl implements StatechartSpecification {
 	/**
-	 * The cached value of the '{@link #getAnnotation() <em>Annotation</em>}' containment reference list.
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAnnotation()
+	 * @see #getAnnotations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ArgumentedAnnotation> annotation;
-
+	protected EList<ArgumentedAnnotation> annotations;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -63,11 +62,11 @@ public class StatechartSpecificationImpl extends ScopedElementImpl implements St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ArgumentedAnnotation> getAnnotation() {
-		if (annotation == null) {
-			annotation = new EObjectContainmentEList<ArgumentedAnnotation>(ArgumentedAnnotation.class, this, StextPackage.STATECHART_SPECIFICATION__ANNOTATION);
+	public EList<ArgumentedAnnotation> getAnnotations() {
+		if (annotations == null) {
+			annotations = new EObjectContainmentEList<ArgumentedAnnotation>(ArgumentedAnnotation.class, this, StextPackage.STATECHART_SPECIFICATION__ANNOTATIONS);
 		}
-		return annotation;
+		return annotations;
 	}
 
 	/**
@@ -78,8 +77,8 @@ public class StatechartSpecificationImpl extends ScopedElementImpl implements St
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StextPackage.STATECHART_SPECIFICATION__ANNOTATION:
-				return ((InternalEList<?>)getAnnotation()).basicRemove(otherEnd, msgs);
+			case StextPackage.STATECHART_SPECIFICATION__ANNOTATIONS:
+				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -92,8 +91,8 @@ public class StatechartSpecificationImpl extends ScopedElementImpl implements St
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StextPackage.STATECHART_SPECIFICATION__ANNOTATION:
-				return getAnnotation();
+			case StextPackage.STATECHART_SPECIFICATION__ANNOTATIONS:
+				return getAnnotations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -107,9 +106,9 @@ public class StatechartSpecificationImpl extends ScopedElementImpl implements St
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StextPackage.STATECHART_SPECIFICATION__ANNOTATION:
-				getAnnotation().clear();
-				getAnnotation().addAll((Collection<? extends ArgumentedAnnotation>)newValue);
+			case StextPackage.STATECHART_SPECIFICATION__ANNOTATIONS:
+				getAnnotations().clear();
+				getAnnotations().addAll((Collection<? extends ArgumentedAnnotation>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -123,8 +122,8 @@ public class StatechartSpecificationImpl extends ScopedElementImpl implements St
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StextPackage.STATECHART_SPECIFICATION__ANNOTATION:
-				getAnnotation().clear();
+			case StextPackage.STATECHART_SPECIFICATION__ANNOTATIONS:
+				getAnnotations().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -138,8 +137,8 @@ public class StatechartSpecificationImpl extends ScopedElementImpl implements St
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StextPackage.STATECHART_SPECIFICATION__ANNOTATION:
-				return annotation != null && !annotation.isEmpty();
+			case StextPackage.STATECHART_SPECIFICATION__ANNOTATIONS:
+				return annotations != null && !annotations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

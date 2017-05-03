@@ -219,13 +219,13 @@ public interface StextPackage extends EPackage {
 	int STATECHART_SPECIFICATION__NAMESPACE = SGraphPackage.SCOPED_ELEMENT__NAMESPACE;
 
 	/**
-	 * The feature id for the '<em><b>Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART_SPECIFICATION__ANNOTATION = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 0;
+	int STATECHART_SPECIFICATION__ANNOTATIONS = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Statechart Specification</em>' class.
@@ -841,6 +841,15 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__ID = TypesPackage.TYPE_ALIAS__ID;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_DEFINITION__ANNOTATIONS = TypesPackage.TYPE_ALIAS__ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -868,22 +877,13 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__VISIBLE = TypesPackage.TYPE_ALIAS__VISIBLE;
 
 	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ALIAS_DEFINITION__ANNOTATIONS = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Type Alias Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 1;
+	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl <em>Local Reaction</em>}' class.
@@ -1625,15 +1625,15 @@ public interface StextPackage extends EPackage {
 	EClass getStatechartSpecification();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.stext.stext.StatechartSpecification#getAnnotation <em>Annotation</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.stext.stext.StatechartSpecification#getAnnotations <em>Annotations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Annotation</em>'.
-	 * @see org.yakindu.sct.model.stext.stext.StatechartSpecification#getAnnotation()
+	 * @return the meta object for the containment reference list '<em>Annotations</em>'.
+	 * @see org.yakindu.sct.model.stext.stext.StatechartSpecification#getAnnotations()
 	 * @see #getStatechartSpecification()
 	 * @generated
 	 */
-	EReference getStatechartSpecification_Annotation();
+	EReference getStatechartSpecification_Annotations();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.StateSpecification <em>State Specification</em>}'.
@@ -2268,12 +2268,12 @@ public interface StextPackage extends EPackage {
 		EClass STATECHART_SPECIFICATION = eINSTANCE.getStatechartSpecification();
 
 		/**
-		 * The meta object literal for the '<em><b>Annotation</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATECHART_SPECIFICATION__ANNOTATION = eINSTANCE.getStatechartSpecification_Annotation();
+		EReference STATECHART_SPECIFICATION__ANNOTATIONS = eINSTANCE.getStatechartSpecification_Annotations();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.StateSpecificationImpl <em>State Specification</em>}' class.

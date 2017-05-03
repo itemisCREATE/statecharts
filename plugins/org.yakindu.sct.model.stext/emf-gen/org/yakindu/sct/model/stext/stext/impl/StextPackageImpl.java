@@ -486,7 +486,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStatechartSpecification_Annotation() {
+	public EReference getStatechartSpecification_Annotations() {
 		return (EReference)statechartSpecificationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -983,7 +983,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		createEReference(transitionRootEClass, TRANSITION_ROOT__DEF);
 
 		statechartSpecificationEClass = createEClass(STATECHART_SPECIFICATION);
-		createEReference(statechartSpecificationEClass, STATECHART_SPECIFICATION__ANNOTATION);
+		createEReference(statechartSpecificationEClass, STATECHART_SPECIFICATION__ANNOTATIONS);
 
 		stateSpecificationEClass = createEClass(STATE_SPECIFICATION);
 		createEReference(stateSpecificationEClass, STATE_SPECIFICATION__SCOPE);
@@ -1152,7 +1152,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEReference(getTransitionRoot_Def(), this.getTransitionSpecification(), null, "def", null, 0, 1, TransitionRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statechartSpecificationEClass, StatechartSpecification.class, "StatechartSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStatechartSpecification_Annotation(), this.getArgumentedAnnotation(), null, "annotation", null, 0, -1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStatechartSpecification_Annotations(), this.getArgumentedAnnotation(), null, "annotations", null, 0, -1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateSpecificationEClass, StateSpecification.class, "StateSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStateSpecification_Scope(), theSGraphPackage.getScope(), null, "scope", null, 0, 1, StateSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

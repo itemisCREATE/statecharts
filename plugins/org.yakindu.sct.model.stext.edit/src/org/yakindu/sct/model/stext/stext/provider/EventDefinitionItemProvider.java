@@ -105,7 +105,7 @@ public class EventDefinitionItemProvider extends EventItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.DECLARATION__ANNOTATIONS,
+				(TypesPackage.Literals.PACKAGE_MEMBER__ANNOTATIONS,
 				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
 	}
 
