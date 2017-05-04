@@ -20,7 +20,7 @@ h2(#system-requirements). System requirements
 
 h3(#java). Java
 
-YAKINDU Statechart Tools is based on the Java programming language and requires *Java 7* or higher. A Java Runtime Environment (JRE) must be installed on your computer.
+YAKINDU Statechart Tools is based on the Java programming language and requires *Java 8* or higher. A Java Runtime Environment (JRE) must be installed on your computer.
 
 Installation of Java is beyond the scope of this document. You can find more information on Java and download it for free from Oracle Corporation at "https://www.java.com/":https://www.java.com/. Before downloading Java, make sure you are picking the variant with the correct bit size, i.&nbsp;e. either 32 or 64 bit, whichever is appropriate for your computer.
 
