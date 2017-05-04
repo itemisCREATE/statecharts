@@ -16,5 +16,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.expressions
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Export-Package: org.yakindu.sct.refactoring.proposals,
+Export-Package: org.yakindu.sct.refactoring.handlers.impl,
+ org.yakindu.sct.refactoring.proposals,
  org.yakindu.sct.refactoring.refactor
