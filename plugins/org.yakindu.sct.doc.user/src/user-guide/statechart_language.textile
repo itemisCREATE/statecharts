@@ -11,9 +11,10 @@ h3(#the-statechart-language-basics-wording). Words and Definitions
 
 To prevent any confusion, some definitions:
 
-* A *"finite state machine":https://en.wikipedia.org/wiki/Finite-state_machine* (FSM) is an abstract machine that consists of a finite set of states and its behavior.
+* A *"finite-state machine":https://en.wikipedia.org/wiki/Finite-state_machine* (FSM) is an abstract machine that consists of a finite set of states and its behavior.
 * A *"state diagram":https://en.wikipedia.org/wiki/State_diagram* is one of many possible representations of an FSM. A "state transition table":https://en.wikipedia.org/wiki/State_transition_table would be different way to describe an FSM.
-* A *"statechart":https://en.wikipedia.org/wiki/State_diagram#Harel_statechart* is an extended form of the classic state diagram. However, the basic principles are the same. In this documentation, the term "statechart" usually means the graphical representation of a state machine, while the term "state machine" usually pertains to its dynamic aspects.
+* A *"statechart":https://en.wikipedia.org/wiki/State_diagram#Harel_statechart* or *Harel statechart* is an extended form of the classic state diagram. However, the basic principles are the same. In this documentation, the term "statechart" usually means the graphical representation of an FSM.
+* A *"state machine"* is an FSM. In this documentation, the term "state machine" usually pertains to the dynamic aspects of an FSM, i.e. it is more thought of as being executed than being depicted.
 
 h3(#the-statechart-language-basics-theory). Automata theory
 
