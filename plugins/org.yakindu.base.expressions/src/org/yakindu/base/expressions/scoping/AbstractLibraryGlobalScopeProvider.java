@@ -1,13 +1,3 @@
-/** 
- * Copyright (c) 2017 committers of YAKINDU and others. 
- * All rights reserved. This program and the accompanying materials 
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at 
- * http://www.eclipse.org/legal/epl-v10.html 
- * Contributors:
- * committers of YAKINDU - initial API and implementation
- *
-*/
 package org.yakindu.base.expressions.scoping;
 
 import java.util.Collections;
@@ -22,6 +12,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
@@ -35,6 +27,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * 
@@ -44,10 +37,13 @@ import com.google.common.collect.Lists;
 public abstract class AbstractLibraryGlobalScopeProvider extends AbstractGlobalScopeProvider
 		implements IGlobalScopeProvider {
 
-	protected abstract Set<URI> getLibraries();
+	@Inject
+	private IResourceServiceProvider.Registry serviceProviderRegistry;
 
-	protected Iterable<URI> getValidLibraries() {
-		return Iterables.filter(getLibraries(), new Predicate<URI>() {
+	protected abstract Set<URI> getLibraries(Resource context);
+
+	protected Iterable<URI> getValidLibraries(Resource context) {
+		return Iterables.filter(getLibraries(context), new Predicate<URI>() {
 			@Override
 			public boolean apply(URI input) {
 				return URIConverter.INSTANCE.exists(input, Collections.EMPTY_MAP);
@@ -69,7 +65,7 @@ public abstract class AbstractLibraryGlobalScopeProvider extends AbstractGlobalS
 	@Override
 	public IScope getScope(Resource context, EReference reference, Predicate<IEObjectDescription> filter) {
 		List<IEObjectDescription> descriptions = Lists.newArrayList();
-		for (URI uri : getValidLibraries()) {
+		for (URI uri : getValidLibraries(context)) {
 			try {
 				Iterables.addAll(descriptions, libraryCache.get(uri));
 			} catch (ExecutionException e) {
@@ -81,13 +77,17 @@ public abstract class AbstractLibraryGlobalScopeProvider extends AbstractGlobalS
 	}
 
 	protected Iterable<IEObjectDescription> getDescriptions(URI uri) {
-		ResourceSet set = new ResourceSetImpl();
 		List<IEObjectDescription> result = Lists.newArrayList();
+		ResourceSet set = new ResourceSetImpl();
 		Resource resource = set.getResource(uri, true);
-		System.out.println("Loading " + uri);
-		Iterable<IEObjectDescription> iterable = Scopes
-				.scopedElementsFor(Lists.newArrayList(resource.getAllContents()));
-		Iterables.addAll(result, iterable);
+		IResourceServiceProvider resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(uri);
+		if (resourceServiceProvider == null) {
+			Iterables.addAll(result, Scopes.scopedElementsFor(Lists.newArrayList(resource.getAllContents())));
+		} else {
+			IResourceDescription resourceDescription = resourceServiceProvider.getResourceDescriptionManager()
+					.getResourceDescription(resource);
+			Iterables.addAll(result, resourceDescription.getExportedObjects());
+		}
 		resource.unload();
 		return result;
 	}
