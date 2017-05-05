@@ -3,6 +3,7 @@ package org.yakindu.sct.model.stext.scoping;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.yakindu.base.expressions.scoping.AbstractLibraryGlobalScopeProvider;
 
 import com.google.common.collect.Sets;
@@ -18,7 +19,7 @@ public class STextLibraryGlobalScopeProvider extends AbstractLibraryGlobalScopeP
 			.createURI("platform:/plugin/org.yakindu.sct.model.stext.lib/lib/STextLib.xmi");
 
 	@Override
-	public Set<URI> getLibraries() {
+	public Set<URI> getLibraries(Resource context) {
 		return Sets.newHashSet(STEXT_LIB);
 	}
 
