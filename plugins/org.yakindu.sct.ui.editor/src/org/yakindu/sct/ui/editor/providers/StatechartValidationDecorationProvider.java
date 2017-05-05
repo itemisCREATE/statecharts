@@ -37,6 +37,7 @@ import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
+import org.yakindu.sct.ui.editor.editparts.BorderItemEditPart;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore.IValidationIssueStoreListener;
 
@@ -53,6 +54,8 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 
 	public void createDecorators(IDecoratorTarget decoratorTarget) {
 		EditPart editPart = (EditPart) decoratorTarget.getAdapter(EditPart.class);
+		if(editPart instanceof BorderItemEditPart)
+			return;
 		if (editPart instanceof IPrimaryEditPart
 				&& (editPart instanceof GraphicalEditPart || editPart instanceof AbstractConnectionEditPart)) {
 			EditDomain ed = editPart.getViewer().getEditDomain();
