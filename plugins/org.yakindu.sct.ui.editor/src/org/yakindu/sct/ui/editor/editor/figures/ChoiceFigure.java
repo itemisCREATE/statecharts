@@ -12,14 +12,12 @@ package org.yakindu.sct.ui.editor.editor.figures;
 
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.Shape;
-import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 public class ChoiceFigure extends Shape {
 
 	public ChoiceFigure() {
-		this.setSize(new Dimension(15, 15));
 		setLineWidth(2);
 	}
 
