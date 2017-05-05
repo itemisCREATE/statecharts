@@ -76,6 +76,7 @@ class DefaultNamingService implements INamingService {
 	@Inject extension StepDepthComparator stepDepthComparator
 	@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
 	@Inject extension NamingHelper
+	@Inject extension NamingServiceUtilities utilities
 
 	@Inject private StextNameProvider provider
 
@@ -106,6 +107,7 @@ class DefaultNamingService implements INamingService {
 		if (map == null || activeStatechart != statechart) {
 			activeFlow = null
 			activeStatechart = statechart
+			utilities.initialize(maxLength, separator, activeStatechart, activeFlow)
 			map = statechart.createShortNameMap(maxLength, separator)
 		}
 	}
@@ -114,6 +116,7 @@ class DefaultNamingService implements INamingService {
 		if (map == null || activeFlow != flow) {
 			activeFlow = flow
 			activeStatechart = null
+			utilities.initialize(maxLength, separator, activeStatechart, activeFlow)
 			map = flow.createShortNameMap(maxLength, separator)
 		}
 	}
@@ -167,12 +170,12 @@ class DefaultNamingService implements INamingService {
 		for (region : element.regions) {
 			for (vertex : region.vertices) {
 				if (vertex instanceof CompositeElement) {
-					map.addShortVertexNames(vertex as CompositeElement, maxLength, separator)
+					map.addShortVertexNames(vertex as CompositeElement, maxLength, separator) 
 				}
 			}
 		}
 	}
-
+	
 	def Map<NamedElement, String> createShortNameMap(ExecutionFlow flow, int maxLength, char separator) {
 		var HashMap<NamedElement, String> map = new HashMap<NamedElement, String>
 		map.addShortStateNames(flow, maxLength, separator)
@@ -220,8 +223,8 @@ class DefaultNamingService implements INamingService {
 				timeEventSpecs.indexOf(tes))
 			if (timeEvent != null) {
 				map.put(timeEvent,
-					executionFlowElement.getShortName(tes.prefix(sgraphElement, separator),
-						tes.suffix(sgraphElement, separator), map.values.toList, maxLength, separator))
+					executionFlowElement.getShortName(tes.prefix(sgraphElement),
+						tes.suffix(sgraphElement), map.values.toList, maxLength, separator))
 			}
 		}
 	}
@@ -231,70 +234,6 @@ class DefaultNamingService implements INamingService {
 		if (!map.containsKey(element)) {
 			map.put(element, element.getShortName(prefix, suffix, map.values.toList, maxLength, separator))
 		}
-	}
-
-	def protected prefix(Step it, char separator) {
-		var prefix = flow.name.toFirstLower
-
-		switch (it) {
-			case isCheckFunction: prefix + separator + "check"
-			case isEntryAction: prefix + separator + "enact"
-			case isExitAction: prefix + separator + "exact"
-			case isEffect: prefix + separator + "effect"
-			case isEnterSequence: prefix + separator + "enseq"
-			case isDeepEnterSequence: prefix + separator + "dhenseq"
-			case isShallowEnterSequence: prefix + separator + "shenseq"
-			case isExitSequence: prefix + separator + "exseq"
-			case isReactSequence: prefix + separator + "react"
-			default: ""
-		}
-	}
-
-	def protected suffix(Step it, char separator) {
-		""
-	}
-
-	def protected prefix(ExecutionState it, char separator) {
-		flow.name
-	}
-
-	def protected suffix(ExecutionState it, char separator) {
-		""
-	}
-
-	def protected prefix(TimeEventSpec it, NamedElement element, char separator) {
-		activeFlow.name
-	}
-
-	def protected suffix(TimeEventSpec it, NamedElement element, char separator) {
-		switch (element) {
-			Statechart: "tev" + element.timeEventSpecs.indexOf(it)
-			State: "tev" + element.timeEventSpecs.indexOf(it)
-		}
-	}
-
-	def protected prefix(State it, char separator) {
-		activeStatechart.name
-	}
-
-	def protected prefix(Vertex it, char separator) {
-		""
-	}
-
-	def protected suffix(Vertex it, char separator) {
-		""
-	}
-
-	override asIdentifier(String string) {
-		string.replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', separator.toString)
-	}
-
-	override asEscapedIdentifier(String string) {
-		string.asIdentifier
-	}
-
-	override isKeyword(String string) {
-		return false
 	}
 
 	def protected String getShortName(NamedElement element, String prefix, String suffix, List<String> nameList,
@@ -505,6 +444,7 @@ class DefaultNamingService implements INamingService {
 
 	override public setMaxLength(int length) {
 		maxLength = length
+		utilities.maxLength = length
 	}
 
 	override public setSeparator(char sep) {
@@ -514,6 +454,7 @@ class DefaultNamingService implements INamingService {
 			throw new IllegalArgumentException
 		}
 		separator = sep
+		utilities.separator = sep
 	}
 
 	override public getMaxLength() {

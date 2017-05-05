@@ -16,11 +16,13 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Property
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
@@ -44,6 +46,8 @@ class Naming {
 	@Inject GeneratorEntry entry
 
 	@Inject extension GenmodelEntries
+	
+	@Inject extension NamingServiceUtilities
 
 	public static final String NULL_STRING = "null";
 
@@ -244,7 +248,7 @@ class Naming {
 		if (isConst) '''«it.constantName»''' else '''«scHandle»->«scope.instance».«name.asEscapedIdentifier»'''
 	}
 
-	def dispatch access(org.yakindu.base.types.Property it) {
+	def dispatch access(Property it) {
 		'''«name.asEscapedIdentifier»'''
 	}
 

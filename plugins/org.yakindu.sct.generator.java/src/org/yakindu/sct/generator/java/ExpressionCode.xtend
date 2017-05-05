@@ -49,7 +49,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 class ExpressionCode extends Expressions {
 
 	@Inject extension Naming
-	@Inject extension JavaNamingService
+	@Inject extension JavaNamingServiceUtilities
 	@Inject extension Navigation
 	@Inject extension ITypeSystem
 	@Inject extension ITypeSystemInferrer

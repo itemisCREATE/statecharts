@@ -21,14 +21,15 @@ import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.ImportScope
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader {
 
@@ -37,6 +38,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntriesExtension
 	@Inject extension INamingService
+	@Inject extension NamingServiceUtilities
 
 	protected GeneratorEntry entry
 

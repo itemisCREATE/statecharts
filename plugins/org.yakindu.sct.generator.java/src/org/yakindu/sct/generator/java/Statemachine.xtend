@@ -33,6 +33,7 @@ class Statemachine {
 	
 	@Inject protected extension Naming
 	@Inject protected extension JavaNamingService
+	@Inject protected extension JavaNamingServiceUtilities
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension Navigation
 	@Inject protected extension ICodegenTypeSystemAccess

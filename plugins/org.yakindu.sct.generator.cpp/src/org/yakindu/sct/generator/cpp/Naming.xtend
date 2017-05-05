@@ -16,7 +16,7 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
@@ -30,7 +30,7 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 
 	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension INamingService
+	@Inject extension NamingServiceUtilities
 	@Inject extension GenmodelEntriesExtension
 	@Inject GeneratorEntry entry
 

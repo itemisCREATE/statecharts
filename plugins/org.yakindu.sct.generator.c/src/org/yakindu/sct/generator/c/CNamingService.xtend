@@ -24,15 +24,12 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
-import static org.yakindu.sct.generator.c.CKeywords.*
 import org.yakindu.sct.model.sgraph.Statechart
 
 public class CNamingService extends DefaultNamingService {
 	
 	@Inject
 	extension GenmodelEntries
-	@Inject
-	extension SExecExtensions
 	@Inject
 	var GeneratorEntry entry
 	
@@ -82,60 +79,5 @@ public class CNamingService extends DefaultNamingService {
 		}
 		
 		return super.getShortNameMap(statechart)
-	}
-	
-	override protected prefix(Step it, char separator) {
-		var prefix = flow.name.toFirstLower
-		if (entry.statemachinePrefix != null) {
-			prefix = entry.statemachinePrefix
-		}
-		switch (it) {
-			case isCheckFunction: prefix + separator + "check"
-			case isEntryAction: prefix + separator + "enact"
-			case isExitAction: prefix + separator + "exact"
-			case isEffect: prefix + separator + "effect"
-			case isEnterSequence: prefix + separator + "enseq"
-			case isDeepEnterSequence: prefix + separator + "dhenseq"
-			case isShallowEnterSequence: prefix + separator + "shenseq"
-			case isExitSequence: prefix + separator + "exseq"
-			case isReactSequence: prefix + separator + "react"
-			default: ""
-		}
-	}
-	
-	override protected prefix(ExecutionState it, char separator) {
-		if (entry.statemachinePrefix.nullOrEmpty) {
-			super.prefix(it, separator).toFirstUpper			
-		} else {
-			entry.statemachinePrefix
-		}
-	}
-	
-	override protected prefix(State it, char separator) {
-		if (entry.statemachinePrefix.nullOrEmpty) {
-			super.prefix(it, separator).toFirstUpper
-		} else {
-			entry.statemachinePrefix
-		}
-	}
-	
-	override protected prefix(TimeEventSpec it, NamedElement element, char separator) {
-		if (entry.statemachinePrefix.nullOrEmpty) {
-			super.prefix(it, element, separator).toFirstLower
-		} else {
-			entry.statemachinePrefix
-		}
-	}
-	
-	override asEscapedIdentifier(String it) {
-		var s = it
-		if (s.isKeyword) {
-			s = s + separator +'ID'
-		}
-		return s.asIdentifier
-	}
-	
-	override boolean isKeyword(String name) {
-		return !Arrays::asList(C_KEYWORDS).findFirst[it.equalsIgnoreCase(name)].nullOrEmpty
 	}
 }

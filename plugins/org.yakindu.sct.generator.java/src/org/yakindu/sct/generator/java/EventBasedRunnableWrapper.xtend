@@ -35,6 +35,7 @@ class EventBasedRunnableWrapper {
 
 	@Inject protected extension Naming
 	@Inject protected extension JavaNamingService
+	@Inject protected extension JavaNamingServiceUtilities
 	@Inject protected extension Navigation
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ICodegenTypeSystemAccess

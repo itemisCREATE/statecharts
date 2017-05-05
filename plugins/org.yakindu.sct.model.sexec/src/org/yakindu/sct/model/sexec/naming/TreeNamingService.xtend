@@ -503,18 +503,6 @@ class TreeNamingService implements INamingService {
 		return getShortenedName(getNodeForElement(elem));
 	}
 
-	override asEscapedIdentifier(String string) {
-		asIdentifier(string);
-	}
-
-	override asIdentifier(String string) {
-		string.replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', separator.toString)
-	}
-
-	override isKeyword(String string) {
-		return false;
-	}
-
 	override getShortNameMap(Statechart statechart) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}

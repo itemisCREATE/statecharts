@@ -22,6 +22,7 @@ import org.yakindu.sct.generator.core.GeneratorModule;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
+import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
@@ -41,6 +42,7 @@ public class CppCodeGeneratorModule implements GeneratorModule {
 		binder.bind(IExecutionFlowGenerator.class).to(CppGenerator.class);
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 		binder.bind(INamingService.class).to(CppNamingService.class);
+		binder.bind(NamingServiceUtilities.class).to(CppNamingServiceUtilities.class);
 		binder.bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
 		bindIGenArtifactConfigurations(entry, binder);
 	}

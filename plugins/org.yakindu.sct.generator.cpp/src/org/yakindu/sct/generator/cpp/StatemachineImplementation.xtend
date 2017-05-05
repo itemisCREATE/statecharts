@@ -27,6 +27,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.sct.model.sexec.naming.NamingServiceUtilities
 
 class StatemachineImplementation implements IContentTemplate {
 	
@@ -36,6 +37,7 @@ class StatemachineImplementation implements IContentTemplate {
 	@Inject extension GenmodelEntriesExtension
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension INamingService
+	@Inject extension NamingServiceUtilities
 	@Inject extension ExpressionCode
 	@Inject protected extension StateVectorExtensions
 	
