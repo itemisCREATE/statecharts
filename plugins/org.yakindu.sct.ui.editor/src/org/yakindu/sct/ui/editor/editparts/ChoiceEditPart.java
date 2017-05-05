@@ -11,25 +11,26 @@
 package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.base.gmf.runtime.editparts.FixedSizeShapeNodeEditPart;
 import org.yakindu.sct.ui.editor.editor.figures.ChoiceFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 import org.yakindu.sct.ui.editor.policies.FeedbackGraphicalNodeEditPolicy;
+import org.yakindu.sct.ui.editor.policies.FixedAspectRatioResizableEditPolicy;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {
+public class ChoiceEditPart extends ShapeNodeEditPart {
 
 	public ChoiceEditPart(View view) {
 		super(view);
@@ -40,11 +41,12 @@ public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
 		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, new FeedbackGraphicalNodeEditPolicy());
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new FixedAspectRatioResizableEditPolicy());
 	}
 
 	@Override
 	protected NodeFigure createNodeFigure() {
-		final NodeFigure figure = new DefaultSizeNodeFigure(getDefaultSize()) {
+		final NodeFigure figure = new NodeFigure() {
 			@Override
 			public PointList getPolygonPoints() {
 				PointList points = new PointList(5);
@@ -57,19 +59,18 @@ public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {
 				return points;
 			}
 		};
-		figure.setLayoutManager(getLayoutManager());
+		figure.setLayoutManager(new StackLayout());
 		figure.add(createPrimaryShape());
 		figure.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);
 		figure.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
+		figure.setMinimumSize(getDefaultSize());
 		return figure;
 	}
 
-	@Override
 	public Dimension getDefaultSize() {
 		return MapModeUtils.getMappedDimensions(getMapMode(), MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
 	}
 
-	@Override
 	public IFigure createPrimaryShape() {
 		return new ChoiceFigure();
 	}
