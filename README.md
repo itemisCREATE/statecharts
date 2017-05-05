@@ -43,7 +43,7 @@ If you are familiar with Eclipse plugin development then you may want to checkou
 4. On the *Product* page, select *Eclipse IDE for Eclipse Committers* in the *Eclipse.org* folder, then click *Next*.
 5. On the *Projects* page, select *Github Projects*.
 6. Click on the green "plus" symbol. Copy the Link https://raw.githubusercontent.com/Yakindu/statecharts/master/StatechartTools.setup in to the text field.
-7. Click on *OK*. The project *Statechart Tools* is available as *Github Projects/<User>/Statechart Tools*.
+7. Click on *OK*. The project *Statechart Tools* is available as *Github Projects/&lt;User&gt;/Statechart Tools*.
 8. Double-click on the project *Statechart Tools* to add it to the catalog section at the bottom of the wizard page, then click *Next*. Choose only the "Statechart Tools". Uncheck the others, if needed.
 9. On the *Variables* page, choose a meaningful name for the *Installation folder name* variable, then click *Next*.
 10. On the *Confirmation* page, check the settings, then click on *Finish*.
