@@ -43,6 +43,7 @@ public class SimulationActivator extends AbstractUIPlugin implements IStartup{
 		plugin = this;
 		SCTHotModelReplacementManager.INSTANCE.addReplacementListener(hotModelReplacementListener);
 		DebugPlugin.getDefault().getLaunchManager().addLaunchListener(manager);
+		DebugPlugin.getDefault().addDebugEventListener(manager);
 	}
 
 	public void stop(BundleContext context) throws Exception {
@@ -50,6 +51,7 @@ public class SimulationActivator extends AbstractUIPlugin implements IStartup{
 		super.stop(context);
 		SCTHotModelReplacementManager.INSTANCE.removeReplacementListener(hotModelReplacementListener);
 		DebugPlugin.getDefault().getLaunchManager().removeLaunchListener(manager);
+		DebugPlugin.getDefault().removeDebugEventListener(manager);
 	}
 
 	public static SimulationActivator getDefault() {

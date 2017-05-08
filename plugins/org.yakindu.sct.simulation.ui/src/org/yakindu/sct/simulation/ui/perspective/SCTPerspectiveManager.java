@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.simulation.ui.perspective;
 
+import static org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_MODELING;
 import static org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION;
 
 import org.eclipse.core.runtime.CoreException;
@@ -17,6 +18,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.debug.core.DebugEvent;
+import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchListener;
@@ -26,19 +29,21 @@ import org.eclipse.debug.internal.ui.viewers.AsynchronousSchedulingRuleFactory;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.progress.UIJob;
+import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 
 /**
  * custom implementation of the {@link PerspectiveManager} for the YAKINDU
  * Statechart launch types. </br>
  * 
  * This implementation forces to open the YAKINDU Simulation perspective and the
- * Debug view.</br>
+ * Debug view. It switches back to modeling view after simulation is
+ * terminated.</br>
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
 @SuppressWarnings("restriction")
-public class SCTPerspectiveManager extends PerspectiveManager implements ILaunchListener {
+public class SCTPerspectiveManager extends PerspectiveManager implements ILaunchListener, IDebugEventSetListener {
 
 	private static final String DEBUG_VIEW_ID = "org.eclipse.debug.ui.DebugView";
 	private static final String LAUNCH_TYPE = "yakindu";
@@ -48,32 +53,50 @@ public class SCTPerspectiveManager extends PerspectiveManager implements ILaunch
 			ILaunchConfigurationType type = launch.getLaunchConfiguration().getType();
 			// Open the simulation perspective for all yakindu simulation types
 			if (type.getIdentifier().contains(LAUNCH_TYPE)) {
-				Job switchJob = new UIJob(DebugUIPlugin.getStandardDisplay(), "Perspective Switch Job") { //$NON-NLS-1$
-					public IStatus runInUIThread(IProgressMonitor monitor) {
-						IWorkbenchWindow window = DebugUIPlugin.getActiveWorkbenchWindow();
-						if (window != null && !(isCurrentPerspective(window, ID_PERSPECTIVE_SCT_SIMULATION))) {
-							switchToPerspective(window, ID_PERSPECTIVE_SCT_SIMULATION);
-						}
-						// Force the debug view to open
-						if (window != null) {
-							try {
-								window.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-										.showView(DEBUG_VIEW_ID);
-							} catch (PartInitException e) {
-								e.printStackTrace();
-							}
-						}
-						return Status.OK_STATUS;
-					}
-				};
-				switchJob.setSystem(true);
-				switchJob.setPriority(Job.INTERACTIVE);
-				switchJob.setRule(AsynchronousSchedulingRuleFactory.getDefault().newSerialPerObjectRule(this));
-				switchJob.schedule();
+				schedulePerspectiveSwitchJob(ID_PERSPECTIVE_SCT_SIMULATION);
 			}
 		} catch (CoreException ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	public void handleDebugEvents(DebugEvent[] events) {
+		for (DebugEvent debugEvent : events) {
+			if ((debugEvent.getSource() instanceof SCTDebugTarget))
+				switch (debugEvent.getKind()) {
+				case DebugEvent.TERMINATE:
+					schedulePerspectiveSwitchJob(ID_PERSPECTIVE_SCT_MODELING);
+					break;
+				case DebugEvent.SUSPEND:
+					break;
+				case DebugEvent.RESUME:
+					break;
+				}
+		}
+	}
+
+	protected void schedulePerspectiveSwitchJob(final String perspectiveID) {
+		Job switchJob = new UIJob(DebugUIPlugin.getStandardDisplay(), "Perspective Switch Job") { //$NON-NLS-1$
+			public IStatus runInUIThread(IProgressMonitor monitor) {
+				IWorkbenchWindow window = DebugUIPlugin.getActiveWorkbenchWindow();
+				if (window != null && !(isCurrentPerspective(window, perspectiveID))) {
+					switchToPerspective(window, perspectiveID);
+				}
+				// Force the debug view to open
+				if (window != null) {
+					try {
+						window.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(DEBUG_VIEW_ID);
+					} catch (PartInitException e) {
+						e.printStackTrace();
+					}
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		switchJob.setSystem(true);
+		switchJob.setPriority(Job.INTERACTIVE);
+		switchJob.setRule(AsynchronousSchedulingRuleFactory.getDefault().newSerialPerObjectRule(this));
+		switchJob.schedule();
 	}
 
 	public void launchChanged(ILaunch launch) {
