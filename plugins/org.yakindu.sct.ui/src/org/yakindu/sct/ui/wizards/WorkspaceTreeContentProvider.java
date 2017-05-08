@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.ui.wizards;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
@@ -85,7 +85,7 @@ public class WorkspaceTreeContentProvider implements ITreeContentProvider {
 	}
 
 	public Object[] filterForContent(Object[] inputElements) throws CoreException {
-		final Set<Object> result = new HashSet<Object>();
+		final Set<Object> result = new LinkedHashSet<Object>();
 		for (final Object obj : inputElements) {
 			((IResource) obj).accept(new IResourceVisitor() {
 				public boolean visit(IResource resource) throws CoreException {

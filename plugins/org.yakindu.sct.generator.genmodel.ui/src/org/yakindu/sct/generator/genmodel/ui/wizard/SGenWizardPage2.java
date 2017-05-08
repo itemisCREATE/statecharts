@@ -99,9 +99,14 @@ public class SGenWizardPage2 extends WizardPage {
 		container.setLayout(new GridLayout(1, false));
 		createGeneratorCombo(container);
 		createObjectTree(container);
-		refreshInput();
 	}
 
+	@Override
+	public void setVisible(boolean visible) {
+		super.setVisible(visible);
+		refreshInput();
+	}
+	
 	private void createObjectTree(Composite container) {
 		lblNewLabel = new Label(container, SWT.NONE);
 		lblNewLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
