@@ -18,7 +18,7 @@ import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_
 import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRACES;
 
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
-import org.yakindu.sct.generator.core.GeneratorModule;
+import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
@@ -32,7 +32,7 @@ import com.google.inject.name.Names;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class CCodeGeneratorModule implements GeneratorModule {
+public class CCodeGeneratorModule implements IGeneratorModule {
 
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {

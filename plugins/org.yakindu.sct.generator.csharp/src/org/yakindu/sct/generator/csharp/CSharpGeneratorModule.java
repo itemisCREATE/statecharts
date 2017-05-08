@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.generator.csharp;
 
-import org.yakindu.sct.generator.core.GeneratorModule;
+import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.csharp.types.CSharpTypeSystemAccess;
@@ -24,7 +24,7 @@ import com.google.inject.Binder;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class CSharpGeneratorModule implements GeneratorModule {
+public class CSharpGeneratorModule implements IGeneratorModule {
 
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {

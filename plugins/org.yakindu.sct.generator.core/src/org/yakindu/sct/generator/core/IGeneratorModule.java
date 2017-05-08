@@ -20,7 +20,7 @@ import com.google.inject.Binder;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface GeneratorModule {
+public interface IGeneratorModule {
 
 	public abstract void configure(GeneratorEntry entry, Binder binder);
 

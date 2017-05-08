@@ -461,13 +461,13 @@ class GeneratorProjectTemplate {
 	def protected module(ProjectData data) '''
 		package «data.generatorClass.packageName»;
 		
-		import org.yakindu.sct.generator.core.GeneratorModule;
+		import org.yakindu.sct.generator.core.IGeneratorModule;
 		import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 		import org.yakindu.sct.model.sgen.GeneratorEntry;
 		
 		import com.google.inject.Binder;
 		
-		public class «data.moduleClass.simpleName» implements GeneratorModule {
+		public class «data.moduleClass.simpleName» implements IGeneratorModule {
 		
 		    public void configure(GeneratorEntry entry, Binder binder) {
 		        binder.bind(IExecutionFlowGenerator.class).to(«data.generatorClass.simpleName».class);

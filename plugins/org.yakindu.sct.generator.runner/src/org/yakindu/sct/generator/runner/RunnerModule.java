@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.generator.runner;
 
-import org.yakindu.sct.generator.core.GeneratorModule;
+import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.inject.Binder;
@@ -20,7 +20,7 @@ import com.google.inject.Binder;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class RunnerModule implements GeneratorModule {
+public class RunnerModule implements IGeneratorModule {
 
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {
