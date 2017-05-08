@@ -35,9 +35,8 @@ p=. HMI main screen
 
 Let's have a look at this simple HMI that represents an infotainment system for cars. You can find it in the YAKINDU Statechart Tools "example repository on Github":https://github.com/Yakindu/examples/wiki.
 
-The application consists of three screens:
-* Blank screen: shows a black window
-* Start screen: shows a welcome animation
+The application consists of two screens:
+* Welcome screen: shows a welcome animation
 * Main screen: consist of severals components (speedometer, light widgets, infotainment, etc.)
 
 p(#tsdom-fig-hmi-main-screen-explained). 
@@ -58,7 +57,7 @@ p=. HMI screens
 h2(#tsdom-modeling-behavior-with-yakindu-statechart-tools-professional). Modeling behavior with YAKINDU Statechart Tools Professional
 
 In this section we will create a statechart that controls the behavior of a very simple HMI. Well, to be honest, it essentially just triggers a single action of the HMI:
-* Upon start, the HMI shows a blank screen.
+* Upon start, the HMI shows a welcome screen.
 * After three seconds have elapsed, the HMI navigates to the main screen.
 
 To model and implement this behaviour we will be dealing with two Eclipse projects:
@@ -71,7 +70,6 @@ Both projects will be related in such a way that the second one effects actions 
 
 h3(#tsdom-importing-the-sample-angular-project-into-eclipse). Importing the sample Angular project into Eclipse
 
-###. FIXME: The example should come from the Github example repository as announced above.
 
 The sample HMI application has to be imported into the Eclipse workspace.
 # In the Eclipse main menu, select _File → Import_. The _Import_ dialog opens.
