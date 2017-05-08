@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.SimpleGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
-import org.yakindu.sct.generator.core.GeneratorModule;
+import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
@@ -33,7 +33,7 @@ import com.google.inject.Binder;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class CppCodeGeneratorModule implements GeneratorModule {
+public class CppCodeGeneratorModule implements IGeneratorModule {
 
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {

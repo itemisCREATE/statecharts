@@ -19,7 +19,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
-import org.yakindu.sct.generator.core.GeneratorModule;
+import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.execution.IGeneratorEntryExecutor;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
@@ -71,7 +71,7 @@ public class GeneratorExtensions {
 		@Override
 		public Module getBindings(GeneratorEntry entry) {
 			try {
-				GeneratorModule module = (GeneratorModule) configElement.createExecutableExtension(ATTRIBUTE_BINDINGS);
+				IGeneratorModule module = (IGeneratorModule) configElement.createExecutableExtension(ATTRIBUTE_BINDINGS);
 				return new GeneratorModuleAdapter(module, entry);
 			} catch (CoreException e) {
 				e.printStackTrace();
@@ -172,9 +172,9 @@ public class GeneratorExtensions {
 	public static class GeneratorModuleAdapter implements Module {
 
 		private GeneratorEntry entry;
-		private GeneratorModule module;
+		private IGeneratorModule module;
 
-		public GeneratorModuleAdapter(GeneratorModule module, GeneratorEntry entry) {
+		public GeneratorModuleAdapter(IGeneratorModule module, GeneratorEntry entry) {
 			this.module = module;
 			this.entry = entry;
 		}
