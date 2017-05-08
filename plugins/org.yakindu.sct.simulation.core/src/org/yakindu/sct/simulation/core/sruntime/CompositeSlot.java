@@ -19,10 +19,10 @@ import java.util.List;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.CompositeSlot#getSlots <em>Slots</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getCompositeSlot()
  * @model

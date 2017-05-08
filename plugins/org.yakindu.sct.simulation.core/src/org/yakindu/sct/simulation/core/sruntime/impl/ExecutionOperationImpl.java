@@ -11,23 +11,24 @@
 package org.yakindu.sct.simulation.core.sruntime.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
+
+import org.yakindu.sct.simulation.core.sruntime.ExecutionOperation;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Execution Variable</b></em>'.
+ * An implementation of the model object '<em><b>Execution Operation</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class ExecutionVariableImpl extends ExecutionSlotImpl implements ExecutionVariable {
+public class ExecutionOperationImpl extends ExecutionVariableImpl implements ExecutionOperation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExecutionVariableImpl() {
+	public ExecutionOperationImpl() {
 		super();
 	}
 
@@ -38,7 +39,7 @@ public class ExecutionVariableImpl extends ExecutionSlotImpl implements Executio
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SRuntimePackage.Literals.EXECUTION_VARIABLE;
+		return SRuntimePackage.Literals.EXECUTION_OPERATION;
 	}
 
-} //ExecutionVariableImpl
+} //ExecutionOperationImpl

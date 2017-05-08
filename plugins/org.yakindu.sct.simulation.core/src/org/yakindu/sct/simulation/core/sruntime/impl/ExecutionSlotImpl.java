@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.yakindu.base.base.impl.NamedElementImpl;
+import org.yakindu.base.types.Type;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
 
@@ -24,13 +25,13 @@ import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getFqName <em>Fq Name</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#isWritable <em>Writable</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -103,7 +104,7 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Type type;
+	protected Type type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -129,10 +130,10 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Type getType() {
+	public Type getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
-			type = (org.yakindu.base.types.Type)eResolveProxy(oldType);
+			type = (Type)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SRuntimePackage.EXECUTION_SLOT__TYPE, oldType, type));
@@ -146,7 +147,7 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Type basicGetType() {
+	public Type basicGetType() {
 		return type;
 	}
 
@@ -155,8 +156,8 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(org.yakindu.base.types.Type newType) {
-		org.yakindu.base.types.Type oldType = type;
+	public void setType(Type newType) {
+		Type oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_SLOT__TYPE, oldType, type));
@@ -264,7 +265,7 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 				setWritable((Boolean)newValue);
 				return;
 			case SRuntimePackage.EXECUTION_SLOT__TYPE:
-				setType((org.yakindu.base.types.Type)newValue);
+				setType((Type)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -288,7 +289,7 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 				setWritable(WRITABLE_EDEFAULT);
 				return;
 			case SRuntimePackage.EXECUTION_SLOT__TYPE:
-				setType((org.yakindu.base.types.Type)null);
+				setType((Type)null);
 				return;
 		}
 		super.eUnset(featureID);

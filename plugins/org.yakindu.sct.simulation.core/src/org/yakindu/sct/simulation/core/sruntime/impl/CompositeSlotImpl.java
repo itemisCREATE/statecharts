@@ -28,10 +28,10 @@ import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
  * <em><b>Composite Slot</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl#getSlots <em>Slots</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
