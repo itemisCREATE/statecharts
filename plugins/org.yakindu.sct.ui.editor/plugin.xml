@@ -531,6 +531,18 @@
                      actionId="cut">
                </GlobalActionId>
             </ElementType>
+              <ElementType
+                  class="org.eclipse.gmf.runtime.diagram.ui.internal.editparts.NoteAttachmentEditPart">
+               <GlobalActionId
+                     actionId="delete">
+               </GlobalActionId>
+               <GlobalActionId
+                     actionId="copy">
+               </GlobalActionId>
+               <GlobalActionId
+                     actionId="cut">
+               </GlobalActionId>
+            </ElementType>
              <ElementType
                   class="org.eclipse.gmf.runtime.diagram.ui.internal.editparts.TextEditPart">
                <GlobalActionId
