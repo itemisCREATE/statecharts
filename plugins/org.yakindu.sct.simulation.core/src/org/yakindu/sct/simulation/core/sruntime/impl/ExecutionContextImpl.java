@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.impl.NamedElementImpl;
+import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
@@ -45,6 +46,7 @@ import com.google.common.collect.Sets;
  * <em><b>Execution Context</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getFqName <em>Fq Name</em>}</li>
@@ -56,7 +58,6 @@ import com.google.common.collect.Sets;
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getSuspendedElements <em>Suspended Elements</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#isSnapshot <em>Snapshot</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -126,7 +127,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.types.Type type;
+	protected Type type;
 
 	/**
 	 * The cached value of the '{@link #getSlots() <em>Slots</em>}' containment reference list.
@@ -206,10 +207,10 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Type getType() {
+	public Type getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
-			type = (org.yakindu.base.types.Type)eResolveProxy(oldType);
+			type = (Type)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SRuntimePackage.EXECUTION_CONTEXT__TYPE, oldType, type));
@@ -223,7 +224,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.types.Type basicGetType() {
+	public Type basicGetType() {
 		return type;
 	}
 
@@ -232,8 +233,8 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(org.yakindu.base.types.Type newType) {
-		org.yakindu.base.types.Type oldType = type;
+	public void setType(Type newType) {
+		Type oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_CONTEXT__TYPE, oldType, type));
@@ -593,7 +594,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				setWritable((Boolean)newValue);
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
-				setType((org.yakindu.base.types.Type)newValue);
+				setType((Type)newValue);
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__SLOTS:
 				getSlots().clear();
@@ -635,7 +636,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				setWritable(WRITABLE_EDEFAULT);
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
-				setType((org.yakindu.base.types.Type)null);
+				setType((Type)null);
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__SLOTS:
 				getSlots().clear();

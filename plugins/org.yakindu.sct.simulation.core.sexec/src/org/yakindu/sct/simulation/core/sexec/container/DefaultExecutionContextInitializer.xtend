@@ -33,9 +33,8 @@ import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.EventDirection
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
+import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory
 import org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl
-import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl
-import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl
 
 /**
  * 
@@ -52,8 +51,11 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
 		flow.scopes.forEach[context.slots += transform]
 	}
-	
-	def dispatch ExecutionSlot create composite : createImportSlot() transform(ImportScope scope) {
+
+	def dispatch ExecutionSlot transform(ImportScope scope) {
+		val composite = SRuntimeFactory.eINSTANCE.createCompositeSlot => [
+			name = "import"
+		]
 		// retrieve namespaces from variable names and create corresponding composite slots
 		for (Declaration decl : scope.declarations.filter(ImportDeclaration).map[declaration]) {
 			val pkg = EcoreUtil2.getContainerOfType(decl, Package)
@@ -68,26 +70,18 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 				if (!slot.slots.exists[fqName == declarationSlot.fqName]) {
 					slot.slots += declarationSlot
 				}
-			}
-			else {
+			} else {
 				composite.slots += decl.transform
 			}
 		}
+		composite
 	}
-	
-	/**
-	 * Create only one root slot for imports independently on how many ImportScopes exist
-	 */
-	def CompositeSlot create slot : new CompositeSlotImpl() createImportSlot() {
-		slot.name = "imports"
-	}
-	
+
 	def getSlotFor(List<ExecutionSlot> slots, String name) {
 		val existingSlot = slots.findFirst[it.name == name]
 		if (existingSlot != null && existingSlot instanceof CompositeSlot) {
 			existingSlot as CompositeSlot
-		}
-		else {
+		} else {
 			val newSlot = new CompositeSlotImpl()
 			newSlot.name = name
 			slots += newSlot
@@ -95,49 +89,63 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		}
 	}
 
-	def dispatch ExecutionSlot create new CompositeSlotImpl() transform(InternalScope scope) {
-		it.name = "internal"
-		scope.declarations.forEach[decl|it.slots += decl.transform]
+	def dispatch ExecutionSlot transform(InternalScope scope) {
+		SRuntimeFactory.eINSTANCE.createCompositeSlot => [
+			name = "internal"
+			scope.declarations.forEach[decl|it.slots += decl.transform]
+		]
 	}
 
-	def dispatch ExecutionSlot create new CompositeSlotImpl() transform(Scope scope) {
-		it.name = "time events"
-		scope.declarations.forEach[decl|it.slots += decl.transform]
+	def dispatch ExecutionSlot transform(Scope scope) {
+		SRuntimeFactory.eINSTANCE.createCompositeSlot => [
+			name = "time events"
+			scope.declarations.forEach[decl|slots += decl.transform]
+		]
 	}
 
-	def dispatch ExecutionSlot create new CompositeSlotImpl() transform(InterfaceScope scope) {
-		if(scope.name != null) it.name = scope.name else it.name = "default"
-		scope.declarations.forEach[decl|it.slots += decl.transform]
+	def dispatch ExecutionSlot transform(InterfaceScope scope) {
+		SRuntimeFactory.eINSTANCE.createCompositeSlot => [
+			if(scope.name != null) name = scope.name else name = "default"
+			scope.declarations.forEach[decl|slots += decl.transform]
+		]
 	}
 
-	def dispatch ExecutionSlot create new ExecutionVariableImpl() transform(VariableDefinition variable) {
-		it.name = variable.fullyQualifiedName.lastSegment
-		it.fqName = variable.fullyQualifiedName.toString
-		it.type = variable.infer.type
-		it.value = it.type?.defaultValue
-		it.writable = !variable.const
+	def dispatch ExecutionSlot transform(VariableDefinition variable) {
+		SRuntimeFactory.eINSTANCE.createExecutionVariable => [
+			name = variable.fullyQualifiedName.lastSegment
+			fqName = variable.fullyQualifiedName.toString
+			type = variable.infer.type
+			value = it.type?.defaultValue
+			writable = !variable.const
+		]
 	}
 
-	def dispatch ExecutionSlot create new ExecutionEventImpl() transform(EventDefinition event) {
-		it.name = event.fullyQualifiedName.lastSegment
-		it.fqName = event.fullyQualifiedName.toString
-		it.type = event.type
-		it.value = it.type?.defaultValue
-		it.direction = EventDirection.get(event.direction.value)
+	def dispatch ExecutionSlot transform(EventDefinition event) {
+		SRuntimeFactory.eINSTANCE.createExecutionEvent => [
+			name = event.fullyQualifiedName.lastSegment
+			fqName = event.fullyQualifiedName.toString
+			type = event.type
+			value = it.type?.defaultValue
+			direction = EventDirection.get(event.direction.value)
+		]
 	}
 
-	def dispatch ExecutionSlot create new ExecutionVariableImpl() transform(OperationDefinition op) {
-		it.name = op.fullyQualifiedName.lastSegment
-		it.fqName = op.fullyQualifiedName.toString
-		it.type = if(op.type != null) op.type else getType(ITypeSystem.VOID)
-		it.value = it.type.defaultValue
+	def dispatch ExecutionSlot transform(OperationDefinition op) {
+		SRuntimeFactory.eINSTANCE.createExecutionOperation => [
+			name = op.fullyQualifiedName.lastSegment
+			fqName = op.fullyQualifiedName.toString
+			type = if(op.type != null) op.type else getType(ITypeSystem.VOID)
+			value = it.type.defaultValue
+		]
 	}
 
-	def dispatch ExecutionSlot create new ExecutionEventImpl() transform(TimeEvent event) {
-		it.name = event.fullyQualifiedName.lastSegment
-		it.fqName = event.fullyQualifiedName.toString
-		it.type = getType(ITypeSystem.INTEGER)
-		it.value = it.type.defaultValue
+	def dispatch ExecutionSlot transform(TimeEvent event) {
+		SRuntimeFactory.eINSTANCE.createExecutionEvent => [
+			name = event.fullyQualifiedName.lastSegment
+			fqName = event.fullyQualifiedName.toString
+			type = getType(ITypeSystem.INTEGER)
+			value = type.defaultValue
+		]
 	}
 
 }

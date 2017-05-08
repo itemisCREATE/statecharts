@@ -57,7 +57,7 @@ public class SRuntimeSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
@@ -122,6 +122,15 @@ public class SRuntimeSwitch<T> extends Switch<T> {
 				if (result == null) result = caseCompositeSlot(referenceSlot);
 				if (result == null) result = caseExecutionSlot(referenceSlot);
 				if (result == null) result = caseNamedElement(referenceSlot);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SRuntimePackage.EXECUTION_OPERATION: {
+				ExecutionOperation executionOperation = (ExecutionOperation)theEObject;
+				T result = caseExecutionOperation(executionOperation);
+				if (result == null) result = caseExecutionVariable(executionOperation);
+				if (result == null) result = caseExecutionSlot(executionOperation);
+				if (result == null) result = caseNamedElement(executionOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -216,6 +225,21 @@ public class SRuntimeSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReferenceSlot(ReferenceSlot object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Execution Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Execution Operation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExecutionOperation(ExecutionOperation object) {
 		return null;
 	}
 

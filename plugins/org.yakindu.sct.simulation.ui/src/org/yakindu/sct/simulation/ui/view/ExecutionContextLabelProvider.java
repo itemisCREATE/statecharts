@@ -17,6 +17,7 @@ import org.eclipse.swt.custom.StyleRange;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionOperation;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
 import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot;
@@ -63,7 +64,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			if (value != null) {
 				if (((ExecutionSlot) element).getType().getOriginType() instanceof EnumerationType) {
 					EnumerationType enumType = (EnumerationType) ((ExecutionSlot) element).getType().getOriginType();
-					String text = enumType.getEnumerator().get(((Long)value).intValue()).getName();
+					String text = enumType.getEnumerator().get(((Long) value).intValue()).getName();
 					cell.setText(text);
 				} else {
 					cell.setText(value.toString());
@@ -95,6 +96,10 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 					cell.setImage(SimulationImages.EVENT_DISABLED.image());
 				}
 			}
+		} else if (element instanceof ExecutionOperation) {
+			ExecutionVariable variable = (ExecutionVariable) element;
+			cell.setText(variable.getName());
+			cell.setImage(SimulationImages.VARIABLE.image());
 		} else if (element instanceof ExecutionVariable) {
 			ExecutionVariable variable = (ExecutionVariable) element;
 			cell.setText(variable.getName());

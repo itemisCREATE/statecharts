@@ -551,6 +551,70 @@ public interface SRuntimePackage extends EPackage {
 	int REFERENCE_SLOT_FEATURE_COUNT = COMPOSITE_SLOT_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionOperationImpl <em>Execution Operation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.simulation.core.sruntime.impl.ExecutionOperationImpl
+	 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getExecutionOperation()
+	 * @generated
+	 */
+	int EXECUTION_OPERATION = 6;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_OPERATION__NAME = EXECUTION_VARIABLE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_OPERATION__VALUE = EXECUTION_VARIABLE__VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Fq Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_OPERATION__FQ_NAME = EXECUTION_VARIABLE__FQ_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Writable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_OPERATION__WRITABLE = EXECUTION_VARIABLE__WRITABLE;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_OPERATION__TYPE = EXECUTION_VARIABLE__TYPE;
+
+	/**
+	 * The number of structural features of the '<em>Execution Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_OPERATION_FEATURE_COUNT = EXECUTION_VARIABLE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.simulation.core.sruntime.EventDirection <em>Event Direction</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -558,7 +622,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getEventDirection()
 	 * @generated
 	 */
-	int EVENT_DIRECTION = 6;
+	int EVENT_DIRECTION = 7;
 
 	/**
 	 * The meta object id for the '<em>Java Object</em>' data type.
@@ -568,7 +632,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getJavaObject()
 	 * @generated
 	 */
-	int JAVA_OBJECT = 7;
+	int JAVA_OBJECT = 8;
 
 
 	/**
@@ -773,6 +837,16 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getReferenceSlot_Reference();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionOperation <em>Execution Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Execution Operation</em>'.
+	 * @see org.yakindu.sct.simulation.core.sruntime.ExecutionOperation
+	 * @generated
+	 */
+	EClass getExecutionOperation();
 
 	/**
 	 * Returns the meta object for enum '{@link org.yakindu.sct.simulation.core.sruntime.EventDirection <em>Event Direction</em>}'.
@@ -980,6 +1054,16 @@ public interface SRuntimePackage extends EPackage {
 		 * @generated
 		 */
 		EReference REFERENCE_SLOT__REFERENCE = eINSTANCE.getReferenceSlot_Reference();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionOperationImpl <em>Execution Operation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.simulation.core.sruntime.impl.ExecutionOperationImpl
+		 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getExecutionOperation()
+		 * @generated
+		 */
+		EClass EXECUTION_OPERATION = eINSTANCE.getExecutionOperation();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.simulation.core.sruntime.EventDirection <em>Event Direction</em>}' enum.

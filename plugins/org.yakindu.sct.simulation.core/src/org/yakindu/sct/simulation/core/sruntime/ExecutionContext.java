@@ -25,13 +25,13 @@ import org.yakindu.sct.model.sgraph.RegularState;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getActiveStates <em>Active States</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getExecutedElements <em>Executed Elements</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getSuspendedElements <em>Suspended Elements</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#isSnapshot <em>Snapshot</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getExecutionContext()
  * @model
