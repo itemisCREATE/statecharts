@@ -99,7 +99,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 		} else if (element instanceof ExecutionOperation) {
 			ExecutionVariable variable = (ExecutionVariable) element;
 			cell.setText(variable.getName());
-			cell.setImage(SimulationImages.VARIABLE.image());
+			cell.setImage(SimulationImages.OPERATION.image());
 		} else if (element instanceof ExecutionVariable) {
 			ExecutionVariable variable = (ExecutionVariable) element;
 			cell.setText(variable.getName());
