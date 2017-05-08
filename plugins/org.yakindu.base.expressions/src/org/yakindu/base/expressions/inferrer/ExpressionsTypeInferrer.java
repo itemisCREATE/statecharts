@@ -294,7 +294,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	 * 
 	 * @throws TypeParameterInferrenceException
 	 */
-	protected Map<TypeParameter, InferenceResult> validateParameters(
+	public Map<TypeParameter, InferenceResult> validateParameters(
 			Map<TypeParameter, InferenceResult> typeParameterMapping, Operation operation, List<Expression> args,
 			IValidationIssueAcceptor acceptor) {
 		List<Parameter> parameters = operation.getParameters();
