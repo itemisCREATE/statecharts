@@ -41,6 +41,7 @@ public class StatechartDiagramEditPart extends DiagramEditPart implements IDiagr
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new XYLayoutEditPolicy());
 		removeEditPolicy(EditPolicyRoles.POPUPBAR_ROLE);
+		installEditPolicy(EditPolicyRoles.SNAP_FEEDBACK_ROLE, new SimpleSnapFeedbackPolicy());
 	}
 
 	public void setPreferencesHint(PreferencesHint preferenceHint) {
