@@ -32,6 +32,7 @@ class StatemachineSource implements IContentTemplate {
 	@Inject extension INamingService
 	@Inject extension FlowCode
 	@Inject extension ConstantInitializationResolver
+	@Inject extension StateConfVectorIndexCalculator
 	@Inject protected extension StateVectorExtensions
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
@@ -204,9 +205,9 @@ class StatemachineSource implements IContentTemplate {
 			{
 				«FOR s : states»
 				case «s.shortName» :
-					result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.shortName»
-					«ELSE»«scHandle»->stateConfVector[«s.stateVector.offset»] >= «s.shortName»
-						&& «scHandle»->stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.shortName»«ENDIF»);
+					result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.getDefine»] == «s.shortName»
+					«ELSE»«scHandle»->stateConfVector[«s.getDefine»] >= «s.shortName»
+						&& «scHandle»->stateConfVector[«s.getDefine»] <= «s.subStates.last.shortName»«ENDIF»);
 					break;
 				«ENDFOR»
 				default:

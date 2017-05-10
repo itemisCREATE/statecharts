@@ -214,7 +214,7 @@ class StatemachineHeader implements IContentTemplate {
 	def stateConfVectorDefines(ExecutionFlow it) {
 		'''
 		«FOR state : states»
-		#define SCVI_«state.shortName» «state.getIndex»
+		#define «state.getDefine» «state.getIndex»
 		«ENDFOR»
 		'''
 	}
