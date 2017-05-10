@@ -34,6 +34,7 @@ class StatemachineHeader implements IContentTemplate {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntries
 	@Inject extension INamingService
+	@Inject extension StateConfVectorIndexCalculator
 	
 	@Inject
 	IGenArtifactConfigurations defaultConfigs
@@ -187,6 +188,10 @@ class StatemachineHeader implements IContentTemplate {
 	def statemachineTypeDecl(ExecutionFlow it) '''
 		/*! Define dimension of the state configuration vector for orthogonal states. */
 		#define «type.toUpperCase»_MAX_ORTHOGONAL_STATES «stateVector.size»
+		
+		/*! Define indices of states in the StateConfVector */
+		«stateConfVectorDefines»
+		
 		«IF hasHistory»
 			/*! Define dimension of the state configuration vector for history states. */
 		#define «type.toUpperCase»_MAX_HISTORY_STATES «historyVector.size»«ENDIF»
@@ -206,6 +211,14 @@ class StatemachineHeader implements IContentTemplate {
 			«ENDFOR»			
 		} «type»;
 	'''
+	
+	def stateConfVectorDefines(ExecutionFlow it) {
+		'''
+		«FOR state : states»
+		#define «state.getDefine» «state.getIndex»
+		«ENDFOR»
+		'''
+	}
 
 	def dispatch scopeFunctionPrototypes(StatechartScope it) '''
 		«FOR d : declarations»
