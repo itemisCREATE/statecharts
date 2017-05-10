@@ -103,7 +103,6 @@ class StatemachineSource implements IContentTemplate {
 			«clearOutEventsFctID»(handle);
 		
 			«initSequence.code»
-		
 		}
 	'''
 	
@@ -221,15 +220,17 @@ class StatemachineSource implements IContentTemplate {
 	def isActiveFunction(ExecutionFlow it) '''
 		sc_boolean «isActiveFctID»(const «scHandleDecl»)
 		{
-			sc_boolean result = bool_false;
+			sc_boolean active = bool_false;
+			sc_boolean initialized = bool_true;
 			int i;
 			
 			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; i++)
 			{
-				result = result || («scHandle»->stateConfVector[i] != «null_state»);
+				active = active || («scHandle»->stateConfVector[i] != «null_state»);
+				initialized = initialized && («scHandle»->stateConfVector[i] != NOT_INITIALIZED_STATE);
 			}
 
-			return result;
+			return active && initialized;
 		}
 	'''
 	
