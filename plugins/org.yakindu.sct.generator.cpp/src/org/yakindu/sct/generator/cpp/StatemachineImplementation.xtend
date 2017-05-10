@@ -14,6 +14,7 @@ import com.google.inject.Inject
 import java.util.List
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
+import org.yakindu.sct.generator.c.StateConfVectorIndexCalculator
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
@@ -37,6 +38,7 @@ class StatemachineImplementation implements IContentTemplate {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension INamingService
 	@Inject extension ExpressionCode
+	@Inject extension StateConfVectorIndexCalculator
 	@Inject protected extension StateVectorExtensions
 	
 	protected GeneratorEntry entry
@@ -236,15 +238,14 @@ class StatemachineImplementation implements IContentTemplate {
 			{
 				«FOR s : states»
 				case «s.shortName.asEscapedIdentifier» : 
-					return (sc_boolean) («IF s.leaf»stateConfVector[«s.stateVector.offset»] == «s.shortName.asEscapedIdentifier»
-					«ELSE»stateConfVector[«s.stateVector.offset»] >= «s.shortName.asEscapedIdentifier»
-						&& stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.shortName.asEscapedIdentifier»«ENDIF»);
+					return (sc_boolean) («IF s.leaf»stateConfVector[«s.getDefine»] == «s.shortName.asEscapedIdentifier»
+					«ELSE»stateConfVector[«s.getDefine»] >= «s.shortName.asEscapedIdentifier»
+						&& stateConfVector[«s.getDefine»] <= «s.subStates.last.shortName.asEscapedIdentifier»«ENDIF»);
 				«ENDFOR»
 				default: return false;
 			}
 		}
 	'''
-	
 	
 	def isActiveFunction(ExecutionFlow it) '''
 		sc_boolean «module»::isActive() const
