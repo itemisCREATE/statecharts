@@ -27,6 +27,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
+import org.yakindu.base.types.Operation
 
 /**
  * Default implementation for resolving execution slots based on expressions.
@@ -53,6 +54,10 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 	
 	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, EObject feature){
 		return context.getVariable(e.feature.fullyQualifiedName.toString)
+	}
+	
+	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Operation feature){
+		return resolveCompositeSlot(context, e)
 	}
 	
 	def dispatch ExecutionSlot resolveByFeature(ExecutionContext context, FeatureCall e, Event feature){
@@ -95,6 +100,10 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 		slot // fallback
 	}
 	
+	def protected dispatch ExecutionSlot resolveFromSlot(CompositeSlot slot, Operation call) {
+		resolveByFeature(slot, call)
+	}
+	
 	def protected dispatch ExecutionSlot resolveFromSlot(CompositeSlot slot, FeatureCall call) {
 		resolveByFeature(slot, call.feature)
 	}
@@ -104,6 +113,10 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 	}
 	
 	def protected dispatch ExecutionSlot resolveByFeature(CompositeSlot slot, Property feature) {
+		resolveByName(slot, feature)
+	}
+	
+	def protected dispatch ExecutionSlot resolveByFeature(CompositeSlot slot, Operation feature) {
 		resolveByName(slot, feature)
 	}
 	
