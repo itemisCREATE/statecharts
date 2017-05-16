@@ -117,7 +117,7 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 	
 	def protected ExecutionSlot packageNamespaceAwareResolve(ExecutionContext context, EObject element) {
 		val pkg = EcoreUtil2.getContainerOfType(element, Package)
-		if (pkg != null) {
+		if (pkg != null && pkg.name != null) {
 			context.getSlot(pkg.name + "." + element.fullyQualifiedName.toString)
 		}
 		else {
