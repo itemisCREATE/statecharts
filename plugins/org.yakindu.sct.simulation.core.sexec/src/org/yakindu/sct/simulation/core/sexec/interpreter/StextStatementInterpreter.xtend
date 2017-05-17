@@ -66,7 +66,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	@Inject
 	extension IQualifiedNameProvider provider
-	@Inject
+	@Inject(optional=true)
 	protected IOperationMockup operationDelegate
 	@Inject
 	protected extension IExecutionSlotResolver resolver
