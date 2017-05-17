@@ -33,4 +33,8 @@
     <enumerator
         name="PARENT_FIRST"/>
   </member>
+  <member xsi:type="types:AnnotationType"
+      name="ChildFirstExecution"/>
+  <member xsi:type="types:AnnotationType"
+      name="ParentFirstExecution"/>
 </types:Package>
