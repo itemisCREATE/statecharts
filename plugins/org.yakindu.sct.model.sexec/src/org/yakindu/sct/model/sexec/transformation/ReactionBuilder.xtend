@@ -34,6 +34,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.DefaultTrigger
+import org.yakindu.sct.model.sexec.StateVector
 
 class ReactionBuilder {
 	@Inject extension SexecElementMapping mapping
@@ -164,10 +165,22 @@ class ReactionBuilder {
 	def Sequence defineCycle(RegularState state) {
 	
 		val execState = state.create
-		val parents = state.parentStates.map(p|p.create as ExecutionState).filter(p|p.stateVector.offset == execState.stateVector.offset)
-		val parentNodes = if ((EcoreUtil2::getRootContainer(execState) as ExecutionFlow).stateVector.offset == execState.stateVector.offset)
-			Iterables::concat(parents.map(p|p as ExecutionNode),newHashSet(EcoreUtil2::getRootContainer(execState) as ExecutionNode))
-			else parents.map(p|p as ExecutionNode)
+		
+		val shouldExecuteParent = if (state.statechart.childFirstExecution) 
+								[StateVector sv | sv.offset == execState.stateVector.offset]
+							else
+								[StateVector sv | sv.offset + sv.size == execState.stateVector.offset + execState.stateVector.size]
+								
+		val parents = state.parentStates.map(p|p.create as ExecutionState).filter(p| shouldExecuteParent.apply(p.stateVector) )
+		
+		var parentNodes = parents.map(p|p as ExecutionNode).toList
+		
+		if ( shouldExecuteParent.apply( execState.flow.stateVector) )
+			Iterables::concat(parents.map(p|p as ExecutionNode),newHashSet(EcoreUtil2::getRootContainer(execState) as ExecutionNode)).toList
+			else parents.map(p|p as ExecutionNode).toList
+		
+		if (state.statechart.childFirstExecution) parentNodes = parentNodes.reverse
+		
 		execState.reactSequence = parentNodes.fold(null, [r, s | {
 			s.createReactionSequence(r)
 		}])
@@ -190,6 +203,7 @@ class ReactionBuilder {
 				ifStep.thenStep = lr.effect.newCall
 				ifStep
 		}))
+		
 		if (localStep != null) localSteps.steps += localStep
 		if (localSteps.steps.empty) localSteps = null
 				
@@ -209,6 +223,7 @@ class ReactionBuilder {
 		
 		return cycle
 	}
+	
 	
 	def ExecutionFlow defineEntryReactions(Statechart statechart, ExecutionFlow r) {
 		statechart.allEntries.forEach(e|e.defineReaction)
