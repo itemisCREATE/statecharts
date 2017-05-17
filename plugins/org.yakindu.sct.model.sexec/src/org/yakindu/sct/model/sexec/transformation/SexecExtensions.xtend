@@ -20,7 +20,9 @@ import org.yakindu.sct.model.sexec.SexecFactory
 import org.yakindu.sct.model.sexec.StateVector
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.Sequence
-
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.EcoreUtil2
 
 class SexecExtensions {
 	
@@ -136,7 +138,9 @@ class SexecExtensions {
 		steps.findFirst(s | s.name == null || s.name.trim == "" ||  s.name.trim == DEFAULT_SEQUENCE_NAME )
 	}
 	
-	
+	def ExecutionFlow getFlow(EObject it) {
+		(EcoreUtil2::getRootContainer(it) as ExecutionFlow)
+	}
 	
 	 
 }
