@@ -60,8 +60,6 @@ public class JavaOperationMockup implements IOperationMockup {
 
 	@Override
 	public boolean canExecute(Operation definition, Object[] parameter) {
-		if(callbacks == null)
-			return false;
 		for (Object callback : callbacks) {
 			Class<?> current = callback.getClass();
 			while (current != Object.class) {

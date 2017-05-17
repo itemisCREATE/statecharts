@@ -35,4 +35,20 @@ public interface IOperationMockup {
 	 */
 	public Object execute(Operation definition, Object[] parameter);
 	
+	/**
+	 * @author Johannes Dicks - Initial contribution and API
+	 */
+	public static final class NullOperationMock implements IOperationMockup{
+
+		@Override
+		public boolean canExecute(Operation definition, Object[] parameter) {
+			return false;
+		}
+
+		@Override
+		public Object execute(Operation definition, Object[] parameter) {
+			return null;
+		}
+	}
+	
 }
