@@ -165,7 +165,7 @@ class SgraphExtensions {
 	}
 	
 	def boolean isChildFirstExecution(Statechart it) {
-		findAnnotation("ParentFirstExecution") == null
+		findAnnotation("ChildFirstExecution") != null
 	}
 	
 	def Annotation findAnnotation(AnnotatableElement it, String name) {
