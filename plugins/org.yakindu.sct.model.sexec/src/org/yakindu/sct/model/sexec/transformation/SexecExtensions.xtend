@@ -139,7 +139,9 @@ class SexecExtensions {
 	}
 	
 	def ExecutionFlow getFlow(EObject it) {
-		(EcoreUtil2::getRootContainer(it) as ExecutionFlow)
+		val root = EcoreUtil2::getRootContainer(it)
+		
+		return if ( root instanceof ExecutionFlow) root as ExecutionFlow else null
 	}
 	
 	 
