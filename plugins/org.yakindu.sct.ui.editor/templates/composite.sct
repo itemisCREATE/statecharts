@@ -41,12 +41,12 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_IZnYAfSOEeKTtv0EBPAdFQ" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_IZnYAvSOEeKTtv0EBPAdFQ"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_IZp0QfSOEeKTtv0EBPAdFQ" name="isHorizontal" booleanValue="true"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_IZnYA_SOEeKTtv0EBPAdFQ" x="94" y="67"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_IZnYA_SOEeKTtv0EBPAdFQ" x="20" y="47"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_bpjSQfR7EeKYZsO6tCRi-g"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_bpTaofR7EeKYZsO6tCRi-g" fontName="Verdana" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_bpj5UPR7EeKYZsO6tCRi-g" x="90" y="10" width="178" height="159"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_bpj5UPR7EeKYZsO6tCRi-g" x="90" y="10" width="151" height="159"/>
     </children>
     <children xsi:type="notation:Shape" xmi:id="_bpwGk_R7EeKYZsO6tCRi-g" type="StatechartText" fontName="Verdana" lineColor="4210752">
       <children xsi:type="notation:DecorationNode" xmi:id="_bpwtoPR7EeKYZsO6tCRi-g" type="StatechartName">
@@ -64,7 +64,7 @@
         <styles xsi:type="notation:ShapeStyle" xmi:id="_KMqC8fSOEeKTtv0EBPAdFQ"/>
         <layoutConstraint xsi:type="notation:Location" xmi:id="_KMqC8vSOEeKTtv0EBPAdFQ" y="10"/>
       </children>
-      <styles xsi:type="notation:ConnectorStyle" xmi:id="_KMo00fSOEeKTtv0EBPAdFQ" lineColor="4210752"/>
+      <styles xsi:type="notation:ConnectorStyle" xmi:id="_KMo00fSOEeKTtv0EBPAdFQ" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_KMpb4PSOEeKTtv0EBPAdFQ" fontName="Verdana"/>
       <bendpoints xsi:type="notation:RelativeBendpoints" xmi:id="_KMo00vSOEeKTtv0EBPAdFQ" points="[7, 2, -94, -35]$[103, 30, 2, -7]"/>
       <targetAnchor xsi:type="notation:IdentityAnchor" xmi:id="_KMvigPSOEeKTtv0EBPAdFQ" id="(0.32,0.1509433962264151)"/>
