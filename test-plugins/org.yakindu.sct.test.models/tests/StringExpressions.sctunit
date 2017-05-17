@@ -9,7 +9,7 @@ testclass StringExpressions for statechart StringExpressions	{
 		
 		
 		raise e
-		cycle
+		proceed 1 cycle
 		assert active(StringExpressions.main_region.VarToVarCompareSucceeded)
 		assert guardStringEqual
 		assert guardStringNotEqual
@@ -17,7 +17,7 @@ testclass StringExpressions for statechart StringExpressions	{
 		assert stringVarNotEqual
 		
 		raise e
-		cycle
+		proceed 1 cycle
 		assert active(StringExpressions.main_region.VarToConstCompareSucceeded)	
 		assert guardStringEqual
 		assert guardStringNotEqual
@@ -25,7 +25,7 @@ testclass StringExpressions for statechart StringExpressions	{
 		assert stringVarNotEqual
 		
 		raise e
-		cycle
+		proceed 1 cycle
 		assert active(StringExpressions.main_region.ConstToVarCompareSucceeded)		
 		assert guardStringEqual
 		assert guardStringNotEqual
@@ -33,7 +33,7 @@ testclass StringExpressions for statechart StringExpressions	{
 		assert stringVarNotEqual
 		
 		raise e		
-		cycle
+		proceed 1 cycle
 		assert active(StringExpressions.main_region.ConstToConstCompareSucceeded)
 		assert guardStringEqual
 		assert guardStringNotEqual

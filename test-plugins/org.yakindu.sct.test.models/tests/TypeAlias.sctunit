@@ -5,17 +5,17 @@ testclass TypeAlias for statechart TypeAlias{
 		assert active(TypeAlias.main_region.Start)
 		assert myVar == 1
 		
-		cycle
+		proceed 1 cycle
 		
 		assert active(TypeAlias.main_region.Mid)
 		assert myString == "TypeSystem"
 		
-		cycle
+		proceed 1 cycle
 		
 		assert active(TypeAlias.main_region.Mid2)
 		
 		raise myEvent 
-		cycle
+		proceed 1 cycle
 		
 		assert active(TypeAlias.main_region.End)		 
 	} 

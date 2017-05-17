@@ -3,7 +3,7 @@ testclass ValuedEvents for statechart ValuedEvents {
 	operation valuedEventsTest(){
 		
 		enter
-		cycle
+		proceed 1 cycle
 //		assert active(ValuedEvents.main_region1.A)
 //		assert active (ValuedEvents.integer_region.C)
 //		assert active (ValuedEvents.string_region.C)
@@ -19,7 +19,7 @@ testclass ValuedEvents for statechart ValuedEvents {
 		raise realEvent : 20
 		raise stringEvent : "tool"
 		
-		cycle
+		proceed 1 cycle
 		assert active (ValuedEvents.integer_region.D)
 		assert active (ValuedEvents.string_region.D)
 		assert active (ValuedEvents.boolean_region.D)

@@ -7,7 +7,7 @@ testclass ExitState for statechart ExitState {
 		assert active(ExitState.r.A)
 		
 		raise e
-		cycle
+		proceed 1 cycle
 		assert active(ExitState.r.E) 
 	} 
 
@@ -18,7 +18,7 @@ testclass ExitState for statechart ExitState {
 		assert active(ExitState.r.A)
 		
 		raise f
-		cycle
+		proceed 1 cycle
 		assert active(ExitState.r.F) 
 	} 
 
@@ -29,7 +29,7 @@ testclass ExitState for statechart ExitState {
 		assert active(ExitState.r.A)
 		
 		raise g
-		cycle
+		proceed 1 cycle
 		assert active(ExitState.r.E) 
 	} 
 
@@ -40,7 +40,7 @@ testclass ExitState for statechart ExitState {
 		enter
 		assert active(ExitState.r.A)
 		
-		cycle
+		proceed 1 cycle
 		assert active(ExitState.r.A) 
 	} 
 

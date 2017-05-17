@@ -6,7 +6,7 @@ testclass HistoryWithoutInitialStep for statechart HistoryWithoutInitialStep {
 		assert active(HistoryWithoutInitialStep.main_region.B.r1.C)
 		
 		raise next
-		cycle
+		proceed 1 cycle
 		assert active(HistoryWithoutInitialStep.main_region.B.r1.D)
 	}
 	
@@ -16,11 +16,11 @@ testclass HistoryWithoutInitialStep for statechart HistoryWithoutInitialStep {
 		assert active(HistoryWithoutInitialStep.main_region.B.r1.C)
 
 		raise toA
-		cycle
+		proceed 1 cycle
 		assert active(HistoryWithoutInitialStep.main_region.A)
 		
 		raise toHistory
-		cycle
+		proceed 1 cycle
 		assert active(HistoryWithoutInitialStep.main_region.B.r1.C)
 	}
 		 
@@ -28,15 +28,15 @@ testclass HistoryWithoutInitialStep for statechart HistoryWithoutInitialStep {
 	operation enterDThroughHistory(){
 		init()
 		raise next
-		cycle
+		proceed 1 cycle
 		assert active(HistoryWithoutInitialStep.main_region.B.r1.D)
 
 		raise toA
-		cycle
+		proceed 1 cycle
 		assert active(HistoryWithoutInitialStep.main_region.A)
 		
 		raise toHistory
-		cycle
+		proceed 1 cycle
 		assert active(HistoryWithoutInitialStep.main_region.B.r1.D)
 	}
 		
@@ -45,6 +45,6 @@ testclass HistoryWithoutInitialStep for statechart HistoryWithoutInitialStep {
 		assert active(HistoryWithoutInitialStep.main_region.A) 
 		
 		raise toB
-		cycle
+		proceed 1 cycle
 	}
 }

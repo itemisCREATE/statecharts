@@ -6,13 +6,13 @@ testclass DeepHistory for statechart DeepHistory {
 		enter
 		
 		raise event1
-		cycle
+		proceed 1 cycle
 		raise event3
-		cycle
+		proceed 1 cycle
 		raise event5
-		cycle
+		proceed 1 cycle
 		raise event7
-		cycle
+		proceed 1 cycle
 		//Not possible to assert event1 because it is an IN event.
 		//assert event1
 		
@@ -21,13 +21,13 @@ testclass DeepHistory for statechart DeepHistory {
 		
 		// Leave State2. State4 and State9 should be saved as history.
 		raise event2
-		cycle
+		proceed 1 cycle
 		assert active ( DeepHistory.mainRegion.State1)
 		assert !active ( DeepHistory.mainRegion.State2._region0.State4._region0.State7._region0.State9)
 		
 		// Reenter State2. State9 should be activated (History of State2).
 		raise event1
-		cycle
+		proceed 1 cycle
 		assert !active (DeepHistory.mainRegion.State1)
 		assert active (DeepHistory.mainRegion.State2._region0.State4._region0.State7._region0.State9)
 	

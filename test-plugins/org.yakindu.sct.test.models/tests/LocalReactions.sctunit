@@ -4,7 +4,7 @@ testclass LocalReactions for statechart LocalReactions{
 		
 		enter
 		assert active(LocalReactions.main_region.A) 
-		cycle
+		proceed 1 cycle
 		assert x == 1
 		 
 	} 

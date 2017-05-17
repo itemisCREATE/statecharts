@@ -25,7 +25,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)
 				
 		raise e1
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) //x
 		assert active(STextKeywordsInStatesAndRegions.namespace.event)
@@ -48,7 +48,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)
 		
 		raise e2
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local) //x
@@ -71,7 +71,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)
 		
 		raise e1
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -94,7 +94,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)
 		
 		raise e2
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -117,7 +117,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)		
 		
 		raise e1	
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -140,7 +140,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)			
 		
 		raise e2
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -163,7 +163,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)	
 		 
 		raise e1
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -186,7 +186,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)			 
 		 
 		raise e2
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -209,7 +209,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)				 
 		 
 		raise e1
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -232,7 +232,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)	
 		
 		raise e2
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -255,7 +255,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)	
 		
 		raise e1
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -278,7 +278,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)	
 		
 		raise e2
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -301,7 +301,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)	
 		
 		raise e1
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -324,7 +324,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)
 			
 		raise e2	
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -347,7 +347,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)		
 				 
 		raise e1		 
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -370,7 +370,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)					 
 		
 		raise e2 
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -393,7 +393,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)	
 		 
 		raise e1 
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -416,7 +416,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)			 
 		
 		raise e2 
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -439,7 +439,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.raise)			 
 		
 		raise e1 
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)
@@ -462,7 +462,7 @@ testclass STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAn
 		assert active(STextKeywordsInStatesAndRegions.active.valueof)	//x	 	 
 		
 		raise e2 
-		cycle
+		proceed 1 cycle
 		assert active(STextKeywordsInStatesAndRegions.default.namespace)
 		assert active(STextKeywordsInStatesAndRegions.operation.internal) 
 		assert active(STextKeywordsInStatesAndRegions.namespace.local)

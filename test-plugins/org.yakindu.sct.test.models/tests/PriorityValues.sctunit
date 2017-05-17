@@ -6,7 +6,7 @@ testclass PriorityValues for statechart PriorityValues {
 		
 		assert active (PriorityValues.main_region.A)
 		raise event1
-		cycle
+		proceed 1 cycle
 		assert active(PriorityValues.main_region.C)
 	}
 	@Test
@@ -16,7 +16,7 @@ testclass PriorityValues for statechart PriorityValues {
 		
 		assert active (PriorityValues.someRegion.A)
 		raise event2
-		cycle
+		proceed 1 cycle
 		assert active(PriorityValues.someRegion.B)
 		assert !active(PriorityValues.main_region.E)
 		

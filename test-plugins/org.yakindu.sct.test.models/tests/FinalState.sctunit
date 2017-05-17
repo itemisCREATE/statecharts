@@ -2,7 +2,7 @@ testclass FinalState for statechart FinalState{
 	@Test
 	operation StatechartNameTest(){ 
 		enter
-		cycle
+		proceed 1 cycle
 		assert is_final
 		 
 	} 

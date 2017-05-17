@@ -13,7 +13,7 @@ testclass StatechartLocalReactions for statechart StatechartLocalReactions {
 			}else {
 				assert active (StatechartLocalReactions.main_region.S2)
 			}
-			cycle 
+			proceed 1 cycle 
 		} 
 	}
 }

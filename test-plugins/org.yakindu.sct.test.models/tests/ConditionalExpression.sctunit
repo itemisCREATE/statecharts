@@ -6,7 +6,7 @@ testclass ConditionalExpression for statechart ConditionalExpressions{
 		assert condition == 1
 		
 		raise e
-		cycle
+		proceed 1 cycle
 		
 		assert active (ConditionalExpressions.main_region.B)
 		assert condition == 2

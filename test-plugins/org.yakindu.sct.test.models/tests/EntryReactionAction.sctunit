@@ -21,7 +21,7 @@ testclass EntryReactionAction for statechart entries.EntryReactionAction {
 	operation entryOnRTS(){
 		init()
 		raise b
-		cycle
+		proceed 1 cycle
 		
 		assert ! enteredR1
 		assert ! enteredR2
@@ -39,7 +39,7 @@ testclass EntryReactionAction for statechart entries.EntryReactionAction {
 	operation noEntryTransitionActionOnHistory(){
 		init()
 		raise d
-		cycle
+		proceed 1 cycle
 		
 		assert ! enteredR1
 		assert ! enteredR2
@@ -51,9 +51,9 @@ testclass EntryReactionAction for statechart entries.EntryReactionAction {
 		enter
 		
 		raise b 
-		cycle 
+		proceed 1 cycle
 		raise d 
-		cycle
+		proceed 1 cycle
 		
 		enteredR1 = false
 		enteredR2 = false

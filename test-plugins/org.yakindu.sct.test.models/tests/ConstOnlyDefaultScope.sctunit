@@ -19,7 +19,7 @@ testclass ConstOnlyDefaultScope for statechart declarations.ConstOnlyDefaultScop
 		
 		enter
 		raise A.e : 1
-		cycle
+		proceed 1 cycle
 		assert active(declarations.ConstOnlyDefaultScope.main_region.B)
 		
 	}

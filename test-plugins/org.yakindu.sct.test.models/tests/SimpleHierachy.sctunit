@@ -8,7 +8,7 @@ testclass SimpleHierachy for statechart SimpleHierachy {
 		raise Event1
 		raise Event1
 		raise Event1
-		cycle
+		proceed 1 cycle
 		assert active (SimpleHierachy.main_region.B)
 		assert active (SimpleHierachy.main_region.B.subregion1.B1)
 	}

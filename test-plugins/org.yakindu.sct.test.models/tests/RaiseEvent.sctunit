@@ -7,8 +7,8 @@ testclass RaiseEvent for statechart RaiseEvent {
 		assert active ( RaiseEvent.second_region.SateA)
 		assert active (RaiseEvent.main_region.StateA)
 		raise e2
-		cycle
-		cycle
+		proceed 1 cycle
+		proceed 1 cycle
 		assert active (RaiseEvent.second_region.StateB)
 		assert active (RaiseEvent.main_region.StateB)
 	}

@@ -5,7 +5,7 @@ testclass FeatureCalls for statechart FeatureCalls {
 		assert active ( FeatureCalls.main_region.A)
 		//assert MyInterface.myInt == 0
 		//raise MyInterface.Event1
-		cycle
+		proceed 1 cycle
 		//assert MyInterface.myInt == 42
 		assert active (FeatureCalls.main_region.A)
 	}

@@ -3,7 +3,7 @@ testclass StaticChoice for statechart StaticChoice{
 	operation StaticChoiceTest(){ 
 		enter
 		assert active(StaticChoice.main_region.Start)
-		cycle
+		proceed 1 cycle
 		//assert active(StaticChoice.main_region.B) // doesn't work atm		 
 	} 
 }

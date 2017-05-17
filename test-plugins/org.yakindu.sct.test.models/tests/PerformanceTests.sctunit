@@ -27,7 +27,7 @@ testclass PerformanceTests for statechart PerformanceTest {
 				}
 			}
 
-			cycle
+			proceed 1 cycle
 		}
 
 		assert a > 2

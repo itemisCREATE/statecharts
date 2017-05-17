@@ -13,7 +13,7 @@ testclass InternalEventLifeCycle for statechart InternalEventLifeCycle {
 		// the internal event i1 must be raised and consumed in the low priority 
 		// region within the same cycle
 		raise e
-		cycle		
+		proceed 1 cycle
 		assert active(InternalEventLifeCycle.r1.A)
 		assert active(InternalEventLifeCycle.r2.D)
 
@@ -22,19 +22,19 @@ testclass InternalEventLifeCycle for statechart InternalEventLifeCycle {
 		
 
 		// make sure nothing happens during an empty cycle		
-		cycle
+		proceed 1 cycle
 		assert active(InternalEventLifeCycle.r1.A)
 		assert active(InternalEventLifeCycle.r2.D)
 		
 		// the internal event i2 should have no impact since it is raised 
 		// in a low priority region and will be cleared after the cycle
 		raise f
-		cycle
+		proceed 1 cycle
 		assert active(InternalEventLifeCycle.r1.A)
 		assert active(InternalEventLifeCycle.r2.C) 
 		
 		// make sure nothing happens during an empty cycle
-		cycle
+		proceed 1 cycle
 		assert active(InternalEventLifeCycle.r1.A)
 		assert active(InternalEventLifeCycle.r2.C) 
 	} 

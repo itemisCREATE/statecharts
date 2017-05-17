@@ -21,7 +21,7 @@ testclass GuardedExit for statechart GuardedExit {
 	operation checkDone(shouldBeDone : boolean){
 		raise e
 		
-		cycle
+		proceed 1 cycle
 
 		assert active(GuardedExit.main_region.B)
 		assert shouldBeDone ? done : !done

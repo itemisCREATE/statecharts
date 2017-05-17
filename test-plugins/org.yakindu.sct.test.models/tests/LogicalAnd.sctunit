@@ -3,7 +3,7 @@ testclass LogicalAndTests for statechart LogicalAnd {
 	operation operandEvaluationOrder(){
 		
 		enter
-		cycle
+		proceed 1 cycle
 		
 		assert x == 4 && b message "logical and expression was executed in wrong order..."	
 	}

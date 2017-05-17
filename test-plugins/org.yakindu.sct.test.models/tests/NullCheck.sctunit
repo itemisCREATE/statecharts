@@ -4,7 +4,7 @@ testclass NullCheck for statechart NullCheck {
 		enter
 				
 		assert active(NullCheck.main_region.A)
-		cycle
+		proceed 1 cycle
 		assert active(NullCheck.main_region.B)			
 
 	} 

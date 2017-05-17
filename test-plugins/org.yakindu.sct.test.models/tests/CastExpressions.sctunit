@@ -4,9 +4,9 @@ testclass CastExpressions for statechart CastExpressions{
 		enter
 		assert realValue == 5
 		assert intValue == 5
-		cycle
+		proceed 1 cycle
 		assert realValue == 15
-		cycle
+		proceed 1 cycle
 		assert active(CastExpressions.main_region.C)
 		
 		assert realValue == 757

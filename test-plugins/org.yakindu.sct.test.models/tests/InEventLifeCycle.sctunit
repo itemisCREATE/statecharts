@@ -13,7 +13,7 @@ testclass InEventLifeCycle for statechart InEventLifeCycle {
 		
 		// assert e		// the in event must be set before the cycle  
 		assert i == 0	// e is not consumed yet
-		cycle
+		proceed 1 cycle
 		
 		// assert ! e		// after the cycle the event is not available anymore
 		assert i == 1	// within the cycle the in event was consumed

@@ -10,7 +10,7 @@ testclass OutEventLifeCycle for statechart OutEventLifeCycle {
 		enter
 
 		raise e
-		cycle
+		proceed 1 cycle
 		
 		assert f
 		
@@ -44,9 +44,9 @@ testclass OutEventLifeCycle for statechart OutEventLifeCycle {
 		enter
 
 		raise e
-		cycle
+		proceed 1 cycle
 		if(sndCycle){
-			cycle
+			proceed 1 cycle
 		}	
 	}
 }

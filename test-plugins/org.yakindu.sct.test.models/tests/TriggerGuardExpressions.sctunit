@@ -9,20 +9,20 @@ testclass TriggerGuardExpressions for statechart TriggerGuardExpressions {
 		
 		raise e1
 		b = true
-		cycle
+		proceed 1 cycle
 		assert active (TriggerGuardExpressions.main_region.B)
 		
-		cycle
+		proceed 1 cycle
 		assert active (TriggerGuardExpressions.main_region.A)
 		raise e2
-		cycle
+		proceed 1 cycle
 		assert active (TriggerGuardExpressions.main_region.B)
 		
-		cycle
+		proceed 1 cycle
 		assert active (TriggerGuardExpressions.main_region.A)
 		raise e1
 		raise e2
-		cycle
+		proceed 1 cycle
 		assert active (TriggerGuardExpressions.main_region.B)
 	}
 	
@@ -35,16 +35,16 @@ testclass TriggerGuardExpressions for statechart TriggerGuardExpressions {
 		b = false
 		
 		raise e1
-		cycle
+		proceed 1 cycle
 		assert active (TriggerGuardExpressions.main_region.A)
 		
 		raise e2
-		cycle
+		proceed 1 cycle
 		assert active (TriggerGuardExpressions.main_region.A)
 		
 		raise e1
 		raise e2
-		cycle
+		proceed 1 cycle
 		assert active (TriggerGuardExpressions.main_region.A)
 	}
 	

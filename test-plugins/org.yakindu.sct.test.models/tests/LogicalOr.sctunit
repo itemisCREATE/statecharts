@@ -3,7 +3,7 @@ testclass LogicalOrTests for statechart LogicalOr {
 	operation operandEvaluationOrder(){
 		
 		enter
-		cycle
+		proceed 1 cycle
 		
 		assert x == 4 && b message "logical or expression was executed in wrong order..."	
 	}

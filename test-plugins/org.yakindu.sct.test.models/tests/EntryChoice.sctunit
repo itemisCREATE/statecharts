@@ -2,8 +2,8 @@ testclass EntryChoice for statechart EntryChoice {
 	@Test
 	operation EntryChoiceTest(){
 		enter
-		cycle
-		cycle
+		proceed 1 cycle
+		proceed 1 cycle
 		assert active ( EntryChoice.main_region.A )
 	}
 }

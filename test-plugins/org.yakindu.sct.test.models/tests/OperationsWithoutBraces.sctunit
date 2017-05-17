@@ -5,16 +5,16 @@ testclass OperationsWithoutBraces for statechart OperationsWithoutBraces{
 		assert active (OperationsWithoutBraces.main_region.A)
 		assert active (OperationsWithoutBraces.another_region.A)
 		
-		cycle
+		proceed 1 cycle
 		assert active (OperationsWithoutBraces.main_region.B)
 		assert active (OperationsWithoutBraces.another_region.B)
 		 
-		cycle
+		proceed 1 cycle
 		
 		assert active (OperationsWithoutBraces.main_region.C)
 		assert active (OperationsWithoutBraces.another_region.C) 
 		
-		cycle
+		proceed 1 cycle
 		
 		assert active (OperationsWithoutBraces.main_region.D)
 		assert active (OperationsWithoutBraces.another_region.D)

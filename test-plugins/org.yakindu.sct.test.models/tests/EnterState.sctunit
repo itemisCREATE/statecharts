@@ -9,7 +9,7 @@ testclass EnterState for statechart EnterState {
 		assert active(EnterState.r.A)
 		
 		raise e
-		cycle
+		proceed 1 cycle
 		assert active(EnterState.r.B.r.E) 
 	} 
 
@@ -21,7 +21,7 @@ testclass EnterState for statechart EnterState {
 		assert active(EnterState.r.A)
 		
 		raise f
-		cycle
+		proceed 1 cycle
 		assert active(EnterState.r.B.r.F) 
 	} 
 
@@ -33,7 +33,7 @@ testclass EnterState for statechart EnterState {
 		assert active(EnterState.r.A)
 		
 		raise g
-		cycle
+		proceed 1 cycle
 		assert active(EnterState.r.B.r.E) 
 	} 
 	
