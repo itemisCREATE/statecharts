@@ -82,7 +82,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		if (existingSlot != null && existingSlot instanceof CompositeSlot) {
 			existingSlot as CompositeSlot
 		} else {
-			val newSlot = new CompositeSlotImpl()
+			val newSlot = SRuntimeFactory.eINSTANCE.createCompositeSlot
 			newSlot.name = name
 			slots += newSlot
 			newSlot
