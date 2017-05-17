@@ -24,6 +24,8 @@ import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.stext.stext.EntryPointSpec
 import org.yakindu.sct.model.stext.stext.ExitPointSpec
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.base.types.Annotation
+import org.yakindu.base.types.AnnotatableElement
 
 class SgraphExtensions {
 	
@@ -161,4 +163,12 @@ class SgraphExtensions {
 		}
 		return ret
 	}
+	
+	def boolean isChildFirstExecution(Statechart it) {
+		findAnnotation("ParentFirstExecution") == null
+	}
+	
+	def Annotation findAnnotation(AnnotatableElement it, String name) {
+		annotations.filter[a | name.equals(a.type.name)].head
+	} 
 }
