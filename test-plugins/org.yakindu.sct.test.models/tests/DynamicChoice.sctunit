@@ -3,7 +3,7 @@ testclass DynamicChoice for statechart DynamicChoice{
 	operation DynamicChoiceTest(){ 
 		enter		
 		assert active(DynamicChoice.main_region.Start)
-		cycle
+		proceed 1 cycle
 		assert active(DynamicChoice.main_region.A)	 
 	} 
 }

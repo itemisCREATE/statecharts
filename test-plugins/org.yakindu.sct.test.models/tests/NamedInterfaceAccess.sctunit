@@ -3,13 +3,13 @@ testclass NamedInterfaceAccess for statechart NamedInterfaceAccess{
 	operation SafeOpenSuccess(){ 
 		enter
 		
-		cycle
+		proceed 1 cycle
 		raise User.numberPressed : 3
-		cycle
+		proceed 1 cycle
 		raise User.numberPressed : 7
-		cycle
+		proceed 1 cycle
 		raise User.numberPressed : 5
-		cycle
+		proceed 1 cycle
 		assert Safe.open
 	} 
 }  

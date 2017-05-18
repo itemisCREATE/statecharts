@@ -5,7 +5,7 @@ testclass OperationsTest for statechart Operations {
 		
 		enter
 		assert active ( Operations.main_region.A )
-		cycle
+		proceed 1 cycle
 
 		assert active ( Operations.main_region.B )
 		assert called internalOperation1 
@@ -19,7 +19,7 @@ testclass OperationsTest for statechart Operations {
 		
 		
 		raise ev
-		cycle
+		proceed 1 cycle
 
 		assert active(Operations.main_region.C)
 		assert called Interface1.interfaceOperation1  
@@ -32,7 +32,7 @@ testclass OperationsTest for statechart Operations {
 		assert called Interface1.interfaceOperation5a
 		
 		raise ev
-		cycle
+		proceed 1 cycle
 		
 		
 		assert active(Operations.main_region.D)

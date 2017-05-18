@@ -6,7 +6,7 @@ testclass BitExpressions for statechart BitExpressions {
 		assert myBit1 == 5
 		assert myBit2 == 7
 		raise e1
-		cycle
+		proceed 1 cycle
 
 		assert active (BitExpressions.main_region.StateB)
 		assert leftBitshift == 10

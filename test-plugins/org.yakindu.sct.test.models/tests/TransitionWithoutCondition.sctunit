@@ -5,7 +5,7 @@ testclass TransitionWithoutCondition for statechart TransitionWithoutCondition{
 		
 		assert active(TransitionWithoutCondition.main_region.A)
 	
-		cycle
+		proceed 1 cycle
 			
 		assert active(TransitionWithoutCondition.main_region.B)
 	

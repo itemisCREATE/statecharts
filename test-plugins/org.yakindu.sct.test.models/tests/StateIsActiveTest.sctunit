@@ -7,8 +7,8 @@ testclass StateIsActive for statechart StateIsActive {
 		assert active (StateIsActive.R1.R1A )
 		assert active (StateIsActive.R2.R2A)
 		raise Event1
-		cycle
-		cycle //Todo warum 2 cycle?
+		proceed 1 cycle
+		proceed 1 cycle //Todo warum 2 cycle?
 		assert active(StateIsActive.R1.R1B)
 		assert active (StateIsActive.R2.R2B)
 	} 

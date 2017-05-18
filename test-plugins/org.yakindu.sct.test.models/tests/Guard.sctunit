@@ -4,23 +4,23 @@ testclass Guard for statechart Guard {
 		enter
 		assert active (Guard.main_region.A)
 		raise Event1
-		cycle
+		proceed 1 cycle
 		
 		assert active (Guard.main_region.A)
 		raise Event2 
-		cycle
+		proceed 1 cycle
 		
 		assert active (Guard.main_region.B)
 		raise Return
-		cycle
+		proceed 1 cycle
 		
 		assert active (Guard.main_region.A)
 		raise Event1 
-		cycle
+		proceed 1 cycle
 		
 		assert active (Guard.main_region.B)
 		raise Return
-		cycle
+		proceed 1 cycle
 		 
 		assert active (Guard.main_region.A)  
 	}

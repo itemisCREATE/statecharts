@@ -14,7 +14,7 @@ testclass ReadOnlyVariable for statechart ReadOnlyVariable{
 		assert A.myBool == true
 		assert A.myReal == 1.1
 		
-		cycle
+		proceed 1 cycle
 		
 		assert active(ReadOnlyVariable.main_region.StateB)
 		assert myInt == 100

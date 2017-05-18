@@ -8,7 +8,7 @@ testclass IntegerExpressions for statechart IntegerExpressions {
 		assert myInt1 == 10
 		assert myInt2 == 5
 		raise e1 
-		cycle 
+		proceed 1 cycle
 		  
 		// comparison
 		assert less == false

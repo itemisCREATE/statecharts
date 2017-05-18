@@ -6,7 +6,7 @@ testclass BooleanExpressions for statechart BooleanExpressions {
 		assert myBool1 == true
 		assert myBool2 == false
 		raise e1
-		cycle
+		proceed 1 cycle
 		assert active (BooleanExpressions.main_region.StateB)
 		assert and == false
 		assert or == true

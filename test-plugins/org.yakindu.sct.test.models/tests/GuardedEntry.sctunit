@@ -38,13 +38,13 @@ testclass GuardedEntry for statechart GuardedEntry{
 
 		assert active(GuardedEntry.main_region.A)
 		raise e
-		cycle
+		proceed 1 cycle
 		assert active(GuardedEntry.main_region.B)
 		
 		guard = guardVar
 		done = doneVar
 		raise e
-		cycle
+		proceed 1 cycle
 		assert active(GuardedEntry.main_region.A)
 	}
 		

@@ -54,7 +54,7 @@ testclass Choice for statechart Choice {
 		c = valueForC
 		raise e
 		
-		cycle
+		proceed 1 cycle
 	}
 	
 	operation initForEventF(valueForC : boolean){
@@ -64,7 +64,7 @@ testclass Choice for statechart Choice {
 		c = valueForC
 		raise f
 		
-		cycle
+		proceed 1 cycle
 	}
 	
 	operation initForEventG(valueForC : boolean){
@@ -74,7 +74,7 @@ testclass Choice for statechart Choice {
 		c = valueForC
 		raise g
 		
-		cycle
+		proceed 1 cycle
 	}
 	
 	operation initForEventH(valueForC : boolean){
@@ -84,6 +84,6 @@ testclass Choice for statechart Choice {
 		c = valueForC
 		raise h
 		
-		cycle
+		proceed 1 cycle
 	}
 }
