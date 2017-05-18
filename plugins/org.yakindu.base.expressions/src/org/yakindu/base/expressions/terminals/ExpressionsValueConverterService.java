@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.model.stext.conversion;
+package org.yakindu.base.expressions.terminals;
 
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
@@ -19,7 +19,7 @@ import org.eclipse.xtext.conversion.ValueConverter;
  * 
  * @author axel terfloth
  */
-public class StextValueConverterService extends DefaultTerminalConverters {
+public class ExpressionsValueConverterService extends DefaultTerminalConverters {
 	
 	protected BoolValueConverter boolConverter = new BoolValueConverter();
 	protected HexValueConverter hexConverter = new HexValueConverter();

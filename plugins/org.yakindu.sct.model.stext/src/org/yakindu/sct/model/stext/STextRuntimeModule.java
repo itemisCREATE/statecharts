@@ -17,11 +17,11 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.validation.CompositeEValidator;
+import org.yakindu.base.expressions.terminals.ExpressionsValueConverterService;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.resource.SCTLinker;
-import org.yakindu.sct.model.stext.conversion.StextValueConverterService;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.resource.SCTResourceDescriptionStrategy;
@@ -40,14 +40,14 @@ import com.google.inject.name.Names;
  */
 public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTextRuntimeModule {
 
-	
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(IDefaultResourceDescriptionStrategy.class).to(SCTResourceDescriptionStrategy.class);
-		//https://github.com/Yakindu/statecharts/issues/1199
+		// https://github.com/Yakindu/statecharts/issues/1199
 		binder.bind(IReferableElementsUnloader.class).to(IReferableElementsUnloader.NullUnloader.class);
 	}
+
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return STextGlobalScopeProvider.class;
 	}
@@ -68,9 +68,8 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 
 	@Override
 	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
-		return StextValueConverterService.class;
+		return ExpressionsValueConverterService.class;
 	}
-
 
 	public void configureFileExtensions(Binder binder) {
 		binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("stext,sct");
@@ -83,14 +82,14 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 						.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
 				.to(org.yakindu.sct.model.stext.scoping.StextImportAwareScopeProvider.class);
 		binder.bind(ITypeSystem.class).toInstance(getTypeSystem());
-		binder.bind(boolean.class).annotatedWith(
-				Names.named(CompositeEValidator.USE_EOBJECT_VALIDATOR)).toInstance(false);
+		binder.bind(boolean.class).annotatedWith(Names.named(CompositeEValidator.USE_EOBJECT_VALIDATOR))
+				.toInstance(false);
 	}
-	
+
 	protected ITypeSystem getTypeSystem() {
 		return GenericTypeSystem.getInstance();
 	}
-	
+
 	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
 		return STextTypeInferrer.class;
 	}
