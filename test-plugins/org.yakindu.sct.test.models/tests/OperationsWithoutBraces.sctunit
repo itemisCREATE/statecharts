@@ -1,21 +1,16 @@
 testclass OperationsWithoutBraces for statechart OperationsWithoutBraces{
 	@Test
 	operation OperationsWithoutBracesTest(){ 
+		mock myBoolOp returns (false)
+		mock myIntOp returns (0)
+		mock myRealOp returns (0.0)
 		enter
-		assert active (OperationsWithoutBraces.main_region.A)
 		assert active (OperationsWithoutBraces.another_region.A)
-		
+		assert active (OperationsWithoutBraces.main_region.A)
 		proceed 1 cycle
-		assert active (OperationsWithoutBraces.main_region.B)
-		assert active (OperationsWithoutBraces.another_region.B)
-		 
-		proceed 1 cycle
-		
+		assert active (OperationsWithoutBraces.another_region.C)
 		assert active (OperationsWithoutBraces.main_region.C)
-		assert active (OperationsWithoutBraces.another_region.C) 
-		
-		proceed 1 cycle
-		
+		proceed 1 cycle	
 		assert active (OperationsWithoutBraces.main_region.D)
 		assert active (OperationsWithoutBraces.another_region.D)
 
