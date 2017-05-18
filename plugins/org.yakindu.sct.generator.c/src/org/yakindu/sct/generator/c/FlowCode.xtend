@@ -38,7 +38,7 @@ class FlowCode {
 	@Inject extension ExpressionCode
 	@Inject extension INamingService
 	@Inject extension GenmodelEntries
-	@Inject extension StateConfVectorIndexCalculator
+	@Inject extension StateConfVector
  
  	@Inject GeneratorEntry entry
  

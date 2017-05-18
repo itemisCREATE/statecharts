@@ -32,7 +32,7 @@ class StatemachineSource implements IContentTemplate {
 	@Inject extension INamingService
 	@Inject extension FlowCode
 	@Inject extension ConstantInitializationResolver
-	@Inject extension StateConfVectorIndexCalculator
+	@Inject extension StateConfVector
 	@Inject protected extension StateVectorExtensions
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 

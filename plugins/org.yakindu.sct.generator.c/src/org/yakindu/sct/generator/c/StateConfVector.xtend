@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2012 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
+
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
@@ -6,22 +17,12 @@ import java.util.Map
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.naming.INamingService
 
-class StateConfVectorIndexCalculator {
+/**
+ * @author René Beckmann
+ */
+class StateConfVector {
 	@Inject extension INamingService
-	protected Map<ExecutionState, Integer> indexMap
 	protected Map<ExecutionState, String> defineMap
-	
-	def Integer getIndex(ExecutionState it) {
-		if(indexMap == null) {
-			indexMap = new HashMap()
-		}
-		var ret = indexMap.get(it)
-		if(ret == null) {
-			ret = calculateIndexForState
-			indexMap.put(it, ret)
-		}
-		return ret
-	}
 	
 	def String getDefine(ExecutionState it) {
 		if(defineMap == null) {
@@ -37,10 +38,5 @@ class StateConfVectorIndexCalculator {
 	
  	def protected String calculateDefine(ExecutionState it) {
  		'''SCVI_«shortName»'''.toString.toUpperCase
- 	}
-	
-	def protected Integer calculateIndexForState(ExecutionState it) {
-		return stateVector.offset
-	}
-	
+ 	}	
 }

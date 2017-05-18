@@ -34,7 +34,7 @@ class StatemachineHeader implements IContentTemplate {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntries
 	@Inject extension INamingService
-	@Inject extension StateConfVectorIndexCalculator
+	@Inject extension StateConfVector
 	
 	@Inject
 	IGenArtifactConfigurations defaultConfigs
@@ -214,7 +214,7 @@ class StatemachineHeader implements IContentTemplate {
 	def stateConfVectorDefines(ExecutionFlow it) {
 		'''
 		«FOR state : states»
-		#define «state.getDefine» «state.getIndex»
+		#define «state.getDefine» «state.stateVector.offset»
 		«ENDFOR»
 		'''
 	}
