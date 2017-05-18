@@ -20,6 +20,7 @@ import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.ProblemAnnotationHover;
+import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
@@ -33,6 +34,7 @@ import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
 import org.yakindu.sct.model.stext.ui.highlighting.SCTHighlightingConfiguration;
+import org.yakindu.sct.model.stext.ui.hyperlink.PackageImportHyperlinkHelper;
 import org.yakindu.sct.model.stext.ui.tasks.STextTaskFinder;
 
 import com.google.inject.Binder;
@@ -113,9 +115,13 @@ public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextU
 	public Class<? extends ITaskFinder> bindITaskFinder() {
 		return STextTaskFinder.class;
 	}
-	
+
 	public Class<? extends IResourceClusteringPolicy> bindIResourceClusteringPolicy() {
 		return DynamicResourceClusteringPolicy.class;
+	}
+
+	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
+		return PackageImportHyperlinkHelper.class;
 	}
 
 }
