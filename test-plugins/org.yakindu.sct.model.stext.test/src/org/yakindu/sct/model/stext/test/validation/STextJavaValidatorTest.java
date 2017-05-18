@@ -71,13 +71,14 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	 */
 	@Test
 	public void checkVariableDefinition() {
-		Scope context = (Scope) parseExpression("interface if : var i : void",
-				InterfaceScope.class.getSimpleName());
+		Scope context = (Scope) parseExpression("interface if : var i : void", InterfaceScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(context);
 		validationResult.assertErrorContains(STextTypeInferrer.VARIABLE_VOID_TYPE);
 	}
 
-	/**b
+	/**
+	 * b
+	 * 
 	 * @see STextJavaValidator#checkAssignmentExpression(org.yakindu.sct.model.stext.stext.AssignmentExpression)
 	 */
 	@Test
@@ -109,8 +110,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	@Test
 	public void checkLeftHandAssignment() {
 
-		String scope =
-				"interface if : operation myOperation() : boolean event Event1 : boolean var myVar : boolean";
+		String scope = "interface if : operation myOperation() : boolean event Event1 : boolean var myVar : boolean";
 
 		EObject model = super.parseExpression("3 = 3", Expression.class.getSimpleName(), scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
@@ -167,17 +167,18 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
 	}
+
 	/**
 	 * @see STextJavaValidator#checkVarArgParameterIsLast(Operation)
 	 */
 	@Test
-	public void checkVarArgParameterIsLast(){
+	public void checkVarArgParameterIsLast() {
 		String scope = "internal: operation myOperation(param1... : integer)"
-					+ "operation myOperation2(param0 : string, param1 ... : integer)";
+				+ "operation myOperation2(param0 : string, param1 ... : integer)";
 		EObject model = super.parseExpression(scope, InternalScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
-		
+
 		model = super.parseExpression("myOperation()", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
@@ -196,23 +197,23 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = super.parseExpression("myOperation2('',5,5,5)", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
-		
+
 		model = super.parseExpression("myOperation2('','')", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertErrorContains("Incompatible types string and integer.");
-		
+
 		scope = "internal: operation myOperation(param1... : integer, param2...: integer)";
 		model = super.parseExpression(scope, InternalScope.class.getSimpleName());
 		validationResult = tester.validate(model);
 		validationResult.assertError(STextJavaValidator.VAR_ARGS_LAST_CODE);
-		
+
 		scope = "internal: operation myOperation2(param1 ... : integer, param0 : string)";
 		model = super.parseExpression(scope, InternalScope.class.getSimpleName());
 		validationResult = tester.validate(model);
 		validationResult.assertError(STextJavaValidator.VAR_ARGS_LAST_CODE);
 
 	}
-	
+
 	/**
 	 * @see STextJavaValidator#checkAnnotationArguments(org.yakindu.sct.model.stext.stext.AnnotationDefinition)
 	 */
@@ -222,19 +223,21 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		String scope = "@Execution()";
 		EObject model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
-		validationResult.assertError(STextJavaValidator.WRONG_NUMBER_OF_ARGUMENTS_CODE);;
-		
+		validationResult.assertError(STextJavaValidator.WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		;
+
 		scope = "@Execution(EVENT_DRIVEN)";
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
-		 validationResult = tester.validate(model);
+		validationResult = tester.validate(model);
 		validationResult.assertOK();
 	}
+
 	/**
 	 * @see STextJavaValidator#checkAnnotationTarget(org.yakindu.base.types.AnnotatableElement)
 	 */
 	@Test
-	public void checkAnnotationTarget(){
-		//TODO: Implement me when default annotation for target is available
+	public void checkAnnotationTarget() {
+		// TODO: Implement me when default annotation for target is available
 	}
 
 	/**
@@ -280,8 +283,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	@Test
 	public void checkFeatureCall() {
 		String scope = "interface if : in event a : integer";
-		EObject model = super.parseExpression("if.a / raise if.a:1",
-				TransitionSpecification.class.getSimpleName(), scope);
+		EObject model = super.parseExpression("if.a / raise if.a:1", TransitionSpecification.class.getSimpleName(),
+				scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
 	}
@@ -294,7 +297,8 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	public void checkReactionTrigger() {
 		// ENTRY, EXIT not allowed in transitions
 		String scope = "internal : event a : integer var myVar : integer";
-		EObject model = super.parseExpression("entry / myVar = 5", TransitionSpecification.class.getSimpleName(), scope);
+		EObject model = super.parseExpression("entry / myVar = 5", TransitionSpecification.class.getSimpleName(),
+				scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertError(ENTRY_EXIT_TRIGGER_NOT_ALLOWED);
 
@@ -310,16 +314,16 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
 	}
-	
+
 	@Test
-	public void checkReactionTriggerRegularEvent(){
-		
+	public void checkReactionTriggerRegularEvent() {
+
 		String scope = "interface : in event e  var x : integer  var y : integer  operation op():integer";
 
 		EObject model = super.parseExpression("e", TransitionSpecification.class.getSimpleName(), scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
-		
+
 		model = super.parseExpression("x", TransitionSpecification.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertError(TRIGGER_IS_NO_EVENT);
@@ -331,11 +335,11 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = super.parseExpression("op()", TransitionSpecification.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertError(TRIGGER_IS_NO_EVENT);
-		
+
 		model = super.parseExpression("x, y", TransitionSpecification.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertAll(errorMsg("Trigger 'x' is no event."), errorMsg("Trigger 'y' is no event."));
-		
+
 	}
 
 	/**
@@ -376,15 +380,13 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 	}
 
-	
-	
 	/**
 	 * @see STextJavaValidator#checkEventDefinition(org.yakindu.sct.model.stext.stext.EventDefinition)
 	 */
 	@Test
 	public void checkEventDefinition() {
 		// No local declarations in interface scope
-		EObject model = super.parseExpression("interface MyInterface: event Event1", 
+		EObject model = super.parseExpression("interface MyInterface: event Event1",
 				InterfaceScope.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertErrorContains(LOCAL_DECLARATIONS);
@@ -405,7 +407,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	 */
 	@Test
 	public void checkInterfaceScope() {
-		EObject model = super.parseExpression("interface: in event event1 interface: in event event2", 
+		EObject model = super.parseExpression("interface: in event event1 interface: in event event2",
 				StatechartSpecification.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertDiagnosticsCount(2);
@@ -440,39 +442,38 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	public void checkExpression() {
 		// Nothing to do
 	}
-	
+
 	@Test
-	public void checkContextElement(){
-		//Nothing to do -> this is covered by ContextPredicateProviderTest
+	public void checkContextElement() {
+		// Nothing to do -> this is covered by ContextPredicateProviderTest
 	}
 
 	@Test
-	public void checkValueOfNoEvent(){
+	public void checkValueOfNoEvent() {
 		String decl = "interface: in event e1:integer var x:integer operation op():integer interface i: in event e2:integer var y:integer";
 
 		EObject model = super.parseExpression("valueof(e1)", Expression.class.getSimpleName(), decl);
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertOK();
-	
+
 		model = super.parseExpression("valueof(i.e2)", Expression.class.getSimpleName(), decl);
 		result = tester.validate(model);
 		result.assertOK();
-	
+
 		model = super.parseExpression("valueof(x)", Expression.class.getSimpleName(), decl);
 		result = tester.validate(model);
 		result.assertError(VALUE_OF_REQUIRES_EVENT);
-		
+
 		model = super.parseExpression("valueof(i.y)", Expression.class.getSimpleName(), decl);
 		result = tester.validate(model);
 		result.assertError(VALUE_OF_REQUIRES_EVENT);
-		
+
 		model = super.parseExpression("valueof(op())", Expression.class.getSimpleName(), decl);
 		result = tester.validate(model);
 		result.assertError(VALUE_OF_REQUIRES_EVENT);
-		
+
 	}
-	
-	
+
 	/**
 	 * checks tht each @Check method of {@link STextJavaValidator} has a @Test
 	 * method in this class with the same name

@@ -140,14 +140,14 @@ class ExpressionCode extends Expressions {
 
 	def dispatch CharSequence code(ElementReferenceExpression it) '''
 		«IF it.reference instanceof OperationDefinition»
-			«reference.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)
+			«reference.code»(«FOR arg : expressions SEPARATOR ", "»«arg.code»«ENDFOR»)
 		«ELSE»
 			«definition.code»«ENDIF»
 	'''
 
 	def dispatch CharSequence code(FeatureCall it) '''
 		«IF feature instanceof Operation»
-			«feature.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)
+			«feature.code»(«FOR arg : expressions SEPARATOR ", "»«arg.code»«ENDFOR»)
 		«ELSE»
 			«definition.context + definition.name.asEscapedIdentifier»
 		«ENDIF»
