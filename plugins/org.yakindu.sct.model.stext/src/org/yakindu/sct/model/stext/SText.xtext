@@ -82,8 +82,13 @@ OperationDefinition:
 	typeSpecifier=TypeSpecifier)?;
 	
 ArgumentedAnnotation:
-	'@' type=[types::AnnotationType|QID] ('('(arguments+=Argument (',' arguments+=Argument)*)? ')')?
+	'@' type=[types::AnnotationType|QID] ('('(arguments+=SimpleArgument (',' arguments+=SimpleArgument)*)? ')')?
 ;
+
+SimpleArgument returns exp::Argument:
+	value=Expression
+;
+
 TypeSpecifier returns types::TypeSpecifier:
 	type=[types::Type|FQN] ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)*'>'))?;
 

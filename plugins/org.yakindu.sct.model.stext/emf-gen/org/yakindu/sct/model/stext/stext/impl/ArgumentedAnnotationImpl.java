@@ -5,6 +5,7 @@ package org.yakindu.sct.model.stext.stext.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -75,23 +76,23 @@ public class ArgumentedAnnotationImpl extends AnnotationImpl implements Argument
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EList<Expression> getArgs() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return getExpressions();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EList<Expression> getExpressions() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		EList<Expression> result = new BasicEList<Expression>();
+		for (Argument argument : getArguments()) {
+			result.add(argument.getValue());
+		}
+		return result;
 	}
 
 	/**

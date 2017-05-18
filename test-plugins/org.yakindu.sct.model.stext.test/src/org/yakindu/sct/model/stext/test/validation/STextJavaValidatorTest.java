@@ -77,8 +77,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	}
 
 	/**
-	 * b
-	 * 
+	 *  
 	 * @see STextJavaValidator#checkAssignmentExpression(org.yakindu.sct.model.stext.stext.AssignmentExpression)
 	 */
 	@Test
@@ -211,6 +210,40 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		model = super.parseExpression(scope, InternalScope.class.getSimpleName());
 		validationResult = tester.validate(model);
 		validationResult.assertError(STextJavaValidator.VAR_ARGS_LAST_CODE);
+
+	}
+	
+	@Test
+	public void checkOperationNamedParameters() {
+		String scope = "internal: operation myOperation(param1 : integer, param2 : boolean)";
+		EObject model = super.parseExpression(scope, InternalScope.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(model);
+		validationResult.assertOK();
+
+		model = super.parseExpression("myOperation(5, true)", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+		model = super.parseExpression("myOperation(5, param2 = true)", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+		model = super.parseExpression("myOperation(param1 = 5, true)", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+		model = super.parseExpression("myOperation(param1 = 5, param2 = true)", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+		model = super.parseExpression("myOperation(param2 = true, param1 = 5)", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+
+
+		model = super.parseExpression("myOperation(param2 = true)", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertError(WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		
+		model = super.parseExpression("myOperation(param1 = 5)", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertError(WRONG_NUMBER_OF_ARGUMENTS_CODE);
 
 	}
 
