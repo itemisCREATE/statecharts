@@ -1,3 +1,11 @@
+/**
+* Copyright (c) 2017 itemis AG - All rights Reserved
+* Unauthorized copying of this file, via any medium is strictly prohibited
+* 
+* Contributors:
+* 	Jonathan Thoene - itemis AG
+*
+*/
 package org.yakindu.sct.simulation.core.sexec.container;
 
 import org.eclipse.core.runtime.CoreException;
