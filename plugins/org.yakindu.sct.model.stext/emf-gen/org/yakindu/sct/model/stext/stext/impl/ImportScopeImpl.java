@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -25,14 +26,14 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  */
 public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope {
 	/**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' reference list.
+	 * The cached value of the '{@link #getImports() <em>Imports</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getImports()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<org.yakindu.base.types.Package> imports;
+	protected EList<String> imports;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -58,9 +59,9 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.yakindu.base.types.Package> getImports() {
+	public EList<String> getImports() {
 		if (imports == null) {
-			imports = new EObjectResolvingEList<org.yakindu.base.types.Package>(org.yakindu.base.types.Package.class, this, StextPackage.IMPORT_SCOPE__IMPORTS);
+			imports = new EDataTypeUniqueEList<String>(String.class, this, StextPackage.IMPORT_SCOPE__IMPORTS);
 		}
 		return imports;
 	}
@@ -90,7 +91,7 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 		switch (featureID) {
 			case StextPackage.IMPORT_SCOPE__IMPORTS:
 				getImports().clear();
-				getImports().addAll((Collection<? extends org.yakindu.base.types.Package>)newValue);
+				getImports().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -123,6 +124,22 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 				return imports != null && !imports.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (imports: ");
+		result.append(imports);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ImportScopeImpl

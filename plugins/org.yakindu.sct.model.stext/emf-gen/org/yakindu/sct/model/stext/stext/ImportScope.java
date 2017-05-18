@@ -22,19 +22,19 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ImportScope extends StatechartScope {
 	/**
-	 * Returns the value of the '<em><b>Imports</b></em>' reference list.
-	 * The list contents are of type {@link org.yakindu.base.types.Package}.
+	 * Returns the value of the '<em><b>Imports</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Imports</em>' reference list.
+	 * @return the value of the '<em>Imports</em>' attribute list.
 	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getImportScope_Imports()
 	 * @model
 	 * @generated
 	 */
-	EList<org.yakindu.base.types.Package> getImports();
+	EList<String> getImports();
 
 } // ImportScope

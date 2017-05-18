@@ -46,13 +46,12 @@ public interface STextValidationMessages {
 	public static final String TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS = "ExitPointSpec can't be used on transition siblings.";
 	public static final String LEFT_HAND_ASSIGNMENT = "The left-hand side of an assignment must be a variable.";
 	public static final String ISSUE_TRANSITION_WITHOUT_TRIGGER = "Missing trigger. Transition is never taken. Use 'oncycle' or 'always' instead.";
-	public static final String IMPORT_NOT_RESOLVED = "Import cannot be resolved.";
 	public static final String EXITPOINTSPEC_WITH_TRIGGER = "Transitions with an exit point spec does not have a trigger or guard.";
 	public static final String ASSIGNMENT_TO_VALUE = "Assignment constant not allowed.";
 	public static final String REFERENCE_TO_VARIABLE = "Cannot reference a variable in a constant initialization.";
 	public static final String CONST_MUST_HAVE_VALUE_MSG = "A constant definition must specify an initial value";
 	public static final String CONST_MUST_HAVE_VALUE_CODE = "ConstMustHaveAValue";
-	public static final String REFERENCE_CONSTANT_BEFORE_DEFINED = "Cannot reference a constant from different scope or before it is defined.";	
+	public static final String REFERENCE_CONSTANT_BEFORE_DEFINED = "Cannot reference a constant from different scope or before it is defined.";
 	public static final String INTERNAL_DECLARATION_UNUSED = "Internal declaration is not used in statechart.";
 	public static final String ERROR_WRONG_ANNOTATION_TARGET_CODE = "WrongAnnotationTarget";
 	public static final String ERROR_WRONG_ANNOTATION_TARGET_MSG = "Annotation '%s' can not be applied on %s ";
@@ -61,6 +60,5 @@ public interface STextValidationMessages {
 	public static final String VAR_ARGS_LAST_MSG = "The variable argument type must be the last argument.";
 	public static final String WRONG_NUMBER_OF_ARGUMENTS_MSG = "Wrong number of arguments, expected %s .";
 	public static final String WRONG_NUMBER_OF_ARGUMENTS_CODE = "WrongNrOfArgs";
-
 
 }

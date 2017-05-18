@@ -9,8 +9,7 @@
 */
 package org.yakindu.sct.model.stext.scoping;
 
-import static java.util.Collections.singletonList;
-
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -27,11 +26,13 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * 
@@ -39,6 +40,9 @@ import com.google.common.collect.Lists;
  *
  */
 public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
+
+	@Inject
+	private IPackageImport2URIMapper mapper;
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
@@ -80,11 +84,13 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 	protected List<ImportNormalizer> createNamespaceResolver(Scope scope, boolean ignoreCase) {
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
 		ImportScope importScope = (ImportScope) scope;
-		for (org.yakindu.base.types.Package child : importScope.getImports()) {
-			String value = getImportedNamespace(child);
-			ImportNormalizer resolver = createImportedNamespaceResolver(value, ignoreCase);
-			if (resolver != null)
-				importedNamespaceResolvers.add(resolver);
+		for (String child : importScope.getImports()) {
+			PackageImport pkgImport = mapper.findPackageImport(scope.eResource(), child);
+			if (pkgImport != null) {
+				ImportNormalizer resolver = createImportedNamespaceResolver(pkgImport.getNamespace(), ignoreCase);
+				if (resolver != null)
+					importedNamespaceResolvers.add(resolver);
+			}
 		}
 		return importedNamespaceResolvers;
 	}
@@ -98,17 +104,13 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 		if (!namespaceResolvers.isEmpty()) {
 			if (isRelativeImport() && name != null && !name.isEmpty()) {
 				ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase);
-				result = createImportScope(result, singletonList(localNormalizer), allDescriptions,
+				result = createImportScope(result, Collections.singletonList(localNormalizer), allDescriptions,
 						reference.getEReferenceType(), isIgnoreCase(reference));
 			}
 			result = createImportScope(result, namespaceResolvers, null, reference.getEReferenceType(),
 					isIgnoreCase(reference));
 		}
-		if (name != null) {
-			ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase);
-			result = createImportScope(result, singletonList(localNormalizer), allDescriptions,
-					reference.getEReferenceType(), isIgnoreCase(reference));
-		}
+		// We don't want to add an implicit local ImportNormalizer here...
 		return result;
 	}
 
