@@ -6,6 +6,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.base.expressions.expressions.*;
 import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
@@ -134,6 +135,10 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseHexLiteral(HexLiteral object) {
 				return createHexLiteralAdapter();
+			}
+			@Override
+			public Adapter caseBinaryLiteral(BinaryLiteral object) {
+				return createBinaryLiteralAdapter();
 			}
 			@Override
 			public Adapter caseStringLiteral(StringLiteral object) {
@@ -334,6 +339,20 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createHexLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.BinaryLiteral <em>Binary Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.expressions.expressions.BinaryLiteral
+	 * @generated
+	 */
+	public Adapter createBinaryLiteralAdapter() {
 		return null;
 	}
 

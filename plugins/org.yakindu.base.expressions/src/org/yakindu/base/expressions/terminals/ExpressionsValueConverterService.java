@@ -23,16 +23,21 @@ public class ExpressionsValueConverterService extends DefaultTerminalConverters 
 	
 	protected BoolValueConverter boolConverter = new BoolValueConverter();
 	protected HexValueConverter hexConverter = new HexValueConverter();
+	protected BinaryValueConverter binaryConverter = new BinaryValueConverter();
 	
 	@ValueConverter(rule = "BOOL")
 	public IValueConverter<Boolean> BOOL() {
 		return boolConverter;
 	}
-
 	
 	@ValueConverter(rule = "HEX")
 	public IValueConverter<Integer> HEX() {
 		return hexConverter;
+	}
+	
+	@ValueConverter(rule = "BINARY")
+	public IValueConverter<Integer> BINARY() {
+		return binaryConverter;
 	}
 
 

@@ -14,6 +14,7 @@ import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;
 import org.yakindu.base.expressions.expressions.BinaryExpression;
+import org.yakindu.base.expressions.expressions.BinaryLiteral;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
 import org.yakindu.base.expressions.expressions.BitwiseOperator;
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
@@ -106,6 +107,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EClass hexLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass binaryLiteralEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -499,8 +507,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getHexLiteral_Value() {
-		return (EAttribute)hexLiteralEClass.getEStructuralFeatures().get(0);
+	public EClass getBinaryLiteral() {
+		return binaryLiteralEClass;
 	}
 
 	/**
@@ -1125,7 +1133,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEAttribute(floatLiteralEClass, FLOAT_LITERAL__VALUE);
 
 		hexLiteralEClass = createEClass(HEX_LITERAL);
-		createEAttribute(hexLiteralEClass, HEX_LITERAL__VALUE);
+
+		binaryLiteralEClass = createEClass(BINARY_LITERAL);
 
 		stringLiteralEClass = createEClass(STRING_LITERAL);
 		createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
@@ -1245,7 +1254,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		intLiteralEClass.getESuperTypes().add(this.getLiteral());
 		doubleLiteralEClass.getESuperTypes().add(this.getLiteral());
 		floatLiteralEClass.getESuperTypes().add(this.getLiteral());
-		hexLiteralEClass.getESuperTypes().add(this.getLiteral());
+		hexLiteralEClass.getESuperTypes().add(this.getIntLiteral());
+		binaryLiteralEClass.getESuperTypes().add(this.getHexLiteral());
 		stringLiteralEClass.getESuperTypes().add(this.getLiteral());
 		nullLiteralEClass.getESuperTypes().add(this.getLiteral());
 		assignmentExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -1303,7 +1313,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEAttribute(getFloatLiteral_Value(), ecorePackage.getEFloat(), "value", null, 0, 1, FloatLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(hexLiteralEClass, HexLiteral.class, "HexLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getHexLiteral_Value(), ecorePackage.getEInt(), "value", null, 0, 1, HexLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(binaryLiteralEClass, BinaryLiteral.class, "BinaryLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

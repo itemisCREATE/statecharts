@@ -77,10 +77,6 @@ class ExpressionCode extends Expressions {
 		expression.value.toString();
 	}
 
-	def dispatch CharSequence code(HexLiteral expression) {
-		expression.value.toString();
-	}
-
 	def dispatch CharSequence code(DoubleLiteral expression) {
 		expression.value.toString();
 	}

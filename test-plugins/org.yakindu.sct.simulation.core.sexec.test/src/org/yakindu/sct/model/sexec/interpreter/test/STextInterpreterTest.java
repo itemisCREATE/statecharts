@@ -60,6 +60,12 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		executeWithDefaultScope("intVar = 0xFF");
 		assertEquals(0xFFL, getIntValue());
 	}
+	
+	@Test
+	public void testBinaryVariableAssignment() {
+		executeWithDefaultScope("intVar = 0b11011");
+		assertEquals(0b11011, getIntValue());
+	}
 
 	@Test
 	public void testBoolTrueVariableAssignment() {
@@ -125,6 +131,13 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	public void testBitwiseXor() {
 		executeWithDefaultScope("intVar = 0xF0F0 ^ 0xFF00");
 		assertEquals(0x0FF0L, getContext().getVariable("intVar").getValue());
+
+	}
+	
+	@Test
+	public void testBitwiseXorBinary() {
+		executeWithDefaultScope("intVar = 0b11011 ^ 0b0011");
+		assertEquals(24, getContext().getVariable("intVar").getValue());
 
 	}
 

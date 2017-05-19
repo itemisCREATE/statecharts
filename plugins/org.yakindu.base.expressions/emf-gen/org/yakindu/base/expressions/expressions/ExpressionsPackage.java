@@ -143,7 +143,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getStringLiteral()
 	 * @generated
 	 */
-	int STRING_LITERAL = 10;
+	int STRING_LITERAL = 11;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NullLiteralImpl <em>Null Literal</em>}' class.
@@ -153,7 +153,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNullLiteral()
 	 * @generated
 	 */
-	int NULL_LITERAL = 11;
+	int NULL_LITERAL = 12;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.AssignmentExpressionImpl <em>Assignment Expression</em>}' class.
@@ -163,7 +163,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAssignmentExpression()
 	 * @generated
 	 */
-	int ASSIGNMENT_EXPRESSION = 12;
+	int ASSIGNMENT_EXPRESSION = 13;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ConditionalExpressionImpl <em>Conditional Expression</em>}' class.
@@ -173,7 +173,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getConditionalExpression()
 	 * @generated
 	 */
-	int CONDITIONAL_EXPRESSION = 13;
+	int CONDITIONAL_EXPRESSION = 14;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BinaryExpressionImpl <em>Binary Expression</em>}' class.
@@ -248,7 +248,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalOrExpression()
 	 * @generated
 	 */
-	int LOGICAL_OR_EXPRESSION = 14;
+	int LOGICAL_OR_EXPRESSION = 15;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalAndExpressionImpl <em>Logical And Expression</em>}' class.
@@ -258,7 +258,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalAndExpression()
 	 * @generated
 	 */
-	int LOGICAL_AND_EXPRESSION = 15;
+	int LOGICAL_AND_EXPRESSION = 16;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalNotExpressionImpl <em>Logical Not Expression</em>}' class.
@@ -268,7 +268,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalNotExpression()
 	 * @generated
 	 */
-	int LOGICAL_NOT_EXPRESSION = 16;
+	int LOGICAL_NOT_EXPRESSION = 17;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BitwiseXorExpressionImpl <em>Bitwise Xor Expression</em>}' class.
@@ -278,7 +278,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseXorExpression()
 	 * @generated
 	 */
-	int BITWISE_XOR_EXPRESSION = 17;
+	int BITWISE_XOR_EXPRESSION = 18;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BitwiseOrExpressionImpl <em>Bitwise Or Expression</em>}' class.
@@ -288,7 +288,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseOrExpression()
 	 * @generated
 	 */
-	int BITWISE_OR_EXPRESSION = 18;
+	int BITWISE_OR_EXPRESSION = 19;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BitwiseAndExpressionImpl <em>Bitwise And Expression</em>}' class.
@@ -298,7 +298,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseAndExpression()
 	 * @generated
 	 */
-	int BITWISE_AND_EXPRESSION = 19;
+	int BITWISE_AND_EXPRESSION = 20;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.LogicalRelationExpressionImpl <em>Logical Relation Expression</em>}' class.
@@ -308,7 +308,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalRelationExpression()
 	 * @generated
 	 */
-	int LOGICAL_RELATION_EXPRESSION = 20;
+	int LOGICAL_RELATION_EXPRESSION = 21;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ShiftExpressionImpl <em>Shift Expression</em>}' class.
@@ -318,7 +318,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftExpression()
 	 * @generated
 	 */
-	int SHIFT_EXPRESSION = 21;
+	int SHIFT_EXPRESSION = 22;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalAddSubtractExpressionImpl <em>Numerical Add Subtract Expression</em>}' class.
@@ -328,7 +328,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalAddSubtractExpression()
 	 * @generated
 	 */
-	int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 22;
+	int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 23;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalMultiplyDivideExpressionImpl <em>Numerical Multiply Divide Expression</em>}' class.
@@ -338,7 +338,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalMultiplyDivideExpression()
 	 * @generated
 	 */
-	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 23;
+	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 24;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NumericalUnaryExpressionImpl <em>Numerical Unary Expression</em>}' class.
@@ -348,7 +348,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalUnaryExpression()
 	 * @generated
 	 */
-	int NUMERICAL_UNARY_EXPRESSION = 24;
+	int NUMERICAL_UNARY_EXPRESSION = 25;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.PrimitiveValueExpressionImpl <em>Primitive Value Expression</em>}' class.
@@ -358,7 +358,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getPrimitiveValueExpression()
 	 * @generated
 	 */
-	int PRIMITIVE_VALUE_EXPRESSION = 25;
+	int PRIMITIVE_VALUE_EXPRESSION = 26;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.ArgumentExpressionImpl <em>Argument Expression</em>}' class.
@@ -476,7 +476,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HEX_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
+	int HEX_LITERAL__VALUE = INT_LITERAL__VALUE;
 
 	/**
 	 * The number of structural features of the '<em>Hex Literal</em>' class.
@@ -485,7 +485,35 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HEX_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
+	int HEX_LITERAL_FEATURE_COUNT = INT_LITERAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.BinaryLiteralImpl <em>Binary Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.BinaryLiteralImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBinaryLiteral()
+	 * @generated
+	 */
+	int BINARY_LITERAL = 10;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINARY_LITERAL__VALUE = HEX_LITERAL__VALUE;
+
+	/**
+	 * The number of structural features of the '<em>Binary Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINARY_LITERAL_FEATURE_COUNT = HEX_LITERAL_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -936,7 +964,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getFeatureCall()
 	 * @generated
 	 */
-	int FEATURE_CALL = 26;
+	int FEATURE_CALL = 27;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -1009,7 +1037,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getElementReferenceExpression()
 	 * @generated
 	 */
-	int ELEMENT_REFERENCE_EXPRESSION = 27;
+	int ELEMENT_REFERENCE_EXPRESSION = 28;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -1073,7 +1101,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getParenthesizedExpression()
 	 * @generated
 	 */
-	int PARENTHESIZED_EXPRESSION = 28;
+	int PARENTHESIZED_EXPRESSION = 29;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1101,7 +1129,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getTypeCastExpression()
 	 * @generated
 	 */
-	int TYPE_CAST_EXPRESSION = 29;
+	int TYPE_CAST_EXPRESSION = 30;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1138,7 +1166,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getArgument()
 	 * @generated
 	 */
-	int ARGUMENT = 30;
+	int ARGUMENT = 31;
 
 	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' reference.
@@ -1175,7 +1203,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAssignmentOperator()
 	 * @generated
 	 */
-	int ASSIGNMENT_OPERATOR = 31;
+	int ASSIGNMENT_OPERATOR = 32;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.ShiftOperator <em>Shift Operator</em>}' enum.
@@ -1185,7 +1213,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftOperator()
 	 * @generated
 	 */
-	int SHIFT_OPERATOR = 32;
+	int SHIFT_OPERATOR = 33;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -1195,7 +1223,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAdditiveOperator()
 	 * @generated
 	 */
-	int ADDITIVE_OPERATOR = 33;
+	int ADDITIVE_OPERATOR = 34;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -1205,7 +1233,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getMultiplicativeOperator()
 	 * @generated
 	 */
-	int MULTIPLICATIVE_OPERATOR = 34;
+	int MULTIPLICATIVE_OPERATOR = 35;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -1215,7 +1243,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getUnaryOperator()
 	 * @generated
 	 */
-	int UNARY_OPERATOR = 35;
+	int UNARY_OPERATOR = 36;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -1225,7 +1253,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getRelationalOperator()
 	 * @generated
 	 */
-	int RELATIONAL_OPERATOR = 36;
+	int RELATIONAL_OPERATOR = 37;
 
 
 	/**
@@ -1236,7 +1264,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalOperator()
 	 * @generated
 	 */
-	int LOGICAL_OPERATOR = 37;
+	int LOGICAL_OPERATOR = 38;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.BitwiseOperator <em>Bitwise Operator</em>}' enum.
@@ -1246,7 +1274,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseOperator()
 	 * @generated
 	 */
-	int BITWISE_OPERATOR = 38;
+	int BITWISE_OPERATOR = 39;
 
 
 	/**
@@ -1364,15 +1392,14 @@ public interface ExpressionsPackage extends EPackage {
 	EClass getHexLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.base.expressions.expressions.HexLiteral#getValue <em>Value</em>}'.
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.BinaryLiteral <em>Binary Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.yakindu.base.expressions.expressions.HexLiteral#getValue()
-	 * @see #getHexLiteral()
+	 * @return the meta object for class '<em>Binary Literal</em>'.
+	 * @see org.yakindu.base.expressions.expressions.BinaryLiteral
 	 * @generated
 	 */
-	EAttribute getHexLiteral_Value();
+	EClass getBinaryLiteral();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.StringLiteral <em>String Literal</em>}'.
@@ -2160,12 +2187,14 @@ public interface ExpressionsPackage extends EPackage {
 		EClass HEX_LITERAL = eINSTANCE.getHexLiteral();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.BinaryLiteralImpl <em>Binary Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.BinaryLiteralImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBinaryLiteral()
 		 * @generated
 		 */
-		EAttribute HEX_LITERAL__VALUE = eINSTANCE.getHexLiteral_Value();
+		EClass BINARY_LITERAL = eINSTANCE.getBinaryLiteral();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.StringLiteralImpl <em>String Literal</em>}' class.

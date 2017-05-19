@@ -40,6 +40,7 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		// int
 		assertTrue(isIntegerType(inferType("1")));
 		assertTrue(isIntegerType(inferType("0x0F")));
+		assertTrue(isIntegerType(inferType("0b00001")));
 		assertTrue(isIntegerType(inferType("-1")));
 		assertTrue(isIntegerType(inferType("0")));
 		assertTrue(isIntegerType(inferType("intVar")));
@@ -77,6 +78,9 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		assertTrue(isIntegerType(inferType("1 + 0x0F")));
 		assertTrue(isIntegerType(inferType("0x0F + 0x0F")));
 		assertTrue(isIntegerType(inferType("intVar + 0x0F")));
+		assertTrue(isIntegerType(inferType("1 + 0b11")));
+		assertTrue(isIntegerType(inferType("0b01 + 0b1110")));
+		assertTrue(isIntegerType(inferType("intVar + 0B101010")));
 		assertTrue(isIntegerType(inferType("intVar + 2")));
 		assertTrue(isRealType(inferType("1.1 + 2")));
 		assertTrue(isRealType(inferType("2 + 1.0")));
@@ -86,6 +90,9 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		assertTrue(isIntegerType(inferType("0x0F - 2")));
 		assertTrue(isIntegerType(inferType("0x0F - 0x0F")));
 		assertTrue(isIntegerType(inferType("0x0F- intVar")));
+		assertTrue(isIntegerType(inferType("1 - 0b11")));
+		assertTrue(isIntegerType(inferType("0b01 - 0b1110")));
+		assertTrue(isIntegerType(inferType("intVar - 0B101010")));
 		assertTrue(isIntegerType(inferType("intVar - 2")));
 		assertTrue(isRealType(inferType("1.0 - 2")));
 		assertTrue(isRealType(inferType("2 - 1.0")));
@@ -139,6 +146,8 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		assertTrue(isIntegerType(inferType("1 * 2")));
 		assertTrue(isIntegerType(inferType("1 * 0x0F")));
 		assertTrue(isIntegerType(inferType("0x0F * intVar")));
+		assertTrue(isIntegerType(inferType("1 * 0B11")));
+		assertTrue(isIntegerType(inferType("0b01101 * intVar")));
 		// real
 		assertTrue(isRealType(inferType("intVar * realVar")));
 		assertTrue(isRealType(inferType("1.0 * 2")));
@@ -152,6 +161,9 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		assertTrue(isIntegerType(inferType("1 / 0x0F")));
 		assertTrue(isIntegerType(inferType("0x0F / 0x0F")));
 		assertTrue(isIntegerType(inferType("intVar / 0x0F")));
+		assertTrue(isIntegerType(inferType("1 / 0b01")));
+		assertTrue(isIntegerType(inferType("0x0F / 0b10")));
+		assertTrue(isIntegerType(inferType("intVar / 0b011")));
 		// real
 		assertTrue(isRealType(inferType("1.0 / 2")));
 		assertTrue(isRealType(inferType("2 / 1.0")));
@@ -163,6 +175,10 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		assertTrue(isIntegerType(inferType("1 % 0x0F")));
 		assertTrue(isIntegerType(inferType("0x0F % 0x0F")));
 		assertTrue(isIntegerType(inferType("intVar % 0x0F")));
+		assertTrue(isIntegerType(inferType("1 % 0b0001")));
+		assertTrue(isIntegerType(inferType("0x0F % 0b1")));
+		assertTrue(isIntegerType(inferType("intVar % 0b001")));
+		
 		// real
 		assertTrue(isRealType(inferType("1.0 % 2")));
 		assertTrue(isRealType(inferType("2 % 1.0")));
@@ -443,6 +459,8 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		assertTrue(isIntegerType(inferType("intVar = 5 * 3")));
 		assertTrue(isIntegerType(inferType("intVar = 0x0F * 3")));
 		assertTrue(isIntegerType(inferType("intVar = intVar * 0x0F")));
+		assertTrue(isIntegerType(inferType("intVar = 0b01 * 3")));
+		assertTrue(isIntegerType(inferType("intVar = intVar * 0b01111")));
 		assertTrue(isIntegerType(inferType("ABC.intVar = 42")));
 		// boolean
 		assertTrue(isBooleanType(inferType("boolVar = true || false")));
