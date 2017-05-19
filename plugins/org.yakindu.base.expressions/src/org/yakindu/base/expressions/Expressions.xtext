@@ -85,19 +85,25 @@ PrimaryExpression returns Expression:
 PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
 
+
+
 FeatureCall returns Expression:
 	ElementReferenceExpression ({FeatureCall.owner=current} '.' feature=[ecore::EObject]
-	(=> operationCall?= '('(args+=Expression (',' args+=Expression)*)?')'
+	(=> operationCall?= '('(arguments+=Argument (',' arguments+=Argument)*)?')'
 		|
 	=> (arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')* 
 	)?)*;
 
 ElementReferenceExpression returns Expression:
 	{ElementReferenceExpression} reference=[ecore::EObject|ID]
-	(=> operationCall?='('	(args+=Expression (',' args+=Expression)*)?	')' 
+	(=> operationCall?='('	(arguments+=Argument (',' arguments+=Argument)*)?	')' 
 		|
 	=> (arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')*
 	)?;
+
+Argument:
+	(parameter=[types::Parameter] '=')?  value=ConditionalExpression
+;
 
 ParenthesizedExpression returns Expression:
 	{ParenthesizedExpression} '(' expression=Expression ')';

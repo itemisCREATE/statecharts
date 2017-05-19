@@ -188,7 +188,7 @@ class ExpressionCode extends Expressions {
 	def protected codeDeclaration(Declaration it, ArgumentExpression exp) {
 		switch it {
 			Operation:
-				return operationCall(it, exp.args)
+				return operationCall(it, exp.expressions)
 			Property case exp.isAssignmentContained:
 				return getStaticContext + identifier
 			Property case exp.isPropertyContained:

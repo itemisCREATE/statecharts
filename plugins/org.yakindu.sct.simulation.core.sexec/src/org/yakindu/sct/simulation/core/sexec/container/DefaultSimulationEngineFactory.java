@@ -69,7 +69,7 @@ public class DefaultSimulationEngineFactory implements ISimulationEngineFactory 
 		ArgumentedAnnotation eventDriven = (ArgumentedAnnotation) statechart
 				.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
 		if (cycleBased != null) {
-			Long result = (Long) interpreter.evaluateStatement(cycleBased.getArgs().get(0),
+			Long result = (Long) interpreter.evaluateStatement(cycleBased.getExpressions().get(0),
 					SRuntimeFactory.eINSTANCE.createExecutionContext());
 			return new CycleBasedSimulationEngine(statechart, result);
 		}

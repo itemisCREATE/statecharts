@@ -63,10 +63,10 @@ class ExpressionCode extends Expressions {
 
 	def dispatch CharSequence code(Expression it, VariableDefinition target) '''«target.access»'''
 
-	def dispatch CharSequence code(ElementReferenceExpression it, OperationDefinition target) '''«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
+	def dispatch CharSequence code(ElementReferenceExpression it, OperationDefinition target) '''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 		
-	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) '''«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
+	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) '''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 
 	def dispatch CharSequence code(ConditionalExpression it) '''«condition.code» ? «trueCase.code» : «falseCase.code»'''

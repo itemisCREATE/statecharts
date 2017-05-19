@@ -8,21 +8,14 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
-
 import org.yakindu.base.types.provider.AnnotationItemProvider;
-
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
-import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
@@ -69,7 +62,7 @@ public class ArgumentedAnnotationItemProvider extends AnnotationItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS);
+			childrenFeatures.add(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGUMENTS);
 		}
 		return childrenFeatures;
 	}
@@ -122,7 +115,7 @@ public class ArgumentedAnnotationItemProvider extends AnnotationItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ArgumentedAnnotation.class)) {
-			case StextPackage.ARGUMENTED_ANNOTATION__ARGS:
+			case StextPackage.ARGUMENTED_ANNOTATION__ARGUMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -142,113 +135,8 @@ public class ArgumentedAnnotationItemProvider extends AnnotationItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createEventRaisingExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createEventValueReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createArgumentedAnnotation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createConditionalExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS,
-				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+				(ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGUMENTS,
+				 ExpressionsFactory.eINSTANCE.createArgument()));
 	}
 
 	/**

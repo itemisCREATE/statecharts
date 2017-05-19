@@ -23,13 +23,13 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.scoping.ExpressionsScopeProvider;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Type;
@@ -55,7 +55,7 @@ import com.google.inject.Inject;
  * @author alexander nyssen Added support for scoping of enumeration literals
  * 
  */
-public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
+public class STextScopeProvider extends ExpressionsScopeProvider {
 
 	@Inject
 	private ITypeSystemInferrer typeInferrer;

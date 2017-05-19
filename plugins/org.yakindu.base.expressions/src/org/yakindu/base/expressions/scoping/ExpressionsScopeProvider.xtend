@@ -6,18 +6,57 @@
  * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
  * committers of YAKINDU - initial API and implementation
- *
-*/
+ * 
+ */
 package org.yakindu.base.expressions.scoping
 
-/**
- * This class contains custom scoping description.
- * 
- * see : http://www.eclipse.org/Xtext/documentation.html#scoping
- * on how and when to use it 
- *
- */
-class ExpressionsScopeProvider extends org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider {
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.xtext.scoping.Scopes
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.Operation
+import org.yakindu.base.expressions.expressions.Argument
+import org.eclipse.xtext.scoping.IScope
 
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
+class ExpressionsScopeProvider extends AbstractDeclarativeScopeProvider {
+
+	def scope_Argument_parameter(Argument object, EReference ref) {
+		var parameters = object?.eContainer?.operation?.parameters
+		return if(parameters != null) Scopes.scopeFor(parameters) else IScope.NULLSCOPE;
+	}
+
+	def scope_Argument_parameter(ElementReferenceExpression exp, EReference ref) {
+		var parameters = exp?.operation?.parameters
+		return if(parameters != null) Scopes.scopeFor(parameters) else IScope.NULLSCOPE;
+	}
+
+	def scope_Argument_parameter(FeatureCall fc, EReference ref) {
+		var parameters = fc?.operation?.parameters
+		return if(parameters != null) Scopes.scopeFor(parameters) else IScope.NULLSCOPE;
+	}
+
+	def dispatch getOperation(ElementReferenceExpression it) {
+		return if (reference instanceof Operation)
+			reference as Operation
+		else
+			null
+	}
+
+	def dispatch getOperation(FeatureCall it) {
+		return if (feature instanceof Operation)
+			feature as Operation
+		else
+			null
+	}
+
+	def dispatch getOperation(EObject object) {
+	}
 
 }

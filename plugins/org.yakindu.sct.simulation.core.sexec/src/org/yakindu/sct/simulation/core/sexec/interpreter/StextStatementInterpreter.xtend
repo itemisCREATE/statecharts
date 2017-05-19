@@ -174,7 +174,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object execute(ElementReferenceExpression expression) {
-		var parameter = expression.args.map(it|execute)
+		var parameter = expression.expressions.map(it|execute)
 		if (expression.operationCall || expression.reference instanceof OperationDefinition) {
 			if (operationDelegate != null &&
 				operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
@@ -299,7 +299,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	def executeFeatureCall(FeatureCall call) {
 		if (call.operationCall || call.feature instanceof OperationDefinition) {
-			var parameter = call.args.map(it|execute)
+			var parameter = call.expressions.map(it|execute)
 			if (call.feature instanceof Operation) {
 				var Operation operation = call.feature as Operation
 				if (operationDelegate != null && operationDelegate.canExecute(operation, parameter)) {

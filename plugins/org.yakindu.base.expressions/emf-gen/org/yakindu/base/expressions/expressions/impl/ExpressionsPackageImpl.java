@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.expressions.expressions.AdditiveOperator;
+import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;
@@ -245,6 +246,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EClass typeCastExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass argumentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -905,6 +913,33 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getArgument() {
+		return argumentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getArgument_Parameter() {
+		return (EReference)argumentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getArgument_Value() {
+		return (EReference)argumentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getArgumentExpression() {
 		return argumentExpressionEClass;
 	}
@@ -914,7 +949,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getArgumentExpression_Args() {
+	public EReference getArgumentExpression_Arguments() {
 		return (EReference)argumentExpressionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1073,7 +1108,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEReference(unaryExpressionEClass, UNARY_EXPRESSION__OPERAND);
 
 		argumentExpressionEClass = createEClass(ARGUMENT_EXPRESSION);
-		createEReference(argumentExpressionEClass, ARGUMENT_EXPRESSION__ARGS);
+		createEReference(argumentExpressionEClass, ARGUMENT_EXPRESSION__ARGUMENTS);
 
 		literalEClass = createEClass(LITERAL);
 
@@ -1156,6 +1191,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		typeCastExpressionEClass = createEClass(TYPE_CAST_EXPRESSION);
 		createEReference(typeCastExpressionEClass, TYPE_CAST_EXPRESSION__OPERAND);
 		createEReference(typeCastExpressionEClass, TYPE_CAST_EXPRESSION__TYPE);
+
+		argumentEClass = createEClass(ARGUMENT);
+		createEReference(argumentEClass, ARGUMENT__PARAMETER);
+		createEReference(argumentEClass, ARGUMENT__VALUE);
 
 		// Create enums
 		assignmentOperatorEEnum = createEEnum(ASSIGNMENT_OPERATOR);
@@ -1243,7 +1282,11 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		addEOperation(unaryExpressionEClass, ecorePackage.getEEnumerator(), "getOperator", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(argumentExpressionEClass, ArgumentExpression.class, "ArgumentExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArgumentExpression_Args(), this.getExpression(), null, "args", null, 0, -1, ArgumentExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArgumentExpression_Arguments(), this.getArgument(), null, "arguments", null, 0, -1, ArgumentExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(argumentExpressionEClass, this.getExpression(), "getArgs", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(argumentExpressionEClass, this.getExpression(), "getExpressions", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(literalEClass, Literal.class, "Literal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1326,6 +1369,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEClass(typeCastExpressionEClass, TypeCastExpression.class, "TypeCastExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeCastExpression_Operand(), this.getExpression(), null, "operand", null, 0, 1, TypeCastExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeCastExpression_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, TypeCastExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(argumentEClass, Argument.class, "Argument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getArgument_Parameter(), theTypesPackage.getParameter(), null, "parameter", null, 0, 1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArgument_Value(), this.getExpression(), null, "value", null, 0, 1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(assignmentOperatorEEnum, AssignmentOperator.class, "AssignmentOperator");

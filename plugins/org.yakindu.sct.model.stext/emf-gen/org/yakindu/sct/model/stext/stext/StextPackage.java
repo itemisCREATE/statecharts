@@ -1482,13 +1482,13 @@ public interface StextPackage extends EPackage {
 	int ARGUMENTED_ANNOTATION__TYPE = TypesPackage.ANNOTATION__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Args</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARGUMENTED_ANNOTATION__ARGS = TypesPackage.ANNOTATION_FEATURE_COUNT + 0;
+	int ARGUMENTED_ANNOTATION__ARGUMENTS = TypesPackage.ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Argumented Annotation</em>' class.

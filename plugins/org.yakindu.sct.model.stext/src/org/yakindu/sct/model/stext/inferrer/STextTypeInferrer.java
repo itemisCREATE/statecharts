@@ -123,7 +123,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	}
 
 	public InferenceResult doInfer(ArgumentedAnnotation ad) {
-		EList<Expression> arguments = ad.getArgs();
+		EList<Expression> arguments = ad.getExpressions();
 		inferAnnotationProperty(ad.getType(), arguments);
 		return getResultFor(VOID);
 	}
