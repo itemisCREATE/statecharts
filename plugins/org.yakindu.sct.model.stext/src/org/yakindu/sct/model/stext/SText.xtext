@@ -86,7 +86,7 @@ ArgumentedAnnotation:
 ;
 
 SimpleArgument returns exp::Argument:
-	value=Expression
+	{exp::Argument} value=ConditionalExpression
 ;
 
 TypeSpecifier returns types::TypeSpecifier:

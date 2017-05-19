@@ -102,7 +102,7 @@ ElementReferenceExpression returns Expression:
 	)?;
 
 Argument:
-	(=>parameter=[types::Parameter] '=')?  value=Expression
+	(parameter=[types::Parameter] '=')?  value=ConditionalExpression
 ;
 
 ParenthesizedExpression returns Expression:
