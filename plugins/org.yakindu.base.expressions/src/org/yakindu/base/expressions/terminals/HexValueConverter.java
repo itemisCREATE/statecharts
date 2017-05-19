@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.model.stext.conversion;
+package org.yakindu.base.expressions.terminals;
 
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter;
@@ -30,7 +30,7 @@ public class HexValueConverter extends AbstractLexerBasedConverter<Integer> {
 			throw new ValueConverterException("Couldn't convert empty string to number.", node, null);
 
 		try {
-			// per form the conversion with string index 2 since the prefix is always '0x'
+			// perform the conversion with string index 2 since the prefix is always '0x'
 			return Integer.parseInt(string.substring(2), 16);
 		} catch ( NumberFormatException e ) {
 			throw new ValueConverterException("Couldn't convert '" + string + "' to number.", node, null);

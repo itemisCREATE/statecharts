@@ -36,5 +36,6 @@ Export-Package: org.yakindu.base.expressions,
  org.yakindu.base.expressions.scoping,
  org.yakindu.base.expressions.serializer,
  org.yakindu.base.expressions.services,
+ org.yakindu.base.expressions.terminals,
  org.yakindu.base.expressions.validation
 Bundle-ClassPath: .
