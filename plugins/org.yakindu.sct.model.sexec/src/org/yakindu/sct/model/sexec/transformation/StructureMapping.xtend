@@ -12,6 +12,7 @@ package org.yakindu.sct.model.sexec.transformation
 
 import com.google.inject.Inject
 import java.util.ArrayList
+import org.eclipse.emf.ecore.resource.URIConverter
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.types.Declaration
@@ -31,6 +32,7 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
@@ -43,6 +45,8 @@ class StructureMapping {
 	@Inject extension StatechartExtensions sct
 	@Inject extension IQualifiedNameProvider
 	@Inject ImportResolver resolver
+	@Inject
+	private IPackageImport2URIMapper mapper;
 	
 	
 	//==========================================================================
@@ -73,17 +77,21 @@ class StructureMapping {
 	 */
 	def dispatch Scope mapScope(ImportScope scope) {
 		val _scope = scope.createScope
-		//FIXME
-//		for (Package imp : scope.imports) {
-//			val props = resolver.getImportedElementsOfType(imp, Property)
-//			for (Declaration decl : props) {
-//				_scope.declarations.add(decl.createImportDeclaration)
-//			}
-//			val operations = resolver.getImportedElementsOfType(imp, Operation) 
-//			for (Declaration decl : operations) {
-//				_scope.declarations.add(decl.createImportDeclaration)
-//			}
-//		}
+		for (String importString : scope.imports){
+			val pkgImport = mapper.findPackageImport(scope.eResource,importString)
+			
+			if(URIConverter.INSTANCE.exists(pkgImport.getUri(), null)){
+				val packageForNamespace = resolver.getPackageForNamespace(scope.eResource,pkgImport.namespace)
+				val props = resolver.getImportedElementsOfType(packageForNamespace,Property)
+				for (Declaration decl : props) {
+					_scope.declarations.add(decl.createImportDeclaration)
+				}
+				val operations = resolver.getImportedElementsOfType(packageForNamespace, Operation) 
+				for (Declaration decl : operations) {
+					_scope.declarations.add(decl.createImportDeclaration)
+				}
+			}
+		}
 		return _scope
 	}
 	
