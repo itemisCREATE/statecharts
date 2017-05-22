@@ -46,6 +46,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.base.expressions.expressions.ConditionalExpression
+import org.yakindu.base.expressions.expressions.BinaryLiteral
 
 class ExpressionCode extends Expressions {
 
@@ -113,6 +114,8 @@ class ExpressionCode extends Expressions {
 	def dispatch CharSequence code(FloatLiteral it) '''«value.toString»'''
 
 	def dispatch CharSequence code(HexLiteral it) '''0x«Integer::toHexString(value)»'''
+	
+	def dispatch CharSequence code(BinaryLiteral it) '''0b«Integer::toBinaryString(value)»'''
 
 	def dispatch CharSequence code(PrimitiveValueExpression it) '''«value.code»'''
 

@@ -193,6 +193,29 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.BinaryLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BinaryLiteralItemProvider binaryLiteralItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.BinaryLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBinaryLiteralAdapter() {
+		if (binaryLiteralItemProvider == null) {
+			binaryLiteralItemProvider = new BinaryLiteralItemProvider(this);
+		}
+
+		return binaryLiteralItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.StringLiteral} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -779,6 +802,7 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 		if (doubleLiteralItemProvider != null) doubleLiteralItemProvider.dispose();
 		if (floatLiteralItemProvider != null) floatLiteralItemProvider.dispose();
 		if (hexLiteralItemProvider != null) hexLiteralItemProvider.dispose();
+		if (binaryLiteralItemProvider != null) binaryLiteralItemProvider.dispose();
 		if (stringLiteralItemProvider != null) stringLiteralItemProvider.dispose();
 		if (nullLiteralItemProvider != null) nullLiteralItemProvider.dispose();
 		if (assignmentExpressionItemProvider != null) assignmentExpressionItemProvider.dispose();

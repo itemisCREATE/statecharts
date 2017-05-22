@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.base.expressions.expressions.*;
 import org.yakindu.base.expressions.expressions.AdditiveOperator;
 import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
@@ -94,6 +95,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.DOUBLE_LITERAL: return createDoubleLiteral();
 			case ExpressionsPackage.FLOAT_LITERAL: return createFloatLiteral();
 			case ExpressionsPackage.HEX_LITERAL: return createHexLiteral();
+			case ExpressionsPackage.BINARY_LITERAL: return createBinaryLiteral();
 			case ExpressionsPackage.STRING_LITERAL: return createStringLiteral();
 			case ExpressionsPackage.NULL_LITERAL: return createNullLiteral();
 			case ExpressionsPackage.ASSIGNMENT_EXPRESSION: return createAssignmentExpression();
@@ -226,6 +228,16 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	public HexLiteral createHexLiteral() {
 		HexLiteralImpl hexLiteral = new HexLiteralImpl();
 		return hexLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BinaryLiteral createBinaryLiteral() {
+		BinaryLiteralImpl binaryLiteral = new BinaryLiteralImpl();
+		return binaryLiteral;
 	}
 
 	/**

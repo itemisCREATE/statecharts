@@ -25,7 +25,6 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
-import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
@@ -343,10 +342,6 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch valueLiteral(IntLiteral literal) {
-		return literal.value as long
-	}
-
-	def dispatch valueLiteral(HexLiteral literal) {
 		return literal.value as long
 	}
 

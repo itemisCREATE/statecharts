@@ -166,6 +166,11 @@ public class PrimitiveValueExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.PRIMITIVE_VALUE_EXPRESSION__VALUE,
+				 ExpressionsFactory.eINSTANCE.createBinaryLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PRIMITIVE_VALUE_EXPRESSION__VALUE,
 				 ExpressionsFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
