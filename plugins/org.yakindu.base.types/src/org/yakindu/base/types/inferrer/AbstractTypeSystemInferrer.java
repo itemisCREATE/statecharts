@@ -23,7 +23,6 @@ import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity;
-import org.yakindu.base.types.validation.TypeValidationError;
 import org.yakindu.base.types.validation.TypeValidator;
 
 import com.google.common.cache.CacheBuilder;
@@ -47,8 +46,9 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 
 	@Inject
 	protected ITypeSystem registry;
-	
-	@Inject TypeValidator typeValidator;
+
+	@Inject
+	TypeValidator typeValidator;
 
 	protected IValidationIssueAcceptor acceptor;
 
@@ -131,43 +131,27 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	}
 
 	protected void assertNotType(InferenceResult currentResult, String msg, InferenceResult... candidates) {
-		for(TypeValidationError e: typeValidator.assertNotType(currentResult, msg, candidates)) {
-			error(e);
-		}
+		typeValidator.assertNotType(currentResult, msg, acceptor, candidates);
 	}
 
 	protected void assertSame(InferenceResult result1, InferenceResult result2, String msg) {
-		for(TypeValidationError e: typeValidator.assertSame(result1, result2, msg)) {
-			error(e);
-		}
+		typeValidator.assertSame(result1, result2, msg, acceptor);
 	}
 
 	protected void assertCompatible(InferenceResult result1, InferenceResult result2, String msg) {
-		for(TypeValidationError e: typeValidator.assertCompatible(result1, result2, msg)) {
-			error(e);
-		}
+		typeValidator.assertCompatible(result1, result2, msg, acceptor);
 	}
 
 	protected void assertAssignable(InferenceResult varResult, InferenceResult valueResult, String msg) {
-		for(TypeValidationError e: typeValidator.assertAssignable(varResult, valueResult, msg)) {
-			error(e);
-		}
+		typeValidator.assertAssignable(varResult, valueResult, msg, acceptor);
 	}
 
 	protected void assertTypeBindingsSame(InferenceResult result1, InferenceResult result2, String msg) {
-		for(TypeValidationError e: typeValidator.assertTypeBindingsSame(result1, result2, msg)) {
-			error(e);
-		}
+		typeValidator.assertTypeBindingsSame(result1, result2, msg, acceptor);
 	}
 
 	protected void assertIsSubType(InferenceResult subResult, InferenceResult superResult, String msg) {
-		for(TypeValidationError e: typeValidator.assertIsSubType(subResult, superResult, msg)) {
-			error(e);
-		}
-	}
-	
-	protected boolean isNullOnComplexType(InferenceResult result1, InferenceResult result2) {
-		return typeValidator.isNullOnComplexType(result1, result2);
+		typeValidator.assertIsSubType(subResult, superResult, msg, acceptor);
 	}
 
 	protected void info(String msg, String issueCode) {
@@ -180,9 +164,5 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 
 	protected void error(String msg, String issueCode) {
 		acceptor.accept(new ValidationIssue(Severity.ERROR, msg, issueCode));
-	}
-	
-	protected void error(TypeValidationError e) {
-		error(e.getMessage(), e.getErrorCode());
 	}
 }

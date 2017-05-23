@@ -87,7 +87,7 @@ public interface IValidationIssueAcceptor {
 	}
 
 	public void accept(ValidationIssue trace);
-
+	
 	public static final class ListBasedValidationIssueAcceptor implements IValidationIssueAcceptor {
 
 		private List<ValidationIssue> traces = Lists.newArrayList();
