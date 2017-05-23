@@ -123,10 +123,10 @@ class StatemachineHeader implements IContentTemplate {
 		/*! Enumeration of all states */ 
 		typedef enum
 		{
-			«FOR state : states»
-				«state.shortName»,
+			«null_state»,
+			«FOR state : states SEPARATOR ","»
+				«state.shortName»
 			«ENDFOR»
-			«null_state»
 		} «statesEnumType»;
 	'''
 
