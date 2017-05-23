@@ -220,7 +220,7 @@ class StatemachineSource implements IContentTemplate {
 	def isActiveFunction(ExecutionFlow it) '''
 		sc_boolean «isActiveFctID»(const «scHandleDecl»)
 		{
-			sc_boolean result = bool_true;
+			sc_boolean result = bool_false;
 			int i;
 			
 			for(i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; i++)
