@@ -17,8 +17,6 @@ import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity;
-import org.yakindu.sct.model.stext.stext.EventDefinition;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -68,15 +66,7 @@ public abstract class AbstractTypeInferrerTest extends AbstractSTextTest {
 		EObject parseResult = super.parseExpression(expression, parserRule, scopes);
 		assertNotNull(parseResult);
 		acceptor = new ListBasedValidationIssueAcceptor();
-		if (parseResult instanceof Expression) {
-			return typeInferrer.infer((Expression) parseResult, acceptor);
-		} else if (parseResult instanceof EventDefinition) {
-			return typeInferrer.infer((EventDefinition) parseResult, acceptor);
-		} else if (parseResult instanceof VariableDefinition) {
-			return typeInferrer.infer((VariableDefinition) parseResult, acceptor);
-		} else {
-			throw new IllegalArgumentException("Unsupported parse result.");
-		}
+		return typeInferrer.infer(parseResult, acceptor);
 	}
 	
 	protected boolean isType(Type type, String typeName) {
