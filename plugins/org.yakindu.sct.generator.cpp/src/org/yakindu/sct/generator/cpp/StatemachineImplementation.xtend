@@ -249,7 +249,17 @@ class StatemachineImplementation implements IContentTemplate {
 	def isActiveFunction(ExecutionFlow it) '''
 		sc_boolean «module»::isActive() const
 		{
-			return «FOR i : 0 ..< stateVector.size SEPARATOR '||'»stateConfVector[«i»] != «null_state»«ENDFOR»;
+			sc_boolean active = false;
+			sc_boolean initialized = true;
+			int i;
+			
+			for (i = 0; i < «orthogonalStatesConst»; i++)
+			{
+				active = active || («scHandle»->stateConfVector[i] != «null_state»);
+				initialized = initialized && («scHandle»->stateConfVector[i] != NOT_INITIALIZED_STATE);
+			}
+
+			return active && initialized;
 		}
 	'''
 	

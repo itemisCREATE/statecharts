@@ -32,6 +32,7 @@ class StatemachineSource implements IContentTemplate {
 	@Inject extension INamingService
 	@Inject extension FlowCode
 	@Inject extension ConstantInitializationResolver
+	@Inject extension StateConfVectorIndexCalculator
 	@Inject protected extension StateVectorExtensions
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
@@ -102,7 +103,6 @@ class StatemachineSource implements IContentTemplate {
 			«clearOutEventsFctID»(handle);
 		
 			«initSequence.code»
-		
 		}
 	'''
 	
@@ -204,9 +204,9 @@ class StatemachineSource implements IContentTemplate {
 			{
 				«FOR s : states»
 				case «s.shortName» :
-					result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.shortName»
-					«ELSE»«scHandle»->stateConfVector[«s.stateVector.offset»] >= «s.shortName»
-						&& «scHandle»->stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.shortName»«ENDIF»);
+					result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.getDefine»] == «s.shortName»
+					«ELSE»«scHandle»->stateConfVector[«s.getDefine»] >= «s.shortName»
+						&& «scHandle»->stateConfVector[«s.getDefine»] <= «s.subStates.last.shortName»«ENDIF»);
 					break;
 				«ENDFOR»
 				default:
@@ -220,16 +220,17 @@ class StatemachineSource implements IContentTemplate {
 	def isActiveFunction(ExecutionFlow it) '''
 		sc_boolean «isActiveFctID»(const «scHandleDecl»)
 		{
-			sc_boolean result;
-			if («FOR i : 0 ..< stateVector.size SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] != «null_state»«ENDFOR»)
+			sc_boolean active = bool_false;
+			sc_boolean initialized = bool_true;
+			int i;
+			
+			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; i++)
 			{
-				result =  bool_true;
+				active = active || («scHandle»->stateConfVector[i] != «null_state»);
+				initialized = initialized && («scHandle»->stateConfVector[i] != NOT_INITIALIZED_STATE);
 			}
-			else
-			{
-				result = bool_false;
-			}
-			return result;
+
+			return active && initialized;
 		}
 	'''
 	
