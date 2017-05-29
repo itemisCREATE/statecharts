@@ -50,6 +50,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		
 		«includes(artifactConfigs)»
 		
+		«stateConfVectorDefines»
+		
 		/*! \file Header of the state machine '«name»'.
 		*/
 		

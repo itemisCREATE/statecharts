@@ -17,9 +17,10 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations;
 import org.yakindu.sct.generator.c.SimpleGenArtifactConfigurations;
+import org.yakindu.sct.generator.c.StateConfVectorIndexCalculator;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
-import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
+import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -27,6 +28,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
 import com.google.inject.Binder;
+import com.google.inject.Singleton;
 
 /**
  * 
@@ -42,6 +44,7 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 		binder.bind(INamingService.class).to(CppNamingService.class);
 		binder.bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
+		binder.bind(StateConfVectorIndexCalculator.class).in(Singleton.class);
 		bindIGenArtifactConfigurations(entry, binder);
 	}
 	
