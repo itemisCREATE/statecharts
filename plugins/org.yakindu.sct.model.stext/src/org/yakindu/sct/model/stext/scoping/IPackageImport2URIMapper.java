@@ -75,9 +75,7 @@ public interface IPackageImport2URIMapper {
 			if (getClass() != obj.getClass())
 				return false;
 			PackageImport other = (PackageImport) obj;
-			if (!attributesEqual(other))
-				return false;
-			return true;
+			return attributesEqual(other);
 		}
 
 		private boolean attributesEqual(PackageImport other) {
