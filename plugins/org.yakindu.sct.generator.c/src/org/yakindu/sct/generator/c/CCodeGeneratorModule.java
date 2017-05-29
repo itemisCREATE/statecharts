@@ -10,22 +10,23 @@
  */
 package org.yakindu.sct.generator.c;
 
-import static org.yakindu.sct.generator.c.features.ICFeatureConstants.FEATURE_TRACING;
 import static org.yakindu.sct.generator.c.features.ICFeatureConstants.FEATURE_INCLUDES;
+import static org.yakindu.sct.generator.c.features.ICFeatureConstants.FEATURE_TRACING;
+import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS;
 import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_TRACING_ENTER_STATE;
 import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_TRACING_EXIT_STATE;
-import static org.yakindu.sct.generator.c.features.ICFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS;
 import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRACES;
 
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
-import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
+import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 
 import com.google.inject.Binder;
+import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 /**
  * 
@@ -40,6 +41,7 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(IExecutionFlowGenerator.class).to(CGenerator.class);
 		binder.bind(INamingService.class).to(CNamingService.class);
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
+		binder.bind(StateConfVector.class).in(Singleton.class);
 		bindIGenArtifactConfigurations(entry, binder);
 		bindTracingProperty(entry, binder);
 	}

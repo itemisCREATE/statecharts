@@ -38,6 +38,7 @@ class FlowCode {
 	@Inject extension ExpressionCode
 	@Inject extension INamingService
 	@Inject extension GenmodelEntries
+	@Inject extension StateConfVector
  
  	@Inject GeneratorEntry entry
  
@@ -144,12 +145,12 @@ class FlowCode {
 	'''
 	
 	def dispatch CharSequence code(EnterState it) '''
-		«scHandle»->stateConfVector[«state.stateVector.offset»] = «state.shortName»;
-		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
+		«scHandle»->stateConfVector[«state.getDefine»] = «state.shortName»;
+		«scHandle»->stateConfVectorPosition = «state.getDefine»;
 	'''
 
 	def dispatch CharSequence code(ExitState it) '''
-		«scHandle»->stateConfVector[«state.stateVector.offset»] = «null_state»;
-		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
+		«scHandle»->stateConfVector[«state.getDefine»] = «null_state»;
+		«scHandle»->stateConfVectorPosition = «state.getDefine»;
 	'''
 }
