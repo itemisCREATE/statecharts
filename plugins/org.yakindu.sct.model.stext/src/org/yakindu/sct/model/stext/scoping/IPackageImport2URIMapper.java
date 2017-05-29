@@ -34,15 +34,15 @@ public interface IPackageImport2URIMapper {
 
 		private String namespace;
 
+		private String name;
+
+		private URI uri;
+
 		public PackageImport(String name, URI uri, String namespace) {
 			this.name = name;
 			this.uri = uri;
 			this.namespace = namespace;
 		}
-
-		private String name;
-
-		private URI uri;
 
 		public String getName() {
 			return name;
@@ -75,20 +75,41 @@ public interface IPackageImport2URIMapper {
 			if (getClass() != obj.getClass())
 				return false;
 			PackageImport other = (PackageImport) obj;
-			if (name == null) {
-				if (other.name != null)
-					return false;
-			} else if (!name.equals(other.name))
+			if (!attributesEqual(other))
 				return false;
+			return true;
+		}
+
+		private boolean attributesEqual(PackageImport other) {
+			// name
+			if (!nameEquals(other) || !namespaceEquals(other) || !uriEquals(other))
+				return false;
+			return true;
+		}
+
+		private boolean uriEquals(PackageImport other) {
+			if (uri == null) {
+				if (other.uri != null)
+					return false;
+			} else if (!uri.equals(other.uri))
+				return false;
+			return true;
+		}
+
+		private boolean namespaceEquals(PackageImport other) {
 			if (namespace == null) {
 				if (other.namespace != null)
 					return false;
 			} else if (!namespace.equals(other.namespace))
 				return false;
-			if (uri == null) {
-				if (other.uri != null)
+			return true;
+		}
+
+		private boolean nameEquals(PackageImport other) {
+			if (name == null) {
+				if (other.name != null)
 					return false;
-			} else if (!uri.equals(other.uri))
+			} else if (!name.equals(other.name))
 				return false;
 			return true;
 		}

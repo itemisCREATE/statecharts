@@ -7,28 +7,27 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Import Scope</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '<em><b>Import
+ * Scope</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.ImportScopeImpl#getImports <em>Imports</em>}</li>
+ * <li>{@link org.yakindu.sct.model.stext.stext.impl.ImportScopeImpl#getImports
+ * <em>Imports</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope {
 	/**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getImports() <em>Imports</em>}'
+	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getImports()
 	 * @generated
 	 * @ordered
@@ -36,8 +35,8 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 	protected EList<String> imports;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ImportScopeImpl() {
@@ -45,8 +44,8 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -55,8 +54,8 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<String> getImports() {
@@ -67,45 +66,45 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StextPackage.IMPORT_SCOPE__IMPORTS:
+			case StextPackage.IMPORT_SCOPE__IMPORTS :
 				return getImports();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StextPackage.IMPORT_SCOPE__IMPORTS:
+			case StextPackage.IMPORT_SCOPE__IMPORTS :
 				getImports().clear();
-				getImports().addAll((Collection<? extends String>)newValue);
+				getImports().addAll((Collection<? extends String>) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StextPackage.IMPORT_SCOPE__IMPORTS:
+			case StextPackage.IMPORT_SCOPE__IMPORTS :
 				getImports().clear();
 				return;
 		}
@@ -113,27 +112,28 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StextPackage.IMPORT_SCOPE__IMPORTS:
+			case StextPackage.IMPORT_SCOPE__IMPORTS :
 				return imports != null && !imports.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (imports: ");
@@ -142,4 +142,4 @@ public class ImportScopeImpl extends StatechartScopeImpl implements ImportScope 
 		return result.toString();
 	}
 
-} //ImportScopeImpl
+} // ImportScopeImpl
