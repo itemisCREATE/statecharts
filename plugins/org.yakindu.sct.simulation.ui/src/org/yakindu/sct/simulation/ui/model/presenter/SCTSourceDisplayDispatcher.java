@@ -23,6 +23,7 @@ import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
+import org.yakindu.sct.simulation.core.debugmodel.IDebugConstants;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugElement;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
@@ -48,7 +49,7 @@ public class SCTSourceDisplayDispatcher implements ISourceDisplay, IDebugEventSe
 
 	public void displaySource(Object element, IWorkbenchPage page, boolean forceSourceLookup) {
 		SCTDebugTarget newTarget = unwrapTarget(element);
-		if (newTarget.getDebugTarget().isTerminated())
+		if (!newTarget.getModelIdentifier().equals(IDebugConstants.ID_DEBUG_MODEL) || newTarget.getDebugTarget().isTerminated())
 			return;
 		if (newTarget != null && activeDebugTarget != newTarget){
 			if (activeSourceDisplay != null)
