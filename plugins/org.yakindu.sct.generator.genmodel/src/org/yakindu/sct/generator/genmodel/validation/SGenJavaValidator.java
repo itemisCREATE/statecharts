@@ -16,6 +16,7 @@ import static com.google.common.collect.Iterables.transform;
 
 import java.util.List;
 
+import org.antlr.grammar.v3.ANTLRv3Parser.finallyClause_return;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
@@ -68,6 +69,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public static final String INCOMPATIBLE_TYPE_STRING_EXPECTED = "Incompatible type, String expected";
 	public static final String UNKNOWN_CONTENT_TYPE = "Unknown content type '";
 	public static final String DEPRECATED = "Element is depricated";
+	public static final String EMPTY_SGEN = ".sgen file does not contain any entries";
 	// Failure codes
 	public static final String CODE_REQUIRED_FEATURE = "code_req_feature";
 
@@ -148,6 +150,14 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 					SGenPackage.Literals.GENERATOR_MODEL__GENERATOR_ID);
 		}
 	}
+	
+	@Check
+	public void checkEntriesExist(GeneratorModel model) {
+		if(model.getEntries() == null || model.getEntries().isEmpty()) {
+			warning(EMPTY_SGEN, null);
+		}
+	}
+	
 
 	@Check
 	public void checkDuplicateGeneratorEntryFeature(final FeatureConfiguration config) {
@@ -226,7 +236,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 						transform(
 								filter(concat(transform(transform(libraryDescriptors, getFeatureTypeLibrary()),
 										getFeatureTypes())), hasName(configuration.getType().getName())),
-								getParmeter())),
+								getParameter())),
 						isRequiredParamter()),
 				getName());
 
@@ -245,7 +255,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	@Check
 	public void checkDeprecatedParameters(GeneratorEntry entry) {
 		Iterable<FeatureParameter> deprecatedParameters = filter(
-				concat(transform(transform(entry.getFeatures(), getFeatureType()), getParmeter())), isDeprecated());
+				concat(transform(transform(entry.getFeatures(), getFeatureType()), getParameter())), isDeprecated());
 		for (FeatureParameter parameter : deprecatedParameters) {
 			warning(String.format(DEPRECATED + " %s : %s", parameter.getName(), parameter.getComment()),
 					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF, parameter.getName());
@@ -278,7 +288,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		};
 	}
 
-	private Function<FeatureType, Iterable<FeatureParameter>> getParmeter() {
+	private Function<FeatureType, Iterable<FeatureParameter>> getParameter() {
 		return new Function<FeatureType, Iterable<FeatureParameter>>() {
 
 			public Iterable<FeatureParameter> apply(FeatureType from) {
