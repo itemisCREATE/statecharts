@@ -70,7 +70,7 @@ class StatemachineSource implements IContentTemplate {
 		«runCycleFunction»
 		
 		«raiseTimeEventFunction»
-		irina.rychkova@gmail.com
+
 		«isStateActiveFunction»
 		
 		«interfaceFunctions»
