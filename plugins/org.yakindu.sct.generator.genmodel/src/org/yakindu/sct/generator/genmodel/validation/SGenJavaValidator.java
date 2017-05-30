@@ -16,7 +16,6 @@ import static com.google.common.collect.Iterables.transform;
 
 import java.util.List;
 
-import org.antlr.grammar.v3.ANTLRv3Parser.finallyClause_return;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
