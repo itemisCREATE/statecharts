@@ -107,7 +107,8 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 		fireEvent(new DebugEvent(getDebugTarget(), DebugEvent.TERMINATE));
 		terminated = true;
 		executionControl.terminate();
-		engine.getExecutionContext().eAdapters().remove(updater);
+		if(engine.getExecutionContext() != null)
+			engine.getExecutionContext().eAdapters().remove(updater);
 	}
 
 	public boolean canResume() {
