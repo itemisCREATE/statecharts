@@ -16,8 +16,10 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Property
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
@@ -158,11 +160,15 @@ class Naming {
 	def lastStateID() {
 		separator + "last" + separator + "state"
 	}
+	
+	def stateVectorDefine(ExecutionState it) {
+		'''SCVI_«shortName»'''.toString.toUpperCase
+	}
 
 	def ExecutionFlow execution_flow(EObject element) {
 		var ret = element;
 
-		while (ret != null) {
+		while (ret !== null) {
 			if (ret instanceof ExecutionFlow) {
 				return ret as ExecutionFlow
 			} else {
@@ -244,7 +250,7 @@ class Naming {
 		if (isConst) '''«it.constantName»''' else '''«scHandle»->«scope.instance».«name.asEscapedIdentifier»'''
 	}
 
-	def dispatch access(org.yakindu.base.types.Property it) {
+	def dispatch access(Property it) {
 		'''«name.asEscapedIdentifier»'''
 	}
 

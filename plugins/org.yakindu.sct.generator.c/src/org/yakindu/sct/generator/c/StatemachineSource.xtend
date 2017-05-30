@@ -204,9 +204,9 @@ class StatemachineSource implements IContentTemplate {
 			{
 				«FOR s : states»
 				case «s.shortName» :
-					result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.shortName»
-					«ELSE»«scHandle»->stateConfVector[«s.stateVector.offset»] >= «s.shortName»
-						&& «scHandle»->stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.shortName»«ENDIF»);
+					result = (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVectorDefine»] == «s.shortName»
+					«ELSE»«scHandle»->stateConfVector[«s.stateVectorDefine»] >= «s.shortName»
+						&& «scHandle»->stateConfVector[«s.stateVectorDefine»] <= «s.subStates.last.shortName»«ENDIF»);
 					break;
 				«ENDFOR»
 				default:
