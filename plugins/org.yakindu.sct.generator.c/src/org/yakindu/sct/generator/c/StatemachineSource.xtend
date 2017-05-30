@@ -70,7 +70,7 @@ class StatemachineSource implements IContentTemplate {
 		«runCycleFunction»
 		
 		«raiseTimeEventFunction»
-		
+		irina.rychkova@gmail.com
 		«isStateActiveFunction»
 		
 		«interfaceFunctions»
@@ -225,7 +225,7 @@ class StatemachineSource implements IContentTemplate {
 			
 			for(i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; i++)
 			{
-				result = result || 	«scHandle»->stateConfVector[i] != «null_state»;
+				result = result || «scHandle»->stateConfVector[i] != «null_state»;
 			}
 			
 			return result;
