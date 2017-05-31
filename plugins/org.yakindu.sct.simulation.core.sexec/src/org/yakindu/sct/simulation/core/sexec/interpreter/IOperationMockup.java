@@ -35,6 +35,8 @@ public interface IOperationMockup {
 	 */
 	public Object execute(Operation definition, Object[] parameter);
 	
+	public void reset();
+	
 	/**
 	 * @author Johannes Dicks - Initial contribution and API
 	 */
@@ -49,6 +51,9 @@ public interface IOperationMockup {
 		public Object execute(Operation definition, Object[] parameter) {
 			return null;
 		}
+
+		@Override
+		public void reset() {}
 	}
 	
 }

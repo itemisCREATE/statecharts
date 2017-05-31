@@ -102,4 +102,7 @@ public class JavaOperationMockup implements IOperationMockup {
 
 		return true;
 	}
+
+	@Override
+	public void reset() {}
 }
