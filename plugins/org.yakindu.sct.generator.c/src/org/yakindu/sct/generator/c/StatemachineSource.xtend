@@ -70,7 +70,7 @@ class StatemachineSource implements IContentTemplate {
 		«runCycleFunction»
 		
 		«raiseTimeEventFunction»
-		
+
 		«isStateActiveFunction»
 		
 		«interfaceFunctions»
@@ -220,15 +220,14 @@ class StatemachineSource implements IContentTemplate {
 	def isActiveFunction(ExecutionFlow it) '''
 		sc_boolean «isActiveFctID»(const «scHandleDecl»)
 		{
-			sc_boolean result;
-			if («FOR i : 0 ..< stateVector.size SEPARATOR ' || '»«scHandle»->stateConfVector[«i»] != «null_state»«ENDFOR»)
+			sc_boolean result = bool_false;
+			int i;
+			
+			for(i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; i++)
 			{
-				result =  bool_true;
+				result = result || «scHandle»->stateConfVector[i] != «null_state»;
 			}
-			else
-			{
-				result = bool_false;
-			}
+			
 			return result;
 		}
 	'''
