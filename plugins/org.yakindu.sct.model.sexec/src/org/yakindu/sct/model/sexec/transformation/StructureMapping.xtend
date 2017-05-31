@@ -87,11 +87,11 @@ class StructureMapping {
 		return _scope
 	}
 	
-	protected def createImportDeclaration(Property decl, Scope scope) {
+	protected dispatch def createImportDeclaration(Property decl, Scope scope) {
 		decl.doCreateAndAddImportDecl(scope)
 	}
 
-	protected def createImportDeclaration(Operation decl, Scope scope) {
+	protected dispatch def createImportDeclaration(Operation decl, Scope scope) {
 		decl.doCreateAndAddImportDecl(scope)
 	}
 	
@@ -102,7 +102,7 @@ class StructureMapping {
 		]
 	}
 	
-	protected def createImportDeclaration(EObject decl, Scope scope) {
+	protected dispatch def createImportDeclaration(EObject decl, Scope scope) {
 		// Nothing to do
 	}
 
