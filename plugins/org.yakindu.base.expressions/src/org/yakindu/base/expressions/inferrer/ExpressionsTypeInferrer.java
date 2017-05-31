@@ -234,7 +234,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 
 	public InferenceResult doInfer(ElementReferenceExpression e) {
 		if (e.isOperationCall()) {
-			if (!e.getReference().eIsProxy()) {
+			if (e.getReference() != null && !e.getReference().eIsProxy()) {
 				return inferOperation(e, (Operation) e.getReference(),
 						Maps.<TypeParameter, InferenceResult> newHashMap());
 			} else {
