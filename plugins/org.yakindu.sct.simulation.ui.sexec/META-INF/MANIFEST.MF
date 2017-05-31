@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.simulation.core.sexec,
  org.eclipse.ui,
  org.yakindu.sct.commons,
- org.eclipse.ui.ide
+ org.eclipse.ui.ide,
+ org.eclipse.ui.console
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.simulation.ui.sexec.launch,
