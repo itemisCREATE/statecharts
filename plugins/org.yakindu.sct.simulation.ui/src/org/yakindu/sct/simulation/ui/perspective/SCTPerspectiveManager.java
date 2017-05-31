@@ -46,13 +46,13 @@ import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 public class SCTPerspectiveManager extends PerspectiveManager implements ILaunchListener, IDebugEventSetListener {
 
 	private static final String DEBUG_VIEW_ID = "org.eclipse.debug.ui.DebugView";
-	private static final String LAUNCH_TYPE = "yakindu";
+	private static final String LAUNCH_TYPE = "org.yakindu.sct.simulation.core.launch.statechart";
 
 	public void launchAdded(ILaunch launch) {
 		try {
 			ILaunchConfigurationType type = launch.getLaunchConfiguration().getType();
 			// Open the simulation perspective for all yakindu simulation types
-			if (type.getIdentifier().contains(LAUNCH_TYPE)) {
+			if (type.getIdentifier().equals(LAUNCH_TYPE)) {
 				schedulePerspectiveSwitchJob(ID_PERSPECTIVE_SCT_SIMULATION);
 			}
 		} catch (CoreException ex) {
