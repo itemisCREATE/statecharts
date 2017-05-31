@@ -21,8 +21,12 @@ public class StatechartAnnotations {
 
 	public static final String CYCLE_BASED_ANNOTATION = "CycleBased";
 	public static final String EVENT_DRIVEN_ANNOTATION = "EventDriven";
-	
-	public boolean isCycleBased(Statechart statechart){
+
+	public boolean isCycleBased(Statechart statechart) {
 		return statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION) == null;
+	}
+
+	public boolean isEventDriven(Statechart statechart) {
+		return statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION) != null;
 	}
 }
