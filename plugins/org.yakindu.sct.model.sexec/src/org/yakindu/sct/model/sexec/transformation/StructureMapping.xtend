@@ -37,14 +37,12 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.util.ImportResolver
 
 class StructureMapping {
 	 
 	@Inject extension SexecElementMapping mapping
 	@Inject extension StatechartExtensions sct
 	@Inject extension IQualifiedNameProvider
-	@Inject ImportResolver resolver
 	@Inject
 	private IPackageImport2URIMapper mapper;
 	
@@ -80,29 +78,34 @@ class StructureMapping {
 		for (String importString : scope.imports){
 			val pkgImport = mapper.findPackageImport(scope.eResource,importString)
 			
-			if(URIConverter.INSTANCE.exists(pkgImport.getUri(), null)){
-				val packageForNamespace = resolver.getPackageForNamespace(scope.eResource,pkgImport.namespace)
-				val props = resolver.getImportedElementsOfType(packageForNamespace,Property)
-				for (Declaration decl : props) {
-					_scope.declarations.add(decl.createImportDeclaration)
-				}
-				val operations = resolver.getImportedElementsOfType(packageForNamespace, Operation) 
-				for (Declaration decl : operations) {
-					_scope.declarations.add(decl.createImportDeclaration)
-				}
+			if (pkgImport !== null && URIConverter.INSTANCE.exists(pkgImport.getUri(), null)) {
+				val packageForNamespace = scope.eResource.resourceSet.getResource(pkgImport.uri, true).contents.
+					head as Package
+				packageForNamespace.eAllContents.filter(Declaration).toList.forEach[createImportDeclaration(_scope)]
 			}
 		}
 		return _scope
 	}
 	
-	protected def createImportDeclaration(Declaration decl) {
-		val importDecl = SGraphFactory.eINSTANCE.createImportDeclaration
-		importDecl.name = decl.name
-		importDecl.declaration = decl
-		importDecl
+	protected def createImportDeclaration(Property decl, Scope scope) {
+		decl.doCreateAndAddImportDecl(scope)
+	}
+
+	protected def createImportDeclaration(Operation decl, Scope scope) {
+		decl.doCreateAndAddImportDecl(scope)
 	}
 	
+	protected def doCreateAndAddImportDecl(Declaration decl, Scope scope){
+		scope.declarations += SGraphFactory.eINSTANCE.createImportDeclaration => [
+			name = decl.name
+			declaration = decl
+		]
+	}
 	
+	protected def createImportDeclaration(EObject decl, Scope scope) {
+		// Nothing to do
+	}
+
 	def dispatch Declaration map(Declaration decl) {
 	}
 	

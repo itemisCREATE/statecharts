@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.EcoreUtil2;
@@ -74,6 +75,8 @@ import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper;
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
@@ -86,6 +89,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Guard;
+import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
@@ -114,12 +118,17 @@ import com.google.inject.name.Named;
 @ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class })
 public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages {
 
+	public static final String IMPORT_NOT_RESOLVED_MSG = "Import '%s' cannot be resolved.";
+	public static final String IMPORT_NOT_RESOLVED_CODE = "ImportNotResolved";
+
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
 	@Inject
 	private STextGrammarAccess grammarAccess;
 	@Inject
 	private IQualifiedNameProvider nameProvider;
+	@Inject
+	private IPackageImport2URIMapper mapper;
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
@@ -736,6 +745,18 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (!STextValidationModelUtils.getExitPointSpecs(t.getProperties()).isEmpty() && t.getTrigger() != null
 				&& t.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
 			error(EXITPOINTSPEC_WITH_TRIGGER, t, null, -1);
+		}
+	}
+
+	@Check
+	public void checkImportExists(ImportScope scope) {
+		EList<String> imports = scope.getImports();
+		for (String packageImport : imports) {
+			PackageImport pkImport = mapper.findPackageImport(scope.eResource(), packageImport);
+			if (pkImport == null || !URIConverter.INSTANCE.exists(pkImport.getUri(), null)) {
+				error(String.format(IMPORT_NOT_RESOLVED_MSG, packageImport), scope,
+						StextPackage.Literals.IMPORT_SCOPE__IMPORTS, imports.indexOf(packageImport));
+			}
 		}
 	}
 
