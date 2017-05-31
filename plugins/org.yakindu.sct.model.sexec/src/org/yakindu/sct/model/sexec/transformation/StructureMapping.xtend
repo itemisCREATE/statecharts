@@ -37,6 +37,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.eclipse.emf.ecore.EObject
 
 class StructureMapping {
 	 
