@@ -79,10 +79,7 @@ public interface IPackageImport2URIMapper {
 		}
 
 		private boolean attributesEqual(PackageImport other) {
-			// name
-			if (!nameEquals(other) || !namespaceEquals(other) || !uriEquals(other))
-				return false;
-			return true;
+			return nameEquals(other) && namespaceEquals(other) && uriEquals(other);
 		}
 
 		private boolean uriEquals(PackageImport other) {
