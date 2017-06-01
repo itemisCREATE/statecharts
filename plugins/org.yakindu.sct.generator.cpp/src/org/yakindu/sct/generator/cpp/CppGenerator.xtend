@@ -54,7 +54,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 	
 	def initGenerationArtifacts(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		locations.configure(flow.typesModule.h, entry.libraryOutput, typesContent)
-		locations.configure(statemachineInterface.h, entry.headerOutput, statemachineInterfaceContent)
+		locations.configure(statemachineInterface.h, entry.libraryOutput, statemachineInterfaceContent)
 		
 		if (flow.timed) {
 				locations.configure(timedStatemachineInterface.h, entry.libraryOutput, timedStatemachineInterfaceContent)
