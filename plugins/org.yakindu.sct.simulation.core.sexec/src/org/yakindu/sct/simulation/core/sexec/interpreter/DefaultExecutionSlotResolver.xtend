@@ -13,7 +13,6 @@ package org.yakindu.sct.simulation.core.sexec.interpreter
 import com.google.inject.Inject
 import java.util.Stack
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
 import org.yakindu.base.base.NamedElement
@@ -21,13 +20,12 @@ import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Event
-import org.yakindu.base.types.Package
+import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
-import org.yakindu.base.types.Operation
 
 /**
  * Default implementation for resolving execution slots based on expressions.
@@ -129,13 +127,7 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 	}
 	
 	def protected ExecutionSlot packageNamespaceAwareResolve(ExecutionContext context, EObject element) {
-		val pkg = EcoreUtil2.getContainerOfType(element, Package)
-		if (pkg != null && pkg.name != null) {
-			context.getSlot(pkg.name + "." + element.fullyQualifiedName.toString)
-		}
-		else {
 			context.getSlot(element.fullyQualifiedName.toString)
-		}
 	}
 
 	def protected name(EObject e) {

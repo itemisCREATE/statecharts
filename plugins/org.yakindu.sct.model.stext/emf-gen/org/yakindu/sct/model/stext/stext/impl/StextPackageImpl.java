@@ -567,8 +567,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImportScope_Imports() {
-		return (EReference)importScopeEClass.getEStructuralFeatures().get(0);
+	public EAttribute getImportScope_Imports() {
+		return (EAttribute)importScopeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -998,7 +998,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		internalScopeEClass = createEClass(INTERNAL_SCOPE);
 
 		importScopeEClass = createEClass(IMPORT_SCOPE);
-		createEReference(importScopeEClass, IMPORT_SCOPE__IMPORTS);
+		createEAttribute(importScopeEClass, IMPORT_SCOPE__IMPORTS);
 
 		eventDefinitionEClass = createEClass(EVENT_DEFINITION);
 
@@ -1167,7 +1167,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEClass(internalScopeEClass, InternalScope.class, "InternalScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(importScopeEClass, ImportScope.class, "ImportScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getImportScope_Imports(), theTypesPackage.getPackage(), null, "imports", null, 0, -1, ImportScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImportScope_Imports(), ecorePackage.getEString(), "imports", null, 0, -1, ImportScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventDefinitionEClass, EventDefinition.class, "EventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -34,7 +34,6 @@ import org.yakindu.sct.simulation.core.sruntime.EventDirection
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
 import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory
-import org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl
 
 /**
  * 
