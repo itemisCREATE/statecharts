@@ -173,30 +173,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object execute(ElementReferenceExpression expression) {
-		var parameter = expression.expressions.map(it|execute)
-		if (expression.operationCall || expression.reference instanceof OperationDefinition) {
-			if (operationDelegate != null &&
-				operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
-				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
-			}
-		}
-		// for enumeration types return the literal value
-		if (expression.reference instanceof Enumerator) {
-			return new Long((expression.reference as Enumerator).literalValue)
-		}
-
-		val executionSlot = context.resolve(expression)
-		if (executionSlot instanceof ExecutionVariable)
-			return executionSlot.getValue
-		if (executionSlot instanceof ExecutionEvent)
-			return (executionSlot as ExecutionEvent).raised
-
-		// reference to an element with complex type is not reflected in an execution variable but in a composite slot
-		// TODO hide reference mechanism in resolver
-		if (executionSlot instanceof CompositeSlot)
-			return executionSlot
-
-		return null
+		executeElementReferenceExpression(expression)
 	}
 
 	def dispatch Object execute(EventValueReferenceExpression expression) {
@@ -294,6 +271,33 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	def dispatch Object execute(FeatureCall call) {
 		executeFeatureCall(call)
+	}
+	
+	def executeElementReferenceExpression(ElementReferenceExpression expression){
+		var parameter = expression.expressions.map(it|execute)
+		if (expression.operationCall || expression.reference instanceof OperationDefinition) {
+			if (operationDelegate != null &&
+				operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
+				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
+			}
+		}
+		// for enumeration types return the literal value
+		if (expression.reference instanceof Enumerator) {
+			return new Long((expression.reference as Enumerator).literalValue)
+		}
+
+		val executionSlot = context.resolve(expression)
+		if (executionSlot instanceof ExecutionVariable)
+			return executionSlot.getValue
+		if (executionSlot instanceof ExecutionEvent)
+			return (executionSlot as ExecutionEvent).raised
+
+		// reference to an element with complex type is not reflected in an execution variable but in a composite slot
+		// TODO hide reference mechanism in resolver
+		if (executionSlot instanceof CompositeSlot)
+			return executionSlot
+
+		return null
 	}
 
 	def executeFeatureCall(FeatureCall call) {
