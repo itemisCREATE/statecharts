@@ -54,13 +54,11 @@ public class PackageImportHyperlinkHelper extends HyperlinkHelper {
 				PackageImport mappedImport = mapper.findPackageImport(resource, pkgImport);
 				final URI targetURI = mappedImport.getUri();
 				XtextHyperlink result = getHyperlinkProvider().get();
-				if (targetURI.isPlatformResource()) {
-					result.setURI(targetURI);
-					Region region = new Region(node.getOffset(), node.getLength());
-					result.setHyperlinkRegion(region);
-					result.setHyperlinkText(targetURI.toString());
-					acceptor.accept(result);
-				}
+				result.setURI(targetURI);
+				Region region = new Region(node.getOffset(), node.getLength());
+				result.setHyperlinkRegion(region);
+				result.setHyperlinkText(targetURI.toString());
+				acceptor.accept(result);
 			}
 
 		}
