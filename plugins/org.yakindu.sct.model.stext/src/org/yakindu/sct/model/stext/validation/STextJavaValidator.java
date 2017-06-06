@@ -114,9 +114,6 @@ import com.google.inject.name.Named;
 @ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class })
 public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages {
 
-	public static final String IMPORT_NOT_RESOLVED_MSG = "Import '%s' cannot be resolved.";
-	public static final String IMPORT_NOT_RESOLVED_CODE = "ImportNotResolved";
-
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
 	@Inject
