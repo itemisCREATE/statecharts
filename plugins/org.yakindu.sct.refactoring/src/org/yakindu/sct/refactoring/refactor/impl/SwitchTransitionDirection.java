@@ -7,6 +7,11 @@ import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.ui.editor.editparts.TransitionEditPart;
 
+/* 
+ * TODO: This is not really a Refactoring. A Refactoring changes stuff without changing what it does, which does
+ * not apply on this "refactoring". There does not seem to be a better place for this at the moment, so when something like
+ * Modifications exists, this should be moved there.
+ */
 public class SwitchTransitionDirection extends AbstractRefactoring<TransitionEditPart> {
 
 	@Override
@@ -40,7 +45,5 @@ public class SwitchTransitionDirection extends AbstractRefactoring<TransitionEdi
 	@Override
 	protected Resource getResource() {
 		return getContextObject().resolveSemanticElement().eResource();
-		
 	}
-
 }
