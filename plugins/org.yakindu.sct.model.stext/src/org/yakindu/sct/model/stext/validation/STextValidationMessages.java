@@ -60,5 +60,7 @@ public interface STextValidationMessages {
 	public static final String VAR_ARGS_LAST_MSG = "The variable argument type must be the last argument.";
 	public static final String WRONG_NUMBER_OF_ARGUMENTS_MSG = "Wrong number of arguments, expected %s .";
 	public static final String WRONG_NUMBER_OF_ARGUMENTS_CODE = "WrongNrOfArgs";
+	public static final String IMPORT_NOT_RESOLVED_MSG = "Import '%s' cannot be resolved.";
+	public static final String IMPORT_NOT_RESOLVED_CODE = "ImportNotResolved";
 
 }
