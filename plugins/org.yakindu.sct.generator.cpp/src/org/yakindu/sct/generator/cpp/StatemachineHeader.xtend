@@ -53,6 +53,11 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		/*! \file Header of the state machine '«name»'.
 		*/
 		
+		/*! Define indices of states in the StateConfVector */
+		«FOR state : states»
+		#define «state.stateVectorDefine» «state.stateVector.offset»
+		«ENDFOR»
+		
 		class «module» : «interfaceExtensions»
 		{
 			
