@@ -237,8 +237,8 @@ class StatemachineImplementation implements IContentTemplate {
 				«FOR s : states»
 				case «s.shortName.asEscapedIdentifier» : 
 					return (sc_boolean) («IF s.leaf»stateConfVector[«s.stateVectorDefine»] == «s.shortName.asEscapedIdentifier»
-					«ELSE»stateConfVector[[«s.stateVectorDefine»] >= «s.shortName.asEscapedIdentifier»
-						&& stateConfVector[[«s.stateVectorDefine»] <= «s.subStates.last.shortName.asEscapedIdentifier»«ENDIF»);
+					«ELSE»stateConfVector[«s.stateVectorDefine»] >= «s.shortName.asEscapedIdentifier»
+						&& stateConfVector[«s.stateVectorDefine»] <= «s.subStates.last.shortName.asEscapedIdentifier»«ENDIF»);
 				«ENDFOR»
 				default: return false;
 			}
