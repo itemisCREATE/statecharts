@@ -29,7 +29,7 @@ import com.google.common.collect.Lists;
  * @author Johannes Dicks
  *
  */
-public class TestCompletnessAssertions {
+public class TestCompletenessAssertions {
 
 	public void assertAllChecksHaveTests(Class<?> validatorClass, Class<?> validatorTestClass) {
 		Iterable<Method> methods = Lists.newArrayList(validatorClass.getDeclaredMethods());

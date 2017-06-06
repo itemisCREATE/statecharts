@@ -46,7 +46,7 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.impl.StextFactoryImpl;
-import org.yakindu.sct.model.stext.test.util.TestCompletnessAssertions;
+import org.yakindu.sct.model.stext.test.util.TestCompletenessAssertions;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
 import org.yakindu.sct.model.stext.validation.STextValidationMessages;
@@ -63,7 +63,7 @@ import com.google.inject.Inject;
 public class STextJavaValidatorTest extends AbstractSTextValidationTest implements STextValidationMessages {
 
 	@Inject
-	TestCompletnessAssertions checkAvailable;
+	TestCompletenessAssertions checkAvailable;
 
 	/**
 	 * @see STextJavaValidator#checkVariableDefinition(org.yakindu.sct.model.stext.stext.VariableDefinition)
