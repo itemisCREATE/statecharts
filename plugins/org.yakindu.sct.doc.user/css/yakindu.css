@@ -247,3 +247,16 @@ body.eclipsehelp {
     content: "";
     counter-increment: none
 }
+
+.body-container .primary .example {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #cccccc;
+    border-radius: 4px;
+    background-color: #e8f2fe;
+    padding-top: 1ex;
+    padding-bottom: 0.5ex;
+    padding-right: 1em;
+    padding-left: 1em;
+    margin-bottom: 1ex;
+}
