@@ -29,9 +29,9 @@ import com.google.common.collect.Lists;
  * @author Johannes Dicks
  *
  */
-public class TestForCheckAvailabilityTester {
+public class TestCompletnessAssertions {
 
-	public void checkAllCheckMethodsHaveATestMethod(Class<?> validatorClass, Class<?> validatorTestClass) {
+	public void assertAllChecksHaveTests(Class<?> validatorClass, Class<?> validatorTestClass) {
 		Iterable<Method> methods = Lists.newArrayList(validatorClass.getDeclaredMethods());
 		methods = Iterables.filter(methods, new Predicate<Method>() {
 			public boolean apply(Method input) {
