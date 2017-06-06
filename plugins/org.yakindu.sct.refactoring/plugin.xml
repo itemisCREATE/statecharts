@@ -200,26 +200,26 @@
                   </and>
                </visibleWhen>
             </command>
-             <command
-                   commandId="com.yakindu.sct.refactoring.switchtransitiondirection"
-                   label="Switch Transition Direction"
-                   style="push">
-                <visibleWhen
-                      checkEnabled="false">
-                   <and>
-                      <reference
-                            definitionId="oneTransitionSelected">
-                      </reference>
-                      <with
-                            variable="activeEditorId">
-                         <equals
-                               value="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
-                         </equals>
-                      </with>
-                   </and>
-                </visibleWhen>
-             </command>
          </menu>
+         <command
+               commandId="com.yakindu.sct.refactoring.switchtransitiondirection"
+               label="Switch Transition Direction"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <and>
+                  <reference
+                        definitionId="oneTransitionSelected">
+                  </reference>
+                  <with
+                        variable="activeEditorId">
+                     <equals
+                           value="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+                     </equals>
+                  </with>
+               </and>
+            </visibleWhen>
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
