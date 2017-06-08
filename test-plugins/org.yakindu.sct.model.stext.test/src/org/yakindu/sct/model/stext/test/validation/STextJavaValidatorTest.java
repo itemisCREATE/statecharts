@@ -14,11 +14,9 @@ package org.yakindu.sct.model.stext.test.validation;
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCode;
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorMsg;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -28,7 +26,6 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
-import org.eclipse.xtext.validation.Check;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,14 +46,13 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.impl.StextFactoryImpl;
+import org.yakindu.sct.model.stext.test.util.TestCompletenessAssertions;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
 import org.yakindu.sct.model.stext.validation.STextValidationMessages;
 import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -65,6 +61,9 @@ import com.google.common.collect.Lists;
 @RunWith(XtextRunner.class)
 @InjectWith(STextInjectorProvider.class)
 public class STextJavaValidatorTest extends AbstractSTextValidationTest implements STextValidationMessages {
+
+	@Inject
+	TestCompletenessAssertions checkAvailable;
 
 	/**
 	 * @see STextJavaValidator#checkVariableDefinition(org.yakindu.sct.model.stext.stext.VariableDefinition)
@@ -513,17 +512,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	 */
 	@Test
 	public void testAllChecksHaveTests() throws Exception {
-		Iterable<Method> methods = Lists.newArrayList(STextJavaValidator.class.getDeclaredMethods());
-		methods = Iterables.filter(methods, new Predicate<Method>() {
-			public boolean apply(Method input) {
-				return input.getAnnotation(Check.class) != null;
-			}
-		});
-		for (Method checkMethod : methods) {
-			Method testMethod = getClass().getMethod(checkMethod.getName());
-			assertNotNull("Missing @Test Annotation for method " + checkMethod.getName(),
-					testMethod.getAnnotation(Test.class));
-		}
+		checkAvailable.assertAllChecksHaveTests(STextJavaValidator.class, this.getClass());
 	}
 
 	@Test
