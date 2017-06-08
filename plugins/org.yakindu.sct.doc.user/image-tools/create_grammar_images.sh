@@ -62,7 +62,10 @@ setup_workdir()
 	echo "Populating working directory with PPM images."
 	for i in ${docuNti}*.png ${sctunitNti}*.png
 	do
-	    pngtopnm ${i} | pnmcrop | pnmmargin -white 10 >"${wd}/`basename $i .png`.ppm"
+	    ppmWorkFile="${wd}/`basename $i .png`.ppm"
+	    pngWorkFile="${wd}/`basename $i`"
+	    pngtopnm ${i} | pnmcrop | pnmmargin -white 10 >"${ppmWorkFile}"
+	    pnmtopng -compression 9 "${ppmWorkFile}" >"${pngWorkFile}"
 	done
     fi
 }
@@ -193,5 +196,5 @@ create_grammar_image assertion \
 
 # Process
 create_grammar_image proceed \
-    proceedstatement \
+    proceedexpression \
     proceedunit
