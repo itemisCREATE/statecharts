@@ -272,7 +272,7 @@ h3(#sctunit_operations_and_tests). Operations and tests
 
 _Operations_ are comparable to methods, functions, or subroutines in other programming languages. Operations are defined in "test classes":#sctunit_test_classes.
 
-A _test_ is a parameterless operation that is annotated with <code>@Test</code>.
+A _test_ is parameterless operation without a return type that is annotated with <code>@Test</code>.
 
 ==<div class="example">==
 
@@ -318,10 +318,10 @@ it also has access to
 * entities imported by the operation's test class.
 
 An operation can call other operations. This is like subroutine calls in other programming languages. Called operations can be …
-* in the same test class,
-* in other test classes of the same "test suite":#sctunit_test_suites,
-* in imported test classes,
-* declared in the statechart.
+* located in the same test class,
+* located in "imported":#sctunit_the_import_statement test classes that pertain to the same statechart.
+
+Operations that are declared in the statechart _cannot_ be executed during a test. If you need them to be called you can "mocked":#sctunit_mocking_an_operation_call them.
 
 
 h4. Annotations
@@ -370,14 +370,13 @@ bq. *Please note:* "active(…)":../user-guide/statechart_language#active-state 
 
 ==</div>==
 
-Generally, an assertion consists of the keyword @assert@, followed by a boolean expression, optionally followed by the keyword @message@ and an error message text. The assertion expects the boolean expression to be _true_ to continue the test. If it evaluates to _false_ the test fails. The optional message can be used to clarify what went wrong.
+Generally, an assertion consists of the keyword @assert@, followed by a boolean expression, optionally followed by the keyword @message@ and an error message text (string literal). The assertion expects the boolean expression to be _true_ to continue the test. If it evaluates to _false_ the test fails. The optional message can be used to clarify what went wrong.
 
 ==<!-- Start sctunit_keyword_called -->==
 
 h5. Asserting an operation call
 
-A special variant of the assertion uses the _called_ expression. It checks whether a certain operation has been called (executed), typically by some action in the statechart.
-
+A special assertion variant uses the @called@ keyword ("_assert called_ statement"). It checks whether a certain operation has been called (executed), typically by some action in the statechart.
 
 ==<div class="example">==
 
@@ -388,13 +387,13 @@ assert called myOperation with (42, 815)
 
 The first assertion checks whether the operation _myOperation_ has been called during the execution of this test. If it hasn't, the test fails.
 
-The second assertion checks whether the operation _myOperation_ has been called with parameters 42 and 815. If the operation hasn't been called at all, the test fails. The test also fails if the operation has been called, but with different parameters than 42 and 815, e.g. @myOperation(1, 2)@.
+The second assertion not only checks whether the operation _myOperation_ has been called, but also checks whether it has been called with parameters 42 and 815. If the operation hasn't been called at all, the test fails. The test also fails if the operation has been called, but with different parameters than 42 and 815, e.g. @myOperation(1, 2)@.
 
 ==</div>==
 
-The _assert called_ statement begins with the keywords @assert called@ and is followed by the name of the operation to check. This variant of the _assert called_ statement checks whether the named operation has been called during the execution of this test.
+The first variant of the _assert called_ statement begins with the keywords @assert called@ and is followed by the name of (resp. reference to) the operation to check. This variant of the _assert called_ statement checks whether the named operation has been called during the execution of this test, irrespective of its parameters.
 
-The _assert called_ statement as described may optionally be followed by the keyword @with@ , followed by a parenthesized list of parameters. This variant of the _assert called_ statement not only checks whether the named operation has been called, but for the test not to fail it also requires that the operation has been called with the specified parameters.
+In the second variant of the _assert called_ statement the keyword @with@ follows the structure described above. It is followed by a parenthesized list of parameters. This variant of the _assert called_ statement not only checks whether the named operation has been called, but for the test not to fail it also requires that the operation has been called with the specified parameters.
 
 ==<!-- End sctunit_keyword_called -->==
 
@@ -421,13 +420,13 @@ A test must execute the _enter_ statement before it can perform any sensible tes
 
 Please see section "&quot;SCTUnit by example&quot;":#sctunit_sctunit_by_example for examples on how the _enter_ statement is used. Please also see the "section on the _exit_ statement":#sctunit_exiting_a_state_machine.
 
-The _enter_ statement's grammar is simple, as figure "&quot;Enter statement grammar&quot;":#sctunit_fig_enter_grammar shows:
+The _enter_ statement's grammar is very simple, as figure "&quot;Enter grammar&quot;":#sctunit_fig_enter_grammar shows:
 
 p(#sctunit_fig_enter_grammar). 
 
-!images/sctunit_grammar_020_enterstatement.png(Enter statement grammar)!
+!images/sctunit_grammar_020_enterexpression.png(Enter grammar)!
 
-p=. Enter statement grammar
+p=. Enter grammar
 
 ==<!-- End sctunit_keyword_enter -->==
 
@@ -446,7 +445,7 @@ Example:
 
 The statechart _myStatechart_ looks like this:
 
-!(tiny)images/sctunit_myStatechart_010_simple.png(Statechart _myStatechart_ )!
+!(tiny)images/sctunit_myStatechart_010_simple.png(Statechart "myStatechart")!
 
 p=. Statechart _myStatechart_
 
@@ -483,13 +482,13 @@ p.
 
 ==</div>==
 
-The _exit_ statement's grammar is simple, as figure "&quot;Exit statement grammar&quot;":#sctunit_fig_exit_grammar shows:
+The _exit_ statement's grammar is very simple, as figure "&quot;Exit grammar&quot;":#sctunit_fig_exit_grammar shows:
 
 p(#sctunit_fig_exit_grammar). 
 
-!images/sctunit_grammar_020_exitstatement.png(Exit statement grammar)!
+!images/sctunit_grammar_020_exitexpression.png(Exit grammar)!
 
-p=. Exit statement grammar
+p=. Exit grammar
 
 ==<!-- End sctunit_keyword_exit -->==
 
@@ -574,9 +573,9 @@ p=. Proceed statement grammar
 
 h4(#sctunit_defining_variables_and_constants). Defining variables and constants
 
-Variables and constants can be defined as specified in the statechart language, please see sections "&quot;Variables&quot;":../user-guide/statechart_language.html#variables and "&quot;Constants&quot;":../user-guide/statechart_language.html#constants for all the details.
+Variables and constants (for brevity we'll summarize both as "variables") can be defined as specified in the statechart language, please see sections "&quot;Variables&quot;":../user-guide/statechart_language.html#variables and "&quot;Constants&quot;":../user-guide/statechart_language.html#constants for all the details. 
 
-However, variables in the SCTUnit language _must_ be initialized. For example, while a definition like
+However, variables in the SCTUnit language _must_ always be initialized. For example, while a definition like
 
 bc. var sum: integer
 
@@ -584,13 +583,13 @@ is fine in the statechart language, it is an error in the SCTUnit language. You 
 
 bc. var sum: integer = 0
 
-Figure "&quot;Variable definition statement grammar&quot;":#sctunit_fig_variable_definition_statement_grammar summarizes the structure of the _variable definition_ statement:
+Figure "&quot;Variable definition grammar&quot;":#sctunit_fig_variable_definition_grammar summarizes the structure of a _variable definition_:
 
-p(#sctunit_fig_variable_definition_statement_grammar). 
+p(#sctunit_fig_variable_definition_grammar). 
 
-!images/sctunit_grammar_020_variabledefinitionstatement.png(Variable definition statement grammar)!
+!images/sctunit_grammar_020_sctunitvariabledefinition.png(Variable definition grammar)!
 
-p=. Variable definition statement grammar
+p=. Variable definition grammar
 
 ==<!-- End sctunit_keyword_var -->==
 
@@ -776,13 +775,28 @@ The test assigns 18.0 to the statechart variable _p_, and performs one run-to-co
 
 After that, the test sets _p_ to 12.0 and executes another RTC. This time, the mocked operation returns 1000000000.0, the guard condition evaluates to _true_ and the state machine transitions to *State_B*.
 
+Calling _getNeutronFlux_ with any other parameter value than 12.0 or 18.0 would not only let the test fail, but would also throw an exception, because the actual operation cannot be called in test mode (simulation mode) and its return value is undefined.
+
+==</div>==
+
+In order to avoid an exception to be thrown, you can define a _mock_ statement with a _default_ return value. This value will be returned from all calls of the mocked operation that are not explicitly overridden by _mock_ statements with specific parameters.
+
+==<div class="example">==
+
+The _mock_ statements in the example above might have better been written as follows:
+
+bc. 
+        mock getNeutronFlux returns (-1.0)
+        mock getNeutronFlux(12.0) returns (1000000000.0)
+        mock getNeutronFlux(18.0) returns (4.3)
+
+The first _mock_ statements defines a return value of -1.0 for each and every call to the _getNeutronFlux_ operation, irrespective of the parameter value. The following statements, however, override this setting for the parameter values 12.0 and 18.0.
+
+bq. *Please note:* The order of the _mock_ statements is important! You should define the general case first, followed by specifying return values for specific parameter lists.
+
 ==</div>==
 
 The type of the default value specified in the _mock_ statement must match the return type of the mocked operation.
-
-It is also possible to make the default return value depending on the operation's parameters.
-
-bc. mock myOperation() returns (param + 1.0)
 
 Figure "&quot;Mock statement grammar&quot;":#sctunit_fig_mock_statement_grammar summarizes the structure of the _mock_ statement:
 
@@ -847,6 +861,8 @@ p. The test suite _MyTest_Suite_ comprises the test classes _TestClassA_, _TestC
 ==</div>==
 
 The nice thing about test suites is that you can run all tests of all the test classes at once. Right-click on the test suite file, say, _mytestsuite.sctunit_, and select _Run As → SCTUnit_ in the context menu. All tests in all test classes referenced in the test suite will be executed.
+
+All test classes within a test suite must pertain to statecharts using the same language domain. For example, if you have a statechart using YAKINDU Statechart Tools' standard domain and another statechart using the "C domain":../user-guide/c-domain.html, you cannot put their respective test classes into the same test suite. Instead you would have to write two different test suites: one for the test classes testing your "normal" statecharts, the another one for testing your "C" statecharts.
 
 The _header_ of a test suite consists of the keyword @testsuite@, followed by the name of the test suite.
 
