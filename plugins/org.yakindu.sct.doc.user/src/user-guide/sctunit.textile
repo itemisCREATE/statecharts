@@ -321,7 +321,7 @@ An operation can call other operations. This is like subroutine calls in other p
 * located in the same test class,
 * located in "imported":#sctunit_the_import_statement test classes that pertain to the same statechart.
 
-Operations that are declared in the statechart _cannot_ be executed during a test. If you need them to be called you can "mocked":#sctunit_mocking_an_operation_call them.
+Operations that are declared in the statechart _cannot_ be executed during a test. If you need them to be called you can "mock":#sctunit_mocking_an_operation_call them.
 
 
 h4. Annotations
