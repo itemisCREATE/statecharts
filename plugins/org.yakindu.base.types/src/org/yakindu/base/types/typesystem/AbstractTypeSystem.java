@@ -102,6 +102,15 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		if (subtypeClass == null)
 			return;
 
+		if (subtypeClass instanceof PrimitiveType) {
+			PrimitiveType primitiveType = (PrimitiveType) subtypeClass;
+			Type baseType = primitiveType.getBaseType();
+			if (baseType != null) {
+				typeHierachy.add(baseType);
+				collectSupertypes(baseType, typeHierachy);
+			}
+		}
+
 		List<Type> superTypes = getSuperTypes(subtypeClass);
 		for (Type superType : superTypes) {
 			typeHierachy.add(superType);
