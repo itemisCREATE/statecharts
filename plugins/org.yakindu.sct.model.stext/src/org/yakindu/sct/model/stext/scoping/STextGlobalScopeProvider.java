@@ -84,7 +84,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		final Statechart statechart = getStatechart(context);
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
 				reference.getEReferenceType());
-		return new FilteringScope(parentScope, new Predicate<IEObjectDescription>() {
+		IScope result = new FilteringScope(parentScope, new Predicate<IEObjectDescription>() {
 			@Override
 			public boolean apply(IEObjectDescription input) {
 				String userData = input.getUserData(DomainRegistry.DOMAIN_ID);
@@ -94,6 +94,19 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 				return statechart.getDomainID().equals(userData);
 			}
 		});
+		result = filterAnnotations(reference, result);
+		return result;
+	}
+
+	protected IScope filterAnnotations(EReference reference, IScope result) {
+		if (reference != TypesPackage.Literals.ANNOTATION__TYPE)
+			result = new FilteringScope(result, new Predicate<IEObjectDescription>() {
+				@Override
+				public boolean apply(IEObjectDescription input) {
+					return input.getEClass() != TypesPackage.Literals.ANNOTATION_TYPE;
+				}
+			});
+		return result;
 	}
 
 	@Override
