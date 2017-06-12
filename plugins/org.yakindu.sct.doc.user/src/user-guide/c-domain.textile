@@ -88,13 +88,18 @@ h3(#cdom_defining-a-c-type-variable-in-a-statechart). Defining a C-type variable
 
 Variables are defined in the definition section on the left-hand side of the statechart editor. Double-click into the section to edit it.
 
-Let's declare a variable *pointA* of the _Point_ type defined above. In the statechart's definition section, enter the following text:
+To get the possibility to use the previously defined struct we have to import the 'point.h' header:
+
+bc. 
+import: "point.h"
+
+After that we can declare a variable *pointA* of the _Point_ type defined above. In the statechart's definition section, enter the following text:
 
 bc. 
 interface:
 	var pointA:
 
-On the right-hand side of the colon in the variable declaration, the variable's type must follow. In order to see which types are available, press @[Ctrl+Space]@. The content assist opens and shows the C types available in our C project, i.&#8239;e.
+On the right-hand side of the colon in the variable declaration, the variable's type must follow. In order to see which types are available, press @[Ctrl+Space]@. The content assist opens and shows the C types available depending on the headers imported within your statechart, i.&#8239;e.
 * the C basic standard types,
 * the C99 types provided by including _stdint.h_,
 * the self-defined _Point_ type,
@@ -116,7 +121,8 @@ A statechart variable with a C type can be used everywhere a "normal" statechart
 
 Let's consider the above example extended by an additional *count* variable of the C99 _int8_t_ standard type. Additionally, we add an event that will be used as a trigger to switch between states.
 
-bc. interface:
+bc. import: "point.h"
+interface:
     var count: int8_t
     var pointA: point.Point
     in event tick
