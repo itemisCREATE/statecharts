@@ -681,7 +681,11 @@ In C it is possible to define structs, unions and enums without a _typedef_. The
 
 ###. CHECK: C domain: Are "struct", "union", and "enum" types still only supported if used in a typedef
 
+
+
 h3(#cdom_performance-issues-with-very-large-c-projects). Performance issues with very large C projects
+
+h4. Processing header files and macro definitions
 
 Statecharts that
 * include a very large number of header files (_.h_ files), or
@@ -690,6 +694,9 @@ Statecharts that
 might cause YAKINDU Statechart Tools to spend a considerable amount of time processing ("parse") them.
 
 Typically, @#define@ directives are coded in header files. Header files in turn can include further header files using the @#include@ directive. The total amount of header files and @#define@ directives involved is not always transparent to the developer, especially if system header files or header files of a programming framework are included.
+
+
+h4. Excluding C header files from being parsed
 
 YAKINDU Statechart Tools parses header files to make types and names defined therein available to your statechart. However, you typically won't need all of them. In order to save processing time you can explicitly exclude header files or folders from parsing.
 
@@ -709,6 +716,30 @@ Aside from the buttons mentioned above, the blacklist dialog has three more butt
 * _Restore Defaults:_ Empties the list.
 
 After changing the blacklist, please perform a _clean_ on the project, followed by a _build_. This is needed for your changes to take effect. After that, any imports excluded by the blacklist will no longer show up in your statechart's content assist.
+
+
+h4. Deactivating the C/C++ indexer
+
+The C/C++ indexer is part of the Eclipse C/C++ Development Toolkit (CDT). It parses C/C++ source and header files and maintains the extracted information in an internal database. This database is used by the CDT for search, navigation and parts of content assist. YAKINDU Statechart Tools also uses the information provided by the C/C++ indexer.
+
+In very large C/C++ projects, however, indexing source and header files can become very time-consuming. You can mitigate this problem somewhat by disabling the C/C++ indexer. In this case YAKINDU Statechart Tools triggers parsing of C header files on its own. This might be faster than having to wait for the C/C++ indexer, because only those header files that are really used within the statechart will be parsed.
+
+You can disable the C/C++ indexer either in the workspace settings, see _Window → Preferences_, or in the project-specific settings. To do the latter, proceed as follows:
+# In the _Project Explorer_ view, select the C project.
+# In the main menu, select _Project → Properties_. Alternatively, select _Properties_ in the project's context menu. The _Properties_ dialog appears.
+# In the navigation area on the left, select _C/C++ General → Indexer_.
+# In the settings on the right:
+## Enable the option _"Enable project specific settings"_ (sic).
+## Disable the option _"Enable indexer"_.
+# Click on the _OK_ button. The _Properties_ dialog disappears.
+
+As an alternative to disabling the C/C++ indexer completely, you might want to play around with its various options, see figure "&quot;Disabling the C/C++ indexer&quot;":#cdom_fig_disabling_the_ccpp_indexer, to improve the indexer's performance.
+
+p(#cdom_fig_disabling_the_ccpp_indexer). 
+
+!images/cdom_ccpp_indexer_010_disabling.png(Disabling the C/C++ indexer)!
+
+p=. Disabling the C/C++ indexer
 
 
 h3(#cdom_please-get-in-touch-with-us). Please get in touch with us
