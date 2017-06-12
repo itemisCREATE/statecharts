@@ -564,15 +564,6 @@ bq.. *Please note:*
 
 State machines calling C functions as operations are debarred from simulation and debugging. The simulator is not yet capable to call C functions.
 
-
-h2(#cdom_macro-definitions). Macro Definitions
-
-Macro definitions declared in a C header file via the @#define@ keyword are also accessible in the statechart. There are two kinds of macro definitions, leading to different interpretations in the context of state machines:
-
-* Constant definitions, e.&nbsp;g. @#define PI 3.14@, are translated into _const_ properties. They can be used within a statechart just like normal variables, but are not changeable during a simulation. The value of such a constant is derived from the value part of the macro definition. However, there are cases where this derivation is not successful, e.&nbsp;g. when other macros are referenced.
-* Parameterized macros, like @#define MIN(x,y) ((x<y) ? x : y)@, are translated into operations. They can be used within a statechart just like normal operations, but are not interpreted during a simulation.
-
-
 h2(#cdom_generating-c-source-code). Generating C source code
 
 Code generation, i.&#8239;e. turning a statechart model into source code of a programming language, is explained in the section _Generating state machine code_. Therefore we won't go into the details here, but instead only put some emphasis on code generation specialties of the _Deep C Integration_.
