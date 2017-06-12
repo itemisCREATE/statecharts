@@ -93,6 +93,8 @@ To get the possibility to use the previously defined struct we have to import th
 bc. 
 import: "point.h"
 
+The content assist (@[Ctrl+Space]@) can be used to see which imports(/includes) are available.
+
 After that we can declare a variable *pointA* of the _Point_ type defined above. In the statechart's definition section, enter the following text:
 
 bc. 
@@ -100,9 +102,9 @@ interface:
 	var pointA:
 
 On the right-hand side of the colon in the variable declaration, the variable's type must follow. In order to see which types are available, press @[Ctrl+Space]@. The content assist opens and shows the C types available depending on the headers imported within your statechart, i.&#8239;e.
-* the C basic standard types,
+* the C basic standard types without an explicit import,
 * the C99 types provided by including _stdint.h_,
-* the self-defined _Point_ type,
+* the self-defined _Point_ type by including _point.h_,
 * the qualifier _pointer_.
 
 !images/cdom_geometry_040_c_types_010.png(Using content assist to display available types)!
@@ -124,7 +126,7 @@ Let's consider the above example extended by an additional *count* variable of t
 bc. import: "point.h"
 interface:
     var count: int8_t
-    var pointA: point.Point
+    var pointA: Point
     in event tick
 
 The statechart below uses these variables in various places, i.&#8239;e. in transition actions, in internal actions, and in guard conditions.
@@ -146,33 +148,29 @@ In case you are interested in the EMF model underlying SCT's type system, you ca
 
 
 
-h2(#cdom_namespaces). Namespaces
+h2(#cdom_namespaces). Imports & Includes
 
-h3(#cdom_importing-a-namespace). Importing a namespace
+h3(#cdom_importing-a-namespace). Importing a C header
 
-Instead of using the fully-qualified type name – as in _point.Point_ – it is also possible to import the definitions provided by a C header file as a namespace.
+YAKINDU Statechart Tools provides the possibility to directly use C header files within the statechart model and therefore saves time during development - especially during integration of your state machine with your c program. In general you can import (or include) all C header files which resides in the same project or headers provided via one of the CDT projects include paths. (see  C Project  → Properties → C/C++ General → Paths and Symbols) 
 
-At the beginning of the definition section, enter @import:@ and hit @[Ctrl+Space]@. The content assist shows all namespaces you can import, besides other syntactical elements that would be valid here. In our example there's a single namespace _point_ that can be imported. The content assist explains that it comes from _/Geometry/point.h_, i.&#8239;e. from the file _point.h_ in the _Geometry_ project.
+To import a C header go to the beginning of the definition section within your statechart, enter @import:@ and hit @[Ctrl+Space]@. The content assist now shows all C headers you can import, besides other syntactical elements that would be valid here. In our example one of the first includes provided by the content assist will be _point.h_ that is placed in _/Geometry/point.h_. Other imports shown are provided by one of the include paths of the CDT project. The following picture for example shows headers provided by a basic _cygwin_ toolchain.
 
 !images/cdom_geometry_060_importing_namespace_010.png(Selecting a namespace to import)!
 
-p=. Selecting a namespace to import
+p=. Selecting a C header to import
 
-If we had more than a single header file in the project, we would see them all. The content assist shows all header files in a project, including those in subdirectories.
+If we had more than a single header file in the project, we would see them all. The content assist shows all header files in a project, including those in sub-directories, relatively to the current statechart.
 
-Click on the namespace entry in the menu to complete the @import@ statement. The result looks like this:
+Click on the _point.h_ entry in the menu to complete the @import@ statement. The result looks like this:
 
-bc.. import: point
+bc.. import: "point.h"
 
 interface:
-	var pointA: point.Point
-
-p. Please note that adding the @import@ statement does not change the variable declaration. However, you can now change the latter to:
-
-bc. var pointA: Point
+	var pointA: Point
 
 
-h3(#cdom_differentiating-between-namespaces). Differentiating between namespaces
+h3(#cdom_differentiating-between-namespaces). Differentiating between C headers
 
 Let's consider a scenario with several different _Point_ definitions now. There are two header files, each defining a _Point_ type, but with different properties.
 
@@ -191,41 +189,29 @@ bc. typedef struct {
     double z;
 } Point;
 
-On the C side we would run into problems if we tried to use both _Point_ definitions simultaneously. However, in a statechart this is possible, because each header file represents a different namespace.
+As on the C side we would run into problems if we tried to use both _Point_ definitions simultaneously, in a statechart this is not possible also.
 
-A statechart definition section using a two-dimensional *pointA* and a three-dimensional *pointB* would look like this:
+A statechart definition section using a two-dimensional *pointA* would look like this:
 
-bc. interface:
-    var pointA: point.Point
-    var pointB: three_d.point.Point
-
-The example above shows that pathnames of header files are mapped to namespace names. The example also shows that characters which are valid in a filesystem pathname (here: '-') are mapped to replacement characters that are allowed to occur in statechart type names (here: '_'). If you are unsure how to map a pathname to a type name, you can always use the content assist to do the mapping for you.
-
-Although it is possible to *import* both namespaces as described in section "&quot;Importing a namespace&quot;":#cdom_importing-a-namespace, it is not advisable. Consider the following example:
-
-bc.. import: point
-import: three_d.point
-
+bc. import: "point.h"
 interface:
     var pointA: Point
-    var pointB: Point
 
-p. This won't work, because _Point_ is ambiguous. To define *pointA* and *pointB* correctly, you would still have to fully qualify the _Point_ types:
+    
+And a statechart definition section using a three-dimensional *pointB* would look like this:
 
-bc.. import: point
-import: three_d.point
-
-interface:
-    var pointA: point.Point
-    var pointB: three_d.point.Point
-
-p. However, in this case the imports would be pointless (pun intended). What you could do is to import only one of the namespaces. Then an unqualified _Point_ denotes the one in the imported namespace, while all other _Point_ types must be fully-qualified. Example:
-
-bc.. import: point
-
+bc. import: "three-d/point.h"
 interface:
     var pointA: Point
-    var pointB: three_d.point.Point
+
+
+The example above shows that pathnames of header files placed in the same project are provided relatively to the actual statechart. 
+
+C header files coming from one of the include paths of the CDT project, will be provided by simple names:
+
+bc. import: "stdio.h"
+
+If you are unsure how to import C header files, you can always use the content assist to do the import for you.
 
 h2(#cdom_data-structure-traversal-via-dot-notation). Data structure traversal via dot notation
 
