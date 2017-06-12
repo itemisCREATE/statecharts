@@ -722,7 +722,7 @@ h4. Deactivating the C/C++ indexer
 
 The C/C++ indexer is part of the Eclipse C/C++ Development Toolkit (CDT). It parses C/C++ source and header files and maintains the extracted information in an internal database. This database is used by the CDT for search, navigation and parts of content assist. YAKINDU Statechart Tools also uses the information provided by the C/C++ indexer.
 
-In very large C/C++ projects, however, indexing source and header files can become very time-consuming. You can mitigate this problem somewhat by disabling the C/C++ indexer. In this case YAKINDU Statechart Tools triggers parsing of C header files on its own. This might be faster than waiting for the C/C++ indexer because just headers which are really used within a statechart will be parsed.
+In very large C/C++ projects, however, indexing source and header files can become very time-consuming. You can mitigate this problem somewhat by disabling the C/C++ indexer. In this case YAKINDU Statechart Tools triggers parsing of C header files on its own. This might be faster than having to wait for the C/C++ indexer, because only those header files that are really used within the statechart will be parsed.
 
 You can disable the C/C++ indexer either in the workspace settings, see _Window → Preferences_, or in the project-specific settings. To do the latter, proceed as follows:
 # In the _Project Explorer_ view, select the C project.
