@@ -15,6 +15,7 @@ import java.util.Map;
 
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.common.core.service.IOperation;
+import org.eclipse.gmf.runtime.common.ui.services.parser.CommonParserHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.AbstractEditPartProvider;
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.CreateRootEditPartOperation;
@@ -36,6 +37,7 @@ import org.yakindu.sct.ui.editor.editparts.StateFigureCompartmentEditPart;
 import org.yakindu.sct.ui.editor.editparts.StateNameEditPart;
 import org.yakindu.sct.ui.editor.editparts.StateTextCompartmentEditPart;
 import org.yakindu.sct.ui.editor.editparts.StateTextCompartmentExpressionEditPart;
+import org.yakindu.sct.ui.editor.editparts.StatechartDescriptionCompartmentEditPart;
 import org.yakindu.sct.ui.editor.editparts.StatechartDiagramEditPart;
 import org.yakindu.sct.ui.editor.editparts.StatechartNameEditPart;
 import org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart;
@@ -85,6 +87,8 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider 
 		editParts.put(TRANSITION_EXPRESSION, TransitionExpressionEditPart.class);
 		editParts.put(EXIT, ExitEditPart.class);
 		editParts.put(SYNCHRONIZATION, SynchronizationEditPart.class);
+		
+		editParts.put(CommonParserHint.DESCRIPTION, StatechartDescriptionCompartmentEditPart.class);
 
 	}
 
