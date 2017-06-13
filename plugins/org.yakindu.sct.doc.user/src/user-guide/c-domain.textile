@@ -86,25 +86,23 @@ Let's create a statechart model now to make use of the C type _Point_ we have ju
 
 h3(#cdom_defining-a-c-type-variable-in-a-statechart). Defining a C-type variable in a statechart
 
-Variables are defined in the definition section on the left-hand side of the statechart editor. Double-click into the section to edit it.
+Variables are defined in the definition section on the left-hand side of the statechart editor. Double-click into the definition section to edit it.
 
-To get the possibility to use the previously defined struct we have to import the 'point.h' header:
+In order to make use of the struct defined above we have to import the _point.h_ header file:
 
 bc. 
 import: "point.h"
 
-The content assist (@[Ctrl+Space]@) can be used to see which imports(/includes) are available.
-
-After that we can declare a variable *pointA* of the _Point_ type defined above. In the statechart's definition section, enter the following text:
+With the definitions from _point.h_ at hand, we can declare a variable *pointA* of the _Point_ type. In the statechart's definition section, enter the following text:
 
 bc. 
 interface:
 	var pointA:
 
-On the right-hand side of the colon in the variable declaration, the variable's type must follow. In order to see which types are available, press @[Ctrl+Space]@. The content assist opens and shows the C types available depending on the headers imported within your statechart, i.&#8239;e.
-* the C basic standard types without an explicit import,
-* the C99 types provided by including _stdint.h_,
-* the self-defined _Point_ type by including _point.h_,
+On the right-hand side of the colon in the variable declaration, the variable's type must follow. In order to see which types are available, press <code>[Ctrl]+[Space]</code>. The content assist opens and shows the C types available, depending on the headers imported within your statechart, i.&#8239;e.
+* the C basic standard types,
+* the C99 types, provided by including _stdint.h_,
+* the self-defined _Point_ type, provided by including _point.h_,
 * the qualifier _pointer_.
 
 !images/cdom_geometry_040_c_types_010.png(Using content assist to display available types)!
@@ -148,19 +146,23 @@ In case you are interested in the EMF model underlying SCT's type system, you ca
 
 
 
-h2(#cdom_namespaces). Imports & Includes
+h2(#cdom_imports-and-includes). Imports and includes
 
-h3(#cdom_importing-a-namespace). Importing a C header
+h3(#cdom_importing-a-c-header). Importing a C header
 
-YAKINDU Statechart Tools provides the possibility to directly use C header files within the statechart model and therefore saves time during development - especially during integration of your state machine with your c program. In general you can import (or include) all C header files which resides in the same project or headers provided via one of the CDT projects include paths. (see  C Project  → Properties → C/C++ General → Paths and Symbols) 
+YAKINDU Statechart Tools gives you direct access to C header files within the statechart model. This saves time during development, especially while integrating your state machine with your C program. In general you can import (include) all C header files residing in the same project as well as those header files that are available on one of the CDT project's include paths, see _Properties → C/C++ General → Paths and Symbols_ in the context menu of your C project.
 
-To import a C header go to the beginning of the definition section within your statechart, enter @import:@ and hit @[Ctrl+Space]@. The content assist now shows all C headers you can import, besides other syntactical elements that would be valid here. In our example one of the first includes provided by the content assist will be _point.h_ that is placed in _/Geometry/point.h_. Other imports shown are provided by one of the include paths of the CDT project. The following picture for example shows headers provided by a basic _cygwin_ toolchain.
+To import a C header file, go to the beginning of your statechart's definition section, enter @import:@ and hit <code>[Ctrl]+[Space]</code>. The content assist now shows all C header files you can import (besides other syntactical elements that would be valid here). In our example one of the first includes provided by the content assist is _point.h_, which is found in _/Geometry/point.h_. Other imports shown by the content assist are provided by the various include paths configured in your CDT project. For example, figure "&quot;Selecting a C header to import&quot;":#cdom_fig_selecting_a_c_header_to_import shows headers on the basic _cygwin_ toolchain on a Windows system.
+
+p(#cdom_fig_selecting_a_c_header_to_import). 
+
+The following picture for example .
 
 !images/cdom_geometry_060_importing_namespace_010.png(Selecting a namespace to import)!
 
 p=. Selecting a C header to import
 
-If we had more than a single header file in the project, we would see them all. The content assist shows all header files in a project, including those in sub-directories, relatively to the current statechart.
+If we had more than a single header file in the project, we would see them all. The content assist shows all header files in a project, including those in subdirectories. A C header's path is relative to the statechart it is imported into.
 
 Click on the _point.h_ entry in the menu to complete the @import@ statement. The result looks like this:
 
@@ -170,48 +172,7 @@ interface:
 	var pointA: Point
 
 
-h3(#cdom_differentiating-between-namespaces). Differentiating between C headers
 
-Let's consider a scenario with several different _Point_ definitions now. There are two header files, each defining a _Point_ type, but with different properties.
-
-The file *point.h* in the main project directory contains the following defintion:
-
-bc. typedef struct {
-    int16_t x;
-    int16_t y;
-} Point;
-
-Additionally, there is a file *three-d/point.h* which also defines a @struct Point@, but with different properties. This _Point_ is three-dimensional and supports _double_ coordinates:
-
-bc. typedef struct {
-    double x;
-    double y;
-    double z;
-} Point;
-
-As on the C side we would run into problems if we tried to use both _Point_ definitions simultaneously, in a statechart this is not possible also.
-
-A statechart definition section using a two-dimensional *pointA* would look like this:
-
-bc. import: "point.h"
-interface:
-    var pointA: Point
-
-    
-And a statechart definition section using a three-dimensional *pointB* would look like this:
-
-bc. import: "three-d/point.h"
-interface:
-    var pointA: Point
-
-
-The example above shows that pathnames of header files placed in the same project are provided relatively to the actual statechart. 
-
-C header files coming from one of the include paths of the CDT project, will be provided by simple names:
-
-bc. import: "stdio.h"
-
-If you are unsure how to import C header files, you can always use the content assist to do the import for you.
 
 h2(#cdom_data-structure-traversal-via-dot-notation). Data structure traversal via dot notation
 
