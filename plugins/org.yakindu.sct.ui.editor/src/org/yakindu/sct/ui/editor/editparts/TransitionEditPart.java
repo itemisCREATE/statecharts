@@ -20,6 +20,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
 import org.eclipse.gmf.runtime.gef.ui.internal.tools.SelectConnectionEditPartTracker;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.ui.editor.editor.figures.TransitionFigure;
 
 /**
@@ -81,6 +82,11 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 				return true;
 			}
 		};
+	}
+	
+	@Override
+	public Transition resolveSemanticElement() {
+		return (Transition) super.resolveSemanticElement();
 	}
 
 }

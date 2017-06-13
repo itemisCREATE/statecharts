@@ -51,6 +51,12 @@
             id="com.yakindu.sct.refactoring.inlineSubDiagram"
             name="Inline Subdiagram">
       </command>
+       <command
+             defaultHandler="org.yakindu.sct.refactoring.handlers.impl.SwitchTransitionDirectionHandler"
+             description="Switch Transition Direction"
+             id="com.yakindu.sct.refactoring.switchtransitiondirection"
+             name="Switch Transition Direction">
+       </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -195,6 +201,25 @@
                </visibleWhen>
             </command>
          </menu>
+         <command
+               commandId="com.yakindu.sct.refactoring.switchtransitiondirection"
+               label="Switch Transition Direction"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <and>
+                  <reference
+                        definitionId="oneTransitionSelected">
+                  </reference>
+                  <with
+                        variable="activeEditorId">
+                     <equals
+                           value="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+                     </equals>
+                  </with>
+               </and>
+            </visibleWhen>
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -250,6 +275,24 @@
                      value="org.yakindu.sct.ui.editor.editparts.StateEditPart">
                </instanceof>
             </iterate>
+         </with>
+      </definition>
+      <definition
+            id="oneTransitionSelected">
+         <with
+               variable="selection">
+            <and>
+               <count
+                     value="1">
+               </count>
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <instanceof
+                        value="org.yakindu.sct.ui.editor.editparts.TransitionEditPart">
+                  </instanceof>
+               </iterate>
+            </and>
          </with>
       </definition>
    </extension>
