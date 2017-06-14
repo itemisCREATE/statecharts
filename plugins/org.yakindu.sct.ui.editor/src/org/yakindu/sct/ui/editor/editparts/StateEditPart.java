@@ -20,6 +20,7 @@ import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
@@ -42,6 +43,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.ui.editor.editparts.tracker.NonRevealingDragEditPartsTrackerEx;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 import org.yakindu.sct.ui.editor.policies.FeedbackGraphicalNodeEditPolicy;
@@ -241,6 +243,11 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 	@Override
 	public State resolveSemanticElement() {
 		return (State) super.resolveSemanticElement();
+	}
+	
+	@Override
+	public DragTracker getDragTracker(Request request) {
+		return new NonRevealingDragEditPartsTrackerEx(this);
 	}
 
 	@Override
