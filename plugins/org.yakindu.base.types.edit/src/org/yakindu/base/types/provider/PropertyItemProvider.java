@@ -144,10 +144,13 @@ public class PropertyItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Property variable = (Property)object;
-		StringBuilder builder = new StringBuilder(variable.getName());
-		builder.append(" : ");
-		if(variable.getType() != null)
+		Property variable = (Property) object;
+		StringBuilder builder = new StringBuilder();
+		if (variable.getName() != null) {
+			builder.append(variable.getName());
+			builder.append(" : ");
+		}
+		if (variable.getType() != null)
 			builder.append(variable.getType().getName());
 		else
 			builder.append("unknown");
