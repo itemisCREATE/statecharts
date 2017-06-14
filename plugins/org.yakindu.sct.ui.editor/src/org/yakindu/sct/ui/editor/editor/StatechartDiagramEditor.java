@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.editor;
 
-import java.awt.event.KeyEvent;
-
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
@@ -242,6 +240,14 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			keyHandler = new KeyHandler();
 
 			registerZoomActions();
+			
+			// Zoom in - Unix - Numpad plus
+			getKeyHandler().put(KeyStroke.getPressed('+', SWT.KEYPAD_ADD, SWT.MOD1),
+					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
+
+			// Zoom in - Unix - Numpad minus
+			getKeyHandler().put(KeyStroke.getPressed('-', SWT.KEYPAD_SUBTRACT, SWT.MOD1),
+					getActionRegistry().getAction(GEFActionConstants.ZOOM_OUT));
 
 			// Zoom out - all OS - German and English keyboard layout
 			getKeyHandler().put(KeyStroke.getPressed('-', 0x2d, SWT.MOD1),
@@ -254,14 +260,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			// Zoom in - Unix - German layout ([CTRL++] propagates char '+')
 			getKeyHandler().put(KeyStroke.getPressed('+', 0x2b, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
-
-			// Zoom in - Unix - Numpad plus
-			getKeyHandler().put(KeyStroke.getPressed('+', SWT.KEYPAD_ADD, SWT.MOD1),
-					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
-
-			// Zoom in - Unix - Numpad minus
-			getKeyHandler().put(KeyStroke.getPressed('-', SWT.KEYPAD_SUBTRACT, SWT.MOD1),
-					getActionRegistry().getAction(GEFActionConstants.ZOOM_OUT));
 
 			// Zoom in - Windows - German layout ([CTRL++] propagates char 0x1d)
 			getKeyHandler().put(KeyStroke.getPressed((char) 0x1d, 0x2b, SWT.MOD1),
