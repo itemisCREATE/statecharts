@@ -34,6 +34,12 @@ public class NonRevealingDragEditPartsTrackerEx extends DragEditPartsTrackerEx {
 
 	@Override
 	protected boolean handleButtonUp(int button) {
+		if (stateTransition(STATE_DRAG_IN_PROGRESS, STATE_TERMINAL)) {
+			eraseSourceFeedback();
+			eraseTargetFeedback();
+			performDrag();
+			return true;
+		}
 		if (isInState(STATE_DRAG)) {
 			performSelection();
 			if (getFlag(FLAG_ENABLE_DIRECT_EDIT))
