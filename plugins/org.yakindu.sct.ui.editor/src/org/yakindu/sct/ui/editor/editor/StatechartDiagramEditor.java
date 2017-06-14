@@ -240,6 +240,14 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			keyHandler = new KeyHandler();
 
 			registerZoomActions();
+			
+			// Zoom in - Unix - Numpad plus
+			getKeyHandler().put(KeyStroke.getPressed('+', SWT.KEYPAD_ADD, SWT.MOD1),
+					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
+
+			// Zoom in - Unix - Numpad minus
+			getKeyHandler().put(KeyStroke.getPressed('-', SWT.KEYPAD_SUBTRACT, SWT.MOD1),
+					getActionRegistry().getAction(GEFActionConstants.ZOOM_OUT));
 
 			// Zoom out - all OS - German and English keyboard layout
 			getKeyHandler().put(KeyStroke.getPressed('-', 0x2d, SWT.MOD1),
