@@ -76,21 +76,16 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 			callStack.add(0, current)
 		}
 		// first: get the root slot where to start the search
-		val root = (current.owner as ElementReferenceExpression).reference
-		var ExecutionSlot featureSlot = null
+		var ExecutionSlot featureSlot = resolve(context, current.owner)
 
-		if (root instanceof InterfaceScope) {
-			featureSlot = context.getSlot(callStack.pop.feature.fullyQualifiedName.toString)
-		} else {
-			featureSlot = resolve(context, current.owner)
-		}
-
-		if (featureSlot === null) {
-			throw new IllegalStateException("Value of '"+current.feature+"' in expression '"+getFeatureCallText(e)+"' has not been set.")// could not find starting slot for feature call
-		}
 		
-		// go through all calls and traverse execution context hierarchy accordingly
+		// second: go through all calls and traverse execution context hierarchy accordingly
 		for (FeatureCall call : callStack) {
+			if (featureSlot === null) {
+				throw new IllegalStateException(
+					"Value of '" + current.feature.name  + "' in expression '" + getFeatureCallText(e) +
+						"' has not been set.") // could not find starting slot for feature call
+			}
 			featureSlot = resolveFromSlot(featureSlot, call)
 		}
 		return featureSlot
