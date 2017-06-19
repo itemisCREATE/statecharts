@@ -82,7 +82,7 @@ class StructureMapping {
 			if (pkgImport !== null && URIConverter.INSTANCE.exists(pkgImport.getUri(), null)) {
 				val packageForNamespace = scope.eResource.resourceSet.getResource(pkgImport.uri, true).contents.
 					head as Package
-				packageForNamespace.eAllContents.filter(Declaration).toList.forEach[createImportDeclaration(_scope)]
+				packageForNamespace.member.filter(Declaration).toList.forEach[createImportDeclaration(_scope)]
 			}
 		}
 		return _scope
