@@ -18,15 +18,14 @@ import org.eclipse.xtext.util.SimpleAttributeResolver
 import org.yakindu.base.base.NamedElement
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
-import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
-import org.yakindu.base.types.Declaration
 
 /**
  * Default implementation for resolving execution slots based on expressions.
@@ -83,7 +82,7 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 		for (FeatureCall call : callStack) {
 			if (featureSlot === null) {
 				throw new IllegalStateException(
-					"Value of '" + current.feature.name  + "' in expression '" + getFeatureCallText(e) +
+					"Value of '" + current.feature.name  + "' in expression '" + getExpressionText(e) +
 						"' has not been set.") // could not find starting slot for feature call
 			}
 			featureSlot = resolveFromSlot(featureSlot, call)
@@ -91,23 +90,16 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 		return featureSlot
 	}
 	
-	def getFeatureCallText(FeatureCall call) {
-		var currCall = call
-		var fcText = currCall.feature.name;
-		var proceed = true;
-		while(proceed){
-				if(currCall.owner instanceof FeatureCall){
-					currCall = currCall.owner as FeatureCall
-					var property = currCall.feature as Declaration;
-					fcText = property.name+"."+fcText
-				}else if(currCall.owner instanceof ElementReferenceExpression){
-					fcText = (currCall.owner as ElementReferenceExpression).reference.fullyQualifiedName +"."+fcText
-					proceed=false;
-				}else{
-					proceed = false
-				}
-		}
-		return fcText;
+	def dispatch String getExpressionText(FeatureCall call) {
+		getExpressionText(call.owner) + "." + call.feature.name
+	}
+	
+	def dispatch String getExpressionText(ElementReferenceExpression exp) {
+		exp.reference.fullyQualifiedName.toString
+	}
+	
+	def dispatch String getExpressionText(Expression exp) {
+		// fallback
 	}
 
 	def protected dispatch ExecutionSlot resolveFromSlot(ExecutionSlot slot, FeatureCall call) {
