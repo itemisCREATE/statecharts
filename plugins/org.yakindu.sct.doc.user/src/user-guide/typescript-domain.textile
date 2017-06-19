@@ -77,9 +77,9 @@ The sample HMI application has to be imported into the Eclipse workspace.
 # Click _Next_. The _Import Projects from File System or Archive_ dialog appears.
 # Click on the _Directory_ button and select the folder containing the Angular application.<br/>!images/tsdomain_import2_dialog.png(Import Projects from File System or Archive dialog)!
 # Click _Finish_. The project explorer should now look like this:<br/>!images/tsdomain_project_explorer.png(Project explorer)!
-# Open the project's context menu and add the _YAKINDU SCT Nature_. !images/tsdomain_add_sct_nature.gif(Adding YAKINDU SCT Nature)!
+# Open the project's context menu and add the _YAKINDU SCT Nature_. We need that to map all typescript artifacts  to the sct type system.  !images/tsdomain_add_sct_nature.gif(Adding YAKINDU SCT Nature)!
 
-###. FIXME (Rainer): What does adding the YAKINDU SCT nature provoke?
+
 
 
 
@@ -146,13 +146,12 @@ In order to actually execute the HMI with statechart control, we have to generat
 For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called _SGen_. It can be created either by using the _YAKINDU Statechart Generator Model_ wizard or by manually creating a text file containing the SGen model. Such a file must have the filename extension _.sgen_.
 
 To create a generator model using the wizard, proceed as follows:
-# In the main menu, select _File → New → YAKINDU SCT → Code Generator Model_. The wizard opens.
+# In the main menu, select _File → New → YAKINDU SCT → Code Generator Model_. The wizard _YAKINDU Statechart Generator Model_ opens.
 # Enter a name and click _Next_.
 # Choose the _YAKINDU SCT TypeScript Generator_ generator.
 # Check the model(s) to generate code from.
 # Click _Finish_.
 
-###. FIXME (Rainer): In the above text, please specify the wizard's exact name, that is, not just "The wizard opens", but something like "The _Explore the Universe_ wizard opens".
 
 p(#tsdom-fig-yakindu-statechart-tools-generator-model-configuration-wizard). 
 !images/tsdomain_genmodel_config.png(YAKINDU Statechart Tools generator model configuration wizard)!
@@ -197,14 +196,4 @@ In the context of Angular, the generated statechart is a _service_. To integrate
 
 # Customize the _app.module.ts_ file as follows:<br/>!images/tsdomain_ngmodule.png(NgModel customization)!
 # Customize the _app.comonent.ts_ file as follows:<br/>!images/tsdomain_ngcomponent.png(NgComponent customization)!
-
-When you start the Angular application, it should behave like this:
-
-p(#tsdom-fig-generated-hmi-behaviour). 
-!images/tsdomain_hmi.gif(Generated HMI behaviour)!
-
-p=. Generated HMI behaviour
-
-###. FIXME: The image does not show the described behaviour! Instead of transitioning from blank screen to main screen, the transition is from main screen to a screen with some text.
-
 ==</div>==
