@@ -156,7 +156,7 @@ To import a C header file, go to the beginning of your statechart's definition s
 
 bq.. *Please note:*
 
-In difference to a c compiler, imports (/includes) will never be available transitively in context of Yakindu Statechart Tools. So includes defined in imported header files have to be imported explicitly in your statechart specification section.
+In difference to a c compiler, imports (/includes) will never be available transitively in context of YAKINDU Statechart Tools. So includes defined in imported header files have to be imported explicitly in your statechart specification section.
 
 p(#cdom_fig_selecting_a_c_header_to_import). 
 
