@@ -266,7 +266,7 @@ Test classes can be grouped into a "test suite":#sctunit_test_suites.
 
 ==<!-- End sctunit_keyword_testclass -->==
 
-
+==<!-- Start sctunit_keyword_operation -->==
 
 h3(#sctunit_operations_and_tests). Operations and tests
 
@@ -330,7 +330,7 @@ When running a "test class":#sctunit_test_classes or a "test suite":#sctunit_tes
 
 While the <code>@Ignore</code> annotation and an omitted annotation have the same effect functionally, you should use the <code>@Ignore</code> annotation to mark operations that are intended as tests, but are (temporarily) disabled for one or the other reason. This differentiates them from other operations that are not tests, but mere subroutines called from elsewhere.
 
-
+==<!-- End sctunit_keyword_operation -->==
 
 h3(#sctunit_statements_and_expressions). Statements and expressions
 
