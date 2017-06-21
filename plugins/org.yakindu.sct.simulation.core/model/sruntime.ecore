@@ -52,4 +52,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="ReferenceSlot" eSuperTypes="#//CompositeSlot">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//ExecutionSlot"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionOperation" eSuperTypes="#//ExecutionVariable"/>
 </ecore:EPackage>

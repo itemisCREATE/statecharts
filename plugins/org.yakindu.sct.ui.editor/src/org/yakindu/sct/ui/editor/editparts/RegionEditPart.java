@@ -14,6 +14,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
@@ -28,6 +29,7 @@ import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.RegionFigure;
+import org.yakindu.sct.ui.editor.editparts.tracker.NonRevealingDragEditPartsTrackerEx;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
@@ -83,6 +85,11 @@ public class RegionEditPart extends ShapeNodeEditPart {
 
 	private RegionFigure getPrimaryShape() {
 		return (RegionFigure) getFigure().getChildren().get(0);
+	}
+
+	@Override
+	public DragTracker getDragTracker(Request request) {
+		return new NonRevealingDragEditPartsTrackerEx(this);
 	}
 
 	@Override

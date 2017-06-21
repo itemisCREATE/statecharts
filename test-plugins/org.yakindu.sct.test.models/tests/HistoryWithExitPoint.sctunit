@@ -6,23 +6,23 @@ testclass HistoryWithExitPoint for statechart HistoryWithExitPoint {
 		assert active ( HistoryWithExitPoint.mr.A.r.X1 )
 		
 		raise push 
-		cycle
+		proceed 1 cycle
 		assert active ( HistoryWithExitPoint.mr.B )
 		
 		raise back
-		cycle
+		proceed 1 cycle
 		assert active ( HistoryWithExitPoint.mr.A.r.X1 )
 		
 		raise next
-		cycle
+		proceed 1 cycle
 		assert active ( HistoryWithExitPoint.mr.A.r.X2 )
 		
 		raise push 
-		cycle
+		proceed 1 cycle
 		assert active ( HistoryWithExitPoint.mr.B )
 		
 		raise back
-		cycle
+		proceed 1 cycle
 		assert active ( HistoryWithExitPoint.mr.A.r.X2 )
 		
 	}

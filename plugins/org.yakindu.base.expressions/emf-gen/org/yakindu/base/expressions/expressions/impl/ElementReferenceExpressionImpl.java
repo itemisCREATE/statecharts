@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -16,6 +17,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.expressions.expressions.util.ArgumentSorter;
+import org.yakindu.base.types.Operation;
 
 /**
  * <!-- begin-user-doc -->
@@ -326,6 +329,15 @@ public class ElementReferenceExpressionImpl extends ArgumentExpressionImpl imple
 		result.append(arrayAccess);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public EList<Expression> getExpressions() {
+		if (getReference() instanceof Operation) {
+			return ArgumentSorter.getOrderedExpressions(getArguments(), (Operation) getReference());
+		} else {
+			return new BasicEList<Expression>();
+		}
 	}
 
 } //ElementReferenceExpressionImpl

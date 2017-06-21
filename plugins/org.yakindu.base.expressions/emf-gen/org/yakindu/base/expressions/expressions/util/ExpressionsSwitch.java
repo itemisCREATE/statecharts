@@ -6,7 +6,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.expressions.expressions.*;
+import org.yakindu.base.expressions.expressions.Argument;
+import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
+import org.yakindu.base.expressions.expressions.BinaryExpression;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression;
@@ -34,6 +37,7 @@ import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
+import org.yakindu.base.expressions.expressions.UnaryExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -156,7 +160,17 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.HEX_LITERAL: {
 				HexLiteral hexLiteral = (HexLiteral)theEObject;
 				T result = caseHexLiteral(hexLiteral);
+				if (result == null) result = caseIntLiteral(hexLiteral);
 				if (result == null) result = caseLiteral(hexLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ExpressionsPackage.BINARY_LITERAL: {
+				BinaryLiteral binaryLiteral = (BinaryLiteral)theEObject;
+				T result = caseBinaryLiteral(binaryLiteral);
+				if (result == null) result = caseHexLiteral(binaryLiteral);
+				if (result == null) result = caseIntLiteral(binaryLiteral);
+				if (result == null) result = caseLiteral(binaryLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -313,6 +327,12 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ExpressionsPackage.ARGUMENT: {
+				Argument argument = (Argument)theEObject;
+				T result = caseArgument(argument);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -419,6 +439,21 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseHexLiteral(HexLiteral object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Binary Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Binary Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBinaryLiteral(BinaryLiteral object) {
 		return null;
 	}
 
@@ -719,6 +754,21 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypeCastExpression(TypeCastExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Argument</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArgument(Argument object) {
 		return null;
 	}
 

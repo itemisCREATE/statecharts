@@ -18,8 +18,6 @@ import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Execution Variable</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

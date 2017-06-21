@@ -123,10 +123,10 @@ class StatemachineHeader implements IContentTemplate {
 		/*! Enumeration of all states */ 
 		typedef enum
 		{
-			«FOR state : states»
-				«state.shortName»,
+			«null_state»,
+			«FOR state : states SEPARATOR ","»
+				«state.shortName»
 			«ENDFOR»
-			«null_state»
 		} «statesEnumType»;
 	'''
 
@@ -190,6 +190,9 @@ class StatemachineHeader implements IContentTemplate {
 			/*! Define dimension of the state configuration vector for history states. */
 		#define «type.toUpperCase»_MAX_HISTORY_STATES «historyVector.size»«ENDIF»
 		
+		/*! Define indices of states in the StateConfVector */
+		«stateConfVectorDefines»
+		
 		/*! 
 		 * Type definition of the data structure for the «type» state machine.
 		 * This data structure has to be allocated by the client code. 
@@ -204,6 +207,12 @@ class StatemachineHeader implements IContentTemplate {
 				«iScope.type» «iScope.instance»;
 			«ENDFOR»			
 		} «type»;
+	'''
+	
+	def stateConfVectorDefines(ExecutionFlow it) '''
+		«FOR state : states»
+		#define «state.stateVectorDefine» «state.stateVector.offset»
+		«ENDFOR»
 	'''
 
 	def dispatch scopeFunctionPrototypes(StatechartScope it) '''

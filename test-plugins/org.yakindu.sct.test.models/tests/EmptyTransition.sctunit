@@ -2,7 +2,7 @@ testclass EmptyTransition for statechart EmptyTransition{
 	@Test
 	operation EmptyTransitionTest(){ 
 		enter
-		cycle
+		proceed 1 cycle
 		assert !active (EmptyTransition.main_region.B)
 		assert active  (EmptyTransition.main_region.A) 
 		 

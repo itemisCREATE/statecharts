@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.generator.java;
 
-import org.yakindu.sct.generator.core.GeneratorModule;
+import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.JavaTypeSystemAccess;
@@ -26,7 +26,7 @@ import com.google.inject.Scopes;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class JavaGeneratorModule implements GeneratorModule {
+public class JavaGeneratorModule implements IGeneratorModule {
 
 	@Override
 	public void configure(GeneratorEntry entry, Binder binder) {

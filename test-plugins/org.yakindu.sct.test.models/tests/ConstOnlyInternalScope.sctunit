@@ -19,7 +19,7 @@ testclass ConstOnlyInternalScope for statechart declarations.ConstOnlyInternalSc
 		
 		enter
 		raise e : 1
-		cycle
+		proceed 1 cycle
 		assert active(declarations.ConstOnlyInternalScope.main_region.B)
 		
 	}

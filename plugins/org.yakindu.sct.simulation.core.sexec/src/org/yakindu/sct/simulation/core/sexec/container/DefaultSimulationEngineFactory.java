@@ -31,7 +31,7 @@ import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory;
-
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
@@ -43,8 +43,7 @@ import com.google.inject.Injector;
 public class DefaultSimulationEngineFactory implements ISimulationEngineFactory {
 
 	private static final int DEFAULT_CYCLE_PERIOD = 200;
-	private static final String CYCLE_BASED_ANNOTATION = "CycleBased";
-	private static final String EVENT_DRIVEN_ANNOTATION = "EventDriven";
+	
 	@Inject
 	private Injector injector;
 	@Inject
@@ -69,7 +68,7 @@ public class DefaultSimulationEngineFactory implements ISimulationEngineFactory 
 		ArgumentedAnnotation eventDriven = (ArgumentedAnnotation) statechart
 				.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
 		if (cycleBased != null) {
-			Long result = (Long) interpreter.evaluateStatement(cycleBased.getArgs().get(0),
+			Long result = (Long) interpreter.evaluateStatement(cycleBased.getExpressions().get(0),
 					SRuntimeFactory.eINSTANCE.createExecutionContext());
 			return new CycleBasedSimulationEngine(statechart, result);
 		}

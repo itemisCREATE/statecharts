@@ -11,13 +11,17 @@
  */
 package org.yakindu.base.expressions.validation;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.validation.Check;
+import org.yakindu.base.expressions.expressions.Argument;
+import org.yakindu.base.expressions.expressions.ArgumentExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.GenericElement;
+import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypeSpecifier;
@@ -55,6 +59,9 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	public static final String ERROR_CYCLE_DETECTED_CODE = "TypeExtendsItself";
 	public static final String ERROR_CYCLE_DETECTED_MSG = "Cycle detected: the type %s cannot extend itself.";
 
+	public static final String ERROR_DUPLICATE_PARAMETER_ASSIGNMENT_CODE = "ErrorDuplicateParameterAssignment";
+	public static final String ERROR_DUPLICATE_PARAMETER_ASSIGNMENT_MSG = "Duplicate assignment to parameter '%s'.";
+
 	@Inject
 	private GenericsPrettyPrinter printer;
 	@Inject
@@ -64,8 +71,9 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 
 	@Check
 	public void checkExpression(Expression expression) {
-		//Only infer root expressions since inferType infers the expression containment hierarchy
-		if(!(expression.eContainer() instanceof Expression))
+		// Only infer root expressions since inferType infers the expression
+		// containment hierarchy
+		if (!(expression.eContainer() instanceof Expression))
 			typeInferrer.infer(expression, this);
 	}
 
@@ -98,9 +106,8 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 
 	@Check
 	public void checkTypedElementNotGeneric(TypeSpecifier typedElement) {
-		if (typedElement.getTypeArguments().size() > 0
-				&& ((!(typedElement.getType() instanceof GenericElement)) || ((GenericElement) typedElement
-						.getType()).getTypeParameters().size() == 0)) {
+		if (typedElement.getTypeArguments().size() > 0 && ((!(typedElement.getType() instanceof GenericElement))
+				|| ((GenericElement) typedElement.getType()).getTypeParameters().size() == 0)) {
 			String s1 = typedElement.getType().getName();
 			String s2 = printer.concatTypeArguments(typedElement.getTypeArguments());
 			error(String.format(ERROR_NOT_GENERIC_MSG, s1, s2), typedElement,
@@ -153,9 +160,9 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			if (parameter.getBound() != null) {
 				Type argument = typedElement.getTypeArguments().get(i).getType();
 				if (!typeSystem.isSuperType(argument, parameter.getBound())) {
-					error(String.format(ERROR_BOUND_MISSMATCH_MSG, argument.getName(),
-							(parameter.getBound()).getName(), type.getName()), typedElement,
-							TypesPackage.Literals.TYPE_SPECIFIER__TYPE_ARGUMENTS, i, ERROR_BOUND_MISSMATCH_CODE);
+					error(String.format(ERROR_BOUND_MISSMATCH_MSG, argument.getName(), (parameter.getBound()).getName(),
+							type.getName()), typedElement, TypesPackage.Literals.TYPE_SPECIFIER__TYPE_ARGUMENTS, i,
+							ERROR_BOUND_MISSMATCH_CODE);
 				}
 			}
 		}
@@ -168,6 +175,22 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			if (superType.equals(type)) {
 				error(String.format(ERROR_CYCLE_DETECTED_MSG, type.getName()), type,
 						TypesPackage.Literals.COMPLEX_TYPE__SUPER_TYPES, ERROR_CYCLE_DETECTED_CODE);
+			}
+		}
+	}
+
+	@Check
+	public void checkDuplicateParameterAssignment(ArgumentExpression exp) {
+		Set<Parameter> assignedParameters = new HashSet<>();
+		EList<Argument> arguments = exp.getArguments();
+		for (Argument argument : arguments) {
+			if (argument.getParameter() != null) {
+				if (assignedParameters.contains(argument.getParameter())) {
+					error(String.format(ERROR_DUPLICATE_PARAMETER_ASSIGNMENT_MSG, argument.getParameter().getName()),
+							argument, null, ERROR_DUPLICATE_PARAMETER_ASSIGNMENT_CODE);
+					break;
+				}
+				assignedParameters.add(argument.getParameter());
 			}
 		}
 	}

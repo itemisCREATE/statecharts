@@ -51,12 +51,16 @@ public class ExecutionContextViewerFactory {
 		valueColumn.getColumn().setMoveable(true);
 		valueColumn.getColumn().setWidth(100);
 		if (!readOnly)
-			valueColumn.setEditingSupport(new MultiEditingSupport(viewer, 
-					new IntegerEditingSupport(viewer, provider), 
-					new RealEditingSupport(viewer, provider), 
-					new BooleanEditingSupport(viewer, provider),
-					new StringEditingSupport(viewer, provider), 
-					new EnumerationEditingSupport(viewer, provider)));
+			valueColumn
+					.setEditingSupport(new MultiEditingSupport(viewer,
+							/*
+							 * Specialized editing supports first...
+							 */
+							new EnumerationEditingSupport(viewer, provider), //
+							new IntegerEditingSupport(viewer, provider), //
+							new RealEditingSupport(viewer, provider), //
+							new BooleanEditingSupport(viewer, provider), //
+							new StringEditingSupport(viewer, provider)));//
 
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
 

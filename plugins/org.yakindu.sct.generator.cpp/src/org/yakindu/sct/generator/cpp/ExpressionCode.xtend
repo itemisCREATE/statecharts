@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
 import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.BinaryLiteral
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
@@ -63,10 +64,10 @@ class ExpressionCode extends Expressions {
 
 	def dispatch CharSequence code(Expression it, VariableDefinition target) '''«target.access»'''
 
-	def dispatch CharSequence code(ElementReferenceExpression it, OperationDefinition target) '''«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
+	def dispatch CharSequence code(ElementReferenceExpression it, OperationDefinition target) '''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 		
-	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) '''«target.access»(«FOR arg : args SEPARATOR ', '»«arg.
+	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) '''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 
 	def dispatch CharSequence code(ConditionalExpression it) '''«condition.code» ? «trueCase.code» : «falseCase.code»'''
@@ -93,6 +94,8 @@ class ExpressionCode extends Expressions {
 	def dispatch CharSequence code(FloatLiteral it) '''«value.toString»'''
 
 	def dispatch CharSequence code(HexLiteral it) '''0x«Integer::toHexString(value)»'''
+	
+	def dispatch CharSequence code(BinaryLiteral it) '''0b«Integer::toBinaryString(value)»'''
 
 	def dispatch CharSequence code(PrimitiveValueExpression it) '''«value.code»'''
 

@@ -234,7 +234,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 
 	public InferenceResult doInfer(ElementReferenceExpression e) {
 		if (e.isOperationCall()) {
-			if (!e.getReference().eIsProxy()) {
+			if (e.getReference() != null && !e.getReference().eIsProxy()) {
 				return inferOperation(e, (Operation) e.getReference(),
 						Maps.<TypeParameter, InferenceResult> newHashMap());
 			} else {
@@ -260,7 +260,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	 * extension methods
 	 */
 	protected List<Expression> getOperationArguments(ArgumentExpression e) {
-		return e.getArgs();
+		return e.getExpressions();
 	}
 
 	protected List<InferenceResult> getArgumentTypes(List<Expression> args) {

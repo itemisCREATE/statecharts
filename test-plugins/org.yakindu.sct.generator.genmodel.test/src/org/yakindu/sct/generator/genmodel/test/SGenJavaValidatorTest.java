@@ -19,6 +19,7 @@ import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.MI
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.MISSING_REQUIRED_PARAMETER;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.UNKNOWN_CONTENT_TYPE;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.UNKOWN_GENERATOR;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.EMPTY_SGEN;
 
 import java.lang.reflect.Method;
 
@@ -199,6 +200,23 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 					.getParameters().get(0).setDeprecated(true);
 			AssertableDiagnostics result = tester.validate(genModel);
 			result.assertAny(new MsgPredicate(DEPRECATED));
+		}
+	}
+	
+	/**
+	 * @see SGenJavaValidator#checkDeprecatedParameters(GeneratorEntry)
+	 */
+	@Test
+	public void checkEntriesExist() {
+		EObject model = parseExpression(
+				"GeneratorModel for yakindu::java {}",
+				GeneratorModel.class.getSimpleName());
+		if (!(model instanceof GeneratorModel)) {
+			fail("Model is of the wrong type");
+		} else {
+			GeneratorModel genModel = (GeneratorModel) model;
+			AssertableDiagnostics result = tester.validate(genModel);
+			result.assertAny(new MsgPredicate(EMPTY_SGEN));
 		}
 	}
 

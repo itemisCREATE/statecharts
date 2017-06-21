@@ -23,12 +23,12 @@ import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl#isRaised <em>Raised</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl#isScheduled <em>Scheduled</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl#getDirection <em>Direction</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

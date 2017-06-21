@@ -9,18 +9,18 @@ testclass ConstantsTests for statechart Constants {
 		assert Named.y == "Hello World"
 		//Caluclation with constants 
 		raise e
-		cycle
+		proceed 1 cycle
 		assert result == 20
 		
 		raise e
-		cycle
+		proceed 1 cycle
 		
 		
 		assert active(Constants.main_region.C)
 		assert result == 100
 		
 		raise e2 : x
-		cycle
+		proceed 1 cycle
 	
 		assert result == 1000
 		assert active(Constants.main_region.A)

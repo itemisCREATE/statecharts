@@ -9,12 +9,12 @@ testclass ExitOnSelfTransition for statechart ExitOnSelfTransition {
 		assert exitCount == 0
 		
 		raise e
-		cycle
+		proceed 1 cycle
 		assert entryCount == 2
 		assert exitCount == 1
 		
 		raise f
-		cycle
+		proceed 1 cycle
 		assert entryCount == 2
 		assert exitCount == 2 
 	} 

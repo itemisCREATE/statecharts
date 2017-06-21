@@ -18,12 +18,12 @@ package org.yakindu.sct.simulation.core.sruntime;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionEvent#isRaised <em>Raised</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionEvent#isScheduled <em>Scheduled</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionEvent#getDirection <em>Direction</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getExecutionEvent()
  * @model

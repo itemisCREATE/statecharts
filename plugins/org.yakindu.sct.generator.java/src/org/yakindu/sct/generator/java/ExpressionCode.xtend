@@ -115,10 +115,6 @@ class ExpressionCode extends Expressions {
 		expression.value.toString();
 	}
 
-	def dispatch String code(HexLiteral expression) {
-		expression.value.toString();
-	}
-
 	def dispatch String code(DoubleLiteral expression) {
 		expression.value.toString();
 	}
@@ -188,7 +184,7 @@ class ExpressionCode extends Expressions {
 	def protected codeDeclaration(Declaration it, ArgumentExpression exp) {
 		switch it {
 			Operation:
-				return operationCall(it, exp.args)
+				return operationCall(it, exp.expressions)
 			Property case exp.isAssignmentContained:
 				return getStaticContext + identifier
 			Property case exp.isPropertyContained:

@@ -409,7 +409,6 @@ public class FeatureCallItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == ExpressionsPackage.Literals.ARGUMENT_EXPRESSION__ARGS ||
 			childFeature == ExpressionsPackage.Literals.FEATURE_CALL__OWNER ||
 			childFeature == ExpressionsPackage.Literals.FEATURE_CALL__ARRAY_SELECTOR;
 

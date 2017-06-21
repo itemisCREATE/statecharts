@@ -25,7 +25,6 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
-import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
@@ -174,30 +173,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object execute(ElementReferenceExpression expression) {
-		var parameter = expression.args.map(it|execute)
-		if (expression.operationCall || expression.reference instanceof OperationDefinition) {
-			if (operationDelegate != null &&
-				operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
-				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
-			}
-		}
-		// for enumeration types return the literal value
-		if (expression.reference instanceof Enumerator) {
-			return new Long((expression.reference as Enumerator).literalValue)
-		}
-
-		val executionSlot = context.resolve(expression)
-		if (executionSlot instanceof ExecutionVariable)
-			return executionSlot.getValue
-		if (executionSlot instanceof ExecutionEvent)
-			return (executionSlot as ExecutionEvent).raised
-
-		// reference to an element with complex type is not reflected in an execution variable but in a composite slot
-		// TODO hide reference mechanism in resolver
-		if (executionSlot instanceof CompositeSlot)
-			return executionSlot
-
-		return null
+		executeElementReferenceExpression(expression)
 	}
 
 	def dispatch Object execute(EventValueReferenceExpression expression) {
@@ -296,10 +272,37 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def dispatch Object execute(FeatureCall call) {
 		executeFeatureCall(call)
 	}
+	
+	def executeElementReferenceExpression(ElementReferenceExpression expression){
+		var parameter = expression.expressions.map(it|execute)
+		if (expression.operationCall || expression.reference instanceof OperationDefinition) {
+			if (operationDelegate != null &&
+				operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
+				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
+			}
+		}
+		// for enumeration types return the literal value
+		if (expression.reference instanceof Enumerator) {
+			return new Long((expression.reference as Enumerator).literalValue)
+		}
+
+		val executionSlot = context.resolve(expression)
+		if (executionSlot instanceof ExecutionVariable)
+			return executionSlot.getValue
+		if (executionSlot instanceof ExecutionEvent)
+			return (executionSlot as ExecutionEvent).raised
+
+		// reference to an element with complex type is not reflected in an execution variable but in a composite slot
+		// TODO hide reference mechanism in resolver
+		if (executionSlot instanceof CompositeSlot)
+			return executionSlot
+
+		return null
+	}
 
 	def executeFeatureCall(FeatureCall call) {
 		if (call.operationCall || call.feature instanceof OperationDefinition) {
-			var parameter = call.args.map(it|execute)
+			var parameter = call.expressions.map(it|execute)
 			if (call.feature instanceof Operation) {
 				var Operation operation = call.feature as Operation
 				if (operationDelegate != null && operationDelegate.canExecute(operation, parameter)) {
@@ -343,10 +346,6 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch valueLiteral(IntLiteral literal) {
-		return literal.value as long
-	}
-
-	def dispatch valueLiteral(HexLiteral literal) {
 		return literal.value as long
 	}
 

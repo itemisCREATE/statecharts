@@ -6,11 +6,11 @@ testclass SameNameDifferentRegion for statechart SameNameDifferentRegion {
 		
 		assert active ( SameNameDifferentRegion.main_region.StateA)
 		raise e1
-		cycle
+		proceed 1 cycle
 		assert active (SameNameDifferentRegion.main_region.StateB)
 		assert active (SameNameDifferentRegion.main_region.StateB.r1.StateA)
 		raise e1
-		cycle
+		proceed 1 cycle
 		assert active (SameNameDifferentRegion.main_region.StateB) 
 		assert active (SameNameDifferentRegion.main_region.StateB.r1.StateB) 
 	}

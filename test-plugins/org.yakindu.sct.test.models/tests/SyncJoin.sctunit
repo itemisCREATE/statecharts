@@ -12,47 +12,47 @@ testclass SyncJoin for statechart SyncJoin {
 		   		
 		   		
 		raise e
-		cycle 
+		proceed 1 cycle
 		assert active (SyncJoin.main_region.B.r1.C2)
 		assert active (SyncJoin.main_region.B.r2.D1)
 		 
 		// require configuration C2Waits 
 		raise jc
-		cycle 
+		proceed 1 cycle
 		assert active (SyncJoin.main_region.B.r1.C2)
 		assert active (SyncJoin.main_region.B.r2.D1)
 		
 		raise jd
-		cycle
+		proceed 1 cycle
 		assert active (SyncJoin.main_region.B.r1.C2)
 		assert active (SyncJoin.main_region.B.r2.D1)
 		
 		// 'If all required triggers exist' 'but the lower priority state is not active no join transition must be taken.' 
 		raise jc
 		raise jd
-		cycle
+		proceed 1 cycle
 		assert active (SyncJoin.main_region.B.r1.C2)
 		assert active (SyncJoin.main_region.B.r2.D1)
 		
 		raise f
-		cycle
+		proceed 1 cycle
 		assert active (SyncJoin.main_region.B.r1.C2)
 		assert active (SyncJoin.main_region.B.r2.D2)
 		
 		raise jc
-		cycle 
+		proceed 1 cycle
 		assert active (SyncJoin.main_region.B.r1.C2)
 		assert active (SyncJoin.main_region.B.r2.D2)
 		
 		raise jd
-		cycle
+		proceed 1 cycle
 		assert active (SyncJoin.main_region.B.r1.C2)
 		assert active (SyncJoin.main_region.B.r2.D2)
 		
 
 		raise jc
 		raise jd
-		cycle
+		proceed 1 cycle
 		assert active (SyncJoin.main_region.A)
 	}
 	@Test
@@ -65,29 +65,29 @@ testclass SyncJoin for statechart SyncJoin {
 		assert active (SyncJoin.main_region.B.r2.D1)
 		   		
 		raise f
-		cycle 
+		proceed 1 cycle
 		assert active (SyncJoin.main_region.B.r1.C1)
 		assert active (SyncJoin.main_region.B.r2.D2)
 		 
 		raise jc
-		cycle 
+		proceed 1 cycle
 		assert active (SyncJoin.main_region.B.r1.C1)
 		assert active (SyncJoin.main_region.B.r2.D2)
 		
 		raise jd
-		cycle
+		proceed 1 cycle
 		assert active (SyncJoin.main_region.B.r1.C1)
 		assert active (SyncJoin.main_region.B.r2.D2)
 		
 		// 'If all required triggers exist' 'but the lower priority state is not active no join transition must be taken.' 
 		raise jc
 		raise jd
-		cycle
+		proceed 1 cycle
 		assert active (SyncJoin.main_region.B.r1.C1)
 		assert active (SyncJoin.main_region.B.r2.D2)
 		
 		raise e
-		cycle
+		proceed 1 cycle
 		assert active (SyncJoin.main_region.B.r1.C2)
 		assert active (SyncJoin.main_region.B.r2.D2)
 				
@@ -103,11 +103,11 @@ testclass SyncJoin for statechart SyncJoin {
 		
 		raise e
 		raise f
-		cycle
+		proceed 1 cycle
 		
 		raise jc
 		raise jd
-		cycle
+		proceed 1 cycle
 		
 		assert active (SyncJoin.main_region.A)
 		assert x == 1

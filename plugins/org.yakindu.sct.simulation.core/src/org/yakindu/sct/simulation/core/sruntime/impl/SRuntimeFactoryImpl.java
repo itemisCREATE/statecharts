@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.sct.simulation.core.sruntime.*;
 import org.yakindu.sct.simulation.core.sruntime.Any;
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.core.sruntime.EventDirection;
@@ -73,6 +74,7 @@ public class SRuntimeFactoryImpl extends EFactoryImpl implements SRuntimeFactory
 			case SRuntimePackage.EXECUTION_VARIABLE: return createExecutionVariable();
 			case SRuntimePackage.COMPOSITE_SLOT: return createCompositeSlot();
 			case SRuntimePackage.REFERENCE_SLOT: return createReferenceSlot();
+			case SRuntimePackage.EXECUTION_OPERATION: return createExecutionOperation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -154,6 +156,16 @@ public class SRuntimeFactoryImpl extends EFactoryImpl implements SRuntimeFactory
 	public ReferenceSlot createReferenceSlot() {
 		ReferenceSlotImpl referenceSlot = new ReferenceSlotImpl();
 		return referenceSlot;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExecutionOperation createExecutionOperation() {
+		ExecutionOperationImpl executionOperation = new ExecutionOperationImpl();
+		return executionOperation;
 	}
 
 	/**

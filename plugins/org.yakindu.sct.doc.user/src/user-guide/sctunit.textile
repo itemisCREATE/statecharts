@@ -5,370 +5,958 @@ p.
 
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/sctunit.textile
 
-h1. SCTUnit
+h1(#sctunit_test-driven_statechart_development_with_sctunit). Test-driven statechart development with SCTUnit
 
-h2. What is SCTUnit for?
+h2(#sctunit_brief_introduction_to_test-driven_development). Brief introduction to test-driven development
 
-!(inlinemediaobject){float: right; height: 10ex}images/sctu_sctunit32.png!
+In "test-driven development":https://en.wikipedia.org/wiki/Test-driven_development, before writing any code the developer creates a _unit test_ that checks the to-be-established implementation for correctness. Only after that, the developer codes the implementation and executes the test. If the test fails, the developer has to fix the implementation – perhaps repeatedly – until the test succeeds.
 
-In test driven development, the developer creates automated unit tests before writing the implementation logic. These unit tests define the behavior of a particular piece of code using assertions and are very important to avoid regression when refactoring code.
+Tests are not written for the complete software product in advance, but rather on a per-feature basis. That is, the developer writes tests only for the one single feature he is going to implement next. Having successfully finished that implementation, the developer should _refactor_ his code and his tests. The most recent additions might have opened opportunities to restructure one or the other, thus reducing complexity and/or adding readability. "Refactoring":https://en.wikipedia.org/wiki/Code_refactoring must never change the semantics of the code. To ensure that, tests come in handy and should be run after each refactoring step.
 
-Test driven development can and should also be used in the context of model-driven development. Since YAKINDU statecharts provide an interface definition for every statechart model, it is possible to write unit tests against these interfaces before creating the implementing statechart model. 
 
-SCTUnit is a testing framework which allows to write unit tests for the YAKINDU Statechart Tools. You can validate the behavior of your statechart by writing a well-defined operational sequence with assertions about active states and values of variables. It allows test driven development of statechart models on the semantic level of statecharts.
 
-Based on these Unit tests, the framework generates JUnit tests to test the generated Java statechart as well as Google Tests for the generated C code. 
-h1. Getting started
 
-h2. Introduction
+h2(#sctunit_test-driven_statechart_modelling). Test-driven statechart modelling
 
-This tutorial will introduce the YAKINDU Statechart Tools Testing Framework *SCTUnit*. SCTUnit allows to write tests for statecharts in the the well known XUnit style. Now you can act test driven while creating a statechart for your need. 
+In "model-driven software development (MDSD)":https://en.wikipedia.org/wiki/Model-driven_software_development, specific parts of the software are created by a code generator instead of being written manually. This also pertains to code "generated from statechart models":../user-guide/generating_code.html.
 
-In this tutorial you will learn how to create a test for a statechart and generate JUnit test code out of the model. You should already be familiar with statecharts and YAKINDU Statechart Tools should be installed.[ref Help SCT] 
+The nice thing about generated code is that we can safely assume it to be correct – at least as long as the code generator developers have tested their product thoroughly enough. However, what about the model? While the generated code might be correct, this won't help at all if the underlying model is broken in the first place.
 
+SCTUnit is a scripting and testing framework for writing unit tests for statechart models. You can validate the behaviour of your statechart by running these tests. Each test, written in the SCTUnit language, consists of a well-defined sequence of instructions. When running a test, these instructions are applied to a state machine under control and possibly changes that state machine in a specific way. You put down the expected effects of these changes as _assertions_. An assertion is used to check whether a specific condition is fulfilled, for example certain states being active or not, variables having specific values, operations having been executed, etc. SCTUnit allows test-driven development of statechart models on the semantic level.
 
-h2. CallHandling example explained
+The subsequent sections will first "introduce SCTUnit by example":#sctunit_sctunit_by_example and then explain "the SCTUnit language in full":#sctunit_the_sctunit_language.
 
-Let's assume that we want to create a software to control a simple phone. The example application we will create during this tutorial is a system for handling of incoming phone calls. After start up, the system is in an Idle state and waits for incoming calls. If a call comes in, the user can either accept the call and open a connection or dismiss it. If the connection is opened, the system tracks the duration of the call and waits for the user to hang up. After hang up, the system displays the total time of call and returns to its idle state. The complete statechart model is shown below:
 
-!images/sctu_call_example.png!
- 
 
-h2. Prepare a project
 
-The first step is to create a new Project by choosing _File -> New -> Project_. The dialog offers a couple of different project types. Since we want to generate Java code later on, choose _Java -> Java Project_ from the wizard menu. Give the project a meaningful name, i.e. CallHandling and click finish. It is good practice to separate your models from the source code. Therefore, create a new folder to the projects root by choosing _File -> New -> Folder_ from the projects context menu and call it "model". You also need to create a folder for the generated code, create two more folders with the names "src-gen" and "test-gen". Further you need another folder for the generator file, call this folder "genmodel". At last we need a folder for our test files (.sctunit), call this folder "tests".
-You now need to add **src-gen** (**test-gen** will be automatically added) to the Java build path as source (_Properties-> Java Build Path-> Source Tab-> "AddFolder"_) and add JUnit to the Libraries (_Properties-> Java Build Path-> Libraries Tab->"Add Libary..."-> JUnit -> Next -> Finish_). Your project should now look like this picture:
+h2(#sctunit_sctunit_by_example). SCTUnit by example
 
-!images/sctu_project_before.png!
+This section introduces SCTUnit by a simple statechart example that models a light switch. We will develop this statechart step by step using a test-driven approach. That is, for each single development step, we will first write a test, then change our statechart model, then run all the tests we created so far until they succeed. After that, we will proceed with the next development step.
 
 
-h2. Create the statechart model
 
-Next, create a new statechart model by choosing _File -> New -> Other -> YAKINDU -> YAKINDU Statechart Model_. The wizard asks for the parent folder and we choose "CallHandling/model". Name the File CallHandling.sct and finish the wizard. Last, confirm the perspective switch with Yes. The statechart editor opens and show the definition of a very simple statechart. You should know how to create this statechart below (ref SCT help) :
+h3(#sctunit_light_switch_requirements). Light switch requirements
 
+Before implementing any tests or models, let's write down the requirements for our light switch statechart model:
+# When the state machine starts, the model is in the *Off* state (initially the light is off).
+# If the *Off* state is active and the _operate_ event occurs (a user _operates_ the light switch), the state machine changes from the *Off* state to the *On* state (the light is switched on).
+# If the *On* state is active and the _operate_ event occurs (a user _operates_ the light switch), the state machine changes from the *On* state to the *Off* state (the light is switched off).
 
-!images/sctu_example_final.png!
 
 
-h2. Create SCTUnit Test
+h3(#sctunit_specifying_the_initial_behaviour_as_a_test). Specifying the initial behaviour as a test
 
-Now we create a "CallHandling.sctunit" file in the "tests" folder. In this example there are two tests, in the first test we accept the call and talk for 10s. In the second test we dismiss the call.
+Now we need an Eclipse project to host our statechart model. So let's create one, naming it _light_switch_. Within the project, we create two folders, _model_ and _test_, for – you guessed it – the model and the tests, respectively.
 
-!images/sctu_testcase.png!
+In the _test_ directory, proceed as follows to create a SCTUnit test file:
+# In the _project explorer_ view, right-click on the _test_ folder. The context menu opens.
+# In the context menu, select _New → Other…_. The _New_ wizard opens.
+# In the wizard, select _YAKINDU SCT → SCTUnit test case_.
+# Click _Next >_. The wizard switches to the _New SCTUnit Test Class_ page.
+# In the _File name_ text field, specify the name of the file to contain the SCTUnit tests, say, _light_switch.sctunit_. The file name extension must always be _.sctunit_.
+# Click _Finish_.
+# If a dialog appears asking whether you want to add the Xtext nature to the project, please click _Yes_.
 
+As a result, the empty file _light_switch.sctunit_ is created in the _test_ folder and is opened in an editor.
 
-h2. Create Java-Code
+In the spirit of test-driven development, create a test for the light switch model's initial behaviour by writing the following in the _light_switch.sctunit_ file:
 
-You cannot run the SCTUnit file directly, you have to generate Code first. In this tutorial we will generate Java code, but it's also possible to create C code. First of all we have to create a generator file for the tests. For this we create a new file in the folder "genmodel" and call it "tests.sgen".
-In this file you can specify what tests should be generated and where to. It looks like this:
+bc.. 
+testclass light_switch_tests for statechart light_switch {
 
-!images/sctu_sgentest.png!
+    @Test
+    operation isStateOffActiveAfterInit () {
+        enter
+        assert active (light_switch.main_region.Off)
+    }
 
-In Java we need also a statemachine which act like the statechart. For this we create another generator file which is called "model.sgen":
-
- 
-!images/sctu_sgenstatemachine.png!
-
-You now have to create the Java code for both, tests and statemachine. Rightclick on the two generator files ("tests.sgen" and "model.sgen") and *generate the Statechart Artifacts*.
-
-
-!images/sctu_genArtifacts.png!
-
-After you did this, your project should look like this:
-
-!images/sctu_project_after.png!
-
-
-h2. Running the Test
-
-The most important reason to create something is to use it, so do we. For running the test you just have to rightclick on the "CallHandlingTest.java" file in the "test-gen" folder. Now the test should success like this:
-
-!images/sctu_junitSuc2.png!
-
-Grats, you just successfully created your first SCTUnit JUnit test. More details will be provided in the next chapter.
-h1. Details of SCTUnit
-
-
-h2. Creating a Test Group / Test Suite 
-
-A SCTUnit file can contain a Test group or a Test Suite. In this chapter we introduce some useful details about the SCTUnit test files at all.
-
-h3. Test Group
-
-A Test Group is started by the keyword *testgroup* followed by the name of the Test Group. Further it's mandatory to  define a statechart for which the test is written. This happens through the keywords *for statechart* followed by the Name of the statechart. The list of all possible statecharts is provided by *STRG+SPACE* (as seen on next picture).  
-
-!images/sctu_strg_statechart.png!
-
-A Test group needs at least one test and a test needs at least one *enter* statement. It's not allowed to create more than one Test group per file. Following picture shows the minimum of a Test Group.
-
-!images/sctu_minimum_testgrp.png!
-
-h3. Test Suite
-
-In SCTUnit it is also possible to create Test Suites which contains a list of Test Groups that should be executed. Just create a Suite with the keyword *testsuite* followed by a name. Inside you can write the Test Groups you want to execute. In the picture below we have created another Test Group called "CallHandling2". As you can see the Test Groups are seperated by commas.
-
-!images/sctu_minimum_suite.png!
-
-h3. Namespaces
-
-It's not mandatory but you can use packages for your tests. This makes sense when you got a bunch of them. Write "namespace" followed by the name you wish. It's also possible to use full qualified names, look below:
-
-!images/sctu_namespace_sctunit.png!
-
-h2. SGen HowTo
-
-The Generator files (.sgen) are used to specify where the generated files are put. But SGen is not only used for this, you also can define many other attributes like for example a LiscenceHeader or debug information.
-
-A Generator file always starts with the keywords *GeneratorModel for* followed by the kind of generator and the subtype. With *STRG+SPACE* you get a list of possible Generators. As you can see there is not only SCTUnit:
-
-!images/sctu_sgen_generic.png!
-
-For a SCTUnit Generator we choose "sctunit::" followed by "java" for this example. This matches the "SCTUnit Generator for Java". 
-
-!images/sctu_sgen_java_01.png!
-
-Further we need to define a test, started with the keyword "test". With *STRG+SPACE* we get again all possible entries:
-
-!images/sctu_sgen_java_04.png! 
-
-For a test a "Outlet Feature" is mandatory, so we create it. The outlet feature got two attributes which also need to be defined: "target Project" and "targetFolder". There is a macro which can be used to create a default outlet feature.
-
-!images/sctu_sgen_java_02.png!
-
-The "targetProject" describes the Project in the actual Workspace where the test should be created. The default name is the project in which the file exist, but it's also possible to choose another project. For a better overview we change the default "targetFolder" from "src-gen" to "test-gen". This is not a must, just best practise, you can call the directory anything you want.
- 
-!images/sctu_sgen_java_03.png!
-
-h3. Statemachine
-
-In java we also need a statemachine which is created in a similar way than the tests. We have to create another Generator file. Now we choose a *GeneratorModel for* for "yakindu::java". 
-
-!images/sctu_sgen_yakindu_01.png!
-
-In this Generator file we have to add the stetechart for which the statemachine should be generated. With *STRG+SPACE* we get all possible entries, just like before in the Generator file for the tests. This artifact also need a outlet feature, so we use the macro as we seen before. We can keep the "src-gen" as "targetFolder" because we allready put the tests into "test-gen". The name of the folder is not a must, just best practise, you can call the directory anything you want.
-
-!images/sctu_sgen_yakindu_02.png!
-
-h2. Folders meaning
-
-Take a look at the following picture. There are many different folders. The following list gives an overview about the function of each. 
-
-!images/sctu_project_after.png!
-
-* *src*: This is the default source folder, it's not used by SCTUnit.
-
-* *src-gen*: If you use SCTUnit for java this folder is used for the mandatory statemachine. You can change the name of this directory in the corresponding generator file. 
-
-* *test-gen*: This folder is the output directory for the tests. It's the same in java and C. You can change the name of this directory in the corresponding generator file.
-
-* *genmodel*: This folder contents the Generator files. In java you need two Generator files (statemachine and tests), in C only one Generator file is used (tests). You can execute them by right clicking on them and use *Generate Statechartart Artifacts*.
-
-* *model*: In this directory the statecharts itself should be stored.
-
-* *tests*: This directory contains the SCTUnit files. A SCTUnit file can contain a Test group or a Test Suite.
-
-All names are recommendations, you can change them as you want. 
-
-+*Warning:*+ When *Generating Statechart Artifacts* the files in the target folder will be overwritten! Also the directory will not be cleaned from old code. So take care if you change a namespace or something else. Best practise is to delete the generated content in the target folder if you have any issues.
-
-
-h2. Reference
-
-h3. Test Group / Test Suite
-
-A SCTUnit file (*.sctunit*) can contain either a test group or a test suite. A test group contains one or more test cases. A test suite is a composite of tests groups. 
-
-==<!-- Start sctunit_keyword_testgroup -->==
-
-h4. Testgroup
-
-A test group consists of one ore more tests (the namespace is not required and optionally splits the testgroups into packages). Further its possible to create a testsuite or testgroup. In this example we create a testgroup which needs a name and is used for an existing statechart, which is shown with the *for* keyword. A testgroup needs at least one *test* which needs at least one *enter* statement. 
-
-Following example shows a minimal Test Group with namespace:
-
-bc(sctunit). 
-testgroup MyExample for statechart SomeStatechart {
-	test firstTest{
-		enter		
-	}	
 }
 
-p. ==<!-- End sctunit_keyword_testgroup -->==
-==<!-- Start sctunit_keyword_testsuite -->==
+p. Let's walk through this example line by line and see what all of this means.
 
-h4. Testsuite 
+* @testclass light_switch_tests for statechart light_switch {@
+** The keyword @testclass@ introduces a test class, a collection of tests. In this example, it is named _light_switch_tests_.
+** A test class always refers to a statechart that is under control and is to be tested. This relationship is established by the _for statechart_ clause. The keywords @for statechart@ are followed by the name of the statechart, here: _light_switch_. However, since there is no _light_switch_ statechart yet, an error marker is attached to the statechart name, as shown in the following screenshot:<br/>!images/sctunit_light_switch_010_initial_test.png(Initial test)!
+** The body of the test class is bracketed in braces, i.e. between @{@ and @}@.
+* <code>@Test</code><br/><code>operation isStateOffActiveAfterInit () {</code>
+** Each test is an _operation_ that is annotated by <code>@Test</code>. This example defines the operation _isStateOffActiveAfterInit_. It has no parameters, which is indicated by <code>()</code>. As we will see later, an operation does not necessarily have to be a test, but can be a mere subroutine. Such operations can have parameters. The operation's body is bracketed in braces.
+* @enter@
+** The _enter_ statement initializes and starts the state machine; it "enters" it. As a consequence, the state machine activates the state that is pointed to by the initial state.
+* @assert active (light_switch.main_region.Off)@
+** The _assert_ statement expects that a specified condition is fulfilled. Using the built-in _active_ function, our example's assertion expects that the state *Off* is active. The state is addressed in a fully-qualified manner, i.e. _statechart_._region_._state_. However, since we don't have a statechart model yet and less than ever any state, the *Off* state in the assertion is flagged as an error.
 
-A Test Suite also can contain a namespace, just as seen at Test Group. A Test Suite is made to hold a list of Test Groups. Following example shows a minimal Test Suite:
 
-bc(sctunit). 
-testsuite MySuite{
-	TestGroup1,
-	Testgroup2
+
+h3(#sctunit_implementing_a_minimal_light_switch_model). Implementing a minimal light switch model
+
+Since the test has error markers, we can say that it fails even without being run. So let's fix that with minimal effort and create a model that is called _light_switch_ and has a state *Off*. Figure "&quot;First step of creating a light switch model&quot;":#sctunit_fig_first_step_of_creating_a_light_switch_model shows the resulting model.
+
+p(#sctunit_fig_first_step_of_creating_a_light_switch_model). 
+
+!images/sctunit_light_switch_020_first_step.png(First step of creating a light switch model)!
+
+p=. First step of creating a light switch model
+
+
+
+h3(#sctunit_running_the_test). Running the test
+
+Figure "&quot;First step of creating a light switch model&quot;":#sctunit_fig_first_step_of_creating_a_light_switch_model also shows that the error markers of the test class have been cleared. This is no surprise since our minimal statechart model has the name that is specified in the test and it also contains the *Off* state.
+
+Now we can execute the test class. In order to do so, proceed as follows:
+* Right-click on the _light_switch.sctunit_ file in the _test_ directory. The context menu opens.
+* In the context menu, select _Run As → SCTUnit_<br/>!images/sctunit_light_switch_030_run_as_sctunit.png(Run as SCTUnit)!
+* The test in the test class is executed.
+* The results are displayed in the _JUnit_ tab. A green bar is shown, which means our model fulfills the expectations expressed in the test class.<br/>!(small)images/sctunit_light_switch_040_sctunit_success.png(SCTUnit test succeeded)!
+
+
+
+h3(#sctunit_adding_more_tests). Adding more tests
+
+h4. Writing a test for the second requirement
+
+The model by now implements the first requirement specified in section "&quot;Light switch requirements&quot;":#sctunit_light_switch_requirements.
+
+So let's care for the second requirement, formulate it as a SCTUnit test, and add it to the test class.
+
+The whole test class now looks like this:
+
+bc.. 
+testclass light_switch_tests for statechart light_switch {
+
+    @Test
+    operation isStateOffActiveAfterInit () {
+        enter
+        assert active (light_switch.main_region.Off)
+    }
+
+    @Test
+    operation isStateOnActiveAfterOperateInOffState () {
+        enter
+        raise operate
+        proceed 1 cycle
+        assert active (light_switch.main_region.On)
+    }
 }
 
-p. ==<!-- End sctunit_keyword_testsuite -->==
+p. The @raise operate@ instruction raises the _operate_ event. However, aside from this event having been raised, nothing will happen yet. The next instruction will change that.
 
-==<!-- Start sctunit_keyword_test -->==
+The @proceed 1 cycle@ instruction orders the state machine to execute one run-to-completion step (RTC). During this RTC, the state machine can react to the raised _operate_ event.
 
-h4. Test
+Processing the _operate_ event should cause the *On* state to become active. This is checked by the following assertion:<br/>@assert active (light_switch.main_region.On)@
 
-A Testgroup needs at least one test. A test is like a script with commands and asserts that are executed from above to bottom. A test must at least contain a "enter" statement. An example for a test is shown here:
+To make the test class syntactically correct, the statechart model must be amended by the _operate_ event and by the *On* state.
 
-bc(sctunit). 
-testgroup MyExample for statechart SomeStatechart {
-	test MyTest{
-			enter
-			raise exampleEvent1
-			cycle
-			assert active (StateName)					
-	}	
+
+h4. Detecting a semantically wrong implementation
+
+However, in order to demonstrate what happens if an SCTUnit test fails, let's have a look at a wrong implementation, as shown in figure "&quot;Erroneous light switch model&quot;":#sctunit_fig_erroneous_light_switch_model. Here the _operate_ event does not trigger a transition from *Off* to *On* but from *Off* back to *Off*.
+
+p(#sctunit_fig_erroneous_light_switch_model). 
+
+!images/sctunit_light_switch_050_erroneous_light_switch_model.png(Erroneous light switch model)!
+
+p=. Erroneous light switch model
+
+The test operation _isStateOnActiveAfterOperateInOffState_ should detect this semantic error and alert us. Running the amended test class as an SCTUnit again indeed leads to the following result:
+
+!(small)images/sctunit_light_switch_060_sctunit_failure.png(SCTUnit test failed)!
+
+The large bar is red now instead of green, meaning that at least one test failed. Below the bar the test class and its tests are listed and it is indicated which tests succeeded and which tests failed. We can see that our _isStateOffActiveAfterInit_ test still succeeds; so while we didn't correctly implement the second requirement, we at least didn't break the first one.
+
+Fixing the model as follows turns the test green:
+
+!images/sctunit_light_switch_070_fixed_light_switch_model.png(Fixed light switch model)!
+
+
+h4. Calling operations
+
+Okay, so let's write a test for the third and final requirement:
+
+bc. 
+    @Test
+    operation isStateOffActiveAfterOperateInOnState () {
+        isStateOnActiveAfterOperateInOffState
+        raise operate
+        proceed 1 cycle
+        assert active (light_switch.main_region.Off)
+    }
+
+A prerequisite for dealing with an _operate_ event in the *On* state is to get into that state in the first place. However, we have implemented the necessary actions before, namely in the test _isStateOnActiveAfterOperateInOffState_. The great thing is that we can just use that test by calling it as subroutine. This is like calling a function or method in any other programming language.
+
+We know that after executing _isStateOnActiveAfterOperateInOffState_ the *On* state is active – we even _assert_ that in the called test operation. So now we just have to raise _operate_ again, run an RTC and check whether we are in the *Off* state after that.
+
+
+h4. Looping
+
+By going from *Off* to *On* and back to *Off*, we have ensured now that the light switch model behaves as specified. However, we might want to check whether this is still the case if we go through this cycle a number of times, say twice or 20,000 times. To support scenarios like this, the SCTUnit language provides a couple of advanced features, see section "The SCTUnit language":#sctunit_the_sctunit_language. Here we use the _while_ loop to iterate over the off-on-off cycle a couple of times:
+
+bc. 
+    @Test
+    operation isStateOffActiveAfter10Cycles () {
+        enter
+        var i: integer = 0
+        while (i < 10) {
+            raise operate
+            proceed 1 cycle
+            assert active (light_switch.main_region.On)
+            raise operate
+            proceed 1 cycle
+            assert active (light_switch.main_region.Off)
+            i = i + 1
+        }
+    }
+
+
+
+
+h2(#sctunit_the_sctunit_language). The SCTUnit language
+
+While section "&quot;SCTUnit by example&quot;":#sctunit_sctunit_by_example gave an overview of test classes and operation, the section at hand provides you with a complete description of the SCTUnit language. More precisely, since the SCTUnit language is an extension of the "statechart language":../user-guide/statechart_language.html, you will find herein a description of those language elements that are specific to the SCTUnit language. Please see section "&quot;The statechart language&quot;":../user-guide/statechart_language.html for everything else.
+
+An important extension of the SCTUnit language over the statechart language is the introduction of "operations":#sctunit_operations_and_tests (subroutines) and control statements, like "_if_":#sctunit_conditional_statements and "_while_":#sctunit_loops. They make it possible to "script" complex procedures, for example by raising different events under different conditions or by looping over a sequence of statements multiple times.
+
+Please remember that you can always hit <code>[Ctrl]+[Space]</code> when editing SCTUnit language files within YAKINDU Statechart Tools. The editor will show you all possible input choices that are valid at your cursor location.
+
+
+==<!-- Start sctunit_keyword_testclass -->==
+
+h3(#sctunit_test_classes). Test classes
+
+A _test class_ contains one or more "operations":#sctunit_operations_and_tests or test cases. It is contained in a file with a _.sctunit_ filename extension.
+
+==<div class="example">==
+
+Example:
+
+bc.. 
+testclass NameOfTheTestClass for statechart NameOfTheStatechart {
+
+    const pi : real = 3.141592654
+    var sum : integer = 0
+
+    @Test
+    operation isFeatureAvailable () {
+        /* … */
+    }
 }
+p. 
 
-p. ==<!-- End sctunit_keyword_test -->==
+==</div>==
+
+The _header_ of a test class consists of the keyword @testclass@, followed by the name of the test class, followed by the keywords @for statechart@, followed by the name of the statechart this test class relates to.
+
+The test class imports the statechart, so all variables, operations, events, etc. that are defined in an interface in the statechart's definition section, as well as the statechart's states, are available in and accessible by the test class.
+
+bq. *Please note:* Entities defined in a statechart's internal scope are not visible from the outside, including test classes controlling the statechart.
+
+The _body_ of a test class is enclosed in braces (<code>{ … }</code>). It consists of an optional part with variable and constant definitions, followed by at least one "operation":#sctunit_operations_and_tests.
+
+Figure "&quot;Test class grammar&quot;":#sctunit_fig_test_class_grammar summarizes the structure of a test class:
+
+p(#sctunit_fig_test_class_grammar). 
+
+!images/sctunit_grammar_020_sctunitclass.png(Test class grammar)!
+
+p=. Test class grammar
+
+Test classes are namespace-aware: Using the "_package_ statement":#sctunit_the_package_statement, you can insert a test class into a specific "namespace":#sctunit_namespaces. You can "import":#sctunit_the_import_statement test classes from the same or from different namespaces into a test class.
+
+Test classes can be grouped into a "test suite":#sctunit_test_suites.
+
+==<!-- End sctunit_keyword_testclass -->==
+
+==<!-- Start sctunit_keyword_operation -->==
+
+h3(#sctunit_operations_and_tests). Operations and tests
+
+_Operations_ are comparable to methods, functions, or subroutines in other programming languages. Operations are defined in "test classes":#sctunit_test_classes.
+
+A _test_ is parameterless operation without a return type that is annotated with <code>@Test</code>.
+
+==<div class="example">==
+
+Example:
+
+bc. 
+    @Test
+    operation isFeatureAvailable () {
+        enter
+        var i: integer = 0
+        var countValue: integer = count
+        while (i < 10) {
+            raise do_cycle
+            assert active (myStatechart.main_region.State_A)
+            assert count == countValue + 1
+            i = i + 1
+        }
+    }
+
+==</div>==
+
+p. The _header_ of an operation consists of an optional annotation, typically <code>&#x40;Test</code>, followed by the keyword @operation@, followed by the name of the operation, followed by a parenthesized list of parameters, optionally followed by a colon and a return type.
+
+The _body_ of an operation is enclosed in braces (<code>{ … }</code>). It consists of a sequence of "statements":#sctunit_statements_and_expressions, which may be empty.
+
+Figure "&quot;Operation grammar&quot;":#sctunit_fig_operation_grammar summarizes the structure of an operation:
+
+p(#sctunit_fig_operation_grammar). 
+
+!images/sctunit_grammar_030_operation.png(Operation grammar)!
+
+p=. Operation grammar
 
 
-==<!-- Start sctunit_keyword_namespace -->==
+h4(#sctunit_scopes). Scopes
 
-h4(#namespace). Namespace
+An operation can define its own variables. Aside from these
+* local variables
+it also has access to
+* variables and operations defined on the test class level,
+* variables, operations, events, and states defined in an interface of the statechart controlled by the operation's test class,
+* entities imported by the statechart controlled by the operation's test class,
+* entities imported by the operation's test class.
 
-It is optional possible to create namespaces. This namespaces work like packages. You can use full qualified names for a namespace.
+An operation can call other operations. This is like subroutine calls in other programming languages. Called operations can be …
+* located in the same test class,
+* located in "imported":#sctunit_the_import_statement test classes that pertain to the same statechart.
 
-bc(sctunit). 
-namespace my.namespace.is.here
-testgroup MyTestGroup{
-...
-}
-
-p. ==<!-- End sctunit_keyword_namespace -->==
+Operations that are declared in the statechart _cannot_ be executed during a test. If you need them to be called you can "mock":#sctunit_mocking_an_operation_call them.
 
 
-h3. Statements
+h4. Annotations
 
-*SCTUnit* provides a list of statements that should be familiar for most programmers:
+When running a "test class":#sctunit_test_classes or a "test suite":#sctunit_test_suites as an SCTUnit, only those operations are executed as tests that are annotated with <code>@Test</code>. Operations annotated with <code>@Ignore</code> or not annotated at all will not be regarded as tests. However, they can be called by test operations.
+
+While the <code>@Ignore</code> annotation and an omitted annotation have the same effect functionally, you should use the <code>@Ignore</code> annotation to mark operations that are intended as tests, but are (temporarily) disabled for one or the other reason. This differentiates them from other operations that are not tests, but mere subroutines called from elsewhere.
+
+==<!-- End sctunit_keyword_operation -->==
+
+h3(#sctunit_statements_and_expressions). Statements and expressions
+
+The body of an "operation":#sctunit_operations_and_tests consists of _statements_. Many types of statements, like _variable definitions_, _assignments_, _event raisings_, or _operation calls_, are already defined in the statechart language and are described "in section &quot;Statements&quot; of the statechart language documentation":../user-guide/statechart_language.html#statements.
+
+Statement types that are specific to the SCTUnit language are described in the following subsections.
+
 
 ==<!-- Start sctunit_keyword_assert -->==
 
-h4. assert
+h4(#sctunit_assertions). Assertions
 
-The expression followed by the 'assert' keyword expects a boolean condition to be true, the test will fail otherwise. It is possible to add an optional message to the assertion statement to clarify the expressions intention. The following example shows a statement that asserts if a state is 'active' or not.
+When it comes to testing, the most important statement is the _assertion_. It evaluates a condition that must be fulfilled for the test to not fail.
 
-bc(prettyprint). assert active(MyStatechart.regionName.StateName) "Expected StateName to be active"
-assert !active(MyStatechart.regionName.AnotherStateName)
+==<div class="example">==
 
-It is also possible to assert variable values. You can use any boolean comparator and its also possible to access variables in Interfaces and values of events:
+Example 1:
 
-bc(prettyprint). assert myVariable1 == 42
-assert myVariable2 == "Sense of life"
-assert myVariable3 => 41
-assert InterfaceName.MyEvent == 5
+bc. assert sum == 42
 
-p. ==<!-- End sctunit_keyword_assert -->==
+This statement asserts that the variable _sum_ has a value of 42. If this is the case, the operation continues. If not, the test fails and is discontinued.
+
+==</div>==
+
+==<div class="example">==
+
+Example 2:
+
+bc. assert active (myStatechart.main_region.State_A)
+assert !active (myStatechart.main_region.State_B) message "State_B must not be active here."
+
+The first statement asserts that state _State_A_ in region _main_region_ in statechart _myStatechart_ is active. If this is not the case, the test fails.
+
+The second statement asserts that _State_B_ is not active. Otherwise the test fails with the error message "State_B must not be active here.". 
+
+bq. *Please note:* "active(…)":../user-guide/statechart_language#active-state is a built-in function of the statechart language.
+
+==</div>==
+
+Generally, an assertion consists of the keyword @assert@, followed by a boolean expression, optionally followed by the keyword @message@ and an error message text (string literal). The assertion expects the boolean expression to be _true_ to continue the test. If it evaluates to _false_ the test fails. The optional message can be used to clarify what went wrong.
+
 ==<!-- Start sctunit_keyword_called -->==
 
-h4. called
+h5. Asserting an operation call
 
-The expression followed by the 'called' keyword expects a reference to an operation that will be called and optional the keyword 'with' and the parameters of the call. If the referenced operation wasn't called or wasn't called with the right parameters, the test will fail. The following example shows a statement that asserts if a operation was called or not.
+A special assertion variant uses the @called@ keyword ("_assert called_ statement"). It checks whether a certain operation has been called (executed), typically by some action in the statechart.
 
-bc(prettyprint). assert called operationname
-assert called operationname with (param1, param2)
+==<div class="example">==
 
-p. ==<!-- End sctunit_keyword_called -->==
-==<!-- Start sctunit_keyword_mock -->==
+Example:
 
-h4. mock
+bc. assert called myOperation
+assert called myOperation with (42, 815)
 
-With the 'mock' Statement it is possible to return a default value for an operation call, without implementing the operation. The type of the default value has to match the return-type of the referenced operation. The following example shows a statement that mocks the default return of an operation.
+The first assertion checks whether the operation _myOperation_ has been called during the execution of this test. If it hasn't, the test fails.
 
-bc(prettyprint). mock operationname returns (value)
+The second assertion not only checks whether the operation _myOperation_ has been called, but also checks whether it has been called with parameters 42 and 815. If the operation hasn't been called at all, the test fails. The test also fails if the operation has been called, but with different parameters than 42 and 815, e.g. @myOperation(1, 2)@.
 
-It is also possible to make the default return dependent from the operation parameters.
+==</div>==
 
-bc(prettyprint). mock operationname returns (paramname + 1.0)
+The first variant of the _assert called_ statement begins with the keywords @assert called@ and is followed by the name of (resp. reference to) the operation to check. This variant of the _assert called_ statement checks whether the named operation has been called during the execution of this test, irrespective of its parameters.
 
-p. ==<!-- End sctunit_keyword_mock -->==
-==<!-- Start sctunit_keyword_cycle -->==
+In the second variant of the _assert called_ statement the keyword @with@ follows the structure described above. It is followed by a parenthesized list of parameters. This variant of the _assert called_ statement not only checks whether the named operation has been called, but for the test not to fail it also requires that the operation has been called with the specified parameters.
 
-h4. cycle
+==<!-- End sctunit_keyword_called -->==
 
-Since SCTUnit does not make any assumptions on the the execution behavior of the statemachine, it is required to execute a cycle manually with the 'cycle' keyword. 
+Figure "&quot;Assertion grammar&quot;":#sctunit_fig_assertion_grammar summarizes the structure of an assertion:
 
-bc(prettyprint). cycle
+p(#sctunit_fig_assertion_grammar). 
 
-p. ==<!-- End sctunit_keyword_cycle -->==
+!images/sctunit_grammar_030_assertion.png(Assertion grammar)!
+
+p=. Assertion grammar
+
+==<!-- End sctunit_keyword_assert -->==
+
+
+
+
 ==<!-- Start sctunit_keyword_enter -->==
+
+h4(#sctunit_entering_a_state_machine). Entering a state machine
+
+The _enter_ statement serves to enter the statechart associated with this "test class":#sctunit_test_classes. The state machine is initialized and started. The state that is denoted by the initial state becomes active.
+
+A test must execute the _enter_ statement before it can perform any sensible testing on the statechart. Unless the state machine is entered, all states are inactive.
+
+Please see section "&quot;SCTUnit by example&quot;":#sctunit_sctunit_by_example for examples on how the _enter_ statement is used. Please also see the "section on the _exit_ statement":#sctunit_exiting_a_state_machine.
+
+The _enter_ statement's grammar is very simple, as figure "&quot;Enter grammar&quot;":#sctunit_fig_enter_grammar shows:
+
+p(#sctunit_fig_enter_grammar). 
+
+!images/sctunit_grammar_020_enterexpression.png(Enter grammar)!
+
+p=. Enter grammar
+
+==<!-- End sctunit_keyword_enter -->==
+
+
+
 ==<!-- Start sctunit_keyword_exit -->==
 
-h4. enter / exit
+h4(#sctunit_exiting_a_state_machine). Exiting a state machine
 
-The 'enter' statements marks the entry of a statechart and is mandatory in every test. The 'exit' statement is only used if a statechart is leaved while the test is running. 
+The _exit_ statement exits and quits a state machine. You can re-initialize and re-enter it using the "_enter_ statement":#sctunit_entering_a_state_machine.
 
-bc(prettyprint). enter
-exit
+
+==<div class="example">==
+
+Example:
+
+The statechart _myStatechart_ looks like this:
+
+!(tiny)images/sctunit_myStatechart_010_simple.png(Statechart "myStatechart")!
+
+p=. Statechart _myStatechart_
+
+The _enter_ and _exit_ statements are explained by the comments of this test class:
+
+bc.. 
+testclass enter_exit_tests for statechart myStatechart {
+
+    @Test
+    operation checkState () {
+
+        /* Before entering the state machine, all states are inactive: */
+        assert !active (myStatechart.main_region.State_A)
+
+        /* Now we are entering the state machine. The state that the
+         * initial state points to becomes active: */
+        enter
+        assert active (myStatechart.main_region.State_A)
+
+        /* The "exit" statement leaves the state machine. All of the 
+         * latter's states are thus inactive:
+         */
+        exit
+        assert !active (myStatechart.main_region.State_A)
+
+        /* It is possible to re-enter the state machine or to be precise:
+         * to enter a new instance of the state machine. As above,
+         * "State_A" should be active now: */
+        enter
+        assert active (myStatechart.main_region.State_A)
+    }
+}
+p. 
+
+==</div>==
+
+The _exit_ statement's grammar is very simple, as figure "&quot;Exit grammar&quot;":#sctunit_fig_exit_grammar shows:
+
+p(#sctunit_fig_exit_grammar). 
+
+!images/sctunit_grammar_020_exitexpression.png(Exit grammar)!
+
+p=. Exit grammar
 
 ==<!-- End sctunit_keyword_exit -->==
-==<!-- End sctunit_keyword_enter -->==
+
+
+
 ==<!-- Start sctunit_keyword_raise -->==
 
+h4(#sctunit_raising_an_event). Raising an event
 
-h4. raise
+The _raise_ statement raises one of the state machine's incoming events.
 
-With the 'raise' statement it is possible to raise in events. Since SCTUnit tests are considered as black-box-tests, it is only allowed to raise in-events. Internal and out-events are not raisable from SCTUnit.
 
-bc(prettyprint). raise myEvent
-raise MyInterface.myEvent
+==<div class="example">==
+
+Example 1:
+
+bc. raise operate
+
+This statement raises the _operate_ event in the state machine's default interface.
+
+==</div>==
+
+==<div class="example">==
+
+Example 2:
+
+bc. raise user.click
+
+This statement raises the _click_ event in the state machine's _user_ interface.
+
+==</div>==
+
+Since state machine internals are inaccessible to SCTUnit tests and outgoing events are, well, outgoing, only incoming events can be raised. Events in the internal scope or outgoing events defined in an interface cannot be raised.
+
+bq. *Please note:* The _raise_ statement is not specific to the SCTUnit language, but is (also) part of the statechart language, see section "&quot;Raising an event&quot;":../user-guide/statechart_language#raising-an-event.
 
 ==<!-- End sctunit_keyword_raise -->==
+
+
+
+==<!-- Start sctunit_keyword_proceed -->==
+
+h4(#sctunit_proceeding_a_state_machine). Proceeding a state machine
+
+The tested state machine does not execute any run-to-completion steps (RTC) by itself, but only if being told so by way of the _proceed_ statement. The latter can advance the state machine by a specified number of RTCs or by a certain period of time.
+
+==<div class="example">==
+
+Example:
+
+bc. raise operate
+raise user.click
+proceed 1 cycle
+
+This example raises the _operate_ and _user.click_ events. The subsequent statement @proceed 1 cycle@ causes the state machine to perform one run-to-completion step, potentially acting on the raised events.
+
+==</div>==
+
+The _proceed_ statement consists of the keyword @proceed@ and an indication by what to proceed. Two variants are available:
+* @proceed@ _number_ @cycle@ – This variant instructs the state machine to perform _number_ run-to-completion steps.
+* @proceed@ _number_ _time_unit_ – This variant instructs the state machine to proceed by the specified time, e.g. @proceed 30 s@ proceeds by 30 seconds. Supported time units are:
+** @s@ – seconds
+** @ms@ – milliseconds
+** @us@ – microseconds
+** @ns@ – nanoseconds
+
+When running an SCTUnit test, the state machine's concept of "time" is decoupled from real time. That is, a statement like @proceed 3600 s@ does not have to wait for one hour of real time to elapse. Instead the state machine "leaps" by one hour in an instant, raises all affected time events, and processes them.
+
+Figure "&quot;Proceed statement grammar&quot;":#sctunit_fig_proceed_statement_grammar summarizes the structure of the _proceed_ statement:
+
+p(#sctunit_fig_proceed_statement_grammar). 
+
+!images/sctunit_grammar_030_proceed.png(Proceed statement grammar)!
+
+p=. Proceed statement grammar
+
+==<!-- End sctunit_keyword_proceed -->==
+
+
+
+==<!-- Start sctunit_keyword_var -->==
+
+h4(#sctunit_defining_variables_and_constants). Defining variables and constants
+
+Variables and constants (for brevity we'll summarize both as "variables") can be defined as specified in the statechart language, please see sections "&quot;Variables&quot;":../user-guide/statechart_language.html#variables and "&quot;Constants&quot;":../user-guide/statechart_language.html#constants for all the details. 
+
+However, variables in the SCTUnit language _must_ always be initialized. For example, while a definition like
+
+bc. var sum: integer
+
+is fine in the statechart language, it is an error in the SCTUnit language. You would rather have to write something like
+
+bc. var sum: integer = 0
+
+Figure "&quot;Variable definition grammar&quot;":#sctunit_fig_variable_definition_grammar summarizes the structure of a _variable definition_:
+
+p(#sctunit_fig_variable_definition_grammar). 
+
+!images/sctunit_grammar_020_sctunitvariabledefinition.png(Variable definition grammar)!
+
+p=. Variable definition grammar
+
+==<!-- End sctunit_keyword_var -->==
+
+
+
 ==<!-- Start sctunit_keyword_if -->==
 ==<!-- Start sctunit_keyword_else -->==
 
-h4. if / else
+h4(#sctunit_conditional_statements). Conditional statements
 
-The 'if' statement works like in every other programming language. The only thing noticeable is, that the condition expression is surrounded by square brackets. The body must contain at least one statement.
+The _if_ statement executes a sequence of statements depending on a condition.
 
-bc(prettyprint). if[variable1 > variable2]{
-	raise MyInterface.myEvent		
-} else {
-	raise MyInterface.myEvent2
-}
+==<div class="example">==
+
+Example 1:
+
+bc. 
+        if (i < 5) {
+            raise do_cycle
+        }
+
+The _do_cycle_ event is raised if the variable _i_ has a value that is less than 5. Otherwise nothing happens.
+
+==</div>==
+
+==<div class="example">==
+
+Example 2:
+
+bc. 
+        if (i < 5) {
+            raise do_cycle
+        } else {
+            raise button5
+        }
+
+The _do_cycle_ event is raised if the variable _i_ has a value that is less than 5. If _i_ is equal to or greater than 5 the _button5_ event is raised instead.
+
+==</div>==
+
+The _if_ statement starts with the keyword @if@, followed by a boolean expression in parenthesis, followed by a sequence of statements in braces. The sequence of statements must contain at least one statement. It is executed if and only if the boolean expression evaluates to _true_.
+
+And optional _else_ clause may follow. It consists of the keyword @else@, followed by a sequence of statements in braces. The sequence of statements must contain at least one statement. It is executed if and only if the boolean expression evaluates to _false_.
+
+Figure "&quot;If statement grammar&quot;":#sctunit_fig_if_statement_grammar summarizes the structure of the _if_ statement:
+
+p(#sctunit_fig_if_statement_grammar). 
+
+!images/sctunit_grammar_020_ifexpression.png(If statement grammar)!
+
+p=. If statement grammar
 
 ==<!-- End sctunit_keyword_if -->==
 ==<!-- End sctunit_keyword_else -->==
+
+
+
 ==<!-- Start sctunit_keyword_while -->==
 
-h4. while
+h4(#sctunit_loops). Loops
 
-The 'while' statement continually executes a block of statements while a particular condition evaluates to true. The while statement evaluates the conditional expression. If the expression is true, the while statement executes the statement(s) in the while body. The body must contain at least one statement.
+The _while_ statement executes a sequence of statements repeatedly, as long as a condition is fulfilled.
 
-bc(prettyprint). while [value < 5] {
-	cycle
-	value=+1
-}
+
+==<div class="example">==
+
+Example:
+
+bc. 
+        var i : integer = 0
+        while (i < 10) {
+            raise do_cycle
+            proceed 1 cycle
+            i = i + 1
+        }
+
+The statements in the _while_ loop's body are executed ten times.
+
+==</div>==
+
+The _while_ statement starts with the keyword @while@, followed by a boolean expression in parenthesis, followed by a sequence of statements in braces, the loop's body. The loop's body must contain at least one statement. It is executed repeatedly if and only if the boolean expression evaluates to _true_. The expression is evaluated before the first execution of the loop body and after each execution of the loop body.
+
+Figure "&quot;While statement grammar&quot;":#sctunit_fig_while_statement_grammar summarizes the structure of the _while_ statement:
+
+p(#sctunit_fig_while_statement_grammar). 
+
+!images/sctunit_grammar_020_loopstatement.png(While statement grammar)!
+
+p=. While statement grammar
 
 ==<!-- End sctunit_keyword_while -->==
-==<!-- Start sctunit_keyword_var -->==
+
+==<!-- Start sctunit_keyword_is_active -->==
+==<!-- Start sctunit_keyword_is_final -->==
+
+h4(#sctunit_retrieving_the_state_machines_status). Retrieving the state machine's status
+
+The keywords @is_active@ and @is_final@ make it possible to retrieve certain aspects of the state machine's status as boolean values and e.g. use them in "assertions":#sctunit_assertions.
+
+==<div class="example">==
+
+Example:
+
+bc. assert is_active
+
+The assertion succeeds if at least one state is active. This is always the case if the state machine has been "entered":#sctunit_entering_a_state_machine and has not been "exited":#sctunit_exiting_a_state_machine. Please note that a final state can be active, too.
+
+The assertion fails if the state machine has not been "entered":#sctunit_entering_a_state_machine or has been "exited":#sctunit_exiting_a_state_machine.
+
+==</div>==
+
+==<div class="example">==
+
+Example:
+
+bc. assert is_final
+
+The assertion succeeds if the state machine is active (see above) and all its active states are final states or composite states.
+
+The assertion fails if the state machine is not active (see above) or it has at least one active state that is not a final state or composite state.
+
+==</div>==
+
+==<!-- End sctunit_keyword_is_final -->==
+==<!-- End sctunit_keyword_is_active -->==
 
 
-h4. var
 
-SCTUnit supports the declaration of local variables. A variable can be declared with the 'var' statement, followed by an unique identifier and a type. Optionally, a default value can be specificed.
+==<!-- Start sctunit_keyword_mock -->==
 
-bc(prettyprint).  var myVar1 : integer
-var myVar2 : integer = 42
-var readonly const : string = "SCTUnit"
-var external ext : boolean = true	
+h4(#sctunit_mocking_an_operation_call). Mocking an operation call
 
-==<!-- End sctunit_keyword_var -->==
-==<!-- Start sctunit_keyword_wait -->==
+The _mock_ statement acts as a placeholder for an operation call and its return value.
 
-h4. wait
+==<div class="example">==
 
-The 'wait' statement causes the currently executing test to sleep for the specified time interval. the following time units are supported: seconds (s), milliseconds (ms), microseconds (us) and nanoseconds (ns). This statement depends on the precision and accuracy of system timers and schedulers.
+Consider a complex operation _getNeutronFlux_, which takes a real value as an argument and returns a real value as a result. During _semantic unit testing_ of your statechart – as opposed to _integration testing_ –, you won't want to integrate the operation into your testing environment. Aside from that, SCTUnit tests are executed in YAKINDU Statechart Tools' simulation mode, where you cannot call operations anyway.
 
-bc(prettyprint). wait 500 ms
-wait 1000 us
-wait 10000 ns
-wait 5s
+Your statechart, however, depends on _getNeutronFlux_ returning actual results, as can be seen in the simple model shown in figure "&quot;Neutron flux statechart&quot;":#sctunit_fig_neutron_flux_statechart:
 
-==<!-- End sctunit_keyword_wait -->==
+p(#sctunit_fig_neutron_flux_statechart). 
+
+!images/sctunit_neutron_flux_010_statechart.png(Neutron flux statechart)!
+
+p=. Neutron flux statechart
+
+While *State_A* is active, the state machine will call _getNeutronFlux(p)_ during each run-to-completion step and, depending on the results, will take the transition to *State_B* (or not).
+
+==</div>==
+
+However, how could you test the behaviour of your statechart if you cannot call an actual operation and retrieve its results?
+
+That's what the _mock_ statement is for. It is a makeshift that mimics an actual operation call by two mechanisms:
+# It creates a static mapping from a specific operation call with a specific list of parameter values to a specific return value.
+# If that operation is called with exactly that specific list of parameter values the caller receives the mapped return value as a result.
+
+A test can create an arbitrary number of such mappings, i.e. it can use the _mock_ statement multiple times for multiple operations, or for multiple parameter list of the same operation.
+
+==<div class="example">==
+
+Consider the following test:
+
+bc. 
+    @Test
+    operation testNeutronFlux() {
+        mock getNeutronFlux(12.0) returns (1000000000.0)
+        mock getNeutronFlux(18.0) returns (4.3)
+        enter
+        p = 18.0
+        proceed 1 cycle
+        assert active(neutronFlux.main_region.State_A)
+        p = 12.0
+        proceed 1 cycle
+        assert active(neutronFlux.main_region.State_B)
+    }
+
+The effect of the two _mock_ statements is as follows:
+* If _getNeutronFlux(12.0)_ is called, the return value is 1000000000.0.
+* If _getNeutronFlux(18.0)_ is called, the return value is 4.3.
+* If _getNeutronFlux_ is called with any other parameter value, the return value is undefined.
+
+The test assigns 18.0 to the statechart variable _p_, and performs one run-to-completion step. During this RTC, the state machine calls _getNeutronFlux(p)_ in order to evaluate the guard condition @[getNeutronFlux(p) >= 100.0]@. Since _p_ has a value of 18.0, the mocked operation returns 4.3, and the transition from *State_A* to *State_B* is not taken.
+
+After that, the test sets _p_ to 12.0 and executes another RTC. This time, the mocked operation returns 1000000000.0, the guard condition evaluates to _true_ and the state machine transitions to *State_B*.
+
+Calling _getNeutronFlux_ with any other parameter value than 12.0 or 18.0 would not only let the test fail, but would also throw an exception, because the actual operation cannot be called in test mode (simulation mode) and its return value is undefined.
+
+==</div>==
+
+In order to avoid an exception to be thrown, you can define a _mock_ statement with a _default_ return value. This value will be returned from all calls of the mocked operation that are not explicitly overridden by _mock_ statements with specific parameters.
+
+==<div class="example">==
+
+The _mock_ statements in the example above might have better been written as follows:
+
+bc. 
+        mock getNeutronFlux returns (-1.0)
+        mock getNeutronFlux(12.0) returns (1000000000.0)
+        mock getNeutronFlux(18.0) returns (4.3)
+
+The first _mock_ statements defines a return value of -1.0 for each and every call to the _getNeutronFlux_ operation, irrespective of the parameter value. The following statements, however, override this setting for the parameter values 12.0 and 18.0.
+
+bq. *Please note:* The order of the _mock_ statements is important! You should define the general case first, followed by specifying return values for specific parameter lists.
+
+==</div>==
+
+The type of the default value specified in the _mock_ statement must match the return type of the mocked operation.
+
+Figure "&quot;Mock statement grammar&quot;":#sctunit_fig_mock_statement_grammar summarizes the structure of the _mock_ statement:
+
+p(#sctunit_fig_mock_statement_grammar). 
+
+!images/sctunit_grammar_020_mockreturnstatement.png(Mock statement grammar)!
+
+p=. Mock statement grammar
+
+==<!-- End sctunit_keyword_mock -->==
+
+
+h4(#sctunit_returning_an_operations_result). Returning an operation's result
+
+==<!-- Start sctunit_keyword_return -->==
+
+The _return_ statement terminates the execution of the current operation and returns the value of an expression to the caller. The type of the expression must match the operation's return type.
+
+==<div class="example">==
+
+Example:
+
+bc. 
+    operation getCircleArea (radius: real): real {
+        const pi: real = 3.141592654
+        return pi * pi * radius
+    }
+
+The _return_ statement evaluates the expression @pi * pi * radius@, i.e. the area of a circle with radius _radius_, and returns the result to the caller of the operation. .
+
+==</div>==
+
+Figure "&quot;Return statement grammar&quot;":#sctunit_fig_return_statement_grammar summarizes the structure of the _return_ statement:
+
+p(#sctunit_fig_return_statement_grammar). 
+
+!images/sctunit_grammar_020_returnstatement.png(Return statement grammar)!
+
+p=. Return statement grammar
+
+==<!-- End sctunit_keyword_return -->==
+
+
+
+
+h3(#sctunit_test_suites). Test suites
+
+==<!-- Start sctunit_keyword_testsuite -->==
+A _test suite_ aggregates a set of "test classes":#sctunit_test_classes into a logical unit. It is contained in a file with a _.sctunit_ filename extension.
+
+==<div class="example">==
+
+Example:
+
+bc. testsuite MyTestSuite {
+    TestClassA,
+    TestClassB,
+    TestClassC
+}
+
+p. The test suite _MyTest_Suite_ comprises the test classes _TestClassA_, _TestClassB_, and _TestClassC_.
+
+==</div>==
+
+The nice thing about test suites is that you can run all tests of all the test classes at once. Right-click on the test suite file, say, _mytestsuite.sctunit_, and select _Run As → SCTUnit_ in the context menu. All tests in all test classes referenced in the test suite will be executed.
+
+All test classes within a test suite must pertain to statecharts using the same language domain. For example, if you have a statechart using YAKINDU Statechart Tools' standard domain and another statechart using the "C domain":../user-guide/c-domain.html, you cannot put their respective test classes into the same test suite. Instead you would have to write two different test suites: one for the test classes testing your "normal" statecharts, the another one for testing your "C" statecharts.
+
+The _header_ of a test suite consists of the keyword @testsuite@, followed by the name of the test suite.
+
+The _body_ of a test suite is enclosed in braces (<code>{ … }</code>). It consists of one or more names of test classes, separated by comma.
+
+Figure "&quot;Test suite grammar&quot;":#sctunit_fig_test_suite_grammar summarizes the structure of a test suite:
+
+p(#sctunit_fig_test_suite_grammar). 
+
+!images/sctunit_grammar_020_sctunitsuite.png(Test suite grammar)!
+
+p=. Test suite grammar
+
+Test suites are namespace-aware: Using the "_package_ statement":#sctunit_the_package_statement, you can insert a test suite into a specific "namespace":#sctunit_namespaces. You can "import":#sctunit_the_import_statement test suites and test classes from the same or from different namespaces into a test suite.
+
+==<!-- End sctunit_keyword_testsuite -->==
+
+h3(#sctunit_namespaces). Namespaces
+
+You can organise your "test classes":#sctunit_test_classes and "test suites":#sctunit_test_suites in different namespaces. Each test class or test suite can assign itself to a namespace by the "_package_":#sctunit_the_package_statement statement. It can import test classes and test suites from other namespaces by the "_import_":#sctunit_the_import_statement statement.
+
+
+
+==<!-- Start sctunit_keyword_package -->==
+
+h4(#sctunit_the_package_statement). The _package_ statement
+
+Use the _package_ statement to determine a namespace for the test class or test suite in the current _.sctunit_ file. The _package_ statement is optional, but if you use it, it must be the first statement of your _.sctunit_ file. Test classes and test suites without a preceeding _package_ statement will be put into the default namespace.
+
+
+==<div class="example">==
+
+Example:
+
+bc.. package foo.light_switch.test
+import bar.helper.steamgen
+import bar.util.*
+
+testclass light_switch_tests for statechart light_switch {
+…
+
+p. The _package_ statement puts the _light_switch_tests_ test class into the _foo.light_switch.test_ namespace.
+
+==</div>==
+
+The _package_ statement consists of the keyword @package@, followed by the package name (namespace). The package name is fully-qualified, i.e. in dot notation.
+
+Please see section "&quot;Test units&quot;":#sctunit_test_units for a summary of the _package_ statement's and related statements' grammar.
+
+==<!-- End sctunit_keyword_package -->==
+
+
+
+==<!-- Start sctunit_keyword_import -->==
+
+h4(#sctunit_the_import_statement). The _import_ statement
+
+Use the _import_ statement to make test classes and test suites from other namespaces available in the test class or test suite at hand.
+
+==<div class="example">==
+
+The example given in section "&quot;The _package_ statement&quot;":#sctunit_the_package_statement uses two _import_ statements:
+
+bc. import bar.helper.steamgen
+
+Imports the _steamgen_ test class or test suite from the _bar.helper_ package.
+
+==</div>==
+
+==<div class="example">==
+
+bc. import bar.util.*
+
+Imports all test classes and test suites from the _bar.util_ package.
+
+==</div>==
+
+Please see section "&quot;Test units&quot;":#sctunit_test_units for a summary of the _import_ statement's and related statements' grammar.
+
+==<!-- End sctunit_keyword_import -->==
+
+
+
+h4(#sctunit_test_units). Test units
+
+A _test unit_ is either a "test class":#sctunit_test_classes or a "test suite":#sctunit_test_suites. It is contained in a file with a _.sctunit_ filename extension.
+
+Figure "&quot;test_unit_grammar&quot;":#sctunit_fig_test_unit_grammar summarizes the structure of a test unit:
+
+p(#sctunit_fig_test_unit_grammar). 
+
+!images/sctunit_grammar_030_test_unit.png(Test unit grammar)!
+
+p=. Test unit grammar
 
 ==</div>==

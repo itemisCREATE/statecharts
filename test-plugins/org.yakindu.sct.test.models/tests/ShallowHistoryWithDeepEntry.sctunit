@@ -8,15 +8,15 @@ testclass ShallowHistoryWithDeepEntry for statechart ShallowHistoryWithDeepEntry
 		assert active(ShallowHistoryWithDeepEntry.main_region.Y) 
 		
 		raise toZ
-		cycle
+		proceed 1 cycle
 		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.A)
 		
 		raise toY
-		cycle
+		proceed 1 cycle
 		assert active(ShallowHistoryWithDeepEntry.main_region.Y)
 		
 		raise toZ
-		cycle
+		proceed 1 cycle
 		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.A)		
 		 
 	} 
@@ -27,20 +27,20 @@ testclass ShallowHistoryWithDeepEntry for statechart ShallowHistoryWithDeepEntry
 		assert active(ShallowHistoryWithDeepEntry.main_region.Y) 
 		
 		raise toZ
-		cycle
+		proceed 1 cycle
 		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.A)
 		
 		raise toC
-		cycle
+		proceed 1 cycle
 		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B._region0.C)
 		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B)
 		
 		raise toY
-		cycle
+		proceed 1 cycle
 		assert active(ShallowHistoryWithDeepEntry.main_region.Y)
 		
 		raise toZ
-		cycle
+		proceed 1 cycle
 		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B._region0.C)
 		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B)
 		
@@ -51,16 +51,16 @@ testclass ShallowHistoryWithDeepEntry for statechart ShallowHistoryWithDeepEntry
 		assert active(ShallowHistoryWithDeepEntry.main_region.Y) 
 		
 		raise toC
-		cycle
+		proceed 1 cycle
 		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B._region0.C)
 		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B)
 		
 		raise toY
-		cycle
+		proceed 1 cycle
 		assert active(ShallowHistoryWithDeepEntry.main_region.Y)
 		
 		raise toZ
-		cycle
+		proceed 1 cycle
 		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B._region0.C)
 		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B)
 		

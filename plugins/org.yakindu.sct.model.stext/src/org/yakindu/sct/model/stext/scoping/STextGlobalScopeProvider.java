@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -29,13 +30,13 @@ import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.IResourceScopeCache;
-import org.yakindu.base.types.Package;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
+import org.yakindu.sct.model.stext.scoping.IPackageImport2URIMapper.PackageImport;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -63,6 +64,8 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	private DefaultGlobalScopeProvider delegate;
 	@Inject
 	private STextLibraryGlobalScopeProvider libraryScope;
+	@Inject
+	private IPackageImport2URIMapper mapper;
 
 	public void setCache(IResourceScopeCache cache) {
 		this.cache = cache;
@@ -81,7 +84,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		final Statechart statechart = getStatechart(context);
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
 				reference.getEReferenceType());
-		return new FilteringScope(parentScope, new Predicate<IEObjectDescription>() {
+		IScope result = new FilteringScope(parentScope, new Predicate<IEObjectDescription>() {
 			@Override
 			public boolean apply(IEObjectDescription input) {
 				String userData = input.getUserData(DomainRegistry.DOMAIN_ID);
@@ -91,6 +94,19 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 				return statechart.getDomainID().equals(userData);
 			}
 		});
+		result = filterAnnotations(reference, result);
+		return result;
+	}
+
+	protected IScope filterAnnotations(EReference reference, IScope result) {
+		if (reference != TypesPackage.Literals.ANNOTATION__TYPE)
+			result = new FilteringScope(result, new Predicate<IEObjectDescription>() {
+				@Override
+				public boolean apply(IEObjectDescription input) {
+					return input.getEClass() != TypesPackage.Literals.ANNOTATION_TYPE;
+				}
+			});
+		return result;
 	}
 
 	@Override
@@ -109,9 +125,9 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 				IAcceptor<String> collector = createURICollector(resource, uniqueImportURIs);
 				Collection<ImportScope> importScopes = getImportScopes(resource);
 				for (ImportScope object : importScopes) {
-					EList<Package> imports = object.getImports();
-					for (Package package1 : imports) {
-						collectPackageImports(package1, collector, uniqueImportURIs);
+					EList<String> imports = object.getImports();
+					for (String packageImport : imports) {
+						collectPackageImports(resource, packageImport, collector, uniqueImportURIs);
 					}
 				}
 				Iterator<URI> uriIter = uniqueImportURIs.iterator();
@@ -135,13 +151,12 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		});
 	}
 
-	protected void collectPackageImports(Package package1, IAcceptor<String> acceptor,
+	protected void collectPackageImports(Resource resource, String packageImport, IAcceptor<String> acceptor,
 			LinkedHashSet<URI> uniqueImportURIs) {
-		EcoreUtil.resolveAll(package1);
-		if (package1.eIsProxy())
-			return;
-		String uri = EcoreUtil.getURI(package1).trimFragment().toString();
-		acceptor.accept(uri);
+		PackageImport pkgImport = mapper.findPackageImport(resource, packageImport);
+		if (pkgImport != null && pkgImport.getUri() != null && URIConverter.INSTANCE.exists(pkgImport.getUri(), null)) {
+			acceptor.accept(pkgImport.getUri().toString());
+		}
 	}
 
 	protected Statechart getStatechart(Resource context) {

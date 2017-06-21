@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.core.sruntime;
 
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,13 +20,13 @@ import org.yakindu.base.base.NamedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getValue <em>Value</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getFqName <em>Fq Name</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#isWritable <em>Writable</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getExecutionSlot()
  * @model abstract="true"
@@ -41,12 +42,12 @@ public interface ExecutionSlot extends NamedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(org.yakindu.base.types.Type)
+	 * @see #setType(Type)
 	 * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getExecutionSlot_Type()
 	 * @model
 	 * @generated
 	 */
-	org.yakindu.base.types.Type getType();
+	Type getType();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getType <em>Type</em>}' reference.
@@ -56,7 +57,7 @@ public interface ExecutionSlot extends NamedElement {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(org.yakindu.base.types.Type value);
+	void setType(Type value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.

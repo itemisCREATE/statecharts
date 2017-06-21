@@ -67,6 +67,15 @@ public interface ExpressionsFactory extends EFactory {
 	HexLiteral createHexLiteral();
 
 	/**
+	 * Returns a new object of class '<em>Binary Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Binary Literal</em>'.
+	 * @generated
+	 */
+	BinaryLiteral createBinaryLiteral();
+
+	/**
 	 * Returns a new object of class '<em>String Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -245,6 +254,15 @@ public interface ExpressionsFactory extends EFactory {
 	 * @generated
 	 */
 	TypeCastExpression createTypeCastExpression();
+
+	/**
+	 * Returns a new object of class '<em>Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Argument</em>'.
+	 * @generated
+	 */
+	Argument createArgument();
 
 	/**
 	 * Returns the package supported by this factory.

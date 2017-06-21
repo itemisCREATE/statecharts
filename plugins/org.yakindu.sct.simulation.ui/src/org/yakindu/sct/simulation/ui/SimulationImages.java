@@ -30,6 +30,8 @@ public enum SimulationImages {
 	EVENT_DISABLED("icons/Event_disabled.gif"),
 
 	VARIABLE("icons/Variable.gif"),
+	
+	OPERATION("icons/Operation.png"),
 
 	SCOPE("icons/Scope.gif"),
 

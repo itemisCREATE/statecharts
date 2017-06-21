@@ -1,20 +1,20 @@
 testclass AlwaysOncycle for statechart AlwaysOncycle {
 	
 	@Test
- 	operation alwaysOncycleTest (){
+ 	operation alwaysOnCycleTest (){
 	 	enter
 		assert active (AlwaysOncycle.main_region.StateA)
 		while (value < 5) {
-			cycle
+			proceed 1 cycle
 			assert active (AlwaysOncycle.main_region.StateA)
 		}
-		cycle
-		assert active ( AlwaysOncycle.main_region.StateB)
+		proceed 1 cycle
+		assert active (AlwaysOncycle.main_region.StateB)
 		while (value < 5) {
-			cycle
+			proceed 1 cycle
 			assert active (AlwaysOncycle.main_region.StateB)
 		}
-		cycle
+		proceed 1 cycle
 		assert active (AlwaysOncycle.main_region.StateA)  
 	}
 		

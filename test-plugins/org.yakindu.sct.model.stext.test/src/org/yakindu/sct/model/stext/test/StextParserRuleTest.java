@@ -66,6 +66,13 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("0xFFB5C5", rule);
 		parseExpression("0XFFB5C5", rule);
 	}
+	
+	@Test
+	public void testBinaryLiteral() {
+		String rule = PrimitiveValueExpression.class.getSimpleName();
+		parseExpression("0b1101101", rule);
+		parseExpression("0B1110001", rule);
+	}
 
 	@Test
 	public void testRealLiteral() {

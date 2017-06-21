@@ -24,6 +24,10 @@ import org.eclipse.debug.ui.ILaunchShortcut;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.console.ConsolePlugin;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleManager;
+import org.eclipse.ui.console.IOConsole;
 import org.yakindu.sct.simulation.core.launch.ISCTLaunchConfigurationType;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
 
@@ -33,6 +37,8 @@ import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
  * 
  */
 public class StatechartLaunchShortcut implements ILaunchShortcut, ISCTLaunchConfigurationType, ISCTLaunchParameters {
+
+	protected static final String TYPE = "com.yakindu.sctunit";
 
 	public void launch(ISelection selection, String mode) {
 		if (selection instanceof IStructuredSelection) {
@@ -44,7 +50,6 @@ public class StatechartLaunchShortcut implements ILaunchShortcut, ISCTLaunchConf
 			}
 		}
 	}
-	
 
 	public void launch(IEditorPart editor, String mode) {
 		IResource resource = (IResource) editor.getEditorInput().getAdapter(IResource.class);
@@ -52,6 +57,7 @@ public class StatechartLaunchShortcut implements ILaunchShortcut, ISCTLaunchConf
 	}
 
 	protected void launch(IFile file, String mode) {
+		showConsole();
 		final ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
 		final ILaunchConfigurationType configType = launchManager.getLaunchConfigurationType(getConfigType());
 		ILaunchConfiguration launchConfig = findLaunchConfiguration(configType, file);
@@ -60,6 +66,19 @@ public class StatechartLaunchShortcut implements ILaunchShortcut, ISCTLaunchConf
 		} else {
 			ILaunchConfiguration launchConfiguration = createNewLaunchConfiguration(file);
 			DebugUITools.launch(launchConfiguration, mode);
+		}
+	}
+
+	protected void showConsole() {
+		IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
+		IConsole[] consoles = consoleManager.getConsoles();
+		for (IConsole iConsole : consoles) {
+			if (TYPE.equals(iConsole.getType())) {
+				if (iConsole instanceof IOConsole) {
+					((IOConsole) iConsole).activate();
+					consoleManager.showConsoleView(iConsole);
+				}
+			}
 		}
 	}
 

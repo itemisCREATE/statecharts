@@ -551,13 +551,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkOperationArguments_FeatureCall(final FeatureCall call) {
 		if (call.getFeature() instanceof Operation) {
 			Operation operation = (Operation) call.getFeature();
-			assertOperationArguments(operation, call.getArgs());
+			assertOperationArguments(operation, call.getExpressions());
 		}
 	}
 
 	@Check(CheckType.FAST)
 	public void checkAnnotationArguments(ArgumentedAnnotation annotation) {
-		if (annotation.getArgs().size() != annotation.getType().getProperties().size()) {
+		if (annotation.getExpressions().size() != annotation.getType().getProperties().size()) {
 			error(String.format(WRONG_NUMBER_OF_ARGUMENTS_MSG, annotation.getType().getProperties()), null,
 					WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		}
@@ -567,7 +567,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkOperationArguments_TypedElementReferenceExpression(final ElementReferenceExpression call) {
 		if (call.getReference() instanceof Operation) {
 			Operation operation = (Operation) call.getReference();
-			assertOperationArguments(operation, call.getArgs());
+			assertOperationArguments(operation, call.getExpressions());
 		}
 	}
 
@@ -774,6 +774,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		EList<Annotation> annotations = element.getAnnotations();
 		for (Annotation annotation : annotations) {
 			EList<EObject> targets = annotation.getType().getTargets();
+			if(targets.isEmpty())
+				continue;
 			boolean found = Iterables.any(targets, new Predicate<EObject>() {
 				@Override
 				public boolean apply(EObject input) {

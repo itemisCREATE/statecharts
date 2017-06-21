@@ -58,7 +58,7 @@ InternalScopeDeclaration returns types::Declaration:
 	EventDefinition | VariableDefinition | OperationDefinition | TypeAliasDefinition
 ;
 ImportScope:
-	 {ImportScope} 'import' ':' (imports+=[types::Package|QID])*;
+	 {ImportScope} 'import' ':' (imports+=QID | imports+=STRING)*;
 
 QID:
 	ID ('.' ID)*;
@@ -82,8 +82,13 @@ OperationDefinition:
 	typeSpecifier=TypeSpecifier)?;
 	
 ArgumentedAnnotation:
-	'@' type=[types::AnnotationType|QID] ('('(args+=Expression (',' args+=Expression)*)? ')')?
+	'@' type=[types::AnnotationType|QID] ('('(arguments+=SimpleArgument (',' arguments+=SimpleArgument)*)? ')')?
 ;
+
+SimpleArgument returns exp::Argument:
+	{exp::Argument} value=ConditionalExpression
+;
+
 TypeSpecifier returns types::TypeSpecifier:
 	type=[types::Type|FQN] ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)*'>'))?;
 
@@ -132,13 +137,13 @@ RegularEventSpec:
 SimpleFeatureCall returns exp::Expression:
 	SimpleElementReferenceExpression ({exp::FeatureCall.owner=current} '.' feature=[ecore::EObject]
 	(=> operationCall?='('
-	(args+=Expression (',' args+=Expression)*)?
+	(arguments+=Argument(',' arguments+=Argument)*)?
 	')')?)*;
 
 SimpleElementReferenceExpression returns exp::ElementReferenceExpression:
 	reference=[ecore::EObject|ID]
 	(=> operationCall?='('
-	(args+=Expression (',' args+=Expression)*)?
+	(arguments+=Argument (',' arguments+=Argument)*)?
 	')')?;
 
 TimeEventSpec:

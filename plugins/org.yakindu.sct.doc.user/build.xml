@@ -323,8 +323,8 @@
                         <file name="user-guide/statechart_language.textile" />
                         <file name="user-guide/generating_code.textile" />
                         <file name="user-guide/generating_code_headless.textile" />
-                        <file name="user-guide/glossary.textile" />
-                        <!-- <file name="user-guide/sctunit.textile" /> -->
+                        <file name="user-guide/sctunit.textile" />
+                        <file name="user-guide/sctunit.textile" />
                     </filelist>
                 </textile-files>
                 <image-files>

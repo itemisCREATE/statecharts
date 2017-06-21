@@ -15,7 +15,7 @@ testclass TriggerExpressionPrecedence for statechart expressions.TriggerExpressi
 		c1 = false
 		c2 = false
 		
-		cycle
+		proceed 1 cycle
 		
 		assert ! e1_transition
 	}
@@ -30,7 +30,7 @@ testclass TriggerExpressionPrecedence for statechart expressions.TriggerExpressi
 		c1 = true
 		c2 = false
 		
-		cycle
+		proceed 1 cycle
 		
 		assert ! e1_transition
 	}
@@ -45,7 +45,7 @@ testclass TriggerExpressionPrecedence for statechart expressions.TriggerExpressi
 		c1 = false
 		c2 = true
 		
-		cycle
+		proceed 1 cycle
 		
 		assert ! e1_transition
 	}
@@ -60,7 +60,7 @@ testclass TriggerExpressionPrecedence for statechart expressions.TriggerExpressi
 		c1 = true
 		c2 = true
 		
-		cycle
+		proceed 1 cycle
 		
 		assert ! e1_transition
 	}

@@ -4,8 +4,8 @@ testclass TimedTransitions for statechart TimedTransitions{
 		enter 
 		assert active (TimedTransitions.main_region.Start)
 		
-		wait 2030ms
-		cycle
+		proceed 2030ms
+		proceed 1 cycle
 		
 		assert active (TimedTransitions.main_region.End)				
 	}		

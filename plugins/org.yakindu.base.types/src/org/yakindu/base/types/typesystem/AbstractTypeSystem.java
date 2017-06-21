@@ -98,9 +98,18 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		return false;
 	}
 
-	private void collectSupertypes(Type subtypeClass, List<Type> typeHierachy) {
+	protected void collectSupertypes(Type subtypeClass, List<Type> typeHierachy) {
 		if (subtypeClass == null)
 			return;
+
+		if (subtypeClass instanceof PrimitiveType) {
+			PrimitiveType primitiveType = (PrimitiveType) subtypeClass;
+			Type baseType = primitiveType.getBaseType();
+			if (baseType != null) {
+				typeHierachy.add(baseType);
+				collectSupertypes(baseType, typeHierachy);
+			}
+		}
 
 		List<Type> superTypes = getSuperTypes(subtypeClass);
 		for (Type superType : superTypes) {
@@ -187,7 +196,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		return null;
 	}
 
-	private Type getCommonTypeInternal(Type type1, Type type2) {
+	protected Type getCommonTypeInternal(Type type1, Type type2) {
 
 		if (isSame(type1, type2))
 			return type1;
