@@ -77,9 +77,7 @@ The sample HMI application has to be imported into the Eclipse workspace.
 # Click _Next_. The _Import Projects from File System or Archive_ dialog appears.
 # Click on the _Directory_ button and select the folder containing the Angular application.<br/>!images/tsdomain_import2_dialog.png(Import Projects from File System or Archive dialog)!
 # Click _Finish_. The project explorer should now look like this:<br/>!images/tsdomain_project_explorer.png(Project explorer)!
-# Open the project's context menu and add the _YAKINDU SCT Nature_. We need that to map all typescript artifacts  to the sct type system.  !images/tsdomain_add_sct_nature.gif(Adding YAKINDU SCT Nature)!
-
-
+# Open the project's context menu and add the _YAKINDU SCT Nature_. It is needed to map all Typescript artifacts to the YAKINDU Statechart Tools type system. !images/tsdomain_add_sct_nature.gif(Adding YAKINDU SCT Nature)!
 
 
 
@@ -151,7 +149,6 @@ To create a generator model using the wizard, proceed as follows:
 # Choose the _YAKINDU SCT TypeScript Generator_ generator.
 # Check the model(s) to generate code from.
 # Click _Finish_.
-
 
 p(#tsdom-fig-yakindu-statechart-tools-generator-model-configuration-wizard). 
 !images/tsdomain_genmodel_config.png(YAKINDU Statechart Tools generator model configuration wizard)!
