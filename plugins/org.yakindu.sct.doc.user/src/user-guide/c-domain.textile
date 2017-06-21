@@ -156,7 +156,7 @@ To import a C header file, go to the beginning of your statechart's definition s
 
 bq.. *Please note:*
 
-In difference to a c compiler, imports (/includes) will never be available transitively in context of YAKINDU Statechart Tools. So includes defined in imported header files have to be imported explicitly in your statechart specification section.
+Contrary to a C compiler, YAKINDU Statechart Tools do not support transitive imports. That is to say, if a header file _a.h_ imports another header file _b.h_ using the @#include@ directive, _b.h_ will not be "seen" in YAKINDU Statechart Tools unless you import it explicitly in your statechart's definition section.
 
 p(#cdom_fig_selecting_a_c_header_to_import). 
 
@@ -166,7 +166,7 @@ The following picture for example .
 
 p=. Selecting a C header to import
 
-If we had more than a single header file in the project, we would see them all. The content assist shows all header files in a project, including those in subdirectories. A C header's path is relative to the statechart it is imported into. 
+If we had more than a single header file in the project, we would see them all. The content assist shows all header files in a project, including those in subdirectories. A C header's path is relative to the statechart it is imported into.
 
 Click on the _point.h_ entry in the menu to complete the @import@ statement. The result looks like this:
 
