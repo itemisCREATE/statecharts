@@ -77,7 +77,7 @@ public class GTestHelper {
 		// copy model to JUnit workspace
 		copyFileFromBundleToFolder(getModelBundle(), getModelPath(), targetPath);
 
-		String sgenFileName = getTestProgram() + ".sgen";
+		String sgenFileName = getSgenFileName(getTestProgram());
 		copyFileFromBundleToFolder(getTestBundle(), sgenFileName, targetPath);
 
 		IPath path = new Path(sgenFileName);
@@ -100,6 +100,11 @@ public class GTestHelper {
 			}
 
 		}.execute(model);
+	}
+
+	protected String getSgenFileName(String testProgram) {
+		String sgenFileName = testProgram + ".sgen";
+		return sgenFileName;
 	}
 
 	protected GCCCommandExecutor getCommandExecutor() {
