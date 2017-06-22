@@ -42,7 +42,7 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
  */
 public final class FactoryUtils {
 
-	private static final String INITIAL_SPECIFICATION = "interface:\n// Define events and\n// and variables here. \n//Use CTRL (CMD) + Space for content assist.";
+	private static final String INITIAL_SPECIFICATION = "interface:\n// Define events and\n// and variables here. \n//Use CTRL + Space for content assist.";
 	private static final int INITIAL_REGION_WIDTH = 400;
 	private static final int INITIAL_REGION_HEIGHT = 400;
 	private static final String INITIAL_REGION_NAME = "main region";

@@ -104,7 +104,12 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 
 	def dispatch ExecutionSlot transform(InterfaceScope scope) {
 		SRuntimeFactory.eINSTANCE.createCompositeSlot => [
-			if(scope.name != null) name = scope.name else name = "default"
+			if (scope.name !== null) {
+				name = scope.name
+				fqName = scope.name
+			} else {
+				name = "default"
+			}
 			scope.declarations.forEach[decl|slots += decl.transform]
 		]
 	}

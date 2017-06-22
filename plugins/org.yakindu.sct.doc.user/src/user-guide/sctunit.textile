@@ -266,7 +266,7 @@ Test classes can be grouped into a "test suite":#sctunit_test_suites.
 
 ==<!-- End sctunit_keyword_testclass -->==
 
-
+==<!-- Start sctunit_keyword_operation -->==
 
 h3(#sctunit_operations_and_tests). Operations and tests
 
@@ -330,7 +330,7 @@ When running a "test class":#sctunit_test_classes or a "test suite":#sctunit_tes
 
 While the <code>@Ignore</code> annotation and an omitted annotation have the same effect functionally, you should use the <code>@Ignore</code> annotation to mark operations that are intended as tests, but are (temporarily) disabled for one or the other reason. This differentiates them from other operations that are not tests, but mere subroutines called from elsewhere.
 
-
+==<!-- End sctunit_keyword_operation -->==
 
 h3(#sctunit_statements_and_expressions). Statements and expressions
 
@@ -844,6 +844,7 @@ p=. Return statement grammar
 
 h3(#sctunit_test_suites). Test suites
 
+==<!-- Start sctunit_keyword_testsuite -->==
 A _test suite_ aggregates a set of "test classes":#sctunit_test_classes into a logical unit. It is contained in a file with a _.sctunit_ filename extension.
 
 ==<div class="example">==
@@ -878,7 +879,7 @@ p=. Test suite grammar
 
 Test suites are namespace-aware: Using the "_package_ statement":#sctunit_the_package_statement, you can insert a test suite into a specific "namespace":#sctunit_namespaces. You can "import":#sctunit_the_import_statement test suites and test classes from the same or from different namespaces into a test suite.
 
-
+==<!-- End sctunit_keyword_testsuite -->==
 
 h3(#sctunit_namespaces). Namespaces
 

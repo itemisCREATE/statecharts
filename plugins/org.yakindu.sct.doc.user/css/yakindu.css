@@ -260,3 +260,16 @@ body.eclipsehelp {
     padding-left: 1em;
     margin-bottom: 1ex;
 }
+
+.body-container .primary .inline-paramount {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #cccccc;
+    border-radius: 4px;
+    background-color: #e8f2fe;
+    padding-top: 0ex;
+    padding-bottom: 0.0ex;
+    padding-right: 0em;
+    padding-left: 0em;
+    margin-bottom: 0ex;
+}
