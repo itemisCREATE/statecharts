@@ -26,24 +26,28 @@ import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceCons
  *
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
+	
+	private static final Color STATE_VG_COLOR = new Color(null,255,128,0);
+	private static final Color STATE_BG_HL_COLOR = new Color(null,245,216,44);
+
 
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = SimulationActivator.getDefault()
 				.getPreferenceStore();
 		PreferenceConverter.setDefault(store,
 				STATE_FOREGROUND_HIGHLIGHTING_COLOR,
-				new Color(null,255,128,0).getRGB());
+				STATE_VG_COLOR.getRGB());
 
 		PreferenceConverter.setDefault(store,
-				STATE_BACKGROUND_HIGHLIGHTING_COLOR, new Color(null,245,216,44).getRGB());
+				STATE_BACKGROUND_HIGHLIGHTING_COLOR, STATE_BG_HL_COLOR.getRGB());
 
 		PreferenceConverter.setDefault(store,
-				VERTEX_FOREGROUND_TRANSIENT_COLOR, new Color(null, 255,128,0).getRGB());
+				VERTEX_FOREGROUND_TRANSIENT_COLOR, STATE_VG_COLOR.getRGB());
 
 		PreferenceConverter.setDefault(store,
-				VERTEX_BACKGROUND_TRANSIENT_COLOR, new Color(null,245,216,44).getRGB());
+				VERTEX_BACKGROUND_TRANSIENT_COLOR, STATE_BG_HL_COLOR.getRGB());
 
 		PreferenceConverter.setDefault(store, TRANSITION_HIGHLIGHTING_COLOR,
-				new Color(null, 255,128,0).getRGB());
+				STATE_VG_COLOR.getRGB());
 	}
 }
