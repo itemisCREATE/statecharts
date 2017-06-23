@@ -32,11 +32,11 @@ import org.yakindu.sct.model.stext.stext.ImportScope
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader {
 
-	@Inject extension Naming
-	@Inject extension Navigation
-	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension GenmodelEntriesExtension
-	@Inject extension INamingService
+	@Inject protected extension Naming
+	@Inject protected extension Navigation
+	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension GenmodelEntriesExtension
+	@Inject protected extension INamingService
 
 	protected GeneratorEntry entry
 
@@ -74,34 +74,48 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		'''
 			class «module» : «interfaceExtensions»
 					{
-						
-						public:
-							
-							«module»();
-							
-							~«module»();
-							
-							«statesEnumDecl»
-							
-							«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
-							
-							«publicFunctionPrototypes»
-							
-							/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-							sc_boolean «stateActiveFctID»(«statesEnumType» state) const;
-						
-						«entry.innerClassVisibility»:
-						
-							«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
-						
-							«statemachineTypeDecl»
-							
-							«prototypes»
-						private:
-						void runCycleIntern();
-						std::deque<std::function<void()>> InternalEventQueue; 	
+						«generatePublicClassmembers»
+						«generateInnerClasses»
+						«generatePrivateClassmembers»
 					};
 		'''
+	}
+
+	def protected generatePublicClassmembers(ExecutionFlow it) {
+		'''
+			public:
+				
+				«module»();
+				
+				~«module»();
+				
+				«statesEnumDecl»
+				
+				«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
+				
+				«publicFunctionPrototypes»
+				
+				/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
+				sc_boolean «stateActiveFctID»(«statesEnumType» state) const;
+				
+		'''
+	}
+
+	def protected generateInnerClasses(ExecutionFlow it) {
+		'''
+			«entry.innerClassVisibility»:
+			
+				«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
+			
+				«statemachineTypeDecl»
+				
+				«prototypes»
+				
+		'''
+	}
+	
+	def protected generatePrivateClassmembers(ExecutionFlow it) {
+		''''''
 	}
 
 	override includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) '''
