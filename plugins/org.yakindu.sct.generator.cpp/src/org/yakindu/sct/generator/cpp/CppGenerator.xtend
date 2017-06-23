@@ -23,7 +23,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.* 
 
 /**
  * This is the CPP code generators main class. 
@@ -78,7 +78,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 
 	}
 
-	def isCycleBased(ExecutionFlow it) {
+	def isCycleBased(ExecutionFlow it) { 
 		val statechart = sourceElement as Statechart
 		val cycleBasedAnnotation = statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION)
 		return cycleBasedAnnotation !== null
