@@ -75,7 +75,6 @@ class CppGenerator implements IExecutionFlowGenerator {
 			locations.configure(flow.module.h, entry.headerOutput, statemachineHeaderContent)
 			locations.configure(flow.module.cpp, entry.sourceOutput, statemachineSourceContent)
 		}
-
 	}
 
 	def isCycleBased(ExecutionFlow it) { 

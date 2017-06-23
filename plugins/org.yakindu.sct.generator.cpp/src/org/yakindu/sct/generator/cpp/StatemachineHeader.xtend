@@ -71,11 +71,11 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 	def protected generateClass(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
 			class «module» : «interfaceExtensions»
-					{
-						«generatePublicClassmembers»
-						«generateInnerClasses»
-						«generatePrivateClassmembers»
-					};
+			{
+				«generatePublicClassmembers»
+				«generateInnerClasses»
+				«generatePrivateClassmembers»
+			};
 		'''
 	}
 
@@ -117,8 +117,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 	}
 
 	override includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) '''
-		#include <deque>
-		#include <functional>
 		#include "«(typesModule.h).relativeTo(module.h)»"
 		#include "«(statemachineInterface.h).relativeTo(module.h)»"
 		«IF timed»
