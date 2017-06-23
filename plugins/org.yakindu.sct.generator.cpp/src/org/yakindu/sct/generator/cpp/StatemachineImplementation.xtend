@@ -68,6 +68,8 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		«finalFunction»
 		
+		«runCycleInternFunction»
+
 		«runCycleFunction»
 		
 		«clearInEventsFunction»
@@ -175,8 +177,8 @@ class StatemachineImplementation implements IContentTemplate {
 		}
 	'''
 	
-	def runCycleFunction(ExecutionFlow it) '''
-		void «module»::runCycle()
+	def runCycleInternFunction(ExecutionFlow it) '''
+		void «module»::runCycleIntern()
 		{
 			
 			clearOutEvents();
@@ -203,6 +205,18 @@ class StatemachineImplementation implements IContentTemplate {
 			}
 			
 			clearInEvents();
+		}
+	'''
+		def runCycleFunction(ExecutionFlow it) '''
+		void «module»::runCycle()
+		{
+			runCycleIntern(); 
+			while (!InternalEventQueue.empty())
+			{
+				InternalEventQueue.front()();
+				InternalEventQueue.pop_front();
+				runCycleIntern(); 
+			}
 		}
 	'''
 	

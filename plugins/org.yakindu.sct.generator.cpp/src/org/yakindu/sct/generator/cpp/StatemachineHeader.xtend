@@ -24,11 +24,11 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.ImportScope
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader {
 
@@ -83,6 +83,9 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 				«statemachineTypeDecl»
 				
 				«prototypes»
+			private:
+			void runCycleIntern();
+			std::deque<std::function<void()>> InternalEventQueue; 	
 		};
 		«IF !entry.useStaticOPC»
 			«scopes.filter(typeof(StatechartScope)).map[createInlineOCB_Destructor].filterNullOrEmptyAndJoin»
@@ -92,6 +95,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 	}
 	
 	override includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) '''
+		#include <deque>
+		#include <functional>
 		#include "«(typesModule.h).relativeTo(module.h)»"
 		#include "«(statemachineInterface.h).relativeTo(module.h)»"
 		«IF timed»
