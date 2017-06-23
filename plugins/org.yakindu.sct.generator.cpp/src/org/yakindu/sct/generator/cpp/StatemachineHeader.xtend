@@ -42,61 +42,68 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) {
 		this.entry = entry
-	'''
-		«entry.licenseText»
-		
-		#ifndef «module().define»_H_
-		#define «module().define»_H_
-		
-		«includes(artifactConfigs)»
-		#include <deque>
-		#include <functional>
-
-		
-		/*! \file Header of the state machine '«name»'.
-		*/
-		
-		/*! Define indices of states in the StateConfVector */
-		«FOR state : states»
-		#define «state.stateVectorDefine» «state.stateVector.offset»
-		«ENDFOR»
-		
-		class «module» : «interfaceExtensions»
-		{
+		'''
+			«entry.licenseText»
 			
-			public:
-				
-				«module»();
-				
-				~«module»();
-				
-				«statesEnumDecl»
-				
-				«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
-				
-				«publicFunctionPrototypes»
-				
-				/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
-				sc_boolean «stateActiveFctID»(«statesEnumType» state) const;
+			#ifndef «module().define»_H_
+			#define «module().define»_H_
 			
-			«entry.innerClassVisibility»:
+			«includes(artifactConfigs)»
+			#include <deque>
+			#include <functional>
 			
-				«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
+			/*! \file Header of the state machine '«name»'.
+			*/
 			
-				«statemachineTypeDecl»
-				
-				«prototypes»
-			private:
-			void runCycleIntern();
-			std::deque<std::function<void()>> InternalEventQueue; 	
-		};
-		«IF !entry.useStaticOPC»
-			«scopes.filter(typeof(StatechartScope)).map[createInlineOCB_Destructor].filterNullOrEmptyAndJoin»
-		«ENDIF»
-		#endif /* «module().define»_H_ */
-	'''
+			/*! Define indices of states in the StateConfVector */
+			«FOR state : states»
+				#define «state.stateVectorDefine» «state.stateVector.offset»
+			«ENDFOR»
+			
+			«generateClass(artifactConfigs)»
+			
+			
+			«IF !entry.useStaticOPC»
+				«scopes.filter(typeof(StatechartScope)).map[createInlineOCB_Destructor].filterNullOrEmptyAndJoin»
+			«ENDIF»
+			#endif /* «module().define»_H_ */
+		'''
 	}
-	
+
+	def protected generateClass(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
+		'''
+			class «module» : «interfaceExtensions»
+					{
+						
+						public:
+							
+							«module»();
+							
+							~«module»();
+							
+							«statesEnumDecl»
+							
+							«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
+							
+							«publicFunctionPrototypes»
+							
+							/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
+							sc_boolean «stateActiveFctID»(«statesEnumType» state) const;
+						
+						«entry.innerClassVisibility»:
+						
+							«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
+						
+							«statemachineTypeDecl»
+							
+							«prototypes»
+						private:
+						void runCycleIntern();
+						std::deque<std::function<void()>> InternalEventQueue; 	
+					};
+		'''
+	}
+
 	override includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) '''
 		#include "«(typesModule.h).relativeTo(module.h)»"
 		#include "«(statemachineInterface.h).relativeTo(module.h)»"
@@ -204,7 +211,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 		static const sc_integer «orthogonalStatesConst» = «stateVector.size»;
 		«IF hasHistory»
-		//! dimension of the state configuration vector for history states
+			//! dimension of the state configuration vector for history states
 		static const sc_integer «historyStatesConst» = «historyVector.size»;«ENDIF»
 		
 		«IF timed»
@@ -258,7 +265,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		*/
 		virtual sc_boolean isFinal() const;
 	'''
-	
+
 	def timedStatemachineFunctions(ExecutionFlow it) '''
 		/*
 		 * Functions inherited from TimedStatemachineInterface
@@ -302,7 +309,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 	override dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
 		«IF const»const «ENDIF»«typeSpecifier.targetLanguageName» «it.asGetter»() const;
-
+		
 		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */
 			void «asSetter»(«typeSpecifier.targetLanguageName» value);
