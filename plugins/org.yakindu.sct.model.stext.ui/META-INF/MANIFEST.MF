@@ -23,7 +23,7 @@ Require-Bundle: org.yakindu.sct.model.stext;visibility:=reexport,
  org.eclipse.xtext.ui.shared
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.model.stext.ui;
   uses:="org.eclipse.ui.plugin,
    org.osgi.framework,

@@ -4,4 +4,4 @@ Bundle-Name: YAKINDU Statechart Tools
 Bundle-SymbolicName: org.yakindu.sct.branding
 Bundle-Version: 2.9.3.qualifier
 Bundle-Vendor: statecharts.org
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

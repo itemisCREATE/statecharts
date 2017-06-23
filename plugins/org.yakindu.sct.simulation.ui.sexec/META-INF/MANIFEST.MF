@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.commons,
  org.eclipse.ui.ide,
  org.eclipse.ui.console
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.simulation.ui.sexec.launch,
  org.yakindu.sct.simulation.ui.sexec.launch.tabs

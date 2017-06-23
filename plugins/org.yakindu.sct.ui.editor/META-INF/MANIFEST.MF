@@ -48,7 +48,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.google.guava,
  org.yakindu.sct.domain
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.ui.editor,
  org.yakindu.sct.ui.editor.assistent,
  org.yakindu.sct.ui.editor.clipboardsupport,
