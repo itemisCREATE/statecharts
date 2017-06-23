@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.test"
       label="YAKINDU 2 Test"
-      version="2.9.3.qualifier"
+      version="3.0.0.qualifier"
       provider-name="yakindu.org">
 
    <description>
