@@ -5,7 +5,6 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class EventDrivenStatemachineHeader extends StatemachineHeader {
-	
 	override protected generatePublicClassmembers(ExecutionFlow it) {
 		'''
 		«super.generatePublicClassmembers(it)»
