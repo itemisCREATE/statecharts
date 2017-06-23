@@ -73,11 +73,11 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 	def protected generateClass(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
 			class «module» : «interfaceExtensions»
-					{
-						«generatePublicClassmembers»
-						«generateInnerClasses»
-						«generatePrivateClassmembers»
-					};
+			{
+				«generatePublicClassmembers»
+				«generateInnerClasses»
+				«generatePrivateClassmembers»
+			};
 		'''
 	}
 
