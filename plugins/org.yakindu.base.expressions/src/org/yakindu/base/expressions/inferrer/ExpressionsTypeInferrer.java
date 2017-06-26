@@ -306,8 +306,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				InferenceResult argumentType = inferTypeDispatch(argument);
 				parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping,
 						acceptor);
-				assertCompatible(argumentType, parameterType,
-						String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
+				assertAssignable(parameterType, argumentType,
+						String.format(INCOMPATIBLE_TYPES, parameterType, argumentType));
 			}
 		}
 		if (operation.isVariadic() && args.size() - 1 >= operation.getVarArgIndex()) {
