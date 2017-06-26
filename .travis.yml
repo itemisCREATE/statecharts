@@ -66,5 +66,5 @@ deploy:
   on:
     tags: Yakindu/statecharts
     condition: "$TRAVIS_TAG =~ ^release.*$"
- notifications:
-    slack: itemis:GpMT4EcgEk90uVGX2BZS1XB3
+notifications:
+   slack: itemis:GpMT4EcgEk90uVGX2BZS1XB3
