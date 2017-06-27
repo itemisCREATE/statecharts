@@ -735,6 +735,59 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		expectIssue(inferType("boolVar = intOp()"),
 				"Assignment operator '=' may only be applied on compatible types, not on boolean and integer.");
 	}
+	
+	@Test
+	public void testOperationCall() {
+		String scope = "internal " 
+				+ "operation opInt(p:integer) : void "
+				+ "operation opReal(p:real) : void "
+				+ "operation opString(p:string) : void "
+				+ "operation opBoolean(p:boolean) : void "
+				+ "operation opSubInt(p:SubInt) : void "
+				+ "operation opSubReal(p:SubReal) : void "
+				+ "operation opSubString(p:SubString) : void "
+				+ "operation opSubBool(p:SubBool) : void "
+				+ "var vi : integer "
+				+ "var vr : real "
+				+ "var vb : boolean "
+				+ "var vs : string "
+				+ "var vsi : SubInt "
+				+ "var vsr : SubReal "
+				+ "var vsb : SubBool "
+				+ "var vss : SubString ";
+		
+		expectNoErrors("opInt(1)", scope);
+		expectNoErrors("opInt(vi)", scope);
+		expectNoErrors("opInt(vsi)", scope);
+		
+		expectNoErrors("opReal(1.1)", scope);
+		expectNoErrors("opReal(1)", scope);
+		expectNoErrors("opReal(vr)", scope);
+		expectNoErrors("opReal(vsr)", scope);
+		
+		expectNoErrors("opString(\"hello\")", scope);
+		expectNoErrors("opString(vs)", scope);
+		expectNoErrors("opString(vss)", scope);
+		
+		expectNoErrors("opBoolean(true)", scope);
+		expectNoErrors("opBoolean(vb)", scope);
+		expectNoErrors("opBoolean(vsb)", scope);
+		
+		expectErrors("opInt(1.1)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		expectErrors("opInt(vr)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		expectErrors("opInt(vsr)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		
+		expectErrors("opSubInt(vi)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		expectErrors("opSubReal(vr)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		expectErrors("opSubBool(vb)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		expectErrors("opSubString(vs)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		
+		// TODO: actually one would expect these to work
+//		expectNoErrors("opSubInt(1)", scope);
+//		expectNoErrors("opSubReal(1.1)", scope);
+//		expectNoErrors("opSubBool(true)", scope);
+//		expectNoErrors("opSubString(\"hello\")", scope);
+	}
 
 	@Test
 	public void testParenthesizedExpression() {
