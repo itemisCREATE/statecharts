@@ -31,10 +31,22 @@ class StatechartEvents implements IContentTemplate {
 		
 		#include "«(typesModule.h).relativeTo(module.h)»"
 		
+		«generateEventsEnum»
+		
 		«generateEventBaseClasses»
 		
 		«generateEvents»
 		#endif /* «generateHeaderDefineGuard» */
+		'''
+	}
+	
+	def generateEventsEnum(ExecutionFlow it) {
+		'''
+		typedef enum  {
+			«FOR e : scopes.map[declarations.filter(EventDefinition)].reduce[i1, i2 | i1 + i2] SEPARATOR ","»
+				«eventEnumMemberName(e)»
+			«ENDFOR»
+		} «eventEnumName»;
 		'''
 	}
 	
@@ -51,21 +63,21 @@ class StatechartEvents implements IContentTemplate {
 		class SctEvent
 		{
 			public:
-				SctEvent(){}
+				SctEvent(«eventEnumName» name) : name(name){}
 				virtual ~SctEvent(){}
-			private:
+				«eventEnumName» name;
+				
 		};
 				
 		template <typename T>
 		class TypedSctEvent : public SctEvent
 		{
 			public:
-				TypedSctEvent(T value) :
-					SctEvent(),
+				TypedSctEvent(«eventEnumName» name, T value) :
+					SctEvent(name),
 					value(value)
 					{}
 				virtual ~TypedSctEvent(){}
-			private:
 				T value;
 		};
 		
@@ -77,40 +89,40 @@ class StatechartEvents implements IContentTemplate {
 		'''
 		«FOR s : scopes»
 			«FOR e : s.declarations.filter(EventDefinition)»
-				«generateEventClass(e)»
+				«generateEventClass(e, it)»
 			«ENDFOR»
 		«ENDFOR»
 		'''
 	}
 	
-	def generateEventClass(EventDefinition it) {
+	def generateEventClass(EventDefinition it, ExecutionFlow flow) {
 		'''
 		«IF hasValue»
-		«generateTypedEventClass»
+		«generateTypedEventClass(flow)»
 		«ELSE»
-		«generateNormalEventClass»
+		«generateNormalEventClass(flow)»
 		«ENDIF»
 		'''
 	}
 	
-	def generateTypedEventClass(EventDefinition it) {
+	def generateTypedEventClass(EventDefinition it, ExecutionFlow flow) {
 		val type = typeSpecifier.targetLanguageName
 		'''
 		class «eventClassName» : public TypedSctEvent<«type»>
 		{
 			public:
-				«eventClassName»(«type» value) :
-					TypedSctEvent(value) {};
+				«eventClassName»(«flow.eventEnumName» name, «type» value) :
+					TypedSctEvent(name, value) {};
 		};
 		'''
 	}
 	
-	def generateNormalEventClass(EventDefinition it) {
+	def generateNormalEventClass(EventDefinition it, ExecutionFlow flow) {
 		'''
 		class «eventClassName» : public SctEvent
 		{
 			public:
-				«eventClassName»(){};
+				«eventClassName»(«flow.eventEnumName» name) : SctEvent(name){};
 		};
 		'''
 	}

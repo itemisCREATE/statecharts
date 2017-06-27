@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.cpp
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtend2.lib.StringConcatenation
+import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -185,20 +186,30 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 				«ENDFOR»
 				
 			«entry.innerClassVisibility»:
-				friend class «scope.execution_flow.module()»;
-				«FOR d : scope.declarations»
-					«d.scopeTypeDeclMember»
-				«ENDFOR»
+				«protectedInnerClassMembers(scope)»
 		};
 	'''
+	
+	protected def CharSequence protectedInnerClassMembers(StatechartScope scope)
+		'''
+			friend class «scope.execution_flow.module()»;
+			«FOR d : scope.declarations»
+				«d.privateFunctionPrototypes»
+				«d.scopeTypeDeclMember»
+			«ENDFOR»
+		'''
+	
 
+	def dispatch privateFunctionPrototypes(Declaration it) {
+		''''''	
+	}
+	
 	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
 		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
 
 	def createOCBInterface(StatechartScope scope) {
 		'''
-			
 			«IF scope.hasOperations»
 				//! Inner class for «scope.simpleName» interface scope operation callbacks.
 				class «scope.interfaceOCBName»
@@ -240,12 +251,12 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		«IF hasHistory»«statesEnumType» historyVector[«historyStatesConst»];«ENDIF»
 		sc_ushort stateConfVectorPosition;
 		
-		«FOR s : scopes.filter(typeof(StatechartScope)).filter[!(it instanceof ImportScope)]»
+		«FOR s : getInterfaces»
 			«s.interfaceName» «s.instance»;
 			«IF s.hasOperations && !entry.useStaticOPC»«s.interfaceOCBName»* «s.OCB_Instance»;«ENDIF»
 		«ENDFOR»
 	'''
-
+	
 	def protected publicFunctionPrototypes(ExecutionFlow it) '''
 		«IStatemachineFunctions»
 		
