@@ -11,5 +11,5 @@ Export-Package: org.yakindu.sct.generator.java,
  org.yakindu.sct.generator.java.features,
  org.yakindu.sct.generator.java.types
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 

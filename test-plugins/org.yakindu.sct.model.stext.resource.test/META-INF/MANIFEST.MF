@@ -4,7 +4,7 @@ Bundle-Name: YAKINDU SText Resource Test
 Bundle-SymbolicName: org.yakindu.sct.model.stext.resource.test
 Bundle-Version: 3.0.0.qualifier
 Fragment-Host: org.yakindu.sct.model.resource
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.junit,
  org.yakindu.sct.test.models,
  org.yakindu.sct.model.stext.ui,

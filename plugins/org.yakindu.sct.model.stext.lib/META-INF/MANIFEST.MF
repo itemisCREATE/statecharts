@@ -7,6 +7,6 @@ Bundle-Activator: org.yakindu.sct.model.stext.lib.STextLibActivator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.sgraph
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.model.stext.lib
