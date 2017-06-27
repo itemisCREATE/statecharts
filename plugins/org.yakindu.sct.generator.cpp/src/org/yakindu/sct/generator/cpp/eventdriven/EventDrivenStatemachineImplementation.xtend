@@ -4,11 +4,15 @@ import org.yakindu.sct.generator.cpp.StatemachineImplementation
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
 class EventDrivenStatemachineImplementation extends StatemachineImplementation {
-	override runCycleFunction(ExecutionFlow it) '''
+	override runCycleFunction(ExecutionFlow it) { 
+	'''
 		void «module»::runCycle()
 		{
-			while(!InternalEventQueue.empty())
+			while(!internalEventQueue.empty())
 			{
+				currentEvent = internalEventQueue.front();
+				internalEventQueue.pop_front();
+				
 				for (stateConfVectorPosition = 0;
 					stateConfVectorPosition < «orthogonalStatesConst»;
 					stateConfVectorPosition++)
@@ -32,4 +36,9 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 			}
 		}
 	'''
+	}
+	
+	override clearInEventsFunction(ExecutionFlow it) {
+		''''''
+	}	
 }
