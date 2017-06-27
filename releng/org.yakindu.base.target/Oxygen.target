@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="Oxygen (SCT)" sequenceNumber="47">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.itemis.xtext.antlr.feature.feature.group" version="2.1.1.v201405091103"/>
+<unit id="de.itemis.xtext.antlr.sdk.feature.group" version="2.1.1.v201405091103"/>
+<repository location="http://download.itemis.com/updates/releases/2.1.1/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="com.google.gson" version="2.2.4.v201311231704"/>
+<unit id="com.google.inject" version="3.0.0.v201312141243"/>
+<unit id="com.google.inject.multibindings" version="3.0.0.v201402270930"/>
+<unit id="com.google.inject.source" version="3.0.0.v201312141243"/>
+<unit id="com.google.inject.multibindings.source" version="3.0.0.v201402270930"/>
+<unit id="org.apache.commons.io" version="2.2.0.v201405211200"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="com.yakindu.products.license.feature.feature.group" version="0.0.0"/>
+<repository location="https://yakindu-builds.itemis.de/updates/product_license/milestone/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="com.yakindu.licmgmt.feature.feature.group" version="2.2.0.201704101159"/>
+<unit id="com.yakindu.licmgmt.ui.feature.feature.group" version="2.2.0.201704101159"/>
+<unit id="com.yakindu.licmgmt.lmx.feature.feature.group" version="4.8.10.201704101159"/>
+<repository location="https://yakindu-builds.itemis.de/updates/licensemanagement/milestone/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.jgit.feature.group" version="4.5.0.201609210915-r"/>
+<repository location="http://download.eclipse.org/egit/updates-4.5/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.platform.sdk" version="4.7.0.I20170612-0950"/>
+<unit id="org.eclipse.pde.source.feature.group" version="3.13.0.v20170612-0950"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.7milestones"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.11.0.201706061437"/>
+<unit id="org.eclipse.epp.logging.aeri.feature.feature.group" version="2.0.5.v20170602-0904"/>
+<unit id="org.eclipse.jdt.feature.group" version="3.13.0.v20170531-2000"/>
+<unit id="org.eclipse.emf.compare.diagram.papyrus.feature.group" version="3.3.1.201706061501"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.12.0.v20170519-1412"/>
+<unit id="org.eclipse.uml2.sdk.feature.group" version="5.3.0.v20170605-1616"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.13.0.v20170504-0807"/>
+<unit id="org.eclipse.recommenders.news.rcp.feature.feature.group" version="2.4.9.v20170526-1135"/>
+<unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="3.3.1.201706061501"/>
+<unit id="org.eclipse.cdt.sdk.feature.group" version="9.3.0.201706051601"/>
+<unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.11.0.201706061354"/>
+<repository location="http://download.eclipse.org/releases/oxygen/"/>
+</location>
+</locations>
+</target>
