@@ -21,78 +21,46 @@ import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
 import static org.junit.Assert.assertTrue;
 /**
- * Unit TestCase for Choice
+ * Unit TestCase for ExitState
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class ChoiceTest extends AbstractExecutionFlowTest {
+public class ExitState extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("Choice.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("ExitState.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void elseChoiceUsingNonDefaultTransition() throws Exception {
-		initForEventE(true);
-		assertTrue(isStateActive("C"));
-	}
-	@Test
-	public void elseChoiceUsingDefaultTransition() throws Exception {
-		initForEventE(false);
-		assertTrue(isStateActive("B"));
-	}
-	@Test
-	public void defaultChoiceUsingNonDefaultTransition() throws Exception {
-		initForEventG(true);
-		assertTrue(isStateActive("C"));
-	}
-	@Test
-	public void defaultChoiceUsingDefaultTransition() throws Exception {
-		initForEventG(false);
-		assertTrue(isStateActive("B"));
-	}
-	@Test
-	public void uncheckedChoiceUsingNonDefaultTransition() throws Exception {
-		initForEventF(true);
-		assertTrue(isStateActive("C"));
-	}
-	@Test
-	public void uncheckedChoiceUsingDefaultTransition() throws Exception {
-		initForEventF(false);
-		assertTrue(isStateActive("B"));
-	}
-	@Test
-	public void alwaysTrueTransitionInChoice() throws Exception {
-		initForEventH(true);
-		assertTrue(isStateActive("C"));
-	}
-	public void initForEventE(boolean valueForC) throws Exception {
+	public void defaultExit() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
-		setBoolean("c", valueForC);
 		raiseEvent("e");
 		interpreter.runCycle();
+		assertTrue(isStateActive("E"));
 	}
-	public void initForEventF(boolean valueForC) throws Exception {
+	@Test
+	public void namedExitThroughNamedTransition() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
-		setBoolean("c", valueForC);
 		raiseEvent("f");
 		interpreter.runCycle();
+		assertTrue(isStateActive("F"));
 	}
-	public void initForEventG(boolean valueForC) throws Exception {
+	@Test
+	public void namedExitThroughDefaultTransition() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
-		setBoolean("c", valueForC);
 		raiseEvent("g");
 		interpreter.runCycle();
+		assertTrue(isStateActive("E"));
 	}
-	public void initForEventH(boolean valueForC) throws Exception {
+	@Test
+	public void remainInA() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
-		setBoolean("c", valueForC);
-		raiseEvent("h");
 		interpreter.runCycle();
+		assertTrue(isStateActive("A"));
 	}
 }
