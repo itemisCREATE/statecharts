@@ -38,6 +38,7 @@ class StatemachineImplementation implements IContentTemplate {
 	@Inject protected extension INamingService
 	@Inject protected extension ExpressionCode
 	@Inject protected extension StateVectorExtensions
+	@Inject protected extension EventCode
 	
 	protected GeneratorEntry entry
 	
@@ -291,76 +292,20 @@ class StatemachineImplementation implements IContentTemplate {
 			{
 				return &«scope.instance»;
 			}
-			
 			«ENDIF»
-			«FOR event : scope.incomingEvents»
-				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams»)
+			«generateEvents(scope)»
+			«generateVariables(scope)»
+			«IF scope.hasOperations && !entry.useStaticOPC»
+				«scope.OCB_InterfaceSetterDeclaration(true)»
 				{
-					«IF event.hasValue»
-					«event.localValueAccess» = value;
-					«ENDIF»
-					«event.localAccess» = true;
+					«scope.OCB_Instance» = operationCallback;
 				}
-				
-				«IF scope.defaultInterface»
-					void «module»::«event.asRaiser»(«event.valueParams»)
-					{
-						«scope.instance».«event.asRaiser»(«IF event.hasValue»value«ENDIF»);
-					}
-					
-				«ENDIF»
-			«ENDFOR»
-			«FOR event : scope.outgoingEvents»
-				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() const
-				{
-					return «event.localAccess»;
-				}
-				
-				«IF scope.defaultInterface»
-					sc_boolean «module»::«event.asRaised»() const
-					{
-						return «scope.instance».«event.asRaised»();
-					}
-					
-				«ENDIF»
-				«IF event.hasValue»
-					«event.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() const
-					{
-						return «event.localValueAccess»;
-					}
-					
-					«IF scope.defaultInterface»
-						«event.typeSpecifier.targetLanguageName» «module»::«event.asGetter»() const
-						{
-							return «scope.instance».«event.asGetter»();
-						}
-						
-					«ENDIF»
-				«ENDIF»
-			«ENDFOR»
-			
-			«FOR event : scope.localEvents»
-				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams»)
-				{
-					«IF event.hasValue»
-					«event.localValueAccess» = value;
-					«ENDIF»
-					«event.localAccess» = true;
-				}
-				
-				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() const
-				{
-					return «event.localAccess»;
-				}
-				
-				«IF event.hasValue» 
-					«event.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() const
-					{
-						return «event.localValueAccess»;
-					}
-					
-				«ENDIF»
-			«ENDFOR»
+			«ENDIF»
+		«ENDFOR»
+	'''
+	
+	def generateVariables(ExecutionFlow it, StatechartScope scope)
+		'''
 			«FOR variable : scope.variableDefinitions»
 				«IF variable.const»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() const
 				{
@@ -389,14 +334,7 @@ class StatemachineImplementation implements IContentTemplate {
 					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
-			«IF scope.hasOperations && !entry.useStaticOPC»
-				«scope.OCB_InterfaceSetterDeclaration(true)»
-				{
-					«scope.OCB_Instance» = operationCallback;
-				}
-			«ENDIF»
-		«ENDFOR»
-	'''
+		'''
 	
 	/* ===================================================================================
 	 * Handling implementation of internal functions
