@@ -198,7 +198,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 		model = super.parseExpression("myOperation2('','')", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
-		validationResult.assertErrorContains("Incompatible types integer and string.");
+		validationResult.assertErrorContains("Incompatible types string and integer.");
 
 		scope = "internal: operation myOperation(param1... : integer, param2...: integer)";
 		model = super.parseExpression(scope, InternalScope.class.getSimpleName());
