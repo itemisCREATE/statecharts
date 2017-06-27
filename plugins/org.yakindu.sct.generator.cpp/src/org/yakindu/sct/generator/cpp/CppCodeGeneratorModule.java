@@ -23,6 +23,7 @@ import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.IGeneratorModule;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
+import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenEventCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenExpressionCode;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineHeader;
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineImplementation;
@@ -66,12 +67,12 @@ public class CppCodeGeneratorModule implements IGeneratorModule {
 	protected void bindEventDrivenClasses(GeneratorEntry entry, Binder binder) {
 		Statechart statechart = (Statechart) entry.getElementRef();
 		Annotation eventDrivenAnnotation = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
-		boolean isEventDriven = eventDrivenAnnotation != null;
 		
-		if(isEventDriven) {
+		if(eventDrivenAnnotation != null) {
 			binder.bind(StatemachineHeader.class).to(EventDrivenStatemachineHeader.class);
 			binder.bind(StatemachineImplementation.class).to(EventDrivenStatemachineImplementation.class);
 			binder.bind(ExpressionCode.class).to(EventDrivenExpressionCode.class);
+			binder.bind(EventCode.class).to(EventDrivenEventCode.class);
 		}
 	}
 
