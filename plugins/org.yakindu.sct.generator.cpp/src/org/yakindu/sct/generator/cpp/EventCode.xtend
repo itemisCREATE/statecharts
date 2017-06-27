@@ -90,7 +90,7 @@ class EventCode {
 	
 	protected def CharSequence generateInterfaceEventRaiser(ExecutionFlow it, EventDefinition event, StatechartScope scope)
 		'''
-			void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams»)
+			void «module»::«scope.interfaceName»::internal_«event.asRaiser»(«event.valueParams»)
 			{
 				«IF event.hasValue»
 				«event.localValueAccess» = value;

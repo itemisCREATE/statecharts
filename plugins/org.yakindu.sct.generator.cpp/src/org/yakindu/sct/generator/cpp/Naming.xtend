@@ -200,7 +200,7 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 			''
 	}
 	
-	def eventEnumMemberName(EventDefinition it) {
+	def eventEnumMemberName(Event it) {
 		'''«scope.interfaceName»_«name.asIdentifier»'''
 	}
 	

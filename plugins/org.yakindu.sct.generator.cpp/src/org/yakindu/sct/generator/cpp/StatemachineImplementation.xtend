@@ -82,7 +82,14 @@ class StatemachineImplementation implements IContentTemplate {
 		«interfaceFunctions»
 		
 		«functionImplementations»
+		
+		«additionalFunctions(entry)»
 	'''
+	}
+	
+	def additionalFunctions(ExecutionFlow it, GeneratorEntry entry) {
+		/* Hook for child classes */
+		''''''
 	}
 	
 	def constructorDefinition(ExecutionFlow it) '''
