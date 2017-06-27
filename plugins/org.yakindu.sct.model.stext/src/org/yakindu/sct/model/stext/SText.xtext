@@ -68,7 +68,7 @@ enum Direction returns types::Direction:
 
 VariableDefinition:
 	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')? & (external?='external')?) name=XID ':' typeSpecifier=TypeSpecifier
-	('=' initialValue=Expression)?; /* ---- operation definition ---- */ 
+	('=' initialValue=Expression)?;  
 	
 TypeAliasDefinition:
 	{TypeAliasDefinition} 'alias' name=XID ':' typeSpecifier=TypeSpecifier;
