@@ -27,7 +27,7 @@ import org.yakindu.sct.model.sgraph.ui.validation.ISctIssueCreator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerType;
 
-import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -51,7 +51,7 @@ public class DefaultResourceChangeToIssueProcessor implements IResourceChangeToI
 		if (deltaForFile == null) {
 			return null;
 		}
-		currentIssues = ArrayListMultimap.create(visibleIssues);
+		currentIssues = HashMultimap.create(visibleIssues);
 		changedIssuesElementIDs = Sets.newHashSet();
 		
 		if ((IResourceDelta.CHANGED == deltaForFile.getKind()) && ((deltaForFile.getFlags() & IResourceDelta.MARKERS) != 0)) {
