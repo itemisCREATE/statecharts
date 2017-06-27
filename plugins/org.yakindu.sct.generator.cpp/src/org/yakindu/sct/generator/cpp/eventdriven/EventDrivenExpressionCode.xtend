@@ -6,11 +6,7 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 class EventDrivenExpressionCode extends ExpressionCode {
 	override dispatch CharSequence code(EventRaisingExpression it) {
 		'''
-		«IF value !== null»
-			InternalEventQueue.push_back(«event.definition.event.eventClassName»(«value.code»))
-		«ELSE»
-			InternalEventQueue.push_back(«event.definition.event.eventClassName»)
-		«ENDIF»
-		'''
+		«IF value !== null»internalEventQueue.push_back(new «event.definition.event.eventClassName»(«value.code»))«ELSE»
+			internalEventQueue.push_back(new «event.definition.event.eventClassName»)«ENDIF»'''
 	}
 }

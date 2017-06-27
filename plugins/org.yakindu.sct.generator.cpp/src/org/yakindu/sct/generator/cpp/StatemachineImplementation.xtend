@@ -88,21 +88,25 @@ class StatemachineImplementation implements IContentTemplate {
 	def constructorDefinition(ExecutionFlow it) '''
 		«module»::«module»()
 		{
-			
-			«scopes.filter(typeof(StatechartScope)).filter[hasOperations && !entry.useStaticOPC].map['''«OCB_Instance» = null;'''].join('\n')»
-			«IF hasHistory»
-				
-				for (int i = 0; i < «historyStatesConst»; ++i)
-					historyVector[i] = «null_state»;
-			«ENDIF»
-			
-			stateConfVectorPosition = 0;
-			
-			«IF timed»
-				«timerInstance» = null;
-			«ENDIF»
+			«constructorBody(it)»
 		}
 	'''
+	
+	protected def CharSequence constructorBody(ExecutionFlow it)
+		'''
+		«scopes.filter(typeof(StatechartScope)).filter[hasOperations && !entry.useStaticOPC].map['''«OCB_Instance» = null;'''].join('\n')»
+		«IF hasHistory»
+			for (int i = 0; i < «historyStatesConst»; ++i)
+				historyVector[i] = «null_state»;
+				
+		«ENDIF»
+		stateConfVectorPosition = 0;
+		
+		«IF timed»
+			«timerInstance» = null;
+		«ENDIF»
+		'''
+	
 	
 	def destructorDefinition(ExecutionFlow it) '''
 		«module»::~«module»()
