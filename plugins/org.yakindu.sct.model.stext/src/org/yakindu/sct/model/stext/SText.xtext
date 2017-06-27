@@ -6,10 +6,10 @@ import "http://www.yakindu.org/sct/sgraph/2.0.0" as sgraph
 import "http://www.yakindu.org/base/types/2.0.0" as types
 import "http://www.yakindu.org/base/base/2.0.0" as base
 import "http://www.yakindu.org/base/expressions/Expressions" as exp
-/* ---- root rules ----
-These root rules are not relevant for the grammar integration in the statechart. They just integrate the different start rules consistently 
-into a single grammar. 
-*/
+// ---- root rules ----
+//These root rules are not relevant for the grammar integration in the statechart. They just integrate the different start rules consistently 
+//into a single grammar. 
+//
 Root:
 	(roots+=DefRoot)*;
 
@@ -24,9 +24,9 @@ StateRoot:
 
 TransitionRoot:
 	'@@transition@@' def=TransitionSpecification;
-/* ---- start rules ----
-Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
-*/
+// ---- start rules ----
+// Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
+//
 
 StatechartSpecification:
 	{StatechartSpecification} ('namespace' namespace=FQN)?
