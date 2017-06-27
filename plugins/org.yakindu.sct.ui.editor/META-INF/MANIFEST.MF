@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Editor
 Bundle-SymbolicName: org.yakindu.sct.ui.editor;singleton:=true
-Bundle-Version: 2.9.3.qualifier
+Bundle-Version: 3.0.0.qualifier
 Bundle-Activator: org.yakindu.sct.ui.editor.DiagramActivator
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
@@ -48,7 +48,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.google.guava,
  org.yakindu.sct.domain
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.ui.editor,
  org.yakindu.sct.ui.editor.assistent,
  org.yakindu.sct.ui.editor.clipboardsupport,

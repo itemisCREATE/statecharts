@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Simulation Execution UI
 Bundle-SymbolicName: org.yakindu.sct.simulation.ui.sexec;singleton:=true
-Bundle-Version: 2.9.3.qualifier
+Bundle-Version: 3.0.0.qualifier
 Bundle-Activator: org.yakindu.sct.simulation.ui.sexec.SExecUiActivator
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.debug.core,
@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.commons,
  org.eclipse.ui.ide,
  org.eclipse.ui.console
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.simulation.ui.sexec.launch,
  org.yakindu.sct.simulation.ui.sexec.launch.tabs

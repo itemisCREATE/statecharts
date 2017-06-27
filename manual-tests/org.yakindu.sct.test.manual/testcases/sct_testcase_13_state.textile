@@ -1,4 +1,4 @@
-h1(#Test2). Yakindu SCT Testcase 13 - State
+h1(#Test2). Yakindu SCT Testcase 13 - Smart Editing
 
 |_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
 | 13.1 | State templates available | Select a state. Press *[Ctrl+Space]*. | The following proposals are shown in a drop-down menu:<p>&emsp;@Add subregion@</br>&emsp;@Add outgoing state@</p><p>For each keyword proposal a corresponding documentation popup window opens when the respective keyword is clicked.</p><p>A completion window should appear with the following entries:</p> | %{color:red}open% |
