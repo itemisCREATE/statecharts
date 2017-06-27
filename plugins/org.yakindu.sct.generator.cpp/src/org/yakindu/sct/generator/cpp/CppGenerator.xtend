@@ -16,8 +16,6 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfiguration
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
-import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineHeader
-import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineImplementation
 import org.yakindu.sct.generator.cpp.eventdriven.StatechartEvents
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -69,7 +67,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 		}
 
 		if (flow.isEventDriven) {
-			locations.configure(flow.name.toFirstUpper + "_Events.h", entry.sourceOutput, statechartEvents)
+			locations.configure(flow.eventClasses.h, entry.sourceOutput, statechartEvents)
 		}
 		locations.configure(flow.module.h, entry.headerOutput, statemachineHeaderContent)
 		locations.configure(flow.module.cpp, entry.sourceOutput, statemachineSourceContent)

@@ -59,6 +59,10 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	def timerInterface() {
 		'TimerInterface'
 	}
+	
+	def eventClasses(ExecutionFlow it) {
+		'''«name.toFirstUpper»_Events'''.toString
+	}
 
 	def timerInstance() {
 		'timer'
@@ -194,5 +198,17 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 			typeSpecifier.targetLanguageName + ' value'
 		else
 			''
+	}
+	
+	def eventEnumMemberName(EventDefinition it) {
+		'''«scope.interfaceName»_«name.asIdentifier»'''
+	}
+	
+	def eventEnumName(ExecutionFlow it) {
+		'''«module»EventName'''
+	}
+	
+	def eventClassName(Event it) {
+		'''SctEvent_«flow.name.toFirstUpper»_«scope.interfaceName»_«it.name.asIdentifier»'''
 	}
 }

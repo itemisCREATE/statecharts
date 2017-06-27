@@ -38,6 +38,18 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 	'''
 	}
 	
+	override initFunction(ExecutionFlow it) {
+		val init = super.initFunction(it).toString
+		
+		return init.replace("clearInEvents();\n", "")
+	}
+	
+	override constructorBody(ExecutionFlow it)
+		'''
+		«super.constructorBody(it)»
+		
+		'''
+	
 	override clearInEventsFunction(ExecutionFlow it) {
 		''''''
 	}	
