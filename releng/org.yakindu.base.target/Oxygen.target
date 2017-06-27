@@ -16,16 +16,6 @@
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="com.yakindu.products.license.feature.feature.group" version="0.0.0"/>
-<repository location="https://yakindu-builds.itemis.de/updates/product_license/milestone/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="com.yakindu.licmgmt.feature.feature.group" version="2.2.0.201704101159"/>
-<unit id="com.yakindu.licmgmt.ui.feature.feature.group" version="2.2.0.201704101159"/>
-<unit id="com.yakindu.licmgmt.lmx.feature.feature.group" version="4.8.10.201704101159"/>
-<repository location="https://yakindu-builds.itemis.de/updates/licensemanagement/milestone/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jgit.feature.group" version="4.5.0.201609210915-r"/>
 <repository location="http://download.eclipse.org/egit/updates-4.5/"/>
 </location>
