@@ -9,7 +9,8 @@
 */
 package org.yakindu.sct.model.stext.scoping;
 
-import java.util.Collections;
+import static java.util.Collections.singletonList;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -104,15 +105,20 @@ public class StextImportAwareScopeProvider extends ImportedNamespaceAwareLocalSc
 		if (!namespaceResolvers.isEmpty()) {
 			if (isRelativeImport() && name != null && !name.isEmpty()) {
 				ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase);
-				result = createImportScope(result, Collections.singletonList(localNormalizer), allDescriptions,
+				result = createImportScope(result, singletonList(localNormalizer), allDescriptions,
 						reference.getEReferenceType(), isIgnoreCase(reference));
 			}
 			result = createImportScope(result, namespaceResolvers, null, reference.getEReferenceType(),
 					isIgnoreCase(reference));
 		}
-		// We don't want to add an implicit local ImportNormalizer here...
+		if (name != null) {
+			ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase);
+			result = createImportScope(result, singletonList(localNormalizer), allDescriptions,
+					reference.getEReferenceType(), isIgnoreCase(reference));
+		}
 		return result;
 	}
+
 
 	@Override
 	protected String getImportedNamespace(EObject object) {
