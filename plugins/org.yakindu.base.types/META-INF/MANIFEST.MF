@@ -6,7 +6,7 @@ Bundle-Version: 3.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: statecharts.org
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.base.base,
  org.yakindu.base.base.impl,
  org.yakindu.base.base.util,

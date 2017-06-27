@@ -13,6 +13,6 @@ Require-Bundle: org.yakindu.sct.model.sgraph,
  org.yakindu.sct.test.models,
  org.yakindu.sct.domain.generic.resource
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: statecharts.org
 Export-Package: org.yakindu.sct.model.sgraph.test.util

@@ -10,6 +10,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.sexec,
  org.yakindu.sct.generator.core,
  org.yakindu.sct.model.stext
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.domain.generic
