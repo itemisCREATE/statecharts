@@ -307,24 +307,22 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 				parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping,
 						acceptor);
 				assertAssignable(parameterType, argumentType,
-						String.format(INCOMPATIBLE_TYPES, parameterType, argumentType));
+						String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
 			}
 		}
 		if (operation.isVariadic() && args.size() - 1 >= operation.getVarArgIndex()) {
 			Parameter parameter = operation.getParameters().get(operation.getVarArgIndex());
 			List<Expression> varArgs = args.subList(operation.getVarArgIndex(), args.size() - 1);
+			InferenceResult parameterType = inferTypeDispatch(parameter);
 			for (Expression expression : varArgs) {
-				// TODO: handle op(T...)
-				assertArgumentIsCompatible(parameter, expression);
+				parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping,
+						acceptor);
+				InferenceResult argumentType = inferTypeDispatch(expression);
+				assertAssignable(parameterType, argumentType,
+						String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
 			}
 		}
 		return typeParameterMapping;
-	}
-
-	protected void assertArgumentIsCompatible(Parameter parameter, Expression argument) {
-		InferenceResult result1 = inferTypeDispatch(parameter);
-		InferenceResult result2 = inferTypeDispatch(argument);
-		assertCompatible(result2, result1, String.format(INCOMPATIBLE_TYPES, result2, result1));
 	}
 
 	public InferenceResult doInfer(ParenthesizedExpression e) {
