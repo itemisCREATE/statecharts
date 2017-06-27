@@ -18,12 +18,13 @@ import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineHeader
 import org.yakindu.sct.generator.cpp.eventdriven.EventDrivenStatemachineImplementation
+import org.yakindu.sct.generator.cpp.eventdriven.StatechartEvents
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.* 
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*
 
 /**
  * This is the CPP code generators main class. 
@@ -38,8 +39,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineInterface statemachineInterfaceContent
 	@Inject extension StatemachineHeader statemachineHeaderContent
 	@Inject extension StatemachineImplementation statemachineSourceContent
-	@Inject extension EventDrivenStatemachineHeader eventDrivenStatemachineHeaderContent
-	@Inject extension EventDrivenStatemachineImplementation eventDrivenStatemachineSourceContent
+	@Inject extension StatechartEvents statechartEvents
 	@Inject extension Navigation
 	@Inject extension Naming
 	@Inject extension ICoreLibraryHelper
@@ -69,18 +69,10 @@ class CppGenerator implements IExecutionFlowGenerator {
 		}
 
 		if (flow.isEventDriven) {
-			locations.configure(flow.module.h, entry.headerOutput, eventDrivenStatemachineHeaderContent)
-			locations.configure(flow.module.cpp, entry.sourceOutput, eventDrivenStatemachineSourceContent)
-		} else if (flow.isCycleBased) {
-			locations.configure(flow.module.h, entry.headerOutput, statemachineHeaderContent)
-			locations.configure(flow.module.cpp, entry.sourceOutput, statemachineSourceContent)
+			locations.configure(flow.name.toFirstUpper + "_Events.h", entry.sourceOutput, statechartEvents)
 		}
-	}
-
-	def isCycleBased(ExecutionFlow it) { 
-		val statechart = sourceElement as Statechart
-		val cycleBasedAnnotation = statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION)
-		return cycleBasedAnnotation !== null
+		locations.configure(flow.module.h, entry.headerOutput, statemachineHeaderContent)
+		locations.configure(flow.module.cpp, entry.sourceOutput, statemachineSourceContent)
 	}
 
 	def isEventDriven(ExecutionFlow it) {
