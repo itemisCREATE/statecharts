@@ -60,9 +60,6 @@ InternalScopeDeclaration returns types::Declaration:
 ImportScope:
 	 {ImportScope} 'import' ':' (imports+=QID | imports+=STRING)*;
 
-QID:
-	ID ('.' ID)*;
-
 EventDefinition:
 	(direction=Direction)? 'event' name=XID (':' typeSpecifier=TypeSpecifier)?;
 
