@@ -4,7 +4,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/AllTests"
 		}
 
 		feature JUnitWrapper {
@@ -29,7 +29,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/AlwaysOncycle"
 		}
 
 		feature JUnitWrapper {
@@ -46,6 +46,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 
 	}
@@ -54,7 +58,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/AssignmentAsExpression"
 		}
 
 		feature JUnitWrapper {
@@ -71,6 +75,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -78,7 +86,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/BitExpressions"
 		}
 
 		feature JUnitWrapper {
@@ -95,6 +103,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -102,7 +114,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/BooleanExpressions"
 		}
 
 		feature JUnitWrapper {
@@ -119,6 +131,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -126,7 +142,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/CastExpressions"
 		}
 
 		feature JUnitWrapper {
@@ -143,6 +159,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -150,7 +170,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/Choice"
 		}
 
 		feature JUnitWrapper {
@@ -167,6 +187,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -174,7 +198,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/CKeywords"
 		}
 
 		feature JUnitWrapper {
@@ -191,6 +215,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -198,7 +226,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/ConditionalExpression"
 		}
 
 		feature JUnitWrapper {
@@ -215,6 +243,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -222,7 +254,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/ConstantsTests"
 		}
 
 		feature JUnitWrapper {
@@ -239,6 +271,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 	
@@ -246,7 +282,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/ConstOnlyInternalScope"
 		}
 
 		feature JUnitWrapper {
@@ -263,6 +299,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 
 	}
@@ -271,7 +311,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/ConstOnlyDefaultScope"
 		}
 
 		feature JUnitWrapper {
@@ -288,6 +328,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 
 	}
@@ -297,7 +341,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/ConstOnlyNamedScope"
 		}
 
 		feature JUnitWrapper {
@@ -314,6 +358,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 
 	}
@@ -322,7 +370,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/Declarations"
 		}
 
 		feature JUnitWrapper {
@@ -339,6 +387,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -346,7 +398,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/DeepEntry"
 		}
 
 		feature JUnitWrapper {
@@ -363,6 +415,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -370,7 +426,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/DeepHistory"
 		}
 
 		feature JUnitWrapper {
@@ -387,6 +443,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -394,7 +454,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/DynamicChoice"
 		}
 
 		feature JUnitWrapper {
@@ -411,6 +471,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -418,7 +482,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/EmptyTransition"
 		}
 
 		feature JUnitWrapper {
@@ -435,6 +499,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -442,7 +510,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/EnterState"
 		}
 
 		feature JUnitWrapper {
@@ -459,6 +527,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -466,7 +538,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/EntryChoice"
 		}
 
 		feature JUnitWrapper {
@@ -483,6 +555,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 	}
 
@@ -490,7 +566,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/EntryExitSelfTransition"
 		}
 
 		feature JUnitWrapper {
@@ -508,13 +584,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test EntryReactionAction {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/EntryReactionAction"
 		}
 
 		feature JUnitWrapper {
@@ -531,6 +612,10 @@ GeneratorModel for sctunit::c {
 			inlineEnterRegion = false
 			inlineExitRegion = false
 			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = true
 		}
 
 	}
@@ -539,7 +624,7 @@ GeneratorModel for sctunit::c {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/ExitOnSelfTransition"
 		}
 
 		feature JUnitWrapper {
@@ -557,13 +642,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test ExitState {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/ExitState"
 		}
 
 		feature JUnitWrapper {
@@ -581,13 +671,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test FeatureCalls {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/FeatureCalls"
 		}
 
 		feature JUnitWrapper {
@@ -605,13 +700,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test FinalState {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/FinalState"
 		}
 
 		feature JUnitWrapper {
@@ -629,13 +729,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test Guard {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/Guard"
 		}
 
 		feature JUnitWrapper {
@@ -653,13 +758,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test GuardedEntry {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/GuardedEntry"
 		}
 
 		feature JUnitWrapper {
@@ -677,13 +787,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test GuardedExit {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/GuardedExit"
 		}
 
 		feature JUnitWrapper {
@@ -701,13 +816,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test HistoryWithExitPoint {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/HistoryWithExitPoint"
 		}
 
 		feature JUnitWrapper {
@@ -725,13 +845,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test HistoryWithoutInitialStep {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/HistoryWithoutInitialStep"
 		}
 
 		feature JUnitWrapper {
@@ -749,13 +874,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test InEventLifeCycle {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/InEventLifeCycle"
 		}
 
 		feature JUnitWrapper {
@@ -773,13 +903,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test IntegerExpressions {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/IntegerExpressions"
 		}
 
 		feature JUnitWrapper {
@@ -797,13 +932,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test InternalEventLifeCycle {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/InternalEventLifeCycle"
 		}
 
 		feature JUnitWrapper {
@@ -821,13 +961,17 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
-
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 	test LocalReactions {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/LocalReactions"
 		}
 
 		feature JUnitWrapper {
@@ -845,13 +989,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test LogicalAndTests {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/LogicalAndTests"
 		}
 
 		feature JUnitWrapper {
@@ -869,13 +1018,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test LogicalOrTests {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/LogicalOrTests"
 		}
 
 		feature JUnitWrapper {
@@ -893,12 +1047,17 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 	
-	test Operations {
+	test OperationsTest {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/OperationsTest"
 		}
 
 		feature JUnitWrapper {
@@ -916,13 +1075,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test NamedInterfaceAccess {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/NamedInterfaceAccess"
 		}
 
 		feature JUnitWrapper {
@@ -940,13 +1104,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test NullCheck {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/NullCheck"
 		}
 
 		feature JUnitWrapper {
@@ -964,13 +1133,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test OutEventLifeCycle {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/OutEventLifeCycle"
 		}
 
 		feature JUnitWrapper {
@@ -988,13 +1162,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test Parenthesis {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/Parenthesis"
 		}
 
 		feature JUnitWrapper {
@@ -1012,13 +1191,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test PriorityValues {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/PriorityValues"
 		}
 
 		feature JUnitWrapper {
@@ -1036,13 +1220,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test ReadOnlyVariable {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/ReadOnlyVariable"
 		}
 
 		feature JUnitWrapper {
@@ -1060,13 +1249,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test RaiseEvent {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/RaiseEvent"
 		}
 
 		feature JUnitWrapper {
@@ -1084,13 +1278,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test SameNameDifferentRegion {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/SameNameDifferentRegion"
 		}
 
 		feature JUnitWrapper {
@@ -1108,13 +1307,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test ShallowHistory {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/ShallowHistory"
 		}
 
 		feature JUnitWrapper {
@@ -1132,13 +1336,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test ShallowHistoryWithDeepEntry {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/ShallowHistoryWithDeepEntry"
 		}
 
 		feature JUnitWrapper {
@@ -1156,13 +1365,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test SimpleEvent {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/SimpleEvent"
 		}
 
 		feature JUnitWrapper {
@@ -1180,13 +1394,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test SimpleHierachy {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/SimpleHierachy"
 		}
 
 		feature JUnitWrapper {
@@ -1204,13 +1423,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test StatechartLocalReactions {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/StatechartLocalReactions"
 		}
 
 		feature JUnitWrapper {
@@ -1228,13 +1452,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test StatechartActive {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/StatechartActive"
 		}
 
 		feature JUnitWrapper {
@@ -1252,13 +1481,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test StateIsActive {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/StateIsActive"
 		}
 
 		feature JUnitWrapper {
@@ -1276,13 +1510,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test StaticChoice {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/StaticChoice"
 		}
 
 		feature JUnitWrapper {
@@ -1300,13 +1539,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test STextKeywordsInStatesAndRegions {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/STextKeywordsInStatesAndRegions"
 		}
 
 		feature JUnitWrapper {
@@ -1324,13 +1568,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test StringExpressions {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/StringExpressions"
 		}
 
 		feature JUnitWrapper {
@@ -1353,13 +1602,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test SyncFork {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/SyncFork"
 		}
 
 		feature JUnitWrapper {
@@ -1377,13 +1631,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test SyncJoin {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/SyncJoin"
 		}
 
 		feature JUnitWrapper {
@@ -1401,13 +1660,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test TimedTransitions {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/TimedTransitions"
 		}
 
 		feature JUnitWrapper {
@@ -1425,13 +1689,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test TransitionWithoutCondition {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/TransitionWithoutCondition"
 		}
 
 		feature JUnitWrapper {
@@ -1449,13 +1718,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test TriggerExpressionPrecedence {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/TriggerExpressionPrecedence"
 		}
 
 		feature JUnitWrapper {
@@ -1473,13 +1747,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 	
 	test TriggerGuardExpressions {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/TriggerGuardExpressions"
 		}
 
 		feature JUnitWrapper {
@@ -1497,13 +1776,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test ValuedEvents {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/ValuedEvents"
 		}
 
 		feature JUnitWrapper {
@@ -1521,13 +1805,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test StatemachineKeywords {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/StatemachineKeywords"
 		}
 
 		feature JUnitWrapper {
@@ -1545,13 +1834,18 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 
 	test TypeAlias {
 
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
-			targetFolder = "test-gen"
+			targetFolder = "gtests/TypeAlias"
 		}
 
 		feature JUnitWrapper {
@@ -1569,5 +1863,10 @@ GeneratorModel for sctunit::c {
 			inlineExitRegion = false
 			inlineEntries = false
 		}
+		
+		feature SGenModel{
+			GenerateSGen = true
+		}
+		
 	}
 }

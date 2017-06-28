@@ -59,15 +59,14 @@ void conditionalExpressions_exit(ConditionalExpressions* handle)
 
 sc_boolean conditionalExpressions_isActive(const ConditionalExpressions* handle)
 {
-	sc_boolean result;
-	if (handle->stateConfVector[0] != ConditionalExpressions_last_state)
+	sc_boolean result = bool_false;
+	int i;
+	
+	for(i = 0; i < CONDITIONALEXPRESSIONS_MAX_ORTHOGONAL_STATES; i++)
 	{
-		result =  bool_true;
+		result = result || handle->stateConfVector[i] != ConditionalExpressions_last_state;
 	}
-	else
-	{
-		result = bool_false;
-	}
+	
 	return result;
 }
 
@@ -125,11 +124,11 @@ sc_boolean conditionalExpressions_isStateActive(const ConditionalExpressions* ha
 	switch (state)
 	{
 		case ConditionalExpressions_main_region_A :
-			result = (sc_boolean) (handle->stateConfVector[0] == ConditionalExpressions_main_region_A
+			result = (sc_boolean) (handle->stateConfVector[SCVI_CONDITIONALEXPRESSIONS_MAIN_REGION_A] == ConditionalExpressions_main_region_A
 			);
 			break;
 		case ConditionalExpressions_main_region_B :
-			result = (sc_boolean) (handle->stateConfVector[0] == ConditionalExpressions_main_region_B
+			result = (sc_boolean) (handle->stateConfVector[SCVI_CONDITIONALEXPRESSIONS_MAIN_REGION_B] == ConditionalExpressions_main_region_B
 			);
 			break;
 		default:

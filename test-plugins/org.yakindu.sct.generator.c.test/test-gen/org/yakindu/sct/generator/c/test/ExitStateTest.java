@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/ExitStateTest/ExitStateTest.cc", program = "gtests/ExitStateTest/ExitState", model = "testmodels/SCTUnit/ExitState.sct" )
+@GTest(sourceFile = "gtests/ExitState/ExitStateTest.cc", program = "gtests/ExitState/ExitState", model = "testmodels/SCTUnit/ExitState.sct" )
 @RunWith(GTestRunner.class)
 public class ExitStateTest {
 

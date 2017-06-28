@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/TimedTransitionsTest/TimedTransitionsTest.cc", program = "gtests/TimedTransitionsTest/TimedTransitions", model = "testmodels/SCTUnit/TimedTransitions.sct" )
+@GTest(sourceFile = "gtests/TimedTransitions/TimedTransitionsTest.cc", program = "gtests/TimedTransitions/TimedTransitions", model = "testmodels/SCTUnit/TimedTransitions.sct" )
 @RunWith(GTestRunner.class)
 public class TimedTransitionsTest {
 

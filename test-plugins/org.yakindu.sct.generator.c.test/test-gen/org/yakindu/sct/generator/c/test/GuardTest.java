@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/GuardTest/GuardTest.cc", program = "gtests/GuardTest/Guard", model = "testmodels/SCTUnit/Guard.sct" )
+@GTest(sourceFile = "gtests/Guard/GuardTest.cc", program = "gtests/Guard/Guard", model = "testmodels/SCTUnit/Guard.sct" )
 @RunWith(GTestRunner.class)
 public class GuardTest {
 

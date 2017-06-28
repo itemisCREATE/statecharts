@@ -11,24 +11,24 @@
 #include "gtest/gtest.h"
 #include "ConditionalExpressions.h"
 
-ConditionalExpressions handle;
+static ConditionalExpressions statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
-		conditionalExpressions_init(&handle);
+		conditionalExpressions_init(&statechart);
 	}
 };
 
 
 TEST_F(StatemachineTest, ConditionalExpressionTest) {					
-	conditionalExpressions_enter(&handle);
-	EXPECT_TRUE(conditionalExpressions_isStateActive(&handle, ConditionalExpressions_main_region_A));
-	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&handle)== 1l);
-	conditionalExpressionsIface_raise_e(&handle);
-	conditionalExpressions_runCycle(&handle);
-	EXPECT_TRUE(conditionalExpressions_isStateActive(&handle, ConditionalExpressions_main_region_B));
-	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&handle)== 2l);
+	conditionalExpressions_enter(&statechart);
+	EXPECT_TRUE(conditionalExpressions_isStateActive(&statechart, ConditionalExpressions_main_region_A));
+	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&statechart)== 1l);
+	conditionalExpressionsIface_raise_e(&statechart);
+	conditionalExpressions_runCycle(&statechart);
+	EXPECT_TRUE(conditionalExpressions_isStateActive(&statechart, ConditionalExpressions_main_region_B));
+	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&statechart)== 2l);
 }
 
 

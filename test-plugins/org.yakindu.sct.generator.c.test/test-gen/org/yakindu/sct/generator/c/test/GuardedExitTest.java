@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/GuardedExitTest/GuardedExitTest.cc", program = "gtests/GuardedExitTest/GuardedExit", model = "testmodels/SCTUnit/GuardedExit.sct" )
+@GTest(sourceFile = "gtests/GuardedExit/GuardedExitTest.cc", program = "gtests/GuardedExit/GuardedExit", model = "testmodels/SCTUnit/GuardedExit.sct" )
 @RunWith(GTestRunner.class)
 public class GuardedExitTest {
 

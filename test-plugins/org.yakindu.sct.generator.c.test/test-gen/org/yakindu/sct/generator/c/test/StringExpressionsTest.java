@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/StringExpressionsTest/StringExpressionsTest.cc", program = "gtests/StringExpressionsTest/StringExpressions", model = "testmodels/SCTUnit/StringExpressions.sct" )
+@GTest(sourceFile = "gtests/StringExpressions/StringExpressionsTest.cc", program = "gtests/StringExpressions/StringExpressions", model = "testmodels/SCTUnit/StringExpressions.sct" )
 @RunWith(GTestRunner.class)
 public class StringExpressionsTest {
 
