@@ -192,31 +192,35 @@ class StatemachineImplementation implements IContentTemplate {
 		{
 			
 			clearOutEvents();
-			
-			for (stateConfVectorPosition = 0;
-				stateConfVectorPosition < «orthogonalStatesConst»;
-				stateConfVectorPosition++)
-				{
-					
-				switch (stateConfVector[stateConfVectorPosition])
-				{
-				«FOR state : states»
-					«IF state.reactSequence!=null»
-					case «state.shortName.asEscapedIdentifier» :
-					{
-						«state.reactSequence.shortName»();
-						break;
-					}
-					«ENDIF»
-				«ENDFOR»
-				default:
-					break;
-				}
-			}
-			
+			«runCycleFunctionForLoop»			
 			clearInEvents();
 		}
 	'''
+	
+	def runCycleFunctionForLoop(ExecutionFlow it) {
+		'''
+		for (stateConfVectorPosition = 0;
+			stateConfVectorPosition < «orthogonalStatesConst»;
+			stateConfVectorPosition++)
+			{
+				
+			switch (stateConfVector[stateConfVectorPosition])
+			{
+			«FOR state : states»
+				«IF state.reactSequence!=null»
+				case «state.shortName.asEscapedIdentifier» :
+				{
+					«state.reactSequence.shortName»();
+					break;
+				}
+				«ENDIF»
+			«ENDFOR»
+			default:
+				break;
+			}
+		}
+		'''
+	}
 	
 	def timedStatemachineFunctions(ExecutionFlow it) '''
 		«IF timed»

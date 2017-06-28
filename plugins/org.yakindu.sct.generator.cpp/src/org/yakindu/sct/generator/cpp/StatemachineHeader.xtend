@@ -197,6 +197,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 				«d.privateFunctionPrototypes»
 				«d.scopeTypeDeclMember»
 			«ENDFOR»
+			void dispatch_event(SctEvent * event);
 		'''
 	
 
