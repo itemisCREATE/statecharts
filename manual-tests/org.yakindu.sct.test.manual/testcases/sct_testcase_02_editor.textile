@@ -25,3 +25,4 @@ h1(#Test2). Yakindu SCT Testcase 02 - Editor
 | 2.16.4 | Navigator View | Expand the states entries in the tree view. | The outgoing transitions of the states are displayed with icon and trigger/guard. | %{color:red}open% |
 | 2.17 | View | Press *[Ctrl++]* to zoom in and *[Ctrl--]* to zoom out. | The view should zoom in and out. | %{color:red}open% |
 | 2.18 | Undo & Redo | Select a region which includes at least a state with an outgoing transition <p> Press *DEL* to delete the region <p>Undo deletion by Strg+Z <p> Redo deletion by Strg+Y <p> Try to move the affected element by dragging | The deletion should properly be undone and redone<p> The elements involved during undo and redo have to be still changeable (move, delete change e.g. name) afterwards | %{color:red}open% |
+| 2.19 | Tasks | Open Tasks.sct | check if all //TODO & //FIXME will be shown in Tasks-View | %{color:red}open% |
