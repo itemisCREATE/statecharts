@@ -34,11 +34,6 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 	}
 	
-	override prototypes(ExecutionFlow it) {
-		var prototypes = super.prototypes(it).toString
-		return prototypes.replace("void clearInEvents();", "");
-	}
-	
 	override CharSequence protectedInnerClassMembers(StatechartScope scope) {
 		'''
 		«super.protectedInnerClassMembers(scope)»
