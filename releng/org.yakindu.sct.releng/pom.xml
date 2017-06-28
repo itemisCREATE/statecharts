@@ -366,6 +366,7 @@
 				<module>../../test-plugins/org.yakindu.sct.model.sexec.test</module>
 				<module>../../test-plugins/org.yakindu.sct.model.sgraph.test</module>
 				<module>../../test-plugins/org.yakindu.sct.generator.genmodel.test</module>
+				<module>../../test-plugins/org.yakindu.sct.model.resource.test</module>
 				<module>../../test-plugins/org.yakindu.sct.model.stext.resource.test</module>
 				<module>../../test-plugins/org.yakindu.sct.model.stext.test</module>
 				<module>../../test-plugins/org.yakindu.sct.simulation.core.sexec.test</module>
