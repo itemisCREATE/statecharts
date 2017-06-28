@@ -13,6 +13,8 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
+import org.eclipse.xtext.resource.generic.GenericResourceServiceProvider;
+import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
@@ -55,6 +57,7 @@ public class SCTExecutableExtensionFactory extends AbstractGuiceAwareExecutableE
 		// overriding of generic bindings
 		return Guice.createInjector(new SharedStateModule(), new Module() {
 			@Override
+			@SuppressWarnings("restriction")
 			public void configure(Binder binder) {
 				binder.bind(IResourceValidator.class).to(SCTResourceValidatorImpl.class);
 				binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("sct");
@@ -69,6 +72,9 @@ public class SCTExecutableExtensionFactory extends AbstractGuiceAwareExecutableE
 				binder.bind(MarkerTypeProvider.class).to(SCTMarkerTypeProvider.class);
 				binder.bind(IDiagnosticConverter.class).to(SCTDiagnosticConverterImpl.class);
 				binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(SCTFileEditorOpener.class);
+				
+				binder.bind(GenericResourceServiceProvider.class).to(SCTResourceServiceProvider.class);
+				binder.bind(ITaskFinder.class).to(DomainSpecificTaskFinder.class);
 			}
 		});
 	}
