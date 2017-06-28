@@ -44,6 +44,7 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 				
 				/* Delete event from memory */
 				delete currentEvent;
+				clearInEvents();
 			}
 		}
 	'''
@@ -75,10 +76,6 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 		«super.constructorBody(it)»
 		
 		'''
-	
-	override clearInEventsFunction(ExecutionFlow it) {
-		''''''
-	}
 	
 	
 	def generateInterfaceDispatchFunctions(ExecutionFlow it) {
