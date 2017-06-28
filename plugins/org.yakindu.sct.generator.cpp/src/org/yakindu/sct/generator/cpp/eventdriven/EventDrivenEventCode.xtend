@@ -40,51 +40,6 @@ class EventDrivenEventCode extends EventCode {
 			«ENDFOR»
 		'''
 	
-	override CharSequence generateEventGetter(ExecutionFlow it, EventDefinition event, StatechartScope scope)
-		'''
-			«event.typeSpecifier.targetLanguageName» «module»::«event.asGetter»() const
-			{
-				return «scope.instance».«event.asGetter»();
-			}
-		'''
-	
-	
-	override CharSequence generateEventValueGetter(ExecutionFlow it, EventDefinition event, StatechartScope scope)
-		'''
-			«event.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() const
-			{
-				return «event.localValueAccess»;
-			}
-		'''
-	
-	
-	override CharSequence generateDefaultInterfaceEventRaised(ExecutionFlow it, EventDefinition event, StatechartScope scope)
-		'''
-			sc_boolean «module»::«event.asRaised»() const
-			{
-				
-				return «scope.instance».«event.asRaised»();
-			}
-		'''
-	
-	
-	override CharSequence generateInterfaceEventRaised(ExecutionFlow it, EventDefinition event, StatechartScope scope)
-		'''
-			sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() const
-			{
-				return «event.localAccess»;
-			}
-		'''
-		
-	
-	override CharSequence generateDefaultInterfaceEventRaiser(ExecutionFlow it, EventDefinition event, StatechartScope scope)
-		'''
-			void «module»::«event.asRaiser»(«event.valueParams»)
-			{
-				«scope.instance».«event.asRaiser»(«IF event.hasValue»value«ENDIF»);
-			}
-		'''
-	
 	
 	protected def CharSequence generateInternalInterfaceEventRaiser(ExecutionFlow it, EventDefinition event, StatechartScope scope)
 		'''

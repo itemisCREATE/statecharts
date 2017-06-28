@@ -1,61 +1,68 @@
 package org.yakindu.sct.generator.cpp.eventdriven
 
+import java.util.List
+import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.cpp.StatemachineImplementation
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 	
 	override additionalFunctions(ExecutionFlow it, GeneratorEntry entry) {
 		'''
-		«internalRaiseEventFunction»
+		«generateInternalDispatchEventFunction»
+		
+		«generateInterfaceDispatchFunctions»
 		'''
 	}
+	
+	override enterFunction(ExecutionFlow it) '''
+		void «module»::enter()
+		{
+			«enterSequences.defaultSequence.code»
+			runCycle();
+		}
+	'''
 	
 	override runCycleFunction(ExecutionFlow it) { 
 	'''
 		void «module»::runCycle()
 		{
+			clearOutEvents();
+			
 			while(!internalEventQueue.empty())
 			{
+				/* Take event from front of queue and remove it */
 				currentEvent = internalEventQueue.front();
 				internalEventQueue.pop_front();
+				/* Set event flags as usual */
+				dispatch_event(currentEvent);
 				
-				for (stateConfVectorPosition = 0;
-					stateConfVectorPosition < «orthogonalStatesConst»;
-					stateConfVectorPosition++)
-					{
-						
-					switch (stateConfVector[stateConfVectorPosition])
-					{
-					«FOR state : states»
-						«IF state.reactSequence!=null»
-						case «state.shortName.asEscapedIdentifier» :
-						{
-							«state.reactSequence.shortName»();
-							break;
-						}
-						«ENDIF»
-					«ENDFOR»
-					default:
-						break;
-					}
-				}
+				«runCycleFunctionForLoop»
+				
+				/* Delete event from memory */
+				delete currentEvent;
 			}
 		}
 	'''
 	}
 	
-	override constructorDefinition(ExecutionFlow it) '''
+	override constructorDefinition(ExecutionFlow it) {
+	val List<String> toInit = newArrayList
+	toInit.addAll(getInterfaces.map[instance].map[i|'''«i»(this)'''])
+	toInit.add("currentEvent(0)")
+	'''
 		«module»::«module»() :
-			«FOR s : getInterfaces SEPARATOR ","»
-			«s.instance»(this)
+			«FOR init : toInit SEPARATOR ","»
+				«init»
 			«ENDFOR»
 		{
 			«constructorBody(it)»
 		}
 	'''
+	}
 	
 	override initFunction(ExecutionFlow it) {
 		val init = super.initFunction(it).toString
@@ -73,18 +80,56 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 		''''''
 	}
 	
-	def internalRaiseEventFunction(ExecutionFlow it) {
+	
+	def generateInterfaceDispatchFunctions(ExecutionFlow it) {
 		'''
-		void «module»::internal_raiseEvent(SctEvent * event)
+		«FOR s : statechartScopes»
+		«generateInterfaceDispatchFunction(s)»
+		«ENDFOR»
+		'''
+	}
+	
+	def generateInterfaceDispatchFunction(ExecutionFlow it, Scope s) {
+		'''
+		void «module»::«s.interfaceName»::dispatch_event(SctEvent * event)
+		{
+			switch(event->name)
+			{
+				«FOR e: s.declarations.filter(EventDefinition).filter[direction == Direction::IN || direction == Direction::LOCAL]»
+					case «e.eventEnumMemberName»:
+					{
+						«IF e.hasValue»
+						«e.eventClassName» * e = dynamic_cast<«e.eventClassName»*>(event);
+						if(e != 0) {
+							internal_«e.asRaiser»(e->value);
+						}
+						«ELSE»
+						internal_«e.asRaiser»();
+						«ENDIF»
+						break;
+					}
+				«ENDFOR»
+				default:
+					break;
+			}
+		}
+		'''
+	}
+	
+	def generateInternalDispatchEventFunction(ExecutionFlow it) {
+		'''
+		void «module»::dispatch_event(SctEvent * event)
 		{
 			switch(event->name)
 			{
 				«FOR s : scopes»
-					«FOR e : s.declarations.filter(EventDefinition)»
+					«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::IN || direction == Direction::LOCAL]»
 						case «e.eventEnumMemberName»:
 					«ENDFOR»
-							«s.instance».internal_raiseEvent(event);
+					{
+							«s.instance».dispatch_event(event);
 							break;
+					}
 				«ENDFOR»
 				default:
 					break;

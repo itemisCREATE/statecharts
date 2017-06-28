@@ -1,5 +1,6 @@
 package org.yakindu.sct.generator.cpp.eventdriven
 
+import java.util.List
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.cpp.StatemachineHeader
@@ -21,7 +22,7 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 			
 			SctEvent* currentEvent;
 			
-			void internal_raiseEvent(SctEvent * event);
+			void dispatch_event(SctEvent * event);
 		'''
 	}
 	
@@ -46,21 +47,35 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 	}
 	
-	override protected createInterface(StatechartScope scope) '''
-		//! Inner class for «scope.simpleName» interface scope.
-		class «scope.interfaceName»
-		{
-			
-			public:
-				«scope.interfaceName»(«scope.execution_flow.module()» * parent): parent(parent) {}
-				«FOR d : scope.declarations»
-					«d.functionPrototypes»
-				«ENDFOR»
+	override protected createInterface(StatechartScope it) {
+		val List<String> toInit = newArrayList
+		for( e : declarations.filter(EventDefinition)) {
+			toInit.add('''«e.name.asIdentifier.raised»(false)''')
+			if (e.hasValue) {
+				toInit.add('''«e.name.asIdentifier.value»()''')
+			}
+		}
+		toInit.add("parent(parent)")
+		return '''
+			//! Inner class for «simpleName» interface scope.
+			class «interfaceName»
+			{
 				
-			«entry.innerClassVisibility»:
-				«protectedInnerClassMembers(scope)»
-		};
-	'''
+				public:
+					«interfaceName»(«execution_flow.module()» * parent): 
+					«FOR init : toInit SEPARATOR ","»
+						«init»
+					«ENDFOR»
+					{}
+					«FOR d : declarations»
+						«d.functionPrototypes»
+					«ENDFOR»
+					
+				«entry.innerClassVisibility»:
+					«protectedInnerClassMembers»
+			};
+		'''
+	}
 	
 	def dispatch privateFunctionPrototypes(EventDefinition it) {
 		'''
