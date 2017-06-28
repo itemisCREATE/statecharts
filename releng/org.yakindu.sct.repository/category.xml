@@ -1,48 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
    <feature url="features/org.yakindu.sct_0.0.0.jar" id="org.yakindu.sct" version="0.0.0">
-      <category name="YAKINDU SCT"/>
+      <category name="YAKINDU Statechart Tools Open Source Edition"/>
    </feature>
    <feature url="features/org.yakindu.sct.generator.c_0.0.0.jar" id="org.yakindu.sct.generator.c" version="0.0.0">
-      <category name="YAKINDU SCT"/>
+      <category name="YAKINDU Statechart Tools Open Source Edition"/>
    </feature>
    <feature url="features/org.yakindu.sct.generator.java_0.0.0.jar" id="org.yakindu.sct.generator.java" version="0.0.0">
-      <category name="YAKINDU SCT"/>
+      <category name="YAKINDU Statechart Tools Open Source Edition"/>
    </feature>
    <feature url="features/org.yakindu.sct.generator.cpp_0.0.0.jar" id="org.yakindu.sct.generator.cpp" version="0.0.0">
-      <category name="YAKINDU SCT"/>
+      <category name="YAKINDU Statechart Tools Open Source Edition"/>
    </feature>
    <feature url="features/org.yakindu.base_0.0.0.jar" id="org.yakindu.base" version="0.0.0">
-      <category name="YAKINDU BASE"/>
+      <category name="YAKINDU Statechart Tools Open Source Edition"/>
    </feature>
-   <feature url="features/org.yakindu.sct.generator_0.0.0.jar" id="org.yakindu.sct.generator" version="0.0.0">
-      <category name="YAKINDU SCT"/>
-   </feature>
-   <!--
-   <feature url="features/org.yakindu.sct.documentation_0.0.0.jar" id="org.yakindu.sct.documentation" version="0.0.0">
-      <category name="YAKINDU SCT"/>
-   </feature>
-   <feature url="features/org.yakindu.sct.simulation_0.0.0.jar" id="org.yakindu.sct.simulation" version="0.0.0">
-      <category name="YAKINDU SCT"/>
-   </feature>
-   <feature url="features/org.yakindu.sct.generator.model_0.0.0.jar" id="org.yakindu.sct.generator.model" version="0.0.0">
-      <category name="YAKINDU SCT"/>
-   </feature>
-   <feature url="features/org.yakindu.sct.compare_0.0.0.jar" id="org.yakindu.sct.compare" version="0.0.0">
-      <category name="YAKINDU SCT"/>
-   </feature>
-   <feature url="features/org.yakindu.sct.editor_0.0.0.jar" id="org.yakindu.sct.editor" version="0.0.0">
-      <category name="YAKINDU SCT"/>
-   </feature>
-   -->
-   <category-def name="YAKINDU SCT" label="YAKINDU SCT">
+   <category-def name="YAKINDU Statechart Tools Open Source Edition" label="YAKINDU Statechart Tools Open Source Edition">
       <description>
-         YAKINDU Statechart Tools (SCT)
-      </description>
-   </category-def>
-   <category-def name="YAKINDU BASE" label="YAKINDU BASE">
-      <description>
-         YAKINDU Base features
+         YAKINDU Statechart Tools Open Source Edition bundles all features that are part of the open source repository.
       </description>
    </category-def>
 </site>
