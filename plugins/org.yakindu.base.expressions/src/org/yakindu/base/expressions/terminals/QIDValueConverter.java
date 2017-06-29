@@ -16,6 +16,8 @@ import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractValueConverter;
 import org.eclipse.xtext.nodemodel.INode;
 
+import com.google.inject.Inject;
+
 /**
  * 
  * @author jonathan thoene - Initial contribution and API
@@ -24,15 +26,8 @@ import org.eclipse.xtext.nodemodel.INode;
 
 public class QIDValueConverter extends AbstractValueConverter<String> {
 
+	@Inject
 	protected AbstractIDValueConverter idValueConverter;
-
-	// public QIDValueConverter(AbstractIDValueConverter idValueConverter) {
-	// this.idValueConverter = idValueConverter;
-	// }
-
-	public void setIDValueConvert(AbstractIDValueConverter idValueConverter) {
-		this.idValueConverter = idValueConverter;
-	}
 
 	@Override
 	public String toValue(String string, INode node) throws ValueConverterException {
@@ -40,12 +35,7 @@ public class QIDValueConverter extends AbstractValueConverter<String> {
 		if (string.split(".").length > 0) {
 			for (String str : string.split(".")) {
 				String partResult = idValueConverter.toValue(str, node);
-				if (string.split("")[0].equals(str)) {
-					result += partResult;
-				} else {
-					partResult = "." + partResult;
-					result += partResult;
-				}
+				result = reassembleString(string, result, str, partResult);
 			}
 		} else {
 			result = idValueConverter.toValue(string, node);
@@ -59,12 +49,7 @@ public class QIDValueConverter extends AbstractValueConverter<String> {
 		if (value.split(".").length > 0) {
 			for (String str : value.split(".")) {
 				String partResult = idValueConverter.toString(str);
-				if (value.split("")[0].equals(str)) {
-					result += partResult;
-				} else {
-					partResult = "." + partResult;
-					result += partResult;
-				}
+				result = reassembleString(value, result, str, partResult);
 			}
 		} else {
 			result = idValueConverter.toString(value);
@@ -72,4 +57,12 @@ public class QIDValueConverter extends AbstractValueConverter<String> {
 		return result;
 	}
 
+	private String reassembleString(String value, String result, String str, String partResult) {
+		if (value.split("")[0].equals(str)) {
+			result += partResult;
+		} else {
+			result += ("." + partResult);
+		}
+		return result;
+	}
 }
