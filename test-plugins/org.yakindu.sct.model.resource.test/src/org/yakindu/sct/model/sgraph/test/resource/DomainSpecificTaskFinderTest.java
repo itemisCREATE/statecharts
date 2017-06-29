@@ -24,6 +24,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.model.resource.tasks.DomainSpecificTaskFinder;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import com.google.inject.Inject;
 
 /**
@@ -48,24 +50,24 @@ public class DomainSpecificTaskFinderTest {
 	@Test
 	public void testFindTODOs() {
 
-		int found = 0;
-		for (Task task : foundTasks) {
-			if (task.getTag().getName().equals(TAG_TODO))
-				found++;
-		}
-		assertEquals(EXPECT_TODO_FOUND, found);
+		assertEquals(EXPECT_TODO_FOUND, Collections2.filter(foundTasks, new Predicate<Task>() {
+			@Override
+			public boolean apply(Task task) {
+				return task.getTag().getName().equals(TAG_TODO);
+			}
+		}).size());
 
 	}
 
 	@Test
 	public void testFindFIXMEs() {
-		int found = 0;
-		for (Task task : foundTasks) {
-			if (task.getTag().getName().equals(TAG_FIXME))
-				found++;
-		}
 
-		assertEquals(EXPECT_FIXME_FOUND, found);
+		assertEquals(EXPECT_FIXME_FOUND, Collections2.filter(foundTasks, new Predicate<Task>() {
+			@Override
+			public boolean apply(Task task) {
+				return task.getTag().getName().equals(TAG_FIXME);
+			}
+		}).size());
 	}
 
 	@Test
