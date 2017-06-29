@@ -25,12 +25,12 @@ import org.eclipse.xtext.nodemodel.INode;
 public class QIDValueConverter extends AbstractValueConverter<String> {
 
 	protected AbstractIDValueConverter idValueConverter;
-	
-//	public QIDValueConverter(AbstractIDValueConverter idValueConverter) {
-//		this.idValueConverter = idValueConverter;
-//	}
-	
-	public void setIDValueConvert(AbstractIDValueConverter idValueConverter){
+
+	// public QIDValueConverter(AbstractIDValueConverter idValueConverter) {
+	// this.idValueConverter = idValueConverter;
+	// }
+
+	public void setIDValueConvert(AbstractIDValueConverter idValueConverter) {
 		this.idValueConverter = idValueConverter;
 	}
 
