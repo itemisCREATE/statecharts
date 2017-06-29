@@ -21,7 +21,7 @@
 				<configuration>
 
 					<includes>
-						<include>**/AllTestsTest.class</include>
+						<include>**/AllTests.class</include>
 						<include>**/CoreFunctionTest.class</include>
 						<include>**/STextInterpreterTest.class</include>
 					</includes>
