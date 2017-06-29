@@ -15,6 +15,10 @@ import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCod
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorMsg;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_ASSIGNMENT_TO_CONST_MSG;
+import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_LEFT_HAND_ASSIGNMENT_MSG;
+import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
+import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_VAR_ARGS_LAST_CODE;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.util.HashMap;
@@ -46,8 +50,8 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.impl.StextFactoryImpl;
-import org.yakindu.sct.model.stext.test.util.TestCompletenessAssertions;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
+import org.yakindu.sct.model.stext.test.util.TestCompletenessAssertions;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
 import org.yakindu.sct.model.stext.validation.STextValidationMessages;
 import org.yakindu.sct.test.models.AbstractTestModelsUtil;
@@ -112,16 +116,16 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 		EObject model = super.parseExpression("3 = 3", Expression.class.getSimpleName(), scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
-		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+		validationResult.assertErrorContains(ERROR_LEFT_HAND_ASSIGNMENT_MSG);
 
 		// Check for referenced elements in interface
 		model = super.parseExpression("if.myOperation() = true", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
-		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+		validationResult.assertErrorContains(ERROR_LEFT_HAND_ASSIGNMENT_MSG);
 
 		model = super.parseExpression("if.Event1 = true", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
-		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+		validationResult.assertErrorContains(ERROR_LEFT_HAND_ASSIGNMENT_MSG);
 
 		model = super.parseExpression("if.myVar = true", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
@@ -132,11 +136,11 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 		model = super.parseExpression("myOperation() = 5", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
-		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+		validationResult.assertErrorContains(ERROR_LEFT_HAND_ASSIGNMENT_MSG);
 
 		model = super.parseExpression("Event1 = true", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
-		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+		validationResult.assertErrorContains(ERROR_LEFT_HAND_ASSIGNMENT_MSG);
 
 		model = super.parseExpression("myVar = 5", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
@@ -203,12 +207,12 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		scope = "internal: operation myOperation(param1... : integer, param2...: integer)";
 		model = super.parseExpression(scope, InternalScope.class.getSimpleName());
 		validationResult = tester.validate(model);
-		validationResult.assertError(STextJavaValidator.VAR_ARGS_LAST_CODE);
+		validationResult.assertError(ERROR_VAR_ARGS_LAST_CODE);
 
 		scope = "internal: operation myOperation2(param1 ... : integer, param0 : string)";
 		model = super.parseExpression(scope, InternalScope.class.getSimpleName());
 		validationResult = tester.validate(model);
-		validationResult.assertError(STextJavaValidator.VAR_ARGS_LAST_CODE);
+		validationResult.assertError(ERROR_VAR_ARGS_LAST_CODE);
 
 	}
 	
@@ -235,14 +239,13 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
 
-
 		model = super.parseExpression("myOperation(param2 = true)", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
-		validationResult.assertError(WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		validationResult.assertError(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		
 		model = super.parseExpression("myOperation(param1 = 5)", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
-		validationResult.assertError(WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		validationResult.assertError(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 
 	}
 
@@ -255,7 +258,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		String scope = "@Execution()";
 		EObject model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
-		validationResult.assertError(STextJavaValidator.WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		validationResult.assertError(STextJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		;
 
 		scope = "@Execution(EVENT_DRIVEN)";
@@ -686,7 +689,7 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "AssignmentToValue.sct");
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
 		assertIssueCount(diagnostics, 2);
-		assertError(diagnostics, ASSIGNMENT_TO_VALUE);
+		assertError(diagnostics, ERROR_ASSIGNMENT_TO_CONST_MSG);
 	}
 
 	@Test
