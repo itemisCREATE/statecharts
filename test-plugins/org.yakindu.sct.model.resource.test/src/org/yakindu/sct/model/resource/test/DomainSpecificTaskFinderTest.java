@@ -7,7 +7,7 @@
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.model.sgraph.test.resource;
+package org.yakindu.sct.model.resource.test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -56,7 +56,6 @@ public class DomainSpecificTaskFinderTest {
 				return task.getTag().getName().equals(TAG_TODO);
 			}
 		}).size());
-
 	}
 
 	@Test
