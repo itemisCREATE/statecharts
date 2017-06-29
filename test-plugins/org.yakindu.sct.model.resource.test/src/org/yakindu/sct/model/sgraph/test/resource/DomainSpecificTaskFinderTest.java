@@ -34,7 +34,9 @@ import com.google.inject.Inject;
 @InjectWith(SCTTestInjectorProvider.class)
 public class DomainSpecificTaskFinderTest {
 
+	private static final String TEST_MODEL = "/org.yakindu.sct.model.resource.test/testdata/Tasks.sct";
 	private static final int EXPECT_TASKS_FOUND = 5;
+
 	@Inject
 	DomainSpecificTaskFinder taskFinder;
 	private List<Task> findTasks;
@@ -56,9 +58,8 @@ public class DomainSpecificTaskFinderTest {
 	public void setup() {
 		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
 		URI sctWithTasks = URI.createPlatformPluginURI(
-				"/org.yakindu.sct.model.resource.test/testdata/Tasks.sct", true);
+				TEST_MODEL, true);
 		Resource resource = resourceSetImpl.getResource(sctWithTasks, true);
-
 		findTasks = taskFinder.findTasks(resource);
 	}
 
