@@ -15,7 +15,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.tasks.Task;
@@ -47,6 +47,9 @@ public class DomainSpecificTaskFinderTest {
 	DomainSpecificTaskFinder taskFinder;
 	private List<Task> foundTasks;
 
+	@Inject
+	private ResourceSet resourceSet;
+
 	@Test
 	public void testFindTODOs() {
 
@@ -76,10 +79,9 @@ public class DomainSpecificTaskFinderTest {
 
 	@Before
 	public void setup() {
-		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
 		URI sctWithTasks = URI.createPlatformPluginURI(
 				TEST_MODEL_WITH_TASKS, true);
-		Resource resource = resourceSetImpl.getResource(sctWithTasks, true);
+		Resource resource = resourceSet.getResource(sctWithTasks, true);
 		foundTasks = taskFinder.findTasks(resource);
 	}
 
