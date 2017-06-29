@@ -11,11 +11,10 @@
 */
 package org.yakindu.base.expressions.terminals;
 
-import java.util.Arrays;
-
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractValueConverter;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 
@@ -31,32 +30,27 @@ public class QIDValueConverter extends AbstractValueConverter<String> {
 
 	@Inject
 	protected AbstractIDValueConverter idValueConverter;
+	@Inject
+	protected IQualifiedNameConverter converter;
 
 	@Override
 	public String toValue(String string, INode node) throws ValueConverterException {
-		if(string.split(".").length > 0){
-			QualifiedName name = QualifiedName.create(Arrays.asList(string.split(".")));
-			QualifiedName result = QualifiedName.EMPTY;
-			for(String str : name.getSegments()){
-				result.append(idValueConverter.toValue(str, node));
-			}
-			return result.toString();
-		}else{
-			return idValueConverter.toValue(string, node);
+		QualifiedName name = converter.toQualifiedName(string);
+		QualifiedName result = QualifiedName.EMPTY;
+		for(String str : name.getSegments()){
+			String segment = idValueConverter.toValue(str, node);
+			result = result.append(segment);
 		}
+		return result.toString();
 	}
 
 	@Override
 	public String toString(String value) throws ValueConverterException {
-		if(value.split(".").length > 0){
-			QualifiedName name = QualifiedName.create(Arrays.asList(value.split(".")));
-			QualifiedName result = QualifiedName.EMPTY;
-			for(String str : name.getSegments()){
-				result.append(idValueConverter.toString(str));
-			}
-			return result.toString();
-		}else{
-			return idValueConverter.toString(value);
+		QualifiedName name = converter.toQualifiedName(value);
+		QualifiedName result = QualifiedName.EMPTY;
+		for(String str : name.getSegments()){
+			result = result.append(idValueConverter.toString(str));
 		}
+		return result.toString();
 	}
 }
