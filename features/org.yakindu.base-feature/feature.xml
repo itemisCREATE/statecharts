@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.yakindu.base"
-      label="YAKINDU Statechart Tool Base"
+      label="YAKINDU Statechart Tools Base"
       version="3.0.0.qualifier"
       provider-name="statecharts.org">
 
