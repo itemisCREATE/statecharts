@@ -25,11 +25,12 @@ import com.google.inject.Inject;
 public class ExpressionsValueConverterService extends DefaultTerminalConverters {
 	
 	@Inject
-	private AbstractIDValueConverter idValueConverter;
+	protected AbstractIDValueConverter idValueConverter;
 	
 	protected BoolValueConverter boolConverter = new BoolValueConverter();
 	protected HexValueConverter hexConverter = new HexValueConverter();
 	protected BinaryValueConverter binaryConverter = new BinaryValueConverter();
+	protected QIDValueConverter qidConverter = new QIDValueConverter();
 	
 	@ValueConverter(rule = "BOOL")
 	public IValueConverter<Boolean> BOOL() {
@@ -48,7 +49,8 @@ public class ExpressionsValueConverterService extends DefaultTerminalConverters 
 	
 	@ValueConverter(rule = "QID")
 	public IValueConverter<String> QID() {
-		return  idValueConverter;
+		qidConverter.setIDValueConvert(idValueConverter);
+		return qidConverter;
 	}
 
 
