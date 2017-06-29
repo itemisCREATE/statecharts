@@ -15,8 +15,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({DomainSpecificTaskFinderTest.class
-		})
+@SuiteClasses({DomainSpecificTaskFinderTest.class})
 public class AllTests {
 
 }

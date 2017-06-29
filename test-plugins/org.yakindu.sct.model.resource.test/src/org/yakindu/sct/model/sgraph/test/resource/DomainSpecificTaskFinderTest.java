@@ -9,7 +9,7 @@
  */
 package org.yakindu.sct.model.sgraph.test.resource;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
@@ -34,33 +34,44 @@ import com.google.inject.Inject;
 @InjectWith(SCTTestInjectorProvider.class)
 public class DomainSpecificTaskFinderTest {
 
-	private static final String TEST_MODEL = "/org.yakindu.sct.model.resource.test/testdata/Tasks.sct";
-	private static final int EXPECT_TASKS_FOUND = 5;
+	private static final String TAG_FIXME = "FIXME";
+	private static final String TAG_TODO = "TODO";
+	private static final String TEST_MODEL_WITH_TASKS = "/org.yakindu.sct.model.resource.test/testdata/Tasks.sct";
+	private static final int EXPECT_TASKS_FOUND = 14;
+	private static final int EXPECT_FIXME_FOUND = 7;
+	private static final int EXPECT_TODO_FOUND = 7;
 
 	@Inject
 	DomainSpecificTaskFinder taskFinder;
-	private List<Task> findTasks;
+	private List<Task> foundTasks;
 
 	@Test
-	public void testTODOs() {
-		assertTrue(findTasks.stream().filter((Task t) -> {
-			return t.getTag().getName().equals("FIXME");
-		}).findAny().isPresent());
+	public void testFindTODOs() {
+		assertEquals(EXPECT_TODO_FOUND, foundTasks.stream().filter((Task t) -> {
+			return t.getTag().getName().equals(TAG_FIXME);
+		}).count());
 
-		assertTrue(findTasks.stream().filter((Task t) -> {
-			return t.getTag().getName().equals("TODO");
-		}).findAny().isPresent());
+	}
 
-		assertTrue(EXPECT_TASKS_FOUND == findTasks.size());
+	@Test
+	public void testFindFIXMEs() {
+		assertEquals(EXPECT_FIXME_FOUND, foundTasks.stream().filter((Task t) -> {
+			return t.getTag().getName().equals(TAG_TODO);
+		}).count());
+	}
+
+	@Test
+	public void testFindAllAvailableTasks() {
+		assertEquals(EXPECT_TASKS_FOUND, foundTasks.size());
 	}
 
 	@Before
 	public void setup() {
 		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
 		URI sctWithTasks = URI.createPlatformPluginURI(
-				TEST_MODEL, true);
+				TEST_MODEL_WITH_TASKS, true);
 		Resource resource = resourceSetImpl.getResource(sctWithTasks, true);
-		findTasks = taskFinder.findTasks(resource);
+		foundTasks = taskFinder.findTasks(resource);
 	}
 
 }
