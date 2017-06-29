@@ -37,8 +37,8 @@ public class DomainSpecificTaskFinderTest {
 	private static final String TAG_FIXME = "FIXME";
 	private static final String TAG_TODO = "TODO";
 	private static final String TEST_MODEL_WITH_TASKS = "/org.yakindu.sct.model.resource.test/testdata/Tasks.sct";
-	private static final int EXPECT_TASKS_FOUND = 14;
-	private static final int EXPECT_FIXME_FOUND = 7;
+	private static final int EXPECT_TASKS_FOUND = 15;
+	private static final int EXPECT_FIXME_FOUND = 8;
 	private static final int EXPECT_TODO_FOUND = 7;
 
 	@Inject
@@ -47,17 +47,25 @@ public class DomainSpecificTaskFinderTest {
 
 	@Test
 	public void testFindTODOs() {
-		assertEquals(EXPECT_TODO_FOUND, foundTasks.stream().filter((Task t) -> {
-			return t.getTag().getName().equals(TAG_FIXME);
-		}).count());
+
+		int found = 0;
+		for (Task task : foundTasks) {
+			if (task.getTag().getName().equals(TAG_TODO))
+				found++;
+		}
+		assertEquals(EXPECT_TODO_FOUND, found);
 
 	}
 
 	@Test
 	public void testFindFIXMEs() {
-		assertEquals(EXPECT_FIXME_FOUND, foundTasks.stream().filter((Task t) -> {
-			return t.getTag().getName().equals(TAG_TODO);
-		}).count());
+		int found = 0;
+		for (Task task : foundTasks) {
+			if (task.getTag().getName().equals(TAG_FIXME))
+				found++;
+		}
+
+		assertEquals(EXPECT_FIXME_FOUND, found);
 	}
 
 	@Test

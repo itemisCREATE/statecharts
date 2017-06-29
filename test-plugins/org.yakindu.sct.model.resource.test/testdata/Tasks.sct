@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_Tem-gFsTEeecK7pQHv942A" specification="interface:&#xA;//TODO of specification&#xA;//FIXME of specification" name="default">
+  <sgraph:Statechart xmi:id="_Tem-gFsTEeecK7pQHv942A" specification="interface:&#xA;//FIXME ...one more than todos&#xA;//TODO of specification&#xA;//FIXME of specification" name="default">
     <regions xmi:id="_TfGGsFsTEeecK7pQHv942A" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_TfiLkFsTEeecK7pQHv942A">
         <outgoingTransitions xmi:id="_TfyDMFsTEeecK7pQHv942A" target="_TfmdAFsTEeecK7pQHv942A"/>
@@ -180,7 +180,7 @@
       <children xsi:type="notation:Shape" xmi:id="_Tf9CU1sTEeecK7pQHv942A" type="StatechartTextExpression" fontName="Verdana" lineColor="4210752">
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Tf9CVFsTEeecK7pQHv942A"/>
       </children>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Tf9pYFsTEeecK7pQHv942A" x="10" y="10" width="200" height="400"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Tf9pYFsTEeecK7pQHv942A" x="10" y="10" width="210" height="86"/>
     </children>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_TfE4kVsTEeecK7pQHv942A"/>
     <edges xmi:id="_Tf7NIFsTEeecK7pQHv942A" type="Transition" element="_TfyDMFsTEeecK7pQHv942A" source="_TfjZsFsTEeecK7pQHv942A" target="_Tfr8kFsTEeecK7pQHv942A">
@@ -195,7 +195,7 @@
     <edges xmi:id="_nOr9IFsbEeecK7pQHv942A" type="Transition" element="_nOlPclsbEeecK7pQHv942A" source="_Tfr8kFsTEeecK7pQHv942A" target="_nOmdkFsbEeecK7pQHv942A">
       <children xsi:type="notation:DecorationNode" xmi:id="_nOr9JFsbEeecK7pQHv942A" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_nOr9JVsbEeecK7pQHv942A"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_nOr9JlsbEeecK7pQHv942A" x="25" y="-137"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_nOr9JlsbEeecK7pQHv942A" x="-135" y="-74"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_nOr9IVsbEeecK7pQHv942A" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_nOr9I1sbEeecK7pQHv942A" fontName="Verdana"/>
