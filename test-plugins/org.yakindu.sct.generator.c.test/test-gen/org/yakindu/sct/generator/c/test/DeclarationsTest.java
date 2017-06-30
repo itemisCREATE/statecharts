@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/DeclarationsTest/DeclarationsTest.cc", program = "gtests/DeclarationsTest/Declarations", model = "testmodels/SCTUnit/Declarations.sct" )
+@GTest(sourceFile = "gtests/Declarations/DeclarationsTest.cc", program = "gtests/Declarations/Declarations", model = "testmodels/SCTUnit/Declarations.sct" )
 @RunWith(GTestRunner.class)
 public class DeclarationsTest {
 

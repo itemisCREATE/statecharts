@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/TransitionWithoutConditionTest/TransitionWithoutConditionTest.cc", program = "gtests/TransitionWithoutConditionTest/TransitionWithoutCondition", model = "testmodels/SCTUnit/TransitionWithoutCondition.sct" )
+@GTest(sourceFile = "gtests/TransitionWithoutCondition/TransitionWithoutConditionTest.cc", program = "gtests/TransitionWithoutCondition/TransitionWithoutCondition", model = "testmodels/SCTUnit/TransitionWithoutCondition.sct" )
 @RunWith(GTestRunner.class)
 public class TransitionWithoutConditionTest {
 

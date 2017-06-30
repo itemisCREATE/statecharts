@@ -54,15 +54,14 @@ void logicalOr_exit(LogicalOr* handle)
 
 sc_boolean logicalOr_isActive(const LogicalOr* handle)
 {
-	sc_boolean result;
-	if (handle->stateConfVector[0] != LogicalOr_last_state)
+	sc_boolean result = bool_false;
+	int i;
+	
+	for(i = 0; i < LOGICALOR_MAX_ORTHOGONAL_STATES; i++)
 	{
-		result =  bool_true;
+		result = result || handle->stateConfVector[i] != LogicalOr_last_state;
 	}
-	else
-	{
-		result = bool_false;
-	}
+	
 	return result;
 }
 
@@ -114,7 +113,7 @@ sc_boolean logicalOr_isStateActive(const LogicalOr* handle, LogicalOrStates stat
 	switch (state)
 	{
 		case LogicalOr_main_region_A :
-			result = (sc_boolean) (handle->stateConfVector[0] == LogicalOr_main_region_A
+			result = (sc_boolean) (handle->stateConfVector[SCVI_LOGICALOR_MAIN_REGION_A] == LogicalOr_main_region_A
 			);
 			break;
 		default:

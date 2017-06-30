@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/IntegerExpressionsTest/IntegerExpressionsTest.cc", program = "gtests/IntegerExpressionsTest/IntegerExpressions", model = "testmodels/SCTUnit/IntegerExpressions.sct" )
+@GTest(sourceFile = "gtests/IntegerExpressions/IntegerExpressionsTest.cc", program = "gtests/IntegerExpressions/IntegerExpressions", model = "testmodels/SCTUnit/IntegerExpressions.sct" )
 @RunWith(GTestRunner.class)
 public class IntegerExpressionsTest {
 

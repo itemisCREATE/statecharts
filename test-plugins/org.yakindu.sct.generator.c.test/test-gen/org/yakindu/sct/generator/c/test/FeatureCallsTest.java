@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/FeatureCallsTest/FeatureCallsTest.cc", program = "gtests/FeatureCallsTest/FeatureCalls", model = "testmodels/SCTUnit/FeatureCalls.sct" )
+@GTest(sourceFile = "gtests/FeatureCalls/FeatureCallsTest.cc", program = "gtests/FeatureCalls/FeatureCalls", model = "testmodels/SCTUnit/FeatureCalls.sct" )
 @RunWith(GTestRunner.class)
 public class FeatureCallsTest {
 

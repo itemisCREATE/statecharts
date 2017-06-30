@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/NullCheckTest/NullCheckTest.cc", program = "gtests/NullCheckTest/NullCheck", model = "testmodels/SCTUnit/NullCheck.sct" )
+@GTest(sourceFile = "gtests/NullCheck/NullCheckTest.cc", program = "gtests/NullCheck/NullCheck", model = "testmodels/SCTUnit/NullCheck.sct" )
 @RunWith(GTestRunner.class)
 public class NullCheckTest {
 

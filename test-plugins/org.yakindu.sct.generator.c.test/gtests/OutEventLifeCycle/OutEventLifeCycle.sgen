@@ -1,0 +1,19 @@
+GeneratorModel for yakindu::c {
+	statechart OutEventLifeCycle {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "OutEventLifeCycle"
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+	}
+}

@@ -14,8 +14,8 @@ extern "C" {
 /*! Enumeration of all states */ 
 typedef enum
 {
-	LogicalOr_main_region_A,
-	LogicalOr_last_state
+	LogicalOr_last_state,
+	LogicalOr_main_region_A
 } LogicalOrStates;
 
 /*! Type definition of the data structure for the LogicalOrIface interface scope. */
@@ -28,6 +28,9 @@ typedef struct
 
 /*! Define dimension of the state configuration vector for orthogonal states. */
 #define LOGICALOR_MAX_ORTHOGONAL_STATES 1
+
+/*! Define indices of states in the StateConfVector */
+#define SCVI_LOGICALOR_MAIN_REGION_A 0
 
 /*! 
  * Type definition of the data structure for the LogicalOr state machine.

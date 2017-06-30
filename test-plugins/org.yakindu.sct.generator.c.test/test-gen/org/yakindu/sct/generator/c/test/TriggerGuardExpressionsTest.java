@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/TriggerGuardExpressionsTest/TriggerGuardExpressionsTest.cc", program = "gtests/TriggerGuardExpressionsTest/TriggerGuardExpressions", model = "testmodels/SCTUnit/TriggerGuardExpressions.sct" )
+@GTest(sourceFile = "gtests/TriggerGuardExpressions/TriggerGuardExpressionsTest.cc", program = "gtests/TriggerGuardExpressions/TriggerGuardExpressions", model = "testmodels/SCTUnit/TriggerGuardExpressions.sct" )
 @RunWith(GTestRunner.class)
 public class TriggerGuardExpressionsTest {
 

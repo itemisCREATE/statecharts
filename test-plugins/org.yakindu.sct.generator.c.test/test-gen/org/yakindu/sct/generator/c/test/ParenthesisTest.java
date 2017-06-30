@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/ParenthesisTest/ParenthesisTest.cc", program = "gtests/ParenthesisTest/Parenthesis", model = "testmodels/SCTUnit/Parenthesis.sct" )
+@GTest(sourceFile = "gtests/Parenthesis/ParenthesisTest.cc", program = "gtests/Parenthesis/Parenthesis", model = "testmodels/SCTUnit/Parenthesis.sct" )
 @RunWith(GTestRunner.class)
 public class ParenthesisTest {
 

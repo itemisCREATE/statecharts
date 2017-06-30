@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/ConstOnlyInternalScopeTest/ConstOnlyInternalScopeTest.cc", program = "gtests/ConstOnlyInternalScopeTest/ConstOnlyInternalScope", model = "testmodels/SCTUnit/declarations/ConstOnlyInternalScope.sct" )
+@GTest(sourceFile = "gtests/ConstOnlyInternalScope/ConstOnlyInternalScopeTest.cc", program = "gtests/ConstOnlyInternalScope/ConstOnlyInternalScope", model = "testmodels/SCTUnit/declarations/ConstOnlyInternalScope.sct" )
 @RunWith(GTestRunner.class)
 public class ConstOnlyInternalScopeTest {
 

@@ -14,11 +14,11 @@ extern "C" {
 /*! Enumeration of all states */ 
 typedef enum
 {
+	Operations_last_state,
 	Operations_main_region_B,
 	Operations_main_region_C,
 	Operations_main_region_D,
-	Operations_main_region_A,
-	Operations_last_state
+	Operations_main_region_A
 } OperationsStates;
 
 /*! Type definition of the data structure for the OperationsInternal interface scope. */
@@ -36,6 +36,12 @@ typedef struct
 
 /*! Define dimension of the state configuration vector for orthogonal states. */
 #define OPERATIONS_MAX_ORTHOGONAL_STATES 1
+
+/*! Define indices of states in the StateConfVector */
+#define SCVI_OPERATIONS_MAIN_REGION_B 0
+#define SCVI_OPERATIONS_MAIN_REGION_C 0
+#define SCVI_OPERATIONS_MAIN_REGION_D 0
+#define SCVI_OPERATIONS_MAIN_REGION_A 0
 
 /*! 
  * Type definition of the data structure for the Operations state machine.

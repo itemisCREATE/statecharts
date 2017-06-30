@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/DeepEntryTest/DeepEntryTest.cc", program = "gtests/DeepEntryTest/DeepEntry", model = "testmodels/SCTUnit/DeepEntry.sct" )
+@GTest(sourceFile = "gtests/DeepEntry/DeepEntryTest.cc", program = "gtests/DeepEntry/DeepEntry", model = "testmodels/SCTUnit/DeepEntry.sct" )
 @RunWith(GTestRunner.class)
 public class DeepEntryTest {
 

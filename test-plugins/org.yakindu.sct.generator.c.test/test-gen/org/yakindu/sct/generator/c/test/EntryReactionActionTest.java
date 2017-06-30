@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/EntryReactionActionTest/EntryReactionActionTest.cc", program = "gtests/EntryReactionActionTest/EntryReactionAction", model = "testmodels/SCTUnit/entries/EntryReactionAction.sct" )
+@GTest(sourceFile = "gtests/EntryReactionAction/EntryReactionActionTest.cc", program = "gtests/EntryReactionAction/EntryReactionAction", model = "testmodels/SCTUnit/entries/EntryReactionAction.sct" )
 @RunWith(GTestRunner.class)
 public class EntryReactionActionTest {
 
