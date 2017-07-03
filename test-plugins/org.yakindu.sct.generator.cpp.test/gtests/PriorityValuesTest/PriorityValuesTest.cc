@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "PriorityValues.h"
 #include "sc_types.h"
-PriorityValues* statechart;
+static PriorityValues* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,9 +33,9 @@ TEST_F(StatemachineTest, transitionPriority) {
 	
 	EXPECT_TRUE(statechart->isStateActive(PriorityValues::main_region_A));
 	
-	statechart->raise_event1();
+	statechart->getDefaultSCI()->raise_event1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(PriorityValues::main_region_C));
 	
@@ -47,9 +47,9 @@ TEST_F(StatemachineTest, regionPriority) {
 	
 	EXPECT_TRUE(statechart->isStateActive(PriorityValues::someRegion_A));
 	
-	statechart->raise_event2();
+	statechart->getDefaultSCI()->raise_event2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(PriorityValues::someRegion_B));
 	

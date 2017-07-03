@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "DynamicChoice.h"
 #include "sc_types.h"
-DynamicChoice* statechart;
+static DynamicChoice* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,7 +33,7 @@ TEST_F(StatemachineTest, DynamicChoiceTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(DynamicChoice::main_region_Start));
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(DynamicChoice::main_region_A));
 	

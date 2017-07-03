@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "CastExpressions.h"
 #include "sc_types.h"
-CastExpressions* statechart;
+static CastExpressions* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -35,11 +35,11 @@ TEST_F(StatemachineTest, CastExpressionTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_intValue()== 5l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 15l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(CastExpressions::main_region_C));
 	

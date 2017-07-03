@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "BitExpressions.h"
 #include "sc_types.h"
-BitExpressions* statechart;
+static BitExpressions* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -37,9 +37,9 @@ TEST_F(StatemachineTest, BitExpressions) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBit2()== 7l);
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(BitExpressions::main_region_StateB));
 	

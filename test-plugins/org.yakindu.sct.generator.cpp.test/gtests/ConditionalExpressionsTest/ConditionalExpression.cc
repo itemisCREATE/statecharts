@@ -10,14 +10,14 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "ConstOnlyNamedScope.h"
+#include "ConditionalExpressions.h"
 #include "sc_types.h"
-static ConstOnlyNamedScope* statechart;
+static ConditionalExpressions* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
-		statechart = new ConstOnlyNamedScope();
+		statechart = new ConditionalExpressions();
 		statechart->init();
 	}
 	virtual void TearDown() {
@@ -26,23 +26,21 @@ class StatemachineTest : public ::testing::Test{
 };
 
 
-TEST_F(StatemachineTest, statechartEntry) {
+TEST_F(StatemachineTest, ConditionalExpressionTest) {
 	
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(ConstOnlyNamedScope::ConstOnlyNamedScope_main_region_A));
+	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_A));
 	
-}
-TEST_F(StatemachineTest, stateTransition) {
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 1l);
 	
-	
-	statechart->enter();
-	
-	statechart->getDefaultSCI()->raise_e( 1l);
+	statechart->getDefaultSCI()->raise_e();
 	
 	statechart->runCycle();;
 	
-	EXPECT_TRUE(statechart->isStateActive(ConstOnlyNamedScope::ConstOnlyNamedScope_main_region_B));
+	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_B));
+	
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 2l);
 	
 }

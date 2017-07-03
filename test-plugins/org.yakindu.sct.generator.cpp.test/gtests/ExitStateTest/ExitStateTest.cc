@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "ExitState.h"
 #include "sc_types.h"
-ExitState* statechart;
+static ExitState* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,9 +33,9 @@ TEST_F(StatemachineTest, defaultExit) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_E));
 	
@@ -47,9 +47,9 @@ TEST_F(StatemachineTest, namedExitThroughNamedTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
 	
-	statechart->raise_f();
+	statechart->getDefaultSCI()->raise_f();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_F));
 	
@@ -61,9 +61,9 @@ TEST_F(StatemachineTest, namedExitThroughDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
 	
-	statechart->raise_g();
+	statechart->getDefaultSCI()->raise_g();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_E));
 	
@@ -75,7 +75,7 @@ TEST_F(StatemachineTest, remainInA) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ExitState::r_A));
 	

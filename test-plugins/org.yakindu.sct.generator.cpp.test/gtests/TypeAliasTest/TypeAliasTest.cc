@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "TypeAlias.h"
 #include "sc_types.h"
-TypeAlias* statechart;
+static TypeAlias* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -35,19 +35,19 @@ TEST_F(StatemachineTest, TypeAliasTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myVar()== 1l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_Mid));
 	
 	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "TypeSystem") == 0);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_Mid2));
 	
-	statechart->raise_myEvent();
+	statechart->getDefaultSCI()->raise_myEvent();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(TypeAlias::main_region_End));
 	

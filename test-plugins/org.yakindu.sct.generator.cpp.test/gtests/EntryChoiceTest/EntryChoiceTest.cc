@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "EntryChoice.h"
 #include "sc_types.h"
-EntryChoice* statechart;
+static EntryChoice* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -31,9 +31,9 @@ TEST_F(StatemachineTest, EntryChoiceTest) {
 	
 	statechart->enter();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(EntryChoice::main_region_A));
 	

@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "InternalEventLifeCycle.h"
 #include "sc_types.h"
-InternalEventLifeCycle* statechart;
+static InternalEventLifeCycle* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -35,29 +35,29 @@ TEST_F(StatemachineTest, InternalEventLifeCycleTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r2_C));
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r1_A));
-	
-	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r2_D));
-	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r1_A));
 	
 	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r2_D));
 	
-	statechart->raise_f();
+	statechart->runCycle();;
 	
-	statechart->runCycle();
+	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r1_A));
+	
+	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r2_D));
+	
+	statechart->getDefaultSCI()->raise_f();
+	
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r1_A));
 	
 	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r2_C));
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(InternalEventLifeCycle::r1_A));
 	

@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "RaiseEvent.h"
 #include "sc_types.h"
-RaiseEvent* statechart;
+static RaiseEvent* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -35,11 +35,11 @@ TEST_F(StatemachineTest, raiseEvent) {
 	
 	EXPECT_TRUE(statechart->isStateActive(RaiseEvent::main_region_StateA));
 	
-	statechart->raise_e2();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(RaiseEvent::second_region_StateB));
 	

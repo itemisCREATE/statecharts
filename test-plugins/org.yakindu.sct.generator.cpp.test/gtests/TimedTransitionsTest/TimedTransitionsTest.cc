@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "TimedTransitions.h"
 #include "sc_types.h"
-TimedTransitions* statechart;
+static TimedTransitions* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,9 +33,6 @@ TEST_F(StatemachineTest, Timer01) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TimedTransitions::main_region_Start));
 	
-	/*not implemented: WaitStatement*/
-	
-	statechart->runCycle();
 	
 	EXPECT_TRUE(statechart->isStateActive(TimedTransitions::main_region_End));
 	

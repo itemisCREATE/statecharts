@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "ShallowHistoryWithDeepEntry.h"
 #include "sc_types.h"
-ShallowHistoryWithDeepEntry* statechart;
+static ShallowHistoryWithDeepEntry* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,21 +33,21 @@ TEST_F(StatemachineTest, noDeepEntryWithinHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
 	
-	statechart->raise_toZ();
+	statechart->getDefaultSCI()->raise_toZ();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_A));
 	
-	statechart->raise_toY();
+	statechart->getDefaultSCI()->raise_toY();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
 	
-	statechart->raise_toZ();
+	statechart->getDefaultSCI()->raise_toZ();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_A));
 	
@@ -59,29 +59,29 @@ TEST_F(StatemachineTest, deepEntryWithinHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
 	
-	statechart->raise_toZ();
+	statechart->getDefaultSCI()->raise_toZ();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_A));
 	
-	statechart->raise_toC();
+	statechart->getDefaultSCI()->raise_toC();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_B__region0_C));
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_B));
 	
-	statechart->raise_toY();
+	statechart->getDefaultSCI()->raise_toY();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
 	
-	statechart->raise_toZ();
+	statechart->getDefaultSCI()->raise_toZ();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_B__region0_C));
 	
@@ -95,23 +95,23 @@ TEST_F(StatemachineTest, directDeepEntryIntoHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
 	
-	statechart->raise_toC();
+	statechart->getDefaultSCI()->raise_toC();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_B__region0_C));
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_B));
 	
-	statechart->raise_toY();
+	statechart->getDefaultSCI()->raise_toY();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Y));
 	
-	statechart->raise_toZ();
+	statechart->getDefaultSCI()->raise_toZ();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ShallowHistoryWithDeepEntry::main_region_Z__region0_B__region0_C));
 	

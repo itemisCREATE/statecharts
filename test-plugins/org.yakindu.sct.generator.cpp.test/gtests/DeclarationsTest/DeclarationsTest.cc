@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "Declarations.h"
 #include "sc_types.h"
-Declarations* statechart;
+static Declarations* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:

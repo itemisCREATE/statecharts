@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "AssignmentAsExpression.h"
 #include "sc_types.h"
-AssignmentAsExpression* statechart;
+static AssignmentAsExpression* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -37,31 +37,31 @@ TEST_F(StatemachineTest, simpleAssignment) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_a()== 9l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(AssignmentAsExpression::main_region_Subtract));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_d()== 6l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(AssignmentAsExpression::main_region_Multiply));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_e()== 15l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(AssignmentAsExpression::main_region_Divide));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_g()== 1l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(AssignmentAsExpression::main_region_Modulo));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 1l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(AssignmentAsExpression::main_region_Shift));
 	
@@ -69,19 +69,19 @@ TEST_F(StatemachineTest, simpleAssignment) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_k()== 4l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(AssignmentAsExpression::main_region_boolean_And));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_l()== 1l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(AssignmentAsExpression::main_region_boolean_Or));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_p()== 15l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(AssignmentAsExpression::main_region_boolean_Xor));
 	

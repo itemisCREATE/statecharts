@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "GuardedEntry.h"
 #include "sc_types.h"
-GuardedEntry* statechart;
+static GuardedEntry* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -28,13 +28,13 @@ class StatemachineTest : public ::testing::Test{
 void initEntryInTransition(bool guardVar, bool doneVar){
 	statechart->enter();
 	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
-	statechart->raise_e();
-	statechart->runCycle();
+	statechart->getDefaultSCI()->raise_e();
+	statechart->runCycle();;
 	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_B));
 	statechart->getDefaultSCI()->set_guard(guardVar);
 	statechart->getDefaultSCI()->set_done(doneVar);
-	statechart->raise_e();
-	statechart->runCycle();
+	statechart->getDefaultSCI()->raise_e();
+	statechart->runCycle();;
 	EXPECT_TRUE(statechart->isStateActive(GuardedEntry::main_region_A));
 }
 

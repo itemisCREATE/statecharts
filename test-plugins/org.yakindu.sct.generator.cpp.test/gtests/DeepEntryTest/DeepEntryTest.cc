@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "DeepEntry.h"
 #include "sc_types.h"
-DeepEntry* statechart;
+static DeepEntry* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -29,38 +29,12 @@ class StatemachineTest : public ::testing::Test{
 TEST_F(StatemachineTest, enterToSubstate) {
 	
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 0l);
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_z()== 0l);
-	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1l);
+	long vergleich = 4l;
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 1l);
+	EXPECT_TRUE(vergleich== 4l);
 	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_z()== 2l);
-	
-	statechart->raise_e();
-	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(DeepEntry::r2_B_r_BB));
-	
-	statechart->raise_f();
-	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(DeepEntry::r2_C));
-	
-	statechart->raise_f();
-	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(DeepEntry::r2_B_r_BB));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 1l);
+	statechart->exit();
 	
 }

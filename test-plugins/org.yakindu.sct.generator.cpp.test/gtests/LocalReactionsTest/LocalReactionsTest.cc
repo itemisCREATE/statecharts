@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "LocalReactions.h"
 #include "sc_types.h"
-LocalReactions* statechart;
+static LocalReactions* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,7 +33,7 @@ TEST_F(StatemachineTest, LocalReactionsTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(LocalReactions::main_region_A));
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1l);
 	

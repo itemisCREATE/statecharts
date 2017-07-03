@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "StaticChoice.h"
 #include "sc_types.h"
-StaticChoice* statechart;
+static StaticChoice* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,6 +33,6 @@ TEST_F(StatemachineTest, StaticChoiceTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(StaticChoice::main_region_Start));
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 }

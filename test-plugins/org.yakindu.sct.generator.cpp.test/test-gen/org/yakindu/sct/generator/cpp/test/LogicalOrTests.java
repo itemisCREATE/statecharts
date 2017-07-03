@@ -18,20 +18,20 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/LogicalOrTestsTest/LogicalOrTestsTest.cc", program = "gtests/LogicalOrTestsTest/LogicalOr", model = "testmodels/SCTUnit/LogicalOr.sct" )
+@GTest(sourceFile = "gtests/LogicalOrTest/LogicalOrTests.cc", program = "gtests/LogicalOrTest/LogicalOr", model = "testmodels/SCTUnit/LogicalOr.sct" )
 @RunWith(GTestRunner.class)
-public class LogicalOrTestsTest {
+public class LogicalOrTests {
 protected final GTestHelper helper = new GTestHelper(this) {
 		@Override
 		protected void getSourceFiles(Collection<String> files) {
-			super.getSourceFiles(files);
+	super.getSourceFiles(files);
 		files.add(getFileName(getTestProgram()) + ".cpp");
 		}
 	};
 
 	@Before
 	public void setUp() {
-		helper.generate();
-		helper.compile();
+	helper.generate();
+	helper.compile();
 	}
 }

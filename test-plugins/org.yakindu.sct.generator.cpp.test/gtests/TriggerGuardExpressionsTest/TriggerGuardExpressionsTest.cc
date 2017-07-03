@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "TriggerGuardExpressions.h"
 #include "sc_types.h"
-TriggerGuardExpressions* statechart;
+static TriggerGuardExpressions* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,33 +33,33 @@ TEST_F(StatemachineTest, trueGuard) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
 	statechart->getDefaultSCI()->set_b(true);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_B));
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
 	
-	statechart->raise_e2();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_B));
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->raise_e2();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_B));
 	
@@ -73,23 +73,23 @@ TEST_F(StatemachineTest, falseGuard) {
 	
 	statechart->getDefaultSCI()->set_b(false);
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
-	
-	statechart->raise_e2();
-	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->raise_e2();
+	statechart->runCycle();;
 	
-	statechart->runCycle();
+	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
+	
+	statechart->getDefaultSCI()->raise_e1();
+	
+	statechart->getDefaultSCI()->raise_e2();
+	
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(TriggerGuardExpressions::main_region_A));
 	

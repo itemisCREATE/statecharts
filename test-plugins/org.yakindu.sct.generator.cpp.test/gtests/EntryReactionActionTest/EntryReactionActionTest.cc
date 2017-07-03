@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "EntryReactionAction.h"
 #include "sc_types.h"
-EntryReactionAction* statechart;
+static EntryReactionAction* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -27,10 +27,10 @@ class StatemachineTest : public ::testing::Test{
 
 void init(){
 	statechart->enter();
-	statechart->raise_b();
-	statechart->runCycle();
-	statechart->raise_d();
-	statechart->runCycle();
+	statechart->getDefaultSCI()->raise_b();
+	statechart->runCycle();;
+	statechart->getDefaultSCI()->raise_d();
+	statechart->runCycle();;
 	statechart->getDefaultSCI()->set_enteredR1(false);
 	statechart->getDefaultSCI()->set_enteredR2(false);
 	statechart->getDefaultSCI()->set_enteredBdefault(false);
@@ -56,9 +56,9 @@ TEST_F(StatemachineTest, entryOnRTS) {
 	
 	init();
 	
-	statechart->raise_b();
+	statechart->getDefaultSCI()->raise_b();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR1());
 	
@@ -74,9 +74,9 @@ TEST_F(StatemachineTest, noEntryTransitionActionOnHistory) {
 	
 	init();
 	
-	statechart->raise_d();
+	statechart->getDefaultSCI()->raise_d();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_enteredR1());
 	

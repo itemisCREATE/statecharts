@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "HistoryWithoutInitialStep.h"
 #include "sc_types.h"
-HistoryWithoutInitialStep* statechart;
+static HistoryWithoutInitialStep* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -28,8 +28,8 @@ class StatemachineTest : public ::testing::Test{
 void init(){
 	statechart->enter();
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_A));
-	statechart->raise_toB();
-	statechart->runCycle();
+	statechart->getDefaultSCI()->raise_toB();
+	statechart->runCycle();;
 }
 
 TEST_F(StatemachineTest, enterThroughInitialEntry) {
@@ -39,9 +39,9 @@ TEST_F(StatemachineTest, enterThroughInitialEntry) {
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_C));
 	
-	statechart->raise_next();
+	statechart->getDefaultSCI()->raise_next();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_D));
 	
@@ -53,15 +53,15 @@ TEST_F(StatemachineTest, enterCThroughHistory) {
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_C));
 	
-	statechart->raise_toA();
+	statechart->getDefaultSCI()->raise_toA();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_A));
 	
-	statechart->raise_toHistory();
+	statechart->getDefaultSCI()->raise_toHistory();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_C));
 	
@@ -71,21 +71,21 @@ TEST_F(StatemachineTest, enterDThroughHistory) {
 	
 	init();
 	
-	statechart->raise_next();
+	statechart->getDefaultSCI()->raise_next();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_D));
 	
-	statechart->raise_toA();
+	statechart->getDefaultSCI()->raise_toA();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_A));
 	
-	statechart->raise_toHistory();
+	statechart->getDefaultSCI()->raise_toHistory();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithoutInitialStep::main_region_B_r1_D));
 	

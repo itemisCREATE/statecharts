@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::cpp {
-	statechart Operations {
+	statechart ConditionalExpressions {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "OperationsTestTest"
+			targetFolder = "ConditionalExpressionsTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

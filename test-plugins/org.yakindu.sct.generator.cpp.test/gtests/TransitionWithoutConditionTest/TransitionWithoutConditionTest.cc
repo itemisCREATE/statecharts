@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "TransitionWithoutCondition.h"
 #include "sc_types.h"
-TransitionWithoutCondition* statechart;
+static TransitionWithoutCondition* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,7 +33,7 @@ TEST_F(StatemachineTest, TransitionWithoutConditionTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(TransitionWithoutCondition::main_region_A));
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(TransitionWithoutCondition::main_region_B));
 	

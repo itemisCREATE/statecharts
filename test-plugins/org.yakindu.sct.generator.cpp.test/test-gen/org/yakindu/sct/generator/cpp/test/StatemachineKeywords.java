@@ -18,20 +18,20 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/StatemachineKeywordsTest/StatemachineKeywordsTest.cc", program = "gtests/StatemachineKeywordsTest/StatechartKeywords", model = "testmodels/SCTUnit/StatechartKeywords.sct" )
+@GTest(sourceFile = "gtests/StatemachineKeywords/StatemachineKeywords.cc", program = "gtests/StatemachineKeywords/StatechartKeywords", model = "testmodels/SCTUnit/StatechartKeywords.sct" )
 @RunWith(GTestRunner.class)
-public class StatemachineKeywordsTest {
+public class StatemachineKeywords {
 protected final GTestHelper helper = new GTestHelper(this) {
 		@Override
 		protected void getSourceFiles(Collection<String> files) {
-			super.getSourceFiles(files);
+	super.getSourceFiles(files);
 		files.add(getFileName(getTestProgram()) + ".cpp");
 		}
 	};
 
 	@Before
 	public void setUp() {
-		helper.generate();
-		helper.compile();
+	helper.generate();
+	helper.compile();
 	}
 }

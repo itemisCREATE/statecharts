@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "ReadOnlyVariable.h"
 #include "sc_types.h"
-ReadOnlyVariable* statechart;
+static ReadOnlyVariable* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -49,7 +49,7 @@ TEST_F(StatemachineTest, ReadOnlyVariableTest) {
 	
 	EXPECT_TRUE(statechart->getSCI_A()->get_myReal()== 1.1);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ReadOnlyVariable::main_region_StateB));
 	

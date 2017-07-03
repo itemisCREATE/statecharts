@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "EntryExitSelfTransition.h"
 #include "sc_types.h"
-EntryExitSelfTransition* statechart;
+static EntryExitSelfTransition* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -27,7 +27,7 @@ class StatemachineTest : public ::testing::Test{
 
 void init(){
 	statechart->enter();
-	statechart->runCycle();
+	statechart->runCycle();;
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
 	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_B));
 	statechart->getDefaultSCI()->set_entries(0l);
@@ -38,15 +38,17 @@ TEST_F(StatemachineTest, SelfTransitionToChildState) {
 	
 	init();
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 1l);
 	
 	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_C));
+	
+	statechart->exit();
 	
 }
 TEST_F(StatemachineTest, SelfTransitionFromChildState) {
@@ -54,9 +56,9 @@ TEST_F(StatemachineTest, SelfTransitionFromChildState) {
 	
 	init();
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 0l);
 	
@@ -64,14 +66,16 @@ TEST_F(StatemachineTest, SelfTransitionFromChildState) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_C));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(EntryExitSelfTransition::main_region_A__region0_B));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_entries()== 1l);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_exits()== 1l);
+	
+	statechart->exit();
 	
 }

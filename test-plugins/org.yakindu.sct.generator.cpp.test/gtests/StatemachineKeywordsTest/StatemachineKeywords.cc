@@ -10,14 +10,14 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "ConditionalExpressions.h"
+#include "StatechartKeywords.h"
 #include "sc_types.h"
-ConditionalExpressions* statechart;
+static StatechartKeywords* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
-		statechart = new ConditionalExpressions();
+		statechart = new StatechartKeywords();
 		statechart->init();
 	}
 	virtual void TearDown() {
@@ -26,21 +26,11 @@ class StatemachineTest : public ::testing::Test{
 };
 
 
-TEST_F(StatemachineTest, ConditionalExpressionTest) {
+TEST_F(StatemachineTest, statemachineKeywords) {
 	
 	
 	statechart->enter();
 	
-	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_A));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 1l);
-	
-	statechart->raise_e();
-	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(ConditionalExpressions::main_region_B));
-	
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 2l);
+	EXPECT_TRUE(statechart->isStateActive(StatechartKeywords::main_region_Timer));
 	
 }
