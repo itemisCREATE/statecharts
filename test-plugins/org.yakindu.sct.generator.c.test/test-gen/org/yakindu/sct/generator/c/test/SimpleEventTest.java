@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/SimpleEventTest/SimpleEventTest.cc", program = "gtests/SimpleEventTest/SimpleEvent", model = "testmodels/SCTUnit/SimpleEvent.sct" )
+@GTest(sourceFile = "gtests/SimpleEvent/SimpleEventTest.cc", program = "gtests/SimpleEvent/SimpleEvent", model = "testmodels/SCTUnit/SimpleEvent.sct" )
 @RunWith(GTestRunner.class)
 public class SimpleEventTest {
 

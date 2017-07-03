@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/FinalStateTest/FinalStateTest.cc", program = "gtests/FinalStateTest/FinalState", model = "testmodels/SCTUnit/FinalState.sct" )
+@GTest(sourceFile = "gtests/FinalState/FinalStateTest.cc", program = "gtests/FinalState/FinalState", model = "testmodels/SCTUnit/FinalState.sct" )
 @RunWith(GTestRunner.class)
 public class FinalStateTest {
 

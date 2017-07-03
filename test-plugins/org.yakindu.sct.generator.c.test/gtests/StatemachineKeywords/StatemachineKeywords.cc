@@ -12,31 +12,31 @@
 #include "StatechartKeywords.h"
 #include "StatechartKeywordsRequired.h"
 
-StatechartKeywords handle;
+static StatechartKeywords statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
-		statechartKeywords_init(&handle);
+		statechartKeywords_init(&statechart);
 	}
 };
 
 
 TEST_F(StatemachineTest, statemachineKeywords) {					
-	statechartKeywords_enter(&handle);
-	EXPECT_TRUE(statechartKeywords_isStateActive(&handle, StatechartKeywords_main_region_Timer));
+	statechartKeywords_enter(&statechart);
+	EXPECT_TRUE(statechartKeywords_isStateActive(&statechart, StatechartKeywords_main_region_Timer));
 }
 
-void statechartKeywords_setTimer(StatechartKeywords* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
+void statechartKeywords_setTimer(StatechartKeywords* statechart, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic){
 	// Mockup
 	statechartKeywords_raiseTimeEvent(handle, evid);
 }
 
-void statechartKeywords_unsetTimer(StatechartKeywords* handle, const sc_eventid evid){
+void statechartKeywords_unsetTimer(StatechartKeywords* statechart, const sc_eventid evid){
 	// Mockup
 }		
 
-void statechartKeywordsIfaceIf_myOperation(const StatechartKeywords* handle){
+void statechartKeywordsIfaceIf_myOperation(const StatechartKeywords* statechart){
 }
-void statechartKeywordsInternal_myOperation(const StatechartKeywords* handle){
+void statechartKeywordsInternal_myOperation(const StatechartKeywords* statechart){
 }

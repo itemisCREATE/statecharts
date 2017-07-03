@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/TypeAliasTest/TypeAliasTest.cc", program = "gtests/TypeAliasTest/TypeAlias", model = "testmodels/SCTUnit/TypeAlias.sct" )
+@GTest(sourceFile = "gtests/TypeAlias/TypeAliasTest.cc", program = "gtests/TypeAlias/TypeAlias", model = "testmodels/SCTUnit/TypeAlias.sct" )
 @RunWith(GTestRunner.class)
 public class TypeAliasTest {
 

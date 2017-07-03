@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/PriorityValuesTest/PriorityValuesTest.cc", program = "gtests/PriorityValuesTest/PriorityValues", model = "testmodels/SCTUnit/PriorityValues.sct" )
+@GTest(sourceFile = "gtests/PriorityValues/PriorityValuesTest.cc", program = "gtests/PriorityValues/PriorityValues", model = "testmodels/SCTUnit/PriorityValues.sct" )
 @RunWith(GTestRunner.class)
 public class PriorityValuesTest {
 

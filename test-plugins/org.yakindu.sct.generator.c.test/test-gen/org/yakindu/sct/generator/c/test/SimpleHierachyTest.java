@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/SimpleHierachyTest/SimpleHierachyTest.cc", program = "gtests/SimpleHierachyTest/SimpleHierachy", model = "testmodels/SCTUnit/SimpleHierachy.sct" )
+@GTest(sourceFile = "gtests/SimpleHierachy/SimpleHierachyTest.cc", program = "gtests/SimpleHierachy/SimpleHierachy", model = "testmodels/SCTUnit/SimpleHierachy.sct" )
 @RunWith(GTestRunner.class)
 public class SimpleHierachyTest {
 

@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/ReadOnlyVariableTest/ReadOnlyVariableTest.cc", program = "gtests/ReadOnlyVariableTest/ReadOnlyVariable", model = "testmodels/SCTUnit/ReadOnlyVariable.sct" )
+@GTest(sourceFile = "gtests/ReadOnlyVariable/ReadOnlyVariableTest.cc", program = "gtests/ReadOnlyVariable/ReadOnlyVariable", model = "testmodels/SCTUnit/ReadOnlyVariable.sct" )
 @RunWith(GTestRunner.class)
 public class ReadOnlyVariableTest {
 

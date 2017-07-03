@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/ShallowHistoryWithDeepEntryTest/ShallowHistoryWithDeepEntryTest.cc", program = "gtests/ShallowHistoryWithDeepEntryTest/ShallowHistoryWithDeepEntry", model = "testmodels/SCTUnit/ShallowHistoryWithDeepEntry.sct" )
+@GTest(sourceFile = "gtests/ShallowHistoryWithDeepEntry/ShallowHistoryWithDeepEntryTest.cc", program = "gtests/ShallowHistoryWithDeepEntry/ShallowHistoryWithDeepEntry", model = "testmodels/SCTUnit/ShallowHistoryWithDeepEntry.sct" )
 @RunWith(GTestRunner.class)
 public class ShallowHistoryWithDeepEntryTest {
 

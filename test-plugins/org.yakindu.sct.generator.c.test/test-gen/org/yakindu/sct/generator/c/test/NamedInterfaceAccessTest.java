@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/NamedInterfaceAccessTest/NamedInterfaceAccessTest.cc", program = "gtests/NamedInterfaceAccessTest/NamedInterfaceAccess", model = "testmodels/SCTUnit/NamedInterfaceAccess.sct" )
+@GTest(sourceFile = "gtests/NamedInterfaceAccess/NamedInterfaceAccessTest.cc", program = "gtests/NamedInterfaceAccess/NamedInterfaceAccess", model = "testmodels/SCTUnit/NamedInterfaceAccess.sct" )
 @RunWith(GTestRunner.class)
 public class NamedInterfaceAccessTest {
 

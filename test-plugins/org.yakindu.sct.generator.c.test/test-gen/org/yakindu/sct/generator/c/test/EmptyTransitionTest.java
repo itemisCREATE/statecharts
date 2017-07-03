@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/EmptyTransitionTest/EmptyTransitionTest.cc", program = "gtests/EmptyTransitionTest/EmptyTransition", model = "testmodels/SCTUnit/EmptyTransition.sct" )
+@GTest(sourceFile = "gtests/EmptyTransition/EmptyTransitionTest.cc", program = "gtests/EmptyTransition/EmptyTransition", model = "testmodels/SCTUnit/EmptyTransition.sct" )
 @RunWith(GTestRunner.class)
 public class EmptyTransitionTest {
 

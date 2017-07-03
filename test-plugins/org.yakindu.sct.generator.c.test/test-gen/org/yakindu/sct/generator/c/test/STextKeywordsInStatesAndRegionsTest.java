@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/STextKeywordsInStatesAndRegionsTest/STextKeywordsInStatesAndRegionsTest.cc", program = "gtests/STextKeywordsInStatesAndRegionsTest/STextKeywordsInStatesAndRegions", model = "testmodels/SCTUnit/STextKeywordsInStatesAndRegions.sct" )
+@GTest(sourceFile = "gtests/STextKeywordsInStatesAndRegions/STextKeywordsInStatesAndRegionsTest.cc", program = "gtests/STextKeywordsInStatesAndRegions/STextKeywordsInStatesAndRegions", model = "testmodels/SCTUnit/STextKeywordsInStatesAndRegions.sct" )
 @RunWith(GTestRunner.class)
 public class STextKeywordsInStatesAndRegionsTest {
 

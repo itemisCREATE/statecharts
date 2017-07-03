@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/HistoryWithExitPointTest/HistoryWithExitPointTest.cc", program = "gtests/HistoryWithExitPointTest/HistoryWithExitPoint", model = "testmodels/SCTUnit/HistoryWithExitPoint.sct" )
+@GTest(sourceFile = "gtests/HistoryWithExitPoint/HistoryWithExitPointTest.cc", program = "gtests/HistoryWithExitPoint/HistoryWithExitPoint", model = "testmodels/SCTUnit/HistoryWithExitPoint.sct" )
 @RunWith(GTestRunner.class)
 public class HistoryWithExitPointTest {
 

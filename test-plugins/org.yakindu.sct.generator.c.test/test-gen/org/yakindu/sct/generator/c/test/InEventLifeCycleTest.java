@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/InEventLifeCycleTest/InEventLifeCycleTest.cc", program = "gtests/InEventLifeCycleTest/InEventLifeCycle", model = "testmodels/SCTUnit/InEventLifeCycle.sct" )
+@GTest(sourceFile = "gtests/InEventLifeCycle/InEventLifeCycleTest.cc", program = "gtests/InEventLifeCycle/InEventLifeCycle", model = "testmodels/SCTUnit/InEventLifeCycle.sct" )
 @RunWith(GTestRunner.class)
 public class InEventLifeCycleTest {
 

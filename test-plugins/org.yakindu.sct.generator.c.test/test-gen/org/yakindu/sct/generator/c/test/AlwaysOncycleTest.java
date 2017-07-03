@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/AlwaysOncycleTest/AlwaysOncycleTest.cc", program = "gtests/AlwaysOncycleTest/AlwaysOncycle", model = "testmodels/SCTUnit/AlwaysOncycle.sct" )
+@GTest(sourceFile = "gtests/AlwaysOncycle/AlwaysOncycleTest.cc", program = "gtests/AlwaysOncycle/AlwaysOncycle", model = "testmodels/SCTUnit/AlwaysOncycle.sct" )
 @RunWith(GTestRunner.class)
 public class AlwaysOncycleTest {
 

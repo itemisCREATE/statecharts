@@ -14,8 +14,8 @@ extern "C" {
 /*! Enumeration of all states */ 
 typedef enum
 {
-	StatechartKeywords_main_region_Timer,
-	StatechartKeywords_last_state
+	StatechartKeywords_last_state,
+	StatechartKeywords_main_region_Timer
 } StatechartKeywordsStates;
 
 /*! Type definition of the data structure for the StatechartKeywordsIfaceIf interface scope. */
@@ -52,6 +52,9 @@ typedef struct
 
 /*! Define dimension of the state configuration vector for orthogonal states. */
 #define STATECHARTKEYWORDS_MAX_ORTHOGONAL_STATES 1
+
+/*! Define indices of states in the StateConfVector */
+#define SCVI_STATECHARTKEYWORDS_MAIN_REGION_TIMER 0
 
 /*! 
  * Type definition of the data structure for the StatechartKeywords state machine.
