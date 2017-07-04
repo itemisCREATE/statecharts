@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/SyncJoinTest/SyncJoinTest.cc", program = "gtests/SyncJoinTest/SyncJoin", model = "testmodels/SCTUnit/SyncJoin.sct" )
+@GTest(sourceFile = "gtests/SyncJoin/SyncJoinTest.cc", program = "gtests/SyncJoin/SyncJoin", model = "testmodels/SCTUnit/SyncJoin.sct" )
 @RunWith(GTestRunner.class)
 public class SyncJoinTest {
 

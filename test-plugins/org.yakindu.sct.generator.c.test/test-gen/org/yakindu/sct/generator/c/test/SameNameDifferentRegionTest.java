@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/SameNameDifferentRegionTest/SameNameDifferentRegionTest.cc", program = "gtests/SameNameDifferentRegionTest/SameNameDifferentRegion", model = "testmodels/SCTUnit/SameNameDifferentRegion.sct" )
+@GTest(sourceFile = "gtests/SameNameDifferentRegion/SameNameDifferentRegionTest.cc", program = "gtests/SameNameDifferentRegion/SameNameDifferentRegion", model = "testmodels/SCTUnit/SameNameDifferentRegion.sct" )
 @RunWith(GTestRunner.class)
 public class SameNameDifferentRegionTest {
 

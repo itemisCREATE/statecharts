@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/DynamicChoiceTest/DynamicChoiceTest.cc", program = "gtests/DynamicChoiceTest/DynamicChoice", model = "testmodels/SCTUnit/DynamicChoice.sct" )
+@GTest(sourceFile = "gtests/DynamicChoice/DynamicChoiceTest.cc", program = "gtests/DynamicChoice/DynamicChoice", model = "testmodels/SCTUnit/DynamicChoice.sct" )
 @RunWith(GTestRunner.class)
 public class DynamicChoiceTest {
 

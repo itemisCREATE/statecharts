@@ -14,10 +14,10 @@ extern "C" {
 /*! Enumeration of all states */ 
 typedef enum
 {
+	Constants_last_state,
 	Constants_main_region_A,
 	Constants_main_region_B,
-	Constants_main_region_C,
-	Constants_last_state
+	Constants_main_region_C
 } ConstantsStates;
 
 /*! Type definition of the data structure for the ConstantsIface interface scope. */
@@ -40,6 +40,11 @@ extern const sc_integer CONSTANTS_CONSTANTSIFACENAMED_TWO;
 
 /*! Define dimension of the state configuration vector for orthogonal states. */
 #define CONSTANTS_MAX_ORTHOGONAL_STATES 1
+
+/*! Define indices of states in the StateConfVector */
+#define SCVI_CONSTANTS_MAIN_REGION_A 0
+#define SCVI_CONSTANTS_MAIN_REGION_B 0
+#define SCVI_CONSTANTS_MAIN_REGION_C 0
 
 /*! 
  * Type definition of the data structure for the Constants state machine.

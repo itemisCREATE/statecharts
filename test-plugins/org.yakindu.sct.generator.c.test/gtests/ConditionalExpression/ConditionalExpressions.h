@@ -14,9 +14,9 @@ extern "C" {
 /*! Enumeration of all states */ 
 typedef enum
 {
+	ConditionalExpressions_last_state,
 	ConditionalExpressions_main_region_A,
-	ConditionalExpressions_main_region_B,
-	ConditionalExpressions_last_state
+	ConditionalExpressions_main_region_B
 } ConditionalExpressionsStates;
 
 /*! Type definition of the data structure for the ConditionalExpressionsIface interface scope. */
@@ -30,6 +30,10 @@ typedef struct
 
 /*! Define dimension of the state configuration vector for orthogonal states. */
 #define CONDITIONALEXPRESSIONS_MAX_ORTHOGONAL_STATES 1
+
+/*! Define indices of states in the StateConfVector */
+#define SCVI_CONDITIONALEXPRESSIONS_MAIN_REGION_A 0
+#define SCVI_CONDITIONALEXPRESSIONS_MAIN_REGION_B 0
 
 /*! 
  * Type definition of the data structure for the ConditionalExpressions state machine.

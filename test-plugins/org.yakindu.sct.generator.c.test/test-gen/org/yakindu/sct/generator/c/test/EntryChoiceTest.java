@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/EntryChoiceTest/EntryChoiceTest.cc", program = "gtests/EntryChoiceTest/EntryChoice", model = "testmodels/SCTUnit/EntryChoice.sct" )
+@GTest(sourceFile = "gtests/EntryChoice/EntryChoiceTest.cc", program = "gtests/EntryChoice/EntryChoice", model = "testmodels/SCTUnit/EntryChoice.sct" )
 @RunWith(GTestRunner.class)
 public class EntryChoiceTest {
 

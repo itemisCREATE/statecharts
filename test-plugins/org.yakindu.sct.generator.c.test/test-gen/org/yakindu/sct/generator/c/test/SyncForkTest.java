@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/SyncForkTest/SyncForkTest.cc", program = "gtests/SyncForkTest/SyncFork", model = "testmodels/SCTUnit/SyncFork.sct" )
+@GTest(sourceFile = "gtests/SyncFork/SyncForkTest.cc", program = "gtests/SyncFork/SyncFork", model = "testmodels/SCTUnit/SyncFork.sct" )
 @RunWith(GTestRunner.class)
 public class SyncForkTest {
 

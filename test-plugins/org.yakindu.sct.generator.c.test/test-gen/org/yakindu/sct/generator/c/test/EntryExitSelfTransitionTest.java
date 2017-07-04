@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/EntryExitSelfTransitionTest/EntryExitSelfTransitionTest.cc", program = "gtests/EntryExitSelfTransitionTest/EntryExitSelfTransition", model = "testmodels/SCTUnit/EntryExitSelfTransition.sct" )
+@GTest(sourceFile = "gtests/EntryExitSelfTransition/EntryExitSelfTransitionTest.cc", program = "gtests/EntryExitSelfTransition/EntryExitSelfTransition", model = "testmodels/SCTUnit/EntryExitSelfTransition.sct" )
 @RunWith(GTestRunner.class)
 public class EntryExitSelfTransitionTest {
 

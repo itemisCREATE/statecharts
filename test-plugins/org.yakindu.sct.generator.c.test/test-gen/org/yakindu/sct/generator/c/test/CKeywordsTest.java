@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/CKeywordsTest/CKeywordsTest.cc", program = "gtests/CKeywordsTest/CKeywords", model = "testmodels/SCTUnit/CKeywords.sct" )
+@GTest(sourceFile = "gtests/CKeywords/CKeywordsTest.cc", program = "gtests/CKeywords/CKeywords", model = "testmodels/SCTUnit/CKeywords.sct" )
 @RunWith(GTestRunner.class)
 public class CKeywordsTest {
 
