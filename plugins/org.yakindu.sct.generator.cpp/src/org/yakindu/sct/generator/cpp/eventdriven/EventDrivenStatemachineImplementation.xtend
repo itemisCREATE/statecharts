@@ -1,30 +1,30 @@
 package org.yakindu.sct.generator.cpp.eventdriven
 
+import com.google.inject.Inject
 import java.util.List
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.cpp.StatemachineImplementation
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class EventDrivenStatemachineImplementation extends StatemachineImplementation {
+	@Inject extension EventNaming eventNaming
 	
-	override additionalFunctions(ExecutionFlow it, GeneratorEntry entry) {
+	override additionalFunctions(ExecutionFlow it) {
 		'''
+		«nextEventFunction»
+		
 		«generateInternalDispatchEventFunction»
 		
 		«generateInterfaceDispatchFunctions»
 		'''
 	}
 	
-	override enterFunction(ExecutionFlow it) '''
-		void «module»::enter()
-		{
-			«enterSequences.defaultSequence.code»
-			runCycle();
-		}
-	'''
+	override protected usingNamespaces(ExecutionFlow it) {
+		'''using namespace «eventNamespaceName»;'''
+	}
+	
 	
 	override runCycleFunction(ExecutionFlow it) { 
 	'''
@@ -32,11 +32,8 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 		{
 			clearOutEvents();
 			
-			while(!internalEventQueue.empty())
+			while(SctEvent * currentEvent = getNextEvent())
 			{
-				/* Take event from front of queue and remove it */
-				currentEvent = internalEventQueue.front();
-				internalEventQueue.pop_front();
 				/* Set event flags as usual */
 				dispatch_event(currentEvent);
 				
@@ -50,10 +47,28 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 	'''
 	}
 	
+	def getNextEventFunction(ExecutionFlow it) {
+		'''
+		SctEvent* «module»::getNextEvent()
+		{
+			SctEvent* nextEvent = 0;
+			
+			if(!internalEventQueue.empty()) {
+				nextEvent = internalEventQueue.front();
+				internalEventQueue.pop_front();
+			} else if(!inEventQueue.empty()) {
+				nextEvent = inEventQueue.front();
+				inEventQueue.pop_front();
+			}
+			
+			return nextEvent;
+		}
+		'''
+	}
+	
 	override constructorDefinition(ExecutionFlow it) {
 	val List<String> toInit = newArrayList
 	toInit.addAll(getInterfaces.map[instance].map[i|'''«i»(this)'''])
-	toInit.add("currentEvent(0)")
 	'''
 		«module»::«module»() :
 			«FOR init : toInit SEPARATOR ","»

@@ -12,7 +12,7 @@ package org.yakindu.sct.generator.cpp;
 
 import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.FEATURE_INCLUDES;
 import static org.yakindu.sct.generator.cpp.features.CPPFeatureConstants.PARAMETER_INCLUDES_USE_RELATIVE_PATHS;
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*;
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;

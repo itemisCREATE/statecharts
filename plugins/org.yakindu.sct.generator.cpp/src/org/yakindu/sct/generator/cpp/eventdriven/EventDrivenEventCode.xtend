@@ -1,11 +1,15 @@
 package org.yakindu.sct.generator.cpp.eventdriven
 
+import com.google.inject.Inject
 import org.yakindu.sct.generator.cpp.EventCode
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
 class EventDrivenEventCode extends EventCode {
+	@Inject extension EventNaming eventNaming
+	
+	
 	override generateEvents(ExecutionFlow it, StatechartScope scope)
 		'''
 			«FOR event : scope.incomingEvents»
@@ -57,9 +61,9 @@ class EventDrivenEventCode extends EventCode {
 			void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams»)
 			{
 				«IF event.hasValue»
-				parent->internalEventQueue.push_back(new «event.eventClassName»(«event.eventEnumMemberName», value));
+				parent->internalEventQueue.push_back(new «eventNamespaceName»::«event.eventClassName»(«event.eventEnumMemberName», value));
 				«ELSE»
-				parent->internalEventQueue.push_back(new «event.eventClassName»(«event.eventEnumMemberName»));
+				parent->internalEventQueue.push_back(new «eventNamespaceName»::«event.eventClassName»(«event.eventEnumMemberName»));
 				«ENDIF»
 				parent->runCycle();
 			}
