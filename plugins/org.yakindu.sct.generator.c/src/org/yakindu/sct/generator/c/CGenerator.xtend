@@ -12,13 +12,17 @@ package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations.GenArtifactConfiguration
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfiguration
+import org.yakindu.sct.generator.c.eventdriven.StatechartEventsHeader
+import org.yakindu.sct.generator.c.eventdriven.StatechartEventsSource
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sgraph.Statechart
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION
 
 /**
  * This is the C code generators main class. 
@@ -31,6 +35,8 @@ class CGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineHeader statemachineHeader
 	@Inject extension StatemachineSource statemachineSource
 	@Inject extension StatemachineRequiredHeader statemachineRequiredHeader
+	@Inject extension StatechartEventsHeader statechartEventsHeader
+	@Inject extension StatechartEventsSource statechartEventsSource
 	@Inject extension Navigation
 	@Inject extension GenmodelEntries
 	@Inject extension Naming
@@ -50,12 +56,17 @@ class CGenerator implements IExecutionFlowGenerator {
 		}
 	}
 	
-	def protected initGenerationArtifacts(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
+	def protected initGenerationArtifacts(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		locations.configure(flow.typesModule.h, entry.libraryOutput, types)
 		locations.configure(flow.module.h, entry.headerOutput, statemachineHeader)
 		locations.configure(flow.module.c, entry.sourceOutput, statemachineSource)
 		if (flow.timed || !flow.operations.empty || entry.tracingEnterState || entry.tracingExitState) {
 			locations.configure(flow.module.client.h, entry.headerOutput, statemachineRequiredHeader)
+		}
+		
+		if((sourceElement as Statechart).getAnnotationOfType(EVENT_DRIVEN_ANNOTATION) !== null) {
+			locations.configure(flow.eventsModule.h, entry.headerOutput, statechartEventsHeader)
+			locations.configure(flow.eventsModule.c, entry.sourceOutput, statechartEventsSource)
 		}
 	}
 	

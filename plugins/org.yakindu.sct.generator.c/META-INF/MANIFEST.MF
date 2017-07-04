@@ -8,7 +8,8 @@ Require-Bundle: org.yakindu.sct.model.sexec,
  org.yakindu.sct.generator.core,
  org.yakindu.sct.generator.genmodel,
  org.yakindu.base.types,
- org.yakindu.sct.domain.generic
+ org.yakindu.sct.domain.generic,
+ org.yakindu.sct.model.stext.lib;bundle-version="3.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.generator.c,
  org.yakindu.sct.generator.c.features,
