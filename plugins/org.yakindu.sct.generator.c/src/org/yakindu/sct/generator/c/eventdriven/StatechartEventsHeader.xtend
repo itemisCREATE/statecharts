@@ -33,8 +33,30 @@ class StatechartEventsHeader implements IContentTemplate {
 		#include "«(typesModule.h).relativeTo(module.h)»"
 		
 		«generateEventsEnum»
+		
+		«generateEventStruct»
+		
+		«generateEventQueue»
 
 		#endif /* «generateHeaderDefineGuard» */
+		'''
+	}
+	
+	def generateEventStruct(ExecutionFlow it) {
+		'''
+		typedef struct {
+			«eventEnumName» name;
+			boolean hasValue;
+			void * value;
+		} «eventStructTypeName»;
+		'''
+	}
+
+	def generateEventQueue(ExecutionFlow it) {
+		'''
+		typedef struct «eventQueueTypeName»_s {
+			«eventQueueTypeName»_s * next;
+		} «eventQueueTypeName»;
 		'''
 	}
 	
