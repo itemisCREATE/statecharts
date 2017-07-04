@@ -148,7 +148,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		if (type != null) {
 			extendsRegistry.removeAll(type);
 			resource.getContents().remove(type);
-			typeRegistry.remove(type);
+			typeRegistry.remove(name);
 		}
 	}
 
