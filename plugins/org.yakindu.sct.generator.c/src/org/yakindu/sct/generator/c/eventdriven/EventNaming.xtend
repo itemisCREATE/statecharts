@@ -19,4 +19,12 @@ class EventNaming {
 	def eventEnumName(ExecutionFlow it) {
 		'''«module»EventName'''
 	}
+	
+	def eventStructTypeName(ExecutionFlow it) {
+		'''«name»_event'''
+	}
+	
+	def eventQueueTypeName(ExecutionFlow it) {
+		'''«name»_event_queue'''
+	}
 }
