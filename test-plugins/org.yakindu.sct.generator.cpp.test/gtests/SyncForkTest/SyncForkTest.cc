@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "SyncFork.h"
 #include "sc_types.h"
-SyncFork* statechart;
+static SyncFork* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,9 +33,9 @@ TEST_F(StatemachineTest, syncForkTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_A));
 	
-	statechart->raise_f();
+	statechart->getDefaultSCI()->raise_f();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_B));
 	
@@ -43,9 +43,9 @@ TEST_F(StatemachineTest, syncForkTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_B_r2_D1));
 	
-	statechart->raise_f();
+	statechart->getDefaultSCI()->raise_f();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_B));
 	
@@ -53,15 +53,15 @@ TEST_F(StatemachineTest, syncForkTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_B_r2_D2));
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_A));
 	
-	statechart->raise_f();
+	statechart->getDefaultSCI()->raise_f();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncFork::main_region_B));
 	

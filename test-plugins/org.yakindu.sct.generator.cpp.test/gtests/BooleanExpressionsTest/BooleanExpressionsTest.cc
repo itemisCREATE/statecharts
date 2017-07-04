@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "BooleanExpressions.h"
 #include "sc_types.h"
-BooleanExpressions* statechart;
+static BooleanExpressions* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -37,9 +37,9 @@ TEST_F(StatemachineTest, booleanExpressions) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool2()== false);
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(BooleanExpressions::main_region_StateB));
 	

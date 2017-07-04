@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::cpp {
-	statechart Constants {
+	statechart LogicalOr {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "ConstantsTestsTest"
+			targetFolder = "LogicalOrTest"
 		}
 		feature FunctionInlining {
 			inlineReactions = false

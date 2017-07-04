@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "EmptyTransition.h"
 #include "sc_types.h"
-EmptyTransition* statechart;
+static EmptyTransition* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -31,7 +31,7 @@ TEST_F(StatemachineTest, EmptyTransitionTest) {
 	
 	statechart->enter();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(!statechart->isStateActive(EmptyTransition::main_region_B));
 	

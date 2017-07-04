@@ -22,8 +22,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	CastExpressionsTest.class,
 	ChoiceTest.class,
 	CKeywordsTest.class,
-	ConditionalExpressionTest.class,
-	ConstantsTestsTest.class,
+	ConditionalExpression.class,
+	ConstantsTests.class,
 	ConstOnlyDefaultScopeTest.class,
 	ConstOnlyInternalScopeTest.class,
 	ConstOnlyNamedScopeTest.class,
@@ -49,10 +49,10 @@ import org.junit.runners.Suite.SuiteClasses;
 	IntegerExpressionsTest.class,
 	InternalEventLifeCycleTest.class,
 	LocalReactionsTest.class,
-	LogicalAndTestsTest.class,
-	LogicalOrTestsTest.class,
+	LogicalAndTests.class,
+	LogicalOrTests.class,
 	NamedInterfaceAccessTest.class,
-	OperationsTestTest.class,
+	OperationsTest.class,
 	OutEventLifeCycleTest.class,
 	ParenthesisTest.class,
 	PriorityValuesTest.class,
@@ -77,5 +77,5 @@ import org.junit.runners.Suite.SuiteClasses;
 	ValuedEventsTest.class,
 	TypeAliasTest.class
 })
-public class AllTestsTest {
+public class AllTests {
 }

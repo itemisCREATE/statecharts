@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "HistoryWithExitPoint.h"
 #include "sc_types.h"
-HistoryWithExitPoint* statechart;
+static HistoryWithExitPoint* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,33 +33,33 @@ TEST_F(StatemachineTest, historyEntryAfterExit) {
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_A_r_X1));
 	
-	statechart->raise_push();
+	statechart->getDefaultSCI()->raise_push();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_B));
 	
-	statechart->raise_back();
+	statechart->getDefaultSCI()->raise_back();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_A_r_X1));
 	
-	statechart->raise_next();
+	statechart->getDefaultSCI()->raise_next();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_A_r_X2));
 	
-	statechart->raise_push();
+	statechart->getDefaultSCI()->raise_push();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_B));
 	
-	statechart->raise_back();
+	statechart->getDefaultSCI()->raise_back();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(HistoryWithExitPoint::mr_A_r_X2));
 	

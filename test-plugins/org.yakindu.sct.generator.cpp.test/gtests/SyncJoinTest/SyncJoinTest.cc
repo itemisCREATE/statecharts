@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "SyncJoin.h"
 #include "sc_types.h"
-SyncJoin* statechart;
+static SyncJoin* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -37,69 +37,69 @@ TEST_F(StatemachineTest, syncJoin_C2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C2));
-	
-	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
-	
-	statechart->raise_jc();
-	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C2));
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
 	
-	statechart->raise_jd();
+	statechart->getDefaultSCI()->raise_jc();
 	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C2));
-	
-	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
-	
-	statechart->raise_jc();
-	
-	statechart->raise_jd();
-	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C2));
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
 	
-	statechart->raise_f();
+	statechart->getDefaultSCI()->raise_jd();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
+	
+	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C2));
+	
+	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
+	
+	statechart->getDefaultSCI()->raise_jc();
+	
+	statechart->getDefaultSCI()->raise_jd();
+	
+	statechart->runCycle();;
+	
+	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C2));
+	
+	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
+	
+	statechart->getDefaultSCI()->raise_f();
+	
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C2));
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
 	
-	statechart->raise_jc();
+	statechart->getDefaultSCI()->raise_jc();
 	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C2));
-	
-	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
-	
-	statechart->raise_jd();
-	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C2));
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
 	
-	statechart->raise_jc();
+	statechart->getDefaultSCI()->raise_jd();
 	
-	statechart->raise_jd();
+	statechart->runCycle();;
 	
-	statechart->runCycle();
+	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C2));
+	
+	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
+	
+	statechart->getDefaultSCI()->raise_jc();
+	
+	statechart->getDefaultSCI()->raise_jd();
+	
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_A));
 	
@@ -115,43 +115,43 @@ TEST_F(StatemachineTest, syncJoin_D2_Waits) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D1));
 	
-	statechart->raise_f();
+	statechart->getDefaultSCI()->raise_f();
 	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C1));
-	
-	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
-	
-	statechart->raise_jc();
-	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C1));
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
 	
-	statechart->raise_jd();
+	statechart->getDefaultSCI()->raise_jc();
 	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C1));
-	
-	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
-	
-	statechart->raise_jc();
-	
-	statechart->raise_jd();
-	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C1));
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_jd();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
+	
+	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C1));
+	
+	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
+	
+	statechart->getDefaultSCI()->raise_jc();
+	
+	statechart->getDefaultSCI()->raise_jd();
+	
+	statechart->runCycle();;
+	
+	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C1));
+	
+	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r2_D2));
+	
+	statechart->getDefaultSCI()->raise_e();
+	
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_B_r1_C2));
 	
@@ -163,17 +163,17 @@ TEST_F(StatemachineTest, doubleEntryActionBug) {
 	
 	statechart->enter();
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->raise_f();
+	statechart->getDefaultSCI()->raise_f();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
-	statechart->raise_jc();
+	statechart->getDefaultSCI()->raise_jc();
 	
-	statechart->raise_jd();
+	statechart->getDefaultSCI()->raise_jd();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SyncJoin::main_region_A));
 	

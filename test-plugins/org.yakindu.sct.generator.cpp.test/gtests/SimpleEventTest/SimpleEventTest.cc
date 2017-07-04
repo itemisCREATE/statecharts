@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "SimpleEvent.h"
 #include "sc_types.h"
-SimpleEvent* statechart;
+static SimpleEvent* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -35,13 +35,13 @@ TEST_F(StatemachineTest, simpleEventTest) {
 	
 	EXPECT_TRUE(5l== 5l);
 	
-	statechart->raise_event1();
+	statechart->getDefaultSCI()->raise_event1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SimpleEvent::main_region_B)) << "Expected B to be active" ;
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(!statechart->isStateActive(SimpleEvent::main_region_B));
 	

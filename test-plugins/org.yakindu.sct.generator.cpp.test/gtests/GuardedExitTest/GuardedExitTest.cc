@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "GuardedExit.h"
 #include "sc_types.h"
-GuardedExit* statechart;
+static GuardedExit* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -26,8 +26,8 @@ class StatemachineTest : public ::testing::Test{
 };
 
 void checkDone(bool shouldBeDone){
-	statechart->raise_e();
-	statechart->runCycle();
+	statechart->getDefaultSCI()->raise_e();
+	statechart->runCycle();;
 	EXPECT_TRUE(statechart->isStateActive(GuardedExit::main_region_B));
 	EXPECT_TRUE(shouldBeDone ? statechart->getDefaultSCI()->get_done()  : !statechart->getDefaultSCI()->get_done());
 }

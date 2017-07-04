@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "FinalState.h"
 #include "sc_types.h"
-FinalState* statechart;
+static FinalState* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -31,7 +31,7 @@ TEST_F(StatemachineTest, StatechartNameTest) {
 	
 	statechart->enter();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isFinal());
 	

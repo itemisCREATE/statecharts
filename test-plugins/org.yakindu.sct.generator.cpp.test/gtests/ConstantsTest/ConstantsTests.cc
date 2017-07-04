@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "Constants.h"
 #include "sc_types.h"
-Constants* statechart;
+static Constants* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -39,23 +39,23 @@ TEST_F(StatemachineTest, constantDefinition) {
 	
 	EXPECT_TRUE(strcmp(statechart->getSCI_Named()->get_y(), "Hello World") == 0);
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_result()== 20l);
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(Constants::main_region_C));
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_result()== 100l);
 	
-	statechart->raise_e2( statechart->getDefaultSCI()->get_x());
+	statechart->getDefaultSCI()->raise_e2( statechart->getDefaultSCI()->get_x());
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_result()== 1000l);
 	

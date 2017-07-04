@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "NamedInterfaceAccess.h"
 #include "sc_types.h"
-NamedInterfaceAccess* statechart;
+static NamedInterfaceAccess* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -31,19 +31,19 @@ TEST_F(StatemachineTest, SafeOpenSuccess) {
 	
 	statechart->enter();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	statechart->getSCI_User()->raise_numberPressed(3l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	statechart->getSCI_User()->raise_numberPressed(7l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	statechart->getSCI_User()->raise_numberPressed(5l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->getSCI_Safe()->isRaised_open());
 	

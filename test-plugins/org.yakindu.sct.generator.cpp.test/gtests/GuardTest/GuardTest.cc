@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "Guard.h"
 #include "sc_types.h"
-Guard* statechart;
+static Guard* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,33 +33,33 @@ TEST_F(StatemachineTest, guardTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
 	
-	statechart->raise_event1();
+	statechart->getDefaultSCI()->raise_event1();
 	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
-	
-	statechart->raise_event2();
-	
-	statechart->runCycle();
-	
-	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_B));
-	
-	statechart->raise_return();
-	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
 	
-	statechart->raise_event1();
+	statechart->getDefaultSCI()->raise_event2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_B));
 	
-	statechart->raise_return();
+	statechart->getDefaultSCI()->raise_return();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
+	
+	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
+	
+	statechart->getDefaultSCI()->raise_event1();
+	
+	statechart->runCycle();;
+	
+	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_B));
+	
+	statechart->getDefaultSCI()->raise_return();
+	
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(Guard::main_region_A));
 	

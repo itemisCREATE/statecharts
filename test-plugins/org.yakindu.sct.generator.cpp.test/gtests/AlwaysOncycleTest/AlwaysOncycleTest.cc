@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "AlwaysOncycle.h"
 #include "sc_types.h"
-AlwaysOncycle* statechart;
+static AlwaysOncycle* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -26,7 +26,7 @@ class StatemachineTest : public ::testing::Test{
 };
 
 
-TEST_F(StatemachineTest, alwaysOncycleTest) {
+TEST_F(StatemachineTest, alwaysOnCycleTest) {
 	
 	
 	statechart->enter();
@@ -34,20 +34,20 @@ TEST_F(StatemachineTest, alwaysOncycleTest) {
 	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
 	
 	while (statechart->getDefaultSCI()->get_value()< 5l) {
-		statechart->runCycle();
+		statechart->runCycle();;
 		EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
 	}
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateB));
 	
 	while (statechart->getDefaultSCI()->get_value()< 5l) {
-		statechart->runCycle();
+		statechart->runCycle();;
 		EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateB));
 	}
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(AlwaysOncycle::main_region_StateA));
 	

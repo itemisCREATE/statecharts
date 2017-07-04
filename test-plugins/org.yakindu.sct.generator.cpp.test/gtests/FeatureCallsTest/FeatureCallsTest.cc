@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "FeatureCalls.h"
 #include "sc_types.h"
-FeatureCalls* statechart;
+static FeatureCalls* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,7 +33,7 @@ TEST_F(StatemachineTest, FeatureCalls) {
 	
 	EXPECT_TRUE(statechart->isStateActive(FeatureCalls::main_region_A));
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(FeatureCalls::main_region_A));
 	

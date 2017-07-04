@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "InEventLifeCycle.h"
 #include "sc_types.h"
-InEventLifeCycle* statechart;
+static InEventLifeCycle* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -31,11 +31,11 @@ TEST_F(StatemachineTest, eventLifeCycle) {
 	
 	statechart->enter();
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 0l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 1l);
 	

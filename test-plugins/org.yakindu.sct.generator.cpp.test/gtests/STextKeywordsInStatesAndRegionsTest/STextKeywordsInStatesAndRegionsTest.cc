@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "STextKeywordsInStatesAndRegions.h"
 #include "sc_types.h"
-STextKeywordsInStatesAndRegions* statechart;
+static STextKeywordsInStatesAndRegions* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -71,9 +71,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -115,9 +115,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e2();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -159,9 +159,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -203,9 +203,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e2();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -247,9 +247,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -291,9 +291,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e2();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -335,9 +335,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -379,9 +379,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e2();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -423,9 +423,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -467,9 +467,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e2();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -511,9 +511,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -555,9 +555,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e2();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -599,9 +599,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -643,9 +643,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e2();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -687,9 +687,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -731,9 +731,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e2();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -775,9 +775,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -819,9 +819,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e2();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -863,9 +863,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_raise));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	
@@ -907,9 +907,9 @@ TEST_F(StatemachineTest, activeCheckWithSTextNamedStates) {
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::active_valueof));
 	
-	statechart->raise_e2();
+	statechart->getDefaultSCI()->raise_e2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(STextKeywordsInStatesAndRegions::default_namespace));
 	

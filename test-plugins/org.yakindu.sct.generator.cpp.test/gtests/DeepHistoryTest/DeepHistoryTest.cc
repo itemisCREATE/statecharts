@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "DeepHistory.h"
 #include "sc_types.h"
-DeepHistory* statechart;
+static DeepHistory* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -31,37 +31,37 @@ TEST_F(StatemachineTest, deepHistoryTest) {
 	
 	statechart->enter();
 	
-	statechart->raise_event1();
+	statechart->getDefaultSCI()->raise_event1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
-	statechart->raise_event3();
+	statechart->getDefaultSCI()->raise_event3();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
-	statechart->raise_event5();
+	statechart->getDefaultSCI()->raise_event5();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
-	statechart->raise_event7();
+	statechart->getDefaultSCI()->raise_event7();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(!statechart->isStateActive(DeepHistory::mainRegion_State1));
 	
 	EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	
-	statechart->raise_event2();
+	statechart->getDefaultSCI()->raise_event2();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(DeepHistory::mainRegion_State1));
 	
 	EXPECT_TRUE(!statechart->isStateActive(DeepHistory::mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	
-	statechart->raise_event1();
+	statechart->getDefaultSCI()->raise_event1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(!statechart->isStateActive(DeepHistory::mainRegion_State1));
 	

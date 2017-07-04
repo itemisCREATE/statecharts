@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "LogicalOr.h"
 #include "sc_types.h"
-LogicalOr* statechart;
+static LogicalOr* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -31,7 +31,7 @@ TEST_F(StatemachineTest, operandEvaluationOrder) {
 	
 	statechart->enter();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 4l && statechart->getDefaultSCI()->get_b()) << "logical or expression was executed in wrong order..." ;
 	

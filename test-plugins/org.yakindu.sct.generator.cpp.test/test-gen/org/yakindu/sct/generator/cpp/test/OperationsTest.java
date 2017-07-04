@@ -19,20 +19,20 @@ import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 import org.yakindu.sct.generator.c.gtest.GMockHelper;
 
-@GTest(sourceFile = "gtests/OperationsTestTest/OperationsTestTest.cc", program = "gtests/OperationsTestTest/Operations", model = "testmodels/SCTUnit/Operations.sct" )
+@GTest(sourceFile = "gtests/OperationsTest/OperationsTest.cc", program = "gtests/OperationsTest/Operations", model = "testmodels/SCTUnit/Operations.sct" )
 @RunWith(GTestRunner.class)
-public class OperationsTestTest {
+public class OperationsTest {
 protected final GTestHelper helper = new GMockHelper(this) {
 		@Override
 		protected void getSourceFiles(Collection<String> files) {
-			super.getSourceFiles(files);
+	super.getSourceFiles(files);
 		files.add(getFileName(getTestProgram()) + ".cpp");
 		}
 	};
 
 	@Before
 	public void setUp() {
-		helper.generate();
-		helper.compile();
+	helper.generate();
+	helper.compile();
 	}
 }

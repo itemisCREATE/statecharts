@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "OutEventLifeCycle.h"
 #include "sc_types.h"
-OutEventLifeCycle* statechart;
+static OutEventLifeCycle* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -27,10 +27,10 @@ class StatemachineTest : public ::testing::Test{
 
 void init(bool sndCycle){
 	statechart->enter();
-	statechart->raise_e();
-	statechart->runCycle();
+	statechart->getDefaultSCI()->raise_e();
+	statechart->runCycle();;
 	if (sndCycle) {
-		statechart->runCycle();
+		statechart->runCycle();;
 	}
 }
 
@@ -39,9 +39,9 @@ TEST_F(StatemachineTest, availableAfterCycle) {
 	
 	statechart->enter();
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->isRaised_f());
 	
