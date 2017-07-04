@@ -25,7 +25,6 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
-import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
@@ -160,15 +159,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			event.value = eventRaising.value.execute
 		}
 		if (event instanceof ExecutionEvent) {
-			if (eventRaising.value != null)
-			{
-				context.getInternalEventQueue().add(new LocalInternalEvent(event.name,false,eventRaising.value));	
-			}
-			else
-			{
-				context.getInternalEventQueue().add(new LocalInternalEvent(event.name,false,null));	
-			}
-			//(event as ExecutionEvent).raised = true
+			(event as ExecutionEvent).raised = true
 		}
 		null
 	}
@@ -355,10 +346,6 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch valueLiteral(IntLiteral literal) {
-		return literal.value as long
-	}
-
-	def dispatch valueLiteral(HexLiteral literal) {
 		return literal.value as long
 	}
 
