@@ -199,16 +199,4 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		else
 			''
 	}
-	
-	def eventEnumMemberName(Event it) {
-		'''«scope.interfaceName»_«name.asIdentifier»'''
-	}
-	
-	def eventEnumName(ExecutionFlow it) {
-		'''«module»EventName'''
-	}
-	
-	def eventClassName(Event it) {
-		'''SctEvent_«flow.name.toFirstUpper»_«scope.interfaceName»_«it.name.asIdentifier»'''
-	}
 }

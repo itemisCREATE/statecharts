@@ -70,7 +70,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			#endif /* «module().define»_H_ */
 		'''
 	}
-
+	
 	def protected generateClass(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
 			class «module» : «interfaceExtensions»
@@ -197,7 +197,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 				«d.privateFunctionPrototypes»
 				«d.scopeTypeDeclMember»
 			«ENDFOR»
-			void dispatch_event(SctEvent * event);
 		'''
 	
 

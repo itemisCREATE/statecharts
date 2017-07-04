@@ -1,5 +1,6 @@
 package org.yakindu.sct.generator.cpp.eventdriven
 
+import com.google.inject.Inject
 import java.util.List
 import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
@@ -9,6 +10,8 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
 class EventDrivenStatemachineHeader extends StatemachineHeader {
+	@Inject extension EventNaming
+	
 	override protected generatePublicClassmembers(ExecutionFlow it) {
 		'''
 		«super.generatePublicClassmembers(it)»
@@ -18,11 +21,12 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 	override protected generatePrivateClassmembers(ExecutionFlow it) {
 		'''
 		private:
-			std::deque<SctEvent*> internalEventQueue;
+			std::deque<«eventNamespaceName»::SctEvent*> internalEventQueue;
+			std::deque<«eventNamespaceName»::SctEvent*> inEventQueue;
 			
-			SctEvent* currentEvent;
+			«eventNamespaceName»::SctEvent* getNextEvent();
 			
-			void dispatch_event(SctEvent * event);
+			void dispatch_event(«eventNamespaceName»::SctEvent * event);
 		'''
 	}
 	
@@ -38,6 +42,7 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 		«super.protectedInnerClassMembers(scope)»
 		«scope.execution_flow.module()» * parent;
+		void dispatch_event(«scope.flow.eventNamespaceName»::SctEvent * event);
 		
 		'''
 	}

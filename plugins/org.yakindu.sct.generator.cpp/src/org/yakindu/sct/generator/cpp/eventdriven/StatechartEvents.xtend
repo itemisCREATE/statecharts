@@ -19,6 +19,8 @@ class StatechartEvents implements IContentTemplate {
 	@Inject protected extension GenmodelEntriesExtension
 	@Inject protected extension INamingService
 	
+	@Inject extension EventNaming eventNaming
+	
 	protected GeneratorEntry entry
 	protected ExecutionFlow flow
 	
@@ -31,11 +33,14 @@ class StatechartEvents implements IContentTemplate {
 		
 		#include "«(typesModule.h).relativeTo(module.h)»"
 		
+		namespace «eventNamespaceName»
+		{
 		«generateEventsEnum»
 		
 		«generateEventBaseClasses»
 		
 		«generateEvents»
+		}
 		#endif /* «generateHeaderDefineGuard» */
 		'''
 	}

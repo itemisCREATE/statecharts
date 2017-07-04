@@ -53,6 +53,8 @@ class StatemachineImplementation implements IContentTemplate {
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		
+		«usingNamespaces»
+		
 		«constructorDefinition»
 		
 		«destructorDefinition»
@@ -83,11 +85,15 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		«functionImplementations»
 		
-		«additionalFunctions(entry)»
+		«additionalFunctions»
 	'''
 	}
 	
-	def additionalFunctions(ExecutionFlow it, GeneratorEntry entry) {
+	def protected usingNamespaces(ExecutionFlow it) {
+		''''''
+	}
+	
+	def additionalFunctions(ExecutionFlow it) {
 		/* Hook for child classes */
 		''''''
 	}
