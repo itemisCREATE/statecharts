@@ -110,6 +110,8 @@ public class StyledTextXtextAdapter {
 
 	private ControlDecoration decoration;
 
+	private IDocumentPartitioner partitioner;
+
 	public StyledTextXtextAdapter(Injector injector, IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
 		this.contextFakeResourceProvider = contextFakeResourceProvider;
 		injector.injectMembers(this);
@@ -259,7 +261,7 @@ public class StyledTextXtextAdapter {
 
 	protected void initXtextDocument(XtextFakeResourceContext context) {
 		document.setInput(context.getFakeResource());
-		IDocumentPartitioner partitioner = documentPartitioner.get();
+		partitioner = documentPartitioner.get();
 		partitioner.connect(document);
 		document.setDocumentPartitioner(partitioner);
 	}
@@ -286,6 +288,9 @@ public class StyledTextXtextAdapter {
 
 	public void dispose() {
 		uninstallHighlightingHelper();
+		validationJob.cancel();
+		 partitioner.disconnect();
+		 sourceviewer.unconfigure();
 		document.disposeInput();
 	}
 
