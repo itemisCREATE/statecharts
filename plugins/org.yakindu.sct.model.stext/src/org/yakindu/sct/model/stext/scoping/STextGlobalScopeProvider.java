@@ -150,7 +150,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	}
 
 	protected LinkedHashSet<URI> getImportedUris(final Resource resourceOrig) {
-		Resource cacheResource = getContextResource(resourceOrig);
+		final Resource cacheResource = getContextResource(resourceOrig);
 		LinkedHashSet<URI> set = cache.get(CACHE_KEY_IMPORTED_URIS, cacheResource, new Provider<LinkedHashSet<URI>>() {
 
 			@Override
