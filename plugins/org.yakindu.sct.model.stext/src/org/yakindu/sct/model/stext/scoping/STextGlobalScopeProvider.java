@@ -17,12 +17,15 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
@@ -51,6 +54,8 @@ import com.google.inject.Provider;
  * 
  */
 public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
+
+	private static final ResourceImpl CACHE_RESOURCE_DESC = new ResourceImpl();
 
 	private static final String CACHE_KEY_IMPORTED_URIS = "IMPORTED_URIS";
 
@@ -116,6 +121,20 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 			return delegate.getScope(resource, reference);
 		}
 		return super.getScope(resource, reference);
+	}
+
+	@Override
+	protected IScope createLazyResourceScope(IScope parent, URI uri, IResourceDescriptions descriptions, EClass type,
+			Predicate<IEObjectDescription> filter, boolean ignoreCase) {
+		
+		return cache.get(uri.toString(), CACHE_RESOURCE_DESC, new Provider<IScope>() {
+
+			@Override
+			public IScope get() {
+				return STextGlobalScopeProvider.super.createLazyResourceScope(parent, uri, descriptions, type, filter, ignoreCase);
+			}
+			
+		});
 	}
 
 	private Collection<ImportScope> getImportScopes(final Resource resource) {
