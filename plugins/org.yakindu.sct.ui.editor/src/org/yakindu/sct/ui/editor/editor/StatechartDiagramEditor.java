@@ -17,6 +17,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.KeyHandler;
@@ -28,6 +30,7 @@ import org.eclipse.gef.ui.actions.ZoomOutAction;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.internal.parts.DiagramGraphicalViewerKeyHandler;
+import org.eclipse.gmf.runtime.emf.core.util.CrossReferenceAdapter;
 import org.eclipse.gmf.runtime.gef.ui.internal.editparts.AnimatableZoomManager;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
@@ -188,6 +191,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		TransactionalEditingDomain domain = DiagramPartitioningUtil.getSharedDomain();
 		domainAdapter = new DirtyStateListener();
 		domain.addResourceSetListener(domainAdapter);
+		replaceCrossReferenceAdapterWithNonResolvingAdapter(domain);
 		return domain;
 	}
 
@@ -328,5 +332,34 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			return issueStore;
 		}
 		return super.getAdapter(type);
+	}
+
+
+	    /*
+	 * replace the current cross reference adapter, because it is responsible
+	 * for loading the transitive hull of all reachable EObject. This is a huge
+	 * performance issue when working with big connected models.<br>The hull is
+	 * computed through the import section.<br> The new registered cross
+	 * reference adapter is configured not to resolve proxies.
+	 */
+	    private void replaceCrossReferenceAdapterWithNonResolvingAdapter(final TransactionalEditingDomain domain) {
+		final CrossReferenceAdapter adapter = getCrossReferenceAdapter(domain);
+	        if (null != adapter) {
+	            adapter.unsetTarget(domain.getResourceSet());
+
+	            domain.getResourceSet().eAdapters().remove(adapter);
+	            domain.getResourceSet().eAdapters().add(new CrossReferenceAdapter(false));
+	        }
+	    }
+
+	private CrossReferenceAdapter getCrossReferenceAdapter(final TransactionalEditingDomain domain) {
+
+		final EList<Adapter> eAdapters = domain.getResourceSet().eAdapters();
+		for (final Adapter adapter : eAdapters) {
+			if (adapter instanceof CrossReferenceAdapter) {
+				return (CrossReferenceAdapter) adapter;
+			}
+		}
+		return null;
 	}
 }
