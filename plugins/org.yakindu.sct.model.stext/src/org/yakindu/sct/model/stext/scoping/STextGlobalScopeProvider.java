@@ -124,8 +124,9 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	}
 
 	@Override
-	protected IScope createLazyResourceScope(IScope parent, URI uri, IResourceDescriptions descriptions, EClass type,
-			Predicate<IEObjectDescription> filter, boolean ignoreCase) {
+	protected IScope createLazyResourceScope(final IScope parent, final URI uri,
+			final IResourceDescriptions descriptions, final EClass type, final Predicate<IEObjectDescription> filter,
+			final boolean ignoreCase) {
 		
 		return cache.get(uri.toString(), CACHE_RESOURCE_DESC, new Provider<IScope>() {
 
