@@ -22,8 +22,6 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class Navigation extends SExecExtensions {
 	
-	
-	
 	def dispatch ExecutionFlow flow(Scope scope) {
 		if (scope.eContainer instanceof ExecutionFlow) scope.eContainer as ExecutionFlow
 		else null
@@ -41,12 +39,14 @@ class Navigation extends SExecExtensions {
 		it
 	}
 	
-	
 	def Scope scope(Declaration it) {
 		if (eContainer instanceof Scope) eContainer as Scope
 		else null
 	}
 	
+	def getAllEvents(ExecutionFlow it) {
+		return scopes.map[declarations.filter(EventDefinition)].reduce[i1, i2 | i1 + i2]
+	}
 	
 	def hasValue (EventDefinition it) {
 		type != null && type.name != 'void'
