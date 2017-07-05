@@ -29,11 +29,11 @@ import static org.eclipse.xtext.util.Strings.*
 
 class StatemachineHeader implements IContentTemplate {
 
-	@Inject extension Naming cNaming
-	@Inject extension Navigation
-	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension GenmodelEntries
-	@Inject extension INamingService
+	@Inject protected extension Naming cNaming
+	@Inject protected extension Navigation
+	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension GenmodelEntries
+	@Inject protected extension INamingService
 	
 	@Inject
 	IGenArtifactConfigurations defaultConfigs
@@ -199,15 +199,21 @@ class StatemachineHeader implements IContentTemplate {
 		 */
 		typedef struct
 		{
-			«statesEnumType» stateConfVector[«type.toUpperCase»_MAX_ORTHOGONAL_STATES];
-			«IF hasHistory»«statesEnumType» historyVector[«type.toUpperCase»_MAX_HISTORY_STATES];«ENDIF»
-			sc_ushort stateConfVectorPosition; 
-			
-			«FOR iScope : scopes.filter[!typeRelevantDeclarations.empty]»
-				«iScope.type» «iScope.instance»;
-			«ENDFOR»			
+			«statemachineTypeStructContent»
 		} «type»;
 	'''
+	
+	def statemachineTypeStructContent(ExecutionFlow it) {
+		'''
+		«statesEnumType» stateConfVector[«type.toUpperCase»_MAX_ORTHOGONAL_STATES];
+		«IF hasHistory»«statesEnumType» historyVector[«type.toUpperCase»_MAX_HISTORY_STATES];«ENDIF»
+		sc_ushort stateConfVectorPosition; 
+		
+		«FOR iScope : scopes.filter[!typeRelevantDeclarations.empty]»
+			«iScope.type» «iScope.instance»;
+		«ENDFOR»
+		'''
+	}
 	
 	def stateConfVectorDefines(ExecutionFlow it) '''
 		«FOR state : states»

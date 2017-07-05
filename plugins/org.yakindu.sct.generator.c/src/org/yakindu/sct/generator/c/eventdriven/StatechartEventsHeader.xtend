@@ -1,6 +1,7 @@
 package org.yakindu.sct.generator.c.eventdriven
 
 import com.google.inject.Inject
+import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.Naming
@@ -9,7 +10,6 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class StatechartEventsHeader implements IContentTemplate {
 	@Inject protected extension Naming
@@ -24,6 +24,8 @@ class StatechartEventsHeader implements IContentTemplate {
 	
 	protected GeneratorEntry entry
 	
+	protected static final int BUFFER_SIZE = 20
+	
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		this.entry = entry
 		'''
@@ -32,41 +34,97 @@ class StatechartEventsHeader implements IContentTemplate {
 		
 		#include "«(typesModule.h).relativeTo(module.h)»"
 		
+		#ifndef «bufferSize»
+		#define «bufferSize» «BUFFER_SIZE»
+		#endif
+		
 		«generateEventsEnum»
+		
+		«generateEventValueUnion»
 		
 		«generateEventStruct»
 		
 		«generateEventQueue»
+		
+		«eventFunctionPrototypes»
+		
+		«eventQueueFunctionPrototypes»
 
 		#endif /* «generateHeaderDefineGuard» */
 		'''
 	}
 	
+	def generateEventsEnum(ExecutionFlow it) {
+		'''
+		/*
+		 * Enum of event names in the statechart.
+		 */
+		typedef enum  {
+			invalid_event,
+			«FOR e : getAllEvents SEPARATOR ","»
+				«eventEnumMemberName(e)»
+			«ENDFOR»
+		} «eventEnumName»;
+		'''
+	}
+	
+	def generateEventValueUnion(ExecutionFlow it) {
+		'''
+		/*
+		 * Union of all possible event value types.
+		 */
+		typedef union {
+			«FOR e : getAllEvents.filter[hasValue && direction != Direction::OUT]»
+			«e.typeSpecifier.targetLanguageName» «eventEnumMemberName(e)»_value;
+			«ENDFOR»
+		} «eventValueUnionName»;
+		'''
+	}
+	
 	def generateEventStruct(ExecutionFlow it) {
 		'''
+		/*
+		 * Struct that represents a single event.
+		 */
 		typedef struct {
 			«eventEnumName» name;
-			boolean hasValue;
-			void * value;
+			sc_boolean has_value;
+			«eventValueUnionName» value;
 		} «eventStructTypeName»;
 		'''
 	}
 
 	def generateEventQueue(ExecutionFlow it) {
 		'''
+		/*
+		 * Queue that holds the raised events.
+		 */
 		typedef struct «eventQueueTypeName»_s {
-			«eventQueueTypeName»_s * next;
+			«eventStructTypeName» events[«bufferSize»];
+			sc_integer pop_index;
+			sc_integer push_index;
+			sc_integer size;
 		} «eventQueueTypeName»;
 		'''
 	}
 	
-	def generateEventsEnum(ExecutionFlow it) {
+	def eventFunctionPrototypes(ExecutionFlow it) {
 		'''
-		typedef enum  {
-			«FOR e : scopes.map[declarations.filter(EventDefinition)].reduce[i1, i2 | i1 + i2] SEPARATOR ","»
-				«eventEnumMemberName(e)»
-			«ENDFOR»
-		} «eventEnumName»;
+		void «eventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name);
+
+		void «eventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name, void * value);
+		'''
+	}
+	
+	def eventQueueFunctionPrototypes(ExecutionFlow it) {
+		'''
+		void «eventQueueInitFunction»(«eventQueueTypeName» * eq);
+		
+		sc_integer «eventQueueSizeFunction»(«eventQueueTypeName» * eq);
+		
+		«eventStructTypeName» «eventQueuePopFunction»(«eventQueueTypeName» * eq);
+		
+		sc_boolean «eventQueuePushFunction»(«eventQueueTypeName» * eq, «eventStructTypeName» ev);
 		'''
 	}
 	

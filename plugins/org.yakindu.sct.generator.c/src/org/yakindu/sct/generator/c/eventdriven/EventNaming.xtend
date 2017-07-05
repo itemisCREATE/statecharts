@@ -17,14 +17,42 @@ class EventNaming {
 	}
 	
 	def eventEnumName(ExecutionFlow it) {
-		'''«module»EventName'''
+		'''«module»_event_name'''.toString.toLowerCase
+	}
+	
+	def eventValueUnionName(ExecutionFlow it) {
+		'''«module»_event_value'''.toString.toLowerCase
 	}
 	
 	def eventStructTypeName(ExecutionFlow it) {
-		'''«name»_event'''
+		'''«name»_event'''.toString.toLowerCase
 	}
 	
 	def eventQueueTypeName(ExecutionFlow it) {
-		'''«name»_event_queue'''
+		'''«name»_eventqueue'''.toString.toLowerCase
+	}
+	
+	def eventInitFunction(ExecutionFlow it) {
+		'''«eventStructTypeName»_init'''
+	}
+	
+	def eventQueueInitFunction(ExecutionFlow it) {
+		'''«eventQueueTypeName»_init'''
+	}
+	
+	def eventQueueSizeFunction(ExecutionFlow it) {
+		'''«eventQueueTypeName»_size'''
+	}
+	
+	def eventQueuePopFunction(ExecutionFlow it) {
+		'''«eventQueueTypeName»_pop'''
+	}
+	
+	def eventQueuePushFunction(ExecutionFlow it) {
+		'''«eventQueueTypeName»_push'''
+	}
+	
+	def bufferSize(ExecutionFlow it) {
+		'''«name»_eventqueue_buffersize'''.toString.toUpperCase
 	}
 }

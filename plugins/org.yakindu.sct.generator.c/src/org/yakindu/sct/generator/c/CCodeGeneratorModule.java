@@ -19,6 +19,7 @@ import static org.yakindu.sct.model.sexec.transformation.IModelSequencer.ADD_TRA
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 
 import org.yakindu.base.types.Annotation;
+import org.yakindu.sct.generator.c.eventdriven.EventDrivenExpressionCode;
 import org.yakindu.sct.generator.c.eventdriven.EventDrivenStatemachineHeader;
 import org.yakindu.sct.generator.c.eventdriven.EventDrivenStatemachineSource;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
@@ -47,6 +48,7 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 		binder.bind(ICodegenTypeSystemAccess.class).to(CTypeSystemAccess.class);
 		bindIGenArtifactConfigurations(entry, binder);
 		bindTracingProperty(entry, binder);
+		configureEventDriven(entry, binder);
 	}
 
 	protected void bindTracingProperty(GeneratorEntry entry, Binder binder) {
@@ -77,6 +79,7 @@ public class CCodeGeneratorModule implements IGeneratorModule {
 		if(eventDrivenAnnotation != null) {
 			binder.bind(StatemachineHeader.class).to(EventDrivenStatemachineHeader.class);
 			binder.bind(StatemachineSource.class).to(EventDrivenStatemachineSource.class);
+			binder.bind(ExpressionCode.class).to(EventDrivenExpressionCode.class);
 		}
 	}
 
