@@ -82,29 +82,35 @@ class StatemachineSource implements IContentTemplate {
 	def initFunction(ExecutionFlow it) '''
 		void «functionPrefix»init(«scHandleDecl»)
 		{
-			sc_integer i;
-
-			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i)
-			{
-				«scHandle»->stateConfVector[i] = «null_state»;
-			}
-			
-			«IF hasHistory»
-			for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i)
-			{
-				«scHandle»->historyVector[i] = «null_state»;
-			}
-			«ENDIF»
-			
-			«scHandle»->stateConfVectorPosition = 0;
-		
-			«clearInEventsFctID»(handle);
-			«clearOutEventsFctID»(handle);
-		
-			«initSequence.code»
-		
+			«initFunctionBody(it)»
 		}
 	'''
+	
+	protected def CharSequence initFunctionBody(ExecutionFlow it) {
+		'''
+		sc_integer i;
+	
+		for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i)
+		{
+			«scHandle»->stateConfVector[i] = «null_state»;
+		}
+		
+		«IF hasHistory»
+		for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i)
+		{
+			«scHandle»->historyVector[i] = «null_state»;
+		}
+		«ENDIF»
+		
+		«scHandle»->stateConfVectorPosition = 0;
+	
+		«clearInEventsFctID»(handle);
+		«clearOutEventsFctID»(handle);
+	
+		«initSequence.code»
+		'''
+	}
+	
 	
 	def enterFunction(ExecutionFlow it) '''
 		void «functionPrefix»enter(«scHandleDecl»)
