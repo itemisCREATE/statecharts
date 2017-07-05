@@ -70,15 +70,14 @@ void operations_exit(Operations* handle)
 
 sc_boolean operations_isActive(const Operations* handle)
 {
-	sc_boolean result;
-	if (handle->stateConfVector[0] != Operations_last_state)
+	sc_boolean result = bool_false;
+	int i;
+	
+	for(i = 0; i < OPERATIONS_MAX_ORTHOGONAL_STATES; i++)
 	{
-		result =  bool_true;
+		result = result || handle->stateConfVector[i] != Operations_last_state;
 	}
-	else
-	{
-		result = bool_false;
-	}
+	
 	return result;
 }
 
@@ -146,19 +145,19 @@ sc_boolean operations_isStateActive(const Operations* handle, OperationsStates s
 	switch (state)
 	{
 		case Operations_main_region_B :
-			result = (sc_boolean) (handle->stateConfVector[0] == Operations_main_region_B
+			result = (sc_boolean) (handle->stateConfVector[SCVI_OPERATIONS_MAIN_REGION_B] == Operations_main_region_B
 			);
 			break;
 		case Operations_main_region_C :
-			result = (sc_boolean) (handle->stateConfVector[0] == Operations_main_region_C
+			result = (sc_boolean) (handle->stateConfVector[SCVI_OPERATIONS_MAIN_REGION_C] == Operations_main_region_C
 			);
 			break;
 		case Operations_main_region_D :
-			result = (sc_boolean) (handle->stateConfVector[0] == Operations_main_region_D
+			result = (sc_boolean) (handle->stateConfVector[SCVI_OPERATIONS_MAIN_REGION_D] == Operations_main_region_D
 			);
 			break;
 		case Operations_main_region_A :
-			result = (sc_boolean) (handle->stateConfVector[0] == Operations_main_region_A
+			result = (sc_boolean) (handle->stateConfVector[SCVI_OPERATIONS_MAIN_REGION_A] == Operations_main_region_A
 			);
 			break;
 		default:

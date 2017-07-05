@@ -13,6 +13,9 @@ package org.yakindu.base.expressions.terminals;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
+import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter;
+
+import com.google.inject.Inject;
 
 /**
  * Contributes stext specific value converters
@@ -21,9 +24,20 @@ import org.eclipse.xtext.conversion.ValueConverter;
  */
 public class ExpressionsValueConverterService extends DefaultTerminalConverters {
 	
-	protected BoolValueConverter boolConverter = new BoolValueConverter();
-	protected HexValueConverter hexConverter = new HexValueConverter();
-	protected BinaryValueConverter binaryConverter = new BinaryValueConverter();
+	@Inject
+	protected AbstractIDValueConverter idValueConverter;
+	
+	@Inject
+	protected BoolValueConverter boolConverter;
+	
+	@Inject
+	protected HexValueConverter hexConverter;
+	
+	@Inject
+	protected BinaryValueConverter binaryConverter;
+	
+	@Inject
+	protected QIDValueConverter qidConverter;
 	
 	@ValueConverter(rule = "BOOL")
 	public IValueConverter<Boolean> BOOL() {
@@ -38,6 +52,11 @@ public class ExpressionsValueConverterService extends DefaultTerminalConverters 
 	@ValueConverter(rule = "BINARY")
 	public IValueConverter<Integer> BINARY() {
 		return binaryConverter;
+	}
+	
+	@ValueConverter(rule = "QID")
+	public IValueConverter<String> QID() {
+		return qidConverter;
 	}
 
 

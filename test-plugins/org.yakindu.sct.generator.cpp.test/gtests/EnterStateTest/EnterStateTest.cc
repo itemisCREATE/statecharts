@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "EnterState.h"
 #include "sc_types.h"
-EnterState* statechart;
+static EnterState* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,9 +33,9 @@ TEST_F(StatemachineTest, defaultEntry) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_A));
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_E));
 	
@@ -47,9 +47,9 @@ TEST_F(StatemachineTest, namedEntryThroughNamedTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_A));
 	
-	statechart->raise_f();
+	statechart->getDefaultSCI()->raise_f();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_F));
 	
@@ -61,9 +61,9 @@ TEST_F(StatemachineTest, namedEntryThroughDefaultTransition) {
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_A));
 	
-	statechart->raise_g();
+	statechart->getDefaultSCI()->raise_g();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(EnterState::r_B_r_E));
 	

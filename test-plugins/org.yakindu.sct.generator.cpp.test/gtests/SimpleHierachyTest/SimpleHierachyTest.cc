@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "SimpleHierachy.h"
 #include "sc_types.h"
-SimpleHierachy* statechart;
+static SimpleHierachy* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,13 +33,13 @@ TEST_F(StatemachineTest, simpleHierachyTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SimpleHierachy::main_region_A));
 	
-	statechart->raise_event1();
+	statechart->getDefaultSCI()->raise_event1();
 	
-	statechart->raise_event1();
+	statechart->getDefaultSCI()->raise_event1();
 	
-	statechart->raise_event1();
+	statechart->getDefaultSCI()->raise_event1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SimpleHierachy::main_region_B));
 	

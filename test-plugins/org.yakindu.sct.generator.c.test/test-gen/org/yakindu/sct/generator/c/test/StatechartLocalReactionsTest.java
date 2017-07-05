@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/StatechartLocalReactionsTest/StatechartLocalReactionsTest.cc", program = "gtests/StatechartLocalReactionsTest/StatechartLocalReactions", model = "testmodels/SCTUnit/StatechartLocalReactions.sct" )
+@GTest(sourceFile = "gtests/StatechartLocalReactions/StatechartLocalReactionsTest.cc", program = "gtests/StatechartLocalReactions/StatechartLocalReactions", model = "testmodels/SCTUnit/StatechartLocalReactions.sct" )
 @RunWith(GTestRunner.class)
 public class StatechartLocalReactionsTest {
 

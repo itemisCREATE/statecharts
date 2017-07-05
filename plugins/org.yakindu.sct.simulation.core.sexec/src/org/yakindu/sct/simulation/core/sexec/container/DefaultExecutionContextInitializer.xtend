@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.ImportDeclaration
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
@@ -103,10 +104,13 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	}
 
 	def dispatch ExecutionSlot transform(InterfaceScope scope) {
+		val flow = EcoreUtil2.getContainerOfType(scope, ExecutionFlow)
+		val namespace = (flow.sourceElement as Statechart).namespace
 		SRuntimeFactory.eINSTANCE.createCompositeSlot => [
 			if (scope.name !== null) {
 				name = scope.name
-				fqName = scope.name
+				val scopeFqn = scope.fullyQualifiedName.toString
+				fqName = if(namespace != null) namespace + "." + scopeFqn else scopeFqn
 			} else {
 				name = "default"
 			}

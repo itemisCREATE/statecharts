@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/AssignmentAsExpressionTest/AssignmentAsExpressionTest.cc", program = "gtests/AssignmentAsExpressionTest/AssignmentAsExpression", model = "testmodels/SCTUnit/AssignmentAsExpression.sct" )
+@GTest(sourceFile = "gtests/AssignmentAsExpression/AssignmentAsExpressionTest.cc", program = "gtests/AssignmentAsExpression/AssignmentAsExpression", model = "testmodels/SCTUnit/AssignmentAsExpression.sct" )
 @RunWith(GTestRunner.class)
 public class AssignmentAsExpressionTest {
 

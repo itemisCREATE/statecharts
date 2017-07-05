@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "NullCheck.h"
 #include "sc_types.h"
-NullCheck* statechart;
+static NullCheck* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,7 +33,7 @@ TEST_F(StatemachineTest, SimpleNullCheckTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(NullCheck::main_region_A));
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(NullCheck::main_region_B));
 	

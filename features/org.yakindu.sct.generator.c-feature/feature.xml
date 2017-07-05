@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.yakindu.sct.generator.c"
-      label="YAKINDU Statechart Tools C code generator"
-      version="2.9.3.qualifier"
+      label="YAKINDU Statechart Tools C Code Generator"
+      version="3.0.0.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.branding">
 
@@ -17,13 +17,13 @@
    <license url="%licenseURL">
       %license
    </license>
-	
+
    <url>
       <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.org/sct/neon/releases/"/>
    </url>
-   
+
    <requires>
-      <import feature="org.yakindu.sct" version="2.9.3.qualifier"/>
+      <import feature="org.yakindu.sct" version="3.0.0.qualifier"/>
    </requires>
 
    <plugin

@@ -54,15 +54,14 @@ void logicalAnd_exit(LogicalAnd* handle)
 
 sc_boolean logicalAnd_isActive(const LogicalAnd* handle)
 {
-	sc_boolean result;
-	if (handle->stateConfVector[0] != LogicalAnd_last_state)
+	sc_boolean result = bool_false;
+	int i;
+	
+	for(i = 0; i < LOGICALAND_MAX_ORTHOGONAL_STATES; i++)
 	{
-		result =  bool_true;
+		result = result || handle->stateConfVector[i] != LogicalAnd_last_state;
 	}
-	else
-	{
-		result = bool_false;
-	}
+	
 	return result;
 }
 
@@ -114,7 +113,7 @@ sc_boolean logicalAnd_isStateActive(const LogicalAnd* handle, LogicalAndStates s
 	switch (state)
 	{
 		case LogicalAnd_main_region_A :
-			result = (sc_boolean) (handle->stateConfVector[0] == LogicalAnd_main_region_A
+			result = (sc_boolean) (handle->stateConfVector[SCVI_LOGICALAND_MAIN_REGION_A] == LogicalAnd_main_region_A
 			);
 			break;
 		default:

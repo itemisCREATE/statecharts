@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "ValuedEvents.h"
 #include "sc_types.h"
-ValuedEvents* statechart;
+static ValuedEvents* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -31,19 +31,19 @@ TEST_F(StatemachineTest, valuedEventsTest) {
 	
 	statechart->enter();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "sct") == 0);
 	
-	statechart->raise_integerEvent( 23l);
+	statechart->getDefaultSCI()->raise_integerEvent( 23l);
 	
-	statechart->raise_booleanEvent( false);
+	statechart->getDefaultSCI()->raise_booleanEvent( false);
 	
-	statechart->raise_realEvent( 20l);
+	statechart->getDefaultSCI()->raise_realEvent( 20l);
 	
-	statechart->raise_stringEvent( "tool");
+	statechart->getDefaultSCI()->raise_stringEvent( "tool");
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ValuedEvents::integer_region_D));
 	

@@ -17,8 +17,6 @@
 using ::testing::AtLeast;
 using ::testing::Return;
 using ::testing::_;
-using ::testing::WithArg;
-using ::testing::Invoke;
 
 class MockInternal : public Operations::InternalSCI_OCB {
 	public:
@@ -54,17 +52,21 @@ class MockDefault : public Operations::DefaultSCI_OCB {
 	MOCK_METHOD1(unnamedOperation5a, sc_string(sc_string param1));
 	MOCK_METHOD0(alwaysTrue, sc_boolean());
 };
-class ReturnInternalOperation3a
-{
-	public:
-		sc_real static internalOperation3a_1(sc_real param1){
-			return param1 +1.0;
-		}
+static Operations* statechart;
+
+class StatemachineTest : public ::testing::Test{
+	protected:
+	virtual void SetUp() {
+		statechart = new Operations();
+		statechart->init();
+	}
+	virtual void TearDown() {
+		delete statechart;
+	}
 };
 
-TEST(StatemachineTest, operationsCalled) {
-	Operations* statechart = new Operations();
-	
+
+TEST_F(StatemachineTest, operationsCalled) {
 	MockDefault defaultMock;
 	
 	MockInternal internalMock;
@@ -74,16 +76,13 @@ TEST(StatemachineTest, operationsCalled) {
 	
 	EXPECT_CALL(defaultMock, alwaysTrue()).WillRepeatedly(Return(true));
 	
-	EXPECT_CALL(internalMock, internalOperation3a(_)).WillRepeatedly(WithArg<0>(Invoke(&(ReturnInternalOperation3a
-	::internalOperation3a_1))));
-	
 	EXPECT_CALL(internalMock, internalOperation1()).Times(AtLeast(1));
 	
 	EXPECT_CALL(internalMock, InternalOperation2(4l)).Times(AtLeast(1));
 	
 	EXPECT_CALL(internalMock, internalOperation3()).Times(AtLeast(1));
 	
-	EXPECT_CALL(internalMock, internalOperation3a(_)).Times(AtLeast(1));
+	EXPECT_CALL(internalMock, internalOperation3a(1.0)).Times(AtLeast(1));
 	
 	EXPECT_CALL(internalMock, internalOperation4()).Times(AtLeast(1));
 	
@@ -91,9 +90,7 @@ TEST(StatemachineTest, operationsCalled) {
 	
 	EXPECT_CALL(internalMock, internalOperation5()).Times(AtLeast(1));
 	
-	EXPECT_CALL(internalMock, internalOperation5a("")).Times(AtLeast(1));
-	
-	EXPECT_CALL(internalMock, InternalOperation2(4l)).Times(AtLeast(1));
+	EXPECT_CALL(internalMock, internalOperation5a(_)).Times(AtLeast(1));
 	
 	EXPECT_CALL(interface1Mock, interfaceOperation1()).Times(AtLeast(1));
 	
@@ -109,7 +106,7 @@ TEST(StatemachineTest, operationsCalled) {
 	
 	EXPECT_CALL(interface1Mock, interfaceOperation5()).Times(AtLeast(1));
 	
-	EXPECT_CALL(interface1Mock, interfaceOperation5a("")).Times(AtLeast(1));
+	EXPECT_CALL(interface1Mock, interfaceOperation5a(_)).Times(AtLeast(1));
 	
 	EXPECT_CALL(defaultMock, unnamedInterfaceOperation1()).Times(AtLeast(1));
 	
@@ -125,32 +122,30 @@ TEST(StatemachineTest, operationsCalled) {
 	
 	EXPECT_CALL(defaultMock, unnamedOperation5()).Times(AtLeast(1));
 	
-	EXPECT_CALL(defaultMock, unnamedOperation5a("")).Times(AtLeast(1));
+	EXPECT_CALL(defaultMock, unnamedOperation5a(_)).Times(AtLeast(1));
 	
 	statechart->setDefaultSCI_OCB(&defaultMock);
 	statechart->setInternalSCI_OCB(&internalMock);
 	statechart->setSCI_Interface1_OCB(&interface1Mock);
 	
-	statechart->init();
 	statechart->enter();
 	
 	EXPECT_TRUE(statechart->isStateActive(Operations::main_region_A));
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(Operations::main_region_B));
 	
-	statechart->raise_ev();
+	statechart->getDefaultSCI()->raise_ev();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(Operations::main_region_C));
 	
-	statechart->raise_ev();
+	statechart->getDefaultSCI()->raise_ev();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(Operations::main_region_D));
 	
-	delete statechart;
 }

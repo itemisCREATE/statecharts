@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "IntegerExpressions.h"
 #include "sc_types.h"
-IntegerExpressions* statechart;
+static IntegerExpressions* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -37,9 +37,9 @@ TEST_F(StatemachineTest, integerExpressions) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt2()== 5l);
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_less()== false);
 	

@@ -70,15 +70,14 @@ void constants_exit(Constants* handle)
 
 sc_boolean constants_isActive(const Constants* handle)
 {
-	sc_boolean result;
-	if (handle->stateConfVector[0] != Constants_last_state)
+	sc_boolean result = bool_false;
+	int i;
+	
+	for(i = 0; i < CONSTANTS_MAX_ORTHOGONAL_STATES; i++)
 	{
-		result =  bool_true;
+		result = result || handle->stateConfVector[i] != Constants_last_state;
 	}
-	else
-	{
-		result = bool_false;
-	}
+	
 	return result;
 }
 
@@ -142,15 +141,15 @@ sc_boolean constants_isStateActive(const Constants* handle, ConstantsStates stat
 	switch (state)
 	{
 		case Constants_main_region_A :
-			result = (sc_boolean) (handle->stateConfVector[0] == Constants_main_region_A
+			result = (sc_boolean) (handle->stateConfVector[SCVI_CONSTANTS_MAIN_REGION_A] == Constants_main_region_A
 			);
 			break;
 		case Constants_main_region_B :
-			result = (sc_boolean) (handle->stateConfVector[0] == Constants_main_region_B
+			result = (sc_boolean) (handle->stateConfVector[SCVI_CONSTANTS_MAIN_REGION_B] == Constants_main_region_B
 			);
 			break;
 		case Constants_main_region_C :
-			result = (sc_boolean) (handle->stateConfVector[0] == Constants_main_region_C
+			result = (sc_boolean) (handle->stateConfVector[SCVI_CONSTANTS_MAIN_REGION_C] == Constants_main_region_C
 			);
 			break;
 		default:

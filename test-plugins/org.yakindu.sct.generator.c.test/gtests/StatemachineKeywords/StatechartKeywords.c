@@ -68,15 +68,14 @@ void statechartKeywords_exit(StatechartKeywords* handle)
 
 sc_boolean statechartKeywords_isActive(const StatechartKeywords* handle)
 {
-	sc_boolean result;
-	if (handle->stateConfVector[0] != StatechartKeywords_last_state)
+	sc_boolean result = bool_false;
+	int i;
+	
+	for(i = 0; i < STATECHARTKEYWORDS_MAX_ORTHOGONAL_STATES; i++)
 	{
-		result =  bool_true;
+		result = result || handle->stateConfVector[i] != StatechartKeywords_last_state;
 	}
-	else
-	{
-		result = bool_false;
-	}
+	
 	return result;
 }
 
@@ -141,7 +140,7 @@ sc_boolean statechartKeywords_isStateActive(const StatechartKeywords* handle, St
 	switch (state)
 	{
 		case StatechartKeywords_main_region_Timer :
-			result = (sc_boolean) (handle->stateConfVector[0] == StatechartKeywords_main_region_Timer
+			result = (sc_boolean) (handle->stateConfVector[SCVI_STATECHARTKEYWORDS_MAIN_REGION_TIMER] == StatechartKeywords_main_region_Timer
 			);
 			break;
 		default:

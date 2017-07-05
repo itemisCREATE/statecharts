@@ -1,0 +1,196 @@
+
+p. 
+
+==<div class="pro-feature">==
+
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/typescript-domain.textile
+
+
+
+
+
+h1(#tsdom-using-typescript-in-statecharts). Using TypeScript in statecharts
+
+h2(#tsdom-introduction). Introduction
+
+Using the _TypeScript_ domain, you can use "TypeScript":http://www.typescriptlang.org/ artifacts like classes, interfaces, enums, variables, etc. directly in your statechart model. The TypeScript domain is available in the Professional Edition of YAKINDU Statechart Tools. It automatically recognizes TypeScript files that are local to your workspace and makes all their type and operation declarations available to your statechart model.
+
+The following sections explain how the TypeScript domain can be practically used. This is done by means of a sample human-machine interface (HMI) project.
+
+We will see how to _model_ an HMI with a statechart, but not only that, we will also see how the statechart can _implement_ the HMI – or can at least can implement its control flow and page flow.
+
+In the example, we will use an "Angular":https://angular.io/ project and demonstrate how the TypeScript artifacts can be used in the statechart model. The example also shows
+* how TypeScript code can be generated from a statechart model and
+* how the generated artifact is integrated into an Angular application.
+
+
+
+
+h2(#tsdom-a-sample-hmi-application). A sample HMI application
+
+p(#tsdom-fig-hmi-main-screen). 
+!images/tsdomain_hmimain.png(HMI main screen)!
+
+p=. HMI main screen
+
+Let's have a look at this simple HMI that represents an infotainment system for cars. You can find it in the YAKINDU Statechart Tools "example repository on Github":https://github.com/Yakindu/examples/wiki.
+
+The application consists of two screens:
+* Welcome screen: shows a welcome animation
+* Main screen: consist of severals components (speedometer, light widgets, infotainment, etc.)
+
+p(#tsdom-fig-hmi-main-screen-explained). 
+!images/tsdomain_hmimain2.png(HMI main screen explained)!
+
+p=. HMI main screen explained
+
+The infotainment component represents a container for further components like _infotainment menu_, _weather_, _music player_, and _phone_.
+
+p(#tsdom-fig-hmi-screens). 
+!images/tsdomain_screens.png(HMI screens)!
+
+p=. HMI screens
+
+
+
+
+h2(#tsdom-modeling-behavior-with-yakindu-statechart-tools-professional). Modeling behavior with YAKINDU Statechart Tools Professional
+
+In this section we will create a statechart that controls the behavior of a very simple HMI. Well, to be honest, it essentially just triggers a single action of the HMI:
+* Upon start, the HMI shows a welcome screen.
+* After three seconds have elapsed, the HMI navigates to the main screen.
+
+To model and implement this behaviour we will be dealing with two Eclipse projects:
+# The first project will contain the HMI from the "example repository":https://github.com/Yakindu/examples/wiki.
+# The second project will contain a statechart that _controls_ the HMI.
+
+Both projects will be related in such a way that the second one effects actions in the first one and the first one sends events to the second one. Our example will demonstrate the first aspect only by causing the HMI to navigate from the blank screen to the main screen.
+
+
+
+h3(#tsdom-importing-the-sample-angular-project-into-eclipse). Importing the sample Angular project into Eclipse
+
+
+The sample HMI application has to be imported into the Eclipse workspace.
+# In the Eclipse main menu, select _File → Import_. The _Import_ dialog opens.
+# Select _General → Projects from Folder or Archive_. <br/>!images/tsdomain_import_dialog.png(Import dialog)!
+# Click _Next_. The _Import Projects from File System or Archive_ dialog appears.
+# Click on the _Directory_ button and select the folder containing the Angular application.<br/>!images/tsdomain_import2_dialog.png(Import Projects from File System or Archive dialog)!
+# Click _Finish_. The project explorer should now look like this:<br/>!images/tsdomain_project_explorer.png(Project explorer)!
+# Open the project's context menu and add the _YAKINDU SCT Nature_. It is needed to map all Typescript artifacts to the YAKINDU Statechart Tools type system. !images/tsdomain_add_sct_nature.gif(Adding YAKINDU SCT Nature)!
+
+
+
+h3(#tsdom-creating-a-new-project-for-statechart-models). Creating a new project for statechart models
+
+The next step is to create the statechart project. The statechart will make use of the Angular project resp. of the TypeScript artifacts therein.
+
+# In the Eclipse main menu, select _File → New → Project_. The _New Project_ dialog appears.
+# Select _General → Project_ and click _Next_.
+# In the _Project name_ field, enter a project name, e.g. *yCarSct*. Then click _Finish_.
+# The project explorer should now look like this:<br/>!images/tsdomain_project_explorer_sct.png(Project explorer)!
+# This project needs a reference to the Angular project. To set the reference, do the following:
+## Right-click on the _yCarSct_ project. The context menu opens.
+## In the context menu, select _Properties_. The _Properties_ dialog appears.
+## Select _Project References_.
+## Make sure that the Angular project (ycar_app) is selected.<br/>!images/tsdomain_project_ref.gif(Project reference)!
+## Click on _OK_.
+
+
+
+h3(#tsdom-creating-a-statechart-model-using-the-typescript-domain). Creating a statechart model using the TypeScript domain
+
+Now that we have a statechart project, let's create a statechart model:
+
+# Right-click on the _yCarSct_ project. The context menu opens.
+# In the context menu, select _New → Statechart Model_. The _New YAKINDU Statechart Wizard_ opens.
+# In the dialog, specify directory and filename for the new statechart model file. The filename must end with _.sct_.
+# Click _Finish_. If Eclipse asks you whether to switch to the _YAKINDU Modeling perspective_, please confirm.
+# The new statechart model is created.<br/>!images/tsdomain_create_statechart_model.png(Statechart model)!
+
+
+h4(#tsdom-Defining-a-typescript-variable-in-a-statechart). Defining a TypeScript variable in a statechart
+
+In order to navigate from the blank screen to the main screen, the statechart will make direct use of TypeScript data types, in particular of the _RouterService_ class and of the latter's _navigate_ method.
+
+Statechart variables are defined in the definition section that is usually on the left-hand side of the statechart editor. Let's declare a variable _routerService_ of type _RouterService_:
+
+# Double-click into the definition section to edit it.
+# Type: @var routerService:@
+# Press @[Ctrl+Space]@ in order to see which types are available.
+# The content assist opens and shows the TypeScript types that are available in the Angular TypeScript sample application.<br/>!images/tsdomain_var.png(Selecting RouterService using content assist)!
+# In the content assist menu, select the _RouterService_ entry to complete the variable definition.<br/>!images/tsdomain_routerService_var.png(Variable _routerService_ defined in the definition section)!
+
+
+h4(#tsdom-using-a-typescript-variable-in-a-statechart). Using a TypeScript variable in a statechart
+
+Now let's see how the TypeScript variable we have defined above can actually be used. Figure "Diagram Appearance":#tsdom-fig-sample-screen-changing-statechart-model shows the modeling of our HMI behaviour: When the specified time has elapsed, a transition takes place from the _blankScreen_ source state to the _mainScreen_ target state.
+
+p(#tsdom-fig-sample-screen-changing-statechart-model). 
+!images/tsdomain_sct_var.png(Sample screen-changing statechart model)!
+
+p=. Sample screen-changing statechart model
+
+The clou is in the _mainScreen_ state's entry action: It connects the statechart model to the actual user interface implementation in, say, a browser. The connection is done via the _routerService_ variable. The entry action calls _routerService_'s _navigate_ method, passes the parameter @"/mainScreen"@, and this in turn directs the browser (or whatever the HMI application is running on) to open the "/mainScreen" URL.
+
+If you are using the TypeScript domain, a statechart variable of a TypeScript type can be used everywhere a "normal" statechart variable can be used.
+
+
+
+h3(#tsdom-creating-a-statechart-generator-model). Creating a statechart generator model
+
+In order to actually execute the HMI with statechart control, we have to generate the statechart as TypeScript code into the Angular project.
+
+For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called _SGen_. It can be created either by using the _YAKINDU Statechart Generator Model_ wizard or by manually creating a text file containing the SGen model. Such a file must have the filename extension _.sgen_.
+
+To create a generator model using the wizard, proceed as follows:
+# In the main menu, select _File → New → YAKINDU SCT → Code Generator Model_. The wizard _YAKINDU Statechart Generator Model_ opens.
+# Enter a name and click _Next_.
+# Choose the _YAKINDU SCT TypeScript Generator_ generator.
+# Check the model(s) to generate code from.
+# Click _Finish_.
+
+p(#tsdom-fig-yakindu-statechart-tools-generator-model-configuration-wizard). 
+!images/tsdomain_genmodel_config.png(YAKINDU Statechart Tools generator model configuration wizard)!
+
+p=. YAKINDU Statechart Tools generator model configuration wizard
+
+The result is an _.sgen_ file of the following format:
+
+p(#tsdom-fig-yakindu-statechart-tools-generator-model). 
+!images/tsdomain_sgen.png(YAKINDU Statechart Tools generator model)!
+
+p=. YAKINDU Statechart Tools generator model
+
+The *Outlet* feature specifies target project and target folder for the generated artifacts. It is a _required_ feature and has the following parameters:
+
+# *targetProject* (String, required): The project to store the generated artifacts to.
+# *targetFolder* (String, required): The folder to store the generated artifacts to. Unless at least one of the optional _libraryTargetFolder_ and _apiTargetFolder_ parameters (see below) are given, all artifacts will be generated into the _targetFolder_. Each of them will be overwritten during re-generation.
+# *libraryTargetFolder* (String, optional): The folder to store _model-independent artifacts_ to. The artifacts in this folder will be preserved during re-generation, i.e. they will be written once and will not be overwritten later. If this parameter is not specified, model-independent artifacts will be written to the _targetFolder_.
+# *apiTargetFolder* (String, optional): The folder to store _API code_ to, e.g. interfaces or header files. If this parameter is not specified, these artifacts will be generated into the target folder.
+
+In our example the generator model looks like this:
+
+p(#tsdom-fig-yakindu-statechart-tools-generator-model-sample-configuration). 
+!images/tsdomain_sgen2.png(YAKINDU Statechart Tools generator model sample configuration)!
+
+p=. YAKINDU Statechart Tools generator model sample configuration
+
+That is, the Angular project _ycarApp_ is augmented by the _src/app/gen_ folder containing the generated artifacts. In order to start generating TypeScript code from your statechart, just save the statechart model.
+
+After generation is done, you can find the generated TypeScript code in the specified _gen_ directory:
+
+p(#tsdom-fig-generated-file-structure). 
+!images/tsdomain_genfolder.png(Generated file structure)!
+
+p=. Generated file structure
+
+
+
+h3(#tsdom-integrating-the-generated-typescript-statemachine-into-an-angular-application). Integrating the generated TypeScript statemachine into an Angular application
+
+In the context of Angular, the generated statechart is a _service_. To integrate it with the application, proceed as follows:
+
+# Customize the _app.module.ts_ file as follows:<br/>!images/tsdomain_ngmodule.png(NgModel customization)!
+# Customize the _app.comonent.ts_ file as follows:<br/>!images/tsdomain_ngcomponent.png(NgComponent customization)!
+==</div>==

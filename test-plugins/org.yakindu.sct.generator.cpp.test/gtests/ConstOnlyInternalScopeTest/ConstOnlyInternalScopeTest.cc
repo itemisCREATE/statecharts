@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "ConstOnlyInternalScope.h"
 #include "sc_types.h"
-ConstOnlyInternalScope* statechart;
+static ConstOnlyInternalScope* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -39,9 +39,9 @@ TEST_F(StatemachineTest, stateTransition) {
 	
 	statechart->enter();
 	
-	statechart->raise_e( 1l);
+	statechart->getDefaultSCI()->raise_e( 1l);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(ConstOnlyInternalScope::ConstOnlyInternalScope_main_region_B));
 	

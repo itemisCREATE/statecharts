@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/BooleanExpressionsTest/BooleanExpressionsTest.cc", program = "gtests/BooleanExpressionsTest/BooleanExpressions", model = "testmodels/SCTUnit/BooleanExpressions.sct" )
+@GTest(sourceFile = "gtests/BooleanExpressions/BooleanExpressionsTest.cc", program = "gtests/BooleanExpressions/BooleanExpressions", model = "testmodels/SCTUnit/BooleanExpressions.sct" )
 @RunWith(GTestRunner.class)
 public class BooleanExpressionsTest {
 

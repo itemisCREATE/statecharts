@@ -11,20 +11,20 @@
 #include "gtest/gtest.h"
 #include "LogicalAnd.h"
 
-LogicalAnd handle;
+static LogicalAnd statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
-		logicalAnd_init(&handle);
+		logicalAnd_init(&statechart);
 	}
 };
 
 
 TEST_F(StatemachineTest, operandEvaluationOrder) {					
-	logicalAnd_enter(&handle);
-	logicalAnd_runCycle(&handle);
-	EXPECT_TRUE(logicalAndIface_get_x(&handle)== 4l && logicalAndIface_get_b(&handle)) << "logical and expression was executed in wrong order..." ;
+	logicalAnd_enter(&statechart);
+	logicalAnd_runCycle(&statechart);
+	EXPECT_TRUE(logicalAndIface_get_x(&statechart)== 4l && logicalAndIface_get_b(&statechart)) << "logical and expression was executed in wrong order..." ;
 }
 
 

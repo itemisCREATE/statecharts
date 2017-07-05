@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/BitExpressionsTest/BitExpressionsTest.cc", program = "gtests/BitExpressionsTest/BitExpressions", model = "testmodels/SCTUnit/BitExpressions.sct" )
+@GTest(sourceFile = "gtests/BitExpressions/BitExpressionsTest.cc", program = "gtests/BitExpressions/BitExpressions", model = "testmodels/SCTUnit/BitExpressions.sct" )
 @RunWith(GTestRunner.class)
 public class BitExpressionsTest {
 

@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/TriggerExpressionPrecedenceTest/TriggerExpressionPrecedenceTest.cc", program = "gtests/TriggerExpressionPrecedenceTest/TriggerExpressionPrecedence", model = "testmodels/SCTUnit/expressions/TriggerExpressionPrecedence.sct" )
+@GTest(sourceFile = "gtests/TriggerExpressionPrecedence/TriggerExpressionPrecedenceTest.cc", program = "gtests/TriggerExpressionPrecedence/TriggerExpressionPrecedence", model = "testmodels/SCTUnit/expressions/TriggerExpressionPrecedence.sct" )
 @RunWith(GTestRunner.class)
 public class TriggerExpressionPrecedenceTest {
 

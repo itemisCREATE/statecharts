@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "TriggerExpressionPrecedence.h"
 #include "sc_types.h"
-TriggerExpressionPrecedence* statechart;
+static TriggerExpressionPrecedence* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -35,7 +35,7 @@ TEST_F(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrFalse) {
 	
 	statechart->getDefaultSCI()->set_c2(false);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
 	
@@ -49,7 +49,7 @@ TEST_F(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrFalse) {
 	
 	statechart->getDefaultSCI()->set_c2(false);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
 	
@@ -63,7 +63,7 @@ TEST_F(StatemachineTest, unsatisfiedTriggerAndFGuardFalseOrTrue) {
 	
 	statechart->getDefaultSCI()->set_c2(true);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
 	
@@ -77,7 +77,7 @@ TEST_F(StatemachineTest, unsatisfiedTriggerAndFGuardTrueOrTrue) {
 	
 	statechart->getDefaultSCI()->set_c2(true);
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_e1_transition());
 	

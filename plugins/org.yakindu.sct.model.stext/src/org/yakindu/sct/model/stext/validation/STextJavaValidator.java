@@ -19,7 +19,6 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -46,13 +45,10 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
-import org.yakindu.base.types.AnnotatableElement;
-import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Direction;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Operation;
-import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
@@ -207,40 +203,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				if (!hasIncomingTransition) {
 					warning(ENTRY_UNUSED, entry, null, -1);
 				}
-			}
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void checkLeftHandAssignment(final AssignmentExpression expression) {
-		Expression varRef = expression.getVarRef();
-		if (varRef instanceof FeatureCall) {
-			EObject referencedObject = ((FeatureCall) varRef).getFeature();
-			if (!(referencedObject instanceof Property)) {
-				error(LEFT_HAND_ASSIGNMENT, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
-			}
-		} else if (varRef instanceof ElementReferenceExpression) {
-			EObject referencedObject = ((ElementReferenceExpression) varRef).getReference();
-			if (!(referencedObject instanceof Property)) {
-				error(LEFT_HAND_ASSIGNMENT, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
-			}
-
-		} else {
-			error(LEFT_HAND_ASSIGNMENT, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void checkAssignmentToFinalVariable(AssignmentExpression exp) {
-		Expression varRef = exp.getVarRef();
-		EObject referencedObject = null;
-		if (varRef instanceof FeatureCall)
-			referencedObject = ((FeatureCall) varRef).getFeature();
-		else if (varRef instanceof ElementReferenceExpression)
-			referencedObject = ((ElementReferenceExpression) varRef).getReference();
-		if (referencedObject instanceof VariableDefinition) {
-			if (((VariableDefinition) referencedObject).isConst()) {
-				error(ASSIGNMENT_TO_VALUE, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
 			}
 		}
 	}
@@ -548,42 +510,10 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	@Check(CheckType.FAST)
-	public void checkOperationArguments_FeatureCall(final FeatureCall call) {
-		if (call.getFeature() instanceof Operation) {
-			Operation operation = (Operation) call.getFeature();
-			assertOperationArguments(operation, call.getExpressions());
-		}
-	}
-
-	@Check(CheckType.FAST)
 	public void checkAnnotationArguments(ArgumentedAnnotation annotation) {
 		if (annotation.getExpressions().size() != annotation.getType().getProperties().size()) {
-			error(String.format(WRONG_NUMBER_OF_ARGUMENTS_MSG, annotation.getType().getProperties()), null,
-					WRONG_NUMBER_OF_ARGUMENTS_CODE);
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void checkOperationArguments_TypedElementReferenceExpression(final ElementReferenceExpression call) {
-		if (call.getReference() instanceof Operation) {
-			Operation operation = (Operation) call.getReference();
-			assertOperationArguments(operation, call.getExpressions());
-		}
-	}
-
-	public void assertOperationArguments(Operation operation, List<Expression> args) {
-		EList<Parameter> parameters = operation.getParameters();
-		if ((operation.isVariadic() && operation.getVarArgIndex() > args.size())
-				|| !operation.isVariadic() && parameters.size() != args.size()) {
-			error(String.format(WRONG_NUMBER_OF_ARGUMENTS_MSG, parameters), null, WRONG_NUMBER_OF_ARGUMENTS_CODE);
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void checkVarArgParameterIsLast(Operation operation) {
-		if (operation.isVariadic() && operation.getVarArgIndex() != operation.getParameters().size() - 1) {
-			error(VAR_ARGS_LAST_MSG, operation.getParameters().get(operation.getVarArgIndex()), null,
-					VAR_ARGS_LAST_CODE);
+			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, annotation.getType().getProperties()), null,
+					ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		}
 	}
 
@@ -767,27 +697,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		}
 		if (!found)
 			warning(CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
-	}
-
-	@Check(CheckType.FAST)
-	public void checkAnnotationTarget(final AnnotatableElement element) {
-		EList<Annotation> annotations = element.getAnnotations();
-		for (Annotation annotation : annotations) {
-			EList<EObject> targets = annotation.getType().getTargets();
-			if(targets.isEmpty())
-				continue;
-			boolean found = Iterables.any(targets, new Predicate<EObject>() {
-				@Override
-				public boolean apply(EObject input) {
-					return ((EClass) input).isInstance(element);
-				}
-			});
-			if (!found) {
-				error(String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getType().getName(),
-						element.eClass()), null,
-						element.getAnnotations().indexOf(annotation), ERROR_WRONG_ANNOTATION_TARGET_CODE);
-			}
-		}
 	}
 
 	protected void checkElementReferenceEffect(ElementReferenceExpression refExp) {

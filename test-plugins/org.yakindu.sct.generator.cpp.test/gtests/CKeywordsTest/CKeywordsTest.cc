@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "CKeywords.h"
 #include "sc_types.h"
-CKeywords* statechart;
+static CKeywords* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,9 +33,9 @@ TEST_F(StatemachineTest, CKeywordsTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_char));
 	
-	statechart->raise_auto();
+	statechart->getDefaultSCI()->raise_auto();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(CKeywords::auto_loop));
 	

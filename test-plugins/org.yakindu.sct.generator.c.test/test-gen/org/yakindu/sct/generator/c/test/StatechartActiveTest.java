@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/StatechartActiveTest/StatechartActiveTest.cc", program = "gtests/StatechartActiveTest/StatechartActive", model = "testmodels/SCTUnit/StatechartActive.sct" )
+@GTest(sourceFile = "gtests/StatechartActive/StatechartActiveTest.cc", program = "gtests/StatechartActive/StatechartActive", model = "testmodels/SCTUnit/StatechartActive.sct" )
 @RunWith(GTestRunner.class)
 public class StatechartActiveTest {
 

@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "ExitOnSelfTransition.h"
 #include "sc_types.h"
-ExitOnSelfTransition* statechart;
+static ExitOnSelfTransition* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -37,17 +37,17 @@ TEST_F(StatemachineTest, ExitOnSelfTransitionTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 0l);
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2l);
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 1l);
 	
-	statechart->raise_f();
+	statechart->getDefaultSCI()->raise_f();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2l);
 	

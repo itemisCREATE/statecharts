@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "SameNameDifferentRegion.h"
 #include "sc_types.h"
-SameNameDifferentRegion* statechart;
+static SameNameDifferentRegion* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -33,17 +33,17 @@ TEST_F(StatemachineTest, sameNameDifferenRegionTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateA));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB));
 	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB_r1_StateA));
 	
-	statechart->raise_e1();
+	statechart->getDefaultSCI()->raise_e1();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(SameNameDifferentRegion::main_region_StateB));
 	

@@ -1,7 +1,6 @@
 sudo: false
 language: java
 jdk: 
- - oraclejdk7
  - oraclejdk8
 addons:
  apt:
@@ -27,16 +26,8 @@ env:
   - secure: "e6AtFe0HJAHRdmzp4uXx4b+xZaEUUd2jeYiLdIkYuRa84op9iSzCmPj5uT3Vkvqps5snBrDx47Wl1EO9rl+Z91WYp1JgTT5Ek37SKj/ikhJ0HfAYBycU/MRTMO5wXEfwL29G0gjygzFxlUe7t/Y92M/VsvlEQ9nHrtqJ4hQA968="
   matrix:
   - TARGET=Mars.target
-  - TARGET=Luna.target
+  - TARGET=Oxygen.target
   - TARGET=Neon.target
-matrix:
-  exclude:
-   - jdk: oraclejdk8
-     env: TARGET=Mars.target
-   - jdk: oraclejdk8
-     env: TARGET=Luna.target
-   - jdk: oraclejdk7
-     env: TARGET=Neon.target
 before_script:
  - wget https://github.com/google/googletest/archive/release-1.8.0.zip
  - unzip release-1.8.0.zip
@@ -67,9 +58,4 @@ deploy:
     tags: Yakindu/statecharts
     condition: "$TRAVIS_TAG =~ ^release.*$"
 notifications:
-  webhooks:
-    urls:
-      - https://webhooks.gitter.im/e/7b7c5ba24ab36f09d721
-    on_success: change  # options: [always|never|change] default: always
-    on_failure: always  # options: [always|never|change] default: always
-    on_start: never     # options: [always|never|change] default: always
+   slack: itemis:GpMT4EcgEk90uVGX2BZS1XB3

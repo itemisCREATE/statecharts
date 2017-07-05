@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/ChoiceTest/ChoiceTest.cc", program = "gtests/ChoiceTest/Choice", model = "testmodels/SCTUnit/Choice.sct" )
+@GTest(sourceFile = "gtests/Choice/ChoiceTest.cc", program = "gtests/Choice/Choice", model = "testmodels/SCTUnit/Choice.sct" )
 @RunWith(GTestRunner.class)
 public class ChoiceTest {
 

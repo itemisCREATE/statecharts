@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "Parenthesis.h"
 #include "sc_types.h"
-Parenthesis* statechart;
+static Parenthesis* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:

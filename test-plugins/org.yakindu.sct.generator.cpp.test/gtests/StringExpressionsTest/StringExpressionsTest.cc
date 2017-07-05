@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "StringExpressions.h"
 #include "sc_types.h"
-StringExpressions* statechart;
+static StringExpressions* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -37,9 +37,9 @@ TEST_F(StatemachineTest, StringExpressionsTest) {
 	
 	EXPECT_TRUE(statechart->isStateActive(StringExpressions::main_region_AssignmentChecked));
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(StringExpressions::main_region_VarToVarCompareSucceeded));
 	
@@ -51,9 +51,9 @@ TEST_F(StatemachineTest, StringExpressionsTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarNotEqual());
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(StringExpressions::main_region_VarToConstCompareSucceeded));
 	
@@ -65,9 +65,9 @@ TEST_F(StatemachineTest, StringExpressionsTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarNotEqual());
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(StringExpressions::main_region_ConstToVarCompareSucceeded));
 	
@@ -79,9 +79,9 @@ TEST_F(StatemachineTest, StringExpressionsTest) {
 	
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_stringVarNotEqual());
 	
-	statechart->raise_e();
+	statechart->getDefaultSCI()->raise_e();
 	
-	statechart->runCycle();
+	statechart->runCycle();;
 	
 	EXPECT_TRUE(statechart->isStateActive(StringExpressions::main_region_ConstToConstCompareSucceeded));
 	

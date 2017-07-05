@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "StatechartLocalReactions.h"
 #include "sc_types.h"
-StatechartLocalReactions* statechart;
+static StatechartLocalReactions* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -43,7 +43,7 @@ TEST_F(StatemachineTest, statechartLocalReactionsTest) {
 		else {
 			EXPECT_TRUE(statechart->isStateActive(StatechartLocalReactions::main_region_S2));
 		}
-		statechart->runCycle();
+		statechart->runCycle();;
 	}
 	
 }

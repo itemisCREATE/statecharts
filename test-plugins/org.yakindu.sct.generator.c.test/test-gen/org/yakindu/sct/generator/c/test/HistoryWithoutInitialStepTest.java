@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/HistoryWithoutInitialStepTest/HistoryWithoutInitialStepTest.cc", program = "gtests/HistoryWithoutInitialStepTest/HistoryWithoutInitialStep", model = "testmodels/SCTUnit/HistoryWithoutInitialStep.sct" )
+@GTest(sourceFile = "gtests/HistoryWithoutInitialStep/HistoryWithoutInitialStepTest.cc", program = "gtests/HistoryWithoutInitialStep/HistoryWithoutInitialStep", model = "testmodels/SCTUnit/HistoryWithoutInitialStep.sct" )
 @RunWith(GTestRunner.class)
 public class HistoryWithoutInitialStepTest {
 

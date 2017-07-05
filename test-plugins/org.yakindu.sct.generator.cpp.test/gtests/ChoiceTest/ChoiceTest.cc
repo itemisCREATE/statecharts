@@ -12,7 +12,7 @@
 #include "gtest/gtest.h"
 #include "Choice.h"
 #include "sc_types.h"
-Choice* statechart;
+static Choice* statechart;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
@@ -29,29 +29,29 @@ void initForEventE(bool valueForC){
 	statechart->enter();
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
 	statechart->getDefaultSCI()->set_c(valueForC);
-	statechart->raise_e();
-	statechart->runCycle();
+	statechart->getDefaultSCI()->raise_e();
+	statechart->runCycle();;
 }
 void initForEventF(bool valueForC){
 	statechart->enter();
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
 	statechart->getDefaultSCI()->set_c(valueForC);
-	statechart->raise_f();
-	statechart->runCycle();
+	statechart->getDefaultSCI()->raise_f();
+	statechart->runCycle();;
 }
 void initForEventG(bool valueForC){
 	statechart->enter();
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
 	statechart->getDefaultSCI()->set_c(valueForC);
-	statechart->raise_g();
-	statechart->runCycle();
+	statechart->getDefaultSCI()->raise_g();
+	statechart->runCycle();;
 }
 void initForEventH(bool valueForC){
 	statechart->enter();
 	EXPECT_TRUE(statechart->isStateActive(Choice::main_region_A));
 	statechart->getDefaultSCI()->set_c(valueForC);
-	statechart->raise_h();
-	statechart->runCycle();
+	statechart->getDefaultSCI()->raise_h();
+	statechart->runCycle();;
 }
 
 TEST_F(StatemachineTest, elseChoiceUsingNonDefaultTransition) {

@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2016 committers of YAKINDU and others.
+* Copyright (c) 2017 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -21,78 +21,78 @@ import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
 import static org.junit.Assert.assertTrue;
 /**
- *  Unit TestCase for Choice
+ * Unit TestCase for Choice
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class ChoiceTest extends AbstractExecutionFlowTest {
 	@Before
-	public void setup() throws Exception {
+	public void setup() throws Exception{
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("Choice.sct");
 		initInterpreter(flow);
 	}
 	@Test
 	public void elseChoiceUsingNonDefaultTransition() throws Exception {
-		interpreter.enter();
-		assertTrue(isStateActive("A"));
-		setBoolean("c", true);
-		raiseEvent("e");
-		interpreter.runCycle();
+		initForEventE(true);
 		assertTrue(isStateActive("C"));
 	}
 	@Test
 	public void elseChoiceUsingDefaultTransition() throws Exception {
-		interpreter.enter();
-		assertTrue(isStateActive("A"));
-		setBoolean("c", false);
-		raiseEvent("e");
-		interpreter.runCycle();
+		initForEventE(false);
 		assertTrue(isStateActive("B"));
 	}
 	@Test
 	public void defaultChoiceUsingNonDefaultTransition() throws Exception {
-		interpreter.enter();
-		assertTrue(isStateActive("A"));
-		setBoolean("c", true);
-		raiseEvent("g");
-		interpreter.runCycle();
+		initForEventG(true);
 		assertTrue(isStateActive("C"));
 	}
 	@Test
 	public void defaultChoiceUsingDefaultTransition() throws Exception {
-		interpreter.enter();
-		assertTrue(isStateActive("A"));
-		setBoolean("c", false);
-		raiseEvent("g");
-		interpreter.runCycle();
+		initForEventG(false);
 		assertTrue(isStateActive("B"));
 	}
 	@Test
 	public void uncheckedChoiceUsingNonDefaultTransition() throws Exception {
-		interpreter.enter();
-		assertTrue(isStateActive("A"));
-		setBoolean("c", true);
-		raiseEvent("f");
-		interpreter.runCycle();
+		initForEventF(true);
 		assertTrue(isStateActive("C"));
 	}
 	@Test
 	public void uncheckedChoiceUsingDefaultTransition() throws Exception {
-		interpreter.enter();
-		assertTrue(isStateActive("A"));
-		setBoolean("c", false);
-		raiseEvent("f");
-		interpreter.runCycle();
+		initForEventF(false);
 		assertTrue(isStateActive("B"));
 	}
 	@Test
 	public void alwaysTrueTransitionInChoice() throws Exception {
+		initForEventH(true);
+		assertTrue(isStateActive("C"));
+	}
+	public void initForEventE(boolean valueForC) throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
-		setBoolean("c", true);
+		setBoolean("c", valueForC);
+		raiseEvent("e");
+		interpreter.runCycle();
+	}
+	public void initForEventF(boolean valueForC) throws Exception {
+		interpreter.enter();
+		assertTrue(isStateActive("A"));
+		setBoolean("c", valueForC);
+		raiseEvent("f");
+		interpreter.runCycle();
+	}
+	public void initForEventG(boolean valueForC) throws Exception {
+		interpreter.enter();
+		assertTrue(isStateActive("A"));
+		setBoolean("c", valueForC);
+		raiseEvent("g");
+		interpreter.runCycle();
+	}
+	public void initForEventH(boolean valueForC) throws Exception {
+		interpreter.enter();
+		assertTrue(isStateActive("A"));
+		setBoolean("c", valueForC);
 		raiseEvent("h");
 		interpreter.runCycle();
-		assertTrue(isStateActive("C"));
 	}
 }
