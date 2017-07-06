@@ -16,13 +16,23 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.yakindu.base.expressions.expressions.Argument;
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
+import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractTypeInferrerTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.test.util.STextTestScopeProvider;
+import org.yakindu.sct.model.stext.test.util.StextTestFactory;
+import org.yakindu.sct.model.stext.test.util.TypesTestFactory;
+
+import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -34,6 +44,9 @@ import org.yakindu.sct.model.stext.test.util.STextTestScopeProvider;
 @InjectWith(STextInjectorProvider.class)
 public class TypeInferrerTest extends AbstractTypeInferrerTest {
 
+	@Inject
+	protected TypesTestFactory typesFactory;
+	
 	// Unary
 	@Test
 	public void testNumericalUnaryExpressionSuccess() {
@@ -840,6 +853,32 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 		expectErrors("opSubBool(vb, vb)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2);
 		expectErrors("opSubString(vs, vs)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2);
 		
+	}
+
+	@Test
+	public void testOperationCallWithOptionalParameter() {
+		OperationDefinition opDef = StextTestFactory._createOperation("opWithOptionals",
+				StextFactory.eINSTANCE.createInternalScope());
+
+		Parameter pReq = typesFactory.createParameter("pReq", ITypeSystem.INTEGER, false);
+		Parameter pOpt = typesFactory.createParameter("pOpt", ITypeSystem.INTEGER, true);
+		opDef.getParameters().add(pReq);
+		opDef.getParameters().add(pOpt);
+
+		Argument boolArg = (Argument) parseExpression("true", Argument.class.getSimpleName());
+		Argument intArg = (Argument) parseExpression("17", Argument.class.getSimpleName());
+
+		// opWithOptionals(17, 17) => valid
+		ElementReferenceExpression opCall1 = StextTestFactory._createOperationCall(opDef, intArg, intArg);
+		expectNoErrors(opCall1);
+
+		// opWithOptionals(17) => valid, because of optional parameter
+		ElementReferenceExpression opCall2 = StextTestFactory._createOperationCall(opDef, intArg);
+		expectNoErrors(opCall2);
+
+		// opWithOptionals(true) => invalid
+		ElementReferenceExpression opCall3 = StextTestFactory._createOperationCall(opDef, boolArg);
+		expectError(opCall3, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 	}
 
 	@Test
