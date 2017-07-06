@@ -11,18 +11,21 @@
 package org.yakindu.sct.model.stext.scoping;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
@@ -42,6 +45,7 @@ import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -51,6 +55,10 @@ import com.google.inject.Provider;
  */
 public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 
+	private static final ResourceImpl CACHE_RESOURCE_DESC = new ResourceImpl();
+
+	private static final String CACHE_KEY_IMPORTED_URIS = "IMPORTED_URIS";
+
 	public static final URI STEXT_LIB = URI
 			.createURI("platform:/plugin/org.yakindu.sct.model.stext.lib/lib/STextLib.xmi");
 
@@ -58,18 +66,16 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	private ITypeSystem typeSystem;
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
+
 	@Inject
-	private IResourceScopeCache cache;
+	IResourceScopeCache cache;
+
 	@Inject
 	private DefaultGlobalScopeProvider delegate;
 	@Inject
 	private STextLibraryGlobalScopeProvider libraryScope;
 	@Inject
 	private IPackageImport2URIMapper mapper;
-
-	public void setCache(IResourceScopeCache cache) {
-		this.cache = cache;
-	}
 
 	public static final String FILE_EXTENSION = "sct";
 
@@ -117,45 +123,80 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		return super.getScope(resource, reference);
 	}
 
-	protected LinkedHashSet<URI> getImportedUris(final Resource resource) {
-		return cache.get(ImportUriGlobalScopeProvider.class.getName(), resource, new Provider<LinkedHashSet<URI>>() {
-			@Override
-			public LinkedHashSet<URI> get() {
-				final LinkedHashSet<URI> uniqueImportURIs = new LinkedHashSet<URI>(5);
-				IAcceptor<String> collector = createURICollector(resource, uniqueImportURIs);
-				Collection<ImportScope> importScopes = getImportScopes(resource);
-				for (ImportScope object : importScopes) {
-					EList<String> imports = object.getImports();
-					for (String packageImport : imports) {
-						collectPackageImports(resource, packageImport, collector, uniqueImportURIs);
-					}
-				}
-				Iterator<URI> uriIter = uniqueImportURIs.iterator();
-				while (uriIter.hasNext()) {
-					if (!EcoreUtil2.isValidUri(resource, uriIter.next()))
-						uriIter.remove();
-				}
-				return uniqueImportURIs;
-			}
+	@Override
+	protected IScope createLazyResourceScope(final IScope parent, final URI uri,
+			final IResourceDescriptions descriptions, final EClass type, final Predicate<IEObjectDescription> filter,
+			final boolean ignoreCase) {
+		
+		return cache.get(uri.toString(), CACHE_RESOURCE_DESC, new Provider<IScope>() {
 
-			private Collection<ImportScope> getImportScopes(final Resource resource) {
-				StatechartSpecification specification = (StatechartSpecification) EcoreUtil
-						.getObjectByType(resource.getContents(), StextPackage.Literals.STATECHART_SPECIFICATION);
-				if (specification != null) {
-					return EcoreUtil.getObjectsByType(specification.getScopes(), StextPackage.Literals.IMPORT_SCOPE);
-				} else {
-					Statechart statechart = getStatechart(resource);
-					return EcoreUtil.getObjectsByType(statechart.getScopes(), StextPackage.Literals.IMPORT_SCOPE);
-				}
+			@Override
+			public IScope get() {
+				return STextGlobalScopeProvider.super.createLazyResourceScope(parent, uri, descriptions, type, filter, ignoreCase);
 			}
+			
 		});
 	}
 
-	protected void collectPackageImports(Resource resource, String packageImport, IAcceptor<String> acceptor,
-			LinkedHashSet<URI> uniqueImportURIs) {
-		PackageImport pkgImport = mapper.findPackageImport(resource, packageImport);
-		if (pkgImport != null && pkgImport.getUri() != null && URIConverter.INSTANCE.exists(pkgImport.getUri(), null)) {
-			acceptor.accept(pkgImport.getUri().toString());
+	private Collection<ImportScope> getImportScopes(final Resource resource) {
+		StatechartSpecification specification = (StatechartSpecification) EcoreUtil
+				.getObjectByType(resource.getContents(), StextPackage.Literals.STATECHART_SPECIFICATION);
+		if (specification != null) {
+			return EcoreUtil.getObjectsByType(specification.getScopes(), StextPackage.Literals.IMPORT_SCOPE);
+		} else {
+			Statechart statechart = getStatechart(resource);
+			return EcoreUtil.getObjectsByType(statechart.getScopes(), StextPackage.Literals.IMPORT_SCOPE);
+		}
+	}
+
+	protected LinkedHashSet<URI> getImportedUris(final Resource resourceOrig) {
+		final Resource cacheResource = getContextResource(resourceOrig);
+		LinkedHashSet<URI> set = cache.get(CACHE_KEY_IMPORTED_URIS, cacheResource, new Provider<LinkedHashSet<URI>>() {
+
+			@Override
+			public LinkedHashSet<URI> get() {
+				LinkedHashSet<URI> importedURIs = new LinkedHashSet<URI>(5);
+				for (ImportScope object : getImportScopes(cacheResource)) {
+					collectPackageImports(cacheResource, object.getImports(),
+							createURICollector(cacheResource, importedURIs));
+				}
+				return importedURIs;
+			}
+		});
+		return set;
+
+	}
+
+	protected Resource getContextResource(Resource context) {
+		Resource contextResource = context;
+		ContextElementAdapter existingAdapter = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context,
+				ContextElementAdapter.class);
+
+		if (existingAdapter != null) {
+			contextResource = existingAdapter.getElement().eResource();
+		}
+		return contextResource;
+	}
+
+	protected void collectPackageImports(Resource resource, EList<String> imports, IAcceptor<String> acceptor) {
+
+		List<String> importsToFind = Lists.newArrayList(imports);
+		Set<PackageImport> allImports = mapper.getAllImports(resource);
+
+		for (PackageImport packageImport : allImports) {
+			if (importsToFind.size() == 0) {
+				break;
+			}
+			if (!EcoreUtil2.isValidUri(resource, packageImport.getUri()))
+				continue;
+
+			if (importsToFind.contains(packageImport.getName())) {
+				acceptor.accept(packageImport.getUri().toString());
+				importsToFind.remove(packageImport.getName());
+			} else if (importsToFind.contains(packageImport.getNamespace())) {
+				acceptor.accept(packageImport.getUri().toString());
+				importsToFind.remove(packageImport.getNamespace());
+			}
 		}
 	}
 

@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.model.stext.scoping;
 
+import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
@@ -120,7 +121,7 @@ public interface IPackageImport2URIMapper {
 
 		@Override
 		public Set<PackageImport> getAllImports(Resource context) {
-			return null;
+			return Collections.EMPTY_SET;
 		}
 	}
 

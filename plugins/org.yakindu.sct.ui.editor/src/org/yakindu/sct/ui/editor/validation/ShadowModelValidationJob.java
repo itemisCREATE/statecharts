@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -48,13 +47,17 @@ public class ShadowModelValidationJob extends ValidationJob {
 	@Inject
 	private ResourceCopier copier;
 
+	@Inject
+	private ResourceSet set;
+
 	@Override
 	protected IStatus runInternal(final IProgressMonitor monitor) {
-		ResourceSet set = new ResourceSetImpl();
 		try {
 			if (!resource.isLoaded())
 				return Status.CANCEL_STATUS;
-			final Resource shadowResource = set.createResource(resource.getURI());
+
+			final Resource shadowResource = set.getResource(resource.getURI(), true);
+
 			cloneResource(monitor, shadowResource);
 			if (monitor.isCanceled())
 				return Status.CANCEL_STATUS;
@@ -85,6 +88,10 @@ public class ShadowModelValidationJob extends ValidationJob {
 
 	protected void cloneResource(final IProgressMonitor monitor, final Resource shadowResource)
 			throws ExecutionException {
+		// clear contents before contents are copied...
+		shadowResource.getContents().clear();
+//		shadowResource.eAdapters().clear();
+
 		AbstractTransactionalCommand cmd = new AbstractTransactionalCommand(TransactionUtil.getEditingDomain(resource),
 				"", null) {
 			@Override
@@ -105,6 +112,10 @@ public class ShadowModelValidationJob extends ValidationJob {
 
 		private static final long serialVersionUID = 1L;
 
+		public ResourceCopier() {
+			super(false, false);
+		}
+		
 		public void cloneResource(Resource original, Resource clone) {
 			clone.setURI(original.getURI());
 			clone.getContents().addAll(super.copyAll(original.getContents()));

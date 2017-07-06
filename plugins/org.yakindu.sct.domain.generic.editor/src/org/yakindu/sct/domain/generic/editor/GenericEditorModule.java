@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.domain.generic.editor;
 
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
@@ -53,6 +55,10 @@ public class GenericEditorModule extends AbstractGenericModule {
 
 	public Class<? extends IDiagnosticConverter> bindIDiagnosticConverter() {
 		return SCTDiagnosticConverterImpl.class;
+	}
+
+	public Class<? extends ResourceSet> bindResourceSet() {
+		return SynchronizedXtextResourceSet.class;
 	}
 
 	public Class<? extends MarkerCreator> bindMarkerCreator() {
