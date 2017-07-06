@@ -335,22 +335,23 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	}
 
 
-	    /*
+	/**
 	 * replace the current cross reference adapter, because it is responsible
 	 * for loading the transitive hull of all reachable EObject. This is a huge
-	 * performance issue when working with big connected models.<br>The hull is
-	 * computed through the import section.<br> The new registered cross
-	 * reference adapter is configured not to resolve proxies.
+	 * performance issue when working with big connected models.<br>
+	 * The hull is computed through the import section.<br>
+	 * The new registered cross reference adapter is configured not to resolve
+	 * proxies.
 	 */
-	    private void replaceCrossReferenceAdapterWithNonResolvingAdapter(final TransactionalEditingDomain domain) {
+	private void replaceCrossReferenceAdapterWithNonResolvingAdapter(final TransactionalEditingDomain domain) {
 		final CrossReferenceAdapter adapter = getCrossReferenceAdapter(domain);
-	        if (null != adapter) {
-	            adapter.unsetTarget(domain.getResourceSet());
+		if (null != adapter) {
+			adapter.unsetTarget(domain.getResourceSet());
 
-	            domain.getResourceSet().eAdapters().remove(adapter);
-	            domain.getResourceSet().eAdapters().add(new CrossReferenceAdapter(false));
-	        }
-	    }
+			domain.getResourceSet().eAdapters().remove(adapter);
+			domain.getResourceSet().eAdapters().add(new CrossReferenceAdapter(false));
+		}
+	}
 
 	private CrossReferenceAdapter getCrossReferenceAdapter(final TransactionalEditingDomain domain) {
 
