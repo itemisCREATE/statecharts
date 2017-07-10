@@ -685,22 +685,22 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 	
 	/* Entry action for state 'Add'. */
 	private void entryAction_main_region_Add() {
-		sCInterface.setA((sCInterface.assignB(5))+4);
+		sCInterface.setA((sCInterface.assignB(5)) + 4);
 	}
 	
 	/* Entry action for state 'Multiply'. */
 	private void entryAction_main_region_Multiply() {
-		sCInterface.setE(sCInterface.getE() * ((sCInterface.assignF(sCInterface.getF() * 5))*3));
+		sCInterface.setE(sCInterface.getE() * ((sCInterface.assignF(sCInterface.getF() * 5)) * 3));
 	}
 	
 	/* Entry action for state 'Divide'. */
 	private void entryAction_main_region_Divide() {
-		sCInterface.setG(sCInterface.getG() / ((sCInterface.assignH(sCInterface.getH() / 2))/4));
+		sCInterface.setG(sCInterface.getG() / ((sCInterface.assignH(sCInterface.getH() / 2)) / 4));
 	}
 	
 	/* Entry action for state 'Modulo'. */
 	private void entryAction_main_region_Modulo() {
-		sCInterface.setI(sCInterface.getI() % ((sCInterface.assignI1(sCInterface.getI1() % 4))%4));
+		sCInterface.setI(sCInterface.getI() % ((sCInterface.assignI1(sCInterface.getI1() % 4)) % 4));
 	}
 	
 	/* Entry action for state 'Shift'. */
@@ -727,7 +727,7 @@ public class AssignmentAsExpressionStatemachine implements IAssignmentAsExpressi
 	
 	/* Entry action for state 'Subtract'. */
 	private void entryAction_main_region_Subtract() {
-		sCInterface.setD(sCInterface.getD() - ((sCInterface.assignC(sCInterface.getC() - 5))-1));
+		sCInterface.setD(sCInterface.getD() - ((sCInterface.assignC(sCInterface.getC() - 5)) - 1));
 	}
 	
 	/* 'default' enter sequence for state Add */

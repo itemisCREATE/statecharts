@@ -315,6 +315,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	private void react_main_region_B() {
 		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
+		} else {
 		}
 	}
 	
@@ -322,6 +323,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	private void react_main_region_C() {
 		if (check_main_region_C_tr0_tr0()) {
 			effect_main_region_C_tr0();
+		} else {
 		}
 	}
 	

@@ -406,6 +406,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		} else {
 			if (check_EntryReactionAction_r2_B_r_BA_tr0_tr0()) {
 				effect_EntryReactionAction_r2_B_r_BA_tr0();
+			} else {
 			}
 		}
 	}
@@ -417,6 +418,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		} else {
 			if (check_EntryReactionAction_r2_B_r_BB_tr0_tr0()) {
 				effect_EntryReactionAction_r2_B_r_BB_tr0();
+			} else {
 			}
 		}
 	}
@@ -428,6 +430,7 @@ public class EntryReactionActionStatemachine implements IEntryReactionActionStat
 		} else {
 			if (check_EntryReactionAction_r2_D_tr1_tr1()) {
 				effect_EntryReactionAction_r2_D_tr1();
+			} else {
 			}
 		}
 	}

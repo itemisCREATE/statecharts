@@ -245,6 +245,7 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 		} else {
 			if (check_main_region_A_tr1_tr1()) {
 				effect_main_region_A_tr1();
+			} else {
 			}
 		}
 	}
@@ -253,6 +254,7 @@ public class ExitOnSelfTransitionStatemachine implements IExitOnSelfTransitionSt
 	private void react_main_region_B() {
 		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
+		} else {
 		}
 	}
 	

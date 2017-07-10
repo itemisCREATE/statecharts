@@ -300,6 +300,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		} else {
 			if (check_mr_A_r_X1_tr1_tr1()) {
 				effect_mr_A_r_X1_tr1();
+			} else {
 			}
 		}
 	}
@@ -311,6 +312,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 		} else {
 			if (check_mr_A_r_X2_tr1_tr1()) {
 				effect_mr_A_r_X2_tr1();
+			} else {
 			}
 		}
 	}
@@ -319,6 +321,7 @@ public class HistoryWithExitPointStatemachine implements IHistoryWithExitPointSt
 	private void react_mr_B() {
 		if (check_mr_B_tr0_tr0()) {
 			effect_mr_B_tr0();
+		} else {
 		}
 	}
 	

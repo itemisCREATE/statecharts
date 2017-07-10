@@ -249,6 +249,7 @@ public class TriggerExpressionPrecedenceStatemachine implements ITriggerExpressi
 		} else {
 			if (check_TriggerExpressionPrecedence_main_region_A_tr1_tr1()) {
 				effect_TriggerExpressionPrecedence_main_region_A_tr1();
+			} else {
 			}
 		}
 	}

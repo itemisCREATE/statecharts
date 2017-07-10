@@ -223,6 +223,7 @@ public class ConstOnlyDefaultScopeStatemachine implements IConstOnlyDefaultScope
 		} else {
 			if (check_ConstOnlyDefaultScope_main_region_A_tr1_tr1()) {
 				effect_ConstOnlyDefaultScope_main_region_A_tr1();
+			} else {
 			}
 		}
 	}

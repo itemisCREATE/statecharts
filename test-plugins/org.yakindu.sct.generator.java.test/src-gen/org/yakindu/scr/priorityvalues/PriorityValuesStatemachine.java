@@ -150,7 +150,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	}
 	
 	private boolean check_main_region_A_tr3_tr3() {
-		return (sCInterface.event2) && ( !isStateActive(State.someRegion_B));
+		return (sCInterface.event2) && (!isStateActive(State.someRegion_B));
 	}
 	
 	private void effect_someRegion_A_tr0() {
@@ -313,6 +313,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	private void react_someRegion_A() {
 		if (check_someRegion_A_tr0_tr0()) {
 			effect_someRegion_A_tr0();
+		} else {
 		}
 	}
 	
@@ -333,6 +334,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 				} else {
 					if (check_main_region_A_tr3_tr3()) {
 						effect_main_region_A_tr3();
+					} else {
 					}
 				}
 			}

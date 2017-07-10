@@ -884,6 +884,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	private void react_auto_char() {
 		if (check_auto_char_tr0_tr0()) {
 			effect_auto_char_tr0();
+		} else {
 		}
 	}
 	

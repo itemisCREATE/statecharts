@@ -174,6 +174,7 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	private void react_main_region_A() {
 		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
+		} else {
 		}
 	}
 	

@@ -899,131 +899,77 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	
 	/* The reactions of state A. */
 	private void react_mr_A() {
-		effect__lr0();
-		if (check__lr1()) {
-			effect__lr1();
-		}
-		if (check__lr2()) {
-			effect__lr2();
-		}
 		if (check_mr_A_tr0_tr0()) {
 			effect_mr_A_tr0();
+		} else {
 		}
 	}
 	
 	/* The reactions of state X. */
 	private void react_mr_B_r1_X() {
-		effect__lr0();
-		if (check__lr1()) {
-			effect__lr1();
-		}
-		if (check__lr2()) {
-			effect__lr2();
-		}
 		if (check_mr_B_r1_X_tr0_tr0()) {
 			effect_mr_B_r1_X_tr0();
+		} else {
 		}
 	}
 	
 	/* The reactions of state Y. */
 	private void react_mr_B_r1_Y() {
-		effect__lr0();
-		if (check__lr1()) {
-			effect__lr1();
-		}
-		if (check__lr2()) {
-			effect__lr2();
-		}
 		if (check_mr_B_r1_Y_tr0_tr0()) {
 			effect_mr_B_r1_Y_tr0();
+		} else {
 		}
 	}
 	
 	/* The reactions of state Z. */
 	private void react_mr_B_r1_Z() {
-		effect__lr0();
-		if (check__lr1()) {
-			effect__lr1();
-		}
-		if (check__lr2()) {
-			effect__lr2();
-		}
 		if (check_mr_B_r1_Z_tr0_tr0()) {
 			effect_mr_B_r1_Z_tr0();
+		} else {
 		}
 	}
 	
 	/* The reactions of state V. */
 	private void react_mr_B_r1_V() {
-		effect__lr0();
-		if (check__lr1()) {
-			effect__lr1();
-		}
-		if (check__lr2()) {
-			effect__lr2();
-		}
 		if (check_mr_B_r1_V_tr0_tr0()) {
 			effect_mr_B_r1_V_tr0();
+		} else {
 		}
 	}
 	
 	/* The reactions of state W. */
 	private void react_mr_B_r1_W() {
-		effect__lr0();
-		if (check__lr1()) {
-			effect__lr1();
-		}
-		if (check__lr2()) {
-			effect__lr2();
-		}
 		if (check_mr_B_r1_W_tr0_tr0()) {
 			effect_mr_B_r1_W_tr0();
+		} else {
 		}
 	}
 	
 	/* The reactions of state S. */
 	private void react_mr_B_r1_S() {
-		effect__lr0();
-		if (check__lr1()) {
-			effect__lr1();
-		}
-		if (check__lr2()) {
-			effect__lr2();
-		}
 		if (check_mr_B_r1_S_tr0_tr0()) {
 			effect_mr_B_r1_S_tr0();
 		} else {
 			if (check_mr_B_r1_S_tr1_tr1()) {
 				effect_mr_B_r1_S_tr1();
+			} else {
 			}
 		}
 	}
 	
 	/* The reactions of state T. */
 	private void react_mr_B_r1_T() {
-		effect__lr0();
-		if (check__lr1()) {
-			effect__lr1();
-		}
-		if (check__lr2()) {
-			effect__lr2();
-		}
 		if (check_mr_B_r1_T_tr0_tr0()) {
 			effect_mr_B_r1_T_tr0();
+		} else {
 		}
 	}
 	
 	/* The reactions of state U. */
 	private void react_mr_B_r1_U() {
-		effect__lr0();
-		if (check__lr1()) {
-			effect__lr1();
-		}
-		if (check__lr2()) {
-			effect__lr2();
-		}
 		if (check_mr_B_r1_U_tr0_tr0()) {
 			effect_mr_B_r1_U_tr0();
+		} else {
 		}
 	}
 	
@@ -1031,6 +977,14 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	private void react_mr_B_r2_S() {
 		if (check_mr_B_r2_S_tr0_tr0()) {
 			effect_mr_B_r2_S_tr0();
+		} else {
+			effect__lr0();
+			if (check__lr1()) {
+				effect__lr1();
+			}
+			if (check__lr2()) {
+				effect__lr2();
+			}
 		}
 	}
 	
@@ -1038,6 +992,14 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	private void react_mr_B_r2_T() {
 		if (check_mr_B_r2_T_tr0_tr0()) {
 			effect_mr_B_r2_T_tr0();
+		} else {
+			effect__lr0();
+			if (check__lr1()) {
+				effect__lr1();
+			}
+			if (check__lr2()) {
+				effect__lr2();
+			}
 		}
 	}
 	
@@ -1048,6 +1010,14 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		} else {
 			if (check_mr_B_r2_U_tr1_tr1()) {
 				effect_mr_B_r2_U_tr1();
+			} else {
+				effect__lr0();
+				if (check__lr1()) {
+					effect__lr1();
+				}
+				if (check__lr2()) {
+					effect__lr2();
+				}
 			}
 		}
 	}
@@ -1059,6 +1029,14 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		} else {
 			if (check_mr_B_r2_V_tr1_tr1()) {
 				effect_mr_B_r2_V_tr1();
+			} else {
+				effect__lr0();
+				if (check__lr1()) {
+					effect__lr1();
+				}
+				if (check__lr2()) {
+					effect__lr2();
+				}
 			}
 		}
 	}
@@ -1067,6 +1045,14 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	private void react_mr_B_r2_W() {
 		if (check_mr_B_r2_W_tr0_tr0()) {
 			effect_mr_B_r2_W_tr0();
+		} else {
+			effect__lr0();
+			if (check__lr1()) {
+				effect__lr1();
+			}
+			if (check__lr2()) {
+				effect__lr2();
+			}
 		}
 	}
 	

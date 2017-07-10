@@ -266,6 +266,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	private void react_main_region_Start() {
 		if (check_main_region_Start_tr0_tr0()) {
 			effect_main_region_Start_tr0();
+		} else {
 		}
 	}
 	
@@ -273,6 +274,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	private void react_main_region_Mid() {
 		if (check_main_region_Mid_tr0_tr0()) {
 			effect_main_region_Mid_tr0();
+		} else {
 		}
 	}
 	
@@ -280,6 +282,7 @@ public class TypeAliasStatemachine implements ITypeAliasStatemachine {
 	private void react_main_region_Mid2() {
 		if (check_main_region_Mid2_tr0_tr0()) {
 			effect_main_region_Mid2_tr0();
+		} else {
 		}
 	}
 	

@@ -266,7 +266,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		
 		sCInterface.setOr(sCInterface.myBool1 || sCInterface.myBool2);
 		
-		sCInterface.setNot( !sCInterface.myBool1);
+		sCInterface.setNot(!sCInterface.myBool1);
 		
 		sCInterface.setEqual(sCInterface.myBool1==sCInterface.myBool2);
 		
@@ -322,6 +322,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	private void react_main_region_StateA() {
 		if (check_main_region_StateA_tr0_tr0()) {
 			effect_main_region_StateA_tr0();
+		} else {
 		}
 	}
 	

@@ -534,15 +534,15 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		
 		sCInterface.setNotEqual((sCInterface.myInt1!=sCInterface.myInt2));
 		
-		sCInterface.setPlus(sCInterface.myInt1+sCInterface.myInt2);
+		sCInterface.setPlus(sCInterface.myInt1 + sCInterface.myInt2);
 		
-		sCInterface.setMinus(sCInterface.myInt1-sCInterface.myInt2);
+		sCInterface.setMinus(sCInterface.myInt1 - sCInterface.myInt2);
 		
-		sCInterface.setMultiply(sCInterface.myInt1*sCInterface.myInt2);
+		sCInterface.setMultiply(sCInterface.myInt1 * sCInterface.myInt2);
 		
-		sCInterface.setDivision(sCInterface.myInt1/sCInterface.myInt2);
+		sCInterface.setDivision(sCInterface.myInt1 / sCInterface.myInt2);
 		
-		sCInterface.setModulo(sCInterface.myInt1%sCInterface.myInt2);
+		sCInterface.setModulo(sCInterface.myInt1 % sCInterface.myInt2);
 		
 		sCInterface.setNegat(-sCInterface.myInt1);
 		
@@ -606,6 +606,7 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 	private void react_main_region_StateA() {
 		if (check_main_region_StateA_tr0_tr0()) {
 			effect_main_region_StateA_tr0();
+		} else {
 		}
 	}
 	

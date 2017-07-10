@@ -544,6 +544,7 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	private void react_r2_C() {
 		if (check_r2_C_tr0_tr0()) {
 			effect_r2_C_tr0();
+		} else {
 		}
 	}
 	

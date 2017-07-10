@@ -265,6 +265,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 			} else {
 				if (check_r_A_r_B_tr2_tr2()) {
 					effect_r_A_r_B_tr2();
+				} else {
 				}
 			}
 		}

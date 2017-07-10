@@ -280,6 +280,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		} else {
 			if (check_main_region_A__region0_B_tr0_tr0()) {
 				effect_main_region_A__region0_B_tr0();
+			} else {
 			}
 		}
 	}
@@ -291,6 +292,7 @@ public class EntryExitSelfTransitionStatemachine implements IEntryExitSelfTransi
 		} else {
 			if (check_main_region_A__region0_C_tr0_tr0()) {
 				effect_main_region_A__region0_C_tr0();
+			} else {
 			}
 		}
 	}

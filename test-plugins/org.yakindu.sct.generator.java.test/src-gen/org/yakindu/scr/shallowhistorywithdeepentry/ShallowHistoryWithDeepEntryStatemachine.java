@@ -337,6 +337,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		} else {
 			if (check_main_region_Y_tr1_tr1()) {
 				effect_main_region_Y_tr1();
+			} else {
 			}
 		}
 	}
@@ -348,6 +349,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		} else {
 			if (check_main_region_Z__region0_A_tr0_tr0()) {
 				effect_main_region_Z__region0_A_tr0();
+			} else {
 			}
 		}
 	}
@@ -359,6 +361,7 @@ public class ShallowHistoryWithDeepEntryStatemachine implements IShallowHistoryW
 		} else {
 			if (check_main_region_Z__region0_B__region0_C_tr0_tr0()) {
 				effect_main_region_Z__region0_B__region0_C_tr0();
+			} else {
 			}
 		}
 	}

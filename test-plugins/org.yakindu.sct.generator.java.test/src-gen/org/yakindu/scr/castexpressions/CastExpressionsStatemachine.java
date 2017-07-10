@@ -138,7 +138,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	}
 	
 	private boolean check_main_region_B_tr0_tr0() {
-		return (true) && (((double) (sCInterface.getRealValue()*0.1))>((long) 1.4) && ((long) (sCInterface.getRealValue()*sCInterface.getIntValue()))<((double) 100));
+		return (true) && (((double) (sCInterface.getRealValue() * 0.1))>((long) 1.4) && ((long) (sCInterface.getRealValue() * sCInterface.getIntValue()))<((double) 100));
 	}
 	
 	private void effect_main_region_A_tr0() {
@@ -153,12 +153,12 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
-		sCInterface.setRealValue(3*((long) 5.5));
+		sCInterface.setRealValue(3 * ((long) 5.5));
 	}
 	
 	/* Entry action for state 'C'. */
 	private void entryAction_main_region_C() {
-		sCInterface.setRealValue(((long) (sCInterface.realValue*sCInterface.intValue*10.1)));
+		sCInterface.setRealValue(((long) (sCInterface.realValue * sCInterface.intValue * 10.1)));
 	}
 	
 	/* 'default' enter sequence for state A */
@@ -230,6 +230,7 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	private void react_main_region_B() {
 		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
+		} else {
 		}
 	}
 	

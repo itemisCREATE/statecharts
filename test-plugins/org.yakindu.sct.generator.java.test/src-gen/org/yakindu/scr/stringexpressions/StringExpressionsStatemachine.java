@@ -582,9 +582,9 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	
 	/* Entry action for state 'AssignmentChecked'. */
 	private void entryAction_main_region_AssignmentChecked() {
-		sCInterface.setStringVarNotEqual( !(sCInterface.stringA== null?sCInterface.stringB ==null :sCInterface.stringA.equals(sCInterface.stringB)));
+		sCInterface.setStringVarNotEqual(!(sCInterface.stringA== null?sCInterface.stringB ==null :sCInterface.stringA.equals(sCInterface.stringB)));
 		
-		sCInterface.setStringVarEqual( !(sCInterface.stringA== null?sCInterface.stringA2 !=null : !sCInterface.stringA.equals(sCInterface.stringA2)));
+		sCInterface.setStringVarEqual(!(sCInterface.stringA== null?sCInterface.stringA2 !=null : !sCInterface.stringA.equals(sCInterface.stringA2)));
 	}
 	
 	/* 'default' enter sequence for state AssignmentChecked */
@@ -695,6 +695,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	private void react_main_region_AssignmentChecked() {
 		if (check_main_region_AssignmentChecked_tr0_tr0()) {
 			effect_main_region_AssignmentChecked_tr0();
+		} else {
 		}
 	}
 	
@@ -706,6 +707,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	private void react_main_region_VarToVarCompareSucceeded() {
 		if (check_main_region_VarToVarCompareSucceeded_tr0_tr0()) {
 			effect_main_region_VarToVarCompareSucceeded_tr0();
+		} else {
 		}
 	}
 	
@@ -713,6 +715,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	private void react_main_region_VarToConstCompareSucceeded() {
 		if (check_main_region_VarToConstCompareSucceeded_tr0_tr0()) {
 			effect_main_region_VarToConstCompareSucceeded_tr0();
+		} else {
 		}
 	}
 	
@@ -720,6 +723,7 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	private void react_main_region_ConstToVarCompareSucceeded() {
 		if (check_main_region_ConstToVarCompareSucceeded_tr0_tr0()) {
 			effect_main_region_ConstToVarCompareSucceeded_tr0();
+		} else {
 		}
 	}
 	

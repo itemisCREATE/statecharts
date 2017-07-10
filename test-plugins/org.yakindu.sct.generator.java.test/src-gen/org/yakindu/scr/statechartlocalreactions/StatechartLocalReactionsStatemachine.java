@@ -222,24 +222,20 @@ public class StatechartLocalReactionsStatemachine implements IStatechartLocalRea
 	
 	/* The reactions of state S1. */
 	private void react_main_region_S1() {
-		effect__lr0();
-		if (check__lr1()) {
-			effect__lr1();
-		}
 		effect_main_region_S1_tr0();
 	}
 	
 	/* The reactions of state S2. */
 	private void react_main_region_S2() {
-		effect__lr0();
-		if (check__lr1()) {
-			effect__lr1();
-		}
 		effect_main_region_S2_tr0();
 	}
 	
 	/* The reactions of state a. */
 	private void react_region2_a() {
+		effect__lr0();
+		if (check__lr1()) {
+			effect__lr1();
+		}
 	}
 	
 	/* Default react sequence for initial entry  */

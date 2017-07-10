@@ -33,6 +33,7 @@ public class OperationsTest {
 	
 	private OperationsStatemachine statemachine;	
 	
+	
 	@Before
 	public void setUp() {
 		statemachine = new OperationsStatemachine();
@@ -60,6 +61,7 @@ public class OperationsTest {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.runCycle();
+		;
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		verify(internalMock, atLeastOnce()).internalOperation1();
 		 
@@ -86,6 +88,7 @@ public class OperationsTest {
 		 
 		statemachine.raiseEv();
 		statemachine.runCycle();
+		;
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 		verify(interface1Mock, atLeastOnce()).interfaceOperation1();
 		 
@@ -112,6 +115,7 @@ public class OperationsTest {
 		 
 		statemachine.raiseEv();
 		statemachine.runCycle();
+		;
 		assertTrue(statemachine.isStateActive(State.main_region_D));
 		verify(defaultMock, atLeastOnce()).unnamedInterfaceOperation1();
 		 

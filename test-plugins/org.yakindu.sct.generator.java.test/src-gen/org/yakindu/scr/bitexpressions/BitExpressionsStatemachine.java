@@ -282,9 +282,9 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.setLeftBitshift(sCInterface.myBit1<<1);
+		sCInterface.setLeftBitshift(sCInterface.myBit1 << 1);
 		
-		sCInterface.setRightBitshift(sCInterface.myBit1>>1);
+		sCInterface.setRightBitshift(sCInterface.myBit1 >> 1);
 		
 		sCInterface.setComplementBitshift(~sCInterface.myBit1);
 		
@@ -344,6 +344,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	private void react_main_region_StateA() {
 		if (check_main_region_StateA_tr0_tr0()) {
 			effect_main_region_StateA_tr0();
+		} else {
 		}
 	}
 	

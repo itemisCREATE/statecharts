@@ -247,6 +247,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	private void react_main_region_StateA() {
 		if (check_main_region_StateA_tr0_tr0()) {
 			effect_main_region_StateA_tr0();
+		} else {
 		}
 	}
 	
@@ -258,6 +259,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	private void react_second_region_SateA() {
 		if (check_second_region_SateA_tr0_tr0()) {
 			effect_second_region_SateA_tr0();
+		} else {
 		}
 	}
 	

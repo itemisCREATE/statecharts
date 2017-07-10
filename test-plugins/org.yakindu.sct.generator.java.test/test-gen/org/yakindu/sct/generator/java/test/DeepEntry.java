@@ -14,7 +14,7 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.deepentry.DeepEntryStatemachine;
-import org.yakindu.scr.deepentry.DeepEntryStatemachine.State;	
+import org.yakindu.scr.deepentry.DeepEntryStatemachine.State;
 
 /**
  * Unit TestCase for DeepEntry

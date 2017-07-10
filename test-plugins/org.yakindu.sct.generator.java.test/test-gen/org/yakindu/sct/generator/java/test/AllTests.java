@@ -28,6 +28,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ConstOnlyDefaultScope.class,
 	ConstOnlyInternalScope.class,
 	ConstOnlyNamedScope.class,
+	ChildFirstExecutionHierarchy.class,
 	Declarations.class,
 	DeepEntry.class,
 	DeepHistory.class,

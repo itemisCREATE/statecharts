@@ -745,6 +745,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		} else {
 			if (check_main_region_A_tr1_tr1()) {
 				effect_main_region_A_tr1();
+			} else {
 			}
 		}
 	}
@@ -762,6 +763,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 				} else {
 					if (check_main_region_B_tr3_tr3()) {
 						effect_main_region_B_tr3();
+					} else {
 					}
 				}
 			}
