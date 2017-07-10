@@ -90,6 +90,9 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	
 	public static final String ERROR_WRONG_ANNOTATION_TARGET_CODE = "WrongAnnotationTarget";
 	public static final String ERROR_WRONG_ANNOTATION_TARGET_MSG = "Annotation '%s' can not be applied on %s ";
+	
+	public static final String ERROR_OPTIONAL_MUST_BE_LAST_CODE = "OptionalParametersLast";
+	public static final String ERROR_OPTIONAL_MUST_BE_LAST_MSG = "Required parameters must not be defined after optional parameters.";
 
 	@Inject
 	private GenericsPrettyPrinter printer;
@@ -307,6 +310,19 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 				error(String.format(ERROR_WRONG_ANNOTATION_TARGET_MSG, annotation.getType().getName(),
 						element.eClass()), null,
 						element.getAnnotations().indexOf(annotation), ERROR_WRONG_ANNOTATION_TARGET_CODE);
+			}
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkOptionalArgumentsAreLast(Operation op) {
+		boolean foundOptional = false;
+		for (Parameter p : op.getParameters()) {
+			if (foundOptional && !p.isOptional()) {
+				error(ERROR_OPTIONAL_MUST_BE_LAST_MSG, p, null, ERROR_OPTIONAL_MUST_BE_LAST_CODE);
+			}
+			if (p.isOptional()) {
+				foundOptional = true;
 			}
 		}
 	}

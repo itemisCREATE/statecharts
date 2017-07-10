@@ -17,8 +17,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_ASSIGNMENT_TO_CONST_MSG;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_LEFT_HAND_ASSIGNMENT_MSG;
-import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
+import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_OPTIONAL_MUST_BE_LAST_CODE;
 import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_VAR_ARGS_LAST_CODE;
+import static org.yakindu.base.expressions.validation.ExpressionsJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.util.HashMap;
@@ -35,6 +36,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -45,13 +47,16 @@ import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.impl.StextFactoryImpl;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
+import org.yakindu.sct.model.stext.test.util.StextTestFactory;
 import org.yakindu.sct.model.stext.test.util.TestCompletenessAssertions;
+import org.yakindu.sct.model.stext.test.util.TypesTestFactory;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
 import org.yakindu.sct.model.stext.validation.STextValidationMessages;
 import org.yakindu.sct.test.models.AbstractTestModelsUtil;
@@ -247,6 +252,25 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult = tester.validate(model);
 		validationResult.assertError(ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 
+	}
+	
+	@Inject
+	protected TypesTestFactory typesTestFactory = TypesTestFactory.INSTANCE;
+	
+	@Test
+	public void checkOptionalArgumentsAreLast() {
+		Scope scope = (Scope) super.parseExpression("internal: ", InternalScope.class.getSimpleName());
+		OperationDefinition op = StextTestFactory._createOperation("op", scope);
+		tester.validate(scope).assertOK();
+		
+		// optional parameter last => no error
+		op.getParameters().add(typesTestFactory.createParameter("p1", ITypeSystem.INTEGER, false));
+		op.getParameters().add(typesTestFactory.createParameter("p2", ITypeSystem.INTEGER, true));
+		tester.validate(op).assertOK();
+		
+		// optional parameter not last anymore => error
+		op.getParameters().add(typesTestFactory.createParameter("p3", ITypeSystem.INTEGER, false));
+		tester.validate(op).assertError(ERROR_OPTIONAL_MUST_BE_LAST_CODE);
 	}
 
 	/**
