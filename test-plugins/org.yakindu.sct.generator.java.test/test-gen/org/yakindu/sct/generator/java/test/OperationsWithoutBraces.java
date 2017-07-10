@@ -20,7 +20,7 @@ import static org.mockito.ArgumentCaptor.forClass;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachine;
-import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachine.State;
+import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachine.State;	
 
 /**
  * Unit TestCase for OperationsWithoutBraces
@@ -28,6 +28,7 @@ import org.yakindu.scr.operationswithoutbraces.OperationsWithoutBracesStatemachi
 @SuppressWarnings("all")
 public class OperationsWithoutBraces {
 	SCInterfaceOperationCallback defaultMock;
+	
 	private OperationsWithoutBracesStatemachine statemachine;	
 	
 	@Before
@@ -52,13 +53,13 @@ public class OperationsWithoutBraces {
 		 
 		when(defaultMock.myRealOp()).thenReturn(0.0);
 		 
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.another_region_A));
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.another_region_C));
 		assertTrue(statemachine.isStateActive(State.main_region_C));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_D));
 		assertTrue(statemachine.isStateActive(State.another_region_D));
 	}

@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.triggerexpressionprecedence.TriggerExpressionPrecedenceStatemachine;
-import org.yakindu.scr.triggerexpressionprecedence.TriggerExpressionPrecedenceStatemachine.State;
+import org.yakindu.scr.triggerexpressionprecedence.TriggerExpressionPrecedenceStatemachine.State;	
 
 /**
  * Unit TestCase for TriggerExpressionPrecedence
  */
 @SuppressWarnings("all")
 public class TriggerExpressionPrecedence {
+	
 	private TriggerExpressionPrecedenceStatemachine statemachine;	
 	
 	@Before
@@ -36,34 +37,34 @@ public class TriggerExpressionPrecedence {
 	
 	@Test
 	public void unsatisfiedTriggerAndFGuardFalseOrFalse() {
-		statemachine.enter();;
+		statemachine.enter();
 		statemachine.setC1(false);
 		statemachine.setC2(false);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(!statemachine.getE1_transition());
 	}
 	@Test
 	public void unsatisfiedTriggerAndFGuardTrueOrFalse() {
-		statemachine.enter();;
+		statemachine.enter();
 		statemachine.setC1(true);
 		statemachine.setC2(false);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(!statemachine.getE1_transition());
 	}
 	@Test
 	public void unsatisfiedTriggerAndFGuardFalseOrTrue() {
-		statemachine.enter();;
+		statemachine.enter();
 		statemachine.setC1(false);
 		statemachine.setC2(true);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(!statemachine.getE1_transition());
 	}
 	@Test
 	public void unsatisfiedTriggerAndFGuardTrueOrTrue() {
-		statemachine.enter();;
+		statemachine.enter();
 		statemachine.setC1(true);
 		statemachine.setC2(true);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(!statemachine.getE1_transition());
 	}
 }

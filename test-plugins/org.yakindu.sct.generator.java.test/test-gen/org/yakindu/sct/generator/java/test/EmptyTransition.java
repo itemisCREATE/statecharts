@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.emptytransition.EmptyTransitionStatemachine;
-import org.yakindu.scr.emptytransition.EmptyTransitionStatemachine.State;
+import org.yakindu.scr.emptytransition.EmptyTransitionStatemachine.State;	
 
 /**
  * Unit TestCase for EmptyTransition
  */
 @SuppressWarnings("all")
 public class EmptyTransition {
+	
 	private EmptyTransitionStatemachine statemachine;	
 	
 	@Before
@@ -36,8 +37,8 @@ public class EmptyTransition {
 	
 	@Test
 	public void emptyTransitionTest() {
-		statemachine.enter();;
-		statemachine.runCycle();;
+		statemachine.enter();
+		statemachine.runCycle();
 		assertTrue(!statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}

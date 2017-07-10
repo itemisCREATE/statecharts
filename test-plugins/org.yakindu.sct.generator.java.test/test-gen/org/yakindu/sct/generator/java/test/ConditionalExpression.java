@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.conditionalexpressions.ConditionalExpressionsStatemachine;
-import org.yakindu.scr.conditionalexpressions.ConditionalExpressionsStatemachine.State;
+import org.yakindu.scr.conditionalexpressions.ConditionalExpressionsStatemachine.State;	
 
 /**
  * Unit TestCase for ConditionalExpressions
  */
 @SuppressWarnings("all")
 public class ConditionalExpression {
+	
 	private ConditionalExpressionsStatemachine statemachine;	
 	
 	@Before
@@ -36,11 +37,11 @@ public class ConditionalExpression {
 	
 	@Test
 	public void conditionalExpressionTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getCondition() == 1l);
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.getCondition() == 2l);
 	}

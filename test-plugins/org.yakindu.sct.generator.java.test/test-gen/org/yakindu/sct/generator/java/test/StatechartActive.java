@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.statechartactive.StatechartActiveStatemachine;
-import org.yakindu.scr.statechartactive.StatechartActiveStatemachine.State;
+import org.yakindu.scr.statechartactive.StatechartActiveStatemachine.State;	
 
 /**
  * Unit TestCase for StatechartActive
  */
 @SuppressWarnings("all")
 public class StatechartActive {
+	
 	private StatechartActiveStatemachine statemachine;	
 	
 	@Before
@@ -40,20 +41,20 @@ public class StatechartActive {
 	}
 	@Test
 	public void activeAfterEnter() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isActive());
 	}
 	@Test
 	public void inactiveAfterExit() {
-		statemachine.enter();;
-		statemachine.exit();;
+		statemachine.enter();
+		statemachine.exit();
 		assertTrue(!statemachine.isActive());
 	}
 	@Test
 	public void activeAfterReenter() {
-		statemachine.enter();;
-		statemachine.exit();;
-		statemachine.enter();;
+		statemachine.enter();
+		statemachine.exit();
+		statemachine.enter();
 		assertTrue(statemachine.isActive());
 	}
 }

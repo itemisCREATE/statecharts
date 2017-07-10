@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.guardedentry.GuardedEntryStatemachine;
-import org.yakindu.scr.guardedentry.GuardedEntryStatemachine.State;
+import org.yakindu.scr.guardedentry.GuardedEntryStatemachine.State;	
 
 /**
  * Unit TestCase for GuardedEntry
  */
 @SuppressWarnings("all")
 public class GuardedEntry {
+	
 	private GuardedEntryStatemachine statemachine;	
 	
 	@Before
@@ -37,14 +38,14 @@ public class GuardedEntry {
 	@Test
 	public void entryNotTakenOnStatechartEnter() {
 		assertTrue(statemachine.getGuard() == false);
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getDone() == false);
 	}
 	@Test
 	public void entryTakenOnStatechartEnter() {
 		statemachine.setGuard(true);
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getDone() == true);
 	}
@@ -59,15 +60,15 @@ public class GuardedEntry {
 		assertTrue(!statemachine.getDone());
 	}
 	public void initEntryInTransition(boolean guardVar, boolean doneVar) {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		statemachine.setGuard(guardVar);
 		statemachine.setDone(doneVar);
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }

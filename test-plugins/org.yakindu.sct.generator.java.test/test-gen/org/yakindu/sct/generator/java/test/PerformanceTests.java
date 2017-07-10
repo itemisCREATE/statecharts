@@ -14,20 +14,23 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.performancetest.PerformanceTestStatemachine;
-import org.yakindu.scr.performancetest.PerformanceTestStatemachine.State;
-import org.yakindu.scr.TimerService;
+import org.yakindu.scr.performancetest.PerformanceTestStatemachine.State;	
+import org.yakindu.scr.VirtualTimer;
 
 /**
  * Unit TestCase for PerformanceTest
  */
 @SuppressWarnings("all")
 public class PerformanceTests {
+	
 	private PerformanceTestStatemachine statemachine;	
+	private VirtualTimer timer;
 	
 	@Before
 	public void setUp() {
 		statemachine = new PerformanceTestStatemachine();
-		statemachine.setTimer(new TimerService());
+		timer = new VirtualTimer();
+		statemachine.setTimer(timer);
 		statemachine.init();
 	}
 
@@ -49,7 +52,7 @@ public class PerformanceTests {
 		performance(10000000l);
 	}
 	public void performance(long perf) {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A));
 		while (statemachine.getC() < perf) {
 			if (statemachine.isStateActive(State.mr_A)) {
@@ -63,7 +66,7 @@ public class PerformanceTests {
 					statemachine.raiseE3();
 				}
 			}
-			statemachine.runCycle();;
+			statemachine.runCycle();
 		}
 		assertTrue(statemachine.getA() > 2l);
 	}

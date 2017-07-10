@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.syncfork.SyncForkStatemachine;
-import org.yakindu.scr.syncfork.SyncForkStatemachine.State;
+import org.yakindu.scr.syncfork.SyncForkStatemachine.State;	
 
 /**
  * Unit TestCase for SyncFork
  */
 @SuppressWarnings("all")
 public class SyncFork {
+	
 	private SyncForkStatemachine statemachine;	
 	
 	@Before
@@ -36,23 +37,23 @@ public class SyncFork {
 	
 	@Test
 	public void syncForkTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseF();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C1));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r2_D1));
 		statemachine.raiseF();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C2));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r2_D2));
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseF();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C1));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r2_D1));

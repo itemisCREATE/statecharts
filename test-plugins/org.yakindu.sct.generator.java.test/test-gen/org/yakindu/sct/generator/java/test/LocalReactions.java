@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.localreactions.LocalReactionsStatemachine;
-import org.yakindu.scr.localreactions.LocalReactionsStatemachine.State;
+import org.yakindu.scr.localreactions.LocalReactionsStatemachine.State;	
 
 /**
  * Unit TestCase for LocalReactions
  */
 @SuppressWarnings("all")
 public class LocalReactions {
+	
 	private LocalReactionsStatemachine statemachine;	
 	
 	@Before
@@ -36,9 +37,9 @@ public class LocalReactions {
 	
 	@Test
 	public void localReactionsTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.getX() == 1l);
 	}
 }

@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.bitexpressions.BitExpressionsStatemachine;
-import org.yakindu.scr.bitexpressions.BitExpressionsStatemachine.State;
+import org.yakindu.scr.bitexpressions.BitExpressionsStatemachine.State;	
 
 /**
  * Unit TestCase for BitExpressions
  */
 @SuppressWarnings("all")
 public class BitExpressions {
+	
 	private BitExpressionsStatemachine statemachine;	
 	
 	@Before
@@ -36,12 +37,12 @@ public class BitExpressions {
 	
 	@Test
 	public void bitExpressions() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyBit1() == 5l);
 		assertTrue(statemachine.getMyBit2() == 7l);
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.getLeftBitshift() == 10l);
 		assertTrue(statemachine.getRightBitshift() == 2l);

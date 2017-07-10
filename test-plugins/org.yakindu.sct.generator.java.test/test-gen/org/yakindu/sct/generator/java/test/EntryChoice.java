@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.entrychoice.EntryChoiceStatemachine;
-import org.yakindu.scr.entrychoice.EntryChoiceStatemachine.State;
+import org.yakindu.scr.entrychoice.EntryChoiceStatemachine.State;	
 
 /**
  * Unit TestCase for EntryChoice
  */
 @SuppressWarnings("all")
 public class EntryChoice {
+	
 	private EntryChoiceStatemachine statemachine;	
 	
 	@Before
@@ -36,9 +37,9 @@ public class EntryChoice {
 	
 	@Test
 	public void entryChoiceTest() {
-		statemachine.enter();;
-		statemachine.runCycle();;
-		statemachine.runCycle();;
+		statemachine.enter();
+		statemachine.runCycle();
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }
