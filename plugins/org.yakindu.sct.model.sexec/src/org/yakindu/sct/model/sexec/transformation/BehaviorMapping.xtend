@@ -52,6 +52,10 @@ import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import java.util.Collection
+import org.yakindu.sct.model.sexec.StateVector
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.base.NamedElement
 
 class BehaviorMapping {
 
@@ -451,6 +455,7 @@ class BehaviorMapping {
 		sequence.steps.addAll( mapToStateConfigurationEnterSequence( newArrayList(t) ).steps )
 		
 		
+		
 		return sequence
 	}
 	
@@ -463,11 +468,11 @@ class BehaviorMapping {
 		// define exit behavior of transition
 		
 		// first process the exit behavior of orthogonal states that has to be performed before source exit
-		val exitStates = transitions.get(0).exitStates.toList
-		for ( t : transitions ) {
-			exitStates.retainAll(t.exitStates.toList)
-		}
-		val topExitState = exitStates.last
+//		val exitStates = transitions.get(0).exitStates.toList
+//		for ( t : transitions ) {
+//			exitStates.retainAll(t.exitStates.toList)
+//		}
+		val topExitState = transitions.topExitState 
 		
 		if (trace.addTraceSteps) {
 			for (t : transitions) {
@@ -494,9 +499,76 @@ class BehaviorMapping {
 	
 		// define entry behavior of the transition	
 		sequence.steps.addAll( mapToStateConfigurationEnterSequence( transitions ).steps )
+		
+		
+		// handle local reactions that are out of transition scope
+		val topEntryState = transitions.topEntryState
+		val commonAncestors = commonAncestors(topExitState, topEntryState)
+		val lcaRegion = commonAncestors.firstRegion
+		
+		System.out.println("LCA " + (if (topExitState != null) topExitState.name else "null" )+ " -> " + (if (topEntryState != null) topEntryState.name else "null" ) + " is " + (if (lcaRegion != null) (((lcaRegion.eContainer) as NamedElement).name + "." + lcaRegion.name) else "null" ))		
 
+		val localReactionSequence = lcaRegion.lcaDoSequence(topExitState.create.flow)
+		if (localReactionSequence != null) sequence.steps += localReactionSequence
 		
 		return sequence
+	}
+	
+	
+	private def Sequence lcaDoSequence(Region region, ExecutionFlow flow) {
+		
+		if ( region == null ) return null
+
+		val execRegion = region.create
+		
+		var List<ExecutionNode> parentNodes = new ArrayList<ExecutionNode>()
+		val shouldExecuteParent = 
+			if (! region.statechart.childFirstExecution) 
+				[ExecutionScope parentScope, ExecutionScope execScope | false ]
+			else
+				[ExecutionScope parentScope, ExecutionScope execScope | 
+					parentScope.stateVector.offset + parentScope.stateVector.size 
+					== execScope.stateVector.offset + execScope.stateVector.size
+				]
+		 
+		
+		if (region.parentStates.head != null) {
+			val state = region.parentStates.head
+			val execState = state.create
+									
+			val parents = state.parentStates.map(p|p.create as ExecutionState).filter(p| shouldExecuteParent.apply(p, execState) )
+			
+			parentNodes.addAll(parents.map(p|p as ExecutionNode))			
+			if ( shouldExecuteParent.apply( flow, execState) )
+				parentNodes += flow
+		} else {
+			if ( shouldExecuteParent.apply( flow, execRegion) )
+				parentNodes += flow
+		}
+
+			
+		if (region.statechart.childFirstExecution) parentNodes = parentNodes.reverse		
+		
+		parentNodes.fold(null, [ r, s | s.createLocalReactionSequence(r)])
+	}
+
+	
+	private def Sequence createLocalReactionSequence(ExecutionNode state, Step localStep) {	
+				
+		val localReactions = state.reactions.filter(r | ! r.transition ).toList
+		var localSteps = sexec.factory.createSequence
+		localSteps.steps.addAll(localReactions.map(lr | {
+				var ifStep = sexec.factory.createIf
+				ifStep.check = lr.check.newRef		
+				ifStep.thenStep = lr.effect.newCall
+				ifStep
+		}))
+
+		if (localStep != null) localSteps.steps += localStep
+		
+//		if (localSteps.steps.empty) return null		
+//		else 
+		return localSteps
 	}
 	
 	/**
@@ -689,6 +761,17 @@ class BehaviorMapping {
 		sourcePath.filter( typeof(State) ) // and reducing this exit path to states 
 	}
 
+	def State topExitState(List<Transition> transitions) {
+				// first process the exit behavior of orthogonal states that has to be performed before source exit
+		val exitStates = transitions.get(0).exitStates.toList
+
+		for ( t : transitions ) {
+			exitStates.retainAll(t.exitStates.toList)
+		}
+		
+		exitStates.last		
+	}
+
 	/** Determines the  */
 	def Iterable<State> entryStates(Transition t) {
 		val l = t.target.containers
@@ -696,20 +779,60 @@ class BehaviorMapping {
 		l.filter( typeof(State) )
 	}
 	
-	def Iterable<ExecutionScope> exitScopes(Transition t) {
-		val source = t.source
-		var executionSource = switch (source) {
-				RegularState: source.create
-			}
+	
+	def State topEntryState(List<Transition> transitions) {
+		// first process the exit behavior of orthogonal states that has to be performed before source exit
+		val states = transitions.get(0).entryStates.toList
+
+		for ( t : transitions ) {
+			states.retainAll(t.entryStates.toList)
+		}
 		
-		var executionTarget = switch (source) {
-				RegularState: source.create
-			}
-		
-		val l =executionSource.containers
-		l.removeAll(executionTarget.containers)
-		null
+		states.last		
 	}
+
+	
+	def List<EObject> commonAncestors(Vertex a, Vertex b) {
+		// we determine the states that have to be exited by 
+		val aParents = a.containers // getting the path elements from the source node 
+		val bParents = b.containers // and the path elements from the target all target node
+		{ // and for the case of self transitions
+			bParents.remove(b) // we make sure that target node
+			aParents.remove(a) // and source node are not part of the target path
+		}
+		
+		aParents.retainAll(bParents) // get all ancestors by retaining the common elements
+		aParents		
+	}
+	
+
+	def firstState(Iterable<EObject> it) {
+		filter( typeof(State) ).head	
+	} 
+	
+	def firstRegion(Iterable<EObject> it) {
+		filter( typeof(Region) ).head			
+	}
+	
+	def State leastCommonAncesterState(State a, State b) {
+		commonAncestors(a,b).firstState
+	}
+	
+	
+//	def Iterable<ExecutionScope> exitScopes(Transition t) {
+//		val source = t.source
+//		var executionSource = switch (source) {
+//				RegularState: source.create
+//			}
+//		
+//		var executionTarget = switch (source) {
+//				RegularState: source.create
+//			}
+//		
+//		val l =executionSource.containers
+//		l.removeAll(executionTarget.containers)
+//		null
+//	}
 	
 	def dispatch Expression buildCondition (Trigger t) { null }
 

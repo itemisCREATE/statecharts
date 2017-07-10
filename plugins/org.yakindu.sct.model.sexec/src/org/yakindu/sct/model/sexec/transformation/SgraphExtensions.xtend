@@ -164,11 +164,36 @@ class SgraphExtensions {
 		return ret
 	}
 	
+	/** 
+	 * Returns wether a child first execution order is defined for the statechart.
+	 * 
+	 * This feature can be configured by using the ChildFirstExecution annotation.
+	 * 
+	 * @return true if child first execution is declared.
+	 */
 	def boolean isChildFirstExecution(Statechart it) {
 		findAnnotation("ChildFirstExecution") != null
 	}
 	
+	/** 
+	 * Returns wether interleaved or non interleaved execution order for local reactions is required.
+	 * 
+	 * Local reactions are interleaved when they are processed directly after a states transition checks. 
+	 * They are not interleaved if they are processed after all transitions along the state hierarchy are checked.
+	 * 
+	 * Currently just interleaved execution order is supportede for all kinds of statecharts. Especially orthogogal 
+	 * statecharts are not supported with non interleaved execution order. Thats why just true is returned. In future
+	 * an annotation should be introduced.
+	 * 
+	 * @return true if interleaved local reaction execution is required.
+	 */
+	def boolean interleaveLocalReactions(Statechart it) {
+		return true	
+	}
+	
+	
 	def Annotation findAnnotation(AnnotatableElement it, String name) {
 		annotations.filter[a | name.equals(a.type.name)].head
-	} 
+	}	
+	 
 }

@@ -10,7 +10,6 @@
 */
 package org.yakindu.sct.model.sexec.transformation
 
-import com.google.common.collect.Iterables
 import com.google.inject.Inject
 import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.expressions.expressions.BoolLiteral
@@ -21,6 +20,7 @@ import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Sequence
+import org.yakindu.sct.model.sexec.StateVector
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Entry
@@ -34,7 +34,6 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.DefaultTrigger
-import org.yakindu.sct.model.sexec.StateVector
 
 class ReactionBuilder {
 	@Inject extension SexecElementMapping mapping
@@ -166,7 +165,7 @@ class ReactionBuilder {
 	
 		val execState = state.create
 		
-		val shouldExecuteParent = if (state.statechart.childFirstExecution) 
+		val shouldExecuteParent = if (! state.statechart.childFirstExecution) 
 								[StateVector sv | sv.offset == execState.stateVector.offset]
 							else
 								[StateVector sv | sv.offset + sv.size == execState.stateVector.offset + execState.stateVector.size]
@@ -176,14 +175,22 @@ class ReactionBuilder {
 		var parentNodes = parents.map(p|p as ExecutionNode).toList
 		
 		if ( shouldExecuteParent.apply( execState.flow.stateVector) )
-			Iterables::concat(parents.map(p|p as ExecutionNode),newHashSet(EcoreUtil2::getRootContainer(execState) as ExecutionNode)).toList
-			else parents.map(p|p as ExecutionNode).toList
-		
+			parentNodes += EcoreUtil2::getRootContainer(execState) as ExecutionNode
+
+
 		if (state.statechart.childFirstExecution) parentNodes = parentNodes.reverse
 		
-		execState.reactSequence = parentNodes.fold(null, [r, s | {
-			s.createReactionSequence(r)
-		}])
+		if (state.statechart.interleaveLocalReactions) {
+
+			execState.reactSequence = parentNodes.fold(null, [r, s | {
+				s.createReactionSequence(s.createLocalReactionSequence(r))
+			}])
+			
+		} else {
+			
+			val localReactSequence = parentNodes.fold(null, [ r, s | s.createLocalReactionSequence(r)])			
+			execState.reactSequence = parentNodes.fold(localReactSequence, [r, s | { s.createReactionSequence(r) }])		
+		}
 		
 		execState.reactSequence.name = 'react'
 		execState.reactSequence.comment = 'The reactions of state ' + state.name + '.'
@@ -191,10 +198,9 @@ class ReactionBuilder {
 		return execState.reactSequence
 	}	
 
-	def Sequence createReactionSequence(ExecutionNode state, Step localStep) {	
-		val cycle = sexec.factory.createSequence
-		cycle.name = "react"
-		
+
+	def Sequence createLocalReactionSequence(ExecutionNode state, Step localStep) {	
+				
 		val localReactions = state.reactions.filter(r | ! r.transition ).toList
 		var localSteps = sexec.factory.createSequence
 		localSteps.steps.addAll(localReactions.map(lr | {
@@ -203,7 +209,20 @@ class ReactionBuilder {
 				ifStep.thenStep = lr.effect.newCall
 				ifStep
 		}))
+
+		if (localStep != null) localSteps.steps += localStep
 		
+//		if (localSteps.steps.empty) return null		
+//		else 
+		return localSteps
+	}
+
+
+	def Sequence createReactionSequence(ExecutionNode state, Step localStep) {	
+		val cycle = sexec.factory.createSequence
+		cycle.name = "react"
+		
+		var localSteps = sexec.factory.createSequence		
 		if (localStep != null) localSteps.steps += localStep
 		if (localSteps.steps.empty) localSteps = null
 				
@@ -223,6 +242,40 @@ class ReactionBuilder {
 		
 		return cycle
 	}
+	
+	
+//	def Sequence createReactionSequence(ExecutionNode state, Step localStep) {	
+//		val cycle = sexec.factory.createSequence
+//		cycle.name = "react"
+//		
+//		val localReactions = state.reactions.filter(r | ! r.transition ).toList
+//		var localSteps = sexec.factory.createSequence
+//		localSteps.steps.addAll(localReactions.map(lr | {
+//				var ifStep = sexec.factory.createIf
+//				ifStep.check = lr.check.newRef		
+//				ifStep.thenStep = lr.effect.newCall
+//				ifStep
+//		}))
+//		
+//		if (localStep != null) localSteps.steps += localStep
+//		if (localSteps.steps.empty) localSteps = null
+//				
+//				
+//		val transitionReactions = state.reactions.filter(r | r.transition && ! r.unchecked ).toList
+//		val transitionStep = transitionReactions.reverseView.fold(localSteps as Step, [s, reaction | {
+//				var ifStep = sexec.factory.createIf
+//				ifStep.check = reaction.check.newRef		
+//				ifStep.thenStep = reaction.effect.newCall
+//				ifStep.elseStep = s
+//				ifStep as Step
+//			}])
+//
+//	
+//		if (transitionStep != null) cycle.steps.add(transitionStep)		
+//		else if (localSteps != null) cycle.steps.add(localSteps)
+//		
+//		return cycle
+//	}
 	
 	
 	def ExecutionFlow defineEntryReactions(Statechart statechart, ExecutionFlow r) {

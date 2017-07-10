@@ -81,9 +81,9 @@ class ModelSequencer implements IModelSequencer {
 		ef.defineStatechartInitSequence(sc)
 		ef.defineStatechartStaticInitSequence(sc)
 		
+		sc.mapLocalReactions(ef)
 		sc.mapTransitions(ef)
 		sc.mapEntries(ef)
-		sc.mapLocalReactions(ef)
 		sc.mapChoiceTransitions(ef)
 		sc.mapSyncTransitions(ef)
 		
