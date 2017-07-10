@@ -11,6 +11,7 @@ testsuite AllTests {
 	ConstOnlyDefaultScope,
 	ConstOnlyInternalScope,
 	ConstOnlyNamedScope,
+	ChildFirstExecutionHierarchy,
 	Declarations, 
 	DeepEntry,
 	DeepHistory,

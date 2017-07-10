@@ -1,0 +1,88 @@
+
+testclass ChildFirstExecutionHierarchy for statechart executionorder.ChildFirstExecutionHierarchy {
+	
+	
+	@Test operation childShouldTakeTransition() {
+				
+		enter 
+		
+		assert active(executionorder.ChildFirstExecutionHierarchy.r.A.r.AA.r.AAA)
+
+		raise e
+		proceed 1 cycle
+				
+		assert active(executionorder.ChildFirstExecutionHierarchy.r.B)
+		assert ! a_reacted
+		assert ! aa_reacted
+		assert aaa_reacted
+		
+		assertNoLocalReaction
+	}
+	
+	
+	@Test operation parentShouldTakeTransition() {
+				
+		enter 
+		
+		assert active(executionorder.ChildFirstExecutionHierarchy.r.A.r.AA.r.AAA)
+
+		disable_aaa = true
+		raise e
+		proceed 1 cycle
+				
+		assert active(executionorder.ChildFirstExecutionHierarchy.r.B)
+		assert ! a_reacted
+		assert aa_reacted
+		assert ! aaa_reacted
+		
+		assert !a_local 
+		assert !aa_local 
+		assert aaa_local
+	}
+	
+		
+	@Test operation grandparentShouldTakeTransition() {
+				
+		enter 
+		
+		assert active(executionorder.ChildFirstExecutionHierarchy.r.A.r.AA.r.AAA)
+
+		disable_aa = true
+		disable_aaa = true
+		
+		raise e
+		proceed 1 cycle
+				
+		assert active(executionorder.ChildFirstExecutionHierarchy.r.B)
+		assert a_reacted
+		assert ! aa_reacted
+		assert ! aaa_reacted
+		
+		assert !a_local 
+		assert aa_local 
+		assert aaa_local
+		
+	}
+	
+	
+	@Test operation expectLocalReactrionsExecuteWithNoTransition() {
+	
+		enter
+		assert active(executionorder.ChildFirstExecutionHierarchy.r.A.r.AA.r.AAA)
+		
+		proceed 1 cycle
+		
+		assert active(executionorder.ChildFirstExecutionHierarchy.r.A.r.AA.r.AAA)
+		assert a_local
+		assert aa_local 
+		assert aaa_local
+			
+	}
+	
+	operation assertNoLocalReaction() : void {
+		assert !a_local 
+		assert !aa_local 
+		assert !aaa_local
+	}
+	
+}

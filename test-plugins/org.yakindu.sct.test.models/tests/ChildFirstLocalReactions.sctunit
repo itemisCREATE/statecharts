@@ -1,0 +1,75 @@
+testclass ChildFirstLocalReactions for statechart executionorder.ChildFirstLocalReactions {
+	
+	var counter : integer = 0
+		
+	
+	 @Test operation expectBottomUpLocalReactionOrder() {
+
+	 	enter
+	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
+	 	
+	 	proceed 1 cycle
+	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
+	 	
+
+		assert aaa_local == 1
+		assert aa_local == 2
+		assert a_local == 3
+		assert sm_local == 4
+		 
+	 }
+	
+	
+	@Test operation expectParentLocalReactionOnChildLocalTransition() {
+		
+		enter
+	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
+	 	
+	 	raise e
+	 	proceed 1 cycle
+	 	
+	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAB) 
+		assert aaa_local == 0
+		assert aa_local == 1
+		assert a_local == 2
+		assert sm_local == 3
+		
+	}
+		
+		
+	@Test operation expectGrandparentLocalReactionOnParentLocalTransition() {
+				
+		enter
+	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
+	 	
+	 	disable_aaa = true
+	 	raise e
+	 	proceed 1 cycle
+	 	
+	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AB) 
+		assert aaa_local == 1
+		assert aa_local == 0
+		assert a_local == 2
+		assert sm_local == 3
+	}
+	
+	
+	@Test operation expectNoLocalReactionOnGrandparentTransition() {
+		
+		enter
+	 	assert active(executionorder.ChildFirstLocalReactions.r.A.r.AA.r.AAA)
+	 	
+	 	disable_aaa = true
+	 	disable_aa = true
+	 	raise e
+	 	proceed 1 cycle
+	 	
+	 	assert active(executionorder.ChildFirstLocalReactions.r.B) 
+		assert aaa_local == 1
+		assert aa_local == 2
+		assert a_local == 0
+		assert sm_local == 3
+		
+	}
+		
+}
