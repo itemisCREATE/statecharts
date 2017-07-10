@@ -18,4 +18,5 @@ Require-Bundle: org.eclipse.ui,
  org.yakindu.sct.ui.editor
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Export-Package: org.yakindu.sct.model.resource
+Export-Package: org.yakindu.sct.model.resource,
+ org.yakindu.sct.model.resource.tasks
