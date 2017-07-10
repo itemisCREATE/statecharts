@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.enterstate.EnterStateStatemachine;
-import org.yakindu.scr.enterstate.EnterStateStatemachine.State;
+import org.yakindu.scr.enterstate.EnterStateStatemachine.State;	
 
 /**
  * Unit TestCase for EnterState
  */
 @SuppressWarnings("all")
 public class EnterState {
+	
 	private EnterStateStatemachine statemachine;	
 	
 	@Before
@@ -36,26 +37,26 @@ public class EnterState {
 	
 	@Test
 	public void defaultEntry() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r_B_r_E));
 	}
 	@Test
 	public void namedEntryThroughNamedTransition() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		statemachine.raiseF();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r_B_r_F));
 	}
 	@Test
 	public void namedEntryThroughDefaultTransition() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		statemachine.raiseG();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r_B_r_E));
 	}
 }

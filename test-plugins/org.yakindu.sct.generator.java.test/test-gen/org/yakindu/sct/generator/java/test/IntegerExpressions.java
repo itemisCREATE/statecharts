@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.integerexpressions.IntegerExpressionsStatemachine;
-import org.yakindu.scr.integerexpressions.IntegerExpressionsStatemachine.State;
+import org.yakindu.scr.integerexpressions.IntegerExpressionsStatemachine.State;	
 
 /**
  * Unit TestCase for IntegerExpressions
  */
 @SuppressWarnings("all")
 public class IntegerExpressions {
+	
 	private IntegerExpressionsStatemachine statemachine;	
 	
 	@Before
@@ -36,12 +37,12 @@ public class IntegerExpressions {
 	
 	@Test
 	public void integerExpressions() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyInt1() == 10l);
 		assertTrue(statemachine.getMyInt2() == 5l);
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.getLess() == false);
 		assertTrue(statemachine.getGreater() == true);
 		assertTrue(statemachine.getEqualOrLess() == false);

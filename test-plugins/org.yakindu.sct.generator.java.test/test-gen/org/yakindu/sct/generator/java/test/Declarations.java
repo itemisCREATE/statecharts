@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.declarations.DeclarationsStatemachine;
-import org.yakindu.scr.declarations.DeclarationsStatemachine.State;
+import org.yakindu.scr.declarations.DeclarationsStatemachine.State;	
 
 /**
  * Unit TestCase for Declarations
  */
 @SuppressWarnings("all")
 public class Declarations {
+	
 	private DeclarationsStatemachine statemachine;	
 	
 	@Before
@@ -36,6 +37,6 @@ public class Declarations {
 	
 	@Test
 	public void declarationsTest() {
-		statemachine.enter();;
+		statemachine.enter();
 	}
 }

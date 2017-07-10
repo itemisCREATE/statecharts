@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.nullcheck.NullCheckStatemachine;
-import org.yakindu.scr.nullcheck.NullCheckStatemachine.State;
+import org.yakindu.scr.nullcheck.NullCheckStatemachine.State;	
 
 /**
  * Unit TestCase for NullCheck
  */
 @SuppressWarnings("all")
 public class NullCheck {
+	
 	private NullCheckStatemachine statemachine;	
 	
 	@Before
@@ -36,9 +37,9 @@ public class NullCheck {
 	
 	@Test
 	public void simpleNullCheckTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 	}
 }

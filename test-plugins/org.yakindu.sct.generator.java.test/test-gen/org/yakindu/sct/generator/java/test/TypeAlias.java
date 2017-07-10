@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.typealias.TypeAliasStatemachine;
-import org.yakindu.scr.typealias.TypeAliasStatemachine.State;
+import org.yakindu.scr.typealias.TypeAliasStatemachine.State;	
 
 /**
  * Unit TestCase for TypeAlias
  */
 @SuppressWarnings("all")
 public class TypeAlias {
+	
 	private TypeAliasStatemachine statemachine;	
 	
 	@Before
@@ -36,16 +37,16 @@ public class TypeAlias {
 	
 	@Test
 	public void typeAliasTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
 		assertTrue(statemachine.getMyVar() == 1l);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_Mid));
 		assertTrue(statemachine.getMyString().equals("TypeSystem"));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_Mid2));
 		statemachine.raiseMyEvent();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_End));
 	}
 }

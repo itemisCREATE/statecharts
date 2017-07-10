@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.ckeywords.CKeywordsStatemachine;
-import org.yakindu.scr.ckeywords.CKeywordsStatemachine.State;
+import org.yakindu.scr.ckeywords.CKeywordsStatemachine.State;	
 
 /**
  * Unit TestCase for CKeywords
  */
 @SuppressWarnings("all")
 public class CKeywords {
+	
 	private CKeywordsStatemachine statemachine;	
 	
 	@Before
@@ -36,10 +37,10 @@ public class CKeywords {
 	
 	@Test
 	public void cKeywordsTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.auto_char));
 		statemachine.raiseAuto();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.auto_loop));
 		assertTrue(statemachine.isStateActive(State.auto_loop_switch_case));
 		assertTrue(statemachine.isStateActive(State.auto_loop_switch_case_enum_asm));

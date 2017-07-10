@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.dynamicchoice.DynamicChoiceStatemachine;
-import org.yakindu.scr.dynamicchoice.DynamicChoiceStatemachine.State;
+import org.yakindu.scr.dynamicchoice.DynamicChoiceStatemachine.State;	
 
 /**
  * Unit TestCase for DynamicChoice
  */
 @SuppressWarnings("all")
 public class DynamicChoice {
+	
 	private DynamicChoiceStatemachine statemachine;	
 	
 	@Before
@@ -36,9 +37,9 @@ public class DynamicChoice {
 	
 	@Test
 	public void dynamicChoiceTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }

@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.constonlynamedscope.ConstOnlyNamedScopeStatemachine;
-import org.yakindu.scr.constonlynamedscope.ConstOnlyNamedScopeStatemachine.State;
+import org.yakindu.scr.constonlynamedscope.ConstOnlyNamedScopeStatemachine.State;	
 
 /**
  * Unit TestCase for ConstOnlyNamedScope
  */
 @SuppressWarnings("all")
 public class ConstOnlyNamedScope {
+	
 	private ConstOnlyNamedScopeStatemachine statemachine;	
 	
 	@Before
@@ -36,14 +37,14 @@ public class ConstOnlyNamedScope {
 	
 	@Test
 	public void statechartEntry() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.constOnlyNamedScope_main_region_A));
 	}
 	@Test
 	public void stateTransition() {
-		statemachine.enter();;
+		statemachine.enter();
 		statemachine.raiseE(1l);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.constOnlyNamedScope_main_region_B));
 	}
 }

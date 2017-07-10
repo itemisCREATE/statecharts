@@ -14,20 +14,23 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.timedtransitions.TimedTransitionsStatemachine;
-import org.yakindu.scr.timedtransitions.TimedTransitionsStatemachine.State;
-import org.yakindu.scr.TimerService;
+import org.yakindu.scr.timedtransitions.TimedTransitionsStatemachine.State;	
+import org.yakindu.scr.VirtualTimer;
 
 /**
  * Unit TestCase for TimedTransitions
  */
 @SuppressWarnings("all")
 public class TimedTransitions {
+	
 	private TimedTransitionsStatemachine statemachine;	
+	private VirtualTimer timer;
 	
 	@Before
 	public void setUp() {
 		statemachine = new TimedTransitionsStatemachine();
-		statemachine.setTimer(new TimerService());
+		timer = new VirtualTimer();
+		statemachine.setTimer(timer);
 		statemachine.init();
 	}
 
@@ -38,8 +41,10 @@ public class TimedTransitions {
 	
 	@Test
 	public void timer01() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
+		timer.timeLeap(2030);
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_End));
 	}
 }

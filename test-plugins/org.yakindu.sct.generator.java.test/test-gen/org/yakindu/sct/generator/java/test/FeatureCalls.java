@@ -14,13 +14,14 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.featurecalls.FeatureCallsStatemachine;
-import org.yakindu.scr.featurecalls.FeatureCallsStatemachine.State;
+import org.yakindu.scr.featurecalls.FeatureCallsStatemachine.State;	
 
 /**
  * Unit TestCase for FeatureCalls
  */
 @SuppressWarnings("all")
 public class FeatureCalls {
+	
 	private FeatureCallsStatemachine statemachine;	
 	
 	@Before
@@ -36,9 +37,9 @@ public class FeatureCalls {
 	
 	@Test
 	public void featureCalls() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }
