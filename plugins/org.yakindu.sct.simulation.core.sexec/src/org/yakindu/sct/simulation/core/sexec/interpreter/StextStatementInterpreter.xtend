@@ -54,6 +54,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
 import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot
+import java.util.List
 
 /**
  * 
@@ -150,6 +151,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			else
 				null
 		}
+		System.out.println("assign: " + scopeVariable.name + " := " + scopeVariable.value)
 		scopeVariable.value
 	}
 
@@ -278,7 +280,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		if (expression.operationCall || expression.reference instanceof OperationDefinition) {
 			if (operationDelegate != null &&
 				operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
-				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
+				return (expression.reference as Operation).execute(parameter.toArray)
 			}
 		}
 		// for enumeration types return the literal value
@@ -306,7 +308,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			if (call.feature instanceof Operation) {
 				var Operation operation = call.feature as Operation
 				if (operationDelegate != null && operationDelegate.canExecute(operation, parameter)) {
-					return operationDelegate.execute(operation, parameter)
+					return operation.execute(parameter)
 				}
 			}
 
@@ -331,6 +333,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 		println("No feature found for " + call.feature.fqn + " -> returning null")
 		return null;
+	}
+
+	def execute(Operation it, List<Object> params) {
+		operationDelegate.execute(it, params)
 	}
 
 	def String fqn(EObject obj) {
