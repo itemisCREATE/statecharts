@@ -134,7 +134,7 @@ public class GTestHelper {
 	private void copyFilesFromBundleToFolder() {
 		IPath targetPath = getTargetPath();
 		List<String> testDataFiles = new ArrayList<String>();
-		getTestDataFiles(testDataFiles);
+		getSourceFiles(testDataFiles);
 		for (String file : testDataFiles) {
 			copyFileFromBundleToFolder(getTestBundle(), file, targetPath);
 		}
@@ -162,7 +162,7 @@ public class GTestHelper {
 		if (gTestDirectory != null)
 			command.add("-L" + gTestDirectory);
 		for (String sourceFile : sourceFiles) {
-			command.add(sourceFile);
+			command.add(getFileName(sourceFile));
 		}
 		command.add("-lgtest");
 		command.add("-lgtest_main");
@@ -207,7 +207,7 @@ public class GTestHelper {
 	}
 
 	protected void getSourceFiles(Collection<String> files) {
-		files.add(getFileName(getTestSourceFile()));
+		files.add(getTestSourceFile());
 	}
 
 	protected String getTestSourceFile() {
@@ -238,7 +238,7 @@ public class GTestHelper {
 		copyFileFromBundleToFolder(bundle, new Path(sourcePath), new Path(targetPath));
 	}
 
-	protected void copyFileFromBundleToFolder(Bundle bundle, String sourcePath, IPath targetPath) {
+	public void copyFileFromBundleToFolder(Bundle bundle, String sourcePath, IPath targetPath) {
 		copyFileFromBundleToFolder(bundle, new Path(sourcePath), targetPath);
 	}
 

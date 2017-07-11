@@ -28,7 +28,7 @@ public class VariadicOperations {
 		@Override
 		protected void getSourceFiles(Collection<String> files) {
 			super.getSourceFiles(files);
-			files.add(getFileName(getTestProgram()) + ".c");
+			files.add(getTestProgram() + ".c");
 		}
 		
 	};
