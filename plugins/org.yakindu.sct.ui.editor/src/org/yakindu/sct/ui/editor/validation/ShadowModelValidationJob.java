@@ -10,6 +10,10 @@
  */
 package org.yakindu.sct.ui.editor.validation;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.commands.ExecutionException;
@@ -17,13 +21,9 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
@@ -33,7 +33,6 @@ import org.eclipse.xtext.validation.Issue;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 
 /**
  * Copies the resource contents to a shadow model that is validated then. Does
@@ -44,9 +43,6 @@ import com.google.inject.Inject;
  * 
  */
 public class ShadowModelValidationJob extends ValidationJob {
-
-	@Inject
-	private ResourceCopier copier;
 
 	@Override
 	protected IStatus runInternal(final IProgressMonitor monitor) {
@@ -85,13 +81,15 @@ public class ShadowModelValidationJob extends ValidationJob {
 
 	protected void cloneResource(final IProgressMonitor monitor, final Resource shadowResource)
 			throws ExecutionException {
+		ByteArrayOutputStream bout = new ByteArrayOutputStream();
 		AbstractTransactionalCommand cmd = new AbstractTransactionalCommand(TransactionUtil.getEditingDomain(resource),
 				"", null) {
 			@Override
 			protected CommandResult doExecuteWithResult(final IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				try {
-					copier.cloneResource(resource, shadowResource);
+					resource.save(bout, Collections.emptyMap());
+					bout.flush();
 				} catch (Throwable t) {
 					return CommandResult.newErrorCommandResult(t.getMessage());
 				}
@@ -99,32 +97,11 @@ public class ShadowModelValidationJob extends ValidationJob {
 			}
 		};
 		cmd.execute(monitor, null);
-	}
-
-	public static class ResourceCopier extends Copier {
-
-		private static final long serialVersionUID = 1L;
-
-		public void cloneResource(Resource original, Resource clone) {
-			clone.setURI(original.getURI());
-			clone.getContents().addAll(super.copyAll(original.getContents()));
-			copyReferences();
-			copyXMIIds(original, clone);
+		try {
+			shadowResource.load(new ByteArrayInputStream(bout.toByteArray()), Collections.emptyMap());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
-		protected void copyXMIIds(Resource original, Resource clone) {
-			if (original instanceof XMLResource) {
-				TreeIterator<EObject> iterator = original.getAllContents();
-				TreeIterator<EObject> cloneIterator = clone.getAllContents();
-				while (iterator.hasNext()) {
-					EObject next = iterator.next();
-					EObject nextClone = cloneIterator.next();
-					if (next.eClass() != nextClone.eClass()) {
-						throw new IllegalStateException("Models are out of sync!");
-					}
-					((XMLResource) clone).setID(nextClone, ((XMLResource) original).getID(next));
-				}
-			}
-		}
 	}
 }

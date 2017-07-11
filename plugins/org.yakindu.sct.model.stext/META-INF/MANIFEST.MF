@@ -19,7 +19,8 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.yakindu.sct.model.sgraph;visibility:=reexport,
  org.yakindu.base.types,
  org.yakindu.base.expressions;visibility:=reexport,
- org.yakindu.sct.domain
+ org.yakindu.sct.domain,
+ org.eclipse.emf.workspace
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.eclipse.xtext.xbase.lib
