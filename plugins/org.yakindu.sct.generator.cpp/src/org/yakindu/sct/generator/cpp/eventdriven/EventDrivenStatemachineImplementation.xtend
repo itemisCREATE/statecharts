@@ -159,14 +159,20 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 	override raiseTimeEventFunction(ExecutionFlow it) { '''
 		void «module»::«raiseTimeEventFctID»(sc_eventid evid)
 		{
-			inEventQueue.push_back(new «eventNamespaceName»::TimedSctEvent(evid));
+			inEventQueue.push_back(new SctTimeEvent(evid));
 		}
+		
+		«internalRaiseTimeEventFunction»
 		'''
 	}
 	
 	def internalRaiseTimeEventFunction(ExecutionFlow it) { '''
-		void «module»::«raiseTimeEventFctID»_internal(TimedSctEvent * event) {
-			sc_eventid evid = event->evid;
+		void «module»::«raiseTimeEventFctID»_internal(SctEvent * event) {
+			SctTimeEvent * time_event = dynamic_cast<SctTimeEvent*>(event);
+			if(time_event == 0) {
+				return;
+			}
+			sc_eventid evid = time_event->evid;
 			if ((evid >= (sc_eventid)«timeEventsInstance») && (evid < (sc_eventid)(&«timeEventsInstance»[«timeEventsCountConst»])))
 			{
 				*(sc_boolean*)evid = true;

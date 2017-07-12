@@ -28,7 +28,7 @@ class EventNaming {
 	}
 	
 	def eventClassName(Event it) {
-		'''«scope.interfaceName»_«it.name.asIdentifier»'''
+		'''SctEvent_«scope.interfaceName»_«it.name.asIdentifier»'''
 	}
 	
 	def eventNamespaceName(ExecutionFlow it) {

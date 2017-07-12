@@ -61,9 +61,9 @@ class EventDrivenEventCode extends EventCode {
 			void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams»)
 			{
 				«IF event.hasValue»
-				parent->internalEventQueue.push_back(new «eventNamespaceName»::«event.eventClassName»(«event.eventEnumMemberName», value));
+				parent->internalEventQueue.push_back(new «event.eventClassName»(«event.eventEnumMemberName», value));
 				«ELSE»
-				parent->internalEventQueue.push_back(new «eventNamespaceName»::«event.eventClassName»(«event.eventEnumMemberName»));
+				parent->internalEventQueue.push_back(new «event.eventClassName»(«event.eventEnumMemberName»));
 				«ENDIF»
 				parent->runCycle();
 			}
