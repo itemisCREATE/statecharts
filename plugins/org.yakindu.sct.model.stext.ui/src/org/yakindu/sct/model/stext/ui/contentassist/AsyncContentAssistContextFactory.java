@@ -1,5 +1,5 @@
 /** 
- * Copyright (c) 2015 committers of YAKINDU and others. 
+ * Copyright (c) 2017 committers of YAKINDU and others. 
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0 
  * which accompanies this distribution, and is available at 
@@ -13,6 +13,11 @@ package org.yakindu.sct.model.stext.ui.contentassist;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.xtext.ui.editor.contentassist.DefaultContentAssistantFactory;
 
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public class AsyncContentAssistContextFactory extends DefaultContentAssistantFactory {
 
 	@Override

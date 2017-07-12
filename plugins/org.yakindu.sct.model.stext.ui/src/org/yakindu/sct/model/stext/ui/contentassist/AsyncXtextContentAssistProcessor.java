@@ -18,6 +18,11 @@ import org.eclipse.xtext.ui.editor.contentassist.CompletionProposalComputer;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public class AsyncXtextContentAssistProcessor extends XtextContentAssistProcessor {
 
 	@Override
