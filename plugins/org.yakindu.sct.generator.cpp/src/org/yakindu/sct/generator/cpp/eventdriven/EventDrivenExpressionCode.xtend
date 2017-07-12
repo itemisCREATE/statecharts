@@ -24,14 +24,14 @@ class EventDrivenExpressionCode extends ExpressionCode {
 	}
 	
 	def CharSequence raiseInEvent(EventRaisingExpression it) {
-		'''inEventQueue.push_back(«eventObjectPointer»);'''
+		'''inEventQueue.push_back(«eventObjectPointer»)'''
 	}
 	def CharSequence raiseOutEvent(EventRaisingExpression it) {
 		return super._code(it)
 	}
 	
 	def CharSequence raiseInternalEvent(EventRaisingExpression it) {
-		'''internalEventQueue.push_back(«eventObjectPointer»);'''
+		'''internalEventQueue.push_back(«eventObjectPointer»)'''
 	}
 	
 	def eventObjectPointer(EventRaisingExpression it) {

@@ -144,6 +144,11 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 							break;
 					}
 				«ENDFOR»
+				«IF timed»
+				case «timeEventEnumName»:
+					«raiseTimeEventFctID»_internal(event);
+					break;
+				«ENDIF»
 				default:
 					break;
 			}
@@ -151,8 +156,22 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 		'''
 	}
 	
-	override timedStatemachineFunctions(ExecutionFlow it) {
-		super.timedStatemachineFunctions(it)
+	override raiseTimeEventFunction(ExecutionFlow it) { '''
+		void «module»::«raiseTimeEventFctID»(sc_eventid evid)
+		{
+			inEventQueue.push_back(new «eventNamespaceName»::TimedSctEvent(evid));
+		}
+		'''
 	}
 	
+	def internalRaiseTimeEventFunction(ExecutionFlow it) { '''
+		void «module»::«raiseTimeEventFctID»_internal(TimedSctEvent * event) {
+			sc_eventid evid = event->evid;
+			if ((evid >= (sc_eventid)«timeEventsInstance») && (evid < (sc_eventid)(&«timeEventsInstance»[«timeEventsCountConst»])))
+			{
+				*(sc_boolean*)evid = true;
+			}
+		}
+		'''
+	}		
 }

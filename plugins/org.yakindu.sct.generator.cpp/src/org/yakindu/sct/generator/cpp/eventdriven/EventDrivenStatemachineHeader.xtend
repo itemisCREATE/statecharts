@@ -30,6 +30,14 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 	}
 	
+	override timedStatemachineFunctions(ExecutionFlow it) {
+		'''
+		«super.timedStatemachineFunctions(it)»
+		
+		void «raiseTimeEventFctID»_internal(«eventNamespaceName»::SctEvent * event);
+		'''
+	}
+	
 	override includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
 		#include <deque>
