@@ -1,7 +1,7 @@
 package org.yakindu.sct.generator.cpp.eventdriven
 
 import com.google.inject.Inject
-import java.util.ArrayList
+import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -40,8 +40,6 @@ class StatechartEvents implements IContentTemplate {
 		
 		«generateEventBaseClasses»
 		
-		«generateTimeEvent»
-		
 		«generateEvents»
 		
 		}
@@ -53,6 +51,7 @@ class StatechartEvents implements IContentTemplate {
 		val enumMembers = scopes
 			.map[declarations.filter(EventDefinition)] // map list of declarations to scope
 			.reduce[i1, i2 | i1 + i2] // reduce multiple lists of declarations into one
+			.filter[direction == Direction::LOCAL]
 			.map[eventEnumMemberName] // generate enumMemberNames for each
 			.toList
 		if(timed) {
@@ -99,7 +98,7 @@ class StatechartEvents implements IContentTemplate {
 	def generateEvents(ExecutionFlow it) {
 		'''
 		«FOR s : scopes»
-			«FOR e : s.declarations.filter(EventDefinition)»
+			«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
 				«generateEventClass(e, it)»
 			«ENDFOR»
 		«ENDFOR»
@@ -135,20 +134,6 @@ class StatechartEvents implements IContentTemplate {
 			public:
 				«eventClassName»(«flow.eventEnumName» name) : SctEvent(name){};
 		};
-		'''
-	}
-	
-	def generateTimeEvent(ExecutionFlow it) {
-		'''
-		«IF timed»
-		class SctTimeEvent : public SctEvent
-		{
-			public:
-				SctTimeEvent(sc_eventid evid) : SctEvent(TimeEvent), evid(evid){}
-				virtual ~SctTimeEvent(){}
-				const sc_eventid evid;
-		};
-		«ENDIF»
 		'''
 	}
 	

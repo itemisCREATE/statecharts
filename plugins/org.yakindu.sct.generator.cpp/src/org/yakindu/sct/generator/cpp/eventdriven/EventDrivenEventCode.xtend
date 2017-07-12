@@ -1,6 +1,7 @@
 package org.yakindu.sct.generator.cpp.eventdriven
 
 import com.google.inject.Inject
+import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.cpp.EventCode
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
@@ -15,7 +16,6 @@ class EventDrivenEventCode extends EventCode {
 			«FOR event : scope.incomingEvents»
 					«generateEventComment(event, scope)»
 					«generateInterfaceEventRaiser(it, event, scope)»
-					«generateInternalInterfaceEventRaiser(it, event, scope)»
 					«IF scope.defaultInterface»
 						«generateDefaultInterfaceEventRaiser(it, event, scope)»
 					«ENDIF»
@@ -56,18 +56,33 @@ class EventDrivenEventCode extends EventCode {
 			}
 		'''
 		
-	protected override CharSequence generateInterfaceEventRaiser(ExecutionFlow it, EventDefinition event, StatechartScope scope)
-		'''
+	protected override CharSequence generateInterfaceEventRaiser(ExecutionFlow it, EventDefinition event, StatechartScope scope) {
+		if(event.direction == Direction::IN) {
+			'''
 			void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams»)
 			{
 				«IF event.hasValue»
-				parent->internalEventQueue.push_back(new «event.eventClassName»(«event.eventEnumMemberName», value));
-				«ELSE»
-				parent->internalEventQueue.push_back(new «event.eventClassName»(«event.eventEnumMemberName»));
+				«event.localValueAccess» = value;
 				«ENDIF»
+				«event.localAccess» = true;
+				
 				parent->runCycle();
 			}
-		'''
+			'''
+		} else if(event.direction == Direction::LOCAL) {
+			'''
+				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams»)
+				{
+					«IF event.hasValue»
+					parent->internalEventQueue.push_back(new «event.eventClassName»(«event.eventEnumMemberName», value));
+					«ELSE»
+					parent->internalEventQueue.push_back(new «event.eventClassName»(«event.eventEnumMemberName»));
+					«ENDIF»
+					parent->runCycle();
+				}
+			'''
+		}
+	}
 	
 	override CharSequence generateEventComment(EventDefinition it, StatechartScope scope)
 		'''/* Functions for event «name» in interface «scope.interfaceName» */'''
