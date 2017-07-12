@@ -16,7 +16,6 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.KeyHandler;
@@ -33,14 +32,10 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CLabel;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
@@ -74,7 +69,6 @@ import com.google.inject.Key;
 public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker {
 
 	private static final int INITIAL_PALETTE_SIZE = 175;
-	private static final Font INVALID_DOMAIN_FONT = new Font(null, new FontData("Verdana", 10, SWT.BOLD));
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 
 	private KeyHandler keyHandler;
@@ -108,20 +102,14 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	@Override
 	protected void createBreadcrumbViewer(Composite parent) {
 		DomainStatus domainStatus = getDomainStatus();
-		if (domainStatus != null && domainStatus.getSeverity() == Severity.ERROR) {
+		if (domainStatus != null && !(domainStatus.getSeverity() == Severity.OK)) {
 			createStatusLabel(parent, domainStatus);
-			return;
 		}
 		super.createBreadcrumbViewer(parent);
 	}
 
-	private void createStatusLabel(Composite parent, DomainStatus domainStatus) {
-		CLabel label = new CLabel(parent, SWT.SHADOW_OUT);
-		label.setFont(INVALID_DOMAIN_FONT);
-		label.setBackground(ColorConstants.white);
-		label.setForeground(ColorConstants.red);
-		label.setImage(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJS_ERROR_TSK));
-		label.setText(domainStatus.getMessage() + " - editor is in readonly mode.");
+	protected void createStatusLabel(Composite parent, DomainStatus domainStatus) {
+		DomainStatusLabel label = new DomainStatusLabel(domainStatus, parent);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
 		parent.pack(true);
 	}
@@ -231,8 +219,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	}
 
 	/**
-	 * Overrides the GMF key handler to fix key binding for zooming and to
-	 * remove unused key bindings.
+	 * Overrides the GMF key handler to fix key binding for zooming and to remove
+	 * unused key bindings.
 	 */
 	@Override
 	protected KeyHandler getKeyHandler() {
@@ -240,7 +228,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			keyHandler = new KeyHandler();
 
 			registerZoomActions();
-			
+
 			// Zoom in - Unix - Numpad plus
 			getKeyHandler().put(KeyStroke.getPressed('+', SWT.KEYPAD_ADD, SWT.MOD1),
 					getActionRegistry().getAction(GEFActionConstants.ZOOM_IN));
