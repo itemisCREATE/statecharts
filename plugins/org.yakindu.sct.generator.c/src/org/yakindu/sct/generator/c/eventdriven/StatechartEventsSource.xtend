@@ -33,7 +33,7 @@ class StatechartEventsSource implements IContentTemplate {
 			ev->has_value = false;
 		}
 		
-		void «eventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name, void * value)
+		void «valueEventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name, void * value)
 		{
 			ev->name = name;
 			ev->has_value = true;

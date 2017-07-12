@@ -112,7 +112,7 @@ class StatechartEventsHeader implements IContentTemplate {
 		'''
 		void «eventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name);
 
-		void «eventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name, void * value);
+		void «valueEventInitFunction»(«eventStructTypeName» * ev, «eventEnumName» name, void * value);
 		'''
 	}
 	
