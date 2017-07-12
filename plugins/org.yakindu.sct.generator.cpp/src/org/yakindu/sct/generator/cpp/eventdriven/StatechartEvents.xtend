@@ -1,6 +1,7 @@
 package org.yakindu.sct.generator.cpp.eventdriven
 
 import com.google.inject.Inject
+import java.util.ArrayList
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -39,17 +40,28 @@ class StatechartEvents implements IContentTemplate {
 		
 		«generateEventBaseClasses»
 		
+		«generateTimeEvent»
+		
 		«generateEvents»
+		
 		}
 		#endif /* «generateHeaderDefineGuard» */
 		'''
 	}
 	
 	def generateEventsEnum(ExecutionFlow it) {
+		val enumMembers = scopes
+			.map[declarations.filter(EventDefinition)] // map list of declarations to scope
+			.reduce[i1, i2 | i1 + i2] // reduce multiple lists of declarations into one
+			.map[eventEnumMemberName.toString] // generate enumMemberNames for each
+			.toList
+		if(timed) {
+			enumMembers.add("TimeEvent")
+		}
 		'''
 		typedef enum  {
-			«FOR e : scopes.map[declarations.filter(EventDefinition)].reduce[i1, i2 | i1 + i2] SEPARATOR ","»
-				«eventEnumMemberName(e)»
+			«FOR e : enumMembers SEPARATOR ","»
+				«e»
 			«ENDFOR»
 		} «eventEnumName»;
 		'''
@@ -70,7 +82,7 @@ class StatechartEvents implements IContentTemplate {
 			public:
 				SctEvent(«eventEnumName» name) : name(name){}
 				virtual ~SctEvent(){}
-				«eventEnumName» name;
+				const «eventEnumName» name;
 				
 		};
 				
@@ -83,7 +95,7 @@ class StatechartEvents implements IContentTemplate {
 					value(value)
 					{}
 				virtual ~TypedSctEvent(){}
-				T value;
+				const T value;
 		};
 		
 		#endif /* SCT_EVENTS_BASE_CLASSES */
@@ -129,6 +141,20 @@ class StatechartEvents implements IContentTemplate {
 			public:
 				«eventClassName»(«flow.eventEnumName» name) : SctEvent(name){};
 		};
+		'''
+	}
+	
+	def generateTimeEvent(ExecutionFlow it) {
+		'''
+		«IF timed»
+		class SctTimeEvent : public SctEvent
+		{
+			public:
+				SctTimeEvent(sc_eventid evid) : SctEvent(TimeEvent), evid(evid){};
+				~SctTimeEvent();
+				const sc_eventid evid;
+		};
+		«ENDIF»
 		'''
 	}
 	

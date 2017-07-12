@@ -7,6 +7,7 @@ import org.yakindu.sct.generator.cpp.StatemachineImplementation
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.StatechartScope
 
 class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 	@Inject extension EventNaming eventNaming
@@ -134,7 +135,7 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 		{
 			switch(event->name)
 			{
-				«FOR s : scopes»
+				«FOR s : scopes.filter(StatechartScope)»
 					«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::IN || direction == Direction::LOCAL]»
 						case «e.eventEnumMemberName»:
 					«ENDFOR»
@@ -148,5 +149,10 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 			}
 		}
 		'''
-	}	
+	}
+	
+	override timedStatemachineFunctions(ExecutionFlow it) {
+		super.timedStatemachineFunctions(it)
+	}
+	
 }
