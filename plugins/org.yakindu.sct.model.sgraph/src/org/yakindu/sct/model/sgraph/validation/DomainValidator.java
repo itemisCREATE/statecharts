@@ -42,8 +42,14 @@ public class DomainValidator implements EValidator {
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (eObject instanceof DomainElement) {
 			DomainStatus status = DomainRegistry.getDomainStatus(((DomainElement) eObject).getDomainID());
-			if (status.getSeverity() != Severity.OK) {
+			if (status.getSeverity() == Severity.ERROR) {
 				diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR, "DomainValidator", 0, status.getMessage(),
+						new Object[] { eObject }));
+			} else if (status.getSeverity() == Severity.WARNING) {
+				diagnostics.add(new BasicDiagnostic(Diagnostic.WARNING, "DomainValidator", 0, status.getMessage(),
+						new Object[] { eObject }));
+			} else if (status.getSeverity() == Severity.INFO) {
+				diagnostics.add(new BasicDiagnostic(Diagnostic.INFO, "DomainValidator", 0, status.getMessage(),
 						new Object[] { eObject }));
 			}
 		}

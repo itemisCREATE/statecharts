@@ -19,7 +19,7 @@ public class DomainStatus {
 	public static final DomainStatus OK = new DomainStatus(Severity.OK);
 
 	public static enum Severity {
-		OK, ERROR
+		OK, ERROR, WARNING, INFO
 	}
 
 	private Severity status;
