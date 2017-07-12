@@ -33,7 +33,9 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 		{
 			clearOutEvents();
 			
-			while(SctEvent * currentEvent = getNextEvent())
+			SctEvent * currentEvent = getNextEvent();
+			
+			do
 			{
 				/* Set event flags as usual */
 				dispatch_event(currentEvent);
@@ -43,7 +45,7 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 				/* Delete event from memory */
 				delete currentEvent;
 				clearInEvents();
-			}
+			} while((currentEvent = getNextEvent()));
 		}
 	'''
 	}
@@ -57,9 +59,6 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 			if(!internalEventQueue.empty()) {
 				nextEvent = internalEventQueue.front();
 				internalEventQueue.pop_front();
-			} else if(!inEventQueue.empty()) {
-				nextEvent = inEventQueue.front();
-				inEventQueue.pop_front();
 			}
 			
 			return nextEvent;
@@ -79,12 +78,6 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 			«constructorBody(it)»
 		}
 	'''
-	}
-	
-	override initFunction(ExecutionFlow it) {
-		val init = super.initFunction(it).toString
-		
-		return init.replace("clearInEvents();\n", "")
 	}
 	
 	override constructorBody(ExecutionFlow it)
@@ -108,7 +101,7 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 		{
 			switch(event->name)
 			{
-				«FOR e: s.declarations.filter(EventDefinition).filter[direction == Direction::IN || direction == Direction::LOCAL]»
+				«FOR e: s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
 					case «e.eventEnumMemberName»:
 					{
 						«IF e.hasValue»
@@ -133,10 +126,13 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 		'''
 		void «module»::dispatch_event(SctEvent * event)
 		{
+			if(event == 0) {
+				return;
+			}
 			switch(event->name)
 			{
 				«FOR s : scopes.filter(StatechartScope)»
-					«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::IN || direction == Direction::LOCAL]»
+					«FOR e : s.declarations.filter(EventDefinition).filter[direction == Direction::LOCAL]»
 						case «e.eventEnumMemberName»:
 					«ENDFOR»
 					{
@@ -144,40 +140,10 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 							break;
 					}
 				«ENDFOR»
-				«IF timed»
-				case «timeEventEnumName»:
-					«raiseTimeEventFctID»_internal(event);
-					break;
-				«ENDIF»
 				default:
 					break;
 			}
 		}
 		'''
 	}
-	
-	override raiseTimeEventFunction(ExecutionFlow it) { '''
-		void «module»::«raiseTimeEventFctID»(sc_eventid evid)
-		{
-			inEventQueue.push_back(new SctTimeEvent(evid));
-		}
-		
-		«internalRaiseTimeEventFunction»
-		'''
-	}
-	
-	def internalRaiseTimeEventFunction(ExecutionFlow it) { '''
-		void «module»::«raiseTimeEventFctID»_internal(SctEvent * event) {
-			SctTimeEvent * time_event = dynamic_cast<SctTimeEvent*>(event);
-			if(time_event == 0) {
-				return;
-			}
-			sc_eventid evid = time_event->evid;
-			if ((evid >= (sc_eventid)«timeEventsInstance») && (evid < (sc_eventid)(&«timeEventsInstance»[«timeEventsCountConst»])))
-			{
-				*(sc_boolean*)evid = true;
-			}
-		}
-		'''
-	}		
 }

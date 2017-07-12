@@ -24,8 +24,9 @@ class EventDrivenExpressionCode extends ExpressionCode {
 	}
 	
 	def CharSequence raiseInEvent(EventRaisingExpression it) {
-		'''inEventQueue.push_back(«eventObjectPointer»)'''
+		return super._code(it)
 	}
+	
 	def CharSequence raiseOutEvent(EventRaisingExpression it) {
 		return super._code(it)
 	}
@@ -40,7 +41,4 @@ class EventDrivenExpressionCode extends ExpressionCode {
 		val args = '''«enm»«IF value !== null», «value.code»«ENDIF»'''
 		'''new «cls»(«args»)'''
 	}
-	
-	override dispatch CharSequence code(EventValueReferenceExpression it) 
-	'''«value.definition.event.valueAccess»'''
 }

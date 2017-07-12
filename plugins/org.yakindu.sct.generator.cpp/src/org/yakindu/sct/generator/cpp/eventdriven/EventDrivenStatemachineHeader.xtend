@@ -22,19 +22,10 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 		private:
 			std::deque<«eventNamespaceName»::SctEvent*> internalEventQueue;
-			std::deque<«eventNamespaceName»::SctEvent*> inEventQueue;
 			
 			«eventNamespaceName»::SctEvent* getNextEvent();
 			
 			void dispatch_event(«eventNamespaceName»::SctEvent * event);
-		'''
-	}
-	
-	override timedStatemachineFunctions(ExecutionFlow it) {
-		'''
-		«super.timedStatemachineFunctions(it)»
-		
-		void «raiseTimeEventFctID»_internal(«eventNamespaceName»::SctEvent * event);
 		'''
 	}
 	
@@ -88,9 +79,6 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 	def dispatch privateFunctionPrototypes(EventDefinition it) {
 		'''
 		«IF direction == Direction::LOCAL»
-			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */
-			void internal_«asRaiser»(«valueParams»);
-		«ELSEIF direction == Direction::IN»
 			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */
 			void internal_«asRaiser»(«valueParams»);
 		«ENDIF»
