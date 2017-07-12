@@ -81,7 +81,7 @@ public class ShadowModelValidationJob extends ValidationJob {
 
 	protected void cloneResource(final IProgressMonitor monitor, final Resource shadowResource)
 			throws ExecutionException {
-		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+		final ByteArrayOutputStream bout = new ByteArrayOutputStream();
 		AbstractTransactionalCommand cmd = new AbstractTransactionalCommand(TransactionUtil.getEditingDomain(resource),
 				"", null) {
 			@Override
