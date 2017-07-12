@@ -23,8 +23,12 @@ class EventNaming {
 		'''«module»EventName'''
 	}
 	
+	def timeEventEnumName() {
+		'''TimeEvent'''
+	}
+	
 	def eventClassName(Event it) {
-		'''SctEvent_«flow.name.toFirstUpper»_«scope.interfaceName»_«it.name.asIdentifier»'''
+		'''«scope.interfaceName»_«it.name.asIdentifier»'''
 	}
 	
 	def eventNamespaceName(ExecutionFlow it) {

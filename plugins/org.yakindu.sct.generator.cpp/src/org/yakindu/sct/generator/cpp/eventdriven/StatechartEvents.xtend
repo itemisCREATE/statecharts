@@ -53,10 +53,10 @@ class StatechartEvents implements IContentTemplate {
 		val enumMembers = scopes
 			.map[declarations.filter(EventDefinition)] // map list of declarations to scope
 			.reduce[i1, i2 | i1 + i2] // reduce multiple lists of declarations into one
-			.map[eventEnumMemberName.toString] // generate enumMemberNames for each
+			.map[eventEnumMemberName] // generate enumMemberNames for each
 			.toList
 		if(timed) {
-			enumMembers.add("TimeEvent")
+			enumMembers.add(timeEventEnumName)
 		}
 		'''
 		typedef enum  {
@@ -73,10 +73,6 @@ class StatechartEvents implements IContentTemplate {
 	
 	def generateEventBaseClasses(ExecutionFlow it) {
 		'''
-		/* Guard for base classes */
-		#ifndef SCT_EVENTS_BASE_CLASSES
-		#define SCT_EVENTS_BASE_CLASSES
-		
 		class SctEvent
 		{
 			public:
@@ -97,8 +93,6 @@ class StatechartEvents implements IContentTemplate {
 				virtual ~TypedSctEvent(){}
 				const T value;
 		};
-		
-		#endif /* SCT_EVENTS_BASE_CLASSES */
 		'''
 	}
 	
