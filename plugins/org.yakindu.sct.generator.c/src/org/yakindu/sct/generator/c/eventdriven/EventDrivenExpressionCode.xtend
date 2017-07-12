@@ -19,8 +19,10 @@ class EventDrivenExpressionCode extends ExpressionCode {
 			«flow.eventStructTypeName» event;
 			«IF value !== null»
 			«event.definition.event.typeSpecifier.targetLanguageName» value = «value.code»;
+			«flow.valueEventInitFunction»(&event, «event.definition.event.eventEnumMemberName»«IF value !== null», &value«ENDIF»);
+			«ELSE»
+			«flow.eventInitFunction»(&event, «event.definition.event.eventEnumMemberName»);
 			«ENDIF»
-			«flow.eventInitFunction»(&event, «event.definition.event.eventEnumMemberName»«IF value !== null», &value«ENDIF»);
 			«flow.eventQueuePushFunction»(&event);
 		«ENDIF»
 		'''

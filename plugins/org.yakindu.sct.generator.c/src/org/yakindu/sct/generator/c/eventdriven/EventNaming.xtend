@@ -36,6 +36,10 @@ class EventNaming {
 		'''«eventStructTypeName»_init'''
 	}
 	
+	def valueEventInitFunction(ExecutionFlow it) {
+		'''«eventStructTypeName»_value_init'''
+	}
+	
 	def eventQueueInitFunction(ExecutionFlow it) {
 		'''«eventQueueTypeName»_init'''
 	}
