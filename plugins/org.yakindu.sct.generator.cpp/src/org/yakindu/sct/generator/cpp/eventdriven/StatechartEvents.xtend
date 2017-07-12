@@ -144,8 +144,8 @@ class StatechartEvents implements IContentTemplate {
 		class SctTimeEvent : public SctEvent
 		{
 			public:
-				SctTimeEvent(sc_eventid evid) : SctEvent(TimeEvent), evid(evid){};
-				~SctTimeEvent();
+				SctTimeEvent(sc_eventid evid) : SctEvent(TimeEvent), evid(evid){}
+				virtual ~SctTimeEvent(){}
 				const sc_eventid evid;
 		};
 		«ENDIF»
