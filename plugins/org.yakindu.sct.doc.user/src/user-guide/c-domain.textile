@@ -42,7 +42,7 @@ Now we can create a C header file specifying our own C type definitions which we
 
 # In the project explorer view, right-click on the project. The context menu opens.
 # In the context menu, select _New → Header File_.<br/>!images/cdom_geometry_020_new_header_file_010.png(Creating a C header file)!
-# The dialog _New Header File_ is shown. Specify the name of the header file. Here we choose *point.h*.<br/>!images/cdom_geometry_020_new_header_file_020.png(Selecting a header file name)!
+# The dialog _New Header File_ is shown. Specify the name of the header file. Here we choose *point.h*.<br/>!images/cdom_geometry_020_new_header_file_020.png(Selecting a header filename)!
 # Click _Finish_. 
 # The header file *point.h* is created.<br/>
 
@@ -531,7 +531,7 @@ In the statechart model introduced above, do the following:
 
 # In the project view, right-click on the project's name. The context menu opens.
 # In the context menu, select _New → Code Generator Model_. The _YAKINDU Generator Model_ wizard opens.
-# Enter a file name into the _File name_ field, e.&#8239;g. *c.sgen*, and click _Next >_.
+# Enter a filename into the _File name_ field, e.&#8239;g. *c.sgen*, and click _Next >_.
 # In the _Generator_ drop-down menu, select *YAKINDU SCT C Code Generator*.
 # Select the statechart models to generate C source code for. Click _Finish_.
 

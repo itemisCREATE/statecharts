@@ -53,7 +53,7 @@ In the _test_ directory, proceed as follows to create a SCTUnit test file:
 # In the context menu, select _New → Other…_. The _New_ wizard opens.
 # In the wizard, select _YAKINDU SCT → SCTUnit test case_.
 # Click _Next >_. The wizard switches to the _New SCTUnit Test Class_ page.
-# In the _File name_ text field, specify the name of the file to contain the SCTUnit tests, say, _light_switch.sctunit_. The file name extension must always be _.sctunit_.
+# In the _Filename_ text field, specify the name of the file to contain the SCTUnit tests, say, _light_switch.sctunit_. The filename extension must always be _.sctunit_.
 # Click _Finish_.
 # If a dialog appears asking whether you want to add the Xtext nature to the project, please click _Yes_.
 
