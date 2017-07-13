@@ -52,7 +52,9 @@ public class URI2ResourceDescriptionCache implements Delegate {
 				return getInternal(URI.createURI(key));
 			}
 		});
-		workspaceSynchronizer = new WorkspaceSynchronizer(getEditingDomain(), this);
+		TransactionalEditingDomain editingDomain = getEditingDomain();
+		if (editingDomain != null)
+		workspaceSynchronizer = new WorkspaceSynchronizer(editingDomain, this);
 	}
 
 	protected TransactionalEditingDomain getEditingDomain() {
@@ -106,7 +108,8 @@ public class URI2ResourceDescriptionCache implements Delegate {
 
 	@Override
 	public void dispose() {
-		workspaceSynchronizer.dispose();
+		if (workspaceSynchronizer != null)
+			workspaceSynchronizer.dispose();
 		cache.invalidateAll();
 	}
 
