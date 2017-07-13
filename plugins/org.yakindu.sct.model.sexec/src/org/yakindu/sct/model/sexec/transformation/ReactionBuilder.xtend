@@ -86,8 +86,8 @@ class ReactionBuilder {
 		val execChoice = choice.create
 		
 		// move the default transition to the end of the reaction list
-		val defaultTransition = choice.outgoingTransitions.filter( t | t.trigger == null || t.trigger instanceof DefaultTrigger ).head
-		if ( defaultTransition != null ) {
+		val defaultTransition = choice.outgoingTransitions.filter( t | t.trigger === null || t.trigger instanceof DefaultTrigger ).head
+		if ( defaultTransition !== null ) {
 			val defaultReaction = defaultTransition.create		
 			execChoice.reactions.move(execChoice.reactions.size -1, defaultReaction)
 		}
@@ -157,7 +157,7 @@ class ReactionBuilder {
 	
 	
 	def unchecked(Reaction it) {
-		return (check == null || check.condition == null )
+		return (check === null || check.condition === null )
 	}
 
 
