@@ -10,14 +10,9 @@
 */
 package org.yakindu.sct.model.stext.ui.contentassist;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
@@ -35,33 +30,21 @@ public class STextStatefulFactory extends StatefulFactory {
 	private IParseResult parseResult;
 
 	@Override
-	public ContentAssistContext[] create(ITextViewer viewer, int offset, XtextResource resource)
-			throws BadLocationException {
+	public ContentAssistContext[] create(ITextViewer viewer, int offset,
+			XtextResource resource) throws BadLocationException {
 		this.parseResult = resource.getParseResult();
-		if (Display.getCurrent() == null) {
-			List<ContentAssistContext> result = new ArrayList<>();
-			Display.getDefault().syncExec(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						result.addAll(Arrays.asList(STextStatefulFactory.super.create(viewer, offset, resource)));
-					} catch (BadLocationException e) {
-						e.printStackTrace();
-					}
-				}
-			});
-			return result.toArray(new ContentAssistContext[] {});
-		}
 		return super.create(viewer, offset, resource);
 	}
 
 	@Override
-	public Builder doCreateContext(INode lastCompleteNode, EObject currentModel, EObject previousModel,
-			INode currentNode, String prefix) {
+	public Builder doCreateContext(INode lastCompleteNode,
+			EObject currentModel, EObject previousModel, INode currentNode,
+			String prefix) {
 		if (currentModel == null) {
 			currentModel = parseResult.getRootASTElement();
 		}
-		Builder result = super.doCreateContext(lastCompleteNode, currentModel, previousModel, currentNode, prefix);
+		Builder result = super.doCreateContext(lastCompleteNode, currentModel,
+				previousModel, currentNode, prefix);
 		return result;
 	}
 }
