@@ -123,5 +123,4 @@ public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextU
 	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
 		return PackageImportHyperlinkHelper.class;
 	}
-
 }
