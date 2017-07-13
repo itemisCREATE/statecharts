@@ -13,7 +13,7 @@
 	<packaging>eclipse-repository</packaging>
 
 	<properties>
-		<source.update.site>http://updates.yakindu.org/sct/releases</source.update.site>
+		<source.update.site>http://updates.yakindu.com/statecharts/releases/</source.update.site>
 		<target.update.site>target/repository</target.update.site>
 		<tycho.extras.version>0.24.0</tycho.extras.version>
 	</properties>
