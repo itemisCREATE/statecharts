@@ -151,7 +151,6 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			else
 				null
 		}
-		System.out.println("assign: " + scopeVariable.name + " := " + scopeVariable.value)
 		scopeVariable.value
 	}
 
