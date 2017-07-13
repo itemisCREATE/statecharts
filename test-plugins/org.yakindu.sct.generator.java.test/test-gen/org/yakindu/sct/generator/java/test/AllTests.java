@@ -28,7 +28,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	ConstOnlyDefaultScope.class,
 	ConstOnlyInternalScope.class,
 	ConstOnlyNamedScope.class,
-	ChildFirstExecutionHierarchy.class,
 	Declarations.class,
 	DeepEntry.class,
 	DeepHistory.class,
@@ -77,9 +76,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TriggerGuardExpressions.class,
 	TriggerExpressionPrecedence.class,
 	ValuedEvents.class,
-	TypeAlias.class,
-	StatemachineKeywords.class,
-	TimedTransitions.class
+	TypeAlias.class
 	})
 public class AllTests {
 }

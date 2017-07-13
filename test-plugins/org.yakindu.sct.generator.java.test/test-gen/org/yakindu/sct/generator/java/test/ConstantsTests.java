@@ -24,14 +24,16 @@ public class ConstantsTests {
 	
 	private ConstantsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void constantsTests_setUp() {
 		statemachine = new ConstantsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void constantsTests_tearDown() {
 		statemachine = null;
 	}
 	

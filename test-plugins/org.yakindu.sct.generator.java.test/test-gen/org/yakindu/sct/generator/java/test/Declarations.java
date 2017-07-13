@@ -24,14 +24,16 @@ public class Declarations {
 	
 	private DeclarationsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void declarations_setUp() {
 		statemachine = new DeclarationsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void declarations_tearDown() {
 		statemachine = null;
 	}
 	

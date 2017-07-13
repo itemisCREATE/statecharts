@@ -24,14 +24,16 @@ public class ReadOnlyVariable {
 	
 	private ReadOnlyVariableStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void readOnlyVariable_setUp() {
 		statemachine = new ReadOnlyVariableStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void readOnlyVariable_tearDown() {
 		statemachine = null;
 	}
 	

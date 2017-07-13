@@ -24,14 +24,16 @@ public class EmptyTransition {
 	
 	private EmptyTransitionStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void emptyTransition_setUp() {
 		statemachine = new EmptyTransitionStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void emptyTransition_tearDown() {
 		statemachine = null;
 	}
 	

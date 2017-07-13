@@ -24,14 +24,16 @@ public class CKeywords {
 	
 	private CKeywordsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void cKeywords_setUp() {
 		statemachine = new CKeywordsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void cKeywords_tearDown() {
 		statemachine = null;
 	}
 	

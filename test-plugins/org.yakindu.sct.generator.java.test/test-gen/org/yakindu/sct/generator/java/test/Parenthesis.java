@@ -24,14 +24,16 @@ public class Parenthesis {
 	
 	private ParenthesisStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void parenthesis_setUp() {
 		statemachine = new ParenthesisStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void parenthesis_tearDown() {
 		statemachine = null;
 	}
 	

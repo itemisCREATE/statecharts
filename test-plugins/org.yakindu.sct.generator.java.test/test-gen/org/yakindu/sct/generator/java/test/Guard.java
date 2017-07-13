@@ -24,14 +24,16 @@ public class Guard {
 	
 	private GuardStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void guard_setUp() {
 		statemachine = new GuardStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void guard_tearDown() {
 		statemachine = null;
 	}
 	

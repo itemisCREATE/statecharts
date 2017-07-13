@@ -24,14 +24,16 @@ public class GuardedExit {
 	
 	private GuardedExitStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void guardedExit_setUp() {
 		statemachine = new GuardedExitStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void guardedExit_tearDown() {
 		statemachine = null;
 	}
 	

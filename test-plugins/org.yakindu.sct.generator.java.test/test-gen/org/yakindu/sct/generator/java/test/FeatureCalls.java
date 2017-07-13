@@ -24,14 +24,16 @@ public class FeatureCalls {
 	
 	private FeatureCallsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void featureCalls_setUp() {
 		statemachine = new FeatureCallsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void featureCalls_tearDown() {
 		statemachine = null;
 	}
 	

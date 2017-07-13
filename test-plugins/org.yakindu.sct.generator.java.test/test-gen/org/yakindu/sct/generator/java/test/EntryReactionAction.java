@@ -24,14 +24,16 @@ public class EntryReactionAction {
 	
 	private EntryReactionActionStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void entryReactionAction_setUp() {
 		statemachine = new EntryReactionActionStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void entryReactionAction_tearDown() {
 		statemachine = null;
 	}
 	

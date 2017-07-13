@@ -24,14 +24,16 @@ public class SimpleEvent {
 	
 	private SimpleEventStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void simpleEvent_setUp() {
 		statemachine = new SimpleEventStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void simpleEvent_tearDown() {
 		statemachine = null;
 	}
 	

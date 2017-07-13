@@ -24,14 +24,16 @@ public class IntegerExpressions {
 	
 	private IntegerExpressionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void integerExpressions_setUp() {
 		statemachine = new IntegerExpressionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void integerExpressions_tearDown() {
 		statemachine = null;
 	}
 	

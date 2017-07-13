@@ -24,14 +24,16 @@ public class LogicalAndTests {
 	
 	private LogicalAndStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void logicalAndTests_setUp() {
 		statemachine = new LogicalAndStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void logicalAndTests_tearDown() {
 		statemachine = null;
 	}
 	

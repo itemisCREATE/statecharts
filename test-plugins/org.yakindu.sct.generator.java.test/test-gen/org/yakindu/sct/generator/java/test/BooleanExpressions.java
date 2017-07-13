@@ -24,14 +24,16 @@ public class BooleanExpressions {
 	
 	private BooleanExpressionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void booleanExpressions_setUp() {
 		statemachine = new BooleanExpressionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void booleanExpressions_tearDown() {
 		statemachine = null;
 	}
 	

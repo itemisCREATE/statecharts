@@ -24,14 +24,16 @@ public class STextKeywordsInStatesAndRegions {
 	
 	private STextKeywordsInStatesAndRegionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void sTextKeywordsInStatesAndRegions_setUp() {
 		statemachine = new STextKeywordsInStatesAndRegionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void sTextKeywordsInStatesAndRegions_tearDown() {
 		statemachine = null;
 	}
 	

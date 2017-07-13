@@ -24,14 +24,16 @@ public class SyncFork {
 	
 	private SyncForkStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void syncFork_setUp() {
 		statemachine = new SyncForkStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void syncFork_tearDown() {
 		statemachine = null;
 	}
 	

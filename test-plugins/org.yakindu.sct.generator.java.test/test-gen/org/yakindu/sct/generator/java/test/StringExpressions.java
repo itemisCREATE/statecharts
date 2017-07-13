@@ -24,14 +24,16 @@ public class StringExpressions {
 	
 	private StringExpressionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void stringExpressions_setUp() {
 		statemachine = new StringExpressionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void stringExpressions_tearDown() {
 		statemachine = null;
 	}
 	

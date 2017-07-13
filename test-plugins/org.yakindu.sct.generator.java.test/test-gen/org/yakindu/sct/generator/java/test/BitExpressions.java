@@ -24,14 +24,16 @@ public class BitExpressions {
 	
 	private BitExpressionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void bitExpressions_setUp() {
 		statemachine = new BitExpressionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void bitExpressions_tearDown() {
 		statemachine = null;
 	}
 	

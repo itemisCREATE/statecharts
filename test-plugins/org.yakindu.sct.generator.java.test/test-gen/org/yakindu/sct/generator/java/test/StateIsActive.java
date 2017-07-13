@@ -24,14 +24,16 @@ public class StateIsActive {
 	
 	private StateIsActiveStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void stateIsActive_setUp() {
 		statemachine = new StateIsActiveStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void stateIsActive_tearDown() {
 		statemachine = null;
 	}
 	

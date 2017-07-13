@@ -235,13 +235,13 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	/* The reactions of state Start. */
 	private void react_main_region_Start() {
+		if (check__lr0()) {
+			effect__lr0();
+		}
+		effect__lr1();
 		if (check_main_region_Start_tr0_tr0()) {
 			effect_main_region_Start_tr0();
 		} else {
-			if (check__lr0()) {
-				effect__lr0();
-			}
-			effect__lr1();
 		}
 	}
 	

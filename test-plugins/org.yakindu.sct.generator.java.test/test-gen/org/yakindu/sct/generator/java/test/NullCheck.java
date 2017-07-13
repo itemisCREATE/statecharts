@@ -24,14 +24,16 @@ public class NullCheck {
 	
 	private NullCheckStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void nullCheck_setUp() {
 		statemachine = new NullCheckStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void nullCheck_tearDown() {
 		statemachine = null;
 	}
 	

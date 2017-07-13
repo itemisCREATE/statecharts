@@ -26,8 +26,10 @@ public class TimedTransitions {
 	private TimedTransitionsStatemachine statemachine;	
 	private VirtualTimer timer;
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void timedTransitions_setUp() {
 		statemachine = new TimedTransitionsStatemachine();
 		timer = new VirtualTimer();
 		statemachine.setTimer(timer);
@@ -35,15 +37,21 @@ public class TimedTransitions {
 	}
 
 	@After
-	public void tearDown() {
+	public void timedTransitions_tearDown() {
 		statemachine = null;
+		timer = null;
 	}
 	
 	@Test
 	public void timer01() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
-		timer.timeLeap(2030);
+		for(int i = 1; i <= 10; i++) {
+			timer.timeLeap(200);
+			statemachine.runCycle();
+		}
+		timer.timeLeap(30);
+		statemachine.runCycle();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_End));
 	}

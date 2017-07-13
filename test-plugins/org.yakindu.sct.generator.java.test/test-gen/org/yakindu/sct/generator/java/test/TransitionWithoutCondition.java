@@ -24,14 +24,16 @@ public class TransitionWithoutCondition {
 	
 	private TransitionWithoutConditionStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void transitionWithoutCondition_setUp() {
 		statemachine = new TransitionWithoutConditionStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void transitionWithoutCondition_tearDown() {
 		statemachine = null;
 	}
 	

@@ -24,14 +24,16 @@ public class DynamicChoice {
 	
 	private DynamicChoiceStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void dynamicChoice_setUp() {
 		statemachine = new DynamicChoiceStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void dynamicChoice_tearDown() {
 		statemachine = null;
 	}
 	

@@ -24,14 +24,16 @@ public class NamedInterfaceAccess {
 	
 	private NamedInterfaceAccessStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void namedInterfaceAccess_setUp() {
 		statemachine = new NamedInterfaceAccessStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void namedInterfaceAccess_tearDown() {
 		statemachine = null;
 	}
 	

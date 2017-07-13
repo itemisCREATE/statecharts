@@ -482,6 +482,10 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	/* The reactions of state s1. */
 	private void react_main_region_Composite_s1_s2_inner_region_s1() {
+		if (check__lr0()) {
+			effect__lr0();
+		}
+		effect__lr1();
 		if (check_main_region_Composite_s1_s2_tr0_tr0()) {
 			effect_main_region_Composite_s1_s2_tr0();
 		} else {
@@ -491,10 +495,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 				if (check_main_region_Composite_s1_s2_inner_region_s1_tr1_tr1()) {
 					effect_main_region_Composite_s1_s2_inner_region_s1_tr1();
 				} else {
-					if (check__lr0()) {
-						effect__lr0();
-					}
-					effect__lr1();
 				}
 			}
 		}
@@ -502,16 +502,16 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	/* The reactions of state s2. */
 	private void react_main_region_Composite_s1_s2_inner_region_s2() {
+		if (check__lr0()) {
+			effect__lr0();
+		}
+		effect__lr1();
 		if (check_main_region_Composite_s1_s2_tr0_tr0()) {
 			effect_main_region_Composite_s1_s2_tr0();
 		} else {
 			if (check_main_region_Composite_s1_s2_inner_region_s2_tr0_tr0()) {
 				effect_main_region_Composite_s1_s2_inner_region_s2_tr0();
 			} else {
-				if (check__lr0()) {
-					effect__lr0();
-				}
-				effect__lr1();
 			}
 		}
 	}

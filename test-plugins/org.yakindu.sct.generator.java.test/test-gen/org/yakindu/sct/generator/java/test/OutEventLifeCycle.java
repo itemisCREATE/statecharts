@@ -24,14 +24,16 @@ public class OutEventLifeCycle {
 	
 	private OutEventLifeCycleStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void outEventLifeCycle_setUp() {
 		statemachine = new OutEventLifeCycleStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void outEventLifeCycle_tearDown() {
 		statemachine = null;
 	}
 	

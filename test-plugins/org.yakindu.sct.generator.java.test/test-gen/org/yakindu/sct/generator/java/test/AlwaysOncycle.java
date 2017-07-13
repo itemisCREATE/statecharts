@@ -24,14 +24,16 @@ public class AlwaysOncycle {
 	
 	private AlwaysOncycleStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void alwaysOncycle_setUp() {
 		statemachine = new AlwaysOncycleStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void alwaysOncycle_tearDown() {
 		statemachine = null;
 	}
 	

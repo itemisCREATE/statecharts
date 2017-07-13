@@ -24,14 +24,16 @@ public class StaticChoice {
 	
 	private StaticChoiceStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void staticChoice_setUp() {
 		statemachine = new StaticChoiceStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void staticChoice_tearDown() {
 		statemachine = null;
 	}
 	

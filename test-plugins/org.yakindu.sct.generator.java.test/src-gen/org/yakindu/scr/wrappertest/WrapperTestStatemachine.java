@@ -385,6 +385,10 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	
 	/* The reactions of state s1. */
 	private void react_main_region_s1() {
+		if (check__lr0()) {
+			effect__lr0();
+		}
+		effect__lr1();
 		if (check_main_region_s1_tr0_tr0()) {
 			effect_main_region_s1_tr0();
 		} else {
@@ -394,10 +398,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 				if (check_main_region_s1_tr2_tr2()) {
 					effect_main_region_s1_tr2();
 				} else {
-					if (check__lr0()) {
-						effect__lr0();
-					}
-					effect__lr1();
 				}
 			}
 		}
@@ -405,13 +405,13 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	
 	/* The reactions of state s2. */
 	private void react_main_region_s2() {
+		if (check__lr0()) {
+			effect__lr0();
+		}
+		effect__lr1();
 		if (check_main_region_s2_tr0_tr0()) {
 			effect_main_region_s2_tr0();
 		} else {
-			if (check__lr0()) {
-				effect__lr0();
-			}
-			effect__lr1();
 		}
 	}
 	

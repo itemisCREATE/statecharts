@@ -24,14 +24,16 @@ public class ConditionalExpression {
 	
 	private ConditionalExpressionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void conditionalExpression_setUp() {
 		statemachine = new ConditionalExpressionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void conditionalExpression_tearDown() {
 		statemachine = null;
 	}
 	

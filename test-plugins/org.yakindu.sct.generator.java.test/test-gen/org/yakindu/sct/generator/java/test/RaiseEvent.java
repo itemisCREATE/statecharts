@@ -24,14 +24,16 @@ public class RaiseEvent {
 	
 	private RaiseEventStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void raiseEvent_setUp() {
 		statemachine = new RaiseEventStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void raiseEvent_tearDown() {
 		statemachine = null;
 	}
 	

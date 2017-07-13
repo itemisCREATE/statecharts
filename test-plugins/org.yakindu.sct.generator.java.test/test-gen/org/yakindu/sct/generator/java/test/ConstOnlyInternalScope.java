@@ -24,14 +24,16 @@ public class ConstOnlyInternalScope {
 	
 	private ConstOnlyInternalScopeStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void constOnlyInternalScope_setUp() {
 		statemachine = new ConstOnlyInternalScopeStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void constOnlyInternalScope_tearDown() {
 		statemachine = null;
 	}
 	

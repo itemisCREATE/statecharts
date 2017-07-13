@@ -24,14 +24,16 @@ public class SameNameDifferentRegion {
 	
 	private SameNameDifferentRegionStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void sameNameDifferentRegion_setUp() {
 		statemachine = new SameNameDifferentRegionStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void sameNameDifferentRegion_tearDown() {
 		statemachine = null;
 	}
 	

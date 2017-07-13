@@ -331,34 +331,34 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	
 	/* The reactions of state C1. */
 	private void react_main_region_B_r1_C1() {
-		if (check_main_region_B_r1_C1_tr0_tr0()) {
-			effect_main_region_B_r1_C1_tr0();
-		} else {
-		}
-	}
-	
-	/* The reactions of state C2. */
-	private void react_main_region_B_r1_C2() {
-	}
-	
-	/* The reactions of state D1. */
-	private void react_main_region_B_r2_D1() {
 		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
 		} else {
-			if (check_main_region_B_r2_D1_tr0_tr0()) {
-				effect_main_region_B_r2_D1_tr0();
+			if (check_main_region_B_r1_C1_tr0_tr0()) {
+				effect_main_region_B_r1_C1_tr0();
 			} else {
 			}
 		}
 	}
 	
-	/* The reactions of state D2. */
-	private void react_main_region_B_r2_D2() {
+	/* The reactions of state C2. */
+	private void react_main_region_B_r1_C2() {
 		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
 		} else {
 		}
+	}
+	
+	/* The reactions of state D1. */
+	private void react_main_region_B_r2_D1() {
+		if (check_main_region_B_r2_D1_tr0_tr0()) {
+			effect_main_region_B_r2_D1_tr0();
+		} else {
+		}
+	}
+	
+	/* The reactions of state D2. */
+	private void react_main_region_B_r2_D2() {
 	}
 	
 	/* Default react sequence for initial entry  */
