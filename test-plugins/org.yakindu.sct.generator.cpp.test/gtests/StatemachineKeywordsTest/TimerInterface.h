@@ -17,7 +17,7 @@ class TimerInterface
 	
 		/*! Starts the timing for a time event.
 		 */ 
-		virtual void setTimer(TimedStatemachineInterface* statemachine, sc_eventid event, sc_integer time, sc_boolean isPeriodic) = 0;
+		virtual void setTimer(TimedStatemachineInterface* statemachine, sc_eventid event, sc_integer time_ms, sc_boolean isPeriodic) = 0;
 		
 		/*! Unsets the given time event.
 		 */

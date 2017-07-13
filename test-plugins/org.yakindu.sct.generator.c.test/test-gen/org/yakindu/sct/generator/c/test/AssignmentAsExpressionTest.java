@@ -24,11 +24,12 @@ public class AssignmentAsExpressionTest {
 
 	protected final GTestHelper helper = new GTestHelper(this) {
 
-	@Override
-	protected void getSourceFiles(Collection<String> files) {
-		super.getSourceFiles(files);
-	files.add(getFileName(getTestProgram()) + ".c");
-	}
+		@Override
+		protected void getSourceFiles(Collection<String> files) {
+			super.getSourceFiles(files);
+			
+			files.add(getTestProgram() + ".c");
+		}
 	};
 
 	@Before

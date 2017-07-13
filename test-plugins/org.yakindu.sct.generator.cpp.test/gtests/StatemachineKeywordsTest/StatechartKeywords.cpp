@@ -133,7 +133,7 @@ sc_boolean StatechartKeywords::isStateActive(StatechartKeywordsStates state) con
 	switch (state)
 	{
 		case main_region_Timer : 
-			return (sc_boolean) (stateConfVector[0] == main_region_Timer
+			return (sc_boolean) (stateConfVector[SCVI_MAIN_REGION_TIMER] == main_region_Timer
 			);
 		default: return false;
 	}

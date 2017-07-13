@@ -124,10 +124,10 @@ sc_boolean TimedTransitions::isStateActive(TimedTransitionsStates state) const
 	switch (state)
 	{
 		case main_region_Start : 
-			return (sc_boolean) (stateConfVector[0] == main_region_Start
+			return (sc_boolean) (stateConfVector[SCVI_MAIN_REGION_START] == main_region_Start
 			);
 		case main_region_End : 
-			return (sc_boolean) (stateConfVector[0] == main_region_End
+			return (sc_boolean) (stateConfVector[SCVI_MAIN_REGION_END] == main_region_End
 			);
 		default: return false;
 	}
