@@ -9,6 +9,9 @@
 /*! \file Header of the state machine 'StatechartKeywords'.
 */
 
+/*! Define indices of states in the StateConfVector */
+#define SCVI_MAIN_REGION_TIMER 0
+
 class StatechartKeywords : public TimedStatemachineInterface, public StatemachineInterface
 {
 	
@@ -21,8 +24,8 @@ class StatechartKeywords : public TimedStatemachineInterface, public Statemachin
 		/*! Enumeration of all states */ 
 		typedef enum
 		{
-			main_region_Timer,
-			StatechartKeywords_last_state
+			StatechartKeywords_last_state,
+			main_region_Timer
 		} StatechartKeywordsStates;
 		
 		//! Inner class for if interface scope.

@@ -26,7 +26,7 @@ protected final GTestHelper helper = new GMockHelper(this) {
 		@Override
 		protected void getSourceFiles(Collection<String> files) {
 	super.getSourceFiles(files);
-		files.add(getFileName(getTestProgram()) + ".cpp");
+		files.add(getTestProgram() + ".cpp");
 		}
 	};
 

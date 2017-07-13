@@ -75,7 +75,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	TriggerGuardExpressionsTest.class,
 	TriggerExpressionPrecedenceTest.class,
 	ValuedEventsTest.class,
-	TypeAliasTest.class
+	TypeAliasTest.class,
+	StatemachineKeywords.class,
+	TimedTransitionsTest.class
 })
 public class AllTests {
 }

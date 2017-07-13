@@ -22,10 +22,12 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 @RunWith(GTestRunner.class)
 public class TimedTransitionsTest {
 protected final GTestHelper helper = new GTestHelper(this) {
-		@Override
-		protected void getSourceFiles(Collection<String> files) {
-	super.getSourceFiles(files);
-		files.add(getFileName(getTestProgram()) + ".cpp");
+	@Override
+	protected void getSourceFiles(Collection<String> files) {
+		super.getSourceFiles(files);
+		files.add(getTestProgram() + ".cpp");
+		files.add(getTargetPath().toOSString() + "/sc_timer_service.cpp");
+		files.add(getTargetPath().toOSString() + "/sc_timer_service.h");
 		}
 	};
 

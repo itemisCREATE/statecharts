@@ -11,17 +11,29 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "StatechartKeywords.h"
+#include "sc_timer_service.h"
 #include "sc_types.h"
 static StatechartKeywords* statechart;
+
+//! The timers are managed by a timer service. */
+static SctUnitTimerService * timer_service;
 
 class StatemachineTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
 		statechart = new StatechartKeywords();
 		statechart->init();
+		timer_service = new SctUnitTimerService(
+			statechart,
+			false,
+			200
+		);
+		
+		statechart->setTimer(timer_service);
 	}
 	virtual void TearDown() {
 		delete statechart;
+		delete timer_service;
 	}
 };
 
