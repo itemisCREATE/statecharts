@@ -27,7 +27,7 @@ testclass EntryExitSelfTransition for statechart EntryExitSelfTransition{
 		exit
 	} 
 	
-	operation init(){
+	operation init() : void {
 		enter
 		proceed 1 cycle
 		

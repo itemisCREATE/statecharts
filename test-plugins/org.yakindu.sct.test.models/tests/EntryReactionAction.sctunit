@@ -47,7 +47,7 @@ testclass EntryReactionAction for statechart entries.EntryReactionAction {
 		assert ! enteredBother		
 	}
 
-	operation init(){
+	operation init() :void {
 		enter
 		
 		raise b 
