@@ -200,7 +200,9 @@
 
             <!-- Add CSS classes "eclipsehelp" and "body-container" to BODY element and
                  nest a DIV child with CSS class "primary" into the BODY element. -->
-            <replaceregexp byline="true" match='&lt;body&gt;' replace='&lt;body class="eclipsehelp body-container"&gt;&lt;div class="primary"&gt;'>
+            <replaceregexp byline="true"
+                           match='&lt;body&gt;'
+                           replace='&lt;body class="eclipsehelp body-container"&gt;&lt;div class="primary"&gt;'>
                 <fileset dir="${help.dir}">
                     <include name="**/*.html" />
                 </fileset>
@@ -212,10 +214,7 @@
             </replaceregexp>
 
             <!-- Fix DIV elements -->
-            <replaceregexp byline="false"
-                           flags="g"
-                           match='&lt;p&gt;&lt;div(.*)&gt;&lt;/p&gt;'
-                           replace='&lt;div\1&gt;'>
+            <replaceregexp byline="false" flags="g" match='&lt;p&gt;&lt;div(.*)&gt;&lt;/p&gt;' replace='&lt;div\1&gt;'>
                 <fileset dir="${help.dir}">
                     <include name="**/*.html" />
                 </fileset>
@@ -324,7 +323,7 @@
                         <file name="user-guide/generating_code.textile" />
                         <file name="user-guide/generating_code_headless.textile" />
                         <file name="user-guide/sctunit.textile" />
-                        <file name="user-guide/sctunit.textile" />
+                        <file name="user-guide/glossary.textile" />
                     </filelist>
                 </textile-files>
                 <image-files>
