@@ -260,7 +260,11 @@ p(#sctunit_fig_test_class_grammar).
 
 p=. Test class grammar
 
-Test classes are namespace-aware: Using the "_package_ statement":#sctunit_the_package_statement, you can insert a test class into a specific "namespace":#sctunit_namespaces. You can "import":#sctunit_the_import_statement test classes from the same or from different namespaces into a test class.
+Test classes are namespace-aware: Using the "_package_ statement":#sctunit_the_package_statement, you can insert a test class into a specific "namespace":#sctunit_namespaces.
+
+###. You can "import":#sctunit_the_import_statement test classes from the same or from different namespaces into a test class.
+
+###. CHECK: Is the "import" statement available now?
 
 Test classes can be grouped into a "test suite":#sctunit_test_suites.
 
@@ -314,12 +318,15 @@ An operation can define its own variables. Aside from these
 it also has access to
 * variables and operations defined on the test class level,
 * variables, operations, events, and states defined in an interface of the statechart controlled by the operation's test class,
-* entities imported by the statechart controlled by the operation's test class,
-* entities imported by the operation's test class.
+* entities imported by the statechart controlled by the operation's test class.
+###. CHECK IMPORT: * entities imported by the operation's test class.
+###. CHECK IMPORT: Fix commas and full stop in the list above when "import" becomes available.
 
-An operation can call other operations. This is like subroutine calls in other programming languages. Called operations can be …
-* located in the same test class,
-* located in "imported":#sctunit_the_import_statement test classes that pertain to the same statechart.
+An operation can call other operations. This is like subroutine calls in other programming languages.
+
+###. CHECK IMPORT: An operation can call other operations. This is like subroutine calls in other programming languages. Called operations can be …
+###. CHECK IMPORT: * located in the same test class,
+###. CHECK IMPORT: * located in "imported":#sctunit_the_import_statement test classes that pertain to the same statechart.
 
 Operations that are declared in the statechart _cannot_ be executed during a test. If you need them to be called you can "mock":#sctunit_mocking_an_operation_call them.
 
@@ -877,13 +884,17 @@ p(#sctunit_fig_test_suite_grammar).
 
 p=. Test suite grammar
 
-Test suites are namespace-aware: Using the "_package_ statement":#sctunit_the_package_statement, you can insert a test suite into a specific "namespace":#sctunit_namespaces. You can "import":#sctunit_the_import_statement test suites and test classes from the same or from different namespaces into a test suite.
+Test suites are namespace-aware: Using the "_package_ statement":#sctunit_the_package_statement, you can insert a test suite into a specific "namespace":#sctunit_namespaces.
+
+###. CHECK IMPORT: You can "import":#sctunit_the_import_statement test suites and test classes from the same or from different namespaces into a test suite.
 
 ==<!-- End sctunit_keyword_testsuite -->==
 
 h3(#sctunit_namespaces). Namespaces
 
-You can organise your "test classes":#sctunit_test_classes and "test suites":#sctunit_test_suites in different namespaces. Each test class or test suite can assign itself to a namespace by the "_package_":#sctunit_the_package_statement statement. It can import test classes and test suites from other namespaces by the "_import_":#sctunit_the_import_statement statement.
+You can organise your "test classes":#sctunit_test_classes and "test suites":#sctunit_test_suites in different namespaces. Each test class or test suite can assign itself to a namespace by the "_package_":#sctunit_the_package_statement statement.
+
+###. CHECK IMPORT: It can import test classes and test suites from other namespaces by the "_import_":#sctunit_the_import_statement statement.
 
 
 
@@ -898,13 +909,21 @@ Use the _package_ statement to determine a namespace for the test class or test 
 
 Example:
 
-bc.. package foo.light_switch.test
+###.. CHECK IMPORT: bc.. package foo.light_switch.test
 import bar.helper.steamgen
 import bar.util.*
 
 testclass light_switch_tests for statechart light_switch {
 …
+}
 
+###.. CHECK IMPORT: Remove the bc.. block below when "import" is available.
+
+bc.. package foo.light_switch.test
+
+testclass light_switch_tests for statechart light_switch {
+…
+}
 p. The _package_ statement puts the _light_switch_tests_ test class into the _foo.light_switch.test_ namespace.
 
 ==</div>==
@@ -917,33 +936,33 @@ Please see section "&quot;Test units&quot;":#sctunit_test_units for a summary of
 
 
 
-==<!-- Start sctunit_keyword_import -->==
-
-h4(#sctunit_the_import_statement). The _import_ statement
-
-Use the _import_ statement to make test classes and test suites from other namespaces available in the test class or test suite at hand.
-
-==<div class="example">==
-
-The example given in section "&quot;The _package_ statement&quot;":#sctunit_the_package_statement uses two _import_ statements:
-
-bc. import bar.helper.steamgen
-
-Imports the _steamgen_ test class or test suite from the _bar.helper_ package.
-
-==</div>==
-
-==<div class="example">==
-
-bc. import bar.util.*
-
-Imports all test classes and test suites from the _bar.util_ package.
-
-==</div>==
-
-Please see section "&quot;Test units&quot;":#sctunit_test_units for a summary of the _import_ statement's and related statements' grammar.
-
-==<!-- End sctunit_keyword_import -->==
+###. CHECK IMPORT: ==<!-- Start sctunit_keyword_import -->==
+###. CHECK IMPORT: 
+###. CHECK IMPORT: h4(#sctunit_the_import_statement). The _import_ statement
+###. CHECK IMPORT: 
+###. CHECK IMPORT: Use the _import_ statement to make test classes and test suites from other namespaces available in the test class or test suite at hand.
+###. CHECK IMPORT: 
+###. CHECK IMPORT: ==<div class="example">==
+###. CHECK IMPORT: 
+###. CHECK IMPORT: The example given in section "&quot;The _package_ statement&quot;":#sctunit_the_package_statement uses two _import_ statements:
+###. CHECK IMPORT: 
+###. CHECK IMPORT: bc. import bar.helper.steamgen
+###. CHECK IMPORT: 
+###. CHECK IMPORT: Imports the _steamgen_ test class or test suite from the _bar.helper_ package.
+###. CHECK IMPORT: 
+###. CHECK IMPORT: ==</div>==
+###. CHECK IMPORT: 
+###. CHECK IMPORT: ==<div class="example">==
+###. CHECK IMPORT: 
+###. CHECK IMPORT: bc. import bar.util.*
+###. CHECK IMPORT: 
+###. CHECK IMPORT: Imports all test classes and test suites from the _bar.util_ package.
+###. CHECK IMPORT: 
+###. CHECK IMPORT: ==</div>==
+###. CHECK IMPORT: 
+###. CHECK IMPORT: Please see section "&quot;Test units&quot;":#sctunit_test_units for a summary of the _import_ statement's and related statements' grammar.
+###. CHECK IMPORT: 
+###. CHECK IMPORT: ==<!-- End sctunit_keyword_import -->==
 
 
 
@@ -951,12 +970,12 @@ h4(#sctunit_test_units). Test units
 
 A _test unit_ is either a "test class":#sctunit_test_classes or a "test suite":#sctunit_test_suites. It is contained in a file with a _.sctunit_ filename extension.
 
-Figure "&quot;test_unit_grammar&quot;":#sctunit_fig_test_unit_grammar summarizes the structure of a test unit:
+###. CHECK IMPORT: Figure "&quot;test_unit_grammar&quot;":#sctunit_fig_test_unit_grammar summarizes the structure of a test unit:
 
-p(#sctunit_fig_test_unit_grammar). 
+###. CHECK IMPORT: p(#sctunit_fig_test_unit_grammar). 
 
-!images/sctunit_grammar_030_test_unit.png(Test unit grammar)!
+###. CHECK IMPORT: !images/sctunit_grammar_030_test_unit.png(Test unit grammar)!
 
-p=. Test unit grammar
+###. CHECK IMPORT: p=. Test unit grammar %{display: block; font-size: 50%; padding-left: 20%; padding-right: 20%;}*Please note:* The _PackageImport_ non-terminal symbol will be available in future versions of YAKINDU Statechart Tools.%
 
 ==</div>==
