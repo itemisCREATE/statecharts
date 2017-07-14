@@ -296,7 +296,7 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 	
 	/* Entry action for statechart 'WrapperTest'. */
 	private void entryAction() {
-		timer.setTimer(this, 1, 1*1000, true);
+		timer.setTimer(this, 1, 1 * 1000, true);
 	}
 	
 	/* Entry action for state 's1'. */

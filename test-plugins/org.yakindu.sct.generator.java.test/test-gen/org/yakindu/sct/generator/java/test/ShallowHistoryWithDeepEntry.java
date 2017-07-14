@@ -24,14 +24,16 @@ public class ShallowHistoryWithDeepEntry {
 	
 	private ShallowHistoryWithDeepEntryStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void shallowHistoryWithDeepEntry_setUp() {
 		statemachine = new ShallowHistoryWithDeepEntryStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void shallowHistoryWithDeepEntry_tearDown() {
 		statemachine = null;
 	}
 	

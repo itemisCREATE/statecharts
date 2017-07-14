@@ -1,0 +1,197 @@
+testclass ParentFirstOrthogonalReactions for statechart executionorder.ParentFirstOrthogonalReactions{
+	
+	var counter : integer = 0
+	const checkFail : integer = -1
+	
+	operation setUp() {
+		counter = 0
+	}
+	
+	
+	@Test operation executionOrder() {
+	
+		setUp
+			
+		mock check("A") returns ( (a_check = (counter+=1)) == checkFail )
+		mock check("AA") returns ( (aa_check = (counter+=1)) == checkFail )
+		mock check("AAA") returns ( (aaa_check = (counter+=1)) == checkFail )
+		mock check("AAC") returns ( (aac_check = (counter+=1)) == checkFail )
+		mock check("AC") returns ( (ac_check = (counter+=1)) == checkFail )
+		mock check("C") returns ( (c_check = (counter+=1)) == checkFail )
+		mock next() returns (counter+=1)
+		
+		enter
+		proceed 1 cycle
+		
+		assert sm_local == 1
+
+		assert a_check == 2
+		assert a_local == 3
+
+		assert aa_check == 4
+		assert aa_local == 5
+		
+		assert aaa_check == 6
+		assert aaa_local == 7
+
+		assert aac_check == 8
+		assert aac_local == 9
+
+		assert ac_check == 10
+		assert ac_local == 11
+
+		assert c_check == 12
+		assert c_local == 13
+		
+	}
+
+
+	@Test operation executionOrderWIthFirstLeafTransition() {
+		
+		setUp
+		
+		mock check("A") returns ( (a_check = (counter+=1)) == checkFail )
+		mock check("AA") returns ( (aa_check = (counter+=1)) == checkFail )
+		mock check("AAA") returns ( (aaa_check = (counter+=1)) == aaa_check)
+		mock check("AAC") returns ( (aac_check = (counter+=1)) == checkFail )
+		mock check("AC") returns ( (ac_check = (counter+=1)) == checkFail )
+		mock check("C") returns ( (c_check = (counter+=1)) == checkFail )
+		mock next() returns (counter+=1)
+		
+		enter
+		proceed 1 cycle
+		
+		assert sm_local == 1
+
+		assert a_check == 2
+		assert a_local == 3
+
+		assert aa_check == 4
+		assert aa_local == 5
+		
+		assert aaa_check == 6
+		assert aaa_local == 0
+
+		assert aac_check == 0
+		assert aac_local == 0
+
+		assert ac_check == 0
+		assert ac_local == 0
+
+		assert c_check == 7
+		assert c_local == 8
+	}
+
+
+	@Test operation executionOrderWIthFirstParentTransition() {
+		
+		setUp
+		
+		mock check("A") returns ( (a_check = (counter+=1)) == checkFail )
+		mock check("AA") returns ( (aa_check = (counter+=1)) == aa_check )
+		mock check("AAA") returns ( (aaa_check = (counter+=1)) == checkFail)
+		mock check("AAC") returns ( (aac_check = (counter+=1)) == checkFail )
+		mock check("AC") returns ( (ac_check = (counter+=1)) == checkFail )
+		mock check("C") returns ( (c_check = (counter+=1)) == checkFail )
+		mock next() returns (counter+=1)
+		
+		enter
+		proceed 1 cycle
+		
+		assert sm_local == 1
+
+		assert a_check == 2
+		assert a_local == 3
+
+		assert aa_check == 4
+		assert aa_local == 0
+		
+		assert aaa_check == 0
+		assert aaa_local == 0
+
+		assert aac_check == 0
+		assert aac_local == 0
+
+		assert ac_check == 0
+		assert ac_local == 0
+
+		assert c_check == 5
+		assert c_local == 6
+	}
+
+
+	@Test operation executionOrderWIthFirstGrandParentTransition() {
+		
+		setUp
+		
+		mock check("A") returns ( (a_check = (counter+=1)) == a_check )
+		mock check("AA") returns ( (aa_check = (counter+=1)) == checkFail )
+		mock check("AAA") returns ( (aaa_check = (counter+=1)) == checkFail)
+		mock check("AAC") returns ( (aac_check = (counter+=1)) == checkFail )
+		mock check("AC") returns ( (ac_check = (counter+=1)) == checkFail )
+		mock check("C") returns ( (c_check = (counter+=1)) == checkFail )
+		mock next() returns (counter+=1)
+		
+		enter
+		proceed 1 cycle
+		
+		assert sm_local == 1
+
+		assert a_check == 2
+		assert a_local == 0
+
+		assert aa_check == 0
+		assert aa_local == 0
+		
+		assert aaa_check == 0
+		assert aaa_local == 0
+
+		assert aac_check == 0
+		assert aac_local == 0
+
+		assert ac_check == 0
+		assert ac_local == 0
+
+		assert c_check == 3
+		assert c_local == 4
+	}
+
+
+	@Test operation executionOrderWithLastLeafTransition() {
+		
+		setUp
+		
+		mock check("A") returns ( (a_check = (counter+=1)) == checkFail )
+		mock check("AA") returns ( (aa_check = (counter+=1)) == checkFail )
+		mock check("AAA") returns ( (aaa_check = (counter+=1)) == checkFail)
+		mock check("AAC") returns ( (aac_check = (counter+=1)) == checkFail )
+		mock check("AC") returns ( (ac_check = (counter+=1)) == checkFail )
+		mock check("C") returns ( (c_check = (counter+=1)) == c_check )
+		mock next() returns (counter+=1)
+		
+		enter
+		proceed 1 cycle
+		
+		assert sm_local == 1
+
+		assert a_check == 2
+		assert a_local == 3
+
+		assert aa_check == 4
+		assert aa_local == 5
+		
+		assert aaa_check == 6
+		assert aaa_local == 7
+
+		assert aac_check == 8
+		assert aac_local == 9
+
+		assert ac_check == 10
+		assert ac_local == 11
+
+		assert c_check == 12
+		assert c_local == 0
+	}
+
+
+}

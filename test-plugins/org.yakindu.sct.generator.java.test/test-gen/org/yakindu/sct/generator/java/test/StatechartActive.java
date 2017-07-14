@@ -24,14 +24,16 @@ public class StatechartActive {
 	
 	private StatechartActiveStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void statechartActive_setUp() {
 		statemachine = new StatechartActiveStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void statechartActive_tearDown() {
 		statemachine = null;
 	}
 	

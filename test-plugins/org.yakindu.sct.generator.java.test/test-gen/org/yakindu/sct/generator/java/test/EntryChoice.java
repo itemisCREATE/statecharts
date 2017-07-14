@@ -24,14 +24,16 @@ public class EntryChoice {
 	
 	private EntryChoiceStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void entryChoice_setUp() {
 		statemachine = new EntryChoiceStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void entryChoice_tearDown() {
 		statemachine = null;
 	}
 	

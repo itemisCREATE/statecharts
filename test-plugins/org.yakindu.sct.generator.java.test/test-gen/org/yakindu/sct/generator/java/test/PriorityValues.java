@@ -24,14 +24,16 @@ public class PriorityValues {
 	
 	private PriorityValuesStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void priorityValues_setUp() {
 		statemachine = new PriorityValuesStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void priorityValues_tearDown() {
 		statemachine = null;
 	}
 	

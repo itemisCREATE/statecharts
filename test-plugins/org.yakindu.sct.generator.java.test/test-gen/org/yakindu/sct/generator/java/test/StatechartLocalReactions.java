@@ -24,14 +24,16 @@ public class StatechartLocalReactions {
 	
 	private StatechartLocalReactionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void statechartLocalReactions_setUp() {
 		statemachine = new StatechartLocalReactionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void statechartLocalReactions_tearDown() {
 		statemachine = null;
 	}
 	

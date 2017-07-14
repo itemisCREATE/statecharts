@@ -56,6 +56,7 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getReactSequence <em>React Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getLocalReactSequence <em>Local React Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getStates <em>States</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getRegions <em>Regions</em>}</li>
@@ -197,6 +198,16 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected Sequence reactSequence;
+
+	/**
+	 * The cached value of the '{@link #getLocalReactSequence() <em>Local React Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocalReactSequence()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sequence localReactSequence;
 
 	/**
 	 * The cached value of the '{@link #getStates() <em>States</em>}' containment reference list.
@@ -848,6 +859,49 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Sequence getLocalReactSequence() {
+		return localReactSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLocalReactSequence(Sequence newLocalReactSequence, NotificationChain msgs) {
+		Sequence oldLocalReactSequence = localReactSequence;
+		localReactSequence = newLocalReactSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__LOCAL_REACT_SEQUENCE, oldLocalReactSequence, newLocalReactSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocalReactSequence(Sequence newLocalReactSequence) {
+		if (newLocalReactSequence != localReactSequence) {
+			NotificationChain msgs = null;
+			if (localReactSequence != null)
+				msgs = ((InternalEObject)localReactSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__LOCAL_REACT_SEQUENCE, null, msgs);
+			if (newLocalReactSequence != null)
+				msgs = ((InternalEObject)newLocalReactSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__LOCAL_REACT_SEQUENCE, null, msgs);
+			msgs = basicSetLocalReactSequence(newLocalReactSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__LOCAL_REACT_SEQUENCE, newLocalReactSequence, newLocalReactSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -886,6 +940,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return ((InternalEList<?>)getReactions()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
 				return basicSetReactSequence(null, msgs);
+			case SexecPackage.EXECUTION_FLOW__LOCAL_REACT_SEQUENCE:
+				return basicSetLocalReactSequence(null, msgs);
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				return ((InternalEList<?>)getStates()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__NODES:
@@ -936,6 +992,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getSimpleName();
 			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
 				return getReactSequence();
+			case SexecPackage.EXECUTION_FLOW__LOCAL_REACT_SEQUENCE:
+				return getLocalReactSequence();
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				return getStates();
 			case SexecPackage.EXECUTION_FLOW__NODES:
@@ -998,6 +1056,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return;
 			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
 				setReactSequence((Sequence)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__LOCAL_REACT_SEQUENCE:
+				setLocalReactSequence((Sequence)newValue);
 				return;
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				getStates().clear();
@@ -1068,6 +1129,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
 				setReactSequence((Sequence)null);
 				return;
+			case SexecPackage.EXECUTION_FLOW__LOCAL_REACT_SEQUENCE:
+				setLocalReactSequence((Sequence)null);
+				return;
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				getStates().clear();
 				return;
@@ -1123,6 +1187,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return SIMPLE_NAME_EDEFAULT == null ? simpleName != null : !SIMPLE_NAME_EDEFAULT.equals(simpleName);
 			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
 				return reactSequence != null;
+			case SexecPackage.EXECUTION_FLOW__LOCAL_REACT_SEQUENCE:
+				return localReactSequence != null;
 			case SexecPackage.EXECUTION_FLOW__STATES:
 				return states != null && !states.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__NODES:
@@ -1176,6 +1242,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				case SexecPackage.EXECUTION_FLOW__REACTIONS: return SexecPackage.EXECUTION_NODE__REACTIONS;
 				case SexecPackage.EXECUTION_FLOW__SIMPLE_NAME: return SexecPackage.EXECUTION_NODE__SIMPLE_NAME;
 				case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE: return SexecPackage.EXECUTION_NODE__REACT_SEQUENCE;
+				case SexecPackage.EXECUTION_FLOW__LOCAL_REACT_SEQUENCE: return SexecPackage.EXECUTION_NODE__LOCAL_REACT_SEQUENCE;
 				default: return -1;
 			}
 		}
@@ -1217,6 +1284,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				case SexecPackage.EXECUTION_NODE__REACTIONS: return SexecPackage.EXECUTION_FLOW__REACTIONS;
 				case SexecPackage.EXECUTION_NODE__SIMPLE_NAME: return SexecPackage.EXECUTION_FLOW__SIMPLE_NAME;
 				case SexecPackage.EXECUTION_NODE__REACT_SEQUENCE: return SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE;
+				case SexecPackage.EXECUTION_NODE__LOCAL_REACT_SEQUENCE: return SexecPackage.EXECUTION_FLOW__LOCAL_REACT_SEQUENCE;
 				default: return -1;
 			}
 		}

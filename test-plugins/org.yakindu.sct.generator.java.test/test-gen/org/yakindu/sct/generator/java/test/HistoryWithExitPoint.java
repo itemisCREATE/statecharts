@@ -24,14 +24,16 @@ public class HistoryWithExitPoint {
 	
 	private HistoryWithExitPointStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void historyWithExitPoint_setUp() {
 		statemachine = new HistoryWithExitPointStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void historyWithExitPoint_tearDown() {
 		statemachine = null;
 	}
 	

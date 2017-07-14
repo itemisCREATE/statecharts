@@ -169,12 +169,12 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 	
 	/* Entry action for statechart 'TimedTransitions'. */
 	private void entryAction() {
-		timer.setTimer(this, 1, 1*1000, true);
+		timer.setTimer(this, 1, 1 * 1000, true);
 	}
 	
 	/* Entry action for state 'Start'. */
 	private void entryAction_main_region_Start() {
-		timer.setTimer(this, 0, 2*1000, false);
+		timer.setTimer(this, 0, 2 * 1000, false);
 	}
 	
 	/* Exit action for state 'TimedTransitions'. */

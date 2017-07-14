@@ -24,14 +24,16 @@ public class TriggerGuardExpressions {
 	
 	private TriggerGuardExpressionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void triggerGuardExpressions_setUp() {
 		statemachine = new TriggerGuardExpressionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void triggerGuardExpressions_tearDown() {
 		statemachine = null;
 	}
 	

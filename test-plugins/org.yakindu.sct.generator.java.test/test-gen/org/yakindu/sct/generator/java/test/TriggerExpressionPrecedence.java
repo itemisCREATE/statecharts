@@ -24,14 +24,16 @@ public class TriggerExpressionPrecedence {
 	
 	private TriggerExpressionPrecedenceStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void triggerExpressionPrecedence_setUp() {
 		statemachine = new TriggerExpressionPrecedenceStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void triggerExpressionPrecedence_tearDown() {
 		statemachine = null;
 	}
 	

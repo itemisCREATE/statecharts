@@ -24,14 +24,16 @@ public class GuardedEntry {
 	
 	private GuardedEntryStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void guardedEntry_setUp() {
 		statemachine = new GuardedEntryStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void guardedEntry_tearDown() {
 		statemachine = null;
 	}
 	

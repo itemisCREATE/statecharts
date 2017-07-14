@@ -24,14 +24,16 @@ public class ValuedEvents {
 	
 	private ValuedEventsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void valuedEvents_setUp() {
 		statemachine = new ValuedEventsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void valuedEvents_tearDown() {
 		statemachine = null;
 	}
 	

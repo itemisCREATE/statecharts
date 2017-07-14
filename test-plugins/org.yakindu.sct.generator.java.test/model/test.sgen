@@ -78,6 +78,39 @@ GeneratorModel for sctunit::java {
 		}
 	}
 
+//	test ChildFirstExecutionHierarchy {
+//		feature Naming {
+//			basePackage = "org.yakindu.sct.generator.java.test"
+//		}
+//
+//		feature Outlet {
+//			targetProject = "org.yakindu.sct.generator.java.test"
+//			targetFolder = "test-gen"
+//		}
+//	}
+//
+//	test ChildFirstLocalReactions {
+//		feature Naming {
+//			basePackage = "org.yakindu.sct.generator.java.test"
+//		}
+//
+//		feature Outlet {
+//			targetProject = "org.yakindu.sct.generator.java.test"
+//			targetFolder = "test-gen"
+//		}
+//	}
+//
+//	test ChildFirstOrthogonalReactions {
+//		feature Naming {
+//			basePackage = "org.yakindu.sct.generator.java.test"
+//		}
+//
+//		feature Outlet {
+//			targetProject = "org.yakindu.sct.generator.java.test"
+//			targetFolder = "test-gen"
+//		}
+//	}
+
 	test CKeywords {
 		feature Naming {
 			basePackage = "org.yakindu.sct.generator.java.test"
@@ -430,7 +463,7 @@ GeneratorModel for sctunit::java {
 		}
 	}
 
-	test Operations {
+	test OperationsTest {
 		feature Naming {
 			basePackage = "org.yakindu.sct.generator.java.test"
 		}
@@ -462,6 +495,44 @@ GeneratorModel for sctunit::java {
 			targetFolder = "test-gen"
 		}
 	}
+
+//	test ParentFirstExecutionHierarchy {
+//		feature Naming {
+//			basePackage = "org.yakindu.sct.generator.java.test"
+//		}
+//
+//		feature Outlet {
+//			targetProject = "org.yakindu.sct.generator.java.test"
+//			targetFolder = "test-gen"
+//		}
+//	}
+//
+//
+//	test ParentFirstLocalReactions {
+//		feature Naming {
+//			basePackage = "org.yakindu.sct.generator.java.test"
+//		}
+//
+//		feature Outlet {
+//			targetProject = "org.yakindu.sct.generator.java.test"
+//			targetFolder = "test-gen"
+//		}
+//	}
+//
+//
+//	test ParentFirstOrthogonalReactions {
+//		feature Naming {
+//			basePackage = "org.yakindu.sct.generator.java.test"
+//		}
+//
+//		feature Outlet {
+//			targetProject = "org.yakindu.sct.generator.java.test"
+//			targetFolder = "test-gen"
+//		}
+//	}
+//
+
+
 
 	test Parenthesis {
 		feature Naming {

@@ -26,8 +26,10 @@ public class StatemachineKeywords {
 	private StatechartKeywordsStatemachine statemachine;	
 	private VirtualTimer timer;
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void statemachineKeywords_setUp() {
 		statemachine = new StatechartKeywordsStatemachine();
 		timer = new VirtualTimer();
 		statemachine.setTimer(timer);
@@ -35,8 +37,9 @@ public class StatemachineKeywords {
 	}
 
 	@After
-	public void tearDown() {
+	public void statemachineKeywords_tearDown() {
 		statemachine = null;
+		timer = null;
 	}
 	
 	@Test

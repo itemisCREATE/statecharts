@@ -24,14 +24,16 @@ public class SyncJoin {
 	
 	private SyncJoinStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void syncJoin_setUp() {
 		statemachine = new SyncJoinStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void syncJoin_tearDown() {
 		statemachine = null;
 	}
 	

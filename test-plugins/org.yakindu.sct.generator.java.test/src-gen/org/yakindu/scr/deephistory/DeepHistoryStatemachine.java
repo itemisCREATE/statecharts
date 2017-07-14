@@ -636,7 +636,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	private void react_mainRegion_State2__region0_State5() {
 		if (check_mainRegion_State2_tr0_tr0()) {
 			effect_mainRegion_State2_tr0();
-		} else {
 		}
 	}
 	

@@ -403,7 +403,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		} else {
 			if (check_main_region_B_r1_E_tr0_tr0()) {
 				effect_main_region_B_r1_E_tr0();
-			} else {
 			}
 		}
 	}

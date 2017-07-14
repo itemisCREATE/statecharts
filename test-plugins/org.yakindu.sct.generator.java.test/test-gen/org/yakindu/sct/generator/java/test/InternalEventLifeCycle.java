@@ -24,14 +24,16 @@ public class InternalEventLifeCycle {
 	
 	private InternalEventLifeCycleStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void internalEventLifeCycle_setUp() {
 		statemachine = new InternalEventLifeCycleStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void internalEventLifeCycle_tearDown() {
 		statemachine = null;
 	}
 	

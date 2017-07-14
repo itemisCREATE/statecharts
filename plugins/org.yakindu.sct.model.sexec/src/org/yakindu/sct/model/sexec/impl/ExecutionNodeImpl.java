@@ -39,6 +39,7 @@ import org.yakindu.sct.model.sexec.SexecPackage;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getReactSequence <em>React Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl#getLocalReactSequence <em>Local React Sequence</em>}</li>
  * </ul>
  *
  * @generated
@@ -103,6 +104,16 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * @ordered
 	 */
 	protected Sequence reactSequence;
+
+	/**
+	 * The cached value of the '{@link #getLocalReactSequence() <em>Local React Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocalReactSequence()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sequence localReactSequence;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -225,6 +236,49 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Sequence getLocalReactSequence() {
+		return localReactSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLocalReactSequence(Sequence newLocalReactSequence, NotificationChain msgs) {
+		Sequence oldLocalReactSequence = localReactSequence;
+		localReactSequence = newLocalReactSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_NODE__LOCAL_REACT_SEQUENCE, oldLocalReactSequence, newLocalReactSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocalReactSequence(Sequence newLocalReactSequence) {
+		if (newLocalReactSequence != localReactSequence) {
+			NotificationChain msgs = null;
+			if (localReactSequence != null)
+				msgs = ((InternalEObject)localReactSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_NODE__LOCAL_REACT_SEQUENCE, null, msgs);
+			if (newLocalReactSequence != null)
+				msgs = ((InternalEObject)newLocalReactSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_NODE__LOCAL_REACT_SEQUENCE, null, msgs);
+			msgs = basicSetLocalReactSequence(newLocalReactSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_NODE__LOCAL_REACT_SEQUENCE, newLocalReactSequence, newLocalReactSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -232,6 +286,8 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return ((InternalEList<?>)getReactions()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_NODE__REACT_SEQUENCE:
 				return basicSetReactSequence(null, msgs);
+			case SexecPackage.EXECUTION_NODE__LOCAL_REACT_SEQUENCE:
+				return basicSetLocalReactSequence(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -252,6 +308,8 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return getSimpleName();
 			case SexecPackage.EXECUTION_NODE__REACT_SEQUENCE:
 				return getReactSequence();
+			case SexecPackage.EXECUTION_NODE__LOCAL_REACT_SEQUENCE:
+				return getLocalReactSequence();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -278,6 +336,9 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			case SexecPackage.EXECUTION_NODE__REACT_SEQUENCE:
 				setReactSequence((Sequence)newValue);
 				return;
+			case SexecPackage.EXECUTION_NODE__LOCAL_REACT_SEQUENCE:
+				setLocalReactSequence((Sequence)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -302,6 +363,9 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 			case SexecPackage.EXECUTION_NODE__REACT_SEQUENCE:
 				setReactSequence((Sequence)null);
 				return;
+			case SexecPackage.EXECUTION_NODE__LOCAL_REACT_SEQUENCE:
+				setLocalReactSequence((Sequence)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -322,6 +386,8 @@ public class ExecutionNodeImpl extends MappedElementImpl implements ExecutionNod
 				return SIMPLE_NAME_EDEFAULT == null ? simpleName != null : !SIMPLE_NAME_EDEFAULT.equals(simpleName);
 			case SexecPackage.EXECUTION_NODE__REACT_SEQUENCE:
 				return reactSequence != null;
+			case SexecPackage.EXECUTION_NODE__LOCAL_REACT_SEQUENCE:
+				return localReactSequence != null;
 		}
 		return super.eIsSet(featureID);
 	}

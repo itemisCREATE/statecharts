@@ -194,6 +194,7 @@ public class ExecutionFlowItemProvider
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACTIONS);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__LOCAL_REACT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__STATES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__NODES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__REGIONS);
@@ -265,6 +266,7 @@ public class ExecutionFlowItemProvider
 			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
+			case SexecPackage.EXECUTION_FLOW__LOCAL_REACT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__STATES:
 			case SexecPackage.EXECUTION_FLOW__NODES:
 			case SexecPackage.EXECUTION_FLOW__REGIONS:
@@ -317,6 +319,11 @@ public class ExecutionFlowItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE,
+				 SexecFactory.eINSTANCE.createSequence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_NODE__LOCAL_REACT_SEQUENCE,
 				 SexecFactory.eINSTANCE.createSequence()));
 
 		newChildDescriptors.add
@@ -593,6 +600,7 @@ public class ExecutionFlowItemProvider
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE ||
+			childFeature == SexecPackage.Literals.EXECUTION_NODE__LOCAL_REACT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATIC_INIT_SEQUENCE ||

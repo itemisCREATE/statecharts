@@ -24,14 +24,16 @@ public class ConstOnlyNamedScope {
 	
 	private ConstOnlyNamedScopeStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void constOnlyNamedScope_setUp() {
 		statemachine = new ConstOnlyNamedScopeStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void constOnlyNamedScope_tearDown() {
 		statemachine = null;
 	}
 	

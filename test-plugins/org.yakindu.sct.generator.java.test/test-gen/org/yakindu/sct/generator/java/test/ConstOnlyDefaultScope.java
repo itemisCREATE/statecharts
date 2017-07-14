@@ -24,14 +24,16 @@ public class ConstOnlyDefaultScope {
 	
 	private ConstOnlyDefaultScopeStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void constOnlyDefaultScope_setUp() {
 		statemachine = new ConstOnlyDefaultScopeStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void constOnlyDefaultScope_tearDown() {
 		statemachine = null;
 	}
 	

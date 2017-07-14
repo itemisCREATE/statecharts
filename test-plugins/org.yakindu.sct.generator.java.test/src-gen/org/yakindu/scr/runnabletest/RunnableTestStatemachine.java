@@ -342,12 +342,12 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 	
 	/* Entry action for statechart 'RunnableTest'. */
 	private void entryAction() {
-		timer.setTimer(this, 2, 1*1000, true);
+		timer.setTimer(this, 2, 1 * 1000, true);
 	}
 	
 	/* Entry action for state 'Composite_s1_s2'. */
 	private void entryAction_main_region_Composite_s1_s2() {
-		timer.setTimer(this, 0, 10*1000, false);
+		timer.setTimer(this, 0, 10 * 1000, false);
 	}
 	
 	/* Entry action for state 's1'. */

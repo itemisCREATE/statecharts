@@ -24,14 +24,16 @@ public class CastExpressions {
 	
 	private CastExpressionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void castExpressions_setUp() {
 		statemachine = new CastExpressionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void castExpressions_tearDown() {
 		statemachine = null;
 	}
 	

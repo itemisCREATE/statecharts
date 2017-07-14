@@ -534,15 +534,15 @@ public class IntegerExpressionsStatemachine implements IIntegerExpressionsStatem
 		
 		sCInterface.setNotEqual((sCInterface.myInt1!=sCInterface.myInt2));
 		
-		sCInterface.setPlus(sCInterface.myInt1+sCInterface.myInt2);
+		sCInterface.setPlus(sCInterface.myInt1 + sCInterface.myInt2);
 		
-		sCInterface.setMinus(sCInterface.myInt1-sCInterface.myInt2);
+		sCInterface.setMinus(sCInterface.myInt1 - sCInterface.myInt2);
 		
-		sCInterface.setMultiply(sCInterface.myInt1*sCInterface.myInt2);
+		sCInterface.setMultiply(sCInterface.myInt1 * sCInterface.myInt2);
 		
-		sCInterface.setDivision(sCInterface.myInt1/sCInterface.myInt2);
+		sCInterface.setDivision(sCInterface.myInt1 / sCInterface.myInt2);
 		
-		sCInterface.setModulo(sCInterface.myInt1%sCInterface.myInt2);
+		sCInterface.setModulo(sCInterface.myInt1 % sCInterface.myInt2);
 		
 		sCInterface.setNegat(-sCInterface.myInt1);
 		

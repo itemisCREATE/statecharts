@@ -52,7 +52,7 @@ class FlowOptimizer {
 		// first replace all 'if true' steps by then step.
 		flow.replaceTrueIfs
 		
-		// we don't need empty functions
+		// we don't need empty functions and blocks
 		flow.eliminateEmptySequences
 		
 		// perform inlining
@@ -90,9 +90,14 @@ class FlowOptimizer {
 	
 	/** Determines and removes all empty sequences that are not part of a parent step from the model */
 	def eliminateEmptySequences(ExecutionFlow flow) {
-		var allReactSequences = flow.states.map( state | state.reactSequence ) 
+
 		var emptySeqences = flow.eAllContents.filter(typeof(Sequence)).filter( s | s.empty ).toList
-		emptySeqences.removeAll(allReactSequences)
+
+
+		emptySeqences.removeAll(flow.states.map( state | state.reactSequence ))
+		emptySeqences.removeAll(flow.nodes.map( node | node.reactSequence ))
+		
+		eliminateEmptySequencesInCompositeSteps(flow.allSequences)
 		
 		emptySeqences.forEach( s | { 
 			val callList = s.caller.toList.clone 
@@ -103,6 +108,51 @@ class FlowOptimizer {
 		})
 	}
 	
+	
+	def eliminateEmptySequencesInCompositeSteps(List<Sequence> sequences) {
+		
+		var List<Sequence> garbage
+		var long count
+		
+		do {
+			
+			garbage = sequences.filter[ seq | seq.empty && (seq.isInSequence || seq.isElseStep)].toList
+			garbage.forEach[ seq | seq.eliminate]
+			count += garbage.size
+			
+		} while (! garbage.empty)	
+	}
+	
+	
+	def isElseStep(Step it) {
+		eContainer instanceof If && (eContainer as If).elseStep === it		
+	}
+	
+	def isInSequence(Step it) {
+		eContainer instanceof Sequence		
+	}
+	
+
+	
+	def allSequences(ExecutionFlow it) {
+		eAllContents.filter(typeof(Sequence)).toList
+	}
+	
+	
+	def eliminate(Step it) {
+		eContainer.eliminate(it)
+	}
+	
+	
+	def dispatch eliminate(Object parent, Step step) {}
+	
+	def dispatch eliminate(Sequence parent, Step step) {
+		if (parent.steps.contains(step)) parent.steps.remove(step);		
+	}
+	
+	def dispatch eliminate(If parent, Step step) {
+		if (parent.elseStep === step) parent.elseStep = null;		
+	}
 	
 	
 	def substituteBy(Step orig, Step substitute) {

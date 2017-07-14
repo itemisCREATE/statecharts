@@ -118,7 +118,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	}
 	
 	private boolean check_main_region_A_tr0_tr0() {
-		return (true) && ( !sCInterface.operationCallback.myBoolOp());
+		return (true) && (!sCInterface.operationCallback.myBoolOp());
 	}
 	
 	private boolean check_main_region_B_tr0_tr0() {
@@ -130,7 +130,7 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	}
 	
 	private boolean check_another_region_A_tr0_tr0() {
-		return (true) && ( !sCInterface.operationCallback.myBoolOp());
+		return (true) && (!sCInterface.operationCallback.myBoolOp());
 	}
 	
 	private boolean check_another_region_B_tr0_tr0() {

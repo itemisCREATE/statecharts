@@ -24,14 +24,16 @@ public class ExitState {
 	
 	private ExitStateStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void exitState_setUp() {
 		statemachine = new ExitStateStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void exitState_tearDown() {
 		statemachine = null;
 	}
 	

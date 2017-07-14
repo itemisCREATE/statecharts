@@ -24,14 +24,16 @@ public class HistoryWithoutInitialStep {
 	
 	private HistoryWithoutInitialStepStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void historyWithoutInitialStep_setUp() {
 		statemachine = new HistoryWithoutInitialStepStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void historyWithoutInitialStep_tearDown() {
 		statemachine = null;
 	}
 	

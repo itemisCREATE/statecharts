@@ -24,14 +24,16 @@ public class LocalReactions {
 	
 	private LocalReactionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void localReactions_setUp() {
 		statemachine = new LocalReactionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void localReactions_tearDown() {
 		statemachine = null;
 	}
 	

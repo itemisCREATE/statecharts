@@ -24,14 +24,16 @@ public class DeepEntry {
 	
 	private DeepEntryStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void deepEntry_setUp() {
 		statemachine = new DeepEntryStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void deepEntry_tearDown() {
 		statemachine = null;
 	}
 	

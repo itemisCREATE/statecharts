@@ -41,6 +41,7 @@ import static org.yakindu.sct.model.stext.test.util.StextTestFactory.createGuard
 
 import java.util.List;
 
+import org.eclipse.core.runtime.AssertionFailedException;
 import org.junit.Test;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;
@@ -664,10 +665,10 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertNotNull(s1.getReactSequence());
 
 		Step step = s1.getReactSequence().getSteps().get(0);
-		If _if = (If) assertedSequence(assertedSequence(step).getSteps().get(0)).getSteps().get(0);
+		If _if = (If) assertedSequence(assertedSequence(assertedSequence(step).getSteps().get(0)).getSteps().get(0)).getSteps().get(0);
 		assertNotNull(_if.getThenStep());
 		assertClass(Call.class, _if.getThenStep());
-		assertNull(_if.getElseStep());
+		assert(assertedSequence(assertedSequence(_if.getElseStep()).getSteps().get(0)).getSteps().isEmpty());
 
 		Call seq = (Call) _if.getThenStep();
 		assertEquals(s1.getReactions().get(0).getEffect(), seq.getStep());
@@ -748,34 +749,34 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertNotNull(s1.getReactSequence());
 
 		Step step = s1.getReactSequence().getSteps().get(0);
-		If _if = (If) assertedSequence(assertedSequence(step).getSteps().get(0)).getSteps().get(0);
+		If _if = (If) assertedSequence(assertedSequence(assertedSequence(step).getSteps().get(0)).getSteps().get(0)).getSteps().get(0);
 		assertNotNull(_if.getThenStep());
 		assertClass(Call.class, _if.getThenStep());
 		assertNotNull(_if.getElseStep());
 
-		Sequence _seq = (Sequence) _if.getElseStep();
+		Sequence _seq =  assertedSequence(assertedSequence(_if.getElseStep()).getSteps().get(0));
 		assertEquals(3, _seq.getSteps().size());
 
 		// check first local reaction
 		If _lr1 = (If) _seq.getSteps().get(0);
 		assertClass(ElementReferenceExpression.class, _lr1.getCheck().getCondition());
-		assertSame(s1.getReactions().get(1).getCheck().getCondition(), _lr1.getCheck().getCondition());
+		assertSame(s1.getReactions().get(0).getCheck().getCondition(), _lr1.getCheck().getCondition());
 		Call _lr1_eff_call = (Call) _lr1.getThenStep();
-		assertSame(s1.getReactions().get(1).getEffect(), _lr1_eff_call.getStep());
+		assertSame(s1.getReactions().get(0).getEffect(), _lr1_eff_call.getStep());
 
 		// check second local reaction
 		If _lr2 = (If) _seq.getSteps().get(1);
 		assertClass(LogicalAndExpression.class, _lr2.getCheck().getCondition());
-		assertSame(s1.getReactions().get(2).getCheck().getCondition(), _lr2.getCheck().getCondition());
+		assertSame(s1.getReactions().get(1).getCheck().getCondition(), _lr2.getCheck().getCondition());
 		Call _lr2_eff_call = (Call) _lr2.getThenStep();
-		assertSame(s1.getReactions().get(2).getEffect(), _lr2_eff_call.getStep());
+		assertSame(s1.getReactions().get(1).getEffect(), _lr2_eff_call.getStep());
 
 		// check the third local reaction
 		If _lr3 = (If) _seq.getSteps().get(2);
 		assertClass(LogicalRelationExpression.class, _lr3.getCheck().getCondition());
-		assertSame(s1.getReactions().get(3).getCheck().getCondition(), _lr3.getCheck().getCondition());
+		assertSame(s1.getReactions().get(2).getCheck().getCondition(), _lr3.getCheck().getCondition());
 		Call _lr3_eff_call = (Call) _lr3.getThenStep();
-		assertSame(s1.getReactions().get(3).getEffect(), _lr3_eff_call.getStep());
+		assertSame(s1.getReactions().get(2).getEffect(), _lr3_eff_call.getStep());
 
 	}
 
@@ -837,7 +838,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertNotNull(s1.getReactSequence());
 
 		Step step = s1.getReactSequence().getSteps().get(0);
-		Sequence _seq = (Sequence) assertedSequence(assertedSequence(step).getSteps().get(0)).getSteps().get(0);
+		Sequence _seq = assertedSequence(assertedSequence(assertedSequence(assertedSequence(assertedSequence(step).getSteps().get(0)).getSteps().get(0)).getSteps().get(0)).getSteps().get(0));
 		assertEquals(3, _seq.getSteps().size());
 
 		// check first local reaction
@@ -943,7 +944,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 		Sequence _seq = (Sequence) s1.getReactSequence().getSteps().get(0);
 
-		If _lr1 = (If) assertedSequence(assertedSequence(_seq.getSteps().get(0)).getSteps().get(0)).getSteps().get(0);
+		If _lr1 = (If) assertedSequence(assertedSequence(assertedSequence(assertedSequence(_seq.getSteps().get(0)).getSteps().get(0)).getSteps().get(0)).getSteps().get(0)).getSteps().get(0);
 		assertClass(ElementReferenceExpression.class, _lr1.getCheck().getCondition());
 		assertSame(s1.getReactions().get(0).getCheck().getCondition(), _lr1.getCheck().getCondition());
 		Call _lr1_eff_call = (Call) _lr1.getThenStep();
@@ -1042,10 +1043,10 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		// third is the s4 cycle with the transition reaction
 		_seq = (Sequence) _if.getElseStep();
 		cycle = (Sequence) _seq.getSteps().get(0);
-		_if = (If) cycle.getSteps().get(0);
+		_if = (If) assertedSequence(cycle.getSteps().get(0)).getSteps().get(0);
 		assertCall(_if.getThenStep(), _s4.getReactions().get(0).getEffect());
 		assertTrue(_s4.getReactions().get(0).isTransition());
-		assertNull(_if.getElseStep());
+		assertTrue(assertedSequence(assertedSequence(_if.getElseStep()).getSteps().get(0)).getSteps().isEmpty());
 		assertEquals(1, cycle.getSteps().size());
 
 	}

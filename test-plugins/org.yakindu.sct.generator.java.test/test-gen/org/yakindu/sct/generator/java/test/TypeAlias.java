@@ -24,14 +24,16 @@ public class TypeAlias {
 	
 	private TypeAliasStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void typeAlias_setUp() {
 		statemachine = new TypeAliasStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void typeAlias_tearDown() {
 		statemachine = null;
 	}
 	

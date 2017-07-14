@@ -24,14 +24,16 @@ public class AssignmentAsExpression {
 	
 	private AssignmentAsExpressionStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void assignmentAsExpression_setUp() {
 		statemachine = new AssignmentAsExpressionStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void assignmentAsExpression_tearDown() {
 		statemachine = null;
 	}
 	

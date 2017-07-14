@@ -26,8 +26,10 @@ public class PerformanceTests {
 	private PerformanceTestStatemachine statemachine;	
 	private VirtualTimer timer;
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void performanceTests_setUp() {
 		statemachine = new PerformanceTestStatemachine();
 		timer = new VirtualTimer();
 		statemachine.setTimer(timer);
@@ -35,8 +37,9 @@ public class PerformanceTests {
 	}
 
 	@After
-	public void tearDown() {
+	public void performanceTests_tearDown() {
 		statemachine = null;
+		timer = null;
 	}
 	
 	@Test

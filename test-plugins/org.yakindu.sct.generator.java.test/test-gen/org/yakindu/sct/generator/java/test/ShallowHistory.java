@@ -24,14 +24,16 @@ public class ShallowHistory {
 	
 	private ShallowHistoryStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void shallowHistory_setUp() {
 		statemachine = new ShallowHistoryStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void shallowHistory_tearDown() {
 		statemachine = null;
 	}
 	

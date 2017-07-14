@@ -24,14 +24,16 @@ public class FinalState {
 	
 	private FinalStateStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void finalState_setUp() {
 		statemachine = new FinalStateStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void finalState_tearDown() {
 		statemachine = null;
 	}
 	

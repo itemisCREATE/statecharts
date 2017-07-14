@@ -24,14 +24,16 @@ public class SimpleHierachy {
 	
 	private SimpleHierachyStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void simpleHierachy_setUp() {
 		statemachine = new SimpleHierachyStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void simpleHierachy_tearDown() {
 		statemachine = null;
 	}
 	

@@ -24,14 +24,16 @@ public class EnterState {
 	
 	private EnterStateStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void enterState_setUp() {
 		statemachine = new EnterStateStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void enterState_tearDown() {
 		statemachine = null;
 	}
 	

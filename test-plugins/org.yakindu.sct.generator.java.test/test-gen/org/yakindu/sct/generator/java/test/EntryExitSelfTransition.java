@@ -24,14 +24,16 @@ public class EntryExitSelfTransition {
 	
 	private EntryExitSelfTransitionStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void entryExitSelfTransition_setUp() {
 		statemachine = new EntryExitSelfTransitionStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void entryExitSelfTransition_tearDown() {
 		statemachine = null;
 	}
 	

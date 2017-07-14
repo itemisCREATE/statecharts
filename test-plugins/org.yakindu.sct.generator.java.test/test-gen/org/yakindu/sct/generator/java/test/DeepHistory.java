@@ -24,14 +24,16 @@ public class DeepHistory {
 	
 	private DeepHistoryStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void deepHistory_setUp() {
 		statemachine = new DeepHistoryStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void deepHistory_tearDown() {
 		statemachine = null;
 	}
 	
