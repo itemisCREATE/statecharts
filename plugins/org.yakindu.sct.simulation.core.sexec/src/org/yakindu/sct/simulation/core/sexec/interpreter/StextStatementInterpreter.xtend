@@ -68,7 +68,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	extension IQualifiedNameProvider provider
 	@Inject(optional=true)
 	protected IOperationMockup operationDelegate
-	@Inject
+	@Inject(optional=true)
 	protected extension IEventRaiser eventRaiser	
 	@Inject
 	protected extension IExecutionSlotResolver resolver
@@ -163,7 +163,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			
 			val value = eventRaising.value?.execute	
 		
-			event.raise(value) 
+			if (eventRaiser != null) event.raise(value) 
 		}
 		
 		null
