@@ -85,6 +85,11 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 
 	boolean suspended = false
 
+
+	override initialize(ExecutionFlow flow, ExecutionContext context) {
+		initialize(flow, context, false)
+	}
+	
 	override initialize(ExecutionFlow flow, ExecutionContext context, boolean useInternalEventQueue) {
 		this.flow = flow
 		executionContext = context
