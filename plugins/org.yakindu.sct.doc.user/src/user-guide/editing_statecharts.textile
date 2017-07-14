@@ -166,9 +166,37 @@ While the documentation is shown, you can modify it in the statechart editor. Do
 
 The _Properties_ view of states and transition always shows both documentation and statechart language elements side by side in different compartments. This might be a alternative and more comfortable way of editing any of them.
 
+
+
+
 h2(#editing-regions). Editing regions
 
-To change the size or the location of a region, use the graphical editor. Drag the region to move it elsewhere. Use a selected region's handles to resize it.
+In a statechart model, you can have
+* top-level regions, which are directly placed on the "canvas":#canvas, and
+* regions inside of composite or orthogonal states.
+
+Their graphical representation differ somewhat, thus editing them is also somewhat different.
+
+
+
+h3(#editing-top-level-regions). Editing top-level regions
+
+You can place a top-level region anywhere on the "canvas":#canvas, and you can change its size at will. To change the location or the size of a region, use the graphical editor. Drag the region to move it elsewhere. Use a selected region's handles to resize it.
+
+
+
+h3(#editing_regions_in_orthogonal_states). Editing regions in orthogonal states
+
+Regions inside an orthogonal or composite state are confined by their enclosing state. They are sized automatically, depending on their contents, and they are arranged either vertically or horizontally.
+
+You can toggle between vertical and horizontally representation of regions in an orthogonal state as follows:
+# Right-click on the orthogonal state's title. The context menu opens.
+# In the context menu, select _Toggle Subregion Alignment_.
+# The layout of the regions switches from horizontal to vertical or vice versa.
+
+
+
+h3(#changing_the_name_of_a_region). Changing the name of a region
 
 You can change the name of a region in the statechart editor as well as in the properties view.
 * In the statechart editor,
@@ -177,6 +205,9 @@ You can change the name of a region in the statechart editor as well as in the p
 ** press the @[Return]@ key.
 * In the properties view,
 ** modify the _Region Name_ property. It is a region's only property you can access through the properties view.
+
+
+
 
 h2(#editing-hierarchies). Editing hierarchies
 
