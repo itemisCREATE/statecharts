@@ -53,7 +53,7 @@ public abstract class AbstractExecutionFlowTest {
 	
 	protected void initInterpreter(ExecutionFlow flow) {
 		initializer.initialize(context, flow);
-		interpreter.initialize(flow, context);
+		interpreter.initialize(flow, context, false);
 		this.flow = flow;
 	}
 
