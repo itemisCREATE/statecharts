@@ -322,7 +322,6 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 	private void react_main_region_StateA() {
 		if (check_main_region_StateA_tr0_tr0()) {
 			effect_main_region_StateA_tr0();
-		} else {
 		}
 	}
 	

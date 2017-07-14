@@ -397,7 +397,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 			} else {
 				if (check_main_region_s1_tr2_tr2()) {
 					effect_main_region_s1_tr2();
-				} else {
 				}
 			}
 		}
@@ -411,7 +410,6 @@ public class WrapperTestStatemachine implements IWrapperTestStatemachine {
 		effect__lr1();
 		if (check_main_region_s2_tr0_tr0()) {
 			effect_main_region_s2_tr0();
-		} else {
 		}
 	}
 	

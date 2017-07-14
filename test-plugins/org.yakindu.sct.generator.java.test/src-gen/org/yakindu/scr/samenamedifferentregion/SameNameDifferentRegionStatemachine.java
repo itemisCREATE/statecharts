@@ -216,7 +216,6 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 	private void react_main_region_StateA() {
 		if (check_main_region_StateA_tr0_tr0()) {
 			effect_main_region_StateA_tr0();
-		} else {
 		}
 	}
 	
@@ -224,7 +223,6 @@ public class SameNameDifferentRegionStatemachine implements ISameNameDifferentRe
 	private void react_main_region_StateB_r1_StateA() {
 		if (check_main_region_StateB_r1_StateA_tr0_tr0()) {
 			effect_main_region_StateB_r1_StateA_tr0();
-		} else {
 		}
 	}
 	

@@ -321,7 +321,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	private void react_main_region_A() {
 		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
-		} else {
 		}
 	}
 	
@@ -329,7 +328,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	private void react_main_region_B() {
 		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
-		} else {
 		}
 	}
 	
@@ -337,7 +335,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	private void react_main_region_C() {
 		if (check_main_region_C_tr0_tr0()) {
 			effect_main_region_C_tr0();
-		} else {
 		}
 	}
 	
@@ -349,7 +346,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	private void react_another_region_A() {
 		if (check_another_region_A_tr0_tr0()) {
 			effect_another_region_A_tr0();
-		} else {
 		}
 	}
 	
@@ -357,7 +353,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	private void react_another_region_B() {
 		if (check_another_region_B_tr0_tr0()) {
 			effect_another_region_B_tr0();
-		} else {
 		}
 	}
 	
@@ -365,7 +360,6 @@ public class OperationsWithoutBracesStatemachine implements IOperationsWithoutBr
 	private void react_another_region_C() {
 		if (check_another_region_C_tr0_tr0()) {
 			effect_another_region_C_tr0();
-		} else {
 		}
 	}
 	

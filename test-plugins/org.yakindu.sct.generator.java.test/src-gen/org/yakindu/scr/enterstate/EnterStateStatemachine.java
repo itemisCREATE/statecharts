@@ -268,7 +268,6 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 			} else {
 				if (check_r_A_tr2_tr2()) {
 					effect_r_A_tr2();
-				} else {
 				}
 			}
 		}

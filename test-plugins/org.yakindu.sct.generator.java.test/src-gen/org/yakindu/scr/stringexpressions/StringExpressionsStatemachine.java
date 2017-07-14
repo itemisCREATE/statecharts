@@ -695,7 +695,6 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	private void react_main_region_AssignmentChecked() {
 		if (check_main_region_AssignmentChecked_tr0_tr0()) {
 			effect_main_region_AssignmentChecked_tr0();
-		} else {
 		}
 	}
 	
@@ -707,7 +706,6 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	private void react_main_region_VarToVarCompareSucceeded() {
 		if (check_main_region_VarToVarCompareSucceeded_tr0_tr0()) {
 			effect_main_region_VarToVarCompareSucceeded_tr0();
-		} else {
 		}
 	}
 	
@@ -715,7 +713,6 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	private void react_main_region_VarToConstCompareSucceeded() {
 		if (check_main_region_VarToConstCompareSucceeded_tr0_tr0()) {
 			effect_main_region_VarToConstCompareSucceeded_tr0();
-		} else {
 		}
 	}
 	
@@ -723,7 +720,6 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	private void react_main_region_ConstToVarCompareSucceeded() {
 		if (check_main_region_ConstToVarCompareSucceeded_tr0_tr0()) {
 			effect_main_region_ConstToVarCompareSucceeded_tr0();
-		} else {
 		}
 	}
 	

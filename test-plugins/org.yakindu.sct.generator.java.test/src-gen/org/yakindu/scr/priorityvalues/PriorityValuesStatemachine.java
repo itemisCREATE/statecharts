@@ -313,7 +313,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	private void react_someRegion_A() {
 		if (check_someRegion_A_tr0_tr0()) {
 			effect_someRegion_A_tr0();
-		} else {
 		}
 	}
 	
@@ -334,7 +333,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 				} else {
 					if (check_main_region_A_tr3_tr3()) {
 						effect_main_region_A_tr3();
-					} else {
 					}
 				}
 			}

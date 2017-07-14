@@ -241,7 +241,6 @@ public class TimedTransitionsStatemachine implements ITimedTransitionsStatemachi
 		effect__lr1();
 		if (check_main_region_Start_tr0_tr0()) {
 			effect_main_region_Start_tr0();
-		} else {
 		}
 	}
 	

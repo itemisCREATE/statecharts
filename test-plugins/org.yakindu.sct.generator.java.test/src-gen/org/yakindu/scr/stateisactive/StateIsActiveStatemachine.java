@@ -221,7 +221,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	private void react_R1_R1A() {
 		if (check_R1_R1A_tr0_tr0()) {
 			effect_R1_R1A_tr0();
-		} else {
 		}
 	}
 	
@@ -233,7 +232,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	private void react_R2_R2A() {
 		if (check_R2_R2A_tr0_tr0()) {
 			effect_R2_R2A_tr0();
-		} else {
 		}
 	}
 	

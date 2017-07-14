@@ -908,7 +908,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		}
 		if (check_mr_A_tr0_tr0()) {
 			effect_mr_A_tr0();
-		} else {
 		}
 	}
 	
@@ -923,7 +922,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		}
 		if (check_mr_B_r1_X_tr0_tr0()) {
 			effect_mr_B_r1_X_tr0();
-		} else {
 		}
 	}
 	
@@ -938,7 +936,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		}
 		if (check_mr_B_r1_Y_tr0_tr0()) {
 			effect_mr_B_r1_Y_tr0();
-		} else {
 		}
 	}
 	
@@ -953,7 +950,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		}
 		if (check_mr_B_r1_Z_tr0_tr0()) {
 			effect_mr_B_r1_Z_tr0();
-		} else {
 		}
 	}
 	
@@ -968,7 +964,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		}
 		if (check_mr_B_r1_V_tr0_tr0()) {
 			effect_mr_B_r1_V_tr0();
-		} else {
 		}
 	}
 	
@@ -983,7 +978,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		}
 		if (check_mr_B_r1_W_tr0_tr0()) {
 			effect_mr_B_r1_W_tr0();
-		} else {
 		}
 	}
 	
@@ -1001,7 +995,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		} else {
 			if (check_mr_B_r1_S_tr1_tr1()) {
 				effect_mr_B_r1_S_tr1();
-			} else {
 			}
 		}
 	}
@@ -1017,7 +1010,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		}
 		if (check_mr_B_r1_T_tr0_tr0()) {
 			effect_mr_B_r1_T_tr0();
-		} else {
 		}
 	}
 	
@@ -1032,7 +1024,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		}
 		if (check_mr_B_r1_U_tr0_tr0()) {
 			effect_mr_B_r1_U_tr0();
-		} else {
 		}
 	}
 	
@@ -1040,7 +1031,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	private void react_mr_B_r2_S() {
 		if (check_mr_B_r2_S_tr0_tr0()) {
 			effect_mr_B_r2_S_tr0();
-		} else {
 		}
 	}
 	
@@ -1048,7 +1038,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	private void react_mr_B_r2_T() {
 		if (check_mr_B_r2_T_tr0_tr0()) {
 			effect_mr_B_r2_T_tr0();
-		} else {
 		}
 	}
 	
@@ -1059,7 +1048,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		} else {
 			if (check_mr_B_r2_U_tr1_tr1()) {
 				effect_mr_B_r2_U_tr1();
-			} else {
 			}
 		}
 	}
@@ -1071,7 +1059,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 		} else {
 			if (check_mr_B_r2_V_tr1_tr1()) {
 				effect_mr_B_r2_V_tr1();
-			} else {
 			}
 		}
 	}
@@ -1080,7 +1067,6 @@ public class PerformanceTestStatemachine implements IPerformanceTestStatemachine
 	private void react_mr_B_r2_W() {
 		if (check_mr_B_r2_W_tr0_tr0()) {
 			effect_mr_B_r2_W_tr0();
-		} else {
 		}
 	}
 	

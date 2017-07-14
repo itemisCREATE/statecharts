@@ -411,7 +411,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	private void react_region_1_Idle() {
 		if (check_region_1_Idle_tr0_tr0()) {
 			effect_region_1_Idle_tr0();
-		} else {
 		}
 	}
 	
@@ -422,7 +421,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		} else {
 			if (check_region_1_Number1Pressed_tr1_tr1()) {
 				effect_region_1_Number1Pressed_tr1();
-			} else {
 			}
 		}
 	}
@@ -434,7 +432,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 		} else {
 			if (check_region_1_Number2Pressed_tr1_tr1()) {
 				effect_region_1_Number2Pressed_tr1();
-			} else {
 			}
 		}
 	}
@@ -443,7 +440,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	private void react_region_1_Number3Pressed() {
 		if (check_region_1_Number3Pressed_tr0_tr0()) {
 			effect_region_1_Number3Pressed_tr0();
-		} else {
 		}
 	}
 	
@@ -451,7 +447,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	private void react__region1_Closed() {
 		if (check__region1_Closed_tr0_tr0()) {
 			effect__region1_Closed_tr0();
-		} else {
 		}
 	}
 	
@@ -459,7 +454,6 @@ public class NamedInterfaceAccessStatemachine implements INamedInterfaceAccessSt
 	private void react__region1_Open() {
 		if (check__region1_Open_tr0_tr0()) {
 			effect__region1_Open_tr0();
-		} else {
 		}
 	}
 	

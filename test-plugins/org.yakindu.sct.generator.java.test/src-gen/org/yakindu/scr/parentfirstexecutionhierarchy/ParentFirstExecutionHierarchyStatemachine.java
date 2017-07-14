@@ -493,7 +493,6 @@ public class ParentFirstExecutionHierarchyStatemachine implements IParentFirstEx
 	private void react_ParentFirstExecutionHierarchy_r_B() {
 		if (check_ParentFirstExecutionHierarchy_r_B_tr0_tr0()) {
 			effect_ParentFirstExecutionHierarchy_r_B_tr0();
-		} else {
 		}
 	}
 	

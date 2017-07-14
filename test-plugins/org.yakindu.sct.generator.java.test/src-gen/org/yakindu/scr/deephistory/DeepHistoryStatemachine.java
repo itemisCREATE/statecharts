@@ -565,7 +565,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	private void react_mainRegion_State1() {
 		if (check_mainRegion_State1_tr0_tr0()) {
 			effect_mainRegion_State1_tr0();
-		} else {
 		}
 	}
 	
@@ -576,7 +575,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		} else {
 			if (check_mainRegion_State2__region0_a_tr0_tr0()) {
 				effect_mainRegion_State2__region0_a_tr0();
-			} else {
 			}
 		}
 	}
@@ -591,7 +589,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			} else {
 				if (check_mainRegion_State2__region0_State4__region0_State6_tr0_tr0()) {
 					effect_mainRegion_State2__region0_State4__region0_State6_tr0();
-				} else {
 				}
 			}
 		}
@@ -610,7 +607,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				} else {
 					if (check_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0_tr0()) {
 						effect_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0();
-					} else {
 					}
 				}
 			}
@@ -630,7 +626,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				} else {
 					if (check_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0_tr0()) {
 						effect_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0();
-					} else {
 					}
 				}
 			}
@@ -641,7 +636,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	private void react_mainRegion_State2__region0_State5() {
 		if (check_mainRegion_State2_tr0_tr0()) {
 			effect_mainRegion_State2_tr0();
-		} else {
 		}
 	}
 	

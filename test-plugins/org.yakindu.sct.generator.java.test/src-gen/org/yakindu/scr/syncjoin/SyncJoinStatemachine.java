@@ -368,7 +368,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	private void react_main_region_A() {
 		if (check_main_region_A_tr0_tr0()) {
 			effect_main_region_A_tr0();
-		} else {
 		}
 	}
 	
@@ -376,7 +375,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	private void react_main_region_B_r1_C1() {
 		if (check_main_region_B_r1_C1_tr0_tr0()) {
 			effect_main_region_B_r1_C1_tr0();
-		} else {
 		}
 	}
 	
@@ -384,7 +382,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	private void react_main_region_B_r1_C2() {
 		if (check_main_region_B_r1_C2_tr0_tr0()) {
 			effect_main_region_B_r1_C2_tr0();
-		} else {
 		}
 	}
 	
@@ -392,7 +389,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	private void react_main_region_B_r2_D1() {
 		if (check_main_region_B_r2_D1_tr0_tr0()) {
 			effect_main_region_B_r2_D1_tr0();
-		} else {
 		}
 	}
 	
@@ -400,7 +396,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	private void react_main_region_B_r2_D2() {
 		if (check_main_region_B_r2_D2_tr0_tr0()) {
 			effect_main_region_B_r2_D2_tr0();
-		} else {
 		}
 	}
 	

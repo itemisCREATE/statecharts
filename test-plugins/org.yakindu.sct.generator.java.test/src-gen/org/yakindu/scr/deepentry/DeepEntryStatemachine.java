@@ -527,7 +527,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		} else {
 			if (check_r2_B_r_BA_tr0_tr0()) {
 				effect_r2_B_r_BA_tr0();
-			} else {
 			}
 		}
 	}
@@ -536,7 +535,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	private void react_r2_B_r_BB() {
 		if (check_r2_B_tr0_tr0()) {
 			effect_r2_B_tr0();
-		} else {
 		}
 	}
 	
@@ -544,7 +542,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	private void react_r2_C() {
 		if (check_r2_C_tr0_tr0()) {
 			effect_r2_C_tr0();
-		} else {
 		}
 	}
 	

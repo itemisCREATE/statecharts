@@ -370,7 +370,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		} else {
 			if (check_main_region_A_tr1_tr1()) {
 				effect_main_region_A_tr1();
-			} else {
 			}
 		}
 	}
@@ -382,7 +381,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		} else {
 			if (check_main_region_B_r1_C_tr0_tr0()) {
 				effect_main_region_B_r1_C_tr0();
-			} else {
 			}
 		}
 	}
@@ -394,7 +392,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		} else {
 			if (check_main_region_B_r1_D_tr0_tr0()) {
 				effect_main_region_B_r1_D_tr0();
-			} else {
 			}
 		}
 	}
@@ -406,7 +403,6 @@ public class HistoryWithoutInitialStepStatemachine implements IHistoryWithoutIni
 		} else {
 			if (check_main_region_B_r1_E_tr0_tr0()) {
 				effect_main_region_B_r1_E_tr0();
-			} else {
 			}
 		}
 	}

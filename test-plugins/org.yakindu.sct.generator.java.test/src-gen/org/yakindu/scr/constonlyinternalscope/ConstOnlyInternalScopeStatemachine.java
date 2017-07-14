@@ -208,7 +208,6 @@ public class ConstOnlyInternalScopeStatemachine implements IConstOnlyInternalSco
 		} else {
 			if (check_ConstOnlyInternalScope_main_region_A_tr1_tr1()) {
 				effect_ConstOnlyInternalScope_main_region_A_tr1();
-			} else {
 			}
 		}
 	}

@@ -230,7 +230,6 @@ public class CastExpressionsStatemachine implements ICastExpressionsStatemachine
 	private void react_main_region_B() {
 		if (check_main_region_B_tr0_tr0()) {
 			effect_main_region_B_tr0();
-		} else {
 		}
 	}
 	

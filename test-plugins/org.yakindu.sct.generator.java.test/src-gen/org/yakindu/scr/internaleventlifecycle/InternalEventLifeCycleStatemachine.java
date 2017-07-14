@@ -285,7 +285,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	private void react_r1_B() {
 		if (check_r1_B_tr0_tr0()) {
 			effect_r1_B_tr0();
-		} else {
 		}
 	}
 	
@@ -293,7 +292,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	private void react_r2_C() {
 		if (check_r2_C_tr0_tr0()) {
 			effect_r2_C_tr0();
-		} else {
 		}
 	}
 	
@@ -301,7 +299,6 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 	private void react_r2_D() {
 		if (check_r2_D_tr0_tr0()) {
 			effect_r2_D_tr0();
-		} else {
 		}
 	}
 	

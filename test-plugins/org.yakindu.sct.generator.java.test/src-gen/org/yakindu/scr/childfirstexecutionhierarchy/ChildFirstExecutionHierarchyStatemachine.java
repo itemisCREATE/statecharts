@@ -493,7 +493,6 @@ public class ChildFirstExecutionHierarchyStatemachine implements IChildFirstExec
 	private void react_ChildFirstExecutionHierarchy_r_B() {
 		if (check_ChildFirstExecutionHierarchy_r_B_tr0_tr0()) {
 			effect_ChildFirstExecutionHierarchy_r_B_tr0();
-		} else {
 		}
 	}
 	

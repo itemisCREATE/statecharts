@@ -1406,7 +1406,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	private void react_goto_abstract() {
 		if (check_goto_abstract_tr0_tr0()) {
 			effect_goto_abstract_tr0();
-		} else {
 		}
 	}
 	
@@ -1417,7 +1416,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		} else {
 			if (check_goto_boolean_tr1_tr1()) {
 				effect_goto_boolean_tr1();
-			} else {
 			}
 		}
 	}
@@ -1430,7 +1428,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	private void react_goto_void_volatile_state() {
 		if (check_goto_void_volatile_state_tr0_tr0()) {
 			effect_goto_void_volatile_state_tr0();
-		} else {
 		}
 	}
 	

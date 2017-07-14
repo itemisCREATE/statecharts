@@ -349,7 +349,6 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 				} else {
 					if (check_main_region_A_tr3_tr3()) {
 						effect_main_region_A_tr3();
-					} else {
 					}
 				}
 			}

@@ -219,7 +219,6 @@ public class ConstOnlyNamedScopeStatemachine implements IConstOnlyNamedScopeStat
 		} else {
 			if (check_ConstOnlyNamedScope_main_region_A_tr1_tr1()) {
 				effect_ConstOnlyNamedScope_main_region_A_tr1();
-			} else {
 			}
 		}
 	}

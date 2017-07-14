@@ -494,7 +494,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 			} else {
 				if (check_main_region_Composite_s1_s2_inner_region_s1_tr1_tr1()) {
 					effect_main_region_Composite_s1_s2_inner_region_s1_tr1();
-				} else {
 				}
 			}
 		}
@@ -511,7 +510,6 @@ public class RunnableTestStatemachine implements IRunnableTestStatemachine {
 		} else {
 			if (check_main_region_Composite_s1_s2_inner_region_s2_tr0_tr0()) {
 				effect_main_region_Composite_s1_s2_inner_region_s2_tr0();
-			} else {
 			}
 		}
 	}
