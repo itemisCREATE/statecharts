@@ -52,7 +52,6 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext.LocalInternalEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
 import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot
@@ -69,6 +68,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	extension IQualifiedNameProvider provider
 	@Inject(optional=true)
 	protected IOperationMockup operationDelegate
+	@Inject
+	protected extension IEventRaiser eventRaiser	
 	@Inject
 	protected extension IExecutionSlotResolver resolver
 	@Inject
@@ -157,20 +158,14 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
 		var event = context.resolve(eventRaising.event)
-		if (eventRaising.value != null) {
-			event.value = eventRaising.value.execute
-		}
+
 		if (event instanceof ExecutionEvent) {
-			if (eventRaising.value != null)
-			{
-				context.getInternalEventQueue().add(new LocalInternalEvent(event.name,false,eventRaising.value));	
-			}
-			else
-			{
-				context.getInternalEventQueue().add(new LocalInternalEvent(event.name,false,null));	
-			}
-			//(event as ExecutionEvent).raised = true
+			
+			val value = eventRaising.value?.execute	
+		
+			event.raise(value) 
 		}
+		
 		null
 	}
 

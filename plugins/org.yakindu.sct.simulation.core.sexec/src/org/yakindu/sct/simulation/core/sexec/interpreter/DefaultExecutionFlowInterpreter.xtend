@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 committers of YAKINDU and others.
+ * Copyright (c) 2013-2017 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -36,7 +36,10 @@ import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext.LocalInternalEvent
+import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
+import java.util.Queue
+import org.eclipse.xtend.lib.annotations.Data
+import java.util.LinkedList
 
 /**
  * 
@@ -45,7 +48,21 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext.LocalInternalEv
  * 
  */
 @Singleton
-class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
+class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEventRaiser {
+
+	@Data static class Event
+	{
+		
+		public ExecutionEvent event;
+		public Object value; 
+
+		new(ExecutionEvent ev, Object value) {
+			this.event = ev
+			this.value = value
+		}
+	}
+	
+	protected Queue<Event> internalEventQueue = new LinkedList<Event>()
 
 	@Inject
 	protected IStatementInterpreter statementInterpreter
@@ -64,16 +81,19 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	protected Map<Integer, ExecutionState> historyStateConfiguration
 	protected List<Step> executionStack
 	protected int activeStateIndex
+	protected boolean useInternalEventQueue 
 
 	boolean suspended = false
 
-	override initialize(ExecutionFlow flow, ExecutionContext context) {
+	override initialize(ExecutionFlow flow, ExecutionContext context, boolean useInternalEventQueue) {
 		this.flow = flow
 		executionContext = context
 		executionStack = newLinkedList()
 		activeStateConfiguration = newArrayOfSize(flow.stateVector.size)
 		activeStateIndex = 0
 		historyStateConfiguration = newHashMap()
+		this.useInternalEventQueue = useInternalEventQueue
+		
 		if (!executionContext.snapshot){
 			flow.staticInitSequence.scheduleAndRun
 			flow.initSequence.scheduleAndRun
@@ -116,6 +136,30 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	}
 
 	override runCycle() {
+		
+		var Event event = null
+		
+		do {
+
+			// activate an event if there is one
+			if ( event !== null ) {			
+				event.event.raised = true
+				event.event.value = event.value	
+				event = null		
+			}
+			
+			// perform a run to completion step
+			rtcStep
+			
+			// get next event if available
+			if ( ! internalEventQueue.empty ) event = internalEventQueue.poll
+			
+		} while (event !== null)
+
+	}
+
+
+	def rtcStep() {
 		executionContext.raiseScheduledEvents
 		activeStateIndex = 0
 		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
@@ -126,27 +170,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 			activeStateIndex = activeStateIndex + 1
 		}
 		executionContext.clearLocalAndInEvents
-		while ( 0 < executionContext.internalEventQueue.size )
-		{
-			var LocalInternalEvent event = executionContext.internalEventQueue.poll
-			if ( event.doesContainValue )
-			{
-				executionContext.getEvent(event.eventname).value = event.value;
-			}
-			 executionContext.getEvent(event.eventname).raised = true; 
-			 		executionContext.raiseScheduledEvents
-		activeStateIndex = 0
-		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
-		executionContext.clearOutEvents
-		while (activeStateIndex < activeStateConfiguration.size) {
-			var state = activeStateConfiguration.get(activeStateIndex)
-			state?.reactSequence?.scheduleAndRun
-			activeStateIndex = activeStateIndex + 1
-		}
-		executionContext.clearLocalAndInEvents
-		}  
 	}
-
+	
+	
 	override resume() {
 		timingService.resume
 		executionContext.suspendedElements.clear
@@ -198,7 +224,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	}
 
 	def dispatch Object execute(Check check) {
-		if (check.condition == null)
+		if (check.condition === null)
 			return true
 		return statementInterpreter.evaluateStatement(check.condition, executionContext)
 
@@ -226,7 +252,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 		var check = execute(ifStep.check)
 		if (check as Boolean) {
 			ifStep.thenStep.schedule
-		} else if (ifStep.elseStep != null) {
+		} else if (ifStep.elseStep !== null) {
 			ifStep.elseStep.schedule
 		}
 		null
@@ -244,7 +270,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	}
 
 	def dispatch Object execute(HistoryEntry entry) {
-		if (historyStateConfiguration.get(entry.region.historyVector.offset) != null) {
+		if (historyStateConfiguration.get(entry.region.historyVector.offset) !== null) {
 			entry.historyStep?.execute
 		} else {
 			entry.initialStep?.execute
@@ -254,7 +280,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 
 	def dispatch Object execute(StateSwitch stateSwitch) {
 		val historyRegion = stateSwitch.historyRegion
-		if (historyRegion != null) {
+		if (historyRegion !== null) {
 			val historyState = historyStateConfiguration.get(historyRegion.historyVector.offset)
 			stateSwitch.cases.filter[it.state == historyState].forEach[step.schedule]
 		} else {
@@ -274,6 +300,22 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 		timingService.unscheduleTimeEvent(timeEvent.timeEvent.name)
 		null
 	}
+	
+	
+	override raise(ExecutionEvent ev, Object value) {
+			
+			if (useInternalEventQueue) {
+				
+				internalEventQueue.add(new Event(ev, value));	
+				
+			} else {
+			
+				ev.raised = true
+				ev.value = value
+			
+			}
+	}
+
 	
 	override boolean isActive() {
 		var List<RegularState> activeStates = executionContext.getAllActiveStates()

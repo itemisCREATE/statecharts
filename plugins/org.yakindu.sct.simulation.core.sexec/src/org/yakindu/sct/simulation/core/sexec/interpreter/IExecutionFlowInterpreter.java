@@ -21,7 +21,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 
 public interface IExecutionFlowInterpreter {
 
-	public void initialize(final ExecutionFlow flow, final ExecutionContext context);
+	public void initialize(final ExecutionFlow flow, final ExecutionContext context, boolean useInternalEventQueue);
 
 	public void tearDown();
 
