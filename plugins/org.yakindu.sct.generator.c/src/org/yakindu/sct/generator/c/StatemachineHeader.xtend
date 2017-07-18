@@ -64,6 +64,19 @@ class StatemachineHeader implements IContentTemplate {
 		
 		«statemachineTypeDecl»
 		
+		«functions(it)»
+		
+		#ifdef __cplusplus
+		}
+		#endif 
+		
+		#endif /* «module.define»_H_ */
+	'''
+	}
+	
+	protected def CharSequence functions(ExecutionFlow it)
+		'''
+		
 		/*! Initializes the «type» state machine data structures. Must be called before first usage.*/
 		extern void «functionPrefix»init(«scHandleDecl»);
 		
@@ -100,19 +113,7 @@ class StatemachineHeader implements IContentTemplate {
 		/*! Checks if the specified state is active (until 2.4.1 the used method for states was called isActive()). */
 		extern sc_boolean «stateActiveFctID»(const «scHandleDecl», «statesEnumType» state);
 		
-		«additionalFunctions(it, entry, artifactConfigs)»
-		
-		#ifdef __cplusplus
-		}
-		#endif 
-		
-		#endif /* «module.define»_H_ */
-	'''
-	}
-	
-	def additionalFunctions(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations configurations) {
-		/* For inheriting classes */
-	}
+		'''
 	
 	/**
 	 * @Deprecated use {@link #includes(ExecutionFlow, ArtifactLocationProvider)} instead
