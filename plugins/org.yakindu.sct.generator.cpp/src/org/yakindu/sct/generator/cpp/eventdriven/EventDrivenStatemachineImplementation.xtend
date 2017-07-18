@@ -162,4 +162,16 @@ class EventDrivenStatemachineImplementation extends StatemachineImplementation {
 		}
 		'''
 	}
+	
+	override raiseTimeEventFunction(ExecutionFlow it) '''
+		void «module»::«raiseTimeEventFctID»(sc_eventid evid)
+		{
+			if ((evid >= (sc_eventid)«timeEventsInstance») && (evid < (sc_eventid)(&«timeEventsInstance»[«timeEventsCountConst»])))
+			{
+				*(sc_boolean*)evid = true;
+				runCycle();
+			}				
+		}
+	'''
+	
 }
