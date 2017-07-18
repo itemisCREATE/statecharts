@@ -8,23 +8,20 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 class EventDrivenExpressionCode extends ExpressionCode {
 	@Inject extension EventNaming
 	
+	protected static int valueVarIndex = 0
+	
 	override dispatch CharSequence code(EventRaisingExpression it) {
+		val valueVarName = '''value_«valueVarIndex++»'''
 		'''
-		«IF event.definition.event.direction == Direction::OUT»
+		«IF event.definition.event.direction != Direction::LOCAL»
 			«IF value !== null»
 				«event.definition.event.valueAccess» = «value.code»;
 			«ENDIF»
-			«event.definition.event.access» = bool_true
-		«ELSE»
-			«flow.eventStructTypeName» event;
+			«event.definition.event.access» = bool_true«ELSE»
 			«IF value !== null»
-			«event.definition.event.typeSpecifier.targetLanguageName» value = «value.code»;
-			«flow.valueEventInitFunction»(&event, «event.definition.event.eventEnumMemberName»«IF value !== null», &value«ENDIF»);
+			«event.definition.event.typeSpecifier.targetLanguageName» «valueVarName» = «value.code»;
+			add_value_event_to_queue(«scHandle», «event.definition.event.eventEnumMemberName», «valueVarName»)
 			«ELSE»
-			«flow.eventInitFunction»(&event, «event.definition.event.eventEnumMemberName»);
-			«ENDIF»
-			«flow.eventQueuePushFunction»(&event);
-		«ENDIF»
-		'''
+			add_event_to_queue(«scHandle», «event.definition.event.eventEnumMemberName»)«ENDIF»«ENDIF»'''
 	}
 }

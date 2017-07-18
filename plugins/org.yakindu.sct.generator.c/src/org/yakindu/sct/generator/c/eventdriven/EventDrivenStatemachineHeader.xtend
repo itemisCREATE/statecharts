@@ -13,29 +13,7 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 		«super.statemachineTypeStructContent(it)»
 		«eventQueueTypeName» internal_event_queue;
-		«eventQueueTypeName» in_event_queue;
 		'''
-	}
-	
-	override additionalFunctions(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations configurations) {
-		'''
-		«eventToInQueueFunction»
-
-		«eventToInternalQueueFunction»
-		'''
-	}
-	
-	def eventToInternalQueueFunction() {
-		'''
-		void add_event_to_queue()
-		{
-			
-		}
-		'''
-	}
-	
-	def eventToInQueueFunction() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 	override includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {

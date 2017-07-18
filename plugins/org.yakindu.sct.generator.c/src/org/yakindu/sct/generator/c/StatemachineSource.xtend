@@ -25,13 +25,13 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class StatemachineSource implements IContentTemplate {
 	
-	@Inject extension Naming
-	@Inject extension GenmodelEntries
-	@Inject extension Navigation
-	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension INamingService
-	@Inject extension FlowCode
-	@Inject extension ConstantInitializationResolver
+	@Inject protected extension Naming
+	@Inject protected extension GenmodelEntries
+	@Inject protected extension Navigation
+	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension INamingService
+	@Inject protected extension FlowCode
+	@Inject protected extension ConstantInitializationResolver
 	@Inject protected extension StateVectorExtensions
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
@@ -53,6 +53,11 @@ class StatemachineSource implements IContentTemplate {
 		
 		«constantDefinitions»
 		
+		«functions»
+	'''
+	}
+	
+	def functions(ExecutionFlow it) '''
 		«initFunction»
 		
 		«enterFunction»
@@ -77,7 +82,6 @@ class StatemachineSource implements IContentTemplate {
 		
 		«functionImplementations»
 	'''
-	}
 	
 	def initFunction(ExecutionFlow it) '''
 		void «functionPrefix»init(«scHandleDecl»)
@@ -163,31 +167,36 @@ class StatemachineSource implements IContentTemplate {
 		{
 			
 			«clearOutEventsFctID»(«scHandle»);
-			
-			for («scHandle»->stateConfVectorPosition = 0;
-				«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
-				«scHandle»->stateConfVectorPosition++)
-				{
-					
-				switch («scHandle»->stateConfVector[handle->stateConfVectorPosition])
-				{
-				«FOR state : states»
-					«IF state.reactSequence!=null»
-					case «state.shortName» :
-					{
-						«state.reactSequence.shortName»(«scHandle»);
-						break;
-					}
-					«ENDIF»
-				«ENDFOR»
-				default:
-					break;
-				}
-			}
-			
+			«runCycleForLoop(it)»
 			«clearInEventsFctID»(«scHandle»);
 		}
 	'''
+	
+	protected def CharSequence runCycleForLoop(ExecutionFlow it)
+		'''
+		for («scHandle»->stateConfVectorPosition = 0;
+			«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
+			«scHandle»->stateConfVectorPosition++)
+			{
+				
+			switch («scHandle»->stateConfVector[handle->stateConfVectorPosition])
+			{
+			«FOR state : states»
+				«IF state.reactSequence !== null»
+				case «state.shortName»:
+				{
+					«state.reactSequence.shortName»(«scHandle»);
+					break;
+				}
+				«ENDIF»
+			«ENDFOR»
+			default:
+				break;
+			}
+		}
+		
+		'''
+	
 	
 	def raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»
