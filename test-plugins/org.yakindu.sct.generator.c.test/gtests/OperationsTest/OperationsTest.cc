@@ -136,6 +136,7 @@ class StatemachineTest : public ::testing::Test{
 
 
 TEST_F(StatemachineTest, operationsCalled) {
+	alwaysTrueMock = new AlwaysTrueMock();
 	alwaysTrueMock->setAlwaysTrueBehavior(&AlwaysTrueMock::alwaysTrue1);
 	operations_enter(&statechart);
 	EXPECT_TRUE(operations_isStateActive(&statechart, Operations_main_region_A));
