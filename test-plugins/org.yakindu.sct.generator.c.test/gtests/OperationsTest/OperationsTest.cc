@@ -26,6 +26,7 @@ class AlwaysTrueMock{
 	
 	void reset() {
 		initialize();
+		alwaysTrueBehavior = AlwaysTrueMock::alwaysTrue;
 	}
 };
 static AlwaysTrueMock* alwaysTrueMock;
