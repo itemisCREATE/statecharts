@@ -19,6 +19,7 @@
         <link toc="help/user-guide/c-domain-toc.xml"/>
         <link toc="help/user-guide/generating_code-toc.xml"/>
         <link toc="help/user-guide/generating_code_headless-toc.xml"/>
+        <link toc="help/user-guide/sctunit-toc.xml"/>
     </topic>
 
     <link toc="help/installation/installation-toc.xml"/>
