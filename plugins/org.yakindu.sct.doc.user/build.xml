@@ -425,7 +425,7 @@
             <replaceregexp byline="false"
                            flags="g"
                            match='src="images/'
-                           replace='src="http://info.itemis.com/hubfs/Yakindu/Statechart_Tools/Documentation/images/'
+                           replace='src="http://info.itemis.com/hubfs/yakindu/statechart-tools/documentation/images/'
                            unless:set="website.local.files">
                 <fileset dir="${work.dir}">
                     <include name="${index.html}" />
