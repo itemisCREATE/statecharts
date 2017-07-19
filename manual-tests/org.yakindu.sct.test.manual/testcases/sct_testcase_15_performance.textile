@@ -1,12 +1,9 @@
-h1(#Test2). Yakindu SCT Testcase 14 - Performance
+h1. YAKINDU Statechart Tools – Testcase 15 - Performance
 
 |_. Nr |_. Testname |_. Test Instructions |_. Postconditions |_. Status|
-| 15.1 | load model | Open statechart big_file.sct | new Statechart is in your Project inserted | %{color:red}open% |
-| 15.2 | performance check | add a new state in your statechart | works the editor smooth? What does it feel like? How long it needs to validate? | %{color:red}open% |
-| 15.3 | performance check | save the Statechart | It shouldn't need a long time | %{color:red}open% |
-| 15.4 | change preferences | Window->Preferences->YAKINDU SCT->Diagram Appearance <p> disable "Enable live validation" | | %{color:red}open% |
-| 15.5 | performance check |  add a new state in your statechart | There is no error marker at the state | %{color:red}open% |
-| 15.6 | performance check | save the Statechart | It shouldn't need a long time. Error marker appears at the state | %{color:red}open% |
-
-
-
+| 15.1 | Loading big model | Open statechart _big_file.sct_. | The statechart is opened. | %{color:red}open% |
+| 15.2 | Performance check: editing | Add a new state to the statechart. | <ul><li><p>The editor works smoothly.</p></li><li><p>The validation is done quickly.</p></li><li><p>The overall user experience is okay.</p></li></ul> | %{color:red}open% |
+| 15.3 | Performance check: saving | Save the statechart. | <ul><li><p>Saving the statechart to a file is done quickly.</p></li></ul> | %{color:red}open% |
+| 15.4 | Changing preferences | <ol><li><p>In the main menu, select _Window → Preferences_.</p></li><li><p>Select _YAKINDU SCT → Diagram Appearance_.</p></li><li><p>Disable _Enable live validation_.</p></li></ol> | | %{color:red}open% |
+| 15.5 | Performance check | Add a new state to the statechart. | <ul><li><p>The new state has no error marker.</p></li></ul> | %{color:red}open% |
+| 15.6 | Performance check | Save the statechart. | <ul><li><p>Saving the statechart to a file is done quickly.</p></li><li><p>The new state from T15.5 has an error marker now.</p></li></ul> | %{color:red}open% |
