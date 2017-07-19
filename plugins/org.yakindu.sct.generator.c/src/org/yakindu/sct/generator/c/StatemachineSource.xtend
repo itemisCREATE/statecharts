@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class StatemachineSource implements IContentTemplate {
 	
@@ -272,28 +273,40 @@ class StatemachineSource implements IContentTemplate {
 	 * Implementation of interface element accessor functions
 	 */
 	
+	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
+		void «event.asRaiser»(«scHandleDecl»«event.valueParams»)
+		{
+			«IF event.hasValue»
+			«event.valueAccess» = value;
+			«ENDIF»
+			«event.access» = bool_true;
+		}
+	'''
+	
+	def interfaceOutgoingEventGetter(ExecutionFlow it, EventDefinition event) '''
+		sc_boolean «event.asRaised»(const «scHandleDecl»)
+		{
+			return «event.access»;
+		}
+	'''
+	
+	def interfaceOutgoingEventValueGetter(ExecutionFlow it, EventDefinition event) '''
+		«event.typeSpecifier.targetLanguageName» «event.asGetter»(const «scHandleDecl»)
+		{
+			return «event.valueAccess»;
+		}
+	'''
+	
 	def interfaceFunctions(ExecutionFlow it) '''
 		«FOR scope : interfaceScopes»
 			«FOR event : scope.incomingEvents»
-				void «event.asRaiser»(«scHandleDecl»«event.valueParams»)
-				{
-					«IF event.hasValue»
-					«event.valueAccess» = value;
-					«ENDIF»
-					«event.access» = bool_true;
-				}
+				«interfaceIncomingEventRaiser(event)»
 			«ENDFOR»
 			
 			«FOR event : scope.outgoingEvents»
-				sc_boolean «event.asRaised»(const «scHandleDecl»)
-				{
-					return «event.access»;
-				}
+				«interfaceOutgoingEventGetter(event)»
 				«IF event.hasValue» 
-					«event.typeSpecifier.targetLanguageName» «event.asGetter»(const «scHandleDecl»)
-					{
-						return «event.valueAccess»;
-					}
+					«interfaceOutgoingEventValueGetter(event)»
 				«ENDIF»
 			«ENDFOR»
 			

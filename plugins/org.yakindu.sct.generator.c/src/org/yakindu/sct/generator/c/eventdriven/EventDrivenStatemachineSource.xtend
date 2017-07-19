@@ -26,6 +26,25 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 		«dispatchEventFunction»
 	'''
 	
+	override enterFunction(ExecutionFlow it) '''
+		void «functionPrefix»enter(«scHandleDecl»)
+		{
+			«enterSequences.defaultSequence.code»
+		}
+	'''
+	
+	override interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
+		void «event.asRaiser»(«scHandleDecl»«event.valueParams»)
+		{
+			«IF event.hasValue»
+			«event.valueAccess» = value;
+			«ENDIF»
+			«event.access» = bool_true;
+			
+			«functionPrefix»runCycle(«scHandle»);
+		}
+	'''
+	
 	def dispatchEventFunction(ExecutionFlow it) '''
 		static void «functionPrefix»dispatch_event(«scHandleDecl», const «eventStructTypeName» * event) {
 			switch(event->name) {
@@ -84,14 +103,14 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 	
 	override raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»
-			void «raiseTimeEventFctID»(const «scHandleDecl», sc_eventid evid)
+			void «raiseTimeEventFctID»(«scHandleDecl», sc_eventid evid)
 			{
 				if ( ((sc_intptr_t)evid) >= ((sc_intptr_t)&(«scHandle»->timeEvents))
 					&&  ((sc_intptr_t)evid) < ((sc_intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»))
 					{
 					*(sc_boolean*)evid = bool_true;
-					«functionPrefix»runCycle(«scHandle»);
 					
+					«functionPrefix»runCycle(«scHandle»);
 				}		
 			}
 		«ENDIF»
