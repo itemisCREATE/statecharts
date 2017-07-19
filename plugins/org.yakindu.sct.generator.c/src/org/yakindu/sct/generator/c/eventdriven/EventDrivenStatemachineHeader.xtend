@@ -23,4 +23,8 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 	}
 	
+	override protected functions(ExecutionFlow it) {
+		super.functions(it).toString.replace('''const «scHandleDecl», sc_eventid evid''','''«scHandleDecl», sc_eventid evid''')
+	}
+	
 }
