@@ -309,7 +309,5 @@ unnamedOperation5a.param1 = param1;
 return 0;
 }
 sc_boolean operationsIface_alwaysTrue(const Operations* statechart){
-sc_boolean (AlwaysTrueMock::*func)() = alwaysTrueMock->alwaysTrueBehavior;
-return (alwaysTrueMock->*func)();
-
+return alwaysTrueMock->alwaysTrue();
 }
