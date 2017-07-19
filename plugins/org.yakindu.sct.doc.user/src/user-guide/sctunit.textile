@@ -1,8 +1,4 @@
 
-p. 
-
-==<div class="pro-feature">==
-
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/sctunit.textile
 
 h1(#sctunit_test-driven_statechart_development_with_sctunit). Test-driven statechart development with SCTUnit
@@ -977,5 +973,3 @@ A _test unit_ is either a "test class":#sctunit_test_classes or a "test suite":#
 ###. CHECK IMPORT: !images/sctunit_grammar_030_test_unit.png(Test unit grammar)!
 
 ###. CHECK IMPORT: p=. Test unit grammar %{display: block; font-size: 50%; padding-left: 20%; padding-right: 20%;}*Please note:* The _PackageImport_ non-terminal symbol will be available in future versions of YAKINDU Statechart Tools.%
-
-==</div>==
