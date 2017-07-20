@@ -8,7 +8,6 @@
 class AlwaysTrueMock{
 	public:
 	sc_boolean defaultReturn;
-	sc_boolean (AlwaysTrueMock::*alwaysTrueBehavior)();
 
 	sc_boolean alwaysTrue() {
 		
@@ -17,7 +16,6 @@ class AlwaysTrueMock{
 
 	void setAlwaysTrueDefault(sc_boolean returnValue){
 		defaultReturn = returnValue;
-		alwaysTrueBehavior = alwaysTrue;
 	}
 	
 	void initialize() {
@@ -26,7 +24,6 @@ class AlwaysTrueMock{
 	
 	void reset() {
 		initialize();
-		alwaysTrueBehavior = AlwaysTrueMock::alwaysTrue;
 	}
 };
 static AlwaysTrueMock* alwaysTrueMock;
