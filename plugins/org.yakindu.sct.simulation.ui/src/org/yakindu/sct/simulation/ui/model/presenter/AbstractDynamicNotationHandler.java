@@ -74,6 +74,8 @@ public abstract class AbstractDynamicNotationHandler implements IDynamicNotation
 		// Set the new colors
 		STATE_HIGHLIGHT_PARAMS.foregroundFadingColor = new Color(Display.getDefault(), foregroundColor);
 		STATE_HIGHLIGHT_PARAMS.backgroundFadingColor = new Color(Display.getDefault(), backgroundColor);
+		SUSPENDED_PARAMS.backgroundFadingColor = STATE_HIGHLIGHT_PARAMS.backgroundFadingColor;
+		SUSPENDED_PARAMS.foregroundFadingColor = green;
 		VERTEX_TRANSIENT_PARAMS.foregroundFadingColor = new Color(Display.getDefault(), vertexForegroundColor);
 		VERTEX_TRANSIENT_PARAMS.backgroundFadingColor = new Color(Display.getDefault(), vertexBackgroundColor);
 		TRANSITION_PARAMS.foregroundFadingColor = new Color(Display.getDefault(), transitionColor);
