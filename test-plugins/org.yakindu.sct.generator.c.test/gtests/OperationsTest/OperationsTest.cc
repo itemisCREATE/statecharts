@@ -7,19 +7,23 @@
 #include "OperationsRequired.h"
 class AlwaysTrueMock{
 	public:
-	sc_boolean defaultReturn;
+	sc_boolean (AlwaysTrueMock::*alwaysTrueBehavior)();
 
-	sc_boolean alwaysTrue() {
-		
-		return defaultReturn;
+	sc_boolean alwaysTrueDefault(){
+		return false;
 	}
 
-	void setAlwaysTrueDefault(sc_boolean returnValue){
-		defaultReturn = returnValue;
+	sc_boolean alwaysTrue1() {
+		
+		return true;
+	}
+
+	void setAlwaysTrueDefault(sc_boolean (AlwaysTrueMock::*func)()){
+		alwaysTrueBehavior = func;
 	}
 	
 	void initialize() {
-		defaultReturn = false;
+		alwaysTrueBehavior = &AlwaysTrueMock::alwaysTrueDefault;
 	}
 	
 	void reset() {
@@ -152,7 +156,7 @@ class StatemachineTest : public ::testing::Test{
 TEST_F(StatemachineTest, operationsCalled) {
 	alwaysTrueMock = new AlwaysTrueMock();
 	alwaysTrueMock->initialize();
-	alwaysTrueMock->setAlwaysTrueDefault(true);
+	alwaysTrueMock->setAlwaysTrueDefault(&AlwaysTrueMock::alwaysTrue1);
 	operations_enter(&statechart);
 	EXPECT_TRUE(operations_isStateActive(&statechart, Operations_main_region_A));
 	operations_runCycle(&statechart);
@@ -306,5 +310,6 @@ unnamedOperation5a.param1 = param1;
 return 0;
 }
 sc_boolean operationsIface_alwaysTrue(const Operations* statechart){
-return alwaysTrueMock->alwaysTrue();
+	sc_boolean (AlwaysTrueMock::*func)() = alwaysTrueMock->alwaysTrueBehavior;
+	return (alwaysTrueMock->*func)();
 }
