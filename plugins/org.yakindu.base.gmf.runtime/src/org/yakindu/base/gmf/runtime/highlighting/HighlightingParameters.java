@@ -26,7 +26,7 @@ public class HighlightingParameters {
 
 	public Color foregroundFadingColor = ColorConstants.red;
 
-	public Color backgroundFadingColor = new Color(null, 245, 216, 0);
+	public Color backgroundFadingColor = new Color(null, 245, 216, 44);
 
 	public HighlightingParameters() {
 	}
