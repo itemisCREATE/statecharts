@@ -57,7 +57,7 @@ public class ExecutionContextVisualizer extends CrossDocumentContentAdapter {
 	public void notifyChanged(final Notification notification) {
 		super.notifyChanged(notification);
 		if (notification.getFeature() == EXECUTION_CONTEXT__ACTIVE_STATES) {
-			highlightStates(notification, HighlightingParameters.DEFAULT);
+			highlightStates(notification, DefaultDynamicNotationHandler.STATE_HIGHLIGHT_PARAMS);
 		} else if (notification.getFeature() == EXECUTION_CONTEXT__EXECUTED_ELEMENTS) {
 			highlight(notification, DefaultDynamicNotationHandler.TRANSITION_PARAMS);
 		} else if (notification.getFeature() == EXECUTION_CONTEXT__SUSPENDED_ELEMENTS) {
