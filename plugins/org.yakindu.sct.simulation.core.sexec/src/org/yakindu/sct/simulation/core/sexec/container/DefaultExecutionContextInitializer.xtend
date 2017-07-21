@@ -35,10 +35,13 @@ import org.yakindu.sct.simulation.core.sruntime.EventDirection
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
 import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth - added functionality to filter unused declaration roots
  * 
  */
 class DefaultExecutionContextInitializer implements IExecutionContextInitializer {
@@ -47,17 +50,35 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
 	@Inject protected extension ITypeValueProvider
+	@Inject protected extension SExecExtensions
 
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
 		flow.scopes.forEach[context.slots += transform]
 	}
 
+	/**
+	 * Hook that decides if unused declarations in import scopes should be transformed to execution slots.
+	 * Subclasses may override this hook.
+	 * 
+	 * @return - false by default
+	 */	
+	def protected mapUnusedDeclarationRootsInImportScope() { false }
+
+
+
 	def dispatch ExecutionSlot transform(ImportScope scope) {
 		val composite = SRuntimeFactory.eINSTANCE.createCompositeSlot => [
 			name = "import"
 		]
+		
+		val usedDeclarations = scope.flow.usedDeclarationRoots
+		
 		// retrieve namespaces from variable names and create corresponding composite slots
-		for (Declaration decl : scope.declarations.filter(ImportDeclaration).map[declaration]) {
+		for (Declaration decl : scope.declarations
+										.filter(ImportDeclaration)
+										.map[declaration]
+										.filter(decl | mapUnusedDeclarationRootsInImportScope || usedDeclarations.contains(decl))) 
+		{
 			val pkg = EcoreUtil2.getContainerOfType(decl, Package)
 			if (pkg != null) {
 				val namespace = pkg.name
@@ -156,4 +177,11 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		]
 	}
 
+	
+	/**
+	 * @return A set of used declaration roots.
+	 */
+	def protected usedDeclarationRoots(ExecutionFlow flow) {
+		flow.eAllContents.filter(typeof(ElementReferenceExpression)).map( ere | ere.reference ).filter(typeof(Declaration)).toSet 
+	}
 }
