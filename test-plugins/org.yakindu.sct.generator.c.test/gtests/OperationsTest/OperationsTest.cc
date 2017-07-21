@@ -5,29 +5,36 @@
 #include "gtest/gtest.h"
 #include "Operations.h"
 #include "OperationsRequired.h"
+
+
 class AlwaysTrueMock{
 	public:
+	
 	sc_boolean (AlwaysTrueMock::*alwaysTrueBehavior)();
-
+	sc_boolean (AlwaysTrueMock::*alwaysTrueBehaviorDefault)();
+	
+	sc_boolean alwaysTrue1(){
+		return (true);
+	}
+	
 	sc_boolean alwaysTrueDefault(){
-		return false;
-	}
-
-	sc_boolean alwaysTrue1() {
-		
-		return true;
-	}
-
-	void setAlwaysTrueDefault(sc_boolean (AlwaysTrueMock::*func)()){
-		alwaysTrueBehavior = func;
+		return (false);
 	}
 	
-	void initialize() {
-		alwaysTrueBehavior = &AlwaysTrueMock::alwaysTrueDefault;
+	void updateBehavior(){
+		alwaysTrueBehavior = alwaysTrueBehaviorDefault;
 	}
 	
-	void reset() {
-		initialize();
+	void setDefaultBehavior(sc_boolean (AlwaysTrueMock::*defaultBehavior)()){
+		alwaysTrueBehaviorDefault = defaultBehavior;
+	}
+	
+	void initializeBehavior() {
+		setDefaultBehavior(&AlwaysTrueMock::alwaysTrueDefault);
+	}
+	
+	void resetBehavior() {
+		initializeBehavior();
 	}
 };
 static AlwaysTrueMock* alwaysTrueMock;
@@ -144,7 +151,6 @@ static struct {
 
 static Operations statechart;
 
-
 class StatemachineTest : public ::testing::Test{
 	protected:
 	virtual void SetUp() {
@@ -155,8 +161,8 @@ class StatemachineTest : public ::testing::Test{
 
 TEST_F(StatemachineTest, operationsCalled) {
 	alwaysTrueMock = new AlwaysTrueMock();
-	alwaysTrueMock->initialize();
-	alwaysTrueMock->setAlwaysTrueDefault(&AlwaysTrueMock::alwaysTrue1);
+	alwaysTrueMock->initializeBehavior();
+	alwaysTrueMock->setDefaultBehavior(&AlwaysTrueMock::alwaysTrue1);
 	operations_enter(&statechart);
 	EXPECT_TRUE(operations_isStateActive(&statechart, Operations_main_region_A));
 	operations_runCycle(&statechart);
@@ -200,7 +206,7 @@ TEST_F(StatemachineTest, operationsCalled) {
 	EXPECT_TRUE(unnamedOperation4a.param1 == 5l);
 	EXPECT_TRUE(unnamedOperation5.called);
 	EXPECT_TRUE(unnamedOperation5a.called);
-	alwaysTrueMock->reset();
+	alwaysTrueMock->resetBehavior();
 }
 
 
@@ -310,6 +316,8 @@ unnamedOperation5a.param1 = param1;
 return 0;
 }
 sc_boolean operationsIface_alwaysTrue(const Operations* statechart){
-	sc_boolean (AlwaysTrueMock::*func)() = alwaysTrueMock->alwaysTrueBehavior;
-	return (alwaysTrueMock->*func)();
+alwaysTrueMock->updateBehavior();
+sc_boolean (AlwaysTrueMock::*func)() = alwaysTrueMock->alwaysTrueBehavior;
+return (alwaysTrueMock->*func)();
+
 }
