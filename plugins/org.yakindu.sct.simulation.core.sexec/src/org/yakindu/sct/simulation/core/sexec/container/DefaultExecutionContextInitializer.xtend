@@ -64,12 +64,16 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	 */	
 	def protected mapUnusedDeclarationRootsInImportScope() { false }
 
-
+	
+	def create it : SRuntimeFactory.eINSTANCE.createCompositeSlot importSlot(ExecutionFlow flow) {
+		it => [
+			name = "imports"
+		]
+	}
 
 	def dispatch ExecutionSlot transform(ImportScope scope) {
-		val composite = SRuntimeFactory.eINSTANCE.createCompositeSlot => [
-			name = "import"
-		]
+		
+		val composite = importSlot(scope.flow)
 		
 		val usedDeclarations = scope.flow.usedDeclarationRoots
 		
@@ -80,7 +84,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 										.filter(decl | mapUnusedDeclarationRootsInImportScope || usedDeclarations.contains(decl))) 
 		{
 			val pkg = EcoreUtil2.getContainerOfType(decl, Package)
-			if (pkg != null) {
+			if (pkg !== null) {
 				val namespace = pkg.name
 				val declName = decl.name
 				val slot = composite.slots.getSlotFor(namespace)
@@ -100,7 +104,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 
 	def getSlotFor(List<ExecutionSlot> slots, String name) {
 		val existingSlot = slots.findFirst[it.name == name]
-		if (existingSlot != null && existingSlot instanceof CompositeSlot) {
+		if (existingSlot !== null && existingSlot instanceof CompositeSlot) {
 			existingSlot as CompositeSlot
 		} else {
 			val newSlot = SRuntimeFactory.eINSTANCE.createCompositeSlot
@@ -131,7 +135,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 			if (scope.name !== null) {
 				name = scope.name
 				val scopeFqn = scope.fullyQualifiedName.toString
-				fqName = if(namespace != null) namespace + "." + scopeFqn else scopeFqn
+				fqName = if(namespace !== null) namespace + "." + scopeFqn else scopeFqn
 			} else {
 				name = "default"
 			}
@@ -163,7 +167,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		SRuntimeFactory.eINSTANCE.createExecutionOperation => [
 			name = op.fullyQualifiedName.lastSegment
 			fqName = op.fullyQualifiedName.toString
-			type = if(op.type != null) op.type else getType(ITypeSystem.VOID)
+			type = if(op.type !== null) op.type else getType(ITypeSystem.VOID)
 			value = it.type.defaultValue
 		]
 	}
