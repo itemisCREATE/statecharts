@@ -54,6 +54,8 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	@Inject protected extension ITypeValueProvider
 	@Inject protected extension SExecExtensions
 
+	protected boolean mapUnusedDaclarationRoots = false
+	
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
 		flow.scopes.forEach[context.slots += transform]
 	}
@@ -64,8 +66,10 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	 * 
 	 * @return - false by default
 	 */	
-	def protected mapUnusedDeclarationRootsInImportScope() { false }
+	def isMapUnusedDeclarationRootsInImportScope() { mapUnusedDaclarationRoots }
 
+	def setMapUnusedDeclarationRootsInImportScope(boolean b) { mapUnusedDaclarationRoots = b }
+	
 	
 	def create it : SRuntimeFactory.eINSTANCE.createCompositeSlot importSlot(ExecutionFlow flow) {
 		it => [
