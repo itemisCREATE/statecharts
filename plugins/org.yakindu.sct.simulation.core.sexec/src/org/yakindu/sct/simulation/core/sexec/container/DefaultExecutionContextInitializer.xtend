@@ -37,6 +37,8 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
 import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import java.util.Set
+import java.util.HashSet
 
 /**
  * 
@@ -186,6 +188,10 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	 * @return A set of used declaration roots.
 	 */
 	def protected usedDeclarationRoots(ExecutionFlow flow) {
-		flow.eAllContents.filter(typeof(ElementReferenceExpression)).map( ere | ere.reference ).filter(typeof(Declaration)).toSet 
+		val Set<Declaration> usedDecls = new HashSet<Declaration>()
+		
+		if (flow !== null) flow.eAllContents.filter(typeof(ElementReferenceExpression)).map( ere | ere.reference ).filter(typeof(Declaration)).forEach[ decl | usedDecls += decl]
+		
+		return usedDecls
 	}
 }
