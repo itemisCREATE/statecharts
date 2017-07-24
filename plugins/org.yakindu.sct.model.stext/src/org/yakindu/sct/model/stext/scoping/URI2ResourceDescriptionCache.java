@@ -61,7 +61,7 @@ public class URI2ResourceDescriptionCache implements Delegate {
 		return TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(DOMAIN_ID);
 	}
 
-	public IResourceDescription get(URI uri) {
+	public synchronized IResourceDescription get(URI uri) {
 		try {
 			IResourceDescription descrpition = cache.get(uri.toString());
 			return descrpition;
@@ -89,25 +89,25 @@ public class URI2ResourceDescriptionCache implements Delegate {
 	}
 
 	@Override
-	public boolean handleResourceDeleted(Resource resource) {
+	public synchronized boolean handleResourceDeleted(Resource resource) {
 		cache.invalidate(resource.getURI().toString());
 		return true;
 	}
 
 	@Override
-	public boolean handleResourceMoved(Resource resource, URI newURI) {
+	public synchronized boolean handleResourceMoved(Resource resource, URI newURI) {
 		cache.invalidate(resource.getURI().toString());
 		return true;
 	}
 
 	@Override
-	public boolean handleResourceChanged(Resource resource) {
+	public synchronized boolean handleResourceChanged(Resource resource) {
 		cache.invalidate(resource.getURI().toString());
 		return true;
 	}
 
 	@Override
-	public void dispose() {
+	public synchronized void dispose() {
 		if (workspaceSynchronizer != null)
 			workspaceSynchronizer.dispose();
 		cache.invalidateAll();
