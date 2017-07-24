@@ -10,11 +10,13 @@
 */
 package org.yakindu.sct.model.stext.ui;
 
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.tasks.ITaskFinder;
+import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
@@ -30,6 +32,8 @@ import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.shared.Access;
 import org.yakindu.base.utils.jface.help.CrossRefObjectTextHover;
+import org.yakindu.sct.model.stext.ui.contentassist.AsyncContentAssistContextFactory;
+import org.yakindu.sct.model.stext.ui.contentassist.AsyncXtextContentAssistProcessor;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
@@ -122,5 +126,15 @@ public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextU
 
 	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
 		return PackageImportHyperlinkHelper.class;
+	}
+
+	@Override
+	public Class<? extends IContentAssistantFactory> bindIContentAssistantFactory() {
+		return AsyncContentAssistContextFactory.class;
+	}
+
+	@Override
+	public Class<? extends IContentAssistProcessor> bindIContentAssistProcessor() {
+		return AsyncXtextContentAssistProcessor.class;
 	}
 }
