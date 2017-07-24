@@ -39,7 +39,7 @@ public class STextStatefulFactory extends StatefulFactory {
 			throws BadLocationException {
 		this.parseResult = resource.getParseResult();
 		if (Display.getCurrent() == null) {
-			List<ContentAssistContext> result = new ArrayList<>();
+			final List<ContentAssistContext> result = new ArrayList<>();
 			Display.getDefault().syncExec(new Runnable() {
 				@Override
 				public void run() {
