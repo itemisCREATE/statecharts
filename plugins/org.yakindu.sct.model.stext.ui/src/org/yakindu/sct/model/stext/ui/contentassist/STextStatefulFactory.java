@@ -35,7 +35,7 @@ public class STextStatefulFactory extends StatefulFactory {
 	private IParseResult parseResult;
 
 	@Override
-	public ContentAssistContext[] create(ITextViewer viewer, int offset, XtextResource resource)
+	public ContentAssistContext[] create(final ITextViewer viewer, int offset, final XtextResource resource)
 			throws BadLocationException {
 		this.parseResult = resource.getParseResult();
 		if (Display.getCurrent() == null) {
