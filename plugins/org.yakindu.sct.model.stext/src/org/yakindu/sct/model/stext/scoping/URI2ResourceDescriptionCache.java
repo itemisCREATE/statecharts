@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutionException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer.Delegate;
@@ -73,7 +74,7 @@ public class URI2ResourceDescriptionCache implements Delegate {
 	}
 
 	protected IResourceDescription getInternal(URI uri) {
-		ResourceSet set = getEditingDomain().getResourceSet();
+		ResourceSet set = getResourceSet();
 		Resource resource = set.getResource(uri, true);
 		if (resource != null) {
 			IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(uri);
@@ -86,6 +87,13 @@ public class URI2ResourceDescriptionCache implements Delegate {
 			return result;
 		}
 		return null;
+	}
+
+	protected ResourceSet getResourceSet() {
+		if(getEditingDomain() == null) {
+			return new ResourceSetImpl();
+		}
+		return getEditingDomain().getResourceSet();
 	}
 
 	@Override
