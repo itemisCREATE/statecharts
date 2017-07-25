@@ -57,20 +57,20 @@ import com.google.inject.Injector;
 public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 	// Error messages
-	public static final String MISSING_REQUIRED_PARAMETER = "Missing required Parameter";
-	public static final String MISSING_REQUIRED_FEATURE = "Missing required feature";
-	public static final String DUPLICATE_PARAMETER = "Duplicate parameter!";
-	public static final String DUPLICATE_FEATURE = "Duplicate feature!";
-	public static final String UNKOWN_GENERATOR = "Unkown Generator";
-	public static final String INCOMPATIBLE_TYPE_BOOLEAN_EXPECTED = "Incompatible type, Boolean expected";
-	public static final String INCOMPATIBLE_TYPE_INTEGER_EXPECTED = "Incompatible type, Integer expected";
-	public static final String INCOMPATIBLE_TYPE_FLOAT_EXPECTED = "Incompatible type, Float expected";
-	public static final String INCOMPATIBLE_TYPE_STRING_EXPECTED = "Incompatible type, String expected";
+	public static final String MISSING_REQUIRED_PARAMETER = "Missing required parameter.";
+	public static final String MISSING_REQUIRED_FEATURE = "Missing required feature.";
+	public static final String DUPLICATE_PARAMETER = "Duplicate parameter.";
+	public static final String DUPLICATE_FEATURE = "Duplicate feature.";
+	public static final String UNKOWN_GENERATOR = "Unkown generator.";
+	public static final String INCOMPATIBLE_TYPE_BOOLEAN_EXPECTED = "Incompatible type, Boolean expected.";
+	public static final String INCOMPATIBLE_TYPE_INTEGER_EXPECTED = "Incompatible type, Integer expected.";
+	public static final String INCOMPATIBLE_TYPE_FLOAT_EXPECTED = "Incompatible type, Float expected.";
+	public static final String INCOMPATIBLE_TYPE_STRING_EXPECTED = "Incompatible type, String expected.";
 	public static final String UNKNOWN_CONTENT_TYPE = "Unknown content type '";
-	public static final String DEPRECATED = "Element is depricated";
-	public static final String EMPTY_SGEN = ".sgen file does not contain any entries";
+	public static final String DEPRECATED = "Element is depricated.";
+	public static final String EMPTY_SGEN = ".sgen file does not contain any entries.";
 	// Failure codes
-	public static final String CODE_REQUIRED_FEATURE = "code_req_feature";
+	public static final String CODE_REQUIRED_FEATURE = "code_req_feature.";
 
 	@Inject
 	private Injector injector;
