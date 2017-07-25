@@ -14,38 +14,41 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.exitonselftransition.ExitOnSelfTransitionStatemachine;
-import org.yakindu.scr.exitonselftransition.ExitOnSelfTransitionStatemachine.State;
+import org.yakindu.scr.exitonselftransition.ExitOnSelfTransitionStatemachine.State;	
 
 /**
  * Unit TestCase for ExitOnSelfTransition
  */
 @SuppressWarnings("all")
 public class ExitOnSelfTransition {
+	
 	private ExitOnSelfTransitionStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void exitOnSelfTransition_setUp() {
 		statemachine = new ExitOnSelfTransitionStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void exitOnSelfTransition_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void exitOnSelfTransitionTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getEntryCount() == 1l);
 		assertTrue(statemachine.getExitCount() == 0l);
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.getEntryCount() == 2l);
 		assertTrue(statemachine.getExitCount() == 1l);
 		statemachine.raiseF();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.getEntryCount() == 2l);
 		assertTrue(statemachine.getExitCount() == 2l);
 	}

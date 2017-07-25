@@ -14,29 +14,32 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.statechartlocalreactions.StatechartLocalReactionsStatemachine;
-import org.yakindu.scr.statechartlocalreactions.StatechartLocalReactionsStatemachine.State;
+import org.yakindu.scr.statechartlocalreactions.StatechartLocalReactionsStatemachine.State;	
 
 /**
  * Unit TestCase for StatechartLocalReactions
  */
 @SuppressWarnings("all")
 public class StatechartLocalReactions {
+	
 	private StatechartLocalReactionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void statechartLocalReactions_setUp() {
 		statemachine = new StatechartLocalReactionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void statechartLocalReactions_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void statechartLocalReactionsTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_S1));
 		assertTrue(statemachine.isStateActive(State.region2_a));
 		while (statemachine.getMyInt() < 10l) {
@@ -47,7 +50,7 @@ public class StatechartLocalReactions {
 			else {
 				assertTrue(statemachine.isStateActive(State.main_region_S2));
 			}
-			statemachine.runCycle();;
+			statemachine.runCycle();
 		}
 	}
 }

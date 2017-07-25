@@ -14,29 +14,32 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.stextkeywordsinstatesandregions.STextKeywordsInStatesAndRegionsStatemachine;
-import org.yakindu.scr.stextkeywordsinstatesandregions.STextKeywordsInStatesAndRegionsStatemachine.State;
+import org.yakindu.scr.stextkeywordsinstatesandregions.STextKeywordsInStatesAndRegionsStatemachine.State;	
 
 /**
  * Unit TestCase for STextKeywordsInStatesAndRegions
  */
 @SuppressWarnings("all")
 public class STextKeywordsInStatesAndRegions {
+	
 	private STextKeywordsInStatesAndRegionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void sTextKeywordsInStatesAndRegions_setUp() {
 		statemachine = new STextKeywordsInStatesAndRegionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void sTextKeywordsInStatesAndRegions_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void activeCheckWithSTextNamedStates() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_interface));
 		assertTrue(statemachine.isStateActive(State.namespace_event));
@@ -58,7 +61,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_event));
@@ -80,7 +83,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -102,7 +105,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -124,7 +127,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -146,7 +149,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -168,7 +171,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -190,7 +193,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -212,7 +215,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -234,7 +237,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -256,7 +259,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -278,7 +281,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -300,7 +303,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -322,7 +325,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -344,7 +347,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -366,7 +369,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -388,7 +391,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -410,7 +413,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -432,7 +435,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_always));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -454,7 +457,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_oncycle));
 		assertTrue(statemachine.isStateActive(State.active_raise));
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));
@@ -476,7 +479,7 @@ public class STextKeywordsInStatesAndRegions {
 		assertTrue(statemachine.isStateActive(State.valueof_oncycle));
 		assertTrue(statemachine.isStateActive(State.active_valueof));
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.default_namespace));
 		assertTrue(statemachine.isStateActive(State.operation_internal));
 		assertTrue(statemachine.isStateActive(State.namespace_local));

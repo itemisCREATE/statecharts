@@ -14,42 +14,45 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.constants.ConstantsStatemachine;
-import org.yakindu.scr.constants.ConstantsStatemachine.State;
+import org.yakindu.scr.constants.ConstantsStatemachine.State;	
 
 /**
  * Unit TestCase for Constants
  */
 @SuppressWarnings("all")
 public class ConstantsTests {
+	
 	private ConstantsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void constantsTests_setUp() {
 		statemachine = new ConstantsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void constantsTests_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void constantDefinition() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getX() == 10l);
 		assertTrue(statemachine.getY() == 20l);
 		assertTrue(statemachine.getSCINamed().getY().equals("Hello World"));
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.getResult() == 20l);
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 		assertTrue(statemachine.getResult() == 100l);
 		statemachine.raiseE2(statemachine.getX());
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.getResult() == 1000l);
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}

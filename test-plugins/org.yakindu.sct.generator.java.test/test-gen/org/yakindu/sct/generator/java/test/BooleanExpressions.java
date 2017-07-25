@@ -14,34 +14,37 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.booleanexpressions.BooleanExpressionsStatemachine;
-import org.yakindu.scr.booleanexpressions.BooleanExpressionsStatemachine.State;
+import org.yakindu.scr.booleanexpressions.BooleanExpressionsStatemachine.State;	
 
 /**
  * Unit TestCase for BooleanExpressions
  */
 @SuppressWarnings("all")
 public class BooleanExpressions {
+	
 	private BooleanExpressionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void booleanExpressions_setUp() {
 		statemachine = new BooleanExpressionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void booleanExpressions_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void booleanExpressions() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyBool1() == true);
 		assertTrue(statemachine.getMyBool2() == false);
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.getAnd() == false);
 		assertTrue(statemachine.getOr() == true);

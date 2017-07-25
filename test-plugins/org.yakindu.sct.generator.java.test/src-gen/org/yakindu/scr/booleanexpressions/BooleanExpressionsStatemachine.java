@@ -266,7 +266,7 @@ public class BooleanExpressionsStatemachine implements IBooleanExpressionsStatem
 		
 		sCInterface.setOr(sCInterface.myBool1 || sCInterface.myBool2);
 		
-		sCInterface.setNot( !sCInterface.myBool1);
+		sCInterface.setNot(!sCInterface.myBool1);
 		
 		sCInterface.setEqual(sCInterface.myBool1==sCInterface.myBool2);
 		

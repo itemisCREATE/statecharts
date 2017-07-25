@@ -33,17 +33,30 @@ class TypesTestFactory {
 	}
 
 	def createParameter(String name, String typeName) {
-		createParameter(name, toTypeSpecifier(ts.getType(typeName)));
+		createParameter(name, typeName, false);
+	}
+	
+	def createParameter(String name, String typeName, boolean isOptional) {
+		createParameter(name, toTypeSpecifier(ts.getType(typeName)), isOptional);
 	}
 
 	def createParameter(String name, Type type) {
-		createParameter(name, type.toTypeSpecifier);
+		createParameter(name, type.toTypeSpecifier, false);
+	}
+	
+	def createParameter(String name, Type type, boolean isOptional) {
+		createParameter(name, type.toTypeSpecifier, isOptional);
 	}
 
 	def createParameter(String name, TypeSpecifier typeSpec) {
+		createParameter(name, typeSpec, false)
+	}
+	
+	def createParameter(String name, TypeSpecifier typeSpec, boolean isOptional) {
 		factory.createParameter => [
 			it.name = name
 			it.typeSpecifier = typeSpec
+			it.optional = isOptional
 		]
 	}
 

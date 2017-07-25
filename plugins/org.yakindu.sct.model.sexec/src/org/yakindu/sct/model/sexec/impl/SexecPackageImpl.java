@@ -495,6 +495,15 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getExecutionNode_LocalReactSequence() {
+		return (EReference)executionNodeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getExecutionState() {
 		return executionStateEClass;
 	}
@@ -1308,6 +1317,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		createEReference(executionNodeEClass, EXECUTION_NODE__REACTIONS);
 		createEAttribute(executionNodeEClass, EXECUTION_NODE__SIMPLE_NAME);
 		createEReference(executionNodeEClass, EXECUTION_NODE__REACT_SEQUENCE);
+		createEReference(executionNodeEClass, EXECUTION_NODE__LOCAL_REACT_SEQUENCE);
 
 		executionStateEClass = createEClass(EXECUTION_STATE);
 		createEAttribute(executionStateEClass, EXECUTION_STATE__LEAF);
@@ -1518,6 +1528,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEReference(getExecutionNode_Reactions(), this.getReaction(), null, "reactions", null, 0, -1, ExecutionNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionNode_SimpleName(), ecorePackage.getEString(), "simpleName", null, 0, 1, ExecutionNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionNode_ReactSequence(), this.getSequence(), null, "reactSequence", null, 0, 1, ExecutionNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionNode_LocalReactSequence(), this.getSequence(), null, "localReactSequence", null, 0, 1, ExecutionNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionStateEClass, ExecutionState.class, "ExecutionState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExecutionState_Leaf(), ecorePackage.getEBoolean(), "leaf", "false", 0, 1, ExecutionState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

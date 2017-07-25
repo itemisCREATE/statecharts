@@ -16,11 +16,13 @@ import static org.mockito.Matchers.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.yakindu.scr.operations.IOperationsStatemachine.*;
 import org.mockito.ArgumentCaptor;
-import static org.mockito.ArgumentCaptor.forClass;
+import static org.mockito.ArgumentCaptor.forClass;		
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.operations.OperationsStatemachine;
-import org.yakindu.scr.operations.OperationsStatemachine.State;
+import org.yakindu.scr.operations.OperationsStatemachine.State;	
 
 /**
  * Unit TestCase for Operations
@@ -30,10 +32,13 @@ public class OperationsTest {
 	SCInterfaceOperationCallback defaultMock;
 	InternalOperationCallback internalMock;
 	SCIInterface1OperationCallback interface1Mock;
+	
 	private OperationsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void operationsTest_setUp() {
 		statemachine = new OperationsStatemachine();
 		statemachine.init();
 		defaultMock = mock(SCInterfaceOperationCallback.class);
@@ -45,7 +50,7 @@ public class OperationsTest {
 	}
 
 	@After
-	public void tearDown() {
+	public void operationsTest_tearDown() {
 		statemachine.getSCInterface().setSCInterfaceOperationCallback(null);
 		statemachine.setInternalOperationCallback(null);
 		statemachine.getSCIInterface1().setSCIInterface1OperationCallback(null);
@@ -54,11 +59,16 @@ public class OperationsTest {
 	
 	@Test
 	public void operationsCalled() {
-		when(defaultMock.alwaysTrue()).thenReturn(true);
+		when(defaultMock.alwaysTrue()).thenAnswer(new Answer<Boolean>() {
+			@Override
+			public Boolean answer(InvocationOnMock invocation) {
+				return true;
+			}
+		});
 		 
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		verify(internalMock, atLeastOnce()).internalOperation1();
 		 
@@ -84,7 +94,7 @@ public class OperationsTest {
 		verify(internalMock, atLeastOnce()).internalOperation5a(stringCaptureinternalOperation5a_12_0.capture());
 		 
 		statemachine.raiseEv();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 		verify(interface1Mock, atLeastOnce()).interfaceOperation1();
 		 
@@ -110,7 +120,7 @@ public class OperationsTest {
 		verify(interface1Mock, atLeastOnce()).interfaceOperation5a(stringCaptureinterfaceOperation5a_23_0.capture());
 		 
 		statemachine.raiseEv();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_D));
 		verify(defaultMock, atLeastOnce()).unnamedInterfaceOperation1();
 		 

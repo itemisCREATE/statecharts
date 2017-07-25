@@ -138,12 +138,12 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		sCInterface.raiseF();
 	}
 	
-	private boolean check_r1_A_tr0_tr0() {
-		return i2;
-	}
-	
 	private boolean check_r1_A_lr0_lr0() {
 		return sCInterface.e;
+	}
+	
+	private boolean check_r1_A_tr0_tr0() {
+		return i2;
 	}
 	
 	private boolean check_r1_B_tr0_tr0() {
@@ -158,13 +158,13 @@ public class InternalEventLifeCycleStatemachine implements IInternalEventLifeCyc
 		return sCInterface.f;
 	}
 	
+	private void effect_r1_A_lr0_lr0() {
+		raiseI1();
+	}
+	
 	private void effect_r1_A_tr0() {
 		exitSequence_r1_A();
 		enterSequence_r1_B_default();
-	}
-	
-	private void effect_r1_A_lr0_lr0() {
-		raiseI1();
 	}
 	
 	private void effect_r1_B_tr0() {

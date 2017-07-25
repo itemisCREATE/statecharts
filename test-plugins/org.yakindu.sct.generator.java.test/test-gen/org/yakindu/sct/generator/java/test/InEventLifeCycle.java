@@ -14,32 +14,35 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.ineventlifecycle.InEventLifeCycleStatemachine;
-import org.yakindu.scr.ineventlifecycle.InEventLifeCycleStatemachine.State;
+import org.yakindu.scr.ineventlifecycle.InEventLifeCycleStatemachine.State;	
 
 /**
  * Unit TestCase for InEventLifeCycle
  */
 @SuppressWarnings("all")
 public class InEventLifeCycle {
+	
 	private InEventLifeCycleStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void inEventLifeCycle_setUp() {
 		statemachine = new InEventLifeCycleStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void inEventLifeCycle_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void eventLifeCycle() {
-		statemachine.enter();;
+		statemachine.enter();
 		statemachine.raiseE();
 		assertTrue(statemachine.getI() == 0l);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.getI() == 1l);
 	}
 }

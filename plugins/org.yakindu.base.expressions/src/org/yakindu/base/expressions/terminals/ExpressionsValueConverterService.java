@@ -24,6 +24,11 @@ import com.google.inject.Inject;
  */
 public class ExpressionsValueConverterService extends DefaultTerminalConverters {
 	
+	public static final String QID = "QID";
+	public static final String BOOL = "BOOL";
+	public static final String HEX = "HEX";
+	public static final String BINARY = "BINARY";
+	
 	@Inject
 	protected AbstractIDValueConverter idValueConverter;
 	
@@ -39,22 +44,22 @@ public class ExpressionsValueConverterService extends DefaultTerminalConverters 
 	@Inject
 	protected QIDValueConverter qidConverter;
 	
-	@ValueConverter(rule = "BOOL")
+	@ValueConverter(rule = BOOL)
 	public IValueConverter<Boolean> BOOL() {
 		return boolConverter;
 	}
 	
-	@ValueConverter(rule = "HEX")
+	@ValueConverter(rule = HEX)
 	public IValueConverter<Integer> HEX() {
 		return hexConverter;
 	}
 	
-	@ValueConverter(rule = "BINARY")
+	@ValueConverter(rule = BINARY)
 	public IValueConverter<Integer> BINARY() {
 		return binaryConverter;
 	}
 	
-	@ValueConverter(rule = "QID")
+	@ValueConverter(rule = QID)
 	public IValueConverter<String> QID() {
 		return qidConverter;
 	}

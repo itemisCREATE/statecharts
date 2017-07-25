@@ -12,12 +12,15 @@ package org.yakindu.sct.model.sexec.transformation
 
 import com.google.inject.Inject
 import java.util.ArrayList
+import java.util.Collection
 import java.util.HashSet
 import java.util.List
 import java.util.Set
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.Expression
+import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExecutionChoice
@@ -50,8 +53,6 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.base.expressions.expressions.ExpressionsFactory
-import java.util.Collection
 
 class BehaviorMapping {
 
@@ -102,7 +103,6 @@ class BehaviorMapping {
 		}	
 		
 		state.entryReactions
-//			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
 			.map([lr | lr.mapEntryAction ])
 			.forEach(e | if (e != null) { seq.steps.add(e) })
 		
@@ -150,7 +150,6 @@ class BehaviorMapping {
 		// map multiple transitions to one reaction
 		r.effect = transitions.mapToEffect(r)
 		
-//		_sync.reactions.addAll( sync.outgoingTransitions.map(t | t.mapTransition) )
 		return _sync
 	}
 
@@ -217,35 +216,6 @@ class BehaviorMapping {
 			
 		} else null
 	}
-	
-
-//	def Statement divide(Expression stmnt, long divisor) {
-//		val NumericalMultiplyDivideExpression div = stext.factory.createNumericalMultiplyDivideExpression
-//		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
-//		val IntLiteral intLit = stext.factory.createIntLiteral
-//		intLit.value = divisor.intValue
-//		pve.value = intLit
-//		
-//		div.operator = MultiplicativeOperator::DIV
-//		div.leftOperand = stmnt
-//		div.rightOperand = pve
-//		
-//		div
-//	}
-	
-//	def Statement multiply(Expression stmnt, long factor) {
-//		val NumericalMultiplyDivideExpression div = stext.factory.createNumericalMultiplyDivideExpression
-//		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
-//		val IntLiteral intLit = stext.factory.createIntLiteral
-//		intLit.value = factor.intValue
-//		pve.value = intLit
-//		
-//		div.operator = MultiplicativeOperator::MUL
-//		div.leftOperand = stmnt
-//		div.rightOperand = pve
-//		
-//		div
-//	}
 	
 		
 	def dispatch Sequence mapEffect(Effect effect) {}
@@ -451,6 +421,7 @@ class BehaviorMapping {
 		sequence.steps.addAll( mapToStateConfigurationEnterSequence( newArrayList(t) ).steps )
 		
 		
+		
 		return sequence
 	}
 	
@@ -463,11 +434,7 @@ class BehaviorMapping {
 		// define exit behavior of transition
 		
 		// first process the exit behavior of orthogonal states that has to be performed before source exit
-		val exitStates = transitions.get(0).exitStates.toList
-		for ( t : transitions ) {
-			exitStates.retainAll(t.exitStates.toList)
-		}
-		val topExitState = exitStates.last
+		val topExitState = transitions.topExitState 
 		
 		if (trace.addTraceSteps) {
 			for (t : transitions) {
@@ -486,7 +453,6 @@ class BehaviorMapping {
 		for ( t : transitions ) {
 			if (t.effect != null) sequence.steps.add(t.effect.mapEffect)	
 			if (trace.addTraceSteps) { 
-//				sequence.steps.add(0, t.create.newTraceReactionWillFire)
 				sequence.steps += t.create.newTraceReactionFired
 			}
 		}
@@ -494,9 +460,74 @@ class BehaviorMapping {
 	
 		// define entry behavior of the transition	
 		sequence.steps.addAll( mapToStateConfigurationEnterSequence( transitions ).steps )
-
+		
+		
+		// handle local reactions that are out of transition scope
+		val topEntryState = transitions.topEntryState
+		val commonAncestors = commonAncestors(topExitState, topEntryState)
+		val lcaRegion = commonAncestors.firstRegion
+		
+		val localReactionSequence = lcaRegion.lcaDoSequence(topExitState.create.flow)
+		if (localReactionSequence != null) sequence.steps += localReactionSequence
 		
 		return sequence
+	}
+	
+	
+	private def Sequence lcaDoSequence(Region region, ExecutionFlow flow) {
+		
+		if ( region == null ) return null
+
+		val execRegion = region.create
+		
+		var List<ExecutionNode> parentNodes = new ArrayList<ExecutionNode>()
+		val shouldExecuteParent = 
+			if (! region.statechart.childFirstExecution) 
+				[ExecutionScope parentScope, ExecutionScope execScope | false ]
+			else
+				[ExecutionScope parentScope, ExecutionScope execScope | 
+					parentScope.stateVector.offset + parentScope.stateVector.size 
+					== execScope.stateVector.offset + execScope.stateVector.size
+				]
+		 
+		
+		if (region.parentStates.head != null) {
+			val state = region.parentStates.head
+			val execState = state.create
+									
+			val parents = state.parentStates.map(p|p.create as ExecutionState).filter(p| shouldExecuteParent.apply(p, execState) )
+			
+			parentNodes.addAll(parents.map(p|p as ExecutionNode))			
+			if ( shouldExecuteParent.apply( flow, execState) )
+				parentNodes += flow
+		} else {
+			if ( shouldExecuteParent.apply( flow, execRegion) )
+				parentNodes += flow
+		}
+
+			
+		if (region.statechart.childFirstExecution) parentNodes = parentNodes.reverse		
+		
+		parentNodes.fold(null, [ r, s | s.createLocalReactionSequence(r)])
+	}
+
+	
+	private def Sequence createLocalReactionSequence(ExecutionNode state, Step localStep) {	
+				
+		val localReactions = state.reactions.filter(r | ! r.transition ).toList
+		var localSteps = sexec.factory.createSequence
+		localSteps.steps.addAll(localReactions.map(lr | {
+				var ifStep = sexec.factory.createIf
+				ifStep.check = lr.check.newRef		
+				ifStep.thenStep = lr.effect.newCall
+				ifStep
+		}))
+
+		if (localStep != null) localSteps.steps += localStep
+		
+//		if (localSteps.steps.empty) return null		
+//		else 
+		return localSteps
 	}
 	
 	/**
@@ -524,15 +555,7 @@ class BehaviorMapping {
 														if (!s.exists(tes | e.target == tes.target)) {s.add(e)} 
 														s
 													}])
-													
-		// determine all target vertices and create a list that does not contain duplicates
-//		val targets = transitions
-//						.map( t | t.target.mapped)
-//						.fold(new ArrayList<ExecutionNode>, [ s, e | { 
-//							if (!s.contains(e)) {s.add(e)} 
-//							s
-//						}])
-		
+															
 		// recursively extend the sequence by entering the scope for the specified targets		
 		if (entryScope != null) entryScope.addEnterStepsForTargetsToSequence( targets, sequence)	
 		else {
@@ -689,6 +712,17 @@ class BehaviorMapping {
 		sourcePath.filter( typeof(State) ) // and reducing this exit path to states 
 	}
 
+	def State topExitState(List<Transition> transitions) {
+				// first process the exit behavior of orthogonal states that has to be performed before source exit
+		val exitStates = transitions.get(0).exitStates.toList
+
+		for ( t : transitions ) {
+			exitStates.retainAll(t.exitStates.toList)
+		}
+		
+		exitStates.last		
+	}
+
 	/** Determines the  */
 	def Iterable<State> entryStates(Transition t) {
 		val l = t.target.containers
@@ -696,20 +730,45 @@ class BehaviorMapping {
 		l.filter( typeof(State) )
 	}
 	
-	def Iterable<ExecutionScope> exitScopes(Transition t) {
-		val source = t.source
-		var executionSource = switch (source) {
-				RegularState: source.create
-			}
+	
+	def State topEntryState(List<Transition> transitions) {
+		// first process the exit behavior of orthogonal states that has to be performed before source exit
+		val states = transitions.get(0).entryStates.toList
+
+		for ( t : transitions ) {
+			states.retainAll(t.entryStates.toList)
+		}
 		
-		var executionTarget = switch (source) {
-				RegularState: source.create
-			}
-		
-		val l =executionSource.containers
-		l.removeAll(executionTarget.containers)
-		null
+		states.last		
 	}
+
+	
+	def List<EObject> commonAncestors(Vertex a, Vertex b) {
+		// we determine the states that have to be exited by 
+		val aParents = a.containers // getting the path elements from the source node 
+		val bParents = b.containers // and the path elements from the target all target node
+		{ // and for the case of self transitions
+			bParents.remove(b) // we make sure that target node
+			aParents.remove(a) // and source node are not part of the target path
+		}
+		
+		aParents.retainAll(bParents) // get all ancestors by retaining the common elements
+		aParents		
+	}
+	
+
+	def firstState(Iterable<EObject> it) {
+		filter( typeof(State) ).head	
+	} 
+	
+	def firstRegion(Iterable<EObject> it) {
+		filter( typeof(Region) ).head			
+	}
+	
+	def State leastCommonAncesterState(State a, State b) {
+		commonAncestors(a,b).firstState
+	}
+	
 	
 	def dispatch Expression buildCondition (Trigger t) { null }
 
@@ -749,21 +808,6 @@ class BehaviorMapping {
 	def dispatch Expression buildGuard( ReactionTrigger t) {
 		if ( t.guard != null ) EcoreUtil::copy(t.guard.expression) else null
 	}
-	
-//	def Statement buildValueExpression(TimeEventSpec tes) {
-//		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
-//		val IntLiteral intLit = stext.factory.createIntLiteral
-//		intLit.value = tes.value
-//		pve.value = intLit
-//	
-//		switch (tes.unit) {
-//			case TimeUnit::MILLISECOND : pve
-//			case TimeUnit::MICROSECOND : pve.divide(1000)
-//			case TimeUnit::NANOSECOND  : pve.divide(1000000)
-//			case TimeUnit::SECOND      : pve.multiply(1000)
-//			default : pve
-//		} 
-//	}
-	
+		
 	
 }

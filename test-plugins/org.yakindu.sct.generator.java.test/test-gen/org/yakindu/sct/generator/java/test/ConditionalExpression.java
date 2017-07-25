@@ -14,33 +14,36 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.conditionalexpressions.ConditionalExpressionsStatemachine;
-import org.yakindu.scr.conditionalexpressions.ConditionalExpressionsStatemachine.State;
+import org.yakindu.scr.conditionalexpressions.ConditionalExpressionsStatemachine.State;	
 
 /**
  * Unit TestCase for ConditionalExpressions
  */
 @SuppressWarnings("all")
 public class ConditionalExpression {
+	
 	private ConditionalExpressionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void conditionalExpression_setUp() {
 		statemachine = new ConditionalExpressionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void conditionalExpression_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void conditionalExpressionTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getCondition() == 1l);
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.getCondition() == 2l);
 	}

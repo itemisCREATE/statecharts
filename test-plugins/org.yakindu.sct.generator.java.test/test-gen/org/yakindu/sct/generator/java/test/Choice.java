@@ -14,23 +14,26 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.choice.ChoiceStatemachine;
-import org.yakindu.scr.choice.ChoiceStatemachine.State;
+import org.yakindu.scr.choice.ChoiceStatemachine.State;	
 
 /**
  * Unit TestCase for Choice
  */
 @SuppressWarnings("all")
 public class Choice {
+	
 	private ChoiceStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void choice_setUp() {
 		statemachine = new ChoiceStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void choice_tearDown() {
 		statemachine = null;
 	}
 	
@@ -70,31 +73,31 @@ public class Choice {
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 	}
 	public void initForEventE(boolean valueForC) {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setC(valueForC);
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 	}
 	public void initForEventF(boolean valueForC) {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setC(valueForC);
 		statemachine.raiseF();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 	}
 	public void initForEventG(boolean valueForC) {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setC(valueForC);
 		statemachine.raiseG();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 	}
 	public void initForEventH(boolean valueForC) {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setC(valueForC);
 		statemachine.raiseH();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 	}
 }

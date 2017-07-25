@@ -14,31 +14,34 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.transitionwithoutcondition.TransitionWithoutConditionStatemachine;
-import org.yakindu.scr.transitionwithoutcondition.TransitionWithoutConditionStatemachine.State;
+import org.yakindu.scr.transitionwithoutcondition.TransitionWithoutConditionStatemachine.State;	
 
 /**
  * Unit TestCase for TransitionWithoutCondition
  */
 @SuppressWarnings("all")
 public class TransitionWithoutCondition {
+	
 	private TransitionWithoutConditionStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void transitionWithoutCondition_setUp() {
 		statemachine = new TransitionWithoutConditionStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void transitionWithoutCondition_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void transitionWithoutConditionTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 	}
 }

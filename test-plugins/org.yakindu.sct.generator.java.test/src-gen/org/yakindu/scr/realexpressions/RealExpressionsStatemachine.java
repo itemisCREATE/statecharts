@@ -582,15 +582,15 @@ public class RealExpressionsStatemachine implements IRealExpressionsStatemachine
 		
 		sCInterface.setNotEqual(sCInterface.myReal1!=sCInterface.myReal2);
 		
-		sCInterface.setPlus((15.89<=(sCInterface.myReal1+sCInterface.myReal2) && (sCInterface.myReal1+sCInterface.myReal2)<=16.91));
+		sCInterface.setPlus((15.89<=(sCInterface.myReal1 + sCInterface.myReal2) && (sCInterface.myReal1 + sCInterface.myReal2)<=16.91));
 		
-		sCInterface.setMinus((5.29<=(sCInterface.myReal2-sCInterface.myReal1) && (sCInterface.myReal1-sCInterface.myReal2)<=5.31));
+		sCInterface.setMinus((5.29<=(sCInterface.myReal2 - sCInterface.myReal1) && (sCInterface.myReal1 - sCInterface.myReal2)<=5.31));
 		
-		sCInterface.setMultiply((56.17<=(sCInterface.myReal1*sCInterface.myReal2) && (sCInterface.myReal1*sCInterface.myReal2)<=56.19));
+		sCInterface.setMultiply((56.17<=(sCInterface.myReal1 * sCInterface.myReal2) && (sCInterface.myReal1 * sCInterface.myReal2)<=56.19));
 		
-		sCInterface.setDivision((1.9<=(sCInterface.myReal2/sCInterface.myReal1) && (sCInterface.myReal1/sCInterface.myReal2)<=2.1));
+		sCInterface.setDivision((1.9<=(sCInterface.myReal2 / sCInterface.myReal1) && (sCInterface.myReal1 / sCInterface.myReal2)<=2.1));
 		
-		sCInterface.setModulo((-0.1<=(sCInterface.myReal2%sCInterface.myReal1) && (sCInterface.myReal1%sCInterface.myReal2)<=0.1));
+		sCInterface.setModulo((-0.1<=(sCInterface.myReal2 % sCInterface.myReal1) && (sCInterface.myReal1 % sCInterface.myReal2)<=0.1));
 		
 		sCInterface.setNegat(-sCInterface.myReal1);
 		

@@ -14,36 +14,39 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.samenamedifferentregion.SameNameDifferentRegionStatemachine;
-import org.yakindu.scr.samenamedifferentregion.SameNameDifferentRegionStatemachine.State;
+import org.yakindu.scr.samenamedifferentregion.SameNameDifferentRegionStatemachine.State;	
 
 /**
  * Unit TestCase for SameNameDifferentRegion
  */
 @SuppressWarnings("all")
 public class SameNameDifferentRegion {
+	
 	private SameNameDifferentRegionStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void sameNameDifferentRegion_setUp() {
 		statemachine = new SameNameDifferentRegionStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void sameNameDifferentRegion_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void sameNameDifferenRegionTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.isStateActive(State.main_region_StateB_r1_StateA));
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.isStateActive(State.main_region_StateB_r1_StateB));
 	}

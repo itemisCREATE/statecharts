@@ -14,36 +14,39 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.valuedevents.ValuedEventsStatemachine;
-import org.yakindu.scr.valuedevents.ValuedEventsStatemachine.State;
+import org.yakindu.scr.valuedevents.ValuedEventsStatemachine.State;	
 
 /**
  * Unit TestCase for ValuedEvents
  */
 @SuppressWarnings("all")
 public class ValuedEvents {
+	
 	private ValuedEventsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void valuedEvents_setUp() {
 		statemachine = new ValuedEventsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void valuedEvents_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void valuedEventsTest() {
-		statemachine.enter();;
-		statemachine.runCycle();;
+		statemachine.enter();
+		statemachine.runCycle();
 		assertTrue(statemachine.getMyString().equals("sct"));
 		statemachine.raiseIntegerEvent(23l);
 		statemachine.raiseBooleanEvent(false);
 		statemachine.raiseRealEvent(20l);
 		statemachine.raiseStringEvent("tool");
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.integer_region_D));
 		assertTrue(statemachine.isStateActive(State.string_region_D));
 		assertTrue(statemachine.isStateActive(State.boolean_region_D));

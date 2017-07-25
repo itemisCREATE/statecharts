@@ -384,7 +384,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_main_region1_A() {
-		sCInterface.raiseIntegerEvent(2*21);
+		sCInterface.raiseIntegerEvent(2 * 21);
 		
 		sCInterface.raiseRealEvent(10);
 		

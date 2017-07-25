@@ -14,36 +14,39 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.namedinterfaceaccess.NamedInterfaceAccessStatemachine;
-import org.yakindu.scr.namedinterfaceaccess.NamedInterfaceAccessStatemachine.State;
+import org.yakindu.scr.namedinterfaceaccess.NamedInterfaceAccessStatemachine.State;	
 
 /**
  * Unit TestCase for NamedInterfaceAccess
  */
 @SuppressWarnings("all")
 public class NamedInterfaceAccess {
+	
 	private NamedInterfaceAccessStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void namedInterfaceAccess_setUp() {
 		statemachine = new NamedInterfaceAccessStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void namedInterfaceAccess_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void safeOpenSuccess() {
-		statemachine.enter();;
-		statemachine.runCycle();;
+		statemachine.enter();
+		statemachine.runCycle();
 		statemachine.getSCIUser().raiseNumberPressed(3l);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		statemachine.getSCIUser().raiseNumberPressed(7l);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		statemachine.getSCIUser().raiseNumberPressed(5l);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.getSCISafe().isRaisedOpen());
 	}
 }

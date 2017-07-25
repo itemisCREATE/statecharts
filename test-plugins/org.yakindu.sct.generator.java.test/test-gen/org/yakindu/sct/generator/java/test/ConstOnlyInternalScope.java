@@ -14,36 +14,39 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.constonlyinternalscope.ConstOnlyInternalScopeStatemachine;
-import org.yakindu.scr.constonlyinternalscope.ConstOnlyInternalScopeStatemachine.State;
+import org.yakindu.scr.constonlyinternalscope.ConstOnlyInternalScopeStatemachine.State;	
 
 /**
  * Unit TestCase for ConstOnlyInternalScope
  */
 @SuppressWarnings("all")
 public class ConstOnlyInternalScope {
+	
 	private ConstOnlyInternalScopeStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void constOnlyInternalScope_setUp() {
 		statemachine = new ConstOnlyInternalScopeStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void constOnlyInternalScope_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void statechartEntry() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.constOnlyInternalScope_main_region_A));
 	}
 	@Test
 	public void stateTransition() {
-		statemachine.enter();;
+		statemachine.enter();
 		statemachine.raiseE(1l);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.constOnlyInternalScope_main_region_B));
 	}
 }

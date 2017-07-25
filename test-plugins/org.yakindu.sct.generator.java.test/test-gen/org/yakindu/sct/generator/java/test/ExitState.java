@@ -14,55 +14,58 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.exitstate.ExitStateStatemachine;
-import org.yakindu.scr.exitstate.ExitStateStatemachine.State;
+import org.yakindu.scr.exitstate.ExitStateStatemachine.State;	
 
 /**
  * Unit TestCase for ExitState
  */
 @SuppressWarnings("all")
 public class ExitState {
+	
 	private ExitStateStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void exitState_setUp() {
 		statemachine = new ExitStateStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void exitState_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void defaultExit() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r_E));
 	}
 	@Test
 	public void namedExitThroughNamedTransition() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		statemachine.raiseF();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r_F));
 	}
 	@Test
 	public void namedExitThroughDefaultTransition() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
 		statemachine.raiseG();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r_E));
 	}
 	@Test
 	public void remainInA() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r_A));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r_A));
 	}
 }

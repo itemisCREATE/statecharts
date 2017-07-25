@@ -14,43 +14,46 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.internaleventlifecycle.InternalEventLifeCycleStatemachine;
-import org.yakindu.scr.internaleventlifecycle.InternalEventLifeCycleStatemachine.State;
+import org.yakindu.scr.internaleventlifecycle.InternalEventLifeCycleStatemachine.State;	
 
 /**
  * Unit TestCase for InternalEventLifeCycle
  */
 @SuppressWarnings("all")
 public class InternalEventLifeCycle {
+	
 	private InternalEventLifeCycleStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void internalEventLifeCycle_setUp() {
 		statemachine = new InternalEventLifeCycleStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void internalEventLifeCycle_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void internalEventLifeCycleTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r1_A));
 		assertTrue(statemachine.isStateActive(State.r2_C));
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r1_A));
 		assertTrue(statemachine.isStateActive(State.r2_D));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r1_A));
 		assertTrue(statemachine.isStateActive(State.r2_D));
 		statemachine.raiseF();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r1_A));
 		assertTrue(statemachine.isStateActive(State.r2_C));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.r1_A));
 		assertTrue(statemachine.isStateActive(State.r2_C));
 	}

@@ -14,44 +14,47 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.historywithexitpoint.HistoryWithExitPointStatemachine;
-import org.yakindu.scr.historywithexitpoint.HistoryWithExitPointStatemachine.State;
+import org.yakindu.scr.historywithexitpoint.HistoryWithExitPointStatemachine.State;	
 
 /**
  * Unit TestCase for HistoryWithExitPoint
  */
 @SuppressWarnings("all")
 public class HistoryWithExitPoint {
+	
 	private HistoryWithExitPointStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void historyWithExitPoint_setUp() {
 		statemachine = new HistoryWithExitPointStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void historyWithExitPoint_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void historyEntryAfterExit() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X1));
 		statemachine.raisePush();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.mr_B));
 		statemachine.raiseBack();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X1));
 		statemachine.raiseNext();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X2));
 		statemachine.raisePush();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.mr_B));
 		statemachine.raiseBack();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.mr_A_r_X2));
 	}
 }

@@ -19,7 +19,7 @@
    </license>
 
    <url>
-      <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.org/sct/mars/releases"/>
+      <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.com/statecharts/releases/"/>
    </url>
 
    <requires>

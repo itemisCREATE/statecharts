@@ -459,6 +459,7 @@ public class ExecutionStateItemProvider
 
 		boolean qualify =
 			childFeature == SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE ||
+			childFeature == SexecPackage.Literals.EXECUTION_NODE__LOCAL_REACT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE ||

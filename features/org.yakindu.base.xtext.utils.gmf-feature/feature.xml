@@ -22,7 +22,7 @@
    </requires>
    
    <url>
-      <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.org/sct/neon/releases/"/>
+      <discovery label="YAKINDU SCT Repository" url="http://updates.yakindu.com/statecharts/releases/"/>
    </url>
 
    <plugin

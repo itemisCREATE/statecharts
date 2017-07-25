@@ -25,6 +25,7 @@ import org.yakindu.base.base.NamedElement;
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionNode#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionNode#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionNode#getReactSequence <em>React Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionNode#getLocalReactSequence <em>Local React Sequence</em>}</li>
  * </ul>
  *
  * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionNode()
@@ -99,5 +100,31 @@ public interface ExecutionNode extends MappedElement, NamedElement {
 	 * @generated
 	 */
 	void setReactSequence(Sequence value);
+
+	/**
+	 * Returns the value of the '<em><b>Local React Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Local React Sequence</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Local React Sequence</em>' containment reference.
+	 * @see #setLocalReactSequence(Sequence)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionNode_LocalReactSequence()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Sequence getLocalReactSequence();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionNode#getLocalReactSequence <em>Local React Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Local React Sequence</em>' containment reference.
+	 * @see #getLocalReactSequence()
+	 * @generated
+	 */
+	void setLocalReactSequence(Sequence value);
 
 } // ExecutionNode

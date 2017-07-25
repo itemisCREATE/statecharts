@@ -14,31 +14,34 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.outeventlifecycle.OutEventLifeCycleStatemachine;
-import org.yakindu.scr.outeventlifecycle.OutEventLifeCycleStatemachine.State;
+import org.yakindu.scr.outeventlifecycle.OutEventLifeCycleStatemachine.State;	
 
 /**
  * Unit TestCase for OutEventLifeCycle
  */
 @SuppressWarnings("all")
 public class OutEventLifeCycle {
+	
 	private OutEventLifeCycleStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void outEventLifeCycle_setUp() {
 		statemachine = new OutEventLifeCycleStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void outEventLifeCycle_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void availableAfterCycle() {
-		statemachine.enter();;
+		statemachine.enter();
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isRaisedF());
 	}
 	@Test
@@ -57,11 +60,11 @@ public class OutEventLifeCycle {
 		assertTrue(!statemachine.isRaisedF());
 	}
 	public void init(boolean sndCycle) {
-		statemachine.enter();;
+		statemachine.enter();
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		if (sndCycle) {
-			statemachine.runCycle();;
+			statemachine.runCycle();
 		}
 	}
 }

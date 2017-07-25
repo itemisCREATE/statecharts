@@ -14,41 +14,44 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.alwaysoncycle.AlwaysOncycleStatemachine;
-import org.yakindu.scr.alwaysoncycle.AlwaysOncycleStatemachine.State;
+import org.yakindu.scr.alwaysoncycle.AlwaysOncycleStatemachine.State;	
 
 /**
  * Unit TestCase for AlwaysOncycle
  */
 @SuppressWarnings("all")
 public class AlwaysOncycle {
+	
 	private AlwaysOncycleStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void alwaysOncycle_setUp() {
 		statemachine = new AlwaysOncycleStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void alwaysOncycle_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void alwaysOnCycleTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		while (statemachine.getValue() < 5l) {
-			statemachine.runCycle();;
+			statemachine.runCycle();
 			assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		}
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		while (statemachine.getValue() < 5l) {
-			statemachine.runCycle();;
+			statemachine.runCycle();
 			assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		}
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 	}
 }

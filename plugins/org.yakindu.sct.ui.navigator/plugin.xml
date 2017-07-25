@@ -35,6 +35,7 @@
                </or>
          </triggerPoints>
          <commonWizard
+               menuGroupId="org.yakindu.statecharttools"
                type="new"
                wizardId="org.yakindu.sct.ui.editor.StatechartDiagramWizard">
           <enablement>
@@ -52,6 +53,7 @@
   		</enablement>
          </commonWizard>
          <commonWizard
+               menuGroupId="org.yakindu.statecharttools"
                type="new"
                wizardId="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard">
             <enablement>

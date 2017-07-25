@@ -298,17 +298,17 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			Map<TypeParameter, InferenceResult> typeParameterMapping, Operation operation, List<Expression> args,
 			IValidationIssueAcceptor acceptor) {
 		List<Parameter> parameters = operation.getParameters();
-		if (parameters.size() <= args.size()) {
 			for (int i = 0; i < parameters.size(); i++) {
-				Parameter parameter = parameters.get(i);
-				Expression argument = args.get(i);
-				InferenceResult parameterType = inferTypeDispatch(parameter);
-				InferenceResult argumentType = inferTypeDispatch(argument);
-				parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping,
-						acceptor);
-				assertAssignable(parameterType, argumentType,
-						String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
-			}
+				if (args.size() > i) {
+					Parameter parameter = parameters.get(i);
+					Expression argument = args.get(i);
+					InferenceResult parameterType = inferTypeDispatch(parameter);
+					InferenceResult argumentType = inferTypeDispatch(argument);
+					parameterType = typeParameterInferrer.buildInferenceResult(parameterType, typeParameterMapping,
+							acceptor);
+					assertAssignable(parameterType, argumentType,
+							String.format(INCOMPATIBLE_TYPES, argumentType, parameterType));
+				}
 		}
 		if (operation.isVariadic() && args.size() - 1 >= operation.getVarArgIndex()) {
 			Parameter parameter = operation.getParameters().get(operation.getVarArgIndex());

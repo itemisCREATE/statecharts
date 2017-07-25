@@ -14,34 +14,37 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.castexpressions.CastExpressionsStatemachine;
-import org.yakindu.scr.castexpressions.CastExpressionsStatemachine.State;
+import org.yakindu.scr.castexpressions.CastExpressionsStatemachine.State;	
 
 /**
  * Unit TestCase for CastExpressions
  */
 @SuppressWarnings("all")
 public class CastExpressions {
+	
 	private CastExpressionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void castExpressions_setUp() {
 		statemachine = new CastExpressionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void castExpressions_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void castExpressionTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.getRealValue() == 5l);
 		assertTrue(statemachine.getIntValue() == 5l);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.getRealValue() == 15l);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 		assertTrue(statemachine.getRealValue() == 757l);
 	}

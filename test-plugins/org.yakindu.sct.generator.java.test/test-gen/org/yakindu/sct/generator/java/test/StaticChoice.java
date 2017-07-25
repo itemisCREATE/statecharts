@@ -14,30 +14,33 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.staticchoice.StaticChoiceStatemachine;
-import org.yakindu.scr.staticchoice.StaticChoiceStatemachine.State;
+import org.yakindu.scr.staticchoice.StaticChoiceStatemachine.State;	
 
 /**
  * Unit TestCase for StaticChoice
  */
 @SuppressWarnings("all")
 public class StaticChoice {
+	
 	private StaticChoiceStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void staticChoice_setUp() {
 		statemachine = new StaticChoiceStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void staticChoice_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void staticChoiceTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_Start));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 	}
 }

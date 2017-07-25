@@ -41,7 +41,7 @@
 					<with variable="selection">
 					<count value="1"/>
 						<iterate>
-							<test property="org.eclipse.debug.ui.matchesPattern" value="*.sct"/>
+							<test property="org.eclipse.debug.ui.matchesPattern" value="*.sct$"/>
 						</iterate>
 					</with>
 				</enablement>

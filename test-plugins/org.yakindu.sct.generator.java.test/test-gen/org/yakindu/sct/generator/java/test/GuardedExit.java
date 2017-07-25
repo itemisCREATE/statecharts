@@ -14,43 +14,46 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.guardedexit.GuardedExitStatemachine;
-import org.yakindu.scr.guardedexit.GuardedExitStatemachine.State;
+import org.yakindu.scr.guardedexit.GuardedExitStatemachine.State;	
 
 /**
  * Unit TestCase for GuardedExit
  */
 @SuppressWarnings("all")
 public class GuardedExit {
+	
 	private GuardedExitStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void guardedExit_setUp() {
 		statemachine = new GuardedExitStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void guardedExit_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void exitTaken() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(!statemachine.getGuard());
 		checkDone(false);
 	}
 	@Test
 	public void exitNotTaken() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setGuard(true);
 		checkDone(true);
 	}
 	public void checkDone(boolean shouldBeDone) {
 		statemachine.raiseE();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(shouldBeDone ? statemachine.getDone()  : !statemachine.getDone());
 	}

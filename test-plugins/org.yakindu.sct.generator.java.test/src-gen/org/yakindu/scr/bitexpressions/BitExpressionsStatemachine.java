@@ -282,9 +282,9 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	
 	/* Entry action for state 'StateB'. */
 	private void entryAction_main_region_StateB() {
-		sCInterface.setLeftBitshift(sCInterface.myBit1<<1);
+		sCInterface.setLeftBitshift(sCInterface.myBit1 << 1);
 		
-		sCInterface.setRightBitshift(sCInterface.myBit1>>1);
+		sCInterface.setRightBitshift(sCInterface.myBit1 >> 1);
 		
 		sCInterface.setComplementBitshift(~sCInterface.myBit1);
 		

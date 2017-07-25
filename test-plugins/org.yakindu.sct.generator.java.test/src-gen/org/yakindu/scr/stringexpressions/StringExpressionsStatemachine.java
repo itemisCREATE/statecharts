@@ -582,9 +582,9 @@ public class StringExpressionsStatemachine implements IStringExpressionsStatemac
 	
 	/* Entry action for state 'AssignmentChecked'. */
 	private void entryAction_main_region_AssignmentChecked() {
-		sCInterface.setStringVarNotEqual( !(sCInterface.stringA== null?sCInterface.stringB ==null :sCInterface.stringA.equals(sCInterface.stringB)));
+		sCInterface.setStringVarNotEqual(!(sCInterface.stringA== null?sCInterface.stringB ==null :sCInterface.stringA.equals(sCInterface.stringB)));
 		
-		sCInterface.setStringVarEqual( !(sCInterface.stringA== null?sCInterface.stringA2 !=null : !sCInterface.stringA.equals(sCInterface.stringA2)));
+		sCInterface.setStringVarEqual(!(sCInterface.stringA== null?sCInterface.stringA2 !=null : !sCInterface.stringA.equals(sCInterface.stringA2)));
 	}
 	
 	/* 'default' enter sequence for state AssignmentChecked */

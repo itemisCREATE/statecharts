@@ -14,60 +14,63 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.triggerguardexpressions.TriggerGuardExpressionsStatemachine;
-import org.yakindu.scr.triggerguardexpressions.TriggerGuardExpressionsStatemachine.State;
+import org.yakindu.scr.triggerguardexpressions.TriggerGuardExpressionsStatemachine.State;	
 
 /**
  * Unit TestCase for TriggerGuardExpressions
  */
 @SuppressWarnings("all")
 public class TriggerGuardExpressions {
+	
 	private TriggerGuardExpressionsStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void triggerGuardExpressions_setUp() {
 		statemachine = new TriggerGuardExpressionsStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void triggerGuardExpressions_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void trueGuard() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseE1();
 		statemachine.setB(true);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseE1();
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 	}
 	@Test
 	public void falseGuard() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setB(false);
 		statemachine.raiseE1();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseE1();
 		statemachine.raiseE2();
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }

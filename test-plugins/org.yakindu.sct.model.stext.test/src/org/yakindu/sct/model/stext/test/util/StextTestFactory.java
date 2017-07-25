@@ -12,7 +12,10 @@
 package org.yakindu.sct.model.stext.test.util;
 
 
+import java.util.Arrays;
+
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.expressions.expressions.Argument;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;
 import org.yakindu.base.expressions.expressions.BoolLiteral;
@@ -321,6 +324,14 @@ public class StextTestFactory extends StextFactoryImpl {
 		FeatureCall oc = ExpressionsFactory.eINSTANCE.createFeatureCall();
 		oc.setFeature(o);
 		oc.setOperationCall(true);
+		return oc;
+	}
+	
+	public static ElementReferenceExpression _createOperationCall(OperationDefinition o, Argument... arguments) {
+		ElementReferenceExpression oc = ExpressionsFactory.eINSTANCE.createElementReferenceExpression();
+		oc.setReference(o);
+		oc.setOperationCall(true);
+		oc.getArguments().addAll(Arrays.asList(arguments));
 		return oc;
 	}
 

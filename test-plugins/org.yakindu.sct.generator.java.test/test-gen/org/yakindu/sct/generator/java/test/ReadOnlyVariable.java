@@ -14,29 +14,32 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.readonlyvariable.ReadOnlyVariableStatemachine;
-import org.yakindu.scr.readonlyvariable.ReadOnlyVariableStatemachine.State;
+import org.yakindu.scr.readonlyvariable.ReadOnlyVariableStatemachine.State;	
 
 /**
  * Unit TestCase for ReadOnlyVariable
  */
 @SuppressWarnings("all")
 public class ReadOnlyVariable {
+	
 	private ReadOnlyVariableStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void readOnlyVariable_setUp() {
 		statemachine = new ReadOnlyVariableStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void readOnlyVariable_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void readOnlyVariableTest() {
-		statemachine.enter();;
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyInt() == 0l);
 		assertTrue(statemachine.getMyString().equals("testString"));
@@ -46,7 +49,7 @@ public class ReadOnlyVariable {
 		assertTrue(statemachine.getSCIA().getMyString().equals("testString"));
 		assertTrue(statemachine.getSCIA().getMyBool() == true);
 		assertTrue(statemachine.getSCIA().getMyReal() == 1.1);
-		statemachine.runCycle();;
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.getMyInt() == 100l);
 		assertTrue(statemachine.getMyString().equals("fail"));

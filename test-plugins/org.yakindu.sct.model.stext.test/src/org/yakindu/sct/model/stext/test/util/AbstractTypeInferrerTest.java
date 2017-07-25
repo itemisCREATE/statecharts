@@ -109,31 +109,70 @@ public abstract class AbstractTypeInferrerTest extends AbstractSTextTest {
 						.iterator().next().getMessage());
 	}
 	
+	protected void expectNoErrors(EObject element) {
+		ListBasedValidationIssueAcceptor diagnostics = validate(element);
+		assertNoErrors(diagnostics);
+	}
+	
 	protected void expectNoErrors(String expression, String scope) {
 		ListBasedValidationIssueAcceptor diagnostics = validate(expression, scope);
+		assertNoErrors(diagnostics);
+	}
+	
+	protected void assertNoErrors(ListBasedValidationIssueAcceptor diagnostics) {
 		List<ValidationIssue> errors = diagnostics.getTraces(Severity.ERROR);
 		assertEquals(errors.toString(), 0, errors.size());
 	}
 	
+	protected void expectWarning(EObject element, String code) {
+		ListBasedValidationIssueAcceptor diagnostics = validate(element);
+		assertWarning(diagnostics, code);
+	}
+	
 	protected void expectWarning(String expression, String scope, String code) {
-		List<ValidationIssue> traces = validate(expression, scope).getTraces(Severity.WARNING);
+		ListBasedValidationIssueAcceptor diagnostics = validate(expression, scope);
+		assertWarning(diagnostics, code);
+	}
+
+	protected void assertWarning(ListBasedValidationIssueAcceptor diagnostics, String code) {
+		List<ValidationIssue> traces = diagnostics.getTraces(Severity.WARNING);
 		List<ValidationIssue> issues = filterForIssueCode(traces, code);
 		assertEquals(Arrays.toString(traces.toArray()), 1, issues.size());
+	}
+
+	protected void expectError(EObject element, String code) {
+		ListBasedValidationIssueAcceptor diagnostics = validate(element);
+		assertError(diagnostics, code);
 	}
 	
 	protected void expectError(String expression, String scope, String code) {
-		List<ValidationIssue> traces = validate(expression, scope).getTraces(Severity.ERROR);
+		ListBasedValidationIssueAcceptor diagnostics = validate(expression, scope);
+		assertError(diagnostics, code);
+	}
+
+	protected void assertError(ListBasedValidationIssueAcceptor diagnostics, String code) {
+		List<ValidationIssue> traces = diagnostics.getTraces(Severity.ERROR);
 		List<ValidationIssue> issues = filterForIssueCode(traces, code);
 		assertEquals(Arrays.toString(traces.toArray()), 1, issues.size());
 	}
 	
+	protected void expectErrors(EObject element, String code, int noOfErrors) {
+		ListBasedValidationIssueAcceptor diagnostics = validate(element);
+		assertErrors(diagnostics, code, noOfErrors);
+	}
+	
 	protected void expectErrors(String expression, String scope, String code, int noOfErrors) {
-		List<ValidationIssue> traces = validate(expression, scope).getTraces(Severity.ERROR);
+		ListBasedValidationIssueAcceptor diagnostics = validate(expression, scope);
+		assertErrors(diagnostics, code, noOfErrors);
+	}
+
+	protected void assertErrors(ListBasedValidationIssueAcceptor diagnostics, String code, int noOfErrors) {
+		List<ValidationIssue> traces = diagnostics.getTraces(Severity.ERROR);
 		List<ValidationIssue> issues = filterForIssueCode(traces, code);
 		assertEquals(Arrays.toString(traces.toArray()), noOfErrors, issues.size());
 	}
 	
-	private List<ValidationIssue> filterForIssueCode(List<ValidationIssue> traces, final String code) {
+	protected List<ValidationIssue> filterForIssueCode(List<ValidationIssue> traces, final String code) {
 		return Lists.newArrayList(Iterables.filter(traces, new Predicate<ValidationIssue>() {
 			@Override
 			public boolean apply(ValidationIssue input) {
@@ -144,8 +183,12 @@ public abstract class AbstractTypeInferrerTest extends AbstractSTextTest {
 	
 	protected ListBasedValidationIssueAcceptor validate(String expression, String scope) {
 		EObject exp = parseExpression(expression, Expression.class.getSimpleName(), scope);
+		return validate(exp);
+	}
+	
+	protected ListBasedValidationIssueAcceptor validate(EObject element) {
 		ListBasedValidationIssueAcceptor diagnostics = new ListBasedValidationIssueAcceptor();
-		typeInferrer.infer(exp, diagnostics);
+		typeInferrer.infer(element, diagnostics);
 		return diagnostics;
 	}
 }

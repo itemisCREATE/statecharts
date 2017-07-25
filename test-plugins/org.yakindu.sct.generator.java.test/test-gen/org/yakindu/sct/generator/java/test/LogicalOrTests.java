@@ -14,30 +14,33 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.yakindu.scr.logicalor.LogicalOrStatemachine;
-import org.yakindu.scr.logicalor.LogicalOrStatemachine.State;
+import org.yakindu.scr.logicalor.LogicalOrStatemachine.State;	
 
 /**
  * Unit TestCase for LogicalOr
  */
 @SuppressWarnings("all")
 public class LogicalOrTests {
+	
 	private LogicalOrStatemachine statemachine;	
 	
+	
+	
 	@Before
-	public void setUp() {
+	public void logicalOrTests_setUp() {
 		statemachine = new LogicalOrStatemachine();
 		statemachine.init();
 	}
 
 	@After
-	public void tearDown() {
+	public void logicalOrTests_tearDown() {
 		statemachine = null;
 	}
 	
 	@Test
 	public void operandEvaluationOrder() {
-		statemachine.enter();;
-		statemachine.runCycle();;
+		statemachine.enter();
+		statemachine.runCycle();
 		assertTrue("logical or expression was executed in wrong order...",statemachine.getX() == 4l && statemachine.getB());
 	}
 }
