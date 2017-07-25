@@ -104,7 +104,7 @@ public class MessageArea extends Composite {
 	public void showProInstall() {
 		state = State.INSTALL;
 		imageLabel.setImage(Display.getDefault().getSystemImage(SWT.ICON_INFORMATION));
-		textLabel.setText("This example requires YAKINDU Statechart Tools professional. Do you want to download it?");
+		textLabel.setText("This example requires YAKINDU Statechart Tools Professional Edition. Do you want to download it?");
 		textLabel.pack();
 		button.setText("Download");
 		button.setVisible(true);
