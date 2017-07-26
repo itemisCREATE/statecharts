@@ -49,7 +49,7 @@ public class DomainValidator implements EValidator {
 				diagnostics.add(new BasicDiagnostic(Diagnostic.WARNING, "DomainValidator", 0, status.getMessage(),
 						new Object[] { eObject }));
 			} else if (status.getSeverity() == Severity.INFO) {
-				diagnostics.add(new BasicDiagnostic(Diagnostic.INFO, "DomainValidator", 0, status.getMessage(),
+				diagnostics.add(new BasicDiagnostic(Diagnostic.INFO, "DomainValidator", 0, status.getShortMessage(),
 						new Object[] { eObject }));
 			}
 		}
