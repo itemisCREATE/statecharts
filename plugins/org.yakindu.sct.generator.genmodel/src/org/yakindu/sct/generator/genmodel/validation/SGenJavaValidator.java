@@ -61,7 +61,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public static final String MISSING_REQUIRED_FEATURE = "Missing required feature.";
 	public static final String DUPLICATE_PARAMETER = "Duplicate parameter.";
 	public static final String DUPLICATE_FEATURE = "Duplicate feature.";
-	public static final String UNKOWN_GENERATOR = "Unkown generator.";
+	public static final String UNKOWN_GENERATOR = "Unknown generator.";
 	public static final String INCOMPATIBLE_TYPE_BOOLEAN_EXPECTED = "Incompatible type, Boolean expected.";
 	public static final String INCOMPATIBLE_TYPE_INTEGER_EXPECTED = "Incompatible type, Integer expected.";
 	public static final String INCOMPATIBLE_TYPE_FLOAT_EXPECTED = "Incompatible type, Float expected.";
