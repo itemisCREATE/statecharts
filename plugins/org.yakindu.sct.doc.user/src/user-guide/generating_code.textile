@@ -9,7 +9,7 @@ To create a generator model with the wizard, proceed as follows:
 
 # Select _File → New → YAKINDU SCT → Code Generator Model_.
 # Enter a name and click _Next_.
-# Choose the desired generator, i.&nbsp;e. _YAKINDU SCT Java Code Generator_.
+# Choose the desired generator, i.e. _YAKINDU SCT Java Code Generator_.
 # Check the model(s) to generate code from and click _Finish_.
 
 !images/docu_genmodelwizardchooselanguage.jpg(Selecting code generator and models)!
@@ -45,7 +45,7 @@ Provided you have created the generator model, proceed as follows:
 # In the context menu, select _Generate Code Artifacts_.
 # The generator is executed.
 
-The source files the generator produces depend on the generator itself. The generators make use of their respective language and their features and best practices, i.&nbsp;e. the Java-generator generates a Java-Interface, and the C and the C++ generator generate header files. The _location_ of these source files can be changed with the generator model options explained in the following section.
+The source files the generator produces depend on the generator itself. The generators make use of their respective language and their features and best practices, i.e. the Java-generator generates a Java-Interface, and the C and the C++ generator generate header files. The _location_ of these source files can be changed with the generator model options explained in the following section.
 
 The generator model is executed by a so-called Eclipse builder. Thus, the artifacts are generated automatically if _Project → Build Automatically_ is checked. If you want or need to execute your Generator Model manually, select _Generate Statechart Artifacts_ from the _Package Explorer_'s context menu.
 
@@ -154,25 +154,94 @@ bc. feature Debug {
 
 h2(#general-concepts-of-the-state-machine-code). General concepts of the state machine code
 
-h3(#cycle-based-execution). Cycle-based execution
+h3(#execution_schemes). Execution schemes
 
-The generated state machine code implements a so-called _cycle-based execution scheme_. Each run cycle consists of two different phases:
-# In the first phase, incoming events are collected.
-# In the second phase, _runCycle()_ is executed.
+The generated state machine code implements one of two execution schemes:
+* In the _cycle-based execution scheme_, the state machine will collect events and later process them in a run-to-completion step. The latter is typically executed in regular time intervals.
+* In the _event-driven execution scheme_, the state machine becomes active each time an event arrives and processes it right away in a run-to-completion step.
 
-This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.&nbsp;g. something like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the IPO (input processing output) model.
 
-In other cases an event-driven approach might be more suitable. This can be implemented e.&nbsp;g. by directly calling _runCycle()_ as soon as a certain event occurs, like in:
+
+h4(#cycle-based_execution_scheme). Cycle-based execution scheme
+
+In the cycle-based execution scheme, each run cycle consists of two different phases:
+# In the first phase, incoming events and time events are collected.
+# In the second phase, _runCycle()_ is executed and processes the events collected in the first phase.
+
+This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.g. something like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the IPO (input processing output) model.
+
+==<div class="example">==
+
+Example: The sample client code below first raises events _eventA_ and _eventB_ in the state machine. These events are lingering in the state machine until the client code calls _runCycle()_ to actually process the events.
 
 bc. sc_raiseEventA(handle);
+sc_raiseEventB(handle);
+…
 sc_runCycle(handle);
 
-More sophisticated approaches could care about buffering of events, managing an event queue, dealing with priority events, and so on. However, since this is out of the the generated code's scope, it is the client code's responsibility.
+==</div>==
+
+
+
+h4(#event-driven_execution_scheme). Event-driven execution scheme
+
+In the _event-driven execution scheme_, each incoming event or time event immediately triggers a run-to-completion step. As a consequence, the state machine will never process two events at the same time, and a condition like @[eventA && eventB]@ will never become true.
+
+==<div class="example">==
+
+Example: The sample client code below raises the events _eventA_ and _eventB_. The state machine processes each event immediately as it arrives, triggered by the respective _raise…()_ method. Thus calling _runCycle()_ is not needed.
+
+bc. sc_raiseEventA(handle);
+sc_raiseEventB(handle);
+
+==</div>==
+
+
+
+h4(#selecting_the_execution_scheme). Selecting the execution scheme
+
+Select the execution scheme by writing the <code>@CycleBased</code> or the <code>@EventDriven</code> annotation at the top of your statechart's definition section, see the examples below. If you omit both of them, the default will be <code>@CycleBased(200)</code>.
+
+The <code>@CycleBased</code> annotation specifies that the cycle-based execution scheme is to be used. Its mandatory parameter _period_ indicates the suggested period of time between two successive run-to-completion steps in milliseconds. Only the simulator takes this value into account, however. It is neither of significance to nor reflected in the generated code, and thus it remains the client code's responsibility to explicitly call _runCycle()_ – and to decide when to do so.
+
+==<div class="example">==
+
+Example: The definition section below specifies that the generated code should implement the _cycle-based execution scheme_ with an interval of 100 milliseconds between two cycles.
+
+bc.. 
+@CycleBased(100)
+
+internal:
+    var light : boolean
+
+interface:
+    in event press
+…
+p. 
+
+==</div>==
+
+The <code>@EventDriven</code> annotation specifies that the event-driven execution scheme is to be used.
+
+==<div class="example">==
+
+Example: The definition section below specifies that the generated code should implement the _event-driven execution scheme_.
+
+bc.. 
+@EventDriven
+
+interface:
+    in event press
+…
+p. 
+
+==</div>==
+
 
 
 h3(#responsibilities-of-generated-code). Responsibilities of generated code
 
-The generated source code supports a basic statechart execution model that can be used to implement different variants. It is important to understand the responsibilities of the generated code, i.&nbsp;e. what it cares about and what it doesn't. The remaining issues are out of scope and must be dealt with in the client code the developer has to provide.
+The generated source code supports a basic statechart execution model that can be used to implement different variants. It is important to understand the responsibilities of the generated code, i.e. what it cares about and what it doesn't. The remaining issues are out of scope and must be dealt with in the client code the developer has to provide.
 
 The generated code basically takes care about the following:
 * It provides the interfaces to access state machine variables and events.
