@@ -23,6 +23,11 @@ import org.eclipse.gmf.runtime.diagram.core.DiagramEditingDomainFactory;
 import org.eclipse.gmf.runtime.emf.core.util.CrossReferenceAdapter;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public class SharedEditingDomainFactory extends DiagramEditingDomainFactory
 		implements TransactionalEditingDomain.Factory {
 
