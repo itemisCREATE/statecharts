@@ -15,7 +15,6 @@ import java.util.concurrent.ExecutionException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer.Delegate;
@@ -37,7 +36,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class URI2ResourceDescriptionCache implements Delegate {
 
-	private static final String DOMAIN_ID = "StatechartDomain";
+	private static final String DOMAIN_ID = "ResourceCache";
 
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
@@ -54,15 +53,21 @@ public class URI2ResourceDescriptionCache implements Delegate {
 			}
 		});
 		TransactionalEditingDomain editingDomain = getEditingDomain();
-		if (editingDomain != null)
 		workspaceSynchronizer = new WorkspaceSynchronizer(editingDomain, this);
 	}
 
 	protected TransactionalEditingDomain getEditingDomain() {
-		return TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(DOMAIN_ID);
+		TransactionalEditingDomain editingDomain = TransactionalEditingDomain.Registry.INSTANCE
+				.getEditingDomain(DOMAIN_ID);
+		if (editingDomain == null) {
+			editingDomain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain();
+			editingDomain.setID(DOMAIN_ID);
+			TransactionalEditingDomain.Registry.INSTANCE.add(DOMAIN_ID, editingDomain);
+		}
+		return editingDomain;
 	}
 
-	public synchronized IResourceDescription get(URI uri) {
+	public IResourceDescription get(URI uri) {
 		try {
 			IResourceDescription descrpition = cache.get(uri.toString());
 			return descrpition;
@@ -90,32 +95,29 @@ public class URI2ResourceDescriptionCache implements Delegate {
 	}
 
 	protected ResourceSet getResourceSet() {
-		if(getEditingDomain() == null) {
-			return new ResourceSetImpl();
-		}
 		return getEditingDomain().getResourceSet();
 	}
 
 	@Override
-	public synchronized boolean handleResourceDeleted(Resource resource) {
+	public boolean handleResourceDeleted(Resource resource) {
 		cache.invalidate(resource.getURI().toString());
 		return true;
 	}
 
 	@Override
-	public synchronized boolean handleResourceMoved(Resource resource, URI newURI) {
+	public boolean handleResourceMoved(Resource resource, URI newURI) {
 		cache.invalidate(resource.getURI().toString());
 		return true;
 	}
 
 	@Override
-	public synchronized boolean handleResourceChanged(Resource resource) {
+	public boolean handleResourceChanged(Resource resource) {
 		cache.invalidate(resource.getURI().toString());
 		return true;
 	}
 
 	@Override
-	public synchronized void dispose() {
+	public void dispose() {
 		if (workspaceSynchronizer != null)
 			workspaceSynchronizer.dispose();
 		cache.invalidateAll();
