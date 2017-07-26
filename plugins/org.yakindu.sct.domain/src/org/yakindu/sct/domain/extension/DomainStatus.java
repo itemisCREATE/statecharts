@@ -27,9 +27,7 @@ public class DomainStatus {
 	private String shortMessage;
 	
 	public DomainStatus(Severity status, String message) {
-		this.status = status;
-		this.message = message;
-
+		this(status, message, message);
 	}
 	
 	public DomainStatus(Severity status, String message, String shortMessage) {
