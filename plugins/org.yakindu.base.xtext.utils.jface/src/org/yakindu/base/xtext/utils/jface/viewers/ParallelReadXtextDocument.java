@@ -30,7 +30,6 @@ public class ParallelReadXtextDocument extends XtextDocument {
 
 	@Override
 	protected Object getResourceLock() {
-		System.out.println("LOCK");
 		return new Object();
 	}
 }
