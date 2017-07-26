@@ -26,12 +26,14 @@ import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
+import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.shared.Access;
 import org.yakindu.base.utils.jface.help.CrossRefObjectTextHover;
+import org.yakindu.base.xtext.utils.jface.viewers.ParallelReadXtextDocument;
 import org.yakindu.sct.model.stext.ui.contentassist.AsyncContentAssistContextFactory;
 import org.yakindu.sct.model.stext.ui.contentassist.AsyncXtextContentAssistProcessor;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
@@ -81,6 +83,7 @@ public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextU
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named("stylesheet")).toInstance("/StextHoverStyleSheet.css");
+		binder.bind(XtextDocument.class).to(ParallelReadXtextDocument.class);
 	}
 
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {

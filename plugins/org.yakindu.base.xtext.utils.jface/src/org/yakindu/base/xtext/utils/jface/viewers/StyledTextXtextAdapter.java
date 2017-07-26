@@ -80,10 +80,6 @@ import com.google.inject.Provider;
 @SuppressWarnings("restriction")
 public class StyledTextXtextAdapter {
 
-	/**
-	 * The sourceViewer, that provides additional functions to the styled text
-	 * widget
-	 */
 	protected XtextSourceViewer sourceviewer;
 
 	private ValidationJob validationJob;
