@@ -14,9 +14,12 @@ import java.util.Arrays;
 
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.contentassist.CompletionProposalComputer;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 
 /**
  * 
@@ -30,11 +33,45 @@ public class AsyncXtextContentAssistProcessor extends XtextContentAssistProcesso
 		if (getContentProposalProvider() == null)
 			return null;
 		IXtextDocument document = (IXtextDocument) viewer.getDocument();
-		CompletionProposalComputer computer = createCompletionProposalComputer(viewer, offset);
-		ICompletionProposal[] result = document.readOnly(computer);
+		final CancelableCompletionProposalComputer computer = createCompletionProposalComputer(viewer, offset);
+		ICompletionProposal[] result = document
+				.readOnly(new CancelableUnitOfWork<ICompletionProposal[], XtextResource>() {
+					@Override
+					public ICompletionProposal[] exec(XtextResource state, CancelIndicator cancelIndicator)
+							throws Exception {
+						computer.setCancelIndicator(cancelIndicator);
+						return computer.exec(state);
+					}
+				});
 		Arrays.sort(result, getCompletionProposalComparator());
 		result = getCompletionProposalPostProcessor().postProcess(result);
 		return result;
 	}
 
+	@Override
+	protected CancelableCompletionProposalComputer createCompletionProposalComputer(ITextViewer viewer, int offset) {
+		return new CancelableCompletionProposalComputer(this, viewer, offset);
+	}
+
+	public static class CancelableCompletionProposalComputer extends CompletionProposalComputer {
+
+		private CancelIndicator cancelIndicator;
+
+		public CancelableCompletionProposalComputer(State state, ITextViewer viewer, int offset) {
+			super(state, viewer, offset);
+		}
+
+		public void setCancelIndicator(CancelIndicator indicator) {
+			this.cancelIndicator = indicator;
+		}
+
+		@Override
+		public boolean canAcceptMoreProposals() {
+			if (cancelIndicator == null) {
+				return super.canAcceptMoreProposals();
+			}
+			return cancelIndicator.isCanceled();
+		}
+
+	}
 }
