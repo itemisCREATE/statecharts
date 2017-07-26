@@ -43,7 +43,7 @@ public class DomainValidator implements EValidator {
 		if (eObject instanceof DomainElement) {
 			DomainStatus status = DomainRegistry.getDomainStatus(((DomainElement) eObject).getDomainID());
 			if (status.getSeverity() == Severity.ERROR) {
-				diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR, "DomainValidator", 0, status.getMessage(),
+				diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR, "DomainValidator", 0, status.getShortMessage(),
 						new Object[] { eObject }));
 			} else if (status.getSeverity() == Severity.WARNING) {
 				diagnostics.add(new BasicDiagnostic(Diagnostic.WARNING, "DomainValidator", 0, status.getMessage(),
