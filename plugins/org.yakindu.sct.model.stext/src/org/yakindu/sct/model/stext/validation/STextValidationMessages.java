@@ -54,5 +54,5 @@ public interface STextValidationMessages {
 	public static final String VALUE_OF_REQUIRES_EVENT = "valueof() expression requires event as argument.";
 	public static final String IMPORT_NOT_RESOLVED_MSG = "Import '%s' cannot be resolved.";
 	public static final String IMPORT_NOT_RESOLVED_CODE = "ImportNotResolved";
-
+	public static final String CONTRADICTORY_ANNOTATIONS = "Some annotations (%s) have contradictory effects.";
 }
