@@ -65,12 +65,12 @@ public class AsyncXtextContentAssistProcessor extends XtextContentAssistProcesso
 			this.cancelIndicator = indicator;
 		}
 
-		@Override
+		@Override 
 		public boolean canAcceptMoreProposals() {
 			if (cancelIndicator == null) {
 				return super.canAcceptMoreProposals();
 			}
-			return cancelIndicator.isCanceled();
+			return !cancelIndicator.isCanceled();
 		}
 
 	}
