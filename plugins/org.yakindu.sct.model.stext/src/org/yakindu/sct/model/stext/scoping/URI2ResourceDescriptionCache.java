@@ -37,7 +37,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class URI2ResourceDescriptionCache implements Delegate {
 
-	private static final String DOMAIN_ID = "StatechartDomain";
+	public static final String DOMAIN_ID = "StatechartDomain";
 
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
