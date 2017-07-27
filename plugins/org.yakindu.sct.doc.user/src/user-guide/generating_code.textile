@@ -154,21 +154,22 @@ bc. feature Debug {
 
 h2(#general-concepts-of-the-state-machine-code). General concepts of the state machine code
 
-h3(#execution_schemes). Execution schemes
+h3(#generating_code_execution_schemes). Execution schemes
 
 The generated state machine code implements one of two execution schemes:
-* In the _cycle-based execution scheme_, the state machine will collect events and later process them in a run-to-completion step. The latter is typically executed in regular time intervals.
+* In the _cycle-based execution scheme_, the state machine will first collect events and later process them in a run-to-completion step. Run-to-completion steps are typically executed in regular time intervals.
 * In the _event-driven execution scheme_, the state machine becomes active each time an event arrives and processes it right away in a run-to-completion step.
 
+You can select the execution scheme via the <code>@CycleBased</code> or <code>@EventDriven</code> annotations. Write the appropriate annotation to the top of your statechart's definition section, see sections "&quot;@CycleBased&quot;":../user-guide/statechart_language.html#statechart_language_cyclebased and "&quot;@EventDriven&quot;":../user-guide/statechart_language.html#statechart_language_eventdriven.
 
 
-h4(#cycle-based_execution_scheme). Cycle-based execution scheme
+h4(#generating_code_cycle-based_execution_scheme). Cycle-based execution scheme
 
 In the cycle-based execution scheme, each run cycle consists of two different phases:
 # In the first phase, incoming events and time events are collected.
 # In the second phase, _runCycle()_ is executed and processes the events collected in the first phase.
 
-This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.g. something like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the IPO (input processing output) model.
+This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.g. a guard condition like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the IPO (input processing output) model.
 
 ==<div class="example">==
 
@@ -183,57 +184,16 @@ sc_runCycle(handle);
 
 
 
-h4(#event-driven_execution_scheme). Event-driven execution scheme
+h4(#generating_code_event-driven_execution_scheme). Event-driven execution scheme
 
-In the _event-driven execution scheme_, each incoming event or time event immediately triggers a run-to-completion step. As a consequence, the state machine will never process two events at the same time, and a condition like @[eventA && eventB]@ will never become true.
+In the _event-driven execution scheme_, each incoming event or time event immediately triggers the execution of a run-to-completion step. As a consequence, the state machine will never process two events simultaneously, and a guard condition like @[eventA && eventB]@ will never become true.
 
 ==<div class="example">==
 
-Example: The sample client code below raises the events _eventA_ and _eventB_. The state machine processes each event immediately as it arrives, triggered by the respective _raise…()_ method. Thus calling _runCycle()_ is not needed.
+Example: The sample client code below raises the events _eventA_ and _eventB_. The state machine processes each event immediately as it arrives, triggered by the respective _raise…()_ method. Thus the client code does not need to call _runCycle()_.
 
 bc. sc_raiseEventA(handle);
 sc_raiseEventB(handle);
-
-==</div>==
-
-
-
-h4(#selecting_the_execution_scheme). Selecting the execution scheme
-
-Select the execution scheme by writing the <code>@CycleBased</code> or the <code>@EventDriven</code> annotation at the top of your statechart's definition section, see the examples below. If you omit both of them, the default will be <code>@CycleBased(200)</code>.
-
-The <code>@CycleBased</code> annotation specifies that the cycle-based execution scheme is to be used. Its mandatory parameter _period_ indicates the suggested period of time between two successive run-to-completion steps in milliseconds. Only the simulator takes this value into account, however. It is neither of significance to nor reflected in the generated code, and thus it remains the client code's responsibility to explicitly call _runCycle()_ – and to decide when to do so.
-
-==<div class="example">==
-
-Example: The definition section below specifies that the generated code should implement the _cycle-based execution scheme_ with an interval of 100 milliseconds between two cycles.
-
-bc.. 
-@CycleBased(100)
-
-internal:
-    var light : boolean
-
-interface:
-    in event press
-…
-p. 
-
-==</div>==
-
-The <code>@EventDriven</code> annotation specifies that the event-driven execution scheme is to be used.
-
-==<div class="example">==
-
-Example: The definition section below specifies that the generated code should implement the _event-driven execution scheme_.
-
-bc.. 
-@EventDriven
-
-interface:
-    in event press
-…
-p. 
 
 ==</div>==
 
