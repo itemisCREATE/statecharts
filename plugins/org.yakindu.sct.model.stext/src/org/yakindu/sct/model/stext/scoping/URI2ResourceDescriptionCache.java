@@ -10,21 +10,14 @@
  */
 package org.yakindu.sct.model.stext.scoping;
 
-import java.util.concurrent.ExecutionException;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer.Delegate;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -34,52 +27,21 @@ import com.google.inject.Singleton;
  * 
  */
 @Singleton
-public class URI2ResourceDescriptionCache implements Delegate {
+public class URI2ResourceDescriptionCache {
 
-	private static final String DOMAIN_ID = "ResourceCache";
+	private static final String DOMAIN_ID = "org.yakindu.sct.domain";
 
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
 
-	private LoadingCache<String, IResourceDescription> cache;
-
-	private WorkspaceSynchronizer workspaceSynchronizer;
-
-	public URI2ResourceDescriptionCache() {
-		cache = CacheBuilder.newBuilder().build(new CacheLoader<String, IResourceDescription>() {
-			@Override
-			public IResourceDescription load(String key) throws Exception {
-				return getInternal(URI.createURI(key));
-			}
-		});
-		TransactionalEditingDomain editingDomain = getEditingDomain();
-		workspaceSynchronizer = new WorkspaceSynchronizer(editingDomain, this);
-	}
-
 	protected TransactionalEditingDomain getEditingDomain() {
 		TransactionalEditingDomain editingDomain = TransactionalEditingDomain.Registry.INSTANCE
 				.getEditingDomain(DOMAIN_ID);
-		if (editingDomain == null) {
-			editingDomain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain();
-			editingDomain.setID(DOMAIN_ID);
-			TransactionalEditingDomain.Registry.INSTANCE.add(DOMAIN_ID, editingDomain);
-		}
 		return editingDomain;
 	}
 
 	public IResourceDescription get(URI uri) {
-		try {
-			IResourceDescription descrpition = cache.get(uri.toString());
-			return descrpition;
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
-		return null;
-
-	}
-
-	protected IResourceDescription getInternal(URI uri) {
-		ResourceSet set = getResourceSet();
+		ResourceSet set = getEditingDomain().getResourceSet();
 		Resource resource = set.getResource(uri, true);
 		if (resource != null) {
 			IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(uri);
@@ -93,34 +55,4 @@ public class URI2ResourceDescriptionCache implements Delegate {
 		}
 		return null;
 	}
-
-	protected ResourceSet getResourceSet() {
-		return getEditingDomain().getResourceSet();
-	}
-
-	@Override
-	public boolean handleResourceDeleted(Resource resource) {
-		cache.invalidate(resource.getURI().toString());
-		return true;
-	}
-
-	@Override
-	public boolean handleResourceMoved(Resource resource, URI newURI) {
-		cache.invalidate(resource.getURI().toString());
-		return true;
-	}
-
-	@Override
-	public boolean handleResourceChanged(Resource resource) {
-		cache.invalidate(resource.getURI().toString());
-		return true;
-	}
-
-	@Override
-	public void dispose() {
-		if (workspaceSynchronizer != null)
-			workspaceSynchronizer.dispose();
-		cache.invalidateAll();
-	}
-
 }

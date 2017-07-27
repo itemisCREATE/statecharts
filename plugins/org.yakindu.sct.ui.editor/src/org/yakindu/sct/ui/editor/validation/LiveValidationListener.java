@@ -34,6 +34,8 @@ public class LiveValidationListener extends ResourceSetListenerImpl {
 	@Inject
 	private ValidationJob validationJob;
 
+	private Resource resource;
+
 	@Override
 	public void resourceSetChanged(ResourceSetChangeEvent event) {
 		for (Notification notification : event.getNotifications()) {
@@ -42,22 +44,27 @@ public class LiveValidationListener extends ResourceSetListenerImpl {
 					&& notification.getEventType() != Notification.RESOLVE) {
 				EObject eObject = (EObject) notification.getNotifier();
 				if (eObject.eClass().getEPackage() == SGraphPackage.eINSTANCE) {
-					validationJob.cancel();
-					if (liveValidationEnabled()) {
-						validationJob.schedule(DELAY);
-						break;
-					}
+					rescheduleJob();
+					break;
 				} else
 					for (EClass eClass : eObject.eClass().getEAllSuperTypes()) {
 						if (SGraphPackage.eINSTANCE == eClass.getEPackage()) {
-							validationJob.cancel();
-							if (liveValidationEnabled()) {
-								validationJob.schedule(DELAY);
-								return;
-							}
+							rescheduleJob();
+							return;
 						}
 					}
 			}
+			else if (notification.getNotifier() instanceof Resource && this.resource != null
+					&& !this.resource.equals(notification.getNotifier())) {
+				rescheduleJob();
+			}
+		}
+	}
+
+	protected void rescheduleJob() {
+		validationJob.cancel();
+		if (liveValidationEnabled()) {
+			validationJob.schedule(DELAY);
 		}
 	}
 
@@ -73,6 +80,7 @@ public class LiveValidationListener extends ResourceSetListenerImpl {
 	}
 
 	public void setResource(Resource resource) {
+		this.resource = resource;
 		validationJob.setResource(resource);
 		validationJob.setRule(WorkspaceSynchronizer.getFile(resource));
 	}

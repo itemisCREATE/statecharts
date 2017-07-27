@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.partitioning;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,13 +19,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
-import org.eclipse.gmf.runtime.diagram.core.DiagramEditingDomainFactory;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -45,7 +42,6 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
@@ -59,7 +55,7 @@ public class DiagramPartitioningUtil {
 	/** GMFs notation {@link Style} id **/
 	public static final String INLINE_STYLE = "isInline";
 
-	private static final String DOMAIN_ID = "StatechartDomain";
+	private static final String DOMAIN_ID = "org.yakindu.sct.domain";
 
 	private DiagramPartitioningUtil() {
 	}
@@ -84,50 +80,14 @@ public class DiagramPartitioningUtil {
 	}
 
 	/**
-	 * Returns the Shared Editing Domain that is used for all Editors acting on
-	 * the same {@link IResource}
+	 * Returns the Shared Editing Domain that is used for all Editors acting on the
+	 * same {@link IResource}
 	 * 
 	 * @return the {@link TransactionalEditingDomain}
 	 */
 	public static synchronized TransactionalEditingDomain getSharedDomain() {
-		TransactionalEditingDomain editingDomain = TransactionalEditingDomain.Registry.INSTANCE
+		return TransactionalEditingDomain.Registry.INSTANCE
 				.getEditingDomain(DOMAIN_ID);
-		if (editingDomain == null) {
-			editingDomain = DiagramEditingDomainFactory.getInstance().createEditingDomain();
-			editingDomain.setID(DOMAIN_ID);
-			TransactionalEditingDomain.Registry.INSTANCE.add(DOMAIN_ID, editingDomain);
-
-			new WorkspaceSynchronizer(editingDomain, new WorkspaceSynchronizer.Delegate() {
-				public boolean handleResourceDeleted(Resource resource) {
-					resource.unload();
-					return true;
-				}
-				public boolean handleResourceMoved(Resource resource, URI newURI) {
-					resource.unload();
-					return true;
-				}
-				public boolean handleResourceChanged(Resource resource) {
-					if (resource instanceof AbstractSCTResource) {
-						// do not unload GMF resources as it might be the one
-						// underlying the currently opened editor
-						return true;
-					}
-					resource.unload();
-					try {
-						resource.load(resource.getResourceSet().getLoadOptions());
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
-					return true;
-				}
-
-				public void dispose() {
-					// nothing to dispose (especially as I am shared)
-				}
-			});
-		}
-		return editingDomain;
 	}
 
 	/**
@@ -203,8 +163,7 @@ public class DiagramPartitioningUtil {
 	}
 
 	/**
-	 * Forces the user to close all opened editors for subdiagrams that are
-	 * inlined.
+	 * Forces the user to close all opened editors for subdiagrams that are inlined.
 	 * 
 	 * @return true if all editors were closed, false otherwise
 	 */

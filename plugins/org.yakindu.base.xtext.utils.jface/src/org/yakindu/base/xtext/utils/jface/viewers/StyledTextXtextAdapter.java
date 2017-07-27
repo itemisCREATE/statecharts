@@ -80,10 +80,6 @@ import com.google.inject.Provider;
 @SuppressWarnings("restriction")
 public class StyledTextXtextAdapter {
 
-	/**
-	 * The sourceViewer, that provides additional functions to the styled text
-	 * widget
-	 */
 	protected XtextSourceViewer sourceviewer;
 
 	private ValidationJob validationJob;
@@ -109,6 +105,8 @@ public class StyledTextXtextAdapter {
 	private StyledText styledText;
 
 	private ControlDecoration decoration;
+
+	private SourceViewerDecorationSupport decorationSupport;
 
 	public StyledTextXtextAdapter(Injector injector, IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
 		this.contextFakeResourceProvider = contextFakeResourceProvider;
@@ -187,7 +185,7 @@ public class StyledTextXtextAdapter {
 			styledText.addFocusListener(listener);
 			styledText.addDisposeListener(listener);
 		} catch (NullPointerException ex) {
-			//Do nothing, not opened within editor context
+			// Do nothing, not opened within editor context
 		}
 
 	}
@@ -197,8 +195,8 @@ public class StyledTextXtextAdapter {
 		decoration.setShowHover(true);
 		decoration.setShowOnlyOnFocus(true);
 
-		final Image image = ImageDescriptor.createFromFile(XtextStyledTextCellEditor.class,
-				"images/content_assist_cue.gif").createImage();
+		final Image image = ImageDescriptor
+				.createFromFile(XtextStyledTextCellEditor.class, "images/content_assist_cue.gif").createImage();
 		decoration.setImage(image);
 		decoration.setDescriptionText("Content Assist Available (CTRL + Space)");
 		decoration.setMarginWidth(2);
@@ -215,8 +213,9 @@ public class StyledTextXtextAdapter {
 	}
 
 	protected ValidationJob createValidationJob() {
-		return new ValidationJob(validator, document, new AnnotationIssueProcessor(document,
-				sourceviewer.getAnnotationModel(), resolutionProvider), CheckMode.ALL);
+		return new ValidationJob(validator, document,
+				new AnnotationIssueProcessor(document, sourceviewer.getAnnotationModel(), resolutionProvider),
+				CheckMode.FAST_ONLY);
 	}
 
 	protected void createFakeResourceContext(Injector injector) {
@@ -227,9 +226,9 @@ public class StyledTextXtextAdapter {
 		sourceviewer = new XtextSourceViewerEx(styledText, preferenceStoreAccess.getPreferenceStore());
 		sourceviewer.configure(configuration);
 		sourceviewer.setDocument(document, new AnnotationModel());
-		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(sourceviewer, null,
-				new DefaultMarkerAnnotationAccess(), getSharedColors());
-		configureSourceViewerDecorationSupport(support);
+		decorationSupport = new SourceViewerDecorationSupport(sourceviewer, null, new DefaultMarkerAnnotationAccess(),
+				getSharedColors());
+		configureSourceViewerDecorationSupport(decorationSupport);
 	}
 
 	protected ISharedTextColors getSharedColors() {
@@ -237,9 +236,8 @@ public class StyledTextXtextAdapter {
 	}
 
 	/**
-	 * Creates decoration support for the sourceViewer. code is entirely copied
-	 * from {@link XtextEditor} and its super class
-	 * {@link AbstractDecoratedTextEditor}.
+	 * Creates decoration support for the sourceViewer. code is entirely copied from
+	 * {@link XtextEditor} and its super class {@link AbstractDecoratedTextEditor}.
 	 * 
 	 */
 	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
@@ -254,7 +252,10 @@ public class StyledTextXtextAdapter {
 				BracketMatchingPreferencesInitializer.COLOR_KEY);
 
 		support.install(preferenceStoreAccess.getPreferenceStore());
+	}
 
+	protected void unconfigureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
+		support.uninstall();
 	}
 
 	protected void initXtextDocument(XtextFakeResourceContext context) {
@@ -285,6 +286,10 @@ public class StyledTextXtextAdapter {
 	}
 
 	public void dispose() {
+		document.setOutdated(true);
+		if (decorationSupport != null) {
+			unconfigureSourceViewerDecorationSupport(decorationSupport);
+		}
 		uninstallHighlightingHelper();
 		document.disposeInput();
 	}
@@ -383,12 +388,12 @@ public class StyledTextXtextAdapter {
 		}
 
 		public void widgetDisposed(DisposeEvent e) {
-            if (selectionProviderOnFocusLost != null) {
-                site.setSelectionProvider(selectionProviderOnFocusLost);
-            }
-            ((StyledText) e.getSource()).removeFocusListener(this);
-            ((StyledText) e.getSource()).removeDisposeListener(this);
-        }
+			if (selectionProviderOnFocusLost != null) {
+				site.setSelectionProvider(selectionProviderOnFocusLost);
+			}
+			((StyledText) e.getSource()).removeFocusListener(this);
+			((StyledText) e.getSource()).removeDisposeListener(this);
+		}
 
 	}
 }
