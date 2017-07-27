@@ -19,7 +19,7 @@
          executor="org.yakindu.sct.generator.runner.WorkspaceGeneratorExecutor"
          icon="icons/sct.png"
          id="yakindu::generic"
-         name="Custom Xtend2/Java-based Generator">
+         name="Custom Xtend/Java-based Generator">
       <FeatureLibrary
             library_id="org.yakindu.generator.core.features">
       </FeatureLibrary>
