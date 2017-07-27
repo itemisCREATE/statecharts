@@ -41,7 +41,7 @@ public class STextStatefulFactory extends StatefulFactory {
 		return result;
 	}
 
-	protected void initializeFromViewerAndResource(int offset) {
+	protected void initializeFromViewerAndResource(final int offset) {
 		if (Display.getCurrent() == null) {
 			Display.getDefault().syncExec(new Runnable() {
 				@Override
