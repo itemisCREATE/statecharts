@@ -20,7 +20,8 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.yakindu.base.types,
  org.yakindu.base.expressions;visibility:=reexport,
  org.yakindu.sct.domain,
- org.eclipse.emf.workspace
+ org.eclipse.emf.workspace,
+ org.yakindu.sct.model.stext.lib
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.eclipse.xtext.xbase.lib
