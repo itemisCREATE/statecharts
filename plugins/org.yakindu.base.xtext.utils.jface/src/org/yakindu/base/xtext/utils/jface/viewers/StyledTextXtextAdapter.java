@@ -12,7 +12,12 @@ package org.yakindu.base.xtext.utils.jface.viewers;
 
 import java.util.List;
 
+import org.eclipse.core.internal.jobs.JobManager;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.fieldassist.ControlDecoration;
@@ -291,7 +296,6 @@ public class StyledTextXtextAdapter {
 			unconfigureSourceViewerDecorationSupport(decorationSupport);
 		}
 		uninstallHighlightingHelper();
-		document.disposeInput();
 	}
 
 	protected XtextSourceViewerConfiguration getXtextSourceViewerConfiguration() {
