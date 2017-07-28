@@ -130,7 +130,7 @@ In the suspended status of a statechart simulation you can change variable value
 
 h3(#advsim_raising-multiple-events-simultaneously). Raising multiple events simultaneously
 
-If you click on an event's name in the _simulation_ view to raise that event in normal simulation, i.&#8239;e. while execution isn't suspended, the state machine immediately processes that event and takes the corresponding transition, if any.
+If you click on an event's name in the _simulation_ view to raise that event in normal simulation, i.e. while execution isn't suspended, the state machine immediately processes that event and takes the corresponding transition, if any.
 
 However, while the simulation is suspended, you can raise multiple events, without instant execution. Once execution resumes, both events are handled at the same time, or, to be more exact, in the same run-to-completion step (RTS).
 

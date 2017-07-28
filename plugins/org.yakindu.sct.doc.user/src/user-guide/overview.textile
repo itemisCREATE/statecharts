@@ -14,6 +14,7 @@ The Standard Edition of YAKINDU Statechart Tools provides the following features
 * *Code generators for Java, C, C++, and TypeScript* to transform statecharts into programming language source code
 * *Custom generator projects* to easily create model-to-text transformations with Xtend or Java in order to create any code of your own choice
 * *Integrated validator* to check for syntactical or semantical problems of the statechart model
+* *Testing framework* to test your state machines with unit tests
 
 The following graph shows these features and their relation to each other:
 
@@ -23,8 +24,9 @@ p=. Features of YAKINDU Statechart Tools
 
 The Professional Edition of YAKINDU Statechart Tools makes additional features available:
 
-* *Testing framework* to test your state machines with unit tests
 * *Deep integration with C and TypeScript* to directly access variables, types etc. in these programming languages
+
+
 
 
 h2(#which-licensing-rules-do-apply-to-yakindu-statechart-tools). Which licensing rules do apply to YAKINDU Statechart Tools?

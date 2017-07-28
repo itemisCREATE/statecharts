@@ -1,7 +1,7 @@
 
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/simulating_statecharts.textile
 
-h1(#simu_simulating-statecharts). Simulating statecharts
+h1(#simu_simulating_statecharts). Simulating statecharts
 
 Simulating a statechart model means to execute it, raise events manually, have time-based and other events being triggered automatically, and observe the model's behavior.
 
@@ -35,11 +35,11 @@ p=. Selecting _Run As → Statechart Simulation_ in the context menu
 h3(#simu_repeating-the-last-simulation). Repeating the last simulation
 
 In order to re-run the simulation you have most recently executed, simply
-* press <code>[Ctrl]+[F11]</code> on the keyboard
+* press @[Ctrl+F11]@ on the keyboard
 or
 * select _Run → Run_ in the main menu.
 
-To be exact, this operation does not necessarily re-run the last _simulation_, but rather the last executed _launch_. So if, for example, you first run a statechart simulation followed by running a Java program, then upon pressing <code>[Ctrl]+[F11]</code> that Java program is executed once again, not the statechart simulation.
+To be exact, this operation does not necessarily re-run the last _simulation_, but rather the last executed _launch_. So if, for example, you first run a statechart simulation followed by running a Java program, then upon pressing @[Ctrl+F11]@ that Java program is executed once again, not the statechart simulation.
 
 
 
@@ -67,13 +67,13 @@ To execute an existing launch configuration, proceed as follows:
 
 
 
-h2(#simu_the-sc-simulation-perspective). The SC Simulation perspective
+h2(#simu_the-sc-simulation-perspective). The _SC Simulation_ perspective
 
 The _SC Simulation_ perspective provides selected views that are most useful when running a statechart simulation.
 
 
 
-h3(#simu_engaging-the-sc-simulation-perspective). Engaging the SC Simulation perspective
+h3(#simu_engaging-the-sc-simulation-perspective). Engaging the _SC Simulation_ perspective
 
 When a simulation starts, the perspective usually changes to the _SC Simulation_ perspective. If this doesn't happen, you can manually engage the _SC Simulation_ perspective as follows:
 

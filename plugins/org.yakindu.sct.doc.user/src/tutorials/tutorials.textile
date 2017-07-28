@@ -1,7 +1,7 @@
 
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/tutorials/tutorials.textile
 
-h1(#oss_five-minutes-tutorial). Five-minutes tutorial
+h1(#five-minutes-tutorial). Five-minutes tutorial
 
 The five-minutes tutorial gives you a brief introduction into modeling state machines with YAKINDU Statechart Tools by a simple example. It models a light switch, which has the states _on_ and _off_. Operating the switch repeatedly turns the light on, off, back on again, and so forth. You can simulate this behavior in a dynamic statechart model (state machine model). Here's how this looks like:
 
@@ -11,7 +11,7 @@ p=. Interactive light switch statechart simulation
 
 In the simulation screenshot above, the light switch is currently in the _on_ state. To toggle the light switch, the user clicks on _operate_ on the right-hand side of the window.
 
-h2(#oss_importing-light-switch-example). Importing light switch example
+h2(#importing-light-switch-example). Importing light switch example
 
 Now try this for yourself. We are assuming that you have already installed and started YAKINDU Statechart Tools. If you don't, please see the "Installation Guide":../installation/installation.html for details.
 
@@ -24,7 +24,7 @@ Now try this for yourself. We are assuming that you have already installed and s
 # In the project explorer on the left-hand side of the window, open the _light_switch_ project by clicking on the small triangle left from the project name ("light_switch"). Also open the _model_ folder.<p>!(standard-image small)images/tuto_5min_020_expand_project.png(Expand project)!</p>
 # The light switch statechart is defined in the file _light_switch.sct_. Double-click on this file to open the model.
 
-h2(#oss_running-the-light-switch-simulation). Simulating the light switch
+h2(#running-the-light-switch-simulation). Simulating the light switch
 
 # Right-click on _light_switch.sct_ and select _Run As → Statechart Simulation_ in the context menu.
 # The simulation starts and shows the light switch model in its _off_ state. The rectangle named *Off* is highlighted in red, meaning it is the active state. <p>!(standard-image)images/tuto_light_switch_320_statechart_simulator_state_events.png(Light switch simulation in "off" state)!</p>
@@ -32,7 +32,7 @@ h2(#oss_running-the-light-switch-simulation). Simulating the light switch
 # Click on the _operate_ link. The active state changes accordingly from *Off* to *On*. <p>!(standard-image)images/tuto_light_switch_330_statechart_simulator_state_on.png(Light switch simulation in "on" state)!</p>
 # Click on _operate_ again to switch off the light.
 
-h2(standard #oss_generating-statechart-code). Generating statechart code
+h2(#generating-statechart-code). Generating statechart code
 
 You have developed and tested your statechart model, and now you need it as a C, C++, or Java implementation? YAKINDU Statechart Tools can create it for you.
 
@@ -43,12 +43,12 @@ As an example, we will take the light switch statechart and generate Java source
 # In the next dialog, check the checkbox left from _light_switch.sct_, then click _Finish_.
 # Java classes implementing the statechart model are generated. You can find the generated source code in the folders _src_ and _src-gen_ within the _light_switch_ project. <p>!(standard-image)images/tuto_5min_140_generated_java_source_code.png(Generated Java source code)!</p>
 
-That's it. If you want to know more, take the time and work through the "Comprehensive Tutorial":#oss_comprehensive-tutorial.
+That's it. If you want to know more, take the time and work through the "Comprehensive Tutorial":#comprehensive-tutorial.
 
 
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/tutorials/tutorials.textile
 
-h1(#oss_comprehensive-tutorial). Comprehensive tutorial
+h1(#comprehensive-tutorial). Comprehensive tutorial
 
 This tutorial introduces YAKINDU Statechart Tools (SCT) which provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concepts of Finite State Machines (FSM) and Harel Statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation for C, C&#43;&#43;, or Java.
 

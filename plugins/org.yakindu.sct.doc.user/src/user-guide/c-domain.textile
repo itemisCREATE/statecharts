@@ -48,7 +48,7 @@ Now we can create a C header file specifying our own C type definitions which we
 
 h2(#cdom_defining-a-c-struct). Defining a C struct
 
-In the created header file we define a struct type named *Point*, which we will later use in a statechart. A (two-dimensional) point consists of an _x_ and a _y_ coordinate. We choose *int16_t* to represent a coordinate, i.&#8239;e. a 16-bit signed integer. The complete header file containing the struct definition looks like this:
+In the created header file we define a struct type named *Point*, which we will later use in a statechart. A (two-dimensional) point consists of an _x_ and a _y_ coordinate. We choose *int16_t* to represent a coordinate, i.e. a 16-bit signed integer. The complete header file containing the struct definition looks like this:
 
 bc.. 
 /*
@@ -93,13 +93,13 @@ In order to make use of the struct defined above we have to import the _point.h_
 bc. 
 import: "point.h"
 
-With the definitions from _point.h_ at hand, we can declare a variable *pointA* of the _Point_ type. In the statechart's definition section, enter the following text:
+With the definitions from _point.h_ at hand, we can declare a variable _pointA_ of the _Point_ type. In the statechart's definition section, enter the following text:
 
 bc. 
 interface:
 	var pointA:
 
-On the right-hand side of the colon in the variable declaration, the variable's type must follow. In order to see which types are available, press <code>[Ctrl]+[Space]</code>. The content assist opens and shows the C types available, depending on the headers imported within your statechart, i.&#8239;e.
+On the right-hand side of the colon in the variable declaration, the variable's type must follow. In order to see which types are available, press @[Ctrl+Space]@. The content assist opens and shows the C types available, depending on the headers imported within your statechart, i.e.
 * the C basic standard types,
 * the C99 types, provided by including _stdint.h_,
 * the self-defined _Point_ type, provided by including _point.h_,
@@ -127,13 +127,13 @@ interface:
     var pointA: Point
     in event tick
 
-The statechart below uses these variables in various places, i.&#8239;e. in transition actions, in internal actions, and in guard conditions.
+The statechart below uses these variables in various places, i.e. in transition actions, in internal actions, and in guard conditions.
 
 !images/cdom_geometry_050_using_c_type_variables_010.png(Using C-type variables)!
 
 p=. Using C-type variables
 
-Variables of primitive types like @var count: int8_t@ are accessed as expected, e.&#8239;g. @count = 0@ or @count += 1;@
+Variables of primitive types like @var count: int8_t@ are accessed as expected, e.g. @count = 0@ or @count += 1;@
 
 The dot notation is used to access structure elements. For example, @pointA.x = 0; pointA.y = 0@ sets *pointA* to the origin of the coordinate system.
 
@@ -420,7 +420,7 @@ p=. Rectangle areas modified and rechecked
 
 h2(#cdom_looking-up-a-type-definition). Looking up a type definition
 
-Given a variable definition in a statechart's definition section, you can lookup the corresponding type definition. The definition section must be in editing mode, i.&#8239;e. you must have double-clicked into it. Now press the @[Ctrl]@ key and move the mouse pointer over the type name. The former changes its shape into a hand symbol and the latter changes into a hyperlink:
+Given a variable definition in a statechart's definition section, you can lookup the corresponding type definition. The definition section must be in editing mode, i.e. you must have double-clicked into it. Now press the @[Ctrl]@ key and move the mouse pointer over the type name. The former changes its shape into a hand symbol and the latter changes into a hyperlink:
 
 !images/cdom_geometry_160_type_lookup_010.png(Looking up a C type)!
 
@@ -463,7 +463,7 @@ typedef struct {
 #endif /* TRIANGLE_H_ */
 
 
-p. Similar to the _Triangle_ type or any other C type, the _Color_ enumeration type can be used in the statechart, e.&#8239;g. by declaring an additional interface variable:
+p. Similar to the _Triangle_ type or any other C type, the _Color_ enumeration type can be used in the statechart, e.g. by declaring an additional interface variable:
 
 bc.. import: color
 import: triangle
@@ -480,7 +480,7 @@ In order to see which values are available the content assist, triggered by @[Ct
 
 p=. Using content assist to select an enumeration value
 
-Once initialized, the _c_ variable can now be used e.&#8239;g. in an assignment to the triangle _t_'s fill color:
+Once initialized, the _c_ variable can now be used e.g. in an assignment to the triangle _t_'s fill color:
 
 bc.  t.fillColor = c;
 
@@ -499,7 +499,7 @@ Let's say our *rectangle.h* header file not only defines the data type, but also
 bc. extern int32_t area(Rectangle r);
 
 For the sake of the example, let's assume the function calculates the area of the given rectangle. Of course we could also do this with means built into the statechart language. However, in the general case you neither _can_ nor _want_ to do that.
-* Implementing the functionality in the statechart language might not be possible, because the latter does not provide the necessary means, e.&#8239;g. to pull some data from an external source.
+* Implementing the functionality in the statechart language might not be possible, because the latter does not provide the necessary means, e.g. to pull some data from an external source.
 * Even if it would be possible to implement the functionality in the statechart language, it might still not be desirable, if the functionality has been developed and fully tested in C already. You will neither want to re-invent the wheel nor would you want to introduce any new errors into an alternative implementation.
 
 YAKINDU Statechart Tools parses function declarations in header files and makes the functions available in the statechart language. It doesn't care where those functions are defined – or whether they are defined at all – nor what they do. Questions like these will become relevant later when the state machine is generated as C source code, compiled and linked to the functions' implementations.
@@ -523,7 +523,7 @@ State machines calling C functions as operations are debarred from simulation an
 
 h2(#cdom_generating-c-source-code). Generating C source code
 
-Code generation, i.&#8239;e. turning a statechart model into source code of a programming language, is explained in the section _Generating state machine code_. Therefore we won't go into the details here, but instead only put some emphasis on code generation specialties of the _Deep C Integration_.
+Code generation, i.e. turning a statechart model into source code of a programming language, is explained in the section _Generating state machine code_. Therefore we won't go into the details here, but instead only put some emphasis on code generation specialties of the _Deep C Integration_.
 
 h3(#cdom_creating-a-generator-model). Creating a generator model
 
@@ -531,7 +531,7 @@ In the statechart model introduced above, do the following:
 
 # In the project view, right-click on the project's name. The context menu opens.
 # In the context menu, select _New → Code Generator Model_. The _YAKINDU Generator Model_ wizard opens.
-# Enter a filename into the _File name_ field, e.&#8239;g. *c.sgen*, and click _Next >_.
+# Enter a filename into the _File name_ field, e.g. *c.sgen*, and click _Next >_.
 # In the _Generator_ drop-down menu, select *YAKINDU SCT C Code Generator*.
 # Select the statechart models to generate C source code for. Click _Finish_.
 
@@ -619,7 +619,7 @@ The current release candidate of YAKINDU Statechart Tools PRO is still missing s
 
 h3(#cdom_current-type-range-checks). Type range checks
 
-Type range validations are currently not implemented. As a consequence, it is possible to e.&#8239;g. assign an _int32_t_ value to an _int8_t_ variable one without any warning.
+Type range validations are currently not implemented. As a consequence, it is possible to e.g. assign an _int32_t_ value to an _int8_t_ variable one without any warning.
 
 ###. CHECK: Are type range validations still not implemented in the C domain?
 
@@ -633,7 +633,7 @@ In C it is possible to define structs, unions and enums without a _typedef_. The
 
 h3(#cdom_performance-issues-with-very-large-c-projects). Performance issues with very large C projects
 
-h4. Processing header files and macro definitions
+h4(#cdom_processing_header_files_and_macro_definitions). Processing header files and macro definitions
 
 Statecharts that
 * include a very large number of header files (_.h_ files), or
@@ -644,7 +644,7 @@ might cause YAKINDU Statechart Tools to spend a considerable amount of time proc
 Typically, @#define@ directives are coded in header files. Header files in turn can include further header files using the @#include@ directive. The total amount of header files and @#define@ directives involved is not always transparent to the developer, especially if system header files or header files of a programming framework are included.
 
 
-h4. Excluding C header files from being parsed
+h4(#cdom_excluding_c_header_files_from_being_parsed). Excluding C header files from being parsed
 
 YAKINDU Statechart Tools parses header files to make types and names defined therein available to your statechart. However, you typically won't need all of them. In order to save processing time you can explicitly exclude header files or folders from parsing.
 
@@ -666,7 +666,7 @@ Aside from the buttons mentioned above, the blacklist dialog has three more butt
 After changing the blacklist, please perform a _clean_ on the project, followed by a _build_. This is needed for your changes to take effect. After that, any imports excluded by the blacklist will no longer show up in your statechart's content assist.
 
 
-h4. Deactivating the C/C++ indexer
+h4(#cdom_deactivating_the_ccpp_indexer). Deactivating the C/C++ indexer
 
 The C/C++ indexer is part of the Eclipse C/C++ Development Toolkit (CDT). It parses C/C++ source and header files and maintains the extracted information in an internal database. This database is used by the CDT for search, navigation and parts of content assist. YAKINDU Statechart Tools also uses the information provided by the C/C++ indexer.
 

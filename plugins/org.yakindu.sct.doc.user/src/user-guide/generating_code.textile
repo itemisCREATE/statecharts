@@ -7,11 +7,7 @@ Ultimately, you will need your state machine not only as a nice graphical statec
 
 YAKINDU Statechart Tools comes with a couple of code generators that save you from the time-consuming and error-prone task of coding your state machine manually. The YAKINDU code generators transform your statechart into source code of a target programming language in an instant. The generated code is always correct, at least in the sense that it is a true one-to-one mapping of your statechart – and at least unless a code generator is buggy itself.
 
-==<div class="pro-feature">==
-
-Use "SCTUnit":../user-guide/sctunit.html in order to test whether your state machine is also correct in the sense that it does what it is intended to do. SCTUnit is available in YAKINDU Statechart Tools Professional Edition.
-
-==</div>==
+Use "SCTUnit":../user-guide/sctunit.html in order to test whether your state machine is also correct in the sense that it does what it is intended to do.
 
 Currently YAKINDU Statechart Tools support code generation for the following programming languages:
 * C
@@ -21,7 +17,7 @@ Currently YAKINDU Statechart Tools support code generation for the following pro
 
 ###. CHECK: YSCT supports code generation for C, C++, Java, TypeScript
 
-If these code generators don't suit your needs, you are free to develop your very own "custom code generator":#generating_code_custom-code-generators.
+If these code generators don't suit your needs, you are free to develop your very own "custom code generator":#generating_code_custom_code_generators.
 
 
 
@@ -92,10 +88,10 @@ To create a generator model using the wizard, proceed as follows:
 # In the context menu, select _New → Code generator model_.
 # The _New YAKINDU SGen model_ wizard opens.
 # Select an appropriate folder and specify the filename of your SGen model. The filename must have the extension _.sgen_.
-# Click _Next >_.
+# Click on _Next >_.
 # From the _Generator_ drop-down menu, choose the code generator you want to use, e.g. _YAKINDU SCT Java code generator_.
 # Check the statechart(s) to generate code from.
-# Click _Finish_.
+# Click on _Finish_.
 
 !images/docu_genmodelwizardchooselanguage.jpg(Selecting code generator and statecharts)!
 
@@ -129,17 +125,17 @@ h2(#running-a-generator). Running a generator
 
 Provided you have created the generator model, proceed as follows:
 # In the project explorer view, right-click on the _.sgen_ file containing the generator model. The context menu opens.
-# In the context menu, select _Generate code artifacts_.
+# In the context menu, select _Generate Code Artifacts_.
 # The generator is executed.
 
 The source files the generator produces depend on the generator itself. Each generator makes use of its specific target language and the latter's features and best practices. For example, the Java generator generates Java interfaces and classes, and the C and C++ generators generate _.h_ header files and _.c_ source files. The _location_ of the generated sources can be changed in the generator model. The respective options are explained in the following section.
 
-The generator model is executed by a so-called Eclipse builder. Thus, the artifacts are generated automatically whenever the statechart is modified, as long as _Project → Build Automatically_ is checked. If you want or need to execute your generator model manually, select _Generate statechart artifacts_ from the _package explorer_'s context menu.
+The generator model is executed by a so-called Eclipse builder. Thus, the artifacts are generated automatically whenever the statechart is modified, as long as _Project → Build Automatically_ is checked. If you want or need to execute your generator model manually, select _Generate Statechart Artifacts_ from the _package explorer_'s context menu.
 
 
 
 
-h2(#generating_code_configuring-a-generator). Configuring a generator
+h2(#generating_code_configuring_a_generator). Configuring a generator
 
 As mentioned above, all generators can be set up and customized by a generator model. The following screenshot shows a sample configuration for the Java code generator.
 
@@ -163,7 +159,6 @@ The *Outlet* feature specifies target project and target folder for the generate
 * _targetFolder_ (String, required): The folder within the _target folder_ to write the generated artifacts to. If a _library target folder_ (see below) is specified, only the model-dependent artifacts are generated in the _target folder_. All artifacts in this folder will be overwritten during re-generation.
 * _libraryTargetFolder_ (String, optional): The folder to write the model-independent artifacts to. If this parameter is not specified, these artifacts will be generated in the _target folder_ (see above). All artifacts in this folder will be preserved during re-generation. Manual modifications of these artifacts will _not_ be overwritten upon re-generation.
 * _apiTargetFolder_ (String, optional): The folder to write API code to, e.g. interfaces or header files. If this parameter is not specified, these artifacts will be generated in the _target folder_ (see above).
-
 
 ==<div class="example">==
 
@@ -222,7 +217,6 @@ The *FunctionInlining* feature enables the inlining of expressions instead of ge
 
 ALl parameters of the *FunctionInlining* feature are _false_ by default.
 
-
 ==<div class="example">==
 
 Example:
@@ -263,13 +257,13 @@ bc. feature Debug {
 
 
 
-h1(#generating_code_c_code-generator). C code generator
+h1(#generating_code_c_code_generator). C code generator
 
-h2(#generating_code_c_generator_features). C generator features
+h2(#generating_code_c_code_generator_features). C code generator features
 
 ==<!-- Start sgen_feature_identifiersettings -->==
 
-h3(#generating_code_generating_code_c_identifiersettings_feature). IdentifierSettings feature
+h3(#generating_code_c_identifiersettings_feature). IdentifierSettings feature
 
 The *IdentifierSettings* feature allows the configuration of module names and identifier character length:
 
@@ -841,9 +835,9 @@ org_yakindu_sct_examples_c_trafficlight::~org_yakindu_sct_examples_c_trafficligh
 
 h1(#generating_code_cpp_code-generator). C++ code generator
 
-h2(#generating_code_cpp_generator_features). C++ generator features
+h2(#generating_code_cpp_code_generator_features). C++ code generator features
 
-The C++ generator features are the same a the "C generator features":#generating_code_c_generator_features, plus the following ones.
+The C++ generator features are the same a the "C generator features":#generating_code_c_code_generator_features, plus the following ones.
 
 ==<!-- Start sgen_feature_generatoroptions -->==
 
@@ -972,6 +966,7 @@ inline StatemachineInterface::~StatemachineInterface() {}
 
 #endif /* STATEMACHINEINTERFACE_H_ */
 
+
 h4(#generating_code_cpp_fundamental-statechart-methods). Fundamental statechart methods
 
 The generated code contains fundamental methods to initialize, enter, and exit a state machine, as well as a function to execute a run-to-completion step.
@@ -979,6 +974,7 @@ The generated code contains fundamental methods to initialize, enter, and exit a
 The _StatemachineInterface_ interface specifies the four functions _init()_, _enter()_, _exit()_ and _runCycle()_.
 
 <ul><li><p>The _init()_ function is used to initialize the internal objects of the state machine right after its instantiation. Variables are initialized to their respective default values. If the statechart defines any initialized variables, these initializations are also done in the _init()_ function.</p></li><li><p>The _enter()_ function must be called to enter the state machine. It brings the state machine to a well-defined state.</p></li><li><p>The _exit()_ function is used to leave a state machine statefully. If for example a history state is used in one of the top regions, the last active state is stored and the state machine is left via _exit()_. Re-entering it via _enter()_ continues to work with the saved state.</p></li><li><p>The _runCycle()_ function is used to trigger a run-to-completion step in which the state machine evaluates arising events and computes possible state changes. Somewhat simplified, a run-to-completion cycle consists of the following steps:</p><ol style="list-style-type:  decimal;"><li><p>Clear the list of outgoing events.</p></li><li><p>Check whether any events have occurred which are leading to a state change.</p></li><li><p>If a state change has to be done:</p><ol style="list-style-type:  decimal;"><li><p>Make the present state inactive.</p></li><li><p>Execute exit actions of the present state.</p></li><li><p>Save history state, if necessary.</p></li><li><p>Execute transition actions, if any.</p></li><li><p>Execute entry actions of the new state.</p></li><li><p>Make the new state active.</p></li></ol></li><li><p>Clear the list of incoming events.</p></li></ol></li></ul>
+
 
 
 h3(#generating_code_cpp_time-controlled-state-machines). Time-controlled state machines
@@ -1081,11 +1077,11 @@ A state machine calls the _setTimer(TimedStatemachineInterface* statemachine, sc
 
 In order to have the timer service raise the time event periodically, the parameter _isPeriodic_ must be _true_.
 
-h4(#generating_code_cpp_function-unsettimer). Function unsetTimer
+h4(#generating_code_cpp_function_unsettimer). Function unsetTimer
 
 The state machine calls the function _unsetTimer(TimedStatemachineInterface* statemachine, sc_eventid event)_ to notify the timer service to unset the timer for the given event ID.
 
-h4(#generating_code_cpp_function-raisetimeevent). Function raiseTimeEvent
+h4(#generating_code_cpp_function_raisetimeevent). Function raiseTimeEvent
 
 In order to notify the state machine about the occurence of a time event after a period of time has expired, the function _raiseTimeEvent(sc_eventid event)_ must be called on the state machine. For this purpose, the state machine must implement the _TimedStatemachineInterface_ interface.
 
@@ -1094,7 +1090,7 @@ The time event is recognized by the state machine and will be processed during t
 You can conclude that in order to process the time events raised by the timing service without too much latency, the runtime environment has to call the state machine's _runCycle()_ function as frequently as needed. Consider for example a time event which is raised by the timer service after 500 ms. However, if the runtime environment calls the state machine's _runCycle()_ function with a frequency of once per 1000 ms only, the event will quite likely not be processed at the correct points in time.
 
 
-h3(#generating_code_cpp_accessing-interfaces-variables-and-events). Accessing interfaces, variables and events
+h3(#generating_code_cpp_accessing_interfaces_variables_and_events). Accessing interfaces, variables and events
 
 The client code can read and write state machine variables and raise state machine events. In a YAKINDU statechart, variables and events are contained in so-called _interfaces_. There can be at most one default, unnamed interface plus zero or more named interfaces. In the generated C++ code, these interfaces can be found as internal subclasses of the main state machine class. This outer class' name is derived from the statechart's name while the internal subclasses' names are derived from the respective names of the statechart interfaces.
 
@@ -1268,7 +1264,8 @@ p. The value of an event can be accessed only if the event has been processed in
 ###. FIXME: In Java we have a section "Interface observers". What about a C++ equivalent?
 
 
-h3(#generating_code_cpp_operation-callbacks). Operation callbacks
+
+h3(#generating_code_cpp_operation_callbacks). Operation callbacks
 
 YAKINDU Statechart Tools support client code operations that can be used by a state machine and are executed as as actions. These operations have to be implemented in the client code in order to make a statechart executable. The figure below shows a sample statechart using an operation:
 
@@ -1318,7 +1315,7 @@ int main(int argc, char *argv[]) {
 
 h1(#generating_code_java_code-generator). Java code generator
 
-h2(#generating_code_java_generator_features). Java generator features
+h2(#generating_code_java_code_generator_features). Java code generator features
 
 ==<!-- Start sgen_feature_naming -->==
 
@@ -1400,7 +1397,7 @@ bc. feature RunnableWrapper {
 
 ==<!-- Start sgen_feature_generalfeatures -->==
 
-h3(#generating_code_java_GeneralFeatures). GeneralFeatures feature
+h3(#generating_code_java_generalfeatures). GeneralFeatures feature
 
 The *GeneralFeatures* feature allows to configure additional services to be generated along with the state machine. Per default, all parameters are _false_, meaning to disable the corresponding features, respectively.
 
@@ -1426,6 +1423,7 @@ bc. feature GeneralFeatures {
 
 
 
+
 h2(#generating_code_java_specification-of-java-code). Specification of Java code
 
 In order to describe the API specifications of the code generated by the YAKINDU Java generator, the explanations below are using the _Traffic Light_ sample state machine, see "figure &quot;The _Traffic Light_ sample statechart model&quot;":#generating_code_java_fig_the_traffic_light_sample_statechart_model. It models a pedestrian crossing with push-button operated traffic lights ("pelican crossing").
@@ -1440,6 +1438,7 @@ p=. The _Traffic Light_ sample statechart model
 ###. To execute the Java example, run the file _CrossingDemoCycleBased.java_ as "Java Application" from the Eclipse _Run As_ context menu.
 
 
+
 h3(#generating_code_java_generated-code-files). Generated code files
 
 Generally you will find generated code at the places specified in the SGen model, see "section &quot;Outlet&quot;":#generating_code_outlet_feature for details.
@@ -1447,6 +1446,7 @@ Generally you will find generated code at the places specified in the SGen model
 In the case of the traffic light example, you will find the generated code in the _src-gen_ folder.
 
 The package _org.yakindu.sct.examples.trafficlight.cyclebased_ contains the general state machine interfaces and classes. They are needed by each particular state machine and are independend from concrete ones.
+
 
 
 h3(#generating_code_java_the-state-machine-interface). The state machine interface
@@ -1495,7 +1495,7 @@ public interface IStatemachine {
 }
 
 
-h4(#generating_code_java_fundamental-statechart-methods). Fundamental statechart methods
+h4(#generating_code_java_fundamental_statechart_methods). Fundamental statechart methods
 
 The generated code contains fundamental methods to initialize, enter, and exit a state machine, as well as a method to execute a run-to-completion step.
 
@@ -1504,7 +1504,7 @@ The _IStatemachine_ interface specifies the four methods _init()_, _enter()_, _e
 <ul><li><p>The _init()_ method is used to initialize the internal objects of the state machine right after its instantiation. Variables are initialized to their respective default values. If the statechart defines any initialized variables, these initializations are also done in the _init()_ method.</p></li><li><p>The _enter()_ method must be called to enter the state machine. It brings the state machine to a well-defined state.</p></li><li><p>The _exit()_ method is used to leave a state machine statefully. If for example a history state is used in one of the top regions, the last active state is stored and the state machine is left via _exit()_. Re-entering it via _enter()_ continues to work with the saved state.</p></li><li><p>The _runCycle()_ method is used to trigger a run-to-completion step in which the state machine evaluates arising events and computes possible state changes. Somewhat simplified, a run-to-completion cycle consists of the following steps:</p><ol style="list-style-type: decimal;"><li><p>Clear the list of outgoing events.</p></li><li><p>Check whether any events have occurred which are leading to a state change.</p></li><li><p>If a state change has to be done:</p><ol style="list-style-type: decimal;"><li><p>Make the present state inactive.</p></li><li><p>Execute exit actions of the present state.</p></li><li><p>Save history state, if necessary.</p></li><li><p>Execute transition actions, if any.</p></li><li><p>Execute entry actions of the new state.</p></li><li><p>Make the new state active.</p></li></ol></li><li><p>Clear the list of incoming events.</p></li></ol></li></ul>
 
 
-h3(#generating_code_java_time-controlled-state-machines). Time-controlled state machines
+h3(#generating_code_java_time_controlled_state_machines). Time-controlled state machines
 
 If a statechart uses timing functionality, additional classes are generated.
 
@@ -1522,7 +1522,8 @@ sm.enter(); // Enter the state machine
 Timer functions generally depend on the hardware target used, therefore the proper time handling has to be implemented by the developer. In principle, for each hardware target a dedicated timer service class implementing the _ITimer_ interface has to be developed.
 
 
-h3(#generating_code_java_default-timer-implementation). Default timer implementation
+
+h3(#generating_code_java_default_timer_implementation). Default timer implementation
 
 However, upon request the Java code generator can create a default implementation of the _ITimer_ interface, and in many cases it will be sufficient. This implementation is based on _java.util.Timer_ and _java.util.TimerTask_ and should be compatible with the Oracle JVM or the OpenJDK JVM.
 
@@ -1647,11 +1648,11 @@ public class TimerService implements ITimer {
 }
 
 
-h3(#generating_code_java_timer-service). Timer service
+h3(#generating_code_java_timer_service). Timer service
 
 A timer service must implement the _ITimer_ interface and must be able to maintain a number of time events and the timers associated with them. A time event is identified by a numeric ID.
 
-If suitable, an application can use the default timer service class _TimerService_, see "section &quot;Default timer implementation&quot;":#generating_code_java_default-timer-implementation for details.
+If suitable, an application can use the default timer service class _TimerService_, see "section &quot;Default timer implementation&quot;":#generating_code_java_default_timer_implementation for details.
 
 The _ITimer_ interface looks like this:
 
@@ -1696,7 +1697,7 @@ public interface ITimer {
 }
 
 
-h4(#generating_code_java_method-settimer). Method setTimer
+h4(#generating_code_java_method_settimer). Method setTimer
 
 A state machine calls the _setTimer(ITimerCallback callback, int eventID, long time, boolean isPeriodic)_ method to tell the timer service that it has to start a timer for the given _eventID_. The _time_ parameter specifies the number of milliseconds until the timer expires. When this period of time has elapsed, the timer service must raise the time event by calling the method _public void timeElapsed(int eventID)_ on the _ITimerCallback_ specified by the _callback_ parameter, i.e. usually the state machine.
 
@@ -1704,12 +1705,13 @@ It is important to keep the execution of the _setTimer()_ method short and use i
 
 If the parameter _isPeriodic_ is _false_, the timer service raises the time event only once. If _isPeriodic_ is _true_, the timer service raises the time event every _time_ milliseconds.
 
-h4(#generating_code_java_method-unsettimer). Method unsetTimer
+h4(#generating_code_java_method_unsettimer). Method unsetTimer
 
 If the state machine calls the _unsetTimer(ITimerCallback callback, int eventID)_ method the timer service must unset the timer for the given _eventID_, i.e. the time event will not be raised.
 
 
-h3(#generating_code_java_raising-time-events-on-a-state-machine). Raising time events on a state machine
+
+h3(#generating_code_java_raising_time_events_on_a_state_machine). Raising time events on a state machine
 
 If a statechart is using time events, the generated Java state machine class not only implements the _IStatemachine_ interface, but it also implements the _ITimerCallback_ interface. _ITimerCallback_ is defined as follows. It specifies a single method: _public void timeElapsed(int eventID)_.
 
@@ -1731,7 +1733,7 @@ public interface ITimerCallback {
 }
 
 
-h4(#generating_code_java_method-timeelapsed). Method timeElapsed
+h4(#generating_code_java_method_timeelapsed). Method timeElapsed
 
 It is the timer service's responsibility to actually raise a time event on a state machine. To do so, the timer service calls the state machine's _timeElapsed()_ method and supplies the time event's _eventID_ as a parameter. The state machine recognizes the time event and will process it during the next run cycle.
 
@@ -1739,15 +1741,15 @@ You can conclude that in order to process time events without too much latency, 
 
 
 
-h3(#generating_code_java_runtime-service). Runtime service
+h3(#generating_code_java_runtime_service). Runtime service
 
 The _RuntimeService_ class maintains all state machines that are expected to execute run-to-completion steps periodically. A client application can retrieve the _RuntimeService_ singleton using _RuntimeService.getInstance()_. It can then pause, resume or cancel all state machines that are poised to run at a specified intervall.
 
-bq. *Please note:* To enable this feature, set the _RuntimeService_ parameter of *GeneralFeatures* to _true_, see "Java: General Features":#generating_code_java_GeneralFeatures. 
+bq. *Please note:* To enable this feature, set the _RuntimeService_ parameter of *GeneralFeatures* to _true_, see "Java: General Features":#generating_code_java_generalfeatures.
 
 
 
-h3(#generating_code_java_accessing-interfaces-variables-and-events). Accessing interfaces, variables and events
+h3(#generating_code_java_accessing_interfaces_variables_and_events). Accessing interfaces, variables and events
 
 The client code can read and write state machine variables and raise state machine events. In a YAKINDU statechart, variables and events are contained in so-called _interfaces_. There can be at most one default, unnamed interface plus zero or more named interfaces. In the generated Java code, these interfaces can be found as inner interface of the interface specifying the state machine. The outer interface's name is derived from the statechart's name while the inner interfaces' names are derived from the respective names of the statechart interfaces.
 
@@ -2005,7 +2007,7 @@ public class DefaultSMStatemachine implements IDefaultSMStatemachine {
 p. The value of an event can be accessed only if the event has been processed in a run-to-completion step. Otherwise an _IllegalStateException_ will be thrown.
 
 
-h3(#generating_code_java_interface-observers). Interface observers
+h3(#generating_code_java_interface_observers). Interface observers
 
 If the general feature _InterfaceObserverSupport_ is enabled in the SGen model, the generated interfaces will support the registration of observers.
 
@@ -2050,7 +2052,7 @@ To register or unregister a listener, use the _getListeners()_ method of the nes
 A callback method specified by the listener interface should complete its operations quickly, because otherwise the state machine execution might be delayed for too long, potentially leading to unexpected runtime behavior.
 
 
-h3(#generating_code_java_operation-callback). Operation callbacks
+h3(#generating_code_java_operation_callback). Operation callbacks
 
 YAKINDU Statechart Tools support _operations_ that are executed by a state machine as actions, but are implemented by client-side code. The figure below shows a sample statechart using an operation:
 
@@ -2117,7 +2119,8 @@ public static void main(String[] args) {
 }
 
 
-h3(#generating_code_java_integrating-generated-code). Integrating generated code
+
+h3(#generating_code_java_integrating_generated_code). Integrating generated code
 
 To get a clue how to integrate a generated Java state machine with your project, have a look at the _CrossingDemoCycleBased_ class and its abstract superclass _CrossingDemoBase_. The _main()_ method is in _CrossingDemoCycleBased_:
 
@@ -2196,7 +2199,8 @@ protected void tearDownStatemachine() {
 If the UI thread has been terminated by the user, the state machine will be shut down. It is necessary to explicitly end the timer service. Finally the runtime service is cancelled.
 
 
-h3(#generating_code_java_simulating-operations-with-custom-java-code). Simulating operations with custom Java code
+
+h3(#generating_code_java_simulating_operations_with_custom_java_code). Simulating operations with custom Java code
 
 To simulate a model with operations it is possible to use custom Java code that mocks the desired behavior or even to simulate against an existing Java backend. For this purpose it is required to provide one or more custom Java classes having a method with a matching signature. 
 
@@ -2224,7 +2228,7 @@ public class Calculator {
    }
 }
 
-This custom class can be passed to Eclipse's run configuration as an _operation class_, see the figure below. It is possible to specify multiple Java classes, separated by comma.
+This custom class can be passed to Eclipse's run configuration as an _Operation Class_, see the figure below. It is possible to specify multiple Java classes, separated by comma.
 
 When the simulation is executed, the variable _result_ gets the value 2.
 
@@ -2236,7 +2240,7 @@ p=. Configuring an operations class
 
 
 
-h1(#generating_code_custom-code-generators). Custom code generators
+h1(#generating_code_custom_code_generators). Custom code generators
 
 Although YAKINDU Statechart Tools are shipped with powerful code generators for C, C++, Java, and TypeScript, it may be necessary to create a custom code generator to support a variety of use cases. One reason for a custom code generator could be to support additional programming languages – in this case we would be happy to receive a contribution! – or to generate code for an existing framework.
 
@@ -2249,7 +2253,7 @@ h2(#generating_code_prerequisits). Prerequisits
 
 Implementing a custom code generator is no trivial task. Before you get started, you should have a basic understanding about the "Eclipse Modeling Framework":https://www.eclipse.org/modeling/emf/ that we are using to structure our data model. Furthermore, we highly recommend to use "Xtend":http://www.eclipse.org/xtend/ as your code generator's template language, although plain old Java is still supported. Xtend provides some great features like "Template Expressions":http://www.eclipse.org/xtend/documentation/203_xtend_expressions.html#templates, "Lambdas":http://www.eclipse.org/xtend/documentation/203_xtend_expressions.html#lambdas, and "Polymorphic Method Invocation":http://www.eclipse.org/xtend/documentation/202_xtend_classes_members.html#polymorphic-dispatch, boosting readability and productivity.
 
-h2(#generating_code_creating-a-new-custom-code-generator-project). Creating a new custom code generator project
+h2(#generating_code_creating_a_new_custom_code_generator_project). Creating a new custom code generator project
 
 Creating custom code generators is a built-in concept in YAKINDU Statechart Tools. You can develop custom code generators directly within your project workspace. You can choose between "Xtend2":http://www.eclipse.org/xtend/ (preferred) or Java for implementing the code generator templates.
 
@@ -2259,9 +2263,9 @@ To set up a new (Xtend2/Java) generator project, select _File → New → Other.
 
 p=. Creating an Xtend2 generator project
 
-The wizard asks for a _project name_ and the name of the _generator class_, which has to be the fully-qualified class name. If you check the *Use Xtend* checkbox, the generator class will initially be created as an "Xtend":http://www.eclipse.org/xtend/ class. Otherwise, Java will be used for the generator.
+The wizard asks for a _Project name_ and the name of the _Generator class_, which has to be the fully-qualified class name. If you check the *Use Xtend* checkbox, the generator class will initially be created as an "Xtend":http://www.eclipse.org/xtend/ class. Otherwise, Java will be used for the generator.
 
-The check box _Configure for plugin export_ adds all required extension point registrations to the new project for exporting it as a plugin. The generator model can refer to the new generator plugin via its unique _Generator ID_. If you want to contribute custom generator features for your code generator, check the _Create feature library_ check box. Click _Finish_ to close the wizard.
+The check box _Configure for Plugin Export_ adds all required extension point registrations to the new project for exporting it as a plugin. The generator model can refer to the new generator plugin via its unique _Generator ID_. If you want to contribute custom generator features for your code generator, check the _Create Feature Library_ check box. Click _Finish_ to close the wizard.
 
 !images/docu_generatornavigator.png(Created generator project)!
 
@@ -2270,11 +2274,12 @@ p=. Created generator project
 Voilà! The wizard creates a new generator project for you with a structure as shown above. The file _CustomGenerator.xtend_ contains a simple default code generator that simply prints the name of the statechart and all of its states to the target file.
 
 
-h3(#generating_code_executing-the-custom-code-generator). Executing the custom code generator
+
+h3(#generating_code_executing_the_custom_code_generator). Executing the custom code generator
 
 To test your custom code generator, create a new project containing a YAKINDU Statechart Tools model as described in section "&quot;Editing statecharts&quot;":../user-guide/editing_statecharts.html#editing-statecharts.
 
-After that, create a new generator model as described in section "&quot;Configuring a generator&quot;":#generating_code_configuring-a-generator. Select _Custom Xtend2/Java based code generator_ as the generator to use. As you may have noticed, the generator model for the @yakindu::generic@ generator contains an additional feature called _Generator_. This is where you can specify the name of your custom generator project and the fully-qualified generator class name as shown below. 
+After that, create a new generator model as described in section "&quot;Configuring a generator&quot;":#generating_code_configuring_a_generator. Select _Custom Xtend/Java based code generator_ as the generator to use. As you may have noticed, the generator model for the @yakindu::generic@ generator contains an additional feature called _Generator_. This is where you can specify the name of your custom generator project and the fully-qualified generator class name as shown below. 
 
 bc(prettyprint).. 
 GeneratorModel for yakindu::generic {
@@ -2289,7 +2294,7 @@ GeneratorModel for yakindu::generic {
 		}
 	}
 }
-p. When you right click the _.sgen_ file and select _Generate statechart artifacts_ from the context menu, the generator is executed and creates a new file _src-gen/MyStatechart.txt_ with the following contents:
+p. When you right click the _.sgen_ file and select _Generate Statechart Artifacts_ from the context menu, the generator is executed and creates a new file _src-gen/MyStatechart.txt_ with the following contents:
 
 bc(prettyprint).. 
 The name of the Statemachine is 'MyStatechart'
@@ -2305,11 +2310,11 @@ to the _CustomGenerator.xtend_ file and regenerate. The _MyStatechart.txt_ file 
 
 
 
-h3(#generating_code_sgen_features-for-custom-code-generators). SGen features for custom code generators
+h3(#generating_code_sgen_features_for_custom_code_generators). SGen features for custom code generators
 
 ==<!-- Start sgen_feature_generator -->==
 
-h4(#generating_code_sgen-generator_feature). Generator feature
+h4(#generating_code_sgen_generator_feature). Generator feature
 
 The *Generator* feature allows to configure a custom code generator located in the workspace and written in Java or in another JVM language.
 
@@ -2332,7 +2337,7 @@ bc. feature Generator {
 ==<!-- End sgen_feature_generator -->==
 
 
-h2(#generating_code_different-meta-models-for-different-use-cases). Different meta models for different use cases
+h2(#generating_code_different_meta_models_for_different_use_cases). Different meta models for different use cases
 
 *The SGraph meta model*
 The SGraph meta model defines the structural aspects of the statechart model and is similiar to the state machine model defined by the Unified Modeling Language (UML). The diagram below shows a simplified version:

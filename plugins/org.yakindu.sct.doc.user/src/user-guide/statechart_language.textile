@@ -14,11 +14,11 @@ h3(#statechart_language_words_and_definitions). Words and definitions
 
 A "*finite-state machine (FSM)*":https://en.wikipedia.org/wiki/Finite-state_machine or *finite-state automaton (FSA, plural: automata)*, *finite automaton*, or simply a *state machine* as a mathematical model of computation. It is an abstract machine that can be in exactly one of a finite number of "states":#statechart_language_states at any given time. The FSM can change from one state to another in response to some external inputs; the change from one state to another is called a "transition":#statechart_language_transitions. An FSM is defined by a list of its states, its initial state, and the conditions for each transition.
 
-A *"state diagram":https://en.wikipedia.org/wiki/State_diagram* is one of many possible representations of a finite-state machine.
+A *"state diagram":https://en.wikipedia.org/wiki/State_diagram* is one of many possible representations of an FSM. A "state transition table":https://en.wikipedia.org/wiki/State_transition_table would be different way to describe an FSM.
 
-A *"statechart":https://en.wikipedia.org/wiki/State_diagram#Harel_statechart* or *Harel statechart* is an extended form of the classic state diagram. The basic principles are the same, however. In this documentation, the term _statechart_ usually denotes the _graphical representation_ of a finite-state machine.
+A *"statechart":https://en.wikipedia.org/wiki/State_diagram#Harel_statechart* or *Harel statechart* is an extended form of the classic state diagram. The basic principles are the same, however. In this documentation, the term _statechart_ usually denotes the _graphical representation_ of an FSM.
 
-The term *state machine* is a short form of _finite-state machine_. In this documentation, the term _state machine_ usually pertains to the _dynamic aspects_ of an finite-state machine, i.e. it is more thought of as being executed, simulated etc. than being depicted.
+The term *state machine* is a short form of _finite-state machine_. In this documentation, the term _state machine_ usually pertains to the _dynamic aspects_ of an FSM, i.e. it is more thought of as being executed, simulated etc. than being depicted.
 
 
 
@@ -174,7 +174,7 @@ _The state's behavior contains a subtle error. Can you spot it?_
 
 h3(#statechart_language_transitions). Transitions
 
-A *transition* is diagrammed as an arrow leading from a _source state_ to a _target state_. When a transition is taken, the source state ceases to be active, and the target state becomes active instead.
+A transition is the transfer of one "state":#statechart_language_states to another. A transition is diagrammed as an arrow leading from a _source state_ to a _target state_. When a transition is taken, the source state ceases to be active, and the target state becomes active instead.
 
 A transition should have a _"reaction":#statechart_language_reactions_. A transition's reaction specifies
 * what the conditions for this transition to be taken are, and
@@ -270,7 +270,7 @@ Which transition will be taken if the state machine is in state *A* and event _e
 
 Fortunately YAKINDU state machines behave deterministically, so this question can be answered unambiguously. Outgoing transitions of a state have a definite order and are _prioritized_ by that order. The state machine checks the transitions one by one in this order and executes the first transition that fulfills all prerequisites for firing.
 
-As you can see in figure "&quot;Transition priorities &#91;1]&quot;":#statechart_language_fig_transition-priorities-1, little numbers at the transition arrows indicate their priorities. This numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram appearance_ has been activated. By default, this option is _not_ activated.
+As you can see in figure "&quot;Transition priorities &#91;1]&quot;":#statechart_language_fig_transition-priorities-1, little numbers at the transition arrows indicate their priorities. This numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram Appearance_ has been activated. By default, this option is _not_ activated.
 
 The order of transitions is a property of their source state. In the example above, the transition priorities of state *A* appear like this in the _properties_ view:
 
@@ -512,7 +512,7 @@ interface NamedInterface:
   out event event3 : integer
   var variable1 : integer
 
-bq. *Please note:* All elements defined in a named interface _must_ be referenced using that interface's name, such as @NamedInterface.event1@, @NamedInterface.event3@, or @NamedInterface.variable1@.
+bq. *Please note:* All elements defined in a named interface _must_ be referenced using that interface's name, such as _NamedInterface.event1_, _NamedInterface.event3_, or _NamedInterface.variable1_.
 
 It is also possible to have a single unnamed interface, which is externally visible as well:
 
@@ -919,9 +919,9 @@ p(#statechart_language_fig_raising-an-event_1).
 
 p=. Raising an event &#91;1]
 
-Now event _e1_ occurs. It triggers transition _A → B_ in _r1_. This transition's effect @raise e2@ causes event _e2_ to be raised. This event triggers transition _X → Y_ in _r2_ to fire _within the same RTC_.
+Now event _e1_ occurs. It triggers transition *A → B* in _r1_. This transition's effect @raise e2@ causes event _e2_ to be raised. This event triggers transition *X → Y* in _r2_ to fire _within the same RTC_.
 
-After that, the situation is now as can be seen in figure "&quot;Raising an event &#91;2]&quot;":#statechart_language_fig_raising-an-event_2: substates *B* and *Y* are now active states. However, the transition _B → C_ will not be taken, because that would have to happen in another RTC. But by then the particular _e2_ instance raised by _A → B_ will be long gone, since it was restricted to the RTC it has been raised in.
+After that, the situation is now as can be seen in figure "&quot;Raising an event &#91;2]&quot;":#statechart_language_fig_raising-an-event_2: substates *B* and *Y* are now active states. However, the transition *B → C* will not be taken, because that would have to happen in another RTC. But by then the particular _e2_ instance raised by *A → B* will be long gone, since it was restricted to the RTC it has been raised in.
 
 p(#statechart_language_fig_raising-an-event_2). 
 !images/docu_transition_010_raise_event_02.png(Raising an event [2])!

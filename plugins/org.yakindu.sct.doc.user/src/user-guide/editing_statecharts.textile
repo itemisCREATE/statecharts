@@ -7,25 +7,29 @@ h2(#creating-and-deleting-statecharts). Creating and deleting statecharts
 
 Statecharts are comprised in *statechart model files*. The filename extension of these files is @.sct@. Their internal format is "XML Metadata Interchange":https://en.wikipedia.org/wiki/XML_Metadata_Interchange or "XMI":https://en.wikipedia.org/wiki/XML_Metadata_Interchange, which is an XML language.
 
+
+
 h3(#creating-a-statechart). Creating a statechart
 
 ###. FIXME: Unify the following with the tutorial text!
 
-In order to create a new statechart, use the _Project Explorer_ view:
+In order to create a new statechart, use the _project explorer_ view:
 # Right-click on a project or on a folder you want to create the new statechart in. The context menu appears.
 # In the context menu, select _New → Other…_. The _New_ dialog appears.
 # In the _New_ dialog, select _YAKINDU SCT → Statechart Model_ and click _Next >_. The _New YAKINDU Statechart_ wizard appears.
-# In the _File name_ field, enter a filename for the statechart file to be created. The filename extension must be _.sct_.
+# In the _File Name_ field, enter a filename for the statechart file to be created. The filename extension must be _.sct_.
 # Click _Next >_.
 # In the wizard, select a statechart domain. Which domains are available depend on your YAKINDU Statechart Tools license. The _Default_ domain for "normal" statecharts without any language integration is always available.
 # Click _Finish_.
 # If the _Confirm Perspective Switch_ dialog appears, answer its question as you see fit.
 # The new statechart file is created in the location you specified and opened in the "statechart editor":#editor-ui.
 
+
+
 h3(#copying-an-existing-statechart). Copying an existing statechart
 
 In order to copy an existing statechart file, proceed as follows:
-# In the _Project Explorer_ view, right-click on the statechart's filename. The context menu appears.
+# In the _project explorer_ view, right-click on the statechart's filename. The context menu appears.
 # In the context menu, select _Copy_.
 # Right-click on the project or folder you want to insert the copied file in. The context menu appears.
 # In the context menu, select _Paste_.
@@ -33,6 +37,8 @@ In order to copy an existing statechart file, proceed as follows:
 ## Specify a name for the new file. The _Name conflict_ dialog and makes a suggestion, which you can modify.
 ## Click _OK_ to paste the new file to the target project or folder.
 # If the target project or folder does not contain a file with the same name as the source file, the copied file will have the same name as the original.
+
+
 
 h3(#deleting-a-statechart). Deleting a statechart
 
@@ -44,9 +50,15 @@ In order to delete a statechart file, proceed as follows:
 ## Click _Cancel_ to cancel the delete operation. Your statechart file will persist.
 ## Click _OK_ to actually delete the statechart file.
 
+
+
+
+
 h2(#editor-ui). Editor UI
 
 YAKINDU Statechart Tools comes with a *statechart editor*. This section explains the statechart editor and how you can use it to graphically edit your statecharts.
+
+
 
 h3(#sc-modeling-perspective). _SC Modeling_ perspective
 
@@ -58,6 +70,8 @@ _SC Modeling_ is an Eclipse perspective supporting the modeling of statecharts. 
 * _Outline_ (right): This view is a bird's eye view on the opened statechart. It also indicates the current viewport for better orientation in large models.
 
 You can change the positions and sizes of these views, you can delete them, or add more views, using standard Eclipse mechanisms.
+
+
 
 h3(#canvas). Canvas
 
@@ -74,6 +88,8 @@ The following list gives an overview of what kind of actions you can perform on 
 ** Press and hold @[Ctrl]@ and turn the mouse wheel to zoom in or out.
 ** Right-click on the canvas to open its context menu. In the context menu, several zooming functions are available in the _Zoom_ submenu.
 
+
+
 h3(#editor-palette). Editor palette
 
 The editor palette provides you with a set of various actions and statechart editing tools. By default, the palette is located right of the canvas, but you can also drag it to the left.
@@ -83,6 +99,7 @@ You can hide the palette by clicking on the small triangle on the right-hand sid
 !(tiny)images/docu_editor-palette_010_overview.png(Editor palette)!
 
 p=. Editor palette
+
 
 h4(#editing-action-tools). Editing action tools
 
@@ -111,9 +128,12 @@ The palette comprises a couple of tools serving to add statechart elements to th
 | !images/docu_editor-palette_310_tool_choice.png(Editor palette element tool "Choice")! | Adds a "choice":../user-guide/statechart_language.html#choice. |
 | !images/docu_editor-palette_320_tool_synchronization.png(Editor palette element tool "Synchronization")! | Adds a "synchronization":../user-guide/statechart_language.html#synchronization. |
 
+
+
 h3(#outline-view). Outline view
 
 The _Outline_ view allows you to keep the big picture of your statechart model and navigate it easily. It displays the model outline either as a graphical overview or as a hierarchical outline.
+
 
 h4(#graphical-overview). Graphical overview
 
@@ -125,9 +145,12 @@ A light-grey overlay rectangle represents the statechart editor's "viewport":htt
 * Drag this rectangle with your mouse to move the statechart editor's viewport.
 * Click into the outline view to position the rectangle's center to the point you have clicked.
 
+
 h4(#hierarchical-outline). Hierarchical outline
 
 Click on the _Outline_ icon in the _Outline_ view's title bar to engage the hierarchical outline.
+
+
 
 h3(#problems-view). Problems view
 
@@ -145,6 +168,9 @@ To configure the view click the small triangle pointing downwards in the view's 
 
 bq. *Please note:* The _problems_ view reflects the error/warning status of _persisted_ statecharts only, i.e. statecharts that have been saved to the statechart file. If you create an error during editing, for example a new state that is not (yet) connected to any other state, the respective element will have an error marker on the canvas, however, it will not appear in the _problems_ view, unless you have saved the statechart. The same holds true for resolved errors: An error will disappear from the _problems_ view only after you saved the fixed error to the statechart file.
 
+
+
+
 h2(#editing-states-and-other-nodes). Editing states and other nodes
 
 Generally, there are two different ways to edit states and other nodes:
@@ -153,6 +179,9 @@ Generally, there are two different ways to edit states and other nodes:
 
 There are certain properties that you can only edit with one of these methods. For example, to modify a state's position or size, you have to use the statechart editor. To change a state's transitions' priorities, you have to use the _properties_ view.
 
+
+
+
 h2(#editing-transitions). Editing transitions
 
 Generally, there are two different ways to edit transitions:
@@ -160,6 +189,9 @@ Generally, there are two different ways to edit transitions:
 * Selecting a transition and editing its properties in the _properties_ view.
 
 There are certain properties that you can only edit with one of these methods. For example, to add guidance points to a transition's arrow, you have to use the statechart editor. To change a transition's arrow's color, you have to use the _properties_ view.
+
+
+
 
 h2(#editing-the-documentation-of-states-and-transitions). Editing the documentation of states and transitions
 
@@ -176,6 +208,9 @@ While the documentation is shown, you can modify it in the statechart editor. Do
 
 The _properties_ view of states and transition always shows both documentation and statechart language elements side by side in different compartments. This might be a more comfortable way of editing any of them.
 
+
+
+
 h2(#editing-regions). Editing regions
 
 To change the size or the location of a top-level region, use the graphical editor. Drag the region to move it elsewhere. Use a selected region's handles to resize it.
@@ -188,7 +223,10 @@ You can change the name of a region in the statechart editor as well as in the _
 ** edit the name in the text field that appeares after double-clicking,
 ** press the @[Return]@ key to finish editing.
 * In the properties view,
-** modify the _region name_ property. It is a region's only property you can access through the properties view.
+** modify the _Region Name_ property. It is a region's only property you can access through the properties view.
+
+
+
 
 h2(#editing-hierarchies). Editing hierarchies
 
@@ -199,6 +237,9 @@ A complementary way to mitigate the size of large statecharts are *subdiagrams*.
 Composite states resp. subdiagrams can be nested to any depth.
 
 The statechart editor provides various "refactorings":#refactorings to support editing these hierarchies.
+
+
+
 
 h2(#using-subdiagrams). Using subdiagrams
 
@@ -224,9 +265,13 @@ p=. Subdiagram editor
 
 Using the "inlining subdiagram refactoring":#inlining-subdiagram, you can turn a subdiagram back into the composite state.
 
+
+
+
 h2(#refactorings). Refactorings
 
 Refactoring means modifying certain model aspects while maintaining the model's semantics. The statechart editor allows for the refactoring of variables, events, interfaces, and states, including composite and orthogonal states. A state's context menu contains the _Refactor_ submenu with the individual refactoring actions explained below. Depending on certain conditions, a refactoring might be executable or not, which will be explained below.
+
 
 
 h3(#renaming-variables-events-and-interfaces). Renaming variables, events and interfaces
@@ -241,14 +286,16 @@ p=. Renaming a variable
 
 * The _Rename …_ dialog opens.
 * In that dialog, type the entity's new name into the text field.
-* Click _OK_ to change each occurence of the old name to the new name.
-* Click _Cancel_ to not rename anything.
+* Click on _OK_ to change each occurence of the old name to the new name.
+* Click on _Cancel_ to not rename anything.
+
+
 
 h3(#folding-incoming-actions). Folding incoming actions
 
 When building a statechart model step by step, you may come into a situation where you have defined several transitions having the same target state and sharing a common set of actions.
 
-The _Fold incoming actions_ refactoring moves these actions from the transitions to the target state's entry block. To preserve model semantics, only actions that are defined on _all_ incoming transitions will be moved. Since the execution order must be preserved, the refactoring algorithm starts with the right-most action and proceeds action by action to the left. As soon as it detects an action that is not defined on _all_ incoming transitions, it stops moving actions to the entry block.
+The _Fold Incoming Actions_ refactoring moves these actions from the transitions to the target state's entry block. To preserve model semantics, only actions that are defined on _all_ incoming transitions will be moved. Since the execution order must be preserved, the refactoring algorithm starts with the right-most action and proceeds action by action to the left. As soon as it detects an action that is not defined on _all_ incoming transitions, it stops moving actions to the entry block.
 
 Consider the following model:
 
@@ -266,7 +313,9 @@ p=. Moving incoming actions into a nested state's entry block
 
 The actions _y = x_ of the two incoming transitions leading to the _Target_ state cannot be moved to _Target_'s entry block, because doing so would change the model's semantics. The reason is the composite state's entry action _x += 1_. It will be executed _after_ the action of transition _A → Target_ and _before_ the actions in the entry block of _Target_. Moving _y = x_ from the transition to _Target_'s entry block would change that order. The statechart editor pays regard to this constraint and prohibits the refactoring.
 
-To fold incoming actions, right-click on the state to refactor, then select _Refactor → Fold incoming actions_ in the context menu. The menu entry is active only if there are actual actions to move into the target state's entry block, with the above rules applied.
+To fold incoming actions, right-click on the state to refactor, then select _Refactor → Fold Incoming Actions_ in the context menu. The menu entry is active only if there are actual actions to move into the target state's entry block, with the above rules applied.
+
+
 
 h3(#folding-outgoing-actions). Folding outgoing actions
 
@@ -280,7 +329,9 @@ p=. Moving outgoing actions to exit block
 
 Here, the actions _y = x_ cannot be moved from the outgoing transitions to the exit block of the source state, because the composite state has an exit action. For the _Source → A_ transition, the proper execution order is to first execute _x += 1_ of the nesting composite state's exit block, followed by _y = x_ of the transition. Moving _y = x_ to the exit block of state _Source_ would reverse this order and thus will be prohibited by the statechart editor.
 
-To fold outgoing actions, right-click on the state to refactor, then select _Refactor → Fold outgoing actions_ in the context menu. The menu entry is active only if there are actual actions to move into the source state's exit block, with the above rules applied.
+To fold outgoing actions, right-click on the state to refactor, then select _Refactor → Fold Outgoing Actions_ in the context menu. The menu entry is active only if there are actual actions to move into the source state's exit block, with the above rules applied.
+
+
 
 h3(#unfolding-entry-actions). Unfolding entry actions
 
@@ -288,7 +339,9 @@ This refactoring is the reverse of "folding incoming actions":#folding-incoming-
 
 Transitions crossing the borders of composite states enclosing the target state might inhibit refactoring, see section "&quot;Unfolding exit actions&quot;":#unfolding-exit-actions for an analogous example.
 
-To unfold entry actions, right-click on the state to refactor, then select _Refactor → Unfold entry actions_ in the context menu. The menu entry is active only if there are actual actions in the state's entry block that can be moved to the state's incoming transitions while maintaining semantic equivalence and preserving execution order.
+To unfold entry actions, right-click on the state to refactor, then select _Refactor → Unfold Entry Actions_ in the context menu. The menu entry is active only if there are actual actions in the state's entry block that can be moved to the state's incoming transitions while maintaining semantic equivalence and preserving execution order.
+
+
 
 h3(#unfolding-exit-actions). Unfolding exit actions
 
@@ -302,32 +355,40 @@ p=. Unfolding exit actions to outgoing transitions
 
 Unfolding the exit action _y = x_ of the _Source_ state to the two outgoing transitions would be invalid, because the execution order of said action and the composite state's exit action would be reversed.
 
-To unfold exit actions, right-click on the state to refactor, then select _Refactor → Unfold exit actions_ in the context menu. The menu entry is active only if there are actual actions in the state's exit block that can be moved to the state's outgoing transitions, while maintaining semantic equivalence and preserving execution order.
+To unfold exit actions, right-click on the state to refactor, then select _Refactor → Unfold Exit Actions_ in the context menu. The menu entry is active only if there are actual actions in the state's exit block that can be moved to the state's outgoing transitions, while maintaining semantic equivalence and preserving execution order.
+
 
 
 h3(#grouping-states-into-composite). Grouping states into composite
 
 This refactoring creates a new composite state containing the selected states. The latter must belong to the same region.
 
-To execute this refactoring, select one or more states from the same region, right-click on one of them, and select _Refactor → Group states into composite_ in the context menu. The menu entry is active only if the selected states belong to the same region.
+To execute this refactoring, select one or more states from the same region, right-click on one of them, and select _Refactor → Group States Into Composite_ in the context menu. The menu entry is active only if the selected states belong to the same region.
+
+
 
 h3(#extracting-subdiagram). Extracting subdiagram
 
 This refactoring extracts the regions of the selected composite or orthogonal state into a subdiagram. Entry and exit points are created as needed in the subdiagram. See section "&quot;Using subdiagrams&quot;":#using-subdiagrams for more details.
 
-To extract a subdiagram, right-click on the composite or orthogonal state to refactor, then select _Refactor → Extract subdiagram_ in the context menu.
+To extract a subdiagram, right-click on the composite or orthogonal state to refactor, then select _Refactor → Extract Subdiagram_ in the context menu.
+
+
 
 h3(#inlining-subdiagram). Inlining subdiagram
 
 This refactoring inlines the selected node's subdiagram in order to show it directly in the composite state's diagram region. See section "&quot;Using subdiagrams&quot;":#using-subdiagrams for more details.
 
-To inline a subdiagram, right-click on a composite state with a subdiagram, then select _Refactor → Inline subdiagram_ in the context menu.
+To inline a subdiagram, right-click on a composite state with a subdiagram, then select _Refactor → Inline Subdiagram_ in the context menu.
+
+
+
 
 h2(#using-editing-proposals). Using editing proposals
 
 h3(#using-text-proposals). Using text proposals
 
-Proposals assist you when writing statechart language expressions. Whenever editing some text anywhere in the graphical statechart editor or in the properties view, at any point you can press the <code>[Ctrl]+[Space]</code> key combination to get some context-sensitive help.
+Proposals assist you when writing statechart language expressions. Whenever editing some text anywhere in the graphical statechart editor or in the properties view, at any point you can press the @[Ctrl+Space]@ key combination to get some context-sensitive help.
 
 Certain proposals, like statechart language keywords, have documentation associated with them. When such a proposal is selected, either using the mouse or the keyboard, this information is shown in a secondary popup window next to the proposal.
 
@@ -339,7 +400,7 @@ You can either use the mouse or the keyboard to select and insert a proposal in 
 
 h3(#using-action-proposals-on-states). Using actions proposals on states
 
-When a state is selected, <code>[Ctrl]+[Space]</code> opens a popup window showing a context-sensitive menu with possible action choices to perform on the state.
+When a state is selected, @[Ctrl+Space]@ opens a popup window showing a context-sensitive menu with possible action choices to perform on the state.
 
 These action proposals have additional information associated to them. When a proposal is selected either using the mouse or the keyboard, this information is shown in a secondary popup window next to the proposal.
 
@@ -347,15 +408,20 @@ You can either use the mouse or the keyboard to execute a proposal:
 * Double-click on a proposal to execute it.
 * Use the up and down arrow keys to navigate to the proposal you want to execute, then press @[Return]@ to actually execute it.
 
+
+
+
 h2(#comparing-statecharts). Comparing statecharts
 
-The statechart editor allows for comparing two or even three statecharts to each other, displaying the results, and possibly merging selected differences. Figure "&quot;Comparing two statecharts&quot;":#oss_fig_comparing_two_statecharts shows a sample comparison result.
+The statechart editor allows for comparing two or even three statecharts to each other, displaying the results, and possibly merging selected differences. Figure "&quot;Comparing two statecharts&quot;":#fig_comparing_two_statecharts shows a sample comparison result.
 
-p(#oss_fig_comparing_two_statecharts). 
+p(#fig_comparing_two_statecharts). 
 
 !images/docu_comparing_statecharts_010_result.png(Comparing two statecharts)!
 
 p=. Comparing two statecharts
+
+
 
 h3(#comparing-a-statechart-to-its-local-history). Comparing a statechart to its local history
 
@@ -366,9 +432,11 @@ bq. *Warning:* The local history typically contains a few recent versions of a f
 To compare a statechart to an older version in the local history, proceed as follows:
 
 # In the _project_ view, right-click on a statechart model file. The context menu opens.
-# In the context menu, select _Compare with → Local history…_.
+# In the context menu, select _Compare With → Local History…_.
 # In the local history, double-click on the file's version to compare to.
 # The comparison results are shown.
+
+
 
 h3(#comparing-two-statecharts). Comparing two statecharts
 
@@ -376,7 +444,7 @@ To compare two statecharts, proceed as follows:
 
 # In the _project_ view, select two statechart model files.
 # Right-click on one of the selected statechart model files. The context menu opens.
-# In the context menu, select _Compare with → Each other_.
+# In the context menu, select _Compare With → Each Other_.
 # The comparison results are shown.
 
 h3(#comparing-three-statecharts). Comparing three statecharts
@@ -385,10 +453,12 @@ To compare three statecharts, proceed as follows:
 
 # In the _project_ view, select three statechart model files.
 # Right-click on one of the selected statechart model files. The context menu opens.
-# In the context menu, select _Compare with → Each other_.
+# In the context menu, select _Compare With → Each Other_.
 # The _Select common ancestor_ dialog appears. It shows the three selected statechart model files.
 # Select one of them. It will be regarded as the common ancestor of the two others.
 # The comparison results are shown.
+
+
 
 
 h2(#exporting-a-statechart-as-an-image-file). Exporting a statechart as an image file
@@ -398,15 +468,18 @@ A complete statechart or parts of it can be saved as an image file as shown in t
 * In the statechart editor:
 ** To create an image file _of the whole statechart_ with all regions and definition section, right-click on the canvas.
 ** To create an image file _of some statechart elements_, select these elements and right-click on one of them. In the example below, the main region has been selected.
-* The context menu appears.<br/>!images/docu_exporting_statechart_as_image_010_save_as_menu_item.png(Selecting the "Save as image file..." menu item)!
-* In the context menu, select _File → Save as image file..._.
-* The _Save as image file_ dialog appears.<br/>!images/docu_exporting_statechart_as_image_020_save_as_dialog.png(The "Save as image file" dialog)!
+* The context menu appears.<br/>!images/docu_exporting_statechart_as_image_010_save_as_menu_item.png(Selecting the "Save As Image File..." menu item)!
+* In the context menu, select _File → Save As Image File..._.
+* The _Save As Image File_ dialog appears.<br/>!images/docu_exporting_statechart_as_image_020_save_as_dialog.png(The "Save As Image File" dialog)!
 * Specify the filesystem folder for the exported image file in the _Folder_ text field.
-* Enter the name of the export image file into the _File name_ text field. The filename extension depends on the selected image format (see below).
-* Select the image format from the _Image format_ drop-down menu. YAKINDU Statechart Tools supports the following formats:<br/><table><tbody><tr><th>Image format</th><th>Description</th></tr><tr><td>BMP, GIF, PNG</td><td>Lossless pixel image formats</td></tr><tr><td>JPG, JPEG</td><td>Lossy pixel image format. You can specify the image quality via the _Quality (%)_ setting.</td></tr><tr><td>SVG</td><td>Scalable Vector Graphics</td></tr><tr><td>PDF</td><td>Portable Document Format</td></tr></tbody></table><blockquote><p>*Note*</p><p>The image export functionality is subject to the capabilities of your Java Runtime Environment (JRE). You can export images only in those image formats your JRE actually supports.</p></blockquote>
+* Enter the name of the export image file into the _File Name_ text field. The filename extension depends on the selected image format (see below).
+* Select the image format from the _Image Format_ drop-down menu. YAKINDU Statechart Tools supports the following formats:<br/><table><tbody><tr><th>Image format</th><th>Description</th></tr><tr><td>BMP, GIF, PNG</td><td>Lossless pixel image formats</td></tr><tr><td>JPG, JPEG</td><td>Lossy pixel image format. You can specify the image quality via the _Quality (%)_ setting.</td></tr><tr><td>SVG</td><td>Scalable Vector Graphics</td></tr><tr><td>PDF</td><td>Portable Document Format</td></tr></tbody></table><blockquote><p>*Note*</p><p>The image export functionality is subject to the capabilities of your Java Runtime Environment (JRE). You can export images only in those image formats your JRE actually supports.</p></blockquote>
 * The _Quality (%)_ text field is active for JPEG images only. JPEG is a lossy format, and reducing the quality results in a smaller file size. However, due to the nature of statechart images, a lossless format like PNG is most often a better choice, for sure in quality and perhaps even in file size.
 * Check _Overwrite existing file without warning_ if you don't want to be bothered by a confirmation dialog which will appear if the export file already exists.
 * Check _Export to HTML_ to create both the image file plus an HTML file including it.
+
+
+
 
 h2(#working-with-statechart-tasks). Working with statechart tasks
 
@@ -414,9 +487,9 @@ While you are busily developing a statechart, it is quite common that you have i
 
 For all these and other purposes you can define _tasks_ in all places in your statechart where a comment is allowed. A task is a special comment comprising the words @FIXME@ or @TODO@. Adding one of these words to a comment is called "tagging" the comment as a task.
 
-The nice thing is that you don't have to remember all the places you took a note and defined a task. YAKINDU Statechart Tools lists all of your tasks in the _tasks_ view. Figure "&quot;Tasks defined by tags in the statechart showing up in the _tasks_ view&quot;":#oss_fig_tasks-defined-by-tags-in-the-statechart-showing-up-in-the-tasks-view is showing an example with various tasks being defined in a transition, in a state's behavior, in a state's documentation, and in the statecharts definition section.
+The nice thing is that you don't have to remember all the places you took a note and defined a task. YAKINDU Statechart Tools lists all of your tasks in the _tasks_ view. Figure "&quot;Tasks defined by tags in the statechart showing up in the _tasks_ view&quot;":#fig_tasks-defined-by-tags-in-the-statechart-showing-up-in-the-tasks-view is showing an example with various tasks being defined in a transition, in a state's behavior, in a state's documentation, and in the statecharts definition section.
 
-p(#oss_fig_tasks-defined-by-tags-in-the-statechart-showing-up-in-the-tasks-view). 
+p(#fig_tasks-defined-by-tags-in-the-statechart-showing-up-in-the-tasks-view). 
 
 !images/docu_task_tags_010_task_view.png(Tasks defined by tags in the statechart showing up in the "tasks" view)!
 
@@ -434,7 +507,9 @@ bq.. *Note*
 
 The _tasks_ view is updated only when the statechart is saved.
 
-###.. h3(#oss_defining-task-tags). Defining task tags
+
+
+###.. h3(#defining-task-tags). Defining task tags
 
 # In the main menu, select _Window → Preferences_. The _Preferences_ Dialog opens.
 # In the _Preferences_ Dialog goto _Java → Compiler → Task Tags_ to edit your task tag preferences. A task tag has one of the priorities _High_, _Normal_, or _Low_.
@@ -444,7 +519,7 @@ The _tasks_ view is updated only when the statechart is saved.
 
 h2(#using-the-example_wizard). Using the example wizard
 
-The example wizard gives you convenient access to the examples in the public YAKINDU Statechart Tools "examples repository":https://github.com/Yakindu/examples. You can browse the available examples and read their documentation in the wizard. By a simple click you can instantiate an example as a new Eclipse project. Within such a sample project, you can explore and modify the state machine models using the statechart editor, run the state machines in the simulator, generate source code, etc.
+The _example wizard_ gives you convenient access to the examples in the public YAKINDU Statechart Tools "examples repository":https://github.com/Yakindu/examples. You can browse the available examples and read their documentation in the wizard. By a simple click you can instantiate an example as a new Eclipse project. Within such a sample project, you can explore and modify the state machine models using the statechart editor, run the state machines in the simulator, generate source code, etc.
 
 Upon its first invocation, the example wizard downloads the complete examples repository and creates a copy on your local disk. After that, all examples are immediately available to you, even if you are offline. The example wizard will take notice when new examples are available in the online repository and offers to download them. It is also possible to download the examples repository out-of-band and later tell the example wizard where it can find the local copy.
 
@@ -454,8 +529,8 @@ h3(#downloading-the-examples-repository). Downloading the examples repository
 
 When you start the example wizard for the first time, it does not yet have any examples available that it could show to you. Thus downloading the online examples repository is required as a special first step.
 
-# In order to start the example wizard, select _File → New → Example…_ in the YAKINDU Statechart Tools main menu. The _New example_ dialog opens.
-# In the _New example_ dialog, select _YAKINDU Statechart Examples_, then click on _Next >_. The example wizard opens.
+# In order to start the example wizard, select _File → New → Example…_ in the YAKINDU Statechart Tools main menu. The _New Example_ dialog opens.
+# In the _New Example_ dialog, select _YAKINDU Statechart Examples_, then click on _Next >_. The example wizard opens.
 # The example wizard outputs a message saying that it could not find any examples and offers to download them.
 # Click on the _Download_ button. The example wizard downloads the online examples repository and creates a clone of it on your local computer. This can take some time. – Downloading can fail for a variety of reasons, not being able to access the Github server being one of them. If this happens, don't panic – and read how to "manually create a local copy of the examples repository":#manually-creating-a-local-copy-of-the-examples-repository.
 
@@ -471,8 +546,8 @@ h3(#changing-the-repository-location). Changing the repository location
 
 You can change the location used by the example wizard to store the online repository's local clone.
 
-# When the example wizard shows the _Download_ button on its first start, click on the link _"change the storage location here"_. The example wizard's preferences dialog opens. Alternatively, open _Window → Preferences_ and select _YAKINDU SCT → Example wizard_.
-# On the examples preferences page, enter the desired directory into the _Storage location_ text field.
+# When the example wizard shows the _Download_ button on its first start, click on the link _"change the storage location here"_. The example wizard's preferences dialog opens. Alternatively, open _Window → Preferences_ and select _YAKINDU SCT → Example Wizard_.
+# On the examples preferences page, enter the desired directory into the _Storage Location_ text field.
 # Click on _OK_. The dialog closes.
 
 You can change the storage location of your local examples repository clone at any time. In fact, it doesn't even need to be a clone of the official examples repository. Any directory containing subdirectories with YAKINDU Statechart Tools examples suffices.
@@ -516,8 +591,8 @@ Downloading the repository as a ZIP archive:
 # The download starts and transfers the ZIP archive file _examples-release.zip_ to your computer.
 # Copy the _examples-release.zip_ file to the computer without Internet access and continue with the following steps on that machine.
 # Unpack the archive file. A directory named _examples-release_ is created, containing the YAKINDU Statechart Tools examples repository.
-# In YAKINDU Statechart Tools, select _Window → Preferences_. The _preferences_ dialog
-# In the _preferences_ dialog, navigate to _YAKINDU SCT → Example wizard_.
+# In YAKINDU Statechart Tools, select _Window → Preferences_. The _preferences_ dialog opens.
+# In the _preferences_ dialog, navigate to _YAKINDU SCT → Example Wizard_.
 # Click on _Browse..._, and select the folder that you just extracted from the ZIP file, then click _OK_.
 # On the next try, the example wizard will now show a catalogue of YAKINDU Statechart Tools examples.
 
@@ -526,11 +601,11 @@ Alternatively, you can clone the repository. Cloning the examples repository con
 # Clone "https://github.com/Yakindu/examples":https://github.com/Yakindu/examples to your local computer. If you are using a command-line tool, the proper command to create the directory _examples_ on your disk is:<br/>@git clone 'https://github.com/Yakindu/examples.git'@
 # Step into that directory:<br/>@cd examples@
 # Checkout the _release_ branch:<br/>@git checkout release@<br/>Now the _examples_ directory reflects the current release state.
-# In the YAKINDU Statechart Tools main menu, select _File → New → Example…_. The _New example_ dialog opens.
-# In the _New example_ dialog, select _YAKINDU statechart examples_ and click on _Next >_. The example wizard opens.
+# In the YAKINDU Statechart Tools main menu, select _File → New → Example…_. The _New Example_ dialog opens.
+# In the _New Example_ dialog, select _YAKINDU statechart examples_ and click on _Next >_. The example wizard opens.
 # When the example wizard is opened for the first time, there are no examples on the local disk yet.
-# In YAKINDU Statechart Tools, select _Window → Preferences_. The _Preferences_ dialog opens.
-# In the _Preferences_ dialog, navigate to _YAKINDU SCT → Example wizard_.
+# In YAKINDU Statechart Tools, select _Window → Preferences_. The _preferences_ dialog opens.
+# In the _preferences_ dialog, navigate to _YAKINDU SCT → Example Wizard_.
 # Click on _Browse..._, and select the folder you just cloned, then click _OK_.
 # On the next try, the example wizard will show a catalogue of YAKINDU Statechart Tools examples.
 
@@ -556,22 +631,25 @@ If you have a project that you want to share with the community, you can contrib
 
 For more information on how to contribute examples, please visit our "Wiki page":https://github.com/Yakindu/examples/wiki/Creating-a-YAKINDU-Statechart-Tools-Example.
 
+
+
+
 h2(#preferences). Preferences
 
 Many aspects of YAKINDU Statechart Tools can be configured by _preferences_. You can find them here:
 
 # In the main menu, select _Window → Preferences_. The _Preferences_ dialog appears.
 # In the navigation on the left-hand side, scroll to _YAKINDU SCT_. Open it and its subentries as needed.
-# Click on an entry to display the associated preference pane on the right-hand side of the _Preferences_ dialog, see e.g. figure "Preferences: diagram appearance":#fig_preferences-diagram-appearance.
+# Click on an entry to display the associated preference pane on the right-hand side of the _Preferences_ dialog, see e.g. figure "Preferences: Diagram Appearance":#fig_preferences-diagram-appearance.
 
 In the subsequent sections we will quickly walk through the preferences.
 
 h3(#diagram-appearance). Diagram appearance
 
 p(#fig_preferences-diagram-appearance). 
-!images/docu_preferences_010_diagram_appearance_01.png(Preferences: diagram appearance)!
+!images/docu_preferences_010_diagram_appearance_01.png(Preferences: Diagram Appearance)!
 
-p=. Preferences: diagram appearance
+p=. Preferences: Diagram Appearance
 
 h4(#colors-and-line-styles). Colors and line styles
 
@@ -589,91 +667,104 @@ While you are editing a statechart, the statechart editor validates your model o
 
 However, on very large and complex statechart models, validation may take a considerable amount of time, causing delays and impeding your editing. Remove the check mark from _Enable live validation_, and your model will be validated only before it is saved to the statechart file.
 
+
+
 h3(#example-wizard). Example wizard
 
 p(#fig_preferences-example-wizard). 
-!images/docu_preferences_020_examples_01.png(Preferences: example wizard)!
+!images/docu_preferences_020_examples_01.png(Preferences: Example wizard)!
 
-p=. Preferences: example wizard
+p=. Preferences: Example wizard
 
 You can change the example wizard storage location here. This is a local directory where the "example wizard":#example-wizard stores your local clone of the examples Git repository. The default is the _sct_examples_ directory in your home directory.
+
+
 
 h3(#expressions-preferences). Expressions preferences
 
 p(#fig_preferences-expressions). 
-!images/docu_preferences_030_expressions_01.png(Preferences: expressions)!
+!images/docu_preferences_030_expressions_01.png(Preferences: Expressions)!
 
-p=. Preferences: expressions
+p=. Preferences: Expressions
 
 Certain dialogs in the statechart editor allow you to opt for never seeing them again. By clicking on the _Clear_ button on this preference pane these hidden dialogs will be shown again at their respective locations.
+
 
 h4(#expression-syntax-coloring). Expression syntax coloring
 
 p(#fig_preferences-expression-syntax-coloring). 
-!images/docu_preferences_040_expressions_syntax_coloring_01.png(Preferences: expression syntax coloring)!
+!images/docu_preferences_040_expressions_syntax_coloring_01.png(Preferences: Expression syntax coloring)!
 
-p=. Preferences: expression syntax coloring
+p=. Preferences: Expression syntax coloring
 
 This preferences pane defines foreground color, background color, font, and style for displaying certain syntactical elements in statechart language texts.
+
 
 h4(#expression-templates). Expression templates
 
 p(#fig_preferences-expression-templates). 
-!images/docu_preferences_050_expressions_template_01.png(Preferences: expression templates)!
+!images/docu_preferences_050_expressions_template_01.png(Preferences: Expression templates)!
 
-p=. Preferences: expression templates
+p=. Preferences: Expression templates
 
 Templates are sections of textual code that occur frequently enough that you would like to be able to insert them with a few keystrokes. This function is known as _content assist_; the sections of code that are inserted are known as _templates_.
 
-To insert an existing content assist template, type the initial character, then press <code>[Ctrl]+[Space]</code>. The templates that begin with that character appear. Double-click on a template to insert it.
+To insert an existing content assist template, type the initial character, then press @[Ctrl+Space]@. The templates that begin with that character appear. Double-click on a template to insert it.
 
 On this preference pane you can create, edit, and delete statechart language templates.
+
+
 
 h3(#generator-model). Generator model
 
 p(#fig_preferences-generator-model). 
-!images/docu_preferences_060_generator_model_01.png(Preferences: generator model)!
+!images/docu_preferences_060_generator_model_01.png(Preferences: Generator model)!
 
-p=. Preferences: generator model
+p=. Preferences: Generator model
 
 By default, code generators automatically generate artifacts defined by generator models in _.sgen_ files. Using this preference setting, you can switch this behavior off or on.
+
 
 h4(#generator-model-refactoring). Generator model refactoring
 
 p(#fig_preferences-generator-model-refactoring). 
-!images/docu_preferences_070_generator_model_refactoring_01.png(Preferences: generator model refactoring)!
+!images/docu_preferences_070_generator_model_refactoring_01.png(Preferences: Generator model refactoring)!
 
-p=. Preferences: generator model refactoring
+p=. Preferences: Generator model refactoring
 
 Change these preference settings for refactoring in generator models as you see fit.
+
 
 h4(#generator-model-syntax-coloring). Generator model syntax coloring
 
 p(#fig_preferences-generator-model-syntax-coloring). 
-!images/docu_preferences_080_generator_syntax_coloring_01.png(Preferences: generator model syntax coloring)!
+!images/docu_preferences_080_generator_syntax_coloring_01.png(Preferences: Generator model syntax coloring)!
 
-p=. Preferences: generator model syntax coloring
+p=. Preferences: Generator model syntax coloring
 
 This preferences pane defines foreground color, background color, font, and style for displaying certain syntactical elements in generator model texts.
+
 
 h4(#generator-model-templates). Generator model templates
 
 p(#fig_preferences-generator-model-templates). 
-!images/docu_preferences_090_generator_templates_01.png(Preferences: generator model templates)!
+!images/docu_preferences_090_generator_templates_01.png(Preferences: Generator model templates)!
 
-p=. Preferences: generator model templates
+p=. Preferences: Generator model templates
 
 Templates are sections of textual code that occur frequently enough that you would like to be able to insert them with a few keystrokes. This function is known as _content assist_; the sections of code that are inserted are known as _templates_.
 
-To insert an existing content assist template, type the initial character, then press <code>[Ctrl]+[Space]</code>. The templates that begin with that character appear. Double-click on a template to insert it.
+To insert an existing content assist template, type the initial character, then press @[Ctrl+Space]@. The templates that begin with that character appear. Double-click on a template to insert it.
 
 On this preference pane you can create, edit, and delete generator model language templates.
+
+
 
 h3(#edit_simulation). Simulation
 
 p(#fig_preferences-simulation). 
-!images/docu_preferences_100_simulation_01.png(Preferences: simulation)!
+!images/docu_preferences_100_simulation_01.png(Preferences: Simulation)!
 
-p=. Preferences: simulation
+p=. Preferences: Simulation
 
 Set your color preferences for the statechart simulator on this preference pane.
