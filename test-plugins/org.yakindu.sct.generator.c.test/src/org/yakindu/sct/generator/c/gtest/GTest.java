@@ -23,6 +23,8 @@ public @interface GTest {
 	String sourceFile();
 	String program();
 	String model();
+	String[] additionalFilesToCopy() default {};
+	String[] additionalFilesToCompile() default {};
 
 	/**
 	 * If no test bundle provided, source files (cc and sgen) are expected to be

@@ -24,6 +24,9 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIHelperImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMISaveImpl;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
@@ -88,7 +91,8 @@ public class ShadowModelValidationJob extends ValidationJob {
 			protected CommandResult doExecuteWithResult(final IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				try {
-					resource.save(bout, Collections.emptyMap());
+					XMISaveImpl saver = new XMISaveImpl(new XMIHelperImpl((XMLResource) resource));
+					saver.save((XMLResource) resource, bout, Collections.emptyMap());
 					bout.flush();
 				} catch (Throwable t) {
 					return CommandResult.newErrorCommandResult(t.getMessage());

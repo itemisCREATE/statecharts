@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -66,7 +67,6 @@ public class GTestHelper {
 	}
 
 	public void generate() {
-
 		IPath targetPath = getTargetPath();
 
 		// copy model to JUnit workspace
@@ -83,6 +83,14 @@ public class GTestHelper {
 		performFullBuild();
 
 		getGeneratorExecutorLookup().execute(model);
+	}
+	
+	protected List<String> getFilesToCopy() {
+		return new ArrayList<String>(Arrays.asList(owner.getClass().getAnnotation(GTest.class).additionalFilesToCopy()));
+	}
+	
+	protected List<String> getFilesToCompile() {
+		return new ArrayList<String>(Arrays.asList(owner.getClass().getAnnotation(GTest.class).additionalFilesToCompile()));
 	}
 
 	protected GeneratorExecutorLookup getGeneratorExecutorLookup() {
@@ -133,7 +141,7 @@ public class GTestHelper {
 
 	private void copyFilesFromBundleToFolder() {
 		IPath targetPath = getTargetPath();
-		List<String> testDataFiles = new ArrayList<String>();
+		List<String> testDataFiles = getFilesToCopy();
 		getTestDataFiles(testDataFiles);
 		for (String file : testDataFiles) {
 			copyFileFromBundleToFolder(getTestBundle(), file, targetPath);
@@ -146,7 +154,7 @@ public class GTestHelper {
 		List<String> includes = new ArrayList<String>();
 		getIncludes(includes);
 
-		List<String> sourceFiles = new ArrayList<String>();
+		List<String> sourceFiles = getFilesToCompile();
 		getSourceFiles(sourceFiles);
 
 		List<String> command = new ArrayList<String>();
@@ -162,7 +170,7 @@ public class GTestHelper {
 		if (gTestDirectory != null)
 			command.add("-L" + gTestDirectory);
 		for (String sourceFile : sourceFiles) {
-			command.add(sourceFile);
+			command.add(getFileName(sourceFile));
 		}
 		command.add("-lgtest");
 		command.add("-lgtest_main");

@@ -68,7 +68,7 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	public static final String ERROR_BOUND_MISSMATCH_MSG = "Bound mismatch: The type %s is not a valid substitute for the bounded parameter %s of the type %s.";
 
 	public static final String ERROR_DUPLICATE_TYPE_PARAMETER_CODE = "DuplicateTypeParameter";
-	public static final String ERROR_DUPLICATE_TYPE_PARAMETER_MSG = "Duplicate Type Parameter %s.";
+	public static final String ERROR_DUPLICATE_TYPE_PARAMETER_MSG = "Duplicate type parameter %s.";
 
 	public static final String ERROR_CYCLE_DETECTED_CODE = "TypeExtendsItself";
 	public static final String ERROR_CYCLE_DETECTED_MSG = "Cycle detected: the type %s cannot extend itself.";
@@ -76,20 +76,20 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	public static final String ERROR_DUPLICATE_PARAMETER_ASSIGNMENT_CODE = "ErrorDuplicateParameterAssignment";
 	public static final String ERROR_DUPLICATE_PARAMETER_ASSIGNMENT_MSG = "Duplicate assignment to parameter '%s'.";
 	
-	public static final String ERROR_ASSIGNMENT_TO_CONST_MSG = "Assignment to constant not allowed.";
 	public static final String ERROR_ASSIGNMENT_TO_CONST_CODE = "AssignmentToConst";
+	public static final String ERROR_ASSIGNMENT_TO_CONST_MSG = "Assignment to constant not allowed.";
 	
-	public static final String ERROR_LEFT_HAND_ASSIGNMENT_MSG = "The left-hand side of an assignment must be a variable.";
 	public static final String ERROR_LEFT_HAND_ASSIGNMENT_CODE = "LeftHandAssignment";
+	public static final String ERROR_LEFT_HAND_ASSIGNMENT_MSG = "The left-hand side of an assignment must be a variable.";
 	
-	public static final String ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG = "Wrong number of arguments, expected %s .";
 	public static final String ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE = "WrongNrOfArgs";
+	public static final String ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG = "Wrong number of arguments, expected %s .";
 	
 	public static final String ERROR_VAR_ARGS_LAST_CODE = "VarArgsMustBeLast";
 	public static final String ERROR_VAR_ARGS_LAST_MSG = "The variable argument type must be the last argument.";
 	
 	public static final String ERROR_WRONG_ANNOTATION_TARGET_CODE = "WrongAnnotationTarget";
-	public static final String ERROR_WRONG_ANNOTATION_TARGET_MSG = "Annotation '%s' can not be applied on %s ";
+	public static final String ERROR_WRONG_ANNOTATION_TARGET_MSG = "Annotation '%s' can not be applied on %s .";
 	
 	public static final String ERROR_OPTIONAL_MUST_BE_LAST_CODE = "OptionalParametersLast";
 	public static final String ERROR_OPTIONAL_MUST_BE_LAST_MSG = "Required parameters must not be defined after optional parameters.";
