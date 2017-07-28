@@ -13,6 +13,8 @@ package org.yakindu.sct.model.stext.validation;
 
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CHILD_FIRST_ANNOTATION;
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.PARENT_FIRST_ANNOTATION;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -437,11 +439,22 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	public void checkAnnotations(final Statechart statechart) {
 		Annotation eventDriven = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
 		Annotation cycleBased = statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
+		
 		if(eventDriven != null && cycleBased != null) {
 			String errorMsg = String.format(CONTRADICTORY_ANNOTATIONS, String.join(
 					", ", eventDriven.getType().toString(), cycleBased.getType().toString()
 					));
 			error(errorMsg, cycleBased, null, -1);
+		}
+		
+		Annotation parentFirst = statechart.getAnnotationOfType(PARENT_FIRST_ANNOTATION);
+		Annotation childFirst = statechart.getAnnotationOfType(CHILD_FIRST_ANNOTATION);
+		
+		if(parentFirst != null && childFirst != null) {
+			String errorMsg = String.format(CONTRADICTORY_ANNOTATIONS, String.join(
+					", ", parentFirst.getType().toString(), childFirst.getType().toString()
+					));
+			error(errorMsg, parentFirst, null, -1);
 		}
 	}
 
