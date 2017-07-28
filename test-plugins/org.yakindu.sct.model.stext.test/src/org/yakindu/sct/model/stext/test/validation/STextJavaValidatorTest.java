@@ -44,6 +44,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.sgraph.impl.StatechartImpl;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -277,15 +278,14 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	 * @see STextJavaValidator#checkAnnotationArguments(org.yakindu.sct.model.stext.stext.AnnotationDefinition)
 	 */
 	@Test
-	@Ignore("Library Scope is not visible during tests")
 	public void checkAnnotationArguments() {
-		String scope = "@Execution()";
+		String scope = "@CycleBased";
 		EObject model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertError(STextJavaValidator.ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		;
 
-		scope = "@Execution(EVENT_DRIVEN)";
+		scope = "@EventDriven";
 		model = super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
@@ -297,6 +297,36 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 	@Test
 	public void checkAnnotationTarget() {
 		// TODO: Implement me when default annotation for target is available
+	}
+	
+	@Test
+	public void checkAnnotations() {
+		String scope;
+		StatechartSpecification model;
+		AssertableDiagnostics validationResult;
+		
+		statechart.setName("Annotated");
+		
+		scope = "@EventDriven";
+		model = (StatechartSpecification) super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		statechart.getAnnotations().addAll(model.getAnnotations());
+		validationResult = tester.validate(statechart);
+		validationResult.assertOK();
+		
+		scope = "@CycleBased(200)";
+		model = (StatechartSpecification) super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		statechart.getAnnotations().clear();
+		statechart.getAnnotations().addAll(model.getAnnotations());
+		validationResult = tester.validate(statechart);
+		validationResult.assertOK();
+
+		scope = "@CycleBased(200)\n"
+				+ "@EventDriven";
+		model = (StatechartSpecification) super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		statechart.getAnnotations().clear();
+		statechart.getAnnotations().addAll(model.getAnnotations());
+		validationResult = tester.validate(statechart);
+		validationResult.assertErrorContains(CONTRADICTORY_ANNOTATIONS.split("%s")[0]);
 	}
 
 	/**
