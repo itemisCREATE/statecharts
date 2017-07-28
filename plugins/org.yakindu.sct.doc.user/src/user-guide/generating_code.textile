@@ -9,7 +9,7 @@ To create a generator model with the wizard, proceed as follows:
 
 # Select _File → New → YAKINDU SCT → Code Generator Model_.
 # Enter a name and click _Next_.
-# Choose the desired generator, i.&nbsp;e. _YAKINDU SCT Java Code Generator_.
+# Choose the desired generator, i.e. _YAKINDU SCT Java Code Generator_.
 # Check the model(s) to generate code from and click _Finish_.
 
 !images/docu_genmodelwizardchooselanguage.jpg(Selecting code generator and models)!
@@ -45,7 +45,7 @@ Provided you have created the generator model, proceed as follows:
 # In the context menu, select _Generate Code Artifacts_.
 # The generator is executed.
 
-The source files the generator produces depend on the generator itself. The generators make use of their respective language and their features and best practices, i.&nbsp;e. the Java-generator generates a Java-Interface, and the C and the C++ generator generate header files. The _location_ of these source files can be changed with the generator model options explained in the following section.
+The source files the generator produces depend on the generator itself. The generators make use of their respective language and their features and best practices, i.e. the Java-generator generates a Java-Interface, and the C and the C++ generator generate header files. The _location_ of these source files can be changed with the generator model options explained in the following section.
 
 The generator model is executed by a so-called Eclipse builder. Thus, the artifacts are generated automatically if _Project → Build Automatically_ is checked. If you want or need to execute your Generator Model manually, select _Generate Statechart Artifacts_ from the _Package Explorer_'s context menu.
 
@@ -154,25 +154,54 @@ bc. feature Debug {
 
 h2(#general-concepts-of-the-state-machine-code). General concepts of the state machine code
 
-h3(#cycle-based-execution). Cycle-based execution
+h3(#generating_code_execution_schemes). Execution schemes
 
-The generated state machine code implements a so-called _cycle-based execution scheme_. Each run cycle consists of two different phases:
-# In the first phase, incoming events are collected.
-# In the second phase, _runCycle()_ is executed.
+The generated state machine code implements one of two execution schemes:
+* In the _cycle-based execution scheme_, the state machine will first collect events and later process them in a run-to-completion step. Run-to-completion steps are typically executed in regular time intervals.
+* In the _event-driven execution scheme_, the state machine becomes active each time an event arrives and processes it right away in a run-to-completion step.
 
-This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.&nbsp;g. something like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the IPO (input processing output) model.
+You can select the execution scheme via the <code>@CycleBased</code> or <code>@EventDriven</code> annotations. Write the appropriate annotation to the top of your statechart's definition section, see sections "&quot;@CycleBased&quot;":../user-guide/statechart_language.html#statechart_language_cyclebased and "&quot;@EventDriven&quot;":../user-guide/statechart_language.html#statechart_language_eventdriven.
 
-In other cases an event-driven approach might be more suitable. This can be implemented e.&nbsp;g. by directly calling _runCycle()_ as soon as a certain event occurs, like in:
+
+h4(#generating_code_cycle-based_execution_scheme). Cycle-based execution scheme
+
+In the cycle-based execution scheme, each run cycle consists of two different phases:
+# In the first phase, incoming events and time events are collected.
+# In the second phase, _runCycle()_ is executed and processes the events collected in the first phase.
+
+This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.g. a guard condition like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the IPO (input processing output) model.
+
+==<div class="example">==
+
+Example: The sample client code below first raises events _eventA_ and _eventB_ in the state machine. These events are lingering in the state machine until the client code calls _runCycle()_ to actually process the events.
 
 bc. sc_raiseEventA(handle);
+sc_raiseEventB(handle);
+…
 sc_runCycle(handle);
 
-More sophisticated approaches could care about buffering of events, managing an event queue, dealing with priority events, and so on. However, since this is out of the the generated code's scope, it is the client code's responsibility.
+==</div>==
+
+
+
+h4(#generating_code_event-driven_execution_scheme). Event-driven execution scheme
+
+In the _event-driven execution scheme_, each incoming event or time event immediately triggers the execution of a run-to-completion step. As a consequence, the state machine will never process two events simultaneously, and a guard condition like @[eventA && eventB]@ will never become true.
+
+==<div class="example">==
+
+Example: The sample client code below raises the events _eventA_ and _eventB_. The state machine processes each event immediately as it arrives, triggered by the respective _raise…()_ method. Thus the client code does not need to call _runCycle()_.
+
+bc. sc_raiseEventA(handle);
+sc_raiseEventB(handle);
+
+==</div>==
+
 
 
 h3(#responsibilities-of-generated-code). Responsibilities of generated code
 
-The generated source code supports a basic statechart execution model that can be used to implement different variants. It is important to understand the responsibilities of the generated code, i.&nbsp;e. what it cares about and what it doesn't. The remaining issues are out of scope and must be dealt with in the client code the developer has to provide.
+The generated source code supports a basic statechart execution model that can be used to implement different variants. It is important to understand the responsibilities of the generated code, i.e. what it cares about and what it doesn't. The remaining issues are out of scope and must be dealt with in the client code the developer has to provide.
 
 The generated code basically takes care about the following:
 * It provides the interfaces to access state machine variables and events.

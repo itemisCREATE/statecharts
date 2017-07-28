@@ -537,6 +537,7 @@ Regarding the syntax of event raising, see section "&quot;Raising an event&quot;
 ==<!-- End stext_keyword_event -->==
 
 
+
 ==<!-- Start stext_keyword_operation -->==
 
 h3(#operations). Operations
@@ -556,6 +557,139 @@ bc. operation sum(count: integer, summand...: integer): integer
 Sample calls of this operation are @sum(1, 42)@, @sum(2, 4711, 815)@, @sum(7, 555, 338, 881, 192, 69, 999, 610)@, or even @sum(0)@. In this example the first parameter advises the called function or method of how many instances of the last parameter it should expect. Whether such information is needed or not depends on the target language. For example, a C function needs to receive this information while a Java method does not.
 
 ==<!-- End stext_keyword_operation -->==
+
+
+
+h3(#statechart_language_annotations). Annotations
+
+Annotations are metadata that you can add to the definition section of your statechart. They provide a means to control specific aspects of the execution semantics.
+
+
+==<!-- Start stext_keyword_cyclebased -->==
+
+h4(#statechart_language_cyclebased). @CycleBased
+
+The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/generating_code.html#execution_schemes is to be used.
+
+Synopsis: <code>@CycleBased(</code>_period_<code>)</code>
+
+The mandatory parameter _period_ indicates the suggested period of time between two successive run-to-completion steps in milliseconds. Only the "statechart simulator":../user-guide/simulating_statecharts.html and the "SCTUnit testing framework":../user-guide/sctunit.html take the _period_ value into account, however. It is neither of significance to nor reflected in the generated code, and thus it remains the client code's responsibility to explicitly call _runCycle()_ – and to decide when to do so.
+
+If the definition section contains neither the <code>@CycleBased</code> nor the <code>@EventDriven</code> annotation, the state machine will behave as if <code>@CycleBased(200)</code> would have been coded.
+
+==<div class="example">==
+
+Example: The definition section below specifies that the state machine should behave according to the _cycle-based execution scheme_ with an interval of 100 milliseconds between two cycles.
+
+bc.. 
+@CycleBased(100)
+
+interface:
+    in event e
+p. 
+
+==</div>==
+
+==<!-- End stext_keyword_cyclebased -->==
+
+
+==<!-- Start stext_keyword_eventdriven -->==
+
+h4(#statechart_language_eventdriven). @EventDriven
+
+The <code>@EventDriven</code> annotation specifies that the "_event-driven execution scheme_":../user-guide/generating_code.html#execution_schemes is to be used.
+
+Synopsis: <code>@EventDriven</code>
+
+If the definition section contains neither the <code>@CycleBased</code> nor the <code>@EventDriven</code> annotation, the state machine will behave as if <code>@CycleBased(200)</code> would have been coded.
+
+==<div class="example">==
+
+Example: The definition section below specifies that the state machine should behave according to the _event-driven execution scheme_.
+
+bc.. 
+@EventDriven
+
+interface:
+    in event e
+p. 
+
+==</div>==
+
+==<!-- End stext_keyword_eventdriven -->==
+
+
+==<!-- Start stext_keyword_childfirstexecution -->==
+
+h4(#statechart_language_childfirstexecution). @ChildFirstExecution
+
+The <code>@ChildFirstExecution</code> annotation specifies that the state machine should always first execute the substates ("children") of an active composite state, before executing the composite state ("parent") itself. Should the execution of a substate trigger a transition leading away from the composite state, the latter and any remaining not-yet-executed substates will not be executed, except for any _exit_ actions.
+
+Synopsis: <code>@ChildFirstExecution</code>
+
+Please note that "<code>@ParentFirstExecution</code>":#statechart_language_parentfirstexecution specifies the opposite behaviour. Both <code>@ChildFirstExecution</code> and <code>@ParentFirstExecution</code> are global settings for _all_ composite states.
+
+If the definition section contains neither the <code>@ParentFirstExecution</code> nor the <code>@ChildFirstExecution</code> annotation, the state machine will behave as if <code>@ParentFirstExecution</code> would have been coded.
+
+==<div class="example">==
+
+Example 1a:
+
+Consider the statechart in the "figure below":#fig_child-first_parent-first_example_1a-1. Composite state *A* and its substate *B* are active and the <code>@ChildFirstExecution</code> annotation has been specified in the definition section.
+
+p(#fig_child-first_parent-first_example_1a-1). 
+!images/docu_childfirst_010_example_01a-1.png(Child-first, example 1a, before transition)!
+
+p=. Child-first, example 1a, before transition
+
+If event _e_ occurs, the state machine will consider child state *B* first, find a matching transition, and thus immediately proceed to state *D*, see the "figure below":#fig_child-first_parent-first_example_1a-2.
+
+p(#fig_child-first_parent-first_example_1a-2). 
+!images/docu_childfirst_010_example_01a-2.png(Child-first, example 1a, after transition)!
+
+p=. Child-first, example 1a, after transition
+
+==</div>==
+
+==<div class="example">==
+
+Example 1b:
+
+Consider the statechart in the "figure below":#fig_child-first_parent-first_example_1a-1. Composite state *A* and its substate *B* are active and the <code>@ParentFirstExecution</code> annotation has been specified in the definition section.
+
+p(#fig_child-first_parent-first_example_1b-1). 
+!images/docu_childfirst_010_example_01b-1.png(Parent-first, example 1b, before transition)!
+
+p=. Parent-first, example 1b, before transition
+
+If event _e_ occurs, the state machine will consider parent state *A* first, find a matching transition, and thus immediately proceed to state *C*, see the "figure below":#fig_child-first_parent-first_example_1b-2.
+
+p(#fig_child-first_parent-first_example_1b-2). 
+!images/docu_childfirst_010_example_01b-2.png(Parent-first, example 1b, after transition)!
+
+p=. Parent-first, example 1b, after transition
+
+==</div>==
+
+==<!-- End stext_keyword_childfirstexecution -->==
+
+
+==<!-- Start stext_keyword_parentfirstexecution -->==
+
+h4(#statechart_language_parentfirstexecution). @ParentFirstExecution
+
+The <code>@ParentFirstExecution</code> annotation specifies that the state machine should always first execute an active composite state ("parent") itself, before executing its substates ("children"). Should the execution of the composite state trigger a transition leading away from the parent, its substates will not be executed, except for any _exit_ actions.
+
+Synopsis: <code>@ParentFirstExecution</code>
+
+Please note that "<code>@ChildFirstExecution</code>":#statechart_language_childfirstexecution specifies the opposite behaviour. Both <code>@ChildFirstExecution</code> and <code>@ParentFirstExecution</code> are global settings for _all_ composite states.
+
+If the definition section contains neither the <code>@ParentFirstExecution</code> nor the <code>@ChildFirstExecution</code> annotation, the state machine will behave as if <code>@ParentFirstExecution</code> would have been coded.
+
+Please see section "&quot;@ChildFirstExecution&quot;":#statechart_language_childfirstexecution for examples.
+
+==<!-- End stext_keyword_parentfirstexecution -->==
+
 
 
 
