@@ -327,6 +327,28 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		statechart.getAnnotations().addAll(model.getAnnotations());
 		validationResult = tester.validate(statechart);
 		validationResult.assertErrorContains(CONTRADICTORY_ANNOTATIONS.split("%s")[0]);
+
+		scope = "@ParentFirstExecution";
+		model = (StatechartSpecification) super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		statechart.getAnnotations().clear();
+		statechart.getAnnotations().addAll(model.getAnnotations());
+		validationResult = tester.validate(statechart);
+		validationResult.assertOK();
+		
+		scope = "@ChildFirstExecution";
+		model = (StatechartSpecification) super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		statechart.getAnnotations().clear();
+		statechart.getAnnotations().addAll(model.getAnnotations());
+		validationResult = tester.validate(statechart);
+		validationResult.assertOK();
+		
+		scope = "@ParentFirstExecution\n"
+				+ "@ChildFirstExecution";
+		model = (StatechartSpecification) super.parseExpression(scope, StatechartSpecification.class.getSimpleName());
+		statechart.getAnnotations().clear();
+		statechart.getAnnotations().addAll(model.getAnnotations());
+		validationResult = tester.validate(statechart);
+		validationResult.assertErrorContains(CONTRADICTORY_ANNOTATIONS.split("%s")[0]);
 	}
 
 	/**
