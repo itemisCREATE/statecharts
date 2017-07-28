@@ -87,7 +87,6 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 	override runCycleFunction(ExecutionFlow it)  '''
 		void «functionPrefix»runCycle(«scHandleDecl»)
 		{
-			
 			«clearOutEventsFctID»(«scHandle»);
 			
 			«eventStructTypeName» currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue));
@@ -95,9 +94,9 @@ class EventDrivenStatemachineSource extends StatemachineSource {
 			do {
 				«functionPrefix»dispatch_event(«scHandle», &currentEvent);
 				«runCycleForLoop»
+				«clearInEventsFctID»(«scHandle»);
 			} while((currentEvent = «eventQueuePopFunction»(&(«scHandle»->internal_event_queue))).name != invalid_event);
 			
-			«clearInEventsFctID»(«scHandle»);
 		}
 	'''
 	
