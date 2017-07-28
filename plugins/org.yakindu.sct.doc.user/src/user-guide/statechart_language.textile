@@ -562,24 +562,24 @@ Sample calls of this operation are @sum(1, 42)@, @sum(2, 4711, 815)@, @sum(7, 55
 
 h3(#statechart_language_annotations). Annotations
 
-Annotations are syntactic metadata that you can add to the definition section of your statechart. They provide you with a means to control specific aspects of the execution semantics.
+Annotations are metadata that you can add to the definition section of your statechart. They provide a means to control specific aspects of the execution semantics.
 
 
 ==<!-- Start stext_keyword_cyclebased -->==
 
 h4(#statechart_language_cyclebased). @CycleBased
 
-The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/generating_code.html#execution_schemes is to be used. Its mandatory parameter _period_ indicates the suggested period of time between two successive run-to-completion steps in milliseconds. Only the simulator takes this value into account, however. It is neither of significance to nor reflected in the generated code, and thus it remains the client code's responsibility to explicitly call _runCycle()_ – and to decide when to do so.
+The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/generating_code.html#execution_schemes is to be used.
 
 Synopsis: <code>@CycleBased(</code>_period_<code>)</code>
 
-The mandatory parameter _period_ indicates the suggested period of time between two successive run-to-completion steps in milliseconds. Only the simulator takes this value into account, however. It is neither of significance to nor reflected in the generated code, and thus it remains the client code's responsibility to explicitly call _runCycle()_ – and to decide when to do so.
+The mandatory parameter _period_ indicates the suggested period of time between two successive run-to-completion steps in milliseconds. Only the "statechart simulator":../user-guide/simulating_statecharts.html and the "SCTUnit testing framework":../user-guide/sctunit.html take the _period_ value into account, however. It is neither of significance to nor reflected in the generated code, and thus it remains the client code's responsibility to explicitly call _runCycle()_ – and to decide when to do so.
 
 If the definition section contains neither the <code>@CycleBased</code> nor the <code>@EventDriven</code> annotation, the state machine will behave as if <code>@CycleBased(200)</code> would have been coded.
 
 ==<div class="example">==
 
-Example: The definition section below specifies that the generated code should implement the _cycle-based execution scheme_ with an interval of 100 milliseconds between two cycles.
+Example: The definition section below specifies that the state machine should behave according to the _cycle-based execution scheme_ with an interval of 100 milliseconds between two cycles.
 
 bc.. 
 @CycleBased(100)
@@ -605,7 +605,7 @@ If the definition section contains neither the <code>@CycleBased</code> nor the 
 
 ==<div class="example">==
 
-Example:
+Example: The definition section below specifies that the state machine should behave according to the _event-driven execution scheme_.
 
 bc.. 
 @EventDriven
