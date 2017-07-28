@@ -15,6 +15,9 @@ Headless code generation is a new feature the YAKINDU team wants to make availab
 
 ###. CHECK: Does headless code generation still have some rough edges?
 
+
+
+
 h2(#hdls_installation). Installation
 
 If you are working with the "Professional Edition":https://info.itemis.com/yakindu/statecharts/pro of YAKINDU Statechart Tools, the headless code generation feature is already included and no further installation procedure is required. You can skip this section and continue reading at "&quot;The scc statechart compiler&quot;":#hdls_the_scc_statechart_compiler.
@@ -56,6 +59,7 @@ p(#hdls_fig_installing_the_headless_code_generation_feature).
 p=. Installing the headless code generation feature
 
 
+
 h3(#hdls_the_scc_statechart_compiler). The scc statechart compiler
 
 The SCT installation directory contains the file _scc_ (Linux, macOS) resp. _scc.bat_ (Windows): the _statechart compiler_. Technically, it is a script file launching the SCT executable, passing proper parameters for headless code generation.
@@ -86,9 +90,13 @@ usage: scc [-d <path>] [-h] [-m <path>{,<path>}…]
                               to model(s) used during execution. If not set
                               the runtime value of basedir is used.
 
-h3(#hdls_custom_generator). Integrating custom code generators
 
-YAKINDU Statechart Tools supports custom generators as described in "Custom code generators":../user-guide/generating_code.html#custom-code-generators. These custom code generators can be executed by use of the headless code generator infrastructure also. To do so the custom code generator has to be installed as an eclipse plug-in within the distribution where the headless code generator feature was installed as described in "Installation":#hdls_installation - thats it: the custom generator will be used whenever a generator model (*.sgen), loaded by the headless generator infrastructure, referencing the custom code generator id.
+
+h3(#hdls_integrating_custom_code_generators). Integrating custom code generators
+
+YAKINDU Statechart Tools supports custom generators as described in "Custom code generators":../user-guide/generating_code#codegen_custom_code_generators. These custom code generators can be executed by use of the headless code generator infrastructure also. To do so the custom code generator has to be installed as an eclipse plug-in within the distribution where the headless code generator feature was installed as described in "Installation":#hdls_installation - thats it: the custom generator will be used whenever a generator model (*.sgen), loaded by the headless generator infrastructure, referencing the custom code generator id.
+
+
 
 
 h2(#hdls_generating_code). Generating code
@@ -108,6 +116,7 @@ GeneratorModel for yakindu::java {
 		}
 	}
 }
+
 
 
 h3(#hdls_generating_code_for_an_eclipse_project). Generating code for an Eclipse project
@@ -140,6 +149,7 @@ bc.
 [somepath]/basedir/[sgen.targetProject]/[sgen.targetFolder]
 
 In this case the statechart compiler determines whether a _.project_ file is available in the current directory and will automatically adjust the generation target to be the parent of the actual project directory to ensure the parameters defined in an _.sgen_ file are interpreted correctly.
+
 
 
 h3(#hdls_using_scc_options). Using scc options
@@ -181,9 +191,11 @@ For our example this means the generated code can be found in
 <code>_basedir_/project1/src-gen/</code>
 
 
+
 h3(#hdls_available_scc_options). Available scc options
 
 All parameters are essentially optional. The reason is that for a directory structure adhering to Eclipse workspace standards like projects within a root folder, or no additional hierarchies, everything can be calculated automatically.
+
 
 h4(#hdls_specifying_a_base_directory). Specifying a base directory
 
@@ -198,7 +210,8 @@ The target folder of generated artifacts will be evaluated as follows:
 
 <code><em>basedir</em>/<em>sgen.targetProject</em>/<em>sgen.targetFolder</em></code>
 
-h4(#hdls_specifying_statechart_model_files). Specifying model files
+
+h4(#hdls_specifying_statechart_model_files). Specifying statechart model files
 
 Use the <code>-m <em>models</em></code> option to select certain models known by the statechart compiler. Usually these will be _.sgen_ or _.sct_ files. However, other model files that are supported by particular code generators, can be specified, too, e.g. C header files for YAKINDU Statechart Tool PRO's deep C integration. The @-m@ option's value can be absolute or relative, can be a file or a folder and can be a single value or a comma-separated list of values.
 
@@ -210,16 +223,20 @@ Use the <code>-m <em>models</em></code> option to select certain models known by
 
 
 
+
 h2(#hdls_troubleshooting). Troubleshooting
 
 If the _scc_ command fails, here are some tips and fixes.
 
-h3(#hdls_troubleshooting_error_executable). [ERROR] Neither 'SCT' nor 'eclipse' executable found!
+
+
+h3(#hdls_troubleshooting_error_neither_sct_nor_eclipse_executable_found). [ERROR] Neither 'SCT' nor 'eclipse' executable found!
 
 If you encounter this error message on Linux, this means the _scc_ command was neither able to locate a _SCT_ executable binary nor an _eclipse_ executable. This happens if the _scc_ executable, which is really only a launcher, is not in the same directory as the _SCT_ or _eclipse_ executables. In a YAKINDU Statechart Tools stand-alone installation, the executable binary is named _SCT_. However, its name is _eclipse_ if you have installed YAKINDU Statechart Tools from an update site into an already existing Eclipse installation. The _scc_ launcher tries to find one of _SCT_ or _eclipse_ and launches the correct one.
 
 
-h3(#hdls_troubleshooting_error_library). The Eclipse executable launcher was unable to locate its companion shared library
+
+h3(#hdls_troubleshooting_the_eclipse_executable_launcher_was_unable_to_locate_its_companion_shared_library). The Eclipse executable launcher was unable to locate its companion shared library
 
 This error message is usually issued if you have installed YAKINDU Statechart Tools from an update site into an already existing Eclipse installation _and_ you installed the latter using the _Eclipse Installer / Oomph_.
 

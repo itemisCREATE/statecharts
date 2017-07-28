@@ -1,30 +1,34 @@
 
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/simulating_statecharts.textile
 
+
+
+
+
 h1(#simu_simulating_statecharts). Simulating statecharts
 
 Simulating a statechart model means to execute it, raise events manually, have time-based and other events being triggered automatically, and observe the model's behavior.
 
 You can run multiple state machines in parallel and even multiple instances of the same state machine.
 
-An introduction to simulation is given in section "&quot;Simulating the light switch model&quot;":../tutorials/tutorials#simulating-the-light-switch-model.
+An introduction to simulation is given in section "&quot;Simulating the light switch model&quot;":../tutorials/tutorials#tutorial_simulating_the_light_switch_model.
 
 
 
 
-h2(#simu_starting-a-simulation). Starting a simulation
+h2(#simu_starting_a_simulation). Starting a simulation
 
 You have several options to start a statechart simulation.
 
 
 
-h3(#simu_using-the-statechart-model-file-context-menu). Using the statechart model file context menu
+h3(#simu_using_the_statechart_model_file_context_menu). Using the statechart model file context menu
 
 The most direct way is to start the simulation based on the statechart model file.
 # In the _project explorer_ view, right-click on the statechart model file. The context menu opens.
-# In the context menu, select _Run As → Statechart Simulation_, see figure "&quot;Selecting _Run As → Statechart Simulation_ in the context menu&quot;":#simu_fig_run-as-statechart-simulation.
+# In the context menu, select _Run As → Statechart Simulation_, see figure "&quot;Selecting _Run As → Statechart Simulation_ in the context menu&quot;":#simu_fig_run_as_statechart_simulation.
 
-p(#simu_fig_run-as-statechart-simulation). 
+p(#simu_fig_run_as_statechart_simulation). 
 
 !(large)images/tuto_light_switch_300_statechart_simulator_run_as_statechart_simulation.png(Selecting "Run As → Statechart Simulation" in the context menu)!
 
@@ -32,7 +36,7 @@ p=. Selecting _Run As → Statechart Simulation_ in the context menu
 
 
 
-h3(#simu_repeating-the-last-simulation). Repeating the last simulation
+h3(#simu_repeating_the_last_simulation). Repeating the last simulation
 
 In order to re-run the simulation you have most recently executed, simply
 * press @[Ctrl+F11]@ on the keyboard
@@ -43,9 +47,9 @@ To be exact, this operation does not necessarily re-run the last _simulation_, b
 
 
 
-h3(#simu_repeating-a-former-simulation). Repeating an earlier simulation
+h3(#simu_repeating_a_former_simulation). Repeating an earlier simulation
 
-Let's consider a scenario where you want to execute a simulation that you have run before, but not as the most recently executed launch. So you cannot use the procedure described in section "&quot;Repeating the last simulation&quot;":#simu_repeating-the-last-simulation.
+Let's consider a scenario where you want to execute a simulation that you have run before, but not as the most recently executed launch. So you cannot use the procedure described in section "&quot;Repeating the last simulation&quot;":#simu_repeating_the_last_simulation.
 
 However, as long as you haven't launched too many other programs in between, chances are good to find your simulation in the _history_.
 
@@ -55,9 +59,9 @@ Try the following:
 
 
 
-h3(#simu_creating-and-executing-a-run-configuration). Creating and executing a launch configuration
+h3(#simu_creating_and_executing_a_run_configuration). Creating and executing a launch configuration
 
-When a statechart is simulated for the first time, a _launch configuration_ is automatically created. A _launch configuration_ describes the parameters used for a particular launch. In case of a statechart simulation, it describes which statechart is to be simulated and the simulation mode (event-driven or cycle-based). For details on how to create and modify a launch configuration, see section "&quot;Configuring a simulation&quot;":#simu_configuring-a-simulation.
+When a statechart is simulated for the first time, a _launch configuration_ is automatically created. A _launch configuration_ describes the parameters used for a particular launch. In case of a statechart simulation, it describes which statechart is to be simulated and the simulation mode (event-driven or cycle-based). For details on how to create and modify a launch configuration, see section "&quot;Configuring a simulation&quot;":#simu_configuring_a_simulation.
 
 To execute an existing launch configuration, proceed as follows:
 # In the main menu, select _Run → Run Configurations…_. The _Run Configurations_ dialog appears.
@@ -67,13 +71,13 @@ To execute an existing launch configuration, proceed as follows:
 
 
 
-h2(#simu_the-sc-simulation-perspective). The _SC Simulation_ perspective
+h2(#simu_the_sc_simulation_perspective). The _SC Simulation_ perspective
 
 The _SC Simulation_ perspective provides selected views that are most useful when running a statechart simulation.
 
 
 
-h3(#simu_engaging-the-sc-simulation-perspective). Engaging the _SC Simulation_ perspective
+h3(#simu_engaging_the_sc_simulation_perspective). Engaging the _SC Simulation_ perspective
 
 When a simulation starts, the perspective usually changes to the _SC Simulation_ perspective. If this doesn't happen, you can manually engage the _SC Simulation_ perspective as follows:
 
@@ -86,25 +90,25 @@ Alternatively, you can do the following:
 
 
 
-h3(#simu_views-contained-in-the-sc-simulation-perspective). Views contained in the SC Simulation perspective
+h3(#simu_views_contained_in_the_sc_simulation_perspective). Views contained in the SC Simulation perspective
 
 By default, the _SC Simulation_ perspective shows the following views:
 * _Project Explorer_ (left): This view displays your workspace and projects, folders, and files contained therein. You can also use the _Project Explorer_ to inspect the internal structure of your statechart models.
 * _Debug_ (top middle): This view is showing all state machine instances and allows to select one of them. YAKINDU Statechart Tools allow multiple executions of the same statechart as well as parallel executions of different statecharts at the same time.
 * _Outline_ (right): This view is a bird's eye view on the opened statechart. It also indicates the current viewport for better orientation in large models.
-* _Simulation_ (right): This view shows the current state of all variables and events during a simulation. A detailed description is available in section "&quot;The Simulation view&quot;":#simu_the-simulation-view.
+* _Simulation_ (right): This view shows the current state of all variables and events during a simulation. A detailed description is available in section "&quot;The Simulation view&quot;":#simu_the_simulation_view.
 * %(pro-feature)_Breakpoints_ (right): This view shows a list of all breakpoints. You can use it for disabling, enabling, or removing breakpoints as well as for defining conditional breakpoints.%
 * %(pro-feature)_Snapshots_ (right): This view contains all snapshots with their respective names and timestamps.%
 
 
 
-h3(#simu_displaying-simulation-progress-in-the-statechart-editor). Displaying simulation progress in the statechart editor
+h3(#simu_displaying_simulation_progress_in_the_statechart_editor). Displaying simulation progress in the statechart editor
 
 The _SC Simulation_ perspective also includes the statechart editor. In a running simulation, the statechart editor highlights active states by coloring their backgrounds in red.
 
 When a transition is taken, the transition arc leading from the source state to the target state flashes briefly in red. After that, the target state becomes active and changes its background color to red. The source state's background color becomes normal again.
 
-p(#simu_fig_the-sc-simulation-perspective). 
+p(#simu_fig_the_sc_simulation_perspective). 
 
 !(large)images/tuto_light_switch_310_statechart_simulator_state_off.png(The "SC Simulation" perspective)!
 
@@ -113,9 +117,9 @@ p=. The _SC Simulation_ perspective
 
 
 
-h2(#simu_the-simulation-view). The Simulation view
+h2(#simu_the_simulation_view). The _Simulation_ view
 
-The _Simulation_ view is used to manually raise events and to inspect and modify variables of a running simulation. By default that view is located on the right-hand side of the "_SC Simulation_":#simu_the-sc-simulation-perspective perspective, see "figure &quot;Simulation view&quot;":#simu_fig-simulation-view for an example.
+The _Simulation_ view is used to manually raise events and to inspect and modify variables of a running simulation. By default that view is located on the right-hand side of the "_SC Simulation_":#simu_the_sc_simulation_perspective perspective, see "figure &quot;Simulation view&quot;":#simu_fig_simulation_view for an example.
 
 The _Simulation_ view groups events and variables by their _interfaces_. The unnamed interface appears as _default_ in the interface list. Click on the small triangle left from a interface's name to show or hide the interface's contents, i.e. events and variables.
 
@@ -123,9 +127,9 @@ bq.. *Please note:*
 
 Depending on your screen resolution and font size settings, you might not be able to spot the _Simulation_ view by its name, because the tab containing it is quite narrow and might not provide enough space for displaying the title. Hover over the tabs to reveal their respective titles in a popup window.
 
-"Figure &quot;The SC Simulation perspective&quot;":#simu_fig_the-sc-simulation-perspective is demonstrating this: The user has hovered the mouse pointer over a tab that is just displaying the starting letter 'S' of its title. However, a popup window right besides the pointer is showing the tab's full title "Simulation".
+"Figure &quot;The SC Simulation perspective&quot;":#simu_fig_the_sc_simulation_perspective is demonstrating this: The user has hovered the mouse pointer over a tab that is just displaying the starting letter 'S' of its title. However, a popup window right besides the pointer is showing the tab's full title "Simulation".
 
-p(#simu_fig-simulation-view). 
+p(#simu_fig_simulation_view). 
 !(large)images/docu_advsim_010_lightswitch_020_simulation.png(Simulation view – The actual "Simulation" view is the pane right from the statechart editor.)!
 
 p=. Simulation view – The actual _Simulation_ view is the pane right from the statechart editor.
@@ -133,7 +137,7 @@ p=. Simulation view – The actual _Simulation_ view is the pane right from the 
 
 
 
-h2(#simu_controlling-a-simulation). Controlling a simulation
+h2(#simu_controlling_a_simulation). Controlling a simulation
 
 * To terminate the simulation, click on the _Terminate_ button !(inlinemediaobject)images/docu_symbol_terminate.png(Symbol: Terminate)! or select _Run → Terminate_ in the main menu.
 * To suspend the simulation, click on the _Suspend_ button !(inlinemediaobject)images/docu_symbol_suspend.png(Symbol: Suspend)! or select _Run → Suspend_ in the main menu.
@@ -143,13 +147,13 @@ h2(#simu_controlling-a-simulation). Controlling a simulation
 
 
 
-h2(#simu_interacting-with-a-simulation). Interacting with a simulation
+h2(#simu_interacting_with_a_simulation). Interacting with a simulation
 
 You can interact with a running simulation by manually raising events and by inspecting and modifying variables. You can do so at any point in time, but in most cases you will do so while the simulation "sits idle" at its active state and waits for an event to trigger a transition.
 
 
 
-h3(#simu_raising-an-event-in-the-simulation). Raising an event in the simulation
+h3(#simu_raising_an_event_in_the_simulation). Raising an event in the simulation
 
 To raise an event, proceed as follows:
 # In the _Simulation_ view, click on the small triangle to open the interface containing the event, if needed.
@@ -157,7 +161,7 @@ To raise an event, proceed as follows:
 
 
 
-h3(#simu_inspecting-a-variable). Inspecting a variable
+h3(#simu_inspecting_a_variable). Inspecting a variable
 
 To inspect a variable's value, proceed as follows:
 # In the _Simulation_ view, click on the small triangle to open the interface containing the variable, if needed.
@@ -167,7 +171,7 @@ Watch the displayed values change as the simulation progresses and actions in st
 
 
 
-h3(#simu_modifying-a-variable). Modifying a variable
+h3(#simu_modifying_a_variable). Modifying a variable
 
 To manually modify a variable's value, proceed as follows:
 # In the _Simulation_ view, click on the small triangle to open the interface containing the variable, if needed.
@@ -177,9 +181,9 @@ To manually modify a variable's value, proceed as follows:
 
 
 
-h2(#simu_configuring-a-simulation). Configuring a simulation
+h2(#simu_configuring_a_simulation). Configuring a simulation
 
-Section "&quot;Creating and executing a launch configuration&quot;":#simu_creating-and-executing-a-run-configuration describes how to start an existing launch configuration.
+Section "&quot;Creating and executing a launch configuration&quot;":#simu_creating_and_executing_a_run_configuration describes how to start an existing launch configuration.
 
 The present section describes how to create and configure a new launch configuration for a statechart simulation.
 

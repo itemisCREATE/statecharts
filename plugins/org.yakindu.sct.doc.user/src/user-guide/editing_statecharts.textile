@@ -1,15 +1,15 @@
 
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/editing_statecharts.textile
 
-h1(#editing-statecharts). Editing statecharts
+h1(#edit_editing_statecharts). Editing statecharts
 
-h2(#creating-and-deleting-statecharts). Creating and deleting statecharts
+h2(#edit_creating_and_deleting_statecharts). Creating and deleting statecharts
 
 Statecharts are comprised in *statechart model files*. The filename extension of these files is @.sct@. Their internal format is "XML Metadata Interchange":https://en.wikipedia.org/wiki/XML_Metadata_Interchange or "XMI":https://en.wikipedia.org/wiki/XML_Metadata_Interchange, which is an XML language.
 
 
 
-h3(#creating-a-statechart). Creating a statechart
+h3(#edit_creating_a_statechart). Creating a statechart
 
 ###. FIXME: Unify the following with the tutorial text!
 
@@ -22,11 +22,11 @@ In order to create a new statechart, use the _project explorer_ view:
 # In the wizard, select a statechart domain. Which domains are available depend on your YAKINDU Statechart Tools license. The _Default_ domain for "normal" statecharts without any language integration is always available.
 # Click _Finish_.
 # If the _Confirm Perspective Switch_ dialog appears, answer its question as you see fit.
-# The new statechart file is created in the location you specified and opened in the "statechart editor":#editor-ui.
+# The new statechart file is created in the location you specified and opened in the "statechart editor":#edit_editor_ui.
 
 
 
-h3(#copying-an-existing-statechart). Copying an existing statechart
+h3(#edit_copying_an_existing_statechart). Copying an existing statechart
 
 In order to copy an existing statechart file, proceed as follows:
 # In the _project explorer_ view, right-click on the statechart's filename. The context menu appears.
@@ -40,7 +40,7 @@ In order to copy an existing statechart file, proceed as follows:
 
 
 
-h3(#deleting-a-statechart). Deleting a statechart
+h3(#edit_deleting_a_statechart). Deleting a statechart
 
 In order to delete a statechart file, proceed as follows:
 # Right-click on the statechart file in the _Project Explorer_ view. The context menu appears.
@@ -53,33 +53,32 @@ In order to delete a statechart file, proceed as follows:
 
 
 
-
-h2(#editor-ui). Editor UI
+h2(#edit_editor_ui). Editor UI
 
 YAKINDU Statechart Tools comes with a *statechart editor*. This section explains the statechart editor and how you can use it to graphically edit your statecharts.
 
 
 
-h3(#sc-modeling-perspective). _SC Modeling_ perspective
+h3(#edit_sc_modeling_perspective). _SC Modeling_ perspective
 
 _SC Modeling_ is an Eclipse perspective supporting the modeling of statecharts. The perspective defines the following views and their positions:
 * _Project Explorer_ (left): This view displays your workspace and projects, folders, and files contained therein. You can also use the _Project Explorer_ to inspect the internal structure of your statechart models.
 * _Properties_ (bottom): This view displays properties, regarding the semantic model or the graphical appearance, of the selected element in the statechart editor. You can directly edit these properties in this view.
 * _Problems_ (bottom): This view displays errors and warnings existing in your workspace. Double-clicking on an entry typically opens the location of the respective error or warning.
-* _Tasks_ (bottom): This view displays any tasks you have defined in your statechart previously. Section "&quot;Working with statechart tasks&quot;":#working-with-statechart-tasks explains how to do that.
+* _Tasks_ (bottom): This view displays any tasks you have defined in your statechart previously. Section "&quot;Working with statechart tasks&quot;":#edit_working_with_statechart_tasks explains how to do that.
 * _Outline_ (right): This view is a bird's eye view on the opened statechart. It also indicates the current viewport for better orientation in large models.
 
 You can change the positions and sizes of these views, you can delete them, or add more views, using standard Eclipse mechanisms.
 
 
 
-h3(#canvas). Canvas
+h3(#edit_canvas). Canvas
 
-The canvas is the statechart editor's drawing area. When you create a new statechart model, the canvas comprises the "definition section":../user-guide/statechart_language.html#definition-section and a single "region":../user-guide/statechart_language#region.
+The canvas is the statechart editor's drawing area. When you create a new statechart model, the canvas comprises the "definition section":../user-guide/statechart_language.html#sclang_definition_section and a single "region":../user-guide/statechart_language#sclang_regions.
 
 The following list gives an overview of what kind of actions you can perform on the canvas:
 * Add or remove a region
-** To add a region to the canvas, select _Region_ in the "editor palette":#editor-palette, then click on the canvas location you want to place the region.
+** To add a region to the canvas, select _Region_ in the "editor palette":#edit_editor_palette, then click on the canvas location you want to place the region.
 ** To remove a region from the canvas, select the region, then
 *** press the @[Del]@ key, or
 *** select _Delete from model_ in the context menu, or
@@ -90,52 +89,53 @@ The following list gives an overview of what kind of actions you can perform on 
 
 
 
-h3(#editor-palette). Editor palette
+h3(#edit_editor_palette). Editor palette
 
 The editor palette provides you with a set of various actions and statechart editing tools. By default, the palette is located right of the canvas, but you can also drag it to the left.
 
 You can hide the palette by clicking on the small triangle on the right-hand side in the palette's title bar. Click on the triangle again to make the palette reappear.
 
-!(tiny)images/docu_editor-palette_010_overview.png(Editor palette)!
+!(tiny)images/docu_editor_palette_010_overview.png(Editor palette)!
 
 p=. Editor palette
 
 
-h4(#editing-action-tools). Editing action tools
+h4(#edit_editing_action_tools). Editing action tools
 
 Below its title bar, the palette contains a toolbar with the following editing action tools (from left to right):
 | *Symbol* | *Action* | *Description* |
-| !(inlinemediaobject)images/docu_editor-palette_020_symbol_select.png(Editor palette symbol "Select")! | Select | Left-click at an object to select it. |
-| !(inlinemediaobject)images/docu_editor-palette_030_symbol_zoom_in.png(Editor palette symbol "Zoom in")! | Zoom in | Left-click to zoom in. Press @[Shift]@ and left-click to zoom out. Drag to zoom to selection. |
-| !(inlinemediaobject)images/docu_editor-palette_040_symbol_zoom_out.png(Editor palette symbol "Zoom out")! | Zoom out | Left-click to zoom out. Press @[Shift]@ and left-click to zoom in. |
-| !(inlinemediaobject)images/docu_editor-palette_070_symbol_note.png(Editor palette symbol "Note")! | Note | Create a note, a text or a note attachment. |
+| !(inlinemediaobject)images/docu_editor_palette_020_symbol_select.png(Editor palette symbol "Select")! | Select | Left-click at an object to select it. |
+| !(inlinemediaobject)images/docu_editor_palette_030_symbol_zoom_in.png(Editor palette symbol "Zoom in")! | Zoom in | Left-click to zoom in. Press @[Shift]@ and left-click to zoom out. Drag to zoom to selection. |
+| !(inlinemediaobject)images/docu_editor_palette_040_symbol_zoom_out.png(Editor palette symbol "Zoom out")! | Zoom out | Left-click to zoom out. Press @[Shift]@ and left-click to zoom in. |
+| !(inlinemediaobject)images/docu_editor_palette_070_symbol_note.png(Editor palette symbol "Note")! | Note | Create a note, a text or a note attachment. |
 
-h4(#statechart-elements-tools). Statechart elements tools
+
+h4(#edit_statechart_elements_tools). Statechart elements tools
 
 The palette comprises a couple of tools serving to add statechart elements to the diagram (from top to bottom):
 
 | *Symbol* | *Description* |
-| !images/docu_editor-palette_210_tool_transition.png(Editor palette element tool "Transition")! | Adds a "transition":../user-guide/statechart_language.html#transition. |
-| !images/docu_editor-palette_220_tool_state.png(Editor palette element tool "State")! | Adds a "state":../user-guide/statechart_language.html#state. |
-| !images/docu_editor-palette_230_tool_composite_state.png(Editor palette element tool "Composite state")! | Adds a "composite state":../user-guide/statechart_language.html#composite-state. |
-| !images/docu_editor-palette_240_tool_orthogonal_state.png(Editor palette element tool "Orthogonal state")! | Adds an "orthogonal state":../user-guide/statechart_language.html#orthogonal-states. |
-| !images/docu_editor-palette_250_tool_region.png(Editor palette element tool "Region")! | Adds a "region":../user-guide/statechart_language.html#region. |
-| !images/docu_editor-palette_260_tool_entry.png(Editor palette element tool "Entry point")! | Adds an "entry point":../user-guide/statechart_language.html#entry_point. |
-| !images/docu_editor-palette_270_tool_shallow_history.png(Editor palette element tool "Shallow history")! | Adds a "shallow history state":../user-guide/statechart_language.html#shallow-history-state. |
-| !images/docu_editor-palette_280_tool_deep_history.png(Editor palette element tool "Deep history")! | Adds a "deep history state":../user-guide/statechart_language.html#deep-history-state. |
-| !images/docu_editor-palette_290_tool_final_state.png(Editor palette element tool "Final state")! | Adds a "final state":../user-guide/statechart_language.html#final-state. |
-| !images/docu_editor-palette_300_tool_exit_point.png(Editor palette element tool "Exit point")! | Adds an "exit point":../user-guide/statechart_language.html#exit_point. |
-| !images/docu_editor-palette_310_tool_choice.png(Editor palette element tool "Choice")! | Adds a "choice":../user-guide/statechart_language.html#choice. |
-| !images/docu_editor-palette_320_tool_synchronization.png(Editor palette element tool "Synchronization")! | Adds a "synchronization":../user-guide/statechart_language.html#synchronization. |
+| !images/docu_editor_palette_210_tool_transition.png(Editor palette element tool "Transition")! | Adds a "transition":../user-guide/statechart_language.html#sclang_transitions. |
+| !images/docu_editor_palette_220_tool_state.png(Editor palette element tool "State")! | Adds a "state":../user-guide/statechart_language.html#sclang_states. |
+| !images/docu_editor_palette_230_tool_composite_state.png(Editor palette element tool "Composite state")! | Adds a "composite state":../user-guide/statechart_language.html#sclang_composite_states. |
+| !images/docu_editor_palette_240_tool_orthogonal_state.png(Editor palette element tool "Orthogonal state")! | Adds an "orthogonal state":../user-guide/statechart_language.html#sclang_orthogonal_states. |
+| !images/docu_editor_palette_250_tool_region.png(Editor palette element tool "Region")! | Adds a "region":../user-guide/statechart_language.html#sclang_regions. |
+| !images/docu_editor_palette_260_tool_entry.png(Editor palette element tool "Entry point")! | Adds an "entry point":../user-guide/statechart_language.html#sclang_entry_points. |
+| !images/docu_editor_palette_270_tool_shallow_history.png(Editor palette element tool "Shallow history")! | Adds a "shallow history state":../user-guide/statechart_language.html#sclang_shallow_history_states. |
+| !images/docu_editor_palette_280_tool_deep_history.png(Editor palette element tool "Deep history")! | Adds a "deep history state":../user-guide/statechart_language.html#sclang_deep_history_states. |
+| !images/docu_editor_palette_290_tool_final_state.png(Editor palette element tool "Final state")! | Adds a "final state":../user-guide/statechart_language.html#sclang_final_state. |
+| !images/docu_editor_palette_300_tool_exit_point.png(Editor palette element tool "Exit point")! | Adds an "exit point":../user-guide/statechart_language.html#sclang_exit_points. |
+| !images/docu_editor_palette_310_tool_choice.png(Editor palette element tool "Choice")! | Adds a "choice":../user-guide/statechart_language.html#sclang_choices. |
+| !images/docu_editor_palette_320_tool_synchronization.png(Editor palette element tool "Synchronization")! | Adds a "synchronization":../user-guide/statechart_language.html#sclang_synchronizations. |
 
 
 
-h3(#outline-view). Outline view
+h3(#edit_outline_view). Outline view
 
 The _Outline_ view allows you to keep the big picture of your statechart model and navigate it easily. It displays the model outline either as a graphical overview or as a hierarchical outline.
 
 
-h4(#graphical-overview). Graphical overview
+h4(#edit_graphical_overview). Graphical overview
 
 Click on the _Overview_ icon in the _Outline_ view's title bar to engage the graphical overview.
 
@@ -146,13 +146,13 @@ A light-grey overlay rectangle represents the statechart editor's "viewport":htt
 * Click into the outline view to position the rectangle's center to the point you have clicked.
 
 
-h4(#hierarchical-outline). Hierarchical outline
+h4(#edit_hierarchical_outline). Hierarchical outline
 
 Click on the _Outline_ icon in the _Outline_ view's title bar to engage the hierarchical outline.
 
 
 
-h3(#problems-view). Problems view
+h3(#edit_problems_view). Problems view
 
 The _problems_ view by default lists all errors, warnings and other types of messages in all open projects.
 
@@ -171,7 +171,7 @@ bq. *Please note:* The _problems_ view reflects the error/warning status of _per
 
 
 
-h2(#editing-states-and-other-nodes). Editing states and other nodes
+h2(#edit_editing_states_and_other_nodes). Editing states and other nodes
 
 Generally, there are two different ways to edit states and other nodes:
 * Using the graphical editor to modify a node in the diagram.
@@ -182,7 +182,7 @@ There are certain properties that you can only edit with one of these methods. F
 
 
 
-h2(#editing-transitions). Editing transitions
+h2(#edit_editing_transitions). Editing transitions
 
 Generally, there are two different ways to edit transitions:
 * Using the graphical editor to modify a transition in the diagram.
@@ -193,7 +193,7 @@ There are certain properties that you can only edit with one of these methods. F
 
 
 
-h2(#editing-the-documentation-of-states-and-transitions). Editing the documentation of states and transitions
+h2(#edit_editing_the_documentation_of_states_and_transitions). Editing the documentation of states and transitions
 
 You can attach documentation to states and transitions. In this context, documentation is some text offering additional information to a human reader. In the model, it does not serve any functional purpose.
 
@@ -211,7 +211,7 @@ The _properties_ view of states and transition always shows both documentation a
 
 
 
-h2(#editing-regions). Editing regions
+h2(#edit_editing_regions). Editing regions
 
 To change the size or the location of a top-level region, use the graphical editor. Drag the region to move it elsewhere. Use a selected region's handles to resize it.
 
@@ -228,20 +228,20 @@ You can change the name of a region in the statechart editor as well as in the _
 
 
 
-h2(#editing-hierarchies). Editing hierarchies
+h2(#edit_editing_hierarchies). Editing hierarchies
 
-Statecharts can get rather big and complex. *"Composite states":../user-guide/statechart_language#composite-state* are a way to reduce complexity and thus make statecharts easier to create, comprehend and maintain. A composite state comprises a state machine of its own within a "region":../user-guide/statechart_language#region. The states belonging to such a nested state machine are called substates. *"Orthogonal states":../user-guide/statechart_language#orthogonal-states* are a generalization of composite states, comprising two or more independent state machines in separate regions that are executed virtually concurrently.
+Statecharts can get rather big and complex. *"Composite states":../user-guide/statechart_language#sclang_composite_states* are a way to reduce complexity and thus make statecharts easier to create, comprehend and maintain. A composite state comprises a state machine of its own within a "region":../user-guide/statechart_language#sclang_regions. The states belonging to such a nested state machine are called substates. *"Orthogonal states":../user-guide/statechart_language#sclang_orthogonal_states* are a generalization of composite states, comprising two or more independent state machines in separate regions that are executed virtually concurrently.
 
-A complementary way to mitigate the size of large statecharts are *subdiagrams*. A subdiagram externalizes the possibly large region(s) contained by a composite state into a subdiagram. In this case the composite state no longer displays its substates. Instead it is visualized very similarly to a regular state. The only difference is a small icon in its lower right corner, marking it as a composite state and giving access to its internal structure: the subdiagram. This way a composite state consumes much less space and gives the user the opportunity to better envision the overall picture. Section "&quot;Using subdiagrams&quot;":#using-subdiagrams explains how to work with subdiagrams, how to create them and how to inline them again, if needed.
+A complementary way to mitigate the size of large statecharts are *subdiagrams*. A subdiagram externalizes the possibly large region(s) contained by a composite state into a subdiagram. In this case the composite state no longer displays its substates. Instead it is visualized very similarly to a regular state. The only difference is a small icon in its lower right corner, marking it as a composite state and giving access to its internal structure: the subdiagram. This way a composite state consumes much less space and gives the user the opportunity to better envision the overall picture. Section "&quot;Using subdiagrams&quot;":#edit_using_subdiagrams explains how to work with subdiagrams, how to create them and how to inline them again, if needed.
 
 Composite states resp. subdiagrams can be nested to any depth.
 
-The statechart editor provides various "refactorings":#refactorings to support editing these hierarchies.
+The statechart editor provides various "refactorings":#edit_refactorings to support editing these hierarchies.
 
 
 
 
-h2(#using-subdiagrams). Using subdiagrams
+h2(#edit_using_subdiagrams). Using subdiagrams
 
 As a statechart grows, it may easily become too big to still give a comprehensive overview of the whole model. Subdiagrams come as a solution. Basically, you can "fold away" a composite state into a subdiagram.
 
@@ -249,9 +249,9 @@ As a statechart grows, it may easily become too big to still give a comprehensiv
 
 p=. Composite state
 
-When the _Extract Subdiagram_ "refactoring":#refactorings is executed on a composite state, all containing regions are extracted into a separate diagram. The composite state no longer clutters the diagram with all its internal details, but instead appears almost like a normal state. The only difference is a small decorator icon in the lower-right corner of the state, indicating the existence of a subdiagram. When you hover over this decorator with the mouse cursor, you'll see a small preview of the subdiagram's content.
+When the _Extract Subdiagram_ "refactoring":#edit_refactorings is executed on a composite state, all containing regions are extracted into a separate diagram. The composite state no longer clutters the diagram with all its internal details, but instead appears almost like a normal state. The only difference is a small decorator icon in the lower-right corner of the state, indicating the existence of a subdiagram. When you hover over this decorator with the mouse cursor, you'll see a small preview of the subdiagram's content.
 
-Extracting a subdiagram creates "entry and exit points":../user-guide/statechart_language#entry-and-exit-points in the subdiagram as needed.
+Extracting a subdiagram creates "entry and exit points":../user-guide/statechart_language#sclang_entry_and_exit_points in the subdiagram as needed.
 
 !images/docu_subdiagram_020_preview.png(Subdiagram popup window)!
 
@@ -259,28 +259,28 @@ p=. Subdiagram popup window
 
 A click on the decorator opens the subdiagram in a separate editor tab. The breadcrumb at the top allows easy navigation throughout the hierachy levels.
 
-!images/docu_subdiagram_030_subdiagram-editor.png(Subdiagram editor)!
+!images/docu_subdiagram_030_subdiagram_editor.png(Subdiagram editor)!
 
 p=. Subdiagram editor
 
-Using the "inlining subdiagram refactoring":#inlining-subdiagram, you can turn a subdiagram back into the composite state.
+Using the "inlining subdiagram refactoring":#edit_inlining_subdiagram, you can turn a subdiagram back into the composite state.
 
 
 
 
-h2(#refactorings). Refactorings
+h2(#edit_refactorings). Refactorings
 
 Refactoring means modifying certain model aspects while maintaining the model's semantics. The statechart editor allows for the refactoring of variables, events, interfaces, and states, including composite and orthogonal states. A state's context menu contains the _Refactor_ submenu with the individual refactoring actions explained below. Depending on certain conditions, a refactoring might be executable or not, which will be explained below.
 
 
 
-h3(#renaming-variables-events-and-interfaces). Renaming variables, events and interfaces
+h3(#edit_renaming_variables_events_and_interfaces). Renaming variables, events and interfaces
 
 Using the _Rename_ refactoring, you can change the name of a variable, event or interface throughout your statechart model. Each occurrence of that name will be changed to the new name.
 
 To initiate renaming, right-click on the name of a variable, event or interface in the diagram editor, in the definition section, or in a text field in the _properties_ view, then select _Rename …_.
 
-!images/docu_refactoring-rename_010_renaming-variable.png(Renaming a variable)!
+!images/docu_refactoring_rename_010_renaming_variable.png(Renaming a variable)!
 
 p=. Renaming a variable
 
@@ -291,7 +291,7 @@ p=. Renaming a variable
 
 
 
-h3(#folding-incoming-actions). Folding incoming actions
+h3(#edit_folding_incoming_actions). Folding incoming actions
 
 When building a statechart model step by step, you may come into a situation where you have defined several transitions having the same target state and sharing a common set of actions.
 
@@ -299,7 +299,7 @@ The _Fold Incoming Actions_ refactoring moves these actions from the transitions
 
 Consider the following model:
 
-!images/docu_refactoring-fold-incoming-actions_010_example_01.png(Moving incoming actions to entry block)!
+!images/docu_refactoring_fold_incoming_actions_010_example_01.png(Moving incoming actions to entry block)!
 
 p=. Moving incoming actions to entry block
 
@@ -307,7 +307,7 @@ Only the most-right action _y += 42_ can be moved to the entry block of the targ
 
 Another aspect to take into account are transitions leading to target states that are nested in composite states. Consider the following example:
 
-!images/docu_refactoring-fold-incoming-actions_020_example_02.png(Moving incoming actions into a nested state's entry block)!
+!images/docu_refactoring_fold_incoming_actions_020_example_02.png(Moving incoming actions into a nested state's entry block)!
 
 p=. Moving incoming actions into a nested state's entry block
 
@@ -317,13 +317,13 @@ To fold incoming actions, right-click on the state to refactor, then select _Ref
 
 
 
-h3(#folding-outgoing-actions). Folding outgoing actions
+h3(#edit_folding_outgoing_actions). Folding outgoing actions
 
-The _fold outgoing actions_ refactoring is similar to "folding incoming actions":#folding-incoming-actions, except that it moves actions from outgoing transitions to the source state's exit block. To preserve model semantics, only actions that are defined on _all_ outgoing transitions will be moved. Since the execution order must be preserved, the refactoring algorithm starts with the left-most action and proceeds action by action to the right. As soon as it detects an action that is not defined on _all_ outgoing transitions, it stops moving actions to the exit block.
+The _fold outgoing actions_ refactoring is similar to "folding incoming actions":#edit_folding_incoming_actions, except that it moves actions from outgoing transitions to the source state's exit block. To preserve model semantics, only actions that are defined on _all_ outgoing transitions will be moved. Since the execution order must be preserved, the refactoring algorithm starts with the left-most action and proceeds action by action to the right. As soon as it detects an action that is not defined on _all_ outgoing transitions, it stops moving actions to the exit block.
 
-Preconditions for this refactoring are analog to "&quot;Folding incoming actions&quot;":#folding-incoming-actions. Consider the following example:
+Preconditions for this refactoring are analog to "&quot;Folding incoming actions&quot;":#edit_folding_incoming_actions. Consider the following example:
 
-!images/docu_refactoring-fold-outgoing-actions_010_example_01.png(Moving outgoing actions to exit block)!
+!images/docu_refactoring_fold_outgoing_actions_010_example_01.png(Moving outgoing actions to exit block)!
 
 p=. Moving outgoing actions to exit block
 
@@ -333,23 +333,23 @@ To fold outgoing actions, right-click on the state to refactor, then select _Ref
 
 
 
-h3(#unfolding-entry-actions). Unfolding entry actions
+h3(#edit_unfolding_entry_actions). Unfolding entry actions
 
-This refactoring is the reverse of "folding incoming actions":#folding-incoming-actions. It removes all entry actions from a target state and appends them to each of its incoming transition's actions.
+This refactoring is the reverse of "folding incoming actions":#edit_folding_incoming_actions. It removes all entry actions from a target state and appends them to each of its incoming transition's actions.
 
-Transitions crossing the borders of composite states enclosing the target state might inhibit refactoring, see section "&quot;Unfolding exit actions&quot;":#unfolding-exit-actions for an analogous example.
+Transitions crossing the borders of composite states enclosing the target state might inhibit refactoring, see section "&quot;Unfolding exit actions&quot;":#edit_unfolding_exit_actions for an analogous example.
 
 To unfold entry actions, right-click on the state to refactor, then select _Refactor → Unfold Entry Actions_ in the context menu. The menu entry is active only if there are actual actions in the state's entry block that can be moved to the state's incoming transitions while maintaining semantic equivalence and preserving execution order.
 
 
 
-h3(#unfolding-exit-actions). Unfolding exit actions
+h3(#edit_unfolding_exit_actions). Unfolding exit actions
 
-This refactoring is the reverse of "folding outgoing actions":#folding-outgoing-actions. It moves all exit actions from a source state and prepends them to each of its outgoing transition's actions.
+This refactoring is the reverse of "folding outgoing actions":#edit_folding_outgoing_actions. It moves all exit actions from a source state and prepends them to each of its outgoing transition's actions.
 
 Transitions crossing the borders of composite states enclosing the source state might inhibit refactoring. Consider the following example:
 
-!images/docu_refactoring-unfold-outgoing-actions_010_example_01.png(Unfolding exit actions to outgoing transitions)!
+!images/docu_refactoring_unfold_outgoing_actions_010_example_01.png(Unfolding exit actions to outgoing transitions)!
 
 p=. Unfolding exit actions to outgoing transitions
 
@@ -359,7 +359,7 @@ To unfold exit actions, right-click on the state to refactor, then select _Refac
 
 
 
-h3(#grouping-states-into-composite). Grouping states into composite
+h3(#edit_grouping_states_into_composite). Grouping states into composite
 
 This refactoring creates a new composite state containing the selected states. The latter must belong to the same region.
 
@@ -367,26 +367,26 @@ To execute this refactoring, select one or more states from the same region, rig
 
 
 
-h3(#extracting-subdiagram). Extracting subdiagram
+h3(#edit_extracting_subdiagram). Extracting subdiagram
 
-This refactoring extracts the regions of the selected composite or orthogonal state into a subdiagram. Entry and exit points are created as needed in the subdiagram. See section "&quot;Using subdiagrams&quot;":#using-subdiagrams for more details.
+This refactoring extracts the regions of the selected composite or orthogonal state into a subdiagram. Entry and exit points are created as needed in the subdiagram. See section "&quot;Using subdiagrams&quot;":#edit_using_subdiagrams for more details.
 
 To extract a subdiagram, right-click on the composite or orthogonal state to refactor, then select _Refactor → Extract Subdiagram_ in the context menu.
 
 
 
-h3(#inlining-subdiagram). Inlining subdiagram
+h3(#edit_inlining_subdiagram). Inlining subdiagram
 
-This refactoring inlines the selected node's subdiagram in order to show it directly in the composite state's diagram region. See section "&quot;Using subdiagrams&quot;":#using-subdiagrams for more details.
+This refactoring inlines the selected node's subdiagram in order to show it directly in the composite state's diagram region. See section "&quot;Using subdiagrams&quot;":#edit_using_subdiagrams for more details.
 
 To inline a subdiagram, right-click on a composite state with a subdiagram, then select _Refactor → Inline Subdiagram_ in the context menu.
 
 
 
 
-h2(#using-editing-proposals). Using editing proposals
+h2(#edit_using_editing_proposals). Using editing proposals
 
-h3(#using-text-proposals). Using text proposals
+h3(#edit_using_text_proposals). Using text proposals
 
 Proposals assist you when writing statechart language expressions. Whenever editing some text anywhere in the graphical statechart editor or in the properties view, at any point you can press the @[Ctrl+Space]@ key combination to get some context-sensitive help.
 
@@ -398,7 +398,7 @@ You can either use the mouse or the keyboard to select and insert a proposal in 
 
 
 
-h3(#using-action-proposals-on-states). Using actions proposals on states
+h3(#edit_using_action_proposals_on_states). Using actions proposals on states
 
 When a state is selected, @[Ctrl+Space]@ opens a popup window showing a context-sensitive menu with possible action choices to perform on the state.
 
@@ -411,11 +411,11 @@ You can either use the mouse or the keyboard to execute a proposal:
 
 
 
-h2(#comparing-statecharts). Comparing statecharts
+h2(#edit_comparing_statecharts). Comparing statecharts
 
-The statechart editor allows for comparing two or even three statecharts to each other, displaying the results, and possibly merging selected differences. Figure "&quot;Comparing two statecharts&quot;":#fig_comparing_two_statecharts shows a sample comparison result.
+The statechart editor allows for comparing two or even three statecharts to each other, displaying the results, and possibly merging selected differences. Figure "&quot;Comparing two statecharts&quot;":#edit_fig_comparing_two_statecharts shows a sample comparison result.
 
-p(#fig_comparing_two_statecharts). 
+p(#edit_fig_comparing_two_statecharts). 
 
 !images/docu_comparing_statecharts_010_result.png(Comparing two statecharts)!
 
@@ -423,7 +423,7 @@ p=. Comparing two statecharts
 
 
 
-h3(#comparing-a-statechart-to-its-local-history). Comparing a statechart to its local history
+h3(#edit_comparing_a_statechart_to_its_local_history). Comparing a statechart to its local history
 
 Whenever a statechart is saved to its statechart file, the previous version of the file is saved to the local history.
 
@@ -438,7 +438,7 @@ To compare a statechart to an older version in the local history, proceed as fol
 
 
 
-h3(#comparing-two-statecharts). Comparing two statecharts
+h3(#edit_comparing_two_statecharts). Comparing two statecharts
 
 To compare two statecharts, proceed as follows:
 
@@ -447,7 +447,9 @@ To compare two statecharts, proceed as follows:
 # In the context menu, select _Compare With → Each Other_.
 # The comparison results are shown.
 
-h3(#comparing-three-statecharts). Comparing three statecharts
+
+
+h3(#edit_comparing_three_statecharts). Comparing three statecharts
 
 To compare three statecharts, proceed as follows:
 
@@ -461,12 +463,12 @@ To compare three statecharts, proceed as follows:
 
 
 
-h2(#exporting-a-statechart-as-an-image-file). Exporting a statechart as an image file
+h2(#edit_exporting_a_statechart_as_an_image_file). Exporting a statechart as an image file
 
 A complete statechart or parts of it can be saved as an image file as shown in the following steps:
 
 * In the statechart editor:
-** To create an image file _of the whole statechart_ with all regions and definition section, right-click on the canvas.
+** To create an image file _of the whole statechart_ with all regions and definition section, right-click on the q.
 ** To create an image file _of some statechart elements_, select these elements and right-click on one of them. In the example below, the main region has been selected.
 * The context menu appears.<br/>!images/docu_exporting_statechart_as_image_010_save_as_menu_item.png(Selecting the "Save As Image File..." menu item)!
 * In the context menu, select _File → Save As Image File..._.
@@ -481,15 +483,15 @@ A complete statechart or parts of it can be saved as an image file as shown in t
 
 
 
-h2(#working-with-statechart-tasks). Working with statechart tasks
+h2(#edit_working_with_statechart_tasks). Working with statechart tasks
 
 While you are busily developing a statechart, it is quite common that you have ideas about what else you could or should do to improve the statechart. However, in order to not get side-tracked, you decide to do it later. Examples are to write a proper documentation for a state, to refine a transition whose final specification you don't have yet, etc.
 
 For all these and other purposes you can define _tasks_ in all places in your statechart where a comment is allowed. A task is a special comment comprising the words @FIXME@ or @TODO@. Adding one of these words to a comment is called "tagging" the comment as a task.
 
-The nice thing is that you don't have to remember all the places you took a note and defined a task. YAKINDU Statechart Tools lists all of your tasks in the _tasks_ view. Figure "&quot;Tasks defined by tags in the statechart showing up in the _tasks_ view&quot;":#fig_tasks-defined-by-tags-in-the-statechart-showing-up-in-the-tasks-view is showing an example with various tasks being defined in a transition, in a state's behavior, in a state's documentation, and in the statecharts definition section.
+The nice thing is that you don't have to remember all the places you took a note and defined a task. YAKINDU Statechart Tools lists all of your tasks in the _tasks_ view. Figure "&quot;Tasks defined by tags in the statechart showing up in the _tasks_ view&quot;":#edit_fig_tasks_defined_by_tags_in_the_statechart_showing_up_in_the_tasks_view is showing an example with various tasks being defined in a transition, in a state's behavior, in a state's documentation, and in the statecharts definition section.
 
-p(#fig_tasks-defined-by-tags-in-the-statechart-showing-up-in-the-tasks-view). 
+p(#edit_fig_tasks_defined_by_tags_in_the_statechart_showing_up_in_the_tasks_view). 
 
 !images/docu_task_tags_010_task_view.png(Tasks defined by tags in the statechart showing up in the "tasks" view)!
 
@@ -509,7 +511,7 @@ The _tasks_ view is updated only when the statechart is saved.
 
 
 
-###.. h3(#defining-task-tags). Defining task tags
+###.. h3(#edit_defining_task_tags). Defining task tags
 
 # In the main menu, select _Window → Preferences_. The _Preferences_ Dialog opens.
 # In the _Preferences_ Dialog goto _Java → Compiler → Task Tags_ to edit your task tag preferences. A task tag has one of the priorities _High_, _Normal_, or _Low_.
@@ -517,7 +519,7 @@ The _tasks_ view is updated only when the statechart is saved.
 
 
 
-h2(#using-the-example_wizard). Using the example wizard
+h2(#edit_using_the_example_wizard). Using the example wizard
 
 The _example wizard_ gives you convenient access to the examples in the public YAKINDU Statechart Tools "examples repository":https://github.com/Yakindu/examples. You can browse the available examples and read their documentation in the wizard. By a simple click you can instantiate an example as a new Eclipse project. Within such a sample project, you can explore and modify the state machine models using the statechart editor, run the state machines in the simulator, generate source code, etc.
 
@@ -525,24 +527,24 @@ Upon its first invocation, the example wizard downloads the complete examples re
 
 
 
-h3(#downloading-the-examples-repository). Downloading the examples repository
+h3(#edit_downloading_the_examples_repository). Downloading the examples repository
 
 When you start the example wizard for the first time, it does not yet have any examples available that it could show to you. Thus downloading the online examples repository is required as a special first step.
 
 # In order to start the example wizard, select _File → New → Example…_ in the YAKINDU Statechart Tools main menu. The _New Example_ dialog opens.
 # In the _New Example_ dialog, select _YAKINDU Statechart Examples_, then click on _Next >_. The example wizard opens.
 # The example wizard outputs a message saying that it could not find any examples and offers to download them.
-# Click on the _Download_ button. The example wizard downloads the online examples repository and creates a clone of it on your local computer. This can take some time. – Downloading can fail for a variety of reasons, not being able to access the Github server being one of them. If this happens, don't panic – and read how to "manually create a local copy of the examples repository":#manually-creating-a-local-copy-of-the-examples-repository.
+# Click on the _Download_ button. The example wizard downloads the online examples repository and creates a clone of it on your local computer. This can take some time. – Downloading can fail for a variety of reasons, not being able to access the Github server being one of them. If this happens, don't panic – and read how to "manually create a local copy of the examples repository":#edit_manually_creating_a_local_copy_of_the_examples_repository.
 
 !images/docu_example_wizard_download.png(Example wizard when invoked for the first time)!
 
 p=. Example wizard when invoked for the first time
 
-When the download is completed, you can "browse the examples repository":#browsing-the-example-repository.
+When the download is completed, you can "browse the examples repository":#edit_browsing_the_example_repository.
 
 
 
-h3(#changing-the-repository-location). Changing the repository location
+h3(#edit_changing_the_repository_location). Changing the repository location
 
 You can change the location used by the example wizard to store the online repository's local clone.
 
@@ -557,7 +559,7 @@ You can change the storage location of your local examples repository clone at a
 
 
 
-h3(#browsing-the-example-repository). Browsing the examples repository
+h3(#edit_browsing_the_example_repository). Browsing the examples repository
 
 The example wizard shows the available examples on the left-hand side.
 
@@ -571,7 +573,7 @@ p=. Example wizard showing all available examples
 
 
 
-h3(#manually-creating-a-local-copy-of-the-examples-repository). Manually creating a local copy of the examples repository
+h3(#edit_manually_creating_a_local_copy_of_the_examples_repository). Manually creating a local copy of the examples repository
 
 The _example wizard_ tries to download a copy of the YAKINDU Statechart Tools examples repository and install it on your local machine. However, if your Internet access is restricted or you don't have Internet access at all, this will fail.
 
@@ -611,7 +613,7 @@ Alternatively, you can clone the repository. Cloning the examples repository con
 
 
 
-h3(#updating-the-examples-respository). Updating the examples repository
+h3(#edit_updating_the_examples_respository). Updating the examples repository
 
 When the example wizard is started and the storage location is a clone of the online examples directory, it checks whether there are any updates in the online examples repository. If new examples are available or existing examples have changed in the online repository, the example wizard offers to update your local examples repository clone accordingly.
 
@@ -625,7 +627,7 @@ If your storage location is a plain directory and not a clone of the online exam
 
 
 
-h3(#contributing-your-own-examples). Contributing your own examples
+h3(#edit_contributing_your_own_examples). Contributing your own examples
 
 If you have a project that you want to share with the community, you can contribute it as an example. Once the YAKINDU team has reviewed and applied your contribution, it will be available for all users of YAKINDU Statechart Tools via the example wizard's update functionality.
 
@@ -634,34 +636,39 @@ For more information on how to contribute examples, please visit our "Wiki page"
 
 
 
-h2(#preferences). Preferences
+h2(#edit_preferences). Preferences
 
 Many aspects of YAKINDU Statechart Tools can be configured by _preferences_. You can find them here:
 
 # In the main menu, select _Window → Preferences_. The _Preferences_ dialog appears.
 # In the navigation on the left-hand side, scroll to _YAKINDU SCT_. Open it and its subentries as needed.
-# Click on an entry to display the associated preference pane on the right-hand side of the _Preferences_ dialog, see e.g. figure "Preferences: Diagram Appearance":#fig_preferences-diagram-appearance.
+# Click on an entry to display the associated preference pane on the right-hand side of the _Preferences_ dialog, see e.g. figure "Preferences: Diagram Appearance":#edit_fig_preferences_diagram_appearance.
 
 In the subsequent sections we will quickly walk through the preferences.
 
-h3(#diagram-appearance). Diagram appearance
 
-p(#fig_preferences-diagram-appearance). 
+
+h3(#edit_diagram_appearance). Diagram appearance
+
+p(#edit_fig_preferences_diagram_appearance). 
 !images/docu_preferences_010_diagram_appearance_01.png(Preferences: Diagram Appearance)!
 
 p=. Preferences: Diagram Appearance
 
-h4(#colors-and-line-styles). Colors and line styles
 
-The "diagram appearance":#fig_preferences-diagram-appearance preferences define default colors for the backgrounds and borders of states and regions, as well as the default routing style for transitions and other lines, with _oblique_ and _rectilinear_ being the options at your choice.
+h4(#edit_colors_and_line_styles). Colors and line styles
+
+The "diagram appearance":#edit_fig_preferences_diagram_appearance preferences define default colors for the backgrounds and borders of states and regions, as well as the default routing style for transitions and other lines, with _oblique_ and _rectilinear_ being the options at your choice.
 
 Please keep in mind that colors and line styles will apply to _new_ elements only. Existing regions, states, etc. will remain as they are. However, you can modify the properties of an existing element anytime using its _properties_ view.
 
-h4(#showing-transition-priorities). Showing transition priorities
 
-In order to display "transition priorities":../user-guide/statechart_language.html#transition-priorities in a statechart, set a check mark at the respective preference option. Section "&quot;Transition priorities&quot;":../user-guide/statechart_language.html#transition-priorities explains what transition priorities are and shows an example.
+h4(#edit_showing_transition_priorities). Showing transition priorities
 
-h4(#disabling-live-validation). Disabling live validation
+In order to display "transition priorities":../user-guide/statechart_language.html#sclang_transition_priorities in a statechart, set a check mark at the respective preference option. Section "&quot;Transition priorities&quot;":../user-guide/statechart_language.html#sclang_transition_priorities explains what transition priorities are and shows an example.
+
+
+h4(#edit_disabling_live_validation). Disabling live validation
 
 While you are editing a statechart, the statechart editor validates your model on each and every modification you make. That's very helpful, because the editor provides you with instant feedback, so you can see immediately what is right, wrong, or dubious, and you can take corrective action, if needed.
 
@@ -669,20 +676,20 @@ However, on very large and complex statechart models, validation may take a cons
 
 
 
-h3(#example-wizard). Example wizard
+h3(#edit_example_wizard). Example wizard
 
-p(#fig_preferences-example-wizard). 
+p(#edit_fig_preferences_example_wizard). 
 !images/docu_preferences_020_examples_01.png(Preferences: Example wizard)!
 
 p=. Preferences: Example wizard
 
-You can change the example wizard storage location here. This is a local directory where the "example wizard":#example-wizard stores your local clone of the examples Git repository. The default is the _sct_examples_ directory in your home directory.
+You can change the example wizard storage location here. This is a local directory where the "example wizard":#edit_example_wizard stores your local clone of the examples Git repository. The default is the _sct_examples_ directory in your home directory.
 
 
 
-h3(#expressions-preferences). Expressions preferences
+h3(#edit_expressions_preferences). Expressions preferences
 
-p(#fig_preferences-expressions). 
+p(#edit_fig_preferences_expressions). 
 !images/docu_preferences_030_expressions_01.png(Preferences: Expressions)!
 
 p=. Preferences: Expressions
@@ -690,9 +697,9 @@ p=. Preferences: Expressions
 Certain dialogs in the statechart editor allow you to opt for never seeing them again. By clicking on the _Clear_ button on this preference pane these hidden dialogs will be shown again at their respective locations.
 
 
-h4(#expression-syntax-coloring). Expression syntax coloring
+h4(#edit_expression_syntax_coloring). Expression syntax coloring
 
-p(#fig_preferences-expression-syntax-coloring). 
+p(#edit_fig_preferences_expression_syntax_coloring). 
 !images/docu_preferences_040_expressions_syntax_coloring_01.png(Preferences: Expression syntax coloring)!
 
 p=. Preferences: Expression syntax coloring
@@ -700,9 +707,9 @@ p=. Preferences: Expression syntax coloring
 This preferences pane defines foreground color, background color, font, and style for displaying certain syntactical elements in statechart language texts.
 
 
-h4(#expression-templates). Expression templates
+h4(#edit_expression_templates). Expression templates
 
-p(#fig_preferences-expression-templates). 
+p(#edit_fig_preferences_expression_templates). 
 !images/docu_preferences_050_expressions_template_01.png(Preferences: Expression templates)!
 
 p=. Preferences: Expression templates
@@ -715,9 +722,9 @@ On this preference pane you can create, edit, and delete statechart language tem
 
 
 
-h3(#generator-model). Generator model
+h3(#edit_generator_model). Generator model
 
-p(#fig_preferences-generator-model). 
+p(#edit_fig_preferences_generator_model). 
 !images/docu_preferences_060_generator_model_01.png(Preferences: Generator model)!
 
 p=. Preferences: Generator model
@@ -725,9 +732,9 @@ p=. Preferences: Generator model
 By default, code generators automatically generate artifacts defined by generator models in _.sgen_ files. Using this preference setting, you can switch this behavior off or on.
 
 
-h4(#generator-model-refactoring). Generator model refactoring
+h4(#edit_generator_model_refactoring). Generator model refactoring
 
-p(#fig_preferences-generator-model-refactoring). 
+p(#edit_fig_preferences_generator_model_refactoring). 
 !images/docu_preferences_070_generator_model_refactoring_01.png(Preferences: Generator model refactoring)!
 
 p=. Preferences: Generator model refactoring
@@ -735,9 +742,9 @@ p=. Preferences: Generator model refactoring
 Change these preference settings for refactoring in generator models as you see fit.
 
 
-h4(#generator-model-syntax-coloring). Generator model syntax coloring
+h4(#edit_generator_model_syntax_coloring). Generator model syntax coloring
 
-p(#fig_preferences-generator-model-syntax-coloring). 
+p(#edit_fig_preferences_generator_model_syntax_coloring). 
 !images/docu_preferences_080_generator_syntax_coloring_01.png(Preferences: Generator model syntax coloring)!
 
 p=. Preferences: Generator model syntax coloring
@@ -745,9 +752,9 @@ p=. Preferences: Generator model syntax coloring
 This preferences pane defines foreground color, background color, font, and style for displaying certain syntactical elements in generator model texts.
 
 
-h4(#generator-model-templates). Generator model templates
+h4(#edit_generator_model_templates). Generator model templates
 
-p(#fig_preferences-generator-model-templates). 
+p(#edit_fig_preferences_generator_model_templates). 
 !images/docu_preferences_090_generator_templates_01.png(Preferences: Generator model templates)!
 
 p=. Preferences: Generator model templates
@@ -762,7 +769,7 @@ On this preference pane you can create, edit, and delete generator model languag
 
 h3(#edit_simulation). Simulation
 
-p(#fig_preferences-simulation). 
+p(#edit_fig_preferences_simulation). 
 !images/docu_preferences_100_simulation_01.png(Preferences: Simulation)!
 
 p=. Preferences: Simulation

@@ -144,12 +144,12 @@ That means that we are using the term _statechart_ to emphasize the graphical re
 
 h2(#glossary_statechart_editor). Statechart editor
 
-The *statechart editor* is a major component of YAKINDU Statechart Tools and allows to graphically edit statecharts. It is descibed in section "&quot;Editor UI&quot;":../user-guide/editing_statecharts.html#editor-ui.
+The *statechart editor* is a major component of YAKINDU Statechart Tools and allows to graphically edit statecharts. It is descibed in section "&quot;Editor UI&quot;":../user-guide/editing_statecharts#edit_editor_ui.
 
 
 h2(#glossary_statechart_model). Statechart model
 
-A *statechart model* is a "statechart":#glossary_statechart a major component of YAKINDU Statechart Tools and allows to graphically edit statecharts. It is descibed in section "&quot;Editor UI&quot;":../user-guide/editing_statecharts.html#editor-ui.
+A *statechart model* is a "statechart":#glossary_statechart a major component of YAKINDU Statechart Tools and allows to graphically edit statecharts. It is descibed in section "&quot;Editor UI&quot;":../user-guide/editing_statecharts#edit_editor_ui.
 
 
 h2(#glossary_statechart_model_file). Statechart model file
@@ -159,7 +159,7 @@ YAKINDU Statechart Tools stores a "statechart":#glossary_statechart (or statecha
 
 h2(#glossary_state). State
 
-A *state* is one of the fundamental concepts of "statecharts":#glossary_statechart. Please see details in section "&quot;State&quot;":../user-guide/statechart_language.html#state.
+A *state* is one of the fundamental concepts of "statecharts":#glossary_statechart. Please see details in section "&quot;State&quot;":../user-guide/statechart_language.html#sclang_states.
 
 
 h2(#glossary_state_machine). State machine
@@ -176,7 +176,7 @@ h2(#glossary_state_machine_code). State machine code
 
 h2(#glossary_transition). Transition
 
-A *transition* is one of the fundamental concepts of "statecharts":#glossary_statechart. It leads from a source "state":#glossary_state to a target state. Details can be found in section "&quot;Transition&quot;":../user-guide/statechart_language.html#transition.
+A *transition* is one of the fundamental concepts of "statecharts":#glossary_statechart. It leads from a source "state":#glossary_state to a target state. Details can be found in section "&quot;Transition&quot;":../user-guide/statechart_language#sclang_transitions.
 
 
 h2(#glossary_type_system). Type system
