@@ -11,6 +11,9 @@
  */
 package org.yakindu.sct.model.stext.validation;
 
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,6 +48,7 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
+import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Direction;
 import org.yakindu.base.types.Event;
@@ -99,7 +103,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-
 /**
  * Several validations for nonsensical expressions.
  * 
@@ -427,6 +430,18 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					}
 				}
 			}
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkAnnotations(final Statechart statechart) {
+		Annotation eventDriven = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
+		Annotation cycleBased = statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
+		if(eventDriven != null && cycleBased != null) {
+			String errorMsg = String.format(CONTRADICTORY_ANNOTATIONS, String.join(
+					", ", eventDriven.getType().toString(), cycleBased.getType().toString()
+					));
+			error(errorMsg, cycleBased, null, -1);
 		}
 	}
 
