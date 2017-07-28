@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.generator.core.execution;
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -62,12 +61,14 @@ public class GeneratorExecutorLookup {
 		Injector injector = createInjector(entry, description, generatorId);
 		injector.injectMembers(executor);
 		ITypeSystem typeSystem = injector.getInstance(ITypeSystem.class);
+		if (entry.getElementRef() == null || entry.getElementRef().eResource() == null) {
+			throw new RuntimeException("Could not resolve reference to model ");
+		}
 		if (typeSystem instanceof AbstractTypeSystem) {
 			ResourceSet set = entry.getElementRef().eResource().getResourceSet();
 			set.getResources().add(((AbstractTypeSystem) typeSystem).getResource());
 			EcoreUtil.resolveAll(set);
 		}
-		Assert.isNotNull(entry.getElementRef().eResource());
 
 		return executor;
 	}
