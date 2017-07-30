@@ -481,23 +481,10 @@ class Statemachine {
 	
 	def protected internalScopeFunctions (ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
-			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-				private void raise«event.name.asEscapedName»(«event.typeSpecifier.targetLanguageName» value) {
-					«event.valueIdentifier» = value;
-					«event.identifier» = true;
-				}
-				
-				private «event.typeSpecifier.targetLanguageName» get«event.name.asEscapedName»Value() {
-					«event.getIllegalAccessValidation()»
-					return «event.valueIdentifier»;
-				}
+			«event.internalEventRaiser»
 
-			«ELSE»
-				private void raise«event.name.asEscapedName»() {
-					«event.identifier» = true;
-				}
+			«event.internalEventValueAccess»
 
-			«ENDIF»
 		«ENDFOR»
 		«FOR internal : flow.internalScopes»
 			«IF internal.hasOperations»
@@ -509,6 +496,28 @@ class Statemachine {
 			«ENDIF»
 		«ENDFOR»
 	'''
+	
+	def protected internalEventRaiser(EventDefinition it) '''
+		private void raise«name.asEscapedName»(«IF hasPayload»«typeSpecifier.targetLanguageName» value«ENDIF») {
+			«IF hasPayload»«valueIdentifier» = value;«ENDIF»
+			«identifier» = true;
+		}
+	'''
+
+	def protected internalEventValueAccess(EventDefinition it) '''
+		«IF hasPayload»
+			private «typeSpecifier.targetLanguageName» get«name.asEscapedName»Value() {
+				«getIllegalAccessValidation()»
+				return «valueIdentifier»;
+			}
+		«ENDIF»
+	'''
+
+
+	def hasPayload(Event it) {
+		type !== null && !isSame(type, getType(GenericTypeSystem.VOID))
+	} 
+	
 	
 	def protected defaultInterfaceFunctions(ExecutionFlow flow, GeneratorEntry entry) '''
 		«IF flow.defaultScope != null»
