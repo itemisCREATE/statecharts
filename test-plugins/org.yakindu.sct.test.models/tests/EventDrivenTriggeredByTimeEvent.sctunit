@@ -1,0 +1,40 @@
+testclass EventDrivenTriggeredByTimeEvent for statechart eventdriven.EventDrivenTriggeredByTimeEvent {
+
+	@Test operation timeEventTriggersRunCycle() {
+		enter
+		
+		assert active(eventdriven.EventDrivenTriggeredByTimeEvent.r.A)
+		assert x == 0
+		
+		proceed 999 ms
+
+		assert active(eventdriven.EventDrivenTriggeredByTimeEvent.r.A)
+		assert x == 0
+		
+		proceed 1 ms
+
+		assert active(eventdriven.EventDrivenTriggeredByTimeEvent.r.B)
+		assert x == 0
+		assert transition_count == 1
+		
+		proceed 1s
+		assert active(eventdriven.EventDrivenTriggeredByTimeEvent.r.A)
+		assert x == 0
+		assert transition_count == 2
+		
+		proceed 999s
+		assert active(eventdriven.EventDrivenTriggeredByTimeEvent.r.B)
+		assert x == 0
+		assert transition_count == 1001
+
+		proceed 999s
+		assert active(eventdriven.EventDrivenTriggeredByTimeEvent.r.A)
+		assert x == 0
+		assert transition_count == 2000
+		
+		exit
+	}
+
+
+
+}

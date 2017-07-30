@@ -1,0 +1,25 @@
+testclass EventDrivenInternalEvent for statechart eventdriven.EventDrivenInternalEvent {
+
+	@Test operation checkInternlEventQueueing() {
+		enter
+		
+		assert active(eventdriven.EventDrivenInternalEvent.r1.A)
+		assert active(eventdriven.EventDrivenInternalEvent.r2.C)
+		assert active(eventdriven.EventDrivenInternalEvent.check.VALID)
+		
+		raise start
+		
+		// after raising start the internal event must have triggerd 
+		assert active(eventdriven.EventDrivenInternalEvent.r1.B)
+		assert active(eventdriven.EventDrivenInternalEvent.r2.D)
+
+		assert active(eventdriven.EventDrivenInternalEvent.check.VALID)
+		assert active(eventdriven.EventDrivenInternalEvent.check.MULTIPLEEVENTS)
+		assert i1_sequence == 2
+		assert i2_sequence == 3
+		
+		exit
+	}
+
+
+}
