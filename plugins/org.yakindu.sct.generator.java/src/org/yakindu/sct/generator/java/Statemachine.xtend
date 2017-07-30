@@ -28,6 +28,9 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.base.types.Event
+import java.util.Set
+import java.util.TreeSet
 
 class Statemachine {
 	
@@ -72,15 +75,30 @@ class Statemachine {
 		}
 	'''
 	
+	
+	
 	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
-		«IF entry.createInterfaceObserver && flow.hasOutgoingEvents»
-			import java.util.LinkedList;
-			import java.util.List;
-		«ENDIF»
-		«IF flow.timed»
-			import «entry.getBasePackageName()».ITimer;
-		«ENDIF»
+		«FOR importEntry : flow.imports(entry)»
+			import «importEntry»;
+		«ENDFOR»
 	'''
+	
+	def protected imports(ExecutionFlow it, GeneratorEntry entry) {
+		// we need a sorted set for the imports
+		val Set<String> importSet = new TreeSet<String>()	
+		
+		if (entry.createInterfaceObserver && hasOutgoingEvents) {
+			importSet += "java.util.List"
+			importSet += "java.util.LinkedList"
+		}
+		
+		if (timed) {
+			importSet += "" + entry.getBasePackageName() + ".ITimer"
+		}
+		
+		return importSet
+	}
+	
 	
 	def protected createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
 		«FOR scope : flow.interfaceScopes»
