@@ -109,14 +109,9 @@ class Statemachine {
 		
 		private final boolean[] timeEvents = new boolean[«flow.timeEvents.size»];
 		«ENDIF»
-		«FOR event : flow.internalScopeEvents»
-			private boolean «event.identifier»;
-			
-			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-				private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
-
-			«ENDIF»
-		«ENDFOR»
+		
+		«flow.internalEventFields»		
+		
 		«FOR variable : flow.internalScopeVariables SEPARATOR newLine AFTER newLine»
 			«IF !variable.const»
 				«variable.fieldDeclaration»
@@ -141,6 +136,29 @@ class Statemachine {
 			«ENDIF»
 		«ENDFOR»
 	'''
+	
+	def protected internalEventFields(ExecutionFlow flow) '''
+		«FOR event : flow.internalScopeEvents»
+
+			«event.internalEventField»	
+			«event.internalEventValueField»
+		«ENDFOR»
+	'''
+	
+	def protected internalEventField(EventDefinition it) '''
+			private boolean «event.identifier»;
+	'''
+	
+	def protected internalEventValueField(EventDefinition it) '''
+		«IF hasPayload»
+			private «typeSpecifier.targetLanguageName» «valueIdentifier»;
+		«ENDIF»
+	'''
+	
+	def hasInternalEvents(ExecutionFlow it) {
+		! flow.internalScopeEvents.empty
+	}
+	
 	//reused by interfaces
 	def protected fieldDeclaration(VariableDefinition variable) {
 		'''private «variable.typeSpecifier.targetLanguageName» «variable.identifier»;
