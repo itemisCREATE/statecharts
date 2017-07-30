@@ -5,7 +5,8 @@ Bundle-SymbolicName: org.yakindu.sct.generator.java;singleton:=true
 Bundle-Version: 3.0.0.qualifier
 Require-Bundle: org.yakindu.sct.model.stext,
  org.yakindu.sct.generator.core,
- org.yakindu.sct.generator.genmodel
+ org.yakindu.sct.generator.genmodel,
+ org.yakindu.sct.model.stext.lib;bundle-version="3.0.0"
 Bundle-Vendor: statecharts.org
 Export-Package: org.yakindu.sct.generator.java,
  org.yakindu.sct.generator.java.features,
