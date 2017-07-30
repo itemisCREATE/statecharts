@@ -14,7 +14,6 @@ testclass EventDrivenInternalEvent for statechart eventdriven.EventDrivenInterna
 		assert active(eventdriven.EventDrivenInternalEvent.r2.D)
 
 		assert active(eventdriven.EventDrivenInternalEvent.check.VALID)
-		assert active(eventdriven.EventDrivenInternalEvent.check.MULTIPLEEVENTS)
 		assert i1_sequence == 2
 		assert i2_sequence == 3
 		
