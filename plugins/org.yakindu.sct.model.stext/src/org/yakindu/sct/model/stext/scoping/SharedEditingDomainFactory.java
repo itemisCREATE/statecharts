@@ -8,7 +8,7 @@
  * committers of YAKINDU - initial API and implementation
  *
 */
-package org.yakindu.sct.ui.editor.partitioning;
+package org.yakindu.sct.model.stext.scoping;
 
 import java.io.IOException;
 
