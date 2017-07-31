@@ -182,6 +182,7 @@ sc_runCycle(handle);
 
 ==</div>==
 
+bq. *Please note:* In the cycle-based execution scheme, an event that has been raised internally using the "_raise_ statement":statechart_language#raising-an-event is visible "downstream" in the run cycle only, i.e. in regions and the states therein that have not yet been processed in the current run cycle. Everything that is "upstream" in the run cycle cannot "see" this event. This is semantically different from the event-driven execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":statechart_language#raising-and-processing-an-event. 
 
 
 h4(#generating_code_event-driven_execution_scheme). Event-driven execution scheme
@@ -196,6 +197,8 @@ bc. sc_raiseEventA(handle);
 sc_raiseEventB(handle);
 
 ==</div>==
+
+bq. *Please note:* In the event-driven execution scheme, an event that has been raised internally using the "_raise_ statement":statechart_language#raising-an-event is not immediately acted upon by active states "downstream" in the event cycle, because only a single event can be processed at a time, which is the event that caused the run cycle to execute in the first place. The internally-raised event will trigger its own run-to-completion step subsequently, and it will thus be visible to all active states. This is semantically different from the cycle-based execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":statechart_language#raising-and-processing-an-event. 
 
 
 
