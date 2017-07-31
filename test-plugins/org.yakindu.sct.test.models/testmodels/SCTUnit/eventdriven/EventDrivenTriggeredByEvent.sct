@@ -8,7 +8,7 @@
       <vertices xsi:type="sgraph:State" xmi:id="_afHugXNqEee07dEgYYRu0Q" specification="always / x+=1" name="A" incomingTransitions="_afKKwXNqEee07dEgYYRu0Q _15vKYHOHEee07dEgYYRu0Q">
         <outgoingTransitions xmi:id="_eiyYQHNqEee07dEgYYRu0Q" specification="e" target="_eixxMHNqEee07dEgYYRu0Q"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_eixxMHNqEee07dEgYYRu0Q" specification="always / x+=1" name="B" incomingTransitions="_eiyYQHNqEee07dEgYYRu0Q">
+      <vertices xsi:type="sgraph:State" xmi:id="_eixxMHNqEee07dEgYYRu0Q" specification="always / x+=1&#xA;&#xA;after 100000s / x+=0" name="B" incomingTransitions="_eiyYQHNqEee07dEgYYRu0Q">
         <outgoingTransitions xmi:id="_15vKYHOHEee07dEgYYRu0Q" specification="e" target="_afHugXNqEee07dEgYYRu0Q"/>
       </vertices>
     </regions>
