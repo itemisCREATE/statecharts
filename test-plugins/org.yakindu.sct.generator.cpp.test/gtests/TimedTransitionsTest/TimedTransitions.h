@@ -9,6 +9,10 @@
 /*! \file Header of the state machine 'TimedTransitions'.
 */
 
+/*! Define indices of states in the StateConfVector */
+#define SCVI_MAIN_REGION_START 0
+#define SCVI_MAIN_REGION_END 0
+
 class TimedTransitions : public TimedStatemachineInterface, public StatemachineInterface
 {
 	
@@ -21,9 +25,9 @@ class TimedTransitions : public TimedStatemachineInterface, public StatemachineI
 		/*! Enumeration of all states */ 
 		typedef enum
 		{
+			TimedTransitions_last_state,
 			main_region_Start,
-			main_region_End,
-			TimedTransitions_last_state
+			main_region_End
 		} TimedTransitionsStates;
 		
 		
