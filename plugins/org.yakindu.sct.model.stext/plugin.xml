@@ -17,4 +17,11 @@
             type="sct">
       </parser>
    </extension>
+       <!-- Shared Editing Domain-->
+     <extension
+         point="org.eclipse.emf.transaction.editingDomains">
+      <editingDomain
+            factory="org.yakindu.sct.model.stext.scoping.SharedEditingDomainFactory"
+            id="org.yakindu.sct.domain"/>
+   </extension>
 </plugin>

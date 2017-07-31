@@ -41,7 +41,7 @@ public class URI2ResourceDescriptionCache {
 	}
 
 	public IResourceDescription get(URI uri) {
-		ResourceSet set = getEditingDomain().getResourceSet();
+		ResourceSet set = getResourceSet();
 		Resource resource = set.getResource(uri, true);
 		if (resource != null) {
 			IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(uri);
@@ -55,4 +55,9 @@ public class URI2ResourceDescriptionCache {
 		}
 		return null;
 	}
+
+	protected ResourceSet getResourceSet() {
+		return getEditingDomain().getResourceSet();
+	}
+
 }
