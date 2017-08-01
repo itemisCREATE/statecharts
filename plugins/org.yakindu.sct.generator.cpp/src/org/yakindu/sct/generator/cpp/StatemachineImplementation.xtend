@@ -30,14 +30,15 @@ import static org.eclipse.xtext.util.Strings.*
 
 class StatemachineImplementation implements IContentTemplate {
 	
-	@Inject extension Naming
-	@Inject extension Navigation
-	@Inject extension FlowCode
-	@Inject extension GenmodelEntriesExtension
-	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension INamingService
-	@Inject extension ExpressionCode
+	@Inject protected extension Naming
+	@Inject protected extension Navigation
+	@Inject protected extension FlowCode
+	@Inject protected extension GenmodelEntriesExtension
+	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension INamingService
+	@Inject protected extension ExpressionCode
 	@Inject protected extension StateVectorExtensions
+	@Inject protected extension EventCode
 	
 	protected GeneratorEntry entry
 	
@@ -51,6 +52,8 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		/*! \file Implementation of the state machine '«name»'
 		*/
+		
+		«usingNamespaces»
 		
 		«constructorDefinition»
 		
@@ -81,27 +84,42 @@ class StatemachineImplementation implements IContentTemplate {
 		«interfaceFunctions»
 		
 		«functionImplementations»
+		
+		«additionalFunctions»
 	'''
+	}
+	
+	def protected usingNamespaces(ExecutionFlow it) {
+		''''''
+	}
+	
+	def additionalFunctions(ExecutionFlow it) {
+		/* Hook for child classes */
+		''''''
 	}
 	
 	def constructorDefinition(ExecutionFlow it) '''
 		«module»::«module»()
 		{
-			
-			«scopes.filter(typeof(StatechartScope)).filter[hasOperations && !entry.useStaticOPC].map['''«OCB_Instance» = null;'''].join('\n')»
-			«IF hasHistory»
-				
-				for (int i = 0; i < «historyStatesConst»; ++i)
-					historyVector[i] = «null_state»;
-			«ENDIF»
-			
-			stateConfVectorPosition = 0;
-			
-			«IF timed»
-				«timerInstance» = null;
-			«ENDIF»
+			«constructorBody(it)»
 		}
 	'''
+	
+	protected def CharSequence constructorBody(ExecutionFlow it)
+		'''
+		«scopes.filter(typeof(StatechartScope)).filter[hasOperations && !entry.useStaticOPC].map['''«OCB_Instance» = null;'''].join('\n')»
+		«IF hasHistory»
+			for (int i = 0; i < «historyStatesConst»; ++i)
+				historyVector[i] = «null_state»;
+				
+		«ENDIF»
+		stateConfVectorPosition = 0;
+		
+		«IF timed»
+			«timerInstance» = null;
+		«ENDIF»
+		'''
+	
 	
 	def destructorDefinition(ExecutionFlow it) '''
 		«module»::~«module»()
@@ -180,31 +198,35 @@ class StatemachineImplementation implements IContentTemplate {
 		{
 			
 			clearOutEvents();
-			
-			for (stateConfVectorPosition = 0;
-				stateConfVectorPosition < «orthogonalStatesConst»;
-				stateConfVectorPosition++)
-				{
-					
-				switch (stateConfVector[stateConfVectorPosition])
-				{
-				«FOR state : states»
-					«IF state.reactSequence!=null»
-					case «state.shortName.asEscapedIdentifier» :
-					{
-						«state.reactSequence.shortName»();
-						break;
-					}
-					«ENDIF»
-				«ENDFOR»
-				default:
-					break;
-				}
-			}
-			
+			«runCycleFunctionForLoop»			
 			clearInEvents();
 		}
 	'''
+	
+	def runCycleFunctionForLoop(ExecutionFlow it) {
+		'''
+		for (stateConfVectorPosition = 0;
+			stateConfVectorPosition < «orthogonalStatesConst»;
+			stateConfVectorPosition++)
+			{
+				
+			switch (stateConfVector[stateConfVectorPosition])
+			{
+			«FOR state : states»
+				«IF state.reactSequence!=null»
+				case «state.shortName.asEscapedIdentifier» :
+				{
+					«state.reactSequence.shortName»();
+					break;
+				}
+				«ENDIF»
+			«ENDFOR»
+			default:
+				break;
+			}
+		}
+		'''
+	}
 	
 	def timedStatemachineFunctions(ExecutionFlow it) '''
 		«IF timed»
@@ -219,14 +241,18 @@ class StatemachineImplementation implements IContentTemplate {
 				return «timerInstance»;
 			}
 			
-			void «module»::«raiseTimeEventFctID»(sc_eventid evid)
-			{
-				if ((evid >= (sc_eventid)«timeEventsInstance») && (evid < (sc_eventid)(&«timeEventsInstance»[«timeEventsCountConst»])))
-				{
-					*(sc_boolean*)evid = true;
-				}				
-			}
+			«raiseTimeEventFunction»
 		«ENDIF»
+	'''
+	
+	def raiseTimeEventFunction(ExecutionFlow it) '''
+		void «module»::«raiseTimeEventFctID»(sc_eventid evid)
+		{
+			if ((evid >= (sc_eventid)«timeEventsInstance») && (evid < (sc_eventid)(&«timeEventsInstance»[«timeEventsCountConst»])))
+			{
+				*(sc_boolean*)evid = true;
+			}				
+		}
 	'''
 	
 	def isStateActiveFunction(ExecutionFlow it) '''
@@ -291,76 +317,20 @@ class StatemachineImplementation implements IContentTemplate {
 			{
 				return &«scope.instance»;
 			}
-			
 			«ENDIF»
-			«FOR event : scope.incomingEvents»
-				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams»)
+			«generateEvents(scope)»
+			«generateVariables(scope)»
+			«IF scope.hasOperations && !entry.useStaticOPC»
+				«scope.OCB_InterfaceSetterDeclaration(true)»
 				{
-					«IF event.hasValue»
-					«event.localValueAccess» = value;
-					«ENDIF»
-					«event.localAccess» = true;
+					«scope.OCB_Instance» = operationCallback;
 				}
-				
-				«IF scope.defaultInterface»
-					void «module»::«event.asRaiser»(«event.valueParams»)
-					{
-						«scope.instance».«event.asRaiser»(«IF event.hasValue»value«ENDIF»);
-					}
-					
-				«ENDIF»
-			«ENDFOR»
-			«FOR event : scope.outgoingEvents»
-				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() const
-				{
-					return «event.localAccess»;
-				}
-				
-				«IF scope.defaultInterface»
-					sc_boolean «module»::«event.asRaised»() const
-					{
-						return «scope.instance».«event.asRaised»();
-					}
-					
-				«ENDIF»
-				«IF event.hasValue»
-					«event.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() const
-					{
-						return «event.localValueAccess»;
-					}
-					
-					«IF scope.defaultInterface»
-						«event.typeSpecifier.targetLanguageName» «module»::«event.asGetter»() const
-						{
-							return «scope.instance».«event.asGetter»();
-						}
-						
-					«ENDIF»
-				«ENDIF»
-			«ENDFOR»
-			
-			«FOR event : scope.localEvents»
-				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams»)
-				{
-					«IF event.hasValue»
-					«event.localValueAccess» = value;
-					«ENDIF»
-					«event.localAccess» = true;
-				}
-				
-				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() const
-				{
-					return «event.localAccess»;
-				}
-				
-				«IF event.hasValue» 
-					«event.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() const
-					{
-						return «event.localValueAccess»;
-					}
-					
-				«ENDIF»
-			«ENDFOR»
+			«ENDIF»
+		«ENDFOR»
+	'''
+	
+	def generateVariables(ExecutionFlow it, StatechartScope scope)
+		'''
 			«FOR variable : scope.variableDefinitions»
 				«IF variable.const»const «ENDIF»«variable.typeSpecifier.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() const
 				{
@@ -389,14 +359,7 @@ class StatemachineImplementation implements IContentTemplate {
 					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
-			«IF scope.hasOperations && !entry.useStaticOPC»
-				«scope.OCB_InterfaceSetterDeclaration(true)»
-				{
-					«scope.OCB_Instance» = operationCallback;
-				}
-			«ENDIF»
-		«ENDFOR»
-	'''
+		'''
 	
 	/* ===================================================================================
 	 * Handling implementation of internal functions

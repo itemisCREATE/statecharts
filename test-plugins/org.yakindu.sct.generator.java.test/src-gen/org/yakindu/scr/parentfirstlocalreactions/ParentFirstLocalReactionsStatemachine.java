@@ -117,6 +117,8 @@ public class ParentFirstLocalReactionsStatemachine implements IParentFirstLocalR
 	
 	private int nextStateIndex;
 	
+	
+	
 	public ParentFirstLocalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

@@ -620,6 +620,97 @@ GeneratorModel for sctunit::cpp {
 		}
 	}
 	
+
+	test EventDrivenInternalEvent {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "gtests/EventDrivenInternalEvent"			
+		}	
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}	
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel {
+			GenerateSGen = "true"
+		}
+	}
+	
+
+
+	test EventDrivenTriggeredByEvent {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "gtests/EventDrivenTriggeredByEvent"			
+		}	
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}	
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel {
+			GenerateSGen = "true"
+		}
+	}
+	
+
+
+	test EventDrivenTriggeredByTimeEvent {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "gtests/EventDrivenTriggeredByTimeEvent"			
+		}	
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}	
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel {
+			GenerateSGen = "true"
+		}
+	}
+	
+
+
 	test ExitOnSelfTransition{
 		
 		feature Outlet{ 

@@ -26,6 +26,7 @@ import org.yakindu.sct.simulation.core.sexec.container.DefaultSimulationEngineFa
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
 import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultExecutionFlowInterpreter;
+import org.yakindu.sct.simulation.core.sexec.interpreter.IEventRaiser;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IOperationMockup;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
@@ -42,6 +43,7 @@ import com.google.inject.name.Names;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth - additions
  * 
  */
 public class GenericSimulationModule extends AbstractGenericModule {
@@ -77,6 +79,10 @@ public class GenericSimulationModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends IExecutionFlowInterpreter> bindIExecutionFlowInterpreter() {
+		return DefaultExecutionFlowInterpreter.class;
+	}
+
+	public Class<? extends IEventRaiser> bindIEventRaiser() {
 		return DefaultExecutionFlowInterpreter.class;
 	}
 

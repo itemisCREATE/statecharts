@@ -85,7 +85,7 @@ public abstract class AbstractExecutionFlowSimulationEngine extends AbstractSimu
 		if (!context.isSnapshot()) {
 			contextInitializer.initialize(context, flow);
 		}
-		interpreter.initialize(flow, context);
+		interpreter.initialize(flow, context, useInternalEventQueue());
 	}
 
 	public void start() {
@@ -141,6 +141,14 @@ public abstract class AbstractExecutionFlowSimulationEngine extends AbstractSimu
 	@Override
 	public IExecutionControl getExecutionControl() {
 		return this;
+	}
+	
+	/**
+	 * Can be overriden to configure the use of an internal event queue.
+	 * @return false
+	 */
+	protected boolean useInternalEventQueue() {
+		return false;
 	}
 
 }
