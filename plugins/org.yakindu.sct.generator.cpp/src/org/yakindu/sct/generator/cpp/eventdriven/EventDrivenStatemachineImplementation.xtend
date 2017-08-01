@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
- package org.yakindu.sct.generator.cpp.eventdriven
+package org.yakindu.sct.generator.cpp.eventdriven
 
 import com.google.inject.Inject
 import java.util.List
