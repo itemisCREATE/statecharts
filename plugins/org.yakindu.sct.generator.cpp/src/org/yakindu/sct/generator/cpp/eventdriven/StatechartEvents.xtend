@@ -25,7 +25,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 /**
  * @author René Beckmann - Initial contribution and API
  */
-class StatechartEvents implements IContentTemplate {
+class StatechartEvents {
 	@Inject protected extension Naming
 	@Inject protected extension Navigation
 	@Inject protected extension ICodegenTypeSystemAccess
@@ -37,14 +37,10 @@ class StatechartEvents implements IContentTemplate {
 	protected GeneratorEntry entry
 	protected ExecutionFlow flow
 	
-	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations locations) {
-		this.entry = entry;
-		this.flow = it;
+	def content(ExecutionFlow it) {
 		'''
 		#ifndef «generateHeaderDefineGuard»
 		#define «generateHeaderDefineGuard»
-		
-		#include "«(typesModule.h).relativeTo(module.h)»"
 		
 		namespace «eventNamespaceName»
 		{
