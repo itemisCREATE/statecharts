@@ -1,0 +1,32 @@
+testclass EventDrivenTriggeredByEvent for statechart eventdriven.EventDrivenTriggeredByEvent {
+
+	@Test operation internalEventTriggersRunCycle() {
+		enter
+		
+		assert active(eventdriven.EventDrivenTriggeredByEvent.main_region.A)
+		raise e
+		
+		assert active(eventdriven.EventDrivenTriggeredByEvent.main_region.B)
+		assert x == 0
+		
+		raise e
+		assert active(eventdriven.EventDrivenTriggeredByEvent.main_region.A)
+		assert x == 0
+		
+		exit
+	}
+
+
+	@Test operation proceedTimeDoesNotTriggerRunCycle() {
+		
+		enter
+		
+		assert active(eventdriven.EventDrivenTriggeredByEvent.main_region.A)
+
+		proceed 120s
+		assert x == 0
+		
+		exit
+	}
+
+}

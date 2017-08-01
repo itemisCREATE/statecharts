@@ -84,4 +84,17 @@
 	    </action>
 	 </objectContribution>
 	</extension>
+	   <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            class="org.yakindu.sct.generator.builder.resources.BuilderPropertyPage"
+            category="org.yakindu.sct.ui.properties.root"
+            id="org.yakindu.sct.generator.builder.resources.properties"
+            name="SGen Filter">
+			<enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.yakindu.sct.builder.SCTNature"/>
+      </page>
+   </extension>
 </plugin>

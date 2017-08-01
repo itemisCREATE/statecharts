@@ -17,6 +17,8 @@ import org.yakindu.sct.generator.java.features.EventBasedRunnableFeature
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.java.wrappers.EventBasedRunnableWrapper
+import org.yakindu.sct.generator.java.wrappers.CycleBasedSynchronizedWrapper
 
 /**
  * This is the Java code generators main class.

@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.expressions.expressions.AssignmentExpression
@@ -54,7 +55,6 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
 import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot
-import java.util.List
 
 /**
  * 
@@ -68,6 +68,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	extension IQualifiedNameProvider provider
 	@Inject(optional=true)
 	protected IOperationMockup operationDelegate
+	@Inject(optional=true)
+	protected extension IEventRaiser eventRaiser	
 	@Inject
 	protected extension IExecutionSlotResolver resolver
 	@Inject
@@ -156,12 +158,14 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
 		var event = context.resolve(eventRaising.event)
-		if (eventRaising.value != null) {
-			event.value = eventRaising.value.execute
-		}
+
 		if (event instanceof ExecutionEvent) {
-			(event as ExecutionEvent).raised = true
+			
+			val value = eventRaising.value?.execute	
+		
+			if (eventRaiser != null) event.raise(value) 
 		}
+		
 		null
 	}
 

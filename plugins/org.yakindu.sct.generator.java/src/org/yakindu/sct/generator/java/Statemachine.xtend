@@ -28,6 +28,9 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.base.types.Event
+import java.util.Set
+import java.util.TreeSet
 
 class Statemachine {
 	
@@ -72,15 +75,30 @@ class Statemachine {
 		}
 	'''
 	
+	
+	
 	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
-		«IF entry.createInterfaceObserver && flow.hasOutgoingEvents»
-			import java.util.LinkedList;
-			import java.util.List;
-		«ENDIF»
-		«IF flow.timed»
-			import «entry.getBasePackageName()».ITimer;
-		«ENDIF»
+		«FOR importEntry : flow.imports(entry)»
+			import «importEntry»;
+		«ENDFOR»
 	'''
+	
+	def protected imports(ExecutionFlow it, GeneratorEntry entry) {
+		// we need a sorted set for the imports
+		val Set<String> importSet = new TreeSet<String>()	
+		
+		if (entry.createInterfaceObserver && hasOutgoingEvents) {
+			importSet += "java.util.List"
+			importSet += "java.util.LinkedList"
+		}
+		
+		if (timed) {
+			importSet += "" + entry.getBasePackageName() + ".ITimer"
+		}
+		
+		return importSet
+	}
+	
 	
 	def protected createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
 		«FOR scope : flow.interfaceScopes»
@@ -109,14 +127,9 @@ class Statemachine {
 		
 		private final boolean[] timeEvents = new boolean[«flow.timeEvents.size»];
 		«ENDIF»
-		«FOR event : flow.internalScopeEvents»
-			private boolean «event.identifier»;
-			
-			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-				private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
-
-			«ENDIF»
-		«ENDFOR»
+		
+		«flow.internalEventFields»		
+		
 		«FOR variable : flow.internalScopeVariables SEPARATOR newLine AFTER newLine»
 			«IF !variable.const»
 				«variable.fieldDeclaration»
@@ -141,6 +154,29 @@ class Statemachine {
 			«ENDIF»
 		«ENDFOR»
 	'''
+	
+	def protected internalEventFields(ExecutionFlow flow) '''
+		«FOR event : flow.internalScopeEvents»
+
+			«event.internalEventField»	
+			«event.internalEventValueField»
+		«ENDFOR»
+	'''
+	
+	def protected internalEventField(EventDefinition it) '''
+			private boolean «event.identifier»;
+	'''
+	
+	def protected internalEventValueField(EventDefinition it) '''
+		«IF hasPayload»
+			private «typeSpecifier.targetLanguageName» «valueIdentifier»;
+		«ENDIF»
+	'''
+	
+	def hasInternalEvents(ExecutionFlow it) {
+		! flow.internalScopeEvents.empty
+	}
+	
 	//reused by interfaces
 	def protected fieldDeclaration(VariableDefinition variable) {
 		'''private «variable.typeSpecifier.targetLanguageName» «variable.identifier»;
@@ -481,23 +517,10 @@ class Statemachine {
 	
 	def protected internalScopeFunctions (ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
-			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-				private void raise«event.name.asEscapedName»(«event.typeSpecifier.targetLanguageName» value) {
-					«event.valueIdentifier» = value;
-					«event.identifier» = true;
-				}
-				
-				private «event.typeSpecifier.targetLanguageName» get«event.name.asEscapedName»Value() {
-					«event.getIllegalAccessValidation()»
-					return «event.valueIdentifier»;
-				}
+			«event.internalEventRaiser»
 
-			«ELSE»
-				private void raise«event.name.asEscapedName»() {
-					«event.identifier» = true;
-				}
+			«event.internalEventValueAccess»
 
-			«ENDIF»
 		«ENDFOR»
 		«FOR internal : flow.internalScopes»
 			«IF internal.hasOperations»
@@ -509,6 +532,28 @@ class Statemachine {
 			«ENDIF»
 		«ENDFOR»
 	'''
+	
+	def protected internalEventRaiser(EventDefinition it) '''
+		private void raise«name.asEscapedName»(«IF hasPayload»«typeSpecifier.targetLanguageName» value«ENDIF») {
+			«IF hasPayload»«valueIdentifier» = value;«ENDIF»
+			«identifier» = true;
+		}
+	'''
+
+	def protected internalEventValueAccess(EventDefinition it) '''
+		«IF hasPayload»
+			private «typeSpecifier.targetLanguageName» get«name.asEscapedName»Value() {
+				«getIllegalAccessValidation()»
+				return «valueIdentifier»;
+			}
+		«ENDIF»
+	'''
+
+
+	def hasPayload(Event it) {
+		type !== null && !isSame(type, getType(GenericTypeSystem.VOID))
+	} 
+	
 	
 	def protected defaultInterfaceFunctions(ExecutionFlow flow, GeneratorEntry entry) '''
 		«IF flow.defaultScope != null»

@@ -8,7 +8,7 @@
  *   	Markus Mühlbrandt - Initial contribution and API
  */
 
-package org.yakindu.sct.generator.java
+package org.yakindu.sct.generator.java.wrappers
 
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
@@ -22,6 +22,10 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.sct.generator.java.GenmodelEntries
+import org.yakindu.sct.generator.java.JavaNamingService
+import org.yakindu.sct.generator.java.Naming
+import org.yakindu.sct.generator.java.Navigation
 
 /**
  * Generates the cycle bases synchronized wrapper for the state machine.

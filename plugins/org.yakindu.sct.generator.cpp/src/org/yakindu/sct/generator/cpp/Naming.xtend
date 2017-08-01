@@ -59,6 +59,10 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	def timerInterface() {
 		'TimerInterface'
 	}
+	
+	def eventClasses(ExecutionFlow it) {
+		'''«name.toFirstUpper»_Events'''.toString
+	}
 
 	def timerInstance() {
 		'timer'

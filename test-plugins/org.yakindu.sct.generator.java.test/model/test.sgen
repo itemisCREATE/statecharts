@@ -75,7 +75,7 @@ GeneratorModel for sctunit::java {
 		}
 	}
 
-	test Choice {
+	test CastExpressions {
 		feature Naming {
 			basePackage = "org.yakindu.sct.generator.java.test"
 		}
@@ -91,7 +91,7 @@ GeneratorModel for sctunit::java {
 		}
 	}
 
-	test CastExpressions {
+	test Choice {
 		feature Naming {
 			basePackage = "org.yakindu.sct.generator.java.test"
 		}

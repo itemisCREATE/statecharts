@@ -29,11 +29,11 @@ import static org.eclipse.xtext.util.Strings.*
 
 class StatemachineHeader implements IContentTemplate {
 
-	@Inject extension Naming cNaming
-	@Inject extension Navigation
-	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension GenmodelEntries
-	@Inject extension INamingService
+	@Inject protected extension Naming cNaming
+	@Inject protected extension Navigation
+	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension GenmodelEntries
+	@Inject protected extension INamingService
 	
 	@Inject
 	IGenArtifactConfigurations defaultConfigs
@@ -63,6 +63,26 @@ class StatemachineHeader implements IContentTemplate {
 		«ENDFOR»
 		
 		«statemachineTypeDecl»
+		
+		«functions(it)»
+		
+		«additionalContents»
+		
+		#ifdef __cplusplus
+		}
+		#endif 
+		
+		#endif /* «module.define»_H_ */
+	'''
+	}
+	
+	def additionalContents(ExecutionFlow it) {
+		/* To be implemented by child classes */
+		''''''
+	}
+	
+	protected def CharSequence functions(ExecutionFlow it)
+		'''
 		
 		/*! Initializes the «type» state machine data structures. Must be called before first usage.*/
 		extern void «functionPrefix»init(«scHandleDecl»);
@@ -100,13 +120,8 @@ class StatemachineHeader implements IContentTemplate {
 		/*! Checks if the specified state is active (until 2.4.1 the used method for states was called isActive()). */
 		extern sc_boolean «stateActiveFctID»(const «scHandleDecl», «statesEnumType» state);
 		
-		#ifdef __cplusplus
-		}
-		#endif 
-		
-		#endif /* «module.define»_H_ */
-	'''
-	}
+		'''
+	
 	/**
 	 * @Deprecated use {@link #includes(ExecutionFlow, ArtifactLocationProvider)} instead
 	 */
@@ -199,15 +214,21 @@ class StatemachineHeader implements IContentTemplate {
 		 */
 		typedef struct
 		{
-			«statesEnumType» stateConfVector[«type.toUpperCase»_MAX_ORTHOGONAL_STATES];
-			«IF hasHistory»«statesEnumType» historyVector[«type.toUpperCase»_MAX_HISTORY_STATES];«ENDIF»
-			sc_ushort stateConfVectorPosition; 
-			
-			«FOR iScope : scopes.filter[!typeRelevantDeclarations.empty]»
-				«iScope.type» «iScope.instance»;
-			«ENDFOR»			
+			«statemachineTypeStructContent»
 		} «type»;
 	'''
+	
+	def statemachineTypeStructContent(ExecutionFlow it) {
+		'''
+		«statesEnumType» stateConfVector[«type.toUpperCase»_MAX_ORTHOGONAL_STATES];
+		«IF hasHistory»«statesEnumType» historyVector[«type.toUpperCase»_MAX_HISTORY_STATES];«ENDIF»
+		sc_ushort stateConfVectorPosition; 
+		
+		«FOR iScope : scopes.filter[!typeRelevantDeclarations.empty]»
+			«iScope.type» «iScope.instance»;
+		«ENDFOR»
+		'''
+	}
 	
 	def stateConfVectorDefines(ExecutionFlow it) '''
 		«FOR state : states»

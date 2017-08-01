@@ -162,6 +162,8 @@ public class ParentFirstOrthogonalReactionsStatemachine implements IParentFirstO
 	
 	private int nextStateIndex;
 	
+	
+	
 	public ParentFirstOrthogonalReactionsStatemachine() {
 		sCInterface = new SCInterfaceImpl();
 	}

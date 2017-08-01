@@ -27,11 +27,11 @@ class ITimerCallback {
 	@Inject ICoreLibraryHelper outletFeatureHelper
 
 	def generateITimerCallback(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null) {
+		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) !== null) {
 			// generate into library target folder in case one is specified, as the contents are static
 			fsa.generateFile(entry.basePackagePath + '/' + iTimerCallback.java, LIBRARY_TARGET_FOLDER_OUTPUT,
 				content(entry))
-		} else if (outletFeatureHelper.getApiTargetFolderValue(entry) != null) {
+		} else if (outletFeatureHelper.getApiTargetFolderValue(entry) !== null) {
 			// generate into API target folder in case one is specified, as it is an interface
 			fsa.generateFile(entry.basePackagePath + '/' + iTimerCallback.java, API_TARGET_FOLDER_OUTPUT,
 				content(entry))
@@ -40,11 +40,15 @@ class ITimerCallback {
 			fsa.generateFile(entry.basePackagePath + '/' + iTimerCallback.java, content(entry))
 		}
 	}
-
-	def private content(GeneratorEntry entry) {
+	
+	def public content(GeneratorEntry entry) {
+		content(entry.licenseText, entry.basePackageName)		
+	}
+	
+	def public content(String licenseText, String basePackageName) {
 		'''
-			«entry.licenseText»
-			package «entry.getBasePackageName()»;
+			«licenseText»
+			package «basePackageName»;
 			
 			/**
 			* Interface for state machines which use timed event triggers.

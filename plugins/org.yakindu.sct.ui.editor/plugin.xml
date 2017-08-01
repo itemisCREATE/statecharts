@@ -865,14 +865,4 @@
             priority="medium">
       </factory>
    </extension>
-  <!-- Added default templates -->
-  
-    <!-- Shared Editing Domain-->
-     <extension
-         point="org.eclipse.emf.transaction.editingDomains">
-      <editingDomain
-            factory="org.yakindu.sct.ui.editor.partitioning.SharedEditingDomainFactory"
-            id="org.yakindu.sct.domain"/>
-   </extension>
-   
 </plugin>
