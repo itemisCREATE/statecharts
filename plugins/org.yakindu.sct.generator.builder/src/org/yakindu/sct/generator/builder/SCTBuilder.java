@@ -227,7 +227,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	protected void logGenmodelInfo(IResource resource) {
 		Status status = new Status(Status.INFO, BUILDER_ID,
 				String.format(
-						"Cannot execute Genmodel %s. The file is excluded from build. (see Window > Preferences > YAKINDU SCT > Builder)",
+						"Cannot execute Genmodel %s. The file is excluded from build. (see project properties > YAKINDU SCT > SGen Filter)",
 						resource));
 		Platform.getLog(BuilderActivator.getDefault().getBundle()).log(status);
 	}
