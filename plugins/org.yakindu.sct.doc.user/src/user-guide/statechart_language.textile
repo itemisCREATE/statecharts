@@ -937,6 +937,8 @@ Events raised internally by the "_raise_ statement":#raising-an-event in the rea
 
 Consider, for example, events _a_ and _b_ having entered, in that order, a state machine that is executing in event-driven mode. Since _a_ entered the state machine first, it is processed first in an RTC. Event _b_ is put on an event queue, where it has to wait until _a_ is done. Processing of _a_, however, leads to another event _c_ being raised via the _raise_ statement. Since _a_ is still being processed, _c_ is, like _b_, also queued. However, _c_ has been raised in the context of the processing of _a_, thus _c_ is queued before the next external event, i.e. _b_. As a consequence the order of events being processed by successive run-to-completion steps is _a_, _c_, _b_.
 
+bq. *Please note:* In the event-driven execution mode, the risk of endless event processing is looming. In the example above, imagine the processing of event _c_ would always lead to another instance of _c_ being raised. In that case, the state machine would be busily processing one _c_ after the other without ever ending. You should be aware of that risk, which cannot happen in the cyle-based execution scheme.
+
 
 
 
