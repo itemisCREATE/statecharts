@@ -933,6 +933,10 @@ As explained above, an event that has been raised using the "_raise_ statement":
 
 The raised event will, however, trigger an RTC on its own. In that RTC, it will be visible to all regions, no matter of their execution order. The execution order as explained in the preceeding section still applies, but it is of less importance in the event-driven approach.
 
+Events raised internally by the "_raise_ statement":#raising-an-event in the reaction of a state or transition take precedence over events that entered the state machine from the outside. This convention ensures that an external event together with all effects it causes – and in particular with all events raised internally – are processed completely, before the next external event can take charge.
+
+Consider, for example, events _a_ and _b_ having entered, in that order, a state machine that is executing in event-driven mode. Since _a_ entered the state machine first, it is processed first in an RTC. Event _b_ is put on an event queue, where it has to wait until _a_ is done. Processing of _a_, however, leads to another event _c_ being raised via the _raise_ statement. Since _a_ is still being processed, _c_ is, like _b_, also queued. However, _c_ has been raised in the context of the processing of _a_, thus _c_ is queued before the next external event, i.e. _b_. As a consequence the order of events being processed by successive run-to-completion steps is _a_, _c_, _b_.
+
 
 
 
