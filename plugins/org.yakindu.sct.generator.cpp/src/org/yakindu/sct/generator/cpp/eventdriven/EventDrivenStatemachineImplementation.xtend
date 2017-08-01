@@ -20,7 +20,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
 /*
- * #TODO to restore the event queue for in events, revert commit 235659d
+ * To restore the event queue for in events, revert commit 235659d
  */
 /**
  * @author René Beckmann - Initial contribution and API
