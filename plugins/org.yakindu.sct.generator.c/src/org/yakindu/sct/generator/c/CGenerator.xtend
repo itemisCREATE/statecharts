@@ -35,8 +35,6 @@ class CGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineHeader statemachineHeader
 	@Inject extension StatemachineSource statemachineSource
 	@Inject extension StatemachineRequiredHeader statemachineRequiredHeader
-	@Inject extension StatechartEventsHeader statechartEventsHeader
-	@Inject extension StatechartEventsSource statechartEventsSource
 	@Inject extension Navigation
 	@Inject extension GenmodelEntries
 	@Inject extension Naming
@@ -62,11 +60,6 @@ class CGenerator implements IExecutionFlowGenerator {
 		locations.configure(flow.module.c, entry.sourceOutput, statemachineSource)
 		if (flow.timed || !flow.operations.empty || entry.tracingEnterState || entry.tracingExitState) {
 			locations.configure(flow.module.client.h, entry.headerOutput, statemachineRequiredHeader)
-		}
-		
-		if((sourceElement as Statechart).getAnnotationOfType(EVENT_DRIVEN_ANNOTATION) !== null) {
-			locations.configure(flow.eventsModule.h, entry.headerOutput, statechartEventsHeader)
-			locations.configure(flow.eventsModule.c, entry.sourceOutput, statechartEventsSource)
 		}
 	}
 	

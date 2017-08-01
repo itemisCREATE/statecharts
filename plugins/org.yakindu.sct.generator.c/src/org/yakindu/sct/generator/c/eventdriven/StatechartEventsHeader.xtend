@@ -24,29 +24,18 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 /**
  * @author René Beckmann
  */
-class StatechartEventsHeader implements IContentTemplate {
+class StatechartEventsHeader {
 	@Inject protected extension Naming
 	@Inject protected extension Navigation
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension INamingService
 	
-	@Inject extension
-	IGenArtifactConfigurations defaultConfigs
-	
 	@Inject extension EventNaming eventNaming
-	
-	protected GeneratorEntry entry
 	
 	protected static final int BUFFER_SIZE = 20
 	
-	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) {
-		this.entry = entry
+	def content(ExecutionFlow it) {
 		'''
-		#ifndef «generateHeaderDefineGuard»
-		#define «generateHeaderDefineGuard»
-		
-		#include "«(typesModule.h).relativeTo(module.h)»"
-		
 		#ifndef «bufferSize»
 		#define «bufferSize» «BUFFER_SIZE»
 		#endif
@@ -62,8 +51,6 @@ class StatechartEventsHeader implements IContentTemplate {
 		«eventFunctionPrototypes»
 		
 		«eventQueueFunctionPrototypes»
-
-		#endif /* «generateHeaderDefineGuard» */
 		'''
 	}
 	
