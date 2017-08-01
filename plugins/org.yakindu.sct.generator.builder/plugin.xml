@@ -90,7 +90,7 @@
             class="org.yakindu.sct.generator.builder.resources.BuilderPropertyPage"
             category="org.yakindu.sct.ui.properties.root"
             id="org.yakindu.sct.generator.builder.resources.properties"
-            name="Builder">
+            name="SGen Filter">
 			<enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
