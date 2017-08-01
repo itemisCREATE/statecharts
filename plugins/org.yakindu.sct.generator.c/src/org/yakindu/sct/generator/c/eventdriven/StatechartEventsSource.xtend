@@ -19,6 +19,9 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
+/**
+ * @author René Beckmann
+ */
 class StatechartEventsSource implements IContentTemplate {
 	@Inject extension Navigation
 	@Inject extension Naming

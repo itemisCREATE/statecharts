@@ -15,6 +15,9 @@ import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.ExpressionCode
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 
+/**
+ * @author René Beckmann
+ */
 class EventDrivenExpressionCode extends ExpressionCode {
 	@Inject extension EventNaming
 	

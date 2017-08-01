@@ -17,6 +17,9 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
+/**
+ * @author René Beckmann
+ */
 class EventDrivenStatemachineSource extends StatemachineSource {
 	@Inject extension EventNaming
 	

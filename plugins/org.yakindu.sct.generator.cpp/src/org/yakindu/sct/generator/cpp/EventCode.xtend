@@ -16,6 +16,9 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
+/**
+ * @author René Beckmann
+ */
 class EventCode {
 	@Inject protected extension Naming
 	@Inject protected extension Navigation

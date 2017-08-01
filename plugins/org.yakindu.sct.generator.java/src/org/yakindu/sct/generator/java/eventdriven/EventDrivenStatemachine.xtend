@@ -17,6 +17,9 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 
+/**
+ * @author terfloth
+ */
 class EventDrivenStatemachine extends Statemachine {
 
 	/** Adds imports for the internal event queue if neccessary. */

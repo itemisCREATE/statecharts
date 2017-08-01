@@ -17,6 +17,9 @@ import org.yakindu.sct.generator.c.Navigation
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.naming.INamingService
 
+/**
+ * @author René Beckmann
+ */
 class EventNaming {
 	@Inject extension Naming
 	@Inject extension Navigation

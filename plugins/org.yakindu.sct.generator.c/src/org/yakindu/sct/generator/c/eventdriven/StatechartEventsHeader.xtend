@@ -21,6 +21,9 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
+/**
+ * @author René Beckmann
+ */
 class StatechartEventsHeader implements IContentTemplate {
 	@Inject protected extension Naming
 	@Inject protected extension Navigation
