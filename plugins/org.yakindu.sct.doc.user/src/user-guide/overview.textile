@@ -3,13 +3,18 @@ p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/
 
 h1(#what-are-yakindu-statechart-tools). What are YAKINDU Statechart Tools?
 
-The statechart tools are a central part of YAKINDU: the modular toolkit for model-driven development of embedded systems. It is based on the open-source development platform Eclipse. YAKINDU Statechart Tools (YAKINDU SCT) provide the following tools to deal with state machine diagrams:
+YAKINDU Statechart Tools (YAKINDU SCT) is a modular toolkit for developing, simulating, and generating executable "_finite-state machines (FSM)_":https://en.wikipedia.org/wiki/Finite-state_machine or simply _state machines_. State machines are useful for the model-driven development of so-called event-discrete systems, i.e. systems that are always in exactly one state of a finite number of states. State machines are particularly well-suited for embedded systems, but they are in no way restricted to them.
 
-* *Statechart diagram editor* to graphically create and edit statecharts
+With YAKINDU Statechart Tools you can easily develop and simulate state machines, as well as generating them as source code for your target software system. YAKINDU Statechart Tools is based on the open-source development platform Eclipse.
+
+The Standard Edition of YAKINDU Statechart Tools provides the following features for dealing with state machines:
+
+* *Statechart diagram editor* to graphically create and edit statecharts, the graphical representation of state machines
 * *Statechart simulator* to simulate the behavior of statecharts
-* *Code generators for Java, C, C&#43;&#43;* to transform statecharts into code
-* *Custom generator projects* to easily create model-to-text transformations with Xtend or Java
-* *Integrated validator* to check for syntactical or semantical problems of the statechart model 
+* *Code generators for Java, C, C++, and TypeScript* to transform statecharts into programming language source code
+* *Custom generator projects* to easily create model-to-text transformations with Xtend or Java in order to create any code of your own choice
+* *Integrated validator* to check for syntactical or semantical problems of the statechart model
+* *Testing framework* to test your state machines with unit tests
 
 The following graph shows these features and their relation to each other:
 
@@ -17,47 +22,32 @@ The following graph shows these features and their relation to each other:
 
 p=. Features of YAKINDU Statechart Tools
 
+The Professional Edition of YAKINDU Statechart Tools makes additional features available:
+
+* "*Deep integration with the C programming language*":../user-guide/c-domain to directly access C variables, types etc.
+* "*Advanced simulation and debugging*":../user-guide/advanced_simulation with breakpoints and snapshots
+
+
+
+
 h2(#which-licensing-rules-do-apply-to-yakindu-statechart-tools). Which licensing rules do apply to YAKINDU Statechart Tools?
+
+###. CHECK Do these licensing information still apply?
 
 The source code of YAKINDU Statechart Tools is provided under the "Eclipse Public License":http://www.eclipse.org/legal/epl-v10.html.
 
-The open source code generators coming with YAKINDU Statechart Tools do not imply any license constraints on the generated code whatsoever. The generated code is property of the user (as person or organization). There is no need to make the generated code open source. The user is free to choose any license model for the generated code.
+The code generators coming with YAKINDU Statechart Tools do not imply any license constraints on the generated code whatsoever. The generated code is property of the user, as a person or as an organization. For the generated code, the user is free to choose any license model they wish.
+
+
+
 
 h2(#who-is-behind-yakindu-statechart-tools). Who is behind YAKINDU Statechart Tools?
 
-The main part of YAKINDU Statechart Tools is an open-source project, available at "http://www.yakindu.org/":http://www.yakindu.org/. Most developers are working for itemis, a well-known consulting company specialized on model-based development.
+YAKINDU Statechart Tools is developed and driven by "itemis AG":https://en.wikipedia.org/wiki/Itemis, a well-known consulting company specialized on model-based development. itemis is providing professional services around YAKINDU, be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages, you name it. The itemis YAKINDU developers do not only know the framework very well but are also experts in programming and domain-specific language design. If you need advice, get in contact with itemis' "YAKINDU team":https://info.itemis.com/contact.
 
-You may ask: Where does the money for open-source development come from? Well, itemis is providing professional services around YAKINDU, be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages, you name it. The itemis YAKINDU developers do not only know the framework very well but are also experts in programming and domain-specific language design. If you need advice get in contact with itemis' "YAKINDU team":https://info.itemis.com/contact.
+
+
 
 h2(#who-is-using-yakindu-statechart-tools). Who is using YAKINDU Statechart Tools?
 
-Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing the benefits of Finite State Machines (FSM) and Harel Statecharts to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, or C&#43;&#43; code.
-
-###.. FIXME: Decide what to do with the following subsection regarding the document structure.
-###.. FIXME: h3(#what-is-the-structure-of-this-documentation). What is the structure of this documentation?
-
-    <orderedlist numeration="arabic">
-     <listitem>
-      <para><link linkend="yakindu-statechart-tools-user-guide">Overview</link></para>
-     </listitem>
-     <listitem>
-      <para><link xl:href="../02_installation/installation.html">Installation</link></para>
-     </listitem>
-     <listitem>
-      <para><link xl:href="../03_getting_started/getting_started.html">Getting Started</link></para>
-     </listitem>
-     <listitem>
-      <para><link xl:href="../04_code_generation/code_generation.html">Code generation</link></para>
-     </listitem>
-     <listitem>
-      <para><link xl:href="../05_reference/reference.html">Reference</link></para>
-     </listitem>
-     <listitem>
-      <para><link xl:href="../06_tasks/tasks.html">Task</link></para>
-     </listitem>
-    </orderedlist>
-    -->
-   </sect3>
-
-
-
+Initially YAKINDU Statechart Tools have been designed for the embedded systems industry: automotive, system controls, vending machines etc. However, YAKINDU Statechart Tools are bringing the benefits of finite-state machines (FSM) and Harel statecharts to everyone who needs to design, simulate and develop behavior. People can use YAKINDU Statechart Tools to generate Java, C, C++, or TypeScript code.
