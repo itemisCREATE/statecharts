@@ -188,7 +188,7 @@ public class ContextPredicateProvider {
 		filter.put(key(EVENT_VALUE_REFERENCE_EXPRESSION), EVENTS);
 		filter.put(key(REACTION_EFFECT), VARIABLES_AND_OPERATIONS);
 		filter.put(key(TRANSITION_SPECIFICATION), EVENTS);
-		filter.put(key(LOCAL_REACTION), VARIABLES_AND_OPERATIONS);
+		filter.put(key(LOCAL_REACTION), VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
 		filter.put(key(TRANSITION_REACTION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(VARIABLE_DEFINITION, TYPE_SPECIFIER__TYPE), TYPES);
 		filter.put(key(VARIABLE_DEFINITION, ELEMENT_REFERENCE_EXPRESSION__REFERENCE),
@@ -207,22 +207,6 @@ public class ContextPredicateProvider {
 		return predicate;
 	}
 
-	public Predicate<IEObjectDescription> calculateFilterPredicate(final EObject context, final EReference reference) {
-		Predicate<IEObjectDescription> predicate = Predicates.alwaysTrue();
-		EObject container = context;
-		EReference ref = reference;
-		while (container != null) {
-			predicate = getPredicate(container.eClass(), ref);
-			if (!(predicate instanceof EmptyPredicate)) {
-				break;
-			}
-			ref = (EReference) container.eContainingFeature();
-			container = container.eContainer();
-		}
-		return predicate;
-	}
-	
-	
 	protected static boolean hasComplexType(IEObjectDescription input) {
 		String hasComplexType = input.getUserData(TypedResourceDescriptionStrategy.HAS_COMPLEX_TYPE);
 		return hasComplexType != null && Boolean.valueOf(hasComplexType);
