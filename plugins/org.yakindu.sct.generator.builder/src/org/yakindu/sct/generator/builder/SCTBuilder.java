@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.yakindu.sct.generator.builder.resources.DefaultResourceBlacklist;
 import org.yakindu.sct.generator.core.GeneratorActivator;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
@@ -54,6 +55,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	private static final String SCT_FILE_EXTENSION = "sct";
 	private static final String SGEN_FILE_EXTENSION = "sgen";
 	public static final String BUILDER_ID = "org.yakindu.sct.builder.SCTBuilder";
+	private DefaultResourceBlacklist sgenBlackList;
 
 	private final class ElementRefGenerator implements Predicate<GeneratorEntry> {
 
@@ -112,6 +114,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 
 		IPreferenceStore store = BuilderActivator.getDefault().getPreferenceStore();
 		boolean generateAutomatical = store.getBoolean(GeneratorActivator.PREF_GENERATE_AUTOMATICALLY);
+		sgenBlackList = new DefaultResourceBlacklist();
 
 		if (generateAutomatical) {
 			if (kind == FULL_BUILD) {
@@ -213,7 +216,20 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	}
 
 	protected void executeGenmodelGenerator(IResource resource) {
-		new EclipseContextGeneratorExecutorLookup().executeGenerator(resource.getProject().getFile(resource.getProjectRelativePath()));
+		if (sgenBlackList.violates(resource, resource.getProject())) {
+			logGenmodelInfo(resource);
+			return;
+		}
+		new EclipseContextGeneratorExecutorLookup()
+				.executeGenerator(resource.getProject().getFile(resource.getProjectRelativePath()));
+	}
+
+	protected void logGenmodelInfo(IResource resource) {
+		Status status = new Status(Status.INFO, BUILDER_ID,
+				String.format(
+						"Cannot execute Genmodel %s. The file is excluded from build. (see Window > Preferences > YAKINDU SCT > Builder)",
+						resource));
+		Platform.getLog(BuilderActivator.getDefault().getBundle()).log(status);
 	}
 
 	protected void logGenmodelError(String resource) {
