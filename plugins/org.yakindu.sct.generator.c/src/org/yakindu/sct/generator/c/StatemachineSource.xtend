@@ -22,16 +22,17 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class StatemachineSource implements IContentTemplate {
 	
-	@Inject extension Naming
-	@Inject extension GenmodelEntries
-	@Inject extension Navigation
-	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension INamingService
-	@Inject extension FlowCode
-	@Inject extension ConstantInitializationResolver
+	@Inject protected extension Naming
+	@Inject protected extension GenmodelEntries
+	@Inject protected extension Navigation
+	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension INamingService
+	@Inject protected extension FlowCode
+	@Inject protected extension ConstantInitializationResolver
 	@Inject protected extension StateVectorExtensions
 	
 	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
@@ -53,6 +54,11 @@ class StatemachineSource implements IContentTemplate {
 		
 		«constantDefinitions»
 		
+		«functions»
+	'''
+	}
+	
+	def functions(ExecutionFlow it) '''
 		«initFunction»
 		
 		«enterFunction»
@@ -77,34 +83,39 @@ class StatemachineSource implements IContentTemplate {
 		
 		«functionImplementations»
 	'''
-	}
 	
 	def initFunction(ExecutionFlow it) '''
 		void «functionPrefix»init(«scHandleDecl»)
 		{
-			sc_integer i;
-
-			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i)
-			{
-				«scHandle»->stateConfVector[i] = «null_state»;
-			}
-			
-			«IF hasHistory»
-			for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i)
-			{
-				«scHandle»->historyVector[i] = «null_state»;
-			}
-			«ENDIF»
-			
-			«scHandle»->stateConfVectorPosition = 0;
-		
-			«clearInEventsFctID»(handle);
-			«clearOutEventsFctID»(handle);
-		
-			«initSequence.code»
-		
+			«initFunctionBody(it)»
 		}
 	'''
+	
+	protected def CharSequence initFunctionBody(ExecutionFlow it) {
+		'''
+		sc_integer i;
+	
+		for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i)
+		{
+			«scHandle»->stateConfVector[i] = «null_state»;
+		}
+		
+		«IF hasHistory»
+		for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i)
+		{
+			«scHandle»->historyVector[i] = «null_state»;
+		}
+		«ENDIF»
+		
+		«scHandle»->stateConfVectorPosition = 0;
+	
+		«clearInEventsFctID»(handle);
+		«clearOutEventsFctID»(handle);
+	
+		«initSequence.code»
+		'''
+	}
+	
 	
 	def enterFunction(ExecutionFlow it) '''
 		void «functionPrefix»enter(«scHandleDecl»)
@@ -157,31 +168,36 @@ class StatemachineSource implements IContentTemplate {
 		{
 			
 			«clearOutEventsFctID»(«scHandle»);
-			
-			for («scHandle»->stateConfVectorPosition = 0;
-				«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
-				«scHandle»->stateConfVectorPosition++)
-				{
-					
-				switch («scHandle»->stateConfVector[handle->stateConfVectorPosition])
-				{
-				«FOR state : states»
-					«IF state.reactSequence!=null»
-					case «state.shortName» :
-					{
-						«state.reactSequence.shortName»(«scHandle»);
-						break;
-					}
-					«ENDIF»
-				«ENDFOR»
-				default:
-					break;
-				}
-			}
-			
+			«runCycleForLoop(it)»
 			«clearInEventsFctID»(«scHandle»);
 		}
 	'''
+	
+	protected def CharSequence runCycleForLoop(ExecutionFlow it)
+		'''
+		for («scHandle»->stateConfVectorPosition = 0;
+			«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
+			«scHandle»->stateConfVectorPosition++)
+			{
+				
+			switch («scHandle»->stateConfVector[handle->stateConfVectorPosition])
+			{
+			«FOR state : states»
+				«IF state.reactSequence !== null»
+				case «state.shortName»:
+				{
+					«state.reactSequence.shortName»(«scHandle»);
+					break;
+				}
+				«ENDIF»
+			«ENDFOR»
+			default:
+				break;
+			}
+		}
+		
+		'''
+	
 	
 	def raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»
@@ -257,28 +273,40 @@ class StatemachineSource implements IContentTemplate {
 	 * Implementation of interface element accessor functions
 	 */
 	
+	def interfaceIncomingEventRaiser(ExecutionFlow it, EventDefinition event) '''
+		void «event.asRaiser»(«scHandleDecl»«event.valueParams»)
+		{
+			«IF event.hasValue»
+			«event.valueAccess» = value;
+			«ENDIF»
+			«event.access» = bool_true;
+		}
+	'''
+	
+	def interfaceOutgoingEventGetter(ExecutionFlow it, EventDefinition event) '''
+		sc_boolean «event.asRaised»(const «scHandleDecl»)
+		{
+			return «event.access»;
+		}
+	'''
+	
+	def interfaceOutgoingEventValueGetter(ExecutionFlow it, EventDefinition event) '''
+		«event.typeSpecifier.targetLanguageName» «event.asGetter»(const «scHandleDecl»)
+		{
+			return «event.valueAccess»;
+		}
+	'''
+	
 	def interfaceFunctions(ExecutionFlow it) '''
 		«FOR scope : interfaceScopes»
 			«FOR event : scope.incomingEvents»
-				void «event.asRaiser»(«scHandleDecl»«event.valueParams»)
-				{
-					«IF event.hasValue»
-					«event.valueAccess» = value;
-					«ENDIF»
-					«event.access» = bool_true;
-				}
+				«interfaceIncomingEventRaiser(event)»
 			«ENDFOR»
 			
 			«FOR event : scope.outgoingEvents»
-				sc_boolean «event.asRaised»(const «scHandleDecl»)
-				{
-					return «event.access»;
-				}
+				«interfaceOutgoingEventGetter(event)»
 				«IF event.hasValue» 
-					«event.typeSpecifier.targetLanguageName» «event.asGetter»(const «scHandleDecl»)
-					{
-						return «event.valueAccess»;
-					}
+					«interfaceOutgoingEventValueGetter(event)»
 				«ENDIF»
 			«ENDFOR»
 			

@@ -79,6 +79,10 @@ class Naming {
 	def typesModule(ExecutionFlow it) {
 		'sc_types'
 	}
+	
+	def eventsModule(ExecutionFlow it) {
+		'''«name»_events'''.toString
+	}
 
 	def timerType(ExecutionFlow it) {
 		'SCTimer'

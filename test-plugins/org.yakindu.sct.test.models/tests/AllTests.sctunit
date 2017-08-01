@@ -23,6 +23,7 @@ testsuite AllTests {
 	EntryChoice,
 	EntryExitSelfTransition,
 	EntryReactionAction,
+	EventDriven,
 	ExitOnSelfTransition, 
 	ExitState,
 	FeatureCalls,
