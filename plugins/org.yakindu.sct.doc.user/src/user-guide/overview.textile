@@ -24,7 +24,8 @@ p=. Features of YAKINDU Statechart Tools
 
 The Professional Edition of YAKINDU Statechart Tools makes additional features available:
 
-* *Deep integration with C and TypeScript* to directly access variables, types etc. in these programming languages
+* "*Deep integration with the C programming language*":../user-guide/c-domain to directly access C variables, types etc.
+* "*Advanced simulation and debugging*":../user-guide/advanced_simulation with breakpoints and snapshots
 
 
 
@@ -35,7 +36,7 @@ h2(#which-licensing-rules-do-apply-to-yakindu-statechart-tools). Which licensing
 
 The source code of YAKINDU Statechart Tools is provided under the "Eclipse Public License":http://www.eclipse.org/legal/epl-v10.html.
 
-The code generators coming with YAKINDU Statechart Tools do not imply any license constraints on the generated code whatsoever. The generated code is property of the user, as a person or as a organization. For the generated code, the user is free to choose any license model they wish.
+The code generators coming with YAKINDU Statechart Tools do not imply any license constraints on the generated code whatsoever. The generated code is property of the user, as a person or as an organization. For the generated code, the user is free to choose any license model they wish.
 
 
 
