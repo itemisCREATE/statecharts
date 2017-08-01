@@ -67,6 +67,9 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			«IF !entry.useStaticOPC»
 				«scopes.filter(typeof(StatechartScope)).map[createInlineOCB_Destructor].filterNullOrEmptyAndJoin»
 			«ENDIF»
+			
+			«additionalContents»
+			
 			#endif /* «module().define»_H_ */
 		'''
 	}

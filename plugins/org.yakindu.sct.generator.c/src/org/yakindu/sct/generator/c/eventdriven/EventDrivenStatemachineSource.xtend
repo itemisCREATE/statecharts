@@ -12,8 +12,10 @@ package org.yakindu.sct.generator.c.eventdriven
 
 import com.google.inject.Inject
 import org.yakindu.base.types.Direction
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.StatemachineSource
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 
@@ -22,6 +24,19 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
  */
 class EventDrivenStatemachineSource extends StatemachineSource {
 	@Inject extension EventNaming
+	@Inject extension StatechartEventsSource events
+	
+	override content(ExecutionFlow it, GeneratorEntry entry, extension IGenArtifactConfigurations artifactConfigs) { 
+		'''
+		«super.content(it, entry, artifactConfigs)»
+		
+		/*
+		 * Helper functions for event driven execution model
+		 */
+		
+		«events.content(it)»
+		'''
+	}
 	
 	override protected initFunctionBody(ExecutionFlow it) {
 		'''

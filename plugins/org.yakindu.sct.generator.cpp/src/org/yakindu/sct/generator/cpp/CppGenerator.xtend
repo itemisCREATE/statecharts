@@ -16,7 +16,6 @@ import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfiguration
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
-import org.yakindu.sct.generator.cpp.eventdriven.StatechartEvents
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
@@ -37,7 +36,6 @@ class CppGenerator implements IExecutionFlowGenerator {
 	@Inject extension StatemachineInterface statemachineInterfaceContent
 	@Inject extension StatemachineHeader statemachineHeaderContent
 	@Inject extension StatemachineImplementation statemachineSourceContent
-	@Inject extension StatechartEvents statechartEvents
 	@Inject extension Navigation
 	@Inject extension Naming
 	@Inject extension ICoreLibraryHelper
@@ -66,9 +64,6 @@ class CppGenerator implements IExecutionFlowGenerator {
 			locations.configure(timerInterface.h, entry.libraryOutput, timerInterfaceContent)
 		}
 
-		if (flow.isEventDriven) {
-			locations.configure(flow.eventClasses.h, entry.sourceOutput, statechartEvents)
-		}
 		locations.configure(flow.module.h, entry.headerOutput, statemachineHeaderContent)
 		locations.configure(flow.module.cpp, entry.sourceOutput, statemachineSourceContent)
 	}

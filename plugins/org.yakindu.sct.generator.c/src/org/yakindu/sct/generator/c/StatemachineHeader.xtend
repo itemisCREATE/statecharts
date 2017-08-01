@@ -66,12 +66,19 @@ class StatemachineHeader implements IContentTemplate {
 		
 		«functions(it)»
 		
+		«additionalContents»
+		
 		#ifdef __cplusplus
 		}
 		#endif 
 		
 		#endif /* «module.define»_H_ */
 	'''
+	}
+	
+	def additionalContents(ExecutionFlow it) {
+		/* To be implemented by child classes */
+		''''''
 	}
 	
 	protected def CharSequence functions(ExecutionFlow it)

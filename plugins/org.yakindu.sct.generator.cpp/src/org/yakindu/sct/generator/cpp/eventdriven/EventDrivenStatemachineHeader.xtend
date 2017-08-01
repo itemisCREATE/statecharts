@@ -24,6 +24,15 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
  */
 class EventDrivenStatemachineHeader extends StatemachineHeader {
 	@Inject extension EventNaming
+	@Inject extension StatechartEvents events
+	
+	override additionalContents(ExecutionFlow it) {
+		'''
+		«super.additionalContents(it)»
+		
+		«events.content(it)»
+		'''
+	}
 	
 	override protected generatePublicClassmembers(ExecutionFlow it) {
 		'''

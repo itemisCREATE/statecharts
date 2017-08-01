@@ -14,10 +14,18 @@ import com.google.inject.Inject
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.c.StatemachineHeader
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class EventDrivenStatemachineHeader extends StatemachineHeader {
 	@Inject extension EventNaming
+	@Inject extension StatechartEventsHeader events
+	
+	override additionalContents(ExecutionFlow it) {
+		'''
+		«super.additionalContents(it)»
+		
+		«events.content(it)»
+		'''
+	}
 	
 	override statemachineTypeStructContent(ExecutionFlow it) {
 		'''

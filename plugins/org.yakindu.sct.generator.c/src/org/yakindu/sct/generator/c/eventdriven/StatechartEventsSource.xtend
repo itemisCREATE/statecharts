@@ -11,27 +11,20 @@
 package org.yakindu.sct.generator.c.eventdriven
 
 import com.google.inject.Inject
-import org.yakindu.sct.generator.c.IContentTemplate
-import org.yakindu.sct.generator.c.IGenArtifactConfigurations
-import org.yakindu.sct.generator.c.Naming
 import org.yakindu.sct.generator.c.Navigation
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgen.GeneratorEntry
 
 /**
  * @author René Beckmann
  */
-class StatechartEventsSource implements IContentTemplate {
+class StatechartEventsSource {
 	@Inject extension Navigation
-	@Inject extension Naming
 	@Inject extension EventNaming
 	@Inject protected extension ICodegenTypeSystemAccess
 	
-	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) {
+	def content(ExecutionFlow it) {
 		'''
-		#include "«eventsModule.h»"
-		
 		«eventFunctions»
 		
 		«eventQueueFunctions»
