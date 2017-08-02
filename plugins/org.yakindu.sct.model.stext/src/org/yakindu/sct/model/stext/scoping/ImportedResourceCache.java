@@ -54,7 +54,7 @@ public class ImportedResourceCache {
 		return TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(DOMAIN_ID);
 	}
 
-	public IResourceDescription get(URI uri) {
+	public IResourceDescription get(final URI uri) {
 		final ResourceSet set = getResourceSet();
 		final Resource resource = set.getResource(uri, true);
 		if (resource != null) {
