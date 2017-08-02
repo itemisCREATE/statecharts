@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/ActiveBeforeInit/ActiveBeforeInit.cc", program = "gtests/AlwaysOncycle/AlwaysOncycle", model = "testmodels/SCTUnit/AlwaysOncycle.sct")
+@GTest(sourceFile = "gtests/ActiveBeforeInit/ActiveBeforeInit.cc", program = "gtests/AlwaysOncycle/AlwaysOncycle", model = "testmodels/SCTUnit/AlwaysOncycle.sct", statechartBundle = "org.yakindu.sct.test.models")
 @RunWith(GTestRunner.class)
 public class ActiveBeforeInit {
 

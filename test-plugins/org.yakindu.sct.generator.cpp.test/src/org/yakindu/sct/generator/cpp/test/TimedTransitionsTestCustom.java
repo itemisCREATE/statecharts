@@ -18,18 +18,18 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/TimedTransitionsTest/TimedTransitionsTestCustom.cc", program = "gtests/TimedTransitionsTest/TimedTransitions", model = "testmodels/SCTUnit/TimedTransitions.sct")
+@GTest(sourceFile = "gtests/TimedTransitionsTest/TimedTransitionsTestCustom.cc", program = "gtests/TimedTransitionsTest/TimedTransitions", model = "testmodels/SCTUnit/TimedTransitions.sct", statechartBundle = "org.yakindu.sct.test.models")
 @RunWith(GTestRunner.class)
 public class TimedTransitionsTestCustom {
 
 	protected final GTestHelper helper = new GTestHelper(this) {
-		
+
 		@Override
 		protected void getTestDataFiles(Collection<String> files) {
 			super.getTestDataFiles(files);
 			files.add("gtests/TimedTransitionsTest/Timer.h");
 		}
-		
+
 		@Override
 		protected void getSourceFiles(Collection<String> files) {
 			super.getSourceFiles(files);

@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/OperationsWithoutBracesTest/OperationsWithoutBracesTestCustom.cc", program = "gtests/OperationsWithoutBracesTest/OperationsWithoutBraces", model = "testmodels/SCTUnit/OperationsWithoutBraces.sct")
+@GTest(sourceFile = "gtests/OperationsWithoutBracesTest/OperationsWithoutBracesTestCustom.cc", program = "gtests/OperationsWithoutBracesTest/OperationsWithoutBraces", model = "testmodels/SCTUnit/OperationsWithoutBraces.sct", statechartBundle = "org.yakindu.sct.test.models")
 @RunWith(GTestRunner.class)
 public class OperationsWithoutBracesTestCustom {
 
@@ -29,13 +29,13 @@ public class OperationsWithoutBracesTestCustom {
 			super.getTestDataFiles(files);
 			files.add("gtests/OperationsWithoutBracesTest/OperationsWithoutBraces_OCB.h");
 		}
-		
+
 		@Override
 		protected void getSourceFiles(Collection<String> files) {
 			super.getSourceFiles(files);
 			files.add(getFileName(getTestProgram()) + ".cpp");
 		}
-		
+
 	};
 
 	@Before
