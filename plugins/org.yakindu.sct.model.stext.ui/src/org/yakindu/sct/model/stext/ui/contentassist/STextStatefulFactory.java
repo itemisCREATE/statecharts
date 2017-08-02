@@ -42,15 +42,18 @@ public class STextStatefulFactory extends StatefulFactory {
 	}
 
 	protected void initializeFromViewerAndResource(final int offset) {
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				initializeAndAdjustCompletionOffset(offset);
+				initializeNodeAndModelData();
+				contextBuilders = Collections.synchronizedList(Lists.<ContentAssistContext.Builder>newArrayList());
+			}
+		};
 		if (Display.getCurrent() == null) {
-			Display.getDefault().syncExec(new Runnable() {
-				@Override
-				public void run() {
-					initializeAndAdjustCompletionOffset(offset);
-					initializeNodeAndModelData();
-					contextBuilders = Collections.synchronizedList(Lists.<ContentAssistContext.Builder>newArrayList());
-				}
-			});
+			Display.getDefault().syncExec(runnable);
+		} else {
+			runnable.run();
 		}
 	}
 }
