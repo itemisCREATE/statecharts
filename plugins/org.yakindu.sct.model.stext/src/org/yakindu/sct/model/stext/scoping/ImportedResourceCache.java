@@ -35,7 +35,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class ImportedResourceCache {
 
-	private static final String DOMAIN_ID = "org.yakindu.sct.domain.resources";
+	public static final String DOMAIN_ID = "org.yakindu.sct.domain.resources";
 
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
