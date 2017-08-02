@@ -101,10 +101,10 @@ sc_boolean AlwaysOncycle::isStateActive(AlwaysOncycleStates state) const
 	switch (state)
 	{
 		case main_region_StateA : 
-			return (sc_boolean) (stateConfVector[0] == main_region_StateA
+			return (sc_boolean) (stateConfVector[SCVI_MAIN_REGION_STATEA] == main_region_StateA
 			);
 		case main_region_StateB : 
-			return (sc_boolean) (stateConfVector[0] == main_region_StateB
+			return (sc_boolean) (stateConfVector[SCVI_MAIN_REGION_STATEB] == main_region_StateB
 			);
 		default: return false;
 	}
@@ -159,17 +159,12 @@ void AlwaysOncycle::set_v2(sc_boolean value)
 
 // implementations of all internal functions
 
-sc_boolean AlwaysOncycle::check_main_region_StateA_tr0_tr0()
-{
-	return iface.value == 5;
-}
-
 sc_boolean AlwaysOncycle::check_main_region_StateA_lr1_lr1()
 {
 	return true;
 }
 
-sc_boolean AlwaysOncycle::check_main_region_StateB_tr0_tr0()
+sc_boolean AlwaysOncycle::check_main_region_StateA_tr0_tr0()
 {
 	return iface.value == 5;
 }
@@ -179,13 +174,23 @@ sc_boolean AlwaysOncycle::check_main_region_StateB_lr0_lr0()
 	return true;
 }
 
+sc_boolean AlwaysOncycle::check_main_region_StateB_tr0_tr0()
+{
+	return iface.value == 5;
+}
+
+void AlwaysOncycle::effect_main_region_StateA_lr1_lr1()
+{
+	iface.value += 1;
+}
+
 void AlwaysOncycle::effect_main_region_StateA_tr0()
 {
 	exseq_main_region_StateA();
 	enseq_main_region_StateB_default();
 }
 
-void AlwaysOncycle::effect_main_region_StateA_lr1_lr1()
+void AlwaysOncycle::effect_main_region_StateB_lr0_lr0()
 {
 	iface.value += 1;
 }
@@ -194,11 +199,6 @@ void AlwaysOncycle::effect_main_region_StateB_tr0()
 {
 	exseq_main_region_StateB();
 	enseq_main_region_StateA_default();
-}
-
-void AlwaysOncycle::effect_main_region_StateB_lr0_lr0()
-{
-	iface.value += 1;
 }
 
 /* Entry action for state 'StateA'. */

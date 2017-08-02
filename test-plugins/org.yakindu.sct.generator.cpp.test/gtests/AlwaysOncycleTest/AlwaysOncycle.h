@@ -8,6 +8,10 @@
 /*! \file Header of the state machine 'AlwaysOncycle'.
 */
 
+/*! Define indices of states in the StateConfVector */
+#define SCVI_MAIN_REGION_STATEA 0
+#define SCVI_MAIN_REGION_STATEB 0
+
 class AlwaysOncycle : public StatemachineInterface
 {
 	
@@ -20,9 +24,9 @@ class AlwaysOncycle : public StatemachineInterface
 		/*! Enumeration of all states */ 
 		typedef enum
 		{
+			AlwaysOncycle_last_state,
 			main_region_StateA,
-			main_region_StateB,
-			AlwaysOncycle_last_state
+			main_region_StateB
 		} AlwaysOncycleStates;
 		
 		//! Inner class for default interface scope.
@@ -109,14 +113,14 @@ class AlwaysOncycle : public StatemachineInterface
 		
 		// prototypes of all internal functions
 		
-		sc_boolean check_main_region_StateA_tr0_tr0();
 		sc_boolean check_main_region_StateA_lr1_lr1();
-		sc_boolean check_main_region_StateB_tr0_tr0();
+		sc_boolean check_main_region_StateA_tr0_tr0();
 		sc_boolean check_main_region_StateB_lr0_lr0();
-		void effect_main_region_StateA_tr0();
+		sc_boolean check_main_region_StateB_tr0_tr0();
 		void effect_main_region_StateA_lr1_lr1();
-		void effect_main_region_StateB_tr0();
+		void effect_main_region_StateA_tr0();
 		void effect_main_region_StateB_lr0_lr0();
+		void effect_main_region_StateB_tr0();
 		void enact_main_region_StateA();
 		void exact_main_region_StateA();
 		void enseq_main_region_StateA_default();
