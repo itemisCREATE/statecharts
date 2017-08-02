@@ -76,10 +76,14 @@ public class GeneratorExecutorLookup {
 	protected Injector createInjector(GeneratorEntry entry, IGeneratorDescriptor description, String generatorId) {
 		Module generatorSpecificModule = description.getBindings(entry);
 		Module executionContextModule = getContextModule();
-		Module domainModule = DomainRegistry.getDomain(entry.getElementRef()).getModule(IDomain.FEATURE_GENERATOR,
-				generatorId);
+		Module domainModule = getDomainGeneratorModule(entry, generatorId);
 		Module combined = Modules.override(Modules.combine(generatorSpecificModule, executionContextModule))
 				.with(domainModule);
 		return Guice.createInjector(combined);
+	}
+
+	protected Module getDomainGeneratorModule(GeneratorEntry entry, String generatorId) {
+		return DomainRegistry.getDomain(entry.getElementRef()).getModule(IDomain.FEATURE_GENERATOR,
+				generatorId);
 	}
 }
