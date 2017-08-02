@@ -678,6 +678,10 @@ To insert an existing content assist template, type the initial character, then 
 
 On this preference pane you can create, edit, and delete generator model language templates.
 
+h4(#generator-model-filter). Generator model filter
+
+Generator models can be executed automatically during the IDEs build. The build will normally execute all generator models that can be found in current workspace, what might be disruptive in some cases. To do a more fine grained configuration it is possible to filter particular generator models or entire folders out of the automatic build execution. To do so right-click on a project within your workspace > Properties > YAKINDU SCT > SGen Filter. Within the opened properties page you can simply add generator models or folders which have to be ignored during build execution.
+
 h3(#simulation). Simulation
 
 p(#fig_preferences-simulation). 
