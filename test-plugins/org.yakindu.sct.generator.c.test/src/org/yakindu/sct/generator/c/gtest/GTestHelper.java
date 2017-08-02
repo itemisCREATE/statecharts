@@ -132,11 +132,11 @@ public class GTestHelper {
 	}
 
 	protected Bundle getModelBundle() {
-		Bundle bundle = getAnnotatedTestBundle();
-		if (bundle == null) {
+		String bundle = getStatechartBundleAnnotation();
+		if (bundle == null || bundle.isEmpty()) {
 			return FrameworkUtil.getBundle(SCTUnitTestModels.class);
 		}
-		return bundle;
+		return Platform.getBundle(bundle);
 	}
 
 	private void copyFilesFromBundleToFolder() {
@@ -236,6 +236,10 @@ public class GTestHelper {
 
 	protected String getTestBundleAnnotation() {
 		return owner.getClass().getAnnotation(GTest.class).testBundle();
+	}
+	
+	protected String getStatechartBundleAnnotation() {
+		return owner.getClass().getAnnotation(GTest.class).statechartBundle();
 	}
 
 	protected IPath getTargetProjectPath() {
