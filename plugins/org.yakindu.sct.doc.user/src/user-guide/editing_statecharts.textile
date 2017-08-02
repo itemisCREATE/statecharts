@@ -678,6 +678,23 @@ To insert an existing content assist template, type the initial character, then 
 
 On this preference pane you can create, edit, and delete generator model language templates.
 
+h4(#generator-model-filter). Generator model filter
+
+p(#fig_preferences-generator-model-filter). 
+!images/docu_preferences_090_generator_filter_01.png(Preferences: Generator model filter)!
+
+p=. Preferences: Generator model filter
+
+The IDE usually executes all generator models in current workspace. However, what might be inconvenient in some cases, especially if you have a lot of different generator models. To exercise a more fine-grained control of which generator models should be executed, it is possible to exclude or "filter away" particular generator models or entire folders from the automatic build execution. 
+
+Please note that this is a project-specific setting, which you won't find via _Window → Preferences_. In order to create or modify a filter configuration, proceed as follows:
+
+# In the project explorer, right-click on a project name. The context menu opens.
+# In the context menu, select _Properties_. The _Properties_ dialog opens.
+# In the menu on the left, select _YAKINDU SCT → SGen Filter_.
+# In the settings pane on the right, use the _Add…_ and _Remove_ buttons to maintain a list of generator models or folders that have to be ignored in automatic builds.
+# Click on _OK_ to store and activate your modifications.
+
 h3(#simulation). Simulation
 
 p(#fig_preferences-simulation). 
