@@ -689,10 +689,10 @@ The IDE usually executes all generator models in current workspace. However, wha
 
 Please note that this is a project-specific setting, which you won't find via _Window → Preferences_. In order to create or modify a filter configuration, proceed as follows:
 
-# Right-click on a project. The context menu opens.
+# In the project explorer, right-click on a project name. The context menu opens.
 # In the context menu, select _Properties_. The _Properties_ dialog opens.
 # In the menu on the left, select _YAKINDU SCT → SGen Filter_.
-# Use the _Add…_ and _Remove_ buttons to maintain a list of generator models or folders that have to be ignored for automatic build.
+# In the settings pane on the right, use the _Add…_ and _Remove_ buttons to maintain a list of generator models or folders that have to be ignored in automatic builds.
 # Click on _OK_ to store and activate your modifications.
 
 h3(#simulation). Simulation
