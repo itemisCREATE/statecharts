@@ -29,7 +29,7 @@ import static org.junit.Assert.assertTrue;
 public class EntryReactionAction extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("entries/EntryReactionAction.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("EntryReactionAction.sct");
 		initInterpreter(flow);
 	}
 	@Test

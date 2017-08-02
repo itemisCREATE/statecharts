@@ -29,7 +29,7 @@ import static org.junit.Assert.assertTrue;
 public class ConstOnlyNamedScope extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("declarations/ConstOnlyNamedScope.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("ConstOnlyNamedScope.sct");
 		initInterpreter(flow);
 	}
 	@Test

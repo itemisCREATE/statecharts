@@ -29,7 +29,7 @@ import static org.junit.Assert.assertTrue;
 public class ConstOnlyInternalScope extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("declarations/ConstOnlyInternalScope.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("ConstOnlyInternalScope.sct");
 		initInterpreter(flow);
 	}
 	@Test
