@@ -40,7 +40,11 @@ public class AsyncXtextContentAssistProcessor extends XtextContentAssistProcesso
 					public ICompletionProposal[] exec(XtextResource state, CancelIndicator cancelIndicator)
 							throws Exception {
 						computer.setCancelIndicator(cancelIndicator);
-						return computer.exec(state);
+						try {
+							return computer.exec(state);
+						} catch (Throwable t) {
+							return new ICompletionProposal[] {};
+						}
 					}
 				});
 		Arrays.sort(result, getCompletionProposalComparator());
@@ -65,7 +69,7 @@ public class AsyncXtextContentAssistProcessor extends XtextContentAssistProcesso
 			this.cancelIndicator = indicator;
 		}
 
-		@Override 
+		@Override
 		public boolean canAcceptMoreProposals() {
 			if (cancelIndicator == null) {
 				return super.canAcceptMoreProposals();

@@ -71,7 +71,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	@Inject
 	private IPackageImport2URIMapper mapper;
 	@Inject
-	private URI2ResourceDescriptionCache resourceDescriptionCache;
+	private ImportedResourceCache resourceDescriptionCache;
 
 	public void setCache(IResourceScopeCache cache) {
 		this.cache = cache;
@@ -180,7 +180,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	protected IScope createLazyResourceScope(IScope parent, URI uri, IResourceDescriptions descriptions, EClass type,
 			Predicate<IEObjectDescription> filter, boolean ignoreCase) {
 		IResourceDescription description = resourceDescriptionCache.get(uri);
-		if(description == null)
+		if (description == null)
 			return IScope.NULLSCOPE;
 		return SelectableBasedScope.createScope(parent, description, filter, type, ignoreCase);
 	}
@@ -204,5 +204,5 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		});
 		return parentScope;
 	}
-	
+
 }
