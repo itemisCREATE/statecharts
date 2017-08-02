@@ -680,7 +680,20 @@ On this preference pane you can create, edit, and delete generator model languag
 
 h4(#generator-model-filter). Generator model filter
 
-Generator models can be executed automatically during the IDEs build. The build will normally execute all generator models that can be found in current workspace, what might be disruptive in some cases. To do a more fine grained configuration it is possible to filter particular generator models or entire folders out of the automatic build execution. To do so right-click on a project within your workspace > Properties > YAKINDU SCT > SGen Filter. Within the opened properties page you can simply add generator models or folders which have to be ignored during build execution.
+p(#fig_preferences-generator-model-filter). 
+!images/docu_preferences_090_generator_filter_01.png(Preferences: Generator model filter)!
+
+p=. Preferences: Generator model filter
+
+The IDE usually executes all generator models in current workspace. However, what might be inconvenient in some cases, especially if you have a lot of different generator models. To exercise a more fine-grained control of which generator models should be executed, it is possible to exclude or "filter away" particular generator models or entire folders from the automatic build execution. 
+
+Please note that this is a project-specific setting, which you won't find via _Window → Preferences_. In order to create or modify a filter configuration, proceed as follows:
+
+# Right-click on a project. The context menu opens.
+# In the context menu, select _Properties_. The _Properties_ dialog opens.
+# In the menu on the left, select _YAKINDU SCT → SGen Filter_.
+# Use the _Add…_ and _Remove_ buttons to maintain a list of generator models or folders that have to be ignored for automatic build.
+# Click on _OK_ to store and activate your modifications.
 
 h3(#simulation). Simulation
 
