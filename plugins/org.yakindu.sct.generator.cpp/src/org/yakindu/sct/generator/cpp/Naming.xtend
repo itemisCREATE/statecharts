@@ -1,9 +1,10 @@
 /**
-  Copyright (c) 2013 committers of YAKINDU and others.
+  Copyright (c) 2013-2017 committers of YAKINDU and others.
   All rights reserved. This program and the accompanying materials
   are made available under the terms of the Eclipse Public License v1.0
   which accompanies this distribution, and is available at
   http://www.eclipse.org/legal/epl-v10.html
+ 
   Contributors:
   	Markus Mühlbrandt - Initial contribution and API
  */
@@ -26,6 +27,11 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
+
+/**
+ * @author Markus Mühlbrands - Initial contribution and API
+ * @author Axel Terfloth - updates
+ */
 class Naming extends org.yakindu.sct.generator.c.Naming {
 
 	@Inject extension Navigation
@@ -60,10 +66,6 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		'TimerInterface'
 	}
 	
-	def eventClasses(ExecutionFlow it) {
-		'''«name.toFirstUpper»_Events'''.toString
-	}
-
 	def timerInstance() {
 		'timer'
 	}

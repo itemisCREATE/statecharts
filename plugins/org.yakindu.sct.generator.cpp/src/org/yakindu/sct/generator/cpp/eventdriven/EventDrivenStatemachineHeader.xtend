@@ -21,6 +21,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 
 /**
  * @author René Beckmann - Initial contribution and API
+ * @author Axel Terfloth - updates
  */
 class EventDrivenStatemachineHeader extends StatemachineHeader {
 	@Inject extension EventNaming
@@ -28,7 +29,7 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 	
 	override preStatechartDeclarations(ExecutionFlow it) {
 		'''
-		«super.postStatechartDeclarations(it)»
+		«super.preStatechartDeclarations(it)»
 		
 		«events.content(it)»
 		'''
@@ -54,7 +55,6 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 	override includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
 		'''
 		#include <deque>
-		#include "«eventClasses.h»"
 		«super.includes(it, artifactConfigs)»
 		'''
 	}
