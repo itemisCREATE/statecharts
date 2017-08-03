@@ -19,9 +19,9 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 	@Inject extension EventNaming
 	@Inject extension StatechartEventsHeader events
 	
-	override additionalContents(ExecutionFlow it) {
+	override preStatechartDeclarations(ExecutionFlow it) {
 		'''
-		«super.additionalContents(it)»
+		«super.preStatechartDeclarations(it)»
 		
 		«events.content(it)»
 		'''
@@ -31,13 +31,6 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 		'''
 		«super.statemachineTypeStructContent(it)»
 		«eventQueueTypeName» internal_event_queue;
-		'''
-	}
-	
-	override includes(ExecutionFlow it, extension IGenArtifactConfigurations artifactConfigs) {
-		'''
-		«super.includes(it, artifactConfigs)»
-		#include "«eventsModule.h»"
 		'''
 	}
 	

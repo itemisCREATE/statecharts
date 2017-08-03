@@ -56,6 +56,8 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			/*! \file Header of the state machine '«name»'.
 			*/
 			
+			«preStatechartDeclarations»
+			
 			/*! Define indices of states in the StateConfVector */
 			«FOR state : states»
 				#define «state.stateVectorDefine» «state.stateVector.offset»
@@ -68,7 +70,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 				«scopes.filter(typeof(StatechartScope)).map[createInlineOCB_Destructor].filterNullOrEmptyAndJoin»
 			«ENDIF»
 			
-			«additionalContents»
+			«postStatechartDeclarations»
 			
 			#endif /* «module().define»_H_ */
 		'''
