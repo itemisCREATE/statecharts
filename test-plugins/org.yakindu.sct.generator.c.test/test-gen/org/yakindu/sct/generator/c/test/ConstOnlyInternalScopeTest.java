@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ConstOnlyInternalScope/ConstOnlyInternalScope",
 	model = "testmodels/SCTUnit/ConstOnlyInternalScope.sct",
 	additionalFilesToCopy = {
-		"gtests/ConstOnlyInternalScope/sc_timer_service.c",
-		"gtests/ConstOnlyInternalScope/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"ConstOnlyInternalScope.c",

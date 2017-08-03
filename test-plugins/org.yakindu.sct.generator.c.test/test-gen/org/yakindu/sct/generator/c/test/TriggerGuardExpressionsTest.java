@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/TriggerGuardExpressions/TriggerGuardExpressions",
 	model = "testmodels/SCTUnit/TriggerGuardExpressions.sct",
 	additionalFilesToCopy = {
-		"gtests/TriggerGuardExpressions/sc_timer_service.c",
-		"gtests/TriggerGuardExpressions/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"TriggerGuardExpressions.c",

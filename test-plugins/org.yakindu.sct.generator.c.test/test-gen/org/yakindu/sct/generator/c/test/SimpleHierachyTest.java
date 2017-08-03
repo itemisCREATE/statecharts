@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/SimpleHierachy/SimpleHierachy",
 	model = "testmodels/SCTUnit/SimpleHierachy.sct",
 	additionalFilesToCopy = {
-		"gtests/SimpleHierachy/sc_timer_service.c",
-		"gtests/SimpleHierachy/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"SimpleHierachy.c",

@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/Parenthesis/Parenthesis",
 	model = "testmodels/SCTUnit/Parenthesis.sct",
 	additionalFilesToCopy = {
-		"gtests/Parenthesis/sc_timer_service.c",
-		"gtests/Parenthesis/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"Parenthesis.c",

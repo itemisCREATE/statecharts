@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/SyncJoin/SyncJoin",
 	model = "testmodels/SCTUnit/SyncJoin.sct",
 	additionalFilesToCopy = {
-		"gtests/SyncJoin/sc_timer_service.c",
-		"gtests/SyncJoin/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"SyncJoin.c",

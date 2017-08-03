@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/NullCheck/NullCheck",
 	model = "testmodels/SCTUnit/NullCheck.sct",
 	additionalFilesToCopy = {
-		"gtests/NullCheck/sc_timer_service.c",
-		"gtests/NullCheck/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"NullCheck.c",

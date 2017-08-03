@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/LogicalOrTests/LogicalOr",
 	model = "testmodels/SCTUnit/LogicalOr.sct",
 	additionalFilesToCopy = {
-		"gtests/LogicalOrTests/sc_timer_service.c",
-		"gtests/LogicalOrTests/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"LogicalOr.c",

@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/BitExpressions/BitExpressions",
 	model = "testmodels/SCTUnit/BitExpressions.sct",
 	additionalFilesToCopy = {
-		"gtests/BitExpressions/sc_timer_service.c",
-		"gtests/BitExpressions/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"BitExpressions.c",

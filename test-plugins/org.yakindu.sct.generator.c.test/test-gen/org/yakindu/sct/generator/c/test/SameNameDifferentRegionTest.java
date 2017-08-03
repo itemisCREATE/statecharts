@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/SameNameDifferentRegion/SameNameDifferentRegion",
 	model = "testmodels/SCTUnit/SameNameDifferentRegion.sct",
 	additionalFilesToCopy = {
-		"gtests/SameNameDifferentRegion/sc_timer_service.c",
-		"gtests/SameNameDifferentRegion/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"SameNameDifferentRegion.c",

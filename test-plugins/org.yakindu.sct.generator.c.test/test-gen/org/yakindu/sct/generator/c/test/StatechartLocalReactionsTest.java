@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/StatechartLocalReactions/StatechartLocalReactions",
 	model = "testmodels/SCTUnit/StatechartLocalReactions.sct",
 	additionalFilesToCopy = {
-		"gtests/StatechartLocalReactions/sc_timer_service.c",
-		"gtests/StatechartLocalReactions/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"StatechartLocalReactions.c",

@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/EnterState/EnterState",
 	model = "testmodels/SCTUnit/EnterState.sct",
 	additionalFilesToCopy = {
-		"gtests/EnterState/sc_timer_service.c",
-		"gtests/EnterState/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"EnterState.c",

@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ExitState/ExitState",
 	model = "testmodels/SCTUnit/ExitState.sct",
 	additionalFilesToCopy = {
-		"gtests/ExitState/sc_timer_service.c",
-		"gtests/ExitState/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"ExitState.c",

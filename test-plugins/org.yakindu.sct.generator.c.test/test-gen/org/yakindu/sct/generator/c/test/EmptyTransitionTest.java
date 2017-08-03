@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/EmptyTransition/EmptyTransition",
 	model = "testmodels/SCTUnit/EmptyTransition.sct",
 	additionalFilesToCopy = {
-		"gtests/EmptyTransition/sc_timer_service.c",
-		"gtests/EmptyTransition/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"EmptyTransition.c",

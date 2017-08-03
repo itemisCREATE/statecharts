@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ReadOnlyVariable/ReadOnlyVariable",
 	model = "testmodels/SCTUnit/ReadOnlyVariable.sct",
 	additionalFilesToCopy = {
-		"gtests/ReadOnlyVariable/sc_timer_service.c",
-		"gtests/ReadOnlyVariable/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"ReadOnlyVariable.c",

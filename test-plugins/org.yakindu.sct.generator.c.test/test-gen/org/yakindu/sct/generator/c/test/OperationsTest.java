@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/OperationsTest/Operations",
 	model = "testmodels/SCTUnit/Operations.sct",
 	additionalFilesToCopy = {
-		"gtests/OperationsTest/sc_timer_service.c",
-		"gtests/OperationsTest/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"Operations.c",
