@@ -102,6 +102,11 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 				/*! Checks if the specified state is active (until 2.4.1 the used method for states was calles isActive()). */
 				sc_boolean «stateActiveFctID»(«statesEnumType» state) const;
 				
+				«IF timed»
+					//! number of time events used by the state machine.
+					static const sc_integer «timeEventsCountConst» = «timeEvents.size»;
+				«ENDIF»
+				
 		'''
 	}
 
@@ -243,8 +248,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		static const sc_integer «historyStatesConst» = «historyVector.size»;«ENDIF»
 		
 		«IF timed»
-			//! number of time events used by the state machine.
-			static const sc_integer «timeEventsCountConst» = «timeEvents.size»;
 			«timerInterface»* «timerInstance»;
 			sc_boolean «timeEventsInstance»[«timeEventsCountConst»];
 		«ENDIF»
