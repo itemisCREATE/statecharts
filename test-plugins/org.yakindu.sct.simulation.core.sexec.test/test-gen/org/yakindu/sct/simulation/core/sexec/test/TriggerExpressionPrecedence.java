@@ -29,7 +29,7 @@ import static org.junit.Assert.assertTrue;
 public class TriggerExpressionPrecedence extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("expressions/TriggerExpressionPrecedence.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("TriggerExpressionPrecedence.sct");
 		initInterpreter(flow);
 	}
 	@Test

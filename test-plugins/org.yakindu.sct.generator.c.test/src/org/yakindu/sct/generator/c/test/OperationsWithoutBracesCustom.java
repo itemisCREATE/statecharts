@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/OperationsWithoutBraces/OperationsWithoutBracesCustom.cc", program = "gtests/OperationsWithoutBraces/OperationsWithoutBraces", model = "testmodels/SCTUnit/OperationsWithoutBraces.sct")
+@GTest(sourceFile = "gtests/OperationsWithoutBraces/OperationsWithoutBracesCustom.cc", program = "gtests/OperationsWithoutBraces/OperationsWithoutBraces", model = "testmodels/SCTUnit/OperationsWithoutBraces.sct", statechartBundle = "org.yakindu.sct.test.models")
 @RunWith(GTestRunner.class)
 public class OperationsWithoutBracesCustom {
 

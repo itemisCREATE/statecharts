@@ -42,7 +42,6 @@ import org.yakindu.sct.generator.builder.EclipseContextGeneratorExecutorLookup;
 import org.yakindu.sct.generator.core.execution.GeneratorExecutorLookup;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.test.models.SCTUnitTestModels;
 
 /**
  * @author Andreas Unger - Initial contribution and API
@@ -132,11 +131,8 @@ public class GTestHelper {
 	}
 
 	protected Bundle getModelBundle() {
-		Bundle bundle = getAnnotatedTestBundle();
-		if (bundle == null) {
-			return FrameworkUtil.getBundle(SCTUnitTestModels.class);
-		}
-		return bundle;
+		String bundle = getStatechartBundleAnnotation();
+		return Platform.getBundle(bundle);
 	}
 
 	private void copyFilesFromBundleToFolder() {
@@ -236,6 +232,10 @@ public class GTestHelper {
 
 	protected String getTestBundleAnnotation() {
 		return owner.getClass().getAnnotation(GTest.class).testBundle();
+	}
+	
+	protected String getStatechartBundleAnnotation() {
+		return owner.getClass().getAnnotation(GTest.class).statechartBundle();
 	}
 
 	protected IPath getTargetProjectPath() {

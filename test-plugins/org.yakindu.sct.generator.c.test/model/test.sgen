@@ -5,6 +5,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/AllTests"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -30,6 +31,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/AlwaysOncycle"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -59,6 +61,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/AssignmentAsExpression"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -87,6 +90,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/BitExpressions"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -115,6 +119,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/BooleanExpressions"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -143,6 +148,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/CastExpressions"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -171,6 +177,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/Choice"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -199,6 +206,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/CKeywords"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -227,6 +235,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ConditionalExpression"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -255,6 +264,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ConstantsTests"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -283,6 +293,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ConstOnlyInternalScope"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -312,6 +323,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ConstOnlyDefaultScope"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -342,6 +354,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ConstOnlyNamedScope"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -371,6 +384,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/Declarations"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -399,6 +413,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/DeepEntry"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -427,6 +442,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/DeepHistory"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -455,6 +471,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/DynamicChoice"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -483,6 +500,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/EmptyTransition"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -511,6 +529,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/EnterState"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -539,6 +558,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/EntryChoice"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -567,6 +587,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/EntryExitSelfTransition"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -596,6 +617,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/EntryReactionAction"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -625,6 +647,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ExitOnSelfTransition"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -654,6 +677,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ExitState"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -683,6 +707,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/FeatureCalls"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -712,6 +737,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/FinalState"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -741,6 +767,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/Guard"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -770,6 +797,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/GuardedEntry"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -799,6 +827,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/GuardedExit"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -828,6 +857,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/HistoryWithExitPoint"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -857,6 +887,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/HistoryWithoutInitialStep"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -886,6 +917,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/InEventLifeCycle"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -915,6 +947,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/IntegerExpressions"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -944,6 +977,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/InternalEventLifeCycle"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -972,6 +1006,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/LocalReactions"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1001,6 +1036,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/LogicalAndTests"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1030,6 +1066,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/LogicalOrTests"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1058,6 +1095,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/OperationsTest"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1087,6 +1125,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/NamedInterfaceAccess"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1116,6 +1155,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/NullCheck"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1145,6 +1185,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/OutEventLifeCycle"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1174,6 +1215,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/Parenthesis"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1203,6 +1245,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/PriorityValues"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1232,6 +1275,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ReadOnlyVariable"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1261,6 +1305,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/RaiseEvent"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1290,6 +1335,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/SameNameDifferentRegion"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1319,6 +1365,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ShallowHistory"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1348,6 +1395,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ShallowHistoryWithDeepEntry"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1377,6 +1425,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/SimpleEvent"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1406,6 +1455,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/SimpleHierachy"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1435,6 +1485,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/StatechartLocalReactions"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1464,6 +1515,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/StatechartActive"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1493,6 +1545,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/StateIsActive"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1522,6 +1575,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/StaticChoice"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1551,6 +1605,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/STextKeywordsInStatesAndRegions"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1580,6 +1635,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/StringExpressions"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1614,6 +1670,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/SyncFork"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1643,6 +1700,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/SyncJoin"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1672,6 +1730,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/TimedTransitions"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1701,6 +1760,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/TransitionWithoutCondition"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1730,6 +1790,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/TriggerExpressionPrecedence"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1759,6 +1820,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/TriggerGuardExpressions"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1788,6 +1850,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ValuedEvents"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1817,6 +1880,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/StatemachineKeywords"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -1845,6 +1909,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/TypeAlias"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
