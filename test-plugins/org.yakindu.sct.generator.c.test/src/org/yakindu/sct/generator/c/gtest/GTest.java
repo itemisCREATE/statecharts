@@ -37,6 +37,6 @@ public @interface GTest {
 	 * 
 	 */
 	String testBundle() default "";
-	String statechartBundle();
+	String statechartBundle() default "";
 
 }
