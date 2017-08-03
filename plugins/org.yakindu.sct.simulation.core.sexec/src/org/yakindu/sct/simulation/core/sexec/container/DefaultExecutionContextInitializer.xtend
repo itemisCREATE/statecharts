@@ -39,6 +39,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import java.util.Set
 import java.util.HashSet
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 /**
  * 
@@ -87,7 +88,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		for (Declaration decl : scope.declarations
 										.filter(ImportDeclaration)
 										.map[declaration]
-										.filter(decl | mapUnusedDeclarationRootsInImportScope || usedDeclarations.contains(decl))) 
+										.filter(decl | mapUnusedDeclarationRootsInImportScope || usedDeclarations.exists[used | EcoreUtil.equals(decl,used)])) 
 		{
 			val pkg = EcoreUtil2.getContainerOfType(decl, Package)
 			if (pkg !== null) {
