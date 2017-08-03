@@ -26,9 +26,9 @@ class EventDrivenStatemachineHeader extends StatemachineHeader {
 	@Inject extension EventNaming
 	@Inject extension StatechartEvents events
 	
-	override additionalContents(ExecutionFlow it) {
+	override preStatechartDeclarations(ExecutionFlow it) {
 		'''
-		«super.additionalContents(it)»
+		«super.postStatechartDeclarations(it)»
 		
 		«events.content(it)»
 		'''

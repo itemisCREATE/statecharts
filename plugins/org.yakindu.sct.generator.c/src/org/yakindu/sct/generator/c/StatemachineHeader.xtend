@@ -55,6 +55,8 @@ class StatemachineHeader implements IContentTemplate {
 		/*! \file Header of the state machine '«name»'.
 		*/
 		
+		«preStatechartDeclarations»
+		
 		«statesEnumDecl»
 		
 		«FOR s : it.scopes»
@@ -66,7 +68,7 @@ class StatemachineHeader implements IContentTemplate {
 		
 		«functions(it)»
 		
-		«additionalContents»
+		«postStatechartDeclarations»
 		
 		#ifdef __cplusplus
 		}
@@ -76,7 +78,12 @@ class StatemachineHeader implements IContentTemplate {
 	'''
 	}
 	
-	def additionalContents(ExecutionFlow it) {
+	def preStatechartDeclarations(ExecutionFlow it) {
+		/* To be implemented by child classes */
+		''''''
+	}
+	
+	def postStatechartDeclarations(ExecutionFlow it) {
 		/* To be implemented by child classes */
 		''''''
 	}
