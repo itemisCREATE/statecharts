@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ParenthesisTest/Parenthesis",
 	model = "testmodels/SCTUnit/Parenthesis.sct",
 	additionalFilesToCopy = {
-		"gtests/ParenthesisTest/sc_runner.h",
-		"gtests/ParenthesisTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"Parenthesis.cpp",

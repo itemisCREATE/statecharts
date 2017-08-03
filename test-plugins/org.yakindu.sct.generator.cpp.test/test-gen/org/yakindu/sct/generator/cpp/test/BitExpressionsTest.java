@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/BitExpressionsTest/BitExpressions",
 	model = "testmodels/SCTUnit/BitExpressions.sct",
 	additionalFilesToCopy = {
-		"gtests/BitExpressionsTest/sc_runner.h",
-		"gtests/BitExpressionsTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"BitExpressions.cpp",

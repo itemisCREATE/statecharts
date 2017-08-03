@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ConstOnlyDefaultScopeTest/ConstOnlyDefaultScope",
 	model = "testmodels/SCTUnit/ConstOnlyDefaultScope.sct",
 	additionalFilesToCopy = {
-		"gtests/ConstOnlyDefaultScopeTest/sc_runner.h",
-		"gtests/ConstOnlyDefaultScopeTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"ConstOnlyDefaultScope.cpp",

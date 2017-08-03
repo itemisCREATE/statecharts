@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/StatemachineKeywordsTest/StatechartKeywords",
 	model = "testmodels/SCTUnit/StatechartKeywords.sct",
 	additionalFilesToCopy = {
-		"gtests/StatemachineKeywordsTest/sc_runner_timed.h",
-		"gtests/StatemachineKeywordsTest/sc_runner_timed.cpp"
+		"libraryTarget/sc_runner_timed.h",
+		"libraryTarget/sc_runner_timed.cpp"
 	},
 	additionalFilesToCompile = {
 		"StatechartKeywords.cpp",

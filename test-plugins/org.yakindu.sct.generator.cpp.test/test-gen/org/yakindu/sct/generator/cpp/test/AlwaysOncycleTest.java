@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/AlwaysOncycleTest/AlwaysOncycle",
 	model = "testmodels/SCTUnit/AlwaysOncycle.sct",
 	additionalFilesToCopy = {
-		"gtests/AlwaysOncycleTest/sc_runner.h",
-		"gtests/AlwaysOncycleTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"AlwaysOncycle.cpp",

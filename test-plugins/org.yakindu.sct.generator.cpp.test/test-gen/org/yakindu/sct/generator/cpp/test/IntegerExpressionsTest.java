@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/IntegerExpressionsTest/IntegerExpressions",
 	model = "testmodels/SCTUnit/IntegerExpressions.sct",
 	additionalFilesToCopy = {
-		"gtests/IntegerExpressionsTest/sc_runner.h",
-		"gtests/IntegerExpressionsTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"IntegerExpressions.cpp",

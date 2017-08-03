@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/HistoryWithoutInitialStepTest/HistoryWithoutInitialStep",
 	model = "testmodels/SCTUnit/HistoryWithoutInitialStep.sct",
 	additionalFilesToCopy = {
-		"gtests/HistoryWithoutInitialStepTest/sc_runner.h",
-		"gtests/HistoryWithoutInitialStepTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"HistoryWithoutInitialStep.cpp",

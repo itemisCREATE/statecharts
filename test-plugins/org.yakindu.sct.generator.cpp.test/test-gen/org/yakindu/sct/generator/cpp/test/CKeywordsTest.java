@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/CKeywordsTest/CKeywords",
 	model = "testmodels/SCTUnit/CKeywords.sct",
 	additionalFilesToCopy = {
-		"gtests/CKeywordsTest/sc_runner.h",
-		"gtests/CKeywordsTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"CKeywords.cpp",

@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/TransitionWithoutConditionTest/TransitionWithoutCondition",
 	model = "testmodels/SCTUnit/TransitionWithoutCondition.sct",
 	additionalFilesToCopy = {
-		"gtests/TransitionWithoutConditionTest/sc_runner.h",
-		"gtests/TransitionWithoutConditionTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"TransitionWithoutCondition.cpp",

@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/TimedTransitionsTest/TimedTransitions",
 	model = "testmodels/SCTUnit/TimedTransitions.sct",
 	additionalFilesToCopy = {
-		"gtests/TimedTransitionsTest/sc_runner_timed.h",
-		"gtests/TimedTransitionsTest/sc_runner_timed.cpp"
+		"libraryTarget/sc_runner_timed.h",
+		"libraryTarget/sc_runner_timed.cpp"
 	},
 	additionalFilesToCompile = {
 		"TimedTransitions.cpp",

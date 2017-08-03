@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/EntryReactionActionTest/EntryReactionAction",
 	model = "testmodels/SCTUnit/EntryReactionAction.sct",
 	additionalFilesToCopy = {
-		"gtests/EntryReactionActionTest/sc_runner.h",
-		"gtests/EntryReactionActionTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"EntryReactionAction.cpp",

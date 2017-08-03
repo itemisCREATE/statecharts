@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ConditionalExpressionsTest/ConditionalExpressions",
 	model = "testmodels/SCTUnit/ConditionalExpressions.sct",
 	additionalFilesToCopy = {
-		"gtests/ConditionalExpressionsTest/sc_runner.h",
-		"gtests/ConditionalExpressionsTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"ConditionalExpressions.cpp",

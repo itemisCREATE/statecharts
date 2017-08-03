@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/NullCheckTest/NullCheck",
 	model = "testmodels/SCTUnit/NullCheck.sct",
 	additionalFilesToCopy = {
-		"gtests/NullCheckTest/sc_runner.h",
-		"gtests/NullCheckTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"NullCheck.cpp",

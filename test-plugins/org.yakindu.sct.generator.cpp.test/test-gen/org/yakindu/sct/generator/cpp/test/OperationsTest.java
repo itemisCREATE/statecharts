@@ -14,8 +14,8 @@ import org.yakindu.sct.generator.c.gtest.GMockHelper;
 	program = "gtests/OperationsTest/Operations",
 	model = "testmodels/SCTUnit/Operations.sct",
 	additionalFilesToCopy = {
-		"gtests/OperationsTest/sc_runner.h",
-		"gtests/OperationsTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"Operations.cpp",

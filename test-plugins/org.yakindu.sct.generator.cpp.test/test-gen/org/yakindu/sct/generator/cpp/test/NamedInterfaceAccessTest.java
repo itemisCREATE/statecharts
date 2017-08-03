@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/NamedInterfaceAccessTest/NamedInterfaceAccess",
 	model = "testmodels/SCTUnit/NamedInterfaceAccess.sct",
 	additionalFilesToCopy = {
-		"gtests/NamedInterfaceAccessTest/sc_runner.h",
-		"gtests/NamedInterfaceAccessTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"NamedInterfaceAccess.cpp",

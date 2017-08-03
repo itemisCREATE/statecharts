@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/InternalEventLifeCycleTest/InternalEventLifeCycle",
 	model = "testmodels/SCTUnit/InternalEventLifeCycle.sct",
 	additionalFilesToCopy = {
-		"gtests/InternalEventLifeCycleTest/sc_runner.h",
-		"gtests/InternalEventLifeCycleTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"InternalEventLifeCycle.cpp",

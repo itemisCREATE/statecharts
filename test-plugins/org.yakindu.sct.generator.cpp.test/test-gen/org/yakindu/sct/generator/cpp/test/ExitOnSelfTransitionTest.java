@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ExitOnSelfTransitionTest/ExitOnSelfTransition",
 	model = "testmodels/SCTUnit/ExitOnSelfTransition.sct",
 	additionalFilesToCopy = {
-		"gtests/ExitOnSelfTransitionTest/sc_runner.h",
-		"gtests/ExitOnSelfTransitionTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"ExitOnSelfTransition.cpp",

@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/BooleanExpressionsTest/BooleanExpressions",
 	model = "testmodels/SCTUnit/BooleanExpressions.sct",
 	additionalFilesToCopy = {
-		"gtests/BooleanExpressionsTest/sc_runner.h",
-		"gtests/BooleanExpressionsTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"BooleanExpressions.cpp",

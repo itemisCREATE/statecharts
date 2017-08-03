@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/TypeAliasTest/TypeAlias",
 	model = "testmodels/SCTUnit/TypeAlias.sct",
 	additionalFilesToCopy = {
-		"gtests/TypeAliasTest/sc_runner.h",
-		"gtests/TypeAliasTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"TypeAlias.cpp",

@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/GuardedExitTest/GuardedExit",
 	model = "testmodels/SCTUnit/GuardedExit.sct",
 	additionalFilesToCopy = {
-		"gtests/GuardedExitTest/sc_runner.h",
-		"gtests/GuardedExitTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"GuardedExit.cpp",

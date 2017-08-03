@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/STextKeywordsInStatesAndRegionsTest/STextKeywordsInStatesAndRegions",
 	model = "testmodels/SCTUnit/STextKeywordsInStatesAndRegions.sct",
 	additionalFilesToCopy = {
-		"gtests/STextKeywordsInStatesAndRegionsTest/sc_runner.h",
-		"gtests/STextKeywordsInStatesAndRegionsTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"STextKeywordsInStatesAndRegions.cpp",

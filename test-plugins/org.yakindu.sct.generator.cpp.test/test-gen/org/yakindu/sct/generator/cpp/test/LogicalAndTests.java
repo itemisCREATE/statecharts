@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/LogicalAndTest/LogicalAnd",
 	model = "testmodels/SCTUnit/LogicalAnd.sct",
 	additionalFilesToCopy = {
-		"gtests/LogicalAndTest/sc_runner.h",
-		"gtests/LogicalAndTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"LogicalAnd.cpp",

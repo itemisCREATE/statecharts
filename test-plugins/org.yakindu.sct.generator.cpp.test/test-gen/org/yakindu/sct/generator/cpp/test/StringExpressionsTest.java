@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/StringExpressionsTest/StringExpressions",
 	model = "testmodels/SCTUnit/StringExpressions.sct",
 	additionalFilesToCopy = {
-		"gtests/StringExpressionsTest/sc_runner.h",
-		"gtests/StringExpressionsTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"StringExpressions.cpp",

@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/StateIsActiveTest/StateIsActive",
 	model = "testmodels/SCTUnit/StateIsActive.sct",
 	additionalFilesToCopy = {
-		"gtests/StateIsActiveTest/sc_runner.h",
-		"gtests/StateIsActiveTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"StateIsActive.cpp",

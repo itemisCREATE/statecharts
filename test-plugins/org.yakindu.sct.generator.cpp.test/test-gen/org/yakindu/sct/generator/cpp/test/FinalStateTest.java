@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/FinalStateTest/FinalState",
 	model = "testmodels/SCTUnit/FinalState.sct",
 	additionalFilesToCopy = {
-		"gtests/FinalStateTest/sc_runner.h",
-		"gtests/FinalStateTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"FinalState.cpp",

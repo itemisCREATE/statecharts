@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ShallowHistoryTest/ShallowHistory",
 	model = "testmodels/SCTUnit/ShallowHistory.sct",
 	additionalFilesToCopy = {
-		"gtests/ShallowHistoryTest/sc_runner.h",
-		"gtests/ShallowHistoryTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"ShallowHistory.cpp",

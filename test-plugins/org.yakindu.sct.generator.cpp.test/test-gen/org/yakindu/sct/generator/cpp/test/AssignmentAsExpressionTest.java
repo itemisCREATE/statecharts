@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/AssignmentAsExpressionTest/AssignmentAsExpression",
 	model = "testmodels/SCTUnit/AssignmentAsExpression.sct",
 	additionalFilesToCopy = {
-		"gtests/AssignmentAsExpressionTest/sc_runner.h",
-		"gtests/AssignmentAsExpressionTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"AssignmentAsExpression.cpp",

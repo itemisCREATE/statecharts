@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/DeepEntryTest/DeepEntry",
 	model = "testmodels/SCTUnit/DeepEntry.sct",
 	additionalFilesToCopy = {
-		"gtests/DeepEntryTest/sc_runner.h",
-		"gtests/DeepEntryTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"DeepEntry.cpp",

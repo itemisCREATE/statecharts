@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/GuardTest/Guard",
 	model = "testmodels/SCTUnit/Guard.sct",
 	additionalFilesToCopy = {
-		"gtests/GuardTest/sc_runner.h",
-		"gtests/GuardTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"Guard.cpp",

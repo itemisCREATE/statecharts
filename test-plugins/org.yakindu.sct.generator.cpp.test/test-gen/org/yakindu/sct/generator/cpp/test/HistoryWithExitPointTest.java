@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/HistoryWithExitPointTest/HistoryWithExitPoint",
 	model = "testmodels/SCTUnit/HistoryWithExitPoint.sct",
 	additionalFilesToCopy = {
-		"gtests/HistoryWithExitPointTest/sc_runner.h",
-		"gtests/HistoryWithExitPointTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"HistoryWithExitPoint.cpp",

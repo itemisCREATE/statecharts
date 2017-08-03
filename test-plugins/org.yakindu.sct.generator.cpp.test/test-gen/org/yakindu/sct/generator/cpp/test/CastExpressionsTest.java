@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/CastExpressionsTest/CastExpressions",
 	model = "testmodels/SCTUnit/CastExpressions.sct",
 	additionalFilesToCopy = {
-		"gtests/CastExpressionsTest/sc_runner.h",
-		"gtests/CastExpressionsTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"CastExpressions.cpp",

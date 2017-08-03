@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ChoiceTest/Choice",
 	model = "testmodels/SCTUnit/Choice.sct",
 	additionalFilesToCopy = {
-		"gtests/ChoiceTest/sc_runner.h",
-		"gtests/ChoiceTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"Choice.cpp",

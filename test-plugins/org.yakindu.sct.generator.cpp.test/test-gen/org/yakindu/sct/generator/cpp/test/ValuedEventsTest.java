@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ValuedEventsTest/ValuedEvents",
 	model = "testmodels/SCTUnit/ValuedEvents.sct",
 	additionalFilesToCopy = {
-		"gtests/ValuedEventsTest/sc_runner.h",
-		"gtests/ValuedEventsTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"ValuedEvents.cpp",

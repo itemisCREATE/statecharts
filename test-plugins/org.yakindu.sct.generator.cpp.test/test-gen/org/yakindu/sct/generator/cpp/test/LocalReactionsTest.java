@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/LocalReactionsTest/LocalReactions",
 	model = "testmodels/SCTUnit/LocalReactions.sct",
 	additionalFilesToCopy = {
-		"gtests/LocalReactionsTest/sc_runner.h",
-		"gtests/LocalReactionsTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"LocalReactions.cpp",

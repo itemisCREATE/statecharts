@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/PriorityValuesTest/PriorityValues",
 	model = "testmodels/SCTUnit/PriorityValues.sct",
 	additionalFilesToCopy = {
-		"gtests/PriorityValuesTest/sc_runner.h",
-		"gtests/PriorityValuesTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"PriorityValues.cpp",

@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/FeatureCallsTest/FeatureCalls",
 	model = "testmodels/SCTUnit/FeatureCalls.sct",
 	additionalFilesToCopy = {
-		"gtests/FeatureCallsTest/sc_runner.h",
-		"gtests/FeatureCallsTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"FeatureCalls.cpp",

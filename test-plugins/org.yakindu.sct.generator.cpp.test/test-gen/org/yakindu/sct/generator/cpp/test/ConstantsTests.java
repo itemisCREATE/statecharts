@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ConstantsTest/Constants",
 	model = "testmodels/SCTUnit/Constants.sct",
 	additionalFilesToCopy = {
-		"gtests/ConstantsTest/sc_runner.h",
-		"gtests/ConstantsTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"Constants.cpp",

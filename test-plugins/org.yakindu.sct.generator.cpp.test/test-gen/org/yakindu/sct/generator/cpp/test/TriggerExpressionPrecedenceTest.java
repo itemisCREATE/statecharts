@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/TriggerExpressionPrecedenceTest/TriggerExpressionPrecedence",
 	model = "testmodels/SCTUnit/TriggerExpressionPrecedence.sct",
 	additionalFilesToCopy = {
-		"gtests/TriggerExpressionPrecedenceTest/sc_runner.h",
-		"gtests/TriggerExpressionPrecedenceTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"TriggerExpressionPrecedence.cpp",

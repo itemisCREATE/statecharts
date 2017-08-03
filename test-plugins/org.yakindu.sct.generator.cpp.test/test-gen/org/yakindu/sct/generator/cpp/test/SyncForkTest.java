@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/SyncForkTest/SyncFork",
 	model = "testmodels/SCTUnit/SyncFork.sct",
 	additionalFilesToCopy = {
-		"gtests/SyncForkTest/sc_runner.h",
-		"gtests/SyncForkTest/sc_runner.cpp"
+		"libraryTarget/sc_runner.h",
+		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
 		"SyncFork.cpp",
