@@ -9,20 +9,20 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
-	sourceFile = "gtests/ConstOnlyInternalScopeTest/ConstOnlyInternalScopeTest.cc",
-	program = "gtests/ConstOnlyInternalScopeTest/ConstOnlyInternalScope",
-	model = "testmodels/SCTUnit/declarations/ConstOnlyInternalScope.sct",
+	sourceFile = "gtests/EventDrivenInternalEvent/EventDrivenInternalEventTest.cc",
+	program = "gtests/EventDrivenInternalEvent/EventDrivenInternalEvent",
+	model = "testmodels/SCTUnit/eventdriven/EventDrivenInternalEvent.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_runner.h",
 		"libraryTarget/sc_runner.cpp"
 	},
 	additionalFilesToCompile = {
-		"ConstOnlyInternalScope.cpp",
+		"EventDrivenInternalEvent.cpp",
 		"sc_runner.cpp"
 	}
 )
 @RunWith(GTestRunner.class)
-public class ConstOnlyInternalScopeTest {
+public class EventDrivenInternalEventTest {
 protected final GTestHelper helper = new GTestHelper(this);
 
 	@Before

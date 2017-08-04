@@ -11,7 +11,7 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	statechartBundle = "org.yakindu.sct.test.models",
 	sourceFile = "gtests/EntryReactionActionTest/EntryReactionActionTest.cc",
 	program = "gtests/EntryReactionActionTest/EntryReactionAction",
-	model = "testmodels/SCTUnit/EntryReactionAction.sct",
+	model = "testmodels/SCTUnit/entries/EntryReactionAction.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_runner.h",
 		"libraryTarget/sc_runner.cpp"
