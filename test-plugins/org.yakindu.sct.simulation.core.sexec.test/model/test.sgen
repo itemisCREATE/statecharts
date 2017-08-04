@@ -280,14 +280,22 @@ GeneratorModel for sctunit::interpreter {
 		}
 	}
 
-	test OperationsWithoutBraces {
+//	test OperationsTest {
+//
+//		feature Outlet {
+//			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
+//			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+//		}
+//	}
 
-		feature Outlet {
-			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
-			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
-		}
-
-	}
+//	test OperationsWithoutBraces {
+//
+//		feature Outlet {
+//			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
+//			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+//		}
+//
+//	}
 
 	test OutEventLifeCycle {
 

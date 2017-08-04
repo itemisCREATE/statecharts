@@ -4,7 +4,7 @@ GeneratorModel for sctunit::interpreter {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
 		}			
 	}
 	
@@ -12,24 +12,24 @@ GeneratorModel for sctunit::interpreter {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
 		}			
 	}
 	
-	test ChildFirstOrthogonalReactions {
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-			targetFolder = "test-gen"			
-		}			
-	}
+//	test ChildFirstOrthogonalReactions {
+//		
+//		feature Outlet{ 
+//			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+//			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+//		}			
+//	}
 	
 	
 	test ParentFirstExecutionHierarchy {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
 		}			
 	}
 	
@@ -37,17 +37,17 @@ GeneratorModel for sctunit::interpreter {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
 		}			
 	}
 	
-	test ParentFirstOrthogonalReactions {
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-			targetFolder = "test-gen"			
-		}			
-	}
+//	test ParentFirstOrthogonalReactions {
+//		
+//		feature Outlet{ 
+//			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+//			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
+//		}			
+//	}
 	
 	
 	
