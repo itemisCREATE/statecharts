@@ -4,6 +4,9 @@
 #include "BitExpressions.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+
+
+
 static BitExpressions* statechart;
 
 //! The timers are managed by a timer service. */

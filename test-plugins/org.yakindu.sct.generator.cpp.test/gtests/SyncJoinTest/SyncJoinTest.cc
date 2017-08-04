@@ -4,6 +4,9 @@
 #include "SyncJoin.h"
 #include "sc_runner.h"
 #include "sc_types.h"
+
+
+
 static SyncJoin* statechart;
 
 //! The timers are managed by a timer service. */
