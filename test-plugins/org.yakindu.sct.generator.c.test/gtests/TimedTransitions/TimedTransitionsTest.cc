@@ -33,6 +33,7 @@ TEST_F(TimedTransitionsTest, Timer01) {
 	timedTransitions_enter(&statechart);
 	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_Start));
 	sc_timer_service_proceed_time(&timer_service, 2030);
+	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(timedTransitions_isStateActive(&statechart, TimedTransitions_main_region_End));
 }
 
