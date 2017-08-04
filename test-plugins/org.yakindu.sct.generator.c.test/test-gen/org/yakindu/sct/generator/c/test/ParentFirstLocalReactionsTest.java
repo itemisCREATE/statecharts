@@ -9,20 +9,20 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
 @GTest(
 	statechartBundle = "org.yakindu.sct.test.models",
-	sourceFile = "gtests/ConstOnlyInternalScope/ConstOnlyInternalScopeTest.cc",
-	program = "gtests/ConstOnlyInternalScope/ConstOnlyInternalScope",
-	model = "testmodels/SCTUnit/declarations/ConstOnlyInternalScope.sct",
+	sourceFile = "gtests/ParentFirstLocalReactions/ParentFirstLocalReactionsTest.cc",
+	program = "gtests/ParentFirstLocalReactions/ParentFirstLocalReactions",
+	model = "testmodels/SCTUnit/executionorder/ParentFirstLocalReactions.sct",
 	additionalFilesToCopy = {
-		"libraryTarget/sc_timer_service.c",
-		"libraryTarget/sc_timer_service.h"
+		"gtests/ParentFirstLocalReactions/sc_timer_service.c",
+		"gtests/ParentFirstLocalReactions/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
-		"ConstOnlyInternalScope.c",
+		"ParentFirstLocalReactions.c",
 		"sc_timer_service.c"
 	}
 )
 @RunWith(GTestRunner.class)
-public class ConstOnlyInternalScopeTest {
+public class ParentFirstLocalReactionsTest {
 
 	protected final GTestHelper helper = new GTestHelper(this);
 

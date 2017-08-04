@@ -18,6 +18,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	ConstOnlyDefaultScopeTest.class,
 	ConstOnlyInternalScopeTest.class,
 	ConstOnlyNamedScopeTest.class,
+	ChildFirstExecutionHierarchyTest.class,
+	ChildFirstLocalReactionsTest.class,
 	DeclarationsTest.class,
 	DeepEntryTest.class,
 	DeepHistoryTest.class,
@@ -27,6 +29,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	EntryChoiceTest.class,
 	EntryExitSelfTransitionTest.class,
 	EntryReactionActionTest.class,
+	EventDrivenInternalEventTest.class,
+	EventDrivenTriggeredByEventTest.class,
+	EventDrivenTriggeredByTimeEventTest.class,
 	ExitOnSelfTransitionTest.class,
 	ExitStateTest.class,
 	FeatureCallsTest.class,
@@ -46,6 +51,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	OperationsTest.class,
 	OutEventLifeCycleTest.class,
 	ParenthesisTest.class,
+	ParentFirstExecutionHierarchyTest.class,
+	ParentFirstLocalReactionsTest.class,
 	PriorityValuesTest.class,
 	RaiseEventTest.class,
 	ReadOnlyVariableTest.class,
@@ -66,9 +73,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TriggerGuardExpressionsTest.class,
 	TriggerExpressionPrecedenceTest.class,
 	ValuedEventsTest.class,
-	TypeAliasTest.class,
-	StatemachineKeywords.class,
-	TimedTransitionsTest.class
+	TypeAliasTest.class
 })
 public class AllTests {
 }
