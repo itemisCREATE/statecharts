@@ -11,7 +11,7 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	statechartBundle = "org.yakindu.sct.test.models",
 	sourceFile = "gtests/ConstOnlyInternalScopeTest/ConstOnlyInternalScopeTest.cc",
 	program = "gtests/ConstOnlyInternalScopeTest/ConstOnlyInternalScope",
-	model = "testmodels/SCTUnit/ConstOnlyInternalScope.sct",
+	model = "testmodels/SCTUnit/declarations/ConstOnlyInternalScope.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_runner.h",
 		"libraryTarget/sc_runner.cpp"

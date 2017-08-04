@@ -10,6 +10,7 @@ using ::testing::AtLeast;
 using ::testing::Return;
 using ::testing::_;
 
+
 class MockInternal : public Operations::InternalSCI_OCB {
 	public:
 	MOCK_METHOD0(internalOperation1, void());
@@ -44,6 +45,7 @@ class MockDefault : public Operations::DefaultSCI_OCB {
 	MOCK_METHOD1(unnamedOperation5a, sc_string(sc_string param1));
 	MOCK_METHOD0(alwaysTrue, sc_boolean());
 };
+
 static Operations* statechart;
 
 //! The timers are managed by a timer service. */

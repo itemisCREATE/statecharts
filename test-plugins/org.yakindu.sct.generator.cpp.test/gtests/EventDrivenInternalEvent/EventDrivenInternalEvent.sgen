@@ -1,0 +1,19 @@
+GeneratorModel for yakindu::cpp {
+	statechart eventdriven.EventDrivenInternalEvent {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "EventDrivenInternalEvent"
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+	}
+}

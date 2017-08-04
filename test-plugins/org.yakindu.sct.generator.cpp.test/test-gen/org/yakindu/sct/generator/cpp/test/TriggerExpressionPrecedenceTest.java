@@ -11,7 +11,7 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	statechartBundle = "org.yakindu.sct.test.models",
 	sourceFile = "gtests/TriggerExpressionPrecedenceTest/TriggerExpressionPrecedenceTest.cc",
 	program = "gtests/TriggerExpressionPrecedenceTest/TriggerExpressionPrecedence",
-	model = "testmodels/SCTUnit/TriggerExpressionPrecedence.sct",
+	model = "testmodels/SCTUnit/expressions/TriggerExpressionPrecedence.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_runner.h",
 		"libraryTarget/sc_runner.cpp"

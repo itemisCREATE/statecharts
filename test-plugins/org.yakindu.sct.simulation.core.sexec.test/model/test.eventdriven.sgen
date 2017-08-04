@@ -4,7 +4,7 @@ GeneratorModel for sctunit::interpreter {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
 		}			
 	}
 	
@@ -12,7 +12,7 @@ GeneratorModel for sctunit::interpreter {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
 		}			
 	}
 	
@@ -20,7 +20,7 @@ GeneratorModel for sctunit::interpreter {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-			targetFolder = "test-gen"			
+			targetFolder = "test-gen/org/yakindu/sct/simulation/core/sexec/test"
 		}			
 	}
 	

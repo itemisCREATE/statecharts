@@ -11,7 +11,7 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	statechartBundle = "org.yakindu.sct.test.models",
 	sourceFile = "gtests/ConstOnlyDefaultScope/ConstOnlyDefaultScopeTest.cc",
 	program = "gtests/ConstOnlyDefaultScope/ConstOnlyDefaultScope",
-	model = "testmodels/SCTUnit/ConstOnlyDefaultScope.sct",
+	model = "testmodels/SCTUnit/declarations/ConstOnlyDefaultScope.sct",
 	additionalFilesToCopy = {
 		"libraryTarget/sc_timer_service.c",
 		"libraryTarget/sc_timer_service.h"

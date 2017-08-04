@@ -1,0 +1,188 @@
+GeneratorModel for sctunit::c {
+
+	test ChildFirstExecutionHierarchy {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/ChildFirstExecutionHierarchy"
+			libraryTargetFolder = "libraryTarget"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = "true"
+		}
+		
+	}
+
+	test ChildFirstLocalReactions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/ChildFirstLocalReactions"
+			libraryTargetFolder = "libraryTarget"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = "true"
+		}
+		
+	}
+
+
+//	test ChildFirstOrthogonalReactions {
+//
+//		feature Outlet {
+//			targetProject = "org.yakindu.sct.generator.c.test"
+//			targetFolder = "gtests/ChildFirstOrthogonalReactions"
+//			libraryTargetFolder = "libraryTarget"
+//		}
+//
+//		feature JUnitWrapper {
+//			WrapToJUnit = "true"
+//		}
+//
+//		feature FunctionInlining {
+//			inlineReactions = false
+//			inlineEntryActions = false
+//			inlineExitActions = false
+//			inlineEnterSequences = false
+//			inlineExitSequences = false
+//			inlineChoices = false
+//			inlineEnterRegion = false
+//			inlineExitRegion = false
+//			inlineEntries = false
+//		}
+//		
+//		feature SGenModel{
+//			GenerateSGen = "true"
+//		}
+//		
+//	}
+
+
+	test ParentFirstExecutionHierarchy {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/ParentFirstExecutionHierarchy"
+			libraryTargetFolder = "libraryTarget"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = "true"
+		}
+		
+	}
+
+	test ParentFirstLocalReactions {
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test"
+			targetFolder = "gtests/ParentFirstLocalReactions"
+			libraryTargetFolder = "libraryTarget"
+		}
+
+		feature JUnitWrapper {
+			WrapToJUnit = "true"
+		}
+
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
+		feature SGenModel{
+			GenerateSGen = "true"
+		}
+		
+	}
+
+
+//	test ParentFirstOrthogonalReactions {
+//
+//		feature Outlet {
+//			targetProject = "org.yakindu.sct.generator.c.test"
+//			targetFolder = "gtests/ParentFirstOrthogonalReactions"
+//			libraryTargetFolder = "libraryTarget"
+//		}
+//
+//		feature JUnitWrapper {
+//			WrapToJUnit = "true"
+//		}
+//
+//		feature FunctionInlining {
+//			inlineReactions = false
+//			inlineEntryActions = false
+//			inlineExitActions = false
+//			inlineEnterSequences = false
+//			inlineExitSequences = false
+//			inlineChoices = false
+//			inlineEnterRegion = false
+//			inlineExitRegion = false
+//			inlineEntries = false
+//		}
+//		
+//		feature SGenModel{
+//			GenerateSGen = "true"
+//		}
+//		
+//	}
+
+
+
+}

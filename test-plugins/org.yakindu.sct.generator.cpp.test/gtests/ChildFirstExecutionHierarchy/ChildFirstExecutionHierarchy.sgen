@@ -1,0 +1,19 @@
+GeneratorModel for yakindu::cpp {
+	statechart executionorder.ChildFirstExecutionHierarchy {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "ChildFirstExecutionHierarchy"
+		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
+	}
+}
