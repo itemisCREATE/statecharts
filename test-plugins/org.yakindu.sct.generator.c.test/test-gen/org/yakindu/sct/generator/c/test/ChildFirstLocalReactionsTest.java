@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ChildFirstLocalReactions/ChildFirstLocalReactions",
 	model = "testmodels/SCTUnit/executionorder/ChildFirstLocalReactions.sct",
 	additionalFilesToCopy = {
-		"gtests/ChildFirstLocalReactions/sc_timer_service.c",
-		"gtests/ChildFirstLocalReactions/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"ChildFirstLocalReactions.c",

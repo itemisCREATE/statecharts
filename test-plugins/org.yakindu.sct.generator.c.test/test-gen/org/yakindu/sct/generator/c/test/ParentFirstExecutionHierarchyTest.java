@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/ParentFirstExecutionHierarchy/ParentFirstExecutionHierarchy",
 	model = "testmodels/SCTUnit/executionorder/ParentFirstExecutionHierarchy.sct",
 	additionalFilesToCopy = {
-		"gtests/ParentFirstExecutionHierarchy/sc_timer_service.c",
-		"gtests/ParentFirstExecutionHierarchy/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"ParentFirstExecutionHierarchy.c",

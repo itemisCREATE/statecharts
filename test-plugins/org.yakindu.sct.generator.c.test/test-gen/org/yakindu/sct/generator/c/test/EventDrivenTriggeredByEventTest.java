@@ -13,8 +13,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 	program = "gtests/EventDrivenTriggeredByEvent/EventDrivenTriggeredByEvent",
 	model = "testmodels/SCTUnit/eventdriven/EventDrivenTriggeredByEvent.sct",
 	additionalFilesToCopy = {
-		"gtests/EventDrivenTriggeredByEvent/sc_timer_service.c",
-		"gtests/EventDrivenTriggeredByEvent/sc_timer_service.h"
+		"libraryTarget/sc_timer_service.c",
+		"libraryTarget/sc_timer_service.h"
 	},
 	additionalFilesToCompile = {
 		"EventDrivenTriggeredByEvent.c",
