@@ -689,7 +689,7 @@ Annotations are metadata that you can add to the definition section of your stat
 
 h4(#sclang_cyclebased). @CycleBased
 
-The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/generating_code.html#generating_code_execution_schemes is to be used.
+The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/generating_code#codegen_execution_schemes is to be used.
 
 Synopsis: <code>@CycleBased(</code>_period_<code>)</code>
 
@@ -717,7 +717,7 @@ p.
 
 h4(#sclang_eventdriven). @EventDriven
 
-The <code>@EventDriven</code> annotation specifies that the "_event-driven execution scheme_":../user-guide/generating_code.html#generating_code_execution_schemes is to be used.
+The <code>@EventDriven</code> annotation specifies that the "_event-driven execution scheme_":../user-guide/generating_code.html#codegen_execution_schemes is to be used.
 
 Synopsis: <code>@EventDriven</code>
 
@@ -1042,7 +1042,7 @@ When a reaction raises an event, the subsequent behaviour of the state machine i
 
 The following sections will give a more in-depth view on these different behaviours.
 
-h5(#processing_an_event_in_the_cycle-based_execution_scheme). Processing an event in the cycle-based execution scheme
+h5(#sclang_processing_an_event_in_the_cycle-based_execution_scheme). Processing an event in the cycle-based execution scheme
 
 As explained above, an event that has been raised using the "_raise_ statement":#sclang_raising_an_event exists in the current run-to-completion step only and thus can be dealt with during the rest of that particular run-to-completion step only.
 
@@ -1079,7 +1079,7 @@ p=. Region priorities
 
 Not being able to raise an event and process it in "earlier" regions is a restriction you can overcome using variables. The idea is to set a "communication variable" to a certain value in a region that is processed "later". During the next RTC the earlier region could act on the variables value. Another option – and in many cases the better on, is to change to the event-driven execution scheme.
 
-h5(#processing_an_event_in_the_event-driven_execution_scheme). Processing an event in the event-driven execution scheme
+h5(#sclang_processing_an_event_in_the_event-driven_execution_scheme). Processing an event in the event-driven execution scheme
 
 As explained above, an event that has been raised using the "_raise_ statement":#sclang_raising_an_event is appended to an event queue, and thus it is not visible in the current run-to-completion step (RTC). Since in the event-driven execution scheme an RTC always processes a single event at a time, only the event that caused the RTC to execute in the first place remains visible "downstream" in the current RTC.
 

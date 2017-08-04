@@ -12,6 +12,7 @@
         <toc file="help/user-guide/simulating_statecharts-toc.xml" primary="false"/>
         <toc file="help/user-guide/advanced_simulation-toc.xml" primary="false"/>
         <toc file="help/user-guide/c-domain-toc.xml" primary="false"/>
+        <toc file="help/user-guide/typescript-domain-toc.xml" primary="false"/>
         <toc file="help/user-guide/statechart_language-toc.xml" primary="false"/>
         <toc file="help/user-guide/generating_code-toc.xml" primary="false"/>
         <toc file="help/user-guide/generating_code_headless-toc.xml" primary="false"/>

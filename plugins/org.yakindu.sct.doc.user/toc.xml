@@ -13,10 +13,11 @@
 
     <topic label="User Guide">
         <link toc="help/user-guide/editing_statecharts-toc.xml"/>
-        <link toc="help/user-guide/statechart_language-toc.xml"/>
         <link toc="help/user-guide/simulating_statecharts-toc.xml"/>
         <link toc="help/user-guide/advanced_simulation-toc.xml"/>
         <link toc="help/user-guide/c-domain-toc.xml"/>
+        <link toc="help/user-guide/typescript-domain-toc.xml"/>
+        <link toc="help/user-guide/statechart_language-toc.xml"/>
         <link toc="help/user-guide/generating_code-toc.xml"/>
         <link toc="help/user-guide/generating_code_headless-toc.xml"/>
         <link toc="help/user-guide/sctunit-toc.xml"/>
