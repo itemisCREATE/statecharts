@@ -278,7 +278,7 @@ class GeneratorProjectTemplate {
 		 org.yakindu.sct.model.sexec,
 		 org.yakindu.sct.model.stext,
 		 org.yakindu.sct.model.sgraph
-		Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+		Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 	'''
 	
 	def protected plugin(ProjectData data) '''

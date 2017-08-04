@@ -35,7 +35,7 @@ public interface STextValidationMessages {
 	public static final String TRANSITION_EXIT_SPEC_NOT_COMPOSITE = "Source state isn't composite.";
 	public static final String TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT = "Target state has regions without 'default' entries.";
 	public static final String TRANSITION_UNBOUND_NAMED_ENTRY_POINT = "Target state has regions without named entries: ";
-	public static final String TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT = "Source State needs at least one region with the named exit point.";
+	public static final String TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT = "Source state needs at least one region with the named exit point.";
 	public static final String TRIGGER_IS_NO_EVENT = "Trigger is no event.";
 	public static final String TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY = "Entry of top level region have to be a default entry.";
 	public static final String REGION_UNBOUND_DEFAULT_ENTRY_POINT = "Region must have a 'default' entry.";
@@ -44,23 +44,15 @@ public interface STextValidationMessages {
 	public static final String EXIT_UNUSED = "The named exit is not used by outgoing transitions.";
 	public static final String EXIT_DEFAULT_UNUSED = "The parent composite state has no 'default' exit transition.";
 	public static final String TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS = "ExitPointSpec can't be used on transition siblings.";
-	public static final String LEFT_HAND_ASSIGNMENT = "The left-hand side of an assignment must be a variable.";
 	public static final String ISSUE_TRANSITION_WITHOUT_TRIGGER = "Missing trigger. Transition is never taken. Use 'oncycle' or 'always' instead.";
 	public static final String EXITPOINTSPEC_WITH_TRIGGER = "Transitions with an exit point spec does not have a trigger or guard.";
-	public static final String ASSIGNMENT_TO_VALUE = "Assignment constant not allowed.";
 	public static final String REFERENCE_TO_VARIABLE = "Cannot reference a variable in a constant initialization.";
-	public static final String CONST_MUST_HAVE_VALUE_MSG = "A constant definition must specify an initial value";
+	public static final String CONST_MUST_HAVE_VALUE_MSG = "A constant definition must specify an initial value.";
 	public static final String CONST_MUST_HAVE_VALUE_CODE = "ConstMustHaveAValue";
 	public static final String REFERENCE_CONSTANT_BEFORE_DEFINED = "Cannot reference a constant from different scope or before it is defined.";
 	public static final String INTERNAL_DECLARATION_UNUSED = "Internal declaration is not used in statechart.";
-	public static final String ERROR_WRONG_ANNOTATION_TARGET_CODE = "WrongAnnotationTarget";
-	public static final String ERROR_WRONG_ANNOTATION_TARGET_MSG = "Annotation '%s' can not be applied on %s ";
 	public static final String VALUE_OF_REQUIRES_EVENT = "valueof() expression requires event as argument.";
-	public static final String VAR_ARGS_LAST_CODE = "VarArgsMustBeLast";
-	public static final String VAR_ARGS_LAST_MSG = "The variable argument type must be the last argument.";
-	public static final String WRONG_NUMBER_OF_ARGUMENTS_MSG = "Wrong number of arguments, expected %s .";
-	public static final String WRONG_NUMBER_OF_ARGUMENTS_CODE = "WrongNrOfArgs";
 	public static final String IMPORT_NOT_RESOLVED_MSG = "Import '%s' cannot be resolved.";
 	public static final String IMPORT_NOT_RESOLVED_CODE = "ImportNotResolved";
-
+	public static final String CONTRADICTORY_ANNOTATIONS = "Some annotations (%s) have contradictory effects.";
 }

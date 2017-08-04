@@ -78,7 +78,7 @@ public abstract class AbstractLibraryGlobalScopeProvider extends AbstractGlobalS
 		for (URI uri : getValidLibraries(context)) {
 			try {
 				Iterables.addAll(descriptions, libraryCache.get(uri));
-			} catch (ExecutionException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

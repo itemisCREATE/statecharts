@@ -680,6 +680,138 @@ Sample calls of this operation are @sum(1, 42)@, @sum(2, 4711, 815)@, @sum(7, 55
 
 
 
+h3(#sclang_annotations). Annotations
+
+Annotations are metadata that you can add to the definition section of your statechart. They provide a means to control specific aspects of the execution semantics.
+
+
+==<!-- Start stext_keyword_cyclebased -->==
+
+h4(#sclang_cyclebased). @CycleBased
+
+The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/generating_code.html#generating_code_execution_schemes is to be used.
+
+Synopsis: <code>@CycleBased(</code>_period_<code>)</code>
+
+The mandatory parameter _period_ indicates the suggested period of time between two successive run-to-completion steps in milliseconds. Only the "statechart simulator":../user-guide/simulating_statecharts.html and the "SCTUnit testing framework":../user-guide/sctunit.html take the _period_ value into account, however. It is neither of significance to nor reflected in the generated code, and thus it remains the client code's responsibility to explicitly call _runCycle()_ – and to decide when to do so.
+
+If the definition section contains neither the <code>@CycleBased</code> nor the <code>@EventDriven</code> annotation, the state machine will behave as if <code>@CycleBased(200)</code> would have been coded.
+
+==<div class="example">==
+
+Example: The definition section below specifies that the state machine should behave according to the _cycle-based execution scheme_ with an interval of 100 milliseconds between two cycles.
+
+bc.. 
+@CycleBased(100)
+
+interface:
+    in event e
+p. 
+
+==</div>==
+
+==<!-- End stext_keyword_cyclebased -->==
+
+
+==<!-- Start stext_keyword_eventdriven -->==
+
+h4(#sclang_eventdriven). @EventDriven
+
+The <code>@EventDriven</code> annotation specifies that the "_event-driven execution scheme_":../user-guide/generating_code.html#generating_code_execution_schemes is to be used.
+
+Synopsis: <code>@EventDriven</code>
+
+If the definition section contains neither the <code>@CycleBased</code> nor the <code>@EventDriven</code> annotation, the state machine will behave as if <code>@CycleBased(200)</code> would have been coded.
+
+==<div class="example">==
+
+Example: The definition section below specifies that the state machine should behave according to the _event-driven execution scheme_.
+
+bc.. 
+@EventDriven
+
+interface:
+    in event e
+p. 
+
+==</div>==
+
+==<!-- End stext_keyword_eventdriven -->==
+
+
+==<!-- Start stext_keyword_childfirstexecution -->==
+
+h4(#sclang_childfirstexecution). @ChildFirstExecution
+
+The <code>@ChildFirstExecution</code> annotation specifies that the state machine should always first execute the substates ("children") of an active composite state, before executing the composite state ("parent") itself. Should the execution of a substate trigger a transition leading away from the composite state, the latter and any remaining not-yet-executed substates will not be executed, except for any _exit_ actions.
+
+Synopsis: <code>@ChildFirstExecution</code>
+
+Please note that "<code>@ParentFirstExecution</code>":#sclang_parentfirstexecution specifies the opposite behaviour. Both <code>@ChildFirstExecution</code> and <code>@ParentFirstExecution</code> are global settings for _all_ composite states.
+
+If the definition section contains neither the <code>@ParentFirstExecution</code> nor the <code>@ChildFirstExecution</code> annotation, the state machine will behave as if <code>@ParentFirstExecution</code> would have been coded.
+
+==<div class="example">==
+
+Example 1a:
+
+Consider the statechart in the "figure below":#fig_child-first_parent-first_example_1a-1. Composite state *A* and its substate *B* are active and the <code>@ChildFirstExecution</code> annotation has been specified in the definition section.
+
+p(#fig_child-first_parent-first_example_1a-1). 
+!images/docu_childfirst_010_example_01a-1.png(Child-first, example 1a, before transition)!
+
+p=. Child-first, example 1a, before transition
+
+If event _e_ occurs, the state machine will consider child state *B* first, find a matching transition, and thus immediately proceed to state *D*, see the "figure below":#fig_child-first_parent-first_example_1a-2.
+
+p(#fig_child-first_parent-first_example_1a-2). 
+!images/docu_childfirst_010_example_01a-2.png(Child-first, example 1a, after transition)!
+
+p=. Child-first, example 1a, after transition
+
+==</div>==
+
+==<div class="example">==
+
+Example 1b:
+
+Consider the statechart in the "figure below":#fig_child-first_parent-first_example_1a-1. Composite state *A* and its substate *B* are active and the <code>@ParentFirstExecution</code> annotation has been specified in the definition section.
+
+p(#fig_child-first_parent-first_example_1b-1). 
+!images/docu_childfirst_010_example_01b-1.png(Parent-first, example 1b, before transition)!
+
+p=. Parent-first, example 1b, before transition
+
+If event _e_ occurs, the state machine will consider parent state *A* first, find a matching transition, and thus immediately proceed to state *C*, see the "figure below":#fig_child-first_parent-first_example_1b-2.
+
+p(#fig_child-first_parent-first_example_1b-2). 
+!images/docu_childfirst_010_example_01b-2.png(Parent-first, example 1b, after transition)!
+
+p=. Parent-first, example 1b, after transition
+
+==</div>==
+
+==<!-- End stext_keyword_childfirstexecution -->==
+
+
+==<!-- Start stext_keyword_parentfirstexecution -->==
+
+h4(#sclang_parentfirstexecution). @ParentFirstExecution
+
+The <code>@ParentFirstExecution</code> annotation specifies that the state machine should always first execute an active composite state ("parent") itself, before executing its substates ("children"). Should the execution of the composite state trigger a transition leading away from the parent, its substates will not be executed, except for any _exit_ actions.
+
+Synopsis: <code>@ParentFirstExecution</code>
+
+Please note that "<code>@ChildFirstExecution</code>":#sclang_childfirstexecution specifies the opposite behaviour. Both <code>@ChildFirstExecution</code> and <code>@ParentFirstExecution</code> are global settings for _all_ composite states.
+
+If the definition section contains neither the <code>@ParentFirstExecution</code> nor the <code>@ChildFirstExecution</code> annotation, the state machine will behave as if <code>@ParentFirstExecution</code> would have been coded.
+
+Please see section "&quot;@ChildFirstExecution&quot;":#sclang_childfirstexecution for examples.
+
+==<!-- End stext_keyword_parentfirstexecution -->==
+
+
+
 
 h2(#sclang_reactions). Reactions
 
@@ -904,9 +1036,17 @@ h4(#sclang_raising_and_processing_an_event). Raising and processing an event
 For the syntax of event raising, see section "&quot;Raising an event&quot;":#sclang_raising_an_event.
 For the syntax of event declaration, see section "&quot;Events&quot;":#sclang_events.
 
-When a reaction raises an event, please consider two important points:
-* The event exists in the current run-to-completion step (RTC) only and thus can be dealt with during the rest of that particular RTC only.
-* Orthogonal regions are executed sequentially and in a deterministic order.
+When a reaction raises an event, the subsequent behaviour of the state machine is highly dependent on the execution scheme, selected by either the "@CycleBased":#sclang_cyclebased (default) or the "@EventDriven":#sclang_eventdriven annotation. In short:
+* In the _cycle-based execution scheme_, the raised event will be added to the events that are processed by the current run-to-completion step. However, it will only be visible "downstream" in the run cycle, i.e. active states that have not yet been executed can take the event into account. When the run cycle is completed, the event will cease to exist. It can thus not be processed in any subsequent run-to-completion step.
+* In the _event-driven execution scheme_, the raised event will be added to an event queue. As a consequence, it will not be visible "downstream" in the current run cycle. Instead, the event will trigger a run cycle on its own. In that run-to-completion step, it will be visible everywhere.
+
+The following sections will give a more in-depth view on these different behaviours.
+
+h5(#processing_an_event_in_the_cycle-based_execution_scheme). Processing an event in the cycle-based execution scheme
+
+As explained above, an event that has been raised using the "_raise_ statement":#sclang_raising_an_event exists in the current run-to-completion step only and thus can be dealt with during the rest of that particular run-to-completion step only.
+
+Please also note that orthogonal regions are executed sequentially and in a deterministic order.
 
 This has remarkable consequences on where an event is "visible" and where it is not. Let's say we have a state machine at a certain point in time where _n_ orthogonal regions are active. The regions _r<sub>i</sub>_ have a defined execution order: _r<sub>1</sub>_ → _r<sub>2</sub>_ → … → _r<sub>n-1</sub>_ → _r<sub>n</sub>_.
 
@@ -937,7 +1077,23 @@ p(#sclang_fig_region-priorities).
 
 p=. Region priorities
 
-Not being able to raise an event and process it in "earlier" regions is a restriction you can overcome using variables. The idea is to set a "communication variable" to a certain value in a region that is processed "later". During the next RTC, the earlier region could act on the variables value.
+Not being able to raise an event and process it in "earlier" regions is a restriction you can overcome using variables. The idea is to set a "communication variable" to a certain value in a region that is processed "later". During the next RTC the earlier region could act on the variables value. Another option – and in many cases the better on, is to change to the event-driven execution scheme.
+
+h5(#processing_an_event_in_the_event-driven_execution_scheme). Processing an event in the event-driven execution scheme
+
+As explained above, an event that has been raised using the "_raise_ statement":#sclang_raising_an_event is appended to an event queue, and thus it is not visible in the current run-to-completion step (RTC). Since in the event-driven execution scheme an RTC always processes a single event at a time, only the event that caused the RTC to execute in the first place remains visible "downstream" in the current RTC.
+
+The raised event will, however, trigger an RTC on its own. In that RTC, it will be visible to all regions, no matter of their execution order. The execution order as explained in the preceeding section still applies, but it is of less importance in the event-driven approach.
+
+Events raised internally by the "_raise_ statement":#sclang_raising_an_event in the reaction of a state or transition take precedence over events that entered the state machine from the outside. This convention ensures that an external event together with all effects it causes – and in particular with all events raised internally – are processed completely, before the next external event can take charge.
+
+Consider, for example, events _a_ and _b_ having entered, in that order, a state machine that is executing in event-driven mode. Since _a_ entered the state machine first, it is processed first in an RTC. Event _b_ is put on a queue for external events, where it has to wait until _a_ is done. Processing of _a_, however, leads to another event _c_ being raised via the _raise_ statement. Since _a_ is still being processed, _c_ is, similar to _b_, also queued.
+
+However, _c_ is put on a different event queue, a queue that is reserved for internal events only. Events in the internal event queue are always processed first. The external event queue will be considered only if the internal event queue is empty. As a consequence for our example, the order of events being processed by successive run-to-completion steps is _a_, _c_, _b_.
+
+bq. *Please note:* There is only a _single_ internal event queue, and all internally-raised events are appended to it. Let's consider the example above again and let's assume that processing of _a_ not only raised the internal event _c_, but also an additional event _d_. Since both _c_ and _d_ are going to the internal event queue, the overall processing sequence is _a_, _c_, _d_, _b_. Now let's also assume that in the course of processing _c_ yet another event _e_ is raised. Like all internally-raised events, it will be appended to the end of the internal event queue, i.e. behind _d_, not behind _c_, resulting in an overall execution sequence of _a_, _c_, _d_, _e_, _b_. In other words, the state machine is taking a _breadth-first_ approach on internally raised events, in lieu of _depth-first_.
+
+bq. *Please also note:* In event-driven execution mode, there's a looming risk of endless event processing you should be aware of. In the example above, imagine processing of event _c_ would always raise another instance of _c_. In that case, the internal event queue would never get empty, the state machine would be busily processing one _c_ after the other, without ever ending and without ever getting to _b_.
 
 
 

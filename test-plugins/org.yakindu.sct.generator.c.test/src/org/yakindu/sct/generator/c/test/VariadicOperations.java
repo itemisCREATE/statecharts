@@ -20,7 +20,8 @@ import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
 @GTest(sourceFile = "gtests/VariadicOperations/VariadicOperations.cc",
 		program = "gtests/VariadicOperations/VariadicFunctions",
-		model = "testmodels/SCTUnit/VariadicFunctions.sct")
+		model = "testmodels/SCTUnit/VariadicFunctions.sct",
+		statechartBundle = "org.yakindu.sct.test.models")
 @RunWith(GTestRunner.class)
 public class VariadicOperations {
 

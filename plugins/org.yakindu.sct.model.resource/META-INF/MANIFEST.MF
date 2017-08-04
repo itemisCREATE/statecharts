@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU SText Resource
 Bundle-SymbolicName: org.yakindu.sct.model.resource;singleton:=true
-Bundle-Version: 2.9.3.qualifier
+Bundle-Version: 3.0.1.qualifier
 Bundle-Vendor: statecharts.org
 Bundle-Activator: org.yakindu.sct.model.resource.Activator
 Require-Bundle: org.eclipse.ui,
@@ -16,6 +16,7 @@ Require-Bundle: org.eclipse.ui,
  org.yakindu.sct.model.stext.ui,
  org.yakindu.sct.model.stext,
  org.yakindu.sct.ui.editor
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Export-Package: org.yakindu.sct.model.resource
+Export-Package: org.yakindu.sct.model.resource,
+ org.yakindu.sct.model.resource.tasks

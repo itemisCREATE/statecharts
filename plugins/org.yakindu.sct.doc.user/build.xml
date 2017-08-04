@@ -142,6 +142,7 @@
                 <include name="user-guide/simulating_statecharts.textile" />
                 <include name="user-guide/advanced_simulation.textile" />
                 <include name="user-guide/c-domain.textile" />
+                <include name="user-guide/typescript-domain.textile" />
                 <include name="user-guide/statechart_language.textile" />
                 <include name="user-guide/generating_code.textile" />
                 <include name="user-guide/generating_code_headless.textile" />
@@ -319,6 +320,7 @@
                         <file name="user-guide/simulating_statecharts.textile" />
                         <file name="user-guide/advanced_simulation.textile" />
                         <file name="user-guide/c-domain.textile" />
+                        <file name="user-guide/typescript-domain.textile" />
                         <file name="user-guide/statechart_language.textile" />
                         <file name="user-guide/generating_code.textile" />
                         <file name="user-guide/generating_code_headless.textile" />
@@ -425,7 +427,7 @@
             <replaceregexp byline="false"
                            flags="g"
                            match='src="images/'
-                           replace='src="http://info.itemis.com/hubfs/Yakindu/Statechart_Tools/Documentation/images/'
+                           replace='src="http://info.itemis.com/hubfs/yakindu/statechart-tools/documentation/images/'
                            unless:set="website.local.files">
                 <fileset dir="${work.dir}">
                     <include name="${index.html}" />

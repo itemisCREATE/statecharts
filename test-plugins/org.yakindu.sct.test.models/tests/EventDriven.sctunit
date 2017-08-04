@@ -1,0 +1,20 @@
+testclass EventDriven for statechart eventDriven {
+	@Test
+	operation test() {
+		enter
+		assert running
+		raise inEvent
+		assert oe1
+		assert oe2
+		assert oe3
+		assert active (eventDriven.main_region.StateD)
+		raise inEventBool : true
+		assert active(eventDriven.main_region.StateE)
+		assert active(eventDriven.main_region.StateE._region0.State2)
+		raise inEvent
+		assert active(eventDriven.main_region.StateF)
+		raise namedI.namedInEvent
+		assert is_final			
+		exit
+	}
+}

@@ -10,11 +10,13 @@
 */
 package org.yakindu.sct.model.stext.ui;
 
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.tasks.ITaskFinder;
+import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
@@ -24,12 +26,16 @@ import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
+import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.shared.Access;
 import org.yakindu.base.utils.jface.help.CrossRefObjectTextHover;
+import org.yakindu.base.xtext.utils.jface.viewers.ParallelReadXtextDocument;
+import org.yakindu.sct.model.stext.ui.contentassist.AsyncContentAssistContextFactory;
+import org.yakindu.sct.model.stext.ui.contentassist.AsyncXtextContentAssistProcessor;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
@@ -77,6 +83,7 @@ public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextU
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named("stylesheet")).toInstance("/StextHoverStyleSheet.css");
+		binder.bind(XtextDocument.class).to(ParallelReadXtextDocument.class);
 	}
 
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
@@ -124,4 +131,13 @@ public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextU
 		return PackageImportHyperlinkHelper.class;
 	}
 
+	@Override
+	public Class<? extends IContentAssistantFactory> bindIContentAssistantFactory() {
+		return AsyncContentAssistContextFactory.class;
+	}
+
+	@Override
+	public Class<? extends IContentAssistProcessor> bindIContentAssistProcessor() {
+		return AsyncXtextContentAssistProcessor.class;
+	}
 }

@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,15 +39,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.yakindu.sct.generator.builder.EclipseContextGeneratorExecutorLookup;
-import org.yakindu.sct.generator.core.execution.IGeneratorEntryExecutor;
+import org.yakindu.sct.generator.core.execution.GeneratorExecutorLookup;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.test.models.SCTUnitTestModels;
-
-import com.google.inject.Binder;
-import com.google.inject.Module;
-import com.google.inject.name.Names;
-import com.google.inject.util.Modules;
 
 /**
  * @author Andreas Unger - Initial contribution and API
@@ -71,13 +66,12 @@ public class GTestHelper {
 	}
 
 	public void generate() {
-
 		IPath targetPath = getTargetPath();
 
 		// copy model to JUnit workspace
 		copyFileFromBundleToFolder(getModelBundle(), getModelPath(), targetPath);
 
-		String sgenFileName = getTestProgram() + ".sgen";
+		String sgenFileName = getSgenFileName(getTestProgram());
 		copyFileFromBundleToFolder(getTestBundle(), sgenFileName, targetPath);
 
 		IPath path = new Path(sgenFileName);
@@ -87,19 +81,24 @@ public class GTestHelper {
 
 		performFullBuild();
 
-		new EclipseContextGeneratorExecutorLookup() {
-			@Override
-			protected Module getContextModule() {
-				return Modules.override(super.getContextModule()).with(new Module() {
-					@Override
-					public void configure(Binder binder) {
-						binder.bind(boolean.class).annotatedWith(Names.named(IGeneratorEntryExecutor.SKIP_VALIDATION))
-								.toInstance(true);
-					}
-				});
-			}
+		getGeneratorExecutorLookup().execute(model);
+	}
+	
+	protected List<String> getFilesToCopy() {
+		return new ArrayList<String>(Arrays.asList(owner.getClass().getAnnotation(GTest.class).additionalFilesToCopy()));
+	}
+	
+	protected List<String> getFilesToCompile() {
+		return new ArrayList<String>(Arrays.asList(owner.getClass().getAnnotation(GTest.class).additionalFilesToCompile()));
+	}
 
-		}.execute(model);
+	protected GeneratorExecutorLookup getGeneratorExecutorLookup() {
+		return new EclipseContextGeneratorExecutorLookup();
+	}
+
+	protected String getSgenFileName(String testProgram) {
+		String sgenFileName = testProgram + ".sgen";
+		return sgenFileName;
 	}
 
 	protected GCCCommandExecutor getCommandExecutor() {
@@ -132,16 +131,13 @@ public class GTestHelper {
 	}
 
 	protected Bundle getModelBundle() {
-		Bundle bundle = getAnnotatedTestBundle();
-		if (bundle == null) {
-			return FrameworkUtil.getBundle(SCTUnitTestModels.class);
-		}
-		return bundle;
+		String bundle = getStatechartBundleAnnotation();
+		return Platform.getBundle(bundle);
 	}
 
 	private void copyFilesFromBundleToFolder() {
 		IPath targetPath = getTargetPath();
-		List<String> testDataFiles = new ArrayList<String>();
+		List<String> testDataFiles = getFilesToCopy();
 		getTestDataFiles(testDataFiles);
 		for (String file : testDataFiles) {
 			copyFileFromBundleToFolder(getTestBundle(), file, targetPath);
@@ -154,7 +150,7 @@ public class GTestHelper {
 		List<String> includes = new ArrayList<String>();
 		getIncludes(includes);
 
-		List<String> sourceFiles = new ArrayList<String>();
+		List<String> sourceFiles = getFilesToCompile();
 		getSourceFiles(sourceFiles);
 
 		List<String> command = new ArrayList<String>();
@@ -170,7 +166,7 @@ public class GTestHelper {
 		if (gTestDirectory != null)
 			command.add("-L" + gTestDirectory);
 		for (String sourceFile : sourceFiles) {
-			command.add(sourceFile);
+			command.add(getFileName(sourceFile));
 		}
 		command.add("-lgtest");
 		command.add("-lgtest_main");
@@ -236,6 +232,10 @@ public class GTestHelper {
 
 	protected String getTestBundleAnnotation() {
 		return owner.getClass().getAnnotation(GTest.class).testBundle();
+	}
+	
+	protected String getStatechartBundleAnnotation() {
+		return owner.getClass().getAnnotation(GTest.class).statechartBundle();
 	}
 
 	protected IPath getTargetProjectPath() {

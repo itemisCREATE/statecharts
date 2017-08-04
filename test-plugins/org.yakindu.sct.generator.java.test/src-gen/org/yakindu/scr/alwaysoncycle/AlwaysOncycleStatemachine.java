@@ -130,15 +130,11 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		sCInterface.setV2(value);
 	}
 	
-	private boolean check_main_region_StateA_tr0_tr0() {
-		return sCInterface.getValue()==5;
-	}
-	
 	private boolean check_main_region_StateA_lr1_lr1() {
 		return true;
 	}
 	
-	private boolean check_main_region_StateB_tr0_tr0() {
+	private boolean check_main_region_StateA_tr0_tr0() {
 		return sCInterface.getValue()==5;
 	}
 	
@@ -146,22 +142,26 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		return true;
 	}
 	
-	private void effect_main_region_StateA_tr0() {
-		exitSequence_main_region_StateA();
-		enterSequence_main_region_StateB_default();
+	private boolean check_main_region_StateB_tr0_tr0() {
+		return sCInterface.getValue()==5;
 	}
 	
 	private void effect_main_region_StateA_lr1_lr1() {
 		sCInterface.setValue(sCInterface.getValue() + 1);
 	}
 	
-	private void effect_main_region_StateB_tr0() {
-		exitSequence_main_region_StateB();
-		enterSequence_main_region_StateA_default();
+	private void effect_main_region_StateA_tr0() {
+		exitSequence_main_region_StateA();
+		enterSequence_main_region_StateB_default();
 	}
 	
 	private void effect_main_region_StateB_lr0_lr0() {
 		sCInterface.setValue(sCInterface.getValue() + 1);
+	}
+	
+	private void effect_main_region_StateB_tr0() {
+		exitSequence_main_region_StateB();
+		enterSequence_main_region_StateA_default();
 	}
 	
 	/* Entry action for state 'StateA'. */

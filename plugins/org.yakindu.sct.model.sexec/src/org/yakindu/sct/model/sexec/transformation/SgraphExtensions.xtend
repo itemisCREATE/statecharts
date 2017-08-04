@@ -24,6 +24,8 @@ import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.stext.stext.EntryPointSpec
 import org.yakindu.sct.model.stext.stext.ExitPointSpec
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.base.types.Annotation
+import org.yakindu.base.types.AnnotatableElement
 
 class SgraphExtensions {
 	
@@ -54,7 +56,7 @@ class SgraphExtensions {
 	
 	def void collectContainers(EObject obj, List<EObject> containerList) {
 		containerList += obj
-		if (obj?.eContainer != null) collectContainers(obj.eContainer, containerList);
+		if (obj?.eContainer !== null) collectContainers(obj.eContainer, containerList);
 	}
 
 	def collectEntries(Region r) {
@@ -62,7 +64,7 @@ class SgraphExtensions {
 	}
 
 	def entry(Region r) {
-		r.vertices.findFirst(v | v instanceof Entry && (v.name == null || "".equals(v.name) || v.name == 'default') ) as Entry
+		r.vertices.findFirst(v | v instanceof Entry && (v.name === null || "".equals(v.name) || v.name == 'default') ) as Entry
 	}
 	
 	
@@ -72,7 +74,7 @@ class SgraphExtensions {
 	def String entryPointName(Transition t) {
 		val eps = t.properties.filter(typeof(EntryPointSpec)).head
 		
-		if (eps == null) 'default' else eps.entrypoint	
+		if (eps === null) 'default' else eps.entrypoint	
 	}
 
 	/**
@@ -81,7 +83,7 @@ class SgraphExtensions {
 	def String exitPointName(Transition t) {
 		val eps = t.properties.filter(typeof(ExitPointSpec)).head
 		
-		if (eps == null) 'default' else eps.exitpoint	
+		if (eps === null) 'default' else eps.exitpoint	
 	}
 	
 
@@ -98,7 +100,7 @@ class SgraphExtensions {
 	}
 	
 	def Transition transition(Entry entry) {
-		if ( entry?.outgoingTransitions != null) {
+		if ( entry?.outgoingTransitions !== null) {
 			if (entry.outgoingTransitions.size > 0) {
 				return entry.outgoingTransitions.get(0)
 			}
@@ -151,7 +153,7 @@ class SgraphExtensions {
 	 */
 	def Statechart getStatechart(EObject element){
 		var Statechart ret = null
-		if (element != null) {
+		if (element !== null) {
 			if (element instanceof Statechart) {
 				return element as Statechart
 			}
@@ -161,4 +163,37 @@ class SgraphExtensions {
 		}
 		return ret
 	}
+	
+	/** 
+	 * Returns wether a child first execution order is defined for the statechart.
+	 * 
+	 * This feature can be configured by using the ChildFirstExecution annotation.
+	 * 
+	 * @return true if child first execution is declared.
+	 */
+	def boolean isChildFirstExecution(Statechart it) {
+		findAnnotation("ChildFirstExecution") !== null
+	}
+	
+	/** 
+	 * Returns wether interleaved or non interleaved execution order for local reactions is required.
+	 * 
+	 * Local reactions are interleaved when they are processed directly after a states transition checks. 
+	 * They are not interleaved if they are processed after all transitions along the state hierarchy are checked.
+	 * 
+	 * Currently just interleaved execution order is supportede for all kinds of statecharts. Especially orthogogal 
+	 * statecharts are not supported with non interleaved execution order. Thats why just true is returned. In future
+	 * an annotation should be introduced.
+	 * 
+	 * @return true if interleaved local reaction execution is required.
+	 */
+	def boolean interleaveLocalReactions(Statechart it) {
+		return true	
+	}
+	
+	
+	def Annotation findAnnotation(AnnotatableElement it, String name) {
+		annotations.filter[a | name.equals(a.type.name)].head
+	}	
+	 
 }

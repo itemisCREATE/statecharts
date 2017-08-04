@@ -211,11 +211,34 @@ The _properties_ view of states and transition always shows both documentation a
 
 
 
-h2(#edit_editing_regions). Editing regions
+h2(#editing-regions). Editing regions
 
-To change the size or the location of a top-level region, use the graphical editor. Drag the region to move it elsewhere. Use a selected region's handles to resize it.
+In a statechart model, you can have
+* top-level regions, which are directly placed on the "canvas":#edit_canvas, and
+* regions inside of composite or orthogonal states.
 
-bq. *Please note:* You can select size and location of top-level regions only. Within a composite state, (orthogonal) regions are always layouted automatically. However, you can toggle between a horizontal and a vertical layout.
+Their graphical representation differ somewhat, thus editing them is also somewhat different.
+
+
+
+h3(#editing-top-level-regions). Editing top-level regions
+
+You can place a top-level region anywhere on the "canvas":#edit_canvas, and you can change its size at will. To change the location or the size of a region, use the graphical editor. Drag the region to move it elsewhere. Use a selected region's handles to resize it.
+
+
+
+h3(#editing_regions_in_orthogonal_states). Editing regions in orthogonal states
+
+Regions inside an orthogonal or composite state are confined by their enclosing state. They are sized automatically, depending on their contents, and they are arranged either vertically or horizontally.
+
+You can toggle between vertical and horizontally representation of regions in an orthogonal state as follows:
+# Right-click on the orthogonal state's title. The context menu opens.
+# In the context menu, select _Toggle Subregion Alignment_.
+# The layout of the regions switches from horizontal to vertical or vice versa.
+
+
+
+h3(#changing_the_name_of_a_region). Changing the name of a region
 
 You can change the name of a region in the statechart editor as well as in the _properties_ view.
 * In the statechart editor,
@@ -764,6 +787,24 @@ Templates are sections of textual code that occur frequently enough that you wou
 To insert an existing content assist template, type the initial character, then press @[Ctrl+Space]@. The templates that begin with that character appear. Double-click on a template to insert it.
 
 On this preference pane you can create, edit, and delete generator model language templates.
+
+
+h4(#edit_generator_model_filter). Generator model filter
+
+p(#fig_preferences_generator_model_filter). 
+!images/docu_preferences_090_generator_filter_01.png(Preferences: Generator model filter)!
+
+p=. Preferences: Generator model filter
+
+The IDE usually executes all generator models in current workspace. However, what might be inconvenient in some cases, especially if you have a lot of different generator models. To exercise a more fine-grained control of which generator models should be executed, it is possible to exclude or "filter away" particular generator models or entire folders from the automatic build execution. 
+
+Please note that this is a project-specific setting, which you won't find via _Window → Preferences_. In order to create or modify a filter configuration, proceed as follows:
+
+# In the project explorer, right-click on a project name. The context menu opens.
+# In the context menu, select _Properties_. The _Properties_ dialog opens.
+# In the menu on the left, select _YAKINDU SCT → SGen Filter_.
+# In the settings pane on the right, use the _Add…_ and _Remove_ buttons to maintain a list of generator models or folders that have to be ignored in automatic builds.
+# Click on _OK_ to store and activate your modifications.
 
 
 

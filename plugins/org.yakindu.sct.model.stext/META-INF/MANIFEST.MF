@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU SText Model
 Bundle-Vendor: statecharts.org
-Bundle-Version: 2.9.3.qualifier
+Bundle-Version: 3.0.1.qualifier
 Bundle-SymbolicName: org.yakindu.sct.model.stext;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -19,11 +19,14 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.yakindu.sct.model.sgraph;visibility:=reexport,
  org.yakindu.base.types,
  org.yakindu.base.expressions;visibility:=reexport,
- org.yakindu.sct.domain
+ org.yakindu.sct.domain,
+ org.eclipse.emf.workspace,
+ org.yakindu.sct.model.stext.lib,
+ org.eclipse.gmf.runtime.diagram.core
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.eclipse.xtext.xbase.lib
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.sct.model.stext,
  org.yakindu.sct.model.stext.expressions,
  org.yakindu.sct.model.stext.formatting,

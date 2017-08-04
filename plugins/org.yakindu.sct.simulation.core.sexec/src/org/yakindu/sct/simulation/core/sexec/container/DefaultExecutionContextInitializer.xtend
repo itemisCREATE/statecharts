@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.ImportDeclaration
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
@@ -34,10 +35,16 @@ import org.yakindu.sct.simulation.core.sruntime.EventDirection
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
 import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import java.util.Set
+import java.util.HashSet
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth - added functionality to filter unused declaration roots
  * 
  */
 class DefaultExecutionContextInitializer implements IExecutionContextInitializer {
@@ -46,19 +53,45 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	@Inject protected extension ITypeSystem
 	@Inject protected extension ITypeSystemInferrer
 	@Inject protected extension ITypeValueProvider
+	@Inject protected extension SExecExtensions
 
+	protected boolean mapUnusedDaclarationRoots = false
+	
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
 		flow.scopes.forEach[context.slots += transform]
 	}
 
-	def dispatch ExecutionSlot transform(ImportScope scope) {
-		val composite = SRuntimeFactory.eINSTANCE.createCompositeSlot => [
-			name = "import"
+	/**
+	 * Hook that decides if unused declarations in import scopes should be transformed to execution slots.
+	 * Subclasses may override this hook.
+	 * 
+	 * @return - false by default
+	 */	
+	def isMapUnusedDeclarationRootsInImportScope() { mapUnusedDaclarationRoots }
+
+	def setMapUnusedDeclarationRootsInImportScope(boolean b) { mapUnusedDaclarationRoots = b }
+	
+	
+	def create it : SRuntimeFactory.eINSTANCE.createCompositeSlot importSlot(ExecutionFlow flow) {
+		it => [
+			name = "imports"
 		]
+	}
+
+	def dispatch ExecutionSlot transform(ImportScope scope) {
+		
+		val composite = importSlot(scope.flow)
+		
+		val usedDeclarations = scope.flow.usedDeclarationRoots
+		
 		// retrieve namespaces from variable names and create corresponding composite slots
-		for (Declaration decl : scope.declarations.filter(ImportDeclaration).map[declaration]) {
+		for (Declaration decl : scope.declarations
+										.filter(ImportDeclaration)
+										.map[declaration]
+										.filter(decl | mapUnusedDeclarationRootsInImportScope || usedDeclarations.exists[used | EcoreUtil.equals(decl,used)])) 
+		{
 			val pkg = EcoreUtil2.getContainerOfType(decl, Package)
-			if (pkg != null) {
+			if (pkg !== null) {
 				val namespace = pkg.name
 				val declName = decl.name
 				val slot = composite.slots.getSlotFor(namespace)
@@ -78,7 +111,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 
 	def getSlotFor(List<ExecutionSlot> slots, String name) {
 		val existingSlot = slots.findFirst[it.name == name]
-		if (existingSlot != null && existingSlot instanceof CompositeSlot) {
+		if (existingSlot !== null && existingSlot instanceof CompositeSlot) {
 			existingSlot as CompositeSlot
 		} else {
 			val newSlot = SRuntimeFactory.eINSTANCE.createCompositeSlot
@@ -103,10 +136,13 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	}
 
 	def dispatch ExecutionSlot transform(InterfaceScope scope) {
+		val flow = EcoreUtil2.getContainerOfType(scope, ExecutionFlow)
+		val namespace = (flow.sourceElement as Statechart).namespace
 		SRuntimeFactory.eINSTANCE.createCompositeSlot => [
 			if (scope.name !== null) {
 				name = scope.name
-				fqName = scope.name
+				val scopeFqn = scope.fullyQualifiedName.toString
+				fqName = if(namespace !== null) namespace + "." + scopeFqn else scopeFqn
 			} else {
 				name = "default"
 			}
@@ -138,7 +174,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		SRuntimeFactory.eINSTANCE.createExecutionOperation => [
 			name = op.fullyQualifiedName.lastSegment
 			fqName = op.fullyQualifiedName.toString
-			type = if(op.type != null) op.type else getType(ITypeSystem.VOID)
+			type = if(op.type !== null) op.type else getType(ITypeSystem.VOID)
 			value = it.type.defaultValue
 		]
 	}
@@ -152,4 +188,15 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		]
 	}
 
+	
+	/**
+	 * @return A set of used declaration roots.
+	 */
+	def protected usedDeclarationRoots(ExecutionFlow flow) {
+		val Set<Declaration> usedDecls = new HashSet<Declaration>()
+		
+		if (flow !== null) flow.eAllContents.filter(typeof(ElementReferenceExpression)).map( ere | ere.reference ).filter(typeof(Declaration)).forEach[ decl | usedDecls += decl]
+		
+		return usedDecls
+	}
 }

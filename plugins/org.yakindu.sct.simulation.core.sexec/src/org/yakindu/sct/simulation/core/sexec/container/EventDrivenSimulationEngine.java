@@ -53,4 +53,11 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 			}
 		}
 	}
+
+	@Override
+	protected boolean useInternalEventQueue() {
+		return true;
+	}
+	
+	
 }

@@ -109,7 +109,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	
 	/* Entry action for state 'A'. */
 	private void entryAction_mainRegion_A() {
-		sCInterface.setErg(4*(3-1));
+		sCInterface.setErg(4 * (3 - 1));
 	}
 	
 	/* 'default' enter sequence for state A */

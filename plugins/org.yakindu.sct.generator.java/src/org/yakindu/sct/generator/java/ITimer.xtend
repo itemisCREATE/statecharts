@@ -28,11 +28,11 @@ class ITimer {
 	@Inject ICoreLibraryHelper outletFeatureHelper
 	
 	def generateITimer(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) != null) {
+		if (outletFeatureHelper.getLibraryTargetFolderValue(entry) !== null) {
 			// generate into library target folder in case one is specified, as the contents are static
 			fsa.generateFile(entry.basePackagePath + '/' + iTimer.java,
 				LIBRARY_TARGET_FOLDER_OUTPUT, content(entry))
-		} else if (outletFeatureHelper.getApiTargetFolderValue(entry) != null) {
+		} else if (outletFeatureHelper.getApiTargetFolderValue(entry) !== null) {
 			// generate into API target folder in case one is specified, as it is an interface
 			fsa.generateFile(entry.basePackagePath + '/' + iTimer.java,
 				API_TARGET_FOLDER_OUTPUT, content(entry))
@@ -41,11 +41,14 @@ class ITimer {
 			fsa.generateFile(entry.basePackagePath + '/' + iTimer.java, content(entry))
 		}
 	}
+	def public content(GeneratorEntry entry) {
+		content(entry.licenseText, entry.basePackageName)		
+	}
 	
-	def private content(GeneratorEntry entry) {
+	def public content(String licenceText, String basePackage) {
 		'''
-		«entry.licenseText»
-		package «entry.getBasePackageName()»;
+		«licenceText»
+		package «basePackage»;
 
 		/**
 		 * Interface a timer has to implement. Use to implement your own timer

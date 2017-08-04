@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.yakindu.sct</groupId>
 	<artifactId>org.yakindu.sct.releng</artifactId>
-	<version>2.9.3-SNAPSHOT</version>
+	<version>3.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
@@ -18,25 +18,6 @@
 	</properties>
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.5.201505241946</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -221,35 +202,6 @@
 
 	<profiles>
 		<profile>
-			<id>Mars.target</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<xtext-version>2.9.1</xtext-version>
-			</properties>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>target-platform-configuration</artifactId>
-						<version>${tycho-version}</version>
-						<configuration>
-							<includePackedArtifacts>true</includePackedArtifacts>
-							<target>
-								<artifact>
-									<groupId>org.yakindu.base</groupId>
-									<artifactId>org.yakindu.base.target</artifactId>
-									<version>2.9.3-SNAPSHOT</version>
-									<classifier>Mars</classifier>
-								</artifact>
-							</target>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
 			<id>Luna.target</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
@@ -269,8 +221,37 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>2.9.3-SNAPSHOT</version>
+									<version>3.0.1-SNAPSHOT</version>
 									<classifier>Luna</classifier>
+								</artifact>
+							</target>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>Mars.target</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<xtext-version>2.9.1</xtext-version>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>target-platform-configuration</artifactId>
+						<version>${tycho-version}</version>
+						<configuration>
+							<includePackedArtifacts>true</includePackedArtifacts>
+							<target>
+								<artifact>
+									<groupId>org.yakindu.base</groupId>
+									<artifactId>org.yakindu.base.target</artifactId>
+									<version>3.0.1-SNAPSHOT</version>
+									<classifier>Mars</classifier>
 								</artifact>
 							</target>
 						</configuration>
@@ -281,7 +262,7 @@
 		<profile>
 			<id>Neon.target</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
 				<xtext-version>2.10.0</xtext-version>
@@ -298,8 +279,37 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>2.9.3-SNAPSHOT</version>
+									<version>3.0.1-SNAPSHOT</version>
 									<classifier>Neon</classifier>
+								</artifact>
+							</target>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>Oxygen.target</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<xtext-version>2.12.0</xtext-version>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>target-platform-configuration</artifactId>
+						<version>${tycho-version}</version>
+						<configuration>
+							<includePackedArtifacts>true</includePackedArtifacts>
+							<target>
+								<artifact>
+									<groupId>org.yakindu.base</groupId>
+									<artifactId>org.yakindu.base.target</artifactId>
+									<version>3.0.1-SNAPSHOT</version>
+									<classifier>Oxygen</classifier>
 								</artifact>
 							</target>
 						</configuration>
@@ -356,6 +366,7 @@
 				<module>../../test-plugins/org.yakindu.sct.model.sexec.test</module>
 				<module>../../test-plugins/org.yakindu.sct.model.sgraph.test</module>
 				<module>../../test-plugins/org.yakindu.sct.generator.genmodel.test</module>
+				<module>../../test-plugins/org.yakindu.sct.model.resource.test</module>
 				<module>../../test-plugins/org.yakindu.sct.model.stext.resource.test</module>
 				<module>../../test-plugins/org.yakindu.sct.model.stext.test</module>
 				<module>../../test-plugins/org.yakindu.sct.simulation.core.sexec.test</module>
@@ -437,7 +448,6 @@
 		<module>../../features/org.yakindu.sct.generator.c-feature</module>
 		<module>../../features/org.yakindu.sct.generator.cpp-feature</module>
 		<module>../../features/org.yakindu.sct.generator.java-feature</module>
-		<module>../../features/org.yakindu.sct.generator-feature</module>
 
 	</modules>
 

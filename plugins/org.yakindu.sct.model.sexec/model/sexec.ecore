@@ -17,9 +17,17 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitAction" eType="#//Step"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="staticInitSequence" eType="#//Sequence"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionNode" eSuperTypes="#//MappedElement ../../org.yakindu.base.types/model/base.ecore#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
+        eType="#//Reaction" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reactSequence" eType="#//Sequence"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localReactSequence" eType="#//Sequence"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionState" eSuperTypes="#//ExecutionNode #//ExecutionScope">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="leaf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
@@ -36,8 +44,18 @@
         eType="#//ExecutionScope" eOpposite="#//ExecutionScope/superScope"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superScope" eType="#//ExecutionScope"
         eOpposite="#//ExecutionScope/subScopes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enterSequences" upperBound="-1"
+        eType="#//Sequence" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exitSequence" eType="#//Sequence"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initSequence" eType="#//Sequence"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionRegion" eSuperTypes="#//ExecutionScope">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deepEnterSequence" eType="#//Sequence"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shallowEnterSequence" eType="#//Sequence"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="historyVector" eType="#//StateVector"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
@@ -47,6 +65,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionExit" eSuperTypes="#//ExecutionNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionChoice" eSuperTypes="#//ExecutionNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionSynchronization" eSuperTypes="#//ExecutionNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Reaction" eSuperTypes="#//MappedElement ../../org.yakindu.base.types/model/base.ecore#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="check" eType="#//Check"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="#//Step"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StateVector">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1"/>
@@ -59,6 +84,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Step" abstract="true" eSuperTypes="../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caller" upperBound="-1"
+        eType="#//Call" eOpposite="#//Call/step"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sequence" eSuperTypes="#//Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
+        eType="#//Step" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Check" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
@@ -70,6 +101,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="check" eType="#//Check"
         eOpposite="#//Check/refs"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="If" eSuperTypes="#//Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="check" eType="#//Check"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thenStep" eType="#//Step"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseStep" eType="#//Step"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Execution" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statement" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
         containment="true"/>
@@ -80,7 +119,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="ExitState" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Call" eSuperTypes="#//Step"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Call" eSuperTypes="#//Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="step" eType="#//Step" eOpposite="#//Step/caller"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduleTimeEvent" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="timeEvent" eType="#//TimeEvent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="timeValue" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
@@ -116,8 +157,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="TraceNodeExecuted" eSuperTypes="#//Trace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//ExecutionNode"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ReactionFired" eSuperTypes="#//Trace"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TraceReactionWillFire" eSuperTypes="#//Trace"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReactionFired" eSuperTypes="#//Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reaction" eType="#//Reaction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceReactionWillFire" eSuperTypes="#//Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reaction" eType="#//Reaction"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TraceStateEntered" eSuperTypes="#//Trace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
   </eClassifiers>

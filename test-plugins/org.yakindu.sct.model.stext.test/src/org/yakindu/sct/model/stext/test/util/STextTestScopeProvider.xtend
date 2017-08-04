@@ -88,6 +88,11 @@ class STextTestScopeProvider extends STextScopeProvider {
 		addToIndex(descriptions, nestedNestedTemplate)
 		addToIndex(descriptions, nestedNestedTemplate.member.head)
 		
+		addToIndex(descriptions, createPrimitiveType("SubBool", BOOLEAN))
+		addToIndex(descriptions, createPrimitiveType("SubReal", REAL))
+		addToIndex(descriptions, createPrimitiveType("SubInt", INTEGER))
+		addToIndex(descriptions, createPrimitiveType("SubString", STRING))
+		
 		return new SimpleScope(descriptions)
 	}
 	
@@ -99,7 +104,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 			}
 		}
 	}
-
+	
 	def protected State createDummyModel() {
 		val stateA = createState => [
 			name = "A"
@@ -398,5 +403,5 @@ class STextTestScopeProvider extends STextScopeProvider {
 			]
 		]
 	}
-
+	
 }

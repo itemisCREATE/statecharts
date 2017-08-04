@@ -361,16 +361,9 @@ p=. The _Install_ wizard
 
 Click on the _Add..._ button near the upper right corner of the wizard.
 
-A dialog opens, asking you to specify the update repository you want to install the new software from. The appropriate update repository depends on your Eclipse version. Please enter the respective update repository into the _Location_ field.
+A dialog opens, asking you to specify the update repository you want to install the new software from. The appropriate update repository depends on your Eclipse version. Please enter the URL of the respective update repository into the _Location_ field.
 
-table(#updaterepositories).
-|\2_. Eclipse |\2_. YAKINDU Statechart Tools Update Repository |
-|_. Name |_. Version |_. Release Build |
-|Neon|4.6|"http://updates.yakindu.org/sct/neon/releases/":http://updates.yakindu.org/sct/neon/releases/|
-|Mars|4.5|"http://updates.yakindu.org/sct/mars/releases/":http://updates.yakindu.org/sct/mars/releases/|
-|Luna|4.4|"http://updates.yakindu.org/sct/luna/releases/":http://updates.yakindu.org/sct/luna/releases/|
-
-p. Please note that YAKINDU Statechart Tools might take some time to catch up with more recent Eclipse releases. The corresponding update repositories will not be available until then.
+bq. *Please note:* Update site URLs are available online via the "YAKINDU Statechart Tools download page":https://info.itemis.com/state-machine/download-yakindu-statechart-tools.
 
 Enter some text into the _Name_ field. This text is abitrary in principle, but you should choose something that makes it easier for you to identify this particular update repository among other update repositories. In the example below, the repository's name is @YAKINDU Statechart Tools (Luna)@. It describes which piece of software the repository provides (YAKINDU Statechart Tools) and which Eclipse release that software is compatible with (Luna, i. e. Eclipse 4.4).
 

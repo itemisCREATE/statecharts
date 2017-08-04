@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Simulation Execution Test
 Bundle-SymbolicName: org.yakindu.sct.simulation.core.sexec.test
-Bundle-Version: 2.9.3.qualifier
+Bundle-Version: 3.0.1.qualifier
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext,
@@ -19,5 +19,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.simulation.core.sexec,
  org.yakindu.sct.domain.generic,
  org.yakindu.sct.domain.generic.simulation
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
+Export-Package: org.yakindu.sct.model.sexec.interpreter.test.util

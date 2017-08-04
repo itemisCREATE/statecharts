@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Generator Core
 Bundle-SymbolicName: org.yakindu.sct.generator.core;singleton:=true
-Bundle-Version: 2.9.3.qualifier
+Bundle-Version: 3.0.1.qualifier
 Bundle-Activator: org.yakindu.sct.generator.core.GeneratorActivator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.yakindu.sct.model.sexec;visibility:=reexport,
@@ -14,7 +14,7 @@ Require-Bundle: org.yakindu.sct.model.sexec;visibility:=reexport,
  com.google.guava,
  org.eclipse.xtext.xbase,
  org.eclipse.core.runtime;visibility:=reexport
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.generator.core;
   uses:="org.osgi.framework,

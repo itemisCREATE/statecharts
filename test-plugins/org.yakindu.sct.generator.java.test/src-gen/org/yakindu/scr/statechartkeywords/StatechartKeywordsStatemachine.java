@@ -337,7 +337,7 @@ public class StatechartKeywordsStatemachine implements IStatechartKeywordsStatem
 	
 	/* Entry action for statechart 'StatechartKeywords'. */
 	private void entryAction() {
-		timer.setTimer(this, 0, 1*1000, true);
+		timer.setTimer(this, 0, 1 * 1000, true);
 	}
 	
 	/* Exit action for state 'StatechartKeywords'. */

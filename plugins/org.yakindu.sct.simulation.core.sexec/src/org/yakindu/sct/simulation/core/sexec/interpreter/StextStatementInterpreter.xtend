@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.expressions.expressions.AssignmentExpression
@@ -67,6 +68,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	extension IQualifiedNameProvider provider
 	@Inject(optional=true)
 	protected IOperationMockup operationDelegate
+	@Inject(optional=true)
+	protected extension IEventRaiser eventRaiser	
 	@Inject
 	protected extension IExecutionSlotResolver resolver
 	@Inject
@@ -155,12 +158,14 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
 		var event = context.resolve(eventRaising.event)
-		if (eventRaising.value != null) {
-			event.value = eventRaising.value.execute
-		}
+
 		if (event instanceof ExecutionEvent) {
-			(event as ExecutionEvent).raised = true
+			
+			val value = eventRaising.value?.execute	
+		
+			if (eventRaiser != null) event.raise(value) 
 		}
+		
 		null
 	}
 
@@ -278,7 +283,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		if (expression.operationCall || expression.reference instanceof OperationDefinition) {
 			if (operationDelegate != null &&
 				operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
-				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
+				return (expression.reference as Operation).execute(parameter.toArray)
 			}
 		}
 		// for enumeration types return the literal value
@@ -306,7 +311,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			if (call.feature instanceof Operation) {
 				var Operation operation = call.feature as Operation
 				if (operationDelegate != null && operationDelegate.canExecute(operation, parameter)) {
-					return operationDelegate.execute(operation, parameter)
+					return operation.execute(parameter)
 				}
 			}
 
@@ -331,6 +336,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 		println("No feature found for " + call.feature.fqn + " -> returning null")
 		return null;
+	}
+
+	def execute(Operation it, List<Object> params) {
+		operationDelegate.execute(it, params)
 	}
 
 	def String fqn(EObject obj) {

@@ -105,7 +105,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 	protected void initModelCreationPage() {
 		modelCreationPage = new ModelCreationWizardPage("DiagramModelFile", getSelection(), "sct");
 		modelCreationPage.setTitle("YAKINDU SCT Diagram");
-		modelCreationPage.setDescription("Create a new YAKINDU SCT Diagram File");
+		modelCreationPage.setDescription("Create a new YAKINDU SCT diagram file.");
 		modelCreationPage.setImageDescriptor(StatechartImages.LOGO.imageDescriptor());
 		addPage(modelCreationPage);
 	}

@@ -865,6 +865,4 @@
             priority="medium">
       </factory>
    </extension>
-  <!-- Added default templates -->
-   
 </plugin>

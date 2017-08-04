@@ -20,45 +20,6 @@ Headless code generation is a new feature the YAKINDU team wants to make availab
 
 h2(#hdls_installation). Installation
 
-If you are working with the "Professional Edition":https://info.itemis.com/yakindu/statecharts/pro of YAKINDU Statechart Tools, the headless code generation feature is already included and no further installation procedure is required. You can skip this section and continue reading at "&quot;The scc statechart compiler&quot;":#hdls_the_scc_statechart_compiler.
-
-As a user of the "Open Edition":https://info.itemis.com/download-yakindu-statechart-tools you can install the headless code generation feature from the YAKINDU Statechart Tools Professional update site.
-
-bq.. *Please note:*
-
-Don't worry! Even though the headless generation feature is coming to you from the YAKINDU Statechart Tools Professional update site, no license fees will be incurred. Headless generation is completely free to use, though not open source.
-
-p. To install the headless generation feature into the open edition or another eclpse instance please follow the following steps.
-
-* Open the "registration form":https://info.itemis.com/yakindu/statecharts/pro with your web browser. If you have never registered before, please fill in your name, profession, and e-mail address. Click on _Send_.
-* You will receive an e-mail containing a download link. In that e-mail, click on _Download SCT Pro Edition_.
-* Your personalized download page will open in your web browser, showing the following download options.
-
-p(#hdls_fig_yakindu_statechart_tools_professional_edition_download_options). 
-
-!images/docu_headless_downloadpage.png(YAKINDU Statechart Tools Professional Edition download options)!
-
-p=. YAKINDU Statechart Tools Professional Edition download options
-
-* Click on _Install from update site_. The browser will take to another page and display the URL of the YAKINDU Statechart Tools Pro update site. You will need it subsequently.
-* In the Eclipse main menu, select _Help → Install New Software…_.
-* The _Install_ wizard opens.
-* Click on the _Add…_ button. The _Add Repository_ dialog opens.
-* Paste the above-mentioned URL into the _Location_ text field. Enter a meaningful name into the _Name_ field, e.g. "YAKINDU Statechart Tools Professional".
-* Click on _OK_.
-* In the _Install_ wizard, open the _YAKINDU Statechart Tools Professional Edition_ entry.
-* Select _YAKINDU Headless Code Generator_, see figure "&quot;Installing the headless code generation feature&quot;":#hdls_fig_installing_the_headless_code_generation_feature. Click on _Next >_.
-* The _Install_ wizard displays all items to be installed, i.e. _YAKINDU Headless Code Generator_. Click on _Next >_.
-* The license agreements for the software to be installed are displayed. Accept them and click on _Finish_.
-* The headless generation feature is installed.
-
-p(#hdls_fig_installing_the_headless_code_generation_feature). 
-
-!images/docu_headless_updatesite.png(Installing the headless code generation feature)!
-
-p=. Installing the headless code generation feature
-
-
 
 h3(#hdls_the_scc_statechart_compiler). The scc statechart compiler
 
@@ -92,9 +53,9 @@ usage: scc [-d <path>] [-h] [-m <path>{,<path>}…]
 
 
 
-h3(#hdls_integrating_custom_code_generators). Integrating custom code generators
+h3(#hdls_custom_generator). Integrating custom code generators
 
-YAKINDU Statechart Tools supports custom generators as described in "Custom code generators":../user-guide/generating_code#codegen_custom_code_generators. These custom code generators can be executed by use of the headless code generator infrastructure also. To do so the custom code generator has to be installed as an eclipse plug-in within the distribution where the headless code generator feature was installed as described in "Installation":#hdls_installation - thats it: the custom generator will be used whenever a generator model (*.sgen), loaded by the headless generator infrastructure, referencing the custom code generator id.
+YAKINDU Statechart Tools supports custom code generators as described in section "&quot;Custom code generators&quot;":../user-guide/generating_code.html#custom-code-generators. These generators can also be executed by use of the headless code generator infrastructure. To do so, the custom code generator has to be installed as an Eclipse plugin within the distribution directory. The custom code generator will be used whenever a generator model (_.sgen_ file) is loaded by the headless generator infrastructure and references the custom code generator ID.
 
 
 
@@ -211,7 +172,11 @@ The target folder of generated artifacts will be evaluated as follows:
 <code><em>basedir</em>/<em>sgen.targetProject</em>/<em>sgen.targetFolder</em></code>
 
 
+<<<<<<< HEAD
 h4(#hdls_specifying_statechart_model_files). Specifying statechart model files
+=======
+h4(#hdls_specifying_statechart_model_files). Specifying model files
+>>>>>>> master
 
 Use the <code>-m <em>models</em></code> option to select certain models known by the statechart compiler. Usually these will be _.sgen_ or _.sct_ files. However, other model files that are supported by particular code generators, can be specified, too, e.g. C header files for YAKINDU Statechart Tool PRO's deep C integration. The @-m@ option's value can be absolute or relative, can be a file or a folder and can be a single value or a comma-separated list of values.
 
@@ -230,13 +195,21 @@ If the _scc_ command fails, here are some tips and fixes.
 
 
 
+<<<<<<< HEAD
 h3(#hdls_troubleshooting_error_neither_sct_nor_eclipse_executable_found). [ERROR] Neither 'SCT' nor 'eclipse' executable found!
+=======
+h3(#hdls_troubleshooting_error_executable). [ERROR] Neither 'SCT' nor 'eclipse' executable found!
+>>>>>>> master
 
 If you encounter this error message on Linux, this means the _scc_ command was neither able to locate a _SCT_ executable binary nor an _eclipse_ executable. This happens if the _scc_ executable, which is really only a launcher, is not in the same directory as the _SCT_ or _eclipse_ executables. In a YAKINDU Statechart Tools stand-alone installation, the executable binary is named _SCT_. However, its name is _eclipse_ if you have installed YAKINDU Statechart Tools from an update site into an already existing Eclipse installation. The _scc_ launcher tries to find one of _SCT_ or _eclipse_ and launches the correct one.
 
 
 
+<<<<<<< HEAD
 h3(#hdls_troubleshooting_the_eclipse_executable_launcher_was_unable_to_locate_its_companion_shared_library). The Eclipse executable launcher was unable to locate its companion shared library
+=======
+h3(#hdls_troubleshooting_error_library). The Eclipse executable launcher was unable to locate its companion shared library
+>>>>>>> master
 
 This error message is usually issued if you have installed YAKINDU Statechart Tools from an update site into an already existing Eclipse installation _and_ you installed the latter using the _Eclipse Installer / Oomph_.
 

@@ -16,13 +16,23 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.yakindu.base.expressions.expressions.Argument;
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
+import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractTypeInferrerTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.test.util.STextTestScopeProvider;
+import org.yakindu.sct.model.stext.test.util.StextTestFactory;
+import org.yakindu.sct.model.stext.test.util.TypesTestFactory;
+
+import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -34,6 +44,9 @@ import org.yakindu.sct.model.stext.test.util.STextTestScopeProvider;
 @InjectWith(STextInjectorProvider.class)
 public class TypeInferrerTest extends AbstractTypeInferrerTest {
 
+	@Inject
+	protected TypesTestFactory typesFactory;
+	
 	// Unary
 	@Test
 	public void testNumericalUnaryExpressionSuccess() {
@@ -734,6 +747,138 @@ public class TypeInferrerTest extends AbstractTypeInferrerTest {
 	public void testOperationFailure() {
 		expectIssue(inferType("boolVar = intOp()"),
 				"Assignment operator '=' may only be applied on compatible types, not on boolean and integer.");
+	}
+	
+	@Test
+	public void testOperationCall() {
+		String scope = "internal " 
+				+ "operation opInt(p:integer) : void "
+				+ "operation opReal(p:real) : void "
+				+ "operation opString(p:string) : void "
+				+ "operation opBoolean(p:boolean) : void "
+				+ "operation opSubInt(p:SubInt) : void "
+				+ "operation opSubReal(p:SubReal) : void "
+				+ "operation opSubString(p:SubString) : void "
+				+ "operation opSubBool(p:SubBool) : void "
+				+ "var vi : integer "
+				+ "var vr : real "
+				+ "var vb : boolean "
+				+ "var vs : string "
+				+ "var vsi : SubInt "
+				+ "var vsr : SubReal "
+				+ "var vsb : SubBool "
+				+ "var vss : SubString ";
+		
+		expectNoErrors("opInt(1)", scope);
+		expectNoErrors("opInt(vi)", scope);
+		expectNoErrors("opInt(vsi)", scope);
+		
+		expectNoErrors("opReal(1.1)", scope);
+		expectNoErrors("opReal(1)", scope);
+		expectNoErrors("opReal(vr)", scope);
+		expectNoErrors("opReal(vsr)", scope);
+		
+		expectNoErrors("opString(\"hello\")", scope);
+		expectNoErrors("opString(vs)", scope);
+		expectNoErrors("opString(vss)", scope);
+		
+		expectNoErrors("opBoolean(true)", scope);
+		expectNoErrors("opBoolean(vb)", scope);
+		expectNoErrors("opBoolean(vsb)", scope);
+		
+		expectErrors("opInt(1.1)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		expectErrors("opInt(vr)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		expectErrors("opInt(vsr)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		
+		expectErrors("opSubInt(vi)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		expectErrors("opSubReal(vr)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		expectErrors("opSubBool(vb)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		expectErrors("opSubString(vs)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		
+		// TODO: actually one would expect these to work
+//		expectNoErrors("opSubInt(1)", scope);
+//		expectNoErrors("opSubReal(1.1)", scope);
+//		expectNoErrors("opSubBool(true)", scope);
+//		expectNoErrors("opSubString(\"hello\")", scope);
+	}
+	
+	@Test
+	public void testOperationCallVarArgs() {
+		String scope = "internal " 
+				+ "operation opInt(p...:integer) : void "
+				+ "operation opReal(p...:real) : void "
+				+ "operation opString(p...:string) : void "
+				+ "operation opBoolean(p...:boolean) : void "
+				+ "operation opSubInt(p...:SubInt) : void "
+				+ "operation opSubReal(p...:SubReal) : void "
+				+ "operation opSubString(p...:SubString) : void "
+				+ "operation opSubBool(p...:SubBool) : void "
+				+ "var vi : integer "
+				+ "var vr : real "
+				+ "var vb : boolean "
+				+ "var vs : string "
+				+ "var vsi : SubInt "
+				+ "var vsr : SubReal "
+				+ "var vsb : SubBool "
+				+ "var vss : SubString ";
+		
+		expectNoErrors("opInt(1)", scope);
+		expectNoErrors("opInt(vi)", scope);
+		expectNoErrors("opInt(vsi)", scope);
+		expectNoErrors("opInt(1, vi, vsi)", scope);
+		
+		expectNoErrors("opReal(1.1)", scope);
+		expectNoErrors("opReal(1)", scope);
+		expectNoErrors("opReal(vr)", scope);
+		expectNoErrors("opReal(vsr)", scope);
+		expectNoErrors("opReal(1.1, 1, vr, vsr)", scope);
+		
+		expectNoErrors("opString(\"hello\")", scope);
+		expectNoErrors("opString(vs)", scope);
+		expectNoErrors("opString(vss)", scope);
+		expectNoErrors("opString(\"hello\", vs, vss)", scope);
+		
+		expectNoErrors("opBoolean(true)", scope);
+		expectNoErrors("opBoolean(vb)", scope);
+		expectNoErrors("opBoolean(vsb)", scope);
+		expectNoErrors("opBoolean(true, vb, vsb)", scope);
+		
+		expectErrors("opInt(1.1)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		expectErrors("opInt(vr)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		expectErrors("opInt(vsr)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1);
+		expectErrors("opInt(1.1, vr, vsr)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 3);
+		
+		expectErrors("opSubInt(vi, vi)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2);
+		expectErrors("opSubReal(vr, vr)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2);
+		expectErrors("opSubBool(vb, vb)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2);
+		expectErrors("opSubString(vs, vs)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2);
+		
+	}
+
+	@Test
+	public void testOperationCallWithOptionalParameter() {
+		OperationDefinition opDef = StextTestFactory._createOperation("opWithOptionals",
+				StextFactory.eINSTANCE.createInternalScope());
+
+		Parameter pReq = typesFactory.createParameter("pReq", ITypeSystem.INTEGER, false);
+		Parameter pOpt = typesFactory.createParameter("pOpt", ITypeSystem.INTEGER, true);
+		opDef.getParameters().add(pReq);
+		opDef.getParameters().add(pOpt);
+
+		Argument boolArg = (Argument) parseExpression("true", Argument.class.getSimpleName());
+		Argument intArg = (Argument) parseExpression("17", Argument.class.getSimpleName());
+
+		// opWithOptionals(17, 17) => valid
+		ElementReferenceExpression opCall1 = StextTestFactory._createOperationCall(opDef, intArg, intArg);
+		expectNoErrors(opCall1);
+
+		// opWithOptionals(17) => valid, because of optional parameter
+		ElementReferenceExpression opCall2 = StextTestFactory._createOperationCall(opDef, intArg);
+		expectNoErrors(opCall2);
+
+		// opWithOptionals(true) => invalid
+		ElementReferenceExpression opCall3 = StextTestFactory._createOperationCall(opDef, boolArg);
+		expectError(opCall3, ITypeSystemInferrer.NOT_COMPATIBLE_CODE);
 	}
 
 	@Test

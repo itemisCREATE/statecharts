@@ -19,15 +19,21 @@ public class DomainStatus {
 	public static final DomainStatus OK = new DomainStatus(Severity.OK);
 
 	public static enum Severity {
-		OK, ERROR
+		OK, ERROR, WARNING, INFO
 	}
 
 	private Severity status;
 	private String message;
-
+	private String shortMessage;
+	
 	public DomainStatus(Severity status, String message) {
+		this(status, message, message);
+	}
+	
+	public DomainStatus(Severity status, String message, String shortMessage) {
 		this.status = status;
 		this.message = message;
+		this.shortMessage = shortMessage;
 	}
 
 	public DomainStatus(Severity status) {
@@ -40,6 +46,10 @@ public class DomainStatus {
 
 	public String getMessage() {
 		return message;
+	}
+	
+	public String getShortMessage() {
+		return shortMessage;
 	}
 
 }

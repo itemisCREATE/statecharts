@@ -156,7 +156,7 @@ To import a C header file, go to the beginning of your statechart's definition s
 
 bq.. *Please note:*
 
-In difference to a c compiler, imports (/includes) will never be available transitively in context of YAKINDU Statechart Tools. So includes defined in imported header files have to be imported explicitly in your statechart specification section.
+Contrary to a C compiler, YAKINDU Statechart Tools do not support transitive imports. That is to say, if a header file _a.h_ imports another header file _b.h_ using the @#include@ directive, _b.h_ will not be "seen" in YAKINDU Statechart Tools unless you import it explicitly in your statechart's definition section.
 
 p(#cdom_fig_selecting_a_c_header_to_import). 
 
@@ -166,7 +166,7 @@ The following picture for example .
 
 p=. Selecting a C header to import
 
-If we had more than a single header file in the project, we would see them all. The content assist shows all header files in a project, including those in subdirectories. A C header's path is relative to the statechart it is imported into. 
+If we had more than a single header file in the project, we would see them all. The content assist shows all header files in a project, including those in subdirectories. A C header's path is relative to the statechart it is imported into.
 
 Click on the _point.h_ entry in the menu to complete the @import@ statement. The result looks like this:
 
@@ -632,64 +632,9 @@ In C it is possible to define structs, unions and enums without a _typedef_. The
 
 
 h3(#cdom_performance_issues_with_very_large_c_projects). Performance issues with very large C projects
-
 h4(#cdom_processing_header_files_and_macro_definitions). Processing header files and macro definitions
-
-Statecharts that
-* include a very large number of header files (_.h_ files), or
-* use a very large number of preprocessor macro definitions (@#define@)
-* or both,
-might cause YAKINDU Statechart Tools to spend a considerable amount of time processing ("parse") them.
-
-Typically, @#define@ directives are coded in header files. Header files in turn can include further header files using the @#include@ directive. The total amount of header files and @#define@ directives involved is not always transparent to the developer, especially if system header files or header files of a programming framework are included.
-
-
 h4(#cdom_excluding_c_header_files_from_being_parsed). Excluding C header files from being parsed
-
-YAKINDU Statechart Tools parses header files to make types and names defined therein available to your statechart. However, you typically won't need all of them. In order to save processing time you can explicitly exclude header files or folders from parsing.
-
-YAKINDU Statechart Tools maintains excluded header files and folders in a blacklist. Initially that list is empty. To modify the blacklist, proceed as follows:
-
-# In the project explorer, right-click on your project. The context menu opens.
-# Select the _Properties_ context menu entry. The _Properties_ dialog opens.
-# In the navigation menu on the left hand side of the dialog, open the _YAKINDU SCT_ entry.
-# Click on the _C Domain_ entry. The blacklist appears at the right.
-# To add one or more header files or folders to the blacklist, click on the _Add_ button. A file selection dialog appears, allowing you to select files with a _.h_ extension or folders.<br/>!images/cdom_blacklist_010_blacklist_for_c_domain_010.png(Excluding C header files from parsing)!
-# To remove files or folders from the blacklist, select them in the list and click on the _Remove_ button.
-# Click on the _OK_ button to make your changes permanent and close the dialog.
-
-Aside from the buttons mentioned above, the blacklist dialog has three more buttons:
-* _Apply:_ Makes your changes permanent, but leaves the dialog open.
-* _Cancel:_ Closes the dialog without making your changes permanent – as long as you haven't applied them yet.
-* _Restore Defaults:_ Empties the list.
-
-After changing the blacklist, please perform a _clean_ on the project, followed by a _build_. This is needed for your changes to take effect. After that, any imports excluded by the blacklist will no longer show up in your statechart's content assist.
-
-
 h4(#cdom_deactivating_the_ccpp_indexer). Deactivating the C/C++ indexer
-
-The C/C++ indexer is part of the Eclipse C/C++ Development Toolkit (CDT). It parses C/C++ source and header files and maintains the extracted information in an internal database. This database is used by the CDT for search, navigation and parts of content assist. YAKINDU Statechart Tools also uses the information provided by the C/C++ indexer.
-
-In very large C/C++ projects, however, indexing source and header files can become very time-consuming. You can mitigate this problem somewhat by disabling the C/C++ indexer. In this case YAKINDU Statechart Tools triggers parsing of C header files on its own. This might be faster than having to wait for the C/C++ indexer, because only those header files that are really used within the statechart will be parsed.
-
-You can disable the C/C++ indexer either in the workspace settings, see _Window → Preferences_, or in the project-specific settings. To do the latter, proceed as follows:
-# In the _Project Explorer_ view, select the C project.
-# In the main menu, select _Project → Properties_. Alternatively, select _Properties_ in the project's context menu. The _Properties_ dialog appears.
-# In the navigation area on the left, select _C/C++ General → Indexer_.
-# In the settings on the right:
-## Enable the option _"Enable project specific settings"_ (sic).
-## Disable the option _"Enable indexer"_.
-# Click on the _OK_ button. The _Properties_ dialog disappears.
-
-As an alternative to disabling the C/C++ indexer completely, you might want to play around with its various options, see figure "&quot;Disabling the C/C++ indexer&quot;":#cdom_fig_disabling_the_ccpp_indexer, to improve the indexer's performance.
-
-p(#cdom_fig_disabling_the_ccpp_indexer). 
-
-!images/cdom_ccpp_indexer_010_disabling.png(Disabling the C/C++ indexer)!
-
-p=. Disabling the C/C++ indexer
-
-
 h3(#cdom_please_get_in_touch_with_us). Please get in touch with us
 
 Please note that the preceding list of restrictions might not be complete. If you discover any further problems, please do not hesitate to contact us! Your feedback is highly appreciated!

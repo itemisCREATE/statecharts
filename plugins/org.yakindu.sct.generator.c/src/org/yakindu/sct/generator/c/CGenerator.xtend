@@ -12,13 +12,17 @@ package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.sct.generator.c.DefaultGenArtifactConfigurations.GenArtifactConfiguration
+import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfiguration
+import org.yakindu.sct.generator.c.eventdriven.StatechartEventsHeader
+import org.yakindu.sct.generator.c.eventdriven.StatechartEventsSource
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sgraph.Statechart
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION
 
 /**
  * This is the C code generators main class. 
@@ -50,7 +54,7 @@ class CGenerator implements IExecutionFlowGenerator {
 		}
 	}
 	
-	def protected initGenerationArtifacts(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
+	def protected initGenerationArtifacts(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		locations.configure(flow.typesModule.h, entry.libraryOutput, types)
 		locations.configure(flow.module.h, entry.headerOutput, statemachineHeader)
 		locations.configure(flow.module.c, entry.sourceOutput, statemachineSource)

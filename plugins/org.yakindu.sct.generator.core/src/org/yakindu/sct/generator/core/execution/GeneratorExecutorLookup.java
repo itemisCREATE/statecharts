@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.generator.core.execution;
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -62,12 +61,14 @@ public class GeneratorExecutorLookup {
 		Injector injector = createInjector(entry, description, generatorId);
 		injector.injectMembers(executor);
 		ITypeSystem typeSystem = injector.getInstance(ITypeSystem.class);
+		if (entry.getElementRef() == null || entry.getElementRef().eResource() == null) {
+			throw new RuntimeException("Could not resolve reference to model ");
+		}
 		if (typeSystem instanceof AbstractTypeSystem) {
 			ResourceSet set = entry.getElementRef().eResource().getResourceSet();
 			set.getResources().add(((AbstractTypeSystem) typeSystem).getResource());
 			EcoreUtil.resolveAll(set);
 		}
-		Assert.isNotNull(entry.getElementRef().eResource());
 
 		return executor;
 	}
@@ -75,10 +76,14 @@ public class GeneratorExecutorLookup {
 	protected Injector createInjector(GeneratorEntry entry, IGeneratorDescriptor description, String generatorId) {
 		Module generatorSpecificModule = description.getBindings(entry);
 		Module executionContextModule = getContextModule();
-		Module domainModule = DomainRegistry.getDomain(entry.getElementRef()).getModule(IDomain.FEATURE_GENERATOR,
-				generatorId);
+		Module domainModule = getDomainGeneratorModule(entry, generatorId);
 		Module combined = Modules.override(Modules.combine(generatorSpecificModule, executionContextModule))
 				.with(domainModule);
 		return Guice.createInjector(combined);
+	}
+
+	protected Module getDomainGeneratorModule(GeneratorEntry entry, String generatorId) {
+		return DomainRegistry.getDomain(entry.getElementRef()).getModule(IDomain.FEATURE_GENERATOR,
+				generatorId);
 	}
 }

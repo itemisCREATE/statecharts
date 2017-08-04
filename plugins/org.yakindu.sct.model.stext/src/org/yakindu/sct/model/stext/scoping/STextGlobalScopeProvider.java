@@ -10,12 +10,16 @@
  */
 package org.yakindu.sct.model.stext.scoping;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -23,10 +27,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.MapBasedScope;
+import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.IResourceScopeCache;
@@ -42,6 +50,8 @@ import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -66,6 +76,8 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	private STextLibraryGlobalScopeProvider libraryScope;
 	@Inject
 	private IPackageImport2URIMapper mapper;
+	@Inject
+	private ImportedResourceCache resourceDescriptionCache;
 
 	public void setCache(IResourceScopeCache cache) {
 		this.cache = cache;
@@ -171,6 +183,34 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	}
 
 	/**
+	 * Overidden to avoid scope nesting which is not required and slows down because
+	 * of shadowing testing.
+	 */
+	@Override
+	protected IScope getScope(Resource resource, boolean ignoreCase, EClass type,
+			Predicate<IEObjectDescription> filter) {
+		final LinkedHashSet<URI> uniqueImportURIs = getImportedUris(resource);
+		IResourceDescriptions descriptions = getResourceDescriptions(resource, uniqueImportURIs);
+		List<URI> urisAsList = Lists.newArrayList(uniqueImportURIs);
+		Collections.reverse(urisAsList);
+		List<IEObjectDescription> objectDescriptions = new ArrayList<IEObjectDescription>();
+		for (URI uri : urisAsList) {
+			IScope scope = createLazyResourceScope(IScope.NULLSCOPE, uri, descriptions, type, filter, ignoreCase);
+			Iterables.addAll(objectDescriptions, scope.getAllElements());
+		}
+		return MapBasedScope.createScope(IScope.NULLSCOPE, objectDescriptions);
+	}
+
+	@Override
+	protected IScope createLazyResourceScope(IScope parent, URI uri, IResourceDescriptions descriptions, EClass type,
+			Predicate<IEObjectDescription> filter, boolean ignoreCase) {
+		IResourceDescription description = resourceDescriptionCache.get(uri);
+		if (description == null)
+			return IScope.NULLSCOPE;
+		return SelectableBasedScope.createScope(parent, description, filter, type, ignoreCase);
+	}
+
+	/**
 	 * Filter all Elements that are part of an SCT file from other resources to
 	 * avoid cross document referencing
 	 */
@@ -189,4 +229,5 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		});
 		return parentScope;
 	}
+
 }

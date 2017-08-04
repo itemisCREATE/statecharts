@@ -6,56 +6,13 @@
 	<parent>
 		<groupId>org.yakindu.sct</groupId>
 		<artifactId>org.yakindu.sct.releng</artifactId>
-		<version>2.9.3-SNAPSHOT</version>
+		<version>3.0.1-SNAPSHOT</version>
 		<relativePath>../../releng/org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
 	<artifactId>org.yakindu.sct.repository</artifactId>
 	<packaging>eclipse-repository</packaging>
 
 	<properties>
-		<source.update.site>http://updates.yakindu.org/sct/releases</source.update.site>
-		<target.update.site>target/repository</target.update.site>
 		<tycho.extras.version>0.24.0</tycho.extras.version>
 	</properties>
-	<profiles>
-		<profile>
-			<id>CopySource</id>
-			<activation>
-				<property>
-					<name>createComposite</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho.extras</groupId>
-						<artifactId>tycho-p2-extras-plugin</artifactId>
-						<version>${tycho.extras.version}</version>
-						<inherited>false</inherited>
-						<executions>
-							<execution>
-								<id>append</id>
-								<phase>package</phase>
-								<goals>
-									<goal>mirror</goal>
-								</goals>
-								<configuration>
-									<source>
-										<repository>
-											<url>${source.update.site}</url>
-											<layout>p2</layout>
-										</repository>
-									</source>
-									<destination>${target.update.site}</destination>
-									<compress>true</compress>
-									<append>true</append>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>

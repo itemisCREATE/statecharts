@@ -88,7 +88,7 @@ public class STextExpressionParser implements IExpressionParser {
 
 	public EObject parseExpression(String expression, String ruleName, String specification) {
 		StextResource resource = getResource();
-		resource.setURI(URI.createURI("path", true));
+		resource.setURI(URI.createURI(getUri(), true));
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(ruleName);
 		IParseResult result = parser.parse(parserRule, new StringReader(expression));
@@ -123,6 +123,10 @@ public class STextExpressionParser implements IExpressionParser {
 			throw new LinkingException("Error during linking: " + diagnosticsConsumer.getResult(Severity.ERROR));
 		}
 		return rootASTElement;
+	}
+
+	protected String getUri() {
+		return "path";
 	}
 
 	public Scope createInternalScope(String contextScope) {

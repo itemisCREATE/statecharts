@@ -24,7 +24,8 @@ p=. Features of YAKINDU Statechart Tools
 
 The Professional Edition of YAKINDU Statechart Tools makes additional features available:
 
-* *Deep integration with C and TypeScript* to directly access variables, types etc. in these programming languages
+* "*Deep integration with the C programming language*":../user-guide/c-domain to directly access C variables, types etc.
+* "*Advanced simulation and debugging*":../user-guide/advanced_simulation with breakpoints and snapshots
 
 
 
@@ -35,11 +36,17 @@ h2(#overview_which_licensing_rules_do_apply_to_yakindu_statechart_tools). Which 
 
 The source code of YAKINDU Statechart Tools is provided under the "Eclipse Public License":http://www.eclipse.org/legal/epl-v10.html.
 
-The code generators coming with YAKINDU Statechart Tools do not imply any license constraints on the generated code whatsoever. The generated code is property of the user, as a person or as a organization. For the generated code, the user is free to choose any license model they wish.
+The code generators coming with YAKINDU Statechart Tools do not imply any license constraints on the generated code whatsoever. The generated code is property of the user, as a person or as an organization. For the generated code, the user is free to choose any license model they wish.
+
+
+
 
 h2(#overview_who_is_behind_yakindu_statechart_tools). Who is behind YAKINDU Statechart Tools?
 
 YAKINDU Statechart Tools is developed and driven by "itemis AG":https://en.wikipedia.org/wiki/Itemis, a well-known consulting company specialized on model-based development. itemis is providing professional services around YAKINDU, be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages, you name it. The itemis YAKINDU developers do not only know the framework very well but are also experts in programming and domain-specific language design. If you need advice, get in contact with itemis' "YAKINDU team":https://info.itemis.com/contact.
+
+
+
 
 h2(#overview_who_is_using_yakindu_statechart_tools). Who is using YAKINDU Statechart Tools?
 

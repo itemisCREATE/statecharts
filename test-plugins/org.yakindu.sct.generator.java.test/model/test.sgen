@@ -9,7 +9,6 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
-
 	}
 
 	test AlwaysOncycle {
@@ -20,6 +19,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -32,8 +36,13 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
-
+	
 	test BitExpressions {
 		feature Naming {
 			basePackage = "org.yakindu.sct.generator.java.test"
@@ -42,6 +51,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -54,16 +68,10 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
-	}
-
-	test Choice {
-		feature Naming {
-			basePackage = "org.yakindu.sct.generator.java.test"
-		}
-
-		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
-			targetFolder = "test-gen"
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -76,6 +84,27 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
+	}
+
+	test Choice {
+		feature Naming {
+			basePackage = "org.yakindu.sct.generator.java.test"
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test CKeywords {
@@ -86,6 +115,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -98,6 +132,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test ConstantsTests {
@@ -108,6 +147,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -120,6 +164,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test ConstOnlyDefaultScope {
@@ -130,6 +179,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -142,6 +196,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test Declarations {
@@ -152,6 +211,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -164,6 +228,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test DeepEntry {
@@ -174,6 +243,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -186,6 +260,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test EmptyTransition {
@@ -196,6 +275,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -208,6 +292,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test EntryChoice {
@@ -218,6 +307,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -230,6 +324,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test EntryReactionAction {
@@ -240,6 +339,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -252,6 +356,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test ExitState {
@@ -262,6 +371,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -274,6 +388,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test FinalState {
@@ -284,6 +403,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -296,6 +420,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test GuardedEntry {
@@ -306,6 +435,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -318,6 +452,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test HistoryWithExitPoint {
@@ -328,6 +467,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -340,6 +484,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test InEventLifeCycle {
@@ -350,6 +499,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -362,6 +516,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test InternalEventLifeCycle {
@@ -372,6 +531,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -384,6 +548,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test LogicalAndTests {
@@ -394,6 +563,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -406,6 +580,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test NamedInterfaceAccess {
@@ -416,6 +595,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -428,9 +612,14 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
-	test Operations {
+	test OperationsTest {
 		feature Naming {
 			basePackage = "org.yakindu.sct.generator.java.test"
 		}
@@ -438,6 +627,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -450,6 +644,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test OutEventLifeCycle {
@@ -460,6 +659,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -472,6 +676,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test PerformanceTests {
@@ -482,6 +691,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -494,6 +708,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test RaiseEvent {
@@ -504,6 +723,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -516,6 +740,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test SameNameDifferentRegion {
@@ -526,6 +755,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -538,6 +772,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test ShallowHistoryWithDeepEntry {
@@ -548,6 +787,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -560,6 +804,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test SimpleHierachy {
@@ -570,6 +819,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -582,6 +836,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test StatechartActive {
@@ -592,6 +851,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -604,6 +868,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test StaticChoice {
@@ -614,6 +883,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -626,6 +900,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test StringExpressions {
@@ -636,6 +915,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -648,6 +932,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test SyncJoin {
@@ -658,6 +947,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -670,6 +964,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test TypeAlias {
@@ -680,6 +979,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -692,6 +996,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test TriggerGuardExpressions {
@@ -702,6 +1011,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 
@@ -714,6 +1028,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test ValuedEvents {
@@ -725,6 +1044,11 @@ GeneratorModel for sctunit::java {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
 		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
+		}
 	}
 
 	test StatemachineKeywords {
@@ -735,6 +1059,11 @@ GeneratorModel for sctunit::java {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "test-gen"
+		}
+		
+		feature StatechartNaming {
+			basePackage = "org.yakindu.scr"
+			libraryTargetFolder = "src-gen"
 		}
 	}
 }
