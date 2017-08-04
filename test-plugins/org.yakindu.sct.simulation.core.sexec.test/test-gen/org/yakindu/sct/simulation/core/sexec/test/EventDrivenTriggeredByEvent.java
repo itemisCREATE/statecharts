@@ -12,25 +12,35 @@ import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
 import static org.junit.Assert.assertTrue;
 /**
- * Unit TestCase for ConditionalExpressions
+ * Unit TestCase for EventDrivenTriggeredByEvent
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class ConditionalExpression extends AbstractExecutionFlowTest {
+public class EventDrivenTriggeredByEvent extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("ConditionalExpressions.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/EventDrivenTriggeredByEvent.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void conditionalExpressionTest() throws Exception {
+	public void internalEventTriggersRunCycle() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
-		assertTrue(getInteger("condition") == 1l);
 		raiseEvent("e");
-		interpreter.runCycle();
 		assertTrue(isStateActive("B"));
-		assertTrue(getInteger("condition") == 2l);
+		assertTrue(getInteger("x") == 0l);
+		raiseEvent("e");
+		assertTrue(isStateActive("A"));
+		assertTrue(getInteger("x") == 0l);
+		interpreter.exit();
+	}
+	@Test
+	public void proceedTimeDoesNotTriggerRunCycle() throws Exception {
+		interpreter.enter();
+		assertTrue(isStateActive("A"));
+		/*not implemented - sorry :(*/
+		assertTrue(getInteger("x") == 0l);
+		interpreter.exit();
 	}
 }

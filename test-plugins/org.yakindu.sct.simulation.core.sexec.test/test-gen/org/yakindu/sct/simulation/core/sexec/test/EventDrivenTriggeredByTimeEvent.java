@@ -12,35 +12,41 @@ import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
 import static org.junit.Assert.assertTrue;
 /**
- * Unit TestCase for Guard
+ * Unit TestCase for EventDrivenTriggeredByTimeEvent
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class Guard extends AbstractExecutionFlowTest {
+public class EventDrivenTriggeredByTimeEvent extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("Guard.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/EventDrivenTriggeredByTimeEvent.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void guardTest() throws Exception {
+	public void timeEventTriggersRunCycle() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
-		raiseEvent("Event1");
-		interpreter.runCycle();
+		assertTrue(getInteger("x") == 0l);
+		/*not implemented - sorry :(*/
 		assertTrue(isStateActive("A"));
-		raiseEvent("Event2");
-		interpreter.runCycle();
+		assertTrue(getInteger("x") == 0l);
+		/*not implemented - sorry :(*/
 		assertTrue(isStateActive("B"));
-		raiseEvent("Return");
-		interpreter.runCycle();
+		assertTrue(getInteger("x") == 0l);
+		assertTrue(getInteger("transition_count") == 1l);
+		/*not implemented - sorry :(*/
 		assertTrue(isStateActive("A"));
-		raiseEvent("Event1");
-		interpreter.runCycle();
+		assertTrue(getInteger("x") == 0l);
+		assertTrue(getInteger("transition_count") == 2l);
+		/*not implemented - sorry :(*/
 		assertTrue(isStateActive("B"));
-		raiseEvent("Return");
-		interpreter.runCycle();
+		assertTrue(getInteger("x") == 0l);
+		assertTrue(getInteger("transition_count") == 1001l);
+		/*not implemented - sorry :(*/
 		assertTrue(isStateActive("A"));
+		assertTrue(getInteger("x") == 0l);
+		assertTrue(getInteger("transition_count") == 2000l);
+		interpreter.exit();
 	}
 }

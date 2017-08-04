@@ -12,25 +12,30 @@ import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
 import static org.junit.Assert.assertTrue;
 /**
- * Unit TestCase for ConditionalExpressions
+ * Unit TestCase for EventDrivenInternalEvent
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class ConditionalExpression extends AbstractExecutionFlowTest {
+public class EventDrivenInternalEvent extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("ConditionalExpressions.sct");
+		ExecutionFlow flow = models.loadExecutionFlowFromResource("eventdriven/EventDrivenInternalEvent.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void conditionalExpressionTest() throws Exception {
+	public void checkInternlEventQueueing() throws Exception {
 		interpreter.enter();
 		assertTrue(isStateActive("A"));
-		assertTrue(getInteger("condition") == 1l);
-		raiseEvent("e");
+		assertTrue(isStateActive("C"));
+		assertTrue(isStateActive("VALID"));
+		raiseEvent("start");
 		interpreter.runCycle();
 		assertTrue(isStateActive("B"));
-		assertTrue(getInteger("condition") == 2l);
+		assertTrue(isStateActive("D"));
+		assertTrue(isStateActive("VALID"));
+		assertTrue(getInteger("i1_sequence") == 2l);
+		assertTrue(getInteger("i2_sequence") == 3l);
+		interpreter.exit();
 	}
 }
