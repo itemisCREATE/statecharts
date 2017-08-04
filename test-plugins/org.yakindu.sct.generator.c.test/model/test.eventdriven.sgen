@@ -5,6 +5,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/EventDrivenInternalEvent"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -34,6 +35,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/EventDrivenTriggeredByEvent"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -64,6 +66,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/EventDrivenTriggeredByTimeEvent"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {

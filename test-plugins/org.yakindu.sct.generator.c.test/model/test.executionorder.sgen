@@ -5,6 +5,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ChildFirstExecutionHierarchy"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -34,6 +35,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ChildFirstLocalReactions"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -64,6 +66,7 @@ GeneratorModel for sctunit::c {
 //		feature Outlet {
 //			targetProject = "org.yakindu.sct.generator.c.test"
 //			targetFolder = "gtests/ChildFirstOrthogonalReactions"
+//			libraryTargetFolder = "libraryTarget"
 //		}
 //
 //		feature JUnitWrapper {
@@ -94,6 +97,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ParentFirstExecutionHierarchy"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -123,6 +127,7 @@ GeneratorModel for sctunit::c {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.c.test"
 			targetFolder = "gtests/ParentFirstLocalReactions"
+			libraryTargetFolder = "libraryTarget"
 		}
 
 		feature JUnitWrapper {
@@ -153,6 +158,7 @@ GeneratorModel for sctunit::c {
 //		feature Outlet {
 //			targetProject = "org.yakindu.sct.generator.c.test"
 //			targetFolder = "gtests/ParentFirstOrthogonalReactions"
+//			libraryTargetFolder = "libraryTarget"
 //		}
 //
 //		feature JUnitWrapper {
