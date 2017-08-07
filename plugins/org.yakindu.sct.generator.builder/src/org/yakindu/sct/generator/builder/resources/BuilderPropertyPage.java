@@ -82,7 +82,7 @@ public class BuilderPropertyPage extends PropertyPage {
 		result.getTable().setLinesVisible(true);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(result.getControl());
 		result.setContentProvider(new ArrayContentProvider());
-		result.setLabelProvider(new ResourceLabelProvider());
+		result.setLabelProvider(new WorkbenchLabelProvider());
 		values = blacklist.getValues(getActualProject());
 		result.setInput(values);
 		return result;
