@@ -17,7 +17,6 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.validation.CompositeEValidator;
-import org.yakindu.base.expressions.terminals.ExpressionsValueConverterService;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -27,6 +26,7 @@ import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.resource.SCTResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
+import org.yakindu.sct.model.stext.terminals.STextValueConverterService;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -68,7 +68,7 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 
 	@Override
 	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
-		return ExpressionsValueConverterService.class;
+		return STextValueConverterService.class;
 	}
 
 	public void configureFileExtensions(Binder binder) {
