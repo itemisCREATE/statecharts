@@ -10,7 +10,9 @@
  */
 package org.yakindu.sct.generator.genmodel.serializer;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.INode;
@@ -34,8 +36,10 @@ public class SGenCrossReferenceSerializer extends CrossReferenceSerializer {
 	@Override
 	public String serializeCrossRef(EObject semanticObject,
 			CrossReference crossref, EObject target, INode node, Acceptor errors) {
-		// for statechart crossreferences, we do not want to check the scope
-		if (target instanceof Statechart) {
+		Resource res = target.eResource();
+		URI uri = res.getURI();
+		// for statechart crossreferences and SCTUnitElement crossreferences, we do not want to check the scope
+		if (target instanceof Statechart || uri.lastSegment().contains(".sctunit")) {
 			return provider.getFullyQualifiedName(target).toString();
 			
 		}
