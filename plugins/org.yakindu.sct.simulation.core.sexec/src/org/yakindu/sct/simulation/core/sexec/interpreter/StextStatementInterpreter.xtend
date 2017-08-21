@@ -55,6 +55,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
 import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot
+import org.yakindu.base.types.Event
 
 /**
  * 
@@ -182,16 +183,31 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object execute(EventValueReferenceExpression expression) {
-		if(context.raisedEvents.nullOrEmpty){
-			throw new IllegalStateException("For checking the value of an event, the event has to be raised within the current run-cycle")
-		}
 		for (event : context.raisedEvents) {
 			val executionSlot = context.resolve(expression.value)
 			if (executionSlot instanceof ExecutionEvent && executionSlot.fqName == event.fqName) {
 				return event.getValue;
 			};
 		}
-		null;
+		throw new UndefinedValueException("Undefined value of event '" + expression.value.eventName + "'\n" + "For checking the value of an event, the event has to be raised within the current run-cycle")
+	}
+	
+	def dispatch protected getEventName(Expression it){
+		return "null"
+	}
+	
+	def dispatch protected getEventName(ElementReferenceExpression it){
+		if(reference instanceof Event){
+			return (reference as Event).name
+		}
+		return "null"
+	}
+	
+	def dispatch protected getEventName(FeatureCall it){
+		if(feature instanceof Event){
+			return (feature as Event).name
+		}
+		return "null"
 	}
 
 	def dispatch qname(FeatureCall e) {
@@ -379,6 +395,14 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	def dispatch valueLiteral(NullLiteral literal) {
 		return null
+	}
+	
+	protected static class UndefinedValueException extends IllegalStateException {
+	
+		new(String message) {
+			super(message)
+		}
+	
 	}
 
 }
