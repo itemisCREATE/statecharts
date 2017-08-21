@@ -83,15 +83,24 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 				superTypes.add(entry.getValue());
 			}
 		}
+		if (type instanceof PrimitiveType) {
+			PrimitiveType primitiveType = (PrimitiveType) type;
+			PrimitiveType baseType = primitiveType.getBaseType();
+			if (baseType != null) {
+				superTypes.add(baseType);
+			}
+		}
 		if (type instanceof ComplexType) {
 			ComplexType complexType = (ComplexType) type;
 			superTypes.addAll(complexType.getSuperTypes());
 		}
 		if (type instanceof TypeParameter) {
 			TypeParameter typeParameter = (TypeParameter) type;
-			superTypes.add(typeParameter.getBound());
+			Type bound = typeParameter.getBound();
+			if (bound != null) {
+				superTypes.add(bound);
+			}
 		}
-
 		return superTypes;
 	}
 
@@ -115,15 +124,6 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	protected void collectSupertypes(Type subType, List<Type> typeHierachy) {
 		if (subType == null)
 			return;
-
-		if (subType instanceof PrimitiveType) {
-			PrimitiveType primitiveType = (PrimitiveType) subType;
-			Type baseType = primitiveType.getBaseType();
-			if (baseType != null) {
-				typeHierachy.add(baseType);
-				collectSupertypes(baseType, typeHierachy);
-			}
-		}
 
 		List<Type> superTypes = getSuperTypes(subType);
 		for (Type superType : superTypes) {
