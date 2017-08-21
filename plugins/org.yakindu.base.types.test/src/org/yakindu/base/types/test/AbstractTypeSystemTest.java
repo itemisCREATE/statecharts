@@ -10,6 +10,7 @@
  */
 package org.yakindu.base.types.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -17,6 +18,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.typesystem.AbstractTypeSystem;
 
@@ -32,6 +34,7 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 	private static final String SIMPLE_TYPE = "SimpleType";
 	private static final String CONVERSION_SUB_TYPE = "ConversionSubType";
 	private static final String CONVERSION_TYPE = "ConversionType";
+	private static final String TYPE_PARAMETER = "T";
 
 	private Type superType;
 	private Type subType;
@@ -39,6 +42,8 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 	private Type simpleType;
 	private Type conversionType;
 	private Type conversionSubType;
+	private TypeParameter typeParameter;
+	
 
 	@Override
 	protected void initRegistries() {
@@ -48,19 +53,32 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 		subType = createPrimitive(SUB_TYPE);
 		declareType(subType, SUB_TYPE);
 		declareSuperType(subType, superType);
+		
 		// SubType2 extends Supertype
 		subType2 = createPrimitive(SUB_TYPE2);
 		declareType(subType2, SUB_TYPE2);
 		declareSuperType(subType2,superType);
+		
 		// SimpleType
 		simpleType = createPrimitive(SIMPLE_TYPE);
 		declareType(simpleType, SIMPLE_TYPE);
+		
 		// simpleType can be converted into Conversiontype
 		conversionType = createPrimitive(CONVERSION_TYPE);
 		declareConversion(simpleType, conversionType);
 		conversionSubType = createPrimitive(CONVERSION_SUB_TYPE);
 		declareSuperType(conversionSubType, conversionType);
+		
+		// T with SuperType as bound (<T extends SuperType>)
+		typeParameter = createTypeParameter(TYPE_PARAMETER);
+		declareType(typeParameter, TYPE_PARAMETER);
+		typeParameter.setBound(superType);
+	}
 
+	protected TypeParameter createTypeParameter(String typeParameter2) {
+		TypeParameter typeParameter = TypesFactory.eINSTANCE.createTypeParameter();
+		typeParameter.setName(TYPE_PARAMETER);
+		return typeParameter;
 	}
 
 	protected Type createPrimitive(String name) {
@@ -72,7 +90,6 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 	@Test
 	public void testGetSuperType() throws Exception {
 		assertTrue(isSame(superType, getSuperTypes(subType).get(0)));
-
 	}
 
 	@Test
@@ -102,6 +119,18 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 	public void testGetCommonTypeWithConversion() throws Exception {
 		assertTrue(isSame(conversionType, getCommonTypeWithConversion(conversionType, simpleType)));
 		assertTrue(isSame(conversionType, getCommonTypeWithConversion(conversionType, conversionSubType)));
+	}
+	
+	@Test
+	public void testGetSuperTypeForTypeParameter() {
+		assertEquals(1, getSuperTypes(typeParameter).size());
+		assertTrue(isSame(superType, getSuperTypes(typeParameter).get(0)));
+	}
+	
+	@Test
+	public void testIsSuperTypeForTypeParameter() {
+		assertTrue(isSuperType(typeParameter, superType));
+		assertFalse(isSuperType(typeParameter, simpleType));
 	}
 
 }

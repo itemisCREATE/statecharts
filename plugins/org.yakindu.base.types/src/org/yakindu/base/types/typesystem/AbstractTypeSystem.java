@@ -27,6 +27,7 @@ import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.annotations.TypeAnnotations;
 
@@ -72,6 +73,9 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		return result;
 	}
 
+	/**
+	 * @returns the list of direct super types for given type
+	 */
 	public List<Type> getSuperTypes(Type type) {
 		List<Type> superTypes = new ArrayList<Type>();
 		for (Entry<Type, Type> entry : extendsRegistry.entries()) {
@@ -83,10 +87,17 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 			ComplexType complexType = (ComplexType) type;
 			superTypes.addAll(complexType.getSuperTypes());
 		}
+		if (type instanceof TypeParameter) {
+			TypeParameter typeParameter = (TypeParameter) type;
+			superTypes.add(typeParameter.getBound());
+		}
 
 		return superTypes;
 	}
 
+	/**
+	 * @returns <code>true</code> if superType is a direct or indirect super type of subType.
+	 */
 	public boolean isSuperType(Type subtype, Type supertype) {
 		List<Type> typehierachy = new ArrayList<Type>();
 		typehierachy.add(subtype);
@@ -98,12 +109,15 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		return false;
 	}
 
-	protected void collectSupertypes(Type subtypeClass, List<Type> typeHierachy) {
-		if (subtypeClass == null)
+	/**
+	 * Recursively calls itself to create list of all direct and indirect super types of given sub type
+	 */
+	protected void collectSupertypes(Type subType, List<Type> typeHierachy) {
+		if (subType == null)
 			return;
 
-		if (subtypeClass instanceof PrimitiveType) {
-			PrimitiveType primitiveType = (PrimitiveType) subtypeClass;
+		if (subType instanceof PrimitiveType) {
+			PrimitiveType primitiveType = (PrimitiveType) subType;
 			Type baseType = primitiveType.getBaseType();
 			if (baseType != null) {
 				typeHierachy.add(baseType);
@@ -111,7 +125,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 			}
 		}
 
-		List<Type> superTypes = getSuperTypes(subtypeClass);
+		List<Type> superTypes = getSuperTypes(subType);
 		for (Type superType : superTypes) {
 			typeHierachy.add(superType);
 			collectSupertypes(superType, typeHierachy);
