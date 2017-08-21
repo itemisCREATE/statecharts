@@ -70,7 +70,7 @@ public abstract class AbstractDefaultFeatureValueProvider implements IDefaultFea
 	protected String getProjectName(EObject contextElement) {
 		URI uri = EcoreUtil.getURI(contextElement);
 		if (uri.isPlatformResource() && uri.segmentCount() > 1) {
-			return uri.segment(1); // 0 is resource
+			return URI.decode(uri.segment(1)); // 0 is resource
 		}
 		return "ProjectName";
 	}
