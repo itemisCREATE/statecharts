@@ -96,7 +96,10 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	protected boolean useInternalEventQueue
 
 	boolean suspended = false
+	boolean terminated = false
+	
 	var cyclePeriod = 200L;
+	var cycleBasedTimer = new Timer
 
 	override initialize(ExecutionFlow flow, ExecutionContext context) {
 		initialize(flow, context, false)
@@ -131,21 +134,20 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 
 		}
 		timingService.scheduleCycleEvent([this.runCycle], cyclePeriod)
-		scheduleTimeLeap
+		startCycleRunner
 	}
 
-	var timer = new Timer
 
-	def void scheduleTimeLeap() {
+	def void startCycleRunner() {
 		var virtualTimerTask = new TimerTask() {
 			override run() {
 				timingService.timeLeapToNextEvent
-				if (!suspended) {
-					scheduleTimeLeap
+				if (!suspended && !terminated) {
+					startCycleRunner
 				}
 			}
 		}
-		timer.schedule(virtualTimerTask, 1);
+		cycleBasedTimer.schedule(virtualTimerTask, 0);
 	}
 
 	override enter() {
@@ -217,13 +219,13 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override stepForward() {
-		scheduleTimeLeap
+		startCycleRunner
 	}
 
 	override resume() {
 		executionContext.suspendedElements.clear
 		suspended = false
-		run
+		startCycleRunner
 	}
 
 	override exit() {
@@ -231,6 +233,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override tearDown() {
+		terminated = true
 		var adapter = EcoreUtil.getExistingAdapter(executionContext, EventDrivenCycleAdapter)
 		if (adapter !== null)
 			executionContext.eAdapters.remove(adapter)

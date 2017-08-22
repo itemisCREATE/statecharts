@@ -6,16 +6,13 @@
  * 	Andreas Muelder - itemis AG
  * 
  */
-package org.yakindu.sct.simulation.core.sexec.interpreter;
+package org.yakindu.sct.simulation.core.sexec.scheduling;
 
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.concurrent.TimeUnit;
 
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 
-import com.google.common.base.Stopwatch;
-import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -25,51 +22,35 @@ import com.google.inject.Singleton;
  * 
  */
 @Singleton
-public class VirtualTimingService implements ISchedulingService {
+public class DefaultSchedulingService implements ISchedulingService {
 
 	private long stopTime = 0;
 	protected long currentTime = 0;
 	protected long scheduleCount = 0;
 
-	@ImplementedBy(RealTime.class)
-	public static interface IWaitingStrategy {
-
-		public void waitfor(long ms);
-
-	}
-
-	public static class Instantly implements IWaitingStrategy {
-
-		@Override
-		public void waitfor(long ms) {
-		}
-	}
-
-	public static class RealTime implements IWaitingStrategy {
-		@Override
-		public void waitfor(long ms) {
-			try {
-				Thread.sleep(ms);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	@Inject
 	private IWaitingStrategy waitingStrategy;
 
-	private Queue<VirtualTimeTask> tasks;
+	private Queue<TimeTask> tasks;
 
-	public abstract static class VirtualTimeTask implements Runnable, Comparable<VirtualTimeTask> {
+	public static class TimeTask implements Runnable, Comparable<TimeTask> {
 
 		long nextExecutionTime = 0;
-		long interval = 0;
 		long period = -1;
 		long scheduleOrder = 0;
 		boolean isCanceled = false;
 
-		public int compareTo(VirtualTimeTask o) {
+		private final Runnable callBack;
+
+		public TimeTask(Runnable callBack) {
+			this.callBack = callBack;
+		}
+
+		public void run() {
+			callBack.run();
+		}
+
+		public int compareTo(TimeTask o) {
 			if (nextExecutionTime != o.nextExecutionTime) {
 				return (int) (nextExecutionTime - o.nextExecutionTime);
 			} else if (o instanceof CycleTimeEventTask && !(this instanceof CycleTimeEventTask)) {
@@ -91,65 +72,43 @@ public class VirtualTimingService implements ISchedulingService {
 		}
 	}
 
-	public static class VirtualTimeEventTask extends VirtualTimeTask {
-
-		private final ExecutionContext context;
+	public static class TimeEventTask extends TimeTask {
 		private final String eventName;
 
-		public VirtualTimeEventTask(ExecutionContext context, String eventName) {
-			this.context = context;
+		public TimeEventTask(ExecutionContext context, String eventName) {
+			super(() -> context.getEvent(eventName).setRaised(true));
 			this.eventName = eventName;
 		}
 
 		public String getEventName() {
 			return eventName;
 		}
+	}
 
-		public void run() {
-			context.getEvent(eventName).setRaised(true);
+	public static class CycleTimeEventTask extends TimeTask {
+
+		public CycleTimeEventTask(Runnable callBack) {
+			super(callBack);
 		}
 
 	}
 
-	public static class CycleTimeEventTask extends VirtualTimeTask {
-
-		private final Runnable callBack;
-
-		public CycleTimeEventTask(Runnable interpreter) {
-			this.callBack = interpreter;
-		}
-
-		public void run() {
-			callBack.run();
-		}
+	public DefaultSchedulingService() {
+		tasks = new PriorityQueue<TimeTask>();
 	}
-
-	public VirtualTimingService() {
-		tasks = new PriorityQueue<VirtualTimeTask>();
-	}
-
-	long timeLeapDelta = 0;
 
 	@Override
 	public void timeLeap(long ms) {
-		Stopwatch watch = Stopwatch.createStarted();
 		stopTime = currentTime + ms;
 		processTasks();
-		timeLeapDelta += watch.elapsed(TimeUnit.MILLISECONDS);
 	}
 
 	@Override
 	public void timeLeapToNextEvent() {
-		VirtualTimeTask nextTask = this.tasks.peek();
+		TimeTask nextTask = this.tasks.peek();
 		if (nextTask != null) {
 			long timeToNextEvent = nextTask.nextExecutionTime - currentTime;
-			long waitingTime = timeToNextEvent - timeLeapDelta;
-			if (waitingTime >= 0) {
-				waitingStrategy.waitfor(waitingTime);
-				timeLeapDelta = 0;
-			} else {
-				// System.out.println("Interpreter is behind " + timeLeapDelta + " ms");
-			}
+			waitingStrategy.waitfor(timeToNextEvent);
 			timeLeap(timeToNextEvent);
 		}
 	}
@@ -159,7 +118,7 @@ public class VirtualTimingService implements ISchedulingService {
 		// This is called with zero for nano and micro seconds
 		if (duration <= 0)
 			duration = 1;
-		VirtualTimeEventTask timeEventTask = new VirtualTimeEventTask(context, eventName);
+		TimeEventTask timeEventTask = new TimeEventTask(context, eventName);
 		if (isPeriodical) {
 			schedulePeriodicalTask(timeEventTask, duration, duration);
 		} else {
@@ -167,16 +126,15 @@ public class VirtualTimingService implements ISchedulingService {
 		}
 	}
 
-	protected void scheduleTask(VirtualTimeTask task, long interval) {
-		task.interval = interval;
+	protected void scheduleTask(TimeTask task, long interval) {
 		scheduleInternal(task, currentTime + interval, -1);
 	}
 
-	protected void schedulePeriodicalTask(VirtualTimeTask task, long interval, long period) {
+	protected void schedulePeriodicalTask(TimeTask task, long interval, long period) {
 		scheduleInternal(task, currentTime + interval, period);
 	}
 
-	protected void scheduleInternal(VirtualTimeTask task, long time, long period) {
+	protected void scheduleInternal(TimeTask task, long time, long period) {
 		task.nextExecutionTime = time;
 		task.period = period;
 		task.scheduleOrder = scheduleCount;
@@ -186,7 +144,7 @@ public class VirtualTimingService implements ISchedulingService {
 
 	@Override
 	public void unscheduleTimeEvent(String eventName) {
-		VirtualTimeTask timerTask = getTask(eventName);
+		TimeTask timerTask = getTask(eventName);
 		if (timerTask != null)
 			timerTask.cancel();
 	}
@@ -196,11 +154,11 @@ public class VirtualTimingService implements ISchedulingService {
 		scheduleInternal(new CycleTimeEventTask(runnable), period, period);
 	}
 
-	protected VirtualTimeTask getTask(String eventName) {
-		for (VirtualTimeTask virtualTimeTask : tasks) {
-			if (!(virtualTimeTask instanceof VirtualTimeEventTask))
+	protected TimeTask getTask(String eventName) {
+		for (TimeTask virtualTimeTask : tasks) {
+			if (!(virtualTimeTask instanceof TimeEventTask))
 				continue;
-			if (((VirtualTimeEventTask) virtualTimeTask).getEventName().equals(eventName))
+			if (((TimeEventTask) virtualTimeTask).getEventName().equals(eventName))
 				return virtualTimeTask;
 		}
 		return null;
@@ -209,7 +167,7 @@ public class VirtualTimingService implements ISchedulingService {
 	protected void processTasks() {
 		boolean processTasks = !tasks.isEmpty();
 		while (processTasks) {
-			VirtualTimeTask task = tasks.peek();
+			TimeTask task = tasks.peek();
 			if (task == null)
 				break;
 			if (task.isCanceled) {
@@ -232,13 +190,13 @@ public class VirtualTimingService implements ISchedulingService {
 	}
 
 	public synchronized void stop() {
-		for (VirtualTimeTask timerTask : tasks) {
+		for (TimeTask timerTask : tasks) {
 			timerTask.cancel();
 		}
 		cancel();
 	}
 
-	public void cancel() {
+	public synchronized void cancel() {
 		synchronized (tasks) {
 			currentTime = 0;
 			stopTime = 0;
