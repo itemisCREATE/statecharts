@@ -39,6 +39,7 @@ import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
+import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -624,6 +625,15 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY);
+	}
+	
+	@Test
+	public void checkTopLevelRegionHasEntry() {
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TopLevelRegionNoEntryPoint.sct");
+		doValidateAllContents(Region.class);
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, REGION_UNBOUND_DEFAULT_ENTRY_POINT);
 	}
 
 	@Test
