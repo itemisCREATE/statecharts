@@ -75,7 +75,7 @@ public class DefaultSchedulingService implements ISchedulingService {
 	public static class TimeEventTask extends TimeTask {
 		private final String eventName;
 
-		public TimeEventTask(ExecutionContext context, String eventName) {
+		public TimeEventTask(final ExecutionContext context, final String eventName) {
 			super(() -> context.getEvent(eventName).setRaised(true));
 			this.eventName = eventName;
 		}
