@@ -189,7 +189,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 				return event.getValue;
 			};
 		}
-		throw new UndefinedValueException("Undefined value of event '" + expression.value.eventName + "'\n" + "For checking the value of an event, the event has to be raised within the current run-cycle")
+		throw new UndefinedValueException("Undefined value of event '" + expression.value.eventName + "'\n" + "Event values only exist in the same cycle in which the event was raised.")
 	}
 	
 	def dispatch protected getEventName(Expression it){
