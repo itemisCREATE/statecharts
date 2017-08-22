@@ -55,6 +55,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
 import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot
+import org.yakindu.base.types.Event
 
 /**
  * 
@@ -145,10 +146,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
 			// Strong typing, use the type of the scopeVariable instead of using new runtime type
-			scopeVariable.value = if(result != null) cast(result, scopeVariable.type) else null
+			scopeVariable.value = if(result !== null) cast(result, scopeVariable.type) else null
 		} else {
 			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.getName())
-			scopeVariable.value = if (result != null)
+			scopeVariable.value = if (result !== null)
 				cast(evaluate(operator, scopeVariable.getValue, result), scopeVariable.type)
 			else
 				null
@@ -163,7 +164,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			
 			val value = eventRaising.value?.execute	
 		
-			if (eventRaiser != null) event.raise(value) 
+			if (eventRaiser !== null) event.raise(value) 
 		}
 		
 		null
@@ -188,7 +189,25 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 				return event.getValue;
 			};
 		}
-		null;
+		throw new UndefinedValueException("Undefined value of event '" + expression.value.eventName + "'\n" + "Event values only exist in the same cycle in which the event was raised.")
+	}
+	
+	def dispatch protected getEventName(Expression it){
+		return "null"
+	}
+	
+	def dispatch protected getEventName(ElementReferenceExpression it){
+		if(reference instanceof Event){
+			return (reference as Event).name
+		}
+		return "null"
+	}
+	
+	def dispatch protected getEventName(FeatureCall it){
+		if(feature instanceof Event){
+			return (feature as Event).name
+		}
+		return "null"
 	}
 
 	def dispatch qname(FeatureCall e) {
@@ -281,7 +300,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def executeElementReferenceExpression(ElementReferenceExpression expression){
 		var parameter = expression.expressions.map(it|execute)
 		if (expression.operationCall || expression.reference instanceof OperationDefinition) {
-			if (operationDelegate != null &&
+			if (operationDelegate !== null &&
 				operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
 				return (expression.reference as Operation).execute(parameter.toArray)
 			}
@@ -310,7 +329,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			var parameter = call.expressions.map(it|execute)
 			if (call.feature instanceof Operation) {
 				var Operation operation = call.feature as Operation
-				if (operationDelegate != null && operationDelegate.canExecute(operation, parameter)) {
+				if (operationDelegate !== null && operationDelegate.canExecute(operation, parameter)) {
 					return operation.execute(parameter)
 				}
 			}
@@ -376,6 +395,14 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	def dispatch valueLiteral(NullLiteral literal) {
 		return null
+	}
+	
+	protected static class UndefinedValueException extends IllegalStateException {
+	
+		new(String message) {
+			super(message)
+		}
+	
 	}
 
 }

@@ -76,20 +76,22 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 		if (desc == null)
 			return IScope.NULLSCOPE;
 		final String elementRefType = desc.getElementRefType();
-		return new FilteringScope(getDelegate().getScope(context, reference),
-				new Predicate<IEObjectDescription>() {
-					public boolean apply(IEObjectDescription input) {
+		IScope scope = new FilteringScope(getDelegate().getScope(context, reference),
+			new Predicate<IEObjectDescription>() {
+				public boolean apply(IEObjectDescription input) {
 
-						EList<EClass> allSuperTypes = input.getEClass()
-								.getESuperTypes();
-						for (EClass eClass : allSuperTypes) {
-							if (elementRefType.equals(eClass.getInstanceClassName()))
-								return true;
-						}
-						return elementRefType.equals(input.getEClass()
-								.getInstanceClassName());
+					EList<EClass> allSuperTypes = input.getEClass()
+							.getESuperTypes();
+					for (EClass eClass : allSuperTypes) {
+						if (elementRefType.equals(eClass.getInstanceClassName()))
+							return true;
 					}
-				});
+					return elementRefType.equals(input.getEClass()
+							.getInstanceClassName());
+				}
+			});
+		return new SimpleScope(scope.getAllElements());
+		
 	}
 
 	protected IScope scope_Parameter(final EObject context, EReference reference) {

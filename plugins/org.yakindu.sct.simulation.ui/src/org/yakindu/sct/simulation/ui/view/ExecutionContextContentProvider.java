@@ -49,7 +49,6 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 					e.printStackTrace();
 				}
 			}
-
 		}
 
 		public boolean isCancel() {
@@ -78,6 +77,9 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		this.viewer = viewer;
+		if (refresher != null) {
+			refresher.cancel = true;
+		}
 		refresher = new ViewerRefresher();
 		if (newInput != null) {
 			new Thread(refresher).start();

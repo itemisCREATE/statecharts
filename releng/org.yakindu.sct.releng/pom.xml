@@ -207,7 +207,7 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
-				<xtext-version>2.7.3</xtext-version>
+				<xtext-version>2.8.4</xtext-version>
 			</properties>
 			<build>
 				<plugins>

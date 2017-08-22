@@ -26,9 +26,10 @@ env:
   # via the "travis encrypt" command using the project repo's public key
   - secure: "e6AtFe0HJAHRdmzp4uXx4b+xZaEUUd2jeYiLdIkYuRa84op9iSzCmPj5uT3Vkvqps5snBrDx47Wl1EO9rl+Z91WYp1JgTT5Ek37SKj/ikhJ0HfAYBycU/MRTMO5wXEfwL29G0gjygzFxlUe7t/Y92M/VsvlEQ9nHrtqJ4hQA968="
   matrix:
+  - TARGET=Luna.target
   - TARGET=Mars.target
-  - TARGET=Oxygen.target
   - TARGET=Neon.target
+  - TARGET=Oxygen.target
 before_script:
  - wget https://github.com/google/googletest/archive/release-1.8.0.zip
  - unzip release-1.8.0.zip
