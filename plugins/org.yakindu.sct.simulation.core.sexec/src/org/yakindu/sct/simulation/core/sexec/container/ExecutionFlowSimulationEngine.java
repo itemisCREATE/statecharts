@@ -15,8 +15,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IStatusHandler;
-import org.eclipse.debug.core.model.IDebugTarget;
-import org.eclipse.emf.common.util.WrappedException;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -38,7 +36,7 @@ import com.google.inject.Inject;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEngine{
+public class ExecutionFlowSimulationEngine extends AbstractSimulationEngine {
 
 	@Inject
 	protected ExecutionContext context;
@@ -54,7 +52,7 @@ public abstract class AbstractExecutionFlowSimulationEngine extends AbstractSimu
 
 	private Statechart statechart;
 
-	public AbstractExecutionFlowSimulationEngine(Statechart statechart) {
+	public ExecutionFlowSimulationEngine(Statechart statechart) {
 		this.statechart = statechart;
 	}
 
@@ -118,7 +116,7 @@ public abstract class AbstractExecutionFlowSimulationEngine extends AbstractSimu
 	public void stepForward() {
 		try {
 			interpreter.resume();
-			interpreter.runCycle();
+			interpreter.stepForward();
 			interpreter.suspend();
 		} catch (Exception ex) {
 			handleException(ex);
@@ -142,9 +140,10 @@ public abstract class AbstractExecutionFlowSimulationEngine extends AbstractSimu
 	public IExecutionControl getExecutionControl() {
 		return this;
 	}
-	
+
 	/**
 	 * Can be overriden to configure the use of an internal event queue.
+	 * 
 	 * @return false
 	 */
 	protected boolean useInternalEventQueue() {

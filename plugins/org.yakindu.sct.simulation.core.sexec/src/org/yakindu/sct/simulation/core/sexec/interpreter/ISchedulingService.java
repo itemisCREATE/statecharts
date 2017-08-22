@@ -17,7 +17,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface ITimingService {
+public interface ISchedulingService {
 
 	/**
 	 * schedules a new TimeEvent with the given name into the given context.
@@ -32,18 +32,16 @@ public interface ITimingService {
 	public void unscheduleTimeEvent(String eventName);
 
 	/**
-	 * pauses all TimeEvent
+	 * Schedules a periodic runcycle event
 	 */
-	public void pause();
-
-	/**
-	 * resumes the TimeEvents
-	 */
-	public void resume();
-
+	public void scheduleCycleEvent(Runnable callback, long period);
 	/**
 	 * Stops all TimeEvent
 	 */
 	public void stop();
 
+	public void timeLeap(long ms);
+	
+	public void timeLeapToNextEvent();
+	
 }

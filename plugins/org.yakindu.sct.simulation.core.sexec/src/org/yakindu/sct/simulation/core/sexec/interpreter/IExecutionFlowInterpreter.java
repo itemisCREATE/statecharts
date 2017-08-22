@@ -32,6 +32,8 @@ public interface IExecutionFlowInterpreter {
 
 	public void suspend();
 
+	public void stepForward();
+
 	public void resume();
 
 	public void exit();

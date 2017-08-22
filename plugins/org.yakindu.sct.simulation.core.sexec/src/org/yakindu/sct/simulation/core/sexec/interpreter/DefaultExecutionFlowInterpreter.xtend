@@ -12,9 +12,14 @@ package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import java.util.LinkedList
 import java.util.List
 import java.util.Map
+import java.util.Queue
+import org.eclipse.emf.common.notify.Notification
+import org.eclipse.emf.ecore.util.EContentAdapter
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtend.lib.annotations.Data
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.EnterState
@@ -35,11 +40,16 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
+import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
-import java.util.Queue
-import org.eclipse.xtend.lib.annotations.Data
-import java.util.LinkedList
+import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage
+
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*
+import java.util.TimerTask
+import java.util.Timer
 
 /**
  * 
@@ -50,30 +60,31 @@ import java.util.LinkedList
 @Singleton
 class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEventRaiser {
 
-	@Data static class Event
-	{
-		
+	@Data static class Event {
+
 		public ExecutionEvent event;
-		public Object value; 
+		public Object value;
 
 		new(ExecutionEvent ev, Object value) {
 			this.event = ev
 			this.value = value
 		}
 	}
-	
+
 	protected Queue<Event> internalEventQueue = new LinkedList<Event>()
 
 	@Inject
 	protected IStatementInterpreter statementInterpreter
 	@Inject
-	ITimingService timingService
+	ISchedulingService timingService
 	@Inject extension SexecExtensions
 	@Inject(optional=true)
 	ITraceStepInterpreter traceInterpreter
 	@Inject protected extension ExecutionContextExtensions
 	@Inject
 	protected StateVectorExtensions stateVectorExtensions;
+	@Inject
+	private extension StatechartAnnotations
 
 	protected ExecutionFlow flow
 	protected ExecutionContext executionContext
@@ -81,15 +92,15 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	protected Map<Integer, ExecutionState> historyStateConfiguration
 	protected List<Step> executionStack
 	protected int activeStateIndex
-	protected boolean useInternalEventQueue 
+	protected boolean useInternalEventQueue
 
 	boolean suspended = false
-
+	var cyclePeriod = 200L;
 
 	override initialize(ExecutionFlow flow, ExecutionContext context) {
 		initialize(flow, context, false)
 	}
-	
+
 	override initialize(ExecutionFlow flow, ExecutionContext context, boolean useInternalEventQueue) {
 		this.flow = flow
 		executionContext = context
@@ -98,18 +109,49 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		activeStateIndex = 0
 		historyStateConfiguration = newHashMap()
 		this.useInternalEventQueue = useInternalEventQueue
-		
-		if (!executionContext.snapshot){
+
+		var statechart = (flow.sourceElement as Statechart)
+		if (statechart.cycleBased) {
+			statechart.initCycleTimer
+		} else if (statechart.eventDriven) {
+			context.eAdapters.add(new EventDrivenCycleAdapter(this))
+		}
+
+		if (!executionContext.snapshot) {
 			flow.staticInitSequence.scheduleAndRun
 			flow.initSequence.scheduleAndRun
 		}
+	}
+
+	def protected initCycleTimer(Statechart it) {
+		val annotation = getAnnotationOfType(CYCLE_BASED_ANNOTATION) as ArgumentedAnnotation
+		if (annotation !== null) {
+			cyclePeriod = statementInterpreter.evaluateStatement(annotation.expressions.head, executionContext) as Long
+
+		}
+		timingService.scheduleCycleEvent([this.runCycle], cyclePeriod)
+		scheduleTimeLeap
+	}
+
+	var timer = new Timer
+
+	def void scheduleTimeLeap() {
+		var virtualTimerTask = new TimerTask() {
+			override run() {
+				timingService.timeLeapToNextEvent
+				if (!suspended) {
+					scheduleTimeLeap
+				}
+			}
+		}
+		timer.schedule(virtualTimerTask, 1);
 	}
 
 	override enter() {
 		if (!executionContext.snapshot)
 			flow.enterSequences?.defaultSequence?.scheduleAndRun
 		else {
-			executionContext.activeStates.forEach[state|
+			executionContext.activeStates.forEach [ state |
 				activeStateConfiguration.set(state.toExecutionState.stateVector.offset, state.toExecutionState)
 				// schedule all time events
 				state.toExecutionState.enterSequences?.forEach[executeAfterRestore]
@@ -117,15 +159,15 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			flow.enterSequences?.forEach[executeAfterRestore]
 		}
 	}
-	
+
 	def dispatch protected void executeAfterRestore(Step it) {
 		// fall back
 	}
-	
+
 	def dispatch protected void executeAfterRestore(Sequence it) {
 		steps.forEach[executeAfterRestore]
 	}
-	
+
 	def dispatch protected void executeAfterRestore(Call it) {
 		step.executeAfterRestore
 	}
@@ -135,34 +177,26 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	def ExecutionState toExecutionState(RegularState state) {
-		return flow.eAllContents.filter(ExecutionState).findFirst[
+		return flow.eAllContents.filter(ExecutionState).findFirst [
 			EcoreUtil.equals(sourceElement, state)
 		]
 	}
 
 	override runCycle() {
-		
 		var Event event = null
-		
 		do {
-
 			// activate an event if there is one
-			if ( event !== null ) {			
+			if (event !== null) {
 				event.event.raised = true
-				event.event.value = event.value	
-				event = null		
+				event.event.value = event.value
+				event = null
 			}
-			
 			// perform a run to completion step
 			rtcStep
-			
 			// get next event if available
-			if ( ! internalEventQueue.empty ) event = internalEventQueue.poll
-			
+			if(! internalEventQueue.empty) event = internalEventQueue.poll
 		} while (event !== null)
-
 	}
-
 
 	def rtcStep() {
 		executionContext.raiseScheduledEvents
@@ -176,18 +210,19 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		}
 		executionContext.clearLocalAndInEvents
 	}
-	
-	
-	override resume() {
-		timingService.resume
-		executionContext.suspendedElements.clear
-		suspended = false
-		run
-	}
 
 	override suspend() {
 		suspended = true
-		timingService.pause
+	}
+
+	override stepForward() {
+		scheduleTimeLeap
+	}
+
+	override resume() {
+		executionContext.suspendedElements.clear
+		suspended = false
+		run
 	}
 
 	override exit() {
@@ -195,6 +230,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override tearDown() {
+		var adapter = EcoreUtil.getExistingAdapter(executionContext, EventDrivenCycleAdapter)
+		if (adapter !== null)
+			executionContext.eAdapters.remove(adapter)
 		timingService.stop
 	}
 
@@ -305,26 +343,24 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		timingService.unscheduleTimeEvent(timeEvent.timeEvent.name)
 		null
 	}
-	
-	
+
 	override raise(ExecutionEvent ev, Object value) {
-			
-			if (useInternalEventQueue) {
-				
-				internalEventQueue.add(new Event(ev, value));	
-				
-			} else {
-			
-				ev.raised = true
-				ev.value = value
-			
-			}
+
+		if (useInternalEventQueue) {
+
+			internalEventQueue.add(new Event(ev, value));
+
+		} else {
+
+			ev.raised = true
+			ev.value = value
+
+		}
 	}
 
-	
 	override boolean isActive() {
 		var List<RegularState> activeStates = executionContext.getAllActiveStates()
-		
+
 		for (RegularState regularState : activeStates) {
 			if (!(regularState instanceof FinalState)) {
 				return true;
@@ -348,5 +384,29 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			return true;
 		}
 	}
-	
+
+	public static class EventDrivenCycleAdapter extends EContentAdapter {
+
+		IExecutionFlowInterpreter interpreter
+
+		new(IExecutionFlowInterpreter interpreter) {
+			this.interpreter = interpreter
+		}
+
+		override notifyChanged(Notification notification) {
+			super.notifyChanged(notification)
+			if (notification.notifier instanceof ExecutionEvent &&
+				notification.feature == SRuntimePackage.Literals.EXECUTION_EVENT__RAISED) {
+				if (notification.newBooleanValue && notification.newBooleanValue != notification.oldBooleanValue) {
+					interpreter.runCycle
+				}
+			}
+		}
+
+		override isAdapterForType(Object type) {
+			return type == EventDrivenCycleAdapter
+		}
+
+	}
+
 }
