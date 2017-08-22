@@ -16,6 +16,8 @@ import java.util.LinkedList
 import java.util.List
 import java.util.Map
 import java.util.Queue
+import java.util.Timer
+import java.util.TimerTask
 import org.eclipse.emf.common.notify.Notification
 import org.eclipse.emf.ecore.util.EContentAdapter
 import org.eclipse.emf.ecore.util.EcoreUtil
@@ -43,13 +45,12 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation
+import org.yakindu.sct.simulation.core.sexec.scheduling.ISchedulingService
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage
 
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*
-import java.util.TimerTask
-import java.util.Timer
 
 /**
  * 

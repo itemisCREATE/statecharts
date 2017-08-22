@@ -22,6 +22,7 @@ Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.simulation.core.sexec,
  org.yakindu.sct.simulation.core.sexec.container,
  org.yakindu.sct.simulation.core.sexec.interpreter,
- org.yakindu.sct.simulation.core.sexec.launch
+ org.yakindu.sct.simulation.core.sexec.launch,
+ org.yakindu.sct.simulation.core.sexec.scheduling
 Bundle-Vendor: statecharts.org
 

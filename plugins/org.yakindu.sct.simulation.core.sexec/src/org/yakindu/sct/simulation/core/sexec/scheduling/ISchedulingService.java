@@ -8,15 +8,18 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.simulation.core.sexec.interpreter;
+package org.yakindu.sct.simulation.core.sexec.scheduling;
 
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@ImplementedBy(DefaultSchedulingService.class)
 public interface ISchedulingService {
 
 	/**
@@ -35,13 +38,14 @@ public interface ISchedulingService {
 	 * Schedules a periodic runcycle event
 	 */
 	public void scheduleCycleEvent(Runnable callback, long period);
+
 	/**
 	 * Stops all TimeEvent
 	 */
 	public void stop();
 
 	public void timeLeap(long ms);
-	
+
 	public void timeLeapToNextEvent();
-	
+
 }
