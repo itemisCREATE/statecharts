@@ -30,11 +30,9 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.scoping.ExpressionsScopeProvider;
-import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Type;
-import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -43,7 +41,6 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider.EmptyPredicate;
-import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 
@@ -114,58 +111,11 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	}
 
 	public IScope scope_ElementReferenceExpression_reference(final EObject context, EReference reference) {
-		IScope result = calculateScope(context, reference);
-		result = filterAnnotationProperties(result);
-		return result;
-	}
-
-	
-	
-	public IScope scope_ElementReferenceExpression_reference(final ArgumentedAnnotation context, EReference reference) {
-		IScope result = calculateScope(context, reference);
-		result = filterPropertiesWhoDoesntBelongToAnnotation(context, result);
-		return result;
-	}
-	
-	private IScope calculateScope(final EObject context, EReference reference) {
 		IScope namedScope = getNamedTopLevelScope(context, reference);
 		IScope unnamedScope = getUnnamedTopLevelScope(context, reference);
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
 		unnamedScope = new FilteringScope(unnamedScope, predicate);
-		IScope result = new SimpleScope(unnamedScope, namedScope.getAllElements());
-		return result;
-	}
-	
-	private IScope filterAnnotationProperties(IScope result) {
-		IScope filter = new FilteringScope(result, new Predicate<IEObjectDescription>() {
-			@Override
-			public boolean apply(IEObjectDescription input) {
-				if(input.getEClass().equals(TypesPackage.Literals.PROPERTY)) {
-					AnnotationType annotation = EcoreUtil2.getContainerOfType(input.getEObjectOrProxy(), AnnotationType.class);
-					if(annotation != null) {
-						return false;
-					}
-				}
-				return true;
-			}
-		});
-		return new SimpleScope(filter.getAllElements());
-	}
-	
-	private IScope filterPropertiesWhoDoesntBelongToAnnotation(final ArgumentedAnnotation context, IScope result) {
-		IScope filter = new FilteringScope(result, new Predicate<IEObjectDescription>() {
-			@Override
-			public boolean apply(IEObjectDescription input) {
-				if(input.getEClass().equals(TypesPackage.Literals.PROPERTY)) {
-					AnnotationType annotation = EcoreUtil2.getContainerOfType(input.getEObjectOrProxy(), AnnotationType.class);
-					if(annotation.equals(context)) {
-						return false;
-					}
-				}
-				return true;
-			}
-		});
-		return new SimpleScope(filter.getAllElements());
+		return new SimpleScope(unnamedScope, namedScope.getAllElements());
 	}
 	
 	public IScope scope_FeatureCall_feature(final FeatureCall context, EReference reference) {
