@@ -32,8 +32,6 @@ import org.yakindu.sct.simulation.core.sexec.interpreter.IOperationMockup;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.JavaOperationMockup;
 import org.yakindu.sct.simulation.core.sexec.interpreter.StextStatementInterpreter;
-import org.yakindu.sct.simulation.core.sexec.scheduling.DefaultSchedulingService;
-import org.yakindu.sct.simulation.core.sexec.scheduling.ISchedulingService;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl;
 
@@ -84,10 +82,6 @@ public class GenericSimulationModule extends AbstractGenericModule {
 
 	public Class<? extends IEventRaiser> bindIEventRaiser() {
 		return DefaultExecutionFlowInterpreter.class;
-	}
-
-	public Class<? extends ISchedulingService> bindITimingService() {
-		return DefaultSchedulingService.class;
 	}
 
 	public Class<? extends IStatementInterpreter> bindIStatementInterpreter() {

@@ -25,6 +25,7 @@ import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
@@ -41,6 +42,8 @@ public class DefaultSimulationEngineFactory implements ISimulationEngineFactory 
 
 	@Inject
 	private Injector injector;
+	@Inject
+	private StatechartAnnotations annotations;
 
 	public ISimulationEngine createExecutionContainer(Statechart statechart, ILaunch launch) throws CoreException {
 		ISimulationEngine controller = createController(statechart);
@@ -57,7 +60,10 @@ public class DefaultSimulationEngineFactory implements ISimulationEngineFactory 
 	}
 
 	protected ISimulationEngine createController(Statechart statechart) throws CoreException {
-		return new ExecutionFlowSimulationEngine(statechart);
+		if (annotations.isEventDriven(statechart)) {
+			return new EventDrivenSimulationEngine(statechart);
+		}
+		return new CycleBasedSimulationEngine(statechart);
 	}
 
 	protected ExecutionContext restore(String context, Statechart statechart) {

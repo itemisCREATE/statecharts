@@ -24,6 +24,7 @@ import org.yakindu.sct.simulation.core.SimulationCoreActivator;
 import org.yakindu.sct.simulation.core.engine.IExecutionControl;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
+import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 
 import com.google.inject.Inject;
@@ -36,33 +37,26 @@ import com.google.inject.Inject;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class ExecutionFlowSimulationEngine extends AbstractSimulationEngine {
+public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEngine {
 
 	@Inject
 	protected ExecutionContext context;
+	@Inject
+	private IExecutionContextInitializer contextInitializer;
 	@Inject
 	private IModelSequencer sequencer;
 	@Inject
 	protected IExecutionFlowInterpreter interpreter;
 	@Inject
-	private IExecutionContextInitializer contextInitializer;
+	protected ITimeTaskScheduler timeTaskScheduler;
 
 	protected boolean terminated = false;
 	protected boolean suspended = false;
 
 	private Statechart statechart;
 
-	public ExecutionFlowSimulationEngine(Statechart statechart) {
+	public AbstractExecutionFlowSimulationEngine(Statechart statechart) {
 		this.statechart = statechart;
-	}
-
-	protected void runCycle() {
-		try {
-			interpreter.runCycle();
-		} catch (Exception e) {
-			e.printStackTrace();
-			handleException(e);
-		}
 	}
 
 	@Override
@@ -89,6 +83,7 @@ public class ExecutionFlowSimulationEngine extends AbstractSimulationEngine {
 	public void start() {
 		try {
 			interpreter.enter();
+			timeTaskScheduler.start();
 		} catch (Exception ex) {
 			handleException(ex);
 		}
@@ -96,13 +91,14 @@ public class ExecutionFlowSimulationEngine extends AbstractSimulationEngine {
 
 	public void suspend() {
 		suspended = true;
-		interpreter.suspend();
+		timeTaskScheduler.suspend();
 	}
 
 	public void resume() {
 		try {
+			context.getSuspendedElements().clear();
 			suspended = false;
-			interpreter.resume();
+			timeTaskScheduler.resume();
 		} catch (Exception ex) {
 			handleException(ex);
 		}
@@ -110,14 +106,12 @@ public class ExecutionFlowSimulationEngine extends AbstractSimulationEngine {
 
 	public void terminate() {
 		terminated = true;
-		interpreter.tearDown();
+		timeTaskScheduler.terminate();
 	}
 
 	public void stepForward() {
 		try {
-			interpreter.resume();
-			interpreter.stepForward();
-			interpreter.suspend();
+			timeTaskScheduler.step();
 		} catch (Exception ex) {
 			handleException(ex);
 		}
@@ -148,6 +142,10 @@ public class ExecutionFlowSimulationEngine extends AbstractSimulationEngine {
 	 */
 	protected boolean useInternalEventQueue() {
 		return false;
+	}
+	
+	public Statechart getStatechart() {
+		return statechart;
 	}
 
 }

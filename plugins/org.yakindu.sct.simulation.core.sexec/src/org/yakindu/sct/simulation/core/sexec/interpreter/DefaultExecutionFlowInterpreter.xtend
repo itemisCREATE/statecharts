@@ -16,10 +16,6 @@ import java.util.LinkedList
 import java.util.List
 import java.util.Map
 import java.util.Queue
-import java.util.Timer
-import java.util.TimerTask
-import org.eclipse.emf.common.notify.Notification
-import org.eclipse.emf.ecore.util.EContentAdapter
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Data
 import org.yakindu.sct.model.sexec.Call
@@ -43,14 +39,11 @@ import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.lib.StatechartAnnotations
-import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation
-import org.yakindu.sct.simulation.core.sexec.scheduling.ISchedulingService
+import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler
+import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler.TimeTask
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
-import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage
-
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 /**
  * 
@@ -77,7 +70,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	@Inject
 	protected IStatementInterpreter statementInterpreter
 	@Inject
-	ISchedulingService timingService
+	ITimeTaskScheduler timingService
 	@Inject extension SexecExtensions
 	@Inject(optional=true)
 	ITraceStepInterpreter traceInterpreter
@@ -85,7 +78,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	@Inject
 	protected StateVectorExtensions stateVectorExtensions;
 	@Inject
-	private extension StatechartAnnotations
+	protected extension StatechartAnnotations 
 
 	protected ExecutionFlow flow
 	protected ExecutionContext executionContext
@@ -94,12 +87,6 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	protected List<Step> executionStack
 	protected int activeStateIndex
 	protected boolean useInternalEventQueue
-
-	boolean suspended = false
-	boolean terminated = false
-	
-	var cyclePeriod = 200L;
-	var cycleBasedTimer = new Timer
 
 	override initialize(ExecutionFlow flow, ExecutionContext context) {
 		initialize(flow, context, false)
@@ -114,40 +101,10 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		historyStateConfiguration = newHashMap()
 		this.useInternalEventQueue = useInternalEventQueue
 
-		var statechart = (flow.sourceElement as Statechart)
-		if (statechart.cycleBased) {
-			statechart.initCycleTimer
-		} else if (statechart.eventDriven) {
-			context.eAdapters.add(new EventDrivenCycleAdapter(this))
-		}
-
 		if (!executionContext.snapshot) {
 			flow.staticInitSequence.scheduleAndRun
 			flow.initSequence.scheduleAndRun
 		}
-	}
-
-	def protected initCycleTimer(Statechart it) {
-		val annotation = getAnnotationOfType(CYCLE_BASED_ANNOTATION) as ArgumentedAnnotation
-		if (annotation !== null) {
-			cyclePeriod = statementInterpreter.evaluateStatement(annotation.expressions.head, executionContext) as Long
-
-		}
-		timingService.scheduleCycleEvent([this.runCycle], cyclePeriod)
-		startCycleRunner
-	}
-
-
-	def void startCycleRunner() {
-		var virtualTimerTask = new TimerTask() {
-			override run() {
-				timingService.timeLeapToNextEvent
-				if (!suspended && !terminated) {
-					startCycleRunner
-				}
-			}
-		}
-		cycleBasedTimer.schedule(virtualTimerTask, 0);
 	}
 
 	override enter() {
@@ -190,7 +147,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		do {
 			// activate an event if there is one
 			if (event !== null) {
-				event.event.raised = true
+				event.event.scheduled = true
 				event.event.value = event.value
 				event = null
 			}
@@ -202,7 +159,12 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	def rtcStep() {
-		executionContext.raiseScheduledEvents
+		if((flow.sourceElement as Statechart).cycleBased){
+			executionContext.raiseScheduledEvents
+		}
+		else{
+			executionContext.clearScheduledEvents
+		}
 		activeStateIndex = 0
 		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
 		executionContext.clearOutEvents
@@ -214,30 +176,11 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		executionContext.clearLocalAndInEvents
 	}
 
-	override suspend() {
-		suspended = true
-	}
-
-	override stepForward() {
-		startCycleRunner
-	}
-
-	override resume() {
-		executionContext.suspendedElements.clear
-		suspended = false
-		startCycleRunner
-	}
-
 	override exit() {
 		flow.exitSequence.scheduleAndRun
 	}
 
 	override tearDown() {
-		terminated = true
-		var adapter = EcoreUtil.getExistingAdapter(executionContext, EventDrivenCycleAdapter)
-		if (adapter !== null)
-			executionContext.eAdapters.remove(adapter)
-		timingService.stop
 	}
 
 	def scheduleAndRun(Step step) {
@@ -337,14 +280,14 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	def dispatch Object execute(ScheduleTimeEvent scheduleTimeEvent) {
-		var timeEvent = scheduleTimeEvent.timeEvent
-		var duration = statementInterpreter.evaluateStatement(scheduleTimeEvent.timeValue, executionContext)
-		timingService.scheduleTimeEvent(executionContext, timeEvent.name, timeEvent.periodic, duration as Long)
+		val timeEvent = scheduleTimeEvent.timeEvent
+		val duration = statementInterpreter.evaluateStatement(scheduleTimeEvent.timeValue, executionContext)
+		timingService.scheduleTimeTask(new TimeTask(timeEvent.name, [executionContext.getEvent(timeEvent.name).scheduled = true]), timeEvent.periodic, duration as Long)
 		null
 	}
 
 	def dispatch Object execute(UnscheduleTimeEvent timeEvent) {
-		timingService.unscheduleTimeEvent(timeEvent.timeEvent.name)
+		timingService.unscheduleTimeTask(timeEvent.timeEvent.name)
 		null
 	}
 
@@ -356,7 +299,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 
 		} else {
 
-			ev.raised = true
+			ev.scheduled = true
 			ev.value = value
 
 		}
@@ -388,29 +331,4 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			return true;
 		}
 	}
-
-	public static class EventDrivenCycleAdapter extends EContentAdapter {
-
-		IExecutionFlowInterpreter interpreter
-
-		new(IExecutionFlowInterpreter interpreter) {
-			this.interpreter = interpreter
-		}
-
-		override notifyChanged(Notification notification) {
-			super.notifyChanged(notification)
-			if (notification.notifier instanceof ExecutionEvent &&
-				notification.feature == SRuntimePackage.Literals.EXECUTION_EVENT__RAISED) {
-				if (notification.newBooleanValue && notification.newBooleanValue != notification.oldBooleanValue) {
-					interpreter.runCycle
-				}
-			}
-		}
-
-		override isAdapterForType(Object type) {
-			return type == EventDrivenCycleAdapter
-		}
-
-	}
-
 }

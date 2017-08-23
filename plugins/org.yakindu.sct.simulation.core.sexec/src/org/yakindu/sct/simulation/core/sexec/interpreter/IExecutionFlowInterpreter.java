@@ -30,12 +30,6 @@ public interface IExecutionFlowInterpreter {
 
 	public void runCycle();
 
-	public void suspend();
-
-	public void stepForward();
-
-	public void resume();
-
 	public void exit();
 	
 	public boolean isActive();

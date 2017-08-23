@@ -32,6 +32,10 @@ class ExecutionContextExtensions {
 	def raiseScheduledEvents(ExecutionContext executionContext) {
 		executionContext.allEvents.filter[scheduled].forEach[raised = true scheduled = false]
 	}
+	
+	def clearScheduledEvents(ExecutionContext executionContext) {
+		executionContext.allEvents.filter[scheduled].forEach[scheduled = false]
+	}
 
 	def clearOutEvents(ExecutionContext executionContext) {
 		executionContext.allEvents.filter[direction == EventDirection.OUT].forEach[if(raised) raised = false]

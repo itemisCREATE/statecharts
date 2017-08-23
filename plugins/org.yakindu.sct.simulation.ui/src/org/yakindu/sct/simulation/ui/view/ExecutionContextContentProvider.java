@@ -78,6 +78,8 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		this.viewer = viewer;
+		if(refresher != null)
+			refresher.setCancel(true);
 		refresher = new ViewerRefresher();
 		if (newInput != null) {
 			new Thread(refresher).start();
