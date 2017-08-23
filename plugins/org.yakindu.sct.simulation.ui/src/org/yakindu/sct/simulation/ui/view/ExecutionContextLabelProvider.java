@@ -90,7 +90,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			if (event.getName().contains("time_event")) {
 				cell.setImage(SimulationImages.TIMEEVENT.image());
 			} else {
-				if (event.isScheduled()) {
+				if (event.isRaised()) {
 					cell.setImage(SimulationImages.EVENT_ENABLED.image());
 				} else {
 					cell.setImage(SimulationImages.EVENT_DISABLED.image());

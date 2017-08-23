@@ -21,7 +21,6 @@ package org.yakindu.sct.simulation.core.sruntime;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionEvent#isRaised <em>Raised</em>}</li>
- *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionEvent#isScheduled <em>Scheduled</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionEvent#getDirection <em>Direction</em>}</li>
  * </ul>
  *
@@ -55,32 +54,6 @@ public interface ExecutionEvent extends ExecutionSlot {
 	 * @generated
 	 */
 	void setRaised(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Scheduled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Scheduled</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Scheduled</em>' attribute.
-	 * @see #setScheduled(boolean)
-	 * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getExecutionEvent_Scheduled()
-	 * @model
-	 * @generated
-	 */
-	boolean isScheduled();
-
-	/**
-	 * Sets the value of the '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionEvent#isScheduled <em>Scheduled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Scheduled</em>' attribute.
-	 * @see #isScheduled()
-	 * @generated
-	 */
-	void setScheduled(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Direction</b></em>' attribute.

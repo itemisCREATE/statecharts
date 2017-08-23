@@ -149,7 +149,9 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		isInited = true;
 
 		// Initialize simple dependencies
+		BasePackage.eINSTANCE.eClass();
 		SGraphPackage.eINSTANCE.eClass();
+		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theSRuntimePackage.createPackageContents();
@@ -234,17 +236,8 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getExecutionEvent_Scheduled() {
-		return (EAttribute)executionEventEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getExecutionEvent_Direction() {
-		return (EAttribute)executionEventEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)executionEventEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -400,7 +393,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		executionEventEClass = createEClass(EXECUTION_EVENT);
 		createEAttribute(executionEventEClass, EXECUTION_EVENT__RAISED);
-		createEAttribute(executionEventEClass, EXECUTION_EVENT__SCHEDULED);
 		createEAttribute(executionEventEClass, EXECUTION_EVENT__DIRECTION);
 
 		executionSlotEClass = createEClass(EXECUTION_SLOT);
@@ -477,8 +469,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		addEOperation(executionContextEClass, this.getExecutionEvent(), "getRaisedEvents", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(executionContextEClass, this.getExecutionEvent(), "getScheduledEvents", 0, -1, IS_UNIQUE, IS_ORDERED);
-
 		EOperation op = addEOperation(executionContextEClass, this.getExecutionVariable(), "getVariable", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -498,7 +488,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		initEClass(executionEventEClass, ExecutionEvent.class, "ExecutionEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExecutionEvent_Raised(), ecorePackage.getEBoolean(), "raised", null, 0, 1, ExecutionEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getExecutionEvent_Scheduled(), ecorePackage.getEBoolean(), "scheduled", null, 0, 1, ExecutionEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionEvent_Direction(), this.getEventDirection(), "direction", null, 0, 1, ExecutionEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionSlotEClass, ExecutionSlot.class, "ExecutionSlot", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

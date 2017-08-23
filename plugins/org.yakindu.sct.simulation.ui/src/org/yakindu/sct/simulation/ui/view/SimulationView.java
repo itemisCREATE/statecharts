@@ -110,7 +110,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	}
 
 	private void updateTypeSystem(final IDebugTarget debugTarget) {
-		IDomain domain = DomainRegistry.getDomain((EObject)debugTarget.getAdapter(EObject.class));
+		IDomain domain = DomainRegistry.getDomain((EObject) debugTarget.getAdapter(EObject.class));
 		typeSystem = domain.getInjector(IDomain.FEATURE_SIMULATION).getInstance(ITypeSystem.class);
 	}
 
@@ -170,13 +170,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 
 		public void raiseEvent(ExecutionEvent event) {
-			if (event.isRaised()) {
-				event.setRaised(false);
-			} else if (event.isScheduled()) {
-				event.setScheduled(false);
-			} else {
-				event.setScheduled(true);
-			}
+			event.setRaised(!event.isRaised());
 			viewer.refresh();
 		}
 	}

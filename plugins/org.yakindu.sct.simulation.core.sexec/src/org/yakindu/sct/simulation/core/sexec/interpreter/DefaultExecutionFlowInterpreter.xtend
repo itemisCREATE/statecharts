@@ -38,12 +38,11 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler
 import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler.TimeTask
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
-import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 
 /**
  * 
@@ -147,7 +146,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		do {
 			// activate an event if there is one
 			if (event !== null) {
-				event.event.scheduled = true
+				event.event.raised = true
 				event.event.value = event.value
 				event = null
 			}
@@ -159,12 +158,6 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	def rtcStep() {
-		if((flow.sourceElement as Statechart).cycleBased){
-			executionContext.raiseScheduledEvents
-		}
-		else{
-			executionContext.clearScheduledEvents
-		}
 		activeStateIndex = 0
 		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
 		executionContext.clearOutEvents
@@ -282,7 +275,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	def dispatch Object execute(ScheduleTimeEvent scheduleTimeEvent) {
 		val timeEvent = scheduleTimeEvent.timeEvent
 		val duration = statementInterpreter.evaluateStatement(scheduleTimeEvent.timeValue, executionContext)
-		timingService.scheduleTimeTask(new TimeTask(timeEvent.name, [executionContext.getEvent(timeEvent.name).scheduled = true]), timeEvent.periodic, duration as Long)
+		timingService.scheduleTimeTask(new TimeTask(timeEvent.name, [executionContext.getEvent(timeEvent.name).raised = true]), timeEvent.periodic, duration as Long)
 		null
 	}
 
@@ -292,16 +285,12 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override raise(ExecutionEvent ev, Object value) {
-
 		if (useInternalEventQueue) {
-
 			internalEventQueue.add(new Event(ev, value));
 
 		} else {
-
-			ev.scheduled = true
+			ev.raised = true
 			ev.value = value
-
 		}
 	}
 

@@ -11,8 +11,6 @@ package org.yakindu.sct.simulation.core.sexec.scheduling;
 import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -43,14 +41,12 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 	protected boolean suspended;
 	protected boolean terminated;
 
-	protected ScheduledExecutorService scheduleService;
 
 	public DefaultTimeTaskScheduler() {
 		tasks = new PriorityQueue<TimeTask>();
 		lock = new ReentrantLock();
 		elementAddedCondition = lock.newCondition();
 		topLevelElementCondition = lock.newCondition();
-		scheduleService = Executors.newScheduledThreadPool(1);
 		queueWorker = () -> {
 			while (!terminated && !suspended) {
 				work();
@@ -190,7 +186,6 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 			}
 			tasks.clear();
 		}
-		scheduleService.shutdownNow();
 	}
 
 	@Override

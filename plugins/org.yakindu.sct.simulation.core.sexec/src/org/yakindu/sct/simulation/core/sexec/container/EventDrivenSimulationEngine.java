@@ -11,16 +11,11 @@
 
 package org.yakindu.sct.simulation.core.sexec.container;
 
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.util.EContentAdapter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
-import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler;
-import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler.TimeTask;
-import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler.TimeTask.Priority;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
 
@@ -32,6 +27,8 @@ import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
  */
 public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulationEngine {
 
+	private EventDrivenCycleAdapter cycleAdapter;
+
 	public EventDrivenSimulationEngine(Statechart statechart) {
 		super(statechart);
 	}
@@ -39,15 +36,32 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 	@Override
 	public void init() {
 		super.init();
-		context.eAdapters().add(new EventDrivenCycleAdapter(timeTaskScheduler, interpreter));
+		cycleAdapter = new EventDrivenCycleAdapter(interpreter);
+		context.eAdapters().add(cycleAdapter);
 	}
 
 	@Override
 	public void terminate() {
-		Adapter adapter = EcoreUtil.getExistingAdapter(context, EventDrivenCycleAdapter.class);
-		if (adapter != null)
-			context.eAdapters().remove(adapter);
+		context.eAdapters().remove(cycleAdapter);
 		super.terminate();
+	}
+
+	@Override
+	public void suspend() {
+		cycleAdapter.suspend();
+		super.suspend();
+	}
+
+	@Override
+	public void resume() {
+		cycleAdapter.resume();
+		super.resume();
+	}
+
+	@Override
+	public void stepForward() {
+		interpreter.runCycle();
+		super.stepForward();
 	}
 
 	@Override
@@ -57,11 +71,12 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 
 	public static class EventDrivenCycleAdapter extends EContentAdapter {
 
-		private ITimeTaskScheduler scheduler;
 		private IExecutionFlowInterpreter interpreter;
 
-		public EventDrivenCycleAdapter(ITimeTaskScheduler taskScheduler, IExecutionFlowInterpreter interpreter) {
-			this.scheduler = taskScheduler;
+		private boolean suspended = false;
+		private boolean cycleAfterResume = false;
+
+		public EventDrivenCycleAdapter(IExecutionFlowInterpreter interpreter) {
 			this.interpreter = interpreter;
 
 		}
@@ -69,23 +84,15 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
 			if (notification.getNotifier() instanceof ExecutionEvent
-					&& notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__SCHEDULED) {
-				if (notification.getNewBooleanValue() != notification.getOldBooleanValue()) {
-					final ExecutionEvent event = (ExecutionEvent) notification.getNotifier();
-					if (notification.getNewBooleanValue()) {
-						TimeTask eventTask = new TimeTask(event.getFqName(), () -> event.setRaised(true),
-								Priority.NORMAL);
-						scheduler.scheduleTimeTask(eventTask, false, 0);
-					} else {
-						scheduler.unscheduleTimeTask(event.getFqName());
-					}
-				}
-			}
-
-			if (notification.getNotifier() instanceof ExecutionEvent
 					&& notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__RAISED) {
 				if (notification.getNewBooleanValue() != notification.getOldBooleanValue()) {
-					interpreter.runCycle();
+					if (notification.getNewBooleanValue()) {
+						if (!suspended)
+							interpreter.runCycle();
+						else {
+							cycleAfterResume = true;
+						}
+					}
 				}
 			}
 
@@ -93,6 +100,17 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 
 		public boolean isAdapterForType(Object type) {
 			return type == EventDrivenCycleAdapter.class;
+		}
+
+		public void suspend() {
+			suspended = true;
+		}
+
+		public void resume() {
+			suspended = false;
+			if (cycleAfterResume)
+				interpreter.runCycle();
+			cycleAfterResume = false;
 		}
 	}
 }
