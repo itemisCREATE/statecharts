@@ -117,7 +117,7 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		unnamedScope = new FilteringScope(unnamedScope, predicate);
 		return new SimpleScope(unnamedScope, namedScope.getAllElements());
 	}
-	
+
 	public IScope scope_FeatureCall_feature(final FeatureCall context, EReference reference) {
 
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
