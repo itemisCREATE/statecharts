@@ -107,7 +107,6 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 			}
 		});
 		result = filterAnnotations(reference, result);
-		result = filterAnnotationArgument(result);
 		return result;
 	}
 
@@ -120,15 +119,6 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 				}
 			});
 		return result;
-	}
-	
-	protected IScope filterAnnotationArgument(IScope result) {
-		return new FilteringScope(result, new Predicate<IEObjectDescription>() {
-			@Override
-			public boolean apply(IEObjectDescription input) {
-				return input.getEClass() != TypesPackage.Literals.PROPERTY;
-			}
-		});
 	}
 
 	@Override
