@@ -23,9 +23,14 @@
 						<phase> generate-sources </phase>
 						<configuration>
 							<target>
+								<property environment="env">
+									<env key="LANG" value="en_US"/>
+								</property>
+							</target>
+							<tasks>
 								<ant dir="${project.basedir}" antfile="build.xml">
 								</ant>
-							</target>
+							</tasks>
 						</configuration>
 						<goals>
 							<goal>run</goal>
