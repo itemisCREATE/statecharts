@@ -80,7 +80,7 @@ public interface ITimeTaskScheduler {
 			if (nextExecutionTime != other.nextExecutionTime) {
 				return (int) (nextExecutionTime - other.nextExecutionTime);
 			} else if (other.priority != this.priority) {
-				return this.priority.getIntValue() - other.priority.getIntValue();
+				return other.priority.getIntValue() - this.priority.getIntValue();
 			} else if (period != other.period) {
 				return (int) (period - other.period);
 			}
