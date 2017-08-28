@@ -88,6 +88,9 @@ public abstract class AbstractDebugTargetView extends ViewPart
 			} else {
 				newTarget = (IDebugTarget) object.getAdapter(IDebugTarget.class);
 			}
+			if(newTarget == debugTarget) {
+				return;
+			}
 			if (newTarget != debugTarget && newTarget != null && !newTarget.isTerminated()) {
 				debugTarget = newTarget;
 				activeTargetChanged(newTarget);

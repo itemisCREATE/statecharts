@@ -27,6 +27,7 @@ import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.annotations.TypeAnnotations;
 
@@ -67,26 +68,59 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		conversionRegistry.clear();
 	}
 
+	@Override
 	public Type getType(String type) {
 		Type result = typeRegistry.get(type);
 		return result;
 	}
-
+	
+	/**
+	 * Returns all direct and indirect super types. Also reflects primitive
+	 * type's base types, type parameter bounds and complex type's super types.
+	 */
+	@Override
 	public List<Type> getSuperTypes(Type type) {
+		List<Type> allSuperTypes = new ArrayList<Type>();
+		collectSupertypes(type, allSuperTypes);
+		return allSuperTypes;
+	}
+
+	/**
+	 * Returns the list of direct super types for given type. Also reflects primitive
+	 * type's base types, type parameter bounds and complex type's super types.
+	 */
+	protected List<Type> getDirectSuperTypes(Type type) {
 		List<Type> superTypes = new ArrayList<Type>();
 		for (Entry<Type, Type> entry : extendsRegistry.entries()) {
 			if (isSame(type, entry.getKey())) {
 				superTypes.add(entry.getValue());
 			}
 		}
+		if (type instanceof PrimitiveType) {
+			PrimitiveType primitiveType = (PrimitiveType) type;
+			PrimitiveType baseType = primitiveType.getBaseType();
+			if (baseType != null) {
+				superTypes.add(baseType);
+			}
+		}
 		if (type instanceof ComplexType) {
 			ComplexType complexType = (ComplexType) type;
 			superTypes.addAll(complexType.getSuperTypes());
 		}
-
+		if (type instanceof TypeParameter) {
+			TypeParameter typeParameter = (TypeParameter) type;
+			Type bound = typeParameter.getBound();
+			if (bound != null) {
+				superTypes.add(bound);
+			}
+		}
 		return superTypes;
 	}
 
+	/**
+	 * @returns <code>true</code> if superType is a direct or indirect super type of subType.
+	 */
+	@Override
 	public boolean isSuperType(Type subtype, Type supertype) {
 		List<Type> typehierachy = new ArrayList<Type>();
 		typehierachy.add(subtype);
@@ -98,30 +132,26 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		return false;
 	}
 
-	protected void collectSupertypes(Type subtypeClass, List<Type> typeHierachy) {
-		if (subtypeClass == null)
+	/**
+	 * Recursively calls itself to create list of all direct and indirect super types of given sub type
+	 */
+	protected void collectSupertypes(Type subType, List<Type> typeHierachy) {
+		if (subType == null)
 			return;
 
-		if (subtypeClass instanceof PrimitiveType) {
-			PrimitiveType primitiveType = (PrimitiveType) subtypeClass;
-			Type baseType = primitiveType.getBaseType();
-			if (baseType != null) {
-				typeHierachy.add(baseType);
-				collectSupertypes(baseType, typeHierachy);
-			}
-		}
-
-		List<Type> superTypes = getSuperTypes(subtypeClass);
+		List<Type> superTypes = getDirectSuperTypes(subType);
 		for (Type superType : superTypes) {
 			typeHierachy.add(superType);
 			collectSupertypes(superType, typeHierachy);
 		}
 	}
 
+	@Override
 	public Collection<Type> getTypes() {
 		return Collections.unmodifiableCollection(typeRegistry.values());
 	}
 
+	@Override
 	public Collection<Type> getConcreteTypes() {
 		List<Type> result = new ArrayList<Type>();
 		for (Type type : getTypes()) {
@@ -139,11 +169,11 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		return primitive;
 	}
 
-	public void declareType(Type type, String name) {
+	protected void declareType(Type type, String name) {
 		typeRegistry.put(name, type);
 	}
 
-	public void removeType(String name) {
+	protected void removeType(String name) {
 		Type type = typeRegistry.get(name);
 		if (type != null) {
 			extendsRegistry.removeAll(type);
@@ -152,22 +182,25 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		}
 	}
 
-	public void declareSuperType(Type subType, Type superType) {
+	protected void declareSuperType(Type subType, Type superType) {
 		extendsRegistry.put(subType, superType);
 	}
 
-	public void declareConversion(Type baseType, Type targetType) {
+	protected void declareConversion(Type baseType, Type targetType) {
 		conversionRegistry.put(baseType, targetType);
 	}
 
+	@Override
 	public boolean haveCommonType(Type type1, Type type2) {
 		return getCommonType(type1, type2) != null;
 	}
 
+	@Override
 	public boolean isSame(Type type1, Type type2) {
 		return EcoreUtil.equals(type1, type2);
 	}
 
+	@Override
 	public Type getCommonType(Type type1, Type type2) {
 		Type result = getCommonTypeInternal(type1, type2);
 		if (result != null)
@@ -180,6 +213,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		return getCommonTypeWithConversion(type1, type2) != null;
 	}
 
+	@Override
 	public Type getCommonTypeWithConversion(Type type1, Type type2) {
 		Type result = getCommonType(type1, type2);
 		if (result != null)

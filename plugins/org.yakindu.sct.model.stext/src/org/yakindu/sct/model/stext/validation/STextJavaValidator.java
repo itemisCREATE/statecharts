@@ -16,6 +16,7 @@ import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CHILD_FIRST_ANNOTATION;
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.PARENT_FIRST_ANNOTATION;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -515,12 +516,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Check(CheckType.NORMAL)
 	public void checkTopLeveEntryIsDefaultEntry(final Entry entry) {
 		Region parentRegion = entry.getParentRegion();
-		EObject eContainer = parentRegion.eContainer();
-
-		boolean isTopLevelRegionEntry = eContainer instanceof Statechart;
-
 		// 1. check if is toplevel
-		if (isTopLevelRegionEntry) {
+		if (isTopLevelRegion(parentRegion)) {
 			boolean isDefaultEntry = STextValidationModelUtils.isDefault(entry);
 			// 2. check if is default entry
 			if (!isDefaultEntry) {
@@ -533,6 +530,19 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				else
 					warning(TOP_LEVEL_REGION_ENTRY_HAVE_TO_BE_A_DEFAULT_ENTRY, entry,
 							SGraphPackage.Literals.ENTRY__KIND, -1);
+			}
+		}
+	}
+	
+	protected boolean isTopLevelRegion(final Region region) {
+		return region.eContainer() instanceof Statechart;
+	}
+	
+	@Check(CheckType.NORMAL)
+	public void checkTopLevelRegionHasEntry(final Region region) {
+		if (isTopLevelRegion(region)) {
+			if (!STextValidationModelUtils.getRegionsWithoutDefaultEntry(Collections.singletonList(region)).isEmpty()) {
+				error(REGION_UNBOUND_DEFAULT_ENTRY_POINT, region, null, -1);
 			}
 		}
 	}
