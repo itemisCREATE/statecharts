@@ -21,16 +21,12 @@ class ExecutionContextExtensions {
 	extension ITypeValueProvider
 
 	def clearLocalAndInEvents(ExecutionContext executionContext) {
-		executionContext.allEvents.filter[direction == EventDirection.IN || direction == EventDirection.LOCAL].forEach[
+		executionContext.allEvents.filter[direction == EventDirection.IN || direction == EventDirection.LOCAL].forEach [
 			if (raised) {
 				raised = false;
-				value = if (type != null) type.defaultValue else null
+				value = if(type !== null) type.defaultValue else null
 			}
 		]
-	}
-
-	def raiseScheduledEvents(ExecutionContext executionContext) {
-		executionContext.allEvents.filter[scheduled].forEach[raised = true scheduled = false]
 	}
 
 	def clearOutEvents(ExecutionContext executionContext) {

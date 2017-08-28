@@ -18,7 +18,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.test.models,
  org.yakindu.sct.simulation.core.sexec,
  org.yakindu.sct.domain.generic,
- org.yakindu.sct.domain.generic.simulation
+ org.yakindu.sct.domain.generic.simulation,
+ org.yakindu.sct.model.stext.lib;bundle-version="3.0.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.model.sexec.interpreter.test.util

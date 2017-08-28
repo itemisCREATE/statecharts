@@ -25,13 +25,11 @@ import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
-import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory;
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*;
+
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
@@ -42,12 +40,10 @@ import com.google.inject.Injector;
  */
 public class DefaultSimulationEngineFactory implements ISimulationEngineFactory {
 
-	private static final int DEFAULT_CYCLE_PERIOD = 200;
-	
 	@Inject
 	private Injector injector;
 	@Inject
-	private IStatementInterpreter interpreter;
+	private StatechartAnnotations annotations;
 
 	public ISimulationEngine createExecutionContainer(Statechart statechart, ILaunch launch) throws CoreException {
 		ISimulationEngine controller = createController(statechart);
@@ -64,18 +60,10 @@ public class DefaultSimulationEngineFactory implements ISimulationEngineFactory 
 	}
 
 	protected ISimulationEngine createController(Statechart statechart) throws CoreException {
-		ArgumentedAnnotation cycleBased = (ArgumentedAnnotation) statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
-		ArgumentedAnnotation eventDriven = (ArgumentedAnnotation) statechart
-				.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
-		if (cycleBased != null) {
-			Long result = (Long) interpreter.evaluateStatement(cycleBased.getExpressions().get(0),
-					SRuntimeFactory.eINSTANCE.createExecutionContext());
-			return new CycleBasedSimulationEngine(statechart, result);
-		}
-		if (eventDriven != null) {
+		if (annotations.isEventDriven(statechart)) {
 			return new EventDrivenSimulationEngine(statechart);
 		}
-		return new CycleBasedSimulationEngine(statechart, DEFAULT_CYCLE_PERIOD);
+		return new CycleBasedSimulationEngine(statechart);
 	}
 
 	protected ExecutionContext restore(String context, Statechart statechart) {

@@ -11,8 +11,13 @@
 
 package org.yakindu.sct.simulation.core.sexec.container;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
+import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
+import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
 
 /**
  * Event Driven implementation of the {@link ISimulationEngine}.
@@ -22,42 +27,90 @@ import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
  */
 public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulationEngine {
 
-	private Thread cycleRunner;
+	private EventDrivenCycleAdapter cycleAdapter;
 
 	public EventDrivenSimulationEngine(Statechart statechart) {
 		super(statechart);
 	}
 
-	public void start() {
-		super.start();
-		cycleRunner = new Thread(new CycleRunner());
-		cycleRunner.start();
+	@Override
+	public void init() {
+		super.init();
+		cycleAdapter = new EventDrivenCycleAdapter(interpreter);
+		context.eAdapters().add(cycleAdapter);
 	}
 
-	public void resume() {
-		super.resume();
-		cycleRunner = new Thread(new CycleRunner());
-		cycleRunner.start();
-	}
-
+	@Override
 	public void terminate() {
+		context.eAdapters().remove(cycleAdapter);
 		super.terminate();
 	}
 
-	private final class CycleRunner implements Runnable {
-		public void run() {
-			while (!terminated && !suspended) {
-				if (context.getRaisedEvents().size() > 0 || context.getScheduledEvents().size() > 0) {
-					runCycle();
-				}
-			}
-		}
+	@Override
+	public void suspend() {
+		cycleAdapter.suspend();
+		super.suspend();
+	}
+
+	@Override
+	public void resume() {
+		cycleAdapter.resume();
+		super.resume();
+	}
+
+	@Override
+	public void stepForward() {
+		interpreter.runCycle();
+		super.stepForward();
 	}
 
 	@Override
 	protected boolean useInternalEventQueue() {
 		return true;
 	}
-	
-	
+
+	public static class EventDrivenCycleAdapter extends EContentAdapter {
+
+		private IExecutionFlowInterpreter interpreter;
+
+		private boolean suspended = false;
+		private boolean cycleAfterResume = false;
+
+		public EventDrivenCycleAdapter(IExecutionFlowInterpreter interpreter) {
+			this.interpreter = interpreter;
+
+		}
+
+		public void notifyChanged(Notification notification) {
+			super.notifyChanged(notification);
+			if (notification.getNotifier() instanceof ExecutionEvent
+					&& notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__RAISED) {
+				if (notification.getNewBooleanValue() != notification.getOldBooleanValue()) {
+					if (notification.getNewBooleanValue()) {
+						if (!suspended)
+							interpreter.runCycle();
+						else {
+							cycleAfterResume = true;
+						}
+					}
+				}
+			}
+
+		}
+
+		public boolean isAdapterForType(Object type) {
+			return type == EventDrivenCycleAdapter.class;
+		}
+
+		public void suspend() {
+			suspended = true;
+		}
+
+		public void resume() {
+			suspended = false;
+			if (cycleAfterResume)
+				interpreter.runCycle();
+			cycleAfterResume = false;
+		}
+	}
 }

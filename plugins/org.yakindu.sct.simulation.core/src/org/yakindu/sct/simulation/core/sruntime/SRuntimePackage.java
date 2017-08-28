@@ -305,22 +305,13 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_EVENT__RAISED = EXECUTION_SLOT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Scheduled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_EVENT__SCHEDULED = EXECUTION_SLOT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Direction</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_EVENT__DIRECTION = EXECUTION_SLOT_FEATURE_COUNT + 2;
+	int EXECUTION_EVENT__DIRECTION = EXECUTION_SLOT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Execution Event</em>' class.
@@ -329,7 +320,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_EVENT_FEATURE_COUNT = EXECUTION_SLOT_FEATURE_COUNT + 3;
+	int EXECUTION_EVENT_FEATURE_COUNT = EXECUTION_SLOT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl <em>Execution Variable</em>}' class.
@@ -711,17 +702,6 @@ public interface SRuntimePackage extends EPackage {
 	EAttribute getExecutionEvent_Raised();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionEvent#isScheduled <em>Scheduled</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Scheduled</em>'.
-	 * @see org.yakindu.sct.simulation.core.sruntime.ExecutionEvent#isScheduled()
-	 * @see #getExecutionEvent()
-	 * @generated
-	 */
-	EAttribute getExecutionEvent_Scheduled();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionEvent#getDirection <em>Direction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -950,14 +930,6 @@ public interface SRuntimePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EXECUTION_EVENT__RAISED = eINSTANCE.getExecutionEvent_Raised();
-
-		/**
-		 * The meta object literal for the '<em><b>Scheduled</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXECUTION_EVENT__SCHEDULED = eINSTANCE.getExecutionEvent_Scheduled();
 
 		/**
 		 * The meta object literal for the '<em><b>Direction</b></em>' attribute feature.
