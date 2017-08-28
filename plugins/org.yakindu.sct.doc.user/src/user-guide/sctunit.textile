@@ -1,6 +1,10 @@
 
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/sctunit.textile
 
+
+
+
+
 h1(#sctunit_test-driven_statechart_development_with_sctunit). Test-driven statechart development with SCTUnit
 
 h2(#sctunit_brief_introduction_to_test-driven_development). Brief introduction to test-driven development
@@ -49,7 +53,7 @@ In the _test_ directory, proceed as follows to create a SCTUnit test file:
 # In the context menu, select _New → Other…_. The _New_ wizard opens.
 # In the wizard, select _YAKINDU SCT → SCTUnit test case_.
 # Click _Next >_. The wizard switches to the _New SCTUnit Test Class_ page.
-# In the _File name_ text field, specify the name of the file to contain the SCTUnit tests, say, _light_switch.sctunit_. The file name extension must always be _.sctunit_.
+# In the _Filename_ text field, specify the name of the file to contain the SCTUnit tests, say, _light_switch.sctunit_. The filename extension must always be _.sctunit_.
 # Click _Finish_.
 # If a dialog appears asking whether you want to add the Xtext nature to the project, please click _Yes_.
 
@@ -215,6 +219,7 @@ An important extension of the SCTUnit language over the statechart language is t
 Please remember that you can always hit <code>[Ctrl]+[Space]</code> when editing SCTUnit language files within YAKINDU Statechart Tools. The editor will show you all possible input choices that are valid at your cursor location.
 
 
+
 ==<!-- Start sctunit_keyword_testclass -->==
 
 h3(#sctunit_test_classes). Test classes
@@ -265,6 +270,8 @@ Test classes are namespace-aware: Using the "_package_ statement":#sctunit_the_p
 Test classes can be grouped into a "test suite":#sctunit_test_suites.
 
 ==<!-- End sctunit_keyword_testclass -->==
+
+
 
 ==<!-- Start sctunit_keyword_operation -->==
 
@@ -333,11 +340,13 @@ When running a "test class":#sctunit_test_classes or a "test suite":#sctunit_tes
 
 While the <code>@Ignore</code> annotation and an omitted annotation have the same effect functionally, you should use the <code>@Ignore</code> annotation to mark operations that are intended as tests, but are (temporarily) disabled for one or the other reason. This differentiates them from other operations that are not tests, but mere subroutines called from elsewhere.
 
+
+
 ==<!-- End sctunit_keyword_operation -->==
 
 h3(#sctunit_statements_and_expressions). Statements and expressions
 
-The body of an "operation":#sctunit_operations_and_tests consists of _statements_. Many types of statements, like _variable definitions_, _assignments_, _event raisings_, or _operation calls_, are already defined in the statechart language and are described "in section &quot;Statements&quot; of the statechart language documentation":../user-guide/statechart_language.html#statements.
+The body of an "operation":#sctunit_operations_and_tests consists of _statements_. Many types of statements, like _variable definitions_, _assignments_, _event raisings_, or _operation calls_, are already defined in the statechart language and are described "in section &quot;Statements&quot; of the statechart language documentation":../user-guide/statechart_language#sclang_statements.
 
 Statement types that are specific to the SCTUnit language are described in the following subsections.
 
@@ -369,7 +378,7 @@ The first statement asserts that state _State_A_ in region _main_region_ in stat
 
 The second statement asserts that _State_B_ is not active. Otherwise the test fails with the error message "State_B must not be active here.". 
 
-bq. *Please note:* "active(…)":../user-guide/statechart_language#active-state is a built-in function of the statechart language.
+bq. *Please note:* "active(…)":../user-guide/statechart_language#sclang_active_state is a built-in function of the statechart language.
 
 ==</div>==
 
@@ -411,8 +420,6 @@ p=. Assertion grammar
 ==<!-- End sctunit_keyword_assert -->==
 
 
-
-
 ==<!-- Start sctunit_keyword_enter -->==
 
 h4(#sctunit_entering_a_state_machine). Entering a state machine
@@ -432,7 +439,6 @@ p(#sctunit_fig_enter_grammar).
 p=. Enter grammar
 
 ==<!-- End sctunit_keyword_enter -->==
-
 
 
 ==<!-- Start sctunit_keyword_exit -->==
@@ -496,7 +502,6 @@ p=. Exit grammar
 ==<!-- End sctunit_keyword_exit -->==
 
 
-
 ==<!-- Start sctunit_keyword_raise -->==
 
 h4(#sctunit_raising_an_event). Raising an event
@@ -526,10 +531,9 @@ This statement raises the _click_ event in the state machine's _user_ interface.
 
 Since state machine internals are inaccessible to SCTUnit tests and outgoing events are, well, outgoing, only incoming events can be raised. Events in the internal scope or outgoing events defined in an interface cannot be raised.
 
-bq. *Please note:* The _raise_ statement is not specific to the SCTUnit language, but is (also) part of the statechart language, see section "&quot;Raising an event&quot;":../user-guide/statechart_language#raising-an-event.
+bq. *Please note:* The _raise_ statement is not specific to the SCTUnit language, but is (also) part of the statechart language, see section "&quot;Raising an event&quot;":../user-guide/statechart_language#sclang_raising_an_event.
 
 ==<!-- End sctunit_keyword_raise -->==
-
 
 
 ==<!-- Start sctunit_keyword_proceed -->==
@@ -571,12 +575,11 @@ p=. Proceed statement grammar
 ==<!-- End sctunit_keyword_proceed -->==
 
 
-
 ==<!-- Start sctunit_keyword_var -->==
 
 h4(#sctunit_defining_variables_and_constants). Defining variables and constants
 
-Variables and constants (for brevity we'll summarize both as "variables") can be defined as specified in the statechart language, please see sections "&quot;Variables&quot;":../user-guide/statechart_language.html#variables and "&quot;Constants&quot;":../user-guide/statechart_language.html#constants for all the details. 
+Variables and constants (for brevity we'll summarize both as "variables") can be defined as specified in the statechart language, please see sections "&quot;Variables&quot;":../user-guide/statechart_language#sclang_variables and "&quot;Constants&quot;":../user-guide/statechart_language#sclang_constants for all the details. 
 
 However, variables in the SCTUnit language _must_ always be initialized. For example, while a definition like
 
@@ -595,7 +598,6 @@ p(#sctunit_fig_variable_definition_grammar).
 p=. Variable definition grammar
 
 ==<!-- End sctunit_keyword_var -->==
-
 
 
 ==<!-- Start sctunit_keyword_if -->==
@@ -649,7 +651,6 @@ p=. If statement grammar
 ==<!-- End sctunit_keyword_else -->==
 
 
-
 ==<!-- Start sctunit_keyword_while -->==
 
 h4(#sctunit_loops). Loops
@@ -685,6 +686,7 @@ p=. While statement grammar
 
 ==<!-- End sctunit_keyword_while -->==
 
+
 ==<!-- Start sctunit_keyword_is_active -->==
 ==<!-- Start sctunit_keyword_is_final -->==
 
@@ -718,7 +720,6 @@ The assertion fails if the state machine is not active (see above) or it has at 
 
 ==<!-- End sctunit_keyword_is_final -->==
 ==<!-- End sctunit_keyword_is_active -->==
-
 
 
 ==<!-- Start sctunit_keyword_mock -->==
@@ -844,7 +845,6 @@ p=. Return statement grammar
 
 
 
-
 h3(#sctunit_test_suites). Test suites
 
 ==<!-- Start sctunit_keyword_testsuite -->==
@@ -886,12 +886,13 @@ Test suites are namespace-aware: Using the "_package_ statement":#sctunit_the_pa
 
 ==<!-- End sctunit_keyword_testsuite -->==
 
+
+
 h3(#sctunit_namespaces). Namespaces
 
 You can organise your "test classes":#sctunit_test_classes and "test suites":#sctunit_test_suites in different namespaces. Each test class or test suite can assign itself to a namespace by the "_package_":#sctunit_the_package_statement statement.
 
 ###. CHECK IMPORT: It can import test classes and test suites from other namespaces by the "_import_":#sctunit_the_import_statement statement.
-
 
 
 ==<!-- Start sctunit_keyword_package -->==
@@ -931,7 +932,6 @@ Please see section "&quot;Test units&quot;":#sctunit_test_units for a summary of
 ==<!-- End sctunit_keyword_package -->==
 
 
-
 ###. CHECK IMPORT: ==<!-- Start sctunit_keyword_import -->==
 ###. CHECK IMPORT: 
 ###. CHECK IMPORT: h4(#sctunit_the_import_statement). The _import_ statement
@@ -959,7 +959,6 @@ Please see section "&quot;Test units&quot;":#sctunit_test_units for a summary of
 ###. CHECK IMPORT: Please see section "&quot;Test units&quot;":#sctunit_test_units for a summary of the _import_ statement's and related statements' grammar.
 ###. CHECK IMPORT: 
 ###. CHECK IMPORT: ==<!-- End sctunit_keyword_import -->==
-
 
 
 h4(#sctunit_test_units). Test units

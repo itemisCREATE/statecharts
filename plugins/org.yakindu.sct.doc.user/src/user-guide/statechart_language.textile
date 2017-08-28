@@ -1,66 +1,76 @@
 
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/statechart_language.textile
 
-h1(#the-statechart-language). The statechart language
+h1(#sclang_the_statechart_language). The statechart language
 
-This chapter describes the language used to describe statecharts. It consists of graphical and textual elements.
+The statechart language is used to describe statecharts. It consists both of graphical and of textual elements.
 
-h2(#the-statechart-language-basics). State machine basics
 
-h3(#the-statechart-language-basics-wording). Words and Definitions
 
-To prevent any confusion, some definitions:
 
-* A *"finite state machine":https://en.wikipedia.org/wiki/Finite-state_machine* (FSM) is an abstract machine that consists of a finite set of states and its behavior.
-* A *"state diagram":https://en.wikipedia.org/wiki/State_diagram* is one of many possible representations of an FSM. A "state transition table":https://en.wikipedia.org/wiki/State_transition_table would be different way to describe an FSM.
-* A *"statechart":https://en.wikipedia.org/wiki/State_diagram#Harel_statechart* is an extended form of the classic state diagram. However, the basic principles are the same. In this documentation, the term "statechart" usually means the graphical representation of a state machine, while the term "state machine" usually pertains to its dynamic aspects.
+h2(#sclang_state_machine_basics). State machine basics
 
-h3(#the-statechart-language-basics-theory). Automata theory
+h3(#sclang_words_and_definitions). Words and definitions
 
-YAKINDU SCT was designed to create statecharts according to "David Harel's":https://en.wikipedia.org/wiki/David_Harel statechart theory. Harel statecharts have become part of the "Unified Modeling Language":https://en.wikipedia.org/wiki/Unified_Modeling_Language (UML). Harel introduced a couple of extensions to convetional state diagrams, making them more concise and more readable.
+A "*finite-state machine (FSM)*":https://en.wikipedia.org/wiki/Finite-state_machine or *finite-state automaton (FSA, plural: automata)*, *finite automaton*, or simply a *state machine* as a mathematical model of computation. It is an abstract machine that can be in exactly one of a finite number of "states":#sclang_states at any given time. The FSM can change from one state to another in response to some external inputs; the change from one state to another is called a "transition":#sclang_transitions. An FSM is defined by a list of its states, its initial state, and the conditions for each transition.
 
-h4(#classic_state_diagrams). Classic state diagrams
+A *"state diagram":https://en.wikipedia.org/wiki/State_diagram* is one of many possible representations of an FSM. A "state transition table":https://en.wikipedia.org/wiki/State_transition_table would be different way to describe an FSM.
 
-Classic state diagrams describe finite state machines (FSM) and consist of the following things only:
+A *"statechart":https://en.wikipedia.org/wiki/State_diagram#Harel_statechart* or *Harel statechart* is an extended form of the classic state diagram. The basic principles are the same, however. In this documentation, the term _statechart_ usually denotes the _graphical representation_ of an FSM.
+
+The term *state machine* is a short form of _finite-state machine_. In this documentation, the term _state machine_ usually pertains to the _dynamic aspects_ of an FSM, i.e. it is more thought of as being executed, simulated etc. than being depicted.
+
+
+
+h3(#sclang_automata_theory). Automata theory
+
+YAKINDU Statechart Tools was designed to create statecharts according to "David Harel's":https://en.wikipedia.org/wiki/David_Harel statechart theory. Harel statecharts have become part of the "Unified Modeling Language":https://en.wikipedia.org/wiki/Unified_Modeling_Language (UML). Harel introduced a couple of extensions to conventional state diagrams, making them more concise and more readable.
+
+
+h4(#sclang_classic_state_diagrams). Classic state diagrams
+
+Classic state diagrams describe finite-state machines and consist of the following things only:
 
 * A (finite) set of possible states
 * A start state
 * An accepting or final state
-* A set of transitions connecting states
+* A set of transitions, connecting states
 * A set of input symbols
 * A set of output symbols
 * An output function, mapping pairs of input symbols and states to output symbols
 
-These parameters describe a finite state machine completely.
+These parameters describe a finite-state machine completely.
 
-h4(#moore_and_mealy_machines). Moore and Mealy machines
 
-In classic automata theory, two distinct types of finite state machines exist:
+h4(#sclang_moore_and_mealy_machines). Moore and Mealy machines
 
-* The *"Moore machine":https://en.wikipedia.org/wiki/Moore_machine*, where the output of the machine depends on its current state only
+In classic automata theory, two distinct types of finite-state machines exist:
+
+* The *"Moore machine":https://en.wikipedia.org/wiki/Moore_machine*, where the output of the machine depends on its current state only.
 * The *"Mealy machine":https://en.wikipedia.org/wiki/Mealy_machine*, where the output of the machine depends on its current state and its input.
 
 It is possible to transform these types of machine into each other, however, states, transitions and the output function need to be changed to achieve this.
 
-h4(#harel_statecharts). Harel statecharts
+
+h4(#sclang_harel_statecharts). Harel statecharts
 
 Harel statecharts extend the classic state diagrams by a couple of additional aspects, resulting in representations that need much less states and transitions, making them much more compact, expressive, manageable and comprehensible – though not as mathematically concise as Moore or Mealy machines.
 
 Harel added the following notations, dealing with _hierarchy_, _concurrency_, and _communication_:
 
 * _Composite states_ and _regions_, containing nested states or regions.
-* _History states_, allowing to re-enter a composite state or region at the point where they had been left.
+* _History states_, allowing to re-enter a composite state or region at the point where it had been left.
 * _Orthogonal states_, allowing to run state machines concurrently.
 * _Events_, allowing for communication between orthogonal states.
 * _Variables_, allowing to memorize values and reducing the necessary number of states drastically.
 * _Actions_ (output) can not only occur along transitions, but additionally inside of states, especially as entry actions or exit actions.
 * _Activities_ (operations), bridging the gap between a state machine and real-world behavior.
 
-Since Harel statecharts are a superset of Mealy and Moore machines, it is possible to model the latter in YAKINDU Statechart Tools as well.
+Since Harel statecharts are a superset of Mealy and Moore machines, it is possible to model all of these types in YAKINDU Statechart Tools.
 
 ###. FIXME: The subsequent section a) doesn't cover all the differences between the YAKINDU statechart language and the UML and b) contains implementation-specific aspects that are unrelated to the language. For now, let's omit that section and refine it later.
 
-###. h4(#yakindu_statecharts_and_statecharts). YAKINDU statecharts and UML statecharts
+###. h4(#sclang_yakindu_statecharts_and_uml_statecharts). YAKINDU statecharts and UML statecharts
 
 ###. To define the behavior in the statechart, YAKINDU Statechart Tools uses its own statechart language, explained in this chapter.
 
@@ -81,282 +91,352 @@ Since Harel statecharts are a superset of Mealy and Moore machines, it is possib
 
 ###. FIXME: I (Rainer) didn't get the purpose of the following section.
 
-###. h2(#why-statechart-language). Why another language?
+###. h2(#sclang_why-statechart-language). Why another language?
 
-###. Before you get too intrigued by learning yet another language, even one you can't use anywhere outside of YAKINDU SCT, you should know _why_ YAKINDU SCT uses its own domain specific language.
+###. Before you get too intrigued by learning yet another language, even one you can't use anywhere outside of YAKINDU Statechart Tools, you should know _why_ YAKINDU Statechart Tools uses its own domain specific language.
 
 ###. There are other tools out there that allow you to draw state diagrams, add behavior to them and even generate code out of them. Some of these tools are even offering a much wider palette of languages you can generate to. What they do not have is their own language. The text you type in is directly copied to the generated code instead. One might argue that this is pretty good, because you can then use any possible language construct of your target language, which is true. If you ever want to switch to another language, because maybe you need the exact same construct in two parts of a multi-language project, those constructs don not work anymore. Even worse, the tool cannot inform you that your input is invalid, because all it does is pass raw text through to the generated code.
 
-###. With the use of its own language, YAKINDU SCT is able to:
+###. With the use of its own language, YAKINDU Statechart Tools is able to:
 
 ###. * Verify the input (syntax and semantic)
 ###. * Offer refactorings
 ###. * Offer special triggers for reactions, for example timed ones
 ###. * Correctly transform all language statements into the target language
-###. * Simulate the statechart, so the correct behavior can be verified before any line of code is written or generated
+###. * Simulate the statechart, so the correct behavior can be verified before any line of code is written or generated.
 
-###. Also, YAKINDU SCT's language is not complicated at all. If something is not clear, this chapter should be able to help you.
+###. Also, YAKINDU Statechart Tools's language is not complicated at all. If something is not clear, this chapter should be able to help you.
 
 
 
-h2(#statechart_model). Statechart model
 
-A _statechart_ or _statechart model_ consists of several components.
+h2(#sclang_statechart_model). Statechart model
 
-The most important part is the _diagram_, comprising "states":#state and "transitions":#transition. They are organized into zero or more "regions":#region. For hints how to use the statechart editor to modify a statechart, see section "Editing statecharts".
+A *statechart* or *statechart model* consists of several components.
 
-The _definition section_ is a textual statechart model component. It contains definitions of "namespaces":#namespace, "interfaces":#interface-scope, "variables":#variables, events, operations, etc.
+The most important part is the _canvas_, comprising one or more top-level "regions":#sclang_regions. Regions in turn are containing "states":#sclang_states and "transitions":#sclang_transitions. For hints on how to use the statechart editor to modify a statechart, see section "&quot;Editing statecharts&quot;":../user-guide/editing_statecharts.html.
 
-Most objects defined in the definition section have a _type_. For example, a variable could be of the _integer_ type. Another example is the return type of an operation (if any). Events can be typed as well. For details, see "the section about types":#types.
+The _definition section_ is a textual statechart model component. It contains definitions of "namespaces":#sclang_namespaces, "interfaces":#sclang_interface_scopes, "variables":#sclang_variables, "events":#sclang_events, "operations":#sclang_operations, etc.
 
-A type system or _domain_ specifies which types are available. YAKINDU Statechart Tools has a built-in type system.
+Most objects defined in the definition section have a _type_. For example, a variable could be of the _integer_ type. Another example is the type of the return value (if any) of an operation. Events can be typed as well.
+
+A type system or _domain_ specifies which types are available. YAKINDU Statechart Tools has a built-in type system.  Section "&quot;Types&quot;":#sclang_types lists the types that are available in YAKINDU Statechart Tools' standard domain.
 
 ==<div class="pro-feature">==
-YAKINDU Statechart Tools Professional Edition allows for additional domains to be installed and includes and domain for the C programming language.
+
+YAKINDU Statechart Tools Professional Edition allows for additional domains to be installed. It includes domains for the following languages:
+* C
+* TypeScript
+
 ==</div>==
 
 
 
-h2(#graphical-elements). Statechart elements
 
-h3(#region). Region
+h2(#sclang_graphical_elements). Statechart elements
 
-YAKINDU statecharts are organized in regions. Hence it is possible to organize multiple state machines in different regions and to run them virtually concurrently.
+h3(#sclang_regions). Regions
+
+YAKINDU statecharts are organized in *regions*. Hence it is possible to organize multiple state machines in different regions and to run them virtually concurrently.
 
 !images/docu_parallelRegions.jpg(Parallel regions)!
 
 p=. Parallel regions
 
-Regions can contain "states":#state. Regions can be contained in states as well, turning them into "composite states":#composite-state.
+###. FIXME (RK): Clean up statechart, make it nice!
+
+Regions typically contain "states":#sclang_states and "transitions":#sclang_transitions. A state in turn can contain one or more regions, turning it into a "composite state":#sclang_composite_states (contains one region) or a "orthogonal state":#sclang_orthogonal_states (contains two or more regions).
 
 
-h3(#state). State
 
-States are the central elements of a state machine. A state has to be placed inside a "region":#region and must have a name that is unique inside this region. During state machine execution, a state can be active or passive.
+h3(#sclang_states). States
 
-A state can have _behavior_. The behavior specifies which "actions":#reactions are executed. Such actions can be triggered by entering the state, leaving the state, occurrence of events, conditions becoming true, or time passing. The behavior specification is a text inside the state's box and consists of a sequence of so-called "_local reactions_":#reactions. 
+*States* are the central elements of a state machine. A state has to be placed inside a "region":#sclang_regions and must have a name that is unique witin this region. During state machine execution, a state is either _active_ or _passive_.
 
-The state *Countdown* in the following example has three local reactions:
+A state can have _behavior_. The behavior specifies which "actions":#sclang_reactions are executed on which conditions. Such actions can be triggered by entering the state, leaving the state, occurrence of events, conditions becoming true, or time passing. The behavior specification is a text in a state's box and consists of a sequence of "_local reactions_":#sclang_reactions. 
 
-p(#fig_state-example). 
+==<div class="example">==
+
+The state *Countdown* in the sample statechart below has three local reactions:
+
+p(#sclang_fig_state_example). 
 !images/docu_state_010_example_01.png(State example)!
 
 p=. State example: A simple state machine to launch a rocket.
 
-When the *Countdown* state is entered, it sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ provides audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the *Countdown* state will become inactive and launches the rocket upon exiting. The countdown can be aborted anytime before launch by a _cancel_ event. (See figure "&quot;Transition example&quot;":#fig_transition-example for a different state machine which solves the same task but puts more emphasis on transitions.)
+When the *Countdown* state is entered, it sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ provides audible information on how many seconds to go until the rocket is launched. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the *Countdown* state will become inactive and launch the rocket upon exiting. The countdown can be aborted anytime before launch by a _cancel_ event. (See figure "&quot;Transition example&quot;":#sclang_fig_transition_example for a different state machine which solves the same task but puts more emphasis on transitions.)
 
-_Can you find the mistake in the state behavior?_
+_The state's behavior contains a subtle error. Can you spot it?_
+
+==</div>==
 
 
-h3(#transition). Transition
 
-A transition is the transfer of one "state":#state to another. A transition is diagrammed as an arrow leading from a _source state_ to a _target state_.
+h3(#sclang_transitions). Transitions
 
-A transition should have a _transition "reaction":#reactions_. The transition reaction specifies what the conditions are for this transition to be taken and which actions, if any, are to be executed. The occurrence of an event, a condition becoming true, or time passing can trigger a transition. The transition's reaction is attached to the transition's arrow as a text. Its syntax can be found in the section on "reactions":#reactions.
+A transition is the transfer of one "state":#sclang_states to another. A transition is diagrammed as an arrow leading from a _source state_ to a _target state_. When a transition is taken, the source state ceases to be active, and the target state becomes active instead.
 
-*Please note:* Transitions without any reaction are possible, but useless. They will never be taken.
+A transition should have a _"reaction":#sclang_reactions_. A transition's reaction specifies
+* what the conditions for this transition to be taken are, and
+* which actions, if any, are to be executed when the transition is taken.
+
+The occurrence of an event, a condition becoming true, or time passing can trigger a transition. The transition's reaction is attached to the transition's arrow as a text. Its syntax can be found in the section on "reactions":#sclang_reactions.
+
+*Please note:* Transitions without a reaction are possible, but useless. They will never be taken.
+
+==<div class="example">==
 
 Here's an example:
 
-p(#fig_transition-example). 
+p(#sclang_fig_transition_example). 
 !images/docu_transition_030_example_01.png(Transition example)!
 
 p=. Transition example: A simple state machine to launch a rocket.
 
-The initial transition's _effect_ sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, each second it gets counted down by 1. The operation _speak_ – executed as one of a transition's _actions_ – cares for audible information on how many seconds to go until rocket launch. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the rocket is launched. The countdown can be aborted anytime before launch by a _cancel_ event which _triggers_ the appropriate transition to fire. (See figure "&quot;State example&quot;":#fig_state-example for a different state machine which solves the same task but puts more emphasis on states.)
+The initial transition's _effect_ sets the counting variable _t_ to 10. As long as that variable's value is greater than 0, every second it gets counted down by 1. The operation _speak_ – executed as one of a transition's _actions_ – cares for audible information on how many seconds to go until the rocket is launched. If _t_ has been counted down to 0 – checked by a transition's _guard condition_ –, the rocket is launched. The countdown can be aborted anytime before launch by a _cancel_ event which _triggers_ the appropriate transition to fire. (See figure "&quot;State example&quot;":#sclang_fig_state_example for a different state machine which solves the same task, but puts more emphasis on states.)
 
-Figure "&quot;Transition syntax overview&quot;":#fig_transition-syntax-overview shows how the syntax of a transition reaction is defined.
+==</div>==
 
-p(#fig_transition-syntax-overview). 
+Figure "&quot;Transition syntax overview&quot;":#sclang_fig_transition_syntax_overview shows how the syntax of a transition reaction is defined.
+
+p(#sclang_fig_transition_syntax_overview). 
 !images/docu_grammar_030_transition-overview.png(Transition syntax overview)!
 
 p=. Transition syntax overview
 
-h4(#entry-and-exit-points). Entry and exit points
 
-Unlike "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language transitions, transitions in YAKINDU statecharts can denote specific entry or exit points when leaving or entering composite states. This is denoted by the _TransitionProperties_ non-terminal symbol in figure "&quot;Transition syntax overview&quot;":#fig_transition-syntax-overview.
+h4(#sclang_entry_and_exit_points). Entry and exit points
 
-The syntax to connect a transition to a "named entry":#entry is as follows:
+A standard "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language composite state is always entered via its _initial state_. The latter denotes the inner state that is to be activated, unless a history state tells otherwise. Since there can be only a single initial state per region, a standard "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language composite state always starts at the same inner state (history states aside).
 
-<code># ><em>entry-name</em></code>
+Unlike UML composite states, however, composite states in YAKINDU statecharts can additionally denote specific named _entry points_. A transition leading to a composite state can specify the entry point to be used instead of the initial state.
 
-A "named exit":#exit can be used as follows:
+Analogously, a composite state can have named _exit points_. Transitions with that composite state as their source state may specify which exit point to react to, and thus lead to different target states, depending on which of the source composite state's exit points has been taken.
+
+The syntax to connect a transition to an "entry point":#sclang_entry_points with the name _entry-point-1_ of a target composite state is as follows:
+
+<code># ><em>entry-point-1</em></code>
+
+A "named exit point":#sclang_exit_points can be used as follows:
 
 <code># <em>exit-point-1</em>> [ <em>exit-point-2</em>> ]…</code>
 
-It is also possible to have both in one transition specification. The order of exit and entry points is irrelevant. Instead, the position of the @>@ character is decisive:
+It is also possible to specify both entry and exit points in a single transition specification. The order of exit and entry points is irrelevant. Instead, the position of the @>@ character is decisive:
 
-* If the @>@ character is to the _right_ of a name, like in @exit_name>@, that name denotes an _exit_.
-* If the @>@ character is to the _left_ of a name, like in @>entry_name@, that name denotes an _entry_.
+* If the @>@ character is to the _right_ of a name, like in @exit_name>@, that name denotes an _exit point_.
+* If the @>@ character is to the _left_ of a name, like in @>entry_name@, that name denotes an _entry point_.
 
-The sample statechart in figure "&quot;Entries and exits&quot;":#fig_state_entry_exit contains two composite states:
+==<div class="example">==
 
-* The composite state _Process_ models a process with two passes (states) A and B. If both passes succeed, the composite state is left via the _no&#95;problem_ exit node. However, if an error occurs in either A or B the execution flow proceeds to the _problem_ exit point and leaves the composite state there.
-* The composite state _Handle result_ is intended to handle the processing result, be it success or failure. It has two entry points _success_ and _failure_.
+The sample statechart in figure "&quot;Entry and exit points&quot;":#sclang_fig_state_entry_exit contains two composite states:
 
-The question is how to connect the exit points of _Process_ to the corresponding entry points of _Handle result_. This is done by two transitions leading from _Process_ to _Handle result_ and appropriate specifications.
+* The composite state *Process* models a process with two passes (states) *A* and *B*. If both passes succeed, the composite state is left via the _no&#95;problem_ exit point. However, if an error occurs in either *A* or *B*, the execution flow proceeds to the _problem_ exit point and leaves the composite state there.
+* The composite state *Handle result* is intended to handle the processing result, be it success or failure. It has two entry points _success_ and _failure_.
 
-The transition shown on the left specifies @# no_problem> >success@. This means: If the source composite state is left via the _no&#95;problem_ exit point, then enter the target composite state at the _success_ entry point. The specification of the transition on the right is analogous: If the source state is left via the _problem_ exit point, then enter the target state at the _failure_ entry point.
+The question is how to connect the exit points of *Process* to the corresponding entry points of *Handle result*. This is done by two transitions leading from *Process* to *Handle result* and appropriate specifications.
 
-Alternatively, _Process_ could have been modeled with two different error exit states, say _error&#95;1_ and _error&#95;2_. This would allow to respond differently to different error conditions, while still enabling to catch them both with a single flow. A transition with @# >error_1 >error_2 problem>@ would do so.
+The transition shown on the left specifies @# no_problem> >success@. This means: If the source composite state is left via the _no_problem_ exit point, then enter the target composite state at the _success_ entry point. The specification of the transition on the right is analogous: If the source state is left via the _problem_ exit point, then enter the target state at the _failure_ entry point.
 
-p(#fig_state_entry_exit). 
-!images/docu_state_entry_exit.png(Entries and exits)!
+Alternatively, *Process* could have been modeled with two different error exit points, say _error&#95;1_ and _error&#95;2_. This would allow to respond differently to different error conditions, while still enabling to catch them both with a single flow. A transition with @# >error_1 >error_2 problem>@ would do so.
 
-p=. Entries and exits
+p(#sclang_fig_state_entry_exit). 
+!images/docu_state_entry_exit.png(Entry and exit points)!
 
-h4(#transition-priorities). Transition priorities
+p=. Entry and exit points
 
-If a state has several outgoing transitions, based on the events that occured and on guard conditions, several of these transitions could fire at the same time. Here's simple example:
+==</div>==
 
-p(#fig_transition-priorities-1). 
+The entry or exit points to take have to be specified at the right-hand side of a transistion specification. The corresponding syntax element is the _TransitionProperties_ non-terminal symbol that is shown in figure "&quot;Transition syntax overview&quot;":#sclang_fig_transition_syntax_overview. It is part of the _TransitionReaction_.
+
+More on entry and exit points can be found in sections "&quot;Entry point&quot;":#sclang_entry_points and "&quot;Exit point&quot;":#sclang_exit_points.
+
+
+h4(#sclang_transition_priorities). Transition priorities
+
+If a state has several outgoing transitions, several of these transitions could in principle fire at the same time, dependent on the events that occured and on guard conditions.
+
+==<div class="example">==
+
+Consider this example:
+
+p(#sclang_fig_transition-priorities-1). 
 !images/docu_transition_020_priorities_01.png(Transition priorities [1])!
 
 p=. Transition priorities &#91;1]
 
-Which transition will fire when the state machine is in state *A* and event _e1_ occurs? Fortunately YAKINDU state machines behave deterministically, so this question can be answered unambiguously. Outgoing transitions of a state have a definite order and are _prioritized_ by that order. The state machine checks the transitions one by one in their order and executes the first transition that fulfills all prerequisites for firing.
+Which transition will be taken if the state machine is in state *A* and event _e1_ occurs?
 
-As you can see in figure "&quot;Transition priorities &#91;1]&quot;":#fig_transition-priorities-1, little numbers indicate the transition priorities. These numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram Appearance_ is activated. By default, this option is _not_ activated.
+==</div>==
 
-The order of transitions is a property of their source state. In the example above, the transition priorities of state *A* appear like this in the _Properties_ view:
+Fortunately YAKINDU state machines behave deterministically, so this question can be answered unambiguously. Outgoing transitions of a state have a definite order and are _prioritized_ by that order. The state machine checks the transitions one by one in this order and executes the first transition that fulfills all prerequisites for firing.
 
-p(#fig_transition-priorities-2). 
+As you can see in figure "&quot;Transition priorities &#91;1]&quot;":#sclang_fig_transition-priorities-1, little numbers at the transition arrows indicate their priorities. This numbering is shown only if the option _Show transition priority_ in _Window → Preferences → YAKINDU SCT → Diagram Appearance_ has been activated. By default, this option is _not_ activated.
+
+The order of transitions is a property of their source state. In the example above, the transition priorities of state *A* appear like this in the _properties_ view:
+
+p(#sclang_fig_transition-priorities-2). 
 !images/docu_transition_020_priorities_02.png(Transition priorities [2])!
 
 p=. Transition priorities &#91;2]
 
-To change priorities, select a transition in the _Properties_ view and click on the _up_ or _down_ button as appropriate.
+To change priorities, select a transition in the _properties_ view and click on the _up_ or _down_ button as appropriate.
 
 
-h3(#entry). Entry
 
-When a state machine starts or when the control flow enters a "region":#region, an _entry_ defines which "state":#state is to be activated first. The flow passes through the state machine's or the region's entry and transitions to the target state the entry's transition is pointing to. This state becomes active.
+h3(#sclang_entry_points). Entry points
 
-An entry has a single outgoing transition and no incoming ones. Its outgoing transition has neither a trigger nor a guard condition. It is always taken immediately.
+When a state machine starts or when the control flow enters a "region":#sclang_regions, an *entry point*, or simply *entry*, defines which "state":#sclang_states is to be activated first. The flow passes through the state machine's or the region's entry point and transitions to the target state the entry point's transition is pointing to. This state becomes active.
 
-An entry is depicted as a filled circle, see figure "&quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
+An entry point has a single outgoing transition and no incoming ones. Its outgoing transition has neither a trigger nor a guard condition. It is always taken immediately.
 
-p(#fig_state_entry_exit_final_explained). 
-!(large)images/docu_state_entry_exit_final_explained.png(Entry, exit, and final state)!
+An entry point is depicted as a filled circle, see figure "&quot;Entry point, exit point, and final state&quot;":#sclang_fig_state_entry_exit_final_explained.
 
-p=. Entry, exit, and final state
+p(#sclang_fig_state_entry_exit_final_explained). 
+!(large)images/docu_state_entry_exit_final_explained.png(Entry point, exit point, and final state)!
 
-h4(#default-entry-and-initial-state). Default entry and initial state
-
-An entry without a name is called the _default entry_. It is similar to the UML's _initial state_. However, while the transition from the initial state to an ordinary state may specify a guard, the transition sourced at an entry cannot.
-
-A region may have at most one default entry.
-
-h4(#named-entries). Named entries
-
-The "default entry":#default-entry-and-initial-state specifies a single entry point into a region. A region can provide a multitude of additional or alternative entry points, thus implementing different kinds of behavior, depending on which entry point has been taken. If a region comprises multiple entries, these entries must be _named_. An entry's name must be unique within its region.
-
-The default entry implicitly has the name @default@. Alternatively, it is possible to explicitly give the name @default@ to the default entry. Semantically both variants are equivalent. Whether an entry has no name or it has the name @default@: in both cases the entry is called _default entry_.
-
-An incoming transition to a composite state can specify a named entry it shall lead to. For details, see "Entry and Exit points":#entry-and-exit-points.
-
-Named entries have no equivalent in the UML.
-
-The sample statechart in figure "&quot;Entry state&quot;":#fig_state_entry has a composite state named _Handle result_. This composite state has a default entry as well as an entry called _failure_. If state *A* is active and the _error_ trigger fires, control is transitioned to the _Handle result_ composite state. The notation @error # >failure@ specifies that the _failure_ entry is to be used; see "Entry and exit points":#entry-and-exit-points.
-
-p(#fig_state_entry). 
-!images/docu_state_entry.png(Entry state)!
-
-p=. Entry state
+p=. Entry point, exit point, and final state
 
 
-h3(#exit). Exit
+h4(#sclang_default_entry_point_and_initial_state). Default entry point and initial state
 
-An _exit_ is a pseudo state that is used to leave and deactivate a composite state. Exits are counterpart to "entries":#entry. They are also known as exit points, exit states, or exit nodes. See section "&quot;Final state&quot;":#final-state for a different way to terminate a region or state machine.
+An entry point without a name is called the _default entry point_. It is similar to the UML's _initial state_. However, while the transition from the initial state to an ordinary state may specify a guard, the transition sourced at an entry point cannot.
 
-An exit may have multiple incoming transitions and has no outgoing one.
-
-An exit state is depicted as an unfilled circle with an X-shaped cross, see figure "&quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
-
-Within a region, multiple exits are allowed. Each exit must either have a name that is unique within its region or be the _default exit_. The default exit is either unnamed or has the name @default@, which is semantically equivalent. A region may have at most one default exit. For details on how to connect named exits to transitions, see subsection "&quot;Entry and exit points&quot;":#entry-and-exit-points in the section on transitions.
-
-When a composite state reaches an exit in any of its regions, all states in other regions of that composite state, if any, are deactivated immediately. The composite state will be left and be deactivated. It maintains no status information that could be probed from the outside. In other words, reaching an exit in one of a composite state's regions has severe consequences for all the other regions since they are exited and disposed immediately. After that, the containing composite state is also exited. There must be an unguarded transition that catches the exit and leads to another state outside of the composite state. The semantics of exit is different from that of final state; please see section "&quot;Final state&quot;":#final-state for details.
-
-Exits have no equivalent in the UML.
+A region may have at most one default entry point.
 
 
-h3(#final-state). Final state
+h4(#sclang_named_entries). Named entry points
 
-A _final state_ denotes the end of the execution flow of a state machine or region. See section "&quot;Exit&quot;":#exit for a different way to terminate a composite state.
+The "default entry point":#sclang_default_entry_point_and_initial_state specifies a single entry point into a region. A region can provide a multitude of additional or alternative entry points, thus implementing different kinds of behavior, depending on which entry point has been taken. If a region comprises multiple entry points, these entry points must have names. An entry point's name must be unique within its region.
 
-A final state is depicted as an unfilled circle with a smaller filled black circle inside, see figure "&quot;Entry, exit, and final state&quot;":#fig_state_entry_exit_final_explained.
+The default entry point implicitly has the name _default_. Alternatively, it is possible to explicitly give the name _default_ to the default entry point. Semantically both variants are equivalent. Whether an entry point has no name or has the name _default_, in both cases this entry point is called the _default entry point_.
+
+An incoming transition to a composite state can specify the named entry point it shall lead to. For details, see section "&quot;Entry and Exit points&quot;":#sclang_entry_and_exit_points.
+
+Named entry points have no equivalent in the "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language.
+
+==<div class="example">==
+
+The sample statechart in figure "&quot;Entry point&quot;":#sclang_fig_state_entry has a composite state named *Handle result*. This composite state has a default entry point as well as an entry point called _failure_. If state *A* is active and the _error_ trigger fires, control is transitioned to the *Handle result* composite state. The notation @error # >failure@ specifies that the _failure_ entry point is to be used; see section "&quot;Entry and exit points&quot;":#sclang_entry_and_exit_points.
+
+p(#sclang_fig_state_entry). 
+!images/docu_state_entry.png(Entry point)!
+
+p=. Entry point
+
+==</div>==
+
+
+
+h3(#sclang_exit_points). Exit points
+
+An *exit point*, or simply *exit*, is a pseudo state that is used to leave and deactivate a composite state. Exit points are counterpart to "entry point":#sclang_entry_points. See section "&quot;Final state&quot;":#sclang_final_state for a different way to terminate a region or state machine.
+
+An exit point may have multiple incoming transitions and has no outgoing one.
+
+An exit point is depicted as an unfilled circle with an X-shaped cross, see figure "&quot;Entry point, exit point, and final state&quot;":#sclang_fig_state_entry_exit_final_explained.
+
+Within a region, multiple exit points are allowed. Each exit point must either have a name that is unique within its region or be the _default exit point_. The default exit point is either unnamed or has the name _default_, which is semantically equivalent. A region may have at most one default exit point. For details on how to connect named exit points to transitions, see section "&quot;Entry and exit points&quot;":#sclang_entry_and_exit_points.
+
+When the control flow of a composite state reaches an exit point in any of its regions, all states in other regions of that composite state, if any, are deactivated immediately. The composite state will be left and be deactivated. It maintains no status information that could be probed from the outside. In other words, reaching an exit point in one of a composite state's regions has severe consequences for all the other regions, since they are exited and disposed immediately. After that, the containing composite state is also exited. There must be an unguarded transition that catches the exit and leads to another state outside of the composite state. The semantics of an exit point is different from that of a final state; please see section "&quot;Final state&quot;":#sclang_final_state for details.
+
+Named exit points have no equivalent in the "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language.
+
+
+
+h3(#sclang_final_state). Final state
+
+A *final state* denotes the end of the execution flow of a state machine or region. See section "&quot;Exit point&quot;":#sclang_exit_points for a different way to terminate a composite state.
+
+A final state is depicted as an unfilled circle with a smaller filled black circle inside, see figure "&quot;Entry point, exit point, and final state&quot;":#sclang_fig_state_entry_exit_final_explained.
 
 A final state can have multiple incoming transitions and has no outgoing ones.
 
 Within a region, only a single final state is allowed, but each region may have its own final state.
 
-When a region reaches its final state, control stops there and waits until all other orthogonal regions, if any, have reached their respective final states, too. The semantics of final states is different from that of exits; please see section "&quot;Exit&quot;":#exit for details.
+When a region reaches its final state, control stops there and waits until all other orthogonal regions, if any, have reached their respective final states, too. The semantics of final states is different from that of exits; please see section "&quot;Exit point&quot;":#sclang_exit_points for details.
 
-bq.. *Note*
-
-Final states are proper states. This is different from the UML, where a final state is a pseudo state, i.e. in the UML a final state cannot have any properties normal states can have, except for a name.
+bq.. *Please note:* In YAKINDU Statechart Tools, final states are proper states. This is different from the "UML":https://en.wikipedia.org/wiki/Unified_Modeling_Language, where a final state is a pseudo state, i.e. in the UML a final state cannot have any properties that normal states can have, except for a name.
 
 
-h3(#choice). Choice
 
-A choice is a pseudo state. It can be used to model a conditional path. A choice node divides a transition into multiple parts.
+h3(#sclang_choices). Choices
+
+A *choice* is a pseudo state. It can be used to model a conditional path. A choice node divides a transition into multiple parts.
 
 Usually the first transition points towards the choice node. One of the choice's outgoing transitions can carry a condition.
 
 ###. FIXME: An example and more explanation is needed here.
 
 
-h3(#synchronization). Synchronization
 
-Synchronization is a means to either split a flow into several parallel regions of a substate or to join several parallel flows from orthogonal regions into a single flow. The synchronization state corresponds to the UML's concepts of fork and join.
+h3(#sclang_synchronizations). Synchronizations
 
-Whether a synchronization state behaves as a fork or as a join depends on its usage.
+A *synchronization* is a means to either split a flow into several parallel regions of a substate or to join several parallel flows from orthogonal regions into a single flow.
 
-* A synchronization with a single incoming transition and several outgoing ones _forks_ the flow into several regions of the same substate. These regions are executed in parallel, see section "&quot;Orthogonal states&quot;":#orthogonal-states.
+The synchronization state corresponds to the UML's concepts of fork and join. Whether a synchronization state behaves as a fork or as a join depends on its usage.
+
+* A synchronization with a single incoming transition and several outgoing ones _forks_ the flow into several regions of the same substate. These regions are executed in parallel, see section "&quot;Orthogonal states&quot;":#sclang_orthogonal_states.
 * A synchronization with several incoming transitions from parallel regions of the same substate and a single outgoing transition _joins_ the incoming flows into a single flow of execution.
 
-A synchronization state is shown as a thick horizontal or vertical line, as can be seen in figure "&quot;Synchronization state&quot;":#fig_state_synchronization.
+A synchronization state is shown as a thick horizontal or vertical line, as can be seen in figure "&quot;Synchronization state&quot;":#sclang_fig_state_synchronization.
 
-p(#fig_state_synchronization). 
+For a synchronization to actually join the incoming transitions and execute the outgoing one, all of the following conditions must be met:
+
+* All source states of all transitions leading to the synchronization must be active.
+* All guard conditions that are specified in all these transitions must be fulfilled.
+* If one or more triggers are defined, at least one trigger must fire at a point in time while the conditions above are met.
+
+==<div class="example">==
+
+Figure "&quot;Synchronization state&quot;":#sclang_fig_state_synchronization shows a sample statechart containing a forking and a joining synchronization. After having left the *Initialize* state, the synchronization state forks the execution flow into two regions _r1_ and _r2_. Both are part of the *Process* composite state and both are executed virtually concurrently. That is, when activating *Process*, the substates *Line A 1* and *Line B 1* also become active. When the flows continues and both *Line A 2* and *Line B 2* have been reached, the synchronization state on the right-hand side joins the flows and transitions to substates *Cleanup*, making it the active state. However, as long as only one of *Line A 2* and *Line B 2* is active, the synchronization will wait for the other one to also become active, before proceeding to *Cleanup*.
+
+p(#sclang_fig_state_synchronization). 
 
 !images/docu_state_synchronization.png(Synchronization state)!
 
 p=. Synchronization state
 
-For a synchronization to actually join the incoming transitions and execute the outgoing one, all of the following conditions must be met:
-
-* All source states must be active.
-* All guard conditions that are specified must be fulfilled.
-* If one or more triggers are defined, at least one trigger must fire at a point in time while the conditions above are met.
-
-Figure "&quot;Synchronization state&quot;":#fig_state_synchronization shows a sample statechart containing a forking and a joining synchronization. After having left the *Initialize* state, the synchronization state forks the execution flow into two regions _r1_ and _r2_. Both are part of the *Process* composite state and both are executed virtually concurrently. That is, when activating *Process*, the substates *Line A 1* and *Line B 1* also become active. When the flows continues and both *Line A 2* and *Line B 2* have been reached, the synchronization state on the right-hand side joins the flows and transitions to substates *Cleanup*, making it the active state. However, as long as only one of *Line A 2* and *Line B 2* is active, the synchronization will wait for the other one to also become active, before proceeding to *Process*.
-
 The example also demonstrates different lengths and orientations of the synchronization symbol. In the statechart editor, first select the synchronization symbol, then use a handle in one of the symbol's corners to change length or orientation. The handles in the middle of the symbol have no effect.
 
-
-h3(#composite-state). Composite state
-
-A composite state is a "state":#state containing a "region":#region. All usual characteristics of regions apply - they can have entry states, exit states, and so on. "Transitions":#transition can connect inner states of composite states to states that are at the same hierarchical level as the composite state, or they can directly be sourced at the composite states. This is useful for constructs like "cancel", where the operation of a composite state should be able to be aborted every time, no matter the active substate.
-
-See "entry state":#entry, "exit state":#exit, "final state":#final-state and "connecting entries and exits to transitions":#entry-and-exit-points for further information.
+==</div>==
 
 
-h3(#orthogonal-states). Orthogonal states
 
-Orthogonal states are basically "composite states":#composite-state with more than one region. These regions are executed virtually concurrently. *Please note* the word _virtually_! YAKINDU SCT does _not_ guarantee in any way that orthogonal regions are really executed concurrently. At the time being, no code generator utilizes threads to achieve this. Orthogonal states should rather be understood as a manner to have two or more sub-statecharts working together, however, they are executed _one after the other other_ in every cycle, in a defined order: top to bottom, left to right. The same applies to multiple regions in the statechart itself. Consult section "&quot;Raising and processing an event&quot;":#raising-and-processing-an-event for further information on region priorities and their meanings for the statechart execution.
+h3(#sclang_composite_states). Composite states
+
+A *composite state* is a "state":#sclang_states containing a "region":#sclang_regions. All usual characteristics of regions apply - they can have entry points, exit points, and so on. "Transitions":#sclang_transitions can connect inner states of composite states to states that are at the same hierarchical level as the composite state, or they can directly be sourced at the composite states. This is useful for constructs like "cancel", where the operation of a composite state should be able to be aborted every time, no matter the active substate.
+
+See the sections on "entry point":#sclang_entry_points, "exit point":#sclang_exit_points, "final state":#sclang_final_state and "connecting entry points and exit points to transitions":#sclang_entry_and_exit_points for further information and examples.
+
+
+
+h3(#sclang_orthogonal_states). Orthogonal states
+
+An *orthogonal state* is basically a "composite state":#sclang_composite_states with more than one region. These regions are executed virtually concurrently. *Please note* the word _virtually_! YAKINDU Statechart Tools does not guarantee in any way that orthogonal regions are _really_ executed concurrently. At the moment, no code generator utilizes threads to achieve this. Orthogonal states should rather be understood as a manner to have two or more sub-statecharts working together, however, they are executed _one after the other other_ in every cycle, and in a defined order: top to bottom, left to right. The same applies to multiple regions in the statechart itself. Please consult section "&quot;Raising and processing an event&quot;":#sclang_raising_and_processing_an_event for further information on region priorities and their meanings for the statechart execution.
 
 ###. CHECK Are there still no code generators taking advantage of threads and executing regions in parallel?
 
+==<div class="example">==
+
 The presumably most famous example for orthogonal states is the keyboard example:
 
-!images/docu_orthogonalState_example.jpg(Orthogonal states)!
+!images/docu_orthogonalState_example.jpg(Orthogonal state)!
 
 p=. Orthogonal states
 
+==</div>==
 
-h3(#shallow-history). Shallow history
 
-The shallow history state is a pseudo state that is placed inside regions of composite states. It is used to remember the last active state inside a composite state. This makes it possible to jump back to the remembered state instead of starting at the inner initial state again. History states save the current state exactly when their containing region is left.
+
+h3(#sclang_shallow_history_states). Shallow history states
+
+A *shallow history state* is a pseudo state that is placed inside the region of a composite state. It is used to remember the last active state inside a composite state. This makes it possible to jump back to the remembered state instead of starting at the inner initial state again.
+
+A history state saves the current state exactly when its containing region is left. A shallow history state saves the state of the current level only. If you need to save the status of multiple nested composite states, use a "deep history state":#sclang_deep_history_states.
+
+==<div class="example">==
+
+###. FIXME: Re-create this example with nice names and even nicer drawings!
 
 The following example, showing the answering of a questionaire, explains this:
 
@@ -376,49 +456,63 @@ p=. Shallow history &#91;3]
 
 When the _goon_ event is triggered, the most recent active state inside of the composite state *answeringQuestions* is activated again.
 
-
-h3(#deep-history). Deep history
-
-Deep history is similar to shallow history, but more complex. With a deep history the latest state of multiple nested states is remembered.
+==</div>==
 
 
 
-h2(#definition-section). Definition section
+h3(#sclang_deep_history_states). Deep history states
+
+A *deep history state* is similar to a shallow history state, but more complex. With a deep history state, the latest status of multiple nested states is remembered.
+
+A history state saves the current state exactly when its containing region is left. A deep history state saves the status of multiple nested composite states. If saving the state of the current level only is sufficient, consider using a "shallow history state":#sclang_shallow_history_states instead.
+
+
+
+
+h2(#sclang_definition_section). Definition section
 
 ###. FIXME: This is very "dry" stuff! Examples are needed!
 
 ###. FIXME: Relation between definition section and the concept of code generation should be explained, since the statechart model is intrinsically independend of code generation. We should discuss whether to mention code generation at all here.
 
-The _definition section_ is a text area. Per default, it is located to the left of the drawing area. You can move or resize it like other elements in the drawing area.
+The *definition section* is a text area. Per default, it is located to the left of the "canvas":../user-guide/editing_statecharts.html#edit_canvas. You can move or resize it like other elements on the canvas.
 
-In the definition section you have to define entities you want to use in your statechart. This includes "variables":#variables, "events":#events, and "operations":#operations. Variables and events have to be defined in the scope of a named "interface":#interface-scope or an "internal interface":#internal-scope. Especially useful for larger parts of a statechart model is the possibility to use "namespaces":#namespace. All these elements are properly reflected in generated source code as much as the respective target language supports it.
+In the definition section, you have to define entities you want to use in your statechart. This includes "variables":#sclang_variables, "events":#sclang_events, and "operations":#sclang_operations. Variables and events have to be defined in the scope of a "named interface":#sclang_interface_scopes or the "internal interface":#sclang_internal_scope. Especially useful for larger parts of a statechart model is the possibility to use "namespaces":#sclang_namespaces.
+
+When it comes to "code generation":../user-guide/generating_code.html all these elements are properly reflected in the generated source code as far as the respective target language supports it.
+
+###. FIXME (RK): Example needed!
 
 
-h3(#scopes). Scopes
+
+h3(#sclang_scopes). Scopes
 
 ==<!-- Start stext_keyword_namespace -->==
 
-h4(#namespace). Namespace
+h4(#sclang_namespaces). Namespaces
 
-The statechart language allows to define unique namespaces. They can be used to qualify references to statechart elements.
+The statechart language allows to define unique *namespaces*. They can be used to qualify references to statechart elements.
 
 bc. namespace trafficlights
 
+###. FIXME (RK): Example needed!
+
 ==<!-- End stext_keyword_namespace -->==
+
 
 ==<!-- Start stext_keyword_interface -->==
 
-h4(#interface-scope). Interface scope
+h4(#sclang_interface_scopes). Interface scopes
 
-Declarations in the interface scope are externally visible. They can be shared within the environment.
+Declarations in the *interface scope* are externally visible. They can be shared within the environment, e.g. client code that uses the state machine.
 
 bc. 
 interface NamedInterface:
   in event event1
   out event event3 : integer
   var variable1 : integer
-  
-Note: All elements defined in a named interface _must_ be referenced using that interface's name, such as @NamedInterface.event1@, @NamedInterface.event3@, or @NamedInterface.variable1@.
+
+bq. *Please note:* All elements defined in a named interface _must_ be referenced using that interface's name, such as _NamedInterface.event1_, _NamedInterface.event3_, or _NamedInterface.variable1_.
 
 It is also possible to have a single unnamed interface, which is externally visible as well:
 
@@ -426,15 +520,16 @@ bc.
 interface:
   in event event1
 
-It behaves exactly the same as a named interface.
+It behaves exactly as a named interface.
 
 ==<!-- End stext_keyword_interface -->==
 
+
 ==<!-- Start stext_keyword_internal -->==
 
-h4(#internal-scope). Internal scope
+h4(#sclang_internal_scope). Internal scope
 
-Definitions made in the internal scope are visible to the statechart only. It is not possible to access them from client code.
+Definitions made in the *internal scope* are visible within the statechart only, but not to the outside. It is not possible to access them from client code.
 
 bc. internal:
   var localVariable1: integer
@@ -446,15 +541,16 @@ bc. internal:
 ==<!-- End stext_keyword_internal -->==
 
 
-h3(#variables). Variables
 
-Variables have to be defined in an "internal":#internal-scope or "external":#interface-scope interface. Variables in the internal scope are not visible to any client code outside of generated state machine code.
+h3(#sclang_variables). Variables
+
+*Variables* have to be defined in an "internal":#sclang_internal_scope or "external":#sclang_interface_scopes interface. Variables in the internal scope are not visible to any client code.
 
 bc. var variable1: real
 
-Variables that are defined in a named interface have to be referenced using the interface name, see section "&quot;Interfaces&quot;":#interface-scope.
+Variables that are defined in a named interface have to be referenced using the interface name, see section "&quot;Interfaces&quot;":#sclang_interface_scopes.
 
-Variables are always typed, see section "&quot;Types&quot;":#types.
+Variables are always typed, see section "&quot;Types&quot;":#sclang_types.
 
 Variables can be _readonly_ (constants):
 
@@ -467,47 +563,54 @@ bc. var external variable3: integer = 34
 ==<!-- End stext_keyword_var -->==
 
 
+
 ==<!-- Start stext_keyword_const -->==
 
-h3(#constants). Constants
+h3(#sclang_constants). Constants
 
-Variables can be immutable. For this special variable the keyword @const@ is used:
+A variable can be immutable, i.e. *constant*. For this special variable the keyword @const@ is used:
 
 bc. const variable1: real
 
 ==<!-- End stext_keyword_const -->==
 
 
+
 ==<!-- Start stext_keyword_event -->==
 
-h3(#events). Events
+h3(#sclang_events). Events
 
-An _event_ is something of importance that happens at a certain point in time in the context of a state machine, for example a user pushes a button, a temperature sensor delivers a value, a period of time has passed, etc. An event can be of three basic types:
+An *event* is something of importance that happens at a certain point in time in the context of a state machine. For example, a user pushes a button, a temperature sensor delivers a value, a period of time has passed, etc. An event can be of one of three basic types:
 
-* Internal events are meant to be raised and processed by the state machine internally only.
-* External events are defined in an "interface scope":#interface-scope and can be _incoming_ or _outgoing_. An external event is either raised by the environment and processed by the state machine or it is raised within the state machine and can be processed outside.
+* *Internal events* are meant to be raised and processed by the state machine internally only.
+* *External events* are defined in an "interface scope":#sclang_interface_scopes and are either *incoming* or *outgoing*.
 
-Events that are defined in a named interface need to be referenced using the interface's name, see section "&quot;Interfaces&quot;":#interface-scope.
+Events that are defined in a named interface need to be referenced using the interface's name, see section "&quot;Interfaces&quot;":#sclang_interface_scopes.
 
-Events can be processed in triggers, see section "&quot;Trigger specification&quot;":#event-specifications. In order to raise an event in the state machine, see section "&quot;Raising an event&quot;":#raising-an-event. For details on the processing of events see section "&quot;Raising and processing an event&quot;":#raising-and-processing-an-event.
+Events can be processed in triggers, see section "&quot;Trigger specification&quot;":#sclang_trigger_specifications. In order to raise an event in the state machine, see section "&quot;Raising an event&quot;":#sclang_raising_an_event. For details on the processing of events see section "&quot;Raising and processing an event&quot;":#sclang_raising_and_processing_an_event.
 
-h4(#incoming-and-outgoing-events). Incoming and outgoing events
+
+h4(#sclang_incoming_and_outgoing_events). Incoming and outgoing events
 
 An event in an interface scope has a _direction_. It is either incoming or outgoing.
+* An *incoming event* is raised somewhere in the environment, delivered to the state machine, and processed by the latter.
+* An *outgoing event* is raised within the state machine and delivered to the outside.
+
+In an event declaration, the corresponding keywords are @in@ and @out@, followed by the keyword @event@, followed by the event's name.
 
 bc. 
 interface NamedInterface:
   in event event1
   out event event2
   
-Events in the internal scope do not have a direction, because they do not leave the state machine.
+Events in the internal scope do neither enter nor leave the state machine, thus they don't have a direction.
 
 bc. 
 internal:
   event ev1
 
 
-h4(#events-with-variables). Events with variables
+h4(#sclang_events_with_variables). Events with values
 
 An event can be typed and can carry a value:
 
@@ -515,24 +618,31 @@ bc.
 internal:
   event event1 : integer
 
-
 An event can have a value assignment:
 
 bc. 
 internal:
   event event1: integer = 25
 
+Read access to an event's value is possible in the statechart using the _valueof()_ built-in method, see section "&quot;Built-in methods&quot;":#sclang_built-in-functions for details.
 
-Read access to the value of an event is possible in the statechart using the @valueof()@ built-in method, see section "&quot;Built-in methods&quot;":#built-in-functions for details. Please note that reading an event's value is possible only when the event actually occurs, for example in a guard:
+bq. *Please note:* Reading an event's value is possible only when the event actually occurs, for example in a guard condition.
+
+###. FIXME (RK): Read access to an event's value is possible "for example in a guard condition" – where else?
+
+==<div class="example">==
+
+Example (reading an event's value in a transition's guard condition):
 
 bc. event1 [valueof(event1) == 6]
 
+==</div>==
 
 An event parameter can be specified when raising an event, as in the following example:
 
 bc. raise event1 : 3+3
 
-Regarding the syntax of event raising, see section "&quot;Raising an event&quot;":#raising-an-event. Regarding the more complicated details of processing an event, see section "&quot;Raising and processing an event&quot;":#raising-and-processing-an-event.
+Regarding the syntax of raising an event, see section "&quot;Raising an event&quot;":#sclang_raising_an_event. Regarding the more complicated details of processing an event, see section "&quot;Raising and processing an event&quot;":#sclang_raising_and_processing_an_event.
 
 ==<!-- End stext_keyword_event -->==
 
@@ -540,15 +650,25 @@ Regarding the syntax of event raising, see section "&quot;Raising an event&quot;
 
 ==<!-- Start stext_keyword_operation -->==
 
-h3(#operations). Operations
+h3(#sclang_operations). Operations
 
-An operation makes external behaviour defined as a function or method of a programming language accessible to a state machine. It is mapped to a suitable construct in a target language, see section "Generating state machine code":../user-guide/generating_code.html.
+An *operation* connects a state machine to the outside world by making external behaviour accessible to the state machine.
 
-Operations can have none, one or multiple parameters. A parameter is declared with a name and a type. An operation may have a single or no return type similar to usual programming languages. Please see section "&quot;Types&quot;":#types for details.
+A state machine typically interacts with the outside world, in order, for example, to read data from a sensor, engage an actuator, etc. The client software has to provide such behaviour as functions or methods in a programming language the state machine can interact with. An operation is the statechart language's means to call such an external procedure from the state machine.
+
+==<div class="example">==
+
+Consider, for example, a C function @float read_sensor()@ that should be called by the state machine. To interface with that function, an operation _read_sensor_ must first be defined in the state machine, and can then be called from e.g. a state or transition. At execution time, a call to the _read_sensor_ operation is mapped to an actual call of the external C function with the same name. To make this work, the statechart must have been generated as source code of the respective target language, of course.
+
+==</div>==
+
+It is the purpose of a code generator to create a suitable construct in the respective target language for the procedure call. For details on code generation, please see section "&quot;Generating state machine code&quot;":../user-guide/generating_code.html.
+
+Operations can have none, one or multiple parameters. A parameter is declared with a name and a type. An operation may have a single or no return type similar to usual programming languages. Please see section "&quot;Types&quot;":#sclang_types for details.
 
 bc. operation myOperation (xValue: integer, yValue: integer): integer
 
-Operations with a variable number of parameters are supported, too. To be more exact, it is possible to specify an operation's last parameter as being allowed to occur an arbitrary number of times. This is usually called "varargs", short for "variable number of arguments". Compared to a "regular" operation parameter declaration, the varargs parameter name is followed by three dots (@...@) to indicate it may occur zero or more times.
+Operations with a variable number of parameters are supported, too. To be more exact, it is possible to specify an operation's last parameter as being allowed to occur an arbitrary number of times. This feature is usually called "varargs", short for "variable number of arguments". Compared to a "regular" operation parameter declaration, the varargs parameter name is followed by three dots (@...@) to indicate it may occur zero or more times.
 
 For example, an operation _sum_ adding a variable number of summands and returning their sum could be defined as follows:
 
@@ -560,16 +680,16 @@ Sample calls of this operation are @sum(1, 42)@, @sum(2, 4711, 815)@, @sum(7, 55
 
 
 
-h3(#statechart_language_annotations). Annotations
+h3(#sclang_annotations). Annotations
 
 Annotations are metadata that you can add to the definition section of your statechart. They provide a means to control specific aspects of the execution semantics.
 
 
 ==<!-- Start stext_keyword_cyclebased -->==
 
-h4(#statechart_language_cyclebased). @CycleBased
+h4(#sclang_cyclebased). @CycleBased
 
-The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/generating_code.html#generating_code_execution_schemes is to be used.
+The <code>@CycleBased</code> annotation specifies that the "_cycle-based execution scheme_":../user-guide/generating_code#codegen_execution_schemes is to be used.
 
 Synopsis: <code>@CycleBased(</code>_period_<code>)</code>
 
@@ -595,9 +715,9 @@ p.
 
 ==<!-- Start stext_keyword_eventdriven -->==
 
-h4(#statechart_language_eventdriven). @EventDriven
+h4(#sclang_eventdriven). @EventDriven
 
-The <code>@EventDriven</code> annotation specifies that the "_event-driven execution scheme_":../user-guide/generating_code.html#generating_code_execution_schemes is to be used.
+The <code>@EventDriven</code> annotation specifies that the "_event-driven execution scheme_":../user-guide/generating_code.html#codegen_execution_schemes is to be used.
 
 Synopsis: <code>@EventDriven</code>
 
@@ -621,13 +741,13 @@ p.
 
 ==<!-- Start stext_keyword_childfirstexecution -->==
 
-h4(#statechart_language_childfirstexecution). @ChildFirstExecution
+h4(#sclang_childfirstexecution). @ChildFirstExecution
 
 The <code>@ChildFirstExecution</code> annotation specifies that the state machine should always first execute the substates ("children") of an active composite state, before executing the composite state ("parent") itself. Should the execution of a substate trigger a transition leading away from the composite state, the latter and any remaining not-yet-executed substates will not be executed, except for any _exit_ actions.
 
 Synopsis: <code>@ChildFirstExecution</code>
 
-Please note that "<code>@ParentFirstExecution</code>":#statechart_language_parentfirstexecution specifies the opposite behaviour. Both <code>@ChildFirstExecution</code> and <code>@ParentFirstExecution</code> are global settings for _all_ composite states.
+Please note that "<code>@ParentFirstExecution</code>":#sclang_parentfirstexecution specifies the opposite behaviour. Both <code>@ChildFirstExecution</code> and <code>@ParentFirstExecution</code> are global settings for _all_ composite states.
 
 If the definition section contains neither the <code>@ParentFirstExecution</code> nor the <code>@ChildFirstExecution</code> annotation, the state machine will behave as if <code>@ParentFirstExecution</code> would have been coded.
 
@@ -676,79 +796,86 @@ p=. Parent-first, example 1b, after transition
 
 ==<!-- Start stext_keyword_parentfirstexecution -->==
 
-h4(#statechart_language_parentfirstexecution). @ParentFirstExecution
+h4(#sclang_parentfirstexecution). @ParentFirstExecution
 
 The <code>@ParentFirstExecution</code> annotation specifies that the state machine should always first execute an active composite state ("parent") itself, before executing its substates ("children"). Should the execution of the composite state trigger a transition leading away from the parent, its substates will not be executed, except for any _exit_ actions.
 
 Synopsis: <code>@ParentFirstExecution</code>
 
-Please note that "<code>@ChildFirstExecution</code>":#statechart_language_childfirstexecution specifies the opposite behaviour. Both <code>@ChildFirstExecution</code> and <code>@ParentFirstExecution</code> are global settings for _all_ composite states.
+Please note that "<code>@ChildFirstExecution</code>":#sclang_childfirstexecution specifies the opposite behaviour. Both <code>@ChildFirstExecution</code> and <code>@ParentFirstExecution</code> are global settings for _all_ composite states.
 
 If the definition section contains neither the <code>@ParentFirstExecution</code> nor the <code>@ChildFirstExecution</code> annotation, the state machine will behave as if <code>@ParentFirstExecution</code> would have been coded.
 
-Please see section "&quot;@ChildFirstExecution&quot;":#statechart_language_childfirstexecution for examples.
+Please see section "&quot;@ChildFirstExecution&quot;":#sclang_childfirstexecution for examples.
 
 ==<!-- End stext_keyword_parentfirstexecution -->==
 
 
 
 
-h2(#reactions). Reactions
+h2(#sclang_reactions). Reactions
 
-Reactions are one of the most important features of YAKINDU SCT's statechart language. Basically everything that happens in a statechart happens in a reaction.
+*Reactions* are one of the most important features of the YAKINDU statechart language. Basically everything that happens in a statechart happens in a reaction.
 
-Reactions can be attached to states as well as transitions. While states can have as many reactions as you wish, transitions can only have one.
+###. FIXME (RK): Insert grammar diagram
 
-The syntax follows the standards of automata theory, where the output is put into relation to the input of the automaton using the following notation (especially Mealy automata):  @input / output@
+Reactions can be attached to states as well as to transitions. While states can have as many reactions as you wish, transitions can only have one.
 
-YAKINDU SCT uses the following syntax for all reactions:
+The syntax follows the standards of automata theory, where the output is put into relation to the input of the automaton using the following notation (especially Mealy automata):
 
-bc. Trigger [Guard] / Effect
+_input_ @/@ _output_
 
-The possible values for the trigger depend on the context, either a state or a transition.
+YAKINDU Statechart Tools uses the following syntax for all reactions:
+
+_trigger_ @[@ _guard_ @] /@ _effect_
+
+###. FIXME (RK): Insert grammar diagram
+
+The possible values that can be specified as a _trigger_ depend on the context, which is either a state or a transition.
 
 All three components are grammatically optional, though a reaction with neither a trigger nor a guard will never happen. Reactions with no effect are useful for transitions, the slash @/@ can be omitted as well then.
 
-h3(#event-specifications). Trigger specifications
 
-Reactions can define a _trigger_ that needs to happen to activate the reaction. "Events":#events are possible triggers, as well as certain keywords defined in the statechart language.
 
-Triggers can be combined with "_guards_":#guard-condition to further define the execution conditions of the reaction. In that case, the reaction is only executed when both the trigger fires and the guard is true.
+h3(#sclang_trigger_specifications). Trigger specifications
 
-You can define multiple triggers for the reaction: @trigger1, trigger2@. When at least one of them occurs, the reaction's trigger fires.
+Reactions can define a *trigger* that needs to occur to activate the reaction. "Events":#sclang_events are possible triggers, as well as certain keywords defined in the statechart language.
 
-The special triggers defined by the statechart language are the following:
-* "@after@: execute after given time":#reaction-trigger-after 
-* "@every@: execute periodically after given time":#reaction-trigger-every
-* "@always@: execute always":#reaction-trigger-always
-* "@oncycle@: same as @always@":#reaction-trigger-oncycle
-* "@else@: useful for choice states":#reaction-trigger-else
-* "@default@: same as @else@":#reaction-trigger-default
-* "@entry@: execute on state entry":#reaction-trigger-entry
-* "@exit@: execute on state exit":#reaction-trigger-exit
+Triggers can be combined with "_guards_":#sclang_guard_conditions to further define the execution conditions of the reaction. In that case, the reaction is only executed if both the trigger occurs and the guard condition is true.
+
+You can define multiple triggers for a reaction, separated by comma: @trigger1, trigger2@. For the combined trigger to fire, it is sufficient that one of the individual triggers occurs.
+
+There are a couple of special triggers defined by the statechart language:
+* "@after@: execute after a given time":#sclang_reaction_trigger_after 
+* "@every@: execute periodically after a given time":#sclang_reaction_trigger_every
+* "@always@: execute always":#sclang_reaction_trigger_always
+* "@oncycle@: same as @always@":#sclang_reaction_trigger_oncycle
+* "@else@: useful for choice states":#sclang_reaction_trigger_else
+* "@default@: same as @else@":#sclang_reaction_trigger_default
+* "@entry@: execute upon entering the state":#sclang_reaction_trigger_entry
+* "@exit@: execute upon exiting the state":#sclang_reaction_trigger_exit
 
 Examples:
 
-* A reaction shall occur when an event named @ev1@ happens: @ev1 / effect@
-* A reaction shall occur when @ev1@ or @ev2@ happen: @ev1, ev2 / effect@
-* A reaction shall occur when @ev1@ happened or three seconds passed: @ev1, after 3s / effect@
+* A reaction shall occur if an event named _ev1_ happens: @ev1 / effect@
+* A reaction shall occur if _ev1_ or _ev2_ happen: @ev1, ev2 / effect@
+* A reaction shall occur if _ev1_ happened or three seconds passed: @ev1, after 3s / effect@
 
-p. 
+Figure "&quot;Event specifications syntax overview&quot;":#sclang_fig_transition_syntax_overview shows where to put event specifications in a reaction trigger and how their syntax is defined.
 
-Figure "&quot;Event specifications syntax overview&quot;":#fig_transition-syntax-overview shows where to put event specifications in a reaction trigger and how their syntax is defined.
-
-p(#fig_event-specifications-syntax-overview). 
+p(#sclang_fig_event-specifications-syntax-overview). 
 !images/docu_grammar_030_event-specification-overview.png(Event specifications syntax overview)!
 
 p=. Event specifications syntax overview
 
+
 ==<!-- Start stext_keyword_after -->==
 
-h4(#reaction-trigger-after). Reaction trigger "after"
+h4(#sclang_reaction_trigger_after). Reaction trigger "after"
 
-The _after_ trigger specifies a one-shot time event.
+The *after* trigger specifies a one-shot time event.
 
-After the specified time the reaction is triggered. An _after_ trigger can be used in transitions of states as well as in local reactions of states and statecharts. The specified time starts when the state or statechart is entered.
+After the specified period of time the reaction is triggered. An _after_ trigger can be used in transitions of states as well as in local reactions of states and statecharts. The specified period of time starts when the state or statechart is entered.
 
 bc. after 20 s
 
@@ -765,11 +892,13 @@ The time _unit_ is one of:
 * ==<!-- Start stext_keyword_ns -->==@ns@: nanoseconds ==<!-- End stext_keyword_ns -->==
 
 ==<!-- End stext_keyword_after -->==
+
+
 ==<!-- Start stext_keyword_every -->==
 
-h4(#reaction-trigger-every). Reaction trigger "every"
+h4(#sclang_reaction_trigger_every). Reaction trigger "every"
 
-The _every_ trigger specifies periodic time events.
+The *every* trigger specifies periodic time events.
 
 The reaction is triggered recurrently after each passing of the specified period of time. An _every_ trigger can be used in transitions as well as in local reactions of states and statecharts. The specified period of time starts when the state or statechart is entered and repeats periodically.
 
@@ -788,111 +917,134 @@ The time _unit_ is one of:
 * @ns@: nanoseconds
 
 ==<!-- End stext_keyword_every -->==
+
+
 ==<!-- Start stext_keyword_always -->==
 
-h4(#reaction-trigger-always). Reaction trigger "always"
+h4(#sclang_reaction_trigger_always). Reaction trigger "always"
 
-This trigger is always true and enables a reaction to be executed in every run-to-completion step (RTC). The _always_ trigger is equivalent to the _oncycle_ trigger.
+The *always* trigger is always true and enables a reaction to be executed in every run-to-completion step (RTC). This trigger is equivalent to the _oncycle_ trigger.
 
 ==<!-- End stext_keyword_always -->==
+
+
 ==<!-- Start stext_keyword_oncycle -->==
 
-h4(#reaction-trigger-oncycle). Reaction trigger "oncycle"
+h4(#sclang_reaction_trigger_oncycle). Reaction trigger "oncycle"
 
-This trigger is always true and enables a reaction to be executed in every run-to-completion step (RTC). The _always_ trigger is equivalent to the _oncycle_ trigger.
+The *oncycle* trigger is always true and enables a reaction to be executed in every run-to-completion step (RTC). This trigger is equivalent to the _always_ trigger.
 
 ==<!-- End stext_keyword_oncycle -->==
+
+
 ==<!-- Start stext_keyword_else -->==
 
-h4(#reaction-trigger-else). Reaction trigger "else"
+h4(#sclang_reaction_trigger_else). Reaction trigger "else"
 
-This trigger is intended to be used for the outgoing transitions of _choice_ pseudo states to make sure that there is always an outgoing transition that can be taken. It can only be be used in transitions and implies the lowest evaluation priority for that transition. The _default_ trigger is equivalent to the _else_ trigger.
+The *else* trigger is intended to be used for the outgoing transitions of _choice_ pseudo states to make sure that there is always an outgoing transition that can be taken. It can only be be used in transitions and implies the lowest evaluation priority for that transition. The _default_ trigger is equivalent to the _else_ trigger.
 
 ==<!-- End stext_keyword_else -->==
+
+
 ==<!-- Start stext_keyword_default -->==
 
-h4(#reaction-trigger-default). Reaction trigger "default"
+h4(#sclang_reaction_trigger_default). Reaction trigger "default"
 
-This trigger is intended to be used for the outgoing transitions of _choice_ pseudo states to make sure that there is always an outgoing transition that can be taken. It can only be be used in transitions and implies the lowest evaluation priority for that transition. The _default_ trigger is equivalent to the _else_ trigger.
+The *default* trigger is intended to be used for the outgoing transitions of _choice_ pseudo states to make sure that there is always an outgoing transition that can be taken. It can only be be used in transitions and implies the lowest evaluation priority for that transition. The _default_ trigger is equivalent to the _else_ trigger.
 
 ==<!-- End stext_keyword_default -->==
+
+
 ==<!-- Start stext_keyword_entry -->==
 
-h4(#reaction-trigger-entry). Reaction trigger "entry"
+h4(#sclang_reaction_trigger_entry). Reaction trigger "entry"
 
-An _entry_ trigger marks actions that are carried out when entering a state or state machine, immediately _before_ making it active.
+An *entry* trigger marks actions that are carried out when entering a state or state machine, immediately _before_ making it active.
 
-bq. *Please note:* A self-transition, leading from a state back to itself, actually first leaves and then re-enters the state. That means that its @exit@ effects as well as its @entry@ effects are executed. This is in contrast to a local reaction, which is executed without leaving the active state. Thus @exit@ and @entry@ effects are _not_ executed in the latter case.
+bq. *Please note:* A self-transition, leading from a state back to itself, actually first leaves and then re-enters the state. That means that its _exit_ effects as well as its _entry_ effects are executed. This is in contrast to a local reaction, which is executed without leaving the active state. Thus _exit_ and _entry_ effects are not executed in the latter case.
 
 ==<!-- End stext_keyword_entry -->==
+
+
 ==<!-- Start stext_keyword_exit -->==
 
-h4(#reaction-trigger-exit). Reaction trigger "exit"
+h4(#sclang_reaction_trigger_exit). Reaction trigger "exit"
 
 An _exit_ trigger marks actions that are carried out when exiting a state or state machine, immediately _after_ making it inactive.
 
-bq. *Please note:* A self-transition, leading from a state back to itself, actually first leaves and then re-enters the state. That means that its @exit@ effects as well as its @entry@ effects are executed. This is in contrast to a local reaction, which is executed without leaving the active state. Thus @exit@ and @entry@ effects are _not_ executed in the latter case.
+bq. *Please note:* A self-transition, leading from a state back to itself, actually first leaves and then re-enters the state. That means that its _exit_ effects as well as its _entry_ effects are executed. This is in contrast to a local reaction, which is executed without leaving the active state. Thus _exit_ and _entry_ effects are not executed in the latter case.
 
 ==<!-- End stext_keyword_exit -->==
 
-h3(#guard-condition). Guard condition
 
-A _guard_ is another option to specify when a reaction should be executed. They can be used on their own or in conjunction with a specified "_trigger_":#event-specifications. In the latter case, the trigger needs to be fired _and_ the guard needs to be true for the reaction to fire its effect.
+
+h3(#sclang_guard_conditions). Guard conditions
+
+A *guard condition*, or simply *guard*, is another option that can be used to specify when a reaction should be executed. Guard conditions can be used on their own or in conjunction with a specified "_trigger_":#sclang_trigger_specifications. In the latter case, the trigger needs to be fired _and_ the guard needs to be true for the reaction to fire its effect.
 
 As a reminder, the complete reaction syntax is as follows:
 
-bc. 
-Trigger [Guard] / Effect
+_trigger_ @[@ _guard_ @] /@ _effect_
 
-In the square brackets you can use any "expression":#expressions that evaluates to a boolean - boolean variables, all kinds of comparisons and operations returning a boolean fall into this category. Please note: YAKINDU SCT does not support the concept of "truthy and falsey" seen in C, Javascript or Python. 
-@[x]@ is not a valid guard condition unless the type of x is boolean.
+In the square brackets you can use any "expression":#sclang_expressions that evaluates to a boolean. Boolean variables, all kinds of comparisons, and operations returning a boolean fall into this category.
 
-Please consult figure "&quot;Guard condition syntax overview&quot;":#fig_guard-condition-syntax-overview to find out how a guard condition syntactically fits into a reaction.
+bq. *Please note:* YAKINDU Statechart Tools does not support the concept of "truthy and falsey" seen in C, Javascript or Python. @[x]@ is not a valid guard condition, unless the type of _x_ is boolean.
 
-p(#fig_guard-condition-syntax-overview). 
+Please consult figure "&quot;Guard condition syntax overview&quot;":#sclang_fig_guard-condition-syntax-overview to find out how a guard condition syntactically fits into a reaction.
+
+p(#sclang_fig_guard-condition-syntax-overview). 
 !images/docu_grammar_030_guard-condition-overview.png(Guard condition syntax overview)!
 
 p=. Guard condition syntax overview
 
-h3(#reaction-effect). Reaction effect
 
-A transition specification may contain zero, one or more _actions_ that are executed when the transition fires, like assigning a value to a variable, calling an operation, or raising an event. All actions taken together are called the transition's _reaction effect_. The complete syntax for reactions is as follows:
 
-bc. 
-Trigger [Guard] / Effect
+h3(#sclang_actions_and_reaction_effects). Actions and reaction effects
 
-This means that the effect will only be executed when the trigger fires or does not exist _and_ the guard condition evaluates to true or does not exist _and_ at least a trigger or a guard exist. See the sections about "triggers":#event-specifications and "guard conditions":#guard-condition.
+A transition specification may contain zero, one or more *actions* that are executed when the transition is taken. An action could be something like assigning a value to a variable, calling an operation, or raising an event. All actions taken together are called the transition's *reaction effect*, or simply *effect*. The complete syntax for reactions is as follows:
 
-Normally, actions are "statements":#statements. Note that you can also use the "conditional expression":#conditional-expression to make some constructs more elegant.
+_trigger_ @[@ _guard_ @] /@ _effect_
 
-If an effect shall consist of multiple actions, they need to be _separated_ by a semicolon @;@. That means the last action is _not_ followed by a semicolon: @Trigger [Guard] / action1; action2; action3@
+###. FIXME: Explain the "transition properties", i.e. refer to the section on entry and exit points!
+
+This means that the effect will only be executed if the trigger fires or does not exist _and_ the guard condition evaluates to true or does not exist _and_ at least a trigger or a guard exist. See the sections about "triggers":#sclang_trigger_specifications and "guard conditions":#sclang_guard_conditions.
+
+Normally, actions are "statements":#sclang_statements. Note that you can also use the "conditional expression":#sclang_conditional_expression to make some constructs more elegant.
+
+If an effect shall consist of multiple actions, they must be separated by a semicolon. That means the last action is _not_ followed by a semicolon. The syntax is:
+
+_trigger_ @[@ _guard_ @] /@ _action1_@;@ _action2_@;@ _action3_@;@ 
 
 A reaction in a state always has a _reaction effect_ with at least one action.
 
-Figure "&quot;Reaction effect syntax&quot;":#fig_reaction-effect-syntax shows the syntax definition.
+Figure "&quot;Reaction effect syntax&quot;":#sclang_fig_reaction-effect-syntax shows the syntax definition.
 
-p(#fig_reaction-effect-syntax). 
+p(#sclang_fig_reaction-effect-syntax). 
 !images/docu_grammar_030_reaction-effect.png(Reaction effect syntax)!
 
 p=. Reaction effect syntax
 
+==<div class="example">==
+
 Example: When a transition or local reaction specified as @ev1 [x > 3] / x += 1; notify(x); raise ev2@ is executed, it increments variable _x_ by 1, calls the _notify_ operation with _x_ as parameter, and raises event _ev2_.
 
+==</div>==
 
-h4(#raising-and-processing-an-event). Raising and processing an event
 
-For the syntax of event raising, see section "&quot;Raising an event&quot;":#raising-an-event.
-For the syntax of event declaration, see section "&quot;Events&quot;":#events.
+h4(#sclang_raising_and_processing_an_event). Raising and processing an event
 
-When a reaction raises an event, the subsequent behaviour of the state machine is highly dependent on the execution scheme, selected by either the "@CycleBased":#statechart_language_cyclebased (default) or the "@EventDriven":#statechart_language_eventdriven annotation. In short:
+For the syntax of event raising, see section "&quot;Raising an event&quot;":#sclang_raising_an_event.
+For the syntax of event declaration, see section "&quot;Events&quot;":#sclang_events.
+
+When a reaction raises an event, the subsequent behaviour of the state machine is highly dependent on the execution scheme, selected by either the "@CycleBased":#sclang_cyclebased (default) or the "@EventDriven":#sclang_eventdriven annotation. In short:
 * In the _cycle-based execution scheme_, the raised event will be added to the events that are processed by the current run-to-completion step. However, it will only be visible "downstream" in the run cycle, i.e. active states that have not yet been executed can take the event into account. When the run cycle is completed, the event will cease to exist. It can thus not be processed in any subsequent run-to-completion step.
 * In the _event-driven execution scheme_, the raised event will be added to an event queue. As a consequence, it will not be visible "downstream" in the current run cycle. Instead, the event will trigger a run cycle on its own. In that run-to-completion step, it will be visible everywhere.
 
 The following sections will give a more in-depth view on these different behaviours.
 
-h5(#processing_an_event_in_the_cycle-based_execution_scheme). Processing an event in the cycle-based execution scheme
+h5(#sclang_processing_an_event_in_the_cycle-based_execution_scheme). Processing an event in the cycle-based execution scheme
 
-As explained above, an event that has been raised using the "_raise_ statement":#raising-an-event exists in the current run-to-completion step only and thus can be dealt with during the rest of that particular run-to-completion step only.
+As explained above, an event that has been raised using the "_raise_ statement":#sclang_raising_an_event exists in the current run-to-completion step only and thus can be dealt with during the rest of that particular run-to-completion step only.
 
 Please also note that orthogonal regions are executed sequentially and in a deterministic order.
 
@@ -900,40 +1052,40 @@ This has remarkable consequences on where an event is "visible" and where it is 
 
 If an event _e_ is raised in region _r<sub>m</sub>_, then _e_ is available only in those regions that have not been processed yet, i.&nbsp;e. in _r<sub>i</sub>_ where _i_ > _m_ and _i_ ≤ _n_.
 
- The following example illustrates this. When the state machine is started, the situation is as shown in figure "&quot;Raising an event &#91;1]&quot;":#fig_raising-an-event_1: *A* and *X* in the parallel regions _r1_ and _r2_ are active states. Important: Region _r1_ is executed *before* _r2_.
+ The following example illustrates this. When the state machine is started, the situation is as shown in figure "&quot;Raising an event &#91;1]&quot;":#sclang_fig_raising-an-event_1: *A* and *X* in the parallel regions _r1_ and _r2_ are active states. Important: Region _r1_ is executed *before* _r2_.
 
-p(#fig_raising-an-event_1). 
+p(#sclang_fig_raising-an-event_1). 
 !images/docu_transition_010_raise_event_01.png(Raising an event [1])!
 
 p=. Raising an event &#91;1]
 
 Now event _e1_ occurs. It triggers transition *A → B* in _r1_. This transition's effect @raise e2@ causes event _e2_ to be raised. This event triggers transition *X → Y* in _r2_ to fire _within the same RTC_.
 
-After that the situation is now as can be seen in figure "&quot;Raising an event &#91;2]&quot;":#fig_raising-an-event_2: substates *B* and *Y* are now active states. However, the transition *B → C* will not be taken, because that would have to happen in another RTC. But by then the particular _e2_ instance raised by *A → B* will be long gone, since it was restricted to the RTC it has been raised in.
+After that, the situation is now as can be seen in figure "&quot;Raising an event &#91;2]&quot;":#sclang_fig_raising-an-event_2: substates *B* and *Y* are now active states. However, the transition *B → C* will not be taken, because that would have to happen in another RTC. But by then the particular _e2_ instance raised by *A → B* will be long gone, since it was restricted to the RTC it has been raised in.
 
-p(#fig_raising-an-event_2). 
+p(#sclang_fig_raising-an-event_2). 
 !images/docu_transition_010_raise_event_02.png(Raising an event [2])!
 
 p=. Raising an event &#91;2]
 
-Orthogonal regions within a state are always executed from left to right or from top to bottom, respectively. On the top level, where orthogonal regions can be graphically arranged at will, the execution order is defined by the statechart model's property _region priority_. To inspect or change it, open the _Properties_ view and select the statechart's definition section.
+Orthogonal regions within a composite state are always executed from left to right or from top to bottom, respectively. On the top level, where orthogonal regions can be graphically arranged at will, the execution order is defined by the statechart model's property _region priority_. To inspect or change it, open the _properties_ view and select the statechart's definition section.
 
-The region priorities of the example above are shown in figure "&quot;Region priorities&quot;":#fig_region-priorities. Change the execution order and the example will behave differently than described.
+The region priorities of the example above are shown in figure "&quot;Region priorities&quot;":#sclang_fig_region-priorities. Change the execution order and the example will behave differently than described.
 
-p(#fig_region-priorities). 
+p(#sclang_fig_region-priorities). 
 !images/docu_regions_010_priorities_01.png(Region priorities)!
 
 p=. Region priorities
 
 Not being able to raise an event and process it in "earlier" regions is a restriction you can overcome using variables. The idea is to set a "communication variable" to a certain value in a region that is processed "later". During the next RTC the earlier region could act on the variables value. Another option – and in many cases the better on, is to change to the event-driven execution scheme.
 
-h5(#processing_an_event_in_the_event-driven_execution_scheme). Processing an event in the event-driven execution scheme
+h5(#sclang_processing_an_event_in_the_event-driven_execution_scheme). Processing an event in the event-driven execution scheme
 
-As explained above, an event that has been raised using the "_raise_ statement":#raising-an-event is appended to an event queue, and thus it is not visible in the current run-to-completion step (RTC). Since in the event-driven execution scheme an RTC always processes a single event at a time, only the event that caused the RTC to execute in the first place remains visible "downstream" in the current RTC.
+As explained above, an event that has been raised using the "_raise_ statement":#sclang_raising_an_event is appended to an event queue, and thus it is not visible in the current run-to-completion step (RTC). Since in the event-driven execution scheme an RTC always processes a single event at a time, only the event that caused the RTC to execute in the first place remains visible "downstream" in the current RTC.
 
 The raised event will, however, trigger an RTC on its own. In that RTC, it will be visible to all regions, no matter of their execution order. The execution order as explained in the preceeding section still applies, but it is of less importance in the event-driven approach.
 
-Events raised internally by the "_raise_ statement":#raising-an-event in the reaction of a state or transition take precedence over events that entered the state machine from the outside. This convention ensures that an external event together with all effects it causes – and in particular with all events raised internally – are processed completely, before the next external event can take charge.
+Events raised internally by the "_raise_ statement":#sclang_raising_an_event in the reaction of a state or transition take precedence over events that entered the state machine from the outside. This convention ensures that an external event together with all effects it causes – and in particular with all events raised internally – are processed completely, before the next external event can take charge.
 
 Consider, for example, events _a_ and _b_ having entered, in that order, a state machine that is executing in event-driven mode. Since _a_ entered the state machine first, it is processed first in an RTC. Event _b_ is put on a queue for external events, where it has to wait until _a_ is done. Processing of _a_, however, leads to another event _c_ being raised via the _raise_ statement. Since _a_ is still being processed, _c_ is, similar to _b_, also queued.
 
@@ -946,9 +1098,9 @@ bq. *Please also note:* In event-driven execution mode, there's a looming risk o
 
 
 
-h2(#types). Types
+h2(#sclang_types). Types
 
-The language has a small integrated type system consisting of the following simple types:
+The YAKINDU statechart language has a small integrated type system consisting of the following simple types:
 
 * integer
 * real
@@ -956,7 +1108,10 @@ The language has a small integrated type system consisting of the following simp
 * string
 * void
 
-h2(#statements). Statements
+
+
+
+h2(#sclang_statements). Statements
 
 A statement is one of three kinds:
 
@@ -964,15 +1119,20 @@ A statement is one of three kinds:
 * event raising
 * operation call
 
-h3(#assignments). Assignments
+
+
+h3(#sclang_assignments). Assignments
 
 The language has the following assignment operators:
 
 <table><tbody><tr class="odd"><td align="left">simple assignment</td><td align="left">@=@</td></tr><tr class="even"><td align="left">multiply and assign</td><td align="left">@*=@</td></tr><tr class="odd"><td align="left">divide and assign</td><td align="left">@/=@</td></tr><tr class="even"><td align="left">calculate modulo and assign</td><td align="left">@%=@</td></tr><tr class="odd"><td align="left">add and assign</td><td align="left">@+=@</td></tr><tr class="even"><td align="left">subtract and assign</td><td align="left">@-=@</td></tr><tr class="odd"><td align="left">bitshift left and assign</td><td align="left">@<<=@</td></tr><tr class="even"><td align="left">bitshift right and assign</td><td align="left">@>>=@</td></tr><tr class="odd"><td align="left">bitwise AND and assign</td><td align="left">@&=@</td></tr><tr class="even"><td align="left">bitwise XOR and assign</td><td align="left">@^=@</td></tr><tr class="odd"><td align="left">bitwise OR and assign</td><td align="left">@|=@</td></tr></tbody></table>
 
-h3(#raising-an-event). Raising an event
 
-An event is raised by using the keyword @raise@, followed by the event name, e. g. @raise Incoming_call@. If the event is an interface event, the name of the interface must also be prepended as usual.
+h3(#sclang_raising_an_event). Raising an event
+
+An event is raised by using the keyword @raise@, followed by the event name, e. g. @raise incoming_call@. If the event is an interface event, the name of the interface must be prepended, using dot notation.
+
+==<div class="example">==
 
 Example:
 
@@ -985,38 +1145,50 @@ Usage in the statechart:
 bc. 
 always / raise intrfc.ev
 
-See also sections "&quot;Declaring events&quot;":#events and "&quot;Raising and processing an event&quot;":#raising-and-processing-an-event.
+==</div>==
 
-h3(#calling-an-operation). Calling an operation
+See also sections "&quot;Declaring events&quot;":#sclang_events and "&quot;Raising and processing an event&quot;":#sclang_raising_and_processing_an_event.
 
-An operation is called similarly to other programming languages using the operation name and passing concrete parameters in parenthesis and separated by comma. The parameters can be expressions. The parenthesis can be omitted when no parameters are needed. Please see section "&quot;Operations&quot;":#operations for an example.
 
-h2(#expressions). Expressions
 
-Expressions in YAKINDU Statechart Tools are similar to expressions in other programming languages. The language provides operators for logical expressions, number arithmetic, bitwise arithmetic, and bit shifting.
+h3(#sclang_calling_an_operation). Calling an operation
+
+An operation is called similarly to other programming languages using the operation name and passing actual parameter values in parenthesis and separated by comma. The parameters can be expressions. The parenthesis can be omitted when no parameters are passed. Please see section "&quot;Operations&quot;":#sclang_operations for an example.
+
+
+
+
+h2(#sclang_expressions). Expressions
+
+Expressions in the YAKINDU statechart language are similar to expressions in other programming languages. The language provides operators for logical expressions, number arithmetic, bitwise arithmetic, and bit shifting.
 
 The type of a logical expression is *boolean*.
 
-h3(#Logical-and). Logical AND
+
+
+h3(#sclang_logical_and). Logical AND
 
 bc. expr1 && expr2
 
 
-h3(#Logical-or). Logical OR
+
+h3(#sclang_logical_or). Logical OR
 
 bc. expr1 ||  expr2
 
 
-h3(#Logical-not). Logical NOT
+
+h3(#sclang_logical_not). Logical NOT
 
 bc. !expr1
 
 
-h3(#conditional-expression). Conditional expression
+
+h3(#sclang_conditional_expression). Conditional expression
 
 bc. expr1 ? expr2 : expr3
 
-When @expr1@ evaluates to true, this returns @expr2@, else @exp3@. This can be used to assign values to variables: 
+If @expr1@ evaluates to true, this returns @expr2@, else @exp3@. This can be used to assign values to variables: 
 
 bc. 
 y = x > 5 ? 1 : 2
@@ -1031,22 +1203,26 @@ if(x > 5) {
 }
 
 
-h3(#bitwise-xor). Bitwise XOR
+
+h3(#sclang_bitwise_xor). Bitwise XOR
 
 bc. expr1 ^ expr2
 
 
-h3(#bitwise-or). Bitwise OR
+
+h3(#sclang_bitwise_or). Bitwise OR
 
 bc. expr1 | expr2
 
 
-h3(#bitwise-and). Bitwise AND
+
+h3(#sclang_bitwise_and). Bitwise AND
 
 bc. expr1 & expr2
 
 
-h3(#logical-relations-and-shift-operators). Logical relations and shift operators
+
+h3(#sclang_logical_relations_and_shift_operators). Logical relations and shift operators
 
 |<. less than|<. @<@|
 |<. equal or less than|<. @<=@|
@@ -1057,7 +1233,9 @@ h3(#logical-relations-and-shift-operators). Logical relations and shift operator
 |<. shift left|<. @<<@|
 |<. shift right|<. @>>@|
 
-h3(#binary-arithmetic-operators). Binary arithmetic operators
+
+
+h3(#sclang_binary_arithmetic_operators). Binary arithmetic operators
 
 |<. plus|<. @+@|
 |<. minus|<. @-@|
@@ -1065,18 +1243,22 @@ h3(#binary-arithmetic-operators). Binary arithmetic operators
 |<. divide|<. @/@|
 |<. modulo|<. @%@|
 
-h3(#unary-arithmetic-operators). Unary arithmetic operators
+
+
+h3(#sclang_unary_arithmetic_operators). Unary arithmetic operators
 
 |<. positive|<. @+@|
 |<. negative|<. @-@|
 |<. complement|<. @~@|
 
 
-h2(#built-in-functions). Built-in functions
+
+
+h2(#sclang_built-in-functions). Built-in functions
 
 ==<!-- Start stext_keyword_valueof -->==
 
-h3(#value-of-event). valueof(event)
+h3(#sclang_valueof_event). valueof(event)
 
 An event can have a value. This function returns the value of the specified event.
 
@@ -1085,18 +1267,24 @@ An event can have a value. This function returns the value of the specified even
 bc. myVar = valueof(myEvent)
 
 ==<!-- End stext_keyword_valueof -->==
+
+
+
 ==<!-- Start stext_keyword_as -->==
 
-h3(#as). as
+h3(#sclang_as). as
 
 Casts a variable. The following example casts a literal from integer to real.
 
 bc. myReal = 12 as real
 
 ==<!-- End stext_keyword_as -->==
+
+
+
 ==<!-- Start stext_keyword_active -->==
 
-h3(#active-state). active(state)
+h3(#sclang_active_state). active(state)
 
 Returns _true_ if the specified state is active and _false_ otherwise.
 
@@ -1105,13 +1293,15 @@ bc. myBool = active(StateA)
 ==<!-- End stext_keyword_ -->==
 
 
-h2(#complete-statechart-language-grammar). Complete statechart language grammar
 
-This section presents the complete grammar of the statechart language. If you are in doubt how to write down a transition specification, a variable declaration, or any other syntactical construct of the statechart language, this is your definite reference that clarifies all syntactical questions.
 
-The grammar is visualized using "railroad diagrams":https://en.wikipedia.org/wiki/Syntax_diagram. Railroad diagrams are easy to read and comprise all syntactically valid language constructs. Figure "&quot;Railroad diagrams explained&quot;":#fig-railroad-diagrams-explained shows an example:
+h2(#sclang_complete_statechart_language_grammar). Complete statechart language grammar
 
-p(#fig-railroad-diagrams-explained). 
+This section presents the complete grammar of the statechart language. If you are in doubt how to write down a transition specification, a variable declaration, or any other syntactical construct of the YAKINDU statechart language, this is your definite reference that clarifies all syntactical questions.
+
+The grammar is visualized using "railroad diagrams":https://en.wikipedia.org/wiki/Syntax_diagram. Railroad diagrams are easy to read and comprise all syntactically valid language constructs. Figure "&quot;Railroad diagrams explained&quot;":#sclang_fig_railroad_diagrams_explained shows an example:
+
+p(#sclang_fig_railroad_diagrams_explained). 
 
 !images/docu_grammar_020_simpleelementreferenceexpression.png(Railroad diagrams explained)!
 
@@ -1119,9 +1309,9 @@ p=. Railroad diagrams explained
 
 On the left-hand side you'll find the so-called "_non-terminal symbol_":https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols (or _non-terminal_ for short) that is being defined by this particular diagram. Here the non-terminal is _SimpleElementReferenceExpression_. To find out what a _SimpleElementReferenceExpression_ is allowed to look like, follow the "railroad track" just like a train would do. At each junction, the train either keeps its direction or changes it by 45 degrees, but it cannot make sharp turns of 90 degrees or more.
 
-On its way, the train passes several "stations". Each station represents a language element that is valid at this point. In our example, the first station is a rectangle with a grey background. The grey background denotes a non-terminal, and the word inside the rectangle is the non-terminal's name, here: _ID_. You will have to look up this particular non-terminal's railroad diagram to learn more about it. However, for simplicity and because their meanings are more or less obvious a few non-terminals are not refined further. Examples are _STRING_, _INT_, _BOOL_, or _ID_.
+On its way, the train passes several "stations". Each station represents a language element that is valid at this point. In our example, the first station is a rectangle with a grey background. The grey background denotes a non-terminal, and the word inside the rectangle is the non-terminal's name, here: _ID_. You will have to look up this particular non-terminal's railroad diagram to learn more about it. However, for simplicity and because their meanings are more or less obvious, a few non-terminals are not refined further. Examples are _STRING_, _INT_, _BOOL_, or _ID_.
 
-In a _SimpleElementReferenceExpression_, a valid ID – a name – is always the first element, e.&nbsp;g. @init42@. If the train turns right at the junction, it moves directly to the railroad diagram's exit. That means just an _ID_ like @init42@ is a valid _SimpleElementReferenceExpression_. Please note that when the train reaches the junction right before the exit, it cannot turn left, because trains don't move that way. That is, the train is unable to travel to the @(@ station from this direction.
+In a _SimpleElementReferenceExpression_, a valid ID – a name – is always the first element, e.g. @init42@. If the train turns right at the junction, it moves directly to the railroad diagram's exit. That means an _ID_ like @init42@ is a valid _SimpleElementReferenceExpression_. Please note that when the train reaches the junction right before the exit, it cannot turn left, because trains don't move that way. That is, the train is unable to travel to the @(@ station.
 
 The train can reach the @)@ from the opposite direction only. After having left the initial _ID_ station, the train can move to the left at the junction and then run a stretch touching only the @(@ and @)@ stations, in that order. These rectangles have a white background color, denoting a "_terminal symbol_":https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols or _terminal_ for short. A terminal stands for itself; write it down as it is.
 
@@ -1135,21 +1325,25 @@ bq.. *Please also note:*
 
 Not each and every construction that is syntactically allowed does make sense semantically. The statechart editor will flag such constructions as errors.
 
-h3(#statechart-grammar). Statechart grammar
 
-Figure "&quot;Statechart grammar&quot;":#fig-statechart-grammar shows the statechart grammar. It makes use of the "expressions grammar":#expressions-grammar.
 
-p(#fig-statechart-grammar). 
+h3(#sclang_statechart_grammar). Statechart grammar
+
+Figure "&quot;Statechart grammar&quot;":#sclang_fig_statechart_grammar shows the statechart grammar. It makes use of the "expressions grammar":#sclang_expressions_grammar.
+
+p(#sclang_fig_statechart_grammar). 
 
 !images/docu_grammar_010_stext.png(Statechart grammar)!
 
 p=. Statechart grammar
 
-h3(#expressions-grammar). Expressions grammar
 
-Figure "&quot;Expressions grammar&quot;":#fig-expressions-grammar shows the expressions grammar. It is used by the "statechart grammar":#statechart-grammar.
 
-p(#fig-expressions-grammar). 
+h3(#sclang_expressions_grammar). Expressions grammar
+
+Figure "&quot;Expressions grammar&quot;":#sclang_fig_expressions_grammar shows the expressions grammar. It is used by the "statechart grammar":#sclang_statechart_grammar.
+
+p(#sclang_fig_expressions_grammar). 
 
 !images/docu_grammar_010_expressions.png(Expressions grammar)!
 

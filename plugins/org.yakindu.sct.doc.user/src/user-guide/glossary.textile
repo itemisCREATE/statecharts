@@ -1,0 +1,187 @@
+
+p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/glossary.textile
+
+h1(#glossary). Glossary.
+
+h2(#glossary_action). Action
+
+An *action* is the _output_ of a "finite-state machine":#glossary_finite-state_machine. Actions can be associated with "transitions":#glossary_transition as well as with "states":#glossary_state.
+
+All the actions of a state or transition taken together are called the state's or transition's "reaction effect"#glossary_reaction_effect.
+
+###. FIXME: Clarify: action vs. reaction vs. effect vs. behaviour.
+
+
+h2(#glossary_active). Active
+
+A "state":#glossary_state is either *active* or "passive":#glossary_passive.
+
+
+h2(#glossary_activity). Activity
+
+An *activity* is David Harel's concept to bridge the gap between a state machine and the real-world behavior. In the YAKINDU Statechart Tools nomenclature an activity is an "operation":#glossary_operation.
+
+
+h2(#glossary_behaviour). Behaviour
+
+A state can have a *behaviour*.
+
+
+h2(#glossary_canvas). Canvas
+
+The *canvas* is one of the top-level elements of a "statechart":#glossary_statechart, besides the "definition section":#glossary_definition_section. It contains "regions":#glossary_region.
+
+
+h2(#glossary_code_generator). Code generator
+
+Software component that performs a model transformation from a statechart into some other model. The latter is typically – but not necessarily – the source code in some programming language. YAKINDU Statechart Tools provides code generators for Java, C, C++, and TypeScript.
+
+###. CHECK: Does YAKINDU Statechart Tools provide code generators for Java, C, C++, and TypeScript?
+
+
+h2(#glossary_composite_state). Composite state
+
+TBD 
+
+
+h2(#glossary_definition_section). Definition section
+
+The *definition section* is one of the top-level elements of a "statechart":#glossary_statechart, besides the "canvas":#glossary_canvas. It allows the definition of interfaces, variables, events, reactions etc. of a "statechart":#glossary_statechart.
+
+
+h2(#glossary_domain). Domain
+
+TBD
+
+
+h2(#glossary_entry_actions). Entry actions
+
+###. Seems to be official verbiage.
+
+TBD
+
+
+h2(#glossary_entry_block). Entry block
+
+Actions to be executed when a "state":#glossary_state is entered.
+
+###. FIXME: The term "entry block" is *not* defined in the statechart language documentation. This should be resolved in one or the other way.
+
+
+h2(#glossary_event). Event
+
+TDB
+
+
+h2(#glossary_exit_actions). Exit actions
+
+###. Seems to be official verbiage.
+
+###. FIXME: versus exit effects
+
+TDB
+
+
+h2(#glossary_exit_block). Exit block
+
+TBD
+
+
+h2(#glossary_exit_effects). Exit effects
+
+###. FIXME: versus exit actions
+
+TDB
+
+
+h2(#glossary_finite-state_machine). Finite-state machine
+
+"Wikipedia defines":https://en.wikipedia.org/wiki/Finite-state_machine a *finite-state machine (FSM)* or *finite-state automaton (FSA, plural: automata)*, *finite automaton*, or simply a *state machine* as a mathematical model of computation. It is an abstract machine that can be in exactly one of a finite number of "states":#glossary_state at any given time. The FSM can change from one state to another in response to some external inputs; the change from one state to another is called a "transition":#glossary_transition. An FSM is defined by a list of its states, its initial state, and the conditions for each transition.
+
+This documentation uses the terms "state machine":#glossary_state_machine and "statechart":#glossary_statechart to denote a final-state automaton. Although both term are theoretically interchangeable, we typically use "state machine":#glossary_state_machine when we are talking about the dynamic aspects of an FSM, and we use "statechart":#glossary_statechart to denote its graphical representation.
+
+
+h2(#glossary_history_state). History state
+
+TBD 
+
+
+h2(#glossary_operation). Operation
+
+An *operation* bridges the gap between a state machine and the real-world. An operation can be "called" from a state machine. It might provide information from the outside to the state machine, might cause any effects in the outside world, or both.
+
+
+h2(#glossary_orthogonal_state). Orthogonal state
+
+TBD 
+
+
+h2(#glossary_passive). Passive
+
+A "state":#glossary_state is either "active":#glossary_active or *passive*.
+
+
+h2(#glossary_reaction_effect). Reaction effect
+
+See "action":#glossary_action.
+
+
+h2(#glossary_region). Region
+
+TBD
+
+
+h2(#glossary_statechart). Statechart
+
+A *statechart* is the graphical representation of a "finite-state machine (FSM)":https://en.wikipedia.org/wiki/Finite-state_machine.
+
+In the context of YAKINDU Statechart Tools, a *statechart* in particular is everything that goes into an _.sct_ file. It consists of the
+* "definition section":#glossary_definition_section and the
+* graphical "canvas":#glossary_canvas.
+
+That means that we are using the term _statechart_ to emphasize the graphical representation or the modelling aspects of a state machine, especially when talking about using the statechart editor to create or modify a statemachine model.
+
+
+h2(#glossary_statechart_editor). Statechart editor
+
+The *statechart editor* is a major component of YAKINDU Statechart Tools and allows to graphically edit statecharts. It is descibed in section "&quot;Editor UI&quot;":../user-guide/editing_statecharts#edit_editor_ui.
+
+
+h2(#glossary_statechart_model). Statechart model
+
+A *statechart model* is a "statechart":#glossary_statechart a major component of YAKINDU Statechart Tools and allows to graphically edit statecharts. It is descibed in section "&quot;Editor UI&quot;":../user-guide/editing_statecharts#edit_editor_ui.
+
+
+h2(#glossary_statechart_model_file). Statechart model file
+
+YAKINDU Statechart Tools stores a "statechart":#glossary_statechart (or statechart model) in a *statechart model file*. Such a file has the filename extension _.sct_. The internal format of statechart model files is "XML Metadata Interchange":https://en.wikipedia.org/wiki/XML_Metadata_Interchange or "XMI":https://en.wikipedia.org/wiki/XML_Metadata_Interchange, which is an XML language.
+
+
+h2(#glossary_state). State
+
+A *state* is one of the fundamental concepts of "statecharts":#glossary_statechart. Please see details in section "&quot;State&quot;":../user-guide/statechart_language.html#sclang_states.
+
+
+h2(#glossary_state_machine). State machine
+
+The term *state machine* is short for "finite-state machine (FSM)":https://en.wikipedia.org/wiki/Finite-state_machine. A state machine can be represented in many different forms, for example as a state transition table, as a "statechart":#glossary_statechart, as source code of a programming language, etc.
+
+In the context of this documentation, we usually use the term _state machine_ to emphasize some dynamical aspect of the model, for example the statechart model being simulated or executed.
+
+
+h2(#glossary_state_machine_code). State machine code
+
+*State machine code* is the representation of a "state machine":#glossary_state_machine. Use a "code generator":#glossary_code_generator to transform your "statechart":#glossary_statechart into   We should also speak of state machine code in the context of code generators as well as state machine execution in the context of the simulation.
+
+
+h2(#glossary_transition). Transition
+
+A *transition* is one of the fundamental concepts of "statecharts":#glossary_statechart. It leads from a source "state":#glossary_state to a target state. Details can be found in section "&quot;Transition&quot;":../user-guide/statechart_language#sclang_transitions.
+
+
+h2(#glossary_type_system). Type system
+
+See "domain":#glossary_domain.
+
+
+{glossary}

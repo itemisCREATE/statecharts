@@ -147,6 +147,7 @@
                 <include name="user-guide/generating_code.textile" />
                 <include name="user-guide/generating_code_headless.textile" />
                 <include name="user-guide/sctunit.textile" />
+                <!-- <include name="user-guide/glossary.textile" /> -->
             </fileset>
 
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
@@ -324,6 +325,7 @@
                         <file name="user-guide/generating_code.textile" />
                         <file name="user-guide/generating_code_headless.textile" />
                         <file name="user-guide/sctunit.textile" />
+                        <file name="user-guide/glossary.textile" />
                     </filelist>
                 </textile-files>
                 <image-files>

@@ -5,7 +5,7 @@ p.
 
 p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/advanced_simulation.textile
 
-h1(#advsim_debugging-with-breakpoints-and-snapshots). Debugging with breakpoints and snapshots
+h1(#advsim_debugging_with_breakpoints_and_snapshots). Debugging with breakpoints and snapshots
 
 h2(#advsim_introduction). Introduction
 
@@ -13,52 +13,52 @@ This advanced feature makes it possible to attach *breakpoints* to states and tr
 
 You can also create *snapshots* of your statechart simulation. A snapshot contains everything making up your state machine simulation at any point in time. It describes the state of the state machine, if you will. Snapshots can be saved and restored later in order to continue the simulation from that point on that is specified by the snapshot.
 
-h3(#advsim_the-light-switch-example). The light switch example
+h3(#advsim_the_light_switch_example). The light switch example
 
 Throughout this chapter we will be using the _light switch_ statechart as an example. It models a lamp which can be turned on and off and also supports various brightness values.
 
 If you press the _pressLightOn_ button, the lamp turns on at its lowest brightness value. If you operate _pressLightOn_ repeatedly, each time the lamp becomes brighter until it reaches its maximum brightness. Pressing the _pressLightOff_ button, immediately turns off the light completely. The brightness can only be raised as long as it hasn't yet reached its maximum value of five. After that, the guard condition disallows to raise it any further.
 
-p(#advsim_fig-the-light-switch-sample-statechart). 
+p(#advsim_fig_the_light_switch_sample_statechart). 
 !images/advsim_010_lightswitch_010_statechart.png(The light switch sample statechart)!
 
 p=. The light switch sample statechart
 
-h2(#advsim-breakpoints). Breakpoints
+h2(#advsim_breakpoints). Breakpoints
 
 Breakpoints allow for automatically suspending the simulation when a certain element of the state machine is activated. Optionally, a halting condition can be specified to better control the behavior of a breakpoint. Breakpoints can be set on transitions or states. When a breakpoint is reached, the simulation pauses and the current state of variable values can be examined in the simulation view. It is possible to change values and to trigger events that will be raised when the simulation run is manually resumed.
 
-h2(#advsim_executing-in-debugging-mode). Executing in debugging mode
+h2(#advsim_executing_in_debugging_mode). Executing in debugging mode
 
 To make use of breakpoints, the statechart simulation needs to be executed in debugging mode:
 
 # Right&#45;click on the statechart model. The context menu opens.
-# Select _Debug As→Statechart Simulation_, see "Figure &quot;Starting a simulation in debugging mode&quot;":#advsim_fig-starting-a-simulation-in-debugging-mode.
+# Select _Debug As→Statechart Simulation_, see "Figure &quot;Starting a simulation in debugging mode&quot;":#advsim_fig_starting_a_simulation_in_debugging_mode.
 # The statechart simulation starts in the debugging mode.
 
-p(#advsim_fig-starting-a-simulation-in-debugging-mode). 
+p(#advsim_fig_starting_a_simulation_in_debugging_mode). 
 !images/advsim_020_start_debugging_010_debug_as_menu.png(Starting a simulation in debugging mode)!
 
 p=. Starting a simulation in debugging mode
 
-h3(#advsim_setting-a-breakpoint). Setting a breakpoint
+h3(#advsim_setting_a_breakpoint). Setting a breakpoint
 
 # Right&#45;click on a state or transition. The context menu opens.
-# Select _Toggle Breakpoint_ from the context menu, see "Figure &quot;Setting a breakpoint&quot;":#advsim_fig-setting-a-breakpoint.
+# Select _Toggle Breakpoint_ from the context menu, see "Figure &quot;Setting a breakpoint&quot;":#advsim_fig_setting_a_breakpoint.
 
-p(#advsim_fig-setting-a-breakpoint). 
+p(#advsim_fig_setting_a_breakpoint). 
 !images/advsim_030_breakpoint_010_setting_on_transition.png(Setting a breakpoint)!
 
 p=. Setting a breakpoint
 
-States and transitions having a breakpoint attached are labeled with a !(inlinemediaobject)images/advsim_symbol_breakpoint_enabled.png(Symbol: Breakpoint enabled)! symbol. "Figure &quot;Breakpoints on transition and state&quot;":#advsim_fig-breakpoints-on-transition-and-state shows an example.
+States and transitions having a breakpoint attached are labeled with a !(inlinemediaobject)images/advsim_symbol_breakpoint_enabled.png(Symbol: Breakpoint enabled)! symbol. "Figure &quot;Breakpoints on transition and state&quot;":#advsim_fig_breakpoints_on_transition_and_state shows an example.
 
-p(#advsim_fig-breakpoints-on-transition-and-state). 
+p(#advsim_fig_breakpoints_on_transition_and_state). 
 !images/advsim_030_breakpoint_020_transition_and_state_with_breakpoints.png(Breakpoints on transition and state)!
 
 p=. Breakpoints on transition and state
 
-h3(#advsim_hitting-a-breakpoint). Hitting a breakpoint
+h3(#advsim_hitting_a_breakpoint). Hitting a breakpoint
 
 If the simulation runs into a state with a breakpoint, the state's entry actions, if any, are executed. After that, execution of the state machine is suspended. The state is highlighted by a small green border.
 
@@ -73,44 +73,44 @@ If the simulation runs into a transition with a breakpoint, execution of the sta
 p=. Highlighting a suspended transition
 
 
-h3(#advsim_continuing-the-simulation). Continuing the simulation
+h3(#advsim_continuing_the_simulation). Continuing the simulation
 
 In order to continue from a breakpoint, you have two options:
 
 * To continue execution, click the resume button !(inlinemediaobject)images/advsim_symbol_resume.png(Symbol: Resume)! or select _Run → Resume_ in the main menu. The statechart simulation continues until the next breakpoint is hit or the simulation is terminated.
 * To execute the next run-cycle of the simulation only and then suspend again, click the step-over button !(inlinemediaobject)images/advsim_symbol_stepover.png(Symbol: Step Over)! or select _Run → Step Over_ in the main menu.
 
-h3(#advsim_using-the-breakpoints-view). Using the breakpoints view
+h3(#advsim_using_the_breakpoints_view). Using the breakpoints view
 
-The _breakpoints_ view shows a list of all breakpoints. The respective breakpoint name identifies the state or transition in question. See "figure &quot;Breakpoints view&quot;":#advsim_fig-breakpoints-view for an example.
+The _breakpoints_ view shows a list of all breakpoints. The respective breakpoint name identifies the state or transition in question. See "figure &quot;Breakpoints view&quot;":#advsim_fig_breakpoints_view for an example.
 
-You can use the _breakpoints_ view for disabling, enabling, and removing breakpoints as well as defining "conditional breakpoints":#advsim_conditional-breakpoints.
+You can use the _breakpoints_ view for disabling, enabling, and removing breakpoints as well as defining "conditional breakpoints":#advsim_conditional_breakpoints.
 
-p(#advsim_fig-breakpoints-view). 
+p(#advsim_fig_breakpoints_view). 
 !images/advsim_030_breakpoint_050_enabled_and_disabled_breakpoints.png(The "Breakpoints" view)!
 
 p=. The _Breakpoints_ view
 
-h3(#advsim_enabling-and-disabling-breakpoints). Enabling and disabling breakpoints
+h3(#advsim_enabling_and_disabling_breakpoints). Enabling and disabling breakpoints
 
 A breakpoint is either enabled or disabled.
 
 * An enabled breakpoint causes the statechart simulation to suspend when reaching it. In the statechart and in the _breakpoints_ view, an enabled breakpoint is visualized by a filled light blue circle with a grey border: !(inlinemediaobject)images/advsim_symbol_breakpoint_enabled.png(Symbol: Breakpoint enabled)!.
 * A disabled breakpoint is ignored by the statechart simulation. In the statechart and in the _breakpoints_ view, a disabled breakpoint is visualized by a hollow circle with a grey border: !(inlinemediaobject)images/advsim_symbol_breakpoint_disabled.png(Symbol: Breakpoint disabled)!.
 
-"Figure &quot;Breakpoints view&quot;":#advsim_fig-breakpoints-view is showing an enabled and a disabled breakpoint in the statechart editor and in the breakpoints view, respectively.
+"Figure &quot;Breakpoints view&quot;":#advsim_fig_breakpoints_view is showing an enabled and a disabled breakpoint in the statechart editor and in the breakpoints view, respectively.
 
 You can instruct the statechart simulation to skip all breakpoints by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_disengaged.png(Button [disengaged]: Skip all breakpoints)! button in the breakpoints view. The button will appear "pressed", and while it is, the "skip breakpoints" functionality is engaged. That means, the simulation will not suspend at any breakpoint.
 
 This is different from disabling all breakpoints, in that each breakpoint keeps its state of being enabled or disabled. Once you disengage the skip breakpoints functionality by clicking at the !(inlinemediaobject)images/advsim_button_breakpoint_skip_engaged.png(Button [engaged]: Skip all breakpoints)! button again, the simulation will suspend again at enabled breakpoints and will not suspend at disabled breakpoints.
 
-h3(#advsim_removing-breakpoints). Removing breakpoints
+h3(#advsim_removing_breakpoints). Removing breakpoints
 
 In order to remove _some_ breakpoints, select these breakpoints in the breakpoints view, then click at the !(inlinemediaobject)images/advsim_button_remove.png(Button: Remove)! button. The selected breakpoints will be removed.
 
 To remove _all_ breakpoints, click at the !(inlinemediaobject)images/advsim_button_remove_all.png(Button: Remove all)! button
 
-h3(#advsim_conditional-breakpoints). Conditional breakpoints
+h3(#advsim_conditional_breakpoints). Conditional breakpoints
 
 A _conditional_ breakpoint has an associated condition and suspends the simulation only if
 * that condition is fulfilled (true) and
@@ -118,25 +118,25 @@ A _conditional_ breakpoint has an associated condition and suspends the simulati
 
 In order to attach a condition to a breakpoint, proceed as follows:
 * In the _breakpoints_ view, select the breakpoint in question.
-* Check the _Conditional_ checkbox, see "figure &quot;Breakpoints view&quot;":#advsim_fig-breakpoints-view in the lower right area. The associated text field becomes writable.
+* Check the _Conditional_ checkbox, see "figure &quot;Breakpoints view&quot;":#advsim_fig_breakpoints_view in the lower right area. The associated text field becomes writable.
 
-Enter the condition into the text field. Like in the statechart editor, a content assist is available when pressing @[Ctrl+Space]@. The expression is validated automatically. In the example shown in "figure &quot;Breakpoints view&quot;":#advsim_fig-breakpoints-view the transition suspends the simulation only if the variable _brightness_ has a value of 4.
+Enter the condition into the text field. Like in the statechart editor, a content assist is available when pressing @[Ctrl+Space]@. The expression is validated automatically. In the example shown in "figure &quot;Breakpoints view&quot;":#advsim_fig_breakpoints_view the transition suspends the simulation only if the variable _brightness_ has a value of 4.
 
-h2(#advsim_debugging-a-statechart). Debugging a statechart
+h2(#advsim_debugging_a_statechart). Debugging a statechart
 
-h3(#advsim_changing-variable-values). Changing variable values
+h3(#advsim_changing_variable_values). Changing variable values
 
-In the suspended status of a statechart simulation you can change variable values using the _simulation_ view. When continuing execution – see section "Continuing the simulation":#advsim_continuing-the-simulation – you can observe how your state machine behaves with those modified values.
+In the suspended status of a statechart simulation you can change variable values using the _simulation_ view. When continuing execution – see section "Continuing the simulation":#advsim_continuing_the_simulation – you can observe how your state machine behaves with those modified values.
 
-h3(#advsim_raising-multiple-events-simultaneously). Raising multiple events simultaneously
+h3(#advsim_raising_multiple_events_simultaneously). Raising multiple events simultaneously
 
-If you click on an event's name in the _simulation_ view to raise that event in normal simulation, i.&#8239;e. while execution isn't suspended, the state machine immediately processes that event and takes the corresponding transition, if any.
+If you click on an event's name in the _simulation_ view to raise that event in normal simulation, i.e. while execution isn't suspended, the state machine immediately processes that event and takes the corresponding transition, if any.
 
 However, while the simulation is suspended, you can raise multiple events, without instant execution. Once execution resumes, both events are handled at the same time, or, to be more exact, in the same run-to-completion step (RTS).
 
-Consider for example, you want to press the &quot;light on&quot; and &quot;light off&quot; buttons at the same time and observe what happens. "Figure &quot;Raising multiple events simultaneously&quot;":#advsim_fig-raising-multiple-events-simultaneously-1 is showing the scenario:
+Consider for example, you want to press the &quot;light on&quot; and &quot;light off&quot; buttons at the same time and observe what happens. "Figure &quot;Raising multiple events simultaneously&quot;":#advsim_fig_raising_multiple_events_simultaneously_1 is showing the scenario:
 
-p(#advsim_fig-raising-multiple-events-simultaneously-1). 
+p(#advsim_fig_raising_multiple_events_simultaneously_1). 
 !images/advsim_040_multiple_events_010_events_not_raised.png(Raising multiple events simultaneously [1])!
 
 p=. Raising multiple events simultaneously &#91;1]
@@ -144,7 +144,7 @@ p=. Raising multiple events simultaneously &#91;1]
 * The simulation has encountered a breakpoint at the _LightOn_ state and has been suspended there.
 * The _simulation_ view shows the _LightOn_ and the _LightOff_ events. Both events are labeled with a !(inlinemediaobject)images/advsim_symbol_event.png(Symbol: Event [not raised])! symbol, meaning the respective event is not raised.
 
-p(#advsim_fig-raising-multiple-events-simultaneously-2). 
+p(#advsim_fig_raising_multiple_events_simultaneously_2). 
 !images/advsim_040_multiple_events_020_events_raised.png(Raising multiple events simultaneously [2])!
 
 p=. Raising multiple events simultaneously &#91;2]
@@ -155,14 +155,14 @@ Both events are raised and will be handled by the state machine during the next 
 
 bq. Please note: While the execution is still suspended, you can "unraise" an already raised event by clicking at the event symbol !(inlinemediaobject)images/advsim_symbol_event_raised.png(Symbol: Event [raised])! a second time. The blue triangle will disappear, and upon continuation of the simulation the event will not be handled.
 
-h4(#advsim_transition-priorities). Transition priorities
+h4(#advsim_transition_priorities). Transition priorities
 
-It is important to understand that there is not queue of events. That is, in case several events occur simultaneously, the state machine consults the active state's transitions priorities in the order that is specified in the corresponding property, see "figure &quot;Transition priorities&quot;":#advsim_fig-transition-priorities. You can change the transitions priorities by selecting a transition and moving it up or down by clicking at the respective button.
+It is important to understand that there is not queue of events. That is, in case several events occur simultaneously, the state machine consults the active state's transitions priorities in the order that is specified in the corresponding property, see "figure &quot;Transition priorities&quot;":#advsim_fig_transition_priorities. You can change the transitions priorities by selecting a transition and moving it up or down by clicking at the respective button.
 
 The first transition whose condition is fulfilled will be executed. All remaining events are quashed.
 
-p(#advsim_fig-transition-priorities). 
-!images/advsim_040_multiple_events_030_transition-priorities.png(Transition priorities)!
+p(#advsim_fig_transition_priorities). 
+!images/advsim_040_multiple_events_030_transition_priorities.png(Transition priorities)!
 
 p=. Transition priorities
 
@@ -172,21 +172,21 @@ The snapshot feature allows to store and restore the state of a simulation run. 
 
 This feature is especially useful when testing complex state machines in which a number of steps need to be taken before reaching a desired situation. Using snapshots, you can store this desired situation once and simply restore it again without repeating all the steps to reach it. Depending on the complexity of the usecase, this can be a huge time-saver.
 
-h3(#advsim_creating-a-snapshot). Creating a snapshot
+h3(#advsim_creating_a_snapshot). Creating a snapshot
 
 To create a snapshot of the current statechart simulation, proceed as follows:
 
 # Change to _Snapshots_ view.
 # Click at the camera button !(inlinemediaobject)images/advsim_button_camera.png(Button: Camera)! in the view's toolbar.
-# The snapshot is taken and appears in the snapshot list. It is labeled as "Snapshot" and tagged with the current timestamp. See "figure &quot;A freshly taken snapshot&quot;":#advsim_fig-a-freshly-taken-snapshot.
+# The snapshot is taken and appears in the snapshot list. It is labeled as "Snapshot" and tagged with the current timestamp. See "figure &quot;A freshly taken snapshot&quot;":#advsim_fig_a_freshly_taken_snapshot.
 
-p(#advsim_fig-a-freshly-taken-snapshot). 
-!images/advsim_050_snapshots_010_a-freshly-taken-snapshot.png(A freshly taken snapshot)!
+p(#advsim_fig_a_freshly_taken_snapshot). 
+!images/advsim_050_snapshots_010_a_freshly-taken_snapshot.png(A freshly taken snapshot)!
 
 p=. A freshly taken snapshot
 
 
-h3(#advsim_the-snapshots-view). The snapshots view
+h3(#advsim_the_snapshots_view). The snapshots view
 
 The _snapshots_ view consists of two parts.
 * The _snapshot list_ contains all snapshots with their respective names and timestamps.
@@ -194,12 +194,12 @@ The _snapshots_ view consists of two parts.
 ** !(inlinemediaobject)images/advsim_button_snapshot_variable_overview.png(Button: Show all variable values)!: shows all variable values
 ** !(inlinemediaobject)images/advsim_button_snapshot_image_overview.png(Button: Show image overview)!: shows an image of the state machine with highlighted active elements
 
-p(#advsim_fig-inspecting-the-variables-of-a-snapshots). 
+p(#advsim_fig_inspecting_the_variables_of_a_snapshots). 
 !images/advsim_050_snapshots_025_details_view.png(Inspecting snapshot details: variables overview [left], image overview [right])!
 
 p=. Inspecting snapshot details: variables overview [left], image overview [right]
 
-h3(#advsim_restoring-a-snapshot). Restoring a snapshot
+h3(#advsim_restoring_a_snapshot). Restoring a snapshot
 
 To restore a snapshot for execution, proceed as follows:
 # Select the snapshot to be restored.
@@ -208,13 +208,13 @@ To restore a snapshot for execution, proceed as follows:
 
 bq. Please note: When the semantics of the underlying state machine have been changed, it might not be possible to restore a snapshot, e.g. when the active state has been deleted.
 
-h3(#advsim_naming-a-snapshot). Naming a snapshot
+h3(#advsim_naming_a_snapshot). Naming a snapshot
 
 The label of a snapshot can be changed as follows:
 # Click at its label. The label becomes an editable field.
 # Enter the new snapshot name and press @[Return]@ or click anywhere outside the editable field.
 
-h3(#advsim_deleting-a-snapshot). Deleting a snapshot
+h3(#advsim_deleting_a_snapshot). Deleting a snapshot
 
 * To delete one or more snapshots, select the snapshots to be deleted, then click at the _remove_ button !(inlinemediaobject)images/advsim_button_remove_red.png(Button: Remove)!.
 * To delete _all_ snapshots, click at the _remove all_ button !(inlinemediaobject)images/advsim_button_remove_all.png(Button: Remove all)!.
