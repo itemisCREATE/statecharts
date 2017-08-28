@@ -42,7 +42,7 @@ public class QIDValueConverter extends AbstractValueConverter<String> {
 		QualifiedName name = converter.toQualifiedName(string);
 		QualifiedName result = QualifiedName.EMPTY;
 		for (String str : name.getSegments()) {
-			result = result.append(converterService.toString(str, "ID"));
+			result = result.append((String)converterService.toValue(str, "ID", node));
 		}
 		return result.toString();
 	}
