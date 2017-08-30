@@ -1,6 +1,4 @@
 
-p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/generating_code.textile
-
 h1(#generating-state-machine-code). Generating state machine code
 
 For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called *SGen*. It can be created either by using the provided wizard *YAKINDU Statechart Generator Model* or by creating a new text file with the file extension @.sgen@.
