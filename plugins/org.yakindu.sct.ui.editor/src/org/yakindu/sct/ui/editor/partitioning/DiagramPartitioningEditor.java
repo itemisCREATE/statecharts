@@ -228,7 +228,9 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 	public static class FilteringDiagramContextMenuProvider extends DiagramContextMenuProvider {
 		// Default context menu items that should be suppressed
 		protected String[] exclude = new String[] { "addNoteLinkAction", "properties",
-				"org.eclipse.mylyn.context.ui.commands.attachment.retrieveContext",
+				"org.eclipse.mylyn.context.ui.commands.attachment.retrieveContext","org.eclipse.jst.ws.atk.ui.webservice.category.popupMenu",
+		        "org.eclipse.tptp.platform.analysis.core.ui.internal.actions.MultiAnalysisActionDelegate", "org.eclipse.debug.ui.contextualLaunch.debug.submenu", 
+		        "org.eclipse.debug.ui.contextualLaunch.profile.submenu",
 				"org.eclipse.mylyn.resources.ui.ui.interest.remove.element", "formatMenu", "filtersMenu", "addGroup",
 				"navigateGroup", "toolbarArrangeAllAction", "selectMenu", "diagramAddMenu", "navigateMenu",
 				"viewGroup", "viewMenu" };
@@ -241,7 +243,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 			if (Arrays.contains(exclude, itemToAdd.getId())) {
 				itemToAdd.setVisible(false);
 			}
-			return super.allowItem(itemToAdd);
+			return true;
 		}
 	}
 

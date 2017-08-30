@@ -15,8 +15,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IStatusHandler;
-import org.eclipse.debug.core.model.IDebugTarget;
-import org.eclipse.emf.common.util.WrappedException;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -26,6 +24,7 @@ import org.yakindu.sct.simulation.core.SimulationCoreActivator;
 import org.yakindu.sct.simulation.core.engine.IExecutionControl;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
+import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 
 import com.google.inject.Inject;
@@ -38,16 +37,18 @@ import com.google.inject.Inject;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEngine{
+public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEngine {
 
 	@Inject
 	protected ExecutionContext context;
+	@Inject
+	private IExecutionContextInitializer contextInitializer;
 	@Inject
 	private IModelSequencer sequencer;
 	@Inject
 	protected IExecutionFlowInterpreter interpreter;
 	@Inject
-	private IExecutionContextInitializer contextInitializer;
+	protected ITimeTaskScheduler timeTaskScheduler;
 
 	protected boolean terminated = false;
 	protected boolean suspended = false;
@@ -56,15 +57,6 @@ public abstract class AbstractExecutionFlowSimulationEngine extends AbstractSimu
 
 	public AbstractExecutionFlowSimulationEngine(Statechart statechart) {
 		this.statechart = statechart;
-	}
-
-	protected void runCycle() {
-		try {
-			interpreter.runCycle();
-		} catch (Exception e) {
-			e.printStackTrace();
-			handleException(e);
-		}
 	}
 
 	@Override
@@ -91,6 +83,7 @@ public abstract class AbstractExecutionFlowSimulationEngine extends AbstractSimu
 	public void start() {
 		try {
 			interpreter.enter();
+			timeTaskScheduler.start();
 		} catch (Exception ex) {
 			handleException(ex);
 		}
@@ -98,13 +91,14 @@ public abstract class AbstractExecutionFlowSimulationEngine extends AbstractSimu
 
 	public void suspend() {
 		suspended = true;
-		interpreter.suspend();
+		timeTaskScheduler.suspend();
 	}
 
 	public void resume() {
 		try {
+			context.getSuspendedElements().clear();
 			suspended = false;
-			interpreter.resume();
+			timeTaskScheduler.resume();
 		} catch (Exception ex) {
 			handleException(ex);
 		}
@@ -112,14 +106,12 @@ public abstract class AbstractExecutionFlowSimulationEngine extends AbstractSimu
 
 	public void terminate() {
 		terminated = true;
-		interpreter.tearDown();
+		timeTaskScheduler.terminate();
 	}
 
 	public void stepForward() {
 		try {
-			interpreter.resume();
-			interpreter.runCycle();
-			interpreter.suspend();
+			timeTaskScheduler.step();
 		} catch (Exception ex) {
 			handleException(ex);
 		}
@@ -142,13 +134,18 @@ public abstract class AbstractExecutionFlowSimulationEngine extends AbstractSimu
 	public IExecutionControl getExecutionControl() {
 		return this;
 	}
-	
+
 	/**
 	 * Can be overriden to configure the use of an internal event queue.
+	 * 
 	 * @return false
 	 */
 	protected boolean useInternalEventQueue() {
 		return false;
+	}
+	
+	public Statechart getStatechart() {
+		return statechart;
 	}
 
 }

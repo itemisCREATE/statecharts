@@ -12,9 +12,12 @@ package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
+import java.util.LinkedList
 import java.util.List
 import java.util.Map
+import java.util.Queue
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtend.lib.annotations.Data
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.EnterState
@@ -35,11 +38,11 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.stext.lib.StatechartAnnotations
+import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler
+import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler.TimeTask
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
-import java.util.Queue
-import org.eclipse.xtend.lib.annotations.Data
-import java.util.LinkedList
 
 /**
  * 
@@ -50,30 +53,31 @@ import java.util.LinkedList
 @Singleton
 class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEventRaiser {
 
-	@Data static class Event
-	{
-		
+	@Data static class Event {
+
 		public ExecutionEvent event;
-		public Object value; 
+		public Object value;
 
 		new(ExecutionEvent ev, Object value) {
 			this.event = ev
 			this.value = value
 		}
 	}
-	
+
 	protected Queue<Event> internalEventQueue = new LinkedList<Event>()
 
 	@Inject
 	protected IStatementInterpreter statementInterpreter
 	@Inject
-	ITimingService timingService
+	ITimeTaskScheduler timingService
 	@Inject extension SexecExtensions
 	@Inject(optional=true)
 	ITraceStepInterpreter traceInterpreter
 	@Inject protected extension ExecutionContextExtensions
 	@Inject
 	protected StateVectorExtensions stateVectorExtensions;
+	@Inject
+	protected extension StatechartAnnotations 
 
 	protected ExecutionFlow flow
 	protected ExecutionContext executionContext
@@ -81,15 +85,12 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	protected Map<Integer, ExecutionState> historyStateConfiguration
 	protected List<Step> executionStack
 	protected int activeStateIndex
-	protected boolean useInternalEventQueue 
-
-	boolean suspended = false
-
+	protected boolean useInternalEventQueue
 
 	override initialize(ExecutionFlow flow, ExecutionContext context) {
 		initialize(flow, context, false)
 	}
-	
+
 	override initialize(ExecutionFlow flow, ExecutionContext context, boolean useInternalEventQueue) {
 		this.flow = flow
 		executionContext = context
@@ -98,8 +99,8 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		activeStateIndex = 0
 		historyStateConfiguration = newHashMap()
 		this.useInternalEventQueue = useInternalEventQueue
-		
-		if (!executionContext.snapshot){
+
+		if (!executionContext.snapshot) {
 			flow.staticInitSequence.scheduleAndRun
 			flow.initSequence.scheduleAndRun
 		}
@@ -109,7 +110,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		if (!executionContext.snapshot)
 			flow.enterSequences?.defaultSequence?.scheduleAndRun
 		else {
-			executionContext.activeStates.forEach[state|
+			executionContext.activeStates.forEach [ state |
 				activeStateConfiguration.set(state.toExecutionState.stateVector.offset, state.toExecutionState)
 				// schedule all time events
 				state.toExecutionState.enterSequences?.forEach[executeAfterRestore]
@@ -117,15 +118,15 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			flow.enterSequences?.forEach[executeAfterRestore]
 		}
 	}
-	
+
 	def dispatch protected void executeAfterRestore(Step it) {
 		// fall back
 	}
-	
+
 	def dispatch protected void executeAfterRestore(Sequence it) {
 		steps.forEach[executeAfterRestore]
 	}
-	
+
 	def dispatch protected void executeAfterRestore(Call it) {
 		step.executeAfterRestore
 	}
@@ -135,37 +136,28 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	def ExecutionState toExecutionState(RegularState state) {
-		return flow.eAllContents.filter(ExecutionState).findFirst[
+		return flow.eAllContents.filter(ExecutionState).findFirst [
 			EcoreUtil.equals(sourceElement, state)
 		]
 	}
 
 	override runCycle() {
-		
 		var Event event = null
-		
 		do {
-
 			// activate an event if there is one
-			if ( event !== null ) {			
+			if (event !== null) {
 				event.event.raised = true
-				event.event.value = event.value	
-				event = null		
+				event.event.value = event.value
+				event = null
 			}
-			
 			// perform a run to completion step
 			rtcStep
-			
 			// get next event if available
-			if ( ! internalEventQueue.empty ) event = internalEventQueue.poll
-			
+			if(! internalEventQueue.empty) event = internalEventQueue.poll
 		} while (event !== null)
-
 	}
 
-
 	def rtcStep() {
-		executionContext.raiseScheduledEvents
 		activeStateIndex = 0
 		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
 		executionContext.clearOutEvents
@@ -176,26 +168,12 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 		}
 		executionContext.clearLocalAndInEvents
 	}
-	
-	
-	override resume() {
-		timingService.resume
-		executionContext.suspendedElements.clear
-		suspended = false
-		run
-	}
-
-	override suspend() {
-		suspended = true
-		timingService.pause
-	}
 
 	override exit() {
 		flow.exitSequence.scheduleAndRun
 	}
 
 	override tearDown() {
-		timingService.stop
 	}
 
 	def scheduleAndRun(Step step) {
@@ -295,36 +273,30 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	def dispatch Object execute(ScheduleTimeEvent scheduleTimeEvent) {
-		var timeEvent = scheduleTimeEvent.timeEvent
-		var duration = statementInterpreter.evaluateStatement(scheduleTimeEvent.timeValue, executionContext)
-		timingService.scheduleTimeEvent(executionContext, timeEvent.name, timeEvent.periodic, duration as Long)
+		val timeEvent = scheduleTimeEvent.timeEvent
+		val duration = statementInterpreter.evaluateStatement(scheduleTimeEvent.timeValue, executionContext)
+		timingService.scheduleTimeTask(new TimeTask(timeEvent.name, [executionContext.getEvent(timeEvent.name).raised = true]), timeEvent.periodic, duration as Long)
 		null
 	}
 
 	def dispatch Object execute(UnscheduleTimeEvent timeEvent) {
-		timingService.unscheduleTimeEvent(timeEvent.timeEvent.name)
+		timingService.unscheduleTimeTask(timeEvent.timeEvent.name)
 		null
 	}
-	
-	
+
 	override raise(ExecutionEvent ev, Object value) {
-			
-			if (useInternalEventQueue) {
-				
-				internalEventQueue.add(new Event(ev, value));	
-				
-			} else {
-			
-				ev.raised = true
-				ev.value = value
-			
-			}
+		if (useInternalEventQueue) {
+			internalEventQueue.add(new Event(ev, value));
+
+		} else {
+			ev.raised = true
+			ev.value = value
+		}
 	}
 
-	
 	override boolean isActive() {
 		var List<RegularState> activeStates = executionContext.getAllActiveStates()
-		
+
 		for (RegularState regularState : activeStates) {
 			if (!(regularState instanceof FinalState)) {
 				return true;
@@ -348,5 +320,4 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			return true;
 		}
 	}
-	
 }

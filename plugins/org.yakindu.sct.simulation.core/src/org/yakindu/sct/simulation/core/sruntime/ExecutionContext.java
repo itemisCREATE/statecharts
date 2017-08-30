@@ -122,14 +122,6 @@ public interface ExecutionContext extends NamedElement, CompositeSlot {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	List<ExecutionEvent> getScheduledEvents();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */

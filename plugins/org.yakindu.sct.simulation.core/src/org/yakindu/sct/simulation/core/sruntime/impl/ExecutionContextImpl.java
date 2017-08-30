@@ -380,22 +380,6 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 		return result;
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public List<ExecutionEvent> getScheduledEvents() {
-		Iterable<ExecutionEvent> raisedEvents = Iterables.filter(getAllEvents(), new Predicate<ExecutionEvent>() {
-			public boolean apply(ExecutionEvent input) {
-				return input.isScheduled();
-			}
-		});
-		BasicEList<ExecutionEvent> result = new BasicEList<ExecutionEvent>();
-		Iterables.addAll(result, raisedEvents);
-		return result;
-	}
-	
 	
 	/**
 	 * Returns the variable by its qualified name

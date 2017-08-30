@@ -8,11 +8,12 @@
  * 
  * Jonathan Thoene - initial API and implementation
  *
-*/
+ */
 package org.yakindu.base.expressions.terminals;
 
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractValueConverter;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -29,16 +30,19 @@ import com.google.inject.Inject;
 public class QIDValueConverter extends AbstractValueConverter<String> {
 
 	@Inject
-	protected AbstractIDValueConverter idValueConverter;
+	protected IValueConverterService converterService;
 	@Inject
 	protected IQualifiedNameConverter converter;
+	@Inject
+	protected IGrammarAccess access;
 
 	@Override
-	public String toValue(String string, INode node) throws ValueConverterException {
+	public String toValue(String string, INode node)
+			throws ValueConverterException {
 		QualifiedName name = converter.toQualifiedName(string);
 		QualifiedName result = QualifiedName.EMPTY;
-		for(String str : name.getSegments()){
-			result = result.append(idValueConverter.toValue(str, node));
+		for (String str : name.getSegments()) {
+			result = result.append((String)converterService.toValue(str, "ID", node));
 		}
 		return result.toString();
 	}
@@ -47,8 +51,8 @@ public class QIDValueConverter extends AbstractValueConverter<String> {
 	public String toString(String value) throws ValueConverterException {
 		QualifiedName name = converter.toQualifiedName(value);
 		QualifiedName result = QualifiedName.EMPTY;
-		for(String str : name.getSegments()){
-			result = result.append(idValueConverter.toString(str));
+		for (String str : name.getSegments()) {
+			result = result.append(converterService.toString(str, "ID"));
 		}
 		return result.toString();
 	}

@@ -26,7 +26,6 @@ import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl#isRaised <em>Raised</em>}</li>
- *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl#isScheduled <em>Scheduled</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl#getDirection <em>Direction</em>}</li>
  * </ul>
  *
@@ -52,26 +51,6 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 	 * @ordered
 	 */
 	protected boolean raised = RAISED_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isScheduled() <em>Scheduled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isScheduled()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean SCHEDULED_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isScheduled() <em>Scheduled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isScheduled()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean scheduled = SCHEDULED_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDirection() <em>Direction</em>}' attribute.
@@ -138,27 +117,6 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isScheduled() {
-		return scheduled;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setScheduled(boolean newScheduled) {
-		boolean oldScheduled = scheduled;
-		scheduled = newScheduled;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_EVENT__SCHEDULED, oldScheduled, scheduled));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EventDirection getDirection() {
 		return direction;
 	}
@@ -185,8 +143,6 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 		switch (featureID) {
 			case SRuntimePackage.EXECUTION_EVENT__RAISED:
 				return isRaised();
-			case SRuntimePackage.EXECUTION_EVENT__SCHEDULED:
-				return isScheduled();
 			case SRuntimePackage.EXECUTION_EVENT__DIRECTION:
 				return getDirection();
 		}
@@ -203,9 +159,6 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 		switch (featureID) {
 			case SRuntimePackage.EXECUTION_EVENT__RAISED:
 				setRaised((Boolean)newValue);
-				return;
-			case SRuntimePackage.EXECUTION_EVENT__SCHEDULED:
-				setScheduled((Boolean)newValue);
 				return;
 			case SRuntimePackage.EXECUTION_EVENT__DIRECTION:
 				setDirection((EventDirection)newValue);
@@ -225,9 +178,6 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 			case SRuntimePackage.EXECUTION_EVENT__RAISED:
 				setRaised(RAISED_EDEFAULT);
 				return;
-			case SRuntimePackage.EXECUTION_EVENT__SCHEDULED:
-				setScheduled(SCHEDULED_EDEFAULT);
-				return;
 			case SRuntimePackage.EXECUTION_EVENT__DIRECTION:
 				setDirection(DIRECTION_EDEFAULT);
 				return;
@@ -245,8 +195,6 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 		switch (featureID) {
 			case SRuntimePackage.EXECUTION_EVENT__RAISED:
 				return raised != RAISED_EDEFAULT;
-			case SRuntimePackage.EXECUTION_EVENT__SCHEDULED:
-				return scheduled != SCHEDULED_EDEFAULT;
 			case SRuntimePackage.EXECUTION_EVENT__DIRECTION:
 				return direction != DIRECTION_EDEFAULT;
 		}
@@ -265,8 +213,6 @@ public class ExecutionEventImpl extends ExecutionSlotImpl implements ExecutionEv
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (raised: ");
 		result.append(raised);
-		result.append(", scheduled: ");
-		result.append(scheduled);
 		result.append(", direction: ");
 		result.append(direction);
 		result.append(')');

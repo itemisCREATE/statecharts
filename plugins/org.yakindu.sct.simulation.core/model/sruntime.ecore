@@ -4,7 +4,6 @@
     nsPrefix="sruntime">
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionContext" eSuperTypes="../../org.yakindu.base.types/model/base.ecore#//NamedElement #//CompositeSlot">
     <eOperations name="getRaisedEvents" upperBound="-1" eType="#//ExecutionEvent"/>
-    <eOperations name="getScheduledEvents" upperBound="-1" eType="#//ExecutionEvent"/>
     <eOperations name="getVariable" eType="#//ExecutionVariable">
       <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
@@ -28,7 +27,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionEvent" eSuperTypes="#//ExecutionSlot">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="raised" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheduled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//EventDirection"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionSlot" abstract="true" eSuperTypes="../../org.yakindu.base.types/model/base.ecore#//NamedElement">

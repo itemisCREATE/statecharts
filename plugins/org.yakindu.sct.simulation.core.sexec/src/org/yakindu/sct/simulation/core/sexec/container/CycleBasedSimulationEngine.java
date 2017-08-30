@@ -10,11 +10,17 @@
  */
 package org.yakindu.sct.simulation.core.sexec.container;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
 
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
+import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
+import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler.TimeTask;
+import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler.TimeTask.Priority;
+import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory;
+
+import com.google.inject.Inject;
 
 /**
  * Cycle based implementation of {@link ISimulationEngine}
@@ -24,41 +30,31 @@ import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
  */
 public class CycleBasedSimulationEngine extends AbstractExecutionFlowSimulationEngine {
 
-	private Timer timer;
+	public static final long DEFAULT_CYCLE_PERIOD = 200;
 
-	private long cyclePeriod;
+	@Inject
+	private IStatementInterpreter statementInterpreter;
 
-	public CycleBasedSimulationEngine(Statechart statechart, long cyclePeriod) {
+	public CycleBasedSimulationEngine(Statechart statechart) {
 		super(statechart);
-		this.cyclePeriod = cyclePeriod;
-		timer = new Timer();
 	}
 
-	protected void scheduleCycle() {
-		if (!terminated && !suspended) {
-			TimerTask virtualTimerTask = new TimerTask() {
-				public void run() {
-					runCycle();
-					scheduleCycle();
-				}
-			};
-			timer.schedule(virtualTimerTask, cyclePeriod);
+	@Override
+	public void init() {
+		super.init();
+		scheduleCycleEvent();
+	}
+
+	private void scheduleCycleEvent() {
+		Long cyclePeriod = DEFAULT_CYCLE_PERIOD;
+		ArgumentedAnnotation cycleBased = (ArgumentedAnnotation) getStatechart()
+				.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
+		if (cycleBased != null) {
+			cyclePeriod = (Long) statementInterpreter.evaluateStatement(cycleBased.getExpressions().get(0),
+					SRuntimeFactory.eINSTANCE.createExecutionContext());
 		}
-	}
 
-	public void start() {
-		super.start();
-		scheduleCycle();
+		TimeTask cycleTask = new TimeTask("$cycle", () -> interpreter.runCycle(), Priority.LOW);
+		timeTaskScheduler.scheduleTimeTask(cycleTask, true, cyclePeriod);
 	}
-
-	public void resume() {
-		super.resume();
-		scheduleCycle();
-	}
-
-	public void terminate() {
-		super.terminate();
-		timer.cancel();
-	}
-
 }
