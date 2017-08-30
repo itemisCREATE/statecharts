@@ -36,29 +36,22 @@
     <property name="lib.dir" location="${basedir}/lib" />
 
     <!-- Aether Ant Tasks configuration -->
-    <property name="aether.jar.version" value="1.0.0.v20140518" />
+    <property name="aether.jar.version" value="1.0.1.v20141111" />
     <property name="aether.jar.checksum"
-              value="9008c0c96390eacc0f7fdde542dacbd921f942dcd5c139465e21f8b583942edb995304025bb436cfeeea0b89698ef9dfccf8a027da68cd079669adea8cca381f" />
+              value="195ea2e75242b2a4919463e8e95f57bd3cfcfeb3920879fca5b680255dba4a22b9ec0d53138e608d3be94d80a444aa9b7b8522e5bf01660f0dfb4688dae998dd" />
     <property name="aether.jar.src"
               value="http://search.maven.org/remotecontent?filepath=org/eclipse/aether/aether-ant-tasks/${aether.jar.version}/aether-ant-tasks-${aether.jar.version}-uber.jar" />
     <property name="aether.jar.file" value="${lib.dir}/aether-ant-tasks-uber.jar" />
 
-    <!-- Wikitext download configuration -->
-    <property name="wikitext.zip.version" value="1.0.0.v20140518" />
-    <property name="wikitext.zip.checksum"
-              value="00d8bf79a9d7baf20e46d2435dd4b6a9963317a2737c731d11029c96aa86f64e8540639b6eefa6f04b8103860f47ff74e998c71b57445179dc20ad7c2847417c" />
-    <!--
-    <property name="wikitext.zip.src"
-              value="http://www.eclipse.org/downloads/download.php?file=/mylyn/snapshots/nightly/docs/wikitext-standalone-latest.zip" />
-    -->
-    <property name="wikitext.zip.src" value="file:///${basedir}/externals/wikitext.zip" />
-    <property name="wikitext.zip.file" value="${lib.dir}/wikitext.zip" />
-    <property name="wikitext.basename" value="wikitext-standalone" />
-    <property name="wikitext.version" value="2.8.0-SNAPSHOT" />
+    <!-- MyLyn Wikitext version: -->
+    <property name="wikitext.version" value="3.0.18" />
+
+    <!-- Compiled Java classes go here: -->
+    <property name="bin.dir" value="bin" />
 
 
 
-    <!-- Remove generated stuff: -->
+    <!-- Remove generated stuff. The "lib" directory will not be deleted. Remove it manually, if you have to. -->
     <target name="clean">
         <delete includeemptydirs="true" failonerror="false">
             <fileset dir="${basedir}" defaultexcludes="false">
@@ -68,53 +61,100 @@
                 <include name="${epub.dir}/**" />
             </fileset>
             <fileset dir="${src-merged.dir}" />
+            <fileset dir="${bin.dir}" />
         </delete>
     </target>
 
-
-    <!-- Download and unpack the wikitext standalone distribution. Unfortunately it is currently available as a nightly build only. -->
-    <target name="wikitext.download" description="Download and unpack the wikitext standalone distribution.">
-        <condition property="wikitext.zip.file.exists">
-            <and>
-                <available file="${wikitext.zip.file}" />
-                <checksum file="${wikitext.zip.file}"
-                          algorithm="SHA-512"
-                          property="${wikitext.zip.checksum}"
-                          verifyproperty="checksum.matches" />
-            </and>
+    <!-- Aether Ant Tasks are used to access Maven dependencies from an Ant build. It is initialized by downloading
+             the Aether Ant Tasks JAR to the library folder, if needed. The downloaded JAR will not be removed by the
+             "clean" target. If the JAR is present, a typedef will make Aether Ant Tasks' elements available in the Ant
+             build file. -->
+    <target name="init.aether"
+            description="Initializes Aether Ant Tasks JAR by downloading the JAR and defining a type.">
+        <condition property="target.exists">
+            <available file="${aether.jar.file}" />
         </condition>
-        <sequential unless:set="wikitext.zip.file.exists">
+        <sequential unless:set="target.exists">
             <mkdir dir="${lib.dir}" />
-            <get src="${wikitext.zip.src}"
-                 dest="${wikitext.zip.file}"
-                 skipexisting="false"
+            <get src="${aether.jar.src}"
+                 dest="${aether.jar.file}"
+                 skipexisting="true"
                  usetimestamp="true"
                  verbose="true" />
-            <fail message="Checksum mismatch for ${wikitext.zip.file}. Please delete it and rerun ant to redownload.">
+            <fail message="Checksum mismatch for ${aether.jar.file}. Please delete it and rerun ant to redownload.">
                 <condition>
                     <not>
-                        <checksum file="${wikitext.zip.file}"
+                        <checksum file="${aether.jar.file}"
                                   algorithm="SHA-512"
-                                  property="${wikitext.zip.checksum}"
+                                  property="${aether.jar.checksum}"
                                   verifyproperty="checksum.matches" />
                     </not>
                 </condition>
             </fail>
-            <unzip dest="${lib.dir}" src="${wikitext.zip.file}" />
         </sequential>
+        <path id="aether-ant-tasks.classpath" path="${aether.jar.file}" />
+        <typedef resource="org/eclipse/aether/ant/antlib.xml"
+                 uri="antlib:org.eclipse.aether.ant"
+                 classpathref="aether-ant-tasks.classpath" />
     </target>
 
+    <!-- Resolves the Wikitext dependencies: -->
+    <target name="init.wikitext" description="Resolves the Wikitext dependencies." depends="init.aether">
 
-    <!-- Resolves the necessary dependencies: -->
-    <target name="init.wikitext"
-            description="Resolves the necessary wikitext dependencies."
-            depends="wikitext.download">
-        <property name="wikitext.dir" location="${lib.dir}/${wikitext.basename}-${wikitext.version}" />
-        <path id="wikitext.classpath">
-            <fileset dir="${wikitext.dir}">
-                <include name="*.jar" />
-            </fileset>
+        <!-- Classpath for MyLyn Wikitext: -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="org.eclipse.mylyn.docs"
+                            artifactId="org.eclipse.mylyn.wikitext"
+                            version="${wikitext.version}"
+                            scope="compile" />
+            </artifact:dependencies>
+            <path refid="wikitext.classpath" />
+            <files dir="${lib.dir}/bin" layout="{groupId}/{artifactId}-{baseVersion}.{extension}" />
+        </artifact:resolve>
+
+        <!-- Sources of MyLyn Wikitext: -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="org.eclipse.mylyn.docs"
+                            artifactId="org.eclipse.mylyn.wikitext"
+                            version="${wikitext.version}"
+                            scope="compile"
+                            classifier="sources" />
+            </artifact:dependencies>
+            <files dir="${lib.dir}/src" layout="{groupId}/{artifactId}-{baseVersion}-{classifier}.{extension}" />
+        </artifact:resolve>
+
+        <!-- Classpath for MyLyn Wikitext's Textile support: -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="org.eclipse.mylyn.docs"
+                            artifactId="org.eclipse.mylyn.wikitext.textile"
+                            version="${wikitext.version}"
+                            scope="compile" />
+            </artifact:dependencies>
+            <path refid="wikitext.textile.classpath" />
+            <files dir="${lib.dir}/bin" layout="{groupId}/{artifactId}-{baseVersion}.{extension}" />
+        </artifact:resolve>
+
+        <!-- Classpath for MyLyn Wikitext's Ant support: -->
+        <artifact:resolve>
+            <artifact:dependencies>
+                <dependency groupId="org.eclipse.mylyn.docs"
+                            artifactId="org.eclipse.mylyn.wikitext.ant"
+                            version="${wikitext.version}"
+                            scope="compile" />
+            </artifact:dependencies>
+            <path refid="wikitext.ant.classpath" />
+        </artifact:resolve>
+
+        <!-- Classpath for Wikitext: -->
+        <path id="wikitext.all.classpath">
+            <path refid="wikitext.classpath" />
+            <path refid="wikitext.textile.classpath" />
+            <path refid="wikitext.ant.classpath" />
         </path>
+
     </target>
 
 
@@ -130,8 +170,7 @@
             depends="init.wikitext">
 
         <sequential>
-            <taskdef classpathref="wikitext.classpath"
-                     resource="org/eclipse/mylyn/wikitext/core/ant/tasks.properties" />
+            <taskdef classpathref="wikitext.all.classpath" resource="org/eclipse/mylyn/wikitext/ant/tasks.properties" />
 
             <!-- Textile source files to turn into HTML: -->
             <fileset id="fileset.eclipsehelp" dir="${src.dir}">
@@ -275,13 +314,25 @@
              images/…
     -->
 
+    <target name="compile.wikitext.converter"
+            description="Compiles the Wikitext converter that turns Textile into our Hubspot HTML"
+            depends="init.wikitext">
+        <mkdir dir="${bin.dir}" />
+        <javac srcdir="${src.dir}/main/java"
+               destdir="${bin.dir}"
+               classpathref="wikitext.all.classpath"
+               debug="true"
+               optimize="false"
+               includeantruntime="false">
+        </javac>
+    </target>
+
     <target name="generate.website"
             description="Generates the documentation as various HTML files for the website, each being composed of selected sections. Use -Dwebsite.local.files=true to generate the website as local files for preview."
-            depends="init.wikitext">
+            depends="init.wikitext, compile.wikitext.converter">
 
         <sequential>
-            <taskdef classpathref="wikitext.classpath"
-                     resource="org/eclipse/mylyn/wikitext/core/ant/tasks.properties" />
+            <taskdef classpathref="wikitext.all.classpath" resource="org/eclipse/mylyn/wikitext/ant/tasks.properties" />
 
             <!-- Installation Guide -->
             <create-website-part name="YSCT-installation" title="YAKINDU Statechart Tools Installation Guide">
@@ -373,45 +424,29 @@
                 <textile-files />
             </concat>
 
-            <!-- Convert textile source files to HTML: -->
-            <wikitext-to-html markupLanguage="Textile"
-                              multipleOutputFiles="false"
-                              navigationImages="true"
-                              formatoutput="true"
-                              validate="true"
-                              xhtmlStrict="true"
-                              overwrite="true"
-                              failOnValidationError="true"
-                              failOnValidationWarning="false"
-                              sourceEncoding="UTF-8"
-                              title="@{title}">
-                <fileset dir="${work.dir}">
-                    <include name="${index.textile}" />
-                </fileset>
-                <stylesheet url="${css.dir}/${css.root.file}" />
-            </wikitext-to-html>
-
-            <!-- Load website fragments: -->
-            <sequential unless:set="website.local.files">
-                <loadfile property="website.header" srcFile="${src.dir}/website/header.htmlf" encoding="UTF-8" />
-                <loadfile property="website.footer" srcFile="${src.dir}/website/footer.htmlf" encoding="UTF-8" />
-                <loadfile property="website.calltoaction.download"
-                          srcFile="${src.dir}/website/calltoaction.download.htmlf"
-                          encoding="UTF-8" />
-            </sequential>
-
-            <!-- Load fragments for generating local files which should look simular to the website: -->
-            <sequential if:set="website.local.files">
-                <loadfile property="website.header"
-                          srcFile="${src.dir}/website/header.local.files.htmlf"
-                          encoding="UTF-8" />
-                <loadfile property="website.footer"
-                          srcFile="${src.dir}/website/footer.local.files.htmlf"
-                          encoding="UTF-8" />
-                <loadfile property="website.calltoaction.download"
-                          srcFile="${src.dir}/website/calltoaction.download.local.files.htmlf"
-                          encoding="UTF-8" />
-            </sequential>
+            <!-- Convert textile source files to Hubspot HTML: -->
+            <path id="converter.classpath">
+                <pathelement location="${bin.dir}" />
+                <path refid="wikitext.all.classpath" />
+            </path>
+            <java classname="org.yakindu.sct.doc.user.wikitext.TextileToHubspotConverter"
+                  classpathref="converter.classpath"
+                  failonerror="true">
+                <arg value="--p1-file" />
+                <arg value="${src.dir}/website/p1.htmlf" />
+                <arg value="--contents-template-file" />
+                <arg value="${src.dir}/website/contents.htmlf" />
+                <arg value="--p2-file" />
+                <arg value="${src.dir}/website/p2.htmlf" />
+                <arg value="--toc-template-file" />
+                <arg value="${src.dir}/website/toc.htmlf" />
+                <arg value="--p3-file" />
+                <arg value="${src.dir}/website/p3.htmlf" />
+                <arg value="--input" />
+                <arg value="${work.dir}/${index.textile}" />
+                <arg value="--output" />
+                <arg value="${work.dir}/${index.html}" />
+            </java>
 
             <!-- Replace "<pre><code>" durch "<pre class="prettyprint"><code>": -->
             <replaceregexp byline="false"
@@ -429,22 +464,6 @@
                            match='src="images/'
                            replace='src="http://info.itemis.com/hubfs/yakindu/statechart-tools/documentation/images/'
                            unless:set="website.local.files">
-                <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
-                </fileset>
-            </replaceregexp>
-
-            <!-- Replace everything up to and including "<body>" by website-specific header: -->
-            <replaceregexp byline="false" flags="s" replace="${website.header}">
-                <regexp pattern="^(.*)&lt;body&gt;" />
-                <fileset dir="${work.dir}">
-                    <include name="${index.html}" />
-                </fileset>
-            </replaceregexp>
-
-            <!-- Replace everything from and including "</body>" by website-specific footer: -->
-            <replaceregexp byline="false" flags="s" replace="${website.footer}">
-                <regexp pattern="&lt;/body&gt;(.*)$" />
                 <fileset dir="${work.dir}">
                     <include name="${index.html}" />
                 </fileset>

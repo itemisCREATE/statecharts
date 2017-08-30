@@ -1,0 +1,6 @@
+
+
+        {% if dynamic_page_hubdb_row.hs_path == "${h1.id}" %}
+${h1.contents}
+
+        {% endif %}
