@@ -431,6 +431,8 @@
             </path>
             <java classname="org.yakindu.sct.doc.user.wikitext.TextileToHubspotConverter"
                   classpathref="converter.classpath"
+                  fork="true"
+                  dir="${basedir}"
                   failonerror="true">
                 <arg value="--p1-file" />
                 <arg value="${src.dir}/website/p1.htmlf" />
