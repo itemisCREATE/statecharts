@@ -47,18 +47,18 @@ public class XtextStyledTextCellEditorEx extends XtextStyledTextCellEditor {
 	 *            Value to set the cell editor to.
 	 * 
 	 *            Note: This happens address defect RATLC00522324. For our
-	 *            topgraphical edit parts we delagate the direct edit request to
+	 *            topgraphical edit parts we delegate the direct edit request to
 	 *            a primary edit part and set focus on that. The issue is that
 	 *            if the user has typed in an initial character when setting
 	 *            focus to the edit part, which typically is a
-	 *            TextCompartmentEditPart then setting that intial value does
+	 *            TextCompartmentEditPart then setting that initial value does
 	 *            not fire the necessary change events that need to occur in
-	 *            order for that value to be recongnized. If you don't use this
+	 *            order for that value to be recognized. If you don't use this
 	 *            method then the result is that if you just type in the initial
 	 *            character and that is it then the text compartment loses focus
 	 *            then the value will not be saved. This is because setting the
 	 *            value of the cell doesn't think its value has changed since
-	 *            the first character is not recongized as a change.
+	 *            the first character is not recognized as a change.
 	 */
 	public void setValueAndProcessEditOccured(Object value) {
 		setValue(value);
