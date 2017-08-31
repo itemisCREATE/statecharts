@@ -253,6 +253,16 @@
                 </fileset>
             </replaceregexp>
 
+            <!-- Remove H1 headings produced by "early separators" -->
+            <replaceregexp byline="false"
+                           flags="g"
+                           match='&lt;h1 id=".+" style="%EARLY_SEPARATOR%"&gt;.*&lt;/h1&gt;'
+                           replace=''>
+                <fileset dir="${help.dir}">
+                    <include name="**/*.html" />
+                </fileset>
+            </replaceregexp>
+
             <!-- Fix DIV elements -->
             <replaceregexp byline="false" flags="g" match='&lt;p&gt;&lt;div(.*)&gt;&lt;/p&gt;' replace='&lt;div\1&gt;'>
                 <fileset dir="${help.dir}">

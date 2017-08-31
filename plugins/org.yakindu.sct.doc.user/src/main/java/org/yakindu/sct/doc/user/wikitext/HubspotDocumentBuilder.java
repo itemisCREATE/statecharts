@@ -3,6 +3,7 @@ package org.yakindu.sct.doc.user.wikitext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,19 @@ import org.eclipse.mylyn.wikitext.parser.builder.HtmlDocumentBuilder;
  * </li>
  * </ol>
  * 
+ * <p>
+ * H1 headlines are used to separate sections. However, sometimes certain text
+ * elements preceed the H1 that must go into the same section, for instance if
+ * the H1 and subsequent elements are encapsulated in a DIV element. In this
+ * case, you can place an "early separator" before the DIV's start tag. The
+ * early separator is a pseudo H1 headline with a very special CSS class. The
+ * eary separator looks like this:
+ * </p>
+ * 
+ * <pre>
+ * h1{%EARLY_SEPARATOR%}. Some text
+ * </pre>
+ * 
  * @author Rainer Klute,
  *         <a href="mailto:rainer.klute@itemis.de">rainer.klute@itemise.de</a>,
  *         2017-08-28
@@ -80,7 +94,16 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 	private PrintWriter w;
 	private String resource = "";
 	private boolean isProcessingHeading = false;
+	private boolean isEarlySeparator = false;
+	private boolean isFollowingEarlySeparator = false;
 	private Heading currentHeading;
+
+	/*
+	 * Used to collect stuff between an early separator and the next H1 heading:
+	 */
+	private HtmlDocumentBuilder h2 = null;
+	private StringWriter s2 = null;
+	private PrintWriter w2 = null;
 
 	/**
 	 * <p>
@@ -200,22 +223,36 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 
 	@Override
 	public void beginBlock(final BlockType type, final Attributes attributes) {
-		super.beginBlock(type, attributes);
+		if (isEarlySeparator)
+			h2.beginBlock(type, attributes);
+		else
+			super.beginBlock(type, attributes);
 	}
 
 	@Override
 	public void endBlock() {
-		super.endBlock();
+		if (isEarlySeparator)
+			h2.endBlock();
+		else
+			super.endBlock();
 	}
 
 	@Override
 	public void beginSpan(final SpanType type, final Attributes attributes) {
-		super.beginSpan(type, attributes);
+		if (isEarlySeparator) {
+			if (!isProcessingHeading)
+				h2.beginSpan(type, attributes);
+		} else
+			super.beginSpan(type, attributes);
 	}
 
 	@Override
 	public void endSpan() {
-		super.endSpan();
+		if (isEarlySeparator) {
+			if (!isProcessingHeading)
+				h2.endSpan();
+		} else
+			super.endSpan();
 	}
 
 	/**
@@ -234,74 +271,123 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 	public void beginHeading(final int level, final Attributes attributes) {
 		isProcessingHeading = true;
 		final String id = attributes.getId();
-		currentHeading = new Heading(resource, level, id);
+		if (!isEarlySeparator) {
+			isFollowingEarlySeparator = isEarlySeparator;
+			isEarlySeparator = level == 1 && "%EARLY_SEPARATOR%".equals(attributes.getCssStyle());
+		} else {
+			isFollowingEarlySeparator = isEarlySeparator;
+			isEarlySeparator = false;
+		}
+		if (isEarlySeparator) {
+			/*
+			 * Collect everything between the early separator and the next H1 in
+			 * another writer.
+			 */
+			s2 = new StringWriter();
+			w2 = new PrintWriter(s2);
+			h2 = new HtmlDocumentBuilder(w2);
+		} else
+			currentHeading = new Heading(resource, level, id);
 
 		if (level == 1) {
-			String s;
-			if (!isFirstH1) {
-				s = resolveHeadingIdAndTitle(contentsTemplate[1], 1, id, null);
-				w.print(s);
-			} else {
+			if (!isFirstH1 && !isFollowingEarlySeparator)
+				w.print(resolveHeadingIdAndTitle(contentsTemplate[1], 1, id, null));
+			else
 				isFirstH1 = false;
-			}
-			s = resolveHeadingIdAndTitle(contentsTemplate[0], 1, id, null);
-			w.println(s);
-		}
 
-		super.beginHeading(level, attributes);
+			if (!isEarlySeparator) {
+				w.println(resolveHeadingIdAndTitle(contentsTemplate[0], 1, id, null));
+				if (isFollowingEarlySeparator) {
+					w2.close();
+					w.println(s2.toString());
+					h2 = null;
+					w2 = null;
+				}
+				super.beginHeading(level, attributes);
+			}
+		} else
+			super.beginHeading(level, attributes);
 	}
 
 	@Override
 	public void endHeading() {
-		headings.add(currentHeading);
-		isProcessingHeading = false;
-		super.endHeading();
+		if (!isEarlySeparator) {
+			headings.add(currentHeading);
+			isProcessingHeading = false;
+			super.endHeading();
+		}
 	}
 
 	@Override
 	public void characters(final String text) {
-		if (isProcessingHeading)
+		if (isEarlySeparator) {
+			if (!isProcessingHeading)
+				h2.characters(text);
+		} else if (isProcessingHeading) {
 			if (currentHeading.getTitle() == null)
 				currentHeading.setTitle(text);
 			else
 				currentHeading.appendToTitle(text);
-		super.characters(text);
+			super.characters(text);
+		} else
+			super.characters(text);
 	}
 
 	@Override
 	public void entityReference(final String entity) {
-		super.entityReference(entity);
+		if (isEarlySeparator)
+			h2.entityReference(entity);
+		else
+			super.entityReference(entity);
 	}
 
 	@Override
 	public void image(final Attributes attributes, final String url) {
-		super.image(attributes, url);
+		if (isEarlySeparator)
+			h2.image(attributes, url);
+		else
+			super.image(attributes, url);
 	}
 
 	@Override
 	public void link(final Attributes attributes, final String hrefOrHashName, final String text) {
-		super.link(attributes, hrefOrHashName, text);
+		if (isEarlySeparator)
+			h2.link(attributes, hrefOrHashName, text);
+		else
+			super.link(attributes, hrefOrHashName, text);
 	}
 
 	@Override
 	public void imageLink(final Attributes linkAttributes, final Attributes imageAttributes, final String href,
 			final String imageUrl) {
-		super.imageLink(linkAttributes, imageAttributes, href, imageUrl);
+		if (isEarlySeparator)
+			h2.imageLink(linkAttributes, imageAttributes, href, imageUrl);
+		else
+			super.imageLink(linkAttributes, imageAttributes, href, imageUrl);
 	}
 
 	@Override
 	public void acronym(final String text, final String definition) {
-		super.acronym(text, definition);
+		if (isEarlySeparator)
+			h2.acronym(text, definition);
+		else
+			super.acronym(text, definition);
 	}
 
 	@Override
 	public void lineBreak() {
-		super.lineBreak();
+		if (isEarlySeparator)
+			h2.lineBreak();
+		else
+			super.lineBreak();
 	}
 
 	@Override
 	public void charactersUnescaped(final String literal) {
-		super.charactersUnescaped(literal);
+		if (isEarlySeparator)
+			h2.charactersUnescaped(literal);
+		else
+			super.charactersUnescaped(literal);
 	}
 
 	/**

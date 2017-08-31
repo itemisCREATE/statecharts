@@ -1,5 +1,5 @@
 
-p. 
+h1{%EARLY_SEPARATOR%}. 
 
 ==<div class="pro-feature">==
 
