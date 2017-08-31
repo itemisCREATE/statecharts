@@ -214,7 +214,7 @@
         <div class="row-fluid-wrapper">
             <div class="row-fluid">
 
-        {% for row in hubdb_table_rows(dynamic_page_hubdb_table_id) %}
+        {% for row in hubdb_table_rows(dynamic_page_hubdb_table_id, "&chapter__gte=1&orderBy=chapter") %}
             
             {% if loop.index != 1 && (loop.index - 1) % 3 == 0 %}
                     </div>
