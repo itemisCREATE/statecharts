@@ -108,7 +108,3 @@
     <div class="span12 widget-span widget-type-raw_html " style="" data-widget-type="raw_html" data-x="0" data-w="12">
     <div class="cell-wrapper layout-widget-wrapper">
     
-    
-    {% widget_block raw_html "module_1502279669748116" wrapping_html='', per_widget_wrapper_html='', overrideable=true, label='Custom HTML' %}
-    {% widget_attribute "value" %}
-    

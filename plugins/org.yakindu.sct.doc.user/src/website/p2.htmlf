@@ -1,10 +1,5 @@
 
 
-        
-    {% end_widget_attribute %}
-      {% end_widget_block %}
-      
-      
     </div><!--end layout-widget-wrapper -->
     </div><!--end widget-span -->
     </div><!--end row-->
