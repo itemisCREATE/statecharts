@@ -82,7 +82,7 @@ class StatechartExtensions {
 	 * Provides a list of all TimeEventSpecs that are defined in the context of 'state'.
 	 */
 	def dispatch List<TimeEventSpec> timeEventSpecs(State state) { 
-		var tesList = new ArrayList<TimeEventSpec>()
+		val tesList = new ArrayList<TimeEventSpec>()
 
 		getTimeEventSpecs(state.outgoingTransitions, tesList)
 
@@ -95,7 +95,7 @@ class StatechartExtensions {
 	 * Provides a list of all TimeEventSpecs that are defined in the context of 'state'.
 	 */
 	def dispatch List<TimeEventSpec> timeEventSpecs(Statechart state) { 
-		var tesList = new ArrayList<TimeEventSpec>()
+		val tesList = new ArrayList<TimeEventSpec>()
 		
 		getTimeEventSpecs(state.localReactions, tesList)
 				
@@ -110,7 +110,19 @@ class StatechartExtensions {
 			}]
 		)
 	}
+	
+	def dispatch int maxNumberOfParallelTimeEvents(Statechart sc) {
+		sc.timeEventSpecs.size + (sc.regions.map[maxNumberOfParallelTimeEvents].reduce[a, b | a + b]?:0)
+	}
+	
+	def dispatch int maxNumberOfParallelTimeEvents(Region r) {
+		r.vertices.filter(State).map[maxNumberOfParallelTimeEvents].max
+	}
 
+	def dispatch int maxNumberOfParallelTimeEvents(State s) {
+		s.timeEventSpecs.size + (s.regions.map[maxNumberOfParallelTimeEvents].reduce[a, b | a + b]?:0)
+	}
+ 
 	def dispatch ReactiveElement reactiveElement(Reaction r) {
 		r.scope.reactiveElement		
 	}
