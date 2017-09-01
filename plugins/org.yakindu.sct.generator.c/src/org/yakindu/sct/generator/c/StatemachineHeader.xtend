@@ -17,8 +17,10 @@ import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
@@ -34,6 +36,7 @@ class StatemachineHeader implements IContentTemplate {
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntries
 	@Inject protected extension INamingService
+	@Inject protected extension StatechartExtensions
 	
 	@Inject
 	IGenArtifactConfigurations defaultConfigs
@@ -211,6 +214,11 @@ class StatemachineHeader implements IContentTemplate {
 		«IF hasHistory»
 			/*! Define dimension of the state configuration vector for history states. */
 		#define «type.toUpperCase»_MAX_HISTORY_STATES «historyVector.size»«ENDIF»
+		
+		«IF timed»
+		/*! Define maximum number of time events that can be active at once */
+		#define «type.toUpperCase»_MAX_ACTIVE_TIME_EVENTS «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»
+		«ENDIF»
 		
 		/*! Define indices of states in the StateConfVector */
 		«stateConfVectorDefines»
