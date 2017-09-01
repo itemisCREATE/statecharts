@@ -119,23 +119,6 @@ class StatechartExtensions {
 		return tesList
 	}
 
-//	/** 
-//	 * Provides a list of all TimeEventSpecs that are defined in the context of 'statechart'.
-//	 */
-//	def List<TimeEventSpec> timeEventSpecs(Statechart state) { 
-//		// TODO: also query local reactions
-//		var tesList = new ArrayList<TimeEventSpec>()
-//
-//		state.localReactions.fold(tesList, 
-//			[s, r | {
-//				EcoreUtil2::eAllContentsAsList(r).filter(typeof (TimeEventSpec)).forEach(tes | s.add(tes))
-//				s
-//			}]
-//		)
-//				
-//		return tesList
-//	}
-
 	def dispatch ReactiveElement reactiveElement(Reaction r) {
 		r.scope.reactiveElement		
 	}
