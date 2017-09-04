@@ -50,8 +50,8 @@ public class DefaultCoreLibraryHelper implements ICoreLibraryHelper {
 
 	@Override
 	public String getRelativeTargetFolder(GeneratorEntry entry) {
-		String projectFolderName = getTargetProjectValue(entry).getStringValue();
-		String targetFolderValue = getTargetFolderValue(entry).getStringValue();
+		String projectFolderName = getTargetProjectValue(entry).getExpression().toString();
+		String targetFolderValue = getTargetFolderValue(entry).getExpression().toString();
 		return projectFolderName + Path.SEPARATOR + targetFolderValue;
 	}
 

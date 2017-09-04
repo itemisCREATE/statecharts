@@ -12,25 +12,16 @@ package org.yakindu.sct.generator.genmodel;
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
-import org.yakindu.base.types.typesystem.GenericTypeSystem;
-import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.generator.genmodel.naming.GenModelQualifiedNameProvider;
-import org.yakindu.sct.generator.genmodel.scoping.SGenGlobalScopeProvider;
 import org.yakindu.sct.generator.genmodel.serializer.SGenCrossReferenceSerializer;
-import org.yakindu.sct.generator.genmodel.typesystem.SGenTypeInferrer;
 
-import com.google.inject.Binder;
-
+/**
+ * Use this class to register components to be used at runtime / without the
+ * Equinox extension registry.
+ */
 @SuppressWarnings("restriction")
-public class SGenRuntimeModule extends org.yakindu.sct.generator.genmodel.AbstractSGenRuntimeModule {
-
-	@Override
-	public void configure(Binder binder) {
-		super.configure(binder);
-		binder.bind(ITypeSystem.class).toInstance(getTypeSystem());
-	}
-
+public class SGenRuntimeModule extends
+		org.yakindu.sct.generator.genmodel.AbstractSGenRuntimeModule {
 	@Override
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return GenModelQualifiedNameProvider.class;
@@ -38,17 +29,5 @@ public class SGenRuntimeModule extends org.yakindu.sct.generator.genmodel.Abstra
 
 	public Class<? extends ICrossReferenceSerializer> bindICrossReferenceSerializer() {
 		return SGenCrossReferenceSerializer.class;
-	}
-
-	protected ITypeSystem getTypeSystem() {
-		return GenericTypeSystem.getInstance();
-	}
-
-	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
-		return SGenTypeInferrer.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return SGenGlobalScopeProvider.class;
 	}
 }

@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.SGenPackage;
-import org.yakindu.sct.model.sgen.VariableDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +35,6 @@ import org.yakindu.sct.model.sgen.VariableDefinition;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.GeneratorModelImpl#getEntries <em>Entries</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.GeneratorModelImpl#getGeneratorId <em>Generator Id</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgen.impl.GeneratorModelImpl#getVariables <em>Variables</em>}</li>
  * </ul>
  *
  * @generated
@@ -70,16 +68,6 @@ public class GeneratorModelImpl extends EObjectImpl implements GeneratorModel {
 	 * @ordered
 	 */
 	protected String generatorId = GENERATOR_ID_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getVariables() <em>Variables</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVariables()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<VariableDefinition> variables;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -138,25 +126,11 @@ public class GeneratorModelImpl extends EObjectImpl implements GeneratorModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<VariableDefinition> getVariables() {
-		if (variables == null) {
-			variables = new EObjectContainmentEList<VariableDefinition>(VariableDefinition.class, this, SGenPackage.GENERATOR_MODEL__VARIABLES);
-		}
-		return variables;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SGenPackage.GENERATOR_MODEL__ENTRIES:
 				return ((InternalEList<?>)getEntries()).basicRemove(otherEnd, msgs);
-			case SGenPackage.GENERATOR_MODEL__VARIABLES:
-				return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -173,8 +147,6 @@ public class GeneratorModelImpl extends EObjectImpl implements GeneratorModel {
 				return getEntries();
 			case SGenPackage.GENERATOR_MODEL__GENERATOR_ID:
 				return getGeneratorId();
-			case SGenPackage.GENERATOR_MODEL__VARIABLES:
-				return getVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -195,10 +167,6 @@ public class GeneratorModelImpl extends EObjectImpl implements GeneratorModel {
 			case SGenPackage.GENERATOR_MODEL__GENERATOR_ID:
 				setGeneratorId((String)newValue);
 				return;
-			case SGenPackage.GENERATOR_MODEL__VARIABLES:
-				getVariables().clear();
-				getVariables().addAll((Collection<? extends VariableDefinition>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -217,9 +185,6 @@ public class GeneratorModelImpl extends EObjectImpl implements GeneratorModel {
 			case SGenPackage.GENERATOR_MODEL__GENERATOR_ID:
 				setGeneratorId(GENERATOR_ID_EDEFAULT);
 				return;
-			case SGenPackage.GENERATOR_MODEL__VARIABLES:
-				getVariables().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -236,8 +201,6 @@ public class GeneratorModelImpl extends EObjectImpl implements GeneratorModel {
 				return entries != null && !entries.isEmpty();
 			case SGenPackage.GENERATOR_MODEL__GENERATOR_ID:
 				return GENERATOR_ID_EDEFAULT == null ? generatorId != null : !GENERATOR_ID_EDEFAULT.equals(generatorId);
-			case SGenPackage.GENERATOR_MODEL__VARIABLES:
-				return variables != null && !variables.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

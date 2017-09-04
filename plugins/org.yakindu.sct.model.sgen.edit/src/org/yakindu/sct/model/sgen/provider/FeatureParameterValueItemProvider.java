@@ -26,7 +26,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.SGenFactory;
 import org.yakindu.sct.model.sgen.SGenPackage;
@@ -175,97 +174,22 @@ public class FeatureParameterValueItemProvider extends ItemProviderAdapter
 		newChildDescriptors.add
 			(createChildParameter
 				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 SGenFactory.eINSTANCE.createVarRefExpression()));
+				 SGenFactory.eINSTANCE.createBoolLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
+				 SGenFactory.eINSTANCE.createIntLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createConditionalExpression()));
+				 SGenFactory.eINSTANCE.createRealLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+				 SGenFactory.eINSTANCE.createStringLiteral()));
 	}
 
 	/**

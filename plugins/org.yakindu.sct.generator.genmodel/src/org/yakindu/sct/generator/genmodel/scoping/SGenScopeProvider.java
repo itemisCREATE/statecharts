@@ -24,7 +24,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
-import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
@@ -55,9 +54,6 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		if(reference.getEReferenceType() == TypesPackage.Literals.TYPE) {
-			return getDelegate().getScope(context, reference);
-		}
 		if (reference.getName().equals("type")) {
 			return scope_Type(context, reference);
 		}
@@ -69,7 +65,7 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 		return super.getScope(context, reference);
 	}
-	
+
 	protected IScope scope_GeneratorEntry_elementRef(final EObject context,
 			final EReference reference) {
 		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil2

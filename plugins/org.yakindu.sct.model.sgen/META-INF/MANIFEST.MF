@@ -11,12 +11,9 @@ Export-Package: org.yakindu.sct.model.sgen,
  org.yakindu.sct.model.sgen.impl,
  org.yakindu.sct.model.sgen.util
 Require-Bundle: org.eclipse.core.runtime,
- org.yakindu.base.expressions;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.yakindu.sct.model.sgraph;visibility:=reexport,
- org.yakindu.sct.model.sgen;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.yakindu.base.types;visibility:=reexport,
- com.google.inject;visibility:=reexport,
- org.yakindu.sct.simulation.core
+ com.google.inject;visibility:=reexport
 Bundle-ActivationPolicy: lazy

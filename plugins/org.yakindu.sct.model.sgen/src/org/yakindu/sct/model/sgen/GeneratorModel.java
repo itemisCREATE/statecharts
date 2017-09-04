@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgen.GeneratorModel#getEntries <em>Entries</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.GeneratorModel#getGeneratorId <em>Generator Id</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgen.GeneratorModel#getVariables <em>Variables</em>}</li>
  * </ul>
  *
  * @see org.yakindu.sct.model.sgen.SGenPackage#getGeneratorModel()
@@ -73,21 +72,5 @@ public interface GeneratorModel extends EObject {
 	 * @generated
 	 */
 	void setGeneratorId(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.sct.model.sgen.VariableDefinition}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Variables</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variables</em>' containment reference list.
-	 * @see org.yakindu.sct.model.sgen.SGenPackage#getGeneratorModel_Variables()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<VariableDefinition> getVariables();
 
 } // GeneratorModel

@@ -48,7 +48,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	protected ITypeSystem registry;
 
 	@Inject
-	protected TypeValidator typeValidator;
+	TypeValidator typeValidator;
 
 	protected IValidationIssueAcceptor acceptor;
 

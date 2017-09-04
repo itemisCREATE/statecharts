@@ -10,7 +10,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.generator.genmodel,
  org.yakindu.sct.commons,
  org.eclipse.jdt.core,
- org.eclipse.emf.workspace,
- org.yakindu.sct.model.sgen
+ org.eclipse.emf.workspace
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy

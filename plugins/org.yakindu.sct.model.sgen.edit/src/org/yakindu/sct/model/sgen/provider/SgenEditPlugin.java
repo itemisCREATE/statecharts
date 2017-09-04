@@ -13,8 +13,6 @@ package org.yakindu.sct.model.sgen.provider;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.yakindu.base.base.provider.BaseEditPlugin;
-import org.yakindu.base.expressions.expressions.provider.ExpressionsEditPlugin;
-import org.yakindu.base.types.provider.TypesEditPlugin;
 
 /**
  * This is the central singleton for the Sgen edit plugin.
@@ -48,8 +46,6 @@ public final class SgenEditPlugin extends EMFPlugin {
 		super
 		  (new ResourceLocator [] {
 		     BaseEditPlugin.INSTANCE,
-		     ExpressionsEditPlugin.INSTANCE,
-		     TypesEditPlugin.INSTANCE,
 		   });
 	}
 

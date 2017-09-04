@@ -16,8 +16,6 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.yakindu.base.base.BasePackage;
-import org.yakindu.base.expressions.expressions.ExpressionsPackage;
-import org.yakindu.base.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -96,22 +94,13 @@ public interface SGenPackage extends EPackage {
 	int GENERATOR_MODEL__GENERATOR_ID = 1;
 
 	/**
-	 * The feature id for the '<em><b>Variables</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_MODEL__VARIABLES = 2;
-
-	/**
 	 * The number of structural features of the '<em>Generator Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_MODEL_FEATURE_COUNT = 3;
+	int GENERATOR_MODEL_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.GeneratorConfigurationImpl <em>Generator Configuration</em>}' class.
@@ -455,6 +444,137 @@ public interface SGenPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.LiteralImpl <em>Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgen.impl.LiteralImpl
+	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getLiteral()
+	 * @generated
+	 */
+	int LITERAL = 8;
+
+	/**
+	 * The number of structural features of the '<em>Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.BoolLiteralImpl <em>Bool Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgen.impl.BoolLiteralImpl
+	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getBoolLiteral()
+	 * @generated
+	 */
+	int BOOL_LITERAL = 9;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOL_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Bool Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOL_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.IntLiteralImpl <em>Int Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgen.impl.IntLiteralImpl
+	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getIntLiteral()
+	 * @generated
+	 */
+	int INT_LITERAL = 10;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INT_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Int Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INT_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.RealLiteralImpl <em>Real Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgen.impl.RealLiteralImpl
+	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getRealLiteral()
+	 * @generated
+	 */
+	int REAL_LITERAL = 11;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Real Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.StringLiteralImpl <em>String Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgen.impl.StringLiteralImpl
+	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getStringLiteral()
+	 * @generated
+	 */
+	int STRING_LITERAL = 12;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>String Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.DeprecatableElementImpl <em>Deprecatable Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -462,7 +582,7 @@ public interface SGenPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getDeprecatableElement()
 	 * @generated
 	 */
-	int DEPRECATABLE_ELEMENT = 8;
+	int DEPRECATABLE_ELEMENT = 13;
 
 	/**
 	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
@@ -492,134 +612,6 @@ public interface SGenPackage extends EPackage {
 	int DEPRECATABLE_ELEMENT_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.VarRefExpressionImpl <em>Var Ref Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sgen.impl.VarRefExpressionImpl
-	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getVarRefExpression()
-	 * @generated
-	 */
-	int VAR_REF_EXPRESSION = 9;
-
-	/**
-	 * The feature id for the '<em><b>Ref</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VAR_REF_EXPRESSION__REF = ExpressionsPackage.EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Var Ref Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VAR_REF_EXPRESSION_FEATURE_COUNT = ExpressionsPackage.EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.VariableDefinitionImpl <em>Variable Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sgen.impl.VariableDefinitionImpl
-	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getVariableDefinition()
-	 * @generated
-	 */
-	int VARIABLE_DEFINITION = 10;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__TYPE = TypesPackage.PROPERTY__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__TYPE_SPECIFIER = TypesPackage.PROPERTY__TYPE_SPECIFIER;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__NAME = TypesPackage.PROPERTY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__ID = TypesPackage.PROPERTY__ID;
-
-	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__ANNOTATIONS = TypesPackage.PROPERTY__ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Const</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__CONST = TypesPackage.PROPERTY__CONST;
-
-	/**
-	 * The feature id for the '<em><b>Readonly</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__READONLY = TypesPackage.PROPERTY__READONLY;
-
-	/**
-	 * The feature id for the '<em><b>External</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__EXTERNAL = TypesPackage.PROPERTY__EXTERNAL;
-
-	/**
-	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__INITIAL_VALUE = TypesPackage.PROPERTY_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Variable Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION_FEATURE_COUNT = TypesPackage.PROPERTY_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.ParameterTypes <em>Parameter Types</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -627,7 +619,7 @@ public interface SGenPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getParameterTypes()
 	 * @generated
 	 */
-	int PARAMETER_TYPES = 11;
+	int PARAMETER_TYPES = 14;
 
 
 	/**
@@ -661,17 +653,6 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getGeneratorModel_GeneratorId();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgen.GeneratorModel#getVariables <em>Variables</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Variables</em>'.
-	 * @see org.yakindu.sct.model.sgen.GeneratorModel#getVariables()
-	 * @see #getGeneratorModel()
-	 * @generated
-	 */
-	EReference getGeneratorModel_Variables();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.GeneratorConfiguration <em>Generator Configuration</em>}'.
@@ -931,6 +912,100 @@ public interface SGenPackage extends EPackage {
 	EAttribute getFeatureTypeLibrary_Name();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.Literal <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Literal</em>'.
+	 * @see org.yakindu.sct.model.sgen.Literal
+	 * @generated
+	 */
+	EClass getLiteral();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.BoolLiteral <em>Bool Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Bool Literal</em>'.
+	 * @see org.yakindu.sct.model.sgen.BoolLiteral
+	 * @generated
+	 */
+	EClass getBoolLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgen.BoolLiteral#isValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.yakindu.sct.model.sgen.BoolLiteral#isValue()
+	 * @see #getBoolLiteral()
+	 * @generated
+	 */
+	EAttribute getBoolLiteral_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.IntLiteral <em>Int Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Int Literal</em>'.
+	 * @see org.yakindu.sct.model.sgen.IntLiteral
+	 * @generated
+	 */
+	EClass getIntLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgen.IntLiteral#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.yakindu.sct.model.sgen.IntLiteral#getValue()
+	 * @see #getIntLiteral()
+	 * @generated
+	 */
+	EAttribute getIntLiteral_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.RealLiteral <em>Real Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Real Literal</em>'.
+	 * @see org.yakindu.sct.model.sgen.RealLiteral
+	 * @generated
+	 */
+	EClass getRealLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgen.RealLiteral#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.yakindu.sct.model.sgen.RealLiteral#getValue()
+	 * @see #getRealLiteral()
+	 * @generated
+	 */
+	EAttribute getRealLiteral_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.StringLiteral <em>String Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>String Literal</em>'.
+	 * @see org.yakindu.sct.model.sgen.StringLiteral
+	 * @generated
+	 */
+	EClass getStringLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgen.StringLiteral#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.yakindu.sct.model.sgen.StringLiteral#getValue()
+	 * @see #getStringLiteral()
+	 * @generated
+	 */
+	EAttribute getStringLiteral_Value();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.DeprecatableElement <em>Deprecatable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -961,48 +1036,6 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDeprecatableElement_Comment();
-
-	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.VarRefExpression <em>Var Ref Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Var Ref Expression</em>'.
-	 * @see org.yakindu.sct.model.sgen.VarRefExpression
-	 * @generated
-	 */
-	EClass getVarRefExpression();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgen.VarRefExpression#getRef <em>Ref</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Ref</em>'.
-	 * @see org.yakindu.sct.model.sgen.VarRefExpression#getRef()
-	 * @see #getVarRefExpression()
-	 * @generated
-	 */
-	EAttribute getVarRefExpression_Ref();
-
-	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.VariableDefinition <em>Variable Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Variable Definition</em>'.
-	 * @see org.yakindu.sct.model.sgen.VariableDefinition
-	 * @generated
-	 */
-	EClass getVariableDefinition();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sgen.VariableDefinition#getInitialValue <em>Initial Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Initial Value</em>'.
-	 * @see org.yakindu.sct.model.sgen.VariableDefinition#getInitialValue()
-	 * @see #getVariableDefinition()
-	 * @generated
-	 */
-	EReference getVariableDefinition_InitialValue();
 
 	/**
 	 * Returns the meta object for enum '{@link org.yakindu.sct.model.sgen.ParameterTypes <em>Parameter Types</em>}'.
@@ -1061,14 +1094,6 @@ public interface SGenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute GENERATOR_MODEL__GENERATOR_ID = eINSTANCE.getGeneratorModel_GeneratorId();
-
-		/**
-		 * The meta object literal for the '<em><b>Variables</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GENERATOR_MODEL__VARIABLES = eINSTANCE.getGeneratorModel_Variables();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.GeneratorConfigurationImpl <em>Generator Configuration</em>}' class.
@@ -1277,6 +1302,88 @@ public interface SGenPackage extends EPackage {
 		EAttribute FEATURE_TYPE_LIBRARY__NAME = eINSTANCE.getFeatureTypeLibrary_Name();
 
 		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.LiteralImpl <em>Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgen.impl.LiteralImpl
+		 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getLiteral()
+		 * @generated
+		 */
+		EClass LITERAL = eINSTANCE.getLiteral();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.BoolLiteralImpl <em>Bool Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgen.impl.BoolLiteralImpl
+		 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getBoolLiteral()
+		 * @generated
+		 */
+		EClass BOOL_LITERAL = eINSTANCE.getBoolLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOOL_LITERAL__VALUE = eINSTANCE.getBoolLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.IntLiteralImpl <em>Int Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgen.impl.IntLiteralImpl
+		 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getIntLiteral()
+		 * @generated
+		 */
+		EClass INT_LITERAL = eINSTANCE.getIntLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INT_LITERAL__VALUE = eINSTANCE.getIntLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.RealLiteralImpl <em>Real Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgen.impl.RealLiteralImpl
+		 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getRealLiteral()
+		 * @generated
+		 */
+		EClass REAL_LITERAL = eINSTANCE.getRealLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REAL_LITERAL__VALUE = eINSTANCE.getRealLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.StringLiteralImpl <em>String Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgen.impl.StringLiteralImpl
+		 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getStringLiteral()
+		 * @generated
+		 */
+		EClass STRING_LITERAL = eINSTANCE.getStringLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_LITERAL__VALUE = eINSTANCE.getStringLiteral_Value();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.DeprecatableElementImpl <em>Deprecatable Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1301,42 +1408,6 @@ public interface SGenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DEPRECATABLE_ELEMENT__COMMENT = eINSTANCE.getDeprecatableElement_Comment();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.VarRefExpressionImpl <em>Var Ref Expression</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.sgen.impl.VarRefExpressionImpl
-		 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getVarRefExpression()
-		 * @generated
-		 */
-		EClass VAR_REF_EXPRESSION = eINSTANCE.getVarRefExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Ref</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute VAR_REF_EXPRESSION__REF = eINSTANCE.getVarRefExpression_Ref();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.VariableDefinitionImpl <em>Variable Definition</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.sgen.impl.VariableDefinitionImpl
-		 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getVariableDefinition()
-		 * @generated
-		 */
-		EClass VARIABLE_DEFINITION = eINSTANCE.getVariableDefinition();
-
-		/**
-		 * The meta object literal for the '<em><b>Initial Value</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VARIABLE_DEFINITION__INITIAL_VALUE = eINSTANCE.getVariableDefinition_InitialValue();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.ParameterTypes <em>Parameter Types</em>}' enum.

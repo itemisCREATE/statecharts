@@ -16,8 +16,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.console,
  org.yakindu.sct.generator.core,
  org.eclipse.xtext.builder,
- org.eclipse.xtext.ui.shared,
- org.yakindu.sct.model.sgen
+ org.eclipse.xtext.ui.shared
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.generator.builder,

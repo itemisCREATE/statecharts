@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.yakindu.sct.model.sgen.*;
-import org.yakindu.sct.model.sgen.DeprecatableElement;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -82,9 +81,11 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 			case SGenPackage.GENERATOR_ENTRY: return createGeneratorEntry();
 			case SGenPackage.FEATURE_PARAMETER_VALUE: return createFeatureParameterValue();
 			case SGenPackage.FEATURE_TYPE_LIBRARY: return createFeatureTypeLibrary();
+			case SGenPackage.BOOL_LITERAL: return createBoolLiteral();
+			case SGenPackage.INT_LITERAL: return createIntLiteral();
+			case SGenPackage.REAL_LITERAL: return createRealLiteral();
+			case SGenPackage.STRING_LITERAL: return createStringLiteral();
 			case SGenPackage.DEPRECATABLE_ELEMENT: return createDeprecatableElement();
-			case SGenPackage.VAR_REF_EXPRESSION: return createVarRefExpression();
-			case SGenPackage.VARIABLE_DEFINITION: return createVariableDefinition();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -205,29 +206,49 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BoolLiteral createBoolLiteral() {
+		BoolLiteralImpl boolLiteral = new BoolLiteralImpl();
+		return boolLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IntLiteral createIntLiteral() {
+		IntLiteralImpl intLiteral = new IntLiteralImpl();
+		return intLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RealLiteral createRealLiteral() {
+		RealLiteralImpl realLiteral = new RealLiteralImpl();
+		return realLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StringLiteral createStringLiteral() {
+		StringLiteralImpl stringLiteral = new StringLiteralImpl();
+		return stringLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public DeprecatableElement createDeprecatableElement() {
 		DeprecatableElementImpl deprecatableElement = new DeprecatableElementImpl();
 		return deprecatableElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public VarRefExpression createVarRefExpression() {
-		VarRefExpressionImpl varRefExpression = new VarRefExpressionImpl();
-		return varRefExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public VariableDefinition createVariableDefinition() {
-		VariableDefinitionImpl variableDefinition = new VariableDefinitionImpl();
-		return variableDefinition;
 	}
 
 	/**
