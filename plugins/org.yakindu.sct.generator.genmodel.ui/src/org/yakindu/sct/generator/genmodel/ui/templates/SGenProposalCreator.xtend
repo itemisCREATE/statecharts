@@ -38,9 +38,9 @@ class SGenProposalCreator {
 		
 	def value(FeatureConfiguration value, FeatureParameter param){
 		 var defaultValue = value.getParameterValue(param.name)
-		 if(defaultValue != null) {
+		 if(defaultValue !== null) {
 		 	if(param.parameterType.equals(ParameterTypes::STRING))
-		 		return ''' "«defaultValue.expression»" '''.toString
+		 		return ''' "«defaultValue.stringValue»" '''.toString
 		 	else
 		 		return defaultValue.expression
 		 }

@@ -14,12 +14,12 @@ import static org.junit.Assert.fail;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.DEPRECATED;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.DUPLICATE_FEATURE;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.DUPLICATE_PARAMETER;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.EMPTY_SGEN;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.INCOMPATIBLE_TYPE_STRING_EXPECTED;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.MISSING_REQUIRED_FEATURE;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.MISSING_REQUIRED_PARAMETER;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.UNKNOWN_CONTENT_TYPE;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.UNKOWN_GENERATOR;
-import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.EMPTY_SGEN;
 
 import java.lang.reflect.Method;
 

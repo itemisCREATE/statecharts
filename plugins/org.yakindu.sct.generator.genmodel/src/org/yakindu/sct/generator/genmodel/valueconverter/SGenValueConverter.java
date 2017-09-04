@@ -10,25 +10,26 @@
  */
 package org.yakindu.sct.generator.genmodel.valueconverter;
 
-import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractIDValueConverter;
+import org.yakindu.base.expressions.terminals.ExpressionsValueConverterService;
 
 import com.google.inject.Inject;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SGenValueConverter extends DefaultTerminalConverters {
+public class SGenValueConverter extends ExpressionsValueConverterService {
 
 	@Inject
 	private AbstractIDValueConverter idValueConverter;
 
-	@ValueConverter(rule = "QID")
+	@ValueConverter(rule = "GENID")
 	public IValueConverter<String> ID() {
 		return idValueConverter;
 	}
-	
+
 }

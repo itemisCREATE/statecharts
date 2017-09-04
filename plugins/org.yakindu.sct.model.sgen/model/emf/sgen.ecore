@@ -5,6 +5,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
         eType="#//GeneratorEntry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="generatorId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
+        eType="#//VariableDefinition" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GeneratorConfiguration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="configurations" upperBound="-1"
@@ -48,18 +50,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureParameterValue">
-    <eOperations name="setValue">
-      <eParameters name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="setValue">
-      <eParameters name="boolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eOperations>
-    <eOperations name="getStringValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eOperations name="getBooleanValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//FeatureParameter"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="featureConfiguration" eType="#//FeatureConfiguration"
         changeable="false" eOpposite="#//FeatureConfiguration/parameterValues"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Literal"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureTypeLibrary">
@@ -73,22 +67,16 @@
     <eLiterals name="BOOLEAN"/>
     <eLiterals name="INTEGER" value="3"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BoolLiteral" eSuperTypes="#//Literal">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntLiteral" eSuperTypes="#//Literal">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RealLiteral" eSuperTypes="#//Literal">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//Literal">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeprecatableElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="deprecated" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VarRefExpression" eSuperTypes="../../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDefinition" eSuperTypes="../../../org.yakindu.base.types/model/types.ecore#//Property">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" eType="ecore:EClass ../../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
