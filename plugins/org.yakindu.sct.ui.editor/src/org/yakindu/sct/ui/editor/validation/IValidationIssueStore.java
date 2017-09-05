@@ -31,7 +31,7 @@ public interface IValidationIssueStore extends IValidationIssueProcessor {
 
 		public void issuesChanged();
 		
-		public String getSemanticURI();
+		public List<String> getSemanticURIs();
 
 	}
 
@@ -43,5 +43,5 @@ public interface IValidationIssueStore extends IValidationIssueProcessor {
 
 	public void disconnect(Resource resource);
 
-	public List<SCTIssue> getIssues(String uri);
+	public List<SCTIssue> getIssues(String uriFragment);
 }
