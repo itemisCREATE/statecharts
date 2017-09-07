@@ -26,6 +26,7 @@ import org.yakindu.sct.model.sruntime.ExecutionVariable;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
+import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 
 import com.google.inject.Inject;
@@ -46,6 +47,8 @@ public abstract class AbstractExecutionFlowTest {
 	protected IExecutionContextInitializer initializer;
 	@Inject
 	protected IExpressionInterpreter stmtInterpreter;
+	@Inject
+	protected ExecutionContextExtensions contextExtensions;
 
 	protected ExecutionFlow flow;
 
@@ -112,7 +115,7 @@ public abstract class AbstractExecutionFlowTest {
 
 	protected boolean isStateActive(String stateName) {
 		Assert.isNotNull(stateName);
-		List<RegularState> allActiveStates = context().getAllActiveStates();
+		List<RegularState> allActiveStates = contextExtensions.getAllActiveStates((context()));
 		for (RegularState regularState : allActiveStates) {
 			if (stateName.equals(regularState.getName())) {
 				return true;

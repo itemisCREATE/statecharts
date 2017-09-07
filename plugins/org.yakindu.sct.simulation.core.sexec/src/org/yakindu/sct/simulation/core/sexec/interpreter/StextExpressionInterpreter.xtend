@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
+import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
 
 /**
  * 
@@ -38,6 +39,7 @@ class StextExpressionInterpreter extends DefaultExpressionInterpreter {
 	extension IExecutionSlotResolver
 	@Inject(optional=true)
 	protected extension IEventRaiser eventRaiser
+	@Inject extension ExecutionContextExtensions
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
 		var event = context.resolve(eventRaising.event)

@@ -15,8 +15,6 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.yakindu.base.base.NamedElement;
 
-import org.yakindu.sct.model.sgraph.RegularState;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Execution Context</b></em>'.
@@ -39,7 +37,7 @@ import org.yakindu.sct.model.sgraph.RegularState;
 public interface ExecutionContext extends NamedElement, CompositeSlot {
 	/**
 	 * Returns the value of the '<em><b>Active States</b></em>' reference list.
-	 * The list contents are of type {@link org.yakindu.sct.model.sgraph.RegularState}.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Active States</em>' reference list isn't clear,
@@ -51,7 +49,7 @@ public interface ExecutionContext extends NamedElement, CompositeSlot {
 	 * @model
 	 * @generated
 	 */
-	List<RegularState> getActiveStates();
+	List<EObject> getActiveStates();
 
 	/**
 	 * Returns the value of the '<em><b>Executed Elements</b></em>' reference list.
@@ -134,14 +132,6 @@ public interface ExecutionContext extends NamedElement, CompositeSlot {
 	 * @generated
 	 */
 	ExecutionEvent getEvent(String qualifiedName);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	List<RegularState> getAllActiveStates();
 
 	/**
 	 * <!-- begin-user-doc -->

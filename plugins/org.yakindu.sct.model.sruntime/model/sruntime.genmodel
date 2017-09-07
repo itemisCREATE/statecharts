@@ -4,7 +4,7 @@
     modelDirectory="/org.yakindu.sct.model.sruntime/src" modelPluginID="org.yakindu.sct.model.sruntime"
     modelName="Sruntime" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     suppressEMFTypes="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0"
-    copyrightFields="false" publicConstructors="true" usedGenPackages="../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph ../../org.yakindu.base.types/model/types.genmodel#//types"
+    copyrightFields="false" publicConstructors="true" usedGenPackages="../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.base.types/model/types.genmodel#//types"
     interfaceNamePattern="" importOrganizing="true">
   <foreignModel>sruntime.ecore</foreignModel>
   <genPackages prefix="SRuntime" basePackage="org.yakindu.sct.model" disposableProviderFactory="true"
@@ -27,7 +27,6 @@
       <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getEvent">
         <genParameters ecoreParameter="sruntime.ecore#//ExecutionContext/getEvent/qualifiedName"/>
       </genOperations>
-      <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getAllActiveStates"/>
       <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getAllEvents"/>
       <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getAllVariables"/>
       <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getAllSlots"/>

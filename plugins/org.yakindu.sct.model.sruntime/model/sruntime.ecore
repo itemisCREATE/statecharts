@@ -10,7 +10,6 @@
     <eOperations name="getEvent" eType="#//ExecutionEvent">
       <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eOperations name="getAllActiveStates" upperBound="-1" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//RegularState"/>
     <eOperations name="getAllEvents" upperBound="-1" eType="#//ExecutionEvent"/>
     <eOperations name="getAllVariables" upperBound="-1" eType="#//ExecutionVariable"/>
     <eOperations name="getAllSlots" upperBound="-1" eType="#//ExecutionSlot"/>
@@ -18,7 +17,7 @@
       <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="activeStates" upperBound="-1"
-        eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//RegularState"/>
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="executedElements" upperBound="-1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="suspendedElements" upperBound="-1"

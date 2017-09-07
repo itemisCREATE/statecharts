@@ -8,10 +8,13 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.simulation.core.sexec.interpreter
+package org.yakindu.sct.simulation.core.util
 
 import com.google.inject.Inject
+import java.util.ArrayList
+import java.util.List
 import org.yakindu.base.types.typesystem.ITypeValueProvider
+import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sruntime.EventDirection
 import org.yakindu.sct.model.sruntime.ExecutionContext
 
@@ -33,4 +36,34 @@ class ExecutionContextExtensions {
 		executionContext.allEvents.filter[direction == EventDirection.OUT].forEach[if(raised) raised = false]
 	}
 
+	def List<RegularState> getAllActiveStates(ExecutionContext context) {
+		context.activeStates.filter(RegularState).map[stateHierachy].flatten.toList
+	}
+
+	def protected getStateHierachy(RegularState state) {
+		var result = new ArrayList<RegularState>()
+		result.add(state);
+		var container = state.eContainer();
+		while (container !== null) {
+			if (container instanceof RegularState) {
+				result.add(container);
+			}
+			container = container.eContainer();
+		}
+		return result
+	}
 }
+//	/**
+//	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+//	 * 
+//	 * @generated NOT
+//	 */
+//	public List<RegularState> getAllActiveStates() {
+//		List<RegularState> result = Lists.newArrayList();
+//		List<RegularState> activeLeafStates = getActiveStates();
+//		for (RegularState regularState : activeLeafStates) {
+//			result.addAll(getActiveHierachy(regularState));
+//		}
+//		return result;
+//	}
+//	

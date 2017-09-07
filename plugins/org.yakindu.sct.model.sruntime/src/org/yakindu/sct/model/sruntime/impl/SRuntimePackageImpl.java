@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.TypesPackage;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sruntime.CompositeSlot;
 import org.yakindu.sct.model.sruntime.EventDirection;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
@@ -150,7 +149,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		// Initialize simple dependencies
 		BasePackage.eINSTANCE.eClass();
-		SGraphPackage.eINSTANCE.eClass();
 		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
@@ -443,7 +441,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		// Obtain other dependent packages
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
-		SGraphPackage theSGraphPackage = (SGraphPackage)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI);
 		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 
 		// Create type parameters
@@ -462,7 +459,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(executionContextEClass, ExecutionContext.class, "ExecutionContext", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExecutionContext_ActiveStates(), theSGraphPackage.getRegularState(), null, "activeStates", null, 0, -1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionContext_ActiveStates(), ecorePackage.getEObject(), null, "activeStates", null, 0, -1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionContext_ExecutedElements(), ecorePackage.getEObject(), null, "executedElements", null, 0, -1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionContext_SuspendedElements(), ecorePackage.getEObject(), null, "suspendedElements", null, 0, -1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionContext_Snapshot(), ecorePackage.getEBoolean(), "snapshot", null, 0, 1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -474,8 +471,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		op = addEOperation(executionContextEClass, this.getExecutionEvent(), "getEvent", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(executionContextEClass, theSGraphPackage.getRegularState(), "getAllActiveStates", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(executionContextEClass, this.getExecutionEvent(), "getAllEvents", 0, -1, IS_UNIQUE, IS_ORDERED);
 

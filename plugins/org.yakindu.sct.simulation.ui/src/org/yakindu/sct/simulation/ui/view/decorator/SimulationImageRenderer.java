@@ -50,6 +50,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
+import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 import org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants;
 
@@ -59,6 +60,8 @@ import org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants;
  * 
  */
 public class SimulationImageRenderer {
+	
+	private ExecutionContextExtensions contextExtensions = new ExecutionContextExtensions();
 	/**
 	 * Renderes an image with highlighted states
 	 * 
@@ -88,7 +91,7 @@ public class SimulationImageRenderer {
 	}
 
 	public void highlightActiveStates(final ExecutionContext context, final Diagram diagram) {
-		highlightElements(context.getAllActiveStates(), diagram);
+		highlightElements(contextExtensions.getAllActiveStates(context), diagram);
 	}
 
 	public void highlightElements(final List<? extends EObject> objects, final Diagram diagram) {

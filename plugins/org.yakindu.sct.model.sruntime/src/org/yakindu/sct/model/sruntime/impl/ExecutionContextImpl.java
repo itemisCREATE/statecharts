@@ -10,10 +10,10 @@
  */
 package org.yakindu.sct.model.sruntime.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -28,8 +28,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.impl.NamedElementImpl;
 import org.yakindu.base.types.Type;
-import org.yakindu.sct.model.sgraph.RegularState;
-import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sruntime.CompositeSlot;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
@@ -39,7 +37,6 @@ import org.yakindu.sct.model.sruntime.SRuntimePackage;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -147,7 +144,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<RegularState> activeStates;
+	protected EList<EObject> activeStates;
 
 	/**
 	 * The cached value of the '{@link #getExecutedElements() <em>Executed Elements</em>}' reference list.
@@ -306,9 +303,9 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List<RegularState> getActiveStates() {
+	public List<EObject> getActiveStates() {
 		if (activeStates == null) {
-			activeStates = new EObjectResolvingEList<RegularState>(RegularState.class, this, SRuntimePackage.EXECUTION_CONTEXT__ACTIVE_STATES);
+			activeStates = new EObjectResolvingEList<EObject>(EObject.class, this, SRuntimePackage.EXECUTION_CONTEXT__ACTIVE_STATES);
 		}
 		return activeStates;
 	}
@@ -427,20 +424,6 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public List<RegularState> getAllActiveStates() {
-		List<RegularState> result = Lists.newArrayList();
-		List<RegularState> activeLeafStates = getActiveStates();
-		for (RegularState regularState : activeLeafStates) {
-			result.addAll(getActiveHierachy(regularState));
-		}
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public List<ExecutionEvent> getAllEvents() {
@@ -518,19 +501,6 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-	private Collection<? extends RegularState> getActiveHierachy(RegularState vertex) {
-		List<RegularState> result = new ArrayList<RegularState>();
-		result.add(vertex);
-		EObject container = vertex.eContainer();
-		while (container != null) {
-			if (container instanceof RegularState) {
-				result.add((State) container);
-			}
-			container = container.eContainer();
-		}
-		return result;
-	}
-
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -587,7 +557,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__ACTIVE_STATES:
 				getActiveStates().clear();
-				getActiveStates().addAll((Collection<? extends RegularState>)newValue);
+				getActiveStates().addAll((Collection<? extends EObject>)newValue);
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__EXECUTED_ELEMENTS:
 				getExecutedElements().clear();
