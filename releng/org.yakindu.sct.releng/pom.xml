@@ -395,6 +395,7 @@
 		<module>../../plugins/org.yakindu.base.types</module>
 		<module>../../plugins/org.yakindu.base.types.edit</module>
 		<module>../../plugins/org.yakindu.base.expressions</module>
+		<module>../../plugins/org.yakindu.base.expressions.interpreter</module>
 		<module>../../plugins/org.yakindu.base.expressions.edit</module>
 		<module>../../plugins/org.yakindu.base.expressions.ui</module>
 		<module>../../plugins/org.yakindu.base.gmf.runtime</module>

@@ -10,7 +10,7 @@
 		<relativePath>../../releng/org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
 	<artifactId>org.yakindu.base.expressions.interpreter</artifactId>
-	<groupId>org.yakindu.sct.plugins</groupId>
+	<groupId>org.yakindu.base.plugins</groupId>
 	<packaging>eclipse-plugin</packaging>
 	<build>
 		<plugins>
