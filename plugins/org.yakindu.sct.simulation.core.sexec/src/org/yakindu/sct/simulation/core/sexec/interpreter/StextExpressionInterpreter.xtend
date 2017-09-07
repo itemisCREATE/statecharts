@@ -36,7 +36,7 @@ class StextExpressionInterpreter extends DefaultExpressionInterpreter {
 	extension IQualifiedNameProvider provider
 	@Inject
 	extension IExecutionSlotResolver
-
+	@Inject(optional=true)
 	protected extension IEventRaiser eventRaiser
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
