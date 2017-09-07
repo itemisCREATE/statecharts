@@ -10,11 +10,14 @@
  */
 package org.yakindu.sct.ui.editor.providers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Label;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.editparts.AbstractConnectionEditPart;
@@ -24,6 +27,7 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.AbstractDecorator;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorProvider;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
+import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Image;
@@ -32,12 +36,15 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.validation.Issue.IssueImpl;
 import org.yakindu.base.gmf.runtime.decorators.AbstractDecoratorProvider;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTIssue;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.editparts.BorderItemEditPart;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
+import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore;
 import org.yakindu.sct.ui.editor.validation.IValidationIssueStore.IValidationIssueStoreListener;
 
@@ -54,7 +61,7 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 
 	public void createDecorators(IDecoratorTarget decoratorTarget) {
 		EditPart editPart = (EditPart) decoratorTarget.getAdapter(EditPart.class);
-		if(editPart instanceof BorderItemEditPart)
+		if (editPart instanceof BorderItemEditPart)
 			return;
 		if (editPart instanceof IPrimaryEditPart
 				&& (editPart instanceof GraphicalEditPart || editPart instanceof AbstractConnectionEditPart)) {
@@ -73,6 +80,10 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 			issueStore = (IValidationIssueStore) part.getAdapter(IValidationIssueStore.class);
 			return true;
 		}
+		// This is required for OffscreenEditPartFactory to render problem markers into
+		// the preview image
+		if (part == null)
+			return true;
 		return false;
 	}
 
@@ -86,8 +97,10 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 
 	public static class ValidationDecorator extends AbstractDecorator implements IValidationIssueStoreListener {
 
+		private static final String SUB_DIAGRAM_ERRORS = "The subdiagram contains errors.";
 		private IValidationIssueStore store;
 		private String semanticID;
+		private String subdiagramSemanticID;
 
 		public ValidationDecorator(IDecoratorTarget decoratorTarget, IValidationIssueStore store) {
 			super(decoratorTarget);
@@ -120,6 +133,9 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 
 		protected void decorate(View view) {
 			List<SCTIssue> issues = store.getIssues(semanticID);
+			SCTIssue subDiagramIssue = getSubDiagramIssue(view);
+			if (subDiagramIssue != null)
+				issues.add(subDiagramIssue);
 			Severity severity = Severity.INFO;
 			Label toolTip = null;
 			if (issues.isEmpty())
@@ -151,9 +167,34 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 				int margin = view.getElement() instanceof Pseudostate || view.getElement() instanceof FinalState ? 0
 						: -1;
 				setDecoration(getDecoratorTarget().addShapeDecoration(getImage(severity),
-						IDecoratorTarget.Direction.NORTH_EAST, margin, true));
+						IDecoratorTarget.Direction.NORTH_EAST, margin, false));
 				getDecoration().setToolTip(toolTip);
 			}
+		}
+
+		protected SCTIssue getSubDiagramIssue(View view) {
+			if (SemanticHints.STATE.equals(view.getType())) {
+				BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(view,
+						DiagramPartitioningUtil.INLINE_STYLE);
+				if (style == null ? false : !style.isBooleanValue()) {
+					EObject element = view.getElement();
+					TreeIterator<EObject> eAllContents = element.eAllContents();
+					while (eAllContents.hasNext()) {
+						EObject next = eAllContents.next();
+						List<SCTIssue> issues = store.getIssues(EcoreUtil.getURI(next).fragment());
+						for (final SCTIssue issue : issues) {
+							if (Severity.ERROR.equals(issue.getSeverity())) {
+								IssueImpl result = new Issue.IssueImpl();
+								result.setMessage(SUB_DIAGRAM_ERRORS);
+								result.setSeverity(Severity.ERROR);
+								subdiagramSemanticID = issue.getSemanticURI();
+								return new SCTIssue(result, issue.getSemanticURI());
+							}
+						}
+					}
+				}
+			}
+			return null;
 		}
 
 		protected Image getImage(Severity severity) {
@@ -177,8 +218,12 @@ public class StatechartValidationDecorationProvider extends AbstractDecoratorPro
 		}
 
 		@Override
-		public String getSemanticURI() {
-			return semanticID;
+		public List<String> getSemanticURIs() {
+			List<String> result = new ArrayList<String>();
+			result.add(semanticID);
+			if (subdiagramSemanticID != null)
+				result.add(subdiagramSemanticID);
+			return result;
 		}
 	}
 }
