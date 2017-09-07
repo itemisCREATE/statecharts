@@ -26,9 +26,9 @@ import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.engine.IExecutionControl;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 
 /**
  * 

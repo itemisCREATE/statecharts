@@ -420,6 +420,7 @@
 		<module>../../plugins/org.yakindu.sct.model.sgraph</module>
 		<module>../../plugins/org.yakindu.sct.model.sgraph.edit</module>
 		<module>../../plugins/org.yakindu.sct.model.sgraph.ui</module>
+		<module>../../plugins/org.yakindu.sct.model.sruntime</module>
 		<module>../../plugins/org.yakindu.sct.model.stext</module>
 		<module>../../plugins/org.yakindu.sct.model.stext.lib</module>
 		<module>../../plugins/org.yakindu.sct.model.stext.edit</module>

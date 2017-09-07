@@ -16,7 +16,7 @@ import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.typesystem.ITypeSystem;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
+import org.yakindu.sct.model.sruntime.ExecutionSlot;
 
 /**
  * {@link CellEditor} support for String values

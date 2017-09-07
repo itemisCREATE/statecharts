@@ -15,7 +15,7 @@ import java.util.List;
 
 import org.yakindu.base.gmf.runtime.highlighting.HighlightingParameters;
 import org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 
 /**
  * @author andreas muelder - Initial contribution and API

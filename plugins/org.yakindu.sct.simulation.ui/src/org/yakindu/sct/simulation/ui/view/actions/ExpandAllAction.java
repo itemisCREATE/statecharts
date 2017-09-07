@@ -12,9 +12,9 @@ package org.yakindu.sct.simulation.ui.view.actions;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
-import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionSlot;
+import org.yakindu.sct.model.sruntime.ReferenceSlot;
 import org.yakindu.sct.simulation.ui.SimulationImages;
 
 /**

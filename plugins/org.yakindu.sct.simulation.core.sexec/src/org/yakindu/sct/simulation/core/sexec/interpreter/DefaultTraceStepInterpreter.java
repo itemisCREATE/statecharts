@@ -12,7 +12,7 @@ package org.yakindu.sct.simulation.core.sexec.interpreter;
 
 import org.yakindu.sct.model.sexec.ReactionFired;
 import org.yakindu.sct.model.sexec.Trace;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 
 public class DefaultTraceStepInterpreter implements ITraceStepInterpreter {
 

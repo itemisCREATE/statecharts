@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Type;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
+import org.yakindu.sct.model.sruntime.ExecutionSlot;
 
 /**
  * {@link CellEditor} support for Boolean values

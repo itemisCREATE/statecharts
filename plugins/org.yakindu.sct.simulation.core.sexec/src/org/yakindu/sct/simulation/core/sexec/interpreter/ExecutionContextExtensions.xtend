@@ -12,8 +12,8 @@ package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
 import org.yakindu.base.types.typesystem.ITypeValueProvider
-import org.yakindu.sct.simulation.core.sruntime.EventDirection
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
+import org.yakindu.sct.model.sruntime.EventDirection
+import org.yakindu.sct.model.sruntime.ExecutionContext
 
 class ExecutionContextExtensions {
 

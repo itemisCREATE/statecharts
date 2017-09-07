@@ -20,13 +20,12 @@ import org.yakindu.base.base.NamedElement
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.expressions.interpreter.IExecutionSlotResolver
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
-import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
-import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
+import org.yakindu.sct.model.sruntime.CompositeSlot
+import org.yakindu.sct.model.sruntime.ExecutionContext
+import org.yakindu.sct.model.sruntime.ExecutionSlot
 
 /**
  * Default implementation for resolving execution slots based on expressions.

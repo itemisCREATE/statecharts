@@ -44,11 +44,11 @@ import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
-import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
-import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
-import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot
+import org.yakindu.sct.model.sruntime.CompositeSlot
+import org.yakindu.sct.model.sruntime.ExecutionContext
+import org.yakindu.sct.model.sruntime.ExecutionEvent
+import org.yakindu.sct.model.sruntime.ExecutionVariable
+import org.yakindu.sct.model.sruntime.ReferenceSlot
 
 /**
  * 

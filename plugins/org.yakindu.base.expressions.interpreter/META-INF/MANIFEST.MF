@@ -6,7 +6,7 @@ Bundle-Version: 3.0.1.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.yakindu.base.types;visibility:=reexport,
- org.yakindu.sct.simulation.core,
  org.eclipse.xtext.xbase.lib,
- org.yakindu.base.expressions
+ org.yakindu.base.expressions,
+ org.yakindu.sct.model.sruntime;visibility:=reexport
 Export-Package: org.yakindu.base.expressions.interpreter

@@ -21,11 +21,11 @@ import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionVariable;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 
 import com.google.inject.Inject;

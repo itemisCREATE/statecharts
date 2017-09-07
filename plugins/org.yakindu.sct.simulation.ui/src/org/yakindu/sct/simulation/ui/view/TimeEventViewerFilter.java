@@ -13,7 +13,7 @@ package org.yakindu.sct.simulation.ui.view;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
+import org.yakindu.sct.model.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
 

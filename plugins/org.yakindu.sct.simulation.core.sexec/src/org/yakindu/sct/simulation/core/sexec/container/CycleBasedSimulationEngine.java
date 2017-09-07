@@ -14,11 +14,11 @@ import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_
 
 import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sruntime.SRuntimeFactory;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler.TimeTask;
 import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler.TimeTask.Priority;
-import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory;
 
 import com.google.inject.Inject;
 

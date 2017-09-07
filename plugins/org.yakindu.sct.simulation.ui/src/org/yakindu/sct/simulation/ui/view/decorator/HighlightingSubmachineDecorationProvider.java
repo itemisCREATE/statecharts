@@ -24,7 +24,7 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.ui.editor.submachine.SubmachineDecorationProvider;
 
 /**

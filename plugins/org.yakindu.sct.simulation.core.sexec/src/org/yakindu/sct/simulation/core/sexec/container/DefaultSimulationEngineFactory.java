@@ -25,10 +25,10 @@ import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;

@@ -11,7 +11,7 @@
 package org.yakindu.base.expressions.interpreter;
 
 import org.yakindu.base.expressions.expressions.Expression;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 
 /**
  * 

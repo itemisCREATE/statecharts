@@ -20,12 +20,12 @@ import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssu
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.SimulationCoreActivator;
 import org.yakindu.sct.simulation.core.engine.IExecutionControl;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 
 import com.google.inject.Inject;
 
