@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: YAKINDU Expressions Interpreter
+Bundle-SymbolicName: org.yakindu.base.expressions.interpreter
+Bundle-Version: 3.0.1.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-Vendor: statecharts.org
+Require-Bundle: org.yakindu.base.expressions;visibility:=reexport,
+ org.yakindu.base.types;visibility:=reexport,
+ org.yakindu.sct.simulation.core
+Export-Package: org.yakindu.base.expressions.interpreter
