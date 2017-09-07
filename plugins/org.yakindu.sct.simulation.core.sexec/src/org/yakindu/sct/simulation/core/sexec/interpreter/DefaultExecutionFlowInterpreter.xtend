@@ -18,6 +18,7 @@ import java.util.Map
 import java.util.Queue
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Data
+import org.yakindu.base.expressions.interpreter.IExpressionInterpreter
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.EnterState
@@ -67,7 +68,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	protected Queue<Event> internalEventQueue = new LinkedList<Event>()
 
 	@Inject
-	protected IStatementInterpreter statementInterpreter
+	protected IExpressionInterpreter statementInterpreter
 	@Inject
 	ITimeTaskScheduler timingService
 	@Inject extension SexecExtensions
@@ -209,7 +210,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	def dispatch Object execute(Check check) {
 		if (check.condition === null)
 			return true
-		return statementInterpreter.evaluateStatement(check.condition, executionContext)
+		return statementInterpreter.evaluate(check.condition, executionContext)
 
 	}
 
@@ -221,7 +222,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	def dispatch Object execute(Execution execution) {
-		statementInterpreter.evaluateStatement(execution.statement, executionContext)
+		statementInterpreter.evaluate(execution.statement, executionContext)
 	}
 
 	def dispatch Object execute(ExitState exitState) {
@@ -274,7 +275,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 
 	def dispatch Object execute(ScheduleTimeEvent scheduleTimeEvent) {
 		val timeEvent = scheduleTimeEvent.timeEvent
-		val duration = statementInterpreter.evaluateStatement(scheduleTimeEvent.timeValue, executionContext)
+		val duration = statementInterpreter.evaluate(scheduleTimeEvent.timeValue, executionContext)
 		timingService.scheduleTimeTask(new TimeTask(timeEvent.name, [executionContext.getEvent(timeEvent.name).raised = true]), timeEvent.periodic, duration as Long)
 		null
 	}

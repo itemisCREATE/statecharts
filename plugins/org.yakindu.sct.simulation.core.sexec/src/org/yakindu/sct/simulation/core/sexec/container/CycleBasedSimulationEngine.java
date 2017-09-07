@@ -12,10 +12,10 @@ package org.yakindu.sct.simulation.core.sexec.container;
 
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
 
+import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
-import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler.TimeTask;
 import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler.TimeTask.Priority;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory;
@@ -33,7 +33,7 @@ public class CycleBasedSimulationEngine extends AbstractExecutionFlowSimulationE
 	public static final long DEFAULT_CYCLE_PERIOD = 200;
 
 	@Inject
-	private IStatementInterpreter statementInterpreter;
+	private IExpressionInterpreter statementInterpreter;
 
 	public CycleBasedSimulationEngine(Statechart statechart) {
 		super(statechart);
@@ -50,7 +50,7 @@ public class CycleBasedSimulationEngine extends AbstractExecutionFlowSimulationE
 		ArgumentedAnnotation cycleBased = (ArgumentedAnnotation) getStatechart()
 				.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
 		if (cycleBased != null) {
-			cyclePeriod = (Long) statementInterpreter.evaluateStatement(cycleBased.getExpressions().get(0),
+			cyclePeriod = (Long) statementInterpreter.evaluate(cycleBased.getExpressions().get(0),
 					SRuntimeFactory.eINSTANCE.createExecutionContext());
 		}
 
