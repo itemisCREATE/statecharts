@@ -5,7 +5,8 @@ Bundle-SymbolicName: org.yakindu.base.expressions.interpreter
 Bundle-Version: 3.0.1.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: statecharts.org
-Require-Bundle: org.yakindu.base.expressions;visibility:=reexport,
- org.yakindu.base.types;visibility:=reexport,
- org.yakindu.sct.simulation.core
+Require-Bundle: org.yakindu.base.types;visibility:=reexport,
+ org.yakindu.sct.simulation.core,
+ org.eclipse.xtext.xbase.lib,
+ org.yakindu.base.expressions
 Export-Package: org.yakindu.base.expressions.interpreter
