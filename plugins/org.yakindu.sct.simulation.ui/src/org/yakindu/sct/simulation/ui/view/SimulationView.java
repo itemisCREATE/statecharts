@@ -12,8 +12,6 @@ package org.yakindu.sct.simulation.ui.view;
 
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
-import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IStep;
 import org.eclipse.debug.internal.ui.commands.actions.ResumeCommandAction;
@@ -57,7 +55,7 @@ import com.google.common.collect.Lists;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SimulationView extends AbstractDebugTargetView implements ITypeSystemProvider, IDebugEventSetListener {
+public class SimulationView extends AbstractDebugTargetView implements ITypeSystemProvider {
 
 	private TreeViewer viewer;
 	private FormToolkit kit;
@@ -69,7 +67,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		kit = new FormToolkit(Display.getDefault());
 		kit.setBorderStyle(SWT.BORDER);
 		font = new Font(Display.getDefault(), new FontData("Courier", 10, SWT.BOLD));
-
 	}
 
 	@Override
@@ -97,7 +94,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	protected Viewer createViewer(Composite parent) {
 		viewer = ExecutionContextViewerFactory.createViewer(parent, false, this);
 		selectionListener = new RaiseEventSelectionListener(viewer);
-		DebugPlugin.getDefault().addDebugEventListener(this);
 		return viewer;
 	}
 
@@ -126,7 +122,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		updateActions();
 	}
 
-	private void updateActions() {
+	protected void updateActions() {
 		IContributionItem[] items = getViewSite().getActionBars().getToolBarManager().getItems();
 		for (IContributionItem iContributionItem : items) {
 			if (iContributionItem instanceof ActionContributionItem) {
@@ -143,7 +139,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 	protected void hookActions() {
 		IToolBarManager mgr = getViewSite().getActionBars().getToolBarManager();
-
 		Lists.newArrayList(new ResumeAction(), new SuspendAction(), new TerminateAction(), new StepOverAction())
 				.forEach(action -> {
 					mgr.add(action);
@@ -156,6 +151,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		mgr.add(expand);
 		IAction hideTimeEvent = new HideTimeEventsAction(false);
 		mgr.add(hideTimeEvent);
+		getViewSite().getActionBars().getToolBarManager().update(true);
 	}
 
 	/**
@@ -224,14 +220,12 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				} catch (DebugException e) {
 					e.printStackTrace();
 				}
-
 			}
 		}
 
 		@Override
 		public boolean isEnabled() {
-			return debugTarget != null && !debugTarget.isTerminated() && debugTarget.isSuspended()
-					&& (debugTarget instanceof IStep && ((IStep) debugTarget).canStepOver());
+			return debugTarget != null && (debugTarget instanceof IStep && ((IStep) debugTarget).canStepOver());
 		}
 	}
 
@@ -245,6 +239,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				e.printStackTrace();
 			}
 		}
+
 		@Override
 		public boolean isEnabled() {
 			return debugTarget != null && debugTarget.canTerminate();
@@ -261,6 +256,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				e.printStackTrace();
 			}
 		}
+
 		@Override
 		public boolean isEnabled() {
 			return debugTarget != null && debugTarget.canSuspend();
@@ -277,10 +273,10 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 				e.printStackTrace();
 			}
 		}
+
 		@Override
 		public boolean isEnabled() {
 			return debugTarget != null && debugTarget.canResume();
 		}
 	}
-
 }
