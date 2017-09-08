@@ -11,10 +11,19 @@
 package org.yakindu.sct.simulation.ui.view;
 
 import org.eclipse.debug.core.DebugEvent;
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IDebugTarget;
+import org.eclipse.debug.core.model.IStep;
+import org.eclipse.debug.internal.ui.commands.actions.ResumeCommandAction;
+import org.eclipse.debug.internal.ui.commands.actions.StepOverCommandAction;
+import org.eclipse.debug.internal.ui.commands.actions.SuspendCommandAction;
+import org.eclipse.debug.internal.ui.commands.actions.TerminateCommandAction;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
@@ -38,6 +47,8 @@ import org.yakindu.sct.simulation.ui.view.actions.CollapseAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.ExpandAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
 import org.yakindu.sct.simulation.ui.view.editing.ScopeSlotEditingSupport.ITypeSystemProvider;
+
+import com.google.common.collect.Lists;
 
 /**
  * 
@@ -87,18 +98,19 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	}
 
 	protected void handleDebugEvent(DebugEvent debugEvent) {
+		updateActions();
 		switch (debugEvent.getKind()) {
-		case DebugEvent.TERMINATE:
-			Display.getDefault().asyncExec(new Runnable() {
-				public void run() {
-					viewer.setInput(null);
-				}
-			});
-			break;
-		case DebugEvent.SUSPEND:
-			break;
-		case DebugEvent.RESUME:
-			break;
+			case DebugEvent.TERMINATE :
+				Display.getDefault().asyncExec(new Runnable() {
+					public void run() {
+						viewer.setInput(null);
+					}
+				});
+				break;
+			case DebugEvent.SUSPEND :
+				break;
+			case DebugEvent.RESUME :
+				break;
 		}
 	}
 
@@ -107,6 +119,17 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		ISimulationEngine engine = (ISimulationEngine) debugTarget.getAdapter(ISimulationEngine.class);
 		viewer.setInput(engine.getExecutionContext());
 		(new ExpandAllAction(viewer)).run();
+		updateActions();
+	}
+
+	protected void updateActions() {
+		IContributionItem[] items = getViewSite().getActionBars().getToolBarManager().getItems();
+		for (IContributionItem iContributionItem : items) {
+			if (iContributionItem instanceof ActionContributionItem) {
+				IAction currentAction = ((ActionContributionItem) iContributionItem).getAction();
+				currentAction.setEnabled(currentAction.isEnabled());
+			}
+		}
 	}
 
 	private void updateTypeSystem(final IDebugTarget debugTarget) {
@@ -116,12 +139,19 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 
 	protected void hookActions() {
 		IToolBarManager mgr = getViewSite().getActionBars().getToolBarManager();
+		Lists.newArrayList(new ResumeAction(), new SuspendAction(), new TerminateAction(), new StepOverAction())
+				.forEach(action -> {
+					mgr.add(action);
+				});
+		updateActions();
+		mgr.add(new Separator());
 		IAction collapse = new CollapseAllAction(viewer);
 		mgr.add(collapse);
 		IAction expand = new ExpandAllAction(viewer);
 		mgr.add(expand);
 		IAction hideTimeEvent = new HideTimeEventsAction(false);
 		mgr.add(hideTimeEvent);
+		getViewSite().getActionBars().getToolBarManager().update(true);
 	}
 
 	/**
@@ -178,5 +208,75 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	@Override
 	public ITypeSystem getTypeSystem() {
 		return typeSystem;
+	}
+
+	@SuppressWarnings("restriction")
+	protected class StepOverAction extends StepOverCommandAction implements IAction {
+		@Override
+		public void run() {
+			if (debugTarget instanceof IStep) {
+				try {
+					((IStep) debugTarget).stepOver();
+				} catch (DebugException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		@Override
+		public boolean isEnabled() {
+			return debugTarget != null && (debugTarget instanceof IStep && ((IStep) debugTarget).canStepOver());
+		}
+	}
+
+	@SuppressWarnings("restriction")
+	protected class TerminateAction extends TerminateCommandAction implements IAction {
+		@Override
+		public void run() {
+			try {
+				debugTarget.terminate();
+			} catch (DebugException e) {
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		public boolean isEnabled() {
+			return debugTarget != null && debugTarget.canTerminate();
+		}
+	}
+
+	@SuppressWarnings("restriction")
+	protected class SuspendAction extends SuspendCommandAction implements IAction {
+		@Override
+		public void run() {
+			try {
+				debugTarget.suspend();
+			} catch (DebugException e) {
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		public boolean isEnabled() {
+			return debugTarget != null && debugTarget.canSuspend();
+		}
+	}
+
+	@SuppressWarnings("restriction")
+	protected class ResumeAction extends ResumeCommandAction implements IAction {
+		@Override
+		public void run() {
+			try {
+				debugTarget.resume();
+			} catch (DebugException e) {
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		public boolean isEnabled() {
+			return debugTarget != null && debugTarget.canResume();
+		}
 	}
 }
