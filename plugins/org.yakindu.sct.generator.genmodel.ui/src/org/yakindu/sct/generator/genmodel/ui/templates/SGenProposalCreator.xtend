@@ -52,11 +52,11 @@ class SGenProposalCreator {
 		 	case ParameterTypes::STRING:
 		 		return "\"\""
 		 	case ParameterTypes::BOOLEAN:
-		 		return "false"
+		 		return false
 		 	case ParameterTypes::FLOAT:
-		 		return "0.0"	
+		 		return 0.0	
 		 	case ParameterTypes::INTEGER:
-		 		return "0"
+		 		return 0l
 		 }
 		 null
 		 
