@@ -74,14 +74,19 @@ public class GTestHelper {
 		String sgenFileName = getSgenFileName(getTestProgram());
 		copyFileFromBundleToFolder(getTestBundle(), sgenFileName, targetPath);
 
-		IPath path = new Path(sgenFileName);
-		Resource sgenResource = loadResource(getWorkspaceFileFor(path));
-		GeneratorModel model = (GeneratorModel) sgenResource.getContents().get(0);
+		GeneratorModel model = getGeneratorModel(sgenFileName);
 		model.getEntries().get(0).setElementRef(getStatechart());
 
 		performFullBuild();
 
 		getGeneratorExecutorLookup().execute(model);
+	}
+
+	protected GeneratorModel getGeneratorModel(String sgenFileName) {
+		IPath path = new Path(sgenFileName);
+		Resource sgenResource = loadResource(getWorkspaceFileFor(path));
+		GeneratorModel model = (GeneratorModel) sgenResource.getContents().get(0);
+		return model;
 	}
 	
 	protected List<String> getFilesToCopy() {
