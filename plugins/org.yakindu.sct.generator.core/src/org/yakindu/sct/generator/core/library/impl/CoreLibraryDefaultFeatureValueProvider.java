@@ -22,7 +22,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.generator.core.library.AbstractDefaultFeatureValueProvider;
-import org.yakindu.sct.model.sgen.BoolLiteral;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
@@ -58,7 +57,7 @@ public class CoreLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatu
 	public IStatus validateParameterValue(FeatureParameterValue parameterValue) {
 		String parameterName = parameterValue.getParameter().getName();
 		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName) && !access.projectExists(parameterValue.getStringValue()))
-			return error(String.format("The Project %s does not exist.", parameterValue.getExpression()));
+			return error(String.format("The Project %s does not exist.", parameterValue.getStringValue()));
 		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName) && access.projectExists(parameterValue.getStringValue())
 				&& !access.projectOpened(parameterValue.getStringValue()))
 			return error(String.format("The Project %s is not open.", parameterValue.getExpression()));
@@ -70,12 +69,8 @@ public class CoreLibraryDefaultFeatureValueProvider extends AbstractDefaultFeatu
 			String targetProjectName = targetProjectParam != null ? targetProjectParam.getStringValue() : null;
 			if (targetProjectName != null && !access.folderExists(targetProjectName, parameterValue.getStringValue())) {
 				return warning(String.format("The Folder %s does not exist in Project %s",
-						parameterValue.getExpression(), targetProjectName));
+						parameterValue.getStringValue(), targetProjectName));
 			}
-		}
-		if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)
-				&& !(parameterValue.getExpression() instanceof BoolLiteral)) {
-			return error("Illegal Value. Must be 'true' or 'false'");
 		}
 		return Status.OK_STATUS;
 	}

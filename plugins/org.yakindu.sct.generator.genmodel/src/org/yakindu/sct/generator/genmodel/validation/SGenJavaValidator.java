@@ -21,12 +21,16 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
+import org.yakindu.base.types.typesystem.ITypeSystem;
+import org.yakindu.base.types.validation.TypeValidator;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.core.library.IDefaultFeatureValueProvider;
-import org.yakindu.sct.model.sgen.BoolLiteral;
 import org.yakindu.sct.model.sgen.DeprecatableElement;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
@@ -35,12 +39,8 @@ import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
-import org.yakindu.sct.model.sgen.IntLiteral;
-import org.yakindu.sct.model.sgen.Literal;
 import org.yakindu.sct.model.sgen.ParameterTypes;
-import org.yakindu.sct.model.sgen.RealLiteral;
 import org.yakindu.sct.model.sgen.SGenPackage;
-import org.yakindu.sct.model.sgen.StringLiteral;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -62,10 +62,6 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public static final String DUPLICATE_PARAMETER = "Duplicate parameter.";
 	public static final String DUPLICATE_FEATURE = "Duplicate feature.";
 	public static final String UNKOWN_GENERATOR = "Unknown generator.";
-	public static final String INCOMPATIBLE_TYPE_BOOLEAN_EXPECTED = "Incompatible type, Boolean expected.";
-	public static final String INCOMPATIBLE_TYPE_INTEGER_EXPECTED = "Incompatible type, Integer expected.";
-	public static final String INCOMPATIBLE_TYPE_FLOAT_EXPECTED = "Incompatible type, Float expected.";
-	public static final String INCOMPATIBLE_TYPE_STRING_EXPECTED = "Incompatible type, String expected.";
 	public static final String UNKNOWN_CONTENT_TYPE = "Unknown content type '";
 	public static final String DEPRECATED = "Element is depricated.";
 	public static final String EMPTY_SGEN = ".sgen file does not contain any entries.";
@@ -74,6 +70,12 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 	@Inject
 	private Injector injector;
+	@Inject
+	private ITypeSystemInferrer inferrer;
+	@Inject
+	protected TypeValidator typeValidator;
+	@Inject
+	protected ITypeSystem typesystem;
 
 	@Check
 	public void checkContentType(GeneratorEntry entry) {
@@ -94,25 +96,23 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public void checkParameterValueType(final FeatureParameterValue parameterValue) {
 		if (parameterValue == null || parameterValue.getExpression() == null)
 			return;
-		Literal value = parameterValue.getExpression();
+		InferenceResult valueResult = inferrer.infer(parameterValue.getExpression());
 		ParameterTypes parameterType = parameterValue.getParameter().getParameterType();
-		switch (parameterType) {
+		typeValidator.assertAssignable(InferenceResult.from(mapType(parameterType)), valueResult, null, this);
+	}
+
+	public Type mapType(ParameterTypes type) {
+		switch (type) {
 		case BOOLEAN:
-			if (!(value instanceof BoolLiteral))
-				error(INCOMPATIBLE_TYPE_BOOLEAN_EXPECTED, SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
-			break;
+			return typesystem.getType(ITypeSystem.BOOLEAN);
 		case INTEGER:
-			if (!(value instanceof IntLiteral))
-				error(INCOMPATIBLE_TYPE_INTEGER_EXPECTED, SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
-			break;
+			return typesystem.getType(ITypeSystem.INTEGER);
 		case FLOAT:
-			if (!(value instanceof RealLiteral))
-				error(INCOMPATIBLE_TYPE_FLOAT_EXPECTED, SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
-			break;
+			return typesystem.getType(ITypeSystem.REAL);
 		case STRING:
-			if (!(value instanceof StringLiteral))
-				error(INCOMPATIBLE_TYPE_STRING_EXPECTED, SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
-			break;
+			return typesystem.getType(ITypeSystem.STRING);
+		default:
+			return typesystem.getType(ITypeSystem.ANY);
 		}
 	}
 
@@ -149,14 +149,13 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 					SGenPackage.Literals.GENERATOR_MODEL__GENERATOR_ID);
 		}
 	}
-	
+
 	@Check
 	public void checkEntriesExist(GeneratorModel model) {
-		if(model.getEntries() == null || model.getEntries().isEmpty()) {
+		if (model.getEntries() == null || model.getEntries().isEmpty()) {
 			warning(EMPTY_SGEN, null);
 		}
 	}
-	
 
 	@Check
 	public void checkDuplicateGeneratorEntryFeature(final FeatureConfiguration config) {
@@ -230,14 +229,10 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		Iterable<ILibraryDescriptor> libraryDescriptors = LibraryExtensions
 				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
 
-		Iterable<String> requiredParameters = transform(
-				filter(concat(
-						transform(
-								filter(concat(transform(transform(libraryDescriptors, getFeatureTypeLibrary()),
-										getFeatureTypes())), hasName(configuration.getType().getName())),
-								getParameter())),
-						isRequiredParamter()),
-				getName());
+		Iterable<String> requiredParameters = transform(filter(concat(transform(
+				filter(concat(transform(transform(libraryDescriptors, getFeatureTypeLibrary()), getFeatureTypes())),
+						hasName(configuration.getType().getName())),
+				getParameter())), isRequiredParamter()), getName());
 
 		List<String> configuredParameters = Lists.newArrayList();
 

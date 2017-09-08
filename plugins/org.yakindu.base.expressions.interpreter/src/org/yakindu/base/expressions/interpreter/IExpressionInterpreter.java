@@ -13,11 +13,14 @@ package org.yakindu.base.expressions.interpreter;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.model.sruntime.ExecutionContext;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@ImplementedBy(DefaultExpressionInterpreter.class)
 public interface IExpressionInterpreter {
 	
 	public Object evaluate(Expression statement, ExecutionContext context);

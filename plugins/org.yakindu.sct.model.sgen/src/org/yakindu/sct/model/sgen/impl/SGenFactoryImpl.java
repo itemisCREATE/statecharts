@@ -16,7 +16,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.base.expressions.ExpressionsRuntimeModule;
 import org.yakindu.sct.model.sgen.*;
+import org.yakindu.sct.model.sgen.DeprecatableElement;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -28,6 +30,9 @@ import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.ParameterTypes;
 import org.yakindu.sct.model.sgen.SGenFactory;
 import org.yakindu.sct.model.sgen.SGenPackage;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,15 +59,17 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 		}
 		return new SGenFactoryImpl();
 	}
+	
+	protected Injector injector;
 
 	/**
 	 * Creates an instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public SGenFactoryImpl() {
-		super();
+		injector = Guice.createInjector(new ExpressionsRuntimeModule());
 	}
 
 	/**
@@ -81,10 +88,6 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 			case SGenPackage.GENERATOR_ENTRY: return createGeneratorEntry();
 			case SGenPackage.FEATURE_PARAMETER_VALUE: return createFeatureParameterValue();
 			case SGenPackage.FEATURE_TYPE_LIBRARY: return createFeatureTypeLibrary();
-			case SGenPackage.BOOL_LITERAL: return createBoolLiteral();
-			case SGenPackage.INT_LITERAL: return createIntLiteral();
-			case SGenPackage.REAL_LITERAL: return createRealLiteral();
-			case SGenPackage.STRING_LITERAL: return createStringLiteral();
 			case SGenPackage.DEPRECATABLE_ELEMENT: return createDeprecatableElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -184,10 +187,11 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public FeatureParameterValue createFeatureParameterValue() {
 		FeatureParameterValueImpl featureParameterValue = new FeatureParameterValueImpl();
+		injector.injectMembers(featureParameterValue);
 		return featureParameterValue;
 	}
 
@@ -199,46 +203,6 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 	public FeatureTypeLibrary createFeatureTypeLibrary() {
 		FeatureTypeLibraryImpl featureTypeLibrary = new FeatureTypeLibraryImpl();
 		return featureTypeLibrary;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BoolLiteral createBoolLiteral() {
-		BoolLiteralImpl boolLiteral = new BoolLiteralImpl();
-		return boolLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public IntLiteral createIntLiteral() {
-		IntLiteralImpl intLiteral = new IntLiteralImpl();
-		return intLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public RealLiteral createRealLiteral() {
-		RealLiteralImpl realLiteral = new RealLiteralImpl();
-		return realLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StringLiteral createStringLiteral() {
-		StringLiteralImpl stringLiteral = new StringLiteralImpl();
-		return stringLiteral;
 	}
 
 	/**

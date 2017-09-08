@@ -102,42 +102,6 @@ public interface SGenFactory extends EFactory {
 	FeatureTypeLibrary createFeatureTypeLibrary();
 
 	/**
-	 * Returns a new object of class '<em>Bool Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Bool Literal</em>'.
-	 * @generated
-	 */
-	BoolLiteral createBoolLiteral();
-
-	/**
-	 * Returns a new object of class '<em>Int Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Int Literal</em>'.
-	 * @generated
-	 */
-	IntLiteral createIntLiteral();
-
-	/**
-	 * Returns a new object of class '<em>Real Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Real Literal</em>'.
-	 * @generated
-	 */
-	RealLiteral createRealLiteral();
-
-	/**
-	 * Returns a new object of class '<em>String Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>String Literal</em>'.
-	 * @generated
-	 */
-	StringLiteral createStringLiteral();
-
-	/**
 	 * Returns a new object of class '<em>Deprecatable Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

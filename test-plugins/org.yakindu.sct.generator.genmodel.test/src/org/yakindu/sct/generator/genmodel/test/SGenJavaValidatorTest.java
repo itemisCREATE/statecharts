@@ -14,12 +14,11 @@ import static org.junit.Assert.fail;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.DEPRECATED;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.DUPLICATE_FEATURE;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.DUPLICATE_PARAMETER;
-import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.INCOMPATIBLE_TYPE_STRING_EXPECTED;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.EMPTY_SGEN;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.MISSING_REQUIRED_FEATURE;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.MISSING_REQUIRED_PARAMETER;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.UNKNOWN_CONTENT_TYPE;
 import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.UNKOWN_GENERATOR;
-import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.EMPTY_SGEN;
 
 import java.lang.reflect.Method;
 
@@ -94,7 +93,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 				"GeneratorModel for yakindu::java { statechart Example { feature Outlet { targetFolder = true }}}",
 				GeneratorModel.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
-		result.assertAny(new MsgPredicate(INCOMPATIBLE_TYPE_STRING_EXPECTED));
+		result.assertAny(new MsgPredicate("Incompatible types string and boolean."));
 	}
 
 	/**
@@ -227,7 +226,7 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 	@Test
 	public void testAllChecksHaveTests() throws Exception {
 		Iterable<Method> methods = Lists.newArrayList(SGenJavaValidator.class
-				.getMethods());
+				.getDeclaredMethods());
 		methods = Iterables.filter(methods, new Predicate<Method>() {
 			public boolean apply(Method input) {
 				return input.getAnnotation(Check.class) != null;

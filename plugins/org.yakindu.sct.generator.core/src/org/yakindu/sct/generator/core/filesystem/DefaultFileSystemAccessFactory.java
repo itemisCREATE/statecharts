@@ -52,7 +52,7 @@ public class DefaultFileSystemAccessFactory {
 
 	protected void initDefaultOutput(ISCTFileSystemAccess access, GeneratorEntry entry) {
 		access.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
-				helper.getTargetFolderValue(entry).getExpression().toString());
+				helper.getTargetFolderValue(entry).getStringValue());
 		access.getOutputConfigurations().get(IFileSystemAccess.DEFAULT_OUTPUT).setCreateOutputDirectory(true);
 	}
 

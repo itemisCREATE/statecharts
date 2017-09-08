@@ -120,6 +120,11 @@ public class CoreFunction extends Function {
 	public Double plus(Long l1, Double d2) {
 		return l1 + d2;
 	}
+	
+	@FunctionMethod(PLUS)
+	public String plus(String s1, String s2) {
+		return s1 + s2;
+	}
 
 	@FunctionMethod(PLUS)
 	public Integer positive(Integer i) {
