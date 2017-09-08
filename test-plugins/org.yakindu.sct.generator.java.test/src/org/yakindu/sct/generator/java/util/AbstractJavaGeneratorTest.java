@@ -116,6 +116,7 @@ public abstract class AbstractJavaGeneratorTest {
 
 		@Override
 		public void log(String line) {
+			System.out.println(line);
 		}
 
 		@Override
