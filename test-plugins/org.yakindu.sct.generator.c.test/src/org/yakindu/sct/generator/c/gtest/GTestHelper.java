@@ -49,11 +49,32 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * 
  */
 public class GTestHelper {
+	
+	/**
+	 * @author rbeckmann
+	 *
+	 */
+	public enum Compiler {
+		GCC ("gcc"), GPLUSPLUS ("g++");
+		
+		protected String command;
+		
+		Compiler(String command) {
+			this.command = command;
+		}
+		
+		public String getCommand() {
+			return this.command;
+		}
+	}
 
 	private final Object owner;
-
+	protected Compiler compiler;
+	
+	
 	public GTestHelper(Object owner) {
 		this.owner = owner;
+		this.compiler = Compiler.GCC;
 	}
 
 	public void compile() {
@@ -74,14 +95,19 @@ public class GTestHelper {
 		String sgenFileName = getSgenFileName(getTestProgram());
 		copyFileFromBundleToFolder(getTestBundle(), sgenFileName, targetPath);
 
-		IPath path = new Path(sgenFileName);
-		Resource sgenResource = loadResource(getWorkspaceFileFor(path));
-		GeneratorModel model = (GeneratorModel) sgenResource.getContents().get(0);
+		GeneratorModel model = getGeneratorModel(sgenFileName);
 		model.getEntries().get(0).setElementRef(getStatechart());
 
 		performFullBuild();
 
 		getGeneratorExecutorLookup().execute(model);
+	}
+
+	protected GeneratorModel getGeneratorModel(String sgenFileName) {
+		IPath path = new Path(sgenFileName);
+		Resource sgenResource = loadResource(getWorkspaceFileFor(path));
+		GeneratorModel model = (GeneratorModel) sgenResource.getContents().get(0);
+		return model;
 	}
 	
 	protected List<String> getFilesToCopy() {
@@ -180,7 +206,7 @@ public class GTestHelper {
 	 * @return
 	 */
 	protected String getCompilerCommand() {
-		return "gcc";
+		return this.compiler.getCommand();
 	}
 
 	/**
