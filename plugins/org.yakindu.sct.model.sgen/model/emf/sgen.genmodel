@@ -5,7 +5,7 @@
     copyrightFields="false" usedGenPackages="../../../org.yakindu.base.types/model/base.genmodel#//base ../../../org.yakindu.base.expressions/model/Expressions.genmodel#//expressions ../../../org.yakindu.base.types/model/types.genmodel#//types">
   <foreignModel>sgen.ecore</foreignModel>
   <genPackages prefix="SGen" basePackage="org.yakindu.sct.model" disposableProviderFactory="true"
-      loadInitialization="true" ecorePackage="sgen.ecore#/">
+      ecorePackage="sgen.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="sgen.ecore#//ParameterTypes">
       <genEnumLiterals ecoreEnumLiteral="sgen.ecore#//ParameterTypes/STRING"/>
       <genEnumLiterals ecoreEnumLiteral="sgen.ecore#//ParameterTypes/FLOAT"/>
@@ -15,6 +15,7 @@
     <genClasses ecoreClass="sgen.ecore#//GeneratorModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgen.ecore#//GeneratorModel/entries"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgen.ecore#//GeneratorModel/generatorId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgen.ecore#//GeneratorModel/properties"/>
     </genClasses>
     <genClasses ecoreClass="sgen.ecore#//GeneratorConfiguration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgen.ecore#//GeneratorConfiguration/configurations"/>
@@ -60,6 +61,10 @@
       </genOperations>
       <genOperations ecoreOperation="sgen.ecore#//FeatureParameterValue/getStringValue"/>
       <genOperations ecoreOperation="sgen.ecore#//FeatureParameterValue/getBooleanValue"/>
+      <genOperations ecoreOperation="sgen.ecore#//FeatureParameterValue/setValue.2">
+        <genParameters ecoreParameter="sgen.ecore#//FeatureParameterValue/setValue.2/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="sgen.ecore#//FeatureParameterValue/getIntegerValue"/>
     </genClasses>
     <genClasses ecoreClass="sgen.ecore#//FeatureTypeLibrary">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgen.ecore#//FeatureTypeLibrary/types"/>
@@ -68,6 +73,9 @@
     <genClasses ecoreClass="sgen.ecore#//DeprecatableElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgen.ecore#//DeprecatableElement/deprecated"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgen.ecore#//DeprecatableElement/comment"/>
+    </genClasses>
+    <genClasses ecoreClass="sgen.ecore#//PropertyDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgen.ecore#//PropertyDefinition/initialValue"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
