@@ -55,11 +55,32 @@ import com.google.inject.util.Modules;
  * 
  */
 public class GTestHelper {
+	
+	/**
+	 * @author rbeckmann
+	 *
+	 */
+	public enum Compiler {
+		GCC ("gcc"), GPLUSPLUS ("g++");
+		
+		protected String command;
+		
+		Compiler(String command) {
+			this.command = command;
+		}
+		
+		public String getCommand() {
+			return this.command;
+		}
+	}
 
 	private final Object owner;
-
+	protected Compiler compiler;
+	
+	
 	public GTestHelper(Object owner) {
 		this.owner = owner;
+		this.compiler = Compiler.GCC;
 	}
 
 	public void compile() {
@@ -196,7 +217,7 @@ public class GTestHelper {
 	 * @return
 	 */
 	protected String getCompilerCommand() {
-		return "gcc";
+		return this.compiler.getCommand();
 	}
 
 	/**

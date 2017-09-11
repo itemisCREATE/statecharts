@@ -5,6 +5,7 @@ import java.util.List;
 public class GMockHelper extends GTestHelper {
 	public GMockHelper(Object owner) {
 		super(owner);
+		this.compiler = Compiler.GPLUSPLUS;
 	}
 	
 	@Override
@@ -13,10 +14,5 @@ public class GMockHelper extends GTestHelper {
 		command.remove("-lgtest_main");
 		command.add("-lgmock_main");
 		return command;
-	}
-	
-	@Override
-	protected String getCompilerCommand() {
-		return "g++";
 	}
 }
