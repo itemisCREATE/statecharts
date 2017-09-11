@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckType;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
@@ -40,6 +41,7 @@ import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.ParameterTypes;
+import org.yakindu.sct.model.sgen.PropertyDefinition;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
 import com.google.common.base.Function;
@@ -76,6 +78,14 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	protected TypeValidator typeValidator;
 	@Inject
 	protected ITypeSystem typesystem;
+
+	@Check(CheckType.FAST)
+	public void checkExpression(PropertyDefinition property) {
+		if (property.getType() == null || property.getType().eIsProxy())
+			return;
+		InferenceResult expressionResult = inferrer.infer(property.getInitialValue(), this);
+		typeValidator.assertAssignable(InferenceResult.from(property.getType()), expressionResult, null, this);
+	}
 
 	@Check
 	public void checkContentType(GeneratorEntry entry) {

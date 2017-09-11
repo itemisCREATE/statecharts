@@ -12,10 +12,12 @@ package org.yakindu.sct.model.sgen.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.expressions.expressions.BoolLiteral;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
@@ -27,7 +29,12 @@ import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.GeneratorModel;
+import org.yakindu.sct.model.sgen.PropertyDefinition;
 import org.yakindu.sct.model.sgen.SGenPackage;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionVariable;
+import org.yakindu.sct.model.sruntime.SRuntimeFactory;
 import org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl;
 
 import com.google.inject.Inject;
@@ -220,8 +227,9 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated NOT
 	 */
 	public String getStringValue() {
-		return interpreter.evaluate(getExpression(), new ExecutionContextImpl()).toString();
+		return interpreter.evaluate(getExpression(), getExecutionContext()).toString();
 	}
+
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -229,7 +237,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated NOT
 	 */
 	public boolean getBooleanValue() {
-		return (boolean) interpreter.evaluate(getExpression(), new ExecutionContextImpl());
+		return (boolean) interpreter.evaluate(getExpression(), getExecutionContext());
 	}
 	
 	/**
@@ -238,7 +246,27 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated NOT
 	 */
 	public int getIntegerValue() {
-		return ((Long)interpreter.evaluate(getExpression(), new ExecutionContextImpl())).intValue();
+		return ((Long)interpreter.evaluate(getExpression(), getExecutionContext())).intValue();
+	}
+	
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	protected ExecutionContext getExecutionContext() {
+		ExecutionContext context = new ExecutionContextImpl();
+		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil.getRootContainer(this);
+		EList<PropertyDefinition> properties = generatorModel.getProperties();
+		for (PropertyDefinition propertyDefinition : properties) {
+			ExecutionVariable variable = SRuntimeFactory.eINSTANCE.createExecutionVariable();
+			variable.setName(propertyDefinition.getName());
+			variable.setFqName(propertyDefinition.getName());
+			variable.setType(propertyDefinition.getType());
+			variable.setValue(interpreter.evaluate(propertyDefinition.getInitialValue(), context));
+			context.getSlots().add(variable);
+		}
+		return context;
 	}
 
 //

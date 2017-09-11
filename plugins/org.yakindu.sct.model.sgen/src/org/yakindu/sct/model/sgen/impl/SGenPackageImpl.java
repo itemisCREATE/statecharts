@@ -112,6 +112,13 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass propertyDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum parameterTypesEEnum = null;
 
 	/**
@@ -206,6 +213,15 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 */
 	public EAttribute getGeneratorModel_GeneratorId() {
         return (EAttribute)getGeneratorModel().getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getGeneratorModel_Properties() {
+        return (EReference)getGeneratorModel().getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -473,6 +489,27 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 */
 	public EAttribute getDeprecatableElement_Comment() {
         return (EAttribute)getDeprecatableElement().getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPropertyDefinition() {
+		if (propertyDefinitionEClass == null) {
+			propertyDefinitionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGenPackage.eNS_URI).getEClassifiers().get(10);
+		}
+		return propertyDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPropertyDefinition_InitialValue() {
+        return (EReference)getPropertyDefinition().getEStructuralFeatures().get(0);
 	}
 
 	/**

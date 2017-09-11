@@ -19,8 +19,13 @@ import "http://www.yakindu.org/sct/statechart/SGen"
  */
 GeneratorModel returns GeneratorModel:
 	'GeneratorModel' 'for' generatorId=GENERATOR_ID '{'
+	(properties+=PropertyDefinition)*
 	(entries+=GeneratorEntry)*
 	'}';
+
+PropertyDefinition returns PropertyDefinition:
+	{PropertyDefinition} ('val') name=ID ':' typeSpecifier=TypeSpecifier
+	('=' initialValue=Expression)?;
 
 GeneratorEntry returns GeneratorEntry:
 	contentType=ID elementRef=[ecore::EObject|QID] '{'

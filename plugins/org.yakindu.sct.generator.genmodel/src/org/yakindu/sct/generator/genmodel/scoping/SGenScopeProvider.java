@@ -21,9 +21,12 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
+import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.IGeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.ILibraryDescriptor;
@@ -51,9 +54,14 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Inject
 	private Injector injector;
+	@Inject
+	private ITypeSystem typeSystem;
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
+		if(reference == TypesPackage.Literals.TYPE_SPECIFIER__TYPE) {
+			return Scopes.scopeFor(typeSystem.getConcreteTypes());
+		}
 		if (reference.getName().equals("type")) {
 			return scope_Type(context, reference);
 		}
