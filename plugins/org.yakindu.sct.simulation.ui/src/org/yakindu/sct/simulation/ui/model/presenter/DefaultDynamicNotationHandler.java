@@ -15,7 +15,8 @@ import java.util.List;
 
 import org.yakindu.base.gmf.runtime.highlighting.HighlightingParameters;
 import org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
+import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -24,7 +25,8 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
  */
 public class DefaultDynamicNotationHandler extends AbstractDynamicNotationHandler {
 
-	ExecutionContextVisualizer visualizer = new ExecutionContextVisualizer(NULL_SUPPORT);
+	private ExecutionContextVisualizer visualizer = new ExecutionContextVisualizer(NULL_SUPPORT);
+	private ExecutionContextExtensions contextExtensions = new ExecutionContextExtensions();
 
 	protected ExecutionContext currentContext;
 
@@ -42,7 +44,7 @@ public class DefaultDynamicNotationHandler extends AbstractDynamicNotationHandle
 	 */
 	protected void restoreNotationState(ExecutionContext context) {
 		List<IHighlightingSupport.Action> actions = new ArrayList<IHighlightingSupport.Action>();
-		actions.add(new IHighlightingSupport.Highlight(context.getAllActiveStates(), HighlightingParameters.DEFAULT));
+		actions.add(new IHighlightingSupport.Highlight(contextExtensions.getAllActiveStates(context), HighlightingParameters.DEFAULT));
 		actions.add(new IHighlightingSupport.Highlight(context.getExecutedElements(), HighlightingParameters.DEFAULT));
 		actions.add(new IHighlightingSupport.Highlight(context.getSuspendedElements(), SUSPENDED_PARAMS));
 		getHighlightingSupport().executeAsync(actions);

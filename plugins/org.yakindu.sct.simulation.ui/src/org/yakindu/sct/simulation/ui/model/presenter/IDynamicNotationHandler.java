@@ -11,7 +11,7 @@
 package org.yakindu.sct.simulation.ui.model.presenter;
 
 import org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 
 /**
  * An IDynamicNotationHandler displays highlights the semantic elements using an

@@ -16,13 +16,13 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.yakindu.base.expressions.interpreter.IOperationMockup;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.IDomain;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.launch.AbstractSCTLaunchConfigurationDelegate;
 import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
-import org.yakindu.sct.simulation.core.sexec.interpreter.IOperationMockup;
 import org.yakindu.sct.simulation.core.sexec.interpreter.JavaOperationMockup;
 
 import com.google.inject.Inject;

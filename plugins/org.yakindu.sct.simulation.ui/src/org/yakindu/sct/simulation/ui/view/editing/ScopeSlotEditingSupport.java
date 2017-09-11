@@ -13,7 +13,7 @@ package org.yakindu.sct.simulation.ui.view.editing;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.typesystem.ITypeSystem;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
+import org.yakindu.sct.model.sruntime.ExecutionSlot;
 
 /**
  * 

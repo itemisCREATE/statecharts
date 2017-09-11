@@ -9,5 +9,6 @@ Require-Bundle: org.yakindu.sct.simulation.core,
  org.yakindu.sct.domain,
  org.yakindu.sct.model.stext,
  org.yakindu.sct.simulation.core.sexec,
- org.yakindu.sct.model.sexec
+ org.yakindu.sct.model.sexec,
+ org.yakindu.base.expressions.interpreter
 Export-Package: org.yakindu.sct.domain.generic.simulation

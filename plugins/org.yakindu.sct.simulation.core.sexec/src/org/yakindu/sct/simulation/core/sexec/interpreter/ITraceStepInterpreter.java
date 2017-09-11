@@ -11,7 +11,7 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter;
 
 import org.yakindu.sct.model.sexec.Trace;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 
 import com.google.inject.ImplementedBy;
 

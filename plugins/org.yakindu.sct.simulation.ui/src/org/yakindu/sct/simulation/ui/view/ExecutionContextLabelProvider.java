@@ -15,12 +15,12 @@ import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.custom.StyleRange;
 import org.yakindu.base.types.EnumerationType;
-import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionOperation;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
-import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot;
+import org.yakindu.sct.model.sruntime.CompositeSlot;
+import org.yakindu.sct.model.sruntime.ExecutionEvent;
+import org.yakindu.sct.model.sruntime.ExecutionOperation;
+import org.yakindu.sct.model.sruntime.ExecutionSlot;
+import org.yakindu.sct.model.sruntime.ExecutionVariable;
+import org.yakindu.sct.model.sruntime.ReferenceSlot;
 import org.yakindu.sct.simulation.ui.SimulationImages;
 
 /**

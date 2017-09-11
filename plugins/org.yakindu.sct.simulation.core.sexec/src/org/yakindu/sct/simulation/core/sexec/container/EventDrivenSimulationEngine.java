@@ -14,10 +14,10 @@ package org.yakindu.sct.simulation.core.sexec.container;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sruntime.ExecutionEvent;
+import org.yakindu.sct.model.sruntime.SRuntimePackage;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
-import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
 
 /**
  * Event Driven implementation of the {@link ISimulationEngine}.

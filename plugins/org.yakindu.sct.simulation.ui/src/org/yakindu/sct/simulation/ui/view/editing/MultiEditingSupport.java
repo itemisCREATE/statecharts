@@ -14,7 +14,7 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.ViewerCell;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
+import org.yakindu.sct.model.sruntime.ExecutionSlot;
 /**
  * 
  * @author andreas muelder - Initial contribution and API

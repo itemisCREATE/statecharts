@@ -12,21 +12,22 @@ package org.yakindu.sct.model.sexec.interpreter.test.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
 
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
+import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionVariable;
 import org.yakindu.sct.model.stext.stext.ArgumentedAnnotation;
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
-import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
+import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.*;
 
 import com.google.inject.Inject;
 
@@ -45,7 +46,9 @@ public abstract class AbstractExecutionFlowTest {
 	@Inject
 	protected IExecutionContextInitializer initializer;
 	@Inject
-	protected IStatementInterpreter stmtInterpreter;
+	protected IExpressionInterpreter stmtInterpreter;
+	@Inject
+	protected ExecutionContextExtensions contextExtensions;
 
 	protected ExecutionFlow flow;
 
@@ -56,7 +59,7 @@ public abstract class AbstractExecutionFlowTest {
 	protected ExecutionFlow flow() {
 		return flow;
 	}
-	
+
 	protected void initInterpreter(ExecutionFlow flow) {
 		initializer.initialize(context, flow);
 		interpreter.initialize(flow, context, false);
@@ -112,7 +115,7 @@ public abstract class AbstractExecutionFlowTest {
 
 	protected boolean isStateActive(String stateName) {
 		Assert.isNotNull(stateName);
-		List<RegularState> allActiveStates = context().getAllActiveStates();
+		List<RegularState> allActiveStates = contextExtensions.getAllActiveStates((context()));
 		for (RegularState regularState : allActiveStates) {
 			if (stateName.equals(regularState.getName())) {
 				return true;
@@ -134,12 +137,13 @@ public abstract class AbstractExecutionFlowTest {
 	protected boolean isRaised(String eventName) {
 		return context().getEvent(eventName).isRaised();
 	}
-	
+
 	protected long getCyclePeriod() {
-		ArgumentedAnnotation annotation = (ArgumentedAnnotation) ((Statechart)flow.getSourceElement()).getAnnotationOfType(CYCLE_BASED_ANNOTATION);
+		ArgumentedAnnotation annotation = (ArgumentedAnnotation) ((Statechart) flow.getSourceElement())
+				.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
 		long cyclePeriod = 200;
 		if (annotation != null) {
-			cyclePeriod = (Long) stmtInterpreter.evaluateStatement(annotation.getExpressions().get(0), context);
+			cyclePeriod = (Long) stmtInterpreter.evaluate(annotation.getExpressions().get(0), context);
 
 		}
 		return cyclePeriod;

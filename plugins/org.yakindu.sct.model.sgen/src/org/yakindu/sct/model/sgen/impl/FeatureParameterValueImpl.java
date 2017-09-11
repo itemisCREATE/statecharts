@@ -12,18 +12,32 @@ package org.yakindu.sct.model.sgen.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.yakindu.sct.model.sgen.BoolLiteral;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.yakindu.base.expressions.expressions.BoolLiteral;
+import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+import org.yakindu.base.expressions.expressions.IntLiteral;
+import org.yakindu.base.expressions.expressions.Literal;
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
+import org.yakindu.base.expressions.expressions.StringLiteral;
+import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
-import org.yakindu.sct.model.sgen.Literal;
-import org.yakindu.sct.model.sgen.SGenFactory;
+import org.yakindu.sct.model.sgen.GeneratorModel;
+import org.yakindu.sct.model.sgen.PropertyDefinition;
 import org.yakindu.sct.model.sgen.SGenPackage;
-import org.yakindu.sct.model.sgen.StringLiteral;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionVariable;
+import org.yakindu.sct.model.sruntime.SRuntimeFactory;
+import org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl;
+
+import com.google.inject.Inject;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -57,13 +71,15 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected Literal expression;
+	protected Expression expression;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-
+	@Inject
+	protected IExpressionInterpreter interpreter;
+	
 	protected FeatureParameterValueImpl() {
 		super();
 	}
@@ -125,7 +141,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Literal getExpression() {
+	public Expression getExpression() {
 		return expression;
 	}
 
@@ -134,8 +150,8 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(Literal newExpression, NotificationChain msgs) {
-		Literal oldExpression = expression;
+	public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs) {
+		Expression oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SGenPackage.FEATURE_PARAMETER_VALUE__EXPRESSION, oldExpression, newExpression);
@@ -149,7 +165,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(Literal newExpression) {
+	public void setExpression(Expression newExpression) {
 		if (newExpression != expression) {
 			NotificationChain msgs = null;
 			if (expression != null)
@@ -168,10 +184,11 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public void setValue(String string) {
-		StringLiteral literal = SGenFactory.eINSTANCE.createStringLiteral();
-		literal.setValue(string);
-		setExpression(literal);
+		StringLiteral stringLiteral = ExpressionsFactory.eINSTANCE.createStringLiteral();
+		stringLiteral.setValue(string);
+		setValue(stringLiteral);
 	}
 
 	/**
@@ -179,10 +196,29 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * 
 	 * @generated NOT
 	 */
-	public void setValue(boolean boolean_) {
-		BoolLiteral literal = SGenFactory.eINSTANCE.createBoolLiteral();
-		literal.setValue(boolean_);
-		setExpression(literal);
+	@Override
+	public void setValue(boolean bool) {
+		BoolLiteral boolLiteral = ExpressionsFactory.eINSTANCE.createBoolLiteral();
+		boolLiteral.setValue(bool);
+		setValue(boolLiteral);
+	}
+	
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void setValue(int bool) {
+		IntLiteral intLiteral = ExpressionsFactory.eINSTANCE.createIntLiteral();
+		intLiteral.setValue(bool);
+		setValue(intLiteral);
+	}
+
+	protected void setValue(Literal literal) {
+		PrimitiveValueExpression expression = ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression();
+		expression.setValue(literal);
+		setExpression(expression);
 	}
 
 	/**
@@ -191,8 +227,9 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated NOT
 	 */
 	public String getStringValue() {
-		return expression.toString();
+		return interpreter.evaluate(getExpression(), getExecutionContext()).toString();
 	}
+
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -200,10 +237,42 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated NOT
 	 */
 	public boolean getBooleanValue() {
-		return ((BoolLiteral)expression).isValue();
+		return (boolean) interpreter.evaluate(getExpression(), getExecutionContext());
+	}
+	
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public int getIntegerValue() {
+		return ((Long)interpreter.evaluate(getExpression(), getExecutionContext())).intValue();
+	}
+	
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	protected ExecutionContext getExecutionContext() {
+		if (!(EcoreUtil.getRootContainer(this) instanceof GeneratorModel)) {
+			return new ExecutionContextImpl();
+		}
+		ExecutionContext context = new ExecutionContextImpl();
+		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil.getRootContainer(this);
+		EList<PropertyDefinition> properties = generatorModel.getProperties();
+		for (PropertyDefinition propertyDefinition : properties) {
+			ExecutionVariable variable = SRuntimeFactory.eINSTANCE.createExecutionVariable();
+			variable.setName(propertyDefinition.getName());
+			variable.setFqName(propertyDefinition.getName());
+			variable.setType(propertyDefinition.getType());
+			variable.setValue(interpreter.evaluate(propertyDefinition.getInitialValue(), context));
+			context.getSlots().add(variable);
+		}
+		return context;
 	}
 
-
+//
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -279,7 +348,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 				setParameter((FeatureParameter)newValue);
 				return;
 			case SGenPackage.FEATURE_PARAMETER_VALUE__EXPRESSION:
-				setExpression((Literal)newValue);
+				setExpression((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -296,7 +365,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 				setParameter((FeatureParameter)null);
 				return;
 			case SGenPackage.FEATURE_PARAMETER_VALUE__EXPRESSION:
-				setExpression((Literal)null);
+				setExpression((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);
