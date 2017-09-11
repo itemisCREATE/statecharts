@@ -108,6 +108,9 @@ Argument:
 ParenthesizedExpression returns Expression:
 	{ParenthesizedExpression} '(' expression=Expression ')';
 
+TypeSpecifier returns types::TypeSpecifier:
+	type=[types::Type|QID] ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)*'>'))?;
+
 Literal:
 	BoolLiteral | IntLiteral | HexLiteral | BinaryLiteral | DoubleLiteral | FloatLiteral | StringLiteral | NullLiteral;
 
