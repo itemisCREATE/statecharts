@@ -20,4 +20,3 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: statecharts.org
 Bundle-ClassPath: lib/mockito-all-2.0.2-beta.jar,
  .
-Export-Package: org.yakindu.sct.generator.java.util
