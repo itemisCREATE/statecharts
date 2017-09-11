@@ -49,6 +49,7 @@ import org.yakindu.sct.model.sruntime.ExecutionContext
 import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.sruntime.ExecutionVariable
 import org.yakindu.sct.model.sruntime.ReferenceSlot
+import com.google.inject.Singleton
 
 /**
  * 
@@ -56,6 +57,7 @@ import org.yakindu.sct.model.sruntime.ReferenceSlot
  * @authos axel terfloth - additions
  * 
  */
+ @Singleton
 class DefaultExpressionInterpreter extends AbstractExpressionInterpreter implements IExpressionInterpreter {
 
 	@Inject

@@ -255,6 +255,9 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated NOT
 	 */
 	protected ExecutionContext getExecutionContext() {
+		if (!(EcoreUtil.getRootContainer(this) instanceof GeneratorModel)) {
+			return new ExecutionContextImpl();
+		}
 		ExecutionContext context = new ExecutionContextImpl();
 		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil.getRootContainer(this);
 		EList<PropertyDefinition> properties = generatorModel.getProperties();

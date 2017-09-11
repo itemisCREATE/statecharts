@@ -29,16 +29,19 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
 import org.yakindu.sct.generator.genmodel.test.util.AbstractSGenTest;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
 import org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
+import org.yakindu.sct.model.sgen.PropertyDefinition;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -81,6 +84,15 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 				GeneratorModel.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate(UNKNOWN_CONTENT_TYPE));
+	}
+	
+	@Test
+	public void checkInitialValue() {
+		EObject model = parseExpression(
+				"GeneratorModel for yakindu::java { var x : boolean = 5 }",
+				GeneratorModel.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertAny(new MsgPredicate("Incompatible types boolean and integer."));
 	}
 
 	/**

@@ -80,7 +80,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	protected ITypeSystem typesystem;
 
 	@Check(CheckType.FAST)
-	public void checkExpression(PropertyDefinition property) {
+	public void checkInitialValue(PropertyDefinition property) {
 		if (property.getType() == null || property.getType().eIsProxy())
 			return;
 		InferenceResult expressionResult = inferrer.infer(property.getInitialValue(), this);
