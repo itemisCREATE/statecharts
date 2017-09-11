@@ -25,6 +25,7 @@ import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
+import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
@@ -34,6 +35,7 @@ import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.genmodel.resource.FeatureResourceDescription;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorModel;
+import org.yakindu.sct.model.sgen.PropertyDefinition;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
 import com.google.common.base.Predicate;
@@ -59,8 +61,11 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		if(reference == TypesPackage.Literals.TYPE_SPECIFIER__TYPE) {
+		if (reference == TypesPackage.Literals.TYPE_SPECIFIER__TYPE) {
 			return Scopes.scopeFor(typeSystem.getConcreteTypes());
+		}
+		if (reference == ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE) {
+			return getElementReferenceScope(context);
 		}
 		if (reference.getName().equals("type")) {
 			return scope_Type(context, reference);
@@ -74,82 +79,73 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 		return super.getScope(context, reference);
 	}
 
-	protected IScope scope_GeneratorEntry_elementRef(final EObject context,
-			final EReference reference) {
-		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil2
-				.getRootContainer(context);
+	protected IScope getElementReferenceScope(EObject context) {
+		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil.getRootContainer(context);
+		EList<PropertyDefinition> properties = generatorModel.getProperties();
+		return Scopes.scopeFor(properties);
+	}
+
+	protected IScope scope_GeneratorEntry_elementRef(final EObject context, final EReference reference) {
+		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil2.getRootContainer(context);
 		String id = generatorModel.getGeneratorId();
-		final IGeneratorDescriptor desc = GeneratorExtensions
-				.getGeneratorDescriptor(id);
+		final IGeneratorDescriptor desc = GeneratorExtensions.getGeneratorDescriptor(id);
 		if (desc == null)
 			return IScope.NULLSCOPE;
 		final String elementRefType = desc.getElementRefType();
 		IScope scope = new FilteringScope(getDelegate().getScope(context, reference),
-			new Predicate<IEObjectDescription>() {
-				public boolean apply(IEObjectDescription input) {
+				new Predicate<IEObjectDescription>() {
+					public boolean apply(IEObjectDescription input) {
 
-					EList<EClass> allSuperTypes = input.getEClass()
-							.getESuperTypes();
-					for (EClass eClass : allSuperTypes) {
-						if (elementRefType.equals(eClass.getInstanceClassName()))
-							return true;
+						EList<EClass> allSuperTypes = input.getEClass().getESuperTypes();
+						for (EClass eClass : allSuperTypes) {
+							if (elementRefType.equals(eClass.getInstanceClassName()))
+								return true;
+						}
+						return elementRefType.equals(input.getEClass().getInstanceClassName());
 					}
-					return elementRefType.equals(input.getEClass()
-							.getInstanceClassName());
-				}
-			});
+				});
 		return new SimpleScope(scope.getAllElements());
-		
+
 	}
 
 	protected IScope scope_Parameter(final EObject context, EReference reference) {
 		IScope libraryScope = getLibraryScope(context.eResource());
-		return new FilteringScope(libraryScope,
-				new Predicate<IEObjectDescription>() {
-					public boolean apply(IEObjectDescription input) {
-						if (!input.getEClass().equals(
-								SGenPackage.Literals.FEATURE_PARAMETER)) {
-							return false;
-						}
-						// Only allow references to FeatureParameters defined by
-						// enclosing Feature
-						FeatureConfiguration configuration = EcoreUtil2
-								.getContainerOfType(context,
-										FeatureConfiguration.class);
-						if (configuration == null
-								|| configuration.getType() == null)
-							return false;
-						String featureName = configuration.getType().getName();
-						if (featureName == null) {
-							return false;
-						}
-						return featureName.equals(input
-								.getUserData(FeatureResourceDescription.FEATURE_CONTAINER));
+		return new FilteringScope(libraryScope, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				if (!input.getEClass().equals(SGenPackage.Literals.FEATURE_PARAMETER)) {
+					return false;
+				}
+				// Only allow references to FeatureParameters defined by
+				// enclosing Feature
+				FeatureConfiguration configuration = EcoreUtil2.getContainerOfType(context, FeatureConfiguration.class);
+				if (configuration == null || configuration.getType() == null)
+					return false;
+				String featureName = configuration.getType().getName();
+				if (featureName == null) {
+					return false;
+				}
+				return featureName.equals(input.getUserData(FeatureResourceDescription.FEATURE_CONTAINER));
 
-					}
-				});
+			}
+		});
 	}
 
 	protected IScope scope_Type(EObject context, EReference reference) {
 		IScope libraryScope = getLibraryScope(context.eResource());
-		return new FilteringScope(libraryScope,
-				new Predicate<IEObjectDescription>() {
-					public boolean apply(IEObjectDescription input) {
-						return input.getEClass().equals(
-								SGenPackage.Literals.FEATURE_TYPE);
-					}
-				});
+		return new FilteringScope(libraryScope, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return input.getEClass().equals(SGenPackage.Literals.FEATURE_TYPE);
+			}
+		});
 	}
 
 	protected SimpleScope getLibraryScope(Resource resource) {
-		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil
-				.getObjectByType(resource.getContents(),
-						SGenPackage.Literals.GENERATOR_MODEL);
+		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil.getObjectByType(resource.getContents(),
+				SGenPackage.Literals.GENERATOR_MODEL);
 		Assert.isNotNull(generatorModel);
 		String generatorId = generatorModel.getGeneratorId();
 
-		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions
-				.getGeneratorDescriptor(generatorId);
+		IGeneratorDescriptor generatorDescriptor = GeneratorExtensions.getGeneratorDescriptor(generatorId);
 
 		Iterable<IEObjectDescription> allElements = Lists.newArrayList();
 
@@ -159,11 +155,9 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 
 			for (ILibraryDescriptor desc : libraryDescriptor) {
 				Resource library = resourceSet.getResource(desc.getURI(), true);
-				FeatureResourceDescription description = new FeatureResourceDescription(
-						library);
+				FeatureResourceDescription description = new FeatureResourceDescription(library);
 				injector.injectMembers(description);
-				allElements = Iterables.concat(allElements,
-						description.getExportedObjects());
+				allElements = Iterables.concat(allElements, description.getExportedObjects());
 			}
 		}
 		return new SimpleScope(allElements);
