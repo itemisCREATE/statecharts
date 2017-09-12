@@ -63,4 +63,18 @@
          install-size="0"
          version="0.0.0"/>
 
+   <plugin
+         id="org.yakindu.base.expressions.interpreter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.model.sruntime"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
