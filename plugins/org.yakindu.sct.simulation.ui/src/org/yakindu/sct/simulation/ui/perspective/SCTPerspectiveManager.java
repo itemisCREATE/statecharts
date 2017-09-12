@@ -19,10 +19,12 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.DebugEvent;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchListener;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.internal.ui.DebugUIPlugin;
 import org.eclipse.debug.internal.ui.launchConfigurations.PerspectiveManager;
 import org.eclipse.debug.internal.ui.viewers.AsynchronousSchedulingRuleFactory;
@@ -64,15 +66,27 @@ public class SCTPerspectiveManager extends PerspectiveManager implements ILaunch
 		for (DebugEvent debugEvent : events) {
 			if ((debugEvent.getSource() instanceof SCTDebugTarget))
 				switch (debugEvent.getKind()) {
-				case DebugEvent.TERMINATE:
-					schedulePerspectiveSwitchJob(ID_PERSPECTIVE_SCT_MODELING);
-					break;
-				case DebugEvent.SUSPEND:
-					break;
-				case DebugEvent.RESUME:
-					break;
+					case DebugEvent.TERMINATE :
+						if (allTargetsTerminated())
+							schedulePerspectiveSwitchJob(ID_PERSPECTIVE_SCT_MODELING);
+						break;
+					case DebugEvent.SUSPEND :
+						break;
+					case DebugEvent.RESUME :
+						break;
 				}
 		}
+	}
+
+	protected boolean allTargetsTerminated() {
+		ILaunch[] launches = DebugPlugin.getDefault().getLaunchManager().getLaunches();
+		for (ILaunch launch : launches) {
+			for (IDebugTarget target : launch.getDebugTargets()) {
+				if (!target.isTerminated())
+					return false;
+			}
+		}
+		return true;
 	}
 
 	protected void schedulePerspectiveSwitchJob(final String perspectiveID) {
