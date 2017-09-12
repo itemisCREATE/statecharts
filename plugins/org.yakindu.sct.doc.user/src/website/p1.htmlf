@@ -25,21 +25,6 @@
             }
         </style>
         
-        <script type="text/javascript" src="{{ get_public_template_url("custom/page/itemis/bootstrap-anchor.js") }}"></script>
-        <script type="text/javascript">
-        jQuery(document).ready(function() {
-            jQuery('#sidebar-navigation').sticky({topSpacing: 100, bottomSpacing: 300});
-            
-            jQuery('.body-container #sidebar-navigation h2 a.toggle').on('click', function() {
-                jQuery('.content-wrapper .primary').toggleClass('span8').toggleClass('span10');
-                jQuery('.content-wrapper .sidebar-navigation-container').toggleClass('span4').toggleClass('span2');
-            });
-            
-            console.log('scrollspy');
-            jQuery('body').css('position', 'relative').scrollspy({target: "#sidebar-navigation", offset: 150});
-        });
-        </script>
-        
     {% elif dynamic_page_hubdb_table_id %}
         <link href="{{ get_public_template_url("Custom/page/itemis/it-yakindu-docs-overview.css") }}" rel="stylesheet" type="text/css">
         
