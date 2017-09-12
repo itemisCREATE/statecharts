@@ -678,7 +678,7 @@ Alternatively, you can use named parameters, like in the following example:
 
 bc. myOperation(xValue = 27, yValue = 42)
 
-Named parameters make the their order irrelevant. The following call is semantically equivalent to the one above:
+Named parameters make their order irrelevant. The following call is semantically equivalent to the one above:
 
 bc. myOperation(yValue = 42, xValue = 27)
 
