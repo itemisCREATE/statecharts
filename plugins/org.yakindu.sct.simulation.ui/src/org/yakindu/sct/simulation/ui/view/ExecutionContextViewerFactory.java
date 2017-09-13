@@ -38,23 +38,21 @@ import org.yakindu.sct.simulation.ui.view.editing.StringEditingSupport;
  * 
  */
 public class ExecutionContextViewerFactory {
-
+	
 	public static TreeViewer createViewer(Composite parent, boolean readOnly, ITypeSystemProvider provider) {
 		final TreeViewer viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
 		final ExecutionContextContentProvider contentProvider = new ExecutionContextContentProvider();
 		viewer.setContentProvider(contentProvider);
-		viewer.setFilters(new ViewerFilter[] { new TimeEventViewerFilter() });
+		viewer.setFilters(new ViewerFilter[]{new TimeEventViewerFilter()});
 		TreeViewerColumn nameColumn = new TreeViewerColumn(viewer, SWT.DEFAULT);
 		nameColumn.getColumn().setText("Name");
-		nameColumn.getColumn().setMoveable(true);
 		nameColumn.getColumn().setResizable(true);
 		nameColumn.setLabelProvider(new ExecutionContextLabelProvider(0));
 
 		TreeViewerColumn valueColumn = new TreeViewerColumn(viewer, SWT.DEFAULT);
 		valueColumn.getColumn().setText("Value");
-		valueColumn.getColumn().setMoveable(true);
 		valueColumn.getColumn().setResizable(false);
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
 
@@ -91,38 +89,60 @@ public class ExecutionContextViewerFactory {
 					}
 				});
 
-		viewer.getTree().addControlListener(new ControlAdapter() {
-			@Override
-			public void controlResized(ControlEvent e) {
-				resizeViewerColumns(viewer);
-			}
-
-			protected void resizeViewerColumns(final TreeViewer viewer) {
-				Tree tree = viewer.getTree();
-				Rectangle area = tree.getClientArea();
-				Point size = tree.computeSize(SWT.DEFAULT, SWT.DEFAULT);
-				ScrollBar vBar = tree.getVerticalBar();
-				int width = area.width - tree.computeTrim(0, 0, 0, 0).width + vBar.getSize().x;
-				if (size.y > area.height + tree.getHeaderHeight()) {
-					width -= vBar.getSize().x;
-				}
-				Point oldSize = tree.getSize();
-				if (oldSize.x > area.width) {
-					setColumnWidths(vBar, width);
-					tree.setSize(area.width, area.height);
-				} else {
-					tree.setSize(area.width, area.height);
-					setColumnWidths(vBar, width);
-				}
-			}
-
-			protected void setColumnWidths(ScrollBar vBar, int width) {
-				valueColumn.getColumn().setWidth((width - (vBar.isVisible() ? vBar.getSize().x : 0)) / 3);
-				nameColumn.getColumn().setWidth(
-						(width - (vBar.isVisible() ? vBar.getSize().x : 0)) - valueColumn.getColumn().getWidth());
-			}
-		});
+		parent.addControlListener(new TreeViewerColumnResizer(viewer, nameColumn, valueColumn));
 
 		return viewer;
+	}
+	
+	
+	/**
+	 * 
+	 * @author robert rudi - Initial contribution and API
+	 * 
+	 */
+	private static final class TreeViewerColumnResizer extends ControlAdapter {
+
+		public static final int VALUE_COL_VIEW_WIDTH_PERCENTAGE = 3; //33%
+		public static final int VALUE_COL_MIN_WIDTH = 80;
+		public static final int NAME_COL_MIN_WIDTH = 100;
+		
+		private final TreeViewer viewer;
+		private final TreeViewerColumn nameColumn;
+		private final TreeViewerColumn valueColumn;
+		
+		private TreeViewerColumnResizer(TreeViewer viewer, TreeViewerColumn nameColumn, TreeViewerColumn valueColumn) {
+			this.nameColumn = nameColumn;
+			this.viewer = viewer;
+			this.valueColumn = valueColumn;
+		}
+		@Override
+		public void controlResized(ControlEvent e) {
+			resizeViewerColumns(viewer);
+		}
+		protected void resizeViewerColumns(final TreeViewer viewer) {
+			Tree tree = viewer.getTree();
+			Rectangle area = tree.getParent().getParent().getClientArea();
+			Point size = tree.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+			ScrollBar vBar = tree.getVerticalBar();
+			int width = area.width - tree.computeTrim(0, 0, 0, 0).width + vBar.getSize().x;
+			if (size.y > area.height + tree.getHeaderHeight()) {
+				width -= vBar.getSize().x;
+			}
+			Point oldSize = tree.getSize();
+			if (oldSize.x > area.width) {
+				setColumnWidths(vBar, width);
+				tree.setSize(area.width, area.height);
+			} else {
+				tree.setSize(area.width, area.height);
+				setColumnWidths(vBar, width);
+			}
+		}
+		protected void setColumnWidths(ScrollBar vBar, int width) {
+			int preferredValueColumnWidth = (width - (vBar.isVisible() ? vBar.getSize().x : 0)) / VALUE_COL_VIEW_WIDTH_PERCENTAGE;
+			valueColumn.getColumn().setWidth(Math.max(preferredValueColumnWidth, VALUE_COL_MIN_WIDTH));
+			
+			int preferredNameColumnWidth = (width - (vBar.isVisible() ? vBar.getSize().x : 0) - valueColumn.getColumn().getWidth());
+			nameColumn.getColumn().setWidth(Math.max(preferredNameColumnWidth, NAME_COL_MIN_WIDTH));
+		}
 	}
 }
