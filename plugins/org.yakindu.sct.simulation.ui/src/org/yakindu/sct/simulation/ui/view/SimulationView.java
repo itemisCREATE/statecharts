@@ -55,6 +55,7 @@ import com.google.common.collect.Lists;
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@SuppressWarnings("restriction")
 public class SimulationView extends AbstractDebugTargetView implements ITypeSystemProvider {
 
 	private TreeViewer viewer;
@@ -210,7 +211,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		return typeSystem;
 	}
 
-	@SuppressWarnings("restriction")
 	protected class StepOverAction extends StepOverCommandAction implements IAction {
 		@Override
 		public void run() {
@@ -229,7 +229,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	protected class TerminateAction extends TerminateCommandAction implements IAction {
 		@Override
 		public void run() {
@@ -246,7 +245,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	protected class SuspendAction extends SuspendCommandAction implements IAction {
 		@Override
 		public void run() {
@@ -263,7 +261,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	protected class ResumeAction extends ResumeCommandAction implements IAction {
 		@Override
 		public void run() {
