@@ -972,3 +972,152 @@ A _test unit_ is either a "test class":#sctunit_test_classes or a "test suite":#
 ###. CHECK IMPORT: !images/sctunit_grammar_030_test_unit.png(Test unit grammar)!
 
 ###. CHECK IMPORT: p=. Test unit grammar %{display: block; font-size: 50%; padding-left: 20%; padding-right: 20%;}*Please note:* The _PackageImport_ non-terminal symbol will be available in future versions of YAKINDU Statechart Tools.%
+
+
+
+
+h2(#sctunit_generating_sctunit_source_code). Generating SCTUnit source code
+
+Executing SCTUnit test within the Eclipse development environment as described in section "&quot;Running the test&quot;":#sctunit_running_the_test is a nice and handy feature the developers. However, unit tests are usually also required in "continuous integration (CI)":https://en.wikipedia.org/wiki/Continuous_integration environents, i.e. outside of and independent from Eclipse. Additionally, it should generally be possible to keep track of how exactly unit tests are done. This is of particular importance for software that is to be deployed in safety-critical areas.
+
+Generating the unit tests as source code comes as a solution. Source code can be inspected, compiled, and integrated wherever needed.
+
+This section explains how you can create such source code with YAKINDU Statechart Tools. Supported programming languages are Java, C, and C++. The generated Java source code uses "JUnit":http://junit.org/ and "Mockito":http://site.mockito.org/, while C and C++ sources rest upon the "Google Test":https://en.wikipedia.org/wiki/Google_Test unit testing library.
+
+You should already be familiar with generating state machines as source code, as explained in chapter "&quot;Generating state machine code&quot;":../user-guide/generating_code#codegen_generating_state_machine_code. Generating SCTUnit test source code follows the same principcles, thus we can focus on the essentials here.
+
+h3(#sctunit_creating_a_generation_model). Creating a generation model
+
+The first step is to create a statechart generation (SGen) model, as explained in section "&quot;Generating state machine code&quot;":../user-guide/generating_code#setting_up_a_code_generator_project.
+
+# In the main menu, select _File → New → Other…_. The _New_ dialog opens.
+# In the _New_ dialog, select _YAKINDU SCT → Code Generator Model_.
+# Click on _Next_. The _YAKINDU Generator Model_ wizard opens.
+# Select a project and a folder as the SGen model's location. The filename must end on _.sgen_.
+# Click on _Next_.
+# In the _Generator_ drop-down menu, select one of the source code generators whose name begins with "SCTUnit", e.g. "SCTUnit Java Code Generator". As a consequence, the _Choose_ list below the drop-down menu switches from showing statechart models to displaying SCTUnit files.
+# In the _Choose_ list, check the SCTUnit files you want to generate as source code.
+# Click on _Finish_.
+
+As a result, the SGen model file is created. Figure "&quot;A sample SCTUnit SGen model&quot;":#sctunit_fig_a_sample_sctunit_sgen_model shows that the select SCTUnit Java generator is reflected in the generator ID "sctunit::java". Each SCTUnit "test unit":#sctunit_test_units is contained in a section marked with the _test_ keyword, followed by the respective fully-qualified test unit name.
+
+p(#sctunit_fig_a_sample_sctunit_sgen_model). 
+
+!images/sctunit_genmodel_010_created.png(A sample SCTUnit SGen model)!
+
+p=. A sample SCTUnit SGen model
+
+
+
+h3. Features
+
+h4. Java
+
+* Outlet
+** targetProject
+** targetFolder
+** libraryTargetFolder
+* Naming
+** basePackage
+* LicenseHeader
+** licenseText
+* StatechartNaming
+** basePackage
+** implementationSuffix
+** libraryTargetFolder
+
+h4. C
+
+* Outlet
+** targetProject
+** targetFolder
+* FunctionInlining
+** inlineReactions = false
+** inlineEntryActions = false
+** inlineExitActions = false
+** inlineEnterSequences = false
+** inlineExitSequences = false
+** inlineChoices = false
+** inlineEnterRegion = false
+** inlineExitRegion = false
+** inlineEntries = false
+* IdentifierSettings
+** moduleName
+** statemachinePrefix = "light_switch"
+** maxIdentifierLength = 31
+** separator = "_"
+* JUnitWrapper
+** WrapToJUnit = false
+* LicenseHeader
+** licenseText
+* SGenModel
+** GenerateSGen = false
+
+h4. C++
+
+Wie C
+
+
+
+h3(#sctunit_java_naming_feature). Naming feature
+
+Using the *Naming* feature, you can configure an additional package name prefix for the generated classes (and interfaces) as well as a prefix and/or a suffix for their names.
+
+It is an _optional_ feature and has the following parameters:
+
+* _basePackage_ (String, required): Package name for the generated Java classes
+* _implementationSuffix_ (String, optional): Name suffix for the implementing classes
+
+==<div class="example">==
+
+Example:
+
+bc. feature Naming {
+    basePackage = "org.ourproject.sct"
+    implementationSuffix = "Impl"
+}
+
+==</div>==
+
+
+
+h3(#sctunit_generating_code_functioninlining_feature). FunctionInlining feature
+
+The *FunctionInlining* feature enables the inlining of expressions instead of generating separate functions or methods. This might reduce the readability of the generated code, but increases performance, because less operation calls are necessary. This is an _optional_ feature and has the following parameters:
+
+* _inlineReactions_ (Boolean, optional): inlines the expression for reactions
+* _inlineEntryActions_ (Boolean, optional): inlines the expression for entry actions
+* _inlineExitActions_ (Boolean, optional): inlines the expression for exit actions
+* _inlineEnterSequences_ (Boolean, optional): inlines the expression for state-entering sequences
+* _inlineExitSequences_ (Boolean, optional): inlines the expression for state-exiting sequences
+* _inlineChoices_ (Boolean, optional): inlines the expression for choices
+* _inlineEnterRegion_ (Boolean, optional): inlines the expression for region-entering sequences
+* _inlineExitRegion_ (Boolean, optional): inlines the expression for region-exiting sequences
+* _inlineEntries_ (Boolean, optional): inlines the expression for entries
+
+ALl parameters of the *FunctionInlining* feature are _false_ by default.
+
+==<div class="example">==
+
+Example:
+
+bc. feature FunctionInlining {
+    inlineChoices = false
+    inlineEnterRegion = true
+    inlineEntries = true
+}
+
+==</div>==
+
+* Creating a code generator model
+* Select one of the SCTUnit generators
+* Only sctunit files become selectable
+
+Different code generation depending on cycle-base or event-driven
+
+Java: JUnit, Mockito (if mock statement is used)
+C, C++: GTest
+
+Features
+statechart naming
+Wohin wird das Statechart generiert, damit ich die Imports richtig machen kann?
