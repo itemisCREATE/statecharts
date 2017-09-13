@@ -116,12 +116,31 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		'''
 			«entry.innerClassVisibility»:
 			
+				«IF (timed || hasOperationCallbacks)»
+				«copyConstructorDecl»
+				
+				«assignmentOperatorDecl»
+				«ENDIF»
+			
 				«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
 			
 				«statemachineTypeDecl»
 				
 				«prototypes»
 				
+		'''
+	}
+	
+	
+	def protected copyConstructorDecl(ExecutionFlow it) {
+		'''
+		«module»(const «module» &rhs);
+		'''
+	}
+	
+	def protected assignmentOperatorDecl(ExecutionFlow it) {
+		'''
+			«module»& operator=(const «module»&);
 		'''
 	}
 	

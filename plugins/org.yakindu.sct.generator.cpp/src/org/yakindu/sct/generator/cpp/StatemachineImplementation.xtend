@@ -101,13 +101,24 @@ class StatemachineImplementation implements IContentTemplate {
 		''''''
 	}
 	
-	def constructorDefinition(ExecutionFlow it) '''
+	def constructorDefinition(ExecutionFlow it){
+	'''
 		«module»::«module»():
 			«initialisationList»
 		{
 			«constructorBody(it)»
 		}
 	'''
+	}
+	
+	def protected copyConstructerDefinition(ExecutionFlow it) {
+		'''
+		«module»::«module»(const «module» &rhs):
+			«initialisationListCopy»
+		{
+		}
+		'''
+	}
 	
 	def protected initialisationList(ExecutionFlow it) {
 		'''
