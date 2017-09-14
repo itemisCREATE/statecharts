@@ -210,14 +210,14 @@ class StatemachineHeader implements IContentTemplate {
 
 	def statemachineTypeDecl(ExecutionFlow it) '''
 		/*! Define dimension of the state configuration vector for orthogonal states. */
-		#define «type.toUpperCase»_MAX_ORTHOGONAL_STATES «stateVector.size»
+		#define «maxOrthogonalStates» «stateVector.size»
 		«IF hasHistory»
-			/*! Define dimension of the state configuration vector for history states. */
-		#define «type.toUpperCase»_MAX_HISTORY_STATES «historyVector.size»«ENDIF»
+		/*! Define dimension of the state configuration vector for history states. */
+		#define «maxHistoryStates» «historyVector.size»«ENDIF»
 		
 		«IF timed»
 		/*! Define maximum number of time events that can be active at once */
-		#define «type.toUpperCase»_MAX_ACTIVE_TIME_EVENTS «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»
+		#define «maxParallelTimeEvents» «(it.sourceElement as Statechart).maxNumberOfParallelTimeEvents»
 		«ENDIF»
 		
 		/*! Define indices of states in the StateConfVector */
