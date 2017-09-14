@@ -120,7 +120,6 @@ class StatemachineImplementation implements IContentTemplate {
 	
 	protected def CharSequence constructorBody(ExecutionFlow it)
 		'''
-«««		«scopes.filter(typeof(StatechartScope)).filter[hasOperations && !entry.useStaticOPC].map['''«OCB_Instance» = null;'''].join('\n')»
 		«IF hasHistory»
 			for (int i = 0; i < «historyStatesConst»; ++i)
 				historyVector[i] = «null_state»;

@@ -125,7 +125,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		'''
 	}
 	
-		def protected generatePrivateClassmembers(ExecutionFlow it) {
+	def protected generatePrivateClassmembers(ExecutionFlow it) {
 		''''''
 	}
 
