@@ -89,9 +89,6 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	}
 	
-
-		
-	
 	def protected usingNamespaces(ExecutionFlow it) {
 		''''''
 	}
@@ -101,41 +98,25 @@ class StatemachineImplementation implements IContentTemplate {
 		''''''
 	}
 	
-	def constructorDefinition(ExecutionFlow it){
-	'''
-		«module»::«module»():
-			«initialisationList»
+	def constructorDefinition(ExecutionFlow it) '''
+		«module»::«module»()
 		{
 			«constructorBody(it)»
 		}
 	'''
-	}
-	
-	def protected initialisationList(ExecutionFlow it) {
-		'''
-			«IF timed»«timerInstance»(null),«ENDIF»
-			stateConfVectorPosition(0)«FOR s : getInterfaces»,
-			«s.instance»()«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(null)«ENDIF»«ENDFOR»
-		'''
-	}
-	
-	def protected initialisationListCopy(ExecutionFlow it) {
-		'''
-			«IF timed»«timerInstance»(rhs.«timerInstance»),«ENDIF»
-			stateConfVectorPosition(rhs.stateConfVectorPosition)«FOR s : getInterfaces»,
-			«s.instance»(rhs.«s.instance»)«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(rhs.«s.OCB_Instance»)«ENDIF»«ENDFOR»
-		'''	
-	}
 	
 	protected def CharSequence constructorBody(ExecutionFlow it)
 		'''
-«««		«scopes.filter(typeof(StatechartScope)).filter[hasOperations && !entry.useStaticOPC].map['''«OCB_Instance» = null;'''].join('\n')»
+		«scopes.filter(typeof(StatechartScope)).filter[hasOperations && !entry.useStaticOPC].map['''«OCB_Instance» = null;'''].join('\n')»
 		«IF hasHistory»
 			for (int i = 0; i < «historyStatesConst»; ++i)
 				historyVector[i] = «null_state»;
 				
+		«ENDIF»
+		stateConfVectorPosition = 0;
+		
+		«IF timed»
+			«timerInstance» = null;
 		«ENDIF»
 		'''
 	
