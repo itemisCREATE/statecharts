@@ -1,3 +1,4 @@
 *.sctunit.xml
 
 plugins/org\.yakindu\.sct\.doc\.user/yakindu_license\.log
+*.xtendbin

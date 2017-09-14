@@ -50,8 +50,6 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 			#define «module().define»_H_
 			
 			«includes(artifactConfigs)»
-			#include <deque>
-			#include <functional>
 			
 			/*! \file Header of the state machine '«name»'.
 			*/
