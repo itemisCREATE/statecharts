@@ -30,6 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		SelfTransitionTest.class,
 		ShortStringTest.class,
 		StatechartEnterExistActionTest.class,
+		StatechartExtensionsTest.class,
 		StringTreeNodeTest.class,
 		//TreeNamingServiceTest.class,
 		//DefaultNamingServiceTest.class,
