@@ -156,11 +156,8 @@ public class ActiveEditorTracker implements IPageListener, IPartListener,
 		} else if (editorInput instanceof URIEditorInput) {
 			final URI uri = ((URIEditorInput) editorInput).getURI();
 			if (uri.isPlatformResource()) {
-				final String segment = uri.segment(1);
-				final IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(segment);
-				if (project.exists()) {
-					return project;
-				}
+				final String platformString = uri.toPlatformString(true);
+				return ResourcesPlugin.getWorkspace().getRoot().findMember(platformString).getProject();
 			}
 		}
 		return null;
