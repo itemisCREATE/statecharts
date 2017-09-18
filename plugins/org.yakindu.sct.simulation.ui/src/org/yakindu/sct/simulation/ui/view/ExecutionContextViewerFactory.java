@@ -24,6 +24,7 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.ui.IMemento;
 import org.yakindu.sct.simulation.ui.view.editing.BooleanEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.EnumerationEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.IntegerEditingSupport;
@@ -38,20 +39,22 @@ import org.yakindu.sct.simulation.ui.view.editing.StringEditingSupport;
  * 
  */
 public class ExecutionContextViewerFactory {
-	
-	public static TreeViewer createViewer(Composite parent, boolean readOnly, ITypeSystemProvider provider) {
-		final TreeViewer viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
+
+	public static TreeViewer createViewer(Composite parent, boolean readOnly, ITypeSystemProvider provider,
+			IMemento memento) {
+		final TreeViewer viewer = new TreeViewer(parent,
+				SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
 		final ExecutionContextContentProvider contentProvider = new ExecutionContextContentProvider();
 		viewer.setContentProvider(contentProvider);
 		viewer.setFilters(new ViewerFilter[]{new TimeEventViewerFilter()});
-		TreeViewerColumn nameColumn = new TreeViewerColumn(viewer, SWT.DEFAULT);
+		TreeViewerColumn nameColumn = new TreeViewerColumn(viewer, SWT.FILL);
 		nameColumn.getColumn().setText("Name");
 		nameColumn.getColumn().setResizable(true);
 		nameColumn.setLabelProvider(new ExecutionContextLabelProvider(0));
 
-		TreeViewerColumn valueColumn = new TreeViewerColumn(viewer, SWT.DEFAULT);
+		TreeViewerColumn valueColumn = new TreeViewerColumn(viewer, SWT.FILL);
 		valueColumn.getColumn().setText("Value");
 		valueColumn.getColumn().setResizable(false);
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
@@ -88,13 +91,16 @@ public class ExecutionContextViewerFactory {
 					public void beforeEditorActivated(ColumnViewerEditorActivationEvent event) {
 					}
 				});
-
-		parent.addControlListener(new TreeViewerColumnResizer(viewer, nameColumn, valueColumn));
+		
+		TreeViewerColumnResizer treeViewerColumnResizer = new TreeViewerColumnResizer(viewer, nameColumn, valueColumn,
+				memento);
+		parent.addControlListener(treeViewerColumnResizer);
+		viewer.getTree().addControlListener(treeViewerColumnResizer);
+		treeViewerColumnResizer.resizeViewerColumns();
 
 		return viewer;
 	}
-	
-	
+
 	/**
 	 * 
 	 * @author robert rudi - Initial contribution and API
@@ -102,24 +108,35 @@ public class ExecutionContextViewerFactory {
 	 */
 	private static final class TreeViewerColumnResizer extends ControlAdapter {
 
-		public static final int VALUE_COL_VIEW_WIDTH_PERCENTAGE = 3; //33%
+		public static final int VALUE_COL_VIEW_WIDTH_PERCENTAGE = 3; // 33%
 		public static final int VALUE_COL_MIN_WIDTH = 80;
 		public static final int NAME_COL_MIN_WIDTH = 100;
-		
+
 		private final TreeViewer viewer;
 		private final TreeViewerColumn nameColumn;
 		private final TreeViewerColumn valueColumn;
-		
-		private TreeViewerColumnResizer(TreeViewer viewer, TreeViewerColumn nameColumn, TreeViewerColumn valueColumn) {
+		private IMemento memento;
+
+		private TreeViewerColumnResizer(TreeViewer viewer, TreeViewerColumn nameColumn, TreeViewerColumn valueColumn,
+				IMemento memento) {
 			this.nameColumn = nameColumn;
 			this.viewer = viewer;
 			this.valueColumn = valueColumn;
+			this.memento = memento;
 		}
 		@Override
 		public void controlResized(ControlEvent e) {
-			resizeViewerColumns(viewer);
+			resizeViewerColumns();
+			rememberOrRestoreColumnWidths();
 		}
-		protected void resizeViewerColumns(final TreeViewer viewer) {
+
+		@Override
+		public void controlMoved(ControlEvent e) {
+			resizeViewerColumns();
+			rememberOrRestoreColumnWidths();
+		}
+
+		protected void resizeViewerColumns() {
 			Tree tree = viewer.getTree();
 			Rectangle area = tree.getParent().getParent().getClientArea();
 			Point size = tree.computeSize(SWT.DEFAULT, SWT.DEFAULT);
@@ -138,11 +155,49 @@ public class ExecutionContextViewerFactory {
 			}
 		}
 		protected void setColumnWidths(ScrollBar vBar, int width) {
-			int preferredValueColumnWidth = (width - (vBar.isVisible() ? vBar.getSize().x : 0)) / VALUE_COL_VIEW_WIDTH_PERCENTAGE;
-			valueColumn.getColumn().setWidth(Math.max(preferredValueColumnWidth, VALUE_COL_MIN_WIDTH));
-			
-			int preferredNameColumnWidth = (width - (vBar.isVisible() ? vBar.getSize().x : 0) - valueColumn.getColumn().getWidth());
-			nameColumn.getColumn().setWidth(Math.max(preferredNameColumnWidth, NAME_COL_MIN_WIDTH));
+			int preferredValueColumnWidth = getPreferredValueColumnWidth(vBar, width);
+			if (memento != null && (memento.getInteger("VALUE_COL_WIDTH") == null)) {
+				valueColumn.getColumn().setWidth(Math.max(preferredValueColumnWidth, VALUE_COL_MIN_WIDTH));
+			} else {
+				if (memento != null && (memento.getInteger("VALUE_COL_WIDTH") != null)) {
+					valueColumn.getColumn().setWidth(Math.max(width - nameColumn.getColumn().getWidth(),
+							Math.max(preferredValueColumnWidth, VALUE_COL_MIN_WIDTH)));
+				}
+			}
+			int preferredNameColumnWidth = getPreferredNameColumnWidth(vBar, width);
+			if (memento != null && (memento.getInteger("NAME_COL_WIDTH") == null)) {
+				nameColumn.getColumn().setWidth(Math.max(preferredNameColumnWidth, NAME_COL_MIN_WIDTH));
+			}
 		}
+
+		private int getPreferredNameColumnWidth(ScrollBar vBar, int width) {
+			return width - (vBar.isVisible() ? vBar.getSize().x : 0) - valueColumn.getColumn().getWidth();
+		}
+
+		private int getPreferredValueColumnWidth(ScrollBar vBar, int width) {
+			return (width - (vBar.isVisible() ? vBar.getSize().x : 0)) / VALUE_COL_VIEW_WIDTH_PERCENTAGE;
+		}
+
+		protected void rememberOrRestoreColumnWidths() {
+			if (memento != null) {
+				if (memento.getInteger("VALUE_COL_WIDTH") == null) {
+					memento.putInteger("VALUE_COL_WIDTH", valueColumn.getColumn().getWidth());
+				} else {
+					if (valueColumn.getColumn().getWidth() != memento.getInteger("VALUE_COL_WIDTH")) {
+						memento.putInteger("VALUE_COL_WIDTH", valueColumn.getColumn().getWidth());
+						valueColumn.getColumn().setWidth(memento.getInteger("VALUE_COL_WIDTH"));
+					}
+				}
+				if (memento.getInteger("NAME_COL_WIDTH") == null) {
+					memento.putInteger("NAME_COL_WIDTH", valueColumn.getColumn().getWidth());
+				} else {
+					if (nameColumn.getColumn().getWidth() != memento.getInteger("NAME_COL_WIDTH")) {
+						memento.putInteger("NAME_COL_WIDTH", nameColumn.getColumn().getWidth());
+						nameColumn.getColumn().setWidth(memento.getInteger("NAME_COL_WIDTH"));
+					}
+				}
+			}
+		}
+
 	}
 }
