@@ -24,6 +24,7 @@ import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.SimulationCoreActivator;
 import org.yakindu.sct.simulation.core.engine.IExecutionControl;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
+import org.yakindu.sct.simulation.core.launch.AbstractSCTLaunchConfigurationDelegate.InitializationException;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler;
 
@@ -61,23 +62,28 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 
 	@Override
 	public void init() {
-		ListBasedValidationIssueAcceptor acceptor = new ListBasedValidationIssueAcceptor();
-		ExecutionFlow flow = sequencer.transform(statechart, acceptor);
-		if (acceptor.getTraces(Severity.ERROR).size() > 0) {
-			Status errorStatus = new Status(Status.ERROR, SimulationCoreActivator.PLUGIN_ID, ERROR_DURING_SIMULATION,
-					acceptor.getTraces(Severity.ERROR).iterator().next().toString(), null);
-			IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(errorStatus);
-			try {
-				statusHandler.handleStatus(errorStatus, getDebugTarget());
-			} catch (CoreException e) {
-				e.printStackTrace();
+		try {
+			ListBasedValidationIssueAcceptor acceptor = new ListBasedValidationIssueAcceptor();
+			ExecutionFlow flow = sequencer.transform(statechart, acceptor);
+			if (acceptor.getTraces(Severity.ERROR).size() > 0) {
+				Status errorStatus = new Status(Status.ERROR, SimulationCoreActivator.PLUGIN_ID,
+						ERROR_DURING_SIMULATION, acceptor.getTraces(Severity.ERROR).iterator().next().toString(), null);
+				IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(errorStatus);
+				try {
+					statusHandler.handleStatus(errorStatus, getDebugTarget());
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
 			}
-		}
 
-		if (!context.isSnapshot()) {
-			contextInitializer.initialize(context, flow);
+			if (!context.isSnapshot()) {
+				contextInitializer.initialize(context, flow);
+			}
+			interpreter.initialize(flow, context, useInternalEventQueue());
+		} catch (Exception ex) {
+			handleException(ex);
+			throw new InitializationException(ex.getMessage());
 		}
-		interpreter.initialize(flow, context, useInternalEventQueue());
 	}
 
 	public void start() {
@@ -143,7 +149,7 @@ public class AbstractExecutionFlowSimulationEngine extends AbstractSimulationEng
 	protected boolean useInternalEventQueue() {
 		return false;
 	}
-	
+
 	public Statechart getStatechart() {
 		return statechart;
 	}
