@@ -10,9 +10,6 @@
  */
 package org.yakindu.sct.simulation.ui.perspective;
 
-import static org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_MODELING;
-import static org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -32,6 +29,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.progress.UIJob;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
+import org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives;
 
 /**
  * custom implementation of the {@link PerspectiveManager} for the YAKINDU
@@ -47,6 +45,8 @@ import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 @SuppressWarnings("restriction")
 public class SCTPerspectiveManager extends PerspectiveManager implements ILaunchListener, IDebugEventSetListener {
 
+	protected static final String ID_PERSPECTIVE_SCT_MODELING = IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_MODELING;
+	protected static final String ID_PERSPECTIVE_SCT_SIMULATION = IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION;
 	private static final String DEBUG_VIEW_ID = "org.eclipse.debug.ui.DebugView";
 	private static final String LAUNCH_TYPE = "org.yakindu.sct.simulation.core.launch.statechart";
 
