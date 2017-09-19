@@ -18,8 +18,10 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.IStatusHandler;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.emf.common.util.URI;
@@ -35,7 +37,7 @@ import org.yakindu.sct.simulation.core.util.ResourceUtil;
  * 
  */
 public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements
-		ILaunchConfigurationDelegate {
+			ILaunchConfigurationDelegate {
 
 	public String FILE_NAME = "filename";
 	public String DEFAULT_FILE_NAME = "";
@@ -51,7 +53,7 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 			return false;
 		return super.preLaunchCheck(configuration, mode, monitor);
 	}
-	
+
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
 		String filename = configuration.getAttribute(FILE_NAME, DEFAULT_FILE_NAME);
@@ -79,12 +81,31 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 		return new IProject[] { resource.getProject() };
 
 	}
-	
+
 	@Override
 	public boolean buildForLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
 			throws CoreException {
-		//Never build the workspace before simulation
+		// Never build the workspace before simulation
 		return false;
 	}
 
+	@Override
+	protected boolean saveBeforeLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
+			throws CoreException {
+		monitor.beginTask("", 1);
+		try {
+			IStatusHandler prompter = DebugPlugin.getDefault().getStatusHandler(promptStatus);
+			if (prompter != null) {
+				// load the projects for which the save prompt should appear
+				IProject[] buildOrder = getProjectsForProblemSearch(configuration, mode);
+				if (!((Boolean) prompter.handleStatus(saveScopedDirtyEditors, new Object[]{configuration, buildOrder}))
+						.booleanValue()) {
+					return false;
+				}
+			}
+			return true;
+		} finally {
+			monitor.done();
+		}
+	}
 }
