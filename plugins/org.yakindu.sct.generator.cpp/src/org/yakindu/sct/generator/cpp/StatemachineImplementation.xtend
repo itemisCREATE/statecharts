@@ -12,6 +12,10 @@ package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
 import java.util.List
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.AssignmentOperator
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.sct.generator.c.IContentTemplate
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
@@ -91,11 +95,17 @@ class StatemachineImplementation implements IContentTemplate {
 	}
 	
 <<<<<<< Upstream, based on master
+<<<<<<< Upstream, based on master
 
 		
 =======
 	def modOnReal() {
 		return true
+=======
+	def modOnReal(ExecutionFlow it) {
+		!eAllContents.filter(NumericalMultiplyDivideExpression).filter[operator == MultiplicativeOperator.MOD].filter[it.haveCommonTypeReal].isEmpty ||
+		!eAllContents.filter(AssignmentExpression).filter[operator == AssignmentOperator.MOD_ASSIGN].filter[it.haveCommonTypeReal].isEmpty
+>>>>>>> fde1cf9 include <math.h> only when needed
 	}
 >>>>>>> 9db0730 fmod only on real, float and double variables
 	

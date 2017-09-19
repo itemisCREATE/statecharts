@@ -13,6 +13,10 @@ package org.yakindu.sct.generator.c
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.util.Strings
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.AssignmentOperator
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -60,8 +64,9 @@ class StatemachineSource implements IContentTemplate {
 	}
 	
 	def modOnReal(ExecutionFlow it) {
-		return true
-		}
+		!eAllContents.filter(NumericalMultiplyDivideExpression).filter[operator == MultiplicativeOperator.MOD].filter[it.haveCommonTypeReal].isEmpty ||
+		!eAllContents.filter(AssignmentExpression).filter[operator == AssignmentOperator.MOD_ASSIGN].filter[it.haveCommonTypeReal].isEmpty
+	}
 	
 	def functions(ExecutionFlow it) '''
 		«initFunction»
