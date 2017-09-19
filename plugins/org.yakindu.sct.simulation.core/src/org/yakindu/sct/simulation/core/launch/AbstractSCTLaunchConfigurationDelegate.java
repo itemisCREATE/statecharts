@@ -91,11 +91,4 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 	protected IProject[] getBuildOrder(ILaunchConfiguration configuration, String mode) throws CoreException {
 		return getProjectsForProblemSearch(configuration, mode);
 	}
-	
-	@Override
-	protected boolean saveBeforeLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
-			throws CoreException {
-		return super.saveBeforeLaunch(configuration, mode, monitor);
-	}
-	
 }
