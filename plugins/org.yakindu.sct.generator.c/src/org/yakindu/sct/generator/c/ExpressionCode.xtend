@@ -142,7 +142,7 @@ class ExpressionCode extends Expressions {
 
 	/* Statements */
 	def dispatch CharSequence code(AssignmentExpression it) {
-		if (it.operator == AssignmentOperator.MOD_ASSIGN && haveCommonTypeReal(expression)) {
+		if (it.operator.equals(AssignmentOperator.MOD_ASSIGN) && haveCommonTypeReal(it)) {
 			'''«varRef.code» = fmod(«varRef.code»,«expression.code»)'''
 		} else
 			'''«varRef.code» «operator.literal» «expression.code»'''
