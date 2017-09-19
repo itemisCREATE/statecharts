@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.simulation.ui.perspective;
 
+import static org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_MODELING;
+import static org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -29,7 +32,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.progress.UIJob;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
-import static org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives.*;
 
 /**
  * custom implementation of the {@link PerspectiveManager} for the YAKINDU
