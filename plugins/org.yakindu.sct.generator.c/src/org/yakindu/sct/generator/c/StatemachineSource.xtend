@@ -20,9 +20,9 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class StatemachineSource implements IContentTemplate {
 	
@@ -42,6 +42,7 @@ class StatemachineSource implements IContentTemplate {
 		
 		#include <stdlib.h>
 		#include <string.h>
+		«IF modOnReal»#include <math.h>«ENDIF»
 		#include "«(typesModule.h).relativeTo(module.c)»"
 		#include "«(module.h).relativeTo(module.c)»"
 		«IF timed || !it.operations.empty»
@@ -57,6 +58,10 @@ class StatemachineSource implements IContentTemplate {
 		«functions»
 	'''
 	}
+	
+	def modOnReal(ExecutionFlow it) {
+		return true
+		}
 	
 	def functions(ExecutionFlow it) '''
 		«initFunction»

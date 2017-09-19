@@ -49,6 +49,7 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		#include "«module.h»"
 		#include <string.h>
+		«IF modOnReal»#include <math.h>«ENDIF»
 		
 		/*! \file Implementation of the state machine '«name»'
 		*/
@@ -89,8 +90,14 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	}
 	
+<<<<<<< Upstream, based on master
 
 		
+=======
+	def modOnReal() {
+		return true
+	}
+>>>>>>> 9db0730 fmod only on real, float and double variables
 	
 	def protected usingNamespaces(ExecutionFlow it) {
 		''''''
