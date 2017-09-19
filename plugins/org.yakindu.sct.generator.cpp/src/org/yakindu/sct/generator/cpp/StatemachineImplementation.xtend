@@ -49,6 +49,7 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		#include "«module.h»"
 		#include <string.h>
+		«IF modOnReal»#include <math.h>«ENDIF»
 		
 		/*! \file Implementation of the state machine '«name»'
 		*/
@@ -87,6 +88,10 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		«additionalFunctions»
 	'''
+	}
+	
+	def modOnReal() {
+		return true
 	}
 	
 	def protected usingNamespaces(ExecutionFlow it) {
