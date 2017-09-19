@@ -35,7 +35,7 @@ import org.yakindu.sct.simulation.core.util.ResourceUtil;
  * 
  */
 public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements
-		ILaunchConfigurationDelegate {
+			ILaunchConfigurationDelegate {
 
 	public String FILE_NAME = "filename";
 	public String DEFAULT_FILE_NAME = "";
@@ -51,7 +51,7 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 			return false;
 		return super.preLaunchCheck(configuration, mode, monitor);
 	}
-	
+
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
 		String filename = configuration.getAttribute(FILE_NAME, DEFAULT_FILE_NAME);
@@ -79,12 +79,16 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 		return new IProject[] { resource.getProject() };
 
 	}
-	
+
 	@Override
 	public boolean buildForLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
 			throws CoreException {
-		//Never build the workspace before simulation
+		// Never build the workspace before simulation
 		return false;
 	}
 
+	@Override
+	protected IProject[] getBuildOrder(ILaunchConfiguration configuration, String mode) throws CoreException {
+		return getProjectsForProblemSearch(configuration, mode);
+	}
 }
