@@ -35,6 +35,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class SExecExtensions {
 	
@@ -60,6 +61,10 @@ class SExecExtensions {
 	
 	def isTimed (ExecutionFlow it) {
 		scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].size > 0
+	}
+	
+	def hasOperationCallbacks (ExecutionFlow it){
+		scopes.filter[declarations.filter( typeof(OperationDefinition) ).size > 0].size > 0
 	}
 	
 	def getTimeEvents(ExecutionFlow it) {

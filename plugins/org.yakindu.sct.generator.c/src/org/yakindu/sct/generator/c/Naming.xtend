@@ -271,4 +271,10 @@ class Naming {
 	def dispatch access(EObject it) '''#error cannot access elements of type «getClass().name»'''
 
 	def valueAccess(Event it) '''«scHandle»->«scope.instance».«name.asIdentifier.value»'''
+	
+	def maxOrthogonalStates(ExecutionFlow it) '''«type.toUpperCase»_MAX_ORTHOGONAL_STATES'''
+	
+	def maxHistoryStates(ExecutionFlow it) '''«type.toUpperCase»_MAX_HISTORY_STATES'''
+	
+	def maxParallelTimeEvents(ExecutionFlow it) '''«type.toUpperCase»_MAX_PARALLEL_TIME_EVENTS'''
 }

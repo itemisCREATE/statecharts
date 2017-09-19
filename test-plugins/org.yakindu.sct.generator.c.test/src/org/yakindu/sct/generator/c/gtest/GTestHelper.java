@@ -49,20 +49,20 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * 
  */
 public class GTestHelper {
-	
+
 	/**
 	 * @author rbeckmann
 	 *
 	 */
 	public enum Compiler {
-		GCC ("gcc"), GPLUSPLUS ("g++");
-		
+		GCC("gcc"), GPLUSPLUS("g++");
+
 		protected String command;
-		
+
 		Compiler(String command) {
 			this.command = command;
 		}
-		
+
 		public String getCommand() {
 			return this.command;
 		}
@@ -70,11 +70,14 @@ public class GTestHelper {
 
 	private final Object owner;
 	protected Compiler compiler;
-	
-	
+
 	public GTestHelper(Object owner) {
+		this(owner, Compiler.GCC);
+	}
+
+	public GTestHelper(Object owner, Compiler compiler) {
 		this.owner = owner;
-		this.compiler = Compiler.GCC;
+		this.compiler = compiler;
 	}
 
 	public void compile() {
@@ -109,13 +112,15 @@ public class GTestHelper {
 		GeneratorModel model = (GeneratorModel) sgenResource.getContents().get(0);
 		return model;
 	}
-	
+
 	protected List<String> getFilesToCopy() {
-		return new ArrayList<String>(Arrays.asList(owner.getClass().getAnnotation(GTest.class).additionalFilesToCopy()));
+		return new ArrayList<String>(
+				Arrays.asList(owner.getClass().getAnnotation(GTest.class).additionalFilesToCopy()));
 	}
-	
+
 	protected List<String> getFilesToCompile() {
-		return new ArrayList<String>(Arrays.asList(owner.getClass().getAnnotation(GTest.class).additionalFilesToCompile()));
+		return new ArrayList<String>(
+				Arrays.asList(owner.getClass().getAnnotation(GTest.class).additionalFilesToCompile()));
 	}
 
 	protected GeneratorExecutorLookup getGeneratorExecutorLookup() {
@@ -259,7 +264,7 @@ public class GTestHelper {
 	protected String getTestBundleAnnotation() {
 		return owner.getClass().getAnnotation(GTest.class).testBundle();
 	}
-	
+
 	protected String getStatechartBundleAnnotation() {
 		return owner.getClass().getAnnotation(GTest.class).statechartBundle();
 	}
