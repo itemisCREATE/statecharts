@@ -6,12 +6,13 @@
  * http://www.eclipse.org/legal/epl-v10.html 
  * Contributors:
  * committers of YAKINDU - initial API and implementation
- *
-*/
+ * 
+ */
 package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
 import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BinaryLiteral
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
@@ -24,7 +25,9 @@ import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.Literal
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NullLiteral
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
@@ -51,6 +54,12 @@ class ExpressionCode extends Expressions {
 	@Inject protected extension INamingService
 	@Inject protected extension ICodegenTypeSystemAccess
 
+	def boolean haveCommonTypeReal(Expression expression) {
+		if(isSame(getCommonType((infer(expression).getType), getType(ITypeSystem.INTEGER)),
+			getType(ITypeSystem.INTEGER))) return false
+		return true
+	}
+
 	/* Referring to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
 		it.code(it.definition)
@@ -60,14 +69,24 @@ class ExpressionCode extends Expressions {
 		it.code(it.definition)
 	}
 
+	def dispatch CharSequence code(NumericalMultiplyDivideExpression expression) {
+		if (expression.operator == MultiplicativeOperator.MOD && haveCommonTypeReal(expression)) {
+			'''fmod(«expression.leftOperand.code.toString.trim»,«expression.rightOperand.code»)'''
+		} else {
+			super._code(expression);
+		}
+	}
+
 	def dispatch CharSequence code(Expression it, Event target) '''«target.access»'''
 
 	def dispatch CharSequence code(Expression it, VariableDefinition target) '''«target.access»'''
 
-	def dispatch CharSequence code(ElementReferenceExpression it, OperationDefinition target) '''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
+	def dispatch CharSequence code(ElementReferenceExpression it,
+		OperationDefinition target) '''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
-		
-	def dispatch CharSequence code(FeatureCall it, OperationDefinition target) '''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
+
+	def dispatch CharSequence code(FeatureCall it,
+		OperationDefinition target) '''«target.access»(«FOR arg : expressions SEPARATOR ', '»«arg.
 		code»«ENDFOR»)'''
 
 	def dispatch CharSequence code(ConditionalExpression it) '''«condition.code» ? «trueCase.code» : «falseCase.code»'''
@@ -90,17 +109,22 @@ class ExpressionCode extends Expressions {
 	def dispatch CharSequence code(IntLiteral it) '''«value.toString»'''
 
 	def dispatch CharSequence code(DoubleLiteral it) '''«value.toString»'''
-	
+
 	def dispatch CharSequence code(FloatLiteral it) '''«value.toString»'''
 
 	def dispatch CharSequence code(HexLiteral it) '''0x«Integer::toHexString(value)»'''
-	
+
 	def dispatch CharSequence code(BinaryLiteral it) '''0b«Integer::toBinaryString(value)»'''
 
 	def dispatch CharSequence code(PrimitiveValueExpression it) '''«value.code»'''
 
 	/* Statements */
-	def dispatch CharSequence code(AssignmentExpression it) '''«varRef.code» «operator.literal» «expression.code»'''
+	def dispatch CharSequence code(AssignmentExpression it) {
+		if (it.operator == AssignmentOperator.MOD_ASSIGN && haveCommonTypeReal(expression)) {
+			'''«varRef.code» = fmod(«varRef.code»,«expression.code»)'''
+		} else
+			'''«varRef.code» «operator.literal» «expression.code»'''
+	}
 
 	def dispatch CharSequence code(EventRaisingExpression it) '''
 	«IF value != null»
