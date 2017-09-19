@@ -213,7 +213,7 @@ class StatemachineImplementation implements IContentTemplate {
 			switch (stateConfVector[stateConfVectorPosition])
 			{
 			«FOR state : states»
-				«IF state.reactSequence!=null»
+				«IF state.reactSequence !== null»
 				case «state.shortName.asEscapedIdentifier» :
 				{
 					«state.reactSequence.shortName»();
@@ -231,9 +231,9 @@ class StatemachineImplementation implements IContentTemplate {
 	def timedStatemachineFunctions(ExecutionFlow it) '''
 		«IF timed»
 			
-			void «module»::setTimer(«timerInterface»* timer)
+			void «module»::setTimer(«timerInterface»* timerInterface)
 			{
-				this->«timerInstance» = timer;
+				this->«timerInstance» = timerInterface;
 			}
 			
 			«timerInterface»* «module»::getTimer()

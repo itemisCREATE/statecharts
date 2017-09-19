@@ -303,7 +303,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		/*
 		 * Functions inherited from TimedStatemachineInterface
 		 */
-		virtual void setTimer(«timerInterface»* timer);
+		virtual void setTimer(«timerInterface»* timerInterface);
 		
 		virtual «timerInterface»* getTimer();
 		
