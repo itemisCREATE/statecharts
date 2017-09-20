@@ -30,11 +30,14 @@ public class GCCCommandExecutor {
 	
 	public void execute(List<String> command, File workingDirectory, boolean refreshWorkspace) {
 		try {
-			// System.out.println("compile: " + command);
+			 System.out.println("compile: " + command);
 
 			ProcessBuilder processBuilder = new ProcessBuilder(command).directory(workingDirectory);
 			Process process = processBuilder.redirectErrorStream(true).start();
 			String message = readProcessInputStream(process);
+			
+			System.out.println("process" + process);
+			System.out.println("message: " + message);
 
 			boolean wait = true;
 			int exitCode = 0;
