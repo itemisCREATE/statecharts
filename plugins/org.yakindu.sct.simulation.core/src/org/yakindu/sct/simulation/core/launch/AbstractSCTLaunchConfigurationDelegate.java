@@ -34,7 +34,8 @@ import org.yakindu.sct.simulation.core.util.ResourceUtil;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements
+public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfigurationDelegate
+		implements
 			ILaunchConfigurationDelegate {
 
 	public String FILE_NAME = "filename";
@@ -58,8 +59,12 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 		Statechart statechart = loadStatechart(filename);
 		SCTDebugTarget target = createDebugTarget(launch, statechart);
 		launch.addDebugTarget(target);
-		target.init();
-		target.start();
+		try {
+			target.init();
+			target.start();
+		} catch (InitializationException e) {
+			// handled in AbstractExecutionFlowSimulationEngine
+		}
 	}
 
 	protected SCTDebugTarget createDebugTarget(ILaunch launch, Statechart statechart) throws CoreException {
@@ -76,7 +81,7 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 			throws CoreException {
 		String filename = configuration.getAttribute(FILE_NAME, "");
 		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(filename);
-		return new IProject[] { resource.getProject() };
+		return new IProject[]{resource.getProject()};
 
 	}
 
@@ -87,8 +92,13 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 		return false;
 	}
 
-	@Override
-	protected IProject[] getBuildOrder(ILaunchConfiguration configuration, String mode) throws CoreException {
-		return getProjectsForProblemSearch(configuration, mode);
+	public static class InitializationException extends RuntimeException {
+
+		private static final long serialVersionUID = 1L;
+
+		public InitializationException(String msg) {
+			super(msg);
+		}
 	}
+
 }
