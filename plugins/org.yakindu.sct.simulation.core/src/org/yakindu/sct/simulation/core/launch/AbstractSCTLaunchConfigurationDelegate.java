@@ -34,8 +34,9 @@ import org.yakindu.sct.simulation.core.util.ResourceUtil;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements
-		ILaunchConfigurationDelegate {
+public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfigurationDelegate
+		implements
+			ILaunchConfigurationDelegate {
 
 	public String FILE_NAME = "filename";
 	public String DEFAULT_FILE_NAME = "";
@@ -51,15 +52,19 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 			return false;
 		return super.preLaunchCheck(configuration, mode, monitor);
 	}
-	
+
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
 		String filename = configuration.getAttribute(FILE_NAME, DEFAULT_FILE_NAME);
 		Statechart statechart = loadStatechart(filename);
 		SCTDebugTarget target = createDebugTarget(launch, statechart);
 		launch.addDebugTarget(target);
-		target.init();
-		target.start();
+		try {
+			target.init();
+			target.start();
+		} catch (InitializationException e) {
+			// handled in AbstractExecutionFlowSimulationEngine
+		}
 	}
 
 	protected SCTDebugTarget createDebugTarget(ILaunch launch, Statechart statechart) throws CoreException {
@@ -76,15 +81,24 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 			throws CoreException {
 		String filename = configuration.getAttribute(FILE_NAME, "");
 		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(filename);
-		return new IProject[] { resource.getProject() };
+		return new IProject[]{resource.getProject()};
 
 	}
-	
+
 	@Override
 	public boolean buildForLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
 			throws CoreException {
-		//Never build the workspace before simulation
+		// Never build the workspace before simulation
 		return false;
+	}
+
+	public static class InitializationException extends RuntimeException {
+
+		private static final long serialVersionUID = 1L;
+
+		public InitializationException(String msg) {
+			super(msg);
+		}
 	}
 
 }

@@ -9,7 +9,7 @@ GeneratorModel for sctunit::cpp {
 		}		
 		
 		feature JUnitWrapper {
-			WrapToJUnit =  "true"
+			WrapToJUnit =  true
 		}		
 		
 		feature FunctionInlining {
@@ -25,7 +25,7 @@ GeneratorModel for sctunit::cpp {
 		}
 		
 		feature SGenModel {
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 		
@@ -39,7 +39,7 @@ GeneratorModel for sctunit::cpp {
 		}		
 		
 		feature JUnitWrapper {
-			WrapToJUnit =  "true"
+			WrapToJUnit =  true
 		}		
 		
 		feature FunctionInlining {
@@ -55,7 +55,7 @@ GeneratorModel for sctunit::cpp {
 		}
 		
 		feature SGenModel {
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 		
@@ -70,7 +70,7 @@ GeneratorModel for sctunit::cpp {
 //		}		
 //		
 //		feature JUnitWrapper {
-//			WrapToJUnit =  "true"
+//			WrapToJUnit =  true
 //		}		
 //		
 //		feature FunctionInlining {
@@ -86,7 +86,7 @@ GeneratorModel for sctunit::cpp {
 //		}
 //		
 //		feature SGenModel {
-//			GenerateSGen = "true"
+//			GenerateSGen = true
 //		}
 //	}
 		
@@ -101,7 +101,7 @@ GeneratorModel for sctunit::cpp {
 		}		
 		
 		feature JUnitWrapper {
-			WrapToJUnit =  "true"
+			WrapToJUnit =  true
 		}		
 		
 		feature FunctionInlining {
@@ -117,7 +117,7 @@ GeneratorModel for sctunit::cpp {
 		}
 		
 		feature SGenModel {
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 		
@@ -132,7 +132,7 @@ GeneratorModel for sctunit::cpp {
 		}		
 		
 		feature JUnitWrapper {
-			WrapToJUnit =  "true"
+			WrapToJUnit =  true
 		}		
 		
 		feature FunctionInlining {
@@ -148,7 +148,7 @@ GeneratorModel for sctunit::cpp {
 		}
 		
 		feature SGenModel {
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 		
@@ -163,7 +163,7 @@ GeneratorModel for sctunit::cpp {
 //		}		
 //		
 //		feature JUnitWrapper {
-//			WrapToJUnit =  "true"
+//			WrapToJUnit =  true
 //		}		
 //		
 //		feature FunctionInlining {
@@ -179,7 +179,7 @@ GeneratorModel for sctunit::cpp {
 //		}
 //		
 //		feature SGenModel {
-//			GenerateSGen = "true"
+//			GenerateSGen = true
 //		}
 //	}
 		

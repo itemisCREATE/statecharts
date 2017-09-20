@@ -29,7 +29,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	EntryChoiceTest.class,
 	EntryExitSelfTransitionTest.class,
 	EntryReactionActionTest.class,
-	EventDrivenInternalEventTest.class,
 	EventDrivenTriggeredByEventTest.class,
 	EventDrivenTriggeredByTimeEventTest.class,
 	ExitOnSelfTransitionTest.class,

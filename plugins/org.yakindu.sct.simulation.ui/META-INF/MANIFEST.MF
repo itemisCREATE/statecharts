@@ -33,6 +33,7 @@ Import-Package: org.eclipse.emf.edit.ui.provider,
  org.eclipse.ui.dialogs,
  org.yakindu.sct.model.sgraph.provider
 Export-Package: org.yakindu.sct.simulation.ui,
+ org.yakindu.sct.simulation.ui.perspective,
  org.yakindu.sct.simulation.ui.preferences,
  org.yakindu.sct.simulation.ui.view,
  org.yakindu.sct.simulation.ui.view.decorator

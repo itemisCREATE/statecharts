@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
+import org.yakindu.sct.generator.c.gtest.GTestHelper.Compiler;
 import org.yakindu.sct.generator.c.gtest.GMockHelper;
 
 @GTest(

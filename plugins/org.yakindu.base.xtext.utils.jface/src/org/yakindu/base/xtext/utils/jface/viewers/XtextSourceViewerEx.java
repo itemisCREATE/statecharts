@@ -30,7 +30,7 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewer;
  * @author alexander.nyssen@itemis.de
  * 
  */
-class XtextSourceViewerEx extends XtextSourceViewer {
+public class XtextSourceViewerEx extends XtextSourceViewer {
 
 	private final StyledText styledText;
 	private final IPreferenceStore preferenceStore;
@@ -53,7 +53,7 @@ class XtextSourceViewerEx extends XtextSourceViewer {
 
 	@Override
 	protected StyledText createTextWidget(Composite parent, int styles) {
-		return styledText;
+		return this.styledText;
 	}
 
 	/**
@@ -99,7 +99,7 @@ class XtextSourceViewerEx extends XtextSourceViewer {
 			declaredField = TextSourceViewerConfiguration.class
 					.getDeclaredField("fPreferenceStore");
 			declaredField.setAccessible(true);
-			declaredField.set(configuration, preferenceStore);
+			declaredField.set(configuration, this.preferenceStore);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -112,7 +112,7 @@ class XtextSourceViewerEx extends XtextSourceViewer {
 	 * @param value
 	 *            the new value.
 	 */
-	private void setPrivateHandleProjectionChangesField(boolean value) {
+	protected void setPrivateHandleProjectionChangesField(boolean value) {
 		try {
 			Field declaredField = ProjectionViewer.class
 					.getDeclaredField("fHandleProjectionChanges");

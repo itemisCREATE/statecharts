@@ -55,7 +55,7 @@ import com.google.inject.Injector;
  */
 public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 
-	private Injector injector;
+	private final Injector injector;
 	private StyledTextXtextAdapter xtextAdapter;
 	private IXtextFakeContextResourcesProvider contextFakeResourceProvider;
 	private final static String CONTEXTMENUID = "org.yakindu.base.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu";
@@ -86,20 +86,17 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		});
 
 		// adapt to xtext
-		xtextAdapter = new StyledTextXtextAdapter(injector,
-				contextFakeResourceProvider == null ? IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER
-						: contextFakeResourceProvider);
-		xtextAdapter.adapt(styledText);
+		this.xtextAdapter = createXtextAdapter();
+		getXtextAdapter().adapt(styledText);
 
 		// configure content assist
-		final IContentAssistant contentAssistant = xtextAdapter.getContentAssistant();
+		final IContentAssistant contentAssistant = getXtextAdapter().getContentAssistant();
 
-		completionProposalAdapter = new CompletionProposalAdapter(styledText, contentAssistant, KeyStroke.getInstance(
-				SWT.CTRL, SWT.SPACE), null);
+		this.completionProposalAdapter = createCompletionProposalAdapter(styledText, contentAssistant);
 
 		// This listener notifies the modification, when text is selected via
 		// proposal. A ModifyEvent is not thrown by the StyledText in this case.
-		xtextAdapter.getXtextSourceviewer().addTextListener(new ITextListener() {
+		getXtextAdapter().getXtextSourceviewer().addTextListener(new ITextListener() {
 			public void textChanged(TextEvent event) {
 				editOccured(null);
 			}
@@ -112,7 +109,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 			// event early enough!
 			styledText.addListener(3005, new Listener() {
 				public void handleEvent(Event event) {
-					if (event.character == SWT.CR && !completionProposalAdapter.isProposalPopupOpen()) {
+					if (event.character == SWT.CR && !getCompletionProposalAdapter().isProposalPopupOpen()) {
 						focusLost();
 					}
 				}
@@ -121,7 +118,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		styledText.addListener(3005, new Listener() {
 			public void handleEvent(Event event) {
 				if (event.character == '\u001b' // ESC
-						&& !completionProposalAdapter.isProposalPopupOpen()) {
+						&& !getCompletionProposalAdapter().isProposalPopupOpen()) {
 					XtextStyledTextCellEditor.this.fireCancelEditor();
 				}
 			}
@@ -155,9 +152,9 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 	@Override
 	protected void doSetValue(Object value) {
 		super.doSetValue(value);
-		// Reset the undo manager to prevend deletion of complete text if the
+		// Reset the undo manager to prevent deletion of complete text if the
 		// user hits ctrl+z after cell editor opens
-		xtextAdapter.sourceviewer.getUndoManager().reset();
+		getXtextAdapter().getXtextSourceviewer().getUndoManager().reset();
 	}
 
 	@Override
@@ -167,7 +164,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 
 	@Override
 	public void performUndo() {
-		xtextAdapter.sourceviewer.getUndoManager().undo();
+		getXtextAdapter().getXtextSourceviewer().getUndoManager().undo();
 	}
 
 	@Override
@@ -177,7 +174,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 
 	@Override
 	public void performRedo() {
-		xtextAdapter.sourceviewer.getUndoManager().redo();
+		getXtextAdapter().getXtextSourceviewer().getUndoManager().redo();
 	}
 
 	@Override
@@ -197,24 +194,25 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 	@Override
 	protected void focusLost() {
 		if (SWT.getPlatform().equals("gtk")) {
-			if (ignoreNextFocusLost) {
-				ignoreNextFocusLost = false;
+			if (isIgnoreNextFocusLost()) {
+				setIgnoreNextFocusLost(false);
 				return;
 			}
 
-			if (completionProposalAdapter.isProposalPopupOpen()) {
-				ignoreNextFocusLost = true;
+			if (getCompletionProposalAdapter().isProposalPopupOpen()) {
+				setIgnoreNextFocusLost(true);
 				return;
 			}
 		}
 
-		if (!completionProposalAdapter.isProposalPopupOpen())
+		if (!getCompletionProposalAdapter().isProposalPopupOpen()) {
 			super.focusLost();
+		}
 	}
 
 	@Override
 	public void dispose() {
-		xtextAdapter.dispose();
+		getXtextAdapter().dispose();
 		super.dispose();
 	}
 
@@ -228,11 +226,41 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 	}
 
 	public void setVisibleRegion(int start, int length) {
-		xtextAdapter.setVisibleRegion(start, length);
+		getXtextAdapter().setVisibleRegion(start, length);
 	}
 	
 	public StyledTextXtextAdapter getXtextAdapter() {
-		return xtextAdapter;
+		return this.xtextAdapter;
 	}
 
+	protected CompletionProposalAdapter getCompletionProposalAdapter() {
+		return this.completionProposalAdapter;
+	}
+
+	protected IXtextFakeContextResourcesProvider getContextFakeResourceProvider() {
+		return this.contextFakeResourceProvider;
+	}
+
+	protected CompletionProposalAdapter createCompletionProposalAdapter(StyledText styledText, final IContentAssistant contentAssistant) {
+		return new CompletionProposalAdapter(styledText, contentAssistant, KeyStroke.getInstance(
+				SWT.CTRL, SWT.SPACE), null);
+	}
+
+	protected StyledTextXtextAdapter createXtextAdapter() {
+		return new StyledTextXtextAdapter(this.getInjector(),
+				getContextFakeResourceProvider() == null ? IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER
+						: getContextFakeResourceProvider());
+	}
+
+	protected boolean isIgnoreNextFocusLost() {
+		return this.ignoreNextFocusLost;
+	}
+
+	protected void setIgnoreNextFocusLost(boolean ignoreNextFocusLost) {
+		this.ignoreNextFocusLost = ignoreNextFocusLost;
+	}
+
+	protected Injector getInjector() {
+		return this.injector;
+	}
 }
