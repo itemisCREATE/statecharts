@@ -30,7 +30,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
@@ -71,8 +70,6 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	@Inject
 	private IResourceScopeCache cache;
 	@Inject
-	private DefaultGlobalScopeProvider delegate;
-	@Inject
 	private STextLibraryGlobalScopeProvider libraryScope;
 	@Inject
 	private IPackageImport2URIMapper mapper;
@@ -86,12 +83,7 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	public static final String FILE_EXTENSION = "sct";
 
 	public IScope getScope(Resource context, EReference reference, Predicate<IEObjectDescription> filter) {
-		if (reference.getEReferenceType() == TypesPackage.Literals.PACKAGE) {
-			return delegate.getScope(context, reference, filter);
-		}
 		IScope parentScope = super.getScope(context, reference, filter);
-		parentScope = new SimpleScope(parentScope, delegate.getScope(context, reference, filter).getAllElements());
-		parentScope = filterExternalDeclarations(context, parentScope);
 		parentScope = new SimpleScope(parentScope, filterPropertiesOfLibrary(context, reference, filter).getAllElements());
 		final Statechart statechart = getStatechart(context);
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
@@ -128,14 +120,6 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 				return input.getEClass() != TypesPackage.Literals.PROPERTY;
 			}
 		});
-	}
-
-	@Override
-	public IScope getScope(Resource resource, EReference reference) {
-		if (reference.getEReferenceType() == TypesPackage.Literals.PACKAGE) {
-			return delegate.getScope(resource, reference);
-		}
-		return super.getScope(resource, reference);
 	}
 
 	protected LinkedHashSet<URI> getImportedUris(final Resource resource) {
@@ -218,25 +202,4 @@ public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 			return IScope.NULLSCOPE;
 		return SelectableBasedScope.createScope(parent, description, filter, type, ignoreCase);
 	}
-
-	/**
-	 * Filter all Elements that are part of an SCT file from other resources to
-	 * avoid cross document referencing
-	 */
-	protected IScope filterExternalDeclarations(Resource context, IScope parentScope) {
-		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context,
-				ContextElementAdapter.class);
-		final URI resourceURI = provider != null ? provider.getElement().eResource().getURI() : context.getURI();
-		parentScope = new FilteringScope(parentScope, new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				if (FILE_EXTENSION.equals(input.getEObjectURI().fileExtension())) {
-					URI sourceURI = input.getEObjectURI().trimFragment();
-					return sourceURI.equals(resourceURI);
-				}
-				return true;
-			}
-		});
-		return parentScope;
-	}
-
 }

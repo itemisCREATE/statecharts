@@ -20,10 +20,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
+import org.eclipse.xtext.scoping.impl.ImportNormalizer;
+import org.eclipse.xtext.scoping.impl.ImportScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
@@ -36,8 +41,11 @@ import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.InferenceResult;
 import org.yakindu.base.types.typesystem.ITypeSystem;
+import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.util.ContextElementAdapter;
 import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider.EmptyPredicate;
@@ -61,6 +69,10 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	private ITypeSystemInferrer typeInferrer;
 	@Inject 
 	private ITypeSystem typeSystem;
+	@Inject
+	private IQualifiedNameProvider nameProvider;
+	@Inject
+	private ContextPredicateProvider predicateProvider;
 	
 	private static class ErrorHandlerDelegate<T> implements ErrorHandler<T> {
 
@@ -96,10 +108,29 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 			return null;
 		}
 	}
+	
+	public IScope scope_ActiveStateReferenceExpression_value(EObject context, EReference reference) {
+		Statechart statechart = getStatechart(context);
+		if (statechart == null)
+			return IScope.NULLSCOPE;
+		List<State> allStates = EcoreUtil2.getAllContentsOfType(statechart, State.class);
+		IScope scope = Scopes.scopeFor(allStates, nameProvider, IScope.NULLSCOPE);
+		return new ImportScope(getActiveStateNormalizer(context), scope,
+				new EObjectDescriptionLookUp(Lists.newArrayList(scope.getAllElements())), reference.getEReferenceType(),
+				false);
+	}
 
-	@Inject
-	private ContextPredicateProvider predicateProvider;
-
+	protected List<ImportNormalizer> getActiveStateNormalizer(EObject context) {
+		SpecificationElement contextElement = getContextElement(context);
+		Region containingRegion = EcoreUtil2.getContainerOfType(contextElement, Region.class);
+		QualifiedName fullyQualifiedName = nameProvider.getFullyQualifiedName(containingRegion);
+		List<ImportNormalizer> normalizer = Lists.newArrayList();
+		while (!fullyQualifiedName.getSegments().isEmpty()) {
+			normalizer.add(new ImportNormalizer(fullyQualifiedName, true, false));
+			fullyQualifiedName = fullyQualifiedName.skipLast(1);
+		}
+		return normalizer;
+	}
 	/**
 	 * Scoping for types and taking imported namespaces into account e.g. in
 	 * variable declarations.
@@ -117,7 +148,7 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		unnamedScope = new FilteringScope(unnamedScope, predicate);
 		return new SimpleScope(unnamedScope, namedScope.getAllElements());
 	}
-
+	
 	public IScope scope_FeatureCall_feature(final FeatureCall context, EReference reference) {
 
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
@@ -225,9 +256,17 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 		return Scopes.scopeFor(scopeCandidates, scope);
 	}
 
-	/**
-	 * Returns the {@link Statechart} for a context element
-	 */
+	protected SpecificationElement getContextElement(EObject context) {
+		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
+				ContextElementAdapter.class);
+
+		if (provider == null) {
+			return EcoreUtil2.getContainerOfType(context, SpecificationElement.class);
+		} else {
+			return (SpecificationElement) provider.getElement();
+		}
+	}
+	
 	protected Statechart getStatechart(EObject context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context.eResource(),
 				ContextElementAdapter.class);
