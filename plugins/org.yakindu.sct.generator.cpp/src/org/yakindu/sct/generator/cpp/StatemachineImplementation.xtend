@@ -130,15 +130,6 @@ class StatemachineImplementation implements IContentTemplate {
 		'''	
 	}
 	
-	def protected initialisationList(ExecutionFlow it) {
-		'''
-			«IF timed»«timerInstance»(null),«ENDIF»
-			stateConfVectorPosition(0)«FOR s : getInterfaces»,
-			«s.instance»()«IF s.hasOperations && !entry.useStaticOPC»,
-			«s.OCB_Instance»(null)«ENDIF»«ENDFOR»
-		'''
-	}
-	
 	protected def CharSequence constructorBody(ExecutionFlow it)
 		'''
 		«IF hasHistory»
