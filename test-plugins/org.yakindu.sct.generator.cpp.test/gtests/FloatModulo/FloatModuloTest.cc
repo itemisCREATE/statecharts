@@ -38,6 +38,4 @@ TEST_F(FloatModuloTest, test) {
 	
 	EXPECT_TRUE(statechart->isFinal());
 	
-	statechart->exit();
-	
 }

@@ -32,7 +32,6 @@ TEST_F(FloatModuloTest, test) {
 	floatModulo_enter(&statechart);
 	sc_timer_service_proceed_cycles(&timer_service, 1);
 	EXPECT_TRUE(floatModulo_isFinal(&statechart));
-	floatModulo_exit(&statechart);
 }
 
 
