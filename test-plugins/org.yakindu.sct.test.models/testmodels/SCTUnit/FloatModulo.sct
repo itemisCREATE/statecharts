@@ -5,7 +5,7 @@
       <vertices xsi:type="sgraph:Entry" xmi:id="_bR_coJ09Eeexs_XA1t2DVA">
         <outgoingTransitions xmi:id="_bSCf8Z09Eeexs_XA1t2DVA" target="_bSAqwZ09Eeexs_XA1t2DVA"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_bSAqwZ09Eeexs_XA1t2DVA" specification="entry / &#xD;&#xA;r %=r; &#xD;&#xA;&#xD;&#xA;r = r % r;&#xD;&#xA;&#xD;&#xA;i = i % i;&#xD;&#xA;&#xD;&#xA;i %= i;&#xD;&#xA;&#xD;&#xA;r = r % i;&#xD;&#xA;r %= i;&#xD;&#xA;&#xD;&#xA;r = i % r;&#xD;&#xA;&#xD;&#xA;r = i % i&#xD;&#xA;" name="StateA" incomingTransitions="_bSCf8Z09Eeexs_XA1t2DVA">
+      <vertices xsi:type="sgraph:State" xmi:id="_bSAqwZ09Eeexs_XA1t2DVA" specification="//entry / &#xD;&#xA;//r %=r; &#xD;&#xA;&#xD;&#xA;//r = r % r;&#xD;&#xA;&#xD;&#xA;//i = i % i;&#xD;&#xA;&#xD;&#xA;//i %= i;&#xD;&#xA;&#xD;&#xA;//r = r % i;&#xD;&#xA;//r %= i;&#xD;&#xA;&#xD;&#xA;//r = i % r;&#xD;&#xA;&#xD;&#xA;//r = i % i&#xD;&#xA;" name="StateA" incomingTransitions="_bSCf8Z09Eeexs_XA1t2DVA">
         <outgoingTransitions xmi:id="_6UFmQJ0-Eeexs_XA1t2DVA" specification="always" target="_5pnF4J0-Eeexs_XA1t2DVA"/>
       </vertices>
       <vertices xsi:type="sgraph:FinalState" xmi:id="_5pnF4J0-Eeexs_XA1t2DVA" incomingTransitions="_6UFmQJ0-Eeexs_XA1t2DVA"/>
