@@ -14,9 +14,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.IAcceptor;
-import org.yakindu.base.types.resource.TypedResourceDescriptionStrategy;
+import org.yakindu.base.types.Declaration;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.stext.stext.InternalScope;
 
 /**
  * This implementation of {@link IDefaultResourceDescriptionStrategy} avoids the
@@ -25,14 +28,24 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTResourceDescriptionStrategy extends TypedResourceDescriptionStrategy {
+public class SCTResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {
 
 	@Override
 	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
-		if (EcoreUtil.getRootContainer(eObject) instanceof Statechart)
-			return super.createEObjectDescriptions(eObject, acceptor);
+		if (EcoreUtil.getRootContainer(eObject) instanceof Statechart) {
+			if (eObject instanceof InternalScope)
+				return false;
+			if (shouldCreateEObjectDescription(eObject)) {
+				super.createEObjectDescriptions(eObject, acceptor);
+			}
+			return true;
+
+		}
 		return false;
 	}
-	
+
+	protected boolean shouldCreateEObjectDescription(EObject eObject) {
+		return eObject instanceof Statechart || eObject instanceof State || eObject instanceof Declaration;
+	}
 
 }
