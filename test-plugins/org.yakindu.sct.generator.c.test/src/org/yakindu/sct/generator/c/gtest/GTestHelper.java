@@ -199,11 +199,14 @@ public class GTestHelper {
 		for (String sourceFile : sourceFiles) {
 			command.add(getFileName(sourceFile));
 		}
+		
 		command.add("-lgtest");
 		command.add("-lgtest_main");
+		command.add("-lm");
 		command.add("-lstdc++");
 		command.add("-pthread");
 		// command.add("-pg");
+		//System.out.println(getCompilerCommand());
 		return command;
 	}
 
