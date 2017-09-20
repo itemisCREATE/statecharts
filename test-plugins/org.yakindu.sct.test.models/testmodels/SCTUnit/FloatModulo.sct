@@ -5,7 +5,7 @@
       <vertices xsi:type="sgraph:Entry" xmi:id="_bR_coJ09Eeexs_XA1t2DVA">
         <outgoingTransitions xmi:id="_bSCf8Z09Eeexs_XA1t2DVA" target="_bSAqwZ09Eeexs_XA1t2DVA"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_bSAqwZ09Eeexs_XA1t2DVA" specification="//entry / &#xD;&#xA;//r %=r; &#xD;&#xA;&#xD;&#xA;//r = r % r;&#xD;&#xA;&#xD;&#xA;//i = i % i;&#xD;&#xA;&#xD;&#xA;//i %= i;&#xD;&#xA;&#xD;&#xA;//r = r % i;&#xD;&#xA;//r %= i;&#xD;&#xA;&#xD;&#xA;//r = i % r;&#xD;&#xA;&#xD;&#xA;//r = i % i&#xD;&#xA;" name="StateA" incomingTransitions="_bSCf8Z09Eeexs_XA1t2DVA">
+      <vertices xsi:type="sgraph:State" xmi:id="_bSAqwZ09Eeexs_XA1t2DVA" specification="entry / &#xD;&#xA;r %=r; &#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r = r % r;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;i = i % i;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;i %= i;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r = r % i;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r %= i;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r = i % r;&#xD;&#xA;r = 3.4;&#xD;&#xA;i = 2;&#xD;&#xA;&#xD;&#xA;r = i % i&#xD;&#xA;" name="StateA" incomingTransitions="_bSCf8Z09Eeexs_XA1t2DVA">
         <outgoingTransitions xmi:id="_6UFmQJ0-Eeexs_XA1t2DVA" specification="always" target="_5pnF4J0-Eeexs_XA1t2DVA"/>
       </vertices>
       <vertices xsi:type="sgraph:FinalState" xmi:id="_5pnF4J0-Eeexs_XA1t2DVA" incomingTransitions="_6UFmQJ0-Eeexs_XA1t2DVA"/>
@@ -45,7 +45,7 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_bSAqxZ09Eeexs_XA1t2DVA" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_bSAqxp09Eeexs_XA1t2DVA"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_bSB44Z09Eeexs_XA1t2DVA" name="isHorizontal" booleanValue="true"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_bSCf8J09Eeexs_XA1t2DVA" x="40" y="80" width="84" height="255"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_bSCf8J09Eeexs_XA1t2DVA" x="40" y="80" width="87" height="255"/>
         </children>
         <children xsi:type="notation:Shape" xmi:id="_5ppiIJ0-Eeexs_XA1t2DVA" type="FinalState" element="_5pnF4J0-Eeexs_XA1t2DVA" fontName="Verdana" lineColor="4210752">
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_5ppiIZ0-Eeexs_XA1t2DVA" x="172" y="234"/>
