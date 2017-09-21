@@ -96,7 +96,7 @@ public class ContextPredicateProvider {
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
 				return true;
-			return TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass())	 || (TypesPackage.Literals.DECLARATION.isSuperTypeOf(input.getEClass()));
+			return TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass());
 		}
 	}
 
