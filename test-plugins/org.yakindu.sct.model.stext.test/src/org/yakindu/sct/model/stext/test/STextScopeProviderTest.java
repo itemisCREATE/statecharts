@@ -241,6 +241,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 				{ "var x : integer", VariableDefinition.class.getSimpleName(), INTERNAL_SCOPE, true }, //
 				/* filter.put(key(REGULAR_EVENT_SPEC), EVENTS) */
 				{ "e1 / myInt = 0", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, true }, //
+				{"e1 / raise myInt", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, false}
 				//{ "myOpp(4) / myInt = 10", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, true }, // context predicates can't validate this expression. This will be done in the SText validation instead.
 				//{ "myInt / myInt = 10", LocalReaction.class.getSimpleName(), INTERNAL_SCOPE, true }, // context predicates can't validate this expression. This will be done in the SText validation instead.
 		});
