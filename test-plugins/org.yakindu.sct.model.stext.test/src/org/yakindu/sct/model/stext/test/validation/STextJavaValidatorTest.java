@@ -453,6 +453,22 @@ public class STextJavaValidatorTest extends AbstractSTextValidationTest implemen
 		validationResult.assertAll(errorMsg("Trigger 'x' is no event."), errorMsg("Trigger 'y' is no event."));
 
 	}
+	
+	@Test
+	public void checkRaisingExpressionEvent() {
+
+		String scope = "interface : in event e  var x : integer  var y : integer  operation op():integer";
+
+		EObject model = super.parseExpression("raise e", ReactionEffect.class.getSimpleName(), scope);
+		AssertableDiagnostics validationResult = tester.validate(model);
+		validationResult.assertOK();
+		
+		model = super.parseExpression("raise y", ReactionEffect.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertAll(errorMsg("'y' is not an event."));
+	}
+	
+	
 
 	/**
 	 * @see STextJavaValidator#checkReactionEffectActions(org.yakindu.sct.model.stext.stext.ReactionEffect)
