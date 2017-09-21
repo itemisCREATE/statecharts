@@ -121,10 +121,14 @@ public class STextScopeProvider extends ExpressionsScopeProvider {
 	}
 
 	protected List<ImportNormalizer> getActiveStateNormalizer(EObject context) {
-		SpecificationElement contextElement = getContextElement(context);
-		Region containingRegion = EcoreUtil2.getContainerOfType(contextElement, Region.class);
-		QualifiedName fullyQualifiedName = nameProvider.getFullyQualifiedName(containingRegion);
 		List<ImportNormalizer> normalizer = Lists.newArrayList();
+		SpecificationElement contextElement = getContextElement(context);
+		if(contextElement == null)
+			return normalizer;
+		Region containingRegion = EcoreUtil2.getContainerOfType(contextElement, Region.class);
+		if(containingRegion == null)
+			return normalizer; 
+		QualifiedName fullyQualifiedName = nameProvider.getFullyQualifiedName(containingRegion);
 		while (!fullyQualifiedName.getSegments().isEmpty()) {
 			normalizer.add(new ImportNormalizer(fullyQualifiedName, true, false));
 			fullyQualifiedName = fullyQualifiedName.skipLast(1);
