@@ -44,13 +44,15 @@ YAKINDU Statechart Tools Headless Generator ((c) by itemis AG)
           Visit http://www.statecharts.org
 --------------------------------------------------------------
 usage: scc [-d <path>] [-h] [-m <path(s)>] [-v <arg>]
- -d,--baseDir <path>    Relative/absolute path to the working directory that contains your statechart projects. If not
-                        set the current directory is used.
+ -d,--baseDir <path>    Relative or absolute path to the working directory that contains your statechart projects. If
+                        not set, the current directory is used.
  -h                     Shows help content.
- -m,--model <path(s)>   A list of comma separated relative/absolute paths to model(s) used during execution. If not set
-                        the runtime value of baseDir is used.
- -v,--variables <arg>   A list of comma separated key=value pairs to override variable in sgen models. baseDir is used.
+ -m,--model <path(s)>   A list of comma-separated relative or absolute paths to model(s) used during execution. If not
+                        set, the runtime value of baseDir is used.
+ -v,--variables <arg>   A list of comma-separated key/value pairs to override variables in SGen models. Example: 
+                       -v key1=value1,key2=value2
 p. 
+
 
 
 h3(#hdls_integrating_custom_code_generators). Integrating custom code generators
