@@ -38,19 +38,19 @@ bc. scc -h
 The output should be similar to the following:
 
 bc.. 
---------------------------------------------------------
+--------------------------------------------------------------
 YAKINDU Statechart Tools Headless Generator ((c) by itemis AG)
 
           Visit http://www.statecharts.org
---------------------------------------------------------
-usage: scc [-d <path>] [-h] [-m <path>{,<path>}…]
- -d,--baseDir <path>   Relative/absolute path to the working directory that contains your statechart projects. If not
-                       set the current directory is used.
- -h                    Shows help content.
- -m,--model <path>{,<path>}…  A list of comma separated Relative/absolute paths
-                              to model(s) used during execution. If not set
-                              the runtime value of basedir is used.
-
+--------------------------------------------------------------
+usage: scc [-d <path>] [-h] [-m <path(s)>] [-v <arg>]
+ -d,--baseDir <path>    Relative/absolute path to the working directory that contains your statechart projects. If not
+                        set the current directory is used.
+ -h                     Shows help content.
+ -m,--model <path(s)>   A list of comma separated relative/absolute paths to model(s) used during execution. If not set
+                        the runtime value of baseDir is used.
+ -v,--variables <arg>   A list of comma separated key=value pairs to override variable in sgen models. baseDir is used.
+p. 
 
 
 h3(#hdls_integrating_custom_code_generators). Integrating custom code generators
