@@ -305,7 +305,7 @@ The generated state machine code implements one of two execution schemes:
 * In the _cycle-based execution scheme_, the state machine will first collect events and later process them in a run-to-completion step. Run-to-completion steps are typically executed in regular time intervals.
 * In the _event-driven execution scheme_, the state machine becomes active each time an event arrives and processes it right away in a run-to-completion step.
 
-You can select the execution scheme via the <code>@CycleBased</code> or <code>@EventDriven</code> annotations. Write the appropriate annotation to the top of your statechart's definition section, see sections "&quot;@CycleBased&quot;":../user-guide/statechart_language.html#statechart_language_cyclebased and "&quot;@EventDriven&quot;":../user-guide/statechart_language.html#statechart_language_eventdriven.
+You can select the execution scheme via the <code>@CycleBased</code> or <code>@EventDriven</code> annotations. Write the appropriate annotation to the top of your statechart's definition section, see sections "&quot;@CycleBased&quot;":../user-guide/statechart_language.html#sclang_cyclebased and "&quot;@EventDriven&quot;":../user-guide/statechart_language.html#sclang_eventdriven.
 
 
 h4(#codegen_cycle-based_execution_scheme). Cycle-based execution scheme
@@ -327,7 +327,7 @@ sc_runCycle(handle);
 
 ==</div>==
 
-bq. *Please note:* In the cycle-based execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language.html#raising-an-event is visible "downstream" in the run cycle only, i.e. in regions and the states therein that have not yet been processed in the current run cycle. Everything that is "upstream" in the run cycle cannot "see" this event. This is semantically different from the event-driven execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#raising-and-processing-an-event. 
+bq. *Please note:* In the cycle-based execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language.html#sclang_raising_an_event is visible "downstream" in the run cycle only, i.e. in regions and the states therein that have not yet been processed in the current run cycle. Everything that is "upstream" in the run cycle cannot "see" this event. This is semantically different from the event-driven execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#sclang_raising_and_processing_an_event.
 
 
 h4(#codegen_event-driven_execution_scheme). Event-driven execution scheme
@@ -343,7 +343,7 @@ sc_raiseEventB(handle);
 
 ==</div>==
 
-bq. *Please note:* In the event-driven execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language.html#raising-an-event is not immediately acted upon by active states "downstream" in the event cycle, because only a single event can be processed at a time, which is the event that caused the run cycle to execute in the first place. The internally-raised event will trigger its own run-to-completion step subsequently, and it will thus be visible to all active states. This is semantically different from the cycle-based execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#raising-and-processing-an-event. 
+bq. *Please note:* In the event-driven execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language.html#sclang_raising_an_event is not immediately acted upon by active states "downstream" in the event cycle, because only a single event can be processed at a time, which is the event that caused the run cycle to execute in the first place. The internally-raised event will trigger its own run-to-completion step subsequently, and it will thus be visible to all active states. This is semantically different from the cycle-based execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#sclang_raising_and_processing_an_event.
 
 
 
