@@ -976,6 +976,8 @@ A _test unit_ is either a "test class":#sctunit_test_classes or a "test suite":#
 
 
 
+==<div class="pro-feature">==
+
 h2(#sctunit_generating_sctunit_source_code). Generating SCTUnit source code
 
 Executing SCTUnit tests within the Eclipse development environment as described in section "&quot;Running the test&quot;":#sctunit_running_the_test is a nice and handy feature the developers. However, unit tests are usually also required to be executed automatically in "continuous integration (CI)":https://en.wikipedia.org/wiki/Continuous_integration environments, i.e. outside of and independent from Eclipse or any other IDE. Additionally, it should generally be possible to inspect what exactly happens inside a unit test, in order to be able to verify that what it does when executed in the right thing. This is of particular importance for software that is to be deployed in safety-critical areas.
@@ -1047,3 +1049,5 @@ h3. The generated Java test class
 The Java source code generated from SCTUnit test classes or test suites takes the form of JUnit tests and can be integrated in CI environments, for example.
 
 In Eclipse, you can execute such a generated JUnit test by right-clicking on the corresponding _.java_ file and selecting _Run As → JUnit Test_ in the context menu.
+
+==</div>==
