@@ -25,29 +25,24 @@ public class SimulationPerspectiveFactory implements IPerspectiveFactory {
 	public void createInitialLayout(IPageLayout layout) {
 		defineActions(layout);
 		defineLayout(layout);
-
 	}
 
 	private void defineLayout(IPageLayout layout) {
 		String editorArea = layout.getEditorArea();
 
-		IFolderLayout left = layout.createFolder("left", IPageLayout.LEFT,
-				0.16f, editorArea);
+		IFolderLayout left = layout.createFolder("left", IPageLayout.LEFT, 0.16f, editorArea);
 		left.addView(IPageLayout.ID_PROJECT_EXPLORER);
 		// Included to get rid of a warning issued by the workbench
 		left.addPlaceholder("org.eclipse.jdt.ui.PackageExplorer");
 
-		IFolderLayout topRight = layout.createFolder("topRight",
-				IPageLayout.RIGHT, 0.84f, editorArea);
-		topRight.addView(IPageLayout.ID_OUTLINE);
+		IFolderLayout topRight = layout.createFolder("topRight", IPageLayout.RIGHT, 0.68f, editorArea);
+		topRight.addView("org.yakindu.sct.simulation.ui.declarationview");
+		topRight.addView("org.eclipse.debug.ui.BreakpointView");
 
-		IFolderLayout bottomRight = layout.createFolder("bottomRight",
-				IPageLayout.BOTTOM, 0.33f, "topRight");
-		bottomRight.addView("org.yakindu.sct.simulation.ui.declarationview");
-		bottomRight.addView("org.eclipse.debug.ui.BreakpointView");
+		IFolderLayout bottomRight = layout.createFolder("bottomRight", IPageLayout.BOTTOM, 0.32f, "topRight");
+		bottomRight.addView(IPageLayout.ID_OUTLINE);
 
-		IFolderLayout top = layout.createFolder("top", IPageLayout.TOP, 0.22f,
-				editorArea);
+		IFolderLayout top = layout.createFolder("top", IPageLayout.TOP, 0.22f, editorArea);
 		top.addView("org.eclipse.debug.ui.DebugView");
 	}
 
@@ -55,5 +50,4 @@ public class SimulationPerspectiveFactory implements IPerspectiveFactory {
 		layout.addPerspectiveShortcut(IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_MODELING);
 		layout.addActionSet("org.eclipse.debug.ui.launchActionSet");
 	}
-
 }

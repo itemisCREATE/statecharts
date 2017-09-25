@@ -37,6 +37,9 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IMemento;
+import org.eclipse.ui.IViewSite;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.domain.extension.DomainRegistry;
@@ -55,6 +58,7 @@ import com.google.common.collect.Lists;
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@SuppressWarnings("restriction")
 public class SimulationView extends AbstractDebugTargetView implements ITypeSystemProvider {
 
 	private TreeViewer viewer;
@@ -62,6 +66,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	private Font font;
 	private RaiseEventSelectionListener selectionListener;
 	private ITypeSystem typeSystem;
+	private IMemento memento;
 
 	public SimulationView() {
 		kit = new FormToolkit(Display.getDefault());
@@ -74,6 +79,12 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		selectionListener.dispose();
 		font.dispose();
 		super.dispose();
+	}
+
+	@Override
+	public void init(IViewSite site, IMemento memento) throws PartInitException {
+		super.init(site, memento);
+		this.memento = memento;
 	}
 
 	@Override
@@ -92,7 +103,7 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	}
 
 	protected Viewer createViewer(Composite parent) {
-		viewer = ExecutionContextViewerFactory.createViewer(parent, false, this);
+		viewer = ExecutionContextViewerFactory.createViewer(parent, false, this, memento);
 		selectionListener = new RaiseEventSelectionListener(viewer);
 		return viewer;
 	}
@@ -210,7 +221,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		return typeSystem;
 	}
 
-	@SuppressWarnings("restriction")
 	protected class StepOverAction extends StepOverCommandAction implements IAction {
 		@Override
 		public void run() {
@@ -235,7 +245,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	protected class TerminateAction extends TerminateCommandAction implements IAction {
 		@Override
 		public void run() {
@@ -258,7 +267,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	protected class SuspendAction extends SuspendCommandAction implements IAction {
 		@Override
 		public void run() {
@@ -281,7 +289,6 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	protected class ResumeAction extends ResumeCommandAction implements IAction {
 		@Override
 		public void run() {
