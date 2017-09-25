@@ -214,13 +214,19 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	protected class StepOverAction extends StepOverCommandAction implements IAction {
 		@Override
 		public void run() {
-			if (debugTarget instanceof IStep) {
-				try {
-					((IStep) debugTarget).stepOver();
-				} catch (DebugException e) {
-					e.printStackTrace();
+			Display.getDefault().asyncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					if (debugTarget instanceof IStep) {
+						try {
+							((IStep) debugTarget).stepOver();
+						} catch (DebugException e) {
+							e.printStackTrace();
+						}
+					}
 				}
-			}
+			});
 		}
 
 		@Override
@@ -233,11 +239,17 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	protected class TerminateAction extends TerminateCommandAction implements IAction {
 		@Override
 		public void run() {
-			try {
-				debugTarget.terminate();
-			} catch (DebugException e) {
-				e.printStackTrace();
-			}
+			Display.getDefault().asyncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					try {
+						debugTarget.terminate();
+					} catch (DebugException e) {
+						e.printStackTrace();
+					}
+				}
+			});
 		}
 
 		@Override
@@ -250,11 +262,17 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	protected class SuspendAction extends SuspendCommandAction implements IAction {
 		@Override
 		public void run() {
-			try {
-				debugTarget.suspend();
-			} catch (DebugException e) {
-				e.printStackTrace();
-			}
+			Display.getDefault().asyncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					try {
+						debugTarget.suspend();
+					} catch (DebugException e) {
+						e.printStackTrace();
+					}
+				}
+			});
 		}
 
 		@Override
@@ -267,11 +285,17 @@ public class SimulationView extends AbstractDebugTargetView implements ITypeSyst
 	protected class ResumeAction extends ResumeCommandAction implements IAction {
 		@Override
 		public void run() {
-			try {
-				debugTarget.resume();
-			} catch (DebugException e) {
-				e.printStackTrace();
-			}
+			Display.getDefault().asyncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					try {
+						debugTarget.resume();
+					} catch (DebugException e) {
+						e.printStackTrace();
+					}
+				}
+			});
 		}
 
 		@Override
