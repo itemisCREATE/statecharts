@@ -106,6 +106,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+
 /**
  * Several validations for nonsensical expressions.
  * 
@@ -435,26 +436,24 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkAnnotations(final Statechart statechart) {
 		Annotation eventDriven = statechart.getAnnotationOfType(EVENT_DRIVEN_ANNOTATION);
 		Annotation cycleBased = statechart.getAnnotationOfType(CYCLE_BASED_ANNOTATION);
-		
-		if(eventDriven != null && cycleBased != null) {
-			String errorMsg = String.format(CONTRADICTORY_ANNOTATIONS, String.join(
-					", ", eventDriven.getType().toString(), cycleBased.getType().toString()
-					));
+
+		if (eventDriven != null && cycleBased != null) {
+			String errorMsg = String.format(CONTRADICTORY_ANNOTATIONS,
+					String.join(", ", eventDriven.getType().toString(), cycleBased.getType().toString()));
 			error(errorMsg, cycleBased, null, -1);
 		}
-		
+
 		Annotation parentFirst = statechart.getAnnotationOfType(PARENT_FIRST_ANNOTATION);
 		Annotation childFirst = statechart.getAnnotationOfType(CHILD_FIRST_ANNOTATION);
-		
-		if(parentFirst != null && childFirst != null) {
-			String errorMsg = String.format(CONTRADICTORY_ANNOTATIONS, String.join(
-					", ", parentFirst.getType().toString(), childFirst.getType().toString()
-					));
+
+		if (parentFirst != null && childFirst != null) {
+			String errorMsg = String.format(CONTRADICTORY_ANNOTATIONS,
+					String.join(", ", parentFirst.getType().toString(), childFirst.getType().toString()));
 			error(errorMsg, parentFirst, null, -1);
 		}
 	}
@@ -533,11 +532,11 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			}
 		}
 	}
-	
+
 	protected boolean isTopLevelRegion(final Region region) {
 		return region.eContainer() instanceof Statechart;
 	}
-	
+
 	@Check(CheckType.NORMAL)
 	public void checkTopLevelRegionHasEntry(final Region region) {
 		if (isTopLevelRegion(region)) {
@@ -612,15 +611,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		for (int i = 0; i < reactionTrigger.getTriggers().size(); i++) {
 			EventSpec eventSpec = reactionTrigger.getTriggers().get(i);
 			if (eventSpec instanceof RegularEventSpec) {
-
-				Expression eventExpression = ((RegularEventSpec) eventSpec).getEvent();
-				EObject element = null;
-				if (eventExpression instanceof ElementReferenceExpression) {
-					element = ((ElementReferenceExpression) eventExpression).getReference();
-				} else if (eventExpression instanceof FeatureCall) {
-					element = ((FeatureCall) eventExpression).getFeature();
-				}
-
+				EObject element = unwrap(((RegularEventSpec) eventSpec).getEvent());
 				if (element != null && (!(element instanceof Event))) {
 					String elementName = "";
 					if (element instanceof NamedElement) {
@@ -631,6 +622,28 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				}
 			}
 		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkRaisingExpressionEvent(EventRaisingExpression expression) {
+		EObject element = unwrap(expression.getEvent());
+		if (element != null && (!(element instanceof Event))) {
+			String elementName = "";
+			if (element instanceof NamedElement) {
+				elementName = ((NamedElement) element).getName();
+			}
+			error(String.format("'%s' is not an event.", elementName), StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT, -1);
+		}
+	}
+
+	protected EObject unwrap(Expression eventExpression) {
+		EObject element = null;
+		if (eventExpression instanceof ElementReferenceExpression) {
+			element = ((ElementReferenceExpression) eventExpression).getReference();
+		} else if (eventExpression instanceof FeatureCall) {
+			element = ((FeatureCall) eventExpression).getFeature();
+		}
+		return element;
 	}
 
 	/**
