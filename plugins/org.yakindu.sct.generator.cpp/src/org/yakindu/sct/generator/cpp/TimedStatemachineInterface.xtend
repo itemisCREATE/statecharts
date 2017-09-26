@@ -19,7 +19,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 class TimedStatemachineInterface implements IContentTemplate {
 	
 	@Inject
-	extension Naming
+	extension CppNaming
 	
 	@Inject
 	extension GenmodelEntries

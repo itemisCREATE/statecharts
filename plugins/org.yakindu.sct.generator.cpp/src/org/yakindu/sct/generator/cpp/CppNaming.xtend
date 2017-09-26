@@ -26,13 +26,13 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-
+import org.yakindu.sct.generator.c.Naming
 
 /**
  * @author Markus Mühlbrands - Initial contribution and API
  * @author Axel Terfloth - updates
  */
-class Naming extends org.yakindu.sct.generator.c.Naming {
+class CppNaming extends Naming {
 
 	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess

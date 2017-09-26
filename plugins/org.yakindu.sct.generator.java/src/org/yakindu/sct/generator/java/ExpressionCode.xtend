@@ -38,15 +38,15 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.generator.core.templates.Expressions
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 
-class ExpressionCode extends Expressions {
+class ExpressionCode extends ExpressionsGenerator {
 
 	@Inject extension Naming
 	@Inject extension JavaNamingService
@@ -68,16 +68,16 @@ class ExpressionCode extends Expressions {
 		return getContext + "operationCallback." + name.asEscapedIdentifier;
 	}
 
-	def dispatch String code(PrimitiveValueExpression primValue) {
+	override dispatch String code(PrimitiveValueExpression primValue) {
 		primValue.value.code.toString;
 	}
 
-	def dispatch String code(ParenthesizedExpression e) {
+	override dispatch String code(ParenthesizedExpression e) {
 		"(" + e.expression.code + ")";
 	}
 
 	/* Assignment */
-	def dispatch String code(AssignmentExpression it) {
+	override dispatch String code(AssignmentExpression it) {
 		if (varRef.definition instanceof Property) {
 			var property = varRef.definition as Property
 			if (eContainer instanceof Expression) {
@@ -111,15 +111,15 @@ class ExpressionCode extends Expressions {
 		expression.value.toString()
 	}
 
-	def dispatch String code(IntLiteral expression) {
+	override dispatch String code(IntLiteral expression) {
 		expression.value.toString();
 	}
 
-	def dispatch String code(DoubleLiteral expression) {
+	override dispatch String code(DoubleLiteral expression) {
 		expression.value.toString();
 	}
 
-	def dispatch String code(FloatLiteral expression) {
+	override dispatch String code(FloatLiteral expression) {
 		expression.value.toString();
 	}
 
@@ -127,20 +127,20 @@ class ExpressionCode extends Expressions {
 		'null'
 	}
 
-	def dispatch String code(StringLiteral expression) {
+	override dispatch String code(StringLiteral expression) {
 		"\"" + expression.value.toString().escaped + "\""
 	}
 
-	def String escaped(String it) {
+	override String escaped(String it) {
 		return it.replace("\"", "\\\"");
 	}
 
 
-	def dispatch String code(ConditionalExpression expression) {
+	override dispatch String code(ConditionalExpression expression) {
 		expression.condition.code + ' ? ' + expression.trueCase.code + ' : ' + expression.falseCase.code
 	}
 
-	def dispatch String code(LogicalRelationExpression expression) {
+	override dispatch String code(LogicalRelationExpression expression) {
 		if (isSame(expression.leftOperand.infer.type, getType(GenericTypeSystem.STRING))) {
 			expression.logicalString
 		} else
@@ -210,7 +210,7 @@ class ExpressionCode extends Expressions {
 		"timeEvents[" + getTimeEvents.indexOf(it) + "]"
 	}
 
-	def dispatch String code(TypeCastExpression it) {
+	override dispatch String code(TypeCastExpression it) {
 		'''((«type.getTargetLanguageName») «operand.code»)'''
 	}
 

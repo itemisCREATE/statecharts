@@ -26,15 +26,15 @@ import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
-import org.yakindu.sct.generator.core.templates.Expressions
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 
-class ExpressionCode extends Expressions {
+class ExpressionCode extends ExpressionsGenerator {
 
 	@Inject extension Naming
 	@Inject extension Navigation
@@ -55,16 +55,16 @@ class ExpressionCode extends Expressions {
 		return context + "operationCallback." + name.asEscapedIdentifier;
 	}
 
-	def dispatch CharSequence code(PrimitiveValueExpression primValue) {
+	override dispatch CharSequence code(PrimitiveValueExpression primValue) {
 		primValue.value.code;
 	}
 
-	def dispatch CharSequence code(ParenthesizedExpression e) {
+	override dispatch CharSequence code(ParenthesizedExpression e) {
 		"(" + e.expression.code.toString.trim + ")";
 	}
 
 	/* Assignment */
-	def dispatch CharSequence code(AssignmentExpression it) {
+	override dispatch CharSequence code(AssignmentExpression it) {
 		varRef.code.toString.trim  + " " +  operator.literal + " " + expression.code.toString.trim
 	}
 
@@ -73,15 +73,15 @@ class ExpressionCode extends Expressions {
 		expression.value.toString()
 	}
 
-	def dispatch CharSequence code(IntLiteral expression) {
+	override dispatch CharSequence code(IntLiteral expression) {
 		expression.value.toString();
 	}
 
-	def dispatch CharSequence code(DoubleLiteral expression) {
+	override dispatch CharSequence code(DoubleLiteral expression) {
 		expression.value.toString();
 	}
 
-	def dispatch CharSequence code(FloatLiteral expression) {
+	override dispatch CharSequence code(FloatLiteral expression) {
 		expression.value.toString();
 	}
 
@@ -89,19 +89,19 @@ class ExpressionCode extends Expressions {
 		'null'
 	}
 
-	def dispatch CharSequence code(StringLiteral expression) {
+	override dispatch CharSequence code(StringLiteral expression) {
 		"\"" + expression.value.toString().escaped + "\""
 	}
 
-	def CharSequence escaped(String it) {
+	override String escaped(String it) {
 		return it.replace("\"", "\\\"");
 	}
 
-	def dispatch CharSequence code(ConditionalExpression expression) {
+	override dispatch CharSequence code(ConditionalExpression expression) {
 		expression.condition.code.toString.trim + ' ? ' + expression.trueCase.code + ' : ' + expression.falseCase.code
 	}
 
-	def dispatch CharSequence code(LogicalRelationExpression expression) {
+	override dispatch CharSequence code(LogicalRelationExpression expression) {
 		if (isSame(expression.leftOperand.infer.type, getType(GenericTypeSystem.STRING))) {
 			expression.logicalString
 		} else
@@ -157,7 +157,7 @@ class ExpressionCode extends Expressions {
 		"timeEvents[" + getTimeEvents.indexOf(it) + "]"
 	}
 
-	def dispatch CharSequence code(TypeCastExpression it) {
+	override dispatch CharSequence code(TypeCastExpression it) {
 		'''((«type.getTargetLanguageName») «operand.code»)'''
 	}
 

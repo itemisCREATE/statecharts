@@ -35,7 +35,7 @@ class FlowCode {
 	
 	@Inject extension Naming
 	@Inject extension Navigation
-	@Inject extension ExpressionCode
+	@Inject extension CExpressionsGenerator
 	@Inject extension INamingService
 	@Inject extension GenmodelEntries
  

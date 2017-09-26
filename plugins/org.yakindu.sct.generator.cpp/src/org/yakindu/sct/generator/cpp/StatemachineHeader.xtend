@@ -33,7 +33,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader {
 
-	@Inject protected extension Naming
+	@Inject protected extension CppNaming
 	@Inject protected extension Navigation
 	@Inject protected extension ICodegenTypeSystemAccess
 	@Inject protected extension GenmodelEntriesExtension
