@@ -13,16 +13,12 @@ package org.yakindu.sct.generator.c
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.c.IGenArtifactConfigurations.GenArtifactConfiguration
-import org.yakindu.sct.generator.c.eventdriven.StatechartEventsHeader
-import org.yakindu.sct.generator.c.eventdriven.StatechartEventsSource
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.sgraph.Statechart
 
 import static org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess.*
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION
 
 /**
  * This is the C code generators main class. 
@@ -30,7 +26,7 @@ import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN
  * @author Axel Terfloth
  */
 class CGenerator implements IExecutionFlowGenerator {
-	
+
 	@Inject extension Types types
 	@Inject extension StatemachineHeader statemachineHeader
 	@Inject extension StatemachineSource statemachineSource
@@ -42,27 +38,31 @@ class CGenerator implements IExecutionFlowGenerator {
 
 	@Inject
 	IGenArtifactConfigurations configs
-	
+
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 		initGenerationArtifacts(flow, entry, configs)
 		generateArtifacts(flow, entry, fsa, configs)
 	}
-	
-	def generateArtifacts(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa, IGenArtifactConfigurations locations) {
+
+	def generateArtifacts(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa,
+		IGenArtifactConfigurations locations) {
 		for (GenArtifactConfiguration a : locations.configurations) {
-			fsa.generateFile(a.getName, a.getOutputName, a.getContentTemplate.content(flow, entry, locations))
+			if (!a.skip) {
+				fsa.generateFile(a.getName, a.getOutputName, a.getContentTemplate.content(flow, entry, locations))
+			}
 		}
 	}
-	
-	def protected initGenerationArtifacts(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) {
-		locations.configure(flow.typesModule.h, entry.libraryOutput, types)
+
+	def protected initGenerationArtifacts(ExecutionFlow it, GeneratorEntry entry,
+		IGenArtifactConfigurations locations) {
+		locations.configure(flow.typesModule.h, entry.libraryOutput, types, getSkipLibraryFiles(entry))
 		locations.configure(flow.module.h, entry.headerOutput, statemachineHeader)
 		locations.configure(flow.module.c, entry.sourceOutput, statemachineSource)
 		if (flow.timed || !flow.operations.empty || entry.tracingEnterState || entry.tracingExitState) {
 			locations.configure(flow.module.client.h, entry.headerOutput, statemachineRequiredHeader)
 		}
 	}
-	
+
 	def protected getHeaderOutput(GeneratorEntry entry) {
 		if (entry.apiTargetFolderValue != null) {
 			API_TARGET_FOLDER_OUTPUT
@@ -78,9 +78,9 @@ class CGenerator implements IExecutionFlowGenerator {
 			entry.headerOutput
 		}
 	}
-	
+
 	def protected getSourceOutput(GeneratorEntry entry) {
 		TARGET_FOLDER_OUTPUT
 	}
-	
+
 }
