@@ -51,6 +51,13 @@ public interface ICoreLibraryHelper {
 	 */
 	FeatureParameterValue getTargetProjectValue(GeneratorEntry entry);
 	/**
+	 * The skipLibraryFiles defined in sgen - allows to skip everything that belongs 
+	 * in libraryTargetFolder
+	 * @param entry
+	 * @return the skipLibraryFiles value
+	 */
+	boolean getSkipLibraryFiles(GeneratorEntry entry);
+	/**
 	 * Convenience to combine targetProject & targetFolder values defined in SGen.
 	 * @param entry
 	 * @return a string representing the relative output path 'targetProject/targetFolder'

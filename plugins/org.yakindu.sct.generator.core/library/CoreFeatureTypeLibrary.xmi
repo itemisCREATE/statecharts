@@ -17,24 +17,60 @@
         name="apiTargetFolder"
         comment="A distinct output folder for API code artifacts. If not specified, the code will be generated into the target folder."
         optional="true"/>
+    <parameters
+        name="skipLibraryFiles"
+        comment="Allows to skip the generation of everything that belongs into the libraryTargetFolder"
+        optional="true"
+        parameterType="BOOLEAN"/>
   </types>
   <types name="LicenseHeader"
       optional="true">
     <parameters
         name="licenseText"/>
   </types>
-   <types name="Debug" optional="true">
-    <parameters name="dumpSexec" parameterType="BOOLEAN"/>
+  <types name="Debug"
+      optional="true">
+    <parameters
+        name="dumpSexec"
+        parameterType="BOOLEAN"/>
   </types>
-  <types name="FunctionInlining" optional="true">
-    <parameters name="inlineReactions" optional="true" parameterType="BOOLEAN"/>
-    <parameters name="inlineEntryActions" optional="true" parameterType="BOOLEAN"/>
-    <parameters name="inlineExitActions" optional="true" parameterType="BOOLEAN"/>
-    <parameters name="inlineEnterSequences" optional="true" parameterType="BOOLEAN"/>
-    <parameters name="inlineExitSequences" optional="true" parameterType="BOOLEAN"/>
-    <parameters name="inlineChoices" optional="true" parameterType="BOOLEAN"/>
-    <parameters name="inlineEnterRegion" optional="true" parameterType="BOOLEAN"/>
-    <parameters name="inlineExitRegion" optional="true" parameterType="BOOLEAN"/>
-    <parameters name="inlineEntries" optional="true" parameterType="BOOLEAN"/>
+  <types name="FunctionInlining"
+      optional="true">
+    <parameters
+        name="inlineReactions"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="inlineEntryActions"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="inlineExitActions"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="inlineEnterSequences"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="inlineExitSequences"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="inlineChoices"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="inlineEnterRegion"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="inlineExitRegion"
+        optional="true"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="inlineEntries"
+        optional="true"
+        parameterType="BOOLEAN"/>
   </types>
 </sgen:FeatureTypeLibrary>

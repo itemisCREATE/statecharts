@@ -17,6 +17,7 @@ import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLE
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_LIBRARY_TARGET_FOLDER;
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_TARGET_FOLDER;
 import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_TARGET_PROJECT;
+import static org.yakindu.sct.generator.core.library.ICoreLibraryConstants.OUTLET_FEATURE_SKIP_LIBRARY_FILES;
 
 import org.eclipse.core.runtime.Path;
 import org.yakindu.sct.generator.core.library.ICoreLibraryHelper;
@@ -76,5 +77,12 @@ public class DefaultCoreLibraryHelper implements ICoreLibraryHelper {
 			return false;
 		}
 		return dumpSexec.getBooleanValue();
+	}
+
+	@Override
+	public boolean getSkipLibraryFiles(GeneratorEntry entry) {
+		FeatureParameterValue skipLibraryFiles = entry.getFeatureParameterValue(
+				OUTLET_FEATURE, OUTLET_FEATURE_SKIP_LIBRARY_FILES);
+		return skipLibraryFiles == null ? false : skipLibraryFiles.getBooleanValue();
 	}
 }
