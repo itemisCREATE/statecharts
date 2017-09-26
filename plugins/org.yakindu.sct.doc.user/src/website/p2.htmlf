@@ -1,16 +1,23 @@
 
+                {# Navigation - Suche #}
+                    <li class="search" id="navigation-search-form" data-cx="015950920325887884916:2e61oxlndni">
+                        <nav class="it-header__menu cf it-header__de hs-cta-wrapper">
+                            <input data-id="it-header__search-input" placeholder="Type here." type="search">
+                            <a href="#" class="header-tools__search-icon it_cta_button_next white">search</a>
+                        </nav>
+                    </li>
 
+
+            </ol>
+        </nav>
+    </div>{% end_widget_attribute %}
+    {% end_widget_block %}
     </div><!--end layout-widget-wrapper -->
     </div><!--end widget-span -->
-    </div><!--end row-->
-    </div><!--end row-wrapper -->
-    
-    </div><!--end widget-span -->
-    <div class="span4 widget-span widget-type-raw_html sidebar-navigation-container" style="" data-widget-type="raw_html" data-x="8" data-w="4">
-    <div class="cell-wrapper layout-widget-wrapper">
-    {% widget_block raw_html "module_150227904680399" wrapping_html='', per_widget_wrapper_html='', overrideable=true, label='Custom HTML' %}
-    {% widget_attribute "value" %}<div id="sidebar-navigation">
-        <h2><span>Statechart User Guide</span> THEMES <a href="#" class="toggle"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></h2>
-        <nav>
-            <ol class="nav">
 
+    <div class="span8 widget-span widget-type-cell primary" style="" data-widget-type="cell" data-x="0" data-w="8">
+    
+    <div class="row-fluid-wrapper row-depth-1 row-number-3 ">
+    <div class="row-fluid ">
+    <div class="span12 widget-span widget-type-raw_html " style="" data-widget-type="raw_html" data-x="0" data-w="12">
+    <div class="cell-wrapper layout-widget-wrapper">

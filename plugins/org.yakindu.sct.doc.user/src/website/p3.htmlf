@@ -1,11 +1,11 @@
-
-
-            </ol>
-        </nav>
-    </div>{% end_widget_attribute %}
-    {% end_widget_block %}
+      
     </div><!--end layout-widget-wrapper -->
     </div><!--end widget-span -->
+    </div><!--end row-->
+    </div><!--end row-wrapper -->
+    
+    </div><!--end widget-span -->
+    
     </div><!--end row-->
     </div><!--end row-wrapper -->
     

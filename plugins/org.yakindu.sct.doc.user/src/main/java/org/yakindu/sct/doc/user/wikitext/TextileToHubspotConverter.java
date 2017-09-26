@@ -80,17 +80,9 @@ public class TextileToHubspotConverter {
 		assertParameterIsSpecified(outFilename, "Output file not specified.");
 
 		/*
-		 * Setup everything for the Hubspot document builder and process files:
+		 * Setup the TOC document builder:
 		 */
-		final Reader p1 = createFileReader(p1Filename, "P1 file not found");
-		final Reader contentsTemplate = createFileReader(contentsTemplateFilename,
-				"Contents template file not found");
-		final Reader p2 = createFileReader(p2Filename, "P2 file not found");
-		final Reader tocTemplate = createFileReader(tocTemplateFilename, "TOC template file not found");
-		final Reader p3 = createFileReader(p3Filename, "P3 file not found");
-		final Writer out = new FileWriter(outFilename);
-		final HubspotDocumentBuilder docBuilder = new HubspotDocumentBuilder(p1, contentsTemplate, p2, tocTemplate, p3,
-				out);
+		final TableOfContentsBuilder tocBuilder = new TableOfContentsBuilder();
 
 		/*
 		 * Concatenate all input files so that the Textile parser sees
@@ -99,14 +91,50 @@ public class TextileToHubspotConverter {
 		final Vector<Reader> readers = new Vector<Reader>(inFileNames.size());
 		for (final String inFileName : inFileNames)
 			readers.addElement(new FileReader(inFileName));
-		final Reader in = new SequenceReader(new Vector<Reader>(readers).elements());
+		Reader in = new SequenceReader(new Vector<Reader>(readers).elements());
+
+		/*
+		 * Create, configure, and run the Textile markup parser. It will call
+		 * back into the table of contents builder, which will create the table
+		 * of contents.
+		 */
+		MarkupParser markupParser = new MarkupParser();
+		markupParser.setMarkupLanguage(ServiceLocator.getInstance().getMarkupLanguage("Textile"));
+		markupParser.setBuilder(tocBuilder);
+		markupParser.parse(in);
+		List<Heading> headings = tocBuilder.getHeadings();
+
+		/*
+		 * Setup everything for the Hubspot document builder and process files:
+		 */
+		final Reader p1 = createFileReader(p1Filename, "P1 file not found");
+		final Reader contentsTemplate = createFileReader(contentsTemplateFilename, "Contents template file not found");
+		final Reader p2 = createFileReader(p2Filename, "P2 file not found");
+		final Reader tocTemplate = createFileReader(tocTemplateFilename, "TOC template file not found");
+		final Reader p3 = createFileReader(p3Filename, "P3 file not found");
+		final Writer out = new FileWriter(outFilename);
+		final HubspotDocumentBuilder docBuilder = new HubspotDocumentBuilder(p1, contentsTemplate, p2, tocTemplate, p3,
+				headings, out);
+
+		/*
+		 * Concatenate all input files so that the Textile parser sees
+		 * everything as one large input file:
+		 */
+		/*
+		 * Concatenate all input files so that the Textile parser sees
+		 * everything as one large input file:
+		 */
+		readers.clear();
+		for (final String inFileName : inFileNames)
+			readers.addElement(new FileReader(inFileName));
+		in = new SequenceReader(new Vector<Reader>(readers).elements());
 
 		/*
 		 * Create, configure, and run the Textile markup parser. It will call
 		 * back into the document builder, which will construct the output
 		 * document.
 		 */
-		final MarkupParser markupParser = new MarkupParser();
+		markupParser = new MarkupParser();
 		markupParser.setMarkupLanguage(ServiceLocator.getInstance().getMarkupLanguage("Textile"));
 		markupParser.setBuilder(docBuilder);
 		markupParser.parse(in);

@@ -28,13 +28,15 @@ import org.eclipse.mylyn.wikitext.parser.builder.HtmlDocumentBuilder;
  * </li>
  * <li>
  * <p>
- * The <em>contents</em> compartment contains the actual document contents. Each
- * H1 chapter will be rendered using a "template". That template is a piece of
- * text – usually consting of Hubspot instructions – that is read from the
- * <em>contentsTemplate</em> reader. Placeholders like <code>${h1.id}</code>,
- * <code>${h1.title}</code>, or <code>${h1.contents}</code> will be replaced by
- * the current H1 heading's ID, title, and the contents of that section,
- * respectively.
+ * The <em>table of contents</em> compartment contains the document's table of
+ * contents. Each H1 entry and its subordinated H2 entries will be rendered
+ * using a "template". That template is a piece of text – usually consting of
+ * Hubspot instructions – that is read from the <em>tocTemplate</em> reader.
+ * Placeholders like <code>${h1.id}</code> or <code>${h1.title}</code> will be
+ * replaced by the current H1 heading's ID and title, respectively.
+ * <code>${h2.toc}</code> will be replaced by the subordinated headings,
+ * currently H2 entries only. These entries are generated purely
+ * programmatically.
  * </p>
  * </li>
  * <li>
@@ -45,15 +47,13 @@ import org.eclipse.mylyn.wikitext.parser.builder.HtmlDocumentBuilder;
  * </li>
  * <li>
  * <p>
- * The <em>table of contents</em> compartment contains the document's table of
- * contents. Each H1 entry and its subordinated H2 entries will be rendered
- * using a "template". That template is a piece of text – usually consting of
- * Hubspot instructions – that is read from the <em>tocTemplate</em> reader.
- * Placeholders like <code>${h1.id}</code> or <code>${h1.title}</code> will be
- * replaced by the current H1 heading's ID and title, respectively.
- * <code>${h2.toc}</code> will be replaced by the subordinated headings,
- * currently H2 entries only. These entries are generated purely
- * programmatically.
+ * The <em>contents</em> compartment contains the actual document contents. Each
+ * H1 chapter will be rendered using a "template". That template is a piece of
+ * text – usually consisting of Hubspot instructions – that is read from the
+ * <em>contentsTemplate</em> reader. Placeholders like <code>${h1.id}</code>,
+ * <code>${h1.title}</code>, or <code>${h1.contents}</code> will be replaced by
+ * the current H1 heading's ID, title, and the contents of that section,
+ * respectively.
  * </p>
  * </li>
  * <li>
@@ -69,8 +69,8 @@ import org.eclipse.mylyn.wikitext.parser.builder.HtmlDocumentBuilder;
  * elements preceed the H1 that must go into the same section, for instance if
  * the H1 and subsequent elements are encapsulated in a DIV element. In this
  * case, you can place an "early separator" before the DIV's start tag. The
- * early separator is a pseudo H1 headline with a very special CSS class. The
- * eary separator looks like this:
+ * early separator is a pseudo H1 headline with a very special CSS class. It
+ * looks like this:
  * </p>
  * 
  * <pre>
@@ -104,6 +104,7 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 	private HtmlDocumentBuilder h2 = null;
 	private StringWriter s2 = null;
 	private PrintWriter w2 = null;
+	private List<Heading> pass1Headings;
 
 	/**
 	 * <p>
@@ -121,10 +122,14 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 	 * <p>
 	 * Constructor. Reads all the required static files and template files.
 	 * </p>
+	 * 
+	 * @param pass1Headings
 	 */
 	public HubspotDocumentBuilder(final Reader p1Reader, final Reader contentsTemplateReader, final Reader p2Reader,
-			final Reader tocTemplateReader, final Reader p3Reader, final Writer writer) {
+			final Reader tocTemplateReader, final Reader p3Reader, final List<Heading> pass1Headings,
+			final Writer writer) {
 		super(writer, true);
+		this.pass1Headings = pass1Headings;
 		try {
 			this.p1 = readContents(p1Reader, false);
 			this.p2 = readContents(p2Reader, false);
@@ -160,35 +165,12 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 		w.print(p1);
 
 		/*
-		 * We don't call the superclass' beginDocument() method here, because
-		 * the beginning part of the resulting document should be provided by
-		 * the P1 part.
-		 */
-	}
-
-	/**
-	 * <p>
-	 * At the end of the document, any open H1 Hubspot encapsulation is closed.
-	 * Then the P2 part is written to the output, followed by the table of
-	 * contents, followed by the P3 part.
-	 * </p>
-	 */
-	@Override
-	public void endDocument() {
-
-		/* Close the current H1 encapsulation, if any: */
-		Heading h1Heading = lookupLastH1Heading(headings);
-		w.print(resolveHeadingIdAndTitle(contentsTemplate[1], 1, h1Heading.getId(), h1Heading.getTitle()));
-
-		/* Copy the P2 string to the output: */
-		w.print(p2);
-
-		/*
 		 * Create the table of contents. Each H1 heading and its subordinate
 		 * headings are encapsulated in the TOC template.
 		 */
-		h1Heading = null;
-		for (final Heading h : headings) {
+
+		Heading h1Heading = null;
+		for (final Heading h : pass1Headings) {
 			if (h.getLevel() == 1) {
 				if (h1Heading != null)
 					/*
@@ -209,13 +191,37 @@ public class HubspotDocumentBuilder extends HtmlDocumentBuilder {
 		 */
 		w.println(resolveHeadingIdAndTitle(tocTemplate[1], 1, h1Heading.getId(), h1Heading.getTitle()));
 
+		/* Copy the P2 string to the output: */
+		w.print(p2);
+
+		/*
+		 * We don't call the superclass' beginDocument() method here, because
+		 * the beginning part of the resulting document should be provided by
+		 * the P1 part.
+		 */
+	}
+
+	/**
+	 * <p>
+	 * At the end of the document, any open H1 Hubspot encapsulation is closed.
+	 * Then the P2 part is written to the output, followed by the table of
+	 * contents, followed by the P3 part.
+	 * </p>
+	 */
+	@Override
+	public void endDocument() {
+
+		/* Close the current H1 encapsulation, if any: */
+		Heading h1Heading = lookupLastH1Heading(pass1Headings);
+		w.print(resolveHeadingIdAndTitle(contentsTemplate[1], 1, h1Heading.getId(), h1Heading.getTitle()));
+
 		/* Copy the P3 string to the output: */
 		w.print(p3);
 
 		/*
 		 * We don't call the superclass' endDocument() method here, because the
-		 * finnishing part of the resulting document should be provided by the
-		 * P3 part.
+		 * finnishing part of the resulting document should have been provided
+		 * by the P3 part.
 		 */
 
 		w.close();
