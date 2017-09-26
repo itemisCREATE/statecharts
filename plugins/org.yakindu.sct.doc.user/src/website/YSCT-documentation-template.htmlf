@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="author" content="{{ meta_author }}">
-    <meta name="description" content="{{ page_meta.meta_description }}">
+    <meta name="description" content="{% if dynamic_page_hubdb_row %}{{ dynamic_page_hubdb_row.description }}{% else %}{{ page_meta.meta_description }}{% endif %}">
     <meta name="generator" content="HubSpot">
     <title>{{ page_meta.html_title }}</title>
     {% if site_settings.favicon_src %}<link rel="shortcut icon" href="{{ site_settings.favicon_src }}" />{% endif %}
@@ -24,6 +24,19 @@
                 counter-increment: h1 +{{dynamic_page_hubdb_row.chapter - 1}};
             }
         </style>
+
+        <script type="text/javascript" src="{{ get_public_template_url("custom/page/itemis/bootstrap-anchor.min.js") }}"></script>    
+        <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('#sidebar-navigation').sticky({topSpacing: 100, bottomSpacing: 300});
+            
+            jQuery('.body-container #sidebar-navigation .nav .active-branch > span').on('click', function() {
+                jQuery(this).next('ol').toggle();
+            });
+
+            jQuery('body').css('position', 'relative').scrollspy({target: "#sidebar-navigation", offset: 150});
+        });
+        </script>
         
     {% elif dynamic_page_hubdb_table_id %}
         <link href="{{ get_public_template_url("Custom/page/itemis/it-yakindu-docs-overview.css") }}" rel="stylesheet" type="text/css">
@@ -135,12 +148,14 @@
                 {% endif %}
 
                 {# Navigation - Suche #}
+                {#
                     <li class="search" id="navigation-search-form" data-cx="015950920325887884916:2e61oxlndni">
                         <nav class="it-header__menu cf it-header__de hs-cta-wrapper">
                             <input data-id="it-header__search-input" placeholder="Type here." type="search">
                             <a href="#" class="header-tools__search-icon it_cta_button_next white">search</a>
                         </nav>
                     </li>
+                #}
 
 
             </ol>
@@ -194,10 +209,20 @@
     <div class="primary">
         <div class="row-fluid-wrapper">
             <div class="row-fluid">
+                <div class="themes-container search span4">
+                    <h2>What's your problem?</h2>
+                    <p>Can't find what you're looking for?</p>
+                    <div id="navigation-search-form" data-cx="015950920325887884916:2e61oxlndni">
+                        <nav class="it-header__menu cf it-header__de hs-cta-wrapper">
+                            <input data-id="it-header__search-input" placeholder="Type here." type="search"> <br /><br />
+                            <a href="#" class="header-tools__search-icon it_cta_button_next white">search</a>
+                        </nav>
+                    </div>
+                </div>
 
         {% for row in hubdb_table_rows(dynamic_page_hubdb_table_id, "&chapter__gte=1&orderBy=chapter") %}
             
-            {% if loop.index != 1 && (loop.index - 1) % 3 == 0 %}
+            {% if loop.index != 1 && loop.index % 3 == 0 %}
                     </div>
                 </div>
                 <div class="row-fluid-wrapper">
@@ -212,7 +237,7 @@
                     </div>
             
             
-            {% if loop.last && (loop.index - 1) % 3 == 2 %}
+            {% if loop.last && loop.index % 3 == 2 %}
                     </div>
                 </div>
                 <div class="row-fluid-wrapper">
@@ -220,18 +245,6 @@
             {% endif %}
             
         {% endfor %}
-        
-                <div class="themes-container search span4">
-                    <h2>What's your problem?</h2>
-                    <p>Can't find what you're looking for?</p>
-                    <div id="navigation-search-form" data-cx="015950920325887884916:2e61oxlndni">
-                        <nav class="it-header__menu cf it-header__de hs-cta-wrapper">
-                            <input data-id="it-header__search-input" placeholder="Type here." type="search"> <br /><br />
-                            <a href="#" class="header-tools__search-icon it_cta_button_next white">search</a>
-                        </nav>
-                    </div>
-                </div>
-            
         
             </div>
         </div>

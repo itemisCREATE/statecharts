@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="author" content="{{ meta_author }}">
-    <meta name="description" content="{{ page_meta.meta_description }}">
+    <meta name="description" content="{% if dynamic_page_hubdb_row %}{{ dynamic_page_hubdb_row.description }}{% else %}{{ page_meta.meta_description }}{% endif %}">
     <meta name="generator" content="HubSpot">
     <title>{{ page_meta.html_title }}</title>
     {% if site_settings.favicon_src %}<link rel="shortcut icon" href="{{ site_settings.favicon_src }}" />{% endif %}
@@ -24,6 +24,18 @@
                 counter-increment: h1 +{{dynamic_page_hubdb_row.chapter - 1}};
             }
         </style>
+        <script type="text/javascript" src="{{ get_public_template_url("custom/page/itemis/bootstrap-anchor.min.js") }}"></script>    
+        <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('#sidebar-navigation').sticky({topSpacing: 100, bottomSpacing: 300});
+            
+            jQuery('.body-container #sidebar-navigation .nav .active-branch > span').on('click', function() {
+                jQuery(this).next('ol').toggle();
+            });
+
+            jQuery('body').css('position', 'relative').scrollspy({target: "#sidebar-navigation", offset: 150});
+        });
+        </script>
         
     {% elif dynamic_page_hubdb_table_id %}
         <link href="{{ get_public_template_url("Custom/page/itemis/it-yakindu-docs-overview.css") }}" rel="stylesheet" type="text/css">
