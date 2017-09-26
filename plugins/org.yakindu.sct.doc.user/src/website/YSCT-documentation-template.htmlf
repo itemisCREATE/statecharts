@@ -25,7 +25,7 @@
             }
         </style>
 
-        <script type="text/javascript" src="{{ get_public_template_url("custom/page/itemis/bootstrap-anchor.min.js") }}"></script>    
+        <script type="text/javascript" src="{{ get_public_template_url("custom/page/itemis/bootstrap-anchor.js") }}"></script>
         <script type="text/javascript">
         jQuery(document).ready(function() {
             jQuery('#sidebar-navigation').sticky({topSpacing: 100, bottomSpacing: 300});
