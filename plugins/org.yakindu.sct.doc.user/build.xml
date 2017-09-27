@@ -179,7 +179,6 @@
                 <include name="user-guide/overview.textile" />
                 <include name="user-guide/editing_statecharts.textile" />
                 <include name="user-guide/simulating_statecharts.textile" />
-                <include name="user-guide/advanced_simulation.textile" />
                 <include name="user-guide/c-domain.textile" />
                 <!-- include name="user-guide/typescript-domain.textile" / -->
                 <include name="user-guide/statechart_language.textile" />
@@ -192,7 +191,7 @@
             <!-- Check whether we have all the expected textile source files – no more, no less: -->
             <fail message="Number of textile source file(s) doesn't match.">
                 <condition>
-                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="11" />
+                    <resourcecount refid="fileset.eclipsehelp" when="ne" count="10" />
                 </condition>
             </fail>
 
@@ -379,7 +378,6 @@
                         <file name="user-guide/overview.textile" />
                         <file name="user-guide/editing_statecharts.textile" />
                         <file name="user-guide/simulating_statecharts.textile" />
-                        <file name="user-guide/advanced_simulation.textile" />
                         <file name="user-guide/c-domain.textile" />
                         <!-- file name="user-guide/typescript-domain.textile" /-->
                         <file name="user-guide/statechart_language.textile" />

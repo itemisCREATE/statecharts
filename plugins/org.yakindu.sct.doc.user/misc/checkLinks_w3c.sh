@@ -50,7 +50,6 @@ then
     checklink --broken --dir-redirects \
 	--recursive --depth 1 \
 	--exclude https://github.com/Yakindu/.* \
-	${prefix}user-guide/advanced_simulation.html \
 	${prefix}user-guide/c-domain.html \
 	${prefix}user-guide/editing_statecharts.html \
 	${prefix}user-guide/generating_code_headless.html \

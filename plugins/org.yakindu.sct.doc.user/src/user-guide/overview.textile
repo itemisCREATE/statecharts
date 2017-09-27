@@ -23,7 +23,7 @@ p=. Features of YAKINDU Statechart Tools
 The Professional Edition of YAKINDU Statechart Tools makes additional features available:
 
 * "*Deep integration with the C programming language*":../user-guide/c-domain to directly access C variables, types etc.
-* "*Advanced simulation and debugging*":../user-guide/advanced_simulation with breakpoints and snapshots
+* "*Advanced simulation and debugging*":../user-guide/simulating_statecharts.html#advsim_debugging_with_breakpoints_and_snapshots with breakpoints and snapshots
 
 
 
