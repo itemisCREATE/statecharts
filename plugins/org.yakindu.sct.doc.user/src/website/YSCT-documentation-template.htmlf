@@ -229,8 +229,8 @@
                     <div class="row-fluid">
             {% endif %}
             
-                    <div class="themes-container span4">
-                        <h2>{{row.hs_name}}</h2>
+                    <div class="themes-container span4{% if row.pro_feature %} pro-feature{% endif %}">
+                        <a href="{{ request.path }}/{{ row.hs_path }}"><h2>{{row.hs_name}}</h2></a>
                         <p>{{row.description}}</p>
                         
                         <div class="hs-cta-wrapper"><a href="{{ request.path }}/{{ row.hs_path }}" class="it_cta_button_next white">More</a></div>
