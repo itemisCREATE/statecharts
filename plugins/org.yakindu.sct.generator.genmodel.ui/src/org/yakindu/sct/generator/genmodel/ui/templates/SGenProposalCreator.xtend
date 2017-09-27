@@ -38,9 +38,13 @@ class SGenProposalCreator {
 		
 	def value(FeatureConfiguration value, FeatureParameter param){
 		 var defaultValue = value.getParameterValue(param.name)
-		 if(defaultValue != null) {
+		 if(defaultValue !== null) {
 		 	if(param.parameterType.equals(ParameterTypes::STRING))
-		 		return ''' "«defaultValue.expression»" '''.toString
+		 		return ''' "«defaultValue.stringValue»" '''.toString
+		 	if(param.parameterType.equals(ParameterTypes::BOOLEAN))
+		 		return ''' «defaultValue.booleanValue» '''.toString
+		 	if(param.parameterType.equals(ParameterTypes::INTEGER))
+		 		return ''' «defaultValue.integerValue» '''.toString
 		 	else
 		 		return defaultValue.expression
 		 }
@@ -48,11 +52,11 @@ class SGenProposalCreator {
 		 	case ParameterTypes::STRING:
 		 		return "\"\""
 		 	case ParameterTypes::BOOLEAN:
-		 		return "false"
+		 		return false
 		 	case ParameterTypes::FLOAT:
-		 		return "0.0"	
+		 		return 0.0	
 		 	case ParameterTypes::INTEGER:
-		 		return "0"
+		 		return 0l
 		 }
 		 null
 		 

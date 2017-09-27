@@ -11,9 +11,13 @@
 package org.yakindu.sct.simulation.core.sexec.container
 
 import com.google.inject.Inject
+import java.util.HashSet
 import java.util.List
+import java.util.Set
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
@@ -21,25 +25,21 @@ import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgraph.ImportDeclaration
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sruntime.CompositeSlot
+import org.yakindu.sct.model.sruntime.EventDirection
+import org.yakindu.sct.model.sruntime.ExecutionContext
+import org.yakindu.sct.model.sruntime.ExecutionSlot
+import org.yakindu.sct.model.sruntime.SRuntimeFactory
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
-import org.yakindu.sct.simulation.core.sruntime.EventDirection
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
-import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
-import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import java.util.Set
-import java.util.HashSet
-import org.eclipse.emf.ecore.util.EcoreUtil
 
 /**
  * 

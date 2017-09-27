@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.yakindu.sct</groupId>
 	<artifactId>org.yakindu.sct.releng</artifactId>
-	<version>3.0.1-SNAPSHOT</version>
+	<version>3.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
@@ -221,7 +221,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.0.1-SNAPSHOT</version>
+									<version>3.1.0-SNAPSHOT</version>
 									<classifier>Luna</classifier>
 								</artifact>
 							</target>
@@ -250,7 +250,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.0.1-SNAPSHOT</version>
+									<version>3.1.0-SNAPSHOT</version>
 									<classifier>Mars</classifier>
 								</artifact>
 							</target>
@@ -279,7 +279,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.0.1-SNAPSHOT</version>
+									<version>3.1.0-SNAPSHOT</version>
 									<classifier>Neon</classifier>
 								</artifact>
 							</target>
@@ -308,7 +308,7 @@
 								<artifact>
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
-									<version>3.0.1-SNAPSHOT</version>
+									<version>3.1.0-SNAPSHOT</version>
 									<classifier>Oxygen</classifier>
 								</artifact>
 							</target>
@@ -395,6 +395,7 @@
 		<module>../../plugins/org.yakindu.base.types</module>
 		<module>../../plugins/org.yakindu.base.types.edit</module>
 		<module>../../plugins/org.yakindu.base.expressions</module>
+		<module>../../plugins/org.yakindu.base.expressions.interpreter</module>
 		<module>../../plugins/org.yakindu.base.expressions.edit</module>
 		<module>../../plugins/org.yakindu.base.expressions.ui</module>
 		<module>../../plugins/org.yakindu.base.gmf.runtime</module>
@@ -419,6 +420,7 @@
 		<module>../../plugins/org.yakindu.sct.model.sgraph</module>
 		<module>../../plugins/org.yakindu.sct.model.sgraph.edit</module>
 		<module>../../plugins/org.yakindu.sct.model.sgraph.ui</module>
+		<module>../../plugins/org.yakindu.sct.model.sruntime</module>
 		<module>../../plugins/org.yakindu.sct.model.stext</module>
 		<module>../../plugins/org.yakindu.sct.model.stext.lib</module>
 		<module>../../plugins/org.yakindu.sct.model.stext.edit</module>

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Simulation Execution
 Bundle-SymbolicName: org.yakindu.sct.simulation.core.sexec;singleton:=true
-Bundle-Version: 3.0.1.qualifier
+Bundle-Version: 3.1.0.qualifier
 Bundle-Activator: org.yakindu.sct.simulation.core.sexec.SExecCoreActivator
 Require-Bundle: org.yakindu.sct.simulation.core,
  org.eclipse.core.runtime,
@@ -16,7 +16,8 @@ Require-Bundle: org.yakindu.sct.simulation.core,
  org.eclipse.emf.workspace,
  org.yakindu.base.xtext.utils.jface,
  org.yakindu.sct.domain,
- org.yakindu.sct.model.stext.lib
+ org.yakindu.sct.model.stext.lib,
+ org.yakindu.base.expressions.interpreter
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.simulation.core.sexec,

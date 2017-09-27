@@ -662,9 +662,25 @@ Consider, for example, a C function @float read_sensor()@ that should be called 
 
 It is the purpose of a code generator to create a suitable construct in the respective target language for the procedure call. For details on code generation, please see section "&quot;Generating state machine code&quot;":../user-guide/generating_code.html.
 
-Operations can have none, one or multiple parameters. A parameter is declared with a name and a type. An operation may have a single or no return type similar to usual programming languages. Please see section "&quot;Types&quot;":#sclang_types for details.
+Operations can have none, one, or multiple parameters. A parameter is declared with a name and a type. An operation may have a single or no return type similar to usual programming languages. Please see section "&quot;Types&quot;":#sclang_types for details.
 
 bc. operation myOperation (xValue: integer, yValue: integer): integer
+
+You can call _myOperation_ by using positional parameters:
+
+bc. myOperation(27, 42)
+
+This call assigns the value 27 to the operation's _xValue_ parameter and 42 to _yValue_.
+
+Alternatively, you can use named parameters, like in the following example:
+
+bc. myOperation(xValue = 27, yValue = 42)
+
+Named parameters make their order irrelevant. The following call is semantically equivalent to the one above:
+
+bc. myOperation(yValue = 42, xValue = 27)
+
+While an operation call with named parameters is longer than the equivalent call with positional parameters, named parameters are a great means for self-documenting code (especially if the parameter names are more telling than in the example above).
 
 Operations with a variable number of parameters are supported, too. To be more exact, it is possible to specify an operation's last parameter as being allowed to occur an arbitrary number of times. This feature is usually called "varargs", short for "variable number of arguments". Compared to a "regular" operation parameter declaration, the varargs parameter name is followed by three dots (@...@) to indicate it may occur zero or more times.
 

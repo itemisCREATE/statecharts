@@ -19,17 +19,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
+import org.yakindu.sct.model.sruntime.CompositeSlot;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionEvent;
+import org.yakindu.sct.model.sruntime.ExecutionVariable;
+import org.yakindu.sct.model.sruntime.impl.CompositeSlotImpl;
+import org.yakindu.sct.model.sruntime.impl.ExecutionEventImpl;
+import org.yakindu.sct.model.sruntime.impl.ExecutionVariableImpl;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
-import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
-import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
-import org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl;
-import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl;
-import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl;
 
 import com.google.inject.Inject;
 
@@ -45,7 +45,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Inject
 	private ExecutionContext context;
 	@Inject
-	private IStatementInterpreter interpreter;
+	private IExpressionInterpreter interpreter;
 	@Inject
 	private ITypeSystem typeSystem;
 
@@ -594,22 +594,22 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	protected Object executeWithDefaultScope(String expression) {
 		Expression statement = (Expression) parseExpression(expression, Expression.class.getSimpleName(), internalScope());
-		return interpreter.evaluateStatement(statement, context);
+		return interpreter.evaluate(statement, context);
 	}
 
 	protected Object execute(String scope, String expression) {
 		Expression statement = (Expression) parseExpression(expression, Expression.class.getSimpleName(), scope);
-		return interpreter.evaluateStatement(statement, context);
+		return interpreter.evaluate(statement, context);
 	}
 
 	protected Object executeExpression(String scope, String expression) {
 		Expression statement = (Expression) parseExpression(expression, Expression.class.getSimpleName(), scope);
-		return interpreter.evaluateStatement(statement, context);
+		return interpreter.evaluate(statement, context);
 	}
 
 	protected Object executeExpression(String expression) {
 		Expression statement = (Expression) parseExpression(expression, Expression.class.getSimpleName());
-		return interpreter.evaluateStatement(statement, context);
+		return interpreter.evaluate(statement, context);
 	}
 
 	public ExecutionContext getContext() {

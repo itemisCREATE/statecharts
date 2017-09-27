@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU Simulation UI
 Bundle-SymbolicName: org.yakindu.sct.simulation.ui;singleton:=true
-Bundle-Version: 3.0.1.qualifier
+Bundle-Version: 3.1.0.qualifier
 Bundle-Activator: org.yakindu.sct.simulation.ui.SimulationActivator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.ui,
@@ -33,6 +33,7 @@ Import-Package: org.eclipse.emf.edit.ui.provider,
  org.eclipse.ui.dialogs,
  org.yakindu.sct.model.sgraph.provider
 Export-Package: org.yakindu.sct.simulation.ui,
+ org.yakindu.sct.simulation.ui.perspective,
  org.yakindu.sct.simulation.ui.preferences,
  org.yakindu.sct.simulation.ui.view,
  org.yakindu.sct.simulation.ui.view.decorator

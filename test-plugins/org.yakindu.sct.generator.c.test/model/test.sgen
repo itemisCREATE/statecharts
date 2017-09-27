@@ -9,7 +9,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -35,7 +35,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -51,7 +51,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 
 	}
@@ -65,7 +65,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -81,7 +81,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -94,7 +94,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -110,7 +110,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -123,7 +123,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -139,7 +139,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -152,7 +152,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -168,7 +168,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -181,7 +181,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -197,7 +197,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -210,7 +210,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -226,7 +226,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -239,7 +239,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -255,7 +255,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -268,7 +268,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -284,7 +284,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 	
@@ -297,7 +297,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -313,7 +313,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 
 	}
@@ -327,7 +327,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -343,7 +343,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 
 	}
@@ -358,7 +358,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -374,7 +374,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 
 	}
@@ -388,7 +388,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -404,7 +404,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -417,7 +417,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -433,7 +433,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -446,7 +446,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -462,7 +462,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -475,7 +475,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -491,7 +491,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -504,7 +504,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -520,7 +520,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -533,7 +533,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -549,7 +549,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -562,7 +562,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -578,7 +578,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -591,7 +591,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -607,7 +607,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -621,7 +621,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -637,7 +637,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 
 	}
@@ -651,7 +651,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -667,7 +667,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -681,7 +681,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -697,7 +697,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -711,7 +711,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -727,7 +727,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -741,7 +741,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -757,7 +757,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -771,7 +771,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -787,7 +787,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -801,7 +801,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -817,7 +817,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -831,7 +831,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -847,7 +847,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -861,7 +861,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -877,7 +877,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -891,7 +891,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -907,7 +907,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -921,7 +921,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -937,7 +937,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -951,7 +951,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -967,7 +967,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -981,7 +981,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -997,7 +997,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1010,7 +1010,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1026,7 +1026,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1040,7 +1040,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1056,7 +1056,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1070,7 +1070,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1086,7 +1086,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1099,7 +1099,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1115,7 +1115,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1129,7 +1129,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1145,7 +1145,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1159,7 +1159,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1175,7 +1175,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1189,7 +1189,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1205,7 +1205,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1219,7 +1219,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1235,7 +1235,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1249,7 +1249,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1265,7 +1265,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1279,7 +1279,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1295,7 +1295,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1309,7 +1309,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1325,7 +1325,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1339,7 +1339,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1355,7 +1355,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1369,7 +1369,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1385,7 +1385,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1399,7 +1399,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1415,7 +1415,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1429,7 +1429,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1445,7 +1445,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1459,7 +1459,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1475,7 +1475,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1489,7 +1489,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1505,7 +1505,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1519,7 +1519,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1535,7 +1535,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1549,7 +1549,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1565,7 +1565,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1579,7 +1579,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1595,7 +1595,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1609,7 +1609,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1625,7 +1625,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1639,7 +1639,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature IdentifierSettings {
@@ -1660,7 +1660,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1674,7 +1674,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1690,7 +1690,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1704,7 +1704,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1720,7 +1720,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1734,7 +1734,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1750,7 +1750,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1764,7 +1764,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1780,7 +1780,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1794,7 +1794,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1810,7 +1810,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1824,7 +1824,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1840,7 +1840,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1854,7 +1854,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1870,7 +1870,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -1884,7 +1884,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1900,7 +1900,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 	}
 
@@ -1913,7 +1913,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -1929,7 +1929,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}

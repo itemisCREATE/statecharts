@@ -89,6 +89,9 @@ class StatemachineImplementation implements IContentTemplate {
 	'''
 	}
 	
+
+		
+	
 	def protected usingNamespaces(ExecutionFlow it) {
 		''''''
 	}
@@ -98,25 +101,41 @@ class StatemachineImplementation implements IContentTemplate {
 		''''''
 	}
 	
-	def constructorDefinition(ExecutionFlow it) '''
-		«module»::«module»()
+
+	def constructorDefinition(ExecutionFlow it){
+	'''
+		«module»::«module»():
+			«initialisationList»
 		{
 			«constructorBody(it)»
 		}
 	'''
+	}
+	
+	def protected initialisationList(ExecutionFlow it) {
+		'''
+			«IF timed»«timerInstance»(null),«ENDIF»
+			stateConfVectorPosition(0)«FOR s : getInterfaces»,
+			«s.instance»()«IF s.hasOperations && !entry.useStaticOPC»,
+			«s.OCB_Instance»(null)«ENDIF»«ENDFOR»
+		'''
+	}
+	
+	def protected initialisationListCopy(ExecutionFlow it) {
+		'''
+			«IF timed»«timerInstance»(rhs.«timerInstance»),«ENDIF»
+			stateConfVectorPosition(rhs.stateConfVectorPosition)«FOR s : getInterfaces»,
+			«s.instance»(rhs.«s.instance»)«IF s.hasOperations && !entry.useStaticOPC»,
+			«s.OCB_Instance»(rhs.«s.OCB_Instance»)«ENDIF»«ENDFOR»
+		'''	
+	}
 	
 	protected def CharSequence constructorBody(ExecutionFlow it)
 		'''
-		«scopes.filter(typeof(StatechartScope)).filter[hasOperations && !entry.useStaticOPC].map['''«OCB_Instance» = null;'''].join('\n')»
 		«IF hasHistory»
 			for (int i = 0; i < «historyStatesConst»; ++i)
 				historyVector[i] = «null_state»;
 				
-		«ENDIF»
-		stateConfVectorPosition = 0;
-		
-		«IF timed»
-			«timerInstance» = null;
 		«ENDIF»
 		'''
 	
@@ -213,7 +232,7 @@ class StatemachineImplementation implements IContentTemplate {
 			switch (stateConfVector[stateConfVectorPosition])
 			{
 			«FOR state : states»
-				«IF state.reactSequence!=null»
+				«IF state.reactSequence !== null»
 				case «state.shortName.asEscapedIdentifier» :
 				{
 					«state.reactSequence.shortName»();
@@ -231,9 +250,9 @@ class StatemachineImplementation implements IContentTemplate {
 	def timedStatemachineFunctions(ExecutionFlow it) '''
 		«IF timed»
 			
-			void «module»::setTimer(«timerInterface»* timer)
+			void «module»::setTimer(«timerInterface»* timerInterface)
 			{
-				this->«timerInstance» = timer;
+				this->«timerInstance» = timerInterface;
 			}
 			
 			«timerInterface»* «module»::getTimer()

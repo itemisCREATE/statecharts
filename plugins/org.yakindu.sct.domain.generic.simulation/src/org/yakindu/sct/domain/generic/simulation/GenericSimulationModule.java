@@ -14,11 +14,15 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.yakindu.base.expressions.interpreter.IExpressionInterpreter;
+import org.yakindu.base.expressions.interpreter.IOperationMockup;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.impl.ExecutionContextImpl;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.simulation.core.sexec.container.DefaultExecutionContextInitializer;
@@ -28,12 +32,8 @@ import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
 import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IEventRaiser;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
-import org.yakindu.sct.simulation.core.sexec.interpreter.IOperationMockup;
-import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.JavaOperationMockup;
-import org.yakindu.sct.simulation.core.sexec.interpreter.StextStatementInterpreter;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl;
+import org.yakindu.sct.simulation.core.sexec.interpreter.StextExpressionInterpreter;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -84,8 +84,8 @@ public class GenericSimulationModule extends AbstractGenericModule {
 		return DefaultExecutionFlowInterpreter.class;
 	}
 
-	public Class<? extends IStatementInterpreter> bindIStatementInterpreter() {
-		return StextStatementInterpreter.class;
+	public Class<? extends IExpressionInterpreter> bindIExpressionInterpreter() {
+		return StextExpressionInterpreter.class;
 	}
 
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {

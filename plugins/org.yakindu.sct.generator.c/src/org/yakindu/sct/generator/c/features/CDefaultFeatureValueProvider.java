@@ -54,7 +54,7 @@ public class CDefaultFeatureValueProvider extends AbstractDefaultFeatureValuePro
 		} else if (ICFeatureConstants.PARAMETER_NAMING_STATEMACHINE_PREFIX.equals(parameterName)) {
 			parameterValue.setValue(StringExtensions.toFirstLower(asIdentifier(statechart.getName(), "_")));
 		} else if (ICFeatureConstants.PARAMETER_NAMING_MAX_IDENTIFIER_LENGTH.equals(parameterName)) {
-			parameterValue.setValue("31");
+			parameterValue.setValue(31);
 		} else if (ICFeatureConstants.PARAMETER_NAMING_SEPARATOR.equals(parameterName)) {
 			parameterValue.setValue("_");
 		} else if (ICFeatureConstants.PARAMETER_TRACING_ENTER_STATE.equals(parameterName)) {

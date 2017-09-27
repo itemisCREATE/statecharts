@@ -6,9 +6,9 @@ _DEFINED_ | _functional_
 If an exception occurs during the interpretation of a state machine then this exceptions must be handled. 
 
 #### Discussion
-Excpetions during simulation may be caused by the user for example if simulation callbacks are user. Or by a bug in the statechart
-tools itself. In any case the error must be handled in a way that is controllable by the user. In any case the current simulation 
-must be terminated. 
+Excpetions during simulation may be caused due ti different reasons. First user implemented callbacks may fail or a bug in the statechart
+tools itself may cause an error. In any case the error must be handled in a way that is controllable by the user. 
+In any case the current simulation must be terminated. 
 
 #### Preconditions
 An excetion occurs within the simulation.

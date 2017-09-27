@@ -16,6 +16,8 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.yakindu.base.expressions.interpreter.IExecutionSlotResolver;
+import org.yakindu.base.expressions.interpreter.IOperationMockup;
 import org.yakindu.base.types.Operation;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
 

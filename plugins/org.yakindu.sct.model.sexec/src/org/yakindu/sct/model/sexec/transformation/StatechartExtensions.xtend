@@ -15,6 +15,7 @@ import java.util.List
 import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sgraph.Exit
 import org.yakindu.sct.model.sgraph.Reaction
 import org.yakindu.sct.model.sgraph.ReactiveElement
 import org.yakindu.sct.model.sgraph.Region
@@ -22,18 +23,17 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.EntryEvent
 import org.yakindu.sct.model.stext.stext.ExitEvent
 import org.yakindu.sct.model.stext.stext.LocalReaction
+import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.sgraph.Synchronization
-import org.yakindu.sct.model.sgraph.Exit
-import org.yakindu.sct.model.stext.stext.ReactionEffect
 
 class StatechartExtensions {
 	
@@ -82,22 +82,11 @@ class StatechartExtensions {
 	 * Provides a list of all TimeEventSpecs that are defined in the context of 'state'.
 	 */
 	def dispatch List<TimeEventSpec> timeEventSpecs(State state) { 
-		// TODO: also query local reactions
-		var tesList = new ArrayList<TimeEventSpec>()
-		
-		state.outgoingTransitions.fold(tesList, 
-			[s, r | {
-				EcoreUtil2::eAllContentsAsList(r).filter(typeof (TimeEventSpec)).forEach(tes | s.add(tes))
-				s
-			}]
-		)
+		val tesList = new ArrayList<TimeEventSpec>()
 
-		state.localReactions.fold(tesList, 
-			[s, r | {
-				EcoreUtil2::eAllContentsAsList(r).filter(typeof (TimeEventSpec)).forEach(tes | s.add(tes))
-				s
-			}]
-		)
+		getTimeEventSpecs(state.outgoingTransitions, tesList)
+
+		getTimeEventSpecs(state.localReactions, tesList)
 				
 		return tesList
 	}
@@ -106,36 +95,34 @@ class StatechartExtensions {
 	 * Provides a list of all TimeEventSpecs that are defined in the context of 'state'.
 	 */
 	def dispatch List<TimeEventSpec> timeEventSpecs(Statechart state) { 
-		// TODO: also query local reactions
-		var tesList = new ArrayList<TimeEventSpec>()
+		val tesList = new ArrayList<TimeEventSpec>()
 		
-		state.localReactions.fold(tesList, 
+		getTimeEventSpecs(state.localReactions, tesList)
+				
+		return tesList
+	}
+	
+	protected def List<TimeEventSpec> getTimeEventSpecs(List<? extends Reaction> reactions, List<TimeEventSpec> tesList) {
+		reactions.fold(tesList, 
 			[s, r | {
 				EcoreUtil2::eAllContentsAsList(r).filter(typeof (TimeEventSpec)).forEach(tes | s.add(tes))
 				s
 			}]
 		)
-				
-		return tesList
+	}
+	
+	def dispatch int maxNumberOfParallelTimeEvents(Statechart sc) {
+		sc.timeEventSpecs.size + (sc.regions.map[maxNumberOfParallelTimeEvents].reduce[a, b | a + b]?:0)
+	}
+	
+	def dispatch int maxNumberOfParallelTimeEvents(Region r) {
+		r.vertices.filter(State).map[maxNumberOfParallelTimeEvents].max
 	}
 
-//	/** 
-//	 * Provides a list of all TimeEventSpecs that are defined in the context of 'statechart'.
-//	 */
-//	def List<TimeEventSpec> timeEventSpecs(Statechart state) { 
-//		// TODO: also query local reactions
-//		var tesList = new ArrayList<TimeEventSpec>()
-//
-//		state.localReactions.fold(tesList, 
-//			[s, r | {
-//				EcoreUtil2::eAllContentsAsList(r).filter(typeof (TimeEventSpec)).forEach(tes | s.add(tes))
-//				s
-//			}]
-//		)
-//				
-//		return tesList
-//	}
-
+	def dispatch int maxNumberOfParallelTimeEvents(State s) {
+		s.timeEventSpecs.size + (s.regions.map[maxNumberOfParallelTimeEvents].reduce[a, b | a + b]?:0)
+	}
+ 
 	def dispatch ReactiveElement reactiveElement(Reaction r) {
 		r.scope.reactiveElement		
 	}

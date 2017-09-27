@@ -91,7 +91,7 @@ public class DefaultValidationIssueStore implements IValidationIssueStore, IReso
 	protected void notifyListeners(String semanticURI) {
 		synchronized (listener) {
 			for (IValidationIssueStoreListener iResourceIssueStoreListener : listener) {
-				if (semanticURI.equals(iResourceIssueStoreListener.getSemanticURI())) {
+				if (iResourceIssueStoreListener.getSemanticURIs().contains(semanticURI)) {
 					iResourceIssueStoreListener.issuesChanged();
 				}
 			}

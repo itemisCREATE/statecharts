@@ -16,8 +16,8 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.widgets.Display;
-import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.CompositeSlot;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
 

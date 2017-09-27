@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.yakindu.sct.model.sruntime;singleton:=true
+Bundle-Version: 3.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.yakindu.sct.model.sruntime,
+ org.yakindu.sct.model.sruntime.impl,
+ org.yakindu.sct.model.sruntime.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.yakindu.base.types;visibility:=reexport,
+ com.google.guava
+Bundle-ActivationPolicy: lazy

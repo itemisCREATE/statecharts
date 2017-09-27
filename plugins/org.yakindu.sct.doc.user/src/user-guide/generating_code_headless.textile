@@ -36,18 +36,20 @@ bc. scc -h
 The output should be similar to the following:
 
 bc.. 
---------------------------------------------------------
+--------------------------------------------------------------
 YAKINDU Statechart Tools Headless Generator ((c) by itemis AG)
 
           Visit http://www.statecharts.org
---------------------------------------------------------
-usage: scc [-d <path>] [-h] [-m <path>{,<path>}…]
- -d,--baseDir <path>   Relative/absolute path to the working directory that contains your statechart projects. If not
-                       set the current directory is used.
- -h                    Shows help content.
- -m,--model <path>{,<path>}…  A list of comma separated Relative/absolute paths
-                              to model(s) used during execution. If not set
-                              the runtime value of basedir is used.
+--------------------------------------------------------------
+usage: scc [-d <path>] [-h] [-m <path(s)>] [-v <arg>]
+ -d,--baseDir <path>    Relative or absolute path to the working directory that contains your statechart projects. If
+                        not set, the current directory is used.
+ -h                     Shows help content.
+ -m,--model <path(s)>   A list of comma-separated relative or absolute paths to model(s) used during execution. If not
+                        set, the runtime value of baseDir is used.
+ -v,--variables <arg>   A list of comma-separated key/value pairs to override variables in SGen models. Example: 
+                       -v key1=value1,key2=value2
+p. 
 
 
 
@@ -179,6 +181,11 @@ Use the <code>-m <em>models</em></code> option to select certain models known by
 * If _model_ is a folder, the generator will search recursively for all model files known by the statechart compiler within <code><em>basedir</em>/<em>statechart_model</em></code>.
 
 *Default:* If the @-m@ option is not specified, this is equivalent to <code>-m <em>basedir</em></code>, i.e. all model files in and beneath _basedir_ are processed.
+
+
+h4(#hdls_specifying_property_values). Specifying property values
+
+Use the <code>-v <em>name1=value1;name2=value2;nameN=valueN</em></code> option to override properties _name1_, _name2_, _nameN_, specified in the generator models, by the given values _value1_, _value2_, and _valueN_, respectively. See section "&quot;Using properties and expressions in generator models&quot;":../user-guide/generating_code#codegen_using_properties_and_expressions_in_generator_models for details.
 
 
 

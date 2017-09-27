@@ -45,7 +45,7 @@ class TimedStatemachineInterface implements IContentTemplate {
 				    externally on a timed state machine before a run cycle can be correct
 				    executed.
 				*/
-				virtual void setTimer(«timerInterface»* timer) = 0;
+				virtual void setTimer(«timerInterface»* timerInterface) = 0;
 				
 				/*! Returns the currently used timer service.
 				*/

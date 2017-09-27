@@ -11,9 +11,9 @@
 package org.yakindu.sct.simulation.core.sexec.container;
 
 import org.yakindu.sct.model.sexec.ExecutionFlow;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionEvent;
+import org.yakindu.sct.model.sruntime.ExecutionVariable;
 
 import com.google.inject.ImplementedBy;
 

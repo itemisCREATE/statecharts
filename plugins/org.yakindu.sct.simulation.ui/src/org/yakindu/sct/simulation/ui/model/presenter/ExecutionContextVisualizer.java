@@ -14,9 +14,9 @@ import static org.eclipse.emf.common.notify.Notification.ADD;
 import static org.eclipse.emf.common.notify.Notification.ADD_MANY;
 import static org.eclipse.emf.common.notify.Notification.REMOVE;
 import static org.eclipse.emf.common.notify.Notification.REMOVE_MANY;
-import static org.yakindu.sct.simulation.core.sruntime.SRuntimePackage.Literals.EXECUTION_CONTEXT__ACTIVE_STATES;
-import static org.yakindu.sct.simulation.core.sruntime.SRuntimePackage.Literals.EXECUTION_CONTEXT__EXECUTED_ELEMENTS;
-import static org.yakindu.sct.simulation.core.sruntime.SRuntimePackage.Literals.EXECUTION_CONTEXT__SUSPENDED_ELEMENTS;
+import static org.yakindu.sct.model.sruntime.SRuntimePackage.Literals.EXECUTION_CONTEXT__ACTIVE_STATES;
+import static org.yakindu.sct.model.sruntime.SRuntimePackage.Literals.EXECUTION_CONTEXT__EXECUTED_ELEMENTS;
+import static org.yakindu.sct.model.sruntime.SRuntimePackage.Literals.EXECUTION_CONTEXT__SUSPENDED_ELEMENTS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.yakindu.base.gmf.runtime.highlighting.HighlightingParameters;
 import org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport;
 import org.yakindu.sct.model.sgraph.RegularState;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.util.CrossDocumentContentAdapter;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.util.CrossDocumentContentAdapter;
 
 import com.google.common.collect.Lists;
 

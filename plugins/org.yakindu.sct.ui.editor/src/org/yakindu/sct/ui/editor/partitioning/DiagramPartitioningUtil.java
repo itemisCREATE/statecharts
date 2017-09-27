@@ -13,6 +13,7 @@ package org.yakindu.sct.ui.editor.partitioning;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -24,7 +25,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.gef.EditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
+import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
@@ -160,6 +164,41 @@ public class DiagramPartitioningUtil {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	
+	public static View findNotationView(EObject semanticElement) {
+		Collection<Diagram> objects = EcoreUtil.getObjectsByType(semanticElement.eResource().getContents(),
+				NotationPackage.Literals.DIAGRAM);
+		for (Diagram diagram : objects) {
+			TreeIterator<EObject> eAllContents = diagram.eAllContents();
+			while (eAllContents.hasNext()) {
+				EObject next = eAllContents.next();
+				if (next instanceof View) {
+					if (((View) next).getElement() == semanticElement) {
+						return ((View) next);
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	public static void selectElementsInDiagram(IDiagramWorkbenchPart diagramPart, List<EditPart> editParts) {
+		diagramPart.getDiagramGraphicalViewer().deselectAll();
+
+		EditPart firstPrimary = null;
+		for (Iterator<EditPart> it = editParts.iterator(); it.hasNext();) {
+			EditPart nextPart = it.next();
+			diagramPart.getDiagramGraphicalViewer().appendSelection(nextPart);
+			if (firstPrimary == null && nextPart instanceof IPrimaryEditPart) {
+				firstPrimary = nextPart;
+			}
+		}
+		if (!editParts.isEmpty()) {
+			diagramPart.getDiagramGraphicalViewer()
+					.reveal(firstPrimary != null ? firstPrimary : (EditPart) editParts.get(0));
+		}
 	}
 
 	/**

@@ -9,7 +9,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -39,7 +39,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {
@@ -70,7 +70,7 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature JUnitWrapper {
-			WrapToJUnit = "true"
+			WrapToJUnit = true
 		}
 
 		feature FunctionInlining {

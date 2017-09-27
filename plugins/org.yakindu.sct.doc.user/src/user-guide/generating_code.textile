@@ -143,7 +143,7 @@ p=. SGen generator model with default values
 
 ###. FIXME: Explain what a "builder" is!
 
-The following section describes the _core features_, which are available for all code generators.
+The following sections describe _core features_, which are available for _all_ code generators. Individual code generators usually support specific additional features; please see the respective code generator documentation for details.
 
 
 
@@ -253,6 +253,48 @@ bc. feature Debug {
 
 
 
+h3(#codegen_using_properties_and_expressions_in_generator_models). Using properties and expressions in generator models
+
+An SGen generator model may assign values to properties and later use these properties in expressions. The following sample generator model uses the *var* keyword to declare the properties _projectName_, _version_, _isBeta_, and _generateTimerServce_ with their respective types and default values. The model then uses these values in *feature* clauses by referring to the properties:
+
+bc.. 
+GeneratorModel for yakindu::java {
+
+    var projectName : string = "light_switch"
+    var version : string = "1.0"
+    var isBeta : boolean = true
+    var generateTimerServce : boolean = true
+
+    statechart myStateAutomaton {
+
+        feature Outlet {
+            targetProject = projectName
+            targetFolder = "src-gen/" + version + (isBeta ? "beta" : "")
+            libraryTargetFolder = "src"
+        }
+
+        feature GeneralFeatures {
+            TimerService = generateTimerServce
+        }
+
+    }
+}
+
+p. The syntax rules for expressions in generator models are the same as for statechart language expressions, see section "&quot;Expressions&quot;":../user-guide/statechart_language#sclang_expressions. However, expressions are constrained to a subset that semantically makes sense in the context of a generator model. That means that, for example, while you can use the @+@ operator to concatenate strings, you cannot use statechart-related constructs like the _after_ keyword or the _active()_ built-in function.
+
+In the properties definition section near the top of a generator model, a value assigned to a property must be given as a _literal_. More complex expressions are not supported there.
+
+The values assigned to properties are _default_ values only. That means, you can override them by different values when actually executing a generation model by way of running the "headless code generator":../user-guide/generating_code#hdls_headless_code_generation.
+
+For example, the command to call the headless generator might look like this:
+
+bc. scc -m myGenmodel.sct -v version=2.0;isBeta=false
+
+The name/value pairs specified by the @-v@ option would override the corresponding default values of the properties in the generator model. In this case, the properties _version_ and _isBeta_ would be set to the values "2.0" and "false", respectively. The variables _projectName_ and _generateTimerServce_ would maintain their default values as specified in the SGen file.
+
+
+
+
 h2(#codegen_general-concepts-of-the-state-machine-code). General concepts of the state machine code
 
 h3(#codegen_execution_schemes). Execution schemes
@@ -261,7 +303,7 @@ The generated state machine code implements one of two execution schemes:
 * In the _cycle-based execution scheme_, the state machine will first collect events and later process them in a run-to-completion step. Run-to-completion steps are typically executed in regular time intervals.
 * In the _event-driven execution scheme_, the state machine becomes active each time an event arrives and processes it right away in a run-to-completion step.
 
-You can select the execution scheme via the <code>@CycleBased</code> or <code>@EventDriven</code> annotations. Write the appropriate annotation to the top of your statechart's definition section, see sections "&quot;@CycleBased&quot;":../user-guide/statechart_language.html#statechart_language_cyclebased and "&quot;@EventDriven&quot;":../user-guide/statechart_language.html#statechart_language_eventdriven.
+You can select the execution scheme via the <code>@CycleBased</code> or <code>@EventDriven</code> annotations. Write the appropriate annotation to the top of your statechart's definition section, see sections "&quot;@CycleBased&quot;":../user-guide/statechart_language.html#sclang_cyclebased and "&quot;@EventDriven&quot;":../user-guide/statechart_language.html#sclang_eventdriven.
 
 
 h4(#codegen_cycle-based_execution_scheme). Cycle-based execution scheme
@@ -283,7 +325,7 @@ sc_runCycle(handle);
 
 ==</div>==
 
-bq. *Please note:* In the cycle-based execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language#raising-an-event is visible "downstream" in the run cycle only, i.e. in regions and the states therein that have not yet been processed in the current run cycle. Everything that is "upstream" in the run cycle cannot "see" this event. This is semantically different from the event-driven execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language#raising-and-processing-an-event. 
+bq. *Please note:* In the cycle-based execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language.html#sclang_raising_an_event is visible "downstream" in the run cycle only, i.e. in regions and the states therein that have not yet been processed in the current run cycle. Everything that is "upstream" in the run cycle cannot "see" this event. This is semantically different from the event-driven execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#sclang_raising_and_processing_an_event.
 
 
 h4(#codegen_event-driven_execution_scheme). Event-driven execution scheme
@@ -299,7 +341,7 @@ sc_raiseEventB(handle);
 
 ==</div>==
 
-bq. *Please note:* In the event-driven execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language#raising-an-event is not immediately acted upon by active states "downstream" in the event cycle, because only a single event can be processed at a time, which is the event that caused the run cycle to execute in the first place. The internally-raised event will trigger its own run-to-completion step subsequently, and it will thus be visible to all active states. This is semantically different from the cycle-based execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language#raising-and-processing-an-event. 
+bq. *Please note:* In the event-driven execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language.html#sclang_raising_an_event is not immediately acted upon by active states "downstream" in the event cycle, because only a single event can be processed at a time, which is the event that caused the run cycle to execute in the first place. The internally-raised event will trigger its own run-to-completion step subsequently, and it will thus be visible to all active states. This is semantically different from the cycle-based execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#sclang_raising_and_processing_an_event.
 
 
 
@@ -432,7 +474,16 @@ h3(#codegen_c_generated_code_files). Generated code files
 
 You will find the generated code in the _src-gen_ folder of the traffic light example.
 
-The C code generator generates three header files. The first one is _sc&#95;types.h_:
+The C code generator generates two or three header files, depending on the statechart.
+
+* _sc_types.h_: Always looks the same for all statecharts and contains definitions of the types used by the statechart. This file will not be overwritten, so you can change the definitions made in here, for example to adapt types to your target platform. Always generated if it does not exist yet.
+* _Statechart.h_: Named after your statechart, this file contains the basic declarations for everything needed in the statechart code. If the statechart is named TrafficLight, this file will be named _TrafficLight.h_. Always generated.
+* _StatechartRequired.h_: Named after your statechart, this file contains declarations for functions _the user will have to implement_, so it is only generated when one or more of the following conditions are fulfilled:
+** You declare operations in the statechart.
+** You use timing features in the statechart.
+** You activated the "Tracing feature":#codegen_c_tracing_feature in the code generator model.
+
+ The first one is _sc&#95;types.h_:
 
 bc.. 
 
@@ -484,8 +535,9 @@ The next header file is named after the statechart. In case of the traffic light
 
 bc.. 
 
-#ifndef TRAFFICLIGHT_H_
-#define TRAFFICLIGHT_H_
+
+#ifndef TRAFFICLIGHTWAITING_H_
+#define TRAFFICLIGHTWAITING_H_
 
 #include "../src/sc_types.h"
 		
@@ -493,162 +545,191 @@ bc..
 extern "C" { 
 #endif 
 
-/*! \file Header of the state machine 'TrafficLight'.
+/*! \file Header of the state machine 'TrafficLightWaiting'.
 */
+
 
 /*! Enumeration of all states */ 
 typedef enum
 {
-	TrafficLight_main_region_on,
-	TrafficLight_main_region_on_r1_StreetGreen,
-	TrafficLight_main_region_on_r1_PedWaiting,
-	TrafficLight_main_region_on_r1_PedWaiting_r1_waitOn,
-	TrafficLight_main_region_on_r1_PedWaiting_r1_waitOff,
-	TrafficLight_main_region_on_r1_StreetAttention,
-	TrafficLight_main_region_on_r1_StreetRed,
-	TrafficLight_main_region_on_r1_PedestrianGreen,
-	TrafficLight_main_region_on_r1_PedestrianRed,
-	TrafficLight_main_region_on_r1_StreetPrepare,
-	TrafficLight_main_region_on_r1_Safe,
-	TrafficLight_main_region_off,
-	TrafficLight_main_region_off_r1_YellowOn,
-	TrafficLight_main_region_off_r1_YellowOff,
-	TrafficLight_last_state
-} TrafficLightStates;
+	TrafficLightWaiting_last_state,
+	TrafficLightWaiting_main_region_on,
+	TrafficLightWaiting_main_region_on_r1_StreetGreen,
+	TrafficLightWaiting_main_region_on_r1_PedWaiting,
+	TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOn,
+	TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOff,
+	TrafficLightWaiting_main_region_on_r1_StreetAttention,
+	TrafficLightWaiting_main_region_on_r1_StreetRed,
+	TrafficLightWaiting_main_region_on_r1_PedestrianGreen,
+	TrafficLightWaiting_main_region_on_r1_PedestrianRed,
+	TrafficLightWaiting_main_region_on_r1_StreetPrepare,
+	TrafficLightWaiting_main_region_off,
+	TrafficLightWaiting_main_region_off_r1_YellowOn,
+	TrafficLightWaiting_main_region_off_r1_YellowOff
+} TrafficLightWaitingStates;
 
-/*! Type definition of the data structure for the TrafficLightIfaceTrafficLight interface scope. */
+/*! Type definition of the data structure for the TrafficLightWaitingIfaceTrafficLight interface scope. */
 typedef struct
 {
 	sc_boolean red;
 	sc_boolean yellow;
 	sc_boolean green;
-} TrafficLightIfaceTrafficLight;
+} TrafficLightWaitingIfaceTrafficLight;
 
-/*! Type definition of the data structure for the TrafficLightIfacePedestrian interface scope. */
+/*! Type definition of the data structure for the TrafficLightWaitingIfacePedestrian interface scope. */
 typedef struct
 {
 	sc_boolean request;
 	sc_boolean red;
 	sc_boolean green;
-} TrafficLightIfacePedestrian;
+} TrafficLightWaitingIfacePedestrian;
 
-/*! Type definition of the data structure for the TrafficLightIface interface scope. */
+/*! Type definition of the data structure for the TrafficLightWaitingIface interface scope. */
 typedef struct
 {
 	sc_boolean pedestrianRequest_raised;
 	sc_boolean onOff_raised;
-} TrafficLightIface;
+} TrafficLightWaitingIface;
 
-/*! Type definition of the data structure for the TrafficLightTimeEvents interface scope. */
+/*! Type definition of the data structure for the TrafficLightWaitingTimeEvents interface scope. */
 typedef struct
 {
-	sc_boolean trafficLight_main_region_on_r1_PedWaiting_tev0_raised;
-	sc_boolean trafficLight_main_region_on_r1_PedWaiting_r1_waitOn_tev0_raised;
-	sc_boolean trafficLight_main_region_on_r1_PedWaiting_r1_waitOff_tev0_raised;
-	sc_boolean trafficLight_main_region_on_r1_StreetAttention_tev0_raised;
-	sc_boolean trafficLight_main_region_on_r1_StreetRed_tev0_raised;
-	sc_boolean trafficLight_main_region_on_r1_PedestrianGreen_tev0_raised;
-	sc_boolean trafficLight_main_region_on_r1_PedestrianRed_tev0_raised;
-	sc_boolean trafficLight_main_region_on_r1_StreetPrepare_tev0_raised;
-	sc_boolean trafficLight_main_region_on_r1_Safe_tev0_raised;
-	sc_boolean trafficLight_main_region_off_r1_YellowOn_tev0_raised;
-	sc_boolean trafficLight_main_region_off_r1_YellowOff_tev0_raised;
-	sc_boolean trafficLight_tev0_raised;
-} TrafficLightTimeEvents;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedWaiting_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOn_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOff_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_StreetAttention_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_StreetRed_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedestrianGreen_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_PedestrianRed_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_on_r1_StreetPrepare_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_off_r1_YellowOn_tev0_raised;
+	sc_boolean trafficLightWaiting_main_region_off_r1_YellowOff_tev0_raised;
+} TrafficLightWaitingTimeEvents;
 
 
 /*! Define dimension of the state configuration vector for orthogonal states. */
-#define TRAFFICLIGHT_MAX_ORTHOGONAL_STATES 1
+#define TRAFFICLIGHTWAITING_MAX_ORTHOGONAL_STATES 1
+
+/*! Define maximum number of time events that can be active at once */
+#define TRAFFICLIGHTWAITING_MAX_ACTIVE_TIME_EVENTS 2
+
+/*! Define indices of states in the StateConfVector */
+#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_ON 0
+#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_ON_R1_STREETGREEN 0
+#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_ON_R1_PEDWAITING 0
+#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_ON_R1_PEDWAITING_R1_WAITON 0
+#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_ON_R1_PEDWAITING_R1_WAITOFF 0
+#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_ON_R1_STREETATTENTION 0
+#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_ON_R1_STREETRED 0
+#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_ON_R1_PEDESTRIANGREEN 0
+#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_ON_R1_PEDESTRIANRED 0
+#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_ON_R1_STREETPREPARE 0
+#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_OFF 0
+#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_OFF_R1_YELLOWON 0
+#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_OFF_R1_YELLOWOFF 0
 
 /*! 
- * Type definition of the data structure for the TrafficLight state machine.
+ * Type definition of the data structure for the TrafficLightWaiting state machine.
  * This data structure has to be allocated by the client code. 
  */
 typedef struct
 {
-	TrafficLightStates stateConfVector[TRAFFICLIGHT_MAX_ORTHOGONAL_STATES];
+	TrafficLightWaitingStates stateConfVector[TRAFFICLIGHTWAITING_MAX_ORTHOGONAL_STATES];
 	sc_ushort stateConfVectorPosition; 
 	
-	TrafficLightIfaceTrafficLight ifaceTrafficLight;
-	TrafficLightIfacePedestrian ifacePedestrian;
-	TrafficLightIface iface;
-	TrafficLightTimeEvents timeEvents;
-} TrafficLight;
+	TrafficLightWaitingIfaceTrafficLight ifaceTrafficLight;
+	TrafficLightWaitingIfacePedestrian ifacePedestrian;
+	TrafficLightWaitingIface iface;
+	TrafficLightWaitingTimeEvents timeEvents;
+} TrafficLightWaiting;
 
-/*! Initializes the TrafficLight state machine data structures. Must be called before first usage.*/
-extern void trafficLight_init(TrafficLight* handle);
+
+/*! Initializes the TrafficLightWaiting state machine data structures. Must be called before first usage.*/
+extern void trafficLightWaiting_init(TrafficLightWaiting* handle);
 
 /*! Activates the state machine */
-extern void trafficLight_enter(TrafficLight* handle);
+extern void trafficLightWaiting_enter(TrafficLightWaiting* handle);
 
 /*! Deactivates the state machine */
-extern void trafficLight_exit(TrafficLight* handle);
+extern void trafficLightWaiting_exit(TrafficLightWaiting* handle);
 
 /*! Performs a 'run to completion' step. */
-extern void trafficLight_runCycle(TrafficLight* handle);
+extern void trafficLightWaiting_runCycle(TrafficLightWaiting* handle);
 
 /*! Raises a time event. */
-extern void trafficLight_raiseTimeEvent(const TrafficLight* handle, sc_eventid evid);
+extern void trafficLightWaiting_raiseTimeEvent(const TrafficLightWaiting* handle, sc_eventid evid);
 
 /*! Gets the value of the variable 'red' that is defined in the interface scope 'TrafficLight'. */ 
-extern sc_boolean trafficLightIfaceTrafficLight_get_red(const TrafficLight* handle);
+extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_red(const TrafficLightWaiting* handle);
 /*! Sets the value of the variable 'red' that is defined in the interface scope 'TrafficLight'. */ 
-extern void trafficLightIfaceTrafficLight_set_red(TrafficLight* handle, sc_boolean value);
+extern void trafficLightWaitingIfaceTrafficLight_set_red(TrafficLightWaiting* handle, sc_boolean value);
 /*! Gets the value of the variable 'yellow' that is defined in the interface scope 'TrafficLight'. */ 
-extern sc_boolean trafficLightIfaceTrafficLight_get_yellow(const TrafficLight* handle);
+extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_yellow(const TrafficLightWaiting* handle);
 /*! Sets the value of the variable 'yellow' that is defined in the interface scope 'TrafficLight'. */ 
-extern void trafficLightIfaceTrafficLight_set_yellow(TrafficLight* handle, sc_boolean value);
+extern void trafficLightWaitingIfaceTrafficLight_set_yellow(TrafficLightWaiting* handle, sc_boolean value);
 /*! Gets the value of the variable 'green' that is defined in the interface scope 'TrafficLight'. */ 
-extern sc_boolean trafficLightIfaceTrafficLight_get_green(const TrafficLight* handle);
+extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_green(const TrafficLightWaiting* handle);
 /*! Sets the value of the variable 'green' that is defined in the interface scope 'TrafficLight'. */ 
-extern void trafficLightIfaceTrafficLight_set_green(TrafficLight* handle, sc_boolean value);
+extern void trafficLightWaitingIfaceTrafficLight_set_green(TrafficLightWaiting* handle, sc_boolean value);
 /*! Gets the value of the variable 'request' that is defined in the interface scope 'Pedestrian'. */ 
-extern sc_boolean trafficLightIfacePedestrian_get_request(const TrafficLight* handle);
+extern sc_boolean trafficLightWaitingIfacePedestrian_get_request(const TrafficLightWaiting* handle);
 /*! Sets the value of the variable 'request' that is defined in the interface scope 'Pedestrian'. */ 
-extern void trafficLightIfacePedestrian_set_request(TrafficLight* handle, sc_boolean value);
+extern void trafficLightWaitingIfacePedestrian_set_request(TrafficLightWaiting* handle, sc_boolean value);
 /*! Gets the value of the variable 'red' that is defined in the interface scope 'Pedestrian'. */ 
-extern sc_boolean trafficLightIfacePedestrian_get_red(const TrafficLight* handle);
+extern sc_boolean trafficLightWaitingIfacePedestrian_get_red(const TrafficLightWaiting* handle);
 /*! Sets the value of the variable 'red' that is defined in the interface scope 'Pedestrian'. */ 
-extern void trafficLightIfacePedestrian_set_red(TrafficLight* handle, sc_boolean value);
+extern void trafficLightWaitingIfacePedestrian_set_red(TrafficLightWaiting* handle, sc_boolean value);
 /*! Gets the value of the variable 'green' that is defined in the interface scope 'Pedestrian'. */ 
-extern sc_boolean trafficLightIfacePedestrian_get_green(const TrafficLight* handle);
+extern sc_boolean trafficLightWaitingIfacePedestrian_get_green(const TrafficLightWaiting* handle);
 /*! Sets the value of the variable 'green' that is defined in the interface scope 'Pedestrian'. */ 
-extern void trafficLightIfacePedestrian_set_green(TrafficLight* handle, sc_boolean value);
+extern void trafficLightWaitingIfacePedestrian_set_green(TrafficLightWaiting* handle, sc_boolean value);
 /*! Raises the in event 'pedestrianRequest' that is defined in the default interface scope. */ 
-extern void trafficLightIface_raise_pedestrianRequest(TrafficLight* handle);
+extern void trafficLightWaitingIface_raise_pedestrianRequest(TrafficLightWaiting* handle);
 
 /*! Raises the in event 'onOff' that is defined in the default interface scope. */ 
-extern void trafficLightIface_raise_onOff(TrafficLight* handle);
+extern void trafficLightWaitingIface_raise_onOff(TrafficLightWaiting* handle);
 
 
 /*!
  * Checks whether the state machine is active (until 2.4.1 this method was used for states).
  * A state machine is active if it was entered. It is inactive if it has not been entered at all or if it has been exited.
  */
-extern sc_boolean trafficLight_isActive(const TrafficLight* handle);
+extern sc_boolean trafficLightWaiting_isActive(const TrafficLightWaiting* handle);
 
 /*!
  * Checks if all active states are final. 
  * If there are no active states then the state machine is considered being inactive. In this case this method returns false.
  */
-extern sc_boolean trafficLight_isFinal(const TrafficLight* handle);
+extern sc_boolean trafficLightWaiting_isFinal(const TrafficLightWaiting* handle);
 
 /*! Checks if the specified state is active (until 2.4.1 the used method for states was called isActive()). */
-extern sc_boolean trafficLight_isStateActive(const TrafficLight* handle, TrafficLightStates state);
+extern sc_boolean trafficLightWaiting_isStateActive(const TrafficLightWaiting* handle, TrafficLightWaitingStates state);
+
+
 
 #ifdef __cplusplus
 }
 #endif 
 
-#endif /* TRAFFICLIGHT_H_ */
+#endif /* TRAFFICLIGHTWAITING_H_ */
+
 
 p. Within this header file an @enum@ containing the state names is defined as well as data structures for each of the statechart's interfaces. Additionally a structure for the statechart's time events is defined. The interfaces' and time events' data structures are nested into the parent structure @TrafficLight@. The client has to allocate memory for this structure. It is a common parameter of most functions the generated state machine code defines. In the subsequent text, this structure is called the _statechart data structure_.
+
+h4(#codegen_c_defines_and_constants). Defines and constants in the statechart header file
+
+The header file _Statechart.h_ contains several _#define_ statements and constants that will be explained in this section, based on the TrafficLight example and the header file shown above.
+
+* @#define TRAFFICLIGHTWAITING_MAX_ORTHOGONAL_STATES 1@: The orthogonality of the statechart, that is, how many states can be active at once. The _state configuration vector_ that manages the active states has this dimension.
+* @#define TRAFFICLIGHTWAITING_MAX_ACTIVE_TIME_EVENTS 2@: The maximum number of time events this statechart can wait for at once. When you write a timer service, you can use this number to plan for the amount of memory you will have to allocate for timers. (Take a look at the traffic light statechart. Can you find the state in which two time events will be active?)
+* @#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_ON 0@ (and so on): The index of the state in the _state configuration vector_. Because this example does not have orthogonal regions, all indizes are 0. If states are orthogonal to each other, their index will be different.t
+
 
 h4(#codegen_c_fundamental_statechart_functions). Fundamental statechart functions
 
 The generated code contains fundamental functions to initialize, enter, and exit a state machine, as well as a function to execute a run-to-completion step.
 
-In the header file, the function names are made up of the state machine name followed by the name of the respective functionality. For example, the functions of the traffic light example are generated as follows:
+In the header file, the function names are made up of the state machine name followed by the name of the respective functionality. For the traffic light example, these functions are generated as follows:
 
 bc.. 
 /*! Initializes the TrafficLight state machine data structures. Must be called before first usage.*/
@@ -681,21 +762,22 @@ h3(#codegen_c_time-controlled_state_machines). Time-controlled state machines
 
 If a statechart uses timing functionality or external operations, or tracing is activated in the generator model, an additional header file is generated. Its name matches the following pattern:
 
-_statechart_name_@Required.h@
+@statechart_name_Required.h@
 
 This header file declares functions the client code has to implement externally.
 
 h4(#codegen_c_time-controlled_state_machines_example). Example
 
-The traffic light example uses timing functionality, namely _after_ clauses. To support time-controlled behavior, the additional header file _TrafficLightRequired.h_ is generated. Note the two functions _trafficLight_setTimer_ and _trafficLight_unsetTimer_.
+The traffic light example uses timing functionality, namely _after_ clauses. To support time-controlled behavior, the additional header file _TrafficLightRequired.h_ is generated. Note the two functions _trafficLight_setTimer_ and _trafficLight_unsetTimer_..
 
 bc.. 
 
-#ifndef TRAFFICLIGHTREQUIRED_H_
-#define TRAFFICLIGHTREQUIRED_H_
+
+#ifndef TRAFFICLIGHTWAITINGREQUIRED_H_
+#define TRAFFICLIGHTWAITINGREQUIRED_H_
 
 #include "../src/sc_types.h"
-#include "TrafficLight.h"
+#include "TrafficLightWaiting.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -705,12 +787,8 @@ extern "C"
 /*! \file This header defines prototypes for all functions that are required by the state machine implementation.
 
 This is a state machine uses time events which require access to a timing service. Thus the function prototypes:
-	- trafficLight_setTimer and
-	- trafficLight_unsetTimer
-are defined.
-
-This state machine makes use of operations declared in the state machines interface or internal scopes. Thus the function prototypes:
-	- trafficLightIface_synchronize
+	- trafficLightWaiting_setTimer and
+	- trafficLightWaiting_unsetTimer
 are defined.
 
 These functions will be called during a 'run to completion step' (runCycle) of the statechart. 
@@ -720,8 +798,6 @@ There are some constraints that have to be considered for the implementation of 
  
 */
 
-
-extern void trafficLightIface_synchronize(const TrafficLight* handle);
 
 
 
@@ -736,14 +812,14 @@ extern void trafficLightIface_synchronize(const TrafficLight* handle);
 	\time_ms The time in milli seconds
 	\periodic Indicates the the time event must be raised periodically until the timer is unset 
 */
-extern void trafficLight_setTimer(TrafficLight* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
+extern void trafficLightWaiting_setTimer(TrafficLightWaiting* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 
 /*! This function has to unset timers for the time events that are required by the state machine. */
 /*! 
 	This function will be called for each time event taht is relevant for a state when a state will be left.
 	\param evid An unique identifier of the event.
 */
-extern void trafficLight_unsetTimer(TrafficLight* handle, const sc_eventid evid);
+extern void trafficLightWaiting_unsetTimer(TrafficLightWaiting* handle, const sc_eventid evid);
 
 
 
@@ -751,7 +827,8 @@ extern void trafficLight_unsetTimer(TrafficLight* handle, const sc_eventid evid)
 }
 #endif 
 
-#endif /* TRAFFICLIGHTREQUIRED_H_ */
+#endif /* TRAFFICLIGHTWAITINGREQUIRED_H_ */
+/
 
 p. Basically the proper time handling has to be implemented by the developer, because timer functions generally depend on the hardware target used. So for each hardware target the client code must provide a function to set a timer and another function to unset it. These functions have to be implemented externally and have to be linked to the generated code.
 
@@ -1060,7 +1137,7 @@ h3(#codegen_cpp_time-controlled_state_machines). Time-controlled state machines
 
 If a statechart uses timing functionality, additional classes are generated.
 
-The traffic light example uses timing funtionality, namely _after_ clauses. To support time-controlled behavior, the abstract classes _TimedStatemachineInterface_ and _TimerInterface_ are generated.
+The traffic light example uses timing funtionality, namely _after_ clauses. To support time-controlled behavior, the abstract classes _TimedStatemachineInterface_ and _TimerInterface_ are generated. Also, the main statechart class has two constants: @timeEventsCount@ and @parallelTimeEventsCount@, which are the overall number of time events and the statechart and the number of time events that can be active at once. For example, time events in states that follow each other cannot be active in parallel, while time events in parent states can be active together with their child states' time events. You can use these constants to allocate sufficient memory in a timer service.
 
 The _TimedStatemachineInterface_ interface extends the generated state machine by a _TimerInterface_ data member. The client code must provide an implementation of that interface.
 

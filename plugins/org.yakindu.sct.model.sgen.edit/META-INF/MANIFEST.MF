@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YAKINDU SGen Edit
 Bundle-SymbolicName: org.yakindu.sct.model.sgen.edit;singleton:=true
-Bundle-Version: 3.0.1.qualifier
+Bundle-Version: 3.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.yakindu.sct.model.sgen.provider.SgenEditPlugin$Implementation
 Bundle-Vendor: statecharts.org
@@ -16,5 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.sgraph.edit;visibility:=reexport,
  org.eclipse.xtext.xbase;visibility:=reexport,
  org.yakindu.base.types;visibility:=reexport,
- org.yakindu.base.types.edit;visibility:=reexport
+ org.yakindu.base.types.edit;visibility:=reexport,
+ org.yakindu.base.expressions;visibility:=reexport,
+ org.yakindu.base.expressions.edit;visibility:=reexport
 Bundle-ActivationPolicy: lazy

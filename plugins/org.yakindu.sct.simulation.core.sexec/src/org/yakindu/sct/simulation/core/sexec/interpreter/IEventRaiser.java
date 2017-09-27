@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.simulation.core.sexec.interpreter;
 
-import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
+import org.yakindu.sct.model.sruntime.ExecutionEvent;
 
 /**
  * 

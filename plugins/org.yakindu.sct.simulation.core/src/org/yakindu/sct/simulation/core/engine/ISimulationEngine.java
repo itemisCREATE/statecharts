@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.simulation.core.engine;
 
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 
 /**
  * 

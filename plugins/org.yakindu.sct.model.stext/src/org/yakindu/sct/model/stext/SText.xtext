@@ -86,9 +86,6 @@ SimpleArgument returns exp::Argument:
 	{exp::Argument} value=ConditionalExpression
 ;
 
-TypeSpecifier returns types::TypeSpecifier:
-	type=[types::Type|FQN] ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)*'>'))?;
-
 Parameter returns types::Parameter:
 	 name=XID (varArgs?='...')? ':' typeSpecifier=TypeSpecifier;
 
