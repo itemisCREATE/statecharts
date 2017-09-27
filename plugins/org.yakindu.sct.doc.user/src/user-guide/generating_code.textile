@@ -476,12 +476,12 @@ You will find the generated code in the _src-gen_ folder of the traffic light ex
 
 The C code generator generates two or three header files, depending on the statechart.
 
-* _sc_types.h_: Always looks the same for all statecharts and contains definitions of the types used by the statechart. This file will not be overwritten, so you can change the definitions made in here, for example to adapt types to your target platform. Always generated if it does not exist yet.
-* _Statechart.h_: Named after your statechart, this file contains the basic declarations for everything needed in the statechart code. If the statechart is named TrafficLight, this file will be named _TrafficLight.h_. Always generated.
-* _StatechartRequired.h_: Named after your statechart, this file contains declarations for functions _the user will have to implement_, so it is only generated when one or more of the following conditions are fulfilled:
-** You declare operations in the statechart.
-** You use timing features in the statechart.
-** You activated the "Tracing feature":#codegen_c_tracing_feature in the code generator model.
+* _sc_types.h_: Contains type definitions used by the statechart. Since the contents of this file is always the same for all statecharts, it will be generated only if it does not yet exist. And since it will never be overwritten, you can change or amend the definitions made there. For example, you might wish to adapt the types to better match your target platform.
+* _Statechart.h_: Contains the basic declarations for everything needed in the underlying statechart's code. The file is named after the statechart, i.e. if the statechart's name is _TrafficLight_, this file's name will be _TrafficLight.h_. It is always generated.
+* _StatechartRequired.h_: Contains declarations of functions _the developer has to implement_. The file is named after the statechart, i.e. if the statechart's name is _TrafficLight_, this file's name will be _TrafficLightRequired.h_. It is generated only if one or more of the following conditions are fulfilled:
+** The statechart declares _operations_.
+** The statechart uses _timing features_.
+** The code generator model activates the "Tracing feature":#codegen_c_tracing_feature.
 
  The first one is _sc&#95;types.h_:
 
@@ -716,13 +716,14 @@ extern sc_boolean trafficLightWaiting_isStateActive(const TrafficLightWaiting* h
 
 p. Within this header file an @enum@ containing the state names is defined as well as data structures for each of the statechart's interfaces. Additionally a structure for the statechart's time events is defined. The interfaces' and time events' data structures are nested into the parent structure @TrafficLight@. The client has to allocate memory for this structure. It is a common parameter of most functions the generated state machine code defines. In the subsequent text, this structure is called the _statechart data structure_.
 
-h4(#codegen_c_defines_and_constants). Defines and constants in the statechart header file
 
-The header file _Statechart.h_ contains several _#define_ statements and constants that will be explained in this section, based on the TrafficLight example and the header file shown above.
+h4(#codegen_c_defines_and_constants_in_the_statechart_header_file). Defines and constants in the statechart header file
 
-* @#define TRAFFICLIGHTWAITING_MAX_ORTHOGONAL_STATES 1@: The orthogonality of the statechart, that is, how many states can be active at once. The _state configuration vector_ that manages the active states has this dimension.
-* @#define TRAFFICLIGHTWAITING_MAX_ACTIVE_TIME_EVENTS 2@: The maximum number of time events this statechart can wait for at once. When you write a timer service, you can use this number to plan for the amount of memory you will have to allocate for timers. (Take a look at the traffic light statechart. Can you find the state in which two time events will be active?)
-* @#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_ON 0@ (and so on): The index of the state in the _state configuration vector_. Because this example does not have orthogonal regions, all indizes are 0. If states are orthogonal to each other, their index will be different.t
+The header file _Statechart.h_ contains several _#define_ statements for constants that are explained below, based on the _TrafficLight_ example and the header file shown above.
+
+* @#define TRAFFICLIGHTWAITING_MAX_ORTHOGONAL_STATES 1@: The orthogonality of this statechart, that is, the maximum number of states that will be active at the same time. The _state configuration vector_ manages the active states. It has this many entries.
+* @#define TRAFFICLIGHTWAITING_MAX_ACTIVE_TIME_EVENTS 2@: The maximum number of time events this statechart will have to wait for simultaneously. When writing a timer service, you can use this constant to plan for the amount of memory you will have to allocate for timers. (Take a look at the traffic light statechart. Can you find the state in which two time events will be active at the same time?)
+* @#define SCVI_TRAFFICLIGHTWAITING_MAIN_REGION_ON 0@ (and so on): The index of the state in the _state configuration vector_. Since this example does not have any orthogonal regions, all indices are 0. If states are orthogonal to each other, their index will be different.
 
 
 h4(#codegen_c_fundamental_statechart_functions). Fundamental statechart functions
@@ -748,6 +749,7 @@ p.
 
 <ul><li><p>The _init()_ function is used to initialize the internal objects of the state machine right after its instantiation. Variables are initialized to their respective default values. If the statechart defines any initialized variables, these initializations are also done in the _init()_ function.</p></li><li><p>The _enter()_ function must be called to enter the state machine. It brings the state machine to a well-defined state.</p></li><li><p>The _exit()_ function is used to leave a state machine statefully. If for example a history state is used in one of the top regions, the last active state is stored and the state machine is left via _exit()_. Re-entering it via _enter()_ continues to work with the saved state.</p></li><li><p>The _runCycle()_ function is used to trigger a run-to-completion step in which the state machine evaluates arising events and computes possible state changes. Somewhat simplified, a run-to-completion cycle consists of the following steps:</p><ol style="list-style-type: decimal;"><li><p>Clear the list of outgoing events.</p></li><li><p>Check whether any events have occurred which are leading to a state change.</p></li><li><p>If a state change has to be done:</p><ol style="list-style-type: decimal;"><li><p>Make the present state inactive.</p></li><li><p>Execute exit actions of the present state.</p></li><li><p>Save history state, if necessary.</p></li><li><p>Execute transition actions, if any.</p></li><li><p>Execute entry actions of the new state.</p></li><li><p>Make the new state active.</p></li></ol></li><li><p>Clear the list of incoming events.</p></li></ol></li></ul>
 
+
 h4(#codegen_c_accessing_variables_and_events). Accessing variables and events
 
 The client code can read and write state machine variables and raise state machine events. The getters and setters for each variable and event are also contained in the header file. The function names are matching the following pattern:
@@ -762,7 +764,7 @@ h3(#codegen_c_time-controlled_state_machines). Time-controlled state machines
 
 If a statechart uses timing functionality or external operations, or tracing is activated in the generator model, an additional header file is generated. Its name matches the following pattern:
 
-@statechart_name_Required.h@
+_statechart_name_@Required.h@
 
 This header file declares functions the client code has to implement externally.
 
@@ -1137,7 +1139,7 @@ h3(#codegen_cpp_time-controlled_state_machines). Time-controlled state machines
 
 If a statechart uses timing functionality, additional classes are generated.
 
-The traffic light example uses timing funtionality, namely _after_ clauses. To support time-controlled behavior, the abstract classes _TimedStatemachineInterface_ and _TimerInterface_ are generated. Also, the main statechart class has two constants: @timeEventsCount@ and @parallelTimeEventsCount@, which are the overall number of time events and the statechart and the number of time events that can be active at once. For example, time events in states that follow each other cannot be active in parallel, while time events in parent states can be active together with their child states' time events. You can use these constants to allocate sufficient memory in a timer service.
+The traffic light example uses timing funtionality, namely _after_ clauses. To support time-controlled behavior, the abstract classes _TimedStatemachineInterface_ and _TimerInterface_ are generated. Also, the main statechart class has two constants: @timeEventsCount@ and @parallelTimeEventsCount@, which are the overall number of time events in the statechart and the maximum number of time events that can be active simultaneously. For example, time events in states within the same region can never be active in parallel, while time events in a parent state can be active together with the time events of child states. You can use these constants in a timer service to allocate sufficient memory for the timers.
 
 The _TimedStatemachineInterface_ interface extends the generated state machine by a _TimerInterface_ data member. The client code must provide an implementation of that interface.
 
