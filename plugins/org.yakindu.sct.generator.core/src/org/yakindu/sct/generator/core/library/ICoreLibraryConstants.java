@@ -23,6 +23,7 @@ public interface ICoreLibraryConstants {
 	String OUTLET_FEATURE_TARGET_FOLDER = "targetFolder";
 	String OUTLET_FEATURE_LIBRARY_TARGET_FOLDER = "libraryTargetFolder";
 	String OUTLET_FEATURE_API_TARGET_FOLDER = "apiTargetFolder";
+	String OUTLET_FEATURE_SKIP_LIBRARY_FILES = "skipLibraryFiles";
 	String LICENSE_HEADER = "LicenseHeader";
 	String LICENSE_TEXT = "licenseText";
 

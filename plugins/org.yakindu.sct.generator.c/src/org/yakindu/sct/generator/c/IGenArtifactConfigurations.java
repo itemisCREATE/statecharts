@@ -31,6 +31,11 @@ public interface IGenArtifactConfigurations {
 	void configure(String artifactName, String outputConfigName, IContentTemplate contentTemplate);
 
 	/**
+	 * Adds a configuration for a generation artifact.
+	 */
+	void configure(String artifactName, String outputConfigName, IContentTemplate contentTemplate, boolean skip);
+
+	/**
 	 * @return all stored configurations
 	 */
 	List<GenArtifactConfiguration> getConfigurations();
@@ -47,11 +52,18 @@ public interface IGenArtifactConfigurations {
 		private String outputName;
 		private String name;
 		private IContentTemplate contentTemplate;
+		
+		private boolean skip;
 
 		public GenArtifactConfiguration(String name, String outputConfigName, IContentTemplate contentTemplate) {
+			this(name, outputConfigName, contentTemplate, false);
+		}
+		
+		public GenArtifactConfiguration(String name, String outputConfigName, IContentTemplate contentTemplate, boolean skip) {
 			this.name = name;
 			this.outputName = outputConfigName;
 			this.contentTemplate = contentTemplate;
+			this.skip = skip;
 		}
 
 		public String getName() {
@@ -64,6 +76,10 @@ public interface IGenArtifactConfigurations {
 
 		public IContentTemplate getContentTemplate() {
 			return contentTemplate;
+		}
+		
+		public boolean getSkip() {
+			return skip;
 		}
 	}
 
