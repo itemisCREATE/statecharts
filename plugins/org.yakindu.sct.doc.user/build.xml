@@ -174,9 +174,9 @@
 
             <!-- Textile source files to turn into HTML: -->
             <fileset id="fileset.eclipsehelp" dir="${src.dir}">
-                <include name="installation/installation.textile" />
                 <include name="tutorials/tutorials.textile" />
                 <include name="user-guide/overview.textile" />
+                <include name="user-guide/installation.textile" />
                 <include name="user-guide/editing_statecharts.textile" />
                 <include name="user-guide/simulating_statecharts.textile" />
                 <include name="user-guide/c-domain.textile" />
@@ -344,20 +344,6 @@
         <sequential>
             <taskdef classpathref="wikitext.all.classpath" resource="org/eclipse/mylyn/wikitext/ant/tasks.properties" />
 
-            <!-- Installation Guide -->
-            <create-website-part name="YSCT-installation" title="YAKINDU Statechart Tools Installation Guide">
-                <textile-files>
-                    <filelist dir="${src.dir}">
-                        <file name="installation/installation.textile" />
-                    </filelist>
-                </textile-files>
-                <image-files>
-                    <fileset dir="${src.dir}">
-                        <include name="installation/images/**/*" />
-                    </fileset>
-                </image-files>
-            </create-website-part>
-
             <!-- Tutorials -->
             <create-website-part name="YSCT-tutorials" title="YAKINDU Statechart Tools Tutorials">
                 <textile-files>
@@ -377,6 +363,7 @@
                 <textile-files>
                     <filelist dir="${src.dir}">
                         <file name="user-guide/overview.textile" />
+                        <file name="user-guide/installation.textile" />
                         <file name="user-guide/editing_statecharts.textile" />
                         <file name="user-guide/simulating_statecharts.textile" />
                         <file name="user-guide/c-domain.textile" />
@@ -494,9 +481,6 @@
                                            work.dir="${work.dir}"
                                            html.file="${index.html}" />
             <adjust-website-document-links document.dir.name="user-guide"
-                                           work.dir="${work.dir}"
-                                           html.file="${index.html}" />
-            <adjust-website-document-links document.dir.name="installation"
                                            work.dir="${work.dir}"
                                            html.file="${index.html}" />
 
