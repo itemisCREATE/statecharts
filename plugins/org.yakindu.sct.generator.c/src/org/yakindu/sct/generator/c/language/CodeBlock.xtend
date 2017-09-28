@@ -8,25 +8,12 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common
-
-import org.yakindu.sct.generator.common.ICodePart
+package org.yakindu.sct.generator.c.language
 
 /**
  * @author rbeckmann
  *
  */
-abstract class CodePart implements ICodePart {
+class CodeBlock implements ICodeBlock {
 	
-	override charAt(int index) {
-		return toString.charAt(index)
-	}
-	
-	override length() {
-		return toString.length
-	}
-	
-	override subSequence(int beginIndex, int endIndex) {
-		return toString.subSequence(beginIndex, endIndex);
-	}
 }
