@@ -331,6 +331,7 @@
                destdir="${bin.dir}"
                classpathref="wikitext.all.classpath"
                debug="true"
+               fork="true"
                optimize="false"
                includeantruntime="false">
         </javac>
