@@ -32,4 +32,12 @@ abstract class CodeBlock extends org.yakindu.sct.generator.common.CodeBlock impl
 	override getBlockOpen() {
 		return BLOCKOPEN
 	}
+	
+	override toString() {
+		'''
+		«blockOpen»
+			«content»
+		«blockClose»
+		'''
+	}
 }

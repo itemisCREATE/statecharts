@@ -10,10 +10,13 @@
  */
 package org.yakindu.sct.generator.common;
 
+import java.util.List;
+
 /**
  * @author rbeckmann
  *
  */
 public interface IFunction extends ICodeBlock, IModifierOwner, ITypeOwner, INameOwner {
-	
+	public List<CharSequence> getParameters();
+	public void setParameters(List<CharSequence> parameter);
 }

@@ -8,12 +8,19 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common;
+package org.yakindu.sct.generator.common
+
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author rbeckmann
  *
  */
-public interface ICodePart extends CharSequence {
-
+class Parameter extends CodePart implements IParameter {
+	@Accessors protected IType type;
+	@Accessors protected CharSequence name;
+	
+	override toString() {
+		'''«type» «name»'''
+	}
 }

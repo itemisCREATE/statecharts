@@ -18,6 +18,5 @@ import java.util.List;
  */
 public interface IModifierOwner extends ICodePart {
 	public List<IModifier> getModifiers();
-	public void addModifier(IModifier part);
-	public void addModifiers(List<IModifier> part);
+	public void setModifiers(List<IModifier> modifiers);
 }

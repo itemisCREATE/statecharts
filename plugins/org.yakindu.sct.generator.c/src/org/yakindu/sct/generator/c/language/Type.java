@@ -10,23 +10,24 @@
  */
 package org.yakindu.sct.generator.c.language;
 
-import org.yakindu.sct.generator.common.IModifier;
+import org.yakindu.sct.generator.common.IType;
 
 /**
  * @author rbeckmann
  *
  */
-public enum Modifier implements IModifier, CKeywords {
-	STATIC (CKeywords.STATIC),
-	EXTERN (CKeywords.EXTERN)
-	;
+public enum Type implements IType {
+	VOID ("void");
 	
-	protected final String s;
-	
-	Modifier(String s) {
+	protected String s;
+	Type(String s) {
 		this.s = s;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Enum#toString()
+	 */
+	@Override
 	public String toString() {
 		return s;
 	}

@@ -8,12 +8,20 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.common;
+package org.yakindu.sct.generator.common
 
 /**
  * @author rbeckmann
  *
  */
-public interface ICodePart extends CharSequence {
+abstract class CodeBlock extends CodePart implements ICodeBlock {
+	protected CharSequence content;
+	
+	override getContent() {
+		return content;
+	}
 
+	override setContent(CharSequence content) {
+		this.content = content;
+	}
 }

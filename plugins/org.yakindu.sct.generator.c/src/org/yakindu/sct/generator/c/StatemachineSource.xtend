@@ -13,6 +13,8 @@ package org.yakindu.sct.generator.c
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.util.Strings
+import org.yakindu.sct.generator.c.language.Function
+import org.yakindu.sct.generator.c.language.Type
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -20,9 +22,9 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class StatemachineSource implements IContentTemplate {
 	
@@ -62,6 +64,8 @@ class StatemachineSource implements IContentTemplate {
 		«initFunction»
 		
 		«enterFunction»
+
+		«enterFunction2»
 		
 		«exitFunction»
 		
@@ -123,6 +127,15 @@ class StatemachineSource implements IContentTemplate {
 			«enterSequences.defaultSequence.code»
 		}
 	'''
+	
+	def enterFunction2(ExecutionFlow it) {
+		val func = new Function()
+		func.name = '''«type.toFirstLower»enter'''
+		func.parameters += scHandleDecl
+		func.type = Type.VOID
+		func.content = enterSequences.defaultSequence.code
+		return func 
+	}
 	
 	def exitFunction(ExecutionFlow it) '''
 		void «type.toFirstLower»_exit(«scHandleDecl»)

@@ -8,29 +8,14 @@
  * 	rbeckmann - initial API and implementation
  * 
  */
-package org.yakindu.sct.generator.c.language;
-
-import org.yakindu.sct.generator.common.IModifier;
+package org.yakindu.sct.generator.common;
 
 /**
  * @author rbeckmann
  *
  */
-public enum Modifier implements IModifier, CKeywords {
-	STATIC (CKeywords.STATIC),
-	EXTERN (CKeywords.EXTERN)
-	;
-	
-	protected final String s;
-	
-	Modifier(String s) {
-		this.s = s;
-	}
-	
-	public String toString() {
-		return s;
-	}
-	
+public abstract class CodePart implements ICodePart {
+
 	/* (non-Javadoc)
 	 * @see java.lang.CharSequence#charAt(int)
 	 */
