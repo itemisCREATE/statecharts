@@ -25,7 +25,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -55,7 +55,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
@@ -86,7 +86,7 @@ GeneratorModel for sctunit::c {
 		}
 		
 		feature SGenModel{
-			GenerateSGen = "true"
+			GenerateSGen = true
 		}
 		
 	}
