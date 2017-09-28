@@ -1,7 +1,5 @@
 
-p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/glossary.textile
-
-h1(#glossary). Glossary.
+h1(#glossary). Glossary
 
 h2(#glossary_action). Action
 

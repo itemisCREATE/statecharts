@@ -1,6 +1,4 @@
 
-p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/editing_statecharts.textile
-
 h1(#edit_editing_statecharts). Editing statecharts
 
 h2(#edit_creating_and_deleting_statecharts). Creating and deleting statecharts

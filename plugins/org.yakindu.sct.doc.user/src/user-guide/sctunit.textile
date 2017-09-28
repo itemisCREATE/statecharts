@@ -1,10 +1,4 @@
 
-p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/sctunit.textile
-
-
-
-
-
 h1(#sctunit_test-driven_statechart_development_with_sctunit). Test-driven statechart development with SCTUnit
 
 h2(#sctunit_brief_introduction_to_test-driven_development). Brief introduction to test-driven development

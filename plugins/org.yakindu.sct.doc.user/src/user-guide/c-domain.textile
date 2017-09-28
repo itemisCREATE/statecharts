@@ -1,9 +1,7 @@
 
-p. 
+h1{%EARLY_SEPARATOR%}. 
 
 ==<div class="pro-feature">==
-
-p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/c-domain.textile
 
 h1(#cdom_deep_c_integration). Deep C integration: Integrating your C source code with your state machines
 
@@ -631,10 +629,6 @@ In C it is possible to define structs, unions and enums without a _typedef_. The
 
 
 
-h3(#cdom_performance_issues_with_very_large_c_projects). Performance issues with very large C projects
-h4(#cdom_processing_header_files_and_macro_definitions). Processing header files and macro definitions
-h4(#cdom_excluding_c_header_files_from_being_parsed). Excluding C header files from being parsed
-h4(#cdom_deactivating_the_ccpp_indexer). Deactivating the C/C++ indexer
 h3(#cdom_please_get_in_touch_with_us). Please get in touch with us
 
 Please note that the preceding list of restrictions might not be complete. If you discover any further problems, please do not hesitate to contact us! Your feedback is highly appreciated!

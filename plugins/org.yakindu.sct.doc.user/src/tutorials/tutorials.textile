@@ -1,6 +1,4 @@
 
-p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/tutorials/tutorials.textile
-
 
 
 
@@ -50,7 +48,7 @@ As an example, we will take the light switch statechart and generate Java source
 That's it. If you want to know more, take the time and work through the "Comprehensive Tutorial":#tutorial_comprehensive_tutorial.
 
 
-p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/tutorials/tutorials.textile
+
 
 h1(#tutorial_comprehensive_tutorial). Comprehensive tutorial
 

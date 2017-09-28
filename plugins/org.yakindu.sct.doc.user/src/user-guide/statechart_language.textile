@@ -1,7 +1,5 @@
 
-p(edit-on-github). "Edit on GitHub":https://github.com/Yakindu/statecharts/edit/master/plugins/org.yakindu.sct.doc.user/src/user-guide/statechart_language.textile
-
-h1(#sclang_the_statechart_language). The statechart language
+h1(#sclang_statechart_language_reference). Statechart language reference
 
 The statechart language is used to describe statecharts. It consists both of graphical and of textual elements.
 
