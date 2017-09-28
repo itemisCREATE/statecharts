@@ -20,31 +20,61 @@ If these code generators don't suit your needs, you are free to develop your ver
 
 
 
-h2(#codegen_general_concepts_of_the_generated_state_machine_code). General concepts of the generated state machine code
+h2(#codegen_general_concepts_of_the_state_machine_code). General concepts of the state machine code
 
-h3(#codegen_generating_code_cycle-based_execution). Cycle-based execution
+h3(#codegen_execution_schemes). Execution schemes
 
-The generated state machine code implements a so-called _cycle-based execution scheme_. Each run cycle consists of two different phases:
-# In the first phase, incoming events are collected.
-# In the second phase, _runCycle()_ is executed.
+The generated state machine code implements one of two execution schemes:
+* In the _cycle-based execution scheme_, the state machine will first collect events and later process them in a run-to-completion step. Run-to-completion steps are typically executed in regular time intervals.
+* In the _event-driven execution scheme_, the state machine becomes active each time an event arrives and processes it right away in a run-to-completion step.
 
-This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.g. something like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the "input-process-output (IPO) model":https://en.wikipedia.org/wiki/IPO_model.
+You can select the execution scheme via the <code>@CycleBased</code> or <code>@EventDriven</code> annotations. Write the appropriate annotation to the top of your statechart's definition section, see sections "&quot;@CycleBased&quot;":../user-guide/statechart_language.html#sclang_cyclebased and "&quot;@EventDriven&quot;":../user-guide/statechart_language.html#sclang_eventdriven.
 
-In other cases an event-driven approach might be more suitable. This can be implemented e.g. by directly calling _runCycle()_ as soon as a certain event occurs, like in:
+h4(#codegen_cycle-based_execution_scheme). Cycle-based execution scheme
+
+In the cycle-based execution scheme, each run cycle consists of two different phases:
+# In the first phase, incoming events and time events are collected.
+# In the second phase, _runCycle()_ is executed and processes the events collected in the first phase.
+
+This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.g. a guard condition like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the IPO (input processing output) model.
+
+==<div class="example">==
+
+Example: The sample client code below first raises events _eventA_ and _eventB_ in the state machine. These events are lingering in the state machine until the client code calls _runCycle()_ to actually process the events.
 
 bc. sc_raiseEventA(handle);
+sc_raiseEventB(handle);
+…
 sc_runCycle(handle);
 
-More sophisticated approaches could care about buffering of events, managing an event queue, dealing with priority events, and so on. However, since this is out of the the generated code's scope, it is the client code's responsibility.
+==</div>==
+
+bq. *Please note:* In the cycle-based execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language.html#sclang_raising_an_event is visible "downstream" in the run cycle only, i.e. in regions and the states therein that have not yet been processed in the current run cycle. Everything that is "upstream" in the run cycle cannot "see" this event. This is semantically different from the event-driven execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#sclang_raising_and_processing_an_event.
+
+
+h4(#codegen_event-driven_execution_scheme). Event-driven execution scheme
+
+In the _event-driven execution scheme_, each incoming event or time event immediately triggers the execution of a run-to-completion step. As a consequence, the state machine will never process two events simultaneously, and a guard condition like @[eventA && eventB]@ will never become true.
+
+==<div class="example">==
+
+Example: The sample client code below raises the events _eventA_ and _eventB_. The state machine processes each event immediately as it arrives, triggered by the respective _raise…()_ method. Thus the client code does not need to call _runCycle()_.
+
+bc. sc_raiseEventA(handle);
+sc_raiseEventB(handle);
+
+==</div>==
+
+bq. *Please note:* In the event-driven execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language.html#sclang_raising_an_event is not immediately acted upon by active states "downstream" in the event cycle, because only a single event can be processed at a time, which is the event that caused the run cycle to execute in the first place. The internally-raised event will trigger its own run-to-completion step subsequently, and it will thus be visible to all active states. This is semantically different from the cycle-based execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#sclang_raising_and_processing_an_event.
 
 
 
-h3(#codegen_generating_code_responsibilities_of_generated_code). Responsibilities of generated code
+h3(#codegen_responsibilities-of-generated-code). Responsibilities of generated code
 
-The source code created by YAKINDU Statechart Tools' code generators supports a basic statechart execution model that can be used to implement different variants. It is important to understand the responsibilities of the generated code, i.&nbsp;e. what it cares about and what it doesn't. The remaining issues are out of scope and must be dealt with in the client code the developer has to provide.
+The generated source code supports a basic statechart execution model that can be used to implement different variants. It is important to understand the responsibilities of the generated code, i.e. what it cares about and what it doesn't. The remaining issues are out of scope and must be dealt with in the client code the developer has to provide.
 
 The generated code basically takes care about the following:
-* It provides the interfaces to access state machine variables and events from client code.
+* It provides the interfaces to access state machine variables and events.
 * It initializes the state machine.
 * It implements the execution semantics within a run-to-completion (RTC) step. This is everything that is happening within the _runCycle()_ function.
 
@@ -56,7 +86,7 @@ Out of scope are:
 * *Scheduling:* The code generator cannot make any general assumptions about scheduling mechanisms and constraints.
 * *Timers:* The code generator does not know how the system handles times. If any specific time-dependend behavior is required, the client code has to contribute it.
 * *Event handling:* The code generator cannot know and does not prescribe how events are entering the system. Therefore deciding when events will be delivered to the state machine is an outside (client code) responsibility.
-* *Concurrency:* The client code has to care about any synchronization of threads.
+* *Concurrency:* The client code has to care about any thread synchronization.
 * *Memory management:* The generated state machine code will never allocate any memory. Allocating the memory needed for the statechart structure is a responsibility of the client code.
 
 All these things are out of the generated code's scope, since the code generators coming with YAKINDU Statechart Tools cannot provide tailored solutions without knowing any details about a respective specific environment, like runtime system, libraries, etc.
@@ -65,9 +95,9 @@ In order to have a better code generator support for specific usage patterns, yo
 
 
 
-h3(#codegen_generating_code_thread-safe_execution). Thread-safe execution
+h3(#codegen_thread-safe_execution). Thread-safe execution
 
-In order to circumvent the missing thread-safety of the _runCycle()_ method, the Java code generator has an option for generating a so-called runnable wrapper, providing event queueing and multi-threading support. For details, see section "&quot;RunnableWrapper feature&quot;":#codegen_java_runnablewrapper_feature. It is easy to implement this as a general solution for Java, since the programming language provides corresponding standard features that by definition are available everywhere and can simply be used.
+In order to circumvent the missing thread-safety of the _runCycle()_ method, the Java code generator has an option for generating a so-called runnable wrapper, providing event queueing and multi-threading support. For details, see section "&quot;RunnableWrapper&quot;":#codegen_java_runnablewrapper_feature. It is easy to implement this as a general solution for Java, since the programming language provides corresponding standard features that by definition are available everywhere by can simply be used.
 
 The C programming language, however, does not have any standardized threading features. Therefore a general solution cannot be given. Specific solutions for specific threading libraries would require the implementation of a suitable code generator extension.
 
@@ -292,89 +322,6 @@ For example, the command to call the headless generator might look like this:
 bc. scc -m myGenmodel.sct -v version=2.0;isBeta=false
 
 The name/value pairs specified by the @-v@ option would override the corresponding default values of the properties in the generator model. In this case, the properties _version_ and _isBeta_ would be set to the values "2.0" and "false", respectively. The variables _projectName_ and _generateTimerServce_ would maintain their default values as specified in the SGen file.
-
-
-
-
-h2(#codegen_general-concepts-of-the-state-machine-code). General concepts of the state machine code
-
-h3(#codegen_execution_schemes). Execution schemes
-
-The generated state machine code implements one of two execution schemes:
-* In the _cycle-based execution scheme_, the state machine will first collect events and later process them in a run-to-completion step. Run-to-completion steps are typically executed in regular time intervals.
-* In the _event-driven execution scheme_, the state machine becomes active each time an event arrives and processes it right away in a run-to-completion step.
-
-You can select the execution scheme via the <code>@CycleBased</code> or <code>@EventDriven</code> annotations. Write the appropriate annotation to the top of your statechart's definition section, see sections "&quot;@CycleBased&quot;":../user-guide/statechart_language.html#sclang_cyclebased and "&quot;@EventDriven&quot;":../user-guide/statechart_language.html#sclang_eventdriven.
-
-
-h4(#codegen_cycle-based_execution_scheme). Cycle-based execution scheme
-
-In the cycle-based execution scheme, each run cycle consists of two different phases:
-# In the first phase, incoming events and time events are collected.
-# In the second phase, _runCycle()_ is executed and processes the events collected in the first phase.
-
-This approach allows for explicitly processing several events at the same time as well as for checking combinations of events, e.g. a guard condition like @[eventA && eventB]@. This is very useful for systems that are close to hardware and input signals. Basically it is the IPO (input processing output) model.
-
-==<div class="example">==
-
-Example: The sample client code below first raises events _eventA_ and _eventB_ in the state machine. These events are lingering in the state machine until the client code calls _runCycle()_ to actually process the events.
-
-bc. sc_raiseEventA(handle);
-sc_raiseEventB(handle);
-…
-sc_runCycle(handle);
-
-==</div>==
-
-bq. *Please note:* In the cycle-based execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language.html#sclang_raising_an_event is visible "downstream" in the run cycle only, i.e. in regions and the states therein that have not yet been processed in the current run cycle. Everything that is "upstream" in the run cycle cannot "see" this event. This is semantically different from the event-driven execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#sclang_raising_and_processing_an_event.
-
-
-h4(#codegen_event-driven_execution_scheme). Event-driven execution scheme
-
-In the _event-driven execution scheme_, each incoming event or time event immediately triggers the execution of a run-to-completion step. As a consequence, the state machine will never process two events simultaneously, and a guard condition like @[eventA && eventB]@ will never become true.
-
-==<div class="example">==
-
-Example: The sample client code below raises the events _eventA_ and _eventB_. The state machine processes each event immediately as it arrives, triggered by the respective _raise…()_ method. Thus the client code does not need to call _runCycle()_.
-
-bc. sc_raiseEventA(handle);
-sc_raiseEventB(handle);
-
-==</div>==
-
-bq. *Please note:* In the event-driven execution scheme, an event that has been raised internally using the "_raise_ statement":../user-guide/statechart_language.html#sclang_raising_an_event is not immediately acted upon by active states "downstream" in the event cycle, because only a single event can be processed at a time, which is the event that caused the run cycle to execute in the first place. The internally-raised event will trigger its own run-to-completion step subsequently, and it will thus be visible to all active states. This is semantically different from the cycle-based execution scheme. Read more on this in section "&quot;Raising and processing an event&quot;":../user-guide/statechart_language.html#sclang_raising_and_processing_an_event.
-
-
-
-h3(#codegen_responsibilities-of-generated-code). Responsibilities of generated code
-
-The generated source code supports a basic statechart execution model that can be used to implement different variants. It is important to understand the responsibilities of the generated code, i.e. what it cares about and what it doesn't. The remaining issues are out of scope and must be dealt with in the client code the developer has to provide.
-
-The generated code basically takes care about the following:
-* It provides the interfaces to access state machine variables and events.
-* It initializes the state machine.
-* It implements the execution semantics within a run-to-completion (RTC) step. This is everything that is happening within the _runCycle()_ function.
-
-There are some predefined constraints:
-* The implementation is not thread-safe. Therefore the _runCycle()_ method must never be called in parallel by different threads.
-* All events for a run-to-completion step will be consumed.
-
-Out of scope are:
-* *Scheduling:* The code generator cannot make any general assumptions about scheduling mechanisms and constraints.
-* *Timers:* The code generator does not know how the system handles times. If any specific time-dependend behavior is required, the client code has to contribute it.
-* *Event handling:* The code generator cannot know and does not prescribe how events are entering the system. Therefore deciding when events will be delivered to the state machine is an outside (client code) responsibility.
-* *Concurrency:* The client code has to care about any thread synchronization.
-* *Memory management:* The generated state machine code will never allocate any memory. Allocating the memory needed for the statechart structure is a responsibility of the client code.
-
-All these things are out of the generated code's scope, since the code generators coming with YAKINDU Statechart Tools cannot provide tailored solutions without knowing any details about a respective specific environment, like runtime system, libraries, etc.
-
-In order to have a better code generator support for specific usage patterns, you would have to implement corresponding code generator extensions.
-
-
-h3(#codegen_thread-safe-execution). Thread-safe execution
-
-In order to circumvent the missing thread-safety of the _runCycle()_ method, the Java code generator has an option for generating a so-called runnable wrapper, providing event queueing and multi-threading support. For details, see section "&quot;RunnableWrapper&quot;":#codegen_java_runnablewrapper_feature. It is easy to implement this as a general solution for Java, since the programming language provides corresponding standard features that by definition are available everywhere by can simply be used.
-
 
 
 
